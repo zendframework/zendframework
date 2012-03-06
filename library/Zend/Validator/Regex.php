@@ -24,7 +24,7 @@
 namespace Zend\Validator;
 
 use Traversable,
-    Zend\Stdlib\IteratorToArray;
+    Zend\Stdlib\ArrayTools;
 
 /**
  * @uses       \Zend\Validator\AbstractValidator
@@ -79,7 +79,7 @@ class Regex extends AbstractValidator
         }
 
         if ($pattern instanceof Traversable) {
-            $pattern = IteratorToArray::convert($pattern);
+            $pattern = ArrayTools::iteratorToArray($pattern);
         }
 
         if (!is_array($pattern)) {

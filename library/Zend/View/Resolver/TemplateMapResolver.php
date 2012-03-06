@@ -24,7 +24,7 @@ namespace Zend\View\Resolver;
 use ArrayIterator,
     IteratorAggregate,
     Traversable,
-    Zend\Stdlib\IteratorToArray,
+    Zend\Stdlib\ArrayTools,
     Zend\View\Exception,
     Zend\View\Renderer,
     Zend\View\Resolver;
@@ -85,7 +85,7 @@ class TemplateMapResolver implements IteratorAggregate, Resolver
         }
 
         if ($map instanceof Traversable) {
-            $map = IteratorToArray::convert($map);
+            $map = ArrayTools::iteratorToArray($map);
         }
 
         $this->map = $map;
@@ -142,7 +142,7 @@ class TemplateMapResolver implements IteratorAggregate, Resolver
         }
 
         if ($map instanceof Traversable) {
-            $map = IteratorToArray::convert($map);
+            $map = ArrayTools::iteratorToArray($map);
         }
 
         $this->map = array_replace_recursive($this->map, $map);

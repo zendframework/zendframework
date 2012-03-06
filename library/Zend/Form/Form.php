@@ -34,7 +34,7 @@ use Countable,
     Zend\Json\Json,
     Zend\View\Renderer\PhpRenderer,
     Zend\View\Renderer as View,
-    Zend\Stdlib\IteratorToArray,
+    Zend\Stdlib\ArrayTools,
     Zend\Translator,
     Zend\Validator\Validator;
 
@@ -255,7 +255,7 @@ class Form implements Iterator, Countable, Validator
     public function __construct($options = null)
     {
         if ($options instanceof Traversable) {
-            $options = IteratorToArray::convert($options);
+            $options = ArrayTools::iteratorToArray($options);
         }
         if (is_array($options)) {
             $this->setOptions($options);
@@ -1040,7 +1040,7 @@ class Form implements Iterator, Countable, Validator
 
             if (is_array($this->_elementDecorators)) {
                 if ($options instanceof Traversable) {
-                    $options = IteratorToArray::convert($options);
+                    $options = ArrayTools::iteratorToArray($options);
                 }
                 if (null === $options) {
                     $options = array('decorators' => $this->_elementDecorators);
@@ -1105,7 +1105,7 @@ class Form implements Iterator, Countable, Validator
         }
 
         if ($options instanceof Traversable) {
-            $options = IteratorToArray::convert($options);
+            $options = ArrayTools::iteratorToArray($options);
         }
 
         if ((null === $options) || !is_array($options)) {
@@ -1823,7 +1823,7 @@ class Form implements Iterator, Countable, Validator
         $name = (string) $name;
 
         if ($options instanceof Traversable) {
-            $options = IteratorToArray::convert($options);
+            $options = ArrayTools::iteratorToArray($options);
         }
         if (is_array($options)) {
             $options['elements'] = $group;

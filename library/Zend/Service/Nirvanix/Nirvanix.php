@@ -23,7 +23,7 @@ namespace Zend\Service\Nirvanix;
 
 use Traversable,
     Zend\Http\Client as HttpClient,
-    Zend\Stdlib\IteratorToArray;
+    Zend\Stdlib\ArrayTools;
 
 /**
  * This class allows Nirvanix authentication credentials to be specified
@@ -63,7 +63,7 @@ class Nirvanix
         );
 
         if ($options instanceof Traversable) {
-            $options = IteratorToArray::convert($options);
+            $options = ArrayTools::iteratorToArray($options);
         }
         if (!is_array($options)) {
             throw new Exception\InvalidArgumentException(__METHOD__ . ' expects an array or Traversable object of options');
@@ -95,7 +95,7 @@ class Nirvanix
         }
 
         if ($options instanceof Traversable) {
-            $options = IteratorToArray::convert($options);
+            $options = ArrayTools::iteratorToArray($options);
         }
         if (!is_array($options)) {
             throw new Exception\InvalidArgumentException(__METHOD__ . ' expects an array or Traversable object of options');

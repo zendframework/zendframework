@@ -120,7 +120,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
                 false
             ),
             'replaceAssoc' => null,
-            'replaceNumerical' => null
+            'replaceNumerical' => true
         );
 
         $this->leadingdot = array('.test' => 'dot-test');
@@ -395,10 +395,10 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
 
         // config->misaligned
         $this->assertInstanceOf('\Zend\Config\Config',$configA->misaligned);
-        $this->assertEquals(null,$configA->misaligned->{0});
-        $this->assertEquals(null,$configA->misaligned->{1});
         $this->assertEquals('foo',$configA->misaligned->{2});
-        $this->assertEquals('baz',$configA->misaligned->{3});
+        $this->assertEquals('bar',$configA->misaligned->{3});
+        $this->assertEquals('baz',$configA->misaligned->{4});
+        $this->assertEquals(null,$configA->misaligned->{0});
 
         // config->mixed
         $this->assertInstanceOf('\Zend\Config\Config',$configA->mixed);
@@ -410,55 +410,10 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
         $this->assertSame(null,$configA->replaceAssoc);
 
         // config->replaceNumerical
-        $this->assertSame(null,$configA->replaceNumerical);
+        $this->assertSame(true,$configA->replaceNumerical);
 
     }
 
-    public function testReplace()
-    {
-        $configA = new Config($this->toCombineA);
-        $configB = new Config($this->toCombineB);
-        $configA->replace($configB);
-
-        // config->
-        $this->assertEquals(3, $configA->foo);
-        $this->assertEquals(2, $configA->bar);
-        $this->assertEquals('bar', $configA->text);
-
-        // config->numerical-> ...
-        $this->assertInstanceOf('\Zend\Config\Config',$configA->numerical);
-        $this->assertEquals('fourth',$configA->numerical->{0});
-        $this->assertEquals('fifth',$configA->numerical->{1});
-
-        // config->numerical->{2}-> ...
-        $this->assertInstanceOf('\Zend\Config\Config',$configA->numerical->{2});
-        $this->assertEquals('sixth',$configA->numerical->{2}->{0});
-        $this->assertEquals(null,$configA->numerical->{2}->{1});
-
-        // config->numerical->  ...
-        $this->assertEquals(null,$configA->numerical->{3});
-        $this->assertEquals(null,$configA->numerical->{4});
-
-        // config->misaligned
-        $this->assertInstanceOf('\Zend\Config\Config',$configA->misaligned);
-        $this->assertEquals(null,$configA->misaligned->{0});
-        $this->assertEquals(null,$configA->misaligned->{1});
-        $this->assertEquals('foo',$configA->misaligned->{2});
-        $this->assertEquals('baz',$configA->misaligned->{3});
-
-        // config->mixed
-        $this->assertInstanceOf('\Zend\Config\Config',$configA->mixed);
-        $this->assertEquals('bar',$configA->mixed->foo);
-        $this->assertSame(false,$configA->mixed->{0});
-        $this->assertSame(null,$configA->mixed->{1});
-
-        // config->replaceAssoc
-        $this->assertSame(null,$configA->replaceAssoc);
-
-        // config->replaceNumerical
-        $this->assertSame(null,$configA->replaceNumerical);
-    }
-    
     public function testArrayAccess()
     {
         $config = new Config($this->all, true);

@@ -24,7 +24,7 @@ namespace Zend\View\Model;
 use ArrayAccess,
     ArrayIterator,
     Traversable,
-    Zend\Stdlib\IteratorToArray,
+    Zend\Stdlib\ArrayTools,
     Zend\View\Exception,
     Zend\View\Model,
     Zend\View\Variables as ViewVariables;
@@ -175,7 +175,7 @@ class ViewModel implements Model
         // Assumption is that lowest common denominator for renderer configuration
         // is an array
         if ($options instanceof Traversable) {
-            $options = IteratorToArray::convert($options);
+            $options = ArrayTools::iteratorToArray($options);
         }
 
         if (!is_array($options)) {
@@ -230,7 +230,7 @@ class ViewModel implements Model
         }
 
         if ($variables instanceof Traversable) {
-            $variables = IteratorToArray::convert($variables);
+            $variables = ArrayTools::iteratorToArray($variables);
         }
 
         if (!is_array($variables)) {

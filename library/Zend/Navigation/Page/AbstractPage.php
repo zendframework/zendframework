@@ -25,7 +25,7 @@ use Traversable,
     Zend\Acl\Resource as AclResource,
     Zend\Navigation\Container,
     Zend\Navigation\Exception,
-    Zend\Stdlib\IteratorToArray;
+    Zend\Stdlib\ArrayTools;
 
 /**
  * Base class for Zend\Navigation\Page pages
@@ -190,7 +190,7 @@ abstract class AbstractPage extends Container
     public static function factory($options)
     {
         if ($options instanceof Traversable) {
-            $options = IteratorToArray::convert($options);
+            $options = ArrayTools::iteratorToArray($options);
         }
 
         if (!is_array($options)) {
@@ -257,7 +257,7 @@ abstract class AbstractPage extends Container
     public function __construct($options = null)
     {
         if ($options instanceof Traversable) {
-            $options = IteratorToArray::convert($options);
+            $options = ArrayTools::iteratorToArray($options);
         }
         if (is_array($options)) {
             $this->setOptions($options);
@@ -497,7 +497,7 @@ abstract class AbstractPage extends Container
 
         if (null !== $relations) {
             if ($relations instanceof Traversable) {
-                $relations = IteratorToArray::convert($relations);
+                $relations = ArrayTools::iteratorToArray($relations);
             }
 
             if (!is_array($relations)) {
@@ -561,7 +561,7 @@ abstract class AbstractPage extends Container
 
         if (null !== $relations) {
             if ($relations instanceof Traversable) {
-                $relations = IteratorToArray::convert($relations);
+                $relations = ArrayTools::iteratorToArray($relations);
             }
 
             if (!is_array($relations)) {

@@ -27,7 +27,7 @@ use Traversable,
     Zend,
     Zend\Loader\Broker,
     Zend\Loader\ShortNameLocator,
-    Zend\Stdlib\IteratorToArray;
+    Zend\Stdlib\ArrayTools;
 
 /**
  * Class for generate Barcode
@@ -130,7 +130,7 @@ class Barcode
          * barcode name and separate config object.
          */
         if ($barcode instanceof Traversable) {
-            $barcode = IteratorToArray::convert($barcode);
+            $barcode = ArrayTools::iteratorToArray($barcode);
             if (isset($barcode['rendererParams'])) {
                 $rendererConfig = $barcode['rendererParams'];
             }
@@ -181,7 +181,7 @@ class Barcode
          * barcode name and separate configuration.
          */
         if ($barcode instanceof Traversable) {
-            $barcode = IteratorToArray::convert($barcode);
+            $barcode = ArrayTools::iteratorToArray($barcode);
             if (isset($barcode['barcodeParams']) && is_array($barcode['barcodeParams'])) {
                 $barcodeConfig = $barcode['barcodeParams'];
             }
@@ -192,7 +192,7 @@ class Barcode
             }
         }
         if ($barcodeConfig instanceof Traversable) {
-            $barcodeConfig = IteratorToArray::convert($barcodeConfig);
+            $barcodeConfig = ArrayTools::iteratorToArray($barcodeConfig);
         }
 
         /*
@@ -234,7 +234,7 @@ class Barcode
          * barcode name and separate config object.
          */
         if ($renderer instanceof Traversable) {
-            $renderer = IteratorToArray::convert($renderer);
+            $renderer = ArrayTools::iteratorToArray($renderer);
             if (isset($renderer['rendererParams'])) {
                 $rendererConfig = $renderer['rendererParams'];
             }
@@ -243,7 +243,7 @@ class Barcode
             }
         }
         if ($rendererConfig instanceof Traversable) {
-            $rendererConfig = IteratorToArray::convert($rendererConfig);
+            $rendererConfig = ArrayTools::iteratorToArray($rendererConfig);
         }
 
         /*

@@ -24,7 +24,7 @@ namespace Zend\Mvc\View;
 use Zend\EventManager\EventCollection as Events,
     Zend\EventManager\ListenerAggregate,
     Zend\Mvc\MvcEvent,
-    Zend\Stdlib\IsAssocArray,
+    Zend\Stdlib\ArrayTools,
     Zend\View\Model\ViewModel;
 
 class CreateViewModelFromArrayListener implements ListenerAggregate
@@ -71,7 +71,7 @@ class CreateViewModelFromArrayListener implements ListenerAggregate
     public function createViewModelFromArray(MvcEvent $e)
     {
         $result = $e->getResult();
-        if (!IsAssocArray::test($result, true)) {
+        if (!ArrayTools::hasStringKeys($result, true)) {
             return;
         }
 

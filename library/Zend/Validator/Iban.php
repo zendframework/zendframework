@@ -23,7 +23,7 @@ namespace Zend\Validator;
 use Traversable,
     Zend\Locale\Locale,
     Zend\Registry,
-    Zend\Stdlib\IteratorToArray;
+    Zend\Stdlib\ArrayTools;
 
 /**
  * Validates IBAN Numbers (International Bank Account Numbers)
@@ -114,7 +114,7 @@ class Iban extends AbstractValidator
     {
         $options = array();
         if ($locale instanceof Traversable) {
-            $locale = IteratorToArray::convert($locale);
+            $locale = ArrayTools::iteratorToArray($locale);
         }
 
         if (is_array($locale)) {

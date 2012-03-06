@@ -23,7 +23,7 @@ namespace Zend\Config;
 use Countable,
     Iterator,
     ArrayAccess,
-    Zend\Stdlib\IsAssocArray
+    Zend\Stdlib\ArrayTools
 ;
 
 /**
@@ -337,8 +337,10 @@ class Config implements Countable, Iterator, ArrayAccess
     /**
      * Merge another Config with this one.
      *
-     * If an item with the same key exists in current config, it will be replaced by an item from $replace.
-     * If an item contains a list (numerical array), elements will be REPLACED with values from $replace.
+     * For duplicate keys, the following will be performed:
+     * - Nested Configs will be recursively merged.
+     * - Items in $merge with INTEGER keys will be appended.
+     * - Items in $merge with STRING keys will overwrite current values.
      *
      * @param  Config $replace
      * @return Config
@@ -368,56 +370,6 @@ class Config implements Countable, Iterator, ArrayAccess
         }
 
         return $this;
-    }
-
-    /**
-     * Merge values from another config into this one, replacing named values and appending items in lists.
-     *
-     * If an item with the same key exists in current config, it will be replaced by item from $merge.
-     * If an item contains numerical list (array), list will be APPENDED with items from $merge.
-     *
-     * @param  Config $merge
-     * @return Config
-     */
-    public function merge(self $merge)
-    {
-        if ($merge->isNumerical() && $this->isNumerical()) {
-            // if both configs are numerical, append one to the other
-            foreach ($merge as $item) {
-                if ($item instanceof self) {
-                    $this->data[] = new self($item->toArray(), $this->allowModifications);
-                } else {
-                    $this->data[] = $item;
-                }
-            }
-        } else {
-            // if one of the configs is not numerical, perform standard replace
-            foreach ($merge as $key => $item) {
-                if (array_key_exists($key, $this->data)) {
-                    if ($item instanceof self && $this->data[$key] instanceof self) {
-                        $this->data[$key] = $this->data[$key]->merge(new self($item->toArray(), $this->allowModifications));
-                    } else {
-                        $this->data[$key] = $item;
-                    }
-                } else {
-                    if ($item instanceof self) {
-                        $this->data[$key] = new self($item->toArray(), $this->allowModifications);
-                    } else {
-                        $this->data[$key] = $item;
-                    }
-                }
-            }
-        }
-        return $this;
-    }
-
-    /**
-     * Check if current config is numerical - i.e. only contains numeric keys starting from 0
-     *
-     * @return bool
-     */
-    public function isNumerical(){
-        return !IsAssocArray::test($this->data);
     }
 
     /**

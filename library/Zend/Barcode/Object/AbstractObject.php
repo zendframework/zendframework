@@ -28,7 +28,7 @@ use Traversable,
     Zend\Barcode,
     Zend\Barcode\Object\Exception,
     Zend\Validator\Barcode as BarcodeValidator,
-    Zend\Stdlib\IteratorToArray;
+    Zend\Stdlib\ArrayTools;
 
 /**
  * Class for generate Barcode
@@ -225,7 +225,7 @@ abstract class AbstractObject implements Barcode\Object
         $this->getDefaultOptions();
         $this->font = Barcode\Barcode::getBarcodeFont();
         if ($options instanceof Traversable) {
-            $options = IteratorToArray::convert($options);
+            $options = ArrayTools::iteratorToArray($options);
         }
         if (is_array($options)) {
             $this->setOptions($options);

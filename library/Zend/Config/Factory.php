@@ -20,7 +20,7 @@
 
 namespace Zend\Config;
 
-use Zend\Stdlib\RecursiveArrayMerge;
+use Zend\Stdlib\ArrayTools;
 
 /**
  * Declared abstract to prevent instantiation
@@ -97,7 +97,7 @@ abstract class Factory
         $config = array();
 
         foreach ($files as $file) {
-            $config = RecursiveArrayMerge::merge($config, self::fromFile($file));
+            $config = ArrayTools::merge($config, self::fromFile($file));
         }
 
         return ($returnConfigObject) ? new Config($config) : $config;

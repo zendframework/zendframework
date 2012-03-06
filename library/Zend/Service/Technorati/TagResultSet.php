@@ -20,17 +20,22 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Service\Technorati;
+
+use DomDocument;
+
+/**
  * Represents a Technorati Tag query result set.
  *
- * @uses       Zend_Service_Technorati_ResultSet
- * @uses       Zend_Service_Technorati_TagResult
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Technorati
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Service_Technorati_TagResultSet extends Zend_Service_Technorati_ResultSet
+class TagResultSet extends ResultSet
 {
     /**
      * Number of posts that match the tag.
@@ -38,7 +43,7 @@ class Zend_Service_Technorati_TagResultSet extends Zend_Service_Technorati_Resul
      * @var     int
      * @access  protected
      */
-    protected $_postsMatched;
+    protected $postsMatched;
 
     /**
      * Number of blogs that match the tag.
@@ -46,7 +51,7 @@ class Zend_Service_Technorati_TagResultSet extends Zend_Service_Technorati_Resul
      * @var     int
      * @access  protected
      */
-    protected $_blogsMatched;
+    protected $blogsMatched;
 
     /**
      * Parses the search response and retrieve the results for iteration.
@@ -58,15 +63,15 @@ class Zend_Service_Technorati_TagResultSet extends Zend_Service_Technorati_Resul
     {
         parent::__construct($dom, $options);
 
-        $result = $this->_xpath->query('/tapi/document/result/postsmatched/text()');
-        if ($result->length == 1) $this->_postsMatched = (int) $result->item(0)->data;
+        $result = $this->xpath->query('/tapi/document/result/postsmatched/text()');
+        if ($result->length == 1) $this->postsMatched = (int) $result->item(0)->data;
 
-        $result = $this->_xpath->query('/tapi/document/result/blogsmatched/text()');
-        if ($result->length == 1) $this->_blogsMatched = (int) $result->item(0)->data;
+        $result = $this->xpath->query('/tapi/document/result/blogsmatched/text()');
+        if ($result->length == 1) $this->blogsMatched = (int) $result->item(0)->data;
 
-        $this->_totalResultsReturned  = (int) $this->_xpath->evaluate("count(/tapi/document/item)");
+        $this->totalResultsReturned  = (int) $this->xpath->evaluate("count(/tapi/document/item)");
         /** @todo Validate the following assertion */
-        $this->_totalResultsAvailable = (int) $this->getPostsMatched();
+        $this->totalResultsAvailable = (int) $this->getPostsMatched();
     }
 
 
@@ -75,8 +80,9 @@ class Zend_Service_Technorati_TagResultSet extends Zend_Service_Technorati_Resul
      *
      * @return  int
      */
-    public function getPostsMatched() {
-        return $this->_postsMatched;
+    public function getPostsMatched()
+    {
+        return $this->postsMatched;
     }
 
     /**
@@ -84,17 +90,18 @@ class Zend_Service_Technorati_TagResultSet extends Zend_Service_Technorati_Resul
      *
      * @return  int
      */
-    public function getBlogsMatched() {
-        return $this->_blogsMatched;
+    public function getBlogsMatched()
+    {
+        return $this->blogsMatched;
     }
 
     /**
-     * Implements Zend_Service_Technorati_ResultSet::current().
+     * Implements ResultSet::current().
      *
-     * @return Zend_Service_Technorati_TagResult current result
+     * @return TagResult current result
      */
     public function current()
     {
-        return new Zend_Service_Technorati_TagResult($this->_results->item($this->_currentIndex));
+        return new TagResult($this->results->item($this->currentIndex));
     }
 }

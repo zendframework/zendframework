@@ -5,10 +5,7 @@ namespace Zend\Module\Listener;
 use ArrayAccess,
     Traversable,
     Zend\Config\Config,
-    Zend\Config\Xml as XmlConfig,
-    Zend\Config\Ini as IniConfig,
-    Zend\Config\Yaml as YamlConfig,
-    Zend\Config\Json as JsonConfig,
+    Zend\Config\Factory as ConfigFactory,
     Zend\Module\ModuleEvent,
     Zend\Stdlib\IteratorToArray,
     Zend\EventManager\EventCollection,
@@ -232,49 +229,11 @@ class ConfigListener extends AbstractListener
      */
     protected function mergeGlobPath($globPath)
     {
-        foreach (glob($globPath, GLOB_BRACE) as $path) {
-            $pathInfo = pathinfo($path);
-            switch (strtolower($pathInfo['extension'])) {
-                case 'php':
-                case 'inc':
-                    $config = include $path;
-                    if (!is_array($config) && !$config instanceof ArrayAccess) {
-                        throw new Exception\RuntimeException(sprintf(
-                            'Invalid configuration type returned by file at "%s"; received "%s"',
-                            $path,
-                            (is_object($config) ? get_class($config) : gettype($config))
-                        ));
-                    }
-                    break;
-
-                case 'xml':
-                    $config = new XmlConfig($path);
-                    break;
-
-                case 'json':
-                    $config = new JsonConfig($path);
-                    break;
-
-                case 'ini':
-                    $config = new IniConfig($path);
-                    break;
-
-                case 'yaml':
-                case 'yml':
-                    $config = new YamlConfig($path);
-                    break;
-
-                default:
-                    throw new Exception\RuntimeException(sprintf(
-                        'Unable to detect config file type by extension: %s',
-                        $path
-                    ));
-                    break;
-            }
-            $this->mergeTraversableConfig($config);
-            if ($this->getOptions()->getConfigCacheEnabled()) {
-                $this->updateCache();
-            }
+        // @TODO Use GlobIterator
+        $config = ConfigFactory::fromFiles(glob($globPath, GLOB_BRACE));
+        $this->mergeTraversableConfig($config);
+        if ($this->getOptions()->getConfigCacheEnabled()) {
+            $this->updateCache();
         }
         return $this;
     }

@@ -84,11 +84,12 @@ class FormText extends FormElement
             $endTag= '>';
         }
 
+        $escaper = $this->view->plugin('escape');
         $xhtml = '<input'
-                . ' type="' .  $this->view->vars()->escape($inputType) . '"'
-                . ' name="' . $this->view->vars()->escape($name) . '"'
-                . ' id="' . $this->view->vars()->escape($id) . '"'
-                . ' value="' . $this->view->vars()->escape($value) . '"'
+                . ' type="'  . $escaper($inputType) . '"'
+                . ' name="'  . $escaper($name)      . '"'
+                . ' id="'    . $escaper($id)        . '"'
+                . ' value="' . $escaper($value)     . '"'
                 . $disabled
                 . $this->_htmlAttribs($attribs)
                 . $endTag;

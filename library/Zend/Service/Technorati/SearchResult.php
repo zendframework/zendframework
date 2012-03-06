@@ -20,27 +20,33 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Service\Technorati;
+
+use DomElement,
+    Zend\Uri;
+
+/**
  * Represents a single Technorati Search query result object.
  * It is never returned as a standalone object,
- * but it always belongs to a valid Zend_Service_Technorati_SearchResultSet object.
+ * but it always belongs to a valid SearchResultSet object.
  *
- * @uses       Zend_Service_Technorati_Result
- * @uses       Zend_Service_Technorati_Utils
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Technorati
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Service_Technorati_SearchResult extends Zend_Service_Technorati_Result
+class SearchResult extends Result
 {
     /**
      * Technorati weblog object corresponding to queried keyword.
      *
-     * @var     Zend_Service_Technorati_Weblog
+     * @var     Weblog
      * @access  protected
      */
-    protected $_weblog;
+    protected $weblog;
 
     /**
      * The title of the entry.
@@ -48,7 +54,7 @@ class Zend_Service_Technorati_SearchResult extends Zend_Service_Technorati_Resul
      * @var     string
      * @access  protected
      */
-    protected $_title;
+    protected $title;
 
     /**
      * The blurb from entry with search term highlighted.
@@ -56,23 +62,23 @@ class Zend_Service_Technorati_SearchResult extends Zend_Service_Technorati_Resul
      * @var     string
      * @access  protected
      */
-    protected $_excerpt;
+    protected $excerpt;
 
     /**
      * The datetime the entry was created.
      *
-     * @var     Zend_Date
+     * @var     ZendDate
      * @access  protected
      */
-    protected $_created;
+    protected $created;
 
     /**
      * The permalink of the blog entry.
      *
-     * @var     Zend_Uri_Http
+     * @var     Uri\Http
      * @access  protected
      */
-    protected $_permalink;
+    protected $permalink;
 
 
     /**
@@ -82,27 +88,28 @@ class Zend_Service_Technorati_SearchResult extends Zend_Service_Technorati_Resul
      */
     public function __construct(DomElement $dom)
     {
-        $this->_fields = array( '_permalink'    => 'permalink',
-                                '_excerpt'      => 'excerpt',
-                                '_created'      => 'created',
-                                '_title'        => 'title');
+        $this->fields = array( 'permalink'    => 'permalink',
+                               'excerpt'      => 'excerpt',
+                               'created'      => 'created',
+                               'title'        => 'title');
         parent::__construct($dom);
 
         // weblog object field
-        $this->_parseWeblog();
+        $this->parseWeblog();
 
         // filter fields
-        $this->_permalink = Zend_Service_Technorati_Utils::normalizeUriHttp($this->_permalink);
-        $this->_created   = Zend_Service_Technorati_Utils::normalizeDate($this->_created);
+        $this->permalink = Utils::normalizeUriHttp($this->permalink);
+        $this->created   = Utils::normalizeDate($this->created);
     }
 
     /**
      * Returns the weblog object that links queried URL.
      *
-     * @return  Zend_Service_Technorati_Weblog
+     * @return  Weblog
      */
-    public function getWeblog() {
-        return $this->_weblog;
+    public function getWeblog()
+    {
+        return $this->weblog;
     }
 
     /**
@@ -110,8 +117,9 @@ class Zend_Service_Technorati_SearchResult extends Zend_Service_Technorati_Resul
      *
      * @return  string
      */
-    public function getTitle() {
-        return $this->_title;
+    public function getTitle()
+    {
+        return $this->title;
     }
 
     /**
@@ -119,26 +127,29 @@ class Zend_Service_Technorati_SearchResult extends Zend_Service_Technorati_Resul
      *
      * @return  string
      */
-    public function getExcerpt() {
-        return $this->_excerpt;
+    public function getExcerpt()
+    {
+        return $this->excerpt;
     }
 
     /**
      * Returns the datetime the entry was created.
      *
-     * @return  Zend_Date
+     * @return  ZendDate
      */
-    public function getCreated() {
-        return $this->_created;
+    public function getCreated()
+    {
+        return $this->created;
     }
 
     /**
      * Returns the permalink of the blog entry.
      *
-     * @return  Zend_Uri_Http
+     * @return  Uri\Http
      */
-    public function getPermalink() {
-        return $this->_permalink;
+    public function getPermalink()
+    {
+        return $this->permalink;
     }
 
 }

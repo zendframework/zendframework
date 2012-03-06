@@ -1,0 +1,623 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" 
+    xml:id="zend.view.helpers">
+    <info><title>View Helpers</title></info>
+
+    <para>
+        In your view scripts, often it is necessary to perform certain complex functions over and
+        over: e.g., formatting a date, generating form elements, or displaying action links. You can
+        use helper, or plugin, classes to perform these behaviors for you.
+    </para>
+
+    <para>
+        A helper is simply a class that implements the interface <classname>Zend\View\Helper</classname>. 
+        <classname>Helper</classname> simply defines two methods,
+        <methodname>setView()</methodname>, which accepts a
+        <classname>Zend\View\Renderer</classname> instance/implementation, and
+        <methodname>getView()</methodname>, used to retrieve that instance.
+        <classname>Zend\View\PhpRenderer</classname> composes a <link
+            linkend="zend.loader.plugin-broker">plugin broker</link>, allowing you to
+        retrieve helpers, and also provides some method overloading capabilities that allow proxying
+        method calls to helpers.
+    </para>
+
+    <para>
+        As an example, let's say we have a helper class named
+        <classname>My\Helper\LowerCase</classname>, which we map in our plugin broker to the name
+        "lowercase". We can retrieve or invoke it in one of the following ways:
+    </para>
+
+    <programlisting language="php"><![CDATA[
+// $view is a PhpRenderer instance
+
+// Via the plugin broker:
+$broker = $view->getBroker();
+$helper = $broker->load('lowercase');
+
+// Retrieve the helper instance, via the method "plugin", 
+// which proxies to the plugin broker:
+$helper = $view->plugin('lowercase');
+
+// If the helper does not define __invoke(), the following also retrieves it:
+$helper = $view->lowercase();
+
+// If the helper DOES define __invoke, you can call the helper 
+// as if it is a method:
+$filtered = $view->lowercase('some value');
+]]></programlisting>
+
+    <para>
+        The last two examples demonstrate how the <classname>PhpRenderer</classname> uses method
+        overloading to retrieve and/or invoke helpers directly, offering a convenience API for end
+        users.
+    </para>
+        
+    <para>
+        A large number of helpers are provided in the standard distribution of Zend Framework.  You
+        can also register helpers by adding them to the <link
+            linkend="zend.loader.plugin-broker">plugin broker</link>, or the plugin locator the
+        broker composes. Please refer to the <link linkend="zend.loader.plugin-broker">plugin broker
+            documentation</link> for details.
+    </para>
+
+    <section xml:id="zend.view.helpers.initial">
+        <info><title>Included Helpers</title></info>
+
+        <para>
+            Zend Framework comes with an initial set of helper classes, most of which relate to form
+            element generation and perform the appropriate output escaping automatically. In
+            addition, there are helpers for creating route-based <acronym>URL</acronym>s and
+            <acronym>HTML</acronym> lists, as well as declaring variables. Additionally, there are a
+            rich set of helpers for providing values for, and rendering, the various HTML
+            <code>&lt;head&gt;</code> tags, such as <classname>HeadTitle</classname>,
+            <classname>HeadLink</classname>, and <classname>HeadScript</classname>. The currently
+            shipped helpers include:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <methodname>fieldset($name, $content, $attribs)</methodname>: Creates an
+                    <acronym>XHTML</acronym> fieldset. If <varname>$attribs</varname> contains a
+                    'legend' key, that value will be used for the fieldset legend. The
+                    fieldset will surround the <varname>$content</varname> as provided to
+                    the helper.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>form($name, $attribs, $content)</methodname>: Generates an
+                    <acronym>XHTML</acronym> form. All <varname>$attribs</varname> are escaped and
+                    rendered as <acronym>XHTML</acronym> attributes of the form tag. If
+                    <varname>$content</varname> is present and not a boolean
+                    <constant>FALSE</constant>, then that content is rendered within the start and
+                    close form tags; if <varname>$content</varname> is a boolean
+                    <constant>FALSE</constant> (the default), only the opening form tag is
+                    generated.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>formButton($name, $value, $attribs)</methodname>: Creates an
+                    &lt;button /&gt; element.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>formCheckbox($name, $value, $attribs, $options)</methodname>:
+                    Creates an &lt;input type="checkbox" /&gt; element.
+                </para>
+
+                <para>
+                    By default, when no $value is provided and no $options are
+                    present, '0' is assumed to be the unchecked value, and '1'
+                    the checked value. If a $value is passed, but no $options
+                    are present, the checked value is assumed to be the value
+                    passed.
+                </para>
+
+                <para>
+                    $options should be an array. If the array is indexed, the
+                    first value is the checked value, and the second the
+                    unchecked value; all other values are ignored. You may also
+                    pass an associative array with the keys 'checked' and
+                    'unChecked'.
+                </para>
+
+                <para>
+                    If $options has been passed, if $value matches the checked
+                    value, then the element will be marked as checked. You may
+                    also mark the element as checked or unchecked by passing a
+                    boolean value for the attribute 'checked'.
+                </para>
+
+                <para>
+                    The above is probably best summed up with some examples:
+                </para>
+
+                <programlisting language="php"><![CDATA[
+// '1' and '0' as checked/unchecked options; not checked
+echo $this->formCheckbox('foo');
+
+// '1' and '0' as checked/unchecked options; checked
+echo $this->formCheckbox('foo', null, array('checked' => true));
+
+// 'bar' and '0' as checked/unchecked options; not checked
+echo $this->formCheckbox('foo', 'bar');
+
+// 'bar' and '0' as checked/unchecked options; checked
+echo $this->formCheckbox('foo', 'bar', array('checked' => true));
+
+// 'bar' and 'baz' as checked/unchecked options; unchecked
+echo $this->formCheckbox('foo', null, null, array('bar', 'baz'));
+
+// 'bar' and 'baz' as checked/unchecked options; unchecked
+echo $this->formCheckbox('foo', null, null, array(
+    'checked' => 'bar',
+    'unChecked' => 'baz'
+));
+
+// 'bar' and 'baz' as checked/unchecked options; checked
+echo $this->formCheckbox('foo', 'bar', null, array('bar', 'baz'));
+echo $this->formCheckbox('foo',
+                         null,
+                         array('checked' => true),
+                         array('bar', 'baz'));
+
+// 'bar' and 'baz' as checked/unchecked options; unchecked
+echo $this->formCheckbox('foo', 'baz', null, array('bar', 'baz'));
+echo $this->formCheckbox('foo',
+                         null,
+                         array('checked' => false),
+                         array('bar', 'baz'));
+]]></programlisting>
+
+                <para>
+                    In all cases, the markup prepends a hidden element with the
+                    unchecked value; this way, if the value is unchecked, you
+                    will still get a valid value returned to your form.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>formErrors($errors, $options)</methodname>: Generates an
+                    <acronym>XHTML</acronym> unordered list to show errors.
+                    <varname>$errors</varname> should be a string or an array of strings;
+                    <varname>$options</varname> should be any attributes you want
+                    placed in the opening list tag.
+                </para>
+
+                <para>
+                    You can specify alternate opening, closing, and separator
+                    content when rendering the errors by calling several methods
+                    on the helper:
+                </para>
+
+                <itemizedlist>
+                    <listitem>
+                        <para>
+                            <methodname>setElementStart($string)</methodname>; default is
+                            '&lt;ul class="errors"%s"&gt;&lt;li&gt;', where %s
+                            is replaced with the attributes as specified in
+                            <varname>$options</varname>.
+                        </para>
+                    </listitem>
+
+                    <listitem>
+                        <para>
+                            <methodname>setElementSeparator($string)</methodname>; default
+                            is '&lt;/li&gt;&lt;li&gt;'.
+                        </para>
+                    </listitem>
+
+                    <listitem>
+                        <para>
+                            <methodname>setElementEnd($string)</methodname>; default is
+                            '&lt;/li&gt;&lt;/ul&gt;'.
+                        </para>
+                    </listitem>
+                </itemizedlist>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>formFile($name, $attribs)</methodname>: Creates an
+                    &lt;input type="file" /&gt; element.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>formHidden($name, $value, $attribs)</methodname>: Creates an
+                    &lt;input type="hidden" /&gt; element.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>formLabel($name, $value, $attribs)</methodname>: Creates a
+                    &lt;label&gt; element, setting the <property>for</property> attribute to
+                    <varname>$name</varname>, and the actual label text to
+                    <varname>$value</varname>. If <emphasis>disable</emphasis> is passed in
+                    <property>attribs</property>, nothing will be returned.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>formMultiCheckbox($name, $value, $attribs, $options,
+                        $listsep)</methodname>: Creates a list of checkboxes.
+                    <varname>$options</varname> should be an associative array, and may be
+                    arbitrarily deep. <varname>$value</varname> may be a single value or
+                    an array of selected values that match the keys in the
+                    <varname>$options</varname> array. <varname>$listsep</varname> is an
+                    <acronym>HTML</acronym> break ("&lt;br /&gt;") by default. By default, this
+                    element is treated as an array; all checkboxes share the same name, and are
+                    submitted as an array.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>formPassword($name, $value, $attribs)</methodname>: Creates an
+                    &lt;input type="password" /&gt; element.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>formRadio($name, $value, $attribs, $options)</methodname>:
+                    Creates a series of &lt;input type="radio" /&gt; elements, one
+                    for each of the $options elements. In the $options array, the
+                    element key is the radio value, and the element value is the
+                    radio label. The $value radio will be preselected for you.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>formReset($name, $value, $attribs)</methodname>: Creates an
+                    &lt;input type="reset" /&gt; element.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>formSelect($name, $value, $attribs, $options)</methodname>:
+                    Creates a &lt;select&gt;...&lt;/select&gt; block, with one
+                    &lt;option&gt;one for each of the $options elements. In the
+                    $options array, the element key is the option value, and the
+                    element value is the option label. The $value option(s) will be
+                    preselected for you.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>formSubmit($name, $value, $attribs)</methodname>: Creates an
+                    &lt;input type="submit" /&gt; element.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>formText($name, $value, $attribs)</methodname>: Creates an
+                    &lt;input type="text" /&gt; element.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>formTextarea($name, $value, $attribs)</methodname>: Creates a
+                    &lt;textarea&gt;...&lt;/textarea&gt; block.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>url($urlOptions, $name, $reset)</methodname>: Creates a
+                    <acronym>URL</acronym> string based on a named route.
+                    <varname>$urlOptions</varname> should be an associative array of key/value pairs
+                    used by the particular route.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>htmlList($items, $ordered, $attribs, $escape)</methodname>:
+                    generates unordered and ordered lists based on the <varname>$items</varname>
+                    passed to it. If <varname>$items</varname> is a multidimensional
+                    array, a nested list will be built. If the <varname>$escape</varname>
+                    flag is <constant>TRUE</constant> (default), individual items will be escaped
+                    using the view objects registered escaping mechanisms; pass a
+                    <constant>FALSE</constant> value if you want to allow markup in your lists.
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            Using these in your view scripts is very easy, here is an example.
+            Note that you all you need to do is call them; they will load
+            and instantiate themselves as they are needed.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+// Inside this view script, $this refers to the Zend\View\Renderer\PhpRenderer 
+// instance rendering the view script.
+//
+// Say that you have already assigned a series of select options under
+// the name $countries as array('us' => 'United States', 'il' =>
+// 'Israel', 'de' => 'Germany').
+?>
+<form action="action.php" method="post">
+    <p><label>Your Email:
+<?php echo $this->formText('email', 'you@example.com', array('size' => 32)) ?>
+    </label></p>
+    <p><label>Your Country:
+<?php echo $this->formSelect('country', 'us', null, $this->countries) ?>
+    </label></p>
+    <p><label>Would you like to opt in?
+<?php echo $this->formCheckbox('opt_in', 'yes', null, array('yes', 'no')) ?>
+    </label></p>
+</form>
+]]></programlisting>
+
+        <para>
+            The resulting output from the view script will look something like this:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+<form action="action.php" method="post">
+    <p><label>Your Email:
+        <input type="text" name="email" value="you@example.com" size="32" />
+    </label></p>
+    <p><label>Your Country:
+        <select name="country">
+            <option value="us" selected="selected">United States</option>
+            <option value="il">Israel</option>
+            <option value="de">Germany</option>
+        </select>
+    </label></p>
+    <p><label>Would you like to opt in?
+        <input type="hidden" name="opt_in" value="no" />
+        <input type="checkbox" name="opt_in" value="yes" checked="checked" />
+    </label></p>
+</form>
+]]></programlisting>
+
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-Action.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-BaseUrl.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-Currency.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-Cycle.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-Partial.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-Placeholder.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-Doctype.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-HeadLink.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-HeadMeta.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-HeadScript.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-HeadStyle.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-HeadTitle.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-HtmlObject.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-InlineScript.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-Json.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-Navigation.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-Translator.xml"/>
+    </section>
+
+    <section xml:id="zend.view.helpers.register">
+        <info><title>Registering Helpers</title></info>
+
+        <para>
+            <classname>Zend\View\Renderer\PhpRenderer</classname> composes a <link
+                linkend="zend.loader.plugin-broker">plugin broker</link> for managing helpers,
+            specifically an instance of <classname>Zend\View\HelperBroker</classname>, which extends
+            the base plugin broker in order to ensure we have valid helpers available. The
+            <classname>HelperBroker</classname> by default uses
+            <classname>Zend\View\HelperLoader</classname> as its helper locator. The
+            <classname>HelperLoader</classname> is a map-based loader, which means that you will
+            simply map the helper/plugin name by which you wish to refer to it to the actual class
+            name of the helper/plugin.
+        </para>
+
+        <para>
+            Programmatically, this is done as follows:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+// $view is an instance of PhpRenderer
+$broker = $view->getBroker();
+$loader = $broker->getClassLoader();
+
+// Register singly:
+$loader->registerPlugin('lowercase', 'My\Helper\LowerCase');
+
+// Register several:
+$loader->registerPlugins(array(
+    'lowercase' => 'My\Helper\LowerCase',
+    'uppercase' => 'My\Helper\UpperCase',
+));
+]]></programlisting>
+
+        <para>
+            Within an MVC application, you will typically simply pass a map of plugins to the class
+            via your configuration.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+// From within a configuration file
+return array(
+    'di' => array('instance' => array(
+        'Zend\View\HelperLoader' => array('parameters' => array(
+            'map' => array(
+                'lowercase' => 'My\Helper\LowerCase',
+                'uppercase' => 'My\Helper\UpperCase',
+            ),
+        )),
+    )),
+);
+]]></programlisting>
+
+        <para>
+            The above can be done in each module that needs to register helpers with the
+            <classname>PhpRenderer</classname>; however, be aware that another module can register
+            helpers with the same name, so order of modules can impact which helper class will
+            actually be registered!
+        </para>
+
+    </section>
+
+    <section xml:id="zend.view.helpers.custom">
+        <info><title>Writing Custom Helpers</title></info>
+
+        <para>
+            Writing custom helpers is easy. We recommend extending
+            <classname>Zend\View\Helper\AbstractHelper</classname>, but at the minimum, you need
+            only implement the <classname>Zend\View\Helper</classname> interface:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+namespace Zend\View;
+
+interface Helper
+{
+    /**
+     * Set the View object
+     *
+     * @param  Renderer $view
+     * @return Helper
+     */
+    public function setView(Renderer $view);
+
+    /**
+     * Get the View object
+     *
+     * @return Renderer
+     */
+    public function getView();
+}
+]]></programlisting>
+
+        <para>
+            If you want your helper to be capable of being invoked as if it were a method call of
+            the <classname>PhpRenderer</classname>, you should also implement an
+            <methodname>__invoke()</methodname> method within your helper.
+        </para>
+
+        <para>
+            As previously noted, we recommend extending
+            <classname>Zend\View\Helper\AbstractHelper</classname>, as it implements the methods
+            defined in <classname>Helper</classname>, giving you a headstart in your development.
+        </para>
+
+        <para>
+            Once you have defined your helper class, make sure you can autoload it, and then <link
+                linkend="zend.view.helpers.register">register it with the plugin broker</link>.
+        </para>
+
+        <para>
+            Here is an example helper, which we're titling "SpecialPurpose"
+        </para>
+
+        <programlisting language="php"><![CDATA[
+namespace My\View\Helper;
+
+use Zend\View\Helper\AbstractHelper;
+
+class SpecialPurpose extends AbstractHelper
+{
+    protected $count = 0;
+
+    public function __invoke()
+    {
+        $this->count++;
+        $output = sprintf("I have seen 'The Jerk' %d time(s).", $this->count);
+        return htmlspecialchars($output, ENT_QUOTES, 'UTF-8');
+    }
+}
+]]></programlisting>
+
+        <para>
+            Then assume that when we <link
+                linkend="zend.view.helpers.register">register it with the plugin broker</link>, we
+            map it to the string "specialpurpose".
+        </para>
+
+        <para>
+            Within a view script, you can call the <classname>SpecialPurpose</classname> helper as
+            many times as you like; it will be instantiated once, and then it persists for the life
+            of that <classname>PhpRenderer</classname> instance.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+// remember, in a view script, $this refers to the Zend_View instance.
+echo $this->specialPurpose();
+echo $this->specialPurpose();
+echo $this->specialPurpose();
+]]></programlisting>
+
+        <para>
+            The output would look something like this:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+I have seen 'The Jerk' 1 time(s).
+I have seen 'The Jerk' 2 time(s).
+I have seen 'The Jerk' 3 time(s).
+]]></programlisting>
+
+        <para>
+            Sometimes you will need access to the calling <classname>PhpRenderer</classname> object --
+            for instance, if you need to use the registered encoding, or want to render another view
+            script as part of your helper. This is why we define the
+            <methodname>setView()</methodname> and <methodname>getView()</methodname> methods. As an
+            example, we could rewrite the <classname>SpecialPurpose</classname> helper as follows to
+            take advantage of the <classname>Escape</classname> helper:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+namespace My\View\Helper;
+
+use Zend\View\Helper\AbstractHelper;
+
+class SpecialPurpose extends AbstractHelper
+{
+    protected $count = 0;
+
+    public function __invoke()
+    {
+        $this->count++;
+        $output  = sprintf("I have seen 'The Jerk' %d time(s).", $this->count);
+        $escaper = $this->getView()->plugin('escape');
+        return $escaper($output);
+    }
+}
+]]></programlisting>
+    </section>
+
+    <section xml:id="zend.view.helpers.registering-concrete">
+        <info><title>Registering Concrete Helpers</title></info>
+
+        <para>
+            Sometimes it is convenient to instantiate a view helper, and then register it with the
+            renderer. This can be done by injecting it directly into the plugin broker.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+// $view is a PhpRenderer instance
+
+$helper = new My_Helper_Foo();
+// ...do some configuration or dependency injection...
+
+$view->getBroker()->register('foo', $helper);
+]]></programlisting>
+
+        <para>
+            When registered, the plugin broker will inject the <classname>PhpRenderer</classname>
+            instance into the helper.
+        </para>
+    </section>
+</section>

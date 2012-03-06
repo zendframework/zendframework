@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" 
+    xml:id="zend.config.processor">
+    <info><title>Zend\Config\Processor</title></info>
+    
+    <para>
+        <classname>Zend\Config\Processor</classname> gives you the ability to perform some operations
+        on a <classname>Zend\Config\Config</classname> object. The <classname>Zend\Config\Processor</classname>
+        is an interface that defines two methods: <methodname>process()</methodname> and <methodname>processValue()</methodname>.
+        These operations are provided by the following concrete implementations:
+    </para>
+    
+    <itemizedlist>
+        <listitem>
+            <para>
+                <classname>Zend\Config\Processor\Constant</classname>: manage PHP constant values;
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <classname>Zend\Config\Processor\Filter</classname>: filter the configuration data 
+                using <classname>Zend\Filter</classname>;
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <classname>Zend\Config\Processor\Queue</classname>: manage a queue of operations
+                to apply to configuration data;
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <classname>Zend\Config\Processor\Token</classname>: find and replace specific tokens;
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <classname>Zend\Config\Processor\Translator</classname>: translate configuration values
+                in other languages using <classname>Zend\Translator</classname>;
+            </para>
+        </listitem>
+    </itemizedlist>
+    
+          
+    <para>
+        Below we reported some examples for each type of processor.
+    </para>
+    
+    <section xml:id="zend.config.processor.constant">
+        <info><title>Zend\Config\Processor\Constant</title></info>
+        
+        <example xml:id="zend.config.processor.constant.example">
+            <info><title>Using Zend\Config\Processor\Constant</title></info>
+            
+            <para>
+                This example illustrates the basic use of <classname>Zend\Config\Processor\Constant</classname>:
+            </para>
+                
+            <programlisting language="php"><![CDATA[
+define ('TEST_CONST', 'bar');
+// set true to Zend\Config\Config to allow modifications
+$config = new Zend\Config\Config(array('foo' => 'TEST_CONST'), true);
+$processor = new Zend\Config\Processor\Constant();
+
+echo $config->foo . ',';
+$processor->process($config);
+echo $config->foo;
+]]></programlisting>
+            
+            <para>
+                This example returns the output: <command>TEST_CONST, bar.</command>.
+            </para>
+        </example>
+    </section>
+    
+    <section xml:id="zend.config.processor.filter">
+        <info><title>Zend\Config\Processor\Filter</title></info>
+        
+        <example xml:id="zend.config.processor.filter.example">
+            <info><title>Using Zend\Config\Processor\Filter</title></info>
+            
+            <para>
+                This example illustrates the basic use of <classname>Zend\Config\Processor\Filter</classname>:
+            </para>
+                
+            <programlisting language="php"><![CDATA[
+use Zend\Filter\StringToUpper,
+    Zend\Config\Processor\Filter as FilterProcessor,
+    Zend\Config\Config;
+
+$config = new Config(array ('foo' => 'bar'), true);
+$upper = new StringToUpper();
+
+$upperProcessor = new FilterProcessor($upper);
+
+echo $config->foo . ',';      
+$upperProcessor->process($config);
+echo $config->foo;
+]]></programlisting>
+            
+            <para>
+                This example returns the output: <command>bar,BAR</command>.
+            </para>
+        </example>
+    </section>
+    
+    <section xml:id="zend.config.processor.queue">
+        <info><title>Zend\Config\Processor\Queue</title></info>
+        
+        <example xml:id="zend.config.processor.queue.example">
+            <info><title>Using Zend\Config\Processor\Queue</title></info>
+            
+            <para>
+                This example illustrates the basic use of <classname>Zend\Config\Processor\Queue</classname>:
+            </para>
+                
+            <programlisting language="php"><![CDATA[
+use Zend\Filter\StringToLower,
+    Zend\Filter\StringToUpper,
+    Zend\Config\Processor\Filter as FilterProcessor,
+    Zend\Config\Processor\Queue,
+    Zend\Config\Config;
+
+$config = new Config(array ('foo' => 'bar'), true);
+$upper  = new StringToUpper();
+$lower  = new StringToLower();
+
+$lowerProcessor = new FilterProcessor($lower);
+$upperProcessor = new FilterProcessor($upper);
+
+$queue = new Queue();
+$queue->insert($upperProcessor);
+$queue->insert($lowerProcessor);
+$queue->process($config);        
+
+echo $config->foo;
+]]></programlisting>
+            
+            <para>
+                This example returns the output: <command>bar</command>. The filters in the queue are applied
+                with a <acronym>FIFO</acronym> logic (First In, First Out).
+            </para>
+            
+        </example>
+    </section>
+    
+    <section xml:id="zend.config.processor.token">
+        <info><title>Zend\Config\Processor\Token</title></info>
+        
+        <example xml:id="zend.config.processor.token.example">
+            <info><title>Using Zend\Config\Processor\Token</title></info>
+            
+            <para>
+                This example illustrates the basic use of <classname>Zend\Config\Processor\Token</classname>:
+            </para>
+                
+            <programlisting language="php"><![CDATA[
+// set the Config to true to allow modifications
+$config = new Config(array('foo' => 'Value is TOKEN'), true);
+$processor = new TokenProcessor();
+
+$processor->addToken('TOKEN', 'bar');
+echo $config->foo . ',';        
+$processor->process($config);
+echo $config->foo;
+]]></programlisting>
+            
+            <para>
+                This example returns the output: <command>Value is TOKEN,Value is bar</command>.
+            </para>
+        </example>
+    </section>
+    
+    <section xml:id="zend.config.processor.translator">
+        <info><title>Zend\Config\Processor\Translator</title></info>
+        
+        <example xml:id="zend.config.processor.translator.example">
+            <info><title>Using Zend\Config\Processor\Translator</title></info>
+            
+            <para>
+                This example illustrates the basic use of <classname>Zend\Config\Processor\Translator</classname>:
+            </para>
+                
+            <programlisting language="php"><![CDATA[
+use Zend\Config\Config,
+    Zend\Config\Processor\Translator as TranslatorProcessor,
+    Zend\Translator\Translator;
+    
+$config = new Config(array('animal' => 'dog'), true);
+
+$italian = array(
+    'dog' => 'cane'
+);
+
+$translator = new Translator(Translator::AN_ARRAY, $italian, 'it_IT');
+$processor = new TranslatorProcessor($translator);
+
+echo "English: {$config->animal}, ";
+$processor->process($config);
+echo "Italian: {$config->animal}";
+]]></programlisting>
+            
+            <para>
+                This example returns the output: <command>English: dog, Italian: cane</command>.
+            </para>
+        </example>
+    </section>
+</section>

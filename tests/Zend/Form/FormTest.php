@@ -27,8 +27,7 @@ use Zend\Form\Form,
     Zend\Form\SubForm,
     Zend\Registry,
     Zend\Config\Config,
-    Zend\Config\Ini as IniConfig,
-    Zend\Config\Xml as XmlConfig,
+    Zend\Config\Factory as ConfigFactory,
     Zend\Loader\PrefixPathLoader,
     Zend\Loader\PrefixPathMapper,
     Zend\Json\Json,
@@ -370,7 +369,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
      */
     public function testDisplayGroupOrderInConfigShouldNotMatter()
     {
-        $config = new XmlConfig(__DIR__ . '/TestAsset/config/zf3250.xml', 'sitearea', true);
+        $config = ConfigFactory::fromFile(__DIR__ . '/TestAsset/config/zf3250.xml', true)->get('sitearea');
         $form = new Form($config->test);
         // no assertions needed; throws error if order matters
     }
@@ -3743,7 +3742,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
      */
     public function testShouldAllowSettingDisplayGroupPrefixPathViaConfigOptions()
     {
-        $config = new IniConfig(__DIR__ . '/TestAsset/config/zf3213.ini', 'form');
+        $config = ConfigFactory::fromFile(__DIR__ . '/TestAsset/config/zf3213.ini', true)->get('form');
         $form   = new Form($config);
         $dg     = $form->foofoo;
         $paths  = $dg->getPluginLoader()->getPaths('My\Decorator');

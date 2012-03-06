@@ -24,12 +24,11 @@
  */
 namespace Zend\GData;
 
+use Zend\Http\Header\Etag;
+
 /**
  * Represents the Gdata flavor of an Atom entry
  *
- * @uses       \Zend\GData\GData
- * @uses       \Zend\GData\App\IOException
- * @uses       \Zend\GData\App\MediaEntry
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Gdata
@@ -53,10 +52,10 @@ class Entry extends App\MediaEntry
         // ETags are special. We only support them in protocol >= 2.X.
         // This will be duplicated by the HTTP ETag header.
         if ($majorVersion >= 2) {
-            if ($this->_etag != null) {
+            if ($this->_etag instanceof Etag) {
                 $element->setAttributeNS($this->lookupNamespace('gd'),
                                          'gd:etag',
-                                         $this->_etag);
+                                         $this->_etag->getFieldValue());
             }
         }
         return $element;
@@ -114,7 +113,7 @@ class Entry extends App\MediaEntry
             if ($this->_etag === null) {
                 $this->_etag = $etag;
             }
-            elseif ($this->_etag != $etag) {
+            elseif ($this->_etag->getFieldValue() != $etag) {
                 throw new App\IOException("ETag mismatch");
             }
             break;

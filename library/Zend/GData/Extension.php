@@ -27,7 +27,6 @@ namespace Zend\GData;
 /**
  * Represents a Gdata extension
  *
- * @uses       \Zend\GData\App\Extension
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Gdata

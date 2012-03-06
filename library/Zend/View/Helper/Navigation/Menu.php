@@ -235,8 +235,9 @@ class Menu extends AbstractHelper
             $element = 'span';
         }
 
+        $escaper = $this->view->plugin('escape');
         return '<' . $element . $this->_htmlAttribs($attribs) . '>'
-             . $this->view->vars()->escape($label)
+             . $escaper($label)
              . '</' . $element . '>';
     }
 

@@ -76,7 +76,7 @@ class AudioscrobblerTest extends AudioscrobblerTestCase
      */
     public function testUnknownMethodViaCallInterceptThrowsException()
     {
-        $this->setExpectedException("Zend\Service\Audioscrobbler\Exception\InvalidArgumentException", 'does not exist in class');
+        $this->setExpectedException("Zend\Service\Audioscrobbler\Exception\BadMethodCallException", 'does not exist in class');
 
         $as = new Audioscrobbler\Audioscrobbler();
         $as->someInvalidMethod();

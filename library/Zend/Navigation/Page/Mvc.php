@@ -26,7 +26,7 @@ use Zend\Mvc\Router\RouteMatch,
     Zend\View\Helper\Url as UrlHelper;
 
 /**
- * Represents a page that is defined using module, controller, action, route
+ * Represents a page that is defined using controller, action, route
  * name and route params to assemble the href
  *
  * @category   Zend
@@ -43,11 +43,6 @@ class Mvc extends AbstractPage
      * @var string
      */
     protected $action;
-
-    /**
-     * @var bool
-     */
-    protected $active = false;
 
     /**
      * Controller name to use when assembling URL
@@ -127,11 +122,14 @@ class Mvc extends AbstractPage
             if ($this->routeMatch instanceof RouteMatch) {
                 $reqParams = $this->routeMatch->getParams();
 
-                if ($this->routeMatch->getMatchedRouteName() === $this->getRoute()) {
+                if (null !== $this->getRoute()
+                    && $this->routeMatch->getMatchedRouteName() === $this->getRoute()
+                ) {
                     $this->active = true;
                     return true;
                 }
             }
+
 
             $myParams = $this->params;
 
@@ -282,40 +280,6 @@ class Mvc extends AbstractPage
     public function getController()
     {
         return $this->controller;
-    }
-
-    /**
-     * Sets module name to use when assembling URL
-     *
-     * @see getHref()
-     *
-     * @param  string|null $module        module name
-     * @return Mvc   fluent interface, returns self
-     * @throws Exception\InvalidArgumentException  if invalid module name is given
-     */
-    public function setModule($module)
-    {
-        if (null !== $module && !is_string($module)) {
-            throw new Exception\InvalidArgumentException(
-                'Invalid argument: $module must be a string or null'
-            );
-        }
-
-        $this->module    = $module;
-        $this->hrefCache = null;
-        return $this;
-    }
-
-    /**
-     * Returns module name to use when assembling URL
-     *
-     * @see getHref()
-     *
-     * @return string|null  module name or null
-     */
-    public function getModule()
-    {
-        return $this->module;
     }
 
     /**

@@ -19,13 +19,18 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
+/**
+ * @namespace
+ */
+namespace ZendTest\Service\Technorati;
+use Zend\Service\Technorati;
 
 /**
  * Test helper
  */
 
 /**
- * @see Zend_Service_Technorati_CosmosResult
+ * @see Technorati\CosmosResult
  */
 
 
@@ -38,7 +43,7 @@
  * @group      Zend_Service
  * @group      Zend_Service_Technorati
  */
-class Zend_Service_Technorati_CosmosResultTest extends Zend_Service_Technorati_TestCase
+class CosmosResultTest extends TestCase
 {
     public function setUp()
     {
@@ -47,52 +52,47 @@ class Zend_Service_Technorati_CosmosResultTest extends Zend_Service_Technorati_T
 
     public function testConstruct()
     {
-        $this->_testConstruct('Zend_Service_Technorati_CosmosResult', array($this->domElements->item(0)));
-    }
-
-    public function testConstructThrowsExceptionWithInvalidDom()
-    {
-        $this->_testConstructThrowsExceptionWithInvalidDom('Zend_Service_Technorati_CosmosResult', 'DOMElement');
+        $this->_testConstruct('Zend\Service\Technorati\CosmosResult', array($this->domElements->item(0)));
     }
 
     public function testCosmosResultSerialization()
     {
-        $this->_testResultSerialization(new Zend_Service_Technorati_CosmosResult($this->domElements->item(0)));
+        $this->_testResultSerialization(new Technorati\CosmosResult($this->domElements->item(0)));
     }
 
     public function testCosmosResultSiteLink()
     {
         $domElements = self::getTestFileElementsAsDom('TestCosmosResultSetSiteLink.xml');
-        $object = new Zend_Service_Technorati_CosmosResult($domElements->item(0));
+        $object = new Technorati\CosmosResult($domElements->item(0));
 
-        $this->assertInstanceOf('Zend_Service_Technorati_Weblog', $object->getWeblog());
+        $this->assertInstanceOf('Zend\Service\Technorati\Weblog', $object->getWeblog());
         $this->assertContains('Gioxx', $object->getWeblog()->getName());
 
-        $this->assertInstanceOf('Zend_Uri_Http', $object->getNearestPermalink());
-        $this->assertEquals(Zend_Uri::factory('http://gioxx.org/2007/11/05/il-passaggio-a-mac-le-11-risposte/'), $object->getNearestPermalink());
+        $this->assertInstanceOf('Zend\Uri\Http', $object->getNearestPermalink());
+        $this->assertEquals(\Zend\Uri\UriFactory::factory('http://gioxx.org/2007/11/05/il-passaggio-a-mac-le-11-risposte/'), $object->getNearestPermalink());
 
         $this->assertInternalType('string', $object->getExcerpt());
         $this->assertContains('Ho intenzione di prendere il modello bianco', $object->getExcerpt());
 
-        $this->assertInstanceOf('Zend_Date', $object->getLinkCreated());
-        $this->assertEquals(new Zend_Date('2007-11-11 20:07:11 GMT'), $object->getLinkCreated());
+        $this->assertInstanceOf('Zend\Date\Date', $object->getLinkCreated());
+        $this->assertEquals(new \Zend\Date\Date('2007-11-11 20:07:11 GMT'), $object->getLinkCreated());
 
-        $this->assertInstanceOf('Zend_Uri_Http', $object->getLinkUrl());
-        $this->assertEquals(Zend_Uri::factory('http://www.simonecarletti.com/blog/2007/04/parallels-desktop-overview.php'), $object->getLinkUrl());
+        $this->assertInstanceOf('Zend\Uri\Http', $object->getLinkUrl());
+        $this->assertEquals(\Zend\Uri\UriFactory::factory('http://www.simonecarletti.com/blog/2007/04/parallels-desktop-overview.php'), $object->getLinkUrl());
 
         // test an other element to prevent cached values
-        $object = new Zend_Service_Technorati_CosmosResult($domElements->item(1));
+        $object = new Technorati\CosmosResult($domElements->item(1));
         $this->assertContains('Progetto-Seo', $object->getWeblog()->getName());
-        $this->assertEquals(Zend_Uri::factory('http://www.progetto-seo.com/motori-di-ricerca/links-interni'), $object->getNearestPermalink());
+        $this->assertEquals(\Zend\Uri\UriFactory::factory('http://www.progetto-seo.com/motori-di-ricerca/links-interni'), $object->getNearestPermalink());
         $this->assertContains('soprattutto Google', $object->getExcerpt());
-        $this->assertEquals(new Zend_Date('2007-11-10 08:57:22 GMT'), $object->getLinkCreated());
-        $this->assertEquals(Zend_Uri::factory('http://www.simonecarletti.com/blog/2007/04/google-yahoo-ask-nofollow.php'), $object->getLinkUrl());
+        $this->assertEquals(new \Zend\Date\Date('2007-11-10 08:57:22 GMT'), $object->getLinkCreated());
+        $this->assertEquals(\Zend\Uri\UriFactory::factory('http://www.simonecarletti.com/blog/2007/04/google-yahoo-ask-nofollow.php'), $object->getLinkUrl());
     }
 
     public function testCosmosResultSiteLinkNearestPermalinkIsNull()
     {
         $domElements = self::getTestFileElementsAsDom('TestCosmosResultSetSiteLink.xml');
-        $object = new Zend_Service_Technorati_CosmosResult($domElements->item(2));
+        $object = new Technorati\CosmosResult($domElements->item(2));
         $this->assertContains('Controrete', $object->getWeblog()->getName());
         $this->assertNull($object->getNearestPermalink());
     }
@@ -100,18 +100,18 @@ class Zend_Service_Technorati_CosmosResultTest extends Zend_Service_Technorati_T
     public function testCosmosResultSiteWeblog()
     {
         $domElements = self::getTestFileElementsAsDom('TestCosmosResultSetSiteWeblog.xml');
-        $object = new Zend_Service_Technorati_CosmosResult($domElements->item(0));
+        $object = new Technorati\CosmosResult($domElements->item(0));
 
-        $this->assertInstanceOf('Zend_Service_Technorati_Weblog', $object->getWeblog());
+        $this->assertInstanceOf('Zend\Service\Technorati\Weblog', $object->getWeblog());
         $this->assertContains('Simone Carletti', $object->getWeblog()->getName());
 
-        $this->assertInstanceOf('Zend_Uri_Http', $object->getLinkUrl());
-        $this->assertEquals(Zend_Uri::factory('http://www.simonecarletti.com'), $object->getLinkUrl());
+        $this->assertInstanceOf('Zend\Uri\Http', $object->getLinkUrl());
+        $this->assertEquals(\Zend\Uri\UriFactory::factory('http://www.simonecarletti.com'), $object->getLinkUrl());
 
         // test an other element to prevent cached values
-        $object = new Zend_Service_Technorati_CosmosResult($domElements->item(1));
+        $object = new Technorati\CosmosResult($domElements->item(1));
         $this->assertContains('Gioxx', $object->getWeblog()->getName());
-        $this->assertEquals(Zend_Uri::factory('http://www.simonecarletti.com'), $object->getLinkUrl());
+        $this->assertEquals(\Zend\Uri\UriFactory::factory('http://www.simonecarletti.com'), $object->getLinkUrl());
     }
 
     public function testCosmosResultBlogLink()

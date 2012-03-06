@@ -288,10 +288,10 @@ class EventManager implements EventCollection
      * methods.
      *
      * @param  ListenerAggregate $aggregate
-     * @param  null|int $priority If provided, a suggested priority for the aggregate to use
+     * @param  int $priority If provided, a suggested priority for the aggregate to use
      * @return mixed return value of {@link ListenerAggregate::attach()}
      */
-    public function attachAggregate(ListenerAggregate $aggregate, $priority = null)
+    public function attachAggregate(ListenerAggregate $aggregate, $priority = 1)
     {
         return $aggregate->attach($this, $priority);
     }

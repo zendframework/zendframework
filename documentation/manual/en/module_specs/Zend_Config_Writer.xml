@@ -1,151 +1,224 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.config.writer.introduction"><info><title>Zend_Config_Writer</title></info>
-    
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" 
+    xml:id="zend.config.writer">
+    <info><title>Zend\Config\Writer</title></info>
 
     <para>
-        <classname>Zend_Config_Writer</classname> gives you the ability to write config
-        files out of <classname>Zend_Config</classname> objects. It works with an
-        adapter-less system and thus is very easy to use. By default
-        <classname>Zend_Config_Writer</classname> ships with three adapters, which are all
-        file-based. You instantiate a writer with specific options, which
-        can be <emphasis>filename</emphasis> and <emphasis>config</emphasis>. Then
-        you call the <methodname>write()</methodname> method of the writer and the config
-        file is created. You can also give <varname>$filename</varname> and
-        <varname>$config</varname> directly to the <methodname>write()</methodname> method.
-        Currently the following writers are shipped with
-        <classname>Zend_Config_Writer</classname>:
+        <classname>Zend\Config\Writer</classname> gives you the ability to write config
+        files out of array, <classname>Zend\Config\Config</classname> and any Traversable object. The <classname>Zend\Config\Writer</classname>
+        is an interface that defines two methods: <methodname>toFile()</methodname> and <methodname>toString()</methodname>.
+        We have three specific writers that implement this interface:
     </para>
 
     <itemizedlist>
         <listitem>
             <para>
-                <classname>Zend_Config_Writer_Array</classname>
+                <classname>Zend\Config\Writer\Ini</classname>
             </para>
         </listitem>
-
         <listitem>
             <para>
-                <classname>Zend_Config_Writer_Ini</classname>
+                <classname>Zend\Config\Write\Xml</classname>
             </para>
         </listitem>
-
         <listitem>
             <para>
-                <classname>Zend_Config_Writer_Xml</classname>
+                <classname>Zend\Config\Write\PhpArray</classname>
             </para>
         </listitem>
     </itemizedlist>
-
-    <para>
-        The <acronym>INI</acronym> writer has two modes for rendering with regard to sections.
-        By default the top-level configuration is always written into section names.
-        By calling <command>$writer-&gt;setRenderWithoutSections();</command> all options are written
-        into the global namespace of the <acronym>INI</acronym> file and no sections are applied.
-    </para>
-
-    <para>
-        As an addition <classname>Zend_Config_Writer_Ini</classname> has an additional
-        option parameter <emphasis>nestSeparator</emphasis>, which defines with which
-        character the single nodes are separated. The default is a single dot,
-        like it is accepted by <classname>Zend_Config_Ini</classname> by default.
-    </para>
-
-    <para>
-        When modifying or creating a <classname>Zend_Config</classname> object, there are
-        some things to know. To create or modify a value, you simply say set
-        the parameter of the <classname>Zend_Config</classname> object via the parameter
-        accessor (<emphasis>-&gt;</emphasis>). To create a section in the root or to
-        create a branch, you just create a new array
-        ("<command>$config-&gt;branch = array();</command>"). To define which section
-        extends another one, you call the <methodname>setExtend()</methodname> method
-        on the root <classname>Zend_Config</classname> object.
-    </para>
-
-    <example xml:id="zend.config.writer.example.using"><info><title>Using Zend_Config_Writer</title></info>
+    
+    <section xml:id="zend.config.writer.ini">
+        <info><title>Zend\Config\Writer\Ini</title></info>
         
-
         <para>
-            This example illustrates the basic use of
-            <classname>Zend_Config_Writer_Xml</classname> to create a new config file:
+            The <acronym>INI</acronym> writer has two modes for rendering with regard to sections.
+            By default the top-level configuration is always written into section names.
+            By calling <command>$writer-&gt;setRenderWithoutSectionsFlags(true);</command> all options are written
+            into the global namespace of the <acronym>INI</acronym> file and no sections are applied.
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <para>
+            As an addition <classname>Zend\Config\Writer\Ini</classname> has an additional
+            option parameter <emphasis>nestSeparator</emphasis>, which defines with which
+            character the single nodes are separated. The default is a single dot,
+            like it is accepted by <classname>Zend\Config\Reader\Ini</classname> by default.
+        </para>
+
+        <para>
+            When modifying or creating a <classname>Zend\Config\Config</classname> object, there are
+            some things to know. To create or modify a value, you simply say set
+            the parameter of the <classname>Config</classname> object via the parameter
+            accessor (<emphasis>-&gt;</emphasis>). To create a section in the root or to
+            create a branch, you just create a new array
+            ("<command>$config-&gt;branch = array();</command>").
+        </para>
+        
+        <example xml:id="zend.config.writer.ini.example">
+            <info><title>Using Zend\Config\Writer\Ini</title></info>
+            
+            <para>
+                This example illustrates the basic use of <classname>Zend\Config\Writer\Ini</classname>
+                to create a new config file:
+            </para>
+                
+            <programlisting language="php"><![CDATA[
 // Create the config object
-$config = new Zend_Config(array(), true);
+$config = new Zend\Config\Config(array(), true);
 $config->production = array();
-$config->staging    = array();
 
-$config->setExtend('staging', 'production');
+$config->production->webhost = 'www.example.com';
+$config->production->database = array();
+$config->production->database->params = array();
+$config->production->database->params->host = 'localhost';
+$config->production->database->params->username = 'production';
+$config->production->database->params->password = 'secret';
+$config->production->database->params->dbname = 'dbproduction';
 
-$config->production->db = array();
-$config->production->db->hostname = 'localhost';
-$config->production->db->username = 'production';
-
-$config->staging->db = array();
-$config->staging->db->username = 'staging';
-
-// Write the config file in one of the following ways:
-// a)
-$writer = new Zend_Config_Writer_Xml(array('config'   => $config,
-                                           'filename' => 'config.xml'));
-$writer->write();
-
-// b)
-$writer = new Zend_Config_Writer_Xml();
-$writer->setConfig($config)
-       ->setFilename('config.xml')
-       ->write();
-
-// c)
-$writer = new Zend_Config_Writer_Xml();
-$writer->write('config.xml', $config);
+$writer = new Zend\Config\Writer\Ini();
+echo $writer->toString($config);
 ]]></programlisting>
-
-        <para>
-            This will create an <acronym>XML</acronym> config file with the sections production
-            and staging, where staging extends production.
-        </para>
-    </example>
-
-    <example xml:id="zend.config.writer.modifying"><info><title>Modifying an Existing Config</title></info>
-        
-
-        <para>
-            This example demonstrates how to edit an existing config file.
-        </para>
-
-        <programlisting language="php"><![CDATA[
-// Load all sections from an existing config file, while skipping the extends.
-$config = new Zend_Config_Ini('config.ini',
-                              null,
-                              array('skipExtends'        => true,
-                                    'allowModifications' => true));
-
-// Modify a value
-$config->production->hostname = 'foobar';
-
-// Write the config file
-$writer = new Zend_Config_Writer_Ini(array('config'   => $config,
-                                           'filename' => 'config.ini'));
-$writer->write();
+            
+            <para>
+                The result of this code is an INI string contains the following values:
+            </para>
+            
+            <programlisting language="ini"><![CDATA[
+[production]
+webhost = "www.example.com"
+database.params.host = "localhost"
+database.params.username = "production"
+database.params.password = "secret"
+database.params.dbname = "dbproduction"
 ]]></programlisting>
-    </example>
+            
+            <para>
+                You can use the method <methodname>toFile()</methodname> to store the INI data in a file.
+            </para>
+        </example>
+    </section>    
 
-    <note><info><title>Loading a Config File</title></info>
+    <section xml:id="zend.config.writer.xml">
+        <info><title>Zend\Config\Writer\Xml</title></info>
         
-
         <para>
-            When loading an existing config file for modifications it is very
-            important to load all sections and to skip the extends, so that
-            no values are merged. This is done by giving the
-            <emphasis>skipExtends</emphasis> as option to the constructor.
+            The <classname>Zend\Config\Writer\Xml</classname>can be used to generate an XML string or file
+            starting from a <classname>Zend\Config\Config</classname> object.
         </para>
-    </note>
+            
+        <example xml:id="zend.config.writer.xml.example">
+            <info><title>Using Zend\Config\Writer\Ini</title></info>
+            
+            <para>
+                This example illustrates the basic use of <classname>Zend\Config\Writer\Xml</classname>
+                to create a new config file:
+            </para>
+                
+            <programlisting language="php"><![CDATA[
+// Create the config object
+$config = new Zend\Config\Config(array(), true);
+$config->production = array();
 
-    <para>
-        For all the File-Based writers (<acronym>INI</acronym>, <acronym>XML</acronym> and
-        <acronym>PHP</acronym> Array) internally the <methodname>render()</methodname> is used to
-        build the configuration string. This method can be used from the outside also if you need
-        to access the string-representation of the configuration data.
-    </para>
+$config->production->webhost = 'www.example.com';
+$config->production->database = array();
+$config->production->database->params = array();
+$config->production->database->params->host = 'localhost';
+$config->production->database->params->username = 'production';
+$config->production->database->params->password = 'secret';
+$config->production->database->params->dbname = 'dbproduction';
+
+$writer = new Zend\Config\Writer\Xml();
+echo $writer->toString($config);
+]]></programlisting>
+            
+            <para>
+                The result of this code is an XML string contains the following data:
+            </para>
+            
+            <programlisting language="xml"><![CDATA[
+<?xml version="1.0" encoding="UTF-8"?>
+<zend-config>
+    <production>
+        <webhost>www.example.com</webhost>
+        <database>
+            <params>
+                <host>localhost</host>
+                <username>production</username>
+                <password>secret</password>
+                <dbname>dbproduction</dbname>
+            </params>
+        </database>
+    </production>
+</zend-config>
+]]></programlisting>
+            
+            <para>
+                You can use the method <methodname>toFile()</methodname> to store the XML data in a file.
+            </para>
+        </example>    
+        
+    </section>
+    
+    <section xml:id="zend.config.writer.phparray">
+        <info><title>Zend\Config\Writer\PhpArray</title></info>
+        
+        <para>
+            The <classname>Zend\Config\Writer\PhpArray</classname>can be used to generate a PHP code
+            that returns an array representation of an <classname>Zend\Config\Config</classname> object.
+        </para>
+            
+        <example xml:id="zend.config.writer.phparray.example">
+            <info><title>Using Zend\Config\Writer\PhpArray</title></info>
+            
+            <para>
+                This example illustrates the basic use of <classname>Zend\Config\Writer\PhpArray</classname>
+                to create a new config file:
+            </para>
+                
+            <programlisting language="php"><![CDATA[
+// Create the config object
+$config = new Zend\Config\Config(array(), true);
+$config->production = array();
+
+$config->production->webhost = 'www.example.com';
+$config->production->database = array();
+$config->production->database->params = array();
+$config->production->database->params->host = 'localhost';
+$config->production->database->params->username = 'production';
+$config->production->database->params->password = 'secret';
+$config->production->database->params->dbname = 'dbproduction';
+
+$writer = new Zend\Config\Writer\PhpArray();
+echo $writer->toString($config);
+]]></programlisting>
+            
+            <para>
+                The result of this code is a PHP script that returns an array as follow:
+            </para>
+            
+            <programlisting language="php"><![CDATA[
+<?php
+return array (
+  'production' => 
+  array (
+    'webhost' => 'www.example.com',
+    'database' => 
+    array (
+      'params' => 
+      array (
+        'host' => 'localhost',
+        'username' => 'production',
+        'password' => 'secret',
+        'dbname' => 'dbproduction',
+      ),
+    ),
+  ),
+);
+]]></programlisting>
+            
+            <para>
+                You can use the method <methodname>toFile()</methodname> to store the PHP script in a file.
+            </para>
+        </example>
+    </section>
 </section>

@@ -77,7 +77,7 @@ class PaginatorTest extends TestCase
         $this->_testCollection = range(1, 101);
         $this->_paginator = Paginator\Paginator::factory($this->_testCollection);
 
-        $this->_config = new Config\Xml(__DIR__ . '/_files/config.xml');
+        $this->_config = Config\Factory::fromFile(__DIR__ . '/_files/config.xml', true);
 
         $this->_cache = CacheFactory::factory(array(
             'adapter' => array(
@@ -105,7 +105,10 @@ class PaginatorTest extends TestCase
 
     protected function tearDown()
     {
-        $this->_cache->clear(CacheAdapter::MATCH_ALL);
+        if ($this->_cache) {
+            $this->_cache->clear(CacheAdapter::MATCH_ALL);
+            $this->_cache = null;
+        }
         $this->_dbConn = null;
         $this->_testCollection = null;
         $this->_paginator = null;
@@ -114,6 +117,9 @@ class PaginatorTest extends TestCase
     protected function _getTmpDir()
     {
         $tmpDir = rtrim(sys_get_temp_dir(), '/\\') . DIRECTORY_SEPARATOR . 'zend_paginator';
+        if (!is_dir($tmpDir)) {
+            mkdir($tmpDir);
+        }
         $this->cacheDir = $tmpDir;
         return $tmpDir;
     }

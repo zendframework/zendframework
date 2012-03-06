@@ -331,7 +331,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
 
     }
 
-    public function testReplaceOld()
+    public function testMerge_old()
     {
         $stdArray = array(
             'test_feature' => false,
@@ -359,7 +359,8 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('myDir/bar.xml', $stdConfig->some_files->bar);
         $this->assertEquals('myDir/baz.xml', $stdConfig->some_files->baz);
         $this->assertEquals('dir/foo.xml', $stdConfig->some_files->foo);
-        $this->assertEquals(456, $stdConfig->{2});
+        $this->assertEquals(123, $stdConfig->{2});
+        $this->assertEquals(456, $stdConfig->{3});
     }
 
     public function testMerge()

@@ -335,7 +335,7 @@ class Config implements Countable, Iterator, ArrayAccess
     }
 
     /**
-     * Replace values in this config with values from another config.
+     * Merge another Config with this one.
      *
      * If an item with the same key exists in current config, it will be replaced by an item from $replace.
      * If an item contains a list (numerical array), elements will be REPLACED with values from $replace.
@@ -343,22 +343,26 @@ class Config implements Countable, Iterator, ArrayAccess
      * @param  Config $replace
      * @return Config
      */
-    public function replace(self $replace)
+    public function merge(self $merge)
     {
-        foreach ($replace as $key => $item) {
+        foreach ($merge as $key => $value) {
             if (array_key_exists($key, $this->data)) {
-                if ($item instanceof self && $this->data[$key] instanceof self) {
-                    $this->data[$key] = $this->data[$key]->replace(
-                        new self($item->toArray(), $this->allowModifications)
-                    );
+                if (is_int($key)) {
+                    $this->data[] = $value;
+                } elseif ($value instanceof self && $this->data[$key] instanceof self) {
+                    $this->data[$key] = $this->data[$key]->merge($value);
                 } else {
-                    $this->data[$key] = $item;
+                    if ($value instanceof self) {
+                        $this->data[$key] = new self($value->toArray(), $this->allowModifications);
+                    } else {
+                        $this->data[$key] = $value;
+                    }
                 }
             } else {
-                if ($item instanceof self) {
-                    $this->data[$key] = new self($item->toArray(), $this->allowModifications);
+                if ($value instanceof self) {
+                    $this->data[$key] = new self($value->toArray(), $this->allowModifications);
                 } else {
-                    $this->data[$key] = $item;
+                    $this->data[$key] = $value;
                 }
             }
         }

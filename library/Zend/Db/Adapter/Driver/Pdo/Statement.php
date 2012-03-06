@@ -215,7 +215,8 @@ class Statement implements StatementInterface
         }
 
         if ($this->resource->execute() === false) {
-            throw new Exception\InvalidQueryException($this->resource->error);
+            $error = $this->resource->errorInfo();
+            throw new Exception\InvalidQueryException($error[2]);
         }
 
         $result = $this->driver->createResult($this->resource);

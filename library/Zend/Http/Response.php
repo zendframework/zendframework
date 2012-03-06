@@ -184,7 +184,7 @@ class Response extends Message implements ResponseDescription
 
         $response = new static();
         $matches = null;
-        if (!preg_match('/^HTTP\/(?P<version>1\.[01]) (?P<status>\d{3})\s*(?P<reason>.*)$/', $firstLine, $matches)) {
+        if (!preg_match('/^HTTP\/(?P<version>1\.[01]) (?P<status>\d{3})(?:[ ]+(?P<reason>.+))?$/', $firstLine, $matches)) {
             throw new Exception\InvalidArgumentException('A valid response status line was not found in the provided string');
         }
 

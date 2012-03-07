@@ -30,7 +30,7 @@ use Traversable,
     Zend\Mvc\Router\Exception;
 
 /**
- * QueryString route.
+ * Query route.
  *
  * @package    Zend_Mvc_Router
  * @subpackage Http
@@ -38,27 +38,8 @@ use Traversable,
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @see        http://manuals.rubyonrails.com/read/chapter/65
  */
-class QueryString implements Route
+class Query implements Route
 {
-    /**
-     * Delimiter between keys and values.
-     *
-     * @var string
-     */
-    protected $keyValueDelimiter;
-
-    /**
-     * Delimtier before parameters.
-     *
-     * @var array
-     */
-    protected $paramDelimiter;
-    
-    /**
-     * Boundary character for query string
-     * @var string
-     */
-    protected $queryBoundary;
     
     /**
      * Default values.
@@ -77,16 +58,11 @@ class QueryString implements Route
     /**
      * Create a new wildcard route.
      * 
-     * @param  string $keyValueDelimiter
-     * @param  string $paramDelimiter
      * @param  array  $defaults
      * @return void
      */
-    public function __construct($keyValueDelimiter = '=', $paramDelimiter = '&', array $defaults = array(), $queryBoundary = '?')
+    public function __construct(array $defaults = array())
     {
-        $this->keyValueDelimiter = $keyValueDelimiter;
-        $this->queryBoundary = $queryBoundary;
-        $this->paramDelimiter    = $paramDelimiter;
         $this->defaults          = $defaults;
     }
     
@@ -105,23 +81,12 @@ class QueryString implements Route
             throw new Exception\InvalidArgumentException(__METHOD__ . ' expects an array or Traversable set of options');
         }
 
-        if (!isset($options['key_value_delimiter'])) {
-            $options['key_value_delimiter'] = '=';
-        }
-
-        if (!isset($options['param_delimiter'])) {
-            $options['param_delimiter'] = '&';
-        }
-        
-        if (!isset($options['query_boundary'])) {
-            $options['query_boundary'] = '?';
-        }
         
         if (!isset($options['defaults'])) {
             $options['defaults'] = array();
         }
 
-        return new static($options['key_value_delimiter'], $options['param_delimiter'], $options['defaults']);
+        return new static($options['defaults']);
     }
 
     /**
@@ -133,7 +98,7 @@ class QueryString implements Route
      */
     public function match(Request $request, $pathOffset = null)
     {
-        // return null as not matching query string
+        // not checking query params
         return null;
     }
 
@@ -147,21 +112,15 @@ class QueryString implements Route
      */
     public function assemble(array $params = array(), array $options = array())
     {
-        $elements              = array();
-        $mergedParams          = array_merge($this->defaults, $params);
-        $this->assembledParams = array();
+        $mergedParams = array_merge($this->defaults, $params);
 
-        if ($mergedParams) {
-            foreach ($mergedParams as $key => $value) {
-                $elements[] = urlencode($key) . $this->keyValueDelimiter . urlencode($value);
-
-                $this->assembledParams[] = $key;
-            }
-
-            return $this->queryBoundary . implode($this->paramDelimiter, $elements);
-        }
+        // this doesnt work form some reason, need to figire out why
+//         if (isset($options['uri'])) {
+//             $options['uri']->setQuery($mergedParams);
+//             return '';
+//         }
         
-        return '';
+        return '?' . str_replace('+', '%20', http_build_query($mergedParams));
     }
     
     /**

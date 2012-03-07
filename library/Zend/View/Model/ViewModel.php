@@ -84,7 +84,7 @@ class ViewModel implements Model
      * @param  array|Traversable $options 
      * @return void
      */
-    public function __construct($variables = null, array $options = null)
+    public function __construct($variables = null, $options = null)
     {
         if (null === $variables) {
             $variables = new ViewVariables();

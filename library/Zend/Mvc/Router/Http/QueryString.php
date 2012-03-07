@@ -133,45 +133,8 @@ class QueryString implements Route
      */
     public function match(Request $request, $pathOffset = null)
     {
-        if (!method_exists($request, 'uri')) {
-            return null;
-        }
-
-        $uri  = $request->uri();
-        $path = $uri->getPath();
-
-        if ($pathOffset !== null) {
-            $path = substr($path, $pathOffset);
-        }
-
-        $matches = array();
-        $params  = explode($this->paramDelimiter, $path);
-
-        if (count($params) > 1 && ($params[0] !== '' || end($params) === '')) {
-            return null;
-        }
-        
-        if ($this->keyValueDelimiter === $this->paramDelimiter) {
-            $count = count($params);
-
-            for ($i = 1; $i < $count; $i += 2) {
-                if (isset($params[$i + 1])) {
-                    $matches[urldecode($params[$i])] = urldecode($params[$i + 1]);
-                }
-            }
-        } else {
-            array_shift($params);
-            
-            foreach ($params as $param) {
-                $param = explode($this->keyValueDelimiter, $param, 2);
-      
-                if (isset($param[1])) {
-                    $matches[urldecode($param[0])] = urldecode($param[1]);
-                }
-            }
-        }
-
-        return new RouteMatch(array_merge($this->defaults, $matches), strlen($path));
+        // return null as not matching query string
+        return null;
     }
 
     /**

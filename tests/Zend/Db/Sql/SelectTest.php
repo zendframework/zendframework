@@ -139,4 +139,16 @@ class SelectTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertInstanceOf('Zend\Db\Sql\Where', $this->select->where);
     }
+
+    /**
+     * @covers Zend\Db\Sql\Select::__clone
+     */
+    public function test__clone()
+    {
+        $select1 = clone $this->select;
+        $select1->where('id = foo');
+
+        $this->assertEquals(0, $this->select->where->count());
+        $this->assertEquals(1, $select1->where->count());
+    }
 }

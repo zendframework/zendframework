@@ -165,7 +165,7 @@ class JsonRenderer implements Renderer, TreeRendererInterface
      */
     protected function recurseModel(Model $model)
     {
-        $values = $model->getVariables();
+        $values = (array) $model->getVariables();
         if (!$model->hasChildren()) {
             return $values;
         }
@@ -179,12 +179,12 @@ class JsonRenderer implements Renderer, TreeRendererInterface
             }
 
             $childValues = $this->recurseModel($child);
-            if ($captureTo) {
-                // Capturing to a specific key
-                $values[$captureTo] = $childValues;
-            } elseif ($mergeChildren) {
+            if ($mergeChildren) {
                 // Merging values with parent
                 $values = array_replace_recursive($values, $childValues);
+            } else {
+                // Capturing to a specific key
+                $values[$captureTo] = $childValues;
             }
         }
         return $values;

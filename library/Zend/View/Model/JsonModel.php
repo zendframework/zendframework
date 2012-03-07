@@ -34,6 +34,13 @@ use Traversable,
 class JsonModel extends ViewModel
 {
     /**
+     * JSON is usually terminal
+     * 
+     * @var bool
+     */
+    protected $terminate = true;
+
+    /**
      * Serialize to JSON
      * 
      * @return string

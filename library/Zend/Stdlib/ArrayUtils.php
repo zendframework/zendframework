@@ -41,13 +41,13 @@ abstract class ArrayUtils
      */
     public static function hasStringKeys($value, $allowEmpty = false)
     {
-        if (is_array($value)) {
-            if (count($value) == 0) {
-                return $allowEmpty;
-            }
-            return count(array_filter(array_keys($value), 'is_string')) > 0;
+        if (!is_array($value)) {
+            return false;
+        } elseif (!$value) {
+            return $allowEmpty;
         }
-        return false;
+
+        return count(array_filter(array_keys($value), 'is_string')) > 0;
     }
 
     /**
@@ -59,13 +59,13 @@ abstract class ArrayUtils
      */
     public static function hasIntegerKeys($value, $allowEmpty = false)
     {
-        if (is_array($value)) {
-            if (count($value) == 0) {
-                return $allowEmpty;
-            }
-            return count(array_filter(array_keys($value), 'is_int')) > 0;
+        if (!is_array($value)) {
+            return false;
+        } elseif (!$value) {
+            return $allowEmpty;
         }
-        return false;
+
+        return count(array_filter(array_keys($value), 'is_int')) > 0;
     }
 
     /**
@@ -84,13 +84,13 @@ abstract class ArrayUtils
      */
     public static function hasNumericKeys($value, $allowEmpty = false)
     {
-        if (is_array($value)) {
-            if (count($value) == 0) {
-                return $allowEmpty;
-            }
-            return count(array_filter(array_keys($value), 'is_numeric')) > 0;
+        if (!is_array($value)) {
+            return false;
+        } elseif (!$value) {
+            return $allowEmpty;
         }
-        return false;
+
+        return count(array_filter(array_keys($value), 'is_numeric')) > 0;
     }
 
     /**
@@ -113,13 +113,13 @@ abstract class ArrayUtils
      */
     public static function isList($value, $allowEmpty = false)
     {
-        if (is_array($value)) {
-            if (count($value) == 0) {
-                return $allowEmpty;
-            }
-            return (array_values($value) === $value);
+        if (!is_array($value)) {
+            return false;
+        } elseif (!$value) {
+            return $allowEmpty;
         }
-        return false;
+
+        return (array_values($value) === $value);
     }
 
     /**
@@ -150,13 +150,13 @@ abstract class ArrayUtils
      */
     public static function isHashTable($value, $allowEmpty = false)
     {
-        if (is_array($value)) {
-            if (count($value) == 0) {
-                return $allowEmpty;
-            }
-            return (array_values($value) !== $value);
+        if (!is_array($value)) {
+            return false;
+        } elseif (!$value) {
+            return $allowEmpty;
         }
-        return false;
+
+        return (array_values($value) !== $value);
     }
 
     /**

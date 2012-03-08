@@ -331,38 +331,6 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
 
     }
 
-    public function testMerge_old()
-    {
-        $stdArray = array(
-            'test_feature' => false,
-            'some_files' => array(
-                'foo'=>'dir/foo.xml',
-                'bar'=>'dir/bar.xml',
-            ),
-            2 => 123,
-        );
-        $stdConfig = new Config($stdArray, true);
-
-        $devArray = array(
-            'test_feature'=>true,
-            'some_files' => array(
-               'bar' => 'myDir/bar.xml',
-               'baz' => 'myDir/baz.xml',
-            ),
-            2 => 456,
-        );
-        $devConfig = new Config($devArray);
-
-        $stdConfig->merge($devConfig);
-
-        $this->assertTrue($stdConfig->test_feature);
-        $this->assertEquals('myDir/bar.xml', $stdConfig->some_files->bar);
-        $this->assertEquals('myDir/baz.xml', $stdConfig->some_files->baz);
-        $this->assertEquals('dir/foo.xml', $stdConfig->some_files->foo);
-        $this->assertEquals(123, $stdConfig->{2});
-        $this->assertEquals(456, $stdConfig->{3});
-    }
-
     public function testMerge()
     {
         $configA = new Config($this->toCombineA);

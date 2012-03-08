@@ -27,7 +27,7 @@ use Traversable,
     Zend\Http\Response as HttpResponse,
     Zend\Service\Nirvanix\Exception,
     Zend\Service\Nirvanix\Response,
-    Zend\Stdlib\ArrayTools;
+    Zend\Stdlib\ArrayUtils;
 
 /**
  * The Nirvanix web services are split into namespaces.  This is a proxy class
@@ -80,7 +80,7 @@ class Base
     public function __construct($options = array())
     {
         if ($options instanceof Traversable) {
-            $options = ArrayTools::iteratorToArray($options);
+            $options = ArrayUtils::iteratorToArray($options);
         }
 
         if (!is_array($options)) {

@@ -26,7 +26,7 @@ namespace Zend\Mvc\Router;
 use ArrayAccess,
     ArrayIterator,
     Traversable,
-    Zend\Stdlib\ArrayTools,
+    Zend\Stdlib\ArrayUtils,
     Zend\Stdlib\RequestDescription as Request;
 
 /**
@@ -82,7 +82,7 @@ class SimpleRouteStack implements RouteStack
     public static function factory($options = array())
     {
         if ($options instanceof Traversable) {
-            $options = ArrayTools::iteratorToArray($options);
+            $options = ArrayUtils::iteratorToArray($options);
         } elseif (!is_array($options)) {
             throw new Exception\InvalidArgumentException(__METHOD__ . ' expects an array or Traversable set of options');
         }
@@ -240,7 +240,7 @@ class SimpleRouteStack implements RouteStack
     protected function routeFromArray($specs)
     {
         if ($specs instanceof Traversable) {
-            $specs = ArrayTools::iteratorToArray($specs);
+            $specs = ArrayUtils::iteratorToArray($specs);
         } elseif (!is_array($specs)) {
             throw new Exception\InvalidArgumentException('Route definition must be an array or Traversable object');
         }

@@ -28,7 +28,7 @@ use Traversable,
     Zend\Locale\Format,
     Zend\Locale\Locale,
     Zend\Registry,
-    Zend\Stdlib\ArrayTools;
+    Zend\Stdlib\ArrayUtils;
 
 /**
  * @category   Zend
@@ -83,7 +83,7 @@ class Date extends AbstractValidator
     public function __construct($options = array())
     {
         if ($options instanceof Traversable) {
-            $options = ArrayTools::iteratorToArray($options);
+            $options = ArrayUtils::iteratorToArray($options);
         } elseif (!is_array($options)) {
             $options = func_get_args();
             $temp['format'] = array_shift($options);

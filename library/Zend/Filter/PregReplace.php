@@ -24,7 +24,7 @@
 namespace Zend\Filter;
 
 use Traversable,
-    Zend\Stdlib\ArrayTools;
+    Zend\Stdlib\ArrayUtils;
 
 /**
  * @uses       Zend\Filter\Exception
@@ -91,7 +91,7 @@ class PregReplace extends AbstractFilter
     public function __construct($options = array())
     {
         if ($options instanceof Traversable) {
-            $options = ArrayTools::iteratorToArray($options);
+            $options = ArrayUtils::iteratorToArray($options);
         } elseif (!is_array($options)) {
             $options = func_get_args();
             $temp    = array();

@@ -34,7 +34,7 @@ use ArrayIterator,
     Zend\Db\Table\Select as DbTableSelect,
     Zend\Filter\Filter,
     Zend\Json\Json,
-    Zend\Stdlib\ArrayTools,
+    Zend\Stdlib\ArrayUtils,
     Zend\View;
 
 /**
@@ -263,7 +263,7 @@ class Paginator implements Countable, IteratorAggregate
     public static function setConfig($config)
     {
         if ($config instanceof Traversable) {
-            $config = ArrayTools::iteratorToArray($config);
+            $config = ArrayUtils::iteratorToArray($config);
         }
         if (!is_array($config)) {
             throw new Exception\InvalidArgumentException(__METHOD__ . ' expects an array or Traversable');

@@ -27,7 +27,7 @@ use Traversable,
     Zend\Loader\PluginLoader,
     Zend\Loader\PrefixPathMapper,
     Zend\Config\Config,
-    Zend\Stdlib\ArrayTools,
+    Zend\Stdlib\ArrayUtils,
     Zend\Translator,
     Zend\View\Renderer\PhpRenderer,
     Zend\View\Renderer as View;
@@ -133,7 +133,7 @@ class DisplayGroup implements \Iterator,\Countable
         $this->setPluginLoader($loader);
 
         if ($options instanceof Traversable) {
-            $options = ArrayTools::iteratorToArray($options);
+            $options = ArrayUtils::iteratorToArray($options);
         }
         if (is_array($options)) {
             $this->setOptions($options);

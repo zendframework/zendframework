@@ -23,7 +23,7 @@ namespace Zend\Config;
 use Countable,
     Iterator,
     ArrayAccess,
-    Zend\Stdlib\ArrayTools
+    Zend\Stdlib\ArrayUtils
 ;
 
 /**

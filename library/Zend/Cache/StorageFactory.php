@@ -23,7 +23,7 @@ namespace Zend\Cache;
 
 use Traversable,
     Zend\Loader\Broker,
-    Zend\Stdlib\ArrayTools;
+    Zend\Stdlib\ArrayUtils;
 
 /**
  * @category   Zend
@@ -59,7 +59,7 @@ class StorageFactory
     public static function factory($cfg)
     {
         if ($cfg instanceof Traversable) {
-            $cfg = ArrayTools::iteratorToArray($cfg);
+            $cfg = ArrayUtils::iteratorToArray($cfg);
         }
 
         if (!is_array($cfg)) {

@@ -7,7 +7,7 @@ use ArrayAccess,
     Zend\Config\Config,
     Zend\Config\Factory as ConfigFactory,
     Zend\Module\ModuleEvent,
-    Zend\Stdlib\ArrayTools,
+    Zend\Stdlib\ArrayUtils,
     Zend\EventManager\EventCollection,
     Zend\EventManager\ListenerAggregate;
 
@@ -202,7 +202,7 @@ class ConfigListener extends AbstractListener
     public function addConfigGlobPaths($globPaths)
     {
         if ($globPaths instanceof Traversable) {
-            $globPaths = ArrayTools::iteratorToArray($globPaths);
+            $globPaths = ArrayUtils::iteratorToArray($globPaths);
         }
 
         if (!is_array($globPaths)) {
@@ -271,7 +271,7 @@ class ConfigListener extends AbstractListener
     protected function mergeTraversableConfig($config)
     {
         if ($config instanceof Traversable) {
-            $config = ArrayTools::iteratorToArray($config);
+            $config = ArrayUtils::iteratorToArray($config);
         }
         if (!is_array($config)) {
             throw new Exception\InvalidArgumentException(

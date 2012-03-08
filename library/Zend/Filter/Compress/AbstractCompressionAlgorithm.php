@@ -21,7 +21,7 @@
 namespace Zend\Filter\Compress;
 
 use Traversable,
-    Zend\Stdlib\ArrayTools;
+    Zend\Stdlib\ArrayUtils;
 
 /**
  * Abstract compression adapter
@@ -43,7 +43,7 @@ abstract class AbstractCompressionAlgorithm implements CompressionAlgorithm
     public function __construct($options = null)
     {
         if ($options instanceof Traversable) {
-            $options = ArrayTools::iteratorToArray($options);
+            $options = ArrayUtils::iteratorToArray($options);
         }
 
         if (is_array($options)) {

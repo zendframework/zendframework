@@ -24,7 +24,7 @@
 namespace Zend\Validator;
 
 use Traversable,
-    Zend\Stdlib\ArrayTools,
+    Zend\Stdlib\ArrayUtils,
     Zend\Translator,
     Zend\Validator\Exception\InvalidArgumentException;
 
@@ -82,7 +82,7 @@ abstract class AbstractValidator implements Validator
     {
         // The abstract constructor allows no scalar values
         if ($options instanceof Traversable) {
-            $options = ArrayTools::iteratorToArray($options);
+            $options = ArrayUtils::iteratorToArray($options);
         }
 
         if (isset($this->_messageTemplates)) {

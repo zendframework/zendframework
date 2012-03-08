@@ -22,7 +22,7 @@ namespace Zend\Cache;
 
 use Traversable,
     Zend\Loader\Broker,
-    Zend\Stdlib\ArrayTools;
+    Zend\Stdlib\ArrayUtils;
 
 /**
  * @category   Zend
@@ -50,7 +50,7 @@ class PatternFactory
     public static function factory($patternName, $options = array())
     {
         if ($options instanceof Traversable) {
-            $options = ArrayTools::iteratorToArray($options);
+            $options = ArrayUtils::iteratorToArray($options);
         }
         if (is_array($options)) {
             $options = new Pattern\PatternOptions($options);

@@ -21,7 +21,7 @@
 namespace Zend\Validator;
 
 use Traversable,
-    Zend\Stdlib\ArrayTools;
+    Zend\Stdlib\ArrayUtils;
 
 /**
  * @uses       \Zend\Validator\AbstractValidator
@@ -158,7 +158,7 @@ class CreditCard extends AbstractValidator
     public function __construct($options = array())
     {
         if ($options instanceof Traversable) {
-            $options = ArrayTools::iteratorToArray($options);
+            $options = ArrayUtils::iteratorToArray($options);
         } else if (!is_array($options)) {
             $options = func_get_args();
             $temp['type'] = array_shift($options);

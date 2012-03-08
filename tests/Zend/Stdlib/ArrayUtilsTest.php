@@ -1,14 +1,34 @@
 <?php
+/**
+ * Zend Framework
+ *
+ * LICENSE
+ *
+ * This source file is subject to the new BSD license that is bundled
+ * with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://framework.zend.com/license/new-bsd
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@zend.com so we can send you a copy immediately.
+ *
+ * @category   Zend
+ * @package    Zend_Stdlib
+ * @subpackage UnitTests
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @version    $Id:$
+ */
 
 namespace ZendTest\Stdlib;
 
 use PHPUnit_Framework_TestCase as TestCase,
     stdClass,
     \ArrayObject,
-    Zend\Stdlib\ArrayTools,
+    Zend\Stdlib\ArrayUtils,
     Zend\Config\Config;
 
-class ArrayToolsTest extends TestCase
+class ArrayUtilsTest extends TestCase
 {
     public static function validHashTables()
     {
@@ -252,7 +272,7 @@ class ArrayToolsTest extends TestCase
      */
     public function testValidArraysWithStringKeys($test)
     {
-        $this->assertTrue(ArrayTools::hasStringKeys($test));
+        $this->assertTrue(ArrayUtils::hasStringKeys($test));
     }
 
     /**
@@ -260,7 +280,7 @@ class ArrayToolsTest extends TestCase
      */
     public function testValidArraysWithIntegerKeys($test)
     {
-        $this->assertTrue(ArrayTools::hasIntegerKeys($test));
+        $this->assertTrue(ArrayUtils::hasIntegerKeys($test));
     }
 
     /**
@@ -268,7 +288,7 @@ class ArrayToolsTest extends TestCase
      */
     public function testValidArraysWithNumericKeys($test)
     {
-        $this->assertTrue(ArrayTools::hasNumericKeys($test));
+        $this->assertTrue(ArrayUtils::hasNumericKeys($test));
     }
 
     /**
@@ -276,17 +296,17 @@ class ArrayToolsTest extends TestCase
      */
     public function testInvalidArraysAlwaysReturnFalse($test)
     {
-        $this->assertFalse(ArrayTools::hasStringKeys($test, False));
-        $this->assertFalse(ArrayTools::hasIntegerKeys($test, False));
-        $this->assertFalse(ArrayTools::hasNumericKeys($test, False));
-        $this->assertFalse(ArrayTools::isList($test, False));
-        $this->assertFalse(ArrayTools::isHashTable($test, False));
+        $this->assertFalse(ArrayUtils::hasStringKeys($test, False));
+        $this->assertFalse(ArrayUtils::hasIntegerKeys($test, False));
+        $this->assertFalse(ArrayUtils::hasNumericKeys($test, False));
+        $this->assertFalse(ArrayUtils::isList($test, False));
+        $this->assertFalse(ArrayUtils::isHashTable($test, False));
 
-        $this->assertFalse(ArrayTools::hasStringKeys($test, false));
-        $this->assertFalse(ArrayTools::hasIntegerKeys($test, false));
-        $this->assertFalse(ArrayTools::hasNumericKeys($test, false));
-        $this->assertFalse(ArrayTools::isList($test, false));
-        $this->assertFalse(ArrayTools::isHashTable($test, false));
+        $this->assertFalse(ArrayUtils::hasStringKeys($test, false));
+        $this->assertFalse(ArrayUtils::hasIntegerKeys($test, false));
+        $this->assertFalse(ArrayUtils::hasNumericKeys($test, false));
+        $this->assertFalse(ArrayUtils::isList($test, false));
+        $this->assertFalse(ArrayUtils::isHashTable($test, false));
     }
 
     /**
@@ -294,11 +314,11 @@ class ArrayToolsTest extends TestCase
      */
     public function testLists($test)
     {
-        $this->assertTrue(ArrayTools::isList($test));
-        $this->assertTrue(ArrayTools::hasIntegerKeys($test));
-        $this->assertTrue(ArrayTools::hasNumericKeys($test));
-        $this->assertFalse(ArrayTools::hasStringKeys($test));
-        $this->assertFalse(ArrayTools::isHashTable($test));
+        $this->assertTrue(ArrayUtils::isList($test));
+        $this->assertTrue(ArrayUtils::hasIntegerKeys($test));
+        $this->assertTrue(ArrayUtils::hasNumericKeys($test));
+        $this->assertFalse(ArrayUtils::hasStringKeys($test));
+        $this->assertFalse(ArrayUtils::isHashTable($test));
     }
 
     /**
@@ -306,28 +326,28 @@ class ArrayToolsTest extends TestCase
      */
     public function testHashTables($test)
     {
-        $this->assertTrue(ArrayTools::isHashTable($test));
-        $this->assertFalse(ArrayTools::isList($test));
+        $this->assertTrue(ArrayUtils::isHashTable($test));
+        $this->assertFalse(ArrayUtils::isList($test));
     }
 
     public function testEmptyArrayReturnsTrue()
     {
         $test = array();
-        $this->assertTrue(ArrayTools::hasStringKeys($test, true));
-        $this->assertTrue(ArrayTools::hasIntegerKeys($test, true));
-        $this->assertTrue(ArrayTools::hasNumericKeys($test, true));
-        $this->assertTrue(ArrayTools::isList($test, true));
-        $this->assertTrue(ArrayTools::isHashTable($test, true));
+        $this->assertTrue(ArrayUtils::hasStringKeys($test, true));
+        $this->assertTrue(ArrayUtils::hasIntegerKeys($test, true));
+        $this->assertTrue(ArrayUtils::hasNumericKeys($test, true));
+        $this->assertTrue(ArrayUtils::isList($test, true));
+        $this->assertTrue(ArrayUtils::isHashTable($test, true));
     }
 
     public function testEmptyArrayReturnsFalse()
     {
         $test = array();
-        $this->assertFalse(ArrayTools::hasStringKeys($test, false));
-        $this->assertFalse(ArrayTools::hasIntegerKeys($test, false));
-        $this->assertFalse(ArrayTools::hasNumericKeys($test, false));
-        $this->assertFalse(ArrayTools::isList($test, false));
-        $this->assertFalse(ArrayTools::isHashTable($test, false));
+        $this->assertFalse(ArrayUtils::hasStringKeys($test, false));
+        $this->assertFalse(ArrayUtils::hasIntegerKeys($test, false));
+        $this->assertFalse(ArrayUtils::hasNumericKeys($test, false));
+        $this->assertFalse(ArrayUtils::isList($test, false));
+        $this->assertFalse(ArrayUtils::isHashTable($test, false));
     }
 
     /**
@@ -335,7 +355,7 @@ class ArrayToolsTest extends TestCase
      */
     public function testMerge($a, $b, $expected)
     {
-        $this->assertEquals($expected, ArrayTools::merge($a, $b));
+        $this->assertEquals($expected, ArrayUtils::merge($a, $b));
     }
 
     /**
@@ -343,7 +363,7 @@ class ArrayToolsTest extends TestCase
      */
     public function testValidIteratorsReturnArrayRepresentation($test, $expected)
     {
-        $result = ArrayTools::iteratorToArray($test);
+        $result = ArrayUtils::iteratorToArray($test);
         $this->assertEquals($expected, $result);
     }
 
@@ -353,6 +373,6 @@ class ArrayToolsTest extends TestCase
     public function testInvalidIteratorsRaiseInvalidArgumentException($test)
     {
         $this->setExpectedException('Zend\Stdlib\Exception\InvalidArgumentException');
-        $this->assertFalse(ArrayTools::iteratorToArray($test));
+        $this->assertFalse(ArrayUtils::iteratorToArray($test));
     }
 }

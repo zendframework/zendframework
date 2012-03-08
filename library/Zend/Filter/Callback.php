@@ -24,7 +24,7 @@
 namespace Zend\Filter;
 
 use Traversable,
-    Zend\Stdlib\ArrayTools;
+    Zend\Stdlib\ArrayUtils;
 
 /**
  * @uses       Zend\Filter\Exception
@@ -59,7 +59,7 @@ class Callback extends AbstractFilter
     public function __construct($options = array())
     {
         if ($options instanceof Traversable) {
-            $options = ArrayTools::iteratorToArray($options);
+            $options = ArrayUtils::iteratorToArray($options);
         } elseif (!is_array($options) || !array_key_exists('callback', $options)) {
             $options          = func_get_args();
             $temp['callback'] = array_shift($options);

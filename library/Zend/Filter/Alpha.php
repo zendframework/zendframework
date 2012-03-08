@@ -26,7 +26,7 @@ namespace Zend\Filter;
 use Traversable,
     Zend\Locale\Locale as ZendLocale,
     Zend\Registry,
-    Zend\Stdlib\ArrayTools;
+    Zend\Stdlib\ArrayUtils;
 
 /**
  * @uses       Zend\Filter\AbstractFilter
@@ -68,7 +68,7 @@ class Alpha extends AbstractFilter
     public function __construct($options = false)
     {
         if ($options instanceof Traversable) {
-            $options = ArrayTools::iteratorToArray($options);
+            $options = ArrayUtils::iteratorToArray($options);
         } elseif (!is_array($options)) {
             $options = func_get_args();
             $temp    = array();

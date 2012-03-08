@@ -19,7 +19,7 @@ prepare for Release Candidate status.
 ### NEW FEATURES IN BETA3
 
  -  Refactored Config component (Ben Scholzen, Artur Bodera, Enrico Zimuel, 
-    Evan Coury) (@DASPRiD, @Thinkscape, @ezimuel, @EvanDotPro)
+    Evan Coury)
      -  All readers moved under Zend\Config\Reader
          -  JSON and YAML readers removed until beta4
          -  New API:
@@ -43,7 +43,7 @@ prepare for Release Candidate status.
             file added.
      -  Factory added, to simplify retrieving configuration from any 
         configuration format supported.
- -  New View layer (Matthew Weier O'Phinney) (@weierophinney)
+ -  New View layer (Matthew Weier O'Phinney)
      -  View layer is now:
          -  Models, for aggregating and representing data to render; models may be
             nested to represent complex view hierarchies
@@ -77,26 +77,25 @@ prepare for Release Candidate status.
         full predicate support; abstraction for ResultSet's, with the ability to 
         cast rows to specific object types; abstraction for SQL metadata; and a 
        revised Table and Row Data Gateway.
- -  New Zend\Service\AgileZen component (Enrico Zimuel) (@ezimuel)
+ -  New Zend\Service\AgileZen component (Enrico Zimuel)
      -  Support for the full AgileZen (http://www.agilezen.com) API
      -  Developed for use with http://framework.zend.com/zf2/board 
  -  PHP 5.4 support
      -  A number of issues when running ZF2 under PHP 5.4 were identified and
         corrected.
  -  Other components that received attention:
-     -  Zend\GData (@Maks3w)
-     -  Zend\Navigation (Kyle Spraggs, Frank Brückner) (@SpiffyJr, @froschdesign)
-     -  Zend\Session (Mike Willbanks) (@mwillibanks)
-     -  Zend\Service\Technorati (@Maks3w)
-     -  Zend\Service\StrikeIron (@Maks3w)
-     -  Zend\Service\Twitter (@Maks3w)
-     -  Zend\Http\Header\Accept* (Matthew Weier O'Phinney, Enrico Zimuel) 
-        (@weierophinney, @ezimuel)
+     -  Zend\GData (Maks3w)
+     -  Zend\Navigation (Kyle Spraggs, Frank Brückner)
+     -  Zend\Session (Mike Willbanks) (mwillibanks)
+     -  Zend\Service\Technorati (Maks3w)
+     -  Zend\Service\StrikeIron (Maks3w)
+     -  Zend\Service\Twitter (Maks3w)
+     -  Zend\Http\Header\Accept* (Matthew Weier O'Phinney, Enrico Zimuel)
      -  Adds support for q priority, level identifiers, and wildcard media and
         submedia types
-     -  Zend\Ldap (Maks3w, Stefah Gehrig) (@Maks3w, @sgehrig)
+     -  Zend\Ldap (Maks3w, Stefah Gehrig)
      -  Zend\Oauth (bakura10)
-     -  Zend\Mvc and Zend\Module (@EvanDotPro, many others)
+     -  Zend\Mvc and Zend\Module (Evan Coury, many others)
 
 Around 200 pull requests for a variety of features and bugfixes were handled
 since beta2.

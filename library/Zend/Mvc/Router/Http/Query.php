@@ -24,7 +24,7 @@
  */
 namespace Zend\Mvc\Router\Http;
 
-use Zend\Mvc\Router\RouteMatch;
+use Zend\Mvc\Router\Http\RouteMatch;
 
 use Traversable,
     Zend\Stdlib\IteratorToArray,

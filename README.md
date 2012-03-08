@@ -107,12 +107,12 @@ latest PHP version whenever possible.
 
 ### INSTALLATION
 
-Please see INSTALL.txt.
+Please see INSTALL.md.
 
 ### CONTRIBUTING
 
 If you wish to contribute to Zend Framework 2.0, please read both the
-README-DEV.txt and README-GIT.txt file.
+README-DEV.md and README-GIT.md file.
 
 ### QUESTIONS AND FEEDBACK
 

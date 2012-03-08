@@ -4,6 +4,7 @@ namespace ZendTest\Module\Listener;
 
 use PHPUnit_Framework_TestCase as TestCase,
     Zend\Module\Listener\ListenerOptions,
+    Zend\Config\Config,
     InvalidArgumentException,
     BadMethodCallException;
 
@@ -46,5 +47,20 @@ class ListenerOptionsTest extends TestCase
 
         $this->assertEquals('foo', $options->config_cache_key);
         $this->assertSame(array('foo', 'bar'), $options->module_paths);
+    }
+
+    public function testSetModulePathsAcceptsConfigOrTraverable()
+    {
+        $config = new Config(array(__DIR__));
+        $options = new ListenerOptions;
+        $options->setModulePaths($config);
+        $this->assertSame($config, $options->getModulePaths());
+    }
+
+    public function testSetModulePathsThrowsInvalidArgumentException()
+    {
+        $this->setExpectedException('InvalidArgumentException');
+        $options = new ListenerOptions;
+        $options->setModulePaths('asd');
     }
 }

@@ -2,7 +2,8 @@
 
 namespace Zend\Module\Listener;
 
-use Zend\Stdlib\Options;
+use Zend\Stdlib\Options,
+    Traversable;
 
 class ListenerOptions extends Options
 {
@@ -39,11 +40,19 @@ class ListenerOptions extends Options
     /**
      * Set an array of paths where modules reside
      *
-     * @param array $modulePaths
+     * @param array|Traversable $modulePaths
      * @return ListenerOptions
      */
-    public function setModulePaths(array $modulePaths)
+    public function setModulePaths($modulePaths)
     {
+        if (!is_array($modulePaths) && !$modulePaths instanceof Traversable) {
+            throw new Exception\InvalidArgumentException(
+                sprintf('Argument passed to %::%s() must be an array, '
+                . 'implement the \Traversable interface, or be an '
+                . 'instance of Zend\Config\Config. %s given.',
+                __CLASS__, __METHOD__, gettype($modulePaths))
+            );
+        }
         $this->modulePaths = $modulePaths;
         return $this;
     }

@@ -120,7 +120,11 @@ class Query implements Route
 //             return '';
 //         }
         
-        return '?' . str_replace('+', '%20', http_build_query($mergedParams));
+        if (count($mergedParams)) {
+            return '?' . str_replace('+', '%20', http_build_query($mergedParams));
+        }
+        
+        return null;
     }
     
     /**

@@ -35,7 +35,7 @@ class QueryTest extends TestCase
 
     /**
      * @dataProvider routeProvider
-     * @param        Wildcard $route
+     * @param        Query $route
      * @param        string   $path
      * @param        integer  $offset
      * @param        array    $params
@@ -45,13 +45,12 @@ class QueryTest extends TestCase
         $request = new Request();
         $request->setUri('http://example.com' . $path);
         $match = $route->match($request, $offset);
-        
-        $this->assertNull($match);
+        $this->assertInstanceOf('Zend\Mvc\Router\RouteMatch', $match);
     }
     
     /**
      * @dataProvider routeProvider
-     * @param        Wildcard $route
+     * @param        Query $route
      * @param        string   $path
      * @param        integer  $offset
      * @param        array    $params
@@ -77,8 +76,8 @@ class QueryTest extends TestCase
     {
         $route   = new Query();
         $request = new BaseRequest();
-        
-        $this->assertNull($route->match($request));
+        $match = $route->match($request);
+        $this->assertInstanceOf('Zend\Mvc\Router\RouteMatch', $match);
     }
     
     public function testGetAssembledParams()

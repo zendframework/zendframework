@@ -24,6 +24,8 @@
  */
 namespace Zend\Mvc\Router\Http;
 
+use Zend\Mvc\Router\RouteMatch;
+
 use Traversable,
     Zend\Stdlib\IteratorToArray,
     Zend\Stdlib\RequestDescription as Request,
@@ -63,7 +65,7 @@ class Query implements Route
      */
     public function __construct(array $defaults = array())
     {
-        $this->defaults          = $defaults;
+        $this->defaults = $defaults;
     }
     
     /**
@@ -98,14 +100,20 @@ class Query implements Route
      */
     public function match(Request $request, $pathOffset = null)
     {
-        // not checking query params
-        return null;
+        $matches = array();
+        
+        foreach($_GET as $key=>$value) {
+            $matches[urldecode($key)] = urldecode($value);
+            
+        }
+
+        return new RouteMatch(array_merge($this->defaults, $matches));
     }
 
     /**
      * assemble(): Defined by Route interface.
-     *
      * @see    Route::assemble()
+     *
      * @param  array $params
      * @param  array $options
      * @return mixed
@@ -114,13 +122,11 @@ class Query implements Route
     {
         $mergedParams = array_merge($this->defaults, $params);
 
-        // this doesnt work form some reason, need to figire out why
-//         if (isset($options['uri'])) {
-//             $options['uri']->setQuery($mergedParams);
-//             return '';
-//         }
-        
         if (count($mergedParams)) {
+            foreach ($mergedParams as $key => $value) {
+                $this->assembledParams[] = $key;
+            }
+            
             return '?' . str_replace('+', '%20', http_build_query($mergedParams));
         }
         

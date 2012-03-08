@@ -24,13 +24,13 @@ prepare for Release Candidate status.
          -  JSON and YAML readers removed until beta4
          -  New API:
 
-            ```
+            ```php
             $xml = new Zend\Config\Reader\Xml(); 
             $config = new Zend\Config\Config($xml->fromFile($filename);
             ```
             or:
 
-            ```
+            ```php
             $xml     = new Zend\Config\Reader\Xml(); 
             $config = $xml->fromFile($filename, true);
             ```

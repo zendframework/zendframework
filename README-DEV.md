@@ -37,7 +37,7 @@ To run tests:
  -  Execute PHPUnit, providing a path to a component directory for which
     you wish to run tests, or a specific test class file.
 
-    ```bash
+    ```sh
     % phpunit ZendTest/Application
     % phpunit ZendTest/Application/Resource/CacheManagerTest.php
     ```
@@ -45,13 +45,13 @@ To run tests:
  -  You may also provide the `--group` switch; in such cases, provide the
     top-level component name:
 
-    ```bash
+    ```sh
     % phpunit --group Zend_Application
     ```
     This will likely lead to errors, so it's usually best to specify a
     specific component in which to run test:
 
-    ```bash
+    ```sh
     % phpunit --group ZF-XYZ Zend/Application
     ```
 You can turn on conditional tests with the TestConfiguration.php file.

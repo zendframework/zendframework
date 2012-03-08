@@ -27,7 +27,7 @@ github or other public site, or setup/use your own repository.
  3. Clone your fork locally and enter it (use your own GitHub username
     in the statement below)
 
-    ```bash
+    ```sh
     % git clone git@github.com:<username>/zf2.git
     % cd zf2
     ```
@@ -35,14 +35,14 @@ github or other public site, or setup/use your own repository.
  4. Configure git to use the email address with which you are registered
     in JIRA:
 
-    ```bash
+    ```sh
     % git config user.email <your email address>
     ```
 
  5. Add a remote to the canonical ZF repository, so you can keep your fork
     up-to-date:
 
-    ```bash
+    ```sh
     % git remote add zf2 https://github.com/zendframework/zf2.git
     % git fetch zf2
     ```
@@ -57,40 +57,40 @@ repository.
 
  1.  Create a new repository
 
-    ```bash
+    ```sh
     % git init
     ```
 
  2. Configure git to use the email address with which you are registered
     in JIRA:
 
-    ```bash
+    ```sh
     % git config user.email <your email address>
     ```
 
  3. Add an "origin" remote pointing to your gitosis/gitolite repo:
 
-    ```bash
+    ```sh
     % git remote add origin git://yourdomain/yourrepo.git
     ```
 
  4. Add a remote for the ZF repository and fetch it
 
-    ```bash
+    ```sh
     % git remote add zf2 https://github.com/zendframework/zf2.git
     % git fetch zf2
     ```
 
  5. Create a new branch for the ZF repository (named "zf/master" here)
 
-    ```bash
+    ```sh
     % git branch -b zf/master zf2/master
     ```
 
  6. Create your master branch off the ZF branch, and push to your
     repository
 
-    ```bash
+    ```sh
     % git branch -b master
     % git push origin HEAD:master
     ```
@@ -103,7 +103,7 @@ added a remote to the Zend Framework repository, which allows you to do
 the following:
 
 
-```bash
+```sh
 % git checkout master
 % git pull zf2 master
 - OPTIONALLY, to keep your remote up-to-date -
@@ -128,18 +128,18 @@ A typical work flow will then consist of the following:
 The mechanics of this process are actually quite trivial. Below, we will
 create a branch for fixing an issue in the tracker.
 
-```bash
+```sh
 % git checkout -b zf9295
 Switched to a new branch 'zf9295'
 ```
 ... do some work ...
   
-```bash
+```sh
 % git commit
 ```
 ... write your log message ...
   
-```bash
+```sh
 % git push origin HEAD:zf9295
 Counting objects: 38, done.
 Delta compression using up to 2 threads.
@@ -179,13 +179,13 @@ repository, we suggest doing some cleanup of these branches.
 
  -  Local branch cleanup
     
-    ```bash
+    ```sh
     % git branch -d <branchname>
     ```
 
  -  Remote branch removal
 
-    ```bash
+    ```sh
     % git push origin :<branchname>
     ```
 

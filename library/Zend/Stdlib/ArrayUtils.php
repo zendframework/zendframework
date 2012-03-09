@@ -20,12 +20,17 @@
 
 namespace Zend\Stdlib;
 
-use \Traversable;
+use Traversable;
 
 /**
  * Utility class for testing and manipulation of PHP arrays.
  *
  * Declared abstract, as we have no need for instantiation.
+ *
+ * @category   Zend
+ * @package    Zend_Stdlib
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class ArrayUtils
 {
@@ -40,7 +45,9 @@ abstract class ArrayUtils
     {
         if (!is_array($value)) {
             return false;
-        } elseif (!$value) {
+        } 
+
+        if (!$value) {
             return $allowEmpty;
         }
 
@@ -58,7 +65,9 @@ abstract class ArrayUtils
     {
         if (!is_array($value)) {
             return false;
-        } elseif (!$value) {
+        } 
+
+        if (!$value) {
             return $allowEmpty;
         }
 
@@ -69,11 +78,11 @@ abstract class ArrayUtils
      * Test whether an array contains one or more numeric keys.
      *
      * A numeric key can be one of the following:
-     *     - an integer 1,
-     *     - a string with a number '20'
-     *     - a string with negative number: '-1000'
-     *     - a float: 2.2120, -78.150999
-     *     - a strings with float:  '4000.99999', '-10.10'
+     * - an integer 1,
+     * - a string with a number '20'
+     * - a string with negative number: '-1000'
+     * - a float: 2.2120, -78.150999
+     * - a string with float:  '4000.99999', '-10.10'
      *
      * @param  mixed $value
      * @param  bool  $allowEmpty    Should an empty array() return true
@@ -83,7 +92,9 @@ abstract class ArrayUtils
     {
         if (!is_array($value)) {
             return false;
-        } elseif (!$value) {
+        } 
+        
+        if (!$value) {
             return $allowEmpty;
         }
 
@@ -97,12 +108,14 @@ abstract class ArrayUtils
      * starting at 0 and ending at count() - 1.
      *
      * For example:
-     *    $list = array( 'a','b','c','d' );
-     *    $list = array(
-     *        0 => 'foo',
-     *        1 => 'bar',
-     *        2 => array( 'foo' => 'baz' )
-     *    );
+     * <code>
+     * $list = array( 'a','b','c','d' );
+     * $list = array(
+     *     0 => 'foo',
+     *     1 => 'bar',
+     *     2 => array( 'foo' => 'baz' ),
+     * );
+     * </code>
      *
      * @param  mixed $value
      * @param  bool  $allowEmpty    Is an empty list a valid list?
@@ -112,7 +125,9 @@ abstract class ArrayUtils
     {
         if (!is_array($value)) {
             return false;
-        } elseif (!$value) {
+        } 
+        
+        if (!$value) {
             return $allowEmpty;
         }
 
@@ -123,23 +138,26 @@ abstract class ArrayUtils
      * Test whether an array is a hash table.
      *
      * An array is a hash table if:
-     *    1. Contains one or more non-integer keys, or
-     *    2. Integer keys are non-continuous or misaligned (not starting with 0)
+     *
+     * 1. Contains one or more non-integer keys, or
+     * 2. Integer keys are non-continuous or misaligned (not starting with 0)
      *
      * For example:
-     *    $hash = array(
-     *        'foo' => 15,
-     *        'bar' => false
-     *    );
-     *    $hash = array(
-     *        1995  => 'Birth of PHP',
-     *        2009  => 'PHP 5.3.0',
-     *        2012  => 'PHP 5.4.0'
-     *    );
-     *    $hash = array(
-     *        'formElement,
-     *        'options' => array( 'debug' => true )
-     *    );
+     * <code>
+     * $hash = array(
+     *     'foo' => 15,
+     *     'bar' => false,
+     * );
+     * $hash = array(
+     *     1995  => 'Birth of PHP',
+     *     2009  => 'PHP 5.3.0',
+     *     2012  => 'PHP 5.4.0',
+     * );
+     * $hash = array(
+     *     'formElement,
+     *     'options' => array( 'debug' => true ),
+     * );
+     * </code>
      *
      * @param  mixed $value
      * @param  bool  $allowEmpty    Is an empty array() a valid hash table?
@@ -149,7 +167,9 @@ abstract class ArrayUtils
     {
         if (!is_array($value)) {
             return false;
-        } elseif (!$value) {
+        } 
+        
+        if (!$value) {
             return $allowEmpty;
         }
 
@@ -237,6 +257,4 @@ abstract class ArrayUtils
 
         return $a;
     }
-
-
 }

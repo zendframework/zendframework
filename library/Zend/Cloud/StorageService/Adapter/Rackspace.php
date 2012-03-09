@@ -27,7 +27,7 @@ use Traversable,
     Zend\Cloud\StorageService\Exception,
     Zend\Service\Rackspace\Exception as RackspaceException,
     Zend\Service\Rackspace\Files as RackspaceFile,
-    Zend\Stdlib\IteratorToArray;
+    Zend\Stdlib\ArrayUtils;
 
 /**
  * Adapter for Rackspace cloud storage
@@ -66,7 +66,7 @@ class Rackspace implements Adapter
     function __construct($options = array())
     {
         if ($options instanceof Traversable) {
-            $options = IteratorToArray::convert($options);
+            $options = ArrayUtils::iteratorToArray($options);
         }
 
         if (!is_array($options) || empty($options)) {

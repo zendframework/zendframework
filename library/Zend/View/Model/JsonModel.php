@@ -22,7 +22,7 @@
 namespace Zend\View\Model;
 
 use Traversable,
-    Zend\Stdlib\IteratorToArray;
+    Zend\Stdlib\ArrayUtils;
 
 /**
  * @category   Zend
@@ -49,7 +49,7 @@ class JsonModel extends ViewModel
     {
         $variables = $this->getVariables();
         if ($variables instanceof Traversable) {
-            $variables = IteratorToArray::convert($variables);
+            $variables = ArrayUtils::iteratorToArray($variables);
         }
         return json_encode($variables);
     }

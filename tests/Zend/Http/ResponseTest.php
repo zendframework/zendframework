@@ -60,6 +60,14 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
         $response->setStatusCode(606);
     }
 
+    public function testResponseEndsAtStatusCode()
+    {
+        $string = 'HTTP/1.0 200' . "\r\n\r\n" . 'Foo Bar';
+        $response = Response::fromString($string);
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals('Foo Bar', $response->getContent());
+    }
+
 // @todo OLD TESTS BELOW, determine if we can use them
 
 //    public function testGzipResponse ()

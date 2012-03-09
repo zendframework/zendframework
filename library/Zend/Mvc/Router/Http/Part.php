@@ -25,7 +25,7 @@
 namespace Zend\Mvc\Router\Http;
 
 use Traversable,
-    Zend\Stdlib\IteratorToArray,
+    Zend\Stdlib\ArrayUtils,
     Zend\Stdlib\RequestDescription as Request,
     Zend\Mvc\Router\RouteBroker,
     Zend\Mvc\Router\Exception,
@@ -100,7 +100,7 @@ class Part extends TreeRouteStack implements Route
     public static function factory($options = array())
     {
         if ($options instanceof Traversable) {
-            $options = IteratorToArray::convert($options);
+            $options = ArrayUtils::iteratorToArray($options);
         } elseif (!is_array($options)) {
             throw new Exception\InvalidArgumentException(__METHOD__ . ' expects an array or Traversable set of options');
         }
@@ -121,7 +121,7 @@ class Part extends TreeRouteStack implements Route
             $options['child_routes'] = null;
         }
         if ($options['child_routes'] instanceof Traversable) {
-            $options['child_routes'] = IteratorToArray::convert($options['child_routes']);
+            $options['child_routes'] = ArrayUtils::iteratorToArray($options['child_routes']);
         }
 
         return new static($options['route'], $options['may_terminate'], $options['route_broker'], $options['child_routes']);

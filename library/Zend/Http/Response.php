@@ -69,7 +69,7 @@ class Response extends Message implements ResponseDescription
     const STATUS_CODE_507 = 507;
     const STATUS_CODE_508 = 508;
     const STATUS_CODE_511 = 511;
-    
+
     /**#@-*/
 
     /**#@+
@@ -179,15 +179,15 @@ class Response extends Message implements ResponseDescription
         if (!is_array($lines) || count($lines)==1) {
             $lines = preg_split ('/\n/',$string);
         }
-        
+
         $firstLine = array_shift($lines);
 
         $response = new static();
         $matches = null;
-        if (!preg_match('/^HTTP\/(?P<version>1\.[01]) (?P<status>\d{3}) (?P<reason>.*)$/', $firstLine, $matches)) {
+        if (!preg_match('/^HTTP\/(?P<version>1\.[01]) (?P<status>\d{3})(?:[ ]+(?P<reason>.+))?$/', $firstLine, $matches)) {
             throw new Exception\InvalidArgumentException('A valid response status line was not found in the provided string');
         }
-        
+
         $response->version = $matches['version'];
         $response->setStatusCode($matches['status']);
         $response->setReasonPhrase($matches['reason']);
@@ -198,10 +198,10 @@ class Response extends Message implements ResponseDescription
 
         $isHeader = true;
         $headers = $content = array();
-        
+
         while ($lines) {
             $nextLine = array_shift($lines);
-            
+
             if ($nextLine == '') {
                 $isHeader = false;
                 continue;
@@ -254,7 +254,7 @@ class Response extends Message implements ResponseDescription
 
     /**
      * Get response headers
-     * 
+     *
      * @return Headers
      */
     public function headers()
@@ -346,8 +346,8 @@ class Response extends Message implements ResponseDescription
 
     /**
      * Get the body of the response
-     * 
-     * @return string 
+     *
+     * @return string
      */
     public function getBody()
     {
@@ -362,7 +362,7 @@ class Response extends Message implements ResponseDescription
         }
 
         $contentEncoding = $this->headers()->get('Content-Encoding');
-        
+
         if (!empty($contentEncoding)) {
             $contentEncoding = $contentEncoding->getFieldValue();
             if ($contentEncoding =='gzip') {
@@ -374,7 +374,7 @@ class Response extends Message implements ResponseDescription
 
         return $body;
     }
-    
+
     /**
      * Does the status code indicate a client error?
      *
@@ -440,15 +440,15 @@ class Response extends Message implements ResponseDescription
 
     /**
      * Do we have a redirect?
-     * 
-     * @return bool 
+     *
+     * @return bool
      */
     public function isRedirect()
     {
         $code = $this->getStatusCode();
         return (300 <= $code && 400 > $code);
     }
-    
+
     /**
      * Was the response successful?
      *
@@ -460,10 +460,10 @@ class Response extends Message implements ResponseDescription
         return (200 <= $code && 300 > $code);
     }
 
-    
+
     /**
      * Render entire response as HTTP response string
-     * 
+     *
      * @return string
      */
     public function toString()
@@ -474,7 +474,7 @@ class Response extends Message implements ResponseDescription
         $str .= $this->getBody();
         return $str;
     }
-    
+
     /**
      * Decode a "chunked" transfer-encoded body and return the decoded text
      *
@@ -559,7 +559,7 @@ class Response extends Message implements ResponseDescription
          * @link http://framework.zend.com/issues/browse/ZF-6040
          */
         $zlibHeader = unpack('n', substr($body, 0, 2));
-        
+
         if ($zlibHeader[1] % 31 == 0) {
             return gzuncompress($body);
         } else {

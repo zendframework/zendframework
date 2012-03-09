@@ -286,7 +286,11 @@ class Request extends HttpRequest
             // Backtrack up the SCRIPT_FILENAME to find the portion
             // matching PHP_SELF.
             $path     = $phpSelf ?: '';
-            $segments = array_reverse(explode('/', trim($filename, '/')));
+            if ($phpSelf{1} != '~') {
+                $segments = array_reverse(explode('/', trim($filename, '/')));
+            } else {
+                $segments = array_reverse(explode('/', trim($phpSelf, '/')));
+            }
             $index    = 0;
             $last     = count($segments);
             $baseUrl  = '';

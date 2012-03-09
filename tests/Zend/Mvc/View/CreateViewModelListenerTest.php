@@ -25,7 +25,7 @@ use PHPUnit_Framework_TestCase as TestCase,
     stdClass,
     Zend\EventManager\EventManager,
     Zend\Mvc\MvcEvent,
-    Zend\Mvc\View\CreateViewModelFromArrayListener,
+    Zend\Mvc\View\CreateViewModelListener,
     Zend\View\Model\ViewModel;
 
 /**
@@ -35,11 +35,11 @@ use PHPUnit_Framework_TestCase as TestCase,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class CreateViewModelFromArrayListenerTest extends TestCase
+class CreateViewModelListenerTest extends TestCase
 {
     public function setUp()
     {
-        $this->listener   = new CreateViewModelFromArrayListener();
+        $this->listener   = new CreateViewModelListener();
         $this->event      = new MvcEvent();
     }
 
@@ -86,25 +86,32 @@ class CreateViewModelFromArrayListenerTest extends TestCase
         $this->assertEquals($test, $result);
     }
 
-    public function testAttachesListenerAtExpectedPriority()
+    public function testAttachesListenersAtExpectedPriority()
     {
         $events = new EventManager();
         $events->attachAggregate($this->listener);
         $listeners = $events->getListeners('dispatch');
 
-        $expectedCallback = array($this->listener, 'createViewModelFromArray');
-        $expectedPriority = -80;
-        $found            = false;
+        $expectedArrayCallback = array($this->listener, 'createViewModelFromArray');
+        $expectedNullCallback  = array($this->listener, 'createViewModelFromNull');
+        $expectedPriority      = -80;
+        $foundArray            = false;
+        $foundNull             = false;
         foreach ($listeners as $listener) {
             $callback = $listener->getCallback();
-            if ($callback === $expectedCallback) {
+            if ($callback === $expectedArrayCallback) {
                 if ($listener->getMetadatum('priority') == $expectedPriority) {
-                    $found = true;
-                    break;
+                    $foundArray = true;
+                }
+            }
+            if ($callback === $expectedNullCallback) {
+                if ($listener->getMetadatum('priority') == $expectedPriority) {
+                    $foundNull = true;
                 }
             }
         }
-        $this->assertTrue($found, 'Listener not found');
+        $this->assertTrue($foundArray, 'Listener FromArray not found');
+        $this->assertTrue($foundNull,  'Listener FromNull not found');
     }
 
     public function testDetachesListeners()
@@ -112,7 +119,7 @@ class CreateViewModelFromArrayListenerTest extends TestCase
         $events = new EventManager();
         $events->attachAggregate($this->listener);
         $listeners = $events->getListeners('dispatch');
-        $this->assertEquals(1, count($listeners));
+        $this->assertEquals(2, count($listeners));
         $events->detachAggregate($this->listener);
         $listeners = $events->getListeners('dispatch');
         $this->assertEquals(0, count($listeners));
@@ -122,6 +129,14 @@ class CreateViewModelFromArrayListenerTest extends TestCase
     {
         $this->event->setResult(array());
         $this->listener->createViewModelFromArray($this->event);
+        $result = $this->event->getResult();
+        $this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
+    }
+    
+    public function testViewModelCreatesViewModelWithNullResult()
+    {
+        $this->event->setResult(null);
+        $this->listener->createViewModelFromNull($this->event);
         $result = $this->event->getResult();
         $this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
     }

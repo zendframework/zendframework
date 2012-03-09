@@ -24,7 +24,7 @@
 namespace Zend\Validator;
 
 use Traversable,
-    Zend\Stdlib\IteratorToArray;
+    Zend\Stdlib\ArrayUtils;
 
 /**
  * @uses       \Zend\Validator\AbstractValidator
@@ -75,7 +75,7 @@ class Identical extends AbstractValidator
     public function __construct($token = null)
     {
         if ($token instanceof Traversable) {
-            $token = IteratorToArray::convert($token);
+            $token = ArrayUtils::iteratorToArray($token);
         }
 
         if (is_array($token) && array_key_exists('token', $token)) {

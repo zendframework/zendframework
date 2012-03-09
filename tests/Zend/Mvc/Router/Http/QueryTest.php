@@ -86,7 +86,7 @@ class QueryTest extends TestCase
         $route->assemble(array('foo' => 'bar'));
         
         
-        $this->assertEquals(array(), $route->getAssembledParams());
+        $this->assertEquals(array('foo'), $route->getAssembledParams());
     }
     
     public function testFactory()

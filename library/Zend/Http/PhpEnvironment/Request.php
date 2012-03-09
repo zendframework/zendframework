@@ -225,7 +225,7 @@ class Request extends HttpRequest
         // IIS7 with URL Rewrite: make sure we get the unencoded url
         // (double slash problem).
         $iisUrlRewritten = $this->server()->get('IIS_WasUrlRewritten');
-        $unencodedUrl    = $this->server()->get('UNENCODED_URL', '');
+        $unencodedUrl = $this->server()->get('UNENCODED_URL', '');
         if ('1' == $iisUrlRewritten && '' !== $unencodedUrl) {
             return $unencodedUrl;
         } 
@@ -269,10 +269,10 @@ class Request extends HttpRequest
      */
     protected function detectBaseUrl()
     {
-        $baseUrl        = '';
-        $filename       = $this->server()->get('SCRIPT_FILENAME', '');
-        $scriptName     = $this->server()->get('SCRIPT_NAME');
-        $phpSelf        = $this->server()->get('PHP_SELF');
+        $baseUrl = '';
+        $filename = $this->server()->get('SCRIPT_FILENAME', '');
+        $scriptName = $this->server()->get('SCRIPT_NAME');
+        $phpSelf = $this->server()->get('PHP_SELF');
         $origScriptName = $this->server()->get('ORIG_SCRIPT_NAME');
 
         if ($scriptName !== null && basename($scriptName) === $filename) {
@@ -285,18 +285,18 @@ class Request extends HttpRequest
         } else {
             // Backtrack up the SCRIPT_FILENAME to find the portion
             // matching PHP_SELF.
-            $path     = $phpSelf ?: '';
-            if ($phpSelf{1} != '~') {
+            $path = $phpSelf ?: '';
+            if (isset($path[1]) && $path[1] !== '~') {
                 $segments = array_reverse(explode('/', trim($filename, '/')));
             } else {
                 $segments = array_reverse(explode('/', trim($phpSelf, '/')));
             }
-            $index    = 0;
-            $last     = count($segments);
-            $baseUrl  = '';
+            $index = 0;
+            $last = count($segments);
+            $baseUrl = '';
 
             do {
-                $segment  = $segments[$index];
+                $segment = $segments[$index];
                 $baseUrl = '/' . $segment . $baseUrl;
                 $index++;
             } while ($last > $index && false !== ($pos = strpos($path, $baseUrl)) && 0 !== $pos);
@@ -351,7 +351,7 @@ class Request extends HttpRequest
     protected function detectBasePath()
     {
         $filename = basename($this->server()->get('SCRIPT_FILENAME', ''));
-        $baseUrl  = $this->getBaseUrl();
+        $baseUrl = $this->getBaseUrl();
 
         // Empty base url detected
         if ($baseUrl === '') {

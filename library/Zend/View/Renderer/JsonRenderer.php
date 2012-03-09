@@ -166,8 +166,8 @@ class JsonRenderer implements Renderer, TreeRendererInterface
     protected function recurseModel(Model $model)
     {
         $values = $model->getVariables();
-        if ($variables instanceof Traversable) {
-            $variables = ArrayUtils::iteratorToArray($variables);
+        if ($values instanceof Traversable) {
+            $values = ArrayUtils::iteratorToArray($values);
         }
         
         if (!$model->hasChildren()) {

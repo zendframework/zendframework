@@ -105,7 +105,7 @@ class EditorTest extends \PHPUnit_Framework_TestCase
         $plugins = array('copy', 'cut', 'paste');
         $html = $this->helper->__invoke('foo', '', array('plugins' => $plugins));
         $pluginsString = Json::encode($plugins);
-        $pluginsString = str_replace('"', "'", $pluginsString);
+        $pluginsString = str_replace('"', "&#039;", $pluginsString);
         $this->assertContains('plugins="' . $pluginsString . '"', $html);
     }
 
@@ -195,7 +195,7 @@ class EditorTest extends \PHPUnit_Framework_TestCase
         $extraPlugins = array('copy', 'cut', 'paste');
         $html = $this->helper->__invoke('foo', '', array('extraPlugins' => $extraPlugins));
         $pluginsString = Json::encode($extraPlugins);
-        $pluginsString = str_replace('"', "'", $pluginsString);
+        $pluginsString = str_replace('"', "&#039;", $pluginsString);
         $this->assertContains('extraPlugins="' . $pluginsString . '"', $html);
     }
 }

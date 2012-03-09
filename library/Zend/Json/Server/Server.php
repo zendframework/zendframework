@@ -356,7 +356,7 @@ class Server extends AbstractServer
     public function getServiceMap()
     {
         if (null === $this->_serviceMap) {
-            $this->_serviceMap = new SMD();
+            $this->_serviceMap = new Smd();
         }
         return $this->_serviceMap;
     }

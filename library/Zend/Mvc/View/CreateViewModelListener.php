@@ -27,7 +27,7 @@ use Zend\EventManager\EventCollection as Events,
     Zend\Stdlib\ArrayUtils,
     Zend\View\Model\ViewModel;
 
-class CreateViewModelFromArrayListener implements ListenerAggregate
+class CreateViewModelListener implements ListenerAggregate
 {
     /**
      * Listeners we've registered
@@ -45,6 +45,7 @@ class CreateViewModelFromArrayListener implements ListenerAggregate
     public function attach(Events $events)
     {
         $this->listeners[] = $events->attach('dispatch', array($this, 'createViewModelFromArray'), -80);
+        $this->listeners[] = $events->attach('dispatch', array($this, 'createViewModelFromNull'), -80);
     }
 
     /**
@@ -76,6 +77,23 @@ class CreateViewModelFromArrayListener implements ListenerAggregate
         }
 
         $model = new ViewModel($result);
+        $e->setResult($model);
+    }
+
+    /**
+     * Inspect the result, and cast it to a ViewModel if null is detected
+     *
+     * @param MvcEvent $e
+     * @return void
+    */
+    public function createViewModelFromNull(MvcEvent $e)
+    {
+        $result = $e->getResult();
+        if (null !== $result) {
+            return;
+        }
+
+        $model = new ViewModel;
         $e->setResult($model);
     }
 }

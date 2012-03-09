@@ -267,10 +267,11 @@ class Bootstrap implements Bootstrapper
         $events->attachAggregate($exceptionStrategy);
 
         // Template/ViewModel listeners
-        $arrayListener           = $locator->get('Zend\Mvc\View\CreateViewModelFromArrayListener');
+        $createViewModelListener = $locator->get('Zend\Mvc\View\CreateViewModelListener');
         $injectTemplateListener  = $locator->get('Zend\Mvc\View\InjectTemplateListener');
         $injectViewModelListener = $locator->get('Zend\Mvc\View\InjectViewModelListener');
-        $staticEvents->attach('Zend\Stdlib\Dispatchable', 'dispatch', array($arrayListener, 'createViewModelFromArray'), -80);
+        $staticEvents->attach('Zend\Stdlib\Dispatchable', 'dispatch', array($createViewModelListener, 'createViewModelFromArray'), -80);
+        $staticEvents->attach('Zend\Stdlib\Dispatchable', 'dispatch', array($createViewModelListener, 'createViewModelFromNull'), -80);
         $staticEvents->attach('Zend\Stdlib\Dispatchable', 'dispatch', array($injectTemplateListener, 'injectTemplate'), -90);
         $events->attach('dispatch.error', array($injectViewModelListener, 'injectViewModel'), -100);
         $staticEvents->attach('Zend\Stdlib\Dispatchable', 'dispatch', array($injectViewModelListener, 'injectViewModel'), -100);

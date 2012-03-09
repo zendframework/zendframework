@@ -69,7 +69,7 @@ class SimpleTextarea extends Dijit
         $attribs = $this->_prepareDijit($attribs, $params, 'textarea');
 
         $html = '<textarea' . $this->_htmlAttribs($attribs) . '>'
-              . $this->view->vars()->escape($value)
+              . $this->view->escape($value)
               . "</textarea>\n";
 
         return $html;

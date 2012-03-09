@@ -56,6 +56,21 @@ class Escape extends AbstractHelper
     protected $encoding = 'UTF-8';
 
     /**
+     * @var array Supported encodings used to avoid an illegal call
+     */
+    protected $supportedEncodings = array(
+        'iso-8859-1',   'iso8859-1',    'iso-8859-5',   'iso8859-5',
+        'iso-8859-15',  'iso8859-15',   'utf-8',        'cp866',
+        'ibm866',       '866',          'cp1251',       'windows-1251',
+        'win-1251',     '1251',         'cp1252',       'windows-1252',
+        '1252',         'koi8-r',       'koi8-ru',      'koi8r',
+        'big5',         '950',          'gb2312',       '936',
+        'big5-hkscs',   'shift_jis',    'sjis',         'sjis-win',
+        'cp932',        '932',          'euc-jp',       'eucjp',
+        'eucjp-win',    'macroman'
+    );
+
+    /**
      * Set the encoding to use for escape operations
      * 
      * @param  string $encoding 
@@ -63,6 +78,18 @@ class Escape extends AbstractHelper
      */
     public function setEncoding($encoding)
     {
+        if (empty($encoding)) {
+            throw new Exception\InvalidArgumentException(
+                get_called_class() . '::setEncoding() does not allow a NULL or '
+                . 'blank string value'
+            );
+        }
+        if (!in_array(strtolower($encoding), $this->supportedEncodings)) {
+            throw new Exception\InvalidArgumentException(
+                'Value of \'' . $encoding . '\' passed to ' . get_called_class()
+                . '::setEncoding() is invalid. Provide an encoding supported by htmlspecialchars()'
+            );
+        }
         $this->encoding = $encoding;
         return $this;
     }

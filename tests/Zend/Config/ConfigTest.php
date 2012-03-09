@@ -77,6 +77,52 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
                 )
             );
 
+        $this->toCombineA = array(
+            'foo' => 1,
+            'bar' => 2,
+            'text' => 'foo',
+            'numerical' => array(
+                'first',
+                'second',
+                array(
+                    'third'
+                )
+            ),
+            'misaligned' => array(
+                2 => 'foo',
+                3 => 'bar'
+            ),
+            'mixed' => array(
+                'foo' => 'bar'
+            ),
+            'replaceAssoc' => array(
+                'foo' => 'bar'
+            ),
+            'replaceNumerical' => array(
+                'foo'
+            )
+        );
+
+        $this->toCombineB = array(
+            'foo' => 3,
+            'text' => 'bar',
+            'numerical' => array(
+                'fourth',
+                'fifth',
+                array(
+                    'sixth'
+                )
+            ),
+            'misaligned' => array(
+                3 => 'baz'
+            ),
+            'mixed' => array(
+                false
+            ),
+            'replaceAssoc' => null,
+            'replaceNumerical' => true
+        );
+
         $this->leadingdot = array('.test' => 'dot-test');
         $this->invalidkey = array(' ' => 'test', ''=>'test2');
 
@@ -287,36 +333,55 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
 
     public function testMerge()
     {
-        $stdArray = array(
-            'test_feature' => false,
-            'some_files' => array(
-                'foo'=>'dir/foo.xml',
-                'bar'=>'dir/bar.xml',
-            ),
-            2 => 123,
-        );
-        $stdConfig = new Config($stdArray, true);
+        $configA = new Config($this->toCombineA);
+        $configB = new Config($this->toCombineB);
+        $configA->merge($configB);
 
-        $devArray = array(
-            'test_feature'=>true,
-            'some_files' => array(
-               'bar' => 'myDir/bar.xml',
-               'baz' => 'myDir/baz.xml',
-            ),
-            2 => 456,
-        );
-        $devConfig = new Config($devArray);
+        // config->
+        $this->assertEquals(3, $configA->foo);
+        $this->assertEquals(2, $configA->bar);
+        $this->assertEquals('bar', $configA->text);
 
-        $stdConfig->merge($devConfig);
+        // config->numerical-> ...
+        $this->assertInstanceOf('\Zend\Config\Config',$configA->numerical);
+        $this->assertEquals('first',$configA->numerical->{0});
+        $this->assertEquals('second',$configA->numerical->{1});
 
-        $this->assertTrue($stdConfig->test_feature);
-        $this->assertEquals('myDir/bar.xml', $stdConfig->some_files->bar);
-        $this->assertEquals('myDir/baz.xml', $stdConfig->some_files->baz);
-        $this->assertEquals('dir/foo.xml', $stdConfig->some_files->foo);
-        $this->assertEquals(456, $stdConfig->{2});
+        // config->numerical->{2}-> ...
+        $this->assertInstanceOf('\Zend\Config\Config',$configA->numerical->{2});
+        $this->assertEquals('third',$configA->numerical->{2}->{0});
+        $this->assertEquals(null,$configA->numerical->{2}->{1});
+
+        // config->numerical->  ...
+        $this->assertEquals('fourth',$configA->numerical->{3});
+        $this->assertEquals('fifth',$configA->numerical->{4});
+
+        // config->numerical->{5}
+        $this->assertInstanceOf('\Zend\Config\Config',$configA->numerical->{5});
+        $this->assertEquals('sixth',$configA->numerical->{5}->{0});
+        $this->assertEquals(null,$configA->numerical->{5}->{1});
+
+        // config->misaligned
+        $this->assertInstanceOf('\Zend\Config\Config',$configA->misaligned);
+        $this->assertEquals('foo',$configA->misaligned->{2});
+        $this->assertEquals('bar',$configA->misaligned->{3});
+        $this->assertEquals('baz',$configA->misaligned->{4});
+        $this->assertEquals(null,$configA->misaligned->{0});
+
+        // config->mixed
+        $this->assertInstanceOf('\Zend\Config\Config',$configA->mixed);
+        $this->assertEquals('bar',$configA->mixed->foo);
+        $this->assertSame(false,$configA->mixed->{0});
+        $this->assertSame(null,$configA->mixed->{1});
+
+        // config->replaceAssoc
+        $this->assertSame(null,$configA->replaceAssoc);
+
+        // config->replaceNumerical
+        $this->assertSame(true,$configA->replaceNumerical);
 
     }
-    
+
     public function testArrayAccess()
     {
         $config = new Config($this->all, true);
@@ -524,6 +589,40 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
 
         $config->toArray();
         $this->assertEquals(1, $config->current());
+    }
+
+    /**
+     * @depends testMerge
+     * @link http://framework.zend.com/issues/browse/ZF2-186
+     */
+    public function testZF2_186_mergeReplacingUnnamedConfigSettings(){
+        $arrayA = array(
+            'flag' => true,
+            'text' => 'foo',
+            'list' => array( 'a', 'b', 'c' ),
+            'aSpecific' => 12
+        );
+
+        $arrayB = array(
+            'flag' => false,
+            'text' => 'bar',
+            'list' => array( 'd', 'e' ),
+            'bSpecific' => 100
+        );
+
+        $mergeResult = array(
+            'flag' => false,
+            'text' => 'bar',
+            'list' => array( 'a', 'b', 'c', 'd', 'e' ),
+            'aSpecific' => 12,
+            'bSpecific' => 100
+        );
+
+        $configA = new Config($arrayA);
+        $configB = new Config($arrayB);
+
+        $configA->merge($configB); // merge B onto A
+        $this->assertEquals($mergeResult, $configA->toArray());
     }
 }
 

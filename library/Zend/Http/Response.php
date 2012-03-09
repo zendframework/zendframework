@@ -190,7 +190,7 @@ class Response extends Message implements ResponseDescription
 
         $response->version = $matches['version'];
         $response->setStatusCode($matches['status']);
-        $response->setReasonPhrase($matches['reason']);
+        $response->setReasonPhrase((isset($matches['reason']) ? $matches['reason'] : ''));
 
         if (count($lines) == 0) {
             return $response;

@@ -6,7 +6,7 @@
 
     <para>
         Once you call <methodname>render()</methodname>,
-        <classname>Zend\View\Renderer\PhpRenderer</classname> then <link xlink:href="http://php.net/include"><methodname>include()</methodname></link>s
+        <classname>Zend\View\Renderer\PhpRenderer</classname> then <function xlink:href="http://php.net/include">include()</function>s
         the requested view script and executes it "inside" the scope of the
         <classname>PhpRenderer</classname> instance. Therefore, in your view scripts, references to
         <varname>$this</varname> actually point to the <classname>PhpRenderer</classname> instance
@@ -108,7 +108,7 @@ echo $this->escape($this->variable);
 
         <para>
             By default, the escape() method uses the <acronym>PHP</acronym>
-            <link xlink:href="http://php.net/htmlspecialchars"><methodname>htmlspecialchars()</methodname> function for escaping, using UTF-8 as the
+            <function xlink:href="http://php.net/htmlspecialchars">htmlspecialchars()</function> function for escaping, using UTF-8 as the
             characterset, and the <constant>ENT_QUOTES</constant> setting. However, depending on
             your environment, you may wish for escaping to occur in a different way. You may change
             either the encoding or callback used, using the <methodname>setEncoding()</methodname>

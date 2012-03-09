@@ -294,13 +294,13 @@ class Application implements AppContext
         $routeMatch = $router->match($request);
 
         if (!$routeMatch instanceof Router\RouteMatch) {
-            $e->setError(static::ERROR_CONTROLLER_NOT_FOUND);
+            $e->setError(static::ERROR_ROUTER_NO_MATCH);
 
             $results = $this->events()->trigger('dispatch.error', $e);
             if (count($results)) {
                 $return  = $results->last();
             } else {
-                $return = $error->getParams();
+                $return = $e->getParams();
             }
             return $return;
         }

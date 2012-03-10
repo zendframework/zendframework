@@ -36,64 +36,7 @@ use Zend\Locale\Data\Cldr,
  * @group      Zend_Locale
  */
 class CldrTest extends \PHPUnit_Framework_TestCase
-{
-
-    private $_cache = null;
-
-    public function setUp()
-    {
-        $this->_cacheDir = sys_get_temp_dir() . '/zend_locale_cldr';
-        $this->_removeRecursive($this->_cacheDir);
-        mkdir($this->_cacheDir);
-
-        $this->_cache = CacheFactory::factory(array(
-            'adapter' => array(
-                'name' => 'Filesystem',
-                'options' => array(
-                    'ttl'       => 1,
-                    'cache_dir' => $this->_cacheDir,
-                )
-            ),
-            'plugins' => array(
-                array(
-                    'name' => 'serializer',
-                    'options' => array(
-                        'serializer' => 'php_serialize',
-                    ),
-                ),
-            ),
-        ));
-        Cldr::setCache($this->_cache);
-    }
-
-
-    public function tearDown()
-    {
-        $this->_cache->clear(CacheAdapter::MATCH_ALL);
-        $this->_removeRecursive($this->_cacheDir);
-    }
-
-    protected function _removeRecursive($dir)
-    {
-        if (file_exists($dir)) {
-            $dirIt = new \DirectoryIterator($dir);
-            foreach ($dirIt as $entry) {
-                $fname = $entry->getFilename();
-                if ($fname == '.' || $fname == '..') {
-                    continue;
-                }
-
-                if ($entry->isFile()) {
-                    unlink($entry->getPathname());
-                } else {
-                    $this->_removeRecursive($entry->getPathname());
-                }
-            }
-
-            rmdir($dir);
-        }
-    }
-
+{    
     /**
      * test for reading with standard locale
      * expected array
@@ -112,8 +55,8 @@ class CldrTest extends \PHPUnit_Framework_TestCase
         $locale = new Locale('de');
         $this->assertTrue(is_array(Cldr::getDisplayLanguage($locale)));
     }
-
-
+    
+    
     /**
      * test for reading without type
      * expected empty array

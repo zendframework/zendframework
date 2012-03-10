@@ -1,0 +1,574 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<section 
+    xmlns="http://docbook.org/ns/docbook" version="5.0"
+    xml:id="zend.mvc.routing">
+  <info><title>Routing</title></info>
+
+  <para>Il Routing è l'atto di far corrispondere ad una richiesta un preciso controller.</para>
+
+  <para>Tipicamente, il routing esaminerà la richiesta URI e si occuperà
+    di fare il "match" dell'URI path sulle regole configurate. Se il set di 
+    regole combacia allora un controller sarà eseguito.
+    Il routing può essere utilizzato per altre porzioni della richiesta URI
+    o dell'ambiente -- Per esempio: lo schema o l'host, i parametri della
+    query, headers, metodo della chiesta e molto altro.
+  </para>
+
+  <para>Il Routing è stato riscritto dalle fondamenta per Zend Framework 2.0.
+    L'esecuzione è molto simile, ma internamente lavora in modo molto
+    più consistenza, performante e spesso semplice.
+  </para>
+
+  <para>
+    L'unità base del routing è una classe <classname>Route</classname>:
+  </para>
+
+  <programlisting language="php"><![CDATA[
+namespace Zend\Mvc\Router;
+
+use zend\Stdlib\RequestDescription as Request;
+
+interface Route
+{
+    public static function factory(array $options = array());
+    public function match(Request $request);
+    public function assemble(array $params = array(), array $options = array());
+}
+]]></programlisting>
+
+  <para>
+    Una <classname>Route</classname> accatta una <classname>Request</classname>,
+    e determina se ne può fare il match. Se può, ritorna un oggetto
+    <classname>RouteMatch</classname>:
+  </para>
+
+  <programlisting language="php"><![CDATA[
+namespace Zend\Mvc\Router;
+
+class RouteMatch
+{
+    public function __construct(array $params);
+    public function setParam($name, $value);
+    public function merge(RouteMatch $match);
+    public function getParam($name, $default = null);
+    public function getRoute();
+}
+]]></programlisting>
+
+  <para>
+    Tipicamente quando una <classname>Route</classname> corrisponde, 
+    questa definisce uno o più parametri. Questi sono passati ad un
+    <classname>RouteMatch</classname>, altri oggetti possono
+    chiedere a <classname>RouteMatch</classname> i suoi valori.
+  </para>
+
+  <programlisting language="php"><![CDATA[
+$id = $routeMatch->getParam('id', false);
+if (!$id) {
+    throw new Exception('Required identifier is missing!');
+}
+$entity = $resource->get($id);
+]]></programlisting>
+
+  <para>
+    Spesso avrai tante "route" che vorrai controllare. Per facilitare
+    questa operazione puoi utilizzare un aggregatore di "route", 
+    tipicamente implementando <classname>RouteStack</classname>:
+  </para>
+
+  <programlisting language="php"><![CDATA[
+namespace Zend\Mvc\Router;
+
+interface RouteStack extends Route
+{
+    public function addRoute($name, $route, $priority = null);
+    public function addRoutes(array $routes);
+    public function removeRoute($name);
+}
+]]></programlisting>
+
+  <para>
+    Tipicamente, le "route" dovrebbero essere richieste in un ordine
+    di tipo LIFO (Last In First Out [Il primo ad entrare è il primo ad uscire][n.d.t.]),
+    questa è la ragione dietro al nome <classname>RouteStack</classname>.
+    Zend Framework concede due implementazione di questa interfaccia:
+    <classname>SimpleRouteStack</classname>, <classname>TreeRoueStack</classname>.
+    In ognuna, registri le "route" una alla volta utilizzando il metodo
+    <methodname>addRoute()</methodname>, o in "bulk" usando 
+    <methodname>addRoutes()</methodname>.
+  </para>
+
+  <programlisting language="php"><![CDATA[
+// One at a time:
+$route = Literal::factory(array(
+    'route' => '/foo',
+    'defaults' => array(
+        'controller' => 'foo-index',
+        'action'     => 'index',
+    ),
+));
+$router->addRoute('foo', $route);
+
+$router->addRoutes(array(
+    // using already instantiated routes:
+    'foo' => $route,
+
+    // providing configuration to allow lazy-loading routes:
+    'bar' => array(
+        'type' => 'literal',
+        'options' => array(
+            'route' => '/bar',
+            'defaults' => array(
+                'controller' => 'bar-index',
+                'action'     => 'index',
+            ),
+        ),
+    ),
+));
+]]></programlisting>
+
+  <section xml:id="zend.mvc.routing.router-types">
+    <info><title>Tipi di Router</title></info>
+
+    <para>Sono forniti due "router", il<classname>SimpleRouteStack</classname>
+     e <classname>TreeRouteStack</classname>. Ognuno lavoro con la precedente
+     interfaccia, ma utilizza differenti opzioni e path di esecuzione.
+    </para>
+
+    <section xml:id="zend.mvc.routing.router-types.simple-route-stack">
+      <info><title>SimpleRouteStack</title></info>
+
+      <para>
+        Questo router semplicemente raccoglie le "route" individuali e 
+        ne fornisce la logica di confronto in uno step e cicla attraverso
+        questi element nell'ordine LIFO finchè un confronto non è positivo.
+        Per questo, "route" positive molto spesso dovrebbero essere 
+        regisdtrate per ultime e le "route" meno frequenti per prime.
+        In aggiunta, bisognerebbe essere sicuri che le "route" che 
+        potenzialmente sovrascrivono le "route" già registrate siano
+        le più specifiche possibili (es. registrate per ultime). In alternativa
+        puoi fornire una priorità con un terzo parametro al metodo
+        <methodname>addRoute()</methodname>, specificando la priorità
+        oppure impostando la proprietà nell'instanza prima di aggiungere
+        una nuova route allo stack.
+      </para>
+    </section>
+
+    <section xml:id="zend.mvc.routing.router-types.tree-route-stack">
+      <info><title>TreeRouteStack</title></info>
+
+      <para>
+        <classname>Zend\Mvc\Router\Http\TreeRouteStack</classname> fornisce 
+        l'attitudine di registrare alberi di "route", e utilizzerà un
+        algoritmo B-tree (albero bilanciato [n.d.t.]) per confrontare
+        le strade. Così puoi registrare una singola "route" con molte
+        "foglie".
+      </para>
+
+      <para>
+        Una <classname>TreeRouteStack</classname> consiste in una delle 
+        seguenti configurazioni:
+      </para>
+
+      <itemizedlist>
+        <listitem>
+          <para>
+            Una "route" di base, che descrive la base di confronto
+            richiesta, la radice dell'albero.
+          </para>
+        </listitem>
+
+        <listitem>
+          <para>
+            Un opzionale "route_broker", che è 
+            <classname>Zend\Mvc\Router\RouteBroker</classname> che può 
+            caricare in modo debole le strade (lazy-loading).
+          </para>
+        </listitem>
+
+        <listitem>
+          <para>
+            L'opzione "may_terminate" che informa il router che
+            non deve seguire altri segmenti.
+          </para>
+        </listitem>
+
+        <listitem>
+          <para>
+            Un array opzionale "child_routes" che contiene le strade
+            addizionali che partona dalla "route" base (es. costruite 
+            da questa). Ogni route "figlio" può essere a sua volta una
+            <classname>TreeRouteStack</classname> se lo desideri, 
+            infatti la "route" <classname>Part</classname> lavora esattamente
+            in questo modo.
+          </para>
+        </listitem>
+      </itemizedlist>
+
+      <para>
+        Quando una "route" confronta in positivo su un <classname>TreeRouteStack</classname>,
+        Il parametro di confronto per ogni segmento dell'albero sarà
+        ritornato.
+      </para>
+
+      <para>
+        A <classname>TreeRouteStack</classname> can be your sole route for your
+        application, or describe particular path segments of the
+        application.
+      </para>
+
+      <para>
+        An example of a <classname>TreeRouteStack</classname> is provided in
+        the documentation of the <classname>Part</classname> route.
+      </para>
+    </section>
+  </section>
+
+  <section xml:id="zend.mvc.routing.route-types">
+    <info><title>Route Types</title></info>
+
+    <para>
+      Zend Framework 2.0 ships with the following route types.
+    </para>
+
+    <section xml:id="zend.mvc.routing.route-types.hostname">
+      <info><title>Zend\Mvc\Router\Http\Hostname</title></info>
+
+      <para>
+        The <classname>Hostname</classname> route attempts to match the
+        hostname registered in the request against specific criteria.
+        Typically, this will be in one of the following forms:
+      </para>
+
+      <itemizedlist>
+        <listitem>
+          <para>
+            "subdomain.domain.tld"
+          </para>
+        </listitem>
+
+        <listitem>
+          <para>
+            ":subdomain.domain.tld"
+          </para>
+        </listitem>
+      </itemizedlist>
+
+      <para>
+        In the above, the second route would return a "subdomain"
+        key as part of the route match.
+      </para>
+
+      <para>
+        For any given hostname segment, you may also provide a constraint.
+        As an example, if the "subdomain" segment needed to match
+        only if it started with "fw" and contained exactly 2
+        digits following, the following route would be needed:
+      </para>
+
+      <programlisting language="php"><![CDATA[
+$route = Hostname::factory(array(
+    'route' => ':subdomain.domain.tld',
+    'constraints' => array(
+        'subdomain' => 'fw\d{2}'
+    ),
+));
+]]></programlisting>
+
+      <para>
+        In the above example, only a "subdomain" key will be
+        returned in the <classname>RouteMatch</classname>. If you wanted to
+        also provide other information based on matching, or a default
+        value to return for the subdomain, you need to also provide
+        defaults.
+      </para>
+
+      <programlisting language="php"><![CDATA[
+$route = Hostname::factory(array(
+    'route' => ':subdomain.domain.tld',
+    'constraints' => array(
+        'subdomain' => 'fw\d{2}'
+    ),
+    'defaults' => array(
+        'type' => 'json',
+    ),
+));
+]]></programlisting>
+
+      <para>
+        When matched, the above will return two keys in the
+        <classname>RouteMatch</classname>, "subdomain" and
+        "type".
+      </para>
+    </section>
+
+    <section xml:id="zend.mvc.routing.route-types.literal">
+      <info><title>Zend\Mvc\Router\Http\Literal</title></info>
+
+      <para>
+        The <classname>Literal</classname> route is for doing exact matching of
+        the URI path. Configuration therefore is solely the path you want
+        to match, and the "defaults", or parameters you want
+        returned on a match.
+      </para>
+
+      <programlisting language="php"><![CDATA[
+$route = Literal::factory(array(
+    'route' => '/foo',
+    'defaults' => array(
+        'controller' => 'foo-index',
+    ),
+));
+]]></programlisting>
+
+      <para>
+        The above route would match a path "/foo", and return the
+        key "controller" in the <classname>RouteMatch</classname>,
+        with the value "foo-index".
+      </para>
+    </section>
+
+    <section xml:id="zend.mvc.routing.route-types.part">
+      <info><title>Zend\Mvc\Router\Http\Part</title></info>
+
+      <para>
+        A <classname>Part</classname> route allows crafting a tree of possible
+        routes based on segments of the URI path. It actually extends the
+        <classname>TreeRouteStack</classname>.
+      </para>
+
+      <para>
+        <classname>Part</classname> routes are difficult to describe, so we'll
+        simply provide a sample one here.
+      </para>
+
+      <programlisting language="php"><![CDATA[
+$route = Part::factory(array(
+    'route' => array(
+        'type'    => 'literal',
+        'options' => array(
+            'route'    => '/',
+            'defaults' => array(
+                'controller' => 'ItsHomePage',
+            ),
+        )
+    ),
+    'may_terminate' => true,
+    'route_broker'  => $routeBroker,
+    'child_routes'  => array(
+        'blog' => array(
+            'type'    => 'literal',
+            'options' => array(
+                'route'    => 'blog',
+                'defaults' => array(
+                    'controller' => 'ItsBlog',
+                ),
+            ),
+            'may_terminate' => true,
+            'child_routes'  => array(
+                'rss' => array(
+                    'type'    => 'literal',
+                    'options' => array(
+                        'route'    => '/rss',
+                        'defaults' => array(
+                            'controller' => 'ItsRssBlog',
+                        ),
+                    ),
+                    'child_routes'  => array(
+                        'sub' => array(
+                            'type'    => 'literal',
+                            'options' => array(
+                                'route'    => '/sub',
+                                'defaults' => array(
+                                    'action' => 'ItsSubRss',
+                                ),
+                            )
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        'forum' => array(
+            'type'    => 'literal',
+            'options' => array(
+                'route'    => 'forum',
+                'defaults' => array(
+                    'controller' => 'ItsForum',
+                ),
+            ),
+        ),
+    ),
+));
+]]></programlisting>
+
+      <para>
+        The above would match the following:
+      </para>
+
+      <itemizedlist>
+        <listitem>
+          <para>
+            "/" would load the "ItsHomePage" controller
+          </para>
+        </listitem>
+
+        <listitem>
+          <para>
+            "/blog" would load the "ItsBlog" controller
+          </para>
+        </listitem>
+
+        <listitem>
+          <para>
+            "/blog/rss" would load the "ItsRssBlog"
+            controller
+          </para>
+        </listitem>
+
+        <listitem>
+          <para>
+            "/blog/rss/sub" would load the "ItsSubRss"
+            controller
+          </para>
+        </listitem>
+
+        <listitem>
+          <para>
+            "/forum" would load the "ItsForum" controller
+          </para>
+        </listitem>
+      </itemizedlist>
+
+      <para>
+        You may use any route type as a child route of a
+        <classname>Part</classname> route.
+      </para>
+    </section>
+
+    <section xml:id="zend.mvc.routing.route-types.regex">
+      <info><title>Zend\Mvc\Router\Http\Regex</title></info>
+
+      <para>
+        A <classname>Regex</classname> route utilizes a regular expression to
+        match against the URI path. Any valid regular expession is allowed;
+        our recommendation is to use named captures for any values you want
+        to return in the <classname>RouteMatch</classname>.
+      </para>
+
+      <para>
+        Since regular expression routes are often complex, you must specify
+        a "spec" or specification to use when assembling URLs
+        from regex routes. The spec is simply a string; replacements are
+        identified using "%keyname%" within the string, with the
+        keys coming from either the captured values or named parameters
+        passed to the <methodname>assemble()</methodname> method.
+      </para>
+
+      <para>
+        Just like other routes, the <classname>Regex</classname> route can
+        accept "defaults", parameters to include in the
+        <classname>RouteMatch</classname> when succesfully matched.
+      </para>
+
+      <programlisting language="php"><![CDATA[
+$route = Regex::factory(array(
+    'regex' => '/blog/(?<id>[a-zA-Z0-9_-]+)(\.(?<format>(json|html|xml|rss)))?',
+    'defaults' => array(
+        'controller' => 'blog-entry',
+        'format'     => 'html',
+    ),
+    'spec' => '/blog/%id%.%format%',
+));
+]]></programlisting>
+
+      <para>
+        The above would match
+        "/blog/001-some-blog_slug-here.html", and return three
+        items in the <classname>RouteMatch</classname>, an "id", the
+        "controller", and the "format". When assembling
+        a URL from this route, the "id" and "format"
+        values would be used to fill the specification.
+      </para>
+    </section>
+
+    <section xml:id="zend.mvc.routing.route-types.scheme">
+      <info><title>Zend\Mvc\Router\Http\Scheme</title></info>
+
+      <para>
+        The <classname>Scheme</classname> route matches the URI scheme only,
+        and must be an exact match. As such, this route, like the
+        <classname>Literal</classname> route, simply takes what you want to
+        match and the "defaults", parameters to return on a
+        match.
+      </para>
+
+      <programlisting language="php"><![CDATA[
+$route = Scheme::factory(array(
+    'scheme' => 'https',
+    'defaults' => array(
+        'https' => true,
+    ),
+));
+]]></programlisting>
+
+      <para>
+        The above route would match the "https" scheme, and
+        return the key "https" in the
+        <classname>RouteMatch</classname> with a boolean
+        <varname>true</varname> value.
+      </para>
+    </section>
+
+    <section xml:id="zend.mvc.routing.route-types.segment">
+      <info><title>Zend\Mvc\Router\Http\Segment</title></info>
+
+      <para>
+        A <classname>Segment</classname> route allows matching any segment of a
+        URI path. Segments are denoted using a colon, followed by
+        alphanumeric characters; if a segment is optional, it should be
+        surrounded by brackets. As an example, "/:foo[/:bar]"
+        would match a "/" followed by text and assign it to the
+        key "bar"; if any additional "/" characters are
+        found, any text following the last one will be assigned to the key
+        "bar".
+      </para>
+
+      <para>
+        The separation between literal and named segments can be anything.
+        For example, the above could be done as "/:foo{-}[-:bar] as well. The
+        {-} after the :foo parameter indicateds a set of one or more delimiters,
+        after which matching of the parameter itself ends.
+      </para>
+
+      <para>
+        Each segment may have constraints associated with it. Each
+        constraint should simply be a regular expression expressing the
+        conditions under which that segment should match.
+      </para>
+
+      <para>
+        Also, as you can in other routes, you may provide defaults to use;
+        these are particularly useful when using optional segments.
+      </para>
+
+      <para>
+        As a complex example:
+      </para>
+
+      <programlisting language="php"><![CDATA[
+$route = Segment::factory(array(
+    'route' => '/:controller[/:action]',
+    'constraints' => array(
+        'controller' => '[a-zA-Z][a-zA-Z0-9_-]+',
+        'action'     => '[a-zA-Z][a-zA-Z0-9_-]+',
+    ),
+    'defaults' => array(
+        'controller' => 'application-index',
+        'action'     => 'index',
+    ),
+));
+]]></programlisting>
+    </section>
+  </section>
+</section>

@@ -38,6 +38,18 @@ use Zend\Locale\Data\Cldr,
 class CldrTest extends \PHPUnit_Framework_TestCase
 {    
     /**
+     * test for reading with cache disabled
+     * @see ZF2-212
+     */
+    public function testNoCache()
+    {
+        Cldr::disableCache(true);
+        $this->testTerritory();
+        Cldr::disableCache(false);
+    }
+    
+    
+    /**
      * test for reading with standard locale
      * expected array
      */

@@ -57,4 +57,15 @@ class PatternFactoryTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($broker, Cache\PatternFactory::getBroker());
     }
 
+    public function testFactory()
+    {
+        $pattern1 = Cache\PatternFactory::factory('capture');
+        $this->assertInstanceOf('Zend\Cache\Pattern\CaptureCache', $pattern1);
+
+        $pattern2 = Cache\PatternFactory::factory('capture');
+        $this->assertInstanceOf('Zend\Cache\Pattern\CaptureCache', $pattern2);
+
+        $this->assertNotSame($pattern1, $pattern2);
+    }
+
 }

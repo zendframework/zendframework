@@ -36,16 +36,20 @@ use Zend\Locale\Data\Cldr,
  * @group      Zend_Locale
  */
 class CldrTest extends \PHPUnit_Framework_TestCase
-{    
-    /**
-     * test for reading with cache disabled
-     * @see ZF2-212
-     */
-    public function testNoCache()
+{
+
+    private $_cache = null;
+
+    public function setUp()
     {
-        Cldr::disableCache(true);
-        $this->testTerritory();
-        Cldr::disableCache(false);
+        $this->_cache = CacheFactory::adapterFactory('memory', array('memory_limit' => 0));
+        Cldr::setCache($this->_cache);
+    }
+
+
+    public function tearDown()
+    {
+        $this->_cache->clear(CacheAdapter::MATCH_ALL);
     }
     
     

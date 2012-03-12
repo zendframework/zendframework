@@ -34,6 +34,14 @@ use Traversable,
 class JsonModel extends ViewModel
 {
     /**
+     * JSON probably won't need to be captured into a 
+     * a parent container by default.
+     * 
+     * @var string
+     */
+    protected $captureTo = null;
+
+    /**
      * JSON is usually terminal
      * 
      * @var bool
@@ -51,6 +59,6 @@ class JsonModel extends ViewModel
         if ($variables instanceof Traversable) {
             $variables = ArrayUtils::iteratorToArray($variables);
         }
-        return json_encode($variables);
+        return Json::encode($variables);
     }
 }

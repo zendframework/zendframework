@@ -1654,7 +1654,7 @@ class Cldr extends AbstractLocale
 
         if (self::hasCacheTagSupport()) {
             self::getCache()->setItem($cacheId, self::$_result, array('tags' => array('Zend_Locale')));
-        } else {
+        } elseif (self::hasCache()) {
             self::getCache()->setItem($cacheId, self::$_result);
         }
 

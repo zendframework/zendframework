@@ -2,7 +2,7 @@
 
 namespace Zend\Http\Header;
 
-class GenericMultiHeader extends GenericHeader
+class GenericMultiHeader extends GenericHeader implements MultipleHeaderDescription
 {
     public static function fromString($headerLine)
     {

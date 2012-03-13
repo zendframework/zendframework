@@ -254,6 +254,9 @@ class EventManager implements EventCollection
      * executed. By default, this value is 1; however, you may set it for any
      * integer value. Higher values have higher priority (i.e., execute first).
      *
+     * You can specify "*" for the event name. In such cases, the listener will 
+     * be triggered for every event.
+     *
      * @param  string|array|ListenerAggregate $event An event or array of event names. If a ListenerAggregate, proxies to {@link attachAggregate()}.
      * @param  callback|int $callback If string $event provided, expects PHP callback; for a ListenerAggregate $event, this will be the priority
      * @param  int $priority If provided, the priority at which to register the callback
@@ -261,10 +264,12 @@ class EventManager implements EventCollection
      */
     public function attach($event, $callback = null, $priority = 1)
     {
+        // Proxy ListenerAggregate arguments to attachAggregate()
         if ($event instanceof ListenerAggregate) {
             return $this->attachAggregate($event, $callback);
         }
 
+        // Null callback is invalid
         if (null === $callback) {
             throw new Exception\InvalidArgumentException(sprintf(
                 '%s: expects a callback; none provided',
@@ -272,6 +277,7 @@ class EventManager implements EventCollection
             ));
         }
 
+        // Array of events should be registered individually, and return an array of all listeners
         if (is_array($event)) {
             $listeners = array();
             foreach ($event as $name) {
@@ -280,10 +286,15 @@ class EventManager implements EventCollection
             return $listeners;
         }
 
+        // If we don't have a priority queue for the event yet, create one
         if (empty($this->events[$event])) {
             $this->events[$event] = new PriorityQueue();
         }
+
+        // Create a callback handler, setting the event and priority in its metadata
         $listener = new CallbackHandler($callback, array('event' => $event, 'priority' => $priority));
+
+        // Inject the callback handler into the queue
         $this->events[$event]->insert($listener, $priority);
         return $listener;
     }
@@ -421,12 +432,32 @@ class EventManager implements EventCollection
         $responses = new ResponseCollection;
         $listeners = $this->getListeners($event);
 
-        // add static listeners to the list of listeners
+        // Add static/wildcard listeners to the list of listeners,
         // but don't modify the listeners object
-        $staticListeners = $this->getStaticListeners($event);
-        if (count($staticListeners)) {
+        $staticListeners   = $this->getStaticListeners($event);
+        $wildcardListeners = $this->getListeners('*');
+        if (count($staticListeners) || count($wildcardListeners)) {
             $listeners = clone $listeners;
+        }
+
+        // Add static listeners
+        if (count($staticListeners)) {
             foreach ($staticListeners as $listener) {
+                $priority = $listener->getMetadatum('priority');
+                if (null === $priority) {
+                    $priority = 1;
+                } elseif (is_array($priority)) {
+                    // If we have an array, likely using PriorityQueue. Grab first
+                    // element of the array, as that's the actual priority.
+                    $priority = array_shift($priority);
+                }
+                $listeners->insert($listener, $priority);
+            }
+        }
+
+        // Add wildcard listeners
+        if (count($wildcardListeners)) {
+            foreach ($wildcardListeners as $listener) {
                 $priority = $listener->getMetadatum('priority');
                 if (null === $priority) {
                     $priority = 1;

@@ -21,7 +21,9 @@
 
 namespace ZendTest\EventManager;
 
-use Zend\EventManager\Event,
+use ArrayIterator,
+    stdClass,
+    Zend\EventManager\Event,
     Zend\EventManager\EventDescription,
     Zend\EventManager\EventManager,
     Zend\EventManager\ResponseCollection,
@@ -570,11 +572,26 @@ class EventManagerTest extends \PHPUnit_Framework_TestCase
 
     public function testIdentifierGetterSettersWorkWithTraversables()
     {
-        $identifiers = new \ArrayIterator(array('foo', 'bar'));
+        $identifiers = new ArrayIterator(array('foo', 'bar'));
         $this->assertInstanceOf('Zend\EventManager\EventManager', $this->events->setIdentifiers($identifiers));
         $this->assertSame($this->events->getIdentifiers(), (array) $identifiers);
-        $identifiers = new \ArrayIterator(array('foo', 'bar', 'baz'));
+        $identifiers = new ArrayIterator(array('foo', 'bar', 'baz'));
         $this->assertInstanceOf('Zend\EventManager\EventManager', $this->events->addIdentifiers($identifiers));
         $this->assertSame($this->events->getIdentifiers(), (array) $identifiers);
+    }
+
+    public function testListenersAttachedWithWildcardAreTriggeredForAllEvents()
+    {
+        $test     = new stdClass;
+        $test->events = array();
+        $callback = function($e) use ($test) {
+            $test->events[] = $e->getName();
+        };
+
+        $this->events->attach('*', $callback);
+        foreach (array('foo', 'bar', 'baz') as $event) {
+            $this->events->trigger($event);
+            $this->assertContains($event, $test->events);
+        }
     }
 }

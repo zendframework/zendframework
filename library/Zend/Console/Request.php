@@ -57,6 +57,7 @@ class Request extends Message implements RequestDescription
          * Store runtime params
          */
         $this->params()->fromArray($args);
+        $this->setContent($args);
 
         /**
          * Store environment data
@@ -73,6 +74,7 @@ class Request extends Message implements RequestDescription
     public function setParams(ParametersDescription $params)
     {
         $this->params = $params;
+        $this->setContent($params);
         return $this;
     }
 

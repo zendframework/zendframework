@@ -43,6 +43,83 @@ class SimpleTestTest extends TestCase
                     'baz' => null,
                 )
             ),
+            'mandatory-long-flag-alternative1' => array(
+                ' ( --foo | --bar )',
+                array('--foo'),
+                array(
+                    'foo' => true,
+                    'bar' => false,
+                    'baz' => null,
+                )
+            ),
+            'mandatory-long-flag-alternative2' => array(
+                ' ( --foo | --bar )',
+                array('--bar'),
+                array(
+                    'foo' => false,
+                    'bar' => true,
+                    'baz' => null,
+                )
+            ),
+            'mandatory-long-flag-alternative3' => array(
+                ' ( --foo | --bar )',
+                array('--baz'),
+                null
+            ),
+
+            // -- mandatory short flags
+            'mandatory-short-flag-no-match' => array(
+                '-f -b',
+                array('a','b','-f'),
+                null
+            ),
+            'mandatory-short-flag-no-partial-match' => array(
+                '-f -b',
+                array('-f','-z'),
+                null
+            ),
+            'mandatory-short-flag-match' => array(
+                '-f -b',
+                array('-f','-b'),
+                array('f' => true, 'b' => true)
+            ),
+            'mandatory-short-flag-mixed-order-match' => array(
+                '-f -b',
+                array('-b','-f'),
+                array('f' => true, 'b' => true)
+            ),
+            'mandatory-short-flag-whitespace-in-definition' => array(
+                '      -f   -b ',
+                array('-b','-f'),
+                array(
+                    'f' => true,
+                    'b' => true,
+                    'baz' => null,
+                )
+            ),
+            'mandatory-short-flag-alternative1' => array(
+                ' ( -f | -b )',
+                array('-f'),
+                array(
+                    'f' => true,
+                    'b' => false,
+                    'baz' => null,
+                )
+            ),
+            'mandatory-short-flag-alternative2' => array(
+                ' ( -f | -b )',
+                array('-b'),
+                array(
+                    'f' => false,
+                    'b' => true,
+                    'baz' => null,
+                )
+            ),
+            'mandatory-short-flag-alternative3' => array(
+                ' ( -f | -b )',
+                array('--baz'),
+                null
+            ),
 
             // -- optional long flags
             'optional-long-flag-non-existent' => array(
@@ -161,7 +238,6 @@ class SimpleTestTest extends TestCase
                 array('--foo','===--'),
                 array('foo' => '===--')
             ),
-
 
             // -- required literal params
             'mandatory-literal-match-1' => array(
@@ -307,6 +383,26 @@ class SimpleTestTest extends TestCase
             ),
 
             // -- combinations
+            'mandatory-long-short-alternative1' => array(
+                ' ( --foo | -f )',
+                array('--foo'),
+                array(
+                    'foo' => true,
+                    'f'   => false,
+                    'baz' => null,
+                )
+            ),
+            'mandatory-long-short-alternative2' => array(
+                ' ( --foo | -f )',
+                array('-f'),
+                array(
+                    'foo' => false,
+                    'f'   => true,
+                    'baz' => null,
+                )
+            ),
+
+
             /*'combined-1' => array(
                 '--foo --bar',
                 array('a','b', 'c', '--foo', '--bar'),

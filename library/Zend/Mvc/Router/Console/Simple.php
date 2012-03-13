@@ -45,9 +45,6 @@ use Traversable,
  */
 class Simple implements Route
 {
-    const VALUE_NUMBER  = 'n';
-    const VALUE_STRING  = 's';
-
     /**
      * Parts of the route.
      *
@@ -197,10 +194,11 @@ class Simple implements Route
      */
     protected function parseRouteDefinition($def)
     {
-        $def = trim($def);
-        $pos        = 0;
-        $length     = strlen($def);
-        $parts      = array();
+        $def    = trim($def);
+        $pos    = 0;
+        $length = strlen($def);
+        $parts  = array();
+        $unnamedGroupCounter = 1;
 
         while ($pos < $length) {
             /**
@@ -208,7 +206,7 @@ class Simple implements Route
              *    --param=
              *    --param=whatever
              */
-            if (preg_match( '/\G--(?<name>[a-zA-Z0-9]+)(?<hasValue>=\S*?)?(?: +|$)/s', $def, $m, 0, $pos )) {
+            if (preg_match( '/\G--(?<name>[a-zA-Z0-9][a-zA-Z0-9\_\-]+)(?<hasValue>=\S*?)?(?: +|$)/s', $def, $m, 0, $pos )) {
                 $item = array(
                     'name'       => strtolower( $m['name'] ),
                     'short'      => false,
@@ -224,7 +222,7 @@ class Simple implements Route
              *    [--param=whatever]
              */
             elseif (preg_match(
-                '/\G\[ *?--(?<name>[a-zA-Z0-9]+)(?<hasValue>=\S*?)? *?\](?: +|$)/s', $def, $m, 0, $pos
+                '/\G\[ *?--(?<name>[a-zA-Z0-9][a-zA-Z0-9\_\-]+)(?<hasValue>=\S*?)? *?\](?: +|$)/s', $def, $m, 0, $pos
             )) {
                 $item = array(
                     'name'       => strtolower( $m['name'] ),
@@ -299,7 +297,7 @@ class Simple implements Route
 
                 // prepare item
                 $item = array(
-                    'name'          => isset($m['groupName']) ? $m['groupName'] : 'unnamedGroupAt'.$pos,
+                    'name'          => isset($m['groupName']) ? $m['groupName'] : 'unnamedGroup'.$unnamedGroupCounter++,
                     'literal'       => true,
                     'required'      => false,
                     'positional'    => true,
@@ -319,7 +317,7 @@ class Simple implements Route
                     (?<options>
                         (?:
                             \ *?
-                            (?<name>[a-z0-9][a-zA-Z0-9_]*?)
+                            (?<name>[a-z0-9][a-zA-Z0-9_]+)
                             \ *?
                             (?:\||(?=\)))
                             \ *?
@@ -329,8 +327,7 @@ class Simple implements Route
                 (?:\:(?<groupName>[a-zA-Z0-9]+))?
                 (?:\ +|$)
                 /sx', $def, $m, 0, $pos
-            )
-            ) {
+            )) {
                 // extract available options
                 $options = preg_split('/ *\| */',trim($m['options']),0,PREG_SPLIT_NO_EMPTY);
 
@@ -339,10 +336,51 @@ class Simple implements Route
 
                 // prepare item
                 $item = array(
-                    'name'          => isset($m['groupName']) ? $m['groupName'] : 'unnamedGroupAt'.$pos,
+                    'name'          => isset($m['groupName']) ? $m['groupName']:'unnamedGroupAt'.$unnamedGroupCounter++,
                     'literal'       => true,
                     'required'      => true,
                     'positional'    => true,
+                    'alternatives'  => $options,
+                    'hasValue'      => false,
+                );
+            }
+            /**
+             * Required long flag alternative
+             *    ( --something | --somethingElse | --anotherOne )
+             *    ( --something | --somethingElse | --anotherOne ):namedGroup
+             */
+            elseif (preg_match( '/
+                \G
+                \(
+                    (?<options>
+                        (?:
+                            \ *?
+                            \-+(?<name>[a-zA-Z0-9][a-zA-Z0-9_\-]*?)
+                            \ *?
+                            (?:\||(?=\)))
+                            \ *?
+                        )+
+                    )
+                \)
+                (?:\:(?<groupName>[a-zA-Z0-9]+))?
+                (?:\ +|$)
+                /sx', $def, $m, 0, $pos
+            )) {
+                // extract available options
+                $options = preg_split('/ *\| */',trim($m['options']),0,PREG_SPLIT_NO_EMPTY);
+
+                // remove dupes
+                array_unique($options);
+
+                // remove prefix
+                array_walk($options,function(&$val,$key){$val = ltrim($val,'-');});
+
+                // prepare item
+                $item = array(
+                    'name'          => isset($m['groupName']) ? $m['groupName']:'unnamedGroupAt'.$unnamedGroupCounter++,
+                    'literal'       => false,
+                    'required'      => true,
+                    'positional'    => false,
                     'alternatives'  => $options,
                     'hasValue'      => false,
                 );
@@ -475,17 +513,32 @@ class Simple implements Route
             /**
              * Prepare match regex
              */
-            if($part['short']){
-                if(isset($part['hasValue'])){
-                    $regex = '/^\-'.$part['name'].'(?:\=(?<value>.*?)$)?$/';
+            if(isset($part['alternatives'])){
+                // an alternative of flags
+                $regex = '/^\-+(?<name>';
+                $regex .= join('|',$part['alternatives']);
+
+                if($part['hasValue']){
+                    $regex .= ')(?:\=(?<value>.*?)$)?$/';
                 }else{
-                    $regex = '/^\-'.$part['name'].'$/';
+                    $regex .= ')$/';
                 }
             }else{
-                if(isset($part['hasValue'])){
-                    $regex = '/^\-{2,}'.$part['name'].'(?:\=(?<value>.*?)$)?$/';
-                }else{
-                    $regex = '/^\-{2,}'.$part['name'].'$/';
+                // a single named flag
+                if($part['short'] === true){
+                    // short variant
+                    if($part['hasValue']){
+                        $regex = '/^\-'.$part['name'].'(?:\=(?<value>.*?)$)?$/';
+                    }else{
+                        $regex = '/^\-'.$part['name'].'$/';
+                    }
+                }elseif($part['short'] === false){
+                    // long variant
+                    if($part['hasValue']){
+                        $regex = '/^\-{2,}'.$part['name'].'(?:\=(?<value>.*?)$)?$/';
+                    }else{
+                        $regex = '/^\-{2,}'.$part['name'].'$/';
+                    }
                 }
             }
 
@@ -503,6 +556,10 @@ class Simple implements Route
 
                     if(isset($m['value'])){
                         $value = $m['value'];
+                    }
+
+                    if(isset($m['name'])){
+                        $matchedName = $m['name'];
                     }
 
                     break;
@@ -533,7 +590,6 @@ class Simple implements Route
             if($param && !$part['hasValue']){
                 $value = true;
             }
-
 
             /**
              * Try to retrieve value if it is expected
@@ -573,11 +629,25 @@ class Simple implements Route
             }
 
             /**
-             * Negate alternatives
+             * If there are alternatives, fill them
              */
             if(isset($part['alternatives'])){
-                foreach($part['alternatives'] as $alt){
-                    $matches[$alt] = false;
+                if($part['hasValue']){
+                    foreach($part['alternatives'] as $alt){
+                        if($alt == $matchedName){
+                            $matches[$alt] = $value;
+                        } else {
+                            $matches[$alt] = null;
+                        }
+                    }
+                }else{
+                    foreach($part['alternatives'] as $alt){
+                        if($alt == $matchedName){
+                            $matches[$alt] = true;
+                        } else {
+                            $matches[$alt] = false;
+                        }
+                    }
                 }
             }
         }
@@ -703,8 +773,6 @@ class Simple implements Route
     public function assemble(array $params = array(), array $options = array())
     {
         $this->assembledParams = array();
-
-
     }
 
     /**

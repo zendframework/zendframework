@@ -7,7 +7,10 @@ use Zend\Di\Configuration as DiConfiguration,
     Zend\EventManager\EventCollection as Events,
     Zend\EventManager\EventManager,
     Zend\EventManager\StaticEventManager,
-    Zend\Mvc\Router\Http\TreeRouteStack as Router;
+    Zend\Mvc\Router\Http\TreeRouteStack as Router,
+    Zend\Console\Console,
+    Zend\Console\Request as ConsoleRequest,
+    Zend\Console\Response as ConsoleResponse;
 
 class Bootstrap implements Bootstrapper
 {
@@ -83,6 +86,10 @@ class Bootstrap implements Bootstrapper
         $this->setupRouter($application);
         $this->setupView($application);
         $this->setupEvents($application);
+
+        if(Console::isConsole()){
+            $this->setupConsole($application);
+        }
     }
 
 
@@ -101,7 +108,7 @@ class Bootstrap implements Bootstrapper
         $diConfig = new DiConfiguration(array('definition' => array('class' => array(
             'Zend\Mvc\Router\RouteStack' => array(
                 'instantiator' => array(
-                    'Zend\Mvc\Router\Http\TreeRouteStack',
+                    'Zend\Mvc\Router\SimpleRouteStack',
                     'factory'
                 ),
             ),
@@ -236,6 +243,18 @@ class Bootstrap implements Bootstrapper
     {
         $router = $application->getLocator()->get('Zend\Mvc\Router\RouteStack');
         $application->setRouter($router);
+    }
+
+    /**
+     * Sets up Console-specific request and response
+     *
+     * @param AppContext $application
+     * @return void
+     */
+    protected function setupConsole(AppContext $application)
+    {
+        $application->setRequest(new ConsoleRequest());
+        $application->setResponse(new ConsoleResponse());
     }
 
     /**

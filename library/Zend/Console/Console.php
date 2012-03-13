@@ -1,7 +1,13 @@
 <?php
 namespace Zend\Console;
 
-class Console
+/**
+ * An static, utility class for interacting with Console enviromen.
+ * Declared abstract to prevent from instantiating.
+ *
+ * @abstract
+ */
+abstract class Console
 {
     /**
      * @var \Zend\Console\Adapter
@@ -85,8 +91,24 @@ class Console
         return class_exists('COM',false);
     }
 
+    /**
+     * Check if running under MS Windows Ansicon
+     *
+     * @static
+     * @return bool
+     */
     static public function isAnsicon(){
         return getenv('ANSICON') !== false;
+    }
+
+    /**
+     * Check if running in a console environment (CLI)
+     *
+     * @static
+     * @return bool
+     */
+    static public function isConsole(){
+        return PHP_SAPI == 'cli';
     }
 
     /**

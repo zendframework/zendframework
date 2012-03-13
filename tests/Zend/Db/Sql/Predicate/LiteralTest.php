@@ -68,4 +68,10 @@ class LiteralTest extends TestCase
         $test = $this->predicate->getWhereParts();
         $this->assertEquals($expected, $test, var_export($test, 1));
     }
+
+    public function testAllowZeroParameterValue()
+    {
+        $predicate = new Literal('foo.bar > ?', 0);
+        $this->assertEquals(0, $predicate->getParameter());
+    }
 }

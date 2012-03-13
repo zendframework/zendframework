@@ -79,25 +79,8 @@ class PaginatorTest extends TestCase
 
         $this->_config = Config\Factory::fromFile(__DIR__ . '/_files/config.xml', true);
 
-        $this->_cache = CacheFactory::factory(array(
-            'adapter' => array(
-                'name' => 'filesystem',
-                'options' => array(
-                    'ttl'       => 3600,
-                    'cache_dir' => $this->_getTmpDir(),
-                ),
-            ),
-            'plugins' => array(
-                array(
-                    'name' => 'serializer',
-                    'options' => array(
-                        'serializer' => 'php_serialize',
-                    ),
-                ),
-            ),
-        ));
+        $this->_cache = CacheFactory::adapterFactory('memory', array('memory_limit' => 0));
         $this->_cache->clear(CacheAdapter::MATCH_ALL);
-
         Paginator\Paginator::setCache($this->_cache);
 
         $this->_restorePaginatorDefaults();

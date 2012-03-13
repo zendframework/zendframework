@@ -158,7 +158,7 @@ class HorizontalSliderTest extends \PHPUnit_Framework_TestCase
     public function testShouldCreateOnChangeAttributeByDefault()
     {
         $html = $this->getElement();
-        $this->assertContains('onChange="dojo.byId(\'elementId\').value = arguments[0];"', $html, $html);
+        $this->assertContains('onChange="dojo.byId(&#39;elementId&#39;).value = arguments[0];"', $html, $html);
     }
 
     public function testShouldCreateHiddenElementWithValue()

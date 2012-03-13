@@ -37,11 +37,21 @@ class MemcachedTest extends CommonAdapterTest
 
     public function setUp()
     {
+        if (!defined('TESTS_ZEND_CACHE_MEMCACHED_ENABLED') || !TESTS_ZEND_CACHE_MEMCACHED_ENABLED) {
+            $this->markTestSkipped("Skipped by TestConfiguration (TESTS_ZEND_CACHE_MEMCACHED_ENABLED)");
+        }
+
         if (!extension_loaded('memcached')) {
             $this->markTestSkipped("Memcached extension is not loaded");
         }
 
         $this->_options = new Cache\Storage\Adapter\MemcachedOptions();
+        if (defined('TESTS_ZEND_CACHE_MEMCACHED_HOST') && defined('TESTS_ZEND_CACHE_MEMCACHED_PORT')) {
+            $this->_options->addServer(TESTS_ZEND_CACHE_MEMCACHED_HOST, TESTS_ZEND_CACHE_MEMCACHED_PORT);
+        } elseif (defined('TESTS_ZEND_CACHE_MEMCACHED_HOST')) {
+            $this->_options->addServer(TESTS_ZEND_CACHE_MEMCACHED_HOST);
+        }
+
         $this->_storage = new Cache\Storage\Adapter\Memcached($this->_options);
 
         parent::setUp();
@@ -93,8 +103,8 @@ class MemcachedTest extends CommonAdapterTest
     {
         if (!empty($this->_storage)) {
             $this->_storage->clear();
-        }    
-        
+        }
+
         parent::tearDown();
     }
 }

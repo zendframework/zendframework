@@ -45,7 +45,7 @@ class Literal implements PredicateInterface
         if ($literal) {
             $this->setLiteral($literal);
         }
-        if ($parameter) {
+        if ($parameter !== null) {
             $this->setParameter($parameter);
         }
     }

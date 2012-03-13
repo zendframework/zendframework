@@ -50,7 +50,7 @@ abstract class AbstractAccept implements HeaderDescription
     {
         $acceptHeader = new static();
 
-        list($name, $values) = preg_split('#: #', $headerLine, 2);
+        list($name, $values) = explode(': ', $headerLine, 2);
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== strtolower($acceptHeader->getFieldName())) {

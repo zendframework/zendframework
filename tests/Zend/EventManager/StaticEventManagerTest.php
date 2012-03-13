@@ -83,6 +83,28 @@ class StaticEventManagerTest extends TestCase
         $this->assertTrue($found, 'Did not find listener!');
     }
 
+    public function testCanAttachCallbackToMultipleEventsAtOnce()
+    {
+        $events = StaticEventManager::getInstance();
+        $events->attach('bar', array('foo', 'test'), array($this, __FUNCTION__));
+        $this->assertContains('foo', $events->getEvents('bar'));
+        $this->assertContains('test', $events->getEvents('bar'));
+        $expected = array($this, __FUNCTION__);
+        foreach (array('foo', 'test') as $event) {
+            $found     = false;
+            $listeners = $events->getListeners('bar', $event);
+            $this->assertInstanceOf('Zend\Stdlib\PriorityQueue', $listeners);
+            $this->assertTrue(0 < count($listeners), 'Empty listeners!');
+            foreach ($listeners as $listener) {
+                if ($expected === $listener->getCallback()) {
+                    $found = true;
+                    break;
+                }
+            }
+            $this->assertTrue($found, 'Did not find listener!');
+        }
+    }
+
     public function testCanAttachSameEventToMultipleResourcesAtOnce()
     {
         $events = StaticEventManager::getInstance();
@@ -102,6 +124,30 @@ class StaticEventManagerTest extends TestCase
                 }
             }
             $this->assertTrue($found, 'Did not find listener!');
+        }
+    }
+
+    public function testCanAttachCallbackToMultipleEventsOnMultipleResourcesAtOnce()
+    {
+        $events = StaticEventManager::getInstance();
+        $events->attach(array('bar', 'baz'), array('foo', 'test'), array($this, __FUNCTION__));
+        $this->assertContains('foo', $events->getEvents('bar'));
+        $this->assertContains('test', $events->getEvents('bar'));
+        $expected = array($this, __FUNCTION__);
+        foreach (array('bar', 'baz') as $resource) {
+            foreach (array('foo', 'test') as $event) {
+                $found     = false;
+                $listeners = $events->getListeners($resource, $event);
+                $this->assertInstanceOf('Zend\Stdlib\PriorityQueue', $listeners);
+                $this->assertTrue(0 < count($listeners), 'Empty listeners!');
+                foreach ($listeners as $listener) {
+                    if ($expected === $listener->getCallback()) {
+                        $found = true;
+                        break;
+                    }
+                }
+                $this->assertTrue($found, 'Did not find listener!');
+            }
         }
     }
 

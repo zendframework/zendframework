@@ -1394,51 +1394,6 @@ class Cldr extends AbstractLocale
         return (string) $locale;
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     /**
      * Returns the path to CLDR
      *
@@ -1628,7 +1583,7 @@ class Cldr extends AbstractLocale
      */
     protected static function readCldr($filePath, $locale, $cacheId, $keyPath, $keyAttrib, $valuePath, $valueAttrib, $detail)
     {
-	$locale = self::_checkLocale($locale);
+        $locale = self::_checkLocale($locale);
 
         if (self::getCache() === null && !self::isCacheDisabled()) {
             self::setDefaultCache();
@@ -1676,21 +1631,7 @@ class Cldr extends AbstractLocale
      */
     public static function getDisplayLanguage($locale, $invert = false, $detail = null)
     {
-        if (!$invert) {
-            return self::readCldr(
-                self::getPath() . '/main', (string) $locale, 'CldrLanguage0',
-                '//ldml/localeDisplayNames/languages/language', 'type',
-                '//ldml/localeDisplayNames/languages/language', null,
-                $detail
-            );
-        } else {
-            return self::readCldr(
-                self::getPath() . '/main', (string) $locale, 'CldrLanguage1',
-                '//ldml/localeDisplayNames/languages/language', null,
-                '//ldml/localeDisplayNames/languages/language', 'type',
-                $detail
-            );
-        }
+        return self::getDisplayData($locale, 'CldrLanguage', 'languages/language', $invert, $detail);
     }
 
     /**
@@ -1704,21 +1645,7 @@ class Cldr extends AbstractLocale
      */
     public static function getDisplayScript($locale, $invert = false, $detail = null)
     {
-        if (!$invert) {
-            return self::readCldr(
-                self::getPath() . '/main', (string) $locale, 'CldrScript0',
-                '//ldml/localeDisplayNames/scripts/script', 'type',
-                '//ldml/localeDisplayNames/scripts/script', null,
-                $detail
-            );
-        } else {
-            return self::readCldr(
-                self::getPath() . '/main',(string) $locale, 'CldrScript1',
-                '//ldml/localeDisplayNames/scripts/script', null,
-                '//ldml/localeDisplayNames/scripts/script', 'type',
-                $detail
-            );
-        }
+        return self::getDisplayData($locale, 'CldrScript', 'scripts/script', $invert, $detail);
     }
 
     /**
@@ -1732,23 +1659,7 @@ class Cldr extends AbstractLocale
      */
     public static function getDisplayTerritory($locale, $invert = false, $detail = null)
     {
-        $locale = (string) $locale;
-
-        if (!$invert) {
-            return self::readCldr(
-                self::getPath() . '/main', $locale, 'CldrTerritory0' . $locale,
-                '//ldml/localeDisplayNames/territories/territory', 'type',
-                '//ldml/localeDisplayNames/territories/territory', null,
-                $detail
-            );
-        } else {
-            return self::readCldr(
-                self::getPath() . '/main', $locale, 'CldrTerritory1' . $locale,
-                '//ldml/localeDisplayNames/territories/territory', null,
-                '//ldml/localeDisplayNames/territories/territory', 'type',
-                $detail
-            );
-        }
+        return self::getDisplayData($locale, 'CldrTerritory', 'territories/territory', $invert, $detail);
     }
 
     /**
@@ -1762,21 +1673,37 @@ class Cldr extends AbstractLocale
      */
     public static function getDisplayVariant($locale, $invert = false, $detail = null)
     {
-        if (!$invert) {
-            return self::readCldr(
-                self::getPath() . '/main', (string) $locale, 'CldrVariant0',
-                '//ldml/localeDisplayNames/variants/variant', 'type',
-                '//ldml/localeDisplayNames/variants/variant', null,
-                $detail
-            );
+        return self::getDisplayData($locale, 'CldrVariant', 'variants/variant', $invert, $detail);
+    }
+
+    /**
+     * Helper method for reading display data.
+     * Used by self::getDisplay*() methods.
+     *
+     * @param string    $locale Normalized locale
+     * @param string    $cacheId
+     * @param string    $path
+     * @param boolean   $invert
+     * @param string    $detail
+     * @return array
+     */
+    protected static function getDisplayData($locale, $cacheId, $path, $invert, $detail)
+    {
+        $path = '//ldml/localeDisplayNames/' . $path;
+        $type1 = 'type';
+        $type2 = null;
+        if ($invert) {
+            $type1 = null;
+            $type2 = 'type';
+            $cacheId = $cacheId . '1' . $locale;
         } else {
-            return self::readCldr(
-                self::getPath() . '/main',(string) $locale, 'CldrVariant1',
-                '//ldml/localeDisplayNames/variants/variant', null,
-                '//ldml/localeDisplayNames/variants/variant', 'type',
-                $detail
-            );
+            $cacheId = $cacheId . '0' . $locale;
         }
+
+        return self::readCldr(
+            self::getPath() . '/main', (string) $locale,
+            $cacheId, $path, $type1, $path, $type2, $detail
+        );
     }
 
 // Formatierungen in Klassen integrieren

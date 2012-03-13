@@ -37,6 +37,10 @@ class ZendServerDiskTest extends CommonAdapterTest
 
     public function setUp()
     {
+        if (!defined('TESTS_ZEND_CACHE_ZEND_SERVER_ENABLED') || !TESTS_ZEND_CACHE_ZEND_SERVER_ENABLED) {
+            $this->markTestSkipped("Skipped by TestConfiguration (TESTS_ZEND_CACHE_ZEND_SERVER_ENABLED)");
+        }
+
         if (!function_exists('zend_disk_cache_store') || PHP_SAPI == 'cli') {
             try {
                 new Cache\Storage\Adapter\ZendServerDisk();
@@ -46,7 +50,8 @@ class ZendServerDiskTest extends CommonAdapterTest
             }
         }
 
-        $this->_storage = new Cache\Storage\Adapter\ZendServerDisk();
+        $this->_options = new Cache\Storage\Adapter\AdapterOptions();
+        $this->_storage = new Cache\Storage\Adapter\ZendServerDisk($this->_options);
         parent::setUp();
     }
 

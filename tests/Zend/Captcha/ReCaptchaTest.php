@@ -150,7 +150,7 @@ class ReCaptchaTest extends \PHPUnit_Framework_TestCase
             'captcha'   => $captcha,
             'belongsTo' => 'contact',
         ));
-        $view = new \Zend\View\PhpRenderer();
+        $view = new \Zend\View\Renderer\PhpRenderer();
         $html = $captcha->render($view, $element);
         $this->assertContains('contact[recaptcha_challenge_field]', $html);
         $this->assertContains('contact[recaptcha_response_field]', $html);

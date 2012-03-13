@@ -28,7 +28,7 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
         $response->setReasonPhrase('Foo Bar');
         $this->assertEquals('HTTP/1.1 404 Foo Bar', $response->renderStatusLine());
     }
-    
+
     public function testResponseUsesHeadersContainerByDefault()
     {
         $response = new Response();
@@ -58,6 +58,14 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
         $response = new Response;
         $this->setExpectedException('Zend\Http\Exception\InvalidArgumentException', 'Invalid status code');
         $response->setStatusCode(606);
+    }
+
+    public function testResponseEndsAtStatusCode()
+    {
+        $string = 'HTTP/1.0 200' . "\r\n\r\n" . 'Foo Bar';
+        $response = Response::fromString($string);
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals('Foo Bar', $response->getContent());
     }
 
 // @todo OLD TESTS BELOW, determine if we can use them
@@ -270,7 +278,7 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
 //
 //        // Check we get an array if no code is passed
 //        $codes = Response::responseCodeAsText();
-//        $this->assertType('array', $codes);
+//        $this->assertInternalType('array', $codes);
 //        $this->assertEquals('OK', $codes[200]);
 //    }
 //

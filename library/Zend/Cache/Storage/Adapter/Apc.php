@@ -118,18 +118,6 @@ class Apc extends AbstractAdapter
      */
     public function setOptions($options)
     {
-        if (!is_array($options)
-            && !$options instanceof Traversable
-            && !$options instanceof ApcOptions
-        ) {
-            throw new Exception\InvalidArgumentException(sprintf(
-                '%s expects an array, a Traversable object, or an ApcOptions instance; '
-                . 'received "%s"',
-                __METHOD__,
-                (is_object($options) ? get_class($options) : gettype($options))
-            ));
-        }
-
         if (!$options instanceof ApcOptions) {
             $options = new ApcOptions($options);
         }
@@ -834,7 +822,6 @@ class Apc extends AbstractAdapter
         $this->normalizeKey($key);
         $args = new ArrayObject(array(
             'key'     => & $key,
-            'value'   => & $value,
             'options' => & $options,
         ));
 
@@ -1076,7 +1063,7 @@ class Apc extends AbstractAdapter
         }
 
         $args = new ArrayObject(array(
-            'key'     => & $key,
+            'keys'    => & $keys,
             'options' => & $options,
         ));
 

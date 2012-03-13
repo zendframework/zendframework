@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_LDAP
+ * @package    Zend_Ldap
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -26,17 +26,17 @@ namespace ZendTest\Ldap\Node;
 use Zend\Ldap\Node\RootDse;
 
 /**
- * Zend_LDAP_OnlineTestCase
+ * Zend_Ldap_OnlineTestCase
  */
 
 /**
  * @category   Zend
- * @package    Zend_LDAP
+ * @package    Zend_Ldap
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_LDAP
- * @group      Zend_LDAP_Node
+ * @group      Zend_Ldap
+ * @group      Zend_Ldap_Node
  */
 class RootDseTest extends \ZendTest\Ldap\OnlineTestCase
 {
@@ -53,38 +53,38 @@ class RootDseTest extends \ZendTest\Ldap\OnlineTestCase
     {
         $root=$this->_getLDAP()->getRootDse();
 
-        $this->assertType('boolean', $root->supportsSaslMechanism('GSSAPI'));
-        $this->assertType('boolean', $root->supportsSaslMechanism(array('GSSAPI', 'DIGEST-MD5')));
-        $this->assertType('boolean', $root->supportsVersion('3'));
-        $this->assertType('boolean', $root->supportsVersion(3));
-        $this->assertType('boolean', $root->supportsVersion(array('3', '2')));
-        $this->assertType('boolean', $root->supportsVersion(array(3, 2)));
+        $this->assertInternalType('boolean', $root->supportsSaslMechanism('GSSAPI'));
+        $this->assertInternalType('boolean', $root->supportsSaslMechanism(array('GSSAPI', 'DIGEST-MD5')));
+        $this->assertInternalType('boolean', $root->supportsVersion('3'));
+        $this->assertInternalType('boolean', $root->supportsVersion(3));
+        $this->assertInternalType('boolean', $root->supportsVersion(array('3', '2')));
+        $this->assertInternalType('boolean', $root->supportsVersion(array(3, 2)));
 
         switch ($root->getServerType()) {
             case RootDse::SERVER_TYPE_ACTIVEDIRECTORY:
-                $this->assertType('boolean', $root->supportsControl('1.2.840.113556.1.4.319'));
-                $this->assertType('boolean', $root->supportsControl(array('1.2.840.113556.1.4.319',
+                $this->assertInternalType('boolean', $root->supportsControl('1.2.840.113556.1.4.319'));
+                $this->assertInternalType('boolean', $root->supportsControl(array('1.2.840.113556.1.4.319',
                     '1.2.840.113556.1.4.473')));
-                $this->assertType('boolean', $root->supportsCapability('1.3.6.1.4.1.4203.1.9.1.1'));
-                $this->assertType('boolean', $root->supportsCapability(array('1.3.6.1.4.1.4203.1.9.1.1',
+                $this->assertInternalType('boolean', $root->supportsCapability('1.3.6.1.4.1.4203.1.9.1.1'));
+                $this->assertInternalType('boolean', $root->supportsCapability(array('1.3.6.1.4.1.4203.1.9.1.1',
                     '2.16.840.1.113730.3.4.18')));
-                $this->assertType('boolean', $root->supportsPolicy('unknown'));
-                $this->assertType('boolean', $root->supportsPolicy(array('unknown', 'unknown')));
+                $this->assertInternalType('boolean', $root->supportsPolicy('unknown'));
+                $this->assertInternalType('boolean', $root->supportsPolicy(array('unknown', 'unknown')));
                 break;
             case RootDse::SERVER_TYPE_EDIRECTORY:
-                $this->assertType('boolean', $root->supportsExtension('1.3.6.1.4.1.1466.20037'));
-                $this->assertType('boolean', $root->supportsExtension(array('1.3.6.1.4.1.1466.20037',
+                $this->assertInternalType('boolean', $root->supportsExtension('1.3.6.1.4.1.1466.20037'));
+                $this->assertInternalType('boolean', $root->supportsExtension(array('1.3.6.1.4.1.1466.20037',
                     '1.3.6.1.4.1.4203.1.11.1')));
                 break;
             case RootDse::SERVER_TYPE_OPENLDAP:
-                $this->assertType('boolean', $root->supportsControl('1.3.6.1.4.1.4203.1.9.1.1'));
-                $this->assertType('boolean', $root->supportsControl(array('1.3.6.1.4.1.4203.1.9.1.1',
+                $this->assertInternalType('boolean', $root->supportsControl('1.3.6.1.4.1.4203.1.9.1.1'));
+                $this->assertInternalType('boolean', $root->supportsControl(array('1.3.6.1.4.1.4203.1.9.1.1',
                     '2.16.840.1.113730.3.4.18')));
-                $this->assertType('boolean', $root->supportsExtension('1.3.6.1.4.1.1466.20037'));
-                $this->assertType('boolean', $root->supportsExtension(array('1.3.6.1.4.1.1466.20037',
+                $this->assertInternalType('boolean', $root->supportsExtension('1.3.6.1.4.1.1466.20037'));
+                $this->assertInternalType('boolean', $root->supportsExtension(array('1.3.6.1.4.1.1466.20037',
                     '1.3.6.1.4.1.4203.1.11.1')));
-                $this->assertType('boolean', $root->supportsFeature('1.3.6.1.1.14'));
-                $this->assertType('boolean', $root->supportsFeature(array('1.3.6.1.1.14',
+                $this->assertInternalType('boolean', $root->supportsFeature('1.3.6.1.1.14'));
+                $this->assertInternalType('boolean', $root->supportsFeature(array('1.3.6.1.1.14',
                     '1.3.6.1.4.1.4203.1.5.1')));
                 break;
         }
@@ -108,8 +108,8 @@ class RootDseTest extends \ZendTest\Ldap\OnlineTestCase
                 $this->assertInternalType('string', $root->getDsServiceName());
                 $this->assertInternalType('string', $root->getForestFunctionality());
                 $this->assertInternalType('string', $root->getHighestCommittedUSN());
-                $this->assertType('boolean', $root->getIsGlobalCatalogReady());
-                $this->assertType('boolean', $root->getIsSynchronized());
+                $this->assertInternalType('boolean', $root->getIsGlobalCatalogReady());
+                $this->assertInternalType('boolean', $root->getIsSynchronized());
                 $this->assertInternalType('string', $root->getLDAPServiceName());
                 $this->assertInternalType('string', $root->getRootDomainNamingContext());
                 $this->assertInternalType('string', $root->getSchemaNamingContext());

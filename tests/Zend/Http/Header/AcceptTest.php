@@ -2,7 +2,8 @@
 
 namespace ZendTest\Http\Header;
 
-use Zend\Http\Header\Accept;
+use Zend\Http\Header\GenericHeader,
+    Zend\Http\Header\Accept;
 
 class AcceptTest extends \PHPUnit_Framework_TestCase
 {
@@ -22,173 +23,88 @@ class AcceptTest extends \PHPUnit_Framework_TestCase
 
     public function testAcceptGetFieldValueReturnsProperValue()
     {
-        $this->markTestIncomplete('Accept needs to be completed');
-
-        $acceptHeader = new Accept();
+        $acceptHeader = Accept::fromString('Accept: xxx');
         $this->assertEquals('xxx', $acceptHeader->getFieldValue());
     }
 
     public function testAcceptToStringReturnsHeaderFormattedString()
     {
-        $this->markTestIncomplete('Accept needs to be completed');
-
         $acceptHeader = new Accept();
+        $acceptHeader->addMediaType('text/html', 0.8)
+                     ->addMediaType('application/json', 1)
+                     ->addMediaType('application/atom+xml', 0.9);
 
         // @todo set some values, then test output
-        $this->assertEmpty('Accept: xxx', $acceptHeader->toString());
+        $this->assertEquals('Accept: text/html;q=0.8,application/json,application/atom+xml;q=0.9', $acceptHeader->toString());
     }
 
-    /** Implmentation specific tests here */
+    /** Implementation specific tests here */
 
-//    /**
-//     * Test construct with type
-//     */
-//    public function testConstructWithType()
-//    {
-//        $header= new Header('Accept');
-//        $this->assertEquals($header->getType(), 'Accept');
-//    }
-//
-//    /**
-//     * Test construct with type and value
-//     */
-//    public function testConstructWithTypeValue()
-//    {
-//        $header= new Header('Accept', 'text/html');
-//        $this->assertEquals($header->getType(), 'Accept');
-//        $this->assertEquals($header->getValue(), 'text/html');
-//    }
-//
-//    /**
-//     * Test construct with a header encoded in a raw string
-//     */
-//    public function testConstructWithRawString()
-//    {
-//        $header= new Header('Accept: text/html');
-//        $this->assertEquals($header->getType(), 'Accept');
-//        $this->assertEquals($header->getValue(), 'text/html');
-//    }
-//
-//    /**
-//     * Test construct with Accept-Charset type and multiple values
-//     */
-//    public function testConstructAcceptMultipleValue()
-//    {
-//        $header= new Header('Accept-Charset: iso-8859-1, utf-8');
-//        $this->assertEquals($header->getValue(), 'iso-8859-1, utf-8');
-//    }
-//
-//    /**
-//     * Test normalize header type
-//     */
-//    public function testNormalizeHeaderType()
-//    {
-//        $header= new Header('accept');
-//        $this->assertEquals($header->getType(), 'Accept');
-//        $header->setType('Accept charset');
-//        $this->assertEquals($header->getType(), 'Accept-Charset');
-//    }
-//
-//    /**
-//     * Test load header from a raw string
-//     */
-//    public function testLoadFromString()
-//    {
-//        $header= new Header('Accept');
-//        $this->assertTrue($header->fromString('Accept: text/html'));
-//        $this->assertEquals($header->getType(), 'Accept');
-//        $this->assertEquals($header->getValue(), 'text/html');
-//    }
-//
-//    /**
-//     * Test to string
-//     */
-//    public function testToString()
-//    {
-//        $header= new Header('Accept', 'text/html');
-//        $this->assertEquals((string) $header,"Accept: text/html\r\n");
-//    }
-//
-//    /**
-//     * Test load header from an invalid raw string
-//     */
-//    public function testLoadFromInvalidString()
-//    {
-//        $header= new Header('Accept');
-//        $this->setExpectedException(
-//            'Zend\Http\Exception\InvalidArgumentException',
-//            'The header specified is not valid'
-//        );
-//        $header->fromString('text/html');
-//    }
-//
-//    /**
-//     * Test set type
-//     */
-//    public function testSetType()
-//    {
-//        $header= new Header('Accept');
-//        $header->setType('Accept-Encoding');
-//        $this->assertEquals($header->getType(), 'Accept-Encoding');
-//    }
-//
-//    /**
-//     * Test set value
-//     */
-//    public function testSetValue()
-//    {
-//        $header= new Header('Accept');
-//        $header->setValue('text/html');
-//        $this->assertEquals($header->getValue(), 'text/html');
-//    }
-//
-//    /**
-//     * Test has value
-//     */
-//    public function testHasValue()
-//    {
-//        $header= new Header('Accept: text/html');
-//        $this->assertTrue($header->hasValue('text/html'));
-//        $this->assertEquals($header->getValue(), 'text/html');
-//    }
-//
-//    /**
-//     * Test has value with multiple values
-//     */
-//    public function testHasValueWithMultiple()
-//    {
-//        $header= new Header('Accept: text/html, text/plain');
-//        $this->assertTrue($header->hasValue('text/html'));
-//        $this->assertTrue($header->hasValue('text/plain'));
-//        $this->assertEquals($header->getValue(), 'text/html, text/plain');
-//    }
-//
-//    /**
-//     * Test quality factor value
-//     */
-//    public function testQualityFactor()
-//    {
-//        $header= new Header('Accept-Charset: iso-8859-1, utf-8;q=0.5, *;q=0.5');
-//        $this->assertTrue($header->hasValue('utf-8'));
-//        $this->assertEquals($header->getQualityFactor('utf-8'), '0.5');
-//        $this->assertTrue($header->hasValue('iso-8859-1'));
-//        $this->assertEquals($header->getQualityFactor('iso-8859-1'), '1'); // by default
-//        $this->assertTrue($header->hasValue('*'));
-//        $this->assertEquals($header->getQualityFactor('*'), '0.5');
-//    }
-//
-//    /**
-//     * Test level value
-//     */
-//    public function testLevel()
-//    {
-//        $header= new Header('Accept-Charset: iso-8859-1;level=1, utf-8;q=0.5;level=2, *;q=0.5');
-//        $this->assertTrue($header->hasValue('utf-8'));
-//        $this->assertEquals($header->getLevel('utf-8'), '2');
-//        $this->assertTrue($header->hasValue('iso-8859-1'));
-//        $this->assertEquals($header->getLevel('iso-8859-1'), '1'); // by default
-//        $this->assertTrue($header->hasValue('*'));
-//        $this->assertEquals($header->getLevel('*'),false);
-//    }
+    public function testCanParseCommaSeparatedValues()
+    {
+        $header = Accept::fromString('Accept: text/plain; q=0.5, text/html, text/x-dvi; q=0.8, text/x-c');
+        $this->assertTrue($header->hasMediaType('text/plain'));
+        $this->assertTrue($header->hasMediaType('text/html'));
+        $this->assertTrue($header->hasMediaType('text/x-dvi'));
+        $this->assertTrue($header->hasMediaType('text/x-c'));
+    }
 
+    public function testPrioritizesValuesBasedOnQParameter()
+    {
+        $header   = Accept::fromString('Accept: text/plain; q=0.5, text/html, text/xml; q=0, text/x-dvi; q=0.8, text/x-c');
+        $expected = array(
+            'text/html',
+            'text/x-c',
+            'text/x-dvi',
+            'text/plain',
+        );
+
+        $test = array();
+        foreach($header->getPrioritized() as $type) {
+            $test[] = $type;
+        }
+        $this->assertEquals($expected, $test);
+    }
+    
+    public function testLevel()
+    {
+        $acceptHeader = new Accept();
+        $acceptHeader->addMediaType('text/html', 0.8, 1)
+                     ->addMediaType('text/html', 0.4, 2)
+                     ->addMediaType('application/atom+xml', 0.9);
+
+        $this->assertEquals('Accept: text/html;level=1;q=0.8,text/html;level=2;q=0.4,application/atom+xml;q=0.9', $acceptHeader->toString());
+    }
+    
+    public function testPrioritizedLevel()
+    {
+        $header = Accept::fromString('Accept: text/*;q=0.3, text/html;q=0.7, text/html;level=1,text/html;level=2;q=0.4, */*;q=0.5');
+        
+        $expected = array (
+            'text/html;level=1',
+            'text/html',
+            '*/*',
+            'text/html;level=2',
+            'text/*'
+        );
+        
+        $test = array();
+        foreach($header->getPrioritized() as $type) {
+            $test[] = $type;
+        }
+        $this->assertEquals($expected, $test);
+    }
+    
+    public function testWildcharMediaType()
+    {
+        $acceptHeader = new Accept();
+        $acceptHeader->addMediaType('text/*', 0.8)
+                     ->addMediaType('application/*', 1)
+                     ->addMediaType('*/*', 0.4);
+        
+        $this->assertTrue($acceptHeader->hasMediaType('text/html'));
+        $this->assertTrue($acceptHeader->hasMediaType('application/atom+xml'));
+        $this->assertTrue($acceptHeader->hasMediaType('audio/basic'));
+        $this->assertEquals('Accept: text/*;q=0.8,application/*,*/*;q=0.4', $acceptHeader->toString());
+    }
 }

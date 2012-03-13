@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<section 
+    xmlns="http://docbook.org/ns/docbook" version="5.0"
+    xml:id="zend.mvc.examples">
+  <info><title>Esempi</title></info>
+
+  <section xml:id="zend.mvc.examples.controllers">
+    <info><title>I Controller</title></info>
+
+    <section xml:id="zend.mvc.examples.controllers.accessing-the-request-and-response">
+      <info><title>Accedere alle Request e Response (richieste e risposte)</title></info>
+
+      <para>
+        Quando utilizzi <classname>ActionController</classname> oppure
+        <classname>RestfulController</classname> la gli oggetti 
+        richiesta e la risposta sono costruiti direttamente dentro 
+        il controller prima dei chiamare il metodo <methodname>dispatch()</methodname>.
+        Puoi accedere a queste variabili nei seguenti modi:
+      </para>
+
+      <programlisting language="php"><![CDATA[
+// Using explicit accessor methods
+$request  = $this->getRequest();
+$response = $this->getResponse();
+
+// Using direct property access
+$request  = $this->request;
+$response = $this->response;
+]]></programlisting>
+
+      <para>
+        In aggiunta, il tuo controller implementa 
+        <classname>InjectApplicationEvent</classname> (come anche
+        <classname>ActionController</classname> e  <classname>RestfulController</classname> 
+        fanno) e puoi accedere a questi oggetti dal collegamento 
+        con <classname>MvcEvent</classname>
+      </para>
+
+      <programlisting language="php"><![CDATA[
+$event    = $this->getEvent();
+$request  = $event->getRequest();
+$response = $event->getResponse();
+]]></programlisting>
+
+      <para>
+        Gli snippet precedenti possono essere utili quando componi gli
+        event listener dentro al tuo controller.
+      </para>
+    </section>
+
+    <section xml:id="zend.mvc.examples.controllers.accessing-routing-parameters">
+      <info><title>Accedere ai parametri di instradamento</title></info>
+
+      <para>
+        I parametri di ritorno quando un intradamento è completo sono
+        incapsulati in un oggetto <classname>Zend\Mvc\Router\RouteMatch</classname>.
+        Questo oggetto è spiegato in dettaglio nella sezione sull'instradamento
+        (routing).
+      </para>
+
+      <para>
+        In aggiunta, il tuo controller implementa 
+        <classname>InjectApplicationEvent</classname> (come anche
+        <classname>ActionController</classname> e  <classname>RestfulController</classname> 
+        fanno) e puoi accedere a questi oggetti dal collegamento 
+        con <classname>MvcEvent</classname>
+      </para>
+      <!-- <para>
+        Within your controller, if you implement
+        <classname>InjectApplicationEvent</classname> (as both
+        <classname>ActionController</classname> and
+        <classname>RestfulController</classname> do), you can access this
+        object from the attached <classname>MvcEvent</classname>:
+      </para> --> <!-- Again? see before...-->
+
+      <programlisting language="php"><![CDATA[
+$event   = $this->getEvent();
+$matches = $event->getRouteMatch();
+]]></programlisting>
+
+      <para>
+        Finchè hai l'oggetto <classname>RouteMatch</classname>, puoi
+        ricevere i parametri da lui.
+      </para>
+    </section>
+
+    <section xml:id="zend.mvc.examples.controllers.returning-early">
+      <info><title>Returning early</title></info>
+
+      <para>
+        Puoi effettivamente cortocircuitare l'esecuzione dell'applicazione
+        ad un qualunque momento ritornando una <classname>Response</classname>
+        fal tuo controller o da un qualunque evento. Quando un valore viene
+        scoperto, si ferma una qualunque esecuzione dell'event
+        manager, una istanza <classname>Application</classname> bella e pronta
+        viene immeditamente restituita.
+      </para>
+
+      <para>
+        Un esempio, il plugin <classname>Redirect</classname> ritorna una
+        <classname>Response</classname> che può essere restituita immeditamente
+        per completare la richiesta il più in fretta possibile. Altri casi
+        d'uso possono essere: la risposta di un JSON o di un XML da un web service,
+        ritornare "401 Forbidden", etc.
+      </para>
+    </section>
+  </section>
+
+  <section xml:id="zend.mvc.examples.bootstrapping">
+    <info><title>Bootstrapping</title></info>
+
+    <section xml:id="registering-module-specific-listeners">
+      <info><title>Registrare listener specifici per un modulo</title></info>
+
+      <para>
+        Spesso si vogliono dei listener specifici per un modulo. Un esempio
+        potrebbe essere un metodo semplice ed efficace per introdurre le
+        autorizzazioni, il logging oppure il caching nella tua applicazione.
+      </para>
+
+      <para>
+        Ogni class <classname>Module</classname> può avere un metodo 
+        <methodname>init()</methodname> opzionale. Tipicamente configurerai
+        gli event listener per il tuo modulo qui. Il metodo <methodname>init()</methodname>
+        è chiamato per <emphasis>ogni</emphasis> modulo su <emphasis>ogni</emphasis>
+        pagina richiesta e dovrebbe essere utilizzato <emphasis>solo</emphasis> per
+        eseguire compiti <emphasis>leggeri</emphasis> come registrare eventi
+        nei listener.
+      </para>
+
+      <para>
+        La base della classe <classname>Bootstrap</classname> fornita con il
+        framework ha un <classname>EventManager</classname> associato, un 
+        locator e un istanza del router inizializzate, questo innesca l'evento
+        "bootstrap", con i parametri "application" e "modules". 
+      </para>
+
+      <para>
+        Quindi, un modo per risolvere i listener specifici per modulo è di mettersi
+        in ascolto per  quell'evento e di registrare i listener in quel momento. Un 
+        esempio:
+      </para>
+
+      <programlisting language="php"><![CDATA[
+namespace SomeCustomModule;
+
+use Zend\EventManager\StaticEventManager;
+
+class Module
+{
+    public function init()
+    {
+        // Remember to keep the init() method as lightweight as possible
+        $events = StaticEventManager::getInstance();
+        $events->attach('bootstrap', 'bootstrap', array($this, 'registerListeners'));
+    }
+
+    public function registerListeners($e)
+    {
+        $application = $e->getParam('application');
+        $config      = $e->getParam('config');
+        $view        = $application->getLocator()->get('view');
+        $view->headTitle($config['view']['base_title']);
+
+        $listeners   = new Listeners\ViewListener();
+        $listeners->setView($view);
+        $application->events()->attachAggregate($listeners);
+    }
+}
+]]></programlisting>
+
+      <para>
+        Questo dimostra molte cose. Primo, mostra come registrare un callback
+        sull'evento "bootstrap" del bootstrap (con il metodo <methodname>init()</methodname>).
+        Secondo, mostra che il listener e come può essere usato per registrare
+        listener con l'applicazione. Usa l'istanza <classname>Application</classname>
+        come l'istanza del module manager. Dalla <classname>Application</classname>
+        è capace di attaccare il locator e dal <classname>Manager</classname> ne
+        prende la configurazione. Questo sono spesso utilizzate per prendere la
+        vista, configurare alcuni helper e allora registrare un listener aggregato
+        con l'event manager dell'applicazione.
+      </para>
+    </section>
+  </section>
+</section>

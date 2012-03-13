@@ -20,6 +20,11 @@
  */
 
 /**
+ * @namespace
+ */
+namespace ZendTest\Service\Technorati;
+
+/**
  * Patch for default timezone in PHP >= 5.1.0
  */
 if (!ini_get('date.timezone')) {
@@ -35,25 +40,25 @@ if (!ini_get('date.timezone')) {
  * @group      Zend_Service
  * @group      Zend_Service_Technorati
  */
-class Zend_Service_Technorati_TestCase extends PHPUnit_Framework_TestCase
+class TestCase extends \PHPUnit_Framework_TestCase
 {
     protected function _testConstruct($className, $args)
     {
-        $reflection = new ReflectionClass($className);
+        $reflection = new \ReflectionClass($className);
         try {
             $object = $reflection->newInstanceArgs($args);
-            $this->assertType($className, $object);
-        } catch (Zend_Service_Technorati_Exception $e) {
+            $this->assertInstanceOf($className, $object);
+        } catch (Technorati\Exception\RuntimeException $e) {
             $this->fail("Exception " . $e->getMessage() . " thrown");
         }
     }
 
     protected function _testResultSetItemsInstanceOfResult($resultSetClassName, $args, $resultClassName)
     {
-        $reflection = new ReflectionClass($resultSetClassName);
+        $reflection = new \ReflectionClass($resultSetClassName);
         $resultset = $reflection->newInstanceArgs($args);
         foreach ($resultset as $result) {
-            $this->assertType($resultClassName, $result);
+            $this->assertInstanceOf($resultClassName, $result);
         }
     }
 
@@ -62,13 +67,13 @@ class Zend_Service_Technorati_TestCase extends PHPUnit_Framework_TestCase
         $unobject = unserialize(serialize($resultSet));
         $unresult = null;
 
-        $this->assertType(get_class($resultSet), $unobject);
+        $this->assertInstanceOf(get_class($resultSet), $unobject);
 
         foreach ($resultSet as $index => $result) {
             try {
                 $unobject->seek($index);
                 $unresult = $unobject->current();
-            } catch(OutOfBoundsException $e) {
+            } catch(\OutOfBoundsException $e) {
                 $this->fail("Missing result index $index");
             }
             $this->assertEquals($result, $unresult);
@@ -97,7 +102,7 @@ class Zend_Service_Technorati_TestCase extends PHPUnit_Framework_TestCase
          */
         $unresult = unserialize(serialize($result));
 
-        $this->assertType(get_class($result), $unresult);
+        $this->assertInstanceOf(get_class($result), $unresult);
         $this->assertEquals($result, $unresult);
     }
 
@@ -108,7 +113,7 @@ class Zend_Service_Technorati_TestCase extends PHPUnit_Framework_TestCase
 
     public static function getTestFileContentAsDom($file)
     {
-        $dom = new DOMDocument();
+        $dom = new \DOMDocument();
         $dom->load(self::getTestFilePath($file));
         return $dom;
     }
@@ -116,14 +121,14 @@ class Zend_Service_Technorati_TestCase extends PHPUnit_Framework_TestCase
     public static function getTestFileElementsAsDom($file, $exp = '//item')
     {
         $dom = self::getTestFileContentAsDom($file);
-        $xpath = new DOMXPath($dom);
+        $xpath = new \DOMXPath($dom);
         return $xpath->query($exp);
     }
 
     public static function getTestFileElementAsDom($file, $exp = '//item', $item = 0)
     {
         $dom = self::getTestFileContentAsDom($file);
-        $xpath = new DOMXPath($dom);
+        $xpath = new \DOMXPath($dom);
         $domElements = $xpath->query($exp);
         return $domElements->item($item);
     }

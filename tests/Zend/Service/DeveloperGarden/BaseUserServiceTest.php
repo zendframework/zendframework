@@ -200,7 +200,7 @@ class Zend_Service_DeveloperGarden_BaseUserServiceTest extends PHPUnit_Framework
         $this->assertEquals('0000', $result->getErrorCode());
         $this->assertInternalType('array', $result->Account);
         foreach ($result->Account as $k => $v) {
-            $this->assertType(
+            $this->assertInstanceOf(
                 'Zend_Service_DeveloperGarden_BaseUserService_AccountBalance',
                 $v
             );

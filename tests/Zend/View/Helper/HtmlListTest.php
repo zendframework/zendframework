@@ -25,7 +25,7 @@
 namespace ZendTest\View\Helper;
 
 use Zend\View\Helper,
-    Zend\View\PhpRenderer as View;
+    Zend\View\Renderer\PhpRenderer as View;
 
 /**
  * @category   Zend
@@ -163,7 +163,7 @@ class HtmlListTest extends \PHPUnit_Framework_TestCase
 
         $this->assertContains('<li>one &lt;small&gt; test</li>', $list);
         $this->assertContains('<li>second &amp; third</li>', $list);
-        $this->assertContains('<li>And \'some\' &quot;final&quot; test</li>', $list);
+        $this->assertContains('<li>And &#039;some&#039; &quot;final&quot; test</li>', $list);
     }
 
     public function testListEscapeSwitchedOffForZF2283()

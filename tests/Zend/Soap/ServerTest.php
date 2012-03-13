@@ -354,7 +354,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $server = new Server();
 
         // Correct class name should pass
-        $r = $server->setClass('\ZendTest\Soap\TestAsset\ServerTestClass', 1, 2, 3, 4);
+        $r = $server->setClass('\ZendTest\Soap\TestAsset\ServerTestClass', null, 1, 2, 3, 4);
         $this->assertSame($server, $r);
     }
 
@@ -599,7 +599,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
 
         $server->handle($request);
 
-        $this->assertEquals($expectedResponse, $server->getLastResponse());
+        $this->assertEquals($expectedResponse, $server->getResponse());
     }
 
     public function testHandle()

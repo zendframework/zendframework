@@ -145,7 +145,7 @@ class Zend_Service_DeveloperGarden_OfflineBaseUserServiceTest extends PHPUnit_Fr
 
     public function testGetCredentialOnSoapObject()
     {
-        $this->assertType(
+        $this->assertInstanceOf(
             'Zend_Service_DeveloperGarden_Credential',
             $this->service->getSoapClient()->getCredential()
         );
@@ -153,7 +153,7 @@ class Zend_Service_DeveloperGarden_OfflineBaseUserServiceTest extends PHPUnit_Fr
 
     public function testGetTokenServiceOnSoapObject()
     {
-        $this->assertType(
+        $this->assertInstanceOf(
             'Zend_Service_DeveloperGarden_SecurityTokenServer',
             $this->service->getSoapClient()->getTokenService()
         );

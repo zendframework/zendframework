@@ -30,13 +30,6 @@ namespace Zend\GData;
  *
  * @link http://code.google.com/apis/health
  *
- * @uses       \Zend\GData\GData
- * @uses       \Zend\GData\App\AuthException
- * @uses       \Zend\GData\App\InvalidArgumentException
- * @uses       \Zend\GData\Health\ProfileEntry
- * @uses       \Zend\GData\Health\ProfileFeed
- * @uses       \Zend\GData\Health\ProfileListEntry
- * @uses       \Zend\GData\Health\ProfileListFeed
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Health

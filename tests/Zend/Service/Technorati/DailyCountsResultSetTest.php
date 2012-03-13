@@ -19,13 +19,18 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
+/**
+ * @namespace
+ */
+namespace ZendTest\Service\Technorati;
+use Zend\Service\Technorati;
 
 /**
  * Test helper
  */
 
 /**
- * @see Zend_Service_Technorati_DailyCountsResultSet
+ * @see Technorati\DailyCountsResultSet
  */
 
 
@@ -38,7 +43,7 @@
  * @group      Zend_Service
  * @group      Zend_Service_Technorati
  */
-class Zend_Service_Technorati_DailyCountsResultSetTest extends Zend_Service_Technorati_TestCase
+class DailyCountsResultSetTest extends TestCase
 {
     public function setUp()
     {
@@ -47,17 +52,12 @@ class Zend_Service_Technorati_DailyCountsResultSetTest extends Zend_Service_Tech
 
     public function testConstruct()
     {
-        $this->_testConstruct('Zend_Service_Technorati_DailyCountsResultSet', array($this->dom));
-    }
-
-    public function testConstructThrowsExceptionWithInvalidDom()
-    {
-        $this->_testConstructThrowsExceptionWithInvalidDom('Zend_Service_Technorati_DailyCountsResultSet', 'DOMDocument');
+        $this->_testConstruct('Zend\Service\Technorati\DailyCountsResultSet', array($this->dom));
     }
 
     public function testDailyCountsResultSet()
     {
-        $object = new Zend_Service_Technorati_DailyCountsResultSet($this->dom);
+        $object = new Technorati\DailyCountsResultSet($this->dom);
 
         // check counts
         $this->assertInternalType('integer', $object->totalResults());
@@ -66,20 +66,20 @@ class Zend_Service_Technorati_DailyCountsResultSetTest extends Zend_Service_Tech
         $this->assertEquals(5, $object->totalResultsAvailable());
 
         // check properties
-        $this->assertType('Zend_Uri_Http', $object->getSearchUrl());
-        $this->assertEquals(Zend_Uri::factory('http://technorati.com/search/google'), $object->getSearchUrl());
+        $this->assertInstanceOf('Zend\Uri\Http', $object->getSearchUrl());
+        $this->assertEquals(\Zend\Uri\UriFactory::factory('http://technorati.com/search/google'), $object->getSearchUrl());
     }
 
     public function testDailyCountsResultSetItemsInstanceOfResult()
     {
         $this->_testResultSetItemsInstanceOfResult(
-                    'Zend_Service_Technorati_DailyCountsResultSet',
+                    'Zend\Service\Technorati\DailyCountsResultSet',
                     array($this->dom),
-                    'Zend_Service_Technorati_DailyCountsResult');
+                    'Zend\Service\Technorati\DailyCountsResult');
     }
 
     public function testDailyCountsResultSetSerialization()
     {
-        $this->_testResultSetSerialization(new Zend_Service_Technorati_DailyCountsResultSet($this->dom));
+        $this->_testResultSetSerialization(new Technorati\DailyCountsResultSet($this->dom));
     }
 }

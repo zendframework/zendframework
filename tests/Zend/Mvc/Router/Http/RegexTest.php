@@ -42,6 +42,12 @@ class RegexTest extends TestCase
                 0,
                 array('foo' => 'bar')
             ),
+            'url-encoded-parameters-are-decoded' => array(
+                new Regex('/(?<foo>[^/]+)', '/%foo%'),
+                '/foo+bar',
+                null,
+                array('foo' => 'foo bar')
+            ),
         );
     }
 

@@ -25,7 +25,7 @@ use Zend\Form\Decorator\Fieldset as FieldsetDecorator,
     Zend\Form\Element,
     Zend\Form\Form,
     Zend\Form\SubForm,
-    Zend\View\PhpRenderer as View;
+    Zend\View\Renderer\PhpRenderer as View;
 
 /**
  * Test class for Zend_Form_Decorator_Fieldset

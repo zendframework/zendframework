@@ -51,7 +51,7 @@ class FormTextareaTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->view = new \Zend\View\PhpRenderer();
+        $this->view = new \Zend\View\Renderer\PhpRenderer();
         $this->helper = new \Zend\View\Helper\FormTextarea();
         $this->helper->setView($this->view);
     }

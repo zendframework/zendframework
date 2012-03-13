@@ -13,16 +13,16 @@ class IfModifiedSince implements HeaderDescription
     {
         $header = new static();
 
-        list($name, $value) = preg_split('#: #', $headerLine, 2);
+        list($name, $value) = explode(': ', $headerLine, 2);
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'if-modified-since') {
-            throw new Exception\InvalidArgumentException('Invalid header line for If-Modified-Since string');
+            throw new Exception\InvalidArgumentException('Invalid header line for If-Modified-Since string: "' . $name . '"');
         }
 
         // @todo implementation details
-        $header->value= $value;
-        
+        $header->value = $value;
+
         return $header;
     }
 
@@ -40,5 +40,5 @@ class IfModifiedSince implements HeaderDescription
     {
         return 'If-Modified-Since: ' . $this->getFieldValue();
     }
-    
+
 }

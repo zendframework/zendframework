@@ -37,5 +37,4 @@ namespace Zend\XmlRpc\Client\Exception;
  */
 class HttpException
     extends RuntimeException
-    implements \Zend\XmlRpc\Client\Exception
 {}

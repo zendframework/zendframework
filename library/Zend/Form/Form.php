@@ -32,9 +32,9 @@ use Countable,
     Zend\Loader\PrefixPathMapper,
     Zend\Loader,
     Zend\Json\Json,
-    Zend\View\PhpRenderer,
+    Zend\View\Renderer\PhpRenderer,
     Zend\View\Renderer as View,
-    Zend\Stdlib\IteratorToArray,
+    Zend\Stdlib\ArrayUtils,
     Zend\Translator,
     Zend\Validator\Validator;
 
@@ -255,7 +255,7 @@ class Form implements Iterator, Countable, Validator
     public function __construct($options = null)
     {
         if ($options instanceof Traversable) {
-            $options = IteratorToArray::convert($options);
+            $options = ArrayUtils::iteratorToArray($options);
         }
         if (is_array($options)) {
             $this->setOptions($options);
@@ -1040,7 +1040,7 @@ class Form implements Iterator, Countable, Validator
 
             if (is_array($this->_elementDecorators)) {
                 if ($options instanceof Traversable) {
-                    $options = IteratorToArray::convert($options);
+                    $options = ArrayUtils::iteratorToArray($options);
                 }
                 if (null === $options) {
                     $options = array('decorators' => $this->_elementDecorators);
@@ -1105,7 +1105,7 @@ class Form implements Iterator, Countable, Validator
         }
 
         if ($options instanceof Traversable) {
-            $options = IteratorToArray::convert($options);
+            $options = ArrayUtils::iteratorToArray($options);
         }
 
         if ((null === $options) || !is_array($options)) {
@@ -1305,8 +1305,9 @@ class Form implements Iterator, Countable, Validator
      */
     public function setDefault($name, $value)
     {
-        $name = (string) $name;
-        if ($element = $this->getElement($name)) {
+        $name    = (string) $name;
+        $element = $this->getElement($name);
+        if ($element) {
             $element->setValue($value);
         } else {
             if (is_scalar($value)) {
@@ -1328,11 +1329,13 @@ class Form implements Iterator, Countable, Validator
      */
     public function getValue($name)
     {
-        if ($element = $this->getElement($name)) {
+        $element = $this->getElement($name);
+        if ($element) {
             return $element->getValue();
         }
 
-        if ($subForm = $this->getSubForm($name)) {
+        $subForm = $this->getSubForm($name);
+        if ($subForm) {
             return $subForm->getValues(true);
         }
 
@@ -1467,7 +1470,8 @@ class Form implements Iterator, Countable, Validator
      */
     public function getUnfilteredValue($name)
     {
-        if ($element = $this->getElement($name)) {
+        $element = $this->getElement($name);
+        if ($element) {
             return $element->getUnfilteredValue();
         }
         return null;
@@ -1819,7 +1823,7 @@ class Form implements Iterator, Countable, Validator
         $name = (string) $name;
 
         if ($options instanceof Traversable) {
-            $options = IteratorToArray::convert($options);
+            $options = ArrayUtils::iteratorToArray($options);
         }
         if (is_array($options)) {
             $options['elements'] = $group;
@@ -2240,7 +2244,7 @@ class Form implements Iterator, Countable, Validator
         }
         $context = $data;
         foreach ($this->getElements() as $key => $element) {
-            if (null !== $translator 
+            if (null !== $translator
                 && $this->hasTranslator()
                 && !$element->hasTranslator()
             ) {

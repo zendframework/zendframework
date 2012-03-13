@@ -95,7 +95,8 @@ class ViewHelper extends AbstractDecorator
                         $this->setHelper($helper);
                     } else {
                         $type = $element->getType();
-                        if ($pos = strrpos($type, '\\')) {
+                        $pos  = strrpos($type, '\\');
+                        if ($pos) {
                             $type = substr($type, $pos + 1);
                         }
                         $this->setHelper('form' . ucfirst($type));

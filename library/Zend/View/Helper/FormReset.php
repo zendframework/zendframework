@@ -69,14 +69,15 @@ class FormReset extends FormElement
         }
 
         // Render button
+        $escaper = $this->view->plugin('escape');
         $xhtml = '<input type="reset"'
-               . ' name="' . $this->view->vars()->escape($name) . '"'
-               . ' id="' . $this->view->vars()->escape($id) . '"'
+               . ' name="' . $escaper($name) . '"'
+               . ' id="'   . $escaper($id)   . '"'
                . $disabled;
 
         // add a value if one is given
         if (! empty($value)) {
-            $xhtml .= ' value="' . $this->view->vars()->escape($value) . '"';
+            $xhtml .= ' value="' . $escaper($value) . '"';
         }
 
         // add attributes, close, and return

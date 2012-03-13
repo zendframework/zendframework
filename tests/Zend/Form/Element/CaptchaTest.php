@@ -25,7 +25,7 @@ use Zend\Form\Element\Captcha as CaptchaElement,
     Zend\Form\Form,
     Zend\Captcha\Dumb as DumbCaptcha,
     Zend\Captcha\ReCaptcha,
-    Zend\View\PhpRenderer as View;
+    Zend\View\Renderer\PhpRenderer as View;
 
 /**
  * @category   Zend

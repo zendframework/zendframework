@@ -36,6 +36,6 @@ class Container extends \Zend\Navigation\Container
     public function addPage($page)
     {
         parent::addPage($page);
-        $this->_pages = array();
+        $this->pages = array();
     }
 }

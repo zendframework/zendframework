@@ -23,7 +23,7 @@ namespace ZendTest\Form\Decorator;
 
 use Zend\Form\Decorator\ViewScript as ViewScriptDecorator,
     Zend\Form\Element\Text as TextElement,
-    Zend\View\PhpRenderer as View;
+    Zend\View\Renderer\PhpRenderer as View;
 
 /**
  * Test class for Zend_Form_Decorator_ViewScript

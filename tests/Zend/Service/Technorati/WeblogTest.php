@@ -19,13 +19,18 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
+/**
+ * @namespace
+ */
+namespace ZendTest\Service\Technorati;
+use Zend\Service\Technorati;
 
 /**
  * Test helper
  */
 
 /**
- * @see Zend_Service_Technorati_Weblog
+ * @see Technorati\Weblog
  */
 
 
@@ -38,7 +43,7 @@
  * @group      Zend_Service
  * @group      Zend_Service_Technorati
  */
-class Zend_Service_Technorati_WeblogTest extends Zend_Service_Technorati_TestCase
+class WeblogTest extends TestCase
 {
     public function setUp()
     {
@@ -47,32 +52,27 @@ class Zend_Service_Technorati_WeblogTest extends Zend_Service_Technorati_TestCas
 
     public function testConstruct()
     {
-        $this->_testConstruct('Zend_Service_Technorati_Weblog', array($this->domElement));
-    }
-
-    public function testConstructThrowsExceptionWithInvalidDom()
-    {
-        $this->_testConstructThrowsExceptionWithInvalidDom('Zend_Service_Technorati_Weblog', 'DOMElement');
+        $this->_testConstruct('Zend\Service\Technorati\Weblog', array($this->domElement));
     }
 
     public function testWeblog()
     {
-        $weblog = new Zend_Service_Technorati_Weblog($this->domElement);
+        $weblog = new Technorati\Weblog($this->domElement);
 
         // check name
         $this->assertEquals('Roby Web World Italia', $weblog->getName());
         // check URL
-        $this->assertEquals(Zend_Uri::factory('http://robyww.blogspot.com'), $weblog->getUrl());
+        $this->assertEquals(\Zend\Uri\UriFactory::factory('http://robyww.blogspot.com'), $weblog->getUrl());
         // check Atom Url
-        $this->assertEquals(Zend_Uri::factory('http://robyww.blogspot.com/feeds/posts/atom'), $weblog->getAtomUrl());
+        $this->assertEquals(\Zend\Uri\UriFactory::factory('http://robyww.blogspot.com/feeds/posts/atom'), $weblog->getAtomUrl());
         // check RSS Url
-        $this->assertEquals(Zend_Uri::factory('http://robyww.blogspot.com/feeds/posts/rss'), $weblog->getRssUrl());
+        $this->assertEquals(\Zend\Uri\UriFactory::factory('http://robyww.blogspot.com/feeds/posts/rss'), $weblog->getRssUrl());
         // check inbound blogs
         $this->assertEquals(71, $weblog->getInboundBlogs());
         // check inbound links
         $this->assertEquals(103, $weblog->getInboundLinks());
         // check last update
-        $this->assertEquals(new Zend_Date('2007-11-11 08:47:26 GMT'), $weblog->getLastUpdate());
+        $this->assertEquals(new \Zend\Date\Date('2007-11-11 08:47:26 GMT'), $weblog->getLastUpdate());
         // check rank
         $this->assertEquals(93473, $weblog->getRank());
         // check authors
@@ -89,7 +89,7 @@ class Zend_Service_Technorati_WeblogTest extends Zend_Service_Technorati_TestCas
     public function testWeblogWithTwoAuthors()
     {
         $domElement = self::getTestFileElementAsDom('TestWeblogTwoAuthors.xml', '//weblog');
-        $weblog = new Zend_Service_Technorati_Weblog($domElement);
+        $weblog = new Technorati\Weblog($domElement);
 
         $authors = $weblog->getAuthors();
 
@@ -99,18 +99,18 @@ class Zend_Service_Technorati_WeblogTest extends Zend_Service_Technorati_TestCas
 
         // check first author
         $author = $authors[0];
-        $this->assertType('Zend_Service_Technorati_Author', $author);
+        $this->assertInstanceOf('Zend\Service\Technorati\Author', $author);
         $this->assertEquals('rfilippini', $author->getUsername());
 
         // check second author, be sure it's not the first one
         $author = $authors[1];
-        $this->assertType('Zend_Service_Technorati_Author', $author);
+        $this->assertInstanceOf('Zend\Service\Technorati\Author', $author);
         $this->assertEquals('Rinzi', $author->getUsername());
     }
 
     public function testSetGet()
     {
-        $weblog = new Zend_Service_Technorati_Weblog($this->domElement);
+        $weblog = new Technorati\Weblog($this->domElement);
 
         // check name
         $set = 'foo';
@@ -120,63 +120,39 @@ class Zend_Service_Technorati_WeblogTest extends Zend_Service_Technorati_TestCas
 
         // check URL
 
-        $set = Zend_Uri::factory('http://www.simonecarletti.com/');
+        $set = \Zend\Uri\UriFactory::factory('http://www.simonecarletti.com/');
         $get = $weblog->setUrl($set)->getUrl();
-        $this->assertType('Zend_Uri_Http', $get);
+        $this->assertInstanceOf('Zend\Uri\Http', $get);
         $this->assertEquals($set, $get);
 
         $set = 'http://www.simonecarletti.com/';
         $get = $weblog->setUrl($set)->getUrl();
-        $this->assertType('Zend_Uri_Http', $get);
-        $this->assertEquals(Zend_Uri::factory($set), $get);
-
-        $set = 'http:::/foo';
-        try {
-            $weblog->setUrl($set);
-            $this->fail('Expected Zend_Service_Technorati_Exception not thrown');
-        } catch(Zend_Service_Technorati_Exception $e) {
-            $this->assertContains("Invalid URI", $e->getMessage());
-        }
+        $this->assertInstanceOf('Zend\Uri\Http', $get);
+        $this->assertEquals(\Zend\Uri\UriFactory::factory($set), $get);
 
         // check Atom URL
 
-        $set = Zend_Uri::factory('http://www.simonecarletti.com/');
+        $set = \Zend\Uri\UriFactory::factory('http://www.simonecarletti.com/');
         $get = $weblog->setAtomUrl($set)->getAtomUrl();
-        $this->assertType('Zend_Uri_Http', $get);
+        $this->assertInstanceOf('Zend\Uri\Http', $get);
         $this->assertEquals($set, $get);
 
         $set = 'http://www.simonecarletti.com/';
         $get = $weblog->setAtomUrl($set)->getAtomUrl();
-        $this->assertType('Zend_Uri_Http', $get);
-        $this->assertEquals(Zend_Uri::factory($set), $get);
-
-        $set = 'http:::/foo';
-        try {
-            $weblog->setAtomUrl($set);
-            $this->fail('Expected Zend_Service_Technorati_Exception not thrown');
-        } catch(Zend_Service_Technorati_Exception $e) {
-            $this->assertContains("Invalid URI", $e->getMessage());
-        }
+        $this->assertInstanceOf('Zend\Uri\Http', $get);
+        $this->assertEquals(\Zend\Uri\UriFactory::factory($set), $get);
 
         // check RSS Url
 
-        $set = Zend_Uri::factory('http://www.simonecarletti.com/');
+        $set = \Zend\Uri\UriFactory::factory('http://www.simonecarletti.com/');
         $get = $weblog->setRssUrl($set)->getRssUrl();
-        $this->assertType('Zend_Uri_Http', $get);
+        $this->assertInstanceOf('Zend\Uri\Http', $get);
         $this->assertEquals($set, $get);
 
         $set = 'http://www.simonecarletti.com/';
         $get = $weblog->setRssUrl($set)->getRssUrl();
-        $this->assertType('Zend_Uri_Http', $get);
-        $this->assertEquals(Zend_Uri::factory($set), $get);
-
-        $set = 'http:::/foo';
-        try {
-            $weblog->setRssUrl($set);
-            $this->fail('Expected Zend_Service_Technorati_Exception not thrown');
-        } catch(Zend_Service_Technorati_Exception $e) {
-            $this->assertContains("Invalid URI", $e->getMessage());
-        }
+        $this->assertInstanceOf('Zend\Uri\Http', $get);
+        $this->assertEquals(\Zend\Uri\UriFactory::factory($set), $get);
 
         // check inbound blogs
 
@@ -206,8 +182,8 @@ class Zend_Service_Technorati_WeblogTest extends Zend_Service_Technorati_TestCas
 
         $set = '2007-11-11 08:47:26 GMT';
         $get = $weblog->setLastUpdate($set)->getLastUpdate();
-        $this->assertType('Zend_Date', $get);
-        $this->assertEquals(new Zend_Date($set), $get);
+        $this->assertInstanceOf('Zend\Date\Date', $get);
+        $this->assertEquals(new \Zend\Date\Date($set), $get);
 
         /* not supported
         $set = time();
@@ -218,8 +194,8 @@ class Zend_Service_Technorati_WeblogTest extends Zend_Service_Technorati_TestCas
         $set = '200ty';
         try {
             $weblog->setLastUpdate($set);
-            $this->fail('Expected Zend_Service_Technorati_Exception not thrown');
-        } catch(Zend_Service_Technorati_Exception $e) {
+            $this->fail('Expected Zend\Service\Technorati\Exception not thrown');
+        } catch(Technorati\Exception\RuntimeException $e) {
             $this->assertContains("valid Date/Time", $e->getMessage());
         }
 
@@ -239,36 +215,69 @@ class Zend_Service_Technorati_WeblogTest extends Zend_Service_Technorati_TestCas
 
         $set = false;
         $get = $weblog->setHasPhoto($set)->hasPhoto();
-        $this->assertType('boolean', $get);
+        $this->assertInternalType('boolean', $get);
         $this->assertEquals($set, $get);
 
         $set = 0;
         $get = $weblog->setHasPhoto($set)->hasPhoto();
-        $this->assertType('boolean', $get);
+        $this->assertInternalType('boolean', $get);
         $this->assertEquals((bool) $set, $get);
 
         // check lat
 
         $set = 1.3;
         $get = $weblog->setLat($set)->getLat();
-        $this->assertType('float', $get);
+        $this->assertInternalType('float', $get);
         $this->assertEquals($set, $get);
 
         $set = '1.3';
         $get = $weblog->setLat($set)->getLat();
-        $this->assertType('float', $get);
+        $this->assertInternalType('float', $get);
         $this->assertEquals((float) $set, $get);
 
         // check lon
 
         $set = 1.3;
         $get = $weblog->setLon($set)->getLon();
-        $this->assertType('float', $get);
+        $this->assertInternalType('float', $get);
         $this->assertEquals($set, $get);
 
         $set = '1.3';
         $get = $weblog->setLon($set)->getLon();
-        $this->assertType('float', $get);
+        $this->assertInternalType('float', $get);
         $this->assertEquals((float) $set, $get);
+    }
+
+    public function testSettingInvalidUrlShouldRaiseException()
+    {
+        $this->markTestIncomplete('Uri::isValid() does not do complete URI validation yet');
+
+        $weblog = new Technorati\Weblog($this->domElement);
+
+        $set = 'http:::/foo';
+        $this->setExpectedException('Zend\Service\Technorati\Exception\RuntimeException', 'invalid URI');
+        $weblog->setUrl($set);
+    }
+
+    public function testSettingInvalidAtomUrlShouldRaiseException()
+    {
+        $this->markTestIncomplete('Uri::isValid() does not do complete URI validation yet');
+
+        $weblog = new Technorati\Weblog($this->domElement);
+
+        $set = 'http:::/foo';
+        $this->setExpectedException('Zend\Service\Technorati\Exception\RuntimeException', 'invalid URI');
+        $weblog->setAtomUrl($set);
+    }
+
+    public function testSettingInvalidRssUrlShouldRaiseException()
+    {
+        $this->markTestIncomplete('Uri::isValid() does not do complete URI validation yet');
+
+        $weblog = new Technorati\Weblog($this->domElement);
+
+        $set = 'http:::/foo';
+        $this->setExpectedException('Zend\Service\Technorati\Exception\RuntimeException', 'invalid URI');
+        $weblog->setRssUrl($set);
     }
 }

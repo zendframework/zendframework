@@ -25,7 +25,7 @@
  */
 namespace Zend\Mail\Storage\Part;
 
-use Zend\Mail\Storage\Part;
+use Zend\Mail\Storage;
 
 /**
  * @category   Zend
@@ -34,6 +34,6 @@ use Zend\Mail\Storage\Part;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Exception extends Part\Exception
+interface Exception extends Storage\Exception
 {
 }

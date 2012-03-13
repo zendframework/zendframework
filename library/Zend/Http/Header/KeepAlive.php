@@ -13,16 +13,16 @@ class KeepAlive implements HeaderDescription
     {
         $header = new static();
 
-        list($name, $value) = preg_split('#: #', $headerLine, 2);
+        list($name, $value) = explode(': ', $headerLine, 2);
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'keep-alive') {
-            throw new Exception\InvalidArgumentException('Invalid header line for Keep-Alive string');
+            throw new Exception\InvalidArgumentException('Invalid header line for Keep-Alive string: "' . $name . '"');
         }
 
         // @todo implementation details
-        $header->value= $value;
-        
+        $header->value = $value;
+
         return $header;
     }
 
@@ -40,5 +40,5 @@ class KeepAlive implements HeaderDescription
     {
         return 'Keep-Alive: ' . $this->getFieldValue();
     }
-    
+
 }

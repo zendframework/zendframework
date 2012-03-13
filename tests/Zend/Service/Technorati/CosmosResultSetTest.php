@@ -19,13 +19,18 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
+/**
+ * @namespace
+ */
+namespace ZendTest\Service\Technorati;
+use Zend\Service\Technorati;
 
 /**
  * Test helper
  */
 
 /**
- * @see Zend_Service_Technorati_CosmosResultSet
+ * @see Technorati\CosmosResultSet
  */
 
 
@@ -38,7 +43,7 @@
  * @group      Zend_Service
  * @group      Zend_Service_Technorati
  */
-class Zend_Service_Technorati_CosmosResultSetTest extends Zend_Service_Technorati_TestCase
+class CosmosResultSetTest extends TestCase
 {
     public function setUp()
     {
@@ -47,17 +52,12 @@ class Zend_Service_Technorati_CosmosResultSetTest extends Zend_Service_Technorat
 
     public function testConstruct()
     {
-        $this->_testConstruct('Zend_Service_Technorati_CosmosResultSet', array($this->dom));
-    }
-
-    public function testConstructThrowsExceptionWithInvalidDom()
-    {
-        $this->_testConstructThrowsExceptionWithInvalidDom('Zend_Service_Technorati_CosmosResultSet', 'DOMDocument');
+        $this->_testConstruct('Zend\Service\Technorati\CosmosResultSet', array($this->dom));
     }
 
     public function testCosmosResultSet()
     {
-        $object = new Zend_Service_Technorati_CosmosResultSet($this->dom);
+        $object = new Technorati\CosmosResultSet($this->dom);
 
         // check counts
         $this->assertInternalType('integer', $object->totalResults());
@@ -66,48 +66,48 @@ class Zend_Service_Technorati_CosmosResultSetTest extends Zend_Service_Technorat
         $this->assertEquals(278, $object->totalResultsAvailable());
 
         // check properties
-        $this->assertType('Zend_Uri_Http', $object->getUrl());
-        $this->assertEquals(Zend_Uri::factory('http://www.simonecarletti.com/blog'), $object->getUrl());
+        $this->assertInstanceOf('Zend\Uri\Http', $object->getUrl());
+        $this->assertEquals(\Zend\Uri\UriFactory::factory('http://www.simonecarletti.com/blog'), $object->getUrl());
         $this->assertInternalType('integer', $object->getInboundLinks());
         $this->assertEquals(278, $object->getInboundLinks());
 
         // check weblog
-        $this->assertType('Zend_Service_Technorati_Weblog', $object->getWeblog());
+        $this->assertInstanceOf('Zend\Service\Technorati\Weblog', $object->getWeblog());
         $this->assertEquals('Simone Carletti\'s Blog', $object->getWeblog()->getName());
     }
 
     public function testCosmosResultSetItemsInstanceOfResult()
     {
         $this->_testResultSetItemsInstanceOfResult(
-                    'Zend_Service_Technorati_CosmosResultSet',
+                    'Zend\Service\Technorati\CosmosResultSet',
                     array($this->dom),
-                    'Zend_Service_Technorati_CosmosResult');
+                    'Zend\Service\Technorati\CosmosResult');
     }
 
     public function testCosmosResultSetSerialization()
     {
-        $this->_testResultSetSerialization(new Zend_Service_Technorati_CosmosResultSet($this->dom));
+        $this->_testResultSetSerialization(new Technorati\CosmosResultSet($this->dom));
     }
 
     public function testCosmosResultSetSiteLink()
     {
         $dom = self::getTestFileContentAsDom('TestCosmosResultSetSiteLink.xml');
-        $object = new Zend_Service_Technorati_CosmosResultSet($dom);
+        $object = new Technorati\CosmosResultSet($dom);
 
         $this->assertEquals(3, $object->totalResults());
         $this->assertEquals(949, $object->totalResultsAvailable());
-        $this->assertEquals(Zend_Uri::factory('http://www.simonecarletti.com'), $object->getUrl());
+        $this->assertEquals(\Zend\Uri\UriFactory::factory('http://www.simonecarletti.com'), $object->getUrl());
         $this->assertEquals(949, $object->getInboundLinks());
     }
 
     public function testCosmosResultSetSiteWeblog()
     {
         $dom = self::getTestFileContentAsDom('TestCosmosResultSetSiteWeblog.xml');
-        $object = new Zend_Service_Technorati_CosmosResultSet($dom);
+        $object = new Technorati\CosmosResultSet($dom);
 
         $this->assertEquals(3, $object->totalResults());
         $this->assertEquals(39, $object->totalResultsAvailable());
-        $this->assertEquals(Zend_Uri::factory('http://www.simonecarletti.com'), $object->getUrl());
+        $this->assertEquals(\Zend\Uri\UriFactory::factory('http://www.simonecarletti.com'), $object->getUrl());
         $this->assertEquals(39, $object->getInboundBlogs());
     }
 
@@ -117,7 +117,7 @@ class Zend_Service_Technorati_CosmosResultSetTest extends Zend_Service_Technorat
         // I only have to ensure the class doens't fail and $object->totalResultsAvailable == 0
 
         $dom = self::getTestFileContentAsDom('TestCosmosResultSetSiteWeblogWithMissingInboundblogs.xml');
-        $object = new Zend_Service_Technorati_CosmosResultSet($dom);
+        $object = new Technorati\CosmosResultSet($dom);
 
         $this->assertEquals(3, $object->totalResults());
         $this->assertEquals(0, $object->totalResultsAvailable());
@@ -138,17 +138,17 @@ class Zend_Service_Technorati_CosmosResultSetTest extends Zend_Service_Technorat
         // $dom = self::getTestFileContentAsDom('TestCosmosResultSetSiteUrlWithInvalidSchema.xml');
         // $object = new Zend_Service_Technorati_CosmosResultSet($dom);
 
-        // $this->assertEquals(Zend_Uri::factory('http://www.simonecarletti.com'), $object->getUrl());
+        // $this->assertEquals(Zend_UriFactory::factory('http://www.simonecarletti.com'), $object->getUrl());
     }
 
     public function testCosmosResultSetBlogLink()
     {
         $dom = self::getTestFileContentAsDom('TestCosmosResultSetBlogLink.xml');
-        $object = new Zend_Service_Technorati_CosmosResultSet($dom);
+        $object = new Technorati\CosmosResultSet($dom);
 
         $this->assertEquals(20, $object->totalResults());
         $this->assertEquals(298, $object->totalResultsAvailable());
-        $this->assertEquals(Zend_Uri::factory('http://www.simonecarletti.com/blog'), $object->getUrl());
+        $this->assertEquals(\Zend\Uri\UriFactory::factory('http://www.simonecarletti.com/blog'), $object->getUrl());
         $this->assertEquals(298, $object->getInboundLinks());
         $this->assertEquals('Simone Carletti\'s Blog', $object->getWeblog()->getName());
     }
@@ -156,11 +156,11 @@ class Zend_Service_Technorati_CosmosResultSetTest extends Zend_Service_Technorat
     public function testCosmosResultSetBlogWeblog()
     {
         $dom = self::getTestFileContentAsDom('TestCosmosResultSetBlogWeblog.xml');
-        $object = new Zend_Service_Technorati_CosmosResultSet($dom);
+        $object = new Technorati\CosmosResultSet($dom);
 
         $this->assertEquals(20, $object->totalResults());
         $this->assertEquals(85, $object->totalResultsAvailable());
-        $this->assertEquals(Zend_Uri::factory('http://www.simonecarletti.com/blog'), $object->getUrl());
+        $this->assertEquals(\Zend\Uri\UriFactory::factory('http://www.simonecarletti.com/blog'), $object->getUrl());
         $this->assertEquals(85, $object->getInboundBlogs());
         $this->assertEquals('Simone Carletti\'s Blog', $object->getWeblog()->getName());
     }

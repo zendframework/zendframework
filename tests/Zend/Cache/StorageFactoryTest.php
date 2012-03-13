@@ -42,6 +42,8 @@ class StorageFactoryTest extends \PHPUnit_Framework_TestCase
 
     public function tearDown()
     {
+        Cache\StorageFactory::resetAdapterBroker();
+        Cache\StorageFactory::resetPluginBroker();
     }
 
     public function testDefaultAdapterBroker()
@@ -59,8 +61,13 @@ class StorageFactoryTest extends \PHPUnit_Framework_TestCase
 
     public function testAdapterFactory()
     {
-        $cache = Cache\StorageFactory::adapterFactory('Memory');
-        $this->assertInstanceOf('Zend\Cache\Storage\Adapter\Memory', $cache);
+        $adapter1 = Cache\StorageFactory::adapterFactory('Memory');
+        $this->assertInstanceOf('Zend\Cache\Storage\Adapter\Memory', $adapter1);
+
+        $adapter2 = Cache\StorageFactory::adapterFactory('Memory');
+        $this->assertInstanceOf('Zend\Cache\Storage\Adapter\Memory', $adapter2);
+
+        $this->assertNotSame($adapter1, $adapter2);
     }
 
     public function testDefaultPluginBroker()
@@ -78,8 +85,13 @@ class StorageFactoryTest extends \PHPUnit_Framework_TestCase
 
     public function testPluginFactory()
     {
-        $plugin = Cache\StorageFactory::pluginFactory('Serializer');
-        $this->assertInstanceOf('Zend\Cache\Storage\Plugin\Serializer', $plugin);
+        $plugin1 = Cache\StorageFactory::pluginFactory('Serializer');
+        $this->assertInstanceOf('Zend\Cache\Storage\Plugin\Serializer', $plugin1);
+
+        $plugin2 = Cache\StorageFactory::pluginFactory('Serializer');
+        $this->assertInstanceOf('Zend\Cache\Storage\Plugin\Serializer', $plugin2);
+
+        $this->assertNotSame($plugin1, $plugin2);
     }
 
     public function testFactoryAdapterAsString()
@@ -114,8 +126,9 @@ class StorageFactoryTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Zend\Cache\Storage\Adapter\Memory', $cache);
 
         // test plugin structure
-        foreach ($cache->getPlugins() as $i => $plugin) {
-            $this->assertInstanceOf('Zend\Cache\Storage\Plugin\\' . $plugins[$i], $plugin);
+        $i = 0;
+        foreach ($cache->getPlugins() as $plugin) {
+            $this->assertInstanceOf('Zend\Cache\Storage\Plugin\\' . $plugins[$i++], $plugin);
         }
     }
 

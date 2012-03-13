@@ -63,24 +63,19 @@ defined('TESTS_ZEND_AUTH_ADAPTER_DBTABLE_PDO_SQLITE_DATABASE') || define('TESTS_
 defined('TESTS_ZEND_AUTH_ADAPTER_LDAP_ONLINE_ENABLED') || define('TESTS_ZEND_AUTH_ADAPTER_LDAP_ONLINE_ENABLED', false);
 
 /**
- * Zend_Cache
- *
- * TESTS_ZEND_CACHE_SQLITE_ENABLED    => sqlite extension has to be enabled
- * TESTS_ZEND_CACHE_APC_ENABLED       => apc extension has to be enabled
- * TESTS_ZEND_CACHE_MEMCACHED_ENABLED => memcache extension has to be enabled and
- *                                       a memcached server has to be available
- * TESTS_ZEND_CACHE_XCACHE_ENABLED    => xcache extension has to be enabled
+ * Zend\Cache\Storage\Adapter
  */
-defined('TESTS_ZEND_CACHE_SQLITE_ENABLED') || define('TESTS_ZEND_CACHE_SQLITE_ENABLED', false);
 defined('TESTS_ZEND_CACHE_APC_ENABLED') || define('TESTS_ZEND_CACHE_APC_ENABLED', false);
+defined('TESTS_ZEND_CACHE_SQLITE_ENABLED') || define('TESTS_ZEND_CACHE_SQLITE_ENABLED', false);
 defined('TESTS_ZEND_CACHE_XCACHE_ENABLED') || define('TESTS_ZEND_CACHE_XCACHE_ENABLED', false);
 defined('TESTS_ZEND_CACHE_XCACHE_USER') || define('TESTS_ZEND_CACHE_XCACHE_USER', null);
 defined('TESTS_ZEND_CACHE_XCACHE_PASSWORD') || define('TESTS_ZEND_CACHE_XCACHE_PASSWORD', null);
 defined('TESTS_ZEND_CACHE_PLATFORM_ENABLED') || define('TESTS_ZEND_CACHE_PLATFORM_ENABLED', false);
+defined('TESTS_ZEND_CACHE_WINCACHE_ENABLED') || define('TESTS_ZEND_CACHE_WINCACHE_ENABLED', false);
+defined('TESTS_ZEND_CACHE_ZEND_SERVER_ENABLED') || define('TESTS_ZEND_CACHE_ZEND_SERVER_ENABLED', false);
 defined('TESTS_ZEND_CACHE_MEMCACHED_ENABLED') || define('TESTS_ZEND_CACHE_MEMCACHED_ENABLED', false);
 defined('TESTS_ZEND_CACHE_MEMCACHED_HOST') || define('TESTS_ZEND_CACHE_MEMCACHED_HOST', '127.0.0.1');
 defined('TESTS_ZEND_CACHE_MEMCACHED_PORT') || define('TESTS_ZEND_CACHE_MEMCACHED_PORT', 11211);
-defined('TESTS_ZEND_CACHE_MEMCACHED_PERSISTENT') || define('TESTS_ZEND_CACHE_MEMCACHED_PERSISTENT', true);
 
 /**
  * Zend_Controller
@@ -561,6 +556,19 @@ defined('TESTS_ZEND_QUEUE_MEMCACHEQ_PORT') || define('TESTS_ZEND_QUEUE_MEMCACHEQ
 defined('TESTS_ZEND_QUEUE_PLATFORMJQ_ENABLED') || define('TESTS_ZEND_QUEUE_PLATFORMJQ_ENABLED', false);
 defined('TESTS_ZEND_QUEUE_PLATFORMJQ_HOST') || define('TESTS_ZEND_QUEUE_PLATFORMJQ_HOST', false);
 defined('TESTS_ZEND_QUEUE_PLATFORMJQ_PASS') || define('TESTS_ZEND_QUEUE_PLATFORMJQ_PASS', false);
+
+
+/**
+ * Zend\Service\AgileZen online tests
+ */
+define('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_ENABLED',false);
+define('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_APIKEY','insert the API key');
+define('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_PROJECT_ID','insert the project id');
+define('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_STORY_ID','insert the story id');
+define('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_INVITE_EMAIL','insert email for invitation');
+define('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_INVITE_ROLE_ID','insert role id for invitation');
+define('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_MEMBER_NAME','insert the member name to add to the project');
+
 
 /**
  * Zend_Service_Amazon online tests

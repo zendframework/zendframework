@@ -168,8 +168,6 @@ return array();
 
     <programlisting language="php"><![CDATA[
 return array(
-    'routes' => array(
-    ),
     'di' => array(
         'instance' => array(
             'alias' => array(
@@ -314,14 +312,15 @@ class Module implements AutoloaderProvider
 <?php
 namespace <module name>\Controller;
 
-use Zend\Mvc\Controller\ActionController;
+use Zend\Mvc\Controller\ActionController,
+    Zend\View\Model\ViewModel;
 
 class HelloController extends ActionController
 {
     public function worldAction()
     {
         $message = $this->getRequest()->query()->get('message', 'foo');
-        return array('message' => $message);
+        return new ViewModel(array('message' => $message));
     }
 }
 ]]></programlisting>
@@ -358,24 +357,15 @@ class HelloController extends ActionController
     </itemizedlist>
 
     <para>
-      You'll notice that we're not doing anything with the view. This is
-      by design; the controller is simply an object martialling input for
-      the model, and returning some data. This keeps a solid separation
-      of concerns.
-    </para>
-
-    <para>
-      If you explore the <classname>ZendSkeletonApplication</classname>
-      repository, you'll find a file
-      <filename>module/Application/src/Application/View/Listener.php</filename>,
-      containing a class <classname>Application\View\Listener</classname>.
-      This listener aggregate is registered in the bootstrap (class
-      <classname>Application\Bootstrap</classname> in
-      <filename>module/Application/src/Application/Bootstrap.php</filename>),
-      and listens on the application's <classname>dispatch</classname> event
-      in order to first render an action's view script, and then inject
-      that into the layout. It uses the return value from actions to seed
-      the variables of the view prior to rendering.
+      We return a <classname>ViewModel</classname>. The view layer will use this
+      when rendering the view, pulling variables and the template name from it.
+      By default, you can omit the template name, and it will resolve to
+      "lowercase-controller-name/lowercase-action-name". However, you can
+      override this to specify something different by calling
+      <methodname>setTemplate()</methodname> on the
+      <classname>ViewModel</classname> instance. Typically, templates will
+      resolve to files with a ".phtml" suffix in your module's
+      <filename>view</filename> directory.
     </para>
 
     <para>
@@ -387,25 +377,15 @@ class HelloController extends ActionController
     <info><title>Create a view script</title></info>
 
     <para>
-      Create the directory
-      <filename>views/&lt;module name&gt;-hello</filename>, where
-      <varname>&lt;module name&gt;</varname> is a lowercase,
-      dash-separated version of the module's namespace -- e.g., namespace
-      <classname>ZendUser</classname> would translate to
-      <filename>zend-user</filename>, and we'd create the directory
-      <filename>zend-user-hello</filename>.
-    </para>
-
-    <para>
-      Inside that directory, create a file named
-      <filename>world.phtml</filename>. Inside that, paste in the
-      following:
+      Create the directory <filename>view/hello</filename>.  Inside that
+      directory, create a file named <filename>world.phtml</filename>. Inside
+      that, paste in the following:
     </para>
 
     <programlisting language="php"><![CDATA[
 <h1>Greetings!</h1>
 
-<p>You said "$foo".</p>
+<p>You said "<?php echo $this->escape($foo) ?>".</p>
 ]]></programlisting>
 
     <para>
@@ -414,12 +394,11 @@ class HelloController extends ActionController
 
     <note>
       <para>
-        Those of you who are security conscious may be worried about
-        the above view script, as it will appear that we have unfiltered
-        input being returned. However, by default, the Zend class will
-        return escaped variables; you will need to purposely request a raw
-        value if you wish to use it. The above usage should be secure from
-        XSS attacks.
+        What is the method <methodname>escape()</methodname>? It's actually a
+        <link linkend="zend.view.helpers">view helper</link>, and it's designed
+        to help mitigate from <acronym>XSS</acronym> attacks. Never trust user
+        input; if you are at all uncertain about the source of a given variable
+        in your view script, escape it.
       </para>
     </note>
   </section>
@@ -440,117 +419,44 @@ class HelloController extends ActionController
         you to specify this: "/zend-user-hello/world". We're
         going to create a route here mainly for illustration purposes, as
         creating explicit routes is a recommended practice.
+        The application will look for a 
+        <classname>Zend\Mvc\Router\RouteStack</classname> instance to setup
+        routing. The default generated router is a 
+        <classname>Zend\Mvc\Router\Http\TreeRouteStack</classname>.
       </para>
     </note>
 
     <para>
       Open your <filename>configs/module.config.php</filename> file, and
-      modify it to add to the "routes" array so it reads as
+      modify it to add to the "routes" parameters so it reads as
       follows:
     </para>
 
     <programlisting language="php"><![CDATA[
 return array(
-    'routes' => array(
-        '<module name>-hello-world' => array(
-            'type'    => `Zend\Mvc\Router\Http\Literal`,
-            'options' => array(
-                'route' => '/hello/world',
-                'defaults' => array(
-                    'controller' => '<module name>-hello',
-                    'action'     => 'world',
-                ),
-            ),
-        ),
-    ),
-    // ... di configuration ...
-);
-]]></programlisting>
-
-    <para>
-      As before, <varname>&lt;module-name&gt;</varname> should be the
-      lowercased, dash-separated version of the module namespace.
-    </para>
-
-    <para>
-      We now have a route to our controller. However, how will it know
-      which controller class to load?
-      <varname>&lt;module name&gt;-hello</varname> is descriptive, but
-      it's not the class name. The answer is via a dependency alias.
-    </para>
-  </section>
-
-  <section xml:id="zend.mvc.quick-start.create-a-di-alias">
-    <info><title>Create a DI alias</title></info>
-
-    <para>
-      Remember the Locator we discussed when talking about the
-      <classname>Application</classname> class? Well, by default, controllers
-      are pulled from it. When your router returns matches, the
-      assumption is that we have a "controller" key in those
-      matches, and we use that to retrieve the controller class.
-    </para>
-
-    <para>
-      However, how does this work when we have descriptive names that
-      aren't class names? Simple: aliasing.
-    </para>
-
-    <para>
-      Open your <filename>config/module.config.php</filename> file, and
-      modify it to add to the DI configuration's "instance"
-      array so it reads as follows:
-    </para>
-
-    <programlisting language="php"><![CDATA[
-return array(
-    // ... routes configuration ...
     'di' => array(
         'instance' => array(
-            'alias' => array(
-                '<module name>-hello' => '<module namespace>\Controller\HelloController',
-            ),
-            'Zend\View\TemplatePathStack' => array('parameters' => array(
-                'paths'  => array(
-                    '<module-name>' => __DIR__ . '/../views',
+            'Zend\Mvc\Router\RouteStack' => array(
+                'parameters' => array(
+                    'routes' => array(
+                        '<module name>-hello-world' => array(
+                            'type'    => `Zend\Mvc\Router\Http\Literal`,
+                                'options' => array(
+                                'route' => '/hello/world',
+                                'defaults' => array(
+                                    'controller' => '<module namespace>\Controller\HelloController',
+                                    'action'     => 'world',
+                                ),
+                            ),
+                        ),
+                    ),
                 ),
-            )),
+            ),
         ),
+        // ... other di configuration ...
     ),
 );
 ]]></programlisting>
-
-    <para>
-      The part to pay attention to above is the "alias" key and
-      values within it. With that one configuration, we now can be
-      assured that when our route is matched, we'll load this controller.
-    </para>
-
-    <para>
-      Okay, we're about ready to test!
-    </para>
-
-    <note>
-      <para>
-        While we've only create an alias here, it's important to note
-        again that the controllers are pulled from the DI container by
-        default. This is an incredibly powerful paradigm. What it means is
-        that you can simply create setter methods for your controller
-        dependencies, and rely on the DI container to inject them prior to
-        use.
-      </para>
-
-      <para>
-        While the default controller implementations (the
-        <classname>ActionController</classname> and
-        <classname>RestfulController</classname>) also implement the
-        LocatorAware interface, which will inject the Locator (usually the DI
-        container) attached to the Application into your controllers, we
-        recommend not relying on this, and instead adding explicit dependencies
-        via constructor or setter injection. This will make your code
-        self-documenting and easier to debug.
-      </para>
-    </note>
   </section>
 
   <section xml:id="zend.mvc.quick-start.tell-the-application-about-our-module">

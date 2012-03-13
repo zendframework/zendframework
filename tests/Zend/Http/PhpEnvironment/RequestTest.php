@@ -152,6 +152,17 @@ class RequestTest extends TestCase
                 '/dir',
                 '/dir'
             ),
+            array(
+                array(
+                    'SCRIPT_NAME'     => '/~username/public/index.php',
+                    'REQUEST_URI'     => '/~username/public/',
+                    'PHP_SELF'        => '/~username/public/index.php',
+                    'SCRIPT_FILENAME' => '/Users/username/Sites/public/index.php',
+                    'ORIG_SCRIPT_NAME'=> null
+                ),
+                '/~username/public',
+                '/~username/public'
+            ),
         );
     }
 
@@ -169,4 +180,59 @@ class RequestTest extends TestCase
         $this->assertEquals($baseUrl,  $request->getBaseUrl());
         $this->assertEquals($basePath, $request->getBasePath());
     }
+
+    /**
+     * Data provider for testing server provided headers.
+     */
+    public static function serverHeaderProvider()
+    {
+        return array(
+            array(
+                array(
+                    'HTTP_USER_AGENT'     => 'Dummy',
+                ),
+                'User-Agent',
+                'Dummy'
+            ),
+            array(
+                array(
+                    'CONTENT_TYPE'     => 'text/html',
+                ),
+                'Content-Type',
+                'text/html'
+            ),
+            array(
+                array(
+                    'CONTENT_LENGTH'     => 12,
+                ),
+                'Content-Length',
+                12
+            ),
+            array(
+                array(
+                    'CONTENT_MD5'     => md5('a'),
+                ),
+                'Content-MD5',
+                md5('a')
+            ),
+        );
+    }
+
+    /**
+     * @dataProvider serverHeaderProvider
+     * @param array  $server
+     * @param string $name
+     * @param string $value
+     */
+    public function testHeadersWithMinus(array $server, $name, $value)
+    {
+        $_SERVER = $server;
+        $request = new Request();
+
+        $header = $request->headers()->get($name);
+        $this->assertNotEquals($header, false);
+        $this->assertEquals($name,  $header->getFieldName($value));
+        $this->assertEquals($value, $header->getFieldValue($value));
+    }
+
 }

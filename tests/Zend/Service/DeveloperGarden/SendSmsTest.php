@@ -60,7 +60,7 @@ class Zend_Service_DeveloperGarden_SendSmsTest extends PHPUnit_Framework_TestCas
         );
         $this->service = new Zend_Service_DeveloperGarden_SendSms_Mock($config);
         // limit to mock env
-        $this->assertType(
+        $this->assertInstanceOf(
             'Zend_Service_DeveloperGarden_SendSms_Mock',
             $this->service->setEnvironment(Zend_Service_DeveloperGarden_SendSms_Mock::ENV_MOCK)
         );
@@ -77,12 +77,12 @@ class Zend_Service_DeveloperGarden_SendSmsTest extends PHPUnit_Framework_TestCas
             'Zend.Framework'
         );
 
-        $this->assertType(
+        $this->assertInstanceOf(
             'Zend_Service_DeveloperGarden_Request_SendSms_SendSMS',
             $sms
         );
 
-        $this->assertType(
+        $this->assertInstanceOf(
             'Zend_Service_DeveloperGarden_Response_SendSms_SendSMSResponse',
             $this->service->send($sms)
         );
@@ -100,12 +100,12 @@ class Zend_Service_DeveloperGarden_SendSmsTest extends PHPUnit_Framework_TestCas
             'Zend.Framework'
         );
 
-        $this->assertType(
+        $this->assertInstanceOf(
             'Zend_Service_DeveloperGarden_Request_SendSms_SendFlashSMS',
             $sms
         );
 
-        $this->assertType(
+        $this->assertInstanceOf(
             'Zend_Service_DeveloperGarden_Response_SendSms_SendFlashSMSResponse',
             $this->service->send($sms)
         );
@@ -119,13 +119,13 @@ class Zend_Service_DeveloperGarden_SendSmsTest extends PHPUnit_Framework_TestCas
             'ZFTest'
         );
 
-        $this->assertType(
+        $this->assertInstanceOf(
             'Zend_Service_DeveloperGarden_Request_SendSms_SendSMS',
             $sms
         );
 
         $result = $this->service->send($sms);
-        $this->assertType(
+        $this->assertInstanceOf(
             'Zend_Service_DeveloperGarden_Response_SendSms_SendSMSResponse',
             $result
         );
@@ -141,13 +141,13 @@ class Zend_Service_DeveloperGarden_SendSmsTest extends PHPUnit_Framework_TestCas
             'ZFTest'
         );
 
-        $this->assertType(
+        $this->assertInstanceOf(
             'Zend_Service_DeveloperGarden_Request_SendSms_SendFlashSMS',
             $sms
         );
 
         $result = $this->service->send($sms);
-        $this->assertType(
+        $this->assertInstanceOf(
             'Zend_Service_DeveloperGarden_Response_SendSms_SendFlashSMSResponse',
             $result
         );
@@ -163,20 +163,20 @@ class Zend_Service_DeveloperGarden_SendSmsTest extends PHPUnit_Framework_TestCas
         $sms = new Zend_Service_DeveloperGarden_Request_SendSms_WrongSmsType(
             $this->service->getEnvironment()
         );
-        $this->assertType(
+        $this->assertInstanceOf(
             'Zend_Service_DeveloperGarden_Request_SendSms_WrongSmsType',
             $sms->setNumber('+49-171-2345678')
         );
-        $this->assertType(
+        $this->assertInstanceOf(
             'Zend_Service_DeveloperGarden_Request_SendSms_WrongSmsType',
             $sms->setMessage('Zend Framework is very cool')
         );
-        $this->assertType(
+        $this->assertInstanceOf(
             'Zend_Service_DeveloperGarden_Request_SendSms_WrongSmsType',
             $sms->setOriginator('ZFTest')
         );
 
-        $this->assertType(
+        $this->assertInstanceOf(
             'Zend_Service_DeveloperGarden_Request_SendSms_WrongSmsType',
             $sms
         );

@@ -66,25 +66,9 @@ class SlideShareTest extends \PHPUnit_Framework_TestCase
                                                  TESTS_ZEND_SERVICE_SLIDESHARE_PASSWORD,
                                                  TESTS_ZEND_SERVICE_SLIDESHARE_SLIDESHOWID);
 
-        mkdir($this->_cacheDir);
-        $cache = CacheFactory::factory(array(
-            'adapter' => array(
-                'name' => 'Filesystem',
-                'options' => array(
-                    'ttl'       => 0,
-                    'cache_dir' => $this->_cacheDir,
-                )
-            ),
-            'plugins' => array(
-                array(
-                    'name' => 'serializer',
-                    'options' => array(
-                        'serializer' => 'php_serialize',
-                    ),
-                ),
-            ),
-        ));
+        $cache = CacheFactory::adapterFactory('memory', array('memory_limit' => 0));
         $ss->setCacheObject($cache);
+
         return $ss;
     }
 
@@ -101,36 +85,10 @@ class SlideShareTest extends \PHPUnit_Framework_TestCase
 
                $this->markTestSkipped("You must configure an account for slideshare to run these tests");
         }
-
-        $this->_cacheDir = sys_get_temp_dir() . '/zend_service_slideshare';
-        $this->_removeRecursive($this->_cacheDir);
     }
 
     public function tearDown()
     {
-        $this->_removeRecursive($this->_cacheDir);
-
-    }
-
-    protected function _removeRecursive($dir)
-    {
-        if (file_exists($dir)) {
-            $dirIt = new \DirectoryIterator($dir);
-            foreach ($dirIt as $entry) {
-                $fname = $entry->getFilename();
-                if ($fname == '.' || $fname == '..') {
-                    continue;
-                }
-
-                if ($entry->isFile()) {
-                    unlink($entry->getPathname());
-                } else {
-                    $this->_removeRecursive($entry->getPathname());
-                }
-            }
-
-            rmdir($dir);
-        }
     }
 
     public function testGetSlideShow()

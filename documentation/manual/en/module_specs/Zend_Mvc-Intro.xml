@@ -175,12 +175,12 @@ module_root/
     src/
         &lt;module_namespace&gt;/
             &lt;code files&gt;
-    tests/
+    test/
         phpunit.xml
         bootstrap.php
         &lt;module_namespace&gt;/
             &lt;test code files&gt;
-    views/
+    view/
         &lt;dir-named-after-a-controller/
             &lt;.phtml files&gt;
 </literallayout>
@@ -280,7 +280,7 @@ class Module
     </para>
 
     <para>
-      The <filename>tests</filename> directory should contain your unit
+      The <filename>test</filename> directory should contain your unit
       tests. Typically, these will be written using
       <link xlink:href="http://phpunit.de">PHPUnit</link>, and contain
       artifacts related to its configuration (e.g.,
@@ -295,7 +295,7 @@ class Module
     </para>
 
     <para>
-      The <filename>views</filename> contains view scripts related to your
+      The <filename>view</filename> directory contains view scripts related to your
       controllers.
     </para>
   </section>

@@ -217,13 +217,13 @@ $transport->send($message);
 
         <variablelist>
             <varlistentry xml:id="zend.mail.message.methods.is-valid">
-                <term>
-                    <methodsynopsis>
-                        <methodname>isValid</methodname>
-                    </methodsynopsis>
-                </term>
+                <term>isValid</term>
 
                 <listitem>
+                    <methodsynopsis>
+                        <methodname>isValid</methodname>
+                        <void/>
+                    </methodsynopsis>
                     <para>Is the message valid?</para>
 
                     <para>
@@ -235,7 +235,9 @@ $transport->send($message);
             </varlistentry>
 
             <varlistentry xml:id="zend.mail.message.methods.set-encoding">
-                <term>
+                <term>setEncoding</term>
+
+                <listitem>
                     <methodsynopsis>
                         <methodname>setEncoding</methodname>
 
@@ -243,9 +245,7 @@ $transport->send($message);
                             <funcparams>string $encoding</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
 
-                <listitem>
                     <para>Set the message encoding.</para>
 
                     <para>Implements a fluent interface.</para>
@@ -253,13 +253,14 @@ $transport->send($message);
             </varlistentry>
 
             <varlistentry xml:id="zend.mail.message.methods.get-encoding">
-                <term>
-                    <methodsynopsis>
-                        <methodname>getEncoding</methodname>
-                    </methodsynopsis>
-                </term>
+                <term>getEncoding</term>
 
                 <listitem>
+                    <methodsynopsis>
+                        <methodname>getEncoding</methodname>
+                        <void/>
+                    </methodsynopsis>
+
                     <para>Get the message encoding.</para>
 
                     <para>Returns string.</para>
@@ -267,16 +268,16 @@ $transport->send($message);
             </varlistentry>
 
             <varlistentry xml:id="zend.mail.message.methods.set-headers">
-                <term>
+                <term>setHeaders</term>
+
+                <listitem>
                     <methodsynopsis>
                         <methodname>setHeaders</methodname>
                         <methodparam>
                             <funcparams>Zend\Mail\Headers $headers</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
 
-                <listitem>
                     <para>Compose headers.</para>
 
                     <para>Implements a fluent interface.</para>
@@ -284,13 +285,14 @@ $transport->send($message);
             </varlistentry>
 
             <varlistentry xml:id="zend.mail.message.methods.headers">
-                <term>
-                    <methodsynopsis>
-                        <methodname>headers</methodname>
-                    </methodsynopsis>
-                </term>
+                <term>setHeaders</term>
 
                 <listitem>
+                    <methodsynopsis>
+                        <methodname>headers</methodname>
+                        <void/>
+                    </methodsynopsis>
+
                     <para>Access headers collection.</para>
 
                     <para>
@@ -302,16 +304,16 @@ $transport->send($message);
             </varlistentry>
 
             <varlistentry xml:id="zend.mail.message.methods.set-from">
-                <term>
+                <term>setFrom</term>
+
+                <listitem>
                     <methodsynopsis>
                         <methodname>setFrom</methodname>
                         <methodparam>
                             <funcparams>string|AddressDescription|array|Zend\Mail\AddressList|Traversable $emailOrAddressList, string|null $name</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
 
-                <listitem>
                     <para>Set (overwrite) From addresses.</para>
 
                     <para>Implements a fluent interface.</para>
@@ -319,16 +321,16 @@ $transport->send($message);
             </varlistentry>
 
             <varlistentry xml:id="zend.mail.message.methods.add-from">
-                <term>
+                <term>addFrom</term>
+
+                <listitem>
                     <methodsynopsis>
                         <methodname>addFrom</methodname>
                         <methodparam>
                             <funcparams>string|Zend\Mail\Address|array|Zend\Mail\AddressList|Traversable $emailOrAddressOrList, string|null $name</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
 
-                <listitem>
                     <para>Add a "From" address.</para>
 
                     <para>Implements a fluent interface.</para>
@@ -336,13 +338,14 @@ $transport->send($message);
             </varlistentry>
 
             <varlistentry xml:id="zend.mail.message.methods.from">
-                <term>
-                    <methodsynopsis>
-                        <methodname>from</methodname>
-                    </methodsynopsis>
-                </term>
+                <term>from</term>
 
                 <listitem>
+                    <methodsynopsis>
+                        <methodname>from</methodname>
+                        <void/>
+                    </methodsynopsis>
+
                     <para>Retrieve list of From senders</para>
 
                     <para>Returns Zend\Mail\AddressList instance.</para>
@@ -350,16 +353,16 @@ $transport->send($message);
             </varlistentry>
 
             <varlistentry xml:id="zend.mail.message.methods.set-to">
-                <term>
+                <term>setTo</term>
+
+                <listitem>
                     <methodsynopsis>
                         <methodname>setTo</methodname>
                         <methodparam>
                             <funcparams>string|AddressDescription|array|Zend\Mail\AddressList|Traversable $emailOrAddressList, null|string $name</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
 
-                <listitem>
                     <para>Overwrite the address list in the To recipients.</para>
 
                     <para>Implements a fluent interface.</para>
@@ -367,16 +370,16 @@ $transport->send($message);
             </varlistentry>
 
             <varlistentry xml:id="zend.mail.message.methods.add-to">
-                <term>
+                <term>addTo</term>
+
+                <listitem>
                     <methodsynopsis>
                         <methodname>addTo</methodname>
                         <methodparam>
                             <funcparams>string|AddressDescription|array|Zend\Mail\AddressList|Traversable $emailOrAddressOrList, null|string $name</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
 
-                <listitem>
                     <para>Add one or more addresses to the To recipients.</para>
 
                     <para>Appends to the list.</para>
@@ -386,13 +389,14 @@ $transport->send($message);
             </varlistentry>
 
             <varlistentry xml:id="zend.mail.message.methods.to">
-                <term>
-                    <methodsynopsis>
-                        <methodname>to</methodname>
-                    </methodsynopsis>
-                </term>
+                <term>to</term>
 
                 <listitem>
+                    <methodsynopsis>
+                        <methodname>to</methodname>
+                        <void/>
+                    </methodsynopsis>
+
                     <para>Access the address list of the To header.</para>
 
                     <para>
@@ -405,16 +409,16 @@ $transport->send($message);
             </varlistentry>
 
             <varlistentry xml:id="zend.mail.message.methods.set-cc">
-                <term>
+                <term>setCc</term>
+
+                <listitem>
                     <methodsynopsis>
                         <methodname>setCc</methodname>
                         <methodparam>
                             <funcparams>string|AddressDescription|array|Zend\Mail\AddressList|Traversable $emailOrAddressList, string|null $name</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
 
-                <listitem>
                     <para>Set (overwrite) CC addresses.</para>
 
                     <para>Implements a fluent interface.</para>
@@ -422,16 +426,16 @@ $transport->send($message);
             </varlistentry>
 
             <varlistentry xml:id="zend.mail.message.methods.add-cc">
-                <term>
+                <term>addCc</term>
+
+                <listitem>
                     <methodsynopsis>
                         <methodname>addCc</methodname>
                         <methodparam>
                             <funcparams>string|Zend\Mail\Address|array|Zend\Mail\AddressList|Traversable $emailOrAddressOrList, string|null $name</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
 
-                <listitem>
                     <para>Add a "Cc" address.</para>
 
                     <para>Implements a fluent interface.</para>
@@ -439,13 +443,14 @@ $transport->send($message);
             </varlistentry>
 
             <varlistentry xml:id="zend.mail.message.methods.cc">
-                <term>
-                    <methodsynopsis>
-                        <methodname>cc</methodname>
-                    </methodsynopsis>
-                </term>
+                <term>cc</term>
 
                 <listitem>
+                    <methodsynopsis>
+                        <methodname>cc</methodname>
+                        <void/>
+                    </methodsynopsis>
+
                     <para>Retrieve list of CC recipients</para>
 
                     <para>
@@ -458,16 +463,16 @@ $transport->send($message);
             </varlistentry>
 
             <varlistentry xml:id="zend.mail.message.methods.set-bcc">
-                <term>
+                <term>setBcc</term>
+
+                <listitem>
                     <methodsynopsis>
                         <methodname>setBcc</methodname>
                         <methodparam>
                             <funcparams>string|AddressDescription|array|Zend\Mail\AddressList|Traversable $emailOrAddressList, string|null $name</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
 
-                <listitem>
                     <para>Set (overwrite) BCC addresses.</para>
 
                     <para>Implements a fluent interface.</para>
@@ -475,16 +480,16 @@ $transport->send($message);
             </varlistentry>
 
             <varlistentry xml:id="zend.mail.message.methods.add-bcc">
-                <term>
+                <term>addBcc</term>
+
+                <listitem>
                     <methodsynopsis>
                         <methodname>addBcc</methodname>
                         <methodparam>
                             <funcparams>string|Zend\Mail\Address|array|Zend\Mail\AddressList|Traversable $emailOrAddressOrList, string|null $name</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
 
-                <listitem>
                     <para>Add a "Bcc" address.</para>
 
                     <para>Implements a fluent interface.</para>
@@ -492,13 +497,14 @@ $transport->send($message);
             </varlistentry>
 
             <varlistentry xml:id="zend.mail.message.methods.bcc">
-                <term>
-                    <methodsynopsis>
-                        <methodname>bcc</methodname>
-                    </methodsynopsis>
-                </term>
+                <term>bcc</term>
 
                 <listitem>
+                    <methodsynopsis>
+                        <methodname>bcc</methodname>
+                        <void/>
+                    </methodsynopsis>
+
                     <para>Retrieve list of BCC recipients.</para>
 
                     <para>
@@ -511,16 +517,16 @@ $transport->send($message);
             </varlistentry>
 
             <varlistentry xml:id="zend.mail.message.methods.set-reply-to">
-                <term>
+                <term>setReplyTo</term>
+
+                <listitem>
                     <methodsynopsis>
                         <methodname>setReplyTo</methodname>
                         <methodparam>
                             <funcparams>string|AddressDescription|array|Zend\Mail\AddressList|Traversable $emailOrAddressList, null|string $name</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
 
-                <listitem>
                     <para>Overwrite the address list in the Reply-To recipients.</para>
 
                     <para>Implements a fluent interface.</para>
@@ -528,16 +534,16 @@ $transport->send($message);
             </varlistentry>
 
             <varlistentry xml:id="zend.mail.message.methods.add-reply-to">
-                <term>
+                <term>addReplyTo</term>
+
+                <listitem>
                     <methodsynopsis>
                         <methodname>addReplyTo</methodname>
                         <methodparam>
                             <funcparams>string|AddressDescription|array|Zend\Mail\AddressList|Traversable $emailOrAddressOrList, null|string $name</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
 
-                <listitem>
                     <para>Add one or more addresses to the Reply-To recipients.</para>
 
                     <para>Implements a fluent interface.</para>
@@ -545,13 +551,14 @@ $transport->send($message);
             </varlistentry>
 
             <varlistentry xml:id="zend.mail.message.methods.reply-to">
-                <term>
-                    <methodsynopsis>
-                        <methodname>replyTo</methodname>
-                    </methodsynopsis>
-                </term>
+                <term>replyTo</term>
 
                 <listitem>
+                    <methodsynopsis>
+                        <methodname>replyTo</methodname>
+                        <void/>
+                    </methodsynopsis>
+
                     <para>Access the address list of the Reply-To header</para>
 
                     <para>
@@ -564,16 +571,16 @@ $transport->send($message);
             </varlistentry>
 
             <varlistentry xml:id="zend.mail.message.methods.set-sender">
-                <term>
+                <term>setSender</term>
+
+                <listitem>
                     <methodsynopsis>
                         <methodname>setSender</methodname>
                         <methodparam>
                             <funcparams>mixed $emailOrAddress, mixed $name</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
 
-                <listitem>
                     <para>Set the message envelope Sender header.</para>
 
                     <para>Implements a fluent interface.</para>
@@ -581,13 +588,14 @@ $transport->send($message);
             </varlistentry>
 
             <varlistentry xml:id="zend.mail.message.methods.get-sender">
-                <term>
-                    <methodsynopsis>
-                        <methodname>getSender</methodname>
-                    </methodsynopsis>
-                </term>
+                <term>getSender</term>
 
                 <listitem>
+                    <methodsynopsis>
+                        <methodname>getSender</methodname>
+                        <void/>
+                    </methodsynopsis>
+
                     <para>Retrieve the sender address, if any.</para>
 
                     <para>Returns null or a Zend\Mail\AddressDescription instance.</para>
@@ -595,16 +603,16 @@ $transport->send($message);
             </varlistentry>
 
             <varlistentry xml:id="zend.mail.message.methods.set-subject">
-                <term>
+                <term>setSubject</term>
+
+                <listitem>
                     <methodsynopsis>
                         <methodname>setSubject</methodname>
                         <methodparam>
                             <funcparams>string $subject</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
 
-                <listitem>
                     <para>Set the message subject header value.</para>
 
                     <para>Implements a fluent interface.</para>
@@ -612,13 +620,14 @@ $transport->send($message);
             </varlistentry>
 
             <varlistentry xml:id="zend.mail.message.methods.get-subject">
-                <term>
-                    <methodsynopsis>
-                        <methodname>getSubject</methodname>
-                    </methodsynopsis>
-                </term>
+                <term>getSubject</term>
 
                 <listitem>
+                    <methodsynopsis>
+                        <methodname>getSubject</methodname>
+                        <void/>
+                    </methodsynopsis>
+
                     <para>Get the message subject header value.</para>
 
                     <para>Returns null or a string.</para>
@@ -626,16 +635,16 @@ $transport->send($message);
             </varlistentry>
 
             <varlistentry xml:id="zend.mail.message.methods.set-body">
-                <term>
+                <term>setBody</term>
+
+                <listitem>
                     <methodsynopsis>
                         <methodname>setBody</methodname>
                         <methodparam>
                             <funcparams>null|string|Zend\Mime\Message|object $body</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
 
-                <listitem>
                     <para>Set the message body.</para>
 
                     <para>Implements a fluent interface.</para>
@@ -643,13 +652,14 @@ $transport->send($message);
             </varlistentry>
 
             <varlistentry xml:id="zend.mail.message.methods.get-body">
-                <term>
-                    <methodsynopsis>
-                        <methodname>getBody</methodname>
-                    </methodsynopsis>
-                </term>
+                <term>getBoidy</term>
 
                 <listitem>
+                    <methodsynopsis>
+                        <methodname>getBody</methodname>
+                        <void/>
+                    </methodsynopsis>
+
                     <para>Return the currently set message body.</para>
 
                     <para>Returns null, a string, or an object.</para>
@@ -657,13 +667,14 @@ $transport->send($message);
             </varlistentry>
 
             <varlistentry xml:id="zend.mail.message.methods.get-body-text">
-                <term>
-                    <methodsynopsis>
-                        <methodname>getBodyText</methodname>
-                    </methodsynopsis>
-                </term>
+                <term>getBodyText</term>
 
                 <listitem>
+                    <methodsynopsis>
+                        <methodname>getBodyText</methodname>
+                        <void/>
+                    </methodsynopsis>
+
                     <para>Get the string-serialized message body text.</para>
 
                     <para>Returns null or a string.</para>
@@ -671,13 +682,14 @@ $transport->send($message);
             </varlistentry>
 
             <varlistentry xml:id="zend.mail.message.methods.to-string">
-                <term>
-                    <methodsynopsis>
-                        <methodname>toString</methodname>
-                    </methodsynopsis>
-                </term>
+                <term>toString</term>
 
                 <listitem>
+                    <methodsynopsis>
+                        <methodname>toString</methodname>
+                        <void/>
+                    </methodsynopsis>
+
                     <para>Serialize to string.</para>
 
                     <para>Returns string.</para>

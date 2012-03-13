@@ -23,6 +23,8 @@
  */
 namespace Zend\Translator;
 
+use Zend\Translator\Exception;
+
 /**
  * Utility class for returning the plural rules according to the given locale
  *
@@ -221,7 +223,7 @@ class Plural
         }
 
         if (!is_callable($rule)) {
-            throw new InvalidArgumentException('The given rule can not be called');
+            throw new Exception\InvalidArgumentException('The given rule can not be called');
         }
 
         self::$_plural[$locale] = $rule;

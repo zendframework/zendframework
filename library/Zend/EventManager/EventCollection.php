@@ -84,10 +84,10 @@ interface EventCollection
     /**
      * Detach an event listener
      * 
-     * @param  CallbackHandler $listener 
+     * @param  CallbackHandler|ListenerAggregate $listener 
      * @return void
      */
-    public function detach(CallbackHandler $listener);
+    public function detach($listener);
 
     /**
      * Get a list of events for which this collection has listeners

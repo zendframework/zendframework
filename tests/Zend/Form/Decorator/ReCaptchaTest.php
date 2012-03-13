@@ -21,7 +21,7 @@
  */
 
 namespace ZendTest\Form\Decorator;
-use Zend\View\PhpRenderer,
+use Zend\View\Renderer\PhpRenderer,
     Zend\Form\Element\Captcha as CaptchaElement,
     Zend\Form\Decorator\Captcha\ReCaptcha as ReCaptchaDecorator;
 

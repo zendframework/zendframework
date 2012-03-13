@@ -86,14 +86,15 @@ class FormCheckbox extends FormElement
         }
 
         // build the element
-        $xhtml = '';
+        $xhtml   = '';
+        $escaper = $this->view->plugin('escape');
         if (!$disable && !strstr($name, '[]')) {
             $xhtml = $this->_hidden($name, $checkedOptions['uncheckedValue']);
         }
         $xhtml .= '<input type="checkbox"'
-                . ' name="' . $this->view->vars()->escape($name) . '"'
-                . ' id="' . $this->view->vars()->escape($id) . '"'
-                . ' value="' . $this->view->vars()->escape($checkedOptions['checkedValue']) . '"'
+                . ' name="'  . $escaper($name)                           . '"'
+                . ' id="'    . $escaper($id)                             . '"'
+                . ' value="' . $escaper($checkedOptions['checkedValue']) . '"'
                 . $checkedOptions['checkedString']
                 . $disabled
                 . $this->_htmlAttribs($attribs)

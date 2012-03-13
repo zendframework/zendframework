@@ -300,7 +300,7 @@ class PythonPickle extends AbstractAdapter
                 // LONG_BINGET + pack("<i", i)
                 $idBin = pack('l', $id);
                 if (self::$_isLittleEndian === false) {
-                    $idBin = strrev($bin);
+                    $idBin = strrev($idBin);
                 }
                 $this->_pickle .= self::OP_LONG_BINGET . $idBin;
             }
@@ -325,7 +325,7 @@ class PythonPickle extends AbstractAdapter
                 // LONG_BINPUT + pack("<i", i)
                 $idBin = pack('l', $id);
                 if (self::$_isLittleEndian === false) {
-                    $idBin = strrev($bin);
+                    $idBin = strrev($idBin);
                 }
                 $this->_pickle .= self::OP_LONG_BINPUT . $idBin;
             }

@@ -35,10 +35,11 @@ use Zend\EventManager\EventCollection;
  */
 interface Manager
 {
-    public function __construct($config = null, $storage = null);
+    public function __construct(Configuration $config = null, Storage $storage = null, SaveHandler $saveHandler = null);
 
     public function getConfig();
     public function getStorage();
+    public function getSaveHandler();
     
     public function sessionExists();
     public function start();

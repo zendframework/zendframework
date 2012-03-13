@@ -58,7 +58,7 @@ class NumberSpinnerTest extends \PHPUnit_Framework_TestCase
 
     public function getView()
     {
-        $view = new View\PhpRenderer();
+        $view = new View\Renderer\PhpRenderer();
         \Zend\Dojo\Dojo::enableView($view);
         return $view;
     }
@@ -105,7 +105,9 @@ class NumberSpinnerTest extends \PHPUnit_Framework_TestCase
         if (!preg_match('/constraints="(.*?)(" )/', $html, $m)) {
             $this->fail('Did not serialize constraints');
         }
-        $constraints = str_replace("'", '"', $m[1]);
+        $constraints = $m[1];
+        $constraints = htmlspecialchars_decode($constraints, ENT_QUOTES);
+        $constraints = str_replace("'", '"', $constraints);
         $constraints = Json::decode($constraints, JSON::TYPE_ARRAY);
         $this->assertTrue(is_array($constraints), var_export($m[1], 1));
         $this->assertTrue(array_key_exists('min', $constraints));

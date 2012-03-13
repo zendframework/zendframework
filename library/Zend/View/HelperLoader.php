@@ -82,9 +82,13 @@ class HelperLoader extends PluginClassLoader
         'partialloop'         => 'Zend\View\Helper\PartialLoop',
         'partial'             => 'Zend\View\Helper\Partial',
         'placeholder'         => 'Zend\View\Helper\Placeholder',
+        'renderchildmodel'    => 'Zend\View\Helper\RenderChildModel',
+        'render_child_model'  => 'Zend\View\Helper\RenderChildModel',
         'rendertoplaceholder' => 'Zend\View\Helper\RenderToPlaceholder',
         'serverurl'           => 'Zend\View\Helper\ServerUrl',
         'translator'          => 'Zend\View\Helper\Translator',
         'url'                 => 'Zend\View\Helper\Url',
+        'viewmodel'           => 'Zend\View\Helper\ViewModel',
+        'view_model'          => 'Zend\View\Helper\ViewModel',
     );
 }

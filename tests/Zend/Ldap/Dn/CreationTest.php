@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_LDAP
+ * @package    Zend_Ldap
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -29,17 +29,17 @@ use Zend\Ldap;
  * Test helper
  */
 /**
- * Zend_LDAP_Dn
+ * Zend_Ldap_Dn
  */
 
 /**
  * @category   Zend
- * @package    Zend_LDAP
+ * @package    Zend_Ldap
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_LDAP
- * @group      Zend_LDAP_Dn
+ * @group      Zend_Ldap
+ * @group      Zend_Ldap_Dn
  */
 class CreationTest extends \PHPUnit_Framework_TestCase
 {
@@ -119,7 +119,7 @@ class CreationTest extends \PHPUnit_Framework_TestCase
 
         try {
             $dn=Ldap\Dn::factory(1);
-            $this->fail('Expected Zend_LDAP_Exception not thrown');
+            $this->fail('Expected Zend_Ldap_Exception not thrown');
         } catch (Ldap\Exception $e) {
             $this->assertEquals('Invalid argument type for $dn', $e->getMessage());
         }
@@ -195,13 +195,13 @@ class CreationTest extends \PHPUnit_Framework_TestCase
 
         try {
             $dn->getParentDn(0)->toString();
-            $this->fail('Expected Zend_LDAP_Exception not thrown');
+            $this->fail('Expected Zend_Ldap_Exception not thrown');
         } catch (Ldap\Exception $e) {
             $this->assertEquals('Cannot retrieve parent DN with given $levelUp', $e->getMessage());
         }
         try {
             $dn->getParentDn(4)->toString();
-            $this->fail('Expected Zend_LDAP_Exception not thrown');
+            $this->fail('Expected Zend_Ldap_Exception not thrown');
         } catch (Ldap\Exception $e) {
             $this->assertEquals('Cannot retrieve parent DN with given $levelUp', $e->getMessage());
         }

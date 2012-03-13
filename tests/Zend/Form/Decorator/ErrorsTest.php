@@ -23,7 +23,7 @@ namespace ZendTest\Form\Decorator;
 
 use Zend\Form\Decorator\Errors as ErrorsDecorator,
     Zend\Form\Element,
-    Zend\View\PhpRenderer as View;
+    Zend\View\Renderer\PhpRenderer as View;
 
 /**
  * Test class for Zend_Form_Decorator_Errors
@@ -77,9 +77,11 @@ class ErrorsTest extends \PHPUnit_Framework_TestCase
     {
         $this->setupElement();
         $content = 'test content';
-        $test = $this->decorator->render($content);
+        $test    = $this->decorator->render($content);
+        $view    = $this->getView();
         $this->assertContains($content, $test);
         foreach ($this->element->getMessages() as $message) {
+            $message = $view->escape($message);
             $this->assertContains($message, $test);
         }
     }

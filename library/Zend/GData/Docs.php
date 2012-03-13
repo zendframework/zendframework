@@ -29,12 +29,6 @@ namespace Zend\GData;
  * Service class for interacting with the Google Document List data API
  * @link http://code.google.com/apis/documents/
  *
- * @uses       \Zend\GData\GData
- * @uses       \Zend\GData\App\Extension\Category
- * @uses       \Zend\GData\App\Extension\Title
- * @uses       \Zend\GData\App\InvalidArgumentException
- * @uses       \Zend\GData\Docs\DocumentListEntry
- * @uses       \Zend\GData\Docs\DocumentListFeed
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Docs

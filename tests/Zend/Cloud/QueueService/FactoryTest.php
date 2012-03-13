@@ -26,7 +26,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
     define("PHPUnit_MAIN_METHOD", "Zend\Cloud\StorageService\FactoryTest::main");
 }
 
-use Zend\Config\Ini,
+use Zend\Config\Factory as ConfigFactory,
     Zend\Cloud\QueueService\Factory,
     PHPUnit_Framework_TestCase as PHPUnitTestCase;
 
@@ -61,17 +61,17 @@ class FactoryTest extends PHPUnitTestCase
     public function testGetAdapterWithConfig()
     {
         // SQS adapter
-        $sqsConfig = new Ini(realpath(dirname(__FILE__) . '/_files/config/sqs.ini'));
+        $sqsConfig = ConfigFactory::fromFile(realpath(dirname(__FILE__) . '/_files/config/sqs.ini'), true);
         $sqsAdapter = Factory::getAdapter($sqsConfig);
         $this->assertEquals('Zend\Cloud\QueueService\Adapter\Sqs', get_class($sqsAdapter));
 
         // Zend queue adapter
-        $zqConfig = new Ini(realpath(dirname(__FILE__) . '/_files/config/zendqueue.ini'));
+        $zqConfig = ConfigFactory::fromFile(realpath(dirname(__FILE__) . '/_files/config/zendqueue.ini'), true);
         $zq = Factory::getAdapter($zqConfig);
         $this->assertEquals('Zend\Cloud\QueueService\Adapter\ZendQueue', get_class($zq));
 
         // Azure adapter
-        //$azureConfig = new Ini(realpath(dirname(__FILE__) . '/_files/config/windowsazure.ini'));
+        //$azureConfig = ConfigFactory::fromFile(realpath(dirname(__FILE__) . '/_files/config/windowsazure.ini'), true);
         //$azureAdapter = Factory::getAdapter($azureConfig);
         //$this->assertEquals('Zend\Cloud\QueueService\Adapter\WindowsAzure', get_class($azureAdapter));
     }

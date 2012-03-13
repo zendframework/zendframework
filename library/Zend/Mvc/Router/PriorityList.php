@@ -102,6 +102,19 @@ class PriorityList implements Iterator, Countable
     }
     
     /**
+     * Remove all routes.
+     * 
+     * @return void 
+     */
+    public function clear()
+    {
+        $this->routes = array();
+        $this->serial = 0;
+        $this->count  = 0;
+        $this->sorted = false;
+    }
+    
+    /**
      * Get a route.
      * 
      * @param  string $name 

@@ -30,11 +30,11 @@ use Traversable,
     Zend\Form\Element\Exception as ElementException,
     Zend\Loader\PrefixPathLoader,
     Zend\Loader\PrefixPathMapper,
-    Zend\Stdlib\IteratorToArray,
+    Zend\Stdlib\ArrayUtils,
     Zend\Translator,
     Zend\Validator\AbstractValidator,
     Zend\Validator\Validator,
-    Zend\View\PhpRenderer,
+    Zend\View\Renderer\PhpRenderer,
     Zend\View\Renderer as View;
 
 /**
@@ -251,7 +251,7 @@ class Element implements Validator
     public function __construct($spec, $options = null)
     {
         if ($spec instanceof Traversable) {
-            $spec = IteratorToArray::convert($spec);
+            $spec = ArrayUtils::iteratorToArray($spec);
         }
         if (is_string($spec)) {
             $this->setName($spec);
@@ -260,7 +260,7 @@ class Element implements Validator
         }
 
         if ($options instanceof Traversable) {
-            $options = IteratorToArray::convert($options);
+            $options = ArrayUtils::iteratorToArray($options);
         }
         if (is_string($spec) && is_array($options)) {
             $this->setOptions($options);

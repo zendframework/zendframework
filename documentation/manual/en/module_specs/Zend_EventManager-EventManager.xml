@@ -132,8 +132,8 @@ $foo->bar('baz', 'bat');
         </para>
 
         <para>
-            Sometimes you may want to specify listeners without yet having an object isntance of the
-            class composing an <classname>Event</classname>Manager. The
+            Sometimes you may want to specify listeners without yet having an object instance of the
+            class composing an <classname>EventManager</classname>. The
             <classname>StaticEventManager</classname> allows you to do this. The call to
             <methodname>attach</methodname> is identical to the <classname>EventManager</classname>,
             but expects an additional parameter at the beginning: a named instance. Remember the
@@ -231,16 +231,14 @@ $foo->bar('baz', 'bat');
  
         <variablelist>
             <varlistentry xml:id="zend.event-manager.event-manager.methods.constructor">
-                <term>
+                <term>__construct</term>
+                <listitem>
                     <methodsynopsis>
                         <methodname>__construct</methodname>
                         <methodparam>
                             <funcparams>null|string|int $identifier</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
- 
-                <listitem>
                     <para>
                         Constructs a new <classname>EventManager</classname> instance, using the
                         given identifier, if provided, for purposes of static attachment.
@@ -249,16 +247,14 @@ $foo->bar('baz', 'bat');
             </varlistentry>
 
             <varlistentry xml:id="zend.event-manager.event-manager.methods.set-event-class">
-                <term>
+                <term>setEventClass</term>
+                <listitem>
                     <methodsynopsis>
                         <methodname>setEventClass</methodname>
                         <methodparam>
                             <funcparams>string $class</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
- 
-                <listitem>
                     <para>
                         Provide the name of an alternate <classname>Event</classname> class to use
                         when creating events to pass to triggered listeners.
@@ -267,16 +263,14 @@ $foo->bar('baz', 'bat');
             </varlistentry>
 
             <varlistentry xml:id="zend.event-manager.event-manager.methods.set-static-connections">
-                <term>
+                <term>setStaticConnections</term>
+                <listitem>
                     <methodsynopsis>
                         <methodname>setStaticConnections</methodname>
                         <methodparam>
                             <funcparams>StaticEventCollection $connections = null</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
- 
-                <listitem>
                     <para>
                         An instance of a <interfacename>StaticEventCollection</interfacename>
                         instance to use when triggering events. By default, this will use
@@ -289,13 +283,12 @@ $foo->bar('baz', 'bat');
             </varlistentry>
 
             <varlistentry xml:id="zend.event-manager.event-manager.methods.get-static-connections">
-                <term>
+                <term>getStaticConnections</term>
+                <listitem>
                     <methodsynopsis>
                         <methodname>getStaticConnections</methodname>
+                        <void/>
                     </methodsynopsis>
-                </term>
- 
-                <listitem>
                     <para>
                         Returns the currently attached
                         <interfacename>StaticEventCollection</interfacename> instance, lazily
@@ -311,7 +304,8 @@ $foo->bar('baz', 'bat');
             </varlistentry>
 
             <varlistentry xml:id="zend.event-manager.event-manager.methods.trigger">
-                <term>
+                <term>trigger</term>
+                <listitem>
                     <methodsynopsis>
                         <methodname>trigger</methodname>
 
@@ -319,16 +313,13 @@ $foo->bar('baz', 'bat');
                             <funcparams>string $event, mixed $target, mixed $argv, callback $callback</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
- 
-                <listitem>
                     <para>
                         Triggers all listeners to a named event. The recommendation is to use the
                         current function/method name for <varname>$event</varname>, appending it
                         with values such as ".pre", ".post", etc. as needed.
                         <varname>$context</varname> should be the current object instance, or the
                         name of the function if not triggering within an object.
-                        <varname>$params</varname> should typically be an associative arry or
+                        <varname>$params</varname> should typically be an associative array or
                         <classname>ArrayAccess</classname> instance; we recommend using the
                         parameters passed to the function/method (<function>compact()</function> is
                         often useful here). This method can also take a callback and behave in the 
@@ -344,7 +335,8 @@ $foo->bar('baz', 'bat');
             </varlistentry>
 
             <varlistentry xml:id="zend.event-manager.event-manager.methods.trigger-until">
-                <term>
+                <term>triggerUntil</term>
+                <listitem>
                     <methodsynopsis>
                         <methodname>triggerUntil</methodname>
 
@@ -353,9 +345,6 @@ $foo->bar('baz', 'bat');
                                 $callback</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
- 
-                <listitem>
                     <para>
                         Triggers all listeners to a named event, just like <link
                             linkend="zend.event-manager.event-manager.methods.trigger">trigger()</link>,
@@ -368,7 +357,8 @@ $foo->bar('baz', 'bat');
             </varlistentry>
 
             <varlistentry xml:id="zend.event-manager.event-manager.methods.attach">
-                <term>
+                <term>attach</term>
+                <listitem>
                     <methodsynopsis>
                         <methodname>attach</methodname>
 
@@ -376,9 +366,6 @@ $foo->bar('baz', 'bat');
                             <funcparams>string $event, callback $callback, int $priority</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
- 
-                <listitem>
                     <para>
                         Attaches <varname>$callback</varname> to the
                         <classname>EventManager</classname> instance, listening for the event
@@ -397,16 +384,14 @@ $foo->bar('baz', 'bat');
             </varlistentry>
 
             <varlistentry xml:id="zend.event-manager.event-manager.methods.attach-aggregate">
-                <term>
+                <term>attachAggregate</term>
+                <listitem>
                     <methodsynopsis>
                         <methodname>attachAggregate</methodname>
                         <methodparam>
                             <funcparams>string|ListenerAggregate $aggregate</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
- 
-                <listitem>
                     <para>
                         If a string is passed for <varname>$aggregate</varname>, instantiates that
                         class. The <varname>$aggregate</varname> is then passed the
@@ -421,16 +406,14 @@ $foo->bar('baz', 'bat');
             </varlistentry>
 
             <varlistentry xml:id="zend.event-manager.event-manager.methods.detach">
-                <term>
+                <term>detach</term>
+                <listitem>
                     <methodsynopsis>
                         <methodname>detach</methodname>
                         <methodparam>
                             <funcparams>CallbackHandler $listener</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
- 
-                <listitem>
                     <para>
                         Scans all listeners, and detaches any that match <varname>$listener</varname>
                         so that they will no longer be triggered.
@@ -445,16 +428,14 @@ $foo->bar('baz', 'bat');
             </varlistentry>
 
             <varlistentry xml:id="zend.event-manager.event-manager.methods.detach-aggregate">
-                <term>
+                <term>detachAggregate</term>
+                <listitem>
                     <methodsynopsis>
                         <methodname>detachAggregate</methodname>
                         <methodparam>
                             <funcparams>ListenerAggregate $aggregate</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
- 
-                <listitem>
                     <para>
                         Loops through all listeners of all events to identify listeners that are
                         represented by the aggregate; for all matches, the listeners will be removed.
@@ -470,13 +451,12 @@ $foo->bar('baz', 'bat');
             </varlistentry>
 
             <varlistentry xml:id="zend.event-manager.event-manager.methods.get-events">
-                <term>
+                <term>detachAggregate</term>
+                <listitem>
                     <methodsynopsis>
                         <methodname>getEvents</methodname>
+                        <void/>
                     </methodsynopsis>
-                </term>
- 
-                <listitem>
                     <para>
                         Returns an array of all event names that have listeners attached.
                     </para>
@@ -484,7 +464,8 @@ $foo->bar('baz', 'bat');
             </varlistentry>
 
             <varlistentry xml:id="zend.event-manager.event-manager.methods.get-listeners">
-                <term>
+                <term>getListeners</term>
+                <listitem>
                     <methodsynopsis>
                         <methodname>getListeners</methodname>
 
@@ -492,9 +473,6 @@ $foo->bar('baz', 'bat');
                             <funcparams>string $event</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
- 
-                <listitem>
                     <para>
                         Returns a <classname>Zend\Stdlib\PriorityQueue</classname> instance of all
                         listeners attached to <varname>$event</varname>.
@@ -503,7 +481,8 @@ $foo->bar('baz', 'bat');
             </varlistentry>
 
             <varlistentry xml:id="zend.event-manager.event-manager.methods.clear-listeners">
-                <term>
+                <term>clearListeners</term>
+                <listitem>
                     <methodsynopsis>
                         <methodname>clearListeners</methodname>
 
@@ -511,9 +490,6 @@ $foo->bar('baz', 'bat');
                             <funcparams>string $event</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
- 
-                <listitem>
                     <para>
                         Removes all listeners attached to <varname>$event</varname>.
                     </para>
@@ -521,7 +497,8 @@ $foo->bar('baz', 'bat');
             </varlistentry>
 
             <varlistentry xml:id="zend.event-manager.event-manager.methods.prepare-args">
-                <term>
+                <term>prepareArgs</term>
+                <listitem>
                     <methodsynopsis>
                         <methodname>prepareArgs</methodname>
 
@@ -529,9 +506,6 @@ $foo->bar('baz', 'bat');
                             <funcparams>array $args</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
- 
-                <listitem>
                     <para>
                         Creates an <classname>ArrayObject</classname> from the provided
                         <varname>$args</varname>. This can be useful if you want yours listeners

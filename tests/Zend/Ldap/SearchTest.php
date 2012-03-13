@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_LDAP
+ * @package    Zend_Ldap
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -30,11 +30,11 @@ use Zend\Ldap\Collection;
 
 /**
  * @category   Zend
- * @package    Zend_LDAP
+ * @package    Zend_Ldap
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_LDAP
+ * @group      Zend_Ldap
  */
 class SearchTest extends OnlineTestCase
 {
@@ -133,7 +133,7 @@ class SearchTest extends OnlineTestCase
     {
         $entries=$this->_getLDAP()->searchEntries('(objectClass=organizationalUnit)',
             TESTS_ZEND_LDAP_WRITEABLE_SUBTREE, Ldap\Ldap::SEARCH_SCOPE_SUB);
-        $this->assertType("array", $entries);
+        $this->assertInternalType("array", $entries);
         $this->assertEquals(9, count($entries));
     }
 
@@ -232,7 +232,7 @@ class SearchTest extends OnlineTestCase
         $filter=Filter::equals('objectClass', 'organizationalUnit');
 
         $entries=$this->_getLDAP()->searchEntries($filter, $dn, Ldap\Ldap::SEARCH_SCOPE_SUB);
-        $this->assertType("array", $entries);
+        $this->assertInternalType("array", $entries);
         $this->assertEquals(9, count($entries));
     }
 
@@ -284,7 +284,7 @@ class SearchTest extends OnlineTestCase
 
     /**
      * Test issue reported by Lance Hendrix on
-     * http://framework.zend.com/wiki/display/ZFPROP/Zend_LDAP+-+Extended+support+-+Stefan+Gehrig?
+     * http://framework.zend.com/wiki/display/ZFPROP/Zend_Ldap+-+Extended+support+-+Stefan+Gehrig?
      *      focusedCommentId=13107431#comment-13107431
      */
     public function testCallingNextAfterIterationShouldNotThrowException()
@@ -442,7 +442,7 @@ class SearchTest extends OnlineTestCase
     {
         $items = $this->_getLDAP()->search('(objectClass=organizationalUnit)',
             TESTS_ZEND_LDAP_WRITEABLE_SUBTREE, Ldap\Ldap::SEARCH_SCOPE_SUB);
-        $this->assertType('\Zend\Ldap\Collection\DefaultIterator', $items->getInnerIterator());
+        $this->assertInstanceOf('\Zend\Ldap\Collection\DefaultIterator', $items->getInnerIterator());
     }
 
     /**

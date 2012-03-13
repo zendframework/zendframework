@@ -19,13 +19,18 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
+/**
+ * @namespace
+ */
+namespace ZendTest\Service\Technorati;
+use Zend\Service\Technorati;
 
 /**
  * Test helper
  */
 
 /**
- * @see Zend_Service_Technorati_TagsResult
+ * @see Technorati\TagsResult
  */
 
 
@@ -38,7 +43,7 @@
  * @group      Zend_Service
  * @group      Zend_Service_Technorati
  */
-class Zend_Service_Technorati_TagResultTest extends Zend_Service_Technorati_TestCase
+class TagResultTest extends TestCase
 {
     public function setUp()
     {
@@ -47,37 +52,32 @@ class Zend_Service_Technorati_TagResultTest extends Zend_Service_Technorati_Test
 
     public function testConstruct()
     {
-        $this->_testConstruct('Zend_Service_Technorati_TagResult', array($this->domElements->item(0)));
-    }
-
-    public function testConstructThrowsExceptionWithInvalidDom()
-    {
-        $this->_testConstructThrowsExceptionWithInvalidDom('Zend_Service_Technorati_TagResult', 'DOMElement');
+        $this->_testConstruct('Zend\Service\Technorati\TagResult', array($this->domElements->item(0)));
     }
 
     public function testTagResult()
     {
-        $object = new Zend_Service_Technorati_TagResult($this->domElements->item(1));
+        $object = new Technorati\TagResult($this->domElements->item(1));
 
         // check properties
         $this->assertInternalType('string', $object->getTitle());
         $this->assertContains('Permalink for : VerveEarth', $object->getTitle());
         $this->assertInternalType('string', $object->getExcerpt());
         $this->assertContains('VerveEarth: Locate Your Blog!', $object->getExcerpt());
-        $this->assertType('Zend_Uri_Http', $object->getPermalink());
-        $this->assertEquals(Zend_Uri::factory('http://scienceroll.com/2007/11/14/verveearth-locate-your-blog/'), $object->getPermalink());
-        $this->assertType('Zend_Date', $object->getCreated());
-        $this->assertEquals(new Zend_Date('2007-11-14 21:52:11'), $object->getCreated());
-        $this->assertType('Zend_Date', $object->getUpdated());
-        $this->assertEquals(new Zend_Date('2007-11-14 21:57:59'), $object->getUpdated());
+        $this->assertInstanceOf('Zend\Uri\Http', $object->getPermalink());
+        $this->assertEquals(\Zend\Uri\UriFactory::factory('http://scienceroll.com/2007/11/14/verveearth-locate-your-blog/'), $object->getPermalink());
+        $this->assertInstanceOf('Zend\Date\Date', $object->getCreated());
+        $this->assertEquals(new \Zend\Date\Date('2007-11-14 21:52:11'), $object->getCreated());
+        $this->assertInstanceOf('Zend\Date\Date', $object->getUpdated());
+        $this->assertEquals(new \Zend\Date\Date('2007-11-14 21:57:59'), $object->getUpdated());
 
         // check weblog
-        $this->assertType('Zend_Service_Technorati_Weblog', $object->getWeblog());
+        $this->assertInstanceOf('Zend\Service\Technorati\Weblog', $object->getWeblog());
         $this->assertEquals(' ScienceRoll', $object->getWeblog()->getName());
     }
 
     public function testTagResultSerialization()
     {
-        $this->_testResultSerialization(new Zend_Service_Technorati_TagResult($this->domElements->item(0)));
+        $this->_testResultSerialization(new Technorati\TagResult($this->domElements->item(0)));
     }
 }

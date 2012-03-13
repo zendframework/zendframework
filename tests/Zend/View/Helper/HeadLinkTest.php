@@ -26,7 +26,7 @@ namespace ZendTest\View\Helper;
 use Zend\Registry,
     Zend\View\Helper\Placeholder\Registry as PlaceholderRegistry,
     Zend\View\Helper,
-    Zend\View\PhpRenderer as View,
+    Zend\View\Renderer\PhpRenderer as View,
     Zend\View\Exception as ViewException;
 
 /**

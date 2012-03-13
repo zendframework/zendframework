@@ -266,7 +266,7 @@ class StandardConfig implements OAuthConfig
      */
     public function getConsumerSecret()
     {
-        if (!is_null($this->_rsaPrivateKey)) {
+        if ($this->_rsaPrivateKey !== null) {
             return $this->_rsaPrivateKey;
         }
         return $this->_consumerSecret;

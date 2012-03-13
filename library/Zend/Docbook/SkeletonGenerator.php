@@ -95,14 +95,14 @@ class SkeletonGenerator
             $synop->appendChild($mparam);
             $item1->appendChild($synop);
 
-            $item2 = $dom->createElement('listitem');
-            $item2->appendChild($dom->createElement('para', $method->getShortDescription()));
-            $item2->appendChild($dom->createElement('para', $method->getLongDescription()));
-            $item2->appendChild($dom->createElement('para', 'Returns ' . $method->getReturnType()));
+            $item1->appendChild($dom->createElement('para', $method->getShortDescription()));
+            if ($method->getLongDescription()) {
+                $item1->appendChild($dom->createElement('para', $method->getLongDescription()));
+            }
+            $item1->appendChild($dom->createElement('para', 'Returns ' . $method->getReturnType()));
 
             $entry->appendChild($term);
             $entry->appendChild($item1);
-            $entry->appendChild($item2);
 
             $varlist->appendChild($entry);
         }

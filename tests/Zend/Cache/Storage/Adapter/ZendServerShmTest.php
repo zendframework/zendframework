@@ -37,6 +37,10 @@ class ZendServerShmTest extends CommonAdapterTest
 
     public function setUp()
     {
+        if (!defined('TESTS_ZEND_CACHE_ZEND_SERVER_ENABLED') || !TESTS_ZEND_CACHE_ZEND_SERVER_ENABLED) {
+            $this->markTestSkipped("Skipped by TestConfiguration (TESTS_ZEND_CACHE_ZEND_SERVER_ENABLED)");
+        }
+
         if (strtolower(PHP_SAPI) == 'cli') {
             $this->markTestSkipped('Zend Server SHM does not work in CLI environment');
             return;
@@ -51,7 +55,8 @@ class ZendServerShmTest extends CommonAdapterTest
             }
         }
 
-        $this->_storage = new Cache\Storage\Adapter\ZendServerShm();
+        $this->_options = new Cache\Storage\Adapter\AdapterOptions();
+        $this->_storage = new Cache\Storage\Adapter\ZendServerShm($this->_options);
         parent::setUp();
     }
 

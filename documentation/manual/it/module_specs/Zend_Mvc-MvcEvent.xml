@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<section 
+    xmlns="http://docbook.org/ns/docbook" version="5.0"
+    xml:id="zend.mvc.mvc-event">
+  <info><title>MvcEvent</title></info>
+
+  <para>
+    Il layer MVC di ZF2 incorpora ed utilizza un tipo
+    <classname>Zend\EventManager\EventDescription</classname> custom, 
+    <classname>Zend\Mvc\MvcEvent</classname>. Questo evento è creato durante
+    <methodname>Zend\Mvc\Application::run()</methodname> ed è 
+    passato direttamente a tutti gli eventi che sono avviati. In aggiunta,
+    se marchi i tuoi controller con l'interfaccia 
+    <classname>Zend\Mvc\InjectApplicationEvent</classname>, questa sarà
+    iniettata in quei controller.
+  </para>
+
+  <para>
+    <classname>MvcEvent</classname> aggiungere accessori e mutatori per le
+    seguenti:
+  </para>
+
+  <itemizedlist>
+    <listitem>
+      <para>
+        <classname>Request</classname>
+      </para>
+    </listitem>
+
+    <listitem>
+      <para>
+        <classname>Response</classname>
+      </para>
+    </listitem>
+
+    <listitem>
+      <para>
+        <classname>Router</classname>
+      </para>
+    </listitem>
+
+    <listitem>
+      <para>
+        <classname>RouteMatch</classname>
+      </para>
+    </listitem>
+
+    <listitem>
+      <para>
+        "Result", tipicamente il risultato dell'esecuzione di un controller
+      </para>
+    </listitem>
+  </itemizedlist>
+
+  <para>
+    I metodi che definisce sono: 
+  </para>
+
+  <itemizedlist>
+    <listitem>
+      <para>
+        <methodname>setRequest($request)</methodname>
+      </para>
+    </listitem>
+
+    <listitem>
+      <para>
+        <methodname>getRequest()</methodname>
+      </para>
+    </listitem>
+
+    <listitem>
+      <para>
+        <methodname>setResponse($response)</methodname>
+      </para>
+    </listitem>
+
+    <listitem>
+      <para>
+        <methodname>getResponse()</methodname>
+      </para>
+    </listitem>
+
+    <listitem>
+      <para>
+        <methodname>setRouter($router)</methodname>
+      </para>
+    </listitem>
+
+    <listitem>
+      <para>
+        <methodname>getRouter()</methodname>
+      </para>
+    </listitem>
+
+    <listitem>
+      <para>
+        <methodname>setRouteMatch($routeMatch)</methodname>
+      </para>
+    </listitem>
+
+    <listitem>
+      <para>
+        <methodname>getRouteMatch()</methodname>
+      </para>
+    </listitem>
+
+    <listitem>
+      <para>
+        <methodname>setResult($result)</methodname>
+      </para>
+    </listitem>
+
+    <listitem>
+      <para>
+        <methodname>getResult()</methodname>
+      </para>
+    </listitem>
+  </itemizedlist>
+
+  <para>
+    Dentro <methodname>Application::run()</methodname>, l'evento è iniettato
+    con la Request, Response e il Router immediatamente.  Seguendo
+    l'evento <varname>route</varname>, questo sarà iniettato anche
+    nell'oggetto <classname>RouteMatch</classname> incapsulando il 
+    risultato del routing.
+  </para>
+
+  <para>
+    Fichè questo oggetto è passato in giro attraverso lo MVC, 
+    è un luogo comune dove ricevere i risultati del routing, il router,
+    e gli oggetti richiesta e risposta. In aggiunta, noi incoraggiamo
+    l'impostazione dei risultati dell'esecuzione nell'evento, per
+    permettere agli event listener di ispezionarlo ed utilizzarli
+    nella loro esecuzione. Un esempio, il risultato potrebbe essere
+    passato ad un view renderer.
+  </para>
+</section>

@@ -178,28 +178,29 @@ $transport->setOptions($options);
 
         <variablelist>
             <varlistentry xml:id="zend.mail.smtp-options.methods.get-name">
-                <term>
-                    <methodsynopsis>
-                        <methodname>getName</methodname>
-                    </methodsynopsis>
-                </term>
+                <term>getName</term>
 
                 <listitem>
+                    <methodsynopsis>
+                        <methodname>getName</methodname>
+                        <void/>
+                    </methodsynopsis>
+
                     <para>Returns the string name of the local client hostname.</para>
                 </listitem>
             </varlistentry>
 
             <varlistentry xml:id="zend.mail.smtp-options.methods.set-name">
-                <term>
+                <term>setName</term>
+
+                <listitem>
                     <methodsynopsis>
                         <methodname>setName</methodname>
                         <methodparam>
                             <funcparams>string $name</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
 
-                <listitem>
                     <para>Set the string name of the local client hostname.</para>
 
                     <para>Implements a fluent interface.</para>
@@ -207,28 +208,29 @@ $transport->setOptions($options);
             </varlistentry>
 
             <varlistentry xml:id="zend.mail.smtp-options.methods.get-connection-class">
-                <term>
-                    <methodsynopsis>
-                        <methodname>getConnectionClass</methodname>
-                    </methodsynopsis>
-                </term>
+                <term>getConnectionClass</term>
 
                 <listitem>
+                    <methodsynopsis>
+                        <methodname>getConnectionClass</methodname>
+                        <void/>
+                    </methodsynopsis>
+
                     <para>Returns a string indicating the connection class name to use.</para>
                 </listitem>
             </varlistentry>
 
             <varlistentry xml:id="zend.mail.smtp-options.methods.set-connection-class">
-                <term>
+                <term>setConnectionClass</term>
+
+                <listitem>
                     <methodsynopsis>
                         <methodname>setConnectionClass</methodname>
                         <methodparam>
                             <funcparams>string $connectionClass</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
 
-                <listitem>
                     <para>Set the connection class to use.</para>
 
                     <para>Implements a fluent interface.</para>
@@ -236,13 +238,14 @@ $transport->setOptions($options);
             </varlistentry>
 
             <varlistentry xml:id="zend.mail.smtp-options.methods.get-connection-config">
-                <term>
-                    <methodsynopsis>
-                        <methodname>getConnectionConfig</methodname>
-                    </methodsynopsis>
-                </term>
+                <term>getConnectionConfig</term>
 
                 <listitem>
+                    <methodsynopsis>
+                        <methodname>getConnectionConfig</methodname>
+                        <void/>
+                    </methodsynopsis>
+
                     <para>Get configuration for the connection class.</para>
 
                     <para>Returns array.</para>
@@ -250,16 +253,16 @@ $transport->setOptions($options);
             </varlistentry>
 
             <varlistentry xml:id="zend.mail.smtp-options.methods.set-connection-config">
-                <term>
+                <term>setConnectionConfig</term>
+
+                <listitem>
                     <methodsynopsis>
                         <methodname>setConnectionConfig</methodname>
                         <methodparam>
                             <funcparams>array $config</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
 
-                <listitem>
                     <para> 
                         Set configuration for the connection class. Typically, if using anything
                         other than the default connection class, this will be an associative array
@@ -271,13 +274,14 @@ $transport->setOptions($options);
             </varlistentry>
 
             <varlistentry xml:id="zend.mail.smtp-options.methods.get-host">
-                <term>
-                    <methodsynopsis>
-                        <methodname>getHost</methodname>
-                    </methodsynopsis>
-                </term>
+                <term>getHost</term>
 
                 <listitem>
+                    <methodsynopsis>
+                        <methodname>getHost</methodname>
+                        <void/>
+                    </methodsynopsis>
+
                     <para>
                         Returns a string indicating the IP address or host name of the SMTP server
                         via which to send messages.
@@ -286,16 +290,16 @@ $transport->setOptions($options);
             </varlistentry>
 
             <varlistentry xml:id="zend.mail.smtp-options.methods.set-host">
-                <term>
+                <term>setHost</term>
+
+                <listitem>
                     <methodsynopsis>
                         <methodname>setHost</methodname>
                         <methodparam>
                             <funcparams>string $host</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
 
-                <listitem>
                     <para>
                         Set the SMTP host name or IP address.
                     </para>
@@ -305,28 +309,29 @@ $transport->setOptions($options);
             </varlistentry>
 
             <varlistentry xml:id="zend.mail.smtp-options.methods.get-port">
-                <term>
-                    <methodsynopsis>
-                        <methodname>getPort</methodname>
-                    </methodsynopsis>
-                </term>
+                <term>getPort</term>
 
                 <listitem>
+                    <methodsynopsis>
+                        <methodname>getPort</methodname>
+                        <void/>
+                    </methodsynopsis>
+
                     <para>Retrieve the integer port on which the SMTP host is listening.</para>
                 </listitem>
             </varlistentry>
 
             <varlistentry xml:id="zend.mail.smtp-options.methods.set-port">
-                <term>
+                <term>setPort</term>
+
+                <listitem>
                     <methodsynopsis>
                         <methodname>setPort</methodname>
                         <methodparam>
                             <funcparams>int $port</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
 
-                <listitem>
                     <para>Set the port on which the SMTP host is listening.</para>
 
                     <para>Implements a fluent interface.</para>
@@ -334,16 +339,16 @@ $transport->setOptions($options);
             </varlistentry>
 
             <varlistentry xml:id="zend.stdlib.options.methods.__construct">
-                <term>
+                <term>__construct</term>
+
+                <listitem>
                     <methodsynopsis>
                         <methodname>__construct</methodname>
                         <methodparam>
                             <funcparams>null|array|Traversable $config</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
 
-                <listitem>
                     <para>
                         Instantiate the class, and optionally configure it with values provided.
                     </para>

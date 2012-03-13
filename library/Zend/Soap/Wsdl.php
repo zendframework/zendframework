@@ -546,8 +546,9 @@ class Wsdl
             case 'integer':
                 return 'xsd:int';
             case 'float':
-            case 'double':
                 return 'xsd:float';
+            case 'double':
+                return 'xsd:double';
             case 'boolean':
             case 'bool':
                 return 'xsd:boolean';
@@ -598,7 +599,8 @@ class Wsdl
             $type = substr($type, 1);
         }
 
-        if ($pos = strrpos($type, '\\')) {
+        $pos = strrpos($type, '\\');
+        if ($pos) {
             $type = substr($type, $pos+1);
         }
 

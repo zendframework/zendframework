@@ -289,8 +289,12 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
         try {
             $currClient = Reader\Reader::getHttpClient();
 
+            $response = new \Zend\Http\Response;
+            $response->setContent('<!DOCTYPE html><html><head><link rel="alternate" type="application/rss+xml" href="../test.rss"><link rel="alternate" type="application/atom+xml" href="/test.atom"></head><body></body></html>');
+            $response->setStatusCode(200);
+            
             $testAdapter = new \Zend\Http\Client\Adapter\Test();
-            $testAdapter->setResponse(new \Zend\Http\Response(200, array(), '<!DOCTYPE html><html><head><link rel="alternate" type="application/rss+xml" href="../test.rss"><link rel="alternate" type="application/atom+xml" href="/test.atom"></head><body></body></html>'));
+            $testAdapter->setResponse($response);
             Reader\Reader::setHttpClient(new \Zend\Http\Client(null, array('adapter' => $testAdapter)));
 
             $links = Reader\Reader::findFeedLinks('http://foo/bar');

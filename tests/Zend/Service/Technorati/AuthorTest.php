@@ -20,10 +20,10 @@
  */
 
 /**
- * @todo: temporary fix because test autoloader doesn't load Zend_* classes
- * from test tree
+ * @namespace
  */
-require_once("Zend/Service/Technorati/TestCase.php");
+namespace ZendTest\Service\Technorati;
+use Zend\Service\Technorati;
 
 /**
  * @category   Zend
@@ -34,7 +34,7 @@ require_once("Zend/Service/Technorati/TestCase.php");
  * @group      Zend_Service
  * @group      Zend_Service_Technorati
  */
-class Zend_Service_Technorati_AuthorTest extends Zend_Service_Technorati_TestCase
+class AuthorTest extends TestCase
 {
     public function setUp()
     {
@@ -43,17 +43,12 @@ class Zend_Service_Technorati_AuthorTest extends Zend_Service_Technorati_TestCas
 
     public function testConstruct()
     {
-        $this->_testConstruct('Zend_Service_Technorati_Author', array($this->domElement));
-    }
-
-    public function testConstructThrowsExceptionWithInvalidDom()
-    {
-        $this->_testConstructThrowsExceptionWithInvalidDom('Zend_Service_Technorati_Author', 'DOMElement');
+        $this->_testConstruct('Zend\Service\Technorati\Author', array($this->domElement));
     }
 
     public function testAuthor()
     {
-        $author = new Zend_Service_Technorati_Author($this->domElement);
+        $author = new Technorati\Author($this->domElement);
 
         $this->assertInternalType('string', $author->getFirstName());
         $this->assertEquals('Cesare', $author->getFirstName());
@@ -70,13 +65,13 @@ class Zend_Service_Technorati_AuthorTest extends Zend_Service_Technorati_TestCas
         $this->assertInternalType('string', $author->getFirstName());
         $this->assertEquals('This is a bio.', $author->getBio());
 
-        $this->assertType('Zend_Uri_Http', $author->getThumbnailPicture());
-        $this->assertEquals(Zend_Uri::factory('http://static.technorati.com/progimages/photo.jpg?uid=117217'), $author->getThumbnailPicture());
+        $this->assertInstanceOf('Zend\Uri\Http', $author->getThumbnailPicture());
+        $this->assertEquals(\Zend\Uri\UriFactory::factory('http://static.technorati.com/progimages/photo.jpg?uid=117217'), $author->getThumbnailPicture());
     }
 
     public function testSetGet()
     {
-        $author = new Zend_Service_Technorati_Author($this->domElement);
+        $author = new Technorati\Author($this->domElement);
 
         // check first name
         $set = 'first';
@@ -110,22 +105,26 @@ class Zend_Service_Technorati_AuthorTest extends Zend_Service_Technorati_TestCas
 
         // check thubmnail picture
 
-        $set = Zend_Uri::factory('http://www.simonecarletti.com/');
+        $set = \Zend\Uri\UriFactory::factory('http://www.simonecarletti.com/');
         $get = $author->setThumbnailPicture($set)->getThumbnailPicture();
-        $this->assertType('Zend_Uri_Http', $get);
+        $this->assertInstanceOf('Zend\Uri\Http', $get);
         $this->assertEquals($set, $get);
 
         $set = 'http://www.simonecarletti.com/';
         $get = $author->setThumbnailPicture($set)->getThumbnailPicture();
-        $this->assertType('Zend_Uri_Http', $get);
-        $this->assertEquals(Zend_Uri::factory($set), $get);
+        $this->assertInstanceOf('Zend\Uri\Http', $get);
+        $this->assertEquals(\Zend\Uri\UriFactory::factory($set), $get);
+
+    }
+
+    public function testShouldRaiseExceptionIfUrlIsInvalid()
+    {
+        $this->markTestIncomplete('Uri::isValid() does not do complete URI validation yet');
+
+        $author = new Technorati\Author($this->domElement);
 
         $set = 'http:::/foo';
-        try {
-            $author->setThumbnailPicture($set);
-            $this->fail('Expected Zend_Service_Technorati_Exception not thrown');
-        } catch(Zend_Service_Technorati_Exception $e) {
-            $this->assertContains("Invalid URI", $e->getMessage());
-        }
+        $this->setExpectedException('Zend\Service\Technorati\Exception\RuntimeException', 'invalid URI');
+        $author->setThumbnailPicture($set);
     }
 }

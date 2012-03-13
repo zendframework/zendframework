@@ -25,9 +25,9 @@ use ZendTest\Cloud\StorageService\TestCase,
     Zend\Cloud\StorageService\Adapter\FileSystem,
     Zend\Config\Config;
 
-// Call Zend\Cloud\StorageService\Adapter\FileSystemTest::main() if this source file is executed directly.
+// Call ZendTest\Cloud\StorageService\Adapter\FileSystemTest::main() if this source file is executed directly.
 if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend\Cloud\StorageService\Adapter\FileSystemTest::main");
+    define("PHPUnit_MAIN_METHOD", "ZendTest\Cloud\StorageService\Adapter\FileSystemTest::main");
 }
 
 /**
@@ -143,6 +143,6 @@ class FileSystemTest extends TestCase
     }
 }
 
-if (PHPUnit_MAIN_METHOD == 'Zend\Cloud\StorageService\Adapter\FileSystemTest::main') {
+if (PHPUnit_MAIN_METHOD == 'ZendTest\Cloud\StorageService\Adapter\FileSystemTest::main') {
     FileSystemTest::main();
 }

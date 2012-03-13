@@ -27,8 +27,7 @@ namespace ZendTest\Service\Amazon\SimpleDb;
 
 use Zend\Service\Amazon\SimpleDb,
     Zend\Service\Amazon\SimpleDb\Exception,
-    Zend\Http\Client\Adapter\Socket,
-    Zend\Config\Ini as Config;
+    Zend\Http\Client\Adapter\Socket;
 
 
 /**

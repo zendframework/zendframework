@@ -1732,16 +1732,18 @@ class Cldr extends AbstractLocale
      */
     public static function getDisplayTerritory($locale, $invert = false, $detail = null)
     {
+        $locale = (string) $locale;
+
         if (!$invert) {
             return self::readCldr(
-                self::getPath() . '/main', (string) $locale, 'CldrTerritory0',
+                self::getPath() . '/main', $locale, 'CldrTerritory0' . $locale,
                 '//ldml/localeDisplayNames/territories/territory', 'type',
                 '//ldml/localeDisplayNames/territories/territory', null,
                 $detail
             );
         } else {
             return self::readCldr(
-                self::getPath() . '/main',(string) $locale, 'CldrTerritory1',
+                self::getPath() . '/main', $locale, 'CldrTerritory1' . $locale,
                 '//ldml/localeDisplayNames/territories/territory', null,
                 '//ldml/localeDisplayNames/territories/territory', 'type',
                 $detail

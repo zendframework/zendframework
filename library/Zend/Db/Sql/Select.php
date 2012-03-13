@@ -38,21 +38,31 @@ use Zend\Db\Adapter\Adapter,
  */
 class Select implements SqlInterface, PreparableSqlInterface
 {
+    const SPECIFICATION_SELECT = 0;
+    const SPECIFICATION_JOIN = 1;
+    const SPECIFICATION_ORDER = 2;
+    const SPECIFICATION_FETCH = 3;
+
     const JOIN_INNER = 'inner';
     const JOIN_OUTER = 'outer';
     const JOIN_LEFT = 'left';
     const JOIN_RIGHT = 'right';
     const SQL_WILDCARD = '*';
 
-    protected $specification1 = 'SELECT %1$s FROM %2$s';
-    protected $specification2 = '%1$s JOIN %2$s ON %3$s';
-    protected $specification3 = 'ORDER BY %1$s';
-    protected $specification4 = 'FETCH %1$s';
+    protected $specifications = array(
+        self::SPECIFICATION_SELECT => 'SELECT %1$s FROM %2$s',
+        self::SPECIFICATION_JOIN   => '%1$s JOIN %2$s ON %3$s',
+        self::SPECIFICATION_ORDER  => 'ORDER BY %1$s',
+        self::SPECIFICATION_FETCH  => 'FETCH %1$s'
+    );
+
+    protected $columns = array(self::SQL_WILDCARD);
 
     protected $table = null;
+    protected $schema = null;
+
     protected $joins = array();
-    protected $databaseOrSchema = null;
-    protected $columns = array('*');
+
     protected $where = null;
     protected $order = null;
     protected $limit = null;
@@ -61,13 +71,13 @@ class Select implements SqlInterface, PreparableSqlInterface
      * Constructor
      * 
      * @param  null|string $table 
-     * @param  null|string $databaseOrSchema 
+     * @param  null|string $schema
      * @return void
      */
-    public function __construct($table = null, $databaseOrSchema = null)
+    public function __construct($table = null, $schema = null)
     {
         if ($table) {
-            $this->from($table, $databaseOrSchema);
+            $this->from($table, $schema);
         }
         $this->where = new Where;
     }
@@ -76,13 +86,13 @@ class Select implements SqlInterface, PreparableSqlInterface
      * Create from clause
      * 
      * @param  string $table 
-     * @param  null|string $databaseOrSchema 
+     * @param  null|string $schema
      * @return Select
      */
-    public function from($table, $databaseOrSchema = null)
+    public function from($table, $schema = null)
     {
         $this->table = $table;
-        $this->databaseOrSchema = $databaseOrSchema;
+        $this->schema = $schema;
         return $this;
     }
 
@@ -140,21 +150,34 @@ class Select implements SqlInterface, PreparableSqlInterface
             $predicate($this->where);
         } else {
             if (is_string($predicate)) {
-                $predicate = new Predicate\Literal($predicate);
+                $predicate = new Predicate\Expression($predicate);
             } elseif (is_array($predicate)) {
                 foreach ($predicate as $pkey => $pvalue) {
                     if (is_string($pkey) && strpos($pkey, '?') !== false) {
-                        $predicate = new Predicate\Literal($pkey, $pvalue);
+                        $predicate = new Predicate\Expression($pkey, $pvalue);
                     } elseif (is_string($pkey)) {
                         $predicate = new Predicate\Operator($pkey, Predicate\Operator::OP_EQ, $pvalue);
                     } else {
-                        $predicate = new Predicate\Literal($pvalue);
+                        $predicate = new Predicate\Expression($pvalue);
                     }
                 }
             }
             $this->where->addPredicate($predicate, $combination);
         }
         return $this;
+    }
+
+    public function getRawState()
+    {
+        return array(
+            'columns' => $this->columns,
+            'table' => $this->table,
+            'schema' => $this->schema,
+            'joins' => $this->joins,
+            'where' => $this->where,
+            'order' => $this->order,
+            ''
+        );
     }
 
     /**
@@ -182,11 +205,11 @@ class Select implements SqlInterface, PreparableSqlInterface
         }
 
         $table = $platform->quoteIdentifier($this->table);
-        if ($this->databaseOrSchema != '') {
-            $dbSchema = $platform->quoteIdentifier($this->databaseOrSchema) . $platform->getIdentifierSeparator();
-            $table = $dbSchema . $table;
+        if ($this->schema != '') {
+            $schema = $platform->quoteIdentifier($this->schema) . $platform->getIdentifierSeparator();
+            $table = $schema . $table;
         } else {
-            $dbSchema = '';
+            $schema = '';
         }
 
         if ($this->joins) {
@@ -205,11 +228,11 @@ class Select implements SqlInterface, PreparableSqlInterface
 
         $columns = implode(', ', $columns);
 
-        $sql = sprintf($this->specification1, $columns, $table);
+        $sql = sprintf($this->specifications[0], $columns, $table);
 
         if (isset($jArgs)) {
             foreach ($jArgs as $jArg) {
-                $sql .= ' ' . vsprintf($this->specification2, $jArg);
+                $sql .= ' ' . vsprintf($this->specifications[0], $jArg);
             }
         }
 
@@ -218,19 +241,19 @@ class Select implements SqlInterface, PreparableSqlInterface
             $this->where->prepareStatement($adapter, $statement);
             $sql = $statement->getSql();
         }
-
-        $order = null; // @todo
         $limit = null; // @todo
 
-        $sql .= (isset($order)) ? sprintf($this->specification3, $order) : '';
-        $sql .= (isset($limit)) ? sprintf($this->specification4, $limit) : '';
+        $sql .= (isset($order)) ? sprintf($this->specifications[0], $order) : '';
+        $sql .= (isset($limit)) ? sprintf($this->specifications[0], $limit) : '';
 
+
+        $order = null; // @todo
         $statement->setSql($sql);
     }
 
     /**
      * Get SQL string for statement
-     * 
+     *
      * @param  null|PlatformInterface $platform If null, defaults to Sql92
      * @return string
      */
@@ -250,11 +273,11 @@ class Select implements SqlInterface, PreparableSqlInterface
 
         // process the schema and table name
         $table = $platform->quoteIdentifier($this->table);
-        if ($this->databaseOrSchema != '') {
-            $dbSchema = $platform->quoteIdentifier($this->databaseOrSchema) . $platform->getIdentifierSeparator();
-            $table = $dbSchema . $table;
+        if ($this->schema != '') {
+            $schema = $platform->quoteIdentifier($this->schema) . $platform->getIdentifierSeparator();
+            $table = $schema . $table;
         } else {
-            $dbSchema = '';
+            $schema = '';
         }
 
         // process any joins
@@ -275,12 +298,12 @@ class Select implements SqlInterface, PreparableSqlInterface
         $columns = implode(', ', $columns);
 
         // create sql
-        $sql = sprintf($this->specification1, $columns, $table);
+        $sql = sprintf($this->specifications[self::SPECIFICATION_SELECT], $columns, $table);
 
         // add in joins
         if (isset($jArgs)) {
             foreach ($jArgs as $jArg) {
-                $sql .= ' ' . vsprintf($this->specification2, $jArg);
+                $sql .= ' ' . vsprintf($this->specifications[self::SPECIFICATION_JOIN], $jArg);
             }
         }
 
@@ -290,8 +313,8 @@ class Select implements SqlInterface, PreparableSqlInterface
         }
 
         // process order & limit (@todo this is too basic, but good for now)
-        $sql .= (isset($this->order)) ? sprintf($this->specification3, $this->order) : '';
-        $sql .= (isset($this->limit)) ? sprintf($this->specification3, $this->limit) : '';
+        $sql .= (isset($this->order)) ? sprintf($this->specifications[self::SPECIFICATION_ORDER], $this->order) : '';
+        $sql .= (isset($this->limit)) ? sprintf($this->specifications[self::SPECIFICATION_FETCH], $this->limit) : '';
         return $sql;
     }
 
@@ -308,6 +331,16 @@ class Select implements SqlInterface, PreparableSqlInterface
         switch (strtolower($name)) {
             case 'where':
                 return $this->where;
+            case 'table':
+                return $this->table;
+            case 'schema':
+                return $this->schema;
+            case 'joins':
+                return $this->joins;
+            case 'columns':
+                return $this->columns;
+//            case '':
+//                return $this->
         }
     }
 

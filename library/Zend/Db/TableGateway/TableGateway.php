@@ -66,22 +66,22 @@ class TableGateway implements TableGatewayInterface
     /**
      * @var Select
      */
-    protected $sqlSelect = null;
+    protected $sqlSelectPrototype = null;
 
     /**
      * @var Insert
      */
-    protected $sqlInsert = null;
+    protected $sqlInsertPrototype = null;
 
     /**
      * @var Update
      */
-    protected $sqlUpdate = null;
+    protected $sqlUpdatePrototype = null;
 
     /**
      * @var Delete
      */
-    protected $sqlDelete = null;
+    protected $sqlDeletePrototype = null;
 
     /**
      *
@@ -115,6 +115,7 @@ class TableGateway implements TableGatewayInterface
         $this->setSelectResultPrototype(($selectResultPrototype) ?: new ResultSet);
         $this->initializeSqlObjects();
     }
+
     /**
      * Get table name
      * 
@@ -124,6 +125,7 @@ class TableGateway implements TableGatewayInterface
     {
         return $this->tableName;
     }
+
     /**
      * Get adapter
      * 
@@ -149,9 +151,9 @@ class TableGateway implements TableGatewayInterface
      * 
      * @param Delete $sqlDelete
      */
-    public function setSqlDelete(Delete $sqlDelete)
+    public function setSqlDeletePrototype(Delete $sqlDelete)
     {
-        $this->sqlDelete = $sqlDelete;
+        $this->sqlDeletePrototype = $sqlDelete;
     }
 
     /**
@@ -159,9 +161,9 @@ class TableGateway implements TableGatewayInterface
      * 
      * @return Delete
      */
-    public function getSqlDelete()
+    public function getSqlDeletePrototype()
     {
-        return $this->sqlDelete;
+        return $this->sqlDeletePrototype;
     }
 
     /**
@@ -169,9 +171,9 @@ class TableGateway implements TableGatewayInterface
      * 
      * @param Insert $sqlInsert
      */
-    public function setSqlInsert(Insert $sqlInsert)
+    public function setSqlInsertPrototype(Insert $sqlInsert)
     {
-        $this->sqlInsert = $sqlInsert;
+        $this->sqlInsertPrototype = $sqlInsert;
     }
 
     /**
@@ -179,9 +181,9 @@ class TableGateway implements TableGatewayInterface
      * 
      * @return Insert
      */
-    public function getSqlInsert()
+    public function getSqlInsertPrototype()
     {
-        return $this->sqlInsert;
+        return $this->sqlInsertPrototype;
     }
 
     /**
@@ -189,9 +191,9 @@ class TableGateway implements TableGatewayInterface
      * 
      * @param Select $sqlSelect
      */
-    public function setSqlSelect(Select $sqlSelect)
+    public function setSqlSelectPrototype(Select $sqlSelect)
     {
-        $this->sqlSelect = $sqlSelect;
+        $this->sqlSelectPrototype = $sqlSelect;
     }
 
     /**
@@ -199,9 +201,9 @@ class TableGateway implements TableGatewayInterface
      * 
      * @return Select
      */
-    public function getSqlSelect()
+    public function getSqlSelectPrototype()
     {
-        return $this->sqlSelect;
+        return $this->sqlSelectPrototype;
     }
 
     /**
@@ -209,9 +211,9 @@ class TableGateway implements TableGatewayInterface
      * 
      * @param Update $sqlUpdate
      */
-    public function setSqlUpdate(Update $sqlUpdate)
+    public function setSqlUpdatePrototype(Update $sqlUpdate)
     {
-        $this->sqlUpdate = $sqlUpdate;
+        $this->sqlUpdatePrototype = $sqlUpdate;
     }
 
     /**
@@ -219,9 +221,9 @@ class TableGateway implements TableGatewayInterface
      * 
      * @return Update
      */
-    public function getSqlUpdate()
+    public function getSqlUpdatePrototype()
     {
-        return $this->sqlUpdate;
+        return $this->sqlUpdatePrototype;
     }
 
     /**
@@ -243,15 +245,17 @@ class TableGateway implements TableGatewayInterface
     {
         return $this->selectResultPrototype;
     }
+
     /**
      * Select
      * 
-     * @param Closure $where
+     * @param string|array|\Closure $where
      * @return type 
      */
     public function select($where = null)
     {
-        $select = clone $this->sqlSelect;
+        $select = clone $this->sqlSelectPrototype;
+
         $select->from($this->tableName, $this->databaseSchema);
         if ($where instanceof \Closure) {
             $where($select);
@@ -267,15 +271,21 @@ class TableGateway implements TableGatewayInterface
         $resultSet->setDataSource($result);
         return $resultSet;
     }
+
+    public function selectWith(Select $select)
+    {
+
+    }
+
     /**
      * Insert
      * 
-     * @param  type $set
-     * @return type 
+     * @param  array $set
+     * @return int
      */
     public function insert($set)
     {
-        $insert = clone $this->sqlInsert;
+        $insert = clone $this->sqlInsertPrototype;
         $insert->into($this->tableName, $this->databaseSchema);
         $insert->values($set);
 
@@ -286,16 +296,17 @@ class TableGateway implements TableGatewayInterface
         $this->lastInsertId = $this->adapter->getDriver()->getConnection()->getLastGeneratedId();
         return $result->getAffectedRows();
     }
+
     /**
      * Update
      * 
-     * @param  type $set
-     * @param  string $where
-     * @return type 
+     * @param  array $set
+     * @param  string|array|closure $where
+     * @return int
      */
     public function update($set, $where = null)
     {
-        $update = clone $this->sqlUpdate;
+        $update = clone $this->sqlUpdatePrototype;
         $update->table($this->tableName, $this->databaseSchema);
         $update->set($set);
         $update->where($where);
@@ -306,6 +317,7 @@ class TableGateway implements TableGatewayInterface
         $result = $statement->execute();
         return $result->getAffectedRows();
     }
+
     /**
      * Delete
      * 
@@ -314,7 +326,7 @@ class TableGateway implements TableGatewayInterface
      */
     public function delete($where)
     {
-        $delete = clone $this->sqlDelete;
+        $delete = clone $this->sqlDeletePrototype;
         $delete->from($this->tableName, $this->databaseSchema);
         if ($where instanceof \Closure) {
             $where($delete);
@@ -328,6 +340,7 @@ class TableGateway implements TableGatewayInterface
         $result = $statement->execute();
         return $result->getAffectedRows();
     }
+
     /**
      * Get last insert id
      * 
@@ -337,6 +350,7 @@ class TableGateway implements TableGatewayInterface
     {
         return $this->lastInsertId;
     }
+
     /**
      * __get
      * 
@@ -355,24 +369,26 @@ class TableGateway implements TableGatewayInterface
         }
         throw new \Exception('Invalid magic property on adapter');
     }
+
     /**
      * Initialize sql objects
      */
     protected function initializeSqlObjects()
     {
-        if (!$this->sqlSelect) {
-            $this->sqlSelect = new Select();
+        if (!$this->sqlSelectPrototype) {
+            $this->sqlSelectPrototype = new Select($this->tableName, $this->databaseSchema);
         }
-        if (!$this->sqlInsert) {
-            $this->sqlInsert = new Insert();
+        if (!$this->sqlInsertPrototype) {
+            $this->sqlInsertPrototype = new Insert($this->tableName, $this->databaseSchema);
         }
-        if (!$this->sqlUpdate) {
-            $this->sqlUpdate = new Update();
+        if (!$this->sqlUpdatePrototype) {
+            $this->sqlUpdatePrototype = new Update($this->tableName, $this->databaseSchema);
         }
-        if (!$this->sqlDelete) {
-            $this->sqlDelete = new Delete();
+        if (!$this->sqlDeletePrototype) {
+            $this->sqlDeletePrototype = new Delete($this->tableName, $this->databaseSchema);
         }
     }
+
     /**
      * __clone
      * 
@@ -380,10 +396,10 @@ class TableGateway implements TableGatewayInterface
     public function __clone()
     {
         $this->selectResultPrototype = clone $this->selectResultPrototype;
-        $this->sqlSelect = clone $this->sqlSelect;
-        $this->sqlInsert = clone $this->sqlInsert;
-        $this->sqlUpdate = clone $this->sqlUpdate;
-        $this->sqlDelete = clone $this->sqlDelete;
+        $this->sqlSelectPrototype = clone $this->sqlSelectPrototype;
+        $this->sqlInsertPrototype = clone $this->sqlInsertPrototype;
+        $this->sqlUpdatePrototype = clone $this->sqlUpdatePrototype;
+        $this->sqlDeletePrototype = clone $this->sqlDeletePrototype;
     }
 
 }

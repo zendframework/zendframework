@@ -30,7 +30,6 @@ class DeleteTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Zend\Db\Sql\Delete::from
-     * @todo   Implement testFrom().
      */
     public function testFrom()
     {
@@ -41,7 +40,6 @@ class DeleteTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Zend\Db\Sql\Delete::where
-     * @todo   Implement testWhere().
      */
     public function testWhere()
     {

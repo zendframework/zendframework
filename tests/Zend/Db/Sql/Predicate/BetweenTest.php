@@ -26,24 +26,36 @@ use PHPUnit_Framework_TestCase as TestCase,
 
 class BetweenTest extends TestCase
 {
+    /**
+     * @var Between
+     */
+    protected $between = null;
+
     public function setUp()
     {
         $this->between = new Between();
     }
 
-    public function testEmptyConstructorYieldsNullIdentifierMinimumAndMaximumValues()
+    /**
+     * @covers Zend\Db\Sql\Predicate\Between::__construct
+     * @covers Zend\Db\Sql\Predicate\Between::getIdentifier
+     * @covers Zend\Db\Sql\Predicate\Between::getMinValue
+     * @covers Zend\Db\Sql\Predicate\Between::getMaxValue
+     */
+    public function testConstructorYieldsNullIdentifierMinimumAndMaximumValues()
     {
         $this->assertNull($this->between->getIdentifier());
         $this->assertNull($this->between->getMinValue());
         $this->assertNull($this->between->getMaxValue());
     }
 
-    public function testSpecificationHasSaneDefaultValue()
-    {
-        $this->assertEquals('%1$s BETWEEN %2$s AND %3$s', $this->between->getSpecification());
-    }
-
-    public function testCanPassIdentifierMinimumAndMaximumValuesToConstructor()
+    /**
+     * @covers Zend\Db\Sql\Predicate\Between::__construct
+     * @covers Zend\Db\Sql\Predicate\Between::getIdentifier
+     * @covers Zend\Db\Sql\Predicate\Between::getMinValue
+     * @covers Zend\Db\Sql\Predicate\Between::getMaxValue
+     */
+    public function testConstructorCanPassIdentifierMinimumAndMaximumValues()
     {
         $between = new Between('foo.bar', 1, 300);
         $this->assertEquals('foo.bar', $between->getIdentifier());
@@ -51,30 +63,59 @@ class BetweenTest extends TestCase
         $this->assertEquals(300, $between->getMaxValue());
     }
 
+    /**
+     * @covers Zend\Db\Sql\Predicate\Between::getSpecification
+     */
+    public function testSpecificationHasSaneDefaultValue()
+    {
+        $this->assertEquals('%1$s BETWEEN %2$s AND %3$s', $this->between->getSpecification());
+    }
+
+
+
+    /**
+     * @covers Zend\Db\Sql\Predicate\Between::setIdentifier
+     * @covers Zend\Db\Sql\Predicate\Between::getIdentifier
+     */
     public function testIdentifierIsMutable()
     {
         $this->between->setIdentifier('foo.bar');
         $this->assertEquals('foo.bar', $this->between->getIdentifier());
     }
 
+    /**
+     * @covers Zend\Db\Sql\Predicate\Between::setMinValue
+     * @covers Zend\Db\Sql\Predicate\Between::getMinValue
+     */
     public function testMinValueIsMutable()
     {
         $this->between->setMinValue(10);
         $this->assertEquals(10, $this->between->getMinValue());
     }
 
+    /**
+     * @covers Zend\Db\Sql\Predicate\Between::setMaxValue
+     * @covers Zend\Db\Sql\Predicate\Between::getMaxValue
+     */
     public function testMaxValueIsMutable()
     {
         $this->between->setMaxValue(10);
         $this->assertEquals(10, $this->between->getMaxValue());
     }
 
+    /**
+     * @covers Zend\Db\Sql\Predicate\Between::setSpecification
+     * @covers Zend\Db\Sql\Predicate\Between::getSpecification
+     */
     public function testSpecificationIsMutable()
     {
         $this->between->setSpecification('%1$s IS INBETWEEN %2$s AND %3$s');
         $this->assertEquals('%1$s IS INBETWEEN %2$s AND %3$s', $this->between->getSpecification());
     }
 
+    /**
+     * @covers Zend\Db\Sql\Predicate\Between::getExpressionData
+     */
     public function testRetrievingWherePartsReturnsSpecificationArrayOfIdentifierAndValuesAndArrayOfTypes()
     {
         $this->between->setIdentifier('foo.bar')
@@ -85,6 +126,6 @@ class BetweenTest extends TestCase
             array('foo.bar', 10, 19),
             array(Between::TYPE_IDENTIFIER, Between::TYPE_VALUE, Between::TYPE_VALUE),
         ));
-        $this->assertEquals($expected, $this->between->getWhereParts());
+        $this->assertEquals($expected, $this->between->getExpressionData());
     }
 }

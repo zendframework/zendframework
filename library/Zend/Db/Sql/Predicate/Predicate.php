@@ -221,7 +221,7 @@ class Predicate extends PredicateSet
     public function literal($literal, $parameter)
     {
         $this->addPredicate(
-            new Literal($literal, $parameter),
+            new Expression($literal, $parameter),
             ($this->nextPredicateCombineOperator) ?: $this->defaultCombination
         );
         $this->nextPredicateCombineOperator = null;

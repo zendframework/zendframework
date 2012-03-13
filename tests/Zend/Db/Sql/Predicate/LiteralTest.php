@@ -22,13 +22,13 @@
 namespace ZendTest\Db\Sql\Predicate;
 
 use PHPUnit_Framework_TestCase as TestCase,
-    Zend\Db\Sql\Predicate\Literal;
+    Zend\Db\Sql\Predicate\Expression;
 
 class LiteralTest extends TestCase
 {
     public function setUp()
     {
-        $this->predicate = new Literal();
+        $this->predicate = new Expression();
     }
 
     public function testEmptyConstructorYieldsEmptyLiteralAndParameter()
@@ -39,7 +39,7 @@ class LiteralTest extends TestCase
 
     public function testCanPassLiteralAndParameterToConstructor()
     {
-        $predicate = new Literal('foo.bar = ?', 'bar');
+        $predicate = new Expression('foo.bar = ?', 'bar');
         $this->assertEquals('foo.bar = ?', $predicate->getLiteral());
         $this->assertEquals(array('bar'), $predicate->getParameter());
     }
@@ -63,7 +63,7 @@ class LiteralTest extends TestCase
         $expected = array(array(
             'foo.bar = %s AND id != %s',
             array('foo', 'bar'),
-            array(Literal::TYPE_VALUE, Literal::TYPE_VALUE),
+            array(Expression::TYPE_VALUE, Expression::TYPE_VALUE),
         ));
         $test = $this->predicate->getWhereParts();
         $this->assertEquals($expected, $test, var_export($test, 1));

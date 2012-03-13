@@ -93,7 +93,6 @@ class InsertTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('INSERT INTO "foo" ("bar") VALUES (\'baz\')', $this->insert->getSqlString());
     }
 
-
     /**
      * @covers Zend\Db\Sql\Insert::__set
      */

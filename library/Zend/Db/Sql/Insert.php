@@ -147,8 +147,8 @@ class Insert implements SqlInterface, PreparableSqlInterface
         foreach ($this->columns as $cIndex => $column) {
             $columns[$cIndex] = $platform->quoteIdentifier($column);
             if ($prepareType == 'positional') {
-                $parameterContainer->offsetSet(null, $this->values[$cIndex]);
                 $values[$cIndex] = $driver->formatParameterName(null);
+                $parameterContainer->offsetSet(null, $this->values[$cIndex]);
             } elseif ($prepareType == 'named') {
                 $values[$cIndex] = $driver->formatParameterName($column);
                 $parameterContainer->offsetSet($column, $this->values[$cIndex]);

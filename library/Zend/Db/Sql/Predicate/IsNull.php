@@ -95,7 +95,7 @@ class IsNull implements PredicateInterface
      *
      * @return array
      */
-    public function getWhereParts()
+    public function getExpressionData()
     {
         return array(array(
             $this->getSpecification(),

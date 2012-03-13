@@ -121,15 +121,15 @@ class Update implements SqlInterface, PreparableSqlInterface
             $predicate($this->where);
         } else {
             if (is_string($predicate)) {
-                $predicate = new Predicate\Literal($predicate);
+                $predicate = new Predicate\Expression($predicate);
             } elseif (is_array($predicate)) {
                 foreach ($predicate as $pkey => $pvalue) {
                     if (is_string($pkey) && strpos($pkey, '?') !== false) {
-                        $predicate = new Predicate\Literal($pkey, $pvalue);
+                        $predicate = new Predicate\Expression($pkey, $pvalue);
                     } elseif (is_string($pkey)) {
                         $predicate = new Predicate\Operator($pkey, Predicate\Operator::OP_EQ, $pvalue);
                     } else {
-                        $predicate = new Predicate\Literal($pvalue);
+                        $predicate = new Predicate\Expression($pvalue);
                     }
                 }
             }

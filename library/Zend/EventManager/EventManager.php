@@ -254,7 +254,7 @@ class EventManager implements EventCollection
      * executed. By default, this value is 1; however, you may set it for any
      * integer value. Higher values have higher priority (i.e., execute first).
      *
-     * @param  string|ListenerAggregate $event
+     * @param  string|array|ListenerAggregate $event An event or array of event names. If a ListenerAggregate, proxies to {@link attachAggregate()}.
      * @param  callback|int $callback If string $event provided, expects PHP callback; for a ListenerAggregate $event, this will be the priority
      * @param  int $priority If provided, the priority at which to register the callback
      * @return CallbackHandler|mixed CallbackHandler if attaching callback (to allow later unsubscribe); mixed if attaching aggregate
@@ -270,6 +270,14 @@ class EventManager implements EventCollection
                 '%s: expects a callback; none provided',
                 __METHOD__
             ));
+        }
+
+        if (is_array($event)) {
+            $listeners = array();
+            foreach ($event as $name) {
+                $listeners[] = $this->attach($name, $callback, $priority);
+            }
+            return $listeners;
         }
 
         if (empty($this->events[$event])) {

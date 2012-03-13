@@ -69,6 +69,37 @@ class EventManagerTest extends \PHPUnit_Framework_TestCase
         $this->assertContains('test', $events);
     }
 
+    public function testAllowsPassingArrayOfEventNamesWhenAttaching()
+    {
+        $callback = function ($e) {
+            return $e->getName();
+        };
+        $this->events->attach(array('foo', 'bar'), $callback);
+
+        foreach (array('foo', 'bar') as $event) {
+            $listeners = $this->events->getListeners($event);
+            $this->assertTrue(count($listeners) > 0);
+            foreach ($listeners as $listener) {
+                $this->assertSame($callback, $listener->getCallback());
+            }
+        }
+    }
+
+    public function testPassingArrayOfEventNamesWhenAttachingReturnsArrayOfCallbackHandlers()
+    {
+        $callback = function ($e) {
+            return $e->getName();
+        };
+        $listeners = $this->events->attach(array('foo', 'bar'), $callback);
+
+        $this->assertInternalType('array', $listeners);
+
+        foreach ($listeners as $listener) {
+            $this->assertInstanceOf('Zend\Stdlib\CallbackHandler', $listener);
+            $this->assertSame($callback, $listener->getCallback());
+        }
+    }
+
     public function testDetachShouldRemoveListenerFromEvent()
     {
         $listener  = $this->events->attach('test', array($this, __METHOD__));

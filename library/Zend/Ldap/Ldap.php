@@ -240,6 +240,7 @@ class Ldap
      *  useStartTls
      *  optRefferals
      *  tryUsernameSplit
+     *  networkTimeout
      *
      * @param  array|\Zend\Config\Config $options Options used in connecting, binding, etc.
      * @return \Zend\Ldap\Ldap Provides a fluent interface

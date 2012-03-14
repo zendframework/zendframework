@@ -20,9 +20,11 @@
  */
 
 namespace ZendTest\EventManager;
-use Zend\EventManager\StaticEventManager,
+
+use PHPUnit_Framework_TestCase as TestCase,
+    stdClass,
     Zend\EventManager\EventManager,
-    PHPUnit_Framework_TestCase as TestCase;
+    Zend\EventManager\StaticEventManager;
 
 /**
  * @category   Zend
@@ -148,6 +150,25 @@ class StaticEventManagerTest extends TestCase
                 }
                 $this->assertTrue($found, 'Did not find listener!');
             }
+        }
+    }
+
+    public function testListenersAttachedUsingWildcardEventWillBeTriggeredByResource()
+    {
+        $test     = new stdClass;
+        $test->events = array();
+        $callback = function($e) use ($test) {
+            $test->events[] = $e->getName();
+        };
+
+        $staticEvents = StaticEventManager::getInstance();
+        $staticEvents->attach('bar', '*', $callback);
+
+        $events = new EventManager('bar');
+
+        foreach (array('foo', 'bar', 'baz') as $event) {
+            $events->trigger($event);
+            $this->assertContains($event, $test->events);
         }
     }
 

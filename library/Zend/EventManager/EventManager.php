@@ -434,41 +434,21 @@ class EventManager implements EventCollection
 
         // Add static/wildcard listeners to the list of listeners,
         // but don't modify the listeners object
-        $staticListeners   = $this->getStaticListeners($event);
-        $wildcardListeners = $this->getListeners('*');
-        if (count($staticListeners) || count($wildcardListeners)) {
+        $staticListeners         = $this->getStaticListeners($event);
+        $staticWildcardListeners = $this->getStaticListeners('*');
+        $wildcardListeners       = $this->getListeners('*');
+        if (count($staticListeners) || count($staticWildcardListeners) || count($wildcardListeners)) {
             $listeners = clone $listeners;
         }
 
-        // Add static listeners
-        if (count($staticListeners)) {
-            foreach ($staticListeners as $listener) {
-                $priority = $listener->getMetadatum('priority');
-                if (null === $priority) {
-                    $priority = 1;
-                } elseif (is_array($priority)) {
-                    // If we have an array, likely using PriorityQueue. Grab first
-                    // element of the array, as that's the actual priority.
-                    $priority = array_shift($priority);
-                }
-                $listeners->insert($listener, $priority);
-            }
-        }
+        // Static listeners on this specific event
+        $this->insertListeners($listeners, $staticListeners);
+
+        // Static wildcard listeners
+        $this->insertListeners($listeners, $staticWildcardListeners);
 
         // Add wildcard listeners
-        if (count($wildcardListeners)) {
-            foreach ($wildcardListeners as $listener) {
-                $priority = $listener->getMetadatum('priority');
-                if (null === $priority) {
-                    $priority = 1;
-                } elseif (is_array($priority)) {
-                    // If we have an array, likely using PriorityQueue. Grab first
-                    // element of the array, as that's the actual priority.
-                    $priority = array_shift($priority);
-                }
-                $listeners->insert($listener, $priority);
-            }
-        }
+        $this->insertListeners($listeners, $wildcardListeners);
 
         if ($listeners->isEmpty()) {
             return $responses;
@@ -530,5 +510,33 @@ class EventManager implements EventCollection
         }
 
         return $staticListeners;
+    }
+
+    /**
+     * Add listeners to the master queue of listeners
+     *
+     * Used to inject static listeners and wildcard listeners.
+     * 
+     * @param  PriorityQueue $masterListeners 
+     * @param  PriorityQueue $listeners 
+     * @return void
+     */
+    protected function insertListeners($masterListeners, $listeners)
+    {
+        if (!count($listeners)) {
+            return;
+        }
+
+        foreach ($listeners as $listener) {
+            $priority = $listener->getMetadatum('priority');
+            if (null === $priority) {
+                $priority = 1;
+            } elseif (is_array($priority)) {
+                // If we have an array, likely using PriorityQueue. Grab first
+                // element of the array, as that's the actual priority.
+                $priority = array_shift($priority);
+            }
+            $masterListeners->insert($listener, $priority);
+        }
     }
 }

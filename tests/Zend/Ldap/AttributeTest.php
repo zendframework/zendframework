@@ -35,12 +35,12 @@ use Zend\Ldap;
  */
 class AttributeTest extends \PHPUnit_Framework_TestCase
 {
-    protected function _assertLocalDateTimeString($timestamp, $value)
+    protected function assertLocalDateTimeString($timestamp, $value)
     {
         $this->assertEquals(date('YmdHisO', $timestamp), $value);
     }
 
-    protected function _assertUtcDateTimeString($localTimestamp, $value)
+    protected function assertUtcDateTimeString($localTimestamp, $value)
     {
         $localOffset = date('Z', $localTimestamp);
         $utcTimestamp = $localTimestamp - $localOffset;
@@ -235,7 +235,7 @@ class AttributeTest extends \PHPUnit_Framework_TestCase
         $ts=mktime(12, 30, 30, 6, 25, 2008);
         $data=array();
         Ldap\Attribute::setDateTimeAttribute($data, 'ts', $ts, false);
-        $this->_assertLocalDateTimeString($ts, $data['ts'][0]);
+        $this->assertLocalDateTimeString($ts, $data['ts'][0]);
     }
 
     public function testSetDateTimeValueUtc()
@@ -243,7 +243,7 @@ class AttributeTest extends \PHPUnit_Framework_TestCase
         $ts=mktime(12, 30, 30, 6, 25, 2008);
         $data=array();
         Ldap\Attribute::setDateTimeAttribute($data, 'ts', $ts, true);
-        $this->_assertUtcDateTimeString($ts, $data['ts'][0]);
+        $this->assertUtcDateTimeString($ts, $data['ts'][0]);
     }
 
     public function testSetDateTimeValueLocalArray()
@@ -253,8 +253,8 @@ class AttributeTest extends \PHPUnit_Framework_TestCase
         $ts[]=mktime(1, 25, 30, 1, 2, 2008);
         $data=array();
         Ldap\Attribute::setDateTimeAttribute($data, 'ts', $ts, false);
-        $this->_assertLocalDateTimeString($ts[0], $data['ts'][0]);
-        $this->_assertLocalDateTimeString($ts[1], $data['ts'][1]);
+        $this->assertLocalDateTimeString($ts[0], $data['ts'][0]);
+        $this->assertLocalDateTimeString($ts[1], $data['ts'][1]);
     }
 
     public function testSetDateTimeValueIllegal()
@@ -270,7 +270,7 @@ class AttributeTest extends \PHPUnit_Framework_TestCase
         $ts=mktime(12, 30, 30, 6, 25, 2008);
         $data=array();
         Ldap\Attribute::setDateTimeAttribute($data, 'ts', $ts, false);
-        $this->_assertLocalDateTimeString($ts, $data['ts'][0]);
+        $this->assertLocalDateTimeString($ts, $data['ts'][0]);
         $retTs=Ldap\Attribute::getDateTimeAttribute($data, 'ts', 0);
         $this->assertEquals($ts, $retTs);
     }
@@ -280,7 +280,7 @@ class AttributeTest extends \PHPUnit_Framework_TestCase
         $ts=mktime(12, 30, 30, 6, 25, 2008);
         $data=array();
         Ldap\Attribute::setDateTimeAttribute($data, 'ts', $ts, true);
-        $this->_assertUtcDateTimeString($ts, $data['ts'][0]);
+        $this->assertUtcDateTimeString($ts, $data['ts'][0]);
         $retTs=Ldap\Attribute::getDateTimeAttribute($data, 'ts', 0);
         $this->assertEquals($ts, $retTs);
     }
@@ -292,8 +292,8 @@ class AttributeTest extends \PHPUnit_Framework_TestCase
         $ts[]=mktime(1, 25, 30, 1, 2, 2008);
         $data=array();
         Ldap\Attribute::setDateTimeAttribute($data, 'ts', $ts, false);
-        $this->_assertLocalDateTimeString($ts[0], $data['ts'][0]);
-        $this->_assertLocalDateTimeString($ts[1], $data['ts'][1]);
+        $this->assertLocalDateTimeString($ts[0], $data['ts'][0]);
+        $this->assertLocalDateTimeString($ts[1], $data['ts'][1]);
         $retTs=Ldap\Attribute::getDateTimeAttribute($data, 'ts');
         $this->assertEquals($ts[0], $retTs[0]);
         $this->assertEquals($ts[1], $retTs[1]);
@@ -417,7 +417,7 @@ class AttributeTest extends \PHPUnit_Framework_TestCase
     public function testConvertToLDAPDateTimeValue()
     {
         $ts=mktime(12, 30, 30, 6, 25, 2008);
-        $this->_assertLocalDateTimeString($ts, Ldap\Attribute::convertToLDAPDateTimeValue($ts));
+        $this->assertLocalDateTimeString($ts, Ldap\Attribute::convertToLDAPDateTimeValue($ts));
     }
 
     public function testRemoveDuplicates()

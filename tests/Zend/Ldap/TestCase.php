@@ -38,7 +38,7 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
     /**
      * @return array
      */
-    protected function _createTestArrayData()
+    protected function createTestArrayData()
     {
         $data=array(
             'dn'          => 'cn=name,dc=example,dc=org',
@@ -54,8 +54,8 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
     /**
      * @return Zend_Ldap_Node
      */
-    protected function _createTestNode()
+    protected function createTestNode()
     {
-        return \Zend\Ldap\Node::fromArray($this->_createTestArrayData(), true);
+        return \Zend\Ldap\Node::fromArray($this->createTestArrayData(), true);
     }
 }

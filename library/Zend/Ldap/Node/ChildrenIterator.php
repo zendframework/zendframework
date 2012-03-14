@@ -29,11 +29,6 @@ use Zend\Ldap\Node;
 /**
  * Zend_Ldap_Node_ChildrenIterator provides an iterator to a collection of children nodes.
  *
- * @uses       ArrayAccess
- * @uses       Countable
- * @uses       Iterator
- * @uses       RecursiveIterator
- * @uses       \Zend\Ldap\Node
  * @category   Zend
  * @package    Zend_Ldap
  * @subpackage Node
@@ -47,7 +42,7 @@ class ChildrenIterator implements \Iterator, \Countable, \RecursiveIterator, \Ar
      *
      * @var array
      */
-    private $_data;
+    private $data;
 
     /**
      * Constructor.
@@ -57,7 +52,7 @@ class ChildrenIterator implements \Iterator, \Countable, \RecursiveIterator, \Ar
      */
     public function __construct(array $data)
     {
-        $this->_data = $data;
+        $this->data = $data;
     }
 
     /**
@@ -68,7 +63,7 @@ class ChildrenIterator implements \Iterator, \Countable, \RecursiveIterator, \Ar
      */
     public function count()
     {
-        return count($this->_data);
+        return count($this->data);
     }
 
     /**
@@ -79,7 +74,7 @@ class ChildrenIterator implements \Iterator, \Countable, \RecursiveIterator, \Ar
      */
     public function current()
     {
-        return current($this->_data);
+        return current($this->data);
     }
 
     /**
@@ -90,7 +85,7 @@ class ChildrenIterator implements \Iterator, \Countable, \RecursiveIterator, \Ar
      */
     public function key()
     {
-        return key($this->_data);
+        return key($this->data);
     }
 
     /**
@@ -99,7 +94,7 @@ class ChildrenIterator implements \Iterator, \Countable, \RecursiveIterator, \Ar
      */
     public function next()
     {
-        next($this->_data);
+        next($this->data);
     }
 
     /**
@@ -108,7 +103,7 @@ class ChildrenIterator implements \Iterator, \Countable, \RecursiveIterator, \Ar
      */
     public function rewind()
     {
-        reset($this->_data);
+        reset($this->data);
     }
 
     /**
@@ -120,7 +115,7 @@ class ChildrenIterator implements \Iterator, \Countable, \RecursiveIterator, \Ar
      */
     public function valid()
     {
-        return (current($this->_data)!==false);
+        return (current($this->data)!==false);
     }
 
     /**
@@ -162,7 +157,7 @@ class ChildrenIterator implements \Iterator, \Countable, \RecursiveIterator, \Ar
     public function offsetGet($rdn)
     {
         if ($this->offsetExists($rdn)) {
-            return $this->_data[$rdn];
+            return $this->data[$rdn];
         } else {
             return null;
         }
@@ -177,7 +172,7 @@ class ChildrenIterator implements \Iterator, \Countable, \RecursiveIterator, \Ar
      */
     public function offsetExists($rdn)
     {
-        return (array_key_exists($rdn, $this->_data));
+        return (array_key_exists($rdn, $this->data));
     }
 
     /**

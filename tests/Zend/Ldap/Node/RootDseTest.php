@@ -42,8 +42,8 @@ class RootDseTest extends \ZendTest\Ldap\OnlineTestCase
 {
     public function testLoadRootDseNode()
     {
-        $root1=$this->_getLDAP()->getRootDse();
-        $root2=$this->_getLDAP()->getRootDse();
+        $root1=$this->getLDAP()->getRootDse();
+        $root2=$this->getLDAP()->getRootDse();
 
         $this->assertEquals($root1, $root2);
         $this->assertSame($root1, $root2);
@@ -51,7 +51,7 @@ class RootDseTest extends \ZendTest\Ldap\OnlineTestCase
 
     public function testSupportCheckMethods()
     {
-        $root=$this->_getLDAP()->getRootDse();
+        $root=$this->getLDAP()->getRootDse();
 
         $this->assertInternalType('boolean', $root->supportsSaslMechanism('GSSAPI'));
         $this->assertInternalType('boolean', $root->supportsSaslMechanism(array('GSSAPI', 'DIGEST-MD5')));
@@ -92,7 +92,7 @@ class RootDseTest extends \ZendTest\Ldap\OnlineTestCase
 
     public function testGetters()
     {
-        $root=$this->_getLDAP()->getRootDse();
+        $root=$this->getLDAP()->getRootDse();
 
         $this->assertInternalType('array', $root->getNamingContexts());
         $this->assertInternalType('string', $root->getSubschemaSubentry());
@@ -128,13 +128,13 @@ class RootDseTest extends \ZendTest\Ldap\OnlineTestCase
                 $this->assertInternalType('string', $root->getStatisticsWholeSubtreeSearchOps());
                 break;
             case RootDse::SERVER_TYPE_OPENLDAP:
-                $this->_assertNullOrString($root->getConfigContext());
-                $this->_assertNullOrString($root->getMonitorContext());
+                $this->assertNullOrString($root->getConfigContext());
+                $this->assertNullOrString($root->getMonitorContext());
                 break;
         }
     }
 
-    protected function _assertNullOrString($value)
+    protected function assertNullOrString($value)
     {
         if ($value===null) {
             $this->assertNull($value);
@@ -148,7 +148,7 @@ class RootDseTest extends \ZendTest\Ldap\OnlineTestCase
      */
     public function testSetterWillThrowException()
     {
-          $root=$this->_getLDAP()->getRootDse();
+          $root=$this->getLDAP()->getRootDse();
           $root->objectClass='illegal';
     }
 
@@ -157,7 +157,7 @@ class RootDseTest extends \ZendTest\Ldap\OnlineTestCase
      */
     public function testOffsetSetWillThrowException()
     {
-          $root=$this->_getLDAP()->getRootDse();
+          $root=$this->getLDAP()->getRootDse();
           $root['objectClass']='illegal';
     }
 
@@ -166,7 +166,7 @@ class RootDseTest extends \ZendTest\Ldap\OnlineTestCase
      */
     public function testUnsetterWillThrowException()
     {
-          $root=$this->_getLDAP()->getRootDse();
+          $root=$this->getLDAP()->getRootDse();
           unset($root->objectClass);
     }
 
@@ -175,7 +175,7 @@ class RootDseTest extends \ZendTest\Ldap\OnlineTestCase
      */
     public function testOffsetUnsetWillThrowException()
     {
-          $root=$this->_getLDAP()->getRootDse();
+          $root=$this->getLDAP()->getRootDse();
           unset($root['objectClass']);
     }
 }

@@ -29,8 +29,6 @@ use Zend\Ldap\Node;
 /**
  * Zend_Ldap_Node_Collection provides a collecion of nodes.
  *
- * @uses       \Zend\Ldap\Collection
- * @uses       \Zend\Ldap\Node
  * @category   Zend
  * @package    Zend_Ldap
  * @subpackage Node
@@ -45,10 +43,10 @@ class Collection extends \Zend\Ldap\Collection
      * @param  array $data
      * @return \Zend\Ldap\Node
      */
-    protected function _createEntry(array $data)
+    protected function createEntry(array $data)
     {
         $node = Node::fromArray($data, true);
-        $node->attachLDAP($this->_iterator->getLDAP());
+        $node->attachLDAP($this->iterator->getLDAP());
         return $node;
     }
 
@@ -60,6 +58,6 @@ class Collection extends \Zend\Ldap\Collection
      */
     public function key()
     {
-        return $this->_iterator->key();
+        return $this->iterator->key();
     }
 }

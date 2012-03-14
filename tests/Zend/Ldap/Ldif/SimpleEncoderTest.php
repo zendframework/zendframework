@@ -168,7 +168,7 @@ class SimpleEncoderTest extends \ZendTest\Ldap\TestCase
 
     public function testNodeEncoding()
     {
-        $node = $this->_createTestNode();
+        $node = $this->createTestNode();
         $expected = 'version: 1' . PHP_EOL .
             'dn: cn=name,dc=example,dc=org' . PHP_EOL .
             'objectclass: account' . PHP_EOL .

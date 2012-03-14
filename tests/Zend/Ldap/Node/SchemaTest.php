@@ -43,41 +43,41 @@ class SchemaTest extends \ZendTest\Ldap\OnlineTestCase
     /**
      * @var Zend_Ldap_Node_Schema
      */
-    private $_schema;
+    private $schema;
 
     protected function setUp()
     {
         parent::setUp();
-        $this->_schema=$this->_getLDAP()->getSchema();
+        $this->schema=$this->getLDAP()->getSchema();
     }
 
     public function testSchemaNode()
     {
-        $schema=$this->_getLDAP()->getSchema();
+        $schema=$this->getLDAP()->getSchema();
 
-        $this->assertEquals($this->_schema, $schema);
-        $this->assertSame($this->_schema, $schema);
+        $this->assertEquals($this->schema, $schema);
+        $this->assertSame($this->schema, $schema);
 
-        $serial=serialize($this->_schema);
+        $serial=serialize($this->schema);
         $schemaUn=unserialize($serial);
-        $this->assertEquals($this->_schema, $schemaUn);
-        $this->assertNotSame($this->_schema, $schemaUn);
+        $this->assertEquals($this->schema, $schemaUn);
+        $this->assertNotSame($this->schema, $schemaUn);
     }
 
     public function testGetters()
     {
-        $this->assertInternalType('array', $this->_schema->getAttributeTypes());
-        $this->assertInternalType('array', $this->_schema->getObjectClasses());
+        $this->assertInternalType('array', $this->schema->getAttributeTypes());
+        $this->assertInternalType('array', $this->schema->getObjectClasses());
 
-        switch ($this->_getLDAP()->getRootDse()->getServerType()) {
+        switch ($this->getLDAP()->getRootDse()->getServerType()) {
             case RootDse::SERVER_TYPE_ACTIVEDIRECTORY:
                 break;
             case RootDse::SERVER_TYPE_EDIRECTORY:
                 break;
             case RootDse::SERVER_TYPE_OPENLDAP:
-                $this->assertInternalType('array', $this->_schema->getLDAPSyntaxes());
-                $this->assertInternalType('array', $this->_schema->getMatchingRules());
-                $this->assertInternalType('array', $this->_schema->getMatchingRuleUse());
+                $this->assertInternalType('array', $this->schema->getLDAPSyntaxes());
+                $this->assertInternalType('array', $this->schema->getMatchingRules());
+                $this->assertInternalType('array', $this->schema->getMatchingRuleUse());
                 break;
         }
     }
@@ -87,7 +87,7 @@ class SchemaTest extends \ZendTest\Ldap\OnlineTestCase
      */
     public function testSetterWillThrowException()
     {
-          $this->_schema->objectClass='illegal';
+          $this->schema->objectClass='illegal';
     }
 
     /**
@@ -95,7 +95,7 @@ class SchemaTest extends \ZendTest\Ldap\OnlineTestCase
      */
     public function testOffsetSetWillThrowException()
     {
-          $this->_schema['objectClass']='illegal';
+          $this->schema['objectClass']='illegal';
     }
 
     /**
@@ -103,7 +103,7 @@ class SchemaTest extends \ZendTest\Ldap\OnlineTestCase
      */
     public function testUnsetterWillThrowException()
     {
-          unset($this->_schema->objectClass);
+          unset($this->schema->objectClass);
     }
 
     /**
@@ -111,18 +111,18 @@ class SchemaTest extends \ZendTest\Ldap\OnlineTestCase
      */
     public function testOffsetUnsetWillThrowException()
     {
-          unset($this->_schema['objectClass']);
+          unset($this->schema['objectClass']);
     }
 
     public function testOpenLDAPSchema()
     {
-        if ($this->_getLDAP()->getRootDse()->getServerType() !==
+        if ($this->getLDAP()->getRootDse()->getServerType() !==
                 RootDse::SERVER_TYPE_OPENLDAP) {
             $this->markTestSkipped('Test can only be run on an OpenLDAP server');
         }
 
-        $objectClasses=$this->_schema->getObjectClasses();
-        $attributeTypes=$this->_schema->getAttributeTypes();
+        $objectClasses=$this->schema->getObjectClasses();
+        $attributeTypes=$this->schema->getAttributeTypes();
 
         $this->assertArrayHasKey('organizationalUnit', $objectClasses);
         $ou=$objectClasses['organizationalUnit'];
@@ -162,6 +162,7 @@ class SchemaTest extends \ZendTest\Ldap\OnlineTestCase
             "teletexTerminalIdentifier $ telephoneNumber $ internationaliSDNNumber $ " .
             "facsimileTelephoneNumber $ street $ postOfficeBox $ postalCode $ postalAddress $ " .
             "physicalDeliveryOfficeName $ st $ l $ description ) )", $ou->_string);
+
         $this->assertEquals(array(), $ou->aliases);
         $this->assertSame($objectClasses['top'], $ou->_parents[0]);
 
@@ -197,18 +198,18 @@ class SchemaTest extends \ZendTest\Ldap\OnlineTestCase
 
     public function testActiveDirectorySchema()
     {
-        if ($this->_getLDAP()->getRootDse()->getServerType() !==
+        if ($this->getLDAP()->getRootDse()->getServerType() !==
                 RootDse::SERVER_TYPE_ACTIVEDIRECTORY) {
             $this->markTestSkipped('Test can only be run on an Active Directory server');
         }
 
-        $objectClasses=$this->_schema->getObjectClasses();
-        $attributeTypes=$this->_schema->getAttributeTypes();
+        $objectClasses=$this->schema->getObjectClasses();
+        $attributeTypes=$this->schema->getAttributeTypes();
     }
 
     public function testeDirectorySchema()
     {
-        if ($this->_getLDAP()->getRootDse()->getServerType() !==
+        if ($this->getLDAP()->getRootDse()->getServerType() !==
                 RootDse::SERVER_TYPE_EDIRECTORY) {
             $this->markTestSkipped('Test can only be run on an eDirectory server');
         }
@@ -217,12 +218,12 @@ class SchemaTest extends \ZendTest\Ldap\OnlineTestCase
 
     public function testOpenLDAPSchemaAttributeTypeInheritance()
     {
-        if ($this->_getLDAP()->getRootDse()->getServerType() !==
+        if ($this->getLDAP()->getRootDse()->getServerType() !==
                 RootDse::SERVER_TYPE_OPENLDAP) {
             $this->markTestSkipped('Test can only be run on an OpenLDAP server');
         }
 
-        $attributeTypes=$this->_schema->getAttributeTypes();
+        $attributeTypes=$this->schema->getAttributeTypes();
 
         $name=$attributeTypes['name'];
         $cn=$attributeTypes['cn'];
@@ -251,12 +252,12 @@ class SchemaTest extends \ZendTest\Ldap\OnlineTestCase
 
     public function testOpenLDAPSchemaObjectClassInheritance()
     {
-        if ($this->_getLDAP()->getRootDse()->getServerType() !==
+        if ($this->getLDAP()->getRootDse()->getServerType() !==
                 RootDse::SERVER_TYPE_OPENLDAP) {
             $this->markTestSkipped('Test can only be run on an OpenLDAP server');
         }
 
-        $objectClasses=$this->_schema->getObjectClasses();
+        $objectClasses=$this->schema->getObjectClasses();
 
         if (!array_key_exists('certificationAuthority', $objectClasses) ||
                 !array_key_exists('certificationAuthority-V2', $objectClasses)) {
@@ -288,12 +289,12 @@ class SchemaTest extends \ZendTest\Ldap\OnlineTestCase
 
     public function testOpenLDAPSchemaAttributeTypeAliases()
     {
-        if ($this->_getLDAP()->getRootDse()->getServerType() !==
+        if ($this->getLDAP()->getRootDse()->getServerType() !==
                 RootDse::SERVER_TYPE_OPENLDAP) {
             $this->markTestSkipped('Test can only be run on an OpenLDAP server');
         }
 
-        $attributeTypes=$this->_schema->getAttributeTypes();
+        $attributeTypes=$this->schema->getAttributeTypes();
         $this->assertArrayHasKey('cn', $attributeTypes);
         $this->assertArrayHasKey('commonName', $attributeTypes);
         $ob1=$attributeTypes['cn'];
@@ -303,12 +304,12 @@ class SchemaTest extends \ZendTest\Ldap\OnlineTestCase
 
     public function testOpenLDAPSchemaObjectClassAliases()
     {
-        if ($this->_getLDAP()->getRootDse()->getServerType() !==
+        if ($this->getLDAP()->getRootDse()->getServerType() !==
                 RootDse::SERVER_TYPE_OPENLDAP) {
             $this->markTestSkipped('Test can only be run on an OpenLDAP server');
         }
 
-        $objectClasses=$this->_schema->getObjectClasses();
+        $objectClasses=$this->schema->getObjectClasses();
         $this->assertArrayHasKey('OpenLDAProotDSE', $objectClasses);
         $this->assertArrayHasKey('LDAProotDSE', $objectClasses);
         $ob1=$objectClasses['OpenLDAProotDSE'];

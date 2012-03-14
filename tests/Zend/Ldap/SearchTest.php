@@ -41,19 +41,19 @@ class SearchTest extends OnlineTestCase
     protected function setUp()
     {
         parent::setUp();
-        $this->_prepareLDAPServer();
+        $this->prepareLDAPServer();
     }
 
     protected function tearDown()
     {
-        $this->_cleanupLDAPServer();
+        $this->cleanupLDAPServer();
         parent::tearDown();
     }
 
     public function testGetSingleEntry()
     {
-        $dn=$this->_createDn('ou=Test1,');
-        $entry=$this->_getLDAP()->getEntry($dn);
+        $dn=$this->createDn('ou=Test1,');
+        $entry=$this->getLDAP()->getEntry($dn);
         $this->assertEquals($dn, $entry["dn"]);
         $this->assertArrayHasKey('ou', $entry);
         $this->assertContains('Test1', $entry['ou']);
@@ -62,8 +62,8 @@ class SearchTest extends OnlineTestCase
 
     public function testGetSingleIllegalEntry()
     {
-        $dn=$this->_createDn('ou=Test99,');
-        $entry=$this->_getLDAP()->getEntry($dn);
+        $dn=$this->createDn('ou=Test99,');
+        $entry=$this->getLDAP()->getEntry($dn);
         $this->assertNull($entry);
     }
 
@@ -72,40 +72,40 @@ class SearchTest extends OnlineTestCase
      */
     public function testGetSingleIllegalEntryWithException()
     {
-        $dn=$this->_createDn('ou=Test99,');
-        $entry=$this->_getLDAP()->getEntry($dn, array(), true);
+        $dn=$this->createDn('ou=Test99,');
+        $entry=$this->getLDAP()->getEntry($dn, array(), true);
     }
 
     public function testCountBase()
     {
-        $dn=$this->_createDn('ou=Node,');
-        $count=$this->_getLDAP()->count('(objectClass=*)', $dn, Ldap\Ldap::SEARCH_SCOPE_BASE);
+        $dn=$this->createDn('ou=Node,');
+        $count=$this->getLDAP()->count('(objectClass=*)', $dn, Ldap\Ldap::SEARCH_SCOPE_BASE);
         $this->assertEquals(1, $count);
     }
 
     public function testCountOne()
     {
-        $dn1=$this->_createDn('ou=Node,');
-        $count1=$this->_getLDAP()->count('(objectClass=*)', $dn1, Ldap\Ldap::SEARCH_SCOPE_ONE);
+        $dn1=$this->createDn('ou=Node,');
+        $count1=$this->getLDAP()->count('(objectClass=*)', $dn1, Ldap\Ldap::SEARCH_SCOPE_ONE);
         $this->assertEquals(2, $count1);
         $dn2=TESTS_ZEND_LDAP_WRITEABLE_SUBTREE;
-        $count2=$this->_getLDAP()->count('(objectClass=*)', $dn2, Ldap\Ldap::SEARCH_SCOPE_ONE);
+        $count2=$this->getLDAP()->count('(objectClass=*)', $dn2, Ldap\Ldap::SEARCH_SCOPE_ONE);
         $this->assertEquals(6, $count2);
     }
 
     public function testCountSub()
     {
-        $dn1=$this->_createDn('ou=Node,');
-        $count1=$this->_getLDAP()->count('(objectClass=*)', $dn1, Ldap\Ldap::SEARCH_SCOPE_SUB);
+        $dn1=$this->createDn('ou=Node,');
+        $count1=$this->getLDAP()->count('(objectClass=*)', $dn1, Ldap\Ldap::SEARCH_SCOPE_SUB);
         $this->assertEquals(3, $count1);
         $dn2=TESTS_ZEND_LDAP_WRITEABLE_SUBTREE;
-        $count2=$this->_getLDAP()->count('(objectClass=*)', $dn2, Ldap\Ldap::SEARCH_SCOPE_SUB);
+        $count2=$this->getLDAP()->count('(objectClass=*)', $dn2, Ldap\Ldap::SEARCH_SCOPE_SUB);
         $this->assertEquals(9, $count2);
     }
 
     public function testResultIteration()
     {
-        $items=$this->_getLDAP()->search('(objectClass=organizationalUnit)',
+        $items=$this->getLDAP()->search('(objectClass=organizationalUnit)',
             TESTS_ZEND_LDAP_WRITEABLE_SUBTREE, Ldap\Ldap::SEARCH_SCOPE_SUB);
         $this->assertEquals(9, $items->count());
         $this->assertEquals(9, count($items));
@@ -124,14 +124,14 @@ class SearchTest extends OnlineTestCase
 
     public function testSearchNoResult()
     {
-        $items=$this->_getLDAP()->search('(objectClass=account)', TESTS_ZEND_LDAP_WRITEABLE_SUBTREE,
+        $items=$this->getLDAP()->search('(objectClass=account)', TESTS_ZEND_LDAP_WRITEABLE_SUBTREE,
             Ldap\Ldap::SEARCH_SCOPE_SUB);
         $this->assertEquals(0, $items->count());
     }
 
     public function testSearchEntriesShortcut()
     {
-        $entries=$this->_getLDAP()->searchEntries('(objectClass=organizationalUnit)',
+        $entries=$this->getLDAP()->searchEntries('(objectClass=organizationalUnit)',
             TESTS_ZEND_LDAP_WRITEABLE_SUBTREE, Ldap\Ldap::SEARCH_SCOPE_SUB);
         $this->assertInternalType("array", $entries);
         $this->assertEquals(9, count($entries));
@@ -142,13 +142,13 @@ class SearchTest extends OnlineTestCase
      */
     public function testIllegalSearch()
     {
-        $dn=$this->_createDn('ou=Node2,');
-        $items=$this->_getLDAP()->search('(objectClass=account)', $dn, Ldap\Ldap::SEARCH_SCOPE_SUB);
+        $dn=$this->createDn('ou=Node2,');
+        $items=$this->getLDAP()->search('(objectClass=account)', $dn, Ldap\Ldap::SEARCH_SCOPE_SUB);
     }
 
     public function testSearchNothingGetFirst()
     {
-        $entries=$this->_getLDAP()->search('(objectClass=account)', TESTS_ZEND_LDAP_WRITEABLE_SUBTREE,
+        $entries=$this->getLDAP()->search('(objectClass=account)', TESTS_ZEND_LDAP_WRITEABLE_SUBTREE,
             Ldap\Ldap::SEARCH_SCOPE_SUB);
         $this->assertEquals(0, $entries->count());
         $this->assertNull($entries->getFirst());
@@ -157,7 +157,7 @@ class SearchTest extends OnlineTestCase
     public function testSorting()
     {
         $lSorted=array('a', 'b', 'c', 'd', 'e');
-        $items=$this->_getLDAP()->search('(l=*)', TESTS_ZEND_LDAP_WRITEABLE_SUBTREE,
+        $items=$this->getLDAP()->search('(l=*)', TESTS_ZEND_LDAP_WRITEABLE_SUBTREE,
             Ldap\Ldap::SEARCH_SCOPE_SUB, array(), 'l');
         $this->assertEquals(5, $items->count());
         foreach ($items as $key => $item)
@@ -168,20 +168,20 @@ class SearchTest extends OnlineTestCase
 
     public function testCountChildren()
     {
-        $dn1=$this->_createDn('ou=Node,');
-        $count1=$this->_getLDAP()->countChildren($dn1);
+        $dn1=$this->createDn('ou=Node,');
+        $count1=$this->getLDAP()->countChildren($dn1);
         $this->assertEquals(2, $count1);
         $dn2=TESTS_ZEND_LDAP_WRITEABLE_SUBTREE;
-        $count2=$this->_getLDAP()->countChildren($dn2);
+        $count2=$this->getLDAP()->countChildren($dn2);
         $this->assertEquals(6, $count2);
     }
 
     public function testExistsDn()
     {
-        $dn1=$this->_createDn('ou=Test2,');
-        $dn2=$this->_createDn('ou=Test99,');
-        $this->assertTrue($this->_getLDAP()->exists($dn1));
-        $this->assertFalse($this->_getLDAP()->exists($dn2));
+        $dn1=$this->createDn('ou=Test2,');
+        $dn2=$this->createDn('ou=Test99,');
+        $this->assertTrue($this->getLDAP()->exists($dn1));
+        $this->assertFalse($this->getLDAP()->exists($dn2));
     }
 
     public function testSearchWithDnObjectAndFilterObject()
@@ -189,41 +189,41 @@ class SearchTest extends OnlineTestCase
         $dn=Ldap\Dn::fromString(TESTS_ZEND_LDAP_WRITEABLE_SUBTREE);
         $filter=Filter::equals('objectClass', 'organizationalUnit');
 
-        $items=$this->_getLDAP()->search($filter, $dn, Ldap\Ldap::SEARCH_SCOPE_SUB);
+        $items=$this->getLDAP()->search($filter, $dn, Ldap\Ldap::SEARCH_SCOPE_SUB);
         $this->assertEquals(9, $items->count());
     }
 
     public function testCountSubWithDnObjectAndFilterObject()
     {
-        $dn1=Ldap\Dn::fromString($this->_createDn('ou=Node,'));
+        $dn1=Ldap\Dn::fromString($this->createDn('ou=Node,'));
         $filter=Filter::any('objectClass');
 
-        $count1=$this->_getLDAP()->count($filter, $dn1, Ldap\Ldap::SEARCH_SCOPE_SUB);
+        $count1=$this->getLDAP()->count($filter, $dn1, Ldap\Ldap::SEARCH_SCOPE_SUB);
         $this->assertEquals(3, $count1);
 
         $dn2=Ldap\Dn::fromString(TESTS_ZEND_LDAP_WRITEABLE_SUBTREE);
-        $count2=$this->_getLDAP()->count($filter, $dn2, Ldap\Ldap::SEARCH_SCOPE_SUB);
+        $count2=$this->getLDAP()->count($filter, $dn2, Ldap\Ldap::SEARCH_SCOPE_SUB);
         $this->assertEquals(9, $count2);
     }
 
     public function testCountChildrenWithDnObject()
     {
-        $dn1=Ldap\Dn::fromString($this->_createDn('ou=Node,'));
-        $count1=$this->_getLDAP()->countChildren($dn1);
+        $dn1=Ldap\Dn::fromString($this->createDn('ou=Node,'));
+        $count1=$this->getLDAP()->countChildren($dn1);
         $this->assertEquals(2, $count1);
 
         $dn2=Ldap\Dn::fromString(TESTS_ZEND_LDAP_WRITEABLE_SUBTREE);
-        $count2=$this->_getLDAP()->countChildren($dn2);
+        $count2=$this->getLDAP()->countChildren($dn2);
         $this->assertEquals(6, $count2);
     }
 
     public function testExistsDnWithDnObject()
     {
-        $dn1=Ldap\Dn::fromString($this->_createDn('ou=Test2,'));
-        $dn2=Ldap\Dn::fromString($this->_createDn('ou=Test99,'));
+        $dn1=Ldap\Dn::fromString($this->createDn('ou=Test2,'));
+        $dn2=Ldap\Dn::fromString($this->createDn('ou=Test99,'));
 
-        $this->assertTrue($this->_getLDAP()->exists($dn1));
-        $this->assertFalse($this->_getLDAP()->exists($dn2));
+        $this->assertTrue($this->getLDAP()->exists($dn1));
+        $this->assertFalse($this->getLDAP()->exists($dn2));
     }
 
     public function testSearchEntriesShortcutWithDnObjectAndFilterObject()
@@ -231,21 +231,21 @@ class SearchTest extends OnlineTestCase
         $dn=Ldap\Dn::fromString(TESTS_ZEND_LDAP_WRITEABLE_SUBTREE);
         $filter=Filter::equals('objectClass', 'organizationalUnit');
 
-        $entries=$this->_getLDAP()->searchEntries($filter, $dn, Ldap\Ldap::SEARCH_SCOPE_SUB);
+        $entries=$this->getLDAP()->searchEntries($filter, $dn, Ldap\Ldap::SEARCH_SCOPE_SUB);
         $this->assertInternalType("array", $entries);
         $this->assertEquals(9, count($entries));
     }
 
     public function testGetSingleEntryWithDnObject()
     {
-        $dn=Ldap\Dn::fromString($this->_createDn('ou=Test1,'));
-        $entry=$this->_getLDAP()->getEntry($dn);
+        $dn=Ldap\Dn::fromString($this->createDn('ou=Test1,'));
+        $entry=$this->getLDAP()->getEntry($dn);
         $this->assertEquals($dn->toString(), $entry["dn"]);
     }
 
     public function testMultipleResultIteration()
     {
-        $items=$this->_getLDAP()->search('(objectClass=organizationalUnit)',
+        $items=$this->getLDAP()->search('(objectClass=organizationalUnit)',
             TESTS_ZEND_LDAP_WRITEABLE_SUBTREE, Ldap\Ldap::SEARCH_SCOPE_SUB);
         $isCount = 9;
         $this->assertEquals($isCount, $items->count());
@@ -289,7 +289,7 @@ class SearchTest extends OnlineTestCase
      */
     public function testCallingNextAfterIterationShouldNotThrowException()
     {
-        $items = $this->_getLDAP()->search('(objectClass=organizationalUnit)',
+        $items = $this->getLDAP()->search('(objectClass=organizationalUnit)',
             TESTS_ZEND_LDAP_WRITEABLE_SUBTREE, Ldap\Ldap::SEARCH_SCOPE_SUB);
         foreach ($items as $key => $item) {
             // do nothing - just iterate
@@ -300,7 +300,7 @@ class SearchTest extends OnlineTestCase
     public function testUnknownCollectionClassThrowsException()
     {
         try {
-            $items=$this->_getLDAP()->search('(objectClass=organizationalUnit)',
+            $items=$this->getLDAP()->search('(objectClass=organizationalUnit)',
                 TESTS_ZEND_LDAP_WRITEABLE_SUBTREE, Ldap\Ldap::SEARCH_SCOPE_SUB, array(), null,
                 'This_Class_Does_Not_Exist');
             $this->fail('Expected exception not thrown');
@@ -313,7 +313,7 @@ class SearchTest extends OnlineTestCase
     public function testCollectionClassNotSubclassingZendLDAPCollectionThrowsException()
     {
         try {
-            $items=$this->_getLDAP()->search(
+            $items=$this->getLDAP()->search(
                 '(objectClass=organizationalUnit)',
                 TESTS_ZEND_LDAP_WRITEABLE_SUBTREE,
                 Ldap\Ldap::SEARCH_SCOPE_SUB,
@@ -334,7 +334,7 @@ class SearchTest extends OnlineTestCase
      */
     public function testSearchWithOptionsArray()
     {
-        $items=$this->_getLDAP()->search(array(
+        $items=$this->getLDAP()->search(array(
             'filter' => '(objectClass=organizationalUnit)',
             'baseDn' => TESTS_ZEND_LDAP_WRITEABLE_SUBTREE,
             'scope'  => Ldap\Ldap::SEARCH_SCOPE_SUB
@@ -347,7 +347,7 @@ class SearchTest extends OnlineTestCase
      */
     public function testSearchEntriesShortcutWithOptionsArray()
     {
-        $items=$this->_getLDAP()->searchEntries(array(
+        $items=$this->getLDAP()->searchEntries(array(
             'filter' => '(objectClass=organizationalUnit)',
             'baseDn' => TESTS_ZEND_LDAP_WRITEABLE_SUBTREE,
             'scope'  => Ldap\Ldap::SEARCH_SCOPE_SUB
@@ -361,7 +361,7 @@ class SearchTest extends OnlineTestCase
     public function testReverseSortingWithSearchEntriesShortcut()
     {
         $lSorted = array('e', 'd', 'c', 'b', 'a');
-        $items = $this->_getLDAP()->searchEntries('(l=*)', TESTS_ZEND_LDAP_WRITEABLE_SUBTREE,
+        $items = $this->getLDAP()->searchEntries('(l=*)', TESTS_ZEND_LDAP_WRITEABLE_SUBTREE,
             Ldap\Ldap::SEARCH_SCOPE_SUB, array(), 'l', true);
         foreach ($items as $key => $item) {
             $this->assertEquals($lSorted[$key], $item['l'][0]);
@@ -374,7 +374,7 @@ class SearchTest extends OnlineTestCase
     public function testReverseSortingWithSearchEntriesShortcutWithOptionsArray()
     {
         $lSorted = array('e', 'd', 'c', 'b', 'a');
-        $items = $this->_getLDAP()->searchEntries(array(
+        $items = $this->getLDAP()->searchEntries(array(
             'filter'      => '(l=*)',
             'baseDn'      => TESTS_ZEND_LDAP_WRITEABLE_SUBTREE,
             'scope'       => Ldap\Ldap::SEARCH_SCOPE_SUB,
@@ -388,7 +388,7 @@ class SearchTest extends OnlineTestCase
 
     public function testSearchNothingIteration()
     {
-        $entries = $this->_getLDAP()->search('(objectClass=account)',
+        $entries = $this->getLDAP()->search('(objectClass=account)',
             TESTS_ZEND_LDAP_WRITEABLE_SUBTREE, Ldap\Ldap::SEARCH_SCOPE_SUB,
             array(), 'uid');
         $this->assertEquals(0, $entries->count());
@@ -401,7 +401,7 @@ class SearchTest extends OnlineTestCase
 
     public function testSearchNothingToArray()
     {
-        $entries = $this->_getLDAP()->search('(objectClass=account)',
+        $entries = $this->getLDAP()->search('(objectClass=account)',
             TESTS_ZEND_LDAP_WRITEABLE_SUBTREE, Ldap\Ldap::SEARCH_SCOPE_SUB,
             array(), 'uid');
         $entries = $entries->toArray();
@@ -418,9 +418,9 @@ class SearchTest extends OnlineTestCase
      */
     public function testUserIsAutomaticallyBoundOnOperationInDisconnectedState()
     {
-        $ldap = $this->_getLDAP();
+        $ldap = $this->getLDAP();
         $ldap->disconnect();
-        $dn = $this->_createDn('ou=Test1,');
+        $dn = $this->createDn('ou=Test1,');
         $entry = $ldap->getEntry($dn);
         $this->assertEquals($dn, $entry['dn']);
     }
@@ -430,17 +430,17 @@ class SearchTest extends OnlineTestCase
      */
     public function testUserIsAutomaticallyBoundOnOperationInUnboundState()
     {
-        $ldap = $this->_getLDAP();
+        $ldap = $this->getLDAP();
         $ldap->disconnect();
         $ldap->connect();
-        $dn = $this->_createDn('ou=Test1,');
+        $dn = $this->createDn('ou=Test1,');
         $entry = $ldap->getEntry($dn);
         $this->assertEquals($dn, $entry['dn']);
     }
 
     public function testInnerIteratorIsOfRequiredType()
     {
-        $items = $this->_getLDAP()->search('(objectClass=organizationalUnit)',
+        $items = $this->getLDAP()->search('(objectClass=organizationalUnit)',
             TESTS_ZEND_LDAP_WRITEABLE_SUBTREE, Ldap\Ldap::SEARCH_SCOPE_SUB);
         $this->assertInstanceOf('\Zend\Ldap\Collection\DefaultIterator', $items->getInnerIterator());
     }
@@ -450,7 +450,7 @@ class SearchTest extends OnlineTestCase
      */
     public function testCallingCurrentOnIteratorReturnsFirstElement()
     {
-        $items = $this->_getLDAP()->search('(objectClass=organizationalUnit)',
+        $items = $this->getLDAP()->search('(objectClass=organizationalUnit)',
             TESTS_ZEND_LDAP_WRITEABLE_SUBTREE, Ldap\Ldap::SEARCH_SCOPE_SUB);
         $this->assertEquals(TESTS_ZEND_LDAP_WRITEABLE_SUBTREE, $items->getInnerIterator()->key());
         $current = $items->getInnerIterator()->current();
@@ -463,7 +463,7 @@ class SearchTest extends OnlineTestCase
      */
     public function testCallingCurrentOnCollectionReturnsFirstElement()
     {
-        $items = $this->_getLDAP()->search('(objectClass=organizationalUnit)',
+        $items = $this->getLDAP()->search('(objectClass=organizationalUnit)',
             TESTS_ZEND_LDAP_WRITEABLE_SUBTREE, Ldap\Ldap::SEARCH_SCOPE_SUB);
         $this->assertEquals(0, $items->key());
         $this->assertEquals(TESTS_ZEND_LDAP_WRITEABLE_SUBTREE, $items->dn());
@@ -477,7 +477,7 @@ class SearchTest extends OnlineTestCase
      */
     public function testCallingCurrentOnEmptyIteratorReturnsNull()
     {
-        $items = $this->_getLDAP()->search('(objectClass=account)', TESTS_ZEND_LDAP_WRITEABLE_SUBTREE,
+        $items = $this->getLDAP()->search('(objectClass=account)', TESTS_ZEND_LDAP_WRITEABLE_SUBTREE,
             Ldap\Ldap::SEARCH_SCOPE_SUB);
         $this->assertNull($items->getInnerIterator()->key());
         $this->assertNull($items->getInnerIterator()->current());
@@ -488,7 +488,7 @@ class SearchTest extends OnlineTestCase
      */
     public function testCallingCurrentOnEmptyCollectionReturnsNull()
     {
-        $items = $this->_getLDAP()->search('(objectClass=account)', TESTS_ZEND_LDAP_WRITEABLE_SUBTREE,
+        $items = $this->getLDAP()->search('(objectClass=account)', TESTS_ZEND_LDAP_WRITEABLE_SUBTREE,
             Ldap\Ldap::SEARCH_SCOPE_SUB);
         $this->assertNull($items->key());
         $this->assertNull($items->dn());
@@ -500,7 +500,7 @@ class SearchTest extends OnlineTestCase
      */
     public function testResultIterationAfterCallingCurrent()
     {
-        $items = $this->_getLDAP()->search('(objectClass=organizationalUnit)',
+        $items = $this->getLDAP()->search('(objectClass=organizationalUnit)',
             TESTS_ZEND_LDAP_WRITEABLE_SUBTREE, Ldap\Ldap::SEARCH_SCOPE_SUB);
         $this->assertEquals(9, $items->count());
         $this->assertEquals(TESTS_ZEND_LDAP_WRITEABLE_SUBTREE, $items->getInnerIterator()->key());
@@ -525,8 +525,8 @@ class SearchTest extends OnlineTestCase
      */
     public function testAttributeNameTreatmentToLower()
     {
-        $dn = $this->_createDn('ou=Node,');
-        $list = $this->_getLDAP()->search('objectClass=*', $dn, Ldap\Ldap::SEARCH_SCOPE_BASE);
+        $dn = $this->createDn('ou=Node,');
+        $list = $this->getLDAP()->search('objectClass=*', $dn, Ldap\Ldap::SEARCH_SCOPE_BASE);
         $list->getInnerIterator()->setAttributeNameTreatment(Collection\DefaultIterator::ATTRIBUTE_TO_LOWER);
         $this->assertArrayHasKey('postalcode', $list->current());
     }
@@ -536,8 +536,8 @@ class SearchTest extends OnlineTestCase
      */
     public function testAttributeNameTreatmentToUpper()
     {
-        $dn = $this->_createDn('ou=Node,');
-        $list = $this->_getLDAP()->search('objectClass=*', $dn, Ldap\Ldap::SEARCH_SCOPE_BASE);
+        $dn = $this->createDn('ou=Node,');
+        $list = $this->getLDAP()->search('objectClass=*', $dn, Ldap\Ldap::SEARCH_SCOPE_BASE);
         $list->getInnerIterator()->setAttributeNameTreatment(Collection\DefaultIterator::ATTRIBUTE_TO_UPPER);
         $this->assertArrayHasKey('POSTALCODE', $list->current());
     }
@@ -547,8 +547,8 @@ class SearchTest extends OnlineTestCase
      */
     public function testAttributeNameTreatmentNative()
     {
-        $dn = $this->_createDn('ou=Node,');
-        $list = $this->_getLDAP()->search('objectClass=*', $dn, Ldap\Ldap::SEARCH_SCOPE_BASE);
+        $dn = $this->createDn('ou=Node,');
+        $list = $this->getLDAP()->search('objectClass=*', $dn, Ldap\Ldap::SEARCH_SCOPE_BASE);
         $list->getInnerIterator()->setAttributeNameTreatment(Collection\DefaultIterator::ATTRIBUTE_NATIVE);
         $this->assertArrayHasKey('postalCode', $list->current());
     }
@@ -558,8 +558,8 @@ class SearchTest extends OnlineTestCase
      */
     public function testAttributeNameTreatmentCustomFunction()
     {
-        $dn = $this->_createDn('ou=Node,');
-        $list = $this->_getLDAP()->search('objectClass=*', $dn, Ldap\Ldap::SEARCH_SCOPE_BASE);
+        $dn = $this->createDn('ou=Node,');
+        $list = $this->getLDAP()->search('objectClass=*', $dn, Ldap\Ldap::SEARCH_SCOPE_BASE);
         $list->getInnerIterator()->setAttributeNameTreatment('ZendTest\Ldap\customNaming');
         $this->assertArrayHasKey('EDOCLATSOP', $list->current());
     }
@@ -569,8 +569,8 @@ class SearchTest extends OnlineTestCase
      */
     public function testAttributeNameTreatmentCustomStaticMethod()
     {
-        $dn = $this->_createDn('ou=Node,');
-        $list = $this->_getLDAP()->search('objectClass=*', $dn, Ldap\Ldap::SEARCH_SCOPE_BASE);
+        $dn = $this->createDn('ou=Node,');
+        $list = $this->getLDAP()->search('objectClass=*', $dn, Ldap\Ldap::SEARCH_SCOPE_BASE);
         $list->getInnerIterator()->setAttributeNameTreatment(array(__NAMESPACE__ . '\CustomNaming', 'name1'));
         $this->assertArrayHasKey('edoclatsop', $list->current());
     }
@@ -580,8 +580,8 @@ class SearchTest extends OnlineTestCase
      */
     public function testAttributeNameTreatmentCustomInstanceMethod()
     {
-        $dn = $this->_createDn('ou=Node,');
-        $list = $this->_getLDAP()->search('objectClass=*', $dn, Ldap\Ldap::SEARCH_SCOPE_BASE);
+        $dn = $this->createDn('ou=Node,');
+        $list = $this->getLDAP()->search('objectClass=*', $dn, Ldap\Ldap::SEARCH_SCOPE_BASE);
         $namer = new CustomNaming();
         $list->getInnerIterator()->setAttributeNameTreatment(array($namer, 'name2'));
         $this->assertArrayHasKey('edoClatsop', $list->current());

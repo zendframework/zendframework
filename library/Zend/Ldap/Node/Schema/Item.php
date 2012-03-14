@@ -28,9 +28,6 @@ namespace Zend\Ldap\Node\Schema;
  * Zend_Ldap_Node_Schema_Item provides a base implementation for managing schema
  * items like objectClass and attribute.
  *
- * @uses       ArrayAccess
- * @uses       BadMethodCallException
- * @uses       Countable
  * @category   Zend
  * @package    Zend_Ldap
  * @subpackage Schema
@@ -44,7 +41,7 @@ abstract class Item implements \ArrayAccess, \Countable
      *
      * @var array
      */
-    protected $_data;
+    protected $data;
 
     /**
      * Constructor.
@@ -64,7 +61,7 @@ abstract class Item implements \ArrayAccess, \Countable
      */
     public function setData(array $data)
     {
-        $this->_data = $data;
+        $this->data = $data;
         return $this;
     }
 
@@ -75,7 +72,7 @@ abstract class Item implements \ArrayAccess, \Countable
      */
     public function getData()
     {
-        return $this->_data;
+        return $this->data;
     }
 
     /**
@@ -86,8 +83,8 @@ abstract class Item implements \ArrayAccess, \Countable
      */
     public function __get($name)
     {
-        if (array_key_exists($name, $this->_data)) {
-            return $this->_data[$name];
+        if (array_key_exists($name, $this->data)) {
+            return $this->data[$name];
         } else {
             return null;
         }
@@ -101,7 +98,7 @@ abstract class Item implements \ArrayAccess, \Countable
      */
     public function __isset($name)
     {
-        return (array_key_exists($name, $this->_data));
+        return (array_key_exists($name, $this->data));
     }
 
     /**
@@ -165,6 +162,6 @@ abstract class Item implements \ArrayAccess, \Countable
      */
     public function count()
     {
-        return count($this->_data);
+        return count($this->data);
     }
 }

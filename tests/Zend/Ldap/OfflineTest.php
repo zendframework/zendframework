@@ -40,7 +40,7 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
      *
      * @var Zend_Ldap
      */
-    protected $_ldap = null;
+    protected $ldap = null;
 
     /**
      * Setup operations run prior to each test method:
@@ -54,7 +54,7 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
         if (!extension_loaded('ldap')) {
             $this->markTestSkipped('LDAP is not enabled');
         }
-        $this->_ldap = new Ldap\Ldap();
+        $this->ldap = new Ldap\Ldap();
     }
 
     /**
@@ -64,7 +64,7 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
     {
         $optionName = 'invalid';
         try {
-            $this->_ldap->setOptions(array($optionName => 'irrelevant'));
+            $this->ldap->setOptions(array($optionName => 'irrelevant'));
             $this->fail('Expected Zend_Ldap_Exception not thrown');
         } catch (Ldap\Exception $e) {
             $this->assertEquals("Unknown Zend_Ldap option: $optionName", $e->getMessage());

@@ -28,10 +28,6 @@ use Zend\Ldap;
 /**
  * Zend_Ldap_Filter_Abstract provides a base implementation for filters.
  *
- * @uses       \Zend\Ldap\Converter
- * @uses       \Zend\Ldap\Filter\AndFilter
- * @uses       \Zend\Ldap\Filter\NotFilter
- * @uses       \Zend\Ldap\Filter\OrFilter
  * @category   Zend
  * @package    Zend_Ldap
  * @subpackage Filter

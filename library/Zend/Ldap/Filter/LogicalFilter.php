@@ -27,9 +27,6 @@ namespace Zend\Ldap\Filter;
 /**
  * Zend_Ldap_Filter_Logical provides a base implementation for a grouping filter.
  *
- * @uses       \Zend\Ldap\Filter\AbstractFilter
- * @uses       \Zend\Ldap\Filter\Exception
- * @uses       \Zend\Ldap\Filter\StringFilter
  * @category   Zend
  * @package    Zend_Ldap
  * @subpackage Filter
@@ -46,14 +43,14 @@ abstract class LogicalFilter extends AbstractFilter
      *
      * @var array
      */
-    private $_subfilters;
+    private $subfilters;
 
     /**
      * The grouping symbol.
      *
      * @var string
      */
-    private $_symbol;
+    private $symbol;
 
     /**
      * Creates a new grouping filter.
@@ -69,8 +66,8 @@ abstract class LogicalFilter extends AbstractFilter
                 throw new Exception('Only strings or Zend\Ldap\Filter\AbstractFilter allowed.');
             }
         }
-        $this->_subfilters = $subfilters;
-        $this->_symbol = $symbol;
+        $this->subfilters = $subfilters;
+        $this->symbol = $symbol;
     }
 
     /**
@@ -82,7 +79,7 @@ abstract class LogicalFilter extends AbstractFilter
     public function addFilter(AbstractFilter $filter)
     {
         $new = clone $this;
-        $new->_subfilters[] = $filter;
+        $new->subfilters[] = $filter;
         return $new;
     }
 
@@ -93,8 +90,8 @@ abstract class LogicalFilter extends AbstractFilter
      */
     public function toString()
     {
-        $return = '(' . $this->_symbol;
-        foreach ($this->_subfilters as $sub) $return .= $sub->toString();
+        $return = '(' . $this->symbol;
+        foreach ($this->subfilters as $sub) $return .= $sub->toString();
         $return .= ')';
         return $return;
     }

@@ -46,18 +46,18 @@ class ChildrenIterationTest extends \ZendTest\Ldap\OnlineTestCase
     protected function setUp()
     {
         parent::setUp();
-        $this->_prepareLDAPServer();
+        $this->prepareLDAPServer();
     }
 
     protected function tearDown()
     {
-        $this->_cleanupLDAPServer();
+        $this->cleanupLDAPServer();
         parent::tearDown();
     }
 
     public function testSimpleIteration()
     {
-        $node=$this->_getLDAP()->getBaseNode();
+        $node=$this->getLDAP()->getBaseNode();
         $children=$node->getChildren();
 
         $i=1;
@@ -66,11 +66,11 @@ class ChildrenIterationTest extends \ZendTest\Ldap\OnlineTestCase
             $rdn=Ldap\Dn::implodeRdn($n->getRdnArray(), Ldap\Dn::ATTR_CASEFOLD_LOWER);
             if ($i==1) {
                 $this->assertEquals('ou=Node', $rdn);
-                $this->assertEquals($this->_createDn('ou=Node,'), $dn);
+                $this->assertEquals($this->createDn('ou=Node,'), $dn);
             }
             else {
                 $this->assertEquals('ou=Test' . ($i-1), $rdn);
-                $this->assertEquals($this->_createDn('ou=Test' . ($i-1) . ','), $dn);
+                $this->assertEquals($this->createDn('ou=Test' . ($i-1) . ','), $dn);
             }
             $i++;
         }
@@ -79,7 +79,7 @@ class ChildrenIterationTest extends \ZendTest\Ldap\OnlineTestCase
 
     public function testSimpleRecursiveIteration()
     {
-        $node=$this->_getLDAP()->getBaseNode();
+        $node=$this->getLDAP()->getBaseNode();
         $ri=new \RecursiveIteratorIterator($node, \RecursiveIteratorIterator::SELF_FIRST);
         $i=0;
         foreach ($ri as $rdn => $n) {
@@ -91,12 +91,12 @@ class ChildrenIterationTest extends \ZendTest\Ldap\OnlineTestCase
             }
             else if ($i==1) {
                 $this->assertEquals('ou=Node', $rdn);
-                $this->assertEquals($this->_createDn('ou=Node,'), $dn);
+                $this->assertEquals($this->createDn('ou=Node,'), $dn);
             }
             else {
                 if ($i<4) {
                     $j=$i-1;
-                    $base=$this->_createDn('ou=Node,');
+                    $base=$this->createDn('ou=Node,');
                 }
                 else {
                     $j=$i-3;
@@ -118,7 +118,7 @@ class ChildrenIterationTest extends \ZendTest\Ldap\OnlineTestCase
      */
     public function testCallingNextAfterIterationShouldNotThrowException()
     {
-        $node = $this->_getLDAP()->getBaseNode();
+        $node = $this->getLDAP()->getBaseNode();
         $nodes = $node->searchChildren('(objectClass=*)');
         foreach ($nodes as $rdn => $n) {
             // do nothing - just iterate

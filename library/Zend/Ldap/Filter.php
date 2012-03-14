@@ -27,10 +27,6 @@ namespace Zend\Ldap;
 /**
  * Zend_Ldap_Filter.
  *
- * @uses       \Zend\Ldap\Filter\AndFilter
- * @uses       \Zend\Ldap\Filter\MaskFilter
- * @uses       \Zend\Ldap\Filter\OrFilter
- * @uses       \Zend\Ldap\Filter\StringFilter
  * @category   Zend
  * @package    Zend_Ldap
  * @subpackage Filter
@@ -230,7 +226,7 @@ class Filter extends Filter\StringFilter
      * @param  string $append
      * @return string
      */
-    private static function _createFilterString($attr, $value, $filtertype, $prepend = null, $append = null)
+    private static function createFilterString($attr, $value, $filtertype, $prepend = null, $append = null)
     {
         $str = $attr . $filtertype;
         if ($prepend !== null) $str .= $prepend;
@@ -250,7 +246,7 @@ class Filter extends Filter\StringFilter
      */
     public function __construct($attr, $value, $filtertype, $prepend = null, $append = null)
     {
-        $filter = self::_createFilterString($attr, $value, $filtertype, $prepend, $append);
+        $filter = self::createFilterString($attr, $value, $filtertype, $prepend, $append);
         parent::__construct($filter);
     }
 }

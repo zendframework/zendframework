@@ -38,19 +38,19 @@ abstract class OnlineTestCase extends TestCase
     /**
      * @var Zend_Ldap
      */
-    private $_ldap;
+    private $ldap;
 
     /**
      * @var array
      */
-    private $_nodes;
+    private $nodes;
 
     /**
      * @return \Zend\Ldap\Ldap
      */
-    protected function _getLDAP()
+    protected function getLDAP()
     {
-        return $this->_ldap;
+        return $this->ldap;
     }
 
     protected function setUp()
@@ -80,19 +80,19 @@ abstract class OnlineTestCase extends TestCase
         if (defined('TESTS_ZEND_LDAP_ACCOUNT_DOMAIN_NAME_SHORT'))
             $options['accountDomainNameShort'] = TESTS_ZEND_LDAP_ACCOUNT_DOMAIN_NAME_SHORT;
 
-        $this->_ldap=new Ldap\Ldap($options);
-        $this->_ldap->bind();
+        $this->ldap=new Ldap\Ldap($options);
+        $this->ldap->bind();
     }
 
     protected function tearDown()
     {
-        if ($this->_ldap!==null) {
-            $this->_ldap->disconnect();
-            $this->_ldap=null;
+        if ($this->ldap!==null) {
+            $this->ldap->disconnect();
+            $this->ldap=null;
         }
     }
 
-    protected function _createDn($dn)
+    protected function createDn($dn)
     {
         if (substr($dn, -1)!==',') {
             $dn.=',';
@@ -101,40 +101,40 @@ abstract class OnlineTestCase extends TestCase
         return Ldap\Dn::fromString($dn)->toString(Ldap\Dn::ATTR_CASEFOLD_LOWER);
     }
 
-    protected function _prepareLDAPServer()
+    protected function prepareLDAPServer()
     {
-        $this->_nodes=array(
-            $this->_createDn('ou=Node,') =>
+        $this->nodes=array(
+            $this->createDn('ou=Node,') =>
                 array("objectClass" => "organizationalUnit", "ou" => "Node", "postalCode" => "1234"),
-            $this->_createDn('ou=Test1,ou=Node,') =>
+            $this->createDn('ou=Test1,ou=Node,') =>
                 array("objectClass" => "organizationalUnit", "ou" => "Test1"),
-            $this->_createDn('ou=Test2,ou=Node,') =>
+            $this->createDn('ou=Test2,ou=Node,') =>
                 array("objectClass" => "organizationalUnit", "ou" => "Test2"),
-            $this->_createDn('ou=Test1,') =>
+            $this->createDn('ou=Test1,') =>
                 array("objectClass" => "organizationalUnit", "ou" => "Test1", "l" => "e"),
-            $this->_createDn('ou=Test2,') =>
+            $this->createDn('ou=Test2,') =>
                 array("objectClass" => "organizationalUnit", "ou" => "Test2", "l" => "d"),
-            $this->_createDn('ou=Test3,') =>
+            $this->createDn('ou=Test3,') =>
                 array("objectClass" => "organizationalUnit", "ou" => "Test3", "l" => "c"),
-            $this->_createDn('ou=Test4,') =>
+            $this->createDn('ou=Test4,') =>
                 array("objectClass" => "organizationalUnit", "ou" => "Test4", "l" => "b"),
-            $this->_createDn('ou=Test5,') =>
+            $this->createDn('ou=Test5,') =>
                 array("objectClass" => "organizationalUnit", "ou" => "Test5", "l" => "a"),
         );
 
-        $ldap=$this->_ldap->getResource();
-        foreach ($this->_nodes as $dn => $entry) {
+        $ldap=$this->ldap->getResource();
+        foreach ($this->nodes as $dn => $entry) {
             ldap_add($ldap, $dn, $entry);
         }
     }
 
-    protected function _cleanupLDAPServer()
+    protected function cleanupLDAPServer()
     {
         if (!constant('TESTS_ZEND_LDAP_ONLINE_ENABLED')) {
             return;
         }
-        $ldap=$this->_ldap->getResource();
-        foreach (array_reverse($this->_nodes) as $dn => $entry) {
+        $ldap=$this->ldap->getResource();
+        foreach (array_reverse($this->nodes) as $dn => $entry) {
             ldap_delete($ldap, $dn);
         }
     }

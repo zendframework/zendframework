@@ -378,7 +378,7 @@ verylong: fhu08rhvt7b478vt5hv78h45nfgt45h78t34hhhhhhhhhv5bg8
 
     public function testRoundtripEncoding()
     {
-        $node = $this->_createTestNode();
+        $node = $this->createTestNode();
         $ldif = $node->toLdif();
         $data = Ldif\Encoder::decode($ldif);
         $expected = array_merge(array('dn' => $node->getDnString()), $node->getData(false));

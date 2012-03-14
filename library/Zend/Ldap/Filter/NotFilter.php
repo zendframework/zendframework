@@ -27,7 +27,6 @@ namespace Zend\Ldap\Filter;
 /**
  * Zend_Ldap_Filter_Not provides a negation filter.
  *
- * @uses       \Zend\Ldap\Filter\AbstractFilter
  * @category   Zend
  * @package    Zend_Ldap
  * @subpackage Filter
@@ -41,7 +40,7 @@ class NotFilter extends AbstractFilter
      *
      * @var \Zend\Ldap\Filter\AbstractFilter
      */
-    private $_filter;
+    private $filter;
 
     /**
      * Creates a Zend_Ldap_Filter_Not.
@@ -50,7 +49,7 @@ class NotFilter extends AbstractFilter
      */
     public function __construct(AbstractFilter $filter)
     {
-        $this->_filter = $filter;
+        $this->filter = $filter;
     }
 
     /**
@@ -60,7 +59,7 @@ class NotFilter extends AbstractFilter
      */
     public function negate()
     {
-        return $this->_filter;
+        return $this->filter;
     }
 
     /**
@@ -70,6 +69,6 @@ class NotFilter extends AbstractFilter
      */
     public function toString()
     {
-        return '(!' . $this->_filter->toString() . ')';
+        return '(!' . $this->filter->toString() . ')';
     }
 }

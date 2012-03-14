@@ -30,10 +30,6 @@ use Zend\Ldap\Node\RootDse;
 /**
  * Zend_Ldap_Node_Schema provides a simple data-container for the Schema node.
  *
- * @uses       \Zend\Ldap\Node\AbstractNode
- * @uses       \Zend\Ldap\Node\RootDse\RootDse
- * @uses       \Zend\Ldap\Node\RootDse\ActiveDirectory
- * @uses       \Zend\Ldap\Node\Schema\ActiveDirectory
  * @category   Zend
  * @package    Zend_Ldap
  * @subpackage Schema
@@ -81,7 +77,7 @@ class Schema extends AbstractNode
     protected function __construct(Ldap\Dn $dn, array $data, Ldap\Ldap $ldap)
     {
         parent::__construct($dn, $data, true);
-        $this->_parseSchema($dn, $ldap);
+        $this->parseSchema($dn, $ldap);
     }
 
     /**
@@ -91,7 +87,7 @@ class Schema extends AbstractNode
      * @param  \Zend\Ldap\Ldap    $ldap
      * @return \Zend\Ldap\Node\Schema Provides a fluid interface
      */
-    protected function _parseSchema(Ldap\Dn $dn, Ldap\Ldap $ldap)
+    protected function parseSchema(Ldap\Dn $dn, Ldap\Ldap $ldap)
     {
         return $this;
     }

@@ -28,11 +28,6 @@ use Zend\Ldap;
 /**
  * Zend_Ldap_Node_RootDse provides a simple data-container for the RootDse node.
  *
- * @uses       \Zend\Ldap\Dn
- * @uses       \Zend\Ldap\Node\AbstractNode
- * @uses       \Zend\Ldap\Node\RootDse\ActiveDirectory
- * @uses       \Zend\Ldap\Node\RootDse\eDirectory
- * @uses       \Zend\Ldap\Node\RootDse\OpenLdap
  * @category   Zend
  * @package    Zend_Ldap
  * @subpackage RootDse

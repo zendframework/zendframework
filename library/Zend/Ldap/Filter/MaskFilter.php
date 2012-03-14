@@ -27,7 +27,6 @@ namespace Zend\Ldap\Filter;
 /**
  * Zend_Ldap_Filter_Mask provides a simple string filter to be used with a mask.
  *
- * @uses       \Zend\Ldap\Filter\StringFilter
  * @category   Zend
  * @package    Zend_Ldap
  * @subpackage Filter
@@ -60,6 +59,6 @@ class MaskFilter extends StringFilter
      */
     public function toString()
     {
-        return $this->_filter;
+        return $this->filter;
     }
 }

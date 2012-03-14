@@ -55,13 +55,13 @@ class Attribute
         if (is_array($value) || ($value instanceof \Traversable)) {
             foreach ($value as $v)
             {
-                $v = self::_valueToLdap($v);
+                $v = self::valueToLdap($v);
                 if ($v !== null) {
                     $valArray[] = $v;
                 }
             }
         } elseif ($value !== null) {
-            $value = self::_valueToLdap($value);
+            $value = self::valueToLdap($value);
             if ($value !== null) {
                 $valArray[] = $value;
             }
@@ -93,14 +93,14 @@ class Attribute
             $retArray = array();
             foreach ($data[$attribName] as $v)
             {
-                $retArray[] = self::_valueFromLDAP($v);
+                $retArray[] = self::valueFromLDAP($v);
             }
             return $retArray;
         } else if (is_int($index)) {
             if (!isset($data[$attribName])) {
                 return null;
             } else if ($index >= 0 && $index<count($data[$attribName])) {
-                return self::_valueFromLDAP($data[$attribName][$index]);
+                return self::valueFromLDAP($data[$attribName][$index]);
             } else {
                 return null;
             }
@@ -126,7 +126,7 @@ class Attribute
         }
 
         foreach ($value as $v) {
-            $v = self::_valueToLDAP($v);
+            $v = self::valueToLDAP($v);
             if (!in_array($v, $data[$attribName], true)) {
                 return false;
             }
@@ -168,7 +168,7 @@ class Attribute
         $valArray = array();
         foreach ($value as $v)
         {
-            $v = self::_valueToLDAP($v);
+            $v = self::valueToLDAP($v);
             if ($v !== null) $valArray[] = $v;
         }
 
@@ -187,7 +187,7 @@ class Attribute
      * @param  mixed $value
      * @return string|null
      */
-    private static function _valueToLdap($value)
+    private static function valueToLdap($value)
     {
         if (is_string($value)) return $value;
         else if (is_int($value) || is_float($value)) return (string)$value;
@@ -202,7 +202,7 @@ class Attribute
      * @param  string $value
      * @return string|boolean
      */
-    private static function _valueFromLdap($value)
+    private static function valueFromLdap($value)
     {
         $value = (string)$value;
         if ($value === 'TRUE') return true;
@@ -218,7 +218,7 @@ class Attribute
      */
     public static function convertToLdapValue($value)
     {
-        return self::_valueToLdap($value);
+        return self::valueToLdap($value);
     }
 
     /**
@@ -229,7 +229,7 @@ class Attribute
      */
     public static function convertFromLdapValue($value)
     {
-        return self::_valueFromLdap($value);
+        return self::valueFromLdap($value);
     }
 
     /**
@@ -241,7 +241,7 @@ class Attribute
      */
     public static function convertToLdapDateTimeValue($value, $utc = false)
     {
-        return self::_valueToLdapDateTime($value, $utc);
+        return self::valueToLdapDateTime($value, $utc);
     }
 
     /**
@@ -252,7 +252,7 @@ class Attribute
      */
     public static function convertFromLdapDateTimeValue($value)
     {
-        return self::_valueFromLdapDateTime($value);
+        return self::valueFromLdapDateTime($value);
     }
 
     /**
@@ -346,13 +346,13 @@ class Attribute
         $convertedValues = array();
         if (is_array($value) || ($value instanceof \Traversable)) {
             foreach ($value as $v) {
-                $v = self::_valueToLdapDateTime($v, $utc);
+                $v = self::valueToLdapDateTime($v, $utc);
                 if ($v !== null) {
                     $convertedValues[] = $v;
                 }
             }
         } elseif ($value !== null) {
-            $value = self::_valueToLdapDateTime($value, $utc);
+            $value = self::valueToLdapDateTime($value, $utc);
             if ($value !== null) {
                 $convertedValues[] = $value;
             }
@@ -365,7 +365,7 @@ class Attribute
      * @param  boolean $utc
      * @return string|null
      */
-    private static function _valueToLDAPDateTime($value, $utc)
+    private static function valueToLDAPDateTime($value, $utc)
     {
         if (is_int($value)) {
             if ($utc === true) return gmdate('YmdHis', $value) . 'Z';
@@ -387,13 +387,13 @@ class Attribute
         $values = self::getAttribute($data, $attribName, $index);
         if (is_array($values)) {
             for ($i = 0; $i<count($values); $i++) {
-                $newVal = self::_valueFromLDAPDateTime($values[$i]);
+                $newVal = self::valueFromLDAPDateTime($values[$i]);
                 if ($newVal !== null) {
                     $values[$i] = $newVal;
                 }
             }
         } else {
-			$newVal = self::_valueFromLDAPDateTime($values);
+			$newVal = self::valueFromLDAPDateTime($values);
 			if ($newVal !== null) {
 			    $values = $newVal;
 			}
@@ -405,7 +405,7 @@ class Attribute
      * @param  string $value
      * @return integer|null
      */
-    private static function _valueFromLDAPDateTime($value)
+    private static function valueFromLDAPDateTime($value)
     {
         $matches = array();
         if (preg_match('/^(\d{4})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})(?:\.0)?([+-]\d{4}|Z)$/', $value, $matches)) {

@@ -38,7 +38,7 @@ class AttributeIterationTest extends \ZendTest\Ldap\TestCase
 {
     public function testSimpleIteration()
     {
-        $node=$this->_createTestNode();
+        $node=$this->createTestNode();
         $i=0;
         $data=array();
         foreach ($node->getAttributes() as $k => $v) {

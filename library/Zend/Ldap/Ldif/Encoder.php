@@ -40,7 +40,7 @@ class Encoder
      *
      * @var array
      */
-    protected $_options = array(
+    protected $options = array(
         'sort'    => true,
         'version' => 1,
         'wrap'    => 78
@@ -49,7 +49,7 @@ class Encoder
     /**
      * @var boolean
      */
-    protected $_versionWritten = false;
+    protected $versionWritten = false;
 
     /**
      * Constructor.
@@ -59,7 +59,7 @@ class Encoder
      */
     protected function __construct(array $options = array())
     {
-        $this->_options = array_merge($this->_options, $options);
+        $this->options = array_merge($this->options, $options);
     }
 
     /**
@@ -97,7 +97,7 @@ class Encoder
                 $type = trim($matches[2]);
                 $value = $matches[3];
                 if ($last !== null) {
-                    $this->_pushAttribute($last, $item);
+                    $this->pushAttribute($last, $item);
                 }
                 if ($name === 'version') {
                     continue;
@@ -112,7 +112,7 @@ class Encoder
             }
         }
         if ($last !== null) {
-            $this->_pushAttribute($last, $item);
+            $this->pushAttribute($last, $item);
         }
         $items[] = $item;
         return (count($items)>1) ? $items : $items[0];
@@ -124,7 +124,7 @@ class Encoder
      * @param array $attribute
      * @param array $entry
      */
-    protected function _pushAttribute(array $attribute, array &$entry)
+    protected function pushAttribute(array $attribute, array &$entry)
     {
         $name = $attribute[0];
         $type = $attribute[1];
@@ -164,11 +164,11 @@ class Encoder
     protected function _encode($value)
     {
         if (is_scalar($value)) {
-            return $this->_encodeString($value);
+            return $this->encodeString($value);
         } else if (is_array($value)) {
-            return $this->_encodeAttributes($value);
+            return $this->encodeAttributes($value);
         } else if ($value instanceof \Zend\Ldap\Node) {
-            return $value->toLdif($this->_options);
+            return $value->toLdif($this->options);
         }
         return null;
     }
@@ -182,7 +182,7 @@ class Encoder
      * @param  boolen $base64
      * @return string
      */
-    protected function _encodeString($string, &$base64 = null)
+    protected function encodeString($string, &$base64 = null)
     {
         $string = (string)$string;
         if (!is_numeric($string) && empty($string)) {
@@ -240,7 +240,7 @@ class Encoder
      * @param  array|string $value
      * @return string
      */
-    protected function _encodeAttribute($name, $value)
+    protected function encodeAttribute($name, $value)
     {
         if (!is_array($value)) {
             $value = array($value);
@@ -254,15 +254,15 @@ class Encoder
 
         foreach ($value as $v) {
             $base64 = null;
-            $v = $this->_encodeString($v, $base64);
+            $v = $this->encodeString($v, $base64);
             $attribute = $name . ':';
             if ($base64 === true) {
                 $attribute .= ': ' . $v;
             } else {
                 $attribute .= ' ' . $v;
             }
-            if (isset($this->_options['wrap']) && strlen($attribute) > $this->_options['wrap']) {
-                $attribute = trim(chunk_split($attribute, $this->_options['wrap'], PHP_EOL . ' '));
+            if (isset($this->options['wrap']) && strlen($attribute) > $this->options['wrap']) {
+                $attribute = trim(chunk_split($attribute, $this->options['wrap'], PHP_EOL . ' '));
             }
             $output .= $attribute . PHP_EOL;
         }
@@ -277,17 +277,17 @@ class Encoder
      * @param  array $attributes
      * @return string
      */
-    protected function _encodeAttributes(array $attributes)
+    protected function encodeAttributes(array $attributes)
     {
         $string = '';
         $attributes = array_change_key_case($attributes, CASE_LOWER);
-        if (!$this->_versionWritten && array_key_exists('dn', $attributes) && isset($this->_options['version'])
+        if (!$this->versionWritten && array_key_exists('dn', $attributes) && isset($this->options['version'])
                 && array_key_exists('objectclass', $attributes)) {
-            $string .= sprintf('version: %d', $this->_options['version']) . PHP_EOL;
-            $this->_versionWritten = true;
+            $string .= sprintf('version: %d', $this->options['version']) . PHP_EOL;
+            $this->versionWritten = true;
         }
 
-        if (isset($this->_options['sort']) && $this->_options['sort'] === true) {
+        if (isset($this->options['sort']) && $this->options['sort'] === true) {
             ksort($attributes, SORT_STRING);
             if (array_key_exists('objectclass', $attributes)) {
                 $oc = $attributes['objectclass'];
@@ -301,7 +301,7 @@ class Encoder
             }
         }
         foreach ($attributes as $key => $value) {
-            $string .= $this->_encodeAttribute($key, $value) . PHP_EOL;
+            $string .= $this->encodeAttribute($key, $value) . PHP_EOL;
         }
         return trim($string, PHP_EOL);
     }

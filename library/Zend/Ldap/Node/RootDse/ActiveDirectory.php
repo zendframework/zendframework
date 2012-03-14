@@ -30,8 +30,6 @@ use Zend\Ldap\Node\RootDse;
  * Zend_Ldap_Node_RootDse provides a simple data-container for the RootDse node of
  * an Active Directory server.
  *
- * @uses       \Zend\Ldap\Dn
- * @uses       \Zend\Ldap\Node\RootDse
  * @category   Zend
  * @package    Zend_Ldap
  * @subpackage RootDse

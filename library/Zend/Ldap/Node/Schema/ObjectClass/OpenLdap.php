@@ -31,9 +31,6 @@ use Zend\Ldap\Node\Schema\ObjectClass,
  * Zend\Ldap\Node\Schema\ObjectClass\OpenLdap provides access to the objectClass
  * schema information on an OpenLDAP server.
  *
- * @uses       \Zend\Ldap\Node\Schema
- * @uses       \Zend\Ldap\Node\Schema\Item
- * @uses       \Zend\Ldap\Node\Schema\ObjectClass
  * @category   Zend
  * @package    Zend_Ldap
  * @subpackage Schema
@@ -47,13 +44,13 @@ class OpenLdap extends Schema\Item implements ObjectClass
      *
      * @var array
      */
-    protected $_inheritedMust = null;
+    protected $inheritedMust = null;
     /**
      * All inherited "MAY" attributes
      *
      * @var array
      */
-    protected $_inheritedMay = null;
+    protected $inheritedMay = null;
 
 
     /**
@@ -83,10 +80,10 @@ class OpenLdap extends Schema\Item implements ObjectClass
      */
     public function getMustContain()
     {
-        if ($this->_inheritedMust === null) {
-            $this->_resolveInheritance();
+        if ($this->inheritedMust === null) {
+            $this->resolveInheritance();
         }
-        return $this->_inheritedMust;
+        return $this->inheritedMust;
     }
 
     /**
@@ -96,10 +93,10 @@ class OpenLdap extends Schema\Item implements ObjectClass
      */
     public function getMayContain()
     {
-        if ($this->_inheritedMay === null) {
-            $this->_resolveInheritance();
+        if ($this->inheritedMay === null) {
+            $this->resolveInheritance();
         }
-        return $this->_inheritedMay;
+        return $this->inheritedMay;
     }
 
     /**
@@ -107,7 +104,7 @@ class OpenLdap extends Schema\Item implements ObjectClass
      *
      * @return void
      */
-    protected function _resolveInheritance()
+    protected function resolveInheritance()
     {
         $must = $this->must;
         $may = $this->may;
@@ -120,8 +117,8 @@ class OpenLdap extends Schema\Item implements ObjectClass
         $may = array_diff($may, $must);
         sort($must, SORT_STRING);
         sort($may, SORT_STRING);
-        $this->_inheritedMust = $must;
-        $this->_inheritedMay = $may;
+        $this->inheritedMust = $must;
+        $this->inheritedMay = $may;
     }
 
     /**

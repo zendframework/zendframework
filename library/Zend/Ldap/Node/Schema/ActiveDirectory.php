@@ -31,10 +31,6 @@ use Zend\Ldap\Node\Schema,
  * Zend_Ldap_Node_Schema_ActiveDirectory provides a simple data-container for the Schema node of
  * an Active Directory server.
  *
- * @uses       \Zend\Ldap\Ldap
- * @uses       \Zend\Ldap\Node\Schema
- * @uses       \Zend\Ldap\Node\Schema\AttributeType\ActiveDirectory
- * @uses       \Zend\Ldap\Node\Schema\ObjectClass\ActiveDirectory
  * @category   Zend
  * @package    Zend_Ldap
  * @subpackage Schema
@@ -48,13 +44,13 @@ class ActiveDirectory extends Schema
      *
      * @var array
      */
-    protected $_attributeTypes = array();
+    protected $attributeTypes = array();
     /**
      * The object classes
      *
      * @var array
      */
-    protected $_objectClasses = array();
+    protected $objectClasses = array();
 
     /**
      * Parses the schema
@@ -63,18 +59,18 @@ class ActiveDirectory extends Schema
      * @param  \Zend\Ldap\Ldap    $ldap
      * @return \Zend\Ldap\Node\Schema Provides a fluid interface
      */
-    protected function _parseSchema(Ldap\Dn $dn, Ldap\Ldap $ldap)
+    protected function parseSchema(Ldap\Dn $dn, Ldap\Ldap $ldap)
     {
-        parent::_parseSchema($dn, $ldap);
+        parent::parseSchema($dn, $ldap);
         foreach ($ldap->search('(objectClass=classSchema)', $dn,
                 Ldap\Ldap::SEARCH_SCOPE_ONE) as $node) {
             $val = new ObjectClass\ActiveDirectory($node);
-            $this->_objectClasses[$val->getName()] = $val;
+            $this->objectClasses[$val->getName()] = $val;
         }
         foreach ($ldap->search('(objectClass=attributeSchema)', $dn,
                 Ldap\Ldap::SEARCH_SCOPE_ONE) as $node) {
             $val = new AttributeType\ActiveDirectory($node);
-            $this->_attributeTypes[$val->getName()] = $val;
+            $this->attributeTypes[$val->getName()] = $val;
         }
         return $this;
     }
@@ -86,7 +82,7 @@ class ActiveDirectory extends Schema
      */
     public function getAttributeTypes()
     {
-        return $this->_attributeTypes;
+        return $this->attributeTypes;
     }
 
     /**
@@ -96,6 +92,6 @@ class ActiveDirectory extends Schema
      */
     public function getObjectClasses()
     {
-        return $this->_objectClasses;
+        return $this->objectClasses;
     }
 }

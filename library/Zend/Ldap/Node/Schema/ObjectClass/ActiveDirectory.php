@@ -31,8 +31,6 @@ use Zend\Ldap\Node\Schema\ObjectClass,
  * Zend_Ldap_Node_Schema_ObjectClass_ActiveDirectory provides access to the objectClass
  * schema information on an Active Directory server.
  *
- * @uses       \Zend\Ldap\Node\Schema\Item
- * @uses       \Zend\Ldap\Node\Schema\ObjectClass
  * @category   Zend
  * @package    Zend_Ldap
  * @subpackage Schema

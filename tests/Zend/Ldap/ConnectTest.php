@@ -41,7 +41,7 @@ use Zend\Ldap;
  */
 class ConnectTest extends \PHPUnit_Framework_TestCase
 {
-    protected $_options = null;
+    protected $options = null;
 
     public function setUp()
     {
@@ -49,11 +49,11 @@ class ConnectTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped("Zend_Ldap online tests are not enabled");
         }
 
-        $this->_options = array('host' => TESTS_ZEND_LDAP_HOST);
+        $this->options = array('host' => TESTS_ZEND_LDAP_HOST);
         if (defined('TESTS_ZEND_LDAP_PORT') && TESTS_ZEND_LDAP_PORT != 389)
-            $this->_options['port'] = TESTS_ZEND_LDAP_PORT;
+            $this->options['port'] = TESTS_ZEND_LDAP_PORT;
         if (defined('TESTS_ZEND_LDAP_USE_SSL'))
-            $this->_options['useSsl'] = TESTS_ZEND_LDAP_USE_SSL;
+            $this->options['useSsl'] = TESTS_ZEND_LDAP_USE_SSL;
     }
 
     public function testEmptyOptionsConnect()
@@ -79,7 +79,7 @@ class ConnectTest extends \PHPUnit_Framework_TestCase
     }
     public function testPlainConnect()
     {
-        $ldap = new Ldap\Ldap($this->_options);
+        $ldap = new Ldap\Ldap($this->options);
         try {
             // Connect doesn't actually try to connect until bind is called
             // but if we get 'Invalid credentials' then we know the connect
@@ -93,7 +93,7 @@ class ConnectTest extends \PHPUnit_Framework_TestCase
     public function testNetworkTimeoutConnect()
     {
         $networkTimeout = 1;
-        $ldap = new Ldap\Ldap(array_merge($this->_options, array('networkTimeout' => $networkTimeout)));
+        $ldap = new Ldap\Ldap(array_merge($this->options, array('networkTimeout' => $networkTimeout)));
 
         $ldap->connect();
         ldap_get_option($ldap->getResource(), LDAP_OPT_NETWORK_TIMEOUT, $actual);
@@ -127,7 +127,7 @@ class ConnectTest extends \PHPUnit_Framework_TestCase
         if (defined('TESTS_ZEND_LDAP_USE_SSL') && TESTS_ZEND_LDAP_USE_SSL)
             $port = 636;
 
-        $ldap = new Ldap\Ldap($this->_options);
+        $ldap = new Ldap\Ldap($this->options);
         try {
             $ldap->connect(null, $port)
                  ->bind('CN=ignored,DC=example,DC=com', 'ignored');
@@ -154,7 +154,7 @@ class ConnectTest extends \PHPUnit_Framework_TestCase
     }
     public function testBadPortConnect()
     {
-        $options = $this->_options;
+        $options = $this->options;
         $options['port'] = 10;
 
         $ldap = new Ldap\Ldap($options);
@@ -168,7 +168,7 @@ class ConnectTest extends \PHPUnit_Framework_TestCase
     public function testSetOptionsConnect()
     {
         $ldap = new Ldap\Ldap();
-        $ldap->setOptions($this->_options);
+        $ldap->setOptions($this->options);
         try {
             $ldap->connect()->bind('CN=ignored,DC=example,DC=com', 'ignored');
             $this->fail('Expected exception for invalid username');
@@ -178,7 +178,7 @@ class ConnectTest extends \PHPUnit_Framework_TestCase
     }
     public function testMultiConnect()
     {
-        $ldap = new Ldap\Ldap($this->_options);
+        $ldap = new Ldap\Ldap($this->options);
         for ($i = 0; $i < 3; $i++) {
             try {
                 $ldap->connect()->bind('CN=ignored,DC=example,DC=com', 'ignored');
@@ -190,7 +190,7 @@ class ConnectTest extends \PHPUnit_Framework_TestCase
     }
     public function testDisconnect()
     {
-        $ldap = new Ldap\Ldap($this->_options);
+        $ldap = new Ldap\Ldap($this->options);
         for ($i = 0; $i < 3; $i++) {
             $ldap->disconnect();
             try {
@@ -204,7 +204,7 @@ class ConnectTest extends \PHPUnit_Framework_TestCase
 
     public function testGetErrorCode()
     {
-        $ldap = new Ldap\Ldap($this->_options);
+        $ldap = new Ldap\Ldap($this->options);
         try {
             // Connect doesn't actually try to connect until bind is called
             // but if we get 'Invalid credentials' then we know the connect

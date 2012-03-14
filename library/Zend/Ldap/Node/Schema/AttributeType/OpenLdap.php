@@ -31,8 +31,6 @@ use Zend\Ldap\Node\Schema\AttributeType,
  * Zend_Ldap_Node_Schema_AttributeType_OpenLdap provides access to the attribute type
  * schema information on an OpenLDAP server.
  *
- * @uses       \Zend\Ldap\Node\Schema\AttributeType
- * @uses       \Zend\Ldap\Node\Schema\Item
  * @category   Zend
  * @package    Zend_Ldap
  * @subpackage Schema

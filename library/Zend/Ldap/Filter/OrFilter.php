@@ -27,7 +27,6 @@ namespace Zend\Ldap\Filter;
 /**
  * Zend_Ldap_Filter_Or provides an 'or' filter.
  *
- * @uses       \Zend\Ldap\Filter\LogicalFilter
  * @category   Zend
  * @package    Zend_Ldap
  * @subpackage Filter

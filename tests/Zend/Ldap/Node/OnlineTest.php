@@ -40,26 +40,26 @@ class OnlineTest extends \ZendTest\Ldap\OnlineTestCase
     protected function setUp()
     {
         parent::setUp();
-        $this->_prepareLDAPServer();
+        $this->prepareLDAPServer();
     }
 
     protected function tearDown()
     {
-        $this->_cleanupLDAPServer();
+        $this->cleanupLDAPServer();
         parent::tearDown();
     }
 
     public function testLoadFromLDAP()
     {
-        $dn=$this->_createDn('ou=Test1,');
-        $node=Node::fromLDAP($dn, $this->_getLDAP());
+        $dn=$this->createDn('ou=Test1,');
+        $node=Node::fromLDAP($dn, $this->getLDAP());
         $this->assertInstanceOf('Zend\Ldap\Node', $node);
         $this->assertTrue($node->isAttached());
     }
 
     public function testChangeReadOnlySystemAttributes()
     {
-        $node=$this->_getLDAP()->getBaseNode();
+        $node=$this->getLDAP()->getBaseNode();
         try {
             $node->setAttribute('createTimestamp', false);
             $this->fail('Expected exception for modification of read-only attribute createTimestamp');
@@ -99,26 +99,26 @@ class OnlineTest extends \ZendTest\Ldap\OnlineTestCase
      */
     public function testLoadFromLDAPIllegalEntry()
     {
-        $dn=$this->_createDn('ou=Test99,');
-        $node=Node::fromLDAP($dn, $this->_getLDAP());
+        $dn=$this->createDn('ou=Test99,');
+        $node=Node::fromLDAP($dn, $this->getLDAP());
     }
 
     public function testDetachAndReattach()
     {
-        $dn=$this->_createDn('ou=Test1,');
-        $node=Node::fromLDAP($dn, $this->_getLDAP());
+        $dn=$this->createDn('ou=Test1,');
+        $node=Node::fromLDAP($dn, $this->getLDAP());
         $this->assertInstanceOf('Zend\Ldap\Node', $node);
         $this->assertTrue($node->isAttached());
         $node->detachLDAP();
         $this->assertFalse($node->isAttached());
-        $node->attachLDAP($this->_getLDAP());
+        $node->attachLDAP($this->getLDAP());
         $this->assertTrue($node->isAttached());
     }
 
     public function testSerialize()
     {
-        $dn=$this->_createDn('ou=Test1,');
-        $node=Node::fromLDAP($dn, $this->_getLDAP());
+        $dn=$this->createDn('ou=Test1,');
+        $node=Node::fromLDAP($dn, $this->getLDAP());
         $sdata=serialize($node);
         $newObject=unserialize($sdata);
         $this->assertFalse($newObject->isAttached());
@@ -139,43 +139,43 @@ class OnlineTest extends \ZendTest\Ldap\OnlineTestCase
         );
         $node=Node::fromArray($data);
         $this->assertFalse($node->isAttached());
-        $node->attachLDAP($this->_getLDAP());
+        $node->attachLDAP($this->getLDAP());
     }
 
     public function testAttachToValidLDAP()
     {
         $data=array(
-            'dn'          => $this->_createDn('ou=name,'),
+            'dn'          => $this->createDn('ou=name,'),
             'ou'          => array('name'),
             'l'           => array('a', 'b', 'c'),
             'objectClass' => array('organizationalUnit', 'top'),
         );
         $node=Node::fromArray($data);
         $this->assertFalse($node->isAttached());
-        $node->attachLDAP($this->_getLDAP());
+        $node->attachLDAP($this->getLDAP());
         $this->assertTrue($node->isAttached());
     }
 
     public function testExistsDn()
     {
         $data=array(
-            'dn'          => $this->_createDn('ou=name,'),
+            'dn'          => $this->createDn('ou=name,'),
             'ou'          => array('name'),
             'l'           => array('a', 'b', 'c'),
             'objectClass' => array('organizationalUnit', 'top'),
         );
         $node1=Node::fromArray($data);
-        $node1->attachLDAP($this->_getLDAP());
+        $node1->attachLDAP($this->getLDAP());
         $this->assertFalse($node1->exists());
-        $dn=$this->_createDn('ou=Test1,');
-        $node2=Node::fromLDAP($dn, $this->_getLDAP());
+        $dn=$this->createDn('ou=Test1,');
+        $node2=Node::fromLDAP($dn, $this->getLDAP());
         $this->assertTrue($node2->exists());
     }
 
     public function testReload()
     {
-        $dn=$this->_createDn('ou=Test1,');
-        $node=Node::fromLDAP($dn, $this->_getLDAP());
+        $dn=$this->createDn('ou=Test1,');
+        $node=Node::fromLDAP($dn, $this->getLDAP());
         $node->reload();
         $this->assertEquals($dn, $node->getDn()->toString());
         $this->assertEquals('ou=Test1', $node->getRdnString());
@@ -183,8 +183,8 @@ class OnlineTest extends \ZendTest\Ldap\OnlineTestCase
 
     public function testGetNode()
     {
-        $dn=$this->_createDn('ou=Test1,');
-        $node=$this->_getLDAP()->getNode($dn);
+        $dn=$this->createDn('ou=Test1,');
+        $node=$this->getLDAP()->getNode($dn);
         $this->assertEquals($dn, $node->getDn()->toString());
         $this->assertEquals("Test1", $node->getAttribute('ou', 0));
     }
@@ -194,13 +194,13 @@ class OnlineTest extends \ZendTest\Ldap\OnlineTestCase
      */
     public function testGetIllegalNode()
     {
-        $dn=$this->_createDn('ou=Test99,');
-        $node=$this->_getLDAP()->getNode($dn);
+        $dn=$this->createDn('ou=Test99,');
+        $node=$this->getLDAP()->getNode($dn);
     }
 
     public function testGetBaseNode()
     {
-        $node=$this->_getLDAP()->getBaseNode();
+        $node=$this->getLDAP()->getBaseNode();
         $this->assertEquals(TESTS_ZEND_LDAP_WRITEABLE_SUBTREE, $node->getDnString());
 
         $dn=Ldap\Dn::fromString(TESTS_ZEND_LDAP_WRITEABLE_SUBTREE,
@@ -210,7 +210,7 @@ class OnlineTest extends \ZendTest\Ldap\OnlineTestCase
 
     public function testSearchSubtree()
     {
-        $node=$this->_getLDAP()->getNode($this->_createDn('ou=Node,'));
+        $node=$this->getLDAP()->getNode($this->createDn('ou=Node,'));
         $items=$node->searchSubtree('(objectClass=organizationalUnit)', Ldap\Ldap::SEARCH_SCOPE_SUB,
             array(), 'ou');
         $this->assertInstanceOf('Zend\Ldap\Node\Collection', $items);
@@ -218,9 +218,9 @@ class OnlineTest extends \ZendTest\Ldap\OnlineTestCase
 
         $i=0;
         $dns=array(
-            $this->_createDn('ou=Node,'),
-            $this->_createDn('ou=Test1,ou=Node,'),
-            $this->_createDn('ou=Test2,ou=Node,'));
+            $this->createDn('ou=Node,'),
+            $this->createDn('ou=Test1,ou=Node,'),
+            $this->createDn('ou=Test2,ou=Node,'));
         foreach ($items as $key => $node) {
             $key=Ldap\Dn::fromString($key)->toString(Ldap\Dn::ATTR_CASEFOLD_LOWER);
             $this->assertEquals($dns[$i], $key);
@@ -237,30 +237,30 @@ class OnlineTest extends \ZendTest\Ldap\OnlineTestCase
 
     public function testCountSubtree()
     {
-        $node=$this->_getLDAP()->getNode(TESTS_ZEND_LDAP_WRITEABLE_SUBTREE);
+        $node=$this->getLDAP()->getNode(TESTS_ZEND_LDAP_WRITEABLE_SUBTREE);
         $this->assertEquals(9, $node->countSubtree('(objectClass=organizationalUnit)',
             Ldap\Ldap::SEARCH_SCOPE_SUB));
     }
 
     public function testCountChildren()
     {
-        $node=$this->_getLDAP()->getNode(TESTS_ZEND_LDAP_WRITEABLE_SUBTREE);
+        $node=$this->getLDAP()->getNode(TESTS_ZEND_LDAP_WRITEABLE_SUBTREE);
         $this->assertEquals(6, $node->countChildren());
-        $node=$this->_getLDAP()->getNode($this->_createDn('ou=Node,'));
+        $node=$this->getLDAP()->getNode($this->createDn('ou=Node,'));
         $this->assertEquals(2, $node->countChildren());
     }
 
     public function testSearchChildren()
     {
-        $node=$this->_getLDAP()->getNode($this->_createDn('ou=Node,'));
+        $node=$this->getLDAP()->getNode($this->createDn('ou=Node,'));
         $this->assertEquals(2, $node->searchChildren('(objectClass=*)', array(), 'ou')->count());
-        $node=$this->_getLDAP()->getNode(TESTS_ZEND_LDAP_WRITEABLE_SUBTREE);
+        $node=$this->getLDAP()->getNode(TESTS_ZEND_LDAP_WRITEABLE_SUBTREE);
         $this->assertEquals(6, $node->searchChildren('(objectClass=*)', array(), 'ou')->count());
     }
 
     public function testGetParent()
     {
-        $node=$this->_getLDAP()->getNode($this->_createDn('ou=Node,'));
+        $node=$this->getLDAP()->getNode($this->createDn('ou=Node,'));
         $pnode=$node->getParent();
         $this->assertEquals(Ldap\Dn::fromString(TESTS_ZEND_LDAP_WRITEABLE_SUBTREE)
             ->toString(Ldap\Dn::ATTR_CASEFOLD_LOWER),
@@ -272,14 +272,14 @@ class OnlineTest extends \ZendTest\Ldap\OnlineTestCase
      */
     public function testGetNonexistantParent()
     {
-        $node=$this->_getLDAP()->getNode(TESTS_ZEND_LDAP_WRITEABLE_SUBTREE);
+        $node=$this->getLDAP()->getNode(TESTS_ZEND_LDAP_WRITEABLE_SUBTREE);
         $pnode=$node->getParent();
     }
 
     public function testLoadFromLDAPWithDnObject()
     {
-        $dn=Ldap\Dn::fromString($this->_createDn('ou=Test1,'));
-        $node=Node::fromLDAP($dn, $this->_getLDAP());
+        $dn=Ldap\Dn::fromString($this->createDn('ou=Test1,'));
+        $node=Node::fromLDAP($dn, $this->getLDAP());
         $this->assertInstanceOf('Zend\Ldap\Node', $node);
         $this->assertTrue($node->isAttached());
     }

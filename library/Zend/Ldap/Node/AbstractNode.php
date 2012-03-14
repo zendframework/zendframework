@@ -28,11 +28,6 @@ use Zend\Ldap;
 /**
  * Zend_Ldap_Node_Abstract provides a bas eimplementation for LDAP nodes
  *
- * @uses       ArrayAccess
- * @uses       BadMethodCallException
- * @uses       Countable
- * @uses       \Zend\Ldap\Attribute
- * @uses       \Zend\Ldap\Dn
  * @category   Zend
  * @package    Zend_Ldap
  * @subpackage Node
@@ -41,7 +36,7 @@ use Zend\Ldap;
  */
 abstract class AbstractNode implements \ArrayAccess, \Countable
 {
-    protected static $_systemAttributes=array('createtimestamp', 'creatorsname',
+    protected static $systemAttributes=array('createtimestamp', 'creatorsname',
         'entrycsn', 'entrydn', 'entryuuid', 'hassubordinates', 'modifiersname',
         'modifytimestamp', 'structuralobjectclass', 'subschemasubentry',
         'distinguishedname', 'instancetype', 'name', 'objectcategory', 'objectguid',
@@ -52,14 +47,14 @@ abstract class AbstractNode implements \ArrayAccess, \Countable
      *
      * @var \Zend\Ldap\Dn
      */
-    protected $_dn;
+    protected $dn;
 
     /**
      * Holds the node's current data.
      *
      * @var array
      */
-    protected $_currentData;
+    protected $currentData;
 
     /**
      * Constructor.
@@ -72,8 +67,8 @@ abstract class AbstractNode implements \ArrayAccess, \Countable
      */
     protected function __construct(Ldap\Dn $dn, array $data, $fromDataSource)
     {
-        $this->_dn = $dn;
-        $this->_loadData($data, $fromDataSource);
+        $this->dn = $dn;
+        $this->loadData($data, $fromDataSource);
     }
 
     /**
@@ -81,13 +76,13 @@ abstract class AbstractNode implements \ArrayAccess, \Countable
      * @param  boolean $fromDataSource
      * @throws \Zend\Ldap\Exception
      */
-    protected function _loadData(array $data, $fromDataSource)
+    protected function loadData(array $data, $fromDataSource)
     {
         if (array_key_exists('dn', $data)) {
             unset($data['dn']);
         }
         ksort($data, SORT_STRING);
-        $this->_currentData = $data;
+        $this->currentData = $data;
     }
 
     /**
@@ -103,7 +98,7 @@ abstract class AbstractNode implements \ArrayAccess, \Countable
     {
         if ($ldap !== null) {
             $data = $ldap->getEntry($this->_getDn(), array('*', '+'), true);
-            $this->_loadData($data, true);
+            $this->loadData($data, true);
         }
         return $this;
     }
@@ -117,7 +112,7 @@ abstract class AbstractNode implements \ArrayAccess, \Countable
      */
     protected function _getDn()
     {
-        return $this->_dn;
+        return $this->dn;
     }
 
     /**
@@ -272,14 +267,14 @@ abstract class AbstractNode implements \ArrayAccess, \Countable
     {
         if ($includeSystemAttributes === false) {
             $data = array();
-            foreach ($this->_currentData as $key => $value) {
-                if (!in_array($key, self::$_systemAttributes)) {
+            foreach ($this->currentData as $key => $value) {
+                if (!in_array($key, self::$systemAttributes)) {
                     $data[$key] = $value;
                 }
             }
             return $data;
         } else {
-            return $this->_currentData;
+            return $this->currentData;
         }
     }
 
@@ -299,9 +294,9 @@ abstract class AbstractNode implements \ArrayAccess, \Countable
     public function existsAttribute($name, $emptyExists = false)
     {
         $name = strtolower($name);
-        if (isset($this->_currentData[$name])) {
+        if (isset($this->currentData[$name])) {
             if ($emptyExists) return true;
-            return count($this->_currentData[$name])>0;
+            return count($this->currentData[$name])>0;
         }
         else return false;
     }
@@ -315,7 +310,7 @@ abstract class AbstractNode implements \ArrayAccess, \Countable
      */
     public function attributeHasValue($attribName, $value)
     {
-        return Ldap\Attribute::attributeHasValue($this->_currentData, $attribName, $value);
+        return Ldap\Attribute::attributeHasValue($this->currentData, $attribName, $value);
     }
 
     /**
@@ -334,7 +329,7 @@ abstract class AbstractNode implements \ArrayAccess, \Countable
             return $this->getDnString();
         }
         else {
-            return Ldap\Attribute::getAttribute($this->_currentData, $name, $index);
+            return Ldap\Attribute::getAttribute($this->currentData, $name, $index);
         }
     }
 
@@ -350,7 +345,7 @@ abstract class AbstractNode implements \ArrayAccess, \Countable
      */
     public function getDateTimeAttribute($name, $index = null)
     {
-        return Ldap\Attribute::getDateTimeAttribute($this->_currentData, $name, $index);
+        return Ldap\Attribute::getDateTimeAttribute($this->currentData, $name, $index);
     }
 
     /**
@@ -481,6 +476,6 @@ abstract class AbstractNode implements \ArrayAccess, \Countable
      */
     public function count()
     {
-        return count($this->_currentData);
+        return count($this->currentData);
     }
 }

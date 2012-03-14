@@ -10,7 +10,7 @@ interface ExpressionInterface
     /**
      * @abstract
      *
-     * @return array should return an array in the format:
+     * @return array of array|string should return an array in the format:
      *
      * array (
      *    string $specification, // a sprintf formatted string

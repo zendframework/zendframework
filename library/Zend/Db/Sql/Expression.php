@@ -63,7 +63,7 @@ class Expression implements ExpressionInterface
 
     public function getExpressionData()
     {
-        $parameters = (is_string($this->parameters)) ? $this->parameters : array($this->parameters);
+        $parameters = (is_string($this->parameters)) ? array($this->parameters) : $this->parameters;
 
         $types = array();
         for ($i = 0; $i < count($parameters); $i++) {
@@ -73,11 +73,11 @@ class Expression implements ExpressionInterface
 
         $expression = str_replace($this->pseudoMarkers, '%s', $this->expression);
 
-        return array(
+        return array(array(
             $expression,
             $parameters,
             $types
-        );
+        ));
     }
 
 }

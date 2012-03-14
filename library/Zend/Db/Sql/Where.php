@@ -51,7 +51,7 @@ class Where extends Predicate\Predicate implements PreparableSqlInterface
         $parameterContainer = $statement->getParameterContainer();
         $prepareType = $driver->getPrepareType();
 
-        $parts = parent::getWhereParts();
+        $parts = parent::getExpressionData();
         $wherePart = '';
         $whereParamIndex = 1;
         foreach ($parts as $part) {
@@ -92,7 +92,7 @@ class Where extends Predicate\Predicate implements PreparableSqlInterface
     public function getSqlString(PlatformInterface $platform = null)
     {
         $platform = ($platform) ?: new Sql92;
-        $parts = parent::getWhereParts();
+        $parts = parent::getExpressionData();
         $wherePart = '';
         foreach ($parts as $part) {
             if (is_string($part)) {

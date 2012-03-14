@@ -55,10 +55,6 @@ class PageFactoryTest extends \PHPUnit_Framework_TestCase
             )),
             AbstractPage::factory(array(
                 'label' => 'MVC Page',
-                'module' => 'index'
-            )),
-            AbstractPage::factory(array(
-                'label' => 'MVC Page',
                 'route' => 'home'
             ))
         );

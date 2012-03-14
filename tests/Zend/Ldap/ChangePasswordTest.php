@@ -35,7 +35,7 @@ use Zend\Ldap;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-class ChangePasswordTest extends OnlineTestCase
+class ChangePasswordTest extends AbstractOnlineTestCase
 {
     public function testAddNewUserWithPasswordOpenLDAP()
     {

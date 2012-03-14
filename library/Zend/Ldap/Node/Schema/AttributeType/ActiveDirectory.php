@@ -37,7 +37,7 @@ use Zend\Ldap\Node\Schema\AttributeType,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ActiveDirectory extends Schema\Item implements AttributeType
+class ActiveDirectory extends Schema\AbstractItem implements AttributeType
 {
     /**
      * Gets the attribute name

@@ -26,7 +26,7 @@ namespace ZendTest\Ldap\Node;
 use Zend\Ldap;
 
 /**
- * Zend_Ldap_OnlineTestCase
+ * Zend_Ldap_AbstractOnlineTestCase
  */
 /**
  * @see Zend_Ldap_Node
@@ -41,7 +41,7 @@ use Zend\Ldap;
  * @group      Zend_Ldap
  * @group      Zend_Ldap_Node
  */
-class ChildrenIterationTest extends \ZendTest\Ldap\OnlineTestCase
+class ChildrenIterationTest extends \ZendTest\Ldap\AbstractOnlineTestCase
 {
     protected function setUp()
     {

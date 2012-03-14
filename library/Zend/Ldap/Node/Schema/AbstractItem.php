@@ -25,7 +25,7 @@
 namespace Zend\Ldap\Node\Schema;
 
 /**
- * Zend_Ldap_Node_Schema_Item provides a base implementation for managing schema
+ * Zend_Ldap_Node_Schema_AbstractItem provides a base implementation for managing schema
  * items like objectClass and attribute.
  *
  * @category   Zend
@@ -34,7 +34,7 @@ namespace Zend\Ldap\Node\Schema;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class Item implements \ArrayAccess, \Countable
+abstract class AbstractItem implements \ArrayAccess, \Countable
 {
     /**
      * The underlying data
@@ -57,7 +57,7 @@ abstract class Item implements \ArrayAccess, \Countable
      * Sets the data
      *
      * @param  array $data
-     * @return \Zend\Ldap\Node\Schema\Item Provides a fluid interface
+     * @return \Zend\Ldap\Node\Schema\AbstractItem Provides a fluid interface
      */
     public function setData(array $data)
     {

@@ -33,7 +33,7 @@ use Zend\Ldap;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Ldap
  */
-class CrudTest extends OnlineTestCase
+class CrudTest extends AbstractOnlineTestCase
 {
     public function testAddAndDelete()
     {

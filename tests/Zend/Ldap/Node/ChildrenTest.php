@@ -34,7 +34,7 @@ namespace ZendTest\Ldap\Node;
  * @group      Zend_Ldap
  * @group      Zend_Ldap_Node
  */
-class ChildrenTest extends \ZendTest\Ldap\OnlineTestCase
+class ChildrenTest extends \ZendTest\Ldap\AbstractOnlineTestCase
 {
     protected function setUp()
     {

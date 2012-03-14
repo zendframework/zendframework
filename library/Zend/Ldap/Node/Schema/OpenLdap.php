@@ -264,10 +264,10 @@ class OpenLdap extends Schema
     /**
      * Resolves inheritance in objectClasses and attributes
      *
-     * @param \Zend\Ldap\Node\Schema\Item $node
+     * @param \Zend\Ldap\Node\Schema\AbstractItem $node
      * @param array                      $repository
      */
-    protected function resolveInheritance(Item $node, array $repository)
+    protected function resolveInheritance(AbstractItem $node, array $repository)
     {
         $data = $node->getData();
         $parents = $data['sup'];

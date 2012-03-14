@@ -36,7 +36,7 @@ use Zend\Ldap\Collection;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Ldap
  */
-class SearchTest extends OnlineTestCase
+class SearchTest extends AbstractOnlineTestCase
 {
     protected function setUp()
     {

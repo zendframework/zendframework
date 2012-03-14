@@ -37,7 +37,7 @@ use Zend\Ldap\Node\Schema\ObjectClass,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ActiveDirectory extends Schema\Item implements ObjectClass
+class ActiveDirectory extends Schema\AbstractItem implements ObjectClass
 {
     /**
      * Gets the objectClass name

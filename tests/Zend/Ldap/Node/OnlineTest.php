@@ -35,7 +35,7 @@ use Zend\Ldap;
  * @group      Zend_Ldap
  * @group      Zend_Ldap_Node
  */
-class OnlineTest extends \ZendTest\Ldap\OnlineTestCase
+class OnlineTest extends \ZendTest\Ldap\AbstractOnlineTestCase
 {
     protected function setUp()
     {

@@ -34,7 +34,7 @@ use Zend\Ldap;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Ldap
  */
-class CopyRenameTest extends OnlineTestCase
+class CopyRenameTest extends AbstractOnlineTestCase
 {
     /**
      * @var string

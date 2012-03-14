@@ -26,7 +26,7 @@ namespace ZendTest\Ldap\Node;
 use Zend\Ldap\Node\RootDse;
 
 /**
- * Zend_Ldap_OnlineTestCase
+ * Zend_Ldap_AbstractOnlineTestCase
  */
 
 /**
@@ -38,7 +38,7 @@ use Zend\Ldap\Node\RootDse;
  * @group      Zend_Ldap
  * @group      Zend_Ldap_Node
  */
-class SchemaTest extends \ZendTest\Ldap\OnlineTestCase
+class SchemaTest extends \ZendTest\Ldap\AbstractOnlineTestCase
 {
     /**
      * @var Zend_Ldap_Node_Schema

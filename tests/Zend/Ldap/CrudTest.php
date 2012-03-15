@@ -381,7 +381,7 @@ class CrudTest extends AbstractOnlineTestCase
     /**
      * @group ZF-9564
      */
-    public function testAddingEntryWithMissingRdnAttribute() 
+    public function testAddingEntryWithMissingRdnAttribute()
     {
         $dn   = $this->createDn('ou=TestCreated,');
         $data = array(
@@ -404,7 +404,7 @@ class CrudTest extends AbstractOnlineTestCase
     /**
      * @group ZF-9564
      */
-    public function testAddingEntryWithMissingRdnAttributeValue() 
+    public function testAddingEntryWithMissingRdnAttributeValue()
     {
         $dn   = $this->createDn('ou=TestCreated,');
         $data = array(
@@ -428,7 +428,7 @@ class CrudTest extends AbstractOnlineTestCase
     /**
      * @group ZF-9564
      */
-    public function testAddingEntryThatHasMultipleValuesOnRdnAttribute() 
+    public function testAddingEntryThatHasMultipleValuesOnRdnAttribute()
     {
         $dn   = $this->createDn('ou=TestCreated,');
         $data = array(
@@ -452,7 +452,7 @@ class CrudTest extends AbstractOnlineTestCase
     /**
      * @group ZF-9564
      */
-    public function testUpdatingEntryWithAttributeThatIsAnRdnAttribute() 
+    public function testUpdatingEntryWithAttributeThatIsAnRdnAttribute()
     {
         $dn   = $this->createDn('ou=TestCreated,');
         $data = array(
@@ -480,7 +480,7 @@ class CrudTest extends AbstractOnlineTestCase
     /**
      * @group ZF-9564
      */
-    public function testUpdatingEntryWithRdnAttributeValueMissingInData() 
+    public function testUpdatingEntryWithRdnAttributeValueMissingInData()
     {
         $dn   = $this->createDn('ou=TestCreated,');
         $data = array(

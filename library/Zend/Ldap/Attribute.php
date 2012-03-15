@@ -390,11 +390,11 @@ class Attribute
                 }
             }
         } else {
-			$newVal = self::valueFromLDAPDateTime($values);
-			if ($newVal !== null) {
-			    $values = $newVal;
-			}
-		}
+            $newVal = self::valueFromLDAPDateTime($values);
+            if ($newVal !== null) {
+                $values = $newVal;
+            }
+        }
         return $values;
     }
 

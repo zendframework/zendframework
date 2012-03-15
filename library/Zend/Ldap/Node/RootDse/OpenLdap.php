@@ -24,7 +24,7 @@ namespace Zend\Ldap\Node\RootDse;
 use Zend\Ldap\Node;
 
 /**
- * Zend\Ldap\Node\RootDse\OpenLdap provides a simple data-container for the 
+ * Zend\Ldap\Node\RootDse\OpenLdap provides a simple data-container for the
  * RootDse node of an OpenLDAP server.
  *
  * @category   Zend

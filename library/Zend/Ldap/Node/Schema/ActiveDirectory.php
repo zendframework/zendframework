@@ -21,7 +21,7 @@
 
 namespace Zend\Ldap\Node\Schema;
 
-use Zend\Ldap, 
+use Zend\Ldap,
     Zend\Ldap\Node;
 
 /**

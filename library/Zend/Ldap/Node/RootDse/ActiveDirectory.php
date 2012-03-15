@@ -21,7 +21,7 @@
 
 namespace Zend\Ldap\Node\RootDse;
 
-use Zend\Ldap, 
+use Zend\Ldap,
     Zend\Ldap\Node;
 
 /**

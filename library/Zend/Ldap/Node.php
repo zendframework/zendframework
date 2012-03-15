@@ -133,7 +133,8 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
     public function getLdap()
     {
         if ($this->ldap === null) {
-            throw new Exception\LdapException(null, 'No LDAP connection specified.', Exception\LdapException::LDAP_OTHER);
+            throw new Exception\LdapException(null, 'No LDAP connection specified.',
+                Exception\LdapException::LDAP_OTHER);
         }
         else return $this->ldap;
     }

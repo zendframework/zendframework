@@ -76,7 +76,8 @@ class SimpleEncoderTest extends TestLdap\TestCase
             array(array('dn' => 'cn=Jürgen Österreicher, ou=Äpfel, dc=airius, dc=com'),
                 'dn:: ' . base64_encode('cn=Jürgen Österreicher, ou=Äpfel, dc=airius, dc=com')),
             array(array('description' => 'Babs is a big sailing fan, and travels extensively in search of perfect sailing conditions.'),
-                'description: Babs is a big sailing fan, and travels extensively in search of p' . PHP_EOL . ' erfect sailing conditions.'),
+                'description: Babs is a big sailing fan, and travels extensively in search of p'
+                . PHP_EOL . ' erfect sailing conditions.'),
             array(array('description' => "CHR(127) \x7f in string"),
                 'description:: ' . base64_encode("CHR(127) \x7f in string")),
             array(array('description' => '1234567890123456789012345678901234567890123456789012345678901234 567890'),

@@ -20,7 +20,8 @@
 
 namespace Zend\Ldap\Collection;
 
-use Zend\Ldap;
+use Zend\Ldap,
+    Zend\Ldap\Exception\LdapException;
 
 /**
  * Zend\Ldap\Collection\DefaultIterator is the default collection iterator implementation
@@ -85,7 +86,7 @@ class DefaultIterator implements \Iterator, \Countable
         $this->resultId = $resultId;
         $this->itemCount = @ldap_count_entries($ldap->getResource(), $resultId);
         if ($this->itemCount === false) {
-            throw new Ldap\Exception($this->ldap, 'counting entries');
+            throw new LdapException($this->ldap, 'counting entries');
         }
     }
 
@@ -186,7 +187,7 @@ class DefaultIterator implements \Iterator, \Countable
      * Implements Iterator
      *
      * @return array|null
-     * @throws Ldap\Exception
+     * @throws Ldap\LdapException
      */
     public function current()
     {
@@ -241,7 +242,7 @@ class DefaultIterator implements \Iterator, \Countable
         if (is_resource($this->current)) {
             $currentDn = @ldap_get_dn($this->ldap->getResource(), $this->current);
             if ($currentDn === false) {
-                throw new Ldap\Exception($this->ldap, 'getting dn');
+                throw new LdapException($this->ldap, 'getting dn');
             }
             return $currentDn;
         } else {
@@ -253,7 +254,7 @@ class DefaultIterator implements \Iterator, \Countable
      * Move forward to next result item
      * Implements Iterator
      *
-     * @throws Ldap\Exception
+     * @throws Ldap\LdapException
      */
     public function next()
     {
@@ -261,11 +262,11 @@ class DefaultIterator implements \Iterator, \Countable
             $this->current = @ldap_next_entry($this->ldap->getResource(), $this->current);
             if ($this->current === false) {
                 $msg = $this->ldap->getLastError($code);
-                if ($code === Ldap\Exception::LDAP_SIZELIMIT_EXCEEDED) {
+                if ($code === LdapException::LDAP_SIZELIMIT_EXCEEDED) {
                     // we have reached the size limit enforced by the server
                     return;
-                } else if ($code > Ldap\Exception::LDAP_SUCCESS) {
-                     throw new Ldap\Exception($this->ldap, 'getting next entry (' . $msg . ')');
+                } else if ($code > LdapException::LDAP_SUCCESS) {
+                     throw new LdapException($this->ldap, 'getting next entry (' . $msg . ')');
                 }
             }
         } else {
@@ -277,15 +278,15 @@ class DefaultIterator implements \Iterator, \Countable
      * Rewind the Iterator to the first result item
      * Implements Iterator
      *
-     * @throws Ldap\Exception
+     * @throws Ldap\LdapException
      */
     public function rewind()
     {
         if (is_resource($this->resultId)) {
             $this->current = @ldap_first_entry($this->ldap->getResource(), $this->resultId);
             if ($this->current === false &&
-                    $this->ldap->getLastErrorCode() > Ldap\Exception::LDAP_SUCCESS) {
-                throw new Ldap\Exception($this->ldap, 'getting first entry');
+                    $this->ldap->getLastErrorCode() > LdapException::LDAP_SUCCESS) {
+                throw new LdapException($this->ldap, 'getting first entry');
             }
         }
     }

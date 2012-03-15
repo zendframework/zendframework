@@ -22,7 +22,8 @@
 namespace ZendTest\Ldap;
 
 use Zend\Ldap,
-    Zend\Ldap\Collection;
+    Zend\Ldap\Collection,
+    Zend\Ldap\Exception\LdapException;
 
 /**
  * @category   Zend
@@ -64,7 +65,7 @@ class SearchTest extends AbstractOnlineTestCase
     }
 
     /**
-     * @expectedException Zend\Ldap\Exception
+     * @expectedException Zend\Ldap\Exception\LdapException
      */
     public function testGetSingleIllegalEntryWithException()
     {
@@ -134,7 +135,7 @@ class SearchTest extends AbstractOnlineTestCase
     }
 
     /**
-     * @expectedException Zend\Ldap\Exception
+     * @expectedException Zend\Ldap\Exception\LdapException
      */
     public function testIllegalSearch()
     {
@@ -300,7 +301,7 @@ class SearchTest extends AbstractOnlineTestCase
                 TESTS_ZEND_LDAP_WRITEABLE_SUBTREE, Ldap\Ldap::SEARCH_SCOPE_SUB, array(), null,
                 'This_Class_Does_Not_Exist');
             $this->fail('Expected exception not thrown');
-        } catch (Ldap\Exception $zle) {
+        } catch (LdapException $zle) {
             $this->assertContains("Class 'This_Class_Does_Not_Exist' can not be found",
                 $zle->getMessage());
         }
@@ -318,7 +319,7 @@ class SearchTest extends AbstractOnlineTestCase
                 'ZendTest\Ldap\CollectionClassNotSubclassingZendLDAPCollection'
                 );
             $this->fail('Expected exception not thrown');
-        } catch (Ldap\Exception $zle) {
+        } catch (LdapException $zle) {
             $this->assertContains(
                 "Class 'ZendTest\\Ldap\\CollectionClassNotSubclassingZendLDAPCollection' must subclass 'Zend\\Ldap\\Collection'",
                 $zle->getMessage());

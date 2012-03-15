@@ -141,7 +141,7 @@ class CopyRenameTest extends AbstractOnlineTestCase
     }
 
     /**
-     * @expectedException Zend\Ldap\Exception
+     * @expectedException Zend\Ldap\Exception\LdapException
      */
     public function testRenameSourceNotExists()
     {
@@ -149,7 +149,7 @@ class CopyRenameTest extends AbstractOnlineTestCase
     }
 
     /**
-     * @expectedException Zend\Ldap\Exception
+     * @expectedException Zend\Ldap\Exception\LdapException
      */
     public function testRenameTargetExists()
     {
@@ -157,7 +157,7 @@ class CopyRenameTest extends AbstractOnlineTestCase
     }
 
     /**
-     * @expectedException Zend\Ldap\Exception
+     * @expectedException Zend\Ldap\Exception\LdapException
      */
     public function testRenameTargetParentNotExists()
     {
@@ -165,7 +165,7 @@ class CopyRenameTest extends AbstractOnlineTestCase
     }
 
     /**
-     * @expectedException Zend\Ldap\Exception
+     * @expectedException Zend\Ldap\Exception\LdapException
      */
     public function testRenameEmulationSourceNotExists()
     {
@@ -173,7 +173,7 @@ class CopyRenameTest extends AbstractOnlineTestCase
     }
 
     /**
-     * @expectedException Zend\Ldap\Exception
+     * @expectedException Zend\Ldap\Exception\LdapException
      */
     public function testRenameEmulationTargetExists()
     {
@@ -181,7 +181,7 @@ class CopyRenameTest extends AbstractOnlineTestCase
     }
 
     /**
-     * @expectedException Zend\Ldap\Exception
+     * @expectedException Zend\Ldap\Exception\LdapException
      */
     public function testRenameEmulationTargetParentNotExists()
     {

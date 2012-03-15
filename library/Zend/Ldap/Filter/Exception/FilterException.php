@@ -19,7 +19,9 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Ldap\Filter;
+namespace Zend\Ldap\Filter\Exception;
+
+use Zend\Ldap;
 
 /**
  * @category   Zend
@@ -28,6 +30,6 @@ namespace Zend\Ldap\Filter;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Exception extends \Exception
+class FilterException extends \Exception implements Ldap\Exception
 {
 }

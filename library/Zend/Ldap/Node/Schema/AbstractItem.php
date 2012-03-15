@@ -21,6 +21,8 @@
 
 namespace Zend\Ldap\Node\Schema;
 
+use Zend\Ldap\Exception\BadMethodCallException;
+
 /**
  * Zend\Ldap\Node\Schema\AbstractItem provides a base implementation for managing schema
  * items like objectClass and attribute.
@@ -111,7 +113,7 @@ abstract class AbstractItem implements \ArrayAccess, \Countable
      */
     public function offsetSet($name, $value)
     {
-        throw new \BadMethodCallException();
+        throw new BadMethodCallException();
     }
 
     /**
@@ -137,7 +139,7 @@ abstract class AbstractItem implements \ArrayAccess, \Countable
      */
     public function offsetUnset($name)
     {
-        throw new \BadMethodCallException();
+        throw new BadMethodCallException();
     }
 
     /**

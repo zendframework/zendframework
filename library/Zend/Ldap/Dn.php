@@ -61,7 +61,7 @@ class Dn implements \ArrayAccess
      * @param  string|array $dn
      * @param  string|null  $caseFold
      * @return Dn
-     * @throws Exception
+     * @throws Exception\LdapException
      */
     public static function factory($dn, $caseFold = null)
     {
@@ -70,7 +70,7 @@ class Dn implements \ArrayAccess
         } else if (is_string($dn)) {
             return self::fromString($dn, $caseFold);
         } else {
-            throw new Exception(null, 'Invalid argument type for $dn');
+            throw new Exception\LdapException(null, 'Invalid argument type for $dn');
         }
     }
 
@@ -80,7 +80,7 @@ class Dn implements \ArrayAccess
      * @param  string      $dn
      * @param  string|null $caseFold
      * @return Dn
-     * @throws Exception
+     * @throws Exception\LdapException
      */
     public static function fromString($dn, $caseFold = null)
     {
@@ -99,7 +99,7 @@ class Dn implements \ArrayAccess
      * @param  array       $dn
      * @param  string|null $caseFold
      * @return Dn
-     * @throws Exception
+     * @throws Exception\LdapException
      */
     public static function fromArray(array $dn, $caseFold = null)
     {
@@ -123,7 +123,7 @@ class Dn implements \ArrayAccess
      *
      * @param  string $caseFold
      * @return array
-     * @throws Exception if DN has no RDN (empty array)
+     * @throws Exception\LdapException if DN has no RDN (empty array)
      */
     public function getRdn($caseFold = null)
     {
@@ -136,7 +136,7 @@ class Dn implements \ArrayAccess
      *
      * @param  string $caseFold
      * @return string
-     * @throws Exception if DN has no RDN (empty array)
+     * @throws Exception\LdapException if DN has no RDN (empty array)
      */
     public function getRdnString($caseFold = null)
     {
@@ -154,7 +154,7 @@ class Dn implements \ArrayAccess
     {
         $levelUp = (int)$levelUp;
         if ($levelUp < 1 || $levelUp >= count($this->dn)) {
-            throw new Exception(null, 'Cannot retrieve parent DN with given $levelUp');
+            throw new Exception\LdapException(null, 'Cannot retrieve parent DN with given $levelUp');
         }
         $newDn = array_slice($this->dn, $levelUp);
         return new self($newDn, $this->caseFold);
@@ -167,7 +167,7 @@ class Dn implements \ArrayAccess
      * @param  int    $length
      * @param  string $caseFold
      * @return array
-     * @throws Exception if index is illegal
+     * @throws Exception\LdapException if index is illegal
      */
     public function get($index, $length = 1, $caseFold = null)
     {
@@ -191,7 +191,7 @@ class Dn implements \ArrayAccess
      * @param  int   $index
      * @param  array $value
      * @return Dn Provides a fluent interface
-     * @throws Exception if index is illegal
+     * @throws Exception\LdapException if index is illegal
      */
     public function set($index, array $value)
     {
@@ -207,7 +207,7 @@ class Dn implements \ArrayAccess
      * @param  int $index
      * @param  int $length
      * @return Dn Provides a fluent interface
-     * @throws Exception if index is illegal
+     * @throws Exception\LdapException if index is illegal
      */
     public function remove($index, $length = 1)
     {
@@ -252,7 +252,7 @@ class Dn implements \ArrayAccess
      * @param  int   $index
      * @param  array $value
      * @return Dn Provides a fluent interface
-     * @throws Exception if index is illegal
+     * @throws Exception\LdapException if index is illegal
      */
     public function insert($index, array $value)
     {
@@ -269,15 +269,15 @@ class Dn implements \ArrayAccess
      *
      * @param  mixed $index
      * @return boolean
-     * @throws Exception
+     * @throws Exception\LdapException
      */
     protected function assertIndex($index)
     {
         if (!is_int($index)) {
-            throw new Exception(null, 'Parameter $index must be an integer');
+            throw new Exception\LdapException(null, 'Parameter $index must be an integer');
         }
         if ($index < 0 || $index >= count($this->dn)) {
-            throw new Exception(null, 'Parameter $index out of bounds');
+            throw new Exception\LdapException(null, 'Parameter $index out of bounds');
         }
         return true;
     }
@@ -287,17 +287,17 @@ class Dn implements \ArrayAccess
      *
      * @param  array $value
      * @return boolean
-     * @throws Exception
+     * @throws Exception\LdapException
      */
     protected static function assertRdn(array $value)
     {
         if (count($value)<1) {
-            throw new Exception(null, 'RDN Array is malformed: it must have at least one item');
+            throw new Exception\LdapException(null, 'RDN Array is malformed: it must have at least one item');
         }
 
         foreach (array_keys($value) as $key) {
             if (!is_string($key)) {
-                throw new Exception(null, 'RDN Array is malformed: it must use string keys');
+                throw new Exception\LdapException(null, 'RDN Array is malformed: it must use string keys');
             }
         }
     }
@@ -317,7 +317,7 @@ class Dn implements \ArrayAccess
      *
      * @param  string $caseFold
      * @return string
-     * @throws Exception
+     * @throws Exception\LdapException
      */
     public function toString($caseFold = null)
     {
@@ -549,7 +549,7 @@ class Dn implements \ArrayAccess
      * @param  array  $vals     An optional array to receive DN values
      * @param  string $caseFold
      * @return array
-     * @throws Exception
+     * @throws Exception\LdapException
      */
     public static function explodeDn($dn, array &$keys = null, array &$vals = null,
         $caseFold = self::ATTR_CASEFOLD_NONE)
@@ -557,7 +557,7 @@ class Dn implements \ArrayAccess
         $k = array();
         $v = array();
         if (!self::checkDn($dn, $k, $v, $caseFold)) {
-            throw new Exception(null, 'DN is malformed');
+            throw new Exception\LdapException(null, 'DN is malformed');
         }
         $ret = array();
         for ($i = 0; $i < count($k); $i++) {
@@ -677,7 +677,7 @@ class Dn implements \ArrayAccess
      * @param  array  $attribute
      * @param  string $caseFold
      * @return string
-     * @throws Exception
+     * @throws Exception\LdapException
      */
     public static function implodeRdn(array $part, $caseFold = null)
     {
@@ -709,7 +709,7 @@ class Dn implements \ArrayAccess
      * @param  string $caseFold
      * @param  string $separator
      * @return string
-     * @throws Exception
+     * @throws Exception\LdapException
      */
     public static function implodeDn(array $dnArray, $caseFold = null, $separator = ',')
     {
@@ -743,7 +743,7 @@ class Dn implements \ArrayAccess
                 $pdn = self::explodeDn($parentDn, $keys, $vals, DN::ATTR_CASEFOLD_LOWER);
             }
         }
-        catch (Exception $e) {
+        catch (Exception\LdapException $e) {
             return false;
         }
 

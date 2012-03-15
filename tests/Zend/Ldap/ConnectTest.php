@@ -21,7 +21,8 @@
 
 namespace ZendTest\Ldap;
 
-use Zend\Ldap;
+use Zend\Ldap,
+    Zend\Ldap\Exception\LdapException;
 
 /* Note: The ldap_connect function does not actually try to connect. This
  * is why many tests attempt to bind with invalid credentials. If the
@@ -60,7 +61,7 @@ class ConnectTest extends \PHPUnit_Framework_TestCase
         try {
             $ldap->connect();
             $this->fail('Expected exception for empty options');
-        } catch (Ldap\Exception $zle) {
+        } catch (LdapException $zle) {
             $this->assertContains('host parameter is required', $zle->getMessage());
         }
     }
@@ -71,7 +72,7 @@ class ConnectTest extends \PHPUnit_Framework_TestCase
             // connect doesn't actually try to connect until bind is called
             $ldap->connect()->bind('CN=ignored,DC=example,DC=com', 'ignored');
             $this->fail('Expected exception for unknown host');
-        } catch (Ldap\Exception $zle) {
+        } catch (LdapException $zle) {
             $this->assertContains('Can\'t contact LDAP server', $zle->getMessage());
         }
     }
@@ -84,7 +85,7 @@ class ConnectTest extends \PHPUnit_Framework_TestCase
             // succeeded.
             $ldap->connect()->bind('CN=ignored,DC=example,DC=com', 'ignored');
             $this->fail('Expected exception for invalid username');
-        } catch (Ldap\Exception $zle) {
+        } catch (LdapException $zle) {
             $this->assertContains('Invalid credentials', $zle->getMessage());
         }
     }
@@ -113,7 +114,7 @@ class ConnectTest extends \PHPUnit_Framework_TestCase
             $ldap->connect($host, $port, $useSsl)
                  ->bind('CN=ignored,DC=example,DC=com', 'ignored');
             $this->fail('Expected exception for invalid username');
-        } catch (Ldap\Exception $zle) {
+        } catch (LdapException $zle) {
             $this->assertContains('Invalid credentials', $zle->getMessage());
         }
     }
@@ -130,7 +131,7 @@ class ConnectTest extends \PHPUnit_Framework_TestCase
             $ldap->connect(null, $port)
                  ->bind('CN=ignored,DC=example,DC=com', 'ignored');
             $this->fail('Expected exception for invalid username');
-        } catch (Ldap\Exception $zle) {
+        } catch (LdapException $zle) {
             $this->assertContains('Invalid credentials', $zle->getMessage());
         }
     }
@@ -159,7 +160,7 @@ class ConnectTest extends \PHPUnit_Framework_TestCase
         try {
             $ldap->connect()->bind('CN=ignored,DC=example,DC=com', 'ignored');
             $this->fail('Expected exception for unknown username');
-        } catch (Ldap\Exception $zle) {
+        } catch (LdapException $zle) {
             $this->assertContains('Can\'t contact LDAP server', $zle->getMessage());
         }
     }
@@ -170,7 +171,7 @@ class ConnectTest extends \PHPUnit_Framework_TestCase
         try {
             $ldap->connect()->bind('CN=ignored,DC=example,DC=com', 'ignored');
             $this->fail('Expected exception for invalid username');
-        } catch (Ldap\Exception $zle) {
+        } catch (LdapException $zle) {
             $this->assertContains('Invalid credentials', $zle->getMessage());
         }
     }
@@ -181,7 +182,7 @@ class ConnectTest extends \PHPUnit_Framework_TestCase
             try {
                 $ldap->connect()->bind('CN=ignored,DC=example,DC=com', 'ignored');
                 $this->fail('Expected exception for unknown username');
-            } catch (Ldap\Exception $zle) {
+            } catch (LdapException $zle) {
                 $this->assertContains('Invalid credentials', $zle->getMessage());
             }
         }
@@ -194,7 +195,7 @@ class ConnectTest extends \PHPUnit_Framework_TestCase
             try {
                 $ldap->connect()->bind('CN=ignored,DC=example,DC=com', 'ignored');
                 $this->fail('Expected exception for unknown username');
-            } catch (Ldap\Exception $zle) {
+            } catch (LdapException $zle) {
                 $this->assertContains('Invalid credentials', $zle->getMessage());
             }
         }
@@ -209,12 +210,12 @@ class ConnectTest extends \PHPUnit_Framework_TestCase
             // succeeded.
             $ldap->connect()->bind('CN=ignored,DC=example,DC=com', 'ignored');
             $this->fail('Expected exception for invalid username');
-        } catch (Ldap\Exception $zle) {
+        } catch (LdapException $zle) {
             $this->assertContains('Invalid credentials', $zle->getMessage());
 
             $this->assertEquals(0x31, $zle->getCode());
-            $this->assertEquals(0x0, Ldap\Exception::getLDAPCode($ldap));
-            $this->assertEquals(0x0, Ldap\Exception::getLDAPCode(null));
+            $this->assertEquals(0x0, LdapException::getLDAPCode($ldap));
+            $this->assertEquals(0x0, LdapException::getLDAPCode(null));
         }
     }
 
@@ -242,7 +243,7 @@ class ConnectTest extends \PHPUnit_Framework_TestCase
             $ldap->connect($host)
                  ->bind('CN=ignored,DC=example,DC=com', 'ignored');
             $this->fail('Expected exception for invalid username');
-        } catch (Ldap\Exception $zle) {
+        } catch (LdapException $zle) {
             $this->assertContains('Invalid credentials', $zle->getMessage());
         }
     }

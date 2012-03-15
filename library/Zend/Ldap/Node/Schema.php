@@ -44,7 +44,7 @@ class Schema extends AbstractNode
      *
      * @param  Ldap\Ldap $ldap
      * @return Schema
-     * @throws Ldap\Exception
+     * @throws Ldap\Exception\LdapException
      */
     public static function create(Ldap\Ldap $ldap)
     {

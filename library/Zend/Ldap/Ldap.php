@@ -20,7 +20,8 @@
 
 namespace Zend\Ldap;
 
-use Zend\Config;
+use Zend\Config,
+    Zend\Ldap\Exception\LdapException;
 
 /**
  * @category   Zend
@@ -111,13 +112,13 @@ class Ldap
      *
      * @param  array|Config\Config $options Options used in connecting, binding, etc.
      * @return void
-     * @throws Exception if ext/ldap is not installed
+     * @throws LdapException if ext/ldap is not installed
      */
     public function __construct($options = array())
     {
         if (!extension_loaded('ldap')) {
-            throw new Exception(null, 'LDAP extension not loaded',
-                Exception::LDAP_X_EXTENSION_NOT_LOADED);
+            throw new LdapException(null, 'LDAP extension not loaded',
+                LdapException::LDAP_X_EXTENSION_NOT_LOADED);
         }
         $this->setOptions($options);
     }
@@ -156,7 +157,7 @@ class Ldap
                 /* For some reason draft-ietf-ldapext-ldap-c-api-xx.txt error
                  * codes in OpenLDAP are negative values from -1 to -17.
                  */
-                $err = Exception::LDAP_SERVER_DOWN + (-$err - 1);
+                $err = LdapException::LDAP_SERVER_DOWN + (-$err - 1);
             }
             return $err;
         }
@@ -243,7 +244,7 @@ class Ldap
      *
      * @param  array|Config\Config $options Options used in connecting, binding, etc.
      * @return Ldap\Ldap Provides a fluent interface
-     * @throws Exception
+     * @throws LdapException
      */
     public function setOptions($options)
     {
@@ -300,7 +301,7 @@ class Ldap
         }
         if (count($options) > 0) {
             $key = key($options);
-            throw new Exception(null, "Unknown Zend\Ldap\Ldap option: $key");
+            throw new LdapException(null, "Unknown Zend\Ldap\Ldap option: $key");
         }
         $this->options = $permittedOptions;
         return $this;
@@ -515,7 +516,7 @@ class Ldap
     /**
      * @param  string $acctname The name of the account
      * @return string The DN of the specified account
-     * @throws Exception
+     * @throws LdapException
      */
     protected function getAccountDn($acctname)
     {
@@ -554,20 +555,20 @@ class Ldap
      * @param  string $acctname The name to canonicalize
      * @param  int    $type     The desired form of canonicalization
      * @return string The canonicalized name in the desired form
-     * @throws Exception
+     * @throws LdapException
      */
     public function getCanonicalAccountName($acctname, $form = 0)
     {
         $this->splitName($acctname, $dname, $uname);
 
         if (!$this->isPossibleAuthority($dname)) {
-            throw new Exception(null,
+            throw new LdapException(null,
                 "Binding domain is not an authority for user: $acctname",
-                Exception::LDAP_X_DOMAIN_MISMATCH);
+                LdapException::LDAP_X_DOMAIN_MISMATCH);
         }
 
         if (!$uname) {
-            throw new Exception(null, "Invalid account name syntax: $acctname");
+            throw new LdapException(null, "Invalid account name syntax: $acctname");
         }
 
         if (function_exists('mb_strtolower')) {
@@ -588,35 +589,35 @@ class Ldap
             case self::ACCTNAME_FORM_BACKSLASH:
                 $accountDomainNameShort = $this->getAccountDomainNameShort();
                 if (!$accountDomainNameShort) {
-                    throw new Exception(null, 'Option required: accountDomainNameShort');
+                    throw new LdapException(null, 'Option required: accountDomainNameShort');
                 }
                 return "$accountDomainNameShort\\$uname";
             case self::ACCTNAME_FORM_PRINCIPAL:
                 $accountDomainName = $this->getAccountDomainName();
                 if (!$accountDomainName) {
-                    throw new Exception(null, 'Option required: accountDomainName');
+                    throw new LdapException(null, 'Option required: accountDomainName');
                 }
                 return "$uname@$accountDomainName";
             default:
-                throw new Exception(null, "Unknown canonical name form: $form");
+                throw new LdapException(null, "Unknown canonical name form: $form");
         }
     }
 
     /**
      * @param  array $attrs An array of names of desired attributes
      * @return array An array of the attributes representing the account
-     * @throws Exception
+     * @throws LdapException
      */
     protected function getAccount($acctname, array $attrs = null)
     {
         $baseDn = $this->getBaseDn();
         if (!$baseDn) {
-            throw new Exception(null, 'Base DN not set');
+            throw new LdapException(null, 'Base DN not set');
         }
 
         $accountFilter = $this->getAccountFilter($acctname);
         if (!$accountFilter) {
-            throw new Exception(null, 'Invalid account filter');
+            throw new LdapException(null, 'Invalid account filter');
         }
 
         if (!is_resource($this->getResource())) {
@@ -630,14 +631,14 @@ class Ldap
             $accounts->close();
             return $acct;
         } else if ($count === 0) {
-            $code = Exception::LDAP_NO_SUCH_OBJECT;
+            $code = LdapException::LDAP_NO_SUCH_OBJECT;
             $str = "No object found for: $accountFilter";
         } else {
-            $code = Exception::LDAP_OPERATIONS_ERROR;
+            $code = LdapException::LDAP_OPERATIONS_ERROR;
             $str = "Unexpected result count ($count) for: $accountFilter";
         }
         $accounts->close();
-        throw new Exception($this, $str, $code);
+        throw new LdapException($this, $str, $code);
     }
 
     /**
@@ -666,7 +667,7 @@ class Ldap
      * @param  boolean $useStartTls    Use STARTTLS
      * @param  int     $networkTimeout The value for network timeout when connect to the LDAP server.
      * @return Ldap Provides a fluent interface
-     * @throws Exception
+     * @throws LdapException
      */
     public function connect($host = null, $port = null, $useSsl = null, $useStartTls = null, $networkTimeout = null)
     {
@@ -695,7 +696,7 @@ class Ldap
         }
 
         if (!$host) {
-            throw new Exception(null, 'A host parameter is required');
+            throw new LdapException(null, 'A host parameter is required');
         }
 
         $useUri = false;
@@ -743,18 +744,18 @@ class Ldap
                 }
             }
 
-            $zle = new Exception($this, "$host:$port");
+            $zle = new LdapException($this, "$host:$port");
             $this->disconnect();
             throw $zle;
         }
-        throw new Exception(null, "Failed to connect to LDAP server: $host:$port");
+        throw new LdapException(null, "Failed to connect to LDAP server: $host:$port");
     }
 
     /**
      * @param  string $username The username for authenticating the bind
      * @param  string $password The password for authenticating the bind
      * @return Ldap Provides a fluent interface
-     * @throws Exception
+     * @throws LdapException
      */
     public function bind($username = null, $password = null)
     {
@@ -782,20 +783,20 @@ class Ldap
                     if ($moreCreds) {
                         try {
                             $username = $this->getAccountDn($username);
-                        } catch (Exception $zle) {
+                        } catch (LdapException $zle) {
                             switch ($zle->getCode()) {
-                                case Exception::LDAP_NO_SUCH_OBJECT:
-                                case Exception::LDAP_X_DOMAIN_MISMATCH:
-                                case Exception::LDAP_X_EXTENSION_NOT_LOADED:
+                                case LdapException::LDAP_NO_SUCH_OBJECT:
+                                case LdapException::LDAP_X_DOMAIN_MISMATCH:
+                                case LdapException::LDAP_X_EXTENSION_NOT_LOADED:
                                     throw $zle;
                             }
-                            throw new Exception(null,
+                            throw new LdapException(null,
                                 'Failed to retrieve DN for account: ' . $username .
                                 ' [' . $zle->getMessage() . ']',
-                                Exception::LDAP_OPERATIONS_ERROR);
+                                LdapException::LDAP_OPERATIONS_ERROR);
                         }
                     } else {
-                        throw new Exception(null, 'Binding requires username in DN form');
+                        throw new LdapException(null, 'Binding requires username in DN form');
                     }
                 } else {
                     $username = $this->getCanonicalAccountName($username,
@@ -809,7 +810,7 @@ class Ldap
         }
 
         if ($username !== null && $password === '' && $this->getAllowEmptyPassword() !== true) {
-            $zle = new Exception(null,
+            $zle = new LdapException(null,
                 'Empty password not allowed - see allowEmptyPassword option.');
         } else {
             if (@ldap_bind($this->resource, $username, $password)) {
@@ -819,14 +820,14 @@ class Ldap
 
             $message = ($username === null) ? $this->connectString : $username;
             switch ($this->getLastErrorCode()) {
-                case Exception::LDAP_SERVER_DOWN:
+                case LdapException::LDAP_SERVER_DOWN:
                     /* If the error is related to establishing a connection rather than binding,
                      * the connect string is more informative than the username.
                      */
                     $message = $this->connectString;
             }
 
-            $zle = new Exception($this, $message);
+            $zle = new LdapException($this, $message);
         }
         $this->disconnect();
         throw $zle;
@@ -851,7 +852,7 @@ class Ldap
      * @param  string|null                        $sort
      * @param  string|null                        $collectionClass
      * @return Collection
-     * @throws Exception
+     * @throws LdapException
      */
     public function search($filter, $basedn = null, $scope = self::SEARCH_SCOPE_SUB,
         array $attributes = array(), $sort = null, $collectionClass = null)
@@ -903,12 +904,12 @@ class Ldap
         }
 
         if($search === false) {
-            throw new Exception($this, 'searching: ' . $filter);
+            throw new LdapException($this, 'searching: ' . $filter);
         }
         if ($sort !== null && is_string($sort)) {
             $isSorted = @ldap_sort($this->getResource(), $search, $sort);
             if($isSorted === false) {
-                throw new Exception($this, 'sorting: ' . $sort);
+                throw new LdapException($this, 'sorting: ' . $sort);
             }
         }
 
@@ -922,7 +923,7 @@ class Ldap
      * @param  Collection\DefaultIterator $iterator
      * @param  string|null                $collectionClass
      * @return Collection
-     * @throws Exception
+     * @throws LdapException
      */
     protected function createCollection(Collection\DefaultIterator $iterator, $collectionClass)
     {
@@ -931,11 +932,11 @@ class Ldap
         } else {
             $collectionClass = (string)$collectionClass;
             if (!class_exists($collectionClass)) {
-                throw new Exception(null,
+                throw new LdapException(null,
                     "Class '$collectionClass' can not be found");
             }
             if (!is_subclass_of($collectionClass, 'Zend\Ldap\Collection')) {
-                throw new Exception(null,
+                throw new LdapException(null,
                     "Class '$collectionClass' must subclass 'Zend\Ldap\Collection'");
             }
             return new $collectionClass($iterator);
@@ -949,14 +950,14 @@ class Ldap
      * @param  string|Dn|null               $basedn
      * @param  integer                      $scope
      * @return integer
-     * @throws Exception
+     * @throws LdapException
      */
     public function count($filter, $basedn = null, $scope = self::SEARCH_SCOPE_SUB)
     {
         try {
             $result = $this->search($filter, $basedn, $scope, array('dn'), null);
-        } catch (Exception $e) {
-            if ($e->getCode() === Exception::LDAP_NO_SUCH_OBJECT) return 0;
+        } catch (LdapException $e) {
+            if ($e->getCode() === LdapException::LDAP_NO_SUCH_OBJECT) return 0;
             else throw $e;
         }
         return $result->count();
@@ -967,7 +968,7 @@ class Ldap
      *
      * @param  string|Dn $dn
      * @return integer
-     * @throws Exception
+     * @throws LdapException
      */
     public function countChildren($dn)
     {
@@ -979,7 +980,7 @@ class Ldap
      *
      * @param  string|Dn $dn
      * @return boolean
-     * @throws Exception
+     * @throws LdapException
      */
     public function exists($dn)
     {
@@ -1005,7 +1006,7 @@ class Ldap
      * @param  string|null                        $sort
      * @param  boolean                            $reverseSort
      * @return array
-     * @throws Exception
+     * @throws LdapException
      */
     public function searchEntries($filter, $basedn = null, $scope = self::SEARCH_SCOPE_SUB,
         array $attributes = array(), $sort = null, $reverseSort = false)
@@ -1035,7 +1036,7 @@ class Ldap
      * @param  array     $attributes
      * @param  boolean   $throwOnNotFound
      * @return array
-     * @throws Exception
+     * @throws LdapException
      */
     public function getEntry($dn, array $attributes = array(), $throwOnNotFound = false)
     {
@@ -1043,7 +1044,7 @@ class Ldap
             $result = $this->search("(objectClass=*)", $dn, self::SEARCH_SCOPE_BASE,
                 $attributes, null);
             return $result->getFirst();
-        } catch (Exception $e){
+        } catch (LdapException $e){
             if ($throwOnNotFound !== false) throw $e;
         }
         return null;
@@ -1054,7 +1055,7 @@ class Ldap
      *
      * @param  array $entry
      * @return void
-     * @throws InvalidArgumentException
+     * @throws InvalidArgumentLdapException
      */
     public static function prepareLdapEntryArray(array &$entry)
     {
@@ -1065,7 +1066,7 @@ class Ldap
                     if ($v === null) {
                         unset($value[$i]);
                     } elseif (!is_scalar($v)) {
-                        throw new \InvalidArgumentException('Only scalar values allowed in LDAP data');
+                        throw new Exception\InvalidArgumentException('Only scalar values allowed in LDAP data');
                     } else {
                         $v = (string)$v;
                         if (strlen($v) == 0) {
@@ -1080,7 +1081,7 @@ class Ldap
                 if ($value === null) {
                     $entry[$key] = array();
                 } elseif (!is_scalar($value)) {
-                    throw new \InvalidArgumentException('Only scalar values allowed in LDAP data');
+                    throw new Exception\InvalidArgumentException('Only scalar values allowed in LDAP data');
                 } else {
                     $value = (string)$value;
                     if (strlen($value) == 0) {
@@ -1100,7 +1101,7 @@ class Ldap
      * @param  string|Dn $dn
      * @param  array     $entry
      * @return Ldap Provides a fluid interface
-     * @throws Exception
+     * @throws LdapException
      */
     public function add($dn, array $entry)
     {
@@ -1133,7 +1134,7 @@ class Ldap
 
         $isAdded = @ldap_add($this->getResource(), $dn->toString(), $entry);
         if($isAdded === false) {
-            throw new Exception($this, 'adding: ' . $dn->toString());
+            throw new LdapException($this, 'adding: ' . $dn->toString());
         }
         return $this;
     }
@@ -1144,7 +1145,7 @@ class Ldap
      * @param  string|Dn $dn
      * @param  array     $entry
      * @return Ldap Provides a fluid interface
-     * @throws Exception
+     * @throws LdapException
      */
     public function update($dn, array $entry)
     {
@@ -1171,7 +1172,7 @@ class Ldap
         if (count($entry) > 0) {
             $isModified = @ldap_modify($this->getResource(), $dn->toString(), $entry);
             if($isModified === false) {
-                throw new Exception($this, 'updating: ' . $dn->toString());
+                throw new LdapException($this, 'updating: ' . $dn->toString());
             }
         }
         return $this;
@@ -1186,7 +1187,7 @@ class Ldap
      * @param  string|Dn $dn
      * @param  array     $entry
      * @return Ldap Provides a fluid interface
-     * @throws Exception
+     * @throws LdapException
      */
     public function save($dn, array $entry)
     {
@@ -1204,7 +1205,7 @@ class Ldap
      * @param  string|Dn $dn
      * @param  boolean   $recursively
      * @return Ldap Provides a fluid interface
-     * @throws Exception
+     * @throws LdapException
      */
     public function delete($dn, $recursively = false)
     {
@@ -1221,7 +1222,7 @@ class Ldap
         }
         $isDeleted = @ldap_delete($this->getResource(), $dn);
         if($isDeleted === false) {
-            throw new Exception($this, 'deleting: ' . $dn);
+            throw new LdapException($this, 'deleting: ' . $dn);
         }
         return $this;
     }
@@ -1247,7 +1248,7 @@ class Ldap
                 $entry = @ldap_next_entry($this->getResource(), $entry)) {
             $childDn = @ldap_get_dn($this->getResource(), $entry);
             if ($childDn === false) {
-                throw new Exception($this, 'getting dn');
+                throw new LdapException($this, 'getting dn');
             }
             $children[] = $childDn;
         }
@@ -1263,7 +1264,7 @@ class Ldap
      * @param  boolean   $recursively
      * @param  boolean   $alwaysEmulate
      * @return Ldap Provides a fluid interface
-     * @throws Exception
+     * @throws LdapException
      */
     public function moveToSubtree($from, $to, $recursively = false, $alwaysEmulate = false)
     {
@@ -1294,7 +1295,7 @@ class Ldap
      * @param  boolean   $recursively
      * @param  boolean   $alwaysEmulate
      * @return Ldap Provides a fluid interface
-     * @throws Exception
+     * @throws LdapException
      */
     public function move($from, $to, $recursively = false, $alwaysEmulate = false)
     {
@@ -1311,7 +1312,7 @@ class Ldap
      * @param  boolean   $recursively
      * @param  boolean   $alwaysEmulate
      * @return Ldap Provides a fluid interface
-     * @throws Exception
+     * @throws LdapException
      */
     public function rename($from, $to, $recursively = false, $alwaysEmulate = false)
     {
@@ -1334,7 +1335,7 @@ class Ldap
             $newParent = Dn::implodeDn($newDnParts);
             $isOK = @ldap_rename($this->getResource(), $from, $newRdn, $newParent, true);
             if($isOK === false) {
-                throw new Exception($this, 'renaming ' . $from . ' to ' . $to);
+                throw new LdapException($this, 'renaming ' . $from . ' to ' . $to);
             }
             else if (!$this->exists($to)) $emulate = true;
         }
@@ -1352,7 +1353,7 @@ class Ldap
      * @param  string|Dn $to
      * @param  boolean   $recursively
      * @return Ldap Provides a fluid interface
-     * @throws Exception
+     * @throws LdapException
      */
     public function copyToSubtree($from, $to, $recursively = false)
     {
@@ -1380,7 +1381,7 @@ class Ldap
      * @param  string|Dn $to
      * @param  boolean   $recursively
      * @return Ldap Provides a fluid interface
-     * @throws Exception
+     * @throws LdapException
      */
     public function copy($from, $to, $recursively = false)
     {
@@ -1410,7 +1411,7 @@ class Ldap
      *
      * @param  string|Dn $dn
      * @return Node|null
-     * @throws Exception
+     * @throws LdapException
      */
     public function getNode($dn)
     {
@@ -1421,7 +1422,7 @@ class Ldap
      * Returns the base node as a Zend\Ldap\Node
      *
      * @return Node
-     * @throws Exception
+     * @throws LdapException
      */
     public function getBaseNode()
     {
@@ -1432,7 +1433,7 @@ class Ldap
      * Returns the RootDse
      *
      * @return Node\RootDse
-     * @throws Exception
+     * @throws LdapException
      */
     public function getRootDse()
     {
@@ -1446,7 +1447,7 @@ class Ldap
      * Returns the schema
      *
      * @return Node\Schema
-     * @throws Exception
+     * @throws LdapException
      */
     public function getSchema()
     {

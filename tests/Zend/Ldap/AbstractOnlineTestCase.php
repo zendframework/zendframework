@@ -19,10 +19,8 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Ldap;
+
 use Zend\Ldap;
 
 /**
@@ -36,7 +34,7 @@ use Zend\Ldap;
 abstract class AbstractOnlineTestCase extends TestCase
 {
     /**
-     * @var Zend_Ldap
+     * @var Ldap\Ldap
      */
     private $ldap;
 
@@ -46,7 +44,7 @@ abstract class AbstractOnlineTestCase extends TestCase
     private $nodes;
 
     /**
-     * @return \Zend\Ldap\Ldap
+     * @return Ldap\Ldap
      */
     protected function getLDAP()
     {

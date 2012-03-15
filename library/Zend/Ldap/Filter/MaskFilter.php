@@ -19,13 +19,10 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Ldap\Filter;
 
 /**
- * Zend_Ldap_Filter_Mask provides a simple string filter to be used with a mask.
+ * Zend\Ldap\Filter\MaskFilter provides a simple string filter to be used with a mask.
  *
  * @category   Zend
  * @package    Zend_Ldap
@@ -36,7 +33,7 @@ namespace Zend\Ldap\Filter;
 class MaskFilter extends StringFilter
 {
     /**
-     * Creates a Zend_Ldap_Filter_String.
+     * Creates a Zend\Ldap\Filter\MaskFilter.
      *
      * @param string $mask
      * @param string $value,...

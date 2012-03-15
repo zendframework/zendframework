@@ -18,13 +18,10 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Ldap;
 
 /**
- * Zend_Ldap_Converter is a collection of useful LDAP related conversion functions.
+ * Zend\Ldap\Converter is a collection of useful LDAP related conversion functions.
  *
  * @category   Zend
  * @package    Zend_Ldap

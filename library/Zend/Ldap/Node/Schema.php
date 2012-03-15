@@ -19,16 +19,12 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Ldap\Node;
 
 use Zend\Ldap;
-use Zend\Ldap\Node\RootDse;
 
 /**
- * Zend_Ldap_Node_Schema provides a simple data-container for the Schema node.
+ * Zend\Ldap\Node\Schema provides a simple data-container for the Schema node.
  *
  * @category   Zend
  * @package    Zend_Ldap
@@ -46,9 +42,9 @@ class Schema extends AbstractNode
     /**
      * Factory method to create the Schema node.
      *
-     * @param  \Zend\Ldap\Ldap $ldap
-     * @return \Zend\Ldap\Node\Schema
-     * @throws \Zend\Ldap\Exception
+     * @param  Ldap\Ldap $ldap
+     * @return Schema
+     * @throws Ldap\Exception
      */
     public static function create(Ldap\Ldap $ldap)
     {
@@ -70,9 +66,9 @@ class Schema extends AbstractNode
      *
      * Constructor is protected to enforce the use of factory methods.
      *
-     * @param  \Zend\Ldap\Dn $dn
-     * @param  array        $data
-     * @param  \Zend\Ldap\Ldap    $ldap
+     * @param  Ldap\Dn   $dn
+     * @param  array     $data
+     * @param  Ldap\Ldap $ldap
      */
     protected function __construct(Ldap\Dn $dn, array $data, Ldap\Ldap $ldap)
     {
@@ -83,9 +79,9 @@ class Schema extends AbstractNode
     /**
      * Parses the schema
      *
-     * @param  \Zend\Ldap\Dn $dn
-     * @param  \Zend\Ldap\Ldap    $ldap
-     * @return \Zend\Ldap\Node\Schema Provides a fluid interface
+     * @param  Dn   $dn
+     * @param  Ldap $ldap
+     * @return Schema Provides a fluid interface
      */
     protected function parseSchema(Ldap\Dn $dn, Ldap\Ldap $ldap)
     {

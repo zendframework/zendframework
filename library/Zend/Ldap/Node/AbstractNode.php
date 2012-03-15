@@ -19,14 +19,12 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Ldap\Node;
+
 use Zend\Ldap;
 
 /**
- * Zend_Ldap_Node_Abstract provides a bas eimplementation for LDAP nodes
+ * Zend\Ldap\Node\AbstractNode provides a bas eimplementation for LDAP nodes
  *
  * @category   Zend
  * @package    Zend_Ldap
@@ -45,7 +43,7 @@ abstract class AbstractNode implements \ArrayAccess, \Countable
     /**
      * Holds the node's DN.
      *
-     * @var \Zend\Ldap\Dn
+     * @var Ldap\Dn
      */
     protected $dn;
 
@@ -61,9 +59,9 @@ abstract class AbstractNode implements \ArrayAccess, \Countable
      *
      * Constructor is protected to enforce the use of factory methods.
      *
-     * @param  \Zend\Ldap\Dn $dn
-     * @param  array        $data
-     * @param  boolean      $fromDataSource
+     * @param  Ldap\Dn $dn
+     * @param  array   $data
+     * @param  boolean $fromDataSource
      */
     protected function __construct(Ldap\Dn $dn, array $data, $fromDataSource)
     {
@@ -74,7 +72,7 @@ abstract class AbstractNode implements \ArrayAccess, \Countable
     /**
      * @param  array   $data
      * @param  boolean $fromDataSource
-     * @throws \Zend\Ldap\Exception
+     * @throws Ldap\Exception
      */
     protected function loadData(array $data, $fromDataSource)
     {
@@ -90,9 +88,9 @@ abstract class AbstractNode implements \ArrayAccess, \Countable
      *
      * This is an online method.
      *
-     * @param  \Zend\Ldap\Ldap $ldap
-     * @return \Zend\Ldap\Node\AbstractNode Provides a fluid interface
-     * @throws \Zend\Ldap\Exception
+     * @param  Ldap\Ldap $ldap
+     * @return AbstractNode Provides a fluid interface
+     * @throws Ldap\Exception
      */
     public function reload(Ldap\Ldap $ldap = null)
     {
@@ -104,11 +102,11 @@ abstract class AbstractNode implements \ArrayAccess, \Countable
     }
 
     /**
-     * Gets the DN of the current node as a Zend_Ldap_Dn.
+     * Gets the DN of the current node as a Zend\Ldap\Dn.
      *
      * This is an offline method.
      *
-     * @return \Zend\Ldap\Dn
+     * @return Ldap\Dn
      */
     protected function _getDn()
     {
@@ -116,12 +114,12 @@ abstract class AbstractNode implements \ArrayAccess, \Countable
     }
 
     /**
-     * Gets the DN of the current node as a Zend_Ldap_Dn.
+     * Gets the DN of the current node as a Zend\Ldap\Dn.
      * The method returns a clone of the node's DN to prohibit modification.
      *
      * This is an offline method.
      *
-     * @return \Zend\Ldap\Dn
+     * @return Ldap\Dn
      */
     public function getDn()
     {
@@ -321,7 +319,7 @@ abstract class AbstractNode implements \ArrayAccess, \Countable
      * @param  string  $name
      * @param  integer $index
      * @return mixed
-     * @throws \Zend\Ldap\Exception
+     * @throws Ldap\Exception
      */
     public function getAttribute($name, $index = null)
     {
@@ -341,7 +339,7 @@ abstract class AbstractNode implements \ArrayAccess, \Countable
      * @param  string  $name
      * @param  integer $index
      * @return array|integer
-     * @throws \Zend\Ldap\Exception
+     * @throws Ldap\Exception
      */
     public function getDateTimeAttribute($name, $index = null)
     {
@@ -370,7 +368,7 @@ abstract class AbstractNode implements \ArrayAccess, \Countable
      *
      * @param  string $name
      * @return array
-     * @throws \Zend\Ldap\Exception
+     * @throws Ldap\Exception
      */
     public function __get($name)
     {
@@ -430,7 +428,7 @@ abstract class AbstractNode implements \ArrayAccess, \Countable
      *
      * @param  string $name
      * @return array
-     * @throws \Zend\Ldap\Exception
+     * @throws Ldap\Exception
      */
     public function offsetGet($name)
     {

@@ -19,15 +19,12 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Ldap\Node;
 
-use Zend\Ldap\Node;
+use Zend\Ldap;
 
 /**
- * Zend_Ldap_Node_ChildrenIterator provides an iterator to a collection of children nodes.
+ * Zend\Ldap\Node\ChildrenIterator provides an iterator to a collection of children nodes.
  *
  * @category   Zend
  * @package    Zend_Ldap
@@ -38,7 +35,7 @@ use Zend\Ldap\Node;
 class ChildrenIterator implements \Iterator, \Countable, \RecursiveIterator, \ArrayAccess
 {
     /**
-     * An array of Zend_Ldap_Node objects
+     * An array of Zend\Ldap\Node objects
      *
      * @var array
      */
@@ -70,7 +67,7 @@ class ChildrenIterator implements \Iterator, \Countable, \RecursiveIterator, \Ar
      * Return the current child.
      * Implements Iterator
      *
-     * @return \Zend\Ldap\Node
+     * @return Ldap\Node
      */
     public function current()
     {
@@ -126,7 +123,7 @@ class ChildrenIterator implements \Iterator, \Countable, \RecursiveIterator, \Ar
      */
     public function hasChildren()
     {
-        if ($this->current() instanceof Node) {
+        if ($this->current() instanceof Ldap\Node) {
             return $this->current()->hasChildren();
         } else {
             return false;
@@ -136,11 +133,11 @@ class ChildrenIterator implements \Iterator, \Countable, \RecursiveIterator, \Ar
     /**
      * Returns the children for the current node.
      *
-     * @return \Zend\Ldap\Node\ChildrenIterator
+     * @return ChildrenIterator
      */
     public function getChildren()
     {
-        if ($this->current() instanceof Node) {
+        if ($this->current() instanceof Ldap\Node) {
             return $this->current()->getChildren();
         } else {
             return null;
@@ -152,7 +149,7 @@ class ChildrenIterator implements \Iterator, \Countable, \RecursiveIterator, \Ar
      * Implements ArrayAccess.
      *
      * @param  string $rdn
-     * @return Zend_Ldap_node
+     * @return Ldap\node
      */
     public function offsetGet($rdn)
     {

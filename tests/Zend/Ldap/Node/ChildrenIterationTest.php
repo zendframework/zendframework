@@ -19,18 +19,10 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Ldap\Node;
-use Zend\Ldap;
 
-/**
- * Zend_Ldap_AbstractOnlineTestCase
- */
-/**
- * @see Zend_Ldap_Node
- */
+use Zend\Ldap,
+    ZendTest\Ldap as TestLdap;
 
 /**
  * @category   Zend
@@ -41,7 +33,7 @@ use Zend\Ldap;
  * @group      Zend_Ldap
  * @group      Zend_Ldap_Node
  */
-class ChildrenIterationTest extends \ZendTest\Ldap\AbstractOnlineTestCase
+class ChildrenIterationTest extends TestLdap\AbstractOnlineTestCase
 {
     protected function setUp()
     {

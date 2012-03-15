@@ -19,14 +19,12 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Ldap\Filter;
+
 use Zend\Ldap;
 
 /**
- * Zend_Ldap_Filter_Abstract provides a base implementation for filters.
+ * Zend\Ldap\Filter\AbstractFilter provides a base implementation for filters.
  *
  * @category   Zend
  * @package    Zend_Ldap
@@ -57,7 +55,7 @@ abstract class AbstractFilter
     /**
      * Negates the filter.
      *
-     * @return \Zend\Ldap\Filter\AbstractFilter
+     * @return AbstractFilter
      */
     public function negate()
     {
@@ -67,8 +65,8 @@ abstract class AbstractFilter
     /**
      * Creates an 'and' filter.
      *
-     * @param  \Zend\Ldap\Filter\AbstractFilter $filter,...
-     * @return \Zend\Ldap\Filter\AndFilter
+     * @param  AbstractFilter $filter,...
+     * @return AndFilter
      */
     public function addAnd($filter)
     {
@@ -80,8 +78,8 @@ abstract class AbstractFilter
     /**
      * Creates an 'or' filter.
      *
-     * @param  \Zend\Ldap\Filter\AbstractFilter $filter,...
-     * @return \Zend\Ldap\Filter\OrFilter
+     * @param  AbstractFilter $filter,...
+     * @return OrFilter
      */
     public function addOr($filter)
     {

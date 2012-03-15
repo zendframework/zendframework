@@ -19,13 +19,12 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Ldap\Ldif;
 
+use Zend\Ldap;
+
 /**
- * Zend_Ldap_Ldif_Encoder provides methods to encode and decode LDAP data into/from Ldif.
+ * Zend\Ldap\Ldif\Encoder provides methods to encode and decode LDAP data into/from Ldif.
  *
  * @category   Zend
  * @package    Zend_Ldap
@@ -167,7 +166,7 @@ class Encoder
             return $this->encodeString($value);
         } else if (is_array($value)) {
             return $this->encodeAttributes($value);
-        } else if ($value instanceof \Zend\Ldap\Node) {
+        } else if ($value instanceof Ldap\Node) {
             return $value->toLdif($this->options);
         }
         return null;

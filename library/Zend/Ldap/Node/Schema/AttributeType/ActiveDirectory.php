@@ -19,16 +19,12 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Ldap\Node\Schema\AttributeType;
 
-use Zend\Ldap\Node\Schema\AttributeType,
-    Zend\Ldap\Node\Schema;
+use Zend\Ldap\Node\Schema;
 
 /**
- * Zend_Ldap_Node_Schema_AttributeType_ActiveDirectory provides access to the attribute type
+ * Zend\Ldap\Node\Schema\AttributeType\ActiveDirectory provides access to the attribute type
  * schema information on an Active Directory server.
  *
  * @category   Zend
@@ -37,7 +33,7 @@ use Zend\Ldap\Node\Schema\AttributeType,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ActiveDirectory extends Schema\AbstractItem implements AttributeType
+class ActiveDirectory extends Schema\AbstractItem implements Schema\AttributeType
 {
     /**
      * Gets the attribute name

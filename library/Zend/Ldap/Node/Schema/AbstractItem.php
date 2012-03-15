@@ -19,13 +19,10 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Ldap\Node\Schema;
 
 /**
- * Zend_Ldap_Node_Schema_AbstractItem provides a base implementation for managing schema
+ * Zend\Ldap\Node\Schema\AbstractItem provides a base implementation for managing schema
  * items like objectClass and attribute.
  *
  * @category   Zend
@@ -57,7 +54,7 @@ abstract class AbstractItem implements \ArrayAccess, \Countable
      * Sets the data
      *
      * @param  array $data
-     * @return \Zend\Ldap\Node\Schema\AbstractItem Provides a fluid interface
+     * @return AbstractItem Provides a fluid interface
      */
     public function setData(array $data)
     {

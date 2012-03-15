@@ -19,12 +19,10 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Ldap\Node;
-use Zend\Ldap\Node;
-use Zend\Ldap;
+
+use Zend\Ldap,
+    ZendTest\Ldap as TestLdap;
 
 /**
  * @category   Zend
@@ -35,7 +33,7 @@ use Zend\Ldap;
  * @group      Zend_Ldap
  * @group      Zend_Ldap_Node
  */
-class OnlineTest extends \ZendTest\Ldap\AbstractOnlineTestCase
+class OnlineTest extends TestLdap\AbstractOnlineTestCase
 {
     protected function setUp()
     {
@@ -52,7 +50,7 @@ class OnlineTest extends \ZendTest\Ldap\AbstractOnlineTestCase
     public function testLoadFromLDAP()
     {
         $dn=$this->createDn('ou=Test1,');
-        $node=Node::fromLDAP($dn, $this->getLDAP());
+        $node=Ldap\Node::fromLDAP($dn, $this->getLDAP());
         $this->assertInstanceOf('Zend\Ldap\Node', $node);
         $this->assertTrue($node->isAttached());
     }
@@ -100,13 +98,13 @@ class OnlineTest extends \ZendTest\Ldap\AbstractOnlineTestCase
     public function testLoadFromLDAPIllegalEntry()
     {
         $dn=$this->createDn('ou=Test99,');
-        $node=Node::fromLDAP($dn, $this->getLDAP());
+        $node=Ldap\Node::fromLDAP($dn, $this->getLDAP());
     }
 
     public function testDetachAndReattach()
     {
         $dn=$this->createDn('ou=Test1,');
-        $node=Node::fromLDAP($dn, $this->getLDAP());
+        $node=Ldap\Node::fromLDAP($dn, $this->getLDAP());
         $this->assertInstanceOf('Zend\Ldap\Node', $node);
         $this->assertTrue($node->isAttached());
         $node->detachLDAP();
@@ -118,7 +116,7 @@ class OnlineTest extends \ZendTest\Ldap\AbstractOnlineTestCase
     public function testSerialize()
     {
         $dn=$this->createDn('ou=Test1,');
-        $node=Node::fromLDAP($dn, $this->getLDAP());
+        $node=Ldap\Node::fromLDAP($dn, $this->getLDAP());
         $sdata=serialize($node);
         $newObject=unserialize($sdata);
         $this->assertFalse($newObject->isAttached());
@@ -137,7 +135,7 @@ class OnlineTest extends \ZendTest\Ldap\AbstractOnlineTestCase
             'l'           => array('a', 'b', 'c'),
             'objectClass' => array('organizationalUnit', 'top'),
         );
-        $node=Node::fromArray($data);
+        $node=Ldap\Node::fromArray($data);
         $this->assertFalse($node->isAttached());
         $node->attachLDAP($this->getLDAP());
     }
@@ -150,7 +148,7 @@ class OnlineTest extends \ZendTest\Ldap\AbstractOnlineTestCase
             'l'           => array('a', 'b', 'c'),
             'objectClass' => array('organizationalUnit', 'top'),
         );
-        $node=Node::fromArray($data);
+        $node=Ldap\Node::fromArray($data);
         $this->assertFalse($node->isAttached());
         $node->attachLDAP($this->getLDAP());
         $this->assertTrue($node->isAttached());
@@ -164,18 +162,18 @@ class OnlineTest extends \ZendTest\Ldap\AbstractOnlineTestCase
             'l'           => array('a', 'b', 'c'),
             'objectClass' => array('organizationalUnit', 'top'),
         );
-        $node1=Node::fromArray($data);
+        $node1=Ldap\Node::fromArray($data);
         $node1->attachLDAP($this->getLDAP());
         $this->assertFalse($node1->exists());
         $dn=$this->createDn('ou=Test1,');
-        $node2=Node::fromLDAP($dn, $this->getLDAP());
+        $node2=Ldap\Node::fromLDAP($dn, $this->getLDAP());
         $this->assertTrue($node2->exists());
     }
 
     public function testReload()
     {
         $dn=$this->createDn('ou=Test1,');
-        $node=Node::fromLDAP($dn, $this->getLDAP());
+        $node=Ldap\Node::fromLDAP($dn, $this->getLDAP());
         $node->reload();
         $this->assertEquals($dn, $node->getDn()->toString());
         $this->assertEquals('ou=Test1', $node->getRdnString());
@@ -279,7 +277,7 @@ class OnlineTest extends \ZendTest\Ldap\AbstractOnlineTestCase
     public function testLoadFromLDAPWithDnObject()
     {
         $dn=Ldap\Dn::fromString($this->createDn('ou=Test1,'));
-        $node=Node::fromLDAP($dn, $this->getLDAP());
+        $node=Ldap\Node::fromLDAP($dn, $this->getLDAP());
         $this->assertInstanceOf('Zend\Ldap\Node', $node);
         $this->assertTrue($node->isAttached());
     }

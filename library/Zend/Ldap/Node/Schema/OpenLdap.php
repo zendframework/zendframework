@@ -19,16 +19,13 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Ldap\Node\Schema;
 
-use Zend\Ldap\Node\Schema,
-    Zend\Ldap;
+use Zend\Ldap,
+    Zend\Ldap\Node;
 
 /**
- * Zend_Ldap_Node_Schema_OpenLDAP provides a simple data-container for the Schema node of
+ * Zend\Ldap\Node\Schema\OpenLDAP provides a simple data-container for the Schema node of
  * an OpenLDAP server.
  *
  * @category   Zend
@@ -37,7 +34,7 @@ use Zend\Ldap\Node\Schema,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class OpenLdap extends Schema
+class OpenLdap extends Node\Schema
 {
     /**
      * The attribute Types
@@ -45,24 +42,28 @@ class OpenLdap extends Schema
      * @var array
      */
     protected $attributeTypes = null;
+
     /**
      * The object classes
      *
      * @var array
      */
     protected $objectClasses = null;
+
     /**
      * The LDAP syntaxes
      *
      * @var array
      */
     protected $ldapSyntaxes = null;
+
     /**
      * The matching rules
      *
      * @var array
      */
     protected $matchingRules = null;
+
     /**
      * The matching rule use
      *
@@ -73,9 +74,9 @@ class OpenLdap extends Schema
     /**
      * Parses the schema
      *
-     * @param  \Zend\Ldap\Dn $dn
-     * @param  \Zend\Ldap\Ldap    $ldap
-     * @return \Zend\Ldap\Node\Schema Provides a fluid interface
+     * @param  Ldap\Dn $dn
+     * @param  Ldap\Ldap    $ldap
+     * @return Schema Provides a fluid interface
      */
     protected function parseSchema(Ldap\Dn $dn, Ldap\Ldap $ldap)
     {
@@ -264,8 +265,8 @@ class OpenLdap extends Schema
     /**
      * Resolves inheritance in objectClasses and attributes
      *
-     * @param \Zend\Ldap\Node\Schema\AbstractItem $node
-     * @param array                      $repository
+     * @param AbstractItem $node
+     * @param array        $repository
      */
     protected function resolveInheritance(AbstractItem $node, array $repository)
     {

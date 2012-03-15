@@ -19,18 +19,9 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Ldap\Dn;
-use Zend\Ldap;
 
-/**
- * Test helper
- */
-/**
- * Zend_Ldap_Dn
- */
+use Zend\Ldap;
 
 /**
  * @category   Zend

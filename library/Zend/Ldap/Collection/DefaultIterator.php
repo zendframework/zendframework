@@ -18,14 +18,12 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Ldap\Collection;
+
 use Zend\Ldap;
 
 /**
- * Zend_Ldap_Collection_Iterator_Default is the default collection iterator implementation
+ * Zend\Ldap\Collection\DefaultIterator is the default collection iterator implementation
  * using ext/ldap
  *
  * @category   Zend
@@ -42,7 +40,7 @@ class DefaultIterator implements \Iterator, \Countable
     /**
      * LDAP Connection
      *
-     * @var \Zend\Ldap\Ldap
+     * @var Ldap\Ldap
      */
     protected $ldap = null;
 
@@ -77,7 +75,7 @@ class DefaultIterator implements \Iterator, \Countable
     /**
      * Constructor.
      *
-     * @param  \Zend\Ldap\Ldap $ldap
+     * @param  Ldap\Ldap $ldap
      * @param  resource  $resultId
      * @return void
      */
@@ -115,7 +113,7 @@ class DefaultIterator implements \Iterator, \Countable
     /**
      * Gets the current LDAP connection.
      *
-     * @return \Zend\Ldap\Ldap
+     * @return Ldap\Ldap
      */
     public function getLDAP()
     {
@@ -126,14 +124,14 @@ class DefaultIterator implements \Iterator, \Countable
      * Sets the attribute name treatment.
      *
      * Can either be one of the following constants
-     * - Zend_Ldap_Collection_Iterator_Default::ATTRIBUTE_TO_LOWER
-     * - Zend_Ldap_Collection_Iterator_Default::ATTRIBUTE_TO_UPPER
-     * - Zend_Ldap_Collection_Iterator_Default::ATTRIBUTE_NATIVE
+     * - Zend\Ldap\Collection\DefaultIterator::ATTRIBUTE_TO_LOWER
+     * - Zend\Ldap\Collection\DefaultIterator::ATTRIBUTE_TO_UPPER
+     * - Zend\Ldap\Collection\DefaultIterator::ATTRIBUTE_NATIVE
      * or a valid callback accepting the attribute's name as it's only
      * argument and returning the new attribute's name.
      *
      * @param  integer|callback $attributeNameTreatment
-     * @return \Zend\Ldap\Collection\DefaultIterator Provides a fluent interface
+     * @return DefaultIterator Provides a fluent interface
      */
     public function setAttributeNameTreatment($attributeNameTreatment)
     {
@@ -188,7 +186,7 @@ class DefaultIterator implements \Iterator, \Countable
      * Implements Iterator
      *
      * @return array|null
-     * @throws \Zend\Ldap\Exception
+     * @throws Ldap\Exception
      */
     public function current()
     {
@@ -255,7 +253,7 @@ class DefaultIterator implements \Iterator, \Countable
      * Move forward to next result item
      * Implements Iterator
      *
-     * @throws \Zend\Ldap\Exception
+     * @throws Ldap\Exception
      */
     public function next()
     {
@@ -279,7 +277,7 @@ class DefaultIterator implements \Iterator, \Countable
      * Rewind the Iterator to the first result item
      * Implements Iterator
      *
-     * @throws \Zend\Ldap\Exception
+     * @throws Ldap\Exception
      */
     public function rewind()
     {

@@ -19,13 +19,10 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Ldap\Filter;
 
 /**
- * Zend_Ldap_Filter_String provides a simple custom string filter.
+ * Zend\Ldap\Filter\StringFilter provides a simple custom string filter.
  *
  * @category   Zend
  * @package    Zend_Ldap
@@ -43,7 +40,7 @@ class StringFilter extends AbstractFilter
     protected $filter;
 
     /**
-     * Creates a Zend_Ldap_Filter_String.
+     * Creates a Zend\Ldap\Filter\StringFilter.
      *
      * @param string $filter
      */

@@ -18,10 +18,9 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Ldap;
+
+use Zend\Config;
 
 /**
  * @category   Zend
@@ -73,19 +72,19 @@ class Ldap
     /**
      * Caches the RootDse
      *
-     * @var \Zend\Ldap\Node
+     * @var Node
      */
     protected $rootDse = null;
 
     /**
      * Caches the schema
      *
-     * @var \Zend\Ldap\Node
+     * @var Node
      */
     protected $schema = null;
 
     /**
-     * @deprecated will be removed, use {@see Zend_Ldap_Filter_Abstract::escapeValue()}
+     * @deprecated will be removed, use {@see Filter\AbstractFilter::escapeValue()}
      * @param  string $str The string to escape.
      * @return string The escaped string
      */
@@ -95,7 +94,7 @@ class Ldap
     }
 
     /**
-     * @deprecated will be removed, use {@see Zend_Ldap_Dn::checkDn()}
+     * @deprecated will be removed, use {@see Dn::checkDn()}
      * @param  string $dn   The DN to parse
      * @param  array  $keys An optional array to receive DN keys (e.g. CN, OU, DC, ...)
      * @param  array  $vals An optional array to receive DN values
@@ -110,9 +109,9 @@ class Ldap
     /**
      * Constructor.
      *
-     * @param  array|\Zend\Config\Config $options Options used in connecting, binding, etc.
+     * @param  array|Config\Config $options Options used in connecting, binding, etc.
      * @return void
-     * @throws \Zend\Ldap\Exception if ext/ldap is not installed
+     * @throws Exception if ext/ldap is not installed
      */
     public function __construct($options = array())
     {
@@ -242,13 +241,13 @@ class Ldap
      *  tryUsernameSplit
      *  networkTimeout
      *
-     * @param  array|\Zend\Config\Config $options Options used in connecting, binding, etc.
-     * @return \Zend\Ldap\Ldap Provides a fluent interface
-     * @throws \Zend\Ldap\Exception
+     * @param  array|Config\Config $options Options used in connecting, binding, etc.
+     * @return Ldap\Ldap Provides a fluent interface
+     * @throws Exception
      */
     public function setOptions($options)
     {
-        if ($options instanceof \Zend\Config\Config) {
+        if ($options instanceof Config\Config) {
             $options = $options->toArray();
         }
 
@@ -301,7 +300,7 @@ class Ldap
         }
         if (count($options) > 0) {
             $key = key($options);
-            throw new Exception(null, "Unknown Zend_Ldap option: $key");
+            throw new Exception(null, "Unknown Zend\Ldap\Ldap option: $key");
         }
         $this->options = $permittedOptions;
         return $this;
@@ -316,7 +315,8 @@ class Ldap
     }
 
     /**
-     * @return string The hostname of the LDAP server being used to authenticate accounts
+     * @return string The hostname of the LDAP server being used to
+     *  authenticate accounts
      */
     protected function getHost()
     {
@@ -324,7 +324,8 @@ class Ldap
     }
 
     /**
-     * @return int The port of the LDAP server or 0 to indicate that no port value is set
+     * @return int The port of the LDAP server or 0 to indicate that no port
+     *  value is set
      */
     protected function getPort()
     {
@@ -384,7 +385,6 @@ class Ldap
          * no account canonical form is specified, we guess based in what domain
          * names have been supplied.
          */
-
         $accountCanonicalForm = $this->options['accountCanonicalForm'];
         if (!$accountCanonicalForm) {
             $accountDomainName = $this->getAccountDomainName();
@@ -515,7 +515,7 @@ class Ldap
     /**
      * @param  string $acctname The name of the account
      * @return string The DN of the specified account
-     * @throws \Zend\Ldap\Exception
+     * @throws Exception
      */
     protected function getAccountDn($acctname)
     {
@@ -554,7 +554,7 @@ class Ldap
      * @param  string $acctname The name to canonicalize
      * @param  int    $type     The desired form of canonicalization
      * @return string The canonicalized name in the desired form
-     * @throws \Zend\Ldap\Exception
+     * @throws Exception
      */
     public function getCanonicalAccountName($acctname, $form = 0)
     {
@@ -605,7 +605,7 @@ class Ldap
     /**
      * @param  array $attrs An array of names of desired attributes
      * @return array An array of the attributes representing the account
-     * @throws \Zend\Ldap\Exception
+     * @throws Exception
      */
     protected function getAccount($acctname, array $attrs = null)
     {
@@ -641,7 +641,7 @@ class Ldap
     }
 
     /**
-     * @return \Zend\Ldap\Ldap Provides a fluent interface
+     * @return Ldap Provides a fluent interface
      */
     public function disconnect()
     {
@@ -665,8 +665,8 @@ class Ldap
      * @param  boolean $useSsl         Use SSL
      * @param  boolean $useStartTls    Use STARTTLS
      * @param  int     $networkTimeout The value for network timeout when connect to the LDAP server.
-     * @return \Zend\Ldap\Ldap Provides a fluent interface
-     * @throws \Zend\Ldap\Exception
+     * @return Ldap Provides a fluent interface
+     * @throws Exception
      */
     public function connect($host = null, $port = null, $useSsl = null, $useStartTls = null, $networkTimeout = null)
     {
@@ -753,8 +753,8 @@ class Ldap
     /**
      * @param  string $username The username for authenticating the bind
      * @param  string $password The password for authenticating the bind
-     * @return \Zend\Ldap\Ldap Provides a fluent interface
-     * @throws \Zend\Ldap\Exception
+     * @return Ldap Provides a fluent interface
+     * @throws Exception
      */
     public function bind($username = null, $password = null)
     {
@@ -844,14 +844,14 @@ class Ldap
      * - sort
      * - collectionClass
      *
-     * @param  string|\Zend\Ldap\Filter\AbstractFilter|array $filter
-     * @param  string|\Zend\Ldap\Dn|null               $basedn
-     * @param  integer                                $scope
-     * @param  array                                  $attributes
-     * @param  string|null                            $sort
-     * @param  string|null                            $collectionClass
-     * @return \Zend\Ldap\Collection
-     * @throws \Zend\Ldap\Exception
+     * @param  string|Filter\AbstractFilter|array $filter
+     * @param  string|Dn|null                     $basedn
+     * @param  integer                            $scope
+     * @param  array                              $attributes
+     * @param  string|null                        $sort
+     * @param  string|null                        $collectionClass
+     * @return Collection
+     * @throws Exception
      */
     public function search($filter, $basedn = null, $scope = self::SEARCH_SCOPE_SUB,
         array $attributes = array(), $sort = null, $collectionClass = null)
@@ -919,10 +919,10 @@ class Ldap
     /**
      * Extension point for collection creation
      *
-     * @param  \Zend\Ldap\Collection\DefaultIterator    $iterator
-     * @param  string|null                              $collectionClass
-     * @return \Zend\Ldap\Collection
-     * @throws \Zend\Ldap\Exception
+     * @param  Collection\DefaultIterator $iterator
+     * @param  string|null                $collectionClass
+     * @return Collection
+     * @throws Exception
      */
     protected function createCollection(Collection\DefaultIterator $iterator, $collectionClass)
     {
@@ -945,11 +945,11 @@ class Ldap
     /**
      * Count items found by given filter.
      *
-     * @param  string|\Zend\Ldap\Filter\AbstractFilter $filter
-     * @param  string|\Zend\Ldap\Dn|null         $basedn
-     * @param  integer                          $scope
+     * @param  string|Filter\AbstractFilter $filter
+     * @param  string|Dn|null               $basedn
+     * @param  integer                      $scope
      * @return integer
-     * @throws \Zend\Ldap\Exception
+     * @throws Exception
      */
     public function count($filter, $basedn = null, $scope = self::SEARCH_SCOPE_SUB)
     {
@@ -965,9 +965,9 @@ class Ldap
     /**
      * Count children for a given DN.
      *
-     * @param  string|\Zend\Ldap\Dn $dn
+     * @param  string|Dn $dn
      * @return integer
-     * @throws \Zend\Ldap\Exception
+     * @throws Exception
      */
     public function countChildren($dn)
     {
@@ -977,9 +977,9 @@ class Ldap
     /**
      * Check if a given DN exists.
      *
-     * @param  string|\Zend\Ldap\Dn $dn
+     * @param  string|Dn $dn
      * @return boolean
-     * @throws \Zend\Ldap\Exception
+     * @throws Exception
      */
     public function exists($dn)
     {
@@ -998,14 +998,14 @@ class Ldap
      * - sort
      * - reverseSort
      *
-     * @param  string|\Zend\Ldap\Filter\AbstractFilter|array $filter
-     * @param  string|\Zend\Ldap\Dn|null               $basedn
-     * @param  integer                                $scope
-     * @param  array                                  $attributes
-     * @param  string|null                            $sort
-     * @param  boolean                                $reverseSort
+     * @param  string|Filter\AbstractFilter|array $filter
+     * @param  string|Dn|null                     $basedn
+     * @param  integer                            $scope
+     * @param  array                              $attributes
+     * @param  string|null                        $sort
+     * @param  boolean                            $reverseSort
      * @return array
-     * @throws \Zend\Ldap\Exception
+     * @throws Exception
      */
     public function searchEntries($filter, $basedn = null, $scope = self::SEARCH_SCOPE_SUB,
         array $attributes = array(), $sort = null, $reverseSort = false)
@@ -1031,11 +1031,11 @@ class Ldap
     /**
      * Get LDAP entry by DN
      *
-     * @param  string|\Zend\Ldap\Dn $dn
-     * @param  array               $attributes
-     * @param  boolean             $throwOnNotFound
+     * @param  string|Dn $dn
+     * @param  array     $attributes
+     * @param  boolean   $throwOnNotFound
      * @return array
-     * @throws \Zend\Ldap\Exception
+     * @throws Exception
      */
     public function getEntry($dn, array $attributes = array(), $throwOnNotFound = false)
     {
@@ -1097,10 +1097,10 @@ class Ldap
     /**
      * Add new information to the LDAP repository
      *
-     * @param  string|\Zend\Ldap\Dn $dn
-     * @param  array               $entry
-     * @return \Zend\Ldap\Ldap                  Provides a fluid interface
-     * @throws \Zend\Ldap\Exception
+     * @param  string|Dn $dn
+     * @param  array     $entry
+     * @return Ldap Provides a fluid interface
+     * @throws Exception
      */
     public function add($dn, array $entry)
     {
@@ -1141,10 +1141,10 @@ class Ldap
     /**
      * Update LDAP registry
      *
-     * @param  string|\Zend\Ldap\Dn $dn
-     * @param  array               $entry
-     * @return \Zend\Ldap\Ldap                  Provides a fluid interface
-     * @throws \Zend\Ldap\Exception
+     * @param  string|Dn $dn
+     * @param  array     $entry
+     * @return Ldap Provides a fluid interface
+     * @throws Exception
      */
     public function update($dn, array $entry)
     {
@@ -1183,10 +1183,10 @@ class Ldap
      * Internally decides if entry will be updated to added by calling
      * {@link exists()}.
      *
-     * @param  string|\Zend\Ldap\Dn $dn
-     * @param  array               $entry
-     * @return \Zend\Ldap\Ldap Provides a fluid interface
-     * @throws \Zend\Ldap\Exception
+     * @param  string|Dn $dn
+     * @param  array     $entry
+     * @return Ldap Provides a fluid interface
+     * @throws Exception
      */
     public function save($dn, array $entry)
     {
@@ -1201,10 +1201,10 @@ class Ldap
     /**
      * Delete an LDAP entry
      *
-     * @param  string|\Zend\Ldap\Dn $dn
-     * @param  boolean             $recursively
-     * @return \Zend\Ldap\Ldap Provides a fluid interface
-     * @throws \Zend\Ldap\Exception
+     * @param  string|Dn $dn
+     * @param  boolean   $recursively
+     * @return Ldap Provides a fluid interface
+     * @throws Exception
      */
     public function delete($dn, $recursively = false)
     {
@@ -1232,7 +1232,7 @@ class Ldap
      * This method is used in recursive methods like {@see delete()}
      * or {@see copy()}
      *
-     * @param  string|\Zend\Ldap\Dn $parentDn
+     * @param  string|Dn $parentDn
      * @return array of DNs
      */
     protected function getChildrenDns($parentDn)
@@ -1258,12 +1258,12 @@ class Ldap
     /**
      * Moves a LDAP entry from one DN to another subtree.
      *
-     * @param  string|\Zend\Ldap\Dn $from
-     * @param  string|\Zend\Ldap\Dn $to
-     * @param  boolean             $recursively
-     * @param  boolean             $alwaysEmulate
-     * @return \Zend\Ldap\Ldap Provides a fluid interface
-     * @throws \Zend\Ldap\Exception
+     * @param  string|Dn $from
+     * @param  string|Dn $to
+     * @param  boolean   $recursively
+     * @param  boolean   $alwaysEmulate
+     * @return Ldap Provides a fluid interface
+     * @throws Exception
      */
     public function moveToSubtree($from, $to, $recursively = false, $alwaysEmulate = false)
     {
@@ -1289,12 +1289,12 @@ class Ldap
      *
      * This is an alias for {@link rename()}
      *
-     * @param  string|\Zend\Ldap\Dn $from
-     * @param  string|\Zend\Ldap\Dn $to
-     * @param  boolean             $recursively
-     * @param  boolean             $alwaysEmulate
-     * @return \Zend\Ldap\Ldap Provides a fluid interface
-     * @throws \Zend\Ldap\Exception
+     * @param  string|Dn $from
+     * @param  string|Dn $to
+     * @param  boolean   $recursively
+     * @param  boolean   $alwaysEmulate
+     * @return Ldap Provides a fluid interface
+     * @throws Exception
      */
     public function move($from, $to, $recursively = false, $alwaysEmulate = false)
     {
@@ -1306,12 +1306,12 @@ class Ldap
      *
      * This method implicitely moves the entry to another location within the tree.
      *
-     * @param  string|\Zend\Ldap\Dn $from
-     * @param  string|\Zend\Ldap\Dn $to
-     * @param  boolean             $recursively
-     * @param  boolean             $alwaysEmulate
-     * @return \Zend\Ldap\Ldap Provides a fluid interface
-     * @throws \Zend\Ldap\Exception
+     * @param  string|Dn $from
+     * @param  string|Dn $to
+     * @param  boolean   $recursively
+     * @param  boolean   $alwaysEmulate
+     * @return Ldap Provides a fluid interface
+     * @throws Exception
      */
     public function rename($from, $to, $recursively = false, $alwaysEmulate = false)
     {
@@ -1348,11 +1348,11 @@ class Ldap
     /**
      * Copies a LDAP entry from one DN to another subtree.
      *
-     * @param  string|\Zend\Ldap\Dn $from
-     * @param  string|\Zend\Ldap\Dn $to
-     * @param  boolean             $recursively
-     * @return \Zend\Ldap\Ldap Provides a fluid interface
-     * @throws \Zend\Ldap\Exception
+     * @param  string|Dn $from
+     * @param  string|Dn $to
+     * @param  boolean   $recursively
+     * @return Ldap Provides a fluid interface
+     * @throws Exception
      */
     public function copyToSubtree($from, $to, $recursively = false)
     {
@@ -1376,11 +1376,11 @@ class Ldap
     /**
      * Copies a LDAP entry from one DN to another DN.
      *
-     * @param  string|\Zend\Ldap\Dn $from
-     * @param  string|\Zend\Ldap\Dn $to
-     * @param  boolean             $recursively
-     * @return \Zend\Ldap\Ldap Provides a fluid interface
-     * @throws \Zend\Ldap\Exception
+     * @param  string|Dn $from
+     * @param  string|Dn $to
+     * @param  boolean   $recursively
+     * @return Ldap Provides a fluid interface
+     * @throws Exception
      */
     public function copy($from, $to, $recursively = false)
     {
@@ -1406,11 +1406,11 @@ class Ldap
     }
 
     /**
-     * Returns the specified DN as a Zend_Ldap_Node
+     * Returns the specified DN as a Zend\Ldap\Node
      *
-     * @param  string|\Zend\Ldap\Dn $dn
-     * @return \Zend\Ldap\Node|null
-     * @throws \Zend\Ldap\Exception
+     * @param  string|Dn $dn
+     * @return Node|null
+     * @throws Exception
      */
     public function getNode($dn)
     {
@@ -1418,10 +1418,10 @@ class Ldap
     }
 
     /**
-     * Returns the base node as a Zend_Ldap_Node
+     * Returns the base node as a Zend\Ldap\Node
      *
-     * @return \Zend\Ldap\Node
-     * @throws \Zend\Ldap\Exception
+     * @return Node
+     * @throws Exception
      */
     public function getBaseNode()
     {
@@ -1431,8 +1431,8 @@ class Ldap
     /**
      * Returns the RootDse
      *
-     * @return \Zend\Ldap\Node\RootDse
-     * @throws \Zend\Ldap\Exception
+     * @return Node\RootDse
+     * @throws Exception
      */
     public function getRootDse()
     {
@@ -1445,8 +1445,8 @@ class Ldap
     /**
      * Returns the schema
      *
-     * @return \Zend\Ldap\Node\Schema
-     * @throws \Zend\Ldap\Exception
+     * @return Node\Schema
+     * @throws Exception
      */
     public function getSchema()
     {

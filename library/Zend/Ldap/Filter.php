@@ -19,13 +19,10 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Ldap;
 
 /**
- * Zend_Ldap_Filter.
+ * Zend\Ldap\Filter.
  *
  * @category   Zend
  * @package    Zend_Ldap
@@ -48,7 +45,7 @@ class Filter extends Filter\StringFilter
      *
      * @param  string $attr
      * @param  string $value
-     * @return \Zend\Ldap\Filter
+     * @return Filter
      */
     public static function equals($attr, $value)
     {
@@ -61,7 +58,7 @@ class Filter extends Filter\StringFilter
      *
      * @param  string $attr
      * @param  string $value
-     * @return \Zend\Ldap\Filter
+     * @return Filter
      */
     public static function begins($attr, $value)
     {
@@ -74,7 +71,7 @@ class Filter extends Filter\StringFilter
      *
      * @param  string $attr
      * @param  string $value
-     * @return \Zend\Ldap\Filter
+     * @return Filter
      */
     public static function ends($attr, $value)
     {
@@ -87,7 +84,7 @@ class Filter extends Filter\StringFilter
      *
      * @param  string $attr
      * @param  string $value
-     * @return \Zend\Ldap\Filter
+     * @return Filter
      */
     public static function contains($attr, $value)
     {
@@ -100,7 +97,7 @@ class Filter extends Filter\StringFilter
      *
      * @param  string $attr
      * @param  string $value
-     * @return \Zend\Ldap\Filter
+     * @return Filter
      */
     public static function greater($attr, $value)
     {
@@ -113,7 +110,7 @@ class Filter extends Filter\StringFilter
      *
      * @param  string $attr
      * @param  string $value
-     * @return \Zend\Ldap\Filter
+     * @return Filter
      */
     public static function greaterOrEqual($attr, $value)
     {
@@ -126,7 +123,7 @@ class Filter extends Filter\StringFilter
      *
      * @param  string $attr
      * @param  string $value
-     * @return \Zend\Ldap\Filter
+     * @return Filter
      */
     public static function less($attr, $value)
     {
@@ -139,7 +136,7 @@ class Filter extends Filter\StringFilter
      *
      * @param  string $attr
      * @param  string $value
-     * @return \Zend\Ldap\Filter
+     * @return Filter
      */
     public static function lessOrEqual($attr, $value)
     {
@@ -152,7 +149,7 @@ class Filter extends Filter\StringFilter
      *
      * @param  string $attr
      * @param  string $value
-     * @return \Zend\Ldap\Filter
+     * @return Filter
      */
     public static function approx($attr, $value)
     {
@@ -164,7 +161,7 @@ class Filter extends Filter\StringFilter
      * (attr=*)
      *
      * @param  string $attr
-     * @return \Zend\Ldap\Filter
+     * @return Filter
      */
     public static function any($attr)
     {
@@ -175,7 +172,7 @@ class Filter extends Filter\StringFilter
      * Creates a simple custom string filter.
      *
      * @param  string $filter
-     * @return \Zend\Ldap\Filter\StringFilter
+     * @return Filter\StringFilter
      */
     public static function string($filter)
     {
@@ -187,7 +184,7 @@ class Filter extends Filter\StringFilter
      *
      * @param string $mask
      * @param string $value
-     * @return \Zend\Ldap\Filter\MaskFilter
+     * @return Filter\MaskFilter
      */
     public static function mask($mask, $value)
     {
@@ -197,8 +194,8 @@ class Filter extends Filter\StringFilter
     /**
      * Creates an 'and' filter.
      *
-     * @param  \Zend\Ldap\Filter\AbstractFilter $filter,...
-     * @return \Zend\Ldap\Filter\AndFilter
+     * @param  Filter\AbstractFilter $filter,...
+     * @return Filter\AndFilter
      */
     public static function andFilter($filter)
     {
@@ -208,8 +205,8 @@ class Filter extends Filter\StringFilter
     /**
      * Creates an 'or' filter.
      *
-     * @param  \Zend\Ldap\Filter\AbstractFilter $filter,...
-     * @return \Zend\Ldap\Filter\OrFilter
+     * @param  Filter\AbstractFilter $filter,...
+     * @return Filter\OrFilter
      */
     public static function orFilter($filter)
     {
@@ -236,7 +233,7 @@ class Filter extends Filter\StringFilter
     }
 
     /**
-     * Creates a new Zend_Ldap_Filter.
+     * Creates a new Zend\Ldap\Filter.
      *
      * @param string $attr
      * @param string $value

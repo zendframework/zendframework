@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Ldap;
 
 /**
@@ -115,9 +112,9 @@ class Exception extends \Exception
     const LDAP_X_EXTENSION_NOT_LOADED         = 0x7002;
 
     /**
-     * @param \Zend\Ldap\Ldap $ldap A \Zend\Ldap\Ldap object
-     * @param string    $str  An informtive exception message
-     * @param int       $code An LDAP error code
+     * @param Ldap   $ldap A Zend\Ldap\Ldap object
+     * @param string $str  An informtive exception message
+     * @param int    $code An LDAP error code
      */
     public function __construct(LDAP $ldap = null, $str = null, $code = 0)
     {
@@ -149,7 +146,7 @@ class Exception extends \Exception
 
     /**
      * @deprecated not necessary any more - will be removed
-     * @param \Zend\Ldap\Ldap $ldap A \Zend\Ldap\Ldap object
+     * @param Ldap $ldap A Zend\Ldap\Ldap object
      * @return int The current error code for the resource
      */
     public static function getLDAPCode(LDAP $ldap = null)

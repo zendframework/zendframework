@@ -19,16 +19,13 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Ldap\Node\Schema;
 
-use Zend\Ldap\Node\Schema,
-    Zend\Ldap;
+use Zend\Ldap, 
+    Zend\Ldap\Node;
 
 /**
- * Zend_Ldap_Node_Schema_ActiveDirectory provides a simple data-container for the Schema node of
+ * Zend\Ldap\Node\Schema\ActiveDirectory provides a simple data-container for the Schema node of
  * an Active Directory server.
  *
  * @category   Zend
@@ -37,7 +34,7 @@ use Zend\Ldap\Node\Schema,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ActiveDirectory extends Schema
+class ActiveDirectory extends Node\Schema
 {
     /**
      * The attribute Types
@@ -55,9 +52,9 @@ class ActiveDirectory extends Schema
     /**
      * Parses the schema
      *
-     * @param  \Zend\Ldap\Dn $dn
-     * @param  \Zend\Ldap\Ldap    $ldap
-     * @return \Zend\Ldap\Node\Schema Provides a fluid interface
+     * @param  Ldap\Dn $dn
+     * @param  Ldap\Ldap    $ldap
+     * @return Schema Provides a fluid interface
      */
     protected function parseSchema(Ldap\Dn $dn, Ldap\Ldap $ldap)
     {

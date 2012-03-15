@@ -19,13 +19,9 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Ldap\Node\Schema\ObjectClass;
 
-use Zend\Ldap\Node\Schema\ObjectClass,
-    Zend\Ldap\Node\Schema;
+use Zend\Ldap\Node\Schema;
 
 /**
  * Zend\Ldap\Node\Schema\ObjectClass\OpenLdap provides access to the objectClass
@@ -37,7 +33,7 @@ use Zend\Ldap\Node\Schema\ObjectClass,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class OpenLdap extends Schema\AbstractItem implements ObjectClass
+class OpenLdap extends Schema\AbstractItem implements Schema\ObjectClass
 {
     /**
      * All inherited "MUST" attributes
@@ -45,6 +41,7 @@ class OpenLdap extends Schema\AbstractItem implements ObjectClass
      * @var array
      */
     protected $inheritedMust = null;
+
     /**
      * All inherited "MAY" attributes
      *
@@ -163,7 +160,7 @@ class OpenLdap extends Schema\AbstractItem implements ObjectClass
     /**
      * Returns the parent object classes in the inhertitance tree if one exists
      *
-     * @return array of \Zend\Ldap\Node\Schema\ObjectClass\OpenLdap
+     * @return array of OpenLdap
      */
     public function getParents()
     {

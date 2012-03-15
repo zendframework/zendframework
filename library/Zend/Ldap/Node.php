@@ -19,13 +19,10 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Ldap;
 
 /**
- * Zend_Ldap_Node provides an object oriented view into a LDAP node.
+ * Zend\Ldap\Node provides an object oriented view into a LDAP node.
  *
  * @category   Zend
  * @package    Zend_Ldap
@@ -38,31 +35,35 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
     /**
      * Holds the node's new Dn if node is renamed.
      *
-     * @var \Zend\Ldap\Dn
+     * @var Dn
      */
     protected $newDn;
+
     /**
      * Holds the node's orginal attributes (as loaded).
      *
      * @var array
      */
     protected $originalData;
+
     /**
      * This node will be added
      *
      * @var boolean
      */
     protected $new;
+
     /**
      * This node will be deleted
      *
      * @var boolean
      */
+
     protected $delete;
     /**
      * Holds the connection to the LDAP server if in connected mode.
      *
-     * @var \Zend\Ldap\Ldap
+     * @var Ldap
      */
     protected $ldap;
 
@@ -85,11 +86,11 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
      *
      * Constructor is protected to enforce the use of factory methods.
      *
-     * @param  \Zend\Ldap\Dn $dn
-     * @param  array        $data
-     * @param  boolean      $fromDataSource
-     * @param  \Zend\Ldap\Ldap    $ldap
-     * @throws \Zend\Ldap\Exception
+     * @param  Dn      $dn
+     * @param  array   $data
+     * @param  boolean $fromDataSource
+     * @param  Ldap    $ldap
+     * @throws Exception
      */
     protected function __construct(Dn $dn, array $data, $fromDataSource, Ldap $ldap = null)
     {
@@ -126,8 +127,8 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
     /**
      * Gets the current LDAP connection.
      *
-     * @return \Zend\Ldap\Ldap
-     * @throws \Zend\Ldap\Exception
+     * @return Ldap
+     * @throws Exception
      */
     public function getLdap()
     {
@@ -142,9 +143,9 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
      *
      * This is an offline method.
      *
-     * @param  \Zend\Ldap\Ldap $ldap
-     * @return \Zend\Ldap\Node Provides a fluid interface
-     * @throws \Zend\Ldap\Exception
+     * @param  Ldap $ldap
+     * @return Node Provides a fluid interface
+     * @throws Exception
      */
     public function attachLdap(Ldap $ldap)
     {
@@ -169,7 +170,7 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
      *
      * This is an offline method.
      *
-     * @return \Zend\Ldap\Node Provides a fluid interface
+     * @return Node Provides a fluid interface
      */
     public function detachLdap()
     {
@@ -197,7 +198,7 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
     /**
      * @param  array   $data
      * @param  boolean $fromDataSource
-     * @throws \Zend\Ldap\Exception
+     * @throws Exception
      */
     protected function loadData(array $data, $fromDataSource)
     {
@@ -213,12 +214,12 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
     }
 
     /**
-     * Factory method to create a new detached Zend_Ldap_Node for a given DN.
+     * Factory method to create a new detached Zend\Ldap\Node for a given DN.
      *
-     * @param  string|array|\Zend\Ldap\Dn $dn
-     * @param  array                     $objectClass
-     * @return \Zend\Ldap\Node
-     * @throws \Zend\Ldap\Exception
+     * @param  string|array|Dn $dn
+     * @param  array           $objectClass
+     * @return Node
+     * @throws Exception
      */
     public static function create($dn, array $objectClass = array())
     {
@@ -236,12 +237,12 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
     }
 
     /**
-     * Factory method to create an attached Zend_Ldap_Node for a given DN.
+     * Factory method to create an attached Zend\Ldap\Node for a given DN.
      *
-     * @param  string|array|\Zend\Ldap\Dn $dn
-     * @param  \Zend\Ldap\Ldap                 $ldap
-     * @return \Zend\Ldap\Node|null
-     * @throws \Zend\Ldap\Exception
+     * @param  string|array|Dn $dn
+     * @param  Ldap            $ldap
+     * @return Node|null
+     * @throws Exception
      */
     public static function fromLdap($dn, Ldap $ldap)
     {
@@ -261,12 +262,12 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
     }
 
     /**
-     * Factory method to create a detached Zend_Ldap_Node from array data.
+     * Factory method to create a detached Zend\Ldap\Node from array data.
      *
      * @param  array   $data
      * @param  boolean $fromDataSource
-     * @return \Zend\Ldap\Node
-     * @throws \Zend\Ldap\Exception
+     * @return Node
+     * @throws Exception
      */
     public static function fromArray(array $data, $fromDataSource = false)
     {
@@ -351,7 +352,7 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
      *
      * Node will be deleted on calling update() if $delete is true.
      *
-     * @return \Zend\Ldap\Node Provides a fluid interface
+     * @return Node Provides a fluid interface
      */
     public function delete()
     {
@@ -378,9 +379,9 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
     /**
      * Sends all pending changes to the LDAP server
      *
-     * @param  \Zend\Ldap\Ldap $ldap
-     * @return \Zend\Ldap\Node Provides a fluid interface
-     * @throws \Zend\Ldap\Exception
+     * @param  Ldap $ldap
+     * @return Node Provides a fluid interface
+     * @throws Exception
      */
     public function update(Ldap $ldap = null)
     {
@@ -426,11 +427,11 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
     }
 
     /**
-     * Gets the DN of the current node as a Zend_Ldap_Dn.
+     * Gets the DN of the current node as a Zend\Ldap\Dn.
      *
      * This is an offline method.
      *
-     * @return \Zend\Ldap\Dn
+     * @return Dn
      */
     protected function _getDn()
     {
@@ -438,12 +439,12 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
     }
 
     /**
-     * Gets the current DN of the current node as a Zend_Ldap_Dn.
+     * Gets the current DN of the current node as a Zend\Ldap\Dn.
      * The method returns a clone of the node's DN to prohibit modification.
      *
      * This is an offline method.
      *
-     * @return \Zend\Ldap\Dn
+     * @return Dn
      */
     public function getCurrentDn()
     {
@@ -456,9 +457,9 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
      *
      * This is an offline method.
      *
-     * @param  \Zend\Ldap\Dn|string|array $newDn
-     * @throws \Zend\Ldap\Exception
-     * @return \Zend\Ldap\Node Provides a fluid interface
+     * @param  Dn|string|array $newDn
+     * @throws Exception
+     * @return Node Provides a fluid interface
      */
     public function setDn($newDn)
     {
@@ -476,9 +477,9 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
      *
      * This is an offline method.
      *
-     * @param  \Zend\Ldap\Dn|string|array $newDn
-     * @throws \Zend\Ldap\Exception
-     * @return \Zend\Ldap\Node Provides a fluid interface
+     * @param  Dn|string|array $newDn
+     * @throws Exception
+     * @return Node Provides a fluid interface
      */
     public function move($newDn)
     {
@@ -490,9 +491,9 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
      *
      * This is an offline method.
      *
-     * @param  \Zend\Ldap\Dn|string|array $newDn
-     * @throws \Zend\Ldap\Exception
-     * @return \Zend\Ldap\Node Provides a fluid interface
+     * @param  Dn|string|array $newDn
+     * @throws Exception
+     * @return Node Provides a fluid interface
      */
     public function rename($newDn)
     {
@@ -505,8 +506,8 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
      * This is an offline method.
      *
      * @param  array|string $value
-     * @return \Zend\Ldap\Node Provides a fluid interface
-     * @throws \Zend\Ldap\Exception
+     * @return Node Provides a fluid interface
+     * @throws Exception
      */
     public function setObjectClass($value)
     {
@@ -520,8 +521,8 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
      * This is an offline method.
      *
      * @param  array|string $value
-     * @return \Zend\Ldap\Node Provides a fluid interface
-     * @throws \Zend\Ldap\Exception
+     * @return Node Provides a fluid interface
+     * @throws Exception
      */
     public function appendObjectClass($value)
     {
@@ -545,7 +546,7 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
      * Gets changed node data.
      *
      * The array contains all changed attributes.
-     * This format can be used in {@link Zend_Ldap::add()} and {@link Zend_Ldap::update()}.
+     * This format can be used in {@link Zend\Ldap\Ldap::add()} and {@link Zend\Ldap\Ldap::update()}.
      *
      * This is an offline method.
      *
@@ -600,8 +601,8 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
      *
      * @param  string $name
      * @param  mixed  $value
-     * @return \Zend\Ldap\Node Provides a fluid interface
-     * @throws \Zend\Ldap\Exception
+     * @return Node Provides a fluid interface
+     * @throws Exception
      */
     public function setAttribute($name, $value)
     {
@@ -616,8 +617,8 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
      *
      * @param  string $name
      * @param  mixed  $value
-     * @return \Zend\Ldap\Node Provides a fluid interface
-     * @throws \Zend\Ldap\Exception
+     * @return Node Provides a fluid interface
+     * @throws Exception
      */
     public function appendToAttribute($name, $value)
     {
@@ -631,7 +632,7 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
      * @param  string  $name
      * @param  mixed   $value
      * @param  boolean $append
-     * @throws \Zend\Ldap\Exception
+     * @throws Exception
      */
     protected function _setAttribute($name, $value, $append)
     {
@@ -647,8 +648,8 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
      * @param  string        $name
      * @param  integer|array $value
      * @param  boolean       $utc
-     * @return \Zend\Ldap\Node Provides a fluid interface
-     * @throws \Zend\Ldap\Exception
+     * @return Node Provides a fluid interface
+     * @throws Exception
      */
     public function setDateTimeAttribute($name, $value, $utc = false)
     {
@@ -664,8 +665,8 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
      * @param  string        $name
      * @param  integer|array $value
      * @param  boolean       $utc
-     * @return \Zend\Ldap\Node Provides a fluid interface
-     * @throws \Zend\Ldap\Exception
+     * @return Node Provides a fluid interface
+     * @throws Exception
      */
     public function appendToDateTimeAttribute($name, $value, $utc = false)
     {
@@ -680,7 +681,7 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
      * @param  integer|array $value
      * @param  boolean       $utc
      * @param  boolean       $append
-     * @throws \Zend\Ldap\Exception
+     * @throws Exception
      */
     protected function _setDateTimeAttribute($name, $value, $utc, $append)
     {
@@ -694,8 +695,8 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
      * @param  string $password
      * @param  string $hashType
      * @param  string $attribName
-     * @return \Zend\Ldap\Node Provides a fluid interface
-     * @throws \Zend\Ldap\Exception
+     * @return Node Provides a fluid interface
+     * @throws Exception
      */
     public function setPasswordAttribute($password, $hashType = Attribute::PASSWORD_HASH_MD5,
         $attribName = 'userPassword')
@@ -713,8 +714,8 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
      * This is an offline method.
      *
      * @param  string $name
-     * @return \Zend\Ldap\Node Provides a fluid interface
-     * @throws \Zend\Ldap\Exception
+     * @return Node Provides a fluid interface
+     * @throws Exception
      */
     public function deleteAttribute($name)
     {
@@ -750,7 +751,7 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
     /**
      * @param  string $name
      * @return boolean
-     * @throws \Zend\Ldap\Exception
+     * @throws Exception
      */
     protected function assertChangeableAttribute($name)
     {
@@ -775,7 +776,7 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
      * @param  string $name
      * @param  mixed  $value
      * @return null
-     * @throws \Zend\Ldap\Exception
+     * @throws Exception
      */
     public function __set($name, $value)
     {
@@ -791,7 +792,7 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
      *
      * @param  string $name
      * @return null
-     * @throws \Zend\Ldap\Exception
+     * @throws Exception
      */
     public function __unset($name)
     {
@@ -807,7 +808,7 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
      * @param  string $name
      * @param  mixed  $value
      * @return null
-     * @throws \Zend\Ldap\Exception
+     * @throws Exception
      */
     public function offsetSet($name, $value)
     {
@@ -824,7 +825,7 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
      *
      * @param  string $name
      * @return null
-     * @throws \Zend\Ldap\Exception
+     * @throws Exception
      */
     public function offsetUnset($name)
     {
@@ -836,9 +837,9 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
      *
      * This is an online method.
      *
-     * @param  \Zend\Ldap\Ldap $ldap
+     * @param  Ldap $ldap
      * @return boolean
-     * @throws \Zend\Ldap\Exception
+     * @throws Exception
      */
     public function exists(Ldap $ldap = null)
     {
@@ -854,9 +855,9 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
      *
      * This is an online method.
      *
-     * @param  \Zend\Ldap\Ldap $ldap
-     * @return \Zend\Ldap\Node Provides a fluid interface
-     * @throws \Zend\Ldap\Exception
+     * @param  Ldap $ldap
+     * @return Node Provides a fluid interface
+     * @throws Exception
      */
     public function reload(Ldap $ldap = null)
     {
@@ -873,11 +874,11 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
      *
      * This is an online method.
      *
-     * @param  string|\Zend\Ldap\Filter\AbstractFilter $filter
-     * @param  integer                          $scope
-     * @param  string                           $sort
-     * @return \Zend\Ldap\Node\Collection
-     * @throws \Zend\Ldap\Exception
+     * @param  string|Filter\AbstractFilter $filter
+     * @param  integer                      $scope
+     * @param  string                       $sort
+     * @return Node\Collection
+     * @throws Exception
      */
     public function searchSubtree($filter, $scope = Ldap::SEARCH_SCOPE_SUB, $sort = null)
     {
@@ -890,10 +891,10 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
      *
      * This is an online method.
      *
-     * @param  string|\Zend\Ldap\Filter\AbstractFilter $filter
-     * @param  integer                          $scope
+     * @param  string|Filter\AbstractFilter $filter
+     * @param  integer                      $scope
      * @return integer
-     * @throws \Zend\Ldap\Exception
+     * @throws Exception
      */
     public function countSubtree($filter, $scope = Ldap::SEARCH_SCOPE_SUB)
     {
@@ -906,7 +907,7 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
      * This is an online method.
      *
      * @return integer
-     * @throws \Zend\Ldap\Exception
+     * @throws Exception
      */
     public function countChildren()
     {
@@ -918,10 +919,10 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
      *
      * This is an online method.
      *
-     * @param  string|\Zend\Ldap\Filter\AbstractFilter $filter
-     * @param  string                           $sort
-     * @return \Zend\Ldap\Node\Collection
-     * @throws \Zend\Ldap\Exception
+     * @param  string|Filter\AbstractFilter $filter
+     * @param  string                       $sort
+     * @return Node\Collection
+     * @throws Exception
      */
     public function searchChildren($filter, $sort = null)
     {
@@ -935,7 +936,7 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
      * Can be used offline but returns false if children have not been retrieved yet.
      *
      * @return boolean
-     * @throws \Zend\Ldap\Exception
+     * @throws Exception
      */
     public function hasChildren()
     {
@@ -955,8 +956,8 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
      *
      * Can be used offline but returns an empty array if children have not been retrieved yet.
      *
-     * @return \Zend\Ldap\Node\ChildrenIterator
-     * @throws \Zend\Ldap\Exception
+     * @return Node\ChildrenIterator
+     * @throws Exception
      */
     public function getChildren()
     {
@@ -975,9 +976,9 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
     /**
      * Returns the parent of the current node.
      *
-     * @param  \Zend\Ldap\Ldap $ldap
-     * @return \Zend\Ldap\Node
-     * @throws \Zend\Ldap\Exception
+     * @param  Ldap $ldap
+     * @return Node
+     * @throws Exception
      */
     public function getParent(Ldap $ldap = null)
     {

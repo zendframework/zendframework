@@ -19,11 +19,10 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Ldap;
-use Zend\Ldap;
+
+use Zend\Config, 
+    Zend\Ldap;
 
 /**
  * @category   Zend
@@ -36,16 +35,16 @@ use Zend\Ldap;
 class OfflineTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * Zend_Ldap instance
+     * Zend\Ldap\Ldap instance
      *
-     * @var Zend_Ldap
+     * @var Ldap\Ldap
      */
     protected $ldap = null;
 
     /**
      * Setup operations run prior to each test method:
      *
-     * * Creates an instance of Zend_Ldap
+     * * Creates an instance of Zend\Ldap\Ldap
      *
      * @return void
      */
@@ -65,9 +64,9 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
         $optionName = 'invalid';
         try {
             $this->ldap->setOptions(array($optionName => 'irrelevant'));
-            $this->fail('Expected Zend_Ldap_Exception not thrown');
+            $this->fail('Expected Zend\Ldap\Exception not thrown');
         } catch (Ldap\Exception $e) {
-            $this->assertEquals("Unknown Zend_Ldap option: $optionName", $e->getMessage());
+            $this->assertEquals("Unknown Zend\Ldap\Ldap option: $optionName", $e->getMessage());
         }
     }
 
@@ -116,9 +115,9 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
     public function testConfigObject()
     {
         /**
-         * @see Zend_Config
+         * @see Zend\Config\Config
          */
-        $config = new \Zend\Config\Config(array(
+        $config = new Config\Config(array(
             'host' => TESTS_ZEND_LDAP_HOST,
             'username' => TESTS_ZEND_LDAP_USERNAME,
             'password' => TESTS_ZEND_LDAP_PASSWORD,

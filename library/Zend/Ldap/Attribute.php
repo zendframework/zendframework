@@ -18,13 +18,10 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Ldap;
 
 /**
- * Zend_Ldap_Attribute is a collection of LDAP attribute related functions.
+ * Zend\Ldap\Attribute is a collection of LDAP attribute related functions.
  *
  * @category   Zend
  * @package    Zend_Ldap

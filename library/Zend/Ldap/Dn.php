@@ -18,13 +18,10 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Ldap;
 
 /**
- * Zend_Ldap_Dn provides an API for DN manipulation
+ * Zend\Ldap\Dn provides an API for DN manipulation
  *
  * @category   Zend
  * @package    Zend_Ldap
@@ -63,8 +60,8 @@ class Dn implements \ArrayAccess
      *
      * @param  string|array $dn
      * @param  string|null  $caseFold
-     * @return \Zend\Ldap\Dn
-     * @throws \Zend\Ldap\Exception
+     * @return Dn
+     * @throws Exception
      */
     public static function factory($dn, $caseFold = null)
     {
@@ -82,8 +79,8 @@ class Dn implements \ArrayAccess
      *
      * @param  string      $dn
      * @param  string|null $caseFold
-     * @return \Zend\Ldap\Dn
-     * @throws \Zend\Ldap\Exception
+     * @return Dn
+     * @throws Exception
      */
     public static function fromString($dn, $caseFold = null)
     {
@@ -101,8 +98,8 @@ class Dn implements \ArrayAccess
      *
      * @param  array       $dn
      * @param  string|null $caseFold
-     * @return \Zend\Ldap\Dn
-     * @throws \Zend\Ldap\Exception
+     * @return Dn
+     * @throws Exception
      */
     public static function fromArray(array $dn, $caseFold = null)
     {
@@ -126,7 +123,7 @@ class Dn implements \ArrayAccess
      *
      * @param  string $caseFold
      * @return array
-     * @throws \Zend\Ldap\Exception if DN has no RDN (empty array)
+     * @throws Exception if DN has no RDN (empty array)
      */
     public function getRdn($caseFold = null)
     {
@@ -139,7 +136,7 @@ class Dn implements \ArrayAccess
      *
      * @param  string $caseFold
      * @return string
-     * @throws \Zend\Ldap\Exception if DN has no RDN (empty array)
+     * @throws Exception if DN has no RDN (empty array)
      */
     public function getRdnString($caseFold = null)
     {
@@ -151,7 +148,7 @@ class Dn implements \ArrayAccess
      * Get the parent DN $levelUp levels up the tree
      *
      * @param  int $levelUp
-     * @return \Zend\Ldap\Dn
+     * @return Dn
      */
     public function getParentDn($levelUp = 1)
     {
@@ -170,7 +167,7 @@ class Dn implements \ArrayAccess
      * @param  int    $length
      * @param  string $caseFold
      * @return array
-     * @throws \Zend\Ldap\Exception if index is illegal
+     * @throws Exception if index is illegal
      */
     public function get($index, $length = 1, $caseFold = null)
     {
@@ -193,8 +190,8 @@ class Dn implements \ArrayAccess
      *
      * @param  int   $index
      * @param  array $value
-     * @return \Zend\Ldap\Dn Provides a fluent interface
-     * @throws \Zend\Ldap\Exception if index is illegal
+     * @return Dn Provides a fluent interface
+     * @throws Exception if index is illegal
      */
     public function set($index, array $value)
     {
@@ -209,8 +206,8 @@ class Dn implements \ArrayAccess
      *
      * @param  int $index
      * @param  int $length
-     * @return \Zend\Ldap\Dn Provides a fluent interface
-     * @throws \Zend\Ldap\Exception if index is illegal
+     * @return Dn Provides a fluent interface
+     * @throws Exception if index is illegal
      */
     public function remove($index, $length = 1)
     {
@@ -227,7 +224,7 @@ class Dn implements \ArrayAccess
      * Append a DN part
      *
      * @param  array $value
-     * @return \Zend\Ldap\Dn Provides a fluent interface
+     * @return Dn Provides a fluent interface
      */
     public function append(array $value)
     {
@@ -240,7 +237,7 @@ class Dn implements \ArrayAccess
      * Prepend a DN part
      *
      * @param  array $value
-     * @return \Zend\Ldap\Dn Provides a fluent interface
+     * @return Dn Provides a fluent interface
      */
     public function prepend(array $value)
     {
@@ -254,8 +251,8 @@ class Dn implements \ArrayAccess
      *
      * @param  int   $index
      * @param  array $value
-     * @return \Zend\Ldap\Dn Provides a fluent interface
-     * @throws \Zend\Ldap\Exception if index is illegal
+     * @return Dn Provides a fluent interface
+     * @throws Exception if index is illegal
      */
     public function insert($index, array $value)
     {
@@ -272,7 +269,7 @@ class Dn implements \ArrayAccess
      *
      * @param  mixed $index
      * @return boolean
-     * @throws \Zend\Ldap\Exception
+     * @throws Exception
      */
     protected function assertIndex($index)
     {
@@ -290,7 +287,7 @@ class Dn implements \ArrayAccess
      *
      * @param  array $value
      * @return boolean
-     * @throws \Zend\Ldap\Exception
+     * @throws Exception
      */
     protected static function assertRdn(array $value)
     {
@@ -320,7 +317,7 @@ class Dn implements \ArrayAccess
      *
      * @param  string $caseFold
      * @return string
-     * @throws \Zend\Ldap\Exception
+     * @throws Exception
      */
     public function toString($caseFold = null)
     {
@@ -552,7 +549,7 @@ class Dn implements \ArrayAccess
      * @param  array  $vals     An optional array to receive DN values
      * @param  string $caseFold
      * @return array
-     * @throws \Zend\Ldap\Exception
+     * @throws Exception
      */
     public static function explodeDn($dn, array &$keys = null, array &$vals = null,
         $caseFold = self::ATTR_CASEFOLD_NONE)
@@ -680,7 +677,7 @@ class Dn implements \ArrayAccess
      * @param  array  $attribute
      * @param  string $caseFold
      * @return string
-     * @throws \Zend\Ldap\Exception
+     * @throws Exception
      */
     public static function implodeRdn(array $part, $caseFold = null)
     {
@@ -712,7 +709,7 @@ class Dn implements \ArrayAccess
      * @param  string $caseFold
      * @param  string $separator
      * @return string
-     * @throws \Zend\Ldap\Exception
+     * @throws Exception
      */
     public static function implodeDn(array $dnArray, $caseFold = null, $separator = ',')
     {
@@ -726,8 +723,8 @@ class Dn implements \ArrayAccess
     /**
      * Checks if given $childDn is beneath $parentDn subtree.
      *
-     * @param  string|\Zend\Ldap\Dn $childDn
-     * @param  string|\Zend\Ldap\Dn $parentDn
+     * @param  string|Dn $childDn
+     * @param  string|Dn $parentDn
      * @return boolean
      */
     public static function isChildOf($childDn, $parentDn)

@@ -18,12 +18,9 @@
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-
-/**
- * @namespace
- */
 namespace ZendTest\Ldap\Node;
 
+use ZendTest\Ldap as TestLdap;
 
 /**
  * @category   Zend
@@ -34,7 +31,7 @@ namespace ZendTest\Ldap\Node;
  * @group      Zend_Ldap
  * @group      Zend_Ldap_Node
  */
-class ChildrenTest extends \ZendTest\Ldap\AbstractOnlineTestCase
+class ChildrenTest extends TestLdap\AbstractOnlineTestCase
 {
     protected function setUp()
     {

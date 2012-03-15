@@ -19,12 +19,10 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Ldap;
-use Zend\Ldap\Node\RootDse;
-use Zend\Ldap;
+
+use Zend\Ldap,
+    Zend\Ldap\Node;
 
 /**
  * @category   Zend
@@ -40,7 +38,7 @@ class ChangePasswordTest extends AbstractOnlineTestCase
     public function testAddNewUserWithPasswordOpenLDAP()
     {
         if ($this->getLDAP()->getRootDse()->getServerType() !==
-                RootDse::SERVER_TYPE_OPENLDAP) {
+                Node\RootDse::SERVER_TYPE_OPENLDAP) {
             $this->markTestSkipped('Test can only be run on an OpenLDAP server');
         }
 
@@ -72,7 +70,7 @@ class ChangePasswordTest extends AbstractOnlineTestCase
     public function testChangePasswordWithUserAccountOpenLDAP()
     {
         if ($this->getLDAP()->getRootDse()->getServerType() !==
-                RootDse::SERVER_TYPE_OPENLDAP) {
+                Node\RootDse::SERVER_TYPE_OPENLDAP) {
             $this->markTestSkipped('Test can only be run on an OpenLDAP server');
         }
 
@@ -121,7 +119,7 @@ class ChangePasswordTest extends AbstractOnlineTestCase
     public function testAddNewUserWithPasswordActiveDirectory()
     {
         if ($this->getLDAP()->getRootDse()->getServerType() !==
-                RootDse::SERVER_TYPE_ACTIVEDIRECTORY) {
+                Node\RootDse::SERVER_TYPE_ACTIVEDIRECTORY) {
             $this->markTestSkipped('Test can only be run on an ActiveDirectory server');
         }
         $options = $this->getLDAP()->getOptions();
@@ -161,7 +159,7 @@ class ChangePasswordTest extends AbstractOnlineTestCase
     public function testChangePasswordWithUserAccountActiveDirectory()
     {
         if ($this->getLDAP()->getRootDse()->getServerType() !==
-                RootDse::SERVER_TYPE_ACTIVEDIRECTORY) {
+                Node\RootDse::SERVER_TYPE_ACTIVEDIRECTORY) {
             $this->markTestSkipped('Test can only be run on an ActiveDirectory server');
         }
         $options = $this->getLDAP()->getOptions();
@@ -201,7 +199,7 @@ class ChangePasswordTest extends AbstractOnlineTestCase
                     strstr($message, 'Server is unwilling to perform'));
             }
 
-            $this->assertInstanceOf('Zend\Ldap', $this->getLDAP()->bind($dn, $newPasswd));
+            $this->assertInstanceOf('Zend\Ldap\Ldap', $this->getLDAP()->bind($dn, $newPasswd));
 
             $this->getLDAP()->bind();
             $this->getLDAP()->delete($dn);

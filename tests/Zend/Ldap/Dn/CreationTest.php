@@ -19,18 +19,9 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Ldap\Dn;
-use Zend\Ldap;
 
-/**
- * Test helper
- */
-/**
- * Zend_Ldap_Dn
- */
+use Zend\Ldap;
 
 /**
  * @category   Zend
@@ -119,7 +110,7 @@ class CreationTest extends \PHPUnit_Framework_TestCase
 
         try {
             $dn=Ldap\Dn::factory(1);
-            $this->fail('Expected Zend_Ldap_Exception not thrown');
+            $this->fail('Expected Zend\Ldap\Exception not thrown');
         } catch (Ldap\Exception $e) {
             $this->assertEquals('Invalid argument type for $dn', $e->getMessage());
         }
@@ -195,13 +186,13 @@ class CreationTest extends \PHPUnit_Framework_TestCase
 
         try {
             $dn->getParentDn(0)->toString();
-            $this->fail('Expected Zend_Ldap_Exception not thrown');
+            $this->fail('Expected Zend\Ldap\Exception not thrown');
         } catch (Ldap\Exception $e) {
             $this->assertEquals('Cannot retrieve parent DN with given $levelUp', $e->getMessage());
         }
         try {
             $dn->getParentDn(4)->toString();
-            $this->fail('Expected Zend_Ldap_Exception not thrown');
+            $this->fail('Expected Zend\Ldap\Exception not thrown');
         } catch (Ldap\Exception $e) {
             $this->assertEquals('Cannot retrieve parent DN with given $levelUp', $e->getMessage());
         }

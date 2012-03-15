@@ -19,11 +19,9 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Ldap;
 
+use Zend\Ldap;
 
 /**
  * @category   Zend
@@ -52,10 +50,10 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @return Zend_Ldap_Node
+     * @return Ldap\Node
      */
     protected function createTestNode()
     {
-        return \Zend\Ldap\Node::fromArray($this->createTestArrayData(), true);
+        return Ldap\Node::fromArray($this->createTestArrayData(), true);
     }
 }

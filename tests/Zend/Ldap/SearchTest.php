@@ -19,14 +19,10 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Ldap;
-use Zend\Ldap;
-use Zend\Ldap\Filter;
-use Zend\Ldap\Collection;
 
+use Zend\Ldap,
+    Zend\Ldap\Collection;
 
 /**
  * @category   Zend
@@ -187,7 +183,7 @@ class SearchTest extends AbstractOnlineTestCase
     public function testSearchWithDnObjectAndFilterObject()
     {
         $dn=Ldap\Dn::fromString(TESTS_ZEND_LDAP_WRITEABLE_SUBTREE);
-        $filter=Filter::equals('objectClass', 'organizationalUnit');
+        $filter=Ldap\Filter::equals('objectClass', 'organizationalUnit');
 
         $items=$this->getLDAP()->search($filter, $dn, Ldap\Ldap::SEARCH_SCOPE_SUB);
         $this->assertEquals(9, $items->count());
@@ -196,7 +192,7 @@ class SearchTest extends AbstractOnlineTestCase
     public function testCountSubWithDnObjectAndFilterObject()
     {
         $dn1=Ldap\Dn::fromString($this->createDn('ou=Node,'));
-        $filter=Filter::any('objectClass');
+        $filter=Ldap\Filter::any('objectClass');
 
         $count1=$this->getLDAP()->count($filter, $dn1, Ldap\Ldap::SEARCH_SCOPE_SUB);
         $this->assertEquals(3, $count1);
@@ -229,7 +225,7 @@ class SearchTest extends AbstractOnlineTestCase
     public function testSearchEntriesShortcutWithDnObjectAndFilterObject()
     {
         $dn=Ldap\Dn::fromString(TESTS_ZEND_LDAP_WRITEABLE_SUBTREE);
-        $filter=Filter::equals('objectClass', 'organizationalUnit');
+        $filter=Ldap\Filter::equals('objectClass', 'organizationalUnit');
 
         $entries=$this->getLDAP()->searchEntries($filter, $dn, Ldap\Ldap::SEARCH_SCOPE_SUB);
         $this->assertInternalType("array", $entries);
@@ -324,7 +320,7 @@ class SearchTest extends AbstractOnlineTestCase
             $this->fail('Expected exception not thrown');
         } catch (Ldap\Exception $zle) {
             $this->assertContains(
-                "Class 'ZendTest\Ldap\CollectionClassNotSubclassingZendLDAPCollection' must subclass 'Zend\Ldap\Collection'",
+                "Class 'ZendTest\\Ldap\\CollectionClassNotSubclassingZendLDAPCollection' must subclass 'Zend\\Ldap\\Collection'",
                 $zle->getMessage());
         }
     }

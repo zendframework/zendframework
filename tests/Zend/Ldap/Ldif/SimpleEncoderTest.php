@@ -19,12 +19,10 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Ldap\Ldif;
-use Zend\Ldap\Ldif;
 
+use Zend\Ldap\Ldif,
+    ZendTest\Ldap as TestLdap;
 
 /**
  * @category   Zend
@@ -35,7 +33,7 @@ use Zend\Ldap\Ldif;
  * @group      Zend_Ldap
  * @group      Zend_Ldap_Ldif
  */
-class SimpleEncoderTest extends \ZendTest\Ldap\TestCase
+class SimpleEncoderTest extends TestLdap\TestCase
 {
     public static function stringEncodingProvider()
     {

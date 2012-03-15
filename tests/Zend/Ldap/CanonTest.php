@@ -19,10 +19,8 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Ldap;
+
 use Zend\Ldap;
 
 /* Note: The ldap_connect function does not actually try to connect. This

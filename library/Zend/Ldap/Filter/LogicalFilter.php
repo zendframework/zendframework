@@ -19,13 +19,10 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Ldap\Filter;
 
 /**
- * Zend_Ldap_Filter_Logical provides a base implementation for a grouping filter.
+ * Zend\Ldap\Filter\LogicalFilter provides a base implementation for a grouping filter.
  *
  * @category   Zend
  * @package    Zend_Ldap
@@ -73,8 +70,8 @@ abstract class LogicalFilter extends AbstractFilter
     /**
      * Adds a filter to this grouping filter.
      *
-     * @param  \Zend\Ldap\Filter\AbstractFilter $filter
-     * @return \Zend\Ldap\Filter\LogicalFilter
+     * @param  AbstractFilter $filter
+     * @return LogicalFilter
      */
     public function addFilter(AbstractFilter $filter)
     {

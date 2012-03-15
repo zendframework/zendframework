@@ -19,16 +19,13 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Ldap\Node\Schema\AttributeType;
 
 use Zend\Ldap\Node\Schema\AttributeType,
     Zend\Ldap\Node\Schema;
 
 /**
- * Zend_Ldap_Node_Schema_AttributeType_OpenLdap provides access to the attribute type
+ * Zend\Ldap\Node\Schema\AttributeType\OpenLdap provides access to the attribute type
  * schema information on an OpenLDAP server.
  *
  * @category   Zend

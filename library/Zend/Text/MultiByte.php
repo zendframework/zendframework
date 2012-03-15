@@ -22,6 +22,7 @@
  * @namespace
  */
 namespace Zend\Text;
+use Zend\Text\Exception;
 
 /**
  * Zend_Text_MultiByte contains multibyte safe string methods
@@ -43,78 +44,56 @@ class MultiByte
      * @param  string  $charset
      * @return string
      */
-    public static function wordWrap($string, $width = 75, $break = "\n", $cut = false, $charset = 'UTF-8')
+    public static function wordWrap($string, $width = 75, $break = "\n", $cut = false, $charset = 'utf-8')
     {
-        $result     = array();
-        $breakWidth = iconv_strlen($break, $charset);
+        $stringWidth = iconv_strlen($string, $charset);
+        $breakWidth  = iconv_strlen($break, $charset);
 
-        while (($stringLength = iconv_strlen($string, $charset)) > 0) {
-            $breakPos = iconv_strpos($string, $break, 0, $charset);
-
-            if ($breakPos !== false && $breakPos < $width) {
-                if ($breakPos === $stringLength - $breakWidth) {
-                    $subString = $string;
-                    $cutLength = null;
-                } else {
-                    $subString = iconv_substr($string, 0, $breakPos, $charset);
-                    $cutLength = $breakPos + $breakWidth;
-                }
+        if (strlen($string) === 0) {
+            return '';
+        } elseif ($breakWidth === null) {
+            throw new Exception\InvalidArgumentException('Break string cannot be empty');
+        } elseif ($width === 0 && $cut) {
+            throw new Exception\InvalidArgumentException('Can\'t force cut when width is zero');
+        }
+        
+        $result    = '';
+        $lastStart = $lastSpace = 0;
+        
+        for ($current = 0; $current < $stringWidth; $current++) {
+            $char = iconv_substr($string, $current, 1, $charset);
+            
+            if ($breakWidth === 1) {
+                $possibleBreak = $char;
             } else {
-                $subString = iconv_substr($string, 0, $width, $charset);
-
-                if ($subString === $string) {
-                    $cutLength = null;
-                } else {
-                    $nextChar = iconv_substr($string, $width, 1, $charset);
-                    
-                    if ($breakWidth === 1) {
-                        $nextBreak = $nextChar;
-                    } else {
-                        $nextBreak = iconv_substr($string, $breakWidth, 1, $charset);
-                    }
-
-                    if ($nextChar === ' ' || $nextBreak === $break) {
-                        $afterNextChar = iconv_substr($string, $width + 1, 1, $charset);
-
-                        if ($afterNextChar === false) {
-                            $subString .= $nextChar;
-                        }
-
-                        $cutLength = iconv_strlen($subString, $charset) + 1;
-                    } else {
-                        $spacePos = iconv_strrpos($subString, ' ', $charset);
-
-                        if ($spacePos !== false) {
-                            $subString = iconv_substr($subString, 0, $spacePos, $charset);
-                            $cutLength = $spacePos + 1;
-                        } else if ($cut === false) {
-                            $spacePos = iconv_strpos($string, ' ', 0, $charset);
-
-                            if ($spacePos !== false) {
-                                $subString = iconv_substr($string, 0, $spacePos, $charset);
-                                $cutLength = $spacePos + 1;
-                            } else {
-                                $subString = $string;
-                                $cutLength = null;
-                            }
-                        } else {
-                            $subString = iconv_substr($subString, 0, $width, $charset);
-                            $cutLength = $width;
-                        }
-                    }
-                }
+                $possibleBreak = iconv_substr($string, $current, $breakWidth, $charset);
             }
-
-            $result[] = $subString;
-
-            if ($cutLength !== null) {
-                $string = iconv_substr($string, $cutLength, ($stringLength - $cutLength), $charset);
-            } else {
-                break;
+            
+            if ($possibleBreak === $break) {
+                $result    .= iconv_substr($string, $lastStart, $current - $lastStart + $breakWidth, $charset);
+                $current   += $breakWidth - 1;
+                $lastStart  = $lastSpace = $current + 1;
+            } elseif ($char === ' ') {
+                if ($current - $lastStart >= $width) {
+                    $result    .= iconv_substr($string, $lastStart, $current - $lastStart, $charset) . $break;
+                    $lastStart  = $current + 1;
+                }
+                
+                $lastSpace = $current;
+            } elseif ($current - $lastStart >= $width && $cut && $lastStart >= $lastSpace) {
+                $result    .= iconv_substr($string, $lastStart, $current - $lastStart, $charset) . $break;
+                $lastStart  = $lastSpace = $current;
+            } elseif ($current - $lastStart >= $width && $lastStart < $lastSpace) {
+                $result    .= iconv_substr($string, $lastStart, $lastSpace - $lastStart, $charset) . $break;
+                $lastStart  = $lastSpace = $lastSpace + 1;
             }
         }
-
-        return implode($break, $result);
+        
+        if ($lastStart !== $current) {
+            $result .= iconv_substr($string, $lastStart, $current - $lastStart, $charset);
+        }
+        
+        return $result;
     }
 
     /**
@@ -127,7 +106,7 @@ class MultiByte
      * @param  string  $charset
      * @return string
      */
-    public static function strPad($input, $padLength, $padString = ' ', $padType = STR_PAD_RIGHT, $charset = 'UTF-8')
+    public static function strPad($input, $padLength, $padString = ' ', $padType = STR_PAD_RIGHT, $charset = 'utf-8')
     {
         $return          = '';
         $lengthOfPadding = $padLength - iconv_strlen($input, $charset);

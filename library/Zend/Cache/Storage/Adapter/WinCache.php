@@ -303,499 +303,284 @@ class WinCache extends AbstractAdapter
      * Add an item.
      *
      * Options:
-     *  - namespace <string> optional
-     *    - The namespace to use (Default: namespace of object)
-     *  - tags <array> optional
-     *    - An array of tags
+     *  - ttl <float>
+     *    - The time-to-life
+     *  - namespace <string>
+     *    - The namespace to use
      *
      * @param  string $key
      * @param  mixed  $value
      * @param  array  $options
      * @return boolean
      * @throws Exception
-     *
-     * @triggers addItem.pre(PreEvent)
-     * @triggers addItem.post(PostEvent)
-     * @triggers addItem.exception(ExceptionEvent)
      */
-    public function addItem($key, $value, array $options = array())
+    protected function internalAddItem(& $normalizedKey, & $value, array & $normalizedOptions)
     {
-        $baseOptions = $this->getOptions();
-        if (!$baseOptions->getWritable()) {
-            return false;
-        }
-
-        $this->normalizeOptions($options);
-        $this->normalizeKey($key);
-        $args = new ArrayObject(array(
-            'key'     => & $key,
-            'value'   => & $value,
-            'options' => & $options,
-        ));
-
-        try {
-            $eventRs = $this->triggerPre(__FUNCTION__, $args);
-            if ($eventRs->stopped()) {
-                return $eventRs->last();
+        $internalKey = $normalizedOptions['namespace'] . $this->getOptions()->getNamespaceSeparator() . $normalizedKey;
+        if (!wincache_ucache_add($internalKey, $value, $normalizedOptions['ttl'])) {
+            // TODO: check if this is really needed
+            if (wincache_ucache_exists($internalKey)) {
+                throw new Exception\RuntimeException("Key '{$internalKey}' already exists");
             }
 
-            $internalKey = $options['namespace'] . $baseOptions->getNamespaceSeparator() . $key;
-            if (!wincache_ucache_add($internalKey, $value, $options['ttl'])) {
-                if (wincache_ucache_exists($internalKey)) {
-                    throw new Exception\RuntimeException("Key '{$internalKey}' already exists");
-                }
-
-                $type = is_object($value) ? get_class($value) : gettype($value);
-                throw new Exception\RuntimeException(
-                    "wincache_ucache_add('{$internalKey}', <{$type}>, {$options['ttl']}) failed"
-                );
-            }
-
-            $result = true;
-            return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
+            $type = is_object($value) ? get_class($value) : gettype($value);
+            throw new Exception\RuntimeException(
+                "wincache_ucache_add('{$internalKey}', <{$type}>, {$normalizedOptions['ttl']}) failed"
+            );
         }
+
+        return true;
     }
 
     /**
-     * Add multiple items.
+     * Internal method to add multiple items.
      *
      * Options:
-     *  - namespace <string> optional
-     *    - The namespace to use (Default: namespace of object)
-     *  - tags <array> optional
-     *    - An array of tags
+     *  - ttl <float>
+     *    - The time-to-life
+     *  - namespace <string>
+     *    - The namespace to use
      *
-     * @param  array $keyValuePairs
-     * @param  array $options
+     * @param  array $normalizedKeyValuePairs
+     * @param  array $normalizedOptions
      * @return boolean
      * @throws Exception
-     *
-     * @triggers addItems.pre(PreEvent)
-     * @triggers addItems.post(PostEvent)
-     * @triggers addItems.exception(ExceptionEvent)
      */
-    public function addItems(array $keyValuePairs, array $options = array())
+    protected function internalAddItems(array & $normalizedKeyValuePairs, array & $normalizedOptions)
     {
-        $baseOptions = $this->getOptions();
-        if (!$baseOptions->getWritable()) {
-            return false;
+        $internalKeyValuePairs = array();
+        $prefix                = $normalizedOptions['namespace'] . $this->getOptions()->getNamespaceSeparator();
+        foreach ($normalizedKeyValuePairs as $normalizedKey => $value) {
+            $internalKey = $prefix . $normalizedKey;
+            $internalKeyValuePairs[$internalKey] = $value;
         }
 
-        $this->normalizeOptions($options);
-        $args = new ArrayObject(array(
-            'keyValuePairs' => & $keyValuePairs,
-            'options'       => & $options,
-        ));
-
-        try {
-            $eventRs = $this->triggerPre(__FUNCTION__, $args);
-            if ($eventRs->stopped()) {
-                return $eventRs->last();
-            }
-
-            $internalKeyValuePairs = array();
-            $prefix                = $options['namespace'] . $baseOptions->getNamespaceSeparator();
-            foreach ($keyValuePairs as $key => &$value) {
-                $internalKey = $prefix . $key;
-                $internalKeyValuePairs[$internalKey] = &$value;
-            }
-
-            $errKeys = wincache_ucache_add($internalKeyValuePairs, null, $options['ttl']);
-            if ($errKeys!==array()) {
-                throw new Exception\RuntimeException(
-                    "wincache_ucache_add(<array>, null, {$options['ttl']}) failed for keys: "
-                    . "'" . implode("','", array_keys($errKeys)) . "'"
-                );
-            }
-
-            $result = true;
-            return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
+        $errKeys = wincache_ucache_add($internalKeyValuePairs, null, $normalizedOptions['ttl']);
+        if ($errKeys !== array()) {
+            throw new Exception\RuntimeException(
+                "wincache_ucache_add(<array>, null, {$normalizedOptions['ttl']}) failed for keys: "
+                . "'" . implode("','", array_keys($errKeys)) . "'"
+            );
         }
+
+        return true;
     }
 
     /**
-     * Replace an item.
+     * Internal method to replace an existing item.
      *
      * Options:
-     *  - namespace <string> optional
-     *    - The namespace to use (Default: namespace of object)
-     *  - tags <array> optional
-     *    - An array of tags
+     *  - ttl <float>
+     *    - The time-to-life
+     *  - namespace <string>
+     *    - The namespace to use
      *
-     * @param  string $key
+     * @param  string $normalizedKey
      * @param  mixed  $value
-     * @param  array  $options
+     * @param  array  $normalizedOptions
      * @return boolean
      * @throws Exception
-     *
-     * @triggers replaceItem.pre(PreEvent)
-     * @triggers replaceItem.post(PostEvent)
-     * @triggers replaceItem.exception(ExceptionEvent)
      */
-    public function replaceItem($key, $value, array $options = array())
+    protected function internalReplaceItem(& $normalizedKey, & $value, array & $normalizedOptions)
     {
-        $baseOptions = $this->getOptions();
-        if (!$baseOptions->getWritable()) {
-            return false;
+        $internalKey = $normalizedOptions['namespace'] . $this->getOptions()->getNamespaceSeparator() . $normalizedKey;
+        if (!wincache_ucache_exists($internalKey)) {
+            throw new Exception\ItemNotFoundException(
+                "Key '{$internalKey}' doesn't exist"
+            );
         }
 
-        $this->normalizeOptions($options);
-        $this->normalizeKey($key);
-        $args = new ArrayObject(array(
-            'key'     => & $key,
-            'value'   => & $value,
-            'options' => & $options,
-        ));
-
-        try {
-            $eventRs = $this->triggerPre(__FUNCTION__, $args);
-            if ($eventRs->stopped()) {
-                return $eventRs->last();
-            }
-
-            $internalKey = $options['namespace'] . $baseOptions->getNamespaceSeparator() . $key;
-            if (!wincache_ucache_exists($internalKey)) {
-                throw new Exception\ItemNotFoundException(
-                    "Key '{$internalKey}' doesn't exist"
-                );
-            }
-
-            if (!wincache_ucache_set($internalKey, $value, $options['ttl'])) {
-                $type = is_object($value) ? get_class($value) : gettype($value);
-                throw new Exception\RuntimeException(
-                    "wincache_ucache_set('{$internalKey}', <{$type}>, {$options['ttl']}) failed"
-                );
-            }
-
-            $result = true;
-            return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
+        if (!wincache_ucache_set($internalKey, $value, $normalizedOptions['ttl'])) {
+            $type = is_object($value) ? get_class($value) : gettype($value);
+            throw new Exception\RuntimeException(
+                "wincache_ucache_set('{$internalKey}', <{$type}>, {$normalizedOptions['ttl']}) failed"
+            );
         }
+
+        return true;
     }
 
     /**
-     * Remove an item.
+     * Internal method to remove an item.
      *
      * Options:
-     *  - namespace <string> optional
-     *    - The namespace to use (Default: namespace of object)
-     *  - ignore_missing_items <boolean> optional
-     *    - Throw exception on missing item or return false
+     *  - namespace <string>
+     *    - The namespace to use
+     *  - ignore_missing_items <boolean>
+     *    - Throw exception on missing item
      *
-     * @param  string $key
-     * @param  array $options
+     * @param  string $normalizedKey
+     * @param  array  $normalizedOptions
      * @return boolean
      * @throws Exception
-     *
-     * @triggers removeItem.pre(PreEvent)
-     * @triggers removeItem.post(PostEvent)
-     * @triggers removeItem.exception(ExceptionEvent)
      */
-    public function removeItem($key, array $options = array())
+    protected function internalRemoveItem(& $normalizedKey, array & $normalizedOptions)
     {
-        $baseOptions = $this->getOptions();
-        if (!$baseOptions->getWritable()) {
-            return false;
+        $internalKey = $normalizedOptions['namespace'] . $this->getOptions()->getNamespaceSeparator() . $normalizedKey;
+        if (!wincache_ucache_delete($internalKey) && !$normalizedOptions['ignore_missing_items']) {
+            throw new Exception\ItemNotFoundException("Key '{$internalKey}' not found");
         }
 
-        $this->normalizeOptions($options);
-        $this->normalizeKey($key);
-        $args = new ArrayObject(array(
-            'key'     => & $key,
-            'options' => & $options,
-        ));
-
-        try {
-            $eventRs = $this->triggerPre(__FUNCTION__, $args);
-            if ($eventRs->stopped()) {
-                return $eventRs->last();
-            }
-
-            $internalKey = $options['namespace'] . $baseOptions->getNamespaceSeparator() . $key;
-            if (!wincache_ucache_delete($internalKey)) {
-                if (!$options['ignore_missing_items']) {
-                    throw new Exception\ItemNotFoundException("Key '{$internalKey}' not found");
-                }
-            }
-
-            $result = true;
-            return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
-        }
+        return true;
     }
 
     /**
-     * Increment an item.
+     * Internal method to increment an item.
      *
      * Options:
-     *  - namespace <string> optional
-     *    - The namespace to use (Default: namespace of object)
-     *  - ignore_missing_items <boolean> optional
-     *    - Throw exception on missing item or return false
+     *  - ttl <float>
+     *    - The time-to-life
+     *  - namespace <string>
+     *    - The namespace to use
+     *  - ignore_missing_items <boolean>
+     *    - Throw exception on missing item
      *
-     * @param  string $key
-     * @param  int $value
-     * @param  array $options
+     * @param  string $normalizedKey
+     * @param  int    $value
+     * @param  array  $normalizedOptions
      * @return int|boolean The new value or false on failure
      * @throws Exception
-     *
-     * @triggers incrementItem.pre(PreEvent)
-     * @triggers incrementItem.post(PostEvent)
-     * @triggers incrementItem.exception(ExceptionEvent)
      */
-    public function incrementItem($key, $value, array $options = array())
+    protected function internalIncrementItem(& $normalizedKey, & $value, array & $normalizedOptions)
     {
-        $baseOptions = $this->getOptions();
-        if (!$baseOptions->getWritable()) {
-            return false;
-        }
-
-        $this->normalizeOptions($options);
-        $this->normalizeKey($key);
-        $args = new ArrayObject(array(
-            'key'     => & $key,
-            'options' => & $options,
-        ));
-
-        try {
-            $eventRs = $this->triggerPre(__FUNCTION__, $args);
-            if ($eventRs->stopped()) {
-                return $eventRs->last();
+        $internalKey = $normalizedOptions['namespace'] . $this->getOptions()->getNamespaceSeparator() . $normalizedKey;
+        $value       = (int)$value;
+        $newValue    = wincache_ucache_inc($internalKey, $value);
+        if ($newValue === false) {
+            if (wincache_ucache_exists($internalKey)) {
+                throw new Exception\RuntimeException("wincache_ucache_inc('{$internalKey}', {$value}) failed");
+            } elseif (!$normalizedOptions['ignore_missing_items']) {
+                throw new Exception\ItemNotFoundException(
+                    "Key '{$internalKey}' not found"
+                );
             }
 
-            $internalKey = $options['namespace'] . $baseOptions->getNamespaceSeparator() . $key;
-            $value       = (int)$value;
-            $newValue    = wincache_ucache_inc($internalKey, $value);
-            if ($newValue === false) {
-                if (wincache_ucache_exists($internalKey)) {
-                    throw new Exception\RuntimeException("wincache_ucache_inc('{$internalKey}', {$value}) failed");
-                } elseif (!$options['ignore_missing_items']) {
-                    throw new Exception\ItemNotFoundException(
-                        "Key '{$internalKey}' not found"
-                    );
-                }
-
-                $this->addItem($key, $value, $options);
-                $newValue = $value;
-            }
-
-            return $this->triggerPost(__FUNCTION__, $args, $newValue);
-        } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
+            $newValue = $value;
+            $this->addItem($normalizedKey, $newValue, $normalizedOptions);
         }
+
+        return $newValue;
     }
 
     /**
-     * Decrement an item.
+     * Internal method to decrement an item.
      *
      * Options:
-     *  - namespace <string> optional
-     *    - The namespace to use (Default: namespace of object)
-     *  - ignore_missing_items <boolean> optional
-     *    - Throw exception on missing item or return false
+     *  - ttl <float>
+     *    - The time-to-life
+     *  - namespace <string>
+     *    - The namespace to use
+     *  - ignore_missing_items <boolean>
+     *    - Throw exception on missing item
      *
-     * @param  string $key
-     * @param  int $value
-     * @param  array $options
-     * @return int|boolean The new value or false or failure
+     * @param  string $normalizedKey
+     * @param  int    $value
+     * @param  array  $normalizedOptions
+     * @return int|boolean The new value or false on failure
      * @throws Exception
-     *
-     * @triggers decrementItem.pre(PreEvent)
-     * @triggers decrementItem.post(PostEvent)
-     * @triggers decrementItem.exception(ExceptionEvent)
      */
-    public function decrementItem($key, $value, array $options = array())
+    protected function internalDecrementItem(& $normalizedKey, & $value, array & $normalizedOptions)
     {
-        $baseOptions = $this->getOptions();
-        if (!$baseOptions->getWritable()) {
-            return false;
-        }
-
-        $this->normalizeOptions($options);
-        $this->normalizeKey($key);
-        $args = new ArrayObject(array(
-            'key'     => & $key,
-            'options' => & $options,
-        ));
-
-        try {
-            $eventRs = $this->triggerPre(__FUNCTION__, $args);
-            if ($eventRs->stopped()) {
-                return $eventRs->last();
+        $internalKey = $normalizedOptions['namespace'] . $this->getOptions()->getNamespaceSeparator() . $normalizedKey;
+        $value       = (int)$value;
+        $newValue    = wincache_ucache_dec($internalKey, $value);
+        if ($newValue === false) {
+            if (wincache_ucache_exists($internalKey)) {
+                throw new Exception\RuntimeException("wincache_ucache_inc('{$internalKey}', {$value}) failed");
+            } elseif (!$normalizedOptions['ignore_missing_items']) {
+                throw new Exception\ItemNotFoundException(
+                    "Key '{$internalKey}' not found"
+                );
             }
 
-            $internalKey = $options['namespace'] . $baseOptions->getNamespaceSeparator() . $key;
-            $value       = (int)$value;
-            $newValue    = wincache_ucache_dec($internalKey, $value);
-            if ($newValue === false) {
-                if (wincache_ucache_exists($internalKey)) {
-                    throw new Exception\RuntimeException("wincache_ucache_dec('{$internalKey}', {$value}) failed");
-                } elseif (!$options['ignore_missing_items']) {
-                    throw new Exception\ItemNotFoundException(
-                        "Key '{$internalKey}' not found"
-                    );
-                }
-
-                $this->addItem($key, -$value, $options);
-                $newValue = -$value;
-            }
-
-            return $this->triggerPost(__FUNCTION__, $args, $newValue);
-        } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
+            $newValue = -$value;
+            $this->addItem($normalizedKey, $newValue, $normalizedOptions);
         }
+
+        return $newValue;
     }
-
-    /* find */
-
 
     /* cleaning */
 
     /**
-     * Clear items off all namespaces.
+     * Internal method to clear items off all namespaces.
      *
      * Options:
-     *  - ttl <float> optional
-     *    - The time-to-life (Default: ttl of object)
-     *  - tags <array> optional
-     *    - Tags to search for used with matching modes of
-     *      Zend\Cache\Storage\Adapter::MATCH_TAGS_*
+     *  - ttl <float>
+     *    - The time-to-life
      *
-     * @param  int $mode Matching mode (Value of Zend\Cache\Storage\Adapter::MATCH_*)
-     * @param  array $options
+     * @param  int   $normalizedMode Matching mode (Value of Adapter::MATCH_*)
+     * @param  array $normalizedOptions
      * @return boolean
      * @throws Exception
-     * @see clearByNamespace()
-     *
-     * @triggers clear.pre(PreEvent)
-     * @triggers clear.post(PostEvent)
-     * @triggers clear.exception(ExceptionEvent)
+     * @see    clearByNamespace()
      */
-    public function clear($mode = self::MATCH_EXPIRED, array $options = array())
+    protected function internalClear(& $normalizedMode, array & $normalizedOptions)
     {
-        if (!$this->getOptions()->getWritable()) {
-            return false;
-        }
-
-        $this->normalizeOptions($options);
-        $this->normalizeMatchingMode($mode, self::MATCH_EXPIRED, $options);
-        $args = new ArrayObject(array(
-            'mode'    => & $mode,
-            'options' => & $options,
-        ));
-
-        try {
-            $eventRs = $this->triggerPre(__FUNCTION__, $args);
-            if ($eventRs->stopped()) {
-                return $eventRs->last();
-            }
-
-            $result = wincache_ucache_clear();
-            return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
-        }
+        return wincache_ucache_clear();
     }
 
     /* status */
 
     /**
-     * Get capabilities
+     * Internal method to get capabilities of this adapter
      *
      * @return Capabilities
-     *
-     * @triggers getCapabilities.pre(PreEvent)
-     * @triggers getCapabilities.post(PostEvent)
-     * @triggers getCapabilities.exception(ExceptionEvent)
      */
-    public function getCapabilities()
+    protected function internalGetCapabilities()
     {
-        $args = new ArrayObject();
-
-        try {
-            $eventRs = $this->triggerPre(__FUNCTION__, $args);
-            if ($eventRs->stopped()) {
-                return $eventRs->last();
-            }
-
-            if ($this->capabilities === null) {
-                $this->capabilityMarker = new stdClass();
-                $this->capabilities     = new Capabilities(
-                    $this->capabilityMarker,
-                    array(
-                        'supportedDatatypes' => array(
-                            'NULL'     => true,
-                            'boolean'  => true,
-                            'integer'  => true,
-                            'double'   => true,
-                            'string'   => true,
-                            'array'    => true,
-                            'object'   => 'object',
-                            'resource' => false,
-                        ),
-                        'supportedMetadata' => array(
-                            'ttl',
-                            'num_hits',
-                            'internal_key',
-                            'mem_size'
-                        ),
-                        'maxTtl'             => 0,
-                        'staticTtl'          => true,
-                        'ttlPrecision'       => 1,
-                        'useRequestTime'     => false,
-                        'expiredRead'        => false,
-                        'namespaceIsPrefix'  => true,
-                        'namespaceSeparator' => $this->getOptions()->getNamespaceSeparator(),
-                        'iterable'           => false,
-                        'clearAllNamespaces' => true,
-                        'clearByNamespace'   => false,
-                    )
-                );
-            }
-
-            return $this->triggerPost(__FUNCTION__, $args, $this->capabilities);
-        } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
+        if ($this->capabilities === null) {
+            $this->capabilityMarker = new stdClass();
+            $this->capabilities     = new Capabilities(
+                $this->capabilityMarker,
+                array(
+                    'supportedDatatypes' => array(
+                        'NULL'     => true,
+                        'boolean'  => true,
+                        'integer'  => true,
+                        'double'   => true,
+                        'string'   => true,
+                        'array'    => true,
+                        'object'   => 'object',
+                        'resource' => false,
+                    ),
+                    'supportedMetadata' => array(
+                        'ttl',
+                        'num_hits',
+                        'internal_key',
+                        'mem_size'
+                    ),
+                    'maxTtl'             => 0,
+                    'staticTtl'          => true,
+                    'ttlPrecision'       => 1,
+                    'useRequestTime'     => false,
+                    'expiredRead'        => false,
+                    'namespaceIsPrefix'  => true,
+                    'namespaceSeparator' => $this->getOptions()->getNamespaceSeparator(),
+                    'iterable'           => false,
+                    'clearAllNamespaces' => true,
+                    'clearByNamespace'   => false,
+                )
+            );
         }
+
+        return $this->capabilities;
     }
 
     /**
-     * Get storage capacity.
+     * Internal method to get storage capacity.
      *
-     * @param  array $options
+     * @param  array $normalizedOptions
      * @return array|boolean Capacity as array or false on failure
-     *
-     * @triggers getCapacity.pre(PreEvent)
-     * @triggers getCapacity.post(PostEvent)
-     * @triggers getCapacity.exception(ExceptionEvent)
+     * @throws Exception
      */
-    public function getCapacity(array $options = array())
+    protected function internalGetCapacity(array & $normalizedOptions)
     {
-        $args = new ArrayObject(array(
-            'options' => & $options,
-        ));
-
-        try {
-            $eventRs = $this->triggerPre(__FUNCTION__, $args);
-            if ($eventRs->stopped()) {
-                return $eventRs->last();
-            }
-
-            $mem    = wincache_ucache_meminfo ();
-            $result = array(
-                'free'  => $mem['memory_free'],
-                'total' => $mem['memory_total'],
-            );
-            return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
-        }
+        $mem = wincache_ucache_meminfo();
+        return array(
+            'free'  => $mem['memory_free'],
+            'total' => $mem['memory_total'],
+        );
     }
 
     /* internal */

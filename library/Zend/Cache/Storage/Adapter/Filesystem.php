@@ -329,6 +329,23 @@ class Filesystem extends AbstractAdapter
     }
 
     /**
+     * Get metadatas
+     *
+     * @param array $keys
+     * @param array $options
+     * @return array
+     */
+    public function getMetadatas(array $keys, array $options = array())
+    {
+        $baseOptions = $this->getOptions();
+        if ($baseOptions->getReadable() && $baseOptions->getClearStatCache()) {
+            clearstatcache();
+        }
+
+        return parent::getMetadatas($keys, $options);
+    }
+
+    /**
      * Get info by key
      *
      * @param string $normalizedKey
@@ -365,24 +382,178 @@ class Filesystem extends AbstractAdapter
         return $keyInfo;
     }
 
+    /* writing */
+
     /**
-     * Get metadatas
+     * Store an item.
      *
-     * @param array $keys
-     * @param array $options
-     * @return array
+     * Options:
+     *  - namespace <string> optional
+     *    - The namespace to use (Default: namespace of object)
+     *  - tags <array> optional
+     *    - An array of tags
+     *
+     * @param  string $key
+     * @param  mixed  $value
+     * @param  array  $options
+     * @return boolean
+     * @throws Exception
+     *
+     * @triggers setItem.pre(PreEvent)
+     * @triggers setItem.post(PostEvent)
+     * @triggers setItem.exception(ExceptionEvent)
      */
-    public function getMetadatas(array $keys, array $options = array())
+    public function setItem($key, $value, array $options = array())
     {
         $baseOptions = $this->getOptions();
-        if ($baseOptions->getReadable() && $baseOptions->getClearStatCache()) {
+        if ($baseOptions->getWritable() && $baseOptions->getClearStatCache()) {
             clearstatcache();
         }
 
-        return parent::getMetadatas($keys, $options);
+        return parent::setItem($key, $value, $options);
     }
 
-    /* writing */
+    /**
+     * Store multiple items.
+     *
+     * Options:
+     *  - namespace <string> optional
+     *    - The namespace to use (Default: namespace of object)
+     *  - tags <array> optional
+     *    - An array of tags
+     *
+     * @param  array $keyValuePairs
+     * @param  array $options
+     * @return boolean
+     * @throws Exception
+     *
+     * @triggers setItems.pre(PreEvent)
+     * @triggers setItems.post(PostEvent)
+     * @triggers setItems.exception(ExceptionEvent)
+     */
+    public function setItems(array $keyValuePairs, array $options = array())
+    {
+        $baseOptions = $this->getOptions();
+        if ($baseOptions->getWritable() && $baseOptions->getClearStatCache()) {
+            clearstatcache();
+        }
+
+        return parent::setItems($keyValuePairs, $options);
+    }
+
+    /**
+     * Add an item.
+     *
+     * Options:
+     *  - namespace <string> optional
+     *    - The namespace to use (Default: namespace of object)
+     *  - tags <array> optional
+     *    - An array of tags
+     *
+     * @param  string $key
+     * @param  mixed  $value
+     * @param  array  $options
+     * @return boolean
+     * @throws Exception
+     *
+     * @triggers addItem.pre(PreEvent)
+     * @triggers addItem.post(PostEvent)
+     * @triggers addItem.exception(ExceptionEvent)
+     */
+    public function addItem($key, $value, array $options = array())
+    {
+        $baseOptions = $this->getOptions();
+        if ($baseOptions->getWritable() && $baseOptions->getClearStatCache()) {
+            clearstatcache();
+        }
+
+        return parent::addItem($key, $value, $options);
+    }
+
+    /**
+     * Add multiple items.
+     *
+     * Options:
+     *  - namespace <string> optional
+     *    - The namespace to use (Default: namespace of object)
+     *  - tags <array> optional
+     *    - An array of tags
+     *
+     * @param  array $keyValuePairs
+     * @param  array $options
+     * @return boolean
+     * @throws Exception
+     *
+     * @triggers addItems.pre(PreEvent)
+     * @triggers addItems.post(PostEvent)
+     * @triggers addItems.exception(ExceptionEvent)
+     */
+    public function addItems(array $keyValuePairs, array $options = array())
+    {
+        $baseOptions = $this->getOptions();
+        if ($baseOptions->getWritable() && $baseOptions->getClearStatCache()) {
+            clearstatcache();
+        }
+
+        return parent::addItems($keyValuePairs, $options);
+    }
+
+    /**
+     * Replace an existing item.
+     *
+     * Options:
+     *  - namespace <string> optional
+     *    - The namespace to use (Default: namespace of object)
+     *  - tags <array> optional
+     *    - An array of tags
+     *
+     * @param  string $key
+     * @param  mixed  $value
+     * @param  array  $options
+     * @return boolean
+     * @throws Exception
+     *
+     * @triggers replaceItem.pre(PreEvent)
+     * @triggers replaceItem.post(PostEvent)
+     * @triggers replaceItem.exception(ExceptionEvent)
+     */
+    public function replaceItem($key, $value, array $options = array())
+    {
+        $baseOptions = $this->getOptions();
+        if ($baseOptions->getWritable() && $baseOptions->getClearStatCache()) {
+            clearstatcache();
+        }
+
+        return parent::replaceItem($key, $value, $options);
+    }
+
+    /**
+     * Replace multiple existing items.
+     *
+     * Options:
+     *  - namespace <string> optional
+     *    - The namespace to use (Default: namespace of object)
+     *  - tags <array> optional
+     *    - An array of tags
+     *
+     * @param  array $keyValuePairs
+     * @param  array $options
+     * @return boolean
+     * @throws Exception
+     *
+     * @triggers replaceItems.pre(PreEvent)
+     * @triggers replaceItems.post(PostEvent)
+     * @triggers replaceItems.exception(ExceptionEvent)
+     */
+    public function replaceItems(array $keyValuePairs, array $options = array())
+    {
+        $baseOptions = $this->getOptions();
+        if ($baseOptions->getWritable() && $baseOptions->getClearStatCache()) {
+            clearstatcache();
+        }
+
+        return parent::replaceItems($keyValuePairs, $options);
+    }
 
     /**
      * Internal method to store an item.
@@ -390,6 +561,8 @@ class Filesystem extends AbstractAdapter
      * Options:
      *  - namespace <string>
      *    - The namespace to use
+     *  - tags <array>
+     *    - An array of tags
      *
      * @param  string $normalizedKey
      * @param  mixed  $value
@@ -471,720 +644,153 @@ class Filesystem extends AbstractAdapter
     }
 
     /**
-     * Replace an item
+     * Set an item only if token matches
      *
-     * @param $key
-     * @param $value
-     * @param array $options
-     * @return bool|mixed
-     * @throws ItemNotFoundException
-     */
-    public function replaceItem($key, $value, array $options = array())
-    {
-        $baseOptions = $this->getOptions();
-        if (!$baseOptions->getWritable()) {
-            return false;
-        }
-
-        $this->normalizeOptions($options);
-        $this->normalizeKey($key);
-        $args = new ArrayObject(array(
-            'key'     => & $key,
-            'value'   => & $value,
-            'options' => & $options,
-        ));
-
-        try {
-            $eventRs = $this->triggerPre(__FUNCTION__, $args);
-            if ($eventRs->stopped()) {
-                return $eventRs->last();
-            }
-
-            if ($baseOptions->getClearStatCache()) {
-                clearstatcache();
-            }
-
-            if ( !$this->internalHasItem($key, $options) ) {
-                throw new Exception\ItemNotFoundException("Key '{$key}' doesn't exist");
-            }
-
-            $result = $this->internalSetItem($key, $value, $options);
-            return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
-        }
-    }
-
-    /**
-     * Replace items
+     * It uses the token received from getItem() to check if the item has
+     * changed before overwriting it.
      *
-     * @param array $keyValuePairs
-     * @param array $options
-     * @return bool|mixed
-     * @throws ItemNotFoundException
-     */
-    public function replaceItems(array $keyValuePairs, array $options = array())
-    {
-        $baseOptions = $this->getOptions();
-        if (!$baseOptions->getWritable()) {
-            return false;
-        }
-
-        $this->normalizeOptions($options);
-        $args = new ArrayObject(array(
-            'keyValuePairs' => & $keyValuePairs,
-            'options'       => & $options,
-        ));
-
-        try {
-            $eventRs = $this->triggerPre(__FUNCTION__, $args);
-            if ($eventRs->stopped()) {
-                return $eventRs->last();
-            }
-
-            if ($baseOptions->getClearStatCache()) {
-                clearstatcache();
-            }
-
-            $result = true;
-            foreach ($keyValuePairs as $key => $value) {
-                if ( !$this->internalHasItem($key, $options) ) {
-                    throw new Exception\ItemNotFoundException("Key '{$key}' doesn't exist");
-                }
-                $result = $this->internalSetItem($key, $value, $options) && $result;
-            }
-
-            return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
-        }
-    }
-
-    /**
-     * Add an item
+     * Options:
+     *  - namespace <string> optional
+     *    - The namespace to use (Default: namespace of object)
+     *  - tags <array> optional
+     *    - An array of tags
      *
-     * @param $key
-     * @param $value
-     * @param array $options
-     * @return bool|mixed
-     * @throws RuntimeException
-     */
-    public function addItem($key, $value, array $options = array())
-    {
-        $baseOptions = $this->getOptions();
-        if (!$baseOptions->getWritable()) {
-            return false;
-        }
-
-        $this->normalizeOptions($options);
-        $this->normalizeKey($key);
-        $args = new ArrayObject(array(
-            'key'     => & $key,
-            'value'   => & $value,
-            'options' => & $options,
-        ));
-
-        try {
-            $eventRs = $this->triggerPre(__FUNCTION__, $args);
-            if ($eventRs->stopped()) {
-                return $eventRs->last();
-            }
-
-            if ($baseOptions->getClearStatCache()) {
-                clearstatcache();
-            }
-
-            if ( $this->internalHasItem($key, $options) ) {
-                throw new Exception\RuntimeException("Key '{$key}' already exist");
-            }
-
-            $result = $this->internalSetItem($key, $value, $options);
-            return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
-        }
-    }
-
-    /**
-     * Add items
-     *
-     * @param array $keyValuePairs
-     * @param array $options
-     * @return bool|mixed
-     * @throws RuntimeException
-     */
-    public function addItems(array $keyValuePairs, array $options = array())
-    {
-        $baseOptions = $this->getOptions();
-        if (!$baseOptions->getWritable()) {
-            return false;
-        }
-
-        $this->normalizeOptions($options);
-        $args = new ArrayObject(array(
-            'keyValuePairs' => & $keyValuePairs,
-            'options'       => & $options,
-        ));
-
-        try {
-            $eventRs = $this->triggerPre(__FUNCTION__, $args);
-            if ($eventRs->stopped()) {
-                return $eventRs->last();
-            }
-
-            if ($baseOptions->getClearStatCache()) {
-                clearstatcache();
-            }
-
-            $result = true;
-            foreach ($keyValuePairs as $key => $value) {
-                if ( $this->internalHasItem($key, $options) ) {
-                    throw new Exception\RuntimeException("Key '{$key}' already exist");
-                }
-
-                $result = $this->internalSetItem($key, $value, $options) && $result;
-            }
-
-            return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
-        }
-    }
-
-    /**
-     * check and set item
-     *
-     * @param string $token
-     * @param string $key
-     * @param mixed  $value
-     * @param array  $options
-     * @return bool|mixed
-     * @throws ItemNotFoundException
+     * @param  mixed  $token
+     * @param  string $key
+     * @param  mixed  $value
+     * @param  array  $options
+     * @return boolean
+     * @throws Exception
+     * @see    getItem()
+     * @see    setItem()
      */
     public function checkAndSetItem($token, $key, $value, array $options = array())
     {
         $baseOptions = $this->getOptions();
-        if (!$baseOptions->getWritable()) {
-            return false;
+        if ($baseOptions->getWritable() && $baseOptions->getClearStatCache()) {
+            clearstatcache();
         }
 
-        $this->normalizeOptions($options);
-        $this->normalizeKey($key);
-        $args = new ArrayObject(array(
-            'token'   => & $token,
-            'key'     => & $key,
-            'value'   => & $value,
-            'options' => & $options,
-        ));
-
-        try {
-            $eventRs = $this->triggerPre(__FUNCTION__, $args);
-            if ($eventRs->stopped()) {
-                return $eventRs->last();
-            }
-
-            if ($baseOptions->getClearStatCache()) {
-                clearstatcache();
-            }
-
-            if ( !($keyInfo = $this->getKeyInfo($key, $options['namespace'])) ) {
-                if ($options['ignore_missing_items']) {
-                    $result = false;
-                } else {
-                    throw new Exception\ItemNotFoundException("Key '{$key}' not found within namespace '{$options['namespace']}'");
-                }
-            } else {
-                // use filemtime + filesize as CAS token
-                $check = $keyInfo['mtime'] . filesize($keyInfo['filespec'] . '.dat');
-                if ($token != $check) {
-                    $result = false;
-                } else {
-                    $result = $this->internalSetItem($key, $value, $options);
-                }
-            }
-
-            return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
-        }
+        return parent::checkAndSetItem($token, $key, $value, $options);
     }
 
     /**
-     * Touch an item
+     * Internal method to set an item only if token matches
      *
-     * @param $key
-     * @param array $options
-     * @return bool|mixed
+     * Options:
+     *  - ttl <float>
+     *    - The time-to-life
+     *  - namespace <string>
+     *    - The namespace to use
+     *  - tags <array>
+     *    - An array of tags
+     *
+     * @param  mixed  $token
+     * @param  string $normalizedKey
+     * @param  mixed  $value
+     * @param  array  $normalizedOptions
+     * @return boolean
+     * @throws Exception
+     * @see    getItem()
+     * @see    setItem()
+     */
+    protected function internalCheckAndSetItem(& $token, & $normalizedKey, & $value, array & $normalizedOptions)
+    {
+        $keyInfo = $this->getKeyInfo($normalizedKey, $normalizedOptions['namespace']);
+        if (!$keyInfo) {
+            if (!$normalizedOptions['ignore_missing_items']) {
+                throw new Exception\ItemNotFoundException(
+                    "Key '{$normalizedKey}' not found within namespace '{$normalizedOptions['namespace']}'"
+                );
+            }
+            return false;
+        }
+
+        // use filemtime + filesize as CAS token
+        $check = $keyInfo['mtime'] . filesize($keyInfo['filespec'] . '.dat');
+        if ($token !== $check) {
+            return false;
+        }
+
+        return $this->internalSetItem($normalizedKey, $value, $normalizedOptions);
+    }
+
+    /**
+     * Reset lifetime of an item
+     *
+     * Options:
+     *  - namespace <string> optional
+     *    - The namespace to use (Default: namespace of object)
+     *
+     * @param  string $key
+     * @param  array  $options
+     * @return boolean
+     * @throws Exception
+     *
+     * @triggers touchItem.pre(PreEvent)
+     * @triggers touchItem.post(PostEvent)
+     * @triggers touchItem.exception(ExceptionEvent)
      */
     public function touchItem($key, array $options = array())
     {
         $baseOptions = $this->getOptions();
-        if (!$baseOptions->getWritable()) {
-            return false;
+        if ($baseOptions->getWritable() && $baseOptions->getClearStatCache()) {
+            clearstatcache();
         }
 
-        $this->normalizeOptions($options);
-        $this->normalizeKey($key);
-        $args = new ArrayObject(array(
-            'key'     => & $key,
-            'options' => & $options,
-        ));
-
-        try {
-            $eventRs = $this->triggerPre(__FUNCTION__, $args);
-            if ($eventRs->stopped()) {
-                return $eventRs->last();
-            }
-
-            if ($baseOptions->getClearStatCache()) {
-                clearstatcache();
-            }
-
-            $this->internalTouchItem($key, $options);
-            $this->lastInfoId = null;
-
-            $result = true;
-            return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
-        }
+        return parent::touchItem($key, $options);
     }
 
     /**
-     * Touch items
+     * Reset lifetime of multiple items.
      *
-     * @param array $keys
-     * @param array $options
-     * @return bool|mixed
+     * Options:
+     *  - namespace <string> optional
+     *    - The namespace to use (Default: namespace of object)
+     *
+     * @param  array $keys
+     * @param  array $options
+     * @return boolean
+     * @throws Exception
+     *
+     * @triggers touchItems.pre(PreEvent)
+     * @triggers touchItems.post(PostEvent)
+     * @triggers touchItems.exception(ExceptionEvent)
      */
     public function touchItems(array $keys, array $options = array())
     {
         $baseOptions = $this->getOptions();
-        if (!$baseOptions->getWritable()) {
-            return false;
+        if ($baseOptions->getWritable() && $baseOptions->getClearStatCache()) {
+            clearstatcache();
         }
 
-        $this->normalizeOptions($options);
-        $args = new ArrayObject(array(
-            'keys'    => & $keys,
-            'options' => & $options,
-        ));
-
-        try {
-            $eventRs = $this->triggerPre(__FUNCTION__, $args);
-            if ($eventRs->stopped()) {
-                return $eventRs->last();
-            }
-
-            foreach ($keys as $key) {
-                $this->internalTouchItem($key, $options);
-            }
-            $this->lastInfoId = null;
-
-            $result = true;
-            return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
-        }
+        return parent::touchItems($keys, $options);
     }
 
     /**
-     * Remove an item
+     * Internal method to reset lifetime of an item
      *
-     * @param $key
-     * @param array $options
-     * @return bool|mixed
-     */
-    public function removeItem($key, array $options = array())
-    {
-        $baseOptions = $this->getOptions();
-        if (!$baseOptions->getWritable()) {
-            return false;
-        }
-
-        $this->normalizeOptions($options);
-        $this->normalizeKey($key);
-        $args = new ArrayObject(array(
-            'key'     => & $key,
-            'options' => & $options,
-        ));
-
-        try {
-            $eventRs = $this->triggerPre(__FUNCTION__, $args);
-            if ($eventRs->stopped()) {
-                return $eventRs->last();
-            }
-
-            // unlink is not affected by clearstatcache
-            $this->internalRemoveItem($key, $options);
-
-            $result = true;
-            return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
-        }
-    }
-
-    /**
-     * Remove items
+     * Options:
+     *  - ttl <float>
+     *    - The time-to-life
+     *  - namespace <string>
+     *    - The namespace to use
      *
-     * @param array $keys
-     * @param array $options
-     * @return bool|mixed
+     * @param  string $key
+     * @param  array  $options
+     * @return boolean
+     * @throws Exception
      */
-    public function removeItems(array $keys, array $options = array())
+    protected function internalTouchItem(& $normalizedKey, array & $normalizedOptions)
     {
-        $baseOptions = $this->getOptions();
-        if (!$baseOptions->getWritable()) {
-            return false;
-        }
-
-        $this->normalizeOptions($options);
-        $args = new ArrayObject(array(
-            'keys'    => & $keys,
-            'options' => & $options,
-        ));
-
-        try {
-            $eventRs = $this->triggerPre(__FUNCTION__, $args);
-            if ($eventRs->stopped()) {
-                return $eventRs->last();
-            }
-
-            // unlink is not affected by clearstatcache
-            foreach ($keys as $key) {
-                $this->internalRemoveItem($key, $options);
-            }
-
-            $result = true;
-            return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
-        }
-    }
-
-    /* non-blocking */
-
-    /**
-     * Find
-     *
-     * @param int $mode
-     * @param array $options
-     * @return bool|mixed
-     * @throws RuntimeException
-     */
-    public function find($mode = self::MATCH_ACTIVE, array $options = array())
-    {
-        if ($this->stmtActive) {
-            throw new Exception\RuntimeException('Statement already in use');
-        }
-
-        $baseOptions = $this->getOptions();
-        if (!$baseOptions->getReadable()) {
-            return false;
-        }
-
-        $this->normalizeOptions($options);
-        $this->normalizeMatchingMode($mode, self::MATCH_ACTIVE, $options);
-        $options = array_merge($baseOptions->toArray(), $options);
-        $args = new ArrayObject(array(
-            'mode'    => & $mode,
-            'options' => & $options,
-        ));
-
-        try {
-            $eventRs = $this->triggerPre(__FUNCTION__, $args);
-            if ($eventRs->stopped()) {
-                return $eventRs->last();
-            }
-
-            if ($baseOptions->getClearStatCache()) {
-                clearstatcache();
-            }
-
-            try {
-                $prefix = $options['namespace'] . $baseOptions->getNamespaceSeparator();
-                $find   = $options['cache_dir']
-                        . str_repeat(\DIRECTORY_SEPARATOR . $prefix . '*', $options['dir_level'])
-                        . \DIRECTORY_SEPARATOR . $prefix . '*.dat';
-                $glob   = new GlobIterator($find);
-
-                $this->stmtActive  = true;
-                $this->stmtGlob    = $glob;
-                $this->stmtMatch   = $mode;
-                $this->stmtOptions = $options;
-            } catch (BaseException $e) {
-                throw new Exception\RuntimeException('Instantiating glob iterator failed', 0, $e);
-            }
-
-            $result = true;
-            return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
-        }
-    }
-
-    /**
-     * Fetch
-     *
-     * @return bool|mixed
-     */
-    public function fetch()
-    {
-        if (!$this->stmtActive) {
-            return false;
-        }
-
-        $args = new ArrayObject();
-
-        try {
-            $eventRs = $this->triggerPre(__FUNCTION__, $args);
-            if ($eventRs->stopped()) {
-                return $eventRs->last();
-            }
-
-            if ($this->stmtGlob !== null) {
-                $result = $this->fetchByGlob();
-
-                if ($result === false) {
-                    // clear statement
-                    $this->stmtActive  = false;
-                    $this->stmtGlob    = null;
-                    $this->stmtMatch   = null;
-                    $this->stmtOptions = null;
-                }
-            } else {
-                $result = parent::fetch();
-            }
-
-            return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
-        }
-    }
-
-    /* cleaning */
-
-    /**
-     * Clear
-     *
-     * @param int $mode
-     * @param array $options
-     * @return mixed
-     */
-    public function clear($mode = self::MATCH_EXPIRED, array $options = array())
-    {
-        $this->normalizeOptions($options);
-        $this->normalizeMatchingMode($mode, self::MATCH_EXPIRED, $options);
-        $args = new ArrayObject(array(
-            'mode'    => & $mode,
-            'options' => & $options,
-        ));
-
-        try {
-            $eventRs = $this->triggerPre(__FUNCTION__, $args);
-            if ($eventRs->stopped()) {
-                return $eventRs->last();
-            }
-
-            $result = $this->clearByPrefix('', $mode, $options);
-            return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
-        }
-    }
-
-    /**
-     * Clear by namespace
-     *
-     * @param int $mode
-     * @param array $options
-     * @return mixed
-     */
-    public function clearByNamespace($mode = self::MATCH_EXPIRED, array $options = array())
-    {
-        $this->normalizeOptions($options);
-        $this->normalizeMatchingMode($mode, self::MATCH_EXPIRED, $options);
-        $args = new ArrayObject(array(
-            'mode'    => & $mode,
-            'options' => & $options,
-        ));
-
-        try {
-            $eventRs = $this->triggerPre(__FUNCTION__, $args);
-            if ($eventRs->stopped()) {
-                return $eventRs->last();
-            }
-
-            $prefix = $options['namespace'] . $this->getOptions()->getNamespaceSeparator();
-            $result = $this->clearByPrefix($prefix, $mode, $options);
-            return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
-        }
-    }
-
-    /**
-     * Optimize
-     *
-     * @param array $options
-     * @return bool|mixed
-     */
-    public function optimize(array $options = array())
-    {
-        $baseOptions = $this->getOptions();
-        if (!$baseOptions->getWritable()) {
-            return false;
-        }
-
-        $this->normalizeOptions($options);
-        $args = new ArrayObject(array(
-            'options' => & $options,
-        ));
-
-        try {
-            $eventRs = $this->triggerPre(__FUNCTION__, $args);
-            if ($eventRs->stopped()) {
-                return $eventRs->last();
-            }
-
-            if ($baseOptions->getDirLevel()) {
-                // removes only empty directories
-                $this->rmDir(
-                    $baseOptions->getCacheDir(),
-                    $options['namespace'] . $baseOptions->getNamespaceSeparator()
-                );
-            }
-
-            $result = true;
-            return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
-        }
-    }
-
-    /* status */
-
-    /**
-     * Get capabilities
-     *
-     * @return mixed
-     */
-    public function getCapabilities()
-    {
-        $args = new ArrayObject();
-
-        try {
-            $eventRs = $this->triggerPre(__FUNCTION__, $args);
-            if ($eventRs->stopped()) {
-                return $eventRs->last();
-            }
-
-            if ($this->capabilities === null) {
-                $this->capabilityMarker = new stdClass();
-                    $this->capabilities = new Capabilities(
-                    $this->capabilityMarker,
-                    array(
-                        'supportedDatatypes' => array(
-                            'NULL'     => 'string',
-                            'boolean'  => 'string',
-                            'integer'  => 'string',
-                            'double'   => 'string',
-                            'string'   => true,
-                            'array'    => false,
-                            'object'   => false,
-                            'resource' => false,
-                        ),
-                        'supportedMetadata'  => array('mtime', 'filespec'),
-                        'maxTtl'             => 0,
-                        'staticTtl'          => false,
-                        'tagging'            => true,
-                        'ttlPrecision'       => 1,
-                        'expiredRead'        => true,
-                        'maxKeyLength'       => 251, // 255 - strlen(.dat | .ifo)
-                        'namespaceIsPrefix'  => true,
-                        'namespaceSeparator' => $this->getOptions()->getNamespaceSeparator(),
-                        'iterable'           => true,
-                        'clearAllNamespaces' => true,
-                        'clearByNamespace'   => true,
-                    )
-                );
-
-                // set dynamic capibilities
-                $this->updateCapabilities();
-            }
-
-            $result = $this->capabilities;
-            return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
-        }
-    }
-
-    /**
-     * Get capacity
-     *
-     * @param array $options
-     * @return mixed
-     */
-    public function getCapacity(array $options = array())
-    {
-        $args = new ArrayObject();
-
-        try {
-            $eventRs = $this->triggerPre(__FUNCTION__, $args);
-            if ($eventRs->stopped()) {
-                return $eventRs->last();
-            }
-
-            $result = Utils::getDiskCapacity($this->getOptions()->getCacheDir());
-            return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
-        }
-    }
-
-    /* internal */
-
-    /**
-     * Remove a key
-     *
-     * @param $key
-     * @param array $options
-     * @throws ItemNotFoundException
-     */
-    protected function internalRemoveItem($key, array &$options)
-    {
-        $filespec = $this->getFileSpec($key, $options['namespace']);
-
-        if (!$options['ignore_missing_items'] && !file_exists($filespec . '.dat')) {
-            throw new Exception\ItemNotFoundException("Key '{$key}' with file '{$filespec}.dat' not found");
-        }
-
-        $this->unlink($filespec . '.dat');
-        $this->unlink($filespec . '.ifo');
-        $this->lastInfoId = null;
-    }
-
-    /**
-     * Touch a key
-     *
-     * @param string $key
-     * @param array  $options
-     * @return bool
-     * @throws ItemNotFoundException|RuntimeException
-     */
-    protected function internalTouchItem($key, array &$options)
-    {
-        $keyInfo = $this->getKeyInfo($key, $options['namespace']);
+        $keyInfo = $this->getKeyInfo($normalizedKey, $normalizedOptions['namespace']);
         if (!$keyInfo) {
-            if ($options['ignore_missing_items']) {
-                return false;
-            } else {
+            if (!$normalizedOptions['ignore_missing_items']) {
                 throw new Exception\ItemNotFoundException(
-                    "Key '{$key}' not found within namespace '{$options['namespace']}'"
+                    "Key '{$normalizedKey}' not found within namespace '{$normalizedOptions['namespace']}'"
                 );
             }
+            return false;
         }
 
         ErrorHandler::start();
@@ -1195,7 +801,294 @@ class Filesystem extends AbstractAdapter
                 "Error touching file '{$keyInfo['filespec']}.dat'", 0, $error
             );
         }
+
+        // remove the buffered info
+        $this->lastInfoId = null;
+
+        return true;
     }
+
+    /**
+     * Remove an item.
+     *
+     * Options:
+     *  - namespace <string> optional
+     *    - The namespace to use (Default: namespace of object)
+     *  - ignore_missing_items <boolean> optional
+     *    - Throw exception on missing item
+     *
+     * @param  string $key
+     * @param  array  $options
+     * @return boolean
+     * @throws Exception
+     *
+     * @triggers removeItem.pre(PreEvent)
+     * @triggers removeItem.post(PostEvent)
+     * @triggers removeItem.exception(ExceptionEvent)
+     */
+    public function removeItem($key, array $options = array())
+    {
+        $baseOptions = $this->getOptions();
+        if ($baseOptions->getWritable() && $baseOptions->getClearStatCache()) {
+            clearstatcache();
+        }
+
+        return parent::removeItem($key, $options);
+    }
+
+    /**
+     * Remove multiple items.
+     *
+     * Options:
+     *  - namespace <string> optional
+     *    - The namespace to use (Default: namespace of object)
+     *  - ignore_missing_items <boolean> optional
+     *    - Throw exception on missing item
+     *
+     * @param  array $keys
+     * @param  array $options
+     * @return boolean
+     * @throws Exception
+     *
+     * @triggers removeItems.pre(PreEvent)
+     * @triggers removeItems.post(PostEvent)
+     * @triggers removeItems.exception(ExceptionEvent)
+     */
+    public function removeItems(array $keys, array $options = array())
+    {
+        $baseOptions = $this->getOptions();
+        if ($baseOptions->getWritable() && $baseOptions->getClearStatCache()) {
+            clearstatcache();
+        }
+
+        return parent::removeItems($keys, $options);
+    }
+
+    /**
+     * Internal method to remove an item.
+     *
+     * Options:
+     *  - namespace <string>
+     *    - The namespace to use
+     *  - ignore_missing_items <boolean>
+     *    - Throw exception on missing item
+     *
+     * @param  string $normalizedKey
+     * @param  array  $normalizedOptions
+     * @return boolean
+     * @throws Exception
+     */
+    protected function internalRemoveItem(& $normalizedKey, array & $normalizedOptions)
+    {
+        $filespec = $this->getFileSpec($normalizedKey, $normalizedOptions['namespace']);
+        if (!file_exists($filespec . '.dat')) {
+            if (!$normalizedOptions['ignore_missing_items']) {
+                throw new Exception\ItemNotFoundException("Key '{$normalizedKey}' with file '{$filespec}.dat' not found");
+            }
+        } else {
+            $this->unlink($filespec . '.dat');
+            $this->unlink($filespec . '.ifo');
+            $this->lastInfoId = null;
+        }
+        return true;
+    }
+
+    /* non-blocking */
+
+    /**
+     * internal method to find items.
+     *
+     * Options:
+     *  - ttl <float>
+     *    - The time-to-live
+     *  - namespace <string>
+     *    - The namespace to use
+     *
+     * @param  int   $normalizedMode Matching mode (Value of Adapter::MATCH_*)
+     * @param  array $normalizedOptions
+     * @return boolean
+     * @throws Exception
+     * @see    fetch()
+     * @see    fetchAll()
+     */
+    protected function internalFind(& $normalizedMode, array & $normalizedOptions)
+    {
+        if ($this->stmtActive) {
+            throw new Exception\RuntimeException('Statement already in use');
+        }
+
+        try {
+            $baseOptions = $this->getOptions();
+
+            $prefix = $normalizedOptions['namespace'] . $baseOptions->getNamespaceSeparator();
+            $find   = $baseOptions->getCacheDir()
+                    . str_repeat(\DIRECTORY_SEPARATOR . $prefix . '*', $baseOptions->getDirLevel())
+                    . \DIRECTORY_SEPARATOR . $prefix . '*.dat';
+            $glob   = new GlobIterator($find);
+
+            $this->stmtActive  = true;
+            $this->stmtGlob    = $glob;
+            $this->stmtMatch   = $normalizedMode;
+            $this->stmtOptions = $normalizedOptions;
+        } catch (BaseException $e) {
+            throw new Exception\RuntimeException("new GlobIterator({$find}) failed", 0, $e);
+        }
+
+        return true;
+    }
+
+    /**
+     * Internal method to fetch the next item from result set
+     *
+     * @return array|boolean The next item or false
+     * @throws Exception
+     */
+    protected function internalFetch()
+    {
+        if (!$this->stmtActive) {
+            return false;
+        }
+
+        if ($this->stmtGlob !== null) {
+            $result = $this->fetchByGlob();
+
+            if ($result === false) {
+                // clear statement
+                $this->stmtActive  = false;
+                $this->stmtGlob    = null;
+                $this->stmtMatch   = null;
+                $this->stmtOptions = null;
+            }
+        } else {
+            $result = parent::internalFetch();
+        }
+
+        return $result;
+    }
+
+    /* cleaning */
+
+    /**
+     * Internal method to clear items off all namespaces.
+     *
+     * @param  int   $normalizedMode Matching mode (Value of Adapter::MATCH_*)
+     * @param  array $normalizedOptions
+     * @return boolean
+     * @throws Exception
+     * @see    clearByNamespace()
+     */
+    protected function internalClear(& $normalizedMode, array & $normalizedOptions)
+    {
+        return $this->clearByPrefix('', $normalizedMode, $normalizedOptions);
+    }
+
+    /**
+     * Clear items by namespace.
+     *
+     * Options:
+     *  - ttl <float>
+     *    - The time-to-life
+     *  - namespace <string>
+     *    - The namespace to use
+     *  - tags <array>
+     *    - Tags to search for used with matching modes of Adapter::MATCH_TAGS_*
+     *
+     * @param  int   $normalizedMode Matching mode (Value of Adapter::MATCH_*)
+     * @param  array $normalizedOptions
+     * @return boolean
+     * @throws Exception
+     * @see    clear()
+     */
+    protected function internalClearByNamespace(& $normalizedMode, array & $normalizedOptions)
+    {
+        $prefix = $normalizedOptions['namespace'] . $this->getOptions()->getNamespaceSeparator();
+        return $this->clearByPrefix($prefix, $normalizedMode, $normalizedOptions);
+    }
+
+    /**
+     * Internal method to optimize adapter storage.
+     *
+     * Options:
+     *  - namespace <string>
+     *    - The namespace to use
+     *
+     * @param  array $normalizedOptions
+     * @return boolean
+     * @throws Exception
+     */
+    protected function internalOptimize(array & $normalizedOptions)
+    {
+        $baseOptions = $this->getOptions();
+        if ($baseOptions->getDirLevel()) {
+            // removes only empty directories
+            $this->rmDir(
+                $baseOptions->getCacheDir(),
+                $normalizedOptions['namespace'] . $baseOptions->getNamespaceSeparator()
+            );
+        }
+
+        return true;
+    }
+
+    /* status */
+
+    /**
+     * Internal method to get capabilities of this adapter
+     *
+     * @return Capabilities
+     */
+    protected function internalGetCapabilities()
+    {
+        if ($this->capabilities === null) {
+            $this->capabilityMarker = new stdClass();
+                $this->capabilities = new Capabilities(
+                $this->capabilityMarker,
+                array(
+                    'supportedDatatypes' => array(
+                        'NULL'     => 'string',
+                        'boolean'  => 'string',
+                        'integer'  => 'string',
+                        'double'   => 'string',
+                        'string'   => true,
+                        'array'    => false,
+                        'object'   => false,
+                        'resource' => false,
+                    ),
+                    'supportedMetadata'  => array('mtime', 'filespec'),
+                    'maxTtl'             => 0,
+                    'staticTtl'          => false,
+                    'tagging'            => true,
+                    'ttlPrecision'       => 1,
+                    'expiredRead'        => true,
+                    'maxKeyLength'       => 251, // 255 - strlen(.dat | .ifo)
+                    'namespaceIsPrefix'  => true,
+                    'namespaceSeparator' => $this->getOptions()->getNamespaceSeparator(),
+                    'iterable'           => true,
+                    'clearAllNamespaces' => true,
+                    'clearByNamespace'   => true,
+                )
+            );
+
+            // set dynamic capibilities
+            $this->updateCapabilities();
+        }
+
+        return $this->capabilities;
+    }
+
+    /**
+     * Internal method to get storage capacity.
+     *
+     * @param  array $normalizedOptions
+     * @return array|boolean Capacity as array or false on failure
+     * @throws Exception
+     */
+    protected function internalGetCapacity(array & $normalizedOptions)
+    {
+        return Utils::getDiskCapacity($this->getOptions()->getCacheDir());
+    }
+
+    /* internal */
 
     /**
      * Fetch by glob

@@ -81,6 +81,16 @@ class PredicateSet implements PredicateInterface, Countable
     }
 
     /**
+     * Return the predicates
+     *
+     * @return PredicateInterface[]
+     */
+    public function getPredicates()
+    {
+        return $this->predicates;
+    }
+
+    /**
      * Add predicate using OR operator
      * 
      * @param  PredicateInterface $predicate 

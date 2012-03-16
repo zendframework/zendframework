@@ -202,6 +202,7 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
         } else {
             if (is_string($predicate)) {
                 $predicate = new Predicate\Expression($predicate);
+                $this->where->addPredicate($predicate, $combination);
             } elseif (is_array($predicate)) {
                 foreach ($predicate as $pkey => $pvalue) {
                     if (is_string($pkey) && strpos($pkey, '?') !== false) {
@@ -211,9 +212,9 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
                     } else {
                         $predicate = new Predicate\Expression($pvalue);
                     }
+                    $this->where->addPredicate($predicate, $combination);
                 }
             }
-            $this->where->addPredicate($predicate, $combination);
         }
         return $this;
     }

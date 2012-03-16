@@ -10,34 +10,69 @@ class SelectTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
+     * @testdox unit test: Test from() returns Select object (is chainable)
      * @covers Zend\Db\Sql\Select::from
      */
     public function testFrom()
     {
         $select = new Select;
         $return = $select->from('foo', 'bar');
-        $this->assertInstanceOf('Zend\Db\Sql\Select', $return);
+        $this->assertSame($select, $return);
+        return $return;
+    }
+
+    /**
+     * @testdox unit test: Test getRawState() returns infromation populated via from()
+     * @covers Zend\Db\Sql\Select::getRawState
+     * @depends testFrom
+     */
+    public function testGetRawStateViaFrom(Select $select)
+    {
         $this->assertEquals('foo', $select->getRawState('table'));
         $this->assertEquals('bar', $select->getRawState('schema'));
     }
 
     /**
+     * @testdox unit test: Test columns() returns Select object (is chainable)
      * @covers Zend\Db\Sql\Select::columns
      */
     public function testColumns()
     {
         $select = new Select;
-        $select->columns(array('foo', 'bar'));
+        $return = $select->columns(array('foo', 'bar'));
+        $this->assertSame($select, $return);
+        return $select;
+    }
+
+    /**
+     * @testdox unit test: Test getRawState() returns information populated via columns()
+     * @covers Zend\Db\Sql\Select::getRawState
+     * @depends testColumns
+     */
+    public function testGetRawStateViaColumns(Select $select)
+    {
         $this->assertEquals(array('foo', 'bar'), $select->getRawState('columns'));
     }
 
     /**
+     * @testdox unit test: Test join() returns same Select object (is chainable)
      * @covers Zend\Db\Sql\Select::join
      */
     public function testJoin()
     {
         $select = new Select;
-        $select->join('foo', 'x = y', Select::SQL_WILDCARD, Select::JOIN_INNER);
+        $return = $select->join('foo', 'x = y', Select::SQL_WILDCARD, Select::JOIN_INNER);
+        $this->assertSame($select, $return);
+        return $return;
+    }
+
+    /**
+     * @testdox unit test: Test getRawState() returns information populated via join()
+     * @covers Zend\Db\Sql\Select::getRawState
+     * @depends testJoin
+     */
+    public function testGetRawStateViaJoin(Select $select)
+    {
         $this->assertEquals(
             array(array(
                 'name' => 'foo',
@@ -50,33 +85,123 @@ class SelectTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @testdox unit test: Test where() returns Select object (is chainable)
      * @covers Zend\Db\Sql\Select::where
      */
-    public function testWhere()
+    public function testWhereReturnsSameSelectObject()
+    {
+        $select = new Select;
+        $this->assertSame($select, $select->where('x = y'));
+    }
+
+    /**
+     * @testdox unit test: Test where() will accept a string for the predicate to create an expression predicate
+     * @covers Zend\Db\Sql\Select::where
+     */
+    public function testWhereArgument1IsString()
     {
         $select = new Select;
         $select->where('x = y');
-        $select->where(array('foo > ?' => 5));
-        $select->where(array('id' => 2));
-        $select->where(array('a = b'), Where::OP_OR);
-        $where = $select->where;
 
-        $predicates = $this->readAttribute($where, 'predicates');
-        $this->assertEquals('AND', $predicates[0][0]);
+        /** @var $where Where */
+        $where = $select->getRawState('where');
+        $predicates = $where->getPredicates();
+        $this->assertEquals(1, count($predicates));
         $this->assertInstanceOf('Zend\Db\Sql\Predicate\Expression', $predicates[0][1]);
+        $this->assertEquals(Where::OP_AND, $predicates[0][0]);
+        $this->assertEquals('x = y', $predicates[0][1]->getExpression());
+    }
 
-        $this->assertEquals('AND', $predicates[1][0]);
-        $this->assertInstanceOf('Zend\Db\Sql\Predicate\Expression', $predicates[1][1]);
+    /**
+     * @testdox unit test: Test where() will accept an array with a string key (containing ?) used as an expression with placeholder
+     * @covers Zend\Db\Sql\Select::where
+     */
+    public function testWhereArgument1IsAssociativeArrayContainingReplacementCharacter()
+    {
+        $select = new Select;
+        $select->where(array('foo > ?' => 5));
 
-        $this->assertEquals('AND', $predicates[2][0]);
-        $this->assertInstanceOf('Zend\Db\Sql\Predicate\Operator', $predicates[2][1]);
+        /** @var $where Where */
+        $where = $select->getRawState('where');
+        $predicates = $where->getPredicates();
+        $this->assertEquals(1, count($predicates));
+        $this->assertInstanceOf('Zend\Db\Sql\Predicate\Expression', $predicates[0][1]);
+        $this->assertEquals(Where::OP_AND, $predicates[0][0]);
+        $this->assertEquals('foo > ?', $predicates[0][1]->getExpression());
+        $this->assertEquals(array(5), $predicates[0][1]->getParameters());
+    }
 
-        $this->assertEquals('OR', $predicates[3][0]);
-        $this->assertInstanceOf('Zend\Db\Sql\Predicate\Expression', $predicates[3][1]);
+    /**
+     * @testdox unit test: Test where() will accept any array with string key (without ?) to be used as Operator predicate
+     * @covers Zend\Db\Sql\Select::where
+     */
+    public function testWhereArugment1IsAssociativeArrayNotContainingReplacementCharacter()
+    {
+        $select = new Select;
+        $select->where(array('name' => 'Ralph', 'age' => 33));
 
-        $where = new Where;
-        $select->where($where);
-        $this->assertSame($where, $select->where);
+        /** @var $where Where */
+        $where = $select->getRawState('where');
+        $predicates = $where->getPredicates();
+        $this->assertEquals(2, count($predicates));
+
+        $this->assertInstanceOf('Zend\Db\Sql\Predicate\Operator', $predicates[0][1]);
+        $this->assertEquals(Where::OP_AND, $predicates[0][0]);
+        $this->assertEquals('name', $predicates[0][1]->getLeft());
+        $this->assertEquals('Ralph', $predicates[0][1]->getRight());
+
+        $this->assertInstanceOf('Zend\Db\Sql\Predicate\Operator', $predicates[1][1]);
+        $this->assertEquals(Where::OP_AND, $predicates[1][0]);
+        $this->assertEquals('age', $predicates[1][1]->getLeft());
+        $this->assertEquals(33, $predicates[1][1]->getRight());
+    }
+
+    /**
+     * @testdox unit test: Test where() will accept an indexed array to be used by joining string expressions
+     * @covers Zend\Db\Sql\Select::where
+     */
+    public function testWhereArugment1IsIndexedArray()
+    {
+        $select = new Select;
+        $select->where(array('name = "Ralph"'));
+
+        /** @var $where Where */
+        $where = $select->getRawState('where');
+        $predicates = $where->getPredicates();
+        $this->assertEquals(1, count($predicates));
+
+        $this->assertInstanceOf('Zend\Db\Sql\Predicate\Expression', $predicates[0][1]);
+        $this->assertEquals(Where::OP_AND, $predicates[0][0]);
+        $this->assertEquals('name = "Ralph"', $predicates[0][1]->getExpression());
+    }
+
+    /**
+     * @testdox unit test: Test where() will accept an indexed array to be used by joining string expressions, combined by OR
+     * @covers Zend\Db\Sql\Select::where
+     */
+    public function testWhereArugment1IsIndexedArrayArgument2IsOr()
+    {
+        $select = new Select;
+        $select->where(array('name = "Ralph"'), Where::OP_OR);
+
+        /** @var $where Where */
+        $where = $select->getRawState('where');
+        $predicates = $where->getPredicates();
+        $this->assertEquals(1, count($predicates));
+
+        $this->assertInstanceOf('Zend\Db\Sql\Predicate\Expression', $predicates[0][1]);
+        $this->assertEquals(Where::OP_OR, $predicates[0][0]);
+        $this->assertEquals('name = "Ralph"', $predicates[0][1]->getExpression());
+    }
+
+    /**
+     * @testdox unit test: Test where() will accept a closure to be executed with Where object as argument
+     * @covers Zend\Db\Sql\Select::where
+     */
+    public function testWhereArugment1IsClosure()
+    {
+        $select = new Select;
+        $where = $select->getRawState('where');
 
         $test = $this;
         $select->where(function ($what) use ($test, $where) {
@@ -85,6 +210,18 @@ class SelectTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @testdox unit test: Test where() will accept a Where object
+     * @covers Zend\Db\Sql\Select::where
+     */
+    public function testWhereArugment1IsWhereObject()
+    {
+        $select = new Select;
+        $select->where($newWhere = new Where);
+        $this->assertSame($newWhere, $select->getRawState('where'));
+    }
+
+    /**
+     * @testdox unit test: Test prepareStatement() will produce expected sql and parameters based on a variety of provided arguments [uses data provider]
      * @covers Zend\Db\Sql\Select::prepareStatement
      * @dataProvider providerForPrepareStatement
      */
@@ -106,8 +243,6 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         if ($expectedParameters) {
             $this->assertEquals($expectedParameters, $parameterContainer->toArray());
         }
-
-
     }
 
     public function providerForPrepareStatement()
@@ -205,6 +340,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @testdox unit test: Test getSqlString() will produce expected sql and parameters based on a variety of provided arguments [uses data provider]
      * @covers Zend\Db\Sql\Select::getSqlString
      * @dataProvider providerForGetSqlString
      */
@@ -217,14 +353,19 @@ class SelectTest extends \PHPUnit_Framework_TestCase
     {
         $data = $this->providerForPrepareStatement();
 
-        // convert placeholders to actual values
+        // using prepare data, alter for use in getSqlString()
+
         $data[7][1] = 'SELECT (COUNT("some_column") + \'5\') AS "bar" FROM "foo"';
+        unset($data[7][2]); // remove parameters
+
         $data[12][1] = 'SELECT * FROM "foo" WHERE x = \'5\'';
+        unset($data[12][2]); // remove parameters
 
         return $data;
     }
 
     /**
+     * @testdox unit test: Test __get() returns expected objects magically
      * @covers Zend\Db\Sql\Select::__get
      */
     public function test__get()
@@ -234,6 +375,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @testdox unit test: Test __clone() will clone the where object so that this select can be used in multiple contexts
      * @covers Zend\Db\Sql\Select::__clone
      */
     public function test__clone()

@@ -27,15 +27,12 @@ use PHPUnit_Framework_TestCase as TestCase,
 
 class PredicateTest extends TestCase
 {
-    public function setUp()
-    {
-        $this->set = new Predicate();
-    }
 
     public function testEqualToCreatesOperatorPredicate()
     {
-        $this->set->equalTo('foo.bar', 'bar');
-        $parts = $this->set->getWhereParts();
+        $predicate = new Predicate();
+        $predicate->equalTo('foo.bar', 'bar');
+        $parts = $predicate->getExpressionData();
         $this->assertEquals(1, count($parts));
         $this->assertContains('%s = %s', $parts[0]);
         $this->assertContains(array('foo.bar', 'bar'), $parts[0]);
@@ -43,8 +40,9 @@ class PredicateTest extends TestCase
 
     public function testLessThanCreatesOperatorPredicate()
     {
-        $this->set->lessThan('foo.bar', 'bar');
-        $parts = $this->set->getWhereParts();
+        $predicate = new Predicate();
+        $predicate->lessThan('foo.bar', 'bar');
+        $parts = $predicate->getExpressionData();
         $this->assertEquals(1, count($parts));
         $this->assertContains('%s < %s', $parts[0]);
         $this->assertContains(array('foo.bar', 'bar'), $parts[0]);
@@ -52,8 +50,9 @@ class PredicateTest extends TestCase
 
     public function testGreaterThanCreatesOperatorPredicate()
     {
-        $this->set->greaterThan('foo.bar', 'bar');
-        $parts = $this->set->getWhereParts();
+        $predicate = new Predicate();
+        $predicate->greaterThan('foo.bar', 'bar');
+        $parts = $predicate->getExpressionData();
         $this->assertEquals(1, count($parts));
         $this->assertContains('%s > %s', $parts[0]);
         $this->assertContains(array('foo.bar', 'bar'), $parts[0]);
@@ -61,8 +60,9 @@ class PredicateTest extends TestCase
 
     public function testLessThanOrEqualToCreatesOperatorPredicate()
     {
-        $this->set->lessThanOrEqualTo('foo.bar', 'bar');
-        $parts = $this->set->getWhereParts();
+        $predicate = new Predicate();
+        $predicate->lessThanOrEqualTo('foo.bar', 'bar');
+        $parts = $predicate->getExpressionData();
         $this->assertEquals(1, count($parts));
         $this->assertContains('%s <= %s', $parts[0]);
         $this->assertContains(array('foo.bar', 'bar'), $parts[0]);
@@ -70,8 +70,9 @@ class PredicateTest extends TestCase
 
     public function testGreaterThanOrEqualToCreatesOperatorPredicate()
     {
-        $this->set->greaterThanOrEqualTo('foo.bar', 'bar');
-        $parts = $this->set->getWhereParts();
+        $predicate = new Predicate();
+        $predicate->greaterThanOrEqualTo('foo.bar', 'bar');
+        $parts = $predicate->getExpressionData();
         $this->assertEquals(1, count($parts));
         $this->assertContains('%s >= %s', $parts[0]);
         $this->assertContains(array('foo.bar', 'bar'), $parts[0]);
@@ -79,8 +80,9 @@ class PredicateTest extends TestCase
 
     public function testLikeCreatesLikePredicate()
     {
-        $this->set->like('foo.bar', 'bar%');
-        $parts = $this->set->getWhereParts();
+        $predicate = new Predicate();
+        $predicate->like('foo.bar', 'bar%');
+        $parts = $predicate->getExpressionData();
         $this->assertEquals(1, count($parts));
         $this->assertContains('%1$s LIKE %2$s', $parts[0]);
         $this->assertContains(array('foo.bar', 'bar%'), $parts[0]);
@@ -88,8 +90,9 @@ class PredicateTest extends TestCase
 
     public function testLiteralCreatesLiteralPredicate()
     {
-        $this->set->literal('foo.bar = ?', 'bar');
-        $parts = $this->set->getWhereParts();
+        $predicate = new Predicate();
+        $predicate->literal('foo.bar = ?', 'bar');
+        $parts = $predicate->getExpressionData();
         $this->assertEquals(1, count($parts));
         $this->assertContains('foo.bar = %s', $parts[0]);
         $this->assertContains(array('bar'), $parts[0]);
@@ -97,8 +100,9 @@ class PredicateTest extends TestCase
 
     public function testIsNullCreatesIsNullPredicate()
     {
-        $this->set->isNull('foo.bar');
-        $parts = $this->set->getWhereParts();
+        $predicate = new Predicate();
+        $predicate->isNull('foo.bar');
+        $parts = $predicate->getExpressionData();
         $this->assertEquals(1, count($parts));
         $this->assertContains('%1$s IS NULL', $parts[0]);
         $this->assertContains(array('foo.bar'), $parts[0]);
@@ -106,8 +110,9 @@ class PredicateTest extends TestCase
 
     public function testIsNotNullCreatesIsNotNullPredicate()
     {
-        $this->set->isNotNull('foo.bar');
-        $parts = $this->set->getWhereParts();
+        $predicate = new Predicate();
+        $predicate->isNotNull('foo.bar');
+        $parts = $predicate->getExpressionData();
         $this->assertEquals(1, count($parts));
         $this->assertContains('%1$s IS NOT NULL', $parts[0]);
         $this->assertContains(array('foo.bar'), $parts[0]);
@@ -115,8 +120,9 @@ class PredicateTest extends TestCase
 
     public function testInCreatesInPredicate()
     {
-        $this->set->in('foo.bar', array('foo', 'bar'));
-        $parts = $this->set->getWhereParts();
+        $predicate = new Predicate();
+        $predicate->in('foo.bar', array('foo', 'bar'));
+        $parts = $predicate->getExpressionData();
         $this->assertEquals(1, count($parts));
         $this->assertContains('%1$s IN (%2$s)', $parts[0]);
         $this->assertContains(array('foo.bar', 'foo', 'bar'), $parts[0]);
@@ -124,8 +130,9 @@ class PredicateTest extends TestCase
 
     public function testBetweenCreatesBetweenPredicate()
     {
-        $this->set->between('foo.bar', 1, 10);
-        $parts = $this->set->getWhereParts();
+        $predicate = new Predicate();
+        $predicate->between('foo.bar', 1, 10);
+        $parts = $predicate->getExpressionData();
         $this->assertEquals(1, count($parts));
         $this->assertContains('%1$s BETWEEN %2$s AND %3$s', $parts[0]);
         $this->assertContains(array('foo.bar', 1, 10), $parts[0]);
@@ -133,12 +140,13 @@ class PredicateTest extends TestCase
 
     public function testCanChainPredicateFactoriesBetweenOperators()
     {
-        $this->set->isNull('foo.bar')
+        $predicate = new Predicate();
+        $predicate->isNull('foo.bar')
                   ->or
                   ->isNotNull('bar.baz')
                   ->and
                   ->equalTo('baz.bat', 'foo');
-        $parts = $this->set->getWhereParts();
+        $parts = $predicate->getExpressionData();
         $this->assertEquals(5, count($parts));
 
         $this->assertContains('%1$s IS NULL', $parts[0]);
@@ -157,13 +165,14 @@ class PredicateTest extends TestCase
 
     public function testCanNestPredicates()
     {
-        $this->set->isNull('foo.bar')
-                  ->nest
+        $predicate = new Predicate();
+        $predicate->isNull('foo.bar')
+                  ->nest()
                   ->isNotNull('bar.baz')
                   ->and
                   ->equalTo('baz.bat', 'foo')
-                  ->unnest;
-        $parts = $this->set->getWhereParts();
+                  ->unnest();
+        $parts = $predicate->getExpressionData();
 
         $this->assertEquals(7, count($parts));
 

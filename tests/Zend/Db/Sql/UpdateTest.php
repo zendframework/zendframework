@@ -35,7 +35,7 @@ class UpdateTest extends \PHPUnit_Framework_TestCase
     {
         $this->update->table('foo', 'bar');
         $this->assertEquals('foo', $this->readAttribute($this->update, 'table'));
-        $this->assertEquals('bar', $this->readAttribute($this->update, 'databaseOrSchema'));
+        $this->assertEquals('bar', $this->readAttribute($this->update, 'schema'));
     }
 
     /**
@@ -60,16 +60,16 @@ class UpdateTest extends \PHPUnit_Framework_TestCase
 
         $predicates = $this->readAttribute($where, 'predicates');
         $this->assertEquals('AND', $predicates[0][0]);
-        $this->assertInstanceOf('Zend\Db\Sql\Predicate\Literal', $predicates[0][1]);
+        $this->assertInstanceOf('Zend\Db\Sql\Predicate\Expression', $predicates[0][1]);
 
         $this->assertEquals('AND', $predicates[1][0]);
-        $this->assertInstanceOf('Zend\Db\Sql\Predicate\Literal', $predicates[1][1]);
+        $this->assertInstanceOf('Zend\Db\Sql\Predicate\Expression', $predicates[1][1]);
 
         $this->assertEquals('AND', $predicates[2][0]);
         $this->assertInstanceOf('Zend\Db\Sql\Predicate\Operator', $predicates[2][1]);
 
         $this->assertEquals('OR', $predicates[3][0]);
-        $this->assertInstanceOf('Zend\Db\Sql\Predicate\Literal', $predicates[3][1]);
+        $this->assertInstanceOf('Zend\Db\Sql\Predicate\Expression', $predicates[3][1]);
 
         $where = new Where;
         $this->update->where($where);

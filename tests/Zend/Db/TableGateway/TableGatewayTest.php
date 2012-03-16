@@ -77,10 +77,10 @@ class TableGatewayTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetDatabaseSchema()
     {
-        $this->assertNull($this->table->getDatabaseSchema());
+        $this->assertNull($this->table->getSchema());
 
         $table = new TableGateway('foo', $this->mockAdapter, 'FooSchema');
-        $this->assertEquals('FooSchema', $table->getDatabaseSchema());
+        $this->assertEquals('FooSchema', $table->getSchema());
     }
 
     /**

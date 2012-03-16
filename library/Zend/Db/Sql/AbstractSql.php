@@ -7,7 +7,9 @@ use Zend\Db\Adapter\Platform\PlatformInterface,
 
 abstract class AbstractSql
 {
-    protected function processExpression(ExpressionInterface $expression, PlatformInterface $platform, DriverInterface $driver = null)
+    protected $specifications = array();
+
+    protected function processExpression(ExpressionInterface $expression, PlatformInterface $platform, DriverInterface $driver = null, $namedParameterPrefix = null)
     {
         $return = array(
             'sql' => '',
@@ -16,6 +18,7 @@ abstract class AbstractSql
 
         if ($driver !== null) {
             $prepareType = $driver->getPrepareType();
+            $namedParameterPrefix = ($namedParameterPrefix) ?: 'exprParam';
         }
 
         $parts = $expression->getExpressionData();
@@ -37,7 +40,7 @@ abstract class AbstractSql
                                 $values[$vIndex] = $driver->formatParameterName(null);
                             } elseif ($prepareType == 'named') {
                                 // @todo use expression specific name
-                                $name = 'exprParam' . $expressionParamIndex++;
+                                $name = $namedParameterPrefix . $expressionParamIndex++;
                                 $return['parameters'][$name] = $value;
                                 $values[$vIndex] = $driver->formatParameterName($name);
                             }
@@ -46,11 +49,21 @@ abstract class AbstractSql
                         }
                     }
                 }
+
                 $expressionPart .= vsprintf($part[0], $values);
             }
         }
 
         $return['sql'] = $expressionPart;
         return $return;
+    }
+
+    protected function applySpecification($name, array $vArgs)
+    {
+        if (!array_key_exists($name, $this->specifications)) {
+            throw new \RuntimeException('Invalid specification index');
+        }
+
+        return vsprintf($this->specifications[$name], $vArgs);
     }
 }

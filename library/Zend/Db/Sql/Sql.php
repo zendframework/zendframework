@@ -30,5 +30,23 @@ namespace Zend\Db\Sql;
  */
 class Sql
 {
-    // @todo is this a facade for something?
+    public function createSelect($table = null, $schema = null)
+    {
+        return new Select($table, $schema);
+    }
+
+    public function createInsert($table = null, $schema = null)
+    {
+        return new Insert($table, $schema);
+    }
+
+    public function createUpdate($table = null, $schema = null)
+    {
+        return new Update($table, $schema);
+    }
+
+    public function createDelete($table = null, $schema = null)
+    {
+        return new Delete($table, $schema);
+    }
 }

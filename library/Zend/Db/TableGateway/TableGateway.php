@@ -56,7 +56,7 @@ class TableGateway implements TableGatewayInterface
     /**
      * @var null|string
      */
-    protected $databaseSchema = null;
+    protected $schema = null;
 
     /**
      * @var ResultSet
@@ -94,10 +94,10 @@ class TableGateway implements TableGatewayInterface
      * 
      * @param string $tableName
      * @param Adapter $adapter
-     * @param string $databaseSchema
+     * @param string $schema
      * @param ResultSet $selectResultPrototype 
      */
-    public function __construct($tableName, Adapter $adapter, $databaseSchema = null, ResultSet $selectResultPrototype = null)
+    public function __construct($tableName, Adapter $adapter, $schema = null, ResultSet $selectResultPrototype = null)
     {
         if (!is_string($tableName)) {
             throw new \InvalidArgumentException('Table name must be a string');
@@ -109,8 +109,8 @@ class TableGateway implements TableGatewayInterface
         // $this->setTableName($tableName);
         // $this->setAdapter($adapter);
 
-        if (is_string($databaseSchema)) {
-            $this->databaseSchema = $databaseSchema;
+        if (is_string($schema)) {
+            $this->schema = $schema;
         }
         $this->setSelectResultPrototype(($selectResultPrototype) ?: new ResultSet);
         $this->initializeSqlObjects();
@@ -141,9 +141,9 @@ class TableGateway implements TableGatewayInterface
      * 
      * @return null|string
      */
-    public function getDatabaseSchema()
+    public function getSchema()
     {
-        return $this->databaseSchema;
+        return $this->schema;
     }
 
     /**
@@ -256,7 +256,6 @@ class TableGateway implements TableGatewayInterface
     {
         $select = clone $this->sqlSelectPrototype;
 
-        $select->from($this->tableName, $this->databaseSchema);
         if ($where instanceof \Closure) {
             $where($select);
         } elseif ($where !== null) {
@@ -286,7 +285,7 @@ class TableGateway implements TableGatewayInterface
     public function insert($set)
     {
         $insert = clone $this->sqlInsertPrototype;
-        $insert->into($this->tableName, $this->databaseSchema);
+        $insert->into($this->tableName, $this->schema);
         $insert->values($set);
 
         $statement = $this->adapter->createStatement();
@@ -307,7 +306,7 @@ class TableGateway implements TableGatewayInterface
     public function update($set, $where = null)
     {
         $update = clone $this->sqlUpdatePrototype;
-        $update->table($this->tableName, $this->databaseSchema);
+        $update->table($this->tableName, $this->schema);
         $update->set($set);
         $update->where($where);
 
@@ -327,7 +326,7 @@ class TableGateway implements TableGatewayInterface
     public function delete($where)
     {
         $delete = clone $this->sqlDeletePrototype;
-        $delete->from($this->tableName, $this->databaseSchema);
+        $delete->from($this->tableName, $this->schema);
         if ($where instanceof \Closure) {
             $where($delete);
         } else {
@@ -376,16 +375,16 @@ class TableGateway implements TableGatewayInterface
     protected function initializeSqlObjects()
     {
         if (!$this->sqlSelectPrototype) {
-            $this->sqlSelectPrototype = new Select($this->tableName, $this->databaseSchema);
+            $this->sqlSelectPrototype = new Select($this->tableName, $this->schema);
         }
         if (!$this->sqlInsertPrototype) {
-            $this->sqlInsertPrototype = new Insert($this->tableName, $this->databaseSchema);
+            $this->sqlInsertPrototype = new Insert($this->tableName, $this->schema);
         }
         if (!$this->sqlUpdatePrototype) {
-            $this->sqlUpdatePrototype = new Update($this->tableName, $this->databaseSchema);
+            $this->sqlUpdatePrototype = new Update($this->tableName, $this->schema);
         }
         if (!$this->sqlDeletePrototype) {
-            $this->sqlDeletePrototype = new Delete($this->tableName, $this->databaseSchema);
+            $this->sqlDeletePrototype = new Delete($this->tableName, $this->schema);
         }
     }
 

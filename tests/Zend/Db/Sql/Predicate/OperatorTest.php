@@ -26,77 +26,81 @@ use PHPUnit_Framework_TestCase as TestCase,
 
 class OperatorTest extends TestCase
 {
-    public function setUp()
-    {
-        $this->predicate = new Operator();
-    }
 
     public function testEmptyConstructorYieldsNullLeftAndRightValues()
     {
-        $this->assertNull($this->predicate->getLeft());
-        $this->assertNull($this->predicate->getRight());
+        $operator = new Operator();
+        $this->assertNull($operator->getLeft());
+        $this->assertNull($operator->getRight());
     }
 
     public function testEmptyConstructorYieldsDefaultsForOperatorAndLeftAndRightTypes()
     {
-        $this->assertEquals(Operator::OP_EQ, $this->predicate->getOperator());
-        $this->assertEquals(Operator::TYPE_IDENTIFIER, $this->predicate->getLeftType());
-        $this->assertEquals(Operator::TYPE_VALUE, $this->predicate->getRightType());
+        $operator = new Operator();
+        $this->assertEquals(Operator::OP_EQ, $operator->getOperator());
+        $this->assertEquals(Operator::TYPE_IDENTIFIER, $operator->getLeftType());
+        $this->assertEquals(Operator::TYPE_VALUE, $operator->getRightType());
     }
 
     public function testCanPassAllValuesToConstructor()
     {
-        $predicate = new Operator('bar', '>=', 'foo.bar', Operator::TYPE_VALUE, Operator::TYPE_IDENTIFIER);
-        $this->assertEquals(Operator::OP_GTE, $predicate->getOperator());
-        $this->assertEquals('bar', $predicate->getLeft());
-        $this->assertEquals('foo.bar', $predicate->getRight());
-        $this->assertEquals(Operator::TYPE_VALUE, $predicate->getLeftType());
-        $this->assertEquals(Operator::TYPE_IDENTIFIER, $predicate->getRightType());
+        $operator = new Operator('bar', '>=', 'foo.bar', Operator::TYPE_VALUE, Operator::TYPE_IDENTIFIER);
+        $this->assertEquals(Operator::OP_GTE, $operator->getOperator());
+        $this->assertEquals('bar', $operator->getLeft());
+        $this->assertEquals('foo.bar', $operator->getRight());
+        $this->assertEquals(Operator::TYPE_VALUE, $operator->getLeftType());
+        $this->assertEquals(Operator::TYPE_IDENTIFIER, $operator->getRightType());
     }
 
     public function testLeftIsMutable()
     {
-        $this->predicate->setLeft('foo.bar');
-        $this->assertEquals('foo.bar', $this->predicate->getLeft());
+        $operator = new Operator();
+        $operator->setLeft('foo.bar');
+        $this->assertEquals('foo.bar', $operator->getLeft());
     }
 
     public function testRightIsMutable()
     {
-        $this->predicate->setRight('bar');
-        $this->assertEquals('bar', $this->predicate->getRight());
+        $operator = new Operator();
+        $operator->setRight('bar');
+        $this->assertEquals('bar', $operator->getRight());
     }
 
     public function testLeftTypeIsMutable()
     {
-        $this->predicate->setLeftType(Operator::TYPE_VALUE);
-        $this->assertEquals(Operator::TYPE_VALUE, $this->predicate->getLeftType());
+        $operator = new Operator();
+        $operator->setLeftType(Operator::TYPE_VALUE);
+        $this->assertEquals(Operator::TYPE_VALUE, $operator->getLeftType());
     }
 
     public function testRightTypeIsMutable()
     {
-        $this->predicate->setRightType(Operator::TYPE_IDENTIFIER);
-        $this->assertEquals(Operator::TYPE_IDENTIFIER, $this->predicate->getRightType());
+        $operator = new Operator();
+        $operator->setRightType(Operator::TYPE_IDENTIFIER);
+        $this->assertEquals(Operator::TYPE_IDENTIFIER, $operator->getRightType());
     }
 
     public function testOperatorIsMutable()
     {
-        $this->predicate->setOperator(Operator::OP_LTE);
-        $this->assertEquals(Operator::OP_LTE, $this->predicate->getOperator());
+        $operator = new Operator();
+        $operator->setOperator(Operator::OP_LTE);
+        $this->assertEquals(Operator::OP_LTE, $operator->getOperator());
     }
 
     public function testRetrievingWherePartsReturnsSpecificationArrayOfLeftAndRightAndArrayOfTypes()
     {
-        $this->predicate->setLeft('foo')
-                        ->setOperator('>=')
-                        ->setRight('foo.bar')
-                        ->setLeftType(Operator::TYPE_VALUE)
-                        ->setRightType(Operator::TYPE_IDENTIFIER);
+        $operator = new Operator();
+        $operator->setLeft('foo')
+            ->setOperator('>=')
+            ->setRight('foo.bar')
+            ->setLeftType(Operator::TYPE_VALUE)
+            ->setRightType(Operator::TYPE_IDENTIFIER);
         $expected = array(array(
             '%s >= %s',
             array('foo', 'foo.bar'),
             array(Operator::TYPE_VALUE, Operator::TYPE_IDENTIFIER),
         ));
-        $test = $this->predicate->getWhereParts();
+        $test = $operator->getExpressionData();
         $this->assertEquals($expected, $test, var_export($test, 1));
     }
 }

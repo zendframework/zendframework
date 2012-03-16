@@ -25,6 +25,7 @@ use Zend\Db\Adapter\Adapter,
     Zend\Db\Adapter\Driver\StatementInterface,
     Zend\Db\Adapter\Platform\PlatformInterface,
     Zend\Db\Adapter\Platform\Sql92,
+    Zend\Db\Adapter\ParameterContainerInterface,
     Zend\Db\Adapter\ParameterContainer;
 
 /**
@@ -36,26 +37,52 @@ use Zend\Db\Adapter\Adapter,
  *
  * @property Where $where
  */
-class Delete implements SqlInterface, PreparableSqlInterface
+class Delete extends AbstractSql implements SqlInterface, PreparableSqlInterface
 {
-    protected $specification        = 'DELETE FROM %1$s';
-    protected $databaseOrSchema     = null;
-    protected $table                = null;
+    const SPECIFICATION_DELETE = 'delete';
+    const SPECIFICATION_WHERE = 'where';
+
+    protected $specifications = array(
+        self::SPECIFICATION_DELETE => 'DELETE FROM %1$s',
+        self::SPECIFICATION_WHERE => 'WHERE %1$s'
+    );
+
+    /**
+     * @var string
+     */
+    protected $table = '';
+
+    /**
+     * @var null|string
+     */
+    protected $schema = null;
+
+    /**
+     * @var bool
+     */
     protected $emptyWhereProtection = true;
-    protected $set                  = array();
-    protected $where                = null;
+
+    /**
+     * @var array
+     */
+    protected $set = array();
+
+    /**
+     * @var null|string|Where
+     */
+    protected $where = null;
 
     /**
      * Constructor
      * 
      * @param  null|string $table 
-     * @param  null|string $databaseOrSchema 
+     * @param  null|string $schema
      * @return void
      */
-    public function __construct($table = null, $databaseOrSchema = null)
+    public function __construct($table = null, $schema = null)
     {
         if ($table) {
-            $this->from($table, $databaseOrSchema);
+            $this->from($table, $schema);
         }
         $this->where = new Where();
     }
@@ -64,14 +91,14 @@ class Delete implements SqlInterface, PreparableSqlInterface
      * Create from statement
      * 
      * @param  string $table 
-     * @param  null|string $databaseOrSchema 
+     * @param  null|string $schema
      * @return Delete
      */
-    public function from($table, $databaseOrSchema = null)
+    public function from($table, $schema = null)
     {
         $this->table = $table;
-        if ($databaseOrSchema) {
-            $this->databaseOrSchema = $databaseOrSchema;
+        if ($schema) {
+            $this->schema = $schema;
         }
         return $this;
     }
@@ -119,17 +146,31 @@ class Delete implements SqlInterface, PreparableSqlInterface
     {
         $driver   = $adapter->getDriver();
         $platform = $adapter->getPlatform();
+        $parameterContainer = $statement->getParameterContainer();
+
+        if (!$parameterContainer instanceof ParameterContainerInterface) {
+            $parameterContainer = new ParameterContainer();
+            $statement->setParameterContainer($parameterContainer);
+        }
 
         $table = $platform->quoteIdentifier($this->table);
-        if ($this->databaseOrSchema != '') {
-            $table = $platform->quoteIdentifier($this->databaseOrSchema)
+        if ($this->schema != '') {
+            $table = $platform->quoteIdentifier($this->schema)
                 . $platform->getIdentifierSeparator()
                 . $table;
         }
 
-        $sql = sprintf($this->specification, $table);
+        $sql = sprintf($this->specifications[self::SPECIFICATION_DELETE], $table);
+
+        // process where
+        if ($this->where->count() > 0) {
+            $whereParts = $this->processExpression($this->where, $platform, $adapter->getDriver(), 'where');
+            if (count($whereParts['parameters']) > 0) {
+                $parameterContainer->merge($whereParts['parameters']);
+            }
+            $sql .= ' ' . sprintf($this->specifications[self::SPECIFICATION_WHERE], $whereParts['sql']);
+        }
         $statement->setSql($sql);
-        $this->where->prepareStatement($adapter, $statement);
     }
 
     /**
@@ -145,12 +186,18 @@ class Delete implements SqlInterface, PreparableSqlInterface
         $platform = ($platform) ?: new Sql92;
         $table = $platform->quoteIdentifier($this->table);
 
-        if ($this->databaseOrSchema != '') {
-            $table = $platform->quoteIdentifier($this->databaseOrSchema) . $platform->getIdentifierSeparator() . $table;
+        if ($this->schema != '') {
+            $table = $platform->quoteIdentifier($this->schema) . $platform->getIdentifierSeparator() . $table;
         }
 
-        $sql = sprintf($this->specification, $table);
-        return $sql . $this->where->getSqlString($platform);
+        $sql = sprintf($this->specifications[self::SPECIFICATION_DELETE], $table);
+
+        if ($this->where->count() > 0) {
+            $whereParts = $this->processExpression($this->where, $platform, null, 'where');
+            $sql .= ' ' . sprintf($this->specifications[self::SPECIFICATION_WHERE], $whereParts['sql']);
+        }
+
+        return $sql;
     }
 
     /**

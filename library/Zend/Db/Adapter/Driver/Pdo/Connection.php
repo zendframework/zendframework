@@ -194,11 +194,13 @@ class Connection implements ConnectionInterface
 
         if (!isset($dsn) && isset($pdoDriver)) {
             $dsn = $pdoDriver . ':';
-            if (isset($hostname)) {
-                $dsn .= "hostname=$hostname;";
-            }
-            if (isset($database)) {
-                $dsn .= "dbname=$database;";
+            switch ($pdoDriver) {
+                case 'sqlite':
+                    $dsn .= $database;
+                    break;
+                default:
+                    $dsn .= (isset($hostname)) ? 'hostname=' . $hostname : '';
+                    $dsn .= (isset($database)) ? 'dbname=' . $database : '';
             }
         } elseif (!isset($dsn)) {
             throw new \Exception('A dsn was not provided or could not be constructed from your parameters');

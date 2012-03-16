@@ -4,7 +4,7 @@ namespace Zend\Db\Sql;
 
 class Expression implements ExpressionInterface
 {
-    protected $pseudoMarkers = array('?');
+    const PLACEHOLDER = '?';
 
     protected $expression = '';
     protected $parameters = array();
@@ -71,7 +71,19 @@ class Expression implements ExpressionInterface
                 ? self::TYPE_IDENTIFIER : self::TYPE_VALUE;
         }
 
-        $expression = str_replace($this->pseudoMarkers, '%s', $this->expression);
+        $expression = $this->expression;
+
+        if (count($parameters) > 0) {
+            $count = 0;
+            $expression = str_replace(self::PLACEHOLDER, '%s', $expression, $count);
+            if ($count !== count($parameters)) {
+                throw new \RuntimeException('The number of replacements in the expression does not match the number of parameters');
+            }
+
+            // Do I really want to support escaped placeholders? I think not
+            // $expression = preg_replace('#(?<!\\)([' . self::PLACEHOLDER . '])#', '%s', $expression, -1, $count);
+            // $expression = str_replace(, self::PLACEHOLDER, $expression);
+        }
 
         return array(array(
             $expression,

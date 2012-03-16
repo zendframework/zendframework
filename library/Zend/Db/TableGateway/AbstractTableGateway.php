@@ -91,8 +91,8 @@ abstract class AbstractTableGateway extends TableGateway
         }
 
 
-        if ($this->databaseSchema == null) {
-            $this->databaseSchema = $this->adapter->getDefaultSchema();
+        if ($this->schema == null) {
+            $this->schema = $this->adapter->getDefaultSchema();
         }
 
         if (!$this->selectResultPrototype) {

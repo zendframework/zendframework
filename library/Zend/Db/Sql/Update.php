@@ -25,6 +25,7 @@ use Zend\Db\Adapter\Adapter,
     Zend\Db\Adapter\Driver\StatementInterface,
     Zend\Db\Adapter\Platform\PlatformInterface,
     Zend\Db\Adapter\Platform\Sql92,
+    Zend\Db\Adapter\ParameterContainerInterface,
     Zend\Db\Adapter\ParameterContainer;
 
 /**
@@ -36,29 +37,55 @@ use Zend\Db\Adapter\Adapter,
  *
  * @property Where $where
  */
-class Update implements SqlInterface, PreparableSqlInterface
+class Update extends AbstractSql implements SqlInterface, PreparableSqlInterface
 {
+    const SPECIFICATION_UPDATE = 'update';
+    const SPECIFICATION_WHERE = 'where';
+
     const VALUES_MERGE = 'merge';
     const VALUES_SET   = 'set';
 
-    protected $specification        = 'UPDATE %1$s SET %2$s';
-    protected $databaseOrSchema     = null;
-    protected $table                = null;
+    protected $specifications = array(
+        self::SPECIFICATION_UPDATE => 'UPDATE %1$s SET %2$s',
+        self::SPECIFICATION_WHERE => 'WHERE %1$s'
+    );
+
+    /**
+     * @var string
+     */
+    protected $table = '';
+
+    /**
+     * @var null|string
+     */
+    protected $schema = null;
+
+    /**
+     * @var bool
+     */
     protected $emptyWhereProtection = true;
-    protected $set                  = array();
-    protected $where                = null;
+
+    /**
+     * @var array
+     */
+    protected $set = array();
+
+    /**
+     * @var string|Where
+     */
+    protected $where = null;
 
     /**
      * Constructor
      * 
      * @param  null|string $table 
-     * @param  null|string $databaseOrSchema 
+     * @param  null|string $schema
      * @return void
      */
-    public function __construct($table = null, $databaseOrSchema = null)
+    public function __construct($table = null, $schema = null)
     {
         if ($table) {
-            $this->table($table, $databaseOrSchema);
+            $this->table($table, $schema);
         }
         $this->where = new Where();
     }
@@ -67,14 +94,14 @@ class Update implements SqlInterface, PreparableSqlInterface
      * Specify table for statement
      * 
      * @param  string $table 
-     * @param  null|string $databaseOrSchema 
+     * @param  null|string $schema
      * @return Update
      */
-    public function table($table, $databaseOrSchema = null)
+    public function table($table, $schema = null)
     {
         $this->table = $table;
-        if ($databaseOrSchema) {
-            $this->databaseOrSchema = $databaseOrSchema;
+        if ($schema) {
+            $this->schema = $schema;
         }
         return $this;
     }
@@ -138,28 +165,6 @@ class Update implements SqlInterface, PreparableSqlInterface
         return $this;
     }
 
-    /*
-    public function isValid($throwException = self::VALID_RETURN_BOOLEAN)
-    {
-        if ($this->table == null || !is_string($this->table)) {
-            if ($throwException) throw new \Exception('A valid table name is required');
-            return false;
-        }
-
-        if (count($this->values) == 0) {
-            if ($throwException) throw new \Exception('Values are required for this insert object to be valid');
-            return false;
-        }
-
-        if (count($this->columns) > 0 && count($this->columns) != count($this->values)) {
-            if ($throwException) throw new \Exception('When columns are present, there needs to be an equal number of columns and values');
-            return false;
-        }
-
-        return true;
-    }
-    */
-
     /**
      * Prepare statement
      *
@@ -172,11 +177,17 @@ class Update implements SqlInterface, PreparableSqlInterface
         $driver   = $adapter->getDriver();
         $platform = $adapter->getPlatform();
         $parameterContainer = $statement->getParameterContainer();
+
+        if (!$parameterContainer instanceof ParameterContainerInterface) {
+            $parameterContainer = new ParameterContainer();
+            $statement->setParameterContainer($parameterContainer);
+        }
+
         $prepareType = $driver->getPrepareType();
 
         $table = $platform->quoteIdentifier($this->table);
-        if ($this->databaseOrSchema != '') {
-            $table = $platform->quoteIdentifier($this->databaseOrSchema)
+        if ($this->schema != '') {
+            $table = $platform->quoteIdentifier($this->schema)
                 . $platform->getIdentifierSeparator()
                 . $table;
         }
@@ -198,10 +209,18 @@ class Update implements SqlInterface, PreparableSqlInterface
             $set = implode(', ', $setSql);
         }
 
-        $sql = sprintf($this->specification, $table, $set);
+        $sql = sprintf($this->specifications[self::SPECIFICATION_UPDATE], $table, $set);
         $statement->setSql($sql);
 
-        $this->where->prepareStatement($adapter, $statement);
+        // process where
+        if ($this->where->count() > 0) {
+            $whereParts = $this->processExpression($this->where, $platform, $adapter->getDriver(), 'where');
+            if (count($whereParts['parameters']) > 0) {
+                $parameterContainer->merge($whereParts['parameters']);
+            }
+            $sql .= ' ' . sprintf($this->specifications[self::SPECIFICATION_WHERE], $whereParts['sql']);
+        }
+        $statement->setSql($sql);
     }
 
     /**
@@ -215,8 +234,8 @@ class Update implements SqlInterface, PreparableSqlInterface
         $platform = ($platform) ?: new Sql92;
         $table = $platform->quoteIdentifier($this->table);
 
-        if ($this->databaseOrSchema != '') {
-            $table = $platform->quoteIdentifier($this->databaseOrSchema) . $platform->getIdentifierSeparator() . $table;
+        if ($this->schema != '') {
+            $table = $platform->quoteIdentifier($this->schema) . $platform->getIdentifierSeparator() . $table;
         }
 
         $set = $this->set;
@@ -228,9 +247,10 @@ class Update implements SqlInterface, PreparableSqlInterface
             $set = implode(', ', $setSql);
         }
 
-        $sql = sprintf($this->specification, $table, $set);
+        $sql = sprintf($this->specifications[self::SPECIFICATION_UPDATE], $table, $set);
         if ($this->where->count() > 0) {
-            $sql .= $this->where->getSqlString($platform);
+            $whereParts = $this->processExpression($this->where, $platform, null, 'where');
+            $sql .= ' ' . sprintf($this->specifications[self::SPECIFICATION_WHERE], $whereParts['sql']);
         }
         return $sql;
     }

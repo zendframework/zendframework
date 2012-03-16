@@ -262,6 +262,16 @@ class TableGateway implements TableGatewayInterface
             $select->where($where);
         }
 
+        return $this->selectWith($select);
+    }
+
+    public function selectWith(Select $select)
+    {
+        $selectState = $select->getRawState();
+        if ($selectState['table'] != $this->tableName || $selectState['schema'] != $this->schema) {
+            throw new \RuntimeException('The table name and schema of the provided select object must match that of the table');
+        }
+
         $statement = $this->adapter->createStatement();
         $select->prepareStatement($this->adapter, $statement);
 
@@ -269,11 +279,6 @@ class TableGateway implements TableGatewayInterface
         $resultSet = clone $this->selectResultPrototype;
         $resultSet->setDataSource($result);
         return $resultSet;
-    }
-
-    public function selectWith(Select $select)
-    {
-
     }
 
     /**

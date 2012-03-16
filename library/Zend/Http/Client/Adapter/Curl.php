@@ -365,7 +365,11 @@ class Curl implements HttpAdapter, Stream
 
         // set additional headers
         $headers['Accept'] = '';
-        curl_setopt($this->curl, CURLOPT_HTTPHEADER, $headers);
+        $curlHeaders = array();
+        foreach ($headers as $key => $value) {
+            $curlHeaders[] = $key . ': ' . $value;
+        }
+        curl_setopt($this->curl, CURLOPT_HTTPHEADER, $curlHeaders);
 
         /**
          * Make sure POSTFIELDS is set after $curlMethod is set:

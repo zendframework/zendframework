@@ -22,7 +22,9 @@ namespace Zend\Config;
 
 use Countable,
     Iterator,
-    ArrayAccess;
+    ArrayAccess,
+    Zend\Stdlib\ArrayUtils
+;
 
 /**
  * @category   Zend
@@ -335,26 +337,34 @@ class Config implements Countable, Iterator, ArrayAccess
     /**
      * Merge another Config with this one.
      *
-     * The items in $merge will override the same named items in the current
-     * config.
+     * For duplicate keys, the following will be performed:
+     * - Nested Configs will be recursively merged.
+     * - Items in $merge with INTEGER keys will be appended.
+     * - Items in $merge with STRING keys will overwrite current values.
      *
-     * @param  self $merge
-     * @return self
+     * @param  Config $replace
+     * @return Config
      */
     public function merge(self $merge)
     {
-        foreach ($merge as $key => $item) {
+        foreach ($merge as $key => $value) {
             if (array_key_exists($key, $this->data)) {
-                if ($item instanceof self && $this->data[$key] instanceof self) {
-                    $this->data[$key] = $this->data[$key]->merge(new self($item->toArray(), $this->allowModifications));
+                if (is_int($key)) {
+                    $this->data[] = $value;
+                } elseif ($value instanceof self && $this->data[$key] instanceof self) {
+                    $this->data[$key]->merge($value);
                 } else {
-                    $this->data[$key] = $item;
+                    if ($value instanceof self) {
+                        $this->data[$key] = new self($value->toArray(), $this->allowModifications);
+                    } else {
+                        $this->data[$key] = $value;
+                    }
                 }
             } else {
-                if ($item instanceof self) {
-                    $this->data[$key] = new self($item->toArray(), $this->allowModifications);
+                if ($value instanceof self) {
+                    $this->data[$key] = new self($value->toArray(), $this->allowModifications);
                 } else {
-                    $this->data[$key] = $item;
+                    $this->data[$key] = $value;
                 }
             }
         }

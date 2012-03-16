@@ -12,7 +12,7 @@ use ArrayObject,
     Zend\Http\PhpEnvironment\Response as PhpHttpResponse,
     Zend\Uri\Http as HttpUri,
     Zend\Stdlib\Dispatchable,
-    Zend\Stdlib\IsAssocArray,
+    Zend\Stdlib\ArrayUtils,
     Zend\Stdlib\Parameters,
     Zend\Stdlib\RequestDescription as Request,
     Zend\Stdlib\ResponseDescription as Response;
@@ -390,7 +390,7 @@ class Application implements AppContext
         complete:
 
         if (!is_object($return)) {
-            if (IsAssocArray::test($return)) {
+            if (ArrayUtils::hasStringKeys($return)) {
                 $return = new ArrayObject($return, ArrayObject::ARRAY_AS_PROPS);
             }
         }

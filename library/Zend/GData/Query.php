@@ -29,8 +29,6 @@ namespace Zend\GData;
  * Queries are not defined for APP, but are provided by Gdata services
  * as an extension.
  *
- * @uses       \Zend\GData\App\Exception
- * @uses       \Zend\GData\App\Util
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Gdata

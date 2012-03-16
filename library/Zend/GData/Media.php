@@ -28,7 +28,6 @@ namespace Zend\GData;
  * Service class for interacting with the services which use the media extensions
  * @link http://code.google.com/apis/gdata/calendar.html
  *
- * @uses       \Zend\GData\GData
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Media

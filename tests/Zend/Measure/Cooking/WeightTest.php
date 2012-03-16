@@ -23,8 +23,10 @@
  * @namespace
  */
 namespace ZendTest\Measure\Cooking;
-use Zend\Measure\Cooking;
-use Zend\Measure;
+use Zend\Measure,
+    Zend\Measure\Cooking,
+    ZendTest\Measure\CommonTestCase;
+
 
 /**
  * @category   Zend
@@ -34,7 +36,7 @@ use Zend\Measure;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Measure
  */
-class WeightTest extends \PHPUnit_Framework_TestCase
+class WeightTest extends CommonTestCase
 {
     /**
      * test for Mass initialisation

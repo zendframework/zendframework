@@ -259,21 +259,22 @@ class ModuleAutoloader implements SplAutoloader
      */
     public function registerPaths($paths)
     {
-        if (is_array($paths) || $paths instanceof Traversable) {
-            foreach ($paths as $module => $path) {
-                if (is_string($module)) {
-                    $this->registerPath($path, $module);
-                } else {
-                    $this->registerPath($path);
-                }
-            }
-        } else {
+        if (!is_array($paths) && !$paths instanceof Traversable) {
             throw new \InvalidArgumentException(
                 'Parameter to \\Zend\\Loader\\ModuleAutoloader\'s '
                 . 'registerPaths method must be an array or '
                 . 'implement the \\Traversable interface'
             );
         }
+
+        foreach ($paths as $module => $path) {
+            if (is_string($module)) {
+                $this->registerPath($path, $module);
+            } else {
+                $this->registerPath($path);
+            }
+        }
+
         return $this;
     }
 

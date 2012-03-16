@@ -3,7 +3,7 @@
 require_once dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . 'Bootstrap.php';
 
 
-use Zend\Config\Ini;
+use Zend\Config\Factory as ConfigFactory;
 use Zend\Service\LiveDocx\Helper;
 use Zend\Service\LiveDocx\MailMerge;
 
@@ -15,7 +15,7 @@ Helper::printLine(
     PHP_EOL
 );
 
-$options = new Ini('credentials.ini');
+$options = ConfigFactory::fromFile('credentials.ini', true);
 
 $mailMerge = new MailMerge($options);
 

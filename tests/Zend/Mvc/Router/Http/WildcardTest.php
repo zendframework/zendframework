@@ -67,6 +67,12 @@ class WildcardTest extends TestCase
                 array(),
                 true
             ),
+            'url-encoded-parameters-are-decoded' => array(
+                new Wildcard(),
+                '/foo/foo+bar',
+                null,
+                array('foo' => 'foo bar')
+            ),
         );
     }
 

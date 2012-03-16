@@ -53,6 +53,12 @@ class Cache implements Savable
     protected $sessionName;
 
     /**
+     * The cache storage adapter
+     * @var StorageAdapter
+     */
+    protected $storageAdapter;
+
+    /**
      * Constructor
      *
      * @param  Zend\Cache\Storage\Adapter $storageAdapter

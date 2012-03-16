@@ -111,7 +111,7 @@ class Di implements DependencyInjection
      */
     public function get($name, array $params = array())
     {
-        array_push($this->instanceContext, array('GET', $name));
+        array_push($this->instanceContext, array('GET', $name, null));
 
         $im = $this->instanceManager;
 

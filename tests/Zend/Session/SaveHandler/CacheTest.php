@@ -24,7 +24,8 @@ namespace ZendTest\Session\SaveHandler;
 use Zend\Session\SaveHandler\Cache,
     Zend\Session\SaveHandler\Exception as SaveHandlerException,
     Zend\Session\Manager,
-    Zend\Cache\Storage\Adapter\Memory;
+    Zend\Cache\StorageFactory as CacheFactory,
+    Zend\Cache\Storage\Adapter as CacheAdapter;
 
 /**
  * Unit testing for DbTable include all tests for
@@ -41,9 +42,9 @@ use Zend\Session\SaveHandler\Cache,
 class CacheTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Zend\Cache\Storage\Adapter\Memory
+     * @var Zend\Cache\Storage\Adapter
      */
-    protected $memory;
+    protected $cache;
 
     /**
      * @var string
@@ -60,14 +61,13 @@ class CacheTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->memory = new Memory();
+        $this->cache = CacheFactory::adapterFactory('memory', array('memory_limit' => 0));
         $this->testArray = array('foo' => 'bar', 'bar' => array('foo' => 'bar'));
     }
 
     public function testReadWrite()
     {
-        $this->_usedSaveHandlers[] =
-            $saveHandler = new Cache($this->memory);
+        $this->_usedSaveHandlers[] = $saveHandler = new Cache($this->cache);
 
         $id = '242';
 
@@ -79,7 +79,7 @@ class CacheTest extends \PHPUnit_Framework_TestCase
 
     public function testReadWriteComplex()
     {
-        $saveHandler = new Cache($this->memory);
+        $saveHandler = new Cache($this->cache);
         $saveHandler->open('savepath', 'sessionname');
 
         $id = '242';
@@ -91,8 +91,7 @@ class CacheTest extends \PHPUnit_Framework_TestCase
 
     public function testReadWriteTwice()
     {
-        $this->_usedSaveHandlers[] =
-            $saveHandler = new Cache($this->memory);
+        $this->_usedSaveHandlers[] = $saveHandler = new Cache($this->cache);
 
         $id = '242';
 

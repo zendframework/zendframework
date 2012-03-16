@@ -41,57 +41,13 @@ class CurrencyTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        $this->_cacheDir = sys_get_temp_dir() . '/zend_currency';
-        $this->_removeRecursive($this->_cacheDir);
-        mkdir($this->_cacheDir);
-
-        $this->_cache = CacheFactory::factory(array(
-            'adapter' => array(
-                'name' => 'Filesystem',
-                'options' => array(
-                    'ttl'       => 120,
-                    'cache_dir' => $this->_cacheDir,
-                )
-            ),
-            'plugins' => array(
-                array(
-                    'name' => 'serializer',
-                    'options' => array(
-                        'serializer' => 'php_serialize',
-                    ),
-                ),
-            ),
-        ));
-
+        $this->_cache = CacheFactory::adapterFactory('memory', array('memory_limit' => 0));
         Currency\Currency::setCache($this->_cache);
     }
 
     public function tearDown()
     {
-        Currency\Currency::clearCache();
-        $this->_cache->clear(CacheAdapter::MATCH_ALL);
-        $this->_removeRecursive($this->_cacheDir);
-    }
-
-    protected function _removeRecursive($dir)
-    {
-        if (file_exists($dir)) {
-            $dirIt = new \DirectoryIterator($dir);
-            foreach ($dirIt as $entry) {
-                $fname = $entry->getFilename();
-                if ($fname == '.' || $fname == '..') {
-                    continue;
-                }
-
-                if ($entry->isFile()) {
-                    unlink($entry->getPathname());
-                } else {
-                    $this->_removeRecursive($entry->getPathname());
-                }
-            }
-
-            rmdir($dir);
-        }
+        Currency\Currency::clearCache(CacheAdapter::MATCH_ALL);
     }
 
     /**

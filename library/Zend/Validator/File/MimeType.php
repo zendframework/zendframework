@@ -25,7 +25,7 @@ namespace Zend\Validator\File;
 
 use Traversable,
     Zend\Loader,
-    Zend\Stdlib\IteratorToArray,
+    Zend\Stdlib\ArrayUtils,
     Zend\Validator\AbstractValidator,
     Zend\Validator\Exception;
 
@@ -117,7 +117,7 @@ class MimeType extends AbstractValidator
     public function __construct($options = null)
     {
         if ($options instanceof Traversable) {
-            $options = IteratorToArray::convert($options);
+            $options = ArrayUtils::iteratorToArray($options);
         } elseif (is_string($options)) {
             $this->setMimeType($options);
             $options = array();

@@ -152,6 +152,17 @@ class RequestTest extends TestCase
                 '/dir',
                 '/dir'
             ),
+            array(
+                array(
+                    'SCRIPT_NAME'     => '/~username/public/index.php',
+                    'REQUEST_URI'     => '/~username/public/',
+                    'PHP_SELF'        => '/~username/public/index.php',
+                    'SCRIPT_FILENAME' => '/Users/username/Sites/public/index.php',
+                    'ORIG_SCRIPT_NAME'=> null
+                ),
+                '/~username/public',
+                '/~username/public'
+            ),
         );
     }
 

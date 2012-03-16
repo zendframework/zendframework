@@ -309,7 +309,7 @@ class ClientSuccess extends Http\Client
         $response = new ResponseSuccess;
         return $response;
     }
-    public function getBody(){return $this->_prepareBody();}
+    public function getBody(){return $this->prepareBody();}
 }
 class ClientFail extends Http\Client
 {
@@ -317,7 +317,7 @@ class ClientFail extends Http\Client
         $response = new ResponseFail;
         return $response;
     }
-    public function getBody(){return $this->_prepareBody();}
+    public function getBody(){return $this->prepareBody();}
 }
 class ResponseSuccess
 {

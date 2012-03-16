@@ -22,7 +22,8 @@
 namespace Zend\View\Model;
 
 use Traversable,
-    Zend\Stdlib\IteratorToArray;
+    Zend\Json\Json,
+    Zend\Stdlib\ArrayUtils;
 
 /**
  * @category   Zend
@@ -34,6 +35,21 @@ use Traversable,
 class JsonModel extends ViewModel
 {
     /**
+     * JSON probably won't need to be captured into a 
+     * a parent container by default.
+     * 
+     * @var string
+     */
+    protected $captureTo = null;
+
+    /**
+     * JSON is usually terminal
+     * 
+     * @var bool
+     */
+    protected $terminate = true;
+
+    /**
      * Serialize to JSON
      * 
      * @return string
@@ -42,8 +58,8 @@ class JsonModel extends ViewModel
     {
         $variables = $this->getVariables();
         if ($variables instanceof Traversable) {
-            $variables = IteratorToArray::convert($variables);
+            $variables = ArrayUtils::iteratorToArray($variables);
         }
-        return json_encode($variables);
+        return Json::encode($variables);
     }
 }

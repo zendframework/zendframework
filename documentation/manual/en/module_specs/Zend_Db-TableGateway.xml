@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" 
+    xml:id="zend.db.tablegateway">
+    <info><title>Zend\Db\TableGateway</title></info>
+
+    <para>
+        The Table Gateway object is intended to provide an object
+        that represents a table in a database, and the methods of
+        this object mirror the most common operations on a database
+        table.  In code, the interface for such an object looks like this:
+    </para>
+
+    <programlisting language="php"><![CDATA[
+interface Zend\Db\TableGateway\TableGatewayInterface
+{
+    public function getTableName();
+    public function select($where = null);
+    public function insert($set);
+    public function update($set, $where = null);
+    public function delete($where);
+}
+]]></programlisting>
+
+    <section xml:id="zend.db.tablegateway.by-example">
+        <info><title>Examples</title></info>
+
+        <para>
+            Here are a few examples of TableGateway usage
+        </para>
+
+        <section xml:id="zend.db.tablegateway.by-example.select">
+            <info><title>Selecting Rows</title></info>
+
+            <programlisting language="php"><![CDATA[
+$artistTable = new Zend\Db\TableGateway\TableGateway('artist', $adapter);
+$rowset = $artistTable->select(array('id' => 2));
+$row = $rowset->current();
+
+$name = $row['name'];
+$name2 = $row->name;
+]]></programlisting>
+        </section>
+
+        <section xml:id="zend.db.tablegateway.by-example.insert">
+            <info><title>Inserting Rows</title></info>
+
+            <programlisting language="php"><![CDATA[
+$artistTable = new Zend\Db\TableGateway\TableGateway('artist', $adapter);
+$result = $artistTable->insert(array(
+    'name' => 'New Artist',
+    'history' => 'This is the history'
+));
+
+// $result is rows affected by the insert
+
+$lastId = $artistTable->getLastInsertId();
+]]></programlisting>
+        </section>
+
+        <section xml:id="zend.db.tablegateway.by-example.update">
+            <info><title>Updating Rows</title></info>
+
+            <programlisting language="php"><![CDATA[
+$artistTable = new Zend\Db\TableGateway\TableGateway('artist', $adapter);
+$result = $artistTable->update(array('name' => 'New Artist'), array('id' => 2));
+
+$name = $row['name'];
+]]></programlisting>
+
+        </section>
+
+        <section xml:id="zend.db.tablegateway.by-example.delete">
+            <info><title>Deleting Rows</title></info>
+
+            <programlisting language="php"><![CDATA[
+$artistTable = new Zend\Db\TableGateway\TableGateway('artist', $adapter);
+$result = $artistTable->delete(array('id' => 2));
+]]></programlisting>
+        </section>
+
+        <section xml:id="zend.db.tablegateway.by-example.select-with-where">
+            <info><title>Using a Fluent Where With Select</title></info>
+
+            <programlisting language="php"><![CDATA[
+$artistTable = new TableGateway('artist', $adapter);
+$where = $select->where;
+$where->like('name', 'Bar%');
+$rowset = $artistTable->select($where);
+$row = $rowset->current();
+]]></programlisting>
+        </section>
+
+        <section xml:id="zend.db.tablegateway.by-example.select-with-closure">
+            <info><title>Using a Closure With Select</title></info>
+
+            <programlisting language="php"><![CDATA[
+$artistTable = new TableGateway('artist', $adapter);
+$rowset = $artistTable->select(function (Select $select) {
+    $select->where->like('name', 'Bar%');
+});
+$row = $rowset->current();
+]]></programlisting>
+        </section>
+
+        <section xml:id="zend.db.tablegateway.by-example.row-gateway">
+            <info><title>Row Gateway Integration</title></info>
+
+            <programlisting language="php"><![CDATA[
+$artistTable = new Zend\Db\TableGateway\TableGateway('artist', $adapter);
+$artistTable->setSelectResultPrototype(
+    new Zend\Db\ResultSet\ResultSet(new Zend\Db\RowGateway\RowGateway($artistTable, 'id'))
+);
+
+// find and update
+$rowset = $artistTable->select(array('id' => 2));
+$row = $rowset->current();
+$row['name'] = 'New Artist'; // array notation
+$affected = $row->save();
+
+// check
+$rowset = $artistTable->select(array('id' => 2));
+$row = $rowset->current();
+]]></programlisting>
+        </section>
+    </section>
+</section>

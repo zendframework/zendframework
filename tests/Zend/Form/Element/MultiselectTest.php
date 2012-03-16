@@ -26,8 +26,7 @@ use Zend\Form\Element\Multiselect as MultiselectElement,
     Zend\Form\Element\Xhtml as XhtmlElement,
     Zend\Form\Element,
     Zend\Form\Decorator,
-    Zend\Config\Xml as XMLConfig,
-    Zend\Config\Ini as INIConfig,
+    Zend\Config\Factory as ConfigFactory,
     Zend\Translator\Translator,
     Zend\View\Renderer\PhpRenderer as View;
 
@@ -157,13 +156,13 @@ class MultiselectTest extends \PHPUnit_Framework_TestCase
      */
     public function testCanSetMultiOptionsUsingConfigWithKeyValueKeys()
     {
-        $config = new XMLConfig(__DIR__ . '/../TestAsset/config/multiOptions.xml', 'testing');
+        $config = ConfigFactory::fromFile(__DIR__ . '/../TestAsset/config/multiOptions.xml', true)->get('testing');
         $this->element->setMultiOptions($config->options->toArray());
         $this->assertEquals($config->options->first->value, $this->element->getMultiOption('aa'));
         $this->assertEquals($config->options->second->value, $this->element->getMultiOption(2));
         $this->assertEquals($config->options->third->value, $this->element->getMultiOption('ssss'));
 
-        $config = new INIConfig(__DIR__ . '/../TestAsset/config/multiOptions.ini', 'testing');
+        $config = ConfigFactory::fromFile(__DIR__ . '/../TestAsset/config/multiOptions.ini', true)->get('testing');
         $this->element->setMultiOptions($config->options->toArray());
         $this->assertEquals($config->options->first->value, $this->element->getMultiOption('aa'));
         $this->assertEquals($config->options->second->value, $this->element->getMultiOption(2));

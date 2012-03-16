@@ -599,7 +599,7 @@ class Filesystem extends AbstractAdapter
 
         $info = null;
         if ($baseOptions->getReadControl()) {
-            $info['hash'] = Utils::generateHash($this->getReadControlAlgo(), $value, true);
+            $info['hash'] = Utils::generateHash($baseOptions->getReadControlAlgo(), $value, true);
             $info['algo'] = $baseOptions->getReadControlAlgo();
         }
 

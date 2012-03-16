@@ -28,7 +28,6 @@ namespace Zend\GData;
  * Service class for interacting with the services which use the
  * DublinCore extensions.
  *
- * @uses       \Zend\GData\GData
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage DublinCore

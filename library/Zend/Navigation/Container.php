@@ -27,7 +27,7 @@ use Countable,
     RecursiveIterator,
     RecursiveIteratorIterator,
     Traversable,
-    Zend\Stdlib\IteratorToArray;
+    Zend\Stdlib\ArrayUtils;
 
 /**
  * Zend_Navigation_Container

@@ -278,17 +278,8 @@ class Cldr extends AbstractLocale
 
         if (!isset(self::$_cache) && !self::$_cacheDisabled) {
             self::$_cache = CacheFactory::factory(array(
-                'adapter' => array(
-                    'name' => 'Filesystem',
-                ),
-                'plugins' => array(
-                    array(
-                        'name' => 'serializer',
-                        'options' => array(
-                            'serializer' => 'php_serialize',
-                        ),
-                    ),
-                ),
+                'adapter' => 'filesystem',
+                'plugins' => array('serializer'),
             ));
         }
 
@@ -1654,7 +1645,7 @@ class Cldr extends AbstractLocale
 
         if (self::hasCacheTagSupport()) {
             self::getCache()->setItem($cacheId, self::$_result, array('tags' => array('Zend_Locale')));
-        } else {
+        } elseif (self::hasCache()) {
             self::getCache()->setItem($cacheId, self::$_result);
         }
 

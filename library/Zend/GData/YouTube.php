@@ -30,20 +30,6 @@ use Zend\Http;
  * Service class for interacting with the YouTube Data API.
  * @link http://code.google.com/apis/youtube/
  *
- * @uses       \Zend\GData\App\Exception
- * @uses       \Zend\GData\App\HttpException
- * @uses       \Zend\GData\App\InvalidArgumentException
- * @uses       \Zend\GData\App\VersionException
- * @uses       \Zend\GData\Media
- * @uses       \Zend\GData\YouTube\ActivityFeed
- * @uses       \Zend\GData\YouTube\CommentFeed
- * @uses       \Zend\GData\YouTube\ContactFeed
- * @uses       \Zend\GData\YouTube\InboxFeed
- * @uses       \Zend\GData\YouTube\PlaylistListFeed
- * @uses       \Zend\GData\YouTube\PlaylistVideoFeed
- * @uses       \Zend\GData\YouTube\SubscriptionFeed
- * @uses       \Zend\GData\YouTube\VideoEntry
- * @uses       \Zend\GData\YouTube\VideoFeed
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage YouTube

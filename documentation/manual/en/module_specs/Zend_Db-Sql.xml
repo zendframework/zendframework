@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" 
+    xml:id="zend.db.sql">
+    <info><title>Zend\Db\Sql</title></info>
+
+    <para>
+        Zend\Db\Sql is a abstraction layer for building vendor and driver specific queries.
+        Zend\Db\Sql is capable of preparing a Zend\Db\Adapter Statement object, but is also
+        capable of producing SQL strings.
+    </para>
+
+    <section xml:id="zend.db.sql.primary">
+        <info><title>Primary Objects: Select, Insert, Update, Delete, Where</title></info>
+
+        <para>
+            The primary objects that to interact with are:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    Zend\Db\Sql\Select - SELECT abstraction
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    Zend\Db\Sql\Insert - INSERT abstraction
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    Zend\Db\Sql\Update - UPDATE abstraction
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    Zend\Db\Sql\Delete - DELETE abstraction
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    Zend\Db\Sql\Where - WHERE abstraction to be used with Select, Update and Delete
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            Each of these objects present their API in a fluent style, for example
+            the method signature from($table) instead of setTable($table).
+            To get a better understanding of the API these, these are the 4 primary
+            object interfaces:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+
+class Zend\Db\Sql\Select
+{
+    const JOIN_INNER = 'inner';
+    const JOIN_OUTER = 'outer';
+    const JOIN_LEFT = 'left';
+    const JOIN_RIGHT = 'right';
+    const SQL_WILDCARD = '*';
+
+    public function __construct($table = null, $databaseOrSchema = null);
+
+    // fluent API
+    public function from($table, $databaseOrSchema = null);
+    public function columns(array $columns);
+    public function join($name, $on, $columns = self::SQL_WILDCARD, $type = self::JOIN_INNER);
+    public function where($predicate, $combination = Predicate\PredicateSet::OP_AND);
+
+    // methods to generate statement and/or sql
+    public function prepareStatement(Adapter $adapter, StatementInterface $statement);
+    public function getSqlString(PlatformInterface $platform = null);
+}
+
+class Zend\Db\Sql\Insert
+{
+    public function __construct($table = null, $databaseOrSchema = null);
+
+    // fluent API
+    public function into($table, $databaseOrSchema = null);
+    public function columns(array $columns);
+    public function values(array $values, $flag = self::VALUES_SET);
+
+    // methods to generate statement and/or sql string
+    public function prepareStatement(Adapter $adapter, StatementInterface $statement);
+    public function getSqlString(PlatformInterface $platform = null);
+}
+
+class \Zend\Db\Sql\Update
+{
+    const VALUES_MERGE = 'merge';
+    const VALUES_SET   = 'set';
+
+    public function __construct($table = null, $databaseOrSchema = null);
+
+    // fluent API
+    public function table($table, $databaseOrSchema = null);
+    public function set(array $values, $flag = self::VALUES_SET);
+    public function where($predicate, $combination = Predicate\PredicateSet::OP_AND);
+
+    // methods to generate statement and/or sql string
+    public function prepareStatement(Adapter $adapter, StatementInterface $statement);
+    public function getSqlString(PlatformInterface $platform = null);
+
+}
+
+class Zend\Db\Sql\Delete
+{
+    public function __construct($table = null, $databaseOrSchema = null);
+
+    // fluent API
+    public function from($table, $databaseOrSchema = null);
+    public function where($predicate, $combination = Predicate\PredicateSet::OP_AND);
+
+    // methods to generate statement and/or sql string
+    public function prepareStatement(Adapter $adapter, StatementInterface $statement);
+    public function getSqlString(PlatformInterface $platform = null);
+
+}
+
+]]></programlisting>
+    </section>
+
+    <section xml:id="zend.db.sql.where">
+        <info><title>Where, Predicates and the Fluent Interface</title></info>
+
+        <para>
+            The Zend\Db\Sql\Where object is where much of the focus of getting
+            information of out a database is set upon.  A where clause in SQL is
+            composed of one or many predicates.  These predicates indicate some kind
+            of truth value to aid the database in selecting the proper rows
+            from a set.
+        </para>
+
+        <para>
+            The Zend\Db\Sql\Predicate namespace is where you will find various common
+            SQL predicates expressed as objects for consumption in a Where object.  The
+            following is a list of currently built-in predicte objects:
+        </para>
+        
+        <itemizedlist>
+            <listitem>
+                <para>
+                    Zend\Db\Sql\Predicate\Between: Check if an identifier is between two values
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    Zend\Db\Sql\Predicate\In: Check if an identifier is in an array of values
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    Zend\Db\Sql\Predicate\IsNotNull: Check if an identifier is not null
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    Zend\Db\Sql\Predicate\IsNull: Check if an identifier is null
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    Zend\Db\Sql\Predicate\Like: Check if an identifier matches a SQL LIKE expression value
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    Zend\Db\Sql\Predicate\Literal: Use an SQL fragment exactly as typed, using ? as parameter interpoation
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    Zend\Db\Sql\Predicate\Operator - Check how a particular value compares to another value, possible operators (=, !=, &gt;, &lt;,&gt;=, &lt;=)
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    Zend\Db\Sql\Predicate\PredicateSet - A nested set of additional Predicates that will be inside a SQL nest - .
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            Zend\Db\Sql\Where\Predicate also helps expose Zend\Db\Where as a fluent API.
+            Take the following example:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$where = new Zend\Db\Sql\Where();
+$where->like('name', 'Ralph%')
+      ->OR
+      ->NEST
+            ->greaterThanOrEqualTo('age', 30)
+            ->AND
+            ->lessThanOrEqualTo('age', 50)
+      ->UNNEST;
+]]></programlisting>
+
+        <para>
+            This API is possible due to Zend\Db\Sql\Where\Predicate, who's interface looks like this:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+class Zend\Db\Sql\Where\Predicate
+{
+    public $OR;
+    public $AND;
+    public $NEST;
+    public $UNNSET;
+
+    public function nest();
+    public function setUnnest(Predicate $predicate);
+    public function unnest();
+
+    public function equalTo($left, $right, $leftType = self::TYPE_IDENTIFIER, $rightType = self::TYPE_VALUE);
+    public function lessThan($left, $right, $leftType = self::TYPE_IDENTIFIER, $rightType = self::TYPE_VALUE);
+    public function greaterThan($left, $right, $leftType = self::TYPE_IDENTIFIER, $rightType = self::TYPE_VALUE);
+    public function lessThanOrEqualTo($left, $right, $leftType = self::TYPE_IDENTIFIER, $rightType = self::TYPE_VALUE);
+    public function greaterThanOrEqualTo($left, $right, $leftType = self::TYPE_IDENTIFIER, $rightType = self::TYPE_VALUE);
+    public function like($identifier, $like);
+    public function literal($literal, $parameter);
+    public function isNull($identifier);
+    public function isNotNull($identifier);
+    public function in($identifier, array $valueSet = array());
+    public function between($identifier, $minValue, $maxValue);
+}
+]]></programlisting>
+    </section>
+
+    <section xml:id="zend.db.sql.examples">
+        <info><title>Examples</title></info>
+
+        <section xml:id="zend.db.sql.examples.complex-where">
+            <info><title>Complex Where</title></info>
+
+            <programlisting language="php"><![CDATA[
+$where = new Zend\Db\Sql\Where();
+$where->equalTo('id', 1)->OR->equalTo('id', 2);
+echo $where->getSqlString() // WHERE "id" = '1' OR "id" = '2'
+
+$where = new Zend\Db\Sql\Where();
+$where->like('name', 'Ralph%')
+      ->OR
+      ->NEST
+            ->greaterThanOrEqualTo('age', 30)
+            ->AND
+            ->lessThanOrEqualTo('age', 50)
+      ->UNNEST;
+echo $where->getSqlString() // WHERE "name" LIKE 'Ralph%' OR ("age" >= '30' AND "age" <= '50')
+]]></programlisting>
+        </section>
+
+        <section xml:id="zend.db.sql.examples.select">
+            <info><title>Select Prepare</title></info>
+
+            <programlisting language="php"><![CDATA[
+use Zend\Db\Sql\Select,
+    Zend\Db\ResultSet\ResultSet;
+
+// instantiate select object
+$select = new Select;
+$select->from('artist')
+    ->join('album', 'artist.id = album.artist_id')
+    ->where->like('artist.name', 'Foo%');
+
+// create a statement to use
+$statment = $adapter->createStatement();
+
+// prepare statement with $select
+$select->prepareStatement($adapter, $statment);
+
+// instantiate a result set for result-as-object iteration
+$resultSet = new ResultSet();
+$resultSet->setDataSource($statment->execute());
+
+$albums = array();
+foreach ($resultSet as $row) {
+    $albums[] = $row->title;
+}
+]]></programlisting>
+        </section>
+    </section>
+</section>

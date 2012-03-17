@@ -43,21 +43,19 @@ use Zend\Config\Config,
  */
 class Client implements Dispatchable
 {
-    /**#@+
+    /**
      * @const string Supported HTTP Authentication methods
      */
     const AUTH_BASIC  = 'basic';
     const AUTH_DIGEST = 'digest';  // not implemented yet
-    /**#@-*/
 
-    /**#@+
+    /**
      * @const string POST data encoding methods
      */
     const ENC_URLENCODED = 'application/x-www-form-urlencoded';
     const ENC_FORMDATA   = 'multipart/form-data';
-    /**#@-*/
 
-    /**#@+
+    /**
      * @const string DIGEST Authentication
      */
     const DIGEST_REALM  = 'realm';
@@ -66,7 +64,6 @@ class Client implements Dispatchable
     const DIGEST_OPAQUE = 'opaque';
     const DIGEST_NC     = 'nc';
     const DIGEST_CNONCE = 'cnonce';
-    /**#@-*/
 
     /**
      * @var Response
@@ -478,7 +475,7 @@ class Client implements Dispatchable
      */
     public function addCookie($cookie, $value = null, $domain = null, $expire = null, $path = null, $secure = false, $httponly = true)
     {
-        if ($cookie instanceof \ArrayIterator) {
+        if (is_array($cookie) || $cookie instanceof \ArrayIterator) {
             foreach ($cookie as $setCookie) {
                 if ($setCookie instanceof SetCookie) {
                     $this->cookies[$this->getCookieId($setCookie)] = $setCookie;

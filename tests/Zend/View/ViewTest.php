@@ -145,6 +145,7 @@ class ViewTest extends TestCase
 
         $child2 = new Model\JsonModel(array('bar' => 'baz'));
         $child2->setCaptureTo('child2');
+        $child2->setTerminal(false);
 
         $this->model->setVariable('parent', 'node');
         $this->model->addChild($child1);

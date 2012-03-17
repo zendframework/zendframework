@@ -456,7 +456,6 @@ class Di implements DependencyInjection
             // PRIORITY 1 - consult user provided parameters
             if (isset($callTimeUserParams[$fqParamPos]) || isset($callTimeUserParams[$name])) {
 
-                // @todo FQ Name in call time params
                 if (isset($callTimeUserParams[$fqParamPos])) {
                     $callTimeCurValue =& $callTimeUserParams[$fqParamPos];
                 } elseif (isset($callTimeUserParams[$fqParamName])) {
@@ -501,7 +500,6 @@ class Di implements DependencyInjection
                     || isset($iConfig[$thisIndex]['parameters'][$fqParamName])
                     || isset($iConfig[$thisIndex]['parameters'][$name])) {
 
-                    // @todo FQ Name in config parameters
                     if (isset($iConfig[$thisIndex]['parameters'][$fqParamPos])) {
                         $iConfigCurValue =& $iConfig[$thisIndex]['parameters'][$fqParamPos];
                     } elseif (isset($iConfig[$thisIndex]['parameters'][$fqParamName])) {
@@ -602,7 +600,13 @@ class Di implements DependencyInjection
                     );
                 }
                 array_push($this->currentDependencies, $class);
-                $resolvedParams[$index] = $this->get($computedParams['required'][$fqParamPos][0], $callTimeUserParams);
+                $dConfig = $this->instanceManager->getConfiguration($computedParams['required'][$fqParamPos][0]);
+                if ($dConfig['shared'] == false) {
+                    $resolvedParams[$index] = $this->newInstance($computedParams['required'][$fqParamPos][0], $callTimeUserParams, false);
+                } else {
+                    $resolvedParams[$index] = $this->get($computedParams['required'][$fqParamPos][0], $callTimeUserParams);
+                }
+
                 array_pop($this->currentDependencies);
 
             } elseif (!array_key_exists($fqParamPos, $computedParams['optional'])) {

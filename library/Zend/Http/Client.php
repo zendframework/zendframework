@@ -464,7 +464,7 @@ class Client implements Dispatchable
     /**
      * Add a cookie
      *
-     * @param ArrayIterator|SetCookie|string $cookie
+     * @param array|ArrayIterator|SetCookie|string $cookie
      * @param string  $value
      * @param string  $domain
      * @param string  $expire

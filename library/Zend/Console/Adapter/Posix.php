@@ -161,14 +161,14 @@ class Posix extends AbstractAdapter implements Adapter
      * Show console cursor
      */
     public function showCursor(){
-        echo chr(27).'[?25h';
+        echo "\x1b[?25h";
     }
 
     /**
      * Hide console cursor
      */
     public function hideCursor(){
-        echo chr(27).'[?25l';
+        echo "\x1b[?25l";
     }
 
     /**
@@ -177,7 +177,7 @@ class Posix extends AbstractAdapter implements Adapter
      * @param int   $y
      */
     public function setPos($x, $y){
-        echo chr(27).'['.$y.';'.$x.'f';
+        echo "\x1b[".$y.';'.$x.'f';
     }
 
     /**
@@ -213,10 +213,10 @@ class Posix extends AbstractAdapter implements Adapter
         }
 
         return
-            ($color !== null ? chr(27).'['.$color.'m' : '').
-            ($bgColor !== null ? chr(27).'['.$bgColor.'m' : '').
+            ($color !== null ? "\x1b[".$color.'m' : '').
+            ($bgColor !== null ? "\x1b[".$bgColor.'m' : '').
             $string.
-            chr(27).'[22;39m'.chr(27).'[0;49m'
+            "\x1b[22;39m\x1b[0;49m"
         ;
     }
 
@@ -240,7 +240,7 @@ class Posix extends AbstractAdapter implements Adapter
             }
         }
 
-        echo chr(27).'['.$color.'m';
+        echo "\x1b[".$color.'m';
     }
 
     /**
@@ -262,7 +262,7 @@ class Posix extends AbstractAdapter implements Adapter
                 $bgColor = static::$ansiColorMap['bg'][$bgColor];
             }
         }
-        echo chr(27).'['.($bgColor).'m';
+        echo "\x1b[".($bgColor).'m';
     }
 
     /**
@@ -270,10 +270,10 @@ class Posix extends AbstractAdapter implements Adapter
      */
     public function resetColor()
     {
-        echo chr(27).'[0;49m'; // reset bg color
-        echo chr(27).'[22;39m'; // reset fg bold, bright and faint
-        echo chr(27).'[25;39m'; // reset fg blink
-        echo chr(27).'[24;39m'; // reset fg underline
+        echo "\x1b[0;49m"; // reset bg color
+        echo "\x1b[22;39m"; // reset fg bold, bright and faint
+        echo "\x1b[25;39m"; // reset fg blink
+        echo "\x1b[24;39m"; // reset fg underline
     }
 
     /**
@@ -339,7 +339,7 @@ class Posix extends AbstractAdapter implements Adapter
      * Reset color to console default.
      */
     public function clear(){
-        echo chr(27).'[2J'; // reset bg color
+        echo "\x1b[2J"; // reset bg color
         $this->setPos(1,1); // reset cursor position
     }
 

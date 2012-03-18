@@ -110,7 +110,7 @@ class Catchall implements Route
      */
     public static function factory($options = array())
     {
-        return new static();
+        return new static($options['defaults']);
     }
 
     /**

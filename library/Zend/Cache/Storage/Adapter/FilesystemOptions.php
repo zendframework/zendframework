@@ -329,7 +329,7 @@ class FilesystemOptions extends AdapterOptions
     public function setFileBlocking($flag)
     {
         $flag = (bool) $flag;
-        if ($flag && substr(\PHP_OS, 0, 3) == 'WIN') {
+        if (!$flag && substr(\PHP_OS, 0, 3) == 'WIN') {
             throw new Exception\InvalidArgumentException(
                 "This option can't be disabled on windows"
             );

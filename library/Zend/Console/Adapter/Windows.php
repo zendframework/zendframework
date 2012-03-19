@@ -69,7 +69,11 @@ class Windows extends Virtual implements Adapter
     }
 
     protected function runProbeCommand(){
-        $output = system('powershell -command "$size = $Host.ui.rawui.windowsize; write ""$($size.width)`t$($size.height)"""',$return);
+        exec(
+            'powershell -command "$size = $Host.ui.rawui.windowsize; write ""$($size.width)`t$($size.height)"""',
+            $output,
+            $return
+        );
         if($return || !$output){
             $this->probeResult = '';
         }else{

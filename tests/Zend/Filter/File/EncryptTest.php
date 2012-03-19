@@ -68,7 +68,7 @@ class EncryptTest extends \PHPUnit_Framework_TestCase
 
         $filter->setVector('testvect');
         $this->assertEquals(dirname(__DIR__).'/_files/newencryption.txt',
-            $filter(dirname(__DIR__).'/_files/encryption.txt'));
+            $filter->filter(dirname(__DIR__).'/_files/encryption.txt'));
 
         $this->assertEquals(
             'Encryption',
@@ -85,7 +85,7 @@ class EncryptTest extends \PHPUnit_Framework_TestCase
         $filter->setFilename(dirname(__DIR__).'/_files/newencryption.txt');
         $filter->setVector('testvect');
         $this->assertEquals(dirname(__DIR__).'/_files/newencryption.txt',
-            $filter(dirname(__DIR__).'/_files/encryption.txt'));
+            $filter->filter(dirname(__DIR__).'/_files/encryption.txt'));
 
         $this->assertNotEquals(
             'Encryption',
@@ -93,7 +93,7 @@ class EncryptTest extends \PHPUnit_Framework_TestCase
 
         $filter = new FileDecrypt();
         $filter->setVector('testvect');
-        $input = $filter(dirname(__DIR__).'/_files/newencryption.txt');
+        $input = $filter->filter(dirname(__DIR__).'/_files/newencryption.txt');
         $this->assertEquals(dirname(__DIR__).'/_files/newencryption.txt', $input);
 
         $this->assertEquals(
@@ -110,7 +110,7 @@ class EncryptTest extends \PHPUnit_Framework_TestCase
         $filter->setVector('testvect');
 
         $this->setExpectedException('\Zend\Filter\Exception\InvalidArgumentException', 'not found');
-        echo $filter(dirname(__DIR__).'/_files/nofile.txt');
+        echo $filter->filter(dirname(__DIR__).'/_files/nofile.txt');
     }
 
     /**
@@ -122,7 +122,7 @@ class EncryptTest extends \PHPUnit_Framework_TestCase
         $filter->setVector('testvect');
 
         copy(dirname(__DIR__).'/_files/encryption.txt', dirname(__DIR__).'/_files/newencryption.txt');
-        $filter(dirname(__DIR__).'/_files/newencryption.txt');
+        $filter->filter(dirname(__DIR__).'/_files/newencryption.txt');
 
         $this->assertNotEquals(
             'Encryption',

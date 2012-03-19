@@ -261,11 +261,12 @@ class LabelTest extends \PHPUnit_Framework_TestCase
 
     public function testSettingTagToEmptyValueShouldDisableTag()
     {
+        $this->decorator->setTag('span');
         $element = new Element\Text('foo', array('label' => 'Foo'));
         $this->decorator->setElement($element)
                         ->setTag('');
         $content = $this->decorator->render('');
-        $this->assertTrue(empty($content), $content);
+        $this->assertNotContains('<span', $content);
     }
 
     /**

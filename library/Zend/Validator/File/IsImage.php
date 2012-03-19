@@ -21,7 +21,7 @@
 namespace Zend\Validator\File;
 
 use Traversable,
-    Zend\Stdlib\IteratorToArray;
+    Zend\Stdlib\ArrayUtils;
 
 /**
  * Validator which checks if the file already exists in the directory
@@ -119,7 +119,7 @@ class IsImage extends MimeType
         );
 
         if ($options instanceof Traversable) {
-            $options = IteratorToArray::convert($options);
+            $options = ArrayUtils::iteratorToArray($options);
         }
 
         if (empty($options)) {

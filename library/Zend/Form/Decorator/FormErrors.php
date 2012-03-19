@@ -424,7 +424,7 @@ class FormErrors extends AbstractDecorator
         }
 
         return $this->getMarkupElementLabelStart()
-             . $view->vars()->escape($label)
+             . $view->escape($label)
              . $this->getMarkupElementLabelEnd();
     }
 

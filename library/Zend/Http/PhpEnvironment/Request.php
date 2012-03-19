@@ -285,14 +285,18 @@ class Request extends HttpRequest
         } else {
             // Backtrack up the SCRIPT_FILENAME to find the portion
             // matching PHP_SELF.
-            $path     = $phpSelf ?: '';
-            $segments = array_reverse(explode('/', trim($filename, '/')));
+            $path = $phpSelf ?: '';
+            if (!isset($path[1]) || $path[1] !== '~') {
+                $segments = array_reverse(explode('/', trim($filename, '/')));
+            } else {
+                $segments = array_reverse(explode('/', trim($path, '/')));
+            }
             $index    = 0;
             $last     = count($segments);
             $baseUrl  = '';
 
             do {
-                $segment  = $segments[$index];
+                $segment = $segments[$index];
                 $baseUrl = '/' . $segment . $baseUrl;
                 $index++;
             } while ($last > $index && false !== ($pos = strpos($path, $baseUrl)) && 0 !== $pos);

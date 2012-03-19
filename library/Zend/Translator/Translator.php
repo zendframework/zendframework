@@ -25,7 +25,7 @@ namespace Zend\Translator;
 
 use Traversable,
     Zend\Cache\Storage\Adapter as CacheAdapter,
-    Zend\Stdlib\IteratorToArray;
+    Zend\Stdlib\ArrayUtils;
 
 /**
  * @category   Zend
@@ -68,7 +68,7 @@ class Translator
     public function __construct($options = array())
     {
         if ($options instanceof Traversable) {
-            $options = IteratorToArray::convert($options);
+            $options = ArrayUtils::iteratorToArray($options);
         } elseif (func_num_args() > 1) {
             $args               = func_get_args();
             $options            = array();
@@ -101,7 +101,7 @@ class Translator
     public function setAdapter($options = array())
     {
         if ($options instanceof Traversable) {
-            $options = IteratorToArray::convert($options);
+            $options = ArrayUtils::iteratorToArray($options);
         } elseif (func_num_args() > 1) {
             $args               = func_get_args();
             $options            = array();

@@ -69,4 +69,10 @@ class ExpressionTest extends TestCase
         $test = $expression->getExpressionData();
         $this->assertEquals($expected, $test, var_export($test, 1));
     }
+
+    public function testAllowZeroParameterValue()
+    {
+        $predicate = new Literal('foo.bar > ?', 0);
+        $this->assertEquals(0, $predicate->getParameter());
+    }
 }

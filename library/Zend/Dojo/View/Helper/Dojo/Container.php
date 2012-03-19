@@ -1122,18 +1122,19 @@ EOJ;
      */
     protected function _renderExtras()
     {
-        $js = array();
+        $js          = array();
         $modulePaths = $this->getModulePaths();
+        $escape      = $this->view->plugin('escape');
         if (!empty($modulePaths)) {
             foreach ($modulePaths as $module => $path) {
-                $js[] =  'dojo.registerModulePath("' . $this->view->vars()->escape($module) . '", "' . $this->view->vars()->escape($path) . '");';
+                $js[] =  'dojo.registerModulePath("' . $escape($module) . '", "' . $escape($path) . '");';
             }
         }
 
         $modules = $this->getModules();
         if (!empty($modules)) {
             foreach ($modules as $module) {
-                $js[] = 'dojo.require("' . $this->view->vars()->escape($module) . '");';
+                $js[] = 'dojo.require("' . $escape($module) . '");';
             }
         }
 

@@ -26,7 +26,7 @@ namespace Zend\Mvc\Router\Http;
 
 use Zend\Mvc\Router\Exception,
     Traversable,
-    Zend\Stdlib\IteratorToArray,
+    Zend\Stdlib\ArrayUtils,
     Zend\Mvc\Router\SimpleRouteStack,
     Zend\Mvc\Router\Route as BaseRoute,
     Zend\Mvc\Router\Http\Route,
@@ -73,6 +73,7 @@ class TreeRouteStack extends SimpleRouteStack
             'scheme'   => __NAMESPACE__ . '\Scheme',
             'segment'  => __NAMESPACE__ . '\Segment',
             'wildcard' => __NAMESPACE__ . '\Wildcard',
+            'query'    => __NAMESPACE__ . '\Query',
         ));
     }
 
@@ -104,7 +105,7 @@ class TreeRouteStack extends SimpleRouteStack
     protected function routeFromArray($specs)
     {
         if ($specs instanceof Traversable) {
-            $specs = IteratorToArray::convert($specs);
+            $specs = ArrayUtils::iteratorToArray($specs);
         } elseif (!is_array($specs)) {
             throw new Exception\InvalidArgumentException('Route definition must be an array or Traversable object');
         }

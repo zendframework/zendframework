@@ -24,7 +24,7 @@ namespace Zend\View\Renderer;
 use JsonSerializable,
     Traversable,
     Zend\Json\Json,
-    Zend\Stdlib\IteratorToArray,
+    Zend\Stdlib\ArrayUtils,
     Zend\View\Exception,
     Zend\View\Model,
     Zend\View\Renderer,
@@ -131,7 +131,7 @@ class JsonRenderer implements Renderer, TreeRendererInterface
             }
 
             if ($nameOrModel instanceof Traversable) {
-                $nameOrModel = IteratorToArray::convert($nameOrModel);
+                $nameOrModel = ArrayUtils::iteratorToArray($nameOrModel);
                 return Json::encode($nameOrModel);
             }
 
@@ -166,6 +166,10 @@ class JsonRenderer implements Renderer, TreeRendererInterface
     protected function recurseModel(Model $model)
     {
         $values = $model->getVariables();
+        if ($values instanceof Traversable) {
+            $values = ArrayUtils::iteratorToArray($values);
+        }
+        
         if (!$model->hasChildren()) {
             return $values;
         }

@@ -36,10 +36,14 @@ class WinCacheTest extends CommonAdapterTest
 
     public function setUp()
     {
+        if (!defined('TESTS_ZEND_CACHE_WINCACHE_ENABLED') || !TESTS_ZEND_CACHE_WINCACHE_ENABLED) {
+            $this->markTestSkipped("Skipped by TestConfiguration (TESTS_ZEND_CACHE_WINCACHE_ENABLED)");
+        }
+
         if (!extension_loaded('wincache')) {
             $this->markTestSkipped("WinCache extension is not loaded");
         }
-        
+
         $enabled = ini_get('wincache.ucenabled');
         if (PHP_SAPI == 'cli') {
             $enabled = $enabled && (bool) ini_get('wincache.enablecli');

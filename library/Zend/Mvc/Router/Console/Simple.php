@@ -415,7 +415,7 @@ class Simple implements Route
              * Optional value param, syntax 2, i.e.
              *    [<SOMETHING>]
              */
-            elseif (preg_match( '/\G\[ *\<(?<name>[A-Z0-9\_]+)\> *\](?: +|$)/s', $def, $m, 0, $pos )) {
+            elseif (preg_match( '/\G\[ *\<(?<name>[a-zA-Z0-9\_]+)\> *\](?: +|$)/s', $def, $m, 0, $pos )) {
                 $item = array(
                     'name'       => strtolower( $m['name'] ),
                     'literal'    => false,

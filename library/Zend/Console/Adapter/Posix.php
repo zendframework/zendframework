@@ -73,6 +73,13 @@ class Posix extends AbstractAdapter implements Adapter
     );
 
     /**
+     * Last fetched TTY mode
+     *
+     * @var string|null
+     */
+    protected $lastTTYMode = null;
+
+    /**
      * Determine and return current console width.
      *
      * @return int
@@ -155,7 +162,6 @@ class Posix extends AbstractAdapter implements Adapter
 
         return false;
     }
-
 
     /**
      * Show console cursor
@@ -325,13 +331,20 @@ class Posix extends AbstractAdapter implements Adapter
      * @param string|null   $mask   A list of allowed chars
      * @return string
      */
-    public function readChar($mask = null){
+    public function readChar($mask = null)
+    {
+        $this->setTTYMode('-icanon -echo');
+
+        $stream = fopen('php://stdin','rb');
         do{
-            $char = trim(`read -s -n1 val; echo \$val`);
+            $char = fgetc($stream);
         }while(
             !$char ||
             ($mask !== null && !stristr($mask,$char))
         );
+        fclose($stream);
+
+        $this->restoreTTYMode();
         return $char;
     }
 
@@ -341,6 +354,38 @@ class Posix extends AbstractAdapter implements Adapter
     public function clear(){
         echo "\x1b[2J"; // reset bg color
         $this->setPos(1,1); // reset cursor position
+    }
+
+    /**
+     * Restore TTY (Console) mode to previous value.
+     *
+     * @return mixed
+     */
+    protected function restoreTTYMode(){
+        if($this->lastTTYMode === null)
+            return;
+
+        shell_exec('stty '.escapeshellarg($this->lastTTYMode));
+
+    }
+
+    /**
+     * Change TTY (Console) mode
+     *
+     * @link http://en.wikipedia.org/wiki/Stty
+     * @param $mode
+     */
+    protected function setTTYMode($mode)
+    {
+        /**
+         * Store last mode
+         */
+        $this->lastTTYMode = trim(`stty -g`);
+
+        /**
+         * Set new mode
+         */
+        shell_exec('stty '.escapeshellcmd($mode));
     }
 
     /**

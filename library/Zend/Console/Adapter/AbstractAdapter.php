@@ -81,11 +81,11 @@ abstract class AbstractAdapter implements Adapter
         $consoleWidth = $this->getWidth();
         if ($width > $consoleWidth) {
             $text = $this->stringTrim( $text, $consoleWidth );
-            echo $text;
+            $this->write($text, $color, $bgColor);
         } elseif ($width == $consoleWidth) {
-            echo $text;
+            $this->write($text, $color, $bgColor);
         } else {
-            echo $text . "\n";
+            $this->write($text. "\n", $color, $bgColor);;
         }
     }
 

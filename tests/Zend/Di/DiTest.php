@@ -591,4 +591,23 @@ class DiTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('ZendTest\Di\TestAsset\SetterInjection\A', $c->a);
     }
     
+    /**
+     * @group SharedInstance
+     */
+    public function testMarkingClassAsNotSharedInjectsNewInstanceIntoAllRequestersButDependentsAreShared()
+    {
+        $di = new Di();
+        $di->configure(new Configuration(array(
+            'instance' => array(
+                'ZendTest\Di\TestAsset\SharedInstance\Lister' => array(
+                    'shared' => false
+                )
+            )
+        )));
+        $movie = $di->get('ZendTest\Di\TestAsset\SharedInstance\Movie');
+        $venue = $di->get('ZendTest\Di\TestAsset\SharedInstance\Venue');
+
+        $this->assertNotSame($movie->lister, $venue->lister);
+        $this->assertSame($movie->lister->sharedLister, $venue->lister->sharedLister);
+    }
 }

@@ -34,11 +34,11 @@ class ConfigurationTest extends TestCase
         $this->assertContains('my-dbAdapter', $im->getTypePreferences('my-mapper'));
 
         $this->assertTrue($im->hasConfiguration('My\DbAdapter'));
-        $expected = array('parameters' => array('username' => 'readonly', 'password' => 'mypassword'), 'injections' => array());
+        $expected = array('parameters' => array('username' => 'readonly', 'password' => 'mypassword'), 'injections' => array(), 'shared' => array());
         $this->assertEquals($expected, $im->getConfiguration('My\DbAdapter'));
         
         $this->assertTrue($im->hasConfiguration('my-dbAdapter'));
-        $expected = array('parameters' => array('username' => 'readwrite'), 'injections' => array());
+        $expected = array('parameters' => array('username' => 'readwrite'), 'injections' => array(), 'shared' => array());
         $this->assertEquals($expected, $im->getConfiguration('my-dbAdapter'));
     }
     

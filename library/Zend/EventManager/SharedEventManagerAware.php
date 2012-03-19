@@ -14,6 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_EventManager
+ * @subpackage UnitTest
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -21,14 +22,21 @@
 namespace Zend\EventManager;
 
 /**
- * Interface for global (static) event listener collections
+ * Interface to automate setter injection for a SharedEventManager instance
  *
  * @category   Zend
  * @package    Zend_EventManager
+ * @subpackage UnitTest
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface StaticEventCollection
+interface SharedEventManagerAware
 {
-    public function getListeners($id, $event);
+    /**
+     * Inject an EventManager instance
+     * 
+     * @param  SharedEventCollection $sharedEventManager 
+     * @return SharedEventManagerAware
+     */
+    public function setSharedConnections(SharedEventCollection $sharedEventManager);
 }

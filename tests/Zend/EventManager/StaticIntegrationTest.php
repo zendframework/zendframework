@@ -43,7 +43,8 @@ class StaticIntegrationTest extends TestCase
     public function testCanConnectStaticallyToClassWithEvents()
     {
         $counter = (object) array('count' => 0);
-        StaticEventManager::getInstance()->attach(
+        $events  = StaticEventManager::getInstance();
+        $events->attach(
             'ZendTest\EventManager\TestAsset\ClassWithEvents', 
             'foo', 
             function ($e) use ($counter) {
@@ -51,6 +52,7 @@ class StaticIntegrationTest extends TestCase
             }
         );
         $class = new TestAsset\ClassWithEvents();
+        $class->events()->setSharedConnections($events);
         $class->foo();
         $this->assertEquals(1, $counter->count);
     }
@@ -58,7 +60,8 @@ class StaticIntegrationTest extends TestCase
     public function testLocalHandlersAreExecutedPriorToStaticHandlersWhenSetWithSamePriority()
     {
         $test = (object) array('results' => array());
-        StaticEventManager::getInstance()->attach(
+        $events = StaticEventManager::getInstance();
+        $events->attach(
             'ZendTest\EventManager\TestAsset\ClassWithEvents', 
             'foo', 
             function ($e) use ($test) {
@@ -69,6 +72,7 @@ class StaticIntegrationTest extends TestCase
         $class->events()->attach('foo', function ($e) use ($test) {
             $test->results[] = 'local';
         });
+        $class->events()->setSharedConnections($events);
         $class->foo();
         $this->assertEquals(array('local', 'static'), $test->results);
     }
@@ -76,7 +80,8 @@ class StaticIntegrationTest extends TestCase
     public function testLocalHandlersAreExecutedInPriorityOrderRegardlessOfStaticOrLocalRegistration()
     {
         $test = (object) array('results' => array());
-        StaticEventManager::getInstance()->attach(
+        $events = StaticEventManager::getInstance();
+        $events->attach(
             'ZendTest\EventManager\TestAsset\ClassWithEvents', 
             'foo', 
             function ($e) use ($test) {
@@ -94,11 +99,12 @@ class StaticIntegrationTest extends TestCase
         $class->events()->attach('foo', function ($e) use ($test) {
             $test->results[] = 'local3';
         }, 15000); // highest priority
+        $class->events()->setSharedConnections($events);
         $class->foo();
         $this->assertEquals(array('local3', 'static', 'local2', 'local'), $test->results);
     }
 
-    public function testPassingNullValueToSetStaticConnectionsDisablesStaticConnections()
+    public function testCallingUnsetSharedConnectionsDisablesStaticConnections()
     {
         $counter = (object) array('count' => 0);
         StaticEventManager::getInstance()->attach(
@@ -109,7 +115,7 @@ class StaticIntegrationTest extends TestCase
             }
         );
         $class = new TestAsset\ClassWithEvents();
-        $class->events()->setStaticConnections(null);
+        $class->events()->unsetSharedConnections();
         $class->foo();
         $this->assertEquals(0, $counter->count);
     }
@@ -126,8 +132,8 @@ class StaticIntegrationTest extends TestCase
         );
         $mockStaticEvents = new TestAsset\StaticEventsMock();
         $class = new TestAsset\ClassWithEvents();
-        $class->events()->setStaticConnections($mockStaticEvents);
-        $this->assertSame($mockStaticEvents, $class->events()->getStaticConnections());
+        $class->events()->setSharedConnections($mockStaticEvents);
+        $this->assertSame($mockStaticEvents, $class->events()->getSharedConnections());
         $class->foo();
         $this->assertEquals(0, $counter->count);
     }
@@ -135,7 +141,8 @@ class StaticIntegrationTest extends TestCase
     public function testTriggerMergesPrioritiesOfStaticAndInstanceListeners()
     {
         $test = (object) array('results' => array());
-        StaticEventManager::getInstance()->attach(
+        $events = StaticEventManager::getInstance();
+        $events->attach(
             'ZendTest\EventManager\TestAsset\ClassWithEvents', 
             'foo', 
             function ($e) use ($test) {
@@ -147,6 +154,7 @@ class StaticIntegrationTest extends TestCase
         $class->events()->attach('foo', function ($e) use ($test) {
             $test->results[] = 'local';
         }, -100);
+        $class->events()->setSharedConnections($events);
         $class->foo();
         $this->assertEquals(array('static', 'local'), $test->results);
     }

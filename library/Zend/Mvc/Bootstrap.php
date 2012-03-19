@@ -217,7 +217,11 @@ class Bootstrap implements Bootstrapper
                     ),
                 ),
             ),
-        ))));
+        )), 'instance' => array(
+            'Zend\EventManager\EventManager' => array(
+                'shared' => false, // new instance per class needing an instance
+            ),
+        )));
         $diConfig->configure($di);
 
         $config = new DiConfiguration($this->config->di);

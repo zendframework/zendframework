@@ -8,7 +8,7 @@ use ArrayObject,
     Zend\Di\Di as DependencyInjector,
     Zend\Di\ServiceLocator,
     Zend\EventManager\EventManager,
-    Zend\EventManager\StaticEventManager,
+    Zend\EventManager\SharedEventManager,
     Zend\Http\Request,
     Zend\Http\PhpEnvironment\Response,
     Zend\Mvc\Application,
@@ -17,11 +17,6 @@ use ArrayObject,
 
 class ApplicationTest extends TestCase
 {
-    public function setUp()
-    {
-        StaticEventManager::resetInstance();
-    }
-
     public function testEventManagerIsLazyLoaded()
     {
         $app = new Application();
@@ -405,14 +400,16 @@ class ApplicationTest extends TestCase
         $router  = $app->getRouter();
         $router->addRoute('locator-aware', $route);
 
+        $events  = new SharedEventManager();
         $locator = new TestAsset\Locator();
-        $locator->add('locator-aware', function() {
-            return new TestAsset\LocatorAwareController;
+        $locator->add('locator-aware', function() use ($events) {
+            $controller = new TestAsset\LocatorAwareController;
+            $controller->events()->setSharedConnections($events);
+            return $controller;
         });
         $app->setLocator($locator);
 
         $storage = new ArrayObject();
-        $events  = StaticEventManager::getInstance();
         $events->attach('ZendTest\Mvc\TestAsset\LocatorAwareController', 'dispatch', function ($e) use ($storage) {
             $controller = $e->getTarget();
             $storage['locator'] = $controller->getLocator();
@@ -436,8 +433,10 @@ class ApplicationTest extends TestCase
 
     public function testCanProvideAlternateEventManagerToDisableDefaultRouteAndDispatchEventListeners()
     {
-        $app    = $this->setupActionController();
-        $events = new EventManager();
+        $app          = $this->setupActionController();
+        $events       = new EventManager();
+        $sharedEvents = new SharedEventManager();
+        $events->setSharedConnections($sharedEvents);
         $app->setEventManager($events);
 
         $listener1 = function($e) {
@@ -452,9 +451,8 @@ class ApplicationTest extends TestCase
             $content  = (empty($content) ? 'listener2' : $content . '::' . 'listener2');
             $response->setContent($content);
         };
-        $events = StaticEventManager::getInstance();
-        $events->attach('ZendTest\Mvc\Controller\TestAsset\SampleController', 'dispatch', $listener1, 10);
-        $events->attach('ZendTest\Mvc\Controller\TestAsset\SampleController', 'dispatch', $listener2, -10);
+        $sharedEvents->attach('ZendTest\Mvc\Controller\TestAsset\SampleController', 'dispatch', $listener1, 10);
+        $sharedEvents->attach('ZendTest\Mvc\Controller\TestAsset\SampleController', 'dispatch', $listener2, -10);
 
         $app->run();
         $response = $app->getResponse();

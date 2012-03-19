@@ -6,10 +6,11 @@ use Zend\Di\Configuration as DiConfiguration,
     Zend\Config\Config,
     Zend\EventManager\EventCollection as Events,
     Zend\EventManager\EventManager,
+    Zend\EventManager\EventManagerAware,
     Zend\EventManager\StaticEventManager,
     Zend\Mvc\Router\Http\TreeRouteStack as Router;
 
-class Bootstrap implements Bootstrapper
+class Bootstrap implements Bootstrapper, EventManagerAware
 {
     /**
      * @var \Zend\Config\Config
@@ -218,6 +219,12 @@ class Bootstrap implements Bootstrapper
                 ),
             ),
         )), 'instance' => array(
+            'preferences' => array(
+                // Use EventManager for EventCollection
+                'Zend\EventManager\EventCollection' => 'Zend\EventManager\EventManager',
+                // Use SharedEventManager for SharedEventCollection
+                'Zend\EventManager\SharedEventCollection' => 'Zend\EventManager\SharedEventManager',
+            ),
             'Zend\EventManager\EventManager' => array(
                 'shared' => false, // new instance per class needing an instance
             ),

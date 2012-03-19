@@ -3,20 +3,12 @@
 namespace Zend\Mvc;
 
 use Zend\Di\Locator,
-    Zend\EventManager\EventCollection,
+    Zend\EventManager\EventManagerAware,
     Zend\Stdlib\RequestDescription as Request,
     Zend\Stdlib\ResponseDescription as Response;
 
-interface AppContext
+interface AppContext extends EventManagerAware
 {
-    /**
-     * Set the event manager instance used by this context
-     * 
-     * @param  EventCollection $events 
-     * @return AppContext
-     */
-    public function setEventManager(EventCollection $events);
-
     /**
      * Set a service locator/DI object
      *

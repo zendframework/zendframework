@@ -210,7 +210,6 @@ class Update extends AbstractSql implements SqlInterface, PreparableSqlInterface
         }
 
         $sql = sprintf($this->specifications[self::SPECIFICATION_UPDATE], $table, $set);
-        $statement->setSql($sql);
 
         // process where
         if ($this->where->count() > 0) {

@@ -179,9 +179,13 @@ class TableGatewayTest extends \PHPUnit_Framework_TestCase
     public function testSelectWithNoWhere()
     {
         $select = $this->getMock('Zend\Db\Sql\Select');
-
-        // assert select::from() is called
-        $select->expects($this->once())->method('from')->with($this->table->getTableName(), null);
+        $select->expects($this->any())
+            ->method('getRawState')
+            ->will($this->returnValue(array(
+                'table' => $this->table->getTableName(),
+                'schema' => ''
+                ))
+            );
 
         $this->table->setSqlSelectPrototype($select);
         $resultSet = $this->table->select();
@@ -197,6 +201,13 @@ class TableGatewayTest extends \PHPUnit_Framework_TestCase
     public function testSelectWithWhereString()
     {
         $select = $this->getMock('Zend\Db\Sql\Select');
+        $select->expects($this->any())
+            ->method('getRawState')
+            ->will($this->returnValue(array(
+                'table' => $this->table->getTableName(),
+                'schema' => ''
+                ))
+            );
 
         // assert select::from() is called
         $select->expects($this->once())

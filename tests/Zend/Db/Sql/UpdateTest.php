@@ -94,12 +94,10 @@ class UpdateTest extends \PHPUnit_Framework_TestCase
         $mockStatement = $this->getMock('Zend\Db\Adapter\Driver\StatementInterface');
         $pContainer = new \Zend\Db\Adapter\ParameterContainer(array());
         $mockStatement->expects($this->any())->method('getParameterContainer')->will($this->returnValue($pContainer));
+
         $mockStatement->expects($this->at(1))
             ->method('setSql')
-            ->with($this->equalTo('UPDATE "foo" SET "bar" = ?'));
-        $mockStatement->expects($this->at(4))
-            ->method('setSql')
-            ->with($this->equalTo(' WHERE x = y'));
+            ->with($this->equalTo('UPDATE "foo" SET "bar" = ? WHERE x = y'));
 
         $this->update->table('foo')
             ->set(array('bar' => 'baz'))

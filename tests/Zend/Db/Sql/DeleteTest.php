@@ -81,7 +81,7 @@ class DeleteTest extends \PHPUnit_Framework_TestCase
         $mockAdapter = $this->getMock('Zend\Db\Adapter\Adapter', null, array($mockDriver));
 
         $mockStatement = $this->getMock('Zend\Db\Adapter\Driver\StatementInterface');
-        $mockStatement->expects($this->at(0))
+        $mockStatement->expects($this->at(2))
             ->method('setSql')
             ->with($this->equalTo('DELETE FROM "foo" WHERE x = y'));
 

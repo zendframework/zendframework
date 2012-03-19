@@ -399,11 +399,11 @@ class TableGateway implements TableGatewayInterface
      */
     public function __clone()
     {
-        $this->selectResultPrototype = clone $this->selectResultPrototype;
-        $this->sqlSelectPrototype = clone $this->sqlSelectPrototype;
-        $this->sqlInsertPrototype = clone $this->sqlInsertPrototype;
-        $this->sqlUpdatePrototype = clone $this->sqlUpdatePrototype;
-        $this->sqlDeletePrototype = clone $this->sqlDeletePrototype;
+        $this->selectResultPrototype = (isset($this->selectResultPrototype)) ? clone $this->selectResultPrototype : null;
+        $this->sqlSelectPrototype = (isset($this->sqlSelectPrototype)) ? clone $this->sqlSelectPrototype : null;
+        $this->sqlInsertPrototype = (isset($this->sqlInsertPrototype)) ? clone $this->sqlInsertPrototype : null;
+        $this->sqlUpdatePrototype = (isset($this->sqlUpdatePrototype)) ? clone $this->sqlUpdatePrototype : null;
+        $this->sqlDeletePrototype = (isset($this->sqlDeletePrototype)) ? clone $this->sqlDeletePrototype : null;
     }
 
 }

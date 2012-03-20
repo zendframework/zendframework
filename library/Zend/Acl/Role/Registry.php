@@ -62,7 +62,7 @@ class Registry
      * @param  \Zend\Acl\Role              $role
      * @param  \Zend\Acl\Role|string|array $parents
      * @throws \Zend\Acl\Exception\InvalidArgumentException
-     * @return \Zend\Acl\Role\Registry Provides a fluent interface
+     * @return Registry Provides a fluent interface
      */
     public function add(Role $role, $parents = null)
     {
@@ -213,7 +213,7 @@ class Registry
      *
      * @param  \Zend\Acl\Role|string $role
      * @throws \Zend\Acl\Exception\InvalidArgumentException
-     * @return \Zend\Acl\Role\Registry Provides a fluent interface
+     * @return Registry Provides a fluent interface
      */
     public function remove($role)
     {
@@ -238,7 +238,7 @@ class Registry
     /**
      * Removes all Roles from the registry
      *
-     * @return \Zend\Acl\Role\Registry Provides a fluent interface
+     * @return Registry Provides a fluent interface
      */
     public function removeAll()
     {

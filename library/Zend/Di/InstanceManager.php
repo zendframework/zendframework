@@ -244,7 +244,7 @@ class InstanceManager /* implements InstanceCollection */
         $configuration = array(
             'parameters' => isset($configuration['parameters']) ? $configuration['parameters'] : array(),
             'injections' => isset($configuration['injections']) ? $configuration['injections'] : array(),
-            'shared'     => isset($configuration['shared'])     ? $configuration['shared']     : array(),
+            'shared'     => isset($configuration['shared'])     ? $configuration['shared']     : true
         );
         $this->configurations[$key] = array_replace_recursive($this->configurations[$key], $configuration);
     }

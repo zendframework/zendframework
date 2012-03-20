@@ -71,7 +71,7 @@ class InstanceManagerTest extends TestCase
         $im->setConfiguration('bar-alias', $config);
 
         $config['injections'] = array();
-        $config['shared'] = array();
+        $config['shared'] = true;
         
         $this->assertEquals($config, $im->getConfiguration('foo-alias'));
     }

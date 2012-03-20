@@ -249,6 +249,33 @@ class RequestTest extends TestCase
                 'test.example.com',
                 '/news',
             ),
+            array(
+                array(
+                    'HTTP_HOST' => 'test.example.com',
+                    'REQUEST_URI' => 'http://test.example.com/news',
+                ),
+                'test.example.com',
+                '/news',
+            ),
+            array(
+                array(
+                    'SERVER_NAME' => 'test.example.com',
+                    'SERVER_PORT' => '8080',
+                    'REQUEST_URI' => 'http://test.example.com/news',
+                ),
+                'test.example.com',
+                '/news',
+            ),
+            array(
+                array(
+                    'SERVER_NAME' => 'test.example.com',
+                    'SERVER_PORT' => '443',
+                    'HTTPS'       => 'on',
+                    'REQUEST_URI' => 'https://test.example.com/news',
+                ),
+                'test.example.com',
+                '/news',
+            ),
         );
     }
 

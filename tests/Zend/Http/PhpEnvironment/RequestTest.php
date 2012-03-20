@@ -235,4 +235,38 @@ class RequestTest extends TestCase
         $this->assertEquals($value, $header->getFieldValue($value));
     }
 
+    /**
+     * Data provider for testing server hostname.
+     */
+    public static function serverHostnameProvider()
+    {
+        return array(
+            array(
+                array(
+                    'SERVER_NAME' => 'test.example.com',
+                    'REQUEST_URI' => 'http://test.example.com/news',
+                ),
+                'test.example.com',
+                '/news',
+            ),
+        );
+    }
+
+    /**
+     * @dataProvider serverHostnameProvider
+     * @param array  $server
+     * @param string $name
+     * @param string $value
+     */
+    public function testServerHostnameProvider(array $server, $expectedHost, $expectedRequestUri)
+    {
+        $_SERVER = $server;
+        $request = new Request();
+
+        $host = $request->uri()->getHost();
+        $this->assertEquals($expectedHost, $host);
+
+        $requestUri = $request->getRequestUri();
+        $this->assertEquals($expectedRequestUri, $requestUri);
+    }
 }

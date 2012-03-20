@@ -99,7 +99,7 @@ class TreeRouteStack extends SimpleRouteStack
      * routeFromArray(): defined by SimpleRouteStack.
      *
      * @see    SimpleRouteStack::routeFromArray()
-     * @param  array|Traversable $specs
+     * @param  array|\Traversable $specs
      * @return Route
      */
     protected function routeFromArray($specs)
@@ -125,7 +125,7 @@ class TreeRouteStack extends SimpleRouteStack
             );
 
             $priority = (isset($route->priority) ? $route->priority : null);
-            
+
             $route = $this->routeBroker->load('part', $options);
             $route->priority = $priority;
         }
@@ -270,7 +270,7 @@ class TreeRouteStack extends SimpleRouteStack
      * Set the request URI.
      *
      * @param  HttpUri $uri
-     * @return self
+     * @return TreeRouteStack
      */
     public function setRequestUri(HttpUri $uri)
     {

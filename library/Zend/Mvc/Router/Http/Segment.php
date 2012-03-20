@@ -53,10 +53,10 @@ class Segment implements Route
      * @var string
      */
     protected $regex;
-    
+
     /**
      * Map from regex groups to parameter names.
-     * 
+     *
      * @var array
      */
     protected $paramMap = array();
@@ -95,7 +95,8 @@ class Segment implements Route
      *
      * @see    Route::factory()
      * @param  array|Traversable $options
-     * @return void
+     * @throws \Zend\Mvc\Router\Exception\InvalidArgumentException
+     * @return Segment
      */
     public static function factory($options = array())
     {
@@ -217,7 +218,7 @@ class Segment implements Route
                     } else {
                         $regex .= '([^' . $part[2] . ']+)';
                     }
-                    
+
                     $this->paramMap[$groupIndex++] = $part[1];
                     break;
 

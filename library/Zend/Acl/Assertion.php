@@ -41,9 +41,9 @@ interface Assertion
      * $role, $resource, or $privilege parameters are null, it means that the query applies to all Roles, Resources, or
      * privileges, respectively.
      *
-     * @param  Zend\Acl\Acl      $acl
-     * @param  Zend\Acl\Role     $role
-     * @param  Zend\Acl\Resource $resource
+     * @param  \Zend\Acl\Acl      $acl
+     * @param  \Zend\Acl\Role     $role
+     * @param  \Zend\Acl\Resource $resource
      * @param  string            $privilege
      * @return boolean
      */

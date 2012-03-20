@@ -59,10 +59,10 @@ class Registry
      * will have the least priority, and the last parent added will have the
      * highest priority.
      *
-     * @param  Zend\Acl\Role              $role
-     * @param  Zend\Acl\Role|string|array $parents
-     * @throws Zend\Acl\Exception\InvalidArgumentException
-     * @return Zend\Acl\Role\Registry Provides a fluent interface
+     * @param  \Zend\Acl\Role              $role
+     * @param  \Zend\Acl\Role|string|array $parents
+     * @throws \Zend\Acl\Exception\InvalidArgumentException
+     * @return \Zend\Acl\Role\Registry Provides a fluent interface
      */
     public function add(Role $role, $parents = null)
     {
@@ -108,9 +108,9 @@ class Registry
      *
      * The $role parameter can either be a Role or a Role identifier.
      *
-     * @param  Zend\Acl\Role|string $role
-     * @throws Zend\Acl\Exception\InvalidArgumentException
-     * @return Zend\Acl\Role
+     * @param  \Zend\Acl\Role|string $role
+     * @throws \Zend\Acl\Exception\InvalidArgumentException
+     * @return \Zend\Acl\Role
      */
     public function get($role)
     {
@@ -132,7 +132,7 @@ class Registry
      *
      * The $role parameter can either be a Role or a Role identifier.
      *
-     * @param  Zend\Acl\Role|string $role
+     * @param  \Zend\Acl\Role|string $role
      * @return boolean
      */
     public function has($role)
@@ -157,7 +157,7 @@ class Registry
      * If the Role does not have any parents, then an empty array is returned.
      *
      * @uses   Zend\Acl\Role\Registry::get()
-     * @param  Zend\Acl\Role|string $role
+     * @param  \Zend\Acl\Role|string $role
      * @return array
      */
     public function getParents($role)
@@ -176,10 +176,10 @@ class Registry
      * through the entire inheritance DAG to determine whether $role
      * inherits from $inherit through its ancestor Roles.
      *
-     * @param  Zend\Acl\Role|string $role
-     * @param  Zend\Acl\Role|string $inherit
+     * @param  \Zend\Acl\Role|string $role
+     * @param  \Zend\Acl\Role|string $inherit
      * @param  boolean                        $onlyParents
-     * @throws Zend\Acl\Exception\InvalidArgumentException
+     * @throws \Zend\Acl\Exception\InvalidArgumentException
      * @return boolean
      */
     public function inherits($role, $inherit, $onlyParents = false)
@@ -211,9 +211,9 @@ class Registry
      *
      * The $role parameter can either be a Role or a Role identifier.
      *
-     * @param  Zend\Acl\Role|string $role
-     * @throws Zend\Acl\Exception\InvalidArgumentException
-     * @return Zend\Acl\Role\Registry Provides a fluent interface
+     * @param  \Zend\Acl\Role|string $role
+     * @throws \Zend\Acl\Exception\InvalidArgumentException
+     * @return \Zend\Acl\Role\Registry Provides a fluent interface
      */
     public function remove($role)
     {
@@ -238,7 +238,7 @@ class Registry
     /**
      * Removes all Roles from the registry
      *
-     * @return Zend\Acl\Role\Registry Provides a fluent interface
+     * @return \Zend\Acl\Role\Registry Provides a fluent interface
      */
     public function removeAll()
     {

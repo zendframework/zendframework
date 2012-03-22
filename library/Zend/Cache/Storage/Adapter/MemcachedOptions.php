@@ -62,7 +62,7 @@ class MemcachedOptions extends AdapterOptions
      */
     public function setNamespace($namespace)
     {
-        $namespace = (string)$namespace;
+        $namespace = (string) $namespace;
 
         if (128 < strlen($namespace)) {
             throw new Exception\InvalidArgumentException(sprintf(

@@ -208,11 +208,6 @@ class AdapterOptions extends Options
     {
         $namespace = (string)$namespace;
         if ($this->namespace !== $namespace) {
-            if ($namespace === '') {
-                // TODO: allow empty namespaces
-                throw new Exception\InvalidArgumentException('No namespace given');
-            }
-
             $pattern = $this->getNamespacePattern();
             if ($pattern && !preg_match($pattern, $namespace)) {
                 throw new Exception\InvalidArgumentException(

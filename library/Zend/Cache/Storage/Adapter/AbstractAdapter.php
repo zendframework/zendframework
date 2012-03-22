@@ -2554,12 +2554,10 @@ abstract class AbstractAdapter implements Adapter
     protected function normalizeNamespace(&$namespace)
     {
         $namespace = (string) $namespace;
-
-        if ($namespace === '') {
-            throw new Exception\InvalidArgumentException('Empty namespaces are not allowed');
-        } elseif (($p = $this->getOptions()->getNamespacePattern()) && !preg_match($p, $namespace)) {
+        $pattern   = $this->getOptions()->getNamespacePattern();
+        if ($pattern && !preg_match($pattern, $namespace)) {
             throw new Exception\InvalidArgumentException(
-                "The namespace '{$namespace}' doesn't match against pattern '{$p}'"
+                "The namespace '{$namespace}' doesn't match against pattern '{$pattern}'"
             );
         }
     }

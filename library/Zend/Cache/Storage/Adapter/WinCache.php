@@ -85,8 +85,7 @@ class WinCache extends AbstractAdapter
             $options = new WinCacheOptions($options);
         }
 
-        $this->options = $options;
-        return $this;
+        return parent::setOptions($options);
     }
 
     /**

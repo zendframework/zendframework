@@ -122,8 +122,7 @@ class Apc extends AbstractAdapter
             $options = new ApcOptions($options);
         }
 
-        $this->options = $options;
-        return $this;
+        return parent::setOptions($options);
     }
 
     /**

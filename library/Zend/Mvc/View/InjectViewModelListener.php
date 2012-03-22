@@ -31,34 +31,34 @@ class InjectViewModelListener implements ListenerAggregate
 {
     /**
      * Filter/inflector used to normalize names for use as template identifiers
-     * 
+     *
      * @var mixed
      */
     protected $inflector;
 
     /**
      * Listeners we've registered
-     * 
+     *
      * @var array
      */
     protected $listeners = array();
 
     /**
      * Attach listeners
-     * 
-     * @param  Events $events 
+     *
+     * @param  Events $events
      * @return void
      */
     public function attach(Events $events)
     {
-        $this->listeners[] = $events->attach('dispatch', array($this, 'injectViewModel'), -100);
-        $this->listeners[] = $events->attach('dispatch.error', array($this, 'injectViewModel'), -100);
+        $this->listeners[] = $events->attach(MvcEvent::EVENT_DISPATCH, array($this, 'injectViewModel'), -100);
+        $this->listeners[] = $events->attach(MvcEvent::EVENT_DISPATCH_ERROR, array($this, 'injectViewModel'), -100);
     }
 
     /**
      * Detach listeners
-     * 
-     * @param  Events $events 
+     *
+     * @param  Events $events
      * @return void
      */
     public function detach(Events $events)
@@ -73,11 +73,11 @@ class InjectViewModelListener implements ListenerAggregate
     /**
      * Insert the view model into the event
      *
-     * Inspects the MVC result; if it is a view model, it then either (a) adds 
-     * it as a child to the default, composed view model, or (b) replaces it, 
+     * Inspects the MVC result; if it is a view model, it then either (a) adds
+     * it as a child to the default, composed view model, or (b) replaces it,
      * if the result  is marked as terminable.
-     * 
-     * @param  MvcEvent $e 
+     *
+     * @param  MvcEvent $e
      * @return void
      */
     public function injectViewModel(MvcEvent $e)

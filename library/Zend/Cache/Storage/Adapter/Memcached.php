@@ -73,13 +73,21 @@ class Memcached extends AbstractAdapter
             throw new Exception\ExtensionNotLoadedException('Need ext/memcached version >= 1.0.0');
         }
 
-        $this->memcached = new MemcachedResource();
-
         parent::__construct($options);
 
-        // It's ok to add server as soon as possible because
+        // It's ok to init the memcached instance as soon as possible because
         // ext/memcached auto-connects to the server on first use
+        $this->memcached = new MemcachedResource();
         $options = $this->getOptions();
+
+        // set lib options
+        if (static::$extMemcachedMajorVersion > 1) {
+            $this->memcached->setOptions($options->getLibOptions());
+        } else {
+            foreach ($options->getLibOptions() as $k => $v) {
+                $this->memcached->setOption($k, $v);
+            }
+        }
 
         $servers = $options->getServers();
         if (!$servers) {
@@ -87,6 +95,25 @@ class Memcached extends AbstractAdapter
             $servers = $options->getServers();
         }
         $this->memcached->addServers($servers);
+
+        // get notified on change options
+        $memc   = $this->memcached;
+        $memcMV = static::$extMemcachedMajorVersion;
+        $this->events()->attach('option', function ($event) use ($memc, $memcMV) {
+            $params = $event->getParams();
+
+            if (isset($params['lib_options'])) {
+                if ($memcMV > 1) {
+                    $memc->setOptions($params['lib_options']);
+                } else {
+                    foreach ($params['lib_options'] as $k => $v) {
+                        $memc->setOption($k, $v);
+                    }
+                }
+            }
+
+            // TODO: update on change/add server(s)
+        });
     }
 
     /* options */
@@ -104,19 +131,7 @@ class Memcached extends AbstractAdapter
             $options = new MemcachedOptions($options);
         }
 
-        $this->options = $options;
-
-        // Set memcached options, using options map to map to Memcached constants
-        $map = $options->getOptionsMap();
-        foreach ($options->toArray() as $key => $value) {
-            if (!array_key_exists($key, $map)) {
-                // skip keys for which there are not equivalent options
-                continue;
-            }
-            $this->memcached->setOption($map[$key], $value);
-        }
-
-        return $this;
+        return parent::setOptions($options);
     }
 
     /**

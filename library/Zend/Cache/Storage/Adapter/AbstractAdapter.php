@@ -52,6 +52,12 @@ abstract class AbstractAdapter implements Adapter
     protected $events = null;
 
     /**
+     * Event handles of this adapter
+     * @var array
+     */
+    protected $eventHandles = array();
+
+    /**
      * The plugin registry
      *
      * @var SplObjectStorage Registered plugins
@@ -128,6 +134,13 @@ abstract class AbstractAdapter implements Adapter
         foreach ($this->getPlugins() as $plugin) {
             $this->removePlugin($plugin);
         }
+
+        if ($this->eventHandles) {
+            $events = $this->events();
+            foreach ($this->eventHandles as $handle) {
+                $events->detach($handle);
+            }
+        }
     }
 
     /* configuration */
@@ -141,11 +154,20 @@ abstract class AbstractAdapter implements Adapter
      */
     public function setOptions($options)
     {
-        if (!$options instanceof AdapterOptions) {
-            $options = new AdapterOptions($options);
-        }
+        if ($this->options !== $options) {
+            if (!$options instanceof AdapterOptions) {
+                $options = new AdapterOptions($options);
+            }
 
-        $this->options = $options;
+            if ($this->options) {
+                $this->options->setAdapter(null);
+            }
+            $options->setAdapter($this);
+            $this->options = $options;
+
+            $event = new Event('option', $this, new ArrayObject($options->toArray()));
+            $this->events()->trigger($event);
+        }
         return $this;
     }
 

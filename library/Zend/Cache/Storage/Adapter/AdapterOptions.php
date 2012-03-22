@@ -21,7 +21,10 @@
 
 namespace Zend\Cache\Storage\Adapter;
 
-use Zend\Cache\Exception,
+use ArrayObject,
+    Zend\Cache\Exception,
+    Zend\Cache\Storage\Adapter,
+    Zend\Cache\Storage\Event,
     Zend\Stdlib\Options;
 
 /**
@@ -35,6 +38,14 @@ use Zend\Cache\Exception,
  */
 class AdapterOptions extends Options
 {
+
+    /**
+     * The adapter using these options
+     *
+     * @var null|Filesystem
+     */
+    protected $adapter;
+
     /**
      * Ignore missing items
      *
@@ -104,6 +115,18 @@ class AdapterOptions extends Options
     }
 
     /**
+     * Adapter using this instance
+     *
+     * @param  Adapter|null $adapter
+     * @return AdapterOptions
+     */
+    public function setAdapter(Adapter $adapter = null)
+    {
+        $this->adapter = $adapter;
+        return $this;
+    }
+
+    /**
      * Enables or disables ignoring of missing items.
      *
      * - If enabled and a missing item was requested:
@@ -121,7 +144,11 @@ class AdapterOptions extends Options
      */
     public function setIgnoreMissingItems($flag)
     {
-        $this->ignoreMissingItems = (bool) $flag;
+        $flag = (bool) $flag;
+        if ($this->ignoreMissingItems !== $flag) {
+            $this->triggerOptionEvent('ignore_missing_items', $flag);
+            $this->ignoreMissingItems = $flag;
+        }
         return $this;
     }
 
@@ -144,18 +171,19 @@ class AdapterOptions extends Options
      */
     public function setKeyPattern($pattern)
     {
-        if (($pattern = (string) $pattern) === '') {
-            $this->keyPattern = '';
-            return $this;
-        }
+        $pattern = (string) $pattern;
+        if ($this->keyPattern !== $pattern) {
+            // validate pattern
+            if ($pattern !== '') {
+                if (@preg_match($pattern, '') === false) {
+                    $err = error_get_last();
+                    throw new Exception\InvalidArgumentException("Invalid pattern '{$pattern}': {$err['message']}");
+                }
+            }
 
-        // validate pattern
-        if (@preg_match($pattern, '') === false) {
-            $err = error_get_last();
-            throw new Exception\InvalidArgumentException("Invalid pattern '{$pattern}': {$err['message']}");
+            $this->triggerOptionEvent('key_pattern', $pattern);
+            $this->keyPattern = $pattern;
         }
-
-        $this->keyPattern = $pattern;
 
         return $this;
     }
@@ -179,18 +207,23 @@ class AdapterOptions extends Options
     public function setNamespace($namespace)
     {
         $namespace = (string)$namespace;
-        if ($namespace === '') {
-            throw new Exception\InvalidArgumentException('No namespace given');
+        if ($this->namespace !== $namespace) {
+            if ($namespace === '') {
+                // TODO: allow empty namespaces
+                throw new Exception\InvalidArgumentException('No namespace given');
+            }
+
+            $pattern = $this->getNamespacePattern();
+            if ($pattern && !preg_match($pattern, $namespace)) {
+                throw new Exception\InvalidArgumentException(
+                    "The namespace '{$namespace}' doesn't match agains pattern '{$pattern}'"
+                );
+            }
+
+            $this->triggerOptionEvent('namespace', $namespace);
+            $this->namespace = $namespace;
         }
 
-        if (($pattern = $this->getNamespacePattern())
-            && !preg_match($pattern, $namespace)
-        ) {
-            throw new Exception\InvalidArgumentException(
-                "The namespace '{$namespace}' doesn't match agains pattern '{$pattern}'"
-            );
-        }
-        $this->namespace = (string) $namespace;
         return $this;
     }
 
@@ -212,25 +245,26 @@ class AdapterOptions extends Options
      */
     public function setNamespacePattern($pattern)
     {
-        if (($pattern = (string) $pattern) === '') {
-            $this->namespacePattern = '';
-            return $this;
+        $pattern = (string) $pattern;
+        if ($this->namespacePattern !== $pattern) {
+            if ($pattern !== '') {
+                // validate pattern
+                if (@preg_match($pattern, '') === false) {
+                    $err = error_get_last();
+                    throw new Exception\InvalidArgumentException("Invalid pattern '{$pattern}': {$err['message']}");
+
+                // validate current namespace
+                } elseif (($ns = $this->getNamespace()) && !preg_match($pattern, $ns)) {
+                    throw new Exception\RuntimeException(
+                        "The current namespace '{$ns}' doesn't match agains pattern '{$pattern}'"
+                        . " - please change the namespace first"
+                    );
+                }
+            }
+
+            $this->triggerOptionEvent('namespace_pattern', $pattern);
+            $this->namespacePattern = $pattern;
         }
-
-        // validate pattern
-        if (@preg_match($pattern, '') === false) {
-            $err = error_get_last();
-            throw new Exception\InvalidArgumentException("Invalid pattern '{$pattern}': {$err['message']}");
-
-        // validate current namespace
-        } elseif (($ns = $this->getNamespace()) && !preg_match($pattern, $ns)) {
-            throw new Exception\RuntimeException(
-                "The current namespace '{$ns}' doesn't match agains pattern '{$pattern}'"
-                . " - please change the namespace first"
-            );
-        }
-
-        $this->namespacePattern = $pattern;
 
         return $this;
     }
@@ -253,7 +287,11 @@ class AdapterOptions extends Options
      */
     public function setReadable($flag)
     {
-        $this->readable = (bool) $flag;
+        $flag = (bool) $flag;
+        if ($this->readable !== $flag) {
+            $this->triggerOptionEvent('readable', $flag);
+            $this->readable = $flag;
+        }
         return $this;
     }
 
@@ -276,7 +314,10 @@ class AdapterOptions extends Options
     public function setTtl($ttl)
     {
         $this->normalizeTtl($ttl);
-        $this->ttl = $ttl;
+        if ($this->ttl !== $ttl) {
+            $this->triggerOptionEvent('ttl', $ttl);
+            $this->ttl = $ttl;
+        }
         return $this;
     }
 
@@ -298,7 +339,11 @@ class AdapterOptions extends Options
      */
     public function setWritable($flag)
     {
-        $this->writable = (bool) $flag;
+        $flag = (bool) $flag;
+        if ($this->writable !== $flag) {
+            $this->triggerOptionEvent('writable', $flag);
+            $this->writable = $flag;
+        }
         return $this;
     }
 
@@ -313,10 +358,29 @@ class AdapterOptions extends Options
     }
 
     /**
+     * Triggers an option.change event
+     * if the this options instance has a connection too an adapter instance
+     *
+     * @param string $optionName
+     * @param mixed  $optionValue
+     * @return void
+     */
+    protected function triggerOptionEvent($optionName, $optionValue)
+    {
+        if (!$this->adapter) {
+            return;
+        }
+
+        $event = new Event('option', $this->adapter, new ArrayObject(array($optionName => $optionValue)));
+        $this->adapter->events()->trigger($event);
+    }
+
+    /**
      * Validates and normalize a TTL.
      *
      * @param  int|float $ttl
      * @throws Exception\InvalidArgumentException
+     * @return void
      */
     protected function normalizeTtl(&$ttl)
     {

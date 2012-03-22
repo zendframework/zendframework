@@ -477,7 +477,7 @@ class Memcached extends AbstractAdapter
      */
     protected function internalRemoveItems(array & $normalizedKeys, array & $normalizedOptions)
     {
-        // support for removing multiple items at once has been added in ext/memcached 2
+        // support for removing multiple items at once has been added in ext/memcached-2.0.0
         if (static::$extMemcachedMajorVersion < 2) {
             return parent::internalRemoveItems($normalizedKeys, $normalizedOptions);
         }

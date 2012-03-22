@@ -530,9 +530,9 @@ class WinCache extends AbstractAdapter
     protected function internalGetCapabilities()
     {
         if ($this->capabilities === null) {
-            $this->capabilityMarker = new stdClass();
-            $this->capabilities     = new Capabilities(
-                $this->capabilityMarker,
+            $marker       = new stdClass();
+            $capabilities = new Capabilities(
+                $marker,
                 array(
                     'supportedDatatypes' => array(
                         'NULL'     => true,
@@ -562,6 +562,18 @@ class WinCache extends AbstractAdapter
                     'clearByNamespace'   => false,
                 )
             );
+
+            // update namespace separator on change option
+            $this->events()->attach('option', function ($event) use ($capabilities, $marker) {
+                $params = $event->getParams();
+
+                if (isset($params['namespace_separator'])) {
+                    $capabilities->setNamespaceSeparator($marker, $params['namespace_separator']);
+                }
+            });
+
+            $this->capabilities     = $capabilities;
+            $this->capabilityMarker = $marker;
         }
 
         return $this->capabilities;

@@ -45,7 +45,7 @@ class MemcachedOptions extends AdapterOptions
     private $optionsMap = array(
         'binary_protocol'      => MemcachedResource::OPT_BINARY_PROTOCOL,
         'buffer_writes'        => MemcachedResource::OPT_BUFFER_WRITES,
-        'cache_lookups'        => MemcachedResource::OPT_CACHE_LOOKUPS,
+        //'cache_lookups'        => MemcachedResource::OPT_CACHE_LOOKUPS,
         'compression'          => MemcachedResource::OPT_COMPRESSION,
         'connect_timeout'      => MemcachedResource::OPT_CONNECT_TIMEOUT,
         'distribution'         => MemcachedResource::OPT_DISTRIBUTION,
@@ -54,10 +54,10 @@ class MemcachedOptions extends AdapterOptions
         'no_block'             => MemcachedResource::OPT_NO_BLOCK,
         'poll_timeout'         => MemcachedResource::OPT_POLL_TIMEOUT,
         'recv_timeout'         => MemcachedResource::OPT_RECV_TIMEOUT,
-        'retry_timeout'        => MemcachedResource::OPT_RETRY_TIMEOUT,
+        //'retry_timeout'        => MemcachedResource::OPT_RETRY_TIMEOUT,
         'send_timeout'         => MemcachedResource::OPT_SEND_TIMEOUT,
         'serializer'           => MemcachedResource::OPT_SERIALIZER,
-        'server_failure_limit' => MemcachedResource::OPT_SERVER_FAILURE_LIMIT,
+        //'server_failure_limit' => MemcachedResource::OPT_SERVER_FAILURE_LIMIT,
         'socket_recv_size'     => MemcachedResource::OPT_SOCKET_RECV_SIZE,
         'socket_send_size'     => MemcachedResource::OPT_SOCKET_SEND_SIZE,
         'tcp_nodelay'          => MemcachedResource::OPT_TCP_NODELAY,
@@ -285,6 +285,16 @@ class MemcachedOptions extends AdapterOptions
     public function getServers()
     {
         return $this->servers;
+    }
+
+    /**
+     * Get overwrittern libmemcached options
+     *
+     * @return array
+     */
+    public function getLibOptions()
+    {
+        return $this->libOptions;
     }
 
     /**

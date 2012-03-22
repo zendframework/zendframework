@@ -83,9 +83,7 @@ class Filesystem extends AbstractAdapter
             $options = new FilesystemOptions($options);
         }
 
-        $this->options = $options;
-        $options->setAdapter($this);
-        return $this;
+        return parent::setOptions($options);
     }
 
     /**
@@ -1040,9 +1038,20 @@ class Filesystem extends AbstractAdapter
     protected function internalGetCapabilities()
     {
         if ($this->capabilities === null) {
-            $this->capabilityMarker = new stdClass();
-                $this->capabilities = new Capabilities(
-                $this->capabilityMarker,
+            $marker  = new stdClass();
+            $options = $this->getOptions();
+
+            // detect metadata
+            $metadata = array('mtime', 'filespec');
+            if (!$options->getNoAtime()) {
+                $metadata[] = 'atime';
+            }
+            if (!$options->getNoCtime()) {
+                $metadata[] = 'ctime';
+            }
+
+            $capabilities = new Capabilities(
+                $marker,
                 array(
                     'supportedDatatypes' => array(
                         'NULL'     => 'string',
@@ -1054,7 +1063,7 @@ class Filesystem extends AbstractAdapter
                         'object'   => false,
                         'resource' => false,
                     ),
-                    'supportedMetadata'  => array('mtime', 'filespec'),
+                    'supportedMetadata'  => $metadata,
                     'maxTtl'             => 0,
                     'staticTtl'          => false,
                     'tagging'            => true,
@@ -1062,15 +1071,42 @@ class Filesystem extends AbstractAdapter
                     'expiredRead'        => true,
                     'maxKeyLength'       => 251, // 255 - strlen(.dat | .ifo)
                     'namespaceIsPrefix'  => true,
-                    'namespaceSeparator' => $this->getOptions()->getNamespaceSeparator(),
+                    'namespaceSeparator' => $options->getNamespaceSeparator(),
                     'iterable'           => true,
                     'clearAllNamespaces' => true,
                     'clearByNamespace'   => true,
                 )
             );
 
-            // set dynamic capibilities
-            $this->updateCapabilities();
+            // update capabilities on change options
+            $this->events()->attach('option', function ($event) use ($capabilities, $marker) {
+                $params = $event->getParams();
+
+                if (isset($params['namespace_separator'])) {
+                    $capabilities->setNamespaceSeparator($marker, $params['namespace_separator']);
+                }
+
+                if (isset($params['no_atime']) || isset($params['no_ctime'])) {
+                    $metadata = $capabilities->getSupportedMetadata();
+
+                    if (isset($params['no_atime']) && !$params['no_atime']) {
+                        $metadata[] = 'atime';
+                    } elseif (isset($params['no_atime']) && ($index = array_search('atime', $metadata)) !== false) {
+                        unset($metadata[$index]);
+                    }
+
+                    if (isset($params['no_ctime']) && !$params['no_ctime']) {
+                        $metadata[] = 'ctime';
+                    } elseif (isset($params['no_ctime']) && ($index = array_search('ctime', $metadata)) !== false) {
+                        unset($metadata[$index]);
+                    }
+
+                    $capabilities->setSupportedMetadata($marker, $metadata);
+                }
+            });
+
+            $this->capabilityMarker = $marker;
+            $this->capabilities     = $capabilities;
         }
 
         return $this->capabilities;
@@ -1575,40 +1611,6 @@ class Filesystem extends AbstractAdapter
         if (!$res && file_exists($file)) {
             throw new Exception\RuntimeException(
                 "Error unlinking file '{$file}'; file still exists", 0, $err
-            );
-        }
-    }
-
-    /**
-     * Update dynamic capabilities only if already created
-     *
-     * @return void
-     */
-    public function updateCapabilities()
-    {
-        if ($this->capabilities) {
-            $options = $this->getOptions();
-
-            // update namespace separator
-            $this->capabilities->setNamespaceSeparator(
-                $this->capabilityMarker,
-                $options->getNamespaceSeparator()
-            );
-
-            // update metadata capabilities
-            $metadata = array('mtime', 'filespec');
-
-            if (!$options->getNoCtime()) {
-                $metadata[] = 'ctime';
-            }
-
-            if (!$options->getNoAtime()) {
-                $metadata[] = 'atime';
-            }
-
-            $this->capabilities->setSupportedMetadata(
-                $this->capabilityMarker,
-                $metadata
             );
         }
     }

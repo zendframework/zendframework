@@ -235,6 +235,7 @@ class Application implements AppContext
         if ($result->stopped()) {
             $response = $result->last();
             if ($response instanceof Response) {
+                $event->setTarget($this);
                 $events->trigger('finish', $event);
                 return $response;
             }
@@ -253,6 +254,7 @@ class Application implements AppContext
         // Complete response
         $response = $result->last();
         if ($response instanceof Response) {
+            $event->setTarget($this);
             $events->trigger('finish', $event);
             return $response;
         }
@@ -275,6 +277,7 @@ class Application implements AppContext
     protected function completeRequest(MvcEvent $event)
     {
         $events = $this->events();
+        $event->setTarget($this);
         $events->trigger('render', $event);
         $events->trigger('finish', $event);
         return $event->getResponse();

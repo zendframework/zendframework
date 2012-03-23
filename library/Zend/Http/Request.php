@@ -86,7 +86,7 @@ class Request extends Message implements RequestDescription
     {
         $request = new static();
 
-        $lines = preg_split('/\r\n/', $string);
+        $lines = explode("\r\n", $string);
 
         // first line must be Method/Uri/Version string
         $matches = null;

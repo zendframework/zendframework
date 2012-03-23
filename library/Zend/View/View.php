@@ -138,7 +138,7 @@ class View
      */
     public function addRenderingStrategy($callable, $priority = 1)
     {
-        $this->events()->attach('renderer', $callable, $priority);
+        $this->events()->attach(ViewEvent::EVENT_RENDERER, $callable, $priority);
         return $this;
     }
 
@@ -159,7 +159,7 @@ class View
      */
     public function addResponseStrategy($callable, $priority = 1)
     {
-        $this->events()->attach('response', $callable, $priority);
+        $this->events()->attach(ViewEvent::EVENT_RESPONSE, $callable, $priority);
         return $this;
     }
 
@@ -182,7 +182,7 @@ class View
         $event   = $this->getEvent();
         $event->setModel($model);
         $events  = $this->events();
-        $results = $events->trigger(MvcEvent::EVENT_RENDERER, $event, function($result) {
+        $results = $events->trigger(ViewEvent::EVENT_RENDERER, $event, function($result) {
             return ($result instanceof Renderer);
         });
         $renderer = $results->last();
@@ -218,7 +218,7 @@ class View
 
         $event->setResult($rendered);
 
-        $events->trigger(MvcEvent::EVENT_RESPONSE, $event);
+        $events->trigger(ViewEvent::EVENT_RESPONSE, $event);
     }
 
     /**

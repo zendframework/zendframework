@@ -17,7 +17,6 @@ class MvcEvent extends Event
     const EVENT_DISPATCH_ERROR = 'dispatch.error';
     const EVENT_FINISH         = 'finish';
     const EVENT_RENDER         = 'render';
-    const EVENT_RENDERER       = 'renderer';
     const EVENT_RESPONSE       = 'response';
     const EVENT_ROUTE          = 'route';
     /**#@-*/

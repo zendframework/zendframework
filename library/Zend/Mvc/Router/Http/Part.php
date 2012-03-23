@@ -69,8 +69,7 @@ class Part extends TreeRouteStack implements Route
      * @param  mixed       $route
      * @param  boolean     $mayTerminate
      * @param  RouteBroker $routeBroker
-     * @param  array       $childRoutes
-     * @return void
+     * @param  array|null  $childRoutes
      */
     public function __construct($route, $mayTerminate, RouteBroker $routeBroker, array $childRoutes = null)
     {
@@ -95,7 +94,8 @@ class Part extends TreeRouteStack implements Route
      *
      * @see    Route::factory()
      * @param  mixed $options
-     * @return void
+     * @throws \Zend\Mvc\Router\Exception\InvalidArgumentException
+     * @return Part
      */
     public static function factory($options = array())
     {
@@ -131,7 +131,8 @@ class Part extends TreeRouteStack implements Route
      * match(): defined by Route interface.
      *
      * @see    Route::match()
-     * @param  Request $request
+     * @param  Request  $request
+     * @param  int|null $pathOffset
      * @return RouteMatch|null
      */
     public function match(Request $request, $pathOffset = null)

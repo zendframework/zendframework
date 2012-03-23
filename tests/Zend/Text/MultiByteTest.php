@@ -250,7 +250,7 @@ class MultiByteTest extends \PHPUnit_Framework_TestCase
 
     public function testWordWrapInvalidArgument()
     {
-        $this->setExpectedException('Zend\Text\Exception\InvalidArgumentException', "Can't force cut when width is zero");
+        $this->setExpectedException('Zend\Text\Exception\InvalidArgumentException', "Cannot force cut when width is zero");
         Text\MultiByte::wordWrap('a', 0, "\n", true);
     }
 }

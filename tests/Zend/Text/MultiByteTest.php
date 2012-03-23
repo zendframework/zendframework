@@ -68,7 +68,7 @@ class MultiByteTest extends \PHPUnit_Framework_TestCase
     public function testWordWrapLongBreak()
     {
         $line = Text\MultiByte::wordWrap("Ä very<br>long wöö<br>öööööööö<br>öörd.", 8, '<br>', false);
-        $this->assertEquals("Ä very<br>long<br>wöö<br>öööööööö<br>öörd.", $line);
+        $this->assertEquals("Ä very<br>long wöö<br>öööööööö<br>öörd.", $line);
     }
 
     /**
@@ -86,10 +86,28 @@ class MultiByteTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('äüö äöü ', $line);
     }
 
+    public function testWordWrapCutEndingSingleSpaceWithNonSpaceDivider()
+    {
+        $line = Text\MultiByte::wordWrap('äöüäöü ', 3, '-', true);
+        $this->assertEquals('äöü-äöü-', $line);
+    }
+
     public function testWordWrapCutEndingTwoSpaces()
     {
         $line = Text\MultiByte::wordWrap('äüöäöü  ', 3, ' ', true);
         $this->assertEquals('äüö äöü  ', $line);
+    }
+
+    public function testWordWrapNoCutEndingSingleSpace()
+    {
+        $line = Text\Multibyte::wordWrap('12345 ', 5, '-', false);
+        $this->assertEquals('12345-', $line);
+    }
+
+    public function testWordWrapNoCutEndingTwoSpaces()
+    {
+        $line = Text\MultiByte::wordWrap('12345  ', 5, '-', false);
+        $this->assertEquals('12345- ', $line);
     }
 
     public function testWordWrapCutEndingThreeSpaces()
@@ -228,5 +246,11 @@ class MultiByteTest extends \PHPUnit_Framework_TestCase
     {
         $text = Text\MultiByte::strPad('äääöö', 5, 'ö', STR_PAD_RIGHT);
         $this->assertEquals('äääöö', $text);
+    }
+
+    public function testWordWrapInvalidArgument()
+    {
+        $this->setExpectedException('Zend\Text\Exception\InvalidArgumentException', "Can't force cut when width is zero");
+        Text\MultiByte::wordWrap('a', 0, "\n", true);
     }
 }

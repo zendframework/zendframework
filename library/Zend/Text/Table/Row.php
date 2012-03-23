@@ -196,11 +196,11 @@ class Row
         for ($line = 0; $line < $maxHeight; $line++) {
             $result .= $decorator->getVertical();
 
-            foreach ($renderedColumns as $renderedColumn) {
+            foreach ($renderedColumns as $index => $renderedColumn) {
                 if (isset($renderedColumn[$line]) === true) {
                     $result .= $renderedColumn[$line];
                 } else {
-                    $result .= str_repeat(' ', strlen($renderedColumn[0]));
+                    $result .= str_repeat(' ', $this->_columnWidths[$index]);
                 }
 
                 $result .= $decorator->getVertical();

@@ -23,7 +23,8 @@
  */
 namespace Zend\Http;
 
-use Zend\Config\Config,
+use ArrayIterator,
+    Zend\Config\Config,
     Zend\Uri\Http,
     Zend\Http\Header\Cookie,
     Zend\Http\Header\SetCookie,
@@ -475,7 +476,7 @@ class Client implements Dispatchable
      */
     public function addCookie($cookie, $value = null, $domain = null, $expire = null, $path = null, $secure = false, $httponly = true)
     {
-        if (is_array($cookie) || $cookie instanceof \ArrayIterator) {
+        if (is_array($cookie) || $cookie instanceof ArrayIterator) {
             foreach ($cookie as $setCookie) {
                 if ($setCookie instanceof SetCookie) {
                     $this->cookies[$this->getCookieId($setCookie)] = $setCookie;

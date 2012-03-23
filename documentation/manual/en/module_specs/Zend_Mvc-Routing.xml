@@ -532,7 +532,7 @@ $route = Scheme::factory(array(
         alphanumeric characters; if a segment is optional, it should be
         surrounded by brackets. As an example, "/:foo[/:bar]"
         would match a "/" followed by text and assign it to the
-        key "bar"; if any additional "/" characters are
+        key "foo"; if any additional "/" characters are
         found, any text following the last one will be assigned to the key
         "bar".
       </para>

@@ -270,7 +270,7 @@ class Connection implements ConnectionInterface
         }
 
         if (!$this->inTransaction) {
-            throw new \Exception('Must call commit() before you can rollback');
+            throw new \Exception('Must call beginTransaction() before you can rollback');
         }
 
         $this->resource->rollBack();

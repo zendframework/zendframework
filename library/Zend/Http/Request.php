@@ -492,6 +492,29 @@ class Request extends Message implements RequestDescription
     }
 
     /**
+     * Is the request a Javascript XMLHttpRequest?
+     *
+     * Should work with Prototype/Script.aculo.us, possibly others.
+     *
+     * @return boolean
+     */
+    public function isXmlHttpRequest()
+    {
+        return ($this->headers()->get('X_REQUESTED_WITH')->getFieldValue() == 'XMLHttpRequest');
+    }
+
+    /**
+     * Is this a Flash request?
+     *
+     * @return boolean
+     */
+    public function isFlashRequest()
+    {
+        $header = strtolower($this->headers()->get('USER_AGENT')->getFieldValue());
+        return (strstr($header, ' flash')) ? true : false;
+    }
+
+    /**
      * Return the formatted request line (first line) for this http request
      *
      * @return string

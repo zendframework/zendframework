@@ -546,7 +546,7 @@ class ApplicationTest extends TestCase
         });
 
         $app->run();
-        $this->assertContains(Application::ERROR_CONTROLLER_NOT_FOUND, $response->getContent());
+        $this->assertContains(Application::ERROR_ROUTER_NO_MATCH, $response->getContent());
     }
 
     /**
@@ -586,7 +586,7 @@ class ApplicationTest extends TestCase
 
         $app->run();
         $event = $app->getMvcEvent();
-        $this->assertEquals(Application::ERROR_CONTROLLER_NOT_FOUND, $event->getError());
+        $this->assertEquals(Application::ERROR_ROUTER_NO_MATCH, $event->getError());
     }
 
     /**

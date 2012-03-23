@@ -821,23 +821,10 @@ class Client implements Dispatchable
                 throw new Client\Exception\RuntimeException('Adapter does not support streaming');
             }
 
-            // Open the connection, send the request and read the response
-            $this->adapter->connect($uri->getHost(), $uri->getPort(), $secure);
+            // calling protected method to allow extending classes
+            // to wrap the interaction with the adapter
+            $response = $this->doRequest($uri, $method, $secure, $headers, $body);
 
-            if($this->config['outputstream']) {
-                if($this->adapter instanceof Client\Adapter\Stream) {
-                    $stream = $this->openTempStream();
-                    $this->adapter->setOutputStream($stream);
-                } else {
-                    throw new Exception\RuntimeException('Adapter does not support streaming');
-                }
-            }
-
-            // HTTP connection
-            $this->lastRawRequest = $this->adapter->write($method,
-                $uri, $this->config['httpversion'], $headers, $body);
-
-            $response = $this->adapter->read();
             if (! $response) {
                 throw new Exception\RuntimeException('Unable to read response, or response is empty');
             }
@@ -1272,6 +1259,39 @@ class Client implements Dispatchable
         }
 
         return $parameters;
+    }
+
+    /**
+     * Separating this from send method allows subclasses to wrap
+     * the interaction with the adapter
+     *
+     * @param Http $uri
+     * @param string $secure
+     * @param string $method
+     * @param array $headers
+     * @param string $body
+     * @return string the raw response
+     * @throws Exception\RuntimeException
+     */
+    protected function doRequest(Http $uri, $method, $secure = false, $headers = array(), $body = '')
+    {
+        // Open the connection, send the request and read the response
+        $this->adapter->connect($uri->getHost(), $uri->getPort(), $secure);
+
+        if($this->config['outputstream']) {
+            if($this->adapter instanceof Client\Adapter\Stream) {
+                $stream = $this->openTempStream();
+                $this->adapter->setOutputStream($stream);
+            } else {
+                throw new Exception\RuntimeException('Adapter does not support streaming');
+            }
+        }
+
+        // HTTP connection
+        $this->lastRawRequest = $this->adapter->write($method,
+            $uri, $this->config['httpversion'], $headers, $body);
+
+        return $this->adapter->read();
     }
 
     /**

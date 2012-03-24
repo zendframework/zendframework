@@ -121,6 +121,7 @@ class Doctype extends AbstractHelper
         if (null !== $doctype) {
             switch ($doctype) {
                 case self::XHTML11:
+                case self::XHTML1_RDFA1:
                 case self::XHTML1_STRICT:
                 case self::XHTML1_TRANSITIONAL:
                 case self::XHTML1_FRAMESET:

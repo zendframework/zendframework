@@ -24,7 +24,9 @@
  */
 namespace Zend\View\Helper;
 
-use Zend\View\Exception;
+use Zend\View\Exception,
+    Zend\Registry,
+    ArrayObject;
 
 /**
  * Helper for setting and retrieving the doctype
@@ -56,7 +58,6 @@ class Doctype extends AbstractHelper
     const HTML5               = 'HTML5';
     const CUSTOM_XHTML        = 'CUSTOM_XHTML';
     const CUSTOM              = 'CUSTOM';
-
     /**#@-*/
 
     /**
@@ -84,8 +85,8 @@ class Doctype extends AbstractHelper
      */
     public function __construct()
     {
-        if (!\Zend\Registry::isRegistered($this->_regKey)) {
-            $this->_registry = new \ArrayObject(array(
+        if (!Registry::isRegistered($this->_regKey)) {
+            $this->_registry = new ArrayObject(array(
                 'doctypes' => array(
                     self::XHTML11             => '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">',
                     self::XHTML1_RDFA1        => '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN" "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd">',
@@ -101,10 +102,10 @@ class Doctype extends AbstractHelper
                 )
             ));
 
-            \Zend\Registry::set($this->_regKey, $this->_registry);
+            Registry::set($this->_regKey, $this->_registry);
             $this->setDoctype($this->_defaultDoctype);
         } else {
-            $this->_registry = \Zend\Registry::get($this->_regKey);
+            $this->_registry = Registry::get($this->_regKey);
         }
     }
 

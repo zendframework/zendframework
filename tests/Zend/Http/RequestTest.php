@@ -144,16 +144,28 @@ class RequestTest extends \PHPUnit_Framework_TestCase
     public function testRequestIsXmlHttpRequest()
     {
         $request = new Request();
-        $request->headers()->addHeaderLine('X_REQUESTED_WITH', 'XMLHttpRequest');
+        $this->assertFalse($request->isXmlHttpRequest());
 
+        $request = new Request();
+        $request->headers()->addHeaderLine('X_REQUESTED_WITH', 'FooBazBar');
+        $this->assertFalse($request->isXmlHttpRequest());
+
+        $request = new Request();
+        $request->headers()->addHeaderLine('X_REQUESTED_WITH', 'XMLHttpRequest');
         $this->assertTrue($request->isXmlHttpRequest());
     }
 
     public function testRequestIsFlashRequest()
     {
         $request = new Request();
-        $request->headers()->addHeaderLine('USER_AGENT', 'Shockwave Flash');
+        $this->assertFalse($request->isFlashRequest());
 
+        $request = new Request();
+        $request->headers()->addHeaderLine('USER_AGENT', 'FooBazBar');
+        $this->assertFalse($request->isFlashRequest());
+
+        $request = new Request();
+        $request->headers()->addHeaderLine('USER_AGENT', 'Shockwave Flash');
         $this->assertTrue($request->isFlashRequest());
     }
 

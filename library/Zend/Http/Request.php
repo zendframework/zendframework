@@ -500,7 +500,8 @@ class Request extends Message implements RequestDescription
      */
     public function isXmlHttpRequest()
     {
-        return ($this->headers()->get('X_REQUESTED_WITH')->getFieldValue() == 'XMLHttpRequest');
+        $header = $this->headers()->get('X_REQUESTED_WITH');
+        return false !== $header && $header->getFieldValue() == 'XMLHttpRequest';
     }
 
     /**
@@ -510,8 +511,8 @@ class Request extends Message implements RequestDescription
      */
     public function isFlashRequest()
     {
-        $header = strtolower($this->headers()->get('USER_AGENT')->getFieldValue());
-        return (strstr($header, ' flash')) ? true : false;
+        $header = $this->headers()->get('USER_AGENT');
+        return false !== $header && stristr($header->getFieldValue(), ' flash');
     }
 
     /**

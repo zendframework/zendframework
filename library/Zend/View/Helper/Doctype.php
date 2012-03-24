@@ -193,15 +193,15 @@ class Doctype extends AbstractHelper
         return (stristr($this->getDoctype(), 'xhtml') ? true : false);
     }
 
-	/**
-	 * Is doctype HTML5? (HeadMeta uses this for validation)
-	 *
-	 * @return boolean
-	 */
-	public function isHtml5()
+    /**
+     * Is doctype HTML5? (HeadMeta uses this for validation)
+     *
+     * @return boolean
+     */
+    public function isHtml5()
     {
-		return (stristr($this->__invoke(), '<!DOCTYPE html>') ? true : false);
-	}
+        return (stristr($this->__invoke(), '<!DOCTYPE html>') ? true : false);
+    }
 
     /**
      * Is doctype RDFa?

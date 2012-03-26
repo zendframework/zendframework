@@ -647,27 +647,21 @@ class Filesystem extends AbstractAdapter
     protected function internalSetItem(& $normalizedKey, & $value, array & $normalizedOptions)
     {
         $baseOptions = $this->getOptions();
-        $oldUmask = null;
+        $filespec    = $this->getFileSpec($normalizedKey, $normalizedOptions);
+        $oldUmask    = null;
 
-        $bufferKey = $normalizedOptions['namespace'] . $baseOptions->getNamespaceSeparator() . $normalizedKey;
-        if ($this->bufferKey == $bufferKey) {
-            $filespec = $this->lastInfo['filespec'];
-            // if lastKeyInfo is available I'm sure that the cache directory exist
-        } else {
-            $filespec = $this->getFileSpec($normalizedKey, $normalizedOptions);
-            if ($baseOptions->getDirLevel() > 0) {
-                $path = dirname($filespec);
-                if (!file_exists($path)) {
-                    $oldUmask = umask($baseOptions->getDirUmask());
-                    ErrorHandler::start();
-                    $mkdir = mkdir($path, 0777, true);
-                    $error = ErrorHandler::stop();
-                    if (!$mkdir) {
-                        umask($oldUmask);
-                        throw new Exception\RuntimeException(
-                            "Error creating directory '{$path}'", 0, $error
-                        );
-                    }
+        if ($baseOptions->getDirLevel() > 0) {
+            $path = dirname($filespec);
+            if (!file_exists($path)) {
+                $oldUmask = umask($baseOptions->getDirUmask());
+                ErrorHandler::start();
+                $mkdir = mkdir($path, 0777, true);
+                $error = ErrorHandler::stop();
+                if (!$mkdir) {
+                    umask($oldUmask);
+                    throw new Exception\RuntimeException(
+                        "Error creating directory '{$path}'", 0, $error
+                    );
                 }
             }
         }

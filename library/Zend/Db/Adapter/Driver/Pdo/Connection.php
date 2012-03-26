@@ -111,9 +111,13 @@ class Connection implements ConnectionInterface
 
         /** @var $result \PDOStatement */
         $result = $this->resource->query('SELECT DATABASE()');
-        $r = $result->fetch_row();
-        return $r[0];
+        if ($result instanceof \PDOStatement) {
+            $r = $result->fetch_row();
+            return $r[0];
+        }
+        return false;
     }
+
     /**
      * Set resource
      * 

@@ -650,6 +650,7 @@ class Filesystem extends AbstractAdapter
                     $mkdir = mkdir($path, 0777, true);
                     $error = ErrorHandler::stop();
                     if (!$mkdir) {
+                        umask($oldUmask);
                         throw new Exception\RuntimeException(
                             "Error creating directory '{$path}'", 0, $error
                         );
@@ -673,7 +674,7 @@ class Filesystem extends AbstractAdapter
         }
 
         try {
-            if ($oldUmask !== null) { // $oldUmask could be defined on set directory_umask
+            if ($oldUmask !== null) { // $oldUmask could be defined on create directory
                 umask($baseOptions->getFileUmask());
             } else {
                 $oldUmask = umask($baseOptions->getFileUmask());

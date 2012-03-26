@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Log
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -23,13 +23,13 @@ namespace ZendTest\Log\Writer;
 
 use ZendTest\Log\TestAsset\ConcreteWriter,
     Zend\Log\Formatter\Simple as SimpleFormatter,
-    Zend\Log\Filter\Message as MessageFilter;
+    Zend\Log\Filter\Regex as RegexFilter;
 
 /**
  * @category   Zend
  * @package    Zend_Log
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Log
  */
@@ -55,7 +55,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
     public function testAddFilter()
     {
         $this->_writer->addFilter(1);
-        $this->_writer->addFilter(new MessageFilter('/mess/'));
+        $this->_writer->addFilter(new RegexFilter('/mess/'));
         $this->setExpectedException('Zend\Log\Exception\InvalidArgumentException');
         $this->_writer->addFilter(new \StdClass());
     }

@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Log
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -24,18 +24,18 @@
 namespace Zend\Log;
 
 use DateTime,
-    SplStack,
+    Zend\Stdlib\SplPriorityQueue,
     Traversable,
     Zend\Loader\Broker,
     Zend\Loader\Pluggable,
-    Zend\Stdlib\IteratorToArray;
+    Zend\Stdlib\ArrayUtils;
 
 /**
  * Logging messages with a stack of backends
  *
  * @category   Zend
  * @package    Zend_Log
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Logger implements Loggable, Pluggable
@@ -67,20 +67,20 @@ class Logger implements Loggable, Pluggable
      * @var array
      */
     protected $priorities = array(
-        self::EMERG => 'EMERG',
-        self::ALERT => 'ALERT',
-        self::CRIT => 'CRIT',
-        self::ERR => 'ERR',
-        self::WARN => 'WARN',
+        self::EMERG  => 'EMERG',
+        self::ALERT  => 'ALERT',
+        self::CRIT   => 'CRIT',
+        self::ERR    => 'ERR',
+        self::WARN   => 'WARN',
         self::NOTICE => 'NOTICE',
-        self::INFO => 'INFO',
-        self::DEBUG => 'DEBUG',
+        self::INFO   => 'INFO',
+        self::DEBUG  => 'DEBUG',
     );
 
     /**
      * Writers
      *
-     * @var SplStack
+     * @var SplPriorityQueue
      */
     protected $writers;
 
@@ -92,6 +92,16 @@ class Logger implements Loggable, Pluggable
     protected $writerBroker;
 
     /**
+     * @var boolean
+     */
+    protected static $registeredErrorHandler = false;
+       
+    /**
+     * @var boolean
+     */
+    protected static $registeredExceptionHandler = false;
+    
+    /**
      * Constructor
      *
      * @todo support configuration (writers, dateTimeFormat, and broker)
@@ -99,7 +109,7 @@ class Logger implements Loggable, Pluggable
      */
     public function __construct()
     {
-        $this->writers = new SplStack();
+        $this->writers = new SplPriorityQueue();
     }
 
     /**
@@ -192,11 +202,12 @@ class Logger implements Loggable, Pluggable
     /**
      * Add a writer to a logger
      *
-     * @param string|Writer $writer
+     * @param  string|Writer $writer
+     * @param  int $priority
      * @return Logger
      * @throws Exception\InvalidArgumentException
      */
-    public function addWriter($writer)
+    public function addWriter($writer, $priority=1)
     {
         if (is_string($writer)) {
             $writer = $this->plugin($writer);
@@ -206,18 +217,28 @@ class Logger implements Loggable, Pluggable
                 is_object($writer) ? get_class($writer) : gettype($writer)
             ));
         }
-        $this->writers->push($writer);
+        
+        $this->writers->insert($writer, $priority);
 
         return $this;
     }
 
     /**
+     * Get writers
+     * 
+     * @return array 
+     */
+    public function getWriters()
+    {
+        return $this->writers->toArray();
+    }
+    
+    /**
      * Add a message as a log entry
      *
-     * @todo implement if stack of writers is empty (exception or null writer)
-     * @param int $priority
-     * @param string $message
-     * @param array|Traversable $extra
+     * @param  int $priority
+     * @param  mixed $message
+     * @param  array|Traversable $extra
      * @return Logger
      * @throws Exception\InvalidArgumentException if message can't be cast in string
      * @throws Exception\InvalidArgumentException if extra can't be iterate
@@ -235,19 +256,27 @@ class Logger implements Loggable, Pluggable
                 '$extra must be an array or implement Traversable'
             );
         } elseif ($extra instanceof Traversable) {
-            $extra = IteratorToArray::convert($extra);
+            $extra = ArrayUtils::iteratorToArray($extra);
         }
 
+        if ($this->getWriters()===array()) {
+            throw new Exception\RuntimeException('No log writer specified');
+        }
+        
         $date = new DateTime();
         $timestamp = $date->format($this->getDateTimeFormat());
 
-        foreach ($this->writers as $writer) {
+        if (is_array($message)) {
+            $message = var_export($message,TRUE);
+        }
+        
+        foreach ($this->getWriters() as $writer) {
             $writer->write(array(
-                'timestamp' => $timestamp,
-                'priority' => (int) $priority,
+                'timestamp'    => $timestamp,
+                'priority'     => (int) $priority,
                 'priorityName' => $this->priorities[$priority],
-                'message' => (string) $message,
-                'extra' => $extra
+                'message'      => (string) $message,
+                'extra'        => $extra
             ));
         }
 
@@ -332,5 +361,104 @@ class Logger implements Loggable, Pluggable
     public function debug($message, $extra = array())
     {
         return $this->log(self::DEBUG, $message, $extra);
+    }
+    
+    /**
+     * Register logging system as an error handler to log PHP errors
+     *
+     * @link http://www.php.net/manual/en/function.set-error-handler.php 
+     *
+     * @param  Logger $logger
+     * @return boolean
+     */
+    public static function registerErrorHandler($logger)
+    {
+        // Only register once per instance
+        if (self::$registeredErrorHandler) {
+            return false;
+        }
+
+        if (!$logger instanceof Logger) {
+            throw new Exception\InvalidArgumentException('Invalid Logger specified');
+        }
+        
+        $errorHandlerMap = array(
+            E_NOTICE            => self::NOTICE,
+            E_USER_NOTICE       => self::NOTICE,
+            E_WARNING           => self::WARN,
+            E_CORE_WARNING      => self::WARN,
+            E_USER_WARNING      => self::WARN,
+            E_ERROR             => self::ERR,
+            E_USER_ERROR        => self::ERR,
+            E_CORE_ERROR        => self::ERR,
+            E_RECOVERABLE_ERROR => self::ERR,
+            E_STRICT            => self::DEBUG,
+            E_DEPRECATED        => self::DEBUG,
+            E_USER_DEPRECATED   => self::DEBUG
+        );
+        
+        set_error_handler(function($errno, $errstr, $errfile, $errline, $errcontext) use ($errorHandlerMap, $logger) {
+            $errorLevel = error_reporting();
+
+            if ($errorLevel && $errno) {
+                if (isset($errorHandlerMap[$errno])) {
+                    $priority = $errorHandlerMap[$errno];
+                } else {
+                    $priority = Logger::INFO;
+                }
+                $logger->log($priority, $errstr, array('errno'=>$errno, 'file'=>$errfile, 'line'=>$errline, 'context'=>$errcontext));
+            }
+        });
+        self::$registeredErrorHandler = true;
+        return true;
+    }
+    /**
+     * Unregister error handler
+     * 
+     */
+    public static function unregisterErrorHandler()
+    {
+        restore_error_handler();
+        self::$registeredErrorHandler = false;
+    }
+    /**
+     * Register logging system as an exception handler to log PHP exceptions
+     * 
+     * @link http://www.php.net/manual/en/function.set-exception-handler.php
+     * 
+     * @param Logger $logger
+     * @return type 
+     */
+    public static function registerExceptionHandler($logger)
+    {
+        // Only register once per instance
+        if (self::$registeredExceptionHandler) {
+            return false;
+        }
+        
+        if (!$logger instanceof Logger) {
+            throw new Exception\InvalidArgumentException('Invalid Logger specified');
+        }
+        
+        set_exception_handler(function ($exception) use ($logger){
+            $extra = array ('file'  => $exception->getFile(), 
+                            'line'  => $exception->getLine(),
+                            'trace' => $exception->getTrace());  
+            if (isset($exception->xdebug_message)) {
+                $extra['xdebug'] = $exception->xdebug_message;
+            }
+            $logger->log(Logger::ERR, $exception->getMessage(), $extra);
+        });
+        self::$registeredExceptionHandler = true;
+        return true;
+    }
+    
+    /**
+     * Unregister exception handler
+     */
+    public static function unregisterExceptionHandler()
+    {
+        restore_exception_handler();
+        self::$registeredExceptionHandler = false;
     }
 }

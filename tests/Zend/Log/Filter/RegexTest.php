@@ -22,7 +22,7 @@
 namespace ZendTest\Log\Filter;
 
 use Zend\Log\Logger,
-    Zend\Log\Filter\Message,
+    Zend\Log\Filter\Regex,
     Zend\Config\Config;
 
 /**
@@ -33,17 +33,17 @@ use Zend\Log\Logger,
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Log
  */
-class MessageTest extends \PHPUnit_Framework_TestCase
+class RegexTest extends \PHPUnit_Framework_TestCase
 {
     public function testMessageFilterRecognizesInvalidRegularExpression()
     {
         $this->setExpectedException('Zend\Log\Exception\InvalidArgumentException', 'invalid reg');
-        new Message('invalid regexp');
+        new Regex('invalid regexp');
     }
 
     public function testMessageFilter()
     {
-        $filter = new Message('/accept/');
+        $filter = new Regex('/accept/');
         $this->assertTrue($filter->filter(array('message' => 'foo accept bar')));
         $this->assertFalse($filter->filter(array('message' => 'foo reject bar')));
     }

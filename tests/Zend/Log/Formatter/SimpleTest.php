@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Log
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -28,7 +28,7 @@ use ZendTest\Log\TestAsset\StringObject,
  * @category   Zend
  * @package    Zend_Log
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Log
  */
@@ -108,5 +108,26 @@ class SimpleTest extends \PHPUnit_Framework_TestCase
         );
         $formatter = Simple::factory($options);
         $this->assertInstanceOf('Zend\Log\Formatter\Simple', $formatter);
+    }
+    
+    /**
+     * @group ZF-10427
+     */
+    public function testDefaultFormatShouldDisplayExtraInformations()
+    {
+    	$message = 'custom message';
+    	$exception = new \RuntimeException($message);
+    	$event = array(
+    	    'timestamp'    => date('c'),
+    	    'message'      => 'Application error',
+    	    'priority'     => 2,
+    	    'priorityName' => 'CRIT',
+    	    'info'         => $exception,
+    	);
+
+        $formatter = new Simple();
+        $output = $formatter->format($event);
+
+        $this->assertContains($message, $output);
     }
 }

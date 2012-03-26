@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Log
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -28,7 +28,7 @@ use Zend\Log\Logger,
  * @category   Zend
  * @package    Zend_Log
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Log
  */
@@ -84,6 +84,13 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Zend\Log\Writer\Mock', $writer);
     }
 
+    public function testPassWriterAsString()
+    {
+        $this->logger->addWriter('mock');
+        $writers = $this->logger->getWriters();
+        $this->assertInstanceOf('Zend\Log\Writer\Mock', $writers[0]);
+    }
+    
     /**
      * @dataProvider provideInvalidClasses
      */
@@ -93,16 +100,59 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
         $this->logger->addWriter($writer);
     }
 
-    public function testLoggingEventDispatchesRecordInRelevantWriters()
+    public function testEmptyWriter()
+    {
+        $this->setExpectedException('Zend\Log\Exception\RuntimeException', 'No log writer specified');
+        $this->logger->log(Logger::INFO, 'test');
+    }
+    
+    public function testAddWriterWithPriority()
+    {
+        $writer1 = $this->logger->plugin('mock');
+        $this->logger->addWriter($writer1,1);
+        $writer2 = $this->logger->plugin('null');
+        $this->logger->addWriter($writer2,2);
+        $writers = $this->logger->getWriters();
+
+        $this->assertTrue(is_array($writers));
+        $this->assertTrue($writers[0] instanceof \Zend\Log\Writer\Null);
+        $this->assertTrue($writers[1] instanceof \Zend\Log\Writer\Mock);
+        
+    }
+    
+    public function testAddWithSamePriority()
+    {
+        $writer1 = $this->logger->plugin('mock');
+        $this->logger->addWriter($writer1,1);
+        $writer2 = $this->logger->plugin('null');
+        $this->logger->addWriter($writer2,1);
+        $writers = $this->logger->getWriters();
+
+        $this->assertTrue(is_array($writers));
+        $this->assertTrue($writers[0] instanceof \Zend\Log\Writer\Mock);
+        $this->assertTrue($writers[1] instanceof \Zend\Log\Writer\Null);
+    }
+    
+    public function testLogging()
     {
         $writer = new MockWriter;
         $this->logger->addWriter($writer);
         $this->logger->log(Logger::INFO, 'tottakai');
+        
+        $this->assertEquals(count($writer->events), 1);
+        $this->assertContains('tottakai', $writer->events[0]['message']);
+    }
+    
+    public function testLoggingArray()
+    {
+        $writer = new MockWriter;
+        $this->logger->addWriter($writer);
+        $this->logger->log(Logger::INFO, array('test'));
 
         $this->assertEquals(count($writer->events), 1);
-        $this->assertContains('tottakai', $writer->events[0]);
+        $this->assertContains('test', $writer->events[0]['message']);
     }
-
+    
     public static function provideAttributes()
     {
         return array(
@@ -145,5 +195,19 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
     {
         $this->setExpectedException('Zend\Log\Exception\InvalidArgumentException');
         $this->logger->log(Logger::ERR, $message, $extra);
+    }
+    
+    public function testRegisterErrorHandler()
+    {
+        $writer = new MockWriter;
+        $this->logger->addWriter($writer);
+
+        $this->assertTrue(Logger::registerErrorHandler($this->logger));
+        // check for single error handler instance
+        $this->assertFalse(Logger::registerErrorHandler($this->logger));
+        // generate a warning
+        echo $test;
+        Logger::unregisterErrorHandler();
+        $this->assertEquals($writer->events[0]['message'], 'Undefined variable: test');
     }
 }

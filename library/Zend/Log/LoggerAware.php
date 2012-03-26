@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Log
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -23,19 +23,17 @@
  */
 namespace Zend\Log;
 
+use Zend\Log\Logger;
+
 /**
+ * Logger aware interface
+ *
  * @category   Zend
  * @package    Zend_Log
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Formatter
+interface LoggerAware
 {
-    /**
-     * Formats data into a single line to be written by the writer.
-     *
-     * @param  array    $event    event data
-     * @return string             formatted line to write to the log
-     */
-    public function format($event);
+    public function setLogger(Logger $logger);
 }

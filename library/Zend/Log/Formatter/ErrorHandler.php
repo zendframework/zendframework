@@ -33,13 +33,13 @@ use \Zend\Log\Formatter;
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Firebug extends AbstractFormatter
+class ErrorHandler extends AbstractFormatter
 {
     /**
-	 * Factory for Zend_Log_Formatter_Firebug classe
-	 *
+     * Factory for Zend\Log\Formatter\ErrorHandler
+     *
      * @param array|\Zend\Config\Config $options useless
-	 * @return \Zend\Log\Formatter\Firebug
+     * @return \Zend\Log\Formatter\Firebug
      */
     public static function factory($options = array())
     {
@@ -47,18 +47,17 @@ class Firebug extends AbstractFormatter
     }
 
     /**
-     * This method formats the event for the firebug writer.
+     * This method formats the event for the PHP Error Handler.
      *
-     * The default is to just send the message parameter, but through
-     * extension of this class and calling the
-     * {@see Zend_Log_Writer_Firebug::setFormatter()} method you can
-     * pass as much of the event data as you are interested in.
-     *
-     * @param  array    $event    event data
-     * @return mixed              event message
+     * @param  array $event
+     * @return string
      */
     public function format($event)
     {
-        return $event['message'];
+        $output = $event['timestamp'] . ' ' . $event['priorityName'] . ' (' .
+                  $event['priority'] . ') ' . $event['message'] . ' (errno ' .
+                  $event['extra']['errno'] . ') in ' . $event['extra']['file'] .
+                  ' on line ' . $event['extra']['line'];
+        return $output;
     }
 }

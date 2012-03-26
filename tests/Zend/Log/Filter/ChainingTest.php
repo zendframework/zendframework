@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Log
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -28,7 +28,7 @@ use \Zend\Log\Logger,
  * @category   Zend
  * @package    Zend_Log
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Log
  */
@@ -77,11 +77,13 @@ class ChainingTest extends \PHPUnit_Framework_TestCase
 
         rewind($this->log);
         $logdata = stream_get_contents($this->log);
+
         $this->assertContains($warn, $logdata);
         $this->assertContains($err, $logdata);
 
         rewind($log2);
         $logdata = stream_get_contents($log2);
+
         $this->assertContains($err, $logdata);
         $this->assertNotContains($warn, $logdata);
     }

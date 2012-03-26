@@ -24,40 +24,50 @@
  */
 namespace Zend\Log\Filter;
 
-use Zend\Log\Factory,
+use Zend\Log\Exception,
     Zend\Log\Filter,
-    Zend\Log\Exception,
-    Zend\Config\Config;
+    Zend\Validator\Validator as ZendValidator;
 
 /**
- * @uses       \Zend\Log\Exception\InvalidArgumentException
- * @uses       \Zend\Log\Filter
- * @uses       \Zend\Log\Factory
  * @category   Zend
  * @package    Zend_Log
  * @subpackage Filter
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class AbstractFilter implements Filter, Factory
+class Validator implements Filter
 {
     /**
-     * Validate and optionally convert the config to array
+     * Regex to match
      *
-     * @param  array|Config $config Config or Array
-     * @return array
+     * @var ZendValidator
+     */
+    protected $validator;
+
+    /**
+     * Filter out any log messages not matching the validator
+     *
+     * @param  ZendValidator $validator
      * @throws Exception\InvalidArgumentException
      */
-    static protected function _parseConfig($config)
+    public function __construct($validator)
     {
-        if ($config instanceof Config) {
-            $config = $config->toArray();
+        if (!$validator instanceof ZendValidator) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                'Expected Zend\Validator object'
+            ));
         }
+        $this->validator = $validator;
+    }
 
-        if (!is_array($config)) {
-            throw new Exception\InvalidArgumentException('Configuration must be an array or instance of Zend\Config\Config');
-        }
-
-        return $config;
+    /**
+     * Returns TRUE to accept the message, FALSE to block it.
+     *
+     * @param array $event event data
+     * @return boolean 
+     */
+    public function filter(array $event)
+    {
+        return $this->validator->isValid($event['message']);
     }
 }

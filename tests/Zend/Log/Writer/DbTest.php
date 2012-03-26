@@ -15,13 +15,14 @@
  * @category   Zend
  * @package    Zend_Log
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace ZendTest\Log\Writer;
 
 use ZendTest\Log\TestAsset\MockDbAdapter,
+    ZendTest\Log\TestAsset\MockDbDriver,
     Zend\Log\Writer\Db as DbWriter,
     Zend\Log\Logger,
     Zend\Log\Formatter\Simple as SimpleFormatter;
@@ -30,7 +31,7 @@ use ZendTest\Log\TestAsset\MockDbAdapter,
  * @category   Zend
  * @package    Zend_Log
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Log
  */
@@ -61,23 +62,72 @@ class DbTest extends \PHPUnit_Framework_TestCase
         $this->writer->write($fields);
 
         // insert should be called once...
-        $this->assertContains('insert', array_keys($this->db->calls));
-        $this->assertEquals(1, count($this->db->calls['insert']));
-
-        // ...with the correct table and binds for the database
-        $binds = array(
-            'message'  => $fields['message'],
-            'priority' => $fields['priority']
-        );
-        $this->assertEquals(array($this->tableName, $binds),
-                            $this->db->calls['insert'][0]);
+        $this->assertContains('query', array_keys($this->db->calls));
+        $this->assertEquals(1, count($this->db->calls['query']));
+        $this->assertContains('execute', array_keys($this->db->calls));
+        $this->assertEquals(1, count($this->db->calls['execute']));
+        $this->assertEquals(array($fields), $this->db->calls['execute'][0]);
     }
 
+    public function testWriteWithDefaultsUsingArray()
+    {      
+        // log to the mock db adapter
+        $message  = 'message-to-log';
+        $priority = 2;
+        $events = array(
+            'file' => 'test',
+            'line' => 1
+        );
+        $this->writer->write(array(
+            'message'  => $message,
+            'priority' => $priority,
+            'events'   => $events
+        ));
+        $this->assertContains('query', array_keys($this->db->calls));
+        $this->assertEquals(1, count($this->db->calls['query']));
+
+        $binds = array(
+            'message' => $message,
+            'priority' => $priority,
+            'events_line' => $events['line'],
+            'events_file' => $events['file']
+        );
+        $this->assertEquals(array($binds), $this->db->calls['execute'][0]);
+    }
+    
+    public function testWriteWithDefaultsUsingArrayAndSeparator()
+    {      
+        $this->writer = new DbWriter($this->db, $this->tableName, null, '-');
+        
+        // log to the mock db adapter
+        $message  = 'message-to-log';
+        $priority = 2;
+        $events = array(
+            'file' => 'test',
+            'line' => 1
+        );
+        $this->writer->write(array(
+            'message'  => $message,
+            'priority' => $priority,
+            'events'   => $events
+        ));
+        $this->assertContains('query', array_keys($this->db->calls));
+        $this->assertEquals(1, count($this->db->calls['query']));
+
+        $binds = array(
+            'message' => $message,
+            'priority' => $priority,
+            'events-line' => $events['line'],
+            'events-file' => $events['file']
+        );
+        $this->assertEquals(array($binds), $this->db->calls['execute'][0]);
+    }
+    
     public function testWriteUsesOptionalCustomColumnNames()
     {
         $this->writer = new DbWriter($this->db, $this->tableName, array(
-            'new-message-field' => 'message',
-            'new-message-field' => 'priority'
+            'message' => 'new-message-field' ,
+            'priority' => 'new-priority-field' 
         ));
 
         // log to the mock db adapter
@@ -89,18 +139,50 @@ class DbTest extends \PHPUnit_Framework_TestCase
         ));
 
         // insert should be called once...
-        $this->assertContains('insert', array_keys($this->db->calls));
-        $this->assertEquals(1, count($this->db->calls['insert']));
+        $this->assertContains('query', array_keys($this->db->calls));
+        $this->assertEquals(1, count($this->db->calls['query']));
 
         // ...with the correct table and binds for the database
         $binds = array(
             'new-message-field' => $message,
-            'new-message-field' => $priority
+            'new-priority-field' => $priority
         );
-        $this->assertEquals(array(
-            $this->tableName, $binds),
-            $this->db->calls['insert'][0]
+        $this->assertEquals(array($binds), $this->db->calls['execute'][0]);
+    }
+    
+    public function testWriteUsesParamsWithArray()
+    {
+        $this->writer = new DbWriter($this->db, $this->tableName, array(
+            'message' => 'new-message-field' ,
+            'priority' => 'new-priority-field',
+            'events' => array(
+                'line' => 'new-line',
+                'file' => 'new-file'
+            )
+        ));
+        
+        // log to the mock db adapter
+        $message  = 'message-to-log';
+        $priority = 2;
+        $events = array(
+            'file' => 'test',
+            'line' => 1
         );
+        $this->writer->write(array(
+            'message'  => $message,
+            'priority' => $priority,
+            'events'   => $events
+        ));
+        $this->assertContains('query', array_keys($this->db->calls));
+        $this->assertEquals(1, count($this->db->calls['query']));
+        // ...with the correct table and binds for the database
+        $binds = array(
+            'new-message-field' => $message,
+            'new-priority-field' => $priority,
+            'new-line' => $events['line'],
+            'new-file' => $events['file']
+        );
+        $this->assertEquals(array($binds), $this->db->calls['execute'][0]);
     }
 
     public function testShutdownRemovesReferenceToDatabaseInstance()

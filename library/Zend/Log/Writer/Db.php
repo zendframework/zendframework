@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Log
  * @subpackage Writer
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -26,7 +26,7 @@ namespace Zend\Log\Writer;
 
 use Zend\Log\Formatter,
     Zend\Log\Exception,
-    Zend\Db\Adapter\AbstractAdapter as DbAdapter;
+    Zend\Db\Adapter\Adapter;
 
 /**
  * @uses       \Zend\Log\Exception\InvalidArgumentException
@@ -35,22 +35,22 @@ use Zend\Log\Formatter,
  * @category   Zend
  * @package    Zend_Log
  * @subpackage Writer
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Db extends AbstractWriter
-{
+{   
     /**
-     * Database adapter instance
+     * Db adapter instance
      *
-     * @var DbAdapter
+     * @var Adapter
      */
     protected $db;
-
+    
     /**
-     * Name of the log table in the database
-     *
-     * @var string
+     * Table name
+     * 
+     * @var string 
      */
     protected $table;
 
@@ -62,18 +62,29 @@ class Db extends AbstractWriter
     protected $columnMap;
 
     /**
+     * Field separator for sub-elements
+     * 
+     * @var string 
+     */
+    protected $separator = '_';
+    
+    /**
      * Constructor
      *
-     * @param DbAdapter $db Database adapter instance
-     * @param string $table Log table in database
+     * @param Adapter $db 
+     * @param string $table
      * @param array $columnMap
-     * @return Db
+     * @param string $separator
      */
-    public function __construct($db, $table, $columnMap = null)
+    public function __construct($db, $table, $columnMap = null, $separator = null)
     {
         $this->db        = $db;
         $this->table     = $table;
         $this->columnMap = $columnMap;
+        
+        if (!empty($separator)) {
+            $this->separator = $separator;
+        }
     }
 
     /**
@@ -110,15 +121,50 @@ class Db extends AbstractWriter
             throw new Exception\RuntimeException('Database adapter is null');
         }
 
+        // Transform the event array into fields
+        $dataToInsert = array();
         if (null === $this->columnMap) {
-            $dataToInsert = $event;
+            foreach ($event as $name => $value) {
+                if (is_array($value)) {
+                    foreach ($value as $key => $subvalue) {
+                         $dataToInsert[$name . $this->separator . $key] = $subvalue;
+                    }
+                } else {
+                    $dataToInsert[$name] = $value;
+                }
+            }
         } else {
-            $dataToInsert = array();
-            foreach ($this->columnMap as $columnName => $fieldKey) {
-                $dataToInsert[$columnName] = $event[$fieldKey];
+            foreach ($event as $name => $value) {
+                if (is_array($value)) {
+                    foreach ($value as $key => $subvalue) {
+                        if (isset($this->columnMap[$name][$key])) {
+                            $dataToInsert[$this->columnMap[$name][$key]] = $subvalue;
+                        }
+                    }
+                } elseif (isset($this->columnMap[$name])) {
+                    $dataToInsert[$this->columnMap[$name]] = $value;
+                } 
             }
         }
 
-        $this->db->insert($this->table, $dataToInsert);
+        $statement = $this->db->query($this->prepareInsert($this->db, $this->table, $dataToInsert));
+        $statement->execute($dataToInsert);
+        
+    }
+    /**
+     * Prepare the INSERT SQL statement
+     * 
+     * @param  Adapter $db
+     * @param  string $table
+     * @param  array $fields
+     * @return string 
+     */
+    protected function prepareInsert($db, $table, array $fields) 
+    {               
+        $sql = 'INSERT INTO ' . $db->platform->quoteIdentifier($table) . ' (' .
+               implode(",",array_map(array($db->platform, 'quoteIdentifier'), $fields)) . ') VALUES (' .
+               implode(",",array_map(array($db->driver, 'formatParameterName'), $fields)) . ')';
+               
+        return $sql;
     }
 }

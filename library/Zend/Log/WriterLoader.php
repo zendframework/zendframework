@@ -38,13 +38,13 @@ class WriterLoader extends PluginClassLoader
      * @var array Pre-aliased writers
      */
     protected $plugins = array(
-        'db' => 'Zend\Log\Writer\Db',
-        'firebug' => 'Zend\Log\Writer\Firebug',
-        'mail' => 'Zend\Log\Writer\Mail',
-        'mock' => 'Zend\Log\Writer\Mock',
-        'null' => 'Zend\Log\Writer\Null',
-        'stream' => 'Zend\Log\Writer\Stream',
-        'syslog' => 'Zend\Log\Writer\Syslog',
+        'db'           => 'Zend\Log\Writer\Db',
+        'firebug'      => 'Zend\Log\Writer\Firebug',
+        'mail'         => 'Zend\Log\Writer\Mail',
+        'mock'         => 'Zend\Log\Writer\Mock',
+        'null'         => 'Zend\Log\Writer\Null',
+        'stream'       => 'Zend\Log\Writer\Stream',
+        'syslog'       => 'Zend\Log\Writer\Syslog',
         'zend_monitor' => 'Zend\Log\Writer\ZendMonitor',
     );
 }

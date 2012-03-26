@@ -34,7 +34,7 @@ use Zend\Log\Exception,
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Message implements Filter
+class Regex implements Filter
 {
     /**
      * Regex to match
@@ -69,6 +69,10 @@ class Message implements Filter
      */
     public function filter(array $event)
     {
-        return preg_match($this->regex, $event['message']) > 0;
+        $message = $event['message'];
+        if (is_array($event['message'])) {
+            $message = var_export($message, TRUE); 
+        }
+        return preg_match($this->regex, $message) > 0;
     }
 }

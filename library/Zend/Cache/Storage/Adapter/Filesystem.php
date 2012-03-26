@@ -1606,12 +1606,15 @@ class Filesystem extends AbstractAdapter
             }
 
             if (!fwrite($fp, $data)) {
+                flock($fp, \LOCK_UN);
                 fclose($fp);
                 $err = ErrorHandler::stop();
                 throw new Exception\RuntimeException("Error writing file '{$file}'", 0, $err);
             }
 
             if (!ftruncate($fp, strlen($data))) {
+                flock($fp, \LOCK_UN);
+                fclose($fp);
                 $err = ErrorHandler::stop();
                 throw new Exception\RuntimeException("Error truncating file '{$file}'", 0, $err);
             }

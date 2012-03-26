@@ -148,7 +148,7 @@ class Health extends GData
 
         // use correct feed for /h9 or /health
         if ($this->_useH9Sandbox) {
-            $uri = preg_replace('/\/health\//', '/h9/', $uri);
+            $uri = str_replace('/health/', '/h9/', $uri);
         }
 
         return parent::getFeed($uri, 'Zend\GData\Health\ProfileListFeed');
@@ -183,7 +183,7 @@ class Health extends GData
 
         // use correct feed for /h9 or /health
         if ($this->_useH9Sandbox) {
-            $uri = preg_replace('/\/health\//', '/h9/', $uri);
+            $uri = str_replace('/health/', '/h9/', $uri);
         }
 
         return parent::getFeed($uri, 'Zend\GData\Health\ProfileFeed');
@@ -241,7 +241,7 @@ class Health extends GData
 
         // use correct feed for /h9 or /health
         if ($this->_useH9Sandbox) {
-            $uri = preg_replace('/\/health\//', '/h9/', $uri);
+            $uri = str_replace('/health/', '/h9/', $uri);
         }
 
         return $this->insertEntry($entry, $uri, 'Zend\GData\Health\ProfileEntry');

@@ -384,7 +384,7 @@ class ClassGenerator extends AbstractGenerator
      */
     public function isAbstract()
     {
-        return ($this->flags & self::FLAG_ABSTRACT);
+        return (boolean) ($this->flags & self::FLAG_ABSTRACT);
     }
 
     /**

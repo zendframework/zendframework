@@ -546,7 +546,7 @@ class ApplicationTest extends TestCase
         });
 
         $app->run();
-        $this->assertContains(Application::ERROR_CONTROLLER_NOT_FOUND, $response->getContent());
+        $this->assertContains(Application::ERROR_ROUTER_NO_MATCH, $response->getContent());
     }
 
     /**
@@ -586,7 +586,7 @@ class ApplicationTest extends TestCase
 
         $app->run();
         $event = $app->getMvcEvent();
-        $this->assertEquals(Application::ERROR_CONTROLLER_NOT_FOUND, $event->getError());
+        $this->assertEquals(Application::ERROR_ROUTER_NO_MATCH, $event->getError());
     }
 
     /**
@@ -632,5 +632,20 @@ class ApplicationTest extends TestCase
         $app->run();
         $this->assertTrue(isset($token->foo));
         $this->assertEquals('bar',$token->foo);
+    }
+
+    public function testApplicationShouldBeEventTargetAtFinishEvent()
+    {
+        $app = $this->setupActionController();
+
+        $events   = $app->events();
+        $response = $app->getResponse();
+        $events->attach('finish', function ($e) use ($response) {
+            $response->setContent("EventClass: " . get_class($e->getTarget()));
+            return $response;
+        });
+
+        $app->run();
+        $this->assertContains('Zend\Mvc\Application', $response->getContent());
     }
 }

@@ -225,6 +225,69 @@ class Filesystem extends AbstractAdapter
     }
 
     /**
+     * Internal method to get multiple items.
+     *
+     * Options:
+     *  - ttl <int>
+     *    - The time-to-life
+     *  - namespace <string>
+     *    - The namespace to use
+     *
+     * @param  array $normalizedKeys
+     * @param  array $normalizedOptions
+     * @return array Associative array of existing keys and values
+     * @throws Exception
+     */
+    protected function internalGetItems(array & $normalizedKeys, array & $normalizedOptions)
+    {
+        $baseOptions = $this->getOptions();
+
+        $result = array();
+        while (true) {
+
+            // LOCK_NB if more than one items have to read
+            $wouldblock = count($normalizedKeys) > 1;
+
+            // read items
+            foreach ($normalizedKeys as $i => $normalizedKey) {
+                if (!$this->internalHasItem($normalizedKey, $normalizedOptions)
+                    || !($keyInfo = $this->getKeyInfo($normalizedKey, $normalizedOptions['namespace']))
+                ) {
+                    unset($normalizedKeys[$i]);
+                    continue;
+                }
+
+                $data = $this->getFileContent($keyInfo['filespec'] . '.dat', $wouldblock);
+                if ($data === false) {
+                    continue;
+                } else {
+                    unset($normalizedKeys[$i]);
+                }
+
+                if ($baseOptions->getReadControl()) {
+                    $info = $this->readInfoFile($keyInfo['filespec'] . '.ifo');
+                    if (isset($info['hash'], $info['algo'])
+                        && Utils::generateHash($info['algo'], $data, true) != $info['hash']
+                    ) {
+                        throw new Exception\UnexpectedValueException(
+                            "ReadControl: Stored hash and computed hash doesn't match"
+                        );
+                    }
+                }
+
+                $result[$normalizedKey] = $data;
+            }
+
+            // no more items to read
+            if (!$normalizedKeys) {
+                break;
+            }
+        }
+
+        return $result;
+    }
+
+    /**
      * Test if an item exists.
      *
      * Options:
@@ -1398,8 +1461,8 @@ class Filesystem extends AbstractAdapter
             );
         }
 
-        $this->lastInfoId  = $lastInfoId;
-        $this->lastInfo    = array(
+        $this->lastInfoId = $lastInfoId;
+        $this->lastInfo   = array(
             'filespec' => $filespec,
             'mtime'    => $mtime,
         );
@@ -1439,7 +1502,7 @@ class Filesystem extends AbstractAdapter
     /**
      * Read info file
      *
-     * @param string $file
+     * @param string   $file
      * @return array|boolean The info array or false if file wasn't found
      * @throws Exception\RuntimeException
      */
@@ -1466,11 +1529,12 @@ class Filesystem extends AbstractAdapter
     /**
      * Read a complete file
      *
-     * @param  string $file File complete path
-     * @return string
+     * @param  string  $file File complete path
+     * @param  boolean $wouldblock Return FALSE if the lock would block
+     * @return string|boolean
      * @throws Exception\RuntimeException
      */
-    protected function getFileContent($file)
+    protected function getFileContent($file, $wouldblock = false)
     {
         $locking = $this->getOptions()->getFileLocking();
 
@@ -1486,7 +1550,19 @@ class Filesystem extends AbstractAdapter
                 );
             }
 
-            if (!flock($fp, \LOCK_SH)) {
+            if ($wouldblock) {
+                $wouldblock = null;
+                $lock = flock($fp, \LOCK_SH | \LOCK_NB, $wouldblock);
+                if ($wouldblock) {
+                    fclose($fp);
+                    ErrorHandler::stop();
+                    return false;
+                }
+            } else {
+                $lock = flock($fp, \LOCK_SH);
+            }
+
+            if (!$lock) {
                 fclose($fp);
                 $err = ErrorHandler::stop();
                 throw new Exception\RuntimeException(

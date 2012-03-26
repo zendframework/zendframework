@@ -73,7 +73,7 @@ EOS);
 
 // OR
 
-$response = new Request();
+$response = new Response();
 $response->setStatusCode(Response::STATUS_CODE_200);
 $response->headers()->addHeaders(array(
     'HeaderField1' => 'header-field-value',

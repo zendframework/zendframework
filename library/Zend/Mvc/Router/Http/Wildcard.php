@@ -53,28 +53,27 @@ class Wildcard implements Route
      * @var array
      */
     protected $paramDelimiter;
-    
+
     /**
      * Default values.
-     * 
+     *
      * @var array
      */
     protected $defaults;
-    
+
     /**
      * List of assembled parameters.
-     * 
+     *
      * @var array
      */
     protected $assembledParams = array();
 
     /**
      * Create a new wildcard route.
-     * 
+     *
      * @param  string $keyValueDelimiter
      * @param  string $paramDelimiter
      * @param  array  $defaults
-     * @return void
      */
     public function __construct($keyValueDelimiter = '/', $paramDelimiter = '/', array $defaults = array())
     {
@@ -82,13 +81,14 @@ class Wildcard implements Route
         $this->paramDelimiter    = $paramDelimiter;
         $this->defaults          = $defaults;
     }
-    
+
     /**
      * factory(): defined by Route interface.
      *
      * @see    Route::factory()
      * @param  array|Traversable $options
-     * @return void
+     * @throws \Zend\Mvc\Router\Exception\InvalidArgumentException
+     * @return Wildcard
      */
     public static function factory($options = array())
     {
@@ -105,7 +105,7 @@ class Wildcard implements Route
         if (!isset($options['param_delimiter'])) {
             $options['param_delimiter'] = '/';
         }
-        
+
         if (!isset($options['defaults'])) {
             $options['defaults'] = array();
         }
@@ -118,6 +118,7 @@ class Wildcard implements Route
      *
      * @see    Route::match()
      * @param  Request $request
+     * @param  int|null $pathOffset
      * @return RouteMatch
      */
     public function match(Request $request, $pathOffset = null)
@@ -139,7 +140,7 @@ class Wildcard implements Route
         if (count($params) > 1 && ($params[0] !== '' || end($params) === '')) {
             return null;
         }
-        
+
         if ($this->keyValueDelimiter === $this->paramDelimiter) {
             $count = count($params);
 
@@ -150,10 +151,10 @@ class Wildcard implements Route
             }
         } else {
             array_shift($params);
-            
+
             foreach ($params as $param) {
                 $param = explode($this->keyValueDelimiter, $param, 2);
-      
+
                 if (isset($param[1])) {
                     $matches[urldecode($param[0])] = urldecode($param[1]);
                 }
@@ -186,13 +187,13 @@ class Wildcard implements Route
 
             return $this->paramDelimiter . implode($this->paramDelimiter, $elements);
         }
-        
+
         return '';
     }
-    
+
     /**
      * getAssembledParams(): defined by Route interface.
-     * 
+     *
      * @see    Route::getAssembledParams
      * @return array
      */

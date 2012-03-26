@@ -56,23 +56,23 @@ class Literal implements Route
 
     /**
      * Create a new literal route.
-     * 
+     *
      * @param  string $route
-     * @param  array  $defaults 
-     * @return void
+     * @param  array  $defaults
      */
     public function __construct($route, array $defaults = array())
     {
         $this->route    = $route;
         $this->defaults = $defaults;
     }
-    
+
     /**
      * factory(): defined by Route interface.
      *
      * @see    Route::factory()
-     * @param  array|Traversable $options
-     * @return void
+     * @param  array|\Traversable $options
+     * @throws \Zend\Mvc\Router\Exception\InvalidArgumentException
+     * @return Literal
      */
     public static function factory($options = array())
     {
@@ -97,8 +97,9 @@ class Literal implements Route
      * match(): defined by Route interface.
      *
      * @see    Route::match()
-     * @param  Request $request
-     * @return RouteMatch
+     * @param  Request  $request
+     * @param  int|null $pathOffset
+     * @return RouteMatch|null
      */
     public function match(Request $request, $pathOffset = null)
     {
@@ -115,7 +116,7 @@ class Literal implements Route
                     return new RouteMatch($this->defaults, strlen($this->route));
                 }
             }
-            
+
             return null;
         }
 
@@ -138,10 +139,10 @@ class Literal implements Route
     {
         return $this->route;
     }
-    
+
     /**
      * getAssembledParams(): defined by Route interface.
-     * 
+     *
      * @see    Route::getAssembledParams
      * @return array
      */

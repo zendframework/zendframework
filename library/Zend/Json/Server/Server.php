@@ -81,11 +81,6 @@ class Server extends AbstractServer
     protected $_smdMethods;
 
     /**
-     * @var \Zend\Server\Description
-     */
-    protected $_table;
-
-    /**
      * Attach a function or callback to the server
      *
      * @param  string|array $function Valid PHP callback
@@ -215,7 +210,7 @@ class Server extends AbstractServer
         }
 
         foreach ($definition as $key => $method) {
-            $this->_table->addMethod($method, $key);
+            $this->table->addMethod($method, $key);
             $this->_addMethodServiceMap($method);
         }
     }
@@ -534,12 +529,12 @@ class Server extends AbstractServer
         }
 
         $method = $request->getMethod();
-        if (!$this->_table->hasMethod($method)) {
+        if (!$this->table->hasMethod($method)) {
             return $this->fault('Method not found', Error::ERROR_INVALID_METHOD);
         }
 
         $params        = $request->getParams();
-        $invocable     = $this->_table->getMethod($method);
+        $invocable     = $this->table->getMethod($method);
         $serviceMap    = $this->getServiceMap();
         $service       = $serviceMap->getService($method);
         $serviceParams = $service->getParams();

@@ -72,7 +72,7 @@ class DirectoryScanner implements Scanner
             } else {
                 $rdi = new RecursiveDirectoryIterator($directory);
                 foreach (new RecursiveIteratorIterator($rdi) as $item) {
-                    if ($item->isFile() && preg_match('#\.php$#', $item->getRealPath())) {
+                    if ($item->isFile() && pathinfo($item->getRealPath(), PATHINFO_EXTENSION) == 'php') {
                         $this->fileScanners[] = new FileScanner($item->getRealPath());
                     }
                 }

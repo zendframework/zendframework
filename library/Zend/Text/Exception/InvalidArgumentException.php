@@ -13,39 +13,22 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Acl
+ * @package    Zend_Text
+ * @subpackage Exception
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
-namespace Zend\Acl;
+namespace Zend\Text\Exception;
+
+use Zend\Text\Exception;
 
 /**
- * @uses       Zend\Acl\Acl
- * @uses       Zend\Acl\Resource
- * @uses       Zend\Acl\Role
  * @category   Zend
- * @package    Zend_Acl
+ * @package    Zend_Text
+ * @subpackage Exception
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Assertion
-{
-    /**
-     * Returns true if and only if the assertion conditions are met
-     *
-     * This method is passed the ACL, Role, Resource, and privilege to which the authorization query applies. If the
-     * $role, $resource, or $privilege parameters are null, it means that the query applies to all Roles, Resources, or
-     * privileges, respectively.
-     *
-     * @param  Acl      $acl
-     * @param  Role     $role
-     * @param  Resource $resource
-     * @param  string   $privilege
-     * @return boolean
-     */
-    public function assert(Acl $acl, Role $role = null, Resource $resource = null, $privilege = null);
-}
+class InvalidArgumentException extends \InvalidArgumentException implements Exception
+{}

@@ -23,7 +23,8 @@
  */
 namespace Zend\Http;
 
-use Zend\Config\Config,
+use ArrayIterator,
+    Zend\Config\Config,
     Zend\Uri\Http,
     Zend\Http\Header\Cookie,
     Zend\Http\Header\SetCookie,
@@ -43,21 +44,19 @@ use Zend\Config\Config,
  */
 class Client implements Dispatchable
 {
-    /**#@+
+    /**
      * @const string Supported HTTP Authentication methods
      */
     const AUTH_BASIC  = 'basic';
     const AUTH_DIGEST = 'digest';  // not implemented yet
-    /**#@-*/
 
-    /**#@+
+    /**
      * @const string POST data encoding methods
      */
     const ENC_URLENCODED = 'application/x-www-form-urlencoded';
     const ENC_FORMDATA   = 'multipart/form-data';
-    /**#@-*/
 
-    /**#@+
+    /**
      * @const string DIGEST Authentication
      */
     const DIGEST_REALM  = 'realm';
@@ -66,7 +65,6 @@ class Client implements Dispatchable
     const DIGEST_OPAQUE = 'opaque';
     const DIGEST_NC     = 'nc';
     const DIGEST_CNONCE = 'cnonce';
-    /**#@-*/
 
     /**
      * @var Response
@@ -467,7 +465,7 @@ class Client implements Dispatchable
     /**
      * Add a cookie
      *
-     * @param ArrayIterator|SetCookie|string $cookie
+     * @param array|ArrayIterator|SetCookie|string $cookie
      * @param string  $value
      * @param string  $domain
      * @param string  $expire
@@ -478,7 +476,7 @@ class Client implements Dispatchable
      */
     public function addCookie($cookie, $value = null, $domain = null, $expire = null, $path = null, $secure = false, $httponly = true)
     {
-        if ($cookie instanceof \ArrayIterator) {
+        if (is_array($cookie) || $cookie instanceof ArrayIterator) {
             foreach ($cookie as $setCookie) {
                 if ($setCookie instanceof SetCookie) {
                     $this->cookies[$this->getCookieId($setCookie)] = $setCookie;
@@ -821,23 +819,10 @@ class Client implements Dispatchable
                 throw new Client\Exception\RuntimeException('Adapter does not support streaming');
             }
 
-            // Open the connection, send the request and read the response
-            $this->adapter->connect($uri->getHost(), $uri->getPort(), $secure);
+            // calling protected method to allow extending classes
+            // to wrap the interaction with the adapter
+            $response = $this->doRequest($uri, $method, $secure, $headers, $body);
 
-            if($this->config['outputstream']) {
-                if($this->adapter instanceof Client\Adapter\Stream) {
-                    $stream = $this->openTempStream();
-                    $this->adapter->setOutputStream($stream);
-                } else {
-                    throw new Exception\RuntimeException('Adapter does not support streaming');
-                }
-            }
-
-            // HTTP connection
-            $this->lastRawRequest = $this->adapter->write($method,
-                $uri, $this->config['httpversion'], $headers, $body);
-
-            $response = $this->adapter->read();
             if (! $response) {
                 throw new Exception\RuntimeException('Unable to read response, or response is empty');
             }
@@ -1272,6 +1257,39 @@ class Client implements Dispatchable
         }
 
         return $parameters;
+    }
+
+    /**
+     * Separating this from send method allows subclasses to wrap
+     * the interaction with the adapter
+     *
+     * @param Http $uri
+     * @param string $secure
+     * @param string $method
+     * @param array $headers
+     * @param string $body
+     * @return string the raw response
+     * @throws Exception\RuntimeException
+     */
+    protected function doRequest(Http $uri, $method, $secure = false, $headers = array(), $body = '')
+    {
+        // Open the connection, send the request and read the response
+        $this->adapter->connect($uri->getHost(), $uri->getPort(), $secure);
+
+        if($this->config['outputstream']) {
+            if($this->adapter instanceof Client\Adapter\Stream) {
+                $stream = $this->openTempStream();
+                $this->adapter->setOutputStream($stream);
+            } else {
+                throw new Exception\RuntimeException('Adapter does not support streaming');
+            }
+        }
+
+        // HTTP connection
+        $this->lastRawRequest = $this->adapter->write($method,
+            $uri, $this->config['httpversion'], $headers, $body);
+
+        return $this->adapter->read();
     }
 
     /**

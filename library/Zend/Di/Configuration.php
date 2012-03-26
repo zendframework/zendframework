@@ -137,6 +137,10 @@ class Configuration
                             case 'injection':
                                 $im->setInjections($target, $v);
                                 break;
+                            case 'shared':
+                            case 'share':
+                                $im->setShared($target, $v);
+                                break;
                         }
                     }
             }

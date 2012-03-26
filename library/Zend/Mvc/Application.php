@@ -235,6 +235,7 @@ class Application implements AppContext
         if ($result->stopped()) {
             $response = $result->last();
             if ($response instanceof Response) {
+                $event->setTarget($this);
                 $events->trigger('finish', $event);
                 return $response;
             }
@@ -253,6 +254,7 @@ class Application implements AppContext
         // Complete response
         $response = $result->last();
         if ($response instanceof Response) {
+            $event->setTarget($this);
             $events->trigger('finish', $event);
             return $response;
         }
@@ -275,6 +277,7 @@ class Application implements AppContext
     protected function completeRequest(MvcEvent $event)
     {
         $events = $this->events();
+        $event->setTarget($this);
         $events->trigger('render', $event);
         $events->trigger('finish', $event);
         return $event->getResponse();
@@ -294,13 +297,13 @@ class Application implements AppContext
         $routeMatch = $router->match($request);
 
         if (!$routeMatch instanceof Router\RouteMatch) {
-            $e->setError(static::ERROR_CONTROLLER_NOT_FOUND);
+            $e->setError(static::ERROR_ROUTER_NO_MATCH);
 
             $results = $this->events()->trigger('dispatch.error', $e);
             if (count($results)) {
                 $return  = $results->last();
             } else {
-                $return = $error->getParams();
+                $return = $e->getParams();
             }
             return $return;
         }

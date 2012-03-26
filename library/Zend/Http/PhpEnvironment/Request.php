@@ -163,9 +163,6 @@ class Request extends HttpRequest
             $uri->setQuery($this->serverParams['QUERY_STRING']);
         }
 
-        $requestUri = $this->getRequestUri();
-        $uri->setPath(substr($requestUri, 0, strpos($requestUri, '?') ?: strlen($requestUri)));
-
         if ($this->headers()->get('host')) {
             //TODO handle IPv6 with port
             if (preg_match('|^([^:]+):([^:]+)$|', $this->headers()->get('host')->getFieldValue(), $match)) {
@@ -181,6 +178,9 @@ class Request extends HttpRequest
                 $uri->setPort($this->serverParams['SERVER_PORT']);
             }
         }
+
+        $requestUri = $this->getRequestUri();
+        $uri->setPath(substr($requestUri, 0, strpos($requestUri, '?') ?: strlen($requestUri)));
 
         return $this;
     }

@@ -79,7 +79,7 @@ class Headers implements Iterator, Countable
         $current = array();
 
         // iterate the header lines, some might be continuations
-        foreach (preg_split('#\r\n#', $string) as $line) {
+        foreach (explode("\r\n", $string) as $line) {
 
             // check if a header name is present
             if (preg_match('/^(?P<name>[^()><@,;:\"\\/\[\]?=}{ \t]+):.*$/', $line, $matches)) {

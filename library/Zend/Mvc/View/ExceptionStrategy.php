@@ -153,6 +153,7 @@ class ExceptionStrategy implements ListenerAggregate
         switch ($error) {
             case Application::ERROR_CONTROLLER_NOT_FOUND:
             case Application::ERROR_CONTROLLER_INVALID:
+            case Application::ERROR_ROUTER_NO_MATCH:
                 // Specifically not handling these
                 return;
 

@@ -108,6 +108,18 @@ class CldrTest extends \PHPUnit_Framework_TestCase
         $value = Cldr::getDisplayLanguage('de', false, 'de');
         $this->assertEquals('Deutsch', $value);
     }
+    
+    /**
+     * test for reading the territorylist in different
+     * languages
+     */
+    public function testTerritoryLanguage()
+    {
+        $this->assertNotEquals(
+            Cldr::getDisplayTerritory('de'),
+            Cldr::getDisplayTerritory('en')
+        );
+    }
 
     /**
      * test for reading the scriptlist from locale

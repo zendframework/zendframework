@@ -55,20 +55,18 @@ class Filesystem extends AbstractAdapter
     protected $stmtMatch = null;
 
     /**
-     * Last buffered identified of internal method getKeyInfo()
+     * Key (namespace + separator + key) of buffered information
      *
      * @var string|null
      */
-    protected $lastInfoId = null;
+    protected $bufferKey = null;
 
     /**
-     * Buffered result of internal method getKeyInfo()
+     * The buffered filespec
      *
-     * @var array|null
+     * @var string|null
      */
-    protected $lastInfo = null;
-
-    /* configuration */
+    protected $bufferedFilespec = null;
 
     /**
      * Set options.
@@ -178,24 +176,23 @@ class Filesystem extends AbstractAdapter
      */
     protected function internalGetItem(& $normalizedKey, array & $normalizedOptions)
     {
-        if ( !$this->internalHasItem($normalizedKey, $normalizedOptions)
-            || !($keyInfo = $this->getKeyInfo($normalizedKey, $normalizedOptions['namespace']))
-        ) {
-            if ($normalizedOptions['ignore_missing_items']) {
-                return false;
-            } else {
+        if (!$this->internalHasItem($normalizedKey, $normalizedOptions)) {
+            if (!$normalizedOptions['ignore_missing_items']) {
                 throw new Exception\ItemNotFoundException(
                     "Key '{$normalizedKey}' not found within namespace '{$normalizedOptions['namespace']}'"
                 );
             }
+
+            return false;
         }
 
-        $baseOptions = $this->getOptions();
         try {
-            $data = $this->getFileContent($keyInfo['filespec'] . '.dat');
+            $filespec    = $this->getFileSpec($normalizedKey, $normalizedOptions);
+            $baseOptions = $this->getOptions();
+            $data        = $this->getFileContent($filespec . '.dat');
 
             if ($baseOptions->getReadControl()) {
-                if ( ($info = $this->readInfoFile($keyInfo['filespec'] . '.ifo'))
+                if ( ($info = $this->readInfoFile($filespec . '.ifo'))
                     && isset($info['hash'], $info['algo'])
                     && Utils::generateHash($info['algo'], $data, true) != $info['hash']
                 ) {
@@ -207,7 +204,7 @@ class Filesystem extends AbstractAdapter
 
             if (array_key_exists('token', $normalizedOptions)) {
                 // use filemtime + filesize as CAS token
-                $normalizedOptions['token'] = $keyInfo['mtime'] . filesize($keyInfo['filespec'] . '.dat');
+                $normalizedOptions['token'] = filemtime($filespec . '.dat') . filesize($filespec . '.dat');
             }
 
             return $data;
@@ -250,14 +247,13 @@ class Filesystem extends AbstractAdapter
 
             // read items
             foreach ($normalizedKeys as $i => $normalizedKey) {
-                if (!$this->internalHasItem($normalizedKey, $normalizedOptions)
-                    || !($keyInfo = $this->getKeyInfo($normalizedKey, $normalizedOptions['namespace']))
-                ) {
+                if (!$this->internalHasItem($normalizedKey, $normalizedOptions)) {
                     unset($normalizedKeys[$i]);
                     continue;
                 }
 
-                $data = $this->getFileContent($keyInfo['filespec'] . '.dat', $wouldblock);
+                $filespec = $this->getFileSpec($normalizedKey, $normalizedOptions);
+                $data     = $this->getFileContent($filespec . '.dat', $wouldblock);
                 if ($data === false) {
                     continue;
                 } else {
@@ -265,7 +261,7 @@ class Filesystem extends AbstractAdapter
                 }
 
                 if ($baseOptions->getReadControl()) {
-                    $info = $this->readInfoFile($keyInfo['filespec'] . '.ifo');
+                    $info = $this->readInfoFile($filespec . '.ifo');
                     if (isset($info['hash'], $info['algo'])
                         && Utils::generateHash($info['algo'], $data, true) != $info['hash']
                     ) {
@@ -359,17 +355,29 @@ class Filesystem extends AbstractAdapter
      */
     protected function internalHasItem(& $normalizedKey, array & $normalizedOptions)
     {
-        $keyInfo = $this->getKeyInfo($normalizedKey, $normalizedOptions['namespace']);
-        if (!$keyInfo) {
-            return false; // missing or corrupted cache data
+        $ttl      = $normalizedOptions['ttl'];
+        $filespec = $this->getFileSpec($normalizedKey, $normalizedOptions);
+
+        if (!file_exists($filespec . '.dat')) {
+            return false;
         }
 
-        $ttl = $normalizedOptions['ttl'];
-        if (!$ttl || time() < ($keyInfo['mtime'] + $ttl)) {
-            return true;
+        if ($ttl) {
+            ErrorHandler::start();
+            $mtime = filemtime($filespec . '.dat');
+            $error = ErrorHandler::stop();
+            if (!$mtime) {
+                throw new Exception\RuntimeException(
+                    "Error getting mtime of file '{$filespec}.dat'", 0, $error
+                );
+            }
+
+            if (time() >= ($mtime + $ttl)) {
+                return false;
+            }
         }
 
-        return false;
+        return true;
     }
 
     /**
@@ -416,31 +424,36 @@ class Filesystem extends AbstractAdapter
      */
     protected function internalGetMetadata(& $normalizedKey, array & $normalizedOptions)
     {
-        $keyInfo = $this->getKeyInfo($normalizedKey, $normalizedOptions['namespace']);
-        if (!$keyInfo) {
+        if (!$this->internalHasItem($normalizedKey, $normalizedOptions)) {
             if (!$normalizedOptions['ignore_missing_items']) {
                 throw new Exception\ItemNotFoundException(
                     "Key '{$normalizedKey}' not found on namespace '{$normalizedOptions['namespace']}'"
                 );
             }
+
             return false;
         }
 
         $baseOptions = $this->getOptions();
+        $filespec    = $this->getFileSpec($normalizedKey, $normalizedOptions);
+
+        $metadata = $this->readInfoFile($filespec . '.ifo');
+        if (!$metadata) {
+            $metadata  = array();
+        }
+
+        $metadata['filespec'] = $filespec;
+        $metadata['mtime']    = filemtime($filespec . '.dat');
+
         if (!$baseOptions->getNoCtime()) {
-            $keyInfo['ctime'] = filectime($keyInfo['filespec'] . '.dat');
+            $metadata['ctime'] = filectime($filespec . '.dat');
         }
 
         if (!$baseOptions->getNoAtime()) {
-            $keyInfo['atime'] = fileatime($keyInfo['filespec'] . '.dat');
+            $metadata['atime'] = fileatime($filespec . '.dat');
         }
 
-        $info = $this->readInfoFile($keyInfo['filespec'] . '.ifo');
-        if ($info) {
-            return $keyInfo + $info;
-        }
-
-        return $keyInfo;
+        return $metadata;
     }
 
     /* writing */
@@ -636,12 +649,12 @@ class Filesystem extends AbstractAdapter
         $baseOptions = $this->getOptions();
         $oldUmask = null;
 
-        $lastInfoId = $normalizedOptions['namespace'] . $baseOptions->getNamespaceSeparator() . $normalizedKey;
-        if ($this->lastInfoId == $lastInfoId) {
+        $bufferKey = $normalizedOptions['namespace'] . $baseOptions->getNamespaceSeparator() . $normalizedKey;
+        if ($this->bufferKey == $bufferKey) {
             $filespec = $this->lastInfo['filespec'];
             // if lastKeyInfo is available I'm sure that the cache directory exist
         } else {
-            $filespec = $this->getFileSpec($normalizedKey, $normalizedOptions['namespace']);
+            $filespec = $this->getFileSpec($normalizedKey, $normalizedOptions);
             if ($baseOptions->getDirLevel() > 0) {
                 $path = dirname($filespec);
                 if (!file_exists($path)) {
@@ -691,7 +704,7 @@ class Filesystem extends AbstractAdapter
                 }
             }
 
-            $this->lastInfoId = null;
+            $this->bufferKey = null;
 
             // reset file_umask
             umask($oldUmask);
@@ -758,18 +771,19 @@ class Filesystem extends AbstractAdapter
      */
     protected function internalCheckAndSetItem(& $token, & $normalizedKey, & $value, array & $normalizedOptions)
     {
-        $keyInfo = $this->getKeyInfo($normalizedKey, $normalizedOptions['namespace']);
-        if (!$keyInfo) {
+        if (!$this->internalHasItem($normalizedKey, $normalizedOptions)) {
             if (!$normalizedOptions['ignore_missing_items']) {
                 throw new Exception\ItemNotFoundException(
                     "Key '{$normalizedKey}' not found within namespace '{$normalizedOptions['namespace']}'"
                 );
             }
+
             return false;
         }
 
         // use filemtime + filesize as CAS token
-        $check = $keyInfo['mtime'] . filesize($keyInfo['filespec'] . '.dat');
+        $filespec = $this->getFileSpec($normalizedKey, $normalizedOptions);
+        $check    = filemtime($filespec . '.dat') . filesize($filespec . '.dat');
         if ($token !== $check) {
             return false;
         }
@@ -845,27 +859,29 @@ class Filesystem extends AbstractAdapter
      */
     protected function internalTouchItem(& $normalizedKey, array & $normalizedOptions)
     {
-        $keyInfo = $this->getKeyInfo($normalizedKey, $normalizedOptions['namespace']);
-        if (!$keyInfo) {
+        if (!$this->internalHasItem($normalizedKey, $normalizedOptions)) {
             if (!$normalizedOptions['ignore_missing_items']) {
                 throw new Exception\ItemNotFoundException(
                     "Key '{$normalizedKey}' not found within namespace '{$normalizedOptions['namespace']}'"
                 );
             }
+
             return false;
         }
 
+        $filespec = $this->getFileSpec($normalizedKey, $normalizedOptions);
+
         ErrorHandler::start();
-        $touch = touch($keyInfo['filespec'] . '.dat');
+        $touch = touch($filespec . '.dat');
         $error = ErrorHandler::stop();
         if (!$touch) {
             throw new Exception\RuntimeException(
-                "Error touching file '{$keyInfo['filespec']}.dat'", 0, $error
+                "Error touching file '{$filespec}.dat'", 0, $error
             );
         }
 
         // remove the buffered info
-        $this->lastInfoId = null;
+        $this->bufferKey = null;
 
         return true;
     }
@@ -942,7 +958,7 @@ class Filesystem extends AbstractAdapter
      */
     protected function internalRemoveItem(& $normalizedKey, array & $normalizedOptions)
     {
-        $filespec = $this->getFileSpec($normalizedKey, $normalizedOptions['namespace']);
+        $filespec = $this->getFileSpec($normalizedKey, $normalizedOptions);
         if (!file_exists($filespec . '.dat')) {
             if (!$normalizedOptions['ignore_missing_items']) {
                 throw new Exception\ItemNotFoundException("Key '{$normalizedKey}' with file '{$filespec}.dat' not found");
@@ -950,7 +966,7 @@ class Filesystem extends AbstractAdapter
         } else {
             $this->unlink($filespec . '.dat');
             $this->unlink($filespec . '.ifo');
-            $this->lastInfoId = null;
+            $this->bufferKey = null;
         }
         return true;
     }
@@ -1432,72 +1448,33 @@ class Filesystem extends AbstractAdapter
     }
 
     /**
-     * Get an array of information about the cache key.
-     * NOTE: returns false if cache doesn't hit.
-     *
-     * @param  string $key
-     * @param  string $ns
-     * @return array|boolean
-     */
-    protected function getKeyInfo($key, $ns)
-    {
-        $lastInfoId = $ns . $this->getOptions()->getNamespaceSeparator() . $key;
-        if ($this->lastInfoId == $lastInfoId) {
-            return $this->lastInfo;
-        }
-
-        $filespec = $this->getFileSpec($key, $ns);
-        $file     = $filespec . '.dat';
-
-        if (!file_exists($file)) {
-            return false;
-        }
-
-        ErrorHandler::start();
-        $mtime = filemtime($file);
-        $error = ErrorHandler::stop();
-        if (!$mtime) {
-            throw new Exception\RuntimeException(
-                "Error getting mtime of file '{$file}'", 0, $error
-            );
-        }
-
-        $this->lastInfoId = $lastInfoId;
-        $this->lastInfo   = array(
-            'filespec' => $filespec,
-            'mtime'    => $mtime,
-        );
-
-        return $this->lastInfo;
-    }
-
-    /**
      * Get file spec of the given key and namespace
      *
-     * @param  string $key
-     * @param  string $ns
+     * @param  string $normalizedKey
+     * @param  array  $normalizedOptions
      * @return string
      */
-    protected function getFileSpec($key, $ns)
+    protected function getFileSpec($normalizedKey, array & $normalizedOptions)
     {
-        $options    = $this->getOptions();
-        $prefix     = $ns . $options->getNamespaceSeparator();
-        $lastInfoId = $prefix . $key;
-        if ($this->lastInfoId == $lastInfoId) {
-            return $this->lastInfo['filespec'];
-        }
+        $baseOptions = $this->getOptions();
+        $prefix      = $normalizedOptions['namespace'] . $baseOptions->getNamespaceSeparator();
+        $bufferKey   = $prefix . $normalizedKey;
 
-        $path  = $options->getCacheDir();
-        $level = $options->getDirLevel();
-        if ( $level > 0 ) {
-            // create up to 256 directories per directory level
-            $hash = md5($key);
-            for ($i = 0, $max = ($level * 2); $i < $max; $i+= 2) {
-                $path .= \DIRECTORY_SEPARATOR . $prefix . $hash[$i] . $hash[$i+1];
+        if ($this->bufferKey !== $bufferKey) {
+            $path  = $baseOptions->getCacheDir();
+            $level = $baseOptions->getDirLevel();
+            if ( $level > 0 ) {
+                // create up to 256 directories per directory level
+                $hash = md5($normalizedKey);
+                for ($i = 0, $max = ($level * 2); $i < $max; $i+= 2) {
+                    $path .= \DIRECTORY_SEPARATOR . $prefix . $hash[$i] . $hash[$i+1];
+                }
             }
+
+            $this->bufferedFilespec = $path . \DIRECTORY_SEPARATOR . $prefix . $normalizedKey;
         }
 
-        return $path . \DIRECTORY_SEPARATOR . $prefix . $key;
+        return $this->bufferedFilespec;
     }
 
     /**

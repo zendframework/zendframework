@@ -1573,20 +1573,21 @@ class Filesystem extends AbstractAdapter
     /**
      * Write content to a file
      *
-     * @param  string $file  File complete path
-     * @param  string $data  Data to write
-     * @return bool
+     * @param  string  $file       File complete path
+     * @param  string  $data       Data to write
+     * @param  boolean $wouldblock Return FALSE if the lock would block
+     * @return boolean TRUE on success, FALSE if lock would block
      * @throws Exception\RuntimeException
      */
-    protected function putFileContent($file, $data)
+    protected function putFileContent($file, $data, $wouldblock = false)
     {
-        $options  = $this->getOptions();
-        $locking  = $options->getFileLocking();
-        $blocking = $locking ? $options->getFileBlocking() : false;
+        $locking    = $this->getOptions()->getFileLocking();
+        $wouldblock = $locking && $wouldblock;
 
         ErrorHandler::start();
 
-        if ($locking && !$blocking) {
+        // file_put_contents can't used
+        if ($locking && $wouldblock) {
             $fp = fopen($file, 'cb');
             if (!$fp) {
                 $err = ErrorHandler::stop();
@@ -1595,11 +1596,12 @@ class Filesystem extends AbstractAdapter
                 );
             }
 
+            $wouldblock = null;
             if(!flock($fp, \LOCK_EX | \LOCK_NB, $wouldblock)) {
                 fclose($fp);
                 $err = ErrorHandler::stop();
                 if ($wouldblock) {
-                    throw new Exception\LockedException("File '{$file}' locked", 0, $err);
+                    return false;
                 } else {
                     throw new Exception\RuntimeException("Error locking file '{$file}'", 0, $err);
                 }
@@ -1621,6 +1623,8 @@ class Filesystem extends AbstractAdapter
 
             flock($fp, \LOCK_UN);
             fclose($fp);
+
+        // file_put_contents can be used
         } else {
             $flags = 0;
             if ($locking) {

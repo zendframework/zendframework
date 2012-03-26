@@ -66,17 +66,6 @@ class FilesystemOptions extends AdapterOptions
     protected $dirUmask = 0007;
 
     /**
-     * Block writing files until writing by another process finished.
-     *
-     * NOTE: this only attempts if fileLocking is enabled
-     * NOTE: if disabled writing operations can throw a LockedException
-     * NOTE: This option can't be disabled on windows
-     *
-     * @var boolean
-     */
-    protected $fileBlocking = true;
-
-    /**
      * Lock files on writing
      *
      * @var boolean
@@ -302,44 +291,6 @@ class FilesystemOptions extends AdapterOptions
     public function getDirUmask()
     {
         return $this->dirUmask;
-    }
-
-    /**
-     * Set block writing files until writing by another process finished.
-     *
-     * NOTE: this only attempts if fileLocking is enabled
-     * NOTE: if disabled writing operations can throw a LockedException
-     * NOTE: This option can't be disabled on windows
-     *
-     * @param  bool $flag
-     * @return FilesystemOptions
-     */
-    public function setFileBlocking($flag)
-    {
-        $flag = (bool) $flag;
-        if (!$flag && substr(\PHP_OS, 0, 3) == 'WIN') {
-            throw new Exception\InvalidArgumentException(
-                "This option can't be disabled on windows"
-            );
-        }
-
-        $this->triggerOptionEvent('file_blocking', $flag);
-        $this->fileBlocking = $flag;
-        return $this;
-    }
-
-    /**
-     * Get block writing files until writing by another process finished.
-     *
-     * NOTE: this only attempts if fileLocking is enabled
-     * NOTE: if disabled writing operations can throw a LockedException
-     * NOTE: This option can't be disabled on windows
-     *
-     * @return bool
-     */
-    public function getFileBlocking()
-    {
-        return $this->fileBlocking;
     }
 
     /**

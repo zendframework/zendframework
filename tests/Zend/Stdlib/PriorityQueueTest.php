@@ -34,6 +34,11 @@ use Zend\Stdlib\PriorityQueue,
  */
 class PriorityQueueTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @var PriorityQueue
+     */
+    protected $queue;
+
     public function setUp()
     {
         $this->queue = new PriorityQueue();
@@ -131,5 +136,22 @@ class PriorityQueueTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertTrue($this->queue->hasPriority(3));
         $this->assertFalse($this->queue->hasPriority(1000));
+    }
+
+    public function testDeepCloning()
+    {
+        $foo  = new \stdClass();
+        $foo->name = 'bar';
+
+        $queue = new PriorityQueue();
+        $queue->insert($foo);
+
+        $queueClone = clone $queue;
+        $queue->remove($foo);
+
+        $this->assertEquals(0, $queue->count());
+        $this->assertEquals(1, $queueClone->count());
+
+        $this->assertInstanceOf('\stdClass', $queueClone->top());
     }
 }

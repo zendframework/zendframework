@@ -1653,11 +1653,6 @@ class Filesystem extends AbstractAdapter
      */
     protected function unlink($file)
     {
-        // If file does not exist, nothing to do
-        if (!file_exists($file)) {
-            return;
-        }
-
         ErrorHandler::start();
         $res = unlink($file);
         $err = ErrorHandler::stop();

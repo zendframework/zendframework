@@ -310,10 +310,8 @@ class PriorityQueue implements Countable, IteratorAggregate, Serializable
      */
     public function __clone()
     {
-        foreach ($this as $key => $val) {
-            if (is_object($val) || (is_array($val))) {
-                $this->{$key} = unserialize(serialize($val));
-            }
+        if (null !== $this->queue) {
+            $this->queue = clone $this->queue;
         }
     }
 }

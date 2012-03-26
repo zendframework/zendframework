@@ -138,20 +138,31 @@ class PriorityQueueTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($this->queue->hasPriority(1000));
     }
 
-    public function testDeepCloning()
+    public function testCloningAlsoClonesQueue()
     {
         $foo  = new \stdClass();
         $foo->name = 'bar';
 
         $queue = new PriorityQueue();
-        $queue->insert($foo);
+        $queue->insert($foo, 1);
+        $queue->insert($foo, 2);
 
         $queueClone = clone $queue;
-        $queue->remove($foo);
 
-        $this->assertEquals(0, $queue->count());
-        $this->assertEquals(1, $queueClone->count());
+        while (!$queue->isEmpty()) {
+            $this->assertSame($foo, $queue->top());
+            $queue->remove($queue->top());
+        }
 
-        $this->assertInstanceOf('\stdClass', $queueClone->top());
+        $this->assertTrue($queue->isEmpty());
+        $this->assertFalse($queueClone->isEmpty());
+        $this->assertEquals(2, $queueClone->count());
+
+        while (!$queueClone->isEmpty()) {
+            $this->assertSame($foo, $queueClone->top());
+            $queueClone->remove($queueClone->top());
+        }
+
+        $this->assertTrue($queueClone->isEmpty());
     }
 }

@@ -20,9 +20,6 @@
  * @version    $Id$
  */
 
-/**
- * @namespace
- */
 namespace Zend\Test\PHPUnit\Constraint\Exception;
 
 /**

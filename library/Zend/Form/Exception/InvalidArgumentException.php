@@ -19,9 +19,6 @@
  * @version    $Id$
  */
 
-/**
- * @namespace
- */
 namespace Zend\Form\Exception;
 
 /**

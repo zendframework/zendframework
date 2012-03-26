@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Service\Amazon\Sqs;
 use Zend\Service\Amazon,
     Zend\Service\Amazon\Sqs\Exception,

@@ -1,7 +1,4 @@
 <?php
-/**
- * @namespace
- */
 namespace ZendTest\Http\PhpEnvironment;
 
 use PHPUnit_Framework_TestCase as TestCase,

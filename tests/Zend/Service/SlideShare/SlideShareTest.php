@@ -20,9 +20,6 @@
  */
 
 
-/**
- * @namespace
- */
 namespace ZendTest\Service\SlideShare;
 
 use Zend\Service\SlideShare,

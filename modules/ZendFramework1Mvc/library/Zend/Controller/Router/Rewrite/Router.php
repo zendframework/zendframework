@@ -20,9 +20,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Controller\Router\Rewrite;
 use Zend\Controller\Router\Rewrite\Route;
 use Zend\Controller\Request\Http as HttpRequest;

@@ -20,9 +20,6 @@
  * @version    $Id$
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Controller\Router\Rewrite\TestAsset;
 use Zend\Controller\Router\Rewrite\Route\Route;
 use Zend\Controller\Request\HTTP as HTTPRequest;

@@ -21,9 +21,6 @@
  * @version    $Id $
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Uri;
 
 use Zend\Uri\Uri;

@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\View\_stubs\HelperDir1;
 
 // used to test when helper file is loaded but class is not within

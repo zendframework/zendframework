@@ -18,9 +18,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Amf\Request;
 use Zend\Amf\Request as AMFRequest,
     Zend\Amf\Parser,

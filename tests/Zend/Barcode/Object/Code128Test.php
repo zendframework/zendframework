@@ -20,9 +20,6 @@
  * @version    $Id: Code25Test.php 21667 2010-03-28 17:45:14Z mikaelkael $
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Barcode\Object;
 use Zend\Barcode;
 

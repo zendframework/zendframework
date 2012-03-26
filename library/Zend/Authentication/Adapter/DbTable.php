@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Authentication\Adapter;
 use Zend\Authentication\Adapter as AuthenticationAdapter,
     Zend\Authentication\Result as AuthenticationResult,

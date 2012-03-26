@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Service\Rackspace\Servers;
 
 use Zend\Service\Rackspace\Servers as RackspaceServers;

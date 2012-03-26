@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Wildfire\Protocol;
 use Zend\Wildfire\Plugin,
     Zend\Wildfire\Protocol\Exception,

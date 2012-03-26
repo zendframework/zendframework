@@ -20,9 +20,6 @@
  * @version    $Id$
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Paginator\TestAsset;
 
 use Zend\Paginator\AdapterBroker as BaseAdapterBroker;

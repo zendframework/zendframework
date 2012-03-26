@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Barcode\Object;
 
 use Zend\Validator\Barcode as BarcodeValidator,

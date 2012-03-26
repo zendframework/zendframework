@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Soap;
 
 require_once __DIR__ . '/TestAsset/commontypes.php';

@@ -20,9 +20,6 @@
  * @version    $Id$
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Markup\Renderer\Markup;
 
 use Zend\Markup\Renderer\Markup\Html\Code as CodeMarkup,

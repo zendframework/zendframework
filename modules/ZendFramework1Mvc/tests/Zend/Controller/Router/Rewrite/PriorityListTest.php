@@ -20,9 +20,6 @@
  * @version    $Id$
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Controller\Router\Rewrite;
 use Zend\Controller\Router\Rewrite\PriorityList;
 use ZendTest\Controller\Router\Rewrite\TestAsset\DummyRoute;

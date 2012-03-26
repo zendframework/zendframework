@@ -1,7 +1,4 @@
 <?php
-/**
- * @namespace
- */
 namespace ZendTest\Http\Client;
 
 use Zend\Http\ClientStatic as HTTPClient,

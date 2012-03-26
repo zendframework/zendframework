@@ -20,9 +20,6 @@
  */
 
 
-/**
- * @namespace
- */
 namespace ZendTest\OpenId\Consumer\Storage;
 
 use Zend\OpenId\OpenId,

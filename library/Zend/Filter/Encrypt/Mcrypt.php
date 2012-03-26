@@ -18,9 +18,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Filter\Encrypt;
 use Zend\Filter\Exception,
     Zend\Filter\Compress,

@@ -21,9 +21,6 @@
  */
 
 
-/**
- * @namespace
- */
 namespace ZendTest\Service\Amazon\SimpleDb;
 
 /**

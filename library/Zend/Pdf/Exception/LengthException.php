@@ -20,9 +20,6 @@
  * @version    $Id$
  */
 
-/**
- * @namespace
- */
 namespace Zend\Pdf\Exception;
 use Zend\Pdf\Exception;
 

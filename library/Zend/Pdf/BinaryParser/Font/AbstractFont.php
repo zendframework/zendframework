@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Pdf\BinaryParser\Font;
 use Zend\Pdf\BinaryParser;
 use Zend\Log;

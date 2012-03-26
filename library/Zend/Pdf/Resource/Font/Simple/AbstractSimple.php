@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Pdf\Resource\Font\Simple;
 use Zend\Pdf\Resource\Font as FontResource;
 use Zend\Pdf\InternalType;

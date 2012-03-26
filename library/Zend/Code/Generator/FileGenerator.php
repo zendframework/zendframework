@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Code\Generator;
 use Zend\Code\Reflection\FileReflection;
 
@@ -503,7 +500,6 @@ class FileGenerator extends AbstractGenerator
 
         // namespace, if any
         if ($namespace = $this->getNamespace()) {
-            $output .= "/** @namespace */" . self::LINE_FEED;
             $output .= sprintf('namespace %s;%s', $namespace, str_repeat(self::LINE_FEED, 2));
         }
 

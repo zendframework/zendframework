@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Wildfire;
 use Zend\Wildfire\Channel,
     Zend\Wildfire\Plugin\FirePhp,

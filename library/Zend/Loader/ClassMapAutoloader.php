@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Loader
  * @subpackage Exception
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -32,7 +32,7 @@ require_once __DIR__ . '/SplAutoloader.php';
  * 
  * @catebory   Zend
  * @package    Zend_Loader
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    New BSD {@link http://framework.zend.com/license/new-bsd}
  */
 class ClassMapAutoloader implements SplAutoloader
@@ -161,7 +161,7 @@ class ClassMapAutoloader implements SplAutoloader
      */
     public function register()
     {
-        spl_autoload_register(array($this, 'autoload'));
+        spl_autoload_register(array($this, 'autoload'), true, true);
     }
 
     /**

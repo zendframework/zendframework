@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Amf
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -27,7 +27,8 @@ use Zend\Amf\Exception,
     Zend\Authentication\AuthenticationService,
     Zend\Loader\Broker,
     Zend\Loader\PluginBroker,
-    Zend\Server\Reflection;
+    Zend\Server\Reflection,
+    Zend\Server\Server as ServerDefinition;
 
 /**
  * An AMF gateway server implementation to allow the connection of the Adobe Flash Player to
@@ -53,10 +54,10 @@ use Zend\Amf\Exception,
  * @uses       Zend\Session\Container
  * @package    Zend_Amf
  * @subpackage Server
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Server implements \Zend\Server\Server
+class Server implements ServerDefinition
 {
     /**
      * Array of dispatchables
@@ -97,10 +98,17 @@ class Server implements \Zend\Server\Server
     protected $_response;
 
     /**
+     * Flag: whether or not to return a response instead of automatically 
+     * emitting it. By default, returns it.
+     * @var boolean
+     */
+    protected $returnResponse = true;
+
+    /**
      * Dispatch table of name => method pairs
      * @var array
      */
-    protected $_table = array();
+    protected $table = array();
 
     /**
      *
@@ -364,7 +372,7 @@ class Server implements \Zend\Server\Server
         }
         $qualifiedName = empty($source) ? $method : $source.".".$method;
 
-        if (!isset($this->_table[$qualifiedName])) {
+        if (!isset($this->table[$qualifiedName])) {
             // if source is null a method that was not defined was called.
             if ($source) {
                 $className = str_replace(".", "\\", $source);
@@ -383,7 +391,7 @@ class Server implements \Zend\Server\Server
             }
         }
 
-        $info = $this->_table[$qualifiedName];
+        $info = $this->table[$qualifiedName];
         $argv = $info->getInvokeArguments();
 
         if (0 < count($argv)) {
@@ -681,7 +689,9 @@ class Server implements \Zend\Server\Server
         }
 
         // Return the Amf serialized output string
-        return $response;
+        if ($this->getReturnResponse()) {
+            return $response;
+        }
     }
 
     /**
@@ -870,7 +880,7 @@ class Server implements \Zend\Server\Server
                 }
             }
         }
-        $this->_table = $table;
+        $this->table = $table;
     }
 
 
@@ -897,7 +907,7 @@ class Server implements \Zend\Server\Server
      */
     public function getFunctions()
     {
-        return $this->_table;
+        return $this->table;
     }
 
     /**
@@ -946,6 +956,33 @@ class Server implements \Zend\Server\Server
      */
     public function listMethods()
     {
-        return array_keys($this->_table);
+        return array_keys($this->table);
+    }
+
+    /**
+     * Set return response flag
+     *
+     * If true, {@link handle()} will return the response instead of
+     * automatically sending it back to the requesting client.
+     *
+     * The response is always available via {@link getResponse()}.
+     *
+     * @param boolean $flag
+     * @return \Zend\XmlRpc\Server
+     */
+    public function setReturnResponse($flag = true)
+    {
+        $this->returnResponse = ($flag) ? true : false;
+        return $this;
+    }
+
+    /**
+     * Retrieve return response flag
+     *
+     * @return boolean
+     */
+    public function getReturnResponse()
+    {
+        return $this->returnResponse;
     }
 }

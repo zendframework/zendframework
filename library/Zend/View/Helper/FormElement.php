@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_View
  * @subpackage Helper
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -34,7 +34,7 @@ use Zend\View\Exception;
  * @category   Zend
  * @package    Zend_View
  * @subpackage Helper
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class FormElement extends HtmlElement
@@ -190,9 +190,10 @@ abstract class FormElement extends HtmlElement
      */
     protected function _hidden($name, $value = null, $attribs = null)
     {
+        $escaper = $this->view->plugin('escape');
         return '<input type="hidden"'
-             . ' name="' . $this->view->vars()->escape($name) . '"'
-             . ' value="' . $this->view->vars()->escape($value) . '"'
+             . ' name="' . $escaper($name) . '"'
+             . ' value="' . $escaper($value) . '"'
              . $this->_htmlAttribs($attribs) . $this->getClosingBracket();
     }
 }

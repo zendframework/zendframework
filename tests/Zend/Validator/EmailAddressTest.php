@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Validator
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -23,14 +23,15 @@
  * @namespace
  */
 namespace ZendTest\Validator;
-use Zend\Validator;
-use Zend\Validator\Hostname;
+use Zend\Validator,
+    Zend\Validator\Hostname,
+    ReflectionClass;
 
 /**
  * @category   Zend
  * @package    Zend_Validator
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Validator
  */
@@ -590,5 +591,102 @@ class EmailAddressTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($validator->isValid('john.doe@gmail.com'));
         $result = $validator->getMXRecord();
         $this->assertTrue(!empty($result));
+    }
+    
+    public function testEqualsMessageTemplates()
+    {
+        $validator = $this->_validator;
+        $reflection = new ReflectionClass($validator);
+        
+        if(!$reflection->hasProperty('_messageTemplates')) {
+            return;
+        }
+        
+        $property = $reflection->getProperty('_messageTemplates');
+        $property->setAccessible(true);
+
+        $this->assertEquals(
+            $property->getValue($validator),
+            $validator->getOption('messageTemplates')
+        );
+    }
+    
+    public function testEqualsMessageVariables()
+    {
+        $validator = $this->_validator;
+        $reflection = new ReflectionClass($validator);
+        
+        if(!$reflection->hasProperty('_messageVariables')) {
+            return;
+        }
+        
+        $property = $reflection->getProperty('_messageVariables');
+        $property->setAccessible(true);
+
+        $this->assertEquals(
+            $property->getValue($validator),
+            $validator->getOption('messageVariables')
+        );
+    }
+
+    /**
+     * @group ZF2-130
+     */
+    public function testUseMxCheckBasicValid()
+    {
+        $validator = new Validator\EmailAddress(array(
+            'useMxCheck'        => true,
+            'useDeepMxCheck'    => true
+        ));
+
+        $emailAddresses = array(
+            'bob@gmail.com',
+            'bob.jones@bbc.co.uk',
+            'bob.jones.smythe@bbc.co.uk',
+            'BoB@aol.com',
+            'bobjones@nist.gov',
+            "B.O'Callaghan@usmc.mil",
+            'bob+jones@nic.us',
+            'bob+jones@dailymail.co.uk',
+            'bob@teaparty.uk.com',
+            'bob@thelongestdomainnameintheworldandthensomeandthensomemoreandmore.com'
+        );
+
+        foreach ($emailAddresses as $input) {
+            $this->assertTrue($validator->isValid($input), "$input failed to pass validation:\n"
+                            . implode("\n", $validator->getMessages()));
+        }
+    }
+
+    /**
+     * @group ZF2-130
+     */
+    public function testUseMxRecordsBasicInvalid() { 
+        $validator = new Validator\EmailAddress(array(
+            'useMxCheck'        => true,
+            'useDeepMxCheck'    => true
+        ));
+
+        $emailAddresses = array(
+            '',
+            'bob
+
+            @domain.com',
+            'bob jones@domain.com',
+            '.bobJones@studio24.com',
+            'bobJones.@studio24.com',
+            'bob.Jones.@studio24.com',
+            '"bob%jones@domain.com',
+            'bob@verylongdomainsupercalifragilisticexpialidociousaspoonfulofsugar.com',
+            'bob+domain.com',
+            'bob.domain.com',
+            'bob @domain.com',
+            'bob@ domain.com',
+            'bob @ domain.com',
+            'Abc..123@example.com'
+            );
+        foreach ($emailAddresses as $input) {
+            $this->assertFalse($validator->isValid($input), implode("\n", $this->_validator->getMessages()) . $input);
+        }
     }
 }

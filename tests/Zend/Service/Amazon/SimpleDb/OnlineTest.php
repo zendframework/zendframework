@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend\Service\Amazon\SimpleDb
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
@@ -27,15 +27,14 @@ namespace ZendTest\Service\Amazon\SimpleDb;
 
 use Zend\Service\Amazon\SimpleDb,
     Zend\Service\Amazon\SimpleDb\Exception,
-    Zend\Http\Client\Adapter\Socket,
-    Zend\Config\Ini as Config;
+    Zend\Http\Client\Adapter\Socket;
 
 
 /**
  * @category   Zend
  * @package    Zend\Service\Amazon\SimpleDb
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class OnlineTest extends \PHPUnit_Framework_TestCase

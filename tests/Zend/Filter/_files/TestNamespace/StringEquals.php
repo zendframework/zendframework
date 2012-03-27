@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Filter
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -29,7 +29,7 @@ use Zend\Validator\AbstractValidator;
  * @category   Zend
  * @package    Zend_Filter
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class StringEquals extends AbstractValidator
@@ -57,12 +57,12 @@ class StringEquals extends AbstractValidator
      */
     public function isValid($value)
     {
-        $this->_setValue($value);
+        $this->setValue($value);
 
         $initial = (string) current((array) $value);
         foreach ((array) $value as $element) {
             if ((string) $element !== $initial) {
-                $this->_error(self::NOT_EQUALS);
+                $this->error(self::NOT_EQUALS);
                 return false;
             }
         }

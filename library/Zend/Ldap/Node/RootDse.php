@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Ldap
  * @subpackage RootDse
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -26,7 +26,7 @@ namespace Zend\Ldap\Node;
 use Zend\Ldap;
 
 /**
- * Zend_Ldap_Node_RootDse provides a simple data-container for the RootDSE node.
+ * Zend_Ldap_Node_RootDse provides a simple data-container for the RootDse node.
  *
  * @uses       \Zend\Ldap\Dn
  * @uses       \Zend\Ldap\Node\AbstractNode
@@ -36,7 +36,7 @@ use Zend\Ldap;
  * @category   Zend
  * @package    Zend_Ldap
  * @subpackage RootDse
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class RootDse extends AbstractNode
@@ -47,7 +47,7 @@ class RootDse extends AbstractNode
     const SERVER_TYPE_EDIRECTORY      = 4;
 
     /**
-     * Factory method to create the RootDSE.
+     * Factory method to create the RootDse.
      *
      * @param  \Zend\Ldap\Ldap $ldap
      * @return \Zend\Ldap\Node\RootDse

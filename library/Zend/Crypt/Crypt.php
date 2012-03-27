@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Crypt
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -27,7 +27,7 @@ namespace Zend\Crypt;
  * @uses       Zend\Crypt\Exception
  * @category   Zend
  * @package    Zend_Crypt
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Crypt
@@ -90,7 +90,7 @@ class Crypt
         }
         self::_detectHashSupport($algorithm);
         $supportedMethod = '_digest' . ucfirst(self::$_type);
-        $result = self::$supportedMethod($algorithm, $data, $binaryOutput);
+        return self::$supportedMethod($algorithm, $data, $binaryOutput);
     }
 
     /**

@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Nirvanix
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -27,7 +27,7 @@ use Traversable,
     Zend\Http\Response as HttpResponse,
     Zend\Service\Nirvanix\Exception,
     Zend\Service\Nirvanix\Response,
-    Zend\Stdlib\IteratorToArray;
+    Zend\Stdlib\ArrayUtils;
 
 /**
  * The Nirvanix web services are split into namespaces.  This is a proxy class
@@ -37,7 +37,7 @@ use Traversable,
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Nirvanix
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Base
@@ -80,7 +80,7 @@ class Base
     public function __construct($options = array())
     {
         if ($options instanceof Traversable) {
-            $options = IteratorToArray::convert($options);
+            $options = ArrayUtils::iteratorToArray($options);
         }
 
         if (!is_array($options)) {

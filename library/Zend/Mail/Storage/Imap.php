@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Mail
  * @subpackage Storage
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -24,24 +24,14 @@
  */
 namespace Zend\Mail\Storage;
 
-use Zend\Mail\AbstractStorage,
-    Zend\Mail\Storage,
-    Zend\Mail\Storage\Exception,
-    Zend\Mail\Protocol;
+use Zend\Mail\Protocol,
+    Zend\Mail\Storage;
 
 /**
- * @uses       \Zend\Mail\Message\Message
- * @uses       \Zend\Mail\Protocol\Imap
- * @uses       \Zend\Mail\Storage
- * @uses       \Zend\Mail\AbstractStorage
- * @uses       \Zend\Mail\Storage\Exception
- * @uses       \Zend\Mail\Storage\Folder
- * @uses       \Zend\Mail\Storage\MailFolder
- * @uses       \Zend\Mail\Storage\Writable
  * @category   Zend
  * @package    Zend_Mail
  * @subpackage Storage
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Imap extends AbstractStorage implements MailFolder, Writable

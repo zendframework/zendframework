@@ -16,7 +16,7 @@
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Gdata
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -28,13 +28,10 @@ namespace Zend\GData;
 /**
  * A streaming Media MIME class that allows for buffered read operations.
  *
- * @uses       \Zend\GData\App\IOException
- * @uses       \Zend\GData\MimeBodyString
- * @uses       \Zend\GData\MimeFile
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Gdata
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class MediaMimeStream

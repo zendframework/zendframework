@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_OAuth
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -30,7 +30,7 @@ use Zend\OAuth\Config as OAuthConfig,
 /**
  * @category   Zend
  * @package    Zend_OAuth
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class StandardConfig implements OAuthConfig
@@ -266,7 +266,7 @@ class StandardConfig implements OAuthConfig
      */
     public function getConsumerSecret()
     {
-        if (!is_null($this->_rsaPrivateKey)) {
+        if ($this->_rsaPrivateKey !== null) {
             return $this->_rsaPrivateKey;
         }
         return $this->_consumerSecret;

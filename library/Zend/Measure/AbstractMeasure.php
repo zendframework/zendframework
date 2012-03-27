@@ -14,7 +14,7 @@
  *
  * @category  Zend
  * @package   Zend_Measure
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -34,7 +34,7 @@ use Zend\Locale\Math;
  * @uses       Zend\Registry
  * @category   Zend
  * @package    Zend_Measure
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class AbstractMeasure
@@ -274,16 +274,7 @@ abstract class AbstractMeasure
                 $value = call_user_func(Math::$div, $value, $this->_units[$type][0], 25);
             }
 
-            $slength = strlen($value);
-            $length  = 0;
-            for($i = 1; $i <= $slength; ++$i) {
-                if ($value[$slength - $i] != '0') {
-                    $length = 26 - $i;
-                    break;
-                }
-            }
-
-            $this->_value = Math::round($value, $length);
+            $this->_value = $this->roundToPrecision($value);
             $this->_type  = $type;
         }
         return $this;
@@ -363,9 +354,9 @@ abstract class AbstractMeasure
     public function add($object)
     {
         $object->setType($this->getType());
-        $value  = $this->getValue(-1) + $object->getValue(-1);
+        $value  = call_user_func(Math::$add, $this->getValue(-1), $object->getValue(-1), 25);
 
-        $this->setValue($value, $this->getType(), $this->_locale);
+        $this->_value = $this->roundToPrecision($value);
         return $this;
     }
 
@@ -378,9 +369,9 @@ abstract class AbstractMeasure
     public function sub($object)
     {
         $object->setType($this->getType());
-        $value  = $this->getValue(-1) - $object->getValue(-1);
+        $value  = call_user_func(Math::$sub, $this->getValue(-1), $object->getValue(-1), 25);
 
-        $this->setValue($value, $this->getType(), $this->_locale);
+        $this->_value = $this->roundToPrecision($value);
         return $this;
     }
 
@@ -402,5 +393,25 @@ abstract class AbstractMeasure
         }
 
         return 0;
+    }
+
+    /**
+     * Rounds a number to its last significant figure
+     *
+     * @param integer|float|string $value the number to round
+     * @return float the rounded number
+     */
+    protected function roundToPrecision($value)
+    {
+        $slength = strlen($value);
+        $length  = 0;
+        for($i = 1; $i <= $slength; ++$i) {
+            if ($value[$slength - $i] != '0') {
+                $length = 26 - $i;
+                break;
+            }
+        }
+
+        return Math::round($value, $length);
     }
 }

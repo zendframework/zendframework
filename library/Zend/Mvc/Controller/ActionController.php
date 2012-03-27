@@ -2,21 +2,21 @@
 
 namespace Zend\Mvc\Controller;
 
-use ArrayObject,
-    Zend\Di\Locator,
+use Zend\Di\Locator,
     Zend\EventManager\EventCollection,
     Zend\EventManager\EventDescription as Event,
     Zend\EventManager\EventManager,
     Zend\Http\PhpEnvironment\Response as HttpResponse,
     Zend\Loader\Broker,
     Zend\Loader\Pluggable,
-    Zend\Stdlib\Dispatchable,
-    Zend\Stdlib\IsAssocArray,
-    Zend\Stdlib\RequestDescription as Request,
-    Zend\Stdlib\ResponseDescription as Response,
+    Zend\Mvc\Exception,
     Zend\Mvc\InjectApplicationEvent,
     Zend\Mvc\LocatorAware,
-    Zend\Mvc\MvcEvent;
+    Zend\Mvc\MvcEvent,
+    Zend\Stdlib\Dispatchable,
+    Zend\Stdlib\RequestDescription as Request,
+    Zend\Stdlib\ResponseDescription as Response,
+    Zend\View\Model\ViewModel;
 
 /**
  * Basic action controller
@@ -34,31 +34,41 @@ abstract class ActionController implements Dispatchable, InjectApplicationEvent,
 
     /**
      * Default action if none provided
-     * 
+     *
      * @return array
      */
     public function indexAction()
     {
-        return array('content' => 'Placeholder page');
+        return new ViewModel(array(
+            'content' => 'Placeholder page'
+        ));
     }
 
     /**
      * Action called if matched action does not exist
-     * 
+     *
      * @return array
      */
     public function notFoundAction()
     {
-        $this->response->setStatusCode(404);
-        return array('content' => 'Page not found');
+        $response   = $this->response;
+        $event      = $this->getEvent();
+        $routeMatch = $event->getRouteMatch();
+
+        $response->setStatusCode(404);
+        $routeMatch->setParam('action', 'not-found');
+
+        return new ViewModel(array(
+            'content' => 'Page not found'
+        ));
     }
 
     /**
      * Dispatch a request
-     * 
+     *
      * @events dispatch.pre, dispatch.post
-     * @param  Request $request 
-     * @param  null|Response $response 
+     * @param  Request $request
+     * @param  null|Response $response
      * @return Response|mixed
      */
     public function dispatch(Request $request, Response $response = null)
@@ -86,8 +96,8 @@ abstract class ActionController implements Dispatchable, InjectApplicationEvent,
 
     /**
      * Execute the request
-     * 
-     * @param  MvcEvent $e 
+     *
+     * @param  MvcEvent $e
      * @return mixed
      */
     public function execute(MvcEvent $e)
@@ -101,7 +111,7 @@ abstract class ActionController implements Dispatchable, InjectApplicationEvent,
             throw new \DomainException('Missing route matches; unsure how to retrieve action');
         }
 
-        $action = $routeMatch->getParam('action', 'index');
+        $action = $routeMatch->getParam('action', 'not-found');
         $method = static::getMethodFromAction($action);
 
         if (!method_exists($this, $method)) {
@@ -110,19 +120,13 @@ abstract class ActionController implements Dispatchable, InjectApplicationEvent,
 
         $actionResponse = $this->$method();
 
-        if (!is_object($actionResponse)) {
-            if (IsAssocArray::test($actionResponse)) {
-                $actionResponse = new ArrayObject($actionResponse, ArrayObject::ARRAY_AS_PROPS);
-            }
-        }
-
         $e->setResult($actionResponse);
         return $actionResponse;
     }
 
     /**
      * Get the request object
-     * 
+     *
      * @return Request
      */
     public function getRequest()
@@ -132,7 +136,7 @@ abstract class ActionController implements Dispatchable, InjectApplicationEvent,
 
     /**
      * Get the response object
-     * 
+     *
      * @return Response
      */
     public function getResponse()
@@ -145,8 +149,8 @@ abstract class ActionController implements Dispatchable, InjectApplicationEvent,
 
     /**
      * Set the event manager instance used by this context
-     * 
-     * @param  EventCollection $events 
+     *
+     * @param  EventCollection $events
      * @return AppContext
      */
     public function setEventManager(EventCollection $events)
@@ -159,7 +163,7 @@ abstract class ActionController implements Dispatchable, InjectApplicationEvent,
      * Retrieve the event manager
      *
      * Lazy-loads an EventManager instance if none registered.
-     * 
+     *
      * @return EventCollection
      */
     public function events()
@@ -167,7 +171,7 @@ abstract class ActionController implements Dispatchable, InjectApplicationEvent,
         if (!$this->events instanceof EventCollection) {
             $this->setEventManager(new EventManager(array(
                 'Zend\Stdlib\Dispatchable',
-                __CLASS__, 
+                __CLASS__,
                 get_called_class()
             )));
             $this->attachDefaultListeners();
@@ -179,8 +183,8 @@ abstract class ActionController implements Dispatchable, InjectApplicationEvent,
      * Set an event to use during dispatch
      *
      * By default, will re-cast to MvcEvent if another event type is provided.
-     * 
-     * @param  Event $e 
+     *
+     * @param  Event $e
      * @return void
      */
     public function setEvent(Event $e)
@@ -198,7 +202,7 @@ abstract class ActionController implements Dispatchable, InjectApplicationEvent,
      * Get the attached event
      *
      * Will create a new MvcEvent if none provided.
-     * 
+     *
      * @return Event
      */
     public function getEvent()
@@ -211,8 +215,8 @@ abstract class ActionController implements Dispatchable, InjectApplicationEvent,
 
     /**
      * Set locator instance
-     * 
-     * @param  Locator $locator 
+     *
+     * @param  Locator $locator
      * @return void
      */
     public function setLocator(Locator $locator)
@@ -222,7 +226,7 @@ abstract class ActionController implements Dispatchable, InjectApplicationEvent,
 
     /**
      * Retrieve locator instance
-     * 
+     *
      * @return Locator
      */
     public function getLocator()
@@ -274,24 +278,27 @@ abstract class ActionController implements Dispatchable, InjectApplicationEvent,
     }
 
     /**
-     * Method overloading: return plugins
+     * Method overloading: return/call plugins
+     *
+     * If the plugin is a functor, call it, passing the parameters provided.
+     * Otherwise, return the plugin instance.
      * 
-     * @param mixed $method 
-     * @param mixed $params 
-     * @return void
+     * @param  string $method 
+     * @param  array $params 
+     * @return mixed
      */
-    public function __call($method, $params)
+    public function __call($method, array $params)
     {
-        $options = null;
-        if (0 < count($params)) {
-            $options = array_shift($params);
+        $plugin = $this->plugin($method);
+        if (is_callable($plugin)) {
+            return call_user_func_array($plugin, $params);
         }
-        return $this->plugin($method, $options);
+        return $plugin;
     }
 
     /**
      * Register the default events for this controller
-     * 
+     *
      * @return void
      */
     protected function attachDefaultListeners()
@@ -302,8 +309,8 @@ abstract class ActionController implements Dispatchable, InjectApplicationEvent,
 
     /**
      * Transform an action name into a method name
-     * 
-     * @param  string $action 
+     *
+     * @param  string $action
      * @return string
      */
     public static function getMethodFromAction($action)

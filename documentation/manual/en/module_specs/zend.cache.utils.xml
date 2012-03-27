@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.cache.utils">
+    <info>
+        <title>Zend\Cache\Utils</title>
+    </info>
+
+    <section xml:id="zend.cache.utils.intro">
+        <info>
+            <title>Overview</title>
+        </info>
+        
+        <para>
+            The class <classname>Zend\Cache\Utils</classname> is a class that defines a set of
+            methods that perform common, often re-used logic needed by the
+            <classname>Zend\Cache</classname> component.
+        </para>
+        
+        <para>
+            It is a static class and has only static members.
+        </para>
+        
+    </section>
+<!-- 
+    <section xml:id="zend.cache.utils.quick-start">
+        <info>
+            <title>Quick Start</title>
+        </info>
+
+    </section>
+
+    <section xml:id="zend.cache.utils.options">
+        <info>
+            <title>Configuration Options</title>
+        </info>
+
+        <variablelist>
+            <title/>
+        </variablelist>
+    </section>
+ -->
+
+    <section xml:id="zend.cache.utils.methods">
+        <info>
+            <title>Available Methods</title>
+        </info>
+
+        <variablelist>
+            <varlistentry xml:id="zend.cache.utils.methods.get-disk-capacity">
+                <term>getDiskCapacity</term>
+
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>getDiskCapacity</methodname>
+                        <methodparam>
+                            <funcparams>string $path</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+
+                    <para>Get disk capacity</para>
+
+                    <para>Returns array</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.cache.utils.methods.get-php-memory-capacity">
+                <term>getPhpMemoryCapacity</term>
+
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>getPhpMemoryCapacity</methodname>
+                        <methodparam>
+                            <funcparams></funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+
+                    <para>Get php memory capacity</para>
+
+                    <para>Returns array</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.cache.utils.methods.get-system-memory-capacity">
+                <term>getSystemMemoryCapacity</term>
+
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>getSystemMemoryCapacity</methodname>
+                        <methodparam>
+                            <funcparams></funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+
+                    <para>Get system memory capacity</para>
+
+                    <para>Returns array</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.cache.utils.methods.generate-hash">
+                <term>generateHash</term>
+
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>generateHash</methodname>
+                        <methodparam>
+                            <funcparams>string $algo, string $data, bool $raw = false</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+
+                    <para>Generate a hash value.</para>
+
+                    <para>This helper adds the virtual hash algo "strlen".</para>
+
+                    <para>Returns string</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.cache.utils.methods.get-hash-algos">
+                <term>getHashAlgos</term>
+
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>getHashAlgos</methodname>
+                        <void/>
+                    </methodsynopsis>
+
+                    <para>
+                        Return a list of registered hashing algorithms, incl. the virtual hash algo
+                        "strlen".
+                    </para>
+
+                    <para>Returns string</para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+    </section>
+
+    <section xml:id="zend.cache.utils.examples">
+        <info>
+            <title>Examples</title>
+        </info>
+
+        <example xml:id="zend.cache.utils.examples.getCapacity">
+            <info>
+                <title>Get capacity of a disk path, internal php memory, or the system memory</title></info
+            >
+
+            <programlisting language="php"><![CDATA[
+use Zend\Cache\Utils;
+
+var_dump(Utils::getDiskCapacity(__DIR__));
+var_dump(Utils::getPhpMemoryCapacity());
+var_dump(Utils::getSystemMemoryCapacity());
+
+/*
+ * Will produce:
+ *
+ * array(2) {
+ *   ["total"]=>
+ *   float(892826808320)
+ *   ["free"]=>
+ *   float(649714921472)
+ * }
+ * array(2) {
+ *   ["total"]=>
+ *   float(134217728)
+ *   ["free"]=>
+ *   float(129236992)
+ * }
+ * array(2) {
+ *   ["total"]=>
+ *   float(516055040)
+ *   ["free"]=>
+ *   float(417021952)
+ * }
+ */
+]]></programlisting>
+        </example>
+    </section>
+</section>

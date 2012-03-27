@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Feed
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -32,7 +32,7 @@ use Zend\Date;
 * @subpackage UnitTests
 * @group Zend_Feed
 * @group Zend_Feed_Writer
-* @copyright Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+* @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
 * @license http://framework.zend.com/license/new-bsd New BSD License
 */
 class DeletedTest extends \PHPUnit_Framework_TestCase
@@ -76,7 +76,29 @@ class DeletedTest extends \PHPUnit_Framework_TestCase
         $myDate = new Date\Date('1234567890', Date\Date::TIMESTAMP);
         $this->assertTrue($myDate->equals($entry->getWhen()));
     }
+ 
+    /**
+     * @group ZF-12070
+     */
+    public function testSetWhenUsesGivenUnixTimestampWhenItIsLessThanTenDigits()
+    {
+        $entry = new Writer\Deleted;
+        $entry->setWhen(123456789);
+        $myDate = new Date\Date('123456789', Date\Date::TIMESTAMP);
+        $this->assertTrue($myDate->equals($entry->getWhen()));
+    }
 
+    /**
+     * @group ZF-11610
+     */
+    public function testSetWhenUsesGivenUnixTimestampWhenItIsAVerySmallInteger()
+    {
+        $entry = new Writer\Deleted;
+        $entry->setWhen(123);
+        $myDate = new Date\Date('123', Date\Date::TIMESTAMP);
+        $this->assertTrue($myDate->equals($entry->getWhen()));
+    }
+    
     public function testSetWhenUsesZendDateObject()
     {
         $entry = new Writer\Deleted;

@@ -341,7 +341,7 @@ $upload->addValidator('Size', false, 20000)
        ->addValidator('Count', false, 2)
        ->addValidator('Filessize', false, 25000);
 
-if ($upload->isValid()) {
+if (!$upload->isValid()) {
     print "検証に失敗";
 }
 ]]></programlisting>

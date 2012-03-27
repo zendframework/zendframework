@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Filter
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -31,7 +31,7 @@ use Zend\Config,
  *
  * @category   Zend
  * @package    Zend_Filter
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Inflector extends AbstractFilter
@@ -140,7 +140,7 @@ class Inflector extends AbstractFilter
      * @param  array $options
      * @return \Zend\Filter\Inflector
      */
-    public function setOptions($options) 
+    public function setOptions($options)
     {
         if ($options instanceof Config\Config) {
             $options = $options->toArray();
@@ -150,8 +150,8 @@ class Inflector extends AbstractFilter
         if (array_key_exists('pluginBroker', $options)) {
             if (is_scalar($options['pluginBroker']) && class_exists($options['pluginBroker'])) {
                 $options['pluginBroker'] = new $options['pluginBroker'];
-            } 
-            $this->setPluginBroker($broker);
+            }
+            $this->setPluginBroker($options['pluginBroker']);
         }
 
         if (array_key_exists('throwTargetExceptionsOn', $options)) {

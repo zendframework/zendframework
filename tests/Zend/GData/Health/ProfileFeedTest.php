@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_GData_Health
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -29,7 +29,7 @@ use Zend\GData\Health;
  * @category   Zend
  * @package    Zend_GData_Health
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_GData
  * @group      Zend_GData_Health
@@ -111,7 +111,7 @@ class ProfileFeedTest extends \PHPUnit_Framework_TestCase
         $this->profileFeed->transferFromXML($this->feedText);
 
         $medications = $this->profileFeed->entry[0]->getCcr()->getMedications();
-        $this->assertType('DOMNodeList', $medications);
+        $this->assertInstanceOf('DOMNodeList', $medications);
         $this->assertEquals(1, count($medications));
 
         foreach ($medications as $med) {

@@ -47,8 +47,10 @@ class Configuration
             switch ($definitionType) {
                 case 'compiler':
                     // @todo
+                    break;
                 case 'runtime':
                     // @todo
+                    break;
                 case 'class':
                     foreach ($definitionData as $className => $classData) {
                         $classDefinitions = $di->definitions()->getDefinitionsByType('Zend\Di\Definition\ClassDefinition');
@@ -134,6 +136,10 @@ class Configuration
                             case 'injections':
                             case 'injection':
                                 $im->setInjections($target, $v);
+                                break;
+                            case 'shared':
+                            case 'share':
+                                $im->setShared($target, $v);
                                 break;
                         }
                     }

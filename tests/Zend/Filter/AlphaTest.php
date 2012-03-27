@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Filter
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -28,7 +28,7 @@ use Zend\Filter\Alpha as AlphaFilter,
  * @category   Zend
  * @package    Zend_Filter
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Filter
  */
@@ -69,16 +69,20 @@ class AlphaTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->_filter = new AlphaFilter();
         if (null === self::$_unicodeEnabled) {
             self::$_unicodeEnabled = (@preg_match('/\pL/u', 'a')) ? true : false;
         }
+
+        $this->_locale = new Locale('auto');
         if (null === self::$_meansEnglishAlphabet) {
-            $this->_locale = new Locale('auto');
             self::$_meansEnglishAlphabet = in_array($this->_locale->getLanguage(),
                                                     array('ja')
                                                     );
         }
+        $this->_filter = new AlphaFilter(array(
+            'unicodeEnabled' => self::$_unicodeEnabled,
+            'locale'         => $this->_locale,
+        ));
     }
 
     /**

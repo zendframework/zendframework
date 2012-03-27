@@ -1,0 +1,923 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.cache.storage.adapter">
+    <info>
+        <title>Zend\Cache\Storage\Adapter</title>
+    </info>
+
+    <section xml:id="zend.cache.storage.adapter.intro">
+        <info>
+            <title>Overview</title>
+        </info>
+
+        <para>
+            Storage adapters are wrappers for real storage resources such as memory and the
+            filesystem, using the well known adapter pattern.
+        </para>
+
+        <para>
+            They comes with tons of methods to read, write and modify stored items and to get
+            information about stored items and the storage.
+        </para>
+
+        <para>
+            All adapters implements the interface <classname>Zend\Cache\Storage\Adapter</classname>
+            and most extend <classname>Zend\Cache\Storage\Adapter\AbstractAdapter</classname>, which
+            comes with basic logic.
+        </para>
+
+        <para>
+            Configuration is handled by either
+            <classname>Zend\Cache\Storage\Adapter\AdapterOptions</classname>, or an adapter-specific
+            options class if it exists. You may pass the options instance to the class at
+            instantiation or via the <methodname>setOptions()</methodname> method, or alternately
+            pass an associative array of options in either place (internally, these are then passed
+            to an options class instance). Alternately, you can pass either the options instance or
+            associative array to the <methodname>Zend\Cache\StorageFactory::factory</methodname>
+            method.
+        </para>
+
+        <note>
+            <title>Many methods throw exceptions</title>
+            
+            <para>
+                Because many caching methods can throw exceptions, you need to catch them manually
+                or you can use the plug-in
+                <classname>Zend\Cache\Storage\Plugin\ExceptionHandler</classname> to automatically
+                catch them and redirect exceptions into a log file using the option
+                "exception_callback".
+            </para>
+            
+        </note>
+
+    </section>
+
+    <section xml:id="zend.cache.storage.adapter.quick-start">
+        <info>
+            <title>Quick Start</title>
+        </info>
+
+        <para>
+            Caching adapters can either be created from the provided
+            <classname>Zend\Cache\StorageFactory</classname> factory, or by simply
+            instantiating one of the <classname>Zend\Cache\Storage\Adapter\*</classname>classes. 
+        </para>
+
+        <para>
+            To make life easier, the <classname>Zend\Cache\StorageFactory</classname>
+            comes with a <methodname>factory</methodname> method to create an adapter
+            and create/add all requested plugins at once.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+use Zend\Cache\StorageFactory;
+
+// Via factory:
+$cache = StorageFactory::factory(array(
+    'adapter' => 'apc',
+    'plugins' => array(
+        'exception_handler' => array('throw_exceptions' => false),
+    ),
+));
+
+// Alternately:
+$cache  = StorageFactory::adapterFactory('apc');
+$plugin = StorageFactory::pluginFactory('exception_handler', array(
+    'throw_exceptions' => false,
+));
+$cache->addPlugin($plugin);
+
+// Or manually:
+$cache  = new Zend\Cache\Storage\Adapter\Apc();
+$plugin = new Zend\Cache\Storage\Plugin\ExceptionHandler(array(
+    'throw_exceptions' => false,
+));
+$cache->addPlugin($plugin);
+
+]]></programlisting>
+    </section>
+
+    <section xml:id="zend.cache.storage.adapter.options">
+        <info>
+            <title>Configuration Options</title>
+        </info>
+
+        <variablelist>
+            <varlistentry xml:id="zend.cache.storage.adapter.options.ignore-missing-items">
+                <term>ignore_missing_items</term>
+
+                <listitem>
+                    <para>Enables or disables ignoring of missing items.</para>
+
+                    <para>If enabled and a missing item was requested:</para>
+
+                    <itemizedlist>
+                        <listitem>
+                            <para>
+                                <methodname>getItem</methodname>,
+                                <methodname>getMetadata</methodname>: return false
+                            </para>
+                        </listitem>
+
+                        <listitem>
+                            <para>
+                                <methodname>removeItem[s]</methodname>: return true
+                            </para>
+                        </listitem>
+
+                        <listitem>
+                            <para>
+                                <methodname>incrementItem[s]</methodname>,
+                                <methodname>decrementItem[s]</methodname>: add a new item with 0 as base
+                            </para>
+                        </listitem>
+
+                        <listitem>
+                            <para>
+                                <methodname>touchItem[s]</methodname>: add new empty item
+                            </para>
+                        </listitem>
+                    </itemizedlist>
+
+                    <para>If disabled and a missing item was requested:</para>
+
+                    <itemizedlist>
+                        <listitem>
+                            <para>
+                                <methodname>getItem</methodname>,
+                                <methodname>getMetadata</methodname>,
+                                <methodname>incrementItem[s]</methodname>,
+                                <methodname>decrementItem[s]</methodname>,
+                                <methodname>touchItem[s]</methodname>
+                            </para>
+                        </listitem>
+                    </itemizedlist>
+
+                    <itemizedlist>
+                        <listitem>
+                            <methodsynopsis>
+                                <methodname>setIgnoreMissingItems</methodname>
+                                <methodparam>
+                                    <funcparams>boolean $flag</funcparams>
+                                </methodparam>
+                            </methodsynopsis>
+
+                            <para>Implements a fluent interface.</para>
+                        </listitem>
+
+                        <listitem>
+                            <methodsynopsis>
+                                <methodname>getIgnoreMissingItems</methodname>
+                                <void/>
+                            </methodsynopsis>
+
+                            <para>Returns boolean</para>
+                        </listitem>
+                    </itemizedlist>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.cache.storage.adapter.options.key-pattern">
+                <term>key_pattern</term>
+
+                <listitem>
+                    <para>
+                        Pattern against which to validate cache keys.
+                    </para>
+
+                    <itemizedlist>
+                        <listitem>
+                            <methodsynopsis>
+                                <methodname>setKeyPattern</methodname>
+                                <methodparam>
+                                    <funcparams>null|string $pattern</funcparams>
+                                </methodparam>
+                            </methodsynopsis>
+
+                            <para>Implements a fluent interface.</para>
+                        </listitem>
+
+                        <listitem>
+                            <methodsynopsis>
+                                <methodname>getKeyPattern</methodname>
+                                <void/>
+                            </methodsynopsis>
+
+                            <para>Returns string</para>
+                        </listitem>
+                    </itemizedlist>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.cache.storage.adapter.options.namespace">
+                <term>namespace</term>
+
+                <listitem>
+                    <para>
+                        The "namespace" in which cache items will live.
+                    </para>
+
+                    <itemizedlist>
+                        <listitem>
+                            <methodsynopsis>
+                                <methodname>setNamespace</methodname>
+                                <methodparam>
+                                    <funcparams>string $namespace</funcparams>
+                                </methodparam>
+                            </methodsynopsis>
+
+                            <para>Implements a fluent interface.</para>
+                        </listitem>
+
+                        <listitem>
+                            <methodsynopsis>
+                                <methodname>getNamespace</methodname>
+                                <void/>
+                            </methodsynopsis>
+
+                            <para>Returns string</para>
+                        </listitem>
+                    </itemizedlist>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.cache.storage.adapter.options.namespace-pattern">
+                <term>namespace_pattern</term>
+
+                <listitem>
+                    <para>
+                        Pattern against which to validate namespace values.
+                    </para>
+
+                    <itemizedlist>
+                        <listitem>
+                            <methodsynopsis>
+                                <methodname>setNamespacePattern</methodname>
+                                <methodparam>
+                                    <funcparams>null|string $pattern</funcparams>
+                                </methodparam>
+                            </methodsynopsis>
+
+                            <para>Implements a fluent interface.</para>
+                        </listitem>
+
+                        <listitem>
+                            <methodsynopsis>
+                                <methodname>getNamespacePattern</methodname>
+                                <void/>
+                            </methodsynopsis>
+
+                            <para>Returns string</para>
+                        </listitem>
+                    </itemizedlist>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.cache.storage.adapter.options.readable">
+                <term>readable</term>
+
+                <listitem>
+                    <para>Enable/Disable reading data from cache.</para>
+
+                    <itemizedlist>
+                        <listitem>
+                            <methodsynopsis>
+                                <methodname>setReadable</methodname>
+                                <methodparam>
+                                    <funcparams>boolean $flag</funcparams>
+                                </methodparam>
+                            </methodsynopsis>
+
+                            <para>Implements a fluent interface.</para>
+                        </listitem>
+
+                        <listitem>
+                            <methodsynopsis>
+                                <methodname>getReadable</methodname>
+                                <void/>
+                            </methodsynopsis>
+
+                            <para>Returns boolean</para>
+                        </listitem>
+                    </itemizedlist>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.cache.storage.adapter.options.ttl">
+                <term>ttl</term>
+
+                <listitem>
+                    <para>Set time to live.</para>
+
+                    <itemizedlist>
+                        <listitem>
+                            <methodsynopsis>
+                                <methodname>setTtl</methodname>
+                                <methodparam>
+                                    <funcparams>int|float $ttl</funcparams>
+                                </methodparam>
+                            </methodsynopsis>
+
+                            <para>Implements a fluent interface.</para>
+                        </listitem>
+
+                        <listitem>
+                            <methodsynopsis>
+                                <methodname>getTtl</methodname>
+                                <void/>
+                            </methodsynopsis>
+
+                            <para>Returns float</para>
+                        </listitem>
+                    </itemizedlist>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.cache.storage.adapter.options.writable">
+                <term>writable</term>
+
+                <listitem>
+                    <para>Enable/Disable writing data to cache.</para>
+
+                    <itemizedlist>
+                        <listitem>
+                            <methodsynopsis>
+                                <methodname>setWritable</methodname>
+                                <methodparam>
+                                    <funcparams>boolean $flag</funcparams>
+                                </methodparam>
+                            </methodsynopsis>
+
+                            <para>Implements a fluent interface.</para>
+                        </listitem>
+
+                        <listitem>
+                            <methodsynopsis>
+                                <methodname>getWritable</methodname>
+                                <void/>
+                            </methodsynopsis>
+
+                            <para>Returns boolean</para>
+                        </listitem>
+                    </itemizedlist>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+    </section>
+
+    <section xml:id="zend.cache.storage.adapter.methods">
+        <info>
+            <title>Available Methods</title>
+        </info>
+
+        <variablelist>
+            <varlistentry xml:id="zend.cache.storage.adapter.methods.set-options">
+                <term>setOptions</term>
+
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>setOptions</methodname>
+                        <methodparam>
+                            <funcparams>array|Traversable|Zend\Cache\Storage\Adapter\AdapterOptions $options</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+
+                    <para>Set options.</para>
+
+                    <para>Implements a fluent interface.</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.cache.storage.adapter.methods.get-options">
+                <term>getOptions</term>
+
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>getOptions</methodname>
+                        <void/>
+                    </methodsynopsis>
+
+                    <para>Get options</para>
+
+                    <para>Returns Zend\Cache\Storage\Adapter\AdapterOptions</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.cache.storage.adapter.methods.get-item">
+                <term>getItem</term>
+
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>getItem</methodname>
+                        <methodparam>
+                            <funcparams>string $key, array $options = array ()</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+
+                    <para>Get an item.</para>
+
+                    <para>Returns mixed</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.cache.storage.adapter.methods.get-items">
+                <term>getItems</term>
+
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>getItems</methodname>
+                        <methodparam>
+                            <funcparams>array $keys, array $options = array ()</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+
+                    <para>Get multiple items.</para>
+
+                    <para>Returns array</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.cache.storage.adapter.methods.has-item">
+                <term>hasItem</term>
+
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>hasItem</methodname>
+                        <methodparam>
+                            <funcparams>string $key, array $options = array ()</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+
+                    <para>Test if an item exists.</para>
+
+                    <para>Returns boolean</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.cache.storage.adapter.methods.has-items">
+                <term>hasItems</term>
+
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>hasItems</methodname>
+                        <methodparam>
+                            <funcparams>array $keys, array $options = array ()</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+
+                    <para>Test multiple items.</para>
+
+                    <para>Returns array</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.cache.storage.adapter.methods.get-metadata">
+                <term>getMetadata</term>
+
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>getMetadata</methodname>
+                        <methodparam>
+                            <funcparams>string $key, array $options = array ()</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+
+                    <para>Get metadata of an item.</para>
+
+                    <para>Returns array|boolean</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.cache.storage.adapter.methods.get-metadatas">
+                <term>getMetadatas</term>
+
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>getMetadatas</methodname>
+                        <methodparam>
+                            <funcparams>array $keys, array $options = array ()</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+
+                    <para>Get multiple metadata</para>
+
+                    <para>Returns array</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.cache.storage.adapter.methods.set-item">
+                <term>setItem</term>
+
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>setItem</methodname>
+                        <methodparam>
+                            <funcparams>string $key, mixed $value, array $options = array ()</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+
+                    <para>Store an item.</para>
+
+                    <para>Returns boolean</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.cache.storage.adapter.methods.set-items">
+                <term>setItems</term>
+
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>setItems</methodname>
+                        <methodparam>
+                            <funcparams>array $keyValuePairs, array $options = array ()</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+
+                    <para>Store multiple items.</para>
+
+                    <para>Returns boolean</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.cache.storage.adapter.methods.add-item">
+                <term>addItem</term>
+
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>addItem</methodname>
+                        <methodparam>
+                            <funcparams>string $key, mixed $value, array $options = array ()</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+
+                    <para>Add an item.</para>
+
+                    <para>Returns boolean</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.cache.storage.adapter.methods.add-items">
+                <term>addItems</term>
+
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>addItems</methodname>
+                        <methodparam>
+                            <funcparams>array $keyValuePairs, array $options = array ()</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+
+                    <para>Add multiple items.</para>
+
+                    <para>Returns boolean</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.cache.storage.adapter.methods.replace-item">
+                <term>replaceItem</term>
+
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>replaceItem</methodname>
+                        <methodparam>
+                            <funcparams>string $key, mixed $value, array $options = array ()</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+
+                    <para>Replace an item.</para>
+
+                    <para>Returns boolean</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.cache.storage.adapter.methods.replace-items">
+                <term>replaceItems</term>
+
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>replaceItems</methodname>
+                        <methodparam>
+                            <funcparams>array $keyValuePairs, array $options = array ()</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+
+                    <para>Replace multiple items.</para>
+
+                    <para>Returns boolean</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.cache.storage.adapter.methods.check-and-set-item">
+                <term>checkAndSetItem</term>
+
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>checkAndSetItem</methodname>
+                        <methodparam>
+                            <funcparams>mixed $token, string|null $key, mixed $value, array $options = array ()</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+
+                    <para>Set item only if token matches</para>
+
+                    <para>
+                        It uses the token from received from <methodname>getItem()</methodname> to
+                        check if the item has changed before overwriting it.
+                    </para>
+
+                    <para>Returns boolean</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.cache.storage.adapter.methods.touch-item">
+                <term>touchItem</term>
+
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>touchItem</methodname>
+                        <methodparam>
+                            <funcparams>string $key, array $options = array ()</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+
+                    <para>Reset lifetime of an item</para>
+
+                    <para>Returns boolean</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.cache.storage.adapter.methods.touch-items">
+                <term>touchItems</term>
+
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>touchItems</methodname>
+                        <methodparam>
+                            <funcparams>array $keys, array $options = array ()</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+
+                    <para>Reset lifetime of multiple items.</para>
+
+                    <para>Returns boolean</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.cache.storage.adapter.methods.remove-item">
+                <term>removeItem</term>
+
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>removeItem</methodname>
+                        <methodparam>
+                            <funcparams>string $key, array $options = array ()</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+
+                    <para>Remove an item.</para>
+
+                    <para>Returns boolean</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.cache.storage.adapter.methods.remove-items">
+                <term>removeItems</term>
+
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>removeItems</methodname>
+                        <methodparam>
+                            <funcparams>array $keys, array $options = array ()</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+
+                    <para>Remove multiple items.</para>
+
+                    <para>Returns boolean</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.cache.storage.adapter.methods.increment-item">
+                <term>incrementItem</term>
+
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>incrementItem</methodname>
+                        <methodparam>
+                            <funcparams>string $key, int $value, array $options = array ()</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+
+                    <para>Increment an item.</para>
+
+                    <para>Returns int|boolean</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.cache.storage.adapter.methods.increment-items">
+                <term>incrementItems</term>
+
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>incrementItems</methodname>
+                        <methodparam>
+                            <funcparams>array $keyValuePairs, array $options = array ()</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+
+                    <para>Increment multiple items.</para>
+
+                    <para>Returns boolean</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.cache.storage.adapter.methods.decrement-item">
+                <term>decrementItem</term>
+
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>decrementItem</methodname>
+                        <methodparam>
+                            <funcparams>string $key, int $value, array $options = array ()</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+
+                    <para>Decrement an item.</para>
+
+                    <para>Returns int|boolean</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.cache.storage.adapter.methods.decrement-items">
+                <term>decrementItems</term>
+
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>decrementItems</methodname>
+                        <methodparam>
+                            <funcparams>array $keyValuePairs, array $options = array ()</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+
+                    <para>Decrement multiple items.</para>
+
+                    <para>Returns boolean</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.cache.storage.adapter.methods.get-delayed">
+                <term>getDelayed</term>
+
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>getDelayed</methodname>
+                        <methodparam>
+                            <funcparams>array $keys, array $options = array ()</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+
+                    <para>Request multiple items.</para>
+
+                    <para>Returns boolean</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.cache.storage.adapter.methods.find">
+                <term>find</term>
+
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>find</methodname>
+                        <methodparam>
+                            <funcparams>int $mode = 2, array $options = array ()</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+
+                    <para>Find items.</para>
+
+                    <para>Returns boolean</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.cache.storage.adapter.methods.fetch">
+                <term>fetch</term>
+
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>fetch</methodname>
+                        <void/>
+                    </methodsynopsis>
+
+                    <para>Fetches the next item from result set</para>
+
+                    <para>Returns array|boolean</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.cache.storage.adapter.methods.fetch-all">
+                <term>fetchAll</term>
+
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>fetchAll</methodname>
+                        <void/>
+                    </methodsynopsis>
+
+                    <para>Returns all items of result set.</para>
+
+                    <para>Returns array</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.cache.storage.adapter.methods.clear">
+                <term>clear</term>
+
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>clear</methodname>
+                        <methodparam>
+                            <funcparams>int $mode = 1, array $options = array ()</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+
+                    <para>Clear items off all namespaces.</para>
+
+                    <para>Returns boolean</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.cache.storage.adapter.methods.clear-by-namespace">
+                <term>clearByNamespace</term>
+
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>clearByNamespace</methodname>
+                        <methodparam>
+                            <funcparams>int $mode = 1, array $options = array ()</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+
+                    <para>Clear items by namespace.</para>
+
+                    <para>Returns boolean</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.cache.storage.adapter.methods.optimize">
+                <term>optimize</term>
+
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>optimize</methodname>
+                        <methodparam>
+                            <funcparams>array $options = array ()</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+
+                    <para>Optimize adapter storage.</para>
+
+                    <para>Returns boolean</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.cache.storage.adapter.methods.get-capabilities">
+                <term>getCapabilities</term>
+
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>getCapabilities</methodname>
+                        <void/>
+                    </methodsynopsis>
+
+                    <para>Capabilities of this storage</para>
+
+                    <para>Returns Zend\Cache\Storage\Capabilities</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.cache.storage.adapter.methods.get-capacity">
+                <term>getCapacity</term>
+
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>getCapacity</methodname>
+                        <methodparam>
+                            <funcparams>array $options = array ()</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+
+                    <para>Get storage capacity.</para>
+
+                    <para>Returns array|boolean</para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+    </section>
+
+    <section xml:id="zend.cache.storage.adapter.examples">
+        <info>
+            <title>TODO: Examples</title>
+        </info>
+
+        <para></para>
+    </section>
+</section>

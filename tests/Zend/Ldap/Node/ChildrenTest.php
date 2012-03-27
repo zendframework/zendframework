@@ -13,9 +13,9 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_LDAP
+ * @package    Zend_Ldap
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -27,12 +27,12 @@ namespace ZendTest\Ldap\Node;
 
 /**
  * @category   Zend
- * @package    Zend_LDAP
+ * @package    Zend_Ldap
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_LDAP
- * @group      Zend_LDAP_Node
+ * @group      Zend_Ldap
+ * @group      Zend_Ldap_Node
  */
 class ChildrenTest extends \ZendTest\Ldap\OnlineTestCase
 {
@@ -52,9 +52,9 @@ class ChildrenTest extends \ZendTest\Ldap\OnlineTestCase
     {
         $node=$this->_getLDAP()->getBaseNode();
         $children=$node->getChildren();
-        $this->assertType('Zend\Ldap\Node\ChildrenIterator', $children);
+        $this->assertInstanceOf('Zend\Ldap\Node\ChildrenIterator', $children);
         $this->assertEquals(6, count($children));
-        $this->assertType('Zend\Ldap\Node', $children['ou=Node']);
+        $this->assertInstanceOf('Zend\Ldap\Node', $children['ou=Node']);
     }
 
     public function testGetChildrenOnDetachedNode()
@@ -62,16 +62,16 @@ class ChildrenTest extends \ZendTest\Ldap\OnlineTestCase
         $node=$this->_getLDAP()->getBaseNode();
         $node->detachLDAP();
         $children=$node->getChildren();
-        $this->assertType('Zend\Ldap\Node\ChildrenIterator', $children);
+        $this->assertInstanceOf('Zend\Ldap\Node\ChildrenIterator', $children);
         $this->assertEquals(0, count($children));
 
         $node->attachLDAP($this->_getLDAP());
         $node->reload();
         $children=$node->getChildren();
 
-        $this->assertType('Zend\Ldap\Node\ChildrenIterator', $children);
+        $this->assertInstanceOf('Zend\Ldap\Node\ChildrenIterator', $children);
         $this->assertEquals(6, count($children));
-        $this->assertType('Zend\Ldap\Node', $children['ou=Node']);
+        $this->assertInstanceOf('Zend\Ldap\Node', $children['ou=Node']);
     }
 
     public function testHasChildrenOnAttachedNode()

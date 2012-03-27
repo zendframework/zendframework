@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Session
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -30,15 +30,16 @@ use Zend\EventManager\EventCollection;
  *
  * @category   Zend
  * @package    Zend_Session
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 interface Manager
 {
-    public function __construct($config = null, $storage = null);
+    public function __construct(Configuration $config = null, Storage $storage = null, SaveHandler $saveHandler = null);
 
     public function getConfig();
     public function getStorage();
+    public function getSaveHandler();
     
     public function sessionExists();
     public function start();

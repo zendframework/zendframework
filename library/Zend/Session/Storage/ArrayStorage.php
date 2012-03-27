@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Session
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -36,7 +36,7 @@ use ArrayObject,
  * @category   Zend
  * @package    Zend_Session
  * @subpackage Storage
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class ArrayStorage extends ArrayObject implements Storable
@@ -149,6 +149,12 @@ class ArrayStorage extends ArrayObject implements Storable
         return array_key_exists($key, $locks);
     }
 
+    /**
+     * Unlock an object or key marked as locked
+     * 
+     * @param  null|int|string $key 
+     * @return ArrayStorage
+     */
     public function unlock($key = null)
     {
         if (null === $key) {

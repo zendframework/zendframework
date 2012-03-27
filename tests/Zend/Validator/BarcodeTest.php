@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Validator
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -23,7 +23,8 @@
  * @namespace
  */
 namespace ZendTest\Validator;
-use Zend\Validator\Barcode;
+use Zend\Validator\Barcode,
+    ReflectionClass;
 
 /**
  * \Zend\Validator\Barcode
@@ -32,7 +33,7 @@ use Zend\Validator\Barcode;
  * @package    Zend_Validator
  * @subpackage UnitTests
  * @uses       Zend_Validator_Barcode
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Validator
  */
@@ -468,5 +469,41 @@ class BarcodeTest extends \PHPUnit_Framework_TestCase
     {
         $barcode = new Barcode('ean13');
         $this->assertFalse($barcode->isValid('3RH1131-1BB40'));
+    }
+    
+    public function testEqualsMessageTemplates()
+    {
+        $validator = new Barcode('code25');
+        $reflection = new ReflectionClass($validator);
+        
+        if(!$reflection->hasProperty('_messageTemplates')) {
+            return;
+        }
+        
+        $property = $reflection->getProperty('_messageTemplates');
+        $property->setAccessible(true);
+
+        $this->assertEquals(
+            $property->getValue($validator),
+            $validator->getOption('messageTemplates')
+        );
+    }
+    
+    public function testEqualsMessageVariables()
+    {
+        $validator = new Barcode('code25');
+        $reflection = new ReflectionClass($validator);
+        
+        if(!$reflection->hasProperty('_messageVariables')) {
+            return;
+        }
+        
+        $property = $reflection->getProperty('_messageVariables');
+        $property->setAccessible(true);
+
+        $this->assertEquals(
+            $property->getValue($validator),
+            $validator->getOption('messageVariables')
+        );
     }
 }

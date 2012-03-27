@@ -15,21 +15,25 @@
  * @category   Zend
  * @package    Zend_Service_StrikeIron
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
+/**
+ * @namespace
+ */
+namespace ZendTest\Service\StrikeIron;
 
 /**
  * Test helper
  */
 
 /**
- * @see Zend_Service_StrikeIron
+ * @see \Zend\Service\StrikeIron\StrikeIron
  */
 
 /**
- * @see Zend_Service_StrikeIron_SalesUseTaxBasic
+ * @see \Zend\Service\StrikeIron\SalesUseTaxBasic
  */
 
 
@@ -37,22 +41,22 @@
  * @category   Zend
  * @package    Zend_Service_StrikeIron
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Service
  * @group      Zend_Service_StrikeIron
  */
-class Zend_Service_StrikeIron_SalesUseTaxBasicTest extends PHPUnit_Framework_TestCase
+class SalesUseTaxBasicTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        $this->soapClient = new stdclass();
-        $this->service = new Zend_Service_StrikeIron_SalesUseTaxBasic(array('client' => $this->soapClient));
+        $this->soapClient = new \stdclass();
+        $this->service = new \Zend\Service\StrikeIron\SalesUseTaxBasic(array('client' => $this->soapClient));
     }
 
     public function testInheritsFromBase()
     {
-        $this->assertType('Zend_Service_StrikeIron_Base', $this->service);
+        $this->assertInstanceOf('Zend\Service\StrikeIron\Base', $this->service);
     }
 
     public function testWsdl()
@@ -63,9 +67,9 @@ class Zend_Service_StrikeIron_SalesUseTaxBasicTest extends PHPUnit_Framework_Tes
 
     public function testInstantiationFromFactory()
     {
-        $strikeIron = new Zend_Service_StrikeIron(array('client' => $this->soapClient));
+        $strikeIron = new \Zend\Service\StrikeIron\StrikeIron(array('client' => $this->soapClient));
         $client = $strikeIron->getService(array('class' => 'SalesUseTaxBasic'));
 
-        $this->assertType('Zend_Service_StrikeIron_SalesUseTaxBasic', $client);
+        $this->assertInstanceOf('Zend\Service\StrikeIron\SalesUseTaxBasic', $client);
     }
 }

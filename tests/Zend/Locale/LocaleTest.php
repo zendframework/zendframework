@@ -15,23 +15,23 @@
  * @category   Zend
  * @package    Zend_Locale
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace ZendTest\Locale;
 
-use \Zend\Locale\Locale,
-    \Zend\Locale\Exception\InvalidArgumentException,
-    \Zend\Locale\Exception\UnexpectedValueException,
-    \Zend\Cache\Cache,
-    \Zend\Cache\Frontend\Core as CacheCore;
+use Zend\Locale\Locale,
+    Zend\Locale\Exception\InvalidArgumentException,
+    Zend\Locale\Exception\UnexpectedValueException,
+    Zend\Cache\StorageFactory as CacheFactory,
+    Zend\Cache\Storage\Adapter as CacheAdapter;
 
 /**
  * @category   Zend
  * @package    Zend_Locale
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Locale
  */
@@ -44,9 +44,9 @@ class LocaleTest extends \PHPUnit_Framework_TestCase
     {
         $this->_locale = setlocale(LC_ALL, 0);
         setlocale(LC_ALL, 'de');
-        $this->_cache = Cache::factory('Core', 'File',
-                 array('lifetime' => 120, 'automatic_serialization' => true),
-                 array('cache_dir' => __DIR__ . '/../_files/'));
+
+        $this->_cache = CacheFactory::adapterFactory('memory', array('memory_limit' => 0));
+
         LocaleTestHelper::resetObject();
         LocaleTestHelper::setCache($this->_cache);
         putenv("HTTP_ACCEPT_LANGUAGE=,de,en-UK-US;q=0.5,fr_FR;q=0.2");
@@ -54,7 +54,10 @@ class LocaleTest extends \PHPUnit_Framework_TestCase
 
     public function tearDown()
     {
-        $this->_cache->clean(Cache::CLEANING_MODE_ALL);
+        if ($this->_cache instanceof CacheAdapter) {
+            $this->_cache->clear(CacheAdapter::MATCH_ALL);
+        }
+
         if (is_string($this->_locale) && strpos($this->_locale, ';')) {
             $locales = array();
             foreach (explode(';', $this->_locale) as $l) {
@@ -677,7 +680,7 @@ class LocaleTest extends \PHPUnit_Framework_TestCase
     public function testCaching()
     {
         $cache = LocaleTestHelper::getCache();
-        $this->assertTrue($cache instanceof CacheCore);
+        $this->assertTrue($cache instanceof CacheAdapter);
         $this->assertTrue(LocaleTestHelper::hasCache());
 
         LocaleTestHelper::clearCache();

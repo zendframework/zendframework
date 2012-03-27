@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_View
  * @subpackage Helper
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -31,7 +31,7 @@ namespace Zend\View\Helper;
  * @category   Zend
  * @package    Zend_View
  * @subpackage Helper
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class FormLabel extends FormElement
@@ -55,10 +55,11 @@ class FormLabel extends FormElement
             return  '';
         }
 
-        $value = ($escape) ? $this->view->vars()->escape($value) : $value;
-        $for   = (empty($attribs['disableFor']) || !$attribs['disableFor'])
-               ? ' for="' . $this->view->vars()->escape($id) . '"'
-               : '';
+        $escaper = $this->view->plugin('escape');
+        $value   = ($escape) ? $escaper($value) : $value;
+        $for     = (empty($attribs['disableFor']) || !$attribs['disableFor'])
+                 ? ' for="' . $escaper($id) . '"'
+                 : '';
         if (array_key_exists('disableFor', $attribs)) {
             unset($attribs['disableFor']);
         }

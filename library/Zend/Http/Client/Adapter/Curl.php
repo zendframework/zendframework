@@ -16,7 +16,7 @@
  * @category   Zend
  * @package    Zend_Http
  * @subpackage Client_Adapter
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -36,7 +36,7 @@ use Zend\Http\Client\Adapter as HttpAdapter,
  * @category   Zend
  * @package    Zend_Http
  * @subpackage Client_Adapter
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Curl implements HttpAdapter, Stream
@@ -365,7 +365,11 @@ class Curl implements HttpAdapter, Stream
 
         // set additional headers
         $headers['Accept'] = '';
-        curl_setopt($this->curl, CURLOPT_HTTPHEADER, $headers);
+        $curlHeaders = array();
+        foreach ($headers as $key => $value) {
+            $curlHeaders[] = $key . ': ' . $value;
+        }
+        curl_setopt($this->curl, CURLOPT_HTTPHEADER, $curlHeaders);
 
         /**
          * Make sure POSTFIELDS is set after $curlMethod is set:

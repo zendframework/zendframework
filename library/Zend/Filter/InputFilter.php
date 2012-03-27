@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Filter
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -25,14 +25,14 @@ namespace Zend\Filter;
 
 use Zend\Loader\Broker,
     Zend\Registry,
-    Zend\Translator\Adapter as TranslationAdapter,
+    Zend\Translator\Adapter\AbstractAdapter as TranslationAdapter,
     Zend\Translator\Translator as Translator,
     Zend\Validator;
 
 /**
  * @category   Zend
  * @package    Zend_Filter
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class InputFilter
@@ -185,12 +185,12 @@ class InputFilter
             case self::VALIDATOR:
                 if (is_string($broker)) {
                     if (!class_exists($broker)) {
-                        throw new Exception(sprintf('Broker class "%s" not found', $broker));
+                        throw new Exception\RuntimeException(sprintf('Broker class "%s" not found', $broker));
                     }
                     $broker = new $broker;
                 }
                 if (!$broker instanceof Broker) {
-                    throw new Exception(sprintf(
+                    throw new Exception\RuntimeException(sprintf(
                         'setPluginBroker() expects a class or object of type Zend\Loader\Broker; received "%s"',
                         (is_object($broker) ? get_class($broker) : gettype($broker))
                     ));
@@ -966,7 +966,7 @@ class InputFilter
                                 $messages[] = $message;
                             }
                         }
-                        $errorsList[] = $notEmptyValidator->getErrors();
+                        $errorsList[] = array_keys($notEmptyValidator->getMessages());
                         $emptyFieldsFound = true;
                     }
                 }
@@ -1032,9 +1032,9 @@ class InputFilter
                     $this->invalidMessages[$validatorRule[self::RULE]] = $collectedMessages;
                     if (isset($this->invalidErrors[$validatorRule[self::RULE]])) {
                         $this->invalidErrors[$validatorRule[self::RULE]] = array_merge($this->invalidErrors[$validatorRule[self::RULE]],
-                                                                                        $validatorChain->getErrors());
+                                                                                        array_keys($validatorChain->getMessages()));
                     } else {
-                        $this->invalidErrors[$validatorRule[self::RULE]] = $validatorChain->getErrors();
+                        $this->invalidErrors[$validatorRule[self::RULE]] = array_keys($validatorChain->getMessages());
                     }
                     unset($this->validFields[$fieldName]);
                     $failed = true;

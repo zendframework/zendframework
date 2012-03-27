@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_GData_YouTube
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -29,7 +29,7 @@ use Zend\GData\YouTube;
  * @category   Zend
  * @package    Zend_GData_YouTube
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_GData
  * @group      Zend_GData_YouTube
@@ -67,6 +67,8 @@ class YouTubeTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($yt instanceOf YouTube);
         $client = $yt->getHttpClient();
 
+        $this->assertEquals($client->getHeader('User-Agent'), 
+                            $applicationId . ' Zend_Framework_Gdata/' . \Zend\Version::VERSION);
         $this->assertEquals($client->getHeader('X-GData-Key'), 'key='. $developerKey);
         $this->assertEquals($client->getHeader('X-GData-Client'), $clientId);
     }

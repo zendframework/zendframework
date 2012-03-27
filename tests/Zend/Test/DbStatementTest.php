@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Test
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -29,7 +29,7 @@ use Zend\Test;
  * @category   Zend
  * @package    Zend_Test
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Test
  */
@@ -54,7 +54,7 @@ class DbStatementTest extends \PHPUnit_Framework_TestCase
 
         $stmt = Test\DbStatement::createSelectStatement($rows);
 
-        $this->assertType('Zend\Test\DbStatement', $stmt);
+        $this->assertInstanceOf('Zend\Test\DbStatement', $stmt);
         $this->assertEquals($rows, $stmt->fetchAll());
     }
 
@@ -62,7 +62,7 @@ class DbStatementTest extends \PHPUnit_Framework_TestCase
     {
         $stmt = Test\DbStatement::createInsertStatement(1234);
 
-        $this->assertType('Zend\Test\DbStatement', $stmt);
+        $this->assertInstanceOf('Zend\Test\DbStatement', $stmt);
         $this->assertEquals(1234, $stmt->rowCount());
     }
 
@@ -70,7 +70,7 @@ class DbStatementTest extends \PHPUnit_Framework_TestCase
     {
         $stmt = Test\DbStatement::createUpdateStatement(1234);
 
-        $this->assertType('Zend\Test\DbStatement', $stmt);
+        $this->assertInstanceOf('Zend\Test\DbStatement', $stmt);
         $this->assertEquals(1234, $stmt->rowCount());
     }
 
@@ -78,7 +78,7 @@ class DbStatementTest extends \PHPUnit_Framework_TestCase
     {
         $stmt = Test\DbStatement::createDeleteStatement(1234);
 
-        $this->assertType('Zend\Test\DbStatement', $stmt);
+        $this->assertInstanceOf('Zend\Test\DbStatement', $stmt);
         $this->assertEquals(1234, $stmt->rowCount());
     }
 

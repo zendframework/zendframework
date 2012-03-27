@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Form
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -24,7 +24,7 @@ namespace ZendTest\Form\Decorator;
 use Zend\Form\Decorator\FormErrors as FormErrorsDecorator,
     Zend\Form\Form,
     Zend\Form\SubForm,
-    Zend\View\PhpRenderer as View;
+    Zend\View\Renderer\PhpRenderer as View;
 
 /**
  * Test class for Zend_Form_Decorator_FormErrors
@@ -32,7 +32,7 @@ use Zend\Form\Decorator\FormErrors as FormErrorsDecorator,
  * @category   Zend
  * @package    Zend_Form
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Form
  */
@@ -116,15 +116,18 @@ class FormErrorsTest extends \PHPUnit_Framework_TestCase
     public function testRenderRendersAllErrorMessages()
     {
         $this->setupForm();
+        $view    = $this->getView();
         $content = 'test content';
-        $test = $this->decorator->render($content);
+        $test    = $this->decorator->render($content);
         $this->assertContains($content, $test);
         foreach ($this->form->getMessages() as $name => $messages) {
             foreach ($messages as $key => $message) {
                 if (is_string($message)) {
+                    $message = $view->escape($message);
                     $this->assertContains($message, $test, var_export($messages, 1));
                 } else {
                     foreach ($message as $m) {
+                        $m = $view->escape($m);
                         $this->assertContains($m, $test, var_export($messages, 1));
                     }
                 }

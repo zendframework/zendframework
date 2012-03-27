@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_View
  * @subpackage Helper
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -31,7 +31,7 @@ namespace Zend\View\Helper;
  * @category   Zend
  * @package    Zend_View
  * @subpackage Helper
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class FormText extends FormElement
@@ -84,11 +84,12 @@ class FormText extends FormElement
             $endTag= '>';
         }
 
+        $escaper = $this->view->plugin('escape');
         $xhtml = '<input'
-                . ' type="' .  $this->view->vars()->escape($inputType) . '"'
-                . ' name="' . $this->view->vars()->escape($name) . '"'
-                . ' id="' . $this->view->vars()->escape($id) . '"'
-                . ' value="' . $this->view->vars()->escape($value) . '"'
+                . ' type="'  . $escaper($inputType) . '"'
+                . ' name="'  . $escaper($name)      . '"'
+                . ' id="'    . $escaper($id)        . '"'
+                . ' value="' . $escaper($value)     . '"'
                 . $disabled
                 . $this->_htmlAttribs($attribs)
                 . $endTag;

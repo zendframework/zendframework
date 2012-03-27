@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_View
  * @subpackage Helper
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -30,7 +30,7 @@ namespace Zend\View\Helper;
  * @uses       \Zend\View\Helper\FormElement
  * @package    Zend_View
  * @subpackage Helper
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Fieldset extends FormElement
@@ -50,12 +50,13 @@ class Fieldset extends FormElement
         extract($info);
 
         // get legend
+        $escaper = $this->view->plugin('escape');
         $legend = '';
         if (isset($attribs['legend'])) {
             $legendString = trim($attribs['legend']);
             if (!empty($legendString)) {
                 $legend = '<legend>'
-                        . (($escape) ? $this->view->vars()->escape($legendString) : $legendString)
+                        . (($escape) ? $escaper($legendString) : $legendString)
                         . '</legend>' . PHP_EOL;
             }
             unset($attribs['legend']);
@@ -63,7 +64,7 @@ class Fieldset extends FormElement
 
         // get id
         if (!empty($id)) {
-            $id = ' id="' . $this->view->vars()->escape($id) . '"';
+            $id = ' id="' . $escaper($id) . '"';
         } else {
             $id = '';
         }

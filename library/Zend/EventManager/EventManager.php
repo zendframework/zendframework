@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_EventManager
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -38,7 +38,7 @@ use Zend\Stdlib\CallbackHandler,
  *
  * @category   Zend
  * @package    Zend_EventManager
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class EventManager implements EventCollection
@@ -122,8 +122,8 @@ class EventManager implements EventCollection
     }
 
     /**
-     * Get the identifier(s) for this EventManager 
-     * 
+     * Get the identifier(s) for this EventManager
+     *
      * @return array
      */
     public function getIdentifiers()
@@ -132,9 +132,9 @@ class EventManager implements EventCollection
     }
 
     /**
-     * Set the identifiers (overrides any currently set identifiers) 
-     * 
-     * @param string|int|array|Traversable $identifiers 
+     * Set the identifiers (overrides any currently set identifiers)
+     *
+     * @param string|int|array|Traversable $identifiers
      * @return ModuleManager
      */
     public function setIdentifiers($identifiers)
@@ -148,9 +148,9 @@ class EventManager implements EventCollection
     }
 
     /**
-     * Add some identifier(s) (appends to any currently set identifiers) 
-     * 
-     * @param string|int|array|Traversable $identifiers 
+     * Add some identifier(s) (appends to any currently set identifiers)
+     *
+     * @param string|int|array|Traversable $identifiers
      * @return ModuleManager
      */
     public function addIdentifiers($identifiers)
@@ -171,7 +171,7 @@ class EventManager implements EventCollection
      * @param  string $event
      * @param  string|object $target Object calling emit, or symbol describing target (such as static method name)
      * @param  array|ArrayAccess $argv Array of arguments; typically, should be associative
-     * @param  null|callback $callback 
+     * @param  null|callback $callback
      * @return ResponseCollection All listener return values
      */
     public function trigger($event, $target = null, $argv = array(), $callback = null)
@@ -195,10 +195,8 @@ class EventManager implements EventCollection
             $e->setParams($argv);
         }
 
-        if (!$callback) {
-            $callback = function() {
-                return false;
-            };
+        if ($callback && !is_callable($callback)) {
+            throw new InvalidCallbackException('Invalid callback provided');
         }
 
         return $this->triggerListeners($event, $e, $callback);
@@ -256,17 +254,47 @@ class EventManager implements EventCollection
      * executed. By default, this value is 1; however, you may set it for any
      * integer value. Higher values have higher priority (i.e., execute first).
      *
-     * @param  string $event
-     * @param  callback $callback PHP callback
+     * You can specify "*" for the event name. In such cases, the listener will 
+     * be triggered for every event.
+     *
+     * @param  string|array|ListenerAggregate $event An event or array of event names. If a ListenerAggregate, proxies to {@link attachAggregate()}.
+     * @param  callback|int $callback If string $event provided, expects PHP callback; for a ListenerAggregate $event, this will be the priority
      * @param  int $priority If provided, the priority at which to register the callback
-     * @return ListenerAggregate (to allow later unsubscribe)
+     * @return CallbackHandler|mixed CallbackHandler if attaching callback (to allow later unsubscribe); mixed if attaching aggregate
      */
-    public function attach($event, $callback, $priority = 1)
+    public function attach($event, $callback = null, $priority = 1)
     {
+        // Proxy ListenerAggregate arguments to attachAggregate()
+        if ($event instanceof ListenerAggregate) {
+            return $this->attachAggregate($event, $callback);
+        }
+
+        // Null callback is invalid
+        if (null === $callback) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                '%s: expects a callback; none provided',
+                __METHOD__
+            ));
+        }
+
+        // Array of events should be registered individually, and return an array of all listeners
+        if (is_array($event)) {
+            $listeners = array();
+            foreach ($event as $name) {
+                $listeners[] = $this->attach($name, $callback, $priority);
+            }
+            return $listeners;
+        }
+
+        // If we don't have a priority queue for the event yet, create one
         if (empty($this->events[$event])) {
             $this->events[$event] = new PriorityQueue();
         }
-        $listener = new CallbackHandler($event, $callback, array('priority' => $priority));
+
+        // Create a callback handler, setting the event and priority in its metadata
+        $listener = new CallbackHandler($callback, array('event' => $event, 'priority' => $priority));
+
+        // Inject the callback handler into the queue
         $this->events[$event]->insert($listener, $priority);
         return $listener;
     }
@@ -279,23 +307,37 @@ class EventManager implements EventCollection
      * methods.
      *
      * @param  ListenerAggregate $aggregate
+     * @param  int $priority If provided, a suggested priority for the aggregate to use
      * @return mixed return value of {@link ListenerAggregate::attach()}
      */
-    public function attachAggregate(ListenerAggregate $aggregate)
+    public function attachAggregate(ListenerAggregate $aggregate, $priority = 1)
     {
-        return $aggregate->attach($this);
+        return $aggregate->attach($this, $priority);
     }
 
     /**
      * Unsubscribe a listener from an event
      *
-     * @param  CallbackHandler $listener
+     * @param  CallbackHandler|ListenerAggregate $listener
      * @return bool Returns true if event and listener found, and unsubscribed; returns false if either event or listener not found
+     * @throws Exception\InvalidArgumentException if invalid listener provided
      */
-    public function detach(CallbackHandler $listener)
+    public function detach($listener)
     {
-        $event = $listener->getEvent();
-        if (empty($this->events[$event])) {
+        if ($listener instanceof ListenerAggregate) {
+            return $this->detachAggregate($listener);
+        }
+
+        if (!$listener instanceof CallbackHandler) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                '%s: expected a ListenerAggregate or CallbackHandler; received "%s"',
+                __METHOD__,
+                (is_object($listener) ? get_class($listener) : gettype($listener))
+            ));
+        }
+
+        $event = $listener->getMetadatum('event');
+        if (!$event || empty($this->events[$event])) {
             return false;
         }
         $return = $this->events[$event]->remove($listener);
@@ -377,43 +419,43 @@ class EventManager implements EventCollection
     /**
      * Trigger listeners
      *
-     * Actual functionality for triggering listeners, to which both trigger() and triggerUntil() 
+     * Actual functionality for triggering listeners, to which both trigger() and triggerUntil()
      * delegate.
-     * 
-     * @param  string $event Event name
-     * @param  EventDescription $e 
-     * @param  callback $callback 
+     *
+     * @param  string           $event Event name
+     * @param  EventDescription $e
+     * @param  null|callback    $callback
      * @return ResponseCollection
      */
-    protected function triggerListeners($event, EventDescription $e, $callback)
+    protected function triggerListeners($event, EventDescription $e, $callback = null)
     {
         $responses = new ResponseCollection;
+        $listeners = $this->getListeners($event);
 
-        $listeners = clone $this->getListeners($event);
-        foreach ($this->getStaticListeners($event) as $listener) {
-            $priority = $listener->getOption('priority');
-            if (null === $priority) {
-                $priority = 1;
-            } elseif (is_array($priority)) {
-                // If we have an array, likely using PriorityQueue. Grab first
-                // element of the array, as that's the actual priority.
-                $priority = array_shift($priority);
-            }
-            $listeners->insert($listener, $priority);
+        // Add static/wildcard listeners to the list of listeners,
+        // but don't modify the listeners object
+        $staticListeners         = $this->getStaticListeners($event);
+        $staticWildcardListeners = $this->getStaticListeners('*');
+        $wildcardListeners       = $this->getListeners('*');
+        if (count($staticListeners) || count($staticWildcardListeners) || count($wildcardListeners)) {
+            $listeners = clone $listeners;
         }
+
+        // Static listeners on this specific event
+        $this->insertListeners($listeners, $staticListeners);
+
+        // Static wildcard listeners
+        $this->insertListeners($listeners, $staticWildcardListeners);
+
+        // Add wildcard listeners
+        $this->insertListeners($listeners, $wildcardListeners);
 
         if ($listeners->isEmpty()) {
             return $responses;
         }
 
         foreach ($listeners as $listener) {
-            // If we have an invalid listener, detach it, and move on to the next
-            if (!$listener->isValid()) {
-                $this->detach($listener);
-                continue;
-            }
-
-            // Trigger the listener's callback, and push its result onto the 
+            // Trigger the listener's callback, and push its result onto the
             // response collection
             $responses->push(call_user_func($listener->getCallback(), $e));
 
@@ -423,9 +465,9 @@ class EventManager implements EventCollection
                 break;
             }
 
-            // If the result causes our validation callback to return true, 
+            // If the result causes our validation callback to return true,
             // stop propagation
-            if (call_user_func($callback, $responses->last())) {
+            if ($callback && call_user_func($callback, $responses->last())) {
                 $responses->setStopped(true);
                 break;
             }
@@ -435,10 +477,10 @@ class EventManager implements EventCollection
     }
 
     /**
-     * Get list of all listeners attached to the static collection for 
+     * Get list of all listeners attached to the static collection for
      * identifiers registered by this instance
-     * 
-     * @param  string $event 
+     *
+     * @param  string $event
      * @return array
      */
     protected function getStaticListeners($event)
@@ -468,5 +510,33 @@ class EventManager implements EventCollection
         }
 
         return $staticListeners;
+    }
+
+    /**
+     * Add listeners to the master queue of listeners
+     *
+     * Used to inject static listeners and wildcard listeners.
+     * 
+     * @param  PriorityQueue $masterListeners 
+     * @param  PriorityQueue $listeners 
+     * @return void
+     */
+    protected function insertListeners($masterListeners, $listeners)
+    {
+        if (!count($listeners)) {
+            return;
+        }
+
+        foreach ($listeners as $listener) {
+            $priority = $listener->getMetadatum('priority');
+            if (null === $priority) {
+                $priority = 1;
+            } elseif (is_array($priority)) {
+                // If we have an array, likely using PriorityQueue. Grab first
+                // element of the array, as that's the actual priority.
+                $priority = array_shift($priority);
+            }
+            $masterListeners->insert($listener, $priority);
+        }
     }
 }

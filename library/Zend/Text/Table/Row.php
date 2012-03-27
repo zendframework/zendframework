@@ -14,7 +14,7 @@
  *
  * @category  Zend
  * @package   Zend_Text_Table
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -30,7 +30,7 @@ namespace Zend\Text\Table;
  * @uses      \Zend\Text\Table\Exception
  * @category  Zend
  * @package   Zend_Text_Table
- * @copyright Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Row
@@ -196,11 +196,11 @@ class Row
         for ($line = 0; $line < $maxHeight; $line++) {
             $result .= $decorator->getVertical();
 
-            foreach ($renderedColumns as $renderedColumn) {
+            foreach ($renderedColumns as $index => $renderedColumn) {
                 if (isset($renderedColumn[$line]) === true) {
                     $result .= $renderedColumn[$line];
                 } else {
-                    $result .= str_repeat(' ', strlen($renderedColumn[0]));
+                    $result .= str_repeat(' ', $this->_columnWidths[$index]);
                 }
 
                 $result .= $decorator->getVertical();

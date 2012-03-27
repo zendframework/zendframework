@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage DublinCore
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -28,11 +28,10 @@ namespace Zend\GData;
  * Service class for interacting with the services which use the
  * DublinCore extensions.
  *
- * @uses       \Zend\GData\GData
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage DublinCore
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class DublinCore extends GData

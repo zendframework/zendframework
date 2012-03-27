@@ -67,6 +67,12 @@ class WildcardTest extends TestCase
                 array(),
                 true
             ),
+            'url-encoded-parameters-are-decoded' => array(
+                new Wildcard(),
+                '/foo/foo+bar',
+                null,
+                array('foo' => 'foo bar')
+            ),
         );
     }
 
@@ -142,7 +148,7 @@ class WildcardTest extends TestCase
     {
         $tester = new FactoryTester($this);
         $tester->testFactory(
-            '\Zend\Mvc\Router\Http\Wildcard',
+            'Zend\Mvc\Router\Http\Wildcard',
             array(),
             array()
         );

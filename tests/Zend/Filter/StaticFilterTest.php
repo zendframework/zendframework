@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Filter
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -30,7 +30,7 @@ use Zend\Filter\StaticFilter,
  * @category   Zend
  * @package    Zend_Filter
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Filter
  */
@@ -49,7 +49,7 @@ class StaticFilterTest extends \PHPUnit_Framework_TestCase
     public function testUsesFilterBrokerByDefault()
     {
         $broker = StaticFilter::getBroker();
-        $this->assertType('Zend\Filter\FilterBroker', $broker);
+        $this->assertInstanceOf('Zend\Filter\FilterBroker', $broker);
     }
 
     public function testCanSpecifyCustomBroker()
@@ -67,7 +67,7 @@ class StaticFilterTest extends \PHPUnit_Framework_TestCase
         StaticFilter::setBroker(null);
         $registered = StaticFilter::getBroker();
         $this->assertNotSame($broker, $registered);
-        $this->assertType('Zend\Filter\FilterBroker', $registered);
+        $this->assertInstanceOf('Zend\Filter\FilterBroker', $registered);
     }
 
     /**

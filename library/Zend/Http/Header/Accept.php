@@ -1,99 +1,78 @@
 <?php
-
+/**
+ * Zend Framework
+ *
+ * LICENSE
+ *
+ * This source file is subject to the new BSD license that is bundled
+ * with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://framework.zend.com/license/new-bsd
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@zend.com so we can send you a copy immediately.
+ *
+ * @category   Zend
+ * @package    Zend\Http\Header
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
 namespace Zend\Http\Header;
 
 /**
- * @todo Implement q and level lookups
- * @see http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.1
+ * Accept Header
+ *
+ * @category   Zend
+ * @package    Zend\Http\Header
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @see        http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.1
  */
-class Accept implements HeaderDescription
-{
-
-    protected $values = array();
-
-    public static function fromString($headerLine)
-    {
-        $acceptHeader = new static();
-
-        list($name, $values) = preg_split('#: #', $headerLine, 2);
-
-        // check to ensure proper header type for this factory
-        if (strtolower($name) !== 'accept') {
-            throw new Exception\InvalidArgumentException('Invalid header line for accept header string');
-        }
-
-        // process multiple accept values
-        // @todo q and level processing here to be retrieved by getters in accept object later
-        $acceptHeader->values = explode(',', $values);
-        foreach ($acceptHeader->values as $index => $value) {
-            $acceptHeader->values[$index] = explode(';', $value);
-        }
-
-        return $acceptHeader;
-    }
-
+class Accept extends AbstractAccept
+{ 
+    protected $regexAddType = '#^([a-zA-Z+-]+|\*)/(\*|[a-zA-Z0-9+-]+)$#';
+        
+    /**
+     * Get field name
+     * 
+     * @return string
+     */
     public function getFieldName()
     {
         return 'Accept';
     }
 
-    public function getFieldValue()
-    {
-        $strings = array();
-        foreach ($this->values as $value) {
-            $strings[] = implode('; ', $value);
-        }
-        return implode(',', $strings);
-    }
-
+    /**
+     * Cast to string
+     * 
+     * @return string
+     */
     public function toString()
     {
         return 'Accept: ' . $this->getFieldValue();
     }
 
-//
-//    /**
-//     * Get the quality factor of the value (q=)
-//     *
-//     * @param string $value
-//     * @return float
-//     */
-//    public function getQualityFactor($value)
-//    {
-//        if ($this->hasValue($value)) {
-//            if (!empty($this->arrayValue)) {
-//                if (isset($this->arrayValue[$value])) {
-//                    foreach ($this->arrayValue[$value] as $val) {
-//                        if (preg_match('/q=(\d\.?\d?)/',$val,$matches)) {
-//                            return $matches[1];
-//                        }
-//                    }
-//                }
-//                return 1;
-//            }
-//        }
-//        return false;
-//    }
-//
-//    /**
-//     * Get the level of a value (level=)
-//     *
-//     * @param string $value
-//     * @return integer
-//     */
-//    public function getLevel($value)
-//    {
-//        if ($this->hasValue($value)) {
-//            if (isset($this->arrayValue[$value])) {
-//                foreach ($this->arrayValue[$value] as $val) {
-//                    if (preg_match('/level=(\d+)/',$val,$matches)) {
-//                        return $matches[1];
-//                    }
-//                }
-//            }
-//        }
-//        return false;
-//    }
-//
+    /**
+     * Add a media type, with the given priority
+     * 
+     * @param  string $type 
+     * @param  int|float $priority 
+     * @param  int $level 
+     * @return Accept
+     */
+    public function addMediaType($type, $priority = 1, $level = null)
+    {
+        return $this->addType($type, $priority, $level);
+    }
 
+    /**
+     * Does the header have the requested media type?
+     * 
+     * @param  string $type 
+     * @return bool
+     */
+    public function hasMediaType($type)
+    {
+        return $this->hasType($type);
+    }
 }

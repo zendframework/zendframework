@@ -1,51 +1,77 @@
 <?php
-
+/**
+ * Zend Framework
+ *
+ * LICENSE
+ *
+ * This source file is subject to the new BSD license that is bundled
+ * with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://framework.zend.com/license/new-bsd
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@zend.com so we can send you a copy immediately.
+ *
+ * @category   Zend
+ * @package    Zend\Http\Header
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
 namespace Zend\Http\Header;
 
 /**
- * @see http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.2
+ * Accept Charset Header
+ *
+ * @category   Zend
+ * @package    Zend\Http\Header
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @see        http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.2
  */
-class AcceptCharset implements HeaderDescription
+class AcceptCharset extends AbstractAccept
 {
-
-    protected $charsets = array();
-
-    protected $qualityValue = 1;
-
-    public static function fromString($headerLine)
-    {
-        $acceptCharsetHeader = new static();
-
-        list($name, $value) = preg_split('#: #', $headerLine, 2);
-
-        // check to ensure proper header type for this factory
-        if (strtolower($name) !== 'accept-charset') {
-            throw new Exception\InvalidArgumentException('Invalid header line for accept header string');
-        }
-
-        $valueParts = explode(';', $value, 2);
-        if (count($valueParts) >= 1) {
-            $acceptCharsetHeader->charsets = explode(',', $valueParts[0]);
-        }
-        if (count($valueParts) == 2 && preg_match('#q=(?P<qvalue>\d(?\.\d)+)#', $valueParts[1], $matches)) {
-            $acceptCharsetHeader->qualityValue = $matches['qvalue'];
-        }
-
-        return $acceptCharsetHeader;
-    }
-
+    protected $regexAddType = '#^([a-zA-Z0-9+-]+|\*)$#';
+    
+    /**
+     * Get field name
+     * 
+     * @return string
+     */
     public function getFieldName()
     {
         return 'Accept-Charset';
     }
 
-    public function getFieldValue()
-    {
-        return implode(', ', $this->charsets) . ';q=' . $this->qualityValue;
-    }
-
+    /**
+     * Cast to string
+     * 
+     * @return string
+     */
     public function toString()
     {
         return 'Accept-Charset: ' . $this->getFieldValue();
+    }
+    
+    /**
+     * Add a charset, with the given priority
+     * 
+     * @param  string $type 
+     * @param  int|float $priority 
+     * @return Accept
+     */
+    public function addCharset($type, $priority = 1)
+    {
+        return $this->addType($type, $priority);
+    }
+    
+    /**
+     * Does the header have the requested charset?
+     * 
+     * @param  string $type 
+     * @return bool
+     */
+    public function hasCharset($type)
+    {
+        return $this->hasType($type);
     }
 }

@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Dojo
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -32,7 +32,7 @@ use Zend\Dojo\Form\Element\NumberSpinner as NumberSpinnerElement,
  * @category   Zend
  * @package    Zend_Dojo
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Dojo
  * @group      Zend_Dojo_Form
@@ -57,7 +57,7 @@ class NumberSpinnerTest extends \PHPUnit_Framework_TestCase
 
     public function getView()
     {
-        $view = new View\PhpRenderer();
+        $view = new View\Renderer\PhpRenderer();
         \Zend\Dojo\Dojo::enableView($view);
         return $view;
     }
@@ -162,8 +162,8 @@ class NumberSpinnerTest extends \PHPUnit_Framework_TestCase
         $this->element->setMin(5)
                       ->setMax(10);
         $html = $this->element->render();
-        $this->assertRegexp('/\'min\':\s*5/', $html, $html);
-        $this->assertRegexp('/\'max\':\s*10/', $html, $html);
+        $this->assertRegexp('/&#39;min&#39;:\s*5/', $html, $html);
+        $this->assertRegexp('/&#39;max&#39;:\s*10/', $html, $html);
     }
     
     public function testSmallAndLargeDeltaCanBeSetAsDecimalValues()

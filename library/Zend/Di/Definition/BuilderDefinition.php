@@ -218,7 +218,11 @@ class BuilderDefinition implements Definition
         if (!$method instanceof Builder\InjectionMethod) {
             throw new Exception\RuntimeException('Cannot find method object for method ' . $method . ' in this builder definition.');
         }
-        return $method->getParameters();
+        $methodParameters = array();
+        foreach ($method->getParameters() as $name => $info) {
+            $methodParameters[$class->getName() . '::' . $method->getName() . ':' . $name] = $info;
+        }
+        return $methodParameters;
     }
 
 

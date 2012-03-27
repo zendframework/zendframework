@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_View
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
@@ -29,7 +29,7 @@ namespace Zend\View;
  *
  * @category   Zend
  * @package    Zend_View
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 interface Renderer
@@ -46,10 +46,19 @@ interface Renderer
     public function getEngine();
 
     /**
+     * Set the resolver used to map a template name to a resource the renderer may consume.
+     * 
+     * @param  Resolver $resolver 
+     * @return Renderer
+     */
+    public function setResolver(Resolver $resolver);
+
+    /**
      * Processes a view script and returns the output.
      *
-     * @param string $name The script name to process.
+     * @param  string|Model $name The script/resource process, or a view model
+     * @param  null|array|\ArrayAccess Values to use during rendering
      * @return string The script output.
      */
-    public function render($name);
+    public function render($nameOrModel, $values = null);
 }

@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Service_Amazon
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -54,7 +54,7 @@ use Zend\Service\Amazon;
  * @category   Zend
  * @package    Zend_Service_Amazon
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Service
  * @group      Zend_Service_Amazon
@@ -346,7 +346,7 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
     	} catch (Amazon\Exception $e) {
     		$this->fail('Unexpected exception was triggered');
     	}
-    	$this->assertType('Zend\Service\Amazon\Item', $currentItem);
+    	$this->assertInstanceOf('Zend\Service\Amazon\Item', $currentItem);
     	$this->assertEquals('0754512673', $currentItem->ASIN);
     }
     

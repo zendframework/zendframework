@@ -5,12 +5,9 @@ namespace Zend\Module\Listener;
 use ArrayAccess,
     Traversable,
     Zend\Config\Config,
-    Zend\Config\Xml as XmlConfig,
-    Zend\Config\Ini as IniConfig,
-    Zend\Config\Yaml as YamlConfig,
-    Zend\Config\Json as JsonConfig,
+    Zend\Config\Factory as ConfigFactory,
     Zend\Module\ModuleEvent,
-    Zend\Stdlib\IteratorToArray,
+    Zend\Stdlib\ArrayUtils,
     Zend\EventManager\EventCollection,
     Zend\EventManager\ListenerAggregate;
 
@@ -57,7 +54,50 @@ class ConfigListener extends AbstractListener
         }
     }
 
+    /**
+     * __invoke proxy to loadModule for easier attaching 
+     * 
+     * @param ModuleEvent $e 
+     * @return ConfigListener
+     */
     public function __invoke(ModuleEvent $e)
+    {
+        return $this->loadModule($e);
+    }
+
+    /**
+     * Attach one or more listeners
+     *
+     * @param EventCollection $events
+     * @return ConfigListener
+     */
+    public function attach(EventCollection $events)
+    {
+        $this->listeners[] = $events->attach('loadModule', array($this, 'loadModule'), 1000);
+        $this->listeners[] = $events->attach('loadModules.pre', array($this, 'loadModulesPre'), 9000);
+        $this->listeners[] = $events->attach('loadModules.post', array($this, 'loadModulesPost'), 9000);
+        return $this;
+    }
+
+    /**
+     * Pass self to the ModuleEvent object early so everyone has access. 
+     * 
+     * @param ModuleEvent $e 
+     * @return ConfigListener
+     */
+    public function loadModulesPre(ModuleEvent $e)
+    {
+        $e->setConfigListener($this);
+        return $this;
+    }
+
+    /**
+     * Merge the config for each module 
+     * 
+     * @param ModuleEvent $e 
+     * @return ConfigListener
+     */
+    public function loadModule(ModuleEvent $e)
     {
         if (true === $this->skipConfig) {
             return;
@@ -66,18 +106,25 @@ class ConfigListener extends AbstractListener
         if (is_callable(array($module, 'getConfig'))) {
             $this->mergeModuleConfig($module);
         }
+        return $this;
     }
 
     /**
-     * Attach one or more listeners
+     * Merge all config files matched by the given glob()s
      *
-     * @param EventCollection $events
-     * @return void
+     * This should really only be called by the module manager.
+     *
+     * @param ModuleEvent $e 
+     * @return ConfigListener
      */
-    public function attach(EventCollection $events)
+    public function loadModulesPost(ModuleEvent $e)
     {
-        $this->listeners[] = $events->attach('loadModule', $this, 1000);
-        $this->listeners[] = $events->attach('loadModules.post', array($this, 'mergeConfigGlobPaths'), 9000);
+        if (true === $this->skipConfig) {
+            return $this;
+        }
+        foreach ($this->globPaths as $globPath) {
+            $this->mergeGlobPath($globPath);
+        }
         return $this;
     }
 
@@ -155,7 +202,7 @@ class ConfigListener extends AbstractListener
     public function addConfigGlobPaths($globPaths)
     {
         if ($globPaths instanceof Traversable) {
-            $globPaths = IteratorToArray::convert($globPaths);
+            $globPaths = ArrayUtils::iteratorToArray($globPaths);
         }
 
         if (!is_array($globPaths)) {
@@ -175,25 +222,6 @@ class ConfigListener extends AbstractListener
     }
 
     /**
-     * Merge all config files matched by the given glob()s
-     *
-     * This should really only be called by the module manager.
-     *
-     * @param mixed $e 
-     * @return ConfigListener
-     */
-    public function mergeConfigGlobPaths($e = null)
-    {
-        foreach ($this->globPaths as $globPath) {
-            $this->mergeGlobPath($globPath);
-        }
-        if ($e instanceof ModuleEvent) {
-            $e->setConfigListener($this);
-        }
-        return $this;
-    }
-
-    /**
      * Merge all config files matching a glob
      *
      * @param mixed $globPath
@@ -201,46 +229,11 @@ class ConfigListener extends AbstractListener
      */
     protected function mergeGlobPath($globPath)
     {
-        foreach (glob($globPath, GLOB_BRACE) as $path) {
-            $pathInfo = pathinfo($path);
-            switch (strtolower($pathInfo['extension'])) {
-                case 'php':
-                case 'inc':
-                    $config = include $path;
-                    if (!is_array($config) && !$config instanceof ArrayAccess) {
-                        throw new Exception\RuntimeException(sprintf(
-                            'Invalid configuration type returned by file at "%s"; received "%s"',
-                            $path,
-                            (is_object($config) ? get_class($config) : gettype($config))
-                        ));
-                    }
-                    break;
-
-                case 'xml':
-                    $config = new XmlConfig($path);
-                    break;
-
-                case 'json':
-                    $config = new JsonConfig($path);
-                    break;
-
-                case 'ini':
-                    $config = new IniConfig($path);
-                    break;
-
-                case 'yaml':
-                case 'yml':
-                    $config = new YamlConfig($path);
-                    break;
-
-                default:
-                    throw new Exception\RuntimeException(sprintf(
-                        'Unable to detect config file type by extension: %s',
-                        $path
-                    ));
-                    break;
-            }
-            $this->mergeTraversableConfig($config);
+        // @TODO Use GlobIterator
+        $config = ConfigFactory::fromFiles(glob($globPath, GLOB_BRACE));
+        $this->mergeTraversableConfig($config);
+        if ($this->getOptions()->getConfigCacheEnabled()) {
+            $this->updateCache();
         }
         return $this;
     }
@@ -278,7 +271,7 @@ class ConfigListener extends AbstractListener
     protected function mergeTraversableConfig($config)
     {
         if ($config instanceof Traversable) {
-            $config = IteratorToArray::convert($config);
+            $config = ArrayUtils::iteratorToArray($config);
         }
         if (!is_array($config)) {
             throw new Exception\InvalidArgumentException(

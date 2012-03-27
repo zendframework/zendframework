@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Form
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -27,8 +27,7 @@ use Zend\Form\Form,
     Zend\Form\SubForm,
     Zend\Registry,
     Zend\Config\Config,
-    Zend\Config\Ini as IniConfig,
-    Zend\Config\Xml as XmlConfig,
+    Zend\Config\Factory as ConfigFactory,
     Zend\Loader\PrefixPathLoader,
     Zend\Loader\PrefixPathMapper,
     Zend\Json\Json,
@@ -40,7 +39,7 @@ use Zend\Form\Form,
  * @category   Zend
  * @package    Zend_Form
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Form
  */
@@ -370,7 +369,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
      */
     public function testDisplayGroupOrderInConfigShouldNotMatter()
     {
-        $config = new XmlConfig(__DIR__ . '/TestAsset/config/zf3250.xml', 'sitearea', true);
+        $config = ConfigFactory::fromFile(__DIR__ . '/TestAsset/config/zf3250.xml', true)->get('sitearea');
         $form = new Form($config->test);
         // no assertions needed; throws error if order matters
     }
@@ -558,7 +557,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
     {
         $this->testActionDefaultsToEmptyString();
         $this->form->setAction('/foo.php?bar')
-                   ->setView(new View\PhpRenderer);
+                   ->setView(new View\Renderer\PhpRenderer);
         $html = $this->form->render();
 
         $this->assertContains('action="/foo.php?bar"', $html);
@@ -1116,7 +1115,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
                 ->addDisplayGroup(array('bar', 'baz'), 'barbaz');
         $this->form->addSubForm($subForm, 'sub')
                    ->setElementsBelongTo('myform')
-                   ->setView(new View\PhpRenderer);
+                   ->setView(new View\Renderer\PhpRenderer);
         $html = $this->form->render();
         foreach (array('foo', 'bar', 'baz', 'bat') as $test) {
             $this->assertContains('id="myform-sub-' . $test . '"', $html);
@@ -2824,19 +2823,19 @@ class FormTest extends \PHPUnit_Framework_TestCase
 
     public function getView()
     {
-        $view = new View\PhpRenderer();
+        $view = new View\Renderer\PhpRenderer();
         return $view;
     }
 
     public function testGetViewLazyLoadsPhpRendererByDefault()
     {
         $test = $this->form->getView();
-        $this->assertInstanceOf('Zend\View\PhpRenderer', $test);
+        $this->assertInstanceOf('Zend\View\Renderer\PhpRenderer', $test);
     }
 
     public function testCanSetView()
     {
-        $view = new View\PhpRenderer();
+        $view = new View\Renderer\PhpRenderer();
         $test = $this->form->getView();
         $this->assertNotSame($view, $test);
         $this->form->setView($view);
@@ -3743,7 +3742,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
      */
     public function testShouldAllowSettingDisplayGroupPrefixPathViaConfigOptions()
     {
-        $config = new IniConfig(__DIR__ . '/TestAsset/config/zf3213.ini', 'form');
+        $config = ConfigFactory::fromFile(__DIR__ . '/TestAsset/config/zf3213.ini', true)->get('form');
         $form   = new Form($config);
         $dg     = $form->foofoo;
         $paths  = $dg->getPluginLoader()->getPaths('My\Decorator');
@@ -3951,7 +3950,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
         $subForm = new \Zend\Form\SubForm();
         $subForm->addElement('file', 'txt');
         $this->form->addSubForm($subForm, 'page1')
-                   ->setView(new View\PhpRenderer);
+                   ->setView(new View\Renderer\PhpRenderer);
         $html = $this->form->render();
 
         $this->assertContains('id="txt"', $html);
@@ -3966,7 +3965,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
     {
         $this->form->addElement('file', 'txt')
                    ->addDisplayGroup(array('txt'), 'txtdisplay')
-                   ->setView(new View\PhpRenderer);
+                   ->setView(new View\Renderer\PhpRenderer);
         $html = $this->form->render();
 
         $this->assertContains('id="txt"', $html);

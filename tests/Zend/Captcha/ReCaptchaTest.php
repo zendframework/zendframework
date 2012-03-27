@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Captcha
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -30,7 +30,7 @@ use Zend\Captcha;
  * @category   Zend
  * @package    Zend_Captcha
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Captcha
  */
@@ -150,7 +150,7 @@ class ReCaptchaTest extends \PHPUnit_Framework_TestCase
             'captcha'   => $captcha,
             'belongsTo' => 'contact',
         ));
-        $view = new \Zend\View\PhpRenderer();
+        $view = new \Zend\View\Renderer\PhpRenderer();
         $html = $captcha->render($view, $element);
         $this->assertContains('contact[recaptcha_challenge_field]', $html);
         $this->assertContains('contact[recaptcha_response_field]', $html);

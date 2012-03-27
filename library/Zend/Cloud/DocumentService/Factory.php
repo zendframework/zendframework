@@ -13,9 +13,9 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Cloud
+ * @package    Zend\Cloud
  * @subpackage DocumentService
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -24,8 +24,7 @@
  */
 namespace Zend\Cloud\DocumentService;
 
-use Zend\Cloud\AbstractFactory,
-    Zend\Cloud\Exception\InvalidArgumentException;
+use Zend\Cloud\AbstractFactory;
 
 /**
  * Class implementing working with Azure queries in a structured way
@@ -35,7 +34,7 @@ use Zend\Cloud\AbstractFactory,
  * @category   Zend
  * @package    Zend\Cloud
  * @subpackage DocumentService
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Factory extends AbstractFactory
@@ -72,7 +71,7 @@ class Factory extends AbstractFactory
                 . self::DOCUMENT_ADAPTER_KEY . '\' key'
             );
         } elseif (!$adapter instanceof self::$_adapterInterface) {
-            throw new InvalidArgumentException(
+            throw new Exception\InvalidArgumentException(
                 'Adapter must implement \'' . self::$_adapterInterface . '\''
             );
         }

@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_View
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -25,13 +25,13 @@
 namespace ZendTest\View\Helper;
 
 use Zend\View\Helper,
-    Zend\View\PhpRenderer as View;
+    Zend\View\Renderer\PhpRenderer as View;
 
 /**
  * @category   Zend
  * @package    Zend_View
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_View
  * @group      Zend_View_Helper
@@ -163,7 +163,7 @@ class HtmlListTest extends \PHPUnit_Framework_TestCase
 
         $this->assertContains('<li>one &lt;small&gt; test</li>', $list);
         $this->assertContains('<li>second &amp; third</li>', $list);
-        $this->assertContains('<li>And \'some\' &quot;final&quot; test</li>', $list);
+        $this->assertContains('<li>And &#039;some&#039; &quot;final&quot; test</li>', $list);
     }
 
     public function testListEscapeSwitchedOffForZF2283()

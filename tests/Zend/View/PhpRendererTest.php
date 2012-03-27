@@ -15,14 +15,16 @@
  * @category   Zend
  * @package    Zend_View
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace ZendTest\View;
 
-use Zend\View\PhpRenderer,
-    Zend\View\TemplatePathStack,
+use Zend\View\Renderer\PhpRenderer,
+    Zend\View\Model\ViewModel,
+    Zend\View\Resolver\TemplateMapResolver,
+    Zend\View\Resolver\TemplatePathStack,
     Zend\View\Variables,
     Zend\Filter\FilterChain;
 
@@ -30,7 +32,7 @@ use Zend\View\PhpRenderer,
  * @category   Zend
  * @package    Zend_View
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_View
  */
@@ -48,7 +50,7 @@ class PhpRendererTest extends \PHPUnit_Framework_TestCase
 
     public function testUsesTemplatePathStackAsDefaultResolver()
     {
-        $this->assertInstanceOf('Zend\View\TemplatePathStack', $this->renderer->resolver());
+        $this->assertInstanceOf('Zend\View\Resolver\TemplatePathStack', $this->renderer->resolver());
     }
 
     public function testCanSetResolverInstance()
@@ -219,7 +221,6 @@ class PhpRendererTest extends \PHPUnit_Framework_TestCase
     {
         $this->renderer->foo = '<p>Bar</p>';
         $this->assertEquals($this->renderer->vars('foo'), $this->renderer->foo);
-        $this->assertSame('<p>Bar</p>', $this->renderer->vars()->getRawValue('foo'));
     }
 
     /**
@@ -257,31 +258,133 @@ class PhpRendererTest extends \PHPUnit_Framework_TestCase
     /**
      * @group convenience-api
      */
-    public function testRawMethodShouldRetrieveRawVariableFromVariableContainer()
-    {
-        $this->renderer->foo = '<p>Bar</p>';
-        $foo = $this->renderer->raw('foo');
-        $this->assertSame($this->renderer->vars()->getRawValue('foo'), $foo);
-    }
-    
-    /**
-     * @group convenience-api
-     */
     public function testRenderingLocalVariables()
     {
-        $expected = '10 &gt; 9';
+        $expected = '10 > 9';
         $this->renderer->vars()->assign(array('foo' => '10 > 9'));
         $this->renderer->resolver()->addPath(__DIR__ . '/_templates');
         $test = $this->renderer->render('testLocalVars.phtml');
         $this->assertContains($expected, $test);
     }    
 
-    public function testInjectsVariablesContainerWithEscapeHelperAsEscapeCallbackWhenPresent()
+    public function testRendersTemplatesInAStack()
     {
-        if (!$this->renderer->getBroker()->getClassLoader()->isLoaded('escape')) {
-            $this->markTestSkipped('Cannot test as escape helper is not loaded');
-        }
-        $escapeHelper = $this->renderer->plugin('escape');
-        $this->assertSame($escapeHelper, $this->renderer->vars()->getEscapeCallback());
+        $resolver = new TemplateMapResolver(array(
+            'layout' => __DIR__ . '/_templates/layout.phtml',
+            'block'  => __DIR__ . '/_templates/block.phtml',
+        ));
+        $this->renderer->setResolver($resolver);
+
+        $content = $this->renderer->render('block');
+        $this->assertRegexp('#<body>\s*Block content\s*</body>#', $content);
+    }
+
+    /**
+     * @group view-model
+     */
+    public function testCanRenderViewModel()
+    {
+        $resolver = new TemplateMapResolver(array(
+            'empty' => __DIR__ . '/_templates/empty.phtml',
+        ));
+        $this->renderer->setResolver($resolver);
+
+        $model = new ViewModel();
+        $model->setTemplate('empty');
+
+        $content = $this->renderer->render($model);
+        $this->assertRegexp('/\s*Empty view\s*/s', $content);
+    }
+
+    /**
+     * @group view-model
+     */
+    public function testViewModelWithoutTemplateRaisesException()
+    {
+        $model = new ViewModel();
+        $this->setExpectedException('Zend\View\Exception\DomainException');
+        $content = $this->renderer->render($model);
+    }
+
+    /**
+     * @group view-model
+     */
+    public function testRendersViewModelWithVariablesSpecified()
+    {
+        $resolver = new TemplateMapResolver(array(
+            'test' => __DIR__ . '/_templates/test.phtml',
+        ));
+        $this->renderer->setResolver($resolver);
+
+        $model = new ViewModel();
+        $model->setTemplate('test');
+        $model->setVariable('bar', 'bar');
+
+        $content = $this->renderer->render($model);
+        $this->assertRegexp('/\s*foo bar baz\s*/s', $content);
+    }
+
+    /**
+     * @group view-model
+     */
+    public function testRenderedViewModelIsRegisteredAsCurrentViewModel()
+    {
+        $resolver = new TemplateMapResolver(array(
+            'empty' => __DIR__ . '/_templates/empty.phtml',
+        ));
+        $this->renderer->setResolver($resolver);
+
+        $model = new ViewModel();
+        $model->setTemplate('empty');
+
+        $content = $this->renderer->render($model);
+        $helper  = $this->renderer->plugin('view_model');
+        $this->assertTrue($helper->hasCurrent());
+        $this->assertSame($model, $helper->getCurrent());
+    }
+
+    public function testRendererRaisesExceptionIfResolverCannotResolveTemplate()
+    {
+        $expected = '10 &gt; 9';
+        $this->renderer->vars()->assign(array('foo' => '10 > 9'));
+        $this->setExpectedException('Zend\View\Exception\RuntimeException', 'could not resolve');
+        $test = $this->renderer->render('should-not-find-this');
+    }
+
+    /**
+     * @group view-model
+     */
+    public function testDoesNotRenderTreesOfViewModelsByDefault()
+    {
+        $this->assertFalse($this->renderer->canRenderTrees());
+    }
+
+    /**
+     * @group view-model
+     */
+    public function testRenderTreesOfViewModelsCapabilityIsMutable()
+    {
+        $this->renderer->setCanRenderTrees(true);
+        $this->assertTrue($this->renderer->canRenderTrees());
+        $this->renderer->setCanRenderTrees(false);
+        $this->assertFalse($this->renderer->canRenderTrees());
+    }
+
+    /**
+     * @group view-model
+     */
+    public function testIfViewModelComposesVariablesInstanceThenRendererUsesIt()
+    {
+        $model = new ViewModel();
+        $model->setTemplate('template');
+        $vars  = $model->getVariables();
+        $vars['foo'] = 'BAR-BAZ-BAT';
+
+        $resolver = new TemplateMapResolver(array(
+            'template' => __DIR__ . '/_templates/view-model-variables.phtml',
+        ));
+        $this->renderer->setResolver($resolver);
+        $test = $this->renderer->render($model);
+        $this->assertContains('BAR-BAZ-BAT', $test);
     }
 }

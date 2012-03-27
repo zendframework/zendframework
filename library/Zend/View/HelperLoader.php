@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_View
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
@@ -28,7 +28,7 @@ use Zend\Loader\PluginClassLoader;
  *
  * @category   Zend
  * @package    Zend_View
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class HelperLoader extends PluginClassLoader
@@ -47,6 +47,7 @@ class HelperLoader extends PluginClassLoader
         'fieldset'            => 'Zend\View\Helper\Fieldset',
         'formbutton'          => 'Zend\View\Helper\FormButton',
         'formcheckbox'        => 'Zend\View\Helper\FormCheckbox',
+        'formcsrf'            => 'Zend\View\Helper\FormCsrf',
         'formerrors'          => 'Zend\View\Helper\FormErrors',
         'formfile'            => 'Zend\View\Helper\FormFile',
         'formhidden'          => 'Zend\View\Helper\FormHidden',
@@ -81,9 +82,13 @@ class HelperLoader extends PluginClassLoader
         'partialloop'         => 'Zend\View\Helper\PartialLoop',
         'partial'             => 'Zend\View\Helper\Partial',
         'placeholder'         => 'Zend\View\Helper\Placeholder',
+        'renderchildmodel'    => 'Zend\View\Helper\RenderChildModel',
+        'render_child_model'  => 'Zend\View\Helper\RenderChildModel',
         'rendertoplaceholder' => 'Zend\View\Helper\RenderToPlaceholder',
         'serverurl'           => 'Zend\View\Helper\ServerUrl',
         'translator'          => 'Zend\View\Helper\Translator',
         'url'                 => 'Zend\View\Helper\Url',
+        'viewmodel'           => 'Zend\View\Helper\ViewModel',
+        'view_model'          => 'Zend\View\Helper\ViewModel',
     );
 }

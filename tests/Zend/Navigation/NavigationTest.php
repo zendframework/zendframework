@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Navigation
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -33,7 +33,7 @@ use Zend\Navigation\Page;
  * @category   Zend
  * @package    Zend_Navigation
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Navigation
  */
@@ -73,10 +73,11 @@ class NavigationTest extends \PHPUnit_Framework_TestCase
         $page1->setOrder(1);
         $page3->setOrder(0);
         $page2->setOrder(2);
-        
+
         $pages = $this->_navigation->toArray();
+
         $this->assertSame(3, count($pages));
-        $this->assertEquals('page3', $pages[0]['uri']);
+        $this->assertEquals('page3', $pages[0]['uri'], var_export($pages, 1));
         $this->assertEquals('page1', $pages[1]['uri']);
         $this->assertEquals('page2', $pages[2]['uri']);
     }

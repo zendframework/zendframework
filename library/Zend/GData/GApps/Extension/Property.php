@@ -16,7 +16,7 @@
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Gapps
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id: EmailList.php 20096 2010-01-06 02:05:09Z bkarwin $
  */
@@ -32,7 +32,7 @@ namespace Zend\GData\GApps\Extension;
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Gapps
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Property extends \Zend\GData\Extension
@@ -172,4 +172,4 @@ class Property extends \Zend\GData\Extension
                "\nProperty Value: " . $this->getValue();
     }
 }
-?>
+

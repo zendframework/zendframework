@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Date
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -23,14 +23,15 @@ namespace ZendTest\Date;
 
 use Zend\Date\Date,
     Zend\Date\DateObject,
-    Zend\Cache\Cache,
+    Zend\Cache\StorageFactory as CacheFactory,
+    Zend\Cache\Storage\Adapter as CacheAdapter,
     Zend\Locale\Locale;
 
 /**
  * @category   Zend
  * @package    Zend_Date
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Date
  */
@@ -47,16 +48,15 @@ class DateObjectTest extends \PHPUnit_Framework_TestCase
     {
         $this->_originaltimezone = date_default_timezone_get();
         date_default_timezone_set('Europe/Paris');
-        $this->_cache = Cache::factory('Core', 'File',
-                 array('lifetime' => 120, 'automatic_serialization' => true),
-                 array('cache_dir' => __DIR__ . '/../_files/'));
+
+        $this->_cache = CacheFactory::adapterFactory('memory', array('memory_limit' => 0));
         DateObjectTestHelper::setOptions(array('cache' => $this->_cache));
     }
 
     public function tearDown()
     {
         date_default_timezone_set($this->_originaltimezone);
-        $this->_cache->clean(Cache::CLEANING_MODE_ALL);
+        $this->_cache->clear(CacheAdapter::MATCH_ALL);
     }
 
     /**

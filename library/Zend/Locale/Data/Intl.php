@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Locale
  * @subpackage Data
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -24,22 +24,15 @@
  */
 namespace Zend\Locale\Data;
 
-use Zend\Cache\Cache,
-    Zend\Cache\Frontend as CacheFrontend,
-    Zend\Locale\Locale as ZFLocale,
-    Zend\Locale\Exception\InvalidArgumentException,
-    Zend\Locale\Exception\UnexpectedValueException;
+use Zend\Locale\Locale as ZFLocale;
 
 /**
  * Locale data provider, handles INTL
  *
- * @uses       Zend\Cache\Cache
- * @uses       Zend\Locale
- * @uses       Zend\Locale\Exception\InvalidArgumentException
  * @category   Zend
  * @package    Zend_Locale
  * @subpackage Data
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Intl extends AbstractLocale

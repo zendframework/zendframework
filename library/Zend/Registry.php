@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Registry
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -23,61 +23,61 @@
  */
 namespace Zend;
 
+use ArrayObject,
+    RuntimeException;
+
 /**
  * Generic storage class helps to manage global data.
  *
- * @uses       ArrayObject
- * @uses       \RuntimeException
- * @uses       \Zend\Loader
  * @category   Zend
  * @package    Zend_Registry
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Registry extends \ArrayObject
+class Registry extends ArrayObject
 {
     /**
      * Class name of the singleton registry object.
      * @var string
      */
-    private static $_registryClassName = '\\Zend\\Registry';
+    private static $registryClassName = 'Zend\\Registry';
 
     /**
      * Registry object provides storage for shared objects.
-     * @var \Zend\Registry
+     * @var Registry
      */
-    private static $_registry = null;
+    private static $registry = null;
 
     /**
      * Retrieves the default registry instance.
      *
-     * @return \Zend\Registry
+     * @return Registry
      */
     public static function getInstance()
     {
-        if (self::$_registry === null) {
+        if (self::$registry === null) {
             self::init();
         }
 
-        return self::$_registry;
+        return self::$registry;
     }
 
     /**
      * Set the default registry instance to a specified instance.
      *
-     * @param \Zend\Registry $registry An object instance of type \Zend\Registry,
+     * @param Registry $registry An object instance of type Registry,
      *   or a subclass.
      * @return void
-     * @throws \RuntimeException if registry is already initialized.
+     * @throws RuntimeException if registry is already initialized.
      */
     public static function setInstance(Registry $registry)
     {
-        if (self::$_registry !== null) {
-            throw new \RuntimeException('Registry is already initialized');
+        if (self::$registry !== null) {
+            throw new RuntimeException('Registry is already initialized');
         }
 
         self::setClassName(get_class($registry));
-        self::$_registry = $registry;
+        self::$registry = $registry;
     }
 
     /**
@@ -87,7 +87,7 @@ class Registry extends \ArrayObject
      */
     protected static function init()
     {
-        self::setInstance(new self::$_registryClassName());
+        self::setInstance(new self::$registryClassName());
     }
 
     /**
@@ -97,17 +97,17 @@ class Registry extends \ArrayObject
      *
      * @param string $registryClassName
      * @return void
-     * @throws \RuntimeException if the registry is initialized or if the
+     * @throws RuntimeException if the registry is initialized or if the
      *   class name is not valid.
      */
-    public static function setClassName($registryClassName = '\\Zend\\Registry')
+    public static function setClassName($registryClassName = 'Zend\\Registry')
     {
-        if (self::$_registry !== null) {
-            throw new \RuntimeException('Registry is already initialized');
+        if (self::$registry !== null) {
+            throw new RuntimeException('Registry is already initialized');
         }
 
         if (!is_string($registryClassName)) {
-            throw new \RuntimeException("Argument is not a class name");
+            throw new RuntimeException("Argument is not a class name");
         }
 
         /**
@@ -117,7 +117,7 @@ class Registry extends \ArrayObject
             Loader::loadClass($registryClassName);
         }
 
-        self::$_registryClassName = $registryClassName;
+        self::$registryClassName = $registryClassName;
     }
 
     /**
@@ -127,7 +127,7 @@ class Registry extends \ArrayObject
      */
     public static function _unsetInstance()
     {
-        self::$_registry = null;
+        self::$registry = null;
     }
 
     /**
@@ -139,14 +139,14 @@ class Registry extends \ArrayObject
      *
      * @param string $index - get the value associated with $index
      * @return mixed
-     * @throws \RuntimeException if no entry is registerd for $index.
+     * @throws RuntimeException if no entry is registerd for $index.
      */
     public static function get($index)
     {
         $instance = self::getInstance();
 
         if (!$instance->offsetExists($index)) {
-            throw new \RuntimeException("No entry is registered for key '$index'");
+            throw new RuntimeException("No entry is registered for key '$index'");
         }
 
         return $instance->offsetGet($index);
@@ -179,10 +179,10 @@ class Registry extends \ArrayObject
      */
     public static function isRegistered($index)
     {
-        if (self::$_registry === null) {
+        if (self::$registry === null) {
             return false;
         }
-        return self::$_registry->offsetExists($index);
+        return self::$registry->offsetExists($index);
     }
 
     /**

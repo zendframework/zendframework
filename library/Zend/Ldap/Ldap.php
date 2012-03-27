@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Ldap
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -30,11 +30,11 @@ namespace Zend\Ldap;
  * @uses       \Zend\Ldap\Exception
  * @uses       \Zend\Ldap\Filter\AbstractFilter
  * @uses       \Zend\Ldap\Node
- * @uses       \Zend\Ldap\Node\RootDSE
+ * @uses       \Zend\Ldap\Node\RootDse
  * @uses       \Zend\Ldap\Node\Schema
  * @category   Zend
  * @package    Zend_Ldap
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Ldap
@@ -79,7 +79,7 @@ class Ldap
     protected $_boundUser = false;
 
     /**
-     * Caches the RootDSE
+     * Caches the RootDse
      *
      * @var \Zend\Ldap\Node
      */
@@ -275,6 +275,7 @@ class Ldap
             'useStartTls'            => false,
             'optReferrals'           => false,
             'tryUsernameSplit'       => true,
+            'networkTimeout'         => null,
         );
 
         foreach ($permittedOptions as $key => $val) {
@@ -287,6 +288,7 @@ class Ldap
                 switch ($key) {
                     case 'port':
                     case 'accountCanonicalForm':
+                    case 'networkTimeout':
                         $permittedOptions[$key] = (int)$val;
                         break;
                     case 'useSsl':
@@ -461,6 +463,14 @@ class Ldap
     protected function _getTryUsernameSplit()
     {
         return $this->_options['tryUsernameSplit'];
+    }
+
+    /**
+     * @return int The value for network timeout when connect to the LDAP server.
+     */
+    protected function _getNetworkTimeout()
+    {
+        return $this->_options['networkTimeout'];
     }
 
     /**
@@ -657,14 +667,15 @@ class Ldap
      * if you really care about the server's cert you can put a cert on the
      * web server.
      *
-     * @param  string  $host        The hostname of the LDAP server to connect to
-     * @param  int     $port        The port number of the LDAP server to connect to
-     * @param  boolean $useSsl      Use SSL
-     * @param  boolean $useStartTls Use STARTTLS
+     * @param  string  $host           The hostname of the LDAP server to connect to
+     * @param  int     $port           The port number of the LDAP server to connect to
+     * @param  boolean $useSsl         Use SSL
+     * @param  boolean $useStartTls    Use STARTTLS
+     * @param  int     $networkTimeout The value for network timeout when connect to the LDAP server.
      * @return \Zend\Ldap\Ldap Provides a fluent interface
      * @throws \Zend\Ldap\Exception
      */
-    public function connect($host = null, $port = null, $useSsl = null, $useStartTls = null)
+    public function connect($host = null, $port = null, $useSsl = null, $useStartTls = null, $networkTimeout = null)
     {
         if ($host === null) {
             $host = $this->_getHost();
@@ -683,6 +694,11 @@ class Ldap
             $useStartTls = $this->_getUseStartTls();
         } else {
             $useStartTls = (bool)$useStartTls;
+        }
+        if ($networkTimeout === null) {
+            $networkTimeout = $this->_getNetworkTimeout();
+        } else {
+            $networkTimeout = (int)$networkTimeout;
         }
 
         if (!$host) {
@@ -713,6 +729,7 @@ class Ldap
 
         $this->disconnect();
 
+
         /* Only OpenLDAP 2.2 + supports URLs so if SSL is not requested, just
          * use the old form.
          */
@@ -725,6 +742,9 @@ class Ldap
             $optReferrals = ($this->_getOptReferrals()) ? 1 : 0;
             if (@ldap_set_option($resource, LDAP_OPT_PROTOCOL_VERSION, 3) &&
                         @ldap_set_option($resource, LDAP_OPT_REFERRALS, $optReferrals)) {
+                if ($networkTimeout) {
+                    @ldap_set_option($resource, LDAP_OPT_NETWORK_TIMEOUT, $networkTimeout);
+                }
                 if ($useSsl || !$useStartTls || @ldap_start_tls($resource)) {
                     return $this;
                 }
@@ -1416,15 +1436,15 @@ class Ldap
     }
 
     /**
-     * Returns the RootDSE
+     * Returns the RootDse
      *
-     * @return \Zend\Ldap\Node\RootDSE
+     * @return \Zend\Ldap\Node\RootDse
      * @throws \Zend\Ldap\Exception
      */
     public function getRootDse()
     {
         if ($this->_rootDse === null) {
-            $this->_rootDse = Node\RootDSE::create($this);
+            $this->_rootDse = Node\RootDse::create($this);
         }
         return $this->_rootDse;
     }

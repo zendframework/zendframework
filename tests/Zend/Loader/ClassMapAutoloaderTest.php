@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Loader
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
@@ -29,7 +29,7 @@ use Zend\Loader\ClassMapAutoloader,
  * @category   Zend
  * @package    Loader
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Loader
  */
@@ -178,7 +178,7 @@ class ClassMapAutoloaderTest extends \PHPUnit_Framework_TestCase
         $this->loader->register();
         $loaders = spl_autoload_functions();
         $this->assertTrue(count($this->loaders) < count($loaders));
-        $test = array_pop($loaders);
+        $test = array_shift($loaders);
         $this->assertEquals(array($this->loader, 'autoload'), $test);
     }
 

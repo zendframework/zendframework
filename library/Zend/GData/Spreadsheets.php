@@ -15,7 +15,7 @@
  * @category     Zend
  * @package      Zend_Gdata
  * @subpackage   Spreadsheets
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -29,21 +29,10 @@ namespace Zend\GData;
  *
  * @link http://code.google.com/apis/gdata/spreadsheets.html
  *
- * @uses       \Zend\GData\GData
- * @uses       \Zend\GData\Spreadsheets\CellEntry
- * @uses       \Zend\GData\Spreadsheets\CellFeed
- * @uses       \Zend\GData\Spreadsheets\CellQuery
- * @uses       \Zend\GData\Spreadsheets\DocumentQuery
- * @uses       \Zend\GData\Spreadsheets\ListEntry
- * @uses       \Zend\GData\Spreadsheets\ListFeed
- * @uses       \Zend\GData\Spreadsheets\ListQuery
- * @uses       \Zend\GData\Spreadsheets\SpreadsheetEntry
- * @uses       \Zend\GData\Spreadsheets\SpreadsheetFeed
- * @uses       \Zend\GData\Spreadsheets\WorksheetEntry
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Spreadsheets
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Spreadsheets extends GData
@@ -78,7 +67,7 @@ class Spreadsheets extends GData
         $this->registerPackage('\Zend\GData\Spreadsheets');
         $this->registerPackage('\Zend\GData\Spreadsheets\Extension');
         parent::__construct($client, $applicationId);
-        $this->_httpClient->setParameterPost('service', self::AUTH_SERVICE_NAME);
+        $this->_httpClient->setParameterPost(array('service' => self::AUTH_SERVICE_NAME));
         $this->_server = 'spreadsheets.google.com';
     }
 

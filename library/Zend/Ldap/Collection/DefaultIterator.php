@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Ldap
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -33,7 +33,7 @@ use Zend\Ldap;
  * @uses       \Zend\Ldap\Exception
  * @category   Zend
  * @package    Zend_Ldap
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class DefaultIterator implements \Iterator, \Countable
@@ -262,7 +262,7 @@ class DefaultIterator implements \Iterator, \Countable
      */
     public function next()
     {
-        if (is_resource($this->_current)) {
+        if (is_resource($this->_current) && $this->_itemCount > 0) {
             $this->_current = @ldap_next_entry($this->_ldap->getResource(), $this->_current);
             if ($this->_current === false) {
                 $msg = $this->_ldap->getLastError($code);
@@ -273,6 +273,8 @@ class DefaultIterator implements \Iterator, \Countable
                      throw new Ldap\Exception($this->_ldap, 'getting next entry (' . $msg . ')');
                 }
             }
+        } else {
+            $this->_current = false;
         }
     }
 

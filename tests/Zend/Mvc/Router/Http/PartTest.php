@@ -1,7 +1,8 @@
 <?php
 namespace ZendTest\Mvc\Router\Http;
 
-use PHPUnit_Framework_TestCase as TestCase,
+use ArrayObject,
+    PHPUnit_Framework_TestCase as TestCase,
     Zend\Http\Request as Request,
     Zend\Stdlib\Request as BaseRequest,
     Zend\Mvc\Router\RouteBroker,
@@ -74,7 +75,13 @@ class PartTest extends TestCase
                             'options' => array(
                                 'route' => '/bar'
                             )
-                        )
+                        ),
+                        'optional' => array(
+                            'type'   => 'Zend\Mvc\Router\Http\Segment',
+                            'options' => array(
+                                'route' => '/bat[/:bar]'
+                            )
+                        ),
                     )
                 )
             )
@@ -152,6 +159,13 @@ class PartTest extends TestCase
                 '/foo/bat/bar/bar',
                 null,
                 'bat/literal',
+                array('foo' => 'bar')
+            ),
+            'optional-parameters-not-required-in-last-part' => array(
+                self::getRoute(),
+                '/foo/bat/bar/bat',
+                null,
+                'bat/optional',
                 array('foo' => 'bar')
             ),
         );
@@ -245,7 +259,7 @@ class PartTest extends TestCase
     {
         $tester = new FactoryTester($this);
         $tester->testFactory(
-            '\Zend\Mvc\Router\Http\Part',
+            'Zend\Mvc\Router\Http\Part',
             array(
                 'route'        => 'Missing "route" in options array',
                 'route_broker' => 'Missing "route_broker" in options array'
@@ -255,5 +269,42 @@ class PartTest extends TestCase
                 'route_broker' => new RouteBroker()
             )
         );
+    }
+
+    /**
+     * @group ZF2-105
+     */
+    public function testFactoryShouldAcceptTraversableChildRoutes()
+    {
+        $children = new ArrayObject(array(
+            'create' => array(
+                'type'    => 'Literal',
+                'options' => array(
+                    'route' => 'create',
+                    'defaults' => array(
+                        'controller' => 'user-admin',
+                        'action'     => 'edit',
+                    ),
+                ),
+            ),
+        ));
+        $options = array(
+            'route'        => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route' => '/admin/users',
+                    'defaults' => array(
+                        'controller' => 'Admin\UserController',
+                        'action'     => 'index',
+                    ),
+                ),
+            ),
+            'route_broker' => new RouteBroker(),
+            'may_terminate' => true,
+            'child_routes'  => $children,
+        );
+
+        $route = Part::factory($options);
+        $this->assertInstanceOf('Zend\Mvc\Router\Http\Part', $route);
     }
 }

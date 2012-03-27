@@ -15,21 +15,21 @@
  * @category   Zend
  * @package    Zend_Config
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace ZendTest\Config\Writer;
 
-use \Zend\Config\Writer\Xml,
+use \Zend\Config\Writer\Xml as XmlWriter,
     \Zend\Config\Config,
-    \Zend\Config\Xml as XmlConfig;
+    \Zend\Config\Reader\Xml as XmlReader;
 
 /**
  * @category   Zend
  * @package    Zend_Config
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Config
  */
@@ -39,168 +39,62 @@ class XmlTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->_tempName = tempnam(__DIR__ . '/temp', 'tmp');
+        $this->writer = new XmlWriter();
+        $this->reader = new XmlReader();
     }
 
-    public function tearDown()
-    {
-        @unlink($this->_tempName);
-    }
-
-    public function testNoFilenameSet()
-    {
-        $writer = new Xml(array('config' => new Config(array())));
-
-        $this->setExpectedException('Zend\Config\Exception\InvalidArgumentException', 'No filename was set');
-        $writer->write();
-    }
-
-    public function testNoConfigSet()
-    {
-        $writer = new Xml(array('filename' => $this->_tempName));
-
-        $this->setExpectedException('Zend\Config\Exception\InvalidArgumentException', 'No config was set');
-        $writer->write();
-    }
-
-    public function testFileNotWritable()
-    {
-        $writer = new Xml(array('config' => new Config(array()), 'filename' => '/../../../'));
-
-        $this->setExpectedException('Zend\Config\Exception\RuntimeException', 'Could not write to file');
-        $writer->write();
-    }
-
-    public function testWriteAndRead()
-    {
-        $config = new Config(array('default' => array('test' => 'foo')));
-
-        $writer = new Xml(array('config' => $config, 'filename' => $this->_tempName));
-        $writer->write();
-
-        $config = new XmlConfig($this->_tempName, null);
-
-        $this->assertEquals('foo', $config->default->test);
-    }
-
-    public function testNoSection()
-    {
-        $config = new Config(array('test' => 'foo', 'test2' => array('test3' => 'bar')));
-
-        $writer = new Xml(array('config' => $config, 'filename' => $this->_tempName));
-        $writer->write();
-
-        $config = new XmlConfig($this->_tempName, null);
-
-        $this->assertEquals('foo', $config->test);
-        $this->assertEquals('bar', $config->test2->test3);
-    }
-
-    public function testWriteAndReadOriginalFile()
-    {
-        $config = new XmlConfig(__DIR__ . '/files/allsections.xml', null, array('skipExtends' => true));
-
-        $writer = new Xml(array('config' => $config, 'filename' => $this->_tempName));
-        $writer->write();
-
-        $config = new XmlConfig($this->_tempName, null);
-        $this->assertEquals('multi', $config->staging->one->two->three);
-
-        $config = new XmlConfig($this->_tempName, null, array('skipExtends' => true));
-        $this->assertFalse(isset($config->staging->one));
-    }
-
-    public function testWriteAndReadSingleSection()
-    {
-        $config = new XmlConfig(__DIR__ . '/files/allsections.xml', 'staging', array('skipExtends' => true));
-
-        $writer = new Xml(array('config' => $config, 'filename' => $this->_tempName));
-        $writer->write();
-
-        $config = new XmlConfig($this->_tempName, null);
-
-        $this->assertEquals('staging', $config->staging->hostname);
-        $this->assertEquals('false', $config->staging->debug);
-        $this->assertEquals(null, @$config->production);
-    }
-
-    /**
-     * @group ZF-6773
-     */
-    public function testWriteMultidimensionalArrayWithNumericKeys()
-    {
-        $writer = new Xml;
-        $writer->write($this->_tempName, new Config(array(
-            'notification' => array(
-                'adress' => array(
-                    0 => array(
-                        'name' => 'Matthew',
-                        'mail' => 'matthew@example.com'
-                    ),
-                    1 => array(
-                        'name' => 'Thomas',
-                        'mail' => 'thomas@example.com'
-                    )
-                )
-            )
-        )));
-    }
-
-    public function testNumericArray()
-    {
-        $config = new Config(array('foo' => array('bar' => array(1 => 'a', 2 => 'b', 5 => 'c'))));
-
-        $writer = new Xml(array('config' => $config, 'filename' => $this->_tempName));
-        $writer->write();
-
-        $config = new XmlConfig($this->_tempName, null);
-
-        $this->assertEquals('a', $config->foo->bar->{0});
-        $this->assertEquals('b', $config->foo->bar->{1});
-        $this->assertEquals('c', $config->foo->bar->{2});
-    }
-
-    public function testMixedArrayFailure()
-    {
-        $config = new Config(array('foo' => array('bar' => array('a', 'b', 'c' => 'd'))));
-
-        $this->setExpectedException('Zend\Config\Exception\RuntimeException', 'Mixing of string and numeric keys is not allowed');
-        $writer = new Xml(array('config' => $config, 'filename' => $this->_tempName));
-        $writer->write();
-    }
-
-    public function testArgumentOverride()
-    {
-        $config = new Config(array('default' => array('test' => 'foo')));
-
-        $writer = new Xml();
-        $writer->write($this->_tempName, $config);
-
-        $config = new XmlConfig($this->_tempName, null);
-
-        $this->assertEquals('foo', $config->default->test);
-    }
-
-    /**
-     * @group ZF-8234
-     */
-    public function testRender()
+    public function testToString()
     {
         $config = new Config(array('test' => 'foo', 'bar' => array(0 => 'baz', 1 => 'foo')));
 
-        $writer = new Xml();
-        $configString = $writer->setConfig($config)->render();
+        $configString = $this->writer->toString($config);
 
         $expected = <<<ECS
-<?xml version="1.0"?>
-<zend-config xmlns:zf="http://framework.zend.com/xml/zend-config-xml/1.0/">
-  <test>foo</test>
-  <bar>baz</bar>
-  <bar>foo</bar>
+<?xml version="1.0" encoding="UTF-8"?>
+<zend-config>
+    <test>foo</test>
+    <bar>baz</bar>
+    <bar>foo</bar>
 </zend-config>
 
 ECS;
 
+        $this->assertEquals($expected, $configString);
+    }
+    
+    public function testSectionsToString()
+    {
+        $config = new Config(array(), true);
+        $config->production = array();
+
+        $config->production->webhost = 'www.example.com';
+        $config->production->database = array();
+        $config->production->database->params = array();
+        $config->production->database->params->host = 'localhost';
+        $config->production->database->params->username = 'production';
+        $config->production->database->params->password = 'secret';
+        $config->production->database->params->dbname = 'dbproduction';
+        
+        $configString = $this->writer->toString($config);
+        
+        $expected = <<<ECS
+<?xml version="1.0" encoding="UTF-8"?>
+<zend-config>
+    <production>
+        <webhost>www.example.com</webhost>
+        <database>
+            <params>
+                <host>localhost</host>
+                <username>production</username>
+                <password>secret</password>
+                <dbname>dbproduction</dbname>
+            </params>
+        </database>
+    </production>
+</zend-config>
+
+ECS;
+        
         $this->assertEquals($expected, $configString);
     }
 }

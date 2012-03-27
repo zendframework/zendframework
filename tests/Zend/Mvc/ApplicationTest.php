@@ -499,7 +499,7 @@ class ApplicationTest extends TestCase
         });
 
         $app->run();
-        $this->assertContains('404', $response->getContent());
+        $this->assertContains(Application::ERROR_CONTROLLER_NOT_FOUND, $response->getContent());
         $this->assertContains('bad', $response->getContent());
     }
 
@@ -523,7 +523,7 @@ class ApplicationTest extends TestCase
         });
 
         $app->run();
-        $this->assertContains('404', $response->getContent());
+        $this->assertContains(Application::ERROR_CONTROLLER_INVALID, $response->getContent());
         $this->assertContains('bad', $response->getContent());
         $this->assertContains('stdClass', $response->getContent());
     }
@@ -546,7 +546,7 @@ class ApplicationTest extends TestCase
         });
 
         $app->run();
-        $this->assertContains('404', $response->getContent());
+        $this->assertContains(Application::ERROR_ROUTER_NO_MATCH, $response->getContent());
     }
 
     /**
@@ -565,5 +565,87 @@ class ApplicationTest extends TestCase
 
         $result = $app->run();
         $this->assertSame($response, $result);
+    }
+
+    /**
+     * @group error-handling
+     */
+    public function testFailureForRouteToReturnRouteMatchShouldPopulateEventError()
+    {
+        $app    = $this->setupBadController();
+        $router = new Router\SimpleRouteStack();
+        $app->setRouter($router);
+
+        $response = $app->getResponse();
+        $events   = $app->events();
+        $events->attach('dispatch.error', function ($e) use ($response) {
+            $error      = $e->getError();
+            $response->setContent("Code: " . $error);
+            return $response;
+        });
+
+        $app->run();
+        $event = $app->getMvcEvent();
+        $this->assertEquals(Application::ERROR_ROUTER_NO_MATCH, $event->getError());
+    }
+
+    /**
+     * @group ZF2-171
+     */
+    public function testFinishShouldRunEvenIfRouteEventReturnsResponse()
+    {
+        $app      = new Application();
+        $response = $app->getResponse();
+        $events   = $app->events();
+        $events->attach('route', function($e) use ($response) {
+            return $response;
+        }, 100);
+
+        $token = new stdClass;
+        $events->attach('finish', function($e) use ($token) {
+            $token->foo = 'bar';
+        });
+
+        $app->run();
+        $this->assertTrue(isset($token->foo));
+        $this->assertEquals('bar',$token->foo);
+    }
+
+    /**
+     * @group ZF2-171
+     */
+    public function testFinishShouldRunEvenIfDispatchEventReturnsResponse()
+    {
+        $app      = new Application();
+        $response = $app->getResponse();
+        $events   = $app->events();
+        $events->clearListeners('route');
+        $events->attach('dispatch', function($e) use ($response) {
+            return $response;
+        }, 100);
+
+        $token = new stdClass;
+        $events->attach('finish', function($e) use ($token) {
+            $token->foo = 'bar';
+        });
+
+        $app->run();
+        $this->assertTrue(isset($token->foo));
+        $this->assertEquals('bar',$token->foo);
+    }
+
+    public function testApplicationShouldBeEventTargetAtFinishEvent()
+    {
+        $app = $this->setupActionController();
+
+        $events   = $app->events();
+        $response = $app->getResponse();
+        $events->attach('finish', function ($e) use ($response) {
+            $response->setContent("EventClass: " . get_class($e->getTarget()));
+            return $response;
+        });
+
+        $app->run();
+        $this->assertContains('Zend\Mvc\Application', $response->getContent());
     }
 }

@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_View
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -33,7 +33,7 @@ use Zend\View;
  * @category   Zend
  * @package    Zend_View
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_View
  * @group      Zend_View_Helper
@@ -242,5 +242,25 @@ class TranslateTest extends \PHPUnit_Framework_TestCase
     {
         $result = $this->helper->__invoke("test %1\$s", "100");
         $this->assertEquals('test 100', $result);
+    }
+
+    /**
+     * @group ZF2-140
+     */
+    public function testSetTranslatorWithTranslationAdapter()
+    {
+        $trans = new Translator\Adapter\ArrayAdapter(array('one' => 'eins', "two %1\$s" => "zwei %1\$s",
+            "three %1\$s %2\$s" => "drei %1\$s %2\$s", 'vier%ig' => 'four%'), 'de');
+        $this->helper->setTranslator($trans);
+    }
+
+    /**
+     * @group ZF2-140
+     */
+    public function testSetTranslatorWithTranslation()
+    {
+        $trans = new Translator\Translator('arrayAdapter', array('one' => 'eins', "two %1\$s" => "zwei %1\$s",
+            "three %1\$s %2\$s" => "drei %1\$s %2\$s", 'vier%ig' => 'four%'), 'de');
+        $this->helper->setTranslator($trans);
     }
 }

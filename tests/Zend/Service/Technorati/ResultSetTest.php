@@ -15,21 +15,26 @@
  * @category   Zend
  * @package    Zend_Service_Technorati
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
+/**
+ * @namespace
+ */
+namespace ZendTest\Service\Technorati;
+use Zend\Service\Technorati;
 
 /**
  * Test helper
  */
 
 /**
- * @see Zend_Service_Technorati_ResultSet
+ * @see Technorati\ResultSet
  */
 
 /**
- * @see Zend_Service_Technorati_SearchResultSet
+ * @see Technorati\SearchResultSet
  */
 
 
@@ -37,12 +42,12 @@
  * @category   Zend
  * @package    Zend_Service_Technorati
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Service
  * @group      Zend_Service_Technorati
  */
-class Zend_Service_Technorati_ResultSetTest extends Zend_Service_Technorati_TestCase
+class ResultSetTest extends TestCase
 {
     /**
      * Even if Zend_Service_Technorati_ResultSet is an abstract class
@@ -54,10 +59,10 @@ class Zend_Service_Technorati_ResultSetTest extends Zend_Service_Technorati_Test
      */
     public function setUp()
     {
-        $this->ref = new ReflectionClass('Zend_Service_Technorati_ResultSet');
+        $this->ref = new \ReflectionClass('Zend\Service\Technorati\ResultSet');
         $this->dom = self::getTestFileContentAsDom('TestSearchResultSet.xml');
-        $this->object = new Zend_Service_Technorati_SearchResultSet($this->dom);
-        $this->objectRef = new ReflectionObject($this->object);
+        $this->object = new Technorati\SearchResultSet($this->dom);
+        $this->objectRef = new \ReflectionObject($this->object);
     }
 
     public function testResultSetIsAbstract()
@@ -91,7 +96,7 @@ class Zend_Service_Technorati_ResultSetTest extends Zend_Service_Technorati_Test
         try {
             $this->object->seek(1000);
             $this->fail('Expected OutOfBoundsException not thrown');
-        } catch (OutOfBoundsException $e) {
+        } catch (\OutOfBoundsException $e) {
             $this->assertContains('Illegal index', $e->getMessage());
         }
     }

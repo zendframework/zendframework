@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_OAuth
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -26,7 +26,7 @@ namespace Zend\OAuth;
 /**
  * @category   Zend
  * @package    Zend_OAuth
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Http
@@ -171,11 +171,14 @@ class Http
         try {
             $response = $this->_attemptRequest($params);
         } catch (\Zend\Http\Client\Exception $e) {
-            throw new Exception('Error in HTTP request', null, $e);
+            throw new Exception(sprintf(
+                'Error in HTTP request: %s',
+                $e->getMessage()
+            ), null, $e);
         }
         if ($response !== null) {
             $body   = $response->getBody();
-            $status = $response->getStatus();
+            $status = $response->getStatusCode();
         }
         if ($response === null // Request failure/exception
             || $status == 500  // Internal Server Error
@@ -220,10 +223,10 @@ class Http
     {
         switch ($this->_preferredRequestScheme) {
             case OAuth::REQUEST_SCHEME_HEADER:
-                $this->_preferredRequestScheme = OAuth\OAuth::REQUEST_SCHEME_POSTBODY;
+                $this->_preferredRequestScheme = OAuth::REQUEST_SCHEME_POSTBODY;
                 break;
             case OAuth::REQUEST_SCHEME_POSTBODY:
-                $this->_preferredRequestScheme = OAuth\OAuth::REQUEST_SCHEME_QUERYSTRING;
+                $this->_preferredRequestScheme = OAuth::REQUEST_SCHEME_QUERYSTRING;
                 break;
             default:
                 throw new Exception(
@@ -257,5 +260,29 @@ class Http
                            . '"';
         }
         return implode(",", $headerValue);
+    }
+
+    /**
+     * Attempt a request based on the current configured OAuth Request Scheme and
+     * return the resulting HTTP Response.
+     *
+     * @param  array $params
+     * @return Zend\Http\Response
+     */
+    protected function _attemptRequest(array $params)
+    {
+        switch ($this->_preferredRequestScheme) {
+            case OAuth::REQUEST_SCHEME_HEADER:
+                $httpClient = $this->getRequestSchemeHeaderClient($params);
+                break;
+            case OAuth::REQUEST_SCHEME_POSTBODY:
+                $httpClient = $this->getRequestSchemePostBodyClient($params);
+                break;
+            case OAuth::REQUEST_SCHEME_QUERYSTRING:
+                $httpClient = $this->getRequestSchemeQueryStringClient($params,
+                    $this->_consumer->getRequestTokenUrl());
+                break;
+        }
+        return $httpClient->send();
     }
 }

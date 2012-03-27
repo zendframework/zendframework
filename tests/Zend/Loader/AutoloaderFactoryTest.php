@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Loader
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
@@ -29,7 +29,7 @@ use ReflectionClass,
  * @category   Zend
  * @package    Loader
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Loader
  */
@@ -79,6 +79,22 @@ class AutoloaderFactoryTest extends \PHPUnit_Framework_TestCase
         $map = $loader->getAutoloadMap();
         $this->assertTrue(is_array($map));
         $this->assertEquals(2, count($map));
+    }
+
+    /**
+     * This tests checks if invalid autoloaders cause exceptions
+     *
+     * @expectedException InvalidArgumentException
+     */
+    public function testFactoryCatchesInvalidClasses()
+    {
+        if (!version_compare(PHP_VERSION, '5.3.7', '>=')) {
+            $this->markTestSkipped('Cannot test invalid interface loader with versions less than 5.3.7');
+        }
+        include __DIR__ . '/_files/InvalidInterfaceAutoloader.php';
+        AutoloaderFactory::factory(array(
+            'InvalidInterfaceAutoloader' => array()            
+        ));
     }
 
     public function testFactoryDoesNotRegisterDuplicateAutoloaders()
@@ -173,5 +189,24 @@ class AutoloaderFactoryTest extends \PHPUnit_Framework_TestCase
         $reflection = new ReflectionClass('Zend\Loader\AutoloaderFactory');
         $constructor = $reflection->getConstructor();
         $this->assertNull($constructor);
+    }
+
+    public function testPassingNoArgumentsToFactoryInstantiatesAndRegistersStandardAutoloader()
+    {
+        AutoloaderFactory::factory();
+        $loaders = AutoloaderFactory::getRegisteredAutoloaders();
+        $this->assertEquals(1, count($loaders));
+        $loader = array_shift($loaders);
+        $this->assertInstanceOf('Zend\Loader\StandardAutoloader', $loader);
+
+        $test  = array($loader, 'autoload');
+        $found = false;
+        foreach (spl_autoload_functions() as $function) {
+            if ($function === $test) {
+                $found = true;
+                break;
+            }
+        }
+        $this->assertTrue($found, 'StandardAutoloader not registered with spl_autoload');
     }
 }

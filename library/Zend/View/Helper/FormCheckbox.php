@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_View
  * @subpackage Helper
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -31,7 +31,7 @@ namespace Zend\View\Helper;
  * @category   Zend
  * @package    Zend_View
  * @subpackage Helper
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class FormCheckbox extends FormElement
@@ -86,14 +86,15 @@ class FormCheckbox extends FormElement
         }
 
         // build the element
-        $xhtml = '';
+        $xhtml   = '';
+        $escaper = $this->view->plugin('escape');
         if (!$disable && !strstr($name, '[]')) {
             $xhtml = $this->_hidden($name, $checkedOptions['uncheckedValue']);
         }
         $xhtml .= '<input type="checkbox"'
-                . ' name="' . $this->view->vars()->escape($name) . '"'
-                . ' id="' . $this->view->vars()->escape($id) . '"'
-                . ' value="' . $this->view->vars()->escape($checkedOptions['checkedValue']) . '"'
+                . ' name="'  . $escaper($name)                           . '"'
+                . ' id="'    . $escaper($id)                             . '"'
+                . ' value="' . $escaper($checkedOptions['checkedValue']) . '"'
                 . $checkedOptions['checkedString']
                 . $disabled
                 . $this->_htmlAttribs($attribs)

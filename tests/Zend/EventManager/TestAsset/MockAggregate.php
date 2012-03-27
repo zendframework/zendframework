@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_EventManager
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -29,16 +29,19 @@ use Zend\EventManager\EventCollection,
  * @package    Zend_EventManager
  * @subpackage UnitTests
  * @group      Zend_EventManager
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class MockAggregate implements ListenerAggregate
 {
 
     protected $listeners = array();
+    public $priority;
 
-    public function attach(EventCollection $events)
+    public function attach(EventCollection $events, $priority = null)
     {
+        $this->priority = $priority;
+
         $listeners = array();
         $listeners[] = $events->attach('foo.bar', array( $this, 'fooBar' ));
         $listeners[] = $events->attach('foo.baz', array( $this, 'fooBaz' ));

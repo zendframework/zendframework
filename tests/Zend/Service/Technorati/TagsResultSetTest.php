@@ -15,17 +15,22 @@
  * @category   Zend
  * @package    Zend_Service_Technorati
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
+/**
+ * @namespace
+ */
+namespace ZendTest\Service\Technorati;
+use Zend\Service\Technorati;
 
 /**
  * Test helper
  */
 
 /**
- * @see Zend_Service_Technorati_TagsResultSet
+ * @see Technorati\TagsResultSet
  */
 
 
@@ -33,32 +38,27 @@
  * @category   Zend
  * @package    Zend_Service_Technorati
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Service
  * @group      Zend_Service_Technorati
  */
-class Zend_Service_Technorati_TagsResultSetTest extends Zend_Service_Technorati_TestCase
+class TagsResultSetTest extends TestCase
 {
     public function setUp()
     {
         $this->dom = self::getTestFileContentAsDom('TestTagsResultSet.xml');
-        $this->object = new Zend_Service_Technorati_TagsResultSet($this->dom);
+        $this->object = new Technorati\TagsResultSet($this->dom);
     }
 
     public function testConstruct()
     {
-        $this->_testConstruct('Zend_Service_Technorati_TagsResultSet', array($this->dom));
-    }
-
-    public function testConstructThrowsExceptionWithInvalidDom()
-    {
-        $this->_testConstructThrowsExceptionWithInvalidDom('Zend_Service_Technorati_TagsResultSet', 'DOMDocument');
+        $this->_testConstruct('Zend\Service\Technorati\TagsResultSet', array($this->dom));
     }
 
     public function testTagsResultSet()
     {
-        $object = new Zend_Service_Technorati_TagsResultSet($this->dom);
+        $object = new Technorati\TagsResultSet($this->dom);
 
         // check counts
         $this->assertInternalType('integer', $object->totalResults());
@@ -70,13 +70,13 @@ class Zend_Service_Technorati_TagsResultSetTest extends Zend_Service_Technorati_
     public function testTagsResultSetItemsInstanceOfResult()
     {
         $this->_testResultSetItemsInstanceOfResult(
-                    'Zend_Service_Technorati_TagsResultSet',
+                    'Zend\Service\Technorati\TagsResultSet',
                     array($this->dom),
-                    'Zend_Service_Technorati_TagsResult');
+                    'Zend\Service\Technorati\TagsResult');
     }
 
     public function testTagsResultSetSerialization()
     {
-        $this->_testResultSetSerialization(new Zend_Service_Technorati_TagsResultSet($this->dom));
+        $this->_testResultSetSerialization(new Technorati\TagsResultSet($this->dom));
     }
 }

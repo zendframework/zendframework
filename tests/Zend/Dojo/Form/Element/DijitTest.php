@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Dojo
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -34,7 +34,7 @@ use Zend\Dojo\Form\Element\TextBox as TextBoxElement,
  * @category   Zend
  * @package    Zend_Dojo
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Dojo
  * @group      Zend_Dojo_Form
@@ -59,7 +59,7 @@ class DijitTest extends \PHPUnit_Framework_TestCase
 
     public function getView()
     {
-        $view = new View\PhpRenderer();
+        $view = new View\Renderer\PhpRenderer();
         \Zend\Dojo\Dojo::enableView($view);
         return $view;
     }
@@ -119,7 +119,7 @@ class DijitTest extends \PHPUnit_Framework_TestCase
 
     public function testElementShouldDojoEnableViewObject()
     {
-        $this->element->setView(new View\PhpRenderer());
+        $this->element->setView(new View\Renderer\PhpRenderer());
         $view = $this->element->getView();
         
         $this->assertInstanceOf('Zend\Dojo\View\Helper\Dojo', $view->plugin('dojo'));

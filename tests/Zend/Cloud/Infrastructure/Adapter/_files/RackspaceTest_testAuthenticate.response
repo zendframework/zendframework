@@ -1,0 +1,11 @@
+HTTP/1.1 204 No Content
+Date: Wed, 11 May 2011 08:04:48 GMT
+Server: Apache/2.2.3 (Mosso Engineering)
+X-storage-url: https://storage101.ord1.clouddrive.com/v1/test
+X-storage-token: 0f0223cd-f157-4d04-bb2d-ccda1a5643af
+X-cdn-management-url: https://cdn2.clouddrive.com/v1/test
+X-auth-token: 0f0223cd-f157-4d04-bb2d-ccda1a5643af
+X-server-management-url: https://servers.api.rackspacecloud.com/v1.0/583924
+Content-length: 0
+Connection: close
+Content-type: application/octet-stream

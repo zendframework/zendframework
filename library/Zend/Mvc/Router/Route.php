@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Mvc_Router
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -27,39 +27,39 @@ use Zend\Stdlib\RequestDescription as Request;
 
 /**
  * Route interface.
- * 
+ *
  * @package    Zend_Mvc_Router
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 interface Route
 {
     /**
      * Priority used for route stacks.
-     * 
+     *
      * @var integer
      * public $priority;
      */
-    
+
     /**
      * Create a new route with given options.
-     * 
-     * @param  array|Traversable $options
+     *
+     * @param  array|\Traversable $options
      * @return void
      */
     public static function factory($options = array());
-    
+
     /**
      * Match a given request.
-     * 
+     *
      * @param  Request $request
      * @return RouteMatch
      */
     public function match(Request $request);
-    
+
     /**
      * Assemble the route.
-     * 
+     *
      * @param  array $params
      * @param  array $options
      * @return mixed

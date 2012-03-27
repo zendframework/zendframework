@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Session
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id:$
  */
@@ -23,6 +23,7 @@
 namespace ZendTest\Session;
 
 use Zend\Session\Container,
+    Zend\Session\Configuration\StandardConfiguration,
     Zend\Session\Manager,
     Zend\Session;
 
@@ -31,7 +32,7 @@ use Zend\Session\Container,
  * @package    Zend_Session
  * @subpackage UnitTests
  * @group      Zend_Session
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class ContainerTest extends \PHPUnit_Framework_TestCase
@@ -41,10 +42,12 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         $this->forceAutoloader();
         $_SESSION = array();
         Container::setDefaultManager(null);
-        $this->manager = $manager = new TestAsset\TestManager(array(
-            'class'   => 'Zend\\Session\\Configuration\\StandardConfiguration',
+
+        $config = new StandardConfiguration(array(
             'storage' => 'Zend\\Session\\Storage\\ArrayStorage',
         ));
+
+        $this->manager = $manager = new TestAsset\TestManager($config);
         $this->container = new Container('Default', $manager);
     }
 
@@ -185,10 +188,10 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
 
     public function testContainerAllowsInjectingManagerViaConstructor()
     {
-        $manager = new TestAsset\TestManager(array(
-            'class'   => 'Zend\\Session\\Configuration\\StandardConfiguration',
+        $config = new StandardConfiguration(array(
             'storage' => 'Zend\\Session\\Storage\\ArrayStorage',
         ));
+        $manager = new TestAsset\TestManager($config);
         $container = new Container('Foo', $manager);
         $this->assertSame($manager, $container->getManager());
     }

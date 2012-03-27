@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Dojo
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -33,7 +33,7 @@ use Zend\Dojo\View\Helper\Editor as EditorHelper,
  * @category   Zend
  * @package    Zend_Dojo
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Dojo
  * @group      Zend_Dojo_View
@@ -58,7 +58,7 @@ class EditorTest extends \PHPUnit_Framework_TestCase
 
     public function getView()
     {
-        $view = new View\PhpRenderer();
+        $view = new View\Renderer\PhpRenderer();
         \Zend\Dojo\Dojo::enableView($view);
         return $view;
     }
@@ -105,7 +105,7 @@ class EditorTest extends \PHPUnit_Framework_TestCase
         $plugins = array('copy', 'cut', 'paste');
         $html = $this->helper->__invoke('foo', '', array('plugins' => $plugins));
         $pluginsString = Json::encode($plugins);
-        $pluginsString = str_replace('"', "'", $pluginsString);
+        $pluginsString = str_replace('"', "&#039;", $pluginsString);
         $this->assertContains('plugins="' . $pluginsString . '"', $html);
     }
 
@@ -195,7 +195,7 @@ class EditorTest extends \PHPUnit_Framework_TestCase
         $extraPlugins = array('copy', 'cut', 'paste');
         $html = $this->helper->__invoke('foo', '', array('extraPlugins' => $extraPlugins));
         $pluginsString = Json::encode($extraPlugins);
-        $pluginsString = str_replace('"', "'", $pluginsString);
+        $pluginsString = str_replace('"', "&#039;", $pluginsString);
         $this->assertContains('extraPlugins="' . $pluginsString . '"', $html);
     }
 }

@@ -15,13 +15,14 @@
  * @category   Zend
  * @package    Zend_Date
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace ZendTest\Date;
 
-use Zend\Cache\Cache,
+use Zend\Cache\StorageFactory as CacheFactory,
+    Zend\Cache\Storage\Adapter as CacheAdapter,
     Zend\Date\Date,
     Zend\Date\Cities,
     Zend\Locale\Locale,
@@ -46,7 +47,7 @@ if (!defined('TESTS_ZEND_I18N_EXTENDED_COVERAGE')) {
  * @category   Zend
  * @package    Zend_Date
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Date
  */
@@ -66,10 +67,8 @@ class DateTest extends \PHPUnit_Framework_TestCase
     {
         $this->_originaltimezone = date_default_timezone_get();
         date_default_timezone_set('Indian/Maldives');
-        $this->_cache = Cache::factory('Core', 'File',
-                 array('lifetime' => 120, 'automatic_serialization' => true),
-                 array('cache_dir' => __DIR__ . '/../_files/'));
-        $this->_orig = Date::setOptions();
+        $this->_orig  = Date::setOptions();
+        $this->_cache = CacheFactory::adapterFactory('memory', array('memory_limit' => 0));
 
         Date::setOptions(array('cache' => $this->_cache));
         Date::setOptions(array('fix_dst' => true));
@@ -80,7 +79,7 @@ class DateTest extends \PHPUnit_Framework_TestCase
     public function tearDown()
     {
         Date::setOptions($this->_orig);
-        $this->_cache->clean(Cache::CLEANING_MODE_ALL);
+        $this->_cache->clear(CacheAdapter::MATCH_ALL);
         date_default_timezone_set($this->_originaltimezone);
     }
 
@@ -5234,10 +5233,8 @@ class DateTest extends \PHPUnit_Framework_TestCase
             // success
         }
 
-        $cache = Cache::factory('Core', 'File',
-                 array('lifetime' => 120, 'automatic_serialization' => true),
-                 array('cache_dir' => __DIR__ . '/../_files/'));
-        Date::setOptions(array('cache' => $cache));
+        $cache = CacheFactory::adapterFactory('memory', array('memory_limit' => 0));
+        Date\Date::setOptions(array('cache' => $cache));
     }
 
     public function testIsDate()

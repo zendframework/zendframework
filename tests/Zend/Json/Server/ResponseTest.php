@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_JSON_Server
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -32,7 +32,7 @@ use Zend\Json\Server,
  * @category   Zend
  * @package    Zend_JSON_Server
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_JSON
  * @group      Zend_JSON_Server
@@ -108,6 +108,25 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
         }
     }
 
+    public function testShouldBeAbleToLoadResponseFromJSONString()
+    {
+        $options = $this->getOptions();
+        $json    = Json\Json::encode($options);
+        $this->response->loadJSON($json);
+
+        $this->assertEquals('foobar', $this->response->getId());
+        $this->assertEquals($options['result'], $this->response->getResult());
+    }
+
+    public function testLoadingFromJSONShouldSetJSONRpcVersionWhenPresent()
+    {
+        $options = $this->getOptions();
+        $options['jsonrpc'] = '2.0';
+        $json    = Json\Json::encode($options);
+        $this->response->loadJSON($json);
+        $this->assertEquals('2.0', $this->response->getVersion());
+    }
+
     public function testResponseShouldBeAbleToCastToJSON()
     {
         $this->response->setResult(true)
@@ -164,5 +183,17 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue($test['result']);
         $this->assertEquals($this->response->getId(), $test['id']);
+    }
+
+    public function getOptions()
+    {
+        return array(
+            'result' => array(
+                5,
+                'four',
+                true,
+            ),
+            'id'  => 'foobar'
+        );
     }
 }

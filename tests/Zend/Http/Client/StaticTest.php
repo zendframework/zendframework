@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Http_Client
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -38,7 +38,7 @@ use \Zend\Uri\Http as UriHttp,
  * @category   Zend
  * @package    Zend_Http_Client
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Http
  * @group      Zend_Http_Client
@@ -48,7 +48,7 @@ class StaticTest extends \PHPUnit_Framework_TestCase
     /**
      * Common HTTP client
      *
-     * @var Zend_Http_Client
+     * @var \Zend\Http\Client
      */
     protected $_client = null;
 
@@ -499,6 +499,35 @@ class StaticTest extends \PHPUnit_Framework_TestCase
         $client = new HTTPClient($url, $config);
         $client->setMethod('GET');
         $result = $client->send();
+    }
+
+    /**
+     * Test sending cookie with encoded value
+     *
+     * @group fix-double-encoding-problem-about-cookie-value
+     */
+    public function testEncodedCookiesInRequestHeaders()
+    {
+        $this->_client->addCookie('foo', 'bar=baz');
+        $this->_client->send();
+        $cookieValue = 'Cookie: foo='.urlencode('bar=baz');
+        $this->assertContains($cookieValue, $this->_client->getLastRawRequest(),
+            'Request is expected to contain the entire cookie "keyname=encoded_value"');
+    }
+
+    /**
+     * Test sending cookie header with raw value
+     *
+     * @group fix-double-encoding-problem-about-cookie-value
+     */
+    public function testRawCookiesInRequestHeaders()
+    {
+        $this->_client->setConfig(array('encodecookies' => false));
+        $this->_client->addCookie('foo', 'bar=baz');
+        $this->_client->send();
+        $cookieValue = 'Cookie: foo=bar=baz';
+        $this->assertContains($cookieValue, $this->_client->getLastRawRequest(),
+            'Request is expected to contain the entire cookie "keyname=raw_value"');
     }
 
     /**

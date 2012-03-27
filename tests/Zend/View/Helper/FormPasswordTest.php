@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_View
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -32,7 +32,7 @@ namespace ZendTest\View\Helper;
  * @category   Zend
  * @package    Zend_View
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_View
  * @group      Zend_View_Helper
@@ -52,7 +52,7 @@ class FormPasswordTest extends \PHPUnit_Framework_TestCase
             $registry = \Zend\Registry::getInstance();
             unset($registry['Zend_View_Helper_Doctype']);
         }
-        $this->view = new \Zend\View\PhpRenderer();
+        $this->view = new \Zend\View\Renderer\PhpRenderer();
         $this->helper = new \Zend\View\Helper\FormPassword();
         $this->helper->setView($this->view);
     }

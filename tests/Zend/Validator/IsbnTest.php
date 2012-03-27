@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Validator
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -22,7 +22,8 @@
  * @namespace
  */
 namespace ZendTest\Validator;
-use Zend\Validator;
+use Zend\Validator,
+    ReflectionClass;
 
 
 /**
@@ -30,7 +31,7 @@ use Zend\Validator;
  * @package    Zend_Validator
  * @subpackage UnitTests
  * @group      Zend_Validator
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class IsbnTest extends \PHPUnit_Framework_TestCase
@@ -232,5 +233,41 @@ class IsbnTest extends \PHPUnit_Framework_TestCase
 
         $this->assertFalse($validator->isValid((float) 1.2345));
         $this->assertFalse($validator->isValid((object) 'Test'));
+    }
+    
+    public function testEqualsMessageTemplates()
+    {
+        $validator = new Validator\Isbn();
+        $reflection = new ReflectionClass($validator);
+        
+        if(!$reflection->hasProperty('_messageTemplates')) {
+            return;
+        }
+        
+        $property = $reflection->getProperty('_messageTemplates');
+        $property->setAccessible(true);
+
+        $this->assertEquals(
+            $property->getValue($validator),
+            $validator->getOption('messageTemplates')
+        );
+    }
+    
+    public function testEqualsMessageVariables()
+    {
+        $validator = new Validator\Isbn();
+        $reflection = new ReflectionClass($validator);
+        
+        if(!$reflection->hasProperty('_messageVariables')) {
+            return;
+        }
+        
+        $property = $reflection->getProperty('_messageVariables');
+        $property->setAccessible(true);
+
+        $this->assertEquals(
+            $property->getValue($validator),
+            $validator->getOption('messageVariables')
+        );
     }
 }

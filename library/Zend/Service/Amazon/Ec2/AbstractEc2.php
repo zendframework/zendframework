@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Service_Amazon
  * @subpackage Ec2
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -40,7 +40,7 @@ use Zend\Service\Amazon,
  * @category   Zend
  * @package    Zend_Service_Amazon
  * @subpackage Ec2
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class AbstractEc2 extends Amazon\AbstractAmazon
@@ -159,10 +159,10 @@ abstract class AbstractEc2 extends Amazon\AbstractAmazon
             ));
 
             $request->setUri($url);
-            $request->setMethod(\Zend\Http\Client::POST);
+            $request->setMethod('POST');
             $request->setParameterPost($params);
 
-            $httpResponse = $request->request();
+            $httpResponse = $request->send();
 
 
         } catch (\Zend\Http\Client\Exception $zhce) {

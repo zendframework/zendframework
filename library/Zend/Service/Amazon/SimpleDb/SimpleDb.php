@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Service_Amazon
  * @subpackage SimpleDb
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -32,7 +32,7 @@ use Zend\Crypt,
  * @category   Zend
  * @package    Zend_Service_Amazon
  * @subpackage SimpleDb
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class SimpleDb extends \Zend\Service\Amazon\AbstractAmazon
@@ -327,7 +327,7 @@ class SimpleDb extends \Zend\Service\Amazon\AbstractAmazon
 	    $params['Action']     = 'CreateDomain';
 	    $params['DomainName'] = $domainName;
         $response             = $this->_sendRequest($params);
-        return $response->getHttpResponse()->isSuccessful();
+        return $response->getHttpResponse()->isSuccess();
     }
 
     /**
@@ -441,12 +441,15 @@ class SimpleDb extends \Zend\Service\Amazon\AbstractAmazon
 
 
             $request->setUri($this->getEndpoint());
-            $request->setMethod(Http\Client::POST);
+            $request->setMethod('POST');
+            $request->setParameterPost($params);
+            /*
             foreach ($params as $key => $value) {
                 $params_out[] = rawurlencode($key)."=".rawurlencode($value);
             }
             $request->setRawData(implode('&', $params_out), Http\Client::ENC_URLENCODED);
-            $httpResponse = $request->request();
+             */
+            $httpResponse = $request->send();
         } catch (Http\Client\Exception $zhce) {
             $message = 'Error in request to AWS service: ' . $zhce->getMessage();
             throw new Exception\RuntimeException($message, $zhce->getCode(), $zhce);

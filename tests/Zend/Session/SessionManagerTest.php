@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Session
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id:$
  */
@@ -31,7 +31,7 @@ use Zend\Session\SessionManager,
  * @package    Zend_Session
  * @subpackage UnitTests
  * @group      Zend_Session
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class SessionManagerTest extends \PHPUnit_Framework_TestCase
@@ -96,61 +96,6 @@ class SessionManagerTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($config, $manager->getConfig());
     }
 
-    public function testPassingUnknownStringClassForConfigurationRaisesException()
-    {
-        $this->setExpectedException('Zend\Session\Exception\InvalidArgumentException', 'Configuration class provided is invalid; not found');
-        $manager = new SessionManager('foobarbazbat');
-    }
-
-    public function testPassingInvalidStringClassForConfigurationRaisesException()
-    {
-        $this->setExpectedException('Zend\Session\Exception\InvalidArgumentException', 'Configuration type provided is invalid; must implement Zend\Session\Configuration');
-        $manager = new SessionManager('Zend\Session\Storage\ArrayStorage');
-    }
-
-    public function testPassingValidStringClassForConfigurationInstantiatesThatConfiguration()
-    {
-        $manager = new SessionManager('Zend\\Session\\Configuration\\StandardConfiguration');
-        $config = $manager->getConfig();
-        $this->assertTrue($config instanceof Session\Configuration\StandardConfiguration);
-    }
-
-    public function testPassingValidStringClassInClassKeyOfArrayConfigurationInstantiatesThatConfiguration()
-    {
-        $manager = new SessionManager(array('class' => 'Zend\\Session\\Configuration\\StandardConfiguration'));
-        $config = $manager->getConfig();
-        $this->assertTrue($config instanceof Session\Configuration\StandardConfiguration);
-    }
-
-    public function testPassingInvalidStringClassInClassKeyOfArrayConfigurationRaisesException()
-    {
-        $this->setExpectedException('Zend\Session\Exception\InvalidArgumentException', 'Class provided for configuration is invalid; not found');
-        $manager = new SessionManager(array('class' => 'foobarbaz'));
-    }
-
-    public function testPassingValidStringClassInClassKeyOfArrayConfigurationInstantiatesThatConfigurationWithOptionsProvided()
-    {
-        $manager = new SessionManager(array(
-            'class'     => 'Zend\\Session\\Configuration\\StandardConfiguration',
-            'save_path' => __DIR__,
-        ));
-        $config = $manager->getConfig();
-        $this->assertTrue($config instanceof Session\Configuration\StandardConfiguration);
-        $this->assertEquals(__DIR__, $config->getSavePath());
-    }
-
-    public function testPassingZendConfigObjectForConfigurationInstantiatesThatConfiguration()
-    {
-        $config = new \Zend\Config\Config(array(
-            'class'     => 'Zend\\Session\\Configuration\\StandardConfiguration',
-            'save_path' => __DIR__,
-        ));
-        $manager = new SessionManager($config);
-        $config = $manager->getConfig();
-        $this->assertTrue($config instanceof Session\Configuration\StandardConfiguration);
-        $this->assertEquals(__DIR__, $config->getSavePath());
-    }
-
     public function testManagerUsesSessionStorageByDefault()
     {
         $storage = $this->manager->getStorage();
@@ -164,28 +109,11 @@ class SessionManagerTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($storage, $manager->getStorage());
     }
 
-    public function testCanPassStringStorageNameToConstructor()
+    public function testCanPassSaveHandlerToConstructor()
     {
-        $manager = new SessionManager(null, 'Zend\\Session\\Storage\\ArrayStorage');
-        $storage = $manager->getStorage();
-        $this->assertTrue($storage instanceof Session\Storage\ArrayStorage);
-    }
-
-    public function testCanPassStorageClassToConfigurationOptions()
-    {
-        $manager = new SessionManager(array('storage' => 'Zend\\Session\\Storage\\ArrayStorage'));
-        $storage = $manager->getStorage();
-        $this->assertTrue($storage instanceof Session\Storage\ArrayStorage);
-    }
-
-    public function testPassingStorageViaParamOverridesStorageInConfig()
-    {
-        $storage = new Session\Storage\ArrayStorage();
-        $manager = new TestAsset\TestManager(array(
-            'class'   => 'Zend\\Session\\Configuration\\StandardConfiguration',
-            'storage' => 'Zend\\Session\\Storage\\SessionStorage',
-        ), $storage);
-        $this->assertSame($storage, $manager->getStorage());
+        $saveHandler = new TestAsset\TestSaveHandler();
+        $manager = new SessionManager(null, null, $saveHandler);
+        $this->assertSame($saveHandler, $manager->getSaveHandler());
     }
 
     // Session-related functionality

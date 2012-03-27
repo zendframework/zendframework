@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Feed
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -29,7 +29,7 @@ use Zend\Feed\Reader;
  * @category   Zend
  * @package    Zend_Feed
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Feed
  * @group      Zend_Feed_Reader
@@ -289,8 +289,12 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
         try {
             $currClient = Reader\Reader::getHttpClient();
 
+            $response = new \Zend\Http\Response;
+            $response->setContent('<!DOCTYPE html><html><head><link rel="alternate" type="application/rss+xml" href="../test.rss"><link rel="alternate" type="application/atom+xml" href="/test.atom"></head><body></body></html>');
+            $response->setStatusCode(200);
+            
             $testAdapter = new \Zend\Http\Client\Adapter\Test();
-            $testAdapter->setResponse(new \Zend\Http\Response(200, array(), '<!DOCTYPE html><html><head><link rel="alternate" type="application/rss+xml" href="../test.rss"><link rel="alternate" type="application/atom+xml" href="/test.atom"></head><body></body></html>'));
+            $testAdapter->setResponse($response);
             Reader\Reader::setHttpClient(new \Zend\Http\Client(null, array('adapter' => $testAdapter)));
 
             $links = Reader\Reader::findFeedLinks('http://foo/bar');

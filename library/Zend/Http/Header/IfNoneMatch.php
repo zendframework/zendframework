@@ -13,16 +13,16 @@ class IfNoneMatch implements HeaderDescription
     {
         $header = new static();
 
-        list($name, $value) = preg_split('#: #', $headerLine, 2);
+        list($name, $value) = explode(': ', $headerLine, 2);
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'if-none-match') {
-            throw new Exception\InvalidArgumentException('Invalid header line for If-None-Match string');
+            throw new Exception\InvalidArgumentException('Invalid header line for If-None-Match string: "' . $name . '"');
         }
 
         // @todo implementation details
-        $header->value= $value;
-        
+        $header->value = $value;
+
         return $header;
     }
 
@@ -40,5 +40,5 @@ class IfNoneMatch implements HeaderDescription
     {
         return 'If-None-Match: ' . $this->getFieldValue();
     }
-    
+
 }

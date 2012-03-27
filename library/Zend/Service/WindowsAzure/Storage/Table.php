@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Service_WindowsAzure
  * @subpackage Storage
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -36,7 +36,7 @@
  * @category   Zend
  * @package    Zend_Service_WindowsAzure
  * @subpackage Storage
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Service_WindowsAzure_Storage_Table
@@ -132,7 +132,7 @@ class Zend_Service_WindowsAzure_Storage_Table
 		    }
 		    
 			// More tables?
-		    if (!is_null($response->getHeader('x-ms-continuation-NextTableName'))) {
+		    if ($response->getHeader('x-ms-continuation-NextTableName') !== null) {
 		        $returnValue = array_merge($returnValue, $this->listTables($response->getHeader('x-ms-continuation-NextTableName')));
 		    }
 
@@ -548,7 +548,7 @@ class Zend_Service_WindowsAzure_Storage_Table
 		    }
 
 			// More entities?
-		    if (!is_null($response->getHeader('x-ms-continuation-NextPartitionKey')) && !is_null($response->getHeader('x-ms-continuation-NextRowKey'))) {
+		    if ($response->getHeader('x-ms-continuation-NextPartitionKey') !== null && $response->getHeader('x-ms-continuation-NextRowKey') !== null) {
 		        if (strpos($queryString, '$top') === false) {
 		            $returnValue = array_merge($returnValue, $this->retrieveEntities($tableName, $filter, $entityClass, $response->getHeader('x-ms-continuation-NextPartitionKey'), $response->getHeader('x-ms-continuation-NextRowKey')));
 		        }

@@ -25,7 +25,7 @@
 namespace Zend\Mvc\Router\Http;
 
 use Traversable,
-    Zend\Stdlib\IteratorToArray,
+    Zend\Stdlib\ArrayUtils,
     Zend\Stdlib\RequestDescription as Request,
     Zend\Mvc\Router\Exception;
 
@@ -42,7 +42,7 @@ class Regex implements Route
 {
     /**
      * Regex to match.
-     * 
+     *
      * @var string
      */
     protected $regex;
@@ -58,24 +58,24 @@ class Regex implements Route
      * Specification for URL assembly.
      *
      * Parameters accepting subsitutions should be denoted as "%key%"
-     * 
+     *
      * @var string
      */
     protected $spec;
-    
+
     /**
      * List of assembled parameters.
-     * 
+     *
      * @var array
      */
     protected $assembledParams = array();
-    
+
     /**
      * Create a new regex route.
-     * 
+     *
      * @param  string $regex
      * @param  string $spec
-     * @param  array  $defaults 
+     * @param  array  $defaults
      * @return void
      */
     public function __construct($regex, $spec, array $defaults = array())
@@ -84,18 +84,19 @@ class Regex implements Route
         $this->spec     = $spec;
         $this->defaults = $defaults;
     }
-    
+
     /**
      * factory(): defined by Route interface.
      *
      * @see    Route::factory()
-     * @param  array|Traversable $options
+     * @param  array|\Traversable $options
+     * @throws \Zend\Mvc\Router\Exception\InvalidArgumentException
      * @return void
      */
     public static function factory($options = array())
     {
         if ($options instanceof Traversable) {
-            $options = IteratorToArray::convert($options);
+            $options = ArrayUtils::iteratorToArray($options);
         } elseif (!is_array($options)) {
             throw new Exception\InvalidArgumentException(__METHOD__ . ' expects an array or Traversable set of options');
         }
@@ -103,7 +104,7 @@ class Regex implements Route
         if (!isset($options['regex'])) {
             throw new Exception\InvalidArgumentException('Missing "regex" in options array');
         }
-        
+
         if (!isset($options['spec'])) {
             throw new Exception\InvalidArgumentException('Missing "spec" in options array');
         }
@@ -140,7 +141,7 @@ class Regex implements Route
         if (!$result) {
             return null;
         }
-        
+
         $matchedLength = strlen($matches[0]);
 
         foreach ($matches as $key => $value) {
@@ -167,23 +168,23 @@ class Regex implements Route
         $url                   = $this->spec;
         $mergedParams          = array_merge($this->defaults, $params);
         $this->assembledParams = array();
-        
+
         foreach ($mergedParams as $key => $value) {
             $spec = '%' . $key . '%';
-            
+
             if (strpos($url, $spec) !== false) {
                 $url = str_replace($spec, urlencode($value), $url);
-                
+
                 $this->assembledParams[] = $key;
             }
         }
-        
+
         return $url;
     }
-    
+
     /**
      * getAssembledParams(): defined by Route interface.
-     * 
+     *
      * @see    Route::getAssembledParams
      * @return array
      */

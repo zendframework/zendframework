@@ -15,29 +15,24 @@
  * @category   Zend
  * @package    Zend_Soap
  * @subpackage Client
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Soap;
+
+use Zend\Server\Client as ServerClient;
 
 /**
  * \Zend\Soap\Client\Client
  *
- * @uses       \Zend\Soap\Client\Common
- * @uses       \Zend\Soap\Client\Exception
- * @uses       \Zend\Soap\Client\Local
- * @uses       \Zend\Soap\Server
  * @category   Zend
  * @package    Zend_Soap
  * @subpackage Client
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Client
+class Client implements ServerClient
 {
     /**
      * Encoding
@@ -1101,6 +1096,17 @@ class Client
         return $this->_preProcessResult($result);
     }
 
+    /**
+     * Send an RPC request to the service for a specific method.
+     *
+     * @param  string $method Name of the method we want to call.
+     * @param  array $params List of parameters for the method.
+     * @return mixed Returned results.
+     */
+    public function call($method, $params = array())
+    {
+        return call_user_func_array(array($this, '__call'), $params);
+    }
 
     /**
      * Return a list of available functions

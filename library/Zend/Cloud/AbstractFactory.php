@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend\Cloud
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -22,14 +22,13 @@
  * @namespace
  */
 namespace Zend\Cloud;
-use Zend\Config;
 
 /**
- * Abstract factory for Zend_Cloud resources
+ * Abstract factory for Zend\Cloud resources
  *
  * @category   Zend
  * @package    Zend\Cloud
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class AbstractFactory
@@ -48,12 +47,12 @@ class AbstractFactory
      * Get an individual adapter instance
      *
      * @param  string $adapterOption
-     * @param  array|Zend_Config $options
-     * @return null|Zend_Cloud_DocumentService_Adapter|Zend_Cloud_QueueService_Adapter|Zend_Cloud_StorageService_Adapter
+     * @param  array|Zend\Config $options
+     * @return null|DocumentService\Adapter|QueueService\Adapter|StorageService\Adapter|Infrastructure\Adapter
      */
     protected static function _getAdapter($adapterOption, $options)
     {
-        if ($options instanceof Config) {
+        if ($options instanceof \Zend\Config\Config) {
             $options = $options->toArray();
         }
 
@@ -63,12 +62,7 @@ class AbstractFactory
 
         $classname = $options[$adapterOption];
         unset($options[$adapterOption]);
-        /*
-        if (!class_exists($classname)) {
-            require_once 'Zend/Loader.php';
-            Zend_Loader::loadClass($classname);
-        }
-        */
+
         return new $classname($options);
     }
 }

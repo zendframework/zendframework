@@ -3,7 +3,8 @@
 namespace Zend\Docbook;
 
 use Zend\Filter\Word\CamelCaseToDash as CamelCaseToDashFilter,
-    Zend\Reflection\ReflectionMethod;
+    Zend\Code\Reflection\MethodReflection,
+    Zend\Code\Reflection\DocBlockReflection;
 
 class ClassMethod
 {
@@ -59,18 +60,18 @@ class ClassMethod
 
     /**
      * Constructor
-     * 
-     * @param  ReflectionMethod $reflection 
+     *
+     * @param  ReflectionMethod $reflection
      * @return void
      */
-    public function __construct(ReflectionMethod $reflection)
+    public function __construct(MethodReflection $reflection)
     {
         $this->reflection = $reflection;
     }
 
     /**
      * Retrieve method name
-     * 
+     *
      * @return string
      */
     public function getName()
@@ -80,7 +81,7 @@ class ClassMethod
 
     /**
      * Get normalized method identifier
-     * 
+     *
      * @return string
      */
     public function getId()
@@ -98,7 +99,7 @@ class ClassMethod
         foreach (explode('\\', $namespace) as $segment) {
             $id .= $filter->filter($segment) . '.';
         }
-        $id .= $filter->filter($class) 
+        $id .= $filter->filter($class)
             . '.methods.'
             . $filter->filter($name);
 
@@ -108,32 +109,45 @@ class ClassMethod
 
     /**
      * Retrieve method short description
-     * 
+     *
      * @return string
      */
     public function getShortDescription()
     {
-        return $this->reflection->getDocblock()->getShortDescription();
+        $rDocblock = $this->reflection->getDocblock();
+        if ($rDocblock instanceof DocBlockReflection) {
+            return $rDocblock->getShortDescription();
+        }
+        return '';
     }
 
     /**
      * Retrieve method long description
-     * 
+     *
      * @return string
      */
     public function getLongDescription()
     {
-        return $this->reflection->getDocblock()->getLongDescription();
+        $rDocblock = $this->reflection->getDocblock();
+        if ($rDocblock instanceof DocBlockReflection) {
+            return $rDocblock->getLongDescription();
+        }
+        return '';
     }
 
     /**
      * Retrieve method return type
-     * 
+     *
      * @return string
      */
     public function getReturnType()
     {
-        $return = $this->reflection->getDocblock()->getTag('return');
+        $rDocblock = $this->reflection->getDocblock();
+        if (!$rDocblock instanceof DocBlockReflection) {
+            return 'void';
+        }
+
+        $return = $rDocblock->getTag('return');
 
         if (!$return) {
             return 'void';
@@ -144,14 +158,14 @@ class ClassMethod
 
     /**
      * Return method argument prototype
-     * 
+     *
      * @return string
      */
     public function getPrototype()
     {
         $params = array();
 
-        $reflectionParams = $this->getParameterAnnotations();
+        $reflectionParams = $this->getParameterTags();
 
         foreach ($this->reflection->getParameters() as $index => $param) {
             $types = '';
@@ -180,8 +194,8 @@ class ClassMethod
 
     /**
      * Resolve the types provided via an @param or @return annotation
-     * 
-     * @param  string $value 
+     *
+     * @param  string $value
      * @return string
      */
     protected function resolveTypes($value)
@@ -189,86 +203,25 @@ class ClassMethod
         $values = explode('|', trim($value));
         array_walk($values, 'trim');
 
+        $nameInformation = new \Zend\Code\NameInformation(
+            $this->getNamespace(),
+            $this->getUses()
+        );
+
         foreach ($values as $index => $value) {
             // Is it an internal type?
             if (in_array(strtolower($value), $this->internalTypes)) {
                 continue;
             }
-
-            // Does it match the class name?
-            if ($value == $this->getClass()) {
-                $values[$index] = $this->getNamespace() . '\\' . $value;
-                continue;
-            }
-
-            // Does it contain a namespace separator?
-            $pos = strpos($value, '\\');
-            if (false !== $pos) {
-                // Does it lead with a namespace separator?
-                if (0 === $pos) {
-                    $values[$index] = substr($value, 1);
-                    continue;
-                }
-
-                // Resolve class based on uses
-                $namespace = substr($value, 0, $pos);
-                $resolved  = $this->resolveClass($namespace);
-                if (false !== $resolved) {
-                    $values[$index] = $resolved . '\\' . substr($value, $pos);
-                    continue;
-                }
-
-                // Must be from current namespace
-                $values[$index] = $this->getNamespace() . '\\' . $value;
-                continue;
-            }
-
-            // Can we resolve it via an import?
-            $resolved = $this->resolveClass($value);
-            if (false !== $resolved) {
-                $values[$index] = $resolved;
-                continue;
-            }
-
-            // Otherwise, use as-is
+            $values[$index] = $nameInformation->resolveName($value);
         }
 
         return implode('|', $values);
     }
 
     /**
-     * Attempt to resolve a class or namespace based on imports
-     * 
-     * @param  string $class 
-     * @return false|string False if unmatched, string namespace/classname on match
-     */
-    protected function resolveClass($class)
-    {
-        $uses = $this->getUses();
-
-        foreach ($uses as $use) {
-            $namespace = $use['namespace'];
-
-            if (!empty($use['as'])) {
-                $as = $use['as'];
-            } else {
-                $as = $use['asResolved'];
-            }
-
-            if ($as && $class == $as) {
-                return $namespace;
-            }
-            if ($class == $namespace) {
-                return $namespace;
-            }
-        }
-
-        return false;
-    }
-
-    /**
      * Get the namespace of the class containing this method
-     * 
+     *
      * @return string
      */
     protected function getNamespace()
@@ -284,7 +237,7 @@ class ClassMethod
 
     /**
      * Get the class containing this method, without the leading namespace
-     * 
+     *
      * @return string
      */
     protected function getClass()
@@ -294,21 +247,15 @@ class ClassMethod
         }
 
         $r = $this->reflection->getDeclaringClass();
-
-        $class     = $r->getName();
-        $namespace = $r->getNamespaceName();
-
-        $class = substr($class, strlen($namespace) + 1);
-
-        $this->class     = $class;
-        $this->namespace = $namespace;
+        $this->class     = $r->getShortName();
+        $this->namespace = $r->getNamespaceName();
 
         return $this->class;
     }
 
     /**
      * Get import statements and aliases from the class containing this method
-     * 
+     *
      * @return array
      */
     protected function getUses()
@@ -321,22 +268,27 @@ class ClassMethod
         $rFile  = $rClass->getDeclaringFile();
 
         $this->uses = $rFile->getUses();
+
         return $this->uses;
     }
 
     /**
      * Get parameter annotations from docblock
-     * 
+     *
      * @return array
      */
-    protected function getParameterAnnotations()
+    protected function getParameterTags()
     {
         if (null !== $this->parameterAnnotations) {
             return $this->parameterAnnotations;
         }
 
         $rDocblock = $this->reflection->getDocblock();
-        $params    = $rDocblock->getTags('param');
+        if ($rDocblock instanceof DocBlockReflection) {
+            $params    = $rDocblock->getTags('param');
+        } else {
+            $params = array();
+        }
 
         $this->parameterAnnotations = $params;
         return $this->parameterAnnotations;

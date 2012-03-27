@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Dojo
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -30,7 +30,7 @@ use Zend\Dojo\Form\Form as DojoForm,
  * @category   Zend
  * @package    Zend_Dojo
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Dojo
  * @group      Zend_Dojo_Form
@@ -48,7 +48,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
         $this->form = new DojoForm();
         $this->form->addElement('TextBox', 'foo')
                    ->addDisplayGroup(array('foo'), 'dg')
-                   ->setView(new View\PhpRenderer());
+                   ->setView(new View\Renderer\PhpRenderer());
     }
 
     public function testDojoFormDecoratorPathShouldBeRegisteredByDefault()
@@ -93,7 +93,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
 
     public function testDisplayGroupShouldRegisterDojoViewHelper()
     {
-        $this->form->dg->setView(new View\PhpRenderer());
+        $this->form->dg->setView(new View\Renderer\PhpRenderer());
         $view   = $this->form->dg->getView();
         $this->assertInstanceOf('Zend\Dojo\View\Helper\Dojo', $view->plugin('dojo'));
     }

@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Form
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -27,9 +27,9 @@ use Traversable,
     Zend\Loader\PluginLoader,
     Zend\Loader\PrefixPathMapper,
     Zend\Config\Config,
-    Zend\Stdlib\IteratorToArray,
+    Zend\Stdlib\ArrayUtils,
     Zend\Translator,
-    Zend\View\PhpRenderer,
+    Zend\View\Renderer\PhpRenderer,
     Zend\View\Renderer as View;
 
 /**
@@ -37,7 +37,7 @@ use Traversable,
  *
  * @category   Zend
  * @package    Zend_Form
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class DisplayGroup implements \Iterator,\Countable
@@ -133,7 +133,7 @@ class DisplayGroup implements \Iterator,\Countable
         $this->setPluginLoader($loader);
 
         if ($options instanceof Traversable) {
-            $options = IteratorToArray::convert($options);
+            $options = ArrayUtils::iteratorToArray($options);
         }
         if (is_array($options)) {
             $this->setOptions($options);

@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.file-options">
+    <info>
+        <title>Zend\Mail\Transport\FileOptions</title>
+    </info>
+
+    <section xml:id="zend.mail.file-options.intro">
+        <info>
+            <title>Overview</title>
+        </info>
+
+        <para>
+            This document details the various options available to the
+            <classname>Zend\Mail\Transport\File</classname> mail transport.
+        </para>
+    </section>
+
+    <section xml:id="zend.mail.file-options.quick-start">
+        <info>
+            <title>Quick Start</title>
+        </info>
+
+        <example xml:id="zend.mail.file-options.quick-start.usage">
+            <info><title>File Transport Usage</title></info>
+
+            <programlisting language="php"><![CDATA[
+use Zend\Mail\Transport\File as FileTransport,
+    Zend\Mail\Transport\FileOptions;
+
+// Setup SMTP transport using LOGIN authentication
+$transport = new FileTransport();
+$options   = new FileOptions(array(
+    'path'              => 'data/mail/',
+    'callback'  => function (FileTransport $transport) {
+        return 'Message_' . microtime(true) . '_' . mt_rand() . '.txt';
+    },
+));
+$transport->setOptions($options);
+]]></programlisting>
+        </example>
+    </section>
+
+    <section xml:id="zend.mail.file-options.options">
+        <info>
+            <title>Configuration Options</title>
+        </info>
+
+        <variablelist>
+            <title>Configuration Options</title>
+
+            <varlistentry xml:id="zend.mail.file-options.options.path">
+                <term>path</term>
+
+                <listitem>
+                    <para>The path under which mail files will be written.</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.mail.file-options.options.callback">
+                <term>callback</term>
+
+                <listitem>
+                    <para>
+                        A PHP callable to be invoked in order to generate a unique name for a
+                        message file. By default, the following is used:
+                    </para>
+
+                    <programlisting language="php"><![CDATA[
+function (Zend\Mail\FileTransport $transport) {
+    return 'ZendMail_' . time() . '_' . mt_rand() . '.tmp';
+}
+]]></programlisting>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+    </section>
+
+    <section xml:id="zend.mail.file-options.methods">
+        <info>
+            <title>Available Methods</title>
+        </info>
+
+        <para>
+            <classname>Zend\Mail\Transport\FileOptions</classname> extends
+            <classname>Zend\Stdlib\Options</classname>, and inherits all functionality from that
+            class; this includes <classname>ArrayAccess</classname> and property overloading.
+            Additionally, the following explicit setters and getters are provided.
+        </para>
+
+        <variablelist>
+            <varlistentry xml:id="zend.mail.file-options.methods.set-path">
+                <term>__construct</term>
+
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>setPath</methodname>
+                        <methodparam>
+                            <funcparams>string $path</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+
+                    <para>Set the path under which mail files will be written.</para>
+
+                    <para>Implements fluent interface.</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.mail.file-options.methods.get-path">
+                <term>getPath</term>
+
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>getPath</methodname>
+                        <void/>
+                    </methodsynopsis>
+
+                    <para>Get the path under which mail files will be written.</para>
+
+                    <para>Returns string</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.mail.file-options.methods.set-callback">
+                <term>setCallback</term>
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>setCallback</methodname>
+                        <methodparam>
+                            <funcparams>Callable $callback</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+
+                    <para>Set the callback used to generate unique filenames for messages.</para>
+
+                    <para>Implements fluent interface.</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.mail.file-options.methods.get-callback">
+                <term>getCallback</term>
+
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>getCallback</methodname>
+                        <void/>
+                    </methodsynopsis>
+
+                    <para>Get the callback used to generate unique filenames for messages.</para>
+
+                    <para>Returns PHP callable argument.</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.mail.file-options.methods.__construct">
+                <term>__construct</term>
+
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>__construct</methodname>
+                        <methodparam>
+                            <funcparams>null|array|Traversable $config</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+
+                    <para>
+                        Initialize the object. Allows passing a PHP array or
+                        <classname>Traversable</classname> object with which to populate the
+                        instance.
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+    </section>
+
+    <section xml:id="zend.mail.file-options.examples">
+        <info>
+            <title>Examples</title>
+        </info>
+
+        <para>
+            Please see the <link linkend="zend.mail.file-options.quick-start">Quick Start</link> for
+            examples.
+        </para>
+    </section>
+</section>

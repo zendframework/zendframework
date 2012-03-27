@@ -42,6 +42,12 @@ class RegexTest extends TestCase
                 0,
                 array('foo' => 'bar')
             ),
+            'url-encoded-parameters-are-decoded' => array(
+                new Regex('/(?<foo>[^/]+)', '/%foo%'),
+                '/foo+bar',
+                null,
+                array('foo' => 'foo bar')
+            ),
         );
     }
 
@@ -116,7 +122,7 @@ class RegexTest extends TestCase
     {
         $tester = new FactoryTester($this);
         $tester->testFactory(
-            '\Zend\Mvc\Router\Http\Regex',
+            'Zend\Mvc\Router\Http\Regex',
             array(
                 'regex' => 'Missing "regex" in options array',
                 'spec'  => 'Missing "spec" in options array'

@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Ldap
  * @subpackage Schema
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -25,19 +25,19 @@
 namespace Zend\Ldap\Node;
 
 use Zend\Ldap;
-use Zend\Ldap\Node\RootDSE;
+use Zend\Ldap\Node\RootDse;
 
 /**
  * Zend_Ldap_Node_Schema provides a simple data-container for the Schema node.
  *
  * @uses       \Zend\Ldap\Node\AbstractNode
- * @uses       \Zend\Ldap\Node\RootDSE\RootDSE
- * @uses       \Zend\Ldap\Node\RootDSE\ActiveDirectory
+ * @uses       \Zend\Ldap\Node\RootDse\RootDse
+ * @uses       \Zend\Ldap\Node\RootDse\ActiveDirectory
  * @uses       \Zend\Ldap\Node\Schema\ActiveDirectory
  * @category   Zend
  * @package    Zend_Ldap
  * @subpackage Schema
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Schema extends AbstractNode
@@ -59,11 +59,11 @@ class Schema extends AbstractNode
         $dn = $ldap->getRootDse()->getSchemaDn();
         $data = $ldap->getEntry($dn, array('*', '+'), true);
         switch ($ldap->getRootDse()->getServerType()) {
-            case RootDSE::SERVER_TYPE_ACTIVEDIRECTORY:
+            case RootDse::SERVER_TYPE_ACTIVEDIRECTORY:
                 return new Schema\ActiveDirectory($dn, $data, $ldap);
-            case RootDSE::SERVER_TYPE_OPENLDAP:
+            case RootDse::SERVER_TYPE_OPENLDAP:
                 return new Schema\OpenLdap($dn, $data, $ldap);
-            case RootDSE::SERVER_TYPE_EDIRECTORY:
+            case RootDse::SERVER_TYPE_EDIRECTORY:
             default:
                 return new self($dn, $data, $ldap);
         }

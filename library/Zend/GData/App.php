@@ -16,7 +16,7 @@
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage App
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -26,6 +26,7 @@
 namespace Zend\GData;
 
 use Zend\Http,
+    Zend\Http\Header\Etag,
     Zend\Uri;
 
 /**
@@ -36,7 +37,7 @@ use Zend\Http,
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage App
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class App
@@ -163,7 +164,7 @@ class App
         // needed once a given service supports a new version.
         $this->applyDefaults();
     }
-    
+
     /**
      * Applys defaults to the Gdata object.
      * We may want to fire off multiple requests with different protocol versions
@@ -247,7 +248,7 @@ class App
         }
         $userAgent = $applicationId . ' Zend_Framework_Gdata/' .
             \Zend\Version::VERSION;
-        $client->setHeaders(array('User-Agent' => $userAgent));
+        $client->getRequest()->headers()->addHeaderLine('User-Agent', $userAgent);
         $client->setConfig(array(
             'strictredirects' => true
             )
@@ -587,7 +588,7 @@ class App
         if ($headers === null) {
             $headers = array();
         }
-        
+
         // Append a Gdata version header if protocol v2 or higher is in use.
         // (Protocol v1 does not use this header.)
         $major = $this->getMajorProtocolVersion();
@@ -608,14 +609,14 @@ class App
             throw new App\InvalidArgumentException(
                 'You must specify an URI to which to post.');
         }
-        $headers['Content-Type'] = $contentType;
+        //$headers['Content-Type'] = $contentType;
         if (self::getGzipEnabled()) {
             // some services require the word 'gzip' to be in the user-agent
             // header in addition to the accept-encoding header
-            if (strpos($this->_httpClient->getHeader('User-Agent'),
+            if (strpos($this->_httpClient->headers()->get('User-Agent'),
                 'gzip') === false) {
                 $headers['User-Agent'] =
-                    $this->_httpClient->getHeader('User-Agent') . ' (gzip)';
+                    $this->_httpClient->headers()->get('User-Agent') . ' (gzip)';
             }
             $headers['Accept-encoding'] = 'gzip, deflate';
         } else {
@@ -634,7 +635,7 @@ class App
         preg_match("/^(.*?)(\?.*)?$/", $url, $matches);
         $this->_httpClient->setUri($matches[1]);
         $queryArray = $urlObj->getQueryAsArray();
-        foreach ($queryArray as $name => $value) { 
+        foreach ($queryArray as $name => $value) {
           $this->_httpClient->setParameterGet($name, $value);
         }
 
@@ -674,9 +675,9 @@ class App
             }
             throw new App\HttpException($e->getMessage(), $e);
         }
-        if ($response->isRedirect() && $response->getStatus() != '304') {
+        if ($response->isRedirect() && $response->getStatusCode() != '304') {
             if ($remainingRedirects > 0) {
-                $newUrl = $response->getHeader('Location');
+                $newUrl = $response->headers()->get('Location');
                 $response = $this->performHttpRequest(
                     $method, $newUrl, $headers, $body,
                     $contentType, $remainingRedirects);
@@ -695,10 +696,10 @@ class App
             $exception->setResponse($response);
             throw $exception;
         }
-        
+
         //Apply defaults in case of later requests.
         $this->applyDefaults();
-        
+
         return $response;
     }
 
@@ -756,10 +757,11 @@ class App
             return $feedContent;
         }
 
-        $protocolVersionStr = $response->getHeader('GData-Version');
+        $header = $response->headers()->get('GData-Version');
         $majorProtocolVersion = null;
         $minorProtocolVersion = null;
-        if ($protocolVersionStr !== null) {
+        if ($header instanceof Http\Header\HeaderDescription) {
+            $protocolVersionStr = $header->getFieldValue();
             // Extract protocol major and minor version from header
             $delimiterPos = strpos($protocolVersionStr, '.');
             $length = strlen($protocolVersionStr);
@@ -774,8 +776,8 @@ class App
         if ($this->getHttpClient() != null) {
             $feed->setHttpClient($this->getHttpClient());
         }
-        $etag = $response->getHeader('ETag');
-        if ($etag !== null) {
+        $etag = $response->headers()->get('ETag');
+        if ($etag instanceof Etag) {
             $feed->setEtag($etag);
         }
         return $feed;
@@ -962,7 +964,7 @@ class App
         $returnEntry->setHttpClient(self::getstaticHttpClient());
 
         $etag = $response->headers()->get('ETag');
-        if ($etag !== null) {
+        if ($etag instanceof Etag) {
             $returnEntry->setEtag($etag);
         }
 
@@ -1000,8 +1002,8 @@ class App
         $returnEntry = new $className($response->getBody());
         $returnEntry->setHttpClient(self::getstaticHttpClient());
 
-        $etag = $response->getHeader('ETag');
-        if ($etag !== null) {
+        $etag = $response->headers()->get('ETag');
+        if ($etag instanceof Etag) {
             $returnEntry->setEtag($etag);
         }
 
@@ -1171,16 +1173,20 @@ class App
      */
     public function generateIfMatchHeaderData($data, $allowWeek)
     {
-        $result = '';
+        $result = null;
         // Set an If-Match header if an ETag has been set (version >= 2 only)
-        if ($this->_majorProtocolVersion >= 2 &&
-                $data instanceof App\Entry) {
+        if ($this->_majorProtocolVersion >= 2 && $data instanceof App\Entry) {
             $etag = $data->getEtag();
-            if (($etag !== null) &&
-                    ($allowWeek || substr($etag, 0, 2) != 'W/')) {
-                $result = $data->getEtag();
+            if ($etag instanceof Etag) {
+                $etag = $etag->getFieldValue();
+                if (!empty($etag) 
+                    && ($allowWeek || (substr($etag, 0, 2) != 'W/'))
+                ) {
+                    $result = $etag;
+                }
             }
         }
+
         return $result;
     }
 

@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Feed_Pubsubhubbub
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -29,7 +29,7 @@ use Zend\Date,
 /**
  * @category   Zend
  * @package    Zend_Feed_Pubsubhubbub
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Subscriber
@@ -715,7 +715,7 @@ class Subscriber
             $params['hub.callback'] = rtrim($this->getCallbackUrl(), '/')
                 . '/' . PubSubHubbub::urlencode($key);
         }
-        if ($mode == 'subscribe' && !is_null($this->getLeaseSeconds())) {
+        if ($mode == 'subscribe' && $this->getLeaseSeconds() !== null) {
             $params['hub.lease_seconds'] = $this->getLeaseSeconds();
         }
 

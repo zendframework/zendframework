@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Validator_File
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -32,7 +32,7 @@ use Zend\Validator;
  * @category   Zend
  * @package    Zend_Validator_File
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Validator
  */
@@ -153,7 +153,7 @@ class MimeTypeTest extends \PHPUnit_Framework_TestCase
             $this->assertEquals($magic, $mimetype);
         }
 
-        $this->setExpectedException('Zend\Validator\Exception\InvalidArgumentException', 'can not be');
+        $this->setExpectedException('Zend\Validator\Exception\InvalidArgumentException', 'could not be');
         $validator->setMagicFile('/unknown/magic/file');
     }
 
@@ -163,7 +163,7 @@ class MimeTypeTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped('This PHP Version has no finfo installed');
         }
 
-        $this->setExpectedException('Zend\Validator\Exception\InvalidArgumentException', 'The given magicfile is not accepted by finfo');
+        $this->setExpectedException('Zend\Validator\Exception\InvalidArgumentException', 'could not be used by ext/finfo');
         $validator = new File\MimeType(array('image/gif', 'magicFile' => __FILE__));
     }
 

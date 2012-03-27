@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Locale
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -24,13 +24,14 @@ namespace ZendTest\Locale\Data;
 use Zend\Locale\Data\Cldr,
     Zend\Locale\Exception\InvalidArgumentException,
     Zend\Locale\Locale,
-    Zend\Cache\Cache;
+    Zend\Cache\StorageFactory as CacheFactory,
+    Zend\Cache\Storage\Adapter as CacheAdapter;
 
 /**
  * @category   Zend
  * @package    Zend_Locale
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Locale
  */
@@ -41,18 +42,17 @@ class CldrTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->_cache = Cache::factory('Core', 'File',
-                 array('lifetime' => 1, 'automatic_serialization' => true),
-                 array('cache_dir' => __DIR__ . '/../../_files/'));
+        $this->_cache = CacheFactory::adapterFactory('memory', array('memory_limit' => 0));
         Cldr::setCache($this->_cache);
     }
 
 
     public function tearDown()
     {
-        $this->_cache->clean(Cache::CLEANING_MODE_ALL);
+        $this->_cache->clear(CacheAdapter::MATCH_ALL);
     }
-
+    
+    
     /**
      * test for reading with standard locale
      * expected array
@@ -71,8 +71,8 @@ class CldrTest extends \PHPUnit_Framework_TestCase
         $locale = new Locale('de');
         $this->assertTrue(is_array(Cldr::getDisplayLanguage($locale)));
     }
-
-
+    
+    
     /**
      * test for reading without type
      * expected empty array
@@ -107,6 +107,18 @@ class CldrTest extends \PHPUnit_Framework_TestCase
 
         $value = Cldr::getDisplayLanguage('de', false, 'de');
         $this->assertEquals('Deutsch', $value);
+    }
+    
+    /**
+     * test for reading the territorylist in different
+     * languages
+     */
+    public function testTerritoryLanguage()
+    {
+        $this->assertNotEquals(
+            Cldr::getDisplayTerritory('de'),
+            Cldr::getDisplayTerritory('en')
+        );
     }
 
     /**

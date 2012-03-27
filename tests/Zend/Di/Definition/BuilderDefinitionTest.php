@@ -4,6 +4,7 @@ namespace ZendTest\Di\Definition;
 
 use Zend\Di\Definition\BuilderDefinition,
     Zend\Di\Definition\Builder,
+    Zend\Config\Factory as ConfigFactory,
     PHPUnit_Framework_TestCase as TestCase;
 
 class BuilderDefinitionTest extends TestCase
@@ -36,13 +37,16 @@ class BuilderDefinitionTest extends TestCase
         $this->assertTrue($definition->hasMethods('Foo'));
         $this->assertTrue($definition->hasMethod('Foo', 'injectBar'));
         $this->assertContains('injectBar', $definition->getMethods('Foo'));
-        $this->assertEquals(array('bar' => 'Bar'), $definition->getMethodParameters('Foo', 'injectBar'));
+        $this->assertEquals(
+            array('Foo::injectBar:0' => array('bar', 'Bar', true)),
+            $definition->getMethodParameters('Foo', 'injectBar')
+        );
     }
     
     public function testBuilderCanBuildFromArray()
     {
-        $ini = new \Zend\Config\Ini(__DIR__ . '/../_files/sample.ini', 'section-b');
-        $iniAsArray = $ini->toArray();
+        $ini = ConfigFactory::fromFile(__DIR__ . '/../_files/sample.ini');
+        $iniAsArray = $ini['section-b'];
         $definitionArray = $iniAsArray['di']['definitions'][1];
         unset($definitionArray['class']);
         
@@ -52,23 +56,26 @@ class BuilderDefinitionTest extends TestCase
         $this->assertTrue($definition->hasClass('My\DbAdapter'));
         $this->assertEquals('__construct', $definition->getInstantiator('My\DbAdapter'));
         $this->assertEquals(
-            array('username' => null, 'password' => null),
+            array(
+                'My\DbAdapter::__construct:0' => array('username', null, true),
+                'My\DbAdapter::__construct:1' => array('password', null, true)
+            ),
             $definition->getMethodParameters('My\DbAdapter', '__construct')
-            );
+        );
         
         $this->assertTrue($definition->hasClass('My\Mapper'));
         $this->assertEquals('__construct', $definition->getInstantiator('My\Mapper'));
         $this->assertEquals(
-            array('dbAdapter' => 'My\DbAdapter'),
+            array('My\Mapper::__construct:0' => array('dbAdapter', 'My\DbAdapter', true)),
             $definition->getMethodParameters('My\Mapper', '__construct')
-            );
+        );
         
         $this->assertTrue($definition->hasClass('My\Repository'));
         $this->assertEquals('__construct', $definition->getInstantiator('My\Repository'));
         $this->assertEquals(
-            array('mapper' => 'My\Mapper'),
+            array('My\Repository::__construct:0' => array('mapper', 'My\Mapper', true)),
             $definition->getMethodParameters('My\Repository', '__construct')
-            );
+        );
         
     }
 
@@ -94,8 +101,14 @@ class BuilderDefinitionTest extends TestCase
         $this->assertTrue($builder->hasMethod('Foo', 'setBar'));
         $this->assertTrue($builder->hasMethod('Foo', 'setConfig'));
 
-        $this->assertEquals(array('bar' => 'Bar'), $builder->getMethodParameters('Foo', 'setBar'));
-        $this->assertEquals(array('config' => null), $builder->getMethodParameters('Foo', 'setConfig'));
+        $this->assertEquals(
+            array('Foo::setBar:0' => array('bar', 'Bar', true)),
+            $builder->getMethodParameters('Foo', 'setBar')
+        );
+        $this->assertEquals(
+            array('Foo::setConfig:0' => array('config', null, true)),
+            $builder->getMethodParameters('Foo', 'setConfig')
+        );
     }
 
     public function testBuilderCanSpecifyClassToUseWithCreateClass()

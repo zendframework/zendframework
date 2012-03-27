@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Http
  * @subpackage Response
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -34,7 +34,7 @@ use Zend\Http\Response;
  * @uses       \Zend\Http\Response
  * @package    Zend_Http
  * @subpackage Response
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Stream extends Response
@@ -132,12 +132,12 @@ class Stream extends Response
     public static function fromStream($response_str, $stream)
     {
         $response= new static();
-        
+
         $response::fromString($response_str);
         if (is_resource($stream)) {
             $response->setStream($stream);
         }
-        
+
         return $response;
     }
 
@@ -190,11 +190,7 @@ class Stream extends Response
             return '';
         }
 
-        if(isset($headers['content-length'])) {
-            $this->body = stream_get_contents($this->stream, $headers['content-length']);
-        } else {
-            $this->body = stream_get_contents($this->stream);
-        }
+        $this->body = stream_get_contents($this->stream);
         fclose($this->stream);
         $this->stream = null;
     }

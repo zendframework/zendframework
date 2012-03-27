@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Validator
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -37,7 +37,7 @@ namespace Zend\Validator;
  * @uses       \Zend\Validator\Ip
  * @category   Zend
  * @package    Zend_Validator
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Hostname extends AbstractValidator
@@ -110,7 +110,7 @@ class Hostname extends AbstractValidator
         'sm', 'sn', 'so', 'sr', 'st', 'su', 'sv', 'sy', 'sz', 'tc', 'td', 'tel', 'tf', 'tg', 'th',
         'tj', 'tk', 'tl', 'tm', 'tn', 'to', 'tp', 'tr', 'travel', 'tt', 'tv', 'tw', 'tz', 'ua',
         'ug', 'uk', 'um', 'us', 'uy', 'uz', 'va', 'vc', 've', 'vg', 'vi', 'vn', 'vu', 'wf', 'ws',
-        'ye', 'yt', 'yu', 'za', 'zm', 'zw'
+        'xxx', 'ye', 'yt', 'yu', 'za', 'zm', 'zw'
     );
 
     /**

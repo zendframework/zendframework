@@ -13,9 +13,9 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_LDAP
+ * @package    Zend_Ldap
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -29,17 +29,17 @@ use Zend\Ldap;
  * Test helper
  */
 /**
- * Zend_LDAP_Dn
+ * Zend_Ldap_Dn
  */
 
 /**
  * @category   Zend
- * @package    Zend_LDAP
+ * @package    Zend_Ldap
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_LDAP
- * @group      Zend_LDAP_Dn
+ * @group      Zend_Ldap
+ * @group      Zend_Ldap_Dn
  */
 class ModificationTest extends \PHPUnit_Framework_TestCase
 {
@@ -54,19 +54,19 @@ class ModificationTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(array('dc' => 'com'), $dn->get(3));
         try {
             $this->assertEquals(array('dc' => 'com'), $dn->get('string'));
-            $this->fail('Expected Zend_LDAP_Exception not thrown');
+            $this->fail('Expected Zend_Ldap_Exception not thrown');
         } catch (Ldap\Exception $e) {
             $this->assertEquals('Parameter $index must be an integer', $e->getMessage());
         }
         try {
             $this->assertEquals(array('cn' => 'Baker, Alice'), $dn->get(-1));
-            $this->fail('Expected Zend_LDAP_Exception not thrown');
+            $this->fail('Expected Zend_Ldap_Exception not thrown');
         } catch (Ldap\Exception $e) {
             $this->assertEquals('Parameter $index out of bounds', $e->getMessage());
         }
         try {
             $this->assertEquals(array('dc' => 'com'), $dn->get(4));
-            $this->fail('Expected Zend_LDAP_Exception not thrown');
+            $this->fail('Expected Zend_Ldap_Exception not thrown');
         } catch (Ldap\Exception $e) {
             $this->assertEquals('Parameter $index out of bounds', $e->getMessage());
         }
@@ -138,13 +138,13 @@ class ModificationTest extends \PHPUnit_Framework_TestCase
 
         try {
             $dn->set(4, array('dc' => 'de'));
-            $this->fail('Expected Zend_LDAP_Exception not thrown');
+            $this->fail('Expected Zend_Ldap_Exception not thrown');
         } catch (Ldap\Exception $e) {
             $this->assertEquals('Parameter $index out of bounds', $e->getMessage());
         }
         try {
             $dn->set(3, array('dc' => 'de', 'ou'));
-            $this->fail('Expected Zend_LDAP_Exception not thrown');
+            $this->fail('Expected Zend_Ldap_Exception not thrown');
         } catch (Ldap\Exception $e) {
             $this->assertEquals('RDN Array is malformed: it must use string keys', $e->getMessage());
         }
@@ -170,7 +170,7 @@ class ModificationTest extends \PHPUnit_Framework_TestCase
         try {
             $dn=Ldap\Dn::fromString($dnString);
             $dn->remove(4);
-            $this->fail('Expected Zend_LDAP_Exception not thrown');
+            $this->fail('Expected Zend_Ldap_Exception not thrown');
         } catch (Ldap\Exception $e) {
             $this->assertEquals('Parameter $index out of bounds', $e->getMessage());
         }
@@ -201,13 +201,13 @@ class ModificationTest extends \PHPUnit_Framework_TestCase
 
         try {
             $dn->append(array('dc' => 'de', 'ou'));
-            $this->fail('Expected Zend_LDAP_Exception not thrown');
+            $this->fail('Expected Zend_Ldap_Exception not thrown');
         } catch (Ldap\Exception $e) {
             $this->assertEquals('RDN Array is malformed: it must use string keys', $e->getMessage());
         }
         try {
             $dn->prepend(array('dc' => 'de', 'ou'));
-            $this->fail('Expected Zend_LDAP_Exception not thrown');
+            $this->fail('Expected Zend_Ldap_Exception not thrown');
         } catch (Ldap\Exception $e) {
             $this->assertEquals('RDN Array is malformed: it must use string keys', $e->getMessage());
         }
@@ -236,14 +236,14 @@ class ModificationTest extends \PHPUnit_Framework_TestCase
         try {
             $dn=Ldap\Dn::fromString($dnString);
             $dn->insert(4, array('dc' => 'de'));
-            $this->fail('Expected Zend_LDAP_Exception not thrown');
+            $this->fail('Expected Zend_Ldap_Exception not thrown');
         } catch (Ldap\Exception $e) {
             $this->assertEquals('Parameter $index out of bounds', $e->getMessage());
         }
         try {
             $dn=Ldap\Dn::fromString($dnString);
             $dn->insert(3, array('dc' => 'de', 'ou'));
-            $this->fail('Expected Zend_LDAP_Exception not thrown');
+            $this->fail('Expected Zend_Ldap_Exception not thrown');
         } catch (Ldap\Exception $e) {
             $this->assertEquals('RDN Array is malformed: it must use string keys', $e->getMessage());
         }

@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Http
  * @subpackage Cookie
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -57,11 +57,11 @@ class Cookie extends ArrayObject implements HeaderDescription
     {
         $header = new static();
 
-        list($name, $value) = preg_split('#: #', $headerLine, 2);
+        list($name, $value) = explode(': ', $headerLine, 2);
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'cookie') {
-            throw new Exception\InvalidArgumentException('Invalid header line for Server string');
+            throw new Exception\InvalidArgumentException('Invalid header line for Server string: "' . $name . '"');
         }
 
         $nvPairs = preg_split('#;\s*#', $value);

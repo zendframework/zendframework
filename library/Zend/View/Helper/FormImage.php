@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_View
  * @subpackage Helper
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -30,7 +30,7 @@ namespace Zend\View\Helper;
  * @category   Zend
  * @package    Zend_View
  * @subpackage Helper
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class FormImage extends FormElement
@@ -56,17 +56,18 @@ class FormImage extends FormElement
         extract($info); // name, value, attribs, options, listsep, disable
 
         // Determine if we should use the value or the src attribute
+        $escaper = $this->view->plugin('escape');
         if (isset($attribs['src'])) {
-            $src = ' src="' . $this->view->vars()->escape($attribs['src']) . '"';
+            $src = ' src="' . $escaper($attribs['src']) . '"';
             unset($attribs['src']);
         } else {
-            $src = ' src="' . $this->view->vars()->escape($value) . '"';
+            $src = ' src="' . $escaper($value) . '"';
             unset($value);
         }
 
         // Do we have a value?
         if (isset($value) && !empty($value)) {
-            $value = ' value="' . $this->view->vars()->escape($value) . '"';
+            $value = ' value="' . $escaper($value) . '"';
         } else {
             $value = '';
         }
@@ -85,8 +86,8 @@ class FormImage extends FormElement
 
         // build the element
         $xhtml = '<input type="image"'
-                . ' name="' . $this->view->vars()->escape($name) . '"'
-                . ' id="' . $this->view->vars()->escape($id) . '"'
+                . ' name="' . $escaper($name) . '"'
+                . ' id="'   . $escaper($id)   . '"'
                 . $src
                 . $value
                 . $disabled

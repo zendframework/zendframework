@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Paginator
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -25,19 +25,21 @@
 namespace ZendTest\Paginator;
 
 use PHPUnit_Framework_TestCase as TestCase,
-    Zend\Paginator,
-    Zend\View\Helper,
-    Zend\View,
+    Zend\Cache\StorageFactory as CacheFactory,
+    Zend\Cache\Storage\Adapter as CacheAdapter,
     Zend\Config,
+    Zend\Paginator,
     Zend\Paginator\Adapter,
-    Zend\Paginator\Exception;
+    Zend\Paginator\Exception,
+    Zend\View,
+    Zend\View\Helper;
 
 
 /**
  * @category   Zend
  * @package    Zend_Paginator
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Paginator
  */
@@ -75,13 +77,10 @@ class PaginatorTest extends TestCase
         $this->_testCollection = range(1, 101);
         $this->_paginator = Paginator\Paginator::factory($this->_testCollection);
 
-        $this->_config = new Config\Xml(__DIR__ . '/_files/config.xml');
+        $this->_config = Config\Factory::fromFile(__DIR__ . '/_files/config.xml', true);
 
-        $fO = array('lifetime' => 3600, 'automatic_serialization' => true);
-        $bO = array('cache_dir'=> $this->_getTmpDir());
-
-        $this->_cache = \Zend\Cache\Cache::factory('Core', 'File', $fO, $bO);
-
+        $this->_cache = CacheFactory::adapterFactory('memory', array('memory_limit' => 0));
+        $this->_cache->clear(CacheAdapter::MATCH_ALL);
         Paginator\Paginator::setCache($this->_cache);
 
         $this->_restorePaginatorDefaults();
@@ -89,6 +88,10 @@ class PaginatorTest extends TestCase
 
     protected function tearDown()
     {
+        if ($this->_cache) {
+            $this->_cache->clear(CacheAdapter::MATCH_ALL);
+            $this->_cache = null;
+        }
         $this->_dbConn = null;
         $this->_testCollection = null;
         $this->_paginator = null;
@@ -97,10 +100,9 @@ class PaginatorTest extends TestCase
     protected function _getTmpDir()
     {
         $tmpDir = rtrim(sys_get_temp_dir(), '/\\') . DIRECTORY_SEPARATOR . 'zend_paginator';
-        if (file_exists($tmpDir)) {
-            $this->_rmDirRecursive($tmpDir);
+        if (!is_dir($tmpDir)) {
+            mkdir($tmpDir);
         }
-        mkdir($tmpDir);
         $this->cacheDir = $tmpDir;
         return $tmpDir;
     }
@@ -136,7 +138,7 @@ class PaginatorTest extends TestCase
 
         Paginator\Paginator::setScrollingStyleBroker(new Paginator\ScrollingStyleBroker());
 
-        $this->_cache->clean();
+        $this->_cache->clear(CacheAdapter::MATCH_ALL);
         $this->_paginator->setCacheEnabled(true);
     }
 
@@ -277,14 +279,14 @@ class PaginatorTest extends TestCase
      */
     public function testRendersWithoutPartial()
     {
-        $this->_paginator->setView(new View\PhpRenderer());
+        $this->_paginator->setView(new View\Renderer\PhpRenderer());
         $string = @$this->_paginator->__toString();
         $this->assertEquals('', $string);
     }
 
     public function testRendersWithPartial()
     {
-        $view = new View\PhpRenderer();
+        $view = new View\Renderer\PhpRenderer();
         $view->resolver()->addPath(__DIR__ . '/_files/scripts');
 
         Helper\PaginationControl::setDefaultViewPartial('partial.phtml');
@@ -518,14 +520,14 @@ class PaginatorTest extends TestCase
 
     public function testGetsAndSetsView()
     {
-        $this->_paginator->setView(new View\PhpRenderer());
+        $this->_paginator->setView(new View\Renderer\PhpRenderer());
         $this->assertInstanceOf('Zend\\View\\Renderer', $this->_paginator->getView());
     }
 
     public function testRenders()
     {
         $this->setExpectedException('Zend\\View\\Exception', 'view partial');
-        $this->_paginator->render(new View\PhpRenderer());
+        $this->_paginator->render(new View\Renderer\PhpRenderer());
     }
 
     public function testGetsAndSetsPageRange()
@@ -656,15 +658,16 @@ class PaginatorTest extends TestCase
         $pageItems = $this->_paginator->setItemCountPerPage(8)->setCurrentPageNumber(3)->getCurrentItems();
 
         $pageItems = $this->_paginator->getPageItemCache();
-        $expected = array(3 => new \ArrayIterator(range(17, 24)));
-        $this->assertEquals($expected, $pageItems);
+        $expected = /*array(3 => */ new \ArrayIterator(range(17, 24)) /*) */;
+        $this->assertEquals($expected, $pageItems[3]);
 
         // get back to already cached data
         $this->_paginator->setItemCountPerPage(5);
         $pageItems = $this->_paginator->getPageItemCache();
         $expected =array(1 => new \ArrayIterator(range(1, 5)),
                          2 => new \ArrayIterator(range(6, 10)));
-        $this->assertEquals($expected, $pageItems);
+        $this->assertEquals($expected[1], $pageItems[1]);
+        $this->assertEquals($expected[2], $pageItems[2]);
     }
 
     public function testToJson()

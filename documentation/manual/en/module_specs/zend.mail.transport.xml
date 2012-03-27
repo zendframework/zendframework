@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section 
+    xmlns="http://docbook.org/ns/docbook" 
+    version="5.0"
+    xml:id="zend.mail.transport">
+    <info>
+        <title>Zend\Mail\Transport</title>
+    </info>
+
+    <section xml:id="zend.mail.transport.intro">
+        <info>
+            <title>Overview</title>
+        </info>
+
+        <para>
+            Transports take care of the actual delivery of mail. Typically, you only need to worry
+            about two possibilities: using PHP's native <methodname>mail()</methodname>
+            functionality, which uses system resources to deliver mail, or using the
+            <acronym>SMTP</acronym> protocol for delivering mail via a remote server. Zend Framework
+            also includes a "File" transport, which creates a mail file for each message sent; these
+            can later be introspected as logs or consumed for the purposes of sending via an
+            alternate transport mechanism later.
+        </para>
+
+        <para>
+            The <classname>Zend\Mail\Transport</classname> interface defines exactly one method,
+            <methodname>send()</methodname>. This method accepts a <classname
+                linkend="zend.mail.message">Zend\Mail\Message</classname> instance, which it then
+            introspects and serializes in order to send.
+        </para>
+    </section>
+
+    <section xml:id="zend.mail.transport.quick-start">
+        <info>
+            <title>Quick Start</title>
+        </info>
+
+        <para>
+            Using a mail transport is typically as simple as instantiating it, optionally
+            configuring it, and then passing a message to it.
+        </para>
+
+        <example xml:id="zend.mail.transport.quick-start.sendmail-usage">
+            <info><title>Sendmail Transport Usage</title></info>
+
+            <programlisting language="php"><![CDATA[
+use Zend\Mail\Message,
+    Zend\Mail\Transport\Sendmail as SendmailTransport;
+
+$message = new Message();
+$message->addTo('matthew@zend.com')
+        ->addFrom('ralph.schindler@zend.com')
+        ->setSubject('Greetings and Salutations!')
+        ->setBody("Sorry, I'm going to be late today!");
+
+$transport = new SendmailTransport();
+$transport->send($message);
+]]></programlisting>
+        </example>
+
+        <example xml:id="zend.mail.transport.quick-start.smtp-usage">
+            <info><title>SMTP Transport Usage</title></info>
+
+            <programlisting language="php"><![CDATA[
+use Zend\Mail\Message,
+    Zend\Mail\Transport\Smtp as SmtpTransport,
+    Zend\Mail\Transport\SmtpOptions;
+
+$message = new Message();
+$message->addTo('matthew@zend.com')
+        ->addFrom('ralph.schindler@zend.com')
+        ->setSubject('Greetings and Salutations!')
+        ->setBody("Sorry, I'm going to be late today!");
+
+// Setup SMTP transport using LOGIN authentication
+$transport = new SmtpTransport();
+$options   = new SmtpOptions(array(
+    'name'              => 'localhost.localdomain',
+    'host'              => '127.0.0.1',
+    'connection_class'  => 'login',
+    'connection_config' => array(
+        'username' => 'user',
+        'password' => 'pass',
+    ),
+));
+$transport->setOptions($options);
+$transport->send($message);
+]]></programlisting>
+        </example>
+
+        <example xml:id="zend.mail.transport.quick-start.file-usage">
+            <info><title>File Transport Usage</title></info>
+
+            <programlisting language="php"><![CDATA[
+use Zend\Mail\Message,
+    Zend\Mail\Transport\File as FileTransport,
+    Zend\Mail\Transport\FileOptions;
+
+$message = new Message();
+$message->addTo('matthew@zend.com')
+        ->addFrom('ralph.schindler@zend.com')
+        ->setSubject('Greetings and Salutations!')
+        ->setBody("Sorry, I'm going to be late today!");
+
+// Setup SMTP transport using LOGIN authentication
+$transport = new FileTransport();
+$options   = new FileOptions(array(
+    'path'              => 'data/mail/',
+    'callback'  => function (FileTransport $transport) {
+        return 'Message_' . microtime(true) . '_' . mt_rand() . '.txt';
+    },
+));
+$transport->setOptions($options);
+$transport->send($message);
+]]></programlisting>
+        </example>
+    </section>
+
+    <section xml:id="zend.mail.transport.options">
+        <info>
+            <title>Configuration Options</title>
+        </info>
+
+        <para>
+            Configuration options are per transport. Please follow the links below for
+            transport-specific options.
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <link linkend="zend.mail.smtp-options">SMTP Transport Options</link>
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <link linkend="zend.mail.file-options">File Transport Options</link>
+                </para>
+            </listitem>
+        </itemizedlist>
+    </section>
+
+    <section xml:id="zend.mail.transport.methods">
+        <info>
+            <title>Available Methods</title>
+        </info>
+
+        <variablelist>
+            <varlistentry xml:id="zend.mail.transport.methods.send">
+                <term>send</term>
+
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>send</methodname>
+                        <methodparam>
+                            <funcparams>Zend\Mail\Message $message</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+
+                    <para>Send a mail message.</para>
+
+                    <para>Returns void</para>
+                </listitem>
+            </varlistentry>
+
+        </variablelist>
+    </section>
+
+    <section xml:id="zend.mail.transport.examples">
+        <info>
+            <title>Examples</title>
+        </info>
+
+        <para>
+            Please see the <link linkend="zend.mail.transport.quick-start">Quick Start
+                section</link> for examples.
+        </para>
+    </section>
+</section>

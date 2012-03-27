@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_View
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -28,9 +28,9 @@ use Zend\Navigation\Navigation,
     Zend\Acl\Acl,
     Zend\Acl\Role\GenericRole,
     Zend\Acl\Resource\GenericResource,
-    Zend\Config\Xml as XmlConfig,
+    Zend\Config\Factory as ConfigFactory,
     Zend\Translator\Translator,
-    Zend\View\PhpRenderer;
+    Zend\View\Renderer\PhpRenderer;
 
 /**
  * Base class for navigation view helper tests
@@ -38,7 +38,7 @@ use Zend\Navigation\Navigation,
  * @category   Zend
  * @package    Zend_View
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_View
  * @group      Zend_View_Helper
@@ -94,7 +94,7 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase
 
         // read navigation config
         $this->_files = $cwd . '/_files';
-        $config = new XmlConfig($this->_files . '/navigation.xml');
+        $config = ConfigFactory::fromFile($this->_files . '/navigation.xml', true);
 
         // setup containers from config
         $this->_nav1 = new Navigation($config->get('nav_test1'));

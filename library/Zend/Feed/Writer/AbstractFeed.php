@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Feed_Writer
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -30,7 +30,7 @@ use Zend\Uri,
 /**
  * @category Zend
  * @package Zend_Feed_Writer
- * @copyright Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license http://framework.zend.com/license/new-bsd New BSD License
  */
 class AbstractFeed
@@ -144,7 +144,7 @@ class AbstractFeed
         $zdate = null;
         if ($date === null) {
             $zdate = new Date\Date;
-        } elseif (ctype_digit($date) && strlen($date) == 10) {
+        } elseif (ctype_digit((string)$date)) {
             $zdate = new Date\Date($date, Date\Date::TIMESTAMP);
         } elseif ($date instanceof Date\Date) {
             $zdate = $date;
@@ -164,7 +164,7 @@ class AbstractFeed
         $zdate = null;
         if ($date === null) {
             $zdate = new Date\Date;
-        } elseif (ctype_digit($date) && strlen($date) == 10) {
+        } elseif (ctype_digit((string)$date)) {
             $zdate = new Date\Date($date, Date\Date::TIMESTAMP);
         } elseif ($date instanceof Date\Date) {
             $zdate = $date;
@@ -184,7 +184,7 @@ class AbstractFeed
         $zdate = null;
         if ($date === null) {
             $zdate = new Date\Date;
-        } elseif (ctype_digit($date) && strlen($date) == 10) {
+        } elseif (ctype_digit((string)$date)) {
             $zdate = new Date\Date($date, Date\Date::TIMESTAMP);
         } elseif ($date instanceof Date\Date) {
             $zdate = $date;

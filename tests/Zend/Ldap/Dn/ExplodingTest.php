@@ -13,9 +13,9 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_LDAP
+ * @package    Zend_Ldap
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -28,12 +28,12 @@ use Zend\Ldap;
 
 /**
  * @category   Zend
- * @package    Zend_LDAP
+ * @package    Zend_Ldap
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_LDAP
- * @group      Zend_LDAP_Dn
+ * @group      Zend_Ldap
+ * @group      Zend_Ldap_Dn
  */
 class ExplodingTest extends \PHPUnit_Framework_TestCase
 {

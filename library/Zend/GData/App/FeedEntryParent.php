@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage App
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -24,7 +24,8 @@
  */
 namespace Zend\GData\App;
 
-use Zend\GData\App;
+use Zend\GData\App,
+    Zend\Http\Header\Etag;
 
 /**
  * Abstract class for common functionality in entries and feeds
@@ -43,7 +44,7 @@ use Zend\GData\App;
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage App
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class FeedEntryParent extends Base
@@ -59,7 +60,7 @@ abstract class FeedEntryParent extends Base
      * The HTTP ETag associated with this entry. Used for optimistic
      * concurrency in protoco v2 or greater.
      *
-     * @var string|null
+     * @var Etag
      */
     protected $_etag = NULL;
 
@@ -530,10 +531,10 @@ abstract class FeedEntryParent extends Base
      * Set the Etag for the current entry to $value. Setting $value to null
      * unsets the Etag.
      *
-     * @param string|null $value
+     * @param Etag $value
      * @return \Zend\GData\App\Entry Provides a fluent interface
      */
-    public function setEtag($value) {
+    public function setEtag(Etag $value) {
         $this->_etag = $value;
         return $this;
     }
@@ -541,7 +542,7 @@ abstract class FeedEntryParent extends Base
     /**
      * Return the Etag for the current entry, or null if not set.
      *
-     * @return string|null
+     * @return Etag|null
      */
     public function getEtag() {
         return $this->_etag;

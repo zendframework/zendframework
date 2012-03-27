@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_View
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -34,7 +34,7 @@ use Zend\View;
  * @category   Zend
  * @package    Zend_View
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_View
  * @group      Zend_View_Helper
@@ -67,6 +67,24 @@ class NavigationTest extends AbstractTest
         $returned = $this->_helper->__invoke($this->_nav2);
         $this->assertEquals($this->_helper, $returned);
         $this->assertEquals($this->_nav2, $returned->getContainer());
+    }
+    
+    public function testAcceptAclShouldReturnGracefullyWithUnknownResource()
+    {
+        // setup
+        $acl = $this->_getAcl();
+        $this->_helper->setAcl($acl['acl']);
+        $this->_helper->setRole($acl['role']);
+        
+        $accepted = $this->_helper->accept(
+            new \Zend\Navigation\Page\Uri(array(
+                'resource'  => 'unknownresource',
+                'privilege' => 'someprivilege' 
+            ),
+            false)
+        );
+
+        $this->assertEquals($accepted, false);
     }
 
     public function testShouldProxyToMenuHelperByDeafult()

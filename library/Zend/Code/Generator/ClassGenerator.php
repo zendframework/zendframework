@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_CodeGenerator
  * @subpackage PHP
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -35,7 +35,7 @@ use Zend\Code\Reflection\ClassReflection;
  * @uses       \Zend\Code\Generator\PhpProperty
  * @category   Zend
  * @package    Zend_CodeGenerator
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class ClassGenerator extends AbstractGenerator
@@ -384,7 +384,7 @@ class ClassGenerator extends AbstractGenerator
      */
     public function isAbstract()
     {
-        return ($this->flags & self::FLAG_ABSTRACT);
+        return (boolean) ($this->flags & self::FLAG_ABSTRACT);
     }
 
     /**

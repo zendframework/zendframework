@@ -9,24 +9,11 @@ use Zend\Code\Scanner,
 class FileScanner extends TokenArrayScanner implements Scanner
 {
     /**
-     * @var bool
-     */
-    protected $isScanned = false;
-
-    /**
      * @var string
      */
     protected $file = null;
 
     public function __construct($file, AnnotationManager $annotationManager = null)
-    {
-        $this->setFile($file);
-        if ($annotationManager) {
-            $this->setAnnotationManager($annotationManager);
-        }
-    }
-    
-    public function setFile($file)
     {
         $this->file = $file;
         if (!file_exists($file)) {
@@ -34,37 +21,12 @@ class FileScanner extends TokenArrayScanner implements Scanner
                 'File "%s" not found', $file
             ));
         }
-        $this->reset();
+        parent::__construct(token_get_all(file_get_contents($file)), $annotationManager);
     }
-    
+
     public function getFile()
     {
         return $this->file;
     }
 
-
-
-    protected function scan()
-    {
-        if ($this->isScanned) {
-            return;
-        }
-
-        $this->setTokens(token_get_all(file_get_contents($this->file)));
-        parent::scan();
-    }
-
-    /*
-    public static function export()
-    {
-        // @todo
-    }
-    
-    public function __toString()
-    {
-        // @todo
-    }
-    */
-    
-    
 }

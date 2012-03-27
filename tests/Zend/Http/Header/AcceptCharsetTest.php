@@ -22,23 +22,54 @@ class AcceptCharsetTest extends \PHPUnit_Framework_TestCase
 
     public function testAcceptCharsetGetFieldValueReturnsProperValue()
     {
-        $this->markTestIncomplete('AcceptCharset needs to be completed');
-
-        $acceptCharsetHeader = new AcceptCharset();
+        $acceptCharsetHeader = AcceptCharset::fromString('Accept-Charset: xxx');
         $this->assertEquals('xxx', $acceptCharsetHeader->getFieldValue());
     }
 
     public function testAcceptCharsetToStringReturnsHeaderFormattedString()
     {
-        $this->markTestIncomplete('AcceptCharset needs to be completed');
 
         $acceptCharsetHeader = new AcceptCharset();
-
-        // @todo set some values, then test output
-        $this->assertEmpty('Accept-Charset: xxx', $acceptCharsetHeader->toString());
+        $acceptCharsetHeader->addCharset('iso-8859-5', 0.8)
+                            ->addCharset('unicode-1-1', 1);
+        
+        $this->assertEquals('Accept-Charset: iso-8859-5;q=0.8,unicode-1-1', $acceptCharsetHeader->toString());
     }
 
     /** Implmentation specific tests here */
+ 
+    public function testCanParseCommaSeparatedValues()
+    {
+        $header = AcceptCharset::fromString('Accept-Charset: iso-8859-5;q=0.8,unicode-1-1');
+        $this->assertTrue($header->hasCharset('iso-8859-5'));
+        $this->assertTrue($header->hasCharset('unicode-1-1'));
+    }
+
+    public function testPrioritizesValuesBasedOnQParameter()
+    {
+        $header   = AcceptCharset::fromString('Accept-Charset: iso-8859-5;q=0.8,unicode-1-1,*;q=0.4');
+        $expected = array(
+            'unicode-1-1',
+            'iso-8859-5',
+            '*'
+        );
+
+        $test = array();
+        foreach($header->getPrioritized() as $type) {
+            $test[] = $type;
+        }
+        $this->assertEquals($expected, $test);
+    }
     
+    public function testWildcharCharset()
+    {
+        $acceptHeader = new AcceptCharset();
+        $acceptHeader->addCharset('iso-8859-5', 0.8)
+                     ->addCharset('*', 0.4);
+        
+        $this->assertTrue($acceptHeader->hasCharset('iso-8859-5'));
+        $this->assertTrue($acceptHeader->hasCharset('unicode-1-1'));
+        $this->assertEquals('Accept-Charset: iso-8859-5;q=0.8,*;q=0.4', $acceptHeader->toString());
+    }
 }
 

@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Feed_Pubsubhubbub
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -29,7 +29,7 @@ use Zend\Feed\PubSubHubbub,
 /**
  * @category   Zend
  * @package    Zend_Feed_Pubsubhubbub
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Callback extends PubSubHubbub\AbstractCallback
@@ -199,7 +199,7 @@ class Callback extends PubSubHubbub\AbstractCallback
      */
     public function hasFeedUpdate()
     {
-        if (is_null($this->_feedUpdate)) {
+        if ($this->_feedUpdate === null) {
             return false;
         }
         return true;

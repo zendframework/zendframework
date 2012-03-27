@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Session
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -30,7 +30,7 @@ use Zend\EventManager\EventManager;
  *
  * @category   Zend
  * @package    Zend_Session
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class ValidatorChain extends EventManager
@@ -38,7 +38,7 @@ class ValidatorChain extends EventManager
     /**
      * @var Storage
      */
-    protected $_storage;
+    protected $storage;
 
     /**
      * Construct the validation chain
@@ -50,7 +50,7 @@ class ValidatorChain extends EventManager
      */
     public function __construct(Storage $storage)
     {
-        $this->_storage = $storage;
+        $this->storage = $storage;
 
         $validators = $storage->getMetadata('_VALID');
         if ($validators) {
@@ -97,6 +97,6 @@ class ValidatorChain extends EventManager
      */
     public function getStorage()
     {
-        return $this->_storage;
+        return $this->storage;
     }
 }

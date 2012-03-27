@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_View
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -27,7 +27,6 @@ namespace ZendTest\View\Helper;
 use PHPUnit_Framework_TestCase as TestCase,
     Zend\Http\Response,
     Zend\Json\Json as JsonFormatter,
-    Zend\Layout\Layout,
     Zend\View\Helper\Json as JsonHelper;
 
 /**
@@ -36,7 +35,7 @@ use PHPUnit_Framework_TestCase as TestCase,
  * @category   Zend
  * @package    Zend_View
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_View
  * @group      Zend_View_Helper
@@ -52,11 +51,9 @@ class JsonTest extends TestCase
      */
     public function setUp()
     {
-        $this->layout   = new Layout();
         $this->response = new Response();
         $this->helper   = new JsonHelper();
-        $this->helper->setLayout($this->layout)
-                     ->setResponse($this->response);
+        $this->helper->setResponse($this->response);
     }
 
     public function verifyJsonHeader()
@@ -78,20 +75,5 @@ class JsonTest extends TestCase
         $data = $this->helper->__invoke('foobar');
         $this->assertTrue(is_string($data));
         $this->assertEquals('foobar', JsonFormatter::decode($data));
-    }
-
-    public function testJsonHelperDisablesLayoutsByDefault()
-    {
-        $this->assertTrue($this->layout->isEnabled());
-        $this->testJsonHelperReturnsJsonEncodedString();
-        $this->assertFalse($this->layout->isEnabled());
-    }
-
-    public function testJsonHelperDoesNotDisableLayoutsWhenKeepLayoutFlagTrue()
-    {
-        $this->assertTrue($this->layout->isEnabled());
-        
-        $data = $this->helper->__invoke(array('foobar'), true);
-        $this->assertTrue($this->layout->isEnabled());
     }
 }

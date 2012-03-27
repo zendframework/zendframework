@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Json
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -33,7 +33,7 @@ use ReflectionFunction,
 /**
  * @category   Zend
  * @package    Zend_Json
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Server extends AbstractServer
@@ -49,7 +49,7 @@ class Server extends AbstractServer
      * Flag: whether or not to auto-emit the response
      * @var bool
      */
-    protected $_autoEmitResponse = true;
+    protected $returnResponse = false;
 
     /**
      * @var bool Flag; allow overwriting existing methods when creating server definition
@@ -79,11 +79,6 @@ class Server extends AbstractServer
      * @var array
      */
     protected $_smdMethods;
-
-    /**
-     * @var \Zend\Server\Description
-     */
-    protected $_table;
 
     /**
      * Attach a function or callback to the server
@@ -144,10 +139,9 @@ class Server extends AbstractServer
      */
     public function setClass($class, $namespace = '', $argv = null)
     {
-        $argv = null;
-        if (3 < func_num_args()) {
+        if (2 < func_num_args()) {
             $argv = func_get_args();
-            $argv = array_slice($argv, 3);
+            $argv = array_slice($argv, 2);
         }
 
         $reflection = Reflection::reflectClass($class, $argv, $namespace);
@@ -194,7 +188,7 @@ class Server extends AbstractServer
         $response = $this->_getReadyResponse();
 
         // Emit response?
-        if ($this->autoEmitResponse()) {
+        if (!$this->returnResponse) {
             echo $response;
             return;
         }
@@ -216,7 +210,7 @@ class Server extends AbstractServer
         }
 
         foreach ($definition as $key => $method) {
-            $this->_table->addMethod($method, $key);
+            $this->table->addMethod($method, $key);
             $this->_addMethodServiceMap($method);
         }
     }
@@ -280,21 +274,49 @@ class Server extends AbstractServer
      *
      * @param  bool $flag
      * @return Server
+     * @deprecated Left just for BC, drop it as soon as not used by anyone - use setReturnResponse() with negation instead.
      */
     public function setAutoEmitResponse($flag)
     {
-        $this->_autoEmitResponse = (bool) $flag;
-        return $this;
+        return $this->setReturnResponse(!$flag);
     }
 
     /**
      * Will we auto-emit the response?
      *
      * @return bool
+     * @deprecated Left just for BC, drop it as soon as not used by anyone - use getReturnResponse() with negation instead.
      */
     public function autoEmitResponse()
     {
-        return $this->_autoEmitResponse;
+        return !$this->getReturnResponse();
+    }
+
+    /**
+     * Set return response flag
+     *
+     * If true, {@link handle()} will return the response instead of
+     * automatically sending it back to the requesting client.
+     *
+     * The response is always available via {@link getResponse()}.
+     *
+     * @param boolean $flag
+     * @return Server
+     */
+    public function setReturnResponse($flag = true)
+    {
+        $this->returnResponse = ($flag) ? true : false;
+        return $this;
+    }
+
+    /**
+     * Retrieve return response flag
+     *
+     * @return boolean
+     */
+    public function getReturnResponse()
+    {
+        return $this->returnResponse;
     }
 
     // overloading for SMD metadata
@@ -507,12 +529,12 @@ class Server extends AbstractServer
         }
 
         $method = $request->getMethod();
-        if (!$this->_table->hasMethod($method)) {
+        if (!$this->table->hasMethod($method)) {
             return $this->fault('Method not found', Error::ERROR_INVALID_METHOD);
         }
 
         $params        = $request->getParams();
-        $invocable     = $this->_table->getMethod($method);
+        $invocable     = $this->table->getMethod($method);
         $serviceMap    = $this->getServiceMap();
         $service       = $serviceMap->getService($method);
         $serviceParams = $service->getParams();

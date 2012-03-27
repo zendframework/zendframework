@@ -13,9 +13,9 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_LDAP
+ * @package    Zend_Ldap
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -28,12 +28,12 @@ use Zend\Ldap;
 
 /**
  * @category   Zend
- * @package    Zend_LDAP
+ * @package    Zend_Ldap
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_LDAP
- * @group      Zend_LDAP_Node
+ * @group      Zend_Ldap
+ * @group      Zend_Ldap_Node
  */
 class OnlineTest extends \ZendTest\Ldap\OnlineTestCase
 {
@@ -53,7 +53,7 @@ class OnlineTest extends \ZendTest\Ldap\OnlineTestCase
     {
         $dn=$this->_createDn('ou=Test1,');
         $node=Node::fromLDAP($dn, $this->_getLDAP());
-        $this->assertType('Zend\Ldap\Node', $node);
+        $this->assertInstanceOf('Zend\Ldap\Node', $node);
         $this->assertTrue($node->isAttached());
     }
 
@@ -107,7 +107,7 @@ class OnlineTest extends \ZendTest\Ldap\OnlineTestCase
     {
         $dn=$this->_createDn('ou=Test1,');
         $node=Node::fromLDAP($dn, $this->_getLDAP());
-        $this->assertType('Zend\Ldap\Node', $node);
+        $this->assertInstanceOf('Zend\Ldap\Node', $node);
         $this->assertTrue($node->isAttached());
         $node->detachLDAP();
         $this->assertFalse($node->isAttached());
@@ -213,7 +213,7 @@ class OnlineTest extends \ZendTest\Ldap\OnlineTestCase
         $node=$this->_getLDAP()->getNode($this->_createDn('ou=Node,'));
         $items=$node->searchSubtree('(objectClass=organizationalUnit)', Ldap\Ldap::SEARCH_SCOPE_SUB,
             array(), 'ou');
-        $this->assertType('Zend\Ldap\Node\Collection', $items);
+        $this->assertInstanceOf('Zend\Ldap\Node\Collection', $items);
         $this->assertEquals(3, $items->count());
 
         $i=0;
@@ -280,7 +280,7 @@ class OnlineTest extends \ZendTest\Ldap\OnlineTestCase
     {
         $dn=Ldap\Dn::fromString($this->_createDn('ou=Test1,'));
         $node=Node::fromLDAP($dn, $this->_getLDAP());
-        $this->assertType('Zend\Ldap\Node', $node);
+        $this->assertInstanceOf('Zend\Ldap\Node', $node);
         $this->assertTrue($node->isAttached());
     }
 }

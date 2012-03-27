@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Service_Amazon
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -32,7 +32,7 @@ use Zend\Service\Amazon\Ec2,
  * @category   Zend
  * @package    Zend_Service_Amazon
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Service
  * @group      Zend_Service_Amazon
@@ -233,7 +233,7 @@ class KeypairTest extends \PHPUnit_Framework_TestCase
         $this->adapter->setResponse($rawHttpResponse);
 
         $response = $this->keypairInstance->delete('myfakekeyname');
-        $this->assertType('boolean', $response);
+        $this->assertInternalType('boolean', $response);
         $this->assertFalse($response);
     }
 
@@ -255,7 +255,7 @@ class KeypairTest extends \PHPUnit_Framework_TestCase
         $this->adapter->setResponse($rawHttpResponse);
 
         $response = $this->keypairInstance->delete('example-key-name');
-        $this->assertType('boolean', $response);
+        $this->assertInternalType('boolean', $response);
         $this->assertTrue($response);
     }
 }

@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Dojo
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -31,7 +31,7 @@ use Zend\Form\Form,
  * @category   Zend
  * @package    Zend_Date
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Dojo
  */
@@ -51,7 +51,7 @@ class DojoTest extends \PHPUnit_Framework_TestCase
                 ->addElement('text', 'bat');
         $form->addDisplayGroup(array('foo', 'bar'), 'foobar')
              ->addSubForm($subForm, 'sub')
-             ->setView(new View\PhpRenderer);
+             ->setView(new View\Renderer\PhpRenderer);
         return $form;
     }
 
@@ -103,7 +103,7 @@ class DojoTest extends \PHPUnit_Framework_TestCase
 
     public function testEnableViewShouldRegisterDojoViewHelpers()
     {
-        $view = new View\PhpRenderer;
+        $view = new View\Renderer\PhpRenderer;
         \Zend\Dojo\Dojo::enableView($view);
         
         $this->assertInstanceOf('Zend\Dojo\View\Helper\Dojo', $view->plugin('dojo'));
@@ -111,7 +111,7 @@ class DojoTest extends \PHPUnit_Framework_TestCase
     
     public function testDisableViewShouldUnregisterDojoViewHelpers()
     {
-        $view = new View\PhpRenderer;
+        $view = new View\Renderer\PhpRenderer;
         \Zend\Dojo\Dojo::enableView($view);
         
         $this->assertInstanceOf('Zend\Dojo\View\Helper\Dojo', $view->plugin('dojo'));

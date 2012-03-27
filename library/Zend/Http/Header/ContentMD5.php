@@ -13,16 +13,16 @@ class ContentMD5 implements HeaderDescription
     {
         $header = new static();
 
-        list($name, $value) = preg_split('#: #', $headerLine, 2);
+        list($name, $value) = explode(': ', $headerLine, 2);
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'content-md5') {
-            throw new Exception\InvalidArgumentException('Invalid header line for Content-MD5 string');
+            throw new Exception\InvalidArgumentException('Invalid header line for Content-MD5 string: "' . $name . '"');
         }
 
         // @todo implementation details
-        $header->value= $value;
-        
+        $header->value = $value;
+
         return $header;
     }
 
@@ -40,5 +40,5 @@ class ContentMD5 implements HeaderDescription
     {
         return 'Content-MD5: ' . $this->getFieldValue();
     }
-    
+
 }

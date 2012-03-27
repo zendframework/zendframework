@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Test
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -29,7 +29,7 @@ use Zend\Test\PHPUnit\Db\DataSet;
  * @category   Zend
  * @package    Zend_Test
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Test
  */
@@ -62,7 +62,7 @@ class DbTableDataSetTest extends \PHPUnit_Framework_TestCase
         $dataSet = new DataSet\DbTableDataSet();
         $dataSet->addTable($table);
 
-        $this->assertType('Zend\Test\PHPUnit\Db\DataSet\DbTable', $dataSet->getTable($fixtureTable));
+        $this->assertInstanceOf('Zend\Test\PHPUnit\Db\DataSet\DbTable', $dataSet->getTable($fixtureTable));
     }
 
     public function testGetUnknownTableThrowsException()

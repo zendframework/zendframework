@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Soap
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -36,7 +36,7 @@ use Zend\Soap\Server,
  * @package    Zend_Soap
  * @subpackage UnitTests
  * @uses       Zend_Server_Interface
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Soap
  * @group      Zend_Soap_Server
@@ -324,6 +324,19 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($server, $r);
     }
 
+    /**
+     * @group PR-706
+     */
+    public function testSetClassWithObject()
+    {
+        $server = new Server();
+
+        // Correct class name should pass
+        $object = new \ZendTest\Soap\TestAsset\ServerTestClass();
+        $r = $server->setClass($object);
+        $this->assertSame($server, $r);
+    }
+
     public function testSetClassTwiceThrowsException()
     {
         $server = new Server();
@@ -341,7 +354,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $server = new Server();
 
         // Correct class name should pass
-        $r = $server->setClass('\ZendTest\Soap\TestAsset\ServerTestClass', 1, 2, 3, 4);
+        $r = $server->setClass('\ZendTest\Soap\TestAsset\ServerTestClass', null, 1, 2, 3, 4);
         $this->assertSame($server, $r);
     }
 
@@ -586,7 +599,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
 
         $server->handle($request);
 
-        $this->assertEquals($expectedResponse, $server->getLastResponse());
+        $this->assertEquals($expectedResponse, $server->getResponse());
     }
 
     public function testHandle()

@@ -14,7 +14,7 @@
  *
  * @category  Zend
  * @package   Zend_Validate
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -30,7 +30,7 @@ namespace Zend\Validator\File;
  * @uses      \Zend\Validator\Exception
  * @category  Zend
  * @package   Zend_Validate
- * @copyright Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Upload extends \Zend\Validator\AbstractValidator
@@ -81,7 +81,7 @@ class Upload extends \Zend\Validator\AbstractValidator
      */
     public function __construct($options = array())
     {
-        if (!array_key_exists('files', $options)) {
+        if (is_array($options) && !array_key_exists('files', $options)) {
             $options = array('files' => $options);
         }
 

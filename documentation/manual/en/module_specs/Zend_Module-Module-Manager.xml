@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<section 
+    xmlns="http://docbook.org/ns/docbook" version="5.0"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    xml:id="zend.module.module-manager">
+    <info>
+        <title>The Module Manager</title>
+    </info>
+
+    <para>
+        The module manager, <classname>Zend\Module\Manager</classname>, is a very simple class which
+        is responsible for iterating over an array of module names and triggering a sequence of
+        events for each. Instantiation of module classes, initialization tasks, and configuration
+        are all performed by attached event listeners.
+    </para>
+
+    <section xml:id="zend.module.module-manager.module-manager-events">
+        <info>
+            <title>Module Manager Events</title>
+        </info>
+
+        <variablelist>
+            <title>Events triggered by <classname>Zend\Module\Manager</classname></title>
+
+            <varlistentry>
+                <term>loadModules.pre</term>
+
+                <listitem>
+                    <para>
+                        Triggered prior to any modules being loaded. This event is useful for
+                        registering a module autoloader. ZF2 ships with a default module autoloader
+                        which is automatically attached to this event if you are using
+                        <classname>Zend\Module\Listener\DefaultListenerAggregate</classname>, both
+                        of which are covered in detail later.
+                    </para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry>
+                <term>loadModule.resolve</term>
+
+                <listitem>
+                    <para>
+                        Triggered for each module that is to be loaded.  The listener(s) to this
+                        event are responsible for taking a module name and resolving it to an
+                        instance of some class. The default module resolver shipped with ZF2 simply
+                        looks for the class <classname>{modulename}\Module</classname>,
+                        instantiating and returning it if it exists.
+                    </para>
+
+                    <para>
+                        The name of the module may be retrieved by listeners using the
+                        <methodname>getModuleName()</methodname> method of the
+                        <classname>Event</classname> object; a listener should then take that name
+                        and resolve it to an object instance representing the given module. Multiple
+                        listeners can be attached to this event, and the module manager will trigger
+                        them in order of their priority until one returns an object. This allows you
+                        to attach additional listeners which have alternative methods of resolving
+                        modules from a given module name.
+                    </para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry>
+                <term>loadModule</term>
+
+                <listitem>
+                    <para>
+                        Once a module resolver listener has resolved the module name to an object,
+                        the module manager then triggers this event, passing the newly created
+                        object to all listeners.
+                    </para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry>
+                <term>loadModules.post</term>
+
+                <listitem>
+                    <para>
+                        This event is triggered by the module manager to allow any listeners to
+                        perform work after every module has finished loading. For example, the
+                        default configuration listener,
+                        <classname>Zend\Module\Listener\ConfigListener</classname> (covered later),
+                        attaches to this event to merge additional user-supplied configuration which
+                        is meant to override the default supplied configurations of installed
+                        modules.
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+    </section>
+    
+    <section xml:id="zend.module.module-manager.module-manager-listeners">
+        <info>
+            <title>Module Manager Listeners</title>
+        </info>
+
+        <para>
+            By default, Zend Framework provides several useful module manager listeners.
+        </para>
+        
+        <variablelist>
+            <title>Provided Module Manager Listeners</title>
+
+            <varlistentry>
+                <term><classname>Zend\Module\Listener\DefaultListenerAggregate</classname></term>
+
+                <listitem>
+                    <para>
+                        To help simplify the most common use case of the module manager, ZF2
+                        provides this default aggregate listener.  In most cases, this will be the
+                        only listener you will need to attach to use the module manager, as it will
+                        take care of properly attaching the requisite listeners (those listed below)
+                        for the module system to function properly.
+                    </para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry>
+                <term><classname>Zend\Module\Listener\ModuleResolverListener</classname></term>
+
+                <listitem>
+                    <para>
+                        This is the default module resolver. It attaches to the "loadModule.resolve"
+                        event and simply returns an instance of
+                        <classname>{moduleName}\Module</classname>.
+                    </para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry>
+                <term><classname>Zend\Module\Listener\ConfigListener</classname></term>
+
+                <listitem>
+                    <para>
+                        If a module class has a <methodname>getConfig()</methodname> method, this
+                        listener will call it and merge the returned array (or
+                        <classname>Traversable</classname> object) into the main application
+                        configuration.
+                    </para>
+                </listitem>
+            </varlistentry>
+            
+            <varlistentry>
+                <term><classname>Zend\Module\Listener\InitTrigger</classname></term>
+
+                <listitem>
+                    <para>
+                        If a module class has an <methodname>init()</methodname> method, this
+                        listener will call it and pass the current instance of
+                        <classname>Zend\Module\Manager</classname> as the sole parameter. The
+                        <methodname>init()</methodname> method is called for
+                        <emphasis>every</emphasis> module on <emphasis>every</emphasis> page request
+                        and should <emphasis>only</emphasis> be used for performing
+                        <emphasis>lightweight</emphasis> tasks such as registering event listeners.
+                    </para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry>
+                <term><classname>Zend\Module\Listener\AutoloaderListener</classname></term>
+
+                <listitem>
+                    <para>
+                        This listener checks each module to see if it has implemented the
+                        <classname>Zend\Module\Consumer\AutoloaderProvider</classname> interface. If
+                        so, it calls the <methodname>getAutoloaderConfig()</methodname> method on
+                        the module class and passes the returned array to
+                        <classname>Zend\Loader\AutoloaderFactory</classname>.
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+    </section>
+</section>

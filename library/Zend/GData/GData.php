@@ -16,7 +16,7 @@
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Gdata
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -34,12 +34,10 @@ namespace Zend\GData;
  *
  * @link http://code.google.com/apis/gdata/overview.html
  *
- * @uses       \Zend\GData\App
- * @uses       \Zend\GData\App\InvalidArgumentException
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Gdata
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class GData extends App

@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Mail
  * @subpackage Storage
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -23,22 +23,16 @@
  * @namespace
  */
 namespace Zend\Mail\Storage;
-use Zend\Mail\AbstractStorage,
-    Zend\Mail\Storage\Exception,
-    Zend\Mail\Protocol,
+
+use Zend\Mail\Protocol,
     Zend\Mail,
     Zend\Mime;
 
 /**
- * @uses       \Zend\Mail\Message\Message
- * @uses       \Zend\Mail\Protocol\Pop3
- * @uses       \Zend\Mail\Storage\AbstractStorage
- * @uses       \Zend\Mail\Storage\Exception
- * @uses       \Zend\Mime\Decode
  * @category   Zend
  * @package    Zend_Mail
  * @subpackage Storage
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Pop3 extends AbstractStorage

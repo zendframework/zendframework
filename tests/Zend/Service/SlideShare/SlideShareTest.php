@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Service_SlideShare
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -27,7 +27,8 @@ namespace ZendTest\Service\SlideShare;
 
 use Zend\Service\SlideShare,
     Zend\Service\SlideShare\SlideShare as SlideShareService,
-    Zend\Cache\Cache as Cache;
+    Zend\Cache\StorageFactory as CacheFactory,
+    Zend\Cache\Storage\Adapter as CacheAdapter;
 
 /**
  * @see \Zend\Service\SlideShare
@@ -38,7 +39,7 @@ use Zend\Service\SlideShare,
  * @category   Zend
  * @package    Zend_Service_SlideShare
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Service
  * @group      Zend_Service_SlideShare
@@ -65,9 +66,9 @@ class SlideShareTest extends \PHPUnit_Framework_TestCase
                                                  TESTS_ZEND_SERVICE_SLIDESHARE_PASSWORD,
                                                  TESTS_ZEND_SERVICE_SLIDESHARE_SLIDESHOWID);
 
-        $cache = Cache::factory('Core', 'File', array('lifetime' => 0, 'automatic_serialization' => true),
-                                                     array('cache_dir' => __DIR__."/_files"));
+        $cache = CacheFactory::adapterFactory('memory', array('memory_limit' => 0));
         $ss->setCacheObject($cache);
+
         return $ss;
     }
 
@@ -84,6 +85,10 @@ class SlideShareTest extends \PHPUnit_Framework_TestCase
 
                $this->markTestSkipped("You must configure an account for slideshare to run these tests");
         }
+    }
+
+    public function tearDown()
+    {
     }
 
     public function testGetSlideShow()

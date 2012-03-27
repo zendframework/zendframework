@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Geo
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -31,11 +31,10 @@ namespace Zend\GData;
  * @link http://www.opengis.net/gml/
  * @link http://code.google.com/apis/picasaweb/reference.html#georss_reference
  *
- * @uses       \Zend\GData\GData
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Geo
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Geo extends GData

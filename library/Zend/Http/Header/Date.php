@@ -13,16 +13,16 @@ class Date implements HeaderDescription
     {
         $header = new static();
 
-        list($name, $value) = preg_split('#: #', $headerLine, 2);
+        list($name, $value) = explode(': ', $headerLine, 2);
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'date') {
-            throw new Exception\InvalidArgumentException('Invalid header line for Date string');
+            throw new Exception\InvalidArgumentException('Invalid header line for Date string: "' . $name . '"');
         }
 
         // @todo implementation details
-        $header->value= $value;
-        
+        $header->value = $value;
+
         return $header;
     }
 
@@ -40,5 +40,5 @@ class Date implements HeaderDescription
     {
         return 'Date: ' . $this->getFieldValue();
     }
-    
+
 }

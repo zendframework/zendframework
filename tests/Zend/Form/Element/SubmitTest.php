@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Form
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -29,7 +29,7 @@ use Zend\Form\Element\Submit as SubmitElement,
     Zend\Registry,
     Zend\Translator\Translator,
     Zend\Translator\Adapter\ArrayAdapter as ArrayTranslator,
-    Zend\View\PhpRenderer as View;
+    Zend\View\Renderer\PhpRenderer as View;
 
 /**
  * Test class for Zend_Form_Element_Submit
@@ -37,7 +37,7 @@ use Zend\Form\Element\Submit as SubmitElement,
  * @category   Zend
  * @package    Zend_Form
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Form
  */

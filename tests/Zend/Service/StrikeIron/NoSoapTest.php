@@ -15,17 +15,22 @@
  * @category   Zend
  * @package    Zend_Service_StrikeIron
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
+/**
+ * @namespace
+ */
+namespace ZendTest\Service\StrikeIron;
+use Zend\Service\StrikeIron;
 
 /**
  * Test helper
  */
 
 /**
- * @see Zend_Service_StrikeIron_BaseTest
+ * @see StrikeIron\BaseTest
  */
 
 
@@ -33,17 +38,17 @@
  * @category   Zend
  * @package    Zend_Service_StrikeIron
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Service
  * @group      Zend_Service_StrikeIron
  */
-class Zend_Service_StrikeIron_NoSoapTest extends PHPUnit_Framework_TestCase
+class NoSoapTest extends \PHPUnit_Framework_TestCase
 {
 
     public function setUp()
     {
-        $this->soapClient = new Zend_Service_StrikeIron_BaseTest_MockSoapClient;
+        $this->soapClient = new BaseTest\MockSoapClient;
         if (extension_loaded('soap')) {
             $this->markTestSkipped('SOAP extension is loaded, so cannot test for exception');
         }
@@ -52,13 +57,14 @@ class Zend_Service_StrikeIron_NoSoapTest extends PHPUnit_Framework_TestCase
     public function testNoSoapException()
     {
         try {
-            $base = new Zend_Service_StrikeIron_Base(array('client'   => $this->soapClient,
+            $base = new StrikeIron\Base(array('client'   => $this->soapClient,
                                                              'username' => 'user',
                                                              'password' => 'pass'));
-            $this->fail('Expecting exception of type Zend_Service_StrikeIron_Exception');
-        } catch (Zend_Exception $e) {
-            $this->assertType('Zend_Service_StrikeIron_Exception', $e,
-                'Expecting exception of type Zend_Service_StrikeIron_Exception, got '.get_class($e));
+            $this->fail('Expecting exception of type Zend\Service\StrikeIron\Exception\RuntimeException');
+        } catch (StrikeIron\Exception\RuntimeException $e) {
+            $this->assertInstanceOf('Zend\Service\StrikeIron\Exception\RuntimeException', $e,
+                'Expecting exception of type Zend\Service\StrikeIron\Exception\RuntimeException, got '
+                . get_class($e));
             $this->assertEquals('SOAP extension is not enabled', $e->getMessage());
         }
     }

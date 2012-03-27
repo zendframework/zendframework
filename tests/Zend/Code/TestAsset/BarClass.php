@@ -27,7 +27,8 @@ abstract class BarClass
     
     protected function three(\ArrayObject $o, &$t = 2, FooBarBaz\BazBarFoo $bbf = self::BAR)
     {
-        // two
+        $x = 5 + 5;
+        $y = 'this string';
     }
     
 }

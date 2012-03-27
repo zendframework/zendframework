@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage App
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -23,6 +23,8 @@
  * @namespace
  */
 namespace Zend\GData\App;
+
+use Zend\Http\Header\Etag;
 
 /**
  * Concrete class for working with Atom entries.
@@ -37,7 +39,7 @@ namespace Zend\GData\App;
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage App
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Entry extends FeedEntryParent
@@ -228,10 +230,10 @@ class Entry extends FeedEntryParent
 
         // Append ETag, if present (Gdata v2 and above, only) and doesn't
         // conflict with existing headers
-        if ($this->_etag != null
+        if (($this->_etag instanceof Etag)
                 && !array_key_exists('If-Match', $extraHeaders)
                 && !array_key_exists('If-None-Match', $extraHeaders)) {
-            $extraHeaders['If-None-Match'] = $this->_etag;
+            $extraHeaders['If-None-Match'] = $this->_etag->getFieldValue();
         }
 
         // If an HTTP 304 status (Not Modified)is returned, then we return
@@ -240,7 +242,7 @@ class Entry extends FeedEntryParent
         try {
             $result = $this->service->importUrl($uri, $className, $extraHeaders);
         } catch (HttpException $e) {
-            if ($e->getResponse()->getStatus() != '304')
+            if ($e->getResponse()->getStatusCode() != '304')
                 throw $e;
         }
 

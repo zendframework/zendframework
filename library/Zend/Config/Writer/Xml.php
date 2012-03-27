@@ -14,76 +14,62 @@
  *
  * @category   Zend
  * @package    Zend_Config
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Config\Writer;
-use Zend\Config;
+
+use Zend\Config\Exception,
+    XMLWriter;
 
 /**
- * @uses       \Zend\Config\Exception
- * @uses       \Zend\Config\Writer\FileAbstract
- * @uses       \Zend\Config\Xml
  * @category   Zend
  * @package    Zend_Config
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Xml extends AbstractFileWriter
+class Xml extends AbstractWriter
 {
     /**
-     * Render a Zend_Config into a XML config string.
+     * processConfig(): defined by AbstractWriter.
      *
-     * @since 1.10
+     * @param  array $config
      * @return string
      */
-    public function render()
+    public function processConfig(array $config)
     {
-        $xml         = new \SimpleXMLElement('<zend-config xmlns:zf="' . Config\Xml::XML_NAMESPACE . '"/>');
-        $extends     = $this->_config->getExtends();
-        $sectionName = $this->_config->getSectionName();
+        $writer = new XMLWriter('UTF-8');
+        $writer->openMemory();
+        $writer->setIndent(true);
+        $writer->setIndentString(str_repeat(' ', 4));
 
-        if (is_string($sectionName)) {
-            $child = $xml->addChild($sectionName);
+        $writer->startDocument('1.0', 'UTF-8');
+        $writer->startElement('zend-config');
 
-            $this->_addBranch($this->_config, $child, $xml);
-        } else {
-            foreach ($this->_config as $sectionName => $data) {
-                if (!($data instanceof Config\Config)) {
-                    $xml->addChild($sectionName, (string) $data);
-                } else {
-                    $child = $xml->addChild($sectionName);
-
-                    if (isset($extends[$sectionName])) {
-                        $child->addAttribute('zf:extends', $extends[$sectionName], Config\Xml::XML_NAMESPACE);
-                    }
-
-                    $this->_addBranch($data, $child, $xml);
-                }
+        foreach ($config as $sectionName => $data) {
+            if (!is_array($data)) {
+                $writer->writeElement($sectionName, (string) $data);
+            } else {
+                $this->addBranch($sectionName, $data, $writer);
             }
         }
 
-        $dom = dom_import_simplexml($xml)->ownerDocument;
-        $dom->formatOutput = true;
+        $writer->endElement();
+        $writer->endDocument();
 
-        $xmlString = $dom->saveXML();
-
-        return $xmlString;
+        return $writer->outputMemory();
     }
 
     /**
-     * Add a branch to an XML object recursively
+     * Add a branch to an XML object recursively.
      *
-     * @param  \Zend\Config\Config      $config
-     * @param  SimpleXMLElement $xml
-     * @param  SimpleXMLElement $parent
+     * @param  string    $branchName
+     * @param  array     $config
+     * @param  XMLWriter $writer
      * @return void
      */
-    protected function _addBranch(Config\Config $config, \SimpleXMLElement $xml, \SimpleXMLElement $parent)
+    protected function addBranch($branchName, array $config, XMLWriter $writer)
     {
         $branchType = null;
 
@@ -91,34 +77,31 @@ class Xml extends AbstractFileWriter
             if ($branchType === null) {
                 if (is_numeric($key)) {
                     $branchType = 'numeric';
-                    $branchName = $xml->getName();
-                    $xml        = $parent;
-
-                    unset($parent->{$branchName});
                 } else {
+                    $writer->startElement($branchName);
                     $branchType = 'string';
                 }
             } else if ($branchType !== (is_numeric($key) ? 'numeric' : 'string')) {
-                throw new Config\Exception\RuntimeException('Mixing of string and numeric keys is not allowed');
+                throw new Exception\RuntimeException('Mixing of string and numeric keys is not allowed');
             }
 
             if ($branchType === 'numeric') {
-                if ($value instanceof Config\Config) {
-                    $child = $parent->addChild($branchName);
-
-                    $this->_addBranch($value, $child, $parent);
+                if (is_array($value)) {
+                    $this->addBranch($value, $value, $writer);
                 } else {
-                    $parent->addChild($branchName, (string) $value);
+                    $writer->writeElement($branchName, (string) $value);
                 }
             } else {
-                if ($value instanceof Config\Config) {
-                    $child = $xml->addChild($key);
-
-                    $this->_addBranch($value, $child, $xml);
+                if (is_array($value)) {
+                    $this->addBranch($key, $value, $writer);
                 } else {
-                    $xml->addChild($key, (string) $value);
+                    $writer->writeElement($key, (string) $value);
                 }
             }
+        }
+
+        if ($branchType === 'string') {
+            $writer->endElement();
         }
     }
 }

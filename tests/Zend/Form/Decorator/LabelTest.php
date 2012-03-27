@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Form
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -25,7 +25,7 @@ use Zend\Form\Decorator\Label as LabelDecorator,
     Zend\Form\Decorator\AbstractDecorator,
     Zend\Form\Element,
     Zend\Translator\Translator,
-    Zend\View\PhpRenderer as View;
+    Zend\View\Renderer\PhpRenderer as View;
 
 /**
  * Test class for Zend_Form_Decorator_Label
@@ -33,7 +33,7 @@ use Zend\Form\Decorator\Label as LabelDecorator,
  * @category   Zend
  * @package    Zend_Form
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Form
  */
@@ -261,11 +261,12 @@ class LabelTest extends \PHPUnit_Framework_TestCase
 
     public function testSettingTagToEmptyValueShouldDisableTag()
     {
+        $this->decorator->setTag('span');
         $element = new Element\Text('foo', array('label' => 'Foo'));
         $this->decorator->setElement($element)
                         ->setTag('');
         $content = $this->decorator->render('');
-        $this->assertTrue(empty($content), $content);
+        $this->assertNotContains('<span', $content);
     }
 
     /**

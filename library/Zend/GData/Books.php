@@ -16,7 +16,7 @@
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Books
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -28,15 +28,10 @@ namespace Zend\GData;
 /**
  * Service class for interacting with the Books service
  *
- * @uses       \Zend\GData\GData
- * @uses       \Zend\GData\Books\CollectionEntry
- * @uses       \Zend\GData\Books\CollectionFeed
- * @uses       \Zend\GData\Books\VolumeEntry
- * @uses       \Zend\GData\Books\VolumeFeed
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Books
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Books extends GData
@@ -68,7 +63,7 @@ class Books extends GData
         $this->registerPackage('Zend\GData\Books');
         $this->registerPackage('Zend\GData\Books\Extension');
         parent::__construct($client, $applicationId);
-        $this->_httpClient->setParameterPost('service', self::AUTH_SERVICE_NAME);
+        $this->_httpClient->setParameterPost(array('service' => self::AUTH_SERVICE_NAME));
      }
 
     /**

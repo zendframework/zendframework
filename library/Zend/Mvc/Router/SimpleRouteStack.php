@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Mvc_Router
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -26,14 +26,14 @@ namespace Zend\Mvc\Router;
 use ArrayAccess,
     ArrayIterator,
     Traversable,
-    Zend\Stdlib\IteratorToArray,
+    Zend\Stdlib\ArrayUtils,
     Zend\Stdlib\RequestDescription as Request;
 
 /**
  * Simple route stack implementation.
  *
  * @package    Zend_Mvc_Router
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class SimpleRouteStack implements RouteStack
@@ -51,59 +51,57 @@ class SimpleRouteStack implements RouteStack
      * @var RouteBroker
      */
     protected $routeBroker;
-    
+
     /**
      * Default parameters.
-     * 
+     *
      * @var array
      */
     protected $defaultParams = array();
 
     /**
      * Create a new simple route stack.
-     * 
-     * @return void
      */
     public function __construct()
     {
         $this->routes      = new PriorityList();
         $this->routeBroker = new RouteBroker();
-        
+
         $this->init();
     }
-    
+
     /**
      * factory(): defined by Route interface.
      *
      * @see    Route::factory()
-     * @param  array|Traversable $options
-     * @return void
+     * @param  array|\Traversable $options
+     * @return SimpleRouteStack
      */
     public static function factory($options = array())
     {
         if ($options instanceof Traversable) {
-            $options = IteratorToArray::convert($options);
+            $options = ArrayUtils::iteratorToArray($options);
         } elseif (!is_array($options)) {
             throw new Exception\InvalidArgumentException(__METHOD__ . ' expects an array or Traversable set of options');
         }
 
         $instance = new static();
-        
+
         if (isset($options['route_broker'])) {
             $instance->setRouteBroker($options['route_broker']);
         }
-        
+
         if (isset($options['routes'])) {
             $instance->addRoutes($options['routes']);
         }
-        
+
         if (isset($options['default_params'])) {
             $instance->setDefaultParams($options['default_params']);
         }
 
         return $instance;
     }
-    
+
     /**
      * Init method for extending classes.
      *
@@ -139,8 +137,8 @@ class SimpleRouteStack implements RouteStack
      * addRoutes(): defined by RouteStack interface.
      *
      * @see    RouteStack::addRoutes()
-     * @param  array|Traversable $routes
-     * @return RouteStack
+     * @param  array|\Traversable $routes
+     * @return SimpleRouteStack
      */
     public function addRoutes($routes)
     {
@@ -158,18 +156,18 @@ class SimpleRouteStack implements RouteStack
     /**
      * addRoute(): defined by RouteStack interface.
      *
-     * @see    Route::addRoute()
+     * @see    RouteStack::addRoute()
      * @param  string  $name
      * @param  mixed   $route
      * @param  integer $priority
-     * @return RouteStack
+     * @return SimpleRouteStack
      */
     public function addRoute($name, $route, $priority = null)
     {
         if (!$route instanceof Route) {
             $route = $this->routeFromArray($route);
         }
-        
+
         if ($priority === null && isset($route->priority)) {
             $priority = $route->priority;
         }
@@ -182,9 +180,9 @@ class SimpleRouteStack implements RouteStack
     /**
      * removeRoute(): defined by RouteStack interface.
      *
-     * @see    Route::removeRoute()
+     * @see    RouteStack::removeRoute()
      * @param  string  $name
-     * @return RouteStack
+     * @return SimpleRouteStack
      */
     public function removeRoute($name)
     {
@@ -192,24 +190,38 @@ class SimpleRouteStack implements RouteStack
         return $this;
     }
 
+
+    /**
+     * setRoutes(): defined by RouteStack interface.
+     *
+     * @param  array|\Traversable $routes
+     * @return SimpleRouteStack
+     */
+    public function setRoutes($routes)
+    {
+        $this->routes->clear();
+        $this->addRoutes($routes);
+        return $this;
+    }
+
     /**
      * Set a default parameters.
-     * 
+     *
      * @param  array $params
-     * @return RouteStack
+     * @return SimpleRouteStack
      */
     public function setDefaultParams(array $params)
     {
         $this->defaultParams = $params;
         return $this;
     }
-    
+
     /**
      * Set a default parameter.
-     * 
+     *
      * @param  string $name
-     * @param  mixed  $value 
-     * @return RouteStack
+     * @param  mixed  $value
+     * @return SimpleRouteStack
      */
     public function setDefaultParam($name, $value)
     {
@@ -220,13 +232,13 @@ class SimpleRouteStack implements RouteStack
     /**
      * Create a route from array specifications.
      *
-     * @param  array|Traversable $specs
+     * @param  array|\Traversable $specs
      * @return SimpleRouteStack
      */
     protected function routeFromArray($specs)
     {
         if ($specs instanceof Traversable) {
-            $specs = IteratorToArray::convert($specs);
+            $specs = ArrayUtils::iteratorToArray($specs);
         } elseif (!is_array($specs)) {
             throw new Exception\InvalidArgumentException('Route definition must be an array or Traversable object');
         }
@@ -242,7 +254,7 @@ class SimpleRouteStack implements RouteStack
         if (isset($specs['priority'])) {
             $route->priority = $specs['priority'];
         }
-        
+
         return $route;
     }
 
@@ -251,20 +263,20 @@ class SimpleRouteStack implements RouteStack
      *
      * @see    Route::match()
      * @param  Request $request
-     * @return RouteMatch
+     * @return RouteMatch|null
      */
     public function match(Request $request)
     {
         foreach ($this->routes as $name => $route) {
             if (($match = $route->match($request)) instanceof RouteMatch) {
                 $match->setMatchedRouteName($name);
-                
+
                 foreach ($this->defaultParams as $name => $value) {
                     if ($match->getParam($name) === null) {
                         $match->setParam($name, $value);
                     }
                 }
-                
+
                 return $match;
             }
         }
@@ -287,7 +299,7 @@ class SimpleRouteStack implements RouteStack
         }
 
         $route = $this->routes->get($options['name']);
-        
+
         if (!$route) {
             throw new Exception\RuntimeException(sprintf('Route with name "%s" not found', $options['name']));
         }

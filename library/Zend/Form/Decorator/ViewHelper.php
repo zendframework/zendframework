@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Form
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -43,7 +43,7 @@ use Zend\Form\Element;
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Decorator
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class ViewHelper extends AbstractDecorator
@@ -95,7 +95,8 @@ class ViewHelper extends AbstractDecorator
                         $this->setHelper($helper);
                     } else {
                         $type = $element->getType();
-                        if ($pos = strrpos($type, '\\')) {
+                        $pos  = strrpos($type, '\\');
+                        if ($pos) {
                             $type = substr($type, $pos + 1);
                         }
                         $this->setHelper('form' . ucfirst($type));

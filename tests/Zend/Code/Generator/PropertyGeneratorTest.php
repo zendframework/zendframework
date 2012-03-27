@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_CodeGenerator
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -30,7 +30,7 @@ use Zend\Code\Generator\PropertyGenerator,
  * @category   Zend
  * @package    Zend_CodeGenerator
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  *
  * @group Zend_CodeGenerator
@@ -139,6 +139,16 @@ EOS;
     public function testPropertyCanProduceContstantModifier()
     {
         $codeGenProperty = new PropertyGenerator('someVal', 'some string value', PropertyGenerator::FLAG_CONSTANT);
+        $this->assertEquals('    const someVal = \'some string value\';', $codeGenProperty->generate());
+    }
+
+    /**
+     * @group PR-704
+     */
+    public function testPropertyCanProduceContstantModifierWithSetter()
+    {
+        $codeGenProperty = new PropertyGenerator('someVal', 'some string value');
+        $codeGenProperty->setConst(true);
         $this->assertEquals('    const someVal = \'some string value\';', $codeGenProperty->generate());
     }
 

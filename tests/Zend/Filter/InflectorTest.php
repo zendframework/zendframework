@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Filter
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -32,7 +32,7 @@ use Zend\Filter\Inflector as InflectorFilter,
  * @category   Zend
  * @package    Zend_Filter
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Filter
  */
@@ -338,7 +338,7 @@ class InflectorTest extends \PHPUnit_Framework_TestCase
         $broker  = $inflector->getPluginBroker();
         $this->assertEquals($options['target'], $inflector->getTarget());
 
-        $this->assertType('Zend\Filter\FilterBroker', $broker);
+        $this->assertInstanceOf('Zend\Filter\FilterBroker', $broker);
         $this->assertTrue($inflector->isThrowTargetExceptionsOn());
         $this->assertEquals($options['targetReplacementIdentifier'], $inflector->getTargetReplacementIdentifier());
 

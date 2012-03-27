@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Mvc_Router
  * @subpackage Http
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -31,35 +31,34 @@ use Zend\Mvc\Router\RouteMatch as BaseRouteMatch;
  *
  * @package    Zend_Mvc_Router
  * @subpackage Http
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class RouteMatch extends BaseRouteMatch
 {
     /**
      * Length of the matched path.
-     * 
+     *
      * @var integer
      */
     protected $length;
-    
+
     /**
      * Create a part RouteMatch with given parameters and length.
-     * 
+     *
      * @param  array   $params
      * @param  integer $length
-     * @return void
      */
     public function __construct(array $params, $length = 0)
     {
         parent::__construct($params);
-        
+
         $this->length = $length;
     }
-    
+
     /**
      * setMatchedRouteName(): defined by BaseRouteMatch.
-     * 
+     *
      * @see    BaseRouteMatch::setMatchedRouteName()
      * @param  string $name
      * @return self
@@ -71,13 +70,13 @@ class RouteMatch extends BaseRouteMatch
         } else {
             $this->matchedRouteName = $name . '/' . $this->matchedRouteName;
         }
-        
+
         return $this;
     }
-    
+
     /**
      * Merge parameters from another match.
-     * 
+     *
      * @param  self $match
      * @return self
      */
@@ -85,15 +84,15 @@ class RouteMatch extends BaseRouteMatch
     {
         $this->params  = array_merge($this->params, $match->getParams());
         $this->length += $match->getLength();
-        
+
         $this->matchedRouteName = $match->getMatchedRouteName();
-        
+
         return $this;
     }
 
     /**
      * Get the matched path length.
-     * 
+     *
      * @return integer
      */
     public function getLength()

@@ -1,0 +1,512 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<section 
+    xmlns="http://docbook.org/ns/docbook" version="5.0"
+    xml:id="zend.mvc.controllers">
+  <info><title>Controller disponibili</title></info>
+
+  <para>
+    I controller del layer MVC semplicemente devono essere oggetti che
+    implementano l'interfaccia <classname>Zend\Stdlib\Dispatchable</classname>.
+    Questa interfaccia descrive un singolo metodo:
+  </para>
+
+  <programlisting language="php"><![CDATA[
+use Zend\Stdlib\Dispatchable,
+    Zend\Stdlib\RequestDescription as Request,
+    Zend\Stdlib\ResponseDescription as Response;
+
+class Foo implements Dispatchable
+{
+    public function dispatch(Request $request, Response $response = null)
+    {
+        // ... do something, and preferably return a Response ...
+    }
+}
+]]></programlisting>
+
+  <para>
+    Benchè questo pattern sia molto semplice, è probabile che tu non
+    voglia cambiare implementare una logica personalizzata per ogni 
+    controller (in particolare non è usuale per un singolo controller
+    implementare diversi tipi di richieste).
+  </para>
+
+  <para>
+    Lo MVC definisce molte interfacce che, quando sono implementate, 
+    possono fornire ai controller molte capacità addizionali.
+  </para>
+
+  <section xml:id="zend.mvc.controllers.interfaces">
+    <info><title>Interfacce comuni usate con i controller</title></info>
+
+    <section xml:id="zend.mvc.controllers.interfaces.inject-application-event">
+      <info><title>InjectApplicationEvent</title></info>
+
+      <para>
+        L'interfaccia <classname>Zend\Mvc\IbjectApplicationEvent</classname>
+        informa l'instanza <classname>Application</classname> che dovrebbe
+        iniettare il suo <classname>MvcEvent</classname> dentro il suo controller.
+        Perchè potrebbe essere utile questo?
+      </para>
+
+      <para>
+        Ricorda che <classname>MvcEvent</classname> è composta da una serie
+        di oggetti: la <classname>Request</classname> e <classname>Response</classname>,
+        ovvio, ma anche il router, le strate trovate (l'instanza 
+        <classname>RouteMatch</classname>) e potenzialmente anche il "risultato" 
+        dell'esecuzione.
+      </para>
+
+      <para>
+        Un controller che ha <classname>MvcEvent</classname> iniettata,
+        allora può ricerverle ed iniettarle. Un esempio:
+      </para>
+
+      <programlisting language="php"><![CDATA[
+$matches = $this->getEvent()->getRouteMatch();
+$id      = $matches->getParam('id', false);
+if (!$id) {
+    $this->getResponse();
+    $response->setStatusCode(500);
+    $this->getEvent()->setResult('Invalid identifier; cannot complete request');
+    return;
+}
+]]></programlisting>
+
+      <para>
+        L'interfaccia <classname>InjectApplicationEvent</classname> semplicemente
+        definisce due metodi:
+      </para>
+
+      <programlisting language="php"><![CDATA[
+use Zend\EventManager\EventDescription as Event;
+
+public function setEvent(Event $event);
+public function getEvent($event);
+]]></programlisting>
+    </section>
+
+    <section xml:id="zend.mvc.controllers.interfaces.locator-aware">
+      <info><title>LocatorAware</title></info>
+
+      <para>
+        Nella maggior parte dei casi definirai i tuo controller
+        e le dipendenze saranno iniettate tramite il Dependecy Injection Container,
+        attraverso gli argomenti del costruttore o i metodi setter.
+      </para>
+
+      <para>
+        Comunque, occasionalmente potresti avere oggetti che vorresti
+        usare nel tuo controller che sono validi solo per certe parti
+        del codice. Per esempio includere form, paginatori, navigazione, etc.
+        In questi casi potresti decidere che non ha molto senso iniettare
+        questi oggetti tutte le volte nel controller in uso.
+      </para>
+
+      <para>
+        L'interfaccia <classname>LocatorAware</classname> suggerisce alla 
+        <classname>Application</classname> dovrebbe iniettare la sua
+        istanza Locator nel controller (che sia un container DI oppure
+        un Service Locator personalizzato). Semplicemente definendo due
+        metodi:
+      </para>
+
+      <programlisting language="php"><![CDATA[
+use Zend\Di\Locator;
+
+public function setLocator(Locator $locator);
+public function getLocator($locator);
+]]></programlisting>
+    </section>
+
+    <section xml:id="zend.mvc.controllers.interfaces.pluggable">
+      <info><title>Pluggable</title></info>
+
+      <para>
+        Riutilizzare il codice è un obiettivo comune per gli sviluppatori.
+        Un altro obiettivo comune è la convenienza. Comunque, questo è spesso
+        difficile da raggiungere in modo pulito e astratto, nei sistemi 
+        generali.
+      </para>
+
+      <para>
+        All'interno dei tuoi controller, spesso ti accorgerai che ripeti 
+        operazioni tra un controller ad un altro. Esempi tipici:
+      </para>
+
+      <itemizedlist>
+        <listitem>
+          <para>
+            Generazione degli URL
+          </para>
+        </listitem>
+
+        <listitem>
+          <para>
+            Ridirezionamento
+          </para>
+        </listitem>
+
+        <listitem>
+          <para>
+            Impostare e ricevere messaggi flash (messaggi che scadona soli 
+            sulla sessione)
+          </para>
+        </listitem>
+
+        <listitem>
+          <para>
+            Invocazione ed esecuzione di controller addizionali
+          </para>
+        </listitem>
+      </itemizedlist>
+
+      <para>
+        Per facilitare queste azioni  mentre sono rese sempre disponibli
+        ad altre implementazioni del controller, abbiamo creato un
+        implementazione <classname>PluginBroker</classname> per il 
+        layer del controller, <classname>Zend\Mvc\Controller\PluginBroken</classname>
+        costruita sopra alle funzionalità di <classname>Zend\Loader\PluginBroken</classname>.
+        Per utilizzarla, semplicemente devi implementare l'interfaccia
+        <classname>Zend\Loader\Pluggable</classname> e configurare il 
+        tuo codice per usare una implementazione specifica del controller
+        di default:        
+      </para>
+
+      <programlisting language="php"><![CDATA[
+use Zend\Loader\Broker,
+    Zend\Mvc\Controller\PluginBroker;
+
+public function setBroker(Broker $broker)
+{
+    $this->broker = $broker;
+    return $this;
+}
+
+public function getBroker()
+{
+    if (!$this->broker instanceof Broker) {
+        $this->setBroker(new PluginBroker);
+    }
+    return $this->broker;
+}
+
+public function plugin($plugin, array $options = null)
+{
+    return $this->getBroker()->load($plugin, $options);
+}
+]]></programlisting>
+    </section>
+  </section>
+
+  <section xml:id="zend.mvc.controllers.action-controller">
+    <info><title>L'ActionController</title></info>
+
+    <para>
+        Implementare ognuna delle interfacce precedenti è molto
+        ridondante;  non avrete spesso voglia di farlo. Per questo
+        abbiamo sviluppato due controller base astratti e 
+        semplicemente puoi estenderli ed essere pronto per partire.
+    </para>
+
+    <para>
+        Il primo è <classname>Zend\Mvc\Controller\ActionController</classname>.
+        Questo controller implementa ognuna delle interfacce descritte
+        precedentemente e usa le seguenti assuzioni:
+    </para>
+
+    <itemizedlist>
+      <listitem>
+        <para>
+            Un parametro "action" è atteso nell'oggetto 
+            <classname>RouteMatch</classname> composto ed attaccato
+            nel <classname>MvcEvent</classname>. Se non ne viene trovato
+            nessuno, un <methodname>notFoundAction()</methodname> è invocato.
+        </para>
+      </listitem>
+
+      <listitem>
+        <para>
+            Il parametro "action" è convertito nella forma
+            camelCased (cammellata) ed appesa alla parola "Action" in modo da
+            creare un nome del metodo. Ad esempio "foo" viene mappata a
+            "fooAction", "foo-bar" o "foo.bar" oppure "foo_bar" a
+            "fooBarAction". Il controller allora controlla se questo metodo 
+            esiste. Se non è presente  il metodo<methodname>notFoundAction()</methodname>
+            è invocato, altrimenti il metodo scoperto.
+        </para>
+      </listitem>
+
+      <listitem>
+        <para>
+            I risultati di una esecuzione di una azione sono iniettati dentro
+            la proprietà "result" del <classname>MvcEvent</classname> (attraverso 
+            il metodo <methodname>setResult()</methodname> e disponibile attraverso
+            <methodname>getResult()</methodname>).
+        </para>
+      </listitem>
+    </itemizedlist>
+
+    <para>
+        Essenzialmente, una mappatura della strada verso
+        un <classname>ActionController</classname> necessita di
+        ritornare le chiavi "controller" e "action" che combaciano.
+    </para>
+
+    <para>
+        La creazione degli action controller è principalmente semplice:
+    </para>
+
+    <programlisting language="php"><![CDATA[
+namespace Foo\Controller;
+
+use Zend\Mvc\Controller\ActionController;
+
+class BarController extends ActionController
+{
+    public function bazAction()
+    {
+        return array('title' => __METHOD__);
+    }
+
+    public function batAction()
+    {
+        return array('title' => __METHOD__);
+    }
+}
+]]></programlisting>
+
+    <section xml:id="zend.mvc.controllers.action-controller.interfaces-and-collaborators">
+      <info><title>Interfacce e collaboratori</title></info>
+
+      <para>
+        <classname>ActionController</classname> implementa ognuna di
+        queste interfacce:
+      </para>
+
+      <itemizedlist>
+        <listitem>
+          <para>
+            <classname>Zend\Stdlib\Dispatchable</classname>
+          </para>
+        </listitem>
+
+        <listitem>
+          <para>
+            <classname>Zend\Loader\Pluggable</classname>
+          </para>
+        </listitem>
+
+        <listitem>
+          <para>
+            <classname>Zend\Mvc\InjectApplicationEvent</classname>
+          </para>
+        </listitem>
+
+        <listitem>
+          <para>
+            <classname>Zend\Mvc\LocatorAware</classname>
+          </para>
+        </listitem>
+      </itemizedlist>
+
+      <para>
+        In aggiunta è composto da <classname>Zend\EventManager\EventCollection</classname>,
+        esponendo i seguenti metodi 
+      </para>
+
+      <itemizedlist>
+        <listitem>
+          <para>
+            <classname>setEventManager(EventCollection $events)</classname>
+          </para>
+        </listitem>
+
+        <listitem>
+          <para>
+            <methodname>events()</methodname> (restituisce l'
+            <classname>EventCollection</classname> attacato, ed un
+            <classname>EventManager</classname> di default.
+          </para>
+        </listitem>
+      </itemizedlist>
+
+      <para>
+        Di default creerà un <classname>EventManager</classname> che è
+        in ascolto sui seguenti contesti:
+      </para>
+
+      <itemizedlist>
+        <listitem>
+          <para>
+            <classname>Zend\Stdlib\Dispatchable</classname>
+          </para>
+        </listitem>
+
+        <listitem>
+          <para>
+            <classname>Zend\Mvc\Controller\ActionController</classname>
+          </para>
+        </listitem>
+      </itemizedlist>
+
+      <para>
+        In aggiunta, se estendi la classe, sarà in ascolto sul nome
+        della classe che estende.
+      </para>
+    </section>
+  </section>
+
+  <section xml:id="zend.mvc.controllers.restful-controller">
+    <info><title>Il RestfulController</title></info>
+
+    <para>
+        Il secondo controller astratto che è fornito da ZF2 è
+        <classname>Zend\Mvc\Controller\RestfulController</classname>.
+        Questo controller fornisce una implementazione RESTful che
+        semplicemente mappa le richieste HTTP nei metodi del controller
+        utilizzando la seguente matrice:
+    </para>
+
+    <itemizedlist>
+      <listitem>
+        <para>
+            <emphasis role="strong">GET</emphasis> mappa al metodo
+            <methodname>get()</methodname> o <methodname>getList()</methodname>,
+            dipende se è presente o no il parametro "id" se trovato nella
+            strada che combacia. Se è passato viene chiamato il metodo
+            <methodname>get()</methodname>; se no il metodo <methodname>getList()</methodname>
+            viene chiamato. Nel primo caso, dovresti fornire una rappresentazione
+            dell'id che è stato ottenuto; nell'altro dovresti
+            fornire una lista di entità.
+        </para>
+      </listitem>
+
+      <listitem>
+        <para>
+          <emphasis role="strong">POST</emphasis> mappato a 
+          <methodname>create()</methodname>. Questo metodo si aspetta
+          un argomento <varname>$data</varname>, tipicamente nella 
+          variabile array superglobale <varname>$_POST</varname>.
+          Il dato dovrebbe esssere una nuova entità e la risposta dovrebbe
+          tipicamente rispondere con un header HTTP 201 con l'header
+          Location indicante l'URI della nuova entità create ed il body della
+          risposta dovrebbe contenerne la rappresentazione.
+        </para>
+      </listitem>
+
+      <listitem>
+        <para>
+            <emphasis role="strong">PUT</emphasis> mappa al metodo
+            <methodname>update()</methodname> e richiede che un parametro
+            id esista nella strada che viene combaciata; questo valore viene
+            passato come argomento al metodo. Dovrebbe aspettarsi un aggiornamento
+            dell'entita ottenuta, e, in caso di successo, ritornare un 200 o
+            202 header di risposta, come la rapresentazione dell'entità.
+        </para>
+      </listitem>
+
+      <listitem>
+        <para>
+            <emphasis role="strong">DELETE</emphasis> mappa al metodo
+            <methodname>delete()</methodname> e richiede che un parametro "id"
+            esista nella strada che combacia; il valore passato p un argomento
+            del metodo. Dovrebbe eseguire una cancellazione dell'entità 
+            ottenuta, e, in caso di successo rispondere con un header 200 o 204. 
+        </para>
+      </listitem>
+    </itemizedlist>
+
+    <para>
+        In aggiunta, puoi mappare metodi "action" nel
+        <classname>RestfulController</classname>, proprio come si farebbe
+        nell'<classname>ActionController</classname>; questi metodi avranno 
+        il suffisso "Action", differenziandosi da metodi RESTful descritti
+        precendentemente. Questo ti permette di realizzare azioni come
+        per esempio l'invio di form verso diversi metodi RESTful o aggiungere
+        metodi RPC alle tue API RESTful.
+    </para>
+
+    <section xml:id="zend.mvc.controllers.restful-controller.interfaces-and-collaborators">
+      <info><title>Interfacce e collaboratori</title></info>
+
+      <para>
+        <classname>RestfulController</classname> implementa ognuna delle
+        seguenti interfacce:
+      </para>
+
+      <itemizedlist>
+        <listitem>
+          <para>
+            <classname>Zend\Stdlib\Dispatchable</classname>
+          </para>
+        </listitem>
+
+        <listitem>
+          <para>
+            <classname>Zend\Loader\Pluggable</classname>
+          </para>
+        </listitem>
+
+        <listitem>
+          <para>
+            <classname>Zend\Mvc\InjectApplicationEvent</classname>
+          </para>
+        </listitem>
+
+        <listitem>
+          <para>
+            <classname>Zend\Mvc\LocatorAware</classname>
+          </para>
+        </listitem>
+      </itemizedlist>
+
+      <para>
+        In aggiunta, è composto da , 
+        <classname>Zend\EventManager\EventCollection</classname>,
+        che espone i seguenti metodi:
+      </para>
+
+      <itemizedlist>
+        <listitem>
+          <para>
+            <methodname>setEventManager(EventCollection $events)</methodname>
+          </para>
+        </listitem>
+
+        <listitem>
+          <para>
+            <methodname>events()</methodname> (risponde con l'
+            <classname>EventCollection</classname> collegato, ed un
+            <classname>EventManager</classname> di default.
+          </para>
+        </listitem>
+      </itemizedlist>
+
+      <para>
+        Di default, crea un <classname>EventManager</classname> in ascolto 
+        sui seguenti contesti:
+      </para>
+
+      <itemizedlist>
+        <listitem>
+          <para>
+            <classname>Zend\Stdlib\Dispatchable</classname>
+          </para>
+        </listitem>
+
+        <listitem>
+          <para>
+            <classname>Zend\Mvc\Controller\RestfulController</classname>
+          </para>
+        </listitem>
+      </itemizedlist>
+
+      <para>
+        In aggiunta, puoi estendere la classe che sarà in ascolto
+        sul nome della classe estesa.
+      </para>
+    </section>
+  </section>
+</section>

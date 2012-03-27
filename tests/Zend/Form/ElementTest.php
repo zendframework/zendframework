@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Form
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -34,13 +34,13 @@ use Zend\Form\Element,
     Zend\Translator\Translator,
     Zend\Validator\AbstractValidator,
     Zend\Validator\Alpha as AlphaValidator,
-    Zend\View\PhpRenderer;
+    Zend\View\Renderer\PhpRenderer;
 
 /**
  * @category   Zend
  * @package    Zend_Form
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Form
  */
@@ -652,7 +652,7 @@ class ElementTest extends \PHPUnit_Framework_TestCase
         }
         $validator = $this->element->getValidator('Alnum');
         $this->assertTrue($validator instanceof \Zend\Validator\Alnum);
-        $this->assertTrue($validator->getAllowWhiteSpace());
+        $this->assertFalse($validator->getAllowWhiteSpace());
     }
 
     public function testCanRetrieveSingleValidatorRegisteredAsValidatorObjectUsingShortName()
@@ -1200,7 +1200,7 @@ class ElementTest extends \PHPUnit_Framework_TestCase
     public function testGetViewLazyLoadsPhpRendererByDefault()
     {
         $view = $this->element->getView();
-        $this->assertInstanceOf('Zend\View\PhpRenderer', $view);
+        $this->assertInstanceOf('Zend\View\Renderer\PhpRenderer', $view);
     }
 
     public function testCanSetView()

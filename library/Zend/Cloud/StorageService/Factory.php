@@ -13,29 +13,34 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Cloud
+ * @package    Zend\Cloud
  * @subpackage StorageService
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-require_once 'Zend/Cloud/AbstractFactory.php';
+/**
+ * @namespace
+ */
+namespace Zend\Cloud\StorageService;
+
+use Zend\Cloud\AbstractFactory;
 
 /**
  * @category   Zend
- * @package    Zend_Cloud
+ * @package    Zend\Cloud
  * @subpackage StorageService
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Cloud_StorageService_Factory extends Zend_Cloud_AbstractFactory
+class Factory extends AbstractFactory
 {
     const STORAGE_ADAPTER_KEY = 'storage_adapter';
 
     /**
      * @var string Interface which adapter must implement to be considered valid
      */
-    protected static $_adapterInterface = 'Zend_Cloud_StorageService_Adapter';
+    protected static $_adapterInterface = 'Zend\Cloud\StorageService\Adapter';
     /**
      * Constructor
      *
@@ -56,12 +61,10 @@ class Zend_Cloud_StorageService_Factory extends Zend_Cloud_AbstractFactory
     {
         $adapter = parent::_getAdapter(self::STORAGE_ADAPTER_KEY, $options);
         if (!$adapter) {
-            require_once 'Zend/Cloud/StorageService/Exception.php';
-            throw new Zend_Cloud_StorageService_Exception('Class must be specified using the \'' .
+            throw new Exception\InvalidArgumentException('Class must be specified using the \'' .
             self::STORAGE_ADAPTER_KEY . '\' key');
         } elseif (!$adapter instanceof self::$_adapterInterface) {
-            require_once 'Zend/Cloud/StorageService/Exception.php';
-            throw new Zend_Cloud_StorageService_Exception(
+            throw new Exception\InvalidArgumentException(
                 'Adapter must implement \'' . self::$_adapterInterface . '\''
             );
         }

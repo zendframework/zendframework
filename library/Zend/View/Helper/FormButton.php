@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_View
  * @subpackage Helper
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -31,7 +31,7 @@ namespace Zend\View\Helper;
  * @category   Zend
  * @package    Zend_View
  * @subpackage Helper
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class FormButton extends FormElement
@@ -82,16 +82,17 @@ class FormButton extends FormElement
             $attribs['disabled'] = 'disabled';
         }
 
-        $content = ($escape) ? $this->view->vars()->escape($content) : $content;
+        $escaper = $this->view->plugin('escape');
+        $content = ($escape) ? $escaper($content) : $content;
 
         $xhtml = '<button'
-                . ' name="' . $this->view->vars()->escape($name) . '"'
-                . ' id="' . $this->view->vars()->escape($id) . '"'
-                . ' type="' . $type . '"';
+                . ' name="' . $escaper($name) . '"'
+                . ' id="'   . $escaper($id)   . '"'
+                . ' type="' . $type           . '"';
 
         // add a value if one is given
         if (!empty($value)) {
-            $xhtml .= ' value="' . $this->view->vars()->escape($value) . '"';
+            $xhtml .= ' value="' . $escaper($value) . '"';
         }
 
         // add attributes and close start tag

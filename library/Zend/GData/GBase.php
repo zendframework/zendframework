@@ -16,7 +16,7 @@
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage GBase
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -30,16 +30,10 @@ namespace Zend\GData;
  *
  * @link http://code.google.com/apis/base
  *
- * @uses       \Zend\GData\GData
- * @uses       \Zend\GData\App\InvalidArgumentException
- * @uses       \Zend\GData\GBase\ItemEntry
- * @uses       \Zend\GData\GBase\ItemFeed
- * @uses       \Zend\GData\GBase\SnippetFeed
- * @uses       \Zend\GData\GBase\SnippetEntry
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage GBase
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class GBase extends GData

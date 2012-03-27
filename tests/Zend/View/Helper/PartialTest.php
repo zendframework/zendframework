@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_View
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -26,7 +26,7 @@ namespace ZendTest\View\Helper;
 
 use PHPUnit_Framework_TestCase as TestCase,
     Zend\View\Helper\Partial,
-    Zend\View\PhpRenderer as View;
+    Zend\View\Renderer\PhpRenderer as View;
 
 /**
  * Test class for Partial view helper.
@@ -34,7 +34,7 @@ use PHPUnit_Framework_TestCase as TestCase,
  * @category   Zend
  * @package    Zend_View
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_View
  * @group      Zend_View_Helper

@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Photos
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -35,7 +35,7 @@ namespace Zend\GData;
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Photos
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Photos extends GData
@@ -448,7 +448,7 @@ class Photos extends GData
             try {
                 $this->delete($album);
             } catch (App\HttpException $e) {
-                if ($e->getResponse()->getStatus() === 409) {
+                if ($e->getResponse()->getStatusCode() === 409) {
                     $entry = new AlbumEntry($e->getResponse()->getBody());
                     $this->delete($entry->getLink('edit')->href);
                 } else {
@@ -477,7 +477,7 @@ class Photos extends GData
             try {
                 $this->delete($photo);
             } catch (App\HttpException $e) {
-                if ($e->getResponse()->getStatus() === 409) {
+                if ($e->getResponse()->getStatusCode() === 409) {
                     $entry = new PhotoEntry($e->getResponse()->getBody());
                     $this->delete($entry->getLink('edit')->href);
                 } else {
@@ -506,7 +506,7 @@ class Photos extends GData
             try {
                 $this->delete($comment);
             } catch (App\HttpException $e) {
-                if ($e->getResponse()->getStatus() === 409) {
+                if ($e->getResponse()->getStatusCode() === 409) {
                     $entry = new CommentEntry($e->getResponse()->getBody());
                     $this->delete($entry->getLink('edit')->href);
                 } else {
@@ -535,7 +535,7 @@ class Photos extends GData
             try {
                 $this->delete($tag);
             } catch (App\HttpException $e) {
-                if ($e->getResponse()->getStatus() === 409) {
+                if ($e->getResponse()->getStatusCode() === 409) {
                     $entry = new TagEntry($e->getResponse()->getBody());
                     $this->delete($entry->getLink('edit')->href);
                 } else {

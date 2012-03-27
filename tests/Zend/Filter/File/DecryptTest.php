@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Filter
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -28,7 +28,7 @@ use Zend\Filter\File\Decrypt as FileDecrypt,
  * @category   Zend
  * @package    Zend_Filter
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Filter
  */
@@ -75,7 +75,7 @@ class DecryptTest extends \PHPUnit_Framework_TestCase
             $filter->getFilename());
 
         $filter->setVector('testvect');
-        $filter(dirname(__DIR__).'/_files/encryption.txt');
+        $filter->filter(dirname(__DIR__).'/_files/encryption.txt');
 
         $filter = new FileDecrypt();
 
@@ -86,7 +86,7 @@ class DecryptTest extends \PHPUnit_Framework_TestCase
         $filter->setVector('testvect');
         $this->assertEquals(
             dirname(__DIR__).'/_files/newencryption.txt',
-            $filter(dirname(__DIR__).'/_files/newencryption.txt'));
+            $filter->filter(dirname(__DIR__).'/_files/newencryption.txt'));
 
         $this->assertEquals(
             'Encryption',
@@ -99,7 +99,7 @@ class DecryptTest extends \PHPUnit_Framework_TestCase
         $filter->setFilename(dirname(__DIR__).'/_files/newencryption.txt');
         $filter->setVector('testvect');
         $this->assertEquals(dirname(__DIR__).'/_files/newencryption.txt',
-            $filter(dirname(__DIR__).'/_files/encryption.txt'));
+            $filter->filter(dirname(__DIR__).'/_files/encryption.txt'));
 
         $this->assertNotEquals(
             'Encryption',
@@ -113,7 +113,7 @@ class DecryptTest extends \PHPUnit_Framework_TestCase
             $filter->getFilename());
 
         $filter->setVector('testvect');
-        $input = $filter(dirname(__DIR__).'/_files/newencryption.txt');
+        $input = $filter->filter(dirname(__DIR__).'/_files/newencryption.txt');
         $this->assertEquals(dirname(__DIR__).'/_files/newencryption2.txt', $input);
 
         $this->assertEquals(
@@ -130,6 +130,6 @@ class DecryptTest extends \PHPUnit_Framework_TestCase
         $filter->setVector('testvect');
 
         $this->setExpectedException('\Zend\Filter\Exception\InvalidArgumentException', 'not found');
-        $filter(dirname(__DIR__).'/_files/nofile.txt');
+        $filter->filter(dirname(__DIR__).'/_files/nofile.txt');
     }
 }

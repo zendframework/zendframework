@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_View
  * @subpackage Helper
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -31,7 +31,7 @@ namespace Zend\View\Helper;
  * @category   Zend
  * @package    Zend_View
  * @subpackage Helper
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class FormPassword extends FormElement
@@ -65,9 +65,10 @@ class FormPassword extends FormElement
 
         // determine the XHTML value
         $valueString = ' value=""';
+        $escaper     = $this->view->plugin('escape');
         if (array_key_exists('renderPassword', $attribs)) {
             if ($attribs['renderPassword']) {
-                $valueString = ' value="' . $this->view->vars()->escape($value) . '"';
+                $valueString = ' value="' . $escaper($value) . '"';
             }
             unset($attribs['renderPassword']);
         }
@@ -80,8 +81,8 @@ class FormPassword extends FormElement
 
         // render the element
         $xhtml = '<input type="password"'
-                . ' name="' . $this->view->vars()->escape($name) . '"'
-                . ' id="' . $this->view->vars()->escape($id) . '"'
+                . ' name="' . $escaper($name) . '"'
+                . ' id="' . $escaper($id) . '"'
                 . $valueString
                 . $disabled
                 . $this->_htmlAttribs($attribs)

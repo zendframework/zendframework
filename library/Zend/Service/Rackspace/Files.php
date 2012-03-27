@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend\Service
  * @subpackage Rackspace
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -159,8 +159,8 @@ class Files extends RackspaceAbstract
             throw new Exception\InvalidArgumentException(self::ERROR_PARAM_NO_NAME_CONTAINER);
         }
         $result= $this->httpCall($this->getStorageUrl().'/'.rawurlencode($container),'GET',null,$options);
-        if ($result->isSuccess()) {
-            return new Files\ObjectList($this,json_decode($result->getBody(),true),$container);
+        if ($result->isSuccess() && ($result->getBody()!=='[]')) {
+            return new Files\ObjectList($this,json_decode($result->getBody(),true),$container);  
         }
         return false;
     }

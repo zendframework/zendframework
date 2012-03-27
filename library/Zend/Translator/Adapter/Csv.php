@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Translator
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -32,7 +32,7 @@ use Zend\Translator\Adapter\AbstractAdapter,
  * @uses       \Zend\Translator\Exception\InvalidArgumentException
  * @category   Zend
  * @package    Zend_Translator
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Csv extends AbstractAdapter
@@ -48,7 +48,7 @@ class Csv extends AbstractAdapter
         $this->_options['length']    = 0;
         $this->_options['enclosure'] = '"';
 
-        if ($options instanceof Zend_Config) {
+        if ($options instanceof \Zend\Config\Config) {
             $options = $options->toArray();
         } else if (func_num_args() > 1) {
             $args               = func_get_args();

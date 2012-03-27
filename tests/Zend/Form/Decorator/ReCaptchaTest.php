@@ -15,13 +15,13 @@
  * @category   Zend
  * @package    Zend_Form
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
 
 namespace ZendTest\Form\Decorator;
-use Zend\View\PhpRenderer,
+use Zend\View\Renderer\PhpRenderer,
     Zend\Form\Element\Captcha as CaptchaElement,
     Zend\Form\Decorator\Captcha\ReCaptcha as ReCaptchaDecorator;
 
@@ -31,7 +31,7 @@ use Zend\View\PhpRenderer,
  * @category   Zend
  * @package    Zend_Form
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Form
  */

@@ -147,7 +147,7 @@
                 <row>
                     <entry>
                         <code>Zend_Ldap connect(string $host, integer $port, boolean $useSsl,
-                            boolean $useStartTls)</code>
+                            boolean $useStartTls, integer $networkTimeout)</code>
                     </entry>
 
                     <entry>

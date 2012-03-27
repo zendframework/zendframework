@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Feed_Reader
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -23,13 +23,15 @@
 */
 namespace Zend\Feed\Reader;
 
-use Zend\Http,
-    Zend\Loader;
+use Zend\Cache\Storage\Adapter as CacheAdapter,
+    Zend\Http,
+    Zend\Loader,
+    Zend\Stdlib\ErrorHandler;
 
 /**
 * @category Zend
 * @package Zend_Feed_Reader
-* @copyright Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+* @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
 * @license http://framework.zend.com/license/new-bsd New BSD License
 */
 class Reader
@@ -65,7 +67,7 @@ class Reader
     /**
      * Cache instance
      *
-     * @var \Zend\Cache\Frontend\Core
+     * @var CacheAdapter
      */
     protected static $_cache = null;
 
@@ -111,7 +113,7 @@ class Reader
     /**
      * Get the Feed cache
      *
-     * @return \Zend\Cache\Frontend\Core
+     * @return CacheAdapter
      */
     public static function getCache()
     {
@@ -121,10 +123,10 @@ class Reader
     /**
      * Set the feed cache
      *
-     * @param \Zend\Cache\Frontend\Core $cache
+     * @param  CacheAdapter $cache
      * @return void
      */
-    public static function setCache(\Zend\Cache\Frontend\Core $cache)
+    public static function setCache(CacheAdapter $cache)
     {
         self::$_cache = $cache;
     }
@@ -217,13 +219,13 @@ class Reader
         $cacheId = 'Zend_Feed_Reader_' . md5($uri);
 
         if (self::$_httpConditionalGet && $cache) {
-            $data = $cache->load($cacheId);
+            $data = $cache->getItem($cacheId);
             if ($data) {
                 if ($etag === null) {
-                    $etag = $cache->load($cacheId.'_etag');
+                    $etag = $cache->getItem($cacheId.'_etag');
                 }
                 if ($lastModified === null) {
-                    $lastModified = $cache->load($cacheId.'_lastmodified');;
+                    $lastModified = $cache->getItem($cacheId.'_lastmodified');;
                 }
                 if ($etag) {
                     $headers->addHeaderLine('If-None-Match', $etag);
@@ -240,17 +242,17 @@ class Reader
                 $responseXml = $data;
             } else {
                 $responseXml = $response->getBody();
-                $cache->save($responseXml, $cacheId);
-                if ($response->getHeader('ETag')) {
-                    $cache->save($response->getHeader('ETag'), $cacheId.'_etag');
+                $cache->setItem($cacheId, $responseXml);
+                if ($response->headers()->get('ETag')) {
+                    $cache->setItem($cacheId . '_etag', $response->headers()->get('ETag')->getFieldValue());
                 }
-                if ($response->getHeader('Last-Modified')) {
-                    $cache->save($response->getHeader('Last-Modified'), $cacheId.'_lastmodified');
+                if ($response->headers()->get('Last-Modified')) {
+                    $cache->setItem($cacheId . '_lastmodified', $response->headers()->get('Last-Modified')->getFieldValue());
                 }
             }
             return self::importString($responseXml);
         } elseif ($cache) {
-            $data = $cache->load($cacheId);
+            $data = $cache->getItem($cacheId);
             if ($data !== false) {
                 return self::importString($data);
             }
@@ -259,7 +261,7 @@ class Reader
                 throw new Exception('Feed failed to load, got response code ' . $response->getStatusCode());
             }
             $responseXml = $response->getBody();
-            $cache->save($responseXml, $cacheId);
+            $cache->setItem($cacheId, $responseXml);
             return self::importString($responseXml);
         } else {
             $response = $client->send();
@@ -322,11 +324,11 @@ class Reader
      */
     public static function importFile($filename)
     {
-        @ini_set('track_errors', 1);
-        $feed = @file_get_contents($filename);
-        @ini_restore('track_errors');
+        ErrorHandler::start();
+        $feed = file_get_contents($filename);
+        $err  = ErrorHandler::stop();
         if ($feed === false) {
-            throw new Exception("File could not be loaded: $php_errormsg");
+            throw new Exception("File '{$filename}' could not be loaded", 0, $err);
         }
         return self::importString($feed);
     }
@@ -454,7 +456,7 @@ class Reader
         if ($xpath->query('//atom:feed')->length) {
             return self::TYPE_ATOM_10;
         }
-        
+
         if ($xpath->query('//atom:entry')->length) {
             if ($specOnly == true) {
                 return self::TYPE_ATOM_10;
@@ -643,7 +645,7 @@ class Reader
         self::registerExtension('Thread');
         self::registerExtension('Podcast');
     }
-    
+
     /**
      * Utility method to apply array_unique operation to a multidimensional
      * array.
@@ -662,5 +664,5 @@ class Reader
         }
         return $array;
     }
- 
+
 }

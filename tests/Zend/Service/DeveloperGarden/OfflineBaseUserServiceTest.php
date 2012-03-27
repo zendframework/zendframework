@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Service_DeveloperGarden
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -31,7 +31,7 @@
  * @subpackage UnitTests
  * @group      Zend_Service
  * @group      Zend_Service_DeveloperGarden
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Service_DeveloperGarden_OfflineBaseUserServiceTest extends PHPUnit_Framework_TestCase
@@ -145,7 +145,7 @@ class Zend_Service_DeveloperGarden_OfflineBaseUserServiceTest extends PHPUnit_Fr
 
     public function testGetCredentialOnSoapObject()
     {
-        $this->assertType(
+        $this->assertInstanceOf(
             'Zend_Service_DeveloperGarden_Credential',
             $this->service->getSoapClient()->getCredential()
         );
@@ -153,7 +153,7 @@ class Zend_Service_DeveloperGarden_OfflineBaseUserServiceTest extends PHPUnit_Fr
 
     public function testGetTokenServiceOnSoapObject()
     {
-        $this->assertType(
+        $this->assertInstanceOf(
             'Zend_Service_DeveloperGarden_SecurityTokenServer',
             $this->service->getSoapClient()->getTokenService()
         );

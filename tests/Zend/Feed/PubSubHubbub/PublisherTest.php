@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -31,7 +31,7 @@ use Zend\Feed\PubSubHubbub;
  * @subpackage UnitTests
  * @group      Zend_Feed
  * @group      Zend_Feed_Subsubhubbub
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class PublisherTest extends \PHPUnit_Framework_TestCase
@@ -309,7 +309,7 @@ class ClientSuccess extends Http\Client
         $response = new ResponseSuccess;
         return $response;
     }
-    public function getBody(){return $this->_prepareBody();}
+    public function getBody(){return $this->prepareBody();}
 }
 class ClientFail extends Http\Client
 {
@@ -317,7 +317,7 @@ class ClientFail extends Http\Client
         $response = new ResponseFail;
         return $response;
     }
-    public function getBody(){return $this->_prepareBody();}
+    public function getBody(){return $this->prepareBody();}
 }
 class ResponseSuccess
 {

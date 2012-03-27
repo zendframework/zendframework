@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Service_Delicious
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -32,7 +32,7 @@ use \Zend\Service\Delicious\Delicious as DeliciousClient,
  * @category   Zend_Service
  * @package    Zend_Service_Delicious
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Service
  * @group      Zend_Service_Delicious
@@ -129,12 +129,12 @@ class PublicDataTest extends \PHPUnit_Framework_TestCase
     {
         $posts = $this->_delicious->getUserPosts(self::TEST_UNAME, 10);
 
-        $this->assertType('\Zend\Service\Delicious\PostList', $posts);
+        $this->assertInstanceOf('Zend\Service\Delicious\PostList', $posts);
 
         // check if all objects in returned \Zend\Service\Delicious\PostList
         // are instances of \Zend\Service\Delicious\SimplePost
         foreach ($posts as $post) {
-            $this->assertType('\Zend\Service\Delicious\SimplePost', $post);
+            $this->assertInstanceOf('Zend\Service\Delicious\SimplePost', $post);
         }
 
         // test filtering of Zend_Service_Delicious_PostList by tag name

@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Ldap
  * @subpackage RootDse
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -27,14 +27,14 @@ namespace Zend\Ldap\Node\RootDse;
 use Zend\Ldap\Node\RootDse;
 
 /**
- * Zend_Ldap_Node_RootDse provides a simple data-container for the RootDSE node of
+ * Zend_Ldap_Node_RootDse provides a simple data-container for the RootDse node of
  * a Novell eDirectory server.
  *
  * @uses       \Zend\Ldap\Node\RootDse
  * @category   Zend
  * @package    Zend_Ldap
  * @subpackage RootDse
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class eDirectory extends RootDse

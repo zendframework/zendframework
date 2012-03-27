@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_EventManager
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -33,7 +33,7 @@ namespace Zend\EventManager;
  *
  * @category   Zend
  * @package    Zend_EventManager
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 interface ListenerAggregate
@@ -41,7 +41,11 @@ interface ListenerAggregate
     /**
      * Attach one or more listeners
      *
+     * Implementors may add an optional $priority argument; the EventManager
+     * implementation will pass this to the aggregate.
+     *
      * @param EventCollection $events
+     * @param null|int $priority Optional priority "hint" to use when attaching listeners
      */
     public function attach(EventCollection $events);
 

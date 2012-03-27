@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Filter
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -30,13 +30,16 @@ use Zend\Filter\Compress\Tar as TarCompression,
  * @package    Zend_Filter
  * @subpackage UnitTests
  * @group      Zend_Filter
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class TarLoadArchveTarTest extends \PHPUnit_Framework_TestCase
 {
     public function testArchiveTarNotLoaded()
     {
+        if (class_exists('Archive_Tar')) {
+            $this->markTestSkipped('PEAR Archive_Tar is present; skipping test that expects its absence');
+        }
         try {
             $tar = new TarCompression;
             $this->fail('ExtensionNotLoadedException was expected but not thrown');

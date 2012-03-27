@@ -119,7 +119,7 @@ class HostnameTest extends TestCase
     {
         $tester = new FactoryTester($this);
         $tester->testFactory(
-            '\Zend\Mvc\Router\Http\Hostname',
+            'Zend\Mvc\Router\Http\Hostname',
             array(
                 'route' => 'Missing "route" in options array'
             ),

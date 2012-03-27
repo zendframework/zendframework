@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Serializer
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -31,7 +31,7 @@ use Zend\Serializer;
  * @package    Zend_Serializer
  * @subpackage UnitTests
  * @group      Zend_Serializer
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class PhpSerializeTest extends \PHPUnit_Framework_TestCase
@@ -139,11 +139,16 @@ class PhpSerializeTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $data);
     }
 
-    public function testUnserialzeInvalid()
+    public function testUnserializingNonserializedStringReturnsItVerbatim()
     {
         $value = 'not a serialized string';
-        $this->setExpectedException('Zend\Serializer\Exception\RuntimeException', 'unserialize(): Error at offset 0 of 23 bytes');
-        $this->_adapter->unserialize($value);
+        $this->assertEquals($value, $this->_adapter->unserialize($value));
     }
 
+    public function testUnserializingInvalidStringRaisesException()
+    {
+        $value = 'a:foobar';
+        $this->setExpectedException('Zend\Serializer\Exception\RuntimeException');
+        $this->_adapter->unserialize($value);
+    }
 }

@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Memory
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -23,16 +23,18 @@
  * @namespace
  */
 namespace ZendTest\Memory;
-use Zend\Cache\Cache;
-use Zend\Memory;
-use Zend\Memory\Container;
+
+use Zend\Cache\StorageFactory as CacheFactory,
+    Zend\Cache\Storage\Adapter as CacheAdapter,
+    Zend\Memory,
+    Zend\Memory\Container;
 
 
 /**
  * @category   Zend
  * @package    Zend_Memory
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Memory
  */
@@ -41,21 +43,18 @@ class MemoryManagerTest extends \PHPUnit_Framework_TestCase
     /**
      * Cache object
      *
-     * @var \Zend\Cache\Frontend
+     * @var CacheAdapter
      */
     private $_cache = null;
 
     public function setUp()
     {
-        $this->_cache = Cache::factory('Core', 'File',
-                 array('lifetime' => 1, 'automatic_serialization' => true),
-                 array('cache_dir' => __DIR__ . '/_files/'));
+        $this->_cache = CacheFactory::adapterFactory('memory', array('memory_limit' => 0));
     }
 
     public function tearDown()
     {
-        $this->_cache->clean(Cache::CLEANING_MODE_ALL);
-        $this->_cache = null;
+        $this->_cache->clear(CacheAdapter::MATCH_ALL);
     }
 
     /**

@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Text
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -30,7 +30,7 @@ use Zend\Text\Table\Decorator;
  * @category   Zend
  * @package    Zend_Text
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Text
  */
@@ -226,6 +226,17 @@ class TableTest extends \PHPUnit_Framework_TestCase
         $row->appendColumn(new Table\Column("foobar"));
 
         $this->assertEquals($row->render(array(10, 10), $decorator), "│foo       │foobar    │\n│bar       │          │\n");
+    }
+
+    public function testUnicodeRowMultiLine()
+    {
+        $decorator = new Decorator\Unicode();
+
+        $row = new Table\Row();
+        $row->appendColumn(new Table\Column("föö\nbär"));
+        $row->appendColumn(new Table\Column("fööbär"));
+
+        $this->assertEquals($row->render(array(3, 10), $decorator), "│föö│fööbär    │\n│bär│          │\n");
     }
 
     public function testTableConstructInvalidColumnWidthsItem()

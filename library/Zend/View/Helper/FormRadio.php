@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_View
  * @subpackage Helper
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -32,7 +32,7 @@ namespace Zend\View\Helper;
  * @category   Zend
  * @package    Zend_View
  * @subpackage Helper
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class FormRadio extends FormElement
@@ -112,7 +112,8 @@ class FormRadio extends FormElement
         $list  = array();
 
         // should the name affect an array collection?
-        $name = $this->view->vars()->escape($name);
+        $escaper = $this->view->plugin('escape');
+        $name    = $escaper($name);
         if ($this->_isArray && ('[]' != substr($name, -2))) {
             $name .= '[]';
         }
@@ -132,7 +133,7 @@ class FormRadio extends FormElement
 
             // Should the label be escaped?
             if ($escape) {
-                $opt_label = $this->view->vars()->escape($opt_label);
+                $opt_label = $escaper($opt_label);
             }
 
             // is it disabled?
@@ -159,7 +160,7 @@ class FormRadio extends FormElement
                     . '<input type="' . $this->_inputType . '"'
                     . ' name="' . $name . '"'
                     . ' id="' . $optId . '"'
-                    . ' value="' . $this->view->vars()->escape($opt_value) . '"'
+                    . ' value="' . $escaper($opt_value) . '"'
                     . $checked
                     . $disabled
                     . $this->_htmlAttribs($attribs)

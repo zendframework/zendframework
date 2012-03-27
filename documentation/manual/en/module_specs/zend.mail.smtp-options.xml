@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.smtp-options">
+    <info>
+        <title>Zend\Mail\Transport\SmtpOptions</title>
+    </info>
+
+    <section xml:id="zend.mail.smtp-options.intro">
+        <info>
+            <title>Overview</title>
+        </info>
+
+        <para>
+            This document details the various options available to the
+            <classname>Zend\Mail\Transport\Smtp</classname> mail transport.
+        </para>
+    </section>
+
+    <section xml:id="zend.mail.smtp-options.quick-start">
+        <info>
+            <title>Quick Start</title>
+        </info>
+
+        <example xml:id="zend.mail.smtp-options.quick-start.basic-smtp-usage">
+            <info><title>Basic SMTP Transport Usage</title></info>
+
+            <programlisting language="php"><![CDATA[
+use Zend\Mail\Transport\Smtp as SmtpTransport,
+    Zend\Mail\Transport\SmtpOptions;
+
+// Setup SMTP transport
+$transport = new SmtpTransport();
+$options   = new SmtpOptions(array(
+    'name' => 'localhost.localdomain',
+    'host' => '127.0.0.1',
+    'port' => 25,
+));
+$transport->setOptions($options);
+]]></programlisting>
+        </example>
+
+        <example xml:id="zend.mail.smtp-options.quick-start.plain-smtp-usage">
+            <info><title>SMTP Transport Usage with PLAIN AUTH</title></info>
+
+            <programlisting language="php"><![CDATA[
+use Zend\Mail\Transport\Smtp as SmtpTransport,
+    Zend\Mail\Transport\SmtpOptions;
+
+// Setup SMTP transport using LOGIN authentication
+$transport = new SmtpTransport();
+$options   = new SmtpOptions(array(
+    'name'              => 'localhost.localdomain',
+    'host'              => '127.0.0.1',
+    'connection_class'  => 'plain',
+    'connection_config' => array(
+        'username' => 'user',
+        'password' => 'pass',
+    ),
+));
+$transport->setOptions($options);
+]]></programlisting>
+        </example>
+
+        <example xml:id="zend.mail.smtp-options.quick-start.login-smtp-usage">
+            <info><title>SMTP Transport Usage with LOGIN AUTH</title></info>
+
+            <programlisting language="php"><![CDATA[
+use Zend\Mail\Transport\Smtp as SmtpTransport,
+    Zend\Mail\Transport\SmtpOptions;
+
+// Setup SMTP transport using LOGIN authentication
+$transport = new SmtpTransport();
+$options   = new SmtpOptions(array(
+    'name'              => 'localhost.localdomain',
+    'host'              => '127.0.0.1',
+    'connection_class'  => 'login',
+    'connection_config' => array(
+        'username' => 'user',
+        'password' => 'pass',
+    ),
+));
+$transport->setOptions($options);
+]]></programlisting>
+        </example>
+
+        <example xml:id="zend.mail.smtp-options.quick-start.crammd5-smtp-usage">
+            <info><title>SMTP Transport Usage with CRAM-MD5 AUTH</title></info>
+
+            <programlisting language="php"><![CDATA[
+use Zend\Mail\Transport\Smtp as SmtpTransport,
+    Zend\Mail\Transport\SmtpOptions;
+
+// Setup SMTP transport using LOGIN authentication
+$transport = new SmtpTransport();
+$options   = new SmtpOptions(array(
+    'name'              => 'localhost.localdomain',
+    'host'              => '127.0.0.1',
+    'connection_class'  => 'crammd5',
+    'connection_config' => array(
+        'username' => 'user',
+        'password' => 'pass',
+    ),
+));
+$transport->setOptions($options);
+]]></programlisting>
+        </example>
+    </section>
+
+    <section xml:id="zend.mail.smtp-options.options">
+        <info>
+            <title>Configuration Options</title>
+        </info>
+
+        <variablelist>
+            <title>Configuration Options</title>
+
+            <varlistentry xml:id="zend.mail.smtp-options.options.name">
+                <term>name</term>
+
+                <listitem>
+                    <para>Name of the SMTP host; defaults to "localhost".</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.mail.smtp-options.options.host">
+                <term>host</term>
+
+                <listitem>
+                    <para>Remote hostname or IP address; defaults to "127.0.0.1".</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.mail.smtp-options.options.port">
+                <term>port</term>
+
+                <listitem>
+                    <para>Port on which the remote host is listening; defaults to "25".</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.mail.smtp-options.options.connection-class">
+                <term>connection_class</term>
+
+                <listitem>
+                    <para>
+                        Fully-qualified classname or short name resolvable via
+                        <classname>Zend\Mail\Protocol\SmtpLoader</classname>. Typically, this will
+                        be one of "smtp", "plain", "login", or "crammd5", and defaults to "smtp".
+                    </para>
+
+                    <para>
+                        Typically, the connection class should extend the
+                        <classname>Zend\Mail\Protocol\AbstractProtocol</classname> class, and
+                        specifically the SMTP variant.
+                    </para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.mail.smtp-options.options.connection-config">
+                <term>connection_config</term>
+
+                <listitem>
+                    <para>
+                        Optional associative array of parameters to pass to the <link
+                            linkend="zend.mail.smtp-options.options.connection-class">connection
+                            class</link> in order to configure it. By default this is empty. For
+                        connection classes other than the default, you will typically need to define
+                        the "username" and "password" options.
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+    </section>
+
+    <section xml:id="zend.mail.smtp-options.methods">
+        <info>
+            <title>Available Methods</title>
+        </info>
+
+        <variablelist>
+            <varlistentry xml:id="zend.mail.smtp-options.methods.get-name">
+                <term>getName</term>
+
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>getName</methodname>
+                        <void/>
+                    </methodsynopsis>
+
+                    <para>Returns the string name of the local client hostname.</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.mail.smtp-options.methods.set-name">
+                <term>setName</term>
+
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>setName</methodname>
+                        <methodparam>
+                            <funcparams>string $name</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+
+                    <para>Set the string name of the local client hostname.</para>
+
+                    <para>Implements a fluent interface.</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.mail.smtp-options.methods.get-connection-class">
+                <term>getConnectionClass</term>
+
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>getConnectionClass</methodname>
+                        <void/>
+                    </methodsynopsis>
+
+                    <para>Returns a string indicating the connection class name to use.</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.mail.smtp-options.methods.set-connection-class">
+                <term>setConnectionClass</term>
+
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>setConnectionClass</methodname>
+                        <methodparam>
+                            <funcparams>string $connectionClass</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+
+                    <para>Set the connection class to use.</para>
+
+                    <para>Implements a fluent interface.</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.mail.smtp-options.methods.get-connection-config">
+                <term>getConnectionConfig</term>
+
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>getConnectionConfig</methodname>
+                        <void/>
+                    </methodsynopsis>
+
+                    <para>Get configuration for the connection class.</para>
+
+                    <para>Returns array.</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.mail.smtp-options.methods.set-connection-config">
+                <term>setConnectionConfig</term>
+
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>setConnectionConfig</methodname>
+                        <methodparam>
+                            <funcparams>array $config</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+
+                    <para> 
+                        Set configuration for the connection class. Typically, if using anything
+                        other than the default connection class, this will be an associative array
+                        with the keys "username" and "password".
+                    </para>
+
+                    <para>Implements a fluent interface.</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.mail.smtp-options.methods.get-host">
+                <term>getHost</term>
+
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>getHost</methodname>
+                        <void/>
+                    </methodsynopsis>
+
+                    <para>
+                        Returns a string indicating the IP address or host name of the SMTP server
+                        via which to send messages.
+                    </para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.mail.smtp-options.methods.set-host">
+                <term>setHost</term>
+
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>setHost</methodname>
+                        <methodparam>
+                            <funcparams>string $host</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+
+                    <para>
+                        Set the SMTP host name or IP address.
+                    </para>
+
+                    <para>Implements a fluent interface.</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.mail.smtp-options.methods.get-port">
+                <term>getPort</term>
+
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>getPort</methodname>
+                        <void/>
+                    </methodsynopsis>
+
+                    <para>Retrieve the integer port on which the SMTP host is listening.</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.mail.smtp-options.methods.set-port">
+                <term>setPort</term>
+
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>setPort</methodname>
+                        <methodparam>
+                            <funcparams>int $port</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+
+                    <para>Set the port on which the SMTP host is listening.</para>
+
+                    <para>Implements a fluent interface.</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.stdlib.options.methods.__construct">
+                <term>__construct</term>
+
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>__construct</methodname>
+                        <methodparam>
+                            <funcparams>null|array|Traversable $config</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+
+                    <para>
+                        Instantiate the class, and optionally configure it with values provided.
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+    </section>
+
+    <section xml:id="zend.mail.smtp-options.examples">
+        <info>
+            <title>Examples</title>
+        </info>
+
+        <para>
+            Please see the <link linkend="zend.mail.smtp-options.quick-start">Quick Start</link> for
+            examples.
+        </para>
+    </section>
+</section>

@@ -34,7 +34,7 @@ class SimpleRouteStackTest extends TestCase
             'foo' => new TestAsset\DummyRoute()
         ));
         
-        $this->assertInstanceOf('\Zend\Mvc\Router\RouteMatch', $stack->match(new Request()));
+        $this->assertInstanceOf('Zend\Mvc\Router\RouteMatch', $stack->match(new Request()));
     }
         
     public function testAddRoutesAsTraversable()
@@ -44,7 +44,43 @@ class SimpleRouteStackTest extends TestCase
             'foo' => new TestAsset\DummyRoute()
         )));
         
-        $this->assertInstanceOf('\Zend\Mvc\Router\RouteMatch', $stack->match(new Request()));
+        $this->assertInstanceOf('Zend\Mvc\Router\RouteMatch', $stack->match(new Request()));
+    }
+    
+    public function testSetRoutesWithInvalidArgument()
+    {
+        $this->setExpectedException('Zend\Mvc\Router\Exception\InvalidArgumentException', 'addRoutes expects an array or Traversable set of routes');
+        $stack = new SimpleRouteStack();
+        $stack->setRoutes('foo');
+    }
+    
+    public function testSetRoutesAsArray()
+    {
+        $stack = new SimpleRouteStack();
+        $stack->setRoutes(array(
+            'foo' => new TestAsset\DummyRoute()
+        ));
+        
+        $this->assertInstanceOf('Zend\Mvc\Router\RouteMatch', $stack->match(new Request()));
+        
+        $stack->setRoutes(array());
+        
+        $this->assertSame(null, $stack->match(new Request()));
+    }
+        
+    public function testSetRoutesAsTraversable()
+    {
+        $stack = new SimpleRouteStack();
+        $stack->setRoutes(new ArrayIterator(array(
+            'foo' => new TestAsset\DummyRoute()
+        )));
+        
+        $this->assertInstanceOf('Zend\Mvc\Router\RouteMatch', $stack->match(new Request()));
+        
+        $stack->setRoutes(new ArrayIterator(array()));
+        
+        $this->assertSame(null, $stack->match(new Request()));
+        
     }
     
     public function testremoveRouteAsArray()
@@ -72,7 +108,7 @@ class SimpleRouteStackTest extends TestCase
             'type' => '\ZendTest\Mvc\Router\TestAsset\DummyRoute'
         ));
         
-        $this->assertInstanceOf('\Zend\Mvc\Router\RouteMatch', $stack->match(new Request()));
+        $this->assertInstanceOf('Zend\Mvc\Router\RouteMatch', $stack->match(new Request()));
     }
 
     public function testAddRouteAsArrayWithOptions()
@@ -83,7 +119,7 @@ class SimpleRouteStackTest extends TestCase
             'options' => array()
         ));
         
-        $this->assertInstanceOf('\Zend\Mvc\Router\RouteMatch', $stack->match(new Request()));
+        $this->assertInstanceOf('Zend\Mvc\Router\RouteMatch', $stack->match(new Request()));
     }
     
     public function testAddRouteAsArrayWithoutType()
@@ -131,7 +167,7 @@ class SimpleRouteStackTest extends TestCase
             'type' => '\ZendTest\Mvc\Router\TestAsset\DummyRoute'
         )));
         
-        $this->assertInstanceOf('\Zend\Mvc\Router\RouteMatch', $stack->match(new Request()));
+        $this->assertInstanceOf('Zend\Mvc\Router\RouteMatch', $stack->match(new Request()));
     }
 
     public function testAssemble()
@@ -195,7 +231,7 @@ class SimpleRouteStackTest extends TestCase
     {
         $tester = new FactoryTester($this);
         $tester->testFactory(
-            '\Zend\Mvc\Router\SimpleRouteStack',
+            'Zend\Mvc\Router\SimpleRouteStack',
             array(),
             array(
                 'route_broker'   => new RouteBroker(),

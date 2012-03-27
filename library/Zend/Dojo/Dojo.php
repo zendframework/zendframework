@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Dojo
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -24,13 +24,13 @@
 namespace Zend\Dojo;
 
 use Zend\View\Renderer,
-    Zend\View\PhpRenderer;
+    Zend\View\Renderer\PhpRenderer;
 
 /**
  * Enable Dojo components
  *
  * @package    Zend_Dojo
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Dojo

@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Session
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -34,7 +34,7 @@ use Zend\Session\Configuration as Configurable,
  * @category   Zend
  * @package    Zend_Session
  * @subpackage Configuration
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class StandardConfiguration implements Configurable
@@ -42,57 +42,57 @@ class StandardConfiguration implements Configurable
     /**
      * @var Zend\Filter Filter to convert CamelCase to underscore_separated
      */
-    protected $_camelCaseToUnderscoreFilter;
+    protected $camelCaseToUnderscoreFilter;
     
     /**
      * @var string session.cookie_domain
      */
-    protected $_cookieDomain;
+    protected $cookieDomain;
 
     /**
      * @var bool session.cookie_httponly
      */
-    protected $_cookieHTTPOnly;
+    protected $cookieHTTPOnly;
 
     /**
      * @var int session.cookie_lifetime
      */
-    protected $_cookieLifetime;
+    protected $cookieLifetime;
 
     /**
      * @var string session.cookie_path
      */
-    protected $_cookiePath;
+    protected $cookiePath;
 
     /**
      * @var bool session.cookie_secure
      */
-    protected $_cookieSecure;
+    protected $cookieSecure;
 
     /**
      * @var string session.name
      */
-    protected $_name;
+    protected $name;
 
     /**
      * @var array All options
      */
-    protected $_options = array();
+    protected $options = array();
 
     /**
      * @var int remember_me_seconds
      */
-    protected $_rememberMeSeconds;
+    protected $rememberMeSeconds;
 
     /**
      * @var string session.save_path
      */
-    protected $_savePath;
+    protected $savePath;
 
     /**
      * @var bool session.use_cookies
      */
-    protected $_useCookies;
+    protected $useCookies;
 
     /**
      * Set storage option in backend configuration store
@@ -133,7 +133,7 @@ class StandardConfiguration implements Configurable
         if (!is_dir($path)) {
             throw new Exception\InvalidArgumentException('Invalid save_path provided');
         }
-        $this->_savePath = $path;
+        $this->savePath = $path;
         $this->setStorageOption('save_path', $path);
         return $this;
     }
@@ -145,10 +145,10 @@ class StandardConfiguration implements Configurable
      */
     public function getSavePath()
     {
-        if (null === $this->_savePath) {
-            $this->_savePath = $this->getStorageOption('save_path');
+        if (null === $this->savePath) {
+            $this->savePath = $this->getStorageOption('save_path');
         }
-        return $this->_savePath;
+        return $this->savePath;
     }
 
     /**
@@ -160,11 +160,11 @@ class StandardConfiguration implements Configurable
      */
     public function setName($name)
     {
-        $this->_name = (string) $name;
-        if (empty($this->_name)) {
+        $this->name = (string) $name;
+        if (empty($this->name)) {
             throw new Exception\InvalidArgumentException('Invalid session name; cannot be empty');
         }
-        $this->setStorageOption('name', $this->_name);
+        $this->setStorageOption('name', $this->name);
         return $this;
     }
 
@@ -175,10 +175,10 @@ class StandardConfiguration implements Configurable
      */
     public function getName()
     {
-        if (null === $this->_name) {
-            $this->_name = $this->getStorageOption('name');
+        if (null === $this->name) {
+            $this->name = $this->getStorageOption('name');
         }
-        return $this->_name;
+        return $this->name;
     }
     
     /**
@@ -262,8 +262,8 @@ class StandardConfiguration implements Configurable
             throw new Exception\InvalidArgumentException('Invalid cookie_lifetime; must be a positive integer or zero');
         }
 
-        $this->_cookieLifetime = (int) $cookieLifetime;
-        $this->setStorageOption('cookie_lifetime', $this->_cookieLifetime);
+        $this->cookieLifetime = (int) $cookieLifetime;
+        $this->setStorageOption('cookie_lifetime', $this->cookieLifetime);
         return $this;
     }
 
@@ -274,10 +274,10 @@ class StandardConfiguration implements Configurable
      */
     public function getCookieLifetime()
     {
-        if (null === $this->_cookieLifetime) {
-            $this->_cookieLifetime = $this->getStorageOption('cookie_lifetime');
+        if (null === $this->cookieLifetime) {
+            $this->cookieLifetime = $this->getStorageOption('cookie_lifetime');
         }
-        return $this->_cookieLifetime;
+        return $this->cookieLifetime;
     }
     
     /**
@@ -296,7 +296,7 @@ class StandardConfiguration implements Configurable
             throw new Exception\InvalidArgumentException('Invalid cookie path');
         }
 
-        $this->_cookiePath = $cookiePath;
+        $this->cookiePath = $cookiePath;
         $this->setStorageOption('cookie_path', $cookiePath);
         return $this;
     }
@@ -308,10 +308,10 @@ class StandardConfiguration implements Configurable
      */
     public function getCookiePath()
     {
-        if (null === $this->_cookiePath) {
-            $this->_cookiePath = $this->getStorageOption('cookie_path');
+        if (null === $this->cookiePath) {
+            $this->cookiePath = $this->getStorageOption('cookie_path');
         }
-        return $this->_cookiePath;
+        return $this->cookiePath;
     }
     
     /**
@@ -333,7 +333,7 @@ class StandardConfiguration implements Configurable
             throw new Exception\InvalidArgumentException('Invalid cookie domain: ' . implode('; ', $validator->getMessages()));
         }
 
-        $this->_cookieDomain = $cookieDomain;
+        $this->cookieDomain = $cookieDomain;
         $this->setStorageOption('cookie_domain', $cookieDomain);
         return $this;
     }
@@ -345,10 +345,10 @@ class StandardConfiguration implements Configurable
      */
     public function getCookieDomain()
     {
-        if (null === $this->_cookieDomain) {
-            $this->_cookieDomain = $this->getStorageOption('cookie_domain');
+        if (null === $this->cookieDomain) {
+            $this->cookieDomain = $this->getStorageOption('cookie_domain');
         }
-        return $this->_cookieDomain;
+        return $this->cookieDomain;
     }
     
     /**
@@ -359,8 +359,8 @@ class StandardConfiguration implements Configurable
      */
     public function setCookieSecure($cookieSecure)
     {
-        $this->_cookieSecure = (bool) $cookieSecure;
-        $this->setStorageOption('cookie_secure', $this->_cookieSecure);
+        $this->cookieSecure = (bool) $cookieSecure;
+        $this->setStorageOption('cookie_secure', $this->cookieSecure);
         return $this;
     }
 
@@ -371,10 +371,10 @@ class StandardConfiguration implements Configurable
      */
     public function getCookieSecure()
     {
-        if (null === $this->_cookieSecure) {
-            $this->_cookieSecure = $this->getStorageOption('cookie_secure');
+        if (null === $this->cookieSecure) {
+            $this->cookieSecure = $this->getStorageOption('cookie_secure');
         }
-        return $this->_cookieSecure;
+        return $this->cookieSecure;
     }
     
     /**
@@ -388,8 +388,8 @@ class StandardConfiguration implements Configurable
      */
     public function setCookieHttponly($cookieHTTPOnly)
     {
-        $this->_cookieHTTPOnly = (bool) $cookieHTTPOnly;
-        $this->setStorageOption('cookie_httponly', $this->_cookieHTTPOnly);
+        $this->cookieHTTPOnly = (bool) $cookieHTTPOnly;
+        $this->setStorageOption('cookie_httponly', $this->cookieHTTPOnly);
         return $this;
     }
 
@@ -400,10 +400,10 @@ class StandardConfiguration implements Configurable
      */
     public function getCookieHTTPOnly()
     {
-        if (null === $this->_cookieHTTPOnly) {
-            $this->_cookieHTTPOnly = $this->getStorageOption('cookie_httponly');
+        if (null === $this->cookieHTTPOnly) {
+            $this->cookieHTTPOnly = $this->getStorageOption('cookie_httponly');
         }
-        return $this->_cookieHTTPOnly;
+        return $this->cookieHTTPOnly;
     }
     
     /**
@@ -414,8 +414,8 @@ class StandardConfiguration implements Configurable
      */
     public function setUseCookies($flag)
     {
-        $this->_useCookies = (bool) $flag;
-        $this->setStorageOption('use_cookies', $this->_useCookies);
+        $this->useCookies = (bool) $flag;
+        $this->setStorageOption('use_cookies', $this->useCookies);
         return $this;
     }
 
@@ -426,10 +426,10 @@ class StandardConfiguration implements Configurable
      */
     public function getUseCookies()
     {
-        if (null === $this->_useCookies) {
-            $this->_useCookies = $this->getStorageOption('use_cookies');
+        if (null === $this->useCookies) {
+            $this->useCookies = $this->getStorageOption('use_cookies');
         }
-        return $this->_useCookies;
+        return $this->useCookies;
     }
     
     /**
@@ -529,7 +529,7 @@ class StandardConfiguration implements Configurable
             throw new Exception\InvalidArgumentException('Invalid remember_me_seconds; must be a positive integer');
         }
 
-        $this->_rememberMeSeconds = $rememberMeSeconds;
+        $this->rememberMeSeconds = $rememberMeSeconds;
         $this->setStorageOption('remember_me_seconds', $rememberMeSeconds);
         return $this;
     }
@@ -541,10 +541,10 @@ class StandardConfiguration implements Configurable
      */
     public function getRememberMeSeconds()
     {
-        if (null === $this->_rememberMeSeconds) {
-            $this->_rememberMeSeconds = $this->getStorageOption('remember_me_seconds');
+        if (null === $this->rememberMeSeconds) {
+            $this->rememberMeSeconds = $this->getStorageOption('remember_me_seconds');
         }
-        return $this->_rememberMeSeconds;
+        return $this->rememberMeSeconds;
     }
  
     /**
@@ -586,8 +586,8 @@ class StandardConfiguration implements Configurable
      */
     public function setOption($option, $value)
     {
-        $option = $this->_normalizeOption($option);
-        $this->_options[$option] = $value;
+        $option = $this->normalizeOption($option);
+        $this->options[$option] = $value;
         $this->setStorageOption($option, $value);
         return $this;
     }
@@ -606,9 +606,9 @@ class StandardConfiguration implements Configurable
      */
     public function getOption($option)
     {
-        $option = $this->_normalizeOption($option);
-        if (array_key_exists($option, $this->_options)) {
-            return $this->_options[$option];
+        $option = $this->normalizeOption($option);
+        if (array_key_exists($option, $this->options)) {
+            return $this->options[$option];
         }
 
         $value = $this->getStorageOption($option);
@@ -628,8 +628,8 @@ class StandardConfiguration implements Configurable
      */
     public function hasOption($option)
     {
-        $option = $this->_normalizeOption($option);
-        return array_key_exists($option, $this->_options);
+        $option = $this->normalizeOption($option);
+        return array_key_exists($option, $this->options);
     }
 
     /**
@@ -639,7 +639,7 @@ class StandardConfiguration implements Configurable
      */
     public function toArray()
     {
-        $options = $this->_options;
+        $options = $this->options;
         $extraOpts = array(
             'cookie_domain'       => $this->getCookieDomain(),
             'cookie_httponly'     => $this->getCookieHTTPOnly(),
@@ -671,14 +671,14 @@ class StandardConfiguration implements Configurable
             // Call to a getter; return matching option.
             // Transform method from MixedCase to underscore_separated.
             $option = substr($method, 3);
-            $key    = $this->_getCamelCaseToUnderscoreFilter()->filter($option);
+            $key    = $this->getCamelCaseToUnderscoreFilter()->filter($option);
             return $this->getOption($key);
         }
         if ('set' == substr($method, 0, 3)) {
             // Call to a setter; return matching option.
             // Transform method from MixedCase to underscore_separated.
             $option = substr($method, 3);
-            $key    = $this->_getCamelCaseToUnderscoreFilter()->filter($option);
+            $key    = $this->getCamelCaseToUnderscoreFilter()->filter($option);
             $value  = array_shift($args);
             return $this->setOption($key, $value);
         }
@@ -691,7 +691,7 @@ class StandardConfiguration implements Configurable
      * @param  string $option 
      * @return string
      */
-    protected function _normalizeOption($option)
+    protected function normalizeOption($option)
     {
         return strtolower((string) $option);
     }
@@ -701,11 +701,11 @@ class StandardConfiguration implements Configurable
      * 
      * @return CamelCaseToUnderscoreFilter
      */
-    protected function _getCamelCaseToUnderscoreFilter()
+    protected function getCamelCaseToUnderscoreFilter()
     {
-        if (null === $this->_camelCaseToUnderscoreFilter) {
-            $this->_camelCaseToUnderscoreFilter = new CamelCaseToUnderscoreFilter();
+        if (null === $this->camelCaseToUnderscoreFilter) {
+            $this->camelCaseToUnderscoreFilter = new CamelCaseToUnderscoreFilter();
         }
-        return $this->_camelCaseToUnderscoreFilter;
+        return $this->camelCaseToUnderscoreFilter;
     }
 }

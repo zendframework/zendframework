@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_OAuth
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -26,7 +26,7 @@ namespace Zend\OAuth;
 /**
  * @category   Zend
  * @package    Zend_OAuth
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Consumer extends OAuth
@@ -119,7 +119,7 @@ class Consumer extends OAuth
     ) {
         if ($redirect === null) {
             $redirect = new Http\UserAuthorization($this, $customServiceParameters);
-        } elseif(!is_null($customServiceParameters)) {
+        } elseif($customServiceParameters !== null) {
             $redirect->setParameters($customServiceParameters);
         }
         if ($token !== null) {
@@ -174,7 +174,7 @@ class Consumer extends OAuth
         }
 
         // OAuth 1.0a Verifier
-        if (!is_null($authorizedToken->getParam('oauth_verifier'))) {
+        if ($authorizedToken->getParam('oauth_verifier') !== null) {
             $params = array_merge($request->getParameters(), array(
                 'oauth_verifier' => $authorizedToken->getParam('oauth_verifier')
             ));

@@ -15,13 +15,15 @@
  * @category   Zend
  * @package    Zend_EventManager
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace ZendTest\EventManager;
 
-use Zend\EventManager\Event,
+use ArrayIterator,
+    stdClass,
+    Zend\EventManager\Event,
     Zend\EventManager\EventDescription,
     Zend\EventManager\EventManager,
     Zend\EventManager\ResponseCollection,
@@ -32,7 +34,7 @@ use Zend\EventManager\Event,
  * @package    Zend_EventManager
  * @subpackage UnitTests
  * @group      Zend_EventManager
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class EventManagerTest extends \PHPUnit_Framework_TestCase
@@ -67,6 +69,37 @@ class EventManagerTest extends \PHPUnit_Framework_TestCase
         $events = $this->events->getEvents();
         $this->assertFalse(empty($events));
         $this->assertContains('test', $events);
+    }
+
+    public function testAllowsPassingArrayOfEventNamesWhenAttaching()
+    {
+        $callback = function ($e) {
+            return $e->getName();
+        };
+        $this->events->attach(array('foo', 'bar'), $callback);
+
+        foreach (array('foo', 'bar') as $event) {
+            $listeners = $this->events->getListeners($event);
+            $this->assertTrue(count($listeners) > 0);
+            foreach ($listeners as $listener) {
+                $this->assertSame($callback, $listener->getCallback());
+            }
+        }
+    }
+
+    public function testPassingArrayOfEventNamesWhenAttachingReturnsArrayOfCallbackHandlers()
+    {
+        $callback = function ($e) {
+            return $e->getName();
+        };
+        $listeners = $this->events->attach(array('foo', 'bar'), $callback);
+
+        $this->assertInternalType('array', $listeners);
+
+        foreach ($listeners as $listener) {
+            $this->assertInstanceOf('Zend\Stdlib\CallbackHandler', $listener);
+            $this->assertSame($callback, $listener->getCallback());
+        }
     }
 
     public function testDetachShouldRemoveListenerFromEvent()
@@ -227,6 +260,16 @@ class EventManagerTest extends \PHPUnit_Framework_TestCase
         }
     }
 
+    public function testCanAttachListenerAggregateViaAttach()
+    {
+        $aggregate = new TestAsset\MockAggregate();
+        $this->events->attach($aggregate);
+        $events = $this->events->getEvents();
+        foreach (array('foo.bar', 'foo.baz') as $event) {
+            $this->assertContains($event, $events);
+        }
+    }
+
     public function testAttachAggregateReturnsAttachOfListenerAggregate()
     {
         $aggregate = new TestAsset\MockAggregate();
@@ -264,12 +307,56 @@ class EventManagerTest extends \PHPUnit_Framework_TestCase
         $this->assertContains($listenerOther, $listeners);
     }
 
+    public function testCanDetachListenerAggregatesViaDetach()
+    {
+        // setup some other event listeners, to ensure appropriate items are detached
+        $listenerFooBar1 = $this->events->attach('foo.bar', function(){ return true; });
+        $listenerFooBar2 = $this->events->attach('foo.bar', function(){ return true; });
+        $listenerFooBaz1 = $this->events->attach('foo.baz', function(){ return true; });
+        $listenerOther   = $this->events->attach('other', function(){ return true; });
+
+        $aggregate = new TestAsset\MockAggregate();
+        $this->events->attach($aggregate);
+        $this->events->detach($aggregate);
+        $events = $this->events->getEvents();
+        foreach (array('foo.bar', 'foo.baz', 'other') as $event) {
+            $this->assertContains($event, $events);
+        }
+
+        $listeners = $this->events->getListeners('foo.bar');
+        $this->assertEquals(2, count($listeners));
+        $this->assertContains($listenerFooBar1, $listeners);
+        $this->assertContains($listenerFooBar2, $listeners);
+
+        $listeners = $this->events->getListeners('foo.baz');
+        $this->assertEquals(1, count($listeners));
+        $this->assertContains($listenerFooBaz1, $listeners);
+
+        $listeners = $this->events->getListeners('other');
+        $this->assertEquals(1, count($listeners));
+        $this->assertContains($listenerOther, $listeners);
+    }
+
     public function testDetachAggregateReturnsDetachOfListenerAggregate()
     {
         $aggregate = new TestAsset\MockAggregate();
         $this->events->attachAggregate($aggregate);
         $method = $this->events->detachAggregate($aggregate);
         $this->assertSame('ZendTest\EventManager\TestAsset\MockAggregate::detach', $method);
+    }
+
+    public function testAttachAggregateAcceptsOptionalPriorityValue()
+    {
+        $aggregate = new TestAsset\MockAggregate();
+        $this->events->attachAggregate($aggregate, 1);
+        $this->assertEquals(1, $aggregate->priority);
+    }
+
+    public function testAttachAggregateAcceptsOptionalPriorityValueViaAttachCallbackArgument()
+    {
+        $aggregate = new TestAsset\MockAggregate();
+        $this->events->attach($aggregate, 1);
+        $this->assertEquals(1, $aggregate->priority);
     }
 
     public function testCallingEventsStopPropagationMethodHaltsEventEmission()
@@ -485,11 +572,26 @@ class EventManagerTest extends \PHPUnit_Framework_TestCase
 
     public function testIdentifierGetterSettersWorkWithTraversables()
     {
-        $identifiers = new \ArrayIterator(array('foo', 'bar'));
+        $identifiers = new ArrayIterator(array('foo', 'bar'));
         $this->assertInstanceOf('Zend\EventManager\EventManager', $this->events->setIdentifiers($identifiers));
         $this->assertSame($this->events->getIdentifiers(), (array) $identifiers);
-        $identifiers = new \ArrayIterator(array('foo', 'bar', 'baz'));
+        $identifiers = new ArrayIterator(array('foo', 'bar', 'baz'));
         $this->assertInstanceOf('Zend\EventManager\EventManager', $this->events->addIdentifiers($identifiers));
         $this->assertSame($this->events->getIdentifiers(), (array) $identifiers);
+    }
+
+    public function testListenersAttachedWithWildcardAreTriggeredForAllEvents()
+    {
+        $test     = new stdClass;
+        $test->events = array();
+        $callback = function($e) use ($test) {
+            $test->events[] = $e->getName();
+        };
+
+        $this->events->attach('*', $callback);
+        foreach (array('foo', 'bar', 'baz') as $event) {
+            $this->events->trigger($event);
+            $this->assertContains($event, $test->events);
+        }
     }
 }

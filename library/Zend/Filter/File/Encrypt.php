@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Filter
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -32,7 +32,7 @@ use Zend\Filter,
  * @uses       \Zend\Filter\Exception
  * @category   Zend
  * @package    Zend_Filter
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Encrypt extends Filter\Encrypt
@@ -74,7 +74,7 @@ class Encrypt extends Filter\Encrypt
      * @param  string $value Full path of file to change
      * @return string The filename which has been set, or false when there were errors
      */
-    public function __invoke($value)
+    public function filter($value)
     {
         if (!file_exists($value)) {
             throw new Exception\InvalidArgumentException("File '$value' not found");
@@ -93,7 +93,7 @@ class Encrypt extends Filter\Encrypt
             throw new Exception\RuntimeException("Problem while reading file '$value'");
         }
 
-        $encrypted = parent::__invoke($content);
+        $encrypted = parent::filter($content);
         $result    = file_put_contents($this->_filename, $encrypted);
 
         if (!$result) {

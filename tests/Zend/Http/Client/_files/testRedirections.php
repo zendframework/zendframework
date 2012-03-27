@@ -15,11 +15,29 @@
  * @category   Zend
  * @package    Zend_Http
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-if (! isset($_GET['redirection'])) $_GET['redirection'] = 0;
+if (! isset($_GET['redirection'])){
+    $_GET['redirection'] = 0;
+
+    /**
+     * Create session cookie, but only on first redirect
+     */
+    setcookie('zf2testSessionCookie','positive');
+
+    /**
+     * Create a long living cookie
+     */
+    setcookie('zf2testLongLivedCookie','positive',time()+2678400);
+
+    /**
+     * Create a cookie that should be invalid on arrival
+     */
+    setcookie('zf2testExpiredCookie','negative',time()-2400);
+}
+
 $_GET['redirection']++;
 $https = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off';
 

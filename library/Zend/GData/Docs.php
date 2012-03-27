@@ -16,7 +16,7 @@
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Docs
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -29,16 +29,10 @@ namespace Zend\GData;
  * Service class for interacting with the Google Document List data API
  * @link http://code.google.com/apis/documents/
  *
- * @uses       \Zend\GData\GData
- * @uses       \Zend\GData\App\Extension\Category
- * @uses       \Zend\GData\App\Extension\Title
- * @uses       \Zend\GData\App\InvalidArgumentException
- * @uses       \Zend\GData\Docs\DocumentListEntry
- * @uses       \Zend\GData\Docs\DocumentListFeed
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Docs
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Docs extends GData

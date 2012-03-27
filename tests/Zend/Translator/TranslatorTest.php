@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Translator
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -23,19 +23,20 @@
  * @namespace
  */
 namespace ZendTest\Translator;
-use Zend\Translator;
-use Zend\Locale;
-use Zend\Translator\Adapter;
-use Zend\Cache;
-use Zend\Cache\Frontend;
-use Zend\Log\Writer;
-use Zend\Log;
+
+use Zend\Cache\StorageFactory as CacheFactory,
+    Zend\Cache\Storage\Adapter as CacheAdapter,
+    Zend\Locale,
+    Zend\Log,
+    Zend\Log\Writer,
+    Zend\Translator,
+    Zend\Translator\Adapter;
 
 /**
  * @category   Zend
  * @package    Zend_Translator
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Translator
  */
@@ -44,6 +45,7 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         putenv("HTTP_ACCEPT_LANGUAGE=,ja,de-AT-DE;q=1,en_US;q=0.5");
+
         if (Translator\Translator::hasCache()) {
             Translator\Translator::clearCache();
             Translator\Translator::removeCache();
@@ -54,9 +56,7 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
             Adapter\ArrayAdapter::removeCache();
         }
 
-        $cache = Cache\Cache::factory('Core', 'File',
-            array('lifetime' => 120, 'automatic_serialization' => true),
-            array('cache_dir' => __DIR__ . '/../_files/'));
+        $cache = CacheFactory::adapterFactory('memory', array('memory_limit' => 0));
         Translator\Translator::setCache($cache);
     }
 
@@ -246,20 +246,18 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
 
     public function testTestingCacheHandling()
     {
-        $cache = Cache\Cache::factory('Core', 'File',
-            array('lifetime' => 120, 'automatic_serialization' => true),
-            array('cache_dir' => __DIR__ . '/../_files/'));
+        $cache = CacheFactory::adapterFactory('memory', array('memory_limit' => 0));
         Translator\Translator::setCache($cache);
 
         $cache = Translator\Translator::getCache();
-        $this->assertTrue($cache instanceof Frontend\Core);
+        $this->assertTrue($cache instanceof CacheAdapter);
         $this->assertTrue(Translator\Translator::hasCache());
 
         $lang = new Translator\Translator(Translator\Translator::AN_ARRAY, array('msg1' => 'Message 1 (en)'), 'en');
         $adapter = $lang->getAdapter();
         $this->assertTrue($adapter instanceof Adapter\ArrayAdapter);
         $adaptercache = $adapter->getCache();
-        $this->assertTrue($adaptercache instanceof Frontend\Core);
+        $this->assertTrue($adaptercache instanceof CacheAdapter);
 
         Translator\Translator::clearCache();
         $this->assertTrue(Translator\Translator::hasCache());
@@ -385,9 +383,7 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetOptionsFromCache()
     {
-        $cache = Cache\Cache::factory('Core', 'File',
-            array('lifetime' => 120, 'automatic_serialization' => true),
-            array('cache_dir' => __DIR__ . '/../_files/'));
+        $cache = CacheFactory::adapterFactory('memory', array('memory_limit' => 0));
         Translator\Translator::setCache($cache);
 
         $lang = new Translator\Translator(Translator\Translator::AN_CSV, __DIR__ . '/Adapter/_files', 'en', array('delimiter' => ','));
@@ -866,9 +862,7 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetCacheThroughOptions()
     {
-        $cache = Cache\Cache::factory('Core', 'File',
-            array('lifetime' => 120, 'automatic_serialization' => true),
-            array('cache_dir' => __DIR__ . '/../_files/'));
+        $cache = CacheFactory::adapterFactory('memory', array('memory_limit' => 0));
 
         $translate = new Translator\Translator(array(
             'adapter' => Translator\Translator::AN_ARRAY,
@@ -878,7 +872,7 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
         ));
 
         $return = Translator\Translator::getCache();
-        $this->assertTrue($return instanceof Cache\Frontend);
+        $this->assertTrue($return instanceof CacheAdapter);
         $this->assertTrue(Translator\Translator::hasCache());
     }
 

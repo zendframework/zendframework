@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Reflection
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -32,7 +32,7 @@ use Zend\Code\Reflection,
  * @uses       \Zend\Code\Reflection\ReflectionDocblockTag
  * @category   Zend
  * @package    Zend_Reflection
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class DocBlockReflection implements Reflection
@@ -103,9 +103,9 @@ class DocBlockReflection implements Reflection
      * @param Reflector|string $commentOrReflector
      * @return \Zend\Code\Reflection\DocBlockReflection
      */
-    public function __construct($commentOrReflector, Docblock\TagManager $tagManager = null)
+    public function __construct($commentOrReflector, DocBlock\TagManager $tagManager = null)
     {
-        $this->tagManager = $tagManager ?: new Docblock\TagManager(Docblock\TagManager::USE_DEFAULT_PROTOTYPES);
+        $this->tagManager = $tagManager ?: new DocBlock\TagManager(DocBlock\TagManager::USE_DEFAULT_PROTOTYPES);
 
         if ($commentOrReflector instanceof \Reflector) {
             $this->reflector = $commentOrReflector;

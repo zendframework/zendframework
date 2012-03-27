@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage GApps
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -35,21 +35,10 @@ namespace Zend\GData;
  *
  * @link http://code.google.com/apis/apps/gdata_provisioning_api_v2.0_reference.html
  *
- * @uses       \Zend\GData\GData
- * @uses       \Zend\GData\App\Exception
- * @uses       \Zend\GData\App\InvalidArgumentException
- * @uses       \Zend\GData\App\IOException
- * @uses       \Zend\GData\GApps\EmailListFeed
- * @uses       \Zend\GData\GApps\EmailListRecipientFeed
- * @uses       \Zend\GData\GApps\Error
- * @uses       \Zend\GData\GApps\NicknameFeed
- * @uses       \Zend\GData\GApps\ServiceException
- * @uses       \Zend\GData\GApps\UserFeed
- * @uses       \Zend\Loader
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage GApps
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class GApps extends GData

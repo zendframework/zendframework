@@ -11,28 +11,32 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Cloud
- * @subpackage StorageService
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @package    Zend\Cloud\StorageService
+ * @subpackage Adapter
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-require_once 'Zend/Cloud/StorageService/Adapter.php';
-require_once 'Zend/Service/WindowsAzure/Storage/Blob.php';
-require_once 'Zend/Cloud/StorageService/Exception.php';
+/**
+ * namespace
+ */
+namespace Zend\Cloud\StorageService\Adapter;
+
+use Zend\Cloud\StorageService\Adapter,
+    Zend\Cloud\StorageService\Exception,
+    Zend\Service\WindowsAzure\Storage\Blob;
 
 /**
  *
  * Windows Azure Blob Service abstraction
  *
  * @category   Zend
- * @package    Zend_Cloud
- * @subpackage StorageService
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @package    Zend\Cloud\StorageService
+ * @subpackage Adapter
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Cloud_StorageService_Adapter_WindowsAzure
-    implements Zend_Cloud_StorageService_Adapter
+class WindowsAzure implements Adapter
 {
     const ACCOUNT_NAME      = 'storage_accountname';
     const ACCOUNT_KEY       = 'storage_accountkey';
@@ -54,7 +58,7 @@ class Zend_Cloud_StorageService_Adapter_WindowsAzure
     const RETURN_LIST  = 1;   // return native list
     const RETURN_NAMES = 2;  // return only names
 
-    const DEFAULT_HOST = Zend_Service_WindowsAzure_Storage::URL_CLOUD_BLOB;
+    const DEFAULT_HOST = Zend\Service\WindowsAzure\Storage::URL_CLOUD_BLOB;
 
     /**
      * Storage container to operate on
@@ -66,26 +70,26 @@ class Zend_Cloud_StorageService_Adapter_WindowsAzure
     /**
      * Storage client
      *
-     * @var Zend_Service_WindowsAzure_Storage_Blob
+     * @var Zend\Service\WindowsAzure\Storage\Blob
      */
     protected $_storageClient = null;
 
     /**
-     * Creates a new Zend_Cloud_Storage_WindowsAzure instance
+     * Creates a new Zend\Cloud\Storage\WindowsAzure instance
      *
-     * @param array|Zend_Config  $options   Options for the Zend_Cloud_Storage_WindowsAzure instance
+     * @param array|Zend\Config\Config  $options   Options for the Zend\Cloud\Storage\WindowsAzure instance
      */
     public function __construct($options = array())
     {
-        if ($options instanceof Zend_Config) {
+        if ($options instanceof \Zend\Config\Config) {
             $options = $options->toArray();
         }
 
         if (!is_array($options)) {
-            throw new Zend_Cloud_StorageService_Exception('Invalid options provided');
+            throw new Exception\InvalidArgumentException('Invalid options provided');
         }
 
-        // Build Zend_Service_WindowsAzure_Storage_Blob instance
+        // Build Zend\Service\WindowsAzure\Storage\Blob instance
         if (!isset($options[self::HOST])) {
             $host = self::DEFAULT_HOST;
         } else {
@@ -93,13 +97,13 @@ class Zend_Cloud_StorageService_Adapter_WindowsAzure
         }
 
         if (!isset($options[self::ACCOUNT_NAME])) {
-            throw new Zend_Cloud_StorageService_Exception('No Windows Azure account name provided.');
+            throw new Exception\InvalidArgumentException('No Windows Azure account name provided.');
         }
         if (!isset($options[self::ACCOUNT_KEY])) {
-            throw new Zend_Cloud_StorageService_Exception('No Windows Azure account key provided.');
+            throw new Exception\InvalidArgumentException('No Windows Azure account key provided.');
         }
 
-        $this->_storageClient = new Zend_Service_WindowsAzure_Storage_Blob($host,
+        $this->_storageClient = new Blob($host,
              $options[self::ACCOUNT_NAME], $options[self::ACCOUNT_KEY]);
 
         // Parse other options
@@ -160,11 +164,11 @@ class Zend_Cloud_StorageService_Adapter_WindowsAzure
                 $path,
                 $returnPath
             );
-        } catch (Zend_Service_WindowsAzure_Exception $e) {
+        } catch (Zend\Service\WindowsAzure\Exception $e) {
             if (strpos($e->getMessage(), "does not exist") !== false) {
                 return false;
             }
-            throw new Zend_Cloud_StorageService_Exception('Error on fetch: '.$e->getMessage(), $e->getCode(), $e);
+            throw new Exception\RuntimeException('Error on fetch: '.$e->getMessage(), $e->getCode(), $e);
         }
 
         // Return value
@@ -223,9 +227,9 @@ class Zend_Cloud_StorageService_Adapter_WindowsAzure
                 $destinationPath,
                 $temporaryFilePath
             );
-        } catch(Zend_Service_WindowsAzure_Exception $e) {
+        } catch(Zend\Service\WindowsAzure\Exception $e) {
             @unlink($temporaryFilePath);
-            throw new Zend_Cloud_StorageService_Exception('Error on store: '.$e->getMessage(), $e->getCode(), $e);
+            throw new Exception\RuntimeException('Error on store: '.$e->getMessage(), $e->getCode(), $e);
         }
         if ($removeTemporaryFilePath) {
             @unlink($temporaryFilePath);
@@ -246,8 +250,8 @@ class Zend_Cloud_StorageService_Adapter_WindowsAzure
                 $this->_container,
                 $path
             );
-        } catch (Zend_Service_WindowsAzure_Exception $e) {
-            throw new Zend_Cloud_StorageService_Exception('Error on delete: '.$e->getMessage(), $e->getCode(), $e);
+        } catch (Zend\Service\WindowsAzure\Exception $e) {
+            throw new Exception\RuntimeException('Error on delete: '.$e->getMessage(), $e->getCode(), $e);
         }
     }
 
@@ -268,8 +272,8 @@ class Zend_Cloud_StorageService_Adapter_WindowsAzure
                 $this->_container,
                 $destinationPath
             );
-        } catch (Zend_Service_WindowsAzure_Exception $e) {
-            throw new Zend_Cloud_StorageService_Exception('Error on copy: '.$e->getMessage(), $e->getCode(), $e);
+        } catch (Zend\Service\WindowsAzure\Exception $e) {
+            throw new Exception\RuntimeException('Error on copy: '.$e->getMessage(), $e->getCode(), $e);
         }
     }
 
@@ -295,8 +299,8 @@ class Zend_Cloud_StorageService_Adapter_WindowsAzure
                 $this->_container,
                 $sourcePath
             );
-        } catch (Zend_Service_WindowsAzure_Exception $e) {
-            throw new Zend_Cloud_StorageService_Exception('Error on move: '.$e->getMessage(), $e->getCode(), $e);
+        } catch (Zend\Service\WindowsAzure\Exception $e) {
+            throw new Exception\RunTimeException('Error on move: '.$e->getMessage(), $e->getCode(), $e);
         }
 
     }
@@ -341,8 +345,8 @@ class Zend_Cloud_StorageService_Adapter_WindowsAzure
                 $this->_container,
                 $path
             );
-        } catch (Zend_Service_WindowsAzure_Exception $e) {
-            throw new Zend_Cloud_StorageService_Exception('Error on list: '.$e->getMessage(), $e->getCode(), $e);
+        } catch (Zend\Service\WindowsAzure\Exception $e) {
+            throw new Exception\RuntimeException('Error on list: '.$e->getMessage(), $e->getCode(), $e);
         }
 
         // Return
@@ -372,11 +376,11 @@ class Zend_Cloud_StorageService_Adapter_WindowsAzure
                 $this->_container,
                 $path
             );
-        } catch (Zend_Service_WindowsAzure_Exception $e) {
+        } catch (Zend\Service\WindowsAzure\Exception $e) {
             if (strpos($e->getMessage(), "could not be accessed") !== false) {
                 return false;
             }
-            throw new Zend_Cloud_StorageService_Exception('Error on fetch: '.$e->getMessage(), $e->getCode(), $e);
+            throw new Exception\RuntimeException('Error on fetch: '.$e->getMessage(), $e->getCode(), $e);
         }
     }
 
@@ -393,9 +397,9 @@ class Zend_Cloud_StorageService_Adapter_WindowsAzure
     {
         try    {
             $this->_storageClient->setBlobMetadata($this->_container, $destinationPath, $metadata);
-        } catch (Zend_Service_WindowsAzure_Exception $e) {
+        } catch (Zend\Service\WindowsAzure\Exception $e) {
             if (strpos($e->getMessage(), "could not be accessed") === false) {
-                throw new Zend_Cloud_StorageService_Exception('Error on store metadata: '.$e->getMessage(), $e->getCode(), $e);
+                throw new Exception\RuntimeException('Error on store metadata: '.$e->getMessage(), $e->getCode(), $e);
             }
         }
     }
@@ -411,9 +415,9 @@ class Zend_Cloud_StorageService_Adapter_WindowsAzure
     {
         try {
             $this->_storageClient->setBlobMetadata($this->_container, $destinationPath, array());
-        } catch (Zend_Service_WindowsAzure_Exception $e) {
+        } catch (Zend\Service\WindowsAzure\Exception $e) {
             if (strpos($e->getMessage(), "could not be accessed") === false) {
-                throw new Zend_Cloud_StorageService_Exception('Error on delete metadata: '.$e->getMessage(), $e->getCode(), $e);
+                throw new Exception\RuntimeException('Error on delete metadata: '.$e->getMessage(), $e->getCode(), $e);
             }
         }
     }
@@ -427,14 +431,14 @@ class Zend_Cloud_StorageService_Adapter_WindowsAzure
     {
         try {
             $this->_storageClient->deleteContainer($this->_container);
-        } catch (Zend_Service_WindowsAzure_Exception $e) {
-            throw new Zend_Cloud_StorageService_Exception('Error on delete: '.$e->getMessage(), $e->getCode(), $e);
+        } catch (Zend\Service\WindowsAzure\Exception $e) {
+            throw new Exception\RuntimeException('Error on delete: '.$e->getMessage(), $e->getCode(), $e);
         }
     }
 
     /**
      * Get the concrete adapter.
-     * @return Zend_Service_Azure_Storage_Blob
+     * @return Zend\Service\Azure\Storage\Blob
      */
     public function getClient()
     {

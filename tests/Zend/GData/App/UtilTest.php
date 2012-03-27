@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_GData_App
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -29,7 +29,7 @@ use Zend\GData\App;
  * @category   Zend
  * @package    Zend_GData_App
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_GData
  * @group      Zend_GData_App
@@ -149,6 +149,17 @@ class UtilTest extends \PHPUnit_Framework_TestCase
         }
         // Excetion not thrown, this is bad.
         $this->fail("Exception not thrown.");
+    }
+
+    /**
+     * @group ZF-11610
+     */
+    public function testFormatTimestepHandlesSmallUnixTimestampProperly()
+    {
+        $this->assertEquals(
+            '1970-01-01T00:02:03+00:00',
+            App\Util::formatTimestamp(123)
+        );
     }
 
     public function testFindGreatestBoundedValueReturnsMax() {

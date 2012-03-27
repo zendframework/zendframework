@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Gdata
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -29,15 +29,10 @@ namespace Zend\GData;
  * for Installed Applications" also known as "ClientLogin".
  * @see http://code.google.com/apis/accounts/AuthForInstalledApps.html
  *
- * @uses       \Zend\GData\App\AuthException
- * @uses       \Zend\GData\App\CaptchaRequiredException
- * @uses       \Zend\GData\App\HttpException
- * @uses       \Zend\GData\HttpClient
- * @uses       \Zend\Version
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Gdata
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class ClientLogin

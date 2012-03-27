@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<section 
+    xmlns="http://docbook.org/ns/docbook" version="5.0"
+    xml:id="zend.mvc.controller-plugins">
+  <info><title>Controller Plugins</title></info>
+
+  <para>
+    Quando usi l'<classname>ActionController</classname> o 
+    <classname>RestfulController</classname>, o se tu utilizzi il
+    <classname>Zend\Mvc\Controller\PluginBroker</classname> nei tuoi
+    controller custom, puoi avere accesso ad un numero di plugin
+    precostruiti. In aggiunta, puoi registrare dei tuoi plugin
+    custom con il broker, sempre se vuoi con 
+    <classname>Zend\Loader\PluginBroker</classname>.
+  </para>
+
+  <para>
+    I plugin precostruiti sono:
+  </para>
+
+  <itemizedlist>
+    <listitem>
+      <para>
+        <classname>Zend\Mvc\Controller\Plugin\FlashMessenger</classname>
+      </para>
+    </listitem>
+
+    <listitem>
+      <para>
+        <classname>Zend\Mvc\Controller\Plugin\Forward</classname>
+      </para>
+    </listitem>
+
+    <listitem>
+      <para>
+        <classname>Zend\Mvc\Controller\Plugin\Redirect</classname>
+      </para>
+    </listitem>
+
+    <listitem>
+      <para>
+        <classname>Zend\Mvc\Controller\Plugin\Url</classname>
+      </para>
+    </listitem>
+  </itemizedlist>
+
+  <para>
+    Se il tuo controller implementa l'interfaccia 
+    <classname>Zend\Loader\Pluggable</classname>, puoi accedere a quei
+    plugin utilizzando il loro nome corto attraverso il metodo 
+    <methodname>plugin()</methodname>: 
+  </para>
+
+  <programlisting language="php"><![CDATA[
+$plugin = $this->plugin('url');
+]]></programlisting>
+
+  <para>
+    Per un ulteriore strato di convenienza, entrambi i 
+    <classname>ActionController</classname> e <classname>RestfulController</classname>
+    hanno l'implementazione <methodname>__call()</methodname> che 
+    ti permette di ottenere i plugin attraverso le chiamate al metodo:
+  </para>
+
+  <programlisting language="php"><![CDATA[
+$plugin = $this->url();
+]]></programlisting>
+
+  <section xml:id="zend.mvc.controller-plugins.flashmessenger">
+    <info><title>Il FlashMessenger</title></info>
+
+    <para>
+      Il <classname>FlashMessenger</classname> è un plugin disegnato
+      per creare e ricevere messaggi, basati sulla sessione, che 
+      "scadono" da soli. Questo espone diversi metodi:
+    </para>
+
+    <itemizedlist>
+      <listitem>
+        <para>
+          <methodname>setSessionManager()</methodname> ti permette di specificare
+          un sistema alternativo di session manager, se lo desideri.
+        </para>
+      </listitem>
+
+      <listitem>
+        <para>
+          <methodname>getSessionManager()</methodname> ti permette di ricevere il 
+          session manager registrato.
+        </para>
+      </listitem>
+
+      <listitem>
+        <para>
+          <methodname>getContainer()</methodname> ritorna l'instanza
+          <classname>Zend\Session\Container</classname> dove sono salvati
+          i messaggi del flash messenger.
+        </para>
+      </listitem>
+
+      <listitem>
+        <para>
+          <methodname>setNamespace()</methodname> ti permette di specificare
+          un namespace specifico nel container che ti permette di salvare e ricevere
+          messaggi flash.
+        </para>
+      </listitem>
+
+      <listitem>
+        <para>
+          <methodname>getNamespace()</methodname> ti permette di ricevere il nome
+          del namespace dei messaggi flash.
+        </para>
+      </listitem>
+
+      <listitem>
+        <para>
+          <methodname>addMessage()</methodname> ti permette di aggiungere un messaggio
+          al namespace corrente del tuo session container.
+        </para>
+      </listitem>
+
+      <listitem>
+        <para>
+          <methodname>hasMessages()</methodname> ti permette di determinare se sono
+          presente messaggi flash dal namespace corrente nel session container.
+        </para>
+      </listitem>
+
+      <listitem>
+        <para>
+          <methodname>getMessages()</methodname> ricevi i messaggi flash dal namespace
+          corrente del tuo session controller.
+        </para>
+      </listitem>
+
+      <listitem>
+        <para>
+          <methodname>clearMessages()</methodname> cancella tutti i messaggi nel 
+          namespsace corrente del tuo session container.
+        </para>
+      </listitem>
+
+      <listitem>
+        <para>
+          <methodname>hasCurrentMessages()</methodname> indica se sono stati aggiunti
+          dei messaggi durante la richiesta corrente.
+        </para>
+      </listitem>
+
+      <listitem>
+        <para>
+          <methodname>getCurrentMessages()</methodname> riceve qualunque messaggi
+          aggiunto durante la richiesta corrente.
+        </para>
+      </listitem>
+
+      <listitem>
+        <para>
+          <methodname>clearCurrentMessages()</methodname> rimuove qualunque messaggi
+          aggiunto durante la richiesta corrente.
+        </para>
+      </listitem>
+    </itemizedlist>
+
+    <para>
+      In aggiunta, il <classname>FlashMessenger</classname> implementa sia
+      <classname>IteratorAggregate</classname> che <classname>Countable</classname>,
+      permettendoti di iterare i contenuti e contare i messaggi flash nel 
+      namespace corrente contenuti all'interno del tuo session container.
+    </para>
+
+    <section xml:id="zend.mvc.controller-plugins.examples">
+      <info><title>Esempi</title></info>
+
+      <programlisting language="php"><![CDATA[
+public function processAction()
+{
+    // ... do some work ...
+    $this->flashMessenger()->addMessage('You are now logged in.');
+    return $this->redirect()->toRoute('user-success');
+}
+
+public function successAction()
+{
+    $return = array('success' => true);
+    $flashMessenger = $this->flashMessenger();
+    if ($flashMessenger->hasMessages()) {
+        $return['messages'] = $flashMessenger->getMessages();
+    }
+    return $return;
+}
+]]></programlisting>
+    </section>
+  </section>
+
+  <section xml:id="zend.mvc.controller-plugins.forward">
+    <info><title>Il Forward Plugin</title></info>
+
+    <para>
+      Occasionalmente, vuoi eseguire controller addizionali a partire da
+      un controller in uso -- per esempio, potresti utilizzare questo 
+      approccio quando stai contruendo dei contenuti tipo "widget". Il
+      <classname>Forward</classname> plugin ti aiuta a lavorare su questo.
+    </para>
+
+    <para>
+      Per lavorare con il <classname>Forward</classname> plugin, il controller
+      che lo chiame deve essere un <classname>LocatorAware</classname>; altrimenti, 
+      il plugin non sarà in grado di ricevere una configurata istanza del
+      controller richiesto ed iniettarla. 
+    </para>
+
+    <para>
+      Il plugin espone un solo metodo, <methodname>dispatch()</methodname>, che
+      accetta due argomenti:
+    </para>
+
+    <itemizedlist>
+      <listitem>
+        <para>
+          <varnane>$name</varnane>, il nome del controller da invocare.
+          Questo dovrebbe essere un nome di classe completamente identificabile,
+          oppure un alias definito e riconoscibile dall'istanza Locator attaccata
+          al controller invocante.          
+        </para>
+      </listitem>
+
+      <listitem>
+        <para>
+          <varname>$params</varname> è un array di parametri opzionale che mostra
+          un oggetto <classname>RouteMatch</classname> specifico per la richiesta.
+        </para>
+      </listitem>
+    </itemizedlist>
+
+    <para>
+      <classname>Forward</classname> ritorna il risultato dell'esecuzione del
+      controller richiesto; è compito dello sviluppatore determinare cosa fare,
+      se presente, con questa risposta. Una raccomandazione è di aggregare questa
+      in un valore di ritorno dal controller invocato.
+    </para>
+
+    <para>
+      Come per esempio:
+    </para>
+
+    <programlisting language="php"><![CDATA[
+$foo = $this->forward()->dispatch('foo', array('action' => 'process'));
+return array(
+    'somekey' => $somevalue,
+    'foo'     => $foo,
+);
+]]></programlisting>
+  </section>
+
+  <section xml:id="zend.mvc.controller-plugins.redirect">
+    <info><title>Il Redirect Plugin</title></info>
+
+    <para>
+      Ridirezionamenti sono un'operazione tipica in una applicazione. Se
+      viene realizzato manualmente, ci sarà bisogno di fare questi step:
+    </para>
+
+    <itemizedlist>
+      <listitem>
+        <para>
+          Assemblare una URL utilizzando il router
+        </para>
+      </listitem>
+
+      <listitem>
+        <para>
+          Creare ed iniettare un header "Location" all'interno dell'oggetto 
+          <classname>Response</classname>, puntando all'URL assemblato.
+        </para>
+      </listitem>
+
+      <listitem>
+        <para>
+          Impostare lo status code (codice di stato) dell'oggetto
+          <classname>Response</classname> ad uno degli stati 3xx del
+          protocollo HTTP.
+        </para>
+      </listitem>
+    </itemizedlist>
+
+    <para>
+      Il <classname>Redirect</classname> plugin fa questo lavoro per te. Questo
+      offre due metodi:
+    </para>
+
+    <itemizedlist>
+      <listitem>
+        <para>
+          <methodname>toRoute($route, array $params = array(), array $options = array())</methodname>:
+          Ridireziona verso una strada conosciuta, utilizzando i <varname>$params</varname> e
+          <varname>$options</varname> forniti per assemblare un URL.
+        </para>
+      </listitem>
+
+      <listitem>
+        <para>
+          <methodname>toUrl($url)</methodname>: Semplicemente ridireziona verso
+          una URL fornita.
+        </para>
+      </listitem>
+    </itemizedlist>
+
+    <para>
+      In tutti i casi, l'oggetto <classname>Response</classname> è ritornato.
+      Se rispondi con questo immediatamente, stai effettivamente cortocircuitando
+      l'esecuzione della richiesta.
+    </para>
+
+    <para>
+      Una nota: questo plugin richiede che il controller che lo invoca 
+      deve implementare <classname>InjectApplicationEvent</classname>, e
+      così ha un <classname>MvcEvent</classname> composto, così come 
+      riceve il rute dall'oggetto evento.
+    </para>
+
+    <para>
+      Un esempio:
+    </para>
+
+    <programlisting language="php"><![CDATA[
+return $this->redirect()->toRoute('login-success');
+]]></programlisting>
+  </section>
+
+  <section xml:id="zend.mvc.controller-plugins.url">
+    <info><title>L'Url Plugin</title></info>
+
+    <para>
+      Spesso vuoi generare gli URL da una strada definita insieme ai tuoi
+      controller -- per riuscire a realizzare una view, generare gli header,
+      etc. Finchè l'oggetto <classname>MvcEvent</classname> compone il 
+      router, farlo manualmente richiede questo workflow:
+    </para>
+
+    <programlisting language="php"><![CDATA[
+$router = $this->getEvent()->getRouter();
+$url    = $router->assemble($params, array('name' => 'route-name'));
+]]></programlisting>
+
+    <para>
+      L'helper <classname>Url</classname> fa qualcosa di più conveniente:
+    </para>
+
+    <programlisting language="php"><![CDATA[
+$url = $this->url()->fromRoute('route-name', $params);
+]]></programlisting>
+
+    <para>
+      Il metodo <methodname>fromRoute()</methodname> è l'unico metodo
+      pubblico, ed ha la seguente firma: 
+    </para>
+
+    <programlisting language="php"><![CDATA[
+public function fromRoute($route, array $params = array(), array $options = array())
+]]></programlisting>
+
+    <para>
+      Un'osservazione: questo plugin richiede che il controller che lo 
+      invoca implementi <classname>InjectApplicationEvent</classname>, così
+      da avere un <classname>MvcEvent</classname> composto, così riceve il 
+      router da un oggetto evento.
+    </para>
+  </section>
+</section>

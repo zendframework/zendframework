@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_View
  * @subpackage Helper
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -39,7 +39,7 @@ use Zend\Loader\ShortNameLocator,
  * @category   Zend
  * @package    Zend_View
  * @subpackage Helper
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Navigation extends AbstractNavigationHelper
@@ -136,7 +136,8 @@ class Navigation extends AbstractNavigationHelper
     public function __call($method, array $arguments = array())
     {
         // check if call should proxy to another helper
-        if ($helper = $this->findHelper($method, false)) {
+        $helper = $this->findHelper($method, false);
+        if ($helper) {
             return call_user_func_array($helper, $arguments);
         }
 
@@ -146,8 +147,8 @@ class Navigation extends AbstractNavigationHelper
 
     /**
      * Set plugin loader for retrieving navigation helpers
-     * 
-     * @param ShortNameLocator $loader 
+     *
+     * @param ShortNameLocator $loader
      * @return void
      */
     public function setPluginLoader(ShortNameLocator $loader)
@@ -159,9 +160,9 @@ class Navigation extends AbstractNavigationHelper
     /**
      * Retrieve plugin loader for navigation helpers
      *
-     * Lazy-loads an instance of Navigation\HelperLoader if none currently 
+     * Lazy-loads an instance of Navigation\HelperLoader if none currently
      * registered.
-     * 
+     *
      * @return ShortNameLocator
      */
     public function getPluginLoader()

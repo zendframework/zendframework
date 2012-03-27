@@ -1,0 +1,941 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.cache.pattern">
+    <info>
+        <title>Zend\Cache\Pattern</title>
+    </info>
+
+    <section xml:id="zend.cache.pattern.intro">
+        <info>
+            <title>Overview</title>
+        </info>
+
+        <para>
+            Cache patterns are configurable objects to solve known performance bottlenecks. Each
+            should be used only in the specific situations they are designed to address.  For
+            example you can use one of the <classname>CallbackCache</classname>,
+            <classname>ObjectCache</classname> or <classname>ClassCache</classname> patterns to
+            cache method and function calls; to cache output generation, the
+            <classname>OutputCache</classname> pattern could assist.
+        </para>
+
+        <para>
+            All cache patterns implements the same interface,
+            <classname>Zend\Cache\Pattern</classname>, and most extend the abstract class
+            <classname>Zend\Cache\Pattern\AbstractPattern</classname> to implement basic logic.
+        </para>
+
+        <para>
+            Configuration is provided via the
+            <classname>Zend\Cache\Pattern\PatternOptions</classname> class, which can simply be
+            instantiated with an associative array of options passed to the constructor.  To
+            configure a pattern object, you can set an instance of
+            <classname>Zend\Cache\Pattern\PatternOptions</classname> with
+            <methodname>setOptions</methodname>, or provide your options (either as an associative
+            array or <classname>PatternOptions</classname> instance) as the second argument to the
+            factory.
+        </para>
+
+        <para>
+            It's also possible to use a single instance of
+            <classname>Zend\Cache\Pattern\PatternOptions</classname> and pass it to multiple pattern
+            objects.
+        </para>
+
+    </section>
+
+    <section xml:id="zend.cache.pattern.quick-start">
+        <info>
+            <title>Quick Start</title>
+        </info>
+
+        <para>
+            Pattern objects can either be created from the provided
+            <classname>Zend\Cache\PatternFactory</classname> factory, or, by simply
+            instantiating one of the <classname>Zend\Cache\Pattern\*</classname>
+            classes.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+use Zend\Cache\PatternFactory,
+    Zend\Cache\Pattern\PatternOptions;
+
+// Via the factory:
+$callbackCache = PatternFactory::factory('callback', array(
+    'storage'      => 'apc',
+    'cache_output' => true,
+));
+
+// OR, the equivalent manual instantiation:
+$callbackCache = new \Zend\Cache\Pattern\CallbackCache();
+$callbackCache->setOptions(new PatternOptions(array(
+    'storage'      => 'apc',
+    'cache_output' => true,
+)));
+]]></programlisting>
+
+    </section>
+
+    <section xml:id="zend.cache.pattern.options">
+        <info>
+            <title>Configuration Options</title>
+        </info>
+
+        <variablelist>
+            <varlistentry xml:id="zend.cache.pattern.options.cache-by-default">
+                <term>cache_by_default</term>
+
+                <listitem>
+                    <para>
+                        Flag indicating whether or not to cache by default. Used by the
+                        <classname>ClassCache</classname> and <classname>ObjectCache</classname>
+                        patterns.
+                    </para>
+
+                    <itemizedlist>
+                        <listitem>
+                            <methodsynopsis>
+                                <methodname>setCacheByDefault</methodname>
+                                <methodparam>
+                                    <funcparams>bool $cacheByDefault</funcparams>
+                                </methodparam>
+                            </methodsynopsis>
+
+                            <para>Implements a fluent interface.</para>
+                        </listitem>
+
+                        <listitem>
+                            <methodsynopsis>
+                                <methodname>getCacheByDefault</methodname>
+                                <void/>
+                            </methodsynopsis>
+
+                            <para>Returns boolean.</para>
+                        </listitem>
+                    </itemizedlist>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.cache.pattern.options.cache-output">
+                <term>cache_output</term>
+
+                <listitem>
+                    <para>
+                        Used by the <classname>CallbackCache</classname>,
+                        <classname>ClassCache</classname>, and <classname>ObjectCache</classname>
+                        patterns. Flag used to determine whether or not to cache output.
+                    </para>
+
+                    <itemizedlist>
+                        <listitem>
+                            <methodsynopsis>
+                                <methodname>setCacheOutput</methodname>
+                                <methodparam>
+                                    <funcparams>bool $cacheOutput</funcparams>
+                                </methodparam>
+                            </methodsynopsis>
+
+                            <para>Implements a fluent interface.</para>
+                        </listitem>
+
+                        <listitem>
+                            <methodsynopsis>
+                                <methodname>getCacheOutput</methodname>
+                                <void/>
+                            </methodsynopsis>
+
+                            <para>Returns boolean</para>
+                        </listitem>
+                    </itemizedlist>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.cache.pattern.options.class">
+                <term>class</term>
+
+                <listitem>
+                    <para>
+                        Set the name of the class to cache. Used by the
+                        <classname>ClassCache</classname> pattern.
+                    </para>
+
+                    <itemizedlist>
+                        <listitem>
+                            <methodsynopsis>
+                                <methodname>setclass</methodname>
+                                <methodparam>
+                                    <funcparams>string $class</funcparams>
+                                </methodparam>
+                            </methodsynopsis>
+
+                            <para>Implements a fluent interface.</para>
+                        </listitem>
+
+                        <listitem>
+                            <methodsynopsis>
+                                <methodname>getClass</methodname>
+                                <void/>
+                            </methodsynopsis>
+
+                            <para>Returns null|string</para>
+                        </listitem>
+                    </itemizedlist>
+                </listitem>
+
+            </varlistentry>
+
+            <varlistentry xml:id="zend.cache.pattern.options.class-cache-methods">
+                <term>class_cache_methods</term>
+
+                <listitem>
+                    <para>
+                        Set list of method return values to cache. Used by
+                        <classname>ClassCache</classname> Pattern.
+                    </para>
+
+                    <itemizedlist>
+                        <listitem>
+                            <methodsynopsis>
+                                <methodname>setClassCacheMethods</methodname>
+                                <methodparam>
+                                    <funcparams>array $classCacheMethods</funcparams>
+                                </methodparam>
+                            </methodsynopsis>
+
+                            <para>Implements a fluent interface.</para>
+                        </listitem>
+
+                        <listitem>
+                            <methodsynopsis>
+                                <methodname>getClassCacheMethods</methodname>
+                                <void/>
+                            </methodsynopsis>
+
+                            <para>Returns array</para>
+                        </listitem>
+                    </itemizedlist>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.cache.pattern.options.class-non-cache-methods">
+                <term>class_non_cache_methods</term>
+
+                <listitem>
+                    <para>
+                        Set list of method return values that should <emphasis>not</emphasis> be
+                        cached. Used by the <classname>ClassCache</classname> pattern.
+                    </para>
+
+                    <itemizedlist>
+                        <listitem>
+                            <methodsynopsis>
+                                <methodname>setClassNonCacheMethods</methodname>
+                                <methodparam>
+                                    <funcparams>array $classNonCacheMethods</funcparams>
+                                </methodparam>
+                            </methodsynopsis>
+
+                            <para>Implements a fluent interface.</para>
+                        </listitem>
+
+                        <listitem>
+                            <methodsynopsis>
+                                <methodname>getClassNonCacheMethods</methodname>
+                                <void/>
+                            </methodsynopsis>
+
+                            <para>Returns array</para>
+                        </listitem>
+                    </itemizedlist>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.cache.pattern.options.dir-perm">
+                <term>dir_perm</term>
+
+                <listitem>
+                    <para>
+                        Set directory permissions; proxies to "dir_umask" property, setting the
+                        inverse of the provided value. Used by the
+                        <classname>CaptureCache</classname> pattern.
+                    </para>
+
+                    <itemizedlist>
+                        <listitem>
+                            <methodsynopsis>
+                                <methodname>setDirPerm</methodname>
+                                <methodparam>
+                                    <funcparams>string|int $dirPerm</funcparams>
+                                </methodparam>
+                            </methodsynopsis>
+
+                            <para>Implements a fluent interface.</para>
+                        </listitem>
+
+                        <listitem>
+                            <methodsynopsis>
+                                <methodname>getDirPerm</methodname>
+                                <void/>
+                            </methodsynopsis>
+
+                            <para>Returns int</para>
+                        </listitem>
+                    </itemizedlist>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.cache.pattern.options.dir-umask">
+                <term>dir_umask</term>
+
+                <listitem>
+                    <para>
+                        Set the directory umask value. Used by the
+                        <classname>CaptureCache</classname> pattern.
+                    </para>
+
+                    <itemizedlist>
+                        <listitem>
+                            <methodsynopsis>
+                                <methodname>setDirUmask</methodname>
+                                <methodparam>
+                                    <funcparams>int $dirUmask</funcparams>
+                                </methodparam>
+                            </methodsynopsis>
+
+                            <para>Implements a fluent interface.</para>
+                        </listitem>
+
+                        <listitem>
+                            <methodsynopsis>
+                                <methodname>getDirUmask</methodname>
+                                <void/>
+                            </methodsynopsis>
+
+                            <para>Returns int</para>
+                        </listitem>
+                    </itemizedlist>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.cache.pattern.options.file-locking">
+                <term>file_locking</term>
+
+                <listitem>
+                    <para>
+                        Set whether or not file locking should be used. Used by the
+                        <classname>CaptureCache</classname> pattern.
+                    </para>
+
+                    <itemizedlist>
+                        <listitem>
+                            <methodsynopsis>
+                                <methodname>setFileLocking</methodname>
+                                <methodparam>
+                                    <funcparams>bool $fileLocking</funcparams>
+                                </methodparam>
+                            </methodsynopsis>
+
+                            <para>Implements a fluent interface.</para>
+                        </listitem>
+
+                        <listitem>
+                            <methodsynopsis>
+                                <methodname>getFileLocking</methodname>
+                                <void/>
+                            </methodsynopsis>
+
+                            <para>Returns bool</para>
+                        </listitem>
+                    </itemizedlist>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.cache.pattern.options.file-perm">
+                <term>file_perm</term>
+
+                <listitem>
+                    <para>
+                        Set file permissions; proxies to the "file_umask" property, setting
+                        the inverse of the value provided. Used by the
+                        <classname>CaptureCache</classname> pattern.
+                    </para>
+
+                    <itemizedlist>
+                        <listitem>
+                            <methodsynopsis>
+                                <methodname>setFilePerm</methodname>
+                                <methodparam>
+                                    <funcparams>int|string $filePerm</funcparams>
+                                </methodparam>
+                            </methodsynopsis>
+
+                            <para>Implements a fluent interface.</para>
+                        </listitem>
+
+                        <listitem>
+                            <methodsynopsis>
+                                <methodname>getFilePerm</methodname>
+                                <void/>
+                            </methodsynopsis>
+
+                            <para>Returns int</para>
+                        </listitem>
+                    </itemizedlist>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.cache.pattern.pattern-options.methods.set-file-umask">
+                <term>file_umask</term>
+
+                <listitem>
+                    <para>
+                        Set file umask; used by the <classname>CaptureCache</classname> pattern.
+                    </para>
+
+                    <itemizedlist>
+                        <listitem>
+                            <methodsynopsis>
+                                <methodname>setFileUmask</methodname>
+                                <methodparam>
+                                    <funcparams>int $fileUmask</funcparams>
+                                </methodparam>
+                            </methodsynopsis>
+
+                            <para>Implements a fluent interface.</para>
+                        </listitem>
+
+                        <listitem>
+                            <methodsynopsis>
+                                <methodname>getFileUmask</methodname>
+                                <void/>
+                            </methodsynopsis>
+
+                            <para>Returns int</para>
+                        </listitem>
+                    </itemizedlist>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.cache.pattern.options.index-filename">
+                <term>index_filename</term>
+
+                <listitem>
+                    <para>
+                        Set value for index filename. Used by the
+                        <classname>CaptureCache</classname> pattern.
+                    </para>
+
+                    <itemizedlist>
+                        <listitem>
+                            <methodsynopsis>
+                                <methodname>setIndexFilename</methodname>
+                                <methodparam>
+                                    <funcparams>string $indexFilename</funcparams>
+                                </methodparam>
+                            </methodsynopsis>
+
+                            <para>Implements a fluent interface.</para>
+                        </listitem>
+
+                        <listitem>
+                            <methodsynopsis>
+                                <methodname>getIndexFilename</methodname>
+                                <void/>
+                            </methodsynopsis>
+
+                            <para>Returns string</para>
+                        </listitem>
+                    </itemizedlist>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.cache.pattern.options.object">
+                <term>object</term>
+
+                <listitem>
+                    <para>
+                        Set object to cache; used by the <classname>ObjectCache</classname> pattern.
+                    </para>
+
+                    <itemizedlist>
+                        <listitem>
+                            <methodsynopsis>
+                                <methodname>setObject</methodname>
+                                <methodparam>
+                                    <funcparams>object $object</funcparams>
+                                </methodparam>
+                            </methodsynopsis>
+
+                            <para>Implements a fluent interface.</para>
+                        </listitem>
+
+                        <listitem>
+                            <methodsynopsis>
+                                <methodname>getObject</methodname>
+                                <void/>
+                            </methodsynopsis>
+
+                            <para>Returns null|object.</para>
+                        </listitem>
+                    </itemizedlist>
+                </listitem>
+            </varlistentry>
+
+           <varlistentry xml:id="zend.cache.pattern.options.object-cache-magic-properties">
+                <term>object_cache_magic_properties</term>
+
+                <listitem>
+                    <para>
+                        Set flag indicating whether or not to cache magic properties. Used by the
+                        <classname>ObjectCache</classname> pattern.
+                    </para>
+
+                    <itemizedlist>
+                        <listitem>
+                            <methodsynopsis>
+                                <methodname>setObjectCacheMagicProperties</methodname>
+                                <methodparam>
+                                    <funcparams>bool $objectCacheMagicProperties</funcparams>
+                                </methodparam>
+                            </methodsynopsis>
+
+                            <para>Implements a fluent interface.</para>
+                        </listitem>
+
+                        <listitem>
+                            <methodsynopsis>
+                                <methodname>getObjectCacheMagicProperties</methodname>
+                                <void/>
+                            </methodsynopsis>
+
+                            <para>Returns bool</para>
+                        </listitem>
+                    </itemizedlist>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.cache.pattern.options.object-cache-methods">
+                <term>object_cache_methods</term>
+
+                <listitem>
+                    <para>
+                        Set list of object methods for which to cache return values. Used by
+                        <classname>ObjectCache</classname> pattern.
+                    </para>
+
+                    <itemizedlist>
+                        <listitem>
+                            <methodsynopsis>
+                                <methodname>setObjectCacheMethods</methodname>
+                                <methodparam>
+                                    <funcparams>array $objectCacheMethods</funcparams>
+                                </methodparam>
+                            </methodsynopsis>
+
+                            <para>Implements a fluent interface.</para>
+                        </listitem>
+
+                        <listitem>
+                            <methodsynopsis>
+                                <methodname>getObjectCacheMethods</methodname>
+                                <void/>
+                            </methodsynopsis>
+
+                            <para>Returns array</para>
+                        </listitem>
+                    </itemizedlist>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.cache.pattern.options.object-key">
+                <term>object_key</term>
+
+                <listitem>
+                    <para>
+                        Set the object key part; used to generate a callback key in order to speed
+                        up key generation. Used by the <classname>ObjectCache</classname> pattern.
+                    </para>
+
+                    <itemizedlist>
+                        <listitem>
+                            <methodsynopsis>
+                                <methodname>setObjectKey</methodname>
+                                <methodparam>
+                                    <funcparams>null|string $objectKey</funcparams>
+                                </methodparam>
+                            </methodsynopsis>
+
+                            <para>Implements a fluent interface.</para>
+                        </listitem>
+
+                        <listitem>
+                            <methodsynopsis>
+                                <methodname>getObjectKey</methodname>
+                                <void/>
+                            </methodsynopsis>
+
+                            <para>Returns null|string</para>
+                        </listitem>
+                    </itemizedlist>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.cache.pattern.options.object-non-cache-methods">
+                <term>object_non_cache_methods</term>
+
+                <listitem>
+                    <para>
+                        Set list of object methods for which <emphasis>not</emphasis> to cache
+                        return values. Used by the <classname>ObjectCache</classname> pattern.
+                    </para>
+
+                    <itemizedlist>
+                        <listitem>
+                            <methodsynopsis>
+                                <methodname>setObjectNonCacheMethods</methodname>
+                                <methodparam>
+                                    <funcparams>array $objectNonCacheMethods</funcparams>
+                                </methodparam>
+                            </methodsynopsis>
+
+                            <para>Implements a fluent interface.</para>
+                        </listitem>
+
+                        <listitem>
+                            <methodsynopsis>
+                                <methodname>getObjectNonCacheMethods</methodname>
+                                <void/>
+                            </methodsynopsis>
+
+                            <para>Returns array</para>
+                        </listitem>
+                    </itemizedlist>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.cache.pattern.options.public-dir">
+                <term>public_dir</term>
+
+                <listitem>
+                    <para>
+                        Set location of public directory; used by the
+                        <classname>CaptureCache</classname> pattern.
+                    </para>
+
+                    <itemizedlist>
+                        <listitem>
+                            <methodsynopsis>
+                                <methodname>setPublicDir</methodname>
+                                <void/>
+                            </methodsynopsis>
+
+                            <para>Implements a fluent interface.</para>
+                        </listitem>
+
+                        <listitem>
+                            <methodsynopsis>
+                                <methodname>getPublicDir</methodname>
+                                <void/>
+                            </methodsynopsis>
+
+                            <para>Returns null|string</para>
+                        </listitem>
+                    </itemizedlist>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.cache.pattern.options.storage">
+                <term>storage</term>
+
+                <listitem>
+                    <para>
+                        Set the storage adapter. Required for the following Pattern classes:
+                        <classname>CallbackCache</classname>, <classname>ClassCache</classname>,
+                        <classname>ObjectCache</classname>, <classname>OutputCache</classname>.
+                    </para>
+
+                    <itemizedlist>
+                        <listitem>
+                            <methodsynopsis>
+                                <methodname>setStorage</methodname>
+                                <methodparam>
+                                    <funcparams>string|array|Zend\Cache\Storage\Adapter $storage</funcparams>
+                                </methodparam>
+                            </methodsynopsis>
+
+                            <para>Implements a fluent interface.</para>
+                        </listitem>
+
+                        <listitem>
+                            <methodsynopsis>
+                                <methodname>getStorage</methodname>
+                                <void/>
+                            </methodsynopsis>
+
+                            <para>Returns null|Zend\Cache\Storage\Adapter</para>
+                        </listitem>
+                    </itemizedlist>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.cache.pattern.options.tag-key">
+                <term>tag_key</term>
+
+                <listitem>
+                    <para>
+                        Set the prefix used for tag keys. Used by the
+                        <classname>CaptureCache</classname> pattern.
+                    </para>
+
+                    <itemizedlist>
+                        <listitem>
+                            <methodsynopsis>
+                                <methodname>setTagKey</methodname>
+                                <methodparam>
+                                    <funcparams>string $tagKey</funcparams>
+                                </methodparam>
+                            </methodsynopsis>
+
+                            <para>Implements a fluent interface.</para>
+                        </listitem>
+
+                        <listitem>
+                            <methodsynopsis>
+                                <methodname>getTagKey</methodname>
+                                <void/>
+                            </methodsynopsis>
+
+                            <para>Returns string</para>
+                        </listitem>
+                    </itemizedlist>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.cache.pattern.options.tags">
+                <term>tags</term>
+
+                <listitem>
+                    <para>
+                        Set list of tags to use for captured content. Used by the
+                        <classname>CaptureCache</classname> pattern.
+                    </para>
+
+                    <itemizedlist>
+                        <listitem>
+                            <methodsynopsis>
+                                <methodname>setTags</methodname>
+                                <methodparam>
+                                    <funcparams>array $tags</funcparams>
+                                </methodparam>
+                            </methodsynopsis>
+
+                            <para>Implements a fluent interface.</para>
+                        </listitem>
+
+                        <listitem>
+                            <methodsynopsis>
+                                <methodname>getTags</methodname>
+                                <void/>
+                            </methodsynopsis>
+
+                            <para>Returns array</para>
+                        </listitem>
+                    </itemizedlist>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.cache.pattern.options.tag-storage">
+                <term>
+                </term>
+
+                <listitem>
+                    <para>
+                        Set storage adapter to use for tags. Used by the
+                        <classname>CaptureCache</classname> pattern.
+                    </para>
+
+                    <itemizedlist>
+                        <listitem>
+                            <methodsynopsis>
+                                <methodname>setTagStorage</methodname>
+                                <methodparam>
+                                    <funcparams>string|array|Zend\Cache\Storage\Adapter $tagStorage</funcparams>
+                                </methodparam>
+                            </methodsynopsis>
+
+                            <para>Implements a fluent interface.</para>
+                        </listitem>
+
+                        <listitem>
+                            <methodsynopsis>
+                                <methodname>getTagStorage</methodname>
+                                <void/>
+                            </methodsynopsis>
+
+                            <para>Returns null|Zend\Cache\Storage\Adapter</para>
+                        </listitem>
+                    </itemizedlist>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+    </section>
+
+    <section xml:id="zend.cache.pattern.methods">
+        <info>
+            <title>Available Methods</title>
+        </info>
+
+        <variablelist>
+            <varlistentry xml:id="zend.cache.pattern.methods.set-options">
+                <term>setOptions</term>
+
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>setOptions</methodname>
+                        <methodparam>
+                            <funcparams>Zend\Cache\Pattern\PatternOptions $options</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+
+                    <para>Set pattern options</para>
+
+                    <para>Returns Zend\Cache\Pattern</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.cache.pattern.methods.get-options">
+                <term>getOptions</term>
+
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>getOptions</methodname>
+                        <void/>
+                    </methodsynopsis>
+
+                    <para>Get all pattern options</para>
+
+                    <para>Returns <classname>PatternOptions</classname> instance.</para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+    </section>
+
+    <section xml:id="zend.cache.pattern.examples">
+        <info>
+            <title>Examples</title>
+        </info>
+
+        <example xml:id="zend.cache.pattern.examples.callback">
+            <info><title>Using the callback cache pattern</title></info>
+
+            <programlisting language="php"><![CDATA[
+use Zend\Cache\PatternFactory;
+
+$callbackCache = PatternFactory::factory('callback', array(
+    'storage' => 'apc'
+));
+
+// Calls and caches the function doResourceIntensiceStuff with three arguments
+// and returns result
+$result = $callbackCache->call('doResourceIntensiveStuff', array(
+    'argument1',
+    'argument2',
+    'argumentN',
+));
+]]></programlisting>
+        </example>
+
+        <example xml:id="zend.cache.pattern.examples.object">
+            <info><title>Using the object cache pattern</title></info>
+
+            <programlisting language="php"><![CDATA[
+use Zend\Cache\PatternFactory;
+
+$object      = new MyObject();
+$objectProxy = PatternFactory::factory('object', array(
+    'object'  => $object,
+    'storage' => 'apc',
+));
+
+// Calls and caches $object->doResourceIntensiveStuff with three arguments
+// and returns result
+$result = $objectProxy->doResourceIntensiveStuff('argument1', 'argument2', 'argumentN');
+]]></programlisting>
+        </example>
+
+        <example xml:id="zend.cache.pattern.examples.class">
+            <info><title>Using the class cache pattern</title></info>
+
+            <programlisting language="php"><![CDATA[
+use Zend\Cache\PatternFactory;
+
+$classProxy = PatternFactory::factory('class', array(
+    'class'   => 'MyClass',
+    'storage' => 'apc',
+));
+
+// Calls and caches MyClass::doResourceIntensiveStuff with three arguments
+// and returns result
+$result = $classProxy->doResourceIntensiveStuff('argument1', 'argument2', 'argumentN');
+]]></programlisting>
+        </example>
+
+        <example xml:id="zend.cache.pattern.examples.output">
+            <info><title>Using the output cache pattern</title></info>
+
+            <programlisting language="php"><![CDATA[
+use Zend\Cache\PatternFactory;
+
+$outputCache = PatternFactory::factory('output', array(
+    'storage' => 'filesystem',
+));
+
+// Start capturing all output (excluding headers) and write it to storage.
+// If there is already a cached item with the same key it will be
+// output and return true, else false.
+if ($outputCache->start('MyUniqueKey') === false) {
+    echo 'cache output since: ' . date('H:i:s') . "<br />\n";
+    
+    // end capturing output, write content to cache storage and display
+    // captured content
+    $outputCache->end();
+}
+
+echo 'This output is never cached.';
+]]></programlisting>
+        </example>
+
+        <example xml:id="zend.cache.pattern.examples.capture">
+            <info><title>Using the capture cache pattern</title></info>
+            
+            <para>
+                You need to configure your HTTP server to redirect missing content to run your
+                script generating it.
+            </para>
+            
+            <para>
+                This example uses Apache with the following .htaccess:
+            </para>
+            
+            <programlisting language="plain"><![CDATA[
+ErrorDocument 404 /index.php
+]]></programlisting>
+            
+            <para>Within your index.php you can add the following content:</para>
+            
+            <programlisting language="php"><![CDATA[
+use Zend\Cache\PatternFactory;
+
+$capture = PatternFactory::factory('capture', array(
+    'public_dir' => __DIR__,
+));
+
+// Start capturing all output excl. headers. and write to public directory
+// If the request was already written the file will be overwritten.
+$capture->start();
+
+// do stuff to dynamically generate output
+
+]]></programlisting>
+        </example>
+    </section>
+</section>

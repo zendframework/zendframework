@@ -11,43 +11,46 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Cloud
- * @subpackage DocumentService
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @package    Zend\Cloud\DocumentService\Adapter
+ * @subpackage SimpleDb
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/*
- * @see Zend_Cloud_DocumentService_Query
+/**
+ * namespace
  */
-require_once 'Zend/Cloud/DocumentService/Query.php';
+namespace Zend\Cloud\DocumentService\Adapter\SimpleDb;
+
+use Zend\Cloud\DocumentService\Query as QueryInterface,
+    Zend\Cloud\DocumentService\Adapter\Exception,
+    Zend\Cloud\DocumentService\Adapter\SimpleDb as SimpleDbAdapter;
 
 /**
  * Class implementing Query adapter for working with SimpleDb queries in a
  * structured way
  *
  * @category   Zend
- * @package    Zend_Cloud
- * @subpackage DocumentService
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @package    Zend\Cloud\DocumentService\Adapter
+ * @subpackage SimpleDb
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Cloud_DocumentService_Adapter_SimpleDb_Query
-    extends Zend_Cloud_DocumentService_Query
+class Query extends QueryInterface
 {
     /**
-     * @var Zend_Cloud_DocumentService_Adapter_SimpleDb
+     * @var Zend\Cloud\DocumentService\Adapter\SimpleDb
      */
     protected $_adapter;
 
     /**
      * Constructor
      *
-     * @param  Zend_Cloud_DocumentService_Adapter_SimpleDb $adapter
+     * @param  SimpleDbAdapter $adapter
      * @param  null|string $collectionName
      * @return void
      */
-    public function __construct(Zend_Cloud_DocumentService_Adapter_SimpleDb $adapter, $collectionName = null)
+    public function __construct(SimpleDbAdapter $adapter, $collectionName = null)
     {
         $this->_adapter = $adapter;
         if (null !== $collectionName) {
@@ -58,7 +61,7 @@ class Zend_Cloud_DocumentService_Adapter_SimpleDb_Query
     /**
      * Get adapter
      *
-     * @return Zend_Cloud_DocumentService_Adapter_SimpleDb
+     * @return SimpleDbAdapter
      */
     public function getAdapter()
     {
@@ -130,8 +133,7 @@ class Zend_Cloud_DocumentService_Adapter_SimpleDb_Query
         }
         if (empty($from)) {
             if (null === $collectionName) {
-                require_once 'Zend/Cloud/DocumentService/Exception.php';
-                throw new Zend_Cloud_DocumentService_Exception("Query requires a FROM clause");
+                throw new Exception\InvalidArgumentException("Query requires a FROM clause");
             }
             $from = $adapter->quoteName($collectionName);
         }

@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Wildfire
  * @subpackage Plugin
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -38,7 +38,7 @@ use Zend\Wildfire\Plugin\FirePhp,
  * @category   Zend
  * @package    Zend_Wildfire
  * @subpackage Plugin
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class TableMessage extends Message
@@ -60,7 +60,7 @@ class TableMessage extends Message
      *
      * @param string $label The label of the table
      */
-    function __construct($label)
+    public function __construct($label)
     {
         parent::__construct(FirePhp::TABLE, null);
         $this->setLabel($label);

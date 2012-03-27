@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Soap
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -32,7 +32,7 @@ use DOMDocument,
  *
  * @category   Zend
  * @package    Zend_Soap
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Wsdl
@@ -540,28 +540,24 @@ class Wsdl
             case 'string':
             case 'str':
                 return 'xsd:string';
-                break;
+            case 'long':
+                return 'xsd:long';
             case 'int':
             case 'integer':
                 return 'xsd:int';
-                break;
             case 'float':
-            case 'double':
                 return 'xsd:float';
-                break;
+            case 'double':
+                return 'xsd:double';
             case 'boolean':
             case 'bool':
                 return 'xsd:boolean';
-                break;
             case 'array':
                 return 'soap-enc:Array';
-                break;
             case 'object':
                 return 'xsd:struct';
-                break;
             case 'mixed':
                 return 'xsd:anyType';
-                break;
             case 'void':
                 return '';
             default:
@@ -603,7 +599,8 @@ class Wsdl
             $type = substr($type, 1);
         }
 
-        if ($pos = strrpos($type, '\\')) {
+        $pos = strrpos($type, '\\');
+        if ($pos) {
             $type = substr($type, $pos+1);
         }
 

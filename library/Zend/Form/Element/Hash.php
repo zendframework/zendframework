@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Element
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -35,7 +35,7 @@ use Zend\Session\Container as SessionContainer,
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Element
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Hash extends Xhtml
@@ -52,6 +52,13 @@ class Hash extends Xhtml
      * @var mixed
      */
     protected $_hash;
+
+    /**
+     * Static cache of the session names to generated hashes
+     *
+     * @var array 
+     */
+    protected static $_hashCache;
 
     /**
      * Salt for CSRF token
@@ -253,12 +260,17 @@ class Hash extends Xhtml
      */
     protected function _generateHash()
     {
-        $this->_hash = md5(
-            mt_rand(1,1000000)
-            .  $this->getSalt()
-            .  $this->getName()
-            .  mt_rand(1,1000000)
-        );
+        if (isset(static::$_hashCache[$this->getSessionName()])) {
+            $this->_hash = static::$_hashCache[$this->getSessionName()];
+        } else {
+            $this->_hash = md5(
+                mt_rand(1,1000000)
+                .  $this->getSalt()
+                .  $this->getName()
+                .  mt_rand(1,1000000)
+            );
+            static::$_hashCache[$this->getSessionName()] = $this->_hash;
+        }
         $this->setValue($this->_hash);
     }
 }

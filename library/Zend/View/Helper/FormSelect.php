@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_View
  * @subpackage Helper
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -31,7 +31,7 @@ namespace Zend\View\Helper;
  * @category   Zend
  * @package    Zend_View
  * @subpackage Helper
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class FormSelect extends FormElement
@@ -100,9 +100,10 @@ class FormSelect extends FormElement
         }
 
         // Build the surrounding select element first.
+        $escaper = $this->view->plugin('escape');
         $xhtml = '<select'
-                . ' name="' . $this->view->vars()->escape($name) . '"'
-                . ' id="' . $this->view->vars()->escape($id) . '"'
+                . ' name="' . $escaper($name) . '"'
+                . ' id="' . $escaper($id) . '"'
                 . $multiple
                 . $disabled
                 . $this->_htmlAttribs($attribs)
@@ -122,7 +123,7 @@ class FormSelect extends FormElement
                 }
                 $list[] = '<optgroup'
                         . $opt_disable
-                        . ' label="' . $this->view->vars()->escape($opt_value) .'">';
+                        . ' label="' . $escaper($opt_value) .'">';
                 foreach ($opt_label as $val => $lab) {
                     $list[] = $this->_build($val, $lab, $value, $disable);
                 }
@@ -153,9 +154,10 @@ class FormSelect extends FormElement
             $disable = array();
         }
 
+        $escaper = $this->view->plugin('escape');
         $opt = '<option'
-             . ' value="' . $this->view->vars()->escape($value) . '"'
-             . ' label="' . $this->view->vars()->escape($label) . '"';
+             . ' value="' . $escaper($value) . '"'
+             . ' label="' . $escaper($label) . '"';
 
         // selected?
         if (in_array((string) $value, $selected)) {
@@ -167,7 +169,7 @@ class FormSelect extends FormElement
             $opt .= ' disabled="disabled"';
         }
 
-        $opt .= '>' . $this->view->vars()->escape($label) . "</option>";
+        $opt .= '>' . $escaper($label) . "</option>";
 
         return $opt;
     }

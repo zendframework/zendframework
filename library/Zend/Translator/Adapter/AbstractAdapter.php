@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Translator
  * @subpackage Zend_Translator_Adapter
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -27,7 +27,7 @@ namespace Zend\Translator\Adapter;
 use RecursiveDirectoryIterator,
     RecursiveIteratorIterator,
     RecursiveRegexIterator,
-    Zend\Cache,
+    Zend\Cache\Storage\Adapter as CacheAdapter,
     Zend\Config\Config,
     Zend\Log,
     Zend\Locale,
@@ -41,7 +41,7 @@ use RecursiveDirectoryIterator,
  * @category   Zend
  * @package    Zend_Translator
  * @subpackage Zend_Translator_Adapter
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class AbstractAdapter
@@ -60,7 +60,7 @@ abstract class AbstractAdapter
 
     /**
      * Internal cache for all adapters
-     * @var \Zend\Cache\Frontend
+     * @var CacheAdapter
      */
     protected static $_cache     = null;
 
@@ -160,7 +160,7 @@ abstract class AbstractAdapter
 
         if (isset(self::$_cache)) {
             $id = 'Zend_Translator_' . $this->toString() . '_Options';
-            $result = self::$_cache->load($id);
+            $result = self::$_cache->getItem($id);
             if ($result) {
                 $this->_options = $result;
             }
@@ -705,7 +705,7 @@ abstract class AbstractAdapter
         $read = true;
         if (isset(self::$_cache)) {
             $id = 'Zend_Translator_' . md5(serialize($options['content'])) . '_' . $this->toString();
-            $temp = self::$_cache->load($id);
+            $temp = self::$_cache->getItem($id);
             if ($temp) {
                 $read = false;
             }
@@ -992,7 +992,7 @@ abstract class AbstractAdapter
     /**
      * Returns the set cache
      *
-     * @return \Zend\Cache\Frontend\Core The set cache
+     * @return CacheAdapter The set cache
      */
     public static function getCache()
     {
@@ -1002,9 +1002,9 @@ abstract class AbstractAdapter
     /**
      * Sets a cache for all Zend_Translator_Adapter's
      *
-     * @param \Zend\Cache\Frontend $cache Cache to store to
+     * @param CacheAdapter $cache Cache to store to
      */
-    public static function setCache(Cache\Frontend $cache)
+    public static function setCache(CacheAdapter $cache)
     {
         self::$_cache = $cache;
         self::_getTagSupportForCache();
@@ -1047,9 +1047,9 @@ abstract class AbstractAdapter
                 $tag = 'Zend_Translator';
             }
 
-            self::$_cache->clean(Cache\Cache::CLEANING_MODE_MATCHING_TAG, array($tag));
+            self::$_cache->clear(CacheAdapter::MATCH_TAGS_OR, array('tags' => array($tag)));
         } else {
-            self::$_cache->clean(Cache\Cache::CLEANING_MODE_ALL);
+            self::$_cache->clear(CacheAdapter::MATCH_ALL);
         }
     }
 
@@ -1064,12 +1064,12 @@ abstract class AbstractAdapter
     protected function saveCache($data, $id)
     {
         if (self::$_cacheTags) {
-            self::$_cache->save($data, $id, array($this->_options['tag']));
+            self::$_cache->setItem($id, $data, array('tags' => array($this->_options['tag'])));
         } else {
-            self::$_cache->save($data, $id);
+            self::$_cache->setItem($id, $data);
         }
 
-        if (!self::$_cache->test($id)) {
+        if (!self::$_cache->hasItem($id)) {
             if (!$this->_options['disableNotices']) {
                 if ($this->_options['log']) {
                     $this->_options['log']->log("Writing to cache failed.", $this->_options['logPriority']);
@@ -1078,7 +1078,7 @@ abstract class AbstractAdapter
                 }
             }
 
-            self::$_cache->remove($id);
+            self::$_cache->removeItem($id);
             return false;
         }
 
@@ -1095,18 +1095,15 @@ abstract class AbstractAdapter
     /**
      * Internal method to check if the given cache supports tags
      *
-     * @param Zend_Cache $cache
+     * @return void
      */
     private static function _getTagSupportForCache()
     {
-        $backend = self::$_cache->getBackend();
-        if ($backend instanceof Cache\Backend\ExtendedInterface) {
-            $cacheOptions = $backend->getCapabilities();
-            self::$_cacheTags = $cacheOptions['tags'];
-        } else {
+        if (!self::$_cache instanceof CacheAdapter) {
             self::$_cacheTags = false;
+            return false;
         }
-
-        return self::$_cacheTags;
+        self::$_cacheTags = true;
+        return true;
     }
 }

@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Test
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -29,7 +29,7 @@ use Zend\Test\PHPUnit\Db;
  * @category   Zend
  * @package    Zend_Test
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Test
  */
@@ -65,7 +65,7 @@ class ConnectionTest extends \PHPUnit_Framework_TestCase
         $connection = $this->createConnection();
         $ret = $connection->createQueryTable("foo", "foo");
 
-        $this->assertType('Zend\Test\PHPUnit\Db\DataSet\QueryTable', $ret);
+        $this->assertInstanceOf('Zend\Test\PHPUnit\Db\DataSet\QueryTable', $ret);
     }
 
     public function testGetSchema()
@@ -81,7 +81,7 @@ class ConnectionTest extends \PHPUnit_Framework_TestCase
         $connection = $this->createConnection();
         $metadata = $connection->getMetaData();
 
-        $this->assertType('Zend\Test\PHPUnit\Db\Metadata\Generic', $metadata);
+        $this->assertInstanceOf('Zend\Test\PHPUnit\Db\Metadata\Generic', $metadata);
     }
 
     public function testGetTruncateCommand()

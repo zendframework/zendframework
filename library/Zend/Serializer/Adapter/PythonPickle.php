@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Serializer
  * @subpackage Adapter
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -39,7 +39,7 @@ use Zend\Serializer\Exception\InvalidArgumentException,
  * @category   Zend
  * @package    Zend_Serializer
  * @subpackage Adapter
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class PythonPickle extends AbstractAdapter
@@ -300,7 +300,7 @@ class PythonPickle extends AbstractAdapter
                 // LONG_BINGET + pack("<i", i)
                 $idBin = pack('l', $id);
                 if (self::$_isLittleEndian === false) {
-                    $idBin = strrev($bin);
+                    $idBin = strrev($idBin);
                 }
                 $this->_pickle .= self::OP_LONG_BINGET . $idBin;
             }
@@ -325,7 +325,7 @@ class PythonPickle extends AbstractAdapter
                 // LONG_BINPUT + pack("<i", i)
                 $idBin = pack('l', $id);
                 if (self::$_isLittleEndian === false) {
-                    $idBin = strrev($bin);
+                    $idBin = strrev($idBin);
                 }
                 $this->_pickle .= self::OP_LONG_BINPUT . $idBin;
             }

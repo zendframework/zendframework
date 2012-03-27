@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Translator
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -27,6 +27,7 @@ namespace ZendTest\Translator\Adapter;
 use Zend\Translator\Adapter;
 use Zend\Translator;
 use Zend\Locale;
+use Zend\Translator\Exception\InvalidFileTypeException;
 
 /**
  * Zend_Translator_Adapter_Tmx
@@ -40,7 +41,7 @@ use Zend\Locale;
  * @category   Zend
  * @package    Zend_Translator
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Translator
  */
@@ -63,6 +64,19 @@ class TmxTest extends \PHPUnit_Framework_TestCase
     {
         $this->setExpectedException('Zend\Translator\Exception\InvalidFileTypeException');
         $adapter = new Adapter\Tmx(__DIR__ . '/_files/failed.tmx', 'en');
+    }
+    
+    /**
+     * @group ZF-12012
+     */
+    public function testErrorOnCreateIncludesFilename()
+    {
+        try {
+            $adapter = new Adapter\Tmx(__DIR__ . '/_files/failed.tmx', 'en');
+            $this->fail("exception expected");
+        } catch (InvalidFileTypeException $e) {
+            $this->assertContains('failed.tmx', $e->getMessage());
+        }
     }
 
     public function testToString()

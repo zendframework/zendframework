@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Session
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id:$
  */
@@ -29,7 +29,7 @@ use Zend\Session\Configuration\SessionConfiguration;
  * @package    Zend_Session
  * @subpackage UnitTests
  * @group      Zend_Session
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class SessionConfigurationTest extends \PHPUnit_Framework_TestCase
@@ -105,7 +105,7 @@ class SessionConfigurationTest extends \PHPUnit_Framework_TestCase
     public function testSettingInvalidSaveHandlerRaisesException()
     {
         $this->setExpectedException('Zend\Session\Exception\InvalidArgumentException', 'Invalid save handler specified');
-        $this->config->setSaveHandler('foobar_bogus');
+        $this->config->setPhpSaveHandler('foobar_bogus');
     }
 
     // session.gc_probability

@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Mail
  * @subpackage Storage
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -24,19 +24,11 @@
  */
 namespace Zend\Mail\Storage;
 
-use Zend\Mail\AbstractStorage,
-    Zend\Mail\Storage\Exception,
-    Zend\Mail\Storage;
-
 /**
- * @uses       \Zend\Mail\Message\File
- * @uses       \Zend\Mail\Storage\Storage
- * @uses       \Zend\Mail\Storage\AbstractStorage
- * @uses       \Zend\Mail\Storage\Exception
  * @category   Zend
  * @package    Zend_Mail
  * @subpackage Storage
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Maildir extends AbstractStorage

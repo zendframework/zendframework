@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_View
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -23,10 +23,11 @@
  * @namespace
  */
 namespace ZendTest\View\Helper;
-use Zend\Cache;
-use Zend\Currency;
-use Zend\View\Helper;
 
+use Zend\Cache\StorageFactory as CacheFactory,
+    Zend\Cache\Storage\Adapter as CacheAdapter,
+    Zend\Currency,
+    Zend\View\Helper;
 
 /**
  * Test class for Zend_View_Helper_Currency
@@ -34,7 +35,7 @@ use Zend\View\Helper;
  * @category   Zend
  * @package    Zend_View
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_View
  * @group      Zend_View_Helper
@@ -64,12 +65,9 @@ class CurrencyTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->clearRegistry();
-        $this->_cache = Cache\Cache::factory('Core', 'File',
-                 array('lifetime' => 120, 'automatic_serialization' => true),
-                 array('cache_dir' => sys_get_temp_dir())
-                 );
-        Currency\Currency::setCache($this->_cache);
 
+        $this->_cache = CacheFactory::adapterFactory('memory', array('memory_limit' => 0));
+        Currency\Currency::setCache($this->_cache);
 
         $this->helper = new Helper\Currency('de_AT');
     }
@@ -83,7 +81,7 @@ class CurrencyTest extends \PHPUnit_Framework_TestCase
     public function tearDown()
     {
         unset($this->helper);
-        $this->_cache->clean(Cache\Cache::CLEANING_MODE_ALL);
+        $this->_cache->clear(CacheAdapter::MATCH_ALL);
         $this->clearRegistry();
     }
 

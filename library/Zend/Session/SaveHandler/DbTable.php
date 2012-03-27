@@ -14,36 +14,34 @@
  *
  * @category   Zend
  * @package    Zend_Session
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace Zend\Session\SaveHandler;
 
-use Zend\Session\SaveHandler as Savable,
+use Zend\Config\Config as Configuration,
+    Zend\Session\SaveHandler as Savable,
     Zend\Session\Container,
-    Zend\Session\Manager,
+    Zend\Session\Exception,
     Zend\Db\Table\AbstractTable,
     Zend\Db\Table\AbstractRow;
 
 /**
  * DB Table session save handler
  *
- * @uses       Zend\Config
- * @uses       Zend_Db_Table_Abstract
- * @uses       Zend_Db_Table_Row_Abstract
- * @uses       Zend\Session\Manager
- * @uses       Zend\Session\SaveHandler\Exception
  * @category   Zend
  * @package    Zend_Session
  * @subpackage SaveHandler
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class DbTable
     extends AbstractTable
     implements Savable
 {
+    const NAME = 'name';
+
     const PRIMARY_ASSIGNMENT                   = 'primaryAssignment';
     const PRIMARY_ASSIGNMENT_SESSION_SAVE_PATH = 'sessionSavePath';
     const PRIMARY_ASSIGNMENT_SESSION_NAME      = 'sessionName';
@@ -62,9 +60,11 @@ class DbTable
     const PRIMARY_TYPE_WHERECLAUSE = 'PRIMARY_TYPE_WHERECLAUSE';
 
     /**
-     * @var Zend\Session\Handler
+     * Session table name
+     *
+     * @var string
      */
-    protected $_manager;
+    protected $_name;
 
     /**
      * Session table primary key value assignment
@@ -125,9 +125,10 @@ class DbTable
     /**
      * Constructor
      *
-     * $config is an instance of Zend_Config or an array of key/value pairs containing configuration options for
-     * Zend_Session_SaveHandler_DbTable and Zend_Db_Table_Abstract. These are the configuration options for
-     * Zend_Session_SaveHandler_DbTable:
+     * $config is an instance of Zend\Config\Config. These are the configuration options for
+     * Zend\Session\SaveHandler\DbTable:
+     *
+     * name              => (string) Session table name
      *
      * primaryAssignment => (string|array) Session table primary key value assignment
      *      (optional; default: 1 => sessionId) You have to assign a value to each primary key of your session table.
@@ -152,25 +153,19 @@ class DbTable
      * overrideLifetime  => (boolean) Whether or not the lifetime of an existing session should be overridden
      *      (optional; default: false)
      *
-     * @param  Zend_Config|array $config      User-provided configuration
+     * @param  Configuration      User-provided configuration
      * @return void
      * @throws Zend_Session_SaveHandler_Exception
      */
-    public function __construct($config)
+    public function __construct(Configuration $config)
     {
-        if ($config instanceof \Zend\Config\Config) {
-            $config = $config->toArray();
-        } else if (!is_array($config)) {
-            throw new Exception\InvalidArgumentException(
-                '$config must be an instance of Zend\\Config or array of key/value pairs containing '
-              . 'configuration options for Zend\\Session\\SaveHandler\\DbTable and Zend\\Db\\Table\\Abstract.');
-        }
+        $config = $config->toArray();
 
         foreach ($config as $key => $value) {
             do {
                 switch ($key) {
-                    case 'manager':
-                        $this->setManager($value);
+                    case self::NAME:
+                        $this->_name = (string) $value;
                         break;
                     case self::PRIMARY_ASSIGNMENT:
                         $this->_primaryAssignment = $value;
@@ -199,41 +194,6 @@ class DbTable
         }
 
         parent::__construct($config);
-    }
-
-    /**
-     * Set session manager
-     * 
-     * @param  Manager $manager 
-     * @return DbTable
-     */
-    public function setManager(Manager $manager)
-    {
-        $this->_manager = $manager;
-        return $this;
-    }
-
-    /**
-     * Get Session Manager
-     * 
-     * @return Manager
-     */
-    public function getManager()
-    {
-        if (null === $this->_manager) {
-            $this->setManager(Container::getDefaultManager());
-        }
-        return $this->_manager;
-    }
-
-    /**
-     * Destructor
-     *
-     * @return void
-     */
-    public function __destruct()
-    {
-        $this->getManager()->writeClose();
     }
 
     /**
@@ -431,12 +391,6 @@ class DbTable
      */
     protected function _setupTableName()
     {
-        $config = $this->getManager()->getConfig();
-
-        if (empty($this->_name) && basename(($this->_name = $config->getSavePath())) != $this->_name) {
-            throw new Exception\RuntimeException('session.save_path is a path and not a table name.');
-        }
-
         if (strpos($this->_name, '.')) {
             list($this->_schema, $this->_name) = explode('.', $this->_name);
         }
@@ -551,7 +505,7 @@ class DbTable
     /**
      * Retrieve session lifetime considering DbTable::OVERRIDE_LIFETIME
      *
-     * @param Zend_Db_Table_Row_Abstract $row
+     * @param Zend\Db\Table\Row\Abstract $row
      * @return int
      */
     protected function _getLifetime(AbstractRow $row)
@@ -568,7 +522,7 @@ class DbTable
     /**
      * Retrieve session expiration time
      *
-     * @param Zend_Db_Table_Row_Abstract $row
+     * @param Zend\Db\Table\Row\Abstract $row
      * @return int
      */
     protected function _getExpirationTime(AbstractRow $row)

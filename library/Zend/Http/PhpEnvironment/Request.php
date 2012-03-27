@@ -73,7 +73,7 @@ class Request extends HttpRequest
     public function getRequestUri()
     {
         if ($this->requestUri === null) {
-            $this->requestUri = $this->detectRequestUri();
+            $this->setRequestUri($this->detectRequestUri());
         }
         return $this->requestUri;
     }
@@ -98,7 +98,7 @@ class Request extends HttpRequest
     public function getBaseUrl()
     {
         if ($this->baseUrl === null) {
-            $this->baseUrl = rtrim($this->detectBaseUrl(), '/');
+            $this->setBaseUrl($this->detectBaseUrl());
         }
         return $this->baseUrl;
     }
@@ -123,7 +123,7 @@ class Request extends HttpRequest
     public function getBasePath()
     {
         if ($this->basePath === null) {
-            $this->basePath = rtrim($this->detectBasePath(), '/');
+            $this->setBasePath($this->detectBasePath());
         }
         
         return $this->basePath;
@@ -163,9 +163,6 @@ class Request extends HttpRequest
             $uri->setQuery($this->serverParams['QUERY_STRING']);
         }
 
-        $requestUri = $this->getRequestUri();
-        $uri->setPath(substr($requestUri, 0, strpos($requestUri, '?') ?: strlen($requestUri)));
-
         if ($this->headers()->get('host')) {
             //TODO handle IPv6 with port
             if (preg_match('|^([^:]+):([^:]+)$|', $this->headers()->get('host')->getFieldValue(), $match)) {
@@ -182,6 +179,9 @@ class Request extends HttpRequest
             }
         }
 
+        $requestUri = $this->getRequestUri();
+        $uri->setPath(substr($requestUri, 0, strpos($requestUri, '?') ?: strlen($requestUri)));
+
         return $this;
     }
 
@@ -192,14 +192,13 @@ class Request extends HttpRequest
         foreach ($server as $key => $value) {
             if (strpos($key, 'HTTP_') === 0 && $value) {
                 $header = substr($key, 5);
-                $headers[substr($key, 5)] = $value;
             } elseif (in_array($key, array('CONTENT_LENGTH', 'CONTENT_MD5', 'CONTENT_TYPE')) && $value) {
                 $header = $key;
             } else {
                 continue;
             }
 
-            $headers[$header] = $server[$key];
+            $headers[strtr($header, '_', '-')] = $value;
         }
 
         return $headers;
@@ -213,7 +212,7 @@ class Request extends HttpRequest
      * 
      * @return string
      */
-    public function detectRequestUri()
+    protected function detectRequestUri()
     {
         $requestUri = null;
 
@@ -268,7 +267,7 @@ class Request extends HttpRequest
      * 
      * @return string
      */
-    public function detectBaseUrl()
+    protected function detectBaseUrl()
     {
         $baseUrl        = '';
         $filename       = $this->server()->get('SCRIPT_FILENAME', '');
@@ -286,14 +285,18 @@ class Request extends HttpRequest
         } else {
             // Backtrack up the SCRIPT_FILENAME to find the portion
             // matching PHP_SELF.
-            $path     = $phpSelf ?: '';
-            $segments = array_reverse(explode('/', trim($filename, '/')));
+            $path = $phpSelf ?: '';
+            if (!isset($path[1]) || $path[1] !== '~') {
+                $segments = array_reverse(explode('/', trim($filename, '/')));
+            } else {
+                $segments = array_reverse(explode('/', trim($path, '/')));
+            }
             $index    = 0;
             $last     = count($segments);
             $baseUrl  = '';
 
             do {
-                $segment  = $segments[$index];
+                $segment = $segments[$index];
                 $baseUrl = '/' . $segment . $baseUrl;
                 $index++;
             } while ($last > $index && false !== ($pos = strpos($path, $baseUrl)) && 0 !== $pos);
@@ -308,9 +311,9 @@ class Request extends HttpRequest
         }
 
         // Directory portion of base path matches.
-        if (0 === strpos($requestUri, dirname($baseUrl))) {
-            $baseUrl = dirname($baseUrl);
-            return $baseUrl;
+        $baseDir = str_replace('\\','/', dirname($baseUrl));
+        if (0 === strpos($requestUri, $baseDir)) {
+            return $baseDir;
         }
 
         $truncatedRequestUri = $requestUri;
@@ -345,7 +348,7 @@ class Request extends HttpRequest
      * 
      * @return string
      */
-    public function detectBasePath()
+    protected function detectBasePath()
     {
         $filename = basename($this->server()->get('SCRIPT_FILENAME', ''));
         $baseUrl  = $this->getBaseUrl();

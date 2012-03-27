@@ -3,7 +3,7 @@
  * @category   Zend
  * @package    Zend\Cloud
  * @subpackage Infrastructure
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -17,7 +17,7 @@ namespace Zend\Cloud\Infrastructure;
  *
  * @package    Zend\Cloud
  * @subpackage Infrastructure
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Instance 
@@ -38,6 +38,7 @@ class Instance
     const INSTANCE_RAM         = 'ram';
     const INSTANCE_STORAGE     = 'storageSize';
     const INSTANCE_ZONE        = 'zone';
+    const INSTANCE_METADATA    = 'metadata';
     const INSTANCE_LAUNCHTIME  = 'launchTime';
     const MONITOR_CPU          = 'CpuUsage';
     const MONITOR_RAM          = 'RamUsage';
@@ -76,8 +77,8 @@ class Instance
         self::INSTANCE_STATUS,
         self::INSTANCE_IMAGEID,
         self::INSTANCE_ZONE,
-        self::INSTANCE_RAM,
-        self::INSTANCE_STORAGE,
+        //self::INSTANCE_RAM,
+        //self::INSTANCE_STORAGE,
     );
 
     /**
@@ -182,7 +183,15 @@ class Instance
     {
         return $this->adapter->statusInstance($this->attributes[self::INSTANCE_ID]);
     }
-
+    /**
+     * Get the metadata of the instance
+     * 
+     * @return array 
+     */
+    public function getMetadata()
+    {
+        return $this->attributes[self::INSTANCE_METADATA];
+    }
     /**
      * Wait for status $status with a timeout of $timeout seconds
      * 

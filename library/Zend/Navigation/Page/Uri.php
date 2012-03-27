@@ -15,27 +15,21 @@
  * @category   Zend
  * @package    Zend_Navigation
  * @subpackage Page
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Navigation\Page;
 
-use Zend\Navigation\AbstractPage,
-    Zend\Navigation\Exception\InvalidArgumentException;
+use Zend\Navigation\Exception;
 
 /**
  * Represents a page that is defined by specifying a URI
  *
- * @uses       \Zend\Navigation\Exception
- * @uses       \Zend\Navigation\Page\Page
  * @category   Zend
  * @package    Zend_Navigation
  * @subpackage Page
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Uri extends AbstractPage
@@ -45,23 +39,25 @@ class Uri extends AbstractPage
      *
      * @var string|null
      */
-    protected $_uri = null;
+    protected $uri = null;
 
     /**
      * Sets page URI
      *
      * @param  string $uri                page URI, must a string or null
-     * @return \Zend\Navigation\Page\Uri   fluent interface, returns self
-     * @throws \Zend\Navigation\InvalidArgumentException  if $uri is invalid
+     *
+     * @return Uri   fluent interface, returns self
+     * @throws Exception\InvalidArgumentException  if $uri is invalid
      */
     public function setUri($uri)
     {
         if (null !== $uri && !is_string($uri)) {
-            throw new InvalidArgumentException(
-                    'Invalid argument: $uri must be a string or null');
+            throw new Exception\InvalidArgumentException(
+                'Invalid argument: $uri must be a string or null'
+            );
         }
 
-        $this->_uri = $uri;
+        $this->uri = $uri;
         return $this;
     }
 
@@ -72,12 +68,12 @@ class Uri extends AbstractPage
      */
     public function getUri()
     {
-        return $this->_uri;
+        return $this->uri;
     }
 
     /**
      * Returns href for this page
-     * 
+     *
      * Includes the fragment identifier if it is set.
      *
      * @return string
@@ -85,20 +81,18 @@ class Uri extends AbstractPage
     public function getHref()
     {
         $uri = $this->getUri();
-        
-        $fragment = $this->getFragment();       
+
+        $fragment = $this->getFragment();
         if (null !== $fragment) {
             if ('#' == substr($uri, -1)) {
                 return $uri . $fragment;
-            } else {                
+            } else {
                 return $uri . '#' . $fragment;
             }
         }
-        
+
         return $uri;
     }
-
-    // Public methods:
 
     /**
      * Returns an array representation of the page
@@ -110,7 +104,8 @@ class Uri extends AbstractPage
         return array_merge(
             parent::toArray(),
             array(
-                'uri' => $this->getUri()
-            ));
+                'uri' => $this->getUri(),
+            )
+        );
     }
 }

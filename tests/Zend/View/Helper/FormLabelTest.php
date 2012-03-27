@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_View
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -31,7 +31,7 @@ namespace ZendTest\View\Helper;
  * @category   Zend
  * @package    Zend_View
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_View
  * @group      Zend_View_Helper
@@ -47,7 +47,7 @@ class FormLabelTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->view = new \Zend\View\PhpRenderer();
+        $this->view = new \Zend\View\Renderer\PhpRenderer();
         $this->helper = new \Zend\View\Helper\FormLabel();
         $this->helper->setView($this->view);
     }
@@ -71,7 +71,7 @@ class FormLabelTest extends \PHPUnit_Framework_TestCase
     public function testFormLabelWithInputNeedingEscapesUsesViewEscaping()
     {
         $label = $this->helper->__invoke('<&foo', '</bar>');
-        $expected = '<label for="' . $this->view->vars()->escape('<&foo') . '">' . $this->view->vars()->escape('</bar>') . '</label>';
+        $expected = '<label for="' . $this->view->escape('<&foo') . '">' . $this->view->escape('</bar>') . '</label>';
         $this->assertEquals($expected, $label);
     }
 

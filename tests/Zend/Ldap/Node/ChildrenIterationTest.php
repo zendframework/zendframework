@@ -13,9 +13,9 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_LDAP
+ * @package    Zend_Ldap
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -26,20 +26,20 @@ namespace ZendTest\Ldap\Node;
 use Zend\Ldap;
 
 /**
- * Zend_LDAP_OnlineTestCase
+ * Zend_Ldap_OnlineTestCase
  */
 /**
- * @see Zend_LDAP_Node
+ * @see Zend_Ldap_Node
  */
 
 /**
  * @category   Zend
- * @package    Zend_LDAP
+ * @package    Zend_Ldap
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_LDAP
- * @group      Zend_LDAP_Node
+ * @group      Zend_Ldap
+ * @group      Zend_Ldap_Node
  */
 class ChildrenIterationTest extends \ZendTest\Ldap\OnlineTestCase
 {
@@ -113,7 +113,7 @@ class ChildrenIterationTest extends \ZendTest\Ldap\OnlineTestCase
 
     /**
      * Test issue reported by Lance Hendrix on
-     * http://framework.zend.com/wiki/display/ZFPROP/Zend_LDAP+-+Extended+support+-+Stefan+Gehrig?
+     * http://framework.zend.com/wiki/display/ZFPROP/Zend_Ldap+-+Extended+support+-+Stefan+Gehrig?
      *      focusedCommentId=13107431#comment-13107431
      */
     public function testCallingNextAfterIterationShouldNotThrowException()

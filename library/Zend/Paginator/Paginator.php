@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Paginator
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -28,19 +28,19 @@ use ArrayIterator,
     Iterator,
     IteratorAggregate,
     Traversable,
-    Zend\Cache\Frontend\Core as CacheCore,
+    Zend\Cache\Storage\Adapter as CacheAdapter,
     Zend\Db\Select as DbSelect,
     Zend\Db\Table\AbstractRowset as DbAbstractRowset,
     Zend\Db\Table\Select as DbTableSelect,
     Zend\Filter\Filter,
     Zend\Json\Json,
-    Zend\Stdlib\IteratorToArray,
+    Zend\Stdlib\ArrayUtils,
     Zend\View;
 
 /**
  * @category   Zend
  * @package    Zend_Paginator
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Paginator implements Countable, IteratorAggregate
@@ -96,7 +96,7 @@ class Paginator implements Countable, IteratorAggregate
     /**
      * Cache object
      *
-     * @var CacheCore
+     * @var CacheAdapter
      */
     protected static $_cache;
 
@@ -263,7 +263,7 @@ class Paginator implements Countable, IteratorAggregate
     public static function setConfig($config)
     {
         if ($config instanceof Traversable) {
-            $config = IteratorToArray::convert($config);
+            $config = ArrayUtils::iteratorToArray($config);
         }
         if (!is_array($config)) {
             throw new Exception\InvalidArgumentException(__METHOD__ . ' expects an array or Traversable');
@@ -323,9 +323,9 @@ class Paginator implements Countable, IteratorAggregate
     /**
      * Sets a cache object
      *
-     * @param CacheCore $cache
+     * @param CacheAdapter $cache
      */
-    public static function setCache(CacheCore $cache)
+    public static function setCache(CacheAdapter $cache)
     {
         self::$_cache = $cache;
     }
@@ -476,14 +476,21 @@ class Paginator implements Countable, IteratorAggregate
         }
 
         if (null === $pageNumber) {
-            foreach (self::$_cache->getIdsMatchingTags(array($this->_getCacheInternalId())) as $id) {
+            self::$_cache->find(CacheAdapter::MATCH_TAGS_OR, array('tags' => array(
+                $this->_getCacheInternalId()
+            )));
+            $cacheIds = array();
+            while (($item = self::$_cache->fetch()) !== false) {
+                $cacheIds[] = $item['key'];
+            }
+            foreach ($cacheIds as $id) {
                 if (preg_match('|'.self::CACHE_TAG_PREFIX."(\d+)_.*|", $id, $page)) {
-                    self::$_cache->remove($this->_getCacheId($page[1]));
+                    self::$_cache->removeItem($this->_getCacheId($page[1]));
                 }
             }
         } else {
             $cleanId = $this->_getCacheId($pageNumber);
-            self::$_cache->remove($cleanId);
+            self::$_cache->removeItem($cleanId);
         }
         return $this;
     }
@@ -676,7 +683,7 @@ class Paginator implements Countable, IteratorAggregate
 
         if (is_array($items) || $items instanceof Countable) {
             $itemCount = count($items);
-        } else { // $items is something like LimitIterator
+        } elseif($items instanceof Traversable) { // $items is something like LimitIterator
             $itemCount = iterator_count($items);
         }
 
@@ -693,7 +700,7 @@ class Paginator implements Countable, IteratorAggregate
         $pageNumber = $this->normalizePageNumber($pageNumber);
 
         if ($this->_cacheEnabled()) {
-            $data = self::$_cache->load($this->_getCacheId($pageNumber));
+            $data = self::$_cache->getItem($this->_getCacheId($pageNumber));
             if ($data !== false) {
                 return $data;
             }
@@ -714,7 +721,11 @@ class Paginator implements Countable, IteratorAggregate
         }
 
         if ($this->_cacheEnabled()) {
-            self::$_cache->save($items, $this->_getCacheId($pageNumber), array($this->_getCacheInternalId()));
+            self::$_cache->setItem(
+                $this->_getCacheId($pageNumber), 
+                $items, 
+                array('tags' => array($this->_getCacheInternalId()))
+            );
         }
 
         return $items;
@@ -802,10 +813,17 @@ class Paginator implements Countable, IteratorAggregate
     {
         $data = array();
         if ($this->_cacheEnabled()) {
-            foreach (self::$_cache->getIdsMatchingTags(array($this->_getCacheInternalId())) as $id) {
-                    if (preg_match('|'.self::CACHE_TAG_PREFIX."(\d+)_.*|", $id, $page)) {
-                        $data[$page[1]] = self::$_cache->load($this->_getCacheId($page[1]));
-                    }
+            $cacheIds = self::$_cache->find(CacheAdapter::MATCH_TAGS_OR, array(
+                'tags' => array($this->_getCacheInternalId()),
+            ));
+            $cacheIds = array();
+            while (($item = self::$_cache->fetch()) !== false) {
+                $cacheIds[] = $item['key'];
+            }
+            foreach ($cacheIds as $id) {
+                if (preg_match('|'.self::CACHE_TAG_PREFIX."(\d+)_.*|", $id, $page)) {
+                    $data[$page[1]] = self::$_cache->getItem($this->_getCacheId($page[1]));
+                }
             }
         }
         return $data;
@@ -821,7 +839,7 @@ class Paginator implements Countable, IteratorAggregate
     public function getView()
     {
         if ($this->_view === null) {
-            $this->setView(new View\PhpRenderer());
+            $this->setView(new View\Renderer\PhpRenderer());
         }
 
         return $this->_view;

@@ -120,6 +120,18 @@ class SegmentTest extends TestCase
                 null,
                 array('foo' => 'bar', 'baz' => 'bat')
             ),
+            'parameter-with-dash-in-name' => array(
+                new Segment('/:foo-bar'),
+                '/baz',
+                null,
+                array('foo-bar' => 'baz')
+            ),
+            'url-encoded-parameters-are-decoded' => array(
+                new Segment('/:foo'),
+                '/foo+bar',
+                null,
+                array('foo' => 'foo bar')
+            ),
         );
     }
 
@@ -256,7 +268,7 @@ class SegmentTest extends TestCase
     {
         $tester = new FactoryTester($this);
         $tester->testFactory(
-            '\Zend\Mvc\Router\Http\Segment',
+            'Zend\Mvc\Router\Http\Segment',
             array(
                 'route' => 'Missing "route" in options array'
             ),

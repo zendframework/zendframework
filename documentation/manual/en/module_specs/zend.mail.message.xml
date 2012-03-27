@@ -1,0 +1,711 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section 
+    xmlns="http://docbook.org/ns/docbook" version="5.0" 
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    xml:id="zend.mail.message">
+    <info>
+        <title>Zend\Mail\Message</title>
+    </info>
+
+    <section xml:id="zend.mail.message.intro">
+        <info>
+            <title>Overview</title>
+        </info>
+
+        <para>
+            The <classname>Message</classname> class encapsulates a single email message as
+            described in RFCs <link xlink:href="http://www.w3.org/Protocols/rfc822/">822</link> and
+            <link xlink:href="http://www.ietf.org/rfc/rfc2822.txt">2822</link>. It acts basically as
+            a value object for setting mail headers and content.
+        </para>
+
+        <para>
+            If desired, multi-part email messages may also be created. This is as trivial as
+            creating the message body using the <link linkend="zend.mime">Zend\Mime</link>
+            component, assigning it to the mail message body.
+        </para>
+
+        <para>
+            The <classname>Message</classname> class is simply a value object. It is not capable of
+            sending or storing itself; for those purposes, you will need to use, respectively, a
+            <link linkend="zend.mail.read">Storage adapter</link> or <link
+                linkend="zend.mail.transport">Transport adapter</link>.
+        </para>
+    </section>
+
+    <section xml:id="zend.mail.message.quick-start">
+        <info>
+            <title>Quick Start</title>
+        </info>
+
+        <para>
+            Creating a <classname>Message</classname> is simple: simply instantiate it.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+use Zend\Mail\Message;
+
+$message = new Message();
+]]></programlisting>
+        
+        <para>
+            Once you have your <classname>Message</classname> instance, you can start adding content
+            or headers. Let's set who the mail is from, who it's addressed to, a subject, and some
+            content:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$message->addFrom("matthew@zend.com", "Matthew Weier O'Phinney")
+        ->addTo("foobar@example.com")
+        ->setSubject("Sending an email from Zend\Mail!");
+$message->setBody("This is the message body.");
+]]></programlisting>
+        
+        <para>
+            You can also add recipients to carbon-copy ("Cc:") or blind carbon-copy ("Bcc:").
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$message->addCc("ralph.schindler@zend.com")
+        ->addBcc("enrico.z@zend.com");
+]]></programlisting>
+
+        <para>
+            If you want to specify an alternate address to which replies may be sent, that can be
+            done, too.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$message->addReplyTo("matthew@weierophinney.net", "Matthew");
+]]></programlisting>
+
+        <para>
+            Interestingly, RFC822 allows for multiple "From:" addresses. When you do this, the first
+            one will be used as the sender, <emphasis>unless</emphasis> you specify a "Sender:"
+            header. The <classname>Message</classname> class allows for this.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+/*
+ * Mail headers created:
+ * From: Ralph Schindler <ralph.schindler@zend.com>, Enrico Zimuel <enrico.z@zend.com>
+ * Sender: Matthew Weier O'Phinney <matthew@zend.com></matthew>
+ */
+$message->addFrom("ralph.schindler@zend.com", "Ralph Schindler")
+        ->addFrom("enrico.z@zend.com", "Enrico Zimuel")
+        ->setSender("matthew@zend.com", "Matthew Weier O'Phinney");
+]]></programlisting>
+
+        <para>
+            By default, the <classname>Message</classname> class assumes ASCII encoding for your
+            email. If you wish to use another encoding, you can do so; setting this will ensure all
+            headers and body content are properly encoded using quoted-printable encoding.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$message->setEncoding("UTF-8");
+]]></programlisting>
+
+        <para>
+            If you wish to set other headers, you can do that as well.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+/*
+ * Mail headers created:
+ * X-API-Key: FOO-BAR-BAZ-BAT
+ */
+$message->headers()->addHeaderLine('X-API-Key', 'FOO-BAR-BAZ-BAT');
+]]></programlisting>
+
+        <para>
+            Sometimes you may want to provide HTML content, or multi-part content. To do that,
+            you'll first create a MIME message object, and then set it as the body of your mail
+            message object. When you do so, the <classname>Message</classname> class will
+            automatically set a "MIME-Version" header, as well as an appropriate "Content-Type"
+            header.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+use Zend\Mail\Message,
+    Zend\Mime\Message as MimeMessage,
+    Zend\Mime\Part as MimePart;
+
+$text = new MimePart($textContent);
+$text->type = "text/plain";
+
+$html = new MimePart($htmlMarkup);
+$html->type = "text/html";
+
+$image = new MimePart(fopen($pathToImage));
+$image->type = "image/jpeg";
+
+$body = new MimeMessage();
+$body->setParts(array($text, $html, $image));
+
+$message = new Message();
+$message->setBody($body);
+]]></programlisting>
+
+        <para>
+            If you want a string representation of your email, you can get that:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+echo $message->toString();
+]]></programlisting>
+
+        <para>
+            Finally, you can fully introspect the message -- including getting all addresses of
+            recipients and senders, all ehaders, and the message body.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+// Headers
+// Note: this will also grab all headers for which accessors/mutators exist in 
+// the Message object itself.
+foreach ($message->headers() as $header) {
+    echo $header->toString();
+    // or grab values: $header->getFieldName(), $header->getFieldValue()
+}
+
+// The logic below also works for the methods cc(), bcc(), to(), and replyTo()
+foreach ($message->from() as $address) {
+    printf("%s: %s\n", $address->getEmail(), $address->getName());
+}
+
+// Sender
+$address = $message->getSender();
+printf("%s: %s\n", $address->getEmail(), $address->getName());
+
+// Subject
+echo "Subject: ", $message->getSubject(), "\n";
+
+// Encoding
+echo "Encoding: ", $message->getEncoding(), "\n";
+
+// Message body:
+echo $message->getBody();     // raw body, or MIME object
+echo $message->getBodyText(); // body as it will be sent
+]]></programlisting>
+
+        <para>
+            Once your message is shaped to your liking, pass it to a <link
+                linkend="zend.mail.transport">mail transport</link> in order to send it!
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$transport->send($message);
+]]></programlisting>
+    </section>
+
+    <section xml:id="zend.mail.message.options">
+        <info>
+            <title>Configuration Options</title>
+        </info>
+
+        <para>
+            The <classname>Message</classname> class has no configuration options, and is instead a
+            value object.
+        </para>
+    </section>
+
+    <section xml:id="zend.mail.message.methods">
+        <info>
+            <title>Available Methods</title>
+        </info>
+
+        <variablelist>
+            <varlistentry xml:id="zend.mail.message.methods.is-valid">
+                <term>isValid</term>
+
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>isValid</methodname>
+                        <void/>
+                    </methodsynopsis>
+                    <para>Is the message valid?</para>
+
+                    <para>
+                        If we don't have any From addresses, we're invalid, according to RFC2822.
+                    </para>
+
+                    <para>Returns bool</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.mail.message.methods.set-encoding">
+                <term>setEncoding</term>
+
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>setEncoding</methodname>
+
+                        <methodparam>
+                            <funcparams>string $encoding</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+
+                    <para>Set the message encoding.</para>
+
+                    <para>Implements a fluent interface.</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.mail.message.methods.get-encoding">
+                <term>getEncoding</term>
+
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>getEncoding</methodname>
+                        <void/>
+                    </methodsynopsis>
+
+                    <para>Get the message encoding.</para>
+
+                    <para>Returns string.</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.mail.message.methods.set-headers">
+                <term>setHeaders</term>
+
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>setHeaders</methodname>
+                        <methodparam>
+                            <funcparams>Zend\Mail\Headers $headers</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+
+                    <para>Compose headers.</para>
+
+                    <para>Implements a fluent interface.</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.mail.message.methods.headers">
+                <term>setHeaders</term>
+
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>headers</methodname>
+                        <void/>
+                    </methodsynopsis>
+
+                    <para>Access headers collection.</para>
+
+                    <para>
+                        Lazy-loads a Zend\Mail\Headers instance if none is already attached.
+                    </para>
+
+                    <para>Returns a Zend\Mail\Headers instance.</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.mail.message.methods.set-from">
+                <term>setFrom</term>
+
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>setFrom</methodname>
+                        <methodparam>
+                            <funcparams>string|AddressDescription|array|Zend\Mail\AddressList|Traversable $emailOrAddressList, string|null $name</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+
+                    <para>Set (overwrite) From addresses.</para>
+
+                    <para>Implements a fluent interface.</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.mail.message.methods.add-from">
+                <term>addFrom</term>
+
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>addFrom</methodname>
+                        <methodparam>
+                            <funcparams>string|Zend\Mail\Address|array|Zend\Mail\AddressList|Traversable $emailOrAddressOrList, string|null $name</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+
+                    <para>Add a "From" address.</para>
+
+                    <para>Implements a fluent interface.</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.mail.message.methods.from">
+                <term>from</term>
+
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>from</methodname>
+                        <void/>
+                    </methodsynopsis>
+
+                    <para>Retrieve list of From senders</para>
+
+                    <para>Returns Zend\Mail\AddressList instance.</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.mail.message.methods.set-to">
+                <term>setTo</term>
+
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>setTo</methodname>
+                        <methodparam>
+                            <funcparams>string|AddressDescription|array|Zend\Mail\AddressList|Traversable $emailOrAddressList, null|string $name</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+
+                    <para>Overwrite the address list in the To recipients.</para>
+
+                    <para>Implements a fluent interface.</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.mail.message.methods.add-to">
+                <term>addTo</term>
+
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>addTo</methodname>
+                        <methodparam>
+                            <funcparams>string|AddressDescription|array|Zend\Mail\AddressList|Traversable $emailOrAddressOrList, null|string $name</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+
+                    <para>Add one or more addresses to the To recipients.</para>
+
+                    <para>Appends to the list.</para>
+
+                    <para>Implements a fluent interface.</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.mail.message.methods.to">
+                <term>to</term>
+
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>to</methodname>
+                        <void/>
+                    </methodsynopsis>
+
+                    <para>Access the address list of the To header.</para>
+
+                    <para>
+                        Lazy-loads a Zend\Mail\AddressList and populates the To header if not
+                        previously done.
+                    </para>
+
+                    <para>Returns a Zend\Mail\AddressList instance.</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.mail.message.methods.set-cc">
+                <term>setCc</term>
+
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>setCc</methodname>
+                        <methodparam>
+                            <funcparams>string|AddressDescription|array|Zend\Mail\AddressList|Traversable $emailOrAddressList, string|null $name</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+
+                    <para>Set (overwrite) CC addresses.</para>
+
+                    <para>Implements a fluent interface.</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.mail.message.methods.add-cc">
+                <term>addCc</term>
+
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>addCc</methodname>
+                        <methodparam>
+                            <funcparams>string|Zend\Mail\Address|array|Zend\Mail\AddressList|Traversable $emailOrAddressOrList, string|null $name</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+
+                    <para>Add a "Cc" address.</para>
+
+                    <para>Implements a fluent interface.</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.mail.message.methods.cc">
+                <term>cc</term>
+
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>cc</methodname>
+                        <void/>
+                    </methodsynopsis>
+
+                    <para>Retrieve list of CC recipients</para>
+
+                    <para>
+                        Lazy-loads a Zend\Mail\AddressList and populates the Cc header if not
+                        previously done.
+                    </para>
+
+                    <para>Returns a Zend\Mail\AddressList instance.</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.mail.message.methods.set-bcc">
+                <term>setBcc</term>
+
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>setBcc</methodname>
+                        <methodparam>
+                            <funcparams>string|AddressDescription|array|Zend\Mail\AddressList|Traversable $emailOrAddressList, string|null $name</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+
+                    <para>Set (overwrite) BCC addresses.</para>
+
+                    <para>Implements a fluent interface.</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.mail.message.methods.add-bcc">
+                <term>addBcc</term>
+
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>addBcc</methodname>
+                        <methodparam>
+                            <funcparams>string|Zend\Mail\Address|array|Zend\Mail\AddressList|Traversable $emailOrAddressOrList, string|null $name</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+
+                    <para>Add a "Bcc" address.</para>
+
+                    <para>Implements a fluent interface.</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.mail.message.methods.bcc">
+                <term>bcc</term>
+
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>bcc</methodname>
+                        <void/>
+                    </methodsynopsis>
+
+                    <para>Retrieve list of BCC recipients.</para>
+
+                    <para>
+                        Lazy-loads a Zend\Mail\AddressList and populates the Bcc header if not
+                        previously done.
+                    </para>
+
+                    <para>Returns a Zend\Mail\AddressList instance.</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.mail.message.methods.set-reply-to">
+                <term>setReplyTo</term>
+
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>setReplyTo</methodname>
+                        <methodparam>
+                            <funcparams>string|AddressDescription|array|Zend\Mail\AddressList|Traversable $emailOrAddressList, null|string $name</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+
+                    <para>Overwrite the address list in the Reply-To recipients.</para>
+
+                    <para>Implements a fluent interface.</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.mail.message.methods.add-reply-to">
+                <term>addReplyTo</term>
+
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>addReplyTo</methodname>
+                        <methodparam>
+                            <funcparams>string|AddressDescription|array|Zend\Mail\AddressList|Traversable $emailOrAddressOrList, null|string $name</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+
+                    <para>Add one or more addresses to the Reply-To recipients.</para>
+
+                    <para>Implements a fluent interface.</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.mail.message.methods.reply-to">
+                <term>replyTo</term>
+
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>replyTo</methodname>
+                        <void/>
+                    </methodsynopsis>
+
+                    <para>Access the address list of the Reply-To header</para>
+
+                    <para>
+                        Lazy-loads a Zend\Mail\AddressList and populates the Reply-To header if not
+                        previously done.
+                    </para>
+
+                    <para>Returns a Zend\Mail\AddressList instance.</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.mail.message.methods.set-sender">
+                <term>setSender</term>
+
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>setSender</methodname>
+                        <methodparam>
+                            <funcparams>mixed $emailOrAddress, mixed $name</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+
+                    <para>Set the message envelope Sender header.</para>
+
+                    <para>Implements a fluent interface.</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.mail.message.methods.get-sender">
+                <term>getSender</term>
+
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>getSender</methodname>
+                        <void/>
+                    </methodsynopsis>
+
+                    <para>Retrieve the sender address, if any.</para>
+
+                    <para>Returns null or a Zend\Mail\AddressDescription instance.</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.mail.message.methods.set-subject">
+                <term>setSubject</term>
+
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>setSubject</methodname>
+                        <methodparam>
+                            <funcparams>string $subject</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+
+                    <para>Set the message subject header value.</para>
+
+                    <para>Implements a fluent interface.</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.mail.message.methods.get-subject">
+                <term>getSubject</term>
+
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>getSubject</methodname>
+                        <void/>
+                    </methodsynopsis>
+
+                    <para>Get the message subject header value.</para>
+
+                    <para>Returns null or a string.</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.mail.message.methods.set-body">
+                <term>setBody</term>
+
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>setBody</methodname>
+                        <methodparam>
+                            <funcparams>null|string|Zend\Mime\Message|object $body</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+
+                    <para>Set the message body.</para>
+
+                    <para>Implements a fluent interface.</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.mail.message.methods.get-body">
+                <term>getBoidy</term>
+
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>getBody</methodname>
+                        <void/>
+                    </methodsynopsis>
+
+                    <para>Return the currently set message body.</para>
+
+                    <para>Returns null, a string, or an object.</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.mail.message.methods.get-body-text">
+                <term>getBodyText</term>
+
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>getBodyText</methodname>
+                        <void/>
+                    </methodsynopsis>
+
+                    <para>Get the string-serialized message body text.</para>
+
+                    <para>Returns null or a string.</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.mail.message.methods.to-string">
+                <term>toString</term>
+
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>toString</methodname>
+                        <void/>
+                    </methodsynopsis>
+
+                    <para>Serialize to string.</para>
+
+                    <para>Returns string.</para>
+                </listitem>
+            </varlistentry>
+
+        </variablelist>
+    </section>
+
+    <section xml:id="zend.mail.message.examples">
+        <info>
+            <title>Examples</title>
+        </info>
+
+        <para>
+            Please <link linkend="zend.mail.message.quick-start">see the Quick Start section</link>.
+        </para>
+    </section>
+</section>

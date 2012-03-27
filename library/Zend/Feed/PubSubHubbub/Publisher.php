@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Feed_Pubsubhubbub
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -28,7 +28,7 @@ use Zend\Uri;
 /**
  * @category   Zend
  * @package    Zend_Feed_Pubsubhubbub
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Publisher
@@ -384,7 +384,7 @@ class Publisher
     protected function _getHttpClient()
     {
         $client = PubSubHubbub::getHttpClient();
-        $client->setMethod(\Zend\Http\Client::POST);
+        $client->setMethod(\Zend\Http\Request::METHOD_POST);
         $client->setConfig(array(
             'useragent' => 'Zend_Feed_Pubsubhubbub_Publisher/' . \Zend\Version::VERSION,
         ));
@@ -403,7 +403,7 @@ class Publisher
             $params[] = urlencode($name) . '=' . urlencode($value);
         }
         $paramString = implode('&', $params);
-        $client->setRawData($paramString);
+        $client->setRawBody($paramString);
         return $client;
     }
 }

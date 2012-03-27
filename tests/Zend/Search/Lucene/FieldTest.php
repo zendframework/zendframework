@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -37,7 +37,7 @@ use Zend\Search\Lucene\Document;
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Search_Lucene
  */
@@ -63,7 +63,7 @@ class FieldTest extends \PHPUnit_Framework_TestCase
         $field = Document\Field::Keyword('field', 'value');
 
         $this->assertEquals($field->boost, 1);
-        $this->assertEquals($field->encoding, '');
+        $this->assertEquals($field->encoding, 'UTF-8');
         $this->assertEquals($field->isBinary,    false);
         $this->assertEquals($field->isIndexed,   true);
         $this->assertEquals($field->isStored,    true);
@@ -78,7 +78,7 @@ class FieldTest extends \PHPUnit_Framework_TestCase
         $field = Document\Field::Text('field', 'value');
 
         $this->assertEquals($field->boost, 1);
-        $this->assertEquals($field->encoding, '');
+        $this->assertEquals($field->encoding, 'UTF-8');
         $this->assertEquals($field->isBinary,    false);
         $this->assertEquals($field->isIndexed,   true);
         $this->assertEquals($field->isStored,    true);
@@ -93,7 +93,7 @@ class FieldTest extends \PHPUnit_Framework_TestCase
         $field = Document\Field::UnIndexed('field', 'value');
 
         $this->assertEquals($field->boost, 1);
-        $this->assertEquals($field->encoding, '');
+        $this->assertEquals($field->encoding, 'UTF-8');
         $this->assertEquals($field->isBinary,    false);
         $this->assertEquals($field->isIndexed,   false);
         $this->assertEquals($field->isStored,    true);
@@ -108,7 +108,7 @@ class FieldTest extends \PHPUnit_Framework_TestCase
         $field = Document\Field::UnStored('field', 'value');
 
         $this->assertEquals($field->boost, 1);
-        $this->assertEquals($field->encoding, '');
+        $this->assertEquals($field->encoding, 'UTF-8');
         $this->assertEquals($field->isBinary,    false);
         $this->assertEquals($field->isIndexed,   true);
         $this->assertEquals($field->isStored,    false);

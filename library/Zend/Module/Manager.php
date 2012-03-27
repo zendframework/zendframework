@@ -128,6 +128,20 @@ class Manager implements ModuleHandler
     }
 
     /**
+     * Get an instance of a module class by the module name 
+     * 
+     * @param string $moduleName 
+     * @return mixed
+     */
+    public function getModule($moduleName)
+    {
+        if (!isset($this->loadedModules[$moduleName])) {
+            return null;
+        }
+        return $this->loadedModules[$moduleName];
+    }
+
+    /**
      * Get the array of module names that this manager should load.
      *
      * @return array

@@ -94,7 +94,7 @@ class RuntimeDefinition implements Definition
             return (array_key_exists($class, $this->classes));
         }
         
-        return class_exists($class, true);
+        return class_exists($class) || interface_exists($class);
     }
 
     /**
@@ -225,6 +225,19 @@ class RuntimeDefinition implements Definition
             }
         }
 
+        $rTarget = $rClass;
+        $supertypes = array();
+        do {
+            $supertypes = array_merge($supertypes, $rTarget->getInterfaceNames());
+            if (!($rTargetParent = $rTarget->getParentClass())) {
+                break;
+            }
+            $supertypes[] = $rTargetParent->getName();
+            $rTarget = $rTargetParent;
+        } while (true);
+
+        $def['supertypes'] = $supertypes;
+
         if ($def['instantiator'] == null) {
             if ($rClass->isInstantiable()) {
                 $def['instantiator'] = '__construct';
@@ -318,8 +331,6 @@ class RuntimeDefinition implements Definition
             /** @var $p \ReflectionParameter  */
             $actualParamName = $p->getName();
 
-            $paramName = $this->createDistinctParameterName($actualParamName, $rClass->getName());
-
             $fqName = $rClass->getName() . '::' . $rMethod->getName() . ':' . $p->getPosition();
 
             $def['parameters'][$methodName][$fqName] = array();
@@ -331,29 +342,4 @@ class RuntimeDefinition implements Definition
         }
 
     }
-
-    protected function createDistinctParameterName($paramName, $class)
-    {
-        $currentParams = array();
-        if ($this->classes[$class]['parameters'] === array()) {
-            return $paramName;
-        }
-        foreach ($this->classes as $cdata) {
-            foreach ($cdata['parameters'] as $mdata) {
-                $currentParams = array_merge($currentParams, array_keys($mdata));
-            }
-        }
-
-        if (!in_array($paramName, $currentParams)) {
-            return $paramName;
-        }
-
-        $alt = 2;
-        while (in_array($paramName . (string) $alt, $currentParams)) {
-            $alt++;
-        }
-
-        return $paramName . (string) $alt;
-    }
-    
 }

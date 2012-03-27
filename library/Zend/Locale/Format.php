@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Locale
  * @subpackage Format
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -24,18 +24,14 @@
  */
 namespace Zend\Locale;
 
-use Zend\Locale\Data\Cldr;
+use Zend\Cache\Storage\Adapter,
+    Zend\Locale\Data\Cldr;
 
 /**
- * @uses       \Zend\Locale\Locale
- * @uses       \Zend\Locale\Data\Cldr
- * @uses       \Zend\Locale\Exception\InvalidArgumentException
- * @usess      \Zend\Locale\Exception\UnsupportedTokenException
- * @uses       \Zend\Locale\Math
  * @category   Zend
  * @package    Zend_Locale
  * @subpackage Format
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Format
@@ -153,7 +149,7 @@ class Format
                     break;
 
                 case 'cache' :
-                    if ($value instanceof \Zend\Cache\Core) {
+                    if ($value instanceof CacheAdapter) {
                         Cldr::setCache($value);
                     }
                     break;
@@ -783,7 +779,7 @@ class Format
             trigger_error("Sorry, your PCRE extension does not support UTF8 which is needed for the I18N core", E_USER_NOTICE);
         }
 
-      if (!is_string($date)) {
+        if (!is_string($date)) {
             throw new Exception\InvalidArgumentException('Invalid date provided; must be string, ' . gettype($date) . ' provided');
         }
         $options = self::_checkOptions($options) + self::$_options;

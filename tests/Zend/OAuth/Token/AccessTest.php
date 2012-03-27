@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_OAuth
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id:$
  */
@@ -30,8 +30,7 @@ use Zend\OAuth\Token\Access as AccessToken,
  * @package    Zend_OAuth
  * @subpackage UnitTests
  * @group      Zend_OAuth
- * @group      disable
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class AccessTest extends \PHPUnit_Framework_TestCase
@@ -41,13 +40,16 @@ class AccessTest extends \PHPUnit_Framework_TestCase
     {
         $response = new HTTPResponse(200, array());
         $token = new AccessToken($response);
-        $this->assertType('Zend\\Http\\Response', $token->getResponse());
+        $this->assertInstanceOf('Zend\\Http\\Response', $token->getResponse());
     }
 
     public function testConstructorParsesRequestTokenFromResponseBody()
     {
-        $body = 'oauth_token=jZaee4GF52O3lUb9&oauth_token_secret=J4Ms4n8sxjYc0A8K0KOQFCTL0EwUQTri';
-        $response = new HTTPResponse(200, array(), $body);
+        $body   = 'oauth_token=jZaee4GF52O3lUb9&oauth_token_secret=J4Ms4n8sxjYc0A8K0KOQFCTL0EwUQTri';
+        $response = new HTTPResponse;
+        $response->setContent($body)
+                 ->setStatusCode(200);
+        
         $token = new AccessToken($response);
         $this->assertEquals('jZaee4GF52O3lUb9', $token->getToken());
     }
@@ -55,7 +57,10 @@ class AccessTest extends \PHPUnit_Framework_TestCase
     public function testConstructorParsesRequestTokenSecretFromResponseBody()
     {
         $body = 'oauth_token=jZaee4GF52O3lUb9&oauth_token_secret=J4Ms4n8sxjYc0A8K0KOQFCTL0EwUQTri';
-        $response = new HTTPResponse(200, array(), $body);
+        $response = new HTTPResponse;
+        $response->setContent($body)
+                 ->setStatusCode(200);
+                 
         $token = new AccessToken($response);
         $this->assertEquals('J4Ms4n8sxjYc0A8K0KOQFCTL0EwUQTri', $token->getTokenSecret());
     }
@@ -63,7 +68,10 @@ class AccessTest extends \PHPUnit_Framework_TestCase
     public function testPropertyAccessWorks()
     {
         $body = 'oauth_token=jZaee4GF52O3lUb9&oauth_token_secret=J4Ms4n8sxjYc0A8K0KOQFCTL0EwUQTri&foo=bar';
-        $response = new HTTPResponse(200, array(), $body);
+        $response = new HTTPResponse;
+        $response->setContent($body)
+                 ->setStatusCode(200);
+                 
         $token = new AccessToken($response);
         $this->assertEquals('J4Ms4n8sxjYc0A8K0KOQFCTL0EwUQTri', $token->oauth_token_secret);
     }
@@ -89,7 +97,10 @@ class AccessTest extends \PHPUnit_Framework_TestCase
     public function testIsValidDetectsBadResponse()
     {
         $body = 'oauthtoken=jZaee4GF52O3lUb9&oauthtokensecret=J4Ms4n8sxjYc0A8K0KOQFCTL0EwUQTri';
-        $response = new HTTPResponse(200, array(), $body);
+        $response = new HTTPResponse;
+        $response->setContent($body)
+                 ->setStatusCode(200);
+                 
         $token = new AccessToken($response);
         $this->assertFalse($token->isValid());
     }
@@ -97,7 +108,10 @@ class AccessTest extends \PHPUnit_Framework_TestCase
     public function testIsValidDetectsGoodResponse()
     {
         $body = 'oauth_token=jZaee4GF52O3lUb9&oauth_token_secret=J4Ms4n8sxjYc0A8K0KOQFCTL0EwUQTri';
-        $response = new HTTPResponse(200, array(), $body);
+        $response = new HTTPResponse;
+        $response->setContent($body)
+                 ->setStatusCode(200);
+                 
         $token = new AccessToken($response);
         $this->assertTrue($token->isValid());
     }

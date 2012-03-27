@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Test
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -30,7 +30,7 @@ use Zend\Test;
  * @category   Zend
  * @package    Zend_Test
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Test
  */
@@ -113,7 +113,7 @@ class QueryTableTest extends DataSetTestCase
         $queryTable = new DataSet\QueryTable("foo", null, $this->connectionMock);
 
         $metadata = $queryTable->getTableMetaData();
-        $this->assertType('PHPUnit_Extensions_Database_DataSet_ITableMetaData', $metadata);
+        $this->assertInstanceOf('PHPUnit_Extensions_Database_DataSet_ITableMetaData', $metadata);
         $this->assertEquals(array(), $metadata->getColumns());
         $this->assertEquals(array(), $metadata->getPrimaryKeys());
         $this->assertEquals("foo", $metadata->getTableName());

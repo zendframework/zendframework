@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_JSON_Server
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -34,7 +34,7 @@ use Zend\Json\Server,
  * @category   Zend
  * @package    Zend_JSON_Server
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_JSON
  * @group      Zend_JSON_Server
@@ -189,14 +189,14 @@ class ServerTest extends \PHPUnit_Framework_TestCase
 
     public function testResponseShouldBeEmittedAutomaticallyByDefault()
     {
-        $this->assertTrue($this->server->autoEmitResponse());
+        $this->assertFalse($this->server->getReturnResponse());
     }
 
     public function testShouldBeAbleToDisableAutomaticResponseEmission()
     {
         $this->testResponseShouldBeEmittedAutomaticallyByDefault();
-        $this->server->setAutoEmitResponse(false);
-        $this->assertFalse($this->server->autoEmitResponse());
+        $this->server->setReturnResponse(true);
+        $this->assertTrue($this->server->getReturnResponse());
     }
 
     public function testShouldBeAbleToRetrieveSmdObject()
@@ -257,7 +257,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
     {
         $this->server->setClass('ZendTest\\Json\\Foo')
                      ->addFunction('ZendTest\\Json\\FooFunc')
-                     ->setAutoEmitResponse(false);
+                     ->setReturnResponse(true);
         $request = $this->server->getRequest();
         $request->setMethod('bar')
                 ->setParams(array(true, 'foo', 'bar'))
@@ -278,7 +278,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
     {
         $this->markTestSkipped('Problems with Zend_Server conversion');
         $this->server->setClass('ZendTest\Json\Foo')
-                     ->setAutoEmitResponse(false);
+                     ->setReturnResponse(true);
         $request = $this->server->getRequest();
         $request->setMethod('bar')
                 ->setParams(array(true))
@@ -297,7 +297,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
     {
         $this->markTestSkipped('Problems with Zend_Server conversion');
         $this->server->setClass('ZendTest\Json\Foo')
-                     ->setAutoEmitResponse(false);
+                     ->setReturnResponse(true);
         $request = $this->server->getRequest();
         $request->setMethod('bar')
                 ->setParams(array(true, 'foo', 'bar', 'baz'))
@@ -315,7 +315,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
     public function testHandleShouldAllowNamedParamsInAnyOrder1()
     {
         $this->server->setClass('ZendTest\Json\Foo')
-                     ->setAutoEmitResponse( false );
+                     ->setReturnResponse(true);
         $request = $this->server->getRequest();
         $request->setMethod('bar')
                 ->setParams( array( 
@@ -336,7 +336,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
     public function testHandleShouldAllowNamedParamsInAnyOrder2()
     {
         $this->server->setClass('ZendTest\Json\Foo')
-                     ->setAutoEmitResponse( false );
+                     ->setReturnResponse(true);
         $request = $this->server->getRequest();
         $request->setMethod('bar')
                 ->setParams( array( 
@@ -357,7 +357,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
     public function testHandleValidWithoutRequiredParamShouldReturnError()
     {
         $this->server->setClass('ZendTest\Json\Foo')
-                     ->setAutoEmitResponse( false );
+                     ->setReturnResponse(true);
         $request = $this->server->getRequest();
         $request->setMethod('bar')
                 ->setParams( array(
@@ -375,7 +375,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
     public function testHandleRequestWithErrorsShouldReturnErrorResponse()
     {
         $this->server->setClass('ZendTest\Json\Foo')
-                     ->setAutoEmitResponse(false);
+                     ->setReturnResponse(true);
         $response = $this->server->handle();
         $this->assertTrue($response instanceof Response);
         $this->assertTrue($response->isError());
@@ -385,7 +385,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
     public function testHandleRequestWithInvalidMethodShouldReturnErrorResponse()
     {
         $this->server->setClass('ZendTest\Json\Foo')
-                     ->setAutoEmitResponse(false);
+                     ->setReturnResponse(true);
         $request = $this->server->getRequest();
         $request->setMethod('bogus')
                 ->setId('foo');
@@ -399,7 +399,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
     {
         $this->markTestSkipped('Problems with Zend_Server conversion');
         $this->server->setClass('ZendTest\Json\Foo')
-                     ->setAutoEmitResponse(false);
+                     ->setReturnResponse(true);
         $request = $this->server->getRequest();
         $request->setMethod('baz')
                 ->setId('foo');

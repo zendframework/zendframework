@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -34,7 +34,7 @@ use Zend\Feed\PubSubHubbub;
  * @subpackage UnitTests
  * @group      Zend_Feed
  * @group      Zend_Feed_Subsubhubbub
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class SubscriberTest extends \PHPUnit_Framework_TestCase
@@ -52,10 +52,10 @@ class SubscriberTest extends \PHPUnit_Framework_TestCase
         PubSubHubbub\PubSubHubbub::setHttpClient($client);
         $this->_subscriber = new \Zend\Feed\PubSubHubbub\Subscriber;
         $this->_adapter = $this->_getCleanMock(
-            '\Zend\Db\Adapter\AbstractAdapter'
+            '\Zend\Db\Adapter\Adapter'
         );
         $this->_tableGateway = $this->_getCleanMock(
-            '\Zend\Db\Table\AbstractTable'
+            '\Zend\Db\TableGateway\TableGateway'
         );
         $this->_tableGateway->expects($this->any())->method('getAdapter')
             ->will($this->returnValue($this->_adapter));
@@ -323,7 +323,7 @@ class SubscriberTest extends \PHPUnit_Framework_TestCase
 
     public function testCanSetStorageImplementation()
     {
-	    $storage = new \Zend\Feed\PubSubHubbub\Model\Subscription($this->_tableGateway);
+	$storage = new \Zend\Feed\PubSubHubbub\Model\Subscription($this->_tableGateway);
         $this->_subscriber->setStorage($storage);
         $this->assertThat($this->_subscriber->getStorage(), $this->identicalTo($storage));
     }

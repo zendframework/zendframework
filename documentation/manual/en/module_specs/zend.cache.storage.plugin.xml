@@ -1,0 +1,393 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.cache.storage.plugin">
+    <info>
+        <title>Zend\Cache\Storage\Plugin</title>
+    </info>
+
+    <section xml:id="zend.cache.storage.plugin.intro">
+        <info>
+            <title>Overview</title>
+        </info>
+
+        <para>
+            Cache storage plugins are objects to add missing functionality or to influence behavior
+            of a storage adapter. 
+        </para>
+
+        <para>
+            The plugins listen to events the adapter triggers and can change called method arguments
+            (*.post - events), skipping and directly return a result (using
+            <methodname>stopPropagation</methodname>), changing the result (with
+            <methodname>setResult</methodname> of
+            <classname>Zend\Cache\Storage\PostEvent</classname>) and catching exceptions (with
+            <classname>Zend\Cache\Storage\ExceptionEvent</classname>).
+        </para>
+
+    </section>
+
+    <section xml:id="zend.cache.storage.plugin.quick-start">
+        <info>
+            <title>Quick Start</title>
+        </info>
+
+        <para>
+            Storage plugins can either be created from
+            <classname>Zend\Cache\StorageFactory</classname> with the
+            <methodname>pluginFactory</methodname>, or by simply instantiating one of the
+            <classname>Zend\Cache\Storage\Plugin\*</classname>classes. 
+        </para>
+        
+        <para>
+            To make life easier, the <classname>Zend\Cache\StorageFactory</classname> comes with the
+            method <methodname>factory</methodname> to create an adapter and all given plugins at
+            once.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+use Zend\Cache\StorageFactory;
+
+// Via factory:
+$cache = StorageFactory::factory(array(
+    'adapter' => 'filesystem',
+    'plugins' => array('serializer'),
+));
+
+// Alternately:
+$cache  = StorageFactory::adapterFactory('filesystem');
+$plugin = StorageFactory::pluginFactory('serializer');
+$cache->addPlugin($plugin);
+
+// Or manually:
+$cache  = new Zend\Cache\Storage\Adapter\Filesystem();
+$plugin = new Zend\Cache\Storage\Plugin\Serializer();
+$cache->addPlugin($plugin);
+]]></programlisting>
+    </section>
+
+    <section xml:id="zend.cache.storage.plugin.options">
+        <info>
+            <title>Configuration Options</title>
+        </info>
+
+        <variablelist>
+            <varlistentry xml:id="zend.cache.storage.plugin.options.clearing-factor">
+                <term>clearing_factor</term>
+
+                <listitem>
+                    <para>
+                        Set the automatic clearing factor. Used by the
+                        <classname>ClearByFactor</classname> plugin.
+                    </para>
+
+                    <itemizedlist>
+                        <listitem>
+                            <methodsynopsis>
+                                <methodname>setClearingFactor</methodname>
+                                <methodparam>
+                                    <funcparams>int $clearingFactor</funcparams>
+                                </methodparam>
+                            </methodsynopsis>
+
+                            <para>Implements a fluent interface.</para>
+                        </listitem>
+
+                        <listitem>
+                            <methodsynopsis>
+                                <methodname>getClearingFactor</methodname>
+                                <void/>
+                            </methodsynopsis>
+
+                            <para>Returns int</para>
+                        </listitem>
+                    </itemizedlist>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.cache.storage.plugin.options.clear-by-namespace">
+                <term>clear_by_namespace</term>
+
+                <listitem>
+                    <para>
+                        Flag indicating whether or not to clear by namespace. Used by the
+                        <classname>ClearByFactor</classname> plugin.
+                    </para>
+
+                    <itemizedlist>
+                        <listitem>
+                            <methodsynopsis>
+                                <methodname>setClearByNamespace</methodname>
+                                <methodparam>
+                                    <funcparams>bool $clearByNamespace</funcparams>
+                                </methodparam>
+                            </methodsynopsis>
+
+                            <para>Implements a fluent interface.</para>
+                        </listitem>
+
+                        <listitem>
+                            <methodsynopsis>
+                                <methodname>getClearByNamespace</methodname>
+                                <void/>
+                            </methodsynopsis>
+
+                            <para>Returns bool</para>
+                        </listitem>
+                    </itemizedlist>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.cache.storage.plugin.options.exception-callback">
+                <term>exception_callback</term>
+
+                <listitem>
+                    <para>
+                        Set callback to call on intercepted exception. Used by the
+                        <classname>ExceptionHandler</classname> plugin.
+                    </para>
+
+                    <itemizedlist>
+                        <listitem>
+                            <methodsynopsis>
+                                <methodname>setExceptionCallback</methodname>
+                                <methodparam>
+                                    <funcparams>callable $exceptionCallback</funcparams>
+                                </methodparam>
+                            </methodsynopsis>
+
+                            <para>Implements a fluent interface.</para>
+                        </listitem>
+
+                        <listitem>
+                            <methodsynopsis>
+                                <methodname>getExceptionCallback</methodname>
+                                <void/>
+                            </methodsynopsis>
+
+                            <para>Returns null|callable</para>
+                        </listitem>
+                    </itemizedlist>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.cache.storage.plugin.options.optimizing-factor">
+                <term>optimizing_factor</term>
+
+                <listitem>
+                    <para>
+                        Set automatic optimizing factor. Used by the
+                        <classname>OptimizeByFactor</classname> plugin.
+                    </para>
+
+                    <itemizedlist>
+                        <listitem>
+                            <methodsynopsis>
+                                <methodname>setOptimizingFactor</methodname>
+                                <methodparam>
+                                    <funcparams>int $optimizingFactor</funcparams>
+                                </methodparam>
+                            </methodsynopsis>
+
+                            <para>Implements a fluent interface.</para>
+                        </listitem>
+
+                        <listitem>
+                            <methodsynopsis>
+                                <methodname>getOptimizingFactor</methodname>
+                                <void/>
+                            </methodsynopsis>
+
+                            <para>Returns int</para>
+                        </listitem>
+                    </itemizedlist>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.cache.storage.plugin.options.serializer">
+                <term>serializer</term>
+
+                <listitem>
+                    <para>
+                        Set serializer adapter to use. Used by <classname>Serializer</classname>
+                        plugin.
+                    </para>
+
+                    <itemizedlist>
+                        <listitem>
+                            <methodsynopsis>
+                                <methodname>setSerializer</methodname>
+                                <methodparam>
+                                    <funcparams>string|Zend\Serializer\Adapter $serializer</funcparams>
+                                </methodparam>
+                            </methodsynopsis>
+
+                            <para>Implements a fluent interface.</para>
+                        </listitem>
+
+                        <listitem>
+                            <methodsynopsis>
+                                <methodname>getSerializer</methodname>
+                                <void/>
+                            </methodsynopsis>
+
+                            <para>Returns Zend\Serializer\Adapter</para>
+                        </listitem>
+                    </itemizedlist>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.cache.storage.plugin.options.serializer-options">
+                <term>serializer_options</term>
+
+                <listitem>
+                    <para>
+                        Set configuration options for instantiating a serializer adapter. Used by
+                        the <classname>Serializer</classname> plugin.
+                    </para>
+
+                    <itemizedlist>
+                        <listitem>
+                            <methodsynopsis>
+                                <methodname>setSerializerOptions</methodname>
+                                <methodparam>
+                                    <funcparams>array $serializerOptions</funcparams>
+                                </methodparam>
+                            </methodsynopsis>
+
+                            <para>Implements a fluent interface.</para>
+                        </listitem>
+
+                        <listitem>
+                            <methodsynopsis>
+                                <methodname>getSerializerOptions</methodname>
+                                <void/>
+                            </methodsynopsis>
+                            
+                            <para>Returns array</para>
+                        </listitem>
+                    </itemizedlist>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.cache.storage.plugin.options.throw-exceptions">
+                <term>throw_exceptions</term>
+
+                <listitem>
+                    <para>
+                        Set flag indicating we should re-throw exceptions. Used by the
+                        <classname>ExceptionHandler</classname> plugin.
+                    </para>
+
+                    <itemizedlist>
+                        <listitem>
+                            <methodsynopsis>
+                                <methodname>setThrowExceptions</methodname>
+                                <methodparam>
+                                    <funcparams>bool $throwExceptions</funcparams>
+                                </methodparam>
+                            </methodsynopsis>
+
+                            <para>Implements a fluent interface.</para>
+                        </listitem>
+
+                        <listitem>
+                            <methodsynopsis>
+                                <methodname>getThrowExceptions</methodname>
+                                <void/>
+                            </methodsynopsis>
+
+                            <para>Returns bool</para>
+                        </listitem>
+                    </itemizedlist>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+    </section>
+
+    <section xml:id="zend.cache.storage.plugin.methods">
+        <info>
+            <title>Available Methods</title>
+        </info>
+
+        <variablelist>
+            <varlistentry xml:id="zend.cache.storage.plugin.methods.set-options">
+                <term>setOptions</term>
+
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>setOptions</methodname>
+                        <methodparam>
+                            <funcparams>Zend\Cache\Storage\Plugin\PluginOptions $options</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+
+                    <para>Set options</para>
+
+                    <para>Implements a fluent interface.</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.cache.storage.plugin.methods.get-options">
+                <term>getOptions</term>
+
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>getOptions</methodname>
+                        <void/>
+                    </methodsynopsis>
+
+                    <para>Get options</para>
+
+                    <para>Returns PluginOptions</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.cache.storage.plugin.methods.attach">
+                <term>attach</term>
+
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>attach</methodname>
+                        <methodparam>
+                            <funcparams>EventCollection $events</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+
+                    <para>
+                        Defined by <classname>Zend\EventManager\ListenerAggregate</classname>,
+                        attach one or more listeners.
+                    </para>
+
+                    <para>Returns void</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.cache.storage.plugin.methods.detach">
+                <term>detach</term>
+
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>detach</methodname>
+                        <methodparam>
+                            <funcparams>EventCollection $events</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+
+                    <para>
+                        Defined by <classname>Zend\EventManager\ListenerAggregate</classname>,
+                        detach all previously attached listeners.
+                    </para>
+
+                    <para>Returns void</para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+    </section>
+
+    <section xml:id="zend.cache.storage.plugin.examples">
+        <info>
+            <title>TODO: Examples</title>
+        </info>
+
+        <para></para>
+    </section>
+</section>

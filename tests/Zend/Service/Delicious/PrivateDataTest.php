@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Service_Delicious
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -32,7 +32,7 @@ use \Zend\Service\Delicious,
  * @category   Zend_Service
  * @package    Zend_Service_Delicious
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Service
  * @group      Zend_Service_Delicious
@@ -81,7 +81,7 @@ class PrivateDataTest extends \PHPUnit_Framework_TestCase
      */
     public function testLastUpdate()
     {
-        $this->assertType('\Zend\Date\Date', $this->_delicious->getLastUpdate());
+        $this->assertInstanceOf('Zend\Date\Date', $this->_delicious->getLastUpdate());
     }
 
     /**
@@ -182,7 +182,7 @@ class PrivateDataTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(self::$TEST_POST_NOTES, $savedPost->getNotes());
         $this->assertEquals(self::$TEST_POST_TAGS, $savedPost->getTags());
         $this->assertEquals(self::$TEST_POST_SHARED, $savedPost->getShared());
-        $this->assertType('\Zend\Date\Date', $savedPost->getDate());
+        $this->assertInstanceOf('Zend\Date\Date', $savedPost->getDate());
         $this->assertInternalType('string', $savedPost->getHash());
         $this->assertInternalType('integer', $savedPost->getOthers());
 
@@ -204,7 +204,7 @@ class PrivateDataTest extends \PHPUnit_Framework_TestCase
     public function testGetAllPosts()
     {
         $posts = $this->_delicious->getAllPosts('zfSite');
-        $this->assertType('Zend\Service\Delicious\PostList', $posts);
+        $this->assertInstanceOf('Zend\Service\Delicious\PostList', $posts);
 
         foreach ($posts as $post) {
             $this->assertContains('zfSite', $post->getTags());
@@ -219,7 +219,7 @@ class PrivateDataTest extends \PHPUnit_Framework_TestCase
     public function testGetRecentPosts()
     {
         $posts = $this->_delicious->getRecentPosts('zfSite', 10);
-        $this->assertType('Zend\Service\Delicious\PostList', $posts);
+        $this->assertInstanceOf('Zend\Service\Delicious\PostList', $posts);
         $this->assertTrue(count($posts) <= 10);
 
         foreach ($posts as $post) {
@@ -235,7 +235,7 @@ class PrivateDataTest extends \PHPUnit_Framework_TestCase
     public function testGetPosts()
     {
         $posts = $this->_delicious->getPosts('zfSite', new Date(), 'help');
-        $this->assertType('\Zend\Service\Delicious\PostList', $posts);
+        $this->assertInstanceOf('Zend\Service\Delicious\PostList', $posts);
         $this->assertTrue(count($posts) <= 10);
 
         foreach ($posts as $post) {

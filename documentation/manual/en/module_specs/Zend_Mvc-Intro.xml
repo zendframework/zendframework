@@ -97,11 +97,11 @@
 
     <literallayout>
 application_root/
-    configs/
+    config/
         application.config.php
     data/
-    library/
-    modules/
+    module/
+    vendor/
     public/
         .htaccess
         index.php
@@ -116,21 +116,23 @@ application_root/
     </para>
 
     <para>
-      The <filename>library</filename> subdirectory should contain any
-      library code on which your application depends. This might include
-      Zend Framework, custom libraries from your organization, or other
-      third-party libraries from other projects.
-    </para>
-
-    <para>
-      The <filename>configs</filename> directory will typically contain
+      The <filename>config</filename> directory will typically contain
       configuration used by <classname>Zend\Module\Manager</classname> in
       order to load modules and merge configuration; we will detail this
       more later.
     </para>
 
     <para>
-      Finally, the <filename>modules</filename> directory will contain one
+      The <filename>vendor</filename> subdirectory should contain any
+      third-party modules or libraries on which your application depends. This
+      might include Zend Framework, custom libraries from your organization, or
+      other third-party libraries from other projects. Libraries and modules
+      placed in the <filename>vendor</filename> subdirectory should not be
+      modified from their original, distributed state.
+    </para>
+
+    <para>
+      Finally, the <filename>module</filename> directory will contain one
       or more modules delivering your application's functionality.
     </para>
 
@@ -164,7 +166,7 @@ module_root/
     autoload_classmap.php
     autoload_function.php
     autoload_register.php
-    configs/
+    config/
         module.config.php
     public/
         images/
@@ -173,12 +175,12 @@ module_root/
     src/
         &lt;module_namespace&gt;/
             &lt;code files&gt;
-    tests/
+    test/
         phpunit.xml
         bootstrap.php
         &lt;module_namespace&gt;/
             &lt;test code files&gt;
-    views/
+    view/
         &lt;dir-named-after-a-controller/
             &lt;.phtml files&gt;
 </literallayout>
@@ -207,10 +209,15 @@ class Module
 
     <para>
       By default, if an <methodname>init()</methodname> method is defined, this
-      method will be triggered by <classname>Zend\Module\Manager</classname>
-      when it loads the module class, and passed an instance of the
+      method will be triggered by a <classname>Zend\Module\Manager</classname>
+      listener when it loads the module class, and passed an instance of the
       manager. This allows you to perform tasks such as setting up
-      module-specific autoloading.
+      module-specific event listeners. The <methodname>init()</methodname>
+      method is called for <emphasis>every</emphasis> module on
+      <emphasis>every</emphasis> page request and should
+      <emphasis>only</emphasis> be used for performing
+      <emphasis>lightweight</emphasis> tasks such as registering event
+      listeners.
     </para>
 
     <para>
@@ -221,7 +228,7 @@ class Module
     <itemizedlist>
       <listitem>
         <para>
-          <filename>autoload_filemap.php</filename> should return an array
+          <filename>autoload_classmap.php</filename> should return an array
           classmap of class name/filename pairs (with the filenames resolved
           via the <varname>__DIR__</varname> magic constant).
         </para>
@@ -256,13 +263,12 @@ class Module
     </para>
 
     <para>
-      The <filename>configs</filename> directory should contain any
+      The <filename>config</filename> directory should contain any
       module-specific configuration. These files may be in any format
-      <classname>Zend\Config</classname> supports. We recommend naming the
-      main configuration "module.format", and for PHP-based
-      configuration, "module.config.php". Typically, you will
-      create configuration for the router as well as for the dependency
-      injector.
+      <classname>Zend\Config</classname> supports. We recommend naming the main
+      configuration "module.format", and for PHP-based configuration,
+      "module.config.php". Typically, you will create configuration for the
+      router as well as for the dependency injector.
     </para>
 
     <para>
@@ -274,7 +280,7 @@ class Module
     </para>
 
     <para>
-      The <filename>tests</filename> directory should contain your unit
+      The <filename>test</filename> directory should contain your unit
       tests. Typically, these will be written using
       <link xlink:href="http://phpunit.de">PHPUnit</link>, and contain
       artifacts related to its configuration (e.g.,
@@ -289,7 +295,7 @@ class Module
     </para>
 
     <para>
-      The <filename>views</filename> contains view scripts related to your
+      The <filename>view</filename> directory contains view scripts related to your
       controllers.
     </para>
   </section>
@@ -308,14 +314,14 @@ class Module
 
     <para>
       Zend Framework ships a default bootstrap implementation in
-      <classname>Zend\Mvc\Bootstrap</classname>. This class accepts a
-      <classname>Zend\Module\Manager</classname> instance to its constructor;
+      <classname>Zend\Mvc\Bootstrap</classname>. This class accepts an
+      instance of <classname>Zend\Config\Config</classname> to its constructor;
       once you have an instance, you then call its
       <methodname>bootstrap()</methodname> method, passing it the
-      <classname>Application</classname> instance. It will then configure
-      your locator (using <classname>Zend\Di\Di</classname> by default) and
-      your router (using
-      <classname>Zend\Mvc\Router\Http\TreeRouteStack</classname> by default).
+      <classname>Application</classname> instance. It will then configure your
+      locator (using <classname>Zend\Di\Di</classname> by default) and your
+      router (using <classname>Zend\Mvc\Router\Http\TreeRouteStack</classname>
+      by default).
     </para>
 
     <para>
@@ -331,8 +337,8 @@ class Module
     </para>
 
     <programlisting language="php"><![CDATA[
-// Assuming $modules is a Zend\Module\Manager
-$bootstrap   = new Bootstrap($modules);
+// Assuming $config is the merged config from all modules
+$bootstrap   = new Bootstrap($config);
 $application = new Application();
 $bootstrap->bootstrap($application);
 ]]></programlisting>
@@ -421,12 +427,11 @@ $response->send();
       <info><title>Configuring the Module Manager</title></info>
 
       <para>
-        The first step is configuring the module manager. This requires two
-        steps. First, you need to setup a
-        <classname>ModuleAutoloader</classname> so that the module manager
-        knows what paths to scan for modules. The second is to configure
-        the module manager itself to inform it of which modules it should
-        use.
+          The first step is configuring the module manager. The easiest way to
+          do this is to utilize the provided
+          <classname>Zend\Module\Listener\DefaultListenerAggregate</classname>.
+          Then you simply inform the module manager which modules to load and
+          attach the listener aggregate.
       </para>
 
       <para>
@@ -436,13 +441,18 @@ $response->send();
 
       <programlisting language="php"><![CDATA[
 <?php
-return new \Zend\Config\Config(array(
-    'modules_paths' => array(
-        realpath(__DIR__ . '/../modules'),
-    ),
+// config/application.config.php
+return array(
     'modules' => array(
+        /* ... */
     ),
-));
+    'module_listener_options' => array( 
+        'module_paths' => array(
+            './module',
+            './vendor',
+        ),
+    ),
+);
 ]]></programlisting>
 
       <para>
@@ -451,16 +461,16 @@ return new \Zend\Config\Config(array(
       </para>
 
       <para>
-        Now, within our <filename>public\index.php</filename>, we can setup
-        the <classname>ModuleAutoloader</classname>:
+        Now, within our <filename>public/index.php</filename>, we can setup
+        the <classname>DefaultListenerAggregate</classname>:
       </para>
 
       <programlisting language="php"><![CDATA[
-$moduleConfig = include __DIR__ . '/../configs/application.config.php';
-$moduleLoader = new \Zend\Loader\ModuleAutoloader(
-    $moduleConfig['module_paths']
-);
-$moduleLoader->register();
+use Zend\Module\Listener;
+
+$moduleConfig     = include __DIR__ . '/../configs/application.config.php';
+$listenerOptions  = new Listener\ListenerOptions($moduleConfig['module_listener_options']);
+$defaultListeners = new Listener\DefaultListenerAggregate($listenerOptions);
 ]]></programlisting>
 
       <para>
@@ -469,35 +479,30 @@ $moduleLoader->register();
       </para>
 
       <programlisting language="php"><![CDATA[
-$moduleManager = new \Zend\Module\Manager(
+use Zend\Module\Manager as ModuleManager;
+
+$moduleManager = new ModuleManager(
     $moduleConfig['modules']
 );
+$moduleManager->events()->attachAggregate($defaultListeners);
 ]]></programlisting>
 
       <para>
-        Each <classname>Module</classname> class that has configuration it
-        wants the <classname>Application</classname> to know about should
-        define a <methodname>getConfig()</methodname> method. That method should
-        return a <classname>Zend\Config\Config</classname> instance. As an
-        example:
+        Each <classname>Module</classname> class that has configuration it wants
+        the <classname>Application</classname> to know about should define a
+        <methodname>getConfig()</methodname> method. That method should return
+        an array or <classname>Traversable</classname> object such as
+        <classname>Zend\Config\Config</classname>. As an example:
       </para>
 
       <programlisting language="php"><![CDATA[
 namespace ZendUser;
 
-use Zend\Config\Config;
-
 class Module
 {
-    public function getConfig($env = null)
+    public function getConfig()
     {
-        $config = new Config(
-            include __DIR__ . '/configs/module.config.php'
-        );
-        if ($env and isset($config->{$env})) {
-            return $config->{$env};
-        }
-        return $config;
+        return include __DIR__ . '/config/module.config.php'
     }
 }
 ]]></programlisting>

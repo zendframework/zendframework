@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Mvc_Router
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @version    $Id$
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -31,7 +31,7 @@ use Countable,
  * Priority list
  *
  * @package    Zend_Mvc_Router
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
   */
 class PriorityList implements Iterator, Countable
@@ -99,6 +99,19 @@ class PriorityList implements Iterator, Countable
         $this->count--;
 
         unset($this->routes[$name]);
+    }
+    
+    /**
+     * Remove all routes.
+     * 
+     * @return void 
+     */
+    public function clear()
+    {
+        $this->routes = array();
+        $this->serial = 0;
+        $this->count  = 0;
+        $this->sorted = false;
     }
     
     /**

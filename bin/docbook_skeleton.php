@@ -1,3 +1,4 @@
+#!/usr/bin/env php
 <?php
 /**
  * Zend Framework
@@ -15,7 +16,7 @@
  * @category   Zend
  * @package    Zend_Docbook
  * @subpackage Exception
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -38,9 +39,9 @@
 use Zend\Console\Getopt,
     Zend\Docbook\ClassParser,
     Zend\Docbook\SkeletonGenerator,
-    Zend\Reflection\ReflectionClass;
+    Zend\Code\Reflection\ClassReflection as ReflectionClass;
 
-$libPath = __DIR__ . '/../library';
+$libPath = getenv('LIB_PATH') ? getenv('LIB_PATH') : __DIR__ . '/../library';
 if (!is_dir($libPath)) {
     // Try to load StandardAutoloader from include_path
     if (false === include('Zend/Loader/StandardAutoloader.php')) {
@@ -49,7 +50,7 @@ if (!is_dir($libPath)) {
     }
 } else {
     // Try to load StandardAutoloader from library
-    if (false === include(__DIR__ . '/../library/Zend/Loader/StandardAutoloader.php')) {
+    if (false === include($libPath . '/Zend/Loader/StandardAutoloader.php')) {
         echo "Unable to locate autoloader via library; aborting" . PHP_EOL;
         exit(2);
     }
@@ -93,7 +94,7 @@ if (!isset($opts->c)) {
 }
 // Valid class name?
 $class = $opts->c;
-if (!class_exists($class)) {
+if (!class_exists($class) && !interface_exists($class)) {
     // Invalid class name == no execution
     printf("Invalid class '%s' provided' class not found\n\n", $class);
     echo $opts->getUsageMessage();

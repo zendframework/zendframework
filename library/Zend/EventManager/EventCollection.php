@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_EventManager
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -30,7 +30,7 @@ use Zend\Stdlib\CallbackHandler;
  *
  * @category   Zend
  * @package    Zend_EventManager
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 interface EventCollection
@@ -84,10 +84,10 @@ interface EventCollection
     /**
      * Detach an event listener
      * 
-     * @param  CallbackHandler $listener 
+     * @param  CallbackHandler|ListenerAggregate $listener 
      * @return void
      */
-    public function detach(CallbackHandler $listener);
+    public function detach($listener);
 
     /**
      * Get a list of events for which this collection has listeners

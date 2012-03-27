@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Measure
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -34,11 +34,11 @@ use Zend\Locale;
  * @category   Zend
  * @package    Zend_Measure
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Measure
  */
-class AccelerationTest extends \PHPUnit_Framework_TestCase
+class AccelerationTest extends CommonTestCase
 {
 
     /**

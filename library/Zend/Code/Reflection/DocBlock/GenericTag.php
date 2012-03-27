@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Reflection
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -30,7 +30,7 @@ namespace Zend\Code\Reflection\DocBlock;
  * @uses       \Zend\Code\Reflection\Exception
  * @category   Zend
  * @package    Zend_Reflection
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class GenericTag implements Tag
@@ -112,7 +112,7 @@ class GenericTag implements Tag
     
     protected function parse($docblockLine)
     {
-        $this->values = explode($docblockLine, $this->contentSplitCharacter);
+        $this->values = explode($this->contentSplitCharacter, $docblockLine);
     }
     
 }

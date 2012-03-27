@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Soap
  * @subpackage Server
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -37,7 +37,7 @@ use Zend\Config\Config;
  * @category   Zend
  * @package    Zend_Soap
  * @subpackage Server
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Server implements \Zend\Server\Server
@@ -535,7 +535,7 @@ class Server implements \Zend\Server\Server
      *
      * See {@link setObject()} to set preconfigured object instances as request handlers.
      *
-     * @param string $class Class Name which executes SOAP Requests at endpoint.
+     * @param string|object $class Class name or object instance which executes SOAP Requests at endpoint.
      * @return \Zend\Soap\Server
      * @throws \Zend\Soap\ServerException if called more than once, or if class
      * does not exist
@@ -544,6 +544,10 @@ class Server implements \Zend\Server\Server
     {
         if (isset($this->_class)) {
             throw new Exception\InvalidArgumentException('A class has already been registered with this soap server instance');
+        }
+
+        if (is_object($class)) {
+            return $this->setObject($class);
         }
 
         if (!is_string($class)) {
@@ -555,10 +559,9 @@ class Server implements \Zend\Server\Server
         }
 
         $this->_class = $class;
-        if (1 < func_num_args()) {
+        if (2 < func_num_args()) {
             $argv = func_get_args();
-            array_shift($argv);
-            $this->_classArgs = $argv;
+            $this->_classArgs = array_slice($argv, 2);
         }
 
         return $this;
@@ -705,7 +708,7 @@ class Server implements \Zend\Server\Server
      * @param boolean $flag
      * @return \Zend\Soap\Server
      */
-    public function setReturnResponse($flag)
+    public function setReturnResponse($flag = true)
     {
         $this->_returnResponse = ($flag) ? true : false;
         return $this;
@@ -726,7 +729,7 @@ class Server implements \Zend\Server\Server
      *
      * @return string
      */
-    public function getLastResponse()
+    public function getResponse()
     {
         return $this->_response;
     }
@@ -806,7 +809,7 @@ class Server implements \Zend\Server\Server
         ob_start();
         if($setRequestException instanceof \Exception) {
             // Send SOAP fault message if we've catched exception
-            $soap->fault("Sender", $setRequestException->getMessage());
+            $soap->fault('Sender', $setRequestException->getMessage());
         } else {
             try {
                 $soap->handle($this->_request);
@@ -936,6 +939,6 @@ class Server implements \Zend\Server\Server
      */
     public function handlePhpErrors($errno, $errstr, $errfile = null, $errline = null, array $errcontext = null)
     {
-        throw $this->fault($errstr, "Receiver");
+        throw $this->fault($errstr, 'Receiver');
     }
 }

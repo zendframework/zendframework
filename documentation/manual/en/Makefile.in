@@ -38,9 +38,17 @@ FOP=@FOP@
 ECSRC=@ECSRC@
 HERE=@HERE@
 
-DOCBOOK_DTD?=http://framework.zend.com/docbook/xml/4.5/docbookx.dtd
+# Docbook 5 DTD
+DOCBOOK_DTD?=http://www.docbook.org/xml/5.0/dtd/docbook.dtd
+
+# You should grab the docbook-xsl-ns HTML chunk.xsl stylesheet and add it
+# via an environment variable for best results.
 DOCBOOK_XSL?=http://framework.zend.com/docbook-xsl/htmlhelp/htmlhelp.xsl
+
+# For rendering PDF
 DOCBOOK_FO_XSL?=http://framework.zend.com/docbook-xsl/fo/docbook.xsl
+
+# Local modifications
 HTML_XSL=html.xsl
 MANUAL_XML=manual.xml
 MANUAL_PRINT1_XML=manual-print1.xml

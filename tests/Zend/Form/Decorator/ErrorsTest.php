@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Form
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -23,7 +23,7 @@ namespace ZendTest\Form\Decorator;
 
 use Zend\Form\Decorator\Errors as ErrorsDecorator,
     Zend\Form\Element,
-    Zend\View\PhpRenderer as View;
+    Zend\View\Renderer\PhpRenderer as View;
 
 /**
  * Test class for Zend_Form_Decorator_Errors
@@ -31,7 +31,7 @@ use Zend\Form\Decorator\Errors as ErrorsDecorator,
  * @category   Zend
  * @package    Zend_Form
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Form
  */
@@ -77,9 +77,11 @@ class ErrorsTest extends \PHPUnit_Framework_TestCase
     {
         $this->setupElement();
         $content = 'test content';
-        $test = $this->decorator->render($content);
+        $test    = $this->decorator->render($content);
+        $view    = $this->getView();
         $this->assertContains($content, $test);
         foreach ($this->element->getMessages() as $message) {
+            $message = $view->escape($message);
             $this->assertContains($message, $test);
         }
     }

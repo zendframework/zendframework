@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Filter
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -24,14 +24,14 @@
 namespace Zend\Filter;
 
 use Traversable,
-    Zend\Stdlib\IteratorToArray;
+    Zend\Stdlib\ArrayUtils;
 
 /**
  * @uses       Zend\Filter\Exception
  * @uses       Zend\Filter\AbstractFilter
  * @category   Zend
  * @package    Zend_Filter
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class PregReplace extends AbstractFilter
@@ -91,7 +91,7 @@ class PregReplace extends AbstractFilter
     public function __construct($options = array())
     {
         if ($options instanceof Traversable) {
-            $options = IteratorToArray::convert($options);
+            $options = ArrayUtils::iteratorToArray($options);
         } elseif (!is_array($options)) {
             $options = func_get_args();
             $temp    = array();

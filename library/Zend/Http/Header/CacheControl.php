@@ -9,8 +9,6 @@ namespace Zend\Http\Header;
 class CacheControl implements HeaderDescription
 {
 
-    const SEPARATOR = ", \t";
-
     protected $directives = array();
 
     /**
@@ -93,65 +91,73 @@ class CacheControl implements HeaderDescription
 
     protected static function parseValue($value)
     {
+        $value = trim($value);
+
         $directives = array();
-        $lastPosition = 0;
-        while (false !== ($token = self::tokenizer($value, self::SEPARATOR, $lastPosition))) {
-            $directive = explode('=', trim($token));
-            if (false === $directive) {
-                // explode shouldn't fail
-                throw new Exception\InvalidArgumentException(
-                	'Invalid header line for Cache-Control string: "' . $value . '"'
-                );
-            }
-            if (preg_match('/^[^a-zA-Z]{1,1}/', $directive[0])) {
-                //directives should start with a letter
-                throw new Exception\InvalidArgumentException(
-                	'Invalid Cache-Control directive: "' . $token . '"'
-                );
-            }
-            $directives[$directive[0]] = true;
-            if (isset($directive[1])) {
-                if (!preg_match('/^"([^"]*)"|([^a-zA-Z0-9._-]*)$/', $directive[1])) {
-                    // the value should either be enclosed in quotes or contain only safe chars
-                    throw new Exception\InvalidArgumentException(
-                    	'Invalid Cache-Control directive: "' . $token . '"'
-                    );
-                }
-                $directives[$directive[0]] = trim($directive[1], '"');
-            }
+
+        // handle empty string early so we don't need a separate start state
+        if ($value == '') {
+            return $directives;
         }
-        return $directives;
+
+        $lastMatch = null;
+
+        state_directive:
+        switch (self::match(array('[a-zA-Z][a-zA-Z_-]*'), $value, $lastMatch)) {
+            case 0:
+                $directive = $lastMatch;
+                goto state_value;
+                break;
+
+            default:
+                throw new Exception\InvalidArgumentException('expected DIRECTIVE');
+                break;
+        }
+
+        state_value:
+        switch (self::match(array('="[^"]*"', '=[^",\s;]*'), $value, $lastMatch)) {
+            case 0:
+                $directives[$directive] = substr($lastMatch, 2, -1);
+                goto state_separator;
+                break;
+
+            case 1:
+                $directives[$directive] = rtrim(substr($lastMatch, 1));
+                goto state_separator;
+                break;
+
+            default:
+                $directives[$directive] = true;
+                goto state_separator;
+                break;
+        }
+
+        state_separator:
+        switch (self::match(array('\s*,\s*', '$'), $value, $lastMatch)) {
+            case 0:
+                goto state_directive;
+                break;
+
+            case 1:
+                return $directives;
+                break;
+
+            default:
+                throw new Exception\InvalidArgumentException('expected SEPARATOR or END');
+                break;
+
+        }
     }
 
-    protected static function tokenizer($string, $sep, &$lastPosition)
+    protected static function match($tokens, &$string, &$lastMatch)
     {
-        $quoted = false;
-        $startPosition = $lastPosition;
-        $array = str_split($string);
-        $length = count($array);
-        if ($lastPosition > $length) {
-            return false;
-        }
-        for ($lastPosition; $lastPosition < $length; $lastPosition++) {
-            if (!$quoted) {
-                if ('"' == $array[$lastPosition]) {
-                    $quoted = true;
-                } elseif (false !== strpos($sep, $array[$lastPosition])) {
-                    if ($startPosition == $lastPosition) {
-                        $startPosition = $lastPosition = $lastPosition++;
-                        continue;
-                    } else {
-                        break;
-                    }
-                }
-            } else {
-                if ('"' == $array[$lastPosition]) {
-                    $quoted = false;
-                }
+        foreach ($tokens as $i => $token) {
+            if (preg_match('/^'.$token.'/', $string, $matches)) {
+                $lastMatch = $matches[0];
+                $string = substr($string, strlen($matches[0]));
+                return $i;
             }
         }
-        $return = substr($string, $startPosition, $lastPosition - $startPosition);
-        $lastPosition++;
-        return $return;
+        return -1;
     }
 }

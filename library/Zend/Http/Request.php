@@ -86,7 +86,7 @@ class Request extends Message implements RequestDescription
     {
         $request = new static();
 
-        $lines = preg_split('/\r\n/', $string);
+        $lines = explode("\r\n", $string);
 
         // first line must be Method/Uri/Version string
         $matches = null;
@@ -489,6 +489,30 @@ class Request extends Message implements RequestDescription
     public function isConnect()
     {
         return ($this->method === self::METHOD_CONNECT);
+    }
+
+    /**
+     * Is the request a Javascript XMLHttpRequest?
+     *
+     * Should work with Prototype/Script.aculo.us, possibly others.
+     *
+     * @return boolean
+     */
+    public function isXmlHttpRequest()
+    {
+        $header = $this->headers()->get('X_REQUESTED_WITH');
+        return false !== $header && $header->getFieldValue() == 'XMLHttpRequest';
+    }
+
+    /**
+     * Is this a Flash request?
+     *
+     * @return boolean
+     */
+    public function isFlashRequest()
+    {
+        $header = $this->headers()->get('USER_AGENT');
+        return false !== $header && stristr($header->getFieldValue(), ' flash');
     }
 
     /**

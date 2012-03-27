@@ -129,8 +129,7 @@ class SetCookieTest extends \PHPUnit_Framework_TestCase
     /** Implmentation specific tests here */
     
     /**
-     * ZF2-169
-     * 
+     * @group ZF2-169
      * @see http://framework.zend.com/issues/browse/ZF2-169
      */
     public function testZF2_169()
@@ -138,6 +137,16 @@ class SetCookieTest extends \PHPUnit_Framework_TestCase
         $cookie = 'Set-Cookie: leo_auth_token="example"; Version=1; Max-Age=1799; Expires=Mon, 20-Feb-2012 02:49:57 GMT; Path=/';
         $setCookieHeader = SetCookie::fromString($cookie);
         $this->assertEquals($cookie, $setCookieHeader->toString());
+    }
+
+    /**
+     * @group ZF2-169
+     */
+    public function testDoesNotAcceptCookieNameFromArbitraryLocationInHeaderValue()
+    {
+        $cookie = 'Set-Cookie: Version=1; Max-Age=1799; Expires=Mon, 20-Feb-2012 02:49:57 GMT; Path=/; leo_auth_token="example"';
+        $setCookieHeader = SetCookie::fromString($cookie);
+        $this->assertNotEquals('leo_auth_token', $setCookieHeader->getName());
     }
 }
 

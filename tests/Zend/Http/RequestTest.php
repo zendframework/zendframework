@@ -141,8 +141,33 @@ class RequestTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("GET / HTTP/1.1\r\n\r\nfoo=bar&bar=baz", $request->toString());
     }
 
+    public function testRequestIsXmlHttpRequest()
+    {
+        $request = new Request();
+        $this->assertFalse($request->isXmlHttpRequest());
 
+        $request = new Request();
+        $request->headers()->addHeaderLine('X_REQUESTED_WITH', 'FooBazBar');
+        $this->assertFalse($request->isXmlHttpRequest());
 
+        $request = new Request();
+        $request->headers()->addHeaderLine('X_REQUESTED_WITH', 'XMLHttpRequest');
+        $this->assertTrue($request->isXmlHttpRequest());
+    }
+
+    public function testRequestIsFlashRequest()
+    {
+        $request = new Request();
+        $this->assertFalse($request->isFlashRequest());
+
+        $request = new Request();
+        $request->headers()->addHeaderLine('USER_AGENT', 'FooBazBar');
+        $this->assertFalse($request->isFlashRequest());
+
+        $request = new Request();
+        $request->headers()->addHeaderLine('USER_AGENT', 'Shockwave Flash');
+        $this->assertTrue($request->isFlashRequest());
+    }
 
     /**
      * PHPUNIT DATA PROVIDER

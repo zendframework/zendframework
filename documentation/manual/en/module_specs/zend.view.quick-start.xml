@@ -285,6 +285,9 @@ class BarController extends ActionController
                 associative array from your controller; if so, it will create a
                 view model and inject this associative array as the view
                 variables container; this view model then replaces the MVC
+                event's result. It will also look to see if you returned nothing
+                or null; if so, it will create a view model without any
+                variables attached; this view model also replaces the MVC
                 event's result. 
             </para>
                 

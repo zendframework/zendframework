@@ -37,15 +37,15 @@ class RouteBroker implements Broker
 {
     /**
      * Default class loader to utilize with this broker.
-     * 
+     *
      * @var string
      */
     protected $defaultClassLoader = 'Zend\Loader\PluginClassLoader';
 
     /**
      * Plugin class loader used by this instance.
-     * 
-     * @var PluginClassLocator 
+     *
+     * @var PluginClassLocator
      */
     protected $classLoader;
 
@@ -53,8 +53,8 @@ class RouteBroker implements Broker
      * Constructor.
      *
      * Allow configuration via options; see {@link setOptions()} for details.
-     * 
-     * @param  null|array|Traversable $options 
+     *
+     * @param  null|array|\Traversable $options
      * @return void
      */
     public function __construct($options = null)
@@ -66,9 +66,9 @@ class RouteBroker implements Broker
 
     /**
      * Configure route broker.
-     * 
-     * @param  mixed $options 
-     * @return PluginBroker
+     *
+     * @param  mixed $options
+     * @return RouteBroker
      */
     public function setOptions($options)
     {
@@ -89,14 +89,14 @@ class RouteBroker implements Broker
                                 $value
                             ));
                         }
-                        
+
                         $value = new $value;
                     }
-                    
+
                     if ($value instanceof ShortNameLocator) {
                         $this->setClassLoader($value);
                         break;
-                    } 
+                    }
 
                     if (!is_array($value) && !$value instanceof \Traversable) {
                         throw new Exception\RuntimeException(sprintf(
@@ -107,7 +107,7 @@ class RouteBroker implements Broker
 
                     $class   = false;
                     $options = null;
-                    
+
                     foreach ($value as $k => $v) {
                         switch (strtolower($k)) {
                             case 'class':
@@ -120,13 +120,13 @@ class RouteBroker implements Broker
                                 break;
                         }
                     }
-                    
+
                     if ($class) {
                         $loader = new $class($options);
                         $this->setClassLoader($loader);
                     }
                     break;
-                    
+
                 default:
                     // ignore unknown options
                     break;
@@ -138,7 +138,7 @@ class RouteBroker implements Broker
 
     /**
      * load(): defined by Broker interface.
-     * 
+     *
      * @see    Broker::load()
      * @param  string $route
      * @param  array  $options
@@ -165,9 +165,9 @@ class RouteBroker implements Broker
 
     /**
      * getPlugins(): defined by Broker interface.
-     * 
+     *
      * Not required in the RouteBroker.
-     * 
+     *
      * @see    Broker::getPlugins()
      * @return array
      */
@@ -177,11 +177,11 @@ class RouteBroker implements Broker
 
     /**
      * isLoaded(): defined by Broker interface.
-     * 
+     *
      * Not required in the RouteBroker.
-     * 
+     *
      * @see    Broker::isLoaded()
-     * @param  string $name 
+     * @param  string $name
      * @return bool
      */
     public function isLoaded($name)
@@ -190,13 +190,13 @@ class RouteBroker implements Broker
 
     /**
      * register(): defined by Broker interface.
-     * 
+     *
      * Not required in the RouteBroker.
-     * 
+     *
      * @see    Broker::register()
-     * @param  string $name 
-     * @param  mixed $plugin 
-     * @return PluginBroker
+     * @param  string $name
+     * @param  mixed $plugin
+     * @return RouteBroker
      */
     public function register($name, $plugin)
     {
@@ -204,11 +204,11 @@ class RouteBroker implements Broker
 
     /**
      * unregister(): defined by Broker interface.
-     * 
+     *
      * Not required in the RouteBroker.
-     * 
+     *
      * @see    Broker::unregister()
-     * @param  string $name 
+     * @param  string $name
      * @return bool
      */
     public function unregister($name)
@@ -217,25 +217,25 @@ class RouteBroker implements Broker
 
     /**
      * setClassLoader(): defined by Broker interface.
-     * 
+     *
      * @see    Broker::setClassLoader()
-     * @param  ShortNameLocator $loader 
-     * @return PluginBroker
+     * @param  ShortNameLocator $loader
+     * @return RouteBroker
      */
     public function setClassLoader(ShortNameLocator $loader)
     {
         if (!$loader instanceof PluginClassLocator) {
             throw new Exception\InvalidArgumentException('Expected instance of PluginClassLocator');
         }
-        
+
         $this->classLoader = $loader;
-        
+
         return $this;
     }
 
     /**
      * getClassLoader(): defined by Broker interface.
-     * 
+     *
      * @see    Broker::getClassLoader()
      * @return ShortNameLocator
      */
@@ -245,7 +245,7 @@ class RouteBroker implements Broker
             $loaderClass = $this->defaultClassLoader;
             $this->setClassLoader(new $loaderClass());
         }
-        
+
         return $this->classLoader;
     }
 }

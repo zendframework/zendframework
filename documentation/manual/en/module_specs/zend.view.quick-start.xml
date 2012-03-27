@@ -320,7 +320,7 @@ use Zend\Mvc\Controller\ActionController;
 
 class BarController extends ActionController
 {
-    public function doSomethingAction()
+    public function doSomethingCrazyAction()
     {
         return array(
             'message' => 'Hello world',

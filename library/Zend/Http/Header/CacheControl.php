@@ -9,6 +9,8 @@ namespace Zend\Http\Header;
 class CacheControl implements HeaderDescription
 {
 
+    const SEPARATOR = ", \t";
+
     protected $directives = array();
 
     /**
@@ -30,7 +32,7 @@ class CacheControl implements HeaderDescription
         }
 
         // @todo implementation details
-        $header->directives = self::parseCacheControl($value);
+        $header->directives = self::parseValue($value);
 
         return $header;
     }
@@ -78,11 +80,9 @@ class CacheControl implements HeaderDescription
                 if (preg_match('#[^a-zA-Z0-9._-]#', $value)) {
                     $value = '"'.$value.'"';
                 }
-
                 $parts[] = "$key=$value";
             }
         }
-
         return implode(', ', $parts);
     }
 
@@ -91,13 +91,67 @@ class CacheControl implements HeaderDescription
         return 'Cache-Control: ' . $this->getFieldValue();
     }
 
-    protected static function parseCacheControl($value)
+    protected static function parseValue($value)
     {
         $directives = array();
-        preg_match_all('#([a-zA-Z][a-zA-Z_-]*)\s*(?:=(?:"([^"]*)"|([^ \t",;]*)))?#', $value, $matches, PREG_SET_ORDER);
-        foreach ($matches as $match) {
-            $directives[strtolower($match[1])] = isset($match[2]) && $match[2] ? $match[2] : (isset($match[3]) ? $match[3] : true);
+        $lastPosition = 0;
+        while (false !== ($token = self::tokenizer($value, self::SEPARATOR, $lastPosition))) {
+            $directive = explode('=', trim($token));
+            if (false === $directive) {
+                // explode shouldn't fail
+                throw new Exception\InvalidArgumentException(
+                	'Invalid header line for Cache-Control string: "' . $value . '"'
+                );
+            }
+            if (preg_match('/^[^a-zA-Z]{1,1}/', $directive[0])) {
+                //directives should start with a letter
+                throw new Exception\InvalidArgumentException(
+                	'Invalid Cache-Control directive: "' . $token . '"'
+                );
+            }
+            $directives[$directive[0]] = true;
+            if (isset($directive[1])) {
+                if (!preg_match('/^"([^"]*)"|([^a-zA-Z0-9._-]*)$/', $directive[1])) {
+                    // the value should either be enclosed in quotes or contain only safe chars
+                    throw new Exception\InvalidArgumentException(
+                    	'Invalid Cache-Control directive: "' . $token . '"'
+                    );
+                }
+                $directives[$directive[0]] = trim($directive[1], '"');
+            }
         }
         return $directives;
+    }
+
+    protected static function tokenizer($string, $sep, &$lastPosition)
+    {
+        $quoted = false;
+        $startPosition = $lastPosition;
+        $array = str_split($string);
+        $length = count($array);
+        if ($lastPosition > $length) {
+            return false;
+        }
+        for ($lastPosition; $lastPosition < $length; $lastPosition++) {
+            if (!$quoted) {
+                if ('"' == $array[$lastPosition]) {
+                    $quoted = true;
+                } elseif (false !== strpos($sep, $array[$lastPosition])) {
+                    if ($startPosition == $lastPosition) {
+                        $startPosition = $lastPosition = $lastPosition++;
+                        continue;
+                    } else {
+                        break;
+                    }
+                }
+            } else {
+                if ('"' == $array[$lastPosition]) {
+                    $quoted = false;
+                }
+            }
+        }
+        $return = substr($string, $startPosition, $lastPosition - $startPosition);
+        $lastPosition++;
+        return $return;
     }
 }

@@ -441,7 +441,7 @@ class StandardConfiguration implements Configurable
      */
     public function setEntropyFile($entropyFile)
     {
-        if (!file_exists($entropyFile) || is_dir($entropyFile) || !is_readable($entropyFile)) {
+        if (is_dir($entropyFile) || !is_readable($entropyFile)) {
             throw new Exception\InvalidArgumentException('Invalid entropy_file provided');
         }
         $this->setOption('entropy_file', $entropyFile);

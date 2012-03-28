@@ -89,14 +89,14 @@ class SessionConfiguration extends StandardConfiguration
      * Does nothing in this implementation; others might use it to set things 
      * such as INI settings.
      * 
-     * @param  string $name 
-     * @param  mixed $value 
+     * @param  string $storageName 
+     * @param  mixed $storageValue 
      * @return Zend\Session\Configuration\StandardConfiguration
      */
-    public function setStorageOption($name, $value)
+    public function setStorageOption($storageName, $storageValue)
     {
         $key = false;
-        switch ($name) {
+        switch ($storageName) {
             case 'remember_me_seconds':
                 // do nothing; not an INI option
                 return;
@@ -104,11 +104,11 @@ class SessionConfiguration extends StandardConfiguration
                 $key = 'url_rewriter.tags';
                 break;
             default:
-                $key = 'session.' . $name;
+                $key = 'session.' . $storageName;
                 break;
         }
 
-        ini_set($key, $value);
+        ini_set($key, $storageValue);
     }
 
     /**
@@ -116,10 +116,10 @@ class SessionConfiguration extends StandardConfiguration
      *
      * Used to retrieve default values from a backend configuration store.
      * 
-     * @param  string $name 
+     * @param  string $storageOption
      * @return mixed
      */
-    public function getStorageOption($name)
+    public function getStorageOption($storageOption)
     {
         $key       = false;
         $transform = false;

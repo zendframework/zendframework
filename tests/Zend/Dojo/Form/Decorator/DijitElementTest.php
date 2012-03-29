@@ -177,11 +177,12 @@ class DijitElementTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @group ZF-7660
+     * @group #964
      */
-    public function testRenderingShouldRenderRequiredFlagAlways()
+    public function testRenderingShouldNotRenderRequiredFlagWhenFalse()
     {
         $this->element->setRequired(false);
         $html = $this->decorator->render('');
-        $this->assertContains('required="false"', $html, $html);
+        $this->assertNotContains('required="false"', $html, $html);
     }
 }

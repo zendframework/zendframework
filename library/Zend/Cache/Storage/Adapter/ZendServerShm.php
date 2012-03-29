@@ -53,38 +53,20 @@ class ZendServerShm extends AbstractZendServer
     }
 
     /**
-     * Get storage capacity.
+     * Internal method to get storage capacity.
      *
-     * @param  array $options
+     * @param  array $normalizedOptions
      * @return array|boolean Capacity as array or false on failure
-     *
-     * @triggers getCapacity.pre(PreEvent)
-     * @triggers getCapacity.post(PostEvent)
-     * @triggers getCapacity.exception(ExceptionEvent)
+     * @throws Exception
      */
-    public function getCapacity(array $options = array())
+    protected function internalGetCapacity(array & $normalizedOptions)
     {
-        $args = new ArrayObject(array(
-            'options' => & $options,
-        ));
-
-        try {
-            $eventRs = $this->triggerPre(__FUNCTION__, $args);
-            if ($eventRs->stopped()) {
-                return $eventRs->last();
-            }
-
-            $total = (int)ini_get('zend_datacache.shm.memory_cache_size');
-            $total*= 1048576; // MB -> Byte
-            $result = array(
-                'total' => $total,
-                // TODO: How to get free capacity status
-            );
-
-            return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
-        }
+        $total = (int)ini_get('zend_datacache.shm.memory_cache_size');
+        $total*= 1048576; // MB -> Byte
+        return array(
+            'total' => $total,
+            // TODO: How to get free capacity status
+        );
     }
 
     /**

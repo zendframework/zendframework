@@ -210,7 +210,7 @@ interface Adapter
     public function addItems(array $keyValuePairs, array $options = array());
 
     /**
-     * Replace an item.
+     * Replace an existing item.
      *
      * @param  string $key
      * @param  mixed  $value
@@ -221,7 +221,7 @@ interface Adapter
     public function replaceItem($key, $value, array $options = array());
 
     /**
-     * Replace multiple items.
+     * Replace multiple existing items.
      *
      * @param  array $keyValuePairs
      * @param  array $options
@@ -231,15 +231,15 @@ interface Adapter
     public function replaceItems(array $keyValuePairs, array $options = array());
 
     /**
-     * Set item only if token matches
+     * Set an item only if token matches
      *
-     * It uses the token from received from getItem() to check if the item has 
+     * It uses the token received from getItem() to check if the item has
      * changed before overwriting it.
      *
-     * @param  mixed       $token
-     * @param  string|null $key
-     * @param  mixed       $value
-     * @param  array       $options
+     * @param  mixed  $token
+     * @param  string $key
+     * @param  mixed  $value
+     * @param  array  $options
      * @return boolean
      * @throws \Zend\Cache\Exception
      * @see    getItem()
@@ -251,7 +251,7 @@ interface Adapter
      * Reset lifetime of an item
      *
      * @param  string $key
-     * @param  array $options
+     * @param  array  $options
      * @return boolean
      * @throws \Zend\Cache\Exception
      */
@@ -271,7 +271,7 @@ interface Adapter
      * Remove an item.
      *
      * @param  string $key
-     * @param  array $options
+     * @param  array  $options
      * @return boolean
      * @throws \Zend\Cache\Exception
      */
@@ -291,9 +291,9 @@ interface Adapter
      * Increment an item.
      *
      * @param  string $key
-     * @param  int $value
-     * @param  array $options
-     * @return int|boolean The new value of false on failure
+     * @param  int    $value
+     * @param  array  $options
+     * @return int|boolean The new value or false on failure
      * @throws \Zend\Cache\Exception
      */
     public function incrementItem($key, $value, array $options = array());
@@ -312,9 +312,9 @@ interface Adapter
      * Decrement an item.
      *
      * @param  string $key
-     * @param  int $value
-     * @param  array $options
-     * @return int|boolean The new value or false or failure
+     * @param  int    $value
+     * @param  array  $options
+     * @return int|boolean The new value or false on failure
      * @throws \Zend\Cache\Exception
      */
     public function decrementItem($key, $value, array $options = array());
@@ -346,7 +346,7 @@ interface Adapter
     /**
      * Find items.
      *
-     * @param  int $mode Matching mode (Value of Adapter::*)
+     * @param  int   $mode Matching mode (Value of Adapter::MATCH_*)
      * @param  array $options
      * @return boolean
      * @throws \Zend\Cache\Exception
@@ -378,7 +378,7 @@ interface Adapter
     /**
      * Clear items off all namespaces.
      *
-     * @param  int $mode Matching mode (Value of Adapter::MATCH_*)
+     * @param  int   $mode Matching mode (Value of Adapter::MATCH_*)
      * @param  array $options
      * @return boolean
      * @throws \Zend\Cache\Exception
@@ -389,7 +389,7 @@ interface Adapter
     /**
      * Clear items by namespace.
      *
-     * @param  int $mode Matching mode (Value of Adapter::MATCH_*)
+     * @param  int   $mode Matching mode (Value of Adapter::MATCH_*)
      * @param  array $options
      * @return boolean
      * @throws \Zend\Cache\Exception

@@ -54,7 +54,9 @@ class MemoryOptions extends AdapterOptions
      */
     public function setMemoryLimit($bytes)
     {
-        $this->memoryLimit = (int) $bytes;
+        $bytes = (int) $bytes;
+        $this->triggerOptionEvent('memory_limit', $bytes);
+        $this->memoryLimit = $bytes;
         return $this;
     }
 

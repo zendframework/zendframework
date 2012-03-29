@@ -68,8 +68,7 @@ class Memory extends AbstractAdapter
             $options = new MemoryOptions($options);
         }
 
-        $this->options = $options;
-        return $this;
+        return parent::setOptions($options);
     }
 
     /**
@@ -89,176 +88,146 @@ class Memory extends AbstractAdapter
     /* reading */
 
     /**
-     * Get an item.
+     * Internal method to get an item.
      *
      * Options:
-     *  - ttl <float> optional
-     *    - The time-to-life (Default: ttl of object)
-     *  - namespace <string> optional
-     *    - The namespace to use (Default: namespace of object)
-     *  - ignore_missing_items <boolean> optional
+     *  - ttl <int>
+     *    - The time-to-life
+     *  - namespace <string>
+     *    - The namespace to use
+     *  - ignore_missing_items <boolean>
      *    - Throw exception on missing item or return false
      *
-     * @param  string $key
-     * @param  array $options
-     * @return mixed Value on success and false on failure
+     * @param  string $normalizedKey
+     * @param  array  $normalizedOptions
+     * @return mixed Data on success or false on failure
      * @throws Exception
-     *
-     * @triggers getItem.pre(PreEvent)
-     * @triggers getItem.post(PostEvent)
-     * @triggers getItem.exception(ExceptionEvent)
      */
-    public function getItem($key, array $options = array())
+    protected function internalGetItem(& $normalizedKey, array & $normalizedOptions)
     {
-        $baseOptions = $this->getOptions();
-        if (!$baseOptions->getReadable()) {
-            return false;
+        $ns    = $normalizedOptions['namespace'];
+        $exist = isset($this->data[$ns][$normalizedKey]);
+        if ($exist) {
+            $data = & $this->data[$ns][$normalizedKey];
+            $ttl  = $normalizedOptions['ttl'];
+            if ($ttl && microtime(true) >= ($data[1] + $ttl) ) {
+                $exist = false;
+            }
         }
 
-        $this->normalizeOptions($options);
-        $this->normalizeKey($key);
-        $args = new ArrayObject(array(
-            'key'     => & $key,
-            'options' => & $options,
-        ));
-
-        try {
-            $eventRs = $this->triggerPre(__FUNCTION__, $args);
-            if ($eventRs->stopped()) {
-                return $eventRs->last();
+        if (!$exist) {
+            if (!$normalizedOptions['ignore_missing_items']) {
+                throw new Exception\ItemNotFoundException("Key '{$normalizedKey}' not found on namespace '{$ns}'");
             }
-
-            $ns = $options['namespace'];
-            $exist = isset($this->data[$ns][$key]);
-            if ($exist) {
-                if ($options['ttl'] && microtime(true) >= ($this->data[$ns][$key][1] + $options['ttl']) ) {
-                    $exist = false;
-                }
+            $result = false;
+        } else {
+            $result = $data[0];
+            if (array_key_exists('token', $normalizedOptions)) {
+                $normalizedOptions['token'] = $data[0];
             }
-
-            if (!$exist) {
-                if (!$options['ignore_missing_items']) {
-                    throw new Exception\ItemNotFoundException("Key '{$key}' not found on namespace '{$ns}'");
-                }
-                $result = false;
-            } else {
-                $result = $this->data[$ns][$key][0];
-                if (array_key_exists('token', $options)) {
-                    $options['token'] = $this->data[$ns][$key][0];
-                }
-            }
-
-            return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
         }
+
+        return $result;
     }
 
     /**
-     * Get multiple items.
+     * Internal method to get multiple items.
      *
      * Options:
-     *  - ttl <float> optional
-     *    - The time-to-life (Default: ttl of object)
-     *  - namespace <string> optional
-     *    - The namespace to use (Default: namespace of object)
+     *  - ttl <int>
+     *    - The time-to-life
+     *  - namespace <string>
+     *    - The namespace to use
      *
-     * @param  array $keys
-     * @param  array $options
-     * @return array Assoziative array of existing keys and values or false on failure
+     * @param  array $normalizedKeys
+     * @param  array $normalizedOptions
+     * @return array Associative array of existing keys and values
      * @throws Exception
-     *
-     * @triggers getItems.pre(PreEvent)
-     * @triggers getItems.post(PostEvent)
-     * @triggers getItems.exception(ExceptionEvent)
      */
-    public function getItems(array $keys, array $options = array())
+    protected function internalGetItems(array & $normalizedKeys, array & $normalizedOptions)
     {
-        $baseOptions = $this->getOptions();
-        if (!$baseOptions->getReadable()) {
+        $ns = $normalizedOptions['namespace'];
+        if (!isset($this->data[$ns])) {
             return array();
         }
 
-        $this->normalizeOptions($options);
-        $args = new ArrayObject(array(
-            'keys'    => & $keys,
-            'options' => & $options,
-        ));
+        $data = & $this->data[$ns];
+        $ttl  = $normalizedOptions['ttl'];
 
-        try {
-            $eventRs = $this->triggerPre(__FUNCTION__, $args);
-            if ($eventRs->stopped()) {
-                return $eventRs->last();
-            }
-
-            $ns = $options['namespace'];
-            if (!isset($this->data[$ns])) {
-                $result = array();
-            } else {
-                $data = &$this->data[$ns];
-
-                $keyValuePairs = array();
-                foreach ($keys as $key) {
-                    if (isset($data[$key])) {
-                        if (!$options['ttl'] || microtime(true) < ($this->data[$ns][$key][1] + $options['ttl']) ) {
-                            $keyValuePairs[$key] = $data[$key][0];
-                        }
-                    }
+        $result = array();
+        foreach ($normalizedKeys as $normalizedKey) {
+            if (isset($data[$normalizedKey])) {
+                if (!$ttl || microtime(true) < ($data[$normalizedKey][1] + $ttl) ) {
+                    $result[$normalizedKey] = $data[$normalizedKey][0];
                 }
-
-                $result = $keyValuePairs;
             }
-
-            return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
         }
+
+        return $result;
     }
 
     /**
-     * Test if an item exists.
+     * Internal method to test if an item exists.
      *
      * Options:
-     *  - ttl <float> optional
-     *    - The time-to-life (Default: ttl of object)
-     *  - namespace <string> optional
-     *    - The namespace to use (Default: namespace of object)
+     *  - ttl <int>
+     *    - The time-to-life
+     *  - namespace <string>
+     *    - The namespace to use
      *
-     * @param  string $key
-     * @param  array $options
+     * @param  string $normalizedKey
+     * @param  array  $normalizedOptions
      * @return boolean
      * @throws Exception
-     *
-     * @triggers hasItem.pre(PreEvent)
-     * @triggers hasItem.post(PostEvent)
-     * @triggers hasItem.exception(ExceptionEvent)
      */
-    public function hasItem($key, array $options = array())
+    protected function internalHasItem(& $normalizedKey, array & $normalizedOptions)
     {
-        $baseOptions = $this->getOptions();
-        if (!$baseOptions->getReadable()) {
+        $ns = $normalizedOptions['namespace'];
+        if (!isset($this->data[$ns][$normalizedKey])) {
             return false;
         }
 
-        $this->normalizeOptions($options);
-        $this->normalizeKey($key);
-        $args = new ArrayObject(array(
-            'key'     => & $key,
-            'options' => & $options,
-        ));
-
-        try {
-            $eventRs = $this->triggerPre(__FUNCTION__, $args);
-            if ($eventRs->stopped()) {
-                return $eventRs->last();
-            }
-
-            $result = $this->checkItem($key, $options);
-
-            return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
+        // check if expired
+        $ttl = $normalizedOptions['ttl'];
+        if ($ttl && microtime(true) >= ($this->data[$ns][$normalizedKey][1] + $ttl) ) {
+            return false;
         }
+
+        return true;
+    }
+
+    /**
+     * Internal method to test multiple items.
+     *
+     * Options:
+     *  - ttl <int>
+     *    - The time-to-life
+     *  - namespace <string>
+     *    - The namespace to use
+     *
+     * @param  array $keys
+     * @param  array $options
+     * @return array Array of existing keys
+     * @throws Exception
+     */
+    protected function internalHasItems(array & $normalizedKeys, array & $normalizedOptions)
+    {
+        $ns = $normalizedOptions['namespace'];
+        if (!isset($this->data[$ns])) {
+            return array();
+        }
+
+        $data = & $this->data[$ns];
+        $ttl  = $normalizedOptions['ttl'];
+
+        $result = array();
+        foreach ($normalizedKeys as $normalizedKey) {
+            if (!$ttl || microtime(true) < ($data[$normalizedKey][1] + $ttl) ) {
+                $result[$normalizedKey] = true;
+            }
+        }
+
+        return $result;
     }
 
     /**
@@ -272,8 +241,8 @@ class Memory extends AbstractAdapter
      *  - ignore_missing_items <boolean> optional
      *    - Throw exception on missing item or return false
      *
-     * @param  string $key
-     * @param  array $options
+     * @param  string $normalizedKey
+     * @param  array  $normalizedOptions
      * @return array|boolean Metadata or false on failure
      * @throws Exception
      *
@@ -281,174 +250,99 @@ class Memory extends AbstractAdapter
      * @triggers getMetadata.post(PostEvent)
      * @triggers getMetadata.exception(ExceptionEvent)
      */
-    public function getMetadata($key, array $options = array())
+    protected function internalGetMetadata(& $normalizedKey, array & $normalizedOptions)
     {
-        $baseOptions = $this->getOptions();
-        if (!$baseOptions->getReadable()) {
+        if (!$this->internalHasItem($normalizedKey, $normalizedOptions)) {
+            if (!$normalizedOptions['ignore_missing_items']) {
+                throw new Exception\ItemNotFoundException(
+                    "Key '{$normalizedKey}' not found on namespace '{$normalizedOptions['namespace']}'"
+                );
+            }
             return false;
         }
 
-        $this->normalizeOptions($options);
-        $this->normalizeKey($key);
-        $args = new ArrayObject(array(
-            'key'     => & $key,
-            'options' => & $options,
-        ));
-
-        try {
-            $eventRs = $this->triggerPre(__FUNCTION__, $args);
-            if ($eventRs->stopped()) {
-                return $eventRs->last();
-            }
-
-            if (!$this->checkItem($key, $options)) {
-                if (!$options['ignore_missing_items']) {
-                    throw new Exception\ItemNotFoundException(
-                        "Key '{$key}' not found on namespace '{$options['namespace']}'"
-                    );
-                }
-                $result = false;
-            } else {
-                $ns = $options['namespace'];
-                $result = array(
-                    'mtime' => $this->data[$ns][$key][1],
-                    'tags'  => $this->data[$ns][$key][2],
-                );
-            }
-
-            return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
-        }
+        $ns = $normalizedOptions['namespace'];
+        return array(
+            'mtime' => $this->data[$ns][$normalizedKey][1],
+            'tags'  => $this->data[$ns][$normalizedKey][2],
+        );
     }
 
     /* writing */
 
     /**
-     * Store an item.
+     * Internal method to store an item.
      *
      * Options:
-     *  - namespace <string> optional
-     *    - The namespace to use (Default: namespace of object)
-     *  - tags <array> optional
+     *  - namespace <string>
+     *    - The namespace to use
+     *  - tags <array>
      *    - An array of tags
      *
-     * @param  string $key
-     * @param  mixed $value
-     * @param  array $options
+     * @param  string $normalizedKey
+     * @param  mixed  $value
+     * @param  array  $normalizedOptions
      * @return boolean
      * @throws Exception
-     *
-     * @triggers setItem.pre(PreEvent)
-     * @triggers setItem.post(PostEvent)
-     * @triggers setItem.exception(ExceptionEvent)
      */
-    public function setItem($key, $value, array $options = array())
+    protected function internalSetItem(& $normalizedKey, & $value, array & $normalizedOptions)
     {
-        $baseOptions = $this->getOptions();
-        if (!$baseOptions->getWritable()) {
-            return false;
+        if (!$this->hasFreeCapacity()) {
+            $memoryLimit = $this->getOptions()->getMemoryLimit();
+            throw new Exception\OutOfCapacityException(
+                "Memory usage exceeds limit ({$memoryLimit})."
+            );
         }
 
-        $this->normalizeOptions($options);
-        $this->normalizeKey($key);
-        $args = new ArrayObject(array(
-            'key'     => & $key,
-            'value'   => & $value,
-            'options' => & $options,
-        ));
+        $ns = $normalizedOptions['namespace'];
+        $this->data[$ns][$normalizedKey] = array($value, microtime(true), $normalizedOptions['tags']);
 
-        try {
-            $eventRs = $this->triggerPre(__FUNCTION__, $args);
-            if ($eventRs->stopped()) {
-                return $eventRs->last();
-            }
-
-            if (!$this->hasFreeCapacity()) {
-                $memoryLimit = $baseOptions->getMemoryLimit();
-                throw new Exception\OutOfCapacityException(
-                    'Memory usage exceeds limit ({$memoryLimit}).'
-                );
-            }
-
-            $ns = $options['namespace'];
-            $this->data[$ns][$key] = array($value, microtime(true), $options['tags']);
-
-            $result = true;
-            return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
-        }
+        return true;
     }
 
     /**
-     * Store multiple items.
+     * Internal method to store multiple items.
      *
      * Options:
-     *  - namespace <string> optional
-     *    - The namespace to use (Default: namespace of object)
-     *  - tags <array> optional
+     *  - namespace <string>
+     *    - The namespace to use
+     *  - tags <array>
      *    - An array of tags
      *
-     * @param  array $keyValuePairs
-     * @param  array $options
+     * @param  array $normalizedKeyValuePairs
+     * @param  array $normalizedOptions
      * @return boolean
      * @throws Exception
-     *
-     * @triggers setItems.pre(PreEvent)
-     * @triggers setItems.post(PostEvent)
-     * @triggers setItems.exception(ExceptionEvent)
      */
-    public function setItems(array $keyValuePairs, array $options = array())
+    protected function internalSetItems(array & $normalizedKeyValuePairs, array & $normalizedOptions)
     {
-        $baseOptions = $this->getOptions();
-        if (!$baseOptions->getWritable()) {
-            return false;
+        if (!$this->hasFreeCapacity()) {
+            $memoryLimit = $this->getOptions()->getMemoryLimit();
+            throw new Exception\OutOfCapacityException(
+                'Memory usage exceeds limit ({$memoryLimit}).'
+            );
         }
 
-        $this->normalizeOptions($options);
-        $args = new ArrayObject(array(
-            'keyValuePairs' => & $keyValuePairs,
-            'options'       => & $options,
-        ));
-
-        try {
-            $eventRs = $this->triggerPre(__FUNCTION__, $args);
-            if ($eventRs->stopped()) {
-                return $eventRs->last();
-            }
-
-            if (!$this->hasFreeCapacity()) {
-                $memoryLimit = $baseOptions->getMemoryLimit();
-                throw new Exception\OutOfCapacityException(
-                    'Memory usage exceeds limit ({$memoryLimit}).'
-                );
-            }
-
-            $ns = $options['namespace'];
-            if (!isset($this->data[$ns])) {
-                $this->data[$ns] = array();
-            }
-
-            $data = & $this->data[$ns];
-            foreach ($keyValuePairs as $key => $value) {
-                $data[$key] = array($value, microtime(true), $options['tags']);
-            }
-
-            $result = true;
-            return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
+        $ns = $normalizedOptions['namespace'];
+        if (!isset($this->data[$ns])) {
+            $this->data[$ns] = array();
         }
+
+        $data = & $this->data[$ns];
+        foreach ($normalizedKeyValuePairs as $normalizedKey => $value) {
+            $data[$normalizedKey] = array($value, microtime(true), $normalizedOptions['tags']);
+        }
+
+        return true;
     }
 
     /**
      * Add an item.
      *
      * Options:
-     *  - namespace <string> optional
-     *    - The namespace to use (Default: namespace of object)
-     *  - tags <array> optional
+     *  - namespace <string>
+     *    - The namespace to use
+     *  - tags <array>
      *    - An array of tags
      *
      * @param  string $key
@@ -456,870 +350,473 @@ class Memory extends AbstractAdapter
      * @param  array  $options
      * @return boolean
      * @throws Exception
-     *
-     * @triggers addItem.pre(PreEvent)
-     * @triggers addItem.post(PostEvent)
-     * @triggers addItem.exception(ExceptionEvent)
      */
-    public function addItem($key, $value, array $options = array())
+    protected function internalAddItem(& $normalizedKey, & $value, array & $normalizedOptions)
     {
-        $baseOptions = $this->getOptions();
-        if (!$baseOptions->getWritable()) {
-            return false;
+        if (!$this->hasFreeCapacity()) {
+            $memoryLimit = $this->getOptions()->getMemoryLimit();
+            throw new Exception\OutOfCapacityException(
+                'Memory usage exceeds limit ({$memoryLimit}).'
+            );
         }
 
-        $this->normalizeOptions($options);
-        $this->normalizeKey($key);
-        $args = new ArrayObject(array(
-            'key'     => & $key,
-            'value'   => & $value,
-            'options' => & $options,
-        ));
-
-        try {
-            $eventRs = $this->triggerPre(__FUNCTION__, $args);
-            if ($eventRs->stopped()) {
-                return $eventRs->last();
-            }
-
-            if (!$this->hasFreeCapacity()) {
-                $memoryLimit = $baseOptions->getMemoryLimit();
-                throw new Exception\OutOfCapacityException(
-                    'Memory usage exceeds limit ({$memoryLimit}).'
-                );
-            }
-
-            $ns = $options['namespace'];
-            if (isset($this->data[$ns][$key])) {
-                throw new Exception\RuntimeException("Key '{$key}' already exists within namespace '$ns'");
-            }
-            $this->data[$ns][$key] = array($value, microtime(true), $options['tags']);
-
-            $result = true;
-            return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
+        $ns = $normalizedOptions['namespace'];
+        if (isset($this->data[$ns][$normalizedKey])) {
+            throw new Exception\RuntimeException("Key '{$normalizedKey}' already exists within namespace '$ns'");
         }
+        $this->data[$ns][$normalizedKey] = array($value, microtime(true), $normalizedOptions['tags']);
+
+        return true;
     }
 
     /**
-     * Add multiple items.
+     * Internal method to add multiple items.
      *
      * Options:
-     *  - namespace <string> optional
-     *    - The namespace to use (Default: namespace of object)
-     *  - tags <array> optional
+     *  - namespace <string>
+     *    - The namespace to use
+     *  - tags <array>
      *    - An array of tags
      *
-     * @param  array $keyValuePairs
-     * @param  array $options
+     * @param  array $normalizedKeyValuePairs
+     * @param  array $normalizedOptions
      * @return boolean
      * @throws Exception
-     *
-     * @triggers addItems.pre(PreEvent)
-     * @triggers addItems.post(PostEvent)
-     * @triggers addItems.exception(ExceptionEvent)
      */
-    public function addItems(array $keyValuePairs, array $options = array())
+    protected function internalAddItems(array & $normalizedKeyValuePairs, array & $normalizedOptions)
     {
-        $baseOptions = $this->getOptions();
-        if (!$baseOptions->getWritable()) {
-            return false;
+        if (!$this->hasFreeCapacity()) {
+            $memoryLimit = $this->getOptions()->getMemoryLimit();
+            throw new Exception\OutOfCapacityException(
+                'Memory usage exceeds limit ({$memoryLimit}).'
+            );
         }
 
-        $this->normalizeOptions($options);
-        $args = new ArrayObject(array(
-            'keyValuePairs' => & $keyValuePairs,
-            'options'       => & $options,
-        ));
-
-        try {
-            $eventRs = $this->triggerPre(__FUNCTION__, $args);
-            if ($eventRs->stopped()) {
-                return $eventRs->last();
-            }
-
-            if (!$this->hasFreeCapacity()) {
-                $memoryLimit = $baseOptions->getMemoryLimit();
-                throw new Exception\OutOfCapacityException(
-                    'Memory usage exceeds limit ({$memoryLimit}).'
-                );
-            }
-
-            $ns = $options['namespace'];
-            if (!isset($this->data[$ns])) {
-                $this->data[$ns] = array();
-            }
-
-            $data = & $this->data[$ns];
-            foreach ($keyValuePairs as $key => $value) {
-                if (isset($data[$key])) {
-                    throw new Exception\RuntimeException("Key '{$key}' already exists within namespace '$ns'");
-                }
-                $data[$key] = array($value, microtime(true), $options['tags']);
-            }
-
-            $result = true;
-            return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
+        $ns = $normalizedOptions['namespace'];
+        if (!isset($this->data[$ns])) {
+            $this->data[$ns] = array();
         }
+
+        $data = & $this->data[$ns];
+        $now  = microtime(true);
+        foreach ($normalizedKeyValuePairs as $normalizedKey => $value) {
+            if (isset($data[$normalizedKey])) {
+                throw new Exception\RuntimeException("Key '{$normalizedKey}' already exists within namespace '{$ns}'");
+            }
+            $data[$normalizedKey] = array($value, $now, $normalizedOptions['tags']);
+        }
+
+        return true;
     }
 
     /**
-     * Replace an item.
+     * Internal method to replace an existing item.
      *
      * Options:
-     *  - namespace <string> optional
-     *    - The namespace to use (Default: namespace of object)
-     *  - tags <array> optional
+     *  - ttl <float>
+     *    - The time-to-life
+     *  - namespace <string>
+     *    - The namespace to use
+     *  - tags <array>
      *    - An array of tags
      *
-     * @param  string $key
+     * @param  string $normalizedKey
      * @param  mixed  $value
-     * @param  array  $options
+     * @param  array  $normalizedOptions
      * @return boolean
      * @throws Exception
-     *
-     * @triggers replaceItem.pre(PreEvent)
-     * @triggers replaceItem.post(PostEvent)
-     * @triggers replaceItem.exception(ExceptionEvent)
      */
-    public function replaceItem($key, $value, array $options = array())
+    protected function internalReplaceItem(& $normalizedKey, & $value, array & $normalizedOptions)
     {
-        $baseOptions = $this->getOptions();
-        if (!$baseOptions->getWritable()) {
-            return false;
+        $ns = $normalizedOptions['namespace'];
+        if (!isset($this->data[$ns][$normalizedKey])) {
+            throw new Exception\ItemNotFoundException("Key '{$normalizedKey}' doesn't exist within namespace '{$ns}'");
         }
+        $this->data[$ns][$normalizedKey] = array($value, microtime(true), $normalizedOptions['tags']);
 
-        $this->normalizeOptions($options);
-        $this->normalizeKey($key);
-        $args = new ArrayObject(array(
-            'key'     => & $key,
-            'value'   => & $value,
-            'options' => & $options,
-        ));
-
-        try {
-            $eventRs = $this->triggerPre(__FUNCTION__, $args);
-            if ($eventRs->stopped()) {
-                return $eventRs->last();
-            }
-
-            $ns = $options['namespace'];
-            if (!isset($this->data[$ns][$key])) {
-                throw new Exception\ItemNotFoundException("Key '{$key}' doen't exists within namespace '$ns'");
-            }
-            $this->data[$ns][$key] = array($value, microtime(true), $options['tags']);
-
-            $result = true;
-            return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
-        }
+        return true;
     }
 
     /**
-     * Replace multiple items.
+     * Internal method to replace multiple existing items.
      *
      * Options:
-     *  - namespace <string> optional
-     *    - The namespace to use (Default: namespace of object)
-     *  - tags <array> optional
+     *  - ttl <float>
+     *    - The time-to-life
+     *  - namespace <string>
+     *    - The namespace to use
+     *  - tags <array>
      *    - An array of tags
      *
-     * @param  array $keyValuePairs
-     * @param  array $options
+     * @param  array $normalizedKeyValuePairs
+     * @param  array $normalizedOptions
      * @return boolean
      * @throws Exception
-     *
-     * @triggers replaceItems.pre(PreEvent)
-     * @triggers replaceItems.post(PostEvent)
-     * @triggers replaceItems.exception(ExceptionEvent)
      */
-    public function replaceItems(array $keyValuePairs, array $options = array())
+    protected function internalReplaceItems(array & $normalizedKeyValuePairs, array & $normalizedOptions)
     {
-        $baseOptions = $this->getOptions();
-        if (!$baseOptions->getWritable()) {
-            return false;
+        $ns = $normalizedOptions['namespace'];
+        if (!isset($this->data[$ns])) {
+            throw new Exception\ItemNotFoundException("Namespace '$ns' doesn't exist");
         }
 
-        $this->normalizeOptions($options);
-        $args = new ArrayObject(array(
-            'keyValuePairs' => & $keyValuePairs,
-            'options'       => & $options,
-        ));
-
-        try {
-            $eventRs = $this->triggerPre(__FUNCTION__, $args);
-            if ($eventRs->stopped()) {
-                return $eventRs->last();
+        $data = & $this->data[$ns];
+        foreach ($normalizedKeyValuePairs as $normalizedKey => $value) {
+            if (!isset($data[$normalizedKey])) {
+                throw new Exception\ItemNotFoundException(
+                    "Key '{$normalizedKey}' doesn't exist within namespace '{$ns}'"
+                );
             }
-
-            $ns = $options['namespace'];
-            if (!isset($this->data[$ns])) {
-                throw new Exception\ItemNotFoundException("Namespace '$ns' doesn't exist");
-            }
-
-            $data = & $this->data[$ns];
-            foreach ($keyValuePairs as $key => $value) {
-                if (!isset($data[$key])) {
-                    throw new Exception\ItemNotFoundException(
-                        "Key '{$key}' doen't exists within namespace '$ns'"
-                    );
-                }
-                $data[$key] = array($value, microtime(true), $options['tags']);
-            }
-
-            $result = true;
-            return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
+            $data[$normalizedKey] = array($value, microtime(true), $normalizedOptions['tags']);
         }
+
+        return true;
     }
 
     /**
-     * Reset lifetime of an item
+     * Internal method to reset lifetime of an item
      *
      * Options:
-     *  - ttl <float> optional
-     *    - The time-to-life (Default: ttl of object)
-     *  - namespace <string> optional
-     *    - The namespace to use (Default: namespace of object)
+     *  - namespace <string>
+     *    - The namespace to use
      *
-     * @param  string $key
-     * @param  array $options
+     * @param  string $normalizedKey
+     * @param  array  $normalizedOptions
      * @return boolean
      * @throws Exception
-     *
-     * @triggers touchItem.pre(PreEvent)
-     * @triggers touchItem.post(PostEvent)
-     * @triggers touchItem.exception(ExceptionEvent)
      */
-    public function touchItem($key, array $options = array())
+    protected function internalTouchItem(& $normalizedKey, array & $normalizedOptions)
     {
-        $baseOptions = $this->getOptions();
-        if (!$baseOptions->getWritable()) {
-            return false;
-        }
-
-        $this->normalizeOptions($options);
-        $this->normalizeKey($key);
-        $args = new ArrayObject(array(
-            'key'     => & $key,
-            'options' => & $options,
-        ));
-
-        try {
-            $eventRs = $this->triggerPre(__FUNCTION__, $args);
-            if ($eventRs->stopped()) {
-                return $eventRs->last();
+        $ns = $normalizedOptions['namespace'];
+        if (isset($this->data[$ns][$normalizedKey])) {
+            // update mtime
+            $this->data[$ns][$normalizedKey][1] = microtime(true);
+        } else {
+            if (!$normalizedOptions['ignore_missing_items']) {
+                throw new Exception\ItemNotFoundException(
+                    "Key '{$normalizedKey}' not found within namespace '{$ns}'"
+                );
             }
 
-            $ns = $options['namespace'];
-            if (isset($this->data[$ns][$key])) {
-                // update mtime
-                $this->data[$ns][$key][1] = microtime(true);
-            } else {
-                if (!$options['ignore_missing_items']) {
-                    throw new Exception\ItemNotFoundException(
-                        "Key '{$key}' not found within namespace '{$ns}'"
-                    );
-                }
-
-                // add an empty item
-                $this->data[$ns][$key] = array('', microtime(true), null);
-            }
-
-            $result = true;
-            return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
+            // add an empty item
+            $this->data[$ns][$normalizedKey] = array('', microtime(true), null);
         }
+
+        return true;
     }
 
     /**
-     * Remove an item.
+     * Internal method to remove an item.
      *
      * Options:
-     *  - namespace <string> optional
-     *    - The namespace to use (Default: namespace of object)
-     *  - ignore_missing_items <boolean> optional
-     *    - Throw exception on missing item or return false
+     *  - namespace <string>
+     *    - The namespace to use
+     *  - ignore_missing_items <boolean>
+     *    - Throw exception on missing item
      *
-     * @param  string $key
-     * @param  array $options
+     * @param  string $normalizedKey
+     * @param  array  $normalizedOptions
      * @return boolean
      * @throws Exception
-     *
-     * @triggers removeItem.pre(PreEvent)
-     * @triggers removeItem.post(PostEvent)
-     * @triggers removeItem.exception(ExceptionEvent)
      */
-    public function removeItem($key, array $options = array())
+    protected function internalRemoveItem(& $normalizedKey, array & $normalizedOptions)
     {
-        $baseOptions = $this->getOptions();
-        if (!$baseOptions->getWritable()) {
-            return false;
-        }
+        $ns = $normalizedOptions['namespace'];
+        if (isset($this->data[$ns][$normalizedKey])) {
+            unset($this->data[$ns][$normalizedKey]);
 
-        $this->normalizeOptions($options);
-        $this->normalizeKey($key);
-        $args = new ArrayObject(array(
-            'key'     => & $key,
-            'options' => & $options,
-        ));
-
-        try {
-            $eventRs = $this->triggerPre(__FUNCTION__, $args);
-            if ($eventRs->stopped()) {
-                return $eventRs->last();
+            // remove empty namespace
+            if (!$this->data[$ns]) {
+                unset($this->data[$ns]);
             }
 
-            $ns = $options['namespace'];
-            if (isset($this->data[$ns][$key])) {
-                unset($this->data[$ns][$key]);
-
-                // remove empty namespace
-                if (!$this->data[$ns]) {
-                    unset($this->data[$ns]);
-                }
-
-            } else {
-                if (!$options['ignore_missing_items']) {
-                    throw new Exception\ItemNotFoundException("Key '{$key}' not found on namespace '{$ns}'");
-                }
-            }
-
-            $result = true;
-            return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
+        } elseif (!$normalizedOptions['ignore_missing_items']) {
+            throw new Exception\ItemNotFoundException("Key '{$normalizedKey}' not found on namespace '{$ns}'");
         }
+
+        return true;
     }
 
     /**
-     * Remove multiple items.
+     * Internal method to increment an item.
      *
      * Options:
-     *  - namespace <string> optional
-     *    - The namespace to use (Default: namespace of object)
-     *  - ignore_missing_items <boolean> optional
-     *    - Throw exception on missing item or return false
+     *  - ttl <float>
+     *    - The time-to-life
+     *  - namespace <string>
+     *    - The namespace to use
+     *  - ignore_missing_items <boolean>
+     *    - Throw exception on missing item
      *
-     * @param  array $keys
-     * @param  array $options
-     * @return boolean
+     * @param  string $normalizedKey
+     * @param  int    $value
+     * @param  array  $normalizedOptions
+     * @return int|boolean The new value or false on failure
      * @throws Exception
-     *
-     * @triggers removeItems.pre(PreEvent)
-     * @triggers removeItems.post(PostEvent)
-     * @triggers removeItems.exception(ExceptionEvent)
      */
-    public function removeItems(array $keys, array $options = array())
+    protected function internalIncrementItem(& $normalizedKey, & $value, array & $normalizedOptions)
     {
-        $baseOptions = $this->getOptions();
-        if (!$baseOptions->getWritable()) {
-            return false;
-        }
-
-        $this->normalizeOptions($options);
-        $args = new ArrayObject(array(
-            'keys'    => & $keys,
-            'options' => & $options,
-        ));
-
-        try {
-            $eventRs = $this->triggerPre(__FUNCTION__, $args);
-            if ($eventRs->stopped()) {
-                return $eventRs->last();
+        $ns   = $normalizedOptions['namespace'];
+        $data = & $this->data[$ns];
+        if (isset($data[$normalizedKey])) {
+            $data[$normalizedKey][0]+= $value;
+            $data[$normalizedKey][1] = microtime(true);
+            $newValue = $data[$normalizedKey][0];
+        } else {
+            if (!$normalizedOptions['ignore_missing_items']) {
+                throw new Exception\ItemNotFoundException(
+                    "Key '{$normalizedKey}' not found within namespace '{$ns}'"
+                );
             }
 
-            $ns = $options['namespace'];
-            if ($options['ignore_missing_items'] === false) {
-                if (!isset($this->data[$ns])) {
-                    throw new Exception\ItemNotFoundException("Namespace '{$ns}' is empty");
-                }
-
-                $data = &$this->data[$ns];
-
-                $missingItems = null;
-                foreach ($keys as $key) {
-                    if (isset($data[$key])) {
-                        unset($data[$key]);
-                    } else {
-                        $missingItems[] = $key;
-                    }
-                }
-
-                if ($missingItems) {
-                    throw new Exception\ItemNotFoundException(
-                        "Keys '" . implode("','", $missingItems) . "' not found on namespace '{$ns}'"
-                    );
-                }
-            } elseif (isset($this->data[$ns])) {
-                $data = & $this->data[$ns];
-                foreach ($keys as $key) {
-                    unset($data[$key]);
-                }
-
-                // remove empty namespace
-                if (!$data) {
-                    unset($this->data[$ns]);
-                }
-            }
-
-            $result = true;
-            return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
+            // add a new item
+            $newValue             = $value;
+            $data[$normalizedKey] = array($newValue, microtime(true), null);
         }
+
+        return $newValue;
     }
 
     /**
-     * Increment an item.
+     * Internal method to decrement an item.
      *
      * Options:
-     *  - namespace <string> optional
-     *    - The namespace to use (Default: namespace of object)
-     *  - ignore_missing_items <boolean> optional
-     *    - Throw exception on missing item or return false
+     *  - ttl <float>
+     *    - The time-to-life
+     *  - namespace <string>
+     *    - The namespace to use
+     *  - ignore_missing_items <boolean>
+     *    - Throw exception on missing item
      *
-     * @param  string $key
-     * @param  int $value
-     * @param  array $options
-     * @return int|boolean The new value of false on failure
+     * @param  string $normalizedKey
+     * @param  int    $value
+     * @param  array  $normalizedOptions
+     * @return int|boolean The new value or false on failure
      * @throws Exception
-     *
-     * @triggers incrementItem.pre(PreEvent)
-     * @triggers incrementItem.post(PostEvent)
-     * @triggers incrementItem.exception(ExceptionEvent)
      */
-    public function incrementItem($key, $value, array $options = array())
+    protected function internalDecrementItem(& $normalizedKey, & $value, array & $normalizedOptions)
     {
-        $baseOptions = $this->getOptions();
-        if (!$baseOptions->getWritable()) {
-            return false;
-        }
-
-        $this->normalizeOptions($options);
-        $this->normalizeKey($key);
-        $value = (int) $value;
-        $args  = new ArrayObject(array(
-            'key'     => & $key,
-            'value'   => & $value,
-            'options' => & $options,
-        ));
-
-        try {
-            $eventRs = $this->triggerPre(__FUNCTION__, $args);
-            if ($eventRs->stopped()) {
-                return $eventRs->last();
+        $ns   = $normalizedOptions['namespace'];
+        $data = & $this->data[$ns];
+        if (isset($data[$normalizedKey])) {
+            $data[$normalizedKey][0]-= $value;
+            $data[$normalizedKey][1] = microtime(true);
+            $newValue = $data[$normalizedKey][0];
+        } else {
+            if (!$normalizedOptions['ignore_missing_items']) {
+                throw new Exception\ItemNotFoundException(
+                    "Key '{$normalizedKey}' not found within namespace '{$ns}'"
+                );
             }
 
-            $ns   = $options['namespace'];
-            $data = & $this->data[$ns];
-            if (isset($data[$key])) {
-                $data[$key][0]+= $value;
-                $data[$key][1] = microtime(true);
-                $result = $data[$key][0];
-            } else {
-                if (!$options['ignore_missing_items']) {
-                    throw new Exception\ItemNotFoundException(
-                        "Key '{$key}' not found within namespace '{$ns}'"
-                    );
-                }
-
-                // add a new item
-                $data[$key] = array($value, microtime(true), null);
-                $result = $value;
-            }
-
-            return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
+            // add a new item
+            $newValue             = -$value;
+            $data[$normalizedKey] = array($newValue, microtime(true), null);
         }
+
+        return $newValue;
     }
 
-    /**
-     * Decrement an item.
-     *
-     * Options:
-     *  - namespace <string> optional
-     *    - The namespace to use (Default: namespace of object)
-     *  - ignore_missing_items <boolean> optional
-     *    - Throw exception on missing item or return false
-     *
-     * @param  string $key
-     * @param  int $value
-     * @param  array $options
-     * @return int|boolean The new value or false or failure
-     * @throws Exception
-     *
-     * @triggers decrementItem.pre(PreEvent)
-     * @triggers decrementItem.post(PostEvent)
-     * @triggers decrementItem.exception(ExceptionEvent)
-     */
-    public function decrementItem($key, $value, array $options = array())
-    {
-        $baseOptions = $this->getOptions();
-        if (!$baseOptions->getWritable()) {
-            return false;
-        }
-
-        $this->normalizeOptions($options);
-        $this->normalizeKey($key);
-        $value = (int) $value;
-        $args  = new ArrayObject(array(
-            'key'     => & $key,
-            'value'   => & $value,
-            'options' => & $options,
-        ));
-
-        try {
-            $eventRs = $this->triggerPre(__FUNCTION__, $args);
-            if ($eventRs->stopped()) {
-                return $eventRs->last();
-            }
-
-            $ns   = $options['namespace'];
-            $data = & $this->data[$ns];
-            if (isset($data[$key])) {
-                $data[$key][0]-= $value;
-                $data[$key][1] = microtime(true);
-                $result = $data[$key][0];
-            } else {
-                if (!$options['ignore_missing_items']) {
-                    throw new Exception\ItemNotFoundException(
-                        "Key '{$key}' not found within namespace '{$ns}'"
-                    );
-                }
-
-                // add a new item
-                $data[$key] = array(-$value, microtime(true), null);
-                $result = -$value;
-            }
-
-            return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
-        }
-    }
-
-    /* non-blocking */
+    /* find */
 
     /**
-     * Find items.
+     * internal method to find items.
      *
      * Options:
-     *  - ttl <float> optional
-     *    - The time-to-life (Default: ttl of object)
-     *  - namespace <string> optional
-     *    - The namespace to use (Default: namespace of object)
-     *  - tags <array> optional
+     *  - ttl <float>
+     *    - The time-to-live
+     *  - namespace <string>
+     *    - The namespace to use
+     *  - tags <array>
      *    - Tags to search for used with matching modes of
-     *      Zend\Cache\Storage\Adapter::MATCH_TAGS_*
+     *      Adapter::MATCH_TAGS_*
      *
-     * @param  int $mode Matching mode (Value of Zend\Cache\Storage\Adapter::MATCH_*)
-     * @param  array $options
+     * @param  int   $normalizedMode Matching mode (Value of Adapter::MATCH_*)
+     * @param  array $normalizedOptions
      * @return boolean
      * @throws Exception
-     * @see fetch()
-     * @see fetchAll()
-     *
-     * @triggers find.pre(PreEvent)
-     * @triggers find.post(PostEvent)
-     * @triggers find.exception(ExceptionEvent)
+     * @see    fetch()
+     * @see    fetchAll()
      */
-    public function find($mode = self::MATCH_ACTIVE, array $options=array())
+    protected function internalFind(& $normalizedMode, array & $normalizedOptions)
     {
-        $baseOptions = $this->getOptions();
-        if (!$baseOptions->getReadable()) {
-            return false;
-        }
-
         if ($this->stmtActive) {
             throw new Exception\RuntimeException('Statement already in use');
         }
 
-        $this->normalizeOptions($options);
-        $this->normalizeMatchingMode($mode, self::MATCH_ACTIVE, $options);
-        $args = new ArrayObject(array(
-            'mode'    => & $mode,
-            'options' => & $options,
-        ));
+        $tags      = & $normalizedOptions['tags'];
+        $emptyTags = $keys = array();
+        foreach ($this->data[ $normalizedOptions['namespace'] ] as $key => &$item) {
 
-        try {
-            $eventRs = $this->triggerPre(__FUNCTION__, $args);
-            if ($eventRs->stopped()) {
-                return $eventRs->last();
-            }
+            // compare expired / active
+            if (($normalizedMode & self::MATCH_ALL) != self::MATCH_ALL) {
 
-            $tags      = & $options['tags'];
-            $emptyTags = $keys = array();
-            foreach ($this->data[ $options['namespace'] ] as $key => &$item) {
-
-                // compare expired / active
-                if (($mode & self::MATCH_ALL) != self::MATCH_ALL) {
-
-                    // if MATCH_EXPIRED -> filter active items
-                    if (($mode & self::MATCH_EXPIRED) == self::MATCH_EXPIRED) {
-                        if ($this->checkItem($key, $options)) {
-                            continue;
-                        }
-
-                    // if MATCH_ACTIVE -> filter expired items
-                    } else {
-                        if (!$this->checkItem($key, $options)) {
-                            continue;
-                        }
-                    }
-                }
-
-                // compare tags
-                if ($tags !== null) {
-                    $tagsStored = isset($item[2]) ? $item[2] : $emptyTags;
-
-                    if ( ($mode & self::MATCH_TAGS_OR) == self::MATCH_TAGS_OR ) {
-                        $matched = (count(array_diff($tags, $tagsStored)) != count($tags));
-                    } elseif ( ($mode & self::MATCH_TAGS_AND) == self::MATCH_TAGS_AND ) {
-                        $matched = (count(array_diff($tags, $tagsStored)) == 0);
+                // if MATCH_EXPIRED -> filter active items
+                if (($normalizedMode & self::MATCH_EXPIRED) == self::MATCH_EXPIRED) {
+                    if ($this->internalHasItem($key, $normalizedOptions)) {
+                        continue;
                     }
 
-                    // negate
-                    if ( ($mode & self::MATCH_TAGS_NEGATE) == self::MATCH_TAGS_NEGATE ) {
-                        $matched = !$matched;
-                    }
-
-                    if (!$matched) {
+                // if MATCH_ACTIVE -> filter expired items
+                } else {
+                    if (!$this->internalHasItem($key, $normalizedOptions)) {
                         continue;
                     }
                 }
-
-                $keys[] = $key;
             }
 
-            // don't check expiry on fetch
-            $options['ttl'] = 0;
+            // compare tags
+            if ($tags !== null) {
+                $tagsStored = isset($item[2]) ? $item[2] : $emptyTags;
 
-            $this->stmtKeys    = $keys;
-            $this->stmtOptions = $options;
-            $this->stmtActive  = true;
+                if ( ($normalizedMode & self::MATCH_TAGS_OR) == self::MATCH_TAGS_OR ) {
+                    $matched = (count(array_diff($tags, $tagsStored)) != count($tags));
+                } elseif ( ($normalizedMode & self::MATCH_TAGS_AND) == self::MATCH_TAGS_AND ) {
+                    $matched = (count(array_diff($tags, $tagsStored)) == 0);
+                }
 
-            $result = true;
-            return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
+                // negate
+                if ( ($normalizedMode & self::MATCH_TAGS_NEGATE) == self::MATCH_TAGS_NEGATE ) {
+                    $matched = !$matched;
+                }
+
+                if (!$matched) {
+                    continue;
+                }
+            }
+
+            $keys[] = $key;
         }
+
+        // don't check expiry on fetch
+        $normalizedOptions['ttl'] = 0;
+
+        $this->stmtKeys    = $keys;
+        $this->stmtOptions = $normalizedOptions;
+        $this->stmtActive  = true;
+
+        return true;
     }
 
     /**
-     * Fetches the next item from result set
+     * Internal method to fetch the next item from result set
      *
      * @return array|boolean The next item or false
      * @throws Exception
-     * @see fetchAll()
-     *
-     * @triggers fetch.pre(PreEvent)
-     * @triggers fetch.post(PostEvent)
-     * @triggers fetch.exception(ExceptionEvent)
      */
-    public function fetch()
+    protected function internalFetch()
     {
         if (!$this->stmtActive) {
             return false;
         }
 
-        try {
-            $args    = new ArrayObject();
-            $eventRs = $this->triggerPre(__FUNCTION__, $args);
-            if ($eventRs->stopped()) {
-                return $eventRs->last();
-            }
+        $options = & $this->stmtOptions;
 
-            $options = & $this->stmtOptions;
-
-            // get the next valid item
-            do {
-                $key = array_shift($this->stmtKeys);
-                if ($key === null) {
-                    break;
-                }
-                if (!$this->checkItem($key, $options)) {
-                    continue;
-                }
-                $ref = & $this->data[ $options['namespace'] ][$key];
+        // get the next valid item
+        do {
+            $key = array_shift($this->stmtKeys);
+            if ($key === null) {
                 break;
-            } while (true);
-
-            // get item data
-            if ($key) {
-                $item = array();
-                foreach ($options['select'] as $select) {
-                    if ($select == 'key') {
-                        $item['key'] = $key;
-                    } elseif ($select == 'value') {
-                        $item['value'] = $ref[0];
-                    } elseif ($select == 'mtime') {
-                        $item['mtime'] = $ref[1];
-                    } elseif ($select == 'tags') {
-                        $item['tags'] = $ref[2];
-                    } else {
-                        $item[$select] = null;
-                    }
-                }
-
-                $result = $item;
-
-            } else {
-                // free statement after last item
-                $this->stmtActive  = false;
-                $this->stmtKeys    = null;
-                $this->stmtOptions = null;
-
-                $result = false;
             }
 
-            return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
+            if (!$this->internalHasItem($key, $options)) {
+                continue;
+            }
+
+            break;
+        } while (true);
+
+        // free statement after last item
+        if (!$key) {
+            $this->stmtActive  = false;
+            $this->stmtKeys    = null;
+            $this->stmtOptions = null;
+
+            return false;
         }
+
+        $ref    = & $this->data[ $options['namespace'] ][$key];
+        $result = array();
+        foreach ($options['select'] as $select) {
+            if ($select == 'key') {
+                $result['key'] = $key;
+            } elseif ($select == 'value') {
+                $result['value'] = $ref[0];
+            } elseif ($select == 'mtime') {
+                $result['mtime'] = $ref[1];
+            } elseif ($select == 'tags') {
+                $result['tags'] = $ref[2];
+            } else {
+                $result[$select] = null;
+            }
+        }
+
+        return $result;
     }
 
     /* cleaning */
 
     /**
-     * Clear items off all namespaces.
+     * Internal method to clear items off all namespaces.
      *
-     * Options:
-     *  - ttl <float> optional
-     *    - The time-to-life (Default: ttl of object)
-     *  - tags <array> optional
-     *    - Tags to search for used with matching modes of
-     *      Zend\Cache\Storage\Adapter::MATCH_TAGS_*
-     *
-     * @param  int $mode Matching mode (Value of Zend\Cache\Storage\Adapter::MATCH_*)
-     * @param  array $options
+     * @param  int   $normalizedMode Matching mode (Value of Adapter::MATCH_*)
+     * @param  array $normalizedOptions
      * @return boolean
      * @throws Exception
-     * @see clearByNamespace()
-     *
-     * @triggers clear.pre(PreEvent)
-     * @triggers clear.post(PostEvent)
-     * @triggers clear.exception(ExceptionEvent)
+     * @see    clearByNamespace()
      */
-    public function clear($mode = self::MATCH_EXPIRED, array $options = array())
+    protected function internalClear(& $normalizedMode, array & $normalizedOptions)
     {
-        $baseOptions = $this->getOptions();
-        if (!$baseOptions->getWritable()) {
-            return false;
+        if (!$normalizedOptions['tags'] && ($normalizedMode & self::MATCH_ALL) == self::MATCH_ALL) {
+            $this->data = array();
+        } else {
+            foreach ($this->data as & $data) {
+                $this->clearNamespacedDataArray($data, $normalizedMode, $normalizedOptions);
+            }
         }
 
-        $this->normalizeOptions($options);
-        $this->normalizeMatchingMode($mode, self::MATCH_EXPIRED, $options);
-        $args = new ArrayObject(array(
-            'mode'    => & $mode,
-            'options' => & $options,
-        ));
-
-        try {
-            $eventRs = $this->triggerPre(__FUNCTION__, $args);
-            if ($eventRs->stopped()) {
-                return $eventRs->last();
-            }
-
-            if (!$options['tags'] && ($mode & self::MATCH_ALL) == self::MATCH_ALL) {
-                $this->data = array();
-            } else {
-                foreach ($this->data as &$data) {
-                    $this->clearNamespacedDataArray($data, $mode, $options);
-                }
-            }
-
-            $result = true;
-            return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
-        }
+        return true;
     }
 
     /**
      * Clear items by namespace.
      *
      * Options:
-     *  - ttl <float> optional
-     *    - The time-to-life (Default: ttl of object)
-     *  - namespace <string> optional
-     *    - The namespace to use (Default: namespace of object)
-     *  - tags <array> optional
-     *    - Tags to search for used with matching modes of
-     *      Zend\Cache\Storage\Adapter::MATCH_TAGS_*
+     *  - ttl <float>
+     *    - The time-to-life
+     *  - namespace <string>
+     *    - The namespace to use
+     *  - tags <array>
+     *    - Tags to search for used with matching modes of Adapter::MATCH_TAGS_*
      *
-     * @param  int $mode Matching mode (Value of Zend\Cache\Storage\Adapter::MATCH_*)
-     * @param  array $options
+     * @param  int   $normalizedMode Matching mode (Value of Adapter::MATCH_*)
+     * @param  array $normalizedOptions
      * @return boolean
-     * @throws Zend\Cache\Exception
-     * @see clear()
-     *
-     * @triggers clearByNamespace.pre(PreEvent)
-     * @triggers clearByNamespace.post(PostEvent)
-     * @triggers clearByNamespace.exception(ExceptionEvent)
+     * @throws Exception
+     * @see    clear()
      */
-    public function clearByNamespace($mode = self::MATCH_EXPIRED, array $options = array())
+    protected function internalClearByNamespace(& $normalizedMode, array & $normalizedOptions)
     {
-        $baseOptions = $this->getOptions();
-        if (!$baseOptions->getWritable()) {
-            return false;
+        if (isset($this->data[ $normalizedOptions['namespace'] ])) {
+            if (!$normalizedOptions['tags'] && ($normalizedMode & self::MATCH_ALL) == self::MATCH_ALL) {
+                unset($this->data[ $normalizedOptions['namespace'] ]);
+            } else {
+                $this->clearNamespacedDataArray($this->data[ $normalizedOptions['namespace'] ], $normalizedMode, $normalizedOptions);
+            }
         }
 
-        $this->normalizeOptions($options);
-        $this->normalizeMatchingMode($mode, self::MATCH_EXPIRED, $options);
-        $args = new ArrayObject(array(
-            'mode'    => & $mode,
-            'options' => & $options,
-        ));
-
-        try {
-            $eventRs = $this->triggerPre(__FUNCTION__, $args);
-            if ($eventRs->stopped()) {
-                return $eventRs->last();
-            }
-
-            if (isset($this->data[ $options['namespace'] ])) {
-                if (!$options['tags'] && ($mode & self::MATCH_ALL) == self::MATCH_ALL) {
-                    unset($this->data[ $options['namespace'] ]);
-                } else {
-                    $this->clearNamespacedDataArray($this->data[ $options['namespace'] ], $mode, $options);
-                }
-            }
-
-            $result = true;
-            return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
-        }
+        return true;
     }
 
     /* status */
 
     /**
-     * Get capabilities
+     * Internal method to get capabilities of this adapter
      *
      * @return Capabilities
-     *
-     * @triggers getCapabilities.pre(PreEvent)
-     * @triggers getCapabilities.post(PostEvent)
-     * @triggers getCapabilities.exception(ExceptionEvent)
      */
-    public function getCapabilities()
+    protected function internalGetCapabilities()
     {
-        $args = new ArrayObject();
-
-        $eventRs = $this->triggerPre(__FUNCTION__, $args);
-        if ($eventRs->stopped()) {
-            return $eventRs->last();
-        }
-
         if ($this->capabilities === null) {
             $this->capabilityMarker = new stdClass();
                 $this->capabilities = new Capabilities(
@@ -1354,39 +851,24 @@ class Memory extends AbstractAdapter
             );
         }
 
-        return $this->triggerPost(__FUNCTION__, $args, $this->capabilities);
+        return $this->capabilities;
     }
 
     /**
-     * Get storage capacity.
+     * Internal method to get storage capacity.
      *
-     * @param  array $options
+     * @param  array $normalizedOptions
      * @return array|boolean Capacity as array or false on failure
      * @throws Exception
-     *
-     * @triggers getCapacity.pre(PreEvent)
-     * @triggers getCapacity.post(PostEvent)
-     * @triggers getCapacity.exception(ExceptionEvent)
      */
-    public function getCapacity(array $options = array())
+    protected function internalGetCapacity(array & $normalizedOptions)
     {
-        $args = new ArrayObject(array(
-            'options' => & $options,
-        ));
-
-        $eventRs = $this->triggerPre(__FUNCTION__, $args);
-        if ($eventRs->stopped()) {
-            return $eventRs->last();
-        }
-
         $total = $this->getOptions()->getMemoryLimit();
         $free  = $total - (float) memory_get_usage(true);
-        $result = array(
+        return array(
             'total' => $total,
             'free'  => ($free >= 0) ? $free : 0,
         );
-
-        return $this->triggerPost(__FUNCTION__, $args, $result);
     }
 
     /* internal */
@@ -1411,33 +893,6 @@ class Memory extends AbstractAdapter
 
         $free  = $total - (float) memory_get_usage(true);
         return ($free > 0);
-    }
-
-    /**
-     * Internal method to check if an key exists
-     * and if it isn't expired.
-     *
-     * Options:
-     *  - namespace <string> required
-     *  - ttl       <int>    required
-     *
-     * @param string $key
-     * @param array $options
-     */
-    protected function checkItem($key, array &$options)
-    {
-        $ns = $options['namespace'];
-
-        if (!isset($this->data[$ns][$key])) {
-            return false;
-        }
-
-        // check if expired
-        if ($options['ttl'] && microtime(true) >= ($this->data[$ns][$key][1] + $options['ttl']) ) {
-            return false;
-        }
-
-        return true;
     }
 
     /**

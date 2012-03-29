@@ -52,7 +52,7 @@ class StaticIntegrationTest extends TestCase
             }
         );
         $class = new TestAsset\ClassWithEvents();
-        $class->events()->setSharedConnections($events);
+        $class->events()->setSharedCollections($events);
         $class->foo();
         $this->assertEquals(1, $counter->count);
     }
@@ -72,7 +72,7 @@ class StaticIntegrationTest extends TestCase
         $class->events()->attach('foo', function ($e) use ($test) {
             $test->results[] = 'local';
         });
-        $class->events()->setSharedConnections($events);
+        $class->events()->setSharedCollections($events);
         $class->foo();
         $this->assertEquals(array('local', 'static'), $test->results);
     }
@@ -99,12 +99,12 @@ class StaticIntegrationTest extends TestCase
         $class->events()->attach('foo', function ($e) use ($test) {
             $test->results[] = 'local3';
         }, 15000); // highest priority
-        $class->events()->setSharedConnections($events);
+        $class->events()->setSharedCollections($events);
         $class->foo();
         $this->assertEquals(array('local3', 'static', 'local2', 'local'), $test->results);
     }
 
-    public function testCallingUnsetSharedConnectionsDisablesStaticConnections()
+    public function testCallingUnsetSharedCollectionsDisablesStaticCollections()
     {
         $counter = (object) array('count' => 0);
         StaticEventManager::getInstance()->attach(
@@ -115,7 +115,7 @@ class StaticIntegrationTest extends TestCase
             }
         );
         $class = new TestAsset\ClassWithEvents();
-        $class->events()->unsetSharedConnections();
+        $class->events()->unsetSharedCollections();
         $class->foo();
         $this->assertEquals(0, $counter->count);
     }
@@ -132,8 +132,8 @@ class StaticIntegrationTest extends TestCase
         );
         $mockStaticEvents = new TestAsset\StaticEventsMock();
         $class = new TestAsset\ClassWithEvents();
-        $class->events()->setSharedConnections($mockStaticEvents);
-        $this->assertSame($mockStaticEvents, $class->events()->getSharedConnections());
+        $class->events()->setSharedCollections($mockStaticEvents);
+        $this->assertSame($mockStaticEvents, $class->events()->getSharedCollections());
         $class->foo();
         $this->assertEquals(0, $counter->count);
     }
@@ -154,7 +154,7 @@ class StaticIntegrationTest extends TestCase
         $class->events()->attach('foo', function ($e) use ($test) {
             $test->results[] = 'local';
         }, -100);
-        $class->events()->setSharedConnections($events);
+        $class->events()->setSharedCollections($events);
         $class->foo();
         $this->assertEquals(array('static', 'local'), $test->results);
     }

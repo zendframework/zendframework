@@ -22,7 +22,7 @@
 namespace Zend\EventManager;
 
 /**
- * Interface to automate setter injection for a SharedEventManager instance
+ * Interface to automate setter injection for a SharedEventCollection instance
  *
  * @category   Zend
  * @package    Zend_EventManager
@@ -30,13 +30,13 @@ namespace Zend\EventManager;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface SharedEventManagerAware
+interface SharedEventCollectionAware
 {
     /**
      * Inject an EventManager instance
      * 
-     * @param  SharedEventCollection $sharedEventManager 
-     * @return SharedEventManagerAware
+     * @param  SharedEventCollection $sharedEventCollection 
+     * @return SharedEventCollectionAware
      */
-    public function setSharedConnections(SharedEventCollection $sharedEventManager);
+    public function setSharedCollections(SharedEventCollection $sharedEventCollection);
 }

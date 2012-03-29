@@ -94,7 +94,7 @@ class Request extends Message implements RequestDescription
             self::METHOD_OPTIONS, self::METHOD_GET, self::METHOD_HEAD, self::METHOD_POST,
             self::METHOD_PUT, self::METHOD_DELETE, self::METHOD_TRACE, self::METHOD_CONNECT
         ));
-        $regex = '^(?P<method>' . $methods . ')\s(?<uri>[^ ]*)(?:\sHTTP\/(?<version>\d+\.\d+)){0,1}';
+        $regex = '^(?P<method>' . $methods . ')\s(?P<uri>[^ ]*)(?:\sHTTP\/(?P<version>\d+\.\d+)){0,1}';
         $firstLine = array_shift($lines);
         if (!preg_match('#' . $regex . '#', $firstLine, $matches)) {
             throw new Exception\InvalidArgumentException('A valid request line was not found in the provided string');

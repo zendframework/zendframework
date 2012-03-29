@@ -66,6 +66,12 @@ class SegmentTest extends TestCase
                 null,
                 array('foo' => 'foo-bar')
             ),
+            'constraints-with-parantheses-dont-break-parameter-map' => array(
+                new Segment('/:foo/:bar', array('foo' => '(bar)')),
+                '/bar/baz',
+                null,
+                array('foo' => 'bar', 'bar' => 'baz')
+            ),
             'simple-match-with-optional-parameter' => array(
                 new Segment('/[:foo]', array(), array('foo' => 'bar')),
                 '/',

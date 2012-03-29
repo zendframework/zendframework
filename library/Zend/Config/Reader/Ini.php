@@ -141,7 +141,7 @@ class Ini implements Reader
             if (is_array($value)) {
                 $config[$section] = $this->processSection($value);
             } else {
-                $config[$section] = $value;
+                $this->processKey($section, $value, $config);
             }
         }
 

@@ -45,43 +45,43 @@ class RouteNotFoundStrategy implements ListenerAggregate
 
     /**
      * Whether or not to display exceptions related to the 404 condition
-     * 
+     *
      * @var bool
      */
     protected $displayExceptions = false;
 
     /**
      * Whether or not to display the reason for a 404
-     * 
+     *
      * @var bool
      */
     protected $displayNotFoundReason = false;
 
     /**
      * Template to use to report page not found conditions
-     * 
+     *
      * @var string
      */
     protected $notFoundTemplate = 'error';
 
     /**
      * The reason for a not-found condition
-     * 
+     *
      * @var false|string
      */
     protected $reason = false;
 
     /**
      * Attach the aggregate to the specified event manager
-     * 
-     * @param  EventCollection $events 
+     *
+     * @param  EventCollection $events
      * @return void
      */
     public function attach(EventCollection $events)
     {
-        $this->listeners[] = $events->attach('dispatch', array($this, 'prepareNotFoundViewModel'), -90);
-        $this->listeners[] = $events->attach('dispatch.error', array($this, 'detectNotFoundError'));
-        $this->listeners[] = $events->attach('dispatch.error', array($this, 'prepareNotFoundViewModel'));
+        $this->listeners[] = $events->attach(MvcEvent::EVENT_DISPATCH, array($this, 'prepareNotFoundViewModel'), -90);
+        $this->listeners[] = $events->attach(MvcEvent::EVENT_DISPATCH_ERROR, array($this, 'detectNotFoundError'));
+        $this->listeners[] = $events->attach(MvcEvent::EVENT_DISPATCH_ERROR, array($this, 'prepareNotFoundViewModel'));
     }
 
     /**
@@ -95,7 +95,7 @@ class RouteNotFoundStrategy implements ListenerAggregate
         $this->displayExceptions = (bool) $displayExceptions;
         return $this;
     }
-    
+
     /**
      * Should we display exceptions related to a not-found condition?
      *
@@ -108,8 +108,8 @@ class RouteNotFoundStrategy implements ListenerAggregate
 
     /**
      * Detach aggregate listeners from the specified event manager
-     * 
-     * @param  EventCollection $events 
+     *
+     * @param  EventCollection $events
      * @return void
      */
     public function detach(EventCollection $events)
@@ -132,7 +132,7 @@ class RouteNotFoundStrategy implements ListenerAggregate
         $this->displayNotFoundReason = (bool) $displayNotFoundReason;
         return $this;
     }
-    
+
     /**
      * Should we display the reason for a not-found condition?
      *
@@ -154,7 +154,7 @@ class RouteNotFoundStrategy implements ListenerAggregate
         $this->notFoundTemplate = (string) $notFoundTemplate;
         return $this;
     }
-    
+
     /**
      * Get template for not found conditions
      *
@@ -170,8 +170,8 @@ class RouteNotFoundStrategy implements ListenerAggregate
      *
      * If a "controller not found" or "invalid controller" error type is
      * encountered, sets the response status code to 404.
-     * 
-     * @param  MvcEvent $e 
+     *
+     * @param  MvcEvent $e
      * @return void
      */
     public function detectNotFoundError(MvcEvent $e)
@@ -200,8 +200,8 @@ class RouteNotFoundStrategy implements ListenerAggregate
 
     /**
      * Create and return a 404 view model
-     * 
-     * @param  MvcEvent $e 
+     *
+     * @param  MvcEvent $e
      * @return void
      */
     public function prepareNotFoundViewModel(MvcEvent $e)
@@ -240,9 +240,9 @@ class RouteNotFoundStrategy implements ListenerAggregate
      * If $displayNotFoundReason is enabled, checks to see if $reason is set,
      * and, if so, injects it into the model. If not, it injects
      * Application::ERROR_CONTROLLER_CANNOT_DISPATCH.
-     * 
-     * @param  ViewModel $model 
-     * @param  MvcEvent $e 
+     *
+     * @param  ViewModel $model
+     * @param  MvcEvent $e
      * @return void
      */
     protected function injectNotFoundReason($model)
@@ -257,7 +257,7 @@ class RouteNotFoundStrategy implements ListenerAggregate
             return;
         }
 
-        // otherwise, must be a case of the controller not being able to 
+        // otherwise, must be a case of the controller not being able to
         // dispatch itself.
         $model->setVariable('reason', Application::ERROR_CONTROLLER_CANNOT_DISPATCH);
     }
@@ -265,11 +265,11 @@ class RouteNotFoundStrategy implements ListenerAggregate
     /**
      * Inject the exception message into the model
      *
-     * If $displayExceptions is enabled, and an exception is found in the 
+     * If $displayExceptions is enabled, and an exception is found in the
      * event, inject it into the model.
-     * 
-     * @param  ViewModel $model 
-     * @param  MvcEvent $e 
+     *
+     * @param  ViewModel $model
+     * @param  MvcEvent $e
      * @return void
      */
     protected function injectException($model, $e)
@@ -289,14 +289,14 @@ class RouteNotFoundStrategy implements ListenerAggregate
     /**
      * Inject the controller and controller class into the model
      *
-     * If either $displayExceptions or $displayNotFoundReason are enabled, 
-     * injects the controllerClass from the MvcEvent. It checks to see if a 
+     * If either $displayExceptions or $displayNotFoundReason are enabled,
+     * injects the controllerClass from the MvcEvent. It checks to see if a
      * controller is present in the MvcEvent, and, if not, grabs it from
-     * the route match if present; if a controller is found, it injects it into 
+     * the route match if present; if a controller is found, it injects it into
      * the model.
-     * 
-     * @param  ViewModel $model 
-     * @param  MvcEvent $e 
+     *
+     * @param  ViewModel $model
+     * @param  MvcEvent $e
      * @return void
      */
     protected function injectController($model, $e)

@@ -57,19 +57,19 @@ class ExceptionStrategy implements ListenerAggregate
 
     /**
      * Attach the aggregate to the specified event manager
-     * 
-     * @param  EventCollection $events 
+     *
+     * @param  EventCollection $events
      * @return void
      */
     public function attach(EventCollection $events)
     {
-        $this->listeners[] = $events->attach('dispatch.error', array($this, 'prepareExceptionViewModel'));
+        $this->listeners[] = $events->attach(MvcEvent::EVENT_DISPATCH_ERROR, array($this, 'prepareExceptionViewModel'));
     }
 
     /**
      * Detach aggregate listeners from the specified event manager
-     * 
-     * @param  EventCollection $events 
+     *
+     * @param  EventCollection $events
      * @return void
      */
     public function detach(EventCollection $events)
@@ -83,8 +83,8 @@ class ExceptionStrategy implements ListenerAggregate
 
     /**
      * Flag: display exceptions in error pages?
-     * 
-     * @param  bool $flag 
+     *
+     * @param  bool $flag
      * @return ExceptionStrategy
      */
     public function setDisplayExceptions($displayExceptions)
@@ -95,7 +95,7 @@ class ExceptionStrategy implements ListenerAggregate
 
     /**
      * Should we display exceptions in error pages?
-     * 
+     *
      * @return bool
      */
     public function displayExceptions()
@@ -105,8 +105,8 @@ class ExceptionStrategy implements ListenerAggregate
 
     /**
      * Set the exception template
-     * 
-     * @param  string $exceptionTemplate 
+     *
+     * @param  string $exceptionTemplate
      * @return ExceptionStrategy
      */
     public function setExceptionTemplate($exceptionTemplate)
@@ -117,7 +117,7 @@ class ExceptionStrategy implements ListenerAggregate
 
     /**
      * Retrieve the exception template
-     * 
+     *
      * @return string
      */
     public function getExceptionTemplate()
@@ -127,13 +127,13 @@ class ExceptionStrategy implements ListenerAggregate
 
     /**
      * Create an exception view model, and set the HTTP status code
-     * 
-     * @todo   dispatch.error does not halt dispatch unless a response is 
+     *
+     * @todo   dispatch.error does not halt dispatch unless a response is
      *         returned. As such, we likely need to trigger rendering as a low
      *         priority dispatch.error event (or goto a render event) to ensure
      *         rendering occurs, and that munging of view models occurs when
      *         expected.
-     * @param  MvcEvent $e 
+     * @param  MvcEvent $e
      * @return void
      */
     public function prepareExceptionViewModel(MvcEvent $e)

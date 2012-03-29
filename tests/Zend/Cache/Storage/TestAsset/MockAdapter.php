@@ -14,11 +14,11 @@ class MockAdapter extends AbstractAdapter
     {
     }
 
-    public function removeItem($key = null, array $options = array())
+    protected function internalRemoveItem(& $normalizedKey, array & $normalizedOptions)
     {
     }
 
-    public function getCapacity(array $options = array())
+    protected function internalGetCapacity(array & $normalizedOptions)
     {
     }
 

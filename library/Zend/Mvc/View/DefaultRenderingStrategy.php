@@ -56,8 +56,8 @@ class DefaultRenderingStrategy implements ListenerAggregate
 
     /**
      * Set view
-     * 
-     * @param  View $view 
+     *
+     * @param  View $view
      * @return DefaultRenderingStrategy
      */
     public function __construct(View $view)
@@ -68,19 +68,19 @@ class DefaultRenderingStrategy implements ListenerAggregate
 
     /**
      * Attach the aggregate to the specified event manager
-     * 
-     * @param  EventCollection $events 
+     *
+     * @param  EventCollection $events
      * @return void
      */
     public function attach(EventCollection $events)
     {
-        $this->listeners[] = $events->attach('render', array($this, 'render'), -10000);
+        $this->listeners[] = $events->attach(MvcEvent::EVENT_RENDER, array($this, 'render'), -10000);
     }
 
     /**
      * Detach aggregate listeners from the specified event manager
-     * 
-     * @param  EventCollection $events 
+     *
+     * @param  EventCollection $events
      * @return void
      */
     public function detach(EventCollection $events)
@@ -103,7 +103,7 @@ class DefaultRenderingStrategy implements ListenerAggregate
         $this->layoutTemplate = (string) $layoutTemplate;
         return $this;
     }
-    
+
     /**
      * Get layout template value
      *
@@ -116,8 +116,8 @@ class DefaultRenderingStrategy implements ListenerAggregate
 
     /**
      * Render the view
-     * 
-     * @param  MvcEvent $e 
+     *
+     * @param  MvcEvent $e
      * @return Response
      */
     public function render(MvcEvent $e)

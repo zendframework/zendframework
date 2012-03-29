@@ -47,7 +47,7 @@ abstract class AbstractAddressList implements Header
 
     /**
      * Header encoding
-     * 
+     *
      * @var string
      */
     protected $encoding = 'ASCII';
@@ -59,8 +59,8 @@ abstract class AbstractAddressList implements Header
 
     /**
      * Parse string to create header object
-     * 
-     * @param  string $headerLine 
+     *
+     * @param  string $headerLine
      * @return AbstractAddressList
      */
     public static function fromString($headerLine)
@@ -86,7 +86,7 @@ abstract class AbstractAddressList implements Header
         $addressList = $header->getAddressList();
         foreach ($values as $address) {
             // split values into name/email
-            if (!preg_match('/^((?<name>.*?)<(?<namedEmail>[^>]+)>|(?<email>.+))$/', $address, $matches)) {
+            if (!preg_match('/^((?P<name>.*?)<(?P<namedEmail>[^>]+)>|(?P<email>.+))$/', $address, $matches)) {
                 // Should we raise an exception here?
                 continue;
             }
@@ -117,7 +117,7 @@ abstract class AbstractAddressList implements Header
 
     /**
      * Get field name of this header
-     * 
+     *
      * @return string
      */
     public function getFieldName()
@@ -127,7 +127,7 @@ abstract class AbstractAddressList implements Header
 
     /**
      * Get field value of this header
-     * 
+     *
      * @return string
      */
     public function getFieldValue()
@@ -156,11 +156,11 @@ abstract class AbstractAddressList implements Header
 
     /**
      * Set header encoding
-     * 
-     * @param  string $encoding 
+     *
+     * @param  string $encoding
      * @return AbstractAddressList
      */
-    public function setEncoding($encoding) 
+    public function setEncoding($encoding)
     {
         $this->encoding = $encoding;
         return $this;
@@ -168,7 +168,7 @@ abstract class AbstractAddressList implements Header
 
     /**
      * Get header encoding
-     * 
+     *
      * @return string
      */
     public function getEncoding()
@@ -178,8 +178,8 @@ abstract class AbstractAddressList implements Header
 
     /**
      * Set address list for this header
-     * 
-     * @param  AddressList $addressList 
+     *
+     * @param  AddressList $addressList
      * @return void
      */
     public function setAddressList(AddressList $addressList)
@@ -189,7 +189,7 @@ abstract class AbstractAddressList implements Header
 
     /**
      * Get address list managed by this header
-     * 
+     *
      * @return AddressList
      */
     public function getAddressList()
@@ -202,7 +202,7 @@ abstract class AbstractAddressList implements Header
 
     /**
      * Serialize to string
-     * 
+     *
      * @return string
      */
     public function toString()
@@ -211,4 +211,4 @@ abstract class AbstractAddressList implements Header
         $value = $this->getFieldValue();
         return sprintf("%s: %s\r\n", $name, $value);
     }
-} 
+}

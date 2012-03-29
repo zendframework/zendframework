@@ -50,8 +50,8 @@ class JsonStrategy implements ListenerAggregate
 
     /**
      * Constructor
-     * 
-     * @param  JsonRenderer $renderer 
+     *
+     * @param  JsonRenderer $renderer
      * @return void
      */
     public function __construct(JsonRenderer $renderer)
@@ -61,21 +61,21 @@ class JsonStrategy implements ListenerAggregate
 
     /**
      * Attach the aggregate to the specified event manager
-     * 
-     * @param  EventCollection $events 
+     *
+     * @param  EventCollection $events
      * @param  int $priority
      * @return void
      */
     public function attach(EventCollection $events, $priority = 1)
     {
-        $this->listeners[] = $events->attach('renderer', array($this, 'selectRenderer'), $priority);
-        $this->listeners[] = $events->attach('response', array($this, 'injectResponse'), $priority);
+        $this->listeners[] = $events->attach(ViewEvent::EVENT_RENDERER, array($this, 'selectRenderer'), $priority);
+        $this->listeners[] = $events->attach(ViewEvent::EVENT_RESPONSE, array($this, 'injectResponse'), $priority);
     }
 
     /**
      * Detach aggregate listeners from the specified event manager
-     * 
-     * @param  EventCollection $events 
+     *
+     * @param  EventCollection $events
      * @return void
      */
     public function detach(EventCollection $events)
@@ -90,8 +90,8 @@ class JsonStrategy implements ListenerAggregate
     /**
      * Detect if we should use the JsonRenderer based on model type and/or
      * Accept header
-     * 
-     * @param  ViewEvent $e 
+     *
+     * @param  ViewEvent $e
      * @return null|JsonRenderer
      */
     public function selectRenderer(ViewEvent $e)
@@ -126,8 +126,8 @@ class JsonStrategy implements ListenerAggregate
 
     /**
      * Inject the response with the JSON payload and appropriate Content-Type header
-     * 
-     * @param  ViewEvent $e 
+     *
+     * @param  ViewEvent $e
      * @return void
      */
     public function injectResponse(ViewEvent $e)

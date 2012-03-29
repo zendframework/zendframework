@@ -463,7 +463,7 @@ class Bbcode implements Parser
             }
 
             $matches = array();
-            $regex   = '#\G(?<text>[^\[]*)(?<open>\[(?<name>[' . self::NAME_CHARSET . ']+)?)?#';
+            $regex   = '#\G(?P<text>[^\[]*)(?P<open>\[(?P<name>[' . self::NAME_CHARSET . ']+)?)?#';
             if (!preg_match($regex, $value, $matches, null, $pointer)) {
                 goto end;
             }
@@ -508,7 +508,7 @@ class Bbcode implements Parser
 
         scanattrs: {
             $matches = array();
-            $regex   = '#\G((?<end>\s*\])|\s+(?<attribute>[' . self::NAME_CHARSET . ']+)(?<eq>=?))#';
+            $regex   = '#\G((?P<end>\s*\])|\s+(?P<attribute>[' . self::NAME_CHARSET . ']+)(?P<eq>=?))#';
             if (!preg_match($regex, $value, $matches, null, $pointer)) {
                 goto end;
             }
@@ -547,7 +547,7 @@ class Bbcode implements Parser
 
         parsevalue: {
             $matches = array();
-            $regex   = '#\G((?<quote>"|\')(?<valuequote>.*?)\\2|(?<value>[^\]\s]+))#';
+            $regex   = '#\G((?P<quote>"|\')(?P<valuequote>.*?)\\2|(?P<value>[^\]\s]+))#';
             if (!preg_match($regex, $value, $matches, null, $pointer)) {
                 goto scanattrs;
             }

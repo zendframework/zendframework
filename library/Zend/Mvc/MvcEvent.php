@@ -9,6 +9,17 @@ use Zend\EventManager\Event,
 
 class MvcEvent extends Event
 {
+    /**#@+
+     * Mvc events triggered by eventmanager
+     */
+    const EVENT_BOOTSTRAP      = 'bootstrap';
+    const EVENT_DISPATCH       = 'dispatch';
+    const EVENT_DISPATCH_ERROR = 'dispatch.error';
+    const EVENT_FINISH         = 'finish';
+    const EVENT_RENDER         = 'render';
+    const EVENT_ROUTE          = 'route';
+    /**#@-*/
+
     protected $request;
     protected $response;
     protected $result;
@@ -75,7 +86,7 @@ class MvcEvent extends Event
         $this->viewModel = $viewModel;
         return $this;
     }
-    
+
     /**
      * Get value for viewModel
      *

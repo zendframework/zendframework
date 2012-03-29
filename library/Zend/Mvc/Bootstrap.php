@@ -24,18 +24,18 @@ class Bootstrap implements Bootstrapper
     /**
      * Constructor
      *
-     * @param Config $config 
+     * @param Config $config
      * @return void
      */
     public function __construct(Config $config)
     {
-        $this->config = $config; 
+        $this->config = $config;
     }
 
     /**
      * Set the event manager to use with this object
-     * 
-     * @param  Events $events 
+     *
+     * @param  Events $events
      * @return void
      */
     public function setEventManager(Events $events)
@@ -49,7 +49,7 @@ class Bootstrap implements Bootstrapper
      * If none is initialized, an EventManager instance will be created with
      * the contexts of this class, the current class name (if extending this
      * class), and "bootstrap".
-     * 
+     *
      * @return Events
      */
     public function events()
@@ -69,12 +69,12 @@ class Bootstrap implements Bootstrapper
      *
      * - Initializes the locator, and injects it in the application
      * - Initializes the router, and injects it in the application
-     * - Triggers the "bootstrap" event, passing in the application and modules 
+     * - Triggers the "bootstrap" event, passing in the application and modules
      *   as parameters. This allows module classes to perform arbitrary
-     *   initialization tasks after bootstrapping but before running the 
+     *   initialization tasks after bootstrapping but before running the
      *   application.
-     * 
-     * @param Application $application 
+     *
+     * @param Application $application
      * @return void
      */
     public function bootstrap(AppContext $application)
@@ -88,8 +88,8 @@ class Bootstrap implements Bootstrapper
 
     /**
      * Sets up the locator based on the configuration provided
-     * 
-     * @param  AppContext $application 
+     *
+     * @param  AppContext $application
      * @return void
      */
     protected function setupLocator(AppContext $application)
@@ -228,8 +228,8 @@ class Bootstrap implements Bootstrapper
 
     /**
      * Sets up the router based on the configuration provided
-     * 
-     * @param  Application $application 
+     *
+     * @param  Application $application
      * @return void
      */
     protected function setupRouter(AppContext $application)
@@ -241,11 +241,11 @@ class Bootstrap implements Bootstrapper
     /**
      * Sets up the view integration
      *
-     * Pulls the View object and PhpRenderer strategy from the locator, and 
-     * attaches the former to the latter. Then attaches the 
+     * Pulls the View object and PhpRenderer strategy from the locator, and
+     * attaches the former to the latter. Then attaches the
      * DefaultRenderingStrategy to the application event manager.
-     * 
-     * @param  Application $application 
+     *
+     * @param  Application $application
      * @return void
      */
     protected function setupView($application)
@@ -270,11 +270,11 @@ class Bootstrap implements Bootstrapper
         $createViewModelListener = $locator->get('Zend\Mvc\View\CreateViewModelListener');
         $injectTemplateListener  = $locator->get('Zend\Mvc\View\InjectTemplateListener');
         $injectViewModelListener = $locator->get('Zend\Mvc\View\InjectViewModelListener');
-        $staticEvents->attach('Zend\Stdlib\Dispatchable', 'dispatch', array($createViewModelListener, 'createViewModelFromArray'), -80);
-        $staticEvents->attach('Zend\Stdlib\Dispatchable', 'dispatch', array($createViewModelListener, 'createViewModelFromNull'), -80);
-        $staticEvents->attach('Zend\Stdlib\Dispatchable', 'dispatch', array($injectTemplateListener, 'injectTemplate'), -90);
-        $events->attach('dispatch.error', array($injectViewModelListener, 'injectViewModel'), -100);
-        $staticEvents->attach('Zend\Stdlib\Dispatchable', 'dispatch', array($injectViewModelListener, 'injectViewModel'), -100);
+        $staticEvents->attach('Zend\Stdlib\Dispatchable', MvcEvent::EVENT_DISPATCH, array($createViewModelListener, 'createViewModelFromArray'), -80);
+        $staticEvents->attach('Zend\Stdlib\Dispatchable', MvcEvent::EVENT_DISPATCH, array($createViewModelListener, 'createViewModelFromNull'), -80);
+        $staticEvents->attach('Zend\Stdlib\Dispatchable', MvcEvent::EVENT_DISPATCH, array($injectTemplateListener, 'injectTemplate'), -90);
+        $events->attach(MvcEvent::EVENT_DISPATCH_ERROR, array($injectViewModelListener, 'injectViewModel'), -100);
+        $staticEvents->attach('Zend\Stdlib\Dispatchable', MvcEvent::EVENT_DISPATCH, array($injectViewModelListener, 'injectViewModel'), -100);
 
         // Inject MVC Event with view model
         $mvcEvent  = $application->getMvcEvent();
@@ -292,8 +292,8 @@ class Bootstrap implements Bootstrapper
      *
      * Triggers with the keys "application" and "config", the latter pointing
      * to the Module Manager attached to the bootstrap.
-     * 
-     * @param  AppContext $application 
+     *
+     * @param  AppContext $application
      * @return void
      */
     protected function setupEvents(AppContext $application)
@@ -302,6 +302,6 @@ class Bootstrap implements Bootstrapper
             'application' => $application,
             'config'      => $this->config,
         );
-        $this->events()->trigger('bootstrap', $this, $params);
+        $this->events()->trigger(MvcEvent::EVENT_BOOTSTRAP, $this, $params);
     }
 }

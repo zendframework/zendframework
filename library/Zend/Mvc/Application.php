@@ -104,8 +104,8 @@ class Application implements AppContext
 
     /**
      * Set the MVC event instance
-     * 
-     * @param  MvcEvent $event 
+     *
+     * @param  MvcEvent $event
      * @return Application
      */
     public function setMvcEvent(MvcEvent $event)
@@ -165,7 +165,7 @@ class Application implements AppContext
 
     /**
      * Get the MVC event instance
-     * 
+     *
      * @return MvcEvent
      */
     public function getMvcEvent()
@@ -229,14 +229,14 @@ class Application implements AppContext
             }
             return false;
         };
-        
+
         // Trigger route event
-        $result = $events->trigger('route', $event, $shortCircuit);
+        $result = $events->trigger(MvcEvent::EVENT_ROUTE, $event, $shortCircuit);
         if ($result->stopped()) {
             $response = $result->last();
             if ($response instanceof Response) {
                 $event->setTarget($this);
-                $events->trigger('finish', $event);
+                $events->trigger(MvcEvent::EVENT_FINISH, $event);
                 return $response;
             }
             if ($event->getError()) {
@@ -249,13 +249,13 @@ class Application implements AppContext
         }
 
         // Trigger dispatch event
-        $result = $events->trigger('dispatch', $event, $shortCircuit);
+        $result = $events->trigger(MvcEvent::EVENT_DISPATCH, $event, $shortCircuit);
 
         // Complete response
         $response = $result->last();
         if ($response instanceof Response) {
             $event->setTarget($this);
-            $events->trigger('finish', $event);
+            $events->trigger(MvcEvent::EVENT_FINISH, $event);
             return $response;
         }
 
@@ -270,16 +270,16 @@ class Application implements AppContext
      *
      * Triggers "render" and "finish" events, and returns response from
      * event object.
-     * 
-     * @param  MvcEvent $event 
+     *
+     * @param  MvcEvent $event
      * @return Response
      */
     protected function completeRequest(MvcEvent $event)
     {
         $events = $this->events();
         $event->setTarget($this);
-        $events->trigger('render', $event);
-        $events->trigger('finish', $event);
+        $events->trigger(MvcEvent::EVENT_RENDER, $event);
+        $events->trigger(MvcEvent::EVENT_FINISH, $event);
         return $event->getResponse();
     }
 
@@ -299,7 +299,7 @@ class Application implements AppContext
         if (!$routeMatch instanceof Router\RouteMatch) {
             $e->setError(static::ERROR_ROUTER_NO_MATCH);
 
-            $results = $this->events()->trigger('dispatch.error', $e);
+            $results = $this->events()->trigger(MvcEvent::EVENT_DISPATCH_ERROR, $e);
             if (count($results)) {
                 $return  = $results->last();
             } else {
@@ -339,7 +339,7 @@ class Application implements AppContext
                   ->setController($controllerName)
                   ->setParam('exception', $exception);
 
-            $results = $events->trigger('dispatch.error', $error);
+            $results = $events->trigger(MvcEvent::EVENT_DISPATCH_ERROR, $error);
             if (count($results)) {
                 $return  = $results->last();
             } else {
@@ -358,7 +358,7 @@ class Application implements AppContext
                   ->setController($controllerName)
                   ->setControllerClass(get_class($controller));
 
-            $results = $events->trigger('dispatch.error', $error);
+            $results = $events->trigger(MvcEvent::EVENT_DISPATCH_ERROR, $error);
             if (count($results)) {
                 $return  = $results->last();
             } else {
@@ -382,7 +382,7 @@ class Application implements AppContext
                   ->setController($controllerName)
                   ->setControllerClass(get_class($controller))
                   ->setParam('exception', $ex);
-            $results = $events->trigger('dispatch.error', $error);
+            $results = $events->trigger(MvcEvent::EVENT_DISPATCH_ERROR, $error);
             if (count($results)) {
                 $return  = $results->last();
             } else {
@@ -410,7 +410,7 @@ class Application implements AppContext
     protected function attachDefaultListeners()
     {
         $events = $this->events();
-        $events->attach('route', array($this, 'route'));
-        $events->attach('dispatch', array($this, 'dispatch'));
+        $events->attach(MvcEvent::EVENT_ROUTE, array($this, 'route'));
+        $events->attach(MvcEvent::EVENT_DISPATCH, array($this, 'dispatch'));
     }
 }

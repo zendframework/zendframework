@@ -43,11 +43,30 @@ class JsonModel extends ViewModel
     protected $captureTo = null;
 
     /**
+     * JSONP callback (if set, wraps the return in a function call)
+     * 
+     * @var string
+     */
+    protected $jsonpCallback = null;
+
+    /**
      * JSON is usually terminal
      * 
      * @var bool
      */
     protected $terminate = true;
+
+    /**
+     * Set the JSONP callback function name
+     * 
+     * @param  string $callback 
+     * @return JsonpModel
+     */
+    public function setJsonpCallback($callback)
+    {
+        $this->jsonpCallback = $callback;
+        return $this;
+    }
 
     /**
      * Serialize to JSON
@@ -60,6 +79,12 @@ class JsonModel extends ViewModel
         if ($variables instanceof Traversable) {
             $variables = ArrayUtils::iteratorToArray($variables);
         }
-        return Json::encode($variables);
+
+        if(!is_null($this->jsonpCallback))
+        {
+            return $this->jsonpCallback.'('.Json::encode($variables).')';
+        } else {
+            return Json::encode($variables);
+        }
     }
 }

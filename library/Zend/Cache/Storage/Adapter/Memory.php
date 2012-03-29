@@ -68,8 +68,7 @@ class Memory extends AbstractAdapter
             $options = new MemoryOptions($options);
         }
 
-        $this->options = $options;
-        return $this;
+        return parent::setOptions($options);
     }
 
     /**

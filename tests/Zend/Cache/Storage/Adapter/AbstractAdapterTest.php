@@ -123,12 +123,6 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('0', $this->_options->getNamespace());
     }
 
-    public function testSetEmptyNamespaceThrowsException()
-    {
-        $this->setExpectedException('Zend\Cache\Exception\InvalidArgumentException');
-        $this->_options->setNamespace('');
-    }
-
     public function testSetNamespacePatternThrowsExceptionOnInvalidPattern()
     {
         $this->setExpectedException('Zend\Cache\Exception\InvalidArgumentException');

@@ -122,8 +122,7 @@ class Apc extends AbstractAdapter
             $options = new ApcOptions($options);
         }
 
-        $this->options = $options;
-        return $this;
+        return parent::setOptions($options);
     }
 
     /**
@@ -852,9 +851,9 @@ class Apc extends AbstractAdapter
     protected function internalGetCapabilities()
     {
         if ($this->capabilities === null) {
-            $this->capabilityMarker = new stdClass();
-            $this->capabilities     = new Capabilities(
-                $this->capabilityMarker,
+            $marker       = new stdClass();
+            $capabilities = new Capabilities(
+                $marker,
                 array(
                     'supportedDatatypes' => array(
                         'NULL'     => true,
@@ -891,6 +890,18 @@ class Apc extends AbstractAdapter
                     'clearByNamespace'   => true,
                 )
             );
+
+            // update namespace separator on change option
+            $this->events()->attach('option', function ($event) use ($capabilities, $marker) {
+                $params = $event->getParams();
+
+                if (isset($params['namespace_separator'])) {
+                    $capabilities->setNamespaceSeparator($marker, $params['namespace_separator']);
+                }
+            });
+
+            $this->capabilities     = $capabilities;
+            $this->capabilityMarker = $marker;
         }
 
         return $this->capabilities;

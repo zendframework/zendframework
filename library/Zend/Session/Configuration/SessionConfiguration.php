@@ -123,7 +123,7 @@ class SessionConfiguration extends StandardConfiguration
     {
         $key       = false;
         $transform = false;
-        switch ($name) {
+        switch ($storageOption) {
             case 'remember_me_seconds':
                 // No remote storage option; just return the current value
                 return $this->rememberMeSeconds;
@@ -139,7 +139,7 @@ class SessionConfiguration extends StandardConfiguration
                     return (bool) $value;
                 };
             default:
-                $key = 'session.' . $name;
+                $key = 'session.' . $storageOption;
                 break;
         }
 

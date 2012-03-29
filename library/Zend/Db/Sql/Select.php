@@ -84,11 +84,6 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
     protected $table = null;
 
     /**
-     * @var string
-     */
-    protected $schema = null;
-
-    /**
      * @var array
      */
     protected $columns = array(self::SQL_WILDCARD);
@@ -126,10 +121,10 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
      * @param  null|string $schema
      * @return void
      */
-    public function __construct($table = null, $schema = null)
+    public function __construct($table = null)
     {
         if ($table) {
-            $this->from($table, $schema);
+            $this->from($table);
             $this->tableReadOnly = true;
         }
 
@@ -143,14 +138,13 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
      * @param  null|string $schema
      * @return Select
      */
-    public function from($table, $schema = null)
+    public function from($table)
     {
         if ($this->tableReadOnly) {
             throw new \InvalidArgumentException('Since this object was created with a table and/or schema in the constructor, it is read only.');
         }
 
         $this->table = $table;
-        $this->schema = $schema;
         return $this;
     }
 
@@ -276,7 +270,6 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
         $rawState = array(
             'columns' => $this->columns,
             'table' => $this->table,
-            'schema' => $this->schema,
             'joins' => $this->joins,
             'where' => $this->where,
             'order' => $this->order,
@@ -330,10 +323,10 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
 
         // process table name
         $table = $platform->quoteIdentifier($this->table);
-        if ($this->schema != '') {
-            $schema = $platform->quoteIdentifier($this->schema) . $separator;
-            $table = $schema . $table;
-        }
+        //if ($this->schema != '') {
+            //$schema = $platform->quoteIdentifier($this->schema) . $separator;
+            //$table = $schema . $table;
+        //}
 
         // process joins
         if ($this->joins) {
@@ -421,12 +414,12 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
 
         // process the schema and table name
         $table = $platform->quoteIdentifier($this->table);
-        if ($this->schema != '') {
-            $schema = $platform->quoteIdentifier($this->schema) . $platform->getIdentifierSeparator();
-            $table = $schema . $table;
-        } else {
-            $schema = '';
-        }
+//        if ($this->schema != '') {
+//            $schema = $platform->quoteIdentifier($this->schema) . $platform->getIdentifierSeparator();
+//            $table = $schema . $table;
+//        } else {
+//            $schema = '';
+//        }
 
         // process joins
         if ($this->joins) {

@@ -61,7 +61,7 @@ class TableGatewayTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetTableName()
     {
-        $this->assertEquals('foo', $this->table->getTableName());
+        $this->assertEquals('foo', $this->table->getTable());
     }
 
     /**
@@ -182,7 +182,7 @@ class TableGatewayTest extends \PHPUnit_Framework_TestCase
         $select->expects($this->any())
             ->method('getRawState')
             ->will($this->returnValue(array(
-                'table' => $this->table->getTableName(),
+                'table' => $this->table->getTable(),
                 'schema' => ''
                 ))
             );
@@ -204,7 +204,7 @@ class TableGatewayTest extends \PHPUnit_Framework_TestCase
         $select->expects($this->any())
             ->method('getRawState')
             ->will($this->returnValue(array(
-                'table' => $this->table->getTableName(),
+                'table' => $this->table->getTable(),
                 'schema' => ''
                 ))
             );
@@ -228,7 +228,7 @@ class TableGatewayTest extends \PHPUnit_Framework_TestCase
         // assert ?
         $insert->expects($this->once())
             ->method('into')
-            ->with($this->table->getTableName());
+            ->with($this->table->getTable());
 
         $insert->expects($this->once())
             ->method('prepareStatement')

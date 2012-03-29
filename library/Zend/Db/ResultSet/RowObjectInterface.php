@@ -33,5 +33,5 @@ use ArrayAccess,
  */
 interface RowObjectInterface extends Countable, ArrayAccess
 {
-    public function exchangeArray($input);
+    public function populate(array $rowData);
 }

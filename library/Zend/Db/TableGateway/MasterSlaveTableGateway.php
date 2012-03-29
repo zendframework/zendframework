@@ -46,19 +46,19 @@ class MasterSlaveTableGateway extends TableGateway
     /**
      * Constructor
      * 
-     * @param string $tableName
+     * @param string $table
      * @param Adapter $masterAdapter
      * @param Adapter $slaveAdapter
      * @param type $databaseSchema
      * @param ResultSet $selectResultPrototype 
      */
-    public function __construct($tableName, Adapter $masterAdapter, Adapter $slaveAdapter, $databaseSchema = null, ResultSet $selectResultPrototype = null)
+    public function __construct($table, Adapter $masterAdapter, Adapter $slaveAdapter, $databaseSchema = null, ResultSet $selectResultPrototype = null)
     {
         $this->masterAdapter = $masterAdapter;
         $this->slaveAdapter = $slaveAdapter;
 
         // initialize adapter to masterAdapter
-        parent::__construct($tableName, $masterAdapter, $databaseSchema, $selectResultPrototype);
+        parent::__construct($table, $masterAdapter, $databaseSchema, $selectResultPrototype);
     }
 
     /**

@@ -61,11 +61,6 @@ class Update extends AbstractSql implements SqlInterface, PreparableSqlInterface
     protected $table = '';
 
     /**
-     * @var null|string
-     */
-    protected $schema = null;
-
-    /**
      * @var bool
      */
     protected $emptyWhereProtection = true;
@@ -87,10 +82,10 @@ class Update extends AbstractSql implements SqlInterface, PreparableSqlInterface
      * @param  null|string $schema
      * @return void
      */
-    public function __construct($table = null, $schema = null)
+    public function __construct($table = null)
     {
         if ($table) {
-            $this->table($table, $schema);
+            $this->table($table);
         }
         $this->where = new Where();
     }
@@ -102,12 +97,9 @@ class Update extends AbstractSql implements SqlInterface, PreparableSqlInterface
      * @param  null|string $schema
      * @return Update
      */
-    public function table($table, $schema = null)
+    public function table($table)
     {
         $this->table = $table;
-        if ($schema) {
-            $this->schema = $schema;
-        }
         return $this;
     }
 
@@ -191,11 +183,11 @@ class Update extends AbstractSql implements SqlInterface, PreparableSqlInterface
         $prepareType = $driver->getPrepareType();
 
         $table = $platform->quoteIdentifier($this->table);
-        if ($this->schema != '') {
-            $table = $platform->quoteIdentifier($this->schema)
-                . $platform->getIdentifierSeparator()
-                . $table;
-        }
+//        if ($this->schema != '') {
+//            $table = $platform->quoteIdentifier($this->schema)
+//                . $platform->getIdentifierSeparator()
+//                . $table;
+//        }
 
         $set = $this->set;
         if (is_array($set)) {
@@ -204,12 +196,11 @@ class Update extends AbstractSql implements SqlInterface, PreparableSqlInterface
             foreach ($set as $column => $value) {
                 if ($prepareType == 'positional') {
                     $parameterContainer->offsetSet(null, $value);
-                    $name = $driver->formatParameterName(null);
+                    $setSql[] = $platform->quoteIdentifier($column) . ' = ' . $driver->formatParameterName(null);
                 } elseif ($prepareType == 'named') {
                     $parameterContainer->offsetSet($column, $value);
-                    $name = $driver->formatParameterName($column);
+                    $setSql[] = $platform->quoteIdentifier($column) . ' = ' . $driver->formatParameterName($column);
                 }
-                $setSql[] = $platform->quoteIdentifier($column) . ' = ' . $name;
             }
             $set = implode(', ', $setSql);
         }
@@ -238,9 +229,9 @@ class Update extends AbstractSql implements SqlInterface, PreparableSqlInterface
         $platform = ($platform) ?: new Sql92;
         $table = $platform->quoteIdentifier($this->table);
 
-        if ($this->schema != '') {
-            $table = $platform->quoteIdentifier($this->schema) . $platform->getIdentifierSeparator() . $table;
-        }
+//        if ($this->schema != '') {
+//            $table = $platform->quoteIdentifier($this->schema) . $platform->getIdentifierSeparator() . $table;
+//        }
 
         $set = $this->set;
         if (is_array($set)) {

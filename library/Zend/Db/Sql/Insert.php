@@ -58,15 +58,6 @@ class Insert implements SqlInterface, PreparableSqlInterface
      * @var string
      */
     protected $table            = null;
-
-    /**
-     * @var string
-     */
-    protected $schema           = null;
-
-    /**
-     * @var array
-     */
     protected $columns          = array();
 
     /**
@@ -81,10 +72,10 @@ class Insert implements SqlInterface, PreparableSqlInterface
      * @param  null|string $schema
      * @return void
      */
-    public function __construct($table = null, $schema = null)
+    public function __construct($table = null)
     {
         if ($table) {
-            $this->into($table, $schema);
+            $this->into($table);
         }
     }
 
@@ -95,12 +86,9 @@ class Insert implements SqlInterface, PreparableSqlInterface
      * @param  null|string $databaseOrSchema 
      * @return Insert
      */
-    public function into($table, $databaseOrSchema = null)
+    public function into($table)
     {
         $this->table = $table;
-        if ($databaseOrSchema) {
-            $this->schema = $databaseOrSchema;
-        }
         return $this;
     }
 
@@ -170,11 +158,11 @@ class Insert implements SqlInterface, PreparableSqlInterface
         $prepareType = $driver->getPrepareType();
 
         $table = $platform->quoteIdentifier($this->table);
-        if ($this->schema != '') {
-            $table = $platform->quoteIdentifier($this->schema)
-                . $platform->getIdentifierSeparator()
-                . $table;
-        }
+//        if ($this->schema != '') {
+//            $table = $platform->quoteIdentifier($this->schema)
+//                . $platform->getIdentifierSeparator()
+//                . $table;
+//        }
 
         $columns = array();
         $values  = array();
@@ -211,9 +199,9 @@ class Insert implements SqlInterface, PreparableSqlInterface
         $platform = ($platform) ?: new Sql92;
         $table = $platform->quoteIdentifier($this->table);
 
-        if ($this->schema != '') {
-            $table = $platform->quoteIdentifier($this->schema) . $platform->getIdentifierSeparator() . $table;
-        }
+//        if ($this->schema != '') {
+//            $table = $platform->quoteIdentifier($this->schema) . $platform->getIdentifierSeparator() . $table;
+//        }
 
         $columns = array_map(array($platform, 'quoteIdentifier'), $this->columns);
         $columns = implode(', ', $columns);

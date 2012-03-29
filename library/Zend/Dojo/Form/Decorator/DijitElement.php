@@ -169,8 +169,11 @@ class DijitElement extends ViewHelperDecorator
         $name      = $element->getFullyQualifiedName();
 
         $dijitParams = $this->getDijitParams();
-        $dijitParams['required'] = $element->isRequired();
-
+        
+        if ($element->isRequired()) {
+            $dijitParams['required'] = true;
+        }
+        
         $id = $element->getId();
         if ($view->plugin('dojo')->hasDijit($id)) {
             trigger_error(sprintf('Duplicate dijit ID detected for id "%s; temporarily generating uniqid"', $id), E_USER_NOTICE);

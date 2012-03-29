@@ -702,8 +702,8 @@ class Filesystem extends AbstractAdapter
     protected function internalSetItem(& $normalizedKey, & $value, array & $normalizedOptions)
     {
         $baseOptions = $this->getOptions();
-        $filespec    = $this->getFileSpec($normalizedKey, $normalizedOptions);
         $oldUmask    = null;
+        $filespec    = $this->getFileSpec($normalizedKey, $normalizedOptions);
 
         if ($baseOptions->getDirLevel() > 0) {
             $path = dirname($filespec);
@@ -726,23 +726,20 @@ class Filesystem extends AbstractAdapter
             $info['hash'] = Utils::generateHash($baseOptions->getReadControlAlgo(), $value, true);
             $info['algo'] = $baseOptions->getReadControlAlgo();
         }
-
-        if (isset($options['tags']) && $normalizedOptions['tags']) {
-            $tags = $normalizedOptions['tags'];
-            if (!is_array($tags)) {
-                $tags = array($tags);
-            }
-            $info['tags'] = array_values(array_unique($tags));
+        if (isset($options['tags'])) {
+            $info['tags'] = $normalizedOptions['tags'];
         }
 
+        // write files
         try {
+            // set umask for files
             if ($oldUmask !== null) { // $oldUmask could be defined on create directory
                 umask($baseOptions->getFileUmask());
             } else {
                 $oldUmask = umask($baseOptions->getFileUmask());
             }
 
-            $contents = array($filespec . '.dat' => $value);
+            $contents = array($filespec . '.dat' => & $value);
             if ($info) {
                 $contents[$filespec . '.ifo'] = serialize($info);
             } else {
@@ -762,6 +759,99 @@ class Filesystem extends AbstractAdapter
             }
 
             // reset file_umask
+            umask($oldUmask);
+
+            return true;
+
+        } catch (Exception $e) {
+            // reset umask on exception
+            umask($oldUmask);
+            throw $e;
+        }
+    }
+
+    /**
+     * Internal method to store multiple items.
+     *
+     * Options:
+     *  - namespace <string>
+     *    - The namespace to use
+     *  - tags <array>
+     *    - An array of tags
+     *
+     * @param  array $normalizedKeyValuePairs
+     * @param  array $normalizedOptions
+     * @return boolean
+     * @throws Exception
+     */
+    protected function internalSetItems(array & $normalizedKeyValuePairs, array & $normalizedOptions)
+    {
+        $baseOptions = $this->getOptions();
+        $oldUmask    = null;
+
+        // create an associated array of files and contents to write
+        $contents = array();
+        foreach ($normalizedKeyValuePairs as $key => & $value) {
+            $filespec = $this->getFileSpec($key, $normalizedOptions);
+
+            // init directory level
+            if ($baseOptions->getDirLevel() > 0) {
+                $path = dirname($filespec);
+                if (!file_exists($path)) {
+                    $oldUmask = ($oldUmask === null) ? umask($baseOptions->getDirUmask()) : $oldUmask;
+                    ErrorHandler::start();
+                    $mkdir = mkdir($path, 0777, true);
+                    $error = ErrorHandler::stop();
+                    if (!$mkdir) {
+                        umask($oldUmask);
+                        throw new Exception\RuntimeException(
+                            "Error creating directory '{$path}'", 0, $error
+                        );
+                    }
+                }
+            }
+
+            // *.dat file
+            $contents[$filespec . '.dat'] = & $value;
+
+            // *.ifo file
+            $info = null;
+            if ($baseOptions->getReadControl()) {
+                $info['hash'] = Utils::generateHash($baseOptions->getReadControlAlgo(), $value, true);
+                $info['algo'] = $baseOptions->getReadControlAlgo();
+            }
+            if (isset($normalizedOptions['tags'])) {
+                $info['tags'] = & $normalizedOptions['tags'];
+            }
+            if ($info) {
+                $contents[$filespec . '.ifo'] = serialize($info);
+            } else {
+                $this->unlink($filespec . '.ifo');
+            }
+        }
+
+        // write to disk
+        try {
+            // set umask for files
+            if ($oldUmask !== null) { // $oldUmask could be defined on create directory
+                umask($baseOptions->getFileUmask());
+            } else {
+                $oldUmask = umask($baseOptions->getFileUmask());
+            }
+
+            while ($contents) {
+                $nonBlocking = count($contents) > 1;
+                $wouldblock  = null;
+
+                foreach ($contents as $file => & $content) {
+                    $this->putFileContent($file, $content, $nonBlocking, $wouldblock);
+                    if (!$nonBlocking || !$wouldblock) {
+                        unset($contents[$file]);
+                    }
+                }
+            }
+
+            // reset umask
             umask($oldUmask);
 
             return true;

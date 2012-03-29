@@ -39,8 +39,8 @@ class MimeVersion implements Header
 
     /**
      * Deserialize from string
-     * 
-     * @param  string $headerLine 
+     *
+     * @param  string $headerLine
      * @return MimeVersion
      */
     public static function fromString($headerLine)
@@ -54,16 +54,16 @@ class MimeVersion implements Header
 
         // Check for version, and set if found
         $header = new static();
-        if (preg_match('/^(?<version>\d+\.\d+)$/', $value, $matches)) {
+        if (preg_match('/^(?P<version>\d+\.\d+)$/', $value, $matches)) {
             $header->version = $matches['version'];
         }
-        
+
         return $header;
     }
 
     /**
      * Get the field name
-     * 
+     *
      * @return string
      */
     public function getFieldName()
@@ -73,7 +73,7 @@ class MimeVersion implements Header
 
     /**
      * Get the field value (version string)
-     * 
+     *
      * @return string
      */
     public function getFieldValue()
@@ -83,8 +83,8 @@ class MimeVersion implements Header
 
     /**
      * Set character encoding
-     * 
-     * @param  string $encoding 
+     *
+     * @param  string $encoding
      * @return void
      */
     public function setEncoding($encoding)
@@ -94,7 +94,7 @@ class MimeVersion implements Header
 
     /**
      * Get character encoding
-     * 
+     *
      * @return void
      */
     public function getEncoding()
@@ -104,17 +104,17 @@ class MimeVersion implements Header
 
     /**
      * Serialize to string
-     * 
+     *
      * @return string
      */
     public function toString()
     {
         return 'Mime-Version: ' . $this->getFieldValue();
     }
-    
+
     /**
      * Set the version string used in this header
-     * 
+     *
      * @param  string $version
      * @return MimeVersion
      */
@@ -126,7 +126,7 @@ class MimeVersion implements Header
 
     /**
      * Retrieve the version string for this header
-     * 
+     *
      * @return string
      */
     public function getVersion()

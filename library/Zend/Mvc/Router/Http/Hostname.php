@@ -135,7 +135,7 @@ class Hostname implements Route
         }
 
         foreach ($this->route as $index => $routePart) {
-            if (preg_match('(^:(?<name>.+)$)', $routePart, $matches)) {
+            if (preg_match('(^:(?P<name>.+)$)', $routePart, $matches)) {
                 if (isset($this->constraints[$matches['name']]) && !preg_match('(^' . $this->constraints[$matches['name']] . '$)', $hostname[$index])) {
                     return null;
                 }
@@ -166,7 +166,7 @@ class Hostname implements Route
             $parts = array();
 
             foreach ($this->route as $index => $routePart) {
-                if (preg_match('(^:(?<name>.+)$)', $routePart, $matches)) {
+                if (preg_match('(^:(?P<name>.+)$)', $routePart, $matches)) {
                     if (!isset($mergedParams[$matches['name']])) {
                         throw new Exception\InvalidArgumentException(sprintf('Missing parameter "%s"', $matches['name']));
                     }

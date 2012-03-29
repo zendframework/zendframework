@@ -55,20 +55,6 @@ class Filesystem extends AbstractAdapter
     protected $stmtMatch = null;
 
     /**
-     * Key (namespace + separator + key) of buffered information
-     *
-     * @var string|null
-     */
-    protected $bufferKey = null;
-
-    /**
-     * The buffered filespec
-     *
-     * @var string|null
-     */
-    protected $bufferedFilespec = null;
-
-    /**
      * Set options.
      *
      * @param  array|Traversable|FilesystemOptions $options
@@ -239,25 +225,30 @@ class Filesystem extends AbstractAdapter
     {
         $baseOptions = $this->getOptions();
 
+        // Don't change arguments passed by reference
+        $keys    = $normalizedKeys;
+        $options = $normalizedOptions;
+
         $result = array();
-        while (true) {
+        while ($keys) {
 
             // LOCK_NB if more than one items have to read
-            $wouldblock = count($normalizedKeys) > 1;
+            $nonBlocking = count($keys) > 1;
+            $wouldblock  = null;
 
             // read items
-            foreach ($normalizedKeys as $i => $normalizedKey) {
-                if (!$this->internalHasItem($normalizedKey, $normalizedOptions)) {
-                    unset($normalizedKeys[$i]);
+            foreach ($keys as $i => $key) {
+                if (!$this->internalHasItem($key, $options)) {
+                    unset($keys[$i]);
                     continue;
                 }
 
-                $filespec = $this->getFileSpec($normalizedKey, $normalizedOptions);
-                $data     = $this->getFileContent($filespec . '.dat', $wouldblock);
-                if ($data === false) {
+                $filespec = $this->getFileSpec($key, $options);
+                $data     = $this->getFileContent($filespec . '.dat', $nonBlocking, $wouldblock);
+                if ($nonBlocking && $wouldblock) {
                     continue;
                 } else {
-                    unset($normalizedKeys[$i]);
+                    unset($keys[$i]);
                 }
 
                 if ($baseOptions->getReadControl()) {
@@ -271,13 +262,11 @@ class Filesystem extends AbstractAdapter
                     }
                 }
 
-                $result[$normalizedKey] = $data;
+                $result[$key] = $data;
             }
 
-            // no more items to read
-            if (!$normalizedKeys) {
-                break;
-            }
+            // Don't check ttl after first iteration
+            $options['ttl'] = 0;
         }
 
         return $result;
@@ -454,6 +443,72 @@ class Filesystem extends AbstractAdapter
         }
 
         return $metadata;
+    }
+
+    /**
+     * Internal method to get multiple metadata
+     *
+     * Options:
+     *  - ttl <int>
+     *    - The time-to-life
+     *  - namespace <string>
+     *    - The namespace to use
+     *
+     * @param  array $normalizedKeys
+     * @param  array $normalizedOptions
+     * @return array Associative array of existing cache ids and its metadata
+     * @throws Exception
+     */
+    protected function internalGetMetadatas(array & $normalizedKeys, array & $normalizedOptions)
+    {
+        $baseOptions = $this->getOptions();
+        $result      = array();
+
+        // Don't change arguments passed by reference
+        $keys    = $normalizedKeys;
+        $options = $normalizedOptions;
+
+        while ($keys) {
+
+            // LOCK_NB if more than one items have to read
+            $nonBlocking = count($keys) > 1;
+            $wouldblock  = null;
+
+            foreach ($keys as $i => $key) {
+                if (!$this->internalHasItem($key, $options)) {
+                    unset($keys[$i]);
+                    continue;
+                }
+
+                $filespec = $this->getFileSpec($key, $options);
+
+                $metadata = $this->readInfoFile($filespec . '.ifo', $nonBlocking, $wouldblock);
+                if ($nonBlocking && $wouldblock) {
+                    continue;
+                } elseif (!$metadata) {
+                    $metadata = array();
+                }
+
+                $metadata['filespec'] = $filespec;
+                $metadata['mtime']    = filemtime($filespec . '.dat');
+
+                if (!$baseOptions->getNoCtime()) {
+                    $metadata['ctime'] = filectime($filespec . '.dat');
+                }
+
+                if (!$baseOptions->getNoAtime()) {
+                    $metadata['atime'] = fileatime($filespec . '.dat');
+                }
+
+                $result[$key] = $metadata;
+                unset($keys[$i]);
+            }
+
+            // Don't check ttl after first iteration
+            $options['ttl'] = 0;
+        }
+
+        return $result;
     }
 
     /* writing */
@@ -687,23 +742,29 @@ class Filesystem extends AbstractAdapter
                 $oldUmask = umask($baseOptions->getFileUmask());
             }
 
-            $ret = $this->putFileContent($filespec . '.dat', $value);
-            if ($ret && $info) {
-                // Don't throw exception if writing of info file failed
-                // -> only return false
-                try {
-                    $ret = $this->putFileContent($filespec . '.ifo', serialize($info));
-                } catch (Exception\RuntimeException $e) {
-                    $ret = false;
-                }
+            $contents = array($filespec . '.dat' => $value);
+            if ($info) {
+                $contents[$filespec . '.ifo'] = serialize($info);
+            } else {
+                $this->unlink($filespec . '.ifo');
             }
 
-            $this->bufferKey = null;
+            while ($contents) {
+                $nonBlocking = count($contents) > 1;
+                $wouldblock  = null;
+
+                foreach ($contents as $file => $content) {
+                    $this->putFileContent($file, $content, $nonBlocking, $wouldblock);
+                    if (!$nonBlocking || !$wouldblock) {
+                        unset($contents[$file]);
+                    }
+                }
+            }
 
             // reset file_umask
             umask($oldUmask);
 
-            return $ret;
+            return true;
 
         } catch (Exception $e) {
             // reset umask on exception
@@ -874,9 +935,6 @@ class Filesystem extends AbstractAdapter
             );
         }
 
-        // remove the buffered info
-        $this->bufferKey = null;
-
         return true;
     }
 
@@ -960,7 +1018,6 @@ class Filesystem extends AbstractAdapter
         } else {
             $this->unlink($filespec . '.dat');
             $this->unlink($filespec . '.ifo');
-            $this->bufferKey = null;
         }
         return true;
     }
@@ -1452,39 +1509,39 @@ class Filesystem extends AbstractAdapter
     {
         $baseOptions = $this->getOptions();
         $prefix      = $normalizedOptions['namespace'] . $baseOptions->getNamespaceSeparator();
-        $bufferKey   = $prefix . $normalizedKey;
 
-        if ($this->bufferKey !== $bufferKey) {
-            $path  = $baseOptions->getCacheDir();
-            $level = $baseOptions->getDirLevel();
-            if ( $level > 0 ) {
-                // create up to 256 directories per directory level
-                $hash = md5($normalizedKey);
-                for ($i = 0, $max = ($level * 2); $i < $max; $i+= 2) {
-                    $path .= \DIRECTORY_SEPARATOR . $prefix . $hash[$i] . $hash[$i+1];
-                }
+        $path  = $baseOptions->getCacheDir();
+        $level = $baseOptions->getDirLevel();
+        if ( $level > 0 ) {
+            // create up to 256 directories per directory level
+            $hash = md5($normalizedKey);
+            for ($i = 0, $max = ($level * 2); $i < $max; $i+= 2) {
+                $path .= \DIRECTORY_SEPARATOR . $prefix . $hash[$i] . $hash[$i+1];
             }
-
-            $this->bufferedFilespec = $path . \DIRECTORY_SEPARATOR . $prefix . $normalizedKey;
         }
 
-        return $this->bufferedFilespec;
+        return $path . \DIRECTORY_SEPARATOR . $prefix . $normalizedKey;
     }
 
     /**
      * Read info file
      *
-     * @param string   $file
+     * @param  string  $file
+     * @param  boolean $nonBlocking Don't block script if file is locked
+     * @param  boolean $wouldblock  The optional argument is set to TRUE if the lock would block
      * @return array|boolean The info array or false if file wasn't found
      * @throws Exception\RuntimeException
      */
-    protected function readInfoFile($file)
+    protected function readInfoFile($file, $nonBlocking = false, & $wouldblock = null)
     {
         if (!file_exists($file)) {
             return false;
         }
 
-        $content = $this->getFileContent($file);
+        $content = $this->getFileContent($file, $nonBlocking, $wouldblock);
+        if ($nonBlocking && $wouldblock) {
+            return false;
+        }
 
         ErrorHandler::start();
         $ifo = unserialize($content);
@@ -1501,14 +1558,16 @@ class Filesystem extends AbstractAdapter
     /**
      * Read a complete file
      *
-     * @param  string  $file File complete path
-     * @param  boolean $wouldblock Return FALSE if the lock would block
-     * @return string|boolean
+     * @param  string  $file        File complete path
+     * @param  boolean $nonBlocking Don't block script if file is locked
+     * @param  boolean $wouldblock  The optional argument is set to TRUE if the lock would block
+     * @return string
      * @throws Exception\RuntimeException
      */
-    protected function getFileContent($file, $wouldblock = false)
+    protected function getFileContent($file, $nonBlocking = false, & $wouldblock = null)
     {
-        $locking = $this->getOptions()->getFileLocking();
+        $locking    = $this->getOptions()->getFileLocking();
+        $wouldblock = null;
 
         ErrorHandler::start();
 
@@ -1522,13 +1581,12 @@ class Filesystem extends AbstractAdapter
                 );
             }
 
-            if ($wouldblock) {
-                $wouldblock = null;
+            if ($nonBlocking) {
                 $lock = flock($fp, \LOCK_SH | \LOCK_NB, $wouldblock);
                 if ($wouldblock) {
                     fclose($fp);
                     ErrorHandler::stop();
-                    return false;
+                    return;
                 }
             } else {
                 $lock = flock($fp, \LOCK_SH);
@@ -1573,21 +1631,23 @@ class Filesystem extends AbstractAdapter
     /**
      * Write content to a file
      *
-     * @param  string  $file       File complete path
-     * @param  string  $data       Data to write
-     * @param  boolean $wouldblock Return FALSE if the lock would block
-     * @return boolean TRUE on success, FALSE if lock would block
+     * @param  string  $file        File complete path
+     * @param  string  $data        Data to write
+     * @param  boolean $nonBlocking Don't block script if file is locked
+     * @param  boolean $wouldblock  The optional argument is set to TRUE if the lock would block
+     * @return void
      * @throws Exception\RuntimeException
      */
-    protected function putFileContent($file, $data, $wouldblock = false)
+    protected function putFileContent($file, $data, $nonBlocking = false, & $wouldblock = null)
     {
-        $locking    = $this->getOptions()->getFileLocking();
-        $wouldblock = $locking && $wouldblock;
+        $locking     = $this->getOptions()->getFileLocking();
+        $nonBlocking = $locking && $nonBlocking;
+        $wouldblock  = null;
 
         ErrorHandler::start();
 
-        // file_put_contents can't used
-        if ($locking && $wouldblock) {
+        // if locking and non blocking is enabled -> file_put_contents can't used
+        if ($locking && $nonBlocking) {
             $fp = fopen($file, 'cb');
             if (!$fp) {
                 $err = ErrorHandler::stop();
@@ -1596,12 +1656,11 @@ class Filesystem extends AbstractAdapter
                 );
             }
 
-            $wouldblock = null;
             if(!flock($fp, \LOCK_EX | \LOCK_NB, $wouldblock)) {
                 fclose($fp);
                 $err = ErrorHandler::stop();
                 if ($wouldblock) {
-                    return false;
+                    return;
                 } else {
                     throw new Exception\RuntimeException("Error locking file '{$file}'", 0, $err);
                 }
@@ -1624,24 +1683,22 @@ class Filesystem extends AbstractAdapter
             flock($fp, \LOCK_UN);
             fclose($fp);
 
-        // file_put_contents can be used
+        // else -> file_put_contents can be used
         } else {
             $flags = 0;
             if ($locking) {
                 $flags = $flags | \LOCK_EX;
             }
 
-            $bytes = strlen($data);
-            if (file_put_contents($file, $data, $flags) !== $bytes) {
+            if (file_put_contents($file, $data, $flags) === false) {
                 $err = ErrorHandler::stop();
                 throw new Exception\RuntimeException(
-                    "Error putting {$bytes} bytes to file '{$file}'", 0, $err
+                    "Error writing file '{$file}'", 0, $err
                 );
             }
         }
 
         ErrorHandler::stop();
-        return true;
     }
 
     /**

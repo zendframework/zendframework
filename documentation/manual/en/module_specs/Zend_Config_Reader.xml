@@ -18,10 +18,19 @@
                 <classname>Zend\Config\Reader\Ini</classname>
             </para>
         </listitem>
-
         <listitem>
             <para>
                 <classname>Zend\Config\Reader\Xml</classname>
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <classname>Zend\Config\Reader\Json</classname>
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <classname>Zend\Config\Reader\Yaml</classname>
             </para>
         </listitem>
     </itemizedlist>
@@ -154,8 +163,7 @@ database.@include = 'database.ini'
                 
         <para>
             The following example illustrates a basic use of <classname>Zend\Config\Reader\Xml</classname> for
-            loading configuration data from an <acronym>XML</acronym> file. In this example there
-            are configuration data for both a production system and for a staging system.
+            loading configuration data from an <acronym>XML</acronym> file. 
             Suppose we have the following <acronym>XML</acronym> configuration file:
         </para>
         
@@ -230,6 +238,173 @@ echo $data['database']['params']['dbname'];  // prints "dbproduction"
         <para>
             The syntax to include an XML file in a specific element is <command>&lt;xi:include href="file-to-include.xml"/&gt;</command>
         </para>
+        
+    </section>
+    
+    <section xml:id="zend.config.reader.json">
+        <info><title>Zend\Config\Reader\Json</title></info>
+        
+        <para>
+            <classname>Zend\Config\Reader\Json</classname> enables developers to read configuration data in a
+            <acronym>JSON</acronym> format and read them in the application by using an array syntax.
+        </para>
+                
+        <para>
+            The following example illustrates a basic use of <classname>Zend\Config\Reader\Json</classname> for
+            loading configuration data from a <acronym>JSON</acronym> file. 
+            Suppose we have the following <acronym>JSON</acronym> configuration file:
+        </para>
+        
+        <programlisting language="json"><![CDATA[
+{ 
+  "webhost"  : "www.example.com",
+  "database" : {
+    "adapter" : "pdo_mysql",
+    "params"  : {
+      "host"     : "db.example.com",
+      "username" : "dbuser",
+      "password" : "secret",
+      "dbname"   : "dbproduction"
+    }
+  }
+}
+]]></programlisting>
+        
+        <para>
+            We can use the <classname>Zend\Config\Reader\>Json</classname> to read this JSON file:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$reader = new Zend\Config\Reader\Json();
+$data   = $reader->fromFile('/path/to/config.json');
+
+echo $data['webhost']  // prints "www.example.com"
+echo $data['database']['params']['dbname'];  // prints "dbproduction"
+]]></programlisting>
+        
+        <para>
+            <classname>Zend\Config\Reader\Json</classname> utilizes the <link linkend="zend.json.introduction"><classname>Zend\Json\Json</classname></link>
+            class. 
+        </para>
+        
+        <para>
+            Using <classname>Zend\Config\Reader\Json</classname> we can include the content of a JSON file
+            in a specific JSON section or element. This is provided using the special syntax <command>@include</command>.
+            Suppose we have a JSON file that contains only the database configuration:
+        </para>
+        
+        <programlisting language="json"><![CDATA[
+{
+  "database" : {
+    "adapter" : "pdo_mysql",
+    "params"  : {
+      "host"     : "db.example.com",
+      "username" : "dbuser",
+      "password" : "secret",
+      "dbname"   : "dbproduction"
+    }
+  }
+}   
+]]></programlisting>
+        
+         <para>
+            We can include this configuration in another JSON file, for instance:
+        </para>
+               
+        <programlisting language="json"><![CDATA[
+{
+    "webhost"  : "www.example.com",
+    "@include" : "database.json"
+}    
+]]></programlisting>
+        
+    </section>
+    
+    <section xml:id="zend.config.reader.yaml">
+        <info><title>Zend\Config\Reader\Yaml</title></info>
+        
+        <para>
+            <classname>Zend\Config\Reader\Yaml</classname> enables developers to read configuration data in a
+            <acronym>YAML</acronym> format and read them in the application by using an array syntax.
+            In order to use the YAML reader we need to pass a callback to an external PHP library or use the
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/manual/en/book.yaml.php">Yaml PECL extension</link>.
+        </para>
+                
+        <para>
+            The following example illustrates a basic use of <classname>Zend\Config\Reader\Yaml</classname> 
+            that use the Yaml PECL extension. 
+            Suppose we have the following <acronym>YAML</acronym> configuration file:
+        </para>
+        
+        <programlisting language="yaml"><![CDATA[
+webhost: www.example.com
+database:
+    adapter: pdo_mysql
+    params:
+      host:     db.example.com
+      username: dbuser
+      password: secret
+      dbname:   dbproduction
+]]></programlisting>
+        
+        <para>
+            We can use the <classname>Zend\Config\Reader\Yaml</classname> to read this YAML file:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$reader = new Zend\Config\Reader\Yaml();
+$data   = $reader->fromFile('/path/to/config.yaml');
+
+echo $data['webhost']  // prints "www.example.com"
+echo $data['database']['params']['dbname'];  // prints "dbproduction"
+]]></programlisting>
+        
+        <para>
+            If you want to use an external YAML reader you have to pass the callback function
+            in the constructor of the class. For instance, if you want to use the
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://code.google.com/p/spyc/">Spyc</link> library:
+        </para>
+        
+        <programlisting language="php"><![CDATA[
+// include the Spyc library
+require_once ('path/to/spyc.php');
+ 
+$reader = new Zend\Config\Reader\Yaml(array('Spyc','YAMLLoadString'));
+$data   = $reader->fromFile('/path/to/config.yaml');
+
+echo $data['webhost']  // prints "www.example.com"
+echo $data['database']['params']['dbname'];  // prints "dbproduction"
+]]></programlisting>
+
+        <para>
+            You can also instantiate the <classname>Zend\Config\Reader\Yaml</classname> without any parameter and
+            specify the YAML reader in a second moment using the <methodname>setYamlDecoder()</methodname> method.
+        </para>
+                
+        <para>
+            Using <classname>Zend\Config\ReaderYaml</classname> we can include the content of a YAML file
+            in a specific YAML section or element. This is provided using the special syntax <command>@include</command>.
+            Suppose we have a YAML file that contains only the database configuration:
+        </para>
+        
+        <programlisting language="yaml"><![CDATA[
+database:
+    adapter: pdo_mysql
+    params:
+      host:     db.example.com
+      username: dbuser
+      password: secret
+      dbname:   dbproduction
+]]></programlisting>
+        
+         <para>
+            We can include this configuration in another YAML file, for instance:
+        </para>
+               
+        <programlisting language="yaml"><![CDATA[
+webhost:  www.example.com
+@include: database.yaml
+]]></programlisting>
         
     </section>
     

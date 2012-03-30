@@ -38,7 +38,7 @@ class Input implements InputInterface
     protected $validatorChain;
     protected $value;
 
-    public function __construct($name)
+    public function __construct($name = null)
     {
         $this->name = $name;
     }

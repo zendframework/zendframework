@@ -107,6 +107,19 @@ class CompilerDefinition implements Definition
             }
         }
 
+        $rTarget = $rClass;
+        $supertypes = array();
+        do {
+            $supertypes = array_merge($supertypes, $rTarget->getInterfaceNames());
+            if (!($rTargetParent = $rTarget->getParentClass())) {
+                break;
+            }
+            $supertypes[] = $rTargetParent->getName();
+            $rTarget = $rTargetParent;
+        } while (true);
+
+        $def['supertypes'] = $supertypes;
+
         if ($def['instantiator'] == null) {
             if ($rClass->isInstantiable()) {
                 $def['instantiator'] = '__construct';

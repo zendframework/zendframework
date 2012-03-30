@@ -1084,7 +1084,7 @@ class Client implements Dispatchable
 
 
     /**
-     * Prepare the request body (for POST, PUT, and PATCH requests)
+     * Prepare the request body (for PATCH, POST and PUT requests)
      *
      * @return string
      * @throws \Zend\Http\Client\Exception

@@ -494,7 +494,6 @@ class Request extends Message implements RequestDescription
     }
 
     /**
-<<<<<<< HEAD
      * Is the request a Javascript XMLHttpRequest?
      *
      * Should work with Prototype/Script.aculo.us, possibly others.

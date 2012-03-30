@@ -22,6 +22,7 @@
 namespace ZendTest\InputFilter;
 
 use PHPUnit_Framework_TestCase as TestCase;
+use Zend\InputFilter\Input;
 use Zend\InputFilter\InputFilter;
 use Zend\Filter;
 use Zend\Validator;
@@ -37,121 +38,12 @@ class InputFilterTest extends TestCase
     public function testAddingInputsIncreasesCountOfFilter()
     {
         $filter = new InputFilter();
-        $filter->add('foo');
+        $foo    = new Input('foo');
+        $filter->add($foo);
         $this->assertEquals(1, count($filter));
-        $filter->add('bar');
+        $bar    = new Input('bar');
+        $filter->add($bar);
         $this->assertEquals(2, count($filter));
-    }
-
-    public function testAddingAnInputCreatesAnEmptyValidatorChain()
-    {
-        $filter = new InputFilter();
-        $filter->add('foo');
-        $input      = $filter->get('foo');
-        $validators = $input->getValidatorChain();
-        $this->assertInstanceOf('Zend\Validator\ValidatorChain', $validators);
-        $this->assertEquals(0, count($validators));
-    }
-
-    public function testAddingAnInputCreatesAnEmptyFilterChain()
-    {
-        $filter = new InputFilter();
-        $filter->add('foo');
-        $input   = $filter->get('foo');
-        $filters = $input->getFilterChain();
-        $this->assertInstanceOf('Zend\Filter\FilterChain', $filters);
-        $this->assertEquals(0, count($filters));
-    }
-
-    public function testCanAddInputWithValidatorChain()
-    {
-        $filter = new InputFilter();
-        $chain  = new Validator\ValidatorChain();
-        $filter->add('foo', $chain);
-        $input = $filter->get('foo');
-        $test  = $input->getValidatorChain();
-        $this->assertSame($chain, $test);
-    }
-
-    public function testCanAddInputWithFilterChain()
-    {
-        $filter = new InputFilter();
-        $chain  = new Filter\FilterChain();
-        $filter->add('foo', $chain);
-        $input = $filter->get('foo');
-        $test  = $input->getFilterChain();
-        $this->assertSame($chain, $test);
-    }
-
-    public function testCanAddInputWithBothFilterAndValidatorChains()
-    {
-        $filter     = new InputFilter();
-        $validators = new Validator\ValidatorChain();
-        $filters    = new Filter\FilterChain();
-        $filter->add('foo', $filters, $validators);
-        $input = $filter->get('foo');
-        $test  = $input->getFilterChain();
-        $this->assertSame($filters, $test);
-        $test  = $input->getValidatorChain();
-        $this->assertSame($validators, $test);
-    }
-
-    public function testCanAddInputWithBothFilterAndValidatorChainsAndOrderOfArgumentsDoesNotMatter()
-    {
-        $filter     = new InputFilter();
-        $validators = new Validator\ValidatorChain();
-        $filters    = new Filter\FilterChain();
-        $filter->add('foo', $validators, $filters);
-        $input = $filter->get('foo');
-        $test  = $input->getFilterChain();
-        $this->assertSame($filters, $test);
-        $test  = $input->getValidatorChain();
-        $this->assertSame($validators, $test);
-    }
-
-    public function testCanAddConcreteInputToInputFilter()
-    {
-        $this->markTestIncomplete();
-    }
-
-    public function testUsesFrameworkFilterBrokerByDefault()
-    {
-        $this->markTestIncomplete();
-    }
-
-    public function testCanInjectAFilterBroker()
-    {
-        $this->markTestIncomplete();
-    }
-
-    public function testInjectedFilterBrokerIsInjectedIntoAllInputsCreatedByInputFilter()
-    {
-        $this->markTestIncomplete();
-    }
-
-    public function testInjectedFilterBrokerIsNotInjectedIntoConcreteInputsAddedToInputFilter()
-    {
-        $this->markTestIncomplete();
-    }
-
-    public function testUsesFrameworkValidatorBrokerByDefault()
-    {
-        $this->markTestIncomplete();
-    }
-
-    public function testCanInjectAValidatorBroker()
-    {
-        $this->markTestIncomplete();
-    }
-
-    public function testInjectedValidatorBrokerIsInjectedIntoAllInputsCreatedByInputFilter()
-    {
-        $this->markTestIncomplete();
-    }
-
-    public function testInjectedValidatorBrokerIsNotInjectedIntoConcreteInputsAddedToInputFilter()
-    {
-        $this->markTestIncomplete();
     }
 
     public function testCanAddInputFilterAsInput()
@@ -185,6 +77,11 @@ class InputFilterTest extends TestCase
     }
 
     public function testCanGetRawInputValues()
+    {
+        $this->markTestIncomplete();
+    }
+
+    public function testCanGetValidationMessages()
     {
         $this->markTestIncomplete();
     }

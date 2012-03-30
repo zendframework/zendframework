@@ -385,7 +385,7 @@ class HelloController extends ActionController
     <programlisting language="php"><![CDATA[
 <h1>Greetings!</h1>
 
-<p>You said "<?php echo $this->escape($foo) ?>".</p>
+<p>You said "<?php echo $this->escape($message) ?>".</p>
 ]]></programlisting>
 
     <para>

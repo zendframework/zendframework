@@ -440,7 +440,7 @@ return array(
                 'parameters' => array(
                     'routes' => array(
                         '<module name>-hello-world' => array(
-                            'type'    => `Zend\Mvc\Router\Http\Literal`,
+                            'type'    => 'Zend\Mvc\Router\Http\Literal',
                                 'options' => array(
                                 'route' => '/hello/world',
                                 'defaults' => array(

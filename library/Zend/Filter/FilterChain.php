@@ -20,7 +20,8 @@
 
 namespace Zend\Filter;
 
-use Zend\Loader\Broker,
+use Countable,
+    Zend\Loader\Broker,
     Zend\Stdlib\SplPriorityQueue;
 
 /**
@@ -29,7 +30,7 @@ use Zend\Loader\Broker,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class FilterChain extends AbstractFilter
+class FilterChain extends AbstractFilter implements Countable
 {
     /**
      * Default priority at which filters are added
@@ -99,6 +100,16 @@ class FilterChain extends AbstractFilter
         }
 
         return $this;
+    }
+
+    /**
+     * Return the count of attached filters
+     * 
+     * @return int
+     */
+    public function count()
+    {
+        return count($this->filters);
     }
 
     /**

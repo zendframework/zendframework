@@ -48,11 +48,12 @@ abstract class Glob
      * @see    http://docs.php.net/glob
      * @param  string  $pattern
      * @param  integer $flags
+     * @param  boolean $forceFallback
      * @return array|false
      */
-    public static function glob($pattern, $flags)
+    public static function glob($pattern, $flags, $forceFallback = false)
     {
-        if (!defined('GLOB_BRACE')) {
+        if (!defined('GLOB_BRACE') || $forceFallback) {
             return self::fallbackGlob($pattern, $flags);
         } else {
             return self::systemGlob($pattern, $flags);
@@ -107,14 +108,33 @@ abstract class Glob
         }
         
         $flags &= ~self::GLOB_BRACE;
+        $length = strlen($pattern);
         $paths  = array();
-        $begin  = strstr($pattern, '{');
+        
+        if ($flags & self::GLOB_NOESCAPE) {
+            $begin = strpos($pattern, '{');
+        } else {
+            $begin = 0;
+            
+            while (true) {
+                if ($begin === $length) {
+                    $begin = false;
+                    break;
+                } else if ($pattern[$begin] === '\\' && ($begin + 1) < $length) {
+                    $begin++;
+                } else if ($pattern[$begin] === '{') {
+                    break;
+                }
+                
+                $begin++;
+            }
+        }
 
         if ($begin === false) {
             return self::systemGlob($pattern, $flags);
         }
         
-        $next = self::nextBraceSub($pattern, $begin);
+        $next = self::nextBraceSub($pattern, $begin + 1, $flags);
 
         if ($next === null) {
             return self::systemGlob($pattern, $flags);
@@ -123,76 +143,67 @@ abstract class Glob
         $rest = $next;
 
         while ($pattern[$rest] !== '}') {
-            $rest = self::nextBraceSub($pattern, $rest + 1);
+            $rest = self::nextBraceSub($pattern, $rest + 1, $flags);
 
             if ($rest === null) {
                 return self::systemGlob($pattern, $flags);
             }
         }
 
-        $p = $being + 1;
+        $p = $begin + 1;
 
-        while (true) {
-            if ($pattern[$next] === '}') {
-                break;
-            }
+        while (true) {           
+            $subPattern = substr($pattern, 0, $begin)
+                        . substr($pattern, $p, $next - $p)
+                        . substr($pattern, $rest + 1);
 
-            $result = self::fallbackGlob($pattern, $flags);
+            $result = self::fallbackGlob($subPattern, $flags | self::GLOB_BRACE);
 
             if ($result) {
                 $paths = array_merge($paths, $result);
             }
+            
+            if ($pattern[$next] === '}') {
+                break;
+            }
 
             $p    = $next + 1;
-            $next = self::nextBraceSub($pattern, $p);
+            $next = self::nextBraceSub($pattern, $p, $flags);
         }
         
-        return $paths;
+        return array_unique($paths);
     }
     
     /**
      * Find the end of the sub-pattern in a brace expression.
      * 
-     * @param  string $pattern
+     * @param  string  $pattern
      * @param  integer $begin
+     * @param  integer $flags
      * @return integer|null 
      */
-    protected static function nextBraceSub($pattern, $begin)
+    protected static function nextBraceSub($pattern, $begin, $flags)
     {
         $length  = strlen($pattern);
         $depth   = 0;
         $current = $begin;
-        
-        while (true) {
-            if ($depth === 0) {
-                if ($pattern[$current] !== ',' && $current < $length) {
-                    if ($pattern[$current] === '{') {
-                        $depth++;
-                    }
-                    
-                    $current++;
-                    continue;
-                }
-            } else {
-                while ($current < $length && $pattern[$current] !== '}' || $depth > 0) {
-                    if ($pattern['current'] === '}') {
-                        $depth--;
-                    }
-                    
-                    $current++;
+
+        while ($current < $length) {
+            if (!$flags & self::GLOB_NOESCAPE && $pattern[$current] === '\\') {
+                if (++$current === $length) {
+                    break;
                 }
                 
-                if ($current >= $length) {
-                    // An incorrectly terminated brace expression.
-                    return null;
+                $current++;
+            } else {               
+                if (($pattern[$current] === '}' && $depth-- === 0) || ($pattern[$current] === ',' && $depth === 0)) {
+                    break;
+                } else if ($pattern[$current++] === '{') {
+                    $depth++;
                 }
-                
-                continue;
             }
-            
-            break;
         }
-        
-        return $current;
+
+        return ($current < $length ? $current : null);
     }
 }

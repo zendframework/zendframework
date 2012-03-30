@@ -202,7 +202,7 @@ class Response extends Message implements ResponseDescription
         while ($lines) {
             $nextLine = array_shift($lines);
 
-            if ($nextLine == '') {
+            if ($isHeader && $nextLine == '') {
                 $isHeader = false;
                 continue;
             }

@@ -262,9 +262,9 @@ class DbTable
      * @param string $name
      * @return boolean
      */
-    public function open($save_path, $name)
+    public function open($savePath, $name)
     {
-        $this->_sessionSavePath = $save_path;
+        $this->_sessionSavePath = $savePath;
         $this->_sessionName     = $name;
 
         return true;

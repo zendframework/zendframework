@@ -514,7 +514,8 @@ class Imap extends AbstractStorage implements MailFolder, Writable
      * @return null
      * @throws \Zend\Mail\Storage\Exception
      */
-    public function moveMessage($id, $folder) {
+    public function moveMessage($id, $folder)
+    {
         $this->copyMessage($id, $folder);
         $this->removeMessage($id);
     }

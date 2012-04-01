@@ -210,7 +210,7 @@ class Test implements HttpAdapter
     {
          if ($response instanceof Response) {
             $response = $response->toString();
-        }
+         }
 
         $this->responses[] = $response;
     }

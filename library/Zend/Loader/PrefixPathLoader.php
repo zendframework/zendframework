@@ -458,7 +458,7 @@ class PrefixPathLoader implements ShortNameLocator, PrefixPathMapper
      */
     protected function formatPrefix($prefix, $namespaced = true)
     {
-        if($prefix == "") {
+        if ($prefix == "") {
             return $prefix;
         }
 

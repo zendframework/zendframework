@@ -506,7 +506,7 @@ class Client implements Dispatchable
         if (is_array($cookies)) {
             $this->clearCookies();
             foreach ($cookies as $name => $value) {
-                $this->addCookie($name,$value);
+                $this->addCookie($name, $value);
             }
         } else {
             throw new Exception\InvalidArgumentException('Invalid cookies passed as parameter, it must be an array');
@@ -607,7 +607,7 @@ class Client implements Dispatchable
     {
         $this->streamName = $this->config['outputstream'];
 
-        if(!is_string($this->streamName)) {
+        if (!is_string($this->streamName)) {
             // If name is not given, create temp name
             $this->streamName = tempnam(
                 isset($this->config['streamtmpdir']) ? $this->config['streamtmpdir'] : sys_get_temp_dir(),
@@ -696,9 +696,9 @@ class Client implements Dispatchable
                      $ha2 = md5($this->getMethod() . ':' . $this->getUri()->getPath() . ':' . md5($entityBody));
                 }
                 if (empty($digest['qop'])) {
-                    $response = md5 ($ha1 . ':' . $digest['nonce'] . ':' . $ha2);
+                    $response = md5($ha1 . ':' . $digest['nonce'] . ':' . $ha2);
                 } else {
-                    $response = md5 ($ha1 . ':' . $digest['nonce'] . ':' . $digest['nc']
+                    $response = md5($ha1 . ':' . $digest['nonce'] . ':' . $digest['nc']
                                     . ':' . $digest['cnonce'] . ':' . $digest['qoc'] . ':' . $ha2);
                 }
                 break;
@@ -783,7 +783,7 @@ class Client implements Dispatchable
                         $queryString = str_replace('+', '%20', $queryString);
                     }
 
-                    if (strpos($newUri,'?') !== false) {
+                    if (strpos($newUri, '?') !== false) {
                         $newUri .= '&' . $queryString;
                     } else {
                         $newUri .= '?' . $queryString;
@@ -804,7 +804,7 @@ class Client implements Dispatchable
             $body = $this->prepareBody();
 
             // headers
-            $headers = $this->prepareHeaders($body,$uri);
+            $headers = $this->prepareHeaders($body, $uri);
 
             $secure = $uri->getScheme() == 'https';
 
@@ -815,7 +815,7 @@ class Client implements Dispatchable
             }
 
             // check that adapter supports streaming before using it
-            if(is_resource($body) && !($this->adapter instanceof Client\Adapter\Stream)) {
+            if (is_resource($body) && !($this->adapter instanceof Client\Adapter\Stream)) {
                 throw new Client\Exception\RuntimeException('Adapter does not support streaming');
             }
 
@@ -833,7 +833,7 @@ class Client implements Dispatchable
                 $this->lastRawResponse = null;
             }
 
-            if($this->config['outputstream']) {
+            if ($this->config['outputstream']) {
                 $streamMetaData = stream_get_meta_data($stream);
                 if ($streamMetaData['seekable']) {
                     rewind($stream);
@@ -842,7 +842,7 @@ class Client implements Dispatchable
                 $this->adapter->setOutputStream(null);
                 $response = Response\Stream::fromStream($response, $stream);
                 $response->setStreamName($this->streamName);
-                if(!is_string($this->config['outputstream'])) {
+                if (!is_string($this->config['outputstream'])) {
                     // we used temp name, will need to clean up
                     $response->setCleanup(true);
                 }
@@ -888,7 +888,7 @@ class Client implements Dispatchable
                     $this->getUri()->setQuery($query);
 
                     // Else, if we got just an absolute path, set it
-                    if(strpos($location, '/') === 0) {
+                    if (strpos($location, '/') === 0) {
                         $this->getUri()->setPath($location);
                         // Else, assume we have a relative path
                     } else {
@@ -962,7 +962,7 @@ class Client implements Dispatchable
     {
         $file = $this->getRequest()->file()->get($filename);
         if (!empty($file)) {
-            $this->getRequest()->file()->set($filename,null);
+            $this->getRequest()->file()->set($filename, null);
             return true;
         }
         return false;
@@ -1235,8 +1235,7 @@ class Client implements Dispatchable
 
         $parameters = array();
 
-        foreach($parray as $name => $value) {
-
+        foreach ($parray as $name => $value) {
             // Calculate array key
             if ($prefix) {
                 if (is_int($name)) {
@@ -1276,8 +1275,8 @@ class Client implements Dispatchable
         // Open the connection, send the request and read the response
         $this->adapter->connect($uri->getHost(), $uri->getPort(), $secure);
 
-        if($this->config['outputstream']) {
-            if($this->adapter instanceof Client\Adapter\Stream) {
+        if ($this->config['outputstream']) {
+            if ($this->adapter instanceof Client\Adapter\Stream) {
                 $stream = $this->openTempStream();
                 $this->adapter->setOutputStream($stream);
             } else {

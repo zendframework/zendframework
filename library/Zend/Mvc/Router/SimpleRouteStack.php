@@ -146,7 +146,7 @@ class SimpleRouteStack implements RouteStack
             throw new Exception\InvalidArgumentException('addRoutes expects an array or Traversable set of routes');
         }
 
-        foreach($routes as $name => $route) {
+        foreach ($routes as $name => $route) {
             $this->addRoute($name, $route);
         }
 

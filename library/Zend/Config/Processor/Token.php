@@ -200,7 +200,7 @@ class Token implements Processor
             foreach ($this->tokens as $token => $value) {
                 $this->map[$this->prefix . $token . $this->suffix] = $value;
             }
-	}
+        }
     }
 
     /**
@@ -228,7 +228,7 @@ class Token implements Processor
             if ($val instanceof Config) {
                 $this->process($val);
             } else {
-                $config->$key = str_replace($keys,$values,$val);
+                $config->$key = str_replace($keys, $values, $val);
             }
         }
 
@@ -248,6 +248,6 @@ class Token implements Processor
         }
         $keys = array_keys($this->map);
         $values = array_values($this->map);
-        return str_replace($keys,$values,$value);
+        return str_replace($keys, $values, $value);
     }
 }

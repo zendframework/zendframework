@@ -31,7 +31,7 @@ use Zend\Ldap;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Ldap
  */
-abstract class AbstractOnlineTestCase extends TestCase
+abstract class AbstractOnlineTestCase extends AbstractTestCase
 {
     /**
      * @var Ldap\Ldap

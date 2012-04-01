@@ -32,7 +32,7 @@ use ZendTest\Ldap as TestLdap;
  * @group      Zend_Ldap
  * @group      Zend_Ldap_Node
  */
-class AttributeIterationTest extends TestLdap\TestCase
+class AttributeIterationTest extends TestLdap\AbstractTestCase
 {
     public function testSimpleIteration()
     {

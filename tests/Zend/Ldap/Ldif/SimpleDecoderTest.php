@@ -33,7 +33,7 @@ use Zend\Ldap\Ldif,
  * @group      Zend_Ldap
  * @group      Zend_Ldap_Ldif
  */
-class SimpleDecoderTest extends TestLdap\TestCase
+class SimpleDecoderTest extends TestLdap\AbstractTestCase
 {
     public function testDecodeSimpleSingleItem()
     {

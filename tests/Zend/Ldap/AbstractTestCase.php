@@ -31,7 +31,7 @@ use Zend\Ldap\Node;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Ldap
  */
-abstract class TestCase extends \PHPUnit_Framework_TestCase
+abstract class AbstractTestCase extends \PHPUnit_Framework_TestCase
 {
     /**
      * @return array

@@ -33,7 +33,7 @@ use Zend\Ldap,
  * @group      Zend_Ldap
  * @group      Zend_Ldap_Node
  */
-class OfflineTest extends TestLdap\TestCase
+class OfflineTest extends TestLdap\AbstractTestCase
 {
     protected function assertLocalDateTimeString($timestamp, $value)
     {

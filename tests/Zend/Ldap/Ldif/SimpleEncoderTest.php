@@ -33,7 +33,7 @@ use Zend\Ldap\Ldif,
  * @group      Zend_Ldap
  * @group      Zend_Ldap_Ldif
  */
-class SimpleEncoderTest extends TestLdap\TestCase
+class SimpleEncoderTest extends TestLdap\AbstractTestCase
 {
     public static function stringEncodingProvider()
     {

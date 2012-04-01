@@ -38,7 +38,7 @@ interface SaveHandler
      * @param string $save_path
      * @param string $name
      */
-    public function open($save_path, $name);
+    public function open($savePath, $name);
 
     /**
      * Close Session - free resources

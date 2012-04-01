@@ -390,7 +390,7 @@ class Http implements AuthenticationAdapter
                 break;
             case 'digest':
                 $result = $this->_digestAuth($authHeader);
-            break;
+                break;
             default:
                 throw new Exception\RuntimeException('Unsupported authentication scheme: ' . $clientScheme);
         }

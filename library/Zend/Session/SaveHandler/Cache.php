@@ -77,10 +77,10 @@ class Cache implements Savable
      * @param string $name
      * @return boolean
      */
-    public function open($save_path, $name)
+    public function open($savePath, $name)
     {
         // @todo figure out if we want to use these
-        $this->sessionSavePath = $save_path;
+        $this->sessionSavePath = $savePath;
         $this->sessionName     = $name;
 
         return true;

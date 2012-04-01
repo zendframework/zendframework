@@ -22,7 +22,7 @@
 namespace Zend\Ldap\Node;
 
 use Zend\Ldap,
-    Zend\Ldap\Exception\BadMethodCallException;
+    Zend\Ldap\Exception;
 
 /**
  * Zend\Ldap\Node\AbstractNode provides a bas eimplementation for LDAP nodes
@@ -73,7 +73,6 @@ abstract class AbstractNode implements \ArrayAccess, \Countable
     /**
      * @param  array   $data
      * @param  boolean $fromDataSource
-     * @throws Ldap\Exception\LdapException
      */
     protected function loadData(array $data, $fromDataSource)
     {
@@ -91,7 +90,7 @@ abstract class AbstractNode implements \ArrayAccess, \Countable
      *
      * @param  Ldap\Ldap $ldap
      * @return AbstractNode Provides a fluid interface
-     * @throws Ldap\Exception\LdapException
+     * @throws Exception\LdapException
      */
     public function reload(Ldap\Ldap $ldap = null)
     {
@@ -99,6 +98,7 @@ abstract class AbstractNode implements \ArrayAccess, \Countable
             $data = $ldap->getEntry($this->_getDn(), array('*', '+'), true);
             $this->loadData($data, true);
         }
+
         return $this;
     }
 
@@ -325,7 +325,7 @@ abstract class AbstractNode implements \ArrayAccess, \Countable
      * @param  string  $name
      * @param  integer $index
      * @return mixed
-     * @throws Ldap\Exception\LdapException
+     * @throws Exception\LdapException
      */
     public function getAttribute($name, $index = null)
     {
@@ -345,7 +345,7 @@ abstract class AbstractNode implements \ArrayAccess, \Countable
      * @param  string  $name
      * @param  integer $index
      * @return array|integer
-     * @throws Ldap\Exception\LdapException
+     * @throws Exception\LdapException
      */
     public function getDateTimeAttribute($name, $index = null)
     {
@@ -360,11 +360,11 @@ abstract class AbstractNode implements \ArrayAccess, \Countable
      * @param  string $name
      * @param  mixed  $value
      * @return null
-     * @throws BadMethodCallException
+     * @throws Exceptipn\BadMethodCallException
      */
     public function __set($name, $value)
     {
-        throw new BadMethodCallException();
+        throw new Exception\BadMethodCallException();
     }
 
     /**
@@ -374,7 +374,7 @@ abstract class AbstractNode implements \ArrayAccess, \Countable
      *
      * @param  string $name
      * @return array
-     * @throws Ldap\Exception\LdapException
+     * @throws Exception\LdapException
      */
     public function __get($name)
     {
@@ -390,11 +390,11 @@ abstract class AbstractNode implements \ArrayAccess, \Countable
      *
      * @param  string $name
      * @return null
-     * @throws BadMethodCallException
+     * @throws Exception\BadMethodCallException
      */
     public function __unset($name)
     {
-        throw new BadMethodCallException();
+        throw new Exception\BadMethodCallException();
     }
 
     /**
@@ -419,11 +419,11 @@ abstract class AbstractNode implements \ArrayAccess, \Countable
      * @param  string $name
      * @param  mixed  $value
      * @return null
-     * @throws BadMethodCallException
+     * @throws Exception\BadMethodCallException
      */
     public function offsetSet($name, $value)
     {
-        throw new BadMethodCallException();
+        throw new Exception\BadMethodCallException();
     }
 
     /**
@@ -434,7 +434,7 @@ abstract class AbstractNode implements \ArrayAccess, \Countable
      *
      * @param  string $name
      * @return array
-     * @throws Ldap\Exception\LdapException
+     * @throws Exception\LdapException
      */
     public function offsetGet($name)
     {
@@ -451,11 +451,11 @@ abstract class AbstractNode implements \ArrayAccess, \Countable
      *
      * @param  string $name
      * @return null
-     * @throws BadMethodCallException
+     * @throws Exception\BadMethodCallException
      */
     public function offsetUnset($name)
     {
-        throw new BadMethodCallException();
+        throw new Exception\BadMethodCallException();
     }
 
     /**

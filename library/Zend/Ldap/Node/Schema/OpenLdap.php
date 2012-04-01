@@ -454,13 +454,16 @@ class OpenLdap extends Node\Schema
                     // this creates the list of values and cycles through the tokens
                     // until the end of the list is reached ')'
                     $data[$token] = array();
-                    while ($tmp = array_shift($tokens)) {
+
+                    $tmp = array_shift($tokens);
+                    while ($tmp) {
                         if ($tmp == ')') {
                             break;
                         }
                         if ($tmp != '$') {
                             $data[$token][] = Ldap\Attribute::convertFromLdapValue($tmp);
                         }
+                        $tmp = array_shift($tokens);
                     }
                 } else {
                     $data[$token] = Ldap\Attribute::convertFromLdapValue($data[$token]);
@@ -484,7 +487,7 @@ class OpenLdap extends Node\Schema
         $tokens  = array();
         $matches = array();
         // this one is taken from PEAR::Net_LDAP2
-        $pattern = "/\s* (?:([()]) | ([^'\s()]+) | '((?:[^']+|'[^\s)])*)') \s*/x";
+        $pattern = "/\\s* (?:([()]) | ([^'\\s()]+) | '((?:[^']+|'[^\\s)])*)') \\s*/x";
         preg_match_all($pattern, $value, $matches);
         $cMatches = count($matches[0]);
         $cPattern = count($matches);

@@ -21,7 +21,7 @@
 
 namespace Zend\Ldap\Node\Schema;
 
-use Zend\Ldap\Exception\BadMethodCallException;
+use Zend\Ldap\Exception;
 
 /**
  * Zend\Ldap\Node\Schema\AbstractItem provides a base implementation for managing schema
@@ -101,7 +101,7 @@ abstract class AbstractItem implements \ArrayAccess, \Countable
     }
 
     /**
-     * Always throws BadMethodCallException
+     * Always throws Zend\Ldap\Exception\BadMethodCallException
      * Implements ArrayAccess.
      *
      * This method is needed for a full implementation of ArrayAccess
@@ -109,11 +109,11 @@ abstract class AbstractItem implements \ArrayAccess, \Countable
      * @param  string $name
      * @param  mixed  $value
      * @return null
-     * @throws BadMethodCallException
+     * @throws Exception\BadMethodCallException
      */
     public function offsetSet($name, $value)
     {
-        throw new BadMethodCallException();
+        throw new Exception\BadMethodCallException();
     }
 
     /**
@@ -128,18 +128,18 @@ abstract class AbstractItem implements \ArrayAccess, \Countable
     }
 
     /**
-     * Always throws BadMethodCallException
+     * Always throws Zend\Ldap\Exception\BadMethodCallException
      * Implements ArrayAccess.
      *
      * This method is needed for a full implementation of ArrayAccess
      *
      * @param  string $name
      * @return null
-     * @throws BadMethodCallException
+     * @throws Exception\BadMethodCallException
      */
     public function offsetUnset($name)
     {
-        throw new BadMethodCallException();
+        throw new Exception\BadMethodCallException();
     }
 
     /**

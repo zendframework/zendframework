@@ -208,7 +208,7 @@ class Di implements DependencyInjection
 
         if ($injectionMethods || $supertypeInjectionMethods) {
             foreach ($injectionMethods as $injectionMethod => $methodIsRequired) {
-                if ($injectionMethod !== '__construct'){
+                if ($injectionMethod !== '__construct') {
                     $this->handleInjectionMethodForInstance($instance, $injectionMethod, $params, $alias, $methodIsRequired);
                 }
             }

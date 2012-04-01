@@ -70,7 +70,7 @@ abstract class AbstractFilter
      */
     public function addAnd($filter)
     {
-        $fa = func_get_args();
+        $fa   = func_get_args();
         $args = array_merge(array($this), $fa);
         return new AndFilter($args);
     }
@@ -83,7 +83,7 @@ abstract class AbstractFilter
      */
     public function addOr($filter)
     {
-        $fa = func_get_args();
+        $fa   = func_get_args();
         $args = array_merge(array($this), $fa);
         return new OrFilter($args);
     }
@@ -94,8 +94,8 @@ abstract class AbstractFilter
      * Any control characters with an ACII code < 32 as well as the characters with special meaning in
      * LDAP filters "*", "(", ")", and "\" (the backslash) are converted into the representation of a
      * backslash followed by two hex digits representing the hexadecimal value of the character.
-     * @see Net_LDAP2_Util::escape_filter_value() from Benedikt Hallinger <beni@php.net>
-     * @link http://pear.php.net/package/Net_LDAP2
+     * @see    Net_LDAP2_Util::escape_filter_value() from Benedikt Hallinger <beni@php.net>
+     * @link   http://pear.php.net/package/Net_LDAP2
      * @author Benedikt Hallinger <beni@php.net>
      *
      * @param  string|array $values Array of values to escape
@@ -103,14 +103,16 @@ abstract class AbstractFilter
      */
     public static function escapeValue($values = array())
     {
-        if (!is_array($values)) $values = array($values);
+        if (!is_array($values)) {
+            $values = array($values);
+        }
         foreach ($values as $key => $val) {
             // Escaping of filter meta characters
             $val = str_replace(array('\\', '*', '(', ')'), array('\5c', '\2a', '\28', '\29'), $val);
             // ASCII < 32 escaping
             $val = Ldap\Converter::ascToHex32($val);
             if (null === $val) {
-                $val = '\0';  // apply escaped "null" if string is empty
+                $val = '\0'; // apply escaped "null" if string is empty
             }
             $values[$key] = $val;
         }
@@ -121,8 +123,8 @@ abstract class AbstractFilter
      * Undoes the conversion done by {@link escapeValue()}.
      *
      * Converts any sequences of a backslash followed by two hex digits into the corresponding character.
-     * @see Net_LDAP2_Util::escape_filter_value() from Benedikt Hallinger <beni@php.net>
-     * @link http://pear.php.net/package/Net_LDAP2
+     * @see    Net_LDAP2_Util::escape_filter_value() from Benedikt Hallinger <beni@php.net>
+     * @link   http://pear.php.net/package/Net_LDAP2
      * @author Benedikt Hallinger <beni@php.net>
      *
      * @param  string|array $values Array of values to escape
@@ -130,7 +132,9 @@ abstract class AbstractFilter
      */
     public static function unescapeValue($values = array())
     {
-        if (!is_array($values)) $values = array($values);
+        if (!is_array($values)) {
+            $values = array($values);
+        }
         foreach ($values as $key => $value) {
             // Translate hex code into ascii
             $values[$key] = Ldap\Converter::hex32ToAsc($value);

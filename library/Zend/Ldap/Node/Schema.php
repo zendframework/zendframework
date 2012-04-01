@@ -48,7 +48,7 @@ class Schema extends AbstractNode
      */
     public static function create(Ldap\Ldap $ldap)
     {
-        $dn = $ldap->getRootDse()->getSchemaDn();
+        $dn   = $ldap->getRootDse()->getSchemaDn();
         $data = $ldap->getEntry($dn, array('*', '+'), true);
         switch ($ldap->getRootDse()->getServerType()) {
             case RootDse::SERVER_TYPE_ACTIVEDIRECTORY:

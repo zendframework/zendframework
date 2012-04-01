@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -111,8 +110,8 @@ class LdapException extends \Exception implements Exception
 
     /* internal error code constants */
 
-    const LDAP_X_DOMAIN_MISMATCH              = 0x7001;
-    const LDAP_X_EXTENSION_NOT_LOADED         = 0x7002;
+    const LDAP_X_DOMAIN_MISMATCH      = 0x7001;
+    const LDAP_X_EXTENSION_NOT_LOADED = 0x7002;
 
     /**
      * @param Ldap   $ldap A Zend\Ldap\Ldap object
@@ -122,13 +121,13 @@ class LdapException extends \Exception implements Exception
     public function __construct(Ldap $ldap = null, $str = null, $code = 0)
     {
         $errorMessages = array();
-        $message = '';
+        $message       = '';
         if ($ldap !== null) {
             $oldCode = $code;
             $message = $ldap->getLastError($code, $errorMessages) . ': ';
             if ($code === 0) {
                 $message = '';
-                $code = $oldCode;
+                $code    = $oldCode;
             }
         }
         if (empty($message)) {

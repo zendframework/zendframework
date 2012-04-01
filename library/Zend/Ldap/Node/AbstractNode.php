@@ -294,10 +294,15 @@ abstract class AbstractNode implements \ArrayAccess, \Countable
     {
         $name = strtolower($name);
         if (isset($this->currentData[$name])) {
-            if ($emptyExists) return true;
-            return count($this->currentData[$name])>0;
+            if ($emptyExists) {
+                return true;
+            }
+
+            return count($this->currentData[$name]) > 0;
         }
-        else return false;
+        else {
+            return false;
+        }
     }
 
     /**

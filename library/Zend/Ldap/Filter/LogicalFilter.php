@@ -21,6 +21,8 @@
 
 namespace Zend\Ldap\Filter;
 
+use Zend\Ldap\Filter\Exception;
+
 /**
  * Zend\Ldap\Filter\LogicalFilter provides a base implementation for a grouping filter.
  *
@@ -58,13 +60,14 @@ abstract class LogicalFilter extends AbstractFilter
     protected function __construct(array $subfilters, $symbol)
     {
         foreach ($subfilters as $key => $s) {
-            if (is_string($s)) $subfilters[$key] = new StringFilter($s);
-            else if (!($s instanceof AbstractFilter)) {
+            if (is_string($s)) {
+                $subfilters[$key] = new StringFilter($s);
+            } else if (!($s instanceof AbstractFilter)) {
                 throw new Exception\FilterException('Only strings or Zend\Ldap\Filter\AbstractFilter allowed.');
             }
         }
         $this->subfilters = $subfilters;
-        $this->symbol = $symbol;
+        $this->symbol     = $symbol;
     }
 
     /**
@@ -75,7 +78,7 @@ abstract class LogicalFilter extends AbstractFilter
      */
     public function addFilter(AbstractFilter $filter)
     {
-        $new = clone $this;
+        $new               = clone $this;
         $new->subfilters[] = $filter;
         return $new;
     }
@@ -88,7 +91,9 @@ abstract class LogicalFilter extends AbstractFilter
     public function toString()
     {
         $return = '(' . $this->symbol;
-        foreach ($this->subfilters as $sub) $return .= $sub->toString();
+        foreach ($this->subfilters as $sub) {
+            $return .= $sub->toString();
+        }
         $return .= ')';
         return $return;
     }

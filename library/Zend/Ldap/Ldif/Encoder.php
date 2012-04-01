@@ -54,7 +54,6 @@ class Encoder
      * Constructor.
      *
      * @param  array $options Additional options used during encoding
-     * @return void
      */
     protected function __construct(array $options = array())
     {
@@ -82,18 +81,18 @@ class Encoder
     protected function _decode($string)
     {
         $items = array();
-        $item = array();
-        $last = null;
+        $item  = array();
+        $last  = null;
         foreach (explode("\n", $string) as $line) {
-            $line = rtrim($line, "\x09\x0A\x0D\x00\x0B");
+            $line    = rtrim($line, "\x09\x0A\x0D\x00\x0B");
             $matches = array();
             if (substr($line, 0, 1) === ' ' && $last !== null) {
                 $last[2] .= substr($line, 1);
             } else if (substr($line, 0, 1) === '#') {
                 continue;
             } else if (preg_match('/^([a-z0-9;-]+)(:[:<]?\s*)([^:<]*)$/i', $line, $matches)) {
-                $name = strtolower($matches[1]);
-                $type = trim($matches[2]);
+                $name  = strtolower($matches[1]);
+                $type  = trim($matches[2]);
                 $value = $matches[3];
                 if ($last !== null) {
                     $this->pushAttribute($last, $item);
@@ -102,8 +101,8 @@ class Encoder
                     continue;
                 } else if (count($item) > 0 && $name === 'dn') {
                     $items[] = $item;
-                    $item = array();
-                    $last = null;
+                    $item    = array();
+                    $last    = null;
                 }
                 $last = array($name, $type, $value);
             } else if (trim($line) === '') {
@@ -114,7 +113,8 @@ class Encoder
             $this->pushAttribute($last, $item);
         }
         $items[] = $item;
-        return (count($items)>1) ? $items : $items[0];
+
+        return (count($items) > 1) ? $items : $items[0];
     }
 
     /**
@@ -125,8 +125,8 @@ class Encoder
      */
     protected function pushAttribute(array $attribute, array &$entry)
     {
-        $name = $attribute[0];
-        $type = $attribute[1];
+        $name  = $attribute[0];
+        $type  = $attribute[1];
         $value = $attribute[2];
         if ($type === '::') {
             $value = base64_decode($value);
@@ -150,6 +150,7 @@ class Encoder
     public static function encode($value, array $options = array())
     {
         $encoder = new self($options);
+
         return $encoder->_encode($value);
     }
 
@@ -169,6 +170,7 @@ class Encoder
         } else if ($value instanceof Ldap\Node) {
             return $value->toLdif($this->options);
         }
+
         return null;
     }
 
@@ -202,7 +204,7 @@ class Encoder
          *                ; any value <= 127 decimal except NUL, LF,
          *                ; and CR
          */
-        $unsafe_char      = array(0, 10, 13);
+        $unsafe_char = array(0, 10, 13);
 
         $base64 = false;
         for ($i = 0; $i < strlen($string); $i++) {
@@ -252,8 +254,8 @@ class Encoder
         }
 
         foreach ($value as $v) {
-            $base64 = null;
-            $v = $this->encodeString($v, $base64);
+            $base64    = null;
+            $v         = $this->encodeString($v, $base64);
             $attribute = $name . ':';
             if ($base64 === true) {
                 $attribute .= ': ' . $v;
@@ -265,6 +267,7 @@ class Encoder
             }
             $output .= $attribute . PHP_EOL;
         }
+
         return trim($output, PHP_EOL);
     }
 
@@ -278,10 +281,11 @@ class Encoder
      */
     protected function encodeAttributes(array $attributes)
     {
-        $string = '';
+        $string     = '';
         $attributes = array_change_key_case($attributes, CASE_LOWER);
         if (!$this->versionWritten && array_key_exists('dn', $attributes) && isset($this->options['version'])
-                && array_key_exists('objectclass', $attributes)) {
+            && array_key_exists('objectclass', $attributes)
+        ) {
             $string .= sprintf('version: %d', $this->options['version']) . PHP_EOL;
             $this->versionWritten = true;
         }
@@ -302,6 +306,7 @@ class Encoder
         foreach ($attributes as $key => $value) {
             $string .= $this->encodeAttribute($key, $value) . PHP_EOL;
         }
+
         return trim($string, PHP_EOL);
     }
 }

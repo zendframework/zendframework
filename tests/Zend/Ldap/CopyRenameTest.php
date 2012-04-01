@@ -64,31 +64,40 @@ class CopyRenameTest extends AbstractOnlineTestCase
         parent::setUp();
         $this->prepareLDAPServer();
 
-        $this->orgDn=$this->createDn('ou=OrgTest,');
-        $this->newDn=$this->createDn('ou=NewTest,');
-        $this->orgSubTreeDn=$this->createDn('ou=OrgSubtree,');
-        $this->newSubTreeDn=$this->createDn('ou=NewSubtree,');
-        $this->targetSubTreeDn=$this->createDn('ou=Target,');
+        $this->orgDn           = $this->createDn('ou=OrgTest,');
+        $this->newDn           = $this->createDn('ou=NewTest,');
+        $this->orgSubTreeDn    = $this->createDn('ou=OrgSubtree,');
+        $this->newSubTreeDn    = $this->createDn('ou=NewSubtree,');
+        $this->targetSubTreeDn = $this->createDn('ou=Target,');
 
-        $this->nodes=array(
-            $this->orgDn => array("objectClass" => "organizationalUnit", "ou" => "OrgTest"),
-            $this->orgSubTreeDn =>  array("objectClass" => "organizationalUnit", "ou" => "OrgSubtree"),
-            'ou=Subtree1,' . $this->orgSubTreeDn =>
-                array("objectClass" => "organizationalUnit", "ou" => "Subtree1"),
+        $this->nodes = array(
+            $this->orgDn        => array("objectClass" => "organizationalUnit",
+                                         "ou"          => "OrgTest"),
+            $this->orgSubTreeDn => array("objectClass" => "organizationalUnit",
+                                         "ou"          => "OrgSubtree"),
+            'ou=Subtree1,' . $this->orgSubTreeDn              =>
+            array("objectClass" => "organizationalUnit",
+                  "ou"          => "Subtree1"),
             'ou=Subtree11,ou=Subtree1,' . $this->orgSubTreeDn =>
-                array("objectClass" => "organizationalUnit", "ou" => "Subtree11"),
+            array("objectClass" => "organizationalUnit",
+                  "ou"          => "Subtree11"),
             'ou=Subtree12,ou=Subtree1,' . $this->orgSubTreeDn =>
-                array("objectClass" => "organizationalUnit", "ou" => "Subtree12"),
+            array("objectClass" => "organizationalUnit",
+                  "ou"          => "Subtree12"),
             'ou=Subtree13,ou=Subtree1,' . $this->orgSubTreeDn =>
-                array("objectClass" => "organizationalUnit", "ou" => "Subtree13"),
-            'ou=Subtree2,' . $this->orgSubTreeDn =>
-                array("objectClass" => "organizationalUnit", "ou" => "Subtree2"),
-            'ou=Subtree3,' . $this->orgSubTreeDn =>
-                array("objectClass" => "organizationalUnit", "ou" => "Subtree3"),
-            $this->targetSubTreeDn => array("objectClass" => "organizationalUnit", "ou" => "Target")
+            array("objectClass" => "organizationalUnit",
+                  "ou"          => "Subtree13"),
+            'ou=Subtree2,' . $this->orgSubTreeDn              =>
+            array("objectClass" => "organizationalUnit",
+                  "ou"          => "Subtree2"),
+            'ou=Subtree3,' . $this->orgSubTreeDn              =>
+            array("objectClass" => "organizationalUnit",
+                  "ou"          => "Subtree3"),
+            $this->targetSubTreeDn => array("objectClass" => "organizationalUnit",
+                                            "ou"          => "Target")
         );
 
-        $ldap=$this->getLDAP()->getResource();
+        $ldap = $this->getLDAP()->getResource();
         foreach ($this->nodes as $dn => $entry) {
             ldap_add($ldap, $dn, $entry);
         }
@@ -99,16 +108,21 @@ class CopyRenameTest extends AbstractOnlineTestCase
         if (!constant('TESTS_ZEND_LDAP_ONLINE_ENABLED')) {
             return;
         }
-        if ($this->getLDAP()->exists($this->newDn))
+        if ($this->getLDAP()->exists($this->newDn)) {
             $this->getLDAP()->delete($this->newDn, false);
-        if ($this->getLDAP()->exists($this->orgDn))
+        }
+        if ($this->getLDAP()->exists($this->orgDn)) {
             $this->getLDAP()->delete($this->orgDn, false);
-        if ($this->getLDAP()->exists($this->orgSubTreeDn))
+        }
+        if ($this->getLDAP()->exists($this->orgSubTreeDn)) {
             $this->getLDAP()->delete($this->orgSubTreeDn, true);
-        if ($this->getLDAP()->exists($this->newSubTreeDn))
+        }
+        if ($this->getLDAP()->exists($this->newSubTreeDn)) {
             $this->getLDAP()->delete($this->newSubTreeDn, true);
-        if ($this->getLDAP()->exists($this->targetSubTreeDn))
+        }
+        if ($this->getLDAP()->exists($this->targetSubTreeDn)) {
             $this->getLDAP()->delete($this->targetSubTreeDn, true);
+        }
 
 
         $this->cleanupLDAPServer();
@@ -117,11 +131,11 @@ class CopyRenameTest extends AbstractOnlineTestCase
 
     public function testSimpleLeafRename()
     {
-        $org=$this->getLDAP()->getEntry($this->orgDn, array(), true);
+        $org = $this->getLDAP()->getEntry($this->orgDn, array(), true);
         $this->getLDAP()->rename($this->orgDn, $this->newDn, false);
         $this->assertFalse($this->getLDAP()->exists($this->orgDn));
         $this->assertTrue($this->getLDAP()->exists($this->newDn));
-        $new=$this->getLDAP()->getEntry($this->newDn);
+        $new = $this->getLDAP()->getEntry($this->newDn);
         $this->assertEquals($org['objectclass'], $new['objectclass']);
         $this->assertEquals(array('NewTest'), $new['ou']);
     }
@@ -186,7 +200,8 @@ class CopyRenameTest extends AbstractOnlineTestCase
     public function testRenameEmulationTargetParentNotExists()
     {
         $this->getLDAP()->rename($this->orgDn, $this->createDn('ou=Test1,ou=ParentDoesNotExist,'),
-            false, true);
+            false, true
+        );
     }
 
     public function testSimpleLeafRenameEmulation()
@@ -252,8 +267,8 @@ class CopyRenameTest extends AbstractOnlineTestCase
 
     public function testSimpleLeafRenameWithDnObjects()
     {
-        $orgDn=Ldap\Dn::fromString($this->orgDn);
-        $newDn=Ldap\Dn::fromString($this->newDn);
+        $orgDn = Ldap\Dn::fromString($this->orgDn);
+        $newDn = Ldap\Dn::fromString($this->newDn);
 
         $this->getLDAP()->rename($orgDn, $newDn, false);
         $this->assertFalse($this->getLDAP()->exists($orgDn));
@@ -266,8 +281,8 @@ class CopyRenameTest extends AbstractOnlineTestCase
 
     public function testSimpleLeafMoveToSubtreeWithDnObjects()
     {
-        $orgDn=Ldap\Dn::fromString($this->orgDn);
-        $orgSubTreeDn=Ldap\Dn::fromString($this->orgSubTreeDn);
+        $orgDn        = Ldap\Dn::fromString($this->orgDn);
+        $orgSubTreeDn = Ldap\Dn::fromString($this->orgSubTreeDn);
 
         $this->getLDAP()->moveToSubtree($orgDn, $orgSubTreeDn, false);
         $this->assertFalse($this->getLDAP()->exists($orgDn));
@@ -276,8 +291,8 @@ class CopyRenameTest extends AbstractOnlineTestCase
 
     public function testSimpleLeafRenameEmulationWithDnObjects()
     {
-        $orgDn=Ldap\Dn::fromString($this->orgDn);
-        $newDn=Ldap\Dn::fromString($this->newDn);
+        $orgDn = Ldap\Dn::fromString($this->orgDn);
+        $newDn = Ldap\Dn::fromString($this->newDn);
 
         $this->getLDAP()->rename($orgDn, $newDn, false, true);
         $this->assertFalse($this->getLDAP()->exists($orgDn));
@@ -286,8 +301,8 @@ class CopyRenameTest extends AbstractOnlineTestCase
 
     public function testSimpleLeafCopyToSubtreeWithDnObjects()
     {
-        $orgDn=Ldap\Dn::fromString($this->orgDn);
-        $orgSubTreeDn=Ldap\Dn::fromString($this->orgSubTreeDn);
+        $orgDn        = Ldap\Dn::fromString($this->orgDn);
+        $orgSubTreeDn = Ldap\Dn::fromString($this->orgSubTreeDn);
 
         $this->getLDAP()->copyToSubtree($orgDn, $orgSubTreeDn, false);
         $this->assertTrue($this->getLDAP()->exists($orgDn));
@@ -296,8 +311,8 @@ class CopyRenameTest extends AbstractOnlineTestCase
 
     public function testSimpleLeafCopyWithDnObjects()
     {
-        $orgDn=Ldap\Dn::fromString($this->orgDn);
-        $newDn=Ldap\Dn::fromString($this->newDn);
+        $orgDn = Ldap\Dn::fromString($this->orgDn);
+        $newDn = Ldap\Dn::fromString($this->newDn);
 
         $this->getLDAP()->copy($orgDn, $newDn, false);
         $this->assertTrue($this->getLDAP()->exists($orgDn));
@@ -306,8 +321,8 @@ class CopyRenameTest extends AbstractOnlineTestCase
 
     public function testRecursiveRenameWithDnObjects()
     {
-        $orgSubTreeDn=Ldap\Dn::fromString($this->orgSubTreeDn);
-        $newSubTreeDn=Ldap\Dn::fromString($this->newSubTreeDn);
+        $orgSubTreeDn = Ldap\Dn::fromString($this->orgSubTreeDn);
+        $newSubTreeDn = Ldap\Dn::fromString($this->newSubTreeDn);
 
         $this->getLDAP()->rename($orgSubTreeDn, $newSubTreeDn, true);
         $this->assertFalse($this->getLDAP()->exists($orgSubTreeDn));
@@ -318,20 +333,22 @@ class CopyRenameTest extends AbstractOnlineTestCase
 
     public function testRecursiveMoveToSubtreeWithDnObjects()
     {
-        $orgSubTreeDn=Ldap\Dn::fromString($this->orgSubTreeDn);
-        $targetSubTreeDn=Ldap\Dn::fromString($this->targetSubTreeDn);
+        $orgSubTreeDn    = Ldap\Dn::fromString($this->orgSubTreeDn);
+        $targetSubTreeDn = Ldap\Dn::fromString($this->targetSubTreeDn);
 
         $this->getLDAP()->moveToSubtree($orgSubTreeDn, $targetSubTreeDn, true);
         $this->assertFalse($this->getLDAP()->exists($orgSubTreeDn));
         $this->assertTrue($this->getLDAP()->exists('ou=OrgSubtree,' . $targetSubTreeDn->toString()));
         $this->assertEquals(3, $this->getLDAP()->countChildren('ou=OrgSubtree,' . $targetSubTreeDn->toString()));
-        $this->assertEquals(3, $this->getLDAP()->countChildren('ou=Subtree1,ou=OrgSubtree,' . $targetSubTreeDn->toString()));
+        $this->assertEquals(3,
+            $this->getLDAP()->countChildren('ou=Subtree1,ou=OrgSubtree,' . $targetSubTreeDn->toString())
+        );
     }
 
     public function testRecursiveCopyToSubtreeWithDnObjects()
     {
-        $orgSubTreeDn=Ldap\Dn::fromString($this->orgSubTreeDn);
-        $targetSubTreeDn=Ldap\Dn::fromString($this->targetSubTreeDn);
+        $orgSubTreeDn    = Ldap\Dn::fromString($this->orgSubTreeDn);
+        $targetSubTreeDn = Ldap\Dn::fromString($this->targetSubTreeDn);
 
         $this->getLDAP()->copyToSubtree($orgSubTreeDn, $targetSubTreeDn, true);
         $this->assertTrue($this->getLDAP()->exists($orgSubTreeDn));
@@ -339,13 +356,15 @@ class CopyRenameTest extends AbstractOnlineTestCase
         $this->assertEquals(3, $this->getLDAP()->countChildren($orgSubTreeDn));
         $this->assertEquals(3, $this->getLDAP()->countChildren('ou=Subtree1,' . $orgSubTreeDn->toString()));
         $this->assertEquals(3, $this->getLDAP()->countChildren('ou=OrgSubtree,' . $targetSubTreeDn->toString()));
-        $this->assertEquals(3, $this->getLDAP()->countChildren('ou=Subtree1,ou=OrgSubtree,' . $targetSubTreeDn->toString()));
+        $this->assertEquals(3,
+            $this->getLDAP()->countChildren('ou=Subtree1,ou=OrgSubtree,' . $targetSubTreeDn->toString())
+        );
     }
 
     public function testRecursiveCopyWithDnObjects()
     {
-        $orgSubTreeDn=Ldap\Dn::fromString($this->orgSubTreeDn);
-        $newSubTreeDn=Ldap\Dn::fromString($this->newSubTreeDn);
+        $orgSubTreeDn = Ldap\Dn::fromString($this->orgSubTreeDn);
+        $newSubTreeDn = Ldap\Dn::fromString($this->newSubTreeDn);
 
         $this->getLDAP()->copy($orgSubTreeDn, $newSubTreeDn, true);
         $this->assertTrue($this->getLDAP()->exists($orgSubTreeDn));

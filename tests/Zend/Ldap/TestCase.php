@@ -21,7 +21,7 @@
 
 namespace ZendTest\Ldap;
 
-use Zend\Ldap;
+use Zend\Ldap\Node;
 
 /**
  * @category   Zend
@@ -38,7 +38,7 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
      */
     protected function createTestArrayData()
     {
-        $data=array(
+        $data = array(
             'dn'          => 'cn=name,dc=example,dc=org',
             'cn'          => array('name'),
             'host'        => array('a', 'b', 'c'),
@@ -50,10 +50,10 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @return Ldap\Node
+     * @return Node
      */
     protected function createTestNode()
     {
-        return Ldap\Node::fromArray($this->createTestArrayData(), true);
+        return Node::fromArray($this->createTestArrayData(), true);
     }
 }

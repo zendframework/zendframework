@@ -103,7 +103,7 @@ class Dn implements \ArrayAccess
      */
     public static function fromArray(array $dn, $caseFold = null)
     {
-         return new self($dn, $caseFold);
+        return new self($dn, $caseFold);
     }
 
     /**
@@ -258,8 +258,8 @@ class Dn implements \ArrayAccess
     {
         $this->assertIndex($index);
         self::assertRdn($value);
-        $first = array_slice($this->dn, 0, $index + 1);
-        $second = array_slice($this->dn, $index + 1);
+        $first    = array_slice($this->dn, 0, $index + 1);
+        $second   = array_slice($this->dn, $index + 1);
         $this->dn = array_merge($first, array($value), $second);
         return $this;
     }
@@ -291,7 +291,7 @@ class Dn implements \ArrayAccess
      */
     protected static function assertRdn(array $value)
     {
-        if (count($value)<1) {
+        if (count($value) < 1) {
             throw new Exception\LdapException(null, 'RDN Array is malformed: it must have at least one item');
         }
 
@@ -411,33 +411,33 @@ class Dn implements \ArrayAccess
      * @param  int $offset
      * @return array
      */
-     public function offsetGet($offset)
-     {
-         return $this->get($offset, 1, null);
-     }
+    public function offsetGet($offset)
+    {
+        return $this->get($offset, 1, null);
+    }
 
-     /**
-      * Proxy to {@see set()}
-      * Required by the ArrayAccess implementation
-      *
-      * @param int   $offset
-      * @param array $value
-      */
-     public function offsetSet($offset, $value)
-     {
-         $this->set($offset, $value);
-     }
+    /**
+     * Proxy to {@see set()}
+     * Required by the ArrayAccess implementation
+     *
+     * @param int   $offset
+     * @param array $value
+     */
+    public function offsetSet($offset, $value)
+    {
+        $this->set($offset, $value);
+    }
 
-     /**
-      * Proxy to {@see remove()}
-      * Required by the ArrayAccess implementation
-      *
-      * @param int $offset
-      */
-     public function offsetUnset($offset)
-     {
-         $this->remove($offset, 1);
-     }
+    /**
+     * Proxy to {@see remove()}
+     * Required by the ArrayAccess implementation
+     *
+     * @param int $offset
+     */
+    public function offsetUnset($offset)
+    {
+        $this->remove($offset, 1);
+    }
 
     /**
      * Sets the default case fold
@@ -476,8 +476,8 @@ class Dn implements \ArrayAccess
      * The characters ",", "+", """, "\", "<", ">", ";", "#", " = " with a special meaning in RFC 2252
      * are preceeded by ba backslash. Control characters with an ASCII code < 32 are represented as \hexpair.
      * Finally all leading and trailing spaces are converted to sequences of \20.
-     * @see Net_LDAP2_Util::escape_dn_value() from Benedikt Hallinger <beni@php.net>
-     * @link http://pear.php.net/package/Net_LDAP2
+     * @see    Net_LDAP2_Util::escape_dn_value() from Benedikt Hallinger <beni@php.net>
+     * @link   http://pear.php.net/package/Net_LDAP2
      * @author Benedikt Hallinger <beni@php.net>
      *
      * @param  string|array $values An array containing the DN values that should be escaped
@@ -485,24 +485,30 @@ class Dn implements \ArrayAccess
      */
     public static function escapeValue($values = array())
     {
-        if (!is_array($values)) $values = array($values);
+        if (!is_array($values)) {
+            $values = array($values);
+        }
         foreach ($values as $key => $val) {
             // Escaping of filter meta characters
-            $val = str_replace(array('\\', ',', '+', '"', '<', '>', ';', '#', '=', ),
-                array('\\\\', '\,', '\+', '\"', '\<', '\>', '\;', '\#', '\='), $val);
+            $val = str_replace(
+                array('\\', ',', '+', '"', '<', '>', ';', '#', '=',),
+                array('\\\\', '\,', '\+', '\"', '\<', '\>', '\;', '\#', '\='), $val
+            );
             $val = Converter::ascToHex32($val);
 
             // Convert all leading and trailing spaces to sequences of \20.
             if (preg_match('/^(\s*)(.+?)(\s*)$/', $val, $matches)) {
                 $val = $matches[2];
-                for ($i = 0; $i<strlen($matches[1]); $i++) {
+                for ($i = 0; $i < strlen($matches[1]); $i++) {
                     $val = '\20' . $val;
                 }
-                for ($i = 0; $i<strlen($matches[3]); $i++) {
+                for ($i = 0; $i < strlen($matches[3]); $i++) {
                     $val = $val . '\20';
                 }
             }
-            if (null === $val) $val = '\0';  // apply escaped "null" if string is empty
+            if (null === $val) {
+                $val = '\0';
+            } // apply escaped "null" if string is empty
             $values[$key] = $val;
         }
         return (count($values) == 1) ? $values[0] : $values;
@@ -513,8 +519,8 @@ class Dn implements \ArrayAccess
      *
      * Any escape sequence starting with a baskslash - hexpair or special character -
      * will be transformed back to the corresponding character.
-     * @see Net_LDAP2_Util::escape_dn_value() from Benedikt Hallinger <beni@php.net>
-     * @link http://pear.php.net/package/Net_LDAP2
+     * @see    Net_LDAP2_Util::escape_dn_value() from Benedikt Hallinger <beni@php.net>
+     * @link   http://pear.php.net/package/Net_LDAP2
      * @author Benedikt Hallinger <beni@php.net>
      *
      * @param  string|array $values Array of DN Values
@@ -522,11 +528,15 @@ class Dn implements \ArrayAccess
      */
     public static function unescapeValue($values = array())
     {
-        if (!is_array($values)) $values = array($values);
+        if (!is_array($values)) {
+            $values = array($values);
+        }
         foreach ($values as $key => $val) {
             // strip slashes from special chars
-            $val = str_replace(array('\\\\', '\,', '\+', '\"', '\<', '\>', '\;', '\#', '\='),
-                array('\\', ',', '+', '"', '<', '>', ';', '#', '=', ), $val);
+            $val          = str_replace(
+                array('\\\\', '\,', '\+', '\"', '\<', '\>', '\;', '\#', '\='),
+                array('\\', ',', '+', '"', '<', '>', ';', '#', '=',), $val
+            );
             $values[$key] = Converter::hex32ToAsc($val);
         }
         return (count($values) == 1) ? $values[0] : $values;
@@ -551,9 +561,10 @@ class Dn implements \ArrayAccess
      * @return array
      * @throws Exception\LdapException
      */
-    public static function explodeDn($dn, array &$keys = null, array &$vals = null,
-        $caseFold = self::ATTR_CASEFOLD_NONE)
-    {
+    public static function explodeDn(
+        $dn, array &$keys = null, array &$vals = null,
+        $caseFold = self::ATTR_CASEFOLD_NONE
+    ) {
         $k = array();
         $v = array();
         if (!self::checkDn($dn, $k, $v, $caseFold)) {
@@ -564,8 +575,8 @@ class Dn implements \ArrayAccess
             if (is_array($k[$i]) && is_array($v[$i]) && (count($k[$i]) === count($v[$i]))) {
                 $multi = array();
                 for ($j = 0; $j < count($k[$i]); $j++) {
-                    $key=$k[$i][$j];
-                    $val=$v[$i][$j];
+                    $key         = $k[$i][$j];
+                    $val         = $v[$i][$j];
                     $multi[$key] = $val;
                 }
                 $ret[] = $multi;
@@ -573,8 +584,12 @@ class Dn implements \ArrayAccess
                 $ret[] = array($k[$i] => $v[$i]);
             }
         }
-        if ($keys !== null) $keys = $k;
-        if ($vals !== null) $vals = $v;
+        if ($keys !== null) {
+            $keys = $k;
+        }
+        if ($vals !== null) {
+            $vals = $v;
+        }
         return $ret;
     }
 
@@ -585,9 +600,10 @@ class Dn implements \ArrayAccess
      * @param  string $caseFold
      * @return boolean True if the DN was successfully parsed or false if the string is not a valid DN.
      */
-    public static function checkDn($dn, array &$keys = null, array &$vals = null,
-        $caseFold = self::ATTR_CASEFOLD_NONE)
-    {
+    public static function checkDn(
+        $dn, array &$keys = null, array &$vals = null,
+        $caseFold = self::ATTR_CASEFOLD_NONE
+    ) {
         /* This is a classic state machine parser. Each iteration of the
          * loop processes one character. State 1 collects the key. When equals ( = )
          * is encountered the state changes to 2 where the value is collected
@@ -595,34 +611,37 @@ class Dn implements \ArrayAccess
          * to state 1. If a backslash (\) is encountered, state 3 is used to collect the
          * following character without engaging the logic of other states.
          */
-        $key = null;
+        $key   = null;
         $value = null;
-        $slen = strlen($dn);
+        $slen  = strlen($dn);
         $state = 1;
-        $ko = $vo = 0;
+        $ko    = $vo = 0;
         $multi = false;
-        $ka = array();
-        $va = array();
+        $ka    = array();
+        $va    = array();
         for ($di = 0; $di <= $slen; $di++) {
             $ch = ($di == $slen) ? 0 : $dn[$di];
             switch ($state) {
                 case 1: // collect key
                     if ($ch === '=') {
                         $key = trim(substr($dn, $ko, $di - $ko));
-                        if ($caseFold == self::ATTR_CASEFOLD_LOWER) $key = strtolower($key);
-                        else if ($caseFold == self::ATTR_CASEFOLD_UPPER) $key = strtoupper($key);
+                        if ($caseFold == self::ATTR_CASEFOLD_LOWER) {
+                            $key = strtolower($key);
+                        } else if ($caseFold == self::ATTR_CASEFOLD_UPPER) {
+                            $key = strtoupper($key);
+                        }
                         if (is_array($multi)) {
                             $keyId = strtolower($key);
                             if (in_array($keyId, $multi)) {
                                 return false;
                             }
-                            $ka[count($ka)-1][] = $key;
-                            $multi[] = $keyId;
+                            $ka[count($ka) - 1][] = $key;
+                            $multi[]              = $keyId;
                         } else {
                             $ka[] = $key;
                         }
                         $state = 2;
-                        $vo = $di + 1;
+                        $vo    = $di + 1;
                     } else if ($ch === ',' || $ch === ';' || $ch === '+') {
                         return false;
                     }
@@ -633,19 +652,19 @@ class Dn implements \ArrayAccess
                     } else if ($ch === ',' || $ch === ';' || $ch === 0 || $ch === '+') {
                         $value = self::unescapeValue(trim(substr($dn, $vo, $di - $vo)));
                         if (is_array($multi)) {
-                            $va[count($va)-1][] = $value;
+                            $va[count($va) - 1][] = $value;
                         } else {
                             $va[] = $value;
                         }
                         $state = 1;
-                        $ko = $di + 1;
+                        $ko    = $di + 1;
                         if ($ch === '+' && $multi === false) {
                             $lastKey = array_pop($ka);
                             $lastVal = array_pop($va);
-                            $ka[] = array($lastKey);
-                            $va[] = array($lastVal);
-                            $multi = array(strtolower($lastKey));
-                        } else if ($ch === ','|| $ch === ';' || $ch === 0) {
+                            $ka[]    = array($lastKey);
+                            $va[]    = array($lastVal);
+                            $multi   = array(strtolower($lastKey));
+                        } else if ($ch === ',' || $ch === ';' || $ch === 0) {
                             $multi = false;
                         }
                     } else if ($ch === '=') {
@@ -682,12 +701,12 @@ class Dn implements \ArrayAccess
     public static function implodeRdn(array $part, $caseFold = null)
     {
         self::assertRdn($part);
-        $part = self::caseFoldRdn($part, $caseFold);
+        $part     = self::caseFoldRdn($part, $caseFold);
         $rdnParts = array();
         foreach ($part as $key => $value) {
-            $value = self::escapeValue($value);
-            $keyId = strtolower($key);
-            $rdnParts[$keyId] =  implode('=', array($key, $value));
+            $value            = self::escapeValue($value);
+            $keyId            = strtolower($key);
+            $rdnParts[$keyId] = implode('=', array($key, $value));
         }
         ksort($rdnParts, SORT_STRING);
         return implode('+', $rdnParts);
@@ -717,6 +736,7 @@ class Dn implements \ArrayAccess
         foreach ($dnArray as $p) {
             $parts[] = self::implodeRdn($p, $caseFold);
         }
+
         return implode($separator, $parts);
     }
 
@@ -747,10 +767,14 @@ class Dn implements \ArrayAccess
             return false;
         }
 
-        $startIndex = count($cdn)-count($pdn);
-        if ($startIndex<0) return false;
-        for ($i = 0; $i<count($pdn); $i++) {
-            if ($cdn[$i+$startIndex] != $pdn[$i]) return false;
+        $startIndex = count($cdn) - count($pdn);
+        if ($startIndex < 0) {
+            return false;
+        }
+        for ($i = 0; $i < count($pdn); $i++) {
+            if ($cdn[$i + $startIndex] != $pdn[$i]) {
+                return false;
+            }
         }
         return true;
     }

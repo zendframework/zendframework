@@ -49,10 +49,12 @@ class ConnectTest extends \PHPUnit_Framework_TestCase
         }
 
         $this->options = array('host' => TESTS_ZEND_LDAP_HOST);
-        if (defined('TESTS_ZEND_LDAP_PORT') && TESTS_ZEND_LDAP_PORT != 389)
+        if (defined('TESTS_ZEND_LDAP_PORT') && TESTS_ZEND_LDAP_PORT != 389) {
             $this->options['port'] = TESTS_ZEND_LDAP_PORT;
-        if (defined('TESTS_ZEND_LDAP_USE_SSL'))
+        }
+        if (defined('TESTS_ZEND_LDAP_USE_SSL')) {
             $this->options['useSsl'] = TESTS_ZEND_LDAP_USE_SSL;
+        }
     }
 
     public function testEmptyOptionsConnect()
@@ -65,6 +67,7 @@ class ConnectTest extends \PHPUnit_Framework_TestCase
             $this->assertContains('host parameter is required', $zle->getMessage());
         }
     }
+
     public function testUnknownHostConnect()
     {
         $ldap = new Ldap\Ldap(array('host' => 'bogus.example.com'));
@@ -76,6 +79,7 @@ class ConnectTest extends \PHPUnit_Framework_TestCase
             $this->assertContains('Can\'t contact LDAP server', $zle->getMessage());
         }
     }
+
     public function testPlainConnect()
     {
         $ldap = new Ldap\Ldap($this->options);
@@ -89,10 +93,11 @@ class ConnectTest extends \PHPUnit_Framework_TestCase
             $this->assertContains('Invalid credentials', $zle->getMessage());
         }
     }
+
     public function testNetworkTimeoutConnect()
     {
         $networkTimeout = 1;
-        $ldap = new Ldap\Ldap(array_merge($this->options, array('networkTimeout' => $networkTimeout)));
+        $ldap           = new Ldap\Ldap(array_merge($this->options, array('networkTimeout' => $networkTimeout)));
 
         $ldap->connect();
         ldap_get_option($ldap->getResource(), LDAP_OPT_NETWORK_TIMEOUT, $actual);
@@ -103,57 +108,66 @@ class ConnectTest extends \PHPUnit_Framework_TestCase
     {
         $host = TESTS_ZEND_LDAP_HOST;
         $port = 0;
-        if (defined('TESTS_ZEND_LDAP_PORT') && TESTS_ZEND_LDAP_PORT != 389)
+        if (defined('TESTS_ZEND_LDAP_PORT') && TESTS_ZEND_LDAP_PORT != 389) {
             $port = TESTS_ZEND_LDAP_PORT;
+        }
         $useSsl = false;
-        if (defined('TESTS_ZEND_LDAP_USE_SSL'))
+        if (defined('TESTS_ZEND_LDAP_USE_SSL')) {
             $useSsl = TESTS_ZEND_LDAP_USE_SSL;
+        }
 
         $ldap = new Ldap\Ldap();
         try {
             $ldap->connect($host, $port, $useSsl)
-                 ->bind('CN=ignored,DC=example,DC=com', 'ignored');
+                ->bind('CN=ignored,DC=example,DC=com', 'ignored');
             $this->fail('Expected exception for invalid username');
         } catch (LdapException $zle) {
             $this->assertContains('Invalid credentials', $zle->getMessage());
         }
     }
+
     public function testExplicitPortConnect()
     {
         $port = 389;
-        if (defined('TESTS_ZEND_LDAP_PORT') && TESTS_ZEND_LDAP_PORT)
+        if (defined('TESTS_ZEND_LDAP_PORT') && TESTS_ZEND_LDAP_PORT) {
             $port = TESTS_ZEND_LDAP_PORT;
-        if (defined('TESTS_ZEND_LDAP_USE_SSL') && TESTS_ZEND_LDAP_USE_SSL)
+        }
+        if (defined('TESTS_ZEND_LDAP_USE_SSL') && TESTS_ZEND_LDAP_USE_SSL) {
             $port = 636;
+        }
 
         $ldap = new Ldap\Ldap($this->options);
         try {
             $ldap->connect(null, $port)
-                 ->bind('CN=ignored,DC=example,DC=com', 'ignored');
+                ->bind('CN=ignored,DC=example,DC=com', 'ignored');
             $this->fail('Expected exception for invalid username');
         } catch (LdapException $zle) {
             $this->assertContains('Invalid credentials', $zle->getMessage());
         }
     }
+
     public function testExplicitNetworkTimeoutConnect()
     {
         $networkTimeout = 1;
-        $host = TESTS_ZEND_LDAP_HOST;
-        $port = 0;
-        if (defined('TESTS_ZEND_LDAP_PORT') && TESTS_ZEND_LDAP_PORT != 389)
+        $host           = TESTS_ZEND_LDAP_HOST;
+        $port           = 0;
+        if (defined('TESTS_ZEND_LDAP_PORT') && TESTS_ZEND_LDAP_PORT != 389) {
             $port = TESTS_ZEND_LDAP_PORT;
+        }
         $useSsl = false;
-        if (defined('TESTS_ZEND_LDAP_USE_SSL'))
+        if (defined('TESTS_ZEND_LDAP_USE_SSL')) {
             $useSsl = TESTS_ZEND_LDAP_USE_SSL;
+        }
 
         $ldap = new Ldap\Ldap();
         $ldap->connect($host, $port, $useSsl, null, $networkTimeout);
         ldap_get_option($ldap->getResource(), LDAP_OPT_NETWORK_TIMEOUT, $actual);
         $this->assertEquals($networkTimeout, $actual);
     }
+
     public function testBadPortConnect()
     {
-        $options = $this->options;
+        $options         = $this->options;
         $options['port'] = 10;
 
         $ldap = new Ldap\Ldap($options);
@@ -164,6 +178,7 @@ class ConnectTest extends \PHPUnit_Framework_TestCase
             $this->assertContains('Can\'t contact LDAP server', $zle->getMessage());
         }
     }
+
     public function testSetOptionsConnect()
     {
         $ldap = new Ldap\Ldap();
@@ -175,6 +190,7 @@ class ConnectTest extends \PHPUnit_Framework_TestCase
             $this->assertContains('Invalid credentials', $zle->getMessage());
         }
     }
+
     public function testMultiConnect()
     {
         $ldap = new Ldap\Ldap($this->options);
@@ -187,6 +203,7 @@ class ConnectTest extends \PHPUnit_Framework_TestCase
             }
         }
     }
+
     public function testDisconnect()
     {
         $ldap = new Ldap\Ldap($this->options);
@@ -226,9 +243,13 @@ class ConnectTest extends \PHPUnit_Framework_TestCase
     {
         $host = TESTS_ZEND_LDAP_HOST;
         $port = 0;
-        if (defined('TESTS_ZEND_LDAP_PORT') && TESTS_ZEND_LDAP_PORT != 389) $port = TESTS_ZEND_LDAP_PORT;
+        if (defined('TESTS_ZEND_LDAP_PORT') && TESTS_ZEND_LDAP_PORT != 389) {
+            $port = TESTS_ZEND_LDAP_PORT;
+        }
         $useSsl = false;
-        if (defined('TESTS_ZEND_LDAP_USE_SSL')) $useSsl = TESTS_ZEND_LDAP_USE_SSL;
+        if (defined('TESTS_ZEND_LDAP_USE_SSL')) {
+            $useSsl = TESTS_ZEND_LDAP_USE_SSL;
+        }
         if ($useSsl) {
             $host = 'ldaps://' . $host;
         } else {
@@ -241,7 +262,7 @@ class ConnectTest extends \PHPUnit_Framework_TestCase
         $ldap = new Ldap\Ldap();
         try {
             $ldap->connect($host)
-                 ->bind('CN=ignored,DC=example,DC=com', 'ignored');
+                ->bind('CN=ignored,DC=example,DC=com', 'ignored');
             $this->fail('Expected exception for invalid username');
         } catch (LdapException $zle) {
             $this->assertContains('Invalid credentials', $zle->getMessage());

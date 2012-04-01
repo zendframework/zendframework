@@ -107,7 +107,7 @@ abstract class AbstractItem implements \ArrayAccess, \Countable
      * This method is needed for a full implementation of ArrayAccess
      *
      * @param  string $name
-     * @param  mixed $value
+     * @param  mixed  $value
      * @return null
      * @throws BadMethodCallException
      */

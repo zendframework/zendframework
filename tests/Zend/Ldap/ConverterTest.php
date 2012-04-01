@@ -35,24 +35,24 @@ class ConverterTest extends \PHPUnit_Framework_TestCase
 {
     public function testAsc2hex32()
     {
-        $expected='\00\01\02\03\04\05\06\07\08\09\0a\0b\0c\0d\0e\0f\10\11\12\13\14\15\16\17\18\19' .
+        $expected = '\00\01\02\03\04\05\06\07\08\09\0a\0b\0c\0d\0e\0f\10\11\12\13\14\15\16\17\18\19' .
             '\1a\1b\1c\1d\1e\1f !"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`' .
             'abcdefghijklmnopqrstuvwxyz{|}~';
-        $str='';
-        for ($i=0; $i<127; $i++) {
-             $str.=chr($i);
+        $str      = '';
+        for ($i = 0; $i < 127; $i++) {
+            $str .= chr($i);
         }
         $this->assertEquals($expected, Ldap\Converter::ascToHex32($str));
     }
 
     public function testHex2asc()
     {
-        $expected='';
-        for ($i=0; $i<127; $i++) {
-             $expected.=chr($i);
+        $expected = '';
+        for ($i = 0; $i < 127; $i++) {
+            $expected .= chr($i);
         }
 
-        $str='\00\01\02\03\04\05\06\07\08\09\0a\0b\0c\0d\0e\0f\10\11\12\13\14\15\16\17\18\19\1a\1b' .
+        $str = '\00\01\02\03\04\05\06\07\08\09\0a\0b\0c\0d\0e\0f\10\11\12\13\14\15\16\17\18\19\1a\1b' .
             '\1c\1d\1e\1f !"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefg' .
             'hijklmnopqrstuvwxyz{|}~';
         $this->assertEquals($expected, Ldap\Converter::hex32ToAsc($str));

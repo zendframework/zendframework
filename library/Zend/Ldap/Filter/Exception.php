@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -21,7 +20,7 @@
 
 namespace Zend\Ldap\Filter;
 
-use Zend\Ldap\Exception;
+use Zend\Ldap;
 
 /**
  * @category   Zend
@@ -29,6 +28,6 @@ use Zend\Ldap\Exception;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Exception extends Exception
+interface Exception extends Ldap\Exception
 {
 }

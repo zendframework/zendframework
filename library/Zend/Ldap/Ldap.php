@@ -100,7 +100,7 @@ class Ldap
      * @param  array  $keys An optional array to receive DN keys (e.g. CN, OU, DC, ...)
      * @param  array  $vals An optional array to receive DN values
      * @return boolean True if the DN was successfully parsed or false if the string is
-     * not a valid DN.
+     *             not a valid DN.
      */
     public static function explodeDn($dn, array &$keys = null, array &$vals = null)
     {
@@ -173,7 +173,7 @@ class Ldap
      */
     public function getLastError(&$errorCode = null, array &$errorMessages = null)
     {
-        $errorCode = $this->getLastErrorCode();
+        $errorCode     = $this->getLastErrorCode();
         $errorMessages = array();
 
         /* The various error retrieval functions can return
@@ -290,8 +290,9 @@ class Ldap
                     case 'useStartTls':
                     case 'optReferrals':
                     case 'tryUsernameSplit':
-                        $permittedOptions[$key] = ($val === true ||
-                                $val === '1' || strcasecmp($val, 'true') == 0);
+                        $permittedOptions[$key] = ($val === true
+                            || $val === '1'
+                            || strcasecmp($val, 'true') == 0);
                         break;
                     default:
                         $permittedOptions[$key] = trim($val);
@@ -301,7 +302,7 @@ class Ldap
         }
         if (count($options) > 0) {
             $key = key($options);
-            throw new LdapException(null, "Unknown Zend\Ldap\Ldap option: $key");
+            throw new LdapException(null, "Unknown Zend\\Ldap\\Ldap option: $key");
         }
         $this->options = $permittedOptions;
         return $this;
@@ -388,14 +389,16 @@ class Ldap
          */
         $accountCanonicalForm = $this->options['accountCanonicalForm'];
         if (!$accountCanonicalForm) {
-            $accountDomainName = $this->getAccountDomainName();
+            $accountDomainName      = $this->getAccountDomainName();
             $accountDomainNameShort = $this->getAccountDomainNameShort();
             if ($accountDomainNameShort) {
                 $accountCanonicalForm = self::ACCTNAME_FORM_BACKSLASH;
-            } else if ($accountDomainName) {
-                $accountCanonicalForm = self::ACCTNAME_FORM_PRINCIPAL;
             } else {
-                $accountCanonicalForm = self::ACCTNAME_FORM_USERNAME;
+                if ($accountDomainName) {
+                    $accountCanonicalForm = self::ACCTNAME_FORM_PRINCIPAL;
+                } else {
+                    $accountCanonicalForm = self::ACCTNAME_FORM_USERNAME;
+                }
             }
         }
 
@@ -474,7 +477,7 @@ class Ldap
     {
         $this->splitName($acctname, $dname, $aname);
         $accountFilterFormat = $this->getAccountFilterFormat();
-        $aname = Filter\AbstractFilter::escapeValue($aname);
+        $aname               = Filter\AbstractFilter::escapeValue($aname);
         if ($accountFilterFormat) {
             return sprintf($accountFilterFormat, $aname);
         }
@@ -524,7 +527,7 @@ class Ldap
             return $acctname;
         }
         $acctname = $this->getCanonicalAccountName($acctname, self::ACCTNAME_FORM_USERNAME);
-        $acct = $this->getAccount($acctname, array('dn'));
+        $acct     = $this->getAccount($acctname, array('dn'));
         return $acct['dn'];
     }
 
@@ -537,7 +540,7 @@ class Ldap
         if ($dname === null) {
             return true;
         }
-        $accountDomainName = $this->getAccountDomainName();
+        $accountDomainName      = $this->getAccountDomainName();
         $accountDomainNameShort = $this->getAccountDomainNameShort();
         if ($accountDomainName === null && $accountDomainNameShort === null) {
             return true;
@@ -625,17 +628,19 @@ class Ldap
         }
 
         $accounts = $this->search($accountFilter, $baseDn, self::SEARCH_SCOPE_SUB, $attrs);
-        $count = $accounts->count();
+        $count    = $accounts->count();
         if ($count === 1) {
             $acct = $accounts->getFirst();
             $accounts->close();
             return $acct;
-        } else if ($count === 0) {
-            $code = LdapException::LDAP_NO_SUCH_OBJECT;
-            $str = "No object found for: $accountFilter";
         } else {
-            $code = LdapException::LDAP_OPERATIONS_ERROR;
-            $str = "Unexpected result count ($count) for: $accountFilter";
+            if ($count === 0) {
+                $code = LdapException::LDAP_NO_SUCH_OBJECT;
+                $str  = "No object found for: $accountFilter";
+            } else {
+                $code = LdapException::LDAP_OPERATIONS_ERROR;
+                $str  = "Unexpected result count ($count) for: $accountFilter";
+            }
         }
         $accounts->close();
         throw new LdapException($this, $str, $code);
@@ -649,8 +654,9 @@ class Ldap
         if (is_resource($this->resource)) {
             @ldap_unbind($this->resource);
         }
-        $this->resource = null;
+        $this->resource  = null;
         $this->boundUser = false;
+
         return $this;
     }
 
@@ -707,12 +713,12 @@ class Ldap
         $hosts = array();
         if (preg_match_all('~ldap(?:i|s)?://~', $host, $hosts, PREG_SET_ORDER) > 0) {
             $this->connectString = $host;
-            $useUri = true;
-            $useSsl = false;
+            $useUri              = true;
+            $useSsl              = false;
         } else {
             if ($useSsl) {
                 $this->connectString = 'ldaps://' . $host;
-                $useUri = true;
+                $useUri              = true;
             } else {
                 $this->connectString = 'ldap://' . $host;
             }
@@ -730,12 +736,13 @@ class Ldap
         $resource = ($useUri) ? @ldap_connect($this->connectString) : @ldap_connect($host, $port);
 
         if (is_resource($resource) === true) {
-            $this->resource = $resource;
+            $this->resource  = $resource;
             $this->boundUser = false;
 
             $optReferrals = ($this->getOptReferrals()) ? 1 : 0;
-            if (@ldap_set_option($resource, LDAP_OPT_PROTOCOL_VERSION, 3) &&
-                        @ldap_set_option($resource, LDAP_OPT_REFERRALS, $optReferrals)) {
+            if (@ldap_set_option($resource, LDAP_OPT_PROTOCOL_VERSION, 3)
+                && @ldap_set_option($resource, LDAP_OPT_REFERRALS, $optReferrals)
+            ) {
                 if ($networkTimeout) {
                     @ldap_set_option($resource, LDAP_OPT_NETWORK_TIMEOUT, $networkTimeout);
                 }
@@ -762,8 +769,8 @@ class Ldap
         $moreCreds = true;
 
         if ($username === null) {
-            $username = $this->getUsername();
-            $password = $this->getPassword();
+            $username  = $this->getUsername();
+            $password  = $this->getPassword();
             $moreCreds = false;
         }
 
@@ -792,15 +799,17 @@ class Ldap
                             }
                             throw new LdapException(null,
                                 'Failed to retrieve DN for account: ' . $username .
-                                ' [' . $zle->getMessage() . ']',
+                                    ' [' . $zle->getMessage() . ']',
                                 LdapException::LDAP_OPERATIONS_ERROR);
                         }
                     } else {
                         throw new LdapException(null, 'Binding requires username in DN form');
                     }
                 } else {
-                    $username = $this->getCanonicalAccountName($username,
-                        $this->getAccountCanonicalForm());
+                    $username = $this->getCanonicalAccountName(
+                        $username,
+                        $this->getAccountCanonicalForm()
+                    );
                 }
             }
         }
@@ -854,8 +863,10 @@ class Ldap
      * @return Collection
      * @throws LdapException
      */
-    public function search($filter, $basedn = null, $scope = self::SEARCH_SCOPE_SUB,
-        array $attributes = array(), $sort = null, $collectionClass = null)
+    public function search(
+        $filter, $basedn = null, $scope = self::SEARCH_SCOPE_SUB,
+        array $attributes = array(), $sort = null, $collectionClass = null
+    )
     {
         if (is_array($filter)) {
             $options = array_change_key_case($filter, CASE_LOWER);
@@ -881,9 +892,8 @@ class Ldap
 
         if ($basedn === null) {
             $basedn = $this->getBaseDn();
-        }
-        else if ($basedn instanceof Dn) {
-            $basedn = $basedn->toString();
+        } else if ($basedn instanceof Dn) {
+                $basedn = $basedn->toString();
         }
 
         if ($filter instanceof Filter\AbstractFilter) {
@@ -903,12 +913,12 @@ class Ldap
                 break;
         }
 
-        if($search === false) {
+        if ($search === false) {
             throw new LdapException($this, 'searching: ' . $filter);
         }
         if ($sort !== null && is_string($sort)) {
             $isSorted = @ldap_sort($this->getResource(), $search, $sort);
-            if($isSorted === false) {
+            if ($isSorted === false) {
                 throw new LdapException($this, 'sorting: ' . $sort);
             }
         }
@@ -937,7 +947,7 @@ class Ldap
             }
             if (!is_subclass_of($collectionClass, 'Zend\Ldap\Collection')) {
                 throw new LdapException(null,
-                    "Class '$collectionClass' must subclass 'Zend\Ldap\Collection'");
+                    "Class '$collectionClass' must subclass 'Zend\\Ldap\\Collection'");
             }
             return new $collectionClass($iterator);
         }
@@ -957,8 +967,11 @@ class Ldap
         try {
             $result = $this->search($filter, $basedn, $scope, array('dn'), null);
         } catch (LdapException $e) {
-            if ($e->getCode() === LdapException::LDAP_NO_SUCH_OBJECT) return 0;
-            else throw $e;
+            if ($e->getCode() === LdapException::LDAP_NO_SUCH_OBJECT) {
+                return 0;
+            } else {
+                throw $e;
+            }
         }
         return $result->count();
     }
@@ -1008,9 +1021,10 @@ class Ldap
      * @return array
      * @throws LdapException
      */
-    public function searchEntries($filter, $basedn = null, $scope = self::SEARCH_SCOPE_SUB,
-        array $attributes = array(), $sort = null, $reverseSort = false)
-    {
+    public function searchEntries(
+        $filter, $basedn = null, $scope = self::SEARCH_SCOPE_SUB,
+        array $attributes = array(), $sort = null, $reverseSort = false
+    ) {
         if (is_array($filter)) {
             $filter = array_change_key_case($filter, CASE_LOWER);
             if (isset($filter['collectionclass'])) {
@@ -1022,7 +1036,7 @@ class Ldap
             }
         }
         $result = $this->search($filter, $basedn, $scope, $attributes, $sort);
-        $items = $result->toArray();
+        $items  = $result->toArray();
         if ((bool)$reverseSort === true) {
             $items = array_reverse($items, false);
         }
@@ -1041,12 +1055,17 @@ class Ldap
     public function getEntry($dn, array $attributes = array(), $throwOnNotFound = false)
     {
         try {
-            $result = $this->search("(objectClass=*)", $dn, self::SEARCH_SCOPE_BASE,
-                $attributes, null);
+            $result = $this->search(
+                "(objectClass=*)", $dn, self::SEARCH_SCOPE_BASE,
+                $attributes, null
+            );
             return $result->getFirst();
-        } catch (LdapException $e){
-            if ($throwOnNotFound !== false) throw $e;
+        } catch (LdapException $e) {
+            if ($throwOnNotFound !== false) {
+                throw $e;
+            }
         }
+
         return null;
     }
 
@@ -1059,7 +1078,9 @@ class Ldap
      */
     public static function prepareLdapEntryArray(array &$entry)
     {
-        if (array_key_exists('dn', $entry)) unset($entry['dn']);
+        if (array_key_exists('dn', $entry)) {
+            unset($entry['dn']);
+        }
         foreach ($entry as $key => $value) {
             if (is_array($value)) {
                 foreach ($value as $i => $v) {
@@ -1121,11 +1142,11 @@ class Ldap
             if (!array_key_exists($key, $entry)) {
                 $entry[$key] = array($value);
             } else if (!in_array($value, $entry[$key])) {
-                $entry[$key] = array_merge(array($value), $entry[$key]);
+                    $entry[$key] = array_merge(array($value), $entry[$key]);
             }
         }
         $adAttributes = array('distinguishedname', 'instancetype', 'name', 'objectcategory',
-            'objectguid', 'usnchanged', 'usncreated', 'whenchanged', 'whencreated');
+                              'objectguid', 'usnchanged', 'usncreated', 'whenchanged', 'whencreated');
         foreach ($adAttributes as $attr) {
             if (array_key_exists($attr, $entry)) {
                 unset($entry[$attr]);
@@ -1133,7 +1154,7 @@ class Ldap
         }
 
         $isAdded = @ldap_add($this->getResource(), $dn->toString(), $entry);
-        if($isAdded === false) {
+        if ($isAdded === false) {
             throw new LdapException($this, 'adding: ' . $dn->toString());
         }
         return $this;
@@ -1162,7 +1183,7 @@ class Ldap
             }
         }
         $adAttributes = array('distinguishedname', 'instancetype', 'name', 'objectcategory',
-            'objectguid', 'usnchanged', 'usncreated', 'whenchanged', 'whencreated');
+                              'objectguid', 'usnchanged', 'usncreated', 'whenchanged', 'whencreated');
         foreach ($adAttributes as $attr) {
             if (array_key_exists($attr, $entry)) {
                 unset($entry[$attr]);
@@ -1171,7 +1192,7 @@ class Ldap
 
         if (count($entry) > 0) {
             $isModified = @ldap_modify($this->getResource(), $dn->toString(), $entry);
-            if($isModified === false) {
+            if ($isModified === false) {
                 throw new LdapException($this, 'updating: ' . $dn->toString());
             }
         }
@@ -1194,8 +1215,12 @@ class Ldap
         if ($dn instanceof Dn) {
             $dn = $dn->toString();
         }
-        if ($this->exists($dn)) $this->update($dn, $entry);
-        else $this->add($dn, $entry);
+        if ($this->exists($dn)) {
+            $this->update($dn, $entry);
+        } else {
+            $this->add($dn, $entry);
+        }
+
         return $this;
     }
 
@@ -1213,7 +1238,7 @@ class Ldap
             $dn = $dn->toString();
         }
         if ($recursively === true) {
-            if ($this->countChildren($dn)>0) {
+            if ($this->countChildren($dn) > 0) {
                 $children = $this->getChildrenDns($dn);
                 foreach ($children as $c) {
                     $this->delete($c, true);
@@ -1221,7 +1246,7 @@ class Ldap
             }
         }
         $isDeleted = @ldap_delete($this->getResource(), $dn);
-        if($isDeleted === false) {
+        if ($isDeleted === false) {
             throw new LdapException($this, 'deleting: ' . $dn);
         }
         return $this;
@@ -1242,10 +1267,12 @@ class Ldap
             $parentDn = $parentDn->toString();
         }
         $children = array();
-        $search = @ldap_list($this->getResource(), $parentDn, '(objectClass=*)', array('dn'));
-        for ($entry = @ldap_first_entry($this->getResource(), $search);
-                $entry !== false;
-                $entry = @ldap_next_entry($this->getResource(), $entry)) {
+        $search   = @ldap_list($this->getResource(), $parentDn, '(objectClass=*)', array('dn'));
+        for (
+            $entry = @ldap_first_entry($this->getResource(), $search);
+            $entry !== false;
+            $entry = @ldap_next_entry($this->getResource(), $entry)
+        ) {
             $childDn = @ldap_get_dn($this->getResource(), $entry);
             if ($childDn === false) {
                 throw new LdapException($this, 'getting dn');
@@ -1281,7 +1308,7 @@ class Ldap
         }
 
         $newDnParts = array_merge(array(array_shift($orgDnParts)), $newParentDnParts);
-        $newDn = Dn::fromArray($newDnParts);
+        $newDn      = Dn::fromArray($newDnParts);
         return $this->rename($from, $newDn, $recursively, $alwaysEmulate);
     }
 
@@ -1317,8 +1344,11 @@ class Ldap
     public function rename($from, $to, $recursively = false, $alwaysEmulate = false)
     {
         $emulate = (bool)$alwaysEmulate;
-        if (!function_exists('ldap_rename')) $emulate = true;
-        else if ($recursively) $emulate = true;
+        if (!function_exists('ldap_rename')) {
+            $emulate = true;
+        } else if ($recursively) {
+            $emulate = true;
+        }
 
         if ($emulate === false) {
             if ($from instanceof Dn) {
@@ -1331,13 +1361,14 @@ class Ldap
                 $newDnParts = Dn::explodeDn($to);
             }
 
-            $newRdn = Dn::implodeRdn(array_shift($newDnParts));
+            $newRdn    = Dn::implodeRdn(array_shift($newDnParts));
             $newParent = Dn::implodeDn($newDnParts);
-            $isOK = @ldap_rename($this->getResource(), $from, $newRdn, $newParent, true);
-            if($isOK === false) {
+            $isOK      = @ldap_rename($this->getResource(), $from, $newRdn, $newParent, true);
+            if ($isOK === false) {
                 throw new LdapException($this, 'renaming ' . $from . ' to ' . $to);
+            } else if (!$this->exists($to)) {
+                $emulate = true;
             }
-            else if (!$this->exists($to)) $emulate = true;
         }
         if ($emulate) {
             $this->copy($from, $to, $recursively);
@@ -1370,7 +1401,7 @@ class Ldap
         }
 
         $newDnParts = array_merge(array(array_shift($orgDnParts)), $newParentDnParts);
-        $newDn = Dn::fromArray($newDnParts);
+        $newDn      = Dn::fromArray($newDnParts);
         return $this->copy($from, $newDn, $recursively);
     }
 
@@ -1394,12 +1425,12 @@ class Ldap
         }
         $this->add($to, $entry);
 
-        if ($recursively === true && $this->countChildren($from)>0) {
+        if ($recursively === true && $this->countChildren($from) > 0) {
             $children = $this->getChildrenDns($from);
             foreach ($children as $c) {
-                $cDnParts = Dn::explodeDn($c);
+                $cDnParts      = Dn::explodeDn($c);
                 $newChildParts = array_merge(array(array_shift($cDnParts)), $toDnParts);
-                $newChild = Dn::implodeDn($newChildParts);
+                $newChild      = Dn::implodeDn($newChildParts);
                 $this->copy($c, $newChild, true);
             }
         }

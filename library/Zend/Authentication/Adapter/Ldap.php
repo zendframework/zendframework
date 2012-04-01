@@ -329,8 +329,8 @@ class Ldap implements AuthenticationAdapter
                     $messages[1] = '';
                     $messages[] = "$canonicalName authentication successful";
                     if ($requireRebind === true) {
-	                    // rebinding with authenticated user
-	                    $ldap->bind($dn, $password);
+                        // rebinding with authenticated user
+                        $ldap->bind($dn, $password);
                     }
                     return new AuthenticationResult(AuthenticationResult::SUCCESS, $canonicalName, $messages);
                 } else {

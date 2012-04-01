@@ -103,7 +103,7 @@ class Query implements Route
     {
         $matches = array();
 
-        foreach($_GET as $key=>$value) {
+        foreach($_GET as $key => $value) {
             $matches[urldecode($key)] = urldecode($value);
 
         }

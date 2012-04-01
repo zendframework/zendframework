@@ -159,7 +159,7 @@ class ExceptionStrategy implements ListenerAggregate
 
             case Application::ERROR_EXCEPTION:
             default:
-                $model     = new ViewModel\ViewModel(array(
+                $model = new ViewModel\ViewModel(array(
                     'message'            => 'An error occurred during execution; please try again later.',
                     'exception'          => $e->getParam('exception'),
                     'display_exceptions' => $this->displayExceptions(),

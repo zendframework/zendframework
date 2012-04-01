@@ -168,8 +168,7 @@ class Request extends HttpRequest
             if (preg_match('|^([^:]+):([^:]+)$|', $this->headers()->get('host')->getFieldValue(), $match)) {
                 $uri->setHost($match[1]);
                 $uri->setPort($match[2]);
-            }
-            else {
+            } else {
                 $uri->setHost($this->headers()->get('host')->getFieldValue());
             }
         } elseif (isset($this->serverParams['SERVER_NAME'])) {
@@ -311,7 +310,7 @@ class Request extends HttpRequest
         }
 
         // Directory portion of base path matches.
-        $baseDir = str_replace('\\','/', dirname($baseUrl));
+        $baseDir = str_replace('\\', '/', dirname($baseUrl));
         if (0 === strpos($requestUri, $baseDir)) {
             return $baseDir;
         }

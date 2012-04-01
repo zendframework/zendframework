@@ -160,7 +160,7 @@ abstract class AbstractAccept implements HeaderDescription
                 'priority'   => $priority,
                 'level'      => (integer) $level
             );
-        } else  {
+        } else {
             $this->prioritizedValues[] = array(
                 'type' => $type,
                 'priority'   => $priority

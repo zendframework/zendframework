@@ -89,7 +89,8 @@ class Stream extends Response
      *
      * @return boolean
      */
-    public function getCleanup() {
+    public function getCleanup()
+    {
         return $this->_cleanup;
     }
 
@@ -98,7 +99,8 @@ class Stream extends Response
      *
      * @param $cleanup Set cleanup trigger
      */
-    public function setCleanup($cleanup = true) {
+    public function setCleanup($cleanup = true)
+    {
         $this->_cleanup = $cleanup;
     }
 
@@ -107,7 +109,8 @@ class Stream extends Response
      *
      * @return string
      */
-    public function getStreamName() {
+    public function getStreamName()
+    {
         return $this->stream_name;
     }
 
@@ -117,7 +120,8 @@ class Stream extends Response
      * @param string $stream_name Name to set
      * @return \Zend\Http\Response\Stream
      */
-    public function setStreamName($stream_name) {
+    public function setStreamName($stream_name)
+    {
         $this->stream_name = $stream_name;
         return $this;
     }
@@ -155,7 +159,7 @@ class Stream extends Response
      */
     public function getBody()
     {
-        if($this->stream != null) {
+        if ($this->stream != null) {
             $this->readStream();
         }
         return parent::getBody();
@@ -171,7 +175,7 @@ class Stream extends Response
      */
     public function getRawBody()
     {
-        if($this->stream) {
+        if ($this->stream) {
             $this->readStream();
         }
         return $this->body;
@@ -186,7 +190,7 @@ class Stream extends Response
      */
     protected function readStream()
     {
-        if(!is_resource($this->stream)) {
+        if (!is_resource($this->stream)) {
             return '';
         }
 
@@ -197,11 +201,11 @@ class Stream extends Response
 
     public function __destruct()
     {
-        if(is_resource($this->stream)) {
+        if (is_resource($this->stream)) {
             fclose($this->stream);
             $this->stream = null;
         }
-        if($this->_cleanup) {
+        if ($this->_cleanup) {
             @unlink($this->stream_name);
         }
     }

@@ -81,6 +81,16 @@ class PredicateSet implements PredicateInterface, Countable
     }
 
     /**
+     * Return the predicates
+     *
+     * @return PredicateInterface[]
+     */
+    public function getPredicates()
+    {
+        return $this->predicates;
+    }
+
+    /**
      * Add predicate using OR operator
      * 
      * @param  PredicateInterface $predicate 
@@ -109,7 +119,7 @@ class PredicateSet implements PredicateInterface, Countable
      *
      * @return array
      */
-    public function getWhereParts()
+    public function getExpressionData()
     {
         $parts = array();
         for ($i = 0; $i < count($this->predicates); $i++) {
@@ -121,7 +131,7 @@ class PredicateSet implements PredicateInterface, Countable
                 $parts[] = '(';
             }
 
-            $parts = array_merge($parts, $predicate->getWhereParts());
+            $parts = array_merge($parts, $predicate->getExpressionData());
 
             if ($predicate instanceof PredicateSet) {
                 $parts[] = ')';

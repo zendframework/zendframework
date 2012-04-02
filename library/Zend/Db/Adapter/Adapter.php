@@ -137,6 +137,11 @@ class Adapter
         return $this;
     }
 
+    public function getQueryMode()
+    {
+        return $this->queryMode;
+    }
+
     /**
      * @return Platform\PlatformInterface
      */

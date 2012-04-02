@@ -49,7 +49,7 @@ class Like implements PredicateInterface
         return $this->specification;
     }
 
-    public function getWhereParts()
+    public function getExpressionData()
     {
         return array(
             array($this->specification, array($this->identifier, $this->like), array(self::TYPE_IDENTIFIER, self::TYPE_VALUE))

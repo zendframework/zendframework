@@ -30,18 +30,16 @@ class DeleteTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Zend\Db\Sql\Delete::from
-     * @todo   Implement testFrom().
      */
     public function testFrom()
     {
         $this->delete->from('foo', 'bar');
         $this->assertEquals('foo', $this->readAttribute($this->delete, 'table'));
-        $this->assertEquals('bar', $this->readAttribute($this->delete, 'databaseOrSchema'));
+        $this->assertEquals('bar', $this->readAttribute($this->delete, 'schema'));
     }
 
     /**
      * @covers Zend\Db\Sql\Delete::where
-     * @todo   Implement testWhere().
      */
     public function testWhere()
     {
@@ -53,16 +51,16 @@ class DeleteTest extends \PHPUnit_Framework_TestCase
 
         $predicates = $this->readAttribute($where, 'predicates');
         $this->assertEquals('AND', $predicates[0][0]);
-        $this->assertInstanceOf('Zend\Db\Sql\Predicate\Literal', $predicates[0][1]);
+        $this->assertInstanceOf('Zend\Db\Sql\Predicate\Expression', $predicates[0][1]);
 
         $this->assertEquals('AND', $predicates[1][0]);
-        $this->assertInstanceOf('Zend\Db\Sql\Predicate\Literal', $predicates[1][1]);
+        $this->assertInstanceOf('Zend\Db\Sql\Predicate\Expression', $predicates[1][1]);
 
         $this->assertEquals('AND', $predicates[2][0]);
         $this->assertInstanceOf('Zend\Db\Sql\Predicate\Operator', $predicates[2][1]);
 
         $this->assertEquals('OR', $predicates[3][0]);
-        $this->assertInstanceOf('Zend\Db\Sql\Predicate\Literal', $predicates[3][1]);
+        $this->assertInstanceOf('Zend\Db\Sql\Predicate\Expression', $predicates[3][1]);
 
         $where = new Where;
         $this->delete->where($where);
@@ -83,12 +81,9 @@ class DeleteTest extends \PHPUnit_Framework_TestCase
         $mockAdapter = $this->getMock('Zend\Db\Adapter\Adapter', null, array($mockDriver));
 
         $mockStatement = $this->getMock('Zend\Db\Adapter\Driver\StatementInterface');
-        $mockStatement->expects($this->at(0))
+        $mockStatement->expects($this->at(2))
             ->method('setSql')
-            ->with($this->equalTo('DELETE FROM "foo"'));
-        $mockStatement->expects($this->at(3))
-            ->method('setSql')
-            ->with($this->equalTo(' WHERE x = y'));
+            ->with($this->equalTo('DELETE FROM "foo" WHERE x = y'));
 
         $this->delete->from('foo')
             ->where('x = y');

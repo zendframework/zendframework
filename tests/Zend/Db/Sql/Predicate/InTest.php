@@ -26,24 +26,23 @@ use PHPUnit_Framework_TestCase as TestCase,
 
 class InTest extends TestCase
 {
-    public function setUp()
-    {
-        $this->predicate = new In();
-    }
 
     public function testEmptyConstructorYieldsNullIdentifierAndValueSet()
     {
-        $this->assertNull($this->predicate->getIdentifier());
-        $this->assertNull($this->predicate->getValueSet());
+        $in = new In();
+        $this->assertNull($in->getIdentifier());
+        $this->assertNull($in->getValueSet());
     }
 
     public function testSpecificationHasSaneDefaultValue()
     {
-        $this->assertEquals('%1$s IN (%2$s)', $this->predicate->getSpecification());
+        $in = new In();
+        $this->assertEquals('%1$s IN (%2$s)', $in->getSpecification());
     }
 
     public function testCanPassIdentifierAndValueSetToConstructor()
     {
+        $in = new In();
         $predicate = new In('foo.bar', array(1, 2));
         $this->assertEquals('foo.bar', $predicate->getIdentifier());
         $this->assertEquals(array(1, 2), $predicate->getValueSet());
@@ -51,31 +50,35 @@ class InTest extends TestCase
 
     public function testIdentifierIsMutable()
     {
-        $this->predicate->setIdentifier('foo.bar');
-        $this->assertEquals('foo.bar', $this->predicate->getIdentifier());
+        $in = new In();
+        $in->setIdentifier('foo.bar');
+        $this->assertEquals('foo.bar', $in->getIdentifier());
     }
 
     public function testValueSetIsMutable()
     {
-        $this->predicate->setValueSet(array(1, 2));
-        $this->assertEquals(array(1, 2), $this->predicate->getValueSet());
+        $in = new In();
+        $in->setValueSet(array(1, 2));
+        $this->assertEquals(array(1, 2), $in->getValueSet());
     }
 
     public function testSpecificationIsMutable()
     {
-        $this->predicate->setSpecification('%1$s IS IN (%2$s)');
-        $this->assertEquals('%1$s IS IN (%2$s)', $this->predicate->getSpecification());
+        $in = new In();
+        $in->setSpecification('%1$s IS IN (%2$s)');
+        $this->assertEquals('%1$s IS IN (%2$s)', $in->getSpecification());
     }
 
     public function testRetrievingWherePartsReturnsSpecificationArrayOfIdentifierAndValuesAndArrayOfTypes()
     {
-        $this->predicate->setIdentifier('foo.bar')
+        $in = new In();
+        $in->setIdentifier('foo.bar')
                         ->setValueSet(array(1, 2, 3));
         $expected = array(array(
-            $this->predicate->getSpecification(),
+            $in->getSpecification(),
             array('foo.bar', 1, 2, 3),
             array(In::TYPE_IDENTIFIER, In::TYPE_VALUE, In::TYPE_VALUE, In::TYPE_VALUE),
         ));
-        $this->assertEquals($expected, $this->predicate->getWhereParts());
+        $this->assertEquals($expected, $in->getExpressionData());
     }
 }

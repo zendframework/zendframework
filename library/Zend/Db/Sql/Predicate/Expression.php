@@ -19,7 +19,9 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Db\Sql;
+namespace Zend\Db\Sql\Predicate;
+
+use Zend\Db\Sql\Expression as BaseExpression;
 
 /**
  * @category   Zend
@@ -28,25 +30,34 @@ namespace Zend\Db\Sql;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Sql
+class Expression extends BaseExpression implements PredicateInterface
 {
-    public function createSelect($table = null, $schema = null)
+
+    /**
+     * Constructor
+     *
+     * @param  string $literal
+     * @param  mixed $valueParameter
+     * @return void
+     */
+    public function __construct($expression = null, $valueParameter = null /*[, $valueParameter, ... ]*/)
     {
-        return new Select($table, $schema);
+        if ($expression) {
+            $this->setExpression($expression);
+        }
+
+        if (is_array($valueParameter)) {
+            $this->setParameters($valueParameter);
+        } else {
+            $argNum = func_num_args();
+            if ($argNum > 2 || is_scalar($valueParameter)) {
+                $parameters = array();
+                for ($i = 1; $i < $argNum; $i++) {
+                    $parameters[] = func_get_arg($i);
+                }
+                $this->setParameters($parameters);
+            }
+        }
     }
 
-    public function createInsert($table = null, $schema = null)
-    {
-        return new Insert($table, $schema);
-    }
-
-    public function createUpdate($table = null, $schema = null)
-    {
-        return new Update($table, $schema);
-    }
-
-    public function createDelete($table = null, $schema = null)
-    {
-        return new Delete($table, $schema);
-    }
 }

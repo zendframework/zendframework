@@ -25,6 +25,7 @@ use Zend\Db\Adapter\Adapter,
     Zend\Db\Adapter\Driver\StatementInterface,
     Zend\Db\Adapter\Platform\PlatformInterface,
     Zend\Db\Adapter\Platform\Sql92,
+    Zend\Db\Adapter\ParameterContainerInterface,
     Zend\Db\Adapter\ParameterContainer;
 
 /**
@@ -36,26 +37,54 @@ use Zend\Db\Adapter\Adapter,
  */
 class Insert implements SqlInterface, PreparableSqlInterface
 {
+    /**#@+
+     * Constants
+     *
+     * @const
+     */
+    const SPECIFICATION_INSERT = 'insert';
     const VALUES_MERGE = 'merge';
     const VALUES_SET   = 'set';
+    /**#@-*/
 
-    protected $specification    = 'INSERT INTO %1$s (%2$s) VALUES (%3$s)';
+    /**
+     * @var array Specification array
+     */
+    protected $specifications = array(
+        self::SPECIFICATION_INSERT => 'INSERT INTO %1$s (%2$s) VALUES (%3$s)'
+    );
+
+    /**
+     * @var string
+     */
     protected $table            = null;
-    protected $databaseOrSchema = null;
+
+    /**
+     * @var string
+     */
+    protected $schema           = null;
+
+    /**
+     * @var array
+     */
     protected $columns          = array();
+
+    /**
+     * @var array
+     */
     protected $values           = array();
 
     /**
      * Constructor
      * 
      * @param  null|string $table 
-     * @param  null|string $databaseOrSchema 
+     * @param  null|string $schema
      * @return void
      */
-    public function __construct($table = null, $databaseOrSchema = null)
+    public function __construct($table = null, $schema = null)
     {
         if ($table) {
-            $this->into($table, $databaseOrSchema);
+            $this->into($table, $schema);
         }
     }
 
@@ -70,7 +99,7 @@ class Insert implements SqlInterface, PreparableSqlInterface
     {
         $this->table = $table;
         if ($databaseOrSchema) {
-            $this->databaseOrSchema = $databaseOrSchema;
+            $this->schema = $databaseOrSchema;
         }
         return $this;
     }
@@ -132,11 +161,17 @@ class Insert implements SqlInterface, PreparableSqlInterface
         $driver   = $adapter->getDriver();
         $platform = $adapter->getPlatform();
         $parameterContainer = $statement->getParameterContainer();
+
+        if (!$parameterContainer instanceof ParameterContainerInterface) {
+            $parameterContainer = new ParameterContainer();
+            $statement->setParameterContainer($parameterContainer);
+        }
+
         $prepareType = $driver->getPrepareType();
 
         $table = $platform->quoteIdentifier($this->table);
-        if ($this->databaseOrSchema != '') {
-            $table = $platform->quoteIdentifier($this->databaseOrSchema)
+        if ($this->schema != '') {
+            $table = $platform->quoteIdentifier($this->schema)
                 . $platform->getIdentifierSeparator()
                 . $table;
         }
@@ -147,15 +182,20 @@ class Insert implements SqlInterface, PreparableSqlInterface
         foreach ($this->columns as $cIndex => $column) {
             $columns[$cIndex] = $platform->quoteIdentifier($column);
             if ($prepareType == 'positional') {
-                $parameterContainer->offsetSet(null, $this->values[$cIndex]);
                 $values[$cIndex] = $driver->formatParameterName(null);
+                $parameterContainer->offsetSet(null, $this->values[$cIndex]);
             } elseif ($prepareType == 'named') {
                 $values[$cIndex] = $driver->formatParameterName($column);
                 $parameterContainer->offsetSet($column, $this->values[$cIndex]);
             }
         }
 
-        $sql = sprintf($this->specification, $table, implode(', ', $columns), implode(', ', $values));
+        $sql = sprintf(
+            $this->specifications[self::SPECIFICATION_INSERT],
+            $table,
+            implode(', ', $columns),
+            implode(', ', $values)
+        );
 
         $statement->setSql($sql);
     }
@@ -171,8 +211,8 @@ class Insert implements SqlInterface, PreparableSqlInterface
         $platform = ($platform) ?: new Sql92;
         $table = $platform->quoteIdentifier($this->table);
 
-        if ($this->databaseOrSchema != '') {
-            $table = $platform->quoteIdentifier($this->databaseOrSchema) . $platform->getIdentifierSeparator() . $table;
+        if ($this->schema != '') {
+            $table = $platform->quoteIdentifier($this->schema) . $platform->getIdentifierSeparator() . $table;
         }
 
         $columns = array_map(array($platform, 'quoteIdentifier'), $this->columns);
@@ -181,7 +221,7 @@ class Insert implements SqlInterface, PreparableSqlInterface
         $values = array_map(array($platform, 'quoteValue'), $this->values);
         $values = implode(', ', $values);
 
-        return sprintf($this->specification, $table, $columns, $values);
+        return sprintf($this->specifications[self::SPECIFICATION_INSERT], $table, $columns, $values);
     }
 
     /**

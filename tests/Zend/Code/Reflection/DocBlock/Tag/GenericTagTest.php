@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Code\Reflection\DocBlock\Tag;
 use Zend\Code\Reflection\DocBlock\GenericTag;
 

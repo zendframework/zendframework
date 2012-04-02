@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Controller\Action\Helper;
 use Zend\View;
 use Zend\Controller\Action;

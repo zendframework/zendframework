@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
-* @namespace
-*/
 namespace ZendTest\Feed\Writer;
 use Zend\Feed\Writer;
 use Zend\Date;

@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Code\Generator;
 use Zend\Code\Generator\MethodGenerator,
     Zend\Code\Generator\ParameterGenerator,

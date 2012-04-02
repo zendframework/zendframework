@@ -19,12 +19,10 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Ldap;
-use Zend\Ldap\Node\RootDse;
-use Zend\Ldap;
+
+use Zend\Ldap\Node\RootDse,
+    Zend\Ldap;
 
 /**
  * @category   Zend

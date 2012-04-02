@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Mvc\Router\Http\TestAsset;
 
 use Zend\Mvc\Router\Http\Route,

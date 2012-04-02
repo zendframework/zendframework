@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Feed\PubSubHubbub\Model;
 use Zend\Feed\PubSubHubbub;
 use Zend\Date;

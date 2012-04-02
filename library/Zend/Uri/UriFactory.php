@@ -20,9 +20,6 @@
  * @version   $Id$
  */
 
-/**
- * @namespace
- */
 namespace Zend\Uri;
 use Zend\Uri\Uri;
 

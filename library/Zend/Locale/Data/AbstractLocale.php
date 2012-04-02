@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Locale\Data;
 
 use Zend\Cache\Storage\Adapter as CacheAdapter,

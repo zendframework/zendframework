@@ -20,9 +20,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Http\Client\Adapter;
 use Zend\Http\Client\Adapter as HttpAdapter,
     Zend\Http\Client\Adapter\Exception as AdapterException,

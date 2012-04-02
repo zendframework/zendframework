@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Barcode\Renderer;
 
 use ZendTest\Barcode\Object\TestAsset as TestAsset;

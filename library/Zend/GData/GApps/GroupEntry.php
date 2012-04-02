@@ -20,9 +20,6 @@
  * @version    $Id:$
  */
 
-/**
- * @namespace
- */
 namespace Zend\GData\GApps;
 
 use Zend\GData\GApps;

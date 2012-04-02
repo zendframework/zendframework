@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Soap;
 use Zend\Soap\Wsdl,
     Zend\Soap\WsdlException,

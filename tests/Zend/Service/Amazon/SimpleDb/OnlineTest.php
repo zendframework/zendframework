@@ -20,9 +20,6 @@
  * @version    $Id$
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Service\Amazon\SimpleDb;
 
 use Zend\Service\Amazon\SimpleDb,

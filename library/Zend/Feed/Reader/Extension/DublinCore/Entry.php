@@ -18,9 +18,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
-* @namespace
-*/
 namespace Zend\Feed\Reader\Extension\DublinCore;
 use Zend\Feed\Reader;
 use Zend\Feed\Reader\Collection;

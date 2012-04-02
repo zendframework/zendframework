@@ -1,6 +1,5 @@
 <?php
 
-/** @namespace */
 namespace Zend\File;
 
 // import SPL classes/interfaces into local scope

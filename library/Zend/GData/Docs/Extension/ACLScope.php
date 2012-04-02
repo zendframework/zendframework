@@ -21,9 +21,6 @@
  * @version    $Id: EmailList.php 20096 2010-01-06 02:05:09Z bkarwin $
  */
 
-/**
- * @namespace
- */
 namespace Zend\GData\Docs\Extension;
 
 /**

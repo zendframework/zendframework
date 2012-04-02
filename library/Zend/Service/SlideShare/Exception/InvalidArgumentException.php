@@ -21,9 +21,6 @@
  * @version    $Id$
  */
 
-/**
- * @namespace
- */
 namespace Zend\Service\SlideShare\Exception;
 
 /**

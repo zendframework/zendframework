@@ -1,8 +1,5 @@
 <?php
 
-/**
- * @namespace
- */
 namespace ZendTest\Http;
 
 use Zend\Http\Client,

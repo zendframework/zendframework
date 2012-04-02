@@ -7,9 +7,6 @@
  * @author Ralph Schindler
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Code\Reflection\TestAsset;
 
 /**

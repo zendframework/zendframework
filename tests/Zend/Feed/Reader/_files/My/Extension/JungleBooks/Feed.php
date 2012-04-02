@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace My\Extension\JungleBooks;
 use Zend\Feed\Reader\Extension;
 

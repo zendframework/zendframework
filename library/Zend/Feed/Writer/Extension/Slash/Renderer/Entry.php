@@ -18,9 +18,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
  
-/**
-* @namespace
-*/
 namespace Zend\Feed\Writer\Extension\Slash\Renderer;
 use Zend\Feed\Writer\Extension;
 

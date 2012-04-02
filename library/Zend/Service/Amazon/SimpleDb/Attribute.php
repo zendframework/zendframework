@@ -20,9 +20,6 @@
  * @version    $Id: Response.php 17539 2009-08-10 22:51:26Z mikaelkael $
  */
 
-/**
- * @namespace
- */
 namespace Zend\Service\Amazon\SimpleDb;
 
 /**

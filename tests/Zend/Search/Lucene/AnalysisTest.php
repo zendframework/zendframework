@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Search\Lucene;
 use Zend\Search\Lucene\Analysis\Analyzer;
 use Zend\Search\Lucene\Analysis\Analyzer\Common;

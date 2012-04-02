@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
-* @namespace
-*/
 namespace ZendTest\Feed\Writer\Renderer\Entry;
 use Zend\Feed\Writer\Renderer;
 use Zend\Feed\Writer;

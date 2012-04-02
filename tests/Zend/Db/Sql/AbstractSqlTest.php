@@ -19,9 +19,7 @@ class AbstractSqlTest extends \PHPUnit_Framework_TestCase
     public function setup()
     {
         $this->abstractSql = $this->getMockForAbstractClass('Zend\Db\Sql\AbstractSql');
-
     }
-
 
     /**
      * @covers Zend\Db\Sql\AbstractSql::processExpression
@@ -70,12 +68,25 @@ class AbstractSqlTest extends \PHPUnit_Framework_TestCase
         $expression = new Expression('? > ? AND y < ?', array('x', 5, 10), array(Expression::TYPE_IDENTIFIER));
         $sqlAndParams = $this->invokeProcessExpressionMethod($expression, $mockDriver);
 
-        $this->assertEquals('"x" > :exprParam1 AND y < :exprParam2', $sqlAndParams['sql']);
+        $this->assertRegExp('#"x" > :expr\d\d\d\dParam1 AND y < :expr\d\d\d\dParam2#', $sqlAndParams['sql']);
         $this->assertInternalType('array', $sqlAndParams['parameters']);
-        $this->assertEquals(
-            array('exprParam1' => 5, 'exprParam2' => 10),
-            $sqlAndParams['parameters']
-        );
+
+        // test keys and values
+        preg_match('#expr(\d\d\d\d)Param1#', key($sqlAndParams['parameters']), $matches);
+        $expressionNumber = $matches[1];
+
+        $this->assertRegExp('#expr\d\d\d\dParam1#', key($sqlAndParams['parameters']));
+        $this->assertEquals(5, current($sqlAndParams['parameters']));
+        next($sqlAndParams['parameters']);
+        $this->assertRegExp('#expr\d\d\d\dParam2#', key($sqlAndParams['parameters']));
+        $this->assertEquals(10, current($sqlAndParams['parameters']));
+
+        // ensure next invocation increases number by 1
+        $sqlAndParamsNext = $this->invokeProcessExpressionMethod($expression, $mockDriver);
+        preg_match('#expr(\d\d\d\d)Param1#', key($sqlAndParamsNext['parameters']), $matches);
+        $expressionNumberNext = $matches[1];
+
+        $this->assertEquals(1, (int) $expressionNumberNext - (int) $expressionNumber);
     }
 
     /**

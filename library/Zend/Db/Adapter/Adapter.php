@@ -52,6 +52,7 @@ class Adapter
     const FUNCTION_QUOTE_IDENTIFIER = 'quoteIdentifier';
     const FUNCTION_QUOTE_VALUE = 'quoteValue';
 
+    const VALUE_QUOTE_SEPARATOR = 'quoteSeparator';
 
     /**
      * @var Driver\DriverInterface
@@ -212,6 +213,24 @@ class Adapter
         }
         $statement->setParameterContainer($initialParameters);
         return $statement;
+    }
+
+    public function getHelpers(/* $functions */)
+    {
+        $functions = array();
+        $driver = $this->driver;
+        $platform = $this->platform;
+        foreach (func_get_args() as $arg) {
+            switch ($arg) {
+                case self::FUNCTION_QUOTE_IDENTIFIER:
+                    $functions[] = function ($value) use ($platform) { return $platform->quoteIdentifier($value); };
+                    break;
+                case self::FUNCTION_QUOTE_VALUE:
+                    $functions[] = function ($value) use ($platform) { return $platform->quoteValue; };
+                    break;
+
+            }
+        }
     }
 
     /**

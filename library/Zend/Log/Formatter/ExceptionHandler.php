@@ -23,7 +23,6 @@
  * @namespace
  */
 namespace Zend\Log\Formatter;
-//use \Zend\Log\Formatter;
 
 /**
  * @uses       \Zend\Log\Formatter\AbstractFormatter
@@ -43,7 +42,7 @@ class ExceptionHandler extends AbstractFormatter
      */
     public static function factory($options = array())
     {
-        return new self;
+        return new self();
     }
 
     /**

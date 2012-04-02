@@ -40,7 +40,7 @@ use DateTime,
  */
 class Logger implements Loggable, Pluggable
 {
-    /**#@+
+    /**
      * @const int defined from the BSD Syslog message severities
      * @link http://tools.ietf.org/html/rfc3164
      */
@@ -52,11 +52,11 @@ class Logger implements Loggable, Pluggable
     const NOTICE = 5;
     const INFO   = 6;
     const DEBUG  = 7;
-    /**#@-*/
 
     /**
-     * The format of the date used for a log entry
-     *
+     * The format of the date used for a log entry (ISO 8601 date)
+     * 
+     * @see http://nl3.php.net/manual/en/function.date.php
      * @var string
      */
     protected $dateTimeFormat = 'c';
@@ -92,11 +92,15 @@ class Logger implements Loggable, Pluggable
     protected $writerBroker;
 
     /**
+     * Registered error handler
+     * 
      * @var boolean
      */
     protected static $registeredErrorHandler = false;
        
     /**
+     * Registered exception handler
+     * 
      * @var boolean
      */
     protected static $registeredExceptionHandler = false;
@@ -113,8 +117,6 @@ class Logger implements Loggable, Pluggable
     }
 
     /**
-     * Destructor
-     *
      * Shutdown all writers
      *
      * @return void
@@ -141,7 +143,8 @@ class Logger implements Loggable, Pluggable
     /**
      * Set the format of DateTime
      *
-     * @param string $format
+     * @see    http://nl3.php.net/manual/en/function.date.php
+     * @param  string $format
      * @return Logger
      */
     public function setDateTimeFormat($format)
@@ -226,13 +229,32 @@ class Logger implements Loggable, Pluggable
     /**
      * Get writers
      * 
-     * @return array 
+     * @return SplPriorityQueue 
      */
     public function getWriters()
     {
-        return $this->writers->toArray();
+        return $this->writers;
     }
-    
+    /**
+     * Set the writers
+     * 
+     * @param  SplPriorityQueue $writers 
+     * @throws Exception\InvalidArgumentException
+     * @return Logger
+     */
+    public function setWriters($writers)
+    {
+        if (!$writers instanceof SplPriorityQueue) {
+            throw new Exception\InvalidArgumentException('Writers must be a SplPriorityQueue of Zend\Log\Writer');
+        }
+        foreach ($writers->toArray() as $writer) {
+            if (!$writer instanceof Writer) {
+                throw new Exception\InvalidArgumentException('Writers must be a SplPriorityQueue of Zend\Log\Writer');
+            }
+        }
+        $this->writers = $writers;
+        return $this;
+    }
     /**
      * Add a message as a log entry
      *
@@ -240,11 +262,16 @@ class Logger implements Loggable, Pluggable
      * @param  mixed $message
      * @param  array|Traversable $extra
      * @return Logger
-     * @throws Exception\InvalidArgumentException if message can't be cast in string
-     * @throws Exception\InvalidArgumentException if extra can't be iterate
+     * @throws Exception\InvalidArgumentException if message can't be cast to string
+     * @throws Exception\InvalidArgumentException if extra can't be iterated over
      */
     public function log($priority, $message, $extra = array())
     {
+        if (!is_int($priority) || ($priority<0) || ($priority>=count($this->priorities))) {
+            throw new Exception\InvalidArgumentException(
+                '$priority must be an integer > 0 and < ' . count($this->priorities)
+            );
+        }
         if (is_object($message) && !method_exists($message, '__toString')) {
             throw new Exception\InvalidArgumentException(
                 '$message must implement magic __toString() method'
@@ -259,7 +286,7 @@ class Logger implements Loggable, Pluggable
             $extra = ArrayUtils::iteratorToArray($extra);
         }
 
-        if ($this->getWriters()===array()) {
+        if ($this->writers->count() === 0) {
             throw new Exception\RuntimeException('No log writer specified');
         }
         
@@ -267,10 +294,10 @@ class Logger implements Loggable, Pluggable
         $timestamp = $date->format($this->getDateTimeFormat());
 
         if (is_array($message)) {
-            $message = var_export($message,TRUE);
+            $message = var_export($message, true);
         }
-        
-        foreach ($this->getWriters() as $writer) {
+               
+        foreach ($this->writers->toArray() as $writer) {
             $writer->write(array(
                 'timestamp'    => $timestamp,
                 'priority'     => (int) $priority,
@@ -371,14 +398,14 @@ class Logger implements Loggable, Pluggable
      * @param  Logger $logger
      * @return boolean
      */
-    public static function registerErrorHandler($logger)
+    public static function registerErrorHandler(Logger $logger)
     {
         // Only register once per instance
         if (self::$registeredErrorHandler) {
             return false;
         }
 
-        if (!$logger instanceof Logger) {
+        if ($logger === null) {
             throw new Exception\InvalidArgumentException('Invalid Logger specified');
         }
         
@@ -429,14 +456,14 @@ class Logger implements Loggable, Pluggable
      * @param Logger $logger
      * @return type 
      */
-    public static function registerExceptionHandler($logger)
+    public static function registerExceptionHandler(Logger $logger)
     {
         // Only register once per instance
         if (self::$registeredExceptionHandler) {
             return false;
         }
         
-        if (!$logger instanceof Logger) {
+        if ($logger === null) {
             throw new Exception\InvalidArgumentException('Invalid Logger specified');
         }
         

@@ -22,7 +22,8 @@
 namespace ZendTest\Log;
 
 use Zend\Log\Logger,
-    Zend\Log\Writer\Mock as MockWriter;
+    Zend\Log\Writer\Mock as MockWriter,
+    Zend\Stdlib\SplPriorityQueue;
 
 /**
  * @category   Zend
@@ -88,7 +89,7 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
     {
         $this->logger->addWriter('mock');
         $writers = $this->logger->getWriters();
-        $this->assertInstanceOf('Zend\Log\Writer\Mock', $writers[0]);
+        $this->assertInstanceOf('Zend\Stdlib\SplPriorityQueue', $writers);
     }
     
     /**
@@ -106,6 +107,23 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
         $this->logger->log(Logger::INFO, 'test');
     }
     
+    public function testSetWriters()
+    {
+        $writer1 = $this->logger->plugin('mock');
+        $writer2 = $this->logger->plugin('null');
+        $writers = new SplPriorityQueue();
+        $writers->insert($writer1, 1);
+        $writers->insert($writer2, 2);
+        $this->logger->setWriters($writers);
+        
+        $writers = $this->logger->getWriters();
+        $this->assertInstanceOf('Zend\Stdlib\SplPriorityQueue', $writers);
+        $writer = $writers->extract();
+        $this->assertTrue($writer instanceof \Zend\Log\Writer\Null);
+        $writer = $writers->extract();
+        $this->assertTrue($writer instanceof \Zend\Log\Writer\Mock);
+    }
+    
     public function testAddWriterWithPriority()
     {
         $writer1 = $this->logger->plugin('mock');
@@ -114,9 +132,11 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
         $this->logger->addWriter($writer2,2);
         $writers = $this->logger->getWriters();
 
-        $this->assertTrue(is_array($writers));
-        $this->assertTrue($writers[0] instanceof \Zend\Log\Writer\Null);
-        $this->assertTrue($writers[1] instanceof \Zend\Log\Writer\Mock);
+        $this->assertInstanceOf('Zend\Stdlib\SplPriorityQueue', $writers);
+        $writer = $writers->extract();
+        $this->assertTrue($writer instanceof \Zend\Log\Writer\Null);
+        $writer = $writers->extract();
+        $this->assertTrue($writer instanceof \Zend\Log\Writer\Mock);
         
     }
     
@@ -128,9 +148,11 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
         $this->logger->addWriter($writer2,1);
         $writers = $this->logger->getWriters();
 
-        $this->assertTrue(is_array($writers));
-        $this->assertTrue($writers[0] instanceof \Zend\Log\Writer\Mock);
-        $this->assertTrue($writers[1] instanceof \Zend\Log\Writer\Null);
+        $this->assertInstanceOf('Zend\Stdlib\SplPriorityQueue', $writers);
+        $writer = $writers->extract();
+        $this->assertTrue($writer instanceof \Zend\Log\Writer\Mock);
+        $writer = $writers->extract();
+        $this->assertTrue($writer instanceof \Zend\Log\Writer\Null);
     }
     
     public function testLogging()

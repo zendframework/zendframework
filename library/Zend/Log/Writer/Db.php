@@ -39,7 +39,7 @@ use Zend\Log\Formatter,
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Db extends AbstractWriter
-{   
+{
     /**
      * Db adapter instance
      *
@@ -52,7 +52,7 @@ class Db extends AbstractWriter
      * 
      * @var string 
      */
-    protected $table;
+    protected $tableName;
 
     /**
      * Relates database columns names to log data field keys.
@@ -71,15 +71,21 @@ class Db extends AbstractWriter
     /**
      * Constructor
      *
+     * We used the Adapter instead of Zend\Db for a performance reason.
+     * 
      * @param Adapter $db 
-     * @param string $table
+     * @param string $tableName
      * @param array $columnMap
      * @param string $separator
      */
-    public function __construct($db, $table, $columnMap = null, $separator = null)
+    public function __construct(Adapter $db, $tableName, array $columnMap = null, $separator = null)
     {
+        if ($db === null) {
+            Exception\InvalidArgumentException('You must pass a valid Zend\Db\Adapter\Adapter');
+        }
+        
         $this->db        = $db;
-        $this->table     = $table;
+        $this->tableName = $tableName;
         $this->columnMap = $columnMap;
         
         if (!empty($separator)) {
@@ -122,32 +128,13 @@ class Db extends AbstractWriter
         }
 
         // Transform the event array into fields
-        $dataToInsert = array();
         if (null === $this->columnMap) {
-            foreach ($event as $name => $value) {
-                if (is_array($value)) {
-                    foreach ($value as $key => $subvalue) {
-                         $dataToInsert[$name . $this->separator . $key] = $subvalue;
-                    }
-                } else {
-                    $dataToInsert[$name] = $value;
-                }
-            }
+            $dataToInsert = $this->eventIntoColumn($event);
         } else {
-            foreach ($event as $name => $value) {
-                if (is_array($value)) {
-                    foreach ($value as $key => $subvalue) {
-                        if (isset($this->columnMap[$name][$key])) {
-                            $dataToInsert[$this->columnMap[$name][$key]] = $subvalue;
-                        }
-                    }
-                } elseif (isset($this->columnMap[$name])) {
-                    $dataToInsert[$this->columnMap[$name]] = $value;
-                } 
-            }
+            $dataToInsert = $this->mapEventIntoColumn($event, $this->columnMap);
         }
 
-        $statement = $this->db->query($this->prepareInsert($this->db, $this->table, $dataToInsert));
+        $statement = $this->db->query($this->prepareInsert($this->db, $this->tableName, $dataToInsert));
         $statement->execute($dataToInsert);
         
     }
@@ -155,16 +142,65 @@ class Db extends AbstractWriter
      * Prepare the INSERT SQL statement
      * 
      * @param  Adapter $db
-     * @param  string $table
+     * @param  string $tableName
      * @param  array $fields
      * @return string 
      */
-    protected function prepareInsert($db, $table, array $fields) 
+    protected function prepareInsert(Adapter $db, $tableName, array $fields) 
     {               
-        $sql = 'INSERT INTO ' . $db->platform->quoteIdentifier($table) . ' (' .
+        $sql = 'INSERT INTO ' . $db->platform->quoteIdentifier($tableName) . ' (' .
                implode(",",array_map(array($db->platform, 'quoteIdentifier'), $fields)) . ') VALUES (' .
                implode(",",array_map(array($db->driver, 'formatParameterName'), $fields)) . ')';
                
         return $sql;
+    }
+    /**
+     * Map event into column using the $columnMap array
+     * 
+     * @param  array $event
+     * @param  array $columnMap
+     * @return array 
+     */
+    protected function mapEventIntoColumn(array $event, array $columnMap = null) 
+    {
+        if (empty($event)) {
+            return array();
+        }
+        $data = array();
+        foreach ($event as $name => $value) {
+            if (is_array($value)) {
+                foreach ($value as $key => $subvalue) {
+                    if (isset($columnMap[$name][$key])) {
+                        $data[$columnMap[$name][$key]] = $subvalue;
+                    }
+                }
+            } elseif (isset($columnMap[$name])) {
+                $data[$columnMap[$name]] = $value;
+            } 
+        }
+        return $data;
+    }
+    /**
+     * Transform event into column for the db table
+     * 
+     * @param  array $event
+     * @return array 
+     */
+    protected function eventIntoColumn(array $event) 
+    {
+        if (empty($event)) {
+            return array();
+        }
+        $data = array();
+        foreach ($event as $name => $value) {
+            if (is_array($value)) {
+                foreach ($value as $key => $subvalue) {
+                    $data[$name . $this->separator . $key] = $subvalue;
+                }
+            } else {
+                $data[$name] = $value;
+            }
+        }
+        return $data;
     }
 }

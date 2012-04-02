@@ -37,7 +37,7 @@
 
             <listitem>
                 <para>
-                    A Formatter (inherits from <classname>Zend\Log\Formatter\AbstractFormatter</classname>)
+                    A Formatter (inheriting from <classname>Zend\Log\Formatter\AbstractFormatter</classname>)
                     can format the log data before it is written by a Writer. Each
                     Writer has exactly one Formatter.
                 </para>

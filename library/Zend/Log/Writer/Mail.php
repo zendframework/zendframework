@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Log\Writer;
 
 use Zend\Log\Formatter\Simple as SimpleFormatter,
@@ -32,12 +29,13 @@ use Zend\Log\Formatter\Simple as SimpleFormatter,
     Zend\Mail\Transport\Sendmail as SendmailTransport;
 
 /**
- * Class used for writing log messages to email via Zend_Mail.
+ * Class used for writing log messages to email via Zend\Mail.
  *
  * Allows for emailing log messages at and above a certain level via a
- * Zend_Mail object.  Note that this class only sends the email upon
+ * Zend\Mail\Message object.  Note that this class only sends the email upon
  * completion, so any log entries accumulated are sent in a single email.
- *
+ * The email is sent using a Zend\Mail\Transport object (Sendmail is default).
+ * 
  * @category   Zend
  * @package    Zend_Log
  * @subpackage Writer
@@ -78,7 +76,7 @@ class Mail extends AbstractWriter
     /**
      * Subject prepend text.
      *
-     * Can only be used of the Zend_Mail object has not already had its
+     * Can only be used of the Zend\Mail object has not already had its
      * subject line set.  Using this will cause the subject to have the entry
      * counts per-priority level appended to it.
      *
@@ -88,14 +86,9 @@ class Mail extends AbstractWriter
 
     /**
      * Constructor
-     *
-     * Constructs the mail writer; requires a Zend_Mail instance, and takes an
-     * optional Zend_Layout instance.  If Zend_Layout is being used,
-     * $this->layout->events will be set for use in the layout template.
-     *
-     * @param  Mailer $mail Mail instance
-     * @param  Layout|null $layout Layout instance
-     * @return Mail
+     * 
+     * @param  Message $mail
+     * @param  Transport $transport
      */
     public function __construct(Message $mail, Transport $transport = null)
     {
@@ -103,6 +96,7 @@ class Mail extends AbstractWriter
         if (null !== $transport) {
             $this->setTransport($transport);
         } else {
+            // default transport
             $this->setTransport(new SendmailTransport());
         }
         $this->formatter = new SimpleFormatter();
@@ -144,8 +138,8 @@ class Mail extends AbstractWriter
      * entry counts per-priority level.
      *
      * Sets the text for use in the subject, with entry counts per-priority
-     * level appended to the end.  Since a Zend_Mail_Message subject can only be set
-     * once, this method cannot be used if the Zend_Mail_Message object already has a
+     * level appended to the end.  Since a Zend\Mail\Message subject can only be set
+     * once, this method cannot be used if the Zend\Mail\Message object already has a
      * subject set.
      *
      * @param  string $subject Subject prepend text
@@ -154,12 +148,6 @@ class Mail extends AbstractWriter
      */
     public function setSubjectPrependText($subject)
     {
-        if ($this->mail->getSubject()) {
-            throw new Exception\RuntimeException(
-                'subject already set on mail; cannot set subject prepend text'
-            );
-        }
-
         $this->subjectPrependText = (string) $subject;
         return $this;
     }
@@ -180,7 +168,7 @@ class Mail extends AbstractWriter
 
         if ($this->subjectPrependText !== null) {
             // Tack on the summary of entries per-priority to the subject
-            // line and set it on the Zend_Mail object.
+            // line and set it on the Zend\Mail object.
             $numEntries = $this->getFormattedNumEntriesPerPriority();
             $this->mail->setSubject("{$this->subjectPrependText} ({$numEntries})");
         }

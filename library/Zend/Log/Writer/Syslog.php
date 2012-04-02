@@ -81,7 +81,7 @@ class Syslog extends AbstractWriter
      *
      * @var string
      */
-    protected $application = 'Zend_Log';
+    protected $appName = 'Zend\Log';
 
     /**
      * Facility used by this syslog-writer instance
@@ -163,9 +163,9 @@ class Syslog extends AbstractWriter
      */
     protected function initializeSyslog()
     {
-        self::$lastApplication = $this->application;
+        self::$lastApplication = $this->appName;
         self::$lastFacility    = $this->facility;
-        openlog($this->application, LOG_PID, $this->facility);
+        openlog($this->appName, LOG_PID, $this->facility);
     }
 
     /**
@@ -207,16 +207,16 @@ class Syslog extends AbstractWriter
     /**
      * Set application name
      *
-     * @param string $application Application name
+     * @param string $appName Application name
      * @return Syslog
      */
-    public function setApplicationName($application)
+    public function setApplicationName($appName)
     {
-        if ($this->application === $application) {
+        if ($this->appName === $appName) {
             return $this;
         }
 
-        $this->application = $application;
+        $this->appName = $appName;
         $this->initializeSyslog();
         return $this;
     }
@@ -245,7 +245,7 @@ class Syslog extends AbstractWriter
             $priority = $this->defaultPriority;
         }
 
-        if ($this->application !== self::$lastApplication
+        if ($this->appName !== self::$lastApplication
             || $this->facility !== self::$lastFacility
         ) {
             $this->initializeSyslog();

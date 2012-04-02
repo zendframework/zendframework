@@ -23,10 +23,10 @@
  * @namespace
  */
 namespace Zend\Log\Formatter;
-use \Zend\Log\Formatter;
+use Zend\Log\Exception;
 
 /**
- * @uses       \Zend\Log\Formatter\AbstractFormatter
+ * @uses       Zend\Log\Formatter\AbstractFormatter
  * @category   Zend
  * @package    Zend_Log
  * @subpackage Formatter
@@ -35,15 +35,55 @@ use \Zend\Log\Formatter;
  */
 class ErrorHandler extends AbstractFormatter
 {
+    const DEFAULT_FORMAT = '%timestamp% %priorityName% (%priority%) %message% (errno %extra[errno]%) in %extra[file]% on line %extra[line]%';
+    
+    /**
+     * Format
+     * 
+     * @var string 
+     */
+    protected $format;
+    
+    /**
+     * Class constructor
+     *
+     * @param  null|string  $format  Format specifier for log messages
+     * @return void
+     * @throws Zend\Log\Exception\InvalidArgumentException
+     */
+    public function __construct($format = null)
+    {
+        if ($format === null) {
+            $format = self::DEFAULT_FORMAT;
+        }
+
+        if (!is_string($format)) {
+            throw new Exception\InvalidArgumentException('Format must be a string');
+        }
+
+        $this->format = $format;
+    }
+
     /**
      * Factory for Zend\Log\Formatter\ErrorHandler
      *
-     * @param array|\Zend\Config\Config $options useless
-     * @return \Zend\Log\Formatter\Firebug
+     * @param  array|\Zend\Config\Config $options useless
+     * @return ErrorHandler
      */
     public static function factory($options = array())
     {
-        return new self;
+        $format = null;
+        if (null !== $options) {
+            if ($options instanceof Config) {
+                $options = $options->toArray();
+            }
+
+            if (array_key_exists('format', $options)) {
+                $format = $options['format'];
+            }
+        }
+        
+        return new self($format);
     }
 
     /**
@@ -54,10 +94,16 @@ class ErrorHandler extends AbstractFormatter
      */
     public function format($event)
     {
-        $output = $event['timestamp'] . ' ' . $event['priorityName'] . ' (' .
-                  $event['priority'] . ') ' . $event['message'] . ' (errno ' .
-                  $event['extra']['errno'] . ') in ' . $event['extra']['file'] .
-                  ' on line ' . $event['extra']['line'];
+        $output = $this->format;
+        foreach ($event as $name => $value) {
+            if (is_array($value)) {
+                foreach ($value as $sname => $svalue) {
+                    $output = str_replace("%{$name}[{$sname}]%", $svalue, $output);
+                }
+            } else {
+                $output = str_replace("%$name%", $value, $output);
+            }
+        }
         return $output;
     }
 }

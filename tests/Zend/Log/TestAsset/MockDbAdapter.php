@@ -1,7 +1,9 @@
 <?php
 namespace ZendTest\Log\TestAsset;
 
-class MockDbAdapter 
+use Zend\Db\Adapter\Adapter as DbAdapter;
+
+class MockDbAdapter extends DbAdapter
 {
     public $plaftorm;
     public $driver;
@@ -19,7 +21,7 @@ class MockDbAdapter
         $this->driver = new MockDbDriver;
         
     }
-    public function query($sql)
+    public function query($sql, $parametersOrQueryMode = DbAdapter::QUERY_MODE_PREPARE)
     {
         $this->calls[__FUNCTION__][] = $sql;
         return $this;

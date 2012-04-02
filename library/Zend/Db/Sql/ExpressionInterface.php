@@ -13,9 +13,14 @@ interface ExpressionInterface
      * @return array of array|string should return an array in the format:
      *
      * array (
-     *    string $specification, // a sprintf formatted string
-     *    array $values, // the values for the above sprintf formatted string
-     *    array $types, // an array of equal length of the $values array, with either TYPE_IDENTIFIER or TYPE_VALUE for each value
+     *    // a sprintf formatted string
+     *    string $specification,
+     *
+     *    // the values for the above sprintf formatted string
+     *    array $values,
+     *
+     *    // an array of equal length of the $values array, with either TYPE_IDENTIFIER or TYPE_VALUE for each value
+     *    array $types,
      * )
      *
      */

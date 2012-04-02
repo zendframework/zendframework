@@ -37,18 +37,41 @@ use Zend\Db\Adapter\Adapter,
  */
 class Insert implements SqlInterface, PreparableSqlInterface
 {
+    /**#@+
+     * Constants
+     *
+     * @const
+     */
     const SPECIFICATION_INSERT = 'insert';
-
     const VALUES_MERGE = 'merge';
     const VALUES_SET   = 'set';
+    /**#@-*/
 
+    /**
+     * @var array Specification array
+     */
     protected $specifications = array(
         self::SPECIFICATION_INSERT => 'INSERT INTO %1$s (%2$s) VALUES (%3$s)'
     );
 
+    /**
+     * @var string
+     */
     protected $table            = null;
+
+    /**
+     * @var string
+     */
     protected $schema           = null;
+
+    /**
+     * @var array
+     */
     protected $columns          = array();
+
+    /**
+     * @var array
+     */
     protected $values           = array();
 
     /**

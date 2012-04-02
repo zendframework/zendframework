@@ -39,21 +39,27 @@ use Zend\Db\Adapter\Adapter,
  */
 class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
 {
+    /**#@+
+     * Constant
+     * @const
+     */
     const SPECIFICATION_SELECT = 'select';
     const SPECIFICATION_JOIN = 'join';
     const SPECIFICATION_WHERE = 'where';
     const SPECIFICATION_ORDER = 'order';
     const SPECIFICATION_FETCH = 'fetch';
-
     const JOIN_INNER = 'inner';
     const JOIN_OUTER = 'outer';
     const JOIN_LEFT = 'left';
     const JOIN_RIGHT = 'right';
     const SQL_WILDCARD = '*';
-
     const ORDER_ASCENDING = 'ASC';
     const ORDER_DESENDING = 'DESC';
+    /**#@-*/
 
+    /**
+     * @var array Specifications
+     */
     protected $specifications = array(
         self::SPECIFICATION_SELECT => 'SELECT %1$s FROM %2$s',
         self::SPECIFICATION_JOIN   => '%1$s JOIN %2$s ON %3$s',
@@ -62,14 +68,24 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
         self::SPECIFICATION_FETCH  => 'FETCH FIRST %1$s'
     );
 
+    /**
+     * @var bool
+     */
     protected $tableReadOnly = false;
 
     /**
      * @var bool
      */
-    protected $prefixColumnsWithTable = false;
+    protected $prefixColumnsWithTable = true;
 
+    /**
+     * @var string
+     */
     protected $table = null;
+
+    /**
+     * @var string
+     */
     protected $schema = null;
 
     /**
@@ -77,12 +93,29 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
      */
     protected $columns = array(self::SQL_WILDCARD);
 
+    /**
+     * @var array
+     */
     protected $joins = array();
 
+    /**
+     * @var Where
+     */
     protected $where = null;
+
+    /**
+     * @var null|string
+     */
     protected $order = null;
 
+    /**
+     * @var int|null
+     */
     protected $fetchNumber = null;
+
+    /**
+     * @var int|null
+     */
     protected $fetchOffset = null;
 
 
@@ -100,25 +133,7 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
             $this->tableReadOnly = true;
         }
 
-        // , array $columns = array(self::SQL_WILDCARD), $where = null, $order = null, $limit = null
-
-        /*
-        if ($columns) {
-            $this->columns = $columns;
-        }
-        */
-
         $this->where = new Where;
-
-        /*
-        if ($order) {
-            $this->order = $order;
-        }
-
-        if ($limit) {
-            $this->limit = $limit;
-        }
-        */
     }
 
     /**
@@ -151,15 +166,15 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
      *
      *   array(string => value, ...)
      *     key string will be use as alias,
-     *     value can be string or Exrpession objects
+     *     value can be string or Expression objects
      *
      * @param  array $columns
      * @return Select
      */
-    public function columns(array $columns, $prefixColumnsWithTable = false)
+    public function columns(array $columns, $prefixColumnsWithTable = true)
     {
         $this->columns = $columns;
-        $this->prefixColumnsWithTable = $prefixColumnsWithTable;
+        $this->prefixColumnsWithTable = (bool) $prefixColumnsWithTable;
         return $this;
     }
 
@@ -222,7 +237,7 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
     /**
      * $order can be an array of:
      *
-     *
+     * @todo
      *
      *
      * @param string|array $order
@@ -242,7 +257,14 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
 
     public function setSpecification($index, $specification)
     {
-        if (!in_array($index, array(self::SPECIFICATION_SELECT, self::SPECIFICATION_JOIN, self::SPECIFICATION_ORDER, self::SPECIFICATION_FETCH))) {
+        $validSpecs = array(
+            self::SPECIFICATION_SELECT,
+            self::SPECIFICATION_JOIN,
+            self::SPECIFICATION_WHERE,
+            self::SPECIFICATION_ORDER,
+            self::SPECIFICATION_FETCH
+        );
+        if (!in_array($index, $validSpecs)) {
             throw new Exception\InvalidArgumentException('Not a valid index');
         }
         $this->specifications[$index] = $specification;
@@ -282,6 +304,11 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
             $statement->setParameterContainer($parameterContainer);
         }
 
+        // create quoted table name to use in columns processing
+        $quotedTable = ($this->prefixColumnsWithTable)
+            ? $platform->quoteIdentifier($this->table) . $platform->getIdentifierSeparator()
+            : '';
+
         // process columns
         $columns = array();
         foreach ($this->columns as $columnIndexOrAs => $column) {
@@ -293,7 +320,7 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
                 }
                 $columnSql .= $columnParts['sql'];
             } else {
-                $columnSql .= $platform->quoteIdentifierInFragment($column);
+                $columnSql .= $quotedTable . $platform->quoteIdentifierInFragment($column);
             }
             if (is_string($columnIndexOrAs)) {
                 $columnSql .= ' AS ' . $platform->quoteIdentifier($columnIndexOrAs);
@@ -316,7 +343,7 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
                 $joinSpecArgArray[$j][] = strtoupper($join['type']); // type
                 $joinSpecArgArray[$j][] = $platform->quoteIdentifier($join['name']); // table
                 $joinSpecArgArray[$j][] = $platform->quoteIdentifierInFragment($join['on'], array('=', 'AND', 'OR', '(', ')')); // on
-                foreach ($join['columns'] as /* $jColumnKey => */ $jColumn) {
+                foreach ($join['columns'] as $jColumn) {
                     $columns[] = $joinSpecArgArray[$j][1] . $separator . $platform->quoteIdentifierInFragment($jColumn);
                 }
             }
@@ -348,9 +375,9 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
             $sql .= $this->applySpecification(self::SPECIFICATION_ORDER, $this->order);
         }
 
-        $order = null; // @todo
-        $limit = null; // @todo
-
+        // @todo Order and Fetch/Limit in prepare for Sql object
+        $order = null;
+        $limit = null;
 
         $sql .= (isset($limit)) ? sprintf($this->specifications[self::SPECIFICATION_FETCH], $limit) : '';
 
@@ -371,6 +398,11 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
         // get identifier separator
         $separator = $platform->getIdentifierSeparator();
 
+        // create quoted table name to use in columns processing
+        $quotedTable = ($this->prefixColumnsWithTable)
+            ? $platform->quoteIdentifier($this->table) . $platform->getIdentifierSeparator()
+            : '';
+
         // process columns
         $columns = array();
         foreach ($this->columns as $columnIndexOrAs => $column) {
@@ -379,7 +411,7 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
                 $columnParts = $this->processExpression($column, $platform, null, 'column');
                 $columnSql .= $columnParts['sql'];
             } else {
-                $columnSql .= $platform->quoteIdentifierInFragment($column);
+                $columnSql .= $quotedTable . $platform->quoteIdentifierInFragment($column);
             }
             if (is_string($columnIndexOrAs)) {
                 $columnSql .= ' AS ' . $platform->quoteIdentifier($columnIndexOrAs);
@@ -429,7 +461,8 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
             $sql .= ' ' . sprintf($this->specifications[self::SPECIFICATION_WHERE], $whereParts['sql']);
         }
 
-        // process order & limit (@todo this is too basic, but good for now)
+        // process order & limit
+        // @todo this is too basic, but good for now
         //$sql .= (isset($this->order)) ? sprintf($this->specifications[self::SPECIFICATION_ORDER], $this->order) : '';
         //$sql .= (isset($this->limit)) ? sprintf($this->specifications[self::SPECIFICATION_FETCH], $this->limit) : '';
 
@@ -449,16 +482,8 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
         switch (strtolower($name)) {
             case 'where':
                 return $this->where;
-//            case 'table':
-//                return $this->table;
-//            case 'schema':
-//                return $this->schema;
-//            case 'joins':
-//                return $this->joins;
-//            case 'columns':
-//                return $this->columns;
-//            case '':
-//                return $this->
+            default:
+                throw new Exception\InvalidArgumentException('Not a valid magic property for this object');
         }
     }
 

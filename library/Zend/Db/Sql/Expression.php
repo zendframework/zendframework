@@ -4,13 +4,32 @@ namespace Zend\Db\Sql;
 
 class Expression implements ExpressionInterface
 {
+    /**
+     * @const
+     */
     const PLACEHOLDER = '?';
 
+    /**
+     * @var string
+     */
     protected $expression = '';
+
+    /**
+     * @var array
+     */
     protected $parameters = array();
+
+    /**
+     * @var array
+     */
     protected $types = array();
 
-    public function __construct($expression = null, $parameters = null, array $types = array())
+    /**
+     * @param string $expression
+     * @param string|array $parameters
+     * @param array $types
+     */
+    public function __construct($expression = '', $parameters = null, array $types = array())
     {
         if ($expression) {
             $this->setExpression($expression);
@@ -23,6 +42,11 @@ class Expression implements ExpressionInterface
         }
     }
 
+    /**
+     * @param $expression
+     * @return Expression
+     * @throws Exception\InvalidArgumentException
+     */
     public function setExpression($expression)
     {
         if (!is_string($expression) || $expression == '') {
@@ -32,11 +56,19 @@ class Expression implements ExpressionInterface
         return $this;
     }
 
+    /**
+     * @return string
+     */
     public function getExpression()
     {
         return $this->expression;
     }
 
+    /**
+     * @param $parameters
+     * @return Expression
+     * @throws Exception\InvalidArgumentException
+     */
     public function setParameters($parameters)
     {
         if (!is_string($parameters) && !is_array($parameters)) {
@@ -46,21 +78,34 @@ class Expression implements ExpressionInterface
         return $this;
     }
 
+    /**
+     * @return array
+     */
     public function getParameters()
     {
         return $this->parameters;
     }
 
+    /**
+     * @param array $types
+     */
     public function setTypes(array $types)
     {
         $this->types = $types;
     }
 
+    /**
+     * @return array
+     */
     public function getTypes()
     {
         return $this->types;
     }
 
+    /**
+     * @return array
+     * @throws \RuntimeException
+     */
     public function getExpressionData()
     {
         $parameters = (is_string($this->parameters)) ? array($this->parameters) : $this->parameters;
@@ -77,12 +122,8 @@ class Expression implements ExpressionInterface
             $count = 0;
             $expression = str_replace(self::PLACEHOLDER, '%s', $expression, $count);
             if ($count !== count($parameters)) {
-                throw new \RuntimeException('The number of replacements in the expression does not match the number of parameters');
+                throw new Exception\RuntimeException('The number of replacements in the expression does not match the number of parameters');
             }
-
-            // Do I really want to support escaped placeholders? I think not
-            // $expression = preg_replace('#(?<!\\)([' . self::PLACEHOLDER . '])#', '%s', $expression, -1, $count);
-            // $expression = str_replace(, self::PLACEHOLDER, $expression);
         }
 
         return array(array(

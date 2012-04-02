@@ -48,12 +48,15 @@ class Expression extends BaseExpression implements PredicateInterface
 
         if (is_array($valueParameter)) {
             $this->setParameters($valueParameter);
-        } elseif (($argNum = func_num_args()) > 2 || is_scalar($valueParameter)) {
-            $parameters = array();
-            for ($i = 1; $i < $argNum; $i++) {
-                $parameters[] = func_get_arg($i);
+        } else {
+            $argNum = func_num_args();
+            if ($argNum > 2 || is_scalar($valueParameter)) {
+                $parameters = array();
+                for ($i = 1; $i < $argNum; $i++) {
+                    $parameters[] = func_get_arg($i);
+                }
+                $this->setParameters($parameters);
             }
-            $this->setParameters($parameters);
         }
     }
 

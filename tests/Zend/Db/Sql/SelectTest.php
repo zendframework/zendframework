@@ -250,27 +250,27 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         // basic table
         $select0 = new Select;
         $select0->from('foo');
-        $sql0 = 'SELECT * FROM "foo"';
+        $sql0 = 'SELECT "foo".* FROM "foo"';
 
         // table + schema
         $select1 = new Select();
         $select1->from('foo', 'bar');
-        $sql1 = 'SELECT * FROM "bar"."foo"';
+        $sql1 = 'SELECT "foo".* FROM "bar"."foo"';
 
         // columns
         $select2 = new Select;
         $select2->from('foo')->columns(array('bar', 'baz'));
-        $sql2 = 'SELECT "bar", "baz" FROM "foo"';
+        $sql2 = 'SELECT "foo"."bar", "foo"."baz" FROM "foo"';
 
         // columns with column fragement (proper quoting)
         $select3 = new Select;
         $select3->from('foo')->columns(array('baz AS bar'));
-        $sql3 = 'SELECT "baz" AS "bar" FROM "foo"';
+        $sql3 = 'SELECT "foo"."baz" AS "bar" FROM "foo"';
 
         // columns with AS associative array
         $select4 = new Select;
         $select4->from('foo')->columns(array('bar' => 'baz'));
-        $sql4 = 'SELECT "baz" AS "bar" FROM "foo"';
+        $sql4 = 'SELECT "foo"."baz" AS "bar" FROM "foo"';
 
         // columns where value is Expression, with AS
         $select5 = new Select;
@@ -299,27 +299,27 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         // joins (plain)
         $select8 = new Select;
         $select8->from('foo')->join('zac', 'm = n');
-        $sql8 = 'SELECT *, "zac".* FROM "foo" INNER JOIN "zac" ON "m" = "n"';
+        $sql8 = 'SELECT "foo".*, "zac".* FROM "foo" INNER JOIN "zac" ON "m" = "n"';
 
         // join with columns
         $select9 = new Select;
         $select9->from('foo')->join('zac', 'm = n', array('bar', 'baz'));
-        $sql9 = 'SELECT *, "zac"."bar", "zac"."baz" FROM "foo" INNER JOIN "zac" ON "m" = "n"';
+        $sql9 = 'SELECT "foo".*, "zac"."bar", "zac"."baz" FROM "foo" INNER JOIN "zac" ON "m" = "n"';
 
         // join with alternate type
         $select10 = new Select;
         $select10->from('foo')->join('zac', 'm = n', array('bar', 'baz'), Select::JOIN_OUTER);
-        $sql10 = 'SELECT *, "zac"."bar", "zac"."baz" FROM "foo" OUTER JOIN "zac" ON "m" = "n"';
+        $sql10 = 'SELECT "foo".*, "zac"."bar", "zac"."baz" FROM "foo" OUTER JOIN "zac" ON "m" = "n"';
 
         // where (simple string)
         $select11 = new Select;
         $select11->from('foo')->where('x = 5');
-        $sql11 = 'SELECT * FROM "foo" WHERE x = 5';
+        $sql11 = 'SELECT "foo".* FROM "foo" WHERE x = 5';
 
         // where (returning parameters)
         $select12 = new Select;
         $select12->from('foo')->where(array('x = ?' => 5));
-        $sql12 = 'SELECT * FROM "foo" WHERE x = ?';
+        $sql12 = 'SELECT "foo".* FROM "foo" WHERE x = ?';
         $params12 = array(5);
 
         return array(
@@ -358,7 +358,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         $data[7][1] = 'SELECT (COUNT("some_column") + \'5\') AS "bar" FROM "foo"';
         unset($data[7][2]); // remove parameters
 
-        $data[12][1] = 'SELECT * FROM "foo" WHERE x = \'5\'';
+        $data[12][1] = 'SELECT "foo".* FROM "foo" WHERE x = \'5\'';
         unset($data[12][2]); // remove parameters
 
         return $data;

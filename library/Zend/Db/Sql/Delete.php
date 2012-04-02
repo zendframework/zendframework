@@ -39,9 +39,16 @@ use Zend\Db\Adapter\Adapter,
  */
 class Delete extends AbstractSql implements SqlInterface, PreparableSqlInterface
 {
+    /**@#+
+     * @const
+     */
     const SPECIFICATION_DELETE = 'delete';
     const SPECIFICATION_WHERE = 'where';
+    /**@#-*/
 
+    /**
+     * @var array Specifications
+     */
     protected $specifications = array(
         self::SPECIFICATION_DELETE => 'DELETE FROM %1$s',
         self::SPECIFICATION_WHERE => 'WHERE %1$s'

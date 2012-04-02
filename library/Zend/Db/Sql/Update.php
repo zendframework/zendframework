@@ -39,11 +39,16 @@ use Zend\Db\Adapter\Adapter,
  */
 class Update extends AbstractSql implements SqlInterface, PreparableSqlInterface
 {
+    /**@#++
+     * @const
+     */
     const SPECIFICATION_UPDATE = 'update';
     const SPECIFICATION_WHERE = 'where';
 
     const VALUES_MERGE = 'merge';
     const VALUES_SET   = 'set';
+    /**@#-**/
+
 
     protected $specifications = array(
         self::SPECIFICATION_UPDATE => 'UPDATE %1$s SET %2$s',

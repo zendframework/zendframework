@@ -535,7 +535,7 @@ $events->attach(array('foo', 'bar'), '*', $callback);
             </varlistentry>
 
             <varlistentry xml:id="zend.event-manager.event-manager.methods.get-events">
-                <term>detachAggregate</term>
+                <term>getEvents</term>
                 <listitem>
                     <methodsynopsis>
                         <methodname>getEvents</methodname>

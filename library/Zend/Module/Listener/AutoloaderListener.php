@@ -8,6 +8,11 @@ use Zend\Loader\AutoloaderFactory,
 
 class AutoloaderListener extends AbstractListener
 {
+
+    /**
+     * @param \Zend\Module\ModuleEvent $e
+     * @return void
+     */
     public function __invoke(ModuleEvent $e)
     {
         $module = $e->getModule();

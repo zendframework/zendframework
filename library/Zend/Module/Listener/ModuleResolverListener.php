@@ -4,6 +4,10 @@ namespace Zend\Module\Listener;
 
 class ModuleResolverListener extends AbstractListener
 {
+    /**
+     * @param $e
+     * @return object
+     */
     public function __invoke($e)
     {
         $moduleName = $e->getModuleName();

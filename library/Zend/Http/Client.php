@@ -353,7 +353,8 @@ class Client implements Dispatchable
         $method = $this->getRequest()->setMethod($method)->getMethod();
 
         if (($method == Request::METHOD_POST || $method == Request::METHOD_PUT ||
-             $method == Request::METHOD_DELETE) && empty($this->encType)) {
+             $method == Request::METHOD_DELETE || $method == Request::METHOD_PATCH)
+             && empty($this->encType)) {
             $this->setEncType(self::ENC_URLENCODED);
         }
 
@@ -1080,7 +1081,7 @@ class Client implements Dispatchable
 
 
     /**
-     * Prepare the request body (for POST and PUT requests)
+     * Prepare the request body (for PATCH, POST and PUT requests)
      *
      * @return string
      * @throws \Zend\Http\Client\Exception

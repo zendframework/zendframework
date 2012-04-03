@@ -22,6 +22,7 @@ class Request extends Message implements RequestDescription
     const METHOD_DELETE  = 'DELETE';
     const METHOD_TRACE   = 'TRACE';
     const METHOD_CONNECT = 'CONNECT';
+    const METHOD_PATCH   = 'PATCH';
     /**#@-*/
 
     /**#@+
@@ -92,7 +93,8 @@ class Request extends Message implements RequestDescription
         $matches = null;
         $methods = implode('|', array(
             self::METHOD_OPTIONS, self::METHOD_GET, self::METHOD_HEAD, self::METHOD_POST,
-            self::METHOD_PUT, self::METHOD_DELETE, self::METHOD_TRACE, self::METHOD_CONNECT
+            self::METHOD_PUT, self::METHOD_DELETE, self::METHOD_TRACE, self::METHOD_CONNECT,
+            self::METHOD_PATCH
         ));
         $regex = '^(?P<method>' . $methods . ')\s(?P<uri>[^ ]*)(?:\sHTTP\/(?P<version>\d+\.\d+)){0,1}';
         $firstLine = array_shift($lines);
@@ -513,6 +515,17 @@ class Request extends Message implements RequestDescription
     {
         $header = $this->headers()->get('USER_AGENT');
         return false !== $header && stristr($header->getFieldValue(), ' flash');
+
+    }
+
+    /*
+     * Is this a PATCH method request?
+     *
+     * @return bool
+     */
+    public function isPatch()
+    {
+        return ($this->method === self::METHOD_PATCH);
     }
 
     /**

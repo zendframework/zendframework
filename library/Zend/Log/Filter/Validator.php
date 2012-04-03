@@ -14,48 +14,57 @@
  *
  * @category   Zend
  * @package    Zend_Log
- * @subpackage Formatter
+ * @subpackage Filter
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Log\Formatter;
-use \Zend\Log\Formatter;
+namespace Zend\Log\Filter;
+
+use Zend\Log\Exception,
+    Zend\Log\Filter,
+    Zend\Validator\Validator as ZendValidator;
 
 /**
- * @uses       \Zend\Log\Formatter\AbstractFormatter
  * @category   Zend
  * @package    Zend_Log
- * @subpackage Formatter
+ * @subpackage Filter
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Firebug extends AbstractFormatter
+class Validator implements Filter
 {
     /**
-	 * Factory for Zend_Log_Formatter_Firebug classe
-	 *
-     * @param array|\Zend\Config\Config $options useless
-	 * @return \Zend\Log\Formatter\Firebug
+     * Regex to match
+     *
+     * @var ZendValidator
      */
-    public static function factory($options = array())
+    protected $validator;
+
+    /**
+     * Filter out any log messages not matching the validator
+     *
+     * @param  ZendValidator $validator
+     * @throws Exception\InvalidArgumentException
+     */
+    public function __construct($validator)
     {
-        return new self;
+        if (!$validator instanceof ZendValidator) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                'Expected Zend\Validator object'
+            ));
+        }
+        $this->validator = $validator;
     }
 
     /**
-     * This method formats the event for the firebug writer.
+     * Returns TRUE to accept the message, FALSE to block it.
      *
-     * The default is to just send the message parameter, but through
-     * extension of this class and calling the
-     * {@see Zend_Log_Writer_Firebug::setFormatter()} method you can
-     * pass as much of the event data as you are interested in.
-     *
-     * @param  array    $event    event data
-     * @return mixed              event message
+     * @param array $event event data
+     * @return boolean 
      */
-    public function format($event)
+    public function filter(array $event)
     {
-        return $event['message'];
+        return $this->validator->isValid($event['message']);
     }
 }

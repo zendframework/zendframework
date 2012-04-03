@@ -19,54 +19,56 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
+/**
+ * @namespace
+ */
 namespace Zend\Log\Formatter;
-
-use Zend\Log\Formatter,
-    Zend\Config\Config;
+use Zend\Log\Exception;
 
 /**
- * @uses       \Zend\Log\Exception\InvalidArgumentException
- * @uses       \Zend\Log\Formatter\AbstractFormatter
+ * @uses       Zend\Log\Formatter\AbstractFormatter
  * @category   Zend
  * @package    Zend_Log
  * @subpackage Formatter
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Simple extends AbstractFormatter
+class ErrorHandler extends AbstractFormatter
 {
+    const DEFAULT_FORMAT = '%timestamp% %priorityName% (%priority%) %message% (errno %extra[errno]%) in %extra[file]% on line %extra[line]%';
+    
     /**
-     * @var string
+     * Format
+     * 
+     * @var string 
      */
-    protected $_format;
-
-    const DEFAULT_FORMAT = '%timestamp% %priorityName% (%priority%): %message% %info%';
-
+    protected $format;
+    
     /**
      * Class constructor
      *
      * @param  null|string  $format  Format specifier for log messages
      * @return void
-     * @throws \Zend\Log\Exception\InvalidArgumentException
+     * @throws Zend\Log\Exception\InvalidArgumentException
      */
     public function __construct($format = null)
     {
         if ($format === null) {
-            $format = self::DEFAULT_FORMAT . PHP_EOL;
+            $format = self::DEFAULT_FORMAT;
         }
 
         if (!is_string($format)) {
-            throw new \Zend\Log\Exception\InvalidArgumentException('Format must be a string');
+            throw new Exception\InvalidArgumentException('Format must be a string');
         }
 
-        $this->_format = $format;
+        $this->format = $format;
     }
 
     /**
-     * Factory for Zend_Log_Formatter_Simple classe
+     * Factory for Zend\Log\Formatter\ErrorHandler
      *
-     * @param  array|Config $options
-     * @return \Zend\Log\Formatter\Simple
+     * @param  array|\Zend\Config\Config $options useless
+     * @return ErrorHandler
      */
     public static function factory($options = array())
     {
@@ -80,33 +82,28 @@ class Simple extends AbstractFormatter
                 $format = $options['format'];
             }
         }
-
+        
         return new self($format);
     }
 
     /**
-     * Formats data into a single line to be written by the writer.
+     * This method formats the event for the PHP Error Handler.
      *
-     * @param  array    $event    event data
-     * @return string             formatted line to write to the log
+     * @param  array $event
+     * @return string
      */
     public function format($event)
     {
-        $output = $this->_format;
-
-        if (!isset($event['info'])) {
-            $event['info'] = '';
-        }
+        $output = $this->format;
         foreach ($event as $name => $value) {
-            if ((is_object($value) && !method_exists($value,'__toString'))
-                || is_array($value)
-            ) {
-                $value = gettype($value);
+            if (is_array($value)) {
+                foreach ($value as $sname => $svalue) {
+                    $output = str_replace("%{$name}[{$sname}]%", $svalue, $output);
+                }
+            } else {
+                $output = str_replace("%$name%", $value, $output);
             }
-
-            $output = str_replace("%$name%", $value, $output);
         }
-
         return $output;
     }
 }

@@ -22,7 +22,6 @@
 namespace Zend\Log\Writer;
 
 /**
- * @uses       \Zend\Log\Writer\AbstractWriter
  * @category   Zend
  * @package    Zend_Log
  * @subpackage Writer
@@ -34,21 +33,9 @@ class Null extends AbstractWriter
     /**
      * Write a message to the log.
      *
-     * @param  array  $event  event data
+     * @param array $event event data
      * @return void
      */
-    protected function _write($event)
-    {
-    }
-
-    /**
-     * Create a new instance of Zend_Log_Writer_Null
-     *
-     * @param  array|\Zend\Config\Config $config
-     * @return \Zend\Log\Writer\Null
-     */
-    static public function factory($config = array())
-    {
-        return new self();
-    }
+    protected function doWrite(array $event)
+    {}
 }

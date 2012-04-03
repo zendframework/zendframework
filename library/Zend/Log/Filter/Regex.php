@@ -15,10 +15,13 @@
  * @category   Zend
  * @package    Zend_Log
  * @subpackage Filter
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
+/**
+ * @namespace
+ */
 namespace Zend\Log\Filter;
 
 use Zend\Log\Exception,
@@ -28,41 +31,34 @@ use Zend\Log\Exception,
  * @category   Zend
  * @package    Zend_Log
  * @subpackage Filter
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Priority implements Filter
+class Regex implements Filter
 {
     /**
-     * @var int
-     */
-    protected $priority;
-
-    /**
+     * Regex to match
+     *
      * @var string
      */
-    protected $operator;
+    protected $regex;
 
     /**
-     * Filter logging by $priority. By default, it will accept any log
-     * event whose priority value is less than or equal to $priority.
+     * Filter out any log messages not matching the pattern
      *
-     * @param int $priority Priority
-     * @param string $operator Comparison operator
-     * @return void
+     * @param string $regex Regular expression to test the log message
+     * @return Message
      * @throws Exception\InvalidArgumentException
      */
-    public function __construct($priority, $operator = null)
+    public function __construct($regex)
     {
-        if (!is_int($priority)) {
+        if (@preg_match($regex, '') === false) {
             throw new Exception\InvalidArgumentException(sprintf(
-                'Priority must be an integer; received "%s"',
-                gettype($priority)
+                'Invalid regular expression "%s"',
+                $regex
             ));
         }
-
-        $this->priority = $priority;
-        $this->operator = $operator === null ? '<=' : $operator;
+        $this->regex = $regex;
     }
 
     /**
@@ -73,6 +69,10 @@ class Priority implements Filter
      */
     public function filter(array $event)
     {
-        return version_compare($event['priority'], $this->priority, $this->operator);
+        $message = $event['message'];
+        if (is_array($event['message'])) {
+            $message = var_export($message, TRUE); 
+        }
+        return preg_match($this->regex, $message) > 0;
     }
 }

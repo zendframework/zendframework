@@ -21,9 +21,9 @@
 
 namespace ZendTest\Log\Filter;
 
-use \Zend\Log\Logger,
-    \Zend\Log\Filter\Message,
-    \Zend\Config\Config;
+use Zend\Log\Logger,
+    Zend\Log\Filter\Regex,
+    Zend\Config\Config;
 
 /**
  * @category   Zend
@@ -33,46 +33,18 @@ use \Zend\Log\Logger,
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Log
  */
-class MessageTest extends \PHPUnit_Framework_TestCase
+class RegexTest extends \PHPUnit_Framework_TestCase
 {
     public function testMessageFilterRecognizesInvalidRegularExpression()
     {
         $this->setExpectedException('Zend\Log\Exception\InvalidArgumentException', 'invalid reg');
-        $filter = new Message('invalid regexp');
+        new Regex('invalid regexp');
     }
 
     public function testMessageFilter()
     {
-        $filter = new Message('/accept/');
-        $this->assertTrue($filter->accept(array('message' => 'foo accept bar')));
-        $this->assertFalse($filter->accept(array('message' => 'foo reject bar')));
-    }
-
-    public function testFactory()
-    {
-        $cfg = array('log' => array('memory' => array(
-            'writerName'   => "Mock",
-            'filterName'   => "Message",
-            'filterParams' => array(
-                'regexp'   => "/42/"
-             ),
-        )));
-
-        $logger = Logger::factory($cfg['log']);
-        $this->assertTrue($logger instanceof Logger);
-    }
-
-    public function testFactoryWithConfig()
-    {
-        $config = new Config(array('log' => array('memory' => array(
-            'writerName'   => "Mock",
-            'filterName'   => "Message",
-            'filterParams' => array(
-                'regexp'   => "/42/"
-             ),
-        ))));
-
-        $filter = Message::factory($config->log->memory->filterParams);
-        $this->assertTrue($filter instanceof Message);
+        $filter = new Regex('/accept/');
+        $this->assertTrue($filter->filter(array('message' => 'foo accept bar')));
+        $this->assertFalse($filter->filter(array('message' => 'foo reject bar')));
     }
 }

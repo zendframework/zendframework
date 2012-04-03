@@ -22,8 +22,10 @@
 namespace ZendTest\Log\Writer;
 
 use ZendTest\Log\TestAsset\MockDbAdapter,
-    \Zend\Log\Writer\Db as DbWriter,
-    \Zend\Log\Logger;
+    ZendTest\Log\TestAsset\MockDbDriver,
+    Zend\Log\Writer\Db as DbWriter,
+    Zend\Log\Logger,
+    Zend\Log\Formatter\Simple as SimpleFormatter;
 
 /**
  * @category   Zend
@@ -46,48 +48,141 @@ class DbTest extends \PHPUnit_Framework_TestCase
     public function testFormattingIsNotSupported()
     {
         $this->setExpectedException('Zend\Log\Exception\InvalidArgumentException', 'does not support formatting');
-        $this->writer->setFormatter(new \Zend\Log\Formatter\Simple);
+        $this->writer->setFormatter(new SimpleFormatter);
     }
 
     public function testWriteWithDefaults()
     {
         // log to the mock db adapter
-        $fields = array('message'  => 'foo',
-                        'priority' => 42);
+        $fields = array(
+            'message'  => 'foo',
+            'priority' => 42
+        );
 
         $this->writer->write($fields);
 
         // insert should be called once...
-        $this->assertContains('insert', array_keys($this->db->calls));
-        $this->assertEquals(1, count($this->db->calls['insert']));
-
-        // ...with the correct table and binds for the database
-        $binds = array('message'  => $fields['message'],
-                       'priority' => $fields['priority']);
-        $this->assertEquals(array($this->tableName, $binds),
-                            $this->db->calls['insert'][0]);
+        $this->assertContains('query', array_keys($this->db->calls));
+        $this->assertEquals(1, count($this->db->calls['query']));
+        $this->assertContains('execute', array_keys($this->db->calls));
+        $this->assertEquals(1, count($this->db->calls['execute']));
+        $this->assertEquals(array($fields), $this->db->calls['execute'][0]);
     }
 
+    public function testWriteWithDefaultsUsingArray()
+    {      
+        // log to the mock db adapter
+        $message  = 'message-to-log';
+        $priority = 2;
+        $events = array(
+            'file' => 'test',
+            'line' => 1
+        );
+        $this->writer->write(array(
+            'message'  => $message,
+            'priority' => $priority,
+            'events'   => $events
+        ));
+        $this->assertContains('query', array_keys($this->db->calls));
+        $this->assertEquals(1, count($this->db->calls['query']));
+
+        $binds = array(
+            'message' => $message,
+            'priority' => $priority,
+            'events_line' => $events['line'],
+            'events_file' => $events['file']
+        );
+        $this->assertEquals(array($binds), $this->db->calls['execute'][0]);
+    }
+    
+    public function testWriteWithDefaultsUsingArrayAndSeparator()
+    {      
+        $this->writer = new DbWriter($this->db, $this->tableName, null, '-');
+        
+        // log to the mock db adapter
+        $message  = 'message-to-log';
+        $priority = 2;
+        $events = array(
+            'file' => 'test',
+            'line' => 1
+        );
+        $this->writer->write(array(
+            'message'  => $message,
+            'priority' => $priority,
+            'events'   => $events
+        ));
+        $this->assertContains('query', array_keys($this->db->calls));
+        $this->assertEquals(1, count($this->db->calls['query']));
+
+        $binds = array(
+            'message' => $message,
+            'priority' => $priority,
+            'events-line' => $events['line'],
+            'events-file' => $events['file']
+        );
+        $this->assertEquals(array($binds), $this->db->calls['execute'][0]);
+    }
+    
     public function testWriteUsesOptionalCustomColumnNames()
     {
-        $this->writer = new DbWriter($this->db, $this->tableName,
-                                                array('new-message-field' => 'message',
-                                                      'new-message-field' => 'priority'));
+        $this->writer = new DbWriter($this->db, $this->tableName, array(
+            'message' => 'new-message-field' ,
+            'priority' => 'new-priority-field' 
+        ));
 
         // log to the mock db adapter
         $message  = 'message-to-log';
         $priority = 2;
-        $this->writer->write(array('message' => $message, 'priority' => $priority));
+        $this->writer->write(array(
+            'message' => $message,
+            'priority' => $priority
+        ));
 
         // insert should be called once...
-        $this->assertContains('insert', array_keys($this->db->calls));
-        $this->assertEquals(1, count($this->db->calls['insert']));
+        $this->assertContains('query', array_keys($this->db->calls));
+        $this->assertEquals(1, count($this->db->calls['query']));
 
         // ...with the correct table and binds for the database
-        $binds = array('new-message-field' => $message,
-                       'new-message-field' => $priority);
-        $this->assertEquals(array($this->tableName, $binds),
-                            $this->db->calls['insert'][0]);
+        $binds = array(
+            'new-message-field' => $message,
+            'new-priority-field' => $priority
+        );
+        $this->assertEquals(array($binds), $this->db->calls['execute'][0]);
+    }
+    
+    public function testWriteUsesParamsWithArray()
+    {
+        $this->writer = new DbWriter($this->db, $this->tableName, array(
+            'message' => 'new-message-field' ,
+            'priority' => 'new-priority-field',
+            'events' => array(
+                'line' => 'new-line',
+                'file' => 'new-file'
+            )
+        ));
+        
+        // log to the mock db adapter
+        $message  = 'message-to-log';
+        $priority = 2;
+        $events = array(
+            'file' => 'test',
+            'line' => 1
+        );
+        $this->writer->write(array(
+            'message'  => $message,
+            'priority' => $priority,
+            'events'   => $events
+        ));
+        $this->assertContains('query', array_keys($this->db->calls));
+        $this->assertEquals(1, count($this->db->calls['query']));
+        // ...with the correct table and binds for the database
+        $binds = array(
+            'new-message-field' => $message,
+            'new-priority-field' => $priority,
+            'new-line' => $events['line'],
+            'new-file' => $events['file']
+        );
+        $this->assertEquals(array($binds), $this->db->calls['execute'][0]);
     }
 
     public function testShutdownRemovesReferenceToDatabaseInstance()
@@ -97,20 +192,6 @@ class DbTest extends \PHPUnit_Framework_TestCase
 
         $this->setExpectedException('Zend\Log\Exception\RuntimeException', 'Database adapter is null');
         $this->writer->write(array('message' => 'this should fail'));
-    }
-
-    public function testFactory()
-    {
-        $cfg = array('log' => array('memory' => array(
-            'writerName'   => "Db",
-            'writerParams' => array(
-                'db'    => $this->db,
-                'table' => $this->tableName,
-            ),
-        )));
-
-        $logger = Logger::factory($cfg['log']);
-        $this->assertTrue($logger instanceof Logger);
     }
 
     /**

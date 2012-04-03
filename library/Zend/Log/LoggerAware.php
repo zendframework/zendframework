@@ -14,33 +14,26 @@
  *
  * @category   Zend
  * @package    Zend_Log
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-
-namespace ZendTest\Log\Writer;
-
-use Zend\Log\Writer\Mock as MockWriter,
-    Zend\Log\Logger;
 
 /**
+ * @namespace
+ */
+namespace Zend\Log;
+
+use Zend\Log\Logger;
+
+/**
+ * Logger aware interface
+ *
  * @category   Zend
  * @package    Zend_Log
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_Log
  */
-class MockTest extends \PHPUnit_Framework_TestCase
+interface LoggerAware
 {
-    public function testWrite()
-    {
-        $writer = new MockWriter();
-        $this->assertSame(array(), $writer->events);
-
-        $fields = array('foo' => 'bar');
-        $writer->write($fields);
-        $this->assertSame(array($fields), $writer->events);
-    }
+    public function setLogger(Logger $logger);
 }

@@ -32,6 +32,8 @@ use Zend\Validator\ValidatorChain;
 interface InputInterface
 {
     public function setAllowEmpty($allowEmpty);
+    public function setBreakOnFailure($breakOnFailure);
+    public function setErrorMessage($errorMessage);
     public function setFilterChain(FilterChain $filterChain);
     public function setName($name);
     public function setRequired($required);
@@ -39,6 +41,7 @@ interface InputInterface
     public function setValue($value);
 
     public function allowEmpty();
+    public function breakOnFailure();
     public function getFilterChain();
     public function getName();
     public function getRawValue();

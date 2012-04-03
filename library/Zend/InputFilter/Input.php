@@ -32,6 +32,8 @@ use Zend\Validator\ValidatorChain;
 class Input implements InputInterface
 {
     protected $allowEmpty = false;
+    protected $breakOnFailure = false;
+    protected $errorMessage;
     protected $filterChain;
     protected $name;
     protected $required = true;
@@ -46,6 +48,19 @@ class Input implements InputInterface
     public function setAllowEmpty($allowEmpty)
     {
         $this->allowEmpty = (bool) $allowEmpty;
+        return $this;
+    }
+
+    public function setBreakOnFailure($breakOnFailure)
+    {
+        $this->breakOnFailure = (bool) $breakOnFailure;
+        return $this;
+    }
+
+    public function setErrorMessage($errorMessage)
+    {
+        $errorMessage = (null === $errorMessage) ? null : (string) $errorMessage;
+        $this->errorMessage = $errorMessage;
         return $this;
     }
 
@@ -83,6 +98,11 @@ class Input implements InputInterface
     public function allowEmpty()
     {
         return $this->allowEmpty;
+    }
+
+    public function breakOnFailure()
+    {
+        return $this->breakOnFailure;
     }
 
     public function getFilterChain()
@@ -132,6 +152,10 @@ class Input implements InputInterface
 
     public function getMessages()
     {
+        if (null !== $this->errorMessage) {
+            return (array) $this->errorMessage;
+        }
+
         $validator = $this->getValidatorChain();
         return $validator->getMessages();
     }

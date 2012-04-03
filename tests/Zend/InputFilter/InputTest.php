@@ -162,4 +162,30 @@ class InputTest extends TestCase
         $messages = $input->getMessages();
         $this->assertArrayHasKey(Validator\Digits::NOT_DIGITS, $messages);
     }
+
+    public function testSpecifyingMessagesToInputReturnsThoseOnFailedValidation()
+    {
+        $input = new Input('foo');
+        $input->setValue('bar');
+        $validator = new Validator\Digits();
+        $input->getValidatorChain()->addValidator($validator);
+        $input->setErrorMessage('Please enter only digits');
+        $this->assertFalse($input->isValid());
+        $messages = $input->getMessages();
+        $this->assertArrayNotHasKey(Validator\Digits::NOT_DIGITS, $messages);
+        $this->assertContains('Please enter only digits', $messages);
+    }
+
+    public function testBreakOnFailureFlagIsOffByDefault()
+    {
+        $input = new Input('foo');
+        $this->assertFalse($input->breakOnFailure());
+    }
+
+    public function testBreakOnFailureFlagIsMutable()
+    {
+        $input = new Input('foo');
+        $input->setBreakOnFailure(true);
+        $this->assertTrue($input->breakOnFailure());
+    }
 }

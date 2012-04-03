@@ -1,0 +1,35 @@
+all: 
+# this is a comment
+  hostname: all
+  name: thisname
+  db: 
+    host: 127.0.0.1
+    user: username
+    pass: password
+    name: live
+  one: 
+    two: 
+      three: multi
+
+staging: 
+  hostname: staging
+  db: 
+    name: dbstaging
+  debug: 
+  _extends: all
+debug: 
+  hostname: debug
+  debug: 1
+  values: 
+    changed: 1
+  db: 
+    name: dbdebug
+  special: 
+    no: 
+    null: 
+    false: 
+  _extends: all
+other_staging: 
+  only_in: otherStaging
+  db: 
+    pass: anotherpwd

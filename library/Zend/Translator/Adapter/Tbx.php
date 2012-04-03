@@ -38,7 +38,6 @@ class Tbx extends AbstractAdapter
 {
     // Internal variables
     private $_file        = false;
-    private $_cleared     = array();
     private $_langset     = null;
     private $_termentry   = null;
     private $_content     = null;

@@ -20,8 +20,9 @@
  */
 
 namespace ZendTest\Ldap\Ldif;
-use Zend\Ldap\Ldif;
 
+use Zend\Ldap\Ldif,
+    ZendTest\Ldap as TestLdap;
 
 /**
  * @category   Zend
@@ -32,15 +33,15 @@ use Zend\Ldap\Ldif;
  * @group      Zend_Ldap
  * @group      Zend_Ldap_Ldif
  */
-class SimpleEncoderTest extends \ZendTest\Ldap\TestCase
+class SimpleEncoderTest extends TestLdap\AbstractTestCase
 {
     public static function stringEncodingProvider()
     {
         $testData = array(
             array('cn=Barbara Jensen, ou=Product Development, dc=airius, dc=com',
-                'cn=Barbara Jensen, ou=Product Development, dc=airius, dc=com'),
+                  'cn=Barbara Jensen, ou=Product Development, dc=airius, dc=com'),
             array('Babs is a big sailing fan, and travels extensively in search of perfect sailing conditions.',
-                'Babs is a big sailing fan, and travels extensively in search of perfect sailing conditions.'),
+                  'Babs is a big sailing fan, and travels extensively in search of perfect sailing conditions.'),
             array("\x00 NULL CHAR first", base64_encode("\x00 NULL CHAR first")),
             array("\n LF CHAR first", base64_encode("\n LF CHAR first")),
             array("\r CR CHAR first", base64_encode("\r CR CHAR first")),
@@ -71,15 +72,17 @@ class SimpleEncoderTest extends \ZendTest\Ldap\TestCase
     {
         $testData = array(
             array(array('dn' => 'cn=Barbara Jensen, ou=Product Development, dc=airius, dc=com'),
-                'dn: cn=Barbara Jensen, ou=Product Development, dc=airius, dc=com'),
+                  'dn: cn=Barbara Jensen, ou=Product Development, dc=airius, dc=com'),
             array(array('dn' => 'cn=Jürgen Österreicher, ou=Äpfel, dc=airius, dc=com'),
-                'dn:: ' . base64_encode('cn=Jürgen Österreicher, ou=Äpfel, dc=airius, dc=com')),
+                  'dn:: ' . base64_encode('cn=Jürgen Österreicher, ou=Äpfel, dc=airius, dc=com')),
             array(array('description' => 'Babs is a big sailing fan, and travels extensively in search of perfect sailing conditions.'),
-                'description: Babs is a big sailing fan, and travels extensively in search of p' . PHP_EOL . ' erfect sailing conditions.'),
+                  'description: Babs is a big sailing fan, and travels extensively in search of p'
+                      . PHP_EOL . ' erfect sailing conditions.'),
             array(array('description' => "CHR(127) \x7f in string"),
-                'description:: ' . base64_encode("CHR(127) \x7f in string")),
+                  'description:: ' . base64_encode("CHR(127) \x7f in string")),
             array(array('description' => '1234567890123456789012345678901234567890123456789012345678901234 567890'),
-                'description: 1234567890123456789012345678901234567890123456789012345678901234 ' . PHP_EOL . ' 567890'),
+                  'description: 1234567890123456789012345678901234567890123456789012345678901234 ' . PHP_EOL
+                      . ' 567890'),
         );
         return $testData;
     }
@@ -95,15 +98,15 @@ class SimpleEncoderTest extends \ZendTest\Ldap\TestCase
 
     public function testChangedWrapCount()
     {
-        $input = '56789012345678901234567890';
+        $input    = '56789012345678901234567890';
         $expected = 'dn: 567890' . PHP_EOL . ' 1234567890' . PHP_EOL . ' 1234567890';
-        $output = Ldif\Encoder::encode(array('dn' => $input), array('wrap' => 10));
+        $output   = Ldif\Encoder::encode(array('dn' => $input), array('wrap' => 10));
         $this->assertEquals($expected, $output);
     }
 
     public function testEncodeMultipleAttributes()
     {
-        $data = array(
+        $data     = array(
             'a' => array('a', 'b'),
             'b' => 'c',
             'c' => '',
@@ -115,7 +118,7 @@ class SimpleEncoderTest extends \ZendTest\Ldap\TestCase
             'c: ' . PHP_EOL .
             'd: ' . PHP_EOL .
             'e: ';
-        $actual = Ldif\Encoder::encode($data);
+        $actual   = Ldif\Encoder::encode($data);
         $this->assertEquals($expected, $actual);
     }
 
@@ -126,7 +129,7 @@ class SimpleEncoderTest extends \ZendTest\Ldap\TestCase
 
     public function testSorting()
     {
-        $data=array(
+        $data     = array(
             'cn'          => array('name'),
             'dn'          => 'cn=name,dc=example,dc=org',
             'host'        => array('a', 'b', 'c'),
@@ -145,7 +148,7 @@ class SimpleEncoderTest extends \ZendTest\Ldap\TestCase
             'host: a' . PHP_EOL .
             'host: b' . PHP_EOL .
             'host: c';
-        $actual = Ldif\Encoder::encode($data);
+        $actual   = Ldif\Encoder::encode($data);
         $this->assertEquals($expected, $actual);
 
         $expected = 'version: 1' . PHP_EOL .
@@ -159,13 +162,13 @@ class SimpleEncoderTest extends \ZendTest\Ldap\TestCase
             'boolean: FALSE' . PHP_EOL .
             'objectclass: account' . PHP_EOL .
             'objectclass: top';
-        $actual = Ldif\Encoder::encode($data, array('sort' => false));
+        $actual   = Ldif\Encoder::encode($data, array('sort' => false));
         $this->assertEquals($expected, $actual);
     }
 
     public function testNodeEncoding()
     {
-        $node = $this->_createTestNode();
+        $node     = $this->createTestNode();
         $expected = 'version: 1' . PHP_EOL .
             'dn: cn=name,dc=example,dc=org' . PHP_EOL .
             'objectclass: account' . PHP_EOL .
@@ -177,7 +180,7 @@ class SimpleEncoderTest extends \ZendTest\Ldap\TestCase
             'host: a' . PHP_EOL .
             'host: b' . PHP_EOL .
             'host: c';
-        $actual = $node->toLdif();
+        $actual   = $node->toLdif();
         $this->assertEquals($expected, $actual);
 
         $actual = Ldif\Encoder::encode($node);
@@ -186,7 +189,7 @@ class SimpleEncoderTest extends \ZendTest\Ldap\TestCase
 
     public function testSupressVersionHeader()
     {
-        $data=array(
+        $data     = array(
             'cn'          => array('name'),
             'dn'          => 'cn=name,dc=example,dc=org',
             'host'        => array('a', 'b', 'c'),
@@ -204,13 +207,13 @@ class SimpleEncoderTest extends \ZendTest\Ldap\TestCase
             'host: a' . PHP_EOL .
             'host: b' . PHP_EOL .
             'host: c';
-        $actual = Ldif\Encoder::encode($data, array('version' => null));
+        $actual   = Ldif\Encoder::encode($data, array('version' => null));
         $this->assertEquals($expected, $actual);
     }
 
     public function testEncodingWithJapaneseCharacters()
     {
-        $data=array(
+        $data     = array(
             'dn'                         => 'uid=rogasawara,ou=営業部,o=Airius',
             'objectclass'                => array('top', 'person', 'organizationalPerson', 'inetOrgPerson'),
             'uid'                        => array('rogasawara'),
@@ -257,7 +260,9 @@ class SimpleEncoderTest extends \ZendTest\Ldap\TestCase
             'sn;lang-en: Ogasawara' . PHP_EOL .
             'cn;lang-en: Rodney Ogasawara' . PHP_EOL .
             'title;lang-en: Sales, Director';
-        $actual = Ldif\Encoder::encode($data, array('sort' => false, 'version' => null));
+        $actual   = Ldif\Encoder::encode($data, array('sort'   => false,
+                                                     'version' => null)
+        );
         $this->assertEquals($expected, $actual);
     }
 }

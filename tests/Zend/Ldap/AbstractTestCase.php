@@ -21,6 +21,7 @@
 
 namespace ZendTest\Ldap;
 
+use Zend\Ldap\Node;
 
 /**
  * @category   Zend
@@ -30,14 +31,14 @@ namespace ZendTest\Ldap;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Ldap
  */
-abstract class TestCase extends \PHPUnit_Framework_TestCase
+abstract class AbstractTestCase extends \PHPUnit_Framework_TestCase
 {
     /**
      * @return array
      */
-    protected function _createTestArrayData()
+    protected function createTestArrayData()
     {
-        $data=array(
+        $data = array(
             'dn'          => 'cn=name,dc=example,dc=org',
             'cn'          => array('name'),
             'host'        => array('a', 'b', 'c'),
@@ -49,10 +50,10 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @return Zend_Ldap_Node
+     * @return Node
      */
-    protected function _createTestNode()
+    protected function createTestNode()
     {
-        return \Zend\Ldap\Node::fromArray($this->_createTestArrayData(), true);
+        return Node::fromArray($this->createTestArrayData(), true);
     }
 }

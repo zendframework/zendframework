@@ -21,6 +21,7 @@
 
 namespace ZendTest\Ldap\Node;
 
+use ZendTest\Ldap as TestLdap;
 
 /**
  * @category   Zend
@@ -31,24 +32,24 @@ namespace ZendTest\Ldap\Node;
  * @group      Zend_Ldap
  * @group      Zend_Ldap_Node
  */
-class ChildrenTest extends \ZendTest\Ldap\OnlineTestCase
+class ChildrenTest extends TestLdap\AbstractOnlineTestCase
 {
     protected function setUp()
     {
         parent::setUp();
-        $this->_prepareLDAPServer();
+        $this->prepareLDAPServer();
     }
 
     protected function tearDown()
     {
-        $this->_cleanupLDAPServer();
+        $this->cleanupLDAPServer();
         parent::tearDown();
     }
 
     public function testGetChildrenOnAttachedNode()
     {
-        $node=$this->_getLDAP()->getBaseNode();
-        $children=$node->getChildren();
+        $node     = $this->getLDAP()->getBaseNode();
+        $children = $node->getChildren();
         $this->assertInstanceOf('Zend\Ldap\Node\ChildrenIterator', $children);
         $this->assertEquals(6, count($children));
         $this->assertInstanceOf('Zend\Ldap\Node', $children['ou=Node']);
@@ -56,15 +57,15 @@ class ChildrenTest extends \ZendTest\Ldap\OnlineTestCase
 
     public function testGetChildrenOnDetachedNode()
     {
-        $node=$this->_getLDAP()->getBaseNode();
+        $node = $this->getLDAP()->getBaseNode();
         $node->detachLDAP();
-        $children=$node->getChildren();
+        $children = $node->getChildren();
         $this->assertInstanceOf('Zend\Ldap\Node\ChildrenIterator', $children);
         $this->assertEquals(0, count($children));
 
-        $node->attachLDAP($this->_getLDAP());
+        $node->attachLDAP($this->getLDAP());
         $node->reload();
-        $children=$node->getChildren();
+        $children = $node->getChildren();
 
         $this->assertInstanceOf('Zend\Ldap\Node\ChildrenIterator', $children);
         $this->assertEquals(6, count($children));
@@ -73,60 +74,60 @@ class ChildrenTest extends \ZendTest\Ldap\OnlineTestCase
 
     public function testHasChildrenOnAttachedNode()
     {
-        $node=$this->_getLDAP()->getNode(TESTS_ZEND_LDAP_WRITEABLE_SUBTREE);
+        $node = $this->getLDAP()->getNode(TESTS_ZEND_LDAP_WRITEABLE_SUBTREE);
         $this->assertTrue($node->hasChildren());
         $this->assertTrue($node->hasChildren());
 
-        $node=$this->_getLDAP()->getNode($this->_createDn('ou=Node,'));
+        $node = $this->getLDAP()->getNode($this->createDn('ou=Node,'));
         $this->assertTrue($node->hasChildren());
         $this->assertTrue($node->hasChildren());
 
-        $node=$this->_getLDAP()->getNode($this->_createDn('ou=Test1,'));
+        $node = $this->getLDAP()->getNode($this->createDn('ou=Test1,'));
         $this->assertFalse($node->hasChildren());
         $this->assertFalse($node->hasChildren());
 
-        $node=$this->_getLDAP()->getNode($this->_createDn('ou=Test1,ou=Node,'));
+        $node = $this->getLDAP()->getNode($this->createDn('ou=Test1,ou=Node,'));
         $this->assertFalse($node->hasChildren());
         $this->assertFalse($node->hasChildren());
     }
 
     public function testHasChildrenOnDetachedNodeWithoutPriorGetChildren()
     {
-        $node=$this->_getLDAP()->getNode(TESTS_ZEND_LDAP_WRITEABLE_SUBTREE);
+        $node = $this->getLDAP()->getNode(TESTS_ZEND_LDAP_WRITEABLE_SUBTREE);
         $node->detachLDAP();
         $this->assertFalse($node->hasChildren());
 
-        $node=$this->_getLDAP()->getNode($this->_createDn('ou=Node,'));
+        $node = $this->getLDAP()->getNode($this->createDn('ou=Node,'));
         $node->detachLDAP();
         $this->assertFalse($node->hasChildren());
 
-        $node=$this->_getLDAP()->getNode($this->_createDn('ou=Test1,'));
+        $node = $this->getLDAP()->getNode($this->createDn('ou=Test1,'));
         $node->detachLDAP();
         $this->assertFalse($node->hasChildren());
 
-        $node=$this->_getLDAP()->getNode($this->_createDn('ou=Test1,ou=Node,'));
+        $node = $this->getLDAP()->getNode($this->createDn('ou=Test1,ou=Node,'));
         $node->detachLDAP();
         $this->assertFalse($node->hasChildren());
     }
 
     public function testHasChildrenOnDetachedNodeWithPriorGetChildren()
     {
-        $node=$this->_getLDAP()->getNode(TESTS_ZEND_LDAP_WRITEABLE_SUBTREE);
+        $node = $this->getLDAP()->getNode(TESTS_ZEND_LDAP_WRITEABLE_SUBTREE);
         $node->getChildren();
         $node->detachLDAP();
         $this->assertTrue($node->hasChildren());
 
-        $node=$this->_getLDAP()->getNode($this->_createDn('ou=Node,'));
+        $node = $this->getLDAP()->getNode($this->createDn('ou=Node,'));
         $node->getChildren();
         $node->detachLDAP();
         $this->assertTrue($node->hasChildren());
 
-        $node=$this->_getLDAP()->getNode($this->_createDn('ou=Test1,'));
+        $node = $this->getLDAP()->getNode($this->createDn('ou=Test1,'));
         $node->getChildren();
         $node->detachLDAP();
         $this->assertFalse($node->hasChildren());
 
-        $node=$this->_getLDAP()->getNode($this->_createDn('ou=Test1,ou=Node,'));
+        $node = $this->getLDAP()->getNode($this->createDn('ou=Test1,ou=Node,'));
         $node->getChildren();
         $node->detachLDAP();
         $this->assertFalse($node->hasChildren());
@@ -134,39 +135,39 @@ class ChildrenTest extends \ZendTest\Ldap\OnlineTestCase
 
     public function testChildrenCollectionSerialization()
     {
-        $node=$this->_getLDAP()->getNode($this->_createDn('ou=Node,'));
+        $node = $this->getLDAP()->getNode($this->createDn('ou=Node,'));
 
-        $children=$node->getChildren();
+        $children = $node->getChildren();
         $this->assertTrue($node->hasChildren());
         $this->assertEquals(2, count($children));
 
-        $string=serialize($node);
-        $node2=unserialize($string);
+        $string = serialize($node);
+        $node2  = unserialize($string);
 
-        $children2=$node2->getChildren();
+        $children2 = $node2->getChildren();
         $this->assertTrue($node2->hasChildren());
         $this->assertEquals(2, count($children2));
 
-        $node2->attachLDAP($this->_getLDAP());
+        $node2->attachLDAP($this->getLDAP());
 
-        $children2=$node2->getChildren();
+        $children2 = $node2->getChildren();
         $this->assertTrue($node2->hasChildren());
         $this->assertEquals(2, count($children2));
 
-        $node=$this->_getLDAP()->getNode($this->_createDn('ou=Node,'));
+        $node = $this->getLDAP()->getNode($this->createDn('ou=Node,'));
         $this->assertTrue($node->hasChildren());
-        $string=serialize($node);
-        $node2=unserialize($string);
+        $string = serialize($node);
+        $node2  = unserialize($string);
         $this->assertFalse($node2->hasChildren());
-        $node2->attachLDAP($this->_getLDAP());
+        $node2->attachLDAP($this->getLDAP());
         $this->assertTrue($node2->hasChildren());
     }
 
     public function testCascadingAttachAndDetach()
     {
-        $node=$this->_getLDAP()->getBaseNode();
-        $baseChildren=$node->getChildren();
-        $nodeChildren=$baseChildren['ou=Node']->getChildren();
+        $node         = $this->getLDAP()->getBaseNode();
+        $baseChildren = $node->getChildren();
+        $nodeChildren = $baseChildren['ou=Node']->getChildren();
 
         $this->assertTrue($node->isAttached());
         foreach ($baseChildren as $bc) {
@@ -185,16 +186,16 @@ class ChildrenTest extends \ZendTest\Ldap\OnlineTestCase
             $this->assertFalse($nc->isAttached());
         }
 
-        $node->attachLDAP($this->_getLDAP());
+        $node->attachLDAP($this->getLDAP());
         $this->assertTrue($node->isAttached());
-        $this->assertSame($this->_getLDAP(), $node->getLDAP());
+        $this->assertSame($this->getLDAP(), $node->getLDAP());
         foreach ($baseChildren as $bc) {
             $this->assertTrue($bc->isAttached());
-            $this->assertSame($this->_getLDAP(), $bc->getLDAP());
+            $this->assertSame($this->getLDAP(), $bc->getLDAP());
         }
         foreach ($nodeChildren as $nc) {
             $this->assertTrue($nc->isAttached());
-            $this->assertSame($this->_getLDAP(), $nc->getLDAP());
+            $this->assertSame($this->getLDAP(), $nc->getLDAP());
         }
     }
 }

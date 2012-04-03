@@ -20,14 +20,8 @@
  */
 
 namespace ZendTest\Ldap\Dn;
-use Zend\Ldap;
 
-/**
- * Test helper
- */
-/**
- * Zend_Ldap_Dn
- */
+use Zend\Ldap;
 
 /**
  * @category   Zend
@@ -44,31 +38,34 @@ class CreationTest extends \PHPUnit_Framework_TestCase
     {
         Ldap\Dn::setDefaultCaseFold(Ldap\Dn::ATTR_CASEFOLD_NONE);
 
-        $dnString1='CN=Baker\\, Alice,CN=Users+OU=Lab,DC=example,DC=com';
-        $dnArray1=array(
+        $dnString1 = 'CN=Baker\\, Alice,CN=Users+OU=Lab,DC=example,DC=com';
+        $dnArray1  = array(
             array('CN' => 'Baker, Alice'),
-            array('CN' => 'Users', 'OU' => 'Lab'),
+            array('CN' => 'Users',
+                  'OU' => 'Lab'),
             array('DC' => 'example'),
             array('DC' => 'com'));
 
-        $dnString2='cn=Baker\\, Alice,cn=Users+ou=Lab,dc=example,dc=com';
-        $dnArray2=array(
+        $dnString2 = 'cn=Baker\\, Alice,cn=Users+ou=Lab,dc=example,dc=com';
+        $dnArray2  = array(
             array('cn' => 'Baker, Alice'),
-            array('cn' => 'Users', 'ou' => 'Lab'),
+            array('cn' => 'Users',
+                  'ou' => 'Lab'),
             array('dc' => 'example'),
             array('dc' => 'com'));
 
-        $dnString3='Cn=Baker\\, Alice,Cn=Users+Ou=Lab,Dc=example,Dc=com';
-        $dnArray3=array(
+        $dnString3 = 'Cn=Baker\\, Alice,Cn=Users+Ou=Lab,Dc=example,Dc=com';
+        $dnArray3  = array(
             array('Cn' => 'Baker, Alice'),
-            array('Cn' => 'Users', 'Ou' => 'Lab'),
+            array('Cn' => 'Users',
+                  'Ou' => 'Lab'),
             array('Dc' => 'example'),
             array('Dc' => 'com'));
 
-        $dn11=Ldap\Dn::fromString($dnString1);
-        $dn12=Ldap\Dn::fromArray($dnArray1);
-        $dn13=Ldap\Dn::factory($dnString1);
-        $dn14=Ldap\Dn::factory($dnArray1);
+        $dn11 = Ldap\Dn::fromString($dnString1);
+        $dn12 = Ldap\Dn::fromArray($dnArray1);
+        $dn13 = Ldap\Dn::factory($dnString1);
+        $dn14 = Ldap\Dn::factory($dnArray1);
 
         $this->assertEquals($dn11, $dn12);
         $this->assertEquals($dn11, $dn13);
@@ -81,10 +78,10 @@ class CreationTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($dnArray1, $dn11->toArray(Ldap\Dn::ATTR_CASEFOLD_UPPER));
         $this->assertEquals($dnArray2, $dn11->toArray(Ldap\Dn::ATTR_CASEFOLD_LOWER));
 
-        $dn21=Ldap\Dn::fromString($dnString2);
-        $dn22=Ldap\Dn::fromArray($dnArray2);
-        $dn23=Ldap\Dn::factory($dnString2);
-        $dn24=Ldap\Dn::factory($dnArray2);
+        $dn21 = Ldap\Dn::fromString($dnString2);
+        $dn22 = Ldap\Dn::fromArray($dnArray2);
+        $dn23 = Ldap\Dn::factory($dnString2);
+        $dn24 = Ldap\Dn::factory($dnArray2);
 
         $this->assertEquals($dn21, $dn22);
         $this->assertEquals($dn21, $dn23);
@@ -98,10 +95,10 @@ class CreationTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($dnArray2, $dn21->toArray(Ldap\Dn::ATTR_CASEFOLD_LOWER));
         $this->assertEquals($dnArray2, $dn22->toArray());
 
-        $dn31=Ldap\Dn::fromString($dnString3);
-        $dn32=Ldap\Dn::fromArray($dnArray3);
-        $dn33=Ldap\Dn::factory($dnString3);
-        $dn34=Ldap\Dn::factory($dnArray3);
+        $dn31 = Ldap\Dn::fromString($dnString3);
+        $dn32 = Ldap\Dn::fromArray($dnArray3);
+        $dn33 = Ldap\Dn::factory($dnString3);
+        $dn34 = Ldap\Dn::factory($dnArray3);
 
         $this->assertEquals($dn31, $dn32);
         $this->assertEquals($dn31, $dn33);
@@ -115,8 +112,8 @@ class CreationTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($dnArray2, $dn31->toArray(Ldap\Dn::ATTR_CASEFOLD_LOWER));
 
         try {
-            $dn=Ldap\Dn::factory(1);
-            $this->fail('Expected Zend_Ldap_Exception not thrown');
+            $dn = Ldap\Dn::factory(1);
+            $this->fail('Expected Zend\Ldap\Exception not thrown');
         } catch (Ldap\Exception $e) {
             $this->assertEquals('Invalid argument type for $dn', $e->getMessage());
         }
@@ -126,25 +123,25 @@ class CreationTest extends \PHPUnit_Framework_TestCase
     {
         Ldap\Dn::setDefaultCaseFold(Ldap\Dn::ATTR_CASEFOLD_NONE);
 
-        $dnString1='Cn=Baker\\, Alice,Cn=Users+Ou=Lab,Dc=example,Dc=com';
-        $dnString2='CN=Baker\\, Alice,CN=Users+OU=Lab,DC=example,DC=com';
-        $dnString3='cn=Baker\\, Alice,cn=Users+ou=Lab,dc=example,dc=com';
+        $dnString1 = 'Cn=Baker\\, Alice,Cn=Users+Ou=Lab,Dc=example,Dc=com';
+        $dnString2 = 'CN=Baker\\, Alice,CN=Users+OU=Lab,DC=example,DC=com';
+        $dnString3 = 'cn=Baker\\, Alice,cn=Users+ou=Lab,dc=example,dc=com';
 
-        $dn=Ldap\Dn::fromString($dnString1, null);
+        $dn = Ldap\Dn::fromString($dnString1, null);
         $this->assertEquals($dnString1, (string)$dn);
         $dn->setCaseFold(Ldap\Dn::ATTR_CASEFOLD_UPPER);
         $this->assertEquals($dnString2, (string)$dn);
         $dn->setCaseFold(Ldap\Dn::ATTR_CASEFOLD_LOWER);
         $this->assertEquals($dnString3, (string)$dn);
 
-        $dn=Ldap\Dn::fromString($dnString1, Ldap\Dn::ATTR_CASEFOLD_UPPER);
+        $dn = Ldap\Dn::fromString($dnString1, Ldap\Dn::ATTR_CASEFOLD_UPPER);
         $this->assertEquals($dnString2, (string)$dn);
         $dn->setCaseFold(null);
         $this->assertEquals($dnString1, (string)$dn);
         $dn->setCaseFold(Ldap\Dn::ATTR_CASEFOLD_LOWER);
         $this->assertEquals($dnString3, (string)$dn);
 
-        $dn=Ldap\Dn::fromString($dnString1, Ldap\Dn::ATTR_CASEFOLD_LOWER);
+        $dn = Ldap\Dn::fromString($dnString1, Ldap\Dn::ATTR_CASEFOLD_LOWER);
         $this->assertEquals($dnString3, (string)$dn);
         $dn->setCaseFold(Ldap\Dn::ATTR_CASEFOLD_UPPER);
         $this->assertEquals($dnString2, (string)$dn);
@@ -154,11 +151,11 @@ class CreationTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($dnString2, (string)$dn);
 
         Ldap\Dn::setDefaultCaseFold(Ldap\Dn::ATTR_CASEFOLD_UPPER);
-        $dn=Ldap\Dn::fromString($dnString1, null);
+        $dn = Ldap\Dn::fromString($dnString1, null);
         $this->assertEquals($dnString2, (string)$dn);
 
         Ldap\Dn::setDefaultCaseFold(null);
-        $dn=Ldap\Dn::fromString($dnString1, null);
+        $dn = Ldap\Dn::fromString($dnString1, null);
         $this->assertEquals($dnString1, (string)$dn);
 
         Ldap\Dn::setDefaultCaseFold(Ldap\Dn::ATTR_CASEFOLD_NONE);
@@ -168,22 +165,24 @@ class CreationTest extends \PHPUnit_Framework_TestCase
     {
         Ldap\Dn::setDefaultCaseFold(Ldap\Dn::ATTR_CASEFOLD_NONE);
 
-        $dnString='cn=Baker\\, Alice,cn=Users,dc=example,dc=com';
-        $dn=Ldap\Dn::fromString($dnString);
+        $dnString = 'cn=Baker\\, Alice,cn=Users,dc=example,dc=com';
+        $dn       = Ldap\Dn::fromString($dnString);
 
         $this->assertEquals(array('cn' => 'Baker, Alice'), $dn->getRdn());
         $this->assertEquals('cn=Baker\\, Alice', $dn->getRdnString());
 
         $dnString = 'Cn=Users+Ou=Lab,dc=example,dc=com';
-        $dn=Ldap\Dn::fromString($dnString);
-        $this->assertEquals(array('Cn' => 'Users', 'Ou' => 'Lab'), $dn->getRdn());
+        $dn       = Ldap\Dn::fromString($dnString);
+        $this->assertEquals(array('Cn' => 'Users',
+                                 'Ou'  => 'Lab'), $dn->getRdn()
+        );
         $this->assertEquals('Cn=Users+Ou=Lab', $dn->getRdnString());
     }
 
     public function testGetParentDn()
     {
-        $dnString='cn=Baker\\, Alice,cn=Users,dc=example,dc=com';
-        $dn=Ldap\Dn::fromString($dnString);
+        $dnString = 'cn=Baker\\, Alice,cn=Users,dc=example,dc=com';
+        $dn       = Ldap\Dn::fromString($dnString);
 
         $this->assertEquals('cn=Users,dc=example,dc=com', $dn->getParentDn()->toString());
         $this->assertEquals('cn=Users,dc=example,dc=com', $dn->getParentDn(1)->toString());
@@ -192,13 +191,13 @@ class CreationTest extends \PHPUnit_Framework_TestCase
 
         try {
             $dn->getParentDn(0)->toString();
-            $this->fail('Expected Zend_Ldap_Exception not thrown');
+            $this->fail('Expected Zend\Ldap\Exception not thrown');
         } catch (Ldap\Exception $e) {
             $this->assertEquals('Cannot retrieve parent DN with given $levelUp', $e->getMessage());
         }
         try {
             $dn->getParentDn(4)->toString();
-            $this->fail('Expected Zend_Ldap_Exception not thrown');
+            $this->fail('Expected Zend\Ldap\Exception not thrown');
         } catch (Ldap\Exception $e) {
             $this->assertEquals('Cannot retrieve parent DN with given $levelUp', $e->getMessage());
         }
@@ -206,8 +205,8 @@ class CreationTest extends \PHPUnit_Framework_TestCase
 
     public function testEmptyStringDn()
     {
-        $dnString='';
-        $dn=Ldap\Dn::fromString($dnString);
+        $dnString = '';
+        $dn       = Ldap\Dn::fromString($dnString);
 
         $this->assertEquals($dnString, $dn->toString());
     }

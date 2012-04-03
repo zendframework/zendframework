@@ -21,8 +21,10 @@
 
 namespace Zend\Ldap\Ldif;
 
+use Zend\Ldap;
+
 /**
- * Zend_Ldap_Ldif_Encoder provides methods to encode and decode LDAP data into/from Ldif.
+ * Zend\Ldap\Ldif\Encoder provides methods to encode and decode LDAP data into/from Ldif.
  *
  * @category   Zend
  * @package    Zend_Ldap
@@ -37,7 +39,7 @@ class Encoder
      *
      * @var array
      */
-    protected $_options = array(
+    protected $options = array(
         'sort'    => true,
         'version' => 1,
         'wrap'    => 78
@@ -46,17 +48,16 @@ class Encoder
     /**
      * @var boolean
      */
-    protected $_versionWritten = false;
+    protected $versionWritten = false;
 
     /**
      * Constructor.
      *
      * @param  array $options Additional options used during encoding
-     * @return void
      */
     protected function __construct(array $options = array())
     {
-        $this->_options = array_merge($this->_options, $options);
+        $this->options = array_merge($this->options, $options);
     }
 
     /**
@@ -80,28 +81,28 @@ class Encoder
     protected function _decode($string)
     {
         $items = array();
-        $item = array();
-        $last = null;
+        $item  = array();
+        $last  = null;
         foreach (explode("\n", $string) as $line) {
-            $line = rtrim($line, "\x09\x0A\x0D\x00\x0B");
+            $line    = rtrim($line, "\x09\x0A\x0D\x00\x0B");
             $matches = array();
             if (substr($line, 0, 1) === ' ' && $last !== null) {
                 $last[2] .= substr($line, 1);
             } else if (substr($line, 0, 1) === '#') {
                 continue;
             } else if (preg_match('/^([a-z0-9;-]+)(:[:<]?\s*)([^:<]*)$/i', $line, $matches)) {
-                $name = strtolower($matches[1]);
-                $type = trim($matches[2]);
+                $name  = strtolower($matches[1]);
+                $type  = trim($matches[2]);
                 $value = $matches[3];
                 if ($last !== null) {
-                    $this->_pushAttribute($last, $item);
+                    $this->pushAttribute($last, $item);
                 }
                 if ($name === 'version') {
                     continue;
                 } else if (count($item) > 0 && $name === 'dn') {
                     $items[] = $item;
-                    $item = array();
-                    $last = null;
+                    $item    = array();
+                    $last    = null;
                 }
                 $last = array($name, $type, $value);
             } else if (trim($line) === '') {
@@ -109,10 +110,11 @@ class Encoder
             }
         }
         if ($last !== null) {
-            $this->_pushAttribute($last, $item);
+            $this->pushAttribute($last, $item);
         }
         $items[] = $item;
-        return (count($items)>1) ? $items : $items[0];
+
+        return (count($items) > 1) ? $items : $items[0];
     }
 
     /**
@@ -121,10 +123,10 @@ class Encoder
      * @param array $attribute
      * @param array $entry
      */
-    protected function _pushAttribute(array $attribute, array &$entry)
+    protected function pushAttribute(array $attribute, array &$entry)
     {
-        $name = $attribute[0];
-        $type = $attribute[1];
+        $name  = $attribute[0];
+        $type  = $attribute[1];
         $value = $attribute[2];
         if ($type === '::') {
             $value = base64_decode($value);
@@ -148,6 +150,7 @@ class Encoder
     public static function encode($value, array $options = array())
     {
         $encoder = new self($options);
+
         return $encoder->_encode($value);
     }
 
@@ -161,12 +164,13 @@ class Encoder
     protected function _encode($value)
     {
         if (is_scalar($value)) {
-            return $this->_encodeString($value);
+            return $this->encodeString($value);
         } else if (is_array($value)) {
-            return $this->_encodeAttributes($value);
-        } else if ($value instanceof \Zend\Ldap\Node) {
-            return $value->toLdif($this->_options);
+            return $this->encodeAttributes($value);
+        } else if ($value instanceof Ldap\Node) {
+            return $value->toLdif($this->options);
         }
+
         return null;
     }
 
@@ -179,7 +183,7 @@ class Encoder
      * @param  boolen $base64
      * @return string
      */
-    protected function _encodeString($string, &$base64 = null)
+    protected function encodeString($string, &$base64 = null)
     {
         $string = (string)$string;
         if (!is_numeric($string) && empty($string)) {
@@ -200,7 +204,7 @@ class Encoder
          *                ; any value <= 127 decimal except NUL, LF,
          *                ; and CR
          */
-        $unsafe_char      = array(0, 10, 13);
+        $unsafe_char = array(0, 10, 13);
 
         $base64 = false;
         for ($i = 0; $i < strlen($string); $i++) {
@@ -237,7 +241,7 @@ class Encoder
      * @param  array|string $value
      * @return string
      */
-    protected function _encodeAttribute($name, $value)
+    protected function encodeAttribute($name, $value)
     {
         if (!is_array($value)) {
             $value = array($value);
@@ -250,19 +254,20 @@ class Encoder
         }
 
         foreach ($value as $v) {
-            $base64 = null;
-            $v = $this->_encodeString($v, $base64);
+            $base64    = null;
+            $v         = $this->encodeString($v, $base64);
             $attribute = $name . ':';
             if ($base64 === true) {
                 $attribute .= ': ' . $v;
             } else {
                 $attribute .= ' ' . $v;
             }
-            if (isset($this->_options['wrap']) && strlen($attribute) > $this->_options['wrap']) {
-                $attribute = trim(chunk_split($attribute, $this->_options['wrap'], PHP_EOL . ' '));
+            if (isset($this->options['wrap']) && strlen($attribute) > $this->options['wrap']) {
+                $attribute = trim(chunk_split($attribute, $this->options['wrap'], PHP_EOL . ' '));
             }
             $output .= $attribute . PHP_EOL;
         }
+
         return trim($output, PHP_EOL);
     }
 
@@ -274,17 +279,18 @@ class Encoder
      * @param  array $attributes
      * @return string
      */
-    protected function _encodeAttributes(array $attributes)
+    protected function encodeAttributes(array $attributes)
     {
-        $string = '';
+        $string     = '';
         $attributes = array_change_key_case($attributes, CASE_LOWER);
-        if (!$this->_versionWritten && array_key_exists('dn', $attributes) && isset($this->_options['version'])
-                && array_key_exists('objectclass', $attributes)) {
-            $string .= sprintf('version: %d', $this->_options['version']) . PHP_EOL;
-            $this->_versionWritten = true;
+        if (!$this->versionWritten && array_key_exists('dn', $attributes) && isset($this->options['version'])
+            && array_key_exists('objectclass', $attributes)
+        ) {
+            $string .= sprintf('version: %d', $this->options['version']) . PHP_EOL;
+            $this->versionWritten = true;
         }
 
-        if (isset($this->_options['sort']) && $this->_options['sort'] === true) {
+        if (isset($this->options['sort']) && $this->options['sort'] === true) {
             ksort($attributes, SORT_STRING);
             if (array_key_exists('objectclass', $attributes)) {
                 $oc = $attributes['objectclass'];
@@ -298,8 +304,9 @@ class Encoder
             }
         }
         foreach ($attributes as $key => $value) {
-            $string .= $this->_encodeAttribute($key, $value) . PHP_EOL;
+            $string .= $this->encodeAttribute($key, $value) . PHP_EOL;
         }
+
         return trim($string, PHP_EOL);
     }
 }

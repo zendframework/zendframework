@@ -4,6 +4,7 @@ namespace ZendTest\Di\Definition;
 
 use Zend\Di\Definition\CompilerDefinition,
     Zend\Code\Scanner\DirectoryScanner,
+    Zend\Code\Scanner\FileScanner,
     PHPUnit_Framework_TestCase as TestCase;
 
 class CompilerDefinitionTest extends TestCase
@@ -54,5 +55,13 @@ class CompilerDefinitionTest extends TestCase
         $this->assertContains('ZendTest\Di\TestAsset\CompilerClasses\C', $definition->getClassSupertypes('ZendTest\Di\TestAsset\CompilerClasses\D'));
         $this->assertContains('ZendTest\Di\TestAsset\CompilerClasses\C', $definition->getClassSupertypes('ZendTest\Di\TestAsset\CompilerClasses\E'));
         $this->assertContains('ZendTest\Di\TestAsset\CompilerClasses\D', $definition->getClassSupertypes('ZendTest\Di\TestAsset\CompilerClasses\E'));
+    }
+    
+    public function testCompilerDirectoryScannerAndFileScanner()
+    {
+        $definition = new CompilerDefinition;
+        $definition->addDirectoryScanner(new DirectoryScanner(__DIR__ . '/../TestAsset/CompilerClasses'));
+        $definition->addCodeScannerFile(new FileScanner(__DIR__ . '/../TestAsset/CompilerClasses/A.php'));
+        $definition->compile();
     }
 }

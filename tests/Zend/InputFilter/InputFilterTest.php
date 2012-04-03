@@ -47,6 +47,9 @@ class InputFilterTest extends TestCase
         $this->assertEquals(2, count($filter));
     }
 
+    /**
+     * @todo Should we do this? or simply alias the input internally?
+     */
     public function testAddingInputWithNameInjectsNameInInput()
     {
         $filter = new InputFilter();

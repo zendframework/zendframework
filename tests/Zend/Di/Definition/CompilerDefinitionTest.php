@@ -42,4 +42,17 @@ class CompilerDefinitionTest extends TestCase
             $definition->getMethodParameters('ZendTest\Di\TestAsset\CompilerClasses\C', 'setB')
         );
     }
+
+    public function testCompilerSupertypes()
+    {
+        $definition = new CompilerDefinition;
+        $definition->addDirectory(__DIR__ . '/../TestAsset/CompilerClasses');
+        $definition->compile();
+        $this->assertCount(0, $definition->getClassSupertypes('ZendTest\Di\TestAsset\CompilerClasses\C'));
+        $this->assertCount(1, $definition->getClassSupertypes('ZendTest\Di\TestAsset\CompilerClasses\D'));
+        $this->assertCount(2, $definition->getClassSupertypes('ZendTest\Di\TestAsset\CompilerClasses\E'));
+        $this->assertContains('ZendTest\Di\TestAsset\CompilerClasses\C', $definition->getClassSupertypes('ZendTest\Di\TestAsset\CompilerClasses\D'));
+        $this->assertContains('ZendTest\Di\TestAsset\CompilerClasses\C', $definition->getClassSupertypes('ZendTest\Di\TestAsset\CompilerClasses\E'));
+        $this->assertContains('ZendTest\Di\TestAsset\CompilerClasses\D', $definition->getClassSupertypes('ZendTest\Di\TestAsset\CompilerClasses\E'));
+    }
 }

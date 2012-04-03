@@ -22,6 +22,7 @@
 namespace ZendTest\InputFilter;
 
 use PHPUnit_Framework_TestCase as TestCase;
+use stdClass;
 use Zend\InputFilter\Input;
 use Zend\InputFilter\InputFilter;
 use Zend\Filter;
@@ -290,11 +291,13 @@ class InputFilterTest extends TestCase
 
     /**
      * Idea for this one is that one input may only need to be validated if another input is present.
-     */
+     *
+     * Commenting out for now, as validation context may make this irrelevant, and unsure what API to expose.
     public function testCanConditionallyInvokeValidators()
     {
         $this->markTestIncomplete();
     }
+     */
 
     /**
      * Idea for this one is that validation may need to rely on context -- e.g., a "password confirmation" 
@@ -302,21 +305,124 @@ class InputFilterTest extends TestCase
      */
     public function testValidationCanUseContext()
     {
-        $this->markTestIncomplete();
+        $filter = new InputFilter();
+
+        $store = new stdClass;
+        $foo   = new Input();
+        $foo->getValidatorChain()->addValidator(new Validator\Callback(function($value, $context) use ($store) {
+            $store->value   = $value;
+            $store->context = $context;
+            return true;
+        }));
+
+        $bar = new Input();
+        $bar->getValidatorChain()->addValidator(new Validator\Digits());
+
+        $filter->add($foo, 'foo')
+               ->add($bar, 'bar');
+
+        $data = array('foo' => 'foo', 'bar' => 123);
+        $filter->setData($data);
+
+        $this->assertTrue($filter->isValid());
+        $this->assertEquals('foo', $store->value);
+        $this->assertEquals($data, $store->context);
+    }
+
+    /**
+     * Idea here is that you can indicate that if validation for a particular input fails, we should not
+     * attempt any further validation of any other inputs.
+     */
+    public function testInputBreakOnFailureFlagIsHonoredWhenValidating()
+    {
+        $filter = new InputFilter();
+
+        $store = new stdClass;
+        $foo   = new Input();
+        $foo->getValidatorChain()->addValidator(new Validator\Callback(function($value, $context) use ($store) {
+            $store->value   = $value;
+            $store->context = $context;
+            return true;
+        }));
+
+        $bar = new Input();
+        $bar->getValidatorChain()->addValidator(new Validator\Digits());
+        $bar->setBreakOnFailure(true);
+
+        $filter->add($bar, 'bar')  // adding bar first, as we want it to validate first and break the chain
+               ->add($foo, 'foo');
+
+        $data = array('bar' => 'bar', 'foo' => 'foo');
+        $filter->setData($data);
+
+        $this->assertFalse($filter->isValid());
+        $this->assertObjectNotHasAttribute('value', $store);
+        $this->assertObjectNotHasAttribute('context', $store);
     }
 
     public function testValidationSkipsFieldsMarkedNotRequiredWhenNoDataPresent()
     {
-        $this->markTestIncomplete();
+        $filter = new InputFilter();
+
+        $foo   = new Input();
+        $foo->getValidatorChain()->addValidator(new Validator\StringLength(3, 5));
+        $foo->setRequired(false);
+
+        $bar = new Input();
+        $bar->getValidatorChain()->addValidator(new Validator\Digits());
+        $bar->setRequired(true);
+
+        $filter->add($foo, 'foo')
+               ->add($bar, 'bar');
+
+        $data = array('bar' => 124);
+        $filter->setData($data);
+
+        $this->assertTrue($filter->isValid());
     }
 
     public function testValidationAllowsEmptyValuesToRequiredInputWhenAllowEmptyFlagIsTrue()
     {
-        $this->markTestIncomplete();
+        $filter = new InputFilter();
+
+        $foo   = new Input();
+        $foo->getValidatorChain()->addValidator(new Validator\StringLength(3, 5));
+        $foo->setRequired(true);
+        $foo->setAllowEmpty(true);
+
+        $bar = new Input();
+        $bar->getValidatorChain()->addValidator(new Validator\Digits());
+        $bar->setRequired(true);
+
+        $filter->add($foo, '')
+               ->add($bar, 'bar');
+
+        $data = array('bar' => 124);
+        $filter->setData($data);
+
+        $this->assertTrue($filter->isValid());
+        $this->assertEquals('', $filter->getValue('foo'));
     }
 
     public function testValidationMarksInputInvalidWhenRequiredAndAllowEmptyFlagIsFalse()
     {
-        $this->markTestIncomplete();
+        $filter = new InputFilter();
+
+        $foo   = new Input();
+        $foo->getValidatorChain()->addValidator(new Validator\StringLength(3, 5));
+        $foo->setRequired(true);
+        $foo->setAllowEmpty(false);
+
+        $bar = new Input();
+        $bar->getValidatorChain()->addValidator(new Validator\Digits());
+        $bar->setRequired(true);
+
+        $filter->add($foo, '')
+               ->add($bar, 'bar');
+
+        $data = array('bar' => 124);
+        $filter->setData($data);
+
+        $this->assertFalse($filter->isValid());
     }
 }

@@ -48,10 +48,13 @@ class AuthenticationService
      * @param  Storage $storage 
      * @return void
      */
-    public function __construct(Storage $storage = null)
+    public function __construct(Storage $storage = null, Adapter $adapter = null)
     {
         if (null !== $storage) {
             $this->setStorage($storage);
+        }
+        if (null !== $adapter) {
+            $this->setAdapter($adapter);
         }
     }
 

@@ -142,12 +142,11 @@ class Input implements InputInterface
         return $filter->filter($this->value);
     }
 
-
-    public function isValid()
+    public function isValid($context = null)
     {
         $validator = $this->getValidatorChain();
         $value     = $this->getValue();
-        return $validator->isValid($value);
+        return $validator->isValid($value, $context);
     }
 
     public function getMessages()

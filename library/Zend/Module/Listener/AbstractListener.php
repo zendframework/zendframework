@@ -27,7 +27,7 @@ abstract class AbstractListener
     /**
      * Get options.
      *
-     * @return options
+     * @return ListenerOptions
      */
     public function getOptions()
     {

@@ -23,7 +23,7 @@ class DefaultListenerAggregate extends AbstractListener
      * Attach one or more listeners
      *
      * @param EventCollection $events
-     * @return void
+     * @return DefaultListenerAggregate
      */
     public function attach(EventCollection $events)
     {
@@ -46,7 +46,7 @@ class DefaultListenerAggregate extends AbstractListener
      * Detach all previously attached listeners
      *
      * @param EventCollection $events
-     * @return void
+     * @return DefaultListenerAggregate
      */
     public function detach(EventCollection $events)
     {

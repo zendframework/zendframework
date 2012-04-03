@@ -132,7 +132,7 @@ class ConfigListener extends AbstractListener
      * Detach all previously attached listeners
      *
      * @param EventCollection $events
-     * @return void
+     * @return ConfigListener
      */
     public function detach(EventCollection $events)
     {
@@ -268,6 +268,11 @@ class ConfigListener extends AbstractListener
         return $this;
     }
 
+    /**
+     * @param $config
+     * @throws Exception\InvalidArgumentException
+     * @return void
+     */
     protected function mergeTraversableConfig($config)
     {
         if ($config instanceof Traversable) {
@@ -283,6 +288,9 @@ class ConfigListener extends AbstractListener
         $this->setMergedConfig(array_replace_recursive($this->mergedConfig, $config));
     }
 
+    /**
+     * @return bool
+     */
     protected function hasCachedConfig()
     {
         if (($this->getOptions()->getConfigCacheEnabled())
@@ -293,11 +301,17 @@ class ConfigListener extends AbstractListener
         return false;
     }
 
+    /**
+     * @return mixed
+     */
     protected function getCachedConfig()
     {
         return include $this->getOptions()->getConfigCacheFile();
     }
 
+    /**
+     * @return ConfigListener
+     */
     protected function updateCache()
     {
         if (($this->getOptions()->getConfigCacheEnabled())

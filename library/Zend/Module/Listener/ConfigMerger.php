@@ -16,7 +16,7 @@ interface ConfigMerger
      * setMergedConfig
      *
      * @param array $config
-     * @return Manager
+     * @return ConfigMerger
      */
     public function setMergedConfig(array $config);
 }

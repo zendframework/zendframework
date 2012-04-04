@@ -248,11 +248,11 @@ class InputFilterTest extends TestCase
     {
         $filter = $this->getInputFilter();
         $invalidData = array(
-            'foo' => ' bazbat ',
+            'foo' => ' bazbat boo ',
             'bar' => 'abc45',
             'nest' => array(
-                'foo' => ' baz bat ',
-                'bar' => '12345',
+                'foo' => ' baz bat boo ',
+                'bar' => '123yz',
             ),
         );
         $filter->setData($invalidData);

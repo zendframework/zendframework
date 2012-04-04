@@ -338,6 +338,10 @@ class InputFilter implements InputFilterInterface
      */
     public function getMessages()
     {
-        return array();
+        $messages = array();
+        foreach ($this->getInvalidInput() as $name => $input) {
+            $messages[$name] = $input->getMessages();
+        }
+        return $messages;
     }
 }

@@ -34,6 +34,8 @@ class InputFilter implements InputFilterInterface
 {
     protected $data;
     protected $inputs = array();
+    protected $invalidInputs;
+    protected $validInputs;
 
     /**
      * Countable: number of inputs in this input filter
@@ -127,15 +129,20 @@ class InputFilter implements InputFilterInterface
             ));
         }
 
-        $valid = true;
+        $this->validInputs   = array();
+        $this->invalidInputs = array();
+        $valid               = true;
         foreach ($this->inputs as $name => $input) {
             if (!isset($this->data[$name])) {
                 // Not sure how to handle input filters in this case
                 if ($input instanceof InputFilterInterface) {
                     $input->setData(array());
                     if (!$input->isValid()) {
+                        $this->invalidInputs[$name] = $input;
                         $valid = false;
+                        continue;
                     }
+                    $this->validInputs[$name] = $input;
                     continue;
                 }
 
@@ -143,16 +150,20 @@ class InputFilter implements InputFilterInterface
                 // - test if input is required
                 // - test if input allows empty
                 if (!$input->isRequired()) {
+                    $this->validInputs[$name] = $input;
                     continue;
                 }
 
                 if ($input->allowEmpty()) {
+                    $this->validInputs[$name] = $input;
                     continue;
                 }
 
                 // How do we mark the input as invalid in this case?
+                // (for purposes of a validation error message)
 
                 // Mark validation as having failed
+                $this->invalidInputs[$name] = $input;
                 $valid = false;
                 if ($input->breakOnFailure()) {
                     // We failed validation, and this input is marked to
@@ -166,19 +177,27 @@ class InputFilter implements InputFilterInterface
             if ($input instanceof InputFilterInterface) {
                 $input->setData($value);
                 if (!$input->isValid()) {
+                    $this->invalidInputs[$name] = $input;
                     $valid = false;
+                    continue;
                 }
+                $this->validInputs[$name] = $input;
+                continue;
             }
             if ($input instanceof InputInterface) {
                 $input->setValue($value);
                 if (!$input->isValid($this->data)) {
                     // Validation failure
+                    $this->invalidInputs[$name] = $input;
                     $valid = false;
 
                     if ($input->breakOnFailure()) {
                         return false;
                     }
+                    continue;
                 }
+                $this->validInputs[$name] = $input;
+                continue;
             }
         }
 
@@ -213,7 +232,7 @@ class InputFilter implements InputFilterInterface
      */
     public function getInvalidInput()
     {
-        return array();
+        return (is_array($this->invalidInputs) ? $this->invalidInputs : array());
     }
 
     /**
@@ -226,7 +245,7 @@ class InputFilter implements InputFilterInterface
      */
     public function getValidInput()
     {
-        return array();
+        return (is_array($this->validInputs) ? $this->validInputs : array());
     }
 
     /**

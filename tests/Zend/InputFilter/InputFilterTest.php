@@ -160,7 +160,7 @@ class InputFilterTest extends TestCase
             'foo' => ' bazbat ',
             'bar' => 'abc45',
             'nest' => array(
-                'foo' => ' baz bat ',
+                'foo' => ' baz bat boo ',
                 'bar' => '12345',
             ),
         );
@@ -170,12 +170,12 @@ class InputFilterTest extends TestCase
         $this->assertArrayNotHasKey('foo', $invalidInputs);
         $this->assertArrayHasKey('bar', $invalidInputs);
         $this->assertInstanceOf('Zend\InputFilter\Input', $invalidInputs['bar']);
-        $this->assertArrayHasKey('nest', $invalidInputs);
-        $this->assertInternalType('array', $invalidInputs['nest']);
-        $nestInvalids = $invalidInputs['nest'];
+        $this->assertArrayHasKey('nest', $invalidInputs, var_export($invalidInputs, 1));
+        $this->assertInstanceOf('Zend\InputFilter\InputFilterInterface', $invalidInputs['nest']);
+        $nestInvalids = $invalidInputs['nest']->getInvalidInput();
         $this->assertArrayHasKey('foo', $nestInvalids);
         $this->assertInstanceOf('Zend\InputFilter\Input', $nestInvalids['foo']);
-        $this->assertArrayNotHasKey('bar', $invalidInputs);
+        $this->assertArrayNotHasKey('bar', $nestInvalids);
     }
 
     public function testCanRetrieveValidInputsOnFailedValidation()
@@ -196,11 +196,12 @@ class InputFilterTest extends TestCase
         $this->assertInstanceOf('Zend\InputFilter\Input', $validInputs['foo']);
         $this->assertArrayNotHasKey('bar', $validInputs);
         $this->assertArrayHasKey('nest', $validInputs);
-        $this->assertInternalType('array', $validInputs['nest']);
-        $nestValids = $validInputs['nest'];
-        $this->assertArrayNotHasKey('foo', $nestInvalids);
-        $this->assertArrayHasKey('bar', $validInputs);
-        $this->assertInstanceOf('Zend\InputFilter\Input', $nestInvalids['bar']);
+        $this->assertInstanceOf('Zend\InputFilter\InputFilterInterface', $validInputs['nest']);
+        $nestValids = $validInputs['nest']->getValidInput();
+        $this->assertArrayHasKey('foo', $nestValids);
+        $this->assertInstanceOf('Zend\InputFilter\Input', $nestValids['foo']);
+        $this->assertArrayHasKey('bar', $nestValids);
+        $this->assertInstanceOf('Zend\InputFilter\Input', $nestValids['bar']);
     }
 
     public function testValuesRetrievedAreFiltered()

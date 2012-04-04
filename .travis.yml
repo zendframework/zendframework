@@ -4,6 +4,6 @@ php:
   - 5.3
   - 5.4
 
-before_install: cp .travis/TestConfiguration.php tests/TestConfiguration.php
+before_install: cp tests/TravisTestConfiguration.php tests/TestConfiguration.php
 
 script: ./.travis/run-tests.sh

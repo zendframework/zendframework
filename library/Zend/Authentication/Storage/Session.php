@@ -82,9 +82,7 @@ class Session implements AuthenticationStorage
         if ($member !== null) {
             $this->member = $member;
         }
-        $this->namespace = $namespace;
-        $this->member    = $member;
-        $this->session   = new SessionContainer($this->_namespace, $manager);
+        $this->session   = new SessionContainer($this->namespace, $manager);
     }
 
     /**

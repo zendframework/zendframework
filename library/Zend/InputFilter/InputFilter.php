@@ -35,6 +35,7 @@ class InputFilter implements InputFilterInterface
     protected $data;
     protected $inputs = array();
     protected $invalidInputs;
+    protected $validationGroup;
     protected $validInputs;
 
     /**
@@ -132,7 +133,11 @@ class InputFilter implements InputFilterInterface
         $this->validInputs   = array();
         $this->invalidInputs = array();
         $valid               = true;
-        foreach ($this->inputs as $name => $input) {
+        
+        $inputs = $this->validationGroup ?: array_keys($this->inputs);
+        foreach ($inputs as $name) {
+            $input = $this->inputs[$name];
+
             if (!isset($this->data[$name])) {
                 // Not sure how to handle input filters in this case
                 if ($input instanceof InputFilterInterface) {
@@ -220,6 +225,21 @@ class InputFilter implements InputFilterInterface
      */
     public function setValidationGroup($name)
     {
+        if ($name === self::VALIDATE_ALL) {
+            $this->validationGroup = null;
+            return $this;
+        }
+
+        if (is_array($name)) {
+            $this->validateValidationGroup($name);
+            $this->validationGroup = $name;
+            return $this;
+        }
+
+        $inputs = func_get_args();
+        $this->validateValidationGroup($inputs);
+        $this->validationGroup = $inputs;
+        return $this;
     }
 
     /**
@@ -343,5 +363,24 @@ class InputFilter implements InputFilterInterface
             $messages[$name] = $input->getMessages();
         }
         return $messages;
+    }
+
+    /**
+     * Ensure all names of a validation group exist as input in the filter
+     * 
+     * @param  array $inputs 
+     * @return void
+     * @throws Exception\InvalidArgumentException
+     */
+    protected function validateValidationGroup(array $inputs)
+    {
+        foreach ($inputs as $name) {
+            if (!array_key_exists($name, $this->inputs)) {
+                throw new Exception\InvalidArgumentException(sprintf(
+                    'setValidationGroup() expects a list of valid input names; "%s" was not found',
+                    $name
+                ));
+            }
+        }
     }
 }

@@ -101,6 +101,14 @@ interface InputFilterInterface extends Countable
     public function getValidInput();
 
     /**
+     * Retrieve a value from a named input
+     * 
+     * @param  string $name 
+     * @return mixed
+     */
+    public function getValue($name);
+
+    /**
      * Return a list of filtered values
      *
      * List should be an associative array, with the values filtered. If
@@ -109,6 +117,14 @@ interface InputFilterInterface extends Countable
      * @return array
      */
     public function getValues();
+
+    /**
+     * Retrieve a raw (unfiltered) value from a named input
+     * 
+     * @param  string $name 
+     * @return mixed
+     */
+    public function getRawValue($name);
 
     /**
      * Return a list of unfiltered values

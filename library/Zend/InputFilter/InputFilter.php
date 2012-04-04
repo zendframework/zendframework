@@ -66,7 +66,7 @@ class InputFilter implements InputFilterInterface
             ));
         }
 
-        if ($name === null) {
+        if (empty($name)) {
             $name = $input->getName();
         }
         $this->inputs[$name] = $input;
@@ -181,6 +181,8 @@ class InputFilter implements InputFilterInterface
                 }
             }
         }
+
+        return $valid;
     }
 
     /**
@@ -211,6 +213,7 @@ class InputFilter implements InputFilterInterface
      */
     public function getInvalidInput()
     {
+        return array();
     }
 
     /**
@@ -223,6 +226,26 @@ class InputFilter implements InputFilterInterface
      */
     public function getValidInput()
     {
+        return array();
+    }
+
+    /**
+     * Retrieve a value from a named input
+     * 
+     * @param  string $name 
+     * @return mixed
+     */
+    public function getValue($name)
+    {
+        if (!array_key_exists($name, $this->inputs)) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                '%s expects a valid input name; "%s" was not found in the filter',
+                __METHOD__,
+                $name
+            ));
+        }
+        $input = $this->inputs[$name];
+        return $input->getValue();
     }
 
     /**
@@ -235,6 +258,34 @@ class InputFilter implements InputFilterInterface
      */
     public function getValues()
     {
+        $values = array();
+        foreach ($this->inputs as $name => $input) {
+            if ($input instanceof InputFilterInterface) {
+                $values[$name] = $input->getValues();
+                continue;
+            }
+            $values[$name] = $input->getValue();
+        }
+        return $values;
+    }
+
+    /**
+     * Retrieve a raw (unfiltered) value from a named input
+     * 
+     * @param  string $name 
+     * @return mixed
+     */
+    public function getRawValue($name)
+    {
+        if (!array_key_exists($name, $this->inputs)) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                '%s expects a valid input name; "%s" was not found in the filter',
+                __METHOD__,
+                $name
+            ));
+        }
+        $input = $this->inputs[$name];
+        return $input->getRawValue();
     }
 
     /**
@@ -247,6 +298,15 @@ class InputFilter implements InputFilterInterface
      */
     public function getRawValues()
     {
+        $values = array();
+        foreach ($this->inputs as $name => $input) {
+            if ($input instanceof InputFilterInterface) {
+                $values[$name] = $input->getRawValues();
+                continue;
+            }
+            $values[$name] = $input->getRawValue();
+        }
+        return $values;
     }
 
     /**
@@ -259,5 +319,6 @@ class InputFilter implements InputFilterInterface
      */
     public function getMessages()
     {
+        return array();
     }
 }

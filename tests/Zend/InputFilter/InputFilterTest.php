@@ -47,17 +47,14 @@ class InputFilterTest extends TestCase
         $this->assertEquals(2, count($filter));
     }
 
-    /**
-     * @todo Should we do this? or simply alias the input internally?
-     */
-    public function testAddingInputWithNameInjectsNameInInput()
+    public function testAddingInputWithNameDoesNotInjectNameInInput()
     {
         $filter = new InputFilter();
         $foo    = new Input('foo');
         $filter->add($foo, 'bar');
         $test   = $filter->get('bar');
         $this->assertSame($foo, $test);
-        $this->assertEquals('bar', $foo->getName());
+        $this->assertEquals('foo', $foo->getName());
     }
 
     public function testCanAddInputFilterAsInput()
@@ -195,14 +192,14 @@ class InputFilterTest extends TestCase
         $filter->setData($invalidData);
         $this->assertFalse($filter->isValid());
         $validInputs = $filter->getValidInput();
-        $this->assertArrayHasKey('foo', $invalidInputs);
-        $this->assertInstanceOf('Zend\InputFilter\Input', $invalidInputs['foo']);
-        $this->assertArrayNotHasKey('bar', $invalidInputs);
-        $this->assertArrayHasKey('nest', $invalidInputs);
-        $this->assertInternalType('array', $invalidInputs['nest']);
+        $this->assertArrayHasKey('foo', $validInputs);
+        $this->assertInstanceOf('Zend\InputFilter\Input', $validInputs['foo']);
+        $this->assertArrayNotHasKey('bar', $validInputs);
+        $this->assertArrayHasKey('nest', $validInputs);
+        $this->assertInternalType('array', $validInputs['nest']);
         $nestValids = $validInputs['nest'];
         $this->assertArrayNotHasKey('foo', $nestInvalids);
-        $this->assertArrayHasKey('bar', $invalidInputs);
+        $this->assertArrayHasKey('bar', $validInputs);
         $this->assertInstanceOf('Zend\InputFilter\Input', $nestInvalids['bar']);
     }
 
@@ -388,7 +385,7 @@ class InputFilterTest extends TestCase
     {
         $filter = new InputFilter();
 
-        $foo   = new Input();
+        $foo   = new Input('foo');
         $foo->getValidatorChain()->addValidator(new Validator\StringLength(3, 5));
         $foo->setRequired(true);
         $foo->setAllowEmpty(true);

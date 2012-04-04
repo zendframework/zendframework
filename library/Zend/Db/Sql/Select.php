@@ -343,8 +343,12 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
                 $joinSpecArgArray[$j][] = strtoupper($join['type']); // type
                 $joinSpecArgArray[$j][] = $platform->quoteIdentifier($join['name']); // table
                 $joinSpecArgArray[$j][] = $platform->quoteIdentifierInFragment($join['on'], array('=', 'AND', 'OR', '(', ')')); // on
-                foreach ($join['columns'] as $jColumn) {
-                    $columns[] = $joinSpecArgArray[$j][1] . $separator . $platform->quoteIdentifierInFragment($jColumn);
+                foreach ($join['columns'] as $jColumnAlias => $jColumn) {
+                    if (is_string($jColumnAlias)) {
+                        $columns[] = $joinSpecArgArray[$j][1] . $separator . $platform->quoteIdentifierInFragment($jColumn) . ' AS ' . $platform->quoteIdentifier($jColumnAlias);
+                    } else {
+                        $columns[] = $joinSpecArgArray[$j][1] . $separator . $platform->quoteIdentifierInFragment($jColumn);
+                    }
                 }
             }
         }
@@ -435,9 +439,13 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
                 $joinSpecArgArray[$j] = array();
                 $joinSpecArgArray[$j][] = strtoupper($join['type']); // type
                 $joinSpecArgArray[$j][] = $platform->quoteIdentifier($join['name']); // table
-                $joinSpecArgArray[$j][] = $platform->quoteIdentifierInFragment($join['on'], array('=', 'AND', 'OR', '(', ')')); // on
-                foreach ($join['columns'] as /* $jColumnKey => */ $jColumn) {
-                    $columns[] = $joinSpecArgArray[$j][1] . $separator . $platform->quoteIdentifierInFragment($jColumn);
+                $joinSpecArgArray[$j][] = $platform->quoteIdentifierInFragment($join['on'], array('=', 'AND', 'OR', '(', ')')); // on 
+                foreach ($join['columns'] as $jColumnAlias => $jColumn) {
+                    if (is_string($jColumnAlias)) {
+                        $columns[] = $joinSpecArgArray[$j][1] . $separator . $platform->quoteIdentifierInFragment($jColumn) . ' AS ' . $platform->quoteIdentifier($jColumnAlias);
+                    } else {
+                        $columns[] = $joinSpecArgArray[$j][1] . $separator . $platform->quoteIdentifierInFragment($jColumn);
+                    }
                 }
             }
         }

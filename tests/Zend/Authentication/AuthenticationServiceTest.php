@@ -66,7 +66,7 @@ class AuthenticationServiceTest extends \PHPUnit_Framework_TestCase
      */
     public function testAuthenticate()
     {
-        $result = $this->_authenticate();
+        $result = $this->authenticate();
         $this->assertTrue($result instanceof Auth\Result);
         $this->assertTrue($this->auth->hasIdentity());
         $this->assertEquals('someIdentity', $this->auth->getIdentity());
@@ -74,7 +74,7 @@ class AuthenticationServiceTest extends \PHPUnit_Framework_TestCase
 
     public function testAuthenticateSetAdapter()
     {
-        $result = $this->_authenticate(new TestAsset\SuccessAdapter());
+        $result = $this->authenticate(new TestAsset\SuccessAdapter());
         $this->assertTrue($result instanceof Auth\Result);
         $this->assertTrue($this->auth->hasIdentity());
         $this->assertEquals('someIdentity', $this->auth->getIdentity());
@@ -87,13 +87,13 @@ class AuthenticationServiceTest extends \PHPUnit_Framework_TestCase
      */
     public function testClearIdentity()
     {
-        $this->_authenticate();
+        $this->authenticate();
         $this->auth->clearIdentity();
         $this->assertFalse($this->auth->hasIdentity());
         $this->assertEquals(null, $this->auth->getIdentity());
     }
 
-    protected function _authenticate($adapter = null)
+    protected function authenticate($adapter = null)
     {
         if ($adapter === null) {
             $adapter = new TestAsset\SuccessAdapter();

@@ -21,6 +21,8 @@
 namespace Zend\Validator;
 
 use Countable;
+use Zend\Loader\Broker;
+use Zend\Loader\Pluggable;
 
 /**
  * @category   Zend
@@ -28,21 +30,29 @@ use Countable;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ValidatorChain implements ValidatorInterface, Countable
+class ValidatorChain implements 
+    Countable, 
+    Pluggable,
+    ValidatorInterface
 {
+    /**
+     * @var Broker
+     */
+    protected $broker;
+
     /**
      * Validator chain
      *
      * @var array
      */
-    protected $_validators = array();
+    protected $validators = array();
 
     /**
      * Array of validation failure messages
      *
      * @var array
      */
-    protected $_messages = array();
+    protected $messages = array();
 
     /**
      * Array of validation failure message codes
@@ -50,7 +60,7 @@ class ValidatorChain implements ValidatorInterface, Countable
      * @var array
      * @deprecated Since 1.5.0
      */
-    protected $_errors = array();
+    protected $errors = array();
 
     /**
      * Return the count of attached valicators
@@ -59,7 +69,52 @@ class ValidatorChain implements ValidatorInterface, Countable
      */
     public function count()
     {
-        return count($this->_validators);
+        return count($this->validators);
+    }
+
+    /**
+     * Get plugin broker instance
+     * 
+     * @return Zend\Loader\Broker
+     */
+    public function getBroker()
+    {
+        if (!$this->broker) {
+            $this->setBroker(new ValidatorBroker());
+        }
+        return $this->broker;
+    }
+
+    /**
+     * Set plugin broker instance
+     * 
+     * @param  string|Broker $broker Plugin broker to load plugins
+     * @return ValidatorChain
+     */
+    public function setBroker($broker)
+    {
+        if (!$broker instanceof Broker) {
+            throw new Exception\RuntimeException(sprintf(
+                '%s expects an argument of type Zend\Loader\Broker; received "%s"',
+                __METHOD__,
+                (is_object($broker) ? get_class($broker) : gettype($broker))
+            ));
+        }
+        $this->broker = $broker;
+        return $this;
+    }
+
+    /**
+     * Retrieve a validator by name
+     * 
+     * @param  string     $plugin  Name of validator to return
+     * @param  null|array $options Options to pass to validator constructor (if not already instantiated)
+     * @return Validator
+     */
+    public function plugin($name, array $options = null)
+    {
+        $broker = $this->getBroker();
+        return $broker->load($name, $options);
     }
 
     /**
@@ -74,10 +129,25 @@ class ValidatorChain implements ValidatorInterface, Countable
      */
     public function addValidator(ValidatorInterface $validator, $breakChainOnFailure = false)
     {
-        $this->_validators[] = array(
+        $this->validators[] = array(
             'instance' => $validator,
             'breakChainOnFailure' => (boolean) $breakChainOnFailure
             );
+        return $this;
+    }
+
+    /**
+     * Use the plugin broker to add a validator by name
+     * 
+     * @param  string $name 
+     * @param  array $options 
+     * @param  bool $breakChainOnFailure 
+     * @return ValidatorChain
+     */
+    public function addByName($name, $options = array(), $breakChainOnFailure = false)
+    {
+        $validator = $this->plugin($name, $options);
+        $this->addValidator($validator, $breakChainOnFailure);
         return $this;
     }
 
@@ -92,18 +162,18 @@ class ValidatorChain implements ValidatorInterface, Countable
      */
     public function isValid($value, $context = null)
     {
-        $this->_messages = array();
-        $this->_errors   = array();
+        $this->messages = array();
+        $this->errors   = array();
         $result = true;
-        foreach ($this->_validators as $element) {
+        foreach ($this->validators as $element) {
             $validator = $element['instance'];
             if ($validator->isValid($value, $context)) {
                 continue;
             }
             $result = false;
             $messages = $validator->getMessages();
-            $this->_messages = array_merge($this->_messages, $messages);
-            $this->_errors   = array_merge($this->_errors,   array_keys($messages));
+            $this->messages = array_merge($this->messages, $messages);
+            $this->errors   = array_merge($this->errors,   array_keys($messages));
             if ($element['breakChainOnFailure']) {
                 break;
             }
@@ -118,7 +188,7 @@ class ValidatorChain implements ValidatorInterface, Countable
      */
     public function getMessages()
     {
-        return $this->_messages;
+        return $this->messages;
     }
 
     /**
@@ -129,7 +199,7 @@ class ValidatorChain implements ValidatorInterface, Countable
      */
     public function getErrors()
     {
-        return $this->_errors;
+        return $this->errors;
     }
 
     /**

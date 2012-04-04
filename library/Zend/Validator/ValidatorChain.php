@@ -87,16 +87,17 @@ class ValidatorChain implements ValidatorInterface, Countable
      * Validators are run in the order in which they were added to the chain (FIFO).
      *
      * @param  mixed $value
+     * @param  mixed $context Extra "context" to provide the validator
      * @return boolean
      */
-    public function isValid($value)
+    public function isValid($value, $context = null)
     {
         $this->_messages = array();
         $this->_errors   = array();
         $result = true;
         foreach ($this->_validators as $element) {
             $validator = $element['instance'];
-            if ($validator->isValid($value)) {
+            if ($validator->isValid($value, $context)) {
                 continue;
             }
             $result = false;

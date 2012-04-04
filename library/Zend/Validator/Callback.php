@@ -125,9 +125,10 @@ class Callback extends AbstractValidator
      * for the provided $value
      *
      * @param  mixed $value
+     * @param  mixed $context Additional context to provide to the callback
      * @return boolean
      */
-    public function isValid($value)
+    public function isValid($value, $context = null)
     {
         $this->setValue($value);
 

@@ -322,6 +322,11 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         $sql12 = 'SELECT "foo".* FROM "foo" WHERE x = ?';
         $params12 = array(5);
 
+        // join with column aliases
+        $select13 = new Select;
+        $select13->from('foo')->join('zac', 'm = n', array('BAR' => 'bar', 'BAZ' => 'baz'));
+        $sql13 = 'SELECT "foo".*, "zac"."bar" AS "BAR", "zac"."baz" AS "BAZ" FROM "foo" INNER JOIN "zac" ON "m" = "n"';
+
         return array(
             array($select0, $sql0),
             array($select1, $sql1),
@@ -335,7 +340,8 @@ class SelectTest extends \PHPUnit_Framework_TestCase
             array($select9, $sql9),
             array($select10, $sql10),
             array($select11, $sql11),
-            array($select12, $sql12, $params12)
+            array($select12, $sql12, $params12),
+            array($select13, $sql13)
         );
     }
 

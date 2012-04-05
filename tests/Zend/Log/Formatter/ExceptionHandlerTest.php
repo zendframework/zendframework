@@ -61,11 +61,4 @@ class ExceptionHandlerTest extends \PHPUnit_Framework_TestCase
                 "[Trace]\nFile  : test.php\nLine  : 1\nFunc  : test\nClass : Test\n" .
                 "Type  : static\nArgs  : Array\n(\n    [0] => 1\n)\n\n", $output);
     }
-
-    public function testFactory()
-    {
-        $options = array();
-        $formatter = ExceptionHandler::factory($options);
-        $this->assertInstanceOf('Zend\Log\Formatter\ExceptionHandler', $formatter);
-    }
 }

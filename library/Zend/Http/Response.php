@@ -485,28 +485,15 @@ class Response extends Message implements ResponseDescription
     {
         $decBody = '';
 
-        // If mbstring overloads substr and strlen functions, we have to
-        // override it's internal encoding
-        if (function_exists('mb_internal_encoding') &&
-           ((int) ini_get('mbstring.func_overload')) & 2) {
-
-            $mbIntEnc = mb_internal_encoding();
-            mb_internal_encoding('ASCII');
-        }
-
         while (trim($body)) {
             if (! preg_match("/^([\da-fA-F]+)[^\r\n]*\r\n/sm", $body, $m)) {
                 throw new Exception\RuntimeException("Error parsing body - doesn't seem to be a chunked message");
             }
 
             $length = hexdec(trim($m[1]));
-            $cut = strlen($m[0]);
+            $cut = static::strlen($m[0]);
             $decBody .= substr($body, $cut, $length);
             $body = substr($body, $cut + $length + 2);
-        }
-
-        if (isset($mbIntEnc)) {
-            mb_internal_encoding($mbIntEnc);
         }
 
         return $decBody;
@@ -567,4 +554,19 @@ class Response extends Message implements ResponseDescription
         }
     }
 
+    /**
+     * Returns length of binary string in bytes
+     *
+     * @param string $str
+     * @return int the string length
+     */
+    static public function strlen($str)
+    {
+        if (function_exists('mb_internal_encoding') &&
+            (((int)ini_get('mbstring.func_overload')) & 2)) {
+            return mb_strlen($str, '8bit');
+        } else {
+            return strlen($str);
+        }
+    }
 }

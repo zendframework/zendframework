@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML 5//EN" "-" [
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML 5//EN" "@DOCBOOK_DTD@" [
     <!-- Add translated specific definitions and snippets -->
     <!ENTITY % language-snippets SYSTEM "./ref/language-snippets.xml">
     %language-snippets;
@@ -18,6 +18,3 @@
         </xi:include>
     </chapter>
 </book>
-<!--
-vim:se ts=4 sw=4 et:
--->

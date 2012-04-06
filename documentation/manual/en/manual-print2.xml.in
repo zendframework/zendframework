@@ -322,6 +322,3 @@
 
     <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="ref/copyrights.xml" parse="xml"/>
 </book>
-<!--
-vim:se ts=4 sw=4 et:
--->

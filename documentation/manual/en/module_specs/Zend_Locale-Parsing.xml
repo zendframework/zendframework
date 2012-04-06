@@ -519,6 +519,3 @@ echo getScriptCode('tamoul', 'fr'); // outputs "Taml"
         </para>
     </section>
 </section>
-<!--
-vim:se ts=4 sw=4 et:
--->

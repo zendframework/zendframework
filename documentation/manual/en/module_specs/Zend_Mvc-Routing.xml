@@ -540,7 +540,7 @@ $route = Scheme::factory(array(
       <para>
         The separation between literal and named segments can be anything.
         For example, the above could be done as "/:foo{-}[-:bar] as well. The
-        {-} after the :foo parameter indicateds a set of one or more delimiters,
+        {-} after the :foo parameter indicates a set of one or more delimiters,
         after which matching of the parameter itself ends.
       </para>
 

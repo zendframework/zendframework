@@ -13,47 +13,47 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Log
+ * @package    Zend_Ldap
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace ZendTest\Log\Formatter;
+namespace ZendTest\Ldap;
 
-use Zend\Log\Formatter\Firebug;
+use Zend\Ldap\Node;
 
 /**
  * @category   Zend
- * @package    Zend_Log
+ * @package    Zend_Ldap
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_Log
+ * @group      Zend_Ldap
  */
-class FirebugTest extends \PHPUnit_Framework_TestCase
+abstract class AbstractTestCase extends \PHPUnit_Framework_TestCase
 {
-    public function testFormat()
+    /**
+     * @return array
+     */
+    protected function createTestArrayData()
     {
-        $event = array(
-            'timestamp' => date('c'),
-        	'message' => 'tottakai',
-            'priority' => 2,
-        	'priorityName' => 'CRIT'
+        $data = array(
+            'dn'          => 'cn=name,dc=example,dc=org',
+            'cn'          => array('name'),
+            'host'        => array('a', 'b', 'c'),
+            'empty'       => array(),
+            'boolean'     => array('TRUE', 'FALSE'),
+            'objectclass' => array('account', 'top'),
         );
-        $formatter = new Firebug();
-        $output = $formatter->format($event);
-
-        $this->assertEquals('tottakai', $output);
+        return $data;
     }
 
     /**
-     * @group ZF-9176
+     * @return Node
      */
-    public function testFactory()
+    protected function createTestNode()
     {
-        $options = array();
-        $formatter = Firebug::factory($options);
-        $this->assertInstanceOf('Zend\Log\Formatter\Firebug', $formatter);
+        return Node::fromArray($this->createTestArrayData(), true);
     }
 }

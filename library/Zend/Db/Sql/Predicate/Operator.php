@@ -219,7 +219,7 @@ class Operator implements PredicateInterface
      * 
      * @return array
      */
-    public function getWhereParts()
+    public function getExpressionData()
     {
         return array(array(
             '%s ' . $this->operator . ' %s', 

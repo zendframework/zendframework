@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\View\Helper;
 use Zend\Registry,
     Zend\View\Helper\Placeholder\Registry as PlaceholderRegistry,

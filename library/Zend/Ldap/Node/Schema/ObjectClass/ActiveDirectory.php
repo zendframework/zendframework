@@ -19,27 +19,21 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Ldap\Node\Schema\ObjectClass;
 
-use Zend\Ldap\Node\Schema\ObjectClass,
-    Zend\Ldap\Node\Schema;
+use Zend\Ldap\Node\Schema;
 
 /**
- * Zend_Ldap_Node_Schema_ObjectClass_ActiveDirectory provides access to the objectClass
+ * Zend\Ldap\Node\Schema\ObjectClass\ActiveDirectory provides access to the objectClass
  * schema information on an Active Directory server.
  *
- * @uses       \Zend\Ldap\Node\Schema\Item
- * @uses       \Zend\Ldap\Node\Schema\ObjectClass
  * @category   Zend
  * @package    Zend_Ldap
  * @subpackage Schema
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ActiveDirectory extends Schema\Item implements ObjectClass
+class ActiveDirectory extends Schema\AbstractItem implements Schema\ObjectClass
 {
     /**
      * Gets the objectClass name

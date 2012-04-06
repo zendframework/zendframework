@@ -22,56 +22,57 @@
 namespace ZendTest\Db\Sql\Predicate;
 
 use PHPUnit_Framework_TestCase as TestCase,
-    Zend\Db\Sql\Predicate\Literal;
+    Zend\Db\Sql\Predicate\Expression;
 
-class LiteralTest extends TestCase
+class ExpressionTest extends TestCase
 {
-    public function setUp()
-    {
-        $this->predicate = new Literal();
-    }
 
     public function testEmptyConstructorYieldsEmptyLiteralAndParameter()
     {
-        $this->assertEquals('', $this->predicate->getLiteral());
-        $this->assertNull($this->predicate->getParameter());
+        $expression = new Expression();
+        $this->assertEquals('', $expression->getExpression());
+        $this->assertEmpty($expression->getParameters());
     }
 
     public function testCanPassLiteralAndParameterToConstructor()
     {
-        $predicate = new Literal('foo.bar = ?', 'bar');
-        $this->assertEquals('foo.bar = ?', $predicate->getLiteral());
-        $this->assertEquals(array('bar'), $predicate->getParameter());
+        $expression = new Expression();
+        $predicate = new Expression('foo.bar = ?', 'bar');
+        $this->assertEquals('foo.bar = ?', $predicate->getExpression());
+        $this->assertEquals(array('bar'), $predicate->getParameters());
     }
 
     public function testLiteralIsMutable()
     {
-        $this->predicate->setLiteral('foo.bar = ?');
-        $this->assertEquals('foo.bar = ?', $this->predicate->getLiteral());
+        $expression = new Expression();
+        $expression->setExpression('foo.bar = ?');
+        $this->assertEquals('foo.bar = ?', $expression->getExpression());
     }
 
     public function testParameterIsMutable()
     {
-        $this->predicate->setParameter(array('foo', 'bar'));
-        $this->assertEquals(array('foo', 'bar'), $this->predicate->getParameter());
+        $expression = new Expression();
+        $expression->setParameters(array('foo', 'bar'));
+        $this->assertEquals(array('foo', 'bar'), $expression->getParameters());
     }
 
     public function testRetrievingWherePartsReturnsSpecificationArrayOfLiteralAndParametersAndArrayOfTypes()
     {
-        $this->predicate->setLiteral('foo.bar = ? AND id != ?')
-                        ->setParameter(array('foo', 'bar'));
+        $expression = new Expression();
+        $expression->setExpression('foo.bar = ? AND id != ?')
+                        ->setParameters(array('foo', 'bar'));
         $expected = array(array(
             'foo.bar = %s AND id != %s',
             array('foo', 'bar'),
-            array(Literal::TYPE_VALUE, Literal::TYPE_VALUE),
+            array(Expression::TYPE_VALUE, Expression::TYPE_VALUE),
         ));
-        $test = $this->predicate->getWhereParts();
+        $test = $expression->getExpressionData();
         $this->assertEquals($expected, $test, var_export($test, 1));
     }
 
     public function testAllowZeroParameterValue()
     {
-        $predicate = new Literal('foo.bar > ?', 0);
-        $this->assertEquals(0, $predicate->getParameter());
+        $predicate = new Expression('foo.bar > ?', 0);
+        $this->assertEquals(array(0), $predicate->getParameters());
     }
 }

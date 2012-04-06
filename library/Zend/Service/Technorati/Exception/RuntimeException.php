@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Service\Technorati\Exception;
 use Zend\Service\Technorati\Exception as TechnoratiException;
 

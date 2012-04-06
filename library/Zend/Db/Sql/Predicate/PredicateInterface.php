@@ -2,14 +2,9 @@
 
 namespace Zend\Db\Sql\Predicate;
 
-interface PredicateInterface
-{
-    const TYPE_IDENTIFIER = 'identifier';
-    const TYPE_VALUE = 'value';
+use Zend\Db\Sql\ExpressionInterface;
 
-    /**
-     * @abstract
-     * @return array
-     */
-    public function getWhereParts();
+interface PredicateInterface extends ExpressionInterface
+{
+
 }

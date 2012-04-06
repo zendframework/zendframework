@@ -14,50 +14,37 @@
  *
  * @category   Zend
  * @package    Zend_Log
- * @subpackage Filter
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
-namespace Zend\Log\Filter;
+namespace ZendTest\Log\Filter;
 
-use Zend\Log\Factory,
-    Zend\Log\Filter,
-    Zend\Log\Exception,
+use Zend\Log\Logger,
+    Zend\Log\Filter\Regex,
     Zend\Config\Config;
 
 /**
- * @uses       \Zend\Log\Exception\InvalidArgumentException
- * @uses       \Zend\Log\Filter
- * @uses       \Zend\Log\Factory
  * @category   Zend
  * @package    Zend_Log
- * @subpackage Filter
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @group      Zend_Log
  */
-abstract class AbstractFilter implements Filter, Factory
+class RegexTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Validate and optionally convert the config to array
-     *
-     * @param  array|Config $config Config or Array
-     * @return array
-     * @throws Exception\InvalidArgumentException
-     */
-    static protected function _parseConfig($config)
+    public function testMessageFilterRecognizesInvalidRegularExpression()
     {
-        if ($config instanceof Config) {
-            $config = $config->toArray();
-        }
+        $this->setExpectedException('Zend\Log\Exception\InvalidArgumentException', 'invalid reg');
+        new Regex('invalid regexp');
+    }
 
-        if (!is_array($config)) {
-            throw new Exception\InvalidArgumentException('Configuration must be an array or instance of Zend\Config\Config');
-        }
-
-        return $config;
+    public function testMessageFilter()
+    {
+        $filter = new Regex('/accept/');
+        $this->assertTrue($filter->filter(array('message' => 'foo accept bar')));
+        $this->assertFalse($filter->filter(array('message' => 'foo reject bar')));
     }
 }

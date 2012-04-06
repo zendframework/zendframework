@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Mvc\Router\Http;
 
 use Zend\Mvc\Router\Http\RouteMatch;
@@ -103,7 +100,7 @@ class Query implements Route
     {
         $matches = array();
 
-        foreach($_GET as $key=>$value) {
+        foreach($_GET as $key => $value) {
             $matches[urldecode($key)] = urldecode($value);
 
         }

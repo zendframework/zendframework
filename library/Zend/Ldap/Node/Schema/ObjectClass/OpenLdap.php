@@ -19,41 +19,35 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Ldap\Node\Schema\ObjectClass;
 
-use Zend\Ldap\Node\Schema\ObjectClass,
-    Zend\Ldap\Node\Schema;
+use Zend\Ldap\Node\Schema;
 
 /**
  * Zend\Ldap\Node\Schema\ObjectClass\OpenLdap provides access to the objectClass
  * schema information on an OpenLDAP server.
  *
- * @uses       \Zend\Ldap\Node\Schema
- * @uses       \Zend\Ldap\Node\Schema\Item
- * @uses       \Zend\Ldap\Node\Schema\ObjectClass
  * @category   Zend
  * @package    Zend_Ldap
  * @subpackage Schema
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class OpenLdap extends Schema\Item implements ObjectClass
+class OpenLdap extends Schema\AbstractItem implements Schema\ObjectClass
 {
     /**
      * All inherited "MUST" attributes
      *
      * @var array
      */
-    protected $_inheritedMust = null;
+    protected $inheritedMust = null;
+
     /**
      * All inherited "MAY" attributes
      *
      * @var array
      */
-    protected $_inheritedMay = null;
+    protected $inheritedMay = null;
 
 
     /**
@@ -83,10 +77,10 @@ class OpenLdap extends Schema\Item implements ObjectClass
      */
     public function getMustContain()
     {
-        if ($this->_inheritedMust === null) {
-            $this->_resolveInheritance();
+        if ($this->inheritedMust === null) {
+            $this->resolveInheritance();
         }
-        return $this->_inheritedMust;
+        return $this->inheritedMust;
     }
 
     /**
@@ -96,10 +90,10 @@ class OpenLdap extends Schema\Item implements ObjectClass
      */
     public function getMayContain()
     {
-        if ($this->_inheritedMay === null) {
-            $this->_resolveInheritance();
+        if ($this->inheritedMay === null) {
+            $this->resolveInheritance();
         }
-        return $this->_inheritedMay;
+        return $this->inheritedMay;
     }
 
     /**
@@ -107,21 +101,21 @@ class OpenLdap extends Schema\Item implements ObjectClass
      *
      * @return void
      */
-    protected function _resolveInheritance()
+    protected function resolveInheritance()
     {
         $must = $this->must;
-        $may = $this->may;
+        $may  = $this->may;
         foreach ($this->getParents() as $p) {
             $must = array_merge($must, $p->getMustContain());
-            $may = array_merge($may, $p->getMayContain());
+            $may  = array_merge($may, $p->getMayContain());
         }
         $must = array_unique($must);
-        $may = array_unique($may);
-        $may = array_diff($may, $must);
+        $may  = array_unique($may);
+        $may  = array_diff($may, $must);
         sort($must, SORT_STRING);
         sort($may, SORT_STRING);
-        $this->_inheritedMust = $must;
-        $this->_inheritedMay = $may;
+        $this->inheritedMust = $must;
+        $this->inheritedMay  = $may;
     }
 
     /**
@@ -166,7 +160,7 @@ class OpenLdap extends Schema\Item implements ObjectClass
     /**
      * Returns the parent object classes in the inhertitance tree if one exists
      *
-     * @return array of \Zend\Ldap\Node\Schema\ObjectClass\OpenLdap
+     * @return array of OpenLdap
      */
     public function getParents()
     {

@@ -18,9 +18,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Dojo\Form\Decorator;
 
 use Zend\Form\Decorator\ViewHelper as ViewHelperDecorator,

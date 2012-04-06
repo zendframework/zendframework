@@ -18,13 +18,10 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Ldap;
 
 /**
- * Zend_Ldap_Attribute is a collection of LDAP attribute related functions.
+ * Zend\Ldap\Attribute is a collection of LDAP attribute related functions.
  *
  * @category   Zend
  * @package    Zend_Ldap
@@ -51,17 +48,17 @@ class Attribute
     public static function setAttribute(array &$data, $attribName, $value, $append = false)
     {
         $attribName = strtolower($attribName);
-        $valArray = array();
+        $valArray   = array();
         if (is_array($value) || ($value instanceof \Traversable)) {
             foreach ($value as $v)
             {
-                $v = self::_valueToLdap($v);
+                $v = self::valueToLdap($v);
                 if ($v !== null) {
                     $valArray[] = $v;
                 }
             }
         } elseif ($value !== null) {
-            $value = self::_valueToLdap($value);
+            $value = self::valueToLdap($value);
             if ($value !== null) {
                 $valArray[] = $value;
             }
@@ -89,22 +86,25 @@ class Attribute
     {
         $attribName = strtolower($attribName);
         if ($index === null) {
-            if (!isset($data[$attribName])) return array();
+            if (!isset($data[$attribName])) {
+                return array();
+            }
             $retArray = array();
             foreach ($data[$attribName] as $v)
             {
-                $retArray[] = self::_valueFromLDAP($v);
+                $retArray[] = self::valueFromLDAP($v);
             }
             return $retArray;
         } else if (is_int($index)) {
             if (!isset($data[$attribName])) {
                 return null;
-            } else if ($index >= 0 && $index<count($data[$attribName])) {
-                return self::_valueFromLDAP($data[$attribName][$index]);
+            } else if ($index >= 0 && $index < count($data[$attribName])) {
+                return self::valueFromLDAP($data[$attribName][$index]);
             } else {
                 return null;
             }
         }
+
         return null;
     }
 
@@ -119,18 +119,21 @@ class Attribute
     public static function attributeHasValue(array &$data, $attribName, $value)
     {
         $attribName = strtolower($attribName);
-        if (!isset($data[$attribName])) return false;
+        if (!isset($data[$attribName])) {
+            return false;
+        }
 
         if (is_scalar($value)) {
             $value = array($value);
         }
 
         foreach ($value as $v) {
-            $v = self::_valueToLDAP($v);
+            $v = self::valueToLDAP($v);
             if (!in_array($v, $data[$attribName], true)) {
                 return false;
             }
         }
+
         return true;
     }
 
@@ -144,7 +147,9 @@ class Attribute
     public static function removeDuplicatesFromAttribute(array &$data, $attribName)
     {
         $attribName = strtolower($attribName);
-        if (!isset($data[$attribName])) return;
+        if (!isset($data[$attribName])) {
+            return;
+        }
         $data[$attribName] = array_values(array_unique($data[$attribName]));
     }
 
@@ -159,7 +164,9 @@ class Attribute
     public static function removeFromAttribute(array &$data, $attribName, $value)
     {
         $attribName = strtolower($attribName);
-        if (!isset($data[$attribName])) return;
+        if (!isset($data[$attribName])) {
+            return;
+        }
 
         if (is_scalar($value)) {
             $value = array($value);
@@ -168,8 +175,10 @@ class Attribute
         $valArray = array();
         foreach ($value as $v)
         {
-            $v = self::_valueToLDAP($v);
-            if ($v !== null) $valArray[] = $v;
+            $v = self::valueToLDAP($v);
+            if ($v !== null) {
+                $valArray[] = $v;
+            }
         }
 
         $resultArray = $data[$attribName];
@@ -179,7 +188,7 @@ class Attribute
                 unset($resultArray[$k]);
             }
         }
-        $resultArray = array_values($resultArray);
+        $resultArray       = array_values($resultArray);
         $data[$attribName] = $resultArray;
     }
 
@@ -187,27 +196,44 @@ class Attribute
      * @param  mixed $value
      * @return string|null
      */
-    private static function _valueToLdap($value)
+    private static function valueToLdap($value)
     {
-        if (is_string($value)) return $value;
-        else if (is_int($value) || is_float($value)) return (string)$value;
-        else if (is_bool($value)) return ($value === true) ? 'TRUE' : 'FALSE';
-        else if (is_object($value) || is_array($value)) return serialize($value);
-        else if (is_resource($value) && get_resource_type($value) === 'stream')
+        if (is_string($value)) {
+            return $value;
+        }
+        else if (is_int($value) || is_float($value)) {
+            return (string)$value;
+        }
+        else if (is_bool($value)) {
+            return ($value === true) ? 'TRUE' : 'FALSE';
+        }
+        else if (is_object($value) || is_array($value)) {
+            return serialize($value);
+        }
+        else if (is_resource($value) && get_resource_type($value) === 'stream') {
             return stream_get_contents($value);
-        else return null;
+        }
+        else {
+            return null;
+        }
     }
 
     /**
      * @param  string $value
      * @return string|boolean
      */
-    private static function _valueFromLdap($value)
+    private static function valueFromLdap($value)
     {
         $value = (string)$value;
-        if ($value === 'TRUE') return true;
-        else if ($value === 'FALSE') return false;
-        else return $value;
+        if ($value === 'TRUE') {
+            return true;
+        }
+        else if ($value === 'FALSE') {
+            return false;
+        }
+        else {
+            return $value;
+        }
     }
 
     /**
@@ -218,7 +244,7 @@ class Attribute
      */
     public static function convertToLdapValue($value)
     {
-        return self::_valueToLdap($value);
+        return self::valueToLdap($value);
     }
 
     /**
@@ -229,7 +255,7 @@ class Attribute
      */
     public static function convertFromLdapValue($value)
     {
-        return self::_valueFromLdap($value);
+        return self::valueFromLdap($value);
     }
 
     /**
@@ -241,7 +267,7 @@ class Attribute
      */
     public static function convertToLdapDateTimeValue($value, $utc = false)
     {
-        return self::_valueToLdapDateTime($value, $utc);
+        return self::valueToLdapDateTime($value, $utc);
     }
 
     /**
@@ -252,7 +278,7 @@ class Attribute
      */
     public static function convertFromLdapDateTimeValue($value)
     {
-        return self::_valueFromLdapDateTime($value);
+        return self::valueFromLdapDateTime($value);
     }
 
     /**
@@ -264,9 +290,10 @@ class Attribute
      * @param  string|null $attribName
      * @return null
      */
-    public static function setPassword(array &$data, $password, $hashType = self::PASSWORD_HASH_MD5,
-        $attribName = null)
-    {
+    public static function setPassword(
+        array &$data, $password, $hashType = self::PASSWORD_HASH_MD5,
+        $attribName = null
+    ) {
         if ($attribName === null) {
             if ($hashType === self::PASSWORD_UNICODEPWD) {
                 $attribName = 'unicodePwd';
@@ -301,7 +328,7 @@ class Attribute
                 } else {
                     $len = strlen($password);
                     $new = '';
-                    for($i=0; $i < $len; $i++) {
+                    for ($i = 0; $i < $len; $i++) {
                         $new .= $password[$i] . "\x00";
                     }
                     $password = $new;
@@ -340,19 +367,21 @@ class Attribute
      * @param  boolean                   $append
      * @return null
      */
-    public static function setDateTimeAttribute(array &$data, $attribName, $value, $utc = false,
-        $append = false)
+    public static function setDateTimeAttribute(
+        array &$data, $attribName, $value, $utc = false,
+        $append = false
+    )
     {
         $convertedValues = array();
         if (is_array($value) || ($value instanceof \Traversable)) {
             foreach ($value as $v) {
-                $v = self::_valueToLdapDateTime($v, $utc);
+                $v = self::valueToLdapDateTime($v, $utc);
                 if ($v !== null) {
                     $convertedValues[] = $v;
                 }
             }
         } elseif ($value !== null) {
-            $value = self::_valueToLdapDateTime($value, $utc);
+            $value = self::valueToLdapDateTime($value, $utc);
             if ($value !== null) {
                 $convertedValues[] = $value;
             }
@@ -365,13 +394,17 @@ class Attribute
      * @param  boolean $utc
      * @return string|null
      */
-    private static function _valueToLDAPDateTime($value, $utc)
+    private static function valueToLDAPDateTime($value, $utc)
     {
         if (is_int($value)) {
-            if ($utc === true) return gmdate('YmdHis', $value) . 'Z';
-            else return date('YmdHisO', $value);
+            if ($utc === true) {
+                return gmdate('YmdHis', $value) . 'Z';
+            } else {
+                return date('YmdHisO', $value);
+            }
+        } else {
+            return null;
         }
-        else return null;
     }
 
     /**
@@ -386,18 +419,18 @@ class Attribute
     {
         $values = self::getAttribute($data, $attribName, $index);
         if (is_array($values)) {
-            for ($i = 0; $i<count($values); $i++) {
-                $newVal = self::_valueFromLDAPDateTime($values[$i]);
+            for ($i = 0; $i < count($values); $i++) {
+                $newVal = self::valueFromLDAPDateTime($values[$i]);
                 if ($newVal !== null) {
                     $values[$i] = $newVal;
                 }
             }
         } else {
-			$newVal = self::_valueFromLDAPDateTime($values);
-			if ($newVal !== null) {
-			    $values = $newVal;
-			}
-		}
+            $newVal = self::valueFromLDAPDateTime($values);
+            if ($newVal !== null) {
+                $values = $newVal;
+            }
+        }
         return $values;
     }
 
@@ -405,26 +438,30 @@ class Attribute
      * @param  string $value
      * @return integer|null
      */
-    private static function _valueFromLDAPDateTime($value)
+    private static function valueFromLDAPDateTime($value)
     {
         $matches = array();
         if (preg_match('/^(\d{4})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})(?:\.0)?([+-]\d{4}|Z)$/', $value, $matches)) {
-            $year = $matches[1];
-            $month = $matches[2];
-            $day = $matches[3];
-            $hour = $matches[4];
-            $minute = $matches[5];
-            $second = $matches[6];
+            $year     = $matches[1];
+            $month    = $matches[2];
+            $day      = $matches[3];
+            $hour     = $matches[4];
+            $minute   = $matches[5];
+            $second   = $matches[6];
             $timezone = $matches[7];
-            $date = gmmktime($hour, $minute, $second, $month, $day, $year);
+            $date     = gmmktime($hour, $minute, $second, $month, $day, $year);
             if ($timezone !== 'Z') {
-                $tzDirection = substr($timezone, 0, 1);
-                $tzOffsetHour = substr($timezone, 1, 2);
+                $tzDirection    = substr($timezone, 0, 1);
+                $tzOffsetHour   = substr($timezone, 1, 2);
                 $tzOffsetMinute = substr($timezone, 3, 2);
-                $tzOffset = ($tzOffsetHour*60*60) + ($tzOffsetMinute*60);
-                if ($tzDirection == '+') $date -= $tzOffset;
-                else if ($tzDirection == '-') $date += $tzOffset;
+                $tzOffset       = ($tzOffsetHour * 60 * 60) + ($tzOffsetMinute * 60);
+                if ($tzDirection == '+') {
+                    $date -= $tzOffset;
+                } else if ($tzDirection == '-') {
+                    $date += $tzOffset;
+                }
             }
+
             return $date;
         }
 

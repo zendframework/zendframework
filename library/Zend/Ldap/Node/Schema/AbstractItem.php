@@ -19,32 +19,28 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Ldap\Node\Schema;
 
+use Zend\Ldap\Exception;
+
 /**
- * Zend_Ldap_Node_Schema_Item provides a base implementation for managing schema
+ * Zend\Ldap\Node\Schema\AbstractItem provides a base implementation for managing schema
  * items like objectClass and attribute.
  *
- * @uses       ArrayAccess
- * @uses       BadMethodCallException
- * @uses       Countable
  * @category   Zend
  * @package    Zend_Ldap
  * @subpackage Schema
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class Item implements \ArrayAccess, \Countable
+abstract class AbstractItem implements \ArrayAccess, \Countable
 {
     /**
      * The underlying data
      *
      * @var array
      */
-    protected $_data;
+    protected $data;
 
     /**
      * Constructor.
@@ -60,11 +56,11 @@ abstract class Item implements \ArrayAccess, \Countable
      * Sets the data
      *
      * @param  array $data
-     * @return \Zend\Ldap\Node\Schema\Item Provides a fluid interface
+     * @return AbstractItem Provides a fluid interface
      */
     public function setData(array $data)
     {
-        $this->_data = $data;
+        $this->data = $data;
         return $this;
     }
 
@@ -75,7 +71,7 @@ abstract class Item implements \ArrayAccess, \Countable
      */
     public function getData()
     {
-        return $this->_data;
+        return $this->data;
     }
 
     /**
@@ -86,8 +82,8 @@ abstract class Item implements \ArrayAccess, \Countable
      */
     public function __get($name)
     {
-        if (array_key_exists($name, $this->_data)) {
-            return $this->_data[$name];
+        if (array_key_exists($name, $this->data)) {
+            return $this->data[$name];
         } else {
             return null;
         }
@@ -101,23 +97,23 @@ abstract class Item implements \ArrayAccess, \Countable
      */
     public function __isset($name)
     {
-        return (array_key_exists($name, $this->_data));
+        return (array_key_exists($name, $this->data));
     }
 
     /**
-     * Always throws BadMethodCallException
+     * Always throws Zend\Ldap\Exception\BadMethodCallException
      * Implements ArrayAccess.
      *
      * This method is needed for a full implementation of ArrayAccess
      *
      * @param  string $name
-     * @param  mixed $value
+     * @param  mixed  $value
      * @return null
-     * @throws BadMethodCallException
+     * @throws Exception\BadMethodCallException
      */
     public function offsetSet($name, $value)
     {
-        throw new \BadMethodCallException();
+        throw new Exception\BadMethodCallException();
     }
 
     /**
@@ -132,18 +128,18 @@ abstract class Item implements \ArrayAccess, \Countable
     }
 
     /**
-     * Always throws BadMethodCallException
+     * Always throws Zend\Ldap\Exception\BadMethodCallException
      * Implements ArrayAccess.
      *
      * This method is needed for a full implementation of ArrayAccess
      *
      * @param  string $name
      * @return null
-     * @throws BadMethodCallException
+     * @throws Exception\BadMethodCallException
      */
     public function offsetUnset($name)
     {
-        throw new \BadMethodCallException();
+        throw new Exception\BadMethodCallException();
     }
 
     /**
@@ -165,6 +161,6 @@ abstract class Item implements \ArrayAccess, \Countable
      */
     public function count()
     {
-        return count($this->_data);
+        return count($this->data);
     }
 }

@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Pdf\Trailer;
 use Zend\Pdf\InternalType;
 use Zend\Pdf\Exception;

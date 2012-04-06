@@ -20,9 +20,6 @@
  * @version    $Id$
  */
 
-/**
- * @namespace
- */
 namespace Zend\Mail\Storage\Part;
 
 use Zend\Mail\Storage;

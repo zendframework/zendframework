@@ -171,7 +171,7 @@ class Generator
 
             // Create fetch of stored service
             if ($im->hasSharedInstance($name, $params)) {
-                $getterBody .= sprintf("if (isset(\$this->services['%s'])) {\n",  $name);
+                $getterBody .= sprintf("if (isset(\$this->services['%s'])) {\n", $name);
                 $getterBody .= sprintf("%sreturn \$this->services['%s'];\n}\n\n", $indent, $name);
             }
 
@@ -275,8 +275,7 @@ class Generator
     {
         $reduced = array();
         $aliases = array_keys($aliasList);
-        foreach ($aliasList as $alias => $service)
-        {
+        foreach ($aliasList as $alias => $service) {
             if (in_array($service, $aliases)) {
                 do {
                     $service = $aliasList[$service];

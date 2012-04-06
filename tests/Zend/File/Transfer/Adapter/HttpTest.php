@@ -20,9 +20,6 @@
  * @version    $Id$
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\File\Transfer\Adapter;
 use Zend\ProgressBar;
 

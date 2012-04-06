@@ -21,9 +21,9 @@
 
 namespace ZendTest\Log\Writer;
 
-use \Zend\Log\Writer\Stream as StreamWriter,
-    \Zend\Log\Logger,
-    \Zend\Log\Formatter\Simple as SimpleFormatter;
+use Zend\Log\Writer\Stream as StreamWriter,
+    Zend\Log\Logger,
+    Zend\Log\Formatter\Simple as SimpleFormatter;
 
 /**
  * @category   Zend
@@ -123,33 +123,5 @@ class StreamWriterTest extends \PHPUnit_Framework_TestCase
         fclose($stream);
 
         $this->assertContains($expected, $contents);
-    }
-
-    public function testFactoryStream()
-    {
-        $cfg = array('log' => array('memory' => array(
-            'writerName'   => "Mock",
-            'writerParams' => array(
-                'stream' => 'php://memory',
-                'mode'   => 'a'
-            )
-        )));
-
-        $logger = Logger::factory($cfg['log']);
-        $this->assertTrue($logger instanceof Logger);
-    }
-
-    public function testFactoryUrl()
-    {
-        $cfg = array('log' => array('memory' => array(
-            'writerName'   => "Mock",
-            'writerParams' => array(
-                'url'  => 'http://localhost',
-                'mode' => 'a'
-            )
-        )));
-
-        $logger = Logger::factory($cfg['log']);
-        $this->assertTrue($logger instanceof Logger);
     }
 }

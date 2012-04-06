@@ -19,15 +19,10 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Ldap\Node;
-use Zend\Ldap\Node\RootDse;
 
-/**
- * Zend_Ldap_OnlineTestCase
- */
+use Zend\Ldap\Node,
+    ZendTest\Ldap as TestLdap;
 
 /**
  * @category   Zend
@@ -38,12 +33,12 @@ use Zend\Ldap\Node\RootDse;
  * @group      Zend_Ldap
  * @group      Zend_Ldap_Node
  */
-class RootDseTest extends \ZendTest\Ldap\OnlineTestCase
+class RootDseTest extends TestLdap\AbstractOnlineTestCase
 {
     public function testLoadRootDseNode()
     {
-        $root1=$this->_getLDAP()->getRootDse();
-        $root2=$this->_getLDAP()->getRootDse();
+        $root1 = $this->getLDAP()->getRootDse();
+        $root2 = $this->getLDAP()->getRootDse();
 
         $this->assertEquals($root1, $root2);
         $this->assertSame($root1, $root2);
@@ -51,7 +46,7 @@ class RootDseTest extends \ZendTest\Ldap\OnlineTestCase
 
     public function testSupportCheckMethods()
     {
-        $root=$this->_getLDAP()->getRootDse();
+        $root = $this->getLDAP()->getRootDse();
 
         $this->assertInternalType('boolean', $root->supportsSaslMechanism('GSSAPI'));
         $this->assertInternalType('boolean', $root->supportsSaslMechanism(array('GSSAPI', 'DIGEST-MD5')));
@@ -61,44 +56,56 @@ class RootDseTest extends \ZendTest\Ldap\OnlineTestCase
         $this->assertInternalType('boolean', $root->supportsVersion(array(3, 2)));
 
         switch ($root->getServerType()) {
-            case RootDse::SERVER_TYPE_ACTIVEDIRECTORY:
+            case Node\RootDse::SERVER_TYPE_ACTIVEDIRECTORY:
                 $this->assertInternalType('boolean', $root->supportsControl('1.2.840.113556.1.4.319'));
                 $this->assertInternalType('boolean', $root->supportsControl(array('1.2.840.113556.1.4.319',
-                    '1.2.840.113556.1.4.473')));
+                                                                                 '1.2.840.113556.1.4.473')
+                    )
+                );
                 $this->assertInternalType('boolean', $root->supportsCapability('1.3.6.1.4.1.4203.1.9.1.1'));
                 $this->assertInternalType('boolean', $root->supportsCapability(array('1.3.6.1.4.1.4203.1.9.1.1',
-                    '2.16.840.1.113730.3.4.18')));
+                                                                                    '2.16.840.1.113730.3.4.18')
+                    )
+                );
                 $this->assertInternalType('boolean', $root->supportsPolicy('unknown'));
                 $this->assertInternalType('boolean', $root->supportsPolicy(array('unknown', 'unknown')));
                 break;
-            case RootDse::SERVER_TYPE_EDIRECTORY:
+            case Node\RootDse::SERVER_TYPE_EDIRECTORY:
                 $this->assertInternalType('boolean', $root->supportsExtension('1.3.6.1.4.1.1466.20037'));
                 $this->assertInternalType('boolean', $root->supportsExtension(array('1.3.6.1.4.1.1466.20037',
-                    '1.3.6.1.4.1.4203.1.11.1')));
+                                                                                   '1.3.6.1.4.1.4203.1.11.1')
+                    )
+                );
                 break;
-            case RootDse::SERVER_TYPE_OPENLDAP:
+            case Node\RootDse::SERVER_TYPE_OPENLDAP:
                 $this->assertInternalType('boolean', $root->supportsControl('1.3.6.1.4.1.4203.1.9.1.1'));
                 $this->assertInternalType('boolean', $root->supportsControl(array('1.3.6.1.4.1.4203.1.9.1.1',
-                    '2.16.840.1.113730.3.4.18')));
+                                                                                 '2.16.840.1.113730.3.4.18')
+                    )
+                );
                 $this->assertInternalType('boolean', $root->supportsExtension('1.3.6.1.4.1.1466.20037'));
                 $this->assertInternalType('boolean', $root->supportsExtension(array('1.3.6.1.4.1.1466.20037',
-                    '1.3.6.1.4.1.4203.1.11.1')));
+                                                                                   '1.3.6.1.4.1.4203.1.11.1')
+                    )
+                );
                 $this->assertInternalType('boolean', $root->supportsFeature('1.3.6.1.1.14'));
                 $this->assertInternalType('boolean', $root->supportsFeature(array('1.3.6.1.1.14',
-                    '1.3.6.1.4.1.4203.1.5.1')));
+                                                                                 '1.3.6.1.4.1.4203.1.5.1')
+                    )
+                );
                 break;
         }
     }
 
     public function testGetters()
     {
-        $root=$this->_getLDAP()->getRootDse();
+        $root = $this->getLDAP()->getRootDse();
 
         $this->assertInternalType('array', $root->getNamingContexts());
         $this->assertInternalType('string', $root->getSubschemaSubentry());
 
         switch ($root->getServerType()) {
-            case RootDse::SERVER_TYPE_ACTIVEDIRECTORY:
+            case Node\RootDse::SERVER_TYPE_ACTIVEDIRECTORY:
                 $this->assertInternalType('string', $root->getConfigurationNamingContext());
                 $this->assertInternalType('string', $root->getCurrentTime());
                 $this->assertInternalType('string', $root->getDefaultNamingContext());
@@ -115,7 +122,7 @@ class RootDseTest extends \ZendTest\Ldap\OnlineTestCase
                 $this->assertInternalType('string', $root->getSchemaNamingContext());
                 $this->assertInternalType('string', $root->getServerName());
                 break;
-            case RootDse::SERVER_TYPE_EDIRECTORY:
+            case Node\RootDse::SERVER_TYPE_EDIRECTORY:
                 $this->assertInternalType('string', $root->getVendorName());
                 $this->assertInternalType('string', $root->getVendorVersion());
                 $this->assertInternalType('string', $root->getDsaName());
@@ -127,16 +134,16 @@ class RootDseTest extends \ZendTest\Ldap\OnlineTestCase
                 $this->assertInternalType('string', $root->getStatisticsAbandonOps());
                 $this->assertInternalType('string', $root->getStatisticsWholeSubtreeSearchOps());
                 break;
-            case RootDse::SERVER_TYPE_OPENLDAP:
-                $this->_assertNullOrString($root->getConfigContext());
-                $this->_assertNullOrString($root->getMonitorContext());
+            case Node\RootDse::SERVER_TYPE_OPENLDAP:
+                $this->assertNullOrString($root->getConfigContext());
+                $this->assertNullOrString($root->getMonitorContext());
                 break;
         }
     }
 
-    protected function _assertNullOrString($value)
+    protected function assertNullOrString($value)
     {
-        if ($value===null) {
+        if ($value === null) {
             $this->assertNull($value);
         } else {
             $this->assertInternalType('string', $value);
@@ -148,8 +155,8 @@ class RootDseTest extends \ZendTest\Ldap\OnlineTestCase
      */
     public function testSetterWillThrowException()
     {
-          $root=$this->_getLDAP()->getRootDse();
-          $root->objectClass='illegal';
+        $root              = $this->getLDAP()->getRootDse();
+        $root->objectClass = 'illegal';
     }
 
     /**
@@ -157,8 +164,8 @@ class RootDseTest extends \ZendTest\Ldap\OnlineTestCase
      */
     public function testOffsetSetWillThrowException()
     {
-          $root=$this->_getLDAP()->getRootDse();
-          $root['objectClass']='illegal';
+        $root                = $this->getLDAP()->getRootDse();
+        $root['objectClass'] = 'illegal';
     }
 
     /**
@@ -166,8 +173,8 @@ class RootDseTest extends \ZendTest\Ldap\OnlineTestCase
      */
     public function testUnsetterWillThrowException()
     {
-          $root=$this->_getLDAP()->getRootDse();
-          unset($root->objectClass);
+        $root = $this->getLDAP()->getRootDse();
+        unset($root->objectClass);
     }
 
     /**
@@ -175,7 +182,7 @@ class RootDseTest extends \ZendTest\Ldap\OnlineTestCase
      */
     public function testOffsetUnsetWillThrowException()
     {
-          $root=$this->_getLDAP()->getRootDse();
-          unset($root['objectClass']);
+        $root = $this->getLDAP()->getRootDse();
+        unset($root['objectClass']);
     }
 }

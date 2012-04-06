@@ -1,8 +1,5 @@
 <?php
 
-/**
- * @namespace
- */
 namespace Zend\Http;
 
 use Zend\Stdlib\ParametersDescription,

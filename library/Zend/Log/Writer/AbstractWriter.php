@@ -19,48 +19,42 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Log\Writer;
 
-use Zend\Log\Factory,
-    Zend\Log\Writer,
+use Zend\Log\Writer,
     Zend\Log\Filter,
     Zend\Log\Formatter,
-    Zend\Log\Exception,
-    Zend\Config\Config;
+    Zend\Log\Exception;
 
 /**
- * @uses       \Zend\Log\Exception\InvalidArgumentException
- * @uses       \Zend\Log\Factory
- * @uses       \Zend\Log\Filter\Priority
  * @category   Zend
  * @package    Zend_Log
  * @subpackage Writer
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class AbstractWriter implements Writer, Factory
+abstract class AbstractWriter implements Writer
 {
     /**
-     * @var array of Filter
+     * Filter chain
+     *
+     * @var array
      */
-    protected $_filters = array();
+    protected $filters = array();
 
     /**
-     * Formats the log message before writing.
+     * Formats the log message before writing
      *
      * @var Formatter
      */
-    protected $_formatter;
+    protected $formatter;
 
     /**
      * Add a filter specific to this writer.
      *
-     * @param  Filter|int  $filter
+     * @param  Filter|int $filter
+     * @return AbstractWriter
      * @throws Exception\InvalidArgumentException
-     * @return self
      */
     public function addFilter($filter)
     {
@@ -69,29 +63,32 @@ abstract class AbstractWriter implements Writer, Factory
         }
 
         if (!$filter instanceof Filter) {
-            throw new Exception\InvalidArgumentException('Invalid filter provided');
+            throw new Exception\InvalidArgumentException(sprintf(
+                'Filter must implement Zend\Log\Filter; received %s',
+                is_object($filter) ? get_class($filter) : gettype($filter)
+            ));
         }
 
-        $this->_filters[] = $filter;
+        $this->filters[] = $filter;
         return $this;
     }
 
     /**
      * Log a message to this writer.
      *
-     * @param  array $event log data event
+     * @param array $event log data event
      * @return void
      */
-    public function write($event)
+    public function write(array $event)
     {
-        foreach ($this->_filters as $filter) {
-            if (! $filter->accept($event)) {
+        foreach ($this->filters as $filter) {
+            if (!$filter->filter($event)) {
                 return;
             }
         }
 
         // exception occurs on error
-        $this->_write($event);
+        $this->doWrite($event);
     }
 
     /**
@@ -102,7 +99,7 @@ abstract class AbstractWriter implements Writer, Factory
      */
     public function setFormatter(Formatter $formatter)
     {
-        $this->_formatter = $formatter;
+        $this->formatter = $formatter;
         return $this;
     }
 
@@ -115,32 +112,10 @@ abstract class AbstractWriter implements Writer, Factory
     {}
 
     /**
-     * Write a message to the log.
+     * Write a message to the log
      *
-     * @param  array  $event  log data event
+     * @param array $event log data event
      * @return void
      */
-    abstract protected function _write($event);
-
-    /**
-     * Validate and optionally convert the config to array
-     *
-     * @param  array|Config $config Config or Array
-     * @return array
-     * @throws Exception\InvalidArgumentException
-     */
-    static protected function _parseConfig($config)
-    {
-        if ($config instanceof Config) {
-            $config = $config->toArray();
-        }
-
-        if (!is_array($config)) {
-            throw new Exception\InvalidArgumentException(
-                'Configuration must be an array or instance of Zend\Config\Config'
-            );
-        }
-
-        return $config;
-    }
+    abstract protected function doWrite(array $event);
 }

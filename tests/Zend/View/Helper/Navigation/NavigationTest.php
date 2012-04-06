@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\View\Helper\Navigation;
 use Zend\Acl;
 use Zend\View\Helper\Navigation;

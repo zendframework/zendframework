@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Http;
 use Zend\Http\Header\Cookie,
     Zend\Http\Header\SetCookie;

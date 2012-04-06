@@ -109,7 +109,7 @@ class Container implements Countable, Iterator, ArrayAccess
             if (!empty($this->projectId)) {
                 $obj['projectId'] = $this->projectId;
             }
-            $this->addObject(new $this->resource($this->service,$obj));
+            $this->addObject(new $this->resource($this->service, $obj));
         }
     }
 

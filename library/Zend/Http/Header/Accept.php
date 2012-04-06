@@ -29,7 +29,7 @@ namespace Zend\Http\Header;
  * @see        http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.1
  */
 class Accept extends AbstractAccept
-{ 
+{
     protected $regexAddType = '#^([a-zA-Z+-]+|\*)/(\*|[a-zA-Z0-9+-]+)$#';
         
     /**

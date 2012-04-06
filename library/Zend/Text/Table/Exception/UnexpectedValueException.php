@@ -1,7 +1,4 @@
 <?php
-/**
- * @namespace
- */
 namespace Zend\Text\Table\Exception;
 
 class UnexpectedValueException

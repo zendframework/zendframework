@@ -19,10 +19,8 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\GData;
+
 use Zend\GData\GApps;
 
 /**
@@ -42,7 +40,7 @@ class GAppsTest extends \PHPUnit_Framework_TestCase
     {
         // These tests shouldn't be doing anything online, so we can use
         // bogous auth credentials.
-        $this->gdata = new GApps\GApps(null, self::TEST_DOMAIN);
+        $this->gdata = new GApps(null, self::TEST_DOMAIN);
     }
 
     public function testMagicFactoryProvidesQueriesWithDomains()

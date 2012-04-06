@@ -44,26 +44,10 @@ class AdapterTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tears down the fixture, for example, closes a network connection.
-     * This method is called after a test is executed.
-     */
-    protected function tearDown()
-    {
-    }
-
-    /**
-     * @covers Zend\Db\Adapter\Adapter::__construct
-     */
-    public function testAdapterWillConstruct()
-    {
-        $adapter = new Adapter($this->mockDriver, $this->mockPlatform);
-        $this->assertInstanceOf('Zend\Db\Adapter\Adapter', $adapter);
-    }
-
-    /**
+     * @testdox unit test: Test createDriverFromParameters() will create proper driver type
      * @covers Zend\Db\Adapter\Adapter::createDriverFromParameters
      */
-    public function testAdapterWillConstructDriverFromArray()
+    public function testCreateDriverFromParameters()
     {
         if (extension_loaded('mysqli')) {
             $adapter = new Adapter(array('driver' => 'mysqli'), $this->mockPlatform);
@@ -85,9 +69,10 @@ class AdapterTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @testdox unit test: Test createPlatformFromDriver() will create proper platform from driver
      * @covers Zend\Db\Adapter\Adapter::createPlatformFromDriver
      */
-    public function testAdapterWillConstructPlatformFromDriver()
+    public function testCreatePlatformFromDriver()
     {
         $driver = clone $this->mockDriver;
         $driver->expects($this->any())->method('getDatabasePlatformName')->will($this->returnValue('Mysql'));
@@ -117,6 +102,7 @@ class AdapterTest extends \PHPUnit_Framework_TestCase
 
 
     /**
+     * @testdox unit test: Test getDriver() will return driver object
      * @covers Zend\Db\Adapter\Adapter::getDriver
      */
     public function testGetDriver()
@@ -125,18 +111,30 @@ class AdapterTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @testdox unit test: Test setQueryMode() sets proper internal state and returns Adapter
      * @covers Zend\Db\Adapter\Adapter::setQueryMode
      */
     public function testSetQueryMode()
     {
         $this->adapter->setQueryMode(Adapter::QUERY_MODE_EXECUTE);
-        $this->adapter->setQueryMode(Adapter::QUERY_MODE_PREPARE);
+        $this->assertEquals(Adapter::QUERY_MODE_EXECUTE, $this->readAttribute($this->adapter, 'queryMode'));
+        $return = $this->adapter->setQueryMode(Adapter::QUERY_MODE_PREPARE);
+        $this->assertEquals(Adapter::QUERY_MODE_PREPARE, $this->readAttribute($this->adapter, 'queryMode'));
+        $this->assertEquals($this->adapter, $return);
+    }
 
+    /**
+     * @testdox unit test: Test setQueryMode() will throw excetion on unknown mode type
+     * @covers Zend\Db\Adapter\Adapter::setQueryMode
+     */
+    public function testSetQueryModeThrowsException()
+    {
         $this->setExpectedException('InvalidArgumentException', 'Query Mode must be one of');
         $this->adapter->setQueryMode('foo');
     }
 
     /**
+     * @testdox unit test: Test getPlatform() returns platform object
      * @covers Zend\Db\Adapter\Adapter::getPlatform
      */
     public function testGetPlatform()
@@ -145,6 +143,7 @@ class AdapterTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @testdox unit test: Test getDefaultSchema() returns default schema from connection object
      * @covers Zend\Db\Adapter\Adapter::getDefaultSchema
      */
     public function testGetDefaultSchema()
@@ -154,6 +153,7 @@ class AdapterTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @testdox unit test: Test query() in prepare mode produces a statement object
      * @covers Zend\Db\Adapter\Adapter::query
      */
     public function testQueryWhenPreparedProducesStatement()
@@ -163,6 +163,7 @@ class AdapterTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @testdox unit test: Test query() in execute mode produces a driver result object
      * @covers Zend\Db\Adapter\Adapter::query
      */
     public function testQueryWhenExecutedProducesAResult()
@@ -176,6 +177,7 @@ class AdapterTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @testdox unit test: Test query() in execute mode produces a resultset object
      * @covers Zend\Db\Adapter\Adapter::query
      */
     public function testQueryWhenExecutedProducesAResultSetObjectWhenResultIsQuery()
@@ -191,6 +193,7 @@ class AdapterTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @testdox unit test: Test createStatement() produces a statement object
      * @covers Zend\Db\Adapter\Adapter::createStatement
      */
     public function testCreateStatement()
@@ -199,6 +202,7 @@ class AdapterTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @testdox unit test: Test __get() works
      * @covers Zend\Db\Adapter\Adapter::__get
      */
     public function test__get()

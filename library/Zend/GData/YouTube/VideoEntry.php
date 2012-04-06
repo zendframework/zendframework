@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\GData\YouTube;
 
 use Zend\GData\YouTube,
@@ -388,7 +385,7 @@ class VideoEntry extends MediaEntry
     {
         if ($this->getMajorProtocolVersion() == 2) {
             throw new App\VersionException(
-                'Calling getRacy() on a YouTube VideoEntry is deprecated ' .
+                'Calling setRacy() on a YouTube VideoEntry is deprecated ' .
                 'as of version 2 of the API.');
         }
 

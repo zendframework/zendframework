@@ -20,9 +20,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Http\Client\Adapter;
 use Zend\Http\Client\Adapter as HttpAdapter,
     Zend\Http\Client\Adapter\Exception as AdapterException,
@@ -138,7 +135,7 @@ class Curl implements HttpAdapter, Stream
             $config[str_replace(array('-', '_', ' ', '.'), '', strtolower($k))] = $v; // replace w/ normalized
         }
 
-        if(isset($config['proxyuser']) && isset($config['proxypass'])) {
+        if (isset($config['proxyuser']) && isset($config['proxypass'])) {
             $this->setCurlOption(CURLOPT_PROXYUSERPWD, $config['proxyuser'].":".$config['proxypass']);
             unset($config['proxyuser'], $config['proxypass']);
         }
@@ -283,7 +280,7 @@ class Curl implements HttpAdapter, Stream
             case 'PUT' :
                 // There are two different types of PUT request, either a Raw Data string has been set
                 // or CURLOPT_INFILE and CURLOPT_INFILESIZE are used.
-                if(is_resource($body)) {
+                if (is_resource($body)) {
                     $this->config['curloptions'][CURLOPT_INFILE] = $body;
                 }
                 if (isset($this->config['curloptions'][CURLOPT_INFILE])) {
@@ -291,7 +288,7 @@ class Curl implements HttpAdapter, Stream
                     // from $headers at this point:
                     foreach ($headers AS $k => $header) {
                         if (preg_match('/Content-Length:\s*(\d+)/i', $header, $m)) {
-                            if(is_resource($body)) {
+                            if (is_resource($body)) {
                                 $this->config['curloptions'][CURLOPT_INFILESIZE] = (int)$m[1];
                             }
                             unset($headers[$k]);
@@ -302,7 +299,7 @@ class Curl implements HttpAdapter, Stream
                         throw new AdapterException\RuntimeException("Cannot set a file-handle for cURL option CURLOPT_INFILE without also setting its size in CURLOPT_INFILESIZE.");
                     }
 
-                    if(is_resource($body)) {
+                    if (is_resource($body)) {
                         $body = '';
                     }
 
@@ -338,7 +335,7 @@ class Curl implements HttpAdapter, Stream
                 throw new AdapterException\InvalidArgumentException("Method currently not supported");
         }
 
-        if(is_resource($body) && $curlMethod != CURLOPT_UPLOAD) {
+        if (is_resource($body) && $curlMethod != CURLOPT_UPLOAD) {
             throw new AdapterException\RuntimeException("Streaming requests are allowed only with PUT");
         }
 
@@ -349,7 +346,7 @@ class Curl implements HttpAdapter, Stream
         curl_setopt($this->curl, $curlHttp, true);
         curl_setopt($this->curl, $curlMethod, $curlValue);
 
-        if($this->outputStream) {
+        if ($this->outputStream) {
             // headers will be read into the response
             curl_setopt($this->curl, CURLOPT_HEADER, false);
             curl_setopt($this->curl, CURLOPT_HEADERFUNCTION, array($this, "readHeader"));
@@ -405,7 +402,7 @@ class Curl implements HttpAdapter, Stream
         $response = curl_exec($this->curl);
 
         // if we used streaming, headers are already there
-        if(!is_resource($this->outputStream)) {
+        if (!is_resource($this->outputStream)) {
             $this->response = $response;
         }
 
@@ -456,7 +453,7 @@ class Curl implements HttpAdapter, Stream
      */
     public function close()
     {
-        if(is_resource($this->curl)) {
+        if (is_resource($this->curl)) {
             curl_close($this->curl);
         }
         $this->curl         = null;

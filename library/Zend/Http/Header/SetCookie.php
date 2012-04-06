@@ -207,7 +207,7 @@ class SetCookie implements MultipleHeaderDescription
         }
         
         $value = $this->getValue();
-        if (strpos($value,'"')!==false) {
+        if (strpos($value, '"')!==false) {
             $value = '"'.urlencode(str_replace('"', '', $value)).'"';
         } else {
             $value = urlencode($value);

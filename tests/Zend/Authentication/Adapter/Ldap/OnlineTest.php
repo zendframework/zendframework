@@ -19,14 +19,11 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Auth\Adapter\Ldap;
 
-use Zend_Ldap,
+use Zend\Authentication,
     Zend\Authentication\Adapter,
-    Zend\Authentication;
+    Zend\Ldap;
 
 /**
  * @category   Zend
@@ -43,47 +40,47 @@ class OnlineTest extends \PHPUnit_Framework_TestCase
      *
      * @var array
      */
-    protected $_options = array();
+    protected $options = array();
 
     /**
      * @var array
      */
-    protected $_names = array();
+    protected $names = array();
 
     public function setUp()
     {
         if (!constant('TESTS_ZEND_AUTH_ADAPTER_LDAP_ONLINE_ENABLED')) {
             $this->markTestSkipped('LDAP online tests are not enabled');
         }
-        $this->_options = array(
+        $this->options = array(
             'host'     => TESTS_ZEND_LDAP_HOST,
             'username' => TESTS_ZEND_LDAP_USERNAME,
             'password' => TESTS_ZEND_LDAP_PASSWORD,
             'baseDn'   => TESTS_ZEND_LDAP_BASE_DN,
         );
         if (defined('TESTS_ZEND_LDAP_PORT'))
-            $this->_options['port'] = TESTS_ZEND_LDAP_PORT;
+            $this->options['port'] = TESTS_ZEND_LDAP_PORT;
         if (defined('TESTS_ZEND_LDAP_USE_START_TLS'))
-            $this->_options['useStartTls'] = TESTS_ZEND_LDAP_USE_START_TLS;
+            $this->options['useStartTls'] = TESTS_ZEND_LDAP_USE_START_TLS;
         if (defined('TESTS_ZEND_LDAP_USE_SSL'))
-            $this->_options['useSsl'] = TESTS_ZEND_LDAP_USE_SSL;
+            $this->options['useSsl'] = TESTS_ZEND_LDAP_USE_SSL;
         if (defined('TESTS_ZEND_LDAP_BIND_REQUIRES_DN'))
-            $this->_options['bindRequiresDn'] = TESTS_ZEND_LDAP_BIND_REQUIRES_DN;
+            $this->options['bindRequiresDn'] = TESTS_ZEND_LDAP_BIND_REQUIRES_DN;
         if (defined('TESTS_ZEND_LDAP_ACCOUNT_FILTER_FORMAT'))
-            $this->_options['accountFilterFormat'] = TESTS_ZEND_LDAP_ACCOUNT_FILTER_FORMAT;
+            $this->options['accountFilterFormat'] = TESTS_ZEND_LDAP_ACCOUNT_FILTER_FORMAT;
         if (defined('TESTS_ZEND_LDAP_ACCOUNT_DOMAIN_NAME'))
-            $this->_options['accountDomainName'] = TESTS_ZEND_LDAP_ACCOUNT_DOMAIN_NAME;
+            $this->options['accountDomainName'] = TESTS_ZEND_LDAP_ACCOUNT_DOMAIN_NAME;
         if (defined('TESTS_ZEND_LDAP_ACCOUNT_DOMAIN_NAME_SHORT'))
-            $this->_options['accountDomainNameShort'] = TESTS_ZEND_LDAP_ACCOUNT_DOMAIN_NAME_SHORT;
+            $this->options['accountDomainNameShort'] = TESTS_ZEND_LDAP_ACCOUNT_DOMAIN_NAME_SHORT;
 
         if (defined('TESTS_ZEND_LDAP_ALT_USERNAME')) {
-            $this->_names[\Zend\Ldap\Ldap::ACCTNAME_FORM_USERNAME] = TESTS_ZEND_LDAP_ALT_USERNAME;
+            $this->names[Ldap\Ldap::ACCTNAME_FORM_USERNAME] = TESTS_ZEND_LDAP_ALT_USERNAME;
             if (defined('TESTS_ZEND_LDAP_ACCOUNT_DOMAIN_NAME')) {
-                $this->_names[\Zend\Ldap\Ldap::ACCTNAME_FORM_PRINCIPAL] =
+                $this->names[Ldap\Ldap::ACCTNAME_FORM_PRINCIPAL] =
                     TESTS_ZEND_LDAP_ALT_USERNAME . '@' . TESTS_ZEND_LDAP_ACCOUNT_DOMAIN_NAME;
             }
             if (defined('TESTS_ZEND_LDAP_ACCOUNT_DOMAIN_NAME_SHORT')) {
-                $this->_names[\Zend\Ldap\Ldap::ACCTNAME_FORM_BACKSLASH] =
+                $this->names[Ldap\Ldap::ACCTNAME_FORM_BACKSLASH] =
                     TESTS_ZEND_LDAP_ACCOUNT_DOMAIN_NAME_SHORT . '\\' . TESTS_ZEND_LDAP_ALT_USERNAME;
             }
         }
@@ -92,7 +89,7 @@ class OnlineTest extends \PHPUnit_Framework_TestCase
     public function testSimpleAuth()
     {
         $adapter = new Adapter\Ldap(
-            array($this->_options),
+            array($this->options),
             TESTS_ZEND_LDAP_ALT_USERNAME,
             TESTS_ZEND_LDAP_ALT_PASSWORD
         );
@@ -112,12 +109,12 @@ class OnlineTest extends \PHPUnit_Framework_TestCase
          * (e.g. authenticate with uname@example.com but getIdentity() returns
          * EXAMPLE\uname). A total of 9 authentications are performed.
          */
-        foreach ($this->_names as $form => $formName) {
-            $options = $this->_options;
+        foreach ($this->names as $form => $formName) {
+            $options = $this->options;
             $options['accountCanonicalForm'] = $form;
             $adapter = new Adapter\Ldap(array($options));
             $adapter->setPassword(TESTS_ZEND_LDAP_ALT_PASSWORD);
-            foreach ($this->_names as $username) {
+            foreach ($this->names as $username) {
                 $adapter->setUsername($username);
                 $result = $adapter->authenticate();
                 $this->assertTrue($result instanceof Authentication\Result);
@@ -131,7 +128,7 @@ class OnlineTest extends \PHPUnit_Framework_TestCase
     public function testInvalidPassAuth()
     {
         $adapter = new Adapter\Ldap(
-            array($this->_options),
+            array($this->options),
             TESTS_ZEND_LDAP_ALT_USERNAME,
             'invalid'
         );
@@ -145,7 +142,7 @@ class OnlineTest extends \PHPUnit_Framework_TestCase
     public function testInvalidUserAuth()
     {
         $adapter = new Adapter\Ldap(
-            array($this->_options),
+            array($this->options),
             'invalid',
             'doesntmatter'
         );
@@ -162,7 +159,7 @@ class OnlineTest extends \PHPUnit_Framework_TestCase
     public function testMismatchDomainAuth()
     {
         $adapter = new Adapter\Ldap(
-            array($this->_options),
+            array($this->options),
             'EXAMPLE\\doesntmatter',
             'doesntmatter'
         );
@@ -178,7 +175,7 @@ class OnlineTest extends \PHPUnit_Framework_TestCase
     public function testAccountObjectRetrieval()
     {
         $adapter = new Adapter\Ldap(
-            array($this->_options),
+            array($this->options),
             TESTS_ZEND_LDAP_ALT_USERNAME,
             TESTS_ZEND_LDAP_ALT_PASSWORD
         );
@@ -194,7 +191,7 @@ class OnlineTest extends \PHPUnit_Framework_TestCase
     public function testAccountObjectRetrievalWithOmittedAttributes()
     {
         $adapter = new Adapter\Ldap(
-            array($this->_options),
+            array($this->options),
             TESTS_ZEND_LDAP_ALT_USERNAME,
             TESTS_ZEND_LDAP_ALT_PASSWORD
         );

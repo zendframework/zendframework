@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Translator\Adapter;
 
 use Zend\Cache\StorageFactory as CacheFactory,

@@ -77,10 +77,10 @@ class TableGatewayTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetDatabaseSchema()
     {
-        $this->assertNull($this->table->getDatabaseSchema());
+        $this->assertNull($this->table->getSchema());
 
         $table = new TableGateway('foo', $this->mockAdapter, 'FooSchema');
-        $this->assertEquals('FooSchema', $table->getDatabaseSchema());
+        $this->assertEquals('FooSchema', $table->getSchema());
     }
 
     /**
@@ -89,8 +89,8 @@ class TableGatewayTest extends \PHPUnit_Framework_TestCase
     public function testSetSqlDelete()
     {
         $delete = new Sql\Delete;
-        $this->table->setSqlDelete($delete);
-        $this->assertSame($delete, $this->table->getSqlDelete());
+        $this->table->setSqlDeletePrototype($delete);
+        $this->assertSame($delete, $this->table->getSqlDeletePrototype());
     }
 
     /**
@@ -98,7 +98,7 @@ class TableGatewayTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetSqlDelete()
     {
-        $this->assertInstanceOf('Zend\Db\Sql\Delete', $this->table->getSqlDelete());
+        $this->assertInstanceOf('Zend\Db\Sql\Delete', $this->table->getSqlDeletePrototype());
     }
 
     /**
@@ -107,8 +107,8 @@ class TableGatewayTest extends \PHPUnit_Framework_TestCase
     public function testSetSqlInsert()
     {
         $insert = new Sql\Insert;
-        $this->table->setSqlInsert($insert);
-        $this->assertSame($insert, $this->table->getSqlInsert());
+        $this->table->setSqlInsertPrototype($insert);
+        $this->assertSame($insert, $this->table->getSqlInsertPrototype());
     }
 
     /**
@@ -116,7 +116,7 @@ class TableGatewayTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetSqlInsert()
     {
-        $this->assertInstanceOf('Zend\Db\Sql\Insert', $this->table->getSqlInsert());
+        $this->assertInstanceOf('Zend\Db\Sql\Insert', $this->table->getSqlInsertPrototype());
     }
 
     /**
@@ -125,8 +125,8 @@ class TableGatewayTest extends \PHPUnit_Framework_TestCase
     public function testSetSqlSelect()
     {
         $select = new Sql\Select;
-        $this->table->setSqlSelect($select);
-        $this->assertSame($select, $this->table->getSqlSelect());
+        $this->table->setSqlSelectPrototype($select);
+        $this->assertSame($select, $this->table->getSqlSelectPrototype());
     }
 
     /**
@@ -134,7 +134,7 @@ class TableGatewayTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetSqlSelect()
     {
-        $this->assertInstanceOf('Zend\Db\Sql\Select', $this->table->getSqlSelect());
+        $this->assertInstanceOf('Zend\Db\Sql\Select', $this->table->getSqlSelectPrototype());
     }
 
     /**
@@ -143,8 +143,8 @@ class TableGatewayTest extends \PHPUnit_Framework_TestCase
     public function testSetSqlUpdate()
     {
         $update = new Sql\Update;
-        $this->table->setSqlUpdate($update);
-        $this->assertSame($update, $this->table->getSqlUpdate());
+        $this->table->setSqlUpdatePrototype($update);
+        $this->assertSame($update, $this->table->getSqlUpdatePrototype());
     }
 
     /**
@@ -152,7 +152,7 @@ class TableGatewayTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetSqlUpdate()
     {
-        $this->assertInstanceOf('Zend\Db\Sql\Update', $this->table->getSqlUpdate());
+        $this->assertInstanceOf('Zend\Db\Sql\Update', $this->table->getSqlUpdatePrototype());
     }
 
     /**
@@ -179,11 +179,15 @@ class TableGatewayTest extends \PHPUnit_Framework_TestCase
     public function testSelectWithNoWhere()
     {
         $select = $this->getMock('Zend\Db\Sql\Select');
+        $select->expects($this->any())
+            ->method('getRawState')
+            ->will($this->returnValue(array(
+                'table' => $this->table->getTableName(),
+                'schema' => ''
+                ))
+            );
 
-        // assert select::from() is called
-        $select->expects($this->once())->method('from')->with($this->table->getTableName(), null);
-
-        $this->table->setSqlSelect($select);
+        $this->table->setSqlSelectPrototype($select);
         $resultSet = $this->table->select();
 
         // check return types
@@ -197,13 +201,20 @@ class TableGatewayTest extends \PHPUnit_Framework_TestCase
     public function testSelectWithWhereString()
     {
         $select = $this->getMock('Zend\Db\Sql\Select');
+        $select->expects($this->any())
+            ->method('getRawState')
+            ->will($this->returnValue(array(
+                'table' => $this->table->getTableName(),
+                'schema' => ''
+                ))
+            );
 
         // assert select::from() is called
         $select->expects($this->once())
             ->method('where')
             ->with($this->equalTo('foo'));
 
-        $this->table->setSqlSelect($select);
+        $this->table->setSqlSelectPrototype($select);
         $this->table->select('foo');
     }
 
@@ -228,7 +239,7 @@ class TableGatewayTest extends \PHPUnit_Framework_TestCase
             ->method('values')
             ->with($this->equalTo(array('foo' => 'bar')));
 
-        $this->table->setSqlInsert($insert);
+        $this->table->setSqlInsertPrototype($insert);
 
         $affectedRows = $this->table->insert(array('foo' => 'bar'));
         $this->assertEquals(5, $affectedRows);
@@ -246,7 +257,7 @@ class TableGatewayTest extends \PHPUnit_Framework_TestCase
             ->method('where')
             ->with($this->equalTo('foo'));
 
-        $this->table->setSqlUpdate($update);
+        $this->table->setSqlUpdatePrototype($update);
         $this->table->update(array('foo' => 'bar'), 'foo');
     }
 
@@ -262,7 +273,7 @@ class TableGatewayTest extends \PHPUnit_Framework_TestCase
             ->method('where')
             ->with($this->equalTo('foo'));
 
-        $this->table->setSqlDelete($delete);
+        $this->table->setSqlDeletePrototype($delete);
         $this->table->delete('foo');
     }
 
@@ -297,9 +308,9 @@ class TableGatewayTest extends \PHPUnit_Framework_TestCase
     {
         $cTable = clone $this->table;
         //$this->assertNotSame($this->mockAdapter, $cTable->getAdapter());
-        $this->assertNotSame($this->table->getSqlInsert(), $cTable->getSqlInsert());
-        $this->assertNotSame($this->table->getSqlUpdate(), $cTable->getSqlUpdate());
-        $this->assertNotSame($this->table->getSqlDelete(), $cTable->getSqlDelete());
-        $this->assertNotSame($this->table->getSqlSelect(), $cTable->getSqlSelect());
+        $this->assertNotSame($this->table->getSqlInsertPrototype(), $cTable->getSqlInsertPrototype());
+        $this->assertNotSame($this->table->getSqlUpdatePrototype(), $cTable->getSqlUpdatePrototype());
+        $this->assertNotSame($this->table->getSqlDeletePrototype(), $cTable->getSqlDeletePrototype());
+        $this->assertNotSame($this->table->getSqlSelectPrototype(), $cTable->getSqlSelectPrototype());
     }
 }

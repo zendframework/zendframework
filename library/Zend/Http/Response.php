@@ -177,7 +177,7 @@ class Response extends Message implements ResponseDescription
     {
         $lines = explode("\r\n", $string);
         if (!is_array($lines) || count($lines)==1) {
-            $lines = explode("\n",$string);
+            $lines = explode("\n", $string);
         }
 
         $firstLine = array_shift($lines);
@@ -202,7 +202,7 @@ class Response extends Message implements ResponseDescription
         while ($lines) {
             $nextLine = array_shift($lines);
 
-            if ($nextLine == '') {
+            if ($isHeader && $nextLine == '') {
                 $isHeader = false;
                 continue;
             }

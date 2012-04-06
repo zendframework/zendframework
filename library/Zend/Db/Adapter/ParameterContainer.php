@@ -257,4 +257,15 @@ class ParameterContainer implements Iterator, ParameterContainerInterface
     {
         reset($this->data);
     }
+
+    public function merge(array $array)
+    {
+        foreach ($array as $key => $value) {
+            if (is_int($key)) {
+                $key = null;
+            }
+            $this->offsetSet($key, $value);
+        }
+        return $this;
+    }
 }

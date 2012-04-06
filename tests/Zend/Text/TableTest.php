@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Text;
 use Zend\Text\Table;
 use Zend\Text\Table\Decorator;

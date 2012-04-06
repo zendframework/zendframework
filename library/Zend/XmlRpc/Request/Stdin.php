@@ -18,9 +18,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\XmlRpc\Request;
 
 use Zend\XmlRpc\Request as XmlRpcRequest,

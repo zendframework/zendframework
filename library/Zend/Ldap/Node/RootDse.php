@@ -19,20 +19,13 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Ldap\Node;
+
 use Zend\Ldap;
 
 /**
- * Zend_Ldap_Node_RootDse provides a simple data-container for the RootDse node.
+ * Zend\Ldap\Node\RootDse provides a simple data-container for the RootDse node.
  *
- * @uses       \Zend\Ldap\Dn
- * @uses       \Zend\Ldap\Node\AbstractNode
- * @uses       \Zend\Ldap\Node\RootDse\ActiveDirectory
- * @uses       \Zend\Ldap\Node\RootDse\eDirectory
- * @uses       \Zend\Ldap\Node\RootDse\OpenLdap
  * @category   Zend
  * @package    Zend_Ldap
  * @subpackage RootDse
@@ -49,20 +42,21 @@ class RootDse extends AbstractNode
     /**
      * Factory method to create the RootDse.
      *
-     * @param  \Zend\Ldap\Ldap $ldap
-     * @return \Zend\Ldap\Node\RootDse
-     * @throws \Zend\Ldap\Exception
+     * @param  Ldap\Ldap $ldap
+     * @return RootDse
+     * @throws Ldap\Exception
      */
     public static function create(Ldap\Ldap $ldap)
     {
-        $dn = Ldap\Dn::fromString('');
+        $dn   = Ldap\Dn::fromString('');
         $data = $ldap->getEntry($dn, array('*', '+'), true);
         if (isset($data['domainfunctionality'])) {
             return new RootDse\ActiveDirectory($dn, $data);
         } else if (isset($data['dsaname'])) {
             return new RootDse\eDirectory($dn, $data);
-        } else if (isset($data['structuralobjectclass']) &&
-                $data['structuralobjectclass'][0] === 'OpenLDAProotDSE') {
+        } else if (isset($data['structuralobjectclass'])
+            && $data['structuralobjectclass'][0] === 'OpenLDAProotDSE'
+        ) {
             return new RootDse\OpenLdap($dn, $data);
         } else {
             return new self($dn, $data);
@@ -74,8 +68,8 @@ class RootDse extends AbstractNode
      *
      * Constructor is protected to enforce the use of factory methods.
      *
-     * @param  \Zend\Ldap\Dn $dn
-     * @param  array        $data
+     * @param  Ldap\Dn $dn
+     * @param  array   $data
      */
     protected function __construct(Ldap\Dn $dn, array $data)
     {
@@ -137,7 +131,7 @@ class RootDse extends AbstractNode
     /**
      * Returns the schema DN
      *
-     * @return \Zend\Ldap\Dn
+     * @return Ldap\Dn
      */
     public function getSchemaDn()
     {

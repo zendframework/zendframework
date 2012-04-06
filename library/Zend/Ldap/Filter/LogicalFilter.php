@@ -19,17 +19,13 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Ldap\Filter;
 
+use Zend\Ldap\Filter\Exception;
+
 /**
- * Zend_Ldap_Filter_Logical provides a base implementation for a grouping filter.
+ * Zend\Ldap\Filter\LogicalFilter provides a base implementation for a grouping filter.
  *
- * @uses       \Zend\Ldap\Filter\AbstractFilter
- * @uses       \Zend\Ldap\Filter\Exception
- * @uses       \Zend\Ldap\Filter\StringFilter
  * @category   Zend
  * @package    Zend_Ldap
  * @subpackage Filter
@@ -46,14 +42,14 @@ abstract class LogicalFilter extends AbstractFilter
      *
      * @var array
      */
-    private $_subfilters;
+    private $subfilters;
 
     /**
      * The grouping symbol.
      *
      * @var string
      */
-    private $_symbol;
+    private $symbol;
 
     /**
      * Creates a new grouping filter.
@@ -64,25 +60,26 @@ abstract class LogicalFilter extends AbstractFilter
     protected function __construct(array $subfilters, $symbol)
     {
         foreach ($subfilters as $key => $s) {
-            if (is_string($s)) $subfilters[$key] = new StringFilter($s);
-            else if (!($s instanceof AbstractFilter)) {
-                throw new Exception('Only strings or Zend\Ldap\Filter\AbstractFilter allowed.');
+            if (is_string($s)) {
+                $subfilters[$key] = new StringFilter($s);
+            } else if (!($s instanceof AbstractFilter)) {
+                throw new Exception\FilterException('Only strings or Zend\Ldap\Filter\AbstractFilter allowed.');
             }
         }
-        $this->_subfilters = $subfilters;
-        $this->_symbol = $symbol;
+        $this->subfilters = $subfilters;
+        $this->symbol     = $symbol;
     }
 
     /**
      * Adds a filter to this grouping filter.
      *
-     * @param  \Zend\Ldap\Filter\AbstractFilter $filter
-     * @return \Zend\Ldap\Filter\LogicalFilter
+     * @param  AbstractFilter $filter
+     * @return LogicalFilter
      */
     public function addFilter(AbstractFilter $filter)
     {
-        $new = clone $this;
-        $new->_subfilters[] = $filter;
+        $new               = clone $this;
+        $new->subfilters[] = $filter;
         return $new;
     }
 
@@ -93,8 +90,10 @@ abstract class LogicalFilter extends AbstractFilter
      */
     public function toString()
     {
-        $return = '(' . $this->_symbol;
-        foreach ($this->_subfilters as $sub) $return .= $sub->toString();
+        $return = '(' . $this->symbol;
+        foreach ($this->subfilters as $sub) {
+            $return .= $sub->toString();
+        }
         $return .= ')';
         return $return;
     }

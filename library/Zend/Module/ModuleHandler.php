@@ -9,7 +9,7 @@ interface ModuleHandler
     /**
      * Load the provided modules.
      *
-     * @return ManagerHandler
+     * @return ModuleHandler
      */
     public function loadModules();
 
@@ -48,7 +48,7 @@ interface ModuleHandler
      * Set the event manager instance used by this module manager.
      *
      * @param  EventCollection $events
-     * @return ManagerHandler
+     * @return ModuleHandler
      */
     public function setEventManager(EventCollection $events);
 

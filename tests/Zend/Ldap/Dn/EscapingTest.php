@@ -19,18 +19,9 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Ldap\Dn;
-use Zend\Ldap;
 
-/**
- * Test helper
- */
-/**
- * Zend_Ldap_Dn
- */
+use Zend\Ldap;
 
 /**
  * @category   Zend
@@ -45,21 +36,23 @@ class EscapingTest extends \PHPUnit_Framework_TestCase
 {
     public function testEscapeValues()
     {
-        $dnval='  '.chr(22).' t,e+s"t,\\v<a>l;u#e=!    ';
-        $expected='\20\20\16 t\,e\+s\"t\,\\\\v\<a\>l\;u\#e\=!\20\20\20\20';
+        $dnval    = '  ' . chr(22) . ' t,e+s"t,\\v<a>l;u#e=!    ';
+        $expected = '\20\20\16 t\,e\+s\"t\,\\\\v\<a\>l\;u\#e\=!\20\20\20\20';
         $this->assertEquals($expected, Ldap\Dn::escapeValue($dnval));
         $this->assertEquals($expected, Ldap\Dn::escapeValue(array($dnval)));
         $this->assertEquals(array($expected, $expected, $expected),
-            Ldap\Dn::escapeValue(array($dnval, $dnval, $dnval)));
+            Ldap\Dn::escapeValue(array($dnval, $dnval, $dnval))
+        );
     }
 
     public function testUnescapeValues()
     {
-        $dnval='\\20\\20\\16\\20t\\,e\\+s \\"t\\,\\\\v\\<a\\>l\\;u\\#e\\=!\\20\\20\\20\\20';
-        $expected='  '.chr(22).' t,e+s "t,\\v<a>l;u#e=!    ';
+        $dnval    = '\\20\\20\\16\\20t\\,e\\+s \\"t\\,\\\\v\\<a\\>l\\;u\\#e\\=!\\20\\20\\20\\20';
+        $expected = '  ' . chr(22) . ' t,e+s "t,\\v<a>l;u#e=!    ';
         $this->assertEquals($expected, Ldap\Dn::unescapeValue($dnval));
         $this->assertEquals($expected, Ldap\Dn::unescapeValue(array($dnval)));
         $this->assertEquals(array($expected, $expected, $expected),
-            Ldap\Dn::unescapeValue(array($dnval,$dnval,$dnval)));
+            Ldap\Dn::unescapeValue(array($dnval, $dnval, $dnval))
+        );
     }
 }

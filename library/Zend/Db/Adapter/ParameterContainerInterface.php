@@ -39,7 +39,8 @@ interface ParameterContainerInterface extends \ArrayAccess, \Countable, \Travers
     const TYPE_STRING  = 'string';
     const TYPE_LOB     = 'lob';
 
-    public function setFromArray(Array $data);
+    public function setFromArray(array $data);
+    public function merge(array $data);
     
     public function offsetSetErrata($nameOrPosition, $errata);
     public function offsetGetErrata($nameOrPosition);

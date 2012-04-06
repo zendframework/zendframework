@@ -18,9 +18,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
-* @namespace
-*/
 namespace Zend\Feed\Reader\Feed\Atom;
 use Zend\Feed\Reader;
 use Zend\Feed\Reader\Feed;

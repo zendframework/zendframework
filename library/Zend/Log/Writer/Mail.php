@@ -19,28 +19,23 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Log\Writer;
 
 use Zend\Log\Formatter\Simple as SimpleFormatter,
-    Zend\Log\Formatter,
     Zend\Log\Exception,
-    Zend\Mail\Mail as Mailer,
-    Zend\Layout\Layout;
+    Zend\Mail\Message,
+    Zend\Mail\Transport,
+    Zend\Mail\Transport\Exception as MailException,
+    Zend\Mail\Transport\Sendmail as SendmailTransport;
 
 /**
- * Class used for writing log messages to email via Zend_Mail.
+ * Class used for writing log messages to email via Zend\Mail.
  *
  * Allows for emailing log messages at and above a certain level via a
- * Zend_Mail object.  Note that this class only sends the email upon
+ * Zend\Mail\Message object.  Note that this class only sends the email upon
  * completion, so any log entries accumulated are sent in a single email.
- *
- * @uses       \Zend\Log\Exception\InvalidArgumentException
- * @uses       \Zend\Log\Exception\RuntimeException
- * @uses       \Zend\Log\Formatter\Simple
- * @uses       \Zend\Log\Writer\AbstractWriter
+ * The email is sent using a Zend\Mail\Transport object (Sendmail is default).
+ * 
  * @category   Zend
  * @package    Zend_Log
  * @subpackage Writer
@@ -54,279 +49,88 @@ class Mail extends AbstractWriter
      *
      * @var array
      */
-    protected $_eventsToMail = array();
+    protected $eventsToMail = array();
+
 
     /**
-     * Array of formatted lines for use in an HTML email body; these events
-     * are formatted with an optional formatter if the caller is using
-     * Zend_Layout.
+     * Mail message instance to use
      *
-     * @var array
+     * @var Message
      */
-    protected $_layoutEventsToMail = array();
+    protected $mail;
 
     /**
-     * Zend_Mail instance to use
+     * Mail transport instance to use; optional.
      *
-     * @var Mailer
+     * @var Transport
      */
-    protected $_mail;
-
-    /**
-     * Zend_Layout instance to use; optional.
-     *
-     * @var Layout
-     */
-    protected $_layout;
-
-    /**
-     * Optional formatter for use when rendering with Zend_Layout.
-     *
-     * @var Formatter
-     */
-    protected $_layoutFormatter;
+    protected $transport;
 
     /**
      * Array keeping track of the number of entries per priority level.
      *
      * @var array
      */
-    protected $_numEntriesPerPriority = array();
+    protected $numEntriesPerPriority = array();
 
     /**
      * Subject prepend text.
      *
-     * Can only be used of the Zend_Mail object has not already had its
+     * Can only be used of the Zend\Mail object has not already had its
      * subject line set.  Using this will cause the subject to have the entry
      * counts per-priority level appended to it.
      *
      * @var string|null
      */
-    protected $_subjectPrependText;
+    protected $subjectPrependText;
 
     /**
-     * MethodMap for Mail's headers
-     *
-     * @var array
+     * Constructor
+     * 
+     * @param  Message $mail
+     * @param  Transport $transport
      */
-    protected static $_methodMapHeaders = array(
-        'from' => 'setFrom',
-        'to' => 'addTo',
-        'cc' => 'addCc',
-        'bcc' => 'addBcc',
-    );
-
-    /**
-     * Class constructor.
-     *
-     * Constructs the mail writer; requires a Zend_Mail instance, and takes an
-     * optional Zend_Layout instance.  If Zend_Layout is being used,
-     * $this->_layout->events will be set for use in the layout template.
-     *
-     * @param  Mailer $mail Mail instance
-     * @param  Layout $layout Layout instance; optional
-     * @return void
-     */
-    public function __construct(Mailer $mail, Layout $layout = null)
+    public function __construct(Message $mail, Transport $transport = null)
     {
-        $this->_mail = $mail;
-        if (null !== $layout) {
-            $this->setLayout($layout);
+        $this->mail = $mail;
+        if (null !== $transport) {
+            $this->setTransport($transport);
+        } else {
+            // default transport
+            $this->setTransport(new SendmailTransport());
         }
-        $this->_formatter = new SimpleFormatter();
+        $this->formatter = new SimpleFormatter();
     }
 
     /**
-     * Create a new instance of Zend_Log_Writer_Mail
+     * Set the transport message
      *
-     * @param  array|\Zend\Config\Config $config
-     * @return \Zend\Log\Writer\Mail
+     * @param  Transport $layout
+     * @return Mail
      */
-    static public function factory($config = array())
+    public function setTransport(Transport $transport)
     {
-        $config = self::_parseConfig($config);
-        $mail = self::_constructMailFromConfig($config);
-        $writer = new self($mail);
-
-        if (isset($config['layout']) || isset($config['layoutOptions'])) {
-            $writer->setLayout($config);
-        }
-        if (isset($config['layoutFormatter'])) {
-            $layoutFormatter = new $config['layoutFormatter'];
-            $writer->setLayoutFormatter($layoutFormatter);
-        }
-        if (isset($config['subjectPrependText'])) {
-            $writer->setSubjectPrependText($config['subjectPrependText']);
-        }
-
-        return $writer;
-    }
-
-    /**
-     * Set the layout
-     *
-     * @param \Zend\Layout\Layout|array $layout
-     * @throws \Zend\Log\Exception\InvalidArgumentException
-     * @return \Zend\Log\Writer\Mail
-     */
-    public function setLayout($layout)
-    {
-        if (is_array($layout)) {
-            $layout = $this->_constructLayoutFromConfig($layout);
-        }
-
-        if (!$layout instanceof Layout) {
-            throw new Exception\InvalidArgumentException(
-                'Mail must be an instance of \Zend\Layout\Layout or an array'
-            );
-        }
-        $this->_layout = $layout;
-
+        $this->transport = $transport;
         return $this;
-    }
-
-    /**
-     * Construct a Mail instance based on a configuration array
-     *
-     * @param array $config
-     * @throws Exception\InvalidArgumentException
-     * @return Mailer
-     */
-    protected static function _constructMailFromConfig(array $config)
-    {
-        $mailClass = 'Zend\Mail\Mail';
-        if (isset($config['mail'])) {
-            $mailClass = $config['mail'];
-        }
-
-        if (!array_key_exists('charset', $config)) {
-            $config['charset'] = null;
-        }
-        $mail = new $mailClass($config['charset']);
-        if (!$mail instanceof Mailer) {
-            throw new Exception\InvalidArgumentException($mail . 'must extend \Zend\Mail\Mail');
-        }
-
-        if (isset($config['subject'])) {
-            $mail->setSubject($config['subject']);
-        }
-
-        $headerAddresses = array_intersect_key($config, self::$_methodMapHeaders);
-        if (count($headerAddresses)) {
-            foreach ($headerAddresses as $header => $address) {
-                $method = self::$_methodMapHeaders[$header];
-                if (is_array($address) && isset($address['name'])
-                    && !is_numeric($address['name'])
-                ) {
-                    $params = array(
-                        $address['email'],
-                        $address['name']
-                    );
-                } else if (is_array($address) && isset($address['email'])) {
-                    $params = array($address['email']);
-                } else {
-                    $params = array($address);
-                }
-                call_user_func_array(array($mail, $method), $params);
-            }
-        }
-
-        return $mail;
-    }
-
-    /**
-     * Construct a Layout instance based on a configuration array
-     *
-     * @param array $config
-     * @throws Exception\InvalidArgumentException
-     * @return Layout
-     */
-    protected function _constructLayoutFromConfig(array $config)
-    {
-        $config = array_merge(array(
-            'layout' => 'Zend\Layout\Layout',
-            'layoutOptions' => null
-        ), $config);
-
-        $layoutClass = $config['layout'];
-        $layout = new $layoutClass($config['layoutOptions']);
-        if (!$layout instanceof Layout) {
-            throw new Exception\InvalidArgumentException(
-                $layout . 'must extend \Zend\Layout\Layout'
-            );
-        }
-
-        return $layout;
     }
 
     /**
      * Places event line into array of lines to be used as message body.
      *
-     * Handles the formatting of both plaintext entries, as well as those
-     * rendered with Zend_Layout.
-     *
-     * @param  array $event Event data
+     * @param array $event Event data
      * @return void
      */
-    protected function _write($event)
+    protected function doWrite(array $event)
     {
         // Track the number of entries per priority level.
-        if (!isset($this->_numEntriesPerPriority[$event['priorityName']])) {
-            $this->_numEntriesPerPriority[$event['priorityName']] = 1;
+        if (!isset($this->numEntriesPerPriority[$event['priorityName']])) {
+            $this->numEntriesPerPriority[$event['priorityName']] = 1;
         } else {
-            $this->_numEntriesPerPriority[$event['priorityName']]++;
+            $this->numEntriesPerPriority[$event['priorityName']]++;
         }
-
-        $formattedEvent = $this->_formatter->format($event);
 
         // All plaintext events are to use the standard formatter.
-        $this->_eventsToMail[] = $formattedEvent;
-
-        // If we have a Zend_Layout instance, use a specific formatter for the
-        // layout if one exists.  Otherwise, just use the event with its
-        // default format.
-        if ($this->_layout) {
-            if ($this->_layoutFormatter) {
-                $this->_layoutEventsToMail[] =
-                    $this->_layoutFormatter->format($event);
-            } else {
-                $this->_layoutEventsToMail[] = $formattedEvent;
-            }
-        }
-    }
-
-    /**
-     * Gets instance of Zend_Log_Formatter used for formatting a
-     * message using Zend_Layout, if applicable.
-     *
-     * @return Formatter|null The formatter, or null.
-     */
-    public function getLayoutFormatter()
-    {
-        return $this->_layoutFormatter;
-    }
-
-    /**
-     * Sets a specific formatter for use with Zend_Layout events.
-     *
-     * Allows use of a second formatter on lines that will be rendered with
-     * Zend_Layout.  In the event that Zend_Layout is not being used, this
-     * formatter cannot be set, so an exception will be thrown.
-     *
-     * @param  Formatter $formatter
-     * @return \Zend\Log\Writer\Mail
-     * @throws Exception\InvalidArgumentException
-     */
-    public function setLayoutFormatter(Formatter $formatter)
-    {
-        if (!$this->_layout) {
-            throw new Exception\InvalidArgumentException(
-                'cannot set formatter for layout; ' .
-                    'a Zend\Layout\Layout instance is not in use');
-        }
-
-        $this->_layoutFormatter = $formatter;
-        return $this;
+        $this->eventsToMail[] = $this->formatter->format($event);
     }
 
     /**
@@ -334,23 +138,17 @@ class Mail extends AbstractWriter
      * entry counts per-priority level.
      *
      * Sets the text for use in the subject, with entry counts per-priority
-     * level appended to the end.  Since a Zend_Mail subject can only be set
-     * once, this method cannot be used if the Zend_Mail object already has a
+     * level appended to the end.  Since a Zend\Mail\Message subject can only be set
+     * once, this method cannot be used if the Zend\Mail\Message object already has a
      * subject set.
      *
-     * @param  string $subject Subject prepend text.
+     * @param  string $subject Subject prepend text
+     * @return Mail
      * @throws Exception\RuntimeException
-     * @return \Zend\Log\Writer\Mail
      */
     public function setSubjectPrependText($subject)
     {
-        if ($this->_mail->getSubject()) {
-            throw new Exception\RuntimeException(
-                'subject already set on mail; ' .
-                    'cannot set subject prepend text');
-        }
-
-        $this->_subjectPrependText = (string) $subject;
+        $this->subjectPrependText = (string) $subject;
         return $this;
     }
 
@@ -364,51 +162,26 @@ class Mail extends AbstractWriter
     {
         // If there are events to mail, use them as message body.  Otherwise,
         // there is no mail to be sent.
-        if (empty($this->_eventsToMail)) {
+        if (empty($this->eventsToMail)) {
             return;
         }
 
-        if ($this->_subjectPrependText !== null) {
+        if ($this->subjectPrependText !== null) {
             // Tack on the summary of entries per-priority to the subject
-            // line and set it on the Zend_Mail object.
-            $numEntries = $this->_getFormattedNumEntriesPerPriority();
-            $this->_mail->setSubject(
-                "{$this->_subjectPrependText} ({$numEntries})");
+            // line and set it on the Zend\Mail object.
+            $numEntries = $this->getFormattedNumEntriesPerPriority();
+            $this->mail->setSubject("{$this->subjectPrependText} ({$numEntries})");
         }
-
 
         // Always provide events to mail as plaintext.
-        $this->_mail->setBodyText(implode('', $this->_eventsToMail));
-
-        // If a Zend_Layout instance is being used, set its "events"
-        // value to the lines formatted for use with the layout.
-        if ($this->_layout) {
-            // Set the required "messages" value for the layout.  Here we
-            // are assuming that the layout is for use with HTML.
-            $this->_layout->events =
-                implode('', $this->_layoutEventsToMail);
-
-            // If an exception occurs during rendering, convert it to a notice
-            // so we can avoid an exception thrown without a stack frame.
-            try {
-                $this->_mail->setBodyHtml($this->_layout->render());
-            } catch (\Exception $e) {
-                trigger_error(
-                    "exception occurred when rendering layout; " .
-                        "unable to set html body for message; " .
-                        "message = {$e->getMessage()}; " .
-                        "code = {$e->getCode()}; " .
-                        "exception class = " . get_class($e),
-                    E_USER_NOTICE);
-            }
-        }
+        $this->mail->setBody(implode('', $this->eventsToMail));
 
         // Finally, send the mail.  If an exception occurs, convert it into a
         // warning-level message so we can avoid an exception thrown without a
         // stack frame.
         try {
-            $this->_mail->send();
-        } catch (\Exception $e) {
+            $this->transport->send($this->mail);
+        } catch (MailException $e) {
             trigger_error(
                 "unable to send log entries via email; " .
                     "message = {$e->getMessage()}; " .
@@ -420,15 +193,15 @@ class Mail extends AbstractWriter
 
     /**
      * Gets a string of number of entries per-priority level that occurred, or
-     * an emptry string if none occurred.
+     * an empty string if none occurred.
      *
      * @return string
      */
-    protected function _getFormattedNumEntriesPerPriority()
+    protected function getFormattedNumEntriesPerPriority()
     {
         $strings = array();
 
-        foreach ($this->_numEntriesPerPriority as $priority => $numEntries) {
+        foreach ($this->numEntriesPerPriority as $priority => $numEntries) {
             $strings[] = "{$priority}={$numEntries}";
         }
 

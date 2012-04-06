@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Controller\Router;
 use Zend\Translator;
 use Zend\Controller\Router\Route;

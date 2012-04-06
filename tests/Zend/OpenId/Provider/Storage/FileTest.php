@@ -24,9 +24,6 @@
  * @see Zend\OpenId\Provider\Storage\File
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\OpenId\Provider\Storage;
 
 use Zend\OpenId,

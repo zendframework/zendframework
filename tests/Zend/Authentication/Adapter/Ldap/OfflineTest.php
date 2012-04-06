@@ -19,10 +19,10 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Auth\Adapter\Ldap;
+
+use Zend\Authentication\Adapter,
+    Zend\Ldap;
 
 /**
  * @category   Zend
@@ -37,20 +37,20 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
     /**
      * Authentication adapter instance
      *
-     * @var Zend_Auth_Adapter_Ldap
+     * @var Adapter\Ldap
      */
-    protected $_adapter = null;
+    protected $adapter = null;
 
     /**
      * Setup operations run prior to each test method:
      *
-     * * Creates an instance of Zend\\Auth\\Adapter\\Ldap
+     * * Creates an instance of Zend\Authentication\Adapter\Ldap
      *
      * @return void
      */
     public function setUp()
     {
-        $this->_adapter = new \Zend\Authentication\Adapter\Ldap();
+        $this->adapter = new Adapter\Ldap();
     }
 
     public function testGetSetLdap()
@@ -58,24 +58,24 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
         if (!extension_loaded('ldap')) {
             $this->markTestSkipped('LDAP is not enabled');
         }
-        $this->_adapter->setLdap(new \Zend\Ldap\Ldap());
-        $this->assertInstanceOf('Zend\Ldap\Ldap', $this->_adapter->getLdap());
+        $this->adapter->setLdap(new Ldap\Ldap());
+        $this->assertInstanceOf('Zend\Ldap\Ldap', $this->adapter->getLdap());
     }
 
     public function testUsernameIsNullIfNotSet()
     {
-        $this->assertNull($this->_adapter->getUsername());
+        $this->assertNull($this->adapter->getUsername());
     }
 
     public function testPasswordIsNullIfNotSet()
     {
-        $this->assertNull($this->_adapter->getPassword());
+        $this->assertNull($this->adapter->getPassword());
     }
 
     public function testSetAndGetUsername()
     {
         $usernameExpected = 'someUsername';
-        $usernameActual = $this->_adapter->setUsername($usernameExpected)
+        $usernameActual = $this->adapter->setUsername($usernameExpected)
                                          ->getUsername();
         $this->assertSame($usernameExpected, $usernameActual);
     }
@@ -83,7 +83,7 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
     public function testSetAndGetPassword()
     {
         $passwordExpected = 'somePassword';
-        $passwordActual = $this->_adapter->setPassword($passwordExpected)
+        $passwordActual = $this->adapter->setPassword($passwordExpected)
                                          ->getPassword();
         $this->assertSame($passwordExpected, $passwordActual);
     }
@@ -91,7 +91,7 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
     public function testSetIdentityProxiesToSetUsername()
     {
         $usernameExpected = 'someUsername';
-        $usernameActual = $this->_adapter->setIdentity($usernameExpected)
+        $usernameActual = $this->adapter->setIdentity($usernameExpected)
                                          ->getUsername();
         $this->assertSame($usernameExpected, $usernameActual);
     }
@@ -99,7 +99,7 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
     public function testSetCredentialProxiesToSetPassword()
     {
         $passwordExpected = 'somePassword';
-        $passwordActual = $this->_adapter->setCredential($passwordExpected)
+        $passwordActual = $this->adapter->setCredential($passwordExpected)
                                          ->getPassword();
         $this->assertSame($passwordExpected, $passwordActual);
     }

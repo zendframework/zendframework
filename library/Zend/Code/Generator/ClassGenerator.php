@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Code\Generator;
 
 use Zend\Code\Reflection\ClassReflection;
@@ -645,7 +642,6 @@ class ClassGenerator extends AbstractGenerator
         $output = '';
 
         if (null !== ($namespace = $this->getNamespaceName())) {
-            $output .= "/** @namespace */" . self::LINE_FEED;
             $output .= 'namespace ' . $namespace . ';' . self::LINE_FEED . self::LINE_FEED;
         }
 

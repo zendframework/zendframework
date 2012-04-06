@@ -71,7 +71,7 @@ class ListenerOptions extends Options
      * Set if the config cache should be enabled or not
      *
      * @param bool $enabled
-     * @return ManagerOptions
+     * @return ListenerOptions
      */
     public function setConfigCacheEnabled($enabled)
     {
@@ -93,7 +93,7 @@ class ListenerOptions extends Options
      * Set key used to create the cache file name
      *
      * @param string $configCacheKey the value to be set
-     * @return ManagerOptions
+     * @return ListenerOptions
      */
     public function setConfigCacheKey($configCacheKey)
     {
@@ -128,7 +128,7 @@ class ListenerOptions extends Options
      * Set the path where cache files can be stored
      *
      * @param string $cacheDir the value to be set
-     * @return ManagerOptions
+     * @return ListenerOptions
      */
     public function setCacheDir($cacheDir)
     {

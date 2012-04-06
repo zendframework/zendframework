@@ -19,12 +19,10 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Ldap\Ldif;
-use Zend\Ldap\Ldif;
 
+use Zend\Ldap\Ldif,
+    ZendTest\Ldap as TestLdap;
 
 /**
  * @category   Zend
@@ -35,7 +33,7 @@ use Zend\Ldap\Ldif;
  * @group      Zend_Ldap
  * @group      Zend_Ldap_Ldif
  */
-class SimpleDecoderTest extends \ZendTest\Ldap\TestCase
+class SimpleDecoderTest extends TestLdap\AbstractTestCase
 {
     public function testDecodeSimpleSingleItem()
     {
@@ -48,7 +46,7 @@ attr3: foo";
             'dn'          => 'cn=test3,ou=example,dc=cno',
             'objectclass' => array('oc1'),
             'attr3'       => array('foo'));
-        $actual = Ldif\Encoder::decode($data);
+        $actual   = Ldif\Encoder::decode($data);
         $this->assertEquals($expected, $actual);
     }
 
@@ -73,11 +71,11 @@ verylong: fhu08rhvt7b478vt5hv78h45nfgt45h78t34hhhhhhhhhv5bg8
             'attr2'       => array('1234', 'baz'),
             'attr3'       => array('foo', 'bar'),
             'cn'          => array('test blabla'),
-            'verylong'    => array('fhu08rhvt7b478vt5hv78h45nfgt45h78t34hhhhhhhhhv5bg8' .
-                                    'h6ttttttttt3489t57nhvgh4788trhg8999vnhtgthgui65hgb' .
-                                    '5789thvngwr789cghm738'),
+            'verylong'    => array('fhu08rhvt7b478vt5hv78h45nfgt45h78t34hhhhhhhhhv5bg8'
+                                 . 'h6ttttttttt3489t57nhvgh4788trhg8999vnhtgthgui65hgb'
+                                 . '5789thvngwr789cghm738'),
         );
-        $actual = Ldif\Encoder::decode($data);
+        $actual   = Ldif\Encoder::decode($data);
         $this->assertEquals($expected, $actual);
     }
 
@@ -107,7 +105,7 @@ cn:: dGVzdCDDtsOkw7w=";
             'attr6'       => array(':badinitchar', '<badinitchar'),
             'cn'          => array('test öäü'),
         );
-        $actual = Ldif\Encoder::decode($data);
+        $actual   = Ldif\Encoder::decode($data);
         $this->assertEquals($expected, $actual);
     }
 
@@ -129,7 +127,7 @@ attr3: bar";
             'attr2'       => array('1234', 'baz'),
             'attr3'       => array('foo', 'bar'),
         );
-        $actual = Ldif\Encoder::decode($data);
+        $actual   = Ldif\Encoder::decode($data);
         $this->assertEquals($expected, $actual);
     }
 
@@ -174,7 +172,7 @@ telephonenumber: +1 408 555 1212";
                 'telephonenumber' => array('+1 408 555 1212'),
             ),
         );
-        $actual = Ldif\Encoder::decode($data);
+        $actual   = Ldif\Encoder::decode($data);
         $this->assertEquals($expected, $actual);
     }
 
@@ -196,17 +194,17 @@ description:Babs is a big sailing fan, and travels extensively in sea
  rch of perfect sailing conditions.
 title:Product Manager, Rod and Reel Division";
         $expected = array(
-            'dn'              => 'cn=Barbara Jensen, ou=Product Development, dc=airius, dc=com',
-            'objectclass'     => array('top', 'person', 'organizationalPerson'),
-            'cn'              => array('Barbara Jensen', 'Barbara J Jensen', 'Babs Jensen'),
-            'sn'              => array('Jensen'),
-            'uid'             => array('bjensen'),
-            'telephonenumber' => array('+1 408 555 1212'),
-            'description'     => array('Babs is a big sailing fan, and travels extensively' .
-                                        ' in search of perfect sailing conditions.'),
+            'dn'                => 'cn=Barbara Jensen, ou=Product Development, dc=airius, dc=com',
+            'objectclass'       => array('top', 'person', 'organizationalPerson'),
+            'cn'                => array('Barbara Jensen', 'Barbara J Jensen', 'Babs Jensen'),
+            'sn'                => array('Jensen'),
+            'uid'               => array('bjensen'),
+            'telephonenumber'   => array('+1 408 555 1212'),
+            'description'       => array('Babs is a big sailing fan, and travels extensively'
+                                       . ' in search of perfect sailing conditions.'),
             'title'             => array('Product Manager, Rod and Reel Division'),
         );
-        $actual = Ldif\Encoder::decode($data);
+        $actual   = Ldif\Encoder::decode($data);
         $this->assertEquals($expected, $actual);
     }
 
@@ -234,12 +232,12 @@ description:: V2hhdCBhIGNhcmVmdWwgcmVhZGVyIHlvdSBhcmUhICBUaGlzIHZhbHVl
             'sn'              => array('Jensen'),
             'uid'             => array('gernj'),
             'telephonenumber' => array('+1 408 555 1212'),
-            'description'     => array('What a careful reader you are!' .
-                                        '  This value is base-64-encoded because it has a ' .
-                                        'control character in it (a CR).' . "\r" .
-                                        '  By the way, you should really get out more.'),
+            'description'     => array('What a careful reader you are!'
+                                     . '  This value is base-64-encoded because it has a '
+                                     . 'control character in it (a CR).' . "\r"
+                                     . '  By the way, you should really get out more.'),
         );
-        $actual = Ldif\Encoder::decode($data);
+        $actual   = Ldif\Encoder::decode($data);
         $this->assertEquals($expected, $actual);
     }
 
@@ -313,7 +311,8 @@ title;lang-en: Sales, Director";
         $this->assertEquals('uid=rogasawara,ou=営業部,o=Airius', $actual[1]['dn']);
         $this->assertEquals('{SHA}O3HSv1MusyL4kTjP+HKI5uxuNoM=', $actual[1]['userpassword'][0]);
         $this->assertEquals(array('top', 'person', 'organizationalPerson', 'inetOrgPerson'),
-            $actual[1]['objectclass']);
+            $actual[1]['objectclass']
+        );
         $this->assertEquals('rogasawara', $actual[1]['uid'][0]);
         $this->assertEquals('rogasawara@airius.co.jp', $actual[1]['mail'][0]);
         $this->assertEquals('ロドニー', $actual[1]['givenname;lang-ja'][0]);
@@ -364,23 +363,23 @@ verylong: fhu08rhvt7b478vt5hv78h45nfgt45h78t34hhhhhhhhhv5bg8
         $expected = array(
             'dn'          => 'cn=test blabla,ou=example,dc=cno',
             'objectclass' => array('top', 'person', 'organizationalPerson'),
-            'description' => array('What a careful reader you are!' .
-                                    '  This value is base-64-encoded because it has a ' .
-                                    'control character in it (a CR).' . "\r" .
-                                    '  By the way, you should really get out more.'),
-            'verylong'    => array('fhu08rhvt7b478vt5hv78h45nfgt45h78t34hhhhhhhhhv5bg8' .
-                                    'h6ttttttttt3489t57nhvgh4788trhg8999vnhtgthgui65hgb' .
-                                    '5789thvngwr789cghm738'),
+            'description' => array('What a careful reader you are!'
+                                 . '  This value is base-64-encoded because it has a '
+                                 . 'control character in it (a CR).' . "\r"
+                                 . '  By the way, you should really get out more.'),
+            'verylong'    => array('fhu08rhvt7b478vt5hv78h45nfgt45h78t34hhhhhhhhhv5bg8'
+                                 . 'h6ttttttttt3489t57nhvgh4788trhg8999vnhtgthgui65hgb'
+                                 . '5789thvngwr789cghm738'),
         );
-        $actual = Ldif\Encoder::decode($data);
+        $actual   = Ldif\Encoder::decode($data);
         $this->assertEquals($expected, $actual);
     }
 
     public function testRoundtripEncoding()
     {
-        $node = $this->_createTestNode();
-        $ldif = $node->toLdif();
-        $data = Ldif\Encoder::decode($ldif);
+        $node     = $this->createTestNode();
+        $ldif     = $node->toLdif();
+        $data     = Ldif\Encoder::decode($ldif);
         $expected = array_merge(array('dn' => $node->getDnString()), $node->getData(false));
         $this->assertEquals($expected, $data);
     }

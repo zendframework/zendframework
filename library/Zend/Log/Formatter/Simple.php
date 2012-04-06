@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Log\Formatter;
 
 use Zend\Log\Formatter,
@@ -43,7 +40,7 @@ class Simple extends AbstractFormatter
      */
     protected $_format;
 
-    const DEFAULT_FORMAT = '%timestamp% %priorityName% (%priority%): %message%';
+    const DEFAULT_FORMAT = '%timestamp% %priorityName% (%priority%): %message% %info%';
 
     /**
      * Class constructor
@@ -66,10 +63,10 @@ class Simple extends AbstractFormatter
     }
 
     /**
-	 * Factory for Zend_Log_Formatter_Simple classe
-	 *
-	 * @param array|Config $options
-	 * @return \Zend\Log\Formatter\Simple
+     * Factory for Zend_Log_Formatter_Simple classe
+     *
+     * @param  array|Config $options
+     * @return \Zend\Log\Formatter\Simple
      */
     public static function factory($options = array())
     {
@@ -97,6 +94,9 @@ class Simple extends AbstractFormatter
     {
         $output = $this->_format;
 
+        if (!isset($event['info'])) {
+            $event['info'] = '';
+        }
         foreach ($event as $name => $value) {
             if ((is_object($value) && !method_exists($value,'__toString'))
                 || is_array($value)

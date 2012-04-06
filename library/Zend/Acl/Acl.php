@@ -18,9 +18,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Acl;
 
 /**
@@ -1002,7 +999,7 @@ class Acl
                 ($this->_isAllowedRole instanceof Role) ? $this->_isAllowedRole : $role,
                 ($this->_isAllowedResource instanceof Resource) ? $this->_isAllowedResource : $resource,
                 $this->_isAllowedPrivilege
-                );
+            );
         }
 
         if (null === $rule['assert'] || $assertionValue) {

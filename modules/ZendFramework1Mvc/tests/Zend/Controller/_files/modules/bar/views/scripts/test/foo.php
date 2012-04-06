@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Controller\_files\modules\bar\views\scripts\test;
 
 echo 'Rendered test/foo.php';

@@ -117,7 +117,7 @@ class In implements PredicateInterface
      *
      * @return array
      */
-    public function getWhereParts()
+    public function getExpressionData()
     {
         $values = $this->getValueSet();
         $types  = array_fill(0, count($values), self::TYPE_VALUE);

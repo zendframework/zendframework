@@ -18,9 +18,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\OAuth\Token;
 use Zend\OAuth\Http,
     Zend\OAuth\Exception as OAuthException;

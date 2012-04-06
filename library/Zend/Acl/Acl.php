@@ -130,7 +130,7 @@ class Acl
         }
 
         if (!$role instanceof Role) {
-            throw new Exception\InvalidArgumentException('addRole() expects $role to be of type Zend_Acl_Role_Interface');
+            throw new Exception\InvalidArgumentException('addRole() expects $role to be of type Zend\Acl\Role');
         }
 
 
@@ -264,7 +264,7 @@ class Acl
         }
 
         if (!$resource instanceof Resource) {
-            throw new Exception\InvalidArgumentException('addResource() expects $resource to be of type Zend_Acl_Resource_Interface');
+            throw new Exception\InvalidArgumentException('addResource() expects $resource to be of type Zend\Acl\Resource');
         }
 
         $resourceId = $resource->getResourceId();

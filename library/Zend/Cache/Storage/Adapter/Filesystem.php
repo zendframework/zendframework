@@ -55,6 +55,21 @@ class Filesystem extends AbstractAdapter
     protected $stmtMatch = null;
 
     /**
+     * An identity for the last filespec
+     * (cache directory + namespace prefix + key + directory level)
+     *
+     * @var string
+     */
+    protected $lastFileSpecId = '';
+
+    /**
+     * The last used filespec
+     *
+     * @var string
+     */
+    protected $lastFileSpec = '';
+
+    /**
      * Set options.
      *
      * @param  array|Traversable|FilesystemOptions $options
@@ -1600,17 +1615,24 @@ class Filesystem extends AbstractAdapter
         $baseOptions = $this->getOptions();
         $prefix      = $normalizedOptions['namespace'] . $baseOptions->getNamespaceSeparator();
 
-        $path  = $baseOptions->getCacheDir();
+        $path  = $baseOptions->getCacheDir() . \DIRECTORY_SEPARATOR;
         $level = $baseOptions->getDirLevel();
-        if ( $level > 0 ) {
-            // create up to 256 directories per directory level
-            $hash = md5($normalizedKey);
-            for ($i = 0, $max = ($level * 2); $i < $max; $i+= 2) {
-                $path .= \DIRECTORY_SEPARATOR . $prefix . $hash[$i] . $hash[$i+1];
+
+        $fileSpecId = $path . $prefix . $normalizedKey . '/' . $level;
+        if ($this->lastFileSpecId !== $fileSpecId) {
+            if ($level > 0) {
+                // create up to 256 directories per directory level
+                $hash = md5($normalizedKey);
+                for ($i = 0, $max = ($level * 2); $i < $max; $i+= 2) {
+                    $path .= $prefix . $hash[$i] . $hash[$i+1] . \DIRECTORY_SEPARATOR;
+                }
             }
+
+            $this->lastFileSpecId = $fileSpecId;
+            $this->lastFileSpec   = $path . $prefix . $normalizedKey;
         }
 
-        return $path . \DIRECTORY_SEPARATOR . $prefix . $normalizedKey;
+        return $this->lastFileSpec;
     }
 
     /**

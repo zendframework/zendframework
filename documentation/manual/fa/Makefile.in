@@ -101,7 +101,7 @@ pdf-print-volume1: pdf-dir $(PDF_XSL) $(MANUAL_PRINT1_XML)
 
 pdf-print-volume2: pdf-dir $(PDF_XSL) $(MANUAL_PRINT2_XML)
 	@echo "Rendering volume 2 of the PDF manual with $(FOP)..."
-	$(XMLLINT) --xinclude --output _temp_manual_2.xml $(MANUAL_PRINT1_XML)
+	$(XMLLINT) --xinclude --output _temp_manual_2.xml $(MANUAL_PRINT2_XML)
 	$(XSLTPROC) --xinclude --output ZendFramework.fo $(PDF_XSL) _temp_manual_2.xml
 	"$(FOP)" -fo ZendFramework.fo -pdf pdf/ZendFrameworkVolume2.pdf
 

@@ -22,7 +22,7 @@
 namespace ZendTest\Ldap;
 
 use Zend\Ldap,
-    Zend\Ldap\Exception\LdapException;
+    Zend\Ldap\Exception;
 
 /* Note: The ldap_connect function does not actually try to connect. This
  * is why many tests attempt to bind with invalid credentials. If the
@@ -93,7 +93,7 @@ class BindTest extends \PHPUnit_Framework_TestCase
         try {
             $ldap->bind();
             $this->fail('Expected exception for empty options');
-        } catch (LdapException $zle) {
+        } catch (Exception\LdapException $zle) {
             $this->assertContains('A host parameter is required', $zle->getMessage());
         }
     }
@@ -106,7 +106,7 @@ class BindTest extends \PHPUnit_Framework_TestCase
         $ldap = new Ldap\Ldap($options);
         try {
             $ldap->bind();
-        } catch (LdapException $zle) {
+        } catch (Exception\LdapException $zle) {
             // or I guess the server doesn't allow unauthenticated binds
             $this->assertContains('unauthenticated bind', $zle->getMessage());
         }
@@ -122,7 +122,7 @@ class BindTest extends \PHPUnit_Framework_TestCase
         try {
             $ldap->bind('invalid', 'ignored');
             $this->fail('Expected exception for baseDn missing');
-        } catch (LdapException $zle) {
+        } catch (Exception\LdapException $zle) {
             $this->assertContains('Base DN not set', $zle->getMessage());
         }
     }
@@ -138,7 +138,7 @@ class BindTest extends \PHPUnit_Framework_TestCase
         try {
             $ldap->bind('invalid', 'ignored');
             $this->fail('Expected exception for missing accountDomainName');
-        } catch (LdapException $zle) {
+        } catch (Exception\LdapException $zle) {
             $this->assertContains('Option required: accountDomainName', $zle->getMessage());
         }
     }
@@ -181,7 +181,7 @@ class BindTest extends \PHPUnit_Framework_TestCase
         try {
             $ldap->bind($this->altUsername, 'invalid');
             $this->fail('Expected exception not thrown');
-        } catch (LdapException $zle) {
+        } catch (Exception\LdapException $zle) {
             $this->assertContains('Invalid credentials', $zle->getMessage());
         }
     }
@@ -198,7 +198,7 @@ class BindTest extends \PHPUnit_Framework_TestCase
         try {
             $ldap->bind($this->principalName);
             $this->fail('Expected exception not thrown');
-        } catch (LdapException $zle) {
+        } catch (Exception\LdapException $zle) {
             /* Note that if your server actually allows anonymous binds this test will fail.
              */
             $this->assertContains('Failed to retrieve DN', $zle->getMessage());
@@ -213,7 +213,7 @@ class BindTest extends \PHPUnit_Framework_TestCase
         try {
             $ldap->bind($this->altUsername, '');
             $this->fail('Expected exception for empty password');
-        } catch (LdapException $zle) {
+        } catch (Exception\LdapException $zle) {
             $this->assertContains('Empty password not allowed - see allowEmptyPassword option.',
                 $zle->getMessage()
             );
@@ -223,7 +223,7 @@ class BindTest extends \PHPUnit_Framework_TestCase
         $ldap                          = new Ldap\Ldap($options);
         try {
             $ldap->bind($this->altUsername, '');
-        } catch (LdapException $zle) {
+        } catch (Exception\LdapException $zle) {
             if ($zle->getMessage() ===
                 'Empty password not allowed - see allowEmptyPassword option.'
             ) {
@@ -248,7 +248,7 @@ class BindTest extends \PHPUnit_Framework_TestCase
         try {
             $ldap->bind();
             $this->fail('Expected exception for empty password');
-        } catch (LdapException $zle) {
+        } catch (Exception\LdapException $zle) {
             $this->assertContains('Binding requires username in DN form',
                 $zle->getMessage()
             );

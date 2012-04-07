@@ -22,7 +22,7 @@
 namespace ZendTest\Ldap;
 
 use Zend\Ldap,
-    Zend\Ldap\Exception\LdapException;
+    Zend\Ldap\Exception;
 
 /**
  * @category   Zend
@@ -46,7 +46,7 @@ class CrudTest extends AbstractOnlineTestCase
             $this->assertEquals(1, $this->getLDAP()->count('ou=TestCreated'));
             $this->getLDAP()->delete($dn);
             $this->assertEquals(0, $this->getLDAP()->count('ou=TestCreated'));
-        } catch (LdapException $e) {
+        } catch (Exception\LdapException $e) {
             if ($this->getLDAP()->exists($dn)) {
                 $this->getLDAP()->delete($dn);
             }
@@ -71,7 +71,7 @@ class CrudTest extends AbstractOnlineTestCase
             $entry = $this->getLDAP()->getEntry($dn);
             $this->getLDAP()->delete($dn);
             $this->assertEquals('mylocation2', $entry['l'][0]);
-        } catch (LdapException $e) {
+        } catch (Exception\LdapException $e) {
             if ($this->getLDAP()->exists($dn)) {
                 $this->getLDAP()->delete($dn);
             }
@@ -108,16 +108,14 @@ class CrudTest extends AbstractOnlineTestCase
             $exThrown = false;
             try {
                 $this->getLDAP()->update($dn, $entry);
-            }
-            catch (LdapException $e) {
+            } catch (Exception\LdapException $e) {
                 $exThrown = true;
             }
             $this->getLDAP()->delete($dn);
             if (!$exThrown) {
                 $this->fail('no exception thrown while illegaly updating entry');
             }
-        }
-        catch (LdapException $e) {
+        } catch (Exception\LdapException $e) {
             $this->fail($e->getMessage());
         }
     }
@@ -157,7 +155,7 @@ class CrudTest extends AbstractOnlineTestCase
         $exCaught = false;
         try {
             $this->getLDAP()->delete($topDn, false);
-        } catch (LdapException $e) {
+        } catch (Exception\LdapException $e) {
             $exCaught = true;
         }
         $this->assertTrue($exCaught,
@@ -181,7 +179,7 @@ class CrudTest extends AbstractOnlineTestCase
             $entry = $this->getLDAP()->getEntry($dn);
             $this->getLDAP()->delete($dn);
             $this->assertEquals('mylocation1', $entry['l'][0]);
-        } catch (LdapException $e) {
+        } catch (Exception\LdapException $e) {
             if ($this->getLDAP()->exists($dn)) {
                 $this->getLDAP()->delete($dn);
             }
@@ -278,8 +276,7 @@ class CrudTest extends AbstractOnlineTestCase
             $this->getLDAP()->add($dn, $data);
             $this->assertEquals(1, $this->getLDAP()->count('ou=TestCreated'));
             $this->getLDAP()->delete($dn);
-        }
-        catch (LdapException $e) {
+        } catch (Exception\LdapException $e) {
             $this->fail($e->getMessage());
         }
     }
@@ -301,8 +298,7 @@ class CrudTest extends AbstractOnlineTestCase
             $entry = $this->getLDAP()->getEntry($dn);
             $this->getLDAP()->delete($dn);
             $this->assertEquals('mylocation2', $entry['l'][0]);
-        }
-        catch (LdapException $e) {
+        } catch (Exception\LdapException $e) {
             $this->fail($e->getMessage());
         }
     }
@@ -321,7 +317,7 @@ class CrudTest extends AbstractOnlineTestCase
             $entry = $this->getLDAP()->getEntry($dn);
             $this->getLDAP()->delete($dn);
             $this->assertEquals('mylocation1', $entry['l'][0]);
-        } catch (LdapException $e) {
+        } catch (Exception\LdapException $e) {
             if ($this->getLDAP()->exists($dn)) {
                 $this->getLDAP()->delete($dn);
             }
@@ -349,7 +345,7 @@ class CrudTest extends AbstractOnlineTestCase
             $this->assertEquals('domain', $entry['associateddomain'][0]);
             $this->assertContains('organizationalUnit', $entry['objectclass']);
             $this->assertContains('domainRelatedObject', $entry['objectclass']);
-        } catch (LdapException $e) {
+        } catch (Exception\LdapException $e) {
             if ($this->getLDAP()->exists($dn)) {
                 $this->getLDAP()->delete($dn);
             }
@@ -378,7 +374,7 @@ class CrudTest extends AbstractOnlineTestCase
             $this->assertArrayNotHasKey('associateddomain', $entry);
             $this->assertContains('organizationalUnit', $entry['objectclass']);
             $this->assertNotContains('domainRelatedObject', $entry['objectclass']);
-        } catch (LdapException $e) {
+        } catch (Exception\LdapException $e) {
             if ($this->getLDAP()->exists($dn)) {
                 $this->getLDAP()->delete($dn);
             }
@@ -401,7 +397,7 @@ class CrudTest extends AbstractOnlineTestCase
             $this->getLdap()->delete($dn);
             $this->assertEquals(array('TestCreated'), $entry['ou']);
 
-        } catch (LdapException $e) {
+        } catch (Exception\LdapException $e) {
             if ($this->getLdap()->exists($dn)) {
                 $this->getLdap()->delete($dn);
             }
@@ -425,7 +421,7 @@ class CrudTest extends AbstractOnlineTestCase
             $this->getLdap()->delete($dn);
             $this->assertEquals(array('TestCreated', 'SecondOu'), $entry['ou']);
 
-        } catch (LdapException $e) {
+        } catch (Exception\LdapException $e) {
             if ($this->getLdap()->exists($dn)) {
                 $this->getLdap()->delete($dn);
             }
@@ -449,7 +445,7 @@ class CrudTest extends AbstractOnlineTestCase
             $this->getLdap()->delete($dn);
             $this->assertEquals(array('TestCreated', 'SecondOu'), $entry['ou']);
 
-        } catch (LdapException $e) {
+        } catch (Exception\LdapException $e) {
             if ($this->getLdap()->exists($dn)) {
                 $this->getLdap()->delete($dn);
             }
@@ -477,7 +473,7 @@ class CrudTest extends AbstractOnlineTestCase
             $this->getLdap()->delete($dn);
             $this->assertEquals(array('TestCreated', 'SecondOu'), $entry['ou']);
 
-        } catch (LdapException $e) {
+        } catch (Exception\LdapException $e) {
             if ($this->getLdap()->exists($dn)) {
                 $this->getLdap()->delete($dn);
             }
@@ -505,7 +501,7 @@ class CrudTest extends AbstractOnlineTestCase
             $this->getLdap()->delete($dn);
             $this->assertEquals(array('TestCreated', 'SecondOu'), $entry['ou']);
 
-        } catch (LdapException $e) {
+        } catch (Exception\LdapException $e) {
             if ($this->getLdap()->exists($dn)) {
                 $this->getLdap()->delete($dn);
             }

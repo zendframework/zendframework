@@ -22,7 +22,7 @@
 namespace ZendTest\Ldap;
 
 use Zend\Ldap,
-    Zend\Ldap\Exception\LdapException,
+    Zend\Ldap\Exception,
     Zend\Ldap\Node;
 
 /**
@@ -61,7 +61,7 @@ class ChangePasswordTest extends AbstractOnlineTestCase
 
             $this->getLDAP()->bind();
             $this->getLDAP()->delete($dn);
-        } catch (LdapException $e) {
+        } catch (Exception\LdapException $e) {
             $this->getLDAP()->bind();
             if ($this->getLDAP()->exists($dn)) {
                 $this->getLDAP()->delete($dn);
@@ -103,7 +103,7 @@ class ChangePasswordTest extends AbstractOnlineTestCase
             try {
                 $this->getLDAP()->bind($dn, $password);
                 $this->fail('Expected exception not thrown');
-            } catch (LdapException $zle) {
+            } catch (Exception\LdapException $zle) {
                 $message = $zle->getMessage();
                 $this->assertTrue(strstr($message, 'Invalid credentials')
                         || strstr($message, 'Server is unwilling to perform')
@@ -114,7 +114,7 @@ class ChangePasswordTest extends AbstractOnlineTestCase
 
             $this->getLDAP()->bind();
             $this->getLDAP()->delete($dn);
-        } catch (LdapException $e) {
+        } catch (Exception\LdapException $e) {
             $this->getLDAP()->bind();
             if ($this->getLDAP()->exists($dn)) {
                 $this->getLDAP()->delete($dn);
@@ -156,7 +156,7 @@ class ChangePasswordTest extends AbstractOnlineTestCase
 
             $this->getLDAP()->bind();
             $this->getLDAP()->delete($dn);
-        } catch (LdapException $e) {
+        } catch (Exception\LdapException $e) {
             $this->getLDAP()->bind();
             if ($this->getLDAP()->exists($dn)) {
                 $this->getLDAP()->delete($dn);
@@ -204,7 +204,7 @@ class ChangePasswordTest extends AbstractOnlineTestCase
             try {
                 $this->getLDAP()->bind($dn, $password);
                 $this->fail('Expected exception not thrown');
-            } catch (LdapException $zle) {
+            } catch (Exception\LdapException $zle) {
                 $message = $zle->getMessage();
                 $this->assertTrue(strstr($message, 'Invalid credentials')
                         || strstr($message, 'Server is unwilling to perform')
@@ -215,7 +215,7 @@ class ChangePasswordTest extends AbstractOnlineTestCase
 
             $this->getLDAP()->bind();
             $this->getLDAP()->delete($dn);
-        } catch (LdapException $e) {
+        } catch (Exception\LdapException $e) {
             $this->getLDAP()->bind();
             if ($this->getLDAP()->exists($dn)) {
                 $this->getLDAP()->delete($dn);

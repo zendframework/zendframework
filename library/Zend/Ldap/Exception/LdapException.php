@@ -144,27 +144,4 @@ class LdapException extends \Exception implements Exception
 
         parent::__construct($message, $code);
     }
-
-
-    /**
-     * @deprecated not necessary any more - will be removed
-     * @param Ldap $ldap A Zend\Ldap\Ldap object
-     * @return int The current error code for the resource
-     */
-    public static function getLDAPCode(LDAP $ldap = null)
-    {
-        if ($ldap !== null) {
-            return $ldap->getLastErrorCode();
-        }
-        return 0;
-    }
-
-    /**
-     * @deprecated will be removed
-     * @return int The current error code for this exception
-     */
-    public function getErrorCode()
-    {
-        return $this->getCode();
-    }
 }

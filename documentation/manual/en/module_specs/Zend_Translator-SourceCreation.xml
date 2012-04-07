@@ -19,8 +19,6 @@
     <section xml:id="zend.translator.sourcecreation.array"><title>Creating Array source files</title>
 
         <para>
-
-        <para>
             Array source files are plain arrays. But you have to define them
             manually since there is no tool to aid this.
             But because they are so simple, it's the fastest way to look up

@@ -8,8 +8,7 @@
     <!ENTITY % language-snippets.default SYSTEM "../en/ref/language-snippets.xml">
     %language-snippets.default;
 ]>
-<book xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="manual"
-    xml:lang="&lang;">
+<book xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="manual" xml:lang="&lang;">
     <info>
         <title>&book.title;</title>
         <subtitle>&book.subtitle;</subtitle>

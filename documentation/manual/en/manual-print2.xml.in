@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE book [
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML 5//EN" "@DOCBOOK_DTD@" [
     <!-- Add translated specific definitions and snippets -->
     <!ENTITY % language-snippets SYSTEM "./ref/language-snippets.xml">
     %language-snippets;
@@ -18,24 +18,36 @@
             <year>2005-<?dbtimestamp format="Y"?></year>
             <holder>
                 Zend Technologies Inc.
-                (<uri xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.zend.com">http://www.zend.com</uri>)
+                (<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.zend.com">http://www.zend.com</link>)
             </holder>
         </copyright>
         <!--
         A Title page graphic can be included like this
             <mediaobject>
               <imageobject>
-                <imagedata fileref="../web/images/foo.jpg"/>
+                <imagedata fileref="../web/images/foo.jpg" />
               </imageobject>
             </mediaobject>
         -->
     </info>
 
-    <chapter xml:id="introduction">
+    <part xml:id="introduction">
         <title>&chapter.introduction.title;</title>
-        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="ref/overview.xml" parse="xml"/>
-        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="ref/installation.xml" parse="xml"/>
-    </chapter>
+
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="ref/overview.xml" parse="xml">
+            <xi:fallback>
+                <xi:include href="../en/ref/overview.xml" parse="xml"/>
+            </xi:fallback>
+        </xi:include>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="ref/installation.xml" parse="xml">
+            <xi:fallback>
+                <xi:include href="../en/ref/installation.xml" parse="xml"/>
+            </xi:fallback>
+        </xi:include>
+    </part>
+
+    <part xml:id="reference">
+        <title>&part.reference.title;</title>
 
         <!--<chapter xml:id="zend.locale"><title>Zend_Locale</title>-->
             <!---->
@@ -1169,19 +1181,120 @@
                 <!--</xi:fallback>-->
             <!--</xi:include>-->
         <!--</chapter>-->
-<!--
-    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="ref/requirements.xml" parse="xml"/>
-    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="ref/coding_standard.xml" parse="xml"/>
--->
-<!--
-    <appendix xml:id="performance">
-        <title>&appendix.performance.title;</title>
-        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="ref/performance-introduction.xml" parse="xml"/>
-        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="ref/performance-classloading.xml" parse="xml"/>
-        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="ref/performance-database.xml" parse="xml"/>
-        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="ref/performance-localization.xml" parse="xml"/>
-        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="ref/performance-view.xml" parse="xml"/>
-    </appendix>
--->
-    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="ref/copyrights.xml" parse="xml"/>
+    </part>
+
+    <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="ref/requirements.xml" parse="xml">-->
+        <!--<xi:fallback>-->
+                <!--<xi:include href="../en/ref/requirements.xml" parse="xml"/>-->
+            <!--</xi:fallback>-->
+    <!--</xi:include>-->
+
+    <!--<appendix xml:id="migration">-->
+        <!--<title>&appendix.migration.title;</title>-->
+        <!---->
+        <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="ref/migration-110.xml" parse="xml">-->
+            <!--<xi:fallback>-->
+                <!--<xi:include href="../en/ref/migration-110.xml" parse="xml"/>-->
+            <!--</xi:fallback>-->
+        <!--</xi:include>-->
+        <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="ref/migration-19.xml" parse="xml">-->
+            <!--<xi:fallback>-->
+                <!--<xi:include href="../en/ref/migration-19.xml" parse="xml"/>-->
+            <!--</xi:fallback>-->
+        <!--</xi:include>-->
+        <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="ref/migration-18.xml" parse="xml">-->
+            <!--<xi:fallback>-->
+                <!--<xi:include href="../en/ref/migration-18.xml" parse="xml"/>-->
+            <!--</xi:fallback>-->
+        <!--</xi:include>-->
+        <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="ref/migration-17.xml" parse="xml">-->
+            <!--<xi:fallback>-->
+                <!--<xi:include href="../en/ref/migration-17.xml" parse="xml"/>-->
+            <!--</xi:fallback>-->
+        <!--</xi:include>-->
+        <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="ref/migration-16.xml" parse="xml">-->
+            <!--<xi:fallback>-->
+                <!--<xi:include href="../en/ref/migration-16.xml" parse="xml"/>-->
+            <!--</xi:fallback>-->
+        <!--</xi:include>-->
+        <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="ref/migration-15.xml" parse="xml">-->
+            <!--<xi:fallback>-->
+                <!--<xi:include href="../en/ref/migration-15.xml" parse="xml"/>-->
+            <!--</xi:fallback>-->
+        <!--</xi:include>-->
+        <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="ref/migration-10.xml" parse="xml">-->
+            <!--<xi:fallback>-->
+                <!--<xi:include href="../en/ref/migration-10.xml" parse="xml"/>-->
+            <!--</xi:fallback>-->
+        <!--</xi:include>-->
+        <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="ref/migration-09.xml" parse="xml">-->
+            <!--<xi:fallback>-->
+                <!--<xi:include href="../en/ref/migration-09.xml" parse="xml"/>-->
+            <!--</xi:fallback>-->
+        <!--</xi:include>-->
+        <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="ref/migration-08.xml" parse="xml">-->
+            <!--<xi:fallback>-->
+                <!--<xi:include href="../en/ref/migration-08.xml" parse="xml"/>-->
+            <!--</xi:fallback>-->
+        <!--</xi:include>-->
+        <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="ref/migration-06.xml" parse="xml">-->
+            <!--<xi:fallback>-->
+                <!--<xi:include href="../en/ref/migration-06.xml" parse="xml"/>-->
+            <!--</xi:fallback>-->
+        <!--</xi:include>-->
+    <!--</appendix>-->
+
+    <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="ref/coding_standard.xml" parse="xml">-->
+        <!--<xi:fallback>-->
+            <!--<xi:include href="../en/ref/coding_standard.xml" parse="xml"/>-->
+        <!--</xi:fallback>-->
+    <!--</xi:include>-->
+
+    <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="ref/documentation-standard.xml" parse="xml">-->
+        <!--<xi:fallback>-->
+            <!--<xi:include href="../en/ref/documentation-standard.xml" parse="xml"/>-->
+        <!--</xi:fallback>-->
+    <!--</xi:include>-->
+
+    <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="ref/project-structure.xml" parse="xml">-->
+        <!--<xi:fallback>-->
+            <!--<xi:include href="../en/ref/project-structure.xml" parse="xml"/>-->
+        <!--</xi:fallback>-->
+    <!--</xi:include>-->
+
+    <!--<appendix xml:id="performance">-->
+        <!--<title>&appendix.performance.title;</title>-->
+        <!---->
+        <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="ref/performance-introduction.xml" parse="xml">-->
+            <!--<xi:fallback>-->
+                <!--<xi:include href="../en/ref/performance-introduction.xml" parse="xml"/>-->
+            <!--</xi:fallback>-->
+        <!--</xi:include>-->
+        <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="ref/performance-classloading.xml" parse="xml">-->
+            <!--<xi:fallback>-->
+                <!--<xi:include href="../en/ref/performance-classloading.xml" parse="xml"/>-->
+            <!--</xi:fallback>-->
+        <!--</xi:include>-->
+        <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="ref/performance-database.xml" parse="xml">-->
+            <!--<xi:fallback>-->
+                <!--<xi:include href="../en/ref/performance-database.xml" parse="xml"/>-->
+            <!--</xi:fallback>-->
+        <!--</xi:include>-->
+        <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="ref/performance-localization.xml" parse="xml">-->
+            <!--<xi:fallback>-->
+                <!--<xi:include href="../en/ref/performance-localization.xml" parse="xml"/>-->
+            <!--</xi:fallback>-->
+        <!--</xi:include>-->
+        <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="ref/performance-view.xml" parse="xml">-->
+            <!--<xi:fallback>-->
+                <!--<xi:include href="../en/ref/performance-view.xml" parse="xml"/>-->
+            <!--</xi:fallback>-->
+        <!--</xi:include>-->
+    <!--</appendix>-->
+
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="ref/copyrights.xml" parse="xml">
+        <xi:fallback>
+                <xi:include href="../en/ref/copyrights.xml" parse="xml"/>
+            </xi:fallback>
+    </xi:include>
 </book>

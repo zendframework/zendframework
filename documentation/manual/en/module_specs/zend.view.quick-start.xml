@@ -4,10 +4,10 @@
     xmlns="http://docbook.org/ns/docbook" version="5.0" 
     xmlns:xlink="http://www.w3.org/1999/xlink"
     xml:id="zend.view.quick-start">
-    <info><title>Zend\View Quick Start</title></info>
+    <title>Zend\View Quick Start</title>
  
     <section xml:id="zend.view.quick-start.intro">
-        <info><title>Overview</title></info>
+        <title>Overview</title>
 
         <para>
             <classname>Zend\View</classname> provides the "View" layer of Zend
@@ -89,7 +89,7 @@
     </section>
 
     <section xml:id="zend.view.quick-start.usage">
-        <info><title>Usage</title></info>
+        <title>Usage</title>
 
         <para>
             This manual section is designed to show you typical usage patterns
@@ -101,7 +101,7 @@
         </para>
 
         <example xml:id="zend.view.quick-start.usage.config">
-            <info><title>Configuration</title></info>
+            <title>Configuration</title>
 
             <para>
                 The default configuration for the framework will typically work
@@ -235,7 +235,7 @@ return array(
         </example>
 
         <example xml:id="zend.view.quick-start.usage.controllers">
-            <info><title>Controllers and View Models</title></info>
+            <title>Controllers and View Models</title>
 
             <para>
                 <classname>Zend\View\View</classname> consumes
@@ -488,7 +488,7 @@ class ArticleController extends ActionController
         </example>
         
         <example xml:id="zend.view.quick-start.usage.layouts">
-            <info><title>Dealing with Layouts</title></info>
+            <title>Dealing with Layouts</title>
 
             <para>
                 Most sites enforce a cohesive look-and-feel, which we typically
@@ -777,8 +777,8 @@ class Module
         </example>
 
         <example xml:id="zend.view.quick-start.usage.strategies">
-            <info><title>Creating and Registering Alternate Rendering and
-                    Response Strategies</title></info>
+            <title>Creating and Registering Alternate Rendering and
+                    Response Strategies</title>
 
             <para>
                 <classname>Zend\View\View</classname> does very little. Its

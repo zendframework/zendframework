@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.amf.server"><info><title>Zend_Amf_Server</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.amf.server"><title>Zend_Amf_Server</title>
     
 
     <para>
@@ -9,7 +9,7 @@
         <acronym>API</acronym>, providing an easy to remember interface for creating servers.
     </para>
 
-    <example xml:id="zend.amf.server.basic"><info><title>Basic AMF Server</title></info>
+    <example xml:id="zend.amf.server.basic"><title>Basic AMF Server</title>
         
 
         <para>
@@ -86,7 +86,7 @@ $server->addDirectory(dirname(__FILE__) .'/../package/');
         </para>
     </example>
 
-    <note><info><title>All Attached Methods and Functions Need Docblocks</title></info>
+    <note><title>All Attached Methods and Functions Need Docblocks</title>
         
 
         <para>
@@ -132,7 +132,7 @@ class World
         </para>
     </note>
 
-    <section xml:id="zend.amf.server.flex"><info><title>Connecting to the Server from Flex</title></info>
+    <section xml:id="zend.amf.server.flex"><title>Connecting to the Server from Flex</title>
         
 
         <para>
@@ -269,7 +269,7 @@ myservice.world.hello("Wade");
         </para>
     </section>
 
-    <section xml:id="zend.amf.server.errors"><info><title>Error Handling</title></info>
+    <section xml:id="zend.amf.server.errors"><title>Error Handling</title>
         
 
         <para>
@@ -302,7 +302,7 @@ $server->setProduction(false);
 $server->setProduction(true);
 ]]></programlisting>
 
-        <note><info><title>Disable production mode sparingly!</title></info>
+        <note><title>Disable production mode sparingly!</title>
             
 
             <para>
@@ -324,7 +324,7 @@ $server->setProduction(true);
         </para>
     </section>
 
-    <section xml:id="zend.amf.server.response"><info><title>AMF Responses</title></info>
+    <section xml:id="zend.amf.server.response"><title>AMF Responses</title>
         
 
         <para>
@@ -334,7 +334,7 @@ $server->setProduction(true);
             object, allowing you to do so.
         </para>
 
-        <example xml:id="zend.amf.server.response.messageHeaderExample"><info><title>Adding Message Headers to the AMF Response</title></info>
+        <example xml:id="zend.amf.server.response.messageHeaderExample"><title>Adding Message Headers to the AMF Response</title>
             
 
             <para>
@@ -350,7 +350,7 @@ echo $response;
         </example>
     </section>
 
-    <section xml:id="zend.amf.server.typedobjects"><info><title>Typed Objects</title></info>
+    <section xml:id="zend.amf.server.typedobjects"><title>Typed Objects</title>
         
 
         <para>
@@ -469,7 +469,7 @@ private function getContactHandler(event:ResultEvent):void {
         </para>
     </section>
 
-    <section xml:id="zend.amf.server.resources"><info><title>Resources</title></info>
+    <section xml:id="zend.amf.server.resources"><title>Resources</title>
         
 
         <para>
@@ -536,7 +536,7 @@ class Zend_Amf_Parse_Resource_MysqlResult
         </para>
     </section>
 
-    <section xml:id="zend.amf.server.flash"><info><title>Connecting to the Server from Flash</title></info>
+    <section xml:id="zend.amf.server.flash"><title>Connecting to the Server from Flash</title>
         
 
         <para>
@@ -684,7 +684,7 @@ private function onFault(fault:Object):void {
         </para>
     </section>
 
-    <section xml:id="zend.amf.server.auth"><info><title>Authentication</title></info>
+    <section xml:id="zend.amf.server.auth"><title>Authentication</title>
         
 
         <para>

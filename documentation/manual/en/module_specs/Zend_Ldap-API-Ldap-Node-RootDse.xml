@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.ldap.api.reference.zend-ldap-node-rootdse"><info><title>Zend_Ldap_Node_RootDse</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.ldap.api.reference.zend-ldap-node-rootdse"><title>Zend_Ldap_Node_RootDse</title>
     
 
     <para>The following methods are available on all vendor-specific subclasses.</para>
@@ -20,7 +20,7 @@
         ro obvious reasons.
     </para>
 
-    <table xml:id="zend.ldap.api.reference.zend-ldap-node-rootdse.table"><info><title>Zend_Ldap_Node_RootDse API</title></info>
+    <table xml:id="zend.ldap.api.reference.zend-ldap-node-rootdse.table"><title>Zend_Ldap_Node_RootDse API</title>
         
 
         <tgroup cols="2">
@@ -284,7 +284,7 @@
         </tgroup>
     </table>
 
-    <section xml:id="zend.ldap.api.reference.zend-ldap-node-rootdse.openldap"><info><title>OpenLDAP</title></info>
+    <section xml:id="zend.ldap.api.reference.zend-ldap-node-rootdse.openldap"><title>OpenLDAP</title>
         
 
         <para>
@@ -301,7 +301,7 @@
             </para>
         </note>
 
-        <table xml:id="zend.ldap.api.reference.zend-ldap-node-rootdse.openldap.table"><info><title>Zend_Ldap_Node_RootDse_OpenLdap API</title></info>
+        <table xml:id="zend.ldap.api.reference.zend-ldap-node-rootdse.openldap.table"><title>Zend_Ldap_Node_RootDse_OpenLdap API</title>
             
 
             <tgroup cols="2">
@@ -351,7 +351,7 @@
         </table>
     </section>
 
-    <section xml:id="zend.ldap.api.reference.zend-ldap-node-rootdse.activedirectory"><info><title>ActiveDirectory</title></info>
+    <section xml:id="zend.ldap.api.reference.zend-ldap-node-rootdse.activedirectory"><title>ActiveDirectory</title>
         
 
         <para>
@@ -368,7 +368,7 @@
             </para>
         </note>
 
-        <table xml:id="zend.ldap.api.reference.zend-ldap-node-rootdse.activedirectory.table"><info><title>Zend_Ldap_Node_RootDse_ActiveDirectory API</title></info>
+        <table xml:id="zend.ldap.api.reference.zend-ldap-node-rootdse.activedirectory.table"><title>Zend_Ldap_Node_RootDse_ActiveDirectory API</title>
             
 
             <tgroup cols="2">
@@ -483,7 +483,7 @@
         </table>
     </section>
 
-    <section xml:id="zend.ldap.api.reference.zend-ldap-node-rootdse.edirectory"><info><title>eDirectory</title></info>
+    <section xml:id="zend.ldap.api.reference.zend-ldap-node-rootdse.edirectory"><title>eDirectory</title>
         
 
         <para>
@@ -499,7 +499,7 @@
             </para>
         </note>
 
-        <table xml:id="zend.ldap.api.reference.zend-ldap-node-rootdse.edirectory.table"><info><title>Zend_Ldap_Node_RootDse_eDirectory API</title></info>
+        <table xml:id="zend.ldap.api.reference.zend-ldap-node-rootdse.edirectory.table"><title>Zend_Ldap_Node_RootDse_eDirectory API</title>
             
 
             <tgroup cols="2">

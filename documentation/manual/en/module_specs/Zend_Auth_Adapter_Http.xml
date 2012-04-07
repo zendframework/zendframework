@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.auth.adapter.http"><info><title>HTTP Authentication Adapter</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.auth.adapter.http"><title>HTTP Authentication Adapter</title>
     
 
-    <section xml:id="zend.auth.adapter.http.introduction"><info><title>Introduction</title></info>
+    <section xml:id="zend.auth.adapter.http.introduction"><title>Introduction</title>
         
 
         <para>
@@ -75,7 +75,7 @@
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.auth.adapter.design_overview"><info><title>Design Overview</title></info>
+    <section xml:id="zend.auth.adapter.design_overview"><title>Design Overview</title>
         
 
         <para>
@@ -89,7 +89,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.auth.adapter.configuration_options"><info><title>Configuration Options</title></info>
+    <section xml:id="zend.auth.adapter.configuration_options"><title>Configuration Options</title>
         
 
         <para>
@@ -98,7 +98,7 @@
             are required:
         </para>
 
-        <table xml:id="zend.auth.adapter.configuration_options.table"><info><title>Configuration Options</title></info>
+        <table xml:id="zend.auth.adapter.configuration_options.table"><title>Configuration Options</title>
             
 
             <tgroup cols="3">
@@ -187,7 +187,7 @@
         </note>
     </section>
 
-    <section xml:id="zend.auth.adapter.http.resolvers"><info><title>Resolvers</title></info>
+    <section xml:id="zend.auth.adapter.http.resolvers"><title>Resolvers</title>
         
 
         <para>
@@ -205,7 +205,7 @@
             simply by implementing the resolver interface.
         </para>
 
-        <section xml:id="zend.auth.adapter.http.resolvers.file"><info><title>File Resolver</title></info>
+        <section xml:id="zend.auth.adapter.http.resolvers.file"><title>File Resolver</title>
             
 
             <para>
@@ -254,7 +254,7 @@ $resolver->setFile($path);
         </section>
     </section>
 
-    <section xml:id="zend.auth.adapter.http.basic_usage"><info><title>Basic Usage</title></info>
+    <section xml:id="zend.auth.adapter.http.basic_usage"><title>Basic Usage</title>
         
 
         <para>

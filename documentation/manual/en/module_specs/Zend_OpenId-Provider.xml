@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.openid.provider"><info><title>Zend_OpenId_Provider</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.openid.provider"><title>Zend_OpenId_Provider</title>
     
 
     <para>
@@ -10,7 +10,7 @@
         may have to deal with more complex issues.
     </para>
 
-    <section xml:id="zend.openid.provider.start"><info><title>Quick start</title></info>
+    <section xml:id="zend.openid.provider.start"><title>Quick start</title>
         
 
         <para>
@@ -27,7 +27,7 @@
             identities.
         </para>
 
-        <example xml:id="zend.openid.provider.example-1"><info><title>The Identity</title></info>
+        <example xml:id="zend.openid.provider.example-1"><title>The Identity</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -68,7 +68,7 @@ if (!$server->hasUser(TEST_ID)) {
             request.
         </para>
 
-        <example xml:id="zend.openid.provider.example-2"><info><title>Simple Identity Provider</title></info>
+        <example xml:id="zend.openid.provider.example-2"><title>Simple Identity Provider</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -121,7 +121,7 @@ if (is_string($ret)) {
             </para>
         </note>
 
-        <example xml:id="zend.openid.provider.example-3"><info><title>Simple Login Screen</title></info>
+        <example xml:id="zend.openid.provider.example-3"><title>Simple Login Screen</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -187,7 +187,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' &&
             automatically without user interaction.
         </para>
 
-        <example xml:id="zend.openid.provider.example-4"><info><title>Simple Trust Screen</title></info>
+        <example xml:id="zend.openid.provider.example-4"><title>Simple Trust Screen</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -244,7 +244,7 @@ is your identity URL.
         </para>
     </section>
 
-    <section xml:id="zend.openid.provider.all"><info><title>Combined Provide Scripts</title></info>
+    <section xml:id="zend.openid.provider.all"><title>Combined Provide Scripts</title>
         
 
         <para>
@@ -263,7 +263,7 @@ is your identity URL.
             </para>
         </note>
 
-        <example xml:id="zend.openid.provider.example-5"><info><title>Everything Together</title></info>
+        <example xml:id="zend.openid.provider.example-5"><title>Everything Together</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -304,7 +304,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' &&
         </para>
     </section>
 
-    <section xml:id="zend.openid.provider.sreg"><info><title>Simple Registration Extension</title></info>
+    <section xml:id="zend.openid.provider.sreg"><title>Simple Registration Extension</title>
         
 
         <para>
@@ -315,7 +315,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' &&
             this manual.
         </para>
 
-        <example xml:id="zend.openid.provider.example-6"><info><title>Identity with Profile</title></info>
+        <example xml:id="zend.openid.provider.example-6"><title>Identity with Profile</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -370,7 +370,7 @@ if (!$server->hasUser(TEST_ID)) {
             argument to the <methodname>Zend_OpenId_Provider::handle()</methodname> method.
         </para>
 
-        <example xml:id="zend.openid.provider.example-7"><info><title>Provider with SREG</title></info>
+        <example xml:id="zend.openid.provider.example-7"><title>Provider with SREG</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -403,7 +403,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' &&
         </example>
     </section>
 
-    <section xml:id="zend.openid.provider.else"><info><title>Anything Else?</title></info>
+    <section xml:id="zend.openid.provider.else"><title>Anything Else?</title>
         
 
         <para>

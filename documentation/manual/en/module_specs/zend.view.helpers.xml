@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" 
     xml:id="zend.view.helpers">
-    <info><title>View Helpers</title></info>
+    <title>View Helpers</title>
 
     <para>
         In your view scripts, often it is necessary to perform certain complex functions over and
@@ -61,7 +61,7 @@ $filtered = $view->lowercase('some value');
     </para>
 
     <section xml:id="zend.view.helpers.initial">
-        <info><title>Included Helpers</title></info>
+        <title>Included Helpers</title>
 
         <para>
             Zend Framework comes with an initial set of helper classes, most of which relate to form
@@ -409,7 +409,7 @@ echo $this->formCheckbox('foo',
     </section>
 
     <section xml:id="zend.view.helpers.register">
-        <info><title>Registering Helpers</title></info>
+        <title>Registering Helpers</title>
 
         <para>
             <classname>Zend\View\Renderer\PhpRenderer</classname> composes a <link
@@ -471,7 +471,7 @@ return array(
     </section>
 
     <section xml:id="zend.view.helpers.custom">
-        <info><title>Writing Custom Helpers</title></info>
+        <title>Writing Custom Helpers</title>
 
         <para>
             Writing custom helpers is easy. We recommend extending
@@ -599,7 +599,7 @@ class SpecialPurpose extends AbstractHelper
     </section>
 
     <section xml:id="zend.view.helpers.registering-concrete">
-        <info><title>Registering Concrete Helpers</title></info>
+        <title>Registering Concrete Helpers</title>
 
         <para>
             Sometimes it is convenient to instantiate a view helper, and then register it with the

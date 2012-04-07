@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.loader.plugin-spec-broker">
-    <info><title>The PluginSpecBroker</title></info>
+    <title>The PluginSpecBroker</title>
 
     <section xml:id="zend.loader.plugin-spec-broker.intro">
-        <info><title>Overview</title></info>
+        <title>Overview</title>
 
         <para>
             This class is an extension of <link linkend="zend.loader.plugin-broker">the
@@ -14,7 +14,7 @@
     </section>
 
     <section xml:id="zend.loader.plugin-spec-broker.quick-start">
-        <info><title>Quick Start</title></info>
+        <title>Quick Start</title>
 
         <para>
             Typically, a component will define an extension to the
@@ -46,7 +46,7 @@ $router = $broker->load('router');
     </section>
 
     <section xml:id="zend.loader.plugin-spec-broker.options">
-        <info><title>Configuration Options</title></info>
+        <title>Configuration Options</title>
 
         <para>
             All <link linkend="zend.loader.plugin-broker.options">PluginBroker options</link> are
@@ -71,7 +71,7 @@ $router = $broker->load('router');
     </section>
 
     <section xml:id="zend.loader.plugin-spec-broker.methods">
-        <info><title>Available Methods</title></info>
+        <title>Available Methods</title>
 
         <para>
             All <link linkend="zend.loader.plugin-broker.methods">PluginBroker methods</link> are

@@ -4,7 +4,7 @@
     xmlns="http://docbook.org/ns/docbook" version="5.0"
     xmlns:xlink="http://www.w3.org/1999/xlink"
     xml:id="zend.mvc.intro">
-  <info><title>Introduction to the MVC Layer</title></info>
+  <title>Introduction to the MVC Layer</title>
 
   <para>
     <classname>Zend\Mvc</classname> is a brand new MVC implementation
@@ -89,7 +89,7 @@
   </para>
 
   <section xml:id="zend.mvc.intro.basic-application-structure">
-    <info><title>Basic Application Structure</title></info>
+    <title>Basic Application Structure</title>
 
     <para>
       The basic structure of an application is as follows:
@@ -143,7 +143,7 @@ application_root/
   </section>
 
   <section xml:id="zend.mvc.intro.basic-module-structure">
-    <info><title>Basic Module Structure</title></info>
+    <title>Basic Module Structure</title>
 
     <para>
       A module may contain just about anything: PHP code, including MVC
@@ -301,7 +301,7 @@ class Module
   </section>
 
   <section xml:id="zend.mvc.intro.bootstrapping-an-application">
-    <info><title>Bootstrapping an Application</title></info>
+    <title>Bootstrapping an Application</title>
 
     <para>
       An <classname>Application</classname> composes several objects, but the
@@ -404,7 +404,7 @@ $response->send();
   </section>
 
   <section xml:id="zend.mvc.intro.bootstrapping-a-modular-application">
-    <info><title>Bootstrapping a Modular Application</title></info>
+    <title>Bootstrapping a Modular Application</title>
 
     <para>
       While the previous approach largely works, where does the
@@ -424,7 +424,7 @@ $response->send();
     </para>
 
     <section xml:id="zend.mvc.intro.bootstrapping-a-modular-application.configuring-the-module-manager">
-      <info><title>Configuring the Module Manager</title></info>
+      <title>Configuring the Module Manager</title>
 
       <para>
           The first step is configuring the module manager. The easiest way to
@@ -510,7 +510,7 @@ class Module
   </section>
 
   <section xml:id="zend.mvc.intro.conclusion">
-    <info><title>Conclusion</title></info>
+    <title>Conclusion</title>
 
     <para>
       The ZF2 MVC layer is incredibly flexible, offering an opt-in, easy

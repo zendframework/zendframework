@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.soap.server"><info><title>Zend_Soap_Server</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.soap.server"><title>Zend_Soap_Server</title>
     
 
     <para>
@@ -28,7 +28,7 @@
         mechanism.
     </para>
 
-    <section xml:id="zend.soap.server.constructor"><info><title>Zend_Soap_Server constructor</title></info>
+    <section xml:id="zend.soap.server.constructor"><title>Zend_Soap_Server constructor</title>
         
 
         <para>
@@ -36,7 +36,7 @@
             WSDL and non-WSDL modes.
         </para>
 
-        <section xml:id="zend.soap.server.constructor.wsdl_mode"><info><title>Zend_Soap_Server constructor for the WSDL mode</title></info>
+        <section xml:id="zend.soap.server.constructor.wsdl_mode"><title>Zend_Soap_Server constructor for the WSDL mode</title>
             
 
             <para>
@@ -120,7 +120,7 @@
             </para>
         </section>
 
-        <section xml:id="zend.soap.server.wsdl_mode"><info><title>Zend_Soap_Server constructor for the non-WSDL mode</title></info>
+        <section xml:id="zend.soap.server.wsdl_mode"><title>Zend_Soap_Server constructor for the non-WSDL mode</title>
             
 
             <para>
@@ -192,7 +192,7 @@
         </section>
     </section>
 
-    <section xml:id="zend.soap.server.api_define_methods"><info><title>Methods to define Web Service API</title></info>
+    <section xml:id="zend.soap.server.api_define_methods"><title>Methods to define Web Service API</title>
         
 
         <para>
@@ -241,7 +241,7 @@ $server->setObject(new MyClass());
 $server->handle();
 ]]></programlisting>
 
-        <note><info><title>Important!</title></info>
+        <note><title>Important!</title>
             
 
             <para>
@@ -287,10 +287,10 @@ $server->handle();
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.soap.server.request_response"><info><title>Request and response objects handling</title></info>
+    <section xml:id="zend.soap.server.request_response"><title>Request and response objects handling</title>
         
 
-        <note><info><title>Advanced</title></info>
+        <note><title>Advanced</title>
             
 
             <para>
@@ -304,7 +304,7 @@ $server->handle();
             automatically, but allows to catch it and do some pre- and post-processing.
         </para>
 
-        <section xml:id="zend.soap.server.request_response.request"><info><title>Request processing</title></info>
+        <section xml:id="zend.soap.server.request_response.request"><title>Request processing</title>
             
 
             <para>
@@ -378,7 +378,7 @@ $request = $server->getLastRequest();
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.soap.server.request_response.response"><info><title>Response pre-processing</title></info>
+        <section xml:id="zend.soap.server.request_response.response"><title>Response pre-processing</title>
             
 
             <para>
@@ -426,7 +426,7 @@ $response = $server->getLastResponse();
         </section>
     </section>
 
-    <section xml:id="zend.soap.server.documentliteral"><info><title>Document/Literal WSDL Handling</title></info>
+    <section xml:id="zend.soap.server.documentliteral"><title>Document/Literal WSDL Handling</title>
 
         <para>
             Using the document/literal binding-style/encoding pattern is used to make SOAP messages as human-readable

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.lucene.queries"><info><title>Supported queries</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.lucene.queries"><title>Supported queries</title>
     
 
     <para>
@@ -17,7 +17,7 @@
         What follows are examples of some common query types and strategies.
     </para>
 
-    <example xml:id="learning.lucene.queries.keyword"><info><title>Querying for a single word</title></info>
+    <example xml:id="learning.lucene.queries.keyword"><title>Querying for a single word</title>
         
 
         <programlisting language="text"><![CDATA[
@@ -29,7 +29,7 @@ hello
         </para>
     </example>
 
-    <note><info><title>Default search field</title></info>
+    <note><title>Default search field</title>
         
 
         <para>
@@ -40,7 +40,7 @@ hello
         </para>
     </note>
 
-    <example xml:id="learning.lucene.queries.multiple-words"><info><title>Querying for multiple words</title></info>
+    <example xml:id="learning.lucene.queries.multiple-words"><title>Querying for multiple words</title>
         
 
         <programlisting language="text"><![CDATA[
@@ -53,7 +53,7 @@ hello dolly
         </para>
     </example>
 
-    <example xml:id="learning.lucene.queries.required-words"><info><title>Requiring words in a query</title></info>
+    <example xml:id="learning.lucene.queries.required-words"><title>Requiring words in a query</title>
         
 
         <programlisting language="text"><![CDATA[
@@ -65,7 +65,7 @@ hello dolly
         </para>
     </example>
 
-    <example xml:id="learning.lucene.queries.prohibited-words"><info><title>Prohibiting words in queried documents</title></info>
+    <example xml:id="learning.lucene.queries.prohibited-words"><title>Prohibiting words in queried documents</title>
         
 
         <programlisting language="text"><![CDATA[
@@ -79,7 +79,7 @@ hello dolly
         </para>
     </example>
 
-    <example xml:id="learning.lucene.queries.phrases"><info><title>Querying for phrases</title></info>
+    <example xml:id="learning.lucene.queries.phrases"><title>Querying for phrases</title>
         
 
         <programlisting language="text"><![CDATA[
@@ -92,7 +92,7 @@ hello dolly
         </para>
     </example>
 
-    <example xml:id="learning.lucene.queries.fields"><info><title>Querying against specific fields</title></info>
+    <example xml:id="learning.lucene.queries.fields"><title>Querying against specific fields</title>
         
 
         <programlisting language="text"><![CDATA[
@@ -105,7 +105,7 @@ title:"The Right Way" AND text:go
         </para>
     </example>
 
-    <example xml:id="learning.lucene.queries.fields-and-document"><info><title>Querying against specific fields as well as the entire document</title></info>
+    <example xml:id="learning.lucene.queries.fields-and-document"><title>Querying against specific fields as well as the entire document</title>
         
 
         <programlisting language="text"><![CDATA[
@@ -118,7 +118,7 @@ title:"The Right Way" AND  go
         </para>
     </example>
 
-    <example xml:id="learning.lucene.queries.fields-and-document-alt"><info><title>Querying against specific fields as well as the entire document (alternate)</title></info>
+    <example xml:id="learning.lucene.queries.fields-and-document-alt"><title>Querying against specific fields as well as the entire document (alternate)</title>
         
 
         <programlisting language="text"><![CDATA[
@@ -132,7 +132,7 @@ title:Do it right
         </para>
     </example>
 
-    <example xml:id="learning.lucene.queries.wildcard-question"><info><title>Querying with the wildcard "?"</title></info>
+    <example xml:id="learning.lucene.queries.wildcard-question"><title>Querying with the wildcard "?"</title>
         
 
         <programlisting language="text"><![CDATA[
@@ -144,7 +144,7 @@ te?t
         </para>
     </example>
 
-    <example xml:id="learning.lucene.queries.wildcard-asterisk"><info><title>Querying with the wildcard "*"</title></info>
+    <example xml:id="learning.lucene.queries.wildcard-asterisk"><title>Querying with the wildcard "*"</title>
         
 
         <programlisting language="text"><![CDATA[
@@ -157,7 +157,7 @@ test*
         </para>
     </example>
 
-    <example xml:id="learning.lucene.queries.range-inclusive"><info><title>Querying for an inclusive range of terms</title></info>
+    <example xml:id="learning.lucene.queries.range-inclusive"><title>Querying for an inclusive range of terms</title>
         
 
         <programlisting language="text"><![CDATA[
@@ -169,7 +169,7 @@ mod_date:[20020101 TO 20030101]
         </para>
     </example>
 
-    <example xml:id="learning.lucene.queries.range-exclusive"><info><title>Querying for an exclusive range of terms</title></info>
+    <example xml:id="learning.lucene.queries.range-exclusive"><title>Querying for an exclusive range of terms</title>
         
 
         <programlisting language="text"><![CDATA[
@@ -181,7 +181,7 @@ title:{Aida to Carmen}
         </para>
     </example>
 
-    <example xml:id="learning.lucene.queries.fuzzy"><info><title>Fuzzy searches</title></info>
+    <example xml:id="learning.lucene.queries.fuzzy"><title>Fuzzy searches</title>
         
 
         <programlisting language="text"><![CDATA[
@@ -193,7 +193,7 @@ roam~
         </para>
     </example>
 
-    <example xml:id="learning.lucene.queries.boolean"><info><title>Boolean searches</title></info>
+    <example xml:id="learning.lucene.queries.boolean"><title>Boolean searches</title>
         
 
         <programlisting language="text"><![CDATA[
@@ -212,7 +212,7 @@ roam~
         combined:
     </para>
 
-    <example xml:id="learning.lucene.queries.combining"><info><title>Combining parsed and constructed queries</title></info>
+    <example xml:id="learning.lucene.queries.combining"><title>Combining parsed and constructed queries</title>
         
 
         <programlisting language="php"><![CDATA[

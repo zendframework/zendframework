@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" 
     xml:id="zend.db.sql">
-    <info><title>Zend\Db\Sql</title></info>
+    <title>Zend\Db\Sql</title>
 
     <para>
         Zend\Db\Sql is a abstraction layer for building vendor and driver specific queries.
@@ -10,7 +10,7 @@
     </para>
 
     <section xml:id="zend.db.sql.primary">
-        <info><title>Primary Objects: Select, Insert, Update, Delete, Where</title></info>
+        <title>Primary Objects: Select, Insert, Update, Delete, Where</title>
 
         <para>
             The primary objects that to interact with are:
@@ -128,7 +128,7 @@ class Zend\Db\Sql\Delete
     </section>
 
     <section xml:id="zend.db.sql.where">
-        <info><title>Where, Predicates and the Fluent Interface</title></info>
+        <title>Where, Predicates and the Fluent Interface</title>
 
         <para>
             The Zend\Db\Sql\Where object is where much of the focus of getting
@@ -235,10 +235,10 @@ class Zend\Db\Sql\Where\Predicate
     </section>
 
     <section xml:id="zend.db.sql.examples">
-        <info><title>Examples</title></info>
+        <title>Examples</title>
 
         <section xml:id="zend.db.sql.examples.complex-where">
-            <info><title>Complex Where</title></info>
+            <title>Complex Where</title>
 
             <programlisting language="php"><![CDATA[
 $where = new Zend\Db\Sql\Where();
@@ -258,7 +258,7 @@ echo $where->getSqlString() // WHERE "name" LIKE 'Ralph%' OR ("age" >= '30' AND 
         </section>
 
         <section xml:id="zend.db.sql.examples.select">
-            <info><title>Select Prepare</title></info>
+            <title>Select Prepare</title>
 
             <programlisting language="php"><![CDATA[
 use Zend\Db\Sql\Select,

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.amazon.ec2.images"><info><title>Zend_Service_Amazon_Ec2: Amazon Machine Images (AMI)</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.amazon.ec2.images"><title>Zend_Service_Amazon_Ec2: Amazon Machine Images (AMI)</title>
     
 
     <para>
@@ -7,10 +7,10 @@
         of operating systems.
     </para>
 
-    <section xml:id="zend.service.amazon.ec2.images.info"><info><title>AMI Information Utilities</title></info>
+    <section xml:id="zend.service.amazon.ec2.images.info"><title>AMI Information Utilities</title>
         
 
-        <example xml:id="zend.service.amazon.ec2.images.register"><info><title>Register an AMI with EC2</title></info>
+        <example xml:id="zend.service.amazon.ec2.images.register"><title>Register an AMI with EC2</title>
             
 
             <para>
@@ -31,7 +31,7 @@ $ip = $ec2_img->register('imageLocation');
 ]]></programlisting>
         </example>
 
-        <example xml:id="zend.service.amazon.ec2.images.deregister"><info><title>Deregister an AMI with EC2</title></info>
+        <example xml:id="zend.service.amazon.ec2.images.deregister"><title>Deregister an AMI with EC2</title>
             
 
             <para>
@@ -50,7 +50,7 @@ $ip = $ec2_img->deregister('imageId');
 ]]></programlisting>
         </example>
 
-        <example xml:id="zend.service.amazon.ec2.images.describe"><info><title>Describe an AMI</title></info>
+        <example xml:id="zend.service.amazon.ec2.images.describe"><title>Describe an AMI</title>
             
 
             <para>
@@ -64,7 +64,7 @@ $ip = $ec2_img->deregister('imageId');
             </para>
 
             <para>
-                <table xml:id="zend.service.amazon.ec2.images.describe-table"><info><title>Launch permissions fall into three categories</title></info>
+                <table xml:id="zend.service.amazon.ec2.images.describe-table"><title>Launch permissions fall into three categories</title>
                     
 
                     <tgroup cols="2">
@@ -158,16 +158,16 @@ $ip = $ec2_img->describe();
         </example>
     </section>
 
-    <section xml:id="zend.service.amazon.ec2.images.attribute"><info><title>AMI Attribute Utilities</title></info>
+    <section xml:id="zend.service.amazon.ec2.images.attribute"><title>AMI Attribute Utilities</title>
         
 
-        <example xml:id="zend.service.amazon.ec2.images.attribute.modify"><info><title>Modify Image Attributes</title></info>
+        <example xml:id="zend.service.amazon.ec2.images.attribute.modify"><title>Modify Image Attributes</title>
             
 
             <para>Modifies an attribute of an <acronym>AMI</acronym></para>
 
             <para>
-                <table xml:id="zend.service.amazon.ec2.images.attribute.modify-table"><info><title>Valid Attributes</title></info>
+                <table xml:id="zend.service.amazon.ec2.images.attribute.modify-table"><title>Valid Attributes</title>
                     
 
                     <tgroup cols="2">
@@ -240,7 +240,7 @@ $return = $ec2_img->modifyAttribute('imageId',
 ]]></programlisting>
         </example>
 
-        <example xml:id="zend.service.amazon.ec2.images.attribute.reset"><info><title>Reset an AMI Attribute</title></info>
+        <example xml:id="zend.service.amazon.ec2.images.attribute.reset"><title>Reset an AMI Attribute</title>
             
 
             <para>
@@ -254,7 +254,7 @@ $return = $ec2_img->resetAttribute('imageId', 'launchPermission');
 ]]></programlisting>
         </example>
 
-        <example xml:id="zend.service.amazon.ec2.images.attribute.describe"><info><title>Describe AMI Attribute</title></info>
+        <example xml:id="zend.service.amazon.ec2.images.attribute.describe"><title>Describe AMI Attribute</title>
             
 
             <para>

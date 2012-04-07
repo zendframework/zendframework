@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.different-transports"><info><title>Using Different Transports</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.different-transports"><title>Using Different Transports</title>
     
 
     <para>
@@ -9,7 +9,7 @@
         transport for the actual <methodname>send()</methodname> request.
     </para>
 
-    <example xml:id="zend.mail.different-transports.example-1"><info><title>Using Different Transports</title></info>
+    <example xml:id="zend.mail.different-transports.example-1"><title>Using Different Transports</title>
         
 
         <programlisting language="php"><![CDATA[
@@ -23,7 +23,7 @@ $mail->send();  // use default again
 ]]></programlisting>
     </example>
 
-    <note><info><title>Additional transports</title></info>
+    <note><title>Additional transports</title>
         
 
         <para>

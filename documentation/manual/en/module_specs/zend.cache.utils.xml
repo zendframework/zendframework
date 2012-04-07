@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.cache.utils">
-    <info>
+    
         <title>Zend\Cache\Utils</title>
-    </info>
+    
 
     <section xml:id="zend.cache.utils.intro">
-        <info>
+        
             <title>Overview</title>
-        </info>
+        
         
         <para>
             The class <classname>Zend\Cache\Utils</classname> is a class that defines a set of
@@ -22,16 +22,16 @@
     </section>
 <!-- 
     <section xml:id="zend.cache.utils.quick-start">
-        <info>
+        
             <title>Quick Start</title>
-        </info>
+        
 
     </section>
 
     <section xml:id="zend.cache.utils.options">
-        <info>
+        
             <title>Configuration Options</title>
-        </info>
+        
 
         <variablelist>
             <title/>
@@ -40,9 +40,9 @@
  -->
 
     <section xml:id="zend.cache.utils.methods">
-        <info>
+        
             <title>Available Methods</title>
-        </info>
+        
 
         <variablelist>
             <varlistentry xml:id="zend.cache.utils.methods.get-disk-capacity">
@@ -136,14 +136,13 @@
     </section>
 
     <section xml:id="zend.cache.utils.examples">
-        <info>
+        
             <title>Examples</title>
-        </info>
+        
 
         <example xml:id="zend.cache.utils.examples.getCapacity">
-            <info>
-                <title>Get capacity of a disk path, internal php memory, or the system memory</title></info
-            >
+            
+                <title>Get capacity of a disk path, internal php memory, or the system memory</title>
 
             <programlisting language="php"><![CDATA[
 use Zend\Cache\Utils;

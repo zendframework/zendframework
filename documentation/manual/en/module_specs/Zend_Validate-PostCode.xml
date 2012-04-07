@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.post_code"><info><title>PostCode</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.post_code"><title>PostCode</title>
     
 
     <para>
@@ -63,7 +63,7 @@ $validator = new Zend_Validate_PostCode('de_AT');
 $validator->setFormat('AT-\d{5}');
 ]]></programlisting>
 
-    <note><info><title>Conventions for self defined formats</title></info>
+    <note><title>Conventions for self defined formats</title>
         
 
         <para>
@@ -78,7 +78,7 @@ $validator->setFormat('AT-\d{5}');
         </para>
     </note>
 
-    <section xml:id="zend.validate.set.post_code.constructor"><info><title>Constructor options</title></info>
+    <section xml:id="zend.validate.set.post_code.constructor"><title>Constructor options</title>
         
 
         <para>
@@ -106,7 +106,7 @@ $validator = new Zend_Validate_PostCode(array(
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.validate.set.post_code.options"><info><title>Supported options for Zend_Validate_PostCode</title></info>
+    <section xml:id="zend.validate.set.post_code.options"><title>Supported options for Zend_Validate_PostCode</title>
         
 
         <para>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.log.overview"><info><title>Overview</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.log.overview"><title>Overview</title>
     
 
     <para>
@@ -44,7 +44,7 @@
             </listitem>
         </itemizedlist>
 
-    <section xml:id="zend.log.overview.creating-a-logger"><info><title>Creating a Log</title></info>
+    <section xml:id="zend.log.overview.creating-a-logger"><title>Creating a Log</title>
 
         <para>
             To get started logging, instantiate a Writer and then pass it to a Logger instance:
@@ -64,7 +64,7 @@ $logger->addWriter($writer);
         </para>
     </section>
 
-    <section xml:id="zend.log.overview.logging-messages"><info><title>Logging Messages</title></info>
+    <section xml:id="zend.log.overview.logging-messages"><title>Logging Messages</title>
         
 
         <para>
@@ -98,7 +98,7 @@ $logger->emerg('Emergency message');
 
     </section>
 
-    <section xml:id="zend.log.overview.destroying-a-logger"><info><title>Destroying a Log</title></info>
+    <section xml:id="zend.log.overview.destroying-a-logger"><title>Destroying a Log</title>
         
 
         <para>
@@ -118,7 +118,7 @@ $logger = null;
         </para>
     </section>
 
-    <section xml:id="zend.log.overview.builtin-priorities"><info><title>Using Built-in Priorities</title></info>
+    <section xml:id="zend.log.overview.builtin-priorities"><title>Using Built-in Priorities</title>
         
 
         <para>
@@ -160,7 +160,7 @@ DEBUG   = 7;  // Debug: debug messages
         </para>
     </section>
 
-    <section xml:id="zend.log.overview.understanding-fields"><info><title>Understanding Log Events</title></info>
+    <section xml:id="zend.log.overview.understanding-fields"><title>Understanding Log Events</title>
         
         <para>
             When you call the <methodname>log()</methodname> method or one of its shortcuts, a
@@ -177,7 +177,7 @@ DEBUG   = 7;  // Debug: debug messages
 
     </section>
 
-    <section xml:id="zend.log.overview.as-errorHandler"><info><title>Log PHP Errors</title></info>
+    <section xml:id="zend.log.overview.as-errorHandler"><title>Log PHP Errors</title>
         
 
         <para>
@@ -205,11 +205,11 @@ Logger::registerErrorHandler($this->logger);
         </para>
         
         <table xml:id="zend.log.overview.as-errorHandler.properties.table">
-            <info><title>
+            <title>
                 Zend\Log\Logger events from PHP errors fields matching
                 <methodname>handler  ( int $errno  , string $errstr  [, string $errfile  [, int
                     $errline  [, array $errcontext  ]]] )</methodname> from <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://us3.php.net/manual/en/function.set-error-handler.php">set_error_handler</link>
-            </title></info>
+            </title>
             
 
             <tgroup cols="3">

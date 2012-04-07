@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="performance.view"><info><title>View Rendering</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="performance.view"><title>View Rendering</title>
     
 
     <para>
@@ -14,7 +14,7 @@
         cost.
     </para>
 
-    <section xml:id="performance.view.pluginloader"><info><title>How can I speed up resolution of view helpers?</title></info>
+    <section xml:id="performance.view.pluginloader"><title>How can I speed up resolution of view helpers?</title>
         
 
         <para>
@@ -43,7 +43,7 @@
             The question, then, is: how can you speed up helper resolution?
         </para>
 
-        <section xml:id="performance.view.pluginloader.cache"><info><title>Use the PluginLoader include file cache</title></info>
+        <section xml:id="performance.view.pluginloader.cache"><title>Use the PluginLoader include file cache</title>
             
 
             <para>
@@ -56,7 +56,7 @@
             </para>
         </section>
 
-        <section xml:id="performance.view.pluginloader.extend"><info><title>Extend Zend_View to provide often used helper methods</title></info>
+        <section xml:id="performance.view.pluginloader.extend"><title>Extend Zend_View to provide often used helper methods</title>
             
 
             <para>
@@ -122,7 +122,7 @@ class My_View extends Zend_View
         </section>
     </section>
 
-    <section xml:id="performance.view.partial"><info><title>How can I speed up view partials?</title></info>
+    <section xml:id="performance.view.partial"><title>How can I speed up view partials?</title>
         
 
         <para>
@@ -132,7 +132,7 @@ class My_View extends Zend_View
             object. Is it possible to speed this up?
         </para>
 
-        <section xml:id="performance.view.partial.render"><info><title>Use partial() only when really necessary</title></info>
+        <section xml:id="performance.view.partial.render"><title>Use partial() only when really necessary</title>
             
 
             <para>
@@ -185,7 +185,7 @@ class My_View extends Zend_View
         </section>
     </section>
 
-    <section xml:id="performance.view.action"><info><title>How can I speed up calls to the action() view helper?</title></info>
+    <section xml:id="performance.view.action"><title>How can I speed up calls to the action() view helper?</title>
         
 
         <para>
@@ -203,7 +203,7 @@ class My_View extends Zend_View
             How can you speed it up?
         </para>
 
-        <section xml:id="performance.view.action.actionstack"><info><title>Use the ActionStack when possible</title></info>
+        <section xml:id="performance.view.action.actionstack"><title>Use the ActionStack when possible</title>
             
 
             <para>
@@ -274,7 +274,7 @@ class LoginPlugin extends Zend_Controller_Plugin_Abstract
             </para>
         </section>
 
-        <section xml:id="performance.view.action.model"><info><title>Favor helpers that query the model over action()</title></info>
+        <section xml:id="performance.view.action.model"><title>Favor helpers that query the model over action()</title>
             
 
             <para>

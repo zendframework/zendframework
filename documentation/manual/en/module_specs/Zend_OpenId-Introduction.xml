@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.openid.introduction"><info><title>Introduction</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.openid.introduction"><title>Introduction</title>
     
 
     <para>
@@ -9,7 +9,7 @@
         simple <acronym>API</acronym> for building OpenID-enabled sites and identity providers.
     </para>
 
-    <section xml:id="zend.openid.introduction.what"><info><title>What is OpenID?</title></info>
+    <section xml:id="zend.openid.introduction.what"><title>What is OpenID?</title>
         
 
         <para>
@@ -33,7 +33,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.openid.introduction.how"><info><title>How Does it Work?</title></info>
+    <section xml:id="zend.openid.introduction.how"><title>How Does it Work?</title>
         
 
         <para>
@@ -122,7 +122,7 @@
         </orderedlist>
     </section>
 
-    <section xml:id="zend.openid.introduction.structure"><info><title>Zend_OpenId Structure</title></info>
+    <section xml:id="zend.openid.introduction.structure"><title>Zend_OpenId Structure</title>
         
 
         <para>
@@ -149,7 +149,7 @@
         </note>
     </section>
 
-    <section xml:id="zend.openid.introduction.standards"><info><title>Supported OpenID Standards</title></info>
+    <section xml:id="zend.openid.introduction.standards"><title>Supported OpenID Standards</title>
         
 
         <para>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.htmlentities"><info><title>HtmlEntities</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.htmlentities"><title>HtmlEntities</title>
     
 
     <para>
@@ -7,7 +7,7 @@
         <acronym>HTML</acronym> entity equivalents where they exist.
     </para>
 
-    <section xml:id="zend.filter.set.htmlentities.options"><info><title>Supported options for Zend_Filter_HtmlEntities</title></info>
+    <section xml:id="zend.filter.set.htmlentities.options"><title>Supported options for Zend_Filter_HtmlEntities</title>
         
 
         <para>
@@ -65,7 +65,7 @@
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.filter.set.htmlentities.basic"><info><title>Basic usage</title></info>
+    <section xml:id="zend.filter.set.htmlentities.basic"><title>Basic usage</title>
         
 
         <para>
@@ -79,7 +79,7 @@ print $filter->filter('<');
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.filter.set.htmlentities.quotestyle"><info><title>Quote Style</title></info>
+    <section xml:id="zend.filter.set.htmlentities.quotestyle"><title>Quote Style</title>
         
 
         <para>
@@ -126,7 +126,7 @@ print $filter->filter($input);
         </para>
     </section>
 
-    <section xml:id="zend.filter.set.htmlentities."><info><title>Helper Methods</title></info>
+    <section xml:id="zend.filter.set.htmlentities."><title>Helper Methods</title>
         
 
         <para>

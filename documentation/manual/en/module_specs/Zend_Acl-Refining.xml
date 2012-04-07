@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.acl.refining"><info><title>Refining Access Controls</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.acl.refining"><title>Refining Access Controls</title>
     
 
-    <section xml:id="zend.acl.refining.precise"><info><title>Precise Access Controls</title></info>
+    <section xml:id="zend.acl.refining.precise"><title>Precise Access Controls</title>
         
 
         <para>
@@ -121,7 +121,7 @@ echo $acl->isAllowed('administrator', 'announcement', 'archive') ?
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.acl.refining.removing"><info><title>Removing Access Controls</title></info>
+    <section xml:id="zend.acl.refining.removing"><title>Removing Access Controls</title>
         
 
         <para>

@@ -33,7 +33,7 @@
     </info>
 
     <part xml:id="introduction">
-        <info><title>&chapter.introduction.title;</title></info>
+        <title>&chapter.introduction.title;</title>
 
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="ref/overview.xml" parse="xml">
             <xi:fallback>
@@ -48,7 +48,7 @@
     </part>
 
     <part xml:id="learning">
-        <info><title>&part.learning.title;</title></info>
+        <title>&part.learning.title;</title>
 
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="tutorials/quickstart-di.xml" parse="xml">
             <xi:fallback>
@@ -57,7 +57,7 @@
         </xi:include>
 
         <!--<chapter xml:id="learning.quickstart">-->
-            <!--<info><title>&part.learning.quickstart.title;</title></info>-->
+            <!--<title>&part.learning.quickstart.title;</title>-->
             <!---->
             <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="tutorials/quickstart-intro-mvc.xml" parse="xml">-->
                 <!--<xi:fallback>-->
@@ -92,7 +92,7 @@
         <!--</chapter>-->
 
         <!--<chapter xml:id="learning.autoloading">-->
-            <!--<info><title>&part.learning.autoloading.title;</title></info>-->
+            <!--<title>&part.learning.autoloading.title;</title>-->
             <!---->
             <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="tutorials/autoloading-intro.xml" parse="xml">-->
                 <!--<xi:fallback>-->
@@ -122,7 +122,7 @@
         <!--</chapter>-->
 
         <!--<chapter xml:id="learning.plugins">-->
-            <!--<info><title>&part.learning.plugins.title;</title></info>-->
+            <!--<title>&part.learning.plugins.title;</title>-->
             <!---->
             <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="tutorials/plugins-intro.xml" parse="xml">-->
                 <!--<xi:fallback>-->
@@ -142,7 +142,7 @@
         <!--</chapter>-->
 
         <!--<chapter xml:id="learning.view.placeholders">-->
-            <!--<info><title>&part.learning.view.placeholders.title;</title></info>-->
+            <!--<title>&part.learning.view.placeholders.title;</title>-->
             <!---->
             <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="tutorials/view-placeholders-intro.xml" parse="xml">-->
                 <!--<xi:fallback>-->
@@ -167,7 +167,7 @@
         <!--</chapter>-->
 
         <!--<chapter xml:id="learning.form.decorators">-->
-            <!--<info><title>&part.learning.form.decorators.title;</title></info>-->
+            <!--<title>&part.learning.form.decorators.title;</title>-->
             <!---->
             <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="tutorials/form-decorators-intro.xml" parse="xml">-->
                 <!--<xi:fallback>-->
@@ -202,7 +202,7 @@
         <!--</chapter>-->
 
         <!--<chapter xml:id="learning.multiuser">-->
-            <!--<info><title>&part.learning.multiuser.title;</title></info>-->
+            <!--<title>&part.learning.multiuser.title;</title>-->
             <!---->
             <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="tutorials/multiuser-intro.xml" parse="xml">-->
                 <!--<xi:fallback>-->
@@ -227,7 +227,7 @@
         <!--</chapter>-->
 
         <!--<chapter xml:id="learning.lucene">-->
-            <!--<info><title>&part.learning.lucene.title;</title></info>-->
+            <!--<title>&part.learning.lucene.title;</title>-->
             <!---->
             <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="tutorials/lucene-intro.xml" parse="xml">-->
                 <!--<xi:fallback>-->
@@ -267,7 +267,7 @@
         <!--</chapter>-->
 
         <!--<chapter xml:id="learning.paginator">-->
-            <!--<info><title>&part.learning.paginator.title;</title></info>-->
+            <!--<title>&part.learning.paginator.title;</title>-->
             <!---->
             <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="tutorials/paginator-intro.xml" parse="xml">-->
                 <!--<xi:fallback>-->
@@ -293,9 +293,9 @@
     </part>
 
     <part xml:id="reference">
-        <info><title>&part.reference.title;</title></info>
+        <title>&part.reference.title;</title>
 
-        <!--<chapter xml:id="zend.acl"><info><title>Zend_Acl</title></info>-->
+        <!--<chapter xml:id="zend.acl"><title>Zend_Acl</title>-->
             <!---->
             <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Acl.xml" parse="xml">-->
                 <!--<xi:fallback>-->
@@ -314,7 +314,7 @@
             <!--</xi:include>-->
         <!--</chapter>-->
 
-        <!--<chapter xml:id="zend.amf"><info><title>Zend_Amf</title></info>-->
+        <!--<chapter xml:id="zend.amf"><title>Zend_Amf</title>-->
             <!---->
             <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Amf.xml" parse="xml">-->
                 <!--<xi:fallback>-->
@@ -328,7 +328,7 @@
             <!--</xi:include>-->
         <!--</chapter>-->
 
-        <!--<chapter xml:id="zend.application"><info><title>Zend_Application</title></info>-->
+        <!--<chapter xml:id="zend.application"><title>Zend_Application</title>-->
             <!---->
             <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Application-Introduction.xml" parse="xml">-->
                 <!--<xi:fallback>-->
@@ -362,7 +362,7 @@
             <!--</xi:include>-->
         <!--</chapter>-->
 
-        <!--<chapter xml:id="zend.auth"><info><title>Zend_Auth</title></info>-->
+        <!--<chapter xml:id="zend.auth"><title>Zend_Auth</title>-->
             <!---->
             <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Auth.xml" parse="xml">-->
                 <!--<xi:fallback>-->
@@ -396,7 +396,7 @@
             <!--</xi:include>-->
         <!--</chapter>-->
 
-        <!--<chapter xml:id="zend.barcode"><info><title>Zend_Barcode</title></info>-->
+        <!--<chapter xml:id="zend.barcode"><title>Zend_Barcode</title>-->
             <!---->
             <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Barcode-Introduction.xml" parse="xml">-->
                 <!--<xi:fallback>-->
@@ -420,7 +420,7 @@
             <!--</xi:include>-->
         <!--</chapter>-->
 
-        <chapter xml:id="zend.cache"><info><title>Zend\Cache</title></info>
+        <chapter xml:id="zend.cache"><title>Zend\Cache</title>
 
             <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/zend.cache.storage.adapter.xml" parse="xml">
                 <xi:fallback>
@@ -479,7 +479,7 @@
             <!--</xi:include>-->
         </chapter>
 
-        <!--<chapter xml:id="zend.captcha"><info><title>Zend_Captcha</title></info>-->
+        <!--<chapter xml:id="zend.captcha"><title>Zend_Captcha</title>-->
             <!---->
             <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Captcha.xml" parse="xml">-->
                 <!--<xi:fallback>-->
@@ -499,7 +499,7 @@
         <!--</chapter>-->
 
         <!--<chapter xml:id="zend.cloud">-->
-            <!--<info><title>Zend_Cloud</title></info>-->
+            <!--<title>Zend_Cloud</title>-->
             <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Cloud_Infrastructure.xml">-->
                 <!--<xi:fallback>-->
                     <!--<xi:include href="../en/module_specs/Zend_Cloud_Infrastructure.xml" />-->
@@ -513,7 +513,7 @@
         <!--</chapter>-->
 
         <!--<chapter xml:id="zend.codegenerator">-->
-            <!--<info><title>Zend_CodeGenerator</title></info>-->
+            <!--<title>Zend_CodeGenerator</title>-->
             <!---->
             <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_CodeGenerator-Introduction.xml" parse="xml">-->
                 <!--<xi:fallback>-->
@@ -532,7 +532,7 @@
             <!--</xi:include>-->
         <!--</chapter>-->
 
-        <chapter xml:id="zend.config"><info><title>Zend_Config</title></info>
+        <chapter xml:id="zend.config"><title>Zend_Config</title>
 
             <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Config-Introduction.xml" parse="xml">
                 <xi:fallback>
@@ -561,7 +561,7 @@
             </xi:include>
         </chapter>
 
-        <!--<chapter xml:id="zend.console.getopt"><info><title>Zend_Console_Getopt</title></info>-->
+        <!--<chapter xml:id="zend.console.getopt"><title>Zend_Console_Getopt</title>-->
             <!---->
             <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Console_Getopt-Introduction.xml" parse="xml">-->
                 <!--<xi:fallback>-->
@@ -585,7 +585,7 @@
             <!--</xi:include>-->
         <!--</chapter>-->
 
-        <!--<chapter xml:id="zend.controller"><info><title>Zend_Controller</title></info>-->
+        <!--<chapter xml:id="zend.controller"><title>Zend_Controller</title>-->
             <!---->
             <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Controller-QuickStart.xml" parse="xml">-->
                 <!--<xi:fallback>-->
@@ -649,7 +649,7 @@
             <!--</xi:include>-->
         <!--</chapter>-->
 
-        <!--<chapter xml:id="zend.currency"><info><title>Zend_Currency</title></info>-->
+        <!--<chapter xml:id="zend.currency"><title>Zend_Currency</title>-->
             <!---->
             <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Currency-Introduction.xml" parse="xml">-->
                 <!--<xi:fallback>-->
@@ -703,7 +703,7 @@
             <!--</xi:include>-->
         <!--</chapter>-->
 
-        <!--<chapter xml:id="zend.date"><info><title>Zend_Date</title></info>-->
+        <!--<chapter xml:id="zend.date"><title>Zend_Date</title>-->
             <!---->
             <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Date-Introduction.xml" parse="xml">-->
                 <!--<xi:fallback>-->
@@ -743,7 +743,7 @@
         <!--</chapter>-->
 
         <chapter xml:id="zend.db">
-            <info><title>Zend_Db</title></info>
+            <title>Zend_Db</title>
 
             <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Db-Adapter.xml" parse="xml">
                 <xi:fallback>
@@ -764,7 +764,7 @@
             </xi:include>
         </chapter>
 
-        <!--<chapter xml:id="zend.debug"><info><title>Zend_Debug</title></info>-->
+        <!--<chapter xml:id="zend.debug"><title>Zend_Debug</title>-->
             <!---->
             <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Debug.xml" parse="xml">-->
                 <!--<xi:fallback>-->
@@ -774,7 +774,7 @@
         <!--</chapter>-->
 
         <chapter xml:id="zend.di">
-            <info><title>Zend\Di</title></info>
+            <title>Zend\Di</title>
 
             <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Di-Introduction.xml" parse="xml">
                 <xi:fallback>
@@ -814,7 +814,7 @@
 
         </chapter>
 
-        <!--<chapter xml:id="zend.dojo"><info><title>Zend_Dojo</title></info>-->
+        <!--<chapter xml:id="zend.dojo"><title>Zend_Dojo</title>-->
             <!---->
             <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Dojo.xml" parse="xml">-->
                 <!--<xi:fallback>-->
@@ -843,7 +843,7 @@
             <!--</xi:include>-->
         <!--</chapter>-->
 
-        <!--<chapter xml:id="zend.dom"><info><title>Zend_Dom</title></info>-->
+        <!--<chapter xml:id="zend.dom"><title>Zend_Dom</title>-->
             <!---->
             <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Dom.xml" parse="xml">-->
                 <!--<xi:fallback>-->
@@ -858,7 +858,7 @@
         <!--</chapter>-->
 
         <chapter xml:id="zend.event-manager">
-            <info><title>Zend\EventManager</title></info>
+            <title>Zend\EventManager</title>
 
             <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_EventManager-EventManager.xml" parse="xml">
                 <xi:fallback>
@@ -867,7 +867,7 @@
             </xi:include>
         </chapter>
 
-        <!--<chapter xml:id="zend.exception"><info><title>Zend_Exception</title></info>-->
+        <!--<chapter xml:id="zend.exception"><title>Zend_Exception</title>-->
             <!---->
             <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Exception.xml" parse="xml">-->
                 <!--<xi:fallback>-->
@@ -886,7 +886,7 @@
             <!--</xi:include>-->
         <!--</chapter>-->
 
-        <!--<chapter xml:id="zend.feed"><info><title>Zend_Feed</title></info>-->
+        <!--<chapter xml:id="zend.feed"><title>Zend_Feed</title>-->
             <!---->
             <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Feed-Introduction.xml" parse="xml">-->
                 <!--<xi:fallback>-->
@@ -945,7 +945,7 @@
             <!--</xi:include>-->
         <!--</chapter>-->
 
-        <!--<chapter xml:id="zend.file"><info><title>Zend_File</title></info>-->
+        <!--<chapter xml:id="zend.file"><title>Zend_File</title>-->
             <!---->
             <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_File_Transfer-Introduction.xml" parse="xml">-->
                 <!--<xi:fallback>-->
@@ -964,7 +964,7 @@
             <!--</xi:include>-->
         <!--</chapter>-->
 
-        <!--<chapter xml:id="zend.filter"><info><title>Zend_Filter</title></info>-->
+        <!--<chapter xml:id="zend.filter"><title>Zend_Filter</title>-->
             <!---->
             <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Filter.xml" parse="xml">-->
                 <!--<xi:fallback>-->
@@ -998,7 +998,7 @@
             <!--</xi:include>-->
         <!--</chapter>-->
 
-        <!--<chapter xml:id="zend.form"><info><title>Zend_Form</title></info>-->
+        <!--<chapter xml:id="zend.form"><title>Zend_Form</title>-->
             <!---->
             <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Form-Introduction.xml" parse="xml">-->
                 <!--<xi:fallback>-->
@@ -1047,7 +1047,7 @@
             <!--</xi:include>-->
         <!--</chapter>-->
 
-        <!--<chapter xml:id="zend.gdata"><info><title>Zend_Gdata</title></info>-->
+        <!--<chapter xml:id="zend.gdata"><title>Zend_Gdata</title>-->
             <!---->
             <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Gdata-Introduction.xml" parse="xml">-->
                 <!--<xi:fallback>-->
@@ -1116,7 +1116,7 @@
             <!--</xi:include>-->
         <!--</chapter>-->
 
-        <chapter xml:id="zend.http"><info><title>Zend_Http</title></info>
+        <chapter xml:id="zend.http"><title>Zend_Http</title>
             <!-- OLD DOCUMENTATION
             <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Http_Client.xml" parse="xml">
                 <xi:fallback>
@@ -1167,7 +1167,7 @@
 
         </chapter>
 
-        <!--<chapter xml:id="zend.infocard"><info><title>Zend_InfoCard</title></info>-->
+        <!--<chapter xml:id="zend.infocard"><title>Zend_InfoCard</title>-->
             <!---->
             <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_InfoCard-Basics.xml" parse="xml">-->
                 <!--<xi:fallback>-->
@@ -1176,7 +1176,7 @@
             <!--</xi:include>-->
         <!--</chapter>-->
 
-        <!--<chapter xml:id="zend.json"><info><title>Zend_Json</title></info>-->
+        <!--<chapter xml:id="zend.json"><title>Zend_Json</title>-->
             <!---->
             <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Json-Introduction.xml" parse="xml">-->
                 <!--<xi:fallback>-->
@@ -1206,7 +1206,7 @@
         <!--</chapter>-->
 
         <chapter xml:id="zend.ldap">
-            <info><title>Zend_Ldap</title></info>
+            <title>Zend_Ldap</title>
             <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Ldap-Introduction.xml" parse="xml">
                 <xi:fallback>
                     <xi:include href="../en/module_specs/Zend_Ldap-Introduction.xml" parse="xml"/>
@@ -1244,7 +1244,7 @@
             </xi:include>
         </chapter>
 
-        <chapter xml:id="zend.loader"><info><title>Zend_Loader</title></info>
+        <chapter xml:id="zend.loader"><title>Zend_Loader</title>
 
             <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Loader.xml" parse="xml">
                 <xi:fallback>
@@ -1269,7 +1269,7 @@
             </xi:include -->
         </chapter>
 
-        <!--<chapter xml:id="zend.locale"><info><title>Zend_Locale</title></info>-->
+        <!--<chapter xml:id="zend.locale"><title>Zend_Locale</title>-->
             <!---->
             <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Locale-Introduction.xml" parse="xml">-->
                 <!--<xi:fallback>-->
@@ -1298,7 +1298,7 @@
             <!--</xi:include>-->
         <!--</chapter>-->
 
-        <!--<chapter xml:id="zend.log"><info><title>Zend_Log</title></info>-->
+        <!--<chapter xml:id="zend.log"><title>Zend_Log</title>-->
             <!---->
             <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Log-Overview.xml" parse="xml">-->
                 <!--<xi:fallback>-->
@@ -1328,7 +1328,7 @@
         <!--</chapter>-->
 
         <chapter xml:id="zend.mail">
-            <info><title>Zend\Mail</title></info>
+            <title>Zend\Mail</title>
 
             <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/zend.mail.message.xml" parse="xml">
                 <xi:fallback>
@@ -1426,7 +1426,7 @@
             <!--</xi:include>-->
         </chapter>
 
-        <!--<chapter xml:id="zend.markup"><info><title>Zend_Markup</title></info>-->
+        <!--<chapter xml:id="zend.markup"><title>Zend_Markup</title>-->
             <!---->
             <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Markup.xml" parse="xml">-->
                 <!--<xi:fallback>-->
@@ -1450,7 +1450,7 @@
             <!--</xi:include>-->
         <!--</chapter>-->
 
-        <!--<chapter xml:id="zend.measure"><info><title>Zend_Measure</title></info>-->
+        <!--<chapter xml:id="zend.measure"><title>Zend_Measure</title>-->
             <!---->
             <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Measure-Introduction.xml" parse="xml">-->
                 <!--<xi:fallback>-->
@@ -1479,7 +1479,7 @@
             <!--</xi:include>-->
         <!--</chapter>-->
 
-        <!--<chapter xml:id="zend.memory"><info><title>Zend_Memory</title></info>-->
+        <!--<chapter xml:id="zend.memory"><title>Zend_Memory</title>-->
             <!---->
             <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Memory-Overview.xml" parse="xml">-->
                 <!--<xi:fallback>-->
@@ -1498,7 +1498,7 @@
             <!--</xi:include>-->
         <!--</chapter>-->
 
-        <!--<chapter xml:id="zend.mime"><info><title>Zend_Mime</title></info>-->
+        <!--<chapter xml:id="zend.mime"><title>Zend_Mime</title>-->
             <!---->
             <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Mime.xml" parse="xml">-->
                 <!--<xi:fallback>-->
@@ -1518,7 +1518,7 @@
         <!--</chapter>-->
 
         <chapter xml:id="zend.module">
-            <info><title>Zend\Module</title></info>
+            <title>Zend\Module</title>
 
             <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Module-Intro.xml" parse="xml">
                 <xi:fallback>
@@ -1552,7 +1552,7 @@
         </chapter>
 
         <chapter xml:id="zend.mvc">
-            <info><title>Zend\Mvc</title></info>
+            <title>Zend\Mvc</title>
 
             <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Mvc-Intro.xml" parse="xml">
                 <xi:fallback>
@@ -1597,7 +1597,7 @@
             </xi:include>
         </chapter>
 
-        <!--<chapter xml:id="zend.navigation"><info><title>Zend_Navigation</title></info>-->
+        <!--<chapter xml:id="zend.navigation"><title>Zend_Navigation</title>-->
             <!---->
             <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Navigation-Introduction.xml" parse="xml">-->
                 <!--<xi:fallback>-->
@@ -1616,7 +1616,7 @@
             <!--</xi:include>-->
         <!--</chapter>-->
 
-        <!--<chapter xml:id="zend.oauth"><info><title>Zend_Oauth</title></info>-->
+        <!--<chapter xml:id="zend.oauth"><title>Zend_Oauth</title>-->
             <!---->
             <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Oauth-Introduction.xml" parse="xml">-->
                 <!--<xi:fallback>-->
@@ -1625,7 +1625,7 @@
             <!--</xi:include>-->
         <!--</chapter>-->
 
-        <!--<chapter xml:id="zend.openid"><info><title>Zend_OpenId</title></info>-->
+        <!--<chapter xml:id="zend.openid"><title>Zend_OpenId</title>-->
             <!---->
             <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_OpenId-Introduction.xml" parse="xml">-->
                 <!--<xi:fallback>-->
@@ -1644,7 +1644,7 @@
             <!--</xi:include>-->
         <!--</chapter>-->
 
-        <!--<chapter xml:id="zend.paginator"><info><title>Zend_Paginator</title></info>-->
+        <!--<chapter xml:id="zend.paginator"><title>Zend_Paginator</title>-->
             <!---->
             <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Paginator-Introduction.xml" parse="xml">-->
                 <!--<xi:fallback>-->
@@ -1668,7 +1668,7 @@
             <!--</xi:include>-->
         <!--</chapter>-->
 
-        <!--<chapter xml:id="zend.pdf"><info><title>Zend_Pdf</title></info>-->
+        <!--<chapter xml:id="zend.pdf"><title>Zend_Pdf</title>-->
             <!---->
             <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Pdf-Introduction.xml" parse="xml">-->
                 <!--<xi:fallback>-->
@@ -1712,7 +1712,7 @@
             <!--</xi:include>-->
         <!--</chapter>-->
 
-        <!--<chapter xml:id="zend.progressbar"><info><title>Zend_ProgressBar</title></info>-->
+        <!--<chapter xml:id="zend.progressbar"><title>Zend_ProgressBar</title>-->
             <!---->
             <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_ProgressBar.xml" parse="xml">-->
                 <!--<xi:fallback>-->
@@ -1721,7 +1721,7 @@
             <!--</xi:include>-->
         <!--</chapter>-->
 
-        <!--<chapter xml:id="zend.queue"><info><title>Zend_Queue</title></info>-->
+        <!--<chapter xml:id="zend.queue"><title>Zend_Queue</title>-->
             <!---->
             <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Queue-Introduction.xml" parse="xml">-->
                 <!--<xi:fallback>-->
@@ -1755,7 +1755,7 @@
             <!--</xi:include>-->
         <!--</chapter>-->
 
-        <!--<chapter xml:id="zend.reflection"><info><title>Zend_Reflection</title></info>-->
+        <!--<chapter xml:id="zend.reflection"><title>Zend_Reflection</title>-->
             <!---->
             <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Reflection-Introduction.xml" parse="xml">-->
                 <!--<xi:fallback>-->
@@ -1774,7 +1774,7 @@
             <!--</xi:include>-->
         <!--</chapter>-->
 
-        <!--<chapter xml:id="zend.registry"><info><title>Zend_Registry</title></info>-->
+        <!--<chapter xml:id="zend.registry"><title>Zend_Registry</title>-->
             <!---->
             <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Registry.xml" parse="xml">-->
                 <!--<xi:fallback>-->
@@ -1783,7 +1783,7 @@
             <!--</xi:include>-->
         <!--</chapter>-->
 
-        <!--<chapter xml:id="zend.rest"><info><title>Zend_Rest</title></info>-->
+        <!--<chapter xml:id="zend.rest"><title>Zend_Rest</title>-->
             <!---->
             <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Rest.xml" parse="xml">-->
                 <!--<xi:fallback>-->
@@ -1802,7 +1802,7 @@
             <!--</xi:include>-->
         <!--</chapter>-->
 
-        <!--<chapter xml:id="zend.search.lucene"><info><title>Zend_Search_Lucene</title></info>-->
+        <!--<chapter xml:id="zend.search.lucene"><title>Zend_Search_Lucene</title>-->
             <!---->
             <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Search_Lucene-Overview.xml" parse="xml">-->
                 <!--<xi:fallback>-->
@@ -1856,7 +1856,7 @@
             <!--</xi:include>-->
         <!--</chapter>-->
 
-        <!--<chapter xml:id="zend.serializer"><info><title>Zend_Serializer</title></info>-->
+        <!--<chapter xml:id="zend.serializer"><title>Zend_Serializer</title>-->
             <!---->
             <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Serializer-Introduction.xml" parse="xml">-->
                 <!--<xi:fallback>-->
@@ -1871,7 +1871,7 @@
             <!--</xi:include>-->
         <!--</chapter>-->
 
-        <!--<chapter xml:id="zend.server"><info><title>Zend_Server</title></info>-->
+        <!--<chapter xml:id="zend.server"><title>Zend_Server</title>-->
             <!---->
             <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Server.xml" parse="xml">-->
                 <!--<xi:fallback>-->
@@ -1885,7 +1885,7 @@
             <!--</xi:include>-->
         <!--</chapter>-->
 
-        <!--<chapter xml:id="zend.service"><info><title>Zend_Service</title></info>-->
+        <!--<chapter xml:id="zend.service"><title>Zend_Service</title>-->
             <!---->
             <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Service.xml" parse="xml">-->
                 <!--<xi:fallback>-->
@@ -2079,7 +2079,7 @@
             <!--</xi:include>-->
         <!--</chapter>-->
 
-        <!--<chapter xml:id="zend.session"><info><title>Zend_Session</title></info>-->
+        <!--<chapter xml:id="zend.session"><title>Zend_Session</title>-->
             <!---->
             <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Session-Introduction.xml" parse="xml">-->
                 <!--<xi:fallback>-->
@@ -2108,7 +2108,7 @@
             <!--</xi:include>-->
         <!--</chapter>-->
 
-        <!--<chapter xml:id="zend.soap"><info><title>Zend_Soap</title></info>-->
+        <!--<chapter xml:id="zend.soap"><title>Zend_Soap</title>-->
             <!---->
             <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Soap_Server.xml" parse="xml">-->
                 <!--<xi:fallback>-->
@@ -2132,7 +2132,7 @@
             <!--</xi:include>-->
         <!--</chapter>-->
 
-        <!--<chapter xml:id="zend.tag"><info><title>Zend_Tag</title></info>-->
+        <!--<chapter xml:id="zend.tag"><title>Zend_Tag</title>-->
             <!---->
             <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Tag-Introduction.xml" parse="xml">-->
                 <!--<xi:fallback>-->
@@ -2146,7 +2146,7 @@
             <!--</xi:include>-->
         <!--</chapter>-->
 
-        <!--<chapter xml:id="zend.test"><info><title>Zend_Test</title></info>-->
+        <!--<chapter xml:id="zend.test"><title>Zend_Test</title>-->
             <!---->
             <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Test.xml" parse="xml">-->
                 <!--<xi:fallback>-->
@@ -2165,7 +2165,7 @@
             <!--</xi:include>-->
         <!--</chapter>-->
 
-        <!--<chapter xml:id="zend.text"><info><title>Zend_Text</title></info>-->
+        <!--<chapter xml:id="zend.text"><title>Zend_Text</title>-->
             <!---->
             <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Text_Figlet.xml" parse="xml">-->
                 <!--<xi:fallback>-->
@@ -2179,7 +2179,7 @@
             <!--</xi:include>-->
         <!--</chapter>-->
 
-        <!--<chapter xml:id="zend.timesync"><info><title>Zend_TimeSync</title></info>-->
+        <!--<chapter xml:id="zend.timesync"><title>Zend_TimeSync</title>-->
             <!---->
             <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_TimeSync.xml" parse="xml">-->
                 <!--<xi:fallback>-->
@@ -2193,7 +2193,7 @@
             <!--</xi:include>-->
         <!--</chapter>-->
 
-        <!--<chapter xml:id="zend.tool"><info><title>Zend_Tool</title></info>-->
+        <!--<chapter xml:id="zend.tool"><title>Zend_Tool</title>-->
             <!---->
             <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Tool-Usage-CLI.xml" parse="xml">-->
                 <!--<xi:fallback>-->
@@ -2207,7 +2207,7 @@
             <!--</xi:include>-->
         <!--</chapter>-->
 
-        <!--<chapter xml:id="zend.tool.framework"><info><title>Zend_Tool_Framework</title></info>-->
+        <!--<chapter xml:id="zend.tool.framework"><title>Zend_Tool_Framework</title>-->
             <!---->
             <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Tool_Framework-Introduction.xml" parse="xml">-->
                 <!--<xi:fallback>-->
@@ -2241,7 +2241,7 @@
             <!--</xi:include>-->
         <!--</chapter>-->
 
-        <!--<chapter xml:id="zend.tool.project"><info><title>Zend_Tool_Project</title></info>-->
+        <!--<chapter xml:id="zend.tool.project"><title>Zend_Tool_Project</title>-->
             <!---->
             <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Tool_Project.xml" parse="xml">-->
                 <!--<xi:fallback>-->
@@ -2265,7 +2265,7 @@
             <!--</xi:include>-->
         <!--</chapter>-->
 
-        <!--<chapter xml:id="zend.translate"><info><title>Zend_Translate</title></info>-->
+        <!--<chapter xml:id="zend.translate"><title>Zend_Translate</title>-->
             <!---->
             <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Translate-Introduction.xml" parse="xml">-->
                 <!--<xi:fallback>-->
@@ -2299,7 +2299,7 @@
             <!--</xi:include>-->
         <!--</chapter>-->
 
-        <chapter xml:id="zend.uri"><info><title>Zend_Uri</title></info>
+        <chapter xml:id="zend.uri"><title>Zend_Uri</title>
 
             <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Uri.xml" parse="xml">
                 <xi:fallback>
@@ -2308,7 +2308,7 @@
             </xi:include>
         </chapter>
 
-        <!--<chapter xml:id="zend.validate"><info><title>Zend_Validate</title></info>-->
+        <!--<chapter xml:id="zend.validate"><title>Zend_Validate</title>-->
             <!---->
             <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Validate.xml" parse="xml">-->
                 <!--<xi:fallback>-->
@@ -2337,7 +2337,7 @@
             <!--</xi:include>-->
         <!--</chapter>-->
 
-        <!--<chapter xml:id="zend.version"><info><title>Zend_Version</title></info>-->
+        <!--<chapter xml:id="zend.version"><title>Zend_Version</title>-->
             <!---->
             <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Version.xml" parse="xml">-->
                 <!--<xi:fallback>-->
@@ -2347,7 +2347,7 @@
         <!--</chapter>-->
 
         <chapter xml:id="zend.view">
-            <info><title>Zend_View</title></info>
+            <title>Zend_View</title>
 
             <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/zend.view.quick-start.xml" parse="xml">
                 <xi:fallback>
@@ -2374,7 +2374,7 @@
             </xi:include>
         </chapter>
 
-        <!--<chapter xml:id="zend.wildfire"><info><title>Zend_Wildfire</title></info>-->
+        <!--<chapter xml:id="zend.wildfire"><title>Zend_Wildfire</title>-->
             <!---->
             <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Wildfire.xml" parse="xml">-->
                 <!--<xi:fallback>-->
@@ -2383,7 +2383,7 @@
             <!--</xi:include>-->
         <!--</chapter>-->
 
-        <!--<chapter xml:id="zend.xmlrpc"><info><title>Zend_XmlRpc</title></info>-->
+        <!--<chapter xml:id="zend.xmlrpc"><title>Zend_XmlRpc</title>-->
             <!---->
             <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_XmlRpc.xml" parse="xml">-->
                 <!--<xi:fallback>-->
@@ -2410,7 +2410,7 @@
     <!--</xi:include>-->
 
     <!--<appendix xml:id="migration">-->
-        <!--<info><title>&appendix.migration.title;</title></info>-->
+        <!--<title>&appendix.migration.title;</title>-->
         <!---->
         <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="ref/migration-110.xml" parse="xml">-->
             <!--<xi:fallback>-->
@@ -2483,7 +2483,7 @@
     <!--</xi:include>-->
 
     <!--<appendix xml:id="performance">-->
-        <!--<info><title>&appendix.performance.title;</title></info>-->
+        <!--<title>&appendix.performance.title;</title>-->
         <!---->
         <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="ref/performance-introduction.xml" parse="xml">-->
             <!--<xi:fallback>-->

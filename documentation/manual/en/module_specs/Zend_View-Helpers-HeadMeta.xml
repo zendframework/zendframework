@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.headmeta"><info><title>HeadMeta Helper</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.headmeta"><title>HeadMeta Helper</title>
     
 
     <para>
@@ -105,7 +105,7 @@
         <link linkend="zend.view.helpers.initial.placeholder">Placeholder helper</link>.
     </para>
 
-    <example xml:id="zend.view.helpers.initial.headmeta.basicusage"><info><title>HeadMeta Helper Basic Usage</title></info>
+    <example xml:id="zend.view.helpers.initial.headmeta.basicusage"><title>HeadMeta Helper Basic Usage</title>
         
 
         <para>

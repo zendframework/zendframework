@@ -32,26 +32,26 @@
     </info>
 
     <chapter xml:id="introduction">
-        <info><title>&chapter.introduction.title;</title></info>
+        <title>&chapter.introduction.title;</title>
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="ref/overview.xml" parse="xml"/>
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="ref/installation.xml" parse="xml"/>
     </chapter>
 
     <chapter xml:id="zend.acl">
-        <info><title>Zend_Acl</title></info>
+        <title>Zend_Acl</title>
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Acl.xml" parse="xml"/>
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Acl-Refining.xml" parse="xml"/>
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Acl-Advanced.xml" parse="xml"/>
     </chapter>
 
     <chapter xml:id="zend.amf">
-        <info><title>Zend_Amf</title></info>
+        <title>Zend_Amf</title>
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Amf.xml" parse="xml"/>
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Amf-Server.xml" parse="xml"/>
     </chapter>
 
     <chapter xml:id="zend.application">
-        <info><title>Zend_Application</title></info>
+        <title>Zend_Application</title>
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Application-Introduction.xml" parse="xml"/>
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Application-QuickStart.xml" parse="xml"/>
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Application-TheoryOfOperation.xml" parse="xml"/>
@@ -61,7 +61,7 @@
     </chapter>
 
     <chapter xml:id="zend.auth">
-        <info><title>Zend_Auth</title></info>
+        <title>Zend_Auth</title>
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Auth.xml" parse="xml"/>
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Auth_Adapter_DbTable.xml" parse="xml"/>
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Auth_Adapter_Digest.xml" parse="xml"/>
@@ -71,7 +71,7 @@
     </chapter>
 
     <chapter xml:id="zend.cache">
-        <info><title>Zend_Cache</title></info>
+        <title>Zend_Cache</title>
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Cache-Introduction.xml" parse="xml"/>
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Cache-Theory.xml" parse="xml"/>
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Cache-Frontends.xml" parse="xml"/>
@@ -79,21 +79,21 @@
     </chapter>
 
     <chapter xml:id="zend.captcha">
-        <info><title>Zend_Captcha</title></info>
+        <title>Zend_Captcha</title>
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Captcha.xml" parse="xml"/>
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Captcha-Operation.xml" parse="xml"/>
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Captcha-Adapters.xml" parse="xml"/>
     </chapter>
 
     <chapter xml:id="zend.codegenerator">
-        <info><title>Zend_CodeGenerator</title></info>
+        <title>Zend_CodeGenerator</title>
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_CodeGenerator-Introduction.xml" parse="xml"/>
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_CodeGenerator-Examples.xml" parse="xml"/>
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_CodeGenerator-Reference.xml" parse="xml"/>
     </chapter>
 
     <chapter xml:id="zend.config">
-        <info><title>Zend_Config</title></info>
+        <title>Zend_Config</title>
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Config-Introduction.xml" parse="xml"/>
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Config-TheoryOfOperation.xml" parse="xml"/>
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Config_Ini.xml" parse="xml"/>
@@ -101,12 +101,12 @@
     </chapter>
 
     <chapter xml:id="zend.config.writer">
-        <info><title>Zend_Config_Writer</title></info>
+        <title>Zend_Config_Writer</title>
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Config_Writer.xml" parse="xml"/>
     </chapter>
 
     <chapter xml:id="zend.console.getopt">
-        <info><title>Zend_Console_Getopt</title></info>
+        <title>Zend_Console_Getopt</title>
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Console_Getopt-Introduction.xml" parse="xml"/>
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Console_Getopt-Rules.xml" parse="xml"/>
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Console_Getopt-Fetching.xml" parse="xml"/>
@@ -114,7 +114,7 @@
     </chapter>
 
     <chapter xml:id="zend.controller">
-        <info><title>Zend_Controller</title></info>
+        <title>Zend_Controller</title>
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Controller-QuickStart.xml" parse="xml"/>
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Controller-Basics.xml" parse="xml"/>
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Controller-FrontController.xml" parse="xml"/>
@@ -131,14 +131,14 @@
     </chapter>
 
     <chapter xml:id="zend.currency">
-        <info><title>Zend_Currency</title></info>
+        <title>Zend_Currency</title>
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Currency-Introduction.xml" parse="xml"/>
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Currency-Usage.xml" parse="xml"/>
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Currency-Migrating.xml" parse="xml"/>
     </chapter>
 
     <chapter xml:id="zend.date">
-        <info><title>Zend_Date</title></info>
+        <title>Zend_Date</title>
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Date-Introduction.xml" parse="xml"/>
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Date-Theory.xml" parse="xml"/>
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Date-Basic.xml" parse="xml"/>
@@ -149,7 +149,7 @@
     </chapter>
 
     <chapter xml:id="zend.db">
-        <info><title>Zend_Db</title></info>
+        <title>Zend_Db</title>
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Db_Adapter.xml" parse="xml"/>
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Db_Statement.xml" parse="xml"/>
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Db_Profiler.xml" parse="xml"/>
@@ -161,12 +161,12 @@
     </chapter>
 
     <chapter xml:id="zend.debug">
-        <info><title>Zend_Debug</title></info>
+        <title>Zend_Debug</title>
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Debug.xml" parse="xml"/>
     </chapter>
 
     <chapter xml:id="zend.dojo">
-        <info><title>Zend_Dojo</title></info>
+        <title>Zend_Dojo</title>
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Dojo.xml" parse="xml"/>
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Dojo-Data.xml" parse="xml"/>
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Dojo-View.xml" parse="xml"/>
@@ -174,18 +174,18 @@
     </chapter>
 
     <chapter xml:id="zend.dom">
-        <info><title>Zend_Dom</title></info>
+        <title>Zend_Dom</title>
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Dom.xml" parse="xml"/>
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Dom-Query.xml" parse="xml"/>
     </chapter>
 
     <chapter xml:id="zend.exception">
-        <info><title>Zend_Exception</title></info>
+        <title>Zend_Exception</title>
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Exception.xml" parse="xml"/>
     </chapter>
 
     <chapter xml:id="zend.feed">
-        <info><title>Zend_Feed</title></info>
+        <title>Zend_Feed</title>
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Feed-Introduction.xml" parse="xml"/>
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Feed-Importing.xml" parse="xml"/>
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Feed-FindFeeds.xml" parse="xml"/>
@@ -197,7 +197,7 @@
     </chapter>
 
     <chapter xml:id="zend.file">
-        <info><title>Zend_File</title></info>
+        <title>Zend_File</title>
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_File_Transfer-Introduction.xml" parse="xml"/>
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_File_Transfer-Validators.xml" parse="xml"/>
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_File_Transfer-Filters.xml" parse="xml"/>
@@ -205,7 +205,7 @@
     </chapter>
 
     <chapter xml:id="zend.filter">
-        <info><title>Zend_Filter</title></info>
+        <title>Zend_Filter</title>
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Filter.xml" parse="xml"/>
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Filter-Set.xml" parse="xml"/>
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Filter-FilterChains.xml" parse="xml"/>
@@ -215,7 +215,7 @@
     </chapter>
 
     <chapter xml:id="zend.form">
-        <info><title>Zend_Form</title></info>
+        <title>Zend_Form</title>
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Form-Introduction.xml" parse="xml"/>
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Form-QuickStart.xml" parse="xml"/>
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Form-Elements.xml" parse="xml"/>
@@ -228,7 +228,7 @@
     </chapter>
 
     <chapter xml:id="zend.gdata">
-        <info><title>Zend_Gdata</title></info>
+        <title>Zend_Gdata</title>
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Gdata-Introduction.xml" parse="xml"/>
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Gdata_AuthSub.xml" parse="xml"/>
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Gdata_Books.xml" parse="xml"/>
@@ -245,7 +245,7 @@
     </chapter>
 
     <chapter xml:id="zend.http">
-        <info><title>Zend_Http</title></info>
+        <title>Zend_Http</title>
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Http_Client.xml" parse="xml"/>
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Http_Client-Advanced.xml" parse="xml"/>
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Http_Client-Adapters.xml" parse="xml"/>
@@ -254,12 +254,12 @@
     </chapter>
 
     <chapter xml:id="zend.infocard">
-        <info><title>Zend_InfoCard</title></info>
+        <title>Zend_InfoCard</title>
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_InfoCard-Basics.xml" parse="xml"/>
     </chapter>
 
     <chapter xml:id="zend.json">
-        <info><title>Zend_Json</title></info>
+        <title>Zend_Json</title>
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Json-Introduction.xml" parse="xml"/>
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Json-Basics.xml" parse="xml"/>
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Json-Objects.xml" parse="xml"/>
@@ -268,7 +268,7 @@
     </chapter>
 
     <chapter xml:id="zend.layout">
-        <info><title>Zend_Layout</title></info>
+        <title>Zend_Layout</title>
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Layout-Introduction.xml" parse="xml"/>
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Layout-QuickStart.xml" parse="xml"/>
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Layout-Options.xml" parse="xml"/>
@@ -276,12 +276,12 @@
     </chapter>
 
     <chapter xml:id="zend.ldap">
-        <info><title>Zend_Ldap</title></info>
+        <title>Zend_Ldap</title>
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Ldap.xml" parse="xml"/>
     </chapter>
 
     <chapter xml:id="zend.loader">
-        <info><title>Zend_Loader</title></info>
+        <title>Zend_Loader</title>
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Loader.xml" parse="xml"/>
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Loader-Autoloader.xml" parse="xml"/>
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Loader-Autoloader-Resource.xml" parse="xml"/>
@@ -292,7 +292,7 @@
     <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="ref/coding_standard.xml" parse="xml"/>
 
     <appendix xml:id="performance">
-        <info><title>&appendix.performance.title;</title></info>
+        <title>&appendix.performance.title;</title>
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="ref/performance-introduction.xml" parse="xml"/>
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="ref/performance-classloading.xml" parse="xml"/>
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="ref/performance-database.xml" parse="xml"/>

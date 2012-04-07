@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.loader.short-name-locater"><info><title>The ShortNameLocater Interface</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.loader.short-name-locater"><title>The ShortNameLocater Interface</title>
     
 
-    <section xml:id="zend.loader.short-name-locater.intro"><info><title>Overview</title></info>
+    <section xml:id="zend.loader.short-name-locater.intro"><title>Overview</title>
         
 
         <para>
@@ -35,7 +35,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.loader.short-name-locater.quick-start"><info><title>Quick Start</title></info>
+    <section xml:id="zend.loader.short-name-locater.quick-start"><title>Quick Start</title>
         
 
         <para>
@@ -55,7 +55,7 @@ interface ShortNameLocater
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.loader.short-name-locater.options"><info><title>Configuration Options</title></info>
+    <section xml:id="zend.loader.short-name-locater.options"><title>Configuration Options</title>
         
 
         <para>
@@ -63,7 +63,7 @@ interface ShortNameLocater
         </para>
     </section>
 
-    <section xml:id="zend.loader.short-name-locater.methods"><info><title>Available Methods</title></info>
+    <section xml:id="zend.loader.short-name-locater.methods"><title>Available Methods</title>
         
 
         <refentry xml:id="zend.loader.short-name-locater.methods.is-loaded">
@@ -81,7 +81,7 @@ interface ShortNameLocater
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsection><info><title>isLoaded()</title></info>
+            <refsection><title>isLoaded()</title>
                 
 
                 <para>
@@ -106,7 +106,7 @@ interface ShortNameLocater
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsection><info><title>getClassName()</title></info>
+            <refsection><title>getClassName()</title>
                 
 
                 <para>
@@ -130,7 +130,7 @@ interface ShortNameLocater
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsection><info><title>load()</title></info>
+            <refsection><title>load()</title>
                 
 
                 <para>
@@ -141,7 +141,7 @@ interface ShortNameLocater
 
     </section>
 
-    <section xml:id="zend.loader.short-name-locater.examples"><info><title>Examples</title></info>
+    <section xml:id="zend.loader.short-name-locater.examples"><title>Examples</title>
         
 
         <para>

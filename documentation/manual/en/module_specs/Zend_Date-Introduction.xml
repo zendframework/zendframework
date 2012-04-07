@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.date.introduction"><info><title>Introduction</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.date.introduction"><title>Introduction</title>
     
 
     <para>
@@ -26,7 +26,7 @@
         regions.
     </para>
 
-    <section xml:id="zend.date.setdefaulttimezone"><info><title>Always Set a Default Timezone</title></info>
+    <section xml:id="zend.date.setdefaulttimezone"><title>Always Set a Default Timezone</title>
         
 
         <para>
@@ -40,7 +40,7 @@
                 Timezone Identifier List</link>.
         </para>
 
-        <example xml:id="zend.date.setdefaulttimezone.example-1"><info><title>Setting a Default Timezone</title></info>
+        <example xml:id="zend.date.setdefaulttimezone.example-1"><title>Setting a Default Timezone</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -68,7 +68,7 @@ date_default_timezone_set('Europe/Berlin');
         </para>
     </section>
 
-    <section xml:id="zend.date.why"><info><title>Why Use Zend_Date?</title></info>
+    <section xml:id="zend.date.why"><title>Why Use Zend_Date?</title>
         
 
         <para>

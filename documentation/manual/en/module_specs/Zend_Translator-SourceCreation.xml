@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.translator.sourcecreation"><info><title>Creating source files</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.translator.sourcecreation"><title>Creating source files</title>
 
 
     <para>
@@ -16,7 +16,7 @@
         </para>
     </note>
 
-    <section xml:id="zend.translator.sourcecreation.array"><info><title>Creating Array source files</title></info>
+    <section xml:id="zend.translator.sourcecreation.array"><title>Creating Array source files</title>
 
         <para>
 
@@ -80,7 +80,7 @@ $translate = new Zend_Translator(
         </note>
     </section>
 
-    <section xml:id="zend.translator.sourcecreation.gettext"><info><title>Creating Gettext source files</title></info>
+    <section xml:id="zend.translator.sourcecreation.gettext"><title>Creating Gettext source files</title>
 
         <para>
             Gettext source files are created by GNU's gettext library.
@@ -161,7 +161,7 @@ print_r($translate->getAdapterInfo());
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.translator.sourcecreation.tmx"><info><title>Creating TMX source files</title></info>
+    <section xml:id="zend.translator.sourcecreation.tmx"><title>Creating TMX source files</title>
 
         <para>
             TMX source files are a new industry standard.
@@ -172,7 +172,7 @@ print_r($translate->getAdapterInfo());
             creating TMX source files are not freely available.
         </para>
 
-        <example xml:id="zend.translator.sourcecreation.tmx.example"><info><title>Example TMX file</title></info>
+        <example xml:id="zend.translator.sourcecreation.tmx.example"><title>Example TMX file</title>
 
             <programlisting language="xml"><![CDATA[
 <?xml version="1.0" ?>
@@ -220,7 +220,7 @@ $translate = new Zend_Translator(
             languages.
         </para>
 
-        <note><info><title>Option useId</title></info>
+        <note><title>Option useId</title>
 
 
             <para>
@@ -243,7 +243,7 @@ $translate = new Zend_Translator(
         </note>
     </section>
 
-    <section xml:id="zend.translator.sourcecreation.csv"><info><title>Creating CSV source files</title></info>
+    <section xml:id="zend.translator.sourcecreation.csv"><title>Creating CSV source files</title>
 
         <para>
             CSV source files are small and human readable.
@@ -251,7 +251,7 @@ $translate = new Zend_Translator(
             you will probably use the CSV adapter.
         </para>
 
-        <example xml:id="zend.translator.sourcecreation.csv.example"><info><title>Example CSV file</title></info>
+        <example xml:id="zend.translator.sourcecreation.csv.example"><title>Example CSV file</title>
 
             <programlisting language="txt"><![CDATA[
 ﻿#Example csv file
@@ -300,7 +300,7 @@ $translate->addTranslation(
             set a different one using the option <emphasis>enclosure</emphasis>.
         </para>
 
-        <example xml:id="zend.translator.sourcecreation.csv.example2"><info><title>Second CSV file example</title></info>
+        <example xml:id="zend.translator.sourcecreation.csv.example2"><title>Second CSV file example</title>
 
             <programlisting language="txt"><![CDATA[
 ﻿# Example CSV file
@@ -337,7 +337,7 @@ $translate->addTranslation(
         </note>
     </section>
 
-    <section xml:id="zend.translator.sourcecreation.ini"><info><title>Creating INI source files</title></info>
+    <section xml:id="zend.translator.sourcecreation.ini"><title>Creating INI source files</title>
 
         <para>
             <acronym>INI</acronym> source files are human readable but normally not very small as
@@ -345,7 +345,7 @@ $translate->addTranslation(
             editable by your customers you can use the <acronym>INI</acronym> adapter.
         </para>
 
-        <example xml:id="zend.translator.sourcecreation.ini.example"><info><title>Example INI file</title></info>
+        <example xml:id="zend.translator.sourcecreation.ini.example"><title>Example INI file</title>
 
             <programlisting language="txt"><![CDATA[
 [Test]

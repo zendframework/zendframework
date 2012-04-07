@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.lessthan"><info><title>LessThan</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.lessthan"><title>LessThan</title>
 
 
     <para>
@@ -7,7 +7,7 @@
         less than a maximum border value.
     </para>
 
-    <note><info><title>Zend_Validate_LessThan supports only number validation</title></info>
+    <note><title>Zend_Validate_LessThan supports only number validation</title>
 
 
         <para>
@@ -16,7 +16,7 @@
         </para>
     </note>
 
-    <section xml:id="zend.validate.set.lessthan.options"><info><title>Supported options for Zend_Validate_LessThan</title></info>
+    <section xml:id="zend.validate.set.lessthan.options"><title>Supported options for Zend_Validate_LessThan</title>
 
 
         <para>
@@ -40,7 +40,7 @@
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.validate.set.lessthan.basic"><info><title>Basic usage</title></info>
+    <section xml:id="zend.validate.set.lessthan.basic"><title>Basic usage</title>
 
 
         <para>
@@ -60,7 +60,7 @@ $return = $valid->isValid($value);
         </para>
     </section>
 
-    <section xml:id="zend.validate.set.lessthan.inclusively"><info><title>Validation inclusive the border value</title></info>
+    <section xml:id="zend.validate.set.lessthan.inclusively"><title>Validation inclusive the border value</title>
 
 
         <para>

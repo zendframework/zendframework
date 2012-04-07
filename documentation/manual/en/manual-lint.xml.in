@@ -10,7 +10,7 @@
 ]>
 <book xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="manual" xml:lang="&lang;">
     <chapter>
-        <info><title>XMLLint</title></info>
+        <title>XMLLint</title>
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="@XMLFILE@" parse="xml">
             <xi:fallback>
                 Cannot find file "@XMLFILE@"

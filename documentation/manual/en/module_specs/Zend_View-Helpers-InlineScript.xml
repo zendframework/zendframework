@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.inlinescript"><info><title>InlineScript Helper</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.inlinescript"><title>InlineScript Helper</title>
     
 
     <para>
@@ -14,7 +14,7 @@
         <methodname>headScript()</methodname>.
     </para>
 
-    <note><info><title>Use InlineScript for HTML Body Scripts</title></info>
+    <note><title>Use InlineScript for HTML Body Scripts</title>
         
 
         <para>

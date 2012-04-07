@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.tool.framework.writing-providers"><info><title>Creating Providers to use with Zend_Tool_Framework</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.tool.framework.writing-providers"><title>Creating Providers to use with Zend_Tool_Framework</title>
     
 
     <para>
@@ -9,7 +9,7 @@
         "controller" is inside of your <acronym>MVC</acronym> application.
     </para>
 
-    <section xml:id="zend.tool.framework.writing-providers.loading"><info><title>How Zend_Tool finds your Providers</title></info>
+    <section xml:id="zend.tool.framework.writing-providers.loading"><title>How Zend_Tool finds your Providers</title>
         
 
         <para>
@@ -66,7 +66,7 @@
             </para>
         </note>
 
-        <example xml:id="zend.tool.framework.writing-providers.loading.example"><info><title>Exposing Your Providers with a Manifest</title></info>
+        <example xml:id="zend.tool.framework.writing-providers.loading.example"><title>Exposing Your Providers with a Manifest</title>
             
 
             <para>
@@ -95,7 +95,7 @@ class My_Component_Manifest
         </example>
     </section>
 
-    <section xml:id="zend.tool.framework.writing-providers.basic"><info><title>Basic Instructions for Creating Providers</title></info>
+    <section xml:id="zend.tool.framework.writing-providers.basic"><title>Basic Instructions for Creating Providers</title>
         
 
         <para>
@@ -133,7 +133,7 @@ Hello from my provider!
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.tool.framework.writing-providers.response"><info><title>The response object</title></info>
+    <section xml:id="zend.tool.framework.writing-providers.response"><title>The response object</title>
         
 
         <para>
@@ -164,10 +164,10 @@ class My_Component_HelloProvider
         </para>
     </section>
 
-    <section xml:id="zend.tool.framework.writing-providers.advanced"><info><title>Advanced Development Information</title></info>
+    <section xml:id="zend.tool.framework.writing-providers.advanced"><title>Advanced Development Information</title>
         
 
-        <section xml:id="zend.tool.framework.writing-providers.advanced.variables"><info><title>Passing Variables to a Provider</title></info>
+        <section xml:id="zend.tool.framework.writing-providers.advanced.variables"><title>Passing Variables to a Provider</title>
             
 
             <para>
@@ -209,7 +209,7 @@ class My_Component_HelloProvider
             </para>
         </section>
 
-        <section xml:id="zend.tool.framework.writing-providers.advanced.prompt"><info><title>Prompt the User for Input</title></info>
+        <section xml:id="zend.tool.framework.writing-providers.advanced.prompt"><title>Prompt the User for Input</title>
             
 
             <para>
@@ -241,7 +241,7 @@ class My_Component_HelloProvider
             </para>
         </section>
 
-        <section xml:id="zend.tool.framework.writing-providers.advanced.pretendable"><info><title>Pretending to execute a Provider Action</title></info>
+        <section xml:id="zend.tool.framework.writing-providers.advanced.pretendable"><title>Pretending to execute a Provider Action</title>
             
 
             <para>
@@ -289,7 +289,7 @@ I would say hello Ralph.
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.tool.framework.writing-providers.advanced.verbosedebug"><info><title>Verbose and Debug modes</title></info>
+        <section xml:id="zend.tool.framework.writing-providers.advanced.verbosedebug"><title>Verbose and Debug modes</title>
             
 
             <para>
@@ -316,7 +316,7 @@ class My_Component_HelloProvider
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.tool.framework.writing-providers.advanced.configstorage"><info><title>Accessing User Config and Storage</title></info>
+        <section xml:id="zend.tool.framework.writing-providers.advanced.configstorage"><title>Accessing User Config and Storage</title>
             
 
             <para>

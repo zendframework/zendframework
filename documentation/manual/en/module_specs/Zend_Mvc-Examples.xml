@@ -3,13 +3,13 @@
 <section
     xmlns="http://docbook.org/ns/docbook" version="5.0"
     xml:id="zend.mvc.examples">
-  <info><title>Examples</title></info>
+  <title>Examples</title>
 
   <section xml:id="zend.mvc.examples.controllers">
-    <info><title>Controllers</title></info>
+    <title>Controllers</title>
 
     <section xml:id="zend.mvc.examples.controllers.accessing-the-request-and-response">
-      <info><title>Accessing the Request and Response</title></info>
+      <title>Accessing the Request and Response</title>
 
       <para>
         When using <classname>ActionController</classname> or
@@ -50,7 +50,7 @@ $response = $event->getResponse();
     </section>
 
     <section xml:id="zend.mvc.examples.controllers.accessing-routing-parameters">
-      <info><title>Accessing routing parameters</title></info>
+      <title>Accessing routing parameters</title>
 
       <para>
         The parameters returned when routing completes are wrapped in a
@@ -78,7 +78,7 @@ $matches = $event->getRouteMatch();
     </section>
 
     <section xml:id="zend.mvc.examples.controllers.returning-early">
-      <info><title>Returning early</title></info>
+      <title>Returning early</title>
 
       <para>
         You can effectively short-circuit execution of the application at
@@ -100,10 +100,10 @@ $matches = $event->getRouteMatch();
   </section>
 
   <section xml:id="zend.mvc.examples.bootstrapping">
-    <info><title>Bootstrapping</title></info>
+    <title>Bootstrapping</title>
 
     <section xml:id="registering-module-specific-listeners">
-      <info><title>Registering module-specific listeners</title></info>
+      <title>Registering module-specific listeners</title>
 
       <para>
         Often you may want module-specific listeners. As an example, this

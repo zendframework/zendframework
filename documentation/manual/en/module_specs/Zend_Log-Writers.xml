@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.log.writers"><info><title>Writers</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.log.writers"><title>Writers</title>
     
 
     <para>
@@ -7,7 +7,7 @@
         A Writer's responsibility is to record log data to a storage backend.
     </para>
 
-    <section xml:id="zend.log.writers.stream"><info><title>Writing to Streams</title></info>
+    <section xml:id="zend.log.writers.stream"><title>Writing to Streams</title>
         
 
         <para>
@@ -70,7 +70,7 @@ $logger->info('Informational message');
         </para>
     </section>
 
-    <section xml:id="zend.log.writers.database"><info><title>Writing to Databases</title></info>
+    <section xml:id="zend.log.writers.database"><title>Writing to Databases</title>
         
 
         <para>
@@ -143,7 +143,7 @@ $logger->info('Informational message');
     <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Log-Writers-Syslog.xml"/>
     <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Log-Writers-ZendMonitor.xml"/>
 
-    <section xml:id="zend.log.writers.null"><info><title>Stubbing Out the Writer</title></info>
+    <section xml:id="zend.log.writers.null"><title>Stubbing Out the Writer</title>
         
 
         <para>
@@ -160,7 +160,7 @@ $logger->info('Informational message');
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.log.writers.mock"><info><title>Testing with the Mock</title></info>
+    <section xml:id="zend.log.writers.mock"><title>Testing with the Mock</title>
         
 
         <para>
@@ -191,7 +191,7 @@ var_dump($mock->events[0]);
         </para>
     </section>
 
-    <section xml:id="zend.log.writers.compositing"><info><title>Compositing Writers</title></info>
+    <section xml:id="zend.log.writers.compositing"><title>Compositing Writers</title>
         
 
         <para>

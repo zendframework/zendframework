@@ -3,7 +3,7 @@
 <section 
     xmlns="http://docbook.org/ns/docbook" version="5.0"
     xml:id="zend.mvc.routing">
-  <info><title>Routing</title></info>
+  <title>Routing</title>
 
   <para>
     Routing is the act of matching a request to a given controller.
@@ -133,7 +133,7 @@ $router->addRoutes(array(
 ]]></programlisting>
 
   <section xml:id="zend.mvc.routing.router-types">
-    <info><title>Router Types</title></info>
+    <title>Router Types</title>
 
     <para>
       Two routers are provided, the <classname>SimpleRouteStack</classname>
@@ -143,7 +143,7 @@ $router->addRoutes(array(
     </para>
 
     <section xml:id="zend.mvc.routing.router-types.simple-route-stack">
-      <info><title>SimpleRouteStack</title></info>
+      <title>SimpleRouteStack</title>
 
       <para>
         This router simply takes individual routes that provide their full
@@ -161,7 +161,7 @@ $router->addRoutes(array(
     </section>
 
     <section xml:id="zend.mvc.routing.router-types.tree-route-stack">
-      <info><title>TreeRouteStack</title></info>
+      <title>TreeRouteStack</title>
 
       <para>
         <classname>Zend\Mvc\Router\Http\TreeRouteStack</classname> provides the
@@ -229,14 +229,14 @@ $router->addRoutes(array(
   </section>
 
   <section xml:id="zend.mvc.routing.route-types">
-    <info><title>Route Types</title></info>
+    <title>Route Types</title>
 
     <para>
       Zend Framework 2.0 ships with the following route types.
     </para>
 
     <section xml:id="zend.mvc.routing.route-types.hostname">
-      <info><title>Zend\Mvc\Router\Http\Hostname</title></info>
+      <title>Zend\Mvc\Router\Http\Hostname</title>
 
       <para>
         The <classname>Hostname</classname> route attempts to match the
@@ -307,7 +307,7 @@ $route = Hostname::factory(array(
     </section>
 
     <section xml:id="zend.mvc.routing.route-types.literal">
-      <info><title>Zend\Mvc\Router\Http\Literal</title></info>
+      <title>Zend\Mvc\Router\Http\Literal</title>
 
       <para>
         The <classname>Literal</classname> route is for doing exact matching of
@@ -333,7 +333,7 @@ $route = Literal::factory(array(
     </section>
 
     <section xml:id="zend.mvc.routing.route-types.part">
-      <info><title>Zend\Mvc\Router\Http\Part</title></info>
+      <title>Zend\Mvc\Router\Http\Part</title>
 
       <para>
         A <classname>Part</classname> route allows crafting a tree of possible
@@ -450,7 +450,7 @@ $route = Part::factory(array(
     </section>
 
     <section xml:id="zend.mvc.routing.route-types.regex">
-      <info><title>Zend\Mvc\Router\Http\Regex</title></info>
+      <title>Zend\Mvc\Router\Http\Regex</title>
 
       <para>
         A <classname>Regex</classname> route utilizes a regular expression to
@@ -496,7 +496,7 @@ $route = Regex::factory(array(
     </section>
 
     <section xml:id="zend.mvc.routing.route-types.scheme">
-      <info><title>Zend\Mvc\Router\Http\Scheme</title></info>
+      <title>Zend\Mvc\Router\Http\Scheme</title>
 
       <para>
         The <classname>Scheme</classname> route matches the URI scheme only,
@@ -524,7 +524,7 @@ $route = Scheme::factory(array(
     </section>
 
     <section xml:id="zend.mvc.routing.route-types.segment">
-      <info><title>Zend\Mvc\Router\Http\Segment</title></info>
+      <title>Zend\Mvc\Router\Http\Segment</title>
 
       <para>
         A <classname>Segment</classname> route allows matching any segment of a

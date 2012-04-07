@@ -29,93 +29,95 @@
             parameters.  Here is a table for the
         </para>
 
-        <table frame='all'><caption>Connection Array Keys</caption>
-            <thead>
-                <row>
-                    <entry>Name</entry>
-                    <entry>Required</entry>
-                    <entry>Notes</entry>
-                </row>
-            </thead>
-            <tbody>
-                <row>
-                    <entry>
-                        driver
-                    </entry>
-                    <entry>
-                        required
-                    </entry>
-                    <entry>
-                        Mysqli, Sqlsrv, Pdo_Sqlite, Pdo_Mysql, Pdo-OtherPdoDriver
-                    </entry>
-                </row>
-                <row>
-                    <entry>
-                        database
-                    </entry>
-                    <entry>
-                        generally required
-                    </entry>
-                    <entry>
-                        the name of the database (schema)
-                    </entry>
-                </row>
-                <row>
-                    <entry>
-                        username
-                    </entry>
-                    <entry>
-                        generally required
-                    </entry>
-                    <entry>
-                        the connection username
-                    </entry>
-                </row>
-                <row>
-                    <entry>
-                        password
-                    </entry>
-                    <entry>
-                        generally required
-                    </entry>
-                    <entry>
-                        the connection password
-                    </entry>
-                </row>
-                <row>
-                    <entry>
-                        hostname
-                    </entry>
-                    <entry>
-                        not generally requried
-                    </entry>
-                    <entry>
-                        the ip address or hostname to connect to
-                    </entry>
-                </row>
-                <row>
-                    <entry>
-                        port
-                    </entry>
-                    <entry>
-                        not generally required
-                    </entry>
-                    <entry>
-                        not generally required  the port to connect to (if applicable)
-                    </entry>
-                </row>
-                <row>
-                    <entry>
-                        characterset
-                    </entry>
-                    <entry>
-                        not generally required
-                    </entry>
-                    <entry>
-                        not generally required  the character set to use
-                    </entry>
-                </row>
-            </tbody>
+        <table frame='all'><title>Connection Array Keys</title>
+        <tgroup cols="3">
+	            <thead>
+	                <row>
+	                    <entry>Name</entry>
+	                    <entry>Required</entry>
+	                    <entry>Notes</entry>
+	                </row>
+	            </thead>
+	            <tbody>
+	                <row>
+	                    <entry>
+	                        driver
+	                    </entry>
+	                    <entry>
+	                        required
+	                    </entry>
+	                    <entry>
+	                        Mysqli, Sqlsrv, Pdo_Sqlite, Pdo_Mysql, Pdo-OtherPdoDriver
+	                    </entry>
+	                </row>
+	                <row>
+	                    <entry>
+	                        database
+	                    </entry>
+	                    <entry>
+	                        generally required
+	                    </entry>
+	                    <entry>
+	                        the name of the database (schema)
+	                    </entry>
+	                </row>
+	                <row>
+	                    <entry>
+	                        username
+	                    </entry>
+	                    <entry>
+	                        generally required
+	                    </entry>
+	                    <entry>
+	                        the connection username
+	                    </entry>
+	                </row>
+	                <row>
+	                    <entry>
+	                        password
+	                    </entry>
+	                    <entry>
+	                        generally required
+	                    </entry>
+	                    <entry>
+	                        the connection password
+	                    </entry>
+	                </row>
+	                <row>
+	                    <entry>
+	                        hostname
+	                    </entry>
+	                    <entry>
+	                        not generally required
+	                    </entry>
+	                    <entry>
+	                        the IP address or hostname to connect to
+	                    </entry>
+	                </row>
+	                <row>
+	                    <entry>
+	                        port
+	                    </entry>
+	                    <entry>
+	                        not generally required
+	                    </entry>
+	                    <entry>
+	                        not generally required  the port to connect to (if applicable)
+	                    </entry>
+	                </row>
+	                <row>
+	                    <entry>
+	                        characterset
+	                    </entry>
+	                    <entry>
+	                        not generally required
+	                    </entry>
+	                    <entry>
+	                        not generally required  the character set to use
+	                    </entry>
+	                </row>
+	            </tbody>
+            </tgroup>
         </table>
 
          <para>

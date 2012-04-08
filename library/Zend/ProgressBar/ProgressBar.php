@@ -17,13 +17,13 @@
  */
 
 namespace Zend\ProgressBar;
-use Zend\ProgressBar\Exception;
+
+use Zend\ProgressBar\Exception,
+    Zend\Session;
 
 /**
  * Zend_ProgressBar offers an interface for multiple enviroments.
  *
- * @uses      \Zend\ProgressBar\Exception
- * @uses      \Zend\Session\Namespace
  * @category  Zend
  * @package   Zend_ProgressBar
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -102,7 +102,7 @@ class ProgressBar
 
         // See if we have to open a session namespace
         if ($persistenceNamespace !== null) {
-            $this->_persistenceNamespace = new \Zend\Session\SessionNamespace($persistenceNamespace);
+            $this->_persistenceNamespace = new Session\Container($persistenceNamespace);
         }
 
         // Set adapter

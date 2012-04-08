@@ -21,8 +21,7 @@
 
 namespace ZendTest\File;
 
-use Zend\File\ClassFileLocator,
-    PHPUnit_Framework_TestCase as TestCase;
+use Zend\File\ClassFileLocator;
 
 /**
  * Test class for Zend\File\ClassFileLocator
@@ -34,7 +33,7 @@ use Zend\File\ClassFileLocator,
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_File
  */
-class ClassFileLocatorTest extends TestCase
+class ClassFileLocatorTest extends \PHPUnit_Framework_TestCase
 {
 
     public function testConstructorThrowsInvalidArgumentExceptionForInvalidStringDirectory()

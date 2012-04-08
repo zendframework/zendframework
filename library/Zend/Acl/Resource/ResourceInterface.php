@@ -18,7 +18,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Acl;
+namespace Zend\Acl\Resource;
 
 /**
  * @category   Zend
@@ -26,7 +26,7 @@ namespace Zend\Acl;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Resource
+interface ResourceInterface
 {
     /**
      * Returns the string identifier of the Resource

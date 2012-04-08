@@ -13,7 +13,7 @@ class UserIsBlogPostOwnerAssertion implements Assertion
     public $lastAssertPrivilege = null;
     public $assertReturnValue = true;
 
-    public function assert(ZendAcl\Acl $acl, ZendAcl\Role $user = null, ZendAcl\Resource $blogPost = null, $privilege = null)
+    public function assert(ZendAcl\Acl $acl, ZendAcl\Role\RoleInterface $user = null, ZendAcl\Resource\ResourceInterface $blogPost = null, $privilege = null)
     {
         $this->lastAssertRole      = $user;
         $this->lastAssertResource  = $blogPost;

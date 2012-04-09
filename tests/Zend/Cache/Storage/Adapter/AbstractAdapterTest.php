@@ -632,6 +632,248 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
     // TODO: incrementItem[s] + decrementItem[s]
     // TODO: touchItem[s]
 
+    public function testPreEventsCanChangeArguments()
+    {
+        // getItem(s)
+        $this->checkPreEventCanChangeArguments('getItem', array(
+            'key' => 'key'
+        ), array(
+            'key'     => 'changedKey',
+            'options' => array('ttl' => 456)
+        ));
+
+        $this->checkPreEventCanChangeArguments('getItems', array(
+            'keys' => array('key')
+        ), array(
+            'keys'    => array('changedKey'),
+            'options' => array('ttl' => 456)
+        ));
+
+        // hasItem(s)
+        $this->checkPreEventCanChangeArguments('hasItem', array(
+            'key' => 'key'
+        ), array(
+            'key'     => 'changedKey',
+            'options' => array('ttl' => 456)
+        ));
+
+        $this->checkPreEventCanChangeArguments('hasItems', array(
+            'keys' => array('key'),
+        ), array(
+            'keys'    => array('changedKey'),
+            'options' => array('ttl' => 456)
+        ));
+
+        // getMetadata(s)
+        $this->checkPreEventCanChangeArguments('getMetadata', array(
+            'key' => 'key'
+        ), array(
+            'key'     => 'changedKey',
+            'options' => array('ttl' => 456)
+        ));
+
+        $this->checkPreEventCanChangeArguments('getMetadatas', array(
+            'keys' => array('key'),
+        ), array(
+            'keys'    => array('changedKey'),
+            'options' => array('ttl' => 456)
+        ));
+
+        // setItem(s)
+        $this->checkPreEventCanChangeArguments('setItem', array(
+            'key'   => 'key',
+            'value' => 'value',
+        ), array(
+            'key'     => 'changedKey',
+            'value'   => 'changedValue',
+            'options' => array('ttl' => 456)
+        ));
+
+        $this->checkPreEventCanChangeArguments('setItems', array(
+            'keyValuePairs' => array('key' => 'value'),
+        ), array(
+            'keyValuePairs' => array('changedKey' => 'changedValue'),
+            'options'       => array('ttl' => 456)
+        ));
+
+        // addItem(s)
+        $this->checkPreEventCanChangeArguments('addItem', array(
+            'key'   => 'key',
+            'value' => 'value',
+        ), array(
+            'key'     => 'changedKey',
+            'value'   => 'changedValue',
+            'options' => array('ttl' => 456)
+        ));
+
+        $this->checkPreEventCanChangeArguments('addItems', array(
+            'keyValuePairs' => array('key' => 'value'),
+        ), array(
+            'keyValuePairs' => array('changedKey' => 'changedValue'),
+            'options'       => array('ttl' => 456)
+        ));
+
+        // replaceItem(s)
+        $this->checkPreEventCanChangeArguments('replaceItem', array(
+            'key'   => 'key',
+            'value' => 'value',
+        ), array(
+            'key'     => 'changedKey',
+            'value'   => 'changedValue',
+            'options' => array('ttl' => 456)
+        ));
+
+        $this->checkPreEventCanChangeArguments('replaceItems', array(
+            'keyValuePairs' => array('key' => 'value'),
+        ), array(
+            'keyValuePairs' => array('changedKey' => 'changedValue'),
+            'options'       => array('ttl' => 456)
+        ));
+
+        // CAS
+        $this->checkPreEventCanChangeArguments('checkAndSetItem', array(
+            'token' => 'token',
+            'key'   => 'key',
+            'value' => 'value',
+        ), array(
+            'token'   => 'changedToken',
+            'key'     => 'changedKey',
+            'value'   => 'changedValue',
+            'options' => array('ttl' => 456)
+        ));
+
+        // touchItem(s)
+        $this->checkPreEventCanChangeArguments('touchItem', array(
+            'key' => 'key',
+        ), array(
+            'key'     => 'changedKey',
+            'options' => array('ttl' => 456)
+        ));
+
+        $this->checkPreEventCanChangeArguments('touchItems', array(
+            'keys' => array('key'),
+        ), array(
+            'keys'    => array('changedKey'),
+            'options' => array('ttl' => 456)
+        ));
+
+        // removeItem(s)
+        $this->checkPreEventCanChangeArguments('removeItem', array(
+            'key' => 'key',
+        ), array(
+            'key'     => 'changedKey',
+            'options' => array('ttl' => 456)
+        ));
+
+        $this->checkPreEventCanChangeArguments('removeItems', array(
+            'keys' => array('key'),
+        ), array(
+            'keys'    => array('changedKey'),
+            'options' => array('ttl' => 456)
+        ));
+
+        // incrementItem(s)
+        $this->checkPreEventCanChangeArguments('incrementItem', array(
+            'key'   => 'key',
+            'value' => 1
+        ), array(
+            'key'     => 'changedKey',
+            'value'   => 2,
+            'options' => array('ttl' => 456)
+        ));
+
+        $this->checkPreEventCanChangeArguments('incrementItems', array(
+            'keyValuePairs' => array('key' => 1),
+        ), array(
+            'keyValuePairs' => array('changedKey' => 2),
+            'options'       => array('ttl' => 456)
+        ));
+
+        // decrementItem(s)
+        $this->checkPreEventCanChangeArguments('decrementItem', array(
+            'key'   => 'key',
+            'value' => 1
+        ), array(
+            'key'     => 'changedKey',
+            'value'   => 2,
+            'options' => array('ttl' => 456)
+        ));
+
+        $this->checkPreEventCanChangeArguments('decrementItems', array(
+            'keyValuePairs' => array('key' => 1),
+        ), array(
+            'keyValuePairs' => array('changedKey' => 2),
+            'options'       => array('ttl' => 456)
+        ));
+
+        // getDelayed
+        $this->checkPreEventCanChangeArguments('getDelayed', array(
+            'keys' => array('key'),
+        ), array(
+            'keys'    => array('changedKey'),
+            'options' => array('ttl' => 456)
+        ));
+
+        // find
+        $this->checkPreEventCanChangeArguments('find', array(
+            'mode' => Cache\Storage\Adapter::MATCH_ACTIVE,
+        ), array(
+            'mode'    => Cache\Storage\Adapter::MATCH_ALL,
+            'options' => array('ttl' => 456)
+        ));
+
+        // clear[ByNamespace]
+        $this->checkPreEventCanChangeArguments('clear', array(
+            'mode' => Cache\Storage\Adapter::MATCH_ACTIVE,
+        ), array(
+            'mode'    => Cache\Storage\Adapter::MATCH_ALL,
+            'options' => array('ttl' => 456)
+        ));
+
+        $this->checkPreEventCanChangeArguments('clearByNamespace', array(
+            'mode' => Cache\Storage\Adapter::MATCH_ACTIVE,
+        ), array(
+            'mode'    => Cache\Storage\Adapter::MATCH_ALL,
+            'options' => array('ttl' => 456)
+        ));
+
+        // optimize
+        $this->checkPreEventCanChangeArguments('optimize', array(), array(
+            'options' => array('ttl' => 456)
+        ));
+
+        // getCapacity
+        $this->checkPreEventCanChangeArguments('getCapacity', array(), array(
+            'options' => array('ttl' => 456)
+        ));
+    }
+
+    public function checkPreEventCanChangeArguments($method, array $args, array $expectedArgs)
+    {
+        $internalMethod = 'internal' . ucfirst($method);
+        $eventName      = $method . '.pre';
+
+        // init mock
+        $this->_storage = $this->getMockForAbstractAdapter(array($internalMethod));
+        $this->_storage->events()->attach($eventName, function ($event) use ($expectedArgs) {
+            $params = $event->getParams();
+            foreach ($expectedArgs as $k => $v) {
+                $params[$k] = $v;
+            }
+        });
+
+        // set expected arguments of internal method call
+        $tmp = $this->_storage->expects($this->once())->method($internalMethod);
+        $equals = array();
+        foreach ($expectedArgs as $v) {
+            $equals[] = $this->equalTo($v);
+        }
+        call_user_func_array(array($tmp, 'with'), $equals);
+
+        // run
+        call_user_func_array(array($this->_storage, $method), $args);
+    }
+
     /**
      * Generates a mock of the abstract storage adapter by mocking all abstract and the given methods
      * Also sets the adapter options

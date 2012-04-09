@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.reader"><info><title>Zend_Feed_Reader</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.reader"><title>Zend_Feed_Reader</title>
     
 
-    <section xml:id="zend.feed.reader.introduction"><info><title>Introduction</title></info>
+    <section xml:id="zend.feed.reader.introduction"><title>Introduction</title>
         
 
         <para>
@@ -64,7 +64,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.feed.reader.import"><info><title>Importing Feeds</title></info>
+    <section xml:id="zend.feed.reader.import"><title>Importing Feeds</title>
         
 
         <para>
@@ -151,7 +151,7 @@ $feed  = Zend_Feed_Reader::importFeed($zfeed);
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.feed.reader.sources"><info><title>Retrieving Underlying Feed and Entry Sources</title></info>
+    <section xml:id="zend.feed.reader.sources"><title>Retrieving Underlying Feed and Entry Sources</title>
         
 
         <para>
@@ -242,10 +242,10 @@ $reportErrorsTo = $xpath->evaluate('string('
         </warning>
     </section>
 
-    <section xml:id="zend.feed.reader.cache-request"><info><title>Cache Support and Intelligent Requests</title></info>
+    <section xml:id="zend.feed.reader.cache-request"><title>Cache Support and Intelligent Requests</title>
         
 
-        <section xml:id="zend.feed.reader.cache-request.cache"><info><title>Adding Cache Support to Zend_Feed_Reader</title></info>
+        <section xml:id="zend.feed.reader.cache-request.cache"><title>Adding Cache Support to Zend_Feed_Reader</title>
             
 
             <para>
@@ -283,7 +283,7 @@ Zend_Feed_Reader::setCache($cache);
             </note>
         </section>
 
-        <section xml:id="zend.feed.reader.cache-request.http-conditional-get"><info><title>HTTP Conditional GET Support</title></info>
+        <section xml:id="zend.feed.reader.cache-request.http-conditional-get"><title>HTTP Conditional GET Support</title>
             
 
             <para>
@@ -356,7 +356,7 @@ $feed = Zend_Feed_Reader::import(
         </section>
     </section>
 
-    <section xml:id="zend.feed.reader.locate"><info><title>Locating Feed URIs from Websites</title></info>
+    <section xml:id="zend.feed.reader.locate"><title>Locating Feed URIs from Websites</title>
         
 
         <para>
@@ -425,7 +425,7 @@ foreach ($links as $link) {
 ]]></programlisting>
   </section>
 
-  <section xml:id="zend.feed.reader.attribute-collections"><info><title>Attribute Collections</title></info>
+  <section xml:id="zend.feed.reader.attribute-collections"><title>Attribute Collections</title>
         
 
         <para>
@@ -505,7 +505,7 @@ $labels = $categories->getValues();
         </para>
   </section>
 
-  <section xml:id="zend.feed.reader.retrieve-info"><info><title>Retrieving Feed Information</title></info>
+  <section xml:id="zend.feed.reader.retrieve-info"><title>Retrieving Feed Information</title>
         
 
         <para>
@@ -563,7 +563,7 @@ $labels = $categories->getValues();
             you to retrieve any specific Extension object separately if required.
         </para>
 
-        <table><info><title>Feed Level API Methods</title></info>
+        <table><title>Feed Level API Methods</title>
             
 
             <tgroup cols="2">
@@ -761,7 +761,7 @@ $labels = $categories->getValues();
             Countable interfaces. The extended <acronym>API</acronym> is summarised below.
         </para>
 
-        <table><info><title>Extended Feed Level API Methods</title></info>
+        <table><title>Extended Feed Level API Methods</title>
             
 
             <tgroup cols="2">
@@ -905,7 +905,7 @@ $labels = $categories->getValues();
         </table>
     </section>
 
-    <section xml:id="zend.feed.reader.entry"><info><title>Retrieving Entry/Item Information</title></info>
+    <section xml:id="zend.feed.reader.entry"><title>Retrieving Entry/Item Information</title>
         
 
         <para>
@@ -916,7 +916,7 @@ $labels = $categories->getValues();
             objects implement and calling the appropriate method on each.
         </para>
 
-        <table><info><title>Entry Level API Methods</title></info>
+        <table><title>Entry Level API Methods</title>
             
 
             <tgroup cols="2">
@@ -1124,7 +1124,7 @@ $labels = $categories->getValues();
             </para>
         </warning>
 
-        <table><info><title>Extended Entry Level API Methods</title></info>
+        <table><title>Extended Entry Level API Methods</title>
             
 
             <tgroup cols="2">
@@ -1214,7 +1214,7 @@ $labels = $categories->getValues();
         </table>
     </section>
 
-    <section xml:id="zend.feed.reader.extending"><info><title>Extending Feed and Entry APIs</title></info>
+    <section xml:id="zend.feed.reader.extending"><title>Extending Feed and Entry APIs</title>
         
 
         <para>
@@ -1254,7 +1254,7 @@ $labels = $categories->getValues();
             bundled Extensions include:
         </para>
 
-        <table><info><title>Core Extensions (pre-registered)</title></info>
+        <table><title>Core Extensions (pre-registered)</title>
             
 
             <tgroup cols="2">
@@ -1321,7 +1321,7 @@ $labels = $categories->getValues();
             common Extensions like Dublin Core.
         </para>
 
-        <table><info><title>Non-Core Extensions (must register manually)</title></info>
+        <table><title>Non-Core Extensions (must register manually)</title>
             
 
             <tgroup cols="2">
@@ -1394,7 +1394,7 @@ $syndication = $feed->getExtension('Syndication');
 $updatePeriod = $syndication->getUpdatePeriod();
 ]]></programlisting>
 
-        <section xml:id="zend.feed.reader.extending.feed"><info><title>Writing Zend_Feed_Reader Extensions</title></info>
+        <section xml:id="zend.feed.reader.extending.feed"><title>Writing Zend_Feed_Reader Extensions</title>
             
 
             <para>

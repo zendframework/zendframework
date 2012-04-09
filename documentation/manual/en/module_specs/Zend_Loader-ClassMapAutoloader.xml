@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.loader.class-map-autoloader"><info><title>The ClassMapAutoloader</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.loader.class-map-autoloader"><title>The ClassMapAutoloader</title>
     
 
-    <section xml:id="zend.loader.class-map-autoloader.intro"><info><title>Overview</title></info>
+    <section xml:id="zend.loader.class-map-autoloader.intro"><title>Overview</title>
         
 
         <para>
@@ -28,7 +28,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.loader.class-map-autoloader.quick-start"><info><title>Quick Start</title></info>
+    <section xml:id="zend.loader.class-map-autoloader.quick-start"><title>Quick Start</title>
         
 
         <para>
@@ -69,14 +69,14 @@ $loader->register();
         </para>
     </section>
 
-    <section xml:id="zend.loader.class-map-autoloader.options"><info><title>Configuration Options</title></info>
+    <section xml:id="zend.loader.class-map-autoloader.options"><title>Configuration Options</title>
         
 
         <para>
             The <classname>ClassMapAutoloader</classname> defines the following options.
         </para>
 
-        <variablelist><info><title>ClassMapAutoloader Options</title></info>
+        <variablelist><title>ClassMapAutoloader Options</title>
             
 
             <varlistentry>
@@ -109,7 +109,7 @@ $config = array(
 
     </section>
 
-    <section xml:id="zend.loader.class-map-autoloader.methods"><info><title>Available Methods</title></info>
+    <section xml:id="zend.loader.class-map-autoloader.methods"><title>Available Methods</title>
         
 
         <refentry xml:id="zend.loader.class-map-autoloader.methods.constructor">
@@ -127,7 +127,7 @@ $config = array(
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsection><info><title>Constructor</title></info>
+            <refsection><title>Constructor</title>
                 
 
                 <para>
@@ -153,7 +153,7 @@ $config = array(
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsection><info><title>setOptions()</title></info>
+            <refsection><title>setOptions()</title>
                 
 
                 <para>
@@ -179,7 +179,7 @@ $config = array(
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsection><info><title>registerAutoloadMap()</title></info>
+            <refsection><title>registerAutoloadMap()</title>
                 
 
                 <para>
@@ -211,7 +211,7 @@ $config = array(
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsection><info><title>registerAutoloadMaps()</title></info>
+            <refsection><title>registerAutoloadMaps()</title>
                 
 
                 <para>
@@ -234,7 +234,7 @@ $config = array(
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsection><info><title>getAutoloadMap()</title></info>
+            <refsection><title>getAutoloadMap()</title>
                 
 
                 <para>
@@ -259,7 +259,7 @@ $config = array(
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsection><info><title>autoload()</title></info>
+            <refsection><title>autoload()</title>
                 
 
                 <para>
@@ -282,7 +282,7 @@ $config = array(
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsection><info><title>register()</title></info>
+            <refsection><title>register()</title>
                 
 
                 <para>
@@ -293,10 +293,10 @@ $config = array(
         </refentry>
     </section>
 
-    <section xml:id="zend.loader.class-map-autoloader.examples"><info><title>Examples</title></info>
+    <section xml:id="zend.loader.class-map-autoloader.examples"><title>Examples</title>
         
 
-        <example xml:id="zend.loader.class-map-autoloader.examples.configuration"><info><title>Using configuration to seed ClassMapAutoloader</title></info>
+        <example xml:id="zend.loader.class-map-autoloader.examples.configuration"><title>Using configuration to seed ClassMapAutoloader</title>
             
 
             <para>

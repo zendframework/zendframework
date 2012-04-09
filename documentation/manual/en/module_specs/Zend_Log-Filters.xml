@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.log.filters"><info><title>Filters</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.log.filters"><title>Filters</title>
     
 
     <para>
         A Filter object blocks a message from being written to the log.
     </para>
 
-    <section xml:id="zend.log.filters.all-writers"><info><title>Filtering for All Writers</title></info>
+    <section xml:id="zend.log.filters.all-writers"><title>Filtering for All Writers</title>
         
 
         <para>
@@ -38,7 +38,7 @@ $logger->emerg('Emergency message');
         </para>
     </section>
 
-    <section xml:id="zend.log.filters.single-writer"><info><title>Filtering for a Writer Instance</title></info>
+    <section xml:id="zend.log.filters.single-writer"><title>Filtering for a Writer Instance</title>
         
 
         <para>
@@ -69,7 +69,7 @@ $logger->emerg('Emergency message');
 ]]></programlisting>
     </section>
     
-    <section xml:id="zend.log.filters.type"><info><title>Available filters</title></info>
+    <section xml:id="zend.log.filters.type"><title>Available filters</title>
     
         <para>The Zend\Log\Filter available are:</para>
         

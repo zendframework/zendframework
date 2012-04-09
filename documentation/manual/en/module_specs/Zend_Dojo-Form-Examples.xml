@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.dojo.form.examples"><info><title>Dojo Form Examples</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.dojo.form.examples"><title>Dojo Form Examples</title>
     
 
-    <example xml:id="zend.dojo.form.examples.dojoform"><info><title>Using Zend_Dojo_Form</title></info>
+    <example xml:id="zend.dojo.form.examples.dojoform"><title>Using Zend_Dojo_Form</title>
         
 
         <para>
@@ -350,7 +350,7 @@ class My_Form_Test extends Zend_Dojo_Form
 ]]></programlisting>
     </example>
 
-    <example xml:id="zend.dojo.form.examples.decorating"><info><title>Modifying an existing form to utilize Dojo</title></info>
+    <example xml:id="zend.dojo.form.examples.decorating"><title>Modifying an existing form to utilize Dojo</title>
         
 
         <para>

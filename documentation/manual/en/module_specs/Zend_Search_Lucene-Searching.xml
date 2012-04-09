@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.searching"><info><title>Searching an Index</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.searching"><title>Searching an Index</title>
     
 
-    <section xml:id="zend.search.lucene.searching.query_building"><info><title>Building Queries</title></info>
+    <section xml:id="zend.search.lucene.searching.query_building"><title>Building Queries</title>
         
 
         <para>
@@ -93,7 +93,7 @@ $index->find($query);
             It's therefore more suitable for computer generated or untokenized fields.
         </para>
 
-        <section xml:id="zend.search.lucene.searching.query_building.parsing"><info><title>Query Parsing</title></info>
+        <section xml:id="zend.search.lucene.searching.query_building.parsing"><title>Query Parsing</title>
             
 
             <para>
@@ -160,7 +160,7 @@ $userQuery = Zend_Search_Lucene_Search_QueryParser::parse($queryStr);
         </section>
     </section>
 
-    <section xml:id="zend.search.lucene.searching.results"><info><title>Search Results</title></info>
+    <section xml:id="zend.search.lucene.searching.results"><title>Search Results</title>
         
 
         <para>
@@ -235,7 +235,7 @@ foreach ($hits as $hit) {
         </para>
     </section>
 
-    <section xml:id="zend.search.lucene.searching.results-limiting"><info><title>Limiting the Result Set</title></info>
+    <section xml:id="zend.search.lucene.searching.results-limiting"><title>Limiting the Result Set</title>
         
 
         <para>
@@ -270,7 +270,7 @@ Zend_Search_Lucene::setResultSetLimit($newLimit);
         </para>
     </section>
 
-    <section xml:id="zend.search.lucene.searching.results-scoring"><info><title>Results Scoring</title></info>
+    <section xml:id="zend.search.lucene.searching.results-scoring"><title>Results Scoring</title>
         
 
         <para>
@@ -305,7 +305,7 @@ foreach ($hits as $hit) {
         </para>
     </section>
 
-    <section xml:id="zend.search.lucene.searching.sorting"><info><title>Search Result Sorting</title></info>
+    <section xml:id="zend.search.lucene.searching.sorting"><title>Search Result Sorting</title>
         
 
         <para>
@@ -364,7 +364,7 @@ $index->find($query, 'name', SORT_STRING, 'quantity', SORT_NUMERIC, SORT_DESC);
         </para>
     </section>
 
-    <section xml:id="zend.search.lucene.searching.highlighting"><info><title>Search Results Highlighting</title></info>
+    <section xml:id="zend.search.lucene.searching.highlighting"><title>Search Results Highlighting</title>
         
 
         <para>

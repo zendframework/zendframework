@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.callback"><info><title>Callback</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.callback"><title>Callback</title>
     
 
     <para>
@@ -8,7 +8,7 @@
         have a method which does the job.
     </para>
 
-    <section xml:id="zend.filter.set.callback.options"><info><title>Supported options for Zend_Filter_Callback</title></info>
+    <section xml:id="zend.filter.set.callback.options"><title>Supported options for Zend_Filter_Callback</title>
         
 
         <para>
@@ -32,7 +32,7 @@
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.filter.set.callback.basic"><info><title>Basic usage</title></info>
+    <section xml:id="zend.filter.set.callback.basic"><title>Basic usage</title>
         
 
         <para>
@@ -70,7 +70,7 @@ print $filter->filter('Hello!');
             another callback use <methodname>setCallback()</methodname>.
         </para>
 
-        <note><info><title>Possible exceptions</title></info>
+        <note><title>Possible exceptions</title>
             
 
             <para>
@@ -80,7 +80,7 @@ print $filter->filter('Hello!');
         </note>
     </section>
 
-    <section xml:id="zend.filter.set.callback.parameters"><info><title>Default parameters within a callback</title></info>
+    <section xml:id="zend.filter.set.callback.parameters"><title>Default parameters within a callback</title>
         
 
         <para>

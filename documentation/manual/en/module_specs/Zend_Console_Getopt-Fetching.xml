@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.console.getopt.fetching"><info><title>Fetching Options and Arguments</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.console.getopt.fetching"><title>Fetching Options and Arguments</title>
     
 
     <para>
@@ -19,7 +19,7 @@
         strings, and configuration options before parsing takes place.
     </para>
 
-    <section xml:id="zend.console.getopt.fetching.exceptions"><info><title>Handling Getopt Exceptions</title></info>
+    <section xml:id="zend.console.getopt.fetching.exceptions"><title>Handling Getopt Exceptions</title>
         
 
         <para>
@@ -35,7 +35,7 @@
             all declared options.
         </para>
 
-        <example xml:id="zend.console.getopt.fetching.exceptions.example"><info><title>Catching Getopt Exceptions</title></info>
+        <example xml:id="zend.console.getopt.fetching.exceptions.example"><title>Catching Getopt Exceptions</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -76,7 +76,7 @@ try {
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.console.getopt.fetching.byname"><info><title>Fetching Options by Name</title></info>
+    <section xml:id="zend.console.getopt.fetching.byname"><title>Fetching Options by Name</title>
         
 
         <para>
@@ -87,7 +87,7 @@ try {
             <constant>TRUE</constant>. Otherwise the method returns <constant>NULL</constant>.
         </para>
 
-        <example xml:id="zend.console.getopt.fetching.byname.example.setoption"><info><title>Using getOption()</title></info>
+        <example xml:id="zend.console.getopt.fetching.byname.example.setoption"><title>Using getOption()</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -104,7 +104,7 @@ $p_parameter = $opts->getOption('p');
             implemented.
         </para>
 
-        <example xml:id="zend.console.getopt.fetching.byname.example.magic"><info><title>Using __get() and __isset() Magic Methods</title></info>
+        <example xml:id="zend.console.getopt.fetching.byname.example.magic"><title>Using __get() and __isset() Magic Methods</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -122,7 +122,7 @@ $p_parameter = $opts->p; // null if not set
         </para>
     </section>
 
-    <section xml:id="zend.console.getopt.fetching.reporting"><info><title>Reporting Options</title></info>
+    <section xml:id="zend.console.getopt.fetching.reporting"><title>Reporting Options</title>
         
 
         <para>
@@ -173,7 +173,7 @@ $p_parameter = $opts->p; // null if not set
         </para>
     </section>
 
-    <section xml:id="zend.console.getopt.fetching.remainingargs"><info><title>Fetching Non-option Arguments</title></info>
+    <section xml:id="zend.console.getopt.fetching.remainingargs"><title>Fetching Non-option Arguments</title>
         
 
         <para>
@@ -184,7 +184,7 @@ $p_parameter = $opts->p; // null if not set
             an array of the strings that were not part of any options.
         </para>
 
-        <example xml:id="zend.console.getopt.fetching.remainingargs.example"><info><title>Using getRemainingArgs()</title></info>
+        <example xml:id="zend.console.getopt.fetching.remainingargs.example"><title>Using getRemainingArgs()</title>
             
 
             <programlisting language="php"><![CDATA[

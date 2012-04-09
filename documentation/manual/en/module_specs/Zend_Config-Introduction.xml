@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" 
     xml:id="zend.config.introduction">
-    <info><title>Introduction</title></info>
+    <title>Introduction</title>
 
     <para>
         <classname>Zend\Config</classname> is designed to simplify the access to, and the use of,
@@ -13,7 +13,7 @@
     </para>
 
     <example xml:id="zend.config.introduction.example.using">
-        <info><title>Using Zend\Config</title></info>
+        <title>Using Zend\Config</title>
 
         <para>
             Normally it is expected that users would use one of the reader classes to read a configuration file using <link linkend="zend.config.reader.ini"><classname>Zend\Config\Reader\Ini</classname></link> or
@@ -64,7 +64,7 @@ $host = $config->database->get('host', 'localhost');
 </programlisting>
 
     <example xml:id="zend.config.introduction.example.file.php">
-        <info><title>Using Zend\Config\Config with a PHP Configuration File</title></info>
+        <title>Using Zend\Config\Config with a PHP Configuration File</title>
 
         <para>
             It is often desirable to use a pure <acronym>PHP</acronym>-based configuration file.

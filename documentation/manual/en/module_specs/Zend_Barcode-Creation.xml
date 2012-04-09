@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.barcode.creation"><info><title>Barcode creation using Zend_Barcode class</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.barcode.creation"><title>Barcode creation using Zend_Barcode class</title>
     
 
-    <section xml:id="zend.barcode.creation.configuration"><info><title>Using Zend_Barcode::factory</title></info>
+    <section xml:id="zend.barcode.creation.configuration"><title>Using Zend_Barcode::factory</title>
         
 
         <para>
@@ -43,7 +43,7 @@
             </listitem>
         </orderedlist>
 
-        <example xml:id="zend.barcode.creation.configuration.example-1"><info><title>Getting a Renderer with Zend_Barcode::factory()</title></info>
+        <example xml:id="zend.barcode.creation.configuration.example-1"><title>Getting a Renderer with Zend_Barcode::factory()</title>
             
 
             <para>
@@ -65,7 +65,7 @@ $renderer = Zend_Barcode::factory(
 ]]></programlisting>
         </example>
 
-        <example xml:id="zend.barcode.creation.configuration.example-2"><info><title>Using Zend_Barcode::factory() with Zend_Config objects</title></info>
+        <example xml:id="zend.barcode.creation.configuration.example-2"><title>Using Zend_Barcode::factory() with Zend_Config objects</title>
             
 
             <para>
@@ -88,7 +88,7 @@ $renderer = Zend_Barcode::factory($config);
         </example>
     </section>
 
-    <section xml:id="zend.barcode.creation.drawing"><info><title>Drawing a barcode</title></info>
+    <section xml:id="zend.barcode.creation.drawing"><title>Drawing a barcode</title>
         
 
         <para>
@@ -98,7 +98,7 @@ $renderer = Zend_Barcode::factory($config);
             <classname>Zend_Barcode</classname>.
         </para>
 
-        <example xml:id="zend.barcode.creation.drawing.example-1"><info><title>Drawing a barcode with the renderer object</title></info>
+        <example xml:id="zend.barcode.creation.drawing.example-1"><title>Drawing a barcode with the renderer object</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -115,7 +115,7 @@ $imageResource = Zend_Barcode::factory(
 ]]></programlisting>
         </example>
 
-        <example xml:id="zend.barcode.creation.drawing.example-2"><info><title>Drawing a barcode with Zend_Barcode::draw()</title></info>
+        <example xml:id="zend.barcode.creation.drawing.example-2"><title>Drawing a barcode with Zend_Barcode::draw()</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -133,7 +133,7 @@ $imageResource = Zend_Barcode::draw(
         </example>
     </section>
 
-    <section xml:id="zend.barcode.creation.renderering"><info><title>Renderering a barcode</title></info>
+    <section xml:id="zend.barcode.creation.renderering"><title>Renderering a barcode</title>
         
 
         <para>
@@ -143,7 +143,7 @@ $imageResource = Zend_Barcode::draw(
             provided by <classname>Zend_Barcode</classname>.
         </para>
 
-        <example xml:id="zend.barcode.creation.renderering.example-1"><info><title>Renderering a barcode with the renderer object</title></info>
+        <example xml:id="zend.barcode.creation.renderering.example-1"><title>Renderering a barcode with the renderer object</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -169,7 +169,7 @@ Zend_Barcode::factory(
             </para>
         </example>
 
-        <example xml:id="zend.barcode.creation.renderering.example-2"><info><title>Renderering a barcode with Zend_Barcode::render()</title></info>
+        <example xml:id="zend.barcode.creation.renderering.example-2"><title>Renderering a barcode with Zend_Barcode::render()</title>
             
 
             <programlisting language="php"><![CDATA[

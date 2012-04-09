@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.loader.plugin-broker"><info><title>The PluginBroker</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.loader.plugin-broker"><title>The PluginBroker</title>
     
 
-    <section xml:id="zend.loader.plugin-broker.intro"><info><title>Overview</title></info>
+    <section xml:id="zend.loader.plugin-broker.intro"><title>Overview</title>
         
 
         <para>
@@ -54,7 +54,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.loader.plugin-broker.quick-start"><info><title>Quick Start</title></info>
+    <section xml:id="zend.loader.plugin-broker.quick-start"><title>Quick Start</title>
         
 
         <para>
@@ -81,10 +81,10 @@ $broker->register('url', $urlHelper);
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.loader.plugin-broker.options"><info><title>Configuration Options</title></info>
+    <section xml:id="zend.loader.plugin-broker.options"><title>Configuration Options</title>
         
 
-        <variablelist><info><title>PluginBroker Options</title></info>
+        <variablelist><title>PluginBroker Options</title>
             
 
             <varlistentry>
@@ -144,7 +144,7 @@ $broker->register('url', $urlHelper);
         </variablelist>
     </section>
 
-    <section xml:id="zend.loader.plugin-broker.methods"><info><title>Available Methods</title></info>
+    <section xml:id="zend.loader.plugin-broker.methods"><title>Available Methods</title>
         
 
         <refentry xml:id="zend.loader.plugin-broker.methods.load">
@@ -162,7 +162,7 @@ $broker->register('url', $urlHelper);
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsection><info><title>load()</title></info>
+            <refsection><title>load()</title>
                 
 
                 <para>
@@ -201,7 +201,7 @@ $broker->register('url', $urlHelper);
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsection><info><title>register()</title></info>
+            <refsection><title>register()</title>
                 
 
                 <para>
@@ -227,7 +227,7 @@ $broker->register('url', $urlHelper);
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsection><info><title>unregister()</title></info>
+            <refsection><title>unregister()</title>
                 
 
                 <para>
@@ -254,7 +254,7 @@ $broker->register('url', $urlHelper);
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsection><info><title>getPlugins()</title></info>
+            <refsection><title>getPlugins()</title>
                 
 
                 <para>
@@ -278,7 +278,7 @@ $broker->register('url', $urlHelper);
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsection><info><title>isLoaded()</title></info>
+            <refsection><title>isLoaded()</title>
                 
 
                 <para>
@@ -305,7 +305,7 @@ $broker->register('url', $urlHelper);
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsection><info><title>setClassLoader()</title></info>
+            <refsection><title>setClassLoader()</title>
                 
 
                 <para>
@@ -328,7 +328,7 @@ $broker->register('url', $urlHelper);
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsection><info><title>getClassLoader()</title></info>
+            <refsection><title>getClassLoader()</title>
                 
 
                 <para>
@@ -353,7 +353,7 @@ $broker->register('url', $urlHelper);
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsection><info><title>setValidator()</title></info>
+            <refsection><title>setValidator()</title>
                 
 
                 <para>
@@ -394,7 +394,7 @@ $broker->setValidator(function($plugin) {
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsection><info><title>getValidator()</title></info>
+            <refsection><title>getValidator()</title>
                 
 
                 <para>
@@ -405,10 +405,10 @@ $broker->setValidator(function($plugin) {
         </refentry>
     </section>
 
-    <section xml:id="zend.loader.plugin-broker.examples"><info><title>Examples</title></info>
+    <section xml:id="zend.loader.plugin-broker.examples"><title>Examples</title>
         
 
-        <example xml:id="zend.loader.plugin-broker.examples.validator-callback"><info><title>Plugin validation callback</title></info>
+        <example xml:id="zend.loader.plugin-broker.examples.validator-callback"><title>Plugin validation callback</title>
             
 
             <para>
@@ -444,7 +444,7 @@ $broker->setClassLoader(new HelperLoader)
             </para>
         </example>
 
-        <example xml:id="zend.loader.plugin-broker.examples.custom-broker"><info><title>Creating a custom broker</title></info>
+        <example xml:id="zend.loader.plugin-broker.examples.custom-broker"><title>Creating a custom broker</title>
             
 
             <para>

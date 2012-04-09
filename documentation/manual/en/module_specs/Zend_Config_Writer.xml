@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" 
     xml:id="zend.config.writer">
-    <info><title>Zend\Config\Writer</title></info>
+    <title>Zend\Config\Writer</title>
 
     <para>
         <classname>Zend\Config\Writer</classname> gives you the ability to write config
@@ -39,7 +39,7 @@
     </itemizedlist>
     
     <section xml:id="zend.config.writer.ini">
-        <info><title>Zend\Config\Writer\Ini</title></info>
+        <title>Zend\Config\Writer\Ini</title>
         
         <para>
             The <acronym>INI</acronym> writer has two modes for rendering with regard to sections.
@@ -65,7 +65,7 @@
         </para>
         
         <example xml:id="zend.config.writer.ini.example">
-            <info><title>Using Zend\Config\Writer\Ini</title></info>
+            <title>Using Zend\Config\Writer\Ini</title>
             
             <para>
                 This example illustrates the basic use of <classname>Zend\Config\Writer\Ini</classname>
@@ -109,7 +109,7 @@ database.params.dbname = "dbproduction"
     </section>    
 
     <section xml:id="zend.config.writer.xml">
-        <info><title>Zend\Config\Writer\Xml</title></info>
+        <title>Zend\Config\Writer\Xml</title>
         
         <para>
             The <classname>Zend\Config\Writer\Xml</classname>can be used to generate an XML string or file
@@ -117,7 +117,7 @@ database.params.dbname = "dbproduction"
         </para>
             
         <example xml:id="zend.config.writer.xml.example">
-            <info><title>Using Zend\Config\Writer\Ini</title></info>
+            <title>Using Zend\Config\Writer\Ini</title>
             
             <para>
                 This example illustrates the basic use of <classname>Zend\Config\Writer\Xml</classname>
@@ -170,7 +170,7 @@ echo $writer->toString($config);
     </section>
     
     <section xml:id="zend.config.writer.phparray">
-        <info><title>Zend\Config\Writer\PhpArray</title></info>
+        <title>Zend\Config\Writer\PhpArray</title>
         
         <para>
             The <classname>Zend\Config\Writer\PhpArray</classname>can be used to generate a PHP code
@@ -178,7 +178,7 @@ echo $writer->toString($config);
         </para>
             
         <example xml:id="zend.config.writer.phparray.example">
-            <info><title>Using Zend\Config\Writer\PhpArray</title></info>
+            <title>Using Zend\Config\Writer\PhpArray</title>
             
             <para>
                 This example illustrates the basic use of <classname>Zend\Config\Writer\PhpArray</classname>
@@ -233,7 +233,7 @@ return array (
     </section>
     
     <section xml:id="zend.config.writer.json">
-        <info><title>Zend\Config\Writer\Json</title></info>
+        <title>Zend\Config\Writer\Json</title>
         
         <para>
             The <classname>Zend\Config\Writer\Json</classname>can be used to generate a PHP code
@@ -241,7 +241,7 @@ return array (
         </para>
         
         <example xml:id="zend.config.writer.json.example">
-            <info><title>Using Zend\Config\Writer\Json</title></info>
+            <title>Using Zend\Config\Writer\Json</title>
             
             <para>
                 This example illustrates the basic use of <classname>Zend\Config\Writer\Json</classname>
@@ -294,7 +294,7 @@ echo $writer->toString($config);
     </section>
     
     <section xml:id="zend.config.writer.yaml">
-        <info><title>Zend\Config\Writer\Yaml</title></info>
+        <title>Zend\Config\Writer\Yaml</title>
         
         <para>
             The <classname>Zend\Config\Writer\Yaml</classname>can be used to generate a PHP code
@@ -304,7 +304,7 @@ echo $writer->toString($config);
         </para>
         
         <example xml:id="zend.config.writer.yaml.example">
-            <info><title>Using Zend\Config\Writer\Yaml</title></info>
+            <title>Using Zend\Config\Writer\Yaml</title>
             
             <para>
                 This example illustrates the basic use of <classname>Zend\Config\Writer\Yaml</classname>

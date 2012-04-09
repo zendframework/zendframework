@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.loader.spl-autoloader"><info><title>The SplAutoloader Interface</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.loader.spl-autoloader"><title>The SplAutoloader Interface</title>
     
 
-    <section xml:id="zend.loader.spl-autoloader.intro"><info><title>Overview</title></info>
+    <section xml:id="zend.loader.spl-autoloader.intro"><title>Overview</title>
         
 
         <para>
@@ -20,7 +20,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.loader.spl-autoloader.quick-start"><info><title>Quick Start</title></info>
+    <section xml:id="zend.loader.spl-autoloader.quick-start"><title>Quick Start</title>
         
 
         <para>
@@ -81,7 +81,7 @@ class ModifiedIncludePathAutoloader implements SplAutoloader
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.loader.spl-autoloader.options"><info><title>Configuration Options</title></info>
+    <section xml:id="zend.loader.spl-autoloader.options"><title>Configuration Options</title>
         
 
         <para>
@@ -89,7 +89,7 @@ class ModifiedIncludePathAutoloader implements SplAutoloader
         </para>
     </section>
 
-    <section xml:id="zend.loader.spl-autoloader.methods"><info><title>Available Methods</title></info>
+    <section xml:id="zend.loader.spl-autoloader.methods"><title>Available Methods</title>
         
 
         <refentry xml:id="zend.loader.spl-autoloader.methods.constructor">
@@ -107,7 +107,7 @@ class ModifiedIncludePathAutoloader implements SplAutoloader
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsection><info><title>Constructor</title></info>
+            <refsection><title>Constructor</title>
                 
 
                 <para>
@@ -133,7 +133,7 @@ class ModifiedIncludePathAutoloader implements SplAutoloader
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsection><info><title>setOptions()</title></info>
+            <refsection><title>setOptions()</title>
                 
 
                 <para>
@@ -160,7 +160,7 @@ class ModifiedIncludePathAutoloader implements SplAutoloader
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsection><info><title>autoload()</title></info>
+            <refsection><title>autoload()</title>
                 
 
                 <para>
@@ -183,7 +183,7 @@ class ModifiedIncludePathAutoloader implements SplAutoloader
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsection><info><title>register()</title></info>
+            <refsection><title>register()</title>
                 
 
                 <para>
@@ -202,7 +202,7 @@ public function register()
         </refentry>
     </section>
 
-    <section xml:id="zend.loader.spl-autoloader.examples"><info><title>Examples</title></info>
+    <section xml:id="zend.loader.spl-autoloader.examples"><title>Examples</title>
         
 
         <para>

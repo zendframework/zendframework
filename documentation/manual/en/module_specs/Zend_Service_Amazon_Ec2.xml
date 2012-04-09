@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.amazon.ec2"><info><title>Zend_Service_Amazon_Ec2</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.amazon.ec2"><title>Zend_Service_Amazon_Ec2</title>
     
 
-    <section xml:id="zend.service.amazon.ec2.introduction"><info><title>Introduction</title></info>
+    <section xml:id="zend.service.amazon.ec2.introduction"><title>Introduction</title>
         
 
         <para>
@@ -11,7 +11,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.service.amazon.ec2.whatis"><info><title>What is Amazon Ec2?</title></info>
+    <section xml:id="zend.service.amazon.ec2.whatis"><title>What is Amazon Ec2?</title>
         
 
         <para>
@@ -22,7 +22,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.service.amazon.ec2.staticmethods"><info><title>Static Methods</title></info>
+    <section xml:id="zend.service.amazon.ec2.staticmethods"><title>Static Methods</title>
         
 
         <para>
@@ -32,7 +32,7 @@
             create any new object you don't need to pass in any keys to the constructor.
         </para>
 
-        <example xml:id="zend.service.amazon.ec2.staticmethods.setkeys"><info><title>setKeys() Example</title></info>
+        <example xml:id="zend.service.amazon.ec2.staticmethods.setkeys"><title>setKeys() Example</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -47,7 +47,7 @@ Zend_Service_Amazon_Ec2_Ebs::setKeys('aws_key','aws_secret_key');
             stating that.
         </para>
 
-        <example xml:id="zend.service.amazon.ec2.staticmethods.setregion"><info><title>setRegion() Example</title></info>
+        <example xml:id="zend.service.amazon.ec2.staticmethods.setregion"><title>setRegion() Example</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -55,7 +55,7 @@ Zend_Service_Amazon_Ec2_Ebs::setRegion('us-east-1');
 ]]></programlisting>
         </example>
 
-        <note xml:id="zend.service.amazon.ec2.staticmethods.setregion.note"><info><title>Set Amazon Ec2 Region</title></info>
+        <note xml:id="zend.service.amazon.ec2.staticmethods.setregion.note"><title>Set Amazon Ec2 Region</title>
             
 
             <para>

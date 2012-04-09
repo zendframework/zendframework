@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.session.basic_usage"><info><title>Basic Usage</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.session.basic_usage"><title>Basic Usage</title>
     
 
     <para>
@@ -33,7 +33,7 @@ $myNamespace = new Zend_Session_Namespace('myNamespace');
         correspond to instances of <classname>Zend_Session_Namespace</classname>.
     </para>
 
-    <section xml:id="zend.session.basic_usage.basic_examples"><info><title>Tutorial Examples</title></info>
+    <section xml:id="zend.session.basic_usage.basic_examples"><title>Tutorial Examples</title>
         
 
         <para>
@@ -46,7 +46,7 @@ $myNamespace = new Zend_Session_Namespace('myNamespace');
             session:
         </para>
 
-        <example xml:id="zend.session.basic_usage.basic_examples.example.counting_page_views"><info><title>Counting Page Views</title></info>
+        <example xml:id="zend.session.basic_usage.basic_examples.example.counting_page_views"><title>Counting Page Views</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -80,7 +80,7 @@ echo "Page requests this session: ",
             starting with "<code>Zend</code>".
         </para>
 
-        <example xml:id="zend.session.basic_usage.basic_examples.example.namespaces.new"><info><title>New Way: Namespaces Avoid Collisions</title></info>
+        <example xml:id="zend.session.basic_usage.basic_examples.example.namespaces.new"><title>New Way: Namespaces Avoid Collisions</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -99,7 +99,7 @@ $webServiceNamespace->user = "mywebusername";
             objects above preserve encapsulation of session data within their respective namespaces.
         </para>
 
-        <example xml:id="zend.session.basic_usage.basic_examples.example.namespaces.old"><info><title>Old Way: PHP Session Access</title></info>
+        <example xml:id="zend.session.basic_usage.basic_examples.example.namespaces.old"><title>Old Way: PHP Session Access</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -109,7 +109,7 @@ $_SESSION['Some_Web_Service']['user'] = "mywebusername";
         </example>
     </section>
 
-    <section xml:id="zend.session.basic_usage.iteration"><info><title>Iterating Over Session Namespaces</title></info>
+    <section xml:id="zend.session.basic_usage.iteration"><title>Iterating Over Session Namespaces</title>
         
 
         <para>
@@ -117,7 +117,7 @@ $_SESSION['Some_Web_Service']['user'] = "mywebusername";
                 interface</link>, including support for the <code>foreach</code> statement:
         </para>
 
-        <example xml:id="zend.session.basic_usage.iteration.example"><info><title>Session Iteration</title></info>
+        <example xml:id="zend.session.basic_usage.iteration.example"><title>Session Iteration</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -131,7 +131,7 @@ foreach ($aNamespace as $index => $value) {
         </example>
     </section>
 
-    <section xml:id="zend.session.basic_usage.accessors"><info><title>Accessors for Session Namespaces</title></info>
+    <section xml:id="zend.session.basic_usage.accessors"><title>Accessors for Session Namespaces</title>
         
 
         <para>
@@ -143,7 +143,7 @@ foreach ($aNamespace as $index => $value) {
             the following example:
         </para>
 
-        <example xml:id="zend.session.basic_usage.accessors.example"><info><title>Accessing Session Data</title></info>
+        <example xml:id="zend.session.basic_usage.accessors.example"><title>Accessing Session Data</title>
             
 
             <programlisting language="php"><![CDATA[

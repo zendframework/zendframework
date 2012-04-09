@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.plugins.usage"><info><title>Using Plugins</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.plugins.usage"><title>Using Plugins</title>
     
 
     <para>
@@ -16,7 +16,7 @@
         Some examples will make all of this more clear.
     </para>
 
-    <example xml:id="learning.plugins.usage.basic"><info><title>Basic Plugin Example: Adding a single prefix path</title></info>
+    <example xml:id="learning.plugins.usage.basic"><title>Basic Plugin Example: Adding a single prefix path</title>
         
 
         <para>
@@ -71,7 +71,7 @@ $element->addValidator('NotEmpty')
         </para>
     </example>
 
-    <note><info><title>What happens if a plugin is not found?</title></info>
+    <note><title>What happens if a plugin is not found?</title>
         
 
         <para>
@@ -92,7 +92,7 @@ $element->addValidator('NotEmpty')
         </para>
     </note>
 
-    <example xml:id="learning.plugins.usage.override"><info><title>Intermediate Plugin Usage: Overriding existing plugins</title></info>
+    <example xml:id="learning.plugins.usage.override"><title>Intermediate Plugin Usage: Overriding existing plugins</title>
         
 
         <para>

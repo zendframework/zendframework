@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.dojo.form.decorators"><info><title>Dijit-Specific Form Decorators</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.dojo.form.decorators"><title>Dijit-Specific Form Decorators</title>
     
 
     <para>
@@ -18,7 +18,7 @@
         information occurs.
     </para>
 
-    <section xml:id="zend.dojo.form.decorators.dijitElement"><info><title>DijitElement Decorator</title></info>
+    <section xml:id="zend.dojo.form.decorators.dijitElement"><title>DijitElement Decorator</title>
         
 
         <para>
@@ -44,7 +44,7 @@
             in your decorator chain, with no additional options.
         </para>
 
-        <example xml:id="zend.dojo.form.decorators.dijitElement.usage"><info><title>DijitElement Decorator Usage</title></info>
+        <example xml:id="zend.dojo.form.decorators.dijitElement.usage"><title>DijitElement Decorator Usage</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -58,7 +58,7 @@ $element->setDecorators(array(
         </example>
     </section>
 
-    <section xml:id="zend.dojo.form.decorators.dijitForm"><info><title>DijitForm Decorator</title></info>
+    <section xml:id="zend.dojo.form.decorators.dijitForm"><title>DijitForm Decorator</title>
         
 
         <para>
@@ -77,7 +77,7 @@ $element->setDecorators(array(
         </para>
     </section>
 
-    <section xml:id="zend.dojo.form.decorators.dijitContainer"><info><title>DijitContainer-based Decorators</title></info>
+    <section xml:id="zend.dojo.form.decorators.dijitContainer"><title>DijitContainer-based Decorators</title>
         
 
         <para>
@@ -107,7 +107,7 @@ $element->setDecorators(array(
             <listitem><para>TabContainer</para></listitem>
         </itemizedlist>
 
-        <example xml:id="zend.dojo.form.decorators.dijitContainer.usage"><info><title>DijitContainer Decorator Usage</title></info>
+        <example xml:id="zend.dojo.form.decorators.dijitContainer.usage"><title>DijitContainer Decorator Usage</title>
             
 
             <programlisting language="php"><![CDATA[

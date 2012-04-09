@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.dojo.view.dijit"><info><title>Dijit-Specific View Helpers</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.dojo.view.dijit"><title>Dijit-Specific View Helpers</title>
     
 
     <para>
@@ -160,7 +160,7 @@
         to the dojo view helpers with your view object.
     </para>
 
-    <example xml:id="zend.dojo.view.dijit.prefixpath"><info><title>Registering the Dojo View Helper Prefix Path</title></info>
+    <example xml:id="zend.dojo.view.dijit.prefixpath"><title>Registering the Dojo View Helper Prefix Path</title>
         
 
         <programlisting language="php"><![CDATA[
@@ -168,7 +168,7 @@ $view->addHelperPath('Zend/Dojo/View/Helper', 'Zend_Dojo_View_Helper');
 ]]></programlisting>
     </example>
 
-    <section xml:id="zend.dojo.view.dijit.layout"><info><title>Dijit Layout Elements</title></info>
+    <section xml:id="zend.dojo.view.dijit.layout"><title>Dijit Layout Elements</title>
         
 
         <para>
@@ -371,7 +371,7 @@ $view->addHelperPath('Zend/Dojo/View/Helper', 'Zend_Dojo_View_Helper');
             </listitem>
         </itemizedlist>
 
-        <example xml:id="zend.dojo.view.dijit.layout.borderexample"><info><title>BorderContainer layout dijit example</title></info>
+        <example xml:id="zend.dojo.view.dijit.layout.borderexample"><title>BorderContainer layout dijit example</title>
             
 
             <para>
@@ -417,7 +417,7 @@ echo $view->borderContainer()->captureEnd('masterLayout');
         </example>
     </section>
 
-    <section xml:id="zend.dojo.view.dijit.form"><info><title>Dijit Form Elements</title></info>
+    <section xml:id="zend.dojo.view.dijit.form"><title>Dijit Form Elements</title>
         
 
         <para>
@@ -634,7 +634,7 @@ echo $view->currencyTextBox(
 );
 ]]></programlisting>
 
-                <note><info><title>Issues with Builds</title></info>
+                <note><title>Issues with Builds</title>
                     
 
                     <para>
@@ -690,7 +690,7 @@ echo $view->dateTextBox(
 echo $view->editor('foo');
 ]]></programlisting>
 
-                <note><info><title>Editor Dijit uses div by default</title></info>
+                <note><title>Editor Dijit uses div by default</title>
                     
 
                     <para>
@@ -1178,7 +1178,7 @@ echo $view->validationTextBox(
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.dojo.view.dijit.custom"><info><title>Custom Dijits</title></info>
+    <section xml:id="zend.dojo.view.dijit.custom"><title>Custom Dijits</title>
         
 
         <para>
@@ -1206,7 +1206,7 @@ echo $view->validationTextBox(
             "dojoType" attribute to its "params" argument.
         </para>
 
-        <example xml:id="zend.dojo.view.dijit.custom.example"><info><title>Using CustomDijit to render a dojox.layout.ContentPane</title></info>
+        <example xml:id="zend.dojo.view.dijit.custom.example"><title>Using CustomDijit to render a dojox.layout.ContentPane</title>
             
 
             <para>

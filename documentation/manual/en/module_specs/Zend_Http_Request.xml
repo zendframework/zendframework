@@ -3,12 +3,12 @@
 <section xmlns="http://docbook.org/ns/docbook"
     xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0"
     xml:id="zend.http.request">
-    <info><title>Zend\Http\Request</title></info>
+    <title>Zend\Http\Request</title>
 
     <section xml:id="zend.http.request.intro">
-        <info>
+        
             <title>Overview</title>
-        </info>
+        
 
         <para>
             The <classname>Zend\Http\Request</classname> object is responsible for providing a
@@ -44,9 +44,9 @@
     </section>
 
     <section xml:id="zend.http.request.quick-start">
-        <info>
+        
             <title>Quick Start</title>
-        </info>
+        
 
         <para>
             Request objects can either be created from the provided
@@ -80,9 +80,9 @@ $request->post()->set('foo', 'bar');
     </section>
 
     <section xml:id="zend.http.request.options">
-        <info>
+        
             <title>Configuration Options</title>
-        </info>
+        
 
         <para>
             None currently
@@ -96,9 +96,9 @@ $request->post()->set('foo', 'bar');
     </section>
 
     <section xml:id="zend.http.request.methods">
-        <info>
+        
             <title>Available Methods</title>
-        </info>
+        
 
         <variablelist>
             <varlistentry xml:id="zend.http.request.methods.from-string">
@@ -631,12 +631,12 @@ the entire metadata container.</para>
     </section>
 
     <section xml:id="zend.http.request.examples">
-        <info>
+        
             <title>Examples</title>
-        </info>
+        
 
         <example xml:id="zend.http.request.examples.from-string">
-            <info><title>Generating a Request object from a string</title></info>
+            <title>Generating a Request object from a string</title>
 
             <programlisting language="php"><![CDATA[
 use Zend\Http\Request;
@@ -651,7 +651,7 @@ $request->getRawBody(); // returns 'Some Content'
         </example>
 
         <example xml:id="zend.http.request.examples.from-array">
-            <info><title>Generating a Request object from an array</title></info>
+            <title>Generating a Request object from an array</title>
 
             <programlisting language="php"><![CDATA[
 N/A
@@ -659,7 +659,7 @@ N/A
         </example>
 
         <example xml:id="zend.http.request.examples.headers">
-            <info><title>Retrieving and setting headers</title></info>
+            <title>Retrieving and setting headers</title>
 
             <programlisting language="php"><![CDATA[
 use Zend\Http\Request;
@@ -673,7 +673,7 @@ foreach ($request->headers() as $header) {
         </example>
 
         <example xml:id="zend.http.request.examples.parameters">
-            <info><title>Retrieving and setting GET and POST values</title></info>
+            <title>Retrieving and setting GET and POST values</title>
 
             <programlisting language="php"><![CDATA[
 use Zend\Http\Request;
@@ -687,7 +687,7 @@ echo $request->get()->offsetGet('myVar');
         </example>
 
         <example xml:id="zend.http.request.examples.to-string">
-            <info><title>Generating an formatted HTTP Request from an Request object</title></info>
+            <title>Generating an formatted HTTP Request from an Request object</title>
 
             <programlisting language="php"><![CDATA[
 use Zend\Http\Request;

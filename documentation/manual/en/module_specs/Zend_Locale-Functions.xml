@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.locale.functions"><info><title>Using Zend_Locale</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.locale.functions"><title>Using Zend_Locale</title>
 
 
     <para>
@@ -8,7 +8,7 @@
         etc.
     </para>
 
-    <section xml:id="zend.locale.copying"><info><title>Copying, Cloning, and Serializing Locale Objects</title></info>
+    <section xml:id="zend.locale.copying"><title>Copying, Cloning, and Serializing Locale Objects</title>
 
 
         <para>
@@ -18,7 +18,7 @@
             <command>$locale-&gt;toString()</command>.
         </para>
 
-        <example xml:id="zend.locale.copying.example-1"><info><title>clone</title></info>
+        <example xml:id="zend.locale.copying.example-1"><title>clone</title>
 
 
             <programlisting language="php"><![CDATA[
@@ -43,7 +43,7 @@ print "copied: ", $copiedLocale;
         </example>
     </section>
 
-    <section xml:id="zend.locale.equals"><info><title>Equality</title></info>
+    <section xml:id="zend.locale.equals"><title>Equality</title>
 
 
         <para>
@@ -51,7 +51,7 @@ print "copied: ", $copiedLocale;
             locales. All locale-aware classes should provide a similar equality check.
         </para>
 
-        <example xml:id="zend.locale.equals.example-1"><info><title>Check for equal locales</title></info>
+        <example xml:id="zend.locale.equals.example-1"><title>Check for equal locales</title>
 
 
             <programlisting language="php"><![CDATA[
@@ -66,7 +66,7 @@ if ($locale->equals($mylocale)) {
         </example>
     </section>
 
-    <section xml:id="zend.locale.getdefault"><info><title>Default locales</title></info>
+    <section xml:id="zend.locale.getdefault"><title>Default locales</title>
 
 
         <para>
@@ -81,7 +81,7 @@ if ($locale->equals($mylocale)) {
             quality rating is included, when available.
         </para>
 
-        <example xml:id="zend.locale.getdefault.example-1"><info><title>Get default locales</title></info>
+        <example xml:id="zend.locale.getdefault.example-1"><title>Get default locales</title>
 
 
             <programlisting language="php"><![CDATA[
@@ -124,7 +124,7 @@ print_r($found2);
         </para>
     </section>
 
-    <section xml:id="zend.locale.setlocale"><info><title>Set a new locale</title></info>
+    <section xml:id="zend.locale.setlocale"><title>Set a new locale</title>
 
 
         <para>
@@ -133,7 +133,7 @@ print_r($found2);
             <link linkend="zend.locale.selection">automatically selected</link>.
         </para>
 
-        <example xml:id="zend.locale.setlocale.example-1"><info><title>setLocale</title></info>
+        <example xml:id="zend.locale.setlocale.example-1"><title>setLocale</title>
 
 
             <programlisting language="php"><![CDATA[
@@ -149,7 +149,7 @@ print $locale->toString();
         </example>
     </section>
 
-    <section xml:id="zend.locale.getlocale"><info><title>Getting the language and region</title></info>
+    <section xml:id="zend.locale.getlocale"><title>Getting the language and region</title>
 
 
         <para>
@@ -159,7 +159,7 @@ print $locale->toString();
             region code from the string locale identifier.
         </para>
 
-        <example xml:id="zend.locale.getlocale.example-1"><info><title>getLanguage and getRegion</title></info>
+        <example xml:id="zend.locale.getlocale.example-1"><title>getLanguage and getRegion</title>
 
 
             <programlisting language="php"><![CDATA[
@@ -174,7 +174,7 @@ print $locale->getRegion();
         </example>
     </section>
 
-    <section xml:id="zend.locale.getlocaletoterritory"><info><title>Get the locale by giving a territory</title></info>
+    <section xml:id="zend.locale.getlocaletoterritory"><title>Get the locale by giving a territory</title>
 
 
         <para>
@@ -185,7 +185,7 @@ print $locale->getRegion();
             been found.
         </para>
 
-        <example xml:id="zend.locale.getlocaletoterritory.example-1"><info><title>getLocaleToTerritory</title></info>
+        <example xml:id="zend.locale.getlocaletoterritory.example-1"><title>getLocaleToTerritory</title>
 
 
             <programlisting language="php"><![CDATA[
@@ -194,7 +194,7 @@ $locale = Zend_Locale::getLocaleToTerritory('US');
 ]]></programlisting>
         </example>
 
-        <note><info><title>Uppercase territories</title></info>
+        <note><title>Uppercase territories</title>
 
 
             <para>
@@ -214,7 +214,7 @@ $locale = Zend_Locale::getLocaleToTerritory('US');
         </note>
     </section>
 
-    <section xml:id="zend.locale.getdata"><info><title>Obtaining localized strings</title></info>
+    <section xml:id="zend.locale.getdata"><title>Obtaining localized strings</title>
 
 
         <para>
@@ -230,7 +230,7 @@ $locale = Zend_Locale::getLocaleToTerritory('US');
             to give an array instead of multiple values.
         </para>
 
-        <example xml:id="zend.locale.getdata.example-1"><info><title>getTranslationList</title></info>
+        <example xml:id="zend.locale.getdata.example-1"><title>getTranslationList</title>
 
 
             <programlisting language="php"><![CDATA[
@@ -254,9 +254,9 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
             an own function for simplicity. See this list for detailed information.
         </para>
 
-        <table xml:id="zend.locale.getdata.table-1"><info><title>
+        <table xml:id="zend.locale.getdata.table-1"><title>
                 Details for getTranslationList($type = null, $locale = null, $value = null)
-            </title></info>
+            </title>
 
 
             <tgroup cols="2">
@@ -915,7 +915,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
             See the following table for detailed information:
         </para>
 
-        <table xml:id="zend.locale.getdata.table-2"><info><title>Details for getTranslation($value = null, $type = null, $locale = null)</title></info>
+        <table xml:id="zend.locale.getdata.table-2"><title>Details for getTranslation($value = null, $type = null, $locale = null)</title>
 
 
             <tgroup cols="2">
@@ -1573,7 +1573,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
             </para>
         </note>
 
-        <table xml:id="zend.locale.getdata.table-3"><info><title>Differences between Zend Framework 1.0 and 1.5</title></info>
+        <table xml:id="zend.locale.getdata.table-3"><title>Differences between Zend Framework 1.0 and 1.5</title>
 
 
             <tgroup cols="2">
@@ -1667,7 +1667,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
             The example below demonstrates how to obtain the names of things in different languages.
         </para>
 
-        <example xml:id="zend.locale.getdata.example-3"><info><title>getTranslationList</title></info>
+        <example xml:id="zend.locale.getdata.example-3"><title>getTranslationList</title>
 
 
             <programlisting language="php"><![CDATA[
@@ -1681,7 +1681,7 @@ print_r(Zend_Locale::getTranslationList('country', 'de'));
             two letter iso country code is not known.
         </para>
 
-        <example xml:id="zend.locale.getdata.example-4"><info><title>Converting country name in one language to another</title></info>
+        <example xml:id="zend.locale.getdata.example-4"><title>Converting country name in one language to another</title>
 
 
             <programlisting language="php"><![CDATA[
@@ -1704,7 +1704,7 @@ echo Zend_Locale::getTranslation($frenchCode, 'language', 'de_AT');
             example, below exceptions are ignored to prevent early termination.
         </para>
 
-        <example xml:id="zend.locale.getdata.example-6"><info><title>All Languages written in their native language</title></info>
+        <example xml:id="zend.locale.getdata.example-6"><title>All Languages written in their native language</title>
 
 
             <programlisting language="php"><![CDATA[
@@ -1724,7 +1724,7 @@ foreach($list as $language => $content) {
         </example>
     </section>
 
-    <section xml:id="zend.locale.getquestion"><info><title>Obtaining translations for "yes" and "no"</title></info>
+    <section xml:id="zend.locale.getquestion"><title>Obtaining translations for "yes" and "no"</title>
 
 
         <para>
@@ -1760,7 +1760,7 @@ foreach($list as $language => $content) {
             following example for the information you can receive:
         </para>
 
-        <example xml:id="zend.locale.getquestion.example-1"><info><title>getQuestion()</title></info>
+        <example xml:id="zend.locale.getquestion.example-1"><title>getQuestion()</title>
 
 
             <programlisting language="php"><![CDATA[
@@ -1801,7 +1801,7 @@ Array
         </note>
     </section>
 
-    <section xml:id="zend.locale.getlocalelist"><info><title>Get a list of all known locales</title></info>
+    <section xml:id="zend.locale.getlocalelist"><title>Get a list of all known locales</title>
 
 
         <para>
@@ -1811,7 +1811,7 @@ Array
             locales.
         </para>
 
-        <example xml:id="zend.locale.getlocalelist.example-1"><info><title>getLocaleList()</title></info>
+        <example xml:id="zend.locale.getlocalelist.example-1"><title>getLocaleList()</title>
 
 
             <programlisting language="php"><![CDATA[
@@ -1827,7 +1827,7 @@ $localelist = Zend_Locale::getLocaleList();
         </note>
     </section>
 
-    <section xml:id="zend.locale.detection"><info><title>Detecting locales</title></info>
+    <section xml:id="zend.locale.detection"><title>Detecting locales</title>
 
 
         <para>
@@ -1836,7 +1836,7 @@ $localelist = Zend_Locale::getLocaleList();
             this method is the string which you want to check.
         </para>
 
-        <example xml:id="zend.locale.detection.example-1"><info><title>Simple locale detection</title></info>
+        <example xml:id="zend.locale.detection.example-1"><title>Simple locale detection</title>
 
 
             <programlisting language="php"><![CDATA[
@@ -1872,7 +1872,7 @@ if (Zend_Locale::isLocale($input)) {
             used to prevent degrading when set to <constant>TRUE</constant>.
         </para>
 
-        <example xml:id="zend.locale.detection.example-2"><info><title>Strict locale detection</title></info>
+        <example xml:id="zend.locale.detection.example-2"><title>Strict locale detection</title>
 
 
             <programlisting language="php"><![CDATA[
@@ -1891,7 +1891,7 @@ if (Zend_Locale::isLocale($input, true)) {
             the same 15 lines of code. Something like the following example:
         </para>
 
-        <example xml:id="zend.locale.detection.example-3"><info><title>Implement locale aware behaviour</title></info>
+        <example xml:id="zend.locale.detection.example-3"><title>Implement locale aware behaviour</title>
 
 
             <programlisting language="php"><![CDATA[
@@ -1975,7 +1975,7 @@ if ($locale instanceof Zend_Locale) {
             one single call:
         </para>
 
-        <example xml:id="zend.locale.detection.example-4"><info><title>Locale aware behaviour as with Zend Framework 1.8</title></info>
+        <example xml:id="zend.locale.detection.example-4"><title>Locale aware behaviour as with Zend Framework 1.8</title>
 
 
             <programlisting language="php"><![CDATA[

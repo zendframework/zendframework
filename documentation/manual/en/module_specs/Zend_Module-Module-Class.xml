@@ -4,9 +4,9 @@
     xmlns="http://docbook.org/ns/docbook" version="5.0"
     xmlns:xlink="http://www.w3.org/1999/xlink"
     xml:id="zend.module.module-class">
-    <info>
+    
         <title>The Module Class</title>
-    </info>
+    
 
     <para>
         By default, ZF2 module system simply expects each module name to be able to be resolved to
@@ -16,9 +16,9 @@
     </para>
 
     <example xml:id="zend.module.module-class.example.minimal-module">
-        <info>
+        
             <title>A Minimal Module</title>
-        </info>
+        
 
         <para>
             As an example, provided the module name "MyModule",
@@ -66,9 +66,9 @@ class Module
     </para>
 
     <example xml:id="zend.module.module-class.example.typical-module-class">
-        <info>
+        
             <title>A Typical Module Class</title>
-        </info>
+        
 
         <para>
             The following example shows a more typical usage of the <classname>Module</classname>
@@ -114,9 +114,9 @@ class Module implements AutoloaderProvider
     </para>
 
     <section xml:id="zend.module.module-class.the-loadModules.post-event">
-        <info>
+        
             <title>The "loadModules.post" Event</title>
-        </info>
+        
 
         <para>
             It is not safe for a module to assume that any other modules have already been loaded at
@@ -135,9 +135,9 @@ class Module implements AutoloaderProvider
         </note>
 
         <example xml:id="zend.module.module-class.example.loadModules.post-event">
-            <info>
+            
                 <title>Sample Usage of "loadModules.post" Event</title>
-            </info>
+            
 
             <programlisting language="php"><![CDATA[
 use Zend\EventManager\EventDescription as Event,
@@ -165,9 +165,9 @@ class Module
     </section>
 
     <section xml:id="zend.module.module-class.the-mvc-bootstrap-event">
-        <info>
+        
             <title>The MVC "bootstrap" Event</title>
-        </info>
+        
 
         <para>
             If you are writing an MVC-oriented module for ZF2, you may need access to additional
@@ -179,9 +179,9 @@ class Module
         </para>
 
         <example xml:id="zend.module.module-class.example.mvc-bootstrap-event">
-            <info>
+            
                 <title>Sample Usage of the MVC "bootstrap" Event</title>
-            </info>
+            
 
             <programlisting language="php"><![CDATA[
 use Zend\EventManager\EventDescription as Event,

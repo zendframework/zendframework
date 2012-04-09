@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.multiple-emails"><info><title>Sending Multiple Mails per SMTP Connection</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.multiple-emails"><title>Sending Multiple Mails per SMTP Connection</title>
     
 
     <para>
@@ -20,7 +20,7 @@
         <methodname>clearDefaultReplyTo</methodname>.
     </para>
 
-    <example xml:id="zend.mail.multiple-emails.example-1"><info><title>Sending Multiple Mails per SMTP Connection</title></info>
+    <example xml:id="zend.mail.multiple-emails.example-1"><title>Sending Multiple Mails per SMTP Connection</title>
         
 
         <programlisting language="php"><![CDATA[
@@ -58,7 +58,7 @@ Zend_Mail::clearDefaultReplyTo();
         transport's protocol object.
     </para>
 
-    <example xml:id="zend.mail.multiple-emails.example-2"><info><title>Manually controlling the transport connection</title></info>
+    <example xml:id="zend.mail.multiple-emails.example-2"><title>Manually controlling the transport connection</title>
         
 
         <programlisting language="php"><![CDATA[

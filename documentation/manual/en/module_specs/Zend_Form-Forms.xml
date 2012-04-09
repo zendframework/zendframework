@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.forms"><info><title>Creating Forms Using Zend_Form</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.forms"><title>Creating Forms Using Zend_Form</title>
 
 
     <para>
@@ -78,7 +78,7 @@ $form = new Zend_Form($config);
         through decorators.
     </para>
 
-    <section xml:id="zend.form.forms.plugins"><info><title>Plugin Loaders</title></info>
+    <section xml:id="zend.form.forms.plugins"><title>Plugin Loaders</title>
 
 
         <para>
@@ -180,7 +180,7 @@ $form = new Zend_Form($config);
         </para>
     </section>
 
-    <section xml:id="zend.form.forms.elements"><info><title>Elements</title></info>
+    <section xml:id="zend.form.forms.elements"><title>Elements</title>
 
 
         <para>
@@ -218,7 +218,7 @@ $form->addElement('text', 'foo');
 $form->addElement('text', 'foo', array('label' => 'Foo:'));
 ]]></programlisting>
 
-        <note><info><title>addElement() Implements Fluent Interface</title></info>
+        <note><title>addElement() Implements Fluent Interface</title>
 
 
             <para>
@@ -272,7 +272,7 @@ $foo = $form->foo;
 $username = $form->createElement('text', 'username');
 ]]></programlisting>
 
-        <section xml:id="zend.form.forms.elements.values"><info><title>Populating and Retrieving Values</title></info>
+        <section xml:id="zend.form.forms.elements.values"><title>Populating and Retrieving Values</title>
 
 
             <para>
@@ -315,7 +315,7 @@ $form->reset();
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.form.forms.elements.global"><info><title>Global Operations</title></info>
+        <section xml:id="zend.form.forms.elements.global"><title>Global Operations</title>
 
 
             <para>
@@ -325,7 +325,7 @@ $form->reset();
                 setting filters for all elements. As examples:
             </para>
 
-            <example xml:id="zend.form.forms.elements.global.allpaths"><info><title>Setting Prefix Paths for All Elements</title></info>
+            <example xml:id="zend.form.forms.elements.global.allpaths"><title>Setting Prefix Paths for All Elements</title>
 
 
                 <para>
@@ -356,7 +356,7 @@ $form->addElementPrefixPath('My_Foo_Decorator',
 ]]></programlisting>
             </example>
 
-            <example xml:id="zend.form.forms.elements.global.decorators"><info><title>Setting Decorators for All Elements</title></info>
+            <example xml:id="zend.form.forms.elements.global.decorators"><title>Setting Decorators for All Elements</title>
 
 
                 <para>
@@ -376,7 +376,7 @@ $form->setElementDecorators(array(
 ]]></programlisting>
             </example>
 
-            <example xml:id="zend.form.forms.elements.global.decoratorsFilter"><info><title>Setting Decorators for Some Elements</title></info>
+            <example xml:id="zend.form.forms.elements.global.decoratorsFilter"><title>Setting Decorators for Some Elements</title>
 
 
                 <para>
@@ -435,7 +435,7 @@ $form->setElementDecorators(
 ]]></programlisting>
             </example>
 
-            <note><info><title>Some Decorators are Inappropriate for Some Elements</title></info>
+            <note><title>Some Decorators are Inappropriate for Some Elements</title>
 
 
                 <para>
@@ -462,7 +462,7 @@ $form->setElementDecorators(
                 </para>
             </note>
 
-            <example xml:id="zend.form.forms.elements.global.filters"><info><title>Setting Filters for All Elements</title></info>
+            <example xml:id="zend.form.forms.elements.global.filters"><title>Setting Filters for All Elements</title>
 
 
                 <para>
@@ -476,7 +476,7 @@ $form->setElementFilters(array('StringTrim'));
             </example>
         </section>
 
-        <section xml:id="zend.form.forms.elements.methods"><info><title>Methods For Interacting With Elements</title></info>
+        <section xml:id="zend.form.forms.elements.methods"><title>Methods For Interacting With Elements</title>
 
 
             <para>
@@ -596,7 +596,7 @@ $form->setElementFilters(array('StringTrim'));
         </section>
     </section>
 
-    <section xml:id="zend.form.forms.displaygroups"><info><title>Display Groups</title></info>
+    <section xml:id="zend.form.forms.displaygroups"><title>Display Groups</title>
 
 
         <para>
@@ -641,7 +641,7 @@ $login = $form->getDisplayGroup('login');
 $login = $form->login;
 ]]></programlisting>
 
-        <note><info><title>Default Decorators Do Not Need to Be Loaded</title></info>
+        <note><title>Default Decorators Do Not Need to Be Loaded</title>
 
 
             <para>
@@ -665,7 +665,7 @@ $form->addDisplayGroup(
             </para>
         </note>
 
-        <section xml:id="zend.form.forms.displaygroups.global"><info><title>Global Operations</title></info>
+        <section xml:id="zend.form.forms.displaygroups.global"><title>Global Operations</title>
 
 
             <para>
@@ -674,7 +674,7 @@ $form->addDisplayGroup(
                 setting the plugin path in which to look for decorators.
             </para>
 
-            <example xml:id="zend.form.forms.displaygroups.global.paths"><info><title>Setting Decorator Prefix Path for All Display Groups</title></info>
+            <example xml:id="zend.form.forms.displaygroups.global.paths"><title>Setting Decorator Prefix Path for All Display Groups</title>
 
 
                 <para>
@@ -689,7 +689,7 @@ $form->addDisplayGroupPrefixPath('My_Foo_Decorator', 'My/Foo/Decorator');
 ]]></programlisting>
             </example>
 
-            <example xml:id="zend.form.forms.displaygroups.global.decorators"><info><title>Setting Decorators for All Display Groups</title></info>
+            <example xml:id="zend.form.forms.displaygroups.global.decorators"><title>Setting Decorators for All Display Groups</title>
 
 
                 <para>
@@ -711,7 +711,7 @@ $form->setDisplayGroupDecorators(array(
             </example>
         </section>
 
-        <section xml:id="zend.form.forms.displaygroups.customClasses"><info><title>Using Custom Display Group Classes</title></info>
+        <section xml:id="zend.form.forms.displaygroups.customClasses"><title>Using Custom Display Group Classes</title>
 
 
             <para>
@@ -756,7 +756,7 @@ $form->setDefaultDisplayGroupClass('My_DisplayGroup');
             </para>
         </section>
 
-        <section xml:id="zend.form.forms.displaygroups.interactionmethods"><info><title>Methods for Interacting With Display Groups</title></info>
+        <section xml:id="zend.form.forms.displaygroups.interactionmethods"><title>Methods for Interacting With Display Groups</title>
 
 
             <para>
@@ -834,7 +834,7 @@ $form->setDefaultDisplayGroupClass('My_DisplayGroup');
             </itemizedlist>
         </section>
 
-        <section xml:id="zend.form.forms.displaygroups.methods"><info><title>Zend_Form_DisplayGroup Methods</title></info>
+        <section xml:id="zend.form.forms.displaygroups.methods"><title>Zend_Form_DisplayGroup Methods</title>
 
 
             <para>
@@ -1040,7 +1040,7 @@ $form->setDefaultDisplayGroupClass('My_DisplayGroup');
         </section>
     </section>
 
-    <section xml:id="zend.form.forms.subforms"><info><title>Sub Forms</title></info>
+    <section xml:id="zend.form.forms.subforms"><title>Sub Forms</title>
 
 
         <para>
@@ -1106,7 +1106,7 @@ $subForm = $form->subform;
             contain are not.
         </para>
 
-        <section xml:id="zend.form.forms.subforms.global"><info><title>Global Operations</title></info>
+        <section xml:id="zend.form.forms.subforms.global"><title>Global Operations</title>
 
 
             <para>
@@ -1129,7 +1129,7 @@ $form->setSubFormDecorators(array(
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.form.forms.subforms.methods"><info><title>Methods for Interacting With Sub Forms</title></info>
+        <section xml:id="zend.form.forms.subforms.methods"><title>Methods for Interacting With Sub Forms</title>
 
 
             <para>
@@ -1188,7 +1188,7 @@ $form->setSubFormDecorators(array(
         </section>
     </section>
 
-    <section xml:id="zend.form.forms.metadata"><info><title>Metadata and Attributes</title></info>
+    <section xml:id="zend.form.forms.metadata"><title>Metadata and Attributes</title>
 
 
         <para>
@@ -1284,7 +1284,7 @@ $form->clearAttribs();
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.form.forms.decorators"><info><title>Decorators</title></info>
+    <section xml:id="zend.form.forms.decorators"><title>Decorators</title>
 
 
         <para>
@@ -1334,7 +1334,7 @@ $form->setDecorators(array(
             attributes of the <emphasis>&lt;form&gt;</emphasis> tag.
         </para>
 
-        <note><info><title>Default Decorators Do Not Need to Be Loaded</title></info>
+        <note><title>Default Decorators Do Not Need to Be Loaded</title>
 
 
             <para>
@@ -1353,7 +1353,7 @@ $form = new Zend_Form(array('disableLoadDefaultDecorators' => true));
             </para>
         </note>
 
-        <note><info><title>Using Multiple Decorators of the Same Type</title></info>
+        <note><title>Using Multiple Decorators of the Same Type</title>
 
 
             <para>
@@ -1481,7 +1481,7 @@ echo $form->renderFieldset("<p>This is fieldset content</p>");
         </para>
     </section>
 
-    <section xml:id="zend.form.forms.validation"><info><title>Validation</title></info>
+    <section xml:id="zend.form.forms.validation"><title>Validation</title>
 
 
         <para>
@@ -1584,7 +1584,7 @@ $messages = $form->getMessages('username');
             </para>
         </note>
 
-        <section xml:id="zend.form.forms.validation.errors"><info><title>Custom Error Messages</title></info>
+        <section xml:id="zend.form.forms.validation.errors"><title>Custom Error Messages</title>
 
 
             <para>
@@ -1669,7 +1669,7 @@ $messages = $form->getMessages('username');
             </para>
         </section>
 
-        <section xml:id="zend.form.forms.validation.values"><info><title>Retrieving Valid Values Only</title></info>
+        <section xml:id="zend.form.forms.validation.values"><title>Retrieving Valid Values Only</title>
 
 
             <para>
@@ -1689,7 +1689,7 @@ $validValues = $form->getValidValues($_POST);
         </section>
     </section>
 
-    <section xml:id="zend.form.forms.methods"><info><title>Methods</title></info>
+    <section xml:id="zend.form.forms.methods"><title>Methods</title>
 
 
         <para>
@@ -2007,7 +2007,7 @@ $validValues = $form->getValidValues($_POST);
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.form.forms.config"><info><title>Configuration</title></info>
+    <section xml:id="zend.form.forms.config"><title>Configuration</title>
 
 
         <para>
@@ -2119,7 +2119,7 @@ decorators.form.decorator = "Form"
         </para>
     </section>
 
-    <section xml:id="zend.form.forms.custom"><info><title>Custom forms</title></info>
+    <section xml:id="zend.form.forms.custom"><title>Custom forms</title>
 
 
         <para>

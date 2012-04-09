@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" 
     xml:id="zend.db.tablegateway">
-    <info><title>Zend\Db\TableGateway</title></info>
+    <title>Zend\Db\TableGateway</title>
 
     <para>
         The Table Gateway object is intended to provide an object
@@ -22,14 +22,14 @@ interface Zend\Db\TableGateway\TableGatewayInterface
 ]]></programlisting>
 
     <section xml:id="zend.db.tablegateway.by-example">
-        <info><title>Examples</title></info>
+        <title>Examples</title>
 
         <para>
             Here are a few examples of TableGateway usage
         </para>
 
         <section xml:id="zend.db.tablegateway.by-example.select">
-            <info><title>Selecting Rows</title></info>
+            <title>Selecting Rows</title>
 
             <programlisting language="php"><![CDATA[
 $artistTable = new Zend\Db\TableGateway\TableGateway('artist', $adapter);
@@ -42,7 +42,7 @@ $name2 = $row->name;
         </section>
 
         <section xml:id="zend.db.tablegateway.by-example.insert">
-            <info><title>Inserting Rows</title></info>
+            <title>Inserting Rows</title>
 
             <programlisting language="php"><![CDATA[
 $artistTable = new Zend\Db\TableGateway\TableGateway('artist', $adapter);
@@ -58,7 +58,7 @@ $lastId = $artistTable->getLastInsertId();
         </section>
 
         <section xml:id="zend.db.tablegateway.by-example.update">
-            <info><title>Updating Rows</title></info>
+            <title>Updating Rows</title>
 
             <programlisting language="php"><![CDATA[
 $artistTable = new Zend\Db\TableGateway\TableGateway('artist', $adapter);
@@ -70,7 +70,7 @@ $name = $row['name'];
         </section>
 
         <section xml:id="zend.db.tablegateway.by-example.delete">
-            <info><title>Deleting Rows</title></info>
+            <title>Deleting Rows</title>
 
             <programlisting language="php"><![CDATA[
 $artistTable = new Zend\Db\TableGateway\TableGateway('artist', $adapter);
@@ -79,7 +79,7 @@ $result = $artistTable->delete(array('id' => 2));
         </section>
 
         <section xml:id="zend.db.tablegateway.by-example.select-with-where">
-            <info><title>Using a Fluent Where With Select</title></info>
+            <title>Using a Fluent Where With Select</title>
 
             <programlisting language="php"><![CDATA[
 $artistTable = new TableGateway('artist', $adapter);
@@ -91,7 +91,7 @@ $row = $rowset->current();
         </section>
 
         <section xml:id="zend.db.tablegateway.by-example.select-with-closure">
-            <info><title>Using a Closure With Select</title></info>
+            <title>Using a Closure With Select</title>
 
             <programlisting language="php"><![CDATA[
 $artistTable = new TableGateway('artist', $adapter);
@@ -103,7 +103,7 @@ $row = $rowset->current();
         </section>
 
         <section xml:id="zend.db.tablegateway.by-example.row-gateway">
-            <info><title>Row Gateway Integration</title></info>
+            <title>Row Gateway Integration</title>
 
             <programlisting language="php"><![CDATA[
 $artistTable = new Zend\Db\TableGateway\TableGateway('artist', $adapter);

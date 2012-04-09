@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.markup.renderers"><info><title>Zend_Markup Renderers</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.markup.renderers"><title>Zend_Markup Renderers</title>
     
 
     <para>
@@ -7,7 +7,7 @@
         <acronym>HTML</acronym> renderer.
     </para>
 
-    <section xml:id="zend.markup.renderers.add"><info><title>Adding your own markups</title></info>
+    <section xml:id="zend.markup.renderers.add"><title>Adding your own markups</title>
         
 
         <para>
@@ -54,7 +54,7 @@ echo $bbcode->render('my [foo]markup[/foo]');
             closing markup.
         </para>
 
-        <section xml:id="zend.markup.renderers.add.callback"><info><title>Add a callback markup</title></info>
+        <section xml:id="zend.markup.renderers.add.callback"><title>Add a callback markup</title>
             
 
             <para>
@@ -113,10 +113,10 @@ echo $bbcode->render('my [upper]markup[/upper]');
         </section>
     </section>
 
-    <section xml:id="zend.markup.renderers.list"><info><title>List of markups</title></info>
+    <section xml:id="zend.markup.renderers.list"><title>List of markups</title>
         
 
-        <table xml:id="zend.markup.renderers.list.markups"><info><title>List of markups</title></info>
+        <table xml:id="zend.markup.renderers.list.markups"><title>List of markups</title>
             
 
             <tgroup cols="2" align="left" colsep="1" rowsep="1">

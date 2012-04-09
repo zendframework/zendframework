@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.windowsazure.storage.queue"><info><title>Zend_Service_WindowsAzure_Storage_Queue</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.windowsazure.storage.queue"><title>Zend_Service_WindowsAzure_Storage_Queue</title>
     
 
     <para>
@@ -22,7 +22,7 @@
         provide a native <acronym>PHP</acronym> interface to the storage account.
     </para>
 
-    <section xml:id="zend.service.windowsazure.storage.queue.api"><info><title>API Examples</title></info>
+    <section xml:id="zend.service.windowsazure.storage.queue.api"><title>API Examples</title>
         
 
         <para>
@@ -32,14 +32,14 @@
             documentation of those features.
         </para>
 
-        <section xml:id="zend.service.windowsazure.storage.queue.api.create-queue"><info><title>Creating a queue</title></info>
+        <section xml:id="zend.service.windowsazure.storage.queue.api.create-queue"><title>Creating a queue</title>
             
 
             <para>
                 Using the following code, a queue can be created on development storage.
             </para>
 
-            <example xml:id="zend.service.windowsazure.storage.queue.api.create-queue.example"><info><title>Creating a queue</title></info>
+            <example xml:id="zend.service.windowsazure.storage.queue.api.create-queue.example"><title>Creating a queue</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -51,14 +51,14 @@ echo 'Queue name is: ' . $result->Name;
             </example>
         </section>
 
-        <section xml:id="zend.service.windowsazure.storage.queue.api.delete-queue"><info><title>Deleting a queue</title></info>
+        <section xml:id="zend.service.windowsazure.storage.queue.api.delete-queue"><title>Deleting a queue</title>
             
 
             <para>
                 Using the following code, a queue can be removed from development storage.
             </para>
 
-            <example xml:id="zend.service.windowsazure.storage.queue.api.delete-queue.example"><info><title>Deleting a queue</title></info>
+            <example xml:id="zend.service.windowsazure.storage.queue.api.delete-queue.example"><title>Deleting a queue</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -68,7 +68,7 @@ $storageClient->deleteQueue('testqueue');
             </example>
         </section>
 
-        <section xml:id="zend.service.windowsazure.storage.queue.api.storing-queue"><info><title>Adding a message to a queue</title></info>
+        <section xml:id="zend.service.windowsazure.storage.queue.api.storing-queue"><title>Adding a message to a queue</title>
             
 
             <para>
@@ -76,7 +76,7 @@ $storageClient->deleteQueue('testqueue');
                 Note that the queue has already been created before.
             </para>
 
-            <example xml:id="zend.service.windowsazure.storage.queue.api.storing-queue.example"><info><title>Adding a message to a queue</title></info>
+            <example xml:id="zend.service.windowsazure.storage.queue.api.storing-queue.example"><title>Adding a message to a queue</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -88,7 +88,7 @@ $storageClient->putMessage('testqueue', 'This is a test message', 3600);
             </example>
         </section>
 
-        <section xml:id="zend.service.windowsazure.storage.queue.api.read-queue"><info><title>Reading a message from a queue</title></info>
+        <section xml:id="zend.service.windowsazure.storage.queue.api.read-queue"><title>Reading a message from a queue</title>
             
 
             <para>
@@ -96,7 +96,7 @@ $storageClient->putMessage('testqueue', 'This is a test message', 3600);
                 Note that the queue and message have already been created before.
             </para>
 
-            <example xml:id="zend.service.windowsazure.storage.queue.api.read-queue.example"><info><title>Reading a message from a queue</title></info>
+            <example xml:id="zend.service.windowsazure.storage.queue.api.read-queue.example"><title>Reading a message from a queue</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -118,7 +118,7 @@ foreach ($messages as $message) {
                 <methodname>deleteMessage()</methodname> method.
             </para>
 
-            <example xml:id="zend.service.windowsazure.storage.queue.api.read-queue.processexample"><info><title>Marking a message as processed</title></info>
+            <example xml:id="zend.service.windowsazure.storage.queue.api.read-queue.processexample"><title>Marking a message as processed</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -137,7 +137,7 @@ foreach ($messages as $message) {
             </example>
         </section>
 
-        <section xml:id="zend.service.windowsazure.storage.queue.api.peek-queue"><info><title>Check if there are messages in a queue</title></info>
+        <section xml:id="zend.service.windowsazure.storage.queue.api.peek-queue"><title>Check if there are messages in a queue</title>
             
 
             <para>
@@ -145,7 +145,7 @@ foreach ($messages as $message) {
                 queue and message have already been created before.
             </para>
 
-            <example xml:id="zend.service.windowsazure.storage.queue.api.peek-queue.example"><info><title>Check if there are messages in a queue</title></info>
+            <example xml:id="zend.service.windowsazure.storage.queue.api.peek-queue.example"><title>Check if there are messages in a queue</title>
                 
 
                 <programlisting language="php"><![CDATA[

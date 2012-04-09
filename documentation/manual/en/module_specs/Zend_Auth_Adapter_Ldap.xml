@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.auth.adapter.ldap"><info><title>LDAP Authentication</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.auth.adapter.ldap"><title>LDAP Authentication</title>
     
 
-    <section xml:id="zend.auth.adapter.ldap.introduction"><info><title>Introduction</title></info>
+    <section xml:id="zend.auth.adapter.ldap.introduction"><title>Introduction</title>
         
 
         <para>
@@ -24,7 +24,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.auth.adapter.ldap.usage"><info><title>Usage</title></info>
+    <section xml:id="zend.auth.adapter.ldap.usage"><title>Usage</title>
         
 
         <para>
@@ -131,7 +131,7 @@ ldap.server2.baseDn = "CN=Users,DC=w,DC=net"
         </para>
     </section>
 
-    <section xml:id="zend.auth.adapter.ldap.api"><info><title>The API</title></info>
+    <section xml:id="zend.auth.adapter.ldap.api"><title>The API</title>
         
 
         <para>
@@ -190,7 +190,7 @@ Array
             the DN for a username being authenticated.
         </para>
 
-        <note><info><title>What is a Distinguished Name?</title></info>
+        <note><title>What is a Distinguished Name?</title>
             
 
             <para>
@@ -221,7 +221,7 @@ Array
             queried.
         </para>
 
-        <note><info><title>The Gory Details: What Happens in the Authenticate Method?</title></info>
+        <note><title>The Gory Details: What Happens in the Authenticate Method?</title>
             
 
             <para>
@@ -259,7 +259,7 @@ Array
         </para>
     </section>
 
-    <section xml:id="zend.auth.adapter.ldap.server-options"><info><title>Server Options</title></info>
+    <section xml:id="zend.auth.adapter.ldap.server-options"><title>Server Options</title>
         
 
         <para>
@@ -269,7 +269,7 @@ Array
             <methodname>Zend_Ldap::setOptions()</methodname>:
         </para>
 
-        <table xml:id="zend.auth.adapter.ldap.server-options.table"><info><title>Server Options</title></info>
+        <table xml:id="zend.auth.adapter.ldap.server-options.table"><title>Server Options</title>
             
 
             <tgroup cols="2">
@@ -522,7 +522,7 @@ Array
         </note>
     </section>
 
-    <section xml:id="zend.auth.adapter.ldap.debugging"><info><title>Collecting Debugging Messages</title></info>
+    <section xml:id="zend.auth.adapter.ldap.debugging"><title>Collecting Debugging Messages</title>
         
 
         <para>
@@ -532,7 +532,7 @@ Array
             <methodname>Zend_Auth_Result::getMessages()</methodname> is described as follows
         </para>
 
-        <table xml:id="zend.auth.adapter.ldap.debugging.table"><info><title>Debugging Messages</title></info>
+        <table xml:id="zend.auth.adapter.ldap.debugging.table"><title>Debugging Messages</title>
             
 
             <tgroup cols="2">
@@ -580,17 +580,17 @@ Array
         </para>
     </section>
 
-    <section xml:id="zend.auth.adapter.ldap.options-common-server-specific"><info><title>Common Options for Specific Servers</title></info>
+    <section xml:id="zend.auth.adapter.ldap.options-common-server-specific"><title>Common Options for Specific Servers</title>
         
 
-        <section xml:id="zend.auth.adapter.ldap.options-common-server-specific.active-directory"><info><title>Options for Active Directory</title></info>
+        <section xml:id="zend.auth.adapter.ldap.options-common-server-specific.active-directory"><title>Options for Active Directory</title>
             
 
             <para>
                 For <acronym>ADS</acronym>, the following options are noteworthy:
             </para>
 
-            <table xml:id="zend.auth.adapter.ldap.options-common-server-specific.active-directory.table"><info><title>Options for Active Directory</title></info>
+            <table xml:id="zend.auth.adapter.ldap.options-common-server-specific.active-directory.table"><title>Options for Active Directory</title>
                 
 
                 <tgroup cols="2">
@@ -694,7 +694,7 @@ Array
             </note>
         </section>
 
-        <section xml:id="zend.auth.adapter.ldap.options-common-server-specific.openldap"><info><title>Options for OpenLDAP</title></info>
+        <section xml:id="zend.auth.adapter.ldap.options-common-server-specific.openldap"><title>Options for OpenLDAP</title>
             
 
             <para>
@@ -702,7 +702,7 @@ Array
                 posixAccount style schema, the following options are noteworthy:
             </para>
 
-            <table xml:id="zend.auth.adapter.ldap.options-common-server-specific.openldap.table"><info><title>Options for OpenLDAP</title></info>
+            <table xml:id="zend.auth.adapter.ldap.options-common-server-specific.openldap.table"><title>Options for OpenLDAP</title>
                 
 
                 <tgroup cols="2">

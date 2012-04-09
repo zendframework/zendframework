@@ -14,6 +14,8 @@ Zend/Docbook
 Zend/Dojo
 Zend/Dom
 Zend/EventManager
+Zend/Feed/Reader
+Zend/Feed/Writer
 Zend/File
 Zend/Filter
 Zend/Form
@@ -35,6 +37,7 @@ Zend/Mvc
 Zend/Navigation
 Zend/OAuth
 Zend/OpenId
+Zend/Paginator
 Zend/Pdf
 Zend/ProgressBar
 Zend/RegistryTest.php
@@ -42,6 +45,7 @@ Zend/Rest
 Zend/Search
 Zend/Serializer
 Zend/Server
+Zend/Session
 Zend/Soap
 Zend/Stdlib
 Zend/Tag

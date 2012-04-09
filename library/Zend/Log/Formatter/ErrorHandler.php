@@ -23,17 +23,17 @@
  * @namespace
  */
 namespace Zend\Log\Formatter;
-use Zend\Log\Exception;
+use Zend\Log\Formatter,
+    Zend\Log\Exception;
 
 /**
- * @uses       Zend\Log\Formatter\AbstractFormatter
  * @category   Zend
  * @package    Zend_Log
  * @subpackage Formatter
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ErrorHandler extends AbstractFormatter
+class ErrorHandler implements Formatter
 {
     const DEFAULT_FORMAT = '%timestamp% %priorityName% (%priority%) %message% (errno %extra[errno]%) in %extra[file]% on line %extra[line]%';
     
@@ -62,28 +62,6 @@ class ErrorHandler extends AbstractFormatter
         }
 
         $this->format = $format;
-    }
-
-    /**
-     * Factory for Zend\Log\Formatter\ErrorHandler
-     *
-     * @param  array|\Zend\Config\Config $options useless
-     * @return ErrorHandler
-     */
-    public static function factory($options = array())
-    {
-        $format = null;
-        if (null !== $options) {
-            if ($options instanceof Config) {
-                $options = $options->toArray();
-            }
-
-            if (array_key_exists('format', $options)) {
-                $format = $options['format'];
-            }
-        }
-        
-        return new self($format);
     }
 
     /**

@@ -24,27 +24,17 @@
  */
 namespace Zend\Log\Formatter;
 
+use Zend\Log\Formatter;
+
 /**
- * @uses       \Zend\Log\Formatter\AbstractFormatter
  * @category   Zend
  * @package    Zend_Log
  * @subpackage Formatter
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ExceptionHandler extends AbstractFormatter
+class ExceptionHandler implements Formatter
 {
-    /**
-     * Factory for Zend\Log\Formatter\ErrorHandler
-     *
-     * @param array|\Zend\Config\Config $options useless
-     * @return \Zend\Log\Formatter\Firebug
-     */
-    public static function factory($options = array())
-    {
-        return new self();
-    }
-
     /**
      * This method formats the event for the PHP Exception
      *

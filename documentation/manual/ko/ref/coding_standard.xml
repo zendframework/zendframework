@@ -694,7 +694,7 @@ switch ($numPeople) {
  *
  * LICENSE: Some license information
  *
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://www.zend.com/license/3_0.txt   PHP License 3.0
  * @link       http://dev.zend.com/package/PackageName
  * @since      File available since Release 1.2.0
@@ -715,7 +715,7 @@ switch ($numPeople) {
  *
  * Long description for class (if any)...
  *
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://www.zend.com/license/3_0.txt   PHP License 3.0
  * @version    Release: @package_version@
  * @link       http://dev.zend.com/package/PackageName

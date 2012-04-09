@@ -3,10 +3,12 @@
     "description": "Zend Framework 2",
     "type": "library",
     "keywords": [
-        "zend",
-        "framework"
+        "zend framework",
+        "zf",
+        "zf2",
+        "zend"
     ],
-    "homepage": "http://zendframework.com/",
+    "homepage": "http://framework.zend.com/",
     "require": {
         "php": ">=5.3.3"
     },

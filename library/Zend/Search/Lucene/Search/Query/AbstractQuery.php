@@ -50,13 +50,6 @@ abstract class AbstractQuery
     protected $_weight = null;
 
     /**
-     * Current highlight color
-     *
-     * @var integer
-     */
-    private $_currentColorIndex = 0;
-
-    /**
      * Gets the boost for this clause.  Documents matching
      * this clause will (in addition to the normal weightings) have their score
      * multiplied by boost.   The boost is 1.0 by default.

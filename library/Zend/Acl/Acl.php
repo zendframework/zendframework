@@ -21,13 +21,6 @@
 namespace Zend\Acl;
 
 /**
- * @uses       Zend\Acl\Assertion
- * @uses       Zend\Acl\Exception\ExceptionInterface
- * @uses       Zend\Acl\Resource\ResourceInterface
- * @uses       Zend\Acl\Resource\GenericResource
- * @uses       Zend\Acl\Role\RoleInterface
- * @uses       Zend\Acl\Role\GenericRole
- * @uses       Zend\Acl\Role\Registry
  * @category   Zend
  * @package    Zend_Acl
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -452,10 +445,10 @@ class Acl
      * @param  Role\RoleInterface|string|array          $roles
      * @param  Resource\ResourceInterface|string|array  $resources
      * @param  string|array                             $privileges
-     * @param  Assertion                                $assert
+     * @param  Assertion\AssertionInterface             $assert
      * @return Acl Provides a fluent interface
      */
-    public function allow($roles = null, $resources = null, $privileges = null, Assertion $assert = null)
+    public function allow($roles = null, $resources = null, $privileges = null, Assertion\AssertionInterface $assert = null)
     {
         return $this->setRule(self::OP_ADD, self::TYPE_ALLOW, $roles, $resources, $privileges, $assert);
     }
@@ -467,10 +460,10 @@ class Acl
      * @param  Role\RoleInterface|string|array          $roles
      * @param  Resource\ResourceInterface|string|array  $resources
      * @param  string|array                             $privileges
-     * @param  Assertion                                $assert
+     * @param  Assertion\AssertionInterface             $assert
      * @return Acl Provides a fluent interface
      */
-    public function deny($roles = null, $resources = null, $privileges = null, Assertion $assert = null)
+    public function deny($roles = null, $resources = null, $privileges = null, Assertion\AssertionInterface $assert = null)
     {
         return $this->setRule(self::OP_ADD, self::TYPE_DENY, $roles, $resources, $privileges, $assert);
     }
@@ -551,12 +544,12 @@ class Acl
      * @param  Role\RoleInterface|string|array          $roles
      * @param  Resource\ResourceInterface|string|array  $resources
      * @param  string|array                             $privileges
-     * @param  Assertion                                $assert
+     * @param  Assertion\AssertionInterface                       $assert
      * @throws Exception\InvalidArgumentException
      * @return Acl Provides a fluent interface
      */
     public function setRule($operation, $type, $roles = null, $resources = null,
-        $privileges = null, Assertion $assert = null
+        $privileges = null, Assertion\AssertionInterface $assert = null
     ) {
         // ensure that the rule type is valid; normalize input to uppercase
         $type = strtoupper($type);

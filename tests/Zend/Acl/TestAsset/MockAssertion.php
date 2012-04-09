@@ -4,7 +4,7 @@ namespace ZendTest\Acl\TestAsset;
 
 use Zend\Acl;
 
-class MockAssertion implements Acl\Assertion
+class MockAssertion implements Acl\Assertion\AssertionInterface
 {
     protected $_returnValue;
 

@@ -223,7 +223,7 @@ class Ldap
      *  networkTimeout
      *
      * @param  array|Traversable $options Options used in connecting, binding, etc.
-     * @return Ldap\Ldap Provides a fluent interface
+     * @return Ldap Provides a fluent interface
      * @throws Exception\LdapException
      */
     public function setOptions($options)
@@ -1050,7 +1050,7 @@ class Ldap
      * @param  array     $attributes
      * @param  boolean   $throwOnNotFound
      * @return array
-     * @throws Exception\LdapException
+     * @throws null|Exception\LdapException
      */
     public function getEntry($dn, array $attributes = array(), $throwOnNotFound = false)
     {

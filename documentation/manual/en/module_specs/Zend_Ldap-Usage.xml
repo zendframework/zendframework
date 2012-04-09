@@ -157,9 +157,9 @@ $ldap->copy('cn=Hugo Müller,ou=People,dc=my,dc=local',
 ]]></programlisting>
             </example>
 
-            <example xml:id="zend.ldap.usage.extended.copy-and-move.move-to-subtree"><info><title>
+            <example xml:id="zend.ldap.usage.extended.copy-and-move.move-to-subtree"><title>
                     Move a LDAP entry recursively with all its descendants to a different subtree
-                </title></info>
+                </title>
 
 
                 <programlisting language="php"><![CDATA[

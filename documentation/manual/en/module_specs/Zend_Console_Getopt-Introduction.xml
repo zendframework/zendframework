@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.console.getopt.introduction"><info><title>Introduction</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.console.getopt.introduction"><title>Introduction</title>
     
 
     <para>
@@ -109,7 +109,7 @@
         code which flags the user specified.
     </para>
 
-    <note><info><title>Getopt is not an Application Framework</title></info>
+    <note><title>Getopt is not an Application Framework</title>
         
 
         <para>

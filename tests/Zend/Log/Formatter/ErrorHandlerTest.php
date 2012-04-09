@@ -52,11 +52,4 @@ class ErrorHandlerTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals($date . ' CRIT (1) test (errno 1) in test.php on line 1', $output);
     }
-
-    public function testFactory()
-    {
-        $options = array();
-        $formatter = ErrorHandler::factory($options);
-        $this->assertInstanceOf('Zend\Log\Formatter\ErrorHandler', $formatter);
-    }
 }

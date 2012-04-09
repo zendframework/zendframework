@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.http.cookies"><info><title>Zend_Http_Cookie and Zend_Http_CookieJar</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.http.cookies"><title>Zend_Http_Cookie and Zend_Http_CookieJar</title>
     
 
-    <section xml:id="zend.http.cookies.introduction"><info><title>Introduction</title></info>
+    <section xml:id="zend.http.cookies.introduction"><title>Introduction</title>
         
 
         <para>
@@ -30,7 +30,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.http.cookies.cookie.instantiating"><info><title>Instantiating Zend_Http_Cookie Objects</title></info>
+    <section xml:id="zend.http.cookies.cookie.instantiating"><title>Instantiating Zend_Http_Cookie Objects</title>
         
 
         <para>
@@ -135,7 +135,7 @@
                 </listitem>
             </itemizedlist>
 
-            <example xml:id="zend.http.cookies.cookie.instantiating.example-1"><info><title>Instantiating a Zend_Http_Cookie object</title></info>
+            <example xml:id="zend.http.cookies.cookie.instantiating.example-1"><title>Instantiating a Zend_Http_Cookie object</title>
                
 
                <programlisting language="php"><![CDATA[
@@ -174,7 +174,7 @@ $cookie = Zend_Http_Cookie::fromString('foo=bar; secure;',
             method. This method will produce a <acronym>HTTP</acronym> request "Cookie" header
             string, showing the cookie's name and value, and terminated by a semicolon (';').
             The value will be URL encoded, as expected in a Cookie header:
-            <example xml:id="zend.http.cookies.cookie.instantiating.example-2"><info><title>Stringifying a Zend_Http_Cookie object</title></info>
+            <example xml:id="zend.http.cookies.cookie.instantiating.example-2"><title>Stringifying a Zend_Http_Cookie object</title>
                
 
                <programlisting language="php"><![CDATA[
@@ -198,7 +198,7 @@ echo $cookie;
         </para>
     </section>
 
-    <section xml:id="zend.http.cookies.cookie.accessors"><info><title>Zend_Http_Cookie getter methods</title></info>
+    <section xml:id="zend.http.cookies.cookie.accessors"><title>Zend_Http_Cookie getter methods</title>
         
 
         <para>
@@ -276,7 +276,7 @@ echo $cookie;
         </para>
 
         <para>
-            <example xml:id="zend.http.cookies.cookie.accessors.example-1"><info><title>Using getter methods with Zend_Http_Cookie</title></info>
+            <example xml:id="zend.http.cookies.cookie.accessors.example-1"><title>Using getter methods with Zend_Http_Cookie</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -309,7 +309,7 @@ echo ($cookie->isSessionCookie() ? 'Yes' : 'No');
         </para>
     </section>
 
-    <section xml:id="zend.http.cookies.cookie.matching"><info><title>Zend_Http_Cookie: Matching against a scenario</title></info>
+    <section xml:id="zend.http.cookies.cookie.matching"><title>Zend_Http_Cookie: Matching against a scenario</title>
         
 
         <para>
@@ -349,7 +349,7 @@ echo ($cookie->isSessionCookie() ? 'Yes' : 'No');
                 </listitem>
             </itemizedlist>
 
-            <example xml:id="zend.http.cookies.cookie.matching.example-1"><info><title>Matching cookies</title></info>
+            <example xml:id="zend.http.cookies.cookie.matching.example-1"><title>Matching cookies</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -402,7 +402,7 @@ $cookie->match('http://www.example.com/', true, time() + (3 * 3600));
         </para>
     </section>
 
-    <section xml:id="zend.http.cookies.cookiejar"><info><title>The Zend_Http_CookieJar Class: Instantiation</title></info>
+    <section xml:id="zend.http.cookies.cookiejar"><title>The Zend_Http_CookieJar Class: Instantiation</title>
         
 
         <para>
@@ -429,7 +429,7 @@ $cookie->match('http://www.example.com/', true, time() + (3 * 3600));
         </para>
     </section>
 
-    <section xml:id="zend.http.cookies.cookiejar.adding_cookies"><info><title>Adding Cookies to a Zend_Http_CookieJar object</title></info>
+    <section xml:id="zend.http.cookies.cookiejar.adding_cookies"><title>Adding Cookies to a Zend_Http_CookieJar object</title>
         
 
         <para>
@@ -466,7 +466,7 @@ $cookie->match('http://www.example.com/', true, time() + (3 * 3600));
         </para>
     </section>
 
-    <section xml:id="zend.http.cookies.cookiejar.getting_cookies"><info><title>Retrieving Cookies From a Zend_Http_CookieJar object</title></info>
+    <section xml:id="zend.http.cookies.cookiejar.getting_cookies"><title>Retrieving Cookies From a Zend_Http_CookieJar object</title>
         
 
         <para>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.rackspace.files">
-    <info><title>Zend\Service\Rackspace\Files</title></info>
+    <title>Zend\Service\Rackspace\Files</title>
 
     <section xml:id="zend.service.rackspace.files.intro">
-        <info><title>Overview</title></info>
+        <title>Overview</title>
 
         <para>
             The <classname>Zend\Service\Rackspace\Files</classname> is a class that provides a
@@ -16,7 +16,7 @@
 
 
     <section xml:id="zend.service.rackspace.files.quick-start">
-        <info><title>Quick Start</title></info>
+        <title>Quick Start</title>
         
         <para>
             To use this class you have to pass the username and the API's key of Rackspace in the
@@ -167,7 +167,7 @@ if ($rackspace->isSuccessful()) {
     </section>
  
     <section xml:id="zend.service.rackspace.files.methods">
-        <info><title>Available Methods</title></info>
+        <title>Available Methods</title>
         
         <variablelist>
             <varlistentry xml:id="zend.service.rackspace.files.methods.copy-object">
@@ -768,10 +768,10 @@ if ($rackspace->isSuccessful()) {
     </section>
  
     <section xml:id="zend.service.rackspace.files.examples">
-        <info><title>Examples</title></info>
+        <title>Examples</title>
         
         <example xml:id="zend.service.rackspace.files.examples.authenticate">
-            <info><title>Authenticate</title></info>
+            <title>Authenticate</title>
  
             <para>Check if the username and the key are valid for the Rackspace authentication.</para>
  
@@ -790,7 +790,7 @@ if ($rackspace->authenticate()) {
         </example>
         
         <example xml:id="zend.service.rackspace.files.examples.get-object">
-            <info><title>Get an object</title></info>
+            <title>Get an object</title>
             
             <para>Get an image file (<emphasis>example.gif</emphasis>) from the cloud and render it in the browser</para>
  
@@ -812,7 +812,7 @@ echo $object->getFile();
         </example>
         
         <example xml:id="zend.service.rackspace.files.examples.create-container">
-            <info><title>Create a container with metadata</title></info>
+            <title>Create a container with metadata</title>
  
             <para>Create a container (<emphasis>test</emphasis>) with some metadata information (<emphasis>$metadata</emphasis>)</para>
  
@@ -836,7 +836,7 @@ if ($rackspace->isSuccessful()) {
         </example>
         
         <example xml:id="zend.service.rackspace.files.examples.get-metadata-container">
-            <info><title>Get the metadata of a container</title></info>
+            <title>Get the metadata of a container</title>
             
             <para>Get the metadata of the container <emphasis>test</emphasis></para>
  
@@ -858,7 +858,7 @@ print_r($metadata);
         </example>
         
         <example xml:id="zend.service.rackspace.files.examples.store-object-container">
-            <info><title>Store an object in a container</title></info>
+            <title>Store an object in a container</title>
  
             <para>Store an object using a <classname>Zend\Service\Rackspace\Files\Container</classname> instance</para>
  
@@ -886,7 +886,7 @@ if ($container->addObject('test.jpg', $file, $metadata)) {
         </example>
         
         <example xml:id="zend.service.rackspace.files.examples.check-cdn-enabled">
-            <info><title>Check if a container is CDN enabled</title></info>
+            <title>Check if a container is CDN enabled</title>
  
             <para>Check if the <emphasis>test</emphasis> container is CDN enabled. If it is not we enable it.</para>
  

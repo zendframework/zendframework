@@ -367,11 +367,12 @@ class FileTest extends \PHPUnit_Framework_TestCase
 
     public function testFileSize()
     {
+    	$expectedSize = sprintf("%.2fkB", 1.14);
         $element = new FileElement('baz');
         $adapter = new TestAsset\MockFileAdapter();
         $element->setTransferAdapter($adapter);
 
-        $this->assertEquals('1.14kB', $element->getFileSize('baz.text'));
+        $this->assertEquals($expectedSize, $element->getFileSize('baz.text'));
         $adapter->setOptions(array('useByteString' => false));
         $this->assertEquals(1172, $element->getFileSize('baz.text'));
     }

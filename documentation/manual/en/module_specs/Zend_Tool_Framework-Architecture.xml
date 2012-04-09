@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.tool.framework.architecture"><info><title>Architecture</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.tool.framework.architecture"><title>Architecture</title>
     
 
-    <section xml:id="zend.tool.framework.architecture.registry"><info><title>Registry</title></info>
+    <section xml:id="zend.tool.framework.architecture.registry"><title>Registry</title>
         
 
         <para>
@@ -66,7 +66,7 @@ interface Zend_Tool_Framework_Registry_EnabledInterface
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.tool.framework.architecture.providers"><info><title>Providers</title></info>
+    <section xml:id="zend.tool.framework.architecture.providers"><title>Providers</title>
         
 
         <para>
@@ -110,7 +110,7 @@ abstract class Zend_Tool_Framework_Provider_Abstract
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.tool.framework.architecture.loaders"><info><title>Loaders</title></info>
+    <section xml:id="zend.tool.framework.architecture.loaders"><title>Loaders</title>
         
 
         <para>
@@ -178,7 +178,7 @@ class Zend_Tool_Framework_Loader_IncludePathLoader
         </para>
     </section>
 
-    <section xml:id="zend.tool.framework.architecture.manifests"><info><title>Manifests</title></info>
+    <section xml:id="zend.tool.framework.architecture.manifests"><title>Manifests</title>
         
 
         <para>
@@ -349,7 +349,7 @@ class Zend_Tool_Framework_Manifest_Repository
         </para>
     </section>
 
-    <section xml:id="zend.tool.framework.architecture.clients"><info><title>Clients</title></info>
+    <section xml:id="zend.tool.framework.architecture.clients"><title>Clients</title>
         
 
         <para>

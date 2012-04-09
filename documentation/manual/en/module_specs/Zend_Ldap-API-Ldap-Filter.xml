@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.ldap.api.reference.zend-ldap-filter"><info><title>Zend_Ldap_Filter</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.ldap.api.reference.zend-ldap-filter"><title>Zend_Ldap_Filter</title>
     
 
-    <table xml:id="zend.ldap.api.reference.zend-filter.table"><info><title>Zend_Ldap_Filter API</title></info>
+    <table xml:id="zend.ldap.api.reference.zend-filter.table"><title>Zend_Ldap_Filter API</title>
         
 
         <tgroup cols="2">

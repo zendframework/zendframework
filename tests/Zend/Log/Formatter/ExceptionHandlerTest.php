@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Log
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -27,7 +27,7 @@ use Zend\Log\Formatter\ExceptionHandler;
  * @category   Zend
  * @package    Zend_Log
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Log
  */
@@ -60,12 +60,5 @@ class ExceptionHandlerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($date . " CRIT (1) test in test.php on line 1\n" .
                 "[Trace]\nFile  : test.php\nLine  : 1\nFunc  : test\nClass : Test\n" .
                 "Type  : static\nArgs  : Array\n(\n    [0] => 1\n)\n\n", $output);
-    }
-
-    public function testFactory()
-    {
-        $options = array();
-        $formatter = ExceptionHandler::factory($options);
-        $this->assertInstanceOf('Zend\Log\Formatter\ExceptionHandler', $formatter);
     }
 }

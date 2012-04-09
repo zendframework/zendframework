@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.rackspace.servers">
-    <info><title>Zend\Service\Rackspace\Servers</title></info>
+    <title>Zend\Service\Rackspace\Servers</title>
 
     <section xml:id="zend.service.rackspace.servers.intro">
-        <info><title>Overview</title></info>
+        <title>Overview</title>
 
         <para>
             The <classname>Zend\Service\Rackspace\Servers</classname> is a class that provides a
@@ -71,7 +71,7 @@
     </section>
 
     <section xml:id="zend.service.rackspace.servers.terminology">
-        <info><title>Terminology</title></info>
+        <title>Terminology</title>
         
         <para>
             A <emphasis>server</emphasis> is a virtual machine instance in the Cloud Servers system. Flavor and image are
@@ -126,7 +126,7 @@
     </section>
     
     <section xml:id="zend.service.rackspace.servers.quick-start">
-        <info><title>Quick Start</title></info>
+        <title>Quick Start</title>
         
         <para>
             To use this class you have to pass the username and the API's key
@@ -220,7 +220,7 @@ foreach ($servers as $srv) {
     </section>
  
     <section xml:id="zend.service.rackspace.servers.methods">
-        <info><title>Available Methods</title></info>
+        <title>Available Methods</title>
  
         <variablelist>
             <varlistentry xml:id="zend.service.rackspace.servers.methods.change-backup-schedule">
@@ -956,10 +956,10 @@ foreach ($servers as $srv) {
     </section>
  
     <section xml:id="zend.service.rackspace.servers.examples">
-        <info><title>Examples</title></info>
+        <title>Examples</title>
  
         <example xml:id="zend.service.rackspace.servers.examples.authenticate">
-            <info><title>Authenticate</title></info>
+            <title>Authenticate</title>
  
             <para>Check if the username and the key are valid for the Rackspace authentication.</para>
  
@@ -978,7 +978,7 @@ if ($rackspace->authenticate()) {
         </example>
         
         <example xml:id="zend.service.rackspace.servers.examples.create-server">
-            <info><title>Create a server with metadata information and upload of a file</title></info>
+            <title>Create a server with metadata information and upload of a file</title>
             
             <para>
                 Create a server with some metadata information and upload the file <emphasis>build.sh</emphasis>
@@ -1013,7 +1013,7 @@ printf("Admin password : %s\n",$server->getAdminPass());
         </example>
         
         <example xml:id="zend.service.rackspace.servers.examples.reboot-server">
-            <info><title>Reboot a server</title></info>
+            <title>Reboot a server</title>
             
             <para>
                 Reboot a server in hard mode (is the equivalent of power cycling the server).
@@ -1031,7 +1031,7 @@ echo "The server has been rebooted successfully";
         </example>
 
         <example xml:id="zend.service.rackspace.servers.examples.list-flavors">
-            <info><title>List all the available flavors</title></info>
+            <title>List all the available flavors</title>
  
             <para>
                 List all the available flavors with all the detailed information.

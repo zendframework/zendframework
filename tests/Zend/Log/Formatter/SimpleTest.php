@@ -97,18 +97,6 @@ class SimpleTest extends \PHPUnit_Framework_TestCase
         $line = $f->format($fields);
         $this->assertContains('object', $line);
     }
-
-    /**
-     * @group ZF-9176
-     */
-    public function testFactory()
-    {
-        $options = array(
-            'format' => '%timestamp% [%priority%]: %message% -- %info%'
-        );
-        $formatter = Simple::factory($options);
-        $this->assertInstanceOf('Zend\Log\Formatter\Simple', $formatter);
-    }
     
     /**
      * @group ZF-10427

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.loader.prefix-path-loader"><info><title>The PrefixPathLoader</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.loader.prefix-path-loader"><title>The PrefixPathLoader</title>
     
 
-    <section xml:id="zend.loader.prefix-path-loader.intro"><info><title>Overview</title></info>
+    <section xml:id="zend.loader.prefix-path-loader.intro"><title>Overview</title>
         
 
         <para>
@@ -37,7 +37,7 @@
             <interfacename>PrefixPathMapper</interfacename> interfaces.
         </para>
 
-        <note><info><title>Case Sensitivity</title></info>
+        <note><title>Case Sensitivity</title>
             
 
             <para>
@@ -48,7 +48,7 @@
             </para>
         </note>
 
-        <note><info><title>Preference is for Namespaces</title></info>
+        <note><title>Preference is for Namespaces</title>
             
 
             <para>
@@ -60,7 +60,7 @@
         </note>
     </section>
 
-    <section xml:id="zend.loader.prefix-path-loader.quick-start"><info><title>Quick Start</title></info>
+    <section xml:id="zend.loader.prefix-path-loader.quick-start"><title>Quick Start</title>
         
 
         <para>
@@ -102,10 +102,10 @@ $plugin = new $class();
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.loader.prefix-path-loader.options"><info><title>Configuration Options</title></info>
+    <section xml:id="zend.loader.prefix-path-loader.options"><title>Configuration Options</title>
         
 
-        <variablelist><info><title>PrefixPathLoader Options</title></info>
+        <variablelist><title>PrefixPathLoader Options</title>
             
 
             <varlistentry>
@@ -123,7 +123,7 @@ $plugin = new $class();
         </variablelist>
     </section>
 
-    <section xml:id="zend.loader.prefix-path-loader.methods"><info><title>Available Methods</title></info>
+    <section xml:id="zend.loader.prefix-path-loader.methods"><title>Available Methods</title>
         
 
         <refentry xml:id="zend.loader.standard-autoloader.methods.constructor">
@@ -141,7 +141,7 @@ $plugin = new $class();
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsection><info><title>__construct()</title></info>
+            <refsection><title>__construct()</title>
                 
 
                 <para>
@@ -173,7 +173,7 @@ $plugin = new $class();
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsection><info><title>addStaticPaths()</title></info>
+            <refsection><title>addStaticPaths()</title>
                 
 
                 <para>
@@ -201,7 +201,7 @@ $plugin = new $class();
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsection><info><title>setOptions()</title></info>
+            <refsection><title>setOptions()</title>
                 
 
                 <para>
@@ -225,7 +225,7 @@ $plugin = new $class();
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsection><info><title>addPrefixPath()</title></info>
+            <refsection><title>addPrefixPath()</title>
                 
 
                 <para>
@@ -259,7 +259,7 @@ $plugin = new $class();
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsection><info><title>addPrefixPaths()</title></info>
+            <refsection><title>addPrefixPaths()</title>
                 
 
                 <para>
@@ -309,7 +309,7 @@ $plugin = new $class();
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsection><info><title>getPaths()</title></info>
+            <refsection><title>getPaths()</title>
                 
 
                 <para>
@@ -345,7 +345,7 @@ $plugin = new $class();
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsection><info><title>clearPaths()</title></info>
+            <refsection><title>clearPaths()</title>
                 
 
                 <para>
@@ -372,7 +372,7 @@ $plugin = new $class();
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsection><info><title>removePrefixPath()</title></info>
+            <refsection><title>removePrefixPath()</title>
                 
 
                 <para>
@@ -396,7 +396,7 @@ $plugin = new $class();
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsection><info><title>isLoaded()</title></info>
+            <refsection><title>isLoaded()</title>
                 
 
                 <para>
@@ -424,7 +424,7 @@ $plugin = new $class();
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsection><info><title>getClassName()</title></info>
+            <refsection><title>getClassName()</title>
                 
 
                 <para>
@@ -451,7 +451,7 @@ $plugin = new $class();
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsection><info><title>load()</title></info>
+            <refsection><title>load()</title>
                 
 
                 <para>
@@ -484,7 +484,7 @@ $plugin = new $class();
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsection><info><title>getPluginMap()</title></info>
+            <refsection><title>getPluginMap()</title>
                 
 
                 <para>
@@ -506,7 +506,7 @@ $plugin = new $class();
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsection><info><title>getClassMap()</title></info>
+            <refsection><title>getClassMap()</title>
                 
 
                 <para>
@@ -517,10 +517,10 @@ $plugin = new $class();
         </refentry>
     </section>
 
-    <section xml:id="zend.loader.prefix-path-loader.examples"><info><title>Examples</title></info>
+    <section xml:id="zend.loader.prefix-path-loader.examples"><title>Examples</title>
         
 
-        <example xml:id="zend.loader.prefix-path-loader.examples.multiple-paths"><info><title>Using multiple paths for the same prefix</title></info>
+        <example xml:id="zend.loader.prefix-path-loader.examples.multiple-paths"><title>Using multiple paths for the same prefix</title>
             
 
             <para>
@@ -579,7 +579,7 @@ $foobar = $loader->load('foobar'); // Foo\Foobar from vendor/Foo/Baz.php
 ]]></programlisting>
         </example>
 
-        <example xml:id="zend.loader.prefix-path-loader.examples.optimizing"><info><title>Prototyping with PrefixPathLoader</title></info>
+        <example xml:id="zend.loader.prefix-path-loader.examples.optimizing"><title>Prototyping with PrefixPathLoader</title>
             
 
             <para>

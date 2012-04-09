@@ -4,9 +4,9 @@
     xmlns="http://docbook.org/ns/docbook" version="5.0"
     xmlns:xlink="http://www.w3.org/1999/xlink"
     xml:id="zend.module.intro">
-    <info>
+    
         <title>Introduction to the Module System</title>
-    </info>
+    
 
     <para>
         Zend Framework 2.0 introduces a new and powerful approach to modules.  This new module
@@ -102,9 +102,9 @@ module_root/
 </literallayout>
 
     <section xml:id="zend.module.intro.the-autoload-files">
-        <info>
+        
             <title>The autoload_*.php Files</title>
-        </info>
+        
 
         <para>
             The three <filename>autoload_*.php</filename> files are not required, but recommended.

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.currency.position"><info><title>Where is the currency?</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.currency.position"><title>Where is the currency?</title>
     
 
     <para>
@@ -8,7 +8,7 @@
         <property>display</property> option and provide one of the following constants:
     </para>
 
-    <table xml:id="zend.currency.position.table-1"><info><title>Available positions for the currency</title></info>
+    <table xml:id="zend.currency.position.table-1"><title>Available positions for the currency</title>
         
 
         <tgroup cols="2" align="left">
@@ -44,7 +44,7 @@
         </tgroup>
     </table>
 
-    <example xml:id="zend.currency.position.example-1"><info><title>Setting the currency position</title></info>
+    <example xml:id="zend.currency.position.example-1"><title>Setting the currency position</title>
         
 
         <para>

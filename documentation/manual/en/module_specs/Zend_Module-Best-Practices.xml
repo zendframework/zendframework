@@ -5,9 +5,9 @@
     xmlns:xlink="http://www.w3.org/1999/xlink"
     xml:id="zend.module.best-practices">
 
-    <info>
+    
         <title>Best Practices when Creating Modules</title>
-    </info>
+    
 
     <para>
         When creating a ZF2 module, there are some best practices you should keep in mind.

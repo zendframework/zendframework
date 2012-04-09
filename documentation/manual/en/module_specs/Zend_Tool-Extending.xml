@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.tool.extending"><info><title>Extending Zend_Tool</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.tool.extending"><title>Extending Zend_Tool</title>
     
 
-    <section xml:id="zend.tool.extending.overview"><info><title>Overview of Zend_Tool</title></info>
+    <section xml:id="zend.tool.extending.overview"><title>Overview of Zend_Tool</title>
         
 
         <para>
@@ -25,10 +25,10 @@
         </para>
     </section>
 
-    <section xml:id="zend.tool.extending.zend-tool-framework"><info><title>Zend_Tool_Framework Extensions</title></info>
+    <section xml:id="zend.tool.extending.zend-tool-framework"><title>Zend_Tool_Framework Extensions</title>
         
 
-        <section xml:id="zend.tool.extending.zend-tool-framework.architecture"><info><title>Overall Architecture</title></info>
+        <section xml:id="zend.tool.extending.zend-tool-framework.architecture"><title>Overall Architecture</title>
             
 
             <para>
@@ -142,7 +142,7 @@
             </itemizedlist>
         </section>
 
-        <section xml:id="zend.tool.extending.zend-tool-framework.cli-client"><info><title>Understanding the CLI Client</title></info>
+        <section xml:id="zend.tool.extending.zend-tool-framework.cli-client"><title>Understanding the CLI Client</title>
             
 
             <para>
@@ -155,7 +155,7 @@
                 <filename>cmd.exe</filename>, console2 and also with the Cygwin project.
             </para>
 
-            <section xml:id="zend.tool.extending.zend-tool-framework.cli-client.setup-general"><info><title>Setting up the CLI tool</title></info>
+            <section xml:id="zend.tool.extending.zend-tool-framework.cli-client.setup-general"><title>Setting up the CLI tool</title>
                 
 
                 <para>
@@ -214,7 +214,7 @@
                 </note>
             </section>
 
-            <section xml:id="zend.tool.extending.zend-tool-framework.cli-client.setup-starnix"><info><title>Setting up the CLI tool on Unix-like Systems</title></info>
+            <section xml:id="zend.tool.extending.zend-tool-framework.cli-client.setup-starnix"><title>Setting up the CLI tool on Unix-like Systems</title>
                 
 
                 <para>
@@ -304,7 +304,7 @@ ln -s /home/username/lib/ZendFramework/bin/zf.sh /home/username/bin/zf
                 </para>
             </section>
 
-            <section xml:id="zend.tool.extending.zend-tool-framework.cli-client.setup-windows"><info><title>Setting up the CLI tool on Windows</title></info>
+            <section xml:id="zend.tool.extending.zend-tool-framework.cli-client.setup-windows"><title>Setting up the CLI tool on Windows</title>
                 
 
                 <para>
@@ -378,7 +378,7 @@ C:\WAMP\PHP\bin
                 </para>
             </section>
 
-            <section xml:id="zend.tool.extending.zend-tool-framework.cli-client.setup-othernotes"><info><title>Other Setup Considerations</title></info>
+            <section xml:id="zend.tool.extending.zend-tool-framework.cli-client.setup-othernotes"><title>Other Setup Considerations</title>
                 
 
                 <para>
@@ -406,7 +406,7 @@ C:\WAMP\PHP\bin
             </section>
         </section>
 
-        <section xml:id="zend.tool.extending.zend-tool-framework.providers-and-manifests"><info><title>Creating Providers</title></info>
+        <section xml:id="zend.tool.extending.zend-tool-framework.providers-and-manifests"><title>Creating Providers</title>
             
 
             <para>
@@ -416,7 +416,7 @@ C:\WAMP\PHP\bin
                 "controller" is inside of your <acronym>MVC</acronym> application.
             </para>
 
-            <section xml:id="zend.tool.extending.zend-tool-framework.providers-and-manifests.loading"><info><title>How Zend_Tool finds your Providers</title></info>
+            <section xml:id="zend.tool.extending.zend-tool-framework.providers-and-manifests.loading"><title>How Zend_Tool finds your Providers</title>
                 
 
                 <para>
@@ -471,7 +471,7 @@ C:\WAMP\PHP\bin
                     they have to be physically present in the include paths.</para>
                 </note>
 
-                <example xml:id="zend.tool.extending.zend-tool-framework.providers-and-manifests.loading.example"><info><title>Exposing Your Providers with a Manifest</title></info>
+                <example xml:id="zend.tool.extending.zend-tool-framework.providers-and-manifests.loading.example"><title>Exposing Your Providers with a Manifest</title>
                     
 
                     <para>
@@ -500,7 +500,7 @@ class My_Component_Manifest
                 </example>
             </section>
 
-            <section xml:id="zend.tool.extending.zend-tool-framework.providers-and-manifests.basic"><info><title>Basic Instructions for Creating Providers</title></info>
+            <section xml:id="zend.tool.extending.zend-tool-framework.providers-and-manifests.basic"><title>Basic Instructions for Creating Providers</title>
                 
 
                 <para>
@@ -538,7 +538,7 @@ Hello from my provider!
 ]]></programlisting>
             </section>
 
-            <section xml:id="zend.tool.extending.zend-tool-framework.providers-and-manifests.response"><info><title>The response object</title></info>
+            <section xml:id="zend.tool.extending.zend-tool-framework.providers-and-manifests.response"><title>The response object</title>
                 
 
                 <para>
@@ -570,10 +570,10 @@ class My_Component_HelloProvider
                 </para>
             </section>
 
-            <section xml:id="zend.tool.extending.zend-tool-framework.providers-and-manifests.advanced"><info><title>Advanced Development Information</title></info>
+            <section xml:id="zend.tool.extending.zend-tool-framework.providers-and-manifests.advanced"><title>Advanced Development Information</title>
                 
 
-                <section xml:id="zend.tool.extending.zend-tool-framework.providers-and-manifests.advanced.variables"><info><title>Passing Variables to a Provider</title></info>
+                <section xml:id="zend.tool.extending.zend-tool-framework.providers-and-manifests.advanced.variables"><title>Passing Variables to a Provider</title>
                     
 
                     <para>
@@ -615,7 +615,7 @@ class My_Component_HelloProvider
                     </para>
                 </section>
 
-                <section xml:id="zend.tool.extending.zend-tool-framework.providers-and-manifests.advanced.prompt"><info><title>Prompt the User for Input</title></info>
+                <section xml:id="zend.tool.extending.zend-tool-framework.providers-and-manifests.advanced.prompt"><title>Prompt the User for Input</title>
                     
 
                     <para>
@@ -647,7 +647,7 @@ class My_Component_HelloProvider
                     </para>
                 </section>
 
-                <section xml:id="zend.tool.extending.zend-tool-framework.providers-and-manifests.advanced.pretendable"><info><title>Pretending to execute a Provider Action</title></info>
+                <section xml:id="zend.tool.extending.zend-tool-framework.providers-and-manifests.advanced.pretendable"><title>Pretending to execute a Provider Action</title>
                     
 
                     <para>
@@ -695,7 +695,7 @@ I would say hello Ralph.
 ]]></programlisting>
                 </section>
 
-                <section xml:id="zend.tool.extending.zend-tool-framework.providers-and-manifests.advanced.verbosedebug"><info><title>Verbose and Debug modes</title></info>
+                <section xml:id="zend.tool.extending.zend-tool-framework.providers-and-manifests.advanced.verbosedebug"><title>Verbose and Debug modes</title>
                     
 
                     <para>
@@ -722,7 +722,7 @@ class My_Component_HelloProvider
 ]]></programlisting>
                 </section>
 
-                <section xml:id="zend.tool.extending.zend-tool-framework.providers-and-manifests.advanced.configstorage"><info><title>Accessing User Config and Storage</title></info>
+                <section xml:id="zend.tool.extending.zend-tool-framework.providers-and-manifests.advanced.configstorage"><title>Accessing User Config and Storage</title>
                     
 
                     <para>
@@ -805,7 +805,7 @@ class Zend_Tool_Framework_Client_Storage
         </section>
     </section>
 
-    <section xml:id="zend.tool.extending.zend-tool-project"><info><title>Zend_Tool_Project Extensions</title></info>
+    <section xml:id="zend.tool.extending.zend-tool-project"><title>Zend_Tool_Project Extensions</title>
         
 
         <para>
@@ -814,7 +814,7 @@ class Zend_Tool_Framework_Client_Storage
             project easier and more manageable.
         </para>
 
-        <section xml:id="zend.tool.extending.zend-tool-project.architecture"><info><title>Overall Architecture</title></info>
+        <section xml:id="zend.tool.extending.zend-tool-project.architecture"><title>Overall Architecture</title>
             
 
             <para>
@@ -845,7 +845,7 @@ class Zend_Tool_Framework_Client_Storage
         </section>
 
 
-        <section xml:id="zend.tool.extending.zend-tool-project.providers"><info><title>Creating Providers</title></info>
+        <section xml:id="zend.tool.extending.zend-tool-project.providers"><title>Creating Providers</title>
             
 
             <para>

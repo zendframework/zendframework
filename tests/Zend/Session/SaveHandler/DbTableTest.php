@@ -341,8 +341,8 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
         $manager = new TestManager(null, null, $saveHandler);
         $manager->start();
 
-        /**
-         * @see Zend_Session_Namespace
+        /*
+         * @see Zend\Session\Container
          */
 
         $session = new \Zend\Session\Container('SaveHandler', $manager);

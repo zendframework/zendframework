@@ -212,7 +212,7 @@ class Application implements AppContext
      *           discovered controller, and controller class (if known).
      *           Typically, a handler should return a populated Response object
      *           that can be returned immediately.
-     * @return SendableResponse
+     * @return PhpHttpResponse
      */
     public function run()
     {

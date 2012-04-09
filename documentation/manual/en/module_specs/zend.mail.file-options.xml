@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.file-options">
-    <info>
+    
         <title>Zend\Mail\Transport\FileOptions</title>
-    </info>
+    
 
     <section xml:id="zend.mail.file-options.intro">
-        <info>
+        
             <title>Overview</title>
-        </info>
+        
 
         <para>
             This document details the various options available to the
@@ -16,12 +16,12 @@
     </section>
 
     <section xml:id="zend.mail.file-options.quick-start">
-        <info>
+        
             <title>Quick Start</title>
-        </info>
+        
 
         <example xml:id="zend.mail.file-options.quick-start.usage">
-            <info><title>File Transport Usage</title></info>
+            <title>File Transport Usage</title>
 
             <programlisting language="php"><![CDATA[
 use Zend\Mail\Transport\File as FileTransport,
@@ -41,9 +41,9 @@ $transport->setOptions($options);
     </section>
 
     <section xml:id="zend.mail.file-options.options">
-        <info>
+        
             <title>Configuration Options</title>
-        </info>
+        
 
         <variablelist>
             <title>Configuration Options</title>
@@ -76,9 +76,9 @@ function (Zend\Mail\FileTransport $transport) {
     </section>
 
     <section xml:id="zend.mail.file-options.methods">
-        <info>
+        
             <title>Available Methods</title>
-        </info>
+        
 
         <para>
             <classname>Zend\Mail\Transport\FileOptions</classname> extends
@@ -173,9 +173,9 @@ function (Zend\Mail\FileTransport $transport) {
     </section>
 
     <section xml:id="zend.mail.file-options.examples">
-        <info>
+        
             <title>Examples</title>
-        </info>
+        
 
         <para>
             Please see the <link linkend="zend.mail.file-options.quick-start">Quick Start</link> for

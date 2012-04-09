@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.codegenerator.examples"><info><title>Zend_CodeGenerator Examples</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.codegenerator.examples"><title>Zend_CodeGenerator Examples</title>
     
 
-    <example xml:id="zend.codegenerator.examples.class"><info><title>Generating PHP classes</title></info>
+    <example xml:id="zend.codegenerator.examples.class"><title>Generating PHP classes</title>
         
 
         <para>
@@ -52,7 +52,7 @@ class Foo
 ]]></programlisting>
     </example>
 
-    <example xml:id="zend.codegenerator.examples.class-properties"><info><title>Generating PHP classes with class properties</title></info>
+    <example xml:id="zend.codegenerator.examples.class-properties"><title>Generating PHP classes with class properties</title>
         
 
         <para>
@@ -125,7 +125,7 @@ class Foo
 ]]></programlisting>
     </example>
 
-    <example xml:id="zend.codegenerator.examples.class-methods"><info><title>Generating PHP classes with class methods</title></info>
+    <example xml:id="zend.codegenerator.examples.class-methods"><title>Generating PHP classes with class methods</title>
         
 
         <para>
@@ -257,7 +257,7 @@ class Foo
 ]]></programlisting>
     </example>
 
-    <example xml:id="zend.codegenerator.examples.file"><info><title>Generating PHP files</title></info>
+    <example xml:id="zend.codegenerator.examples.file"><title>Generating PHP files</title>
         
 
         <para>
@@ -358,7 +358,7 @@ define('APPLICATION_ENV', 'testing');
 ]]></programlisting>
     </example>
 
-    <example xml:id="zend.codegenerator.examples.reflection-file"><info><title>Seeding PHP file code generation via reflection</title></info>
+    <example xml:id="zend.codegenerator.examples.reflection-file"><title>Seeding PHP file code generation via reflection</title>
         
 
         <para>
@@ -376,7 +376,7 @@ file_put_contents($path, $generator->generate());
 ]]></programlisting>
     </example>
 
-    <example xml:id="zend.codegenerator.examples.reflection-class"><info><title>Seeding PHP class generation via reflection</title></info>
+    <example xml:id="zend.codegenerator.examples.reflection-class"><title>Seeding PHP class generation via reflection</title>
         
 
         <para>

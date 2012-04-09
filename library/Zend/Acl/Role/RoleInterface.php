@@ -13,25 +13,25 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Log
- * @subpackage Formatter
+ * @package    Zend_Acl
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Log\Formatter;
-use \Zend\Log\Factory,
-    \Zend\Log\Formatter;
+namespace Zend\Acl\Role;
 
 /**
- * @uses       \Zend\Log\Factory
- * @uses       \Zend\Log\Formatter
  * @category   Zend
- * @package    Zend_Log
- * @subpackage Formatter
+ * @package    Zend_Acl
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class AbstractFormatter implements Formatter, Factory
+interface RoleInterface
 {
+    /**
+     * Returns the string identifier of the Role
+     *
+     * @return string
+     */
+    public function getRoleId();
 }

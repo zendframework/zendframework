@@ -2,7 +2,7 @@
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" 
     xmlns:xlink="http://www.w3.org/1999/xlink"
     xml:id="zend.config.reader.introduction">
-    <info><title>Zend\Config\Reader</title></info>
+    <title>Zend\Config\Reader</title>
     
     <para>
         <classname>Zend\Config\Reader</classname> gives you the ability to read a config
@@ -39,9 +39,32 @@
         The <methodname>fromFile()</methodname> and <methodname>fromString()</methodname> return a PHP array contains the
         data of the configuration file.
     </para>
+
+    <note>
+        <title>Differences from ZF1</title>
+        
+        <para>
+            The <classname>Zend\Config\Reader</classname> component no longer supports the following
+            features:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    Inheritance of sections.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    Reading of specific sections.
+                </para>
+            </listitem>
+        </itemizedlist>
+    </note>
     
     <section xml:id="zend.config.reader.ini">
-        <info><title>Zend\Config\Reader\Ini</title></info>
+        <title>Zend\Config\Reader\Ini</title>
         
         <para>
             <classname>Zend\Config\Reader\Ini</classname> enables developers to store configuration data in a
@@ -58,7 +81,7 @@
         </para>
         
         <note>
-            <info><title>Key Separator</title></info>
+            <title>Key Separator</title>
         
             <para>
                 By default, the key separator character is the period character
@@ -152,7 +175,7 @@ database.@include = 'database.ini'
     </section>
     
     <section xml:id="zend.config.reader.xml">
-        <info><title>Zend\Config\Reader\Xml</title></info>
+        <title>Zend\Config\Reader\Xml</title>
         
         <para>
             <classname>Zend\Config\Reader\Xml</classname> enables developers to read configuration data in a
@@ -242,7 +265,7 @@ echo $data['database']['params']['dbname'];  // prints "dbproduction"
     </section>
     
     <section xml:id="zend.config.reader.json">
-        <info><title>Zend\Config\Reader\Json</title></info>
+        <title>Zend\Config\Reader\Json</title>
         
         <para>
             <classname>Zend\Config\Reader\Json</classname> enables developers to read configuration data in a
@@ -321,7 +344,7 @@ echo $data['database']['params']['dbname'];  // prints "dbproduction"
     </section>
     
     <section xml:id="zend.config.reader.yaml">
-        <info><title>Zend\Config\Reader\Yaml</title></info>
+        <title>Zend\Config\Reader\Yaml</title>
         
         <para>
             <classname>Zend\Config\Reader\Yaml</classname> enables developers to read configuration data in a
@@ -407,27 +430,4 @@ webhost:  www.example.com
 ]]></programlisting>
         
     </section>
-    
-    <note>
-        <info><title>Differences from ZF1</title></info>
-        
-        <para>
-            The <classname>Zend\Config\Reader</classname> component no longer supports the following
-            features:
-        </para>
-
-        <itemizedlist>
-            <listitem>
-                <para>
-                    Inheritance of sections.
-                </para>
-            </listitem>
-
-            <listitem>
-                <para>
-                    Reading of specific sections.
-                </para>
-            </listitem>
-        </itemizedlist>
-    </note>
 </section>

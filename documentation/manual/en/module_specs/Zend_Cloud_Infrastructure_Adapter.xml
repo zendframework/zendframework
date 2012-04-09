@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.cloud.infrastructure.adapter">
-    <info><title>Zend\Cloud\Infrastructure\Adapter</title></info>
+    <title>Zend\Cloud\Infrastructure\Adapter</title>
 
     <section xml:id="zend.cloud.infrastructure.adapter.intro">
-        <info><title>Adapters</title></info>
+        <title>Adapters</title>
 
         <para>
             The <classname>Zend\Cloud\Infrastructure</classname> supports the following adapters:
@@ -25,7 +25,7 @@
     </section>    
     
     <section xml:id="zend.cloud.infrastructure.adapter.ec2">
-        <info><title>AMAZON EC2</title></info>
+        <title>AMAZON EC2</title>
 
         <para>
             To initialize the AMAZON EC2 adapter you have to use the following code:
@@ -88,7 +88,7 @@ print_r($cpuUsage);
     </section> 
     
     <section xml:id="zend.cloud.infrastructure.adapter.rackspace">
-        <info><title>Rackspace Cloud Servers</title></info>
+        <title>Rackspace Cloud Servers</title>
 
         <para>
             To initialize the Rackspace Cloud Servers adapter you have to use the following code:

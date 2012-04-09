@@ -6,6 +6,25 @@ use Zend\Http\Header\SetCookie;
 
 class SetCookieTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @group ZF2-254
+     */
+    public function testSetCookieConstructor()
+    {
+        $setCookieHeader = new SetCookie(
+            'myname', 'myvalue', 9, 99, 'docs.foo.com', 
+            'Wed, 13-Jan-2021 22:23:01 GMT', '/accounts', true, true
+        );
+        $this->assertEquals('myname', $setCookieHeader->getName());
+        $this->assertEquals('myvalue', $setCookieHeader->getValue());
+        $this->assertEquals(9, $setCookieHeader->getVersion());
+        $this->assertEquals(99, $setCookieHeader->getMaxAge());
+        $this->assertEquals('docs.foo.com', $setCookieHeader->getDomain());
+        $this->assertEquals('Wed, 13-Jan-2021 22:23:01 GMT', $setCookieHeader->getExpires());
+        $this->assertEquals('/accounts', $setCookieHeader->getPath());
+        $this->assertTrue($setCookieHeader->isSecure());
+        $this->assertTrue($setCookieHeader->isHttpOnly());
+    }
 
     public function testSetCookieFromStringCreatesValidSetCookieHeader()
     {

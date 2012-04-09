@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.loader.standard-autoloader"><info><title>The StandardAutoloader</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.loader.standard-autoloader"><title>The StandardAutoloader</title>
     
 
-    <section xml:id="zend.loader.standard-autoloader.intro"><info><title>Overview</title></info>
+    <section xml:id="zend.loader.standard-autoloader.intro"><title>Overview</title>
         
 
         <para>
@@ -69,7 +69,7 @@ $filename = str_replace(array('_', '\\'), DIRECTORY_SEPARATOR, $classname)
             SPL autoloader registry.
         </para>
 
-        <note><info><title>Vocabulary: Namespaces vs. Vendor Prefixes</title></info>
+        <note><title>Vocabulary: Namespaces vs. Vendor Prefixes</title>
             
 
             <para>
@@ -93,7 +93,7 @@ $filename = str_replace(array('_', '\\'), DIRECTORY_SEPARATOR, $classname)
         </note>
     </section>
 
-    <section xml:id="zend.loader.standard-autoloader.quick-start"><info><title>Quick Start</title></info>
+    <section xml:id="zend.loader.standard-autoloader.quick-start"><title>Quick Start</title>
         
 
         <para>
@@ -108,7 +108,7 @@ $filename = str_replace(array('_', '\\'), DIRECTORY_SEPARATOR, $classname)
             its own classfile is located on the filesystem.
         </para>
 
-        <example xml:id="zend.loader.standard-autoloader.quick-start.example-manual-configuration"><info><title>Manual Configuration</title></info>
+        <example xml:id="zend.loader.standard-autoloader.quick-start.example-manual-configuration"><title>Manual Configuration</title>
             
 
             <programlisting xml:lang="php"><![CDATA[
@@ -133,7 +133,7 @@ $loader->register();
 ]]></programlisting>
         </example>
 
-        <example xml:id="zend.loader.standard-autoloader.quick-start.example-constructor-configuration"><info><title>Configuration at Instantiation</title></info>
+        <example xml:id="zend.loader.standard-autoloader.quick-start.example-constructor-configuration"><title>Configuration at Instantiation</title>
             
 
             <para>
@@ -180,14 +180,14 @@ $loader->register();
         </example>
     </section>
 
-    <section xml:id="zend.loader.standard-autoloader.options"><info><title>Configuration Options</title></info>
+    <section xml:id="zend.loader.standard-autoloader.options"><title>Configuration Options</title>
         
 
         <para>
             The <classname>StandardAutoloader</classname> defines the following options.
         </para>
 
-        <variablelist><info><title>StandardAutoloader Options</title></info>
+        <variablelist><title>StandardAutoloader Options</title>
             
 
             <varlistentry>
@@ -231,7 +231,7 @@ $loader->register();
         </variablelist>
     </section>
 
-    <section xml:id="zend.loader.standard-autoloader.methods"><info><title>Available Methods</title></info>
+    <section xml:id="zend.loader.standard-autoloader.methods"><title>Available Methods</title>
         
 
         <refentry xml:id="zend.loader.standard-autoloader.methods.constructor">
@@ -249,7 +249,7 @@ $loader->register();
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsection><info><title>Constructor</title></info>
+            <refsection><title>Constructor</title>
                 
 
                 <para>
@@ -275,7 +275,7 @@ $loader->register();
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsection><info><title>setOptions()</title></info>
+            <refsection><title>setOptions()</title>
                 
 
                 <para>
@@ -322,7 +322,7 @@ $loader->register();
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsection><info><title>setFallbackAutoloader()</title></info>
+            <refsection><title>setFallbackAutoloader()</title>
                 
 
                 <para>
@@ -344,7 +344,7 @@ $loader->register();
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsection><info><title>isFallbackAutoloader()</title></info>
+            <refsection><title>isFallbackAutoloader()</title>
                 
 
                 <para>
@@ -368,7 +368,7 @@ $loader->register();
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsection><info><title>registerNamespace()</title></info>
+            <refsection><title>registerNamespace()</title>
                 
 
                 <para>
@@ -394,7 +394,7 @@ $loader->register();
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsection><info><title>registerNamespaces()</title></info>
+            <refsection><title>registerNamespaces()</title>
                 
 
                 <para>
@@ -419,7 +419,7 @@ $loader->register();
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsection><info><title>registerPrefix()</title></info>
+            <refsection><title>registerPrefix()</title>
                 
 
                 <para>
@@ -446,7 +446,7 @@ $loader->register();
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsection><info><title>registerPrefixes()</title></info>
+            <refsection><title>registerPrefixes()</title>
                 
 
                 <para>
@@ -471,7 +471,7 @@ $loader->register();
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsection><info><title>autoload()</title></info>
+            <refsection><title>autoload()</title>
                 
 
                 <para>
@@ -494,7 +494,7 @@ $loader->register();
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsection><info><title>register()</title></info>
+            <refsection><title>register()</title>
                 
 
                 <para>
@@ -505,7 +505,7 @@ $loader->register();
         </refentry>
     </section>
 
-    <section xml:id="zend.loader.standard-autoloader.examples"><info><title>Examples</title></info>
+    <section xml:id="zend.loader.standard-autoloader.examples"><title>Examples</title>
         
 
         <para>

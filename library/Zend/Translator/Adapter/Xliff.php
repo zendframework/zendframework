@@ -39,7 +39,6 @@ class Xliff extends AbstractAdapter
     // Internal variables
     private $_file        = false;
     private $_useId       = true;
-    private $_cleared     = array();
     private $_transunit   = null;
     private $_source      = null;
     private $_target      = null;

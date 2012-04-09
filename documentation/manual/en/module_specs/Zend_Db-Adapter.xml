@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.adapter"><info><title>Zend\Db\Adapter</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.adapter"><title>Zend\Db\Adapter</title>
 
     <para>
         The Adapter object is the most important sub-component of Zend\Db.
@@ -12,7 +12,7 @@
         "Platform" portion of the adapter.
     </para>
 
-    <section xml:id="zend.db.adapter.quickstart"><info><title>Creating an Adapter (Quickstart)</title></info>
+    <section xml:id="zend.db.adapter.quickstart"><title>Creating an Adapter (Quickstart)</title>
 
         <para>
             Creating an adapter can simply be done by instantiating the
@@ -30,91 +30,94 @@
         </para>
 
         <table frame='all'><title>Connection Array Keys</title>
-            <!--<tgroup cols="3" align="left">-->
-            <!---->
-            <!--</tgroup>-->
-            <thead>
-                <entry>Name</entry>
-                <entry>Required</entry>
-                <entry>Notes</entry>
-            </thead>
-            <row>
-                <entry>
-                    driver
-                </entry>
-                <entry>
-                    required
-                </entry>
-                <entry>
-                    Mysqli, Sqlsrv, Pdo_Sqlite, Pdo_Mysql, Pdo-OtherPdoDriver
-                </entry>
-            </row>
-            <row>
-                <entry>
-                    database
-                </entry>
-                <entry>
-                    generally required
-                </entry>
-                <entry>
-                    the name of the database (schema)
-                </entry>
-            </row>
-            <row>
-                <entry>
-                    username
-                </entry>
-                <entry>
-                    generally required
-                </entry>
-                <entry>
-                    the connection username
-                </entry>
-            </row>
-            <row>
-                <entry>
-                    password
-                </entry>
-                <entry>
-                    generally required
-                </entry>
-                <entry>
-                    the connection password
-                </entry>
-            </row>
-            <row>
-                <entry>
-                    hostname
-                </entry>
-                <entry>
-                    not generally requried
-                </entry>
-                <entry>
-                    the ip address or hostname to connect to
-                </entry>
-            </row>
-            <row>
-                <entry>
-                    port
-                </entry>
-                <entry>
-                    not generally requried
-                </entry>
-                <entry>
-                    not generally required  the port to connect to (if applicable)
-                </entry>
-            </row>
-            <row>
-                <entry>
-                    characterset
-                </entry>
-                <entry>
-                    not generally requried
-                </entry>
-                <entry>
-                    not generally required  the character set to use
-                </entry>
-            </row>
+        <tgroup cols="3">
+	            <thead>
+	                <row>
+	                    <entry>Name</entry>
+	                    <entry>Required</entry>
+	                    <entry>Notes</entry>
+	                </row>
+	            </thead>
+	            <tbody>
+	                <row>
+	                    <entry>
+	                        driver
+	                    </entry>
+	                    <entry>
+	                        required
+	                    </entry>
+	                    <entry>
+	                        Mysqli, Sqlsrv, Pdo_Sqlite, Pdo_Mysql, Pdo-OtherPdoDriver
+	                    </entry>
+	                </row>
+	                <row>
+	                    <entry>
+	                        database
+	                    </entry>
+	                    <entry>
+	                        generally required
+	                    </entry>
+	                    <entry>
+	                        the name of the database (schema)
+	                    </entry>
+	                </row>
+	                <row>
+	                    <entry>
+	                        username
+	                    </entry>
+	                    <entry>
+	                        generally required
+	                    </entry>
+	                    <entry>
+	                        the connection username
+	                    </entry>
+	                </row>
+	                <row>
+	                    <entry>
+	                        password
+	                    </entry>
+	                    <entry>
+	                        generally required
+	                    </entry>
+	                    <entry>
+	                        the connection password
+	                    </entry>
+	                </row>
+	                <row>
+	                    <entry>
+	                        hostname
+	                    </entry>
+	                    <entry>
+	                        not generally required
+	                    </entry>
+	                    <entry>
+	                        the IP address or hostname to connect to
+	                    </entry>
+	                </row>
+	                <row>
+	                    <entry>
+	                        port
+	                    </entry>
+	                    <entry>
+	                        not generally required
+	                    </entry>
+	                    <entry>
+	                        not generally required  the port to connect to (if applicable)
+	                    </entry>
+	                </row>
+	                <row>
+	                    <entry>
+	                        characterset
+	                    </entry>
+	                    <entry>
+	                        not generally required
+	                    </entry>
+	                    <entry>
+	                        not generally required  the character set to use
+	                    </entry>
+	                </row>
+	            </tbody>
+            </tgroup>
         </table>
 
          <para>
@@ -123,7 +126,7 @@
             For example, dbname in most cases will also work for 'database'.  Another
             example is that in the case of Sqlsrv, UID will work in place of username.
             Which format you chose is up to you, but the above table represents the
-            offical abstraction names.
+            official abstraction names.
          </para>
 
         <para>
@@ -162,7 +165,7 @@
 
     </section>
 
-    <section xml:id="zend.db.adapter.instantiating"><info><title>Creating an Adapter (By Injecting Dependencies)</title></info>
+    <section xml:id="zend.db.adapter.instantiating"><title>Creating an Adapter (By Injecting Dependencies)</title>
 
         <para>
             The more expressive and explicit way of creating an adapter is by injecting all your
@@ -193,7 +196,7 @@
 
     </section>
 
-    <section xml:id="zend.db.adapter.query-preparing"><info><title>Query Preparation Through Zend\Db\Adapter\Adapter::query()</title></info>
+    <section xml:id="zend.db.adapter.query-preparing"><title>Query Preparation Through Zend\Db\Adapter\Adapter::query()</title>
 
         <para>
             By default, query() prefers that you use "preparation" as a means for processing SQL
@@ -252,7 +255,7 @@
     </section>
 
 
-    <section xml:id="zend.db.adapter.query-execution"><info><title>Query Execution Through Zend\Db\Adapter\Adapter::query()</title></info>
+    <section xml:id="zend.db.adapter.query-execution"><title>Query Execution Through Zend\Db\Adapter\Adapter::query()</title>
 
         <para>
             In some cases, you have to execute statements directly.  The primary purpose for
@@ -274,7 +277,7 @@
     </section>
 
 
-    <section xml:id="zend.db.adapter.statement-creation"><info><title>Creating Statements</title></info>
+    <section xml:id="zend.db.adapter.statement-creation"><title>Creating Statements</title>
 
         <para>
             While query() is highly useful for one-off and quick querying of a
@@ -293,7 +296,7 @@
     </section>
 
 
-    <section xml:id="zend.db.adapter.platform"><info><title>Using The Platform Object</title></info>
+    <section xml:id="zend.db.adapter.platform"><title>Using The Platform Object</title>
 
         <para>
             The Platform object provides an API to assist in crafting queries in a way that
@@ -338,7 +341,7 @@
     </section>
 
 
-    <section xml:id="zend.db.adapter.parameter-container"><info><title>Using The Parameter Container</title></info>
+    <section xml:id="zend.db.adapter.parameter-container"><title>Using The Parameter Container</title>
 
         <para>
             The ParameterContainer object is a container for the various parameters that
@@ -349,7 +352,7 @@
 
     </section>
 
-    <section xml:id="zend.db.adapter.parameter-container.examples"><info><title>Examples</title></info>
+    <section xml:id="zend.db.adapter.parameter-container.examples"><title>Examples</title>
 
         <para>
             Creating a Driver and Vendor portable Query, Preparing and Iterating Result

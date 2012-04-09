@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.amazon.ec2.reserved.instance"><info><title>Zend_Service_Amazon_Ec2: Reserved Instances</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.amazon.ec2.reserved.instance"><title>Zend_Service_Amazon_Ec2: Reserved Instances</title>
     
 
     <para>
@@ -14,7 +14,7 @@
         1 year or 3 years) and are only available for Linux or UNIX instances.
     </para>
 
-    <section xml:id="zend.service.amazon.ec2.reserved.instance.howitworks"><info><title>How Reserved Instances are Applied</title></info>
+    <section xml:id="zend.service.amazon.ec2.reserved.instance.howitworks"><title>How Reserved Instances are Applied</title>
         
 
         <para>
@@ -64,10 +64,10 @@
         </para>
     </section>
 
-    <section xml:id="zend.service.amazon.ec2.reserved.instance.operations"><info><title>Reserved Instances Usage</title></info>
+    <section xml:id="zend.service.amazon.ec2.reserved.instance.operations"><title>Reserved Instances Usage</title>
         
 
-        <example xml:id="zend.service.amazon.ec2.reserved.instance.operations.describe"><info><title>Describes Reserved Instances that you purchased</title></info>
+        <example xml:id="zend.service.amazon.ec2.reserved.instance.operations.describe"><title>Describes Reserved Instances that you purchased</title>
             
 
             <para>
@@ -88,7 +88,7 @@ $return = $ec2_instance->describeInstances('instanceId');
 ]]></programlisting>
         </example>
 
-        <example xml:id="zend.service.amazon.ec2.reserved.instance.offerings.describe"><info><title>Describe current Reserved Instance Offerings available</title></info>
+        <example xml:id="zend.service.amazon.ec2.reserved.instance.offerings.describe"><title>Describe current Reserved Instance Offerings available</title>
             
 
             <para>
@@ -112,7 +112,7 @@ $return = $ec2_instance->describeOfferings();
 ]]></programlisting>
         </example>
 
-        <example xml:id="zend.service.amazon.ec2.reserved.instance.offerings.purchase"><info><title>Turn off CloudWatch Monitoring on an Instance(s)</title></info>
+        <example xml:id="zend.service.amazon.ec2.reserved.instance.offerings.purchase"><title>Turn off CloudWatch Monitoring on an Instance(s)</title>
             
 
             <para>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.loader.load"><info><title>Loading Files and Classes Dynamically</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.loader.load"><title>Loading Files and Classes Dynamically</title>
     
 
     <para>
@@ -7,7 +7,7 @@
         dynamically.
     </para>
 
-    <section xml:id="zend.loader.load.file"><info><title>Loading Files</title></info>
+    <section xml:id="zend.loader.load.file"><title>Loading Files</title>
         
 
         <para>
@@ -19,7 +19,7 @@
             if the specified file does not exist.
         </para>
 
-        <example xml:id="zend.loader.load.file.example"><info><title>Example of the loadFile() Method</title></info>
+        <example xml:id="zend.loader.load.file.example"><title>Example of the loadFile() Method</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -53,7 +53,7 @@ Zend_Loader::loadFile($filename, $dirs=null, $once=false);
         </para>
     </section>
 
-    <section xml:id="zend.loader.load.isreadable"><info><title>Testing if a File is Readable</title></info>
+    <section xml:id="zend.loader.load.isreadable"><title>Testing if a File is Readable</title>
         
 
         <para>
@@ -62,7 +62,7 @@ Zend_Loader::loadFile($filename, $dirs=null, $once=false);
             and is readable, <constant>FALSE</constant> otherwise.
         </para>
 
-        <example xml:id="zend.loader.load.isreadable.example"><info><title>Example of isReadable() method</title></info>
+        <example xml:id="zend.loader.load.isreadable.example"><title>Example of isReadable() method</title>
             
 
             <programlisting language="php"><![CDATA[

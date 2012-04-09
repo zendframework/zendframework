@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.amazon.sqs"><info><title>Zend_Service_Amazon_Sqs</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.amazon.sqs"><title>Zend_Service_Amazon_Sqs</title>
     
 
-    <section xml:id="zend.service.amazon.sqs.introduction"><info><title>Introduction</title></info>
+    <section xml:id="zend.service.amazon.sqs.introduction"><title>Introduction</title>
         
 
         <para>
@@ -28,7 +28,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.service.amazon.sqs.registering"><info><title>Registering with Amazon SQS</title></info>
+    <section xml:id="zend.service.amazon.sqs.registering"><title>Registering with Amazon SQS</title>
         
 
         <para>
@@ -44,7 +44,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.service.amazon.sqs.apiDocumentation"><info><title>API Documentation</title></info>
+    <section xml:id="zend.service.amazon.sqs.apiDocumentation"><title>API Documentation</title>
         
 
         <para>
@@ -57,7 +57,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.service.amazon.sqs.features"><info><title>Features</title></info>
+    <section xml:id="zend.service.amazon.sqs.features"><title>Features</title>
         
 
         <para>
@@ -99,7 +99,7 @@
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.service.amazon.sqs.storing-your-first"><info><title>Getting Started</title></info>
+    <section xml:id="zend.service.amazon.sqs.storing-your-first"><title>Getting Started</title>
         
 
         <para>
@@ -113,7 +113,7 @@
             retrieving messages.
         </para>
 
-        <example xml:id="zend.service.amazon.sqs.storing-your-first.example"><info><title>Zend_Service_Amazon_Sqs Usage Example</title></info>
+        <example xml:id="zend.service.amazon.sqs.storing-your-first.example"><title>Zend_Service_Amazon_Sqs Usage Example</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -143,7 +143,7 @@ $sqs = new Zend_Service_Amazon_Sqs();
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.service.amazon.sqs.queues"><info><title>Queue operations</title></info>
+    <section xml:id="zend.service.amazon.sqs.queues"><title>Queue operations</title>
         
 
         <para>
@@ -171,7 +171,7 @@ $sqs = new Zend_Service_Amazon_Sqs();
                     the queue.
                 </para>
 
-                <example xml:id="zend.service.amazon.sqs.queues.removalExample"><info><title>Zend_Service_Amazon_Sqs Queue Removal Example</title></info>
+                <example xml:id="zend.service.amazon.sqs.queues.removalExample"><title>Zend_Service_Amazon_Sqs Queue Removal Example</title>
                     
 
                     <programlisting language="php"><![CDATA[
@@ -188,7 +188,7 @@ $sqs->delete($queue_url);
                     of messages in the queue.
                 </para>
 
-                <example xml:id="zend.service.amazon.sqs.queues.countExample"><info><title>Zend_Service_Amazon_Sqs Queue Count Example</title></info>
+                <example xml:id="zend.service.amazon.sqs.queues.countExample"><title>Zend_Service_Amazon_Sqs Queue Count Example</title>
                     
 
                     <programlisting language="php"><![CDATA[
@@ -206,7 +206,7 @@ $count = $sqs->count($queue_url); // Returns '1'
                     names of all queues belonging to the user.
                 </para>
 
-                <example xml:id="zend.service.amazon.sqs.queues.listExample"><info><title>Zend_Service_Amazon_Sqs Queue Listing Example</title></info>
+                <example xml:id="zend.service.amazon.sqs.queues.listExample"><title>Zend_Service_Amazon_Sqs Queue Listing Example</title>
                     
 
                     <programlisting language="php"><![CDATA[
@@ -221,7 +221,7 @@ foreach($list as $queue) {
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.service.amazon.sqs.messages"><info><title>Message operations</title></info>
+    <section xml:id="zend.service.amazon.sqs.messages"><title>Message operations</title>
         
 
         <para>
@@ -239,7 +239,7 @@ foreach($list as $queue) {
                     queue <acronym>URL</acronym>.
                 </para>
 
-                <example xml:id="zend.service.amazon.sqs.messages.sendExample"><info><title>Zend_Service_Amazon_Sqs Message Send Example</title></info>
+                <example xml:id="zend.service.amazon.sqs.messages.sendExample"><title>Zend_Service_Amazon_Sqs Message Send Example</title>
                     
 
                     <programlisting language="php"><![CDATA[
@@ -256,7 +256,7 @@ $sqs->send($queue_url, 'this is a test message');
                     messages from the queue.
                 </para>
 
-                <example xml:id="zend.service.amazon.sqs.messages.receiveExample"><info><title>Zend_Service_Amazon_Sqs Message Receive Example</title></info>
+                <example xml:id="zend.service.amazon.sqs.messages.receiveExample"><title>Zend_Service_Amazon_Sqs Message Receive Example</title>
                     
 
                     <programlisting language="php"><![CDATA[
@@ -278,7 +278,7 @@ foreach ($sqs->receive($queue_url) as $message) {
                     before it can be deleted.
                 </para>
 
-                <example xml:id="zend.service.amazon.sqs.messages.deleteExample"><info><title>Zend_Service_Amazon_Sqs Message Delete Example</title></info>
+                <example xml:id="zend.service.amazon.sqs.messages.deleteExample"><title>Zend_Service_Amazon_Sqs Message Delete Example</title>
                     
 
                     <programlisting language="php"><![CDATA[

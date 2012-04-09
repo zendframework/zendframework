@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.soap.autodiscovery"><info><title>AutoDiscovery</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.soap.autodiscovery"><title>AutoDiscovery</title>
 
 
-    <section xml:id="zend.soap.autodiscovery.introduction"><info><title>AutoDiscovery Introduction</title></info>
+    <section xml:id="zend.soap.autodiscovery.introduction"><title>AutoDiscovery Introduction</title>
 
 
         <para>
@@ -111,7 +111,7 @@ $wsdl->dump("/path/to/file.wsdl");
 $dom = $wsdl->toDomDocument();
 ]]></programlisting>
 
-        <note xml:id="zend.soap.autodiscovery.introduction.noserver"><info><title>Zend\Soap\Autodiscover is not a Soap Server</title></info>
+        <note xml:id="zend.soap.autodiscovery.introduction.noserver"><title>Zend\Soap\Autodiscover is not a Soap Server</title>
 
             <para>
                 It is very important to note, that the class
@@ -135,7 +135,7 @@ if(isset($_GET['wsdl'])) {
         </note>
     </section>
 
-    <section xml:id="zend.soap.autodiscovery.class"><info><title>Class autodiscovering</title></info>
+    <section xml:id="zend.soap.autodiscovery.class"><title>Class autodiscovering</title>
 
 
         <para>
@@ -221,7 +221,7 @@ $wsdl = $autodiscover->generate();
         </para>
     </section>
 
-    <section xml:id="zend.soap.autodiscovery.functions"><info><title>Functions autodiscovering</title></info>
+    <section xml:id="zend.soap.autodiscovery.functions"><title>Functions autodiscovering</title>
 
         <para>
             If set of functions are used to provide SOAP server functionality, then the same set
@@ -241,7 +241,7 @@ $wsdl = $autodiscover->generate();
         <para>The same rules apply to generation as described in the class audodiscover seection above.</para>
     </section>
 
-    <section xml:id="zend.soap.autodiscovery.datatypes"><info><title>Autodiscovering Datatypes</title></info>
+    <section xml:id="zend.soap.autodiscovery.datatypes"><title>Autodiscovering Datatypes</title>
 
 
         <para>
@@ -319,7 +319,7 @@ $wsdl = $autodiscover->generate();
         </para>
     </section>
 
-    <section xml:id="zend.soap.autodiscovery.wsdlstyles"><info><title>WSDL Binding Styles</title></info>
+    <section xml:id="zend.soap.autodiscovery.wsdlstyles"><title>WSDL Binding Styles</title>
 
 
         <para>

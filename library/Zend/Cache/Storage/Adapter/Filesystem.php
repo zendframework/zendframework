@@ -55,20 +55,19 @@ class Filesystem extends AbstractAdapter
     protected $stmtMatch = null;
 
     /**
-     * Last buffered identified of internal method getKeyInfo()
+     * An identity for the last filespec
+     * (cache directory + namespace prefix + key + directory level)
      *
-     * @var string|null
+     * @var string
      */
-    protected $lastInfoId = null;
+    protected $lastFileSpecId = '';
 
     /**
-     * Buffered result of internal method getKeyInfo()
+     * The last used filespec
      *
-     * @var array|null
+     * @var string
      */
-    protected $lastInfo = null;
-
-    /* configuration */
+    protected $lastFileSpec = '';
 
     /**
      * Set options.
@@ -178,24 +177,23 @@ class Filesystem extends AbstractAdapter
      */
     protected function internalGetItem(& $normalizedKey, array & $normalizedOptions)
     {
-        if ( !$this->internalHasItem($normalizedKey, $normalizedOptions)
-            || !($keyInfo = $this->getKeyInfo($normalizedKey, $normalizedOptions['namespace']))
-        ) {
-            if ($normalizedOptions['ignore_missing_items']) {
-                return false;
-            } else {
+        if (!$this->internalHasItem($normalizedKey, $normalizedOptions)) {
+            if (!$normalizedOptions['ignore_missing_items']) {
                 throw new Exception\ItemNotFoundException(
                     "Key '{$normalizedKey}' not found within namespace '{$normalizedOptions['namespace']}'"
                 );
             }
+
+            return false;
         }
 
-        $baseOptions = $this->getOptions();
         try {
-            $data = $this->getFileContent($keyInfo['filespec'] . '.dat');
+            $filespec    = $this->getFileSpec($normalizedKey, $normalizedOptions);
+            $baseOptions = $this->getOptions();
+            $data        = $this->getFileContent($filespec . '.dat');
 
             if ($baseOptions->getReadControl()) {
-                if ( ($info = $this->readInfoFile($keyInfo['filespec'] . '.ifo'))
+                if ( ($info = $this->readInfoFile($filespec . '.ifo'))
                     && isset($info['hash'], $info['algo'])
                     && Utils::generateHash($info['algo'], $data, true) != $info['hash']
                 ) {
@@ -207,7 +205,7 @@ class Filesystem extends AbstractAdapter
 
             if (array_key_exists('token', $normalizedOptions)) {
                 // use filemtime + filesize as CAS token
-                $normalizedOptions['token'] = $keyInfo['mtime'] . filesize($keyInfo['filespec'] . '.dat');
+                $normalizedOptions['token'] = filemtime($filespec . '.dat') . filesize($filespec . '.dat');
             }
 
             return $data;
@@ -222,6 +220,71 @@ class Filesystem extends AbstractAdapter
 
             throw $e;
         }
+    }
+
+    /**
+     * Internal method to get multiple items.
+     *
+     * Options:
+     *  - ttl <int>
+     *    - The time-to-life
+     *  - namespace <string>
+     *    - The namespace to use
+     *
+     * @param  array $normalizedKeys
+     * @param  array $normalizedOptions
+     * @return array Associative array of existing keys and values
+     * @throws Exception
+     */
+    protected function internalGetItems(array & $normalizedKeys, array & $normalizedOptions)
+    {
+        $baseOptions = $this->getOptions();
+
+        // Don't change arguments passed by reference
+        $keys    = $normalizedKeys;
+        $options = $normalizedOptions;
+
+        $result = array();
+        while ($keys) {
+
+            // LOCK_NB if more than one items have to read
+            $nonBlocking = count($keys) > 1;
+            $wouldblock  = null;
+
+            // read items
+            foreach ($keys as $i => $key) {
+                if (!$this->internalHasItem($key, $options)) {
+                    unset($keys[$i]);
+                    continue;
+                }
+
+                $filespec = $this->getFileSpec($key, $options);
+                $data     = $this->getFileContent($filespec . '.dat', $nonBlocking, $wouldblock);
+                if ($nonBlocking && $wouldblock) {
+                    continue;
+                } else {
+                    unset($keys[$i]);
+                }
+
+                if ($baseOptions->getReadControl()) {
+                    $info = $this->readInfoFile($filespec . '.ifo');
+                    if (isset($info['hash'], $info['algo'])
+                        && Utils::generateHash($info['algo'], $data, true) != $info['hash']
+                    ) {
+                        throw new Exception\UnexpectedValueException(
+                            "ReadControl: Stored hash and computed hash doesn't match"
+                        );
+                    }
+                }
+
+                $result[$key] = $data;
+            }
+
+            // Don't check ttl after first iteration
+            $options['ttl'] = 0;
+        }
+
+        return $result;
     }
 
     /**
@@ -296,17 +359,29 @@ class Filesystem extends AbstractAdapter
      */
     protected function internalHasItem(& $normalizedKey, array & $normalizedOptions)
     {
-        $keyInfo = $this->getKeyInfo($normalizedKey, $normalizedOptions['namespace']);
-        if (!$keyInfo) {
-            return false; // missing or corrupted cache data
+        $ttl      = $normalizedOptions['ttl'];
+        $filespec = $this->getFileSpec($normalizedKey, $normalizedOptions);
+
+        if (!file_exists($filespec . '.dat')) {
+            return false;
         }
 
-        $ttl = $normalizedOptions['ttl'];
-        if (!$ttl || time() < ($keyInfo['mtime'] + $ttl)) {
-            return true;
+        if ($ttl) {
+            ErrorHandler::start();
+            $mtime = filemtime($filespec . '.dat');
+            $error = ErrorHandler::stop();
+            if (!$mtime) {
+                throw new Exception\RuntimeException(
+                    "Error getting mtime of file '{$filespec}.dat'", 0, $error
+                );
+            }
+
+            if (time() >= ($mtime + $ttl)) {
+                return false;
+            }
         }
 
-        return false;
+        return true;
     }
 
     /**
@@ -353,31 +428,102 @@ class Filesystem extends AbstractAdapter
      */
     protected function internalGetMetadata(& $normalizedKey, array & $normalizedOptions)
     {
-        $keyInfo = $this->getKeyInfo($normalizedKey, $normalizedOptions['namespace']);
-        if (!$keyInfo) {
+        if (!$this->internalHasItem($normalizedKey, $normalizedOptions)) {
             if (!$normalizedOptions['ignore_missing_items']) {
                 throw new Exception\ItemNotFoundException(
                     "Key '{$normalizedKey}' not found on namespace '{$normalizedOptions['namespace']}'"
                 );
             }
+
             return false;
         }
 
         $baseOptions = $this->getOptions();
+        $filespec    = $this->getFileSpec($normalizedKey, $normalizedOptions);
+
+        $metadata = $this->readInfoFile($filespec . '.ifo');
+        if (!$metadata) {
+            $metadata  = array();
+        }
+
+        $metadata['filespec'] = $filespec;
+        $metadata['mtime']    = filemtime($filespec . '.dat');
+
         if (!$baseOptions->getNoCtime()) {
-            $keyInfo['ctime'] = filectime($keyInfo['filespec'] . '.dat');
+            $metadata['ctime'] = filectime($filespec . '.dat');
         }
 
         if (!$baseOptions->getNoAtime()) {
-            $keyInfo['atime'] = fileatime($keyInfo['filespec'] . '.dat');
+            $metadata['atime'] = fileatime($filespec . '.dat');
         }
 
-        $info = $this->readInfoFile($keyInfo['filespec'] . '.ifo');
-        if ($info) {
-            return $keyInfo + $info;
+        return $metadata;
+    }
+
+    /**
+     * Internal method to get multiple metadata
+     *
+     * Options:
+     *  - ttl <int>
+     *    - The time-to-life
+     *  - namespace <string>
+     *    - The namespace to use
+     *
+     * @param  array $normalizedKeys
+     * @param  array $normalizedOptions
+     * @return array Associative array of existing cache ids and its metadata
+     * @throws Exception
+     */
+    protected function internalGetMetadatas(array & $normalizedKeys, array & $normalizedOptions)
+    {
+        $baseOptions = $this->getOptions();
+        $result      = array();
+
+        // Don't change arguments passed by reference
+        $keys    = $normalizedKeys;
+        $options = $normalizedOptions;
+
+        while ($keys) {
+
+            // LOCK_NB if more than one items have to read
+            $nonBlocking = count($keys) > 1;
+            $wouldblock  = null;
+
+            foreach ($keys as $i => $key) {
+                if (!$this->internalHasItem($key, $options)) {
+                    unset($keys[$i]);
+                    continue;
+                }
+
+                $filespec = $this->getFileSpec($key, $options);
+
+                $metadata = $this->readInfoFile($filespec . '.ifo', $nonBlocking, $wouldblock);
+                if ($nonBlocking && $wouldblock) {
+                    continue;
+                } elseif (!$metadata) {
+                    $metadata = array();
+                }
+
+                $metadata['filespec'] = $filespec;
+                $metadata['mtime']    = filemtime($filespec . '.dat');
+
+                if (!$baseOptions->getNoCtime()) {
+                    $metadata['ctime'] = filectime($filespec . '.dat');
+                }
+
+                if (!$baseOptions->getNoAtime()) {
+                    $metadata['atime'] = fileatime($filespec . '.dat');
+                }
+
+                $result[$key] = $metadata;
+                unset($keys[$i]);
+            }
+
+            // Don't check ttl after first iteration
+            $options['ttl'] = 0;
         }
 
-        return $keyInfo;
+        return $result;
     }
 
     /* writing */
@@ -571,26 +717,21 @@ class Filesystem extends AbstractAdapter
     protected function internalSetItem(& $normalizedKey, & $value, array & $normalizedOptions)
     {
         $baseOptions = $this->getOptions();
-        $oldUmask = null;
+        $oldUmask    = null;
+        $filespec    = $this->getFileSpec($normalizedKey, $normalizedOptions);
 
-        $lastInfoId = $normalizedOptions['namespace'] . $baseOptions->getNamespaceSeparator() . $normalizedKey;
-        if ($this->lastInfoId == $lastInfoId) {
-            $filespec = $this->lastInfo['filespec'];
-            // if lastKeyInfo is available I'm sure that the cache directory exist
-        } else {
-            $filespec = $this->getFileSpec($normalizedKey, $normalizedOptions['namespace']);
-            if ($baseOptions->getDirLevel() > 0) {
-                $path = dirname($filespec);
-                if (!file_exists($path)) {
-                    $oldUmask = umask($baseOptions->getDirUmask());
-                    ErrorHandler::start();
-                    $mkdir = mkdir($path, 0777, true);
-                    $error = ErrorHandler::stop();
-                    if (!$mkdir) {
-                        throw new Exception\RuntimeException(
-                            "Error creating directory '{$path}'", 0, $error
-                        );
-                    }
+        if ($baseOptions->getDirLevel() > 0) {
+            $path = dirname($filespec);
+            if (!file_exists($path)) {
+                $oldUmask = umask($baseOptions->getDirUmask());
+                ErrorHandler::start();
+                $mkdir = mkdir($path, 0777, true);
+                $error = ErrorHandler::stop();
+                if (!$mkdir) {
+                    umask($oldUmask);
+                    throw new Exception\RuntimeException(
+                        "Error creating directory '{$path}'", 0, $error
+                    );
                 }
             }
         }
@@ -600,39 +741,135 @@ class Filesystem extends AbstractAdapter
             $info['hash'] = Utils::generateHash($baseOptions->getReadControlAlgo(), $value, true);
             $info['algo'] = $baseOptions->getReadControlAlgo();
         }
-
-        if (isset($options['tags']) && $normalizedOptions['tags']) {
-            $tags = $normalizedOptions['tags'];
-            if (!is_array($tags)) {
-                $tags = array($tags);
-            }
-            $info['tags'] = array_values(array_unique($tags));
+        if (isset($options['tags'])) {
+            $info['tags'] = $normalizedOptions['tags'];
         }
 
+        // write files
         try {
-            if ($oldUmask !== null) { // $oldUmask could be defined on set directory_umask
+            // set umask for files
+            if ($oldUmask !== null) { // $oldUmask could be defined on create directory
                 umask($baseOptions->getFileUmask());
             } else {
                 $oldUmask = umask($baseOptions->getFileUmask());
             }
 
-            $ret = $this->putFileContent($filespec . '.dat', $value);
-            if ($ret && $info) {
-                // Don't throw exception if writing of info file failed
-                // -> only return false
-                try {
-                    $ret = $this->putFileContent($filespec . '.ifo', serialize($info));
-                } catch (Exception\RuntimeException $e) {
-                    $ret = false;
-                }
+            $contents = array($filespec . '.dat' => & $value);
+            if ($info) {
+                $contents[$filespec . '.ifo'] = serialize($info);
+            } else {
+                $this->unlink($filespec . '.ifo');
             }
 
-            $this->lastInfoId = null;
+            while ($contents) {
+                $nonBlocking = count($contents) > 1;
+                $wouldblock  = null;
+
+                foreach ($contents as $file => $content) {
+                    $this->putFileContent($file, $content, $nonBlocking, $wouldblock);
+                    if (!$nonBlocking || !$wouldblock) {
+                        unset($contents[$file]);
+                    }
+                }
+            }
 
             // reset file_umask
             umask($oldUmask);
 
-            return $ret;
+            return true;
+
+        } catch (Exception $e) {
+            // reset umask on exception
+            umask($oldUmask);
+            throw $e;
+        }
+    }
+
+    /**
+     * Internal method to store multiple items.
+     *
+     * Options:
+     *  - namespace <string>
+     *    - The namespace to use
+     *  - tags <array>
+     *    - An array of tags
+     *
+     * @param  array $normalizedKeyValuePairs
+     * @param  array $normalizedOptions
+     * @return boolean
+     * @throws Exception
+     */
+    protected function internalSetItems(array & $normalizedKeyValuePairs, array & $normalizedOptions)
+    {
+        $baseOptions = $this->getOptions();
+        $oldUmask    = null;
+
+        // create an associated array of files and contents to write
+        $contents = array();
+        foreach ($normalizedKeyValuePairs as $key => & $value) {
+            $filespec = $this->getFileSpec($key, $normalizedOptions);
+
+            // init directory level
+            if ($baseOptions->getDirLevel() > 0) {
+                $path = dirname($filespec);
+                if (!file_exists($path)) {
+                    $oldUmask = ($oldUmask === null) ? umask($baseOptions->getDirUmask()) : $oldUmask;
+                    ErrorHandler::start();
+                    $mkdir = mkdir($path, 0777, true);
+                    $error = ErrorHandler::stop();
+                    if (!$mkdir) {
+                        umask($oldUmask);
+                        throw new Exception\RuntimeException(
+                            "Error creating directory '{$path}'", 0, $error
+                        );
+                    }
+                }
+            }
+
+            // *.dat file
+            $contents[$filespec . '.dat'] = & $value;
+
+            // *.ifo file
+            $info = null;
+            if ($baseOptions->getReadControl()) {
+                $info['hash'] = Utils::generateHash($baseOptions->getReadControlAlgo(), $value, true);
+                $info['algo'] = $baseOptions->getReadControlAlgo();
+            }
+            if (isset($normalizedOptions['tags'])) {
+                $info['tags'] = & $normalizedOptions['tags'];
+            }
+            if ($info) {
+                $contents[$filespec . '.ifo'] = serialize($info);
+            } else {
+                $this->unlink($filespec . '.ifo');
+            }
+        }
+
+        // write to disk
+        try {
+            // set umask for files
+            if ($oldUmask !== null) { // $oldUmask could be defined on create directory
+                umask($baseOptions->getFileUmask());
+            } else {
+                $oldUmask = umask($baseOptions->getFileUmask());
+            }
+
+            while ($contents) {
+                $nonBlocking = count($contents) > 1;
+                $wouldblock  = null;
+
+                foreach ($contents as $file => & $content) {
+                    $this->putFileContent($file, $content, $nonBlocking, $wouldblock);
+                    if (!$nonBlocking || !$wouldblock) {
+                        unset($contents[$file]);
+                    }
+                }
+            }
+
+            // reset umask
+            umask($oldUmask);
+
+            return true;
 
         } catch (Exception $e) {
             // reset umask on exception
@@ -694,18 +931,19 @@ class Filesystem extends AbstractAdapter
      */
     protected function internalCheckAndSetItem(& $token, & $normalizedKey, & $value, array & $normalizedOptions)
     {
-        $keyInfo = $this->getKeyInfo($normalizedKey, $normalizedOptions['namespace']);
-        if (!$keyInfo) {
+        if (!$this->internalHasItem($normalizedKey, $normalizedOptions)) {
             if (!$normalizedOptions['ignore_missing_items']) {
                 throw new Exception\ItemNotFoundException(
                     "Key '{$normalizedKey}' not found within namespace '{$normalizedOptions['namespace']}'"
                 );
             }
+
             return false;
         }
 
         // use filemtime + filesize as CAS token
-        $check = $keyInfo['mtime'] . filesize($keyInfo['filespec'] . '.dat');
+        $filespec = $this->getFileSpec($normalizedKey, $normalizedOptions);
+        $check    = filemtime($filespec . '.dat') . filesize($filespec . '.dat');
         if ($token !== $check) {
             return false;
         }
@@ -781,27 +1019,26 @@ class Filesystem extends AbstractAdapter
      */
     protected function internalTouchItem(& $normalizedKey, array & $normalizedOptions)
     {
-        $keyInfo = $this->getKeyInfo($normalizedKey, $normalizedOptions['namespace']);
-        if (!$keyInfo) {
+        if (!$this->internalHasItem($normalizedKey, $normalizedOptions)) {
             if (!$normalizedOptions['ignore_missing_items']) {
                 throw new Exception\ItemNotFoundException(
                     "Key '{$normalizedKey}' not found within namespace '{$normalizedOptions['namespace']}'"
                 );
             }
+
             return false;
         }
 
+        $filespec = $this->getFileSpec($normalizedKey, $normalizedOptions);
+
         ErrorHandler::start();
-        $touch = touch($keyInfo['filespec'] . '.dat');
+        $touch = touch($filespec . '.dat');
         $error = ErrorHandler::stop();
         if (!$touch) {
             throw new Exception\RuntimeException(
-                "Error touching file '{$keyInfo['filespec']}.dat'", 0, $error
+                "Error touching file '{$filespec}.dat'", 0, $error
             );
         }
-
-        // remove the buffered info
-        $this->lastInfoId = null;
 
         return true;
     }
@@ -878,7 +1115,7 @@ class Filesystem extends AbstractAdapter
      */
     protected function internalRemoveItem(& $normalizedKey, array & $normalizedOptions)
     {
-        $filespec = $this->getFileSpec($normalizedKey, $normalizedOptions['namespace']);
+        $filespec = $this->getFileSpec($normalizedKey, $normalizedOptions);
         if (!file_exists($filespec . '.dat')) {
             if (!$normalizedOptions['ignore_missing_items']) {
                 throw new Exception\ItemNotFoundException("Key '{$normalizedKey}' with file '{$filespec}.dat' not found");
@@ -886,7 +1123,6 @@ class Filesystem extends AbstractAdapter
         } else {
             $this->unlink($filespec . '.dat');
             $this->unlink($filespec . '.ifo');
-            $this->lastInfoId = null;
         }
         return true;
     }
@@ -1368,88 +1604,56 @@ class Filesystem extends AbstractAdapter
     }
 
     /**
-     * Get an array of information about the cache key.
-     * NOTE: returns false if cache doesn't hit.
-     *
-     * @param  string $key
-     * @param  string $ns
-     * @return array|boolean
-     */
-    protected function getKeyInfo($key, $ns)
-    {
-        $lastInfoId = $ns . $this->getOptions()->getNamespaceSeparator() . $key;
-        if ($this->lastInfoId == $lastInfoId) {
-            return $this->lastInfo;
-        }
-
-        $filespec = $this->getFileSpec($key, $ns);
-        $file     = $filespec . '.dat';
-
-        if (!file_exists($file)) {
-            return false;
-        }
-
-        ErrorHandler::start();
-        $mtime = filemtime($file);
-        $error = ErrorHandler::stop();
-        if (!$mtime) {
-            throw new Exception\RuntimeException(
-                "Error getting mtime of file '{$file}'", 0, $error
-            );
-        }
-
-        $this->lastInfoId  = $lastInfoId;
-        $this->lastInfo    = array(
-            'filespec' => $filespec,
-            'mtime'    => $mtime,
-        );
-
-        return $this->lastInfo;
-    }
-
-    /**
      * Get file spec of the given key and namespace
      *
-     * @param  string $key
-     * @param  string $ns
+     * @param  string $normalizedKey
+     * @param  array  $normalizedOptions
      * @return string
      */
-    protected function getFileSpec($key, $ns)
+    protected function getFileSpec($normalizedKey, array & $normalizedOptions)
     {
-        $options    = $this->getOptions();
-        $prefix     = $ns . $options->getNamespaceSeparator();
-        $lastInfoId = $prefix . $key;
-        if ($this->lastInfoId == $lastInfoId) {
-            return $this->lastInfo['filespec'];
-        }
+        $baseOptions = $this->getOptions();
+        $prefix      = $normalizedOptions['namespace'] . $baseOptions->getNamespaceSeparator();
 
-        $path  = $options->getCacheDir();
-        $level = $options->getDirLevel();
-        if ( $level > 0 ) {
-            // create up to 256 directories per directory level
-            $hash = md5($key);
-            for ($i = 0, $max = ($level * 2); $i < $max; $i+= 2) {
-                $path .= \DIRECTORY_SEPARATOR . $prefix . $hash[$i] . $hash[$i+1];
+        $path  = $baseOptions->getCacheDir() . \DIRECTORY_SEPARATOR;
+        $level = $baseOptions->getDirLevel();
+
+        $fileSpecId = $path . $prefix . $normalizedKey . '/' . $level;
+        if ($this->lastFileSpecId !== $fileSpecId) {
+            if ($level > 0) {
+                // create up to 256 directories per directory level
+                $hash = md5($normalizedKey);
+                for ($i = 0, $max = ($level * 2); $i < $max; $i+= 2) {
+                    $path .= $prefix . $hash[$i] . $hash[$i+1] . \DIRECTORY_SEPARATOR;
+                }
             }
+
+            $this->lastFileSpecId = $fileSpecId;
+            $this->lastFileSpec   = $path . $prefix . $normalizedKey;
         }
 
-        return $path . \DIRECTORY_SEPARATOR . $prefix . $key;
+        return $this->lastFileSpec;
     }
 
     /**
      * Read info file
      *
-     * @param string $file
+     * @param  string  $file
+     * @param  boolean $nonBlocking Don't block script if file is locked
+     * @param  boolean $wouldblock  The optional argument is set to TRUE if the lock would block
      * @return array|boolean The info array or false if file wasn't found
      * @throws Exception\RuntimeException
      */
-    protected function readInfoFile($file)
+    protected function readInfoFile($file, $nonBlocking = false, & $wouldblock = null)
     {
         if (!file_exists($file)) {
             return false;
         }
 
-        $content = $this->getFileContent($file);
+        $content = $this->getFileContent($file, $nonBlocking, $wouldblock);
+        if ($nonBlocking && $wouldblock) {
+            return false;
+        }
 
         ErrorHandler::start();
         $ifo = unserialize($content);
@@ -1466,13 +1670,16 @@ class Filesystem extends AbstractAdapter
     /**
      * Read a complete file
      *
-     * @param  string $file File complete path
+     * @param  string  $file        File complete path
+     * @param  boolean $nonBlocking Don't block script if file is locked
+     * @param  boolean $wouldblock  The optional argument is set to TRUE if the lock would block
      * @return string
      * @throws Exception\RuntimeException
      */
-    protected function getFileContent($file)
+    protected function getFileContent($file, $nonBlocking = false, & $wouldblock = null)
     {
-        $locking = $this->getOptions()->getFileLocking();
+        $locking    = $this->getOptions()->getFileLocking();
+        $wouldblock = null;
 
         ErrorHandler::start();
 
@@ -1486,7 +1693,18 @@ class Filesystem extends AbstractAdapter
                 );
             }
 
-            if (!flock($fp, \LOCK_SH)) {
+            if ($nonBlocking) {
+                $lock = flock($fp, \LOCK_SH | \LOCK_NB, $wouldblock);
+                if ($wouldblock) {
+                    fclose($fp);
+                    ErrorHandler::stop();
+                    return;
+                }
+            } else {
+                $lock = flock($fp, \LOCK_SH);
+            }
+
+            if (!$lock) {
                 fclose($fp);
                 $err = ErrorHandler::stop();
                 throw new Exception\RuntimeException(
@@ -1525,20 +1743,23 @@ class Filesystem extends AbstractAdapter
     /**
      * Write content to a file
      *
-     * @param  string $file  File complete path
-     * @param  string $data  Data to write
-     * @return bool
+     * @param  string  $file        File complete path
+     * @param  string  $data        Data to write
+     * @param  boolean $nonBlocking Don't block script if file is locked
+     * @param  boolean $wouldblock  The optional argument is set to TRUE if the lock would block
+     * @return void
      * @throws Exception\RuntimeException
      */
-    protected function putFileContent($file, $data)
+    protected function putFileContent($file, $data, $nonBlocking = false, & $wouldblock = null)
     {
-        $options  = $this->getOptions();
-        $locking  = $options->getFileLocking();
-        $blocking = $locking ? $options->getFileBlocking() : false;
+        $locking     = $this->getOptions()->getFileLocking();
+        $nonBlocking = $locking && $nonBlocking;
+        $wouldblock  = null;
 
         ErrorHandler::start();
 
-        if ($locking && !$blocking) {
+        // if locking and non blocking is enabled -> file_put_contents can't used
+        if ($locking && $nonBlocking) {
             $fp = fopen($file, 'cb');
             if (!$fp) {
                 $err = ErrorHandler::stop();
@@ -1551,42 +1772,45 @@ class Filesystem extends AbstractAdapter
                 fclose($fp);
                 $err = ErrorHandler::stop();
                 if ($wouldblock) {
-                    throw new Exception\LockedException("File '{$file}' locked", 0, $err);
+                    return;
                 } else {
                     throw new Exception\RuntimeException("Error locking file '{$file}'", 0, $err);
                 }
             }
 
             if (!fwrite($fp, $data)) {
+                flock($fp, \LOCK_UN);
                 fclose($fp);
                 $err = ErrorHandler::stop();
                 throw new Exception\RuntimeException("Error writing file '{$file}'", 0, $err);
             }
 
             if (!ftruncate($fp, strlen($data))) {
+                flock($fp, \LOCK_UN);
+                fclose($fp);
                 $err = ErrorHandler::stop();
                 throw new Exception\RuntimeException("Error truncating file '{$file}'", 0, $err);
             }
 
             flock($fp, \LOCK_UN);
             fclose($fp);
+
+        // else -> file_put_contents can be used
         } else {
             $flags = 0;
             if ($locking) {
                 $flags = $flags | \LOCK_EX;
             }
 
-            $bytes = strlen($data);
-            if (file_put_contents($file, $data, $flags) !== $bytes) {
+            if (file_put_contents($file, $data, $flags) === false) {
                 $err = ErrorHandler::stop();
                 throw new Exception\RuntimeException(
-                    "Error putting {$bytes} bytes to file '{$file}'", 0, $err
+                    "Error writing file '{$file}'", 0, $err
                 );
             }
         }
 
         ErrorHandler::stop();
-        return true;
     }
 
     /**
@@ -1598,11 +1822,6 @@ class Filesystem extends AbstractAdapter
      */
     protected function unlink($file)
     {
-        // If file does not exist, nothing to do
-        if (!file_exists($file)) {
-            return;
-        }
-
         ErrorHandler::start();
         $res = unlink($file);
         $err = ErrorHandler::stop();

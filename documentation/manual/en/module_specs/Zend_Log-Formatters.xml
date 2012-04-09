@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.log.formatters"><info><title>Formatters</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.log.formatters"><title>Formatters</title>
     
 
     <para>
@@ -14,7 +14,7 @@
         set a Formatter.
     </para>
 
-    <section xml:id="zend.log.formatters.simple"><info><title>Simple Formatting</title></info>
+    <section xml:id="zend.log.formatters.simple"><title>Simple Formatting</title>
         
 
         <para>
@@ -56,7 +56,7 @@ $logger->info('there');
         </para>
     </section>
 
-    <section xml:id="zend.log.formatters.xml"><info><title>Formatting to XML</title></info>
+    <section xml:id="zend.log.formatters.xml"><title>Formatting to XML</title>
         
 
         <para>
@@ -126,7 +126,7 @@ $logger->info('informational message');
 ]]></programlisting>
     </section>
     
-    <section xml:id="zend.log.formatters.firebug"><info><title>Formatting to Firebug</title></info>
+    <section xml:id="zend.log.formatters.firebug"><title>Formatting to Firebug</title>
     
         <para>
             <classname>Zend\Log\Formatter\Firebug</classname> formats log data for the

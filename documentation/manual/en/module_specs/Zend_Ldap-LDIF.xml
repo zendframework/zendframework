@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.ldap.ldif"><title>Serializing LDAP data to and from LDIF</title>
-    
 
     <section xml:id="zend.ldap.ldif.encode"><title>Serialize a LDAP entry to LDIF</title>
-        
 
         <programlisting language="php"><![CDATA[
 $data = array(
@@ -32,7 +30,7 @@ $data = array(
     'cn;lang-en'                 => array('Rodney Ogasawara'),
     'title;lang-en'              => array('Sales, Director'),
 );
-$ldif = Zend_Ldap_Ldif_Encoder::encode($data, array('sort' => false,
+$ldif = Zend\Ldap\Ldif\Encoder::encode($data, array('sort' => false,
                                                     'version' => null));
 /*
 $ldif contains:
@@ -65,7 +63,6 @@ title;lang-en: Sales, Director
     </section>
 
     <section xml:id="zend.ldap.ldif.decode"><title>Deserialize a LDIF string into a LDAP entry</title>
-        
 
         <programlisting language="php"><![CDATA[
 $ldif = "dn:: dWlkPXJvZ2FzYXdhcmEsb3U95Za25qWt6YOoLG89QWlyaXVz
@@ -92,7 +89,7 @@ givenname;lang-en: Rodney
 sn;lang-en: Ogasawara
 cn;lang-en: Rodney Ogasawara
 title;lang-en: Sales, Director";
-$data = Zend_Ldap_Ldif_Encoder::decode($ldif);
+$data = Zend\Ldap\Ldif\Encoder::decode($ldif);
 /*
 $data = array(
     'dn'                         => 'uid=rogasawara,ou=営業部,o=Airius',

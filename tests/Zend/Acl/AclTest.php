@@ -128,6 +128,18 @@ class AclTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Ensures that an exception is thrown when a not Role is passed
+     *
+     * @return void
+     */
+    public function testRoleRegistryAddNotRole()
+    {
+        $this->setExpectedException('Zend\Acl\Exception\InvalidArgumentException',
+                                    'addRole() expects $role to be of type Zend\Acl\Role');
+        $this->_acl->addRole(new \stdClass, 'guest');
+    }
+
+    /**
      * Ensures that an exception is thrown when a non-existent Role is specified to each parameter of inherits()
      *
      * @return void
@@ -328,6 +340,18 @@ class AclTest extends \PHPUnit_Framework_TestCase
     {
         $this->setExpectedException('Zend\Acl\Exception\InvalidArgumentException', 'does not exist');
         $this->_acl->addResource(new Resource\GenericResource('area'), 'nonexistent');
+    }
+
+    /**
+     * Ensures that an exception is thrown when a not Resource is passed
+     *
+     * @return void
+     */
+    public function testResourceRegistryAddNotResource()
+    {
+        $this->setExpectedException('Zend\Acl\Exception\InvalidArgumentException',
+                                    'addResource() expects $resource to be of type Zend\Acl\Resource');
+        $this->_acl->addResource(new \stdClass);
     }
 
     /**

@@ -21,14 +21,15 @@
 
 namespace ZendTest\File\Transfer\Adapter;
 
-use Zend\Loader\PrefixPathLoader,
-    Zend\Loader\ShortNameLocator,
-    Zend\Validator\File,
+use Zend\File,
     Zend\Filter,
-    Zend\File\Transfer;
+    Zend\Filter\Word,
+    Zend\Loader,
+    Zend\Validator,
+    Zend\Validator\File as FileValidator;
 
 /**
- * Test class for Zend_File_Transfer_Adapter_Abstract
+ * Test class for Zend\File\Transfer\Adapter\AbstractAdapter
  *
  * @category   Zend
  * @package    Zend_File
@@ -47,7 +48,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->adapter = new AbstractTestMockAdapter();
+        $this->adapter = new AbstractAdapterTestMockAdapter();
     }
 
     /**
@@ -69,19 +70,19 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
     public function testAdapterShouldHavePluginLoaderForValidators()
     {
         $loader = $this->adapter->getPluginLoader('validator');
-        $this->assertTrue($loader instanceof PrefixPathLoader);
+        $this->assertTrue($loader instanceof Loader\PrefixPathLoader);
     }
 
     public function testAdapterShouldAllowAddingCustomPluginLoader()
     {
-        $loader = new PrefixPathLoader();
+        $loader = new Loader\PrefixPathLoader();
         $this->adapter->setPluginLoader($loader, 'filter');
         $this->assertSame($loader, $this->adapter->getPluginLoader('filter'));
     }
 
     public function testAddingInvalidPluginLoaderTypeToAdapterShouldRaiseException()
     {
-        $loader = new PrefixPathLoader();
+        $loader = new Loader\PrefixPathLoader();
 
         $this->setExpectedException('Zend\File\Transfer\Exception\InvalidArgumentException', 'Invalid type "BOGUS" provided to setPluginLoader');
         $this->adapter->setPluginLoader($loader, 'bogus');
@@ -150,7 +151,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
 
     public function testAdapterShouldAllowAddingValidatorInstance()
     {
-        $validator = new File\Count(array('min' => 1, 'max' => 1));
+        $validator = new FileValidator\Count(array('min' => 1, 'max' => 1));
         $this->adapter->addValidator($validator);
         $test = $this->adapter->getValidator('Zend\Validator\File\Count');
         $this->assertSame($validator, $test);
@@ -160,7 +161,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
     {
         $this->adapter->addValidator('Count', false, array('min' => 1, 'max' => 1));
         $test = $this->adapter->getValidator('Count');
-        $this->assertTrue($test instanceof File\Count);
+        $this->assertTrue($test instanceof FileValidator\Count);
     }
 
 
@@ -176,20 +177,20 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
             'count' => array('min' => 1, 'max' => 1),
             'Exists' => 'C:\temp',
             array('validator' => 'Upload', 'options' => array(realpath(__FILE__))),
-            new File\Extension('jpg'),
+            new FileValidator\Extension('jpg'),
         );
         $this->adapter->addValidators($validators);
         $test = $this->adapter->getValidators();
         $this->assertTrue(is_array($test));
         $this->assertEquals(4, count($test), var_export($test, 1));
         $count = array_shift($test);
-        $this->assertTrue($count instanceof File\Count);
+        $this->assertTrue($count instanceof FileValidator\Count);
         $exists = array_shift($test);
-        $this->assertTrue($exists instanceof File\Exists);
+        $this->assertTrue($exists instanceof FileValidator\Exists);
         $size = array_shift($test);
-        $this->assertTrue($size instanceof File\Upload);
+        $this->assertTrue($size instanceof FileValidator\Upload);
         $ext = array_shift($test);
-        $this->assertTrue($ext instanceof File\Extension);
+        $this->assertTrue($ext instanceof FileValidator\Extension);
         $orig = array_pop($validators);
         $this->assertSame($orig, $ext);
     }
@@ -205,15 +206,15 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
         $validators = $this->adapter->getValidators('foo');
         $this->assertEquals(1, count($validators));
         $validator = array_shift($validators);
-        $this->assertTrue($validator instanceof \Zend\Validator\Alpha);
+        $this->assertTrue($validator instanceof Validator\Alpha);
     }
 
     public function testCallingSetValidatorsOnAdapterShouldOverwriteExistingValidators()
     {
         $this->testAdapterShouldAllowAddingMultipleValidatorsAtOnceUsingBothInstancesAndPluginLoader();
         $validators = array(
-            new File\Count(1),
-            new File\Extension('jpg'),
+            new FileValidator\Count(1),
+            new FileValidator\Extension('jpg'),
         );
         $this->adapter->setValidators($validators);
         $test = $this->adapter->getValidators();
@@ -224,14 +225,14 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
     {
         $this->testAdapterShouldAllowAddingMultipleValidatorsAtOnceUsingBothInstancesAndPluginLoader();
         $ext = $this->adapter->getValidator('Zend\Validator\File\Extension');
-        $this->assertTrue($ext instanceof File\Extension);
+        $this->assertTrue($ext instanceof FileValidator\Extension);
     }
 
     public function testAdapterShouldAllowRetrievingValidatorInstancesByPluginName()
     {
         $this->testAdapterShouldAllowAddingMultipleValidatorsAtOnceUsingBothInstancesAndPluginLoader();
         $count = $this->adapter->getValidator('Count');
-        $this->assertTrue($count instanceof File\Count);
+        $this->assertTrue($count instanceof FileValidator\Count);
     }
 
     public function testAdapterShouldAllowRetrievingAllValidatorsAtOnce()
@@ -241,7 +242,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(is_array($validators));
         $this->assertEquals(4, count($validators));
         foreach ($validators as $validator) {
-            $this->assertTrue($validator instanceof \Zend\Validator\Validator);
+            $this->assertTrue($validator instanceof Validator\Validator);
         }
     }
 
@@ -336,7 +337,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
     public function testAdapterShouldHavePluginLoaderForFilters()
     {
         $loader = $this->adapter->getPluginLoader('filter');
-        $this->assertTrue($loader instanceof ShortNameLocator);
+        $this->assertTrue($loader instanceof Loader\ShortNameLocator);
     }
 
     public function testFilterPluginLoaderShouldRegisterPathsForBaseAndFileFiltersByDefault()
@@ -367,7 +368,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
     public function testAdapterhShouldRaiseExceptionWhenAddingInvalidFilterType()
     {
         $this->setExpectedException('Zend\File\Transfer\Exception\InvalidArgumentException', 'Invalid filter specified');
-        $this->adapter->addFilter(new File\Extension('jpg'));
+        $this->adapter->addFilter(new FileValidator\Extension('jpg'));
     }
 
     public function testAdapterShouldAllowAddingMultipleFiltersAtOnceUsingBothInstancesAndPluginLoader()
@@ -382,7 +383,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(is_array($test));
         $this->assertEquals(3, count($test), var_export($test, 1));
         $count = array_shift($test);
-        $this->assertTrue($count instanceof \Zend\Filter\Word\SeparatorToCamelCase);
+        $this->assertTrue($count instanceof Word\SeparatorToCamelCase);
         $size = array_shift($test);
         $this->assertTrue($size instanceof Filter\Alpha);
         $ext  = array_shift($test);
@@ -609,22 +610,22 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
 
     public function testEmptyTempDirectoryDetection()
     {
-        $this->adapter->_tmpDir = "";
-        $this->assertTrue(empty($this->adapter->_tmpDir), "Empty temporary directory");
+        $this->adapter->tmpDir = "";
+        $this->assertTrue(empty($this->adapter->tmpDir), "Empty temporary directory");
     }
 
     public function testTempDirectoryDetection()
     {
         $this->adapter->getTmpDir();
-        $this->assertTrue(!empty($this->adapter->_tmpDir), "Temporary directory filled");
+        $this->assertTrue(!empty($this->adapter->tmpDir), "Temporary directory filled");
     }
 
     public function testTemporaryDirectoryAccessDetection()
     {
-        $this->adapter->_tmpDir = ".";
+        $this->adapter->tmpDir = ".";
         $path = "/NoPath/To/File";
         $this->assertFalse($this->adapter->isPathWriteable($path));
-        $this->assertTrue($this->adapter->isPathWriteable($this->adapter->_tmpDir));
+        $this->assertTrue($this->adapter->isPathWriteable($this->adapter->tmpDir));
     }
 
     public function testFileSizeButNoFileFound()
@@ -642,9 +643,10 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
 
     public function testFileSizeByTmpName()
     {
+    	$expectedSize = sprintf("%.2fkB", 1.14);
         $options = $this->adapter->getOptions();
         $this->assertTrue($options['baz']['useByteString']);
-        $this->assertEquals('1.14kB', $this->adapter->getFileSize('baz.text'));
+        $this->assertEquals($expectedSize, $this->adapter->getFileSize('baz.text'));
         $this->adapter->setOptions(array('useByteString' => false));
         $options = $this->adapter->getOptions();
         $this->assertFalse($options['baz']['useByteString']);
@@ -671,7 +673,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
 
     public function testSetOwnErrorMessage()
     {
-        $this->adapter->addValidator('Count', false, array('min' => 5, 'max' => 5, 'messages' => array(File\Count::TOO_FEW => 'Zu wenige')));
+        $this->adapter->addValidator('Count', false, array('min' => 5, 'max' => 5, 'messages' => array(FileValidator\Count::TOO_FEW => 'Zu wenige')));
         $this->assertFalse($this->adapter->isValid('foo'));
         $message = $this->adapter->getMessages();
         $this->assertContains('Zu wenige', $message);
@@ -709,8 +711,8 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
     {
         $validators = array(
             array('MimeType', true, array('image/jpeg')), // no files
-            array('FilesSize', true, array('max' => '1MB', 'messages' => 'файл больше 1MБ')), // no files
-            array('Count', true, array('min' => 1, 'max' => '1', 'messages' => 'файл не 1'), 'bar'), // 'bar' from config
+            array('FilesSize', true, array('max' => '1MB', 'message' => 'файл больше 1MБ')), // no files
+            array('Count', true, array('min' => 1, 'max' => '1', 'message' => 'файл не 1'), 'bar'), // 'bar' from config
             array('MimeType', true, array('image/jpeg'), 'bar'), // 'bar' from config
         );
 
@@ -723,16 +725,16 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
         $test = $this->adapter->getValidators('foo');
         $this->assertEquals(2, count($test));
         $mimeType = array_shift($test);
-        $this->assertTrue($mimeType instanceof File\MimeType);
+        $this->assertTrue($mimeType instanceof FileValidator\MimeType);
         $filesSize = array_shift($test);
-        $this->assertTrue($filesSize instanceof File\FilesSize);
+        $this->assertTrue($filesSize instanceof FileValidator\FilesSize);
 
         $test = $this->adapter->getValidators('bar');
         $this->assertEquals(2, count($test));
         $filesSize = array_shift($test);
-        $this->assertTrue($filesSize instanceof File\Count);
+        $this->assertTrue($filesSize instanceof FileValidator\Count);
         $mimeType = array_shift($test);
-        $this->assertTrue($mimeType instanceof File\MimeType);
+        $this->assertTrue($mimeType instanceof FileValidator\MimeType);
 
         $test = $this->adapter->getValidators('baz');
         $this->assertEquals(0, count($test));
@@ -757,135 +759,4 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
                 'detectInfos' => false))
             , $this->adapter->getOptions('foo'));
     }
-}
-
-class AbstractTestMockAdapter extends \Zend\File\Transfer\Adapter\AbstractAdapter
-{
-    public $received = false;
-
-    public $_tmpDir;
-
-    public function __construct()
-    {
-        $testfile = __DIR__ . '/_files/test.txt';
-        $this->_files = array(
-            'foo' => array(
-                'name'      => 'foo.jpg',
-                'type'      => 'image/jpeg',
-                'size'      => 126976,
-                'tmp_name'  => '/tmp/489127ba5c89c',
-                'options'   => array('ignoreNoFile' => false, 'useByteString' => true, 'detectInfos' => true),
-                'validated' => false,
-                'received'  => false,
-                'filtered'  => false,
-            ),
-            'bar' => array(
-                'name'     => 'bar.png',
-                'type'     => 'image/png',
-                'size'     => 91136,
-                'tmp_name' => '/tmp/489128284b51f',
-                'options'  => array('ignoreNoFile' => false, 'useByteString' => true),
-                'validated' => false,
-                'received'  => false,
-                'filtered'  => false,
-            ),
-            'baz' => array(
-                'name'     => 'baz.text',
-                'type'     => 'text/plain',
-                'size'     => 1172,
-                'tmp_name' => $testfile,
-                'options'  => array('ignoreNoFile' => false, 'useByteString' => true),
-                'validated' => false,
-                'received'  => false,
-                'filtered'  => false,
-            ),
-            'file_0_' => array(
-                'name'      => 'foo.jpg',
-                'type'      => 'image/jpeg',
-                'size'      => 126976,
-                'tmp_name'  => '/tmp/489127ba5c89c',
-                'options'   => array('ignoreNoFile' => false, 'useByteString' => true),
-                'validated' => false,
-                'received'  => false,
-                'filtered'  => false,
-            ),
-            'file_1_' => array(
-                'name'     => 'baz.text',
-                'type'     => 'text/plain',
-                'size'     => 1172,
-                'tmp_name' => $testfile,
-                'options'  => array('ignoreNoFile' => false, 'useByteString' => true),
-                'validated' => false,
-                'received'  => false,
-                'filtered'  => false,
-            ),
-            'file' => array(
-                'name'      => 'foo.jpg',
-                'multifiles' => array(0 => 'file_0_', 1 => 'file_1_')
-            ),
-        );
-    }
-
-    public function send($options = null)
-    {
-        return;
-    }
-
-    public function receive($options = null)
-    {
-        $this->received = true;
-        return;
-    }
-
-    public function isSent($file = null)
-    {
-        return false;
-    }
-
-    public function isReceived($file = null)
-    {
-        return $this->received;
-    }
-
-    public function isUploaded($files = null)
-    {
-        return true;
-    }
-
-    public function isFiltered($files = null)
-    {
-        return true;
-    }
-
-    public static function getProgress()
-    {
-        return;
-    }
-
-    public function getTmpDir()
-    {
-        $this->_tmpDir = parent::_getTmpDir();
-    }
-
-    public function isPathWriteable($path)
-    {
-        return parent::_isPathWriteable($path);
-    }
-
-    public function addInvalidFile()
-    {
-        $this->_files += array(
-            'test' => array(
-                'name'      => 'test.txt',
-                'type'      => 'image/jpeg',
-                'size'      => 0,
-                'tmp_name'  => '',
-                'options'   => array('ignoreNoFile' => true, 'useByteString' => true),
-                'validated' => false,
-                'received'  => false,
-                'filtered'  => false,
-            )
-        );
-    }
-
 }

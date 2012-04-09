@@ -2,16 +2,16 @@
 
 namespace ZendTest\Form\Element\TestAsset;
 
-use Zend\File\Transfer\Adapter\AbstractAdapter;
+use Zend\File\Transfer\Adapter;
 
-class MockFileAdapter extends AbstractAdapter
+class MockFileAdapter extends Adapter\AbstractAdapter
 {
     public $received = false;
 
     public function __construct()
     {
         $testfile = __DIR__ . '/../../../File/Transfer/Adapter/_files/test.txt';
-        $this->_files = array(
+        $this->files = array(
             'foo' => array(
                 'name'       => 'foo.jpg',
                 'type'       => 'image/jpeg',

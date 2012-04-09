@@ -63,5 +63,20 @@ class CompilerDefinitionTest extends TestCase
         $definition->addDirectoryScanner(new DirectoryScanner(__DIR__ . '/../TestAsset/CompilerClasses'));
         $definition->addCodeScannerFile(new FileScanner(__DIR__ . '/../TestAsset/CompilerClasses/A.php'));
         $definition->compile();
+        $this->assertContains('ZendTest\Di\TestAsset\CompilerClasses\C', $definition->getClassSupertypes('ZendTest\Di\TestAsset\CompilerClasses\D'));
+        $this->assertContains('ZendTest\Di\TestAsset\CompilerClasses\C', $definition->getClassSupertypes('ZendTest\Di\TestAsset\CompilerClasses\E'));
+        $this->assertContains('ZendTest\Di\TestAsset\CompilerClasses\D', $definition->getClassSupertypes('ZendTest\Di\TestAsset\CompilerClasses\E'));
+    }
+    
+    public function testCompilerFileScanner()
+    {
+        $definition = new CompilerDefinition;
+        $definition->addCodeScannerFile(new FileScanner(__DIR__ . '/../TestAsset/CompilerClasses/C.php'));
+        $definition->addCodeScannerFile(new FileScanner(__DIR__ . '/../TestAsset/CompilerClasses/D.php'));
+        $definition->addCodeScannerFile(new FileScanner(__DIR__ . '/../TestAsset/CompilerClasses/E.php'));
+        $definition->compile();
+        $this->assertContains('ZendTest\Di\TestAsset\CompilerClasses\C', $definition->getClassSupertypes('ZendTest\Di\TestAsset\CompilerClasses\D'));
+        $this->assertContains('ZendTest\Di\TestAsset\CompilerClasses\C', $definition->getClassSupertypes('ZendTest\Di\TestAsset\CompilerClasses\E'));
+        $this->assertContains('ZendTest\Di\TestAsset\CompilerClasses\D', $definition->getClassSupertypes('ZendTest\Di\TestAsset\CompilerClasses\E'));
     }
 }

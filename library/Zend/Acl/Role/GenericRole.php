@@ -20,16 +20,15 @@
 
 namespace Zend\Acl\Role;
 
-use Zend\Acl\Role;
+use Zend\Acl\Role\RoleInterface;
 
 /**
- * @uses       Zend\Acl\Role
  * @category   Zend
  * @package    Zend_Acl
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class GenericRole implements Role
+class GenericRole implements RoleInterface
 {
     /**
      * Unique id of Role
@@ -50,7 +49,7 @@ class GenericRole implements Role
     }
 
     /**
-     * Defined by Zend\Acl\Role; returns the Role identifier
+     * Defined by Zend\Acl\Role\RoleInterface; returns the Role identifier
      *
      * @return string
      */
@@ -60,7 +59,7 @@ class GenericRole implements Role
     }
 
     /**
-     * Defined by Zend\Acl\Role; returns the Role identifier
+     * Defined by Zend\Acl\Role\RoleInterface; returns the Role identifier
      * Proxies to getRoleId()
      *
      * @return string

@@ -2,10 +2,10 @@
 
 namespace ZendTest\Acl\TestAsset\UseCase1;
 
-use Zend\Acl\Assertion,
+use Zend\Acl\Assertion\AssertionInterface,
     Zend\Acl as ZendAcl;
 
-class UserIsBlogPostOwnerAssertion implements Assertion
+class UserIsBlogPostOwnerAssertion implements AssertionInterface
 {
 
     public $lastAssertRole = null;
@@ -13,7 +13,7 @@ class UserIsBlogPostOwnerAssertion implements Assertion
     public $lastAssertPrivilege = null;
     public $assertReturnValue = true;
 
-    public function assert(ZendAcl\Acl $acl, ZendAcl\Role $user = null, ZendAcl\Resource $blogPost = null, $privilege = null)
+    public function assert(ZendAcl\Acl $acl, ZendAcl\Role\RoleInterface $user = null, ZendAcl\Resource\ResourceInterface $blogPost = null, $privilege = null)
     {
         $this->lastAssertRole      = $user;
         $this->lastAssertResource  = $blogPost;

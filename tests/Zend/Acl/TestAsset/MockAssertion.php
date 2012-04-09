@@ -4,7 +4,7 @@ namespace ZendTest\Acl\TestAsset;
 
 use Zend\Acl;
 
-class MockAssertion implements Acl\Assertion
+class MockAssertion implements Acl\Assertion\AssertionInterface
 {
     protected $_returnValue;
 
@@ -13,7 +13,7 @@ class MockAssertion implements Acl\Assertion
         $this->_returnValue = (bool) $returnValue;
     }
 
-    public function assert(Acl\Acl $acl, Acl\Role $role = null, Acl\Resource $resource = null,
+    public function assert(Acl\Acl $acl, Acl\Role\RoleInterface $role = null, Acl\Resource\ResourceInterface $resource = null,
                            $privilege = null)
     {
        return $this->_returnValue;

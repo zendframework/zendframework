@@ -33,9 +33,8 @@ use Zend\Db\Adapter\Adapter,
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  *
  * @property Adapter $adapter
- * @property int $lastInsertId
+ * @property int $lastInsertValue
  * @property string $tableName
- * @property Sql\Select $selectWhere
  */
 class TableGateway implements TableGatewayInterface
 {
@@ -49,11 +48,6 @@ class TableGateway implements TableGatewayInterface
      * @var string
      */
     protected $table = null;
-
-    /**
-     * @var null|string
-     */
-    protected $schema = null;
 
     /**
      * @var ResultSet
@@ -76,8 +70,8 @@ class TableGateway implements TableGatewayInterface
      * 
      * @param string $table
      * @param Adapter $adapter
-     * @param string $schema
-     * @param ResultSet $selectResultPrototype 
+     * @param ResultSet $selectResultPrototype
+     * @param Sql\Sql $selectResultPrototype
      */
     public function __construct($table, Adapter $adapter, ResultSet $selectResultPrototype = null, Sql\Sql $sql = null)
     {
@@ -107,7 +101,7 @@ class TableGateway implements TableGatewayInterface
     /**
      * Get adapter
      * 
-     * @return type 
+     * @return Adapter
      */
     public function getAdapter()
     {
@@ -161,8 +155,8 @@ class TableGateway implements TableGatewayInterface
     public function selectWith(Sql\Select $select)
     {
         $selectState = $select->getRawState();
-        if ($selectState['table'] != $this->tableName || $selectState['schema'] != $this->schema) {
-            throw new \RuntimeException('The table name and schema of the provided select object must match that of the table');
+        if ($selectState['table'] != $this->table) {
+            throw new \RuntimeException('The table name of the provided select object must match that of the table');
         }
 
         $statement = $this->adapter->createStatement();
@@ -183,7 +177,6 @@ class TableGateway implements TableGatewayInterface
     public function insert($set)
     {
         $insert = $this->sql->insert();
-        $insert->into($this->tableName, $this->schema);
         $insert->values($set);
 
         $statement = $this->adapter->createStatement();
@@ -203,8 +196,8 @@ class TableGateway implements TableGatewayInterface
      */
     public function update($set, $where = null)
     {
-        $update = $this->sql->update();
-        $update->table($this->tableName, $this->schema);
+        $sql = $this->sql;
+        $update = $sql->update();
         $update->set($set);
         $update->where($where);
 
@@ -224,7 +217,6 @@ class TableGateway implements TableGatewayInterface
     public function delete($where)
     {
         $delete = $this->sql->delete();
-        $delete->from($this->tableName, $this->schema);
         if ($where instanceof \Closure) {
             $where($delete);
         } else {
@@ -257,12 +249,12 @@ class TableGateway implements TableGatewayInterface
     public function __get($name)
     {
         switch (strtolower($name)) {
-            case 'lastinsertid':
-                return $this->lastInsertId;
+            case 'lastinsertvalue':
+                return $this->lastInsertValue;
             case 'adapter':
                 return $this->adapter;
-            case 'tablename':
-                return $this->tableName;
+            case 'table':
+                return $this->table;
         }
         throw new \Exception('Invalid magic property on adapter');
     }

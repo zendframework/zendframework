@@ -221,13 +221,13 @@ class Update extends AbstractSql implements SqlInterface, PreparableSqlInterface
     /**
      * Get SQL string for statement
      * 
-     * @param  null|PlatformInterface $platform If null, defaults to Sql92
+     * @param  null|PlatformInterface $adapterPlatform If null, defaults to Sql92
      * @return string
      */
-    public function getSqlString(PlatformInterface $platform = null)
+    public function getSqlString(PlatformInterface $adapterPlatform = null)
     {
-        $platform = ($platform) ?: new Sql92;
-        $table = $platform->quoteIdentifier($this->table);
+        $adapterPlatform = ($adapterPlatform) ?: new Sql92;
+        $table = $adapterPlatform->quoteIdentifier($this->table);
 
 //        if ($this->schema != '') {
 //            $table = $platform->quoteIdentifier($this->schema) . $platform->getIdentifierSeparator() . $table;
@@ -237,14 +237,14 @@ class Update extends AbstractSql implements SqlInterface, PreparableSqlInterface
         if (is_array($set)) {
             $setSql = array();
             foreach ($set as $setName => $setValue) {
-                $setSql[] = $platform->quoteIdentifier($setName) . ' = ' . $platform->quoteValue($setValue);
+                $setSql[] = $adapterPlatform->quoteIdentifier($setName) . ' = ' . $adapterPlatform->quoteValue($setValue);
             }
             $set = implode(', ', $setSql);
         }
 
         $sql = sprintf($this->specifications[self::SPECIFICATION_UPDATE], $table, $set);
         if ($this->where->count() > 0) {
-            $whereParts = $this->processExpression($this->where, $platform, null, 'where');
+            $whereParts = $this->processExpression($this->where, $adapterPlatform, null, 'where');
             $sql .= ' ' . sprintf($this->specifications[self::SPECIFICATION_WHERE], $whereParts['sql']);
         }
         return $sql;

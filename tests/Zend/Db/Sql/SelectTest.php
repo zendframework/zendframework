@@ -4,6 +4,7 @@ namespace ZendTest\Db\Sql;
 use Zend\Db\Sql\Select,
     Zend\Db\Sql\Expression,
     Zend\Db\Sql\Where,
+    Zend\Db\Sql\TableIdentifier,
     Zend\Db\Adapter\ParameterContainer;
 
 class SelectTest extends \PHPUnit_Framework_TestCase
@@ -29,7 +30,6 @@ class SelectTest extends \PHPUnit_Framework_TestCase
     public function testGetRawStateViaFrom(Select $select)
     {
         $this->assertEquals('foo', $select->getRawState('table'));
-        $this->assertEquals('bar', $select->getRawState('schema'));
     }
 
     /**
@@ -252,9 +252,9 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         $select0->from('foo');
         $sql0 = 'SELECT "foo".* FROM "foo"';
 
-        // table + schema
+        // table as TableIdentifier
         $select1 = new Select();
-        $select1->from('foo', 'bar');
+        $select1->from(new TableIdentifier('foo', 'bar'));
         $sql1 = 'SELECT "foo".* FROM "bar"."foo"';
 
         // columns

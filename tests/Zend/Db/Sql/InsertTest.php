@@ -35,7 +35,6 @@ class InsertTest extends \PHPUnit_Framework_TestCase
     {
         $this->insert->into('table', 'schema');
         $this->assertEquals('table', $this->readAttribute($this->insert, 'table'));
-        $this->assertEquals('schema', $this->readAttribute($this->insert, 'schema'));
     }
 
     /**

@@ -191,22 +191,22 @@ class Insert implements SqlInterface, PreparableSqlInterface
     /**
      * Get SQL string for this statement
      * 
-     * @param  null|PlatformInterface $platform Defaults to Sql92 if none provided
+     * @param  null|PlatformInterface $adapterPlatform Defaults to Sql92 if none provided
      * @return string
      */
-    public function getSqlString(PlatformInterface $platform = null)
+    public function getSqlString(PlatformInterface $adapterPlatform = null)
     {
-        $platform = ($platform) ?: new Sql92;
-        $table = $platform->quoteIdentifier($this->table);
+        $adapterPlatform = ($adapterPlatform) ?: new Sql92;
+        $table = $adapterPlatform->quoteIdentifier($this->table);
 
 //        if ($this->schema != '') {
 //            $table = $platform->quoteIdentifier($this->schema) . $platform->getIdentifierSeparator() . $table;
 //        }
 
-        $columns = array_map(array($platform, 'quoteIdentifier'), $this->columns);
+        $columns = array_map(array($adapterPlatform, 'quoteIdentifier'), $this->columns);
         $columns = implode(', ', $columns);
 
-        $values = array_map(array($platform, 'quoteValue'), $this->values);
+        $values = array_map(array($adapterPlatform, 'quoteValue'), $this->values);
         $values = implode(', ', $values);
 
         return sprintf($this->specifications[self::SPECIFICATION_INSERT], $table, $columns, $values);

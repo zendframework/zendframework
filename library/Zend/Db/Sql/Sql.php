@@ -67,7 +67,7 @@ class Sql
                 $this->table
             ));
         }
-        return new Select($table);
+        return new Select(($table) ?: $this->table);
     }
 
     public function insert($table = null)
@@ -78,7 +78,7 @@ class Sql
                 $this->table
             ));
         }
-        return new Insert($table);
+        return new Insert(($table) ?: $this->table);
     }
 
     public function update($table = null)
@@ -89,7 +89,7 @@ class Sql
                 $this->table
             ));
         }
-        return new Update($table);
+        return new Update(($table) ?: $this->table);
     }
 
     public function delete($table = null)
@@ -100,6 +100,6 @@ class Sql
                 $this->table
             ));
         }
-        return new Delete($table);
+        return new Delete(($table) ?: $this->table);
     }
 }

@@ -177,13 +177,13 @@ class Delete extends AbstractSql implements SqlInterface, PreparableSqlInterface
      *
      * Platform defaults to Sql92 if none provided
      * 
-     * @param  null|PlatformInterface $platform 
+     * @param  null|PlatformInterface $adapterPlatform
      * @return string
      */
-    public function getSqlString(PlatformInterface $platform = null)
+    public function getSqlString(PlatformInterface $adapterPlatform = null)
     {
-        $platform = ($platform) ?: new Sql92;
-        $table = $platform->quoteIdentifier($this->table);
+        $adapterPlatform = ($adapterPlatform) ?: new Sql92;
+        $table = $adapterPlatform->quoteIdentifier($this->table);
 
 //        if ($this->schema != '') {
 //            $table = $platform->quoteIdentifier($this->schema) . $platform->getIdentifierSeparator() . $table;
@@ -192,7 +192,7 @@ class Delete extends AbstractSql implements SqlInterface, PreparableSqlInterface
         $sql = sprintf($this->specifications[self::SPECIFICATION_DELETE], $table);
 
         if ($this->where->count() > 0) {
-            $whereParts = $this->processExpression($this->where, $platform, null, 'where');
+            $whereParts = $this->processExpression($this->where, $adapterPlatform, null, 'where');
             $sql .= ' ' . sprintf($this->specifications[self::SPECIFICATION_WHERE], $whereParts['sql']);
         }
 

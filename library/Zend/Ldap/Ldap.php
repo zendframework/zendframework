@@ -73,39 +73,16 @@ class Ldap
     /**
      * Caches the RootDse
      *
-     * @var Node
+     * @var Node\RootDse
      */
     protected $rootDse = null;
 
     /**
      * Caches the schema
      *
-     * @var Node
+     * @var Node\Schema
      */
     protected $schema = null;
-
-    /**
-     * @deprecated will be removed, use {@see Filter\AbstractFilter::escapeValue()}
-     * @param  string $str The string to escape.
-     * @return string The escaped string
-     */
-    public static function filterEscape($str)
-    {
-        return Filter\AbstractFilter::escapeValue($str);
-    }
-
-    /**
-     * @deprecated will be removed, use {@see Dn::checkDn()}
-     * @param  string $dn   The DN to parse
-     * @param  array  $keys An optional array to receive DN keys (e.g. CN, OU, DC, ...)
-     * @param  array  $vals An optional array to receive DN values
-     * @return boolean True if the DN was successfully parsed or false if the string is
-     *             not a valid DN.
-     */
-    public static function explodeDn($dn, array &$keys = null, array &$vals = null)
-    {
-        return Dn::checkDn($dn, $keys, $vals);
-    }
 
     /**
      * Constructor.
@@ -141,6 +118,7 @@ class Ldap
         if (!is_resource($this->resource) || $this->boundUser === false) {
             $this->bind();
         }
+
         return $this->resource;
     }
 
@@ -161,6 +139,7 @@ class Ldap
             }
             return $err;
         }
+
         return 0;
     }
 
@@ -204,6 +183,7 @@ class Ldap
         } else {
             $message .= '(no error message from LDAP)';
         }
+
         return $message;
     }
 
@@ -243,7 +223,7 @@ class Ldap
      *  networkTimeout
      *
      * @param  array|Traversable $options Options used in connecting, binding, etc.
-     * @return Ldap\Ldap Provides a fluent interface
+     * @return Ldap Provides a fluent interface
      * @throws Exception\LdapException
      */
     public function setOptions($options)
@@ -305,6 +285,7 @@ class Ldap
             throw new Exception\LdapException(null, "Unknown Zend\\Ldap\\Ldap option: $key");
         }
         $this->options = $permittedOptions;
+
         return $this;
     }
 
@@ -488,6 +469,7 @@ class Ldap
             // is there a better way to detect this?
             return sprintf("(&(objectClass=user)(sAMAccountName=%s))", $aname);
         }
+
         return sprintf("(&(objectClass=posixAccount)(uid=%s))", $aname);
     }
 
@@ -531,6 +513,7 @@ class Ldap
         }
         $acctname = $this->getCanonicalAccountName($acctname, self::ACCTNAME_FORM_USERNAME);
         $acct     = $this->getAccount($acctname, array('dn'));
+
         return $acct['dn'];
     }
 
@@ -554,6 +537,7 @@ class Ldap
         if (strcasecmp($dname, $accountDomainNameShort) == 0) {
             return true;
         }
+
         return false;
     }
 
@@ -649,6 +633,7 @@ class Ldap
             }
         }
         $accounts->close();
+
         throw new Exception\LdapException($this, $str, $code);
     }
 
@@ -761,6 +746,7 @@ class Ldap
             $this->disconnect();
             throw $zle;
         }
+
         throw new Exception\LdapException(null, "Failed to connect to LDAP server: $host:$port");
     }
 
@@ -845,6 +831,7 @@ class Ldap
             $zle = new Exception\LdapException($this, $message);
         }
         $this->disconnect();
+
         throw $zle;
     }
 
@@ -930,6 +917,7 @@ class Ldap
         }
 
         $iterator = new Collection\DefaultIterator($this, $search);
+
         return $this->createCollection($iterator, $collectionClass);
     }
 
@@ -955,6 +943,7 @@ class Ldap
                 throw new Exception\LdapException(null,
                     "Class '$collectionClass' must subclass 'Zend\\Ldap\\Collection'");
             }
+
             return new $collectionClass($iterator);
         }
     }
@@ -979,6 +968,7 @@ class Ldap
                 throw $e;
             }
         }
+
         return $result->count();
     }
 
@@ -1046,6 +1036,7 @@ class Ldap
         if ((bool)$reverseSort === true) {
             $items = array_reverse($items, false);
         }
+
         return $items;
     }
 
@@ -1056,7 +1047,7 @@ class Ldap
      * @param  array     $attributes
      * @param  boolean   $throwOnNotFound
      * @return array
-     * @throws Exception\LdapException
+     * @throws null|Exception\LdapException
      */
     public function getEntry($dn, array $attributes = array(), $throwOnNotFound = false)
     {
@@ -1065,6 +1056,7 @@ class Ldap
                 "(objectClass=*)", $dn, self::SEARCH_SCOPE_BASE,
                 $attributes, null
             );
+
             return $result->getFirst();
         } catch (Exception\LdapException $e) {
             if ($throwOnNotFound !== false) {
@@ -1163,6 +1155,7 @@ class Ldap
         if ($isAdded === false) {
             throw new Exception\LdapException($this, 'adding: ' . $dn->toString());
         }
+
         return $this;
     }
 
@@ -1202,6 +1195,7 @@ class Ldap
                 throw new Exception\LdapException($this, 'updating: ' . $dn->toString());
             }
         }
+
         return $this;
     }
 
@@ -1255,6 +1249,7 @@ class Ldap
         if ($isDeleted === false) {
             throw new Exception\LdapException($this, 'deleting: ' . $dn);
         }
+
         return $this;
     }
 
@@ -1286,6 +1281,7 @@ class Ldap
             $children[] = $childDn;
         }
         @ldap_free_result($search);
+
         return $children;
     }
 
@@ -1315,6 +1311,7 @@ class Ldap
 
         $newDnParts = array_merge(array(array_shift($orgDnParts)), $newParentDnParts);
         $newDn      = Dn::fromArray($newDnParts);
+
         return $this->rename($from, $newDn, $recursively, $alwaysEmulate);
     }
 
@@ -1380,6 +1377,7 @@ class Ldap
             $this->copy($from, $to, $recursively);
             $this->delete($from, $recursively);
         }
+
         return $this;
     }
 
@@ -1408,6 +1406,7 @@ class Ldap
 
         $newDnParts = array_merge(array(array_shift($orgDnParts)), $newParentDnParts);
         $newDn      = Dn::fromArray($newDnParts);
+
         return $this->copy($from, $newDn, $recursively);
     }
 
@@ -1440,6 +1439,7 @@ class Ldap
                 $this->copy($c, $newChild, true);
             }
         }
+
         return $this;
     }
 
@@ -1477,6 +1477,7 @@ class Ldap
         if ($this->rootDse === null) {
             $this->rootDse = Node\RootDse::create($this);
         }
+
         return $this->rootDse;
     }
 
@@ -1491,6 +1492,7 @@ class Ldap
         if ($this->schema === null) {
             $this->schema = Node\Schema::create($this);
         }
+
         return $this->schema;
     }
 }

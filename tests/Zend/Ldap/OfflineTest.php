@@ -23,7 +23,7 @@ namespace ZendTest\Ldap;
 
 use Zend\Config,
     Zend\Ldap,
-    Zend\Ldap\Exception\LdapException;
+    Zend\Ldap\Exception;
 
 /**
  * @category   Zend
@@ -66,22 +66,20 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
         try {
             $this->ldap->setOptions(array($optionName => 'irrelevant'));
             $this->fail('Expected Zend\Ldap\Exception\LdapException not thrown');
-        } catch (LdapException $e) {
+        } catch (Exception\LdapException $e) {
             $this->assertEquals("Unknown Zend\Ldap\Ldap option: $optionName", $e->getMessage());
         }
     }
 
     public function testException()
     {
-        $e = new LdapException(null, '', 0);
+        $e = new Exception\LdapException(null, '', 0);
         $this->assertEquals('no exception message', $e->getMessage());
         $this->assertEquals(0, $e->getCode());
-        $this->assertEquals(0, $e->getErrorCode());
 
-        $e = new LdapException(null, '', 15);
+        $e = new Exception\LdapException(null, '', 15);
         $this->assertEquals('0xf: no exception message', $e->getMessage());
         $this->assertEquals(15, $e->getCode());
-        $this->assertEquals(15, $e->getErrorCode());
     }
 
     public function testOptionsGetter()

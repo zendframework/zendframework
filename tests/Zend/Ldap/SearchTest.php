@@ -22,8 +22,8 @@
 namespace ZendTest\Ldap;
 
 use Zend\Ldap,
-Zend\Ldap\Collection,
-Zend\Ldap\Exception\LdapException;
+    Zend\Ldap\Collection,
+    Zend\Ldap\Exception;
 
 /**
  * @category   Zend
@@ -311,7 +311,7 @@ class SearchTest extends AbstractOnlineTestCase
                 'This_Class_Does_Not_Exist'
             );
             $this->fail('Expected exception not thrown');
-        } catch (LdapException $zle) {
+        } catch (Exception\LdapException $zle) {
             $this->assertContains("Class 'This_Class_Does_Not_Exist' can not be found",
                 $zle->getMessage()
             );
@@ -330,7 +330,7 @@ class SearchTest extends AbstractOnlineTestCase
                 'ZendTest\Ldap\CollectionClassNotSubclassingZendLDAPCollection'
             );
             $this->fail('Expected exception not thrown');
-        } catch (LdapException $zle) {
+        } catch (Exception\LdapException $zle) {
             $this->assertContains(
                 "Class 'ZendTest\\Ldap\\CollectionClassNotSubclassingZendLDAPCollection' must subclass 'Zend\\Ldap\\Collection'",
                 $zle->getMessage()

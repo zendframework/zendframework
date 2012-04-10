@@ -49,7 +49,8 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
     const SPECIFICATION_GROUP = 'group';
     const SPECIFICATION_HAVING = 'having';
     const SPECIFICATION_ORDER = 'order';
-    const SPECIFICATION_FETCH = 'fetch';
+    const SPECIFICATION_LIMIT = 'limit';
+    const SPECIFICATION_OFFSET = 'offset';
     const JOIN_INNER = 'inner';
     const JOIN_OUTER = 'outer';
     const JOIN_LEFT = 'left';
@@ -69,7 +70,8 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
         self::SPECIFICATION_GROUP  => 'GROUP BY %1$s',
         self::SPECIFICATION_HAVING => 'HAVING %1$s',
         self::SPECIFICATION_ORDER  => 'ORDER BY %1$s',
-        self::SPECIFICATION_FETCH  => 'FETCH FIRST %1$s'
+        self::SPECIFICATION_LIMIT  => 'LIMIT %1$s',
+        self::SPECIFICATION_OFFSET => 'OFFSET %1$s'
     );
 
     /**

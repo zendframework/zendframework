@@ -53,6 +53,13 @@ class JsonRenderer implements Renderer, TreeRendererInterface
     protected $resolver;
 
     /**
+     * JSONP callback (if set, wraps the return in a function call)
+     *
+     * @var string
+     */
+    protected $jsonpCallback = null;
+
+    /**
      * Return the template engine object, if any
      *
      * If using a third-party template engine, such as Smarty, patTemplate,
@@ -89,7 +96,29 @@ class JsonRenderer implements Renderer, TreeRendererInterface
         $this->mergeUnnamedChildren = (bool) $mergeUnnamedChildren;
         return $this;
     }
-    
+
+	/**
+     * Set the JSONP callback function name
+     *
+     * @param  string $callback
+     * @return JsonpModel
+     */
+    public function setJsonpCallback($callback)
+    {
+        $this->jsonpCallback = $callback;
+        return $this;
+    }
+
+    /**
+     * Returns whether or not the jsonpCallback has been set
+     *
+     * @return bool
+     */
+    public function hasJsonpCallback()
+    {
+        return !is_null($this->jsonpCallback);
+    }
+
     /**
      * Should we merge unnamed children?
      *
@@ -120,6 +149,9 @@ class JsonRenderer implements Renderer, TreeRendererInterface
                 $values = Json::encode($values);
             }
 
+            if ($this->hasJsonpCallback()) {
+                $values = $this->jsonpCallback.'('.$values.');';
+            }
             return $values;
         }
 
@@ -127,15 +159,18 @@ class JsonRenderer implements Renderer, TreeRendererInterface
         // Serialize $nameOrModel
         if (null === $values) {
             if (!is_object($nameOrModel) || $nameOrModel instanceof JsonSerializable) {
-                return Json::encode($nameOrModel);
-            }
-
-            if ($nameOrModel instanceof Traversable) {
+                $return = Json::encode($nameOrModel);
+            } elseif ($nameOrModel instanceof Traversable) {
                 $nameOrModel = ArrayUtils::iteratorToArray($nameOrModel);
-                return Json::encode($nameOrModel);
+                $return = Json::encode($nameOrModel);
+            } else {
+                $return = Json::encode(get_object_vars($nameOrModel));
             }
 
-            return Json::encode(get_object_vars($nameOrModel));
+            if ($this->hasJsonpCallback()) {
+                $return = $this->jsonpCallback.'('.$return.');';
+            }
+            return $return;
         }
 
         // use case 3: Both $nameOrModel and $values are populated

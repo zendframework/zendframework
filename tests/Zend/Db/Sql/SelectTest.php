@@ -221,6 +221,29 @@ class SelectTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @author Rob Allen
+     * @testdox unit test: Test order()
+     * @covers Zend\Db\Sql\Select::order
+     */
+    public function testOrder()
+    {
+        $select = new Select;
+        $return = $select->order('id DESC');
+        $this->assertSame($select, $return); // test fluent interface
+        $this->assertEquals(array('id DESC'), $select->getRawState('order'));
+
+        $select = new Select;
+        $select->order('id DESC')
+            ->order('name ASC, age DESC');
+        $this->assertEquals(array('id DESC', 'name ASC', 'age DESC'), $select->getRawState('order'));
+
+        $select = new Select;
+        $select->order(array('name ASC', 'age DESC'));
+        $this->assertEquals(array('name ASC', 'age DESC'), $select->getRawState('order'));
+
+    }
+
+    /**
      * @testdox unit test: Test prepareStatement() will produce expected sql and parameters based on a variety of provided arguments [uses data provider]
      * @covers Zend\Db\Sql\Select::prepareStatement
      * @dataProvider providerForPrepareStatement
@@ -262,7 +285,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         $select2->from('foo')->columns(array('bar', 'baz'));
         $sql2 = 'SELECT "foo"."bar", "foo"."baz" FROM "foo"';
 
-        // columns with column fragement (proper quoting)
+        // columns with column fragment (proper quoting)
         $select3 = new Select;
         $select3->from('foo')->columns(array('baz AS bar'));
         $sql3 = 'SELECT "foo"."baz" AS "bar" FROM "foo"';
@@ -311,16 +334,72 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         $select10->from('foo')->join('zac', 'm = n', array('bar', 'baz'), Select::JOIN_OUTER);
         $sql10 = 'SELECT "foo".*, "zac"."bar", "zac"."baz" FROM "foo" OUTER JOIN "zac" ON "m" = "n"';
 
-        // where (simple string)
+        // join with column aliases
         $select11 = new Select;
-        $select11->from('foo')->where('x = 5');
-        $sql11 = 'SELECT "foo".* FROM "foo" WHERE x = 5';
+        $select11->from('foo')->join('zac', 'm = n', array('BAR' => 'bar', 'BAZ' => 'baz'));
+        $sql11 = 'SELECT "foo".*, "zac"."bar" AS "BAR", "zac"."baz" AS "BAZ" FROM "foo" INNER JOIN "zac" ON "m" = "n"';
+
+        // where (simple string)
+        $select12 = new Select;
+        $select12->from('foo')->where('x = 5');
+        $sql12 = 'SELECT "foo".* FROM "foo" WHERE x = 5';
 
         // where (returning parameters)
-        $select12 = new Select;
-        $select12->from('foo')->where(array('x = ?' => 5));
-        $sql12 = 'SELECT "foo".* FROM "foo" WHERE x = ?';
-        $params12 = array(5);
+        $select13 = new Select;
+        $select13->from('foo')->where(array('x = ?' => 5));
+        $sql13 = 'SELECT "foo".* FROM "foo" WHERE x = ?';
+        $params13 = array(5);
+
+        // group
+        $select14 = new Select;
+        $select14->from('foo')->group(array('col1', 'col2'));
+        $sql14 = 'SELECT "foo".* FROM "foo" GROUP BY "col1", "col2"';
+
+        $select15 = new Select;
+        $select15->from('foo')->group('col1')->group('col2');
+        $sql15 = 'SELECT "foo".* FROM "foo" GROUP BY "col1", "col2"';
+
+        $select16 = new Select;
+        $select16->from('foo')->group(new Expression('DAY(?)', array('col1'), array(Expression::TYPE_IDENTIFIER)));
+        $sql16 = 'SELECT "foo".* FROM "foo" GROUP BY DAY("col1")';
+
+        // having (simple string)
+        $select17 = new Select;
+        $select17->from('foo')->having('x = 5');
+        $sql17 = 'SELECT "foo".* FROM "foo" HAVING x = 5';
+
+        // having (returning parameters)
+        $select18 = new Select;
+        $select18->from('foo')->having(array('x = ?' => 5));
+        $sql18 = 'SELECT "foo".* FROM "foo" HAVING x = ?';
+        $params18 = array(5);
+
+        // order
+        $select19 = new Select;
+        $select19->from('foo')->order('c1');
+        $sql19 = 'SELECT "foo".* FROM "foo" ORDER BY "c1" ASC';
+
+        $select20 = new Select;
+        $select20->from('foo')->order(array('c1', 'c2'));
+        $sql20 = 'SELECT "foo".* FROM "foo" ORDER BY "c1" ASC, "c2" ASC';
+
+        $select21 = new Select;
+        $select21->from('foo')->order(array('c1' => 'DESC', 'c2' => 'Asc')); // notice partially lower case ASC
+        $sql21 = 'SELECT "foo".* FROM "foo" ORDER BY "c1" DESC, "c2" ASC';
+
+        $select22 = new Select;
+        $select22->from('foo')->order(array('c1' => 'asc'))->order('c2 desc'); // notice partially lower case ASC
+        $sql22 = 'SELECT "foo".* FROM "foo" ORDER BY "c1" ASC, "c2" DESC';
+
+        // limit
+        $select23 = new Select;
+        $select23->from('foo')->limit(5);
+        $sql23 = 'SELECT "foo".* FROM "foo" LIMIT 5';
+
+        // limit with offset
+        $select24 = new Select;
+        $select24->from('foo')->limit(5)->offset(10);
+        $sql24 = 'SELECT "foo".* FROM "foo" LIMIT 5 OFFSET 10';
 
         return array(
             array($select0, $sql0),
@@ -335,7 +414,19 @@ class SelectTest extends \PHPUnit_Framework_TestCase
             array($select9, $sql9),
             array($select10, $sql10),
             array($select11, $sql11),
-            array($select12, $sql12, $params12)
+            array($select12, $sql12),
+            array($select13, $sql13, $params13),
+            array($select14, $sql14),
+            array($select15, $sql15),
+            array($select16, $sql16),
+            array($select17, $sql17),
+            array($select18, $sql18, $params18),
+            array($select19, $sql19),
+            array($select20, $sql20),
+            array($select21, $sql21),
+            array($select22, $sql22),
+            array($select23, $sql23),
+            array($select24, $sql24),
         );
     }
 
@@ -358,8 +449,11 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         $data[7][1] = 'SELECT (COUNT("some_column") + \'5\') AS "bar" FROM "foo"';
         unset($data[7][2]); // remove parameters
 
-        $data[12][1] = 'SELECT "foo".* FROM "foo" WHERE x = \'5\'';
-        unset($data[12][2]); // remove parameters
+        $data[13][1] = 'SELECT "foo".* FROM "foo" WHERE x = \'5\'';
+        unset($data[13][2]); // remove parameters
+
+        $data[18][1] = 'SELECT "foo".* FROM "foo" HAVING x = \'5\'';
+        unset($data[18][2]); // remove parameters
 
         return $data;
     }

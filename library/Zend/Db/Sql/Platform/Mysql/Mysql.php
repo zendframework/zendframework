@@ -7,11 +7,18 @@ use Zend\Db\Sql\Platform\PlatformInterface;
 class Mysql implements PlatformInterface
 {
 
-    public function create($sqlObject)
+    public function __construct()
     {
-        if ($sqlObject instanceof \Zend\Db\Sql\Select) {
-            return new Select($sqlObject);
-        }
+
     }
 
+    function canPrepareSqlObject(PreparableSqlInterface $sqlObject)
+    {
+        // TODO: Implement canPrepareSqlObject() method.
+    }
+
+    public function prepareSqlObject(PreparableSqlInterface $sqlObject)
+    {
+        // TODO: Implement prepareSqlObject() method.
+    }
 }

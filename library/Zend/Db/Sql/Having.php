@@ -14,24 +14,26 @@
  *
  * @category   Zend
  * @package    Zend_Db
- * @subpackage Adapter
+ * @subpackage Sql
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Db\Adapter\Driver;
+namespace Zend\Db\Sql;
+
+use Zend\Db\Adapter\Adapter,
+Zend\Db\Adapter\Driver\StatementInterface,
+Zend\Db\Adapter\Platform\PlatformInterface,
+Zend\Db\Adapter\Platform\Sql92;
 
 /**
  * @category   Zend
  * @package    Zend_Db
- * @subpackage Adapter
+ * @subpackage Sql
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface ResultInterface extends \Countable, \Iterator
+class Having extends Predicate\Predicate
 {
-    public function isQueryResult();
-    public function getAffectedRows();
-    public function getGeneratedValue();
-    public function getResource();
+
 }

@@ -14,18 +14,17 @@ abstract class AbstractSql
         // static counter for the number of times this method was invoked across the PHP runtime
         static $runtimeExpressionPrefix = 0;
 
-        $return = array(
-            'sql' => '',
-            'parameters' => array()
-        );
-
-        // get the prepare type from the driver,
-        if ($driver !== null) {
+        if ($driver) {
             $prepareType = $driver->getPrepareType();
             if ((!is_string($namedParameterPrefix) || $namedParameterPrefix == '') && $prepareType == 'named') {
                 $namedParameterPrefix = sprintf('expr%04dParam', ++$runtimeExpressionPrefix);
             }
         }
+
+        $return = array(
+            'sql' => '',
+            'parameters' => array()
+        );
 
         // initialize variables
         $parts = $expression->getExpressionData();
@@ -53,7 +52,7 @@ abstract class AbstractSql
 
                     // if prepareType is set, it means that this particular value must be
                     // passed back to the statement in a way it can be used as a placeholder value
-                    if (isset($prepareType)) {
+                    if ($driver) {
                         if ($prepareType == 'positional') {
                             $return['parameters'][] = $value;
                             $values[$vIndex] = $driver->formatParameterName(null);
@@ -77,12 +76,4 @@ abstract class AbstractSql
         return $return;
     }
 
-    protected function applySpecification($name, array $vArgs)
-    {
-        if (!array_key_exists($name, $this->specifications)) {
-            throw new \RuntimeException('Invalid specification index');
-        }
-
-        return vsprintf($this->specifications[$name], $vArgs);
-    }
 }

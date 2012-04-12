@@ -23,7 +23,7 @@ namespace Zend\Db\Sql;
 
 use Zend\Db\Adapter\Adapter,
     Zend\Db\Adapter\Driver\StatementInterface,
-    Zend\Db\Adapter\Platform\PlatformInterface as AdapterPlatformInterface,
+    Zend\Db\Adapter\Platform\PlatformInterface,
     Zend\Db\Adapter\Platform\Sql92 as AdapterSql92Platform,
     Zend\Db\Adapter\ParameterContainer,
     Zend\Db\Adapter\ParameterContainerInterface;
@@ -107,17 +107,27 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
     /**
      * @var null|string
      */
-    protected $order = null;
+    protected $order = array();
+
+    /**
+     * @var null|array
+     */
+    protected $group = null;
+
+    /**
+     * @var null|string|array
+     */
+    protected $having = null;
 
     /**
      * @var int|null
      */
-    protected $fetchNumber = null;
+    protected $limit = null;
 
     /**
      * @var int|null
      */
-    protected $fetchOffset = null;
+    protected $offset = null;
 
 
     /**
@@ -135,6 +145,7 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
         }
 
         $this->where = new Where;
+        $this->having = new Having;
     }
 
     /**
@@ -238,25 +249,84 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
         return $this;
     }
 
+    public function group($group)
+    {
+        if (is_array($group)) {
+            foreach ($group as $o) {
+                $this->group[] = $o;
+            }
+        } else {
+            $this->group[] = $group;
+        }
+        return $this;
+    }
+
     /**
-     * $order can be an array of:
+     * Create where clause
      *
-     * @todo
-     *
-     *
+     * @param  Where|\Closure|string|array $predicate
+     * @param  string $combination One of the OP_* constants from Predicate\PredicateSet
+     * @return Select
+     */
+    public function having($predicate, $combination = Predicate\PredicateSet::OP_AND)
+    {
+        if ($predicate instanceof Having) {
+            $this->having = $predicate;
+        } elseif ($predicate instanceof \Closure) {
+            $predicate($this->having);
+        } else {
+            if (is_string($predicate)) {
+                $predicate = new Predicate\Expression($predicate);
+                $this->having->addPredicate($predicate, $combination);
+            } elseif (is_array($predicate)) {
+                foreach ($predicate as $pkey => $pvalue) {
+                    if (is_string($pkey) && strpos($pkey, '?') !== false) {
+                        $predicate = new Predicate\Expression($pkey, $pvalue);
+                    } elseif (is_string($pkey)) {
+                        $predicate = new Predicate\Operator($pkey, Predicate\Operator::OP_EQ, $pvalue);
+                    } else {
+                        $predicate = new Predicate\Expression($pvalue);
+                    }
+                    $this->having->addPredicate($predicate, $combination);
+                }
+            }
+        }
+        return $this;
+    }
+
+    /**
      * @param string|array $order
      * @return Select
      */
     public function order($order)
     {
-        $this->order = $order;
+        if (is_string($order)) {
+            if (strpos($order, ',') !== false) {
+                $order = preg_split('#,\s+#', $order);
+            } else {
+                $order = (array) $order;
+            }
+        }
+        foreach ($order as $k => $v) {
+            if (is_string($k)) {
+                $this->order[$k] = $v;
+            } else {
+                $this->order[] = $v;
+            }
+        }
         return $this;
     }
 
-    public function fetch($number, $offset = null)
+    public function limit($limit)
     {
-        $this->fetchNumber = $number;
-        $this->fetchOffset = $offset;
+        $this->limit = $limit;
+        return $this;
+    }
+
+    public function offset($offset)
+    {
+        $this->offset = $offset;
+        return $this;
     }
 
     public function setSpecification($index, $specification)
@@ -266,7 +336,8 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
             self::SPECIFICATION_JOIN,
             self::SPECIFICATION_WHERE,
             self::SPECIFICATION_ORDER,
-            self::SPECIFICATION_FETCH
+            self::SPECIFICATION_LIMIT,
+            self::SPECIFICATION_OFFSET
         );
         if (!in_array($index, $validSpecs)) {
             throw new Exception\InvalidArgumentException('Not a valid index');
@@ -283,7 +354,8 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
             'joins' => $this->joins,
             'where' => $this->where,
             'order' => $this->order,
-            'fetch' => array($this->fetchNumber, $this->fetchOffset)
+            'limit' => $this->limit,
+            'offset' => $this->offset
         );
         return (isset($key) && array_key_exists($key, $rawState)) ? $rawState[$key] : $rawState;
     }
@@ -295,10 +367,8 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
      * @param \Zend\Db\Adapter\Driver\StatementInterface $statement
      * @return void
      */
-    public function prepareStatement(Adapter $adapter, StatementInterface $statement, Platform\PlatformInterface $sqlPlatform = null)
+    public function prepareStatement(Adapter $adapter, StatementInterface $statement)
     {
-        $sqlPlatform = ($sqlPlatform) ?: new Platform\Platform($adapter->getPlatform());
-
         // ensure statement has a ParameterContainer
         $parameterContainer = $statement->getParameterContainer();
         if (!$parameterContainer instanceof ParameterContainerInterface) {
@@ -308,31 +378,75 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
 
         $sqls = array();
 
-        $sqls[] = $this->prepareStatementSelect($adapter, $statement, $sqlPlatform);
+        $platform = $adapter->getPlatform();
+
+        $sqls[] = $this->processSelect($platform, $adapter, $parameterContainer);
         if ($this->joins) {
-            $sqls[] = $this->prepareStatementJoin($adapter, $statement, $sqlPlatform, $sqls);
+            $sqls[] = $this->processJoin($platform, $adapter, $parameterContainer, $sqls);
         }
         if ($this->where->count() > 0) {
-            $sqls[] = $this->prepareStatementWhere($adapter, $statement, $sqlPlatform, $sqls);
+            $sqls[] = $this->processWhere($platform, $adapter, $parameterContainer, $sqls);
         }
-
-        /*
-        $sqls[] = $this->prepareStatementGroup($adapter, $statement, $sqlPlatform, $sqls);
-        $sqls[] = $this->prepareStatementHaving($adapter, $statement, $sqlPlatform, $sqls);
-        $sqls[] = $this->prepareStatementOrder($adapter, $statement, $sqlPlatform, $sqls);
-        $sqls[] = $this->prepareStatementFetch($adapter, $statement, $sqlPlatform, $sqls);
-        */
+        if ($this->group) {
+            $sqls[] = $this->processGroup($platform, $adapter, $parameterContainer, $sqls);
+        }
+        if ($this->having->count() > 0) {
+            $sqls[] = $this->processHaving($platform, $adapter, $parameterContainer, $sqls);
+        }
+        if ($this->order) {
+            $sqls[] = $this->processOrder($platform, $adapter, $parameterContainer, $sqls);
+        }
+        if ($this->limit) {
+            $sqls[] = $this->processLimitOffset($platform, $adapter, $parameterContainer, $sqls);
+        }
 
         $sql = implode(' ', $sqls);
         $statement->setSql($sql);
         return;
     }
 
-    protected function prepareStatementSelect(Adapter $adapter, StatementInterface $statement, Platform\PlatformInterface $sqlPlatform)
-    {
-        $platform = $adapter->getPlatform();
-        $parameterContainer = $statement->getParameterContainer();
 
+    /**
+     * Get SQL string for statement
+     *
+     * @param  null|PlatformInterface $adapterPlatform If null, defaults to Sql92
+     * @return string
+     */
+    public function getSqlString(PlatformInterface $adapterPlatform = null)
+    {
+        // get platform, or create default
+        $adapterPlatform = ($adapterPlatform) ?: new AdapterSql92Platform;
+
+        $sqls = array();
+
+        $sqls[] = $this->processSelect($adapterPlatform);
+        if ($this->joins) {
+            $sqls[] = $this->processJoin($adapterPlatform, null, null, $sqls);
+        }
+        if ($this->where->count() > 0) {
+            $sqls[] = $this->processWhere($adapterPlatform, null, null, $sqls);
+        }
+        if ($this->group) {
+            $sqls[] = $this->processGroup($adapterPlatform, null, null, $sqls);
+        }
+        if ($this->having->count() > 0) {
+            $sqls[] = $this->processHaving($adapterPlatform, null, null, $sqls);
+        }
+        if ($this->order) {
+            $sqls[] = $this->processOrder($adapterPlatform, null, null, $sqls);
+        }
+        if ($this->limit) {
+            $sqls[] = $this->processLimitOffset($adapterPlatform, null, null, $sqls);
+        }
+
+        $sql = implode(' ', $sqls);
+        return $sql;
+    }
+
+
+
+    protected function processSelect(PlatformInterface $platform, Adapter $adapter = null, ParameterContainerInterface $parameterContainer = null)
+    {
         // create quoted table name to use in columns processing
         if ($this->table instanceof TableIdentifier) {
             list($table, $schema) = $this->table->getTableAndSchema();
@@ -354,7 +468,12 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
         foreach ($this->columns as $columnIndexOrAs => $column) {
             $columnSql = '';
             if ($column instanceof Expression) {
-                $columnParts = $this->processExpression($column, $platform, $adapter->getDriver(), 'column');
+                $columnParts = $this->processExpression(
+                    $column,
+                    $platform,
+                    ($adapter) ? $adapter->getDriver() : null,
+                    (is_string($columnIndexOrAs)) ? $columnIndexOrAs : 'column'
+                );
                 if (count($columnParts['parameters']) > 0) {
                     $parameterContainer->merge($columnParts['parameters']);
                 }
@@ -375,8 +494,8 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
             foreach ($join['columns'] as $jKey => $jColumn) {
                 if (is_string($jKey)) {
                     $columns[] = $platform->quoteIdentifier($join['name']) . $separator
-                        . $platform->quoteIdentifierInFragment($jKey) . ' AS '
-                        . $platform->quoteIdentifier($jColumn);
+                        . $platform->quoteIdentifierInFragment($jColumn) . ' AS '
+                        . $platform->quoteIdentifier($jKey);
                 } else {
                     $columns[] = $platform->quoteIdentifier($join['name']) . $separator . $platform->quoteIdentifierInFragment($jColumn);
                 }
@@ -397,10 +516,8 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
         return $sql;
     }
 
-    protected function prepareStatementJoin(Adapter $adapter, StatementInterface $statement, Platform\PlatformInterface $sqlPlatform, &$sqls)
+    protected function processJoin(PlatformInterface $platform, Adapter $adapter = null, ParameterContainerInterface $parameterContainer = null, &$sqls)
     {
-        $platform = $adapter->getPlatform();
-
         // process joins
         $joinSpecArgArray = array();
         foreach ($this->joins as $j => $join) {
@@ -419,124 +536,71 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
         return implode(' ', $joinSqls);
     }
 
-    protected function prepareStatementWhere(Adapter $adapter, StatementInterface $statement, Platform\PlatformInterface $sqlPlatform, &$sqls)
+    protected function processWhere(PlatformInterface $platform, Adapter $adapter = null, ParameterContainerInterface $parameterContainer = null, &$sqls)
     {
-        $platform = $adapter->getPlatform();
-        $parameterContainer = $statement->getParameterContainer();
-
-        $whereParts = $this->processExpression($this->where, $platform, $adapter->getDriver(), 'where');
+        $whereParts = $this->processExpression($this->where, $platform, ($adapter) ? $adapter->getDriver() : null, 'where');
         if (count($whereParts['parameters']) > 0) {
             $parameterContainer->merge($whereParts['parameters']);
         }
         return sprintf($this->specifications[self::SPECIFICATION_WHERE], $whereParts['sql']);
     }
 
-    protected function prepareStatementGroup(Adapter $adapter, StatementInterface $statement, Platform\PlatformInterface $sqlPlatform, &$sqls)
+    protected function processGroup(PlatformInterface $platform, Adapter $adapter = null, ParameterContainerInterface $parameterContainer = null, &$sqls)
     {
-    }
-
-    protected function prepareStatementHaving(Adapter $adapter, StatementInterface $statement, Platform\PlatformInterface $sqlPlatform, &$sqls)
-    {
-    }
-
-    protected function prepareStatementOrder(Adapter $adapter, StatementInterface $statement, Platform\PlatformInterface $sqlPlatform, &$sqls)
-    {
-    }
-
-    protected function prepareStatementFetch(Adapter $adapter, StatementInterface $statement, Platform\PlatformInterface $sqlPlatform, &$sqls)
-    {
-    }
-
-    /**
-     * Get SQL string for statement
-     *
-     * @param  null|PlatformInterface $adapterPlatform If null, defaults to Sql92
-     * @return string
-     */
-    public function getSqlString(AdapterPlatformInterface $adapterPlatform = null, Platform\PlatformInterface $sqlPlatform = null)
-    {
-        // get platform, or create default
-        $adapterPlatform = ($adapterPlatform) ?: new AdapterSql92Platform;
-        $sqlPlatform = ($sqlPlatform) ?: new Platform\Platform($adapterPlatform);
-
-        // get identifier separator
-        $separator = $adapterPlatform->getIdentifierSeparator();
-
-        // create quoted table name to use in columns processing
-        if ($this->table instanceof TableIdentifier) {
-            list($table, $schema) = $this->table->getTableAndSchema();
-            $table = $adapterPlatform->quoteIdentifier($table);
-            if ($schema) {
-                $schema = $adapterPlatform->quoteIdentifier($schema);
-            } else {
-                unset($schema);
-            }
-        } else {
-            $table = $adapterPlatform->quoteIdentifier($this->table);
-        }
-        $quotedTable = ($this->prefixColumnsWithTable)
-            ? $table . $adapterPlatform->getIdentifierSeparator()
-            : '';
-
-        // process columns
-        $columns = array();
-        foreach ($this->columns as $columnIndexOrAs => $column) {
+        // process table columns
+        $groups = array();
+        foreach ($this->group as $k => $column) {
             $columnSql = '';
             if ($column instanceof Expression) {
-                $columnParts = $this->processExpression($column, $adapterPlatform, null, 'column');
+                $columnParts = $this->processExpression($column, $platform, ($adapter) ? $adapter->getDriver() : null, 'group');
+                if (count($columnParts['parameters']) > 0) {
+                    $parameterContainer->merge($columnParts['parameters']);
+                }
                 $columnSql .= $columnParts['sql'];
             } else {
-                $columnSql .= $quotedTable . $adapterPlatform->quoteIdentifierInFragment($column);
+                $columnSql .= $platform->quoteIdentifier($column);
             }
-            if (is_string($columnIndexOrAs)) {
-                $columnSql .= ' AS ' . $adapterPlatform->quoteIdentifier($columnIndexOrAs);
-            }
-            $columns[] = $columnSql;
+            $groups[] = $columnSql;
         }
+        return sprintf($this->specifications[self::SPECIFICATION_GROUP], implode(', ', $groups));
+    }
 
-        // process joins
-        if ($this->joins) {
-            $joinSpecArgArray = array();
-            foreach ($this->joins as $j => $join) {
-                $joinSpecArgArray[$j] = array();
-                $joinSpecArgArray[$j][] = strtoupper($join['type']); // type
-                $joinSpecArgArray[$j][] = $adapterPlatform->quoteIdentifier($join['name']); // table
-                $joinSpecArgArray[$j][] = $adapterPlatform->quoteIdentifierInFragment($join['on'], array('=', 'AND', 'OR', '(', ')')); // on
-                foreach ($join['columns'] as /* $jColumnKey => */ $jColumn) {
-                    $columns[] = $joinSpecArgArray[$j][1] . $separator . $adapterPlatform->quoteIdentifierInFragment($jColumn);
+    protected function processHaving(PlatformInterface $platform, Adapter $adapter = null, ParameterContainerInterface $parameterContainer = null, &$sqls)
+    {
+        $whereParts = $this->processExpression($this->having, $platform, ($adapter) ? $adapter->getDriver() : null, 'having');
+        if (count($whereParts['parameters']) > 0) {
+            $parameterContainer->merge($whereParts['parameters']);
+        }
+        return sprintf($this->specifications[self::SPECIFICATION_HAVING], $whereParts['sql']);
+    }
+
+    protected function processOrder(PlatformInterface $platform, Adapter $adapter = null, ParameterContainerInterface $parameterContainer = null, &$sqls)
+    {
+        $orders = array();
+        foreach ($this->order as $k => $v) {
+            if (is_int($k)) {
+                if (strpos($v, ' ') !== false) {
+                    list($k, $v) = preg_split('# #', $v, 2);
+                } else {
+                    $k = $v;
+                    $v = self::ORDER_ASCENDING;
                 }
             }
-        }
-
-        // convert columns to string
-        $columns = implode(', ', $columns);
-
-        // process table name
-        if (isset($schema)) {
-            $table = $schema . $separator . $table;
-        }
-
-        // create sql
-        $sql = sprintf($this->specifications[self::SPECIFICATION_SELECT], $columns, $table);
-
-        // add in joins
-        if (isset($joinSpecArgArray)) {
-            foreach ($joinSpecArgArray as $joinSpecArgs) {
-                $sql .= ' ' . vsprintf($this->specifications[self::SPECIFICATION_JOIN], $joinSpecArgs);
+            if (strtoupper($v) == self::ORDER_DESENDING) {
+                $orders[] = $platform->quoteIdentifier($k) . ' ' . self::ORDER_DESENDING;
+            } else {
+                $orders[] = $platform->quoteIdentifier($k) . ' ' . self::ORDER_ASCENDING;
             }
         }
+        return sprintf($this->specifications[self::SPECIFICATION_ORDER], implode(', ', $orders));
+    }
 
-        // process where
-        if ($this->where->count() > 0) {
-            $whereParts = $this->processExpression($this->where, $adapterPlatform, null, 'where');
-            $sql .= ' ' . sprintf($this->specifications[self::SPECIFICATION_WHERE], $whereParts['sql']);
+    protected function processLimitOffset(PlatformInterface $platform, Adapter $adapter = null, ParameterContainerInterface $parameterContainer = null, &$sqls)
+    {
+        $sql = sprintf($this->specifications[self::SPECIFICATION_LIMIT], $this->limit);
+        if ($this->offset) {
+            $sql .= ' ' . sprintf($this->specifications[self::SPECIFICATION_OFFSET], $this->offset);
         }
-
-        // process order & limit
-        // @todo this is too basic, but good for now
-        //$sql .= (isset($this->order)) ? sprintf($this->specifications[self::SPECIFICATION_ORDER], $this->order) : '';
-        //$sql .= (isset($this->limit)) ? sprintf($this->specifications[self::SPECIFICATION_FETCH], $this->limit) : '';
-
         return $sql;
     }
 

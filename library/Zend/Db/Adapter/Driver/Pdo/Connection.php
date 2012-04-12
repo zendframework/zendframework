@@ -320,14 +320,20 @@ class Connection implements ConnectionInterface
         $statement = $this->driver->createStatement($sql);
         return $statement;
     }
+
     /**
      * Get last generated id
      * 
      * @return integer 
      */
-    public function getLastGeneratedId()
+    public function getLastGeneratedValue()
     {
-        return $this->resource->lastInsertId();
+        try {
+            return $this->resource->lastInsertId();
+        } catch (\Exception $e) {
+            // do nothing
+        }
+        return false;
     }
 
 }

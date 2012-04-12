@@ -183,7 +183,7 @@ class TableGateway implements TableGatewayInterface
         $insert->prepareStatement($this->adapter, $statement);
 
         $result = $statement->execute();
-        $this->lastInsertValue = $this->adapter->getDriver()->getConnection()->getLastGeneratedId();
+        $this->lastInsertValue = $this->adapter->getDriver()->getConnection()->getLastGeneratedValue();
         return $result->getAffectedRows();
     }
 

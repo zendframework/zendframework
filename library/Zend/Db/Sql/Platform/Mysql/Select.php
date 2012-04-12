@@ -2,16 +2,16 @@
 
 namespace Zend\Db\Sql\Platform\Mysql;
 
-use Zend\Db\Sql\Select as BaseSelect;
+use Zend\Db\Sql\Select;
 
-class Select extends BaseSelect
+class SelectPreparer extends Select
 {
 
-    protected $baseSelect = null;
+    protected $select = null;
 
-    public function __construct(BaseSelect $select)
+    public function setProxy(Select $select)
     {
-        $this->baseSelect = $select;
+        $this->select = $select;
     }
 
 }

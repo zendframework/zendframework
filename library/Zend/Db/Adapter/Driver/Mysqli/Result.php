@@ -90,12 +90,17 @@ class Result implements \Iterator, ResultInterface
     protected $statementBindValues = array('keys' => null, 'values' => array());
 
     /**
+     * @var mixed
+     */
+    protected $generatedValue = null;
+
+    /**
      * Initialize
      * 
      * @param  mixed $resource
      * @return Result 
      */
-    public function initialize($resource)
+    public function initialize($resource, $generatedValue)
     {
         if (!$resource instanceof \mysqli && !$resource instanceof \mysqli_result && !$resource instanceof \mysqli_stmt) {
             throw new \InvalidArgumentException('Invalid resource provided.');
@@ -104,6 +109,7 @@ class Result implements \Iterator, ResultInterface
         $this->isQueryResult = (!$resource instanceof \mysqli);
 
         $this->resource = $resource;
+        $this->generatedValue = $generatedValue;
         $this->mode = ($this->resource instanceof \mysqli_stmt) ? self::MODE_STATEMENT : self::MODE_RESULT;
         return $this;
     }
@@ -295,5 +301,9 @@ class Result implements \Iterator, ResultInterface
     {
         return $this->resource->num_rows;
     }
-    
+
+    public function getGeneratedValue()
+    {
+        return $this->generatedValue;
+    }
 }

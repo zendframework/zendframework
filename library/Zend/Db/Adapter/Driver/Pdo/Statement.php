@@ -94,12 +94,6 @@ class Statement implements StatementInterface
         return $this;
     }
 
-    /*
-    public function setParameterContainer(ParameterContainer $parameterContainer)
-    {
-        $this->parameterContainer = $parameterContainer;
-    }
-    */
     /**
      * Set resource
      * 

@@ -72,4 +72,8 @@ interface DriverInterface
      */
     public function formatParameterName($name, $type = null);
 
+    /**
+     * @return mixed
+     */
+    public function getLastGeneratedValue();
 }

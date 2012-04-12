@@ -178,4 +178,12 @@ class Mysqli implements DriverInterface
     {
         return '?';
     }
+
+    /**
+     * @return mixed
+     */
+    public function getLastGeneratedValue()
+    {
+        // TODO: Implement getLastGeneratedValue() method.
+    }
 }

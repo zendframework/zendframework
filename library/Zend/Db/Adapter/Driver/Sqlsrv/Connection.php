@@ -302,7 +302,7 @@ class Connection implements ConnectionInterface
      * 
      * @return mixed 
      */
-    public function getLastGeneratedId()
+    public function getLastGeneratedValue()
     {
         $sql = 'SELECT SCOPE_IDENTITY() as Current_Identity';
         $result = sqlsrv_query($this->resource, $sql);

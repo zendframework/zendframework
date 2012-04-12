@@ -21,6 +21,8 @@
 
 namespace Zend\Db\Sql;
 
+use Zend\Db\Adapter\Adapter;
+
 /**
  * @category   Zend
  * @package    Zend_Db
@@ -30,13 +32,18 @@ namespace Zend\Db\Sql;
  */
 class Sql
 {
+    protected $adapter = null;
     protected $table = null;
+    protected $sqlPlatform = null;
 
-    public function __construct($table = null)
+
+    public function __construct(Adapter $adapter, $table = null, Platform\PlatformInterface $sqlPlatform = null)
     {
+        $this->adapter = $adapter;
         if ($table) {
             $this->setTable($table);
         }
+        $this->sqlPlatform = ($sqlPlatform) ?: Platform\Platform($adapter);
     }
 
     public function hasTable()

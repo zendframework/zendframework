@@ -175,8 +175,12 @@ class Request extends Message implements RequestDescription
     public function setUri($uri)
     {
         if (is_string($uri)) {
-            if (!\Zend\Uri\Uri::validateHost($uri)) {
-                throw new Exception\InvalidArgumentException('Invalid URI passed as string');
+            try {
+                $newuri = new \Zend\Uri\Uri;
+                $newuri->parse($uri);
+                $uri = $newuri;
+            } catch (Exception\InvalidUriPartException $e) {
+                throw new exception\invalidargumentexception('invalid uri passed as string: ' . $e->getMessage());
             }
         } elseif (!($uri instanceof \Zend\Uri\Http)) {
             throw new Exception\InvalidArgumentException('URI must be an instance of Zend\Uri\Http or a string');

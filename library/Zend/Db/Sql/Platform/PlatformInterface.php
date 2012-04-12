@@ -7,6 +7,6 @@ use Zend\Db\Sql\PreparableSqlInterface,
 
 interface PlatformInterface
 {
-    public function canPrepareSqlObject(PreparableSqlInterface $sqlObject);
-    public function prepareSqlObject(PreparableSqlInterface $sqlObject);
+    public function supportsSqlObject(PreparableSqlInterface $sqlObject);
+    public function prepareStatementFromSqlObject(PreparableSqlInterface $sqlObject);
 }

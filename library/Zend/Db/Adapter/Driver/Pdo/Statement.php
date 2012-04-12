@@ -224,7 +224,7 @@ class Statement implements StatementInterface
      */
     protected function bindParametersFromContainer(ParameterContainerInterface $container)
     {
-        $parameters = $container->toArray();
+        $parameters = $container->getNamedArray();
         foreach ($parameters as $position => &$value) {
             $type = \PDO::PARAM_STR;
             if ($container->offsetHasErrata($position)) {

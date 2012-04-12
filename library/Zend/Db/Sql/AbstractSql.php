@@ -14,11 +14,8 @@ abstract class AbstractSql
         // static counter for the number of times this method was invoked across the PHP runtime
         static $runtimeExpressionPrefix = 0;
 
-        if ($driver) {
-            $prepareType = $driver->getPrepareType();
-            if ((!is_string($namedParameterPrefix) || $namedParameterPrefix == '') && $prepareType == 'named') {
-                $namedParameterPrefix = sprintf('expr%04dParam', ++$runtimeExpressionPrefix);
-            }
+        if ($driver && ((!is_string($namedParameterPrefix) || $namedParameterPrefix == ''))) {
+            $namedParameterPrefix = sprintf('expr%04dParam', ++$runtimeExpressionPrefix);
         }
 
         $return = array(
@@ -53,14 +50,9 @@ abstract class AbstractSql
                     // if prepareType is set, it means that this particular value must be
                     // passed back to the statement in a way it can be used as a placeholder value
                     if ($driver) {
-                        if ($prepareType == 'positional') {
-                            $return['parameters'][] = $value;
-                            $values[$vIndex] = $driver->formatParameterName(null);
-                        } elseif ($prepareType == 'named') {
-                            $name = $namedParameterPrefix . $expressionParamIndex++;
-                            $return['parameters'][$name] = $value;
-                            $values[$vIndex] = $driver->formatParameterName($name);
-                        }
+                        $name = $namedParameterPrefix . $expressionParamIndex++;
+                        $return['parameters'][$name] = $value;
+                        $values[$vIndex] = $driver->formatParameterName($name);
                         continue;
                     }
 

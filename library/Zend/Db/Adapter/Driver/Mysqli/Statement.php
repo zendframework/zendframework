@@ -220,7 +220,7 @@ class Statement implements StatementInterface
      */
     protected function bindParametersFromContainer(ParameterContainerInterface $pContainer)
     {
-        $parameters = $pContainer->toArray();
+        $parameters = $pContainer->getPositionalArray();
         $type = '';
         $args = array();
 

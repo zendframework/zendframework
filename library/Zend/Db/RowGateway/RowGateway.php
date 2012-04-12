@@ -69,11 +69,11 @@ class RowGateway implements RowGatewayInterface, RowObjectInterface
      * @param Adapter $adapter
      * @param Sql\Sql $sql
      */
-    public function __construct($primaryKey, $table, Adapter $adapter, Sql\Sql $sql = null)
+    public function __construct($primaryKey, $table, Adapter $adapter = null, Sql\Sql $sql = null)
     {
         $this->primaryKey = $primaryKey;
         $this->table = $table;
-        $this->sql = $sql ?: new Sql\Sql($this->table);
+        $this->sql = $sql ?: new Sql\Sql($adapter, $this->table);
     }
 
     /**
@@ -117,31 +117,33 @@ class RowGateway implements RowGatewayInterface, RowObjectInterface
         }
 
         if (isset($this->originalData[$this->primaryKey])) {
+
             // UPDATE
-//            $where = array($this->primaryKey => $this->originalData[$this->primaryKey]);
-//            $data = $this->currentData;
-//            unset($data[$this->primaryKey]);
-//            $rowsAffected = $this->tableGateway->update($data, $where);
+            $where = array($this->primaryKey => $this->originalData[$this->primaryKey]);
+            $data = $this->data;
+            unset($data[$this->primaryKey]);
+
+            $uStatement = $this->sql->prepareStatementFromSqlObject($this->sql->update()->set($data)->where($where));
+            $result = $uStatement->execute();
+            $rowsAffected = $result->getAffectedRows();
+
         } else {
+
             // INSERT
             $insert = $this->sql->insert();
             $insert->values($this->data);
 
-            $statement = $this->adapter->createStatement();
-            $insert->prepareStatement($this->adapter, $statement);
+            $statement = $this->sql->prepareStatementFromSqlObject($insert);
 
             $result = $statement->execute();
-            $this->lastInsertId = $this->adapter->getDriver()->getConnection()->getLastGeneratedId();
-            return $result->getAffectedRows();
-
-
-            $rowsAffected = $this->tableGateway->insert($this->data);
-            $primaryKey = $this->tableGateway->getLastInsertId();
+            $primaryKey = $result->getGeneratedValue();
+            $rowsAffected = $result->getAffectedRows();
             $where = array($this->primaryKey => $primaryKey);
         }
 
         // refresh data
-        $result = $this->tableGateway->select($where);
+        $statement = $this->sql->prepareStatementFromSqlObject($this->sql->select()->where($where));
+        $result = $statement->execute();
         $rowData = $result->current();
         $this->populateOriginalData($rowData);
 

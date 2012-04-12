@@ -234,7 +234,7 @@ class ResultSet implements Countable, Iterator /*, ResultSetInterface */
 
         if ($this->returnType === self::TYPE_OBJECT && is_array($data)) {
             $row = clone $this->rowObjectPrototype;
-            $row->exchangeArray($data);
+            $row->populate($data);
             return $row;
         } else {
             return $data;

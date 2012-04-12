@@ -21,7 +21,8 @@
 
 namespace Zend\Db\Sql;
 
-use Zend\Db\Adapter\Adapter;
+use Zend\Db\Adapter\Adapter,
+    Zend\Db\Adapter\Driver\StatementInterface;
 
 /**
  * @category   Zend
@@ -43,7 +44,7 @@ class Sql
         if ($table) {
             $this->setTable($table);
         }
-        $this->sqlPlatform = ($sqlPlatform) ?: Platform\Platform($adapter);
+        $this->sqlPlatform = ($sqlPlatform) ?: new Platform\Platform($adapter);
     }
 
     public function hasTable()
@@ -108,5 +109,18 @@ class Sql
             ));
         }
         return new Delete(($table) ?: $this->table);
+    }
+
+    public function prepareStatementFromSqlObject(PreparableSqlInterface $sqlObject, StatementInterface $statement = null)
+    {
+        $statement = ($statement) ?: $this->adapter->createStatement();
+
+        if ($this->sqlPlatform->supportsSqlObject($sqlObject)) {
+            $this->sqlPlatform->prepareStatementFromSqlObject($sqlObject, $statement);
+        } else {
+            $sqlObject->prepareStatement($this->adapter, $statement);
+        }
+
+        return $statement;
     }
 }

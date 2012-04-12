@@ -40,14 +40,14 @@ class TableGatewayTest extends \PHPUnit_Framework_TestCase
         $mockStatement->expects($this->any())->method('execute')->will($this->returnValue($mockResult));
 
         $mockConnection = $this->getMock('Zend\Db\Adapter\Driver\ConnectionInterface');
-        $mockConnection->expects($this->any())->method('getLastGeneratedId')->will($this->returnValue(10));
+        $mockConnection->expects($this->any())->method('getLastGeneratedValue')->will($this->returnValue(10));
 
         $mockDriver = $this->getMock('Zend\Db\Adapter\Driver\DriverInterface');
         $mockDriver->expects($this->any())->method('createStatement')->will($this->returnValue($mockStatement));
         $mockDriver->expects($this->any())->method('getConnection')->will($this->returnValue($mockConnection));
 
         $this->mockAdapter = $this->getMock('Zend\Db\Adapter\Adapter', null, array($mockDriver));
-        $this->mockSql = $this->getMock('Zend\Db\Sql\Sql', array('select', 'insert', 'update', 'delete'), array('foo'));
+        $this->mockSql = $this->getMock('Zend\Db\Sql\Sql', array('select', 'insert', 'update', 'delete'), array($this->mockAdapter, 'foo'));
         $this->mockSql->expects($this->any())->method('select')->will($this->returnValue($this->getMock('Zend\Db\Sql\Select', array('where', 'getRawSate'), array('foo'))));
         $this->mockSql->expects($this->any())->method('insert')->will($this->returnValue($this->getMock('Zend\Db\Sql\Insert', array('prepareStatement', 'values'), array('foo'))));
         $this->mockSql->expects($this->any())->method('update')->will($this->returnValue($this->getMock('Zend\Db\Sql\Update', array('where'), array('foo'))));
@@ -193,7 +193,6 @@ class TableGatewayTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Zend\Db\TableGateway\TableGateway::__get
-     * @todo   Implement test__get().
      */
     public function test__get()
     {
@@ -206,15 +205,10 @@ class TableGatewayTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Zend\Db\TableGateway\TableGateway::__clone
-     * @todo   Implement test__clone().
      */
     public function test__clone()
     {
         $cTable = clone $this->table;
         $this->assertSame($this->mockAdapter, $cTable->getAdapter());
-//        $this->assertNotSame($this->table->getSqlInsertPrototype(), $cTable->getSqlInsertPrototype());
-//        $this->assertNotSame($this->table->getSqlUpdatePrototype(), $cTable->getSqlUpdatePrototype());
-//        $this->assertNotSame($this->table->getSqlDeletePrototype(), $cTable->getSqlDeletePrototype());
-//        $this->assertNotSame($this->table->getSqlSelectPrototype(), $cTable->getSqlSelectPrototype());
     }
 }

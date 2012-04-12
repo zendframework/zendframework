@@ -217,7 +217,7 @@ class Statement implements StatementInterface
      */
     protected function bindParametersFromContainer()
     {
-        $values = $this->parameterContainer->toArray();
+        $values = $this->parameterContainer->getPositionalArray();
         $position = 0;
         foreach ($values as $value) {
             $this->parameterReferences[$position++][0] = $value;

@@ -82,7 +82,7 @@ class TableGateway implements TableGatewayInterface
         $this->adapter = $adapter;
 
         $this->setSelectResultPrototype(($selectResultPrototype) ?: new ResultSet);
-        $this->sql = ($sql) ?: new Sql\Sql($this->table);
+        $this->sql = ($sql) ?: new Sql\Sql($this->adapter, $this->table);
         if ($this->sql->getTable() != $this->table) {
             throw new Exception\InvalidArgumentException('The table inside the provided Sql object must match the table of this TableGateway');
         }

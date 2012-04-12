@@ -158,7 +158,7 @@ class Mysqli implements DriverInterface
     public function createResult($resource)
     {
         $result = clone $this->resultPrototype;
-        $result->initialize($resource);
+        $result->initialize($resource, $this->connection->getLastGeneratedValue());
         return $result;
     }
 

@@ -597,10 +597,21 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
 
     protected function processLimitOffset(PlatformInterface $platform, Adapter $adapter = null, ParameterContainerInterface $parameterContainer = null, &$sqls)
     {
-        $sql = sprintf($this->specifications[self::SPECIFICATION_LIMIT], $this->limit);
-        if ($this->offset) {
-            $sql .= ' ' . sprintf($this->specifications[self::SPECIFICATION_OFFSET], $this->offset);
+        if ($adapter) {
+            $driver = $adapter->getDriver();
+            $sql = sprintf($this->specifications[self::SPECIFICATION_LIMIT], $driver->formatParameterName('limit'));
+            $parameterContainer->offsetSet('limit', $this->limit);
+            if ($this->offset !== null) {
+                $sql .= ' ' . sprintf($this->specifications[self::SPECIFICATION_OFFSET], $driver->formatParameterName('offset'));
+                $parameterContainer->offsetSet('offset', $this->offset);
+            }
+        } else {
+            $sql = sprintf($this->specifications[self::SPECIFICATION_LIMIT], $platform->quoteValue($this->limit));
+            if ($this->offset) {
+                $sql .= ' ' . sprintf($this->specifications[self::SPECIFICATION_OFFSET], $platform->quoteValue($this->offset));
+            }
         }
+
         return $sql;
     }
 

@@ -4,7 +4,8 @@ namespace Zend\Db\Sql\Platform;
 
 use Zend\Db\Adapter\Adapter,
     Zend\Db\Sql\PreparableSqlInterface,
-    Zend\Db\Sql\SqlInterface;
+    Zend\Db\Sql\SqlInterface,
+    Zend\Db\Adapter\Driver\StatementInterface;
 
 class Platform implements PlatformInterface
 {
@@ -28,23 +29,24 @@ class Platform implements PlatformInterface
         }
     }
 
-    public function canPrepareSqlObject(PreparableSqlInterface $sqlObject)
+    public function supportsSqlObject(PreparableSqlInterface $sqlObject)
     {
         if ($this->platform) {
-            return $this->platform->canPrepareSqlObject($sqlObject);
+            return $this->platform->supportsSqlObject($sqlObject);
         }
 
         return true;
     }
 
-    public function prepareSqlObject(PreparableSqlInterface $sqlObject)
+    public function prepareStatementFromSqlObject(PreparableSqlInterface $sqlObject, StatementInterface $statement = null)
     {
         if ($this->platform) {
             return $this->prepareSqlObject($sqlObject);
         }
 
-        $statement = $this->adapter->createStatement();
+        $statement = ($statement) ?: $this->adapter->createStatement();
         $sqlObject->prepareStatement($this->adapter, $statement);
         return $statement;
     }
+
 }

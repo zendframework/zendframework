@@ -264,7 +264,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         $select->prepareStatement($mockAdapter, $mockStatement);
 
         if ($expectedParameters) {
-            $this->assertEquals($expectedParameters, $parameterContainer->toArray());
+            $this->assertEquals($expectedParameters, $parameterContainer->getNamedArray());
         }
     }
 
@@ -317,7 +317,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
             )
         );
         $sql7 = 'SELECT (COUNT("some_column") + ?) AS "bar" FROM "foo"';
-        $params7 = array(5);
+        $params7 = array('column1' => 5);
 
         // joins (plain)
         $select8 = new Select;
@@ -348,7 +348,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         $select13 = new Select;
         $select13->from('foo')->where(array('x = ?' => 5));
         $sql13 = 'SELECT "foo".* FROM "foo" WHERE x = ?';
-        $params13 = array(5);
+        $params13 = array('where1' => 5);
 
         // group
         $select14 = new Select;
@@ -372,7 +372,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         $select18 = new Select;
         $select18->from('foo')->having(array('x = ?' => 5));
         $sql18 = 'SELECT "foo".* FROM "foo" HAVING x = ?';
-        $params18 = array(5);
+        $params18 = array('having1' => 5);
 
         // order
         $select19 = new Select;
@@ -394,12 +394,14 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         // limit
         $select23 = new Select;
         $select23->from('foo')->limit(5);
-        $sql23 = 'SELECT "foo".* FROM "foo" LIMIT 5';
+        $sql23 = 'SELECT "foo".* FROM "foo" LIMIT ?';
+        $params23 = array('limit' => 5);
 
         // limit with offset
         $select24 = new Select;
         $select24->from('foo')->limit(5)->offset(10);
-        $sql24 = 'SELECT "foo".* FROM "foo" LIMIT 5 OFFSET 10';
+        $sql24 = 'SELECT "foo".* FROM "foo" LIMIT ? OFFSET ?';
+        $params24 = array('limit' => 5, 'offset' => 10);
 
         return array(
             array($select0, $sql0),
@@ -425,8 +427,8 @@ class SelectTest extends \PHPUnit_Framework_TestCase
             array($select20, $sql20),
             array($select21, $sql21),
             array($select22, $sql22),
-            array($select23, $sql23),
-            array($select24, $sql24),
+            array($select23, $sql23, $params23),
+            array($select24, $sql24, $params24),
         );
     }
 
@@ -454,6 +456,12 @@ class SelectTest extends \PHPUnit_Framework_TestCase
 
         $data[18][1] = 'SELECT "foo".* FROM "foo" HAVING x = \'5\'';
         unset($data[18][2]); // remove parameters
+
+        $data[23][1] = 'SELECT "foo".* FROM "foo" LIMIT \'5\'';
+        unset($data[23][2]);
+
+        $data[24][1] = 'SELECT "foo".* FROM "foo" LIMIT \'5\' OFFSET \'10\'';
+        unset($data[24][2]);
 
         return $data;
     }

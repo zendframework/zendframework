@@ -30,7 +30,7 @@ namespace Zend\Db\Adapter;
  */
 interface ParameterContainerInterface extends \ArrayAccess, \Countable, \Traversable
 {
-    const POSITION_APPEND = null;
+    const POSITION_NEXT = null;
 
     const TYPE_AUTO    = 'auto';
     const TYPE_NULL    = 'null';
@@ -48,5 +48,6 @@ interface ParameterContainerInterface extends \ArrayAccess, \Countable, \Travers
     public function offsetUnsetErrata($nameOrPosition);
     public function getErrataIterator();
 
-    public function toArray();
+    public function getNamedArray();
+    public function getPositionalArray();
 }

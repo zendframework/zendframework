@@ -53,13 +53,13 @@ class ParameterContainerTest extends \PHPUnit_Framework_TestCase
         $this->parameterContainer->offsetSet('boo', 'baz');
         $this->assertEquals('baz', $this->parameterContainer->offsetGet('boo'));
 
-        $this->parameterContainer->offsetSet(null, 'book', ParameterContainer::TYPE_STRING);
+        $this->parameterContainer->offsetSet('1', 'book', ParameterContainer::TYPE_STRING);
         $this->assertEquals(
-            array('foo' => 'bar', 'boo' => 'baz', 0 => 'book'),
-            $this->parameterContainer->toArray()
+            array('foo' => 'bar', 'boo' => 'baz', '1' => 'book'),
+            $this->parameterContainer->getNamedArray()
         );
 
-        $this->assertEquals('string', $this->parameterContainer->offsetGetErrata(0));
+        $this->assertEquals('string', $this->parameterContainer->offsetGetErrata('1'));
     }
 
     /**
@@ -132,11 +132,11 @@ class ParameterContainerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Zend\Db\Adapter\ParameterContainer::toArray
+     * @covers Zend\Db\Adapter\ParameterContainer::getNamedArray
      */
-    public function testToArray()
+    public function testGetNamedArray()
     {
-        $data = $this->parameterContainer->toArray();
+        $data = $this->parameterContainer->getNamedArray();
         $this->assertEquals(array('foo' => 'bar'), $data);
     }
 

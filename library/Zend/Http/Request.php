@@ -180,7 +180,11 @@ class Request extends Message implements RequestDescription
                 $newuri->parse($uri);
                 $uri = $newuri;
             } catch (Exception\InvalidUriPartException $e) {
-                throw new exception\invalidargumentexception('invalid uri passed as string: ' . $e->getMessage());
+                throw new Exception\InvalidArgumentException(
+                        sprintf('Invalid URI passed as string (%s)', $uri),
+                        $e->getCode(),
+                        $e
+                );
             }
         } elseif (!($uri instanceof \Zend\Uri\Http)) {
             throw new Exception\InvalidArgumentException('URI must be an instance of Zend\Uri\Http or a string');

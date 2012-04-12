@@ -176,7 +176,7 @@ class Request extends Message implements RequestDescription
     {
         if (is_string($uri)) {
             try {
-                $newuri = new \Zend\Uri\Uri;
+                $newuri = new HttpUri;
                 $newuri->parse($uri);
                 $uri = $newuri;
             } catch (Exception\InvalidUriPartException $e) {
@@ -186,7 +186,7 @@ class Request extends Message implements RequestDescription
                         $e
                 );
             }
-        } elseif (!($uri instanceof \Zend\Uri\Http)) {
+        } elseif (!($uri instanceof HttpUri)) {
             throw new Exception\InvalidArgumentException('URI must be an instance of Zend\Uri\Http or a string');
         }
         $this->uri = $uri;

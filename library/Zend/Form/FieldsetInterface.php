@@ -20,6 +20,7 @@
 
 namespace Zend\Form;
 
+use Countable;
 use IteratorAggregate;
 
 /**
@@ -29,17 +30,37 @@ use IteratorAggregate;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 interface FieldsetInterface extends 
+    Countable,
     IteratorAggregate, 
     ElementInterface
 {
     /**
      * Add an element or fieldset
+     *
+     * $flags could contain metadata such as the alias under which to register 
+     * the element or fieldset, order in which to prioritize it, etc.
      * 
-     * @param  ElementInterface|FieldsetInterface $elementOrFieldset 
-     * @param  int $order 
+     * @param  ElementInterface $elementOrFieldset 
+     * @param  array $flags
      * @return FieldsetInterface
      */
-    public function add($elementOrFieldset, $order = null);
+    public function add(ElementInterface $elementOrFieldset, array $flags = array());
+
+    /**
+     * Does the fieldset have an element/fieldset by the given name?
+     * 
+     * @param  string $elementOrFieldset 
+     * @return bool
+     */
+    public function has($elementOrFieldset);
+
+    /**
+     * Retrieve a named element or fieldset
+     * 
+     * @param  string $elementOrFieldset 
+     * @return ElementInterface
+     */
+    public function get($elementOrFieldset);
 
     /**
      * Remove a named element or fieldset
@@ -51,6 +72,8 @@ interface FieldsetInterface extends
 
     /**
      * Retrieve all attached elements
+     *
+     * Storage is an implementation detail of the concrete class.
      * 
      * @return array|\Traversable
      */
@@ -58,6 +81,8 @@ interface FieldsetInterface extends
 
     /**
      * Retrieve all attached fieldsets
+     * 
+     * Storage is an implementation detail of the concrete class.
      * 
      * @return array|\Traversable
      */

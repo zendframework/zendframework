@@ -287,6 +287,7 @@ class Bootstrap implements Bootstrapper, EventManagerAware
         $injectTemplateListener  = $locator->get('Zend\Mvc\View\InjectTemplateListener');
         $injectViewModelListener = $locator->get('Zend\Mvc\View\InjectViewModelListener');
         $sharedEvents->attach('Zend\Stdlib\Dispatchable', MvcEvent::EVENT_DISPATCH, array($createViewModelListener, 'createViewModelFromArray'), -80);
+        $sharedEvents->attach('Zend\Stdlib\Dispatchable', MvcEvent::EVENT_DISPATCH, array($noRouteStrategy, 'prepareNotFoundViewModel'), -90);
         $sharedEvents->attach('Zend\Stdlib\Dispatchable', MvcEvent::EVENT_DISPATCH, array($createViewModelListener, 'createViewModelFromNull'), -80);
         $sharedEvents->attach('Zend\Stdlib\Dispatchable', MvcEvent::EVENT_DISPATCH, array($injectTemplateListener, 'injectTemplate'), -90);
         $events->attach(MvcEvent::EVENT_DISPATCH_ERROR, array($injectViewModelListener, 'injectViewModel'), -100);

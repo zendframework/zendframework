@@ -89,4 +89,24 @@ class ElementTest extends TestCase
         $element->clearAttributes();
         $this->assertEquals(array(), $element->getAttributes());
     }
+
+    public function testSettingNameSetsNameAttribute()
+    {
+        $element = new Element();
+        $element->setName('foo');
+        $this->assertEquals('foo', $element->getAttribute('name'));
+    }
+
+    public function testSettingNameAttributeAllowsRetrievingName()
+    {
+        $element = new Element();
+        $element->setAttribute('name', 'foo');
+        $this->assertEquals('foo', $element->getName());
+    }
+
+    public function testCanPassNameToConstructor()
+    {
+        $element = new Element('foo');
+        $this->assertEquals('foo', $element->getName());
+    }
 }

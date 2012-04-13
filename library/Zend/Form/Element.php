@@ -36,6 +36,41 @@ class Element implements ElementInterface
     protected $attributes = array();
 
     /**
+     * Constructor
+     * 
+     * @param  null|string|int $name Optional name for the element
+     * @return void
+     */
+    public function __construct($name = null)
+    {
+        if (null !== $name) {
+            $this->setName($name);
+        }
+    }
+
+    /**
+     * Set value for name
+     *
+     * @param  string|int name
+     * @return Element
+     */
+    public function setName($name)
+    {
+        $this->setAttribute('name', $name);
+        return $this;
+    }
+    
+    /**
+     * Get value for name
+     *
+     * @return string|int
+     */
+    public function getName()
+    {
+        return $this->getAttribute('name');
+    }
+
+    /**
      * Set a single element attribute
      * 
      * @param  string $key 

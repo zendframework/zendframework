@@ -29,6 +29,24 @@ namespace Zend\Form;
 interface ElementInterface
 {
     /**
+     * Set the name of this element
+     *
+     * In most cases, this will proxy to the attributes for storage, but is
+     * present to indicate that elements are generally named.
+     * 
+     * @param  string $name 
+     * @return ElementInterface
+     */
+    public function setName($name);
+
+    /**
+     * Retrieve the element name
+     * 
+     * @return string
+     */
+    public function getName();
+
+    /**
      * Set a single element attribute
      * 
      * @param  string $key 

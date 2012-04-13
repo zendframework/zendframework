@@ -342,6 +342,26 @@ class ConfigListenerTest extends TestCase
         $this->assertSame('loaded', $configObject->xml);
     }
 
+    public function testMergesWithMergeAndReplaceBehavior()
+    {
+        $configListener = new ConfigListener();
+
+        $moduleManager = $this->moduleManager;
+        $moduleManager->setModules(array('SomeModule'));
+
+        $configListener->addConfigStaticPaths(array(
+            __DIR__ . '/_files/good/merge1.php',
+            __DIR__ . '/_files/good/merge2.php',
+        ));
+
+        $moduleManager->events()->attachAggregate($configListener);
+        $moduleManager->loadModules();
+
+        $mergedConfig = $configListener->getMergedConfig(false);
+        $this->assertSame(array('foo', 'bar'), $mergedConfig['indexed']);
+        $this->assertSame('bar', $mergedConfig['keyed']);
+    }
+
     public function testConfigListenerFunctionsAsAggregateListener()
     {
         $configListener = new ConfigListener;

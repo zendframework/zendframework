@@ -14,6 +14,7 @@ class Forward extends AbstractPlugin
 {
     protected $event;
     protected $locator;
+    protected $actionStack = array();
 
     /**
      * Dispatch another controller
@@ -48,7 +49,15 @@ class Forward extends AbstractPlugin
             $event->setRouteMatch($matches);
         }
 
+        $actionKey = get_class($controller) . ':' . (isset($params['action'])?$params['action']:'index');
+        if (in_array($actionKey, $this->actionStack)) {
+            throw new Exception\DomainException("Circular forwarding detected: $actionKey is already in the stack");
+        }
+        array_push($this->actionStack, $actionKey);
+
         $return = $controller->dispatch($event->getRequest(), $event->getResponse());
+
+        array_pop($this->actionStack);
 
         if ($cachedMatches) {
             $event->setRouteMatch($cachedMatches);

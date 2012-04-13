@@ -73,6 +73,16 @@ class ForwardTest extends TestCase
         $this->plugin->dispatch('bogus');
     }
 
+    public function testDispatchRaisesDomainExceptionIfCircular()
+    {
+        $this->setExpectedException('Zend\Mvc\Exception\DomainException', 'Circular forwarding');
+        $sampleController = $this->controller;
+        $sampleController->getLocator()->add('sample', function() use ($sampleController) {
+            return $sampleController;
+        });
+        $this->plugin->dispatch('sample', array('action' => 'test-circular'));
+    }
+
     public function testPluginDispatchsRequestedControllerWhenFound()
     {
         $result = $this->plugin->dispatch('forward');

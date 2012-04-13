@@ -176,12 +176,10 @@ class Request extends Message implements RequestDescription
     {
         if (is_string($uri)) {
             try {
-                $newuri = new HttpUri;
-                $newuri->parse($uri);
-                $uri = $newuri;
+                $uri = new HttpUri($uri);
             } catch (Exception\InvalidUriPartException $e) {
                 throw new Exception\InvalidArgumentException(
-                        sprintf('Invalid URI passed as string (%s)', $uri),
+                        sprintf('Invalid URI passed as string (%s)', (string) $uri),
                         $e->getCode(),
                         $e
                 );

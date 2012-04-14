@@ -64,7 +64,7 @@ class DigestTest extends \PHPUnit_Framework_TestCase
             $adapter->authenticate();
             $this->fail('Expected Zend_Auth_Adapter_Exception not thrown upon authentication attempt before setting '
                       . 'a required option');
-        } catch (Adapter\Exception $e) {
+        } catch (Adapter\Exception\ExceptionInterface $e) {
             $this->assertContains('must be set before authentication', $e->getMessage());
         }
     }
@@ -81,7 +81,7 @@ class DigestTest extends \PHPUnit_Framework_TestCase
             $adapter->authenticate();
             $this->fail('Expected Zend_Auth_Adapter_Exception not thrown upon authenticating against nonexistent '
                       . 'file');
-        } catch (Adapter\Exception $e) {
+        } catch (Adapter\Exception\ExceptionInterface $e) {
             $this->assertContains('Cannot open', $e->getMessage());
         }
     }

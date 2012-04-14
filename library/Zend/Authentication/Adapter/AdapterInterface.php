@@ -22,12 +22,19 @@
 namespace Zend\Authentication\Adapter;
 
 /**
- * @uses       Zend\Authentication\Exception
  * @category   Zend
  * @package    Zend_Authentication
  * @subpackage Adapter
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Exception extends \Zend\Authentication\Exception
-{}
+interface AdapterInterface
+{
+    /**
+     * Performs an authentication attempt
+     *
+     * @return Zend\Authentication\Result
+     * @throws Zend\Authentication\Adapter\Exception\ExceptionInterface If authentication cannot be performed
+     */
+    public function authenticate();
+}

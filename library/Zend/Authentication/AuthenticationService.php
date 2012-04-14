@@ -21,7 +21,6 @@
 namespace Zend\Authentication;
 
 /**
- * @uses       Zend\Authentication\Storage\Session
  * @category   Zend
  * @package    Zend_Authentication
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -32,17 +31,17 @@ class AuthenticationService
     /**
      * Persistent storage handler
      *
-     * @var Zend\Authentication\Storage
+     * @var Zend\Authentication\Storage\StorageInterface
      */
     protected $_storage = null;
 
     /**
      * Constructor
      * 
-     * @param  Storage $storage 
+     * @param  Storage\StorageInterface $storage 
      * @return void
      */
-    public function __construct(Storage $storage = null)
+    public function __construct(Storage\StorageInterface $storage = null)
     {
         if (null !== $storage) {
             $this->setStorage($storage);
@@ -54,7 +53,7 @@ class AuthenticationService
      *
      * Session storage is used by default unless a different storage adapter has been set.
      *
-     * @return Zend\Authentication\Storage
+     * @return Zend\Authentication\Storage\StorageInterface
      */
     public function getStorage()
     {
@@ -68,10 +67,10 @@ class AuthenticationService
     /**
      * Sets the persistent storage handler
      *
-     * @param  Zend\Authentication\Storage $storage
+     * @param  Zend\Authentication\Storage\StorageInterface $storage
      * @return Zend\Authentication\AuthenticationService Provides a fluent interface
      */
-    public function setStorage(Storage $storage)
+    public function setStorage(Storage\StorageInterface $storage)
     {
         $this->_storage = $storage;
         return $this;
@@ -80,10 +79,10 @@ class AuthenticationService
     /**
      * Authenticates against the supplied adapter
      *
-     * @param  Zend\Authentication\Adapter $adapter
+     * @param  Zend\Authentication\Adapter\AdapterInterface $adapter
      * @return Zend\Authentication\Result
      */
-    public function authenticate(Adapter $adapter)
+    public function authenticate(Adapter\AdapterInterface $adapter)
     {
         $result = $adapter->authenticate();
 

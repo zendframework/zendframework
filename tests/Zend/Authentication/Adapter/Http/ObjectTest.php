@@ -112,7 +112,7 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
     {
         try {
             $t = new Adapter\Http($this->_basicConfig);
-        } catch (Adapter\Exception $e) {
+        } catch (Adapter\Exception\ExceptionInterface $e) {
             $this->fail('Valid config deemed invalid');
         }
         $this->assertFalse(empty($t));
@@ -121,7 +121,7 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
 
         try {
             $t = new Adapter\Http($this->_digestConfig);
-        } catch (Adapter\Exception $e) {
+        } catch (Adapter\Exception\ExceptionInterface $e) {
             $this->fail('Valid config deemed invalid');
         }
         $this->assertFalse(empty($t));
@@ -130,7 +130,7 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
 
         try {
             $t = new Adapter\Http($this->_bothConfig);
-        } catch (Adapter\Exception $e) {
+        } catch (Adapter\Exception\ExceptionInterface $e) {
             $this->fail('Valid config deemed invalid');
         }
         $this->assertFalse(empty($t));
@@ -170,7 +170,7 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
             try {
                 $t = new Adapter\Http($cfg);
                 $this->fail('Accepted an invalid config');
-            } catch (Adapter\Exception $e) {
+            } catch (Adapter\Exception\ExceptionInterface $e) {
                 // Good, it threw an exception
             }
         }
@@ -183,7 +183,7 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
         try {
             $a->authenticate();
             $this->fail('Attempted authentication without request/response objects');
-        } catch (Adapter\Exception $e) {
+        } catch (Adapter\Exception\ExceptionInterface $e) {
             // Good, it threw an exception
         }
 
@@ -212,7 +212,7 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
               ->setResponse($response);
             $result = $a->authenticate();
             $this->fail("Tried Basic authentication without a resolver.\n" . \Zend\Debug::dump($result->getMessages(),null,false));
-        } catch (Adapter\Exception $e) {
+        } catch (Adapter\Exception\ExceptionInterface $e) {
             // Good, it threw an exception
             unset($a);
         }
@@ -230,7 +230,7 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
               ->setResponse($response);
             $result = $a->authenticate();
             $this->fail("Tried Digest authentication without a resolver.\n" . \Zend\Debug::dump($result->getMessages(),null,false));
-        } catch (Adapter\Exception $e) {
+        } catch (Adapter\Exception\ExceptionInterface $e) {
             // Good, it threw an exception
             unset($a);
         }

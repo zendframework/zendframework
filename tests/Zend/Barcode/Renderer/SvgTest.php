@@ -56,7 +56,7 @@ class SvgTest extends TestCommon
 
     public function testBadHeight()
     {
-        $this->setExpectedException('\Zend\Barcode\Renderer\Exception');
+        $this->setExpectedException('\Zend\Barcode\Renderer\Exception\ExceptionInterface');
         $this->renderer->setHeight(-1);
     }
 
@@ -71,7 +71,7 @@ class SvgTest extends TestCommon
 
     public function testBadWidth()
     {
-        $this->setExpectedException('\Zend\Barcode\Renderer\Exception');
+        $this->setExpectedException('\Zend\Barcode\Renderer\Exception\ExceptionInterface');
         $this->renderer->setWidth(-1);
     }
 
@@ -83,7 +83,7 @@ class SvgTest extends TestCommon
 
     public function testObjectSvgResource()
     {
-        $this->setExpectedException('Zend\Barcode\Renderer\Exception');
+        $this->setExpectedException('Zend\Barcode\Renderer\Exception\ExceptionInterface');
         $svgResource = new \StdClass();
         $this->renderer->setResource($svgResource);
     }

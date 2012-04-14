@@ -33,6 +33,6 @@ use Zend\Barcode\Renderer\Exception;
  */
 class InvalidArgumentException
     extends \InvalidArgumentException
-    implements Exception
+    implements ExceptionInterface
 {
 }

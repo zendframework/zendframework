@@ -33,6 +33,6 @@ use Zend\Barcode\Renderer\Exception;
  */
 class RuntimeException
     extends \RuntimeException
-    implements Exception
+    implements ExceptionInterface
 {
 }

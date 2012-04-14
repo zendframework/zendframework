@@ -19,17 +19,18 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Barcode;
+namespace Zend\Barcode\Renderer;
 
 /**
  * Class for rendering the barcode
  *
  * @category   Zend
  * @package    Zend_Barcode
+ * @subpackage Renderer
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Renderer
+interface RendererInterface
 {
     /**
      * Constructor
@@ -145,14 +146,14 @@ interface Renderer
 
     /**
      * Set the barcode object
-     * @param  Object $barcode
+     * @param  Object\ObjectInterface $barcode
      * @return Renderer
      */
     public function setBarcode($barcode);
 
     /**
      * Retrieve the barcode object
-     * @return Object
+     * @return Object\ObjectInterface
      */
     public function getBarcode();
 

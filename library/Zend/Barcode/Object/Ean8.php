@@ -21,7 +21,7 @@
 
 namespace Zend\Barcode\Object;
 
-use Zend\Barcode\Object\Exception,
+use Zend\Barcode\Object\Exception\ExceptionInterface,
     Zend\Validator\Barcode as BarcodeValidator;
 
 /**

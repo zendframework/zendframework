@@ -23,9 +23,9 @@ namespace Zend\Barcode\Renderer;
 
 use Traversable,
     Zend\Barcode\Barcode,
-    Zend\Barcode\Exception as BarcodeException,
-    Zend\Barcode\Object,
-    Zend\Barcode\Renderer,
+    Zend\Barcode\Exception\ExceptionInterface as BarcodeException,
+    Zend\Barcode\Object\ObjectInterface,
+    Zend\Barcode\Renderer\RendererInterface,
     Zend\Stdlib\ArrayUtils;
 
 /**
@@ -36,7 +36,7 @@ use Traversable,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class AbstractRenderer implements Renderer
+abstract class AbstractRenderer implements RendererInterface
 {
     /**
      * Namespace of the renderer for autoloading
@@ -88,7 +88,7 @@ abstract class AbstractRenderer implements Renderer
 
     /**
      * Barcode object
-     * @var Object
+     * @var Object\ObjectInterface
      */
     protected $barcode;
 
@@ -320,7 +320,7 @@ abstract class AbstractRenderer implements Renderer
      */
     public function setBarcode($barcode)
     {
-        if (!$barcode instanceof Object) {
+        if (!$barcode instanceof ObjectInterface) {
             throw new Exception\InvalidArgumentException(
                 'Invalid barcode object provided to setBarcode()'
             );
@@ -331,7 +331,7 @@ abstract class AbstractRenderer implements Renderer
 
     /**
      * Retrieve the barcode object
-     * @return Object
+     * @return Object\ObjectInterface
      */
     public function getBarcode()
     {

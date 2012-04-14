@@ -33,6 +33,6 @@ use Zend\Barcode\Renderer\Exception;
  */
 class OutOfRangeException
     extends \OutOfRangeException
-    implements Exception
+    implements ExceptionInterface
 {
 }

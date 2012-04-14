@@ -21,6 +21,8 @@
 
 namespace Zend\Barcode\Object\Exception;
 
+use Zend\Barcode\Object\Exception\ExceptionInterface;
+
 /**
  * Exception for Zend_Barcode component.
  *
@@ -31,6 +33,6 @@ namespace Zend\Barcode\Object\Exception;
  */
 class ExtensionNotLoadedException
     extends \RuntimeException
-    implements \Zend\Barcode\Object\Exception
+    implements ExceptionInterface
 {
 }

@@ -33,6 +33,6 @@ use Zend\Barcode\Renderer\Exception;
  */
 class UnexpectedValueException
     extends \UnexpectedValueException
-    implements Exception
+    implements ExceptionInterface
 {
 }

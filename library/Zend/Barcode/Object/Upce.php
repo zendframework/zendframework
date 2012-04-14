@@ -22,7 +22,7 @@
 namespace Zend\Barcode\Object;
 
 use Zend\Validator\Barcode as BarcodeValidator,
-    Zend\Barcode\Object\Exception;
+    Zend\Barcode\Object\Exception\ExceptionInterface;
 
 /**
  * Class for generate UpcA barcode

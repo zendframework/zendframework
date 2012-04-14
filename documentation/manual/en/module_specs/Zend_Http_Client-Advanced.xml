@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.http.client.advanced"><info><title>Zend_Http_Client - Advanced Usage</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.http.client.advanced"><title>Zend_Http_Client - Advanced Usage</title>
     
 
-    <section xml:id="zend.http.client.redirections"><info><title>HTTP Redirections</title></info>
+    <section xml:id="zend.http.client.redirections"><title>HTTP Redirections</title>
         
 
         <para>
@@ -21,7 +21,7 @@
             are reset, and a <constant>GET</constant> request is sent to the new location. This
             behavior can be changed by setting the 'strictredirects' configuration
             parameter to boolean <constant>TRUE</constant>:
-            <example xml:id="zend.http.client.redirections.example-1"><info><title>Forcing RFC 2616 Strict Redirections on 301 and 302 Responses</title></info>
+            <example xml:id="zend.http.client.redirections.example-1"><title>Forcing RFC 2616 Strict Redirections on 301 and 302 Responses</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -40,7 +40,7 @@ $client->setConfig(array('strictredirects' => false));
         </para>
     </section>
 
-    <section xml:id="zend.http.client.cookies"><info><title>Adding Cookies and Using Cookie Persistence</title></info>
+    <section xml:id="zend.http.client.cookies"><title>Adding Cookies and Using Cookie Persistence</title>
         
 
         <para>
@@ -49,7 +49,7 @@ $client->setConfig(array('strictredirects' => false));
             required. This is done using the setCookie() method. This method
             can be used in several ways:
 
-            <example xml:id="zend.http.client.cookies.example-1"><info><title>Setting Cookies Using setCookie()</title></info>
+            <example xml:id="zend.http.client.cookies.example-1"><title>Setting Cookies Using setCookie()</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -78,7 +78,7 @@ $client->setCookie($cookie);
             first and receive and authentication or session ID cookie before
             sending further requests.
 
-            <example xml:id="zend.http.client.cookies.example-2"><info><title>Enabling Cookie Stickiness</title></info>
+            <example xml:id="zend.http.client.cookies.example-2"><title>Enabling Cookie Stickiness</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -106,7 +106,7 @@ $client->request('GET');
         </para>
     </section>
 
-    <section xml:id="zend.http.client.custom_headers"><info><title>Setting Custom Request Headers</title></info>
+    <section xml:id="zend.http.client.custom_headers"><title>Setting Custom Request Headers</title>
         
 
         <para>
@@ -114,7 +114,7 @@ $client->request('GET');
             This method is quite diverse and can be used in several ways, as
             the following example shows:
 
-            <example xml:id="zend.http.client.custom_headers.example-1"><info><title>Setting A Single Custom Request Header</title></info>
+            <example xml:id="zend.http.client.custom_headers.example-1"><title>Setting A Single Custom Request Header</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -138,7 +138,7 @@ $client->setHeaders('Cookie', array(
             setHeader() can also be easily used to set multiple headers in one
             call, by providing an array of headers as a single parameter:
 
-            <example xml:id="zend.http.client.custom_headers.example-2"><info><title>Setting Multiple Custom Request Headers</title></info>
+            <example xml:id="zend.http.client.custom_headers.example-2"><title>Setting Multiple Custom Request Headers</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -158,7 +158,7 @@ $client->setHeaders(array(
         </para>
     </section>
 
-    <section xml:id="zend.http.client.file_uploads"><info><title>File Uploads</title></info>
+    <section xml:id="zend.http.client.file_uploads"><title>File Uploads</title>
         
 
         <para>
@@ -178,7 +178,7 @@ $client->setHeaders(array(
             the mime_content_type function will be used to guess the file's
             content type, if it is available. In any case, the default MIME
             type will be application/octet-stream.
-            <example xml:id="zend.http.client.file_uploads.example-1"><info><title>Using setFileUpload to Upload Files</title></info>
+            <example xml:id="zend.http.client.file_uploads.example-1"><title>Using setFileUpload to Upload Files</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -202,7 +202,7 @@ $client->request('POST');
             type will be set to 'application/octet-stream'.
         </para>
 
-        <note><info><title>Uploading files</title></info>
+        <note><title>Uploading files</title>
             
 
             <para>
@@ -215,7 +215,7 @@ $client->request('POST');
         </note>
     </section>
 
-    <section xml:id="zend.http.client.raw_post_data"><info><title>Sending Raw POST Data</title></info>
+    <section xml:id="zend.http.client.raw_post_data"><title>Sending Raw POST Data</title>
         
 
         <para>
@@ -226,7 +226,7 @@ $client->request('POST');
             optional, you should usually set it before sending the request -
             either using setRawData(), or with another method: setEncType().
 
-            <example xml:id="zend.http.client.raw_post_data.example-1"><info><title>Sending Raw POST Data</title></info>
+            <example xml:id="zend.http.client.raw_post_data.example-1"><title>Sending Raw POST Data</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -247,7 +247,7 @@ $client->setRawData($xml)->setEncType('text/xml')->request('POST');
             $HTTP_RAW_POST_DATA variable or through the php://input stream.
         </para>
 
-        <note><info><title>Using raw POST data</title></info>
+        <note><title>Using raw POST data</title>
             
 
             <para>
@@ -259,7 +259,7 @@ $client->setRawData($xml)->setEncType('text/xml')->request('POST');
         </note>
     </section>
 
-    <section xml:id="zend.http.client.http_authentication"><info><title>HTTP Authentication</title></info>
+    <section xml:id="zend.http.client.http_authentication"><title>HTTP Authentication</title>
         
 
         <para>
@@ -272,7 +272,7 @@ $client->setRawData($xml)->setEncType('text/xml')->request('POST');
             authentication is supported (digest authentication support is
             planned).
 
-            <example xml:id="zend.http.client.http_authentication.example-1"><info><title>Setting HTTP Authentication User and Password</title></info>
+            <example xml:id="zend.http.client.http_authentication.example-1"><title>Setting HTTP Authentication User and Password</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -289,7 +289,7 @@ $client->setUri('http://christer:secret@example.com');
         </para>
     </section>
 
-    <section xml:id="zend.http.client.multiple_requests"><info><title>Sending Multiple Requests With the Same Client</title></info>
+    <section xml:id="zend.http.client.multiple_requests"><title>Sending Multiple Requests With the Same Client</title>
         
 
         <para>
@@ -317,7 +317,7 @@ $client->setUri('http://christer:secret@example.com');
             reset and are not reused in the next request.
         </para>
 
-        <note><info><title>Resetting parameters</title></info>
+        <note><title>Resetting parameters</title>
             
 
             <para>
@@ -351,7 +351,7 @@ $client->setUri('http://christer:secret@example.com');
             authenticate the user once every session.
         </para>
 
-        <example xml:id="zend.http.client.multiple_requests.example-1"><info><title>Performing consecutive requests with one client</title></info>
+        <example xml:id="zend.http.client.multiple_requests.example-1"><title>Performing consecutive requests with one client</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -390,7 +390,7 @@ $_SESSION['cookiejar'] = $client->getCookieJar();
         </example>
     </section>
 
-    <section xml:id="zend.http.client.streaming"><info><title>Data Streaming</title></info>
+    <section xml:id="zend.http.client.streaming"><title>Data Streaming</title>
         
 
         <para>
@@ -406,7 +406,7 @@ $_SESSION['cookiejar'] = $client->getCookieJar();
             use <methodname>setRawData()</methodname> method with data argument being stream
             resource (e.g., result of <methodname>fopen()</methodname>).
 
-            <example xml:id="zend.http.client.streaming.example-1"><info><title>Sending file to HTTP server with streaming</title></info>
+            <example xml:id="zend.http.client.streaming.example-1"><title>Sending file to HTTP server with streaming</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -440,7 +440,7 @@ $client->setRawData($fp, 'application/zip')->request('PUT');
             You can either write the response to pre-defined file, or use temporary file for storing
             it and send it out or write it to another file using regular stream functions.
 
-            <example xml:id="zend.http.client.streaming.example-2"><info><title>Receiving file from HTTP server with streaming</title></info>
+            <example xml:id="zend.http.client.streaming.example-2"><title>Receiving file from HTTP server with streaming</title>
                 
 
                 <programlisting language="php"><![CDATA[

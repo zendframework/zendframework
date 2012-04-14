@@ -18,9 +18,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Translator\Adapter;
 use Zend\Translator\Adapter\AbstractAdapter,
     Zend\Translator,
@@ -41,8 +38,6 @@ class Qt extends AbstractAdapter
 {
     // Internal variables
     private $_file        = false;
-    private $_cleared     = array();
-    private $_transunit   = null;
     private $_source      = null;
     private $_target      = null;
     private $_scontent    = null;
@@ -79,9 +74,10 @@ class Qt extends AbstractAdapter
         xml_set_character_data_handler($this->_file, "_contentElement");
 
         if (!xml_parse($this->_file, file_get_contents($filename))) {
-            $ex = sprintf('XML error: %s at line %d',
+            $ex = sprintf('XML error: %s at line %d of file %s',
                           xml_error_string(xml_get_error_code($this->_file)),
-                          xml_get_current_line_number($this->_file));
+                          xml_get_current_line_number($this->_file),
+                          $filename);
             xml_parser_free($this->_file);
             throw new InvalidFileTypeException($ex);
         }

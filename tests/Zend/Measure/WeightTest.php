@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Measure;
 use Zend\Measure;
 
@@ -33,7 +30,7 @@ use Zend\Measure;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Measure
  */
-class WeightTest extends \PHPUnit_Framework_TestCase
+class WeightTest extends CommonTestCase
 {
     /**
      * test for Weight initialisation

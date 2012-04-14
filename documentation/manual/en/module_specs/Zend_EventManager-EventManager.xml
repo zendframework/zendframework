@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.event-manager.event-manager">
-    <info><title>The EventManager</title></info>
+    <title>The EventManager</title>
  
     <section xml:id="zend.event-manager.event-manager.intro">
-        <info><title>Overview</title></info>
+        <title>Overview</title>
 
         <para>
             The <classname>EventManager</classname> is a component designed for the following use
@@ -39,7 +39,7 @@
     </section>
  
     <section xml:id="zend.event-manager.event-manager.quick-start">
-        <info><title>Quick Start</title></info>
+        <title>Quick Start</title>
 
         <para>
             Typically, you will compose an <classname>EventManager</classname> instance in a class.
@@ -178,10 +178,94 @@ $foo->bar('baz', 'bat');
             values of listeners, test and loop through the results returned by listeners, prioritize
             listeners, and more. Many of these features are detailed in the examples.
         </para>
+        
+        <section xml:id="zend.event-manager.event-manager.quick-start.wildcard">
+            <title>Wildcard Listeners</title>
+
+            <para>
+                Sometimes you'll want to attach the same listener to many events or to all events of
+                a given instance -- or potentially, with the static manager, many contexts, and many
+                events. The <classname>EventManager</classname> component allows for this.
+            </para>
+
+            <example xml:id="zend.event-manager.event-manager.quick-start.wildcard.many">
+                <title>Attaching to many events at once</title>
+
+                <programlisting language="php"><![CDATA[
+$events = new EventManager();
+$events->attach(array('these', 'are', 'event', 'names'), $callback);
+]]></programlisting>
+
+                <para>
+                    Note that if you specify a priority, that priority will be used for all events
+                    specified.
+                </para>
+            </example>
+
+            <example xml:id="zend.event-manager.event-manager.quick-start.wildcard.wildcard">
+                <title>Attaching using the wildcard</title>
+
+                <programlisting language="php"><![CDATA[
+$events = new EventManager();
+$events->attach('*', $callback);
+]]></programlisting>
+
+                <para>
+                    Note that if you specify a priority, that priority will be used for this
+                    listener for any event triggered.
+                </para>
+
+                <para>
+                    What the above specifies is that <emphasis>any</emphasis> event triggered will
+                    result in notification of this particular listener.
+                </para>
+            </example>
+
+            <example xml:id="zend.event-manager.event-manager.quick-start.wildcard.static-many">
+                <title>Attaching to many events at once via the StaticEventManager</title>
+
+                <programlisting language="php"><![CDATA[
+$events = StaticEventManager::getInstance();
+// Attach to many events on the context "foo"
+$events->attach('foo', array('these', 'are', 'event', 'names'), $callback);
+
+// Attach to many events on the contexts "foo" and "bar"
+$events->attach(array('foo', 'bar'), array('these', 'are', 'event', 'names'), $callback);
+]]></programlisting>
+
+                <para>
+                    Note that if you specify a priority, that priority will be used for all events
+                    specified.
+                </para>
+            </example>
+
+            <example xml:id="zend.event-manager.event-manager.quick-start.wildcard.static-wildcard">
+                <title>Attaching to many events at once via the StaticEventManager</title>
+
+                <programlisting language="php"><![CDATA[
+$events = StaticEventManager::getInstance();
+// Attach to all events on the context "foo"
+$events->attach('foo', '*', $callback);
+
+// Attach to all events on the contexts "foo" and "bar"
+$events->attach(array('foo', 'bar'), '*', $callback);
+]]></programlisting>
+
+                <para>
+                    Note that if you specify a priority, that priority will be used for all events
+                    specified.
+                </para>
+
+                <para>
+                    The above is specifying that for the contexts "foo" and "bar", the specified
+                    listener should be notified for any event they trigger.
+                </para>
+            </example>
+        </section>
     </section>
  
     <section xml:id="zend.event-manager.event-manager.options">
-        <info><title>Configuration Options</title></info>
+        <title>Configuration Options</title>
  
         <variablelist>
             <title>EventManager Options</title>
@@ -227,7 +311,7 @@ $foo->bar('baz', 'bat');
     </section>
  
     <section xml:id="zend.event-manager.event-manager.methods">
-        <info><title>Available Methods</title></info>
+        <title>Available Methods</title>
  
         <variablelist>
             <varlistentry xml:id="zend.event-manager.event-manager.methods.constructor">
@@ -451,7 +535,7 @@ $foo->bar('baz', 'bat');
             </varlistentry>
 
             <varlistentry xml:id="zend.event-manager.event-manager.methods.get-events">
-                <term>detachAggregate</term>
+                <term>getEvents</term>
                 <listitem>
                     <methodsynopsis>
                         <methodname>getEvents</methodname>
@@ -518,10 +602,10 @@ $foo->bar('baz', 'bat');
     </section>
  
     <section xml:id="zend.event-manager.event-manager.examples">
-        <info><title>Examples</title></info>
+        <title>Examples</title>
  
         <example xml:id="zend.event-manager.event-manager.examples.modifying-args">
-            <info><title>Modifying Arguments</title></info>
+            <title>Modifying Arguments</title>
  
             <para>
                 Occasionally it can be useful to allow listeners to modify the arguments they
@@ -577,7 +661,7 @@ $v->inject(array(
         </example>
 
         <example xml:id="zend.event-manager.event-manager.examples.short-circuiting">
-            <info><title>Short Circuiting</title></info>
+            <title>Short Circuiting</title>
  
             <para>
                 One common use case for events is to trigger listeners until either one indicates no
@@ -648,7 +732,7 @@ class Foo implements Dispatchable
         </example>
 
         <example xml:id="zend.event-manager.event-manager.examples.priority">
-            <info><title>Assigning Priority to Listeners</title></info>
+            <title>Assigning Priority to Listeners</title>
  
             <para>
                 One use case for the <classname>EventManager</classname> is for implementing caching

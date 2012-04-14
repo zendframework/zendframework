@@ -20,81 +20,24 @@
 
 namespace Zend\Config\Writer;
 
-use Zend\Config\Json as JsonConfig,
-    Zend\Json\Json as JsonUtil;
-
+use Zend\Config\Exception,
+    Zend\Json\Json as JsonFormat;
 /**
  * @category   Zend
  * @package    Zend_Config
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Json extends AbstractFileWriter
+class Json extends AbstractWriter
 {
     /**
-     * If we need to pretty-print JSON data
+     * processConfig(): defined by AbstractWriter.
      *
-     * @var boolean
-     */
-    protected $_prettyPrint = false;
-
-    /**
-     * Get prettyPrint flag
-     *
-     * @return the prettyPrint flag
-     */
-    public function prettyPrint()
-    {
-        return $this->_prettyPrint;
-    }
-
-    /**
-     * Set prettyPrint flag
-     *
-     * @param  bool $prettyPrint PrettyPrint flag
-     * @return Zend_Config_Writer_Json
-     */
-    public function setPrettyPrint($flag)
-    {
-        $this->_prettyPrint = (bool) $flag;
-        return $this;
-    }
-
-    /**
-     * Render a Zend_Config into a JSON config string.
-     *
-     * @since 1.10
+     * @param  array $config
      * @return string
      */
-    public function render()
+    public function processConfig(array $config)
     {
-        $data        = $this->_config->toArray();
-        $sectionName = $this->_config->getSectionName();
-        $extends     = $this->_config->getExtends();
-
-        if (is_string($sectionName)) {
-            $data = array($sectionName => $data);
-        }
-
-        foreach ($extends as $section => $parentSection) {
-            $data[$section][JsonConfig::EXTENDS_NAME] = $parentSection;
-        }
-
-        // Ensure that each "extends" section actually exists
-        foreach ($data as $section => $sectionData) {
-            if (is_array($sectionData) && isset($sectionData[JsonConfig::EXTENDS_NAME])) {
-                $sectionExtends = $sectionData[JsonConfig::EXTENDS_NAME];
-                if (!isset($data[$sectionExtends])) {
-                    // Remove "extends" declaration if section does not exist
-                    unset($data[$section][JsonConfig::EXTENDS_NAME]);
-                }
-            }
-        }
-
-        $out = JsonUtil::encode($data);
-        if ($this->prettyPrint()) {
-             $out = JsonUtil::prettyPrint($out);
-        }
-        return $out;
+        return JsonFormat::encode($config);
     }
 }

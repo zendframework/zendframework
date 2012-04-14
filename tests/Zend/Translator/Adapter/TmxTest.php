@@ -19,14 +19,12 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Translator\Adapter;
 
 use Zend\Translator\Adapter;
 use Zend\Translator;
 use Zend\Locale;
+use Zend\Translator\Exception\InvalidFileTypeException;
 
 /**
  * Zend_Translator_Adapter_Tmx
@@ -63,6 +61,19 @@ class TmxTest extends \PHPUnit_Framework_TestCase
     {
         $this->setExpectedException('Zend\Translator\Exception\InvalidFileTypeException');
         $adapter = new Adapter\Tmx(__DIR__ . '/_files/failed.tmx', 'en');
+    }
+    
+    /**
+     * @group ZF-12012
+     */
+    public function testErrorOnCreateIncludesFilename()
+    {
+        try {
+            $adapter = new Adapter\Tmx(__DIR__ . '/_files/failed.tmx', 'en');
+            $this->fail("exception expected");
+        } catch (InvalidFileTypeException $e) {
+            $this->assertContains('failed.tmx', $e->getMessage());
+        }
     }
 
     public function testToString()

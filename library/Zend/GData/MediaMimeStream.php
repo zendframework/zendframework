@@ -20,17 +20,11 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\GData;
 
 /**
  * A streaming Media MIME class that allows for buffered read operations.
  *
- * @uses       \Zend\GData\App\IOException
- * @uses       \Zend\GData\MimeBodyString
- * @uses       \Zend\GData\MimeFile
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Gdata

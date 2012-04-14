@@ -31,7 +31,7 @@ use DOMDocument,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class AgileZen 
+class AgileZen
 {
     const URL            = 'https://agilezen.com/api/v1';
     const HEADER_KEY     = 'X-Zen-ApiKey';
@@ -193,7 +193,7 @@ class AgileZen
      */
     public function authenticate()
     {
-        $result = $this->httpCall('/projects','GET');
+        $result = $this->httpCall('/projects', 'GET');
         return ($result!==false);
     }
 
@@ -205,11 +205,11 @@ class AgileZen
      */
     public function getProjects($params=array())
     {
-        $result = $this->httpCall('/projects' . $this->getUrlParameters($params),'GET');
+        $result = $this->httpCall('/projects' . $this->getUrlParameters($params), 'GET');
         if ($result===false) {
             return false;
         }
-        $list = json_decode($result->getBody(),true);
+        $list = json_decode($result->getBody(), true);
         if (is_array($list) && !empty($list['items'])) {
             return new Container($this, $list['items'], 'project');
         } 
@@ -228,11 +228,11 @@ class AgileZen
         if (empty($projectId)) {
             throw new Exception\InvalidArgumentException(self::ERR_ID_PROJECT);
         }
-        $result = $this->httpCall("/projects/$projectId" . $this->getUrlParameters($params),'GET');
+        $result = $this->httpCall("/projects/$projectId" . $this->getUrlParameters($params), 'GET');
         if ($result===false) {
             return false;
         }
-        $project = json_decode($result->getBody(),true);
+        $project = json_decode($result->getBody(), true);
         if (is_array($project)) {
             return new Resources\Project($this, $project);
         } 
@@ -254,11 +254,11 @@ class AgileZen
         if (!is_array($data) || !Resources\Project::validKeys($data)) {
             throw new Exception\InvalidArgumentException('The array of values is not valid for the project');
         }
-        $result = $this->httpCall("/projects/$id",'PUT', $data);
+        $result = $this->httpCall("/projects/$id", 'PUT', $data);
         if ($result===false) {
             return false;
         }
-        $project = json_decode($result->getBody(),true);
+        $project = json_decode($result->getBody(), true);
         if (is_array($project)) {
             return new Resources\Project($this, $project);
         } 
@@ -278,11 +278,11 @@ class AgileZen
             throw new Exception\InvalidArgumentException(self::ERR_ID_PROJECT);
         }
         $result = $this->httpCall("/projects/$projectId/members" . 
-                $this->getUrlParameters($params),'GET');
+                $this->getUrlParameters($params), 'GET');
         if ($result===false) {
             return false;
         }
-        $members = json_decode($result->getBody(),true);
+        $members = json_decode($result->getBody(), true);
         if (is_array($members) && !empty($members['items'])) {
             return new Container($this, $members['items'], 'user');
         } 
@@ -339,11 +339,11 @@ class AgileZen
         if (empty($projectId)) {
             throw new Exception\InvalidArgumentException(self::ERR_ID_PROJECT);
         }
-        $result = $this->httpCall("/projects/$projectId/phases" . $this->getUrlParameters($params),'GET');
+        $result = $this->httpCall("/projects/$projectId/phases" . $this->getUrlParameters($params), 'GET');
         if ($result===false) {
             return false;
         }
-        $phases = json_decode($result->getBody(),true);
+        $phases = json_decode($result->getBody(), true);
         if (is_array($phases) && !empty($phases['items'])) {
             return new Container($this, $phases['items'], 'phase', $projectId);
         } 
@@ -362,11 +362,11 @@ class AgileZen
         if (empty($projectId)) {
             throw new Exception\InvalidArgumentException(self::ERR_ID_PROJECT);
         }
-        $result = $this->httpCall("/projects/$projectId/stories" . $this->getUrlParameters($params),'GET');
+        $result = $this->httpCall("/projects/$projectId/stories" . $this->getUrlParameters($params), 'GET');
         if ($result===false) {
             return false;
         }
-        $stories = json_decode($result->getBody(),true);
+        $stories = json_decode($result->getBody(), true);
         if (is_array($stories) && !empty($stories['items'])) {
             return new Container($this, $stories['items'], 'story', $projectId);
         } 
@@ -390,11 +390,11 @@ class AgileZen
             throw new Exception\InvalidArgumentException(self::ERR_ID_PHASE);
         }
         $result = $this->httpCall("/projects/$projectId/phases/$phaseId/stories" . 
-                $this->getUrlParameters($params),'GET');
+                $this->getUrlParameters($params), 'GET');
         if ($result===false) {
             return false;
         }
-        $stories = json_decode($result->getBody(),true);
+        $stories = json_decode($result->getBody(), true);
         if (is_array($stories) && !empty($stories['items'])) {
             return new Container($this, $stories['items'], 'story', $projectId);
         } 
@@ -412,11 +412,11 @@ class AgileZen
         if (empty($id)) {
             throw new Exception\InvalidArgumentException(self::ERR_ID_PROJECT);
         }
-        $result = $this->httpCall("/projects/$id?with=metrics",'GET');
+        $result = $this->httpCall("/projects/$id?with=metrics", 'GET');
         if ($result===false) {
             return false;
         }
-        $result = json_decode($result->getBody(),true);
+        $result = json_decode($result->getBody(), true);
         if (isset($result['metrics'])) {
             return $result['metrics'];
         }
@@ -441,11 +441,11 @@ class AgileZen
             throw new Exception\InvalidArgumentException(self::ERR_ID_STORY);
         }
         $result = $this->httpCall("/projects/$projectId/stories/$storyId" . 
-                $this->getUrlParameters($params),'GET');
+                $this->getUrlParameters($params), 'GET');
         if ($result===false) {
             return false;
         }
-        $story = json_decode($result->getBody(),true);
+        $story = json_decode($result->getBody(), true);
         if (!empty($story) && is_array($story)) {
             $story['projectId'] = $projectId;
             return new Resources\Story($this, $story);
@@ -469,11 +469,11 @@ class AgileZen
             throw new Exception\InvalidArgumentException("You did not specify the id of the phase");
         }
         $result = $this->httpCall("/projects/$projectId/phases/$phaseId" . 
-                $this->getUrlParameters($params),'GET');
+                $this->getUrlParameters($params), 'GET');
         if ($result===false) {
             return false;
         }
-        $phase = json_decode($result->getBody(),true);
+        $phase = json_decode($result->getBody(), true);
         if (!empty($phase) && is_array($phase)) {
             $phase['projectId'] = $projectId;
             return new Resources\Phase($this, $phase);
@@ -493,11 +493,11 @@ class AgileZen
         if (empty($projectId)) {
             throw new Exception\InvalidArgumentException(self::ERR_ID_PROJECT);
         }
-        $result = $this->httpCall("/projects/$projectId/roles" . $this->getUrlParameters($params),'GET');
+        $result = $this->httpCall("/projects/$projectId/roles" . $this->getUrlParameters($params), 'GET');
         if ($result===false) {
             return false;
         }
-        $roles = json_decode($result->getBody(),true);
+        $roles = json_decode($result->getBody(), true);
         if (is_array($roles) && !empty($roles['items'])) {
             return new Container($this, $roles['items'], 'role', $projectId);
         } 
@@ -521,11 +521,11 @@ class AgileZen
             throw new Exception\InvalidArgumentException("You did not specify the id of the role");
         }
         $result = $this->httpCall("/projects/$projectId/roles/$roleId" . 
-                $this->getUrlParameters($params),'GET');
+                $this->getUrlParameters($params), 'GET');
         if ($result===false) {
             return false;
         }
-        $role = json_decode($result->getBody(),true);
+        $role = json_decode($result->getBody(), true);
         if (!empty($role) && is_array($role)) {
             $role['projectId'] = $projectId;
             return new Resources\Role($this, $role);
@@ -546,11 +546,11 @@ class AgileZen
             throw new Exception\InvalidArgumentException(self::ERR_ID_PROJECT);
         }
         $result = $this->httpCall("/projects/$projectId/invites" . 
-                $this->getUrlParameters($params),'GET');
+                $this->getUrlParameters($params), 'GET');
         if ($result===false) {
             return false;
         } 
-        $invites = json_decode($result->getBody(),true);
+        $invites = json_decode($result->getBody(), true);
         if (is_array($invites) && !empty($invites['items'])) {
             return new Container($this, $invites['items'], 'invite', $projectId);
         } 
@@ -573,11 +573,11 @@ class AgileZen
         if (empty($inviteId)) {
             throw new Exception\InvalidArgumentException("You did not specify the id of the invite");
         }
-        $result = $this->httpCall("/projects/$projectId/invites/$inviteId",'GET');
+        $result = $this->httpCall("/projects/$projectId/invites/$inviteId", 'GET');
         if ($result===false) {
             return false;
         }
-        $invite = json_decode($result->getBody(),true);
+        $invite = json_decode($result->getBody(), true);
         if (is_array($invite) && !empty($invite)) {
             $invite['projectId'] = $projectId;
             return new Resources\Invite($this, $invite);
@@ -602,11 +602,11 @@ class AgileZen
             throw new Exception\InvalidArgumentException(self::ERR_ID_STORY);
         }
         $result = $this->httpCall("/projects/$projectId/stories/$storyId/tasks" . 
-                $this->getUrlParameters($params),'GET');
+                $this->getUrlParameters($params), 'GET');
         if ($result===false) {
             return false;
         }
-        $tasks = json_decode($result->getBody(),true);
+        $tasks = json_decode($result->getBody(), true);
         if (is_array($tasks['items']) && !empty($tasks['items'])) {
             return new Container($this, $tasks['items'], 'task', $projectId);
         }
@@ -634,11 +634,11 @@ class AgileZen
             throw new Exception\InvalidArgumentException("You did not specify the id of the task");
         }
         $result = $this->httpCall("/projects/$projectId/stories/$storyId/tasks/$taskId" .
-                $this->getUrlParameters($params),'GET');
+                $this->getUrlParameters($params), 'GET');
         if ($result===false) {
             return false;
         }
-        $task = json_decode($result->getBody(),true);
+        $task = json_decode($result->getBody(), true);
         if (is_array($task) && !empty($task)) {
             $task['projectId'] = $projectId;
             return new Resources\Task($this, $task);
@@ -668,11 +668,11 @@ class AgileZen
         if (!isset($data['text'])) {
             throw new Exception\InvalidArgumentException("You did not specify the text key in data");
         }
-        $result = $this->httpCall("/projects/$projectId/stories/$storyId/tasks",'POST',$data);
+        $result = $this->httpCall("/projects/$projectId/stories/$storyId/tasks",'POST', $data);
         if ($result===false) {
             return false;
         }
-        $task = json_decode($result->getBody(),true);
+        $task = json_decode($result->getBody(), true);
         if (is_array($task) && !empty($task)) {
             $task['projectId'] = $projectId;
             return new Resources\Task($this, $task);
@@ -706,11 +706,11 @@ class AgileZen
         if (!isset($data['text'])) {
             throw new Exception\InvalidArgumentException("You did not specify the text key in data");
         }
-        $result = $this->httpCall("/projects/$projectId/stories/$storyId/tasks/$taskId",'PUT',$data);
+        $result = $this->httpCall("/projects/$projectId/stories/$storyId/tasks/$taskId",'PUT', $data);
         if ($result===false) {
             return false;
         }
-        $task = json_decode($result->getBody(),true);
+        $task = json_decode($result->getBody(), true);
         if (is_array($task) && !empty($task)) {
             $task['projectId'] = $projectId;
             return new Resources\Task($this, $task);
@@ -765,7 +765,7 @@ class AgileZen
         if ($result===false) {
             return false;
         }
-        $story = json_decode($result->getBody(),true);
+        $story = json_decode($result->getBody(), true);
         if (is_array($story) && !empty($story)) {
             $story['projectId'] = $projectId;
             return new Resources\Story($this, $story);
@@ -800,7 +800,7 @@ class AgileZen
         if ($result===false) {
             return false;
         }
-        $story = json_decode($result->getBody(),true);
+        $story = json_decode($result->getBody(), true);
         if (is_array($story) && !empty($story)) {
             $story['projectId'] = $projectId;
             return new Resources\Story($this, $story);
@@ -850,7 +850,7 @@ class AgileZen
         if ($result===false) {
             return false;
         }
-        $role = json_decode($result->getBody(),true);
+        $role = json_decode($result->getBody(), true);
         if (is_array($role) && !empty($role)) {
             $role['projectId'] = $projectId;
             return new Resources\Role($this, $role);
@@ -884,7 +884,7 @@ class AgileZen
         if ($result===false) {
             return false;
         }
-        $role = json_decode($result->getBody(),true);
+        $role = json_decode($result->getBody(), true);
         if (is_array($role) && !empty($role)) {
             $role['projectId'] = $projectId;
             return new Resources\Role($this, $role);
@@ -936,7 +936,7 @@ class AgileZen
         if ($result===false) {
             return false;
         }
-        $phase = json_decode($result->getBody(),true);
+        $phase = json_decode($result->getBody(), true);
         if (is_array($phase) && !empty($phase)) {
             $phase['projectId'] = $projectId;
             return new Resources\Phase($this, $phase);
@@ -970,7 +970,7 @@ class AgileZen
         if ($result===false) {
             return false;
         }
-        $phase = json_decode($result->getBody(),true);
+        $phase = json_decode($result->getBody(), true);
         if (is_array($phase) && !empty($phase)) {
             $phase['projectId'] = $projectId;
             return new Resources\Phase($this, $phase);
@@ -1022,7 +1022,7 @@ class AgileZen
         if ($result===false) {
             return false;
         }
-        $invite = json_decode($result->getBody(),true);
+        $invite = json_decode($result->getBody(), true);
         if (is_array($invite) && !empty($invite)) {
             $invite['projectId'] = $projectId;
             return new Resources\Invite($this, $invite);
@@ -1071,7 +1071,7 @@ class AgileZen
         if ($result===false) {
             return false;
         } 
-        $tag = json_decode($result->getBody(),true);
+        $tag = json_decode($result->getBody(), true);
         if (is_array($tag) && !empty($tag)) {
             $tag['projectId'] = $projectId;
             return new Resources\Tag($this, $tag);
@@ -1091,11 +1091,11 @@ class AgileZen
         if (empty($projectId)) {
             throw new Exception\InvalidArgumentException(self::ERR_ID_PROJECT);
         }
-        $result = $this->httpCall("/projects/$projectId/tags" . $this->getUrlParameters($params),'GET');
+        $result = $this->httpCall("/projects/$projectId/tags" . $this->getUrlParameters($params), 'GET');
         if ($result===false) {
             return false;
         }
-        $tags = json_decode($result->getBody(),true);
+        $tags = json_decode($result->getBody(), true);
         if (is_array($tags) && !empty($tags['items'])) {
             return new Container($this, $tags['items'], 'tag', $projectId);
         } 
@@ -1124,7 +1124,7 @@ class AgileZen
         if ($result===false) {
             return false;
         }
-        $tag = json_decode($result->getBody(),true);
+        $tag = json_decode($result->getBody(), true);
         if (is_array($tag) && !empty($tag)) {
             $tag['projectId'] = $projectId;
             return new Resources\Tag($this, $tag);
@@ -1154,7 +1154,7 @@ class AgileZen
         if ($result===false) {
             return false;
         }
-        $task = json_decode($result->getBody(),true);
+        $task = json_decode($result->getBody(), true);
         if (is_array($task) && !empty($task)) {
             $task['projectId'] = $projectId;
             return new Resources\Task($this, $task);
@@ -1206,7 +1206,7 @@ class AgileZen
         if ($result===false) {
             return false;
         }
-        $attach = json_decode($result->getBody(),true);
+        $attach = json_decode($result->getBody(), true);
         if (is_array($attach) && !empty($attach)) {
             $attach['projectId'] = $projectId;
             return new Resources\Attachment($this, $attach);
@@ -1231,11 +1231,11 @@ class AgileZen
             throw new Exception\InvalidArgumentException(self::ERR_ID_STORY);
         }
         $result = $this->httpCall("/projects/$projectId/stories/$storyId/attachments" .
-                $this->getUrlParameters($params),'GET');
+                $this->getUrlParameters($params), 'GET');
         if ($result===false) {
             return false;
         }
-        $attachments = json_decode($result->getBody(),true);
+        $attachments = json_decode($result->getBody(), true);
         if (is_array($attachments) && !empty($attachments['items'])) {
             return new Container($this, $attachments['items'], 'attachment', $projectId);
         } 
@@ -1268,7 +1268,7 @@ class AgileZen
         if ($result===false) {
             return false;
         }
-        $attachments = json_decode($result->getBody(),true);
+        $attachments = json_decode($result->getBody(), true);
         if (is_array($attachments) && !empty($attachments['items'])) {
             return new Container($this, $attachments['items'], 'attachment', $projectId);
         } 
@@ -1305,7 +1305,7 @@ class AgileZen
         if ($result===false) {
             return false;
         }
-        $attachment = json_decode($result->getBody(),true);
+        $attachment = json_decode($result->getBody(), true);
         if (is_array($attachment) && !empty($attachment)) {
             $attachment['projectId'] = $projectId;
             return new Resources\Attachment($this, $attachment);
@@ -1361,7 +1361,7 @@ class AgileZen
         if ($result===false) {
             return false;
         }
-        $comment = json_decode($result->getBody(),true);
+        $comment = json_decode($result->getBody(), true);
         if (is_array($comment) && !empty($comment)) {
             $comment['projectId'] = $projectId;
             return new Resources\Comment($this, $comment);
@@ -1386,11 +1386,11 @@ class AgileZen
             throw new Exception\InvalidArgumentException(self::ERR_ID_STORY);
         }
         $result = $this->httpCall("/projects/$projectId/stories/$storyId/comments" .
-                $this->getUrlParameters($params),'GET');
+                $this->getUrlParameters($params), 'GET');
         if ($result===false) {
             return false;
         }
-        $comments = json_decode($result->getBody(),true);
+        $comments = json_decode($result->getBody(), true);
         if (is_array($comments) && !empty($comments['items'])) {
             return new Container($this, $comments['items'], 'comment', $projectId);
         } 
@@ -1423,7 +1423,7 @@ class AgileZen
         if ($result===false) {
             return false;
         }
-        $comment = json_decode($result->getBody(),true);
+        $comment = json_decode($result->getBody(), true);
         if (is_array($comment) && !empty($comment)) {
             $comment['projectId'] = $projectId;
             return new Resources\Comment($this, $comment);
@@ -1461,7 +1461,7 @@ class AgileZen
         if ($result===false) {
             return false;
         }
-        $comment = json_decode($result->getBody(),true);
+        $comment = json_decode($result->getBody(), true);
         if (is_array($comment) && !empty($comment)) {
             $comment['projectId'] = $projectId;
             return new Resources\Comment($this, $comment);
@@ -1503,7 +1503,7 @@ class AgileZen
         if ($result===false) {
             return false;
         }
-        $me = json_decode($result->getBody(),true);
+        $me = json_decode($result->getBody(), true);
         if (is_array($me) && !empty($me)) {
             return new Resources\User($this, $me);
         }
@@ -1522,10 +1522,10 @@ class AgileZen
             throw new Exception\InvalidArgumentException(self::ERR_DATA);
         }
         $result = $this->httpCall("/me", 'PUT', $data);
-         if ($result===false) {
+        if ($result===false) {
             return false;
         }
-        $me = json_decode($result->getBody(),true);
+        $me = json_decode($result->getBody(), true);
         if (is_array($me) && !empty($me)) {
             return new Resources\User($this, $me);
         }
@@ -1540,11 +1540,11 @@ class AgileZen
      */
     public function getMyStories($params=array())
     {
-        $result = $this->httpCall("/me/stories" . $this->getUrlParameters($params),'GET');
+        $result = $this->httpCall("/me/stories" . $this->getUrlParameters($params), 'GET');
         if ($result===false) {
             return false;
         }
-        $stories = json_decode($result->getBody(),true);
+        $stories = json_decode($result->getBody(), true);
         if (is_array($stories) && !empty($stories['items'])) {
             return new Container($this, $stories['items'], 'story');
         } 

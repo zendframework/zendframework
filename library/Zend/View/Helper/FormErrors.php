@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\View\Helper;
 
 /**
@@ -75,8 +72,9 @@ class FormErrors extends FormElement
         }
 
         if ($escape) {
+            $escaper = $this->view->plugin('escape');
             foreach ($errors as $key => $error) {
-                $errors[$key] = $this->view->vars()->escape($error);
+                $errors[$key] = $escaper($error);
             }
         }
 

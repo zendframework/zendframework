@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Crypt\Math\BigInteger;
 
 use Zend\Crypt\Math\BigInteger\Gmp;

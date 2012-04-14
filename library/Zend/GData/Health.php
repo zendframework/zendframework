@@ -20,9 +20,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\GData;
 
 /**
@@ -30,13 +27,6 @@ namespace Zend\GData;
  *
  * @link http://code.google.com/apis/health
  *
- * @uses       \Zend\GData\GData
- * @uses       \Zend\GData\App\AuthException
- * @uses       \Zend\GData\App\InvalidArgumentException
- * @uses       \Zend\GData\Health\ProfileEntry
- * @uses       \Zend\GData\Health\ProfileFeed
- * @uses       \Zend\GData\Health\ProfileListEntry
- * @uses       \Zend\GData\Health\ProfileListFeed
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Health
@@ -155,7 +145,7 @@ class Health extends GData
 
         // use correct feed for /h9 or /health
         if ($this->_useH9Sandbox) {
-            $uri = preg_replace('/\/health\//', '/h9/', $uri);
+            $uri = str_replace('/health/', '/h9/', $uri);
         }
 
         return parent::getFeed($uri, 'Zend\GData\Health\ProfileListFeed');
@@ -190,7 +180,7 @@ class Health extends GData
 
         // use correct feed for /h9 or /health
         if ($this->_useH9Sandbox) {
-            $uri = preg_replace('/\/health\//', '/h9/', $uri);
+            $uri = str_replace('/health/', '/h9/', $uri);
         }
 
         return parent::getFeed($uri, 'Zend\GData\Health\ProfileFeed');
@@ -248,7 +238,7 @@ class Health extends GData
 
         // use correct feed for /h9 or /health
         if ($this->_useH9Sandbox) {
-            $uri = preg_replace('/\/health\//', '/h9/', $uri);
+            $uri = str_replace('/health/', '/h9/', $uri);
         }
 
         return $this->insertEntry($entry, $uri, 'Zend\GData\Health\ProfileEntry');

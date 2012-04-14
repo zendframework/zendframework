@@ -19,7 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/** @namespace */
 namespace Zend\Cloud\Infrastructure\Adapter\Exception;
 
 use Zend\Cloud\Infrastructure\Adapter\Exception;

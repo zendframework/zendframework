@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Measure;
 use Zend\Measure;
 use Zend\Registry;
@@ -35,7 +32,7 @@ use Zend\Locale\Data\Cldr;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Measure
  */
-class TemperatureTest extends \PHPUnit_Framework_TestCase
+class TemperatureTest extends CommonTestCase
 {
     public function setUp()
     {
@@ -43,10 +40,11 @@ class TemperatureTest extends \PHPUnit_Framework_TestCase
             $registry = Registry::getInstance();
             unset($registry['Zend_Locale']);
         }
-        Cldr::removeCache();
 
         $this->_locale = setlocale(LC_ALL, 0);
         setlocale(LC_ALL, 'de');
+
+        parent::setUp();
     }
 
     public function tearDown()
@@ -61,6 +59,8 @@ class TemperatureTest extends \PHPUnit_Framework_TestCase
             return;
         }
         setlocale(LC_ALL, $this->_locale);
+
+        parent::tearDown();
     }
 
     /**

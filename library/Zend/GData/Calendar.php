@@ -20,21 +20,12 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\GData;
 
 /**
  * Service class for interacting with the Google Calendar data API
  * @link http://code.google.com/apis/gdata/calendar.html
  *
- * @uses       \Zend\GData\GData
- * @uses       \Zend\GData\App\InvalidArgumentException
- * @uses       \Zend\GData\Calendar\EventEntry
- * @uses       \Zend\GData\Calendar\EventFeed
- * @uses       \Zend\GData\Calendar\ListEntry
- * @uses       \Zend\GData\Calendar\ListFeed
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Calendar

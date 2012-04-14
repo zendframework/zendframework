@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Barcode\Renderer;
 
 use Traversable,
@@ -29,7 +26,7 @@ use Traversable,
     Zend\Barcode\Exception as BarcodeException,
     Zend\Barcode\Object,
     Zend\Barcode\Renderer,
-    Zend\Stdlib\IteratorToArray;
+    Zend\Stdlib\ArrayUtils;
 
 /**
  * Class for rendering the barcode
@@ -108,7 +105,7 @@ abstract class AbstractRenderer implements Renderer
     public function __construct($options = null)
     {
         if ($options instanceof Traversable) {
-            $options = IteratorToArray::convert($options);
+            $options = ArrayUtils::iteratorToArray($options);
         }
         if (is_array($options)) {
             $this->setOptions($options);

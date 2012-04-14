@@ -19,10 +19,9 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\GData\App\TestAsset;
+
+use Zend\GData\App\Base;
 
 /**
  * Minimal implementation of Zend_GData_App_Base
@@ -34,7 +33,7 @@ namespace ZendTest\GData\App\TestAsset;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-class MockBase extends \Zend\GData\App\Base
+class MockBase extends Base
 {
     // This space intentionally left blank.
 }

@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\View\Helper;
 
 use Zend\Cache\StorageFactory as CacheFactory,
@@ -66,28 +63,7 @@ class CurrencyTest extends \PHPUnit_Framework_TestCase
     {
         $this->clearRegistry();
 
-        $this->_cacheDir = sys_get_temp_dir() . '/zend_view_helper_currency';
-        $this->_removeRecursive($this->_cacheDir);
-        mkdir($this->_cacheDir);
-
-        $this->_cache = CacheFactory::factory(array(
-            'adapter' => array(
-                'name' => 'Filesystem',
-                'options' => array(
-                    'ttl'       => 120,
-                    'cache_dir' => $this->_cacheDir,
-                )
-            ),
-            'plugins' => array(
-                array(
-                    'name' => 'serializer',
-                    'options' => array(
-                        'serializer' => 'php_serialize',
-                    ),
-                ),
-            ),
-        ));
-
+        $this->_cache = CacheFactory::adapterFactory('memory', array('memory_limit' => 0));
         Currency\Currency::setCache($this->_cache);
 
         $this->helper = new Helper\Currency('de_AT');
@@ -103,29 +79,7 @@ class CurrencyTest extends \PHPUnit_Framework_TestCase
     {
         unset($this->helper);
         $this->_cache->clear(CacheAdapter::MATCH_ALL);
-        $this->_removeRecursive($this->_cacheDir);
         $this->clearRegistry();
-    }
-
-    protected function _removeRecursive($dir)
-    {
-        if (file_exists($dir)) {
-            $dirIt = new \DirectoryIterator($dir);
-            foreach ($dirIt as $entry) {
-                $fname = $entry->getFilename();
-                if ($fname == '.' || $fname == '..') {
-                    continue;
-                }
-
-                if ($entry->isFile()) {
-                    unlink($entry->getPathname());
-                } else {
-                    $this->_removeRecursive($entry->getPathname());
-                }
-            }
-
-            rmdir($dir);
-        }
     }
 
     public function testCurrencyObjectPassedToConstructor()

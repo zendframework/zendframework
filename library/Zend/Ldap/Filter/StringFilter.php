@@ -19,15 +19,11 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Ldap\Filter;
 
 /**
- * Zend_Ldap_Filter_String provides a simple custom string filter.
+ * Zend\Ldap\Filter\StringFilter provides a simple custom string filter.
  *
- * @uses       \Zend\Ldap\Filter\AbstractFilter
  * @category   Zend
  * @package    Zend_Ldap
  * @subpackage Filter
@@ -41,16 +37,16 @@ class StringFilter extends AbstractFilter
      *
      * @var string
      */
-    protected $_filter;
+    protected $filter;
 
     /**
-     * Creates a Zend_Ldap_Filter_String.
+     * Creates a Zend\Ldap\Filter\StringFilter.
      *
      * @param string $filter
      */
     public function __construct($filter)
     {
-        $this->_filter = $filter;
+        $this->filter = $filter;
     }
 
     /**
@@ -60,6 +56,6 @@ class StringFilter extends AbstractFilter
      */
     public function toString()
     {
-        return '(' . $this->_filter . ')';
+        return '(' . $this->filter . ')';
     }
 }

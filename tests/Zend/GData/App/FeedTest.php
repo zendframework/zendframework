@@ -20,11 +20,10 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\GData\App;
-use Zend\GData\App;
+
+use Zend\GData\App,
+    Zend\Http\Header\Etag;
 
 /**
  * @category   Zend
@@ -113,15 +112,14 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     }
 
     public function testCanSetAndGetEtag() {
-        $data = "W/&amp;FooBarBaz&amp;";
+        $data = Etag::fromString("Etag: W/&amp;FooBarBaz&amp;");
         $this->feed->setEtag($data);
         $this->assertEquals($this->feed->getEtag(), $data);
     }
 
     public function testSetServicePropagatesToChildren() {
         // Setup
-        $entries = array(new App\Entry(),
-                         new App\Entry());
+        $entries = array(new App\Entry(), new App\Entry());
         foreach ($entries as $entry) {
             $this->feed->addEntry($entry);
         }
@@ -134,20 +132,15 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         if (!is_object($service)) {
             $this->fail('No feed service received');
         }
-        $this->assertEquals(
-            'Zend\GData\App',
-            get_class($service)
-            );
+        $this->assertEquals('Zend\GData\App', get_class($service));
 
         foreach ($entries as $entry) {
             $service = $entry->getService();
             if (!is_object($service)) {
                 $this->fail('No entry service received');
             }
-            $this->assertEquals(
-                'Zend\GData\App',
-                get_class($service)
-                );
+            $this->assertEquals('Zend\GData\App', get_class($service));
+
         }
 
         // Set null service instance and test for propagation

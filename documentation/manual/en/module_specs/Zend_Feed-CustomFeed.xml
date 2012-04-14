@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.custom-feed"><info><title>Custom Feed and Entry Classes</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.custom-feed"><title>Custom Feed and Entry Classes</title>
     
 
     <para>
@@ -15,7 +15,7 @@
         worry about namespaces at all.
     </para>
 
-    <example xml:id="zend.feed.custom-feed.example.extending"><info><title>Extending the Atom Entry Class with Custom Namespaces</title></info>
+    <example xml:id="zend.feed.custom-feed.example.extending"><title>Extending the Atom Entry Class with Custom Namespaces</title>
         
 
         <programlisting language="php"><![CDATA[

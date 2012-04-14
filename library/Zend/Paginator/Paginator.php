@@ -18,9 +18,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Paginator;
 
 use ArrayIterator,
@@ -34,7 +31,7 @@ use ArrayIterator,
     Zend\Db\Table\Select as DbTableSelect,
     Zend\Filter\Filter,
     Zend\Json\Json,
-    Zend\Stdlib\IteratorToArray,
+    Zend\Stdlib\ArrayUtils,
     Zend\View;
 
 /**
@@ -263,7 +260,7 @@ class Paginator implements Countable, IteratorAggregate
     public static function setConfig($config)
     {
         if ($config instanceof Traversable) {
-            $config = IteratorToArray::convert($config);
+            $config = ArrayUtils::iteratorToArray($config);
         }
         if (!is_array($config)) {
             throw new Exception\InvalidArgumentException(__METHOD__ . ' expects an array or Traversable');

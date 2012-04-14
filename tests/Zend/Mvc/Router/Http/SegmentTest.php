@@ -66,6 +66,12 @@ class SegmentTest extends TestCase
                 null,
                 array('foo' => 'foo-bar')
             ),
+            'constraints-with-parantheses-dont-break-parameter-map' => array(
+                new Segment('/:foo/:bar', array('foo' => '(bar)')),
+                '/bar/baz',
+                null,
+                array('foo' => 'bar', 'bar' => 'baz')
+            ),
             'simple-match-with-optional-parameter' => array(
                 new Segment('/[:foo]', array(), array('foo' => 'bar')),
                 '/',
@@ -119,6 +125,18 @@ class SegmentTest extends TestCase
                 '/bar/bat',
                 null,
                 array('foo' => 'bar', 'baz' => 'bat')
+            ),
+            'parameter-with-dash-in-name' => array(
+                new Segment('/:foo-bar'),
+                '/baz',
+                null,
+                array('foo-bar' => 'baz')
+            ),
+            'url-encoded-parameters-are-decoded' => array(
+                new Segment('/:foo'),
+                '/foo+bar',
+                null,
+                array('foo' => 'foo bar')
             ),
         );
     }

@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\GData;
 
 /**
@@ -448,7 +445,7 @@ class Photos extends GData
             try {
                 $this->delete($album);
             } catch (App\HttpException $e) {
-                if ($e->getResponse()->getStatus() === 409) {
+                if ($e->getResponse()->getStatusCode() === 409) {
                     $entry = new AlbumEntry($e->getResponse()->getBody());
                     $this->delete($entry->getLink('edit')->href);
                 } else {
@@ -477,7 +474,7 @@ class Photos extends GData
             try {
                 $this->delete($photo);
             } catch (App\HttpException $e) {
-                if ($e->getResponse()->getStatus() === 409) {
+                if ($e->getResponse()->getStatusCode() === 409) {
                     $entry = new PhotoEntry($e->getResponse()->getBody());
                     $this->delete($entry->getLink('edit')->href);
                 } else {
@@ -506,7 +503,7 @@ class Photos extends GData
             try {
                 $this->delete($comment);
             } catch (App\HttpException $e) {
-                if ($e->getResponse()->getStatus() === 409) {
+                if ($e->getResponse()->getStatusCode() === 409) {
                     $entry = new CommentEntry($e->getResponse()->getBody());
                     $this->delete($entry->getLink('edit')->href);
                 } else {
@@ -535,7 +532,7 @@ class Photos extends GData
             try {
                 $this->delete($tag);
             } catch (App\HttpException $e) {
-                if ($e->getResponse()->getStatus() === 409) {
+                if ($e->getResponse()->getStatusCode() === 409) {
                     $entry = new TagEntry($e->getResponse()->getBody());
                     $this->delete($entry->getLink('edit')->href);
                 } else {

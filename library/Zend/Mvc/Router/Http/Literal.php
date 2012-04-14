@@ -15,17 +15,14 @@
  * @category   Zend
  * @package    Zend_Mvc_Router
  * @subpackage Http
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Mvc\Router\Http;
 
 use Traversable,
-    Zend\Stdlib\IteratorToArray,
+    Zend\Stdlib\ArrayUtils,
     Zend\Stdlib\RequestDescription as Request,
     Zend\Mvc\Router\Exception;
 
@@ -34,7 +31,7 @@ use Traversable,
  *
  * @package    Zend_Mvc_Router
  * @subpackage Http
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @see        http://manuals.rubyonrails.com/read/chapter/65
  */
@@ -56,28 +53,28 @@ class Literal implements Route
 
     /**
      * Create a new literal route.
-     * 
+     *
      * @param  string $route
-     * @param  array  $defaults 
-     * @return void
+     * @param  array  $defaults
      */
     public function __construct($route, array $defaults = array())
     {
         $this->route    = $route;
         $this->defaults = $defaults;
     }
-    
+
     /**
      * factory(): defined by Route interface.
      *
      * @see    Route::factory()
-     * @param  array|Traversable $options
-     * @return void
+     * @param  array|\Traversable $options
+     * @throws \Zend\Mvc\Router\Exception\InvalidArgumentException
+     * @return Literal
      */
     public static function factory($options = array())
     {
         if ($options instanceof Traversable) {
-            $options = IteratorToArray::convert($options);
+            $options = ArrayUtils::iteratorToArray($options);
         } elseif (!is_array($options)) {
             throw new Exception\InvalidArgumentException(__METHOD__ . ' expects an array or Traversable set of options');
         }
@@ -97,8 +94,9 @@ class Literal implements Route
      * match(): defined by Route interface.
      *
      * @see    Route::match()
-     * @param  Request $request
-     * @return RouteMatch
+     * @param  Request  $request
+     * @param  int|null $pathOffset
+     * @return RouteMatch|null
      */
     public function match(Request $request, $pathOffset = null)
     {
@@ -115,7 +113,7 @@ class Literal implements Route
                     return new RouteMatch($this->defaults, strlen($this->route));
                 }
             }
-            
+
             return null;
         }
 
@@ -138,10 +136,10 @@ class Literal implements Route
     {
         return $this->route;
     }
-    
+
     /**
      * getAssembledParams(): defined by Route interface.
-     * 
+     *
      * @see    Route::getAssembledParams
      * @return array
      */

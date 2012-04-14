@@ -19,13 +19,15 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
+namespace ZendTest\Service\Technorati;
+use Zend\Service\Technorati;
 
 /**
  * Test helper
  */
 
 /**
- * @see Zend_Service_Technorati_GetInfoResult
+ * @see Technorati\GetInfoResult
  */
 
 
@@ -38,7 +40,7 @@
  * @group      Zend_Service
  * @group      Zend_Service_Technorati
  */
-class Zend_Service_Technorati_GetInfoResultTest extends Zend_Service_Technorati_TestCase
+class GetInfoResultTest extends TestCase
 {
     public function setUp()
     {
@@ -47,27 +49,22 @@ class Zend_Service_Technorati_GetInfoResultTest extends Zend_Service_Technorati_
 
     public function testConstruct()
     {
-        $this->_testConstruct('Zend_Service_Technorati_GetInfoResult', array($this->dom));
-    }
-
-    public function testConstructThrowsExceptionWithInvalidDom()
-    {
-        $this->_testConstructThrowsExceptionWithInvalidDom('Zend_Service_Technorati_GetInfoResult', 'DOMDocument');
+        $this->_testConstruct('Zend\Service\Technorati\GetInfoResult', array($this->dom));
     }
 
     public function testGetInfoResult()
     {
-        $object = new Zend_Service_Technorati_GetInfoResult($this->dom);
+        $object = new Technorati\GetInfoResult($this->dom);
 
         // check author
         $author = $object->getAuthor();
-        $this->assertType('Zend_Service_Technorati_Author', $author);
+        $this->assertInstanceOf('Zend\Service\Technorati\Author', $author);
         $this->assertEquals('weppos', $author->getUsername());
 
         // check weblogs
         $weblogs = $object->getWeblogs();
         $this->assertInternalType('array', $weblogs);
         $this->assertEquals(2, count($weblogs));
-        $this->assertType('Zend_Service_Technorati_Weblog', $weblogs[0]);
+        $this->assertInstanceOf('Zend\Service\Technorati\Weblog', $weblogs[0]);
     }
 }

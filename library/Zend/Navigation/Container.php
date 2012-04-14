@@ -18,16 +18,13 @@
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Navigation;
 
 use Countable,
     RecursiveIterator,
     RecursiveIteratorIterator,
     Traversable,
-    Zend\Stdlib\IteratorToArray;
+    Zend\Stdlib\ArrayUtils;
 
 /**
  * Zend_Navigation_Container

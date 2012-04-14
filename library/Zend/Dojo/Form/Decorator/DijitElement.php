@@ -18,9 +18,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Dojo\Form\Decorator;
 
 use Zend\Form\Decorator\ViewHelper as ViewHelperDecorator,
@@ -169,8 +166,11 @@ class DijitElement extends ViewHelperDecorator
         $name      = $element->getFullyQualifiedName();
 
         $dijitParams = $this->getDijitParams();
-        $dijitParams['required'] = $element->isRequired();
-
+        
+        if ($element->isRequired()) {
+            $dijitParams['required'] = true;
+        }
+        
         $id = $element->getId();
         if ($view->plugin('dojo')->hasDijit($id)) {
             trigger_error(sprintf('Duplicate dijit ID detected for id "%s; temporarily generating uniqid"', $id), E_USER_NOTICE);

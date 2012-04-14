@@ -17,14 +17,13 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 namespace ZendTest\Config\Writer;
 
-use Zend\Config\Config,
-    Zend\Config\Json as JsonConfig,
-    Zend\Config\Writer\Json as JsonWriter;;
+use \Zend\Config\Writer\Json as JsonWriter,
+    \Zend\Config\Config,
+    \Zend\Config\Reader\Json as JsonReader;
 
 /**
  * @category   Zend
@@ -32,119 +31,40 @@ use Zend\Config\Config,
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @group      Zend_Config
  */
-class JsonTest extends \PHPUnit_Framework_TestCase
+class JsonTest extends AbstractWriterTestCase
 {
-    protected $_tempName;
 
     public function setUp()
     {
-        $this->_tempName = tempnam(__DIR__ . '/temp', 'tmp');
+        $this->reader = new JsonReader();
+        $this->writer = new JsonWriter();
     }
 
-    public function tearDown()
-    {
-        @unlink($this->_tempName);
-    }
-
-    public function testNoFilenameSet()
-    {
-        $writer = new JsonWriter(array('config' => new Config(array())));
-
-        $this->setExpectedException('Zend\Config\Exception\InvalidArgumentException', 'No filename was set');
-        $writer->write();
-    }
-
-    public function testNoConfigSet()
-    {
-        $writer = new JsonWriter(array('filename' => $this->_tempName));
-
-        $this->setExpectedException('Zend\Config\Exception\InvalidArgumentException', 'No config was set');
-        $writer->write();
-    }
-
-    public function testFileNotWritable()
-    {
-        $writer = new JsonWriter(array('config' => new Config(array()), 'filename' => '/../../../'));
-
-        $this->setExpectedException('Zend\Config\Exception\RuntimeException', 'Could not write to file');
-        $writer->write();
-    }
-
-    public function testWriteAndRead()
-    {
-        $config = new Config(array('default' => array('test' => 'foo')));
-
-        $writer = new JsonWriter(array('config' => $config, 'filename' => $this->_tempName));
-        $writer->write();
-
-        $config = new JsonConfig($this->_tempName, null);
-
-        $this->assertEquals('foo', $config->default->test);
-    }
+   
 
     public function testNoSection()
     {
         $config = new Config(array('test' => 'foo', 'test2' => array('test3' => 'bar')));
 
-        $writer = new JsonWriter(array('config' => $config, 'filename' => $this->_tempName));
-        $writer->write();
+        $this->writer->toFile($this->getTestAssetFileName(), $config);
 
-        $config = new JsonConfig($this->_tempName);
+        $config = $this->reader->fromFile($this->getTestAssetFileName());
 
-        $this->assertEquals('foo', $config->test);
-        $this->assertEquals('bar', $config->test2->test3);
+        $this->assertEquals('foo', $config['test']);
+        $this->assertEquals('bar', $config['test2']['test3']);
     }
 
     public function testWriteAndReadOriginalFile()
     {
-        $config = new JsonConfig(__DIR__ . '/files/allsections.json', null, array('skip_extends' => true));
+        $config = $this->reader->fromFile(__DIR__ . '/files/allsections.json');
 
-        $writer = new JsonWriter(array('config' => $config, 'filename' => $this->_tempName));
-        $writer->write();
+        $this->writer->toFile($this->getTestAssetFileName(), $config);
 
-        $config = new JsonConfig($this->_tempName, null);
-        $this->assertEquals('multi', $config->staging->one->two->three, var_export($config->toArray(), 1));
+        $config = $this->reader->fromFile($this->getTestAssetFileName());
 
-        $config = new JsonConfig($this->_tempName, null, array('skip_extends' => true));
-        $this->assertFalse(isset($config->staging->one));
-    }
+        $this->assertEquals('multi', $config['all']['one']['two']['three']);
 
-
-    public function testWriteAndReadSingleSection()
-    {
-        $config = new JsonConfig(__DIR__ . '/files/allsections.json', 'staging', array('skip_extends' => true));
-
-        $writer = new JsonWriter(array('config' => $config, 'filename' => $this->_tempName));
-        $writer->write();
-
-        $config = new JsonConfig($this->_tempName, null);
-
-        $this->assertEquals('staging', $config->staging->hostname);
-        $this->assertEquals('', $config->staging->debug);
-        $this->assertEquals(null, @$config->production);
-    }
-
-    public function testArgumentOverride()
-    {
-        $config = new Config(array('default' => array('test' => 'foo')));
-
-        $writer = new JsonWriter();
-        $writer->write($this->_tempName, $config);
-
-        $config = new JsonConfig($this->_tempName, null);
-
-        $this->assertEquals('foo', $config->default->test);
-    }
-
-    public function testCanWritePrettyPrintedVersion()
-    {
-        $config = new JsonConfig(__DIR__ . '/files/allsections-pretty.json');
-
-        $writer = new JsonWriter(array('config' => $config, 'filename' => $this->_tempName));
-        $writer->setPrettyPrint(true);
-        $writer->write();
-        $testOutput     = file_get_contents($this->_tempName);
-        $this->assertRegExp('/^\s+/m', $testOutput);
     }
 }

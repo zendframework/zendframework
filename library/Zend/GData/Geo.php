@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\GData;
 
 /**
@@ -31,7 +28,6 @@ namespace Zend\GData;
  * @link http://www.opengis.net/gml/
  * @link http://code.google.com/apis/picasaweb/reference.html#georss_reference
  *
- * @uses       \Zend\GData\GData
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Geo

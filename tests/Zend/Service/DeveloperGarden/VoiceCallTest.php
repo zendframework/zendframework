@@ -67,13 +67,13 @@ class Zend_Service_DeveloperGarden_VoiceCallTest extends PHPUnit_Framework_TestC
         $bNumber = '+4932-000002';
 
 
-        $this->assertType(
+        $this->assertInstanceOf(
             'Zend_Service_DeveloperGarden_Client_AbstractClient',
             $this->service->setEnvironment(Zend_Service_DeveloperGarden_VoiceCall_Mock::ENV_MOCK)
         );
 
         $result = $this->service->newCall($aNumber, $bNumber, 30, 30);
-        $this->assertType(
+        $this->assertInstanceOf(
             'Zend_Service_DeveloperGarden_Response_VoiceButler_NewCallResponse',
             $result
         );
@@ -97,19 +97,19 @@ class Zend_Service_DeveloperGarden_VoiceCallTest extends PHPUnit_Framework_TestC
         );
 
 
-        $this->assertType(
+        $this->assertInstanceOf(
             'Zend_Service_DeveloperGarden_Client_AbstractClient',
             $this->service->setEnvironment(Zend_Service_DeveloperGarden_VoiceCall_Mock::ENV_MOCK)
         );
 
         $result = $this->service->newCallSequenced($aNumber, $bNumber, 30, 30, 5);
-        $this->assertType(
+        $this->assertInstanceOf(
             'Zend_Service_DeveloperGarden_Response_VoiceButler_NewCallSequencedResponse',
             $result
         );
 
         // test getReturn specially here
-        $this->assertType(
+        $this->assertInstanceOf(
             'stdClass',
             $result->getReturn()
         );
@@ -129,7 +129,7 @@ class Zend_Service_DeveloperGarden_VoiceCallTest extends PHPUnit_Framework_TestC
         );
 
 
-        $this->assertType(
+        $this->assertInstanceOf(
             'Zend_Service_DeveloperGarden_Client_AbstractClient',
             $this->service->setEnvironment(Zend_Service_DeveloperGarden_VoiceCall_Mock::ENV_MOCK)
         );
@@ -143,13 +143,13 @@ class Zend_Service_DeveloperGarden_VoiceCallTest extends PHPUnit_Framework_TestC
         $bNumber = '+4932-000001';
 
 
-        $this->assertType(
+        $this->assertInstanceOf(
             'Zend_Service_DeveloperGarden_Client_AbstractClient',
             $this->service->setEnvironment(Zend_Service_DeveloperGarden_VoiceCall_Mock::ENV_MOCK)
         );
 
         $result = $this->service->newCall($aNumber, $bNumber, 30, 30);
-        $this->assertType(
+        $this->assertInstanceOf(
             'Zend_Service_DeveloperGarden_Response_VoiceButler_NewCallResponse',
             $result
         );
@@ -161,7 +161,7 @@ class Zend_Service_DeveloperGarden_VoiceCallTest extends PHPUnit_Framework_TestC
         $this->assertNotNull($sessionId);
 
         $result = $this->service->tearDownCall($sessionId);
-        $this->assertType(
+        $this->assertInstanceOf(
             'Zend_Service_DeveloperGarden_Response_VoiceButler_TearDownCallResponse',
             $result
         );
@@ -178,7 +178,7 @@ class Zend_Service_DeveloperGarden_VoiceCallTest extends PHPUnit_Framework_TestC
      */
     public function testTearDownCallException()
     {
-        $this->assertType(
+        $this->assertInstanceOf(
             'Zend_Service_DeveloperGarden_Client_AbstractClient',
             $this->service->setEnvironment(Zend_Service_DeveloperGarden_VoiceCall_Mock::ENV_MOCK)
         );
@@ -192,13 +192,13 @@ class Zend_Service_DeveloperGarden_VoiceCallTest extends PHPUnit_Framework_TestC
         $bNumber = '+4932-000001';
 
 
-        $this->assertType(
+        $this->assertInstanceOf(
             'Zend_Service_DeveloperGarden_Client_AbstractClient',
             $this->service->setEnvironment(Zend_Service_DeveloperGarden_VoiceCall_Mock::ENV_MOCK)
         );
 
         $result = $this->service->newCall($aNumber, $bNumber, 30, 30);
-        $this->assertType(
+        $this->assertInstanceOf(
             'Zend_Service_DeveloperGarden_Response_VoiceButler_NewCallResponse',
             $result
         );
@@ -210,7 +210,7 @@ class Zend_Service_DeveloperGarden_VoiceCallTest extends PHPUnit_Framework_TestC
         $this->assertNotNull($sessionId);
 
         $result = $this->service->callStatus($sessionId, 30);
-        $this->assertType(
+        $this->assertInstanceOf(
             'Zend_Service_DeveloperGarden_Response_VoiceButler_CallStatusResponse',
             $result
         );
@@ -302,61 +302,61 @@ class Zend_Service_DeveloperGarden_VoiceCallTest extends PHPUnit_Framework_TestC
             $request->getEnvironment()
         );
 
-        $this->assertType(
+        $this->assertInstanceOf(
             'Zend_Service_DeveloperGarden_Request_VoiceButler_NewCall',
             $request->setAccount(999999)
         );
         $this->assertEquals(999999, $request->getAccount());
 
-        $this->assertType(
+        $this->assertInstanceOf(
             'Zend_Service_DeveloperGarden_Request_VoiceButler_NewCall',
             $request->setANumber('+49-123456')
         );
         $this->assertEquals('+49-123456', $request->getANumber());
 
-        $this->assertType(
+        $this->assertInstanceOf(
             'Zend_Service_DeveloperGarden_Request_VoiceButler_NewCall',
             $request->setBNumber('+49-654321')
         );
         $this->assertEquals('+49-654321', $request->getBNumber());
 
-        $this->assertType(
+        $this->assertInstanceOf(
             'Zend_Service_DeveloperGarden_Request_VoiceButler_NewCall',
             $request->setBNumber('+49-654321')
         );
         $this->assertEquals('+49-654321', $request->getBNumber());
 
-        $this->assertType(
+        $this->assertInstanceOf(
             'Zend_Service_DeveloperGarden_Request_VoiceButler_NewCall',
             $request->setPrivacyA(true)
         );
         $this->assertEquals(true, $request->getPrivacyA());
 
-        $this->assertType(
+        $this->assertInstanceOf(
             'Zend_Service_DeveloperGarden_Request_VoiceButler_NewCall',
             $request->setPrivacyB(true)
         );
         $this->assertEquals(true, $request->getPrivacyB());
 
-        $this->assertType(
+        $this->assertInstanceOf(
             'Zend_Service_DeveloperGarden_Request_VoiceButler_NewCall',
             $request->setExpiration(30)
         );
         $this->assertEquals(30, $request->getExpiration());
 
-        $this->assertType(
+        $this->assertInstanceOf(
             'Zend_Service_DeveloperGarden_Request_VoiceButler_NewCall',
             $request->setMaxDuration(60)
         );
         $this->assertEquals(60, $request->getMaxDuration());
 
-        $this->assertType(
+        $this->assertInstanceOf(
             'Zend_Service_DeveloperGarden_Request_VoiceButler_NewCall',
             $request->setGreeter('49-999999')
         );
         $this->assertEquals('49-999999', $request->getGreeter());
 
-        $this->assertType(
+        $this->assertInstanceOf(
             'Zend_Service_DeveloperGarden_Request_VoiceButler_NewCall',
             $request->setEnvironment(Zend_Service_DeveloperGarden_VoiceCall_Mock::ENV_MOCK)
         );
@@ -376,7 +376,7 @@ class Zend_Service_DeveloperGarden_VoiceCallTest extends PHPUnit_Framework_TestC
             $request->getEnvironment()
         );
 
-        $this->assertType(
+        $this->assertInstanceOf(
             'Zend_Service_DeveloperGarden_Request_VoiceButler_NewCallSequenced',
             $request->setBNumber(array('+49-654321','+49-123456'))
         );
@@ -391,7 +391,7 @@ class Zend_Service_DeveloperGarden_VoiceCallTest extends PHPUnit_Framework_TestC
         $this->assertArrayHasKey(0, array('+49-654321','+49-123456'));
         $this->assertArrayHasKey(1, array('+49-654321','+49-123456'));
 
-        $this->assertType(
+        $this->assertInstanceOf(
             'Zend_Service_DeveloperGarden_Request_VoiceButler_NewCallSequenced',
             $request->setMaxWait(9)
         );
@@ -415,7 +415,7 @@ class Zend_Service_DeveloperGarden_VoiceCallTest extends PHPUnit_Framework_TestC
             $request->getSessionId()
         );
 
-        $this->assertType(
+        $this->assertInstanceOf(
             'Zend_Service_DeveloperGarden_Request_VoiceButler_TearDownCall',
             $request->setSessionId('SESSIONID-8888888888')
         );
@@ -448,7 +448,7 @@ class Zend_Service_DeveloperGarden_VoiceCallTest extends PHPUnit_Framework_TestC
         );
 
         // value changes
-        $this->assertType(
+        $this->assertInstanceOf(
             'Zend_Service_DeveloperGarden_Request_VoiceButler_CallStatus',
             $request->setSessionId('SESSIONID-8888888888')
         );
@@ -458,7 +458,7 @@ class Zend_Service_DeveloperGarden_VoiceCallTest extends PHPUnit_Framework_TestC
             $request->getSessionId()
         );
 
-        $this->assertType(
+        $this->assertInstanceOf(
             'Zend_Service_DeveloperGarden_Request_VoiceButler_CallStatus',
             $request->setKeepAlive(15)
         );

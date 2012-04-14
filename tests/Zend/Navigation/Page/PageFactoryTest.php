@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Navigation;
 
 use Zend\Navigation\Page\AbstractPage,
@@ -52,10 +49,6 @@ class PageFactoryTest extends \PHPUnit_Framework_TestCase
             AbstractPage::factory(array(
                 'label' => 'MVC Page',
                 'controller' => 'index'
-            )),
-            AbstractPage::factory(array(
-                'label' => 'MVC Page',
-                'module' => 'index'
             )),
             AbstractPage::factory(array(
                 'label' => 'MVC Page',

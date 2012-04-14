@@ -12,7 +12,6 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @uses       \Zend\Service\Audioscrobbler\Exception
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Audioscrobbler
@@ -20,10 +19,9 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Service\Audioscrobbler\Exception;
+
+use Zend\Service\Audioscrobbler\Exception;
 
 /**
  * @category   Zend
@@ -34,6 +32,5 @@ namespace Zend\Service\Audioscrobbler\Exception;
  */
 class InvalidArgumentException
     extends \InvalidArgumentException
-    implements \Zend\Service\Audioscrobbler\Exception
+    implements Exception
 {}
-

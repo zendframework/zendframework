@@ -77,9 +77,11 @@ class ErrorsTest extends \PHPUnit_Framework_TestCase
     {
         $this->setupElement();
         $content = 'test content';
-        $test = $this->decorator->render($content);
+        $test    = $this->decorator->render($content);
+        $view    = $this->getView();
         $this->assertContains($content, $test);
         foreach ($this->element->getMessages() as $message) {
+            $message = $view->escape($message);
             $this->assertContains($message, $test);
         }
     }

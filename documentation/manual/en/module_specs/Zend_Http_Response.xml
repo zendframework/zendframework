@@ -2,14 +2,14 @@
 <!-- Reviewed: no -->
 <section xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0"
     xml:id="zend.http.response">
-    <info>
+    
         <title>Zend\Http\Response</title>
-    </info>
+    
 
     <section xml:id="zend.http.response.intro">
-        <info>
+        
             <title>Overview</title>
-        </info>
+        
 
         <para>
             The <classname>Zend\Http\Response</classname> class is responsible for providing a
@@ -46,9 +46,9 @@
     </section>
 
     <section xml:id="zend.http.response.quick-start">
-        <info>
+        
             <title>Quick Start</title>
-        </info>
+        
 
         <para>
             Response objects can either be created from the provided
@@ -73,7 +73,7 @@ EOS);
 
 // OR
 
-$response = new Request();
+$response = new Response();
 $response->setStatusCode(Response::STATUS_CODE_200);
 $response->headers()->addHeaders(array(
     'HeaderField1' => 'header-field-value',
@@ -90,9 +90,9 @@ EOS);
     </section>
 
     <section xml:id="zend.http.response.options">
-        <info>
+        
             <title>Configuration Options</title>
-        </info>
+        
 
         <para>
             None currently available
@@ -106,9 +106,9 @@ EOS);
     </section>
 
     <section xml:id="zend.http.response.methods">
-        <info>
+        
             <title>Available Methods</title>
-        </info>
+        
 
         <variablelist>
             <varlistentry xml:id="zend.http.response.methods.from-string">
@@ -449,12 +449,12 @@ the entire metadata container.</para>
     </section>
 
     <section xml:id="zend.http.response.examples">
-        <info>
+        
             <title>Examples</title>
-        </info>
+        
 
         <example xml:id="zend.http.response.examples.from-string">
-            <info><title>Generating a Response object from a string</title></info>
+            <title>Generating a Response object from a string</title>
 
             <programlisting language="php"><![CDATA[
 use Zend\Http\Response;
@@ -473,7 +473,7 @@ EOS);
         </example>
 
         <example xml:id="zend.http.response.examples.construct-response">
-            <info><title>Generating a Response object from a string</title></info>
+            <title>Generating a Response object from a string</title>
 
             <programlisting language="php"><![CDATA[
 use Zend\Http\Response;

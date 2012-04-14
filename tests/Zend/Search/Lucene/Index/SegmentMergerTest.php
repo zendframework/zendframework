@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Search\Lucene\Index;
 use Zend\Search\Lucene\Storage\Directory;
 use Zend\Search\Lucene\Index;

@@ -116,15 +116,15 @@ class DefaultRenderingStrategyTest extends TestCase
         $expected = sprintf('content (%s): %s', json_encode(array('template' => 'content')), json_encode(array('foo' => 'bar')));
     }
 
-    public function testBaseTemplateIsLayoutByDefault()
+    public function testLayoutTemplateIsLayoutByDefault()
     {
-        $this->assertEquals('layout', $this->strategy->getBaseTemplate());
+        $this->assertEquals('layout', $this->strategy->getLayoutTemplate());
     }
 
-    public function testBaseTemplateIsMutable()
+    public function testLayoutTemplateIsMutable()
     {
-        $this->strategy->setBaseTemplate('alternate/layout');
-        $this->assertEquals('alternate/layout', $this->strategy->getBaseTemplate());
+        $this->strategy->setLayoutTemplate('alternate/layout');
+        $this->assertEquals('alternate/layout', $this->strategy->getLayoutTemplate());
     }
 
     public function testBypassesRenderingIfResultIsAResponse()

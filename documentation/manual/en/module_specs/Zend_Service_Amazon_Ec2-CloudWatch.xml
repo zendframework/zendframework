@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.amazon.ec2.cloudwatch"><info><title>Zend_Service_Amazon_Ec2: CloudWatch Monitoring</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.amazon.ec2.cloudwatch"><title>Zend_Service_Amazon_Ec2: CloudWatch Monitoring</title>
     
 
     <para>
         Amazon CloudWatch is an easy-to-use web service that provides
         comprehensive monitoring for Amazon Elastic Compute Cloud (Amazon
         <acronym>EC2</acronym>) and Elastic Load Balancing. For more details information
-        check cout the <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://docs.amazonwebservices.com/AmazonCloudWatch/latest/DeveloperGuide/index.html?SvcIntro.html">
+        check out the <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://docs.amazonwebservices.com/AmazonCloudWatch/latest/DeveloperGuide/Welcome.html">
             Amazon CloudWatch Developers Guide</link>
     </para>
 
-    <section xml:id="zend.service.amazon.ec2.cloudwatch.usage"><info><title>CloudWatch Usage</title></info>
+    <section xml:id="zend.service.amazon.ec2.cloudwatch.usage"><title>CloudWatch Usage</title>
         
 
-        <example xml:id="zend.service.amazon.ec2.cloudwatch.usage.list"><info><title>Listing Aviable Metrics</title></info>
+        <example xml:id="zend.service.amazon.ec2.cloudwatch.usage.list"><title>Listing Aviable Metrics</title>
             
 
             <para>
@@ -28,7 +28,7 @@ $return = $ec2_ebs->listMetrics();
 ]]></programlisting>
         </example>
 
-        <example xml:id="zend.service.amazon.ec2.cloudwatch.usage.getmetricstatistics"><info><title>Return Statistics for a given metric</title></info>
+        <example xml:id="zend.service.amazon.ec2.cloudwatch.usage.getmetricstatistics"><title>Return Statistics for a given metric</title>
             
 
             <para>
@@ -67,7 +67,7 @@ $return = $ec2_ebs->listMetrics();
                         <acronym>CPU</acronym>Utilization, NetworkIn, NetworkOut, DiskWriteOps
                         DiskReadBytes, DiskReadOps, DiskWriteBytes. Valid Elastic
                         Load Balancing Metrics are Latency, RequestCount, HealthyHostCount
-                        UnHealthyHostCount. <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://docs.amazonwebservices.com/AmazonCloudWatch/latest/DeveloperGuide/arch-AmazonCloudWatch-metricscollected.html">For
+                        UnHealthyHostCount. <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://docs.amazonwebservices.com/AmazonCloudWatch/latest/DeveloperGuide/CW_Support_For_AWS.html#ec2-metricscollected">For
                             more information click here</link>
                     </para>
                 </listitem>
@@ -78,7 +78,7 @@ $return = $ec2_ebs->listMetrics();
                         metric. Valid values are Average, Maximum, Minimum, Samples, Sum. You can
                         specify this as a string or as an array of values. If you don't specify one
                         it will default to Average instead of failing out. If you specify an
-                        incorrect option it will just skip it. <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://docs.amazonwebservices.com/AmazonCloudWatch/latest/DeveloperGuide/arch-Amazon-CloudWatch-statistics.html">For
+                        incorrect option it will just skip it. <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://docs.amazonwebservices.com/AmazonCloudWatch/latest/DeveloperGuide/US_GetStatistics.html">For
                             more information click here</link>
                     </para>
                 </listitem>

@@ -69,7 +69,7 @@ class Response extends Message implements ResponseDescription
     const STATUS_CODE_507 = 507;
     const STATUS_CODE_508 = 508;
     const STATUS_CODE_511 = 511;
-    
+
     /**#@-*/
 
     /**#@+
@@ -175,22 +175,22 @@ class Response extends Message implements ResponseDescription
      */
     public static function fromString($string)
     {
-        $lines = preg_split('/\r\n/', $string);
+        $lines = explode("\r\n", $string);
         if (!is_array($lines) || count($lines)==1) {
-            $lines = preg_split ('/\n/',$string);
+            $lines = explode("\n", $string);
         }
-        
+
         $firstLine = array_shift($lines);
 
         $response = new static();
         $matches = null;
-        if (!preg_match('/^HTTP\/(?P<version>1\.[01]) (?P<status>\d{3}) (?P<reason>.*)$/', $firstLine, $matches)) {
+        if (!preg_match('/^HTTP\/(?P<version>1\.[01]) (?P<status>\d{3})(?:[ ]+(?P<reason>.+))?$/', $firstLine, $matches)) {
             throw new Exception\InvalidArgumentException('A valid response status line was not found in the provided string');
         }
-        
+
         $response->version = $matches['version'];
         $response->setStatusCode($matches['status']);
-        $response->setReasonPhrase($matches['reason']);
+        $response->setReasonPhrase((isset($matches['reason']) ? $matches['reason'] : ''));
 
         if (count($lines) == 0) {
             return $response;
@@ -198,11 +198,11 @@ class Response extends Message implements ResponseDescription
 
         $isHeader = true;
         $headers = $content = array();
-        
+
         while ($lines) {
             $nextLine = array_shift($lines);
-            
-            if ($nextLine == '') {
+
+            if ($isHeader && $nextLine == '') {
                 $isHeader = false;
                 continue;
             }
@@ -254,7 +254,7 @@ class Response extends Message implements ResponseDescription
 
     /**
      * Get response headers
-     * 
+     *
      * @return Headers
      */
     public function headers()
@@ -346,8 +346,8 @@ class Response extends Message implements ResponseDescription
 
     /**
      * Get the body of the response
-     * 
-     * @return string 
+     *
+     * @return string
      */
     public function getBody()
     {
@@ -362,7 +362,7 @@ class Response extends Message implements ResponseDescription
         }
 
         $contentEncoding = $this->headers()->get('Content-Encoding');
-        
+
         if (!empty($contentEncoding)) {
             $contentEncoding = $contentEncoding->getFieldValue();
             if ($contentEncoding =='gzip') {
@@ -374,7 +374,7 @@ class Response extends Message implements ResponseDescription
 
         return $body;
     }
-    
+
     /**
      * Does the status code indicate a client error?
      *
@@ -440,15 +440,15 @@ class Response extends Message implements ResponseDescription
 
     /**
      * Do we have a redirect?
-     * 
-     * @return bool 
+     *
+     * @return bool
      */
     public function isRedirect()
     {
         $code = $this->getStatusCode();
         return (300 <= $code && 400 > $code);
     }
-    
+
     /**
      * Was the response successful?
      *
@@ -460,10 +460,10 @@ class Response extends Message implements ResponseDescription
         return (200 <= $code && 300 > $code);
     }
 
-    
+
     /**
      * Render entire response as HTTP response string
-     * 
+     *
      * @return string
      */
     public function toString()
@@ -474,7 +474,7 @@ class Response extends Message implements ResponseDescription
         $str .= $this->getBody();
         return $str;
     }
-    
+
     /**
      * Decode a "chunked" transfer-encoded body and return the decoded text
      *
@@ -485,28 +485,15 @@ class Response extends Message implements ResponseDescription
     {
         $decBody = '';
 
-        // If mbstring overloads substr and strlen functions, we have to
-        // override it's internal encoding
-        if (function_exists('mb_internal_encoding') &&
-           ((int) ini_get('mbstring.func_overload')) & 2) {
-
-            $mbIntEnc = mb_internal_encoding();
-            mb_internal_encoding('ASCII');
-        }
-
         while (trim($body)) {
             if (! preg_match("/^([\da-fA-F]+)[^\r\n]*\r\n/sm", $body, $m)) {
                 throw new Exception\RuntimeException("Error parsing body - doesn't seem to be a chunked message");
             }
 
             $length = hexdec(trim($m[1]));
-            $cut = strlen($m[0]);
+            $cut = static::strlen($m[0]);
             $decBody .= substr($body, $cut, $length);
             $body = substr($body, $cut + $length + 2);
-        }
-
-        if (isset($mbIntEnc)) {
-            mb_internal_encoding($mbIntEnc);
         }
 
         return $decBody;
@@ -559,7 +546,7 @@ class Response extends Message implements ResponseDescription
          * @link http://framework.zend.com/issues/browse/ZF-6040
          */
         $zlibHeader = unpack('n', substr($body, 0, 2));
-        
+
         if ($zlibHeader[1] % 31 == 0) {
             return gzuncompress($body);
         } else {
@@ -567,4 +554,19 @@ class Response extends Message implements ResponseDescription
         }
     }
 
+    /**
+     * Returns length of binary string in bytes
+     *
+     * @param string $str
+     * @return int the string length
+     */
+    static public function strlen($str)
+    {
+        if (function_exists('mb_internal_encoding') &&
+            (((int)ini_get('mbstring.func_overload')) & 2)) {
+            return mb_strlen($str, '8bit');
+        } else {
+            return strlen($str);
+        }
+    }
 }

@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Dojo\View\Helper;
 
 /**
@@ -69,7 +66,7 @@ class SimpleTextarea extends Dijit
         $attribs = $this->_prepareDijit($attribs, $params, 'textarea');
 
         $html = '<textarea' . $this->_htmlAttribs($attribs) . '>'
-              . $this->view->vars()->escape($value)
+              . $this->view->escape($value)
               . "</textarea>\n";
 
         return $html;

@@ -15,17 +15,14 @@
  * @category   Zend
  * @package    Zend_Mvc_Router
  * @subpackage Http
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Mvc\Router\Http;
 
 use Traversable,
-    Zend\Stdlib\IteratorToArray,
+    Zend\Stdlib\ArrayUtils,
     Zend\Stdlib\RequestDescription as Request,
     Zend\Mvc\Router\Exception;
 
@@ -34,7 +31,7 @@ use Traversable,
  *
  * @package    Zend_Mvc_Router
  * @subpackage Http
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @see        http://manuals.rubyonrails.com/read/chapter/65
  */
@@ -49,32 +46,31 @@ class Hostname implements Route
 
     /**
      * Constraints for parameters.
-     * 
+     *
      * @var array
      */
     protected $constraints;
-    
+
     /**
      * Default values.
      *
      * @var array
      */
     protected $defaults;
-    
+
     /**
      * List of assembled parameters.
-     * 
+     *
      * @var array
      */
     protected $assembledParams = array();
 
     /**
      * Create a new hostname route.
-     * 
+     *
      * @param  string $route
      * @param  array  $constraints
-     * @param  array  $defaults 
-     * @return void
+     * @param  array  $defaults
      */
     public function __construct($route, array $constraints = array(), array $defaults = array())
     {
@@ -82,18 +78,19 @@ class Hostname implements Route
         $this->constraints = $constraints;
         $this->defaults    = $defaults;
     }
-    
+
     /**
      * factory(): defined by Route interface.
      *
      * @see    Route::factory()
-     * @param  array|Traversable $options
-     * @return void
+     * @param  array|\Traversable $options
+     * @throws \Zend\Mvc\Router\Exception\InvalidArgumentException
+     * @return Hostname
      */
     public static function factory($options = array())
     {
         if ($options instanceof Traversable) {
-            $options = IteratorToArray::convert($options);
+            $options = ArrayUtils::iteratorToArray($options);
         } elseif (!is_array($options)) {
             throw new Exception\InvalidArgumentException(__METHOD__ . ' expects an array or Traversable set of options');
         }
@@ -105,7 +102,7 @@ class Hostname implements Route
         if (!isset($options['constraints'])) {
             $options['constraints'] = array();
         }
-        
+
         if (!isset($options['defaults'])) {
             $options['defaults'] = array();
         }
@@ -133,19 +130,19 @@ class Hostname implements Route
         if (count($hostname) !== count($this->route)) {
             return null;
         }
-        
+
         foreach ($this->route as $index => $routePart) {
-            if (preg_match('(^:(?<name>.+)$)', $routePart, $matches)) {
+            if (preg_match('(^:(?P<name>.+)$)', $routePart, $matches)) {
                 if (isset($this->constraints[$matches['name']]) && !preg_match('(^' . $this->constraints[$matches['name']] . '$)', $hostname[$index])) {
                     return null;
                 }
-                
+
                 $params[$matches['name']] = $hostname[$index];
             } elseif ($hostname[$index] !== $routePart) {
                 return null;
             }
         }
-        
+
         return new RouteMatch(array_merge($this->defaults, $params));
     }
 
@@ -161,34 +158,34 @@ class Hostname implements Route
     {
         $mergedParams          = array_merge($this->defaults, $params);
         $this->assembledParams = array();
-        
+
         if (isset($options['uri'])) {
             $parts = array();
-            
+
             foreach ($this->route as $index => $routePart) {
-                if (preg_match('(^:(?<name>.+)$)', $routePart, $matches)) {
+                if (preg_match('(^:(?P<name>.+)$)', $routePart, $matches)) {
                     if (!isset($mergedParams[$matches['name']])) {
                         throw new Exception\InvalidArgumentException(sprintf('Missing parameter "%s"', $matches['name']));
                     }
-                    
+
                     $parts[] = $mergedParams[$matches['name']];
-                    
+
                     $this->assembledParams[] = $matches['name'];
                 } else {
                     $parts[] = $routePart;
                 }
             }
-            
+
             $options['uri']->setHost(implode('.', $parts));
         }
-        
+
         // A hostname does not contribute to the path, thus nothing is returned.
         return '';
     }
-    
+
     /**
      * getAssembledParams(): defined by Route interface.
-     * 
+     *
      * @see    Route::getAssembledParams
      * @return array
      */

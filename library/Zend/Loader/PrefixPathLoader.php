@@ -18,9 +18,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Loader;
 
 use Zend\Stdlib\ArrayStack,
@@ -458,7 +455,7 @@ class PrefixPathLoader implements ShortNameLocator, PrefixPathMapper
      */
     protected function formatPrefix($prefix, $namespaced = true)
     {
-        if($prefix == "") {
+        if ($prefix == "") {
             return $prefix;
         }
 

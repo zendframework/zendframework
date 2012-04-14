@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\View\Helper;
 
 /**
@@ -50,7 +47,8 @@ class Form extends FormElement
         extract($info);
 
         if (!empty($id)) {
-            $id = ' id="' . $this->view->vars()->escape($id) . '"';
+            $escaper = $this->view->plugin('escape');
+            $id      = ' id="' . $escaper($id) . '"';
         } else {
             $id = '';
         }

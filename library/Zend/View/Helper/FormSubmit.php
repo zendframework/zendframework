@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\View\Helper;
 
 /**
@@ -69,10 +66,11 @@ class FormSubmit extends FormElement
         }
 
         // Render the button.
+        $escaper = $this->view->plugin('escape');
         $xhtml = '<input type="submit"'
-               . ' name="' . $this->view->vars()->escape($name) . '"'
-               . ' id="' . $this->view->vars()->escape($id) . '"'
-               . ' value="' . $this->view->vars()->escape($value) . '"'
+               . ' name="'  . $escaper($name)  . '"'
+               . ' id="'    . $escaper($id)    . '"'
+               . ' value="' . $escaper($value) . '"'
                . $disabled
                . $this->_htmlAttribs($attribs)
                . $endTag;

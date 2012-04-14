@@ -15,17 +15,14 @@
  * @category   Zend
  * @package    Zend_Mvc_Router
  * @subpackage Http
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Mvc\Router\Http;
 
 use Traversable,
-    Zend\Stdlib\IteratorToArray,
+    Zend\Stdlib\ArrayUtils,
     Zend\Stdlib\RequestDescription as Request,
     Zend\Mvc\Router\Exception;
 
@@ -34,7 +31,7 @@ use Traversable,
  *
  * @package    Zend_Mvc_Router
  * @subpackage Http
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @see        http://manuals.rubyonrails.com/read/chapter/65
  */
@@ -46,7 +43,7 @@ class Scheme implements Route
      * @var array
      */
     protected $scheme;
-    
+
     /**
      * Default values.
      *
@@ -56,28 +53,28 @@ class Scheme implements Route
 
     /**
      * Create a new scheme route.
-     * 
+     *
      * @param  string $scheme
-     * @param  array  $defaults 
-     * @return void
+     * @param  array  $defaults
      */
     public function __construct($scheme, array $defaults = array())
     {
         $this->scheme   = $scheme;
         $this->defaults = $defaults;
     }
-    
+
     /**
      * factory(): defined by Route interface.
      *
      * @see    Route::factory()
-     * @param  array|Traversable $options
-     * @return void
+     * @param  array|\Traversable $options
+     * @throws \Zend\Mvc\Router\Exception\InvalidArgumentException
+     * @return Scheme
      */
     public static function factory($options = array())
     {
         if ($options instanceof Traversable) {
-            $options = IteratorToArray::convert($options);
+            $options = ArrayUtils::iteratorToArray($options);
         } elseif (!is_array($options)) {
             throw new Exception\InvalidArgumentException(__METHOD__ . ' expects an array or Traversable set of options');
         }
@@ -85,7 +82,7 @@ class Scheme implements Route
         if (!isset($options['scheme'])) {
             throw new Exception\InvalidArgumentException('Missing "scheme" in options array');
         }
-        
+
         if (!isset($options['defaults'])) {
             $options['defaults'] = array();
         }
@@ -112,7 +109,7 @@ class Scheme implements Route
         if ($scheme !== $this->scheme) {
             return null;
         }
-        
+
         return new RouteMatch($this->defaults);
     }
 
@@ -129,14 +126,14 @@ class Scheme implements Route
         if (isset($options['uri'])) {
             $options['uri']->setScheme($this->scheme);
         }
-        
+
         // A scheme does not contribute to the path, thus nothing is returned.
         return '';
     }
-    
+
     /**
      * getAssembledParams(): defined by Route interface.
-     * 
+     *
      * @see    Route::getAssembledParams
      * @return array
      */

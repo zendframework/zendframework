@@ -42,7 +42,7 @@ class ManagerTest extends TestCase
 
     public function testCanRegisterPathsFromConstructor()
     {
-        $paths = array(__DIR__ . '/_files/');
+        $paths = array(__DIR__ . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR);
         $loader = new ModuleAutoloader($paths);
         $registeredPaths = $loader->getPaths();
         $this->assertSame($paths, $registeredPaths);
@@ -188,4 +188,5 @@ class ManagerTest extends TestCase
         $this->assertTrue(class_exists('My\NonmatchingModule\Module'));
         $this->assertTrue(class_exists('PharModuleExplicit\Module'));
     }
+
 }

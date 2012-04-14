@@ -20,9 +20,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\GData;
 
 /**
@@ -30,12 +27,6 @@ namespace Zend\GData;
  *
  * @link http://code.google.com/apis/base
  *
- * @uses       \Zend\GData\GData
- * @uses       \Zend\GData\App\InvalidArgumentException
- * @uses       \Zend\GData\GBase\ItemEntry
- * @uses       \Zend\GData\GBase\ItemFeed
- * @uses       \Zend\GData\GBase\SnippetFeed
- * @uses       \Zend\GData\GBase\SnippetEntry
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage GBase

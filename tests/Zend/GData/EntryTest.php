@@ -19,11 +19,10 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\GData;
-use Zend\GData\App;
+
+use Zend\GData\App,
+    Zend\Http\Header\Etag;
 
 /**
  * @category   Zend
@@ -51,31 +50,31 @@ class EntryTest extends \PHPUnit_Framework_TestCase
     }
 
     public function testXMLHasNoEtagsWhenUsingV1() {
-        $etagData = 'Quux';
+        $etagData = Etag::fromString('Etag: Quux');
         $this->entry->setEtag($etagData);
         $domNode = $this->entry->getDOM(null, 1, null);
         $this->assertNull($domNode->attributes->getNamedItemNS($this->gdNamespace, $this->etagLocalName));
     }
 
     public function testXMLHasNoEtagsWhenUsingV1X() {
-        $etagData = 'Quux';
+        $etagData = Etag::fromString('Etag: Quux');
         $this->entry->setEtag($etagData);
         $domNode = $this->entry->getDOM(null, 1, 1);
         $this->assertNull($domNode->attributes->getNamedItemNS($this->gdNamespace, $this->etagLocalName));
     }
 
     public function testXMLHasEtagsWhenUsingV2() {
-        $etagData = 'Quux';
+        $etagData = Etag::fromString('Etag: Quux');
         $this->entry->setEtag($etagData);
         $domNode = $this->entry->getDOM(null, 2, null);
-        $this->assertEquals($etagData, $domNode->attributes->getNamedItemNS($this->gdNamespace, $this->etagLocalName)->nodeValue);
+        $this->assertEquals($etagData->getFieldValue(), $domNode->attributes->getNamedItemNS($this->gdNamespace, $this->etagLocalName)->nodeValue);
     }
 
     public function testXMLHasEtagsWhenUsingV2X() {
-        $etagData = 'Quux';
+        $etagData = Etag::fromString('Etag: Quux');
         $this->entry->setEtag($etagData);
         $domNode = $this->entry->getDOM(null, 2, 1);
-        $this->assertEquals($etagData, $domNode->attributes->getNamedItemNS($this->gdNamespace, $this->etagLocalName)->nodeValue);
+        $this->assertEquals($etagData->getFieldValue(), $domNode->attributes->getNamedItemNS($this->gdNamespace, $this->etagLocalName)->nodeValue);
     }
 
     public function testXMLETagsPropagateToEntry() {
@@ -85,7 +84,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
 
     public function testXMLandHTMLEtagsDifferingThrowsException() {
         $exceptionCaught = false;
-        $this->entry->setEtag("Foo");
+        $this->entry->setEtag(Etag::fromString("Etag: Foo"));
         try {
             $this->entry->transferFromXML($this->entryText);
         } catch (App\IOException $e) {
@@ -96,7 +95,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
 
     public function testHttpAndXmlEtagsDifferingThrowsExceptionWithMessage() {
         $messageCorrect = false;
-        $this->entry->setEtag("Foo");
+        $this->entry->setEtag(Etag::fromString("Etag: Foo"));
         try {
             $this->entry->transferFromXML($this->entryText);
         } catch (App\IOException $e) {
@@ -107,9 +106,9 @@ class EntryTest extends \PHPUnit_Framework_TestCase
     }
 
     public function testNothingBadHappensWhenHttpAndXmlEtagsMatch() {
-        $this->entry->setEtag($this->expectedEtag);
+        $this->entry->setEtag(Etag::fromString('Etag: ' . $this->expectedEtag));
         $this->entry->transferFromXML($this->entryText);
-        $this->assertEquals($this->expectedEtag, $this->entry->getEtag());
+        $this->assertEquals($this->expectedEtag, $this->entry->getEtag()->getFieldValue());
     }
 
     public function testLookUpOpenSearchv1Namespace() {

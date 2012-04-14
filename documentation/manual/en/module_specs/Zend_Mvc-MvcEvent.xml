@@ -3,7 +3,7 @@
 <section 
     xmlns="http://docbook.org/ns/docbook" version="5.0"
     xml:id="zend.mvc.mvc-event">
-  <info><title>The MvcEvent</title></info>
+  <title>The MvcEvent</title>
 
   <para>
     The ZF2 MVC layer incorporates and utilizes a custom

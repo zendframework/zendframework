@@ -3,7 +3,7 @@
 <section 
     xmlns="http://docbook.org/ns/docbook" version="5.0"
     xml:id="zend.mvc.controller-plugins">
-  <info><title>Controller Plugins</title></info>
+  <title>Controller Plugins</title>
 
   <para>
     When using the <classname>ActionController</classname> or
@@ -69,7 +69,7 @@ $plugin = $this->url();
 ]]></programlisting>
 
   <section xml:id="zend.mvc.controller-plugins.flashmessenger">
-    <info><title>The FlashMessenger</title></info>
+    <title>The FlashMessenger</title>
 
     <para>
       The <classname>FlashMessenger</classname> is a plugin designed to
@@ -175,7 +175,7 @@ $plugin = $this->url();
     </para>
 
     <section xml:id="zend.mvc.controller-plugins.examples">
-      <info><title>Examples</title></info>
+      <title>Examples</title>
 
       <programlisting language="php"><![CDATA[
 public function processAction()
@@ -199,7 +199,7 @@ public function successAction()
   </section>
 
   <section xml:id="zend.mvc.controller-plugins.forward">
-    <info><title>The Forward Plugin</title></info>
+    <title>The Forward Plugin</title>
 
     <para>
       Occasionally, you may want to dispatch additional controllers from
@@ -260,7 +260,7 @@ return array(
   </section>
 
   <section xml:id="zend.mvc.controller-plugins.redirect">
-    <info><title>The Redirect Plugin</title></info>
+    <title>The Redirect Plugin</title>
 
     <para>
       Redirections are quite common operations within applications. If
@@ -334,7 +334,7 @@ return $this->redirect()->toRoute('login-success');
   </section>
 
   <section xml:id="zend.mvc.controller-plugins.url">
-    <info><title>The Url Plugin</title></info>
+    <title>The Url Plugin</title>
 
     <para>
       Often you may want to generate URLs from route definitions within

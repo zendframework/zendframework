@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="performance.localization"><info><title>Internationalization (i18n) and Localization (l10n)</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="performance.localization"><title>Internationalization (i18n) and Localization (l10n)</title>
 
 
     <para>
@@ -12,7 +12,7 @@
         l10n.
     </para>
 
-    <section xml:id="performance.localization.translationadapter"><info><title>Which translation adapter should I use?</title></info>
+    <section xml:id="performance.localization.translationadapter"><title>Which translation adapter should I use?</title>
 
 
         <para>
@@ -23,7 +23,7 @@
             adapters are fastest?
         </para>
 
-        <section xml:id="performance.localization.translationadapter.fastest"><info><title>Use non-XML translation adapters for greatest speed</title></info>
+        <section xml:id="performance.localization.translationadapter.fastest"><title>Use non-XML translation adapters for greatest speed</title>
 
 
             <para>
@@ -80,7 +80,7 @@
         </section>
     </section>
 
-    <section xml:id="performance.localization.cache"><info><title>How can I make translation and localization even faster?</title></info>
+    <section xml:id="performance.localization.cache"><title>How can I make translation and localization even faster?</title>
 
 
         <para>
@@ -90,7 +90,7 @@
             you do this?
         </para>
 
-        <section xml:id="performance.localization.cache.usage"><info><title>Use translation and localization caches</title></info>
+        <section xml:id="performance.localization.cache.usage"><title>Use translation and localization caches</title>
 
 
             <para>

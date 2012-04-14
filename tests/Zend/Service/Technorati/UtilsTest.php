@@ -19,13 +19,15 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
+namespace ZendTest\Service\Technorati;
+use Zend\Service\Technorati;
 
 /**
  * Test helper
  */
 
 /**
- * @see Zend_Service_Technorati_Utils
+ * @see Technorati\Utils
  */
 
 
@@ -38,14 +40,14 @@
  * @group      Zend_Service
  * @group      Zend_Service_Technorati
  */
-class Zend_Service_Technorati_UtilsTest extends Zend_Service_Technorati_TestCase
+class UtilsTest extends TestCase
 {
     /**
      * @return void
      */
     public function testSetUriHttpInputNullReturnsNull()
     {
-        $this->assertNull(Zend_Service_Technorati_Utils::normalizeUriHttp(null));
+        $this->assertNull(Technorati\Utils::normalizeUriHttp(null));
     }
 
     /**
@@ -56,9 +58,9 @@ class Zend_Service_Technorati_UtilsTest extends Zend_Service_Technorati_TestCase
         $scheme             = 'ftp';
         $inputInvalidScheme = "$scheme://example.com";
         try {
-            Zend_Service_Technorati_Utils::normalizeUriHttp($inputInvalidScheme);
-            $this->fail('Expected Zend_Service_Technorati_Exception not thrown');
-        } catch (Zend_Service_Technorati_Exception $e) {
+            Technorati\Utils::normalizeUriHttp($inputInvalidScheme);
+            $this->fail('Expected Zend\Service\Technorati\Exception not thrown');
+        } catch (Technorati\Exception\RuntimeException $e) {
             $this->assertContains($scheme, $e->getMessage());
         }
     }
@@ -68,7 +70,7 @@ class Zend_Service_Technorati_UtilsTest extends Zend_Service_Technorati_TestCase
      */
     public function testSetDateInputNullReturnsNull()
     {
-        $this->assertNull(Zend_Service_Technorati_Utils::normalizeDate(null));
+        $this->assertNull(Technorati\Utils::normalizeDate(null));
     }
 
     /**
@@ -76,10 +78,10 @@ class Zend_Service_Technorati_UtilsTest extends Zend_Service_Technorati_TestCase
      */
     public function testSetDateInputDateInstanceReturnsInstance()
     {
-        $date   = new Zend_Date('2007-11-11 08:47:26 GMT');
-        $result = Zend_Service_Technorati_Utils::normalizeDate($date);
+        $date   = new \Zend\Date\Date('2007-11-11 08:47:26 GMT');
+        $result = Technorati\Utils::normalizeDate($date);
 
-        $this->assertType('Zend_Date', $result);
+        $this->assertInstanceOf('Zend\Date\Date', $result);
         $this->assertEquals($date, $result);
     }
 
@@ -90,9 +92,9 @@ class Zend_Service_Technorati_UtilsTest extends Zend_Service_Technorati_TestCase
     {
         $inputInvalid = "2007foo";
         try {
-            Zend_Service_Technorati_Utils::normalizeDate($inputInvalid);
-            $this->fail('Expected Zend_Service_Technorati_Exception not thrown');
-        } catch (Zend_Service_Technorati_Exception $e) {
+            Technorati\Utils::normalizeDate($inputInvalid);
+            $this->fail('Expected Zend\Service\Technorati\Exception\RuntimeException not thrown');
+        } catch (Technorati\Exception\RuntimeException $e) {
             $this->assertContains($inputInvalid, $e->getMessage());
         }
     }

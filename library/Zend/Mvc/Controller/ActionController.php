@@ -84,7 +84,7 @@ abstract class ActionController implements Dispatchable, InjectApplicationEvent,
           ->setResponse($response)
           ->setTarget($this);
 
-        $result = $this->events()->trigger('dispatch', $e, function($test) {
+        $result = $this->events()->trigger(MvcEvent::EVENT_DISPATCH, $e, function($test) {
             return ($test instanceof Response);
         });
 
@@ -282,9 +282,9 @@ abstract class ActionController implements Dispatchable, InjectApplicationEvent,
      *
      * If the plugin is a functor, call it, passing the parameters provided.
      * Otherwise, return the plugin instance.
-     * 
-     * @param  string $method 
-     * @param  array $params 
+     *
+     * @param  string $method
+     * @param  array $params
      * @return mixed
      */
     public function __call($method, array $params)
@@ -304,7 +304,7 @@ abstract class ActionController implements Dispatchable, InjectApplicationEvent,
     protected function attachDefaultListeners()
     {
         $events = $this->events();
-        $events->attach('dispatch', array($this, 'execute'));
+        $events->attach(MvcEvent::EVENT_DISPATCH, array($this, 'execute'));
     }
 
     /**

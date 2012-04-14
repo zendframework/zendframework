@@ -19,22 +19,17 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\GData;
-use Zend\Http\Client;
+
+use Zend\Http,
+    Zend\Http\Client;
 
 /**
- * Wrapper around Zend_Http_Client to facilitate Google's "Account Authentication
+ * Wrapper around Zend\Http\Client to facilitate Google's "Account Authentication
  * Proxy for Web-Based Applications".
  *
  * @see http://code.google.com/apis/accounts/AuthForWebApps.html
  *
- * @uses       \Zend\GData\App\AuthException
- * @uses       \Zend\GData\App\HttpException
- * @uses       \Zend\GData\HttpClient
- * @uses       \Zend\Version
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Gdata
@@ -112,9 +107,10 @@ class AuthSub
         } else {
             $client->setUri($request_uri);
         }
+        $client->setMethod(Http\Request::METHOD_GET);
 
         try {
-            $response = $client->request('GET');
+            $response = $client->send();
         } catch (Client\Exception $e) {
             throw new App\HttpException($e->getMessage(), $e);
         }
@@ -160,10 +156,11 @@ class AuthSub
         } else {
             $client->setUri($request_uri);
         }
+        $client->setMethod(Http\Request::METHOD_GET);
 
         ob_start();
         try {
-            $response = $client->request('GET');
+            $response = $client->send();
         } catch (Client\Exception $e) {
             throw new App\HttpException($e->getMessage(), $e);
         }
@@ -200,10 +197,11 @@ class AuthSub
         } else {
             $client->setUri($request_uri);
         }
+        $client->setMethod(Http\Request::METHOD_GET);
 
         ob_start();
         try {
-            $response = $client->request('GET');
+            $response = $client->send();
         } catch (Client\Exception $e) {
             throw new App\HttpException($e->getMessage(), $e);
         }

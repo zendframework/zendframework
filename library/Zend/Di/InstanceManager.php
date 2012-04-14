@@ -37,6 +37,10 @@ class InstanceManager /* implements InstanceCollection */
          * injection type => array of ordered method params
          */
         'injections' => array(),
+        /**
+         * alias|class => bool
+         */
+        'shared' => true
         );
 
     /**
@@ -240,6 +244,7 @@ class InstanceManager /* implements InstanceCollection */
         $configuration = array(
             'parameters' => isset($configuration['parameters']) ? $configuration['parameters'] : array(),
             'injections' => isset($configuration['injections']) ? $configuration['injections'] : array(),
+            'shared'     => isset($configuration['shared'])     ? $configuration['shared']     : true
         );
         $this->configurations[$key] = array_replace_recursive($this->configurations[$key], $configuration);
     }
@@ -287,7 +292,11 @@ class InstanceManager /* implements InstanceCollection */
     {
         return $this->setConfiguration($aliasOrClass, array('injections' => $injections), true);
     }
-    
+
+    public function setShared($aliasOrClass, $isShared)
+    {
+        return $this->setConfiguration($aliasOrClass, array('shared' => $isShared), true);
+    }
 
     public function hasTypePreferences($interfaceOrAbstract)
     {

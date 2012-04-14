@@ -163,16 +163,12 @@ class Request extends HttpRequest
             $uri->setQuery($this->serverParams['QUERY_STRING']);
         }
 
-        $requestUri = $this->getRequestUri();
-        $uri->setPath(substr($requestUri, 0, strpos($requestUri, '?') ?: strlen($requestUri)));
-
         if ($this->headers()->get('host')) {
             //TODO handle IPv6 with port
             if (preg_match('|^([^:]+):([^:]+)$|', $this->headers()->get('host')->getFieldValue(), $match)) {
                 $uri->setHost($match[1]);
                 $uri->setPort($match[2]);
-            }
-            else {
+            } else {
                 $uri->setHost($this->headers()->get('host')->getFieldValue());
             }
         } elseif (isset($this->serverParams['SERVER_NAME'])) {
@@ -181,6 +177,9 @@ class Request extends HttpRequest
                 $uri->setPort($this->serverParams['SERVER_PORT']);
             }
         }
+
+        $requestUri = $this->getRequestUri();
+        $uri->setPath(substr($requestUri, 0, strpos($requestUri, '?') ?: strlen($requestUri)));
 
         return $this;
     }
@@ -285,14 +284,18 @@ class Request extends HttpRequest
         } else {
             // Backtrack up the SCRIPT_FILENAME to find the portion
             // matching PHP_SELF.
-            $path     = $phpSelf ?: '';
-            $segments = array_reverse(explode('/', trim($filename, '/')));
+            $path = $phpSelf ?: '';
+            if (!isset($path[1]) || $path[1] !== '~') {
+                $segments = array_reverse(explode('/', trim($filename, '/')));
+            } else {
+                $segments = array_reverse(explode('/', trim($path, '/')));
+            }
             $index    = 0;
             $last     = count($segments);
             $baseUrl  = '';
 
             do {
-                $segment  = $segments[$index];
+                $segment = $segments[$index];
                 $baseUrl = '/' . $segment . $baseUrl;
                 $index++;
             } while ($last > $index && false !== ($pos = strpos($path, $baseUrl)) && 0 !== $pos);
@@ -307,7 +310,7 @@ class Request extends HttpRequest
         }
 
         // Directory portion of base path matches.
-        $baseDir = str_replace('\\','/', dirname($baseUrl));
+        $baseDir = str_replace('\\', '/', dirname($baseUrl));
         if (0 === strpos($requestUri, $baseDir)) {
             return $baseDir;
         }

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mime.mime"><info><title>Zend_Mime</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mime.mime"><title>Zend_Mime</title>
     
 
-    <section xml:id="zend.mime.mime.introduction"><info><title>Introduction</title></info>
+    <section xml:id="zend.mime.mime.introduction"><title>Introduction</title>
         
 
         <para>
@@ -14,7 +14,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.mime.mime.static"><info><title>Static Methods and Constants</title></info>
+    <section xml:id="zend.mime.mime.static"><title>Static Methods and Constants</title>
         
 
         <para>
@@ -148,7 +148,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.mime.mime.instantiation"><info><title>Instantiating Zend_Mime</title></info>
+    <section xml:id="zend.mime.mime.instantiation"><title>Instantiating Zend_Mime</title>
         
 
         <para>

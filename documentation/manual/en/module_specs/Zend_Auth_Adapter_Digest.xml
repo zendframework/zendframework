@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.auth.adapter.digest"><info><title>Digest Authentication</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.auth.adapter.digest"><title>Digest Authentication</title>
     
 
-    <section xml:id="zend.auth.adapter.digest.introduction"><info><title>Introduction</title></info>
+    <section xml:id="zend.auth.adapter.digest.introduction"><title>Introduction</title>
         
 
         <para>
@@ -49,7 +49,7 @@ someUser:Some Realm:fde17b91c3a510ecbaf7dbd37f59d4f8
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.auth.adapter.digest.specifics"><info><title>Specifics</title></info>
+    <section xml:id="zend.auth.adapter.digest.specifics"><title>Specifics</title>
         
 
         <para>
@@ -88,7 +88,7 @@ someUser:Some Realm:fde17b91c3a510ecbaf7dbd37f59d4f8
         </para>
     </section>
 
-    <section xml:id="zend.auth.adapter.digest.identity"><info><title>Identity</title></info>
+    <section xml:id="zend.auth.adapter.digest.identity"><title>Identity</title>
         
 
         <para>

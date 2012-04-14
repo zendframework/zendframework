@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Form\Decorator;
 
 use Zend\Form,
@@ -424,7 +421,7 @@ class FormErrors extends AbstractDecorator
         }
 
         return $this->getMarkupElementLabelStart()
-             . $view->vars()->escape($label)
+             . $view->escape($label)
              . $this->getMarkupElementLabelEnd();
     }
 

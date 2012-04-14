@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\GData\App;
 use Zend\GData\App;
 
@@ -149,6 +146,17 @@ class UtilTest extends \PHPUnit_Framework_TestCase
         }
         // Excetion not thrown, this is bad.
         $this->fail("Exception not thrown.");
+    }
+
+    /**
+     * @group ZF-11610
+     */
+    public function testFormatTimestepHandlesSmallUnixTimestampProperly()
+    {
+        $this->assertEquals(
+            '1970-01-01T00:02:03+00:00',
+            App\Util::formatTimestamp(123)
+        );
     }
 
     public function testFindGreatestBoundedValueReturnsMax() {

@@ -18,9 +18,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Mvc\Router;
 
 /**
@@ -32,7 +29,7 @@ interface RouteStack extends Route
 {
     /**
      * Add a route to the stack.
-     * 
+     *
      * @param  string  $name
      * @param  mixed   $route
      * @param  integer $priority
@@ -42,15 +39,15 @@ interface RouteStack extends Route
 
     /**
      * Add multiple routes to the stack.
-     * 
-     * @param  array|Traversable $routes
+     *
+     * @param  array|\Traversable $routes
      * @return RouteStack
      */
     public function addRoutes($routes);
 
     /**
      * Remove a route from the stack.
-     * 
+     *
      * @param  string $name
      * @return RouteStack
      */
@@ -58,8 +55,8 @@ interface RouteStack extends Route
 
     /**
      * Remove all routes from the stack and set new ones.
-     * 
-     * @param  array|Traversable $routes
+     *
+     * @param  array|\Traversable $routes
      * @return RouteStack
      */
     public function setRoutes($routes);

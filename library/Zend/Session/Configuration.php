@@ -18,9 +18,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Session;
 
 /**
@@ -39,7 +36,7 @@ interface Configuration
     public function getOption($option);
     public function toArray();
 
-    public function setSavePath($path);
+    public function setSavePath($savePath);
     public function getSavePath();
 
     public function setName($name);
@@ -53,10 +50,10 @@ interface Configuration
     public function getCookieDomain();
     public function setCookieSecure($cookieSecure);
     public function getCookieSecure();
-    public function setCookieHttponly($cookieHTTPOnly);
-    public function getCookieHTTPOnly();
-    public function setUseCookies($flag);
+    public function setCookieHttpOnly($cookieHTTPOnly);
+    public function getCookieHttpOnly();
+    public function setUseCookies($useCookies);
     public function getUseCookies();
-    public function setRememberMeSeconds($seconds);
+    public function setRememberMeSeconds($rememberMeSeconds);
     public function getRememberMeSeconds();
 }

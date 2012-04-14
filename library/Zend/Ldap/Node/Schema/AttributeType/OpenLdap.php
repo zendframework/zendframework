@@ -19,27 +19,22 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Ldap\Node\Schema\AttributeType;
 
-use Zend\Ldap\Node\Schema\AttributeType,
-    Zend\Ldap\Node\Schema;
+use Zend\Ldap\Node\Schema,
+    Zend\Ldap\Node\Schema\AttributeType;
 
 /**
- * Zend_Ldap_Node_Schema_AttributeType_OpenLdap provides access to the attribute type
+ * Zend\Ldap\Node\Schema\AttributeType\OpenLdap provides access to the attribute type
  * schema information on an OpenLDAP server.
  *
- * @uses       \Zend\Ldap\Node\Schema\AttributeType
- * @uses       \Zend\Ldap\Node\Schema\Item
  * @category   Zend
  * @package    Zend_Ldap
  * @subpackage Schema
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class OpenLdap extends Schema\Item implements AttributeType
+class OpenLdap extends Schema\AbstractItem implements AttributeType
 {
     /**
      * Gets the attribute name
@@ -70,8 +65,11 @@ class OpenLdap extends Schema\Item implements AttributeType
     {
         if ($this->syntax === null) {
             $parent = $this->getParent();
-            if ($parent === null) return null;
-            else return $parent->getSyntax();
+            if ($parent === null) {
+                return null;
+            } else {
+                return $parent->getSyntax();
+            }
         } else {
             return $this->syntax;
         }
@@ -87,8 +85,11 @@ class OpenLdap extends Schema\Item implements AttributeType
         $maxLength = $this->{'max-length'};
         if ($maxLength === null) {
             $parent = $this->getParent();
-            if ($parent === null) return null;
-            else return $parent->getMaxLength();
+            if ($parent === null) {
+                return null;
+            } else {
+                return $parent->getMaxLength();
+            }
         } else {
             return (int)$maxLength;
         }
@@ -117,7 +118,7 @@ class OpenLdap extends Schema\Item implements AttributeType
     /**
      * Returns the parent attribute type in the inhertitance tree if one exists
      *
-     * @return \Zend\Ldap\Node\Schema\AttributeType\OpenLdap|null
+     * @return OpenLdap|null
      */
     public function getParent()
     {

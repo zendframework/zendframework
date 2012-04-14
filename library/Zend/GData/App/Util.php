@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\GData\App;
 
 /**
@@ -50,7 +47,7 @@ class Util
         $rfc3339 = '/^(\d{4})\-?(\d{2})\-?(\d{2})((T|t)(\d{2})\:?(\d{2})' .
                    '\:?(\d{2})(\.\d{1,})?((Z|z)|([\+\-])(\d{2})\:?(\d{2})))?$/';
 
-        if (ctype_digit($timestamp)) {
+        if (ctype_digit((string)$timestamp)) {
             return gmdate('Y-m-d\TH:i:sP', $timestamp);
         } elseif (preg_match($rfc3339, $timestamp) > 0) {
             // timestamp is already properly formatted

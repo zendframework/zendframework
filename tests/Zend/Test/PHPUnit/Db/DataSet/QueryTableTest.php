@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Test\PHPUnit\Db\DataSet;
 use Zend\Test\PHPUnit\Db\DataSet;
 use Zend\Test;
@@ -113,7 +110,7 @@ class QueryTableTest extends DataSetTestCase
         $queryTable = new DataSet\QueryTable("foo", null, $this->connectionMock);
 
         $metadata = $queryTable->getTableMetaData();
-        $this->assertType('PHPUnit_Extensions_Database_DataSet_ITableMetaData', $metadata);
+        $this->assertInstanceOf('PHPUnit_Extensions_Database_DataSet_ITableMetaData', $metadata);
         $this->assertEquals(array(), $metadata->getColumns());
         $this->assertEquals(array(), $metadata->getPrimaryKeys());
         $this->assertEquals("foo", $metadata->getTableName());

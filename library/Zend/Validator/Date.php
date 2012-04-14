@@ -18,9 +18,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Validator;
 
 use Traversable,
@@ -28,7 +25,7 @@ use Traversable,
     Zend\Locale\Format,
     Zend\Locale\Locale,
     Zend\Registry,
-    Zend\Stdlib\IteratorToArray;
+    Zend\Stdlib\ArrayUtils;
 
 /**
  * @category   Zend
@@ -83,7 +80,7 @@ class Date extends AbstractValidator
     public function __construct($options = array())
     {
         if ($options instanceof Traversable) {
-            $options = IteratorToArray::convert($options);
+            $options = ArrayUtils::iteratorToArray($options);
         } elseif (!is_array($options)) {
             $options = func_get_args();
             $temp['format'] = array_shift($options);

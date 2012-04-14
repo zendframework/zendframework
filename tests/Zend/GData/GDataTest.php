@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\GData;
 use Zend\GData;
 use Zend\Http;
@@ -81,7 +78,7 @@ class GDataTest extends \PHPUnit_Framework_TestCase
             $feed = $gdata->getFeed(new \stdClass());
             $this->fail('Expecting to catch Zend\GData\App\InvalidArgumentException');
         } catch (\Exception $e) {
-            $this->assertType('Zend\GData\App\InvalidArgumentException', $e,
+            $this->assertInstanceOf('Zend\GData\App\InvalidArgumentException', $e,
                 'Expecting Zend\GData\App\InvalidArgumentException, got '.get_class($e));
             $this->assertEquals('You must specify the location as either a string URI or a child of Zend\GData\Query', $e->getMessage());
         }
@@ -96,7 +93,7 @@ class GDataTest extends \PHPUnit_Framework_TestCase
             $feed = $gdata->getEntry(new \stdClass());
             $this->fail('Expecting to catch Zend\GData\App\InvalidArgumentException');
         } catch (\Exception $e) {
-            $this->assertType('Zend\GData\App\InvalidArgumentException', $e,
+            $this->assertInstanceOf('Zend\GData\App\InvalidArgumentException', $e,
                 'Expecting Zend\GData\App\InvalidArgumentException, got '.get_class($e));
             $this->assertEquals('You must specify the location as either a string URI or a child of Zend\GData\Query', $e->getMessage());
         }

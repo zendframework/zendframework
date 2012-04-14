@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.dojo.view"><info><title>Dojo View Helpers</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.dojo.view"><title>Dojo View Helpers</title>
     
 
     <para>
@@ -16,7 +16,7 @@
         </listitem>
     </itemizedlist>
 
-    <example xml:id="zend.dojo.view.setup"><info><title>Using Dojo View Helpers</title></info>
+    <example xml:id="zend.dojo.view.setup"><title>Using Dojo View Helpers</title>
         
 
         <para>

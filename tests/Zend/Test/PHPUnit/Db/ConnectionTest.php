@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Test\PHPUnit\Db;
 use Zend\Test\PHPUnit\Db;
 
@@ -65,7 +62,7 @@ class ConnectionTest extends \PHPUnit_Framework_TestCase
         $connection = $this->createConnection();
         $ret = $connection->createQueryTable("foo", "foo");
 
-        $this->assertType('Zend\Test\PHPUnit\Db\DataSet\QueryTable', $ret);
+        $this->assertInstanceOf('Zend\Test\PHPUnit\Db\DataSet\QueryTable', $ret);
     }
 
     public function testGetSchema()
@@ -81,7 +78,7 @@ class ConnectionTest extends \PHPUnit_Framework_TestCase
         $connection = $this->createConnection();
         $metadata = $connection->getMetaData();
 
-        $this->assertType('Zend\Test\PHPUnit\Db\Metadata\Generic', $metadata);
+        $this->assertInstanceOf('Zend\Test\PHPUnit\Db\Metadata\Generic', $metadata);
     }
 
     public function testGetTruncateCommand()

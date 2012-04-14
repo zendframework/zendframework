@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.loader.autoloader-factory"><info><title>The AutoloaderFactory</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.loader.autoloader-factory"><title>The AutoloaderFactory</title>
     
 
-    <section xml:id="zend.loader.autoloader-factory.intro"><info><title>Overview</title></info>
+    <section xml:id="zend.loader.autoloader-factory.intro"><title>Overview</title>
         
 
         <para>
@@ -19,7 +19,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.loader.autoloader-factory.quick-start"><info><title>Quick Start</title></info>
+    <section xml:id="zend.loader.autoloader-factory.quick-start"><title>Quick Start</title>
         
 
         <para>
@@ -73,10 +73,10 @@ Zend\Loader\AutoloaderFactory::factory($config);
         </para>
     </section>
 
-    <section xml:id="zend.loader.autoloader-factory.options"><info><title>Configuration Options</title></info>
+    <section xml:id="zend.loader.autoloader-factory.options"><title>Configuration Options</title>
         
 
-        <variablelist><info><title>AutoloaderFactory Options</title></info>
+        <variablelist><title>AutoloaderFactory Options</title>
             
 
             <varlistentry>
@@ -104,7 +104,7 @@ Zend\Loader\AutoloaderFactory::factory($config);
         </variablelist>
     </section>
 
-    <section xml:id="zend.loader.autoloader-factory.methods"><info><title>Available Methods</title></info>
+    <section xml:id="zend.loader.autoloader-factory.methods"><title>Available Methods</title>
         
 
         <refentry xml:id="zend.loader.autoloader-factory.methods.factory">
@@ -122,7 +122,7 @@ Zend\Loader\AutoloaderFactory::factory($config);
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsection><info><title>factory()</title></info>
+            <refsection><title>factory()</title>
                 
 
                 <para>
@@ -146,7 +146,7 @@ Zend\Loader\AutoloaderFactory::factory($config);
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsection><info><title>getRegisteredAutoloaders()</title></info>
+            <refsection><title>getRegisteredAutoloaders()</title>
                 
 
                 <para>
@@ -158,7 +158,7 @@ Zend\Loader\AutoloaderFactory::factory($config);
         </refentry>
     </section>
 
-    <section xml:id="zend.loader.autoloader-factory.examples"><info><title>Examples</title></info>
+    <section xml:id="zend.loader.autoloader-factory.examples"><title>Examples</title>
         
 
         <para>

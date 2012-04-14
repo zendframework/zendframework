@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.navigation.containers"><info><title>Containers</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.navigation.containers"><title>Containers</title>
     
 
     <para>
@@ -12,7 +12,7 @@
         <classname>RecursiveIteratorIterator</classname> class.
     </para>
 
-    <section xml:id="zend.navigation.containers.creating"><info><title>Creating containers</title></info>
+    <section xml:id="zend.navigation.containers.creating"><title>Creating containers</title>
         
 
         <para>
@@ -33,7 +33,7 @@
             instance.
         </para>
 
-        <example xml:id="zend.navigation.containers.creating.example.array"><info><title>Creating a container using an array</title></info>
+        <example xml:id="zend.navigation.containers.creating.example.array"><title>Creating a container using an array</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -206,7 +206,7 @@ $container = new Zend_Navigation(array(
 ]]></programlisting>
         </example>
 
-        <example xml:id="zend.navigation.containers.creating.example.config"><info><title>Creating a container using a config object</title></info>
+        <example xml:id="zend.navigation.containers.creating.example.config"><title>Creating a container using a config object</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -403,7 +403,7 @@ $container = new Zend_Navigation($config);
         </example>
     </section>
 
-    <section xml:id="zend.navigation.containers.adding"><info><title>Adding pages</title></info>
+    <section xml:id="zend.navigation.containers.adding"><title>Adding pages</title>
         
 
         <para>
@@ -412,7 +412,7 @@ $container = new Zend_Navigation($config);
             <methodname>setPages()</methodname>. See examples below for explanation.
         </para>
 
-        <example xml:id="zend.navigation.containers.adding.example"><info><title>Adding pages to a container</title></info>
+        <example xml:id="zend.navigation.containers.adding.example"><title>Adding pages to a container</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -454,7 +454,7 @@ $container->setPages($pages);
         </example>
     </section>
 
-    <section xml:id="zend.navigation.containers.removing"><info><title>Removing pages</title></info>
+    <section xml:id="zend.navigation.containers.removing"><title>Removing pages</title>
         
 
         <para>
@@ -465,7 +465,7 @@ $container->setPages($pages);
             pages in the container.
         </para>
 
-        <example xml:id="zend.navigation.containers.removing.example"><info><title>Removing pages from a container</title></info>
+        <example xml:id="zend.navigation.containers.removing.example"><title>Removing pages from a container</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -489,7 +489,7 @@ $container = new Zend_Navigation(array(
 $container->removePage(0);      // removes Page 1
 
 // remove page by instance
-$page3 = $container->findOneByAction('Page 3');
+$page3 = $container->findOneByAction('page3');
 $container->removePage($page3); // removes Page 3
 
 // remove page by explicit page order
@@ -501,7 +501,7 @@ $container->removePages();      // removes all pages
         </example>
     </section>
 
-    <section xml:id="zend.navigation.containers.finding"><info><title>Finding pages</title></info>
+    <section xml:id="zend.navigation.containers.finding"><title>Finding pages</title>
         
 
         <para>
@@ -531,7 +531,7 @@ $container->removePages();      // removes all pages
             <methodname>findByFoo('bar')</methodname>.
         </para>
 
-        <example xml:id="zend.navigation.containers.finding.example"><info><title>Finding pages in a container</title></info>
+        <example xml:id="zend.navigation.containers.finding.example"><title>Finding pages in a container</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -617,7 +617,7 @@ $found = $container->findAllByController('index'); // returns Page 2 and Page 3
         </example>
     </section>
 
-    <section xml:id="zend.navigation.containers.iterating"><info><title>Iterating containers</title></info>
+    <section xml:id="zend.navigation.containers.iterating"><title>Iterating containers</title>
         
 
         <para>
@@ -628,7 +628,7 @@ $found = $container->findAllByController('index'); // returns Page 2 and Page 3
             <classname>RecursiveIteratorIterator</classname> class.
         </para>
 
-        <example xml:id="zend.navigation.containers.iterating.example"><info><title>Iterating a container</title></info>
+        <example xml:id="zend.navigation.containers.iterating.example"><title>Iterating a container</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -678,7 +678,7 @@ foreach ($it as $page) {
         </example>
     </section>
 
-    <section xml:id="zend.navigation.containers.other"><info><title>Other operations</title></info>
+    <section xml:id="zend.navigation.containers.other"><title>Other operations</title>
         
 
         <para>
@@ -694,7 +694,7 @@ foreach ($it as $page) {
             debugging.
         </para>
 
-        <example xml:id="zend.navigation.containers.other.example.toarray"><info><title>Converting a container to an array</title></info>
+        <example xml:id="zend.navigation.containers.other.example.toarray"><title>Converting a container to an array</title>
             
 
             <programlisting language="php"><![CDATA[

@@ -20,14 +20,16 @@
  * @version    $Id$
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\File\Transfer\Adapter;
-use Zend\ProgressBar;
+
+use Zend\File\Transfer\Adapter,
+    Zend\File\Transfer\Exception,
+    Zend\ProgressBar,
+    Zend\ProgressBar\Adapter as AdapterProgressBar,
+    Zend\Validator\File as FileValidator;
 
 /**
- * Test class for Zend_File_Transfer_Adapter_Http
+ * Test class for Zend\File\Transfer\Adapter\Http
  *
  * @category   Zend
  * @package    Zend_File
@@ -54,7 +56,7 @@ class HttpTest extends \PHPUnit_Framework_TestCase
                 'size' => 8,
                 'tmp_name' => __DIR__ . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'test.txt',
                 'error' => 0));
-        $this->adapter = new HTTPTestMockAdapter();
+        $this->adapter = new HttpTestMockAdapter();
     }
 
     /**
@@ -76,23 +78,23 @@ class HttpTest extends \PHPUnit_Framework_TestCase
     public function testAutoSetUploadValidator()
     {
         $validators = array(
-            new \Zend\Validator\File\Count(1),
-            new \Zend\Validator\File\Extension('jpg'),
+            new FileValidator\Count(1),
+            new FileValidator\Extension('jpg'),
         );
         $this->adapter->setValidators($validators);
         $test = $this->adapter->getValidator('Upload');
-        $this->assertTrue($test instanceof \Zend\Validator\File\Upload);
+        $this->assertTrue($test instanceof FileValidator\Upload);
     }
 
     public function testSendingFiles()
     {
-        $this->setExpectedException('Zend\File\Transfer\Exception\RuntimeException', 'not implemented');
+        $this->setExpectedException('Zend\File\Transfer\Exception\BadMethodCallException', 'not implemented');
         $this->adapter->send();
     }
 
     public function testFileIsSent()
     {
-        $this->setExpectedException('Zend\File\Transfer\Exception\RuntimeException', 'not implemented');
+        $this->setExpectedException('Zend\File\Transfer\Exception\BadMethodCallException', 'not implemented');
         $this->adapter->isSent();
     }
 
@@ -122,7 +124,7 @@ class HttpTest extends \PHPUnit_Framework_TestCase
     {
         try {
             $this->assertFalse($this->adapter->receive('unknownFile'));
-        } catch (\Zend\File\Transfer\Exception $e) {
+        } catch (Exception $e) {
             $this->assertContains('not find', $e->getMessage());
         }
     }
@@ -136,7 +138,7 @@ class HttpTest extends \PHPUnit_Framework_TestCase
                 'size' => 8,
                 'tmp_name' => 'unknown.txt',
                 'error' => 0));
-        $adapter = new HTTPTestMockAdapter();
+        $adapter = new HttpTestMockAdapter();
         $this->assertFalse($adapter->receive());
     }
 
@@ -186,7 +188,7 @@ class HttpTest extends \PHPUnit_Framework_TestCase
                 'error' => array(
                     0 => 0,
                     1 => 0)));
-        $adapter = new HTTPTestMockAdapter();
+        $adapter = new HttpTestMockAdapter();
         $adapter->setOptions(array('ignoreNoFile' => true));
         $this->assertTrue($adapter->receive('exe'));
         $this->assertEquals(
@@ -197,36 +199,33 @@ class HttpTest extends \PHPUnit_Framework_TestCase
 
     public function testNoUploadInProgress()
     {
-        if (!(ini_get('apc.enabled') && (bool) ini_get('apc.rfc1867') && is_callable('apc_fetch')) &&
-            !is_callable('uploadprogress_get_info')) {
+        if (!Adapter\Http::isApcAvailable() && !Adapter\Http::isUploadProgressAvailable()) {
             $this->markTestSkipped('Whether APC nor UploadExtension available');
-            return;
         }
 
-        $status = HTTPTestMockAdapter::getProgress();
+        $status = HttpTestMockAdapter::getProgress();
         $this->assertContains('No upload in progress', $status);
     }
 
     public function testUploadProgressFailure()
     {
-        if (!(ini_get('apc.enabled') && (bool) ini_get('apc.rfc1867') && is_callable('apc_fetch')) &&
-            !is_callable('uploadprogress_get_info')) {
+        if (!Adapter\Http::isApcAvailable() && !Adapter\Http::isUploadProgressAvailable()) {
             $this->markTestSkipped('Whether APC nor UploadExtension available');
-            return;
         }
 
         $_GET['progress_key'] = 'mykey';
-        $status = HTTPTestMockAdapter::getProgress();
+        $status = HttpTestMockAdapter::getProgress();
         $this->assertEquals(array(
             'total'   => 100,
             'current' => 100,
             'rate'    => 10,
             'id'      => 'mykey',
             'done'    => false,
-            'message' => '100B - 100B'), $status);
+            'message' => '100B - 100B'
+            ), $status);
 
         $this->adapter->switchApcToUP();
-        $status = HTTPTestMockAdapter::getProgress($status);
+        $status = HttpTestMockAdapter::getProgress($status);
         $this->assertEquals(array(
             'total'          => 100,
             'bytes_total'    => 100,
@@ -237,22 +236,20 @@ class HttpTest extends \PHPUnit_Framework_TestCase
             'cancel_upload'  => true,
             'message'        => 'The upload has been canceled',
             'done'           => true,
-            'id'      => 'mykey'), $status);
-
+            'id'             => 'mykey'
+            ), $status);
     }
 
     public function testUploadProgressAdapter()
     {
-        if (!(ini_get('apc.enabled') && (bool) ini_get('apc.rfc1867') && is_callable('apc_fetch')) &&
-            !is_callable('uploadprogress_get_info')) {
+        if (!Adapter\Http::isApcAvailable() && !Adapter\Http::isUploadProgressAvailable()) {
             $this->markTestSkipped('Whether APC nor UploadExtension available');
-            return;
         }
 
         $_GET['progress_key'] = 'mykey';
-        $adapter = new \Zend\ProgressBar\Adapter\Console();
+        $adapter = new AdapterProgressBar\Console();
         $status = array('progress' => $adapter, 'session' => 'upload');
-        $status = HTTPTestMockAdapter::getProgress($status);
+        $status = HttpTestMockAdapter::getProgress($status);
         $this->assertTrue(array_key_exists('total', $status));
         $this->assertTrue(array_key_exists('current', $status));
         $this->assertTrue(array_key_exists('rate', $status));
@@ -262,7 +259,7 @@ class HttpTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($status['progress'] instanceof ProgressBar\ProgressBar);
 
         $this->adapter->switchApcToUP();
-        $status = HTTPTestMockAdapter::getProgress($status);
+        $status = HttpTestMockAdapter::getProgress($status);
         $this->assertTrue(array_key_exists('total', $status));
         $this->assertTrue(array_key_exists('current', $status));
         $this->assertTrue(array_key_exists('rate', $status));
@@ -277,50 +274,8 @@ class HttpTest extends \PHPUnit_Framework_TestCase
         $_SERVER['CONTENT_LENGTH'] = 10;
 
         $_FILES = array();
-        $adapter = new HTTPTestMockAdapter();
+        $adapter = new HttpTestMockAdapter();
         $this->assertFalse($adapter->isValidParent());
         $this->assertContains('exceeds the defined ini size', current($adapter->getMessages()));
     }
-}
-
-class HTTPTestMockAdapter extends \Zend\File\Transfer\Adapter\Http
-{
-    public function __construct()
-    {
-        self::$_callbackApc = array('HTTPTestMockAdapter', 'apcTest');
-        parent::__construct();
-    }
-
-    public function isValid($files = null)
-    {
-        return true;
-    }
-
-    public function isValidParent($files = null)
-    {
-        return parent::isValid($files);
-    }
-
-    public static function isApcAvailable()
-    {
-        return true;
-    }
-
-    public static function apcTest($id)
-    {
-        return array('total' => 100, 'current' => 100, 'rate' => 10);
-    }
-
-    public static function uPTest($id)
-    {
-        return array('bytes_total' => 100, 'bytes_uploaded' => 100, 'speed_average' => 10, 'cancel_upload' => true);
-    }
-
-    public function switchApcToUP()
-    {
-        self::$_callbackApc = null;
-        self::$_callbackUploadProgress = array('HTTPTestMockAdapter', 'uPTest');
-    }
-    
-    
 }

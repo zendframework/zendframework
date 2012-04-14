@@ -19,13 +19,15 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
+namespace ZendTest\Service\Technorati;
+use Zend\Service\Technorati;
 
 /**
  * Test helper
  */
 
 /**
- * @see Zend_Service_Technorati_TagResultSet
+ * @see Technorati\TagResultSet
  */
 
 
@@ -38,7 +40,7 @@
  * @group      Zend_Service
  * @group      Zend_Service_Technorati
  */
-class Zend_Service_Technorati_TagResultSetTest extends Zend_Service_Technorati_TestCase
+class TagResultSetTest extends TestCase
 {
     public function setUp()
     {
@@ -47,17 +49,12 @@ class Zend_Service_Technorati_TagResultSetTest extends Zend_Service_Technorati_T
 
     public function testConstruct()
     {
-        $this->_testConstruct('Zend_Service_Technorati_TagResultSet', array($this->dom));
-    }
-
-    public function testConstructThrowsExceptionWithInvalidDom()
-    {
-        $this->_testConstructThrowsExceptionWithInvalidDom('Zend_Service_Technorati_TagResultSet', 'DOMDocument');
+        $this->_testConstruct('Zend\Service\Technorati\TagResultSet', array($this->dom));
     }
 
     public function testTagResultSet()
     {
-        $object = new Zend_Service_Technorati_TagResultSet($this->dom);
+        $object = new Technorati\TagResultSet($this->dom);
 
         // check counts
         $this->assertInternalType('integer', $object->totalResults());
@@ -75,13 +72,13 @@ class Zend_Service_Technorati_TagResultSetTest extends Zend_Service_Technorati_T
     public function testTagResultSetItemsInstanceOfResult()
     {
         $this->_testResultSetItemsInstanceOfResult(
-                    'Zend_Service_Technorati_TagResultSet',
+                    'Zend\Service\Technorati\TagResultSet',
                     array($this->dom),
-                    'Zend_Service_Technorati_TagResult');
+                    'Zend\Service\Technorati\TagResult');
     }
 
     public function testTagResultSetSerialization()
     {
-        $this->_testResultSetSerialization(new Zend_Service_Technorati_TagResultSet($this->dom));
+        $this->_testResultSetSerialization(new Technorati\TagResultSet($this->dom));
     }
 }

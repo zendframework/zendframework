@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Search\Lucene\Search\Query;
 use Zend\Search\Lucene;
 use Zend\Search\Lucene\Search\Highlighter;
@@ -51,13 +48,6 @@ abstract class AbstractQuery
      * @var \Zend\Search\Lucene\Search\Weight\Weight
      */
     protected $_weight = null;
-
-    /**
-     * Current highlight color
-     *
-     * @var integer
-     */
-    private $_currentColorIndex = 0;
 
     /**
      * Gets the boost for this clause.  Documents matching

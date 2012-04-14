@@ -18,9 +18,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
-* @namespace
-*/
 namespace Zend\Feed\Reader;
 
 use ArrayObject,
@@ -65,16 +62,16 @@ class FeedSet extends ArrayObject
                 continue;
             }
             if (!isset($this->rss) && $link->getAttribute('type') == 'application/rss+xml') {
-                $this->rss = $this->_absolutiseUri(trim($link->getAttribute('href')), $uri);
+                $this->rss = $this->absolutiseUri(trim($link->getAttribute('href')), $uri);
             } elseif(!isset($this->atom) && $link->getAttribute('type') == 'application/atom+xml') {
-                $this->atom = $this->_absolutiseUri(trim($link->getAttribute('href')), $uri);
+                $this->atom = $this->absolutiseUri(trim($link->getAttribute('href')), $uri);
             } elseif(!isset($this->rdf) && $link->getAttribute('type') == 'application/rdf+xml') {
-                $this->rdf = $this->_absolutiseUri(trim($link->getAttribute('href')), $uri);
+                $this->rdf = $this->absolutiseUri(trim($link->getAttribute('href')), $uri);
             }
             $this[] = new self(array(
                 'rel' => 'alternate',
                 'type' => $link->getAttribute('type'),
-                'href' => $this->_absolutiseUri(trim($link->getAttribute('href')), $uri),
+                'href' => $this->absolutiseUri(trim($link->getAttribute('href')), $uri),
             ));
         }
     }
@@ -82,9 +79,10 @@ class FeedSet extends ArrayObject
     /**
      *  Attempt to turn a relative URI into an absolute URI
      */
-    protected function _absolutiseUri($link, $uri = null)
+    protected function absolutiseUri($link, $uri = null)
     {
-        if (!Uri\UriFactory::factory($link)->isValid()) {
+        $linkUri = Uri\UriFactory::factory($link);
+        if (!$linkUri->isAbsolute() or !$linkUri->isValid()) {
             if ($uri !== null) {
                 $uri = Uri\UriFactory::factory($uri);
 
@@ -92,7 +90,7 @@ class FeedSet extends ArrayObject
                     $link = $uri->getPath() . '/' . $link;
                 }
 
-                $link = $uri->getScheme() . '://' . $uri->getHost() . '/' . $this->_canonicalizePath($link);
+                $link = $uri->getScheme() . '://' . $uri->getHost() . '/' . $this->canonicalizePath($link);
                 if (!Uri\UriFactory::factory($link)->isValid()) {
                     $link = null;
                 }
@@ -104,7 +102,7 @@ class FeedSet extends ArrayObject
     /**
      *  Canonicalize relative path
      */
-    protected function _canonicalizePath($path)
+    protected function canonicalizePath($path)
     {
         $parts = array_filter(explode('/', $path));
         $absolutes = array();

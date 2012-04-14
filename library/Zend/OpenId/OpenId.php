@@ -18,9 +18,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\OpenId;
 
 use Zend\Http\Response;
@@ -457,7 +454,7 @@ class OpenId
         $response->headers()->addHeaderLine('Location', $url);
 
         if (!headers_sent()) {
-            header($response->renderResponseLine());
+            header($response->renderStatusLine());
             foreach ($response->headers() as $header) {
                 header($header->toString());
             }

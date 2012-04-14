@@ -18,16 +18,13 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Application;
 
 use Traversable,
     Zend\Config,
     Zend\Loader\SplAutoloader,
     Zend\Loader\StandardAutoloader,
-    Zend\Stdlib\IteratorToArray;
+    Zend\Stdlib\ArrayUtils;
 
 /**
  * @category   Zend
@@ -105,7 +102,7 @@ class Application
             if (is_string($options)) {
                 $options = $this->_loadConfig($options);
             } elseif ($options instanceof Traversable) {
-                $options = IteratorToArray::convert($options);
+                $options = ArrayUtils::iteratorToArray($options);
             } elseif (!is_array($options)) {
                 throw new Exception\InvalidArgumentException('Invalid options provided; must be location of config file, a config object, or an array');
             }

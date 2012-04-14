@@ -18,9 +18,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Feed\PubSubHubbub;
 use Zend\Db\Adapter;
 
@@ -52,10 +49,10 @@ class SubscriberTest extends \PHPUnit_Framework_TestCase
         PubSubHubbub\PubSubHubbub::setHttpClient($client);
         $this->_subscriber = new \Zend\Feed\PubSubHubbub\Subscriber;
         $this->_adapter = $this->_getCleanMock(
-            '\Zend\Db\Adapter\AbstractAdapter'
+            '\Zend\Db\Adapter\Adapter'
         );
         $this->_tableGateway = $this->_getCleanMock(
-            '\Zend\Db\Table\AbstractTable'
+            '\Zend\Db\TableGateway\TableGateway'
         );
         $this->_tableGateway->expects($this->any())->method('getAdapter')
             ->will($this->returnValue($this->_adapter));
@@ -323,7 +320,7 @@ class SubscriberTest extends \PHPUnit_Framework_TestCase
 
     public function testCanSetStorageImplementation()
     {
-	    $storage = new \Zend\Feed\PubSubHubbub\Model\Subscription($this->_tableGateway);
+	$storage = new \Zend\Feed\PubSubHubbub\Model\Subscription($this->_tableGateway);
         $this->_subscriber->setStorage($storage);
         $this->assertThat($this->_subscriber->getStorage(), $this->identicalTo($storage));
     }

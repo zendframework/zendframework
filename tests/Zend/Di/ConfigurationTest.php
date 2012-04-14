@@ -4,13 +4,14 @@ namespace ZendTest\Di;
 
 use Zend\Di\Configuration,
     Zend\Di\Di,
+    Zend\Config\Factory as ConfigFactory,
     PHPUnit_Framework_TestCase as TestCase;
 
 class ConfigurationTest extends TestCase
 {
     public function testConfigurationCanConfigureInstanceManagerWithIniFile()
     {
-        $ini = new \Zend\Config\Ini(__DIR__ . '/_files/sample.ini', 'section-a');
+        $ini = ConfigFactory::fromFile(__DIR__ . '/_files/sample.ini', true)->get('section-a');
         $config = new Configuration($ini->di);
         $di = new Di();
         $di->configure($config);
@@ -33,18 +34,18 @@ class ConfigurationTest extends TestCase
         $this->assertContains('my-dbAdapter', $im->getTypePreferences('my-mapper'));
 
         $this->assertTrue($im->hasConfiguration('My\DbAdapter'));
-        $expected = array('parameters' => array('username' => 'readonly', 'password' => 'mypassword'), 'injections' => array());
+        $expected = array('parameters' => array('username' => 'readonly', 'password' => 'mypassword'), 'injections' => array(), 'shared' => true);
         $this->assertEquals($expected, $im->getConfiguration('My\DbAdapter'));
         
         $this->assertTrue($im->hasConfiguration('my-dbAdapter'));
-        $expected = array('parameters' => array('username' => 'readwrite'), 'injections' => array());
+        $expected = array('parameters' => array('username' => 'readwrite'), 'injections' => array(), 'shared' => true);
         $this->assertEquals($expected, $im->getConfiguration('my-dbAdapter'));
     }
     
     public function testConfigurationCanConfigureBuilderDefinitionFromIni()
     {
         $this->markTestIncomplete('Builder not updated to new DI yet');
-        $ini = new \Zend\Config\Ini(__DIR__ . '/_files/sample.ini', 'section-b');
+        $ini = ConfigFactory::fromFile(__DIR__ . '/_files/sample.ini', true)->get('section-b');
         $config = new Configuration($ini->di);
         $di = new Di($config);
         $definition = $di->getDefinition();

@@ -16,13 +16,11 @@
  * @package    Zend_Config
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 namespace Zend\Config\Writer;
 
-use Zend\Config\Yaml as YamlConfig,
-    Zend\Config\Exception;
+use Zend\Config\Exception;
 
 /**
  * @category   Zend
@@ -30,15 +28,28 @@ use Zend\Config\Yaml as YamlConfig,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Yaml extends AbstractFileWriter
+class Yaml extends AbstractWriter
 {
     /**
-     * What to call when we need to decode some YAML?
-     *
+     * Yaml encoder callback
+     * 
      * @var callable
      */
-    protected $_yamlEncoder = array('Zend\Config\Writer\Yaml', 'encode');
-
+    protected $yamlEncoder;
+    /**
+     * Constructor
+     * 
+     * @param callable $yamlDecoder 
+     */
+    public function __construct($yamlEncoder=null) {
+        if (!empty($yamlEncoder)) {
+            $this->setYamlEncoder($yamlEncoder);
+        } else {
+            if (function_exists('yaml_parse')) {
+                $this->setYamlEncoder('yaml_parse');
+            }
+        }
+    }
     /**
      * Get callback for decoding YAML
      *
@@ -46,93 +57,39 @@ class Yaml extends AbstractFileWriter
      */
     public function getYamlEncoder()
     {
-        return $this->_yamlEncoder;
+        return $this->yamlEncoder;
     }
-
     /**
      * Set callback for decoding YAML
      *
      * @param  callable $yamlEncoder the decoder to set
-     * @return Zend_Config_Yaml
+     * @return Yaml
      */
     public function setYamlEncoder($yamlEncoder)
     {
         if (!is_callable($yamlEncoder)) {
-            throw new Exception\InvalidArgumentException('Invalid parameter to setYamlEncoder - must be callable');
+            throw new Exception\InvalidArgumentException('Invalid parameter to setYamlEncoder() - must be callable');
         }
-
-        $this->_yamlEncoder = $yamlEncoder;
+        $this->yamlEncoder = $yamlEncoder;
         return $this;
     }
-
     /**
-     * Render a Zend_Config into a YAML config string.
+     * processConfig(): defined by AbstractWriter.
      *
-     * @since 1.10
+     * @param  array $config
      * @return string
      */
-    public function render()
+    public function processConfig(array $config)
     {
-        $data        = $this->_config->toArray();
-        $sectionName = $this->_config->getSectionName();
-        $extends     = $this->_config->getExtends();
-
-        if (is_string($sectionName)) {
-            $data = array($sectionName => $data);
+        if (null === $this->getYamlEncoder()) {
+             throw new Exception\RuntimeException("You didn't specify a Yaml callback encoder");
         }
-
-        foreach ($extends as $section => $parentSection) {
-            $data[$section][YamlConfig::EXTENDS_NAME] = $parentSection;
+        
+        $config = call_user_func($this->getYamlEncoder(), $config);
+        if (null === $config) {
+            throw new Exception\RuntimeException("Error generating YAML data");
         }
-
-        // Ensure that each "extends" section actually exists
-        foreach ($data as $section => $sectionData) {
-            if (is_array($sectionData) && isset($sectionData[YamlConfig::EXTENDS_NAME])) {
-                $sectionExtends = $sectionData[YamlConfig::EXTENDS_NAME];
-                if (!isset($data[$sectionExtends])) {
-                    // Remove "extends" declaration if section does not exist
-                    unset($data[$section][YamlConfig::EXTENDS_NAME]);
-                }
-            }
-        }
-
-        return call_user_func($this->getYamlEncoder(), $data);
-    }
-
-    /**
-     * Very dumb YAML encoder
-     *
-     * Until we have Zend_Yaml...
-     *
-     * @param array $data YAML data
-     * @return string
-     */
-    public static function encode($data)
-    {
-        return self::_encodeYaml(0, $data);
-    }
-
-    /**
-     * Service function for encoding YAML
-     *
-     * @param int $indent Current indent level
-     * @param array $data Data to encode
-     * @return string
-     */
-    protected static function _encodeYaml($indent, $data)
-    {
-        reset($data);
-        $result = "";
-        $numeric = is_numeric(key($data));
-
-        foreach($data as $key => $value) {
-            if(is_array($value)) {
-                $encoded = "\n".self::_encodeYaml($indent+1, $value);
-            } else {
-                $encoded = (string)$value."\n";
-            }
-            $result .= str_repeat("  ", $indent).($numeric?"- ":"$key: ").$encoded;
-        }
-        return $result;
+        
+        return $config;
     }
 }

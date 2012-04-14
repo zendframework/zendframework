@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.ldap.api.reference.zend-ldap"><info><title>Zend_Ldap</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.ldap.api.reference.zend-ldap"><title>Zend_Ldap</title>
     
 
     <para>
@@ -10,7 +10,7 @@
         <acronym>LDAP</acronym> tree.
     </para>
 
-    <table xml:id="zend.ldap.api.reference.zend-ldap.table"><info><title>Zend_Ldap API</title></info>
+    <table xml:id="zend.ldap.api.reference.zend-ldap.table"><title>Zend_Ldap API</title>
         
 
         <tgroup cols="2">
@@ -147,7 +147,7 @@
                 <row>
                     <entry>
                         <code>Zend_Ldap connect(string $host, integer $port, boolean $useSsl,
-                            boolean $useStartTls)</code>
+                            boolean $useStartTls, integer $networkTimeout)</code>
                     </entry>
 
                     <entry>
@@ -563,7 +563,7 @@
         </tgroup>
     </table>
 
-    <section xml:id="zend.ldap.api.reference.zend-ldap.zend-ldap-collection"><info><title>Zend_Ldap_Collection</title></info>
+    <section xml:id="zend.ldap.api.reference.zend-ldap.zend-ldap-collection"><title>Zend_Ldap_Collection</title>
         
 
         <para>
@@ -574,7 +574,7 @@
             extension point for developers needing custom result objects.
         </para>
 
-        <table xml:id="zend.ldap.api.reference.zend-ldap.zend-ldap-collection.table"><info><title>Zend_Ldap_Collection API</title></info>
+        <table xml:id="zend.ldap.api.reference.zend-ldap.zend-ldap-collection.table"><title>Zend_Ldap_Collection API</title>
             
 
             <tgroup cols="2">

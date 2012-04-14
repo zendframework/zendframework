@@ -20,9 +20,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\GData;
 
 /**
@@ -34,8 +31,6 @@ namespace Zend\GData;
  *
  * @link http://code.google.com/apis/gdata/overview.html
  *
- * @uses       \Zend\GData\App
- * @uses       \Zend\GData\App\InvalidArgumentException
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Gdata

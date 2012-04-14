@@ -6,6 +6,25 @@ use Zend\Http\Header\SetCookie;
 
 class SetCookieTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @group ZF2-254
+     */
+    public function testSetCookieConstructor()
+    {
+        $setCookieHeader = new SetCookie(
+            'myname', 'myvalue', 9, 99, 'docs.foo.com', 
+            'Wed, 13-Jan-2021 22:23:01 GMT', '/accounts', true, true
+        );
+        $this->assertEquals('myname', $setCookieHeader->getName());
+        $this->assertEquals('myvalue', $setCookieHeader->getValue());
+        $this->assertEquals(9, $setCookieHeader->getVersion());
+        $this->assertEquals(99, $setCookieHeader->getMaxAge());
+        $this->assertEquals('docs.foo.com', $setCookieHeader->getDomain());
+        $this->assertEquals('Wed, 13-Jan-2021 22:23:01 GMT', $setCookieHeader->getExpires());
+        $this->assertEquals('/accounts', $setCookieHeader->getPath());
+        $this->assertTrue($setCookieHeader->isSecure());
+        $this->assertTrue($setCookieHeader->isHttpOnly());
+    }
 
     public function testSetCookieFromStringCreatesValidSetCookieHeader()
     {
@@ -128,5 +147,25 @@ class SetCookieTest extends \PHPUnit_Framework_TestCase
 
     /** Implmentation specific tests here */
     
+    /**
+     * @group ZF2-169
+     * @see http://framework.zend.com/issues/browse/ZF2-169
+     */
+    public function testZF2_169()
+    {
+        $cookie = 'Set-Cookie: leo_auth_token="example"; Version=1; Max-Age=1799; Expires=Mon, 20-Feb-2012 02:49:57 GMT; Path=/';
+        $setCookieHeader = SetCookie::fromString($cookie);
+        $this->assertEquals($cookie, $setCookieHeader->toString());
+    }
+
+    /**
+     * @group ZF2-169
+     */
+    public function testDoesNotAcceptCookieNameFromArbitraryLocationInHeaderValue()
+    {
+        $cookie = 'Set-Cookie: Version=1; Max-Age=1799; Expires=Mon, 20-Feb-2012 02:49:57 GMT; Path=/; leo_auth_token="example"';
+        $setCookieHeader = SetCookie::fromString($cookie);
+        $this->assertNotEquals('leo_auth_token', $setCookieHeader->getName());
+    }
 }
 

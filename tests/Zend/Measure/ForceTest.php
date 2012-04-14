@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Measure;
 use Zend\Measure;
 
@@ -33,7 +30,7 @@ use Zend\Measure;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Measure
  */
-class ForceTest extends \PHPUnit_Framework_TestCase
+class ForceTest extends CommonTestCase
 {
     /**
      * test for Force initialisation

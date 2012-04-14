@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Pdf\Resource\Font\Simple\Parsed;
 use Zend\Pdf\InternalType;
 use Zend\Pdf\BinaryParser\Font\OpenType as OpenTypeFontParser;

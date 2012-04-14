@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Amf\Parser\Amf0;
 use Zend\Amf\Parser\AbstractDeserializer,
     Zend\Amf,

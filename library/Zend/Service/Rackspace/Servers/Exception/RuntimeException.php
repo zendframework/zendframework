@@ -19,10 +19,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
-namespace Zend\Service\Rackspace\Exception;
+namespace Zend\Service\Rackspace\Servers\Exception;
 
 use \Zend\Service\Rackspace\Exception;
 

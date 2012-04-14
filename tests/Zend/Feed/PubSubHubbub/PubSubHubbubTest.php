@@ -18,9 +18,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Feed\PubSubHubbub;
 use Zend\Feed\PubSubHubbub;
 
@@ -44,7 +41,7 @@ class PubSubHubbubTest extends \PHPUnit_Framework_TestCase
     public function testCanSetCustomHttpClient()
     {
         PubSubHubbub\PubSubHubbub::setHttpClient(new Pubsub());
-        $this->assertType('ZendTest\Feed\PubSubHubbub\Pubsub', PubSubHubbub\PubSubHubbub::getHttpClient());
+        $this->assertInstanceOf('ZendTest\Feed\PubSubHubbub\Pubsub', PubSubHubbub\PubSubHubbub::getHttpClient());
     }
 
     public function testCanDetectHubs()

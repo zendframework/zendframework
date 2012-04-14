@@ -19,13 +19,15 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
+namespace ZendTest\Service\Technorati;
+use Zend\Service\Technorati;
 
 /**
  * Test helper
  */
 
 /**
- * @see Zend_Service_Technorati_KeyInfoResult
+ * @see Technorati\KeyInfoResult
  */
 
 
@@ -38,7 +40,7 @@
  * @group      Zend_Service
  * @group      Zend_Service_Technorati
  */
-class Zend_Service_Technorati_KeyInfoResultTest extends Zend_Service_Technorati_TestCase
+class KeyInfoResultTest extends TestCase
 {
     const TEST_API_KEY = 'avalidapikey';
 
@@ -49,17 +51,12 @@ class Zend_Service_Technorati_KeyInfoResultTest extends Zend_Service_Technorati_
 
     public function testConstruct()
     {
-        $this->_testConstruct('Zend_Service_Technorati_KeyInfoResult', array($this->dom, self::TEST_API_KEY));
-    }
-
-    public function testConstructThrowsExceptionWithInvalidDom()
-    {
-        $this->_testConstructThrowsExceptionWithInvalidDom('Zend_Service_Technorati_KeyInfoResult', 'DOMDocument');
+        $this->_testConstruct('Zend\Service\Technorati\KeyInfoResult', array($this->dom, self::TEST_API_KEY));
     }
 
     public function testKeyInfoResult()
     {
-        $object = new Zend_Service_Technorati_KeyInfoResult($this->dom, self::TEST_API_KEY);
+        $object = new Technorati\KeyInfoResult($this->dom, self::TEST_API_KEY);
 
         $this->assertInternalType('string', $object->getApiKey());
         $this->assertEquals(self::TEST_API_KEY, $object->getApiKey());
@@ -71,13 +68,13 @@ class Zend_Service_Technorati_KeyInfoResultTest extends Zend_Service_Technorati_
 
     public function testApiKeyIsNullByDefault()
     {
-        $object = new Zend_Service_Technorati_KeyInfoResult($this->dom);
+        $object = new Technorati\KeyInfoResult($this->dom);
         $this->assertEquals(null, $object->getApiKey());
     }
 
     public function testSetGet()
     {
-        $object = new Zend_Service_Technorati_KeyInfoResult($this->dom, self::TEST_API_KEY);
+        $object = new Technorati\KeyInfoResult($this->dom, self::TEST_API_KEY);
 
         $set = 'anewapikey';
         $get = $object->setApiKey($set)->getApiKey();

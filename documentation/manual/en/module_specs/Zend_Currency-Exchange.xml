@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.currency.exchange"><info><title>Exchanging currencies</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.currency.exchange"><title>Exchanging currencies</title>
     
 
     <para>
@@ -93,7 +93,7 @@ print $currency->add($currency2);
         converted by a rate of 2 to 2.000 <acronym>EUR</acronym>.
     </para>
 
-    <note><info><title>Calculation without exchange service</title></info>
+    <note><title>Calculation without exchange service</title>
         
 
         <para>

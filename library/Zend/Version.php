@@ -18,9 +18,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend;
 
 use Zend\Json\Json;
@@ -38,7 +35,7 @@ final class Version
     /**
      * Zend Framework version identification - see compareVersion()
      */
-    const VERSION = '2.0.0beta2';
+    const VERSION = '2.0.0beta3';
 
     /**
      * The latest stable version Zend Framework available

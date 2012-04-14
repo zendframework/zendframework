@@ -18,15 +18,12 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Filter;
 
 use Traversable,
     Zend\Locale\Locale as ZendLocale,
     Zend\Registry,
-    Zend\Stdlib\IteratorToArray;
+    Zend\Stdlib\ArrayUtils;
 
 /**
  * @uses       Zend\Filter\AbstractFilter
@@ -68,7 +65,7 @@ class Alpha extends AbstractFilter
     public function __construct($options = false)
     {
         if ($options instanceof Traversable) {
-            $options = IteratorToArray::convert($options);
+            $options = ArrayUtils::iteratorToArray($options);
         } elseif (!is_array($options)) {
             $options = func_get_args();
             $temp    = array();

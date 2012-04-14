@@ -18,9 +18,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
-* @namespace
-*/
 namespace Zend\Feed\Reader;
 
 use Zend\Cache\Storage\Adapter as CacheAdapter,
@@ -243,11 +240,11 @@ class Reader
             } else {
                 $responseXml = $response->getBody();
                 $cache->setItem($cacheId, $responseXml);
-                if ($response->getHeader('ETag')) {
-                    $cache->setItem($cacheId . '_etag', $response->getHeader('ETag'));
+                if ($response->headers()->get('ETag')) {
+                    $cache->setItem($cacheId . '_etag', $response->headers()->get('ETag')->getFieldValue());
                 }
-                if ($response->getHeader('Last-Modified')) {
-                    $cache->setItem($cacheId . '_lastmodified', $response->getHeader('Last-Modified'));
+                if ($response->headers()->get('Last-Modified')) {
+                    $cache->setItem($cacheId . '_lastmodified', $response->headers()->get('Last-Modified')->getFieldValue());
                 }
             }
             return self::importString($responseXml);

@@ -18,9 +18,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Session;
 
 use Zend\EventManager\EventCollection;
@@ -35,7 +32,7 @@ use Zend\EventManager\EventCollection;
  */
 interface Manager
 {
-    public function __construct($config = null, $storage = null, $saveHandler = null);
+    public function __construct(Configuration $config = null, Storage $storage = null, SaveHandler $saveHandler = null);
 
     public function getConfig();
     public function getStorage();

@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<section 
+<section
     xmlns="http://docbook.org/ns/docbook" version="5.0"
     xml:id="zend.mvc.examples">
-  <info><title>Examples</title></info>
+  <title>Examples</title>
 
   <section xml:id="zend.mvc.examples.controllers">
-    <info><title>Controllers</title></info>
+    <title>Controllers</title>
 
     <section xml:id="zend.mvc.examples.controllers.accessing-the-request-and-response">
-      <info><title>Accessing the Request and Response</title></info>
+      <title>Accessing the Request and Response</title>
 
       <para>
         When using <classname>ActionController</classname> or
@@ -50,7 +50,7 @@ $response = $event->getResponse();
     </section>
 
     <section xml:id="zend.mvc.examples.controllers.accessing-routing-parameters">
-      <info><title>Accessing routing parameters</title></info>
+      <title>Accessing routing parameters</title>
 
       <para>
         The parameters returned when routing completes are wrapped in a
@@ -78,7 +78,7 @@ $matches = $event->getRouteMatch();
     </section>
 
     <section xml:id="zend.mvc.examples.controllers.returning-early">
-      <info><title>Returning early</title></info>
+      <title>Returning early</title>
 
       <para>
         You can effectively short-circuit execution of the application at
@@ -100,10 +100,10 @@ $matches = $event->getRouteMatch();
   </section>
 
   <section xml:id="zend.mvc.examples.bootstrapping">
-    <info><title>Bootstrapping</title></info>
+    <title>Bootstrapping</title>
 
     <section xml:id="registering-module-specific-listeners">
-      <info><title>Registering module-specific listeners</title></info>
+      <title>Registering module-specific listeners</title>
 
       <para>
         Often you may want module-specific listeners. As an example, this
@@ -137,7 +137,8 @@ $matches = $event->getRouteMatch();
       <programlisting language="php"><![CDATA[
 namespace SomeCustomModule;
 
-use Zend\EventManager\StaticEventManager;
+use Zend\EventManager\StaticEventManager,
+    Zend\Mvc\MvcEvent;
 
 class Module
 {
@@ -145,7 +146,7 @@ class Module
     {
         // Remember to keep the init() method as lightweight as possible
         $events = StaticEventManager::getInstance();
-        $events->attach('bootstrap', 'bootstrap', array($this, 'registerListeners'));
+        $events->attach('bootstrap', MvcEvent::EVENT_BOOTSTRAP, array($this, 'registerListeners'));
     }
 
     public function registerListeners($e)
@@ -165,11 +166,11 @@ class Module
       <para>
         The above demonstrates several things. First, it shows registering a
         callback on the bootstrap's "bootstrap" event (within the
-        <methodname>init()</methodname> method). Second, it demonstrates that 
+        <methodname>init()</methodname> method). Second, it demonstrates that
         listener, and how it can be used to register listeners with the
         application. It grabs the <classname>Application</classname> instance,
         as well as the module manager instance. From the
-        <classname>Application</classname>, it is able to grab the attached 
+        <classname>Application</classname>, it is able to grab the attached
         locator, and from the <classname>Managar</classname>, it grabs
         configuration. These are then used to retrieve the view, configure some
         helpers, and then register a listener aggregate with the application

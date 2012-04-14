@@ -117,38 +117,31 @@ class ConfigListenerTest extends TestCase
         $moduleManager->loadModules();
     }
     
-    public function testBadConfigFileExtensionThrowsRuntimeException()
-    {
-        $this->setExpectedException('RuntimeException');
-
-        $configListener = new ConfigListener;
-        $configListener->addConfigGlobPath(__DIR__ . '/_files/bad/*.badext');
-
-        $moduleManager = $this->moduleManager;
-        $moduleManager->setModules(array('SomeModule'));
-        $moduleManager->events()->attach('loadModule', $configListener);
-        $moduleManager->events()->attach('loadModules.post', array($configListener, 'loadModulesPost'), 1000);
-        $moduleManager->loadModules();
-    }
-
     public function testBadGlobPathTrowsInvalidArgumentException()
     {
         $this->setExpectedException('InvalidArgumentException');
         $configListener = new ConfigListener;
         $configListener->addConfigGlobPath(array('asd'));
     }
-
+    
     public function testBadGlobPathArrayTrowsInvalidArgumentException()
     {
         $this->setExpectedException('InvalidArgumentException');
         $configListener = new ConfigListener;
         $configListener->addConfigGlobPaths('asd');
     }
+    
+    public function testBadStaticPathArrayTrowsInvalidArgumentException()
+    {
+        $this->setExpectedException('InvalidArgumentException');
+        $configListener = new ConfigListener;
+        $configListener->addConfigStaticPaths('asd');
+    }
 
     public function testCanMergeConfigFromGlob()
     {
         $configListener = new ConfigListener;
-        $configListener->addConfigGlobPath(__DIR__ . '/_files/good/*.{ini,json,php,xml,yml}');
+        $configListener->addConfigGlobPath(__DIR__ . '/_files/good/*.{ini,php,xml}');
 
         $moduleManager = $this->moduleManager;
         $moduleManager->setModules(array('SomeModule'));
@@ -163,16 +156,70 @@ class ConfigListenerTest extends TestCase
         $this->assertSame(spl_object_hash($configObjectCheck), spl_object_hash($configObject));
         $this->assertSame('loaded', $configObject->ini);
         $this->assertSame('loaded', $configObject->php);
-        $this->assertSame('loaded', $configObject->json);
         $this->assertSame('loaded', $configObject->xml);
-        $this->assertSame('loaded', $configObject->yml);
         // Test as array
         $config = $configListener->getMergedConfig(false);
         $this->assertSame('loaded', $config['ini']);
-        $this->assertSame('loaded', $config['json']);
         $this->assertSame('loaded', $config['php']);
         $this->assertSame('loaded', $config['xml']);
-        $this->assertSame('loaded', $config['yml']);
+    }
+    
+    public function testCanMergeConfigFromStaticPath()
+    {
+        $configListener = new ConfigListener;
+        $configListener->addConfigStaticPath(__DIR__ . '/_files/good/config.ini');
+        $configListener->addConfigStaticPath(__DIR__ . '/_files/good/config.php');
+        $configListener->addConfigStaticPath(__DIR__ . '/_files/good/config.xml');
+
+        $moduleManager = $this->moduleManager;
+        $moduleManager->setModules(array('SomeModule'));
+
+        $moduleManager->events()->attachAggregate($configListener);
+
+        $moduleManager->loadModules();
+        $configObjectCheck = $configListener->getMergedConfig();
+
+        // Test as object
+        $configObject = $configListener->getMergedConfig();
+        $this->assertSame(spl_object_hash($configObjectCheck), spl_object_hash($configObject));
+        $this->assertSame('loaded', $configObject->ini);
+        $this->assertSame('loaded', $configObject->php);
+        $this->assertSame('loaded', $configObject->xml);
+        // Test as array
+        $config = $configListener->getMergedConfig(false);
+        $this->assertSame('loaded', $config['ini']);
+        $this->assertSame('loaded', $config['php']);
+        $this->assertSame('loaded', $config['xml']);
+    }
+    
+    public function testCanMergeConfigFromStaticPaths()
+    {
+        $configListener = new ConfigListener;
+        $configListener->addConfigStaticPaths(array(
+                __DIR__ . '/_files/good/config.ini',
+                __DIR__ . '/_files/good/config.php',
+                __DIR__ . '/_files/good/config.xml')
+                );
+
+        $moduleManager = $this->moduleManager;
+        $moduleManager->setModules(array('SomeModule'));
+
+        $moduleManager->events()->attachAggregate($configListener);
+
+        $moduleManager->loadModules();
+        $configObjectCheck = $configListener->getMergedConfig();
+
+        // Test as object
+        $configObject = $configListener->getMergedConfig();
+        $this->assertSame(spl_object_hash($configObjectCheck), spl_object_hash($configObject));
+        $this->assertSame('loaded', $configObject->ini);
+        $this->assertSame('loaded', $configObject->php);
+        $this->assertSame('loaded', $configObject->xml);
+        // Test as array
+        $config = $configListener->getMergedConfig(false);
+        $this->assertSame('loaded', $config['ini']);
+        $this->assertSame('loaded', $config['php']);
+        $this->assertSame('loaded', $config['xml']);
     }
 
     public function testCanCacheMergedConfigFromGlob()
@@ -182,7 +229,7 @@ class ConfigListenerTest extends TestCase
             'config_cache_enabled' => true,
         ));
         $configListener = new ConfigListener($options);
-        $configListener->addConfigGlobPath(__DIR__ . '/_files/good/*.{ini,json,php,xml,yml}');
+        $configListener->addConfigGlobPath(__DIR__ . '/_files/good/*.{ini,php,xml}');
 
         $moduleManager = $this->moduleManager;
         $moduleManager->setModules(array('SomeModule'));
@@ -203,11 +250,52 @@ class ConfigListenerTest extends TestCase
 
         // Check if values from glob object and cache object are the same
         $configObjectFromCache = $configListener->getMergedConfig();
+        $this->assertNotNull($configObjectFromGlob->ini);
         $this->assertSame($configObjectFromGlob->ini, $configObjectFromCache->ini);
+        $this->assertNotNull($configObjectFromGlob->php);
         $this->assertSame($configObjectFromGlob->php, $configObjectFromCache->php);
-        $this->assertSame($configObjectFromGlob->json, $configObjectFromCache->json);
+        $this->assertNotNull($configObjectFromGlob->xml);
         $this->assertSame($configObjectFromGlob->xml, $configObjectFromCache->xml);
-        $this->assertSame($configObjectFromGlob->yml, $configObjectFromCache->yml);
+    }
+    
+    public function testCanCacheMergedConfigFromStatic()
+    {
+        $options = new ListenerOptions(array(
+            'cache_dir'            => $this->tmpdir,
+            'config_cache_enabled' => true,
+        ));
+        $configListener = new ConfigListener($options);
+        $configListener->addConfigStaticPaths(array(
+                __DIR__ . '/_files/good/config.ini',
+                __DIR__ . '/_files/good/config.php',
+                __DIR__ . '/_files/good/config.xml')
+                );
+
+        $moduleManager = $this->moduleManager;
+        $moduleManager->setModules(array('SomeModule'));
+
+        $moduleManager->events()->attachAggregate($configListener);
+
+        $moduleManager->loadModules();
+        $configObjectFromGlob = $configListener->getMergedConfig();
+
+        // This time, don't add the glob path
+        $configListener = new ConfigListener($options);
+        $moduleManager = new Manager(array('SomeModule'));
+        $moduleManager->events()->attach('loadModule.resolve', new ModuleResolverListener, 1000);
+
+        $moduleManager->events()->attachAggregate($configListener);
+
+        $moduleManager->loadModules();
+
+        // Check if values from glob object and cache object are the same
+        $configObjectFromCache = $configListener->getMergedConfig();
+        $this->assertNotNull($configObjectFromGlob->ini);
+        $this->assertSame($configObjectFromGlob->ini, $configObjectFromCache->ini);
+        $this->assertNotNull($configObjectFromGlob->php);
+        $this->assertSame($configObjectFromGlob->php, $configObjectFromCache->php);
+        $this->assertNotNull($configObjectFromGlob->xml);
+        $this->assertSame($configObjectFromGlob->xml, $configObjectFromCache->xml);
     }
 
     public function testCanMergeConfigFromArrayOfGlobs()
@@ -215,10 +303,8 @@ class ConfigListenerTest extends TestCase
         $configListener = new ConfigListener;
         $configListener->addConfigGlobPaths(new ArrayObject(array(
             __DIR__ . '/_files/good/*.ini',
-            __DIR__ . '/_files/good/*.json',
             __DIR__ . '/_files/good/*.php',
             __DIR__ . '/_files/good/*.xml',
-            __DIR__ . '/_files/good/*.yml',
         )));
 
         $moduleManager = $this->moduleManager;
@@ -231,9 +317,49 @@ class ConfigListenerTest extends TestCase
         $configObject = $configListener->getMergedConfig();
         $this->assertSame('loaded', $configObject->ini);
         $this->assertSame('loaded', $configObject->php);
-        $this->assertSame('loaded', $configObject->json);
         $this->assertSame('loaded', $configObject->xml);
-        $this->assertSame('loaded', $configObject->yml);
+    }
+    
+    public function testCanMergeConfigFromArrayOfStatic()
+    {
+        $configListener = new ConfigListener;
+        $configListener->addConfigStaticPaths(new ArrayObject(array(
+            __DIR__ . '/_files/good/config.ini',
+            __DIR__ . '/_files/good/config.php',
+            __DIR__ . '/_files/good/config.xml',
+        )));
+
+        $moduleManager = $this->moduleManager;
+        $moduleManager->setModules(array('SomeModule'));
+
+        $moduleManager->events()->attachAggregate($configListener);
+        $moduleManager->loadModules();
+
+        // Test as object
+        $configObject = $configListener->getMergedConfig();
+        $this->assertSame('loaded', $configObject->ini);
+        $this->assertSame('loaded', $configObject->php);
+        $this->assertSame('loaded', $configObject->xml);
+    }
+
+    public function testMergesWithMergeAndReplaceBehavior()
+    {
+        $configListener = new ConfigListener();
+
+        $moduleManager = $this->moduleManager;
+        $moduleManager->setModules(array('SomeModule'));
+
+        $configListener->addConfigStaticPaths(array(
+            __DIR__ . '/_files/good/merge1.php',
+            __DIR__ . '/_files/good/merge2.php',
+        ));
+
+        $moduleManager->events()->attachAggregate($configListener);
+        $moduleManager->loadModules();
+
+        $mergedConfig = $configListener->getMergedConfig(false);
+        $this->assertSame(array('foo', 'bar'), $mergedConfig['indexed']);
+        $this->assertSame('bar', $mergedConfig['keyed']);
     }
 
     public function testConfigListenerFunctionsAsAggregateListener()
@@ -248,23 +374,5 @@ class ConfigListenerTest extends TestCase
 
         $configListener->detach($moduleManager->events());
         $this->assertEquals(1, count($moduleManager->events()->getEvents()));
-    }
-
-    public function testPhpConfigFileReturningInvalidConfigRaisesException()
-    {
-        $this->setExpectedException('Zend\Module\Listener\Exception\RuntimeException', 'Invalid configuration');
-
-        $configListener = new ConfigListener;
-        $configListener->addConfigGlobPaths(new ArrayObject(array(
-            __DIR__ . '/_files/bad/*.php',
-        )));
-
-        $moduleManager  = $this->moduleManager;
-        $moduleManager->setModules(array('SomeModule'));
-
-        $moduleManager->events()->attach('loadModule', $configListener);
-        $moduleManager->events()->attach('loadModules.post', array($configListener, 'loadModulesPost'), 1000);
-
-        $moduleManager->loadModules();
     }
 }

@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Measure;
 use Zend\Measure;
 use Zend\Locale;
@@ -38,7 +35,7 @@ use Zend\Locale;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Measure
  */
-class AccelerationTest extends \PHPUnit_Framework_TestCase
+class AccelerationTest extends CommonTestCase
 {
 
     /**

@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\View\Helper\Navigation;
 
 use Zend\Navigation\Container,
@@ -193,7 +190,8 @@ class Breadcrumbs extends AbstractHelper
             if ($this->getUseTranslator() && $t = $this->getTranslator()) {
                 $html = $t->translate($html);
             }
-            $html = $this->view->vars()->escape($html);
+            $escaper = $this->view->plugin('escape');
+            $html    = $escaper($html);
         }
 
         // walk back to root

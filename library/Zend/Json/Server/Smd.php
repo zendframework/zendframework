@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Json\Server;
 use Zend\Json\Server\Exception\InvalidArgumentException,
     Zend\Json\Server\Exception\RuntimeException;
@@ -37,7 +34,7 @@ use Zend\Json\Server\Exception\InvalidArgumentException,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class SMD
+class Smd
 {
     const ENV_JSONRPC_1 = 'JSON-RPC-1.0';
     const ENV_JSONRPC_2 = 'JSON-RPC-2.0';

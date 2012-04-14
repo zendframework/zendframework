@@ -19,14 +19,11 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Mvc\Router\Http;
 
 use Zend\Mvc\Router\Exception,
     Traversable,
-    Zend\Stdlib\IteratorToArray,
+    Zend\Stdlib\ArrayUtils,
     Zend\Mvc\Router\SimpleRouteStack,
     Zend\Mvc\Router\Route as BaseRoute,
     Zend\Mvc\Router\Http\Route,
@@ -73,6 +70,7 @@ class TreeRouteStack extends SimpleRouteStack
             'scheme'   => __NAMESPACE__ . '\Scheme',
             'segment'  => __NAMESPACE__ . '\Segment',
             'wildcard' => __NAMESPACE__ . '\Wildcard',
+            'query'    => __NAMESPACE__ . '\Query',
         ));
     }
 
@@ -98,13 +96,13 @@ class TreeRouteStack extends SimpleRouteStack
      * routeFromArray(): defined by SimpleRouteStack.
      *
      * @see    SimpleRouteStack::routeFromArray()
-     * @param  array|Traversable $specs
+     * @param  array|\Traversable $specs
      * @return Route
      */
     protected function routeFromArray($specs)
     {
         if ($specs instanceof Traversable) {
-            $specs = IteratorToArray::convert($specs);
+            $specs = ArrayUtils::iteratorToArray($specs);
         } elseif (!is_array($specs)) {
             throw new Exception\InvalidArgumentException('Route definition must be an array or Traversable object');
         }
@@ -124,7 +122,7 @@ class TreeRouteStack extends SimpleRouteStack
             );
 
             $priority = (isset($route->priority) ? $route->priority : null);
-            
+
             $route = $this->routeBroker->load('part', $options);
             $route->priority = $priority;
         }
@@ -269,7 +267,7 @@ class TreeRouteStack extends SimpleRouteStack
      * Set the request URI.
      *
      * @param  HttpUri $uri
-     * @return self
+     * @return TreeRouteStack
      */
     public function setRequestUri(HttpUri $uri)
     {

@@ -12,7 +12,7 @@ use ArrayObject,
     Zend\Http\PhpEnvironment\Response as PhpHttpResponse,
     Zend\Uri\Http as HttpUri,
     Zend\Stdlib\Dispatchable,
-    Zend\Stdlib\IsAssocArray,
+    Zend\Stdlib\ArrayUtils,
     Zend\Stdlib\Parameters,
     Zend\Stdlib\RequestDescription as Request,
     Zend\Stdlib\ResponseDescription as Response;
@@ -27,9 +27,11 @@ use ArrayObject,
  */
 class Application implements AppContext
 {
-    const ERROR_CONTROLLER_NOT_FOUND = 404;
-    const ERROR_CONTROLLER_INVALID   = 404;
-    const ERROR_EXCEPTION            = 500;
+    const ERROR_CONTROLLER_CANNOT_DISPATCH = 'error-controller-cannot-dispatch';
+    const ERROR_CONTROLLER_NOT_FOUND       = 'error-controller-not-found';
+    const ERROR_CONTROLLER_INVALID         = 'error-controller-invalid';
+    const ERROR_EXCEPTION                  = 'error-exception';
+    const ERROR_ROUTER_NO_MATCH            = 'error-router-no-match';
 
     protected $event;
     protected $events;
@@ -102,8 +104,8 @@ class Application implements AppContext
 
     /**
      * Set the MVC event instance
-     * 
-     * @param  MvcEvent $event 
+     *
+     * @param  MvcEvent $event
      * @return Application
      */
     public function setMvcEvent(MvcEvent $event)
@@ -163,7 +165,7 @@ class Application implements AppContext
 
     /**
      * Get the MVC event instance
-     * 
+     *
      * @return MvcEvent
      */
     public function getMvcEvent()
@@ -210,7 +212,7 @@ class Application implements AppContext
      *           discovered controller, and controller class (if known).
      *           Typically, a handler should return a populated Response object
      *           that can be returned immediately.
-     * @return SendableResponse
+     * @return PhpHttpResponse
      */
     public function run()
     {
@@ -227,13 +229,14 @@ class Application implements AppContext
             }
             return false;
         };
-        
+
         // Trigger route event
-        $result = $events->trigger('route', $event, $shortCircuit);
+        $result = $events->trigger(MvcEvent::EVENT_ROUTE, $event, $shortCircuit);
         if ($result->stopped()) {
             $response = $result->last();
             if ($response instanceof Response) {
-                $events->trigger('finish', $event);
+                $event->setTarget($this);
+                $events->trigger(MvcEvent::EVENT_FINISH, $event);
                 return $response;
             }
             if ($event->getError()) {
@@ -246,12 +249,13 @@ class Application implements AppContext
         }
 
         // Trigger dispatch event
-        $result = $events->trigger('dispatch', $event, $shortCircuit);
+        $result = $events->trigger(MvcEvent::EVENT_DISPATCH, $event, $shortCircuit);
 
         // Complete response
         $response = $result->last();
         if ($response instanceof Response) {
-            $events->trigger('finish', $event);
+            $event->setTarget($this);
+            $events->trigger(MvcEvent::EVENT_FINISH, $event);
             return $response;
         }
 
@@ -266,15 +270,16 @@ class Application implements AppContext
      *
      * Triggers "render" and "finish" events, and returns response from
      * event object.
-     * 
-     * @param  MvcEvent $event 
+     *
+     * @param  MvcEvent $event
      * @return Response
      */
     protected function completeRequest(MvcEvent $event)
     {
         $events = $this->events();
-        $events->trigger('render', $event);
-        $events->trigger('finish', $event);
+        $event->setTarget($this);
+        $events->trigger(MvcEvent::EVENT_RENDER, $event);
+        $events->trigger(MvcEvent::EVENT_FINISH, $event);
         return $event->getResponse();
     }
 
@@ -292,13 +297,13 @@ class Application implements AppContext
         $routeMatch = $router->match($request);
 
         if (!$routeMatch instanceof Router\RouteMatch) {
-            $e->setError(static::ERROR_CONTROLLER_NOT_FOUND);
+            $e->setError(static::ERROR_ROUTER_NO_MATCH);
 
-            $results = $this->events()->trigger('dispatch.error', $e);
+            $results = $this->events()->trigger(MvcEvent::EVENT_DISPATCH_ERROR, $e);
             if (count($results)) {
                 $return  = $results->last();
             } else {
-                $return = $error->getParams();
+                $return = $e->getParams();
             }
             return $return;
         }
@@ -326,24 +331,15 @@ class Application implements AppContext
         $controllerName = $routeMatch->getParam('controller', 'not-found');
         $events         = $this->events();
 
-        $im=$locator->instanceManager();
-        if($im->hasAlias($controllerName))
-        {
-            
-            $controllerClass=$im->getClassFromAlias($controllerName);
-        }
-        else {
-            $controllerClass=$controllerName;
-        }
-        
-        
-        if(!class_exists($controllerClass))
-        {
+        try {
+            $controller = $locator->get($controllerName);
+        } catch (ClassNotFoundException $exception) {
             $error = clone $e;
             $error->setError(static::ERROR_CONTROLLER_NOT_FOUND)
-                  ->setController($controllerName);
+                  ->setController($controllerName)
+                  ->setParam('exception', $exception);
 
-            $results = $events->trigger('dispatch.error', $error);
+            $results = $events->trigger(MvcEvent::EVENT_DISPATCH_ERROR, $error);
             if (count($results)) {
                 $return  = $results->last();
             } else {
@@ -351,15 +347,18 @@ class Application implements AppContext
             }
             goto complete;
         }
-        
-        if(!in_array("Zend\Stdlib\Dispatchable", class_implements($controllerClass)))
-        {
+
+        if ($controller instanceof LocatorAware) {
+            $controller->setLocator($locator);
+        }
+
+        if (!$controller instanceof Dispatchable) {
             $error = clone $e;
             $error->setError(static::ERROR_CONTROLLER_INVALID)
                   ->setController($controllerName)
-                  ->setControllerClass($controllerClass);
-            
-            $results = $events->trigger('dispatch.error', $error);
+                  ->setControllerClass(get_class($controller));
+
+            $results = $events->trigger(MvcEvent::EVENT_DISPATCH_ERROR, $error);
             if (count($results)) {
                 $return  = $results->last();
             } else {
@@ -367,11 +366,6 @@ class Application implements AppContext
             }
             goto complete;
         }
-        
-        
-        
-        
-        $controller = $locator->get($controllerName);
 
         $request  = $e->getRequest();
         $response = $this->getResponse();
@@ -388,7 +382,7 @@ class Application implements AppContext
                   ->setController($controllerName)
                   ->setControllerClass(get_class($controller))
                   ->setParam('exception', $ex);
-            $results = $events->trigger('dispatch.error', $error);
+            $results = $events->trigger(MvcEvent::EVENT_DISPATCH_ERROR, $error);
             if (count($results)) {
                 $return  = $results->last();
             } else {
@@ -399,7 +393,7 @@ class Application implements AppContext
         complete:
 
         if (!is_object($return)) {
-            if (IsAssocArray::test($return)) {
+            if (ArrayUtils::hasStringKeys($return)) {
                 $return = new ArrayObject($return, ArrayObject::ARRAY_AS_PROPS);
             }
         }
@@ -416,7 +410,7 @@ class Application implements AppContext
     protected function attachDefaultListeners()
     {
         $events = $this->events();
-        $events->attach('route', array($this, 'route'));
-        $events->attach('dispatch', array($this, 'dispatch'));
+        $events->attach(MvcEvent::EVENT_ROUTE, array($this, 'route'));
+        $events->attach(MvcEvent::EVENT_DISPATCH, array($this, 'dispatch'));
     }
 }

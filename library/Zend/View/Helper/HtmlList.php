@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\View\Helper;
 
 /**
@@ -52,7 +49,8 @@ class HtmlList extends FormElement
         foreach ($items as $item) {
             if (!is_array($item)) {
                 if ($escape) {
-                    $item = $this->view->vars()->escape($item);
+                    $escaper = $this->view->plugin('escape');
+                    $item    = $escaper($item);
                 }
                 $list .= '<li>' . $item . '</li>' . self::EOL;
             } else {

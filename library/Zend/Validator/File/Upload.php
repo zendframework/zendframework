@@ -18,9 +18,6 @@
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Validator\File;
 
 /**
@@ -81,7 +78,7 @@ class Upload extends \Zend\Validator\AbstractValidator
      */
     public function __construct($options = array())
     {
-        if (!array_key_exists('files', $options)) {
+        if (is_array($options) && !array_key_exists('files', $options)) {
             $options = array('files' => $options);
         }
 

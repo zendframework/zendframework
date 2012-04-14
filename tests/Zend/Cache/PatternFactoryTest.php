@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Cache
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -27,7 +27,7 @@ use Zend\Cache,
  * @category   Zend
  * @package    Zend_Cache
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Cache
  */
@@ -55,6 +55,17 @@ class PatternFactoryTest extends \PHPUnit_Framework_TestCase
         $broker = new Cache\PatternBroker();
         Cache\PatternFactory::setBroker($broker);
         $this->assertSame($broker, Cache\PatternFactory::getBroker());
+    }
+
+    public function testFactory()
+    {
+        $pattern1 = Cache\PatternFactory::factory('capture');
+        $this->assertInstanceOf('Zend\Cache\Pattern\CaptureCache', $pattern1);
+
+        $pattern2 = Cache\PatternFactory::factory('capture');
+        $this->assertInstanceOf('Zend\Cache\Pattern\CaptureCache', $pattern2);
+
+        $this->assertNotSame($pattern1, $pattern2);
     }
 
 }

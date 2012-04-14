@@ -25,7 +25,7 @@ use Traversable,
     Zend\Acl\Resource as AclResource,
     Zend\Navigation\Container,
     Zend\Navigation\Exception,
-    Zend\Stdlib\IteratorToArray;
+    Zend\Stdlib\ArrayUtils;
 
 /**
  * Base class for Zend\Navigation\Page pages
@@ -168,7 +168,7 @@ abstract class AbstractPage extends Container
      * If 'type' is not given, the type of page to construct will be determined
      * by the following rules:
      * - If $options contains either of the keys 'action', 'controller',
-     *   'module', or 'route', a Zend_Navigation_Page_Mvc page will be created.
+     *   or 'route', a Zend_Navigation_Page_Mvc page will be created.
      * - If $options contains the key 'uri', a Zend_Navigation_Page_Uri page
      *   will be created.
      *
@@ -190,7 +190,7 @@ abstract class AbstractPage extends Container
     public static function factory($options)
     {
         if ($options instanceof Traversable) {
-            $options = IteratorToArray::convert($options);
+            $options = ArrayUtils::iteratorToArray($options);
         }
 
         if (!is_array($options)) {
@@ -233,7 +233,6 @@ abstract class AbstractPage extends Container
 
         $hasUri = isset($options['uri']);
         $hasMvc = isset($options['action']) || isset($options['controller'])
-                || isset($options['module'])
                 || isset($options['route']);
 
         if ($hasMvc) {
@@ -257,7 +256,7 @@ abstract class AbstractPage extends Container
     public function __construct($options = null)
     {
         if ($options instanceof Traversable) {
-            $options = IteratorToArray::convert($options);
+            $options = ArrayUtils::iteratorToArray($options);
         }
         if (is_array($options)) {
             $this->setOptions($options);
@@ -497,7 +496,7 @@ abstract class AbstractPage extends Container
 
         if (null !== $relations) {
             if ($relations instanceof Traversable) {
-                $relations = IteratorToArray::convert($relations);
+                $relations = ArrayUtils::iteratorToArray($relations);
             }
 
             if (!is_array($relations)) {
@@ -561,7 +560,7 @@ abstract class AbstractPage extends Container
 
         if (null !== $relations) {
             if ($relations instanceof Traversable) {
-                $relations = IteratorToArray::convert($relations);
+                $relations = ArrayUtils::iteratorToArray($relations);
             }
 
             if (!is_array($relations)) {

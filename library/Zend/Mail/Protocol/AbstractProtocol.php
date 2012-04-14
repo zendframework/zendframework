@@ -20,9 +20,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Mail\Protocol;
 
 use Zend\Validator\Hostname as HostnameValidator,

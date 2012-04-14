@@ -19,26 +19,22 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Ldap\Node\RootDse;
 
-use Zend\Ldap\Node\RootDse;
+use Zend\Ldap,
+    Zend\Ldap\Node;
 
 /**
- * Zend_Ldap_Node_RootDse provides a simple data-container for the RootDse node of
- * an Active Directory server.
+ * Zend\Ldap\Node\RootDse\ActiveDirectory provides a simple data-container for
+ * the RootDse node of an Active Directory server.
  *
- * @uses       \Zend\Ldap\Dn
- * @uses       \Zend\Ldap\Node\RootDse
  * @category   Zend
  * @package    Zend_Ldap
  * @subpackage RootDse
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ActiveDirectory extends RootDse
+class ActiveDirectory extends Node\RootDse
 {
     /**
      * Gets the configurationNamingContext.
@@ -236,11 +232,11 @@ class ActiveDirectory extends RootDse
     /**
      * Returns the schema DN
      *
-     * @return \Zend\Ldap\Dn
+     * @return Ldap\Dn
      */
     public function getSchemaDn()
     {
         $schemaDn = $this->getSchemaNamingContext();
-        return \Zend\Ldap\Dn::fromString($schemaDn);
+        return Ldap\Dn::fromString($schemaDn);
     }
 }

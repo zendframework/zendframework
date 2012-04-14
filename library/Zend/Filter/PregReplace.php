@@ -18,13 +18,10 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Filter;
 
 use Traversable,
-    Zend\Stdlib\IteratorToArray;
+    Zend\Stdlib\ArrayUtils;
 
 /**
  * @uses       Zend\Filter\Exception
@@ -91,7 +88,7 @@ class PregReplace extends AbstractFilter
     public function __construct($options = array())
     {
         if ($options instanceof Traversable) {
-            $options = IteratorToArray::convert($options);
+            $options = ArrayUtils::iteratorToArray($options);
         } elseif (!is_array($options)) {
             $options = func_get_args();
             $temp    = array();

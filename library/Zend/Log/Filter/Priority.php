@@ -19,89 +19,60 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Log\Filter;
 
+use Zend\Log\Exception,
+    Zend\Log\Filter;
+
 /**
- * @uses       \Zend\Log\Exception\InvalidArgumentException
- * @uses       \Zend\Log\Filter\AbstractFilter
  * @category   Zend
  * @package    Zend_Log
  * @subpackage Filter
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Priority extends AbstractFilter
+class Priority implements Filter
 {
     /**
-     * @var integer
+     * @var int
      */
-    protected $_priority;
+    protected $priority;
 
     /**
      * @var string
      */
-    protected $_operator;
+    protected $operator;
 
     /**
-     * Filter logging by $priority.  By default, it will accept any log
+     * Filter logging by $priority. By default, it will accept any log
      * event whose priority value is less than or equal to $priority.
      *
-     * @param  integer  $priority  Priority
-     * @param  string   $operator  Comparison operator
+     * @param int $priority Priority
+     * @param string $operator Comparison operator
      * @return void
-     * @throws \Zend\Log\Exception\InvalidArgumentException
+     * @throws Exception\InvalidArgumentException
      */
     public function __construct($priority, $operator = null)
     {
-        if (! is_int($priority)) {
-            throw new \Zend\Log\Exception\InvalidArgumentException('Priority must be an integer');
+        if (!is_int($priority)) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                'Priority must be an integer; received "%s"',
+                gettype($priority)
+            ));
         }
 
-        $this->_priority = $priority;
-        $this->_operator = $operator === null ? '<=' : $operator;
-    }
-
-    /**
-     * Create a new instance of Zend_Log_Filter_Priority
-     *
-     * @param  array|\Zend\Config\Config $config
-     * @return \Zend\Log\Filter\Priority
-     * @throws \Zend\Log\Exception\InvalidArgumentException
-     */
-    static public function factory($config = array())
-    {
-        $config = self::_parseConfig($config);
-        $config = array_merge(array(
-            'priority' => null,
-            'operator' => null,
-        ), $config);
-
-        // Add support for constants
-        if (!is_numeric($config['priority']) && isset($config['priority']) && defined($config['priority'])) {
-            $config['priority'] = constant($config['priority']);
-        }
-
-        if (!is_numeric($config['priority'])) {
-        	throw new \Zend\Log\Exception\InvalidArgumentException('Priority must be an integer.');
-        }
-
-        return new self(
-            (int) $config['priority'],
-            $config['operator']
-        );
+        $this->priority = $priority;
+        $this->operator = $operator === null ? '<=' : $operator;
     }
 
     /**
      * Returns TRUE to accept the message, FALSE to block it.
      *
-     * @param  array    $event    event data
-     * @return boolean            accepted?
+     * @param array $event event data
+     * @return boolean accepted?
      */
-    public function accept($event)
+    public function filter(array $event)
     {
-        return version_compare($event['priority'], $this->_priority, $this->_operator);
+        return version_compare($event['priority'], $this->priority, $this->operator);
     }
 }

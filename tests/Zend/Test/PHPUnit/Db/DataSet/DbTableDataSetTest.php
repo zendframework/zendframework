@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Test\PHPUnit\Db\DataSet;
 use Zend\Test\PHPUnit\Db\DataSet;
 
@@ -62,7 +59,7 @@ class DbTableDataSetTest extends \PHPUnit_Framework_TestCase
         $dataSet = new DataSet\DbTableDataSet();
         $dataSet->addTable($table);
 
-        $this->assertType('Zend\Test\PHPUnit\Db\DataSet\DbTable', $dataSet->getTable($fixtureTable));
+        $this->assertInstanceOf('Zend\Test\PHPUnit\Db\DataSet\DbTable', $dataSet->getTable($fixtureTable));
     }
 
     public function testGetUnknownTableThrowsException()

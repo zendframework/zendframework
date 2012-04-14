@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Pdf\Resource\Font\CidFont;
 use Zend\Pdf\BinaryParser\Font\OpenType as OpenTypeFontParser;
 use Zend\Pdf\Resource\Font as FontResource;

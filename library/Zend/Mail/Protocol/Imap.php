@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Mail\Protocol;
 use Zend\Mail\Protocol\Exception;
 
@@ -304,7 +301,7 @@ class Imap
         // last line has response code
         if ($tokens[0] == 'OK') {
             return $lines ? $lines : true;
-        } else if ($tokens[0] == 'NO'){
+        } elseif ($tokens[0] == 'NO') {
             return false;
         }
         return null;

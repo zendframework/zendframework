@@ -18,9 +18,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Session;
 
 use Zend\EventManager\EventManager;
@@ -38,7 +35,7 @@ class ValidatorChain extends EventManager
     /**
      * @var Storage
      */
-    protected $_storage;
+    protected $storage;
 
     /**
      * Construct the validation chain
@@ -50,7 +47,7 @@ class ValidatorChain extends EventManager
      */
     public function __construct(Storage $storage)
     {
-        $this->_storage = $storage;
+        $this->storage = $storage;
 
         $validators = $storage->getMetadata('_VALID');
         if ($validators) {
@@ -97,6 +94,6 @@ class ValidatorChain extends EventManager
      */
     public function getStorage()
     {
-        return $this->_storage;
+        return $this->storage;
     }
 }

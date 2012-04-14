@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Service\Amazon\Ec2;
 use Zend\Service\Amazon\Ec2,
     Zend\Service\Amazon\Ec2\Exception;
@@ -233,7 +230,7 @@ class KeypairTest extends \PHPUnit_Framework_TestCase
         $this->adapter->setResponse($rawHttpResponse);
 
         $response = $this->keypairInstance->delete('myfakekeyname');
-        $this->assertType('boolean', $response);
+        $this->assertInternalType('boolean', $response);
         $this->assertFalse($response);
     }
 
@@ -255,7 +252,7 @@ class KeypairTest extends \PHPUnit_Framework_TestCase
         $this->adapter->setResponse($rawHttpResponse);
 
         $response = $this->keypairInstance->delete('example-key-name');
-        $this->assertType('boolean', $response);
+        $this->assertInternalType('boolean', $response);
         $this->assertTrue($response);
     }
 }

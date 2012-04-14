@@ -1,7 +1,4 @@
 <?php
-/**
- * @namespace
- */
 namespace ZendTest\Http\PhpEnvironment;
 
 use PHPUnit_Framework_TestCase as TestCase,
@@ -152,6 +149,17 @@ class RequestTest extends TestCase
                 '/dir',
                 '/dir'
             ),
+            array(
+                array(
+                    'SCRIPT_NAME'     => '/~username/public/index.php',
+                    'REQUEST_URI'     => '/~username/public/',
+                    'PHP_SELF'        => '/~username/public/index.php',
+                    'SCRIPT_FILENAME' => '/Users/username/Sites/public/index.php',
+                    'ORIG_SCRIPT_NAME'=> null
+                ),
+                '/~username/public',
+                '/~username/public'
+            ),
         );
     }
 
@@ -224,4 +232,65 @@ class RequestTest extends TestCase
         $this->assertEquals($value, $header->getFieldValue($value));
     }
 
+    /**
+     * Data provider for testing server hostname.
+     */
+    public static function serverHostnameProvider()
+    {
+        return array(
+            array(
+                array(
+                    'SERVER_NAME' => 'test.example.com',
+                    'REQUEST_URI' => 'http://test.example.com/news',
+                ),
+                'test.example.com',
+                '/news',
+            ),
+            array(
+                array(
+                    'HTTP_HOST' => 'test.example.com',
+                    'REQUEST_URI' => 'http://test.example.com/news',
+                ),
+                'test.example.com',
+                '/news',
+            ),
+            array(
+                array(
+                    'SERVER_NAME' => 'test.example.com',
+                    'SERVER_PORT' => '8080',
+                    'REQUEST_URI' => 'http://test.example.com/news',
+                ),
+                'test.example.com',
+                '/news',
+            ),
+            array(
+                array(
+                    'SERVER_NAME' => 'test.example.com',
+                    'SERVER_PORT' => '443',
+                    'HTTPS'       => 'on',
+                    'REQUEST_URI' => 'https://test.example.com/news',
+                ),
+                'test.example.com',
+                '/news',
+            ),
+        );
+    }
+
+    /**
+     * @dataProvider serverHostnameProvider
+     * @param array  $server
+     * @param string $name
+     * @param string $value
+     */
+    public function testServerHostnameProvider(array $server, $expectedHost, $expectedRequestUri)
+    {
+        $_SERVER = $server;
+        $request = new Request();
+
+        $host = $request->uri()->getHost();
+        $this->assertEquals($expectedHost, $host);
+
+        $requestUri = $request->getRequestUri();
+        $this->assertEquals($expectedRequestUri, $requestUri);
+    }
 }

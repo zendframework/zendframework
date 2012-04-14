@@ -17,14 +17,13 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 namespace ZendTest\Config\Writer;
 
-use Zend\Config\Config,
-    Zend\Config\Yaml as YamlConfig,
-    Zend\Config\Writer\Yaml as YamlWriter;
+use \Zend\Config\Writer\Yaml as YamlWriter,
+    \Zend\Config\Config,
+    \Zend\Config\Reader\Yaml as YamlReader;
 
 /**
  * @category   Zend
@@ -32,108 +31,57 @@ use Zend\Config\Config,
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @group      Zend_Config
  */
-class YamlTest extends \PHPUnit_Framework_TestCase
+class YamlTest extends AbstractWriterTestCase
 {
-    protected $_tempName;
 
     public function setUp()
     {
-        $this->_tempName = tempnam(__DIR__ . '/temp', 'tmp');
-    }
-
-    public function tearDown()
-    {
-        @unlink($this->_tempName);
-    }
-
-    public function testNoFilenameSet()
-    {
-        $writer = new YamlWriter(array('config' => new Config(array())));
-
-        $this->setExpectedException('Zend\Config\Exception\InvalidArgumentException', 'No filename was set');
-        $writer->write();
-    }
-
-    public function testNoConfigSet()
-    {
-        $writer = new YamlWriter(array('filename' => $this->_tempName));
-
-        $this->setExpectedException('Zend\Config\Exception\InvalidArgumentException', 'No config was set');
-        $writer->write();
-    }
-
-    public function testFileNotWritable()
-    {
-        $writer = new YamlWriter(array('config' => new Config(array()), 'filename' => '/../../../'));
-
-        $this->setExpectedException('Zend\Config\Exception\RuntimeException', 'Could not write');
-        $writer->write();
-    }
-
-    public function testWriteAndRead()
-    {
-        $config = new Config(array('default' => array('test' => 'foo')));
-
-        $writer = new YamlWriter(array('config' => $config, 'filename' => $this->_tempName));
-        $writer->write();
-
-        $config = new YamlConfig($this->_tempName, null);
-
-        $this->assertEquals('foo', $config->default->test);
+        if (!constant('TESTS_ZEND_CONFIG_YAML_ENABLED')) {
+            $this->markTestSkipped('Yaml test for Zend\Config skipped');
+        }
+        
+        if (constant('TESTS_ZEND_CONFIG_YAML_LIB_INCLUDE')) {
+            require_once constant('TESTS_ZEND_CONFIG_YAML_LIB_INCLUDE');
+        }
+        
+        $yamlReader = explode('::', constant('TESTS_ZEND_CONFIG_READER_YAML_CALLBACK'));
+        if (isset($yamlReader[1])) {
+            $this->reader = new YamlReader(array($yamlReader[0], $yamlReader[1]));
+        } else {
+            $this->reader = new YamlReader(array($yamlReader[0]));
+        }
+        
+        $yamlWriter = explode('::', constant('TESTS_ZEND_CONFIG_WRITER_YAML_CALLBACK'));
+        if (isset($yamlWriter[1])) {
+            $this->writer = new YamlWriter(array($yamlWriter[0], $yamlWriter[1]));
+        } else {
+            $this->writer = new YamlWriter(array($yamlWriter[0]));
+        }
     }
 
     public function testNoSection()
     {
         $config = new Config(array('test' => 'foo', 'test2' => array('test3' => 'bar')));
 
-        $writer = new YamlWriter(array('config' => $config, 'filename' => $this->_tempName));
-        $writer->write();
+        $this->writer->toFile($this->getTestAssetFileName(), $config);
 
-        $config = new YamlConfig($this->_tempName, null);
+        $config = $this->reader->fromFile($this->getTestAssetFileName());
 
-        $this->assertEquals('foo', $config->test);
-        $this->assertEquals('bar', $config->test2->test3);
+        $this->assertEquals('foo', $config['test']);
+        $this->assertEquals('bar', $config['test2']['test3']);
     }
 
     public function testWriteAndReadOriginalFile()
     {
-        $config = new YamlConfig(__DIR__ . '/files/allsections.yaml', null, array('skip_extends' => true));
+        $config = $this->reader->fromFile(__DIR__ . '/files/allsections.yaml');
 
-        $writer = new YamlWriter(array('config' => $config, 'filename' => $this->_tempName));
-        $writer->write();
+        $this->writer->toFile($this->getTestAssetFileName(), $config);
 
-        $config = new YamlConfig($this->_tempName, null);
-        $this->assertEquals('multi', $config->staging->one->two->three, var_export($config->toArray(), 1));
+        $config = $this->reader->fromFile($this->getTestAssetFileName());
 
-        $config = new YamlConfig($this->_tempName, null, array('skip_extends' => true));
-        $this->assertFalse(isset($config->staging->one));
-    }
+        $this->assertEquals('multi', $config['all']['one']['two']['three']);
 
-
-    public function testWriteAndReadSingleSection()
-    {
-        $config = new YamlConfig(__DIR__ . '/files/allsections.yaml', 'staging', array('skip_extends' => true));
-
-        $writer = new YamlWriter(array('config' => $config, 'filename' => $this->_tempName));
-        $writer->write();
-
-        $config = new YamlConfig($this->_tempName, null);
-
-        $this->assertEquals('staging', $config->staging->hostname);
-        $this->assertEquals('', $config->staging->debug);
-        $this->assertEquals(null, @$config->production);
-    }
-
-    public function testArgumentOverride()
-    {
-        $config = new Config(array('default' => array('test' => 'foo')));
-
-        $writer = new YamlWriter();
-        $writer->write($this->_tempName, $config);
-
-        $config = new YamlConfig($this->_tempName, null);
-
-        $this->assertEquals('foo', $config->default->test);
     }
 }

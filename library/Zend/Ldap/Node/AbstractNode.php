@@ -19,20 +19,14 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Ldap\Node;
-use Zend\Ldap;
+
+use Zend\Ldap,
+    Zend\Ldap\Exception;
 
 /**
- * Zend_Ldap_Node_Abstract provides a bas eimplementation for LDAP nodes
+ * Zend\Ldap\Node\AbstractNode provides a bas eimplementation for LDAP nodes
  *
- * @uses       ArrayAccess
- * @uses       BadMethodCallException
- * @uses       Countable
- * @uses       \Zend\Ldap\Attribute
- * @uses       \Zend\Ldap\Dn
  * @category   Zend
  * @package    Zend_Ldap
  * @subpackage Node
@@ -41,7 +35,7 @@ use Zend\Ldap;
  */
 abstract class AbstractNode implements \ArrayAccess, \Countable
 {
-    protected static $_systemAttributes=array('createtimestamp', 'creatorsname',
+    protected static $systemAttributes=array('createtimestamp', 'creatorsname',
         'entrycsn', 'entrydn', 'entryuuid', 'hassubordinates', 'modifiersname',
         'modifytimestamp', 'structuralobjectclass', 'subschemasubentry',
         'distinguishedname', 'instancetype', 'name', 'objectcategory', 'objectguid',
@@ -50,44 +44,43 @@ abstract class AbstractNode implements \ArrayAccess, \Countable
     /**
      * Holds the node's DN.
      *
-     * @var \Zend\Ldap\Dn
+     * @var Ldap\Dn
      */
-    protected $_dn;
+    protected $dn;
 
     /**
      * Holds the node's current data.
      *
      * @var array
      */
-    protected $_currentData;
+    protected $currentData;
 
     /**
      * Constructor.
      *
      * Constructor is protected to enforce the use of factory methods.
      *
-     * @param  \Zend\Ldap\Dn $dn
-     * @param  array        $data
-     * @param  boolean      $fromDataSource
+     * @param  Ldap\Dn $dn
+     * @param  array   $data
+     * @param  boolean $fromDataSource
      */
     protected function __construct(Ldap\Dn $dn, array $data, $fromDataSource)
     {
-        $this->_dn = $dn;
-        $this->_loadData($data, $fromDataSource);
+        $this->dn = $dn;
+        $this->loadData($data, $fromDataSource);
     }
 
     /**
      * @param  array   $data
      * @param  boolean $fromDataSource
-     * @throws \Zend\Ldap\Exception
      */
-    protected function _loadData(array $data, $fromDataSource)
+    protected function loadData(array $data, $fromDataSource)
     {
         if (array_key_exists('dn', $data)) {
             unset($data['dn']);
         }
         ksort($data, SORT_STRING);
-        $this->_currentData = $data;
+        $this->currentData = $data;
     }
 
     /**
@@ -95,38 +88,39 @@ abstract class AbstractNode implements \ArrayAccess, \Countable
      *
      * This is an online method.
      *
-     * @param  \Zend\Ldap\Ldap $ldap
-     * @return \Zend\Ldap\Node\AbstractNode Provides a fluid interface
-     * @throws \Zend\Ldap\Exception
+     * @param  Ldap\Ldap $ldap
+     * @return AbstractNode Provides a fluid interface
+     * @throws Exception\LdapException
      */
     public function reload(Ldap\Ldap $ldap = null)
     {
         if ($ldap !== null) {
             $data = $ldap->getEntry($this->_getDn(), array('*', '+'), true);
-            $this->_loadData($data, true);
+            $this->loadData($data, true);
         }
+
         return $this;
     }
 
     /**
-     * Gets the DN of the current node as a Zend_Ldap_Dn.
+     * Gets the DN of the current node as a Zend\Ldap\Dn.
      *
      * This is an offline method.
      *
-     * @return \Zend\Ldap\Dn
+     * @return Ldap\Dn
      */
     protected function _getDn()
     {
-        return $this->_dn;
+        return $this->dn;
     }
 
     /**
-     * Gets the DN of the current node as a Zend_Ldap_Dn.
+     * Gets the DN of the current node as a Zend\Ldap\Dn.
      * The method returns a clone of the node's DN to prohibit modification.
      *
      * This is an offline method.
      *
-     * @return \Zend\Ldap\Dn
+     * @return Ldap\Dn
      */
     public function getDn()
     {
@@ -272,14 +266,14 @@ abstract class AbstractNode implements \ArrayAccess, \Countable
     {
         if ($includeSystemAttributes === false) {
             $data = array();
-            foreach ($this->_currentData as $key => $value) {
-                if (!in_array($key, self::$_systemAttributes)) {
+            foreach ($this->currentData as $key => $value) {
+                if (!in_array($key, self::$systemAttributes)) {
                     $data[$key] = $value;
                 }
             }
             return $data;
         } else {
-            return $this->_currentData;
+            return $this->currentData;
         }
     }
 
@@ -299,11 +293,16 @@ abstract class AbstractNode implements \ArrayAccess, \Countable
     public function existsAttribute($name, $emptyExists = false)
     {
         $name = strtolower($name);
-        if (isset($this->_currentData[$name])) {
-            if ($emptyExists) return true;
-            return count($this->_currentData[$name])>0;
+        if (isset($this->currentData[$name])) {
+            if ($emptyExists) {
+                return true;
+            }
+
+            return count($this->currentData[$name]) > 0;
         }
-        else return false;
+        else {
+            return false;
+        }
     }
 
     /**
@@ -315,7 +314,7 @@ abstract class AbstractNode implements \ArrayAccess, \Countable
      */
     public function attributeHasValue($attribName, $value)
     {
-        return Ldap\Attribute::attributeHasValue($this->_currentData, $attribName, $value);
+        return Ldap\Attribute::attributeHasValue($this->currentData, $attribName, $value);
     }
 
     /**
@@ -326,7 +325,7 @@ abstract class AbstractNode implements \ArrayAccess, \Countable
      * @param  string  $name
      * @param  integer $index
      * @return mixed
-     * @throws \Zend\Ldap\Exception
+     * @throws Exception\LdapException
      */
     public function getAttribute($name, $index = null)
     {
@@ -334,7 +333,7 @@ abstract class AbstractNode implements \ArrayAccess, \Countable
             return $this->getDnString();
         }
         else {
-            return Ldap\Attribute::getAttribute($this->_currentData, $name, $index);
+            return Ldap\Attribute::getAttribute($this->currentData, $name, $index);
         }
     }
 
@@ -346,11 +345,11 @@ abstract class AbstractNode implements \ArrayAccess, \Countable
      * @param  string  $name
      * @param  integer $index
      * @return array|integer
-     * @throws \Zend\Ldap\Exception
+     * @throws Exception\LdapException
      */
     public function getDateTimeAttribute($name, $index = null)
     {
-        return Ldap\Attribute::getDateTimeAttribute($this->_currentData, $name, $index);
+        return Ldap\Attribute::getDateTimeAttribute($this->currentData, $name, $index);
     }
 
     /**
@@ -361,11 +360,11 @@ abstract class AbstractNode implements \ArrayAccess, \Countable
      * @param  string $name
      * @param  mixed  $value
      * @return null
-     * @throws BadMethodCallException
+     * @throws Exceptipn\BadMethodCallException
      */
     public function __set($name, $value)
     {
-        throw new \BadMethodCallException();
+        throw new Exception\BadMethodCallException();
     }
 
     /**
@@ -375,7 +374,7 @@ abstract class AbstractNode implements \ArrayAccess, \Countable
      *
      * @param  string $name
      * @return array
-     * @throws \Zend\Ldap\Exception
+     * @throws Exception\LdapException
      */
     public function __get($name)
     {
@@ -391,11 +390,11 @@ abstract class AbstractNode implements \ArrayAccess, \Countable
      *
      * @param  string $name
      * @return null
-     * @throws BadMethodCallException
+     * @throws Exception\BadMethodCallException
      */
     public function __unset($name)
     {
-        throw new \BadMethodCallException();
+        throw new Exception\BadMethodCallException();
     }
 
     /**
@@ -420,11 +419,11 @@ abstract class AbstractNode implements \ArrayAccess, \Countable
      * @param  string $name
      * @param  mixed  $value
      * @return null
-     * @throws BadMethodCallException
+     * @throws Exception\BadMethodCallException
      */
     public function offsetSet($name, $value)
     {
-        throw new \BadMethodCallException();
+        throw new Exception\BadMethodCallException();
     }
 
     /**
@@ -435,7 +434,7 @@ abstract class AbstractNode implements \ArrayAccess, \Countable
      *
      * @param  string $name
      * @return array
-     * @throws \Zend\Ldap\Exception
+     * @throws Exception\LdapException
      */
     public function offsetGet($name)
     {
@@ -452,11 +451,11 @@ abstract class AbstractNode implements \ArrayAccess, \Countable
      *
      * @param  string $name
      * @return null
-     * @throws BadMethodCallException
+     * @throws Exception\BadMethodCallException
      */
     public function offsetUnset($name)
     {
-        throw new \BadMethodCallException();
+        throw new Exception\BadMethodCallException();
     }
 
     /**
@@ -481,6 +480,6 @@ abstract class AbstractNode implements \ArrayAccess, \Countable
      */
     public function count()
     {
-        return count($this->_currentData);
+        return count($this->currentData);
     }
 }

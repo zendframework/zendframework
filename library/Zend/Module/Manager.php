@@ -57,7 +57,7 @@ class Manager implements ModuleHandler
      *
      * @triggers loadModules.pre
      * @triggers loadModules.post
-     * @return ManagerHandler
+     * @return Manager
      */
     public function loadModules()
     {

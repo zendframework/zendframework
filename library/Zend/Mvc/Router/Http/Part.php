@@ -15,17 +15,14 @@
  * @category   Zend
  * @package    Zend_Mvc_Router
  * @subpackage Http
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Mvc\Router\Http;
 
 use Traversable,
-    Zend\Stdlib\IteratorToArray,
+    Zend\Stdlib\ArrayUtils,
     Zend\Stdlib\RequestDescription as Request,
     Zend\Mvc\Router\RouteBroker,
     Zend\Mvc\Router\Exception,
@@ -36,7 +33,7 @@ use Traversable,
  *
  * @package    Zend_Mvc_Router
  * @subpackage Http
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @see        http://manuals.rubyonrails.com/read/chapter/65
  */
@@ -69,8 +66,7 @@ class Part extends TreeRouteStack implements Route
      * @param  mixed       $route
      * @param  boolean     $mayTerminate
      * @param  RouteBroker $routeBroker
-     * @param  array       $childRoutes
-     * @return void
+     * @param  array|null  $childRoutes
      */
     public function __construct($route, $mayTerminate, RouteBroker $routeBroker, array $childRoutes = null)
     {
@@ -95,12 +91,13 @@ class Part extends TreeRouteStack implements Route
      *
      * @see    Route::factory()
      * @param  mixed $options
-     * @return void
+     * @throws \Zend\Mvc\Router\Exception\InvalidArgumentException
+     * @return Part
      */
     public static function factory($options = array())
     {
         if ($options instanceof Traversable) {
-            $options = IteratorToArray::convert($options);
+            $options = ArrayUtils::iteratorToArray($options);
         } elseif (!is_array($options)) {
             throw new Exception\InvalidArgumentException(__METHOD__ . ' expects an array or Traversable set of options');
         }
@@ -121,7 +118,7 @@ class Part extends TreeRouteStack implements Route
             $options['child_routes'] = null;
         }
         if ($options['child_routes'] instanceof Traversable) {
-            $options['child_routes'] = IteratorToArray::convert($options['child_routes']);
+            $options['child_routes'] = ArrayUtils::iteratorToArray($options['child_routes']);
         }
 
         return new static($options['route'], $options['may_terminate'], $options['route_broker'], $options['child_routes']);
@@ -131,7 +128,8 @@ class Part extends TreeRouteStack implements Route
      * match(): defined by Route interface.
      *
      * @see    Route::match()
-     * @param  Request $request
+     * @param  Request  $request
+     * @param  int|null $pathOffset
      * @return RouteMatch|null
      */
     public function match(Request $request, $pathOffset = null)

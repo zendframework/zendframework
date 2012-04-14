@@ -18,9 +18,6 @@
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Locale;
 
 use Zend\Cache\Storage\Adapter as CacheAdapter,
@@ -587,10 +584,11 @@ class Locale
 
         $httplanguages = getenv('HTTP_ACCEPT_LANGUAGE');
         if (empty($httplanguages)) {
-            if (array_key_exists('HTTP_ACCEPT_LANGUAGE', $_SERVER)) {
-                $httplanguages = $_SERVER['HTTP_ACCEPT_LANGUAGE'];
-            } else {
-                $httplanguages = null;
+            $httplanguages = null;
+            if (is_array($_SERVER)) {
+                if (array_key_exists('HTTP_ACCEPT_LANGUAGE', $_SERVER)) {
+                    $httplanguages = $_SERVER['HTTP_ACCEPT_LANGUAGE'];
+                }   
             }
         }
 

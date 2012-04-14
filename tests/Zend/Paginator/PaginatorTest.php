@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Paginator;
 
 use PHPUnit_Framework_TestCase as TestCase,
@@ -77,27 +74,10 @@ class PaginatorTest extends TestCase
         $this->_testCollection = range(1, 101);
         $this->_paginator = Paginator\Paginator::factory($this->_testCollection);
 
-        $this->_config = new Config\Xml(__DIR__ . '/_files/config.xml');
+        $this->_config = Config\Factory::fromFile(__DIR__ . '/_files/config.xml', true);
 
-        $this->_cache = CacheFactory::factory(array(
-            'adapter' => array(
-                'name' => 'filesystem',
-                'options' => array(
-                    'ttl'       => 3600,
-                    'cache_dir' => $this->_getTmpDir(),
-                ),
-            ),
-            'plugins' => array(
-                array(
-                    'name' => 'serializer',
-                    'options' => array(
-                        'serializer' => 'php_serialize',
-                    ),
-                ),
-            ),
-        ));
+        $this->_cache = CacheFactory::adapterFactory('memory', array('memory_limit' => 0));
         $this->_cache->clear(CacheAdapter::MATCH_ALL);
-
         Paginator\Paginator::setCache($this->_cache);
 
         $this->_restorePaginatorDefaults();
@@ -105,7 +85,10 @@ class PaginatorTest extends TestCase
 
     protected function tearDown()
     {
-        $this->_cache->clear(CacheAdapter::MATCH_ALL);
+        if ($this->_cache) {
+            $this->_cache->clear(CacheAdapter::MATCH_ALL);
+            $this->_cache = null;
+        }
         $this->_dbConn = null;
         $this->_testCollection = null;
         $this->_paginator = null;
@@ -114,6 +97,9 @@ class PaginatorTest extends TestCase
     protected function _getTmpDir()
     {
         $tmpDir = rtrim(sys_get_temp_dir(), '/\\') . DIRECTORY_SEPARATOR . 'zend_paginator';
+        if (!is_dir($tmpDir)) {
+            mkdir($tmpDir);
+        }
         $this->cacheDir = $tmpDir;
         return $tmpDir;
     }

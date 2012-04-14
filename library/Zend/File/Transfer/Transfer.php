@@ -18,16 +18,11 @@
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\File\Transfer;
 
 /**
  * Base class for all protocols supporting file transfers
  *
- * @uses      \Zend\File\Transfer\Exception
- * @uses      \Zend\Loader
  * @category  Zend
  * @package   Zend_File_Transfer
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -40,7 +35,7 @@ class Transfer
      *
      * @var array
      */
-    protected $_adapter = array();
+    protected $adapter = array();
 
     /**
      * Creates a file processing handler
@@ -48,7 +43,7 @@ class Transfer
      * @param  string  $adapter   Adapter to use
      * @param  boolean $direction OPTIONAL False means Download, true means upload
      * @param  array   $options   OPTIONAL Options to set for this adapter
-     * @throws \Zend\File\Transfer\Exception
+     * @throws Exception
      */
     public function __construct($adapter = 'Http', $direction = false, $options = array())
     {
@@ -61,7 +56,8 @@ class Transfer
      * @param  string  $adapter   Adapter to use
      * @param  boolean $direction OPTIONAL False means Download, true means upload
      * @param  array   $options   OPTIONAL Options to set for this adapter
-     * @throws \Zend\File\Transfer\Exception
+     * @return Transfer
+     * @throws Exception
      */
     public function setAdapter($adapter, $direction = false, $options = array())
     {
@@ -74,9 +70,9 @@ class Transfer
         }
 
         $direction = (integer) $direction;
-        $this->_adapter[$direction] = new $adapter($options);
-        if (!$this->_adapter[$direction] instanceof Adapter\AbstractAdapter) {
-            throw new Exception\InvalidArgumentException("Adapter " . $adapter . " does not extend Zend_File_Transfer_Adapter_Abstract");
+        $this->adapter[$direction] = new $adapter($options);
+        if (!$this->adapter[$direction] instanceof Adapter\AbstractAdapter) {
+            throw new Exception\InvalidArgumentException('Adapter ' . $adapter . ' does not extend Zend\File\Transfer\Adapter\AbstractAdapter');
         }
 
         return $this;
@@ -88,16 +84,16 @@ class Transfer
      * @param boolean $direction On null, all directions are returned
      *                           On false, download direction is returned
      *                           On true, upload direction is returned
-     * @return array|Zend_File_Transfer_Adapter
+     * @return array|Transfer\Adapter
      */
     public function getAdapter($direction = null)
     {
         if ($direction === null) {
-            return $this->_adapter;
+            return $this->adapter;
         }
 
         $direction = (integer) $direction;
-        return $this->_adapter[$direction];
+        return $this->adapter[$direction];
     }
 
     /**
@@ -115,8 +111,8 @@ class Transfer
             $direction = 0;
         }
 
-        if (method_exists($this->_adapter[$direction], $method)) {
-            return call_user_func_array(array($this->_adapter[$direction], $method), $options);
+        if (method_exists($this->adapter[$direction], $method)) {
+            return call_user_func_array(array($this->adapter[$direction], $method), $options);
         }
 
         throw new Exception\BadMethodCallException("Unknown method '" . $method . "' called!");

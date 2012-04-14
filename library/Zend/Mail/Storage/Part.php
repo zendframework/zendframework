@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Mail\Storage;
 
 use RecursiveIterator,
@@ -315,7 +312,7 @@ class Part implements RecursiveIterator, MailPart
 
         if ($this->headerExists($name) == false) {
             $lowerName = strtolower(preg_replace('%([a-z])([A-Z])%', '\1-\2', $name));
-            if($this->headerExists($lowerName) == false) {
+            if ($this->headerExists($lowerName) == false) {
                 throw new Exception\InvalidArgumentException("no Header with Name $name or $lowerName found");
             }
         }
@@ -347,7 +344,7 @@ class Part implements RecursiveIterator, MailPart
     public function headerExists($name)
     {
         $name = strtolower($name);
-        if(isset($this->_headers[$name])) {
+        if (isset($this->_headers[$name])) {
             return true;
         } else {
             return false;

@@ -179,7 +179,7 @@ abstract class Utils
      *
      * This helper adds the virtual hash algo "strlen".
      *
-     * @param  string $data  Name of selected hashing algorithm
+     * @param  string $algo  Name of selected hashing algorithm
      * @param  string $data  Message to be hashed.
      * @param  bool   $raw   When set to TRUE, outputs raw binary data. FALSE outputs lowercase hexits.
      * @return string        Hash value

@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\View\Helper;
 
 use Zend\View\Helper,
@@ -163,7 +160,7 @@ class HtmlListTest extends \PHPUnit_Framework_TestCase
 
         $this->assertContains('<li>one &lt;small&gt; test</li>', $list);
         $this->assertContains('<li>second &amp; third</li>', $list);
-        $this->assertContains('<li>And \'some\' &quot;final&quot; test</li>', $list);
+        $this->assertContains('<li>And &#039;some&#039; &quot;final&quot; test</li>', $list);
     }
 
     public function testListEscapeSwitchedOffForZF2283()

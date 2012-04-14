@@ -41,22 +41,22 @@ class Sender implements Header
 
     /**
      * Header encoding
-     * 
+     *
      * @var string
      */
     protected $encoding = 'ASCII';
 
     /**
      * Factory: create Sender header object from string
-     * 
-     * @param  string $headerLine 
+     *
+     * @param  string $headerLine
      * @return Sender
      * @throws Exception\InvalidArgumentException on invalid header line
      */
     public static function fromString($headerLine)
     {
         $headerLine = iconv_mime_decode($headerLine, ICONV_MIME_DECODE_CONTINUE_ON_ERROR);
-        list($name, $value) = preg_split('#: #', $headerLine, 2);
+        list($name, $value) = explode(': ', $headerLine, 2);
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'sender') {
@@ -66,7 +66,7 @@ class Sender implements Header
         $header = new static();
 
         // Check for address, and set if found
-        if (preg_match('^(?<name>.*?)<(?<email>[^>]+)>$', $value, $matches)) {
+        if (preg_match('^(?P<name>.*?)<(?P<email>[^>]+)>$', $value, $matches)) {
             $name = $matches['name'];
             if (empty($name)) {
                 $name = null;
@@ -75,13 +75,13 @@ class Sender implements Header
             }
             $header->setAddress($matches['email'], $name);
         }
-        
+
         return $header;
     }
 
     /**
      * Get header name
-     * 
+     *
      * @return string
      */
     public function getFieldName()
@@ -91,7 +91,7 @@ class Sender implements Header
 
     /**
      * Get header value
-     * 
+     *
      * @return string
      */
     public function getFieldValue()
@@ -114,11 +114,11 @@ class Sender implements Header
 
     /**
      * Set header encoding
-     * 
-     * @param  string $encoding 
+     *
+     * @param  string $encoding
      * @return Sender
      */
-    public function setEncoding($encoding) 
+    public function setEncoding($encoding)
     {
         $this->encoding = $encoding;
         return $this;
@@ -126,7 +126,7 @@ class Sender implements Header
 
     /**
      * Get header encoding
-     * 
+     *
      * @return string
      */
     public function getEncoding()
@@ -136,19 +136,19 @@ class Sender implements Header
 
     /**
      * Serialize to string
-     * 
+     *
      * @return string
      */
     public function toString()
     {
         return 'Sender: ' . $this->getFieldValue();
     }
-    
+
     /**
      * Set the address used in this header
-     * 
-     * @param  string|AddressDescription $emailOrAddress 
-     * @param  null|string $name 
+     *
+     * @param  string|AddressDescription $emailOrAddress
+     * @param  null|string $name
      * @return Sender
      */
     public function setAddress($emailOrAddress, $name = null)
@@ -159,7 +159,7 @@ class Sender implements Header
         if (!$emailOrAddress instanceof AddressDescription) {
             throw new Exception\InvalidArgumentException(sprintf(
                 '%s expects a string or AddressDescription object; received "%s"',
-                __METHOD__, 
+                __METHOD__,
                 (is_object($emailOrAddress) ? get_class($emailOrAddress) : gettype($emailOrAddress))
             ));
         }
@@ -169,7 +169,7 @@ class Sender implements Header
 
     /**
      * Retrieve the internal address from this header
-     * 
+     *
      * @return AddressDescription|null
      */
     public function getAddress()

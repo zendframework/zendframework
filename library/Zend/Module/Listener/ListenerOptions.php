@@ -2,7 +2,8 @@
 
 namespace Zend\Module\Listener;
 
-use Zend\Stdlib\Options;
+use Zend\Stdlib\Options,
+    Traversable;
 
 class ListenerOptions extends Options
 {
@@ -39,11 +40,19 @@ class ListenerOptions extends Options
     /**
      * Set an array of paths where modules reside
      *
-     * @param array $modulePaths
+     * @param array|Traversable $modulePaths
      * @return ListenerOptions
      */
-    public function setModulePaths(array $modulePaths)
+    public function setModulePaths($modulePaths)
     {
+        if (!is_array($modulePaths) && !$modulePaths instanceof Traversable) {
+            throw new Exception\InvalidArgumentException(
+                sprintf('Argument passed to %::%s() must be an array, '
+                . 'implement the \Traversable interface, or be an '
+                . 'instance of Zend\Config\Config. %s given.',
+                __CLASS__, __METHOD__, gettype($modulePaths))
+            );
+        }
         $this->modulePaths = $modulePaths;
         return $this;
     }
@@ -62,7 +71,7 @@ class ListenerOptions extends Options
      * Set if the config cache should be enabled or not
      *
      * @param bool $enabled
-     * @return ManagerOptions
+     * @return ListenerOptions
      */
     public function setConfigCacheEnabled($enabled)
     {
@@ -84,7 +93,7 @@ class ListenerOptions extends Options
      * Set key used to create the cache file name
      *
      * @param string $configCacheKey the value to be set
-     * @return ManagerOptions
+     * @return ListenerOptions
      */
     public function setConfigCacheKey($configCacheKey)
     {
@@ -119,7 +128,7 @@ class ListenerOptions extends Options
      * Set the path where cache files can be stored
      *
      * @param string $cacheDir the value to be set
-     * @return ManagerOptions
+     * @return ListenerOptions
      */
     public function setCacheDir($cacheDir)
     {

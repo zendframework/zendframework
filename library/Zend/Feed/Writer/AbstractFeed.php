@@ -18,9 +18,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
-* @namespace
-*/
 namespace Zend\Feed\Writer;
 
 use Zend\Uri,
@@ -41,7 +38,7 @@ class AbstractFeed
      * @var array
      */
     protected $_data = array();
-    
+
     /**
      * Holds the value "atom" or "rss" depending on the feed type set when
      * when last exported.
@@ -49,7 +46,7 @@ class AbstractFeed
      * @var string
      */
     protected $_type = null;
-    
+
     /**
      * Constructor: Primarily triggers the registration of core extensions and
      * loads those appropriate to this data container.
@@ -144,7 +141,7 @@ class AbstractFeed
         $zdate = null;
         if ($date === null) {
             $zdate = new Date\Date;
-        } elseif (ctype_digit($date) && strlen($date) == 10) {
+        } elseif (ctype_digit((string)$date)) {
             $zdate = new Date\Date($date, Date\Date::TIMESTAMP);
         } elseif ($date instanceof Date\Date) {
             $zdate = $date;
@@ -164,7 +161,7 @@ class AbstractFeed
         $zdate = null;
         if ($date === null) {
             $zdate = new Date\Date;
-        } elseif (ctype_digit($date) && strlen($date) == 10) {
+        } elseif (ctype_digit((string)$date)) {
             $zdate = new Date\Date($date, Date\Date::TIMESTAMP);
         } elseif ($date instanceof Date\Date) {
             $zdate = $date;
@@ -184,7 +181,7 @@ class AbstractFeed
         $zdate = null;
         if ($date === null) {
             $zdate = new Date\Date;
-        } elseif (ctype_digit($date) && strlen($date) == 10) {
+        } elseif (ctype_digit((string)$date)) {
             $zdate = new Date\Date($date, Date\Date::TIMESTAMP);
         } elseif ($date instanceof Date\Date) {
             $zdate = $date;
@@ -260,7 +257,7 @@ class AbstractFeed
      */
     public function setId($id)
     {
-        if ((empty($id) || !is_string($id) || !Uri\UriFactory::factory($id)->isValid()) 
+        if ((empty($id) || !is_string($id) || !Uri\UriFactory::factory($id)->isValid())
             && !preg_match("#^urn:[a-zA-Z0-9][a-zA-Z0-9\-]{1,31}:([a-zA-Z0-9\(\)\+\,\.\:\=\@\;\$\_\!\*\-]|%[0-9a-fA-F]{2})*#", $id)
             && !$this->_validateTagUri($id)
         ) {
@@ -268,7 +265,7 @@ class AbstractFeed
         }
         $this->_data['id'] = $id;
     }
-    
+
     /**
      * Validate a URI using the tag scheme (RFC 4151)
      *
@@ -277,7 +274,7 @@ class AbstractFeed
      */
     protected function _validateTagUri($id)
     {
-        if (preg_match('/^tag:(?<name>.*),(?<date>\d{4}-?\d{0,2}-?\d{0,2}):(?<specific>.*)(.*:)*$/', $id, $matches)) {
+        if (preg_match('/^tag:(?P<name>.*),(?P<date>\d{4}-?\d{0,2}-?\d{0,2}):(?P<specific>.*)(.*:)*$/', $id, $matches)) {
             $dvalid = false;
             $nvalid = false;
             $date = $matches['date'];
@@ -317,7 +314,7 @@ class AbstractFeed
             throw new Exception('Invalid parameter: parameter \'uri\''
             . ' must be a non-empty string and valid URI/IRI');
         }
-        $this->_data['image'] = $data;  
+        $this->_data['image'] = $data;
     }
 
     /**
@@ -387,7 +384,7 @@ class AbstractFeed
         }
         $this->_data['encoding'] = $encoding;
     }
-    
+
     /**
      * Set the feed's base URL
      *
@@ -401,7 +398,7 @@ class AbstractFeed
         }
         $this->_data['baseUrl'] = $url;
     }
-    
+
     /**
      * Add a Pubsubhubbub hub endpoint URL
      *
@@ -418,7 +415,7 @@ class AbstractFeed
         }
         $this->_data['hubs'][] = $url;
     }
-    
+
     /**
      * Add Pubsubhubbub hub endpoint URLs
      *
@@ -430,12 +427,12 @@ class AbstractFeed
             $this->addHub($url);
         }
     }
-    
+
     /**
      * Add a feed category
      *
      * @param string $category
-     */ 
+     */
     public function addCategory(array $category)
     {
         if (!isset($category['term'])) {
@@ -444,7 +441,7 @@ class AbstractFeed
             . ' readable category name');
         }
         if (isset($category['scheme'])) {
-            if (empty($category['scheme']) 
+            if (empty($category['scheme'])
                 || !is_string($category['scheme'])
                 || !Uri\UriFactory::factory($category['scheme'])->isValid()
             ) {
@@ -457,7 +454,7 @@ class AbstractFeed
         }
         $this->_data['categories'][] = $category;
     }
-    
+
     /**
      * Set an array of feed categories
      *
@@ -666,7 +663,7 @@ class AbstractFeed
         }
         return $this->_data['encoding'];
     }
-    
+
     /**
      * Get the feed's base url
      *
@@ -679,7 +676,7 @@ class AbstractFeed
         }
         return $this->_data['baseUrl'];
     }
-    
+
     /**
      * Get the URLs used as Pubsubhubbub hubs endpoints
      *
@@ -692,7 +689,7 @@ class AbstractFeed
         }
         return $this->_data['hubs'];
     }
-    
+
     /**
      * Get the feed categories
      *
@@ -715,7 +712,7 @@ class AbstractFeed
     {
         $this->_data = array();
     }
-    
+
     /**
      * Set the current feed type being exported to "rss" or "atom". This allows
      * other objects to gracefully choose whether to execute or not, depending
@@ -727,7 +724,7 @@ class AbstractFeed
     {
         $this->_type = $type;
     }
-    
+
     /**
      * Retrieve the current or last feed type exported.
      *
@@ -737,7 +734,7 @@ class AbstractFeed
     {
         return $this->_type;
     }
-    
+
     /**
      * Unset a specific data point
      *
@@ -749,7 +746,7 @@ class AbstractFeed
             unset($this->_data[$name]);
         }
     }
-    
+
     /**
      * Method overloading: call given method on first extension implementing it
      *

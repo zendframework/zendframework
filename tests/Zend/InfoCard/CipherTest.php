@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\InfoCard;
 use Zend\InfoCard\Cipher\PKI\Adapter;
 use Zend\InfoCard\Cipher;

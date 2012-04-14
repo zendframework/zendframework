@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\GData;
 use Zend\GData\Extension;
 
@@ -83,7 +80,7 @@ class EntryLinkTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(1, count($newEntryLink->extensionElements));
         $this->assertEquals("http://gmail.com/jo/contacts/Bob", $newEntryLink->href);
         $this->assertEquals("self", $newEntryLink->rel);
-        $this->assertEquals("false", $newEntryLink->readOnly);
+        $this->assertTrue($newEntryLink->readOnly);
 
         /* try constructing using magic factory */
         $gdata = new \Zend\GData\GData();
@@ -92,7 +89,7 @@ class EntryLinkTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(1, count($newEntryLink2->extensionElements));
         $this->assertEquals("http://gmail.com/jo/contacts/Bob", $newEntryLink2->href);
         $this->assertEquals("self", $newEntryLink2->rel);
-        $this->assertEquals("false", $newEntryLink2->readOnly);
+        $this->assertTrue($newEntryLink2->readOnly);
     }
 
     public function testEmptyEntryLinkToAndFromStringShouldMatch() {
@@ -135,7 +132,7 @@ class EntryLinkTest extends \PHPUnit_Framework_TestCase
         $this->entryLink->transferFromXML($this->entryLinkText);
         $this->assertEquals("http://gmail.com/jo/contacts/Jo", $this->entryLink->href);
         $this->assertEquals("via", $this->entryLink->rel);
-        $this->assertEquals("true", $this->entryLink->readOnly);
+        $this->assertTrue($this->entryLink->readOnly);
         $this->assertTrue($this->entryLink->entry instanceof \Zend\GData\App\Entry);
         $this->assertEquals("Jo March", $this->entryLink->entry->title->text);
     }

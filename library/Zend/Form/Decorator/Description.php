@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Form\Decorator;
 
 /**
@@ -181,7 +178,7 @@ class Description extends AbstractDecorator
         $options   = $this->getOptions();
 
         if ($escape) {
-            $description = $view->vars()->escape($description);
+            $description = $view->escape($description);
         }
 
         if (!empty($tag)) {

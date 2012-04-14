@@ -54,7 +54,7 @@ class Date implements Header
      */
     public static function fromString($headerLine)
     {
-        list($name, $value) = preg_split('#: #', $headerLine, 2);
+        list($name, $value) = explode(': ', $headerLine, 2);
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'date') {

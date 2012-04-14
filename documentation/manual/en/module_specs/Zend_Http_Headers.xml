@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.http.headers">
-    <info>
+    
         <title>Zend\Http\Headers And The Various Header Classes</title>
-    </info>
+    
 
     <section xml:id="zend.http.headers.intro">
-        <info>
+        
             <title>Overview</title>
-        </info>
+        
 
         <para>
             The <classname>Zend\Http\Headers</classname> class is a container for HTTP headers.  It
@@ -37,9 +37,9 @@
     </section>
 
     <section xml:id="zend.http.headers.quick-start">
-        <info>
+        
             <title>Quick Start</title>
-        </info>
+        
 
         <para>
             The quickest way to get started interacting with header objects is by getting an already populated
@@ -48,9 +48,9 @@
     </section>
 
     <section xml:id="zend.http.headers.options">
-        <info>
+        
             <title>Configuration Options</title>
-        </info>
+        
 
         <para>
             None currently available.
@@ -64,9 +64,9 @@
     </section>
 
     <section xml:id="zend.http.headers.methods">
-        <info>
+        
             <title>Available Methods</title>
-        </info>
+        
 
         <variablelist>
             <varlistentry xml:id="zend.http.headers.methods.from-string">
@@ -350,17 +350,17 @@
     </section>
 
     <section xml:id="zend.http.headers.examples">
-        <info>
+        
             <title>Examples</title>
-        </info>
+        
 
         <para></para>
     </section>
 
     <section xml:id="zend.http.headers.header-description">
-        <info>
+        
             <title>Zend\Http\Header\* Base Methods</title>
-        </info>
+        
 
         <variablelist>
             <varlistentry xml:id="zend.http.header.generic-header.methods.from-string">
@@ -417,9 +417,9 @@
     </section>
 
     <section xml:id="zend.http.header-types.list">
-        <info>
+        
             <title>List of Http Header Types</title>
-        </info>
+        
 
         <table frame='all'>
             <title>Zend\Http\Header\* Classes</title>

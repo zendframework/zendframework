@@ -58,39 +58,24 @@ class OutputCache extends AbstractPattern
     }
 
     /**
-     * Start output cache
+     * if there is a cached item with the given key display it's data and return true
+     * else start buffering output until end() is called or the script ends.
      *
-     * Options:
-     *   output  boolean  If true the (default) cached output will be displayed
-     *                    else the cached output will be returned instead of true
-     *   + storage read options
-     *
-     * @param  string  $key      Key
-     * @param  array   $options  Output start options (ttl | validate | output)
-     * @return boolean|string    True if the cache is hit or if output disabled the cached data, false else
+     * @param  string  $key            Key
+     * @param  array   $storageOptions Options passing to Zend\Cache\Storage\Adapter::getItem
+     * @return boolean
      * @throws Exception
      */
-    public function start($key, array $options = array())
+    public function start($key, array $storageOptions = array())
     {
         if (($key = (string) $key) === '') {
-            throw new Exception\MissingKeyException('Missing key to read/write output from storage');
+            throw new Exception\MissingKeyException('Missing key to read/write output from cache');
         }
 
-        $classOptions = $this->getOptions();
-
-        $optOutput = true;
-        if (isset($options['output'])) {
-            $optOutput = (bool) $options['output'];
-            unset($options['output']); // don't forword this option to storage
-        }
-
-        $data = $classOptions->getStorage()->getItem($key, $options);
+        $data = $this->getOptions()->getStorage()->getItem($key, $storageOptions);
         if ($data !== false) {
-            if ($optOutput) {
-                echo $data;
-                return true;
-            }
-            return (string) $data;
+            echo $data;
+            return true;
         }
 
         ob_start();
@@ -100,40 +85,25 @@ class OutputCache extends AbstractPattern
     }
 
     /**
-     * Stop output cache
+     * Stops bufferung output, write buffered data to cache using the given key on start()
+     * and displays the buffer.
      *
-     * Options:
-     *   output  boolean  If true (default) the catched output will be displayed
-     *                    else teh catched output will only be written to cache
-     *   + storage write options
-     *
-     * @param  array   $options
-     * @return boolean
+     * @param  array   $storageOptions Options passed to Zend\Cache\Storage\Adapter::setItem
+     * @return boolean TRUE on success, FALSE on failure writing to cache
      * @throws Exception
      */
-    public function end(array $options = array())
+    public function end(array $storageOptions = array())
     {
         $key = array_pop($this->keyStack);
         if ($key === null) {
-            throw new Exception\RuntimeException('use of end() without a start()');
+            throw new Exception\RuntimeException('Output cache not started');
         }
 
-        $optOutput = true;
-        if (isset($options['output'])) {
-            $optOutput = (bool) $options['output'];
-            unset($options['output']); // don't forword this option to storage
-        }
-
-        if ($optOutput) {
-            $data = ob_get_flush();
-        } else {
-            $data = ob_get_clean();
-        }
-
-        if ($data === false) {
+        $output = ob_end_flush();
+        if ($output === false) {
             throw new Exception\RuntimeException('Output buffering not active');
         }
 
-        return $this->getOptions()->getStorage()->setItem($key, $data, $options);
+        return $this->getOptions()->getStorage()->setItem($key, $output, $storageOptions);
     }
 }

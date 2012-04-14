@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Cache
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -28,7 +28,7 @@ use Zend\Cache,
  * @category   Zend
  * @package    Zend_Cache
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Cache
  */
@@ -37,6 +37,10 @@ class ZendServerDiskTest extends CommonAdapterTest
 
     public function setUp()
     {
+        if (!defined('TESTS_ZEND_CACHE_ZEND_SERVER_ENABLED') || !TESTS_ZEND_CACHE_ZEND_SERVER_ENABLED) {
+            $this->markTestSkipped("Skipped by TestConfiguration (TESTS_ZEND_CACHE_ZEND_SERVER_ENABLED)");
+        }
+
         if (!function_exists('zend_disk_cache_store') || PHP_SAPI == 'cli') {
             try {
                 new Cache\Storage\Adapter\ZendServerDisk();

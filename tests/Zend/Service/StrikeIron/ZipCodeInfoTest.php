@@ -19,17 +19,18 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
+namespace ZendTest\Service\StrikeIron;
 
 /**
  * Test helper
  */
 
 /**
- * @see Zend_Service_StrikeIron
+ * @see \Zend\Service\StrikeIron\StrikeIron
  */
 
 /**
- * @see Zend_Service_StrikeIron_ZipCodeInfo
+ * @see \Zend\Service\StrikeIron\ZipCodeInfo
  */
 
 
@@ -42,17 +43,17 @@
  * @group      Zend_Service
  * @group      Zend_Service_StrikeIron
  */
-class Zend_Service_StrikeIron_ZipCodeInfoTest extends PHPUnit_Framework_TestCase
+class ZipCodeInfoTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        $this->soapClient = new stdclass();
-        $this->service = new Zend_Service_StrikeIron_ZipCodeInfo(array('client' => $this->soapClient));
+        $this->soapClient = new \stdclass();
+        $this->service = new \Zend\Service\StrikeIron\ZipCodeInfo(array('client' => $this->soapClient));
     }
 
     public function testInheritsFromBase()
     {
-        $this->assertType('Zend_Service_StrikeIron_Base', $this->service);
+        $this->assertInstanceOf('Zend\Service\StrikeIron\Base', $this->service);
     }
 
     public function testHasCorrectWsdl()
@@ -63,10 +64,10 @@ class Zend_Service_StrikeIron_ZipCodeInfoTest extends PHPUnit_Framework_TestCase
 
     public function testInstantiationFromFactory()
     {
-        $strikeIron = new Zend_Service_StrikeIron(array('client' => $this->soapClient));
+        $strikeIron = new \Zend\Service\StrikeIron\StrikeIron(array('client' => $this->soapClient));
         $client = $strikeIron->getService(array('class' => 'ZipCodeInfo'));
 
-        $this->assertType('Zend_Service_StrikeIron_ZipCodeInfo', $client);
+        $this->assertInstanceOf('Zend\Service\StrikeIron\ZipCodeInfo', $client);
     }
 
 }

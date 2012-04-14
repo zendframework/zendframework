@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
-* @namespace
-*/
 namespace ZendTest\Feed\Reader;
 use Zend\Feed\Reader;
 
@@ -315,7 +312,7 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
     public function testRegistersUserExtension()
     {
         try {
-            Reader\Reader::addPrefixPath('My\\FeedReader\\Extension', dirname(__FILE__) . '/_files/My/Extension');
+            Reader\Reader::addPrefixPath('My\\Extension', dirname(__FILE__) . '/_files/My/Extension');
             Reader\Reader::registerExtension('JungleBooks');
         } catch(\Exception $e) {
             $this->fail($e->getMessage());

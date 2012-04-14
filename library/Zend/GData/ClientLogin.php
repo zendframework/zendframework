@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\GData;
 
 /**
@@ -29,11 +26,6 @@ namespace Zend\GData;
  * for Installed Applications" also known as "ClientLogin".
  * @see http://code.google.com/apis/accounts/AuthForInstalledApps.html
  *
- * @uses       \Zend\GData\App\AuthException
- * @uses       \Zend\GData\App\CaptchaRequiredException
- * @uses       \Zend\GData\App\HttpException
- * @uses       \Zend\GData\HttpClient
- * @uses       \Zend\Version
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Gdata

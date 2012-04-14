@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\View\Helper;
 
 /**
@@ -71,7 +68,7 @@ class FormLabelTest extends \PHPUnit_Framework_TestCase
     public function testFormLabelWithInputNeedingEscapesUsesViewEscaping()
     {
         $label = $this->helper->__invoke('<&foo', '</bar>');
-        $expected = '<label for="' . $this->view->vars()->escape('<&foo') . '">' . $this->view->vars()->escape('</bar>') . '</label>';
+        $expected = '<label for="' . $this->view->escape('<&foo') . '">' . $this->view->escape('</bar>') . '</label>';
         $this->assertEquals($expected, $label);
     }
 

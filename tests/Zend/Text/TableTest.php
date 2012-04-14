@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Text;
 use Zend\Text\Table;
 use Zend\Text\Table\Decorator;
@@ -226,6 +223,17 @@ class TableTest extends \PHPUnit_Framework_TestCase
         $row->appendColumn(new Table\Column("foobar"));
 
         $this->assertEquals($row->render(array(10, 10), $decorator), "│foo       │foobar    │\n│bar       │          │\n");
+    }
+
+    public function testUnicodeRowMultiLine()
+    {
+        $decorator = new Decorator\Unicode();
+
+        $row = new Table\Row();
+        $row->appendColumn(new Table\Column("föö\nbär"));
+        $row->appendColumn(new Table\Column("fööbär"));
+
+        $this->assertEquals($row->render(array(3, 10), $decorator), "│föö│fööbär    │\n│bär│          │\n");
     }
 
     public function testTableConstructInvalidColumnWidthsItem()

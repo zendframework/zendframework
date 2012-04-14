@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\View\Helper\Navigation;
 
 use RecursiveIteratorIterator,
@@ -641,8 +638,10 @@ abstract class AbstractHelper extends View\Helper\HtmlElement implements Helper
             'target' => $page->getTarget()
         );
 
+        $escaper = $this->view->plugin('escape');
+
         return '<a' . $this->_htmlAttribs($attribs) . '>'
-             . $this->view->vars()->escape($label)
+             . $escaper($label)
              . '</a>';
     }
 

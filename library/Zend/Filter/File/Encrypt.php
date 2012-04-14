@@ -18,9 +18,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Filter\File;
 use Zend\Filter,
     Zend\Filter\Exception;
@@ -74,7 +71,7 @@ class Encrypt extends Filter\Encrypt
      * @param  string $value Full path of file to change
      * @return string The filename which has been set, or false when there were errors
      */
-    public function __invoke($value)
+    public function filter($value)
     {
         if (!file_exists($value)) {
             throw new Exception\InvalidArgumentException("File '$value' not found");
@@ -93,7 +90,7 @@ class Encrypt extends Filter\Encrypt
             throw new Exception\RuntimeException("Problem while reading file '$value'");
         }
 
-        $encrypted = parent::__invoke($content);
+        $encrypted = parent::filter($content);
         $result    = file_put_contents($this->_filename, $encrypted);
 
         if (!$result) {

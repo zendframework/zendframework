@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.xmlrpc.client"><info><title>Zend_XmlRpc_Client</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.xmlrpc.client"><title>Zend_XmlRpc_Client</title>
     
 
-    <section xml:id="zend.xmlrpc.client.introduction"><info><title>Introduction</title></info>
+    <section xml:id="zend.xmlrpc.client.introduction"><title>Introduction</title>
         
 
         <para>
@@ -14,7 +14,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.xmlrpc.client.method-calls"><info><title>Method Calls</title></info>
+    <section xml:id="zend.xmlrpc.client.method-calls"><title>Method Calls</title>
         
 
         <para>
@@ -32,7 +32,7 @@
             <classname>Zend_XmlRpc</classname> components.
         </para>
 
-        <example xml:id="zend.xmlrpc.client.method-calls.example-1"><info><title>XML-RPC Method Call</title></info>
+        <example xml:id="zend.xmlrpc.client.method-calls.example-1"><title>XML-RPC Method Call</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -59,7 +59,7 @@ echo $client->call('test.sayHello');
             values to pass to the remote method:
         </para>
 
-        <example xml:id="zend.xmlrpc.client.method-calls.example-2"><info><title>XML-RPC Method Call with Parameters</title></info>
+        <example xml:id="zend.xmlrpc.client.method-calls.example-2"><title>XML-RPC Method Call with Parameters</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -91,7 +91,7 @@ $result = $client->call('test.sayHello', array($arg1, $arg2));
         </para>
     </section>
 
-    <section xml:id="zend.xmlrpc.value.parameters"><info><title>Types and Conversions</title></info>
+    <section xml:id="zend.xmlrpc.value.parameters"><title>Types and Conversions</title>
         
 
         <para>
@@ -103,7 +103,7 @@ $result = $client->call('test.sayHello', array($arg1, $arg2));
             (one of the <classname>Zend_XmlRpc_Value</classname> objects).
         </para>
 
-        <section xml:id="zend.xmlrpc.value.parameters.php-native"><info><title>PHP Native Types as Parameters</title></info>
+        <section xml:id="zend.xmlrpc.value.parameters.php-native"><title>PHP Native Types as Parameters</title>
             
 
             <para>
@@ -116,7 +116,7 @@ $result = $client->call('test.sayHello', array($arg1, $arg2));
                 according to this table:
             </para>
 
-            <table xml:id="zend.xmlrpc.value.parameters.php-native.table-1"><info><title>PHP and XML-RPC Type Conversions</title></info>
+            <table xml:id="zend.xmlrpc.value.parameters.php-native.table-1"><title>PHP and XML-RPC Type Conversions</title>
                 
 
                 <tgroup cols="2">
@@ -186,7 +186,7 @@ $result = $client->call('test.sayHello', array($arg1, $arg2));
                 </tgroup>
             </table>
 
-            <note><info><title>What type do empty arrays get cast to?</title></info>
+            <note><title>What type do empty arrays get cast to?</title>
                 
 
                 <para>
@@ -221,7 +221,7 @@ $result = $client->call('foo.bar', array(array()));
             </note>
         </section>
 
-        <section xml:id="zend.xmlrpc.value.parameters.xmlrpc-value"><info><title>Zend_XmlRpc_Value Objects as Parameters</title></info>
+        <section xml:id="zend.xmlrpc.value.parameters.xmlrpc-value"><title>Zend_XmlRpc_Value Objects as Parameters</title>
             
 
             <para>
@@ -267,7 +267,7 @@ $result = $client->call('foo.bar', array(array()));
                 <methodname>Zend_XmlRpc_Value::getXmlRpcValue()</methodname>.
             </para>
 
-            <table xml:id="zend.xmlrpc.value.parameters.xmlrpc-value.table-1"><info><title>Zend_XmlRpc_Value Objects for XML-RPC Types</title></info>
+            <table xml:id="zend.xmlrpc.value.parameters.xmlrpc-value.table-1"><title>Zend_XmlRpc_Value Objects for XML-RPC Types</title>
                 
 
                 <tgroup cols="3">
@@ -404,7 +404,7 @@ $result = $client->call('foo.bar', array(array()));
             </table>
 
             <para>
-                <note><info><title>Automatic Conversion</title></info>
+                <note><title>Automatic Conversion</title>
                     
 
                     <para>
@@ -421,7 +421,7 @@ $result = $client->call('foo.bar', array(array()));
         </section>
     </section>
 
-    <section xml:id="zend.xmlrpc.client.requests-and-responses"><info><title>Server Proxy Object</title></info>
+    <section xml:id="zend.xmlrpc.client.requests-and-responses"><title>Server Proxy Object</title>
         
 
         <para>
@@ -440,7 +440,7 @@ $result = $client->call('foo.bar', array(array()));
             method.
         </para>
 
-        <example xml:id="zend.xmlrpc.client.requests-and-responses.example-1"><info><title>Proxy the Default Namespace</title></info>
+        <example xml:id="zend.xmlrpc.client.requests-and-responses.example-1"><title>Proxy the Default Namespace</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -460,7 +460,7 @@ $hello = $service->test->sayHello(1, 2);  // test.Hello(1, 2) returns "hello"
             will be proxied:
         </para>
 
-        <example xml:id="zend.xmlrpc.client.requests-and-responses.example-2"><info><title>Proxy Any Namespace</title></info>
+        <example xml:id="zend.xmlrpc.client.requests-and-responses.example-2"><title>Proxy Any Namespace</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -481,7 +481,7 @@ $hello = $test->sayHello(1, 2);         // test.Hello(1,2) returns "hello"
         </para>
     </section>
 
-    <section xml:id="zend.xmlrpc.client.error-handling"><info><title>Error Handling</title></info>
+    <section xml:id="zend.xmlrpc.client.error-handling"><title>Error Handling</title>
         
 
         <para>
@@ -491,7 +491,7 @@ $hello = $test->sayHello(1, 2);         // test.Hello(1,2) returns "hello"
             to detect and trap them independently.
         </para>
 
-        <section xml:id="zend.xmlrpc.client.error-handling.http"><info><title>HTTP Errors</title></info>
+        <section xml:id="zend.xmlrpc.client.error-handling.http"><title>HTTP Errors</title>
             
 
             <para>
@@ -500,7 +500,7 @@ $hello = $test->sayHello(1, 2);         // test.Hello(1,2) returns "hello"
                 <classname>Zend_XmlRpc_Client_HttpException</classname> will be thrown.
             </para>
 
-            <example xml:id="zend.xmlrpc.client.error-handling.http.example-1"><info><title>Handling HTTP Errors</title></info>
+            <example xml:id="zend.xmlrpc.client.error-handling.http.example-1"><title>Handling HTTP Errors</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -526,7 +526,7 @@ try {
             </para>
         </section>
 
-        <section xml:id="zend.xmlrpc.client.error-handling.faults"><info><title>XML-RPC Faults</title></info>
+        <section xml:id="zend.xmlrpc.client.error-handling.faults"><title>XML-RPC Faults</title>
             
 
             <para>
@@ -546,7 +546,7 @@ try {
                 response.
             </para>
 
-            <example xml:id="zend.xmlrpc.client.error-handling.faults.example-1"><info><title>Handling XML-RPC Faults</title></info>
+            <example xml:id="zend.xmlrpc.client.error-handling.faults.example-1"><title>Handling XML-RPC Faults</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -584,7 +584,7 @@ try {
         </section>
     </section>
 
-    <section xml:id="zend.xmlrpc.client.introspection"><info><title>Server Introspection</title></info>
+    <section xml:id="zend.xmlrpc.client.introspection"><title>Server Introspection</title>
         
 
         <para>
@@ -602,7 +602,7 @@ try {
         </para>
     </section>
 
-    <section xml:id="zend.xmlrpc.client.request-to-response"><info><title>From Request to Response</title></info>
+    <section xml:id="zend.xmlrpc.client.request-to-response"><title>From Request to Response</title>
         
 
         <para>
@@ -617,7 +617,7 @@ try {
             The <methodname>doRequest()</methodname> method is also available for use directly:
         </para>
 
-        <example xml:id="zend.xmlrpc.client.request-to-response.example-1"><info><title>Processing Request to Response</title></info>
+        <example xml:id="zend.xmlrpc.client.request-to-response.example-1"><title>Processing Request to Response</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -644,7 +644,7 @@ $client->doRequest($request);
         </para>
     </section>
 
-    <section xml:id="zend.xmlrpc.client.http-client"><info><title>HTTP Client and Testing</title></info>
+    <section xml:id="zend.xmlrpc.client.http-client"><title>HTTP Client and Testing</title>
         
 
         <para>

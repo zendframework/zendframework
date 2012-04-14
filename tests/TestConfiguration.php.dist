@@ -37,7 +37,7 @@
  *
  *  defined(...) || define(...);
  *
- * This ensures that, when a test is marked to run in a separate process, 
+ * This ensures that, when a test is marked to run in a separate process,
  * PHP will not complain of a constant already being defined.
  */
 
@@ -63,24 +63,27 @@ defined('TESTS_ZEND_AUTH_ADAPTER_DBTABLE_PDO_SQLITE_DATABASE') || define('TESTS_
 defined('TESTS_ZEND_AUTH_ADAPTER_LDAP_ONLINE_ENABLED') || define('TESTS_ZEND_AUTH_ADAPTER_LDAP_ONLINE_ENABLED', false);
 
 /**
- * Zend_Cache
- *
- * TESTS_ZEND_CACHE_SQLITE_ENABLED    => sqlite extension has to be enabled
- * TESTS_ZEND_CACHE_APC_ENABLED       => apc extension has to be enabled
- * TESTS_ZEND_CACHE_MEMCACHED_ENABLED => memcache extension has to be enabled and
- *                                       a memcached server has to be available
- * TESTS_ZEND_CACHE_XCACHE_ENABLED    => xcache extension has to be enabled
+ * Zend\Cache\Storage\Adapter
  */
-defined('TESTS_ZEND_CACHE_SQLITE_ENABLED') || define('TESTS_ZEND_CACHE_SQLITE_ENABLED', false);
 defined('TESTS_ZEND_CACHE_APC_ENABLED') || define('TESTS_ZEND_CACHE_APC_ENABLED', false);
+defined('TESTS_ZEND_CACHE_SQLITE_ENABLED') || define('TESTS_ZEND_CACHE_SQLITE_ENABLED', false);
 defined('TESTS_ZEND_CACHE_XCACHE_ENABLED') || define('TESTS_ZEND_CACHE_XCACHE_ENABLED', false);
 defined('TESTS_ZEND_CACHE_XCACHE_USER') || define('TESTS_ZEND_CACHE_XCACHE_USER', null);
 defined('TESTS_ZEND_CACHE_XCACHE_PASSWORD') || define('TESTS_ZEND_CACHE_XCACHE_PASSWORD', null);
 defined('TESTS_ZEND_CACHE_PLATFORM_ENABLED') || define('TESTS_ZEND_CACHE_PLATFORM_ENABLED', false);
+defined('TESTS_ZEND_CACHE_WINCACHE_ENABLED') || define('TESTS_ZEND_CACHE_WINCACHE_ENABLED', false);
+defined('TESTS_ZEND_CACHE_ZEND_SERVER_ENABLED') || define('TESTS_ZEND_CACHE_ZEND_SERVER_ENABLED', false);
 defined('TESTS_ZEND_CACHE_MEMCACHED_ENABLED') || define('TESTS_ZEND_CACHE_MEMCACHED_ENABLED', false);
 defined('TESTS_ZEND_CACHE_MEMCACHED_HOST') || define('TESTS_ZEND_CACHE_MEMCACHED_HOST', '127.0.0.1');
 defined('TESTS_ZEND_CACHE_MEMCACHED_PORT') || define('TESTS_ZEND_CACHE_MEMCACHED_PORT', 11211);
-defined('TESTS_ZEND_CACHE_MEMCACHED_PERSISTENT') || define('TESTS_ZEND_CACHE_MEMCACHED_PERSISTENT', true);
+
+/**
+ * Zend_Config
+ */
+defined('TESTS_ZEND_CONFIG_YAML_ENABLED') || define('TESTS_ZEND_CONFIG_YAML_ENABLED', false);
+defined('TESTS_ZEND_CONFIG_YAML_LIB_INCLUDE') || define('TESTS_ZEND_CONFIG_YAML_LIB_INCLUDE', ''); // path to YAML library or empty for YAML PECL extension
+defined('TESTS_ZEND_CONFIG_WRITER_YAML_CALLBACK') || define('TESTS_ZEND_CONFIG_WRITER_YAML_CALLBACK', '');
+defined('TESTS_ZEND_CONFIG_READER_YAML_CALLBACK') || define('TESTS_ZEND_CONFIG_READER_YAML_CALLBACK', '');
 
 /**
  * Zend_Controller
@@ -93,7 +96,7 @@ defined('TESTS_ZEND_CONTROLLER_DISPATCHER_OB') || define('TESTS_ZEND_CONTROLLER_
 /**
  * Zend_Crypt related constantes
  *
- * TESTS_ZEND_CRYPT_OPENSSL_CONF => location of an openssl.cnf file for use 
+ * TESTS_ZEND_CRYPT_OPENSSL_CONF => location of an openssl.cnf file for use
  *     with RSA encryption
  */
 defined('TESTS_ZEND_CRYPT_OPENSSL_CONF') || define('TESTS_ZEND_CRYPT_OPENSSL_CONF', false);
@@ -402,20 +405,21 @@ defined('TESTS_ZEND_LDAP_ONLINE_ENABLED') || define('TESTS_ZEND_LDAP_ONLINE_ENAB
  *              ALT_PASSWORD: apass
  */
 defined('TESTS_ZEND_LDAP_HOST') || define('TESTS_ZEND_LDAP_HOST', 'localhost');
-//define('TESTS_ZEND_LDAP_PORT', 389);
+//defined('TESTS_ZEND_LDAP_PORT') || define('TESTS_ZEND_LDAP_PORT', 389);
 defined('TESTS_ZEND_LDAP_USE_START_TLS') || define('TESTS_ZEND_LDAP_USE_START_TLS', true);
-//define('TESTS_ZEND_LDAP_USE_SSL', false);
+//defined('TESTS_ZEND_LDAP_USE_SSL') || define('TESTS_ZEND_LDAP_USE_SSL', false);
 defined('TESTS_ZEND_LDAP_USERNAME') || define('TESTS_ZEND_LDAP_USERNAME', 'CN=someUser,DC=example,DC=com');
 defined('TESTS_ZEND_LDAP_PRINCIPAL_NAME') || define('TESTS_ZEND_LDAP_PRINCIPAL_NAME', 'someUser@example.com');
 defined('TESTS_ZEND_LDAP_PASSWORD') || define('TESTS_ZEND_LDAP_PASSWORD', null);
 defined('TESTS_ZEND_LDAP_BIND_REQUIRES_DN') || define('TESTS_ZEND_LDAP_BIND_REQUIRES_DN', true);
 defined('TESTS_ZEND_LDAP_BASE_DN') || define('TESTS_ZEND_LDAP_BASE_DN', 'OU=Sales,DC=example,DC=com');
-//define('TESTS_ZEND_LDAP_ACCOUNT_FILTER_FORMAT', '(&(objectClass=posixAccount)(uid=%s))');
+//defined('TESTS_ZEND_LDAP_ACCOUNT_FILTER_FORMAT') || define('TESTS_ZEND_LDAP_ACCOUNT_FILTER_FORMAT', '(&(objectClass=posixAccount)(uid=%s))');
 defined('TESTS_ZEND_LDAP_ACCOUNT_DOMAIN_NAME') || define('TESTS_ZEND_LDAP_ACCOUNT_DOMAIN_NAME', 'example.com');
 defined('TESTS_ZEND_LDAP_ACCOUNT_DOMAIN_NAME_SHORT') || define('TESTS_ZEND_LDAP_ACCOUNT_DOMAIN_NAME_SHORT', 'EXAMPLE');
 defined('TESTS_ZEND_LDAP_ALT_USERNAME') || define('TESTS_ZEND_LDAP_ALT_USERNAME', 'anotherUser');
 defined('TESTS_ZEND_LDAP_ALT_DN') || define('TESTS_ZEND_LDAP_ALT_DN', 'CN=Another User,OU=Sales,DC=example,DC=com');
-defined('TESTS_ZEND_LDAP_ALT_PASSWORD') || define('TESTS_ZEND_LDAP_ALT_PASSWORD', null);
+defined('TESTS_ZEND_LDAP_ALT_PASSWORD') || define('TESTS_ZEND_LDAP_ALT_PASSWORD', null); // Used in Zend_Auth_Adapter_Ldap tests
+//(defined('TESTS_ZEND_LDAP_WRITEABLE_SUBTREE') || define('TESTS_ZEND_LDAP_WRITEABLE_SUBTREE', 'OU=Test,OU=Sales,DC=example,DC=com');
 
 /**
  * Zend_Locale tests

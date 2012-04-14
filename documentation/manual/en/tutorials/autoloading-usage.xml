@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.autoloading.usage"><info><title>Basic Autoloader Usage</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.autoloading.usage"><title>Basic Autoloader Usage</title>
     
 
     <para>
@@ -48,7 +48,7 @@ $loader->registerNamespace(array('Foo_', 'Bar_'));
 $loader->setFallbackAutoloader(true);
 ]]></programlisting>
 
-    <warning><info><title>Do not use as a fallback autoloader</title></info>
+    <warning><title>Do not use as a fallback autoloader</title>
         
 
         <para>
@@ -90,7 +90,7 @@ $loader->setFallbackAutoloader(true);
         </para>
     </warning>
 
-    <note><info><title>Namespace Prefixes vs PHP Namespaces</title></info>
+    <note><title>Namespace Prefixes vs PHP Namespaces</title>
         
 
         <para>

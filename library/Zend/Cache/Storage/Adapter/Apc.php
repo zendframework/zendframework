@@ -122,8 +122,7 @@ class Apc extends AbstractAdapter
             $options = new ApcOptions($options);
         }
 
-        $this->options = $options;
-        return $this;
+        return parent::setOptions($options);
     }
 
     /**
@@ -144,223 +143,128 @@ class Apc extends AbstractAdapter
     /* reading */
 
     /**
-     * Get an item.
+     * Internal method to get an item.
      *
      * Options:
-     *  - namespace <string> optional
-     *    - The namespace to use (Default: namespace of object)
-     *  - ignore_missing_items <boolean> optional
+     *  - namespace <string>
+     *    - The namespace to use
+     *  - ignore_missing_items <boolean>
      *    - Throw exception on missing item or return false
      *
-     * @param  string $key
-     * @param  array $options
-     * @return mixed Value on success and false on failure
+     * @param  string $normalizedKey
+     * @param  array  $normalizedOptions
+     * @return mixed Data on success or false on failure
      * @throws Exception
-     *
-     * @triggers getItem.pre(PreEvent)
-     * @triggers getItem.post(PostEvent)
-     * @triggers getItem.exception(ExceptionEvent)
      */
-    public function getItem($key, array $options = array())
+    protected function internalGetItem(& $normalizedKey, array & $normalizedOptions)
     {
-        $baseOptions = $this->getOptions();
-        if (!$baseOptions->getReadable()) {
-            return false;
+        $prefix      = $normalizedOptions['namespace'] . $this->getOptions()->getNamespaceSeparator();
+        $internalKey = $prefix . $normalizedKey;
+        $success     = false;
+        $result      = apc_fetch($internalKey, $success);
+
+        if (!$success) {
+            if (!$normalizedOptions['ignore_missing_items']) {
+                throw new Exception\ItemNotFoundException("Key '{$internalKey}' not found");
+            }
+            $result = false;
+        } else {
+            if (array_key_exists('token', $normalizedOptions)) {
+                $normalizedOptions['token'] = $result;
+            }
         }
 
-        $this->normalizeOptions($options);
-        $this->normalizeKey($key);
-        $args = new ArrayObject(array(
-            'key'     => & $key,
-            'options' => & $options,
-        ));
-
-        try {
-            $eventRs = $this->triggerPre(__FUNCTION__, $args);
-            if ($eventRs->stopped()) {
-                return $eventRs->last();
-            }
-
-            $internalKey = $options['namespace'] . $baseOptions->getNamespaceSeparator() . $key;
-            $result      = apc_fetch($internalKey, $success);
-            if (!$success) {
-                if (!$options['ignore_missing_items']) {
-                    throw new Exception\ItemNotFoundException("Key '{$internalKey}' not found");
-                }
-                $result = false;
-            } else {
-                if (array_key_exists('token', $options)) {
-                    $options['token'] = $result;
-                }
-            }
-
-            return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
-        }
+        return $result;
     }
 
     /**
-     * Get multiple items.
+     * Internal method to get multiple items.
      *
      * Options:
-     *  - namespace <string> optional
-     *    - The namespace to use (Default: namespace of object)
+     *  - namespace <string>
+     *    - The namespace to use
+     *
+     * @param  array $normalizedKeys
+     * @param  array $normalizedOptions
+     * @return array Associative array of existing keys and values
+     * @throws Exception
+     */
+    protected function internalGetItems(array & $normalizedKeys, array & $normalizedOptions)
+    {
+        $namespaceSep = $this->getOptions()->getNamespaceSeparator();
+        $prefix = $normalizedOptions['namespace'] . $this->getOptions()->getNamespaceSeparator();
+
+        $internalKeys = array();
+        foreach ($normalizedKeys as $normalizedKey) {
+            $internalKeys[] = $prefix . $normalizedKey;
+        }
+
+        $fetch = apc_fetch($internalKeys);
+        if (!$normalizedOptions['ignore_missing_items']) {
+            if (count($normalizedKeys) != count($fetch)) {
+                $missing = implode("', '", array_diff($internalKeys, array_keys($fetch)));
+                throw new Exception\ItemNotFoundException('Keys not found: ' . $missing);
+            }
+        }
+
+        // remove namespace prefix
+        $prefixL = strlen($prefix);
+        $result  = array();
+        foreach ($fetch as $internalKey => & $value) {
+            $result[ substr($internalKey, $prefixL) ] = $value;
+        }
+
+        return $result;
+    }
+
+    /**
+     * Internal method to test if an item exists.
+     *
+     * Options:
+     *  - namespace <string>
+     *    - The namespace to use
+     *
+     * @param  string $normalizedKey
+     * @param  array  $normalizedOptions
+     * @return boolean
+     * @throws Exception
+     */
+    protected function internalHasItem(& $normalizedKey, array & $normalizedOptions)
+    {
+        $prefix = $normalizedOptions['namespace'] . $this->getOptions()->getNamespaceSeparator();
+        return apc_exists($prefix . $normalizedKey);
+    }
+
+    /**
+     * Internal method to test multiple items.
+     *
+     * Options:
+     *  - namespace <string>
+     *    - The namespace to use
      *
      * @param  array $keys
      * @param  array $options
-     * @return array Assoziative array of existing keys and values or false on failure
+     * @return array Array of existing keys
      * @throws Exception
-     *
-     * @triggers getItems.pre(PreEvent)
-     * @triggers getItems.post(PostEvent)
-     * @triggers getItems.exception(ExceptionEvent)
      */
-    public function getItems(array $keys, array $options = array())
+    protected function internalHasItems(array & $normalizedKeys, array & $normalizedOptions)
     {
-        $baseOptions = $this->getOptions();
-        if (!$baseOptions->getReadable()) {
-            return array();
+        $prefix       = $normalizedOptions['namespace'] . $this->getOptions()->getNamespaceSeparator();
+        $internalKeys = array();
+        foreach ($normalizedKeys as $normalizedKey) {
+            $internalKeys[] = $prefix . $normalizedKey;
         }
 
-        $this->normalizeOptions($options);
-        $args = new ArrayObject(array(
-            'keys'    => & $keys,
-            'options' => & $options,
-        ));
-
-        try {
-            $eventRs = $this->triggerPre(__FUNCTION__, $args);
-            if ($eventRs->stopped()) {
-                return $eventRs->last();
+        $exists  = apc_exists($internalKeys);
+        $result  = array();
+        $prefixL = strlen($prefix);
+        foreach ($exists as $internalKey => $bool) {
+            if ($bool === true) {
+                $result[] = substr($internalKey, $prefixL);
             }
-
-            $namespaceSep = $baseOptions->getNamespaceSeparator();
-            $internalKeys = array();
-            foreach ($keys as $key) {
-                $internalKeys[] = $options['namespace'] . $namespaceSep . $key;
-            }
-
-            $fetch = apc_fetch($internalKeys);
-            if (!$options['ignore_missing_items']) {
-                if (count($keys) != count($fetch)) {
-                    $missing = implode("', '", array_diff($internalKeys, array_keys($fetch)));
-                    throw new Exception\ItemNotFoundException('Keys not found: ' . $missing);
-                }
-            }
-
-            // remove namespace prefix
-            $prefixL = strlen($options['namespace'] . $namespaceSep);
-            $result  = array();
-            foreach ($fetch as $internalKey => &$value) {
-                $result[ substr($internalKey, $prefixL) ] = $value;
-            }
-
-            return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
-        }
-    }
-
-    /**
-     * Test if an item exists.
-     *
-     * Options:
-     *  - namespace <string> optional
-     *    - The namespace to use (Default: namespace of object)
-     *
-     * @param  string $key
-     * @param  array $options
-     * @return boolean
-     * @throws Exception
-     *
-     * @triggers hasItem.pre(PreEvent)
-     * @triggers hasItem.post(PostEvent)
-     * @triggers hasItem.exception(ExceptionEvent)
-     */
-    public function hasItem($key, array $options = array())
-    {
-        $baseOptions = $this->getOptions();
-        if (!$baseOptions->getReadable()) {
-            return false;
         }
 
-        $this->normalizeOptions($options);
-        $this->normalizeKey($key);
-        $args = new ArrayObject(array(
-            'key'     => & $key,
-            'options' => & $options,
-        ));
-
-        try {
-            $eventRs = $this->triggerPre(__FUNCTION__, $args);
-            if ($eventRs->stopped()) {
-                return $eventRs->last();
-            }
-
-            $internalKey = $options['namespace'] . $baseOptions->getNamespaceSeparator() . $key;
-            $result      = apc_exists($internalKey);
-
-            return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
-        }
-    }
-
-    /**
-     * Test if multiple items exists.
-     *
-     * Options:
-     *  - namespace <string> optional
-     *    - The namespace to use (Default: namespace of object)
-     *
-     * @param  string $key
-     * @param  array $options
-     * @return boolean
-     * @throws Exception
-     *
-     * @triggers hasItems.pre(PreEvent)
-     * @triggers hasItems.post(PostEvent)
-     * @triggers hasItems.exception(ExceptionEvent)
-     */
-    public function hasItems(array $keys, array $options = array())
-    {
-        $baseOptions = $this->getOptions();
-        if (!$baseOptions->getReadable()) {
-            return array();
-        }
-
-        $this->normalizeOptions($options);
-        $args = new ArrayObject(array(
-            'keys'    => & $keys,
-            'options' => & $options,
-        ));
-
-        try {
-            $eventRs = $this->triggerPre(__FUNCTION__, $args);
-            if ($eventRs->stopped()) {
-                return $eventRs->last();
-            }
-
-            $namespaceSep = $baseOptions->getNamespaceSeparator();
-            $internalKeys = array();
-            foreach ($keys as $key) {
-                $internalKeys[] = $options['namespace'] . $namespaceSep . $key;
-            }
-
-            $exists  = apc_exists($internalKeys);
-            $result  = array();
-            $prefixL = strlen($options['namespace'] . $namespaceSep);
-            foreach ($exists as $internalKey => $bool) {
-                if ($bool === true) {
-                    $result[] = substr($internalKey, $prefixL);
-                }
-            }
-
-            return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
-        }
+        return $result;
     }
 
     /**
@@ -372,8 +276,8 @@ class Apc extends AbstractAdapter
      *  - ignore_missing_items <boolean> optional
      *    - Throw exception on missing item or return false
      *
-     * @param  string $key
-     * @param  array $options
+     * @param  string $normalizedKey
+     * @param  array  $normalizedOptions
      * @return array|boolean Metadata or false on failure
      * @throws Exception
      *
@@ -381,50 +285,29 @@ class Apc extends AbstractAdapter
      * @triggers getMetadata.post(PostEvent)
      * @triggers getMetadata.exception(ExceptionEvent)
      */
-    public function getMetadata($key, array $options = array())
+    protected function internalGetMetadata(& $normalizedKey, array & $normalizedOptions)
     {
-        $baseOptions = $this->getOptions();
-        if (!$baseOptions->getReadable()) {
-            return false;
-        }
+        $internalKey = $normalizedOptions['namespace'] . $this->getOptions()->getNamespaceSeparator() . $normalizedKey;
 
-        $this->normalizeOptions($options);
-        $this->normalizeKey($key);
-        $args = new ArrayObject(array(
-            'key'     => & $key,
-            'options' => & $options,
-        ));
-
-        try {
-            $eventRs = $this->triggerPre(__FUNCTION__, $args);
-            if ($eventRs->stopped()) {
-                return $eventRs->last();
-            }
-
-            $internalKey = $options['namespace'] . $baseOptions->getNamespaceSeparator() . $key;
-
+        // @see http://pecl.php.net/bugs/bug.php?id=22564
+        if (!apc_exists($internalKey)) {
+            $metadata = false;
+        } else {
             $format   = \APC_ITER_ALL ^ \APC_ITER_VALUE ^ \APC_ITER_TYPE;
             $regexp   = '/^' . preg_quote($internalKey, '/') . '$/';
             $it       = new APCIterator('user', $regexp, $format, 100, \APC_LIST_ACTIVE);
             $metadata = $it->current();
-
-            // @see http://pecl.php.net/bugs/bug.php?id=22564
-            if (!apc_exists($internalKey)) {
-                $metadata = false;
-            }
-
-            if (!$metadata) {
-                if (!$options['ignore_missing_items']) {
-                    throw new Exception\ItemNotFoundException("Key '{$internalKey}' not found");
-                }
-            } else {
-                $this->normalizeMetadata($metadata);
-            }
-
-            return $this->triggerPost(__FUNCTION__, $args, $metadata);
-        } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
         }
+
+        if (!$metadata) {
+            if (!$normalizedOptions['ignore_missing_items']) {
+                throw new Exception\ItemNotFoundException("Key '{$internalKey}' not found");
+            }
+        } else {
+            $this->normalizeMetadata($metadata);
+        }
+
+        return $metadata;
     }
 
     /**
@@ -434,8 +317,8 @@ class Apc extends AbstractAdapter
      *  - namespace <string> optional
      *    - The namespace to use (Default: namespace of object)
      *
-     * @param  array $keys
-     * @param  array $options
+     * @param  array $normalizedKeys
+     * @param  array $normalizedOptions
      * @return array
      * @throws Exception\ItemNotFoundException
      *
@@ -443,980 +326,601 @@ class Apc extends AbstractAdapter
      * @triggers getMetadatas.post(PostEvent)
      * @triggers getMetadatas.exception(ExceptionEvent)
      */
-    public function getMetadatas(array $keys, array $options = array())
+    protected function internalGetMetadatas(array & $normalizedKeys, array & $normalizedOptions)
     {
-        $baseOptions = $this->getOptions();
-        if (!$baseOptions->getReadable()) {
-            return array();
+        $keysRegExp = array();
+        foreach ($normalizedKeys as $normalizedKey) {
+            $keysRegExp[] = preg_quote($normalizedKey, '/');
+        }
+        $prefix = $normalizedOptions['namespace'] . $this->getOptions()->getNamespaceSeparator();
+        $regexp = '/^' . preg_quote($prefix, '/') . '(' . implode('|', $keysRegExp) . ')' . '$/';
+        $format = \APC_ITER_ALL ^ \APC_ITER_VALUE ^ \APC_ITER_TYPE;
+
+        $it      = new APCIterator('user', $regexp, $format, 100, \APC_LIST_ACTIVE);
+        $result  = array();
+        $prefixL = strlen($prefix);
+        foreach ($it as $internalKey => $metadata) {
+            // @see http://pecl.php.net/bugs/bug.php?id=22564
+            if (!apc_exists($internalKey)) {
+                continue;
+            }
+
+            $this->normalizeMetadata($metadata);
+            $result[ substr($internalKey, $prefixL) ] = & $metadata;
         }
 
-        $this->normalizeOptions($options);
-        $args = new ArrayObject(array(
-            'keys'    => & $keys,
-            'options' => & $options,
-        ));
-
-        try {
-            $eventRs = $this->triggerPre(__FUNCTION__, $args);
-            if ($eventRs->stopped()) {
-                return $eventRs->last();
-            }
-
-            $keysRegExp = array();
-            foreach ($keys as $key) {
-                $keysRegExp[] = preg_quote($key, '/');
-            }
-            $regexp = '/^'
-                . preg_quote($options['namespace'] . $baseOptions->getNamespaceSeparator(), '/')
-                . '(' . implode('|', $keysRegExp) . ')'
-                . '$/';
-            $format = \APC_ITER_ALL ^ \APC_ITER_VALUE ^ \APC_ITER_TYPE;
-
-            $it      = new APCIterator('user', $regexp, $format, 100, \APC_LIST_ACTIVE);
-            $result  = array();
-            $prefixL = strlen($options['namespace'] . $baseOptions->getNamespaceSeparator());
-            foreach ($it as $internalKey => $metadata) {
-                // @see http://pecl.php.net/bugs/bug.php?id=22564
-                if (!apc_exists($internalKey)) {
-                    continue;
-                }
-
-                $this->normalizeMetadata($metadata);
-                $result[ substr($internalKey, $prefixL) ] = & $metadata;
-            }
-
-            if (!$options['ignore_missing_items']) {
-                if (count($keys) != count($result)) {
-                    $missing = implode("', '", array_diff($keys, array_keys($result)));
-                    throw new Exception\ItemNotFoundException('Keys not found: ' . $missing);
-                }
-            }
-
-            return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
-        }
+        return $result;
     }
 
     /* writing */
 
     /**
-     * Store an item.
+     * Internal method to store an item.
      *
      * Options:
-     *  - ttl <float> optional
-     *    - The time-to-life (Default: ttl of object)
-     *  - namespace <string> optional
-     *    - The namespace to use (Default: namespace of object)
+     *  - ttl <float>
+     *    - The time-to-life
+     *  - namespace <string>
+     *    - The namespace to use
      *
-     * @param  string $key
-     * @param  mixed $value
-     * @param  array $options
+     * @param  string $normalizedKey
+     * @param  mixed  $value
+     * @param  array  $normalizedOptions
      * @return boolean
      * @throws Exception
-     *
-     * @triggers setItem.pre(PreEvent)
-     * @triggers setItem.post(PostEvent)
-     * @triggers setItem.exception(ExceptionEvent)
      */
-    public function setItem($key, $value, array $options = array())
+    protected function internalSetItem(& $normalizedKey, & $value, array & $normalizedOptions)
     {
-        $baseOptions = $this->getOptions();
-        if (!$baseOptions->getWritable()) {
-            return false;
+        $prefix = $normalizedOptions['namespace'] . $this->getOptions()->getNamespaceSeparator();
+        $internalKey = $prefix . $normalizedKey;
+        if (!apc_store($internalKey, $value, $normalizedOptions['ttl'])) {
+            $type = is_object($value) ? get_class($value) : gettype($value);
+            throw new Exception\RuntimeException(
+                "apc_store('{$internalKey}', <{$type}>, {$normalizedOptions['ttl']}) failed"
+            );
         }
-
-        $this->normalizeOptions($options);
-        $this->normalizeKey($key);
-        $args = new ArrayObject(array(
-            'key'     => & $key,
-            'value'   => & $value,
-            'options' => & $options,
-        ));
-
-        try {
-            $eventRs = $this->triggerPre(__FUNCTION__, $args);
-            if ($eventRs->stopped()) {
-                return $eventRs->last();
-            }
-
-            $internalKey = $options['namespace'] . $baseOptions->getNamespaceSeparator() . $key;
-            if (!apc_store($internalKey, $value, $options['ttl'])) {
-                $type = is_object($value) ? get_class($value) : gettype($value);
-                throw new Exception\RuntimeException(
-                    "apc_store('{$internalKey}', <{$type}>, {$options['ttl']}) failed"
-                );
-            }
-
-            $result = true;
-            return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
-        }
+        return true;
     }
 
     /**
-     * Store multiple items.
+     * Internal method to store multiple items.
      *
      * Options:
-     *  - ttl <float> optional
-     *    - The time-to-life (Default: ttl of object)
-     *  - namespace <string> optional
-     *    - The namespace to use (Default: namespace of object)
+     *  - ttl <float>
+     *    - The time-to-life
+     *  - namespace <string>
+     *    - The namespace to use
      *
-     * @param  array $keyValuePairs
-     * @param  array $options
+     * @param  array $normalizedKeyValuePairs
+     * @param  array $normalizedOptions
      * @return boolean
      * @throws Exception
-     *
-     * @triggers setItems.pre(PreEvent)
-     * @triggers setItems.post(PostEvent)
-     * @triggers setItems.exception(ExceptionEvent)
      */
-    public function setItems(array $keyValuePairs, array $options = array())
+    protected function internalSetItems(array & $normalizedKeyValuePairs, array & $normalizedOptions)
     {
-        $baseOptions = $this->getOptions();
-        if (!$baseOptions->getWritable()) {
-            return false;
+        $prefix = $normalizedOptions['namespace'] . $this->getOptions()->getNamespaceSeparator();
+
+        $internalKeyValuePairs = array();
+        foreach ($normalizedKeyValuePairs as $normalizedKey => &$value) {
+            $internalKey = $prefix . $normalizedKey;
+            $internalKeyValuePairs[$internalKey] = &$value;
         }
 
-        $this->normalizeOptions($options);
-        $args = new ArrayObject(array(
-            'keyValuePairs' => & $keyValuePairs,
-            'options'       => & $options,
-        ));
-
-        try {
-            $eventRs = $this->triggerPre(__FUNCTION__, $args);
-            if ($eventRs->stopped()) {
-                return $eventRs->last();
-            }
-
-            $internalKeyValuePairs = array();
-            $prefix                = $options['namespace'] . $baseOptions->getNamespaceSeparator();
-            foreach ($keyValuePairs as $key => &$value) {
-                $internalKey = $prefix . $key;
-                $internalKeyValuePairs[$internalKey] = &$value;
-            }
-
-            $errKeys = apc_store($internalKeyValuePairs, null, $options['ttl']);
-            if ($errKeys) {
-                throw new Exception\RuntimeException(
-                    "apc_store(<array>, null, {$options['ttl']}) failed for keys: "
-                    . "'" . implode("','", $errKeys) . "'"
-                );
-            }
-
-            $result = true;
-            return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
+        $errKeys = apc_store($internalKeyValuePairs, null, $normalizedOptions['ttl']);
+        if ($errKeys) {
+            throw new Exception\RuntimeException(
+                "apc_store(<array>, null, {$normalizedOptions['ttl']}) failed for keys: "
+                . "'" . implode("','", $errKeys) . "'"
+            );
         }
+
+        return true;
     }
 
     /**
      * Add an item.
      *
      * Options:
-     *  - ttl <float> optional
-     *    - The time-to-life (Default: ttl of object)
-     *  - namespace <string> optional
-     *    - The namespace to use (Default: namespace of object)
+     *  - ttl <float>
+     *    - The time-to-life
+     *  - namespace <string>
+     *    - The namespace to use
      *
-     * @param  string $key
+     * @param  string $normalizedKey
      * @param  mixed  $value
-     * @param  array  $options
+     * @param  array  $normalizedOptions
      * @return boolean
      * @throws Exception
-     *
-     * @triggers addItem.pre(PreEvent)
-     * @triggers addItem.post(PostEvent)
-     * @triggers addItem.exception(ExceptionEvent)
      */
-    public function addItem($key, $value, array $options = array())
+    protected function internalAddItem(& $normalizedKey, & $value, array & $normalizedOptions)
     {
-        $baseOptions = $this->getOptions();
-        if (!$baseOptions->getWritable()) {
-            return false;
-        }
-
-        $this->normalizeOptions($options);
-        $this->normalizeKey($key);
-        $args = new ArrayObject(array(
-            'key'     => & $key,
-            'value'   => & $value,
-            'options' => & $options,
-        ));
-
-        try {
-            $eventRs = $this->triggerPre(__FUNCTION__, $args);
-            if ($eventRs->stopped()) {
-                return $eventRs->last();
+        $internalKey = $normalizedOptions['namespace'] . $this->getOptions()->getNamespaceSeparator() . $normalizedKey;
+        if (!apc_add($internalKey, $value, $normalizedOptions['ttl'])) {
+            if (apc_exists($internalKey)) {
+                throw new Exception\RuntimeException("Key '{$internalKey}' already exists");
             }
 
-            $internalKey = $options['namespace'] . $baseOptions->getNamespaceSeparator() . $key;
-            if (!apc_add($internalKey, $value, $options['ttl'])) {
-                if (apc_exists($internalKey)) {
-                    throw new Exception\RuntimeException("Key '{$internalKey}' already exists");
-                }
-
-                $type = is_object($value) ? get_class($value) : gettype($value);
-                throw new Exception\RuntimeException(
-                    "apc_add('{$internalKey}', <{$type}>, {$options['ttl']}) failed"
-                );
-            }
-
-            $result = true;
-            return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
+            $type = is_object($value) ? get_class($value) : gettype($value);
+            throw new Exception\RuntimeException(
+                "apc_add('{$internalKey}', <{$type}>, {$normalizedOptions['ttl']}) failed"
+            );
         }
+
+        return true;
     }
 
     /**
-     * Add multiple items.
+     * Internal method to add multiple items.
      *
      * Options:
-     *  - ttl <float> optional
-     *    - The time-to-life (Default: ttl of object)
-     *  - namespace <string> optional
-     *    - The namespace to use (Default: namespace of object)
+     *  - ttl <float>
+     *    - The time-to-life
+     *  - namespace <string>
+     *    - The namespace to use
      *
-     * @param  array $keyValuePairs
-     * @param  array $options
+     * @param  array $normalizedKeyValuePairs
+     * @param  array $normalizedOptions
      * @return boolean
      * @throws Exception
-     *
-     * @triggers addItems.pre(PreEvent)
-     * @triggers addItems.post(PostEvent)
-     * @triggers addItems.exception(ExceptionEvent)
      */
-    public function addItems(array $keyValuePairs, array $options = array())
+    protected function internalAddItems(array & $normalizedKeyValuePairs, array & $normalizedOptions)
     {
-        $baseOptions = $this->getOptions();
-        if (!$baseOptions->getWritable()) {
-            return false;
+        $internalKeyValuePairs = array();
+        $prefix                = $normalizedOptions['namespace'] . $this->getOptions()->getNamespaceSeparator();
+        foreach ($normalizedKeyValuePairs as $normalizedKey => $value) {
+            $internalKey = $prefix . $normalizedKey;
+            $internalKeyValuePairs[$internalKey] = $value;
         }
 
-        $this->normalizeOptions($options);
-        $args = new ArrayObject(array(
-            'keyValuePairs' => & $keyValuePairs,
-            'options'       => & $options,
-        ));
-
-        try {
-            $eventRs = $this->triggerPre(__FUNCTION__, $args);
-            if ($eventRs->stopped()) {
-                return $eventRs->last();
-            }
-
-            $internalKeyValuePairs = array();
-            $prefix                = $options['namespace'] . $baseOptions->getNamespaceSeparator();
-            foreach ($keyValuePairs as $key => &$value) {
-                $internalKey = $prefix . $key;
-                $internalKeyValuePairs[$internalKey] = &$value;
-            }
-
-            $errKeys = apc_add($internalKeyValuePairs, null, $options['ttl']);
-            if ($errKeys) {
-                throw new Exception\RuntimeException(
-                    "apc_add(<array>, null, {$options['ttl']}) failed for keys: "
-                    . "'" . implode("','", $errKeys) . "'"
-                );
-            }
-
-            $result = true;
-            return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
+        $errKeys = apc_add($internalKeyValuePairs, null, $normalizedOptions['ttl']);
+        if ($errKeys) {
+            throw new Exception\RuntimeException(
+                "apc_add(<array>, null, {$normalizedOptions['ttl']}) failed for keys: "
+                . "'" . implode("','", $errKeys) . "'"
+            );
         }
+
+        return true;
     }
 
     /**
-     * Replace an item.
+     * Internal method to replace an existing item.
      *
      * Options:
-     *  - ttl <float> optional
-     *    - The time-to-life (Default: ttl of object)
-     *  - namespace <string> optional
-     *    - The namespace to use (Default: namespace of object)
+     *  - ttl <float>
+     *    - The time-to-life
+     *  - namespace <string>
+     *    - The namespace to use
      *
-     * @param  string $key
+     * @param  string $normalizedKey
      * @param  mixed  $value
-     * @param  array  $options
+     * @param  array  $normalizedOptions
      * @return boolean
      * @throws Exception
-     *
-     * @triggers replaceItem.pre(PreEvent)
-     * @triggers replaceItem.post(PostEvent)
-     * @triggers replaceItem.exception(ExceptionEvent)
      */
-    public function replaceItem($key, $value, array $options = array())
+    protected function internalReplaceItem(& $normalizedKey, & $value, array & $normalizedOptions)
     {
-        $baseOptions = $this->getOptions();
-        if (!$baseOptions->getWritable()) {
-            return false;
+        $internalKey = $normalizedOptions['namespace'] . $this->getOptions()->getNamespaceSeparator() . $normalizedKey;
+        if (!apc_exists($internalKey)) {
+            throw new Exception\ItemNotFoundException(
+                "Key '{$internalKey}' doesn't exist"
+            );
         }
 
-        $this->normalizeOptions($options);
-        $this->normalizeKey($key);
-        $args = new ArrayObject(array(
-            'key'     => & $key,
-            'value'   => & $value,
-            'options' => & $options,
-        ));
-
-        try {
-            $eventRs = $this->triggerPre(__FUNCTION__, $args);
-            if ($eventRs->stopped()) {
-                return $eventRs->last();
-            }
-
-            $internalKey = $options['namespace'] . $baseOptions->getNamespaceSeparator() . $key;
-            if (!apc_exists($internalKey)) {
-                throw new Exception\ItemNotFoundException(
-                    "Key '{$internalKey}' doesn't exist"
-                );
-            }
-
-            if (!apc_store($internalKey, $value, $options['ttl'])) {
-                $type = is_object($value) ? get_class($value) : gettype($value);
-                throw new Exception\RuntimeException(
-                    "apc_store('{$internalKey}', <{$type}>, {$options['ttl']}) failed"
-                );
-            }
-
-            $result = true;
-            return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
+        if (!apc_store($internalKey, $value, $normalizedOptions['ttl'])) {
+            $type = is_object($value) ? get_class($value) : gettype($value);
+            throw new Exception\RuntimeException(
+                "apc_store('{$internalKey}', <{$type}>, {$normalizedOptions['ttl']}) failed"
+            );
         }
+
+        return true;
     }
 
     /**
-     * Remove an item.
+     * Internal method to remove an item.
      *
      * Options:
-     *  - namespace <string> optional
-     *    - The namespace to use (Default: namespace of object)
-     *  - ignore_missing_items <boolean> optional
-     *    - Throw exception on missing item or return false
+     *  - namespace <string>
+     *    - The namespace to use
+     *  - ignore_missing_items <boolean>
+     *    - Throw exception on missing item
      *
-     * @param  string $key
-     * @param  array $options
+     * @param  string $normalizedKey
+     * @param  array  $normalizedOptions
      * @return boolean
      * @throws Exception
-     *
-     * @triggers removeItem.pre(PreEvent)
-     * @triggers removeItem.post(PostEvent)
-     * @triggers removeItem.exception(ExceptionEvent)
      */
-    public function removeItem($key, array $options = array())
+    protected function internalRemoveItem(& $normalizedKey, array & $normalizedOptions)
     {
-        $baseOptions = $this->getOptions();
-        if (!$baseOptions->getWritable()) {
-            return false;
+        $internalKey = $normalizedOptions['namespace'] . $this->getOptions()->getNamespaceSeparator() . $normalizedKey;
+        if (!apc_delete($internalKey) && !$normalizedOptions['ignore_missing_items']) {
+            throw new Exception\ItemNotFoundException("Key '{$internalKey}' not found");
         }
 
-        $this->normalizeOptions($options);
-        $this->normalizeKey($key);
-        $args = new ArrayObject(array(
-            'key'     => & $key,
-            'options' => & $options,
-        ));
-
-        try {
-            $eventRs = $this->triggerPre(__FUNCTION__, $args);
-            if ($eventRs->stopped()) {
-                return $eventRs->last();
-            }
-
-            $internalKey = $options['namespace'] . $baseOptions->getNamespaceSeparator() . $key;
-            if (!apc_delete($internalKey)) {
-                if (!$options['ignore_missing_items']) {
-                    throw new Exception\ItemNotFoundException("Key '{$internalKey}' not found");
-                }
-            }
-
-            $result = true;
-            return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
-        }
+        return true;
     }
 
     /**
-     * Remove multiple items.
+     * Internal method to remove multiple items.
      *
      * Options:
-     *  - namespace <string> optional
-     *    - The namespace to use (Default: namespace of object)
-     *  - ignore_missing_items <boolean> optional
-     *    - Throw exception on missing item or return false
+     *  - namespace <string>
+     *    - The namespace to use
+     *  - ignore_missing_items <boolean>
+     *    - Throw exception on missing item
      *
      * @param  array $keys
      * @param  array $options
      * @return boolean
      * @throws Exception
-     *
-     * @triggers removeItems.pre(PreEvent)
-     * @triggers removeItems.post(PostEvent)
-     * @triggers removeItems.exception(ExceptionEvent)
      */
-    public function removeItems(array $keys, array $options = array())
+    protected function internalRemoveItems(array & $normalizedKeys, array & $normalizedOptions)
     {
-        $baseOptions = $this->getOptions();
-        if (!$baseOptions->getWritable()) {
-            return false;
+        $internalKeys = array();
+        $prefix       = $normalizedOptions['namespace'] . $this->getOptions()->getNamespaceSeparator();
+        foreach ($normalizedKeys as $normalizedKey) {
+            $internalKeys[] = $prefix . $normalizedKey;
         }
 
-        $this->normalizeOptions($options);
-        $args = new ArrayObject(array(
-            'keys'    => & $keys,
-            'options' => & $options,
-        ));
-
-        try {
-            $eventRs = $this->triggerPre(__FUNCTION__, $args);
-            if ($eventRs->stopped()) {
-                return $eventRs->last();
-            }
-
-            $internalKeys = array();
-            $prefix       = $options['namespace'] . $baseOptions->getNamespaceSeparator();
-            foreach ($keys as $key) {
-                $internalKeys[] = $prefix . $key;
-            }
-
-            $errKeys = apc_delete($internalKeys);
-            if ($errKeys) {
-                if (!$options['ignore_missing_items']) {
-                    throw new Exception\ItemNotFoundException("Keys '" . implode("','", $errKeys) . "' not found");
-                }
-            }
-
-            $result = true;
-            return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
+        $errKeys = apc_delete($internalKeys);
+        if ($errKeys && !$normalizedOptions['ignore_missing_items']) {
+            throw new Exception\ItemNotFoundException("Keys '" . implode("','", $errKeys) . "' not found");
         }
+
+        return true;
     }
 
     /**
-     * Increment an item.
+     * Internal method to increment an item.
      *
      * Options:
-     *  - ttl <float> optional
-     *    - The time-to-life (Default: ttl of object)
-     *  - namespace <string> optional
-     *    - The namespace to use (Default: namespace of object)
-     *  - ignore_missing_items <boolean> optional
-     *    - Throw exception on missing item or return false
+     *  - ttl <float>
+     *    - The time-to-life
+     *  - namespace <string>
+     *    - The namespace to use
+     *  - ignore_missing_items <boolean>
+     *    - Throw exception on missing item
      *
-     * @param  string $key
-     * @param  int $value
-     * @param  array $options
+     * @param  string $normalizedKey
+     * @param  int    $value
+     * @param  array  $normalizedOptions
      * @return int|boolean The new value or false on failure
      * @throws Exception
-     *
-     * @triggers incrementItem.pre(PreEvent)
-     * @triggers incrementItem.post(PostEvent)
-     * @triggers incrementItem.exception(ExceptionEvent)
      */
-    public function incrementItem($key, $value, array $options = array())
+    protected function internalIncrementItem(& $normalizedKey, & $value, array & $normalizedOptions)
     {
-        $baseOptions = $this->getOptions();
-        if (!$baseOptions->getWritable()) {
-            return false;
-        }
-
-        $this->normalizeOptions($options);
-        $this->normalizeKey($key);
-        $args = new ArrayObject(array(
-            'key'     => & $key,
-            'options' => & $options,
-        ));
-
-        try {
-            $eventRs = $this->triggerPre(__FUNCTION__, $args);
-            if ($eventRs->stopped()) {
-                return $eventRs->last();
+        $internalKey = $normalizedOptions['namespace'] . $this->getOptions()->getNamespaceSeparator() . $normalizedKey;
+        $value       = (int)$value;
+        $newValue    = apc_inc($internalKey, $value);
+        if ($newValue === false) {
+            if (apc_exists($internalKey)) {
+                throw new Exception\RuntimeException("apc_inc('{$internalKey}', {$value}) failed");
+            } elseif (!$normalizedOptions['ignore_missing_items']) {
+                throw new Exception\ItemNotFoundException(
+                    "Key '{$internalKey}' not found"
+                );
             }
 
-            $internalKey = $options['namespace'] . $baseOptions->getNamespaceSeparator() . $key;
-            $value       = (int)$value;
-            $newValue    = apc_inc($internalKey, $value);
-            if ($newValue === false) {
-                if (apc_exists($internalKey)) {
-                    throw new Exception\RuntimeException("apc_inc('{$internalKey}', {$value}) failed");
-                } elseif (!$options['ignore_missing_items']) {
-                    throw new Exception\ItemNotFoundException(
-                        "Key '{$internalKey}' not found"
-                    );
-                }
-
-                $this->addItem($key, $value, $options);
-                $newValue = $value;
+            $newValue = $value;
+            if (!apc_add($internalKey, $newValue, $normalizedOptions['ttl'])) {
+                throw new Exception\RuntimeException(
+                    "apc_add('{$internalKey}', {$newValue}, {$normalizedOptions['ttl']}) failed"
+                );
             }
-
-            return $this->triggerPost(__FUNCTION__, $args, $newValue);
-        } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
         }
+
+        return $newValue;
     }
 
     /**
-     * Decrement an item.
+     * Internal method to decrement an item.
      *
      * Options:
-     *  - ttl <float> optional
-     *    - The time-to-life (Default: ttl of object)
-     *  - namespace <string> optional
-     *    - The namespace to use (Default: namespace of object)
-     *  - ignore_missing_items <boolean> optional
-     *    - Throw exception on missing item or return false
+     *  - ttl <float>
+     *    - The time-to-life
+     *  - namespace <string>
+     *    - The namespace to use
+     *  - ignore_missing_items <boolean>
+     *    - Throw exception on missing item
      *
-     * @param  string $key
-     * @param  int $value
-     * @param  array $options
-     * @return int|boolean The new value or false or failure
+     * @param  string $normalizedKey
+     * @param  int    $value
+     * @param  array  $normalizedOptions
+     * @return int|boolean The new value or false on failure
      * @throws Exception
-     *
-     * @triggers decrementItem.pre(PreEvent)
-     * @triggers decrementItem.post(PostEvent)
-     * @triggers decrementItem.exception(ExceptionEvent)
      */
-    public function decrementItem($key, $value, array $options = array())
+    protected function internalDecrementItem(& $normalizedKey, & $value, array & $normalizedOptions)
     {
-        $baseOptions = $this->getOptions();
-        if (!$baseOptions->getWritable()) {
-            return false;
-        }
-
-        $this->normalizeOptions($options);
-        $this->normalizeKey($key);
-        $args = new ArrayObject(array(
-            'key'     => & $key,
-            'options' => & $options,
-        ));
-
-        try {
-            $eventRs = $this->triggerPre(__FUNCTION__, $args);
-            if ($eventRs->stopped()) {
-                return $eventRs->last();
+        $internalKey = $normalizedOptions['namespace'] . $this->getOptions()->getNamespaceSeparator() . $normalizedKey;
+        $value       = (int)$value;
+        $newValue    = apc_dec($internalKey, $value);
+        if ($newValue === false) {
+            if (apc_exists($internalKey)) {
+                throw new Exception\RuntimeException("apc_dec('{$internalKey}', {$value}) failed");
+            } elseif (!$normalizedOptions['ignore_missing_items']) {
+                throw new Exception\ItemNotFoundException(
+                    "Key '{$internalKey}' not found"
+                );
             }
 
-            $internalKey = $options['namespace'] . $baseOptions->getNamespaceSeparator() . $key;
-            $value       = (int)$value;
-            $newValue    = apc_dec($internalKey, $value);
-            if ($newValue === false) {
-                if (apc_exists($internalKey)) {
-                    throw new Exception\RuntimeException("apc_dec('{$internalKey}', {$value}) failed");
-                } elseif (!$options['ignore_missing_items']) {
-                    throw new Exception\ItemNotFoundException(
-                        "Key '{$internalKey}' not found"
-                    );
-                }
-
-                $this->addItem($key, -$value, $options);
-                $newValue = -$value;
+            $newValue = -$value;
+            if (!apc_add($internalKey, $newValue, $normalizedOptions['ttl'])) {
+                throw new Exception\RuntimeException(
+                    "apc_add('{$internalKey}', {$newValue}, {$normalizedOptions['ttl']}) failed"
+                );
             }
-
-            return $this->triggerPost(__FUNCTION__, $args, $newValue);
-        } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
         }
+
+        return $newValue;
     }
 
     /* non-blocking */
 
     /**
-     * Get items that were marked to delay storage for purposes of removing blocking
+     * Internal method to request multiple items.
      *
      * Options:
-     *  - namespace <string> optional
-     *    - The namespace to use (Default: namespace of object)
+     *  - ttl <float>
+     *    - The time-to-live
+     *  - namespace <string>
+     *    - The namespace to use
+     *  - select <array>
+     *    - An array of the information the returned item contains
+     *  - callback <callback> optional
+     *    - An result callback will be invoked for each item in the result set.
+     *    - The first argument will be the item array.
+     *    - The callback does not have to return anything.
      *
-     * @param  array $keys
-     * @param  array $options
-     * @return bool
+     * @param  array $normalizedKeys
+     * @param  array $normalizedOptions
+     * @return boolean
      * @throws Exception
-     *
-     * @triggers getDelayed.pre(PreEvent)
-     * @triggers getDelayed.post(PostEvent)
-     * @triggers getDelayed.exception(ExceptionEvent)
+     * @see    fetch()
+     * @see    fetchAll()
      */
-    public function getDelayed(array $keys, array $options = array())
+    protected function internalGetDelayed(array & $normalizedKeys, array & $normalizedOptions)
     {
-        $baseOptions = $this->getOptions();
         if ($this->stmtActive) {
             throw new Exception\RuntimeException('Statement already in use');
-        } elseif (!$baseOptions->getReadable()) {
-            return false;
-        } elseif (!$keys) {
-            return true;
         }
 
-        $this->normalizeOptions($options);
-        if (isset($options['callback']) && !is_callable($options['callback'], false)) {
+        if (isset($normalizedOptions['callback']) && !is_callable($normalizedOptions['callback'], false)) {
             throw new Exception\InvalidArgumentException('Invalid callback');
         }
 
-        $args = new ArrayObject(array(
-            'keys'    => & $keys,
-            'options' => & $options,
-        ));
-
-        try {
-            $eventRs = $this->triggerPre(__FUNCTION__, $args);
-            if ($eventRs->stopped()) {
-                return $eventRs->last();
+        $format = 0;
+        foreach ($normalizedOptions['select'] as $property) {
+            if (isset(self::$selectMap[$property])) {
+                $format = $format | self::$selectMap[$property];
             }
+        }
 
-            $prefix = $options['namespace'] . $baseOptions->getNamespaceSeparator();
-            $prefix = preg_quote($prefix, '/');
+        $prefix = $normalizedOptions['namespace'] . $this->getOptions()->getNamespaceSeparator();
+        $search = array();
+        foreach ($normalizedKeys as $normalizedKey) {
+            $search[] = preg_quote($normalizedKey, '/');
+        }
+        $search = '/^' . preg_quote($prefix, '/') . '(' . implode('|', $search) . ')$/';
+
+        $this->stmtIterator = new APCIterator('user', $search, $format, 1, \APC_LIST_ACTIVE);
+        $this->stmtActive   = true;
+        $this->stmtOptions  = & $normalizedOptions;
+
+        if (isset($normalizedOptions['callback'])) {
+            $callback = & $normalizedOptions['callback'];
+            while (($item = $this->fetch()) !== false) {
+                call_user_func($callback, $item);
+            }
+        }
+
+        return true;
+    }
+
+    /* find */
+
+    /**
+     * internal method to find items.
+     *
+     * Options:
+     *  - namespace <string>
+     *    - The namespace to use
+     *
+     * @param  int   $normalizedMode Matching mode (Value of Adapter::MATCH_*)
+     * @param  array $normalizedOptions
+     * @return boolean
+     * @throws Exception
+     * @see    fetch()
+     * @see    fetchAll()
+     */
+    protected function internalFind(& $normalizedMode, array & $normalizedOptions)
+    {
+        if ($this->stmtActive) {
+            throw new Exception\RuntimeException('Statement already in use');
+        }
+
+        // This adapter doesn't support to read expired items
+        if (($normalizedMode & self::MATCH_ACTIVE) == self::MATCH_ACTIVE) {
+            $prefix = $normalizedOptions['namespace'] . $this->getOptions()->getNamespaceSeparator();
+            $search = '/^' . preg_quote($prefix, '/') . '+/';
 
             $format = 0;
-            foreach ($options['select'] as $property) {
+            foreach ($normalizedOptions['select'] as $property) {
                 if (isset(self::$selectMap[$property])) {
                     $format = $format | self::$selectMap[$property];
                 }
             }
 
-            $search = array();
-            foreach ($keys as $key) {
-                $search[] = preg_quote($key, '/');
-            }
-            $search = '/^' . $prefix . '(' . implode('|', $search) . ')$/';
-
             $this->stmtIterator = new APCIterator('user', $search, $format, 1, \APC_LIST_ACTIVE);
             $this->stmtActive   = true;
-            $this->stmtOptions  = &$options;
-
-            if (isset($options['callback'])) {
-                $callback = $options['callback'];
-                while (($item = $this->fetch()) !== false) {
-                    call_user_func($callback, $item);
-                }
-            }
-
-            $result = true;
-            return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
+            $this->stmtOptions  = & $normalizedOptions;
         }
+
+        return true;
     }
 
     /**
-     * Find items.
-     *
-     * Options:
-     *  - namespace <string> optional
-     *    - The namespace to use (Default: namespace of object)
-     *
-     * @param  int $mode Matching mode (Value of Zend\Cache\Storage\Adapter::MATCH_*)
-     * @param  array $options
-     * @return boolean
-     * @throws Exception
-     * @see fetch()
-     * @see fetchAll()
-     *
-     * @triggers find.pre(PreEvent)
-     * @triggers find.post(PostEvent)
-     * @triggers find.exception(ExceptionEvent)
-     */
-    public function find($mode = self::MATCH_ACTIVE, array $options = array())
-    {
-        $baseOptions = $this->getOptions();
-        if ($this->stmtActive) {
-            throw new Exception\RuntimeException('Statement already in use');
-        } elseif (!$baseOptions->getReadable()) {
-            return false;
-        }
-
-        $this->normalizeOptions($options);
-        $this->normalizeMatchingMode($mode, self::MATCH_ACTIVE, $options);
-        $args = new ArrayObject(array(
-            'mode'    => & $mode,
-            'options' => & $options,
-        ));
-
-        try {
-            $eventRs = $this->triggerPre(__FUNCTION__, $args);
-            if ($eventRs->stopped()) {
-                return $eventRs->last();
-            }
-
-            // This adapter doesn't support to read expired items
-            if (($mode & self::MATCH_ACTIVE) == self::MATCH_ACTIVE) {
-                $prefix = $options['namespace'] . $baseOptions->getNamespaceSeparator();
-                $search = '/^' . preg_quote($prefix, '/') . '+/';
-
-                $format = 0;
-                foreach ($options['select'] as $property) {
-                    if (isset(self::$selectMap[$property])) {
-                        $format = $format | self::$selectMap[$property];
-                    }
-                }
-
-                $this->stmtIterator = new APCIterator('user', $search, $format, 1, \APC_LIST_ACTIVE);
-                $this->stmtActive   = true;
-                $this->stmtOptions  = &$options;
-            }
-
-            $result = true;
-            return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
-        }
-    }
-
-    /**
-     * Fetches the next item from result set
+     * Internal method to fetch the next item from result set
      *
      * @return array|boolean The next item or false
-     * @see    fetchAll()
-     *
-     * @triggers fetch.pre(PreEvent)
-     * @triggers fetch.post(PostEvent)
-     * @triggers fetch.exception(ExceptionEvent)
+     * @throws Exception
      */
-    public function fetch()
+    protected function internalFetch()
     {
         if (!$this->stmtActive) {
             return false;
         }
 
-        $args = new ArrayObject();
+        $prefix  = $this->stmtOptions['namespace'] . $this->getOptions()->getNamespaceSeparator();
+        $prefixL = strlen($prefix);
 
-        try {
-            $eventRs = $this->triggerPre(__FUNCTION__, $args);
-            if ($eventRs->stopped()) {
-                return $eventRs->last();
+        do {
+            if (!$this->stmtIterator->valid()) {
+                // clear stmt
+                $this->stmtActive   = false;
+                $this->stmtIterator = null;
+                $this->stmtOptions  = null;
+
+                return false;
             }
 
-            $prefixL = strlen($this->stmtOptions['namespace'] . $this->getOptions()->getNamespaceSeparator());
+            // @see http://pecl.php.net/bugs/bug.php?id=22564
+            $exist = apc_exists($this->stmtIterator->key());
+            if ($exist) {
+                $result = $this->stmtIterator->current();
+                $this->normalizeMetadata($result);
 
-            do {
-                if (!$this->stmtIterator->valid()) {
-                    // clear stmt
-                    $this->stmtActive   = false;
-                    $this->stmtIterator = null;
-                    $this->stmtOptions  = null;
-
-                    $result = false;
-                    break;
+                $select = $this->stmtOptions['select'];
+                if (in_array('key', $select)) {
+                    $internalKey = $this->stmtIterator->key();
+                    $result['key'] = substr($internalKey, $prefixL);
                 }
+            }
 
-                // @see http://pecl.php.net/bugs/bug.php?id=22564
-                $exist = apc_exists($this->stmtIterator->key());
-                if ($exist) {
-                    $result = $this->stmtIterator->current();
-                    $this->normalizeMetadata($result);
+            $this->stmtIterator->next();
+        } while (!$exist);
 
-                    $select = $this->stmtOptions['select'];
-                    if (in_array('key', $select)) {
-                        $internalKey = $this->stmtIterator->key();
-                        $result['key'] = substr($internalKey, $prefixL);
-                    }
-                }
-
-                $this->stmtIterator->next();
-            } while (!$exist);
-
-            return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
-        }
+        return $result;
     }
 
     /* cleaning */
 
     /**
-     * Clear items off all namespaces.
+     * Internal method to clear items off all namespaces.
      *
-     * @param  int $mode Matching mode (Value of Zend\Cache\Storage\Adapter::MATCH_*)
-     * @param  array $options
+     * @param  int   $normalizedMode Matching mode (Value of Adapter::MATCH_*)
+     * @param  array $normalizedOptions
      * @return boolean
      * @throws Exception
-     * @see clearByNamespace()
-     *
-     * @triggers clear.pre(PreEvent)
-     * @triggers clear.post(PostEvent)
-     * @triggers clear.exception(ExceptionEvent)
+     * @see    clearByNamespace()
      */
-    public function clear($mode = self::MATCH_EXPIRED, array $options = array())
+    protected function internalClear(& $normalizedMode, array & $normalizedOptions)
     {
-        if (!$this->getOptions()->getWritable()) {
-            return false;
-        }
-
-        $this->normalizeOptions($options);
-        $this->normalizeMatchingMode($mode, self::MATCH_EXPIRED, $options);
-        $args = new ArrayObject(array(
-            'mode'    => & $mode,
-            'options' => & $options,
-        ));
-
-        try {
-            $eventRs = $this->triggerPre(__FUNCTION__, $args);
-            if ($eventRs->stopped()) {
-                return $eventRs->last();
-            }
-
-            $result = $this->clearByRegEx('/.*/', $mode, $options);
-            return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
-        }
+        return $this->clearByRegEx('/.*/', $normalizedMode, $normalizedOptions);
     }
 
     /**
      * Clear items by namespace.
      *
      * Options:
-     *  - namespace <string> optional
-     *    - The namespace to use (Default: namespace of object)
+     *  - namespace <string>
+     *    - The namespace to use
+     *  - tags <array>
+     *    - Tags to search for used with matching modes of Adapter::MATCH_TAGS_*
      *
-     * @param  int $mode Matching mode (Value of Zend\Cache\Storage\Adapter::MATCH_*)
-     * @param  array $options
+     * @param  int   $normalizedMode Matching mode (Value of Adapter::MATCH_*)
+     * @param  array $normalizedOptions
      * @return boolean
-     * @throws Zend\Cache\Exception
-     * @see clear()
-     *
-     * @triggers clearByNamespace.pre(PreEvent)
-     * @triggers clearByNamespace.post(PostEvent)
-     * @triggers clearByNamespace.exception(ExceptionEvent)
+     * @throws Exception
+     * @see    clear()
      */
-    public function clearByNamespace($mode = self::MATCH_EXPIRED, array $options = array())
+    protected function internalClearByNamespace(& $normalizedMode, array & $normalizedOptions)
     {
-        $baseOptions = $this->getOptions();
-        if (!$baseOptions->getWritable()) {
-            return false;
-        }
-
-        $this->normalizeOptions($options);
-        $this->normalizeMatchingMode($mode, self::MATCH_EXPIRED, $options);
-        $args = new ArrayObject(array(
-            'mode'    => & $mode,
-            'options' => & $options,
-        ));
-
-        try {
-            $eventRs = $this->triggerPre(__FUNCTION__, $args);
-            if ($eventRs->stopped()) {
-                return $eventRs->last();
-            }
-
-            $prefix = $options['namespace'] . $baseOptions->getNamespaceSeparator();
-            $regex  = '/^' . preg_quote($prefix, '/') . '+/';
-            $result = $this->clearByRegEx($regex, $mode, $options);
-            return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
-        }
+        $prefix = $normalizedOptions['namespace'] . $this->getOptions()->getNamespaceSeparator();
+        $regex  = '/^' . preg_quote($prefix, '/') . '+/';
+        return $this->clearByRegEx($regex, $normalizedMode, $normalizedOptions);
     }
 
     /* status */
 
     /**
-     * Get capabilities
+     * Internal method to get capabilities of this adapter
      *
      * @return Capabilities
-     *
-     * @triggers getCapabilities.pre(PreEvent)
-     * @triggers getCapabilities.post(PostEvent)
-     * @triggers getCapabilities.exception(ExceptionEvent)
      */
-    public function getCapabilities()
+    protected function internalGetCapabilities()
     {
-        $args = new ArrayObject();
+        if ($this->capabilities === null) {
+            $marker       = new stdClass();
+            $capabilities = new Capabilities(
+                $marker,
+                array(
+                    'supportedDatatypes' => array(
+                        'NULL'     => true,
+                        'boolean'  => true,
+                        'integer'  => true,
+                        'double'   => true,
+                        'string'   => true,
+                        'array'    => true,
+                        'object'   => 'object',
+                        'resource' => false,
+                    ),
+                    'supportedMetadata' => array(
+                        'atime',
+                        'ctime',
+                        'internal_key',
+                        'mem_size',
+                        'mtime',
+                        'num_hits',
+                        'ref_count',
+                        'rtime',
+                        'ttl',
+                    ),
+                    'maxTtl'             => 0,
+                    'staticTtl'          => true,
+                    'tagging'            => false,
+                    'ttlPrecision'       => 1,
+                    'useRequestTime'     => (bool) ini_get('apc.use_request_time'),
+                    'expiredRead'        => false,
+                    'maxKeyLength'       => 5182,
+                    'namespaceIsPrefix'  => true,
+                    'namespaceSeparator' => $this->getOptions()->getNamespaceSeparator(),
+                    'iterable'           => true,
+                    'clearAllNamespaces' => true,
+                    'clearByNamespace'   => true,
+                )
+            );
 
-        try {
-            $eventRs = $this->triggerPre(__FUNCTION__, $args);
-            if ($eventRs->stopped()) {
-                return $eventRs->last();
-            }
+            // update namespace separator on change option
+            $this->events()->attach('option', function ($event) use ($capabilities, $marker) {
+                $params = $event->getParams();
 
-            if ($this->capabilities === null) {
-                $this->capabilityMarker = new stdClass();
-                $this->capabilities     = new Capabilities(
-                    $this->capabilityMarker,
-                    array(
-                        'supportedDatatypes' => array(
-                            'NULL'     => true,
-                            'boolean'  => true,
-                            'integer'  => true,
-                            'double'   => true,
-                            'string'   => true,
-                            'array'    => true,
-                            'object'   => 'object',
-                            'resource' => false,
-                        ),
-                        'supportedMetadata' => array(
-                            'atime',
-                            'ctime',
-                            'internal_key',
-                            'mem_size',
-                            'mtime',
-                            'num_hits',
-                            'ref_count',
-                            'rtime',
-                            'ttl',
-                        ),
-                        'maxTtl'             => 0,
-                        'staticTtl'          => true,
-                        'tagging'            => false,
-                        'ttlPrecision'       => 1,
-                        'useRequestTime'     => (bool) ini_get('apc.use_request_time'),
-                        'expiredRead'        => false,
-                        'maxKeyLength'       => 5182,
-                        'namespaceIsPrefix'  => true,
-                        'namespaceSeparator' => $this->getOptions()->getNamespaceSeparator(),
-                        'iterable'           => true,
-                        'clearAllNamespaces' => true,
-                        'clearByNamespace'   => true,
-                    )
-                );
-            }
+                if (isset($params['namespace_separator'])) {
+                    $capabilities->setNamespaceSeparator($marker, $params['namespace_separator']);
+                }
+            });
 
-            return $this->triggerPost(__FUNCTION__, $args, $this->capabilities);
-        } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
+            $this->capabilities     = $capabilities;
+            $this->capabilityMarker = $marker;
         }
+
+        return $this->capabilities;
     }
 
     /**
-     * Get storage capacity.
+     * Internal method to get storage capacity.
      *
-     * @param  array $options
+     * @param  array $normalizedOptions
      * @return array|boolean Capacity as array or false on failure
-     *
-     * @triggers getCapacity.pre(PreEvent)
-     * @triggers getCapacity.post(PostEvent)
-     * @triggers getCapacity.exception(ExceptionEvent)
+     * @throws Exception
      */
-    public function getCapacity(array $options = array())
+    protected function internalGetCapacity(array & $normalizedOptions)
     {
-        $args = new ArrayObject(array(
-            'options' => & $options,
-        ));
-
-        try {
-            $eventRs = $this->triggerPre(__FUNCTION__, $args);
-            if ($eventRs->stopped()) {
-                return $eventRs->last();
-            }
-
-            $mem    = apc_sma_info(true);
-            $result = array(
-                'free'  => $mem['avail_mem'],
-                'total' => $mem['num_seg'] * $mem['seg_size'],
-            );
-            return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
-        }
+        $mem = apc_sma_info(true);
+        return array(
+            'free'  => $mem['avail_mem'],
+            'total' => $mem['num_seg'] * $mem['seg_size'],
+        );
     }
 
     /* internal */

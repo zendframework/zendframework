@@ -18,16 +18,13 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Form;
 
 use Traversable,
     Zend\Loader\PluginLoader,
     Zend\Loader\PrefixPathMapper,
     Zend\Config\Config,
-    Zend\Stdlib\IteratorToArray,
+    Zend\Stdlib\ArrayUtils,
     Zend\Translator,
     Zend\View\Renderer\PhpRenderer,
     Zend\View\Renderer as View;
@@ -133,7 +130,7 @@ class DisplayGroup implements \Iterator,\Countable
         $this->setPluginLoader($loader);
 
         if ($options instanceof Traversable) {
-            $options = IteratorToArray::convert($options);
+            $options = ArrayUtils::iteratorToArray($options);
         }
         if (is_array($options)) {
             $this->setOptions($options);

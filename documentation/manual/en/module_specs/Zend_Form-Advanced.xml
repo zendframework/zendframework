@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.advanced"><info><title>Advanced Zend_Form Usage</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.advanced"><title>Advanced Zend_Form Usage</title>
     
 
     <para>
@@ -8,7 +8,7 @@
         functionality with examples and use cases.
     </para>
 
-    <section xml:id="zend.form.advanced.arrayNotation"><info><title>Array Notation</title></info>
+    <section xml:id="zend.form.advanced.arrayNotation"><title>Array Notation</title>
         
 
         <para>
@@ -208,7 +208,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.form.advanced.multiPage"><info><title>Multi-Page Forms</title></info>
+    <section xml:id="zend.form.advanced.multiPage"><title>Multi-Page Forms</title>
         
 
         <para>
@@ -224,7 +224,7 @@
             the form until all sub forms are complete.
         </para>
 
-        <example xml:id="zend.form.advanced.multiPage.registration"><info><title>Registration Form Example</title></info>
+        <example xml:id="zend.form.advanced.multiPage.registration"><title>Registration Form Example</title>
             
 
             <para>

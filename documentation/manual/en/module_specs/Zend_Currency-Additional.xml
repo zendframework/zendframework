@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.currency.additional"><info><title>Additional informations on Zend_Currency</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.currency.additional"><title>Additional informations on Zend_Currency</title>
     
 
-    <section xml:id="zend.currency.additional.informations"><info><title>Currency informations</title></info>
+    <section xml:id="zend.currency.additional.informations"><title>Currency informations</title>
         
 
         <para>
@@ -103,7 +103,7 @@ var_dump($currency->getName('EUR'));
         </para>
     </section>
 
-    <section xml:id="zend.currency.additional.cache"><info><title>Currency Performance Optimization</title></info>
+    <section xml:id="zend.currency.additional.cache"><title>Currency Performance Optimization</title>
         
 
         <para>
@@ -117,7 +117,7 @@ var_dump($currency->getName('EUR'));
             <methodname>clearCache()</methodname> and <methodname>removeCache()</methodname>.
         </para>
 
-        <example xml:id="zend.currency.usage.cache.example"><info><title>Caching currencies</title></info>
+        <example xml:id="zend.currency.usage.cache.example"><title>Caching currencies</title>
             
 
             <programlisting language="php"><![CDATA[

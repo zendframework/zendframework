@@ -16,9 +16,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\ProgressBar\Adapter;
 
 use Zend\Json\Json;

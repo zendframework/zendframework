@@ -45,10 +45,10 @@ class ExceptionStrategy implements ListenerAggregate
     protected $displayExceptions = false;
 
     /**
-     * Name of error template
+     * Name of exception template
      * @var string
      */
-    protected $errorTemplate = 'error';
+    protected $exceptionTemplate = 'error';
 
     /**
      * @var \Zend\Stdlib\CallbackHandler[]
@@ -57,19 +57,19 @@ class ExceptionStrategy implements ListenerAggregate
 
     /**
      * Attach the aggregate to the specified event manager
-     * 
-     * @param  EventCollection $events 
+     *
+     * @param  EventCollection $events
      * @return void
      */
     public function attach(EventCollection $events)
     {
-        $this->listeners[] = $events->attach('dispatch.error', array($this, 'prepareExceptionViewModel'));
+        $this->listeners[] = $events->attach(MvcEvent::EVENT_DISPATCH_ERROR, array($this, 'prepareExceptionViewModel'));
     }
 
     /**
      * Detach aggregate listeners from the specified event manager
-     * 
-     * @param  EventCollection $events 
+     *
+     * @param  EventCollection $events
      * @return void
      */
     public function detach(EventCollection $events)
@@ -83,8 +83,8 @@ class ExceptionStrategy implements ListenerAggregate
 
     /**
      * Flag: display exceptions in error pages?
-     * 
-     * @param  bool $flag 
+     *
+     * @param  bool $flag
      * @return ExceptionStrategy
      */
     public function setDisplayExceptions($displayExceptions)
@@ -95,7 +95,7 @@ class ExceptionStrategy implements ListenerAggregate
 
     /**
      * Should we display exceptions in error pages?
-     * 
+     *
      * @return bool
      */
     public function displayExceptions()
@@ -104,36 +104,36 @@ class ExceptionStrategy implements ListenerAggregate
     }
 
     /**
-     * Set the error template
-     * 
-     * @param  string $template 
+     * Set the exception template
+     *
+     * @param  string $exceptionTemplate
      * @return ExceptionStrategy
      */
-    public function setErrorTemplate($template)
+    public function setExceptionTemplate($exceptionTemplate)
     {
-        $this->errorTemplate = (string) $template;
+        $this->exceptionTemplate = (string) $exceptionTemplate;
         return $this;
     }
 
     /**
-     * Retrieve the error template
-     * 
+     * Retrieve the exception template
+     *
      * @return string
      */
-    public function getErrorTemplate()
+    public function getExceptionTemplate()
     {
-        return $this->errorTemplate;
+        return $this->exceptionTemplate;
     }
 
     /**
-     * Create an error view model, and set the HTTP status code
-     * 
-     * @todo   dispatch.error does not halt dispatch unless a response is 
+     * Create an exception view model, and set the HTTP status code
+     *
+     * @todo   dispatch.error does not halt dispatch unless a response is
      *         returned. As such, we likely need to trigger rendering as a low
      *         priority dispatch.error event (or goto a render event) to ensure
      *         rendering occurs, and that munging of view models occurs when
      *         expected.
-     * @param  MvcEvent $e 
+     * @param  MvcEvent $e
      * @return void
      */
     public function prepareExceptionViewModel(MvcEvent $e)
@@ -153,17 +153,18 @@ class ExceptionStrategy implements ListenerAggregate
         switch ($error) {
             case Application::ERROR_CONTROLLER_NOT_FOUND:
             case Application::ERROR_CONTROLLER_INVALID:
+            case Application::ERROR_ROUTER_NO_MATCH:
                 // Specifically not handling these
                 return;
 
             case Application::ERROR_EXCEPTION:
             default:
-                $model     = new ViewModel\ViewModel(array(
+                $model = new ViewModel\ViewModel(array(
                     'message'            => 'An error occurred during execution; please try again later.',
                     'exception'          => $e->getParam('exception'),
                     'display_exceptions' => $this->displayExceptions(),
                 ));
-                $model->setTemplate($this->getErrorTemplate());
+                $model->setTemplate($this->getExceptionTemplate());
                 $e->setResult($model);
 
                 $response = $e->getResponse();

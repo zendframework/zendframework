@@ -45,15 +45,18 @@ class MemoryOptions extends AdapterOptions
     /**
      * Set memory limit
      *
-     * If the used memory of PHP exceeds this limit an OutOfCapacityException
-     * will be thrown.
+     * - Bytes of less or equal 0 will disable the memory limit
+     * - If the used memory of PHP exceeds this limit an OutOfCapacityException
+     *   will be thrown.
      *
      * @param  int $bytes
      * @return MemoryOptions
      */
     public function setMemoryLimit($bytes)
     {
-        $this->memoryLimit = (int) $bytes;
+        $bytes = (int) $bytes;
+        $this->triggerOptionEvent('memory_limit', $bytes);
+        $this->memoryLimit = $bytes;
         return $this;
     }
 
@@ -72,8 +75,8 @@ class MemoryOptions extends AdapterOptions
             if ($memoryLimit >= 0) {
                 $this->memoryLimit = floor($memoryLimit / 2);
             } else {
-                // use a hard memory limit of 32M if php memory limit is disabled
-                $this->memoryLimit = 33554432;
+                // disable memory limit
+                $this->memoryLimit = 0;
             }
         }
 

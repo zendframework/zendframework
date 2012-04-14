@@ -18,9 +18,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Search\Lucene\Document;
 
 interface Exception extends \Zend\Search\Lucene\Exception

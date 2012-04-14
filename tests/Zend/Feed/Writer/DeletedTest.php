@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
-* @namespace
-*/
 namespace ZendTest\Feed\Writer;
 use Zend\Feed\Writer;
 use Zend\Date;
@@ -76,7 +73,29 @@ class DeletedTest extends \PHPUnit_Framework_TestCase
         $myDate = new Date\Date('1234567890', Date\Date::TIMESTAMP);
         $this->assertTrue($myDate->equals($entry->getWhen()));
     }
+ 
+    /**
+     * @group ZF-12070
+     */
+    public function testSetWhenUsesGivenUnixTimestampWhenItIsLessThanTenDigits()
+    {
+        $entry = new Writer\Deleted;
+        $entry->setWhen(123456789);
+        $myDate = new Date\Date('123456789', Date\Date::TIMESTAMP);
+        $this->assertTrue($myDate->equals($entry->getWhen()));
+    }
 
+    /**
+     * @group ZF-11610
+     */
+    public function testSetWhenUsesGivenUnixTimestampWhenItIsAVerySmallInteger()
+    {
+        $entry = new Writer\Deleted;
+        $entry->setWhen(123);
+        $myDate = new Date\Date('123', Date\Date::TIMESTAMP);
+        $this->assertTrue($myDate->equals($entry->getWhen()));
+    }
+    
     public function testSetWhenUsesZendDateObject()
     {
         $entry = new Writer\Deleted;

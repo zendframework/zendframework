@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.loader.autoloader-resource"><info><title>Resource Autoloaders</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.loader.autoloader-resource"><title>Resource Autoloaders</title>
     
 
     <para>
@@ -17,7 +17,7 @@
         benefits of autoloading.
     </para>
 
-    <section xml:id="zend.loader.autoloader-resource.usage"><info><title>Resource autoloader usage</title></info>
+    <section xml:id="zend.loader.autoloader-resource.usage"><title>Resource autoloader usage</title>
         
 
         <para>
@@ -56,7 +56,7 @@ $resourceLoader = new Zend_Loader_Autoloader_Resource(array(
 ));
 ]]></programlisting>
 
-        <note><info><title>Base namespace</title></info>
+        <note><title>Base namespace</title>
             
 
             <para>
@@ -136,7 +136,7 @@ $resourceLoader = new Zend_Loader_Autoloader_Resource(array(
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.loader.autoloader-resource.module"><info><title>The Module Resource Autoloader</title></info>
+    <section xml:id="zend.loader.autoloader-resource.module"><title>The Module Resource Autoloader</title>
         
 
         <para>
@@ -175,13 +175,13 @@ views/
         </para>
     </section>
 
-    <section xml:id="zend.loader.autoloader-resource.factory"><info><title>Using Resource Autoloaders as Object Factories</title></info>
+    <section xml:id="zend.loader.autoloader-resource.factory"><title>Using Resource Autoloaders as Object Factories</title>
         
         <para/>
         <!-- @todo -->
     </section>
 
-    <section xml:id="zend.loader.autoloader-resource.reference"><info><title>Resource Autoloader Reference</title></info>
+    <section xml:id="zend.loader.autoloader-resource.reference"><title>Resource Autoloader Reference</title>
         
         <para/>
         <!-- @todo -->

@@ -20,9 +20,6 @@
  * @version    $Id: AllTests.php 11973 2008-10-15 16:00:56Z matthew $
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Service\Amazon\Authentication;
 
 use Zend\Service\Amazon\Authentication,

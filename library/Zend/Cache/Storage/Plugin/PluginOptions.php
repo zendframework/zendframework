@@ -340,7 +340,7 @@ class PluginOptions extends Options
     {
         $factor = (int) $factor;
         if ($factor < 0) {
-            throw new Exception\InvalidArgumentAxception(
+            throw new Exception\InvalidArgumentException(
                 "Invalid factor '{$factor}': must be greater or equal 0"
             );
         }

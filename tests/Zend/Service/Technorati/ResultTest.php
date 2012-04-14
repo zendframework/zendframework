@@ -19,17 +19,19 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
+namespace ZendTest\Service\Technorati;
+use Zend\Service\Technorati;
 
 /**
  * Test helper
  */
 
 /**
- * @see Zend_Service_Technorati_Result
+ * @see Technorati\Result
  */
 
 /**
- * @see Zend_Service_Technorati_SearchResult
+ * @see Technorati\SearchResult
  */
 
 
@@ -42,7 +44,7 @@
  * @group      Zend_Service
  * @group      Zend_Service_Technorati
  */
-class Zend_Service_Technorati_ResultTest extends Zend_Service_Technorati_TestCase
+class ResultTest extends TestCase
 {
     /**
      * Any *Result class should be a child of Result
@@ -50,10 +52,10 @@ class Zend_Service_Technorati_ResultTest extends Zend_Service_Technorati_TestCas
      */
     public function setUp()
     {
-        $this->ref = new ReflectionClass('Zend_Service_Technorati_Result');
+        $this->ref = new \ReflectionClass('Zend\Service\Technorati\Result');
         $this->domElements = self::getTestFileElementsAsDom('TestSearchResultSet.xml');
-        $this->object = new Zend_Service_Technorati_SearchResult($this->domElements->item(0));
-        $this->objectRef = new ReflectionObject($this->object);
+        $this->object = new Technorati\SearchResult($this->domElements->item(0));
+        $this->objectRef = new \ReflectionObject($this->object);
     }
 
     public function testResultIsAbstract()

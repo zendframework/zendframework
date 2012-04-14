@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Service\Amazon;
 use Zend\Service\Amazon;
 
@@ -346,7 +343,7 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
     	} catch (Amazon\Exception $e) {
     		$this->fail('Unexpected exception was triggered');
     	}
-    	$this->assertType('Zend\Service\Amazon\Item', $currentItem);
+    	$this->assertInstanceOf('Zend\Service\Amazon\Item', $currentItem);
     	$this->assertEquals('0754512673', $currentItem->ASIN);
     }
     

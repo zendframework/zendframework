@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Search\Lucene\Search\Weight;
 use Zend\Search\Lucene\Search\Query;
 use Zend\Search\Lucene;

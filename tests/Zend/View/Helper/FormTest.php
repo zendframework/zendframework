@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\View\Helper;
 
 /**
@@ -72,7 +69,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
     public function testFormWithInputNeedingEscapesUsesViewEscaping()
     {
         $form = $this->helper->__invoke('<&foo');
-        $this->assertContains($this->view->vars()->escape('<&foo'), $form);
+        $this->assertContains($this->view->escape('<&foo'), $form);
     }
 
     public function testPassingIdAsAttributeShouldRenderIdAttribAndNotName()

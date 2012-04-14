@@ -18,10 +18,9 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Feed\PubSubHubbub\Model;
+
+use \Zend\Db\TableGateway;
 
 /**
  * @uses       \Zend\Db\Table\Table
@@ -47,12 +46,12 @@ class AbstractModel
      * @param  \Zend\Db\Table\AbstractTable $tableGateway 
      * @return void
      */
-    public function __construct(\Zend\Db\Table\AbstractTable $tableGateway = null)
+    public function __construct(TableGateway\TableGatewayInterface $tableGateway = null)
     {
         if ($tableGateway === null) {
             $parts = explode('\\', get_class($this));
             $table = strtolower(array_pop($parts));
-            $this->_db = new \Zend\Db\Table\Table($table);
+            $this->_db = new TableGateway\TableGateway($table);
         } else {
             $this->_db = $tableGateway;
         }

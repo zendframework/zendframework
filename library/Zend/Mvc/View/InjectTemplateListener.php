@@ -32,33 +32,33 @@ class InjectTemplateListener implements ListenerAggregate
 {
     /**
      * Filter/inflector used to normalize names for use as template identifiers
-     * 
+     *
      * @var mixed
      */
     protected $inflector;
 
     /**
      * Listeners we've registered
-     * 
+     *
      * @var array
      */
     protected $listeners = array();
 
     /**
      * Attach listeners
-     * 
-     * @param  Events $events 
+     *
+     * @param  Events $events
      * @return void
      */
     public function attach(Events $events)
     {
-        $this->listeners[] = $events->attach('dispatch', array($this, 'injectTemplate'), -90);
+        $this->listeners[] = $events->attach(MvcEvent::EVENT_DISPATCH, array($this, 'injectTemplate'), -90);
     }
 
     /**
      * Detach listeners
-     * 
-     * @param  Events $events 
+     *
+     * @param  Events $events
      * @return void
      */
     public function detach(Events $events)
@@ -73,10 +73,10 @@ class InjectTemplateListener implements ListenerAggregate
     /**
      * Inject a template into the view model, if none present
      *
-     * Template is derived from the controller found in the route match, and, 
+     * Template is derived from the controller found in the route match, and,
      * optionally, the action, if present.
      *
-     * @param  MvcEvent $e 
+     * @param  MvcEvent $e
      * @return void
      */
     public function injectTemplate(MvcEvent $e)
@@ -85,7 +85,7 @@ class InjectTemplateListener implements ListenerAggregate
         if (!$model instanceof ViewModel) {
             return;
         }
-        
+
         $template = $model->getTemplate();
         if (!empty($template)) {
             return;
@@ -105,8 +105,8 @@ class InjectTemplateListener implements ListenerAggregate
 
     /**
      * Inflect a name to a normalized value
-     * 
-     * @param  string $name 
+     *
+     * @param  string $name
      * @return string
      */
     protected function inflectName($name)
@@ -122,8 +122,8 @@ class InjectTemplateListener implements ListenerAggregate
      * Determine the name of the controller
      *
      * Strip the namespace, and the suffix "Controller" if present.
-     * 
-     * @param  string $controller 
+     *
+     * @param  string $controller
      * @return string
      */
     protected function deriveControllerClass($controller)
@@ -132,7 +132,7 @@ class InjectTemplateListener implements ListenerAggregate
             $controller = substr($controller, strrpos($controller, '\\') + 1);
         }
 
-        if ((10 < strlen($controller)) 
+        if ((10 < strlen($controller))
             && ('Controller' == substr($controller, -10))
         ) {
             $controller = substr($controller, 0, -10);

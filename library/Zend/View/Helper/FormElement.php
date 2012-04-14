@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\View\Helper;
 
 use Zend\View\Exception;
@@ -190,9 +187,10 @@ abstract class FormElement extends HtmlElement
      */
     protected function _hidden($name, $value = null, $attribs = null)
     {
+        $escaper = $this->view->plugin('escape');
         return '<input type="hidden"'
-             . ' name="' . $this->view->vars()->escape($name) . '"'
-             . ' value="' . $this->view->vars()->escape($value) . '"'
+             . ' name="' . $escaper($name) . '"'
+             . ' value="' . $escaper($value) . '"'
              . $this->_htmlAttribs($attribs) . $this->getClosingBracket();
     }
 }

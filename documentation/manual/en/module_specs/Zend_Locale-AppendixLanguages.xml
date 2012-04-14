@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.locale.appendix"><info><title>Supported locales</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.locale.appendix"><title>Supported locales</title>
     
 
     <para>
@@ -9,7 +9,7 @@
         table shows all languages and their related locales, sorted by language:
     </para>
 
-    <table xml:id="zend.locale.appendix.table"><info><title>List of all supported languages</title></info>
+    <table xml:id="zend.locale.appendix.table"><title>List of all supported languages</title>
         
 
         <tgroup cols="3">

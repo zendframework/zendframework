@@ -81,14 +81,14 @@ class Message
                     $result = get_class($options['queue']);
                 }
 
-                throw new Exception(
+                throw new Exception\InvalidArgumentException(
                     '$options[\'queue\'] = ' . $result . ': must be instanceof \Zend\Queue\Queue'
                 );
             }
         }
         if (isset($options['data'])) {
             if (!is_array($options['data'])) {
-                throw new Exception('Data must be an array');
+                throw new Exception\InvalidArgumentException('Data must be an array');
             }
             $this->_data = $options['data'];
         }
@@ -104,7 +104,7 @@ class Message
     public function __get($key)
     {
         if (!array_key_exists($key, $this->_data)) {
-            throw new Exception("Specified field \"$key\" is not in the message");
+            throw new Exception\InvalidArgumentException("Specified field \"$key\" is not in the message");
         }
         return $this->_data[$key];
     }
@@ -120,7 +120,7 @@ class Message
     public function __set($key, $value)
     {
         if (!array_key_exists($key, $this->_data)) {
-            throw new Exception("Specified field \"$key\" is not in the message");
+            throw new Exception\InvalidArgumentException("Specified field \"$key\" is not in the message");
         }
         $this->_data[$key] = $value;
     }

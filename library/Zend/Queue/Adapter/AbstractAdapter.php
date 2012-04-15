@@ -23,7 +23,7 @@ namespace Zend\Queue\Adapter;
 
 use Zend\Queue\Adapter,
     Zend\Queue\Queue,
-    Zend\Queue\Exception as QueueException,
+    Zend\Queue\Exception,
     Zend\Config\Config;
 
 /**
@@ -105,7 +105,7 @@ abstract class AbstractAdapter implements Adapter
          * Verify that adapter parameters are in an array.
          */
         if (!is_array($options)) {
-            throw new QueueException('Adapter options must be an array or Zend_Config object');
+            throw new Exception\InvalidArgumentException('Adapter options must be an array or Zend_Config object');
         }
 
         // set the queue
@@ -119,7 +119,7 @@ abstract class AbstractAdapter implements Adapter
         // Normalize the options and merge with the defaults
         if (array_key_exists('options', $options)) {
             if (!is_array($options['options'])) {
-                throw new QueueException("Configuration array 'options' must be an array");
+                throw new Exception\InvalidArgumentException("Configuration array 'options' must be an array");
             }
 
             // Can't use array_merge() because keys might be integers

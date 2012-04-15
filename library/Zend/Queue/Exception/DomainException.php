@@ -18,16 +18,19 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Queue;
+namespace Zend\Queue\Exception;
+
+use Zend\Queue\Exception;
 
 /**
- * Base exception interface
+ * Exception for Zend_Queue component.
  *
  * @category   Zend
  * @package    Zend_Queue
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Exception
+class DomainException 
+    extends \DomainException implements Exception
 {
 }

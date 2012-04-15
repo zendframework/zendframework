@@ -46,7 +46,7 @@ class PatternBroker extends PluginBroker
      */
     protected function validatePlugin($plugin)
     {
-        if (!$plugin instanceof Pattern) {
+        if (!$plugin instanceof Pattern\PatternInterface) {
             throw new Exception\RuntimeException('Cache pattern must implement Zend\Cache\Pattern');
         }
         return true;

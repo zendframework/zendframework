@@ -49,7 +49,7 @@ class AdapterBroker extends PluginBroker
      */
     protected function validatePlugin($plugin)
     {
-        if (!$plugin instanceof Adapter) {
+        if (!$plugin instanceof Adapter\AdapterInterface) {
             throw new Exception\RuntimeException('Cache storage adapters must implement Zend\Cache\Storage\Adapter');
         }
         return true;

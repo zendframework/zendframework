@@ -45,7 +45,7 @@ class IgnoreUserAbort extends AbstractPlugin
     /**
      * The storage adapter target who activated ignore_user_abort.
      *
-     * @var null|Adapter
+     * @var null|Adapter\AdapterInterface
      */
     protected $activatedTarget = null;
 

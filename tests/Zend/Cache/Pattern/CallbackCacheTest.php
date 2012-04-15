@@ -66,7 +66,7 @@ class CallbackCacheTest extends CommonPatternTest
 {
 
     /**
-     * @var Zend\Cache\Storage\Adapter
+     * @var Zend\Cache\Storage\Adapter\AdapterInterface
      */
     protected $_storage;
 

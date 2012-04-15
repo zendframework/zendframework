@@ -43,7 +43,7 @@ use ArrayObject,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class AbstractAdapter implements Adapter, EventManagerAware
+abstract class AbstractAdapter implements AdapterInterface, EventManagerAware
 {
     /**
      * The used EventManager if any
@@ -111,7 +111,7 @@ abstract class AbstractAdapter implements Adapter, EventManagerAware
      * Constructor
      *
      * @param  null|array|Traversable|AdapterOptions $options
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      * @return void
      */
     public function __construct($options = null)
@@ -290,7 +290,7 @@ abstract class AbstractAdapter implements Adapter, EventManagerAware
      * @param  string $eventName
      * @param  ArrayObject $args
      * @param  \Exception $exception
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      * @return mixed
      */
     protected function triggerException($eventName, ArrayObject $args, \Exception $exception)
@@ -312,10 +312,10 @@ abstract class AbstractAdapter implements Adapter, EventManagerAware
     /**
      * Check if a plugin is registered
      *
-     * @param  Plugin $plugin
+     * @param  Plugin\PluginInterface $plugin
      * @return boolean
      */
-    public function hasPlugin(Plugin $plugin)
+    public function hasPlugin(Plugin\PluginInterface $plugin)
     {
         $registry = $this->getPluginRegistry();
         return $registry->contains($plugin);
@@ -324,11 +324,11 @@ abstract class AbstractAdapter implements Adapter, EventManagerAware
     /**
      * Register a plugin
      *
-     * @param  Plugin $plugin
+     * @param  Plugin\PluginInterface $plugin
      * @return AbstractAdapter Fluent interface
      * @throws Exception\LogicException
      */
-    public function addPlugin(Plugin $plugin)
+    public function addPlugin(Plugin\PluginInterface $plugin)
     {
         $registry = $this->getPluginRegistry();
         if ($registry->contains($plugin)) {
@@ -347,11 +347,11 @@ abstract class AbstractAdapter implements Adapter, EventManagerAware
     /**
      * Unregister an already registered plugin
      *
-     * @param  Plugin $plugin
+     * @param  Plugin\PluginInterface $plugin
      * @return AbstractAdapter Fluent interface
      * @throws Exception\LogicException
      */
-    public function removePlugin(Plugin $plugin)
+    public function removePlugin(Plugin\PluginInterface $plugin)
     {
         $registry = $this->getPluginRegistry();
         if ($registry->contains($plugin)) {
@@ -387,7 +387,7 @@ abstract class AbstractAdapter implements Adapter, EventManagerAware
      * @param  string $key
      * @param  array  $options
      * @return mixed Data on success and false on failure
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      *
      * @triggers getItem.pre(PreEvent)
      * @triggers getItem.post(PostEvent)
@@ -433,7 +433,7 @@ abstract class AbstractAdapter implements Adapter, EventManagerAware
      * @param  string $normalizedKey
      * @param  array  $normalizedOptions
      * @return mixed Data on success or false on failure
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     abstract protected function internalGetItem(& $normalizedKey, array &$normalizedOptions);
 
@@ -449,7 +449,7 @@ abstract class AbstractAdapter implements Adapter, EventManagerAware
      * @param  array $keys
      * @param  array $options
      * @return array Associative array of existing keys and values
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      *
      * @triggers getItems.pre(PreEvent)
      * @triggers getItems.post(PostEvent)
@@ -493,7 +493,7 @@ abstract class AbstractAdapter implements Adapter, EventManagerAware
      * @param  array $normalizedKeys
      * @param  array $normalizedOptions
      * @return array Associative array of existing keys and values
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     protected function internalGetItems(array & $normalizedKeys, array & $normalizedOptions)
     {
@@ -524,7 +524,7 @@ abstract class AbstractAdapter implements Adapter, EventManagerAware
      * @param  string $key
      * @param  array  $options
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      *
      * @triggers hasItem.pre(PreEvent)
      * @triggers hasItem.post(PostEvent)
@@ -568,7 +568,7 @@ abstract class AbstractAdapter implements Adapter, EventManagerAware
      * @param  string $normalizedKey
      * @param  array  $normalizedOptions
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     protected function internalHasItem(& $normalizedKey, array & $normalizedOptions)
     {
@@ -592,7 +592,7 @@ abstract class AbstractAdapter implements Adapter, EventManagerAware
      * @param  array $keys
      * @param  array $options
      * @return array Array of existing keys
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      *
      * @triggers hasItems.pre(PreEvent)
      * @triggers hasItems.post(PostEvent)
@@ -636,7 +636,7 @@ abstract class AbstractAdapter implements Adapter, EventManagerAware
      * @param  array $keys
      * @param  array $options
      * @return array Array of existing keys
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     protected function internalHasItems(array & $normalizedKeys, array & $normalizedOptions)
     {
@@ -661,7 +661,7 @@ abstract class AbstractAdapter implements Adapter, EventManagerAware
      * @param  string $key
      * @param  array  $options
      * @return array|boolean Metadata or false on failure
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      *
      * @triggers getMetadata.pre(PreEvent)
      * @triggers getMetadata.post(PostEvent)
@@ -705,7 +705,7 @@ abstract class AbstractAdapter implements Adapter, EventManagerAware
      * @param  string $normalizedKey
      * @param  array  $normalizedOptions
      * @return array|boolean Metadata or false on failure
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     protected function internalGetMetadata(& $normalizedKey, array & $normalizedOptions)
     {
@@ -734,7 +734,7 @@ abstract class AbstractAdapter implements Adapter, EventManagerAware
      * @param  array $keys
      * @param  array $options
      * @return array Associative array of existing cache ids and its metadata
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      *
      * @triggers getMetadatas.pre(PreEvent)
      * @triggers getMetadatas.post(PostEvent)
@@ -778,7 +778,7 @@ abstract class AbstractAdapter implements Adapter, EventManagerAware
      * @param  array $normalizedKeys
      * @param  array $normalizedOptions
      * @return array Associative array of existing cache ids and its metadata
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     protected function internalGetMetadatas(array & $normalizedKeys, array & $normalizedOptions)
     {
@@ -818,7 +818,7 @@ abstract class AbstractAdapter implements Adapter, EventManagerAware
      * @param  mixed  $value
      * @param  array  $options
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      *
      * @triggers setItem.pre(PreEvent)
      * @triggers setItem.post(PostEvent)
@@ -866,7 +866,7 @@ abstract class AbstractAdapter implements Adapter, EventManagerAware
      * @param  mixed  $value
      * @param  array  $normalizedOptions
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     abstract protected function internalSetItem(& $normalizedKey, & $value, array & $normalizedOptions);
 
@@ -884,7 +884,7 @@ abstract class AbstractAdapter implements Adapter, EventManagerAware
      * @param  array $keyValuePairs
      * @param  array $options
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      *
      * @triggers setItems.pre(PreEvent)
      * @triggers setItems.post(PostEvent)
@@ -930,7 +930,7 @@ abstract class AbstractAdapter implements Adapter, EventManagerAware
      * @param  array $normalizedKeyValuePairs
      * @param  array $normalizedOptions
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     protected function internalSetItems(array & $normalizedKeyValuePairs, array & $normalizedOptions)
     {
@@ -956,7 +956,7 @@ abstract class AbstractAdapter implements Adapter, EventManagerAware
      * @param  mixed  $value
      * @param  array  $options
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      *
      * @triggers addItem.pre(PreEvent)
      * @triggers addItem.post(PostEvent)
@@ -1004,7 +1004,7 @@ abstract class AbstractAdapter implements Adapter, EventManagerAware
      * @param  mixed  $value
      * @param  array  $normalizedOptions
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     protected function internalAddItem(& $normalizedKey, & $value, array & $normalizedOptions)
     {
@@ -1028,7 +1028,7 @@ abstract class AbstractAdapter implements Adapter, EventManagerAware
      * @param  array $keyValuePairs
      * @param  array $options
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      *
      * @triggers addItems.pre(PreEvent)
      * @triggers addItems.post(PostEvent)
@@ -1074,7 +1074,7 @@ abstract class AbstractAdapter implements Adapter, EventManagerAware
      * @param  array $normalizedKeyValuePairs
      * @param  array $normalizedOptions
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     protected function internalAddItems(array & $normalizedKeyValuePairs, array & $normalizedOptions)
     {
@@ -1100,7 +1100,7 @@ abstract class AbstractAdapter implements Adapter, EventManagerAware
      * @param  mixed  $value
      * @param  array  $options
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      *
      * @triggers replaceItem.pre(PreEvent)
      * @triggers replaceItem.post(PostEvent)
@@ -1148,7 +1148,7 @@ abstract class AbstractAdapter implements Adapter, EventManagerAware
      * @param  mixed  $value
      * @param  array  $normalizedOptions
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     protected function internalReplaceItem(& $normalizedKey, & $value, array & $normalizedOptions)
     {
@@ -1173,7 +1173,7 @@ abstract class AbstractAdapter implements Adapter, EventManagerAware
      * @param  array $keyValuePairs
      * @param  array $options
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      *
      * @triggers replaceItems.pre(PreEvent)
      * @triggers replaceItems.post(PostEvent)
@@ -1219,7 +1219,7 @@ abstract class AbstractAdapter implements Adapter, EventManagerAware
      * @param  array $normalizedKeyValuePairs
      * @param  array $normalizedOptions
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     protected function internalReplaceItems(array & $normalizedKeyValuePairs, array & $normalizedOptions)
     {
@@ -1250,7 +1250,7 @@ abstract class AbstractAdapter implements Adapter, EventManagerAware
      * @param  mixed  $value
      * @param  array  $options
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      * @see    getItem()
      * @see    setItem()
      */
@@ -1297,7 +1297,7 @@ abstract class AbstractAdapter implements Adapter, EventManagerAware
      * @param  mixed  $value
      * @param  array  $normalizedOptions
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      * @see    getItem()
      * @see    setItem()
      */
@@ -1323,7 +1323,7 @@ abstract class AbstractAdapter implements Adapter, EventManagerAware
      * @param  string $key
      * @param  array  $options
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      *
      * @triggers touchItem.pre(PreEvent)
      * @triggers touchItem.post(PostEvent)
@@ -1367,7 +1367,7 @@ abstract class AbstractAdapter implements Adapter, EventManagerAware
      * @param  string $normalizedKey
      * @param  array  $normalizedOptions
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     protected function internalTouchItem(& $normalizedKey, array & $normalizedOptions)
     {
@@ -1404,7 +1404,7 @@ abstract class AbstractAdapter implements Adapter, EventManagerAware
      * @param  array $keys
      * @param  array $options
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      *
      * @triggers touchItems.pre(PreEvent)
      * @triggers touchItems.post(PostEvent)
@@ -1448,7 +1448,7 @@ abstract class AbstractAdapter implements Adapter, EventManagerAware
      * @param  array $normalizedKeys
      * @param  array $normalizedOptions
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     protected function internalTouchItems(array & $normalizedKeys, array & $normalizedOptions)
     {
@@ -1471,7 +1471,7 @@ abstract class AbstractAdapter implements Adapter, EventManagerAware
      * @param  string $key
      * @param  array  $options
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      *
      * @triggers removeItem.pre(PreEvent)
      * @triggers removeItem.post(PostEvent)
@@ -1515,7 +1515,7 @@ abstract class AbstractAdapter implements Adapter, EventManagerAware
      * @param  string $normalizedKey
      * @param  array  $normalizedOptions
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     abstract protected function internalRemoveItem(& $normalizedKey, array & $normalizedOptions);
 
@@ -1531,7 +1531,7 @@ abstract class AbstractAdapter implements Adapter, EventManagerAware
      * @param  array $keys
      * @param  array $options
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      *
      * @triggers removeItems.pre(PreEvent)
      * @triggers removeItems.post(PostEvent)
@@ -1575,7 +1575,7 @@ abstract class AbstractAdapter implements Adapter, EventManagerAware
      * @param  array $keys
      * @param  array $options
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     protected function internalRemoveItems(array & $normalizedKeys, array & $normalizedOptions)
     {
@@ -1613,7 +1613,7 @@ abstract class AbstractAdapter implements Adapter, EventManagerAware
      * @param  int    $value
      * @param  array  $options
      * @return int|boolean The new value or false on failure
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      *
      * @triggers incrementItem.pre(PreEvent)
      * @triggers incrementItem.post(PostEvent)
@@ -1661,7 +1661,7 @@ abstract class AbstractAdapter implements Adapter, EventManagerAware
      * @param  int    $value
      * @param  array  $normalizedOptions
      * @return int|boolean The new value or false on failure
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     protected function internalIncrementItem(& $normalizedKey, & $value, array & $normalizedOptions)
     {
@@ -1686,7 +1686,7 @@ abstract class AbstractAdapter implements Adapter, EventManagerAware
      * @param  array $keyValuePairs
      * @param  array $options
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      *
      * @triggers incrementItems.pre(PreEvent)
      * @triggers incrementItems.post(PostEvent)
@@ -1732,7 +1732,7 @@ abstract class AbstractAdapter implements Adapter, EventManagerAware
      * @param  array $normalizedKeyValuePairs
      * @param  array $normalizedOptions
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     protected function internatIncrementItems(array & $normalizedKeyValuePairs, array & $normalizedOptions)
     {
@@ -1758,7 +1758,7 @@ abstract class AbstractAdapter implements Adapter, EventManagerAware
      * @param  int    $value
      * @param  array  $options
      * @return int|boolean The new value or false on failure
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      *
      * @triggers decrementItem.pre(PreEvent)
      * @triggers decrementItem.post(PostEvent)
@@ -1806,7 +1806,7 @@ abstract class AbstractAdapter implements Adapter, EventManagerAware
      * @param  int    $value
      * @param  array  $normalizedOptions
      * @return int|boolean The new value or false on failure
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     protected function internalDecrementItem(& $normalizedKey, & $value, array & $normalizedOptions)
     {
@@ -1831,7 +1831,7 @@ abstract class AbstractAdapter implements Adapter, EventManagerAware
      * @param  array $keyValuePairs
      * @param  array $options
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      *
      * @triggers incrementItems.pre(PreEvent)
      * @triggers incrementItems.post(PostEvent)
@@ -1877,7 +1877,7 @@ abstract class AbstractAdapter implements Adapter, EventManagerAware
      * @param  array $normalizedKeyValuePairs
      * @param  array $normalizedOptions
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     protected function internatDecrementItems(array & $normalizedKeyValuePairs, array & $normalizedOptions)
     {
@@ -1909,7 +1909,7 @@ abstract class AbstractAdapter implements Adapter, EventManagerAware
      * @param  array $keys
      * @param  array $options
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      * @see    fetch()
      * @see    fetchAll()
      *
@@ -1964,7 +1964,7 @@ abstract class AbstractAdapter implements Adapter, EventManagerAware
      * @param  array $normalizedKeys
      * @param  array $normalizedOptions
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      * @see    fetch()
      * @see    fetchAll()
      */
@@ -2009,7 +2009,7 @@ abstract class AbstractAdapter implements Adapter, EventManagerAware
      * @param  int   $mode Matching mode (Value of Adapter::MATCH_*)
      * @param  array $options
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      * @see    fetch()
      * @see    fetchAll()
      *
@@ -2058,7 +2058,7 @@ abstract class AbstractAdapter implements Adapter, EventManagerAware
      * @param  int   $normalizedMode Matching mode (Value of Adapter::MATCH_*)
      * @param  array $normalizedOptions
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      * @see    fetch()
      * @see    fetchAll()
      */
@@ -2071,7 +2071,7 @@ abstract class AbstractAdapter implements Adapter, EventManagerAware
      * Fetches the next item from result set
      *
      * @return array|boolean The next item or false
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      * @see    fetchAll()
      *
      * @triggers fetch.pre(PreEvent)
@@ -2099,7 +2099,7 @@ abstract class AbstractAdapter implements Adapter, EventManagerAware
      * Internal method to fetch the next item from result set
      *
      * @return array|boolean The next item or false
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     protected function internalFetch()
     {
@@ -2161,7 +2161,7 @@ abstract class AbstractAdapter implements Adapter, EventManagerAware
      * Returns all items of result set.
      *
      * @return array The result set as array containing all items
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      * @see    fetch()
      *
      * @triggers fetchAll.pre(PreEvent)
@@ -2189,7 +2189,7 @@ abstract class AbstractAdapter implements Adapter, EventManagerAware
      * Internal method to return all items of result set.
      *
      * @return array The result set as array containing all items
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      * @see    fetch()
      */
     protected function internalFetchAll()
@@ -2215,7 +2215,7 @@ abstract class AbstractAdapter implements Adapter, EventManagerAware
      * @param  int   $mode Matching mode (Value of Adapter::MATCH_*)
      * @param  array $options
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      * @see    clearByNamespace()
      *
      * @triggers clear.pre(PreEvent)
@@ -2260,7 +2260,7 @@ abstract class AbstractAdapter implements Adapter, EventManagerAware
      * @param  int   $normalizedMode Matching mode (Value of Adapter::MATCH_*)
      * @param  array $normalizedOptions
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      * @see    clearByNamespace()
      */
     protected function internalClear(& $normalizedMode, array & $normalizedOptions)
@@ -2284,7 +2284,7 @@ abstract class AbstractAdapter implements Adapter, EventManagerAware
      * @param  int   $mode Matching mode (Value of Adapter::MATCH_*)
      * @param  array $options
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      * @see    clear()
      *
      * @triggers clearByNamespace.pre(PreEvent)
@@ -2331,7 +2331,7 @@ abstract class AbstractAdapter implements Adapter, EventManagerAware
      * @param  int   $normalizedMode Matching mode (Value of Adapter::MATCH_*)
      * @param  array $normalizedOptions
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      * @see    clear()
      */
     protected function internalClearByNamespace(& $normalizedMode, array & $normalizedOptions)
@@ -2350,7 +2350,7 @@ abstract class AbstractAdapter implements Adapter, EventManagerAware
      *
      * @param  array $options
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      *
      * @triggers optimize.pre(PreEvent)
      * @triggers optimize.post(PostEvent)
@@ -2386,7 +2386,7 @@ abstract class AbstractAdapter implements Adapter, EventManagerAware
      *
      * @param  array $normalizedOptions
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     protected function internalOptimize(array & $normalizedOptions)
     {
@@ -2439,7 +2439,7 @@ abstract class AbstractAdapter implements Adapter, EventManagerAware
      *
      * @param  array $options
      * @return array|boolean Capacity as array or false on failure
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      *
      * @triggers getCapacity.pre(PreEvent)
      * @triggers getCapacity.post(PostEvent)
@@ -2470,7 +2470,7 @@ abstract class AbstractAdapter implements Adapter, EventManagerAware
      *
      * @param  array $normalizedOptions
      * @return array|boolean Capacity as array or false on failure
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     abstract protected function internalGetCapacity(array & $normalizedOptions);
 

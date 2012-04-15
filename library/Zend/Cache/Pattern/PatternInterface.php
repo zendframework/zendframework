@@ -14,47 +14,34 @@
  *
  * @category   Zend
  * @package    Zend_Cache
- * @subpackage Storage
+ * @subpackage Pattern
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Cache\Storage;
-
-use Zend\EventManager\ListenerAggregate;
+namespace Zend\Cache\Pattern;
 
 /**
- * Zend Framework
- *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
  * @category   Zend
  * @package    Zend_Cache
+ * @subpackage Pattern
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Plugin extends ListenerAggregate
+interface PatternInterface
 {
     /**
-     * Set options
+     * Set pattern options
      *
-     * @param  Plugin\PluginOptions $options
-     * @return Plugin
+     * @param  PatternOptions $options
+     * @return Pattern
      */
-    public function setOptions(Plugin\PluginOptions $options);
+    public function setOptions(PatternOptions $options);
 
     /**
-     * Get options
+     * Get all pattern options
      *
-     * @return PluginOptions
+     * @return array
      */
     public function getOptions();
 }

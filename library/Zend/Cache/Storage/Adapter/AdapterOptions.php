@@ -117,10 +117,10 @@ class AdapterOptions extends Options
     /**
      * Adapter using this instance
      *
-     * @param  Adapter|null $adapter
+     * @param  Adapter\AdapterInterface|null $adapter
      * @return AdapterOptions
      */
-    public function setAdapter(Adapter $adapter = null)
+    public function setAdapter(Adapter\AdapterInterface $adapter = null)
     {
         $this->adapter = $adapter;
         return $this;

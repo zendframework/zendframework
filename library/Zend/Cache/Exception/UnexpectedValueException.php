@@ -20,7 +20,7 @@
 
 namespace Zend\Cache\Exception;
 
-use Zend\Cache\Exception;
+use Zend\Cache\Exception\ExceptionInterface;
 
 /**
  * @category   Zend
@@ -28,6 +28,6 @@ use Zend\Cache\Exception;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class UnexpectedValueException extends \UnexpectedValueException implements Exception
+class UnexpectedValueException extends \UnexpectedValueException implements ExceptionInterface
 {
 }

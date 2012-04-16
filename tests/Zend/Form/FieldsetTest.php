@@ -39,6 +39,65 @@ class FieldsetTest extends TestCase
         $this->fieldset = new Fieldset();
     }
 
+    public function populateFieldset()
+    {
+        $this->fieldset->add(new Element('foo'));
+        $this->fieldset->add(new Element('bar'));
+        $this->fieldset->add(new Element('baz'));
+
+        $subFieldset = new Fieldset('foobar');
+        $subFieldset->add(new Element('foo'));
+        $subFieldset->add(new Element('bar'));
+        $subFieldset->add(new Element('baz'));
+        $this->fieldset->add($subFieldset);
+
+        $subFieldset = new Fieldset('barbaz');
+        $subFieldset->add(new Element('foo'));
+        $subFieldset->add(new Element('bar'));
+        $subFieldset->add(new Element('baz'));
+        $this->fieldset->add($subFieldset);
+    }
+
+    public function getMessages()
+    {
+        return array(
+            'foo' => array(
+                'Foo message 1',
+            ),
+            'bar' => array(
+                'Bar message 1',
+                'Bar message 2',
+            ),
+            'baz' => array(
+                'Baz message 1',
+            ),
+            'foobar' => array(
+                'foo' => array(
+                    'Foo message 1',
+                ),
+                'bar' => array(
+                    'Bar message 1',
+                    'Bar message 2',
+                ),
+                'baz' => array(
+                    'Baz message 1',
+                ),
+            ),
+            'barbaz' => array(
+                'foo' => array(
+                    'Foo message 1',
+                ),
+                'bar' => array(
+                    'Bar message 1',
+                    'Bar message 2',
+                ),
+                'baz' => array(
+                    'Baz message 1',
+                ),
+            ),
+        );
+    }
+
     public function testFieldsetIsEmptyByDefault()
     {
         $this->assertEquals(0, count($this->fieldset));
@@ -112,44 +171,86 @@ class FieldsetTest extends TestCase
 
     public function testCanRetrieveAllAttachedElementsSeparateFromFieldsetsAtOnce()
     {
-        $this->markTestIncomplete();
+        $this->populateFieldset();
+        $elements = $this->fieldset->getElements();
+        $this->assertEquals(3, count($elements));
+        foreach (array('foo', 'bar', 'baz') as $name) {
+            $this->assertTrue(isset($elements[$name]));
+            $element = $this->fieldset->get($name);
+            $this->assertSame($element, $elements[$name]);
+        }
     }
 
     public function testCanRetrieveAllAttachedFieldsetsSeparateFromElementsAtOnce()
     {
-        $this->markTestIncomplete();
+        $this->populateFieldset();
+        $fieldsets = $this->fieldset->getFieldsets();
+        $this->assertEquals(2, count($fieldsets));
+        foreach (array('foobar', 'barbaz') as $name) {
+            $this->assertTrue(isset($fieldsets[$name]));
+            $fieldset = $this->fieldset->get($name);
+            $this->assertSame($fieldset, $fieldsets[$name]);
+        }
     }
 
     public function testCanSetAndRetrieveErrorMessagesForAllElementsAndFieldsets()
     {
-        $this->markTestIncomplete();
+        $this->populateFieldset();
+        $messages = $this->getMessages();
+        $this->fieldset->setMessages($messages);
+        $test = $this->fieldset->getMessages();
+        $this->assertEquals($messages, $test);
     }
 
     public function testCanRetrieveMessagesForSingleElementsAfterMessagesHaveBeenSet()
     {
-        $this->markTestIncomplete();
+        $this->populateFieldset();
+        $messages = $this->getMessages();
+        $this->fieldset->setMessages($messages);
+
+        $test = $this->fieldset->getMessages('bar');
+        $this->assertEquals($messages['bar'], $test);
     }
 
     public function testCanRetrieveMessagesForSingleFieldsetsAfterMessagesHaveBeenSet()
     {
-        $this->markTestIncomplete();
+        $this->populateFieldset();
+        $messages = $this->getMessages();
+        $this->fieldset->setMessages($messages);
+
+        $test = $this->fieldset->getMessages('barbaz');
+        $this->assertEquals($messages['barbaz'], $test);
     }
 
     public function testCountGivesCountOfAttachedElementsAndFieldsets()
     {
-        $this->markTestIncomplete();
+        $this->populateFieldset();
+        $this->assertEquals(5, count($this->fieldset));
     }
 
     public function testCanIterateOverElementsAndFieldsetsInOrderAttached()
     {
-        $this->markTestIncomplete();
+        $this->populateFieldset();
+        $expected = array('foo', 'bar', 'baz', 'foobar', 'barbaz');
+        $test     = array();
+        foreach ($this->fieldset as $element) {
+            $test[] = $element->getName();
+        }
+        $this->assertEquals($expected, $test);
     }
 
-    /**
-     * @todo Should this use priority queue, or the hack used in Zend_Form v1?
-     */
     public function testIteratingRespectsOrderPriorityProvidedWhenAttaching()
     {
-        $this->markTestIncomplete();
+        $this->fieldset->add(new Element('foo'), array('priority', 10));
+        $this->fieldset->add(new Element('bar'), array('priority', 20));
+        $this->fieldset->add(new Element('baz'), array('priority', -10));
+        $this->fieldset->add(new Fieldset('barbaz'), array('priority', 30));
+
+        $expected = array('barbaz', 'bar', 'foo', 'baz');
+        $test     = array();
+        foreach ($this->fieldset as $element) {
+            $test[] = $element->getName();
+        }
+        $this->assertEquals($expected, $test);
     }
 }

@@ -207,7 +207,9 @@ class Socket implements HttpAdapter, Stream
 
             $flags = STREAM_CLIENT_CONNECT;
             if ($this->config['persistent']) $flags |= STREAM_CLIENT_PERSISTENT;
-            
+
+            $errno = null;
+            $errstr = '';
             $this->socket = @stream_socket_client($host . ':' . $port,
                                                   $errno,
                                                   $errstr,

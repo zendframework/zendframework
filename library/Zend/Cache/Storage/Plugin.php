@@ -57,4 +57,5 @@ interface Plugin extends ListenerAggregate
      * @return PluginOptions
      */
     public function getOptions();
+
 }

@@ -327,7 +327,7 @@ abstract class AbstractAdapter implements Adapter
      * @return AbstractAdapter Fluent interface
      * @throws Exception\LogicException
      */
-    public function addPlugin(Plugin $plugin)
+    public function addPlugin(Plugin $plugin, $priority = 1)
     {
         $registry = $this->getPluginRegistry();
         if ($registry->contains($plugin)) {
@@ -337,7 +337,7 @@ abstract class AbstractAdapter implements Adapter
             ));
         }
 
-        $plugin->attach($this->events());
+        $plugin->attach($this->events(), $priority);
         $registry->attach($plugin);
 
         return $this;

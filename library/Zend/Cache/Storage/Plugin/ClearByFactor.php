@@ -50,7 +50,7 @@ class ClearByFactor extends AbstractPlugin
      * @return ClearByFactor
      * @throws Exception\LogicException
      */
-    public function attach(EventCollection $eventCollection)
+    public function attach(EventCollection $eventCollection, $priority = 1)
     {
         $index = spl_object_hash($eventCollection);
         if (isset($this->handles[$index])) {
@@ -60,10 +60,11 @@ class ClearByFactor extends AbstractPlugin
         $handles = array();
         $this->handles[$index] = & $handles;
 
-        $handles[] = $eventCollection->attach('setItem.post',  array($this, 'clearByFactor'));
-        $handles[] = $eventCollection->attach('setItems.post', array($this, 'clearByFactor'));
-        $handles[] = $eventCollection->attach('addItem.post',  array($this, 'clearByFactor'));
-        $handles[] = $eventCollection->attach('addItems.post', array($this, 'clearByFactor'));
+        $callback = array($this, 'clearByFactor');
+        $handles[] = $eventCollection->attach('setItem.post',  $callback, $priority);
+        $handles[] = $eventCollection->attach('setItems.post', $callback, $priority);
+        $handles[] = $eventCollection->attach('addItem.post',  $callback, $priority);
+        $handles[] = $eventCollection->attach('addItems.post', $callback, $priority);
 
         return $this;
     }

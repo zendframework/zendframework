@@ -143,9 +143,21 @@ class StorageFactoryTest extends \PHPUnit_Framework_TestCase
                  ),
             ),
             'plugins' => array(
+                // plugin as a simple string entry
                 'Serializer',
+
+                // plugin as name-options pair
                 'ClearByFactor' => array(
                     'clearing_factor' => 1,
+                ),
+
+                // plugin with full definition
+                array(
+                    'name'     => 'IgnoreUserAbort',
+                    'priority' => 100,
+                    'options'  => array(
+                        'exit_on_abort' => false,
+                    ),
                 ),
             ),
             'options' => array(
@@ -171,14 +183,19 @@ class StorageFactoryTest extends \PHPUnit_Framework_TestCase
                         $plugin->getOptions()->getClearingFactor()
                     );
                     break;
+
                 case 'Zend\Cache\Storage\Plugin\Serializer':
                     break;
+
+                case 'Zend\Cache\Storage\Plugin\IgnoreUserAbort':
+                    $this->assertFalse($plugin->getOptions()->getExitOnAbort());
+                    break;
+
                 default:
                     $this->fail("Unexpected plugin class '{$pluginClass}'");
             }
 
         }
-
     }
 
 }

@@ -48,7 +48,7 @@ class ExceptionHandler extends AbstractPlugin
      * @return ExceptionHandler
      * @throws Exception\LogicException
      */
-    public function attach(EventCollection $eventCollection)
+    public function attach(EventCollection $eventCollection, $priority = 1)
     {
         $index = spl_object_hash($eventCollection);
         if (isset($this->handles[$index])) {
@@ -60,54 +60,54 @@ class ExceptionHandler extends AbstractPlugin
         $this->handles[$index] = & $handles;
 
         // read
-        $handles[] = $eventCollection->attach('getItem.exception', $callback);
-        $handles[] = $eventCollection->attach('getItems.exception', $callback);
+        $handles[] = $eventCollection->attach('getItem.exception', $callback, $priority);
+        $handles[] = $eventCollection->attach('getItems.exception', $callback, $priority);
 
-        $handles[] = $eventCollection->attach('hasItem.exception', $callback);
-        $handles[] = $eventCollection->attach('hasItems.exception', $callback);
+        $handles[] = $eventCollection->attach('hasItem.exception', $callback, $priority);
+        $handles[] = $eventCollection->attach('hasItems.exception', $callback, $priority);
 
-        $handles[] = $eventCollection->attach('getMetadata.exception', $callback);
-        $handles[] = $eventCollection->attach('getMetadatas.exception', $callback);
+        $handles[] = $eventCollection->attach('getMetadata.exception', $callback, $priority);
+        $handles[] = $eventCollection->attach('getMetadatas.exception', $callback, $priority);
 
         // non-blocking
-        $handles[] = $eventCollection->attach('getDelayed.exception', $callback);
-        $handles[] = $eventCollection->attach('find.exception', $callback);
+        $handles[] = $eventCollection->attach('getDelayed.exception', $callback, $priority);
+        $handles[] = $eventCollection->attach('find.exception', $callback, $priority);
 
-        $handles[] = $eventCollection->attach('fetch.exception', $callback);
-        $handles[] = $eventCollection->attach('fetchAll.exception', $callback);
+        $handles[] = $eventCollection->attach('fetch.exception', $callback, $priority);
+        $handles[] = $eventCollection->attach('fetchAll.exception', $callback, $priority);
 
         // write
-        $handles[] = $eventCollection->attach('setItem.exception', $callback);
-        $handles[] = $eventCollection->attach('setItems.exception', $callback);
+        $handles[] = $eventCollection->attach('setItem.exception', $callback, $priority);
+        $handles[] = $eventCollection->attach('setItems.exception', $callback, $priority);
 
-        $handles[] = $eventCollection->attach('addItem.exception', $callback);
-        $handles[] = $eventCollection->attach('addItems.exception', $callback);
+        $handles[] = $eventCollection->attach('addItem.exception', $callback, $priority);
+        $handles[] = $eventCollection->attach('addItems.exception', $callback, $priority);
 
-        $handles[] = $eventCollection->attach('replaceItem.exception', $callback);
-        $handles[] = $eventCollection->attach('replaceItems.exception', $callback);
+        $handles[] = $eventCollection->attach('replaceItem.exception', $callback, $priority);
+        $handles[] = $eventCollection->attach('replaceItems.exception', $callback, $priority);
 
-        $handles[] = $eventCollection->attach('touchItem.exception', $callback);
-        $handles[] = $eventCollection->attach('touchItems.exception', $callback);
+        $handles[] = $eventCollection->attach('touchItem.exception', $callback, $priority);
+        $handles[] = $eventCollection->attach('touchItems.exception', $callback, $priority);
 
-        $handles[] = $eventCollection->attach('removeItem.exception', $callback);
-        $handles[] = $eventCollection->attach('removeItems.exception', $callback);
+        $handles[] = $eventCollection->attach('removeItem.exception', $callback, $priority);
+        $handles[] = $eventCollection->attach('removeItems.exception', $callback, $priority);
 
-        $handles[] = $eventCollection->attach('checkAndSetItem.exception', $callback);
+        $handles[] = $eventCollection->attach('checkAndSetItem.exception', $callback, $priority);
 
         // increment / decrement item(s)
-        $handles[] = $eventCollection->attach('incrementItem.exception', $callback);
-        $handles[] = $eventCollection->attach('incrementItems.exception', $callback);
+        $handles[] = $eventCollection->attach('incrementItem.exception', $callback, $priority);
+        $handles[] = $eventCollection->attach('incrementItems.exception', $callback, $priority);
 
-        $handles[] = $eventCollection->attach('decrementItem.exception', $callback);
-        $handles[] = $eventCollection->attach('decrementItems.exception', $callback);
+        $handles[] = $eventCollection->attach('decrementItem.exception', $callback, $priority);
+        $handles[] = $eventCollection->attach('decrementItems.exception', $callback, $priority);
 
         // clear
-        $handles[] = $eventCollection->attach('clear.exception', $callback);
-        $handles[] = $eventCollection->attach('clearByNamespace.exception', $callback);
+        $handles[] = $eventCollection->attach('clear.exception', $callback, $priority);
+        $handles[] = $eventCollection->attach('clearByNamespace.exception', $callback, $priority);
 
         // additional
-        $handles[] = $eventCollection->attach('optimize.exception', $callback);
-        $handles[] = $eventCollection->attach('getCapacity.exception', $callback);
+        $handles[] = $eventCollection->attach('optimize.exception', $callback, $priority);
+        $handles[] = $eventCollection->attach('getCapacity.exception', $callback, $priority);
 
         return $this;
     }

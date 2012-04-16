@@ -57,7 +57,7 @@ class Serializer extends AbstractPlugin
      * @return Serializer
      * @throws Exception\LogicException
      */
-    public function attach(EventCollection $events)
+    public function attach(EventCollection $events, $priority = 1)
     {
         $index = spl_object_hash($events);
         if (isset($this->handles[$index])) {
@@ -67,35 +67,40 @@ class Serializer extends AbstractPlugin
         $handles = array();
         $this->handles[$index] = & $handles;
 
+        // The higher the priority the sooner the plugin will be called on pre events
+        // but the later it will be called on post events.
+        $prePriority  = $priority;
+        $postPriority = -$priority;
+
         // read
-        $handles[] = $events->attach('getItem.post',  array($this, 'onReadItemPost'));
-        $handles[] = $events->attach('getItems.post', array($this, 'onReadItemsPost'));
+        $handles[] = $events->attach('getItem.post',  array($this, 'onReadItemPost'), $postPriority);
+        $handles[] = $events->attach('getItems.post', array($this, 'onReadItemsPost'), $postPriority);
 
         // fetch / fetchAll
-        $handles[] = $events->attach('fetch.post', array($this, 'onFetchPost'));
-        $handles[] = $events->attach('fetchAll.post', array($this, 'onFetchAllPost'));
+        $handles[] = $events->attach('fetch.post', array($this, 'onFetchPost'), $postPriority);
+        $handles[] = $events->attach('fetchAll.post', array($this, 'onFetchAllPost'), $postPriority);
 
         // write
-        $handles[] = $events->attach('setItem.pre',  array($this, 'onWriteItemPre'));
-        $handles[] = $events->attach('setItems.pre', array($this, 'onWriteItemsPre'));
+        $handles[] = $events->attach('setItem.pre',  array($this, 'onWriteItemPre'), $prePriority);
+        $handles[] = $events->attach('setItems.pre', array($this, 'onWriteItemsPre'), $prePriority);
 
-        $handles[] = $events->attach('addItem.pre',  array($this, 'onWriteItemPre'));
-        $handles[] = $events->attach('addItems.pre', array($this, 'onWriteItemsPre'));
+        $handles[] = $events->attach('addItem.pre',  array($this, 'onWriteItemPre'), $prePriority);
+        $handles[] = $events->attach('addItems.pre', array($this, 'onWriteItemsPre'), $prePriority);
 
-        $handles[] = $events->attach('replaceItem.pre',  array($this, 'onWriteItemPre'));
-        $handles[] = $events->attach('replaceItems.pre', array($this, 'onWriteItemsPre'));
+        $handles[] = $events->attach('replaceItem.pre',  array($this, 'onWriteItemPre'), $prePriority);
+        $handles[] = $events->attach('replaceItems.pre', array($this, 'onWriteItemsPre'), $prePriority);
 
-        $handles[] = $events->attach('checkAndSetItem.pre', array($this, 'onWriteItemPre'));
+        $handles[] = $events->attach('checkAndSetItem.pre', array($this, 'onWriteItemPre'), $prePriority);
 
         // increment / decrement item(s)
-        $handles[] = $events->attach('incrementItem.pre', array($this, 'onIncrementItemPre'));
-        $handles[] = $events->attach('incrementItems.pre', array($this, 'onIncrementItemsPre'));
+        $handles[] = $events->attach('incrementItem.pre', array($this, 'onIncrementItemPre'), $prePriority);
+        $handles[] = $events->attach('incrementItems.pre', array($this, 'onIncrementItemsPre'), $prePriority);
 
-        $handles[] = $events->attach('decrementItem.pre', array($this, 'onDecrementItemPre'));
-        $handles[] = $events->attach('decrementItems.pre', array($this, 'onDecrementItemsPre'));
+        $handles[] = $events->attach('decrementItem.pre', array($this, 'onDecrementItemPre'), $prePriority);
+        $handles[] = $events->attach('decrementItems.pre', array($this, 'onDecrementItemsPre'), $prePriority);
 
         // overwrite capabilities
-        $handles[] = $events->attach('getCapabilities.post',  array($this, 'onGetCapabilitiesPost'));
+        $handles[] = $events->attach('getCapabilities.post',  array($this, 'onGetCapabilitiesPost'), $postPriority);
 
         return $this;
     }

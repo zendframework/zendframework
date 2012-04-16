@@ -61,4 +61,5 @@ abstract class AbstractPlugin implements Plugin
         }
         return $this->options;
     }
+
 }

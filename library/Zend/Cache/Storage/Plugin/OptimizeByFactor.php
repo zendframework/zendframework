@@ -49,7 +49,7 @@ class OptimizeByFactor extends AbstractPlugin
      * @return OptimizeByFactor
      * @throws Exception\LogicException
      */
-    public function attach(EventCollection $eventCollection)
+    public function attach(EventCollection $eventCollection, $priority = 1)
     {
         $index = spl_object_hash($eventCollection);
         if (isset($this->handles[$index])) {
@@ -59,10 +59,11 @@ class OptimizeByFactor extends AbstractPlugin
         $handles = array();
         $this->handles[$index] = & $handles;
 
-        $handles[] = $eventCollection->attach('removeItem.post',       array($this, 'optimizeByFactor'));
-        $handles[] = $eventCollection->attach('removeItems.post',      array($this, 'optimizeByFactor'));
-        $handles[] = $eventCollection->attach('clear.post',            array($this, 'optimizeByFactor'));
-        $handles[] = $eventCollection->attach('clearByNamespace.post', array($this, 'optimizeByFactor'));
+        $callback = array($this, 'optimizeByFactor');
+        $handles[] = $eventCollection->attach('removeItem.post',       $callback, $priority);
+        $handles[] = $eventCollection->attach('removeItems.post',      $callback, $priority);
+        $handles[] = $eventCollection->attach('clear.post',            $callback, $priority);
+        $handles[] = $eventCollection->attach('clearByNamespace.post', $callback, $priority);
 
         return $this;
     }

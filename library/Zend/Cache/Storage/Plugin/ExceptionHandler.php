@@ -45,6 +45,7 @@ class ExceptionHandler extends AbstractPlugin
      * Attach
      *
      * @param  EventCollection $eventCollection
+     * @param  int             $priority
      * @return ExceptionHandler
      * @throws Exception\LogicException
      */

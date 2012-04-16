@@ -324,6 +324,7 @@ abstract class AbstractAdapter implements Adapter
      * Register a plugin
      *
      * @param  Plugin $plugin
+     * @param  int    $priority
      * @return AbstractAdapter Fluent interface
      * @throws Exception\LogicException
      */

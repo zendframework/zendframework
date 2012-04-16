@@ -54,6 +54,7 @@ class Serializer extends AbstractPlugin
      * Attach
      *
      * @param  EventCollection $eventCollection
+     * @param  int             $priority
      * @return Serializer
      * @throws Exception\LogicException
      */

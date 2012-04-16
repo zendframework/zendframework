@@ -46,6 +46,7 @@ class OptimizeByFactor extends AbstractPlugin
      * Attach
      *
      * @param  EventCollection $eventCollection
+     * @param  int             $priority
      * @return OptimizeByFactor
      * @throws Exception\LogicException
      */

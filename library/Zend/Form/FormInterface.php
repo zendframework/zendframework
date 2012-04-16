@@ -54,7 +54,22 @@ interface FormInterface extends FieldsetInterface
      * @param  object $model 
      * @return void
      */
-    public function bindModel(object $model);
+    public function bind(object $model);
+
+    /**
+     * Set the hydrator to use when binding an object to the form
+     * 
+     * @param  Hydrator\HydratorInterface $hydrator 
+     * @return FormInterface
+     */
+    public function setHydrator(Hydrator\HydratorInterface $hydrator);
+
+    /**
+     * Get the hydrator used when binding an object to the form
+     * 
+     * @return null|Hydrator\HydratorInterface
+     */
+    public function getHydrator();
 
     /**
      * Validate the form

@@ -22,10 +22,13 @@
 namespace ZendTest\Form;
 
 use PHPUnit_Framework_TestCase as TestCase;
+use stdClass;
 use Zend\Form\Element;
 use Zend\Form\Fieldset;
 use Zend\Form\Form;
+use Zend\Form\Hydrator;
 use Zend\InputFilter\InputFilter;
+use Zend\InputFilter\Factory as InputFilterFactory;
 
 /**
  * @category   Zend
@@ -39,6 +42,84 @@ class FormTest extends TestCase
     public function setUp()
     {
         $this->form = new Form;
+    }
+
+    public function populateForm()
+    {
+        $this->form->add(new Element('foo'));
+        $this->form->add(new Element('bar'));
+
+        $fieldset = new Fieldset('foobar');
+        $fieldset->add(new Element('foo'));
+        $fieldset->add(new Element('bar'));
+        $this->form->add($fieldset);
+
+        $inputFilterFactory = new InputFilterFactory();
+        $inputFilterFactory->createInputFilter(array(
+            'foo' => array(
+                'name'       => 'foo',
+                'required'   => false,
+                'validators' => array(
+                    array(
+                        'name' => 'not_empty',
+                    ),
+                    array(
+                        'name' => 'string_length',
+                        'options' => array(
+                            'min' => 3,
+                            'max' => 5,
+                        ),
+                    ),
+                ),
+            ),
+            'bar' => array(
+                'allow_empty' => true,
+                'filters'     => array(
+                    array(
+                        'name' => 'string_trim',
+                    ),
+                    array(
+                        'name' => 'string_to_lower',
+                        'options' => array(
+                            'encoding' => 'ISO-8859-1',
+                        ),
+                    ),
+                ),
+            ),
+            'foobar' => array(
+                'type'   => 'Zend\InputFilter\InputFilter',
+                'foo' => array(
+                    'name'       => 'foo',
+                    'required'   => false,
+                    'validators' => array(
+                        array(
+                            'name' => 'not_empty',
+                        ),
+                        array(
+                            'name' => 'string_length',
+                            'options' => array(
+                                'min' => 3,
+                                'max' => 5,
+                            ),
+                        ),
+                    ),
+                ),
+                'bar' => array(
+                    'allow_empty' => true,
+                    'filters'     => array(
+                        array(
+                            'name' => 'string_trim',
+                        ),
+                        array(
+                            'name' => 'string_to_lower',
+                            'options' => array(
+                                'encoding' => 'ISO-8859-1',
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+        ));
     }
 
     public function testNoInputFilterPresentByDefault()
@@ -61,22 +142,62 @@ class FormTest extends TestCase
 
     public function testValidatesEntireDataSetByDefault()
     {
-        $this->markTestIncomplete();
+        $this->populateForm();
+        $invalidSet = array(
+            'foo' => 'a',
+            'bar' => 'always valid',
+            'foobar' => array(
+                'foo' => 'a',
+                'bar' => 'always valid',
+            ),
+        );
+        $this->form->setData($invalidSet);
+        $this->assertFalse($this->form->isValid());
+
+        $validSet = array(
+            'foo' => 'abcde',
+            'bar' => 'always valid',
+            'foobar' => array(
+                'foo' => 'abcde',
+                'bar' => 'always valid',
+            ),
+        );
+        $this->form->setData($validSet);
+        $this->assertTrue($this->form->isValid());
     }
 
     public function testSpecifyingValidationGroupForcesPartialValidation()
     {
-        $this->markTestIncomplete();
+        $this->populateForm();
+        $invalidSet = array(
+            'foo' => 'a',
+        );
+        $this->form->setValidationGroup('foo');
+        $this->form->setData($invalidSet);
+        $this->assertFalse($this->form->isValid());
+
+        $validSet = array(
+            'foo' => 'abcde',
+        );
+        $this->form->setData($validSet);
+        $this->assertTrue($this->form->isValid());
     }
 
     public function testSettingValidateAllFlagAfterPartialValidationForcesFullValidation()
     {
-        $this->markTestIncomplete();
+        $this->populateForm();
+        $this->form->setValidationGroup('foo');
+
+        $validSet = array(
+            'foo' => 'abcde',
+        );
+        $this->form->setData($validSet);
+        $this->form->setValidationGroup(Form::VALIDATE_ALL);
+        $this->assertFalse($this->form->isValid());
+        $messages = $this->form->getMessages();
+        $this->assertTrue(isset($messages['foobar']));
     }
 
-    /**
-     * @todo Should getData() be allowed only after isValid()?
-     */
     public function testCallingGetDataReturnsEmptyArrayIfNoDataSetAndNoModelBound()
     {
         $this->assertEquals(array(), $this->form->getData());
@@ -84,40 +205,190 @@ class FormTest extends TestCase
 
     public function testCallingGetDataReturnsNormalizedDataByDefault()
     {
-        $this->markTestIncomplete();
+        $this->populateForm();
+        $validSet = array(
+            'foo' => 'abcde',
+            'bar' => ' ALWAYS valid ',
+            'foobar' => array(
+                'foo' => 'abcde',
+                'bar' => ' ALWAYS valid',
+            ),
+        );
+        $this->form->setData($validSet);
+        $data = $this->form->getData();
+
+        $expected = array(
+            'foo' => 'abcde',
+            'bar' => 'always valid',
+            'foobar' => array(
+                'foo' => 'abcde',
+                'bar' => 'always valid',
+            ),
+        );
+        $this->assertEquals($expected, $data);
     }
 
     public function testAllowsReturningRawValuesViaGetData()
     {
-        $this->markTestIncomplete();
+        $this->populateForm();
+        $validSet = array(
+            'foo' => 'abcde',
+            'bar' => ' ALWAYS valid ',
+            'foobar' => array(
+                'foo' => 'abcde',
+                'bar' => ' ALWAYS valid',
+            ),
+        );
+        $this->form->setData($validSet);
+        $data = $this->form->getData(Form::VALUES_RAW);
+        $this->assertEquals($validSet, $data);
     }
 
     public function testGetDataReturnsBoundModel()
     {
-        $this->markTestIncomplete();
+        $model = new stdClass;
+        $this->form->setHydrator(new Hydrator\ObjectProperty());
+        $this->populateForm();
+        $this->form->bind($model);
+        $data = $this->form->getData();
+        $this->assertSame($model, $data);
     }
 
     public function testGetDataCanReturnValuesAsArrayWhenModelIsBound()
     {
-        $this->markTestIncomplete();
+        $model = new stdClass;
+        $validSet = array(
+            'foo' => 'abcde',
+            'bar' => 'always valid',
+            'foobar' => array(
+                'foo' => 'abcde',
+                'bar' => 'always valid',
+            ),
+        );
+        $this->populateForm();
+        $this->form->setHydrator(new Hydrator\ObjectProperty());
+        $this->form->bind($model);
+        $this->setData($validSet);
+        $data = $this->form->getData(Form::VALUES_AS_ARRAY);
+        $this->assertEquals($validSet, $data);
     }
 
     public function testValuesBoundToModelAreNormalizedByDefault()
     {
-        $this->markTestIncomplete();
+        $model = new stdClass;
+        $validSet = array(
+            'foo' => 'abcde',
+            'bar' => ' ALWAYS valid ',
+            'foobar' => array(
+                'foo' => 'abcde',
+                'bar' => ' always VALID',
+            ),
+        );
+        $this->populateForm();
+        $this->form->setHydrator(new Hydrator\ObjectProperty());
+        $this->form->bind($model);
+        $this->setData($validSet);
+
+        $this->assertEquals($validSet['foo'], $model->foo);
+        $this->assertEquals('always valid', $model->bar);
+        $this->assertEquals(array(
+            'foo' => 'abcde',
+            'bar' => 'always valid',
+        ), $model->foobar);
     }
 
     public function testCanBindRawValuesToModel()
     {
-        $this->markTestIncomplete();
+        $model = new stdClass;
+        $validSet = array(
+            'foo' => 'abcde',
+            'bar' => ' ALWAYS valid ',
+            'foobar' => array(
+                'foo' => 'abcde',
+                'bar' => ' always VALID',
+            ),
+        );
+        $this->populateForm();
+        $this->form->setHydrator(new Hydrator\ObjectProperty());
+        $this->form->bind($model, Form::VALUES_RAW);
+        $this->setData($validSet);
+
+        $this->assertEquals($validSet['foo'], $model->foo);
+        $this->assertEquals(' ALWAYS valid ', $model->bar);
+        $this->assertEquals(array(
+            'foo' => 'abcde',
+            'bar' => ' always VALID',
+        ), $model->foobar);
     }
 
     public function testGetDataReturnsSubsetOfDataWhenValidationGroupSet()
     {
-        $this->markTestIncomplete();
+        $validSet = array(
+            'foo' => 'abcde',
+            'bar' => ' ALWAYS valid ',
+            'foobar' => array(
+                'foo' => 'abcde',
+                'bar' => ' always VALID',
+            ),
+        );
+        $this->populateForm();
+        $this->form->setHydrator(new Hydrator\ObjectProperty());
+        $this->form->setValidationGroup('foo');
+        $data = $this->form->getData();
+        $this->assertInternalType('array', $data);
+        $this->assertEquals(1, count($data));
+        $this->assertArrayHasKey('foo', $data);
+        $this->assertEquals('abcde', $data['foo']);
     }
 
     public function testSettingValidationGroupBindsOnlyThoseValuesToModel()
+    {
+        $model = new stdClass;
+        $validSet = array(
+            'foo' => 'abcde',
+            'bar' => ' ALWAYS valid ',
+            'foobar' => array(
+                'foo' => 'abcde',
+                'bar' => ' always VALID',
+            ),
+        );
+        $this->populateForm();
+        $this->form->setHydrator(new Hydrator\ObjectProperty());
+        $this->form->bind($model);
+        $this->setData($validSet);
+        $this->form->setValidationGroup('foo');
+
+        $this->assertObjectHasAttribute('foo', $model);
+        $this->assertEquals('abcde', $model->foo);
+        $this->assertObjectNotHasAttribute('bar', $model);
+        $this->assertObjectNotHasAttribute('foobar', $model);
+    }
+
+    public function testCanBindModelsToArraySerializableObjects()
+    {
+        $model = new TestAsset\Model();
+        $validSet = array(
+            'foo' => 'abcde',
+            'bar' => 'always valid',
+            'foobar' => array(
+                'foo' => 'abcde',
+                'bar' => 'always valid',
+            ),
+        );
+        $this->populateForm();
+        $this->form->setHydrator(new Hydrator\ArraySerializable());
+        $this->form->bind($model);
+        $this->setData($validSet);
+
+        $this->assertEquals('abcde', $model->foo);
+        $this->assertEquals('always valid', $model->bar);
+        $this->assertEquals(array(
+            'foo' => 'abcde',
+            'bar' => 'always valid',
+        ), $model->foobar);
+    }
+
+    public function testSetsInputFilterToFilterFromBoundModelIfModelImplementsInputLocatorAware()
     {
         $this->markTestIncomplete();
     }

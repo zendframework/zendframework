@@ -15,10 +15,7 @@
     "autoload": {
         "psr-0": {
             "Zend": "library/"
-        },
-        "classmap": [
-            "library/"
-        ]
+        }
     },
     "config": {
         "bin-dir": "bin"

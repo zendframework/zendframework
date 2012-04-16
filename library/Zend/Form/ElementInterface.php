@@ -79,4 +79,21 @@ interface ElementInterface
      * @return array|\Traversable
      */
     public function getAttributes();
+
+    /**
+     * Set a list of messages to report when validation fails
+     *
+     * @param  array|\Traversable $messages
+     * @return ElementInterface
+     */
+    public function setMessages($messages);
+
+    /**
+     * Get validation error messages, if any
+     *
+     * Returns a list of validation failure messages, if any.
+     * 
+     * @return array|\Traversable
+     */
+    public function getMessages();
 }

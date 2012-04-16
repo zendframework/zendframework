@@ -87,24 +87,4 @@ interface FieldsetInterface extends
      * @return array|\Traversable
      */
     public function getFieldsets();
-
-    /**
-     * Set a hash of element names/messages to use when validation fails
-     *
-     * @param  array|\Traversable $messages
-     * @return FieldsetInterface
-     */
-    public function setMessages($messages); // hash of element names => messages
-
-    /**
-     * Get validation error messages, if any
-     *
-     * Returns a hash of element names/messages for all elements failing 
-     * validation, or, if $elementName is provided, messages for that element 
-     * only.
-     * 
-     * @param  null|string $elementName 
-     * @return array|\Traversable
-     */
-    public function getMessages($elementName = null);
 }

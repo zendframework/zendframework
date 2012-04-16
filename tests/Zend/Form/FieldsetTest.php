@@ -105,7 +105,7 @@ class FieldsetTest extends TestCase
 
     public function testCanAddElementsToFieldset()
     {
-        $this->element->add(new Element('foo'));
+        $this->fieldset->add(new Element('foo'));
         $this->assertEquals(1, count($this->fieldset));
     }
 
@@ -241,10 +241,10 @@ class FieldsetTest extends TestCase
 
     public function testIteratingRespectsOrderPriorityProvidedWhenAttaching()
     {
-        $this->fieldset->add(new Element('foo'), array('priority', 10));
-        $this->fieldset->add(new Element('bar'), array('priority', 20));
-        $this->fieldset->add(new Element('baz'), array('priority', -10));
-        $this->fieldset->add(new Fieldset('barbaz'), array('priority', 30));
+        $this->fieldset->add(new Element('foo'), array('priority' => 10));
+        $this->fieldset->add(new Element('bar'), array('priority' => 20));
+        $this->fieldset->add(new Element('baz'), array('priority' => -10));
+        $this->fieldset->add(new Fieldset('barbaz'), array('priority' => 30));
 
         $expected = array('barbaz', 'bar', 'foo', 'baz');
         $test     = array();

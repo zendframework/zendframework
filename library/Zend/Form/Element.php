@@ -36,6 +36,11 @@ class Element implements ElementInterface
     protected $attributes = array();
 
     /**
+     * @var array Validation error messages
+     */
+    protected $messages = array();
+
+    /**
      * Constructor
      * 
      * @param  null|string|int $name Optional name for the element
@@ -138,5 +143,37 @@ class Element implements ElementInterface
     public function clearAttributes()
     {
         $this->attributes = array();
+    }
+
+    /**
+     * Set a list of messages to report when validation fails
+     *
+     * @param  array|\Traversable $messages
+     * @return ElementInterface
+     */
+    public function setMessages($messages)
+    {
+        if (!is_array($messages) && !$messages instanceof Traversable) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                '%s expects an array or Traversable object of validation error messages; received "%s"',
+                __METHOD__,
+                (is_object($messages) ? get_class($messages) : gettype($messages))
+            ));
+        }
+
+        $this->messages = $messages;
+        return $this;
+    }
+
+    /**
+     * Get validation error messages, if any
+     *
+     * Returns a list of validation failure messages, if any.
+     * 
+     * @return array|\Traversable
+     */
+    public function getMessages()
+    {
+        return $this->messages;
     }
 }

@@ -22,10 +22,10 @@ namespace Zend\Validator\Db;
 
 use Traversable,
     Zend\Config\Config,
-    Zend\Db\Adapter\AbstractAdapter as AbstractDBAdapter,
+    Zend\Db\Adapter\Adapter as DBAdapter,
     Zend\Db\Db,
-    Zend\Db\Select as DBSelect,
-    Zend\Db\Table\AbstractTable as AbstractTable,
+    Zend\Db\Sql\Select as DBSelect,
+    Zend\Db\TableGateway\AbstractTableGateway as AbstractTable,
     Zend\Validator\AbstractValidator,
     Zend\Validator\Exception;
 
@@ -159,7 +159,7 @@ abstract class AbstractDb extends AbstractValidator
     /**
      * Returns the set adapter
      *
-     * @return AbstractDBAdapter
+     * @return DBAdapter
      */
     public function getAdapter()
     {
@@ -167,7 +167,7 @@ abstract class AbstractDb extends AbstractValidator
          * Check for an adapter being defined. If not, fetch the default adapter.
          */
         if ($this->_adapter === null) {
-            $this->_adapter = AbstractTable::getDefaultAdapter();
+            $this->_adapter = AbstractTable::getAdapter();
             if (null === $this->_adapter) {
                 throw new Exception\RuntimeException('No database adapter present');
             }
@@ -179,10 +179,10 @@ abstract class AbstractDb extends AbstractValidator
     /**
      * Sets a new database adapter
      *
-     * @param  AbstractDBAdapter $adapter
+     * @param  DBAdapter $adapter
      * @return AbstractDb
      */
-    public function setAdapter(AbstractDBAdapter $adapter)
+    public function setAdapter(DBAdapter $adapter)
     {
         $this->_adapter = $adapter;
         return $this;
@@ -299,37 +299,40 @@ abstract class AbstractDb extends AbstractValidator
     public function getSelect()
     {
         if (null === $this->_select) {
-            $db = $this->getAdapter();
+            $adapter = $this->getAdapter();
+            $driver   = $adapter->getDriver();
+            $platform = $adapter->getPlatform();
 
             /**
              * Build select object
              */
-            $select = new DBSelect($db);
-            $select->from($this->_table, array($this->_field), $this->_schema);
+            $select = new DBSelect();
+            $select->from($this->_table, $this->_schema)->columns(
+            	array($this->_field)
+            );
 
             // Support both named and positional parameters
-            if ($db->supportsParameters('named')) {
+            if ('named' == $driver->getPrepareType()) {
                 $select->where(
-                    $db->quoteIdentifier($this->_field, true) . ' = :value'
+                    $platform->quoteIdentifier($this->_field, true) . ' = :value'
                 );
             } else {
                 $select->where(
-                    $db->quoteIdentifier($this->_field, true) . ' = ?'
+                    $platform->quoteIdentifier($this->_field, true) . ' = ?'
                 );
             }
 
             if ($this->_exclude !== null) {
                 if (is_array($this->_exclude)) {
                     $select->where(
-                          $db->quoteIdentifier($this->_exclude['field'], true) .
+                          $platform->quoteIdentifier($this->_exclude['field'], true) .
                             ' != ?', $this->_exclude['value']
                     );
                 } else {
                     $select->where($this->_exclude);
                 }
             }
-
-            $select->limit(1);
+            
             $this->_select = $select;
         }
 
@@ -344,14 +347,10 @@ abstract class AbstractDb extends AbstractValidator
      */
     protected function _query($value)
     {
-        $select = $this->getSelect();
-
-        $result = $select->getAdapter()->fetchRow(
-            $select,
-            array('value' => $value),
-            Db::FETCH_ASSOC
-        );
-
-        return $result;
+        $adapter = $this->getAdapter();
+        $statment = $adapter->createStatement();
+        $this->getSelect()->prepareStatement($adapter, $statment);
+	    
+        return $statment->execute(array('value' => $value))->current();
     }
 }

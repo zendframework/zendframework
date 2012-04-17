@@ -390,6 +390,10 @@ class FormTest extends TestCase
 
     public function testSetsInputFilterToFilterFromBoundModelIfModelImplementsInputLocatorAware()
     {
-        $this->markTestIncomplete();
+        $model = new TestAsset\ValidatingModel();
+        $model->setInputFilter(new InputFilter());
+        $this->populateForm();
+        $this->form->bind($model);
+        $this->assertSame($model->getInputFilter(), $this->form->getInputFilter());
     }
 }

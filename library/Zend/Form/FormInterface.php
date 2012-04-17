@@ -21,7 +21,7 @@
 namespace Zend\Form;
 
 use IteratorAggregate;
-use Zend\InputFilter\InputFilterInterface;
+use Zend\InputFilter\InputFilterAwareInterface;
 
 /**
  * @category   Zend
@@ -29,7 +29,7 @@ use Zend\InputFilter\InputFilterInterface;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface FormInterface extends FieldsetInterface
+interface FormInterface extends InputFilterAwareInterface, FieldsetInterface
 {
     const VALIDATE_ALL      = 1;
     const VALUES_NORMALIZED = 2;
@@ -90,21 +90,6 @@ interface FormInterface extends FieldsetInterface
      * @return array|object
      */
     public function getData($flag = FormInterface::VALUES_NORMALIZED);
-
-    /**
-     * Set the input filter used to validate this form
-     * 
-     * @param  InputFilterInterface $inputFilter
-     * @return FormInterface
-     */
-    public function setInputFilter(InputFilterInterface $inputFilter);
-
-    /**
-     * Get the composed input filter
-     * 
-     * @return InputFilterInterface
-     */
-    public function getInputFilter();
 
     /**
      * Set the validation group (set of values to validate)

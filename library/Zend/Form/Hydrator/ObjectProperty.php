@@ -41,7 +41,7 @@ class ObjectProperty implements HydratorInterface
      * @param  object $object 
      * @return void
      */
-    public function hydrate(array $data, object $object)
+    public function hydrate(array $data, $object)
     {
         foreach ($data as $property => $value) {
             $object->$property = $value;

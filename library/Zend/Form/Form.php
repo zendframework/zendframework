@@ -21,7 +21,10 @@
 namespace Zend\Form;
 
 use IteratorAggregate;
+use Traversable;
+use Zend\InputFilter\InputFilterAwareInterface;
 use Zend\InputFilter\InputFilterInterface;
+use Zend\Stdlib\ArrayUtils;
 
 /**
  * @category   Zend
@@ -39,11 +42,32 @@ class Form extends Fieldset implements FormInterface
     protected $attributes = array(
         'method' => 'POST',
     );
+
+    /**
+     * How to bind values to the model
+     * 
+     * @var int
+     */
+    protected $bindAs = FormInterface::VALUES_NORMALIZED;
+
+    /**
+     * Data being validated
+     * 
+     * @var null|array|\Traversable
+     */
+    protected $data;
  
     /**
      * @var null|InputFilterInterface
      */
     protected $filter;
+
+    /**
+     * Whether or not validation has occurred
+     * 
+     * @var bool
+     */
+    protected $hasValidated = false;
 
     /**
      * Hydrator to use with bound model
@@ -72,10 +96,26 @@ class Form extends Fieldset implements FormInterface
      * Typically, also passes data on to the composed input filter.
      * 
      * @param  array|\ArrayAccess $data 
-     * @return FormInterface
+     * @return Form
      */
     public function setData($data)
     {
+        if ($data instanceof Traversable) {
+            $data = ArrayUtils::iteratorToArray($data);
+        }
+        if (!is_array($data)) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                '%s expects an array or Traversable argument; received "%s"',
+                __METHOD__,
+                (is_object($data) ? get_class($data) : gettype($data))
+            ));
+        }
+
+        $this->hasValidated = false;
+        $this->data         = $data;
+        $this->populateValues($data);
+
+        return $this;
     }
 
     /**
@@ -86,7 +126,7 @@ class Form extends Fieldset implements FormInterface
      * @param  object $model 
      * @return void
      */
-    public function bind($model)
+    public function bind($model, $flags = FormInterface::VALUES_NORMALIZED)
     {
         if (!is_object($model)) {
             throw new Exception\InvalidArgumentException(sprintf(
@@ -95,7 +135,19 @@ class Form extends Fieldset implements FormInterface
                 $model
             ));
         }
-        $this->model = $model;
+
+        if (!in_array($flags, array(FormInterface::VALUES_NORMALIZED, FormInterface::VALUES_RAW))) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                '%s expects the $flags argument to be one of "%s" or "%s"; received "%s"',
+                __METHOD__,
+                'Zend\Form\FormInterface::VALUES_NORMALIZED',
+                'Zend\Form\FormInterface::VALUES_RAW',
+                $flags
+            ));
+        }
+
+        $this->bindAs = $flags;
+        $this->model  = $model;
     }
 
     /**
@@ -112,6 +164,8 @@ class Form extends Fieldset implements FormInterface
 
     /**
      * Get the hydrator used when binding an object to the form
+     *
+     * Will lazy-load Hydrator\ArraySerializable if none is present.
      * 
      * @return null|Hydrator\HydratorInterface
      */
@@ -132,6 +186,39 @@ class Form extends Fieldset implements FormInterface
      */
     public function isValid()
     {
+        if (!is_array($this->data)) {
+            throw new Exception\DomainException(sprintf(
+                '%s is unable to validate as there is no data currently set',
+                __METHOD__
+            ));
+        }
+
+        $filter = $this->getInputFilter();
+        if (!$filter instanceof InputFilterInterface) {
+            throw new Exception\DomainException(sprintf(
+                '%s is unable to validate as there is no input filter present',
+                __METHOD__
+            ));
+        }
+
+        $filter->setData($this->data);
+        $filter->setValidationGroup(InputFilterInterface::VALIDATE_ALL);
+
+        if ($this->validationGroup !== null) {
+            $filter->setValidationGroup($this->validationGroup);
+        }
+
+        $result = $filter->isValid();
+        if ($result) {
+            $this->hydrate();
+        }
+
+        if (!$result) {
+            $this->setMessages($filter->getMessages());
+        }
+
+        $this->hasValidated = true;
+        return $result;
     }
 
     /**
@@ -145,6 +232,24 @@ class Form extends Fieldset implements FormInterface
      */
     public function getData($flag = FormInterface::VALUES_NORMALIZED)
     {
+        if (!$this->hasValidated) {
+            throw new Exception\DomainException(sprintf(
+                '%s cannot return data as validation has not yet occurred',
+                __METHOD__
+            ));
+        }
+
+        if (($flag !== FormInterface::VALUES_AS_ARRAY) && is_object($this->model)) {
+            return $this->model;
+        }
+
+        $filter = $this->getInputFilter();
+
+        if ($flag === FormInterface::VALUES_RAW) {
+            return $filter->getRawValues();
+        }
+
+        return $filter->getValues();
     }
 
     /**
@@ -165,6 +270,7 @@ class Form extends Fieldset implements FormInterface
         }
 
         $argv = func_get_args();
+        $this->hasValidated = false;
 
         if (1 < $argc) {
             $this->validationGroup = $argv;
@@ -192,7 +298,8 @@ class Form extends Fieldset implements FormInterface
      */
     public function setInputFilter(InputFilterInterface $inputFilter)
     {
-        $this->filter = $inputFilter;
+        $this->hasValidated = false;
+        $this->filter       = $inputFilter;
         return $this;
     }
 
@@ -203,6 +310,34 @@ class Form extends Fieldset implements FormInterface
      */
     public function getInputFilter()
     {
+        if ($this->model instanceof InputFilterAwareInterface) {
+            return $this->model->getInputFilter();
+        }
         return $this->filter;
+    }
+
+    /**
+     * Hydrate the attached model
+     * 
+     * @return void
+     */
+    protected function hydrate()
+    {
+        if (!is_object($this->model)) {
+            return;
+        }
+        $hydrator = $this->getHydrator();
+        $filter   = $this->getInputFilter();
+
+        switch ($this->bindAs) {
+            case FormInterface::VALUES_RAW:
+                $data = $filter->getRawValues();
+                break;
+            case FormInterface::VALUES_NORMALIZED:
+            default:
+                $data = $filter->getValues();
+                break;
+        }
+        $hydrator->hydrate($data, $this->model);
     }
 }

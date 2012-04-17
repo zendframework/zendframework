@@ -44,7 +44,7 @@ class ArraySerializable implements HydratorInterface
      * @return void
      * @throws Exception\UnexpectedValueException for an $object not implementing ArraySerializableInterface
      */
-    public function hydrate(array $data, object $object)
+    public function hydrate(array $data, $object)
     {
         if (!$object instanceof ArraySerializableInterface) {
             throw new Exception\UnexpectedValueException(sprintf(

@@ -195,7 +195,7 @@ class Fieldset extends Element implements FieldsetInterface
      * only.
      * 
      * @param  null|string $elementName 
-     * @return array|\Traversable
+     * @return array|Traversable
      */
     public function getMessages($elementName = null)
     {
@@ -203,7 +203,7 @@ class Fieldset extends Element implements FieldsetInterface
             $messages = array();
             foreach ($this->byName as $name => $element) {
                 $messageSet = $element->getMessages();
-                if (count($messageSet) == 0) {
+                if (!is_array($messageSet) && !$messageSet instanceof Traversable) {
                     continue;
                 }
                 $messages[$name] = $messageSet;
@@ -221,6 +221,37 @@ class Fieldset extends Element implements FieldsetInterface
 
         $element = $this->get($elementName);
         return $element->getMessages();
+    }
+
+    /**
+     * Recursively populate values of attached elements and fieldsets
+     * 
+     * @param  array|Traversable $data 
+     * @return void
+     */
+    public function populateValues($data)
+    {
+        if (!is_array($data) && !$data instanceof Traversable) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                '%s expects an array or Traversable set of data; received "%s"',
+                __METHOD__,
+                (is_object($data) ? get_class($data) : gettype($data))
+            ));
+        }
+
+        foreach ($data as $name => $value) {
+            if (!$this->has($name)) {
+                continue;
+            }
+
+            $element = $this->get($name);
+            if ($element instanceof FieldsetInterface) {
+                $element->populateValues($value);
+                continue;
+            }
+
+            $element->setAttribute('value', $value);
+        }
     }
 
     /**

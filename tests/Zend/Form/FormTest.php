@@ -55,7 +55,7 @@ class FormTest extends TestCase
         $this->form->add($fieldset);
 
         $inputFilterFactory = new InputFilterFactory();
-        $inputFilterFactory->createInputFilter(array(
+        $inputFilter = $inputFilterFactory->createInputFilter(array(
             'foo' => array(
                 'name'       => 'foo',
                 'required'   => false,
@@ -90,7 +90,7 @@ class FormTest extends TestCase
                 'type'   => 'Zend\InputFilter\InputFilter',
                 'foo' => array(
                     'name'       => 'foo',
-                    'required'   => false,
+                    'required'   => true,
                     'validators' => array(
                         array(
                             'name' => 'not_empty',
@@ -120,6 +120,7 @@ class FormTest extends TestCase
                 ),
             ),
         ));
+        $this->form->setInputFilter($inputFilter);
     }
 
     public function testNoInputFilterPresentByDefault()
@@ -134,7 +135,7 @@ class FormTest extends TestCase
         $this->assertSame($filter, $this->form->getInputFilter());
     }
 
-    public function testCallingIsValidRaisesExceptionIfNoDataSetAndNoModelBound()
+    public function testCallingIsValidRaisesExceptionIfNoDataSet()
     {
         $this->setExpectedException('Zend\Form\Exception\DomainException');
         $this->form->isValid();
@@ -195,12 +196,37 @@ class FormTest extends TestCase
         $this->form->setValidationGroup(Form::VALIDATE_ALL);
         $this->assertFalse($this->form->isValid());
         $messages = $this->form->getMessages();
-        $this->assertTrue(isset($messages['foobar']));
+        $this->assertArrayHasKey('foobar', $messages, var_export($messages, 1));
     }
 
-    public function testCallingGetDataReturnsEmptyArrayIfNoDataSetAndNoModelBound()
+    public function testCallingGetDataPriorToValidationRaisesException()
     {
-        $this->assertEquals(array(), $this->form->getData());
+        $this->setExpectedException('Zend\Form\Exception\DomainException');
+        $this->form->getData();
+    }
+
+    public function testAttemptingToValidateWithNoInputFilterAttachedRaisesException()
+    {
+        $this->setExpectedException('Zend\Form\Exception\DomainException');
+        $this->form->isValid();
+    }
+
+    public function testCanRetrieveDataWithoutErrorsFollowingValidation()
+    {
+        $this->populateForm();
+        $validSet = array(
+            'foo' => 'abcde',
+            'bar' => ' ALWAYS valid ',
+            'foobar' => array(
+                'foo' => 'abcde',
+                'bar' => ' ALWAYS valid',
+            ),
+        );
+        $this->form->setData($validSet);
+        $this->form->isValid();
+
+        $data = $this->form->getData();
+        $this->assertInternalType('array', $data);
     }
 
     public function testCallingGetDataReturnsNormalizedDataByDefault()
@@ -215,6 +241,7 @@ class FormTest extends TestCase
             ),
         );
         $this->form->setData($validSet);
+        $this->form->isValid();
         $data = $this->form->getData();
 
         $expected = array(
@@ -240,6 +267,7 @@ class FormTest extends TestCase
             ),
         );
         $this->form->setData($validSet);
+        $this->form->isValid();
         $data = $this->form->getData(Form::VALUES_RAW);
         $this->assertEquals($validSet, $data);
     }
@@ -249,7 +277,9 @@ class FormTest extends TestCase
         $model = new stdClass;
         $this->form->setHydrator(new Hydrator\ObjectProperty());
         $this->populateForm();
+        $this->form->setData(array());
         $this->form->bind($model);
+        $this->form->isValid();
         $data = $this->form->getData();
         $this->assertSame($model, $data);
     }
@@ -269,6 +299,7 @@ class FormTest extends TestCase
         $this->form->setHydrator(new Hydrator\ObjectProperty());
         $this->form->bind($model);
         $this->form->setData($validSet);
+        $this->form->isValid();
         $data = $this->form->getData(Form::VALUES_AS_ARRAY);
         $this->assertEquals($validSet, $data);
     }
@@ -288,6 +319,7 @@ class FormTest extends TestCase
         $this->form->setHydrator(new Hydrator\ObjectProperty());
         $this->form->bind($model);
         $this->form->setData($validSet);
+        $this->form->isValid();
 
         $this->assertObjectHasAttribute('foo', $model);
         $this->assertEquals($validSet['foo'], $model->foo);
@@ -315,6 +347,7 @@ class FormTest extends TestCase
         $this->form->setHydrator(new Hydrator\ObjectProperty());
         $this->form->bind($model, Form::VALUES_RAW);
         $this->form->setData($validSet);
+        $this->form->isValid();
 
         $this->assertObjectHasAttribute('foo', $model);
         $this->assertEquals($validSet['foo'], $model->foo);
@@ -338,8 +371,9 @@ class FormTest extends TestCase
             ),
         );
         $this->populateForm();
-        $this->form->setHydrator(new Hydrator\ObjectProperty());
         $this->form->setValidationGroup('foo');
+        $this->form->setData($validSet);
+        $this->form->isValid();
         $data = $this->form->getData();
         $this->assertInternalType('array', $data);
         $this->assertEquals(1, count($data));
@@ -363,6 +397,7 @@ class FormTest extends TestCase
         $this->form->bind($model);
         $this->form->setData($validSet);
         $this->form->setValidationGroup('foo');
+        $this->form->isValid();
 
         $this->assertObjectHasAttribute('foo', $model);
         $this->assertEquals('abcde', $model->foo);
@@ -385,6 +420,7 @@ class FormTest extends TestCase
         $this->form->setHydrator(new Hydrator\ArraySerializable());
         $this->form->bind($model);
         $this->form->setData($validSet);
+        $this->form->isValid();
 
         $this->assertEquals('abcde', $model->foo);
         $this->assertEquals('always valid', $model->bar);
@@ -401,5 +437,28 @@ class FormTest extends TestCase
         $this->populateForm();
         $this->form->bind($model);
         $this->assertSame($model->getInputFilter(), $this->form->getInputFilter());
+    }
+
+    public function testSettingDataShouldSetElementValueAttributes()
+    {
+        $this->populateForm();
+        $data = array(
+            'foo' => 'abcde',
+            'bar' => 'always valid',
+            'foobar' => array(
+                'foo' => 'abcde',
+                'bar' => 'always valid',
+            ),
+        );
+        $this->form->setData($data);
+
+        $fieldset = $this->form->get('foobar');
+        foreach (array('foo', 'bar') as $name) {
+            $element = $this->form->get($name);
+            $this->assertEquals($data[$name], $element->getAttribute('value'));
+
+            $element = $fieldset->get($name);
+            $this->assertEquals($data[$name], $element->getAttribute('value'));
+        }
     }
 }

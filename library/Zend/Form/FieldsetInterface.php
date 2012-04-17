@@ -87,4 +87,12 @@ interface FieldsetInterface extends
      * @return array|\Traversable
      */
     public function getFieldsets();
+
+    /**
+     * Recursively populate value attributes of elements
+     * 
+     * @param  array|\Traversable $data 
+     * @return void
+     */
+    public function populateValues($data);
 }

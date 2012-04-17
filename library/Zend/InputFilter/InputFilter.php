@@ -299,8 +299,11 @@ class InputFilter implements InputFilterInterface
      */
     public function getValues()
     {
+        $inputs = $this->validationGroup ?: array_keys($this->inputs);
         $values = array();
-        foreach ($this->inputs as $name => $input) {
+        foreach ($inputs as $name) {
+            $input = $this->inputs[$name];
+
             if ($input instanceof InputFilterInterface) {
                 $values[$name] = $input->getValues();
                 continue;

@@ -14,28 +14,22 @@
  *
  * @category   Zend
  * @package    Zend_Form
- * @subpackage Hydrator
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @version    $Id$
  */
 
-namespace Zend\Form\Hydrator;
+namespace Zend\Form\Exception;
+
+use Zend\Form\Exception;
 
 /**
+ * @uses       Zend\Form\Exception
+ * @uses       \InvalidArgumentException
  * @category   Zend
  * @package    Zend_Form
- * @subpackage Hydrator
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface HydratorInterface
-{
-    /**
-     * Hydrate $object with the provided $data.
-     * 
-     * @param  array $data 
-     * @param  object $object 
-     * @return void
-     */
-    public function hydrate(array $data, $object);
-}
+class DomainException extends \DomainException implements Exception
+{}

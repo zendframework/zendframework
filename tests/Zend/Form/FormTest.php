@@ -268,7 +268,7 @@ class FormTest extends TestCase
         $this->populateForm();
         $this->form->setHydrator(new Hydrator\ObjectProperty());
         $this->form->bind($model);
-        $this->setData($validSet);
+        $this->form->setData($validSet);
         $data = $this->form->getData(Form::VALUES_AS_ARRAY);
         $this->assertEquals($validSet, $data);
     }
@@ -287,10 +287,13 @@ class FormTest extends TestCase
         $this->populateForm();
         $this->form->setHydrator(new Hydrator\ObjectProperty());
         $this->form->bind($model);
-        $this->setData($validSet);
+        $this->form->setData($validSet);
 
+        $this->assertObjectHasAttribute('foo', $model);
         $this->assertEquals($validSet['foo'], $model->foo);
+        $this->assertObjectHasAttribute('bar', $model);
         $this->assertEquals('always valid', $model->bar);
+        $this->assertObjectHasAttribute('foobar', $model);
         $this->assertEquals(array(
             'foo' => 'abcde',
             'bar' => 'always valid',
@@ -311,10 +314,13 @@ class FormTest extends TestCase
         $this->populateForm();
         $this->form->setHydrator(new Hydrator\ObjectProperty());
         $this->form->bind($model, Form::VALUES_RAW);
-        $this->setData($validSet);
+        $this->form->setData($validSet);
 
+        $this->assertObjectHasAttribute('foo', $model);
         $this->assertEquals($validSet['foo'], $model->foo);
+        $this->assertObjectHasAttribute('bar', $model);
         $this->assertEquals(' ALWAYS valid ', $model->bar);
+        $this->assertObjectHasAttribute('foobar', $model);
         $this->assertEquals(array(
             'foo' => 'abcde',
             'bar' => ' always VALID',
@@ -355,7 +361,7 @@ class FormTest extends TestCase
         $this->populateForm();
         $this->form->setHydrator(new Hydrator\ObjectProperty());
         $this->form->bind($model);
-        $this->setData($validSet);
+        $this->form->setData($validSet);
         $this->form->setValidationGroup('foo');
 
         $this->assertObjectHasAttribute('foo', $model);
@@ -378,7 +384,7 @@ class FormTest extends TestCase
         $this->populateForm();
         $this->form->setHydrator(new Hydrator\ArraySerializable());
         $this->form->bind($model);
-        $this->setData($validSet);
+        $this->form->setData($validSet);
 
         $this->assertEquals('abcde', $model->foo);
         $this->assertEquals('always valid', $model->bar);

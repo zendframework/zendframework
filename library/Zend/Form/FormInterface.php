@@ -54,7 +54,7 @@ interface FormInterface extends InputFilterAwareInterface, FieldsetInterface
      * @param  object $model 
      * @return void
      */
-    public function bind(object $model);
+    public function bind($model);
 
     /**
      * Set the hydrator to use when binding an object to the form

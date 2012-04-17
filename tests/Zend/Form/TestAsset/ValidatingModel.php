@@ -37,11 +37,11 @@ class ValidatingModel extends Model implements InputFilterAwareInterface
 
     public function setInputFilter(InputFilterInterface $inputFilter)
     {
-        $this->filter = $inputFilter;
+        $this->inputFilter = $inputFilter;
     }
 
     public function getInputFilter()
     {
-        return $this->filter;
+        return $this->inputFilter;
     }
 }

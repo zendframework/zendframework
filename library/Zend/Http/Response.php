@@ -491,7 +491,7 @@ class Response extends Message implements ResponseDescription
             }
 
             $length = hexdec(trim($m[1]));
-            $cut = static::strlen($m[0]);
+            $cut = strlen($m[0]);
             $decBody .= substr($body, $cut, $length);
             $body = substr($body, $cut + $length + 2);
         }
@@ -551,22 +551,6 @@ class Response extends Message implements ResponseDescription
             return gzuncompress($body);
         } else {
             return gzinflate($body);
-        }
-    }
-
-    /**
-     * Returns length of binary string in bytes
-     *
-     * @param string $str
-     * @return int the string length
-     */
-    static public function strlen($str)
-    {
-        if (function_exists('mb_internal_encoding') &&
-            (((int)ini_get('mbstring.func_overload')) & 2)) {
-            return mb_strlen($str, '8bit');
-        } else {
-            return strlen($str);
         }
     }
 }

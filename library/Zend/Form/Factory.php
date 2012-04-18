@@ -22,6 +22,8 @@ namespace Zend\Form;
 
 use ArrayAccess;
 use Traversable;
+use Zend\InputFilter\Factory as InputFilterFactory;
+use Zend\InputFilter\InputFilterInterface;
 use Zend\Stdlib\ArrayUtils;
 
 /**
@@ -32,6 +34,35 @@ use Zend\Stdlib\ArrayUtils;
  */
 class Factory
 {
+    protected $inputFilterFactory;
+
+    /**
+     * Set input filter factory to use when creating forms
+     *
+     * @param  InputFilterFactory $inputFilterFactory
+     * @return Factory
+     */
+    public function setInputFilterFactory(InputFilterFactory $inputFilterFactory)
+    {
+        $this->inputFilterFactory = $inputFilterFactory;
+        return $this;
+    }
+    
+    /**
+     * Get current input filter factory
+     *
+     * If none provided, uses an unconfigured instance.
+     *
+     * @return InputFilterFactory
+     */
+    public function getInputFilterFactory()
+    {
+        if (null === $this->inputFilterFactory) {
+            $this->setInputFilterFactory(new InputFilterFactory());
+        }
+        return $this->inputFilterFactory;
+    }
+
     /**
      * Create an element based on the provided specification
      *
@@ -90,7 +121,7 @@ class Factory
      * @param  array|Traversable|ArrayAccess $spec 
      * @return FieldsetInterface
      * @throws Exception\InvalidArgumentException for an invalid $spec
-     * @throws Exception\DomainException for an invalid element type
+     * @throws Exception\DomainException for an invalid fieldset type
      */
     public function createFieldset($spec)
     {
@@ -117,6 +148,44 @@ class Factory
         }
 
         return $fieldset;
+    }
+
+    /**
+     * Create a form based on the provided specification
+     *
+     * Specification follows that of {@link createFieldset()}, and adds the 
+     * following keys:
+     * 
+     * @param  array|Traversable|ArrayAccess $spec 
+     * @return FormInterface
+     * @throws Exception\InvalidArgumentException for an invalid $spec
+     * @throws Exception\DomainException for an invalid form type
+     */
+    public function createForm($spec)
+    {
+        $spec = $this->validateSpecification($spec, __METHOD__);
+
+        $type = isset($spec['type']) ? $spec['type'] : 'Zend\Form\Form';
+        $spec['type'] = $type;
+        
+        $form = $this->createFieldset($spec);
+        if (!$form instanceof FormInterface) {
+            throw new Exception\DomainException(sprintf(
+                '%s expects a form type that implements Zend\Form\FormInterface; received "%s"',
+                __METHOD__,
+                $type
+            ));
+        }
+
+        if (isset($spec['input_filter'])) {
+            $this->prepareAndInjectInputFilter($spec['input_filter'], $form, __METHOD__);
+        }
+
+        if (isset($spec['hydrator'])) {
+            $this->prepareAndInjectHydrator($spec['hydrator'], $form, __METHOD__);
+        }
+
+        return $form;
     }
 
     /**
@@ -191,5 +260,91 @@ class Factory
             $fieldset = $this->createFieldset($spec);
             $masterFieldset->add($fieldset, $flags);
         }
+    }
+
+    /**
+     * Prepare an input filter instance and inject in the provided form
+     *
+     * If the input filter specified is a string, assumes it is a class name, 
+     * and attempts to instantiate it. If the class does not exist, or does
+     * not extend InputFilterInterface, an exception is raised.
+     *
+     * Otherwise, $spec is passed on to the attached InputFilter Factory 
+     * instance in order to create the input filter.
+     * 
+     * @param  string|array|Traversable $spec 
+     * @param  FormInterface $form 
+     * @param  string $method 
+     * @return void
+     * @throws Exception\DomainException for unknown InputFilter class or invalid InputFilter instance
+     */
+    protected function prepareAndInjectInputFilter($spec, FormInterface $form, $method)
+    {
+        if (is_string($spec)) {
+            if (!class_exists($spec)) {
+                throw new Exception\DomainException(sprintf(
+                    '%s expects string input filter names to be valid class names; received "%s"',
+                    $method,
+                    $spec
+                ));
+            }
+            $filter = new $spec;
+            if (!$filter instanceof InputFilterInterface) {
+                throw new Exception\DomainException(sprintf(
+                    '%s expects a valid implementation of Zend\InputFilter\InputFilterInterface; received "%s"',
+                    $method,
+                    $spec
+                ));
+            }
+            $form->setInputFilter($filter);
+            return;
+        }
+
+        $factory = $this->getInputFilterFactory();
+        $filter  = $factory->createInputFilter($spec);
+        $form->setInputFilter($filter);
+    }
+
+    /**
+     * Prepare and inject a named hydrator
+     *
+     * Takes a string indicating a hydrator class name, instantiates the class 
+     * by that name, and injects the hydrator instance into the form.
+     * 
+     * @param  string $hydratorName 
+     * @param  FormInterface $form 
+     * @param  string $method 
+     * @return void
+     * @throws Exception\DomainException if $hydratorName is not a string, does not resolve to a known class, or the class does not implement Hydrator\HydratorInterface
+     */
+    protected function prepareAndInjectHydrator($hydratorName, FormInterface $form, $method)
+    {
+        if (!is_string($hydratorName)) {
+            throw new Exception\DomainException(sprintf(
+                '%s expects string hydrator class name; received "%s"',
+                $method,
+                (is_object($hydratorName) ? get_class($hydratorName) : gettype($hydratorName))
+            ));
+        }
+
+        if (!class_exists($hydratorName)) {
+            throw new Exception\DomainException(sprintf(
+                '%s expects string hydrator name to be a valid class name; received "%s"',
+                $method,
+                $hydratorName
+            ));
+        }
+
+        $hydrator = new $hydratorName;
+        if (!$hydrator instanceof Hydrator\HydratorInterface) {
+            throw new Exception\DomainException(sprintf(
+                '%s expects a valid implementation of Zend\Form\Hydrator\HydratorInterface; received "%s"',
+                $method,
+                $hydratorName
+            ));
+        }
+
+        $form->setHydrator($hydrator);
+        return;
     }
 }

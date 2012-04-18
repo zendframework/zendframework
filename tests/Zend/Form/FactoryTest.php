@@ -61,17 +61,173 @@ class FactoryTest extends TestCase
 
     public function testCanCreateFieldsets()
     {
-        $this->markTestIncomplete();
+        $fieldset = $this->factory->createFieldset(array(
+            'name'       => 'foo',
+            'attributes' => array(
+                'type'         => 'fieldset',
+                'class'        => 'foo-class',
+                'data-js-type' => 'my.form.fieldset',
+            ),
+        ));
+        $this->assertInstanceOf('Zend\Form\FieldsetInterface', $fieldset);
+        $this->assertEquals('foo', $fieldset->getName());
+        $this->assertEquals('fieldset', $fieldset->getAttribute('type'));
+        $this->assertEquals('foo-class', $fieldset->getAttribute('class'));
+        $this->assertEquals('my.form.fieldset', $fieldset->getAttribute('data-js-type'));
     }
 
     public function testCanCreateFieldsetsWithElements()
     {
-        $this->markTestIncomplete();
+        $fieldset = $this->factory->createFieldset(array(
+            'name'       => 'foo',
+            'elements' => array(
+                array(
+                    'flags' => array(
+                        'name' => 'bar',
+                    ),
+                    'spec' => array(
+                        'attributes' => array(
+                            'type' => 'text',
+                        ),
+                    ),
+                ),
+                array(
+                    'flags' => array(
+                        'name' => 'baz',
+                    ),
+                    'spec' => array(
+                        'attributes' => array(
+                            'type' => 'radio',
+                            'options' => array(
+                                'foo' => 'Foo Bar',
+                                'bar' => 'Bar Baz',
+                            ),
+                        ),
+                    ),
+                ),
+                array(
+                    'flags' => array(
+                        'priority' => 10,
+                    ),
+                    'spec' => array(
+                        'name'       => 'bat',
+                        'attributes' => array(
+                            'type' => 'textarea',
+                            'content' => 'Type here...',
+                        ),
+                    ),
+                ),
+            ),
+        ));
+        $this->assertInstanceOf('Zend\Form\FieldsetInterface', $fieldset);
+        $elements = $fieldset->getElements();
+        $this->assertEquals(3, count($elements));
+        $this->assertTrue($fieldset->has('bar'));
+        $this->assertTrue($fieldset->has('baz'));
+        $this->assertTrue($fieldset->has('bat'));
+
+        $element = $fieldset->get('bar');
+        $this->assertEquals('text', $element->getAttribute('type'));
+
+        $element = $fieldset->get('baz');
+        $this->assertEquals('radio', $element->getAttribute('type'));
+        $this->assertEquals(array(
+            'foo' => 'Foo Bar',
+            'bar' => 'Bar Baz',
+        ), $element->getAttribute('options'));
+
+        $element = $fieldset->get('bat');
+        $this->assertEquals('textarea', $element->getAttribute('type'));
+        $this->assertEquals('Type here...', $element->getAttribute('content'));
+        $this->assertEquals('bat', $element->getName());
+
+        // Testing that priority flag is present and works as expected
+        foreach ($fieldset as $element) {
+            $test = $element->getName();
+            break;
+        }
+        $this->assertEquals('bat', $test);
     }
 
     public function testCanCreateNestedFieldsets()
     {
-        $this->markTestIncomplete();
+        $masterFieldset = $this->factory->createFieldset(array(
+            'name'       => 'foo',
+            'fieldsets'  => array(
+                array(
+                    'flags' => array('name' => 'bar'),
+                    'spec'  => array(
+                        'elements' => array(
+                            array(
+                                'flags' => array(
+                                    'name' => 'bar',
+                                ),
+                                'spec' => array(
+                                    'attributes' => array(
+                                        'type' => 'text',
+                                    ),
+                                ),
+                            ),
+                            array(
+                                'flags' => array(
+                                    'name' => 'baz',
+                                ),
+                                'spec' => array(
+                                    'attributes' => array(
+                                        'type' => 'radio',
+                                        'options' => array(
+                                            'foo' => 'Foo Bar',
+                                            'bar' => 'Bar Baz',
+                                        ),
+                                    ),
+                                ),
+                            ),
+                            array(
+                                'flags' => array(
+                                    'priority' => 10,
+                                ),
+                                'spec' => array(
+                                    'name'       => 'bat',
+                                    'attributes' => array(
+                                        'type' => 'textarea',
+                                        'content' => 'Type here...',
+                                    ),
+                                ),
+                            ),
+                        ),
+                    )
+                )
+            )
+        ));
+        $this->assertInstanceOf('Zend\Form\FieldsetInterface', $masterFieldset);
+        $fieldsets = $masterFieldset->getFieldsets();
+        $this->assertEquals(1, count($fieldsets));
+        $this->assertTrue($masterFieldset->has('bar'));
+
+        $fieldset = $masterFieldset->get('bar');
+        $this->assertInstanceOf('Zend\Form\FieldsetInterface', $fieldset);
+
+        $element = $fieldset->get('bar');
+        $this->assertEquals('text', $element->getAttribute('type'));
+
+        $element = $fieldset->get('baz');
+        $this->assertEquals('radio', $element->getAttribute('type'));
+        $this->assertEquals(array(
+            'foo' => 'Foo Bar',
+            'bar' => 'Bar Baz',
+        ), $element->getAttribute('options'));
+
+        $element = $fieldset->get('bat');
+        $this->assertEquals('textarea', $element->getAttribute('type'));
+        $this->assertEquals('Type here...', $element->getAttribute('content'));
+        $this->assertEquals('bat', $element->getName());
+
+        // Testing that priority flag is present and works as expected
+        foreach ($fieldset as $element) {
+            $test = $element->getName();
+            break;
+        }
+        $this->assertEquals('bat', $test);
     }
 
     public function testCanCreateForms()

@@ -44,7 +44,19 @@ class FactoryTest extends TestCase
 
     public function testCanCreateElements()
     {
-        $this->markTestIncomplete();
+        $element = $this->factory->createElement(array(
+            'name'       => 'foo',
+            'attributes' => array(
+                'type'         => 'text',
+                'class'        => 'foo-class',
+                'data-js-type' => 'my.form.text',
+            ),
+        ));
+        $this->assertInstanceOf('Zend\Form\ElementInterface', $element);
+        $this->assertEquals('foo', $element->getName());
+        $this->assertEquals('text', $element->getAttribute('type'));
+        $this->assertEquals('foo-class', $element->getAttribute('class'));
+        $this->assertEquals('my.form.text', $element->getAttribute('data-js-type'));
     }
 
     public function testCanCreateFieldsets()

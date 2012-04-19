@@ -66,6 +66,9 @@ class Fieldset extends Element implements FieldsetInterface
 
         if (array_key_exists('name', $flags) && !empty($flags['name'])) {
             $name = $flags['name'];
+
+            // Rename the element or fieldset to the specified alias
+            $elementOrFieldset->setName($name);
         }
         $order = 0;
         if (array_key_exists('priority', $flags)) {

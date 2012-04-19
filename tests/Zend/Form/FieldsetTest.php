@@ -123,11 +123,11 @@ class FieldsetTest extends TestCase
         $this->assertSame($element, $this->fieldset->get('bar'));
     }
 
-    public function testElementRetainsNameEvenWhenProvidedWithAliasWhenAdded()
+    public function testElementNameIsChangedToAliasWhenAdded()
     {
         $element = new Element('foo');
         $this->fieldset->add($element, array('name' => 'bar'));
-        $this->assertEquals('foo', $element->getName());
+        $this->assertEquals('bar', $element->getName());
     }
 
     public function testCannotRetrieveElementByItsNameWhenProvidingAnAliasDuringAddition()

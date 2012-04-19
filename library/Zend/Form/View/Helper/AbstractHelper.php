@@ -27,6 +27,8 @@ use Zend\View\Helper\Doctype;
 use Zend\View\Helper\Escape;
 
 /**
+ * Base functionality for all form view helpers
+ *
  * @category   Zend
  * @package    Zend_Form
  * @subpackage View

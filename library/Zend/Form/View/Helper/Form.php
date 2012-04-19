@@ -23,6 +23,15 @@ namespace Zend\Form\View\Helper;
 
 use Zend\Form\FormInterface;
 
+/**
+ * View helper for rendering Form objects
+ * 
+ * @category   Zend
+ * @package    Zend_Form
+ * @subpackage View
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
 class Form extends AbstractHelper
 {
     /**

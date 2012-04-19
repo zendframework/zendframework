@@ -20,7 +20,7 @@
 
 namespace Zend\View\Exception;
 
-use Zend\View\Exception;
+use Zend\View\Exception\ExceptionInterface;
 
 /**
  * Invalid argument exception
@@ -32,6 +32,6 @@ use Zend\View\Exception;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class InvalidArgumentException extends \InvalidArgumentException
-    implements Exception
+    implements ExceptionInterface
 {
 }

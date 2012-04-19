@@ -261,7 +261,7 @@ class MenuTest extends AbstractTest
         try {
             $this->_helper->render();
             $this->fail('invalid $partial should throw Zend_View_Exception');
-        } catch (\Zend\View\Exception $e) {
+        } catch (\Zend\View\Exception\ExceptionInterface $e) {
         }
     }
 

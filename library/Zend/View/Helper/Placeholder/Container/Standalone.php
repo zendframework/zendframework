@@ -129,7 +129,7 @@ abstract class Standalone
     protected function _escape($string)
     {
         $enc = 'UTF-8';
-        if ($this->view instanceof \Zend\View\Renderer
+        if ($this->view instanceof \Zend\View\Renderer\RendererInterface
             && method_exists($this->view, 'getEncoding')
         ) {
             $enc = $this->view->getEncoding();

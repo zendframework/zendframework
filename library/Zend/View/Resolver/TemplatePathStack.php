@@ -24,8 +24,7 @@ namespace Zend\View\Resolver;
 use SplFileInfo,
     Zend\Stdlib\SplStack,
     Zend\View\Exception,
-    Zend\View\Renderer,
-    Zend\View\Resolver;
+    Zend\View\Renderer\RendererInterface as Renderer;
 
 /**
  * Resolves view scripts based on a stack of paths
@@ -36,7 +35,7 @@ use SplFileInfo,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class TemplatePathStack implements Resolver
+class TemplatePathStack implements ResolverInterface
 {
     const FAILURE_NO_PATHS  = 'TemplatePathStack_Failure_No_Paths';
     const FAILURE_NOT_FOUND = 'TemplatePathStack_Failure_Not_Found';
@@ -100,7 +99,7 @@ class TemplatePathStack implements Resolver
     /**
      * Configure object
      *
-     * @param  array|Traversable $options
+     * @param  array|\Traversable $options
      * @return void
      * @throws Exception\InvalidArgumentException
      */

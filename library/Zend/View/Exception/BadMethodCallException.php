@@ -20,7 +20,7 @@
 
 namespace Zend\View\Exception;
 
-use Zend\View\Exception;
+use Zend\View\Exception\ExceptionInterface;
 
 /**
  * Bad method call exception
@@ -32,6 +32,6 @@ use Zend\View\Exception;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class BadMethodCallException extends \BadMethodCallException
-    implements Exception
+    implements ExceptionInterface
 {
 }

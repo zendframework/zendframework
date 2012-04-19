@@ -14,34 +14,30 @@
  *
  * @category   Zend
  * @package    Zend_View
- * @subpackage Helper
+ * @subpackage Resolver
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\View;
+namespace Zend\View\Resolver;
+
+use Zend\View\Renderer\RendererInterface as Renderer;
 
 /**
  * @category   Zend
  * @package    Zend_View
- * @subpackage Helper
+ * @subpackage Resolver
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Helper
+interface ResolverInterface
 {
     /**
-     * Set the View object
-     *
-     * @param  \Zend\View\Renderer $view
-     * @return \Zend\View\Helper
+     * Resolve a template/pattern name to a resource the renderer can consume
+     * 
+     * @param  string $name 
+     * @param  null|Renderer $renderer 
+     * @return mixed
      */
-    public function setView(Renderer $view);
-
-    /**
-     * Get the View object
-     *
-     * @return \Zend\View\Renderer
-     */
-    public function getView();
+    public function resolve($name, Renderer $renderer = null);
 }

@@ -30,7 +30,7 @@ use Countable,
     Zend\Loader,
     Zend\Json\Json,
     Zend\View\Renderer\PhpRenderer,
-    Zend\View\Renderer as View,
+    Zend\View\Renderer\RendererInterface as View,
     Zend\Stdlib\ArrayUtils,
     Zend\Translator,
     Zend\Validator\Validator;

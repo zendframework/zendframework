@@ -26,7 +26,7 @@ use Zend\EventManager\EventCollection as Events,
     Zend\Filter\Word\CamelCaseToDash as CamelCaseToDashFilter,
     Zend\Mvc\MvcEvent,
     Zend\Mvc\Router\RouteMatch,
-    Zend\View\Model as ViewModel;
+    Zend\View\Model\ModelInterface as ViewModel;
 
 class InjectTemplateListener implements ListenerAggregate
 {

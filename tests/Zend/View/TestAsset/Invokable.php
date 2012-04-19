@@ -2,8 +2,8 @@
 
 namespace ZendTest\View\TestAsset;
 
-use Zend\View\Renderer,
-    Zend\View\Helper;
+use Zend\View\Renderer\RendererInterface as Renderer,
+    Zend\View\Helper\HelperInterface as Helper;
 
 class Invokable implements Helper
 {
@@ -12,8 +12,8 @@ class Invokable implements Helper
     /**
      * Set the View object
      *
-     * @param  \Zend\View\Renderer $view
-     * @return \Zend\View\Helper
+     * @param Renderer $view
+     * @return Helper
      */
     public function setView(Renderer $view)
     {
@@ -23,7 +23,7 @@ class Invokable implements Helper
     /**
      * Get the View object
      *
-     * @return \Zend\View\Renderer
+     * @return Renderer
      */
     public function getView()
     {

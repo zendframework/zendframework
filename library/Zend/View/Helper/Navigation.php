@@ -25,7 +25,7 @@ use Zend\Loader\ShortNameLocator,
     Zend\Loader\PluginClassLoader,
     Zend\Navigation\Container,
     Zend\View\Helper\Navigation\AbstractHelper as AbstractNavigationHelper,
-    Zend\View\Helper\Navigation\Helper as NavigationHelper,
+    Zend\View\Helper\Navigation\HelperInterface as NavigationHelper,
     Zend\View\Exception;
 
 /**
@@ -124,7 +124,7 @@ class Navigation extends AbstractNavigationHelper
      *                                    container
      * @param  array  $arguments          [optional] arguments to pass
      * @return mixed                      returns what the proxied call returns
-     * @throws \Zend\View\Exception        if proxying to a helper, and the
+     * @throws \Zend\View\Exception\ExceptionInterface        if proxying to a helper, and the
      *                                    helper is not an instance of the
      *                                    interface specified in
      *                                    {@link findHelper()}
@@ -146,7 +146,7 @@ class Navigation extends AbstractNavigationHelper
      * Set plugin loader for retrieving navigation helpers
      *
      * @param ShortNameLocator $loader
-     * @return void
+     * @return Navigation
      */
     public function setPluginLoader(ShortNameLocator $loader)
     {
@@ -181,7 +181,7 @@ class Navigation extends AbstractNavigationHelper
      *                                             exceptions should be
      *                                             thrown if something goes
      *                                             wrong. Default is true.
-     * @return \Zend\View\Helper\Navigation\Helper  helper instance
+     * @return \Zend\View\Helper\Navigation\Helper\HelperInterface  helper instance
      * @throws \Zend\Loader\PluginLoader\Exception  if $strict is true and
      *         helper cannot be found
      * @throws Exception\InvalidArgumentException if $strict is true and
@@ -230,7 +230,7 @@ class Navigation extends AbstractNavigationHelper
      * Injects container, ACL, and translator to the given $helper if this
      * helper is configured to do so
      *
-     * @param  \Zend\View\Helper\Navigation\Helper $helper  helper instance
+     * @param  NavigationHelper $helper  helper instance
      * @return void
      */
     protected function _inject(NavigationHelper $helper)
@@ -331,7 +331,7 @@ class Navigation extends AbstractNavigationHelper
      * @param  bool $injectTranslator       [optional] whether translator should
      *                                      be injected when proxying. Default
      *                                      is true.
-     * @return \Zend\View\Helper\Navigation  fluent interface, returns self
+     * @return Navigation  fluent interface, returns self
      */
     public function setInjectTranslator($injectTranslator = true)
     {
@@ -360,7 +360,7 @@ class Navigation extends AbstractNavigationHelper
      *                                               registered in the helper.
      * @return string                                helper output
      * @throws \Zend\Loader\PluginLoader\Exception    if helper cannot be found
-     * @throws \Zend\View\Exception                   if helper doesn't implement
+     * @throws \Zend\View\Exception\ExceptionInterface                   if helper doesn't implement
      *                                               the interface specified in
      *                                               {@link findHelper()}
      */

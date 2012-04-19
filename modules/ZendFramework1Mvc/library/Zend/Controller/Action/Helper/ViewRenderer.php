@@ -51,7 +51,7 @@ use Zend\Filter;
 class ViewRenderer extends AbstractHelper
 {
     /**
-     * @var \Zend\View\Renderer
+     * @var \Zend\View\Renderer\RendererInterface
      */
     public $view;
 
@@ -152,11 +152,11 @@ class ViewRenderer extends AbstractHelper
      *
      * Optionally set view object and options.
      *
-     * @param  \Zend\View\Renderer $view
+     * @param  \Zend\View\Renderer\RendererInterface $view
      * @param  array               $options
      * @return void
      */
-    public function __construct(View\Renderer $view = null, array $options = array())
+    public function __construct(View\Renderer\RendererInterface $view = null, array $options = array())
     {
         if (null !== $view) {
             $this->setView($view);
@@ -174,7 +174,7 @@ class ViewRenderer extends AbstractHelper
      */
     public function __clone()
     {
-        if (isset($this->view) && $this->view instanceof View\Renderer) {
+        if (isset($this->view) && $this->view instanceof View\Renderer\RendererInterface) {
             $this->view = clone $this->view;
 
         }
@@ -183,10 +183,10 @@ class ViewRenderer extends AbstractHelper
     /**
      * Set the view object
      *
-     * @param  \Zend\View\Renderer $view
+     * @param  \Zend\View\Renderer\RendererInterface $view
      * @return \Zend\Controller\Action\Helper\ViewRenderer Provides a fluent interface
      */
-    public function setView(View\Renderer $view)
+    public function setView(View\Renderer\RendererInterface $view)
     {
         $this->view = $view;
         return $this;
@@ -417,7 +417,7 @@ class ViewRenderer extends AbstractHelper
     public function initView($path = null, $prefix = null, array $options = array())
     {
         if (null === $this->view) {
-            $this->setView(new View\PhpRenderer());
+            $this->setView(new View\Renderer\PhpRenderer());
         }
 
         // Reset some flags every time

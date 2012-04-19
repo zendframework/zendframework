@@ -20,7 +20,7 @@
 
 namespace Zend\View\Exception;
 
-use Zend\View\Exception as ViewException;
+use Zend\View\Exception\ExceptionInterface;
 
 /**
  * Invalid helper exception
@@ -31,6 +31,6 @@ use Zend\View\Exception as ViewException;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class InvalidHelperException extends \Exception implements ViewException
+class InvalidHelperException extends \Exception implements ExceptionInterface
 {
 }

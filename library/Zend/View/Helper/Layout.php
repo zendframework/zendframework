@@ -22,7 +22,7 @@
 namespace Zend\View\Helper;
 
 use Zend\View\Exception,
-    Zend\View\Model;
+    Zend\View\Model\ModelInterface as Model;
 
 /**
  * View helper for retrieving layout object

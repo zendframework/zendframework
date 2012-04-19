@@ -27,7 +27,7 @@ use Zend\EventManager\EventCollection,
     Zend\Mvc\Application,
     Zend\Mvc\MvcEvent,
     Zend\Stdlib\ResponseDescription as Response,
-    Zend\View\Model as ViewModel;
+    Zend\View\Model\ModelInterface as ViewModel;
 
 /**
  * @category   Zend

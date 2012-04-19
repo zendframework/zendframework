@@ -24,7 +24,10 @@ use Zend\EventManager\EventCollection,
     Zend\EventManager\EventManager,
     Zend\Mvc\MvcEvent,
     Zend\Stdlib\RequestDescription as Request,
-    Zend\Stdlib\ResponseDescription as Response;
+    Zend\Stdlib\ResponseDescription as Response,
+    Zend\View\Renderer\RendererInterface as Renderer,
+    Zend\View\Model\ModelInterface as Model,
+    Zend\View\Renderer\TreeRendererInterface;
 
 /**
  * @category   Zend
@@ -197,7 +200,7 @@ class View
         // a) the renderer does not implement TreeRendererInterface, or
         // b) it does, but canRenderTrees() returns false
         if ($model->hasChildren()
-            && (!$renderer instanceof Renderer\TreeRendererInterface
+            && (!$renderer instanceof TreeRendererInterface
                 || !$renderer->canRenderTrees())
         ) {
             $this->renderChildren($model);

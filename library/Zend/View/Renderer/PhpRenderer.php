@@ -25,9 +25,10 @@ use ArrayAccess,
     Zend\Loader\Pluggable,
     Zend\View\Exception,
     Zend\View\HelperBroker,
-    Zend\View\Model,
-    Zend\View\Renderer,
-    Zend\View\Resolver,
+    Zend\View\Model\ModelInterface as Model,
+    Zend\View\Resolver\TemplatePathStack,
+    Zend\View\Renderer\RendererInterface as Renderer,
+    Zend\View\Resolver\ResolverInterface as Resolver,
     Zend\View\Variables;
 
 /**
@@ -164,7 +165,7 @@ class PhpRenderer implements Renderer, Pluggable, TreeRendererInterface
     public function resolver($name = null)
     {
         if (null === $this->__templateResolver) {
-            $this->setResolver(new Resolver\TemplatePathStack());
+            $this->setResolver(new TemplatePathStack());
         }
 
         if (null !== $name) {
@@ -294,7 +295,7 @@ class PhpRenderer implements Renderer, Pluggable, TreeRendererInterface
      * Set plugin broker instance
      * 
      * @param  string|HelperBroker $broker 
-     * @return Zend\View\Abstract
+     * @return void
      * @throws Exception\InvalidArgumentException
      */
     public function setBroker($broker)
@@ -369,7 +370,7 @@ class PhpRenderer implements Renderer, Pluggable, TreeRendererInterface
      * Set filter chain
      * 
      * @param  FilterChain $filters 
-     * @return Zend\View\PhpRenderer
+     * @return PhpRenderer
      */
     public function setFilterChain(FilterChain $filters)
     {

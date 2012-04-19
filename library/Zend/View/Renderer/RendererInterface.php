@@ -19,7 +19,10 @@
  * @version    $Id$
  */
 
-namespace Zend\View;
+namespace Zend\View\Renderer;
+
+use Zend\View\Resolver\ResolverInterface as Resolver,
+    Zend\View\Model\ModelInterface as Model;
 
 /**
  * Interface class for Zend_View compatible template engine implementations
@@ -29,7 +32,7 @@ namespace Zend\View;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Renderer
+interface RendererInterface
 {
     /**
      * Return the template engine object, if any
@@ -46,7 +49,7 @@ interface Renderer
      * Set the resolver used to map a template name to a resource the renderer may consume.
      * 
      * @param  Resolver $resolver 
-     * @return Renderer
+     * @return RendererInterface
      */
     public function setResolver(Resolver $resolver);
 

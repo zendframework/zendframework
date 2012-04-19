@@ -21,7 +21,8 @@
 
 namespace Zend\View\Helper;
 
-use Zend\View\Helper;
+use Zend\View\Helper\HelperInterface,
+    Zend\View\Renderer\RendererInterface as Renderer;
 
 /**
  * @uses       \Zend\View\Helper
@@ -31,22 +32,22 @@ use Zend\View\Helper;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class AbstractHelper implements Helper
+abstract class AbstractHelper implements HelperInterface
 {
     /**
      * View object
      *
-     * @var \Zend\View\Renderer
+     * @var Renderer
      */
     protected $view = null;
 
     /**
      * Set the View object
      *
-     * @param  \Zend\View\Renderer $view
-     * @return \Zend\View\Helper\AbstractHelper
+     * @param  Renderer $view
+     * @return AbstractHelper
      */
-    public function setView(\Zend\View\Renderer $view)
+    public function setView(Renderer $view)
     {
         $this->view = $view;
         return $this;
@@ -55,7 +56,7 @@ abstract class AbstractHelper implements Helper
     /**
      * Get the view object
      * 
-     * @return null|AbstractHelper
+     * @return null|Renderer
      */
     public function getView()
     {

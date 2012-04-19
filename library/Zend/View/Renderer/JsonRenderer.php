@@ -26,9 +26,10 @@ use JsonSerializable,
     Zend\Json\Json,
     Zend\Stdlib\ArrayUtils,
     Zend\View\Exception,
-    Zend\View\Model,
-    Zend\View\Renderer,
-    Zend\View\Resolver;
+    Zend\View\Model\ModelInterface as Model,
+    Zend\View\Model\JsonModel,
+    Zend\View\Renderer\RendererInterface as Renderer,
+    Zend\View\Resolver\ResolverInterface as Resolver;
 
 /**
  * JSON renderer
@@ -113,7 +114,7 @@ class JsonRenderer implements Renderer, TreeRendererInterface
         // use case 1: View Models
         // Serialize variables in view model
         if ($nameOrModel instanceof Model) {
-            if ($nameOrModel instanceof Model\JsonModel) {
+            if ($nameOrModel instanceof JsonModel) {
                 $values = $nameOrModel->serialize();
             } else {
                 $values = $this->recurseModel($nameOrModel);

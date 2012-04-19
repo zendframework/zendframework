@@ -28,7 +28,7 @@ use Zend\Config\Config,
     Zend\Filter\Filter,
     Zend\Validator\AbstractValidator,
     Zend\Form\Element\Exception as ElementException,
-    Zend\View\Renderer as View;
+    Zend\View\Renderer\RendererInterface as View;
 
 /**
  * Zend_Form_Element
@@ -214,7 +214,7 @@ class Element implements Validator
     protected $_value;
 
     /**
-     * @var \Zend\View\Renderer
+     * @var \Zend\View\Renderer\RendererInterface
      */
     protected $_view;
 
@@ -1761,7 +1761,7 @@ class Element implements Validator
     /**
      * Set view object
      *
-     * @param  \Zend\View\Renderer $view
+     * @param  View $view
      * @return \Zend\Form\Element
      */
     public function setView(View $view = null)
@@ -1775,7 +1775,7 @@ class Element implements Validator
      *
      * Retrieves from ViewRenderer if none previously set.
      *
-     * @return null|\Zend\View\Renderer
+     * @return null|View
      */
     public function getView()
     {

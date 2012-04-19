@@ -21,6 +21,7 @@
 
 namespace Zend\Form\View\Helper;
 
+use Zend\Form\ElementInterface;
 use Zend\Loader\Pluggable;
 use Zend\View\Helper\AbstractHelper as BaseAbstractHelper;
 use Zend\View\Helper\Doctype;
@@ -109,6 +110,25 @@ abstract class AbstractHelper extends BaseAbstractHelper
             $strings[] = sprintf('%s="%s"', $key, $escape($value));
         }
         return implode(' ', $strings);
+    }
+
+    /**
+     * Get the ID of an element
+     *
+     * If no ID attribute present, attempts to use the name attribute.
+     * If no name attribute is present, either, returns null.
+     * 
+     * @param  ElementInterface $element 
+     * @return null|string
+     */
+    public function getId(ElementInterface $element)
+    {
+        $id = $element->getAttribute('id');
+        if (null !== $id) {
+            return $id;
+        }
+
+        return $element->getName();
     }
 
     /**

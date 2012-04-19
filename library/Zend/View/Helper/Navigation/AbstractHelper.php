@@ -334,7 +334,7 @@ abstract class AbstractHelper extends View\Helper\HtmlElement implements Helper
      * Implements {@link Helper::setRole()}.
      *
      * @param  mixed $role [optional] role to set. Expects a string, an 
-     *                     instance of type {@link Acl\Role}, or null. Default 
+     *                     instance of type {@link Acl\Role\RoleInterface}, or null. Default
      *                     is null, which will set no role.
      * @return AbstractHelper  fluent interface, returns self
      * @throws Exception\InvalidArgumentException if $role is invalid
@@ -342,7 +342,7 @@ abstract class AbstractHelper extends View\Helper\HtmlElement implements Helper
     public function setRole($role = null)
     {
         if (null === $role || is_string($role) ||
-            $role instanceof Acl\Role
+            $role instanceof Acl\Role\RoleInterface
         ) {
             $this->role = $role;
         } else {
@@ -362,7 +362,7 @@ abstract class AbstractHelper extends View\Helper\HtmlElement implements Helper
      *
      * Implements {@link Helper::getRole()}.
      *
-     * @return string|Acl\Role|null  role or null
+     * @return string|Acl\Role\RoleInterface|null  role or null
      */
     public function getRole()
     {
@@ -794,7 +794,7 @@ abstract class AbstractHelper extends View\Helper\HtmlElement implements Helper
      * set later with {@link setRole()}
      *
      * @param  mixed $role [optional] role to set. Expects null, string, or an 
-     *                     instance of {@link Acl\Role}. Default is null, which 
+     *                     instance of {@link Acl\Role\RoleInterface}. Default is null, which
      *                     sets no default role.
      * @return void
      * @throws Exception\InvalidArgumentException if role is invalid
@@ -803,7 +803,7 @@ abstract class AbstractHelper extends View\Helper\HtmlElement implements Helper
     {
         if (null === $role 
             || is_string($role) 
-            || $role instanceof Acl\Role
+            || $role instanceof Acl\Role\RoleInterface
         ) {
             self::$defaultRole = $role;
         } else {

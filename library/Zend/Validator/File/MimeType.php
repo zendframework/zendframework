@@ -24,7 +24,8 @@ use Traversable,
     Zend\Loader,
     Zend\Stdlib\ArrayUtils,
     Zend\Validator\AbstractValidator,
-    Zend\Validator\Exception;
+    Zend\Validator\Exception\ExceptionInterface,
+    Zend\Validator\Exception\InvalidArgumentException;
 
 /**
  * Validator for the mime type of a file
@@ -167,7 +168,7 @@ class MimeType extends AbstractValidator
                         if ($this->options['magicFile'] !== null) {
                             break;
                         }
-                    } catch (Exception $e) {
+                    } catch (ExceptionInterface $e) {
                         // Intentionally, catch and fall through
                     }
                 }
@@ -188,7 +189,7 @@ class MimeType extends AbstractValidator
      * if false, the default MAGIC file from PHP will be used
      *
      * @param  string $file
-     * @throws Exception When finfo can not read the magicfile
+     * @throws InvalidArgumentException When finfo can not read the magicfile
      * @return MimeType Provides fluid interface
      */
     public function setMagicFile($file)
@@ -199,9 +200,9 @@ class MimeType extends AbstractValidator
             $this->options['magicFile'] = null;
         } else if (!(class_exists('finfo', false))) {
             $this->options['magicFile'] = null;
-            throw new Exception\InvalidArgumentException('Magicfile can not be set; there is no finfo extension installed');
+            throw new InvalidArgumentException('Magicfile can not be set; there is no finfo extension installed');
         } else if (!is_file($file) || !is_readable($file)) {
-            throw new Exception\InvalidArgumentException(sprintf(
+            throw new InvalidArgumentException(sprintf(
                 'The given magicfile ("%s") could not be read',
                 $file
             ));
@@ -210,7 +211,7 @@ class MimeType extends AbstractValidator
             $this->finfo = @finfo_open($const, $file);
             if (empty($this->finfo)) {
                 $this->finfo = null;
-                throw new Exception\InvalidArgumentException(sprintf(
+                throw new InvalidArgumentException(sprintf(
                     'The given magicfile ("%s") could not be used by ext/finfo',
                     $file
                 ));

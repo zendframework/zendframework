@@ -23,7 +23,7 @@ namespace Zend\Log\Filter;
 
 use Zend\Log\Exception,
     Zend\Log\Filter,
-    Zend\Validator\Validator as ZendValidator;
+    Zend\Validator\ValidatorInterface as ZendValidator;
 
 /**
  * @category   Zend

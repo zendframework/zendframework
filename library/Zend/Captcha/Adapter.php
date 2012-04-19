@@ -26,14 +26,14 @@ namespace Zend\Captcha;
  *
  * Each specific captcha implementation should implement this interface
  *
- * @uses       Zend\Validator\Validator
+ * @uses       Zend\Validator\ValidatorInterface
  * @category   Zend
  * @package    Zend_Captcha
  * @subpackage Adapter
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Adapter extends \Zend\Validator\Validator
+interface Adapter extends \Zend\Validator\ValidatorInterface
 {
     /**
      * Generate a new captcha

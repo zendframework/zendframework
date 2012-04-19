@@ -2031,9 +2031,9 @@ namespace ZendTest\Filter\TestClasses\Filter
 
 namespace ZendTest\Filter\TestClasses\Validator
 {
-    use Zend\Validator\Validator;
+    use Zend\Validator\ValidatorInterface;
 
-    class Date implements Validator
+    class Date implements ValidatorInterface
     {
         public function isValid($value)
         {

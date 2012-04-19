@@ -30,7 +30,7 @@ use Traversable,
     Zend\Stdlib\ArrayUtils,
     Zend\Translator,
     Zend\Validator\AbstractValidator,
-    Zend\Validator\Validator,
+    Zend\Validator\ValidatorInterface,
     Zend\View\Renderer\PhpRenderer,
     Zend\View\Renderer as View;
 
@@ -46,7 +46,7 @@ use Traversable,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Element implements Validator
+class Element implements ValidatorInterface
 {
     /**
      * Element Constants
@@ -1124,7 +1124,7 @@ class Element implements Validator
      *
      * Note: will overwrite existing validators if they are of the same class.
      *
-     * @param  string|Validator $validator
+     * @param  string|ValidatorInterface $validator
      * @param  bool $breakChainOnFailure
      * @param  array $options
      * @return Element
@@ -1132,7 +1132,7 @@ class Element implements Validator
      */
     public function addValidator($validator, $breakChainOnFailure = false, $options = array())
     {
-        if ($validator instanceof Validator) {
+        if ($validator instanceof ValidatorInterface) {
             $name = get_class($validator);
 
             if (!isset($validator->zfBreakChainOnFailure)) {
@@ -1146,7 +1146,7 @@ class Element implements Validator
                 'options'             => $options,
             );
         } else {
-            throw new ElementException\InvalidArgumentException('Invalid validator provided to addValidator; must be string or Zend\Validator\Validator');
+            throw new ElementException\InvalidArgumentException('Invalid validator provided to addValidator; must be string or Zend\Validator\ValidatorInterface');
         }
 
 
@@ -1256,7 +1256,7 @@ class Element implements Validator
     {
         $validators = array();
         foreach ($this->_validators as $key => $value) {
-            if ($value instanceof Validator) {
+            if ($value instanceof ValidatorInterface) {
                 $validators[$key] = $value;
                 continue;
             }

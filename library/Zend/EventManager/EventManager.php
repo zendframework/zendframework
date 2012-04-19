@@ -108,7 +108,7 @@ class EventManager implements EventCollection, SharedEventCollectionAware
      */
     public function unsetSharedCollections()
     {
-        $this->sharedCollections = null;
+        $this->sharedCollections = false;
     }
 
     /**
@@ -118,6 +118,9 @@ class EventManager implements EventCollection, SharedEventCollectionAware
      */
     public function getSharedCollections()
     {
+        if (null === $this->sharedCollections) {
+            $this->setSharedCollections(StaticEventManager::getInstance());
+        }
         return $this->sharedCollections;
     }
 

@@ -79,4 +79,17 @@ class FormTest extends CommonTestCase
             $this->assertContains(sprintf('%s="%s"', $attribute, $escape($value)), $markup);
         }
     }
+
+    public function testOpenTagUsesNameAsIdIfNoIdAttributePresent()
+    {
+        $form = new Form();
+        $attributes = array(
+            'name'  => 'login-form',
+        );
+        $form->setAttributes($attributes);
+
+        $markup = $this->helper->openTag($form);
+        $this->assertContains('name="login-form"', $markup);
+        $this->assertContains('id="login-form"', $markup);
+    }
 }

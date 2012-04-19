@@ -101,6 +101,8 @@ abstract class AbstractHelper extends BaseAbstractHelper
      */
     public function createAttributesString(array $attributes)
     {
+        $attributes = $this->prepareAttributes($attributes);
+
         $escape  = $this->getEscapeHelper();
         $strings = array();
         foreach ($attributes as $key => $value) {
@@ -151,5 +153,23 @@ abstract class AbstractHelper extends BaseAbstractHelper
         }
 
         return $this->escapeHelper;
+    }
+
+    /**
+     * Prepare attributes for rendering
+     *
+     * Ensures appropriate attributes are present (e.g., if "name" is present, 
+     * but no "id", sets the latter to the former).
+     * 
+     * @param  array $attributes 
+     * @return array
+     */
+    protected function prepareAttributes(array $attributes)
+    {
+        if (isset($attributes['name']) && !isset($attributes['id'])) {
+            $attributes['id'] = $attributes['name'];
+        }
+
+        return $attributes;
     }
 }

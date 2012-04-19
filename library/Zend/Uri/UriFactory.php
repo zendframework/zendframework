@@ -37,7 +37,7 @@ use Zend\Uri\Uri;
  * @uses      \Zend\Uri\Http
  * @uses      \Zend\Uri\File
  * @uses      \Zend\Uri\Mailto
- * @uses      \Zend\Uri\Exception
+ * @uses      \Zend\Uri\Exception\ExceptionInterface
  * @uses      \Zend\Loader
  * @category  Zend
  * @package   Zend_Uri
@@ -61,8 +61,8 @@ abstract class UriFactory
     /**
      * Register a scheme-specific class to be used
      *
-     * @param unknown_type $scheme
-     * @param unknown_type $class
+     * @param string $scheme
+     * @param string $class
      */
     static public function registerScheme($scheme, $class)
     {

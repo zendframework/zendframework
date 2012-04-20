@@ -38,10 +38,12 @@ class HelperLoader extends PluginClassLoader
      * @var array Pre-aliased view helpers
      */
     protected $plugins = array(
-        'form'       => 'Zend\Form\View\Helper\Form',
-        'forminput'  => 'Zend\Form\View\Helper\FormInput',
-        'form_input' => 'Zend\Form\View\Helper\FormInput',
-        'formlabel'  => 'Zend\Form\View\Helper\FormLabel',
-        'form_label' => 'Zend\Form\View\Helper\FormLabel',
+        'form'                => 'Zend\Form\View\Helper\Form',
+        'formelementerrors'   => 'Zend\Form\View\Helper\FormElementErrors',
+        'form_element_errors' => 'Zend\Form\View\Helper\FormElementErrors',
+        'forminput'           => 'Zend\Form\View\Helper\FormInput',
+        'form_input'          => 'Zend\Form\View\Helper\FormInput',
+        'formlabel'           => 'Zend\Form\View\Helper\FormLabel',
+        'form_label'          => 'Zend\Form\View\Helper\FormLabel',
     );
 }

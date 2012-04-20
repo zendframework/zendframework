@@ -404,7 +404,7 @@ class ApplicationTest extends TestCase
         $locator = new TestAsset\Locator();
         $locator->add('locator-aware', function() use ($events) {
             $controller = new TestAsset\LocatorAwareController;
-            $controller->events()->setSharedConnections($events);
+            $controller->events()->setSharedCollections($events);
             return $controller;
         });
         $app->setLocator($locator);
@@ -436,7 +436,7 @@ class ApplicationTest extends TestCase
         $app          = $this->setupActionController();
         $events       = new EventManager();
         $sharedEvents = new SharedEventManager();
-        $events->setSharedConnections($sharedEvents);
+        $events->setSharedCollections($sharedEvents);
         $app->setEventManager($events);
 
         $listener1 = function($e) {

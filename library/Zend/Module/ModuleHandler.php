@@ -45,14 +45,6 @@ interface ModuleHandler extends EventManagerAware
     public function setModules($modules);
 
     /**
-     * Set the event manager instance used by this module manager.
-     *
-     * @param  EventCollection $events
-     * @return ModuleHandler
-     */
-    public function setEventManager(EventCollection $events);
-
-    /**
      * Retrieve the event manager
      *
      * Lazy-loads an EventManager instance if none registered.

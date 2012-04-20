@@ -137,7 +137,7 @@ class RestfulControllerTest extends TestCase
         $events->attach('Zend\Stdlib\Dispatchable', 'dispatch', function($e) use ($response) {
             return $response;
         }, 10);
-        $this->controller->events()->setSharedConnections($events);
+        $this->controller->events()->setSharedCollections($events);
         $result = $this->controller->dispatch($this->request, $this->response);
         $this->assertSame($response, $result);
     }
@@ -150,7 +150,7 @@ class RestfulControllerTest extends TestCase
         $events->attach('Zend\Mvc\Controller\RestfulController', 'dispatch', function($e) use ($response) {
             return $response;
         }, 10);
-        $this->controller->events()->setSharedConnections($events);
+        $this->controller->events()->setSharedCollections($events);
         $result = $this->controller->dispatch($this->request, $this->response);
         $this->assertSame($response, $result);
     }
@@ -163,7 +163,7 @@ class RestfulControllerTest extends TestCase
         $events->attach(get_class($this->controller), 'dispatch', function($e) use ($response) {
             return $response;
         }, 10);
-        $this->controller->events()->setSharedConnections($events);
+        $this->controller->events()->setSharedCollections($events);
         $result = $this->controller->dispatch($this->request, $this->response);
         $this->assertSame($response, $result);
     }

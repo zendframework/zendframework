@@ -65,49 +65,21 @@ abstract class AbstractHelper extends BaseAbstractHelper
     protected $escapeHelper;
 
     /**
-     * Valid attributes for form markup
+     * Attributes globally valid for all tags
      * 
      * @var array
      */
-    protected $validAttributes = array(
-        'accept'             => true,
-        'accept-charset'     => true,
+    protected $validGlobalAttributes = array(
         'accesskey'          => true,
-        'action'             => true,
-        'alt'                => true,
-        'autocomplete'       => true,
-        'autofocus'          => true,
-        'checked'            => true,
         'class'              => true,
-        'cols'               => true,
         'contenteditable'    => true,
         'contextmenu'        => true,
         'dir'                => true,
-        'dirname'            => true,
-        'disabled'           => true,
         'draggable'          => true,
         'dropzone'           => true,
-        'enctype'            => true,
-        'for'                => true,
-        'form'               => true,
-        'formaction'         => true,
-        'formenctype'        => true,
-        'formmethod'         => true,
-        'formnovalidate'     => true,
-        'formtarget'         => true,
-        'height'             => true,
         'hidden'             => true,
         'id'                 => true,
-        'label'              => true,
         'lang'               => true,
-        'list'               => true,
-        'max'                => true,
-        'maxlength'          => true,
-        'method'             => true,
-        'min'                => true,
-        'multiple'           => true,
-        'name'               => true,
-        'novalidate'         => true,
         'onabort'            => true,
         'onblur'             => true,
         'oncanplay'          => true,
@@ -161,27 +133,23 @@ abstract class AbstractHelper extends BaseAbstractHelper
         'ontimeupdate'       => true,
         'onvolumechange'     => true,
         'onwaiting'          => true,
-        'pattern'            => true,
-        'placeholder'        => true,
-        'readonly'           => true,
-        'required'           => true,
-        'rows'               => true,
-        'selected'           => true,
-        'size'               => true,
         'spellcheck'         => true,
-        'src'                => true,
-        'step'               => true,
         'style'              => true,
         'tabindex'           => true,
-        'target'             => true,
         'title'              => true,
-        'type'               => true,
-        'value'              => true,
-        'width'              => true,
-        'wrap'               => true,
         'xml:base'           => true,
         'xml:lang'           => true,
         'xml:space'          => true,
+    );
+
+    /**
+     * Attributes valid for the tag represented by this helper
+     *
+     * This should be overridden in extending classes
+     * 
+     * @var array
+     */
+    protected $validTagAttributes = array(
     );
 
     /**
@@ -347,45 +315,41 @@ abstract class AbstractHelper extends BaseAbstractHelper
         foreach ($attributes as $key => $value) {
             $attribute = strtolower($key);
 
-            if (isset($this->validAttributes[$attribute])) {
-                if ($attribute != $key) {
-                    unset($attributes[$key]);
-                }
-                $attributes[$attribute] = $this->prepareAttributeValue($attribute, $value);
+            if (!isset($this->validGlobalAttributes[$attribute])
+                && !isset($this->validTagAttributes[$attribute])
+                && 'data-' != substr($attribute, 0, 5)
+            ) {
+                // Invalid attribute for the current tag
+                unset($attributes[$key]);
                 continue;
             }
 
-            // data-* attributes are also allowed
-            if ('data-' == substr($attribute, 0, 5)) {
-                if ($attribute != $key) {
-                    unset($attributes[$key]);
-                    $attributes[$attribute] = $value;
-                }
-                continue;
+            // Normalize attribute key, if needed
+            if ($attribute != $key) {
+                unset($attributes[$key]);
+                $attributes[$attribute] = $value;
             }
 
-            unset($attributes[$key]);
+            // Normalize boolean attribute values
+            if (isset($this->booleanAttributes[$attribute])) {
+                $attributes[$attribute] = $this->prepareBooleanAttributeValue($attribute, $value);
+            }
         }
 
         return $attributes;
     }
 
     /**
-     * Prepare an attribute value
+     * Prepare a boolean attribute value
      *
-     * Determines if we have a boolean attribute value, and, if so, prepares
-     * the expected representation.
+     * Prepares the expected representation for the boolean attribute specified.
      * 
      * @param  string $attribute 
      * @param  mixed $value 
      * @return string
      */
-    protected function prepareAttributeValue($attribute, $value)
+    protected function prepareBooleanAttributeValue($attribute, $value)
     {
-        if (!isset($this->booleanAttributes[$attribute])) {
-            return $value;
-        }
-
         $value = (bool) $value;
         return ($value 
             ? $this->booleanAttributes[$attribute]['on']

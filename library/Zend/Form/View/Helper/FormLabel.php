@@ -37,6 +37,16 @@ class FormLabel extends AbstractHelper
     const PREPEND = 'prepend';
 
     /**
+     * Attributes valid for the label tag
+     *
+     * @var array
+     */
+    protected $validTagAttributes = array(
+        'for'  => true,
+        'form' => true,
+    );
+
+    /**
      * Generate an opening label tag
      * 
      * @param  null|array|ElementInterface $attributesOrElement 

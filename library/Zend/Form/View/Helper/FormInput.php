@@ -34,6 +34,44 @@ use Zend\Form\Exception;
 class FormInput extends AbstractHelper
 {
     /**
+     * Attributes valid for the input tag
+     *
+     * @var array
+     */
+    protected $validTagAttributes = array(
+        'name'           => true,
+        'accept'         => true,
+        'alt'            => true,
+        'autocomplete'   => true,
+        'autofocus'      => true,
+        'checked'        => true,
+        'dirname'        => true,
+        'disabled'       => true,
+        'form'           => true,
+        'formaction'     => true,
+        'formenctype'    => true,
+        'formmethod'     => true,
+        'formnovalidate' => true,
+        'formtarget'     => true,
+        'height'         => true,
+        'list'           => true,
+        'max'            => true,
+        'maxlength'      => true,
+        'min'            => true,
+        'multiple'       => true,
+        'pattern'        => true,
+        'placeholder'    => true,
+        'readonly'       => true,
+        'required'       => true,
+        'size'           => true,
+        'src'            => true,
+        'step'           => true,
+        'type'           => true,
+        'value'          => true,
+        'width'          => true,
+    );
+
+    /**
      * Valid values for the input type
      * 
      * @var array

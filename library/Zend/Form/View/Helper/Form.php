@@ -35,6 +35,22 @@ use Zend\Form\FormInterface;
 class Form extends AbstractHelper
 {
     /**
+     * Attributes valid for this tag (form)
+     * 
+     * @var array
+     */
+    protected $validTagAttributes = array(
+        'accept-charset' => true,
+        'action'         => true,
+        'autocomplete'   => true,
+        'enctype'        => true,
+        'method'         => true,
+        'name'           => true,
+        'novalidate'     => true,
+        'target'         => true,
+    );
+
+    /**
      * Invoke as function
      * 
      * @return Form

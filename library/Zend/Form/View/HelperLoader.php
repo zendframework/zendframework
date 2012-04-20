@@ -45,5 +45,7 @@ class HelperLoader extends PluginClassLoader
         'form_input'          => 'Zend\Form\View\Helper\FormInput',
         'formlabel'           => 'Zend\Form\View\Helper\FormLabel',
         'form_label'          => 'Zend\Form\View\Helper\FormLabel',
+        'formtextarea'        => 'Zend\Form\View\Helper\FormTextarea',
+        'form_textarea'       => 'Zend\Form\View\Helper\FormTextarea',
     );
 }

@@ -38,7 +38,7 @@ use Zend\Stdlib\CallbackHandler,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class EventManager implements EventCollection
+class EventManager implements EventCollection, SharedEventCollectionAware
 {
     /**
      * Subscribed events and their listeners
@@ -52,22 +52,22 @@ class EventManager implements EventCollection
     protected $eventClass = 'Zend\EventManager\Event';
 
     /**
-     * Identifiers, used to pull static signals from StaticEventManager
+     * Identifiers, used to pull shared signals from SharedEventCollection instance
      * @var array
      */
     protected $identifiers = array();
 
     /**
-     * Static connections
-     * @var false|null|StaticEventCollection
+     * Shared connections
+     * @var false|null|SharedEventCollection
      */
-    protected $staticConnections = null;
+    protected $sharedCollections = null;
 
     /**
      * Constructor
      *
      * Allows optionally specifying identifier(s) to use to pull signals from a
-     * StaticEventManager.
+     * SharedEventCollection.
      *
      * @param  null|string|int|array|Traversable $identifiers
      * @return void
@@ -90,32 +90,38 @@ class EventManager implements EventCollection
     }
 
     /**
-     * Set static connections container
+     * Set shared collections container
      *
-     * @param  null|StaticEventCollection $connections
+     * @param  SharedEventCollection $connections
      * @return void
      */
-    public function setStaticConnections(StaticEventCollection $connections = null)
+    public function setSharedCollections(SharedEventCollection $sharedEventCollection)
     {
-        if (null === $connections) {
-            $this->staticConnections = false;
-        } else {
-            $this->staticConnections = $connections;
-        }
+        $this->sharedCollections = $sharedEventCollection;
         return $this;
     }
 
     /**
-     * Get static connections container
-     *
-     * @return false|StaticEventCollection
+     * Remove any shared collections
+     * 
+     * @return void
      */
-    public function getStaticConnections()
+    public function unsetSharedCollections()
     {
-        if (null === $this->staticConnections) {
-            $this->setStaticConnections(StaticEventManager::getInstance());
+        $this->sharedCollections = false;
+    }
+
+    /**
+     * Get shared collections container
+     *
+     * @return false|SharedEventCollection
+     */
+    public function getSharedCollections()
+    {
+        if (null === $this->sharedCollections) {
+            $this->setSharedCollections(StaticEventManager::getInstance());
         }
-        return $this->staticConnections;
+        return $this->sharedCollections;
     }
 
     /**
@@ -429,20 +435,20 @@ class EventManager implements EventCollection
         $responses = new ResponseCollection;
         $listeners = $this->getListeners($event);
 
-        // Add static/wildcard listeners to the list of listeners,
+        // Add shared/wildcard listeners to the list of listeners,
         // but don't modify the listeners object
-        $staticListeners         = $this->getStaticListeners($event);
-        $staticWildcardListeners = $this->getStaticListeners('*');
+        $sharedListeners         = $this->getSharedListeners($event);
+        $sharedWildcardListeners = $this->getSharedListeners('*');
         $wildcardListeners       = $this->getListeners('*');
-        if (count($staticListeners) || count($staticWildcardListeners) || count($wildcardListeners)) {
+        if (count($sharedListeners) || count($sharedWildcardListeners) || count($wildcardListeners)) {
             $listeners = clone $listeners;
         }
 
-        // Static listeners on this specific event
-        $this->insertListeners($listeners, $staticListeners);
+        // Shared listeners on this specific event
+        $this->insertListeners($listeners, $sharedListeners);
 
-        // Static wildcard listeners
-        $this->insertListeners($listeners, $staticWildcardListeners);
+        // Shared wildcard listeners
+        $this->insertListeners($listeners, $sharedWildcardListeners);
 
         // Add wildcard listeners
         $this->insertListeners($listeners, $wildcardListeners);
@@ -474,23 +480,23 @@ class EventManager implements EventCollection
     }
 
     /**
-     * Get list of all listeners attached to the static collection for
+     * Get list of all listeners attached to the shared collection for
      * identifiers registered by this instance
      *
      * @param  string $event
      * @return array
      */
-    protected function getStaticListeners($event)
+    protected function getSharedListeners($event)
     {
-        if (!$staticConnections = $this->getStaticConnections()) {
+        if (!$sharedCollections = $this->getSharedCollections()) {
             return array();
         }
 
         $identifiers     = $this->getIdentifiers();
-        $staticListeners = array();
+        $sharedListeners = array();
 
         foreach ($identifiers as $id) {
-            if (!$listeners = $staticConnections->getListeners($id, $event)) {
+            if (!$listeners = $sharedCollections->getListeners($id, $event)) {
                 continue;
             }
 
@@ -502,17 +508,17 @@ class EventManager implements EventCollection
                 if (!$listener instanceof CallbackHandler) {
                     continue;
                 }
-                $staticListeners[] = $listener;
+                $sharedListeners[] = $listener;
             }
         }
 
-        return $staticListeners;
+        return $sharedListeners;
     }
 
     /**
      * Add listeners to the master queue of listeners
      *
-     * Used to inject static listeners and wildcard listeners.
+     * Used to inject shared listeners and wildcard listeners.
      * 
      * @param  PriorityQueue $masterListeners 
      * @param  PriorityQueue $listeners 

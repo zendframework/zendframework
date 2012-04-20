@@ -232,16 +232,16 @@ class FormInputTest extends CommonTestCase
             'accept'             => 'value',
             'accesskey'          => 'value',
             'alt'                => 'value',
-            'autocomplete'       => 'value',
-            'autofocus'          => 'value',
-            'checked'            => 'value',
+            'autocomplete'       => 'on',
+            'autofocus'          => 'autofocus',
+            'checked'            => 'checked',
             'class'              => 'value',
             'cols'               => 'value',
             'contenteditable'    => 'value',
             'contextmenu'        => 'value',
             'dir'                => 'value',
             'dirname'            => 'value',
-            'disabled'           => 'value',
+            'disabled'           => 'disabled',
             'draggable'          => 'value',
             'dropzone'           => 'value',
             'form'               => 'value',
@@ -259,7 +259,7 @@ class FormInputTest extends CommonTestCase
             'max'                => 'value',
             'maxlength'          => 'value',
             'min'                => 'value',
-            'multiple'           => 'value',
+            'multiple'           => 'multiple',
             'name'               => 'value',
             'onabort'            => 'value',
             'onblur'             => 'value',
@@ -316,10 +316,10 @@ class FormInputTest extends CommonTestCase
             'onwaiting'          => 'value',
             'pattern'            => 'value',
             'placeholder'        => 'value',
-            'readonly'           => 'value',
-            'required'           => 'value',
+            'readonly'           => 'readonly',
+            'required'           => 'required',
             'rows'               => 'value',
-            'selected'           => 'value',
+            'selected'           => 'selected',
             'size'               => 'value',
             'spellcheck'         => 'value',
             'src'                => 'value',
@@ -347,9 +347,9 @@ class FormInputTest extends CommonTestCase
      */
     public function testAllValidFormMarkupAttributesPresentInElementAreRendered($attribute, $assertion)
     {
-        $element = $this->getElement();
+        $element = $this->getCompleteElement();
         $markup  = $this->helper->render($element);
-        $expect  = sprintf('%s="value"', $attribute);
+        $expect  = sprintf('%s="%s"', $attribute, $element->getAttribute($attribute));
         $this->$assertion($expect, $markup);
     }
 
@@ -360,7 +360,6 @@ class FormInputTest extends CommonTestCase
             array('HTML4_LOOSE'),
             array('HTML4_FRAMESET'),
             array('HTML5'),
-            array('CUSTOM'),
         );
     }
 
@@ -370,7 +369,7 @@ class FormInputTest extends CommonTestCase
     public function testRenderingOmitsClosingSlashWhenDoctypeIsNotXhtml($doctype)
     {
         $element = new Element('foo');
-        $this->helper->setDoctype($doctype);
+        $this->renderer->doctype($doctype);
         $markup = $this->helper->render($element);
         $this->assertNotContains('/>', $markup);
     }
@@ -385,7 +384,6 @@ class FormInputTest extends CommonTestCase
             array('XHTML1_FRAMESET'),
             array('XHTML_BASIC1'),
             array('XHTML5'),
-            array('CUSTOM_XHTML'),
         );
     }
 
@@ -395,7 +393,7 @@ class FormInputTest extends CommonTestCase
     public function testRenderingIncludesClosingSlashWhenDoctypeIsXhtml($doctype)
     {
         $element = new Element('foo');
-        $this->helper->setDoctype($doctype);
+        $this->renderer->doctype($doctype);
         $markup = $this->helper->render($element);
         $this->assertContains('/>', $markup);
     }

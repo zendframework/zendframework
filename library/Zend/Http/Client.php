@@ -485,7 +485,7 @@ class Client implements Dispatchable
         } elseif ($cookie instanceof SetCookie) {
             $this->cookies[$this->getCookieId($cookie)] = $cookie;
         } elseif (is_string($cookie) && $value !== null) {
-            $setCookie = new SetCookie($cookie, $value, $domain, $expire, $path, $secure, $httponly);
+            $setCookie = new SetCookie($cookie, $value, null, null, $domain, $expire, $path, $secure, $httponly);
             $this->cookies[$this->getCookieId($setCookie)] = $setCookie;
         } else {
             throw new Exception\InvalidArgumentException('Invalid parameter type passed as Cookie');

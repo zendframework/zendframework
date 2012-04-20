@@ -105,7 +105,7 @@ class RuntimeDefinition implements Definition
      */
     public function getClassSupertypes($class)
     {
-        if (!array_key_exists($class, $this->classes[$class])) {
+        if (!array_key_exists($class, $this->classes)) {
             $this->processClass($class);
         }
         return $this->classes[$class]['supertypes'];

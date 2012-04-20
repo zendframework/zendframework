@@ -10,6 +10,8 @@ MUST HAVE for BETA4
 * formInput(ElementInterface $element)
   * this would look for a "type", and default to "text" if not found
 * Normalization of common attributes (also, limit attributes to these?)
+  * name
+  * id
   * autocomplete ("on" or "off")
   * autofocus ("autofocus" or "")
   * disabled ("disabled" or "")
@@ -70,7 +72,7 @@ WISH LIST
     * allows `#[0-9a-fA-F]{6}`
   * formDate(ElementInterface $element)
     * min/max/value must be RFC3339 date (Y-m-d)
-    * allows setep (positive integer)
+    * allows step (positive integer)
   * formDatetime(ElementInterface $element)
     * min/max/value must follow RFC3339, and T and Z (if used) in format MUST be uppercase
     * allows step (positive float)

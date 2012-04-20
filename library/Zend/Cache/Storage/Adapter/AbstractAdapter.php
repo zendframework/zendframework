@@ -33,7 +33,8 @@ use ArrayObject,
     Zend\Cache\Storage\PostEvent,
     Zend\Cache\Storage\Plugin,
     Zend\EventManager\EventCollection,
-    Zend\EventManager\EventManager;
+    Zend\EventManager\EventManager,
+    Zend\EventManager\EventManagerAware;
 
 /**
  * @category   Zend
@@ -42,7 +43,7 @@ use ArrayObject,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class AbstractAdapter implements Adapter
+abstract class AbstractAdapter implements Adapter, EventManagerAware
 {
     /**
      * The used EventManager if any

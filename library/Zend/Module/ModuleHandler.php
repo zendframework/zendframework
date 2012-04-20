@@ -2,9 +2,9 @@
 
 namespace Zend\Module;
 
-use Zend\EventManager\EventCollection;
+use Zend\EventManager\EventManagerAware;
 
-interface ModuleHandler
+interface ModuleHandler extends EventManagerAware
 {
     /**
      * Load the provided modules.
@@ -43,14 +43,6 @@ interface ModuleHandler
      * @return ModuleHandler
      */
     public function setModules($modules);
-
-    /**
-     * Set the event manager instance used by this module manager.
-     *
-     * @param  EventCollection $events
-     * @return ModuleHandler
-     */
-    public function setEventManager(EventCollection $events);
 
     /**
      * Retrieve the event manager

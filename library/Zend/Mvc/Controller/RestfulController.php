@@ -6,6 +6,7 @@ use Zend\Di\Locator,
     Zend\EventManager\EventCollection,
     Zend\EventManager\EventDescription as Event,
     Zend\EventManager\EventManager,
+    Zend\EventManager\EventManagerAware,
     Zend\Http\Request as HttpRequest,
     Zend\Http\PhpEnvironment\Response as HttpResponse,
     Zend\Loader\Broker,
@@ -21,7 +22,7 @@ use Zend\Di\Locator,
 /**
  * Abstract RESTful controller
  */
-abstract class RestfulController implements Dispatchable, InjectApplicationEvent, LocatorAware, Pluggable
+abstract class RestfulController implements Dispatchable, EventManagerAware, InjectApplicationEvent, LocatorAware, Pluggable
 {
     protected $broker;
     protected $request;

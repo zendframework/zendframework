@@ -18,12 +18,12 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\XmlRpc;
+namespace Zend\XmlRpc\Generator;
 
 /**
  * XML generator adapter interface
  */
-interface Generator
+interface GeneratorInterface
 {
     public function getEncoding();
     public function setEncoding($encoding);

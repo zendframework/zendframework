@@ -50,6 +50,15 @@ class AuthenticationServiceTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($storage instanceof Auth\Storage\Session);
     }
 
+    public function testAdapter()
+    {
+        $this->assertNull($this->auth->getAdapter());
+        $successAdapter = new TestAsset\SuccessAdapter();
+        $ret = $this->auth->setAdapter($successAdapter);
+        $this->assertSame($ret, $this->auth);
+        $this->assertSame($successAdapter, $this->auth->getAdapter());
+    }
+
     /**
      * Ensures expected behavior for successful authentication
      *
@@ -57,7 +66,15 @@ class AuthenticationServiceTest extends \PHPUnit_Framework_TestCase
      */
     public function testAuthenticate()
     {
-        $result = $this->_authenticate();
+        $result = $this->authenticate();
+        $this->assertTrue($result instanceof Auth\Result);
+        $this->assertTrue($this->auth->hasIdentity());
+        $this->assertEquals('someIdentity', $this->auth->getIdentity());
+    }
+
+    public function testAuthenticateSetAdapter()
+    {
+        $result = $this->authenticate(new TestAsset\SuccessAdapter());
         $this->assertTrue($result instanceof Auth\Result);
         $this->assertTrue($this->auth->hasIdentity());
         $this->assertEquals('someIdentity', $this->auth->getIdentity());
@@ -70,14 +87,17 @@ class AuthenticationServiceTest extends \PHPUnit_Framework_TestCase
      */
     public function testClearIdentity()
     {
-        $this->_authenticate();
+        $this->authenticate();
         $this->auth->clearIdentity();
         $this->assertFalse($this->auth->hasIdentity());
         $this->assertEquals(null, $this->auth->getIdentity());
     }
 
-    protected function _authenticate()
+    protected function authenticate($adapter = null)
     {
-        return $this->auth->authenticate(new TestAsset\SuccessAdapter());
+        if ($adapter === null) {
+            $adapter = new TestAsset\SuccessAdapter();
+        }
+        return $this->auth->authenticate($adapter);
     }
 }

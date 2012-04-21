@@ -20,8 +20,6 @@
 
 namespace Zend\Cache\Exception;
 
-use Zend\Cache\Exception\ExceptionInterface;
-
 /**
  * @category   Zend
  * @package    Zend_Cache

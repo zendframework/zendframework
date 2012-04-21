@@ -20,7 +20,7 @@
  */
 
 namespace Zend\Mime\Exception;
-use Zend\Mime\Exception;
+use Zend\Mime\Exception\ExceptionInterface;
 
 /**
  * Exception for Zend_Mime component.
@@ -33,6 +33,6 @@ use Zend\Mime\Exception;
  */
 class RuntimeException
     extends \RuntimeException
-    implements Exception
+    implements ExceptionInterface
 {
 }

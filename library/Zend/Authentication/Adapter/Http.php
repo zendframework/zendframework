@@ -21,7 +21,7 @@
 
 namespace Zend\Authentication\Adapter;
 
-use Zend\Authentication\Adapter as AuthenticationAdapter,
+use Zend\Authentication\Adapter\AdapterInterface as AuthenticationAdapter,
     Zend\Authentication,
     Zend\Http\Request as HTTPRequest,
     Zend\Http\Response as HTTPResponse,
@@ -32,8 +32,6 @@ use Zend\Authentication\Adapter as AuthenticationAdapter,
  *
  * Implements a pretty good chunk of RFC 2617.
  *
- * @uses       Zend\Authentication\Exception
- * @uses       Zend\Authentication\Adapter
  * @category   Zend
  * @package    Zend_Authentication
  * @subpackage Adapter_Http
@@ -244,10 +242,10 @@ class Http implements AuthenticationAdapter
     /**
      * Setter for the _basicResolver property
      *
-     * @param  Zend\Authentication\Adapter\Http\Resolver $resolver
+     * @param  Zend\Authentication\Adapter\Http\ResolverInterface $resolver
      * @return Zend\Authentication\Adapter\Http Provides a fluent interface
      */
-    public function setBasicResolver(Http\Resolver $resolver)
+    public function setBasicResolver(Http\ResolverInterface $resolver)
     {
         $this->_basicResolver = $resolver;
 
@@ -257,7 +255,7 @@ class Http implements AuthenticationAdapter
     /**
      * Getter for the _basicResolver property
      *
-     * @return Zend\Authentication\Adapter\Http\Resolver
+     * @return Zend\Authentication\Adapter\Http\ResolverInterface
      */
     public function getBasicResolver()
     {
@@ -267,10 +265,10 @@ class Http implements AuthenticationAdapter
     /**
      * Setter for the _digestResolver property
      *
-     * @param  Zend\Authentication\Adapter\Http\Resolver $resolver
+     * @param  Zend\Authentication\Adapter\Http\ResolverInterface $resolver
      * @return Zend\Authentication\Adapter\Http Provides a fluent interface
      */
-    public function setDigestResolver(Http\Resolver $resolver)
+    public function setDigestResolver(Http\ResolverInterface $resolver)
     {
         $this->_digestResolver = $resolver;
 
@@ -280,7 +278,7 @@ class Http implements AuthenticationAdapter
     /**
      * Getter for the _digestResolver property
      *
-     * @return Zend\Authentication\Adapter\Http\Resolver
+     * @return Zend\Authentication\Adapter\Http\ResolverInterface
      */
     public function getDigestResolver()
     {
@@ -467,7 +465,7 @@ class Http implements AuthenticationAdapter
      * Basic Authentication
      *
      * @param  string $header Client's Authorization header
-     * @throws Zend\Authentication\UnexpectedValueException
+     * @throws Zend\Authentication\Exception\ExceptionInterface
      * @return Zend\Authentication\Result
      */
     protected function _basicAuth($header)
@@ -514,7 +512,7 @@ class Http implements AuthenticationAdapter
      * Digest Authentication
      *
      * @param  string $header Client's Authorization header
-     * @throws Zend\Authentication\Adapter\Exception\UnexpectedValueException
+     * @throws Zend\Authentication\Adapter\Exception\ExceptionInterface
      * @return Zend\Authentication\Result Valid auth result only on successful auth
      */
     protected function _digestAuth($header)

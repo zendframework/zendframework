@@ -20,7 +20,7 @@
  */
 
 namespace Zend\Authentication\Adapter;
-use Zend\Authentication\Adapter as AuthenticationAdapter,
+use Zend\Authentication\Adapter\AdapterInterface as AuthenticationAdapter,
     Zend\Authentication\Result as AuthenticationResult,
     Zend\Db\Adapter\Adapter as DbAdapter,
     Zend\Db\Sql\Select as DbSelect,
@@ -352,7 +352,7 @@ class DbTable implements AuthenticationAdapter
      * making sure that this adapter was indeed setup properly with all
      * required pieces of information.
      *
-     * @throws Exception - in the event that setup was not done properly
+     * @throws Exception\ExceptionInterface - in the event that setup was not done properly
      * @return true
      */
     protected function _authenticateSetup()

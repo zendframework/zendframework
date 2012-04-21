@@ -21,7 +21,7 @@
 
 namespace Zend\Authentication\Adapter;
 
-use Zend\Authentication\Adapter as AuthenticationAdapter,
+use Zend\Authentication\Adapter\AdapterInterface as AuthenticationAdapter,
     Zend\Authentication\Result as AuthenticationResult,
     Zend\Ldap as ZendLdap,
     Zend\Ldap\Exception\LdapException;
@@ -237,7 +237,7 @@ class Ldap implements AuthenticationAdapter
      * Authenticate the user
      *
      * @return Zend\Authentication\Result
-     * @throws Zend\Authentication\Adapter\Exception
+     * @throws Zend\Authentication\Adapter\Exception\ExceptionInterface
      */
     public function authenticate()
     {

@@ -60,7 +60,7 @@ class FigletTest extends CommonWordTest
 
     public function testCaptchaAdapterCreated()
     {
-        $this->assertTrue($this->element->getCaptcha() instanceof \Zend\Captcha\Adapter);
+        $this->assertTrue($this->element->getCaptcha() instanceof \Zend\Captcha\Adapter\AdapterInterface);
     }
 
     public function getView()

@@ -20,7 +20,6 @@
  */
 
 namespace Zend\Captcha\Exception;
-use Zend\Captcha\Exception;
 
 /**
  * Exception for Zend_Form component.
@@ -33,6 +32,6 @@ use Zend\Captcha\Exception;
  */
 class ImageNotLoadableException
     extends \RuntimeException
-    implements Exception
+    implements ExceptionInterface
 {
 }

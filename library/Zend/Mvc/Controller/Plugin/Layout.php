@@ -21,7 +21,7 @@
 
 namespace Zend\Mvc\Controller\Plugin;
 
-use Zend\Mvc\InjectApplicationEvent,
+use Zend\Mvc\InjectApplicationEventInterface,
     Zend\Mvc\Exception,
     Zend\Mvc\MvcEvent,
     Zend\View\Model;
@@ -83,8 +83,8 @@ class Layout extends AbstractPlugin
         }
 
         $controller = $this->getController();
-        if (!$controller instanceof InjectApplicationEvent) {
-            throw new Exception\DomainException('Layout plugin requires a controller that implements InjectApplicationEvent');
+        if (!$controller instanceof InjectApplicationEventInterface) {
+            throw new Exception\DomainException('Layout plugin requires a controller that implements InjectApplicationEventInterface');
         }
 
         $event = $controller->getEvent();

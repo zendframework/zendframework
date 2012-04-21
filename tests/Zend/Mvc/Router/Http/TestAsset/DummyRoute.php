@@ -21,7 +21,7 @@
 
 namespace ZendTest\Mvc\Router\Http\TestAsset;
 
-use Zend\Mvc\Router\Http\Route,
+use Zend\Mvc\Router\Http\RouteInterface,
     Zend\Mvc\Router\Http\RouteMatch,
     Zend\Stdlib\RequestDescription as Request;
 
@@ -34,10 +34,10 @@ use Zend\Mvc\Router\Http\Route,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class DummyRoute implements Route
+class DummyRoute implements RouteInterface
 {
     /**
-     * match(): defined by Route interface.
+     * match(): defined by RouteInterface interface.
      *
      * @see    Route::match()
      * @param  Request $request
@@ -50,7 +50,7 @@ class DummyRoute implements Route
     }
 
     /**
-     * assemble(): defined by Route interface.
+     * assemble(): defined by RouteInterface interface.
      *
      * @see    Route::assemble()
      * @param  array $params
@@ -63,7 +63,7 @@ class DummyRoute implements Route
     }
 
     /**
-     * factory(): defined by Route interface
+     * factory(): defined by RouteInterface interface
      * 
      * @param  array|Traversable $options 
      * @return DummyRoute
@@ -74,7 +74,7 @@ class DummyRoute implements Route
     }
     
     /**
-     * getAssembledParams(): defined by Route interface.
+     * getAssembledParams(): defined by RouteInterface interface.
      * 
      * @see    Route::getAssembledParams
      * @return array

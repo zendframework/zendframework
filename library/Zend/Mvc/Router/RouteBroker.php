@@ -26,7 +26,7 @@ use Zend\Loader\Broker,
     Zend\Mvc\Router\Exception;
 
 /**
- * Route broker.
+ * RouteInterface broker.
  *
  * @category   Zend
  * @package    Zend_Mvc_Router
@@ -142,7 +142,7 @@ class RouteBroker implements Broker
      * @see    Broker::load()
      * @param  string $route
      * @param  array  $options
-     * @return Route
+     * @return RouteInterface
      */
     public function load($route, array $options = array())
     {

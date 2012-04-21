@@ -60,7 +60,7 @@ class Mvc extends AbstractPage
     protected $params = array();
 
     /**
-     * Route name to use when assembling URL
+     * RouteInterface name to use when assembling URL
      *
      * @see getHref()
      * @var string
@@ -79,7 +79,7 @@ class Mvc extends AbstractPage
     protected $hrefCache;
 
     /**
-     * Route matches; used for routing parameters and testing validity
+     * RouteInterface matches; used for routing parameters and testing validity
      *
      * @var RouteMatch
      */

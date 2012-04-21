@@ -54,7 +54,7 @@ class ApplicationTest extends TestCase
     {
         $app    = new Application();
         $router = $app->getRouter();
-        $this->assertInstanceOf('Zend\Mvc\Router\RouteStack', $router);
+        $this->assertInstanceOf('Zend\Mvc\Router\RouteStackInterface', $router);
     }
 
     public function testRouterMayBeInjected()

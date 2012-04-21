@@ -7,13 +7,13 @@ use Zend\Di\Locator,
     Zend\Stdlib\RequestDescription as Request,
     Zend\Stdlib\ResponseDescription as Response;
 
-interface AppContext extends EventManagerAware
+interface ApplicationInterface extends EventManagerAware
 {
     /**
      * Set a service locator/DI object
      *
      * @param  Locator $locator 
-     * @return AppContext
+     * @return ApplicationInterface
      */
     public function setLocator(Locator $locator);
 
@@ -21,7 +21,7 @@ interface AppContext extends EventManagerAware
      * Set request object that will be consumed
      * 
      * @param  Request $request 
-     * @return AppContext
+     * @return ApplicationInterface
      */
     public function setRequest(Request $request);
 
@@ -29,7 +29,7 @@ interface AppContext extends EventManagerAware
      * Set response object that will be returned
      * 
      * @param  Response $request 
-     * @return AppContext
+     * @return ApplicationInterface
      */
     public function setResponse(Response $response);
 
@@ -38,10 +38,10 @@ interface AppContext extends EventManagerAware
      *
      * A router should return a metadata object containing a controller key.
      * 
-     * @param  Router\RouteStack $router 
-     * @return AppContext
+     * @param  Router\RouteStackInterface $router
+     * @return ApplicationInterface
      */
-    public function setRouter(Router\RouteStack $router);
+    public function setRouter(Router\RouteStackInterface $router);
 
     /**
      * Get the locator object

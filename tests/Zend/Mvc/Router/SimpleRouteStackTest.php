@@ -96,7 +96,7 @@ class SimpleRouteStackTest extends TestCase
     
     public function testAddRouteWithInvalidArgument()
     {
-        $this->setExpectedException('Zend\Mvc\Router\Exception\InvalidArgumentException', 'Route definition must be an array or Traversable object');
+        $this->setExpectedException('Zend\Mvc\Router\Exception\InvalidArgumentException', 'RouteInterface definition must be an array or Traversable object');
         $stack = new SimpleRouteStack();
         $stack->addRoute('foo', 'bar');
     }
@@ -186,7 +186,7 @@ class SimpleRouteStackTest extends TestCase
     
     public function testAssembleNonExistentRoute()
     {
-        $this->setExpectedException('Zend\Mvc\Router\Exception\RuntimeException', 'Route with name "foo" not found');
+        $this->setExpectedException('Zend\Mvc\Router\Exception\RuntimeException', 'RouteInterface with name "foo" not found');
         $stack = new SimpleRouteStack();
         $stack->assemble(array(), array('name' => 'foo'));
     }

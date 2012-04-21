@@ -41,7 +41,7 @@ class ForwardTest extends TestCase
         $controller = new UneventfulController();
         $plugin     = new ForwardPlugin();
         $plugin->setController($controller);
-        $this->setExpectedException('Zend\Mvc\Exception\DomainException', 'InjectApplicationEvent');
+        $this->setExpectedException('Zend\Mvc\Exception\DomainException', 'InjectApplicationEventInterface');
         $plugin->dispatch('forward');
     }
 
@@ -51,7 +51,7 @@ class ForwardTest extends TestCase
         $controller->setEvent($this->controller->getEvent());
         $plugin     = new ForwardPlugin();
         $plugin->setController($controller);
-        $this->setExpectedException('Zend\Mvc\Exception\DomainException', 'implements LocatorAware');
+        $this->setExpectedException('Zend\Mvc\Exception\DomainException', 'implements LocatorAwareInterface');
         $plugin->dispatch('forward');
     }
 

@@ -20,7 +20,9 @@
 
 namespace Zend\I18n\Translator;
 
-use \Locale;
+use Locale;
+use Zend\Loader\Broker;
+use Zend\Loader\PluginBroker;
 
 /**
  * Translator.
@@ -53,12 +55,12 @@ class Translator
     protected $locale;
     
     /**
-     * Language part of the default locale.
+     * Plugin broker.
      * 
-     * @var string
+     * @var Broker
      */
-    protected $language;
-    
+    protected $pluginBroker;
+        
     /**
      * Set the default locale.
      * 
@@ -67,9 +69,7 @@ class Translator
      */
     public function setLocale($locale)
     {
-        $this->locale   = $locale;
-        $tihs->language = null;
-        
+        $this->locale = $locale;       
         return $this;
     }
     
@@ -88,44 +88,65 @@ class Translator
     }
     
     /**
-     * Get default language.
+     * Retreive or set the plugin broker.
      * 
-     * @return string
+     * @param  Broker $broker
+     * @return Broker
      */
-    public function getLanguage()
+    public function pluginBroker(Broker $broker = null)
     {
-        if ($this->language === null) {
-            $this->language = Locale::getPrimaryLanguage($this->getLocale());
+        if ($broker !== null) {
+            $this->pluginBroker = $broker;
+        } elseif ($this->pluginBroker === null) {
+            $this->pluginBroker = new PluginBroker();
+            $this->pluginBroker->getClassLoader()->registerPlugins(array(
+                'phpArray' => __NAMESPACE__ . '\Loader\PhpArray',
+                'gettext'  => __NAMESPACE__ . '\Loader\Gettext',
+                // And so on …
+            ));
         }
         
-        return $this->language;
+        return $this->pluginBroker;
     }
     
     /**
      * Translate a message.
      * 
-     * @param  string $messageId
+     * @param  string $message
      * @param  string $domain
      * @param  string $locale
      * @return string 
      */
-    public function translate($messageId, $domain = 'default', $locale = null)
+    public function translate($message, $domain = 'default', $locale = null)
     {
-        if ($locale === null) {
-            $language = $this->getLanguage();
-        } else {
-            $language = Locale::getPrimaryLanguage($locale);
+        $locale = ($locale ?: $this->getLocale());
+        
+        if (!isset($this->messages[$domain][$locale])) {
+            $this->loadMessages($domain, $locale);
         }
         
-        if (!isset($this->messages[$language][$domain])) {
-            $this->loadMessages($language, $domain);
+        if (!isset($this->messages[$domain][$locale][$message])) {
+            return $message;
         }
         
-        if (!isset($this->messages[$language][$domain])) {
-            return $messageId;
-        }
+        return $this->messages[$domain][$locale][$message];
+    }
+    
+    /**
+     * Translate a plural message.
+     * 
+     * @param  type $singular
+     * @param  type $plural
+     * @param  type $number
+     * @param  type $domain
+     * @param  type $locale 
+     * @return string
+     */
+    public function translatePlural($singular, $plural, $number, $domain = 'default', $locale = null)
+    {
+        $data = $this->translate($singular, $domain, $locale);
         
-        return $this->messages[$language][$domain];
+        
     }
     
     /**
@@ -133,19 +154,21 @@ class Translator
      * 
      * @param  string $type
      * @param  string $filename
-     * @param  string $locale
      * @param  string $domain
+     * @param  string $locale
      * @return Translator 
      */
-    public function addTranslationFile($type, $filename, $locale, $domain = 'default')
+    public function addTranslationFile($type, $filename, $domain = 'default', $locale = null)
     {
-        $language = Locale::getPrimaryLanguage($locale);
+        $locale = ($locale ?: '*');
         
-        if (!isset($this->files[$language])) {
-            $this->files[$language] = array();
+        if (!isset($this->files[$domain])) {
+            $this->files[$domain] = array();
+        } elseif (!isset($this->files[$domain][$locale])) {
+            $this->files[$domain][$locale] = array();
         }
         
-        $this->files[$language][$domain] = array(
+        $this->files[$domain][$locale][] = array(
             'type'     => $type,
             'filename' => $filename
         );
@@ -156,16 +179,46 @@ class Translator
     /**
      * Load messages for a given language and domain.
      * 
-     * @param  string $language
      * @param  string $domain
+     * @param  string $locale
      * @return void
      */
-    protected function loadMessages($language, $domain)
+    protected function loadMessages($domain, $locale)
     {
-        if (!isset($this->files[$language][$domain])) {
-            return;
+        if (!isset($this->messages[$domain])) {
+            $this->messages[$domain] = array();
+        } elseif (!isset($this->messages[$domain][$locale])) {
+            $this->messages[$domain][$locale] = array();
         }
         
-        
+        foreach (array($locale, '*') as $locale) {
+            if (!isset($this->files[$domain][$locale])) {
+                continue;
+            }
+                       
+            foreach ($this->files[$domain][$locale] as $file) {
+                $data = $this->pluginBroker()->load($file['type'])->load($file['filename']);
+                
+                if ($locale === '*') {
+                    foreach ($data as $messageLocale => $messages) {
+                        if (!isset($this->messages[$domain][$messageLocale])) {
+                            $this->messages[$domain][$messageLocale] = array();
+                        }
+                        
+                        $this->messages[$domain][$messageLocale] = array_replace(
+                            $this->messages[$domain][$messageLocale],
+                            $messages
+                        );
+                    }
+                } else {
+                    $this->messages[$domain][$locale] = array_replace(
+                        $this->messages[$domain][$locale],
+                        $data
+                    );
+                }
+            }
+            
+            unset($this->files[$domain][$locale]);
+        }
     }
 }

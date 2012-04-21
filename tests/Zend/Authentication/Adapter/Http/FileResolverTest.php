@@ -93,7 +93,7 @@ class FileTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetFileInvalid()
     {
-        $this->setExpectedException('Zend\\Authentication\\Adapter\\Http\\Exception', 'Path not readable');
+        $this->setExpectedException('Zend\\Authentication\\Adapter\\Http\\Exception\\ExceptionInterface', 'Path not readable');
         $this->_resolver->setFile($this->_badPath);
     }
 
@@ -115,7 +115,7 @@ class FileTest extends \PHPUnit_Framework_TestCase
      */
     public function testConstructInvalid()
     {
-        $this->setExpectedException('Zend\\Authentication\\Adapter\\Http\\Exception', 'Path not readable');
+        $this->setExpectedException('Zend\\Authentication\\Adapter\\Http\\Exception\\ExceptionInterface', 'Path not readable');
         $v = new Http\FileResolver($this->_badPath);
     }
 
@@ -126,7 +126,7 @@ class FileTest extends \PHPUnit_Framework_TestCase
      */
     public function testResolveUsernameEmpty()
     {
-        $this->setExpectedException('Zend\\Authentication\\Adapter\\Http\\Exception', 'Username is required');
+        $this->setExpectedException('Zend\\Authentication\\Adapter\\Http\\Exception\\ExceptionInterface', 'Username is required');
         $this->_resolver->resolve('', '');
     }
 
@@ -137,7 +137,7 @@ class FileTest extends \PHPUnit_Framework_TestCase
      */
     public function testResolveRealmEmpty()
     {
-        $this->setExpectedException('Zend\\Authentication\\Adapter\\Http\\Exception', 'Realm is required');
+        $this->setExpectedException('Zend\\Authentication\\Adapter\\Http\\Exception\\ExceptionInterface', 'Realm is required');
         $this->_resolver->resolve('username', '');
     }
 
@@ -151,13 +151,13 @@ class FileTest extends \PHPUnit_Framework_TestCase
         try {
             $this->_resolver->resolve('bad:name', 'realm');
             $this->fail('Accepted malformed username with colon');
-        } catch (Http\Exception $e) {
+        } catch (Http\Exception\ExceptionInterface $e) {
             $this->assertContains('Username must consist', $e->getMessage());
         }
         try {
             $this->_resolver->resolve("badname\n", 'realm');
             $this->fail('Accepted malformed username with newline');
-        } catch (Http\Exception $e) {
+        } catch (Http\Exception\ExceptionInterface $e) {
             $this->assertContains('Username must consist', $e->getMessage());
         }
     }
@@ -172,13 +172,13 @@ class FileTest extends \PHPUnit_Framework_TestCase
         try {
             $this->_resolver->resolve('username', 'bad:realm');
             $this->fail('Accepted malformed realm with colon');
-        } catch (Http\Exception $e) {
+        } catch (Http\Exception\ExceptionInterface $e) {
             $this->assertContains('Realm must consist', $e->getMessage());
         }
         try {
             $this->_resolver->resolve('username', "badrealm\n");
             $this->fail('Accepted malformed realm with newline');
-        } catch (Http\Exception $e) {
+        } catch (Http\Exception\ExceptionInterface $e) {
             $this->assertContains('Realm must consist', $e->getMessage());
         }
     }
@@ -194,7 +194,7 @@ class FileTest extends \PHPUnit_Framework_TestCase
             try {
                 $this->_resolver->resolve('username', 'realm');
                 $this->fail('Expected thrown exception upon resolve() after moving valid file');
-            } catch (Http\Exception $e) {
+            } catch (Http\Exception\ExceptionInterface $e) {
                 $this->assertContains('Unable to open password file', $e->getMessage());
             }
             rename("$this->_filesPath/htdigest.3.renamed", "$this->_filesPath/htdigest.3");

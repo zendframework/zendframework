@@ -31,7 +31,7 @@ class AuthenticationService
     /**
      * Persistent storage handler
      *
-     * @var Zend\Authentication\Storage
+     * @var Zend\Authentication\Storage\StorageInterface
      */
     protected $storage = null;
 
@@ -45,10 +45,10 @@ class AuthenticationService
     /**
      * Constructor
      * 
-     * @param  Storage $storage 
+     * @param  Storage\StorageInterface $storage 
      * @return void
      */
-    public function __construct(Storage $storage = null, Adapter $adapter = null)
+    public function __construct(Storage\StorageInterface $storage = null, Adapter\AdapterInterface $adapter = null)
     {
         if (null !== $storage) {
             $this->setStorage($storage);
@@ -87,7 +87,7 @@ class AuthenticationService
      *
      * Session storage is used by default unless a different storage adapter has been set.
      *
-     * @return Zend\Authentication\Storage
+     * @return Zend\Authentication\Storage\StorageInterface
      */
     public function getStorage()
     {
@@ -101,10 +101,10 @@ class AuthenticationService
     /**
      * Sets the persistent storage handler
      *
-     * @param  Zend\Authentication\Storage $storage
+     * @param  Zend\Authentication\Storage\StorageInterface $storage
      * @return Zend\Authentication\AuthenticationService Provides a fluent interface
      */
-    public function setStorage(Storage $storage)
+    public function setStorage(Storage\StorageInterface $storage)
     {
         $this->storage = $storage;
         return $this;
@@ -113,11 +113,11 @@ class AuthenticationService
     /**
      * Authenticates against the supplied adapter
      *
-     * @param  Zend\Authentication\Adapter $adapter
+     * @param  Zend\Authentication\Adapter\AdapterInterface $adapter
      * @return Zend\Authentication\Result
      * @throws Zend\Authentication\Exception\RuntimeException
      */
-    public function authenticate(Adapter $adapter = null)
+    public function authenticate(Adapter\AdapterInterface $adapter = null)
     {
         if (!$adapter) {
             if (!$adapter = $this->getAdapter()) {

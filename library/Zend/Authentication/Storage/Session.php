@@ -21,7 +21,7 @@
 
 namespace Zend\Authentication\Storage;
 
-use Zend\Authentication\Storage as AuthenticationStorage,
+use Zend\Authentication\Storage\StorageInterface as AuthenticationStorage,
     Zend\Session\Container as SessionContainer,
     Zend\Session\Manager as SessionManager;
 

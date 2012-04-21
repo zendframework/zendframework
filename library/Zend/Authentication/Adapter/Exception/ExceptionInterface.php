@@ -14,27 +14,20 @@
  *
  * @category   Zend
  * @package    Zend_Authentication
- * @subpackage Adapter
+ * @subpackage Adapter_Exception
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Authentication;
+namespace Zend\Authentication\Adapter\Exception;
 
 /**
+ * @uses       Zend\Authentication\Exception
  * @category   Zend
  * @package    Zend_Authentication
- * @subpackage Adapter
+ * @subpackage Adapter_Exception
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Adapter
-{
-    /**
-     * Performs an authentication attempt
-     *
-     * @return Zend\Authentication\Result
-     * @throws Zend\Authentication\Adapter\Exception If authentication cannot be performed
-     */
-    public function authenticate();
-}
+interface ExceptionInterface extends \Zend\Authentication\Exception\ExceptionInterface
+{}

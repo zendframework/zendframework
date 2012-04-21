@@ -25,7 +25,6 @@ use Traversable,
     Zend\Barcode\Barcode,
     Zend\Barcode\Exception\ExceptionInterface as BarcodeException,
     Zend\Barcode\Object\ObjectInterface,
-    Zend\Barcode\Renderer\RendererInterface,
     Zend\Stdlib\ArrayUtils;
 
 /**

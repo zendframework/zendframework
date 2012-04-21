@@ -23,7 +23,6 @@ namespace Zend\Barcode\Object;
 
 use Traversable,
     Zend\Barcode,
-    Zend\Barcode\Object\Exception\ExceptionInterface,
     Zend\Validator\Barcode as BarcodeValidator,
     Zend\Stdlib\ArrayUtils;
 
@@ -35,7 +34,7 @@ use Traversable,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class AbstractObject implements Barcode\Object\ObjectInterface
+abstract class AbstractObject implements ObjectInterface
 {
     /**
      * Namespace of the barcode for autoloading

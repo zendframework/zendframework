@@ -21,8 +21,6 @@
 
 namespace Zend\Barcode\Exception;
 
-use Zend\Barcode\Exception\ExceptionInterface;
-
 /**
  * Exception for Zend_Barcode component.
  *

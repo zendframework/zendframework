@@ -19,7 +19,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend;
+namespace ZendTest\Mime;
 use Zend\Mime\Mime;
 use Zend\Mail;
 

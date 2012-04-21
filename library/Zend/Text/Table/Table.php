@@ -21,7 +21,8 @@
 namespace Zend\Text\Table;
 
 use Zend\Config,
-    Zend\Loader\PrefixPathLoader;
+    Zend\Loader\PrefixPathLoader,
+    Zend\Text\Table\Decorator\DecoratorInterface as Decorator;
 
 /**
  * Zend_Text_Table enables developers to create tables out of characters
@@ -44,7 +45,7 @@ class Table
     /**
      * Decorator used for the table borders
      *
-     * @var \Zend\Text\Table\Decorator
+     * @var \Zend\Text\Table\Decorator\DecoratorInterface
      */
     protected $_decorator = null;
 
@@ -215,8 +216,8 @@ class Table
     /**
      * Set decorator
      *
-     * @param  \Zend\Text\Table\Decorator|string $decorator Decorator to use
-     * @return \Zend\Text\Table\Table
+     * @param  Decorator|string $decorator Decorator to use
+     * @return Table
      */
     public function setDecorator($decorator)
     {

@@ -3,6 +3,6 @@ namespace Zend\Text\Table\Exception;
 
 class UnexpectedValueException
     extends \UnexpectedValueException
-    implements \Zend\Text\Exception
+    implements \Zend\Text\Exception\ExceptionInterface
 {
 }

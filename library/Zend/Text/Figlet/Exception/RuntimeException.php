@@ -31,6 +31,6 @@ namespace Zend\Text\Figlet\Exception;
  */
 class RuntimeException 
     extends \RuntimeException
-    implements \Zend\Text\Figlet\Exception
+    implements \Zend\Text\Figlet\Exception\ExceptionInterface
 {
 }

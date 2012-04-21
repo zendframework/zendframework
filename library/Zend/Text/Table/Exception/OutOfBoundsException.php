@@ -3,6 +3,6 @@ namespace Zend\Text\Table\Exception;
 
 class OutOfBoundsException 
     extends \OutOfBoundsException
-    implements \Zend\Text\Exception
+    implements \Zend\Text\Table\Exception\ExceptionInterface
 {
 }

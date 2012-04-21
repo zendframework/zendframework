@@ -20,6 +20,8 @@
 
 namespace Zend\Text\Table;
 
+use Zend\Text\Table\Decorator\DecoratorInterface as Decorator;
+
 /**
  * Row class for Zend_Text_Table
  *
@@ -129,7 +131,7 @@ class Row
      * Render the row
      *
      * @param  array                               $columnWidths Width of all columns
-     * @param  \Zend\Text\Table\Decorator $decorator    Decorator for the row borders
+     * @param  Decorator $decorator    Decorator for the row borders
      * @param  integer                             $padding      Padding for the columns
      * @throws \Zend\Text\Table\Exception\OverflowException When there are too many columns
      * @return string

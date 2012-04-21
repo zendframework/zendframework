@@ -3,7 +3,7 @@
 namespace Zend\Module\Listener;
 
 use Zend\EventManager\ListenerAggregate,
-    Zend\EventManager\EventCollection,
+    Zend\EventManager\EventManagerInterface,
     Zend\Loader\ModuleAutoloader;
 
 class DefaultListenerAggregate extends AbstractListener
@@ -22,10 +22,10 @@ class DefaultListenerAggregate extends AbstractListener
     /**
      * Attach one or more listeners
      *
-     * @param EventCollection $events
+     * @param EventManagerInterface $events
      * @return DefaultListenerAggregate
      */
-    public function attach(EventCollection $events)
+    public function attach(EventManagerInterface $events)
     {
         $options = $this->getOptions();
         $configListener = $this->getConfigListener();
@@ -45,10 +45,10 @@ class DefaultListenerAggregate extends AbstractListener
     /**
      * Detach all previously attached listeners
      *
-     * @param EventCollection $events
+     * @param EventManagerInterface $events
      * @return DefaultListenerAggregate
      */
-    public function detach(EventCollection $events)
+    public function detach(EventManagerInterface $events)
     {
         foreach ($this->listeners as $key => $listener) {
             if ($listener instanceof ListenerAggregate) {

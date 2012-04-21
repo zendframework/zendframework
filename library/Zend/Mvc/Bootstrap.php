@@ -4,7 +4,7 @@ namespace Zend\Mvc;
 use Zend\Di\Configuration as DiConfiguration,
     Zend\Di\Di,
     Zend\Config\Config,
-    Zend\EventManager\EventCollection as Events,
+    Zend\EventManager\EventManagerInterface as Events,
     Zend\EventManager\EventManager,
     Zend\EventManager\EventManagerAware,
     Zend\EventManager\StaticEventManager,
@@ -220,10 +220,10 @@ class Bootstrap implements Bootstrapper, EventManagerAware
             ),
         )), 'instance' => array(
             'preferences' => array(
-                // Use EventManager for EventCollection
-                'Zend\EventManager\EventCollection' => 'Zend\EventManager\EventManager',
-                // Use SharedEventManager for SharedEventCollection
-                'Zend\EventManager\SharedEventCollection' => 'Zend\EventManager\SharedEventManager',
+                // Use EventManager for EventManagerInterface
+                'Zend\EventManager\EventManagerInterface' => 'Zend\EventManager\EventManager',
+                // Use SharedEventManager for SharedEventManagerInterface
+                'Zend\EventManager\SharedEventManagerInterface' => 'Zend\EventManager\SharedEventManager',
             ),
             'Zend\EventManager\EventManager' => array(
                 'shared' => false, // new instance per class needing an instance

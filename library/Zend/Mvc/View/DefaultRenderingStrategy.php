@@ -21,7 +21,7 @@
 
 namespace Zend\Mvc\View;
 
-use Zend\EventManager\EventCollection,
+use Zend\EventManager\EventManagerInterface,
     Zend\EventManager\ListenerAggregate,
     Zend\Mvc\MvcEvent,
     Zend\Stdlib\ResponseDescription as Response,
@@ -69,10 +69,10 @@ class DefaultRenderingStrategy implements ListenerAggregate
     /**
      * Attach the aggregate to the specified event manager
      *
-     * @param  EventCollection $events
+     * @param  EventManagerInterface $events
      * @return void
      */
-    public function attach(EventCollection $events)
+    public function attach(EventManagerInterface $events)
     {
         $this->listeners[] = $events->attach(MvcEvent::EVENT_RENDER, array($this, 'render'), -10000);
     }
@@ -80,10 +80,10 @@ class DefaultRenderingStrategy implements ListenerAggregate
     /**
      * Detach aggregate listeners from the specified event manager
      *
-     * @param  EventCollection $events
+     * @param  EventManagerInterface $events
      * @return void
      */
-    public function detach(EventCollection $events)
+    public function detach(EventManagerInterface $events)
     {
         foreach ($this->listeners as $index => $listener) {
             if ($events->detach($listener)) {

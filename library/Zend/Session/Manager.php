@@ -20,7 +20,7 @@
 
 namespace Zend\Session;
 
-use Zend\EventManager\EventCollection;
+use Zend\EventManager\EventManagerInterface;
 
 /**
  * Session manager interface
@@ -53,7 +53,7 @@ interface Manager
     public function forgetMe();
     public function expireSessionCookie();
 
-    public function setValidatorChain(EventCollection $chain);
+    public function setValidatorChain(EventManagerInterface $chain);
     public function getValidatorChain();
     public function isValid();
 }

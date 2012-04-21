@@ -21,7 +21,7 @@
 
 namespace Zend\Mvc\View;
 
-use Zend\EventManager\EventCollection,
+use Zend\EventManager\EventManagerInterface,
     Zend\EventManager\ListenerAggregate,
     Zend\Http\Response as HttpResponse,
     Zend\Mvc\Application,
@@ -74,10 +74,10 @@ class RouteNotFoundStrategy implements ListenerAggregate
     /**
      * Attach the aggregate to the specified event manager
      *
-     * @param  EventCollection $events
+     * @param  EventManagerInterface $events
      * @return void
      */
-    public function attach(EventCollection $events)
+    public function attach(EventManagerInterface $events)
     {
         $this->listeners[] = $events->attach(MvcEvent::EVENT_DISPATCH, array($this, 'prepareNotFoundViewModel'), -90);
         $this->listeners[] = $events->attach(MvcEvent::EVENT_DISPATCH_ERROR, array($this, 'detectNotFoundError'));
@@ -109,10 +109,10 @@ class RouteNotFoundStrategy implements ListenerAggregate
     /**
      * Detach aggregate listeners from the specified event manager
      *
-     * @param  EventCollection $events
+     * @param  EventManagerInterface $events
      * @return void
      */
-    public function detach(EventCollection $events)
+    public function detach(EventManagerInterface $events)
     {
         foreach ($this->listeners as $index => $listener) {
             if ($events->detach($listener)) {

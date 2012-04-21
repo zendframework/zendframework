@@ -3,8 +3,8 @@
 namespace Zend\Mvc\Controller;
 
 use Zend\Di\Locator,
-    Zend\EventManager\EventCollection,
-    Zend\EventManager\EventDescription as Event,
+    Zend\EventManager\EventManagerInterface,
+    Zend\EventManager\EventInterface as Event,
     Zend\EventManager\EventManager,
     Zend\EventManager\EventManagerAware,
     Zend\Http\Request as HttpRequest,
@@ -215,10 +215,10 @@ abstract class RestfulController implements Dispatchable, EventManagerAware, Inj
     /**
      * Set the event manager instance used by this context
      *
-     * @param  EventCollection $events
+     * @param  EventManagerInterface $events
      * @return AppContext
      */
-    public function setEventManager(EventCollection $events)
+    public function setEventManager(EventManagerInterface $events)
     {
         $this->events = $events;
         return $this;
@@ -229,7 +229,7 @@ abstract class RestfulController implements Dispatchable, EventManagerAware, Inj
      *
      * Lazy-loads an EventManager instance if none registered.
      *
-     * @return EventCollection
+     * @return EventManagerInterface
      */
     public function events()
     {

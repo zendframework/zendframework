@@ -3,7 +3,7 @@
 namespace Zend\Module;
 
 use Traversable,
-    Zend\EventManager\EventCollection,
+    Zend\EventManager\EventManagerInterface,
     Zend\EventManager\EventManager;
 
 class Manager implements ModuleHandler
@@ -14,7 +14,7 @@ class Manager implements ModuleHandler
     protected $loadedModules = array();
 
     /**
-     * @var EventCollection
+     * @var EventManagerInterface
      */
     protected $events;
 
@@ -41,13 +41,13 @@ class Manager implements ModuleHandler
      * __construct
      *
      * @param array|Traversable $modules
-     * @param EventCollection $eventManager
+     * @param EventManagerInterface $eventManager
      * @return void
      */
-    public function __construct($modules, EventCollection $eventManager = null)
+    public function __construct($modules, EventManagerInterface $eventManager = null)
     {
         $this->setModules($modules);
-        if ($eventManager instanceof EventCollection) {
+        if ($eventManager instanceof EventManagerInterface) {
             $this->setEventManager($eventManager);
         }
     }
@@ -198,10 +198,10 @@ class Manager implements ModuleHandler
     /**
      * Set the event manager instance used by this module manager.
      *
-     * @param  EventCollection $events
+     * @param  EventManagerInterface $events
      * @return Manager
      */
-    public function setEventManager(EventCollection $events)
+    public function setEventManager(EventManagerInterface $events)
     {
         $this->events = $events;
         return $this;
@@ -212,11 +212,11 @@ class Manager implements ModuleHandler
      *
      * Lazy-loads an EventManager instance if none registered.
      *
-     * @return EventCollection
+     * @return EventManagerInterface
      */
     public function events()
     {
-        if (!$this->events instanceof EventCollection) {
+        if (!$this->events instanceof EventManagerInterface) {
             $this->setEventManager(new EventManager(array(__CLASS__, get_class($this))));
         }
         return $this->events;

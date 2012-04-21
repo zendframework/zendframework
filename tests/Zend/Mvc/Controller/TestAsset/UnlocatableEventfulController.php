@@ -2,7 +2,7 @@
 
 namespace ZendTest\Mvc\Controller\TestAsset;
 
-use Zend\EventManager\EventDescription as Event,
+use Zend\EventManager\EventInterface as Event,
     Zend\Mvc\InjectApplicationEvent,
     Zend\Stdlib\Dispatchable,
     Zend\Stdlib\RequestDescription as Request,

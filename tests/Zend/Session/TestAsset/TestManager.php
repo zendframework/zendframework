@@ -5,7 +5,7 @@ use Zend\Session\AbstractManager,
     Zend\Session\Configuration as SessionConfiguration,
     Zend\Session\Storage as SessionStorage,
     Zend\Session\SaveHandler as SessionSaveHandler,
-    Zend\EventManager\EventCollection;
+    Zend\EventManager\EventManagerInterface;
 
 class TestManager extends AbstractManager
 {
@@ -54,7 +54,7 @@ class TestManager extends AbstractManager
     {}
 
 
-    public function setValidatorChain(EventCollection $chain)
+    public function setValidatorChain(EventManagerInterface $chain)
     {}
 
     public function getValidatorChain()

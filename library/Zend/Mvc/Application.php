@@ -5,7 +5,7 @@ namespace Zend\Mvc;
 use ArrayObject,
     Zend\Di\Exception\ClassNotFoundException,
     Zend\Di\Locator,
-    Zend\EventManager\EventCollection,
+    Zend\EventManager\EventManagerInterface,
     Zend\EventManager\EventManager,
     Zend\Http\Header\Cookie,
     Zend\Http\PhpEnvironment\Request as PhpHttpRequest,
@@ -43,10 +43,10 @@ class Application implements AppContext
     /**
      * Set the event manager instance used by this context
      *
-     * @param  EventCollection $events
+     * @param  EventManagerInterface $events
      * @return Application
      */
-    public function setEventManager(EventCollection $events)
+    public function setEventManager(EventManagerInterface $events)
     {
         $this->events = $events;
         return $this;
@@ -187,11 +187,11 @@ class Application implements AppContext
      *
      * Lazy-loads an EventManager instance if none registered.
      *
-     * @return EventCollection
+     * @return EventManagerInterface
      */
     public function events()
     {
-        if (!$this->events instanceof EventCollection) {
+        if (!$this->events instanceof EventManagerInterface) {
             $this->setEventManager(new EventManager(array(__CLASS__, get_class($this))));
             $this->attachDefaultListeners();
         }
@@ -404,7 +404,7 @@ class Application implements AppContext
     /**
      * Attach default listeners for route and dispatch events
      *
-     * @param  EventCollection $events
+     * @param  EventManagerInterface $events
      * @return void
      */
     protected function attachDefaultListeners()

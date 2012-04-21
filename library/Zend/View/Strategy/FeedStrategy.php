@@ -21,7 +21,7 @@
 
 namespace Zend\View\Strategy;
 
-use Zend\EventManager\EventCollection,
+use Zend\EventManager\EventManagerInterface,
     Zend\EventManager\ListenerAggregate,
     Zend\Feed\Writer\Feed,
     Zend\Http\Request as HttpRequest,
@@ -63,11 +63,11 @@ class FeedStrategy implements ListenerAggregate
     /**
      * Attach the aggregate to the specified event manager
      *
-     * @param  EventCollection $events
+     * @param  EventManagerInterface $events
      * @param  int $priority
      * @return void
      */
-    public function attach(EventCollection $events, $priority = 1)
+    public function attach(EventManagerInterface $events, $priority = 1)
     {
         $this->listeners[] = $events->attach(ViewEvent::EVENT_RENDERER, array($this, 'selectRenderer'), $priority);
         $this->listeners[] = $events->attach(ViewEvent::EVENT_RESPONSE, array($this, 'injectResponse'), $priority);
@@ -76,10 +76,10 @@ class FeedStrategy implements ListenerAggregate
     /**
      * Detach aggregate listeners from the specified event manager
      *
-     * @param  EventCollection $events
+     * @param  EventManagerInterface $events
      * @return void
      */
-    public function detach(EventCollection $events)
+    public function detach(EventManagerInterface $events)
     {
         foreach ($this->listeners as $index => $listener) {
             if ($events->detach($listener)) {

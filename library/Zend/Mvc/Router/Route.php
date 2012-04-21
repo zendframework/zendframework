@@ -20,7 +20,7 @@
 
 namespace Zend\Mvc\Router;
 
-use Zend\Stdlib\RequestDescription as Request;
+use Zend\Stdlib\RequestInterface;
 
 /**
  * Route interface.
@@ -49,10 +49,10 @@ interface Route
     /**
      * Match a given request.
      *
-     * @param  Request $request
+     * @param  RequestInterface $request
      * @return RouteMatch
      */
-    public function match(Request $request);
+    public function match(RequestInterface $request);
 
     /**
      * Assemble the route.

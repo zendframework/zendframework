@@ -26,7 +26,7 @@ use Zend\EventManager\EventCollection,
     Zend\Http\Response as HttpResponse,
     Zend\Mvc\Application,
     Zend\Mvc\MvcEvent,
-    Zend\Stdlib\ResponseDescription as Response,
+    Zend\Stdlib\ResponseInterface,
     Zend\View\Model as ViewModel;
 
 /**
@@ -146,7 +146,7 @@ class ExceptionStrategy implements ListenerAggregate
 
         // Do nothing if the result is a response object
         $result = $e->getResult();
-        if ($result instanceof Response) {
+        if ($result instanceof ResponseInterface) {
             return;
         }
 

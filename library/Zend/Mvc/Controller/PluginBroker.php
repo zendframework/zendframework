@@ -3,7 +3,7 @@
 namespace Zend\Mvc\Controller;
 
 use Zend\Loader\PluginBroker as PluginBrokerBase,
-    Zend\Stdlib\Dispatchable;
+    Zend\Stdlib\DispatchableInterface;
 
 class PluginBroker extends PluginBrokerBase
 {
@@ -13,17 +13,17 @@ class PluginBroker extends PluginBrokerBase
     protected $defaultClassLoader = 'Zend\Mvc\Controller\PluginLoader';
 
     /**
-     * @var Dispatchable
+     * @var DispatchableInterface
      */
     protected $controller;
 
     /**
      * Set controller object
      *
-     * @param  Dispatchable $controller
+     * @param  DispatchableInterface $controller
      * @return PluginBroker
      */
-    public function setController(Dispatchable $controller)
+    public function setController(DispatchableInterface $controller)
     {
         $this->controller = $controller;
         return $this;
@@ -32,7 +32,7 @@ class PluginBroker extends PluginBrokerBase
     /**
      * Retrieve controller instance
      *
-     * @return null|Dispatchable
+     * @return null|DispatchableInterface
      */
     public function getController()
     {

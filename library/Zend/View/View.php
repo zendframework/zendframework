@@ -24,8 +24,8 @@ use Zend\EventManager\EventCollection,
     Zend\EventManager\EventManager,
     Zend\EventManager\EventManagerAware,
     Zend\Mvc\MvcEvent,
-    Zend\Stdlib\RequestDescription as Request,
-    Zend\Stdlib\ResponseDescription as Response;
+    Zend\Stdlib\RequestInterface as Request,
+    Zend\Stdlib\ResponseInterface as Response;
 
 /**
  * @category   Zend

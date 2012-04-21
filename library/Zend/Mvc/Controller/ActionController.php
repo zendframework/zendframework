@@ -14,15 +14,15 @@ use Zend\Di\Locator,
     Zend\Mvc\InjectApplicationEvent,
     Zend\Mvc\LocatorAware,
     Zend\Mvc\MvcEvent,
-    Zend\Stdlib\Dispatchable,
-    Zend\Stdlib\RequestDescription as Request,
-    Zend\Stdlib\ResponseDescription as Response,
+    Zend\Stdlib\DispatchableInterface,
+    Zend\Stdlib\RequestInterface as Request,
+    Zend\Stdlib\ResponseInterface as Response,
     Zend\View\Model\ViewModel;
 
 /**
  * Basic action controller
  */
-abstract class ActionController implements Dispatchable, EventManagerAware, InjectApplicationEvent, LocatorAware, Pluggable
+abstract class ActionController implements DispatchableInterface, EventManagerAware, InjectApplicationEvent, LocatorAware, Pluggable
 {
     //use \Zend\EventManager\ProvidesEvents;
 
@@ -128,7 +128,7 @@ abstract class ActionController implements Dispatchable, EventManagerAware, Inje
     /**
      * Get the request object
      *
-     * @return Request
+     * @return RequestInterface
      */
     public function getRequest()
     {
@@ -138,7 +138,7 @@ abstract class ActionController implements Dispatchable, EventManagerAware, Inje
     /**
      * Get the response object
      *
-     * @return Response
+     * @return ResponseInterface
      */
     public function getResponse()
     {
@@ -152,7 +152,7 @@ abstract class ActionController implements Dispatchable, EventManagerAware, Inje
      * Set the event manager instance used by this context
      *
      * @param  EventCollection $events
-     * @return AppContext
+     * @return ActionController
      */
     public function setEventManager(EventCollection $events)
     {
@@ -171,7 +171,7 @@ abstract class ActionController implements Dispatchable, EventManagerAware, Inje
     {
         if (!$this->events instanceof EventCollection) {
             $this->setEventManager(new EventManager(array(
-                'Zend\Stdlib\Dispatchable',
+                'Zend\Stdlib\DispatchableInterface',
                 __CLASS__,
                 get_called_class()
             )));

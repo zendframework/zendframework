@@ -23,7 +23,7 @@ namespace Zend\Mvc\Router\Http;
 
 use Traversable,
     Zend\Stdlib\ArrayUtils,
-    Zend\Stdlib\RequestDescription as Request,
+    Zend\Stdlib\RequestInterface,
     Zend\Mvc\Router\Exception;
 
 /**
@@ -94,10 +94,10 @@ class Scheme implements Route
      * match(): defined by Route interface.
      *
      * @see    Route::match()
-     * @param  Request $request
+     * @param  RequestInterface $request
      * @return RouteMatch
      */
-    public function match(Request $request)
+    public function match(RequestInterface $request)
     {
         if (!method_exists($request, 'uri')) {
             return null;

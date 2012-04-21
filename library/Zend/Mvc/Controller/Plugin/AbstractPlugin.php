@@ -2,13 +2,13 @@
 
 namespace Zend\Mvc\Controller\Plugin;
 
-use Zend\Stdlib\Dispatchable;
+use Zend\Stdlib\DispatchableInterface;
 
 abstract class AbstractPlugin
 {
     protected $controller;
 
-    public function setController(Dispatchable $controller)
+    public function setController(DispatchableInterface $controller)
     {
         $this->controller = $controller;
     }

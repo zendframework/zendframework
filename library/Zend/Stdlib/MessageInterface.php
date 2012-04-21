@@ -2,7 +2,7 @@
 
 namespace Zend\Stdlib;
 
-interface MessageDescription
+interface MessageInterface
 {
     public function setMetadata($spec, $value = null);
     public function getMetadata($key = null);

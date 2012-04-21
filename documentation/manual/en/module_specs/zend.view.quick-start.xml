@@ -208,7 +208,7 @@ return array(
             // found" strategy. Basically, this gets triggered if (a) no route
             // matches the current request, (b) the controller specified in the
             // route match cannot be found in the locator, (c) the controller
-            // specified in the route match does not implement the Dispatchable
+            // specified in the route match does not implement the DispatchableInterface
             // interface, or (d) if a response from a controller sets the
             // response status to 404.
             //

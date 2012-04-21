@@ -20,7 +20,7 @@
 
 namespace Zend\Stdlib\Exception;
 
-use Zend\Stdlib\Exception;
+use Zend\Stdlib\Exception\ExceptionInterface;
 
 /**
  * Bad method call exception
@@ -31,6 +31,6 @@ use Zend\Stdlib\Exception;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class BadMethodCallException extends \BadMethodCallException
-    implements Exception
+    implements ExceptionInterface
 {
 }

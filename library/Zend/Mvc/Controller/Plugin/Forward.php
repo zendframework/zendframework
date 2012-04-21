@@ -8,7 +8,7 @@ use Zend\Di\Locator,
     Zend\Mvc\LocatorAware,
     Zend\Mvc\MvcEvent,
     Zend\Mvc\Router\RouteMatch,
-    Zend\Stdlib\Dispatchable;
+    Zend\Stdlib\DispatchableInterface;
 
 class Forward extends AbstractPlugin
 {
@@ -30,8 +30,8 @@ class Forward extends AbstractPlugin
         $locator = $this->getLocator();
 
         $controller = $locator->get($name);
-        if (!$controller instanceof Dispatchable) {
-            throw new Exception\DomainException('Can only forward to Dispatchable classes; class of type ' . get_class($controller) . ' received');
+        if (!$controller instanceof DispatchableInterface) {
+            throw new Exception\DomainException('Can only forward to DispatchableInterface classes; class of type ' . get_class($controller) . ' received');
         }
         if ($controller instanceof InjectApplicationEvent) {
             $controller->setEvent($event);

@@ -20,7 +20,7 @@
 
 namespace Zend\Stdlib\Exception;
 
-use Zend\Stdlib\Exception;
+use Zend\Stdlib\Exception\ExceptionInterface;
 
 /**
  * Invalid callback exception
@@ -34,6 +34,6 @@ use Zend\Stdlib\Exception;
  */
 class InvalidCallbackException
     extends DomainException
-    implements Exception
+    implements ExceptionInterface
 {
 }

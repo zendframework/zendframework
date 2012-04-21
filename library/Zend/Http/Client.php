@@ -26,10 +26,10 @@ use ArrayIterator,
     Zend\Http\Header\Cookie,
     Zend\Http\Header\SetCookie,
     Zend\Stdlib\Parameters,
-    Zend\Stdlib\ParametersDescription,
-    Zend\Stdlib\Dispatchable,
-    Zend\Stdlib\RequestDescription,
-    Zend\Stdlib\ResponseDescription;
+    Zend\Stdlib\ParametersInterface,
+    Zend\Stdlib\DispatchableInterface,
+    Zend\Stdlib\RequestInterface,
+    Zend\Stdlib\ResponseInterface;
 
 /**
  * Http client
@@ -39,7 +39,7 @@ use ArrayIterator,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Client implements Dispatchable
+class Client implements DispatchableInterface
 {
     /**
      * @const string Supported HTTP Authentication methods
@@ -732,11 +732,11 @@ class Client implements Dispatchable
     /**
      * Dispatch
      *
-     * @param RequestDescription $request
-     * @param ResponseDescription $response
-     * @return ResponseDescription
+     * @param RequestInterface $request
+     * @param ResponseInterface $response
+     * @return ResponseInterface
      */
-    public function dispatch(RequestDescription $request, ResponseDescription $response = null)
+    public function dispatch(RequestInterface $request, ResponseInterface $response = null)
     {
         $response = $this->send($request);
         return $response;

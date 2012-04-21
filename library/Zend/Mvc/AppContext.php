@@ -4,8 +4,8 @@ namespace Zend\Mvc;
 
 use Zend\Di\Locator,
     Zend\EventManager\EventManagerAware,
-    Zend\Stdlib\RequestDescription as Request,
-    Zend\Stdlib\ResponseDescription as Response;
+    Zend\Stdlib\RequestInterface as Request,
+    Zend\Stdlib\ResponseInterface as Response;
 
 interface AppContext extends EventManagerAware
 {
@@ -20,7 +20,7 @@ interface AppContext extends EventManagerAware
     /**
      * Set request object that will be consumed
      * 
-     * @param  Request $request 
+     * @param  Request $request
      * @return AppContext
      */
     public function setRequest(Request $request);
@@ -28,7 +28,7 @@ interface AppContext extends EventManagerAware
     /**
      * Set response object that will be returned
      * 
-     * @param  Response $request 
+     * @param  Response $request
      * @return AppContext
      */
     public function setResponse(Response $response);

@@ -232,7 +232,7 @@ class Module implements AutoloaderProvider
 
     <para>
       Controllers are simply objects that implement
-      <classname>Zend\Stdlib\Dispatchable</classname>. This means they simply
+      <classname>Zend\Stdlib\DispatchableInterface</classname>. This means they simply
       need to implement a <methodname>dispatch()</methodname> method that takes
       minimally a <classname>Response</classname> object as an argument.
     </para>

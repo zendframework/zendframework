@@ -3,8 +3,8 @@
 namespace Zend\Mvc;
 
 use Zend\EventManager\Event,
-    Zend\Stdlib\RequestDescription as Request,
-    Zend\Stdlib\ResponseDescription as Response,
+    Zend\Stdlib\RequestInterface as Request,
+    Zend\Stdlib\ResponseInterface as Response,
     Zend\View\Model as ViewModel;
 
 class MvcEvent extends Event
@@ -51,11 +51,22 @@ class MvcEvent extends Event
         return $this;
     }
 
+    /**
+     * Get request
+     *
+     * @return Request
+     */
     public function getRequest()
     {
         return $this->getParam('request');
     }
 
+    /**
+     * Set request
+     *
+     * @param Request $request
+     * @return MvcEvent
+     */
     public function setRequest(Request $request)
     {
         $this->setParam('request', $request);
@@ -63,11 +74,22 @@ class MvcEvent extends Event
         return $this;
     }
 
+    /**
+     * Get response
+     *
+     * @return Response
+     */
     public function getResponse()
     {
         return $this->getParam('response');
     }
 
+    /**
+     * Set response
+     *
+     * @param Response $response
+     * @return MvcEvent
+     */
     public function setResponse(Response $response)
     {
         $this->setParam('response', $response);

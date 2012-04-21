@@ -2,10 +2,10 @@
 
 namespace Zend\Stdlib\Exception;
 
-use Zend\Stdlib\Exception;
+use Zend\Stdlib\Exception\ExceptionInterface;
 
 class InvalidArgumentException 
     extends \InvalidArgumentException 
-    implements Exception
+    implements ExceptionInterface
 {
 }

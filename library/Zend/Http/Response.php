@@ -3,9 +3,9 @@
 namespace Zend\Http;
 
 use Zend\Stdlib\Message,
-    Zend\Stdlib\ResponseDescription;
+    Zend\Stdlib\ResponseInterface;
 
-class Response extends Message implements ResponseDescription
+class Response extends Message implements ResponseInterface
 {
 
     /**#@+

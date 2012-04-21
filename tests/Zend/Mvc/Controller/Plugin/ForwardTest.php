@@ -69,7 +69,7 @@ class ForwardTest extends TestCase
         $locator->add('bogus', function() {
             return new stdClass;
         });
-        $this->setExpectedException('Zend\Mvc\Exception\DomainException', 'Dispatchable');
+        $this->setExpectedException('Zend\Mvc\Exception\DomainException', 'DispatchableInterface');
         $this->plugin->dispatch('bogus');
     }
 

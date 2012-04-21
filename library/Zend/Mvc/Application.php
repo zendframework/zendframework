@@ -11,11 +11,11 @@ use ArrayObject,
     Zend\Http\PhpEnvironment\Request as PhpHttpRequest,
     Zend\Http\PhpEnvironment\Response as PhpHttpResponse,
     Zend\Uri\Http as HttpUri,
-    Zend\Stdlib\Dispatchable,
+    Zend\Stdlib\DispatchableInterface,
     Zend\Stdlib\ArrayUtils,
     Zend\Stdlib\Parameters,
-    Zend\Stdlib\RequestDescription as Request,
-    Zend\Stdlib\ResponseDescription as Response;
+    Zend\Stdlib\RequestInterface as Request,
+    Zend\Stdlib\ResponseInterface as Response;
 
 /**
  * Main application class for invoking applications
@@ -352,7 +352,7 @@ class Application implements AppContext
             $controller->setLocator($locator);
         }
 
-        if (!$controller instanceof Dispatchable) {
+        if (!$controller instanceof DispatchableInterface) {
             $error = clone $e;
             $error->setError(static::ERROR_CONTROLLER_INVALID)
                   ->setController($controllerName)

@@ -12,7 +12,7 @@ use ArrayAccess,
  *     class QueryParams extends ArrayObject implements Parameters {}
  * and have 90% of the functionality
  */
-interface ParametersDescription extends ArrayAccess, Countable, Serializable, Traversable
+interface ParametersInterface extends ArrayAccess, Countable, Serializable, Traversable
 {
     public function __construct(array $values = null);
 

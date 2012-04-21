@@ -38,7 +38,7 @@ class AuthenticationService
     /**
      * Authentication adapter
      *
-     * @var Zend\Authentication\Adapter
+     * @var Zend\Authentication\Adapter\AdapterInterface
      */
     protected $adapter = null;
 
@@ -46,6 +46,7 @@ class AuthenticationService
      * Constructor
      * 
      * @param  Storage\StorageInterface $storage 
+     * @param  Adapter\AdapterInterface $adapter 
      * @return void
      */
     public function __construct(Storage\StorageInterface $storage = null, Adapter\AdapterInterface $adapter = null)
@@ -63,7 +64,7 @@ class AuthenticationService
      *
      * The adapter does not have a default if the storage adapter has not been set.
      *
-     * @return Zend\Authentication\Adapter|null
+     * @return Zend\Authentication\Adapter\AdapterInterface|null
      */
     public function getAdapter()
     {
@@ -73,10 +74,10 @@ class AuthenticationService
     /**
      * Sets the authentication adapter
      *
-     * @param  Zend\Authentication\Adapter $adapter
+     * @param  Zend\Authentication\Adapter\AdapterInterface $adapter
      * @return Zend\Authentication\AuthenticationService Provides a fluent interface
      */
-    public function setAdapter(Adapter $adapter)
+    public function setAdapter(Adapter\AdapterInterface $adapter)
     {
         $this->adapter = $adapter;
         return $this;

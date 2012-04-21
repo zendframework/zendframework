@@ -14,45 +14,48 @@
  *
  * @category   Zend
  * @package    Zend_Tag
- * @subpackage Cloud
+ * @subpackage Item
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Tag\Cloud;
-
-use Zend\Loader\PluginBroker,
-    Zend\Tag\Exception\InvalidArgumentException,
-    Zend\Tag\Cloud\Decorator\DecoratorInterface as Decorator;
+namespace Zend\Tag;
 
 /**
- * Broker for decorator instances
- *
  * @category   Zend
  * @package    Zend_Tag
- * @subpackage Cloud
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class DecoratorBroker extends PluginBroker
+interface TaggableInterface
 {
     /**
-     * @var string Default plugin loading strategy
+     * Get the title of the tag
+     *
+     * @return string
      */
-    protected $defaultClassLoader = 'Zend\Tag\Cloud\DecoratorLoader';
+    public function getTitle();
 
     /**
-     * Determine if we have a valid decorator
-     * 
-     * @param  mixed $plugin 
-     * @return true
-     * @throws InvalidArgumentException
+     * Get the weight of the tag
+     *
+     * @return float
      */
-    protected function validatePlugin($plugin)
-    {
-        if (!$plugin instanceof Decorator) {
-            throw new InvalidArgumentException('Tag cloud decorators must implement Zend\Tag\Cloud\DecoratorInterface');
-        }
-        return true;
-    }
+    public function getWeight();
+
+    /**
+     * Set a parameter
+     *
+     * @param string $name
+     * @param string $value
+     */
+    public function setParam($name, $value);
+
+    /**
+     * Get a parameter
+     *
+     * @param  string $name
+     * @return mixed
+     */
+    public function getParam($name);
 }

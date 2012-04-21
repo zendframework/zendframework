@@ -202,7 +202,7 @@ class ItemList implements \Countable, \SeekableIterator, \ArrayAccess
      * Get the value of an offset
      *
      * @param  mixed $offset
-     * @return \Zend\Tag\Taggable
+     * @return \Zend\Tag\TaggableInterface
      */
     public function offsetGet($offset) {
         return $this->_items[$offset];
@@ -212,15 +212,15 @@ class ItemList implements \Countable, \SeekableIterator, \ArrayAccess
      * Append a new item
      *
      * @param  mixed          $offset
-     * @param  \Zend\Tag\Taggable $item
-     * @throws \Zend\Tag\Exception\OutOfBoundsException When item does not implement Zend\Tag\Taggable
+     * @param  \Zend\Tag\TaggableInterface $item
+     * @throws \Zend\Tag\Exception\OutOfBoundsException When item does not implement Zend\Tag\TaggableInterface
      * @return void
      */
     public function offsetSet($offset, $item) {
         // We need to make that check here, as the method signature must be
         // compatible with ArrayAccess::offsetSet()
-        if (!($item instanceof Taggable)) {
-            throw new OutOfBoundsException('Item must implement Zend\Tag\Taggable');
+        if (!($item instanceof TaggableInterface)) {
+            throw new OutOfBoundsException('Item must implement Zend\Tag\TaggableInterface');
         }
 
         if ($offset === null) {

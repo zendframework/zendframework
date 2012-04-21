@@ -24,10 +24,10 @@ namespace Zend\Tag\Cloud\Decorator;
 /**
  * Simple HTML decorator for clouds
  *
- * @uses      \Zend\Tag\Cloud\Decorator\Cloud
+ * @uses      \Zend\Tag\Cloud\DecoratorInterface\Cloud
  * @category  Zend
  * @package   Zend_Tag
- * @uses      \Zend\Tag\Cloud\Decorator\Cloud
+ * @uses      \Zend\Tag\Cloud\DecoratorInterface\Cloud
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -68,7 +68,7 @@ class HtmlCloud extends Cloud
      * Set encoding
      *
      * @param string
-     * @return \Zend\Tag\Cloud\Decorator\HTMLCloud
+     * @return \Zend\Tag\Cloud\DecoratorInterface\HTMLCloud
      */
     public function setEncoding($value)
     {
@@ -80,7 +80,7 @@ class HtmlCloud extends Cloud
      * Set the HTML tags surrounding all tags
      *
      * @param  array $htmlTags
-     * @return \Zend\Tag\Cloud\Decorator\HTMLCloud
+     * @return \Zend\Tag\Cloud\DecoratorInterface\HTMLCloud
      */
     public function setHTMLTags(array $htmlTags)
     {
@@ -102,7 +102,7 @@ class HtmlCloud extends Cloud
      * Set the separator between the single tags
      *
      * @param  string
-     * @return \Zend\Tag\Cloud\Decorator\HTMLCloud
+     * @return \Zend\Tag\Cloud\DecoratorInterface\HTMLCloud
      */
     public function setSeparator($separator)
     {
@@ -121,7 +121,7 @@ class HtmlCloud extends Cloud
     }
 
     /**
-     * Defined by Zend\Tag\Cloud\Decorator\Cloud
+     * Defined by Zend\Tag\Cloud\DecoratorInterface\Cloud
      *
      * @param  array $tags
      * @return string

@@ -12,23 +12,23 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @category   Zend
- * @package    Zend_Tag
- * @subpackage Cloud
+ * @category  Zend
+ * @package   Zend_Tag
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Tag\Cloud\Decorator;
+namespace Zend\Tag\Exception;
 
 /**
- * Exception class for Zend_Tag_Cloud_Decorator
+ * Exception interface for Zend\Tag
  *
  * @category  Zend
  * @package   Zend_Tag
  * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Exception extends \Zend\Tag\Exception
+interface ExceptionInterface
+
 {
 }

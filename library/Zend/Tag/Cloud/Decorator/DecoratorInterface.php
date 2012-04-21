@@ -14,48 +14,39 @@
  *
  * @category   Zend
  * @package    Zend_Tag
- * @subpackage Item
+ * @subpackage Cloud
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Tag;
+namespace Zend\Tag\Cloud\Decorator;
 
 /**
+ * Interface for decorators
+ *
  * @category   Zend
  * @package    Zend_Tag
+ * @subpackage Cloud
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Taggable
+interface DecoratorInterface
 {
     /**
-     * Get the title of the tag
+     * Constructor
      *
+     * Allow passing options to the constructor.
+     * 
+     * @param  mixed $options 
+     * @return void
+     */
+    public function __construct($options = null);
+
+    /**
+     * Render a list of tags
+     * 
+     * @param  mixed $tags 
      * @return string
      */
-    public function getTitle();
-
-    /**
-     * Get the weight of the tag
-     *
-     * @return float
-     */
-    public function getWeight();
-
-    /**
-     * Set a parameter
-     *
-     * @param string $name
-     * @param string $value
-     */
-    public function setParam($name, $value);
-
-    /**
-     * Get a parameter
-     *
-     * @param  string $name
-     * @return mixed
-     */
-    public function getParam($name);
+    public function render($tags);
 }

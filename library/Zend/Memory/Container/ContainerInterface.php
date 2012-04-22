@@ -18,7 +18,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Memory;
+namespace Zend\Memory\Container;
 
 /**
  * Memory value container interface
@@ -28,7 +28,7 @@ namespace Zend\Memory;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Container
+interface ContainerInterface
 {
     /**
      * Get string value reference

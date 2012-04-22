@@ -19,6 +19,7 @@
  */
 
 namespace Zend\Memory\Container;
+
 use Zend\Memory,
     Zend\Memory\Exception;
 
@@ -27,9 +28,6 @@ use Zend\Memory,
  *
  * Movable (may be swapped with specified backend and unloaded).
  *
- * @uses       \Zend\Memory\Container\AbstractContainer
- * @uses       \Zend\Memory\Exception
- * @uses       \Zend\Memory\Value
  * @category   Zend
  * @package    Zend_Memory
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -131,7 +129,7 @@ class Movable extends AbstractContainer
      *
      * @param string $property
      * @return string
-     * @throws \Zend\Memory\Exception
+     * @throws Exception\InvalidArgumentException
      */
     public function __get($property)
     {

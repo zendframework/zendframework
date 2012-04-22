@@ -21,12 +21,12 @@
 
 namespace ZendTest\Session\SaveHandler;
 
-use //Zend\Session\SaveHandler\DbTable,
+use Zend\Session\SaveHandler\DbTable,
     Zend\Session\Exception as SaveHandlerException,
     Zend\Session\ManagerInterface as Manager,
-    //Zend\Db\Db,
-    //Zend\Db\Adapter\AbstractAdapter,
-    //Zend\Db\Table\AbstractTable,
+    Zend\Db\Db,
+    Zend\Db\Adapter\AbstractAdapter,
+    Zend\Db\Table\AbstractTable,
     Zend\Config\Config,
     ZendTest\Session\TestAsset\TestManager;
 
@@ -49,22 +49,22 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
      */
     /*
     protected $saveHandlerTableConfig = array(
-'name'              => 'sessions',
-'primary'           => array(
-'id',
-'save_path',
-'name',
-),
-DbTable::MODIFIED_COLUMN    => 'modified',
-DbTable::LIFETIME_COLUMN    => 'lifetime',
-DbTable::DATA_COLUMN        => 'data',
-DbTable::PRIMARY_ASSIGNMENT => array(
-DbTable::PRIMARY_ASSIGNMENT_SESSION_ID,
-DbTable::PRIMARY_ASSIGNMENT_SESSION_SAVE_PATH,
-DbTable::PRIMARY_ASSIGNMENT_SESSION_NAME,
-),
-);
-*/
+        'name'              => 'sessions',
+        'primary'           => array(
+            'id',
+            'save_path',
+            'name',
+        ),
+        DbTable::MODIFIED_COLUMN    => 'modified',
+        DbTable::LIFETIME_COLUMN    => 'lifetime',
+        DbTable::DATA_COLUMN        => 'data',
+        DbTable::PRIMARY_ASSIGNMENT => array(
+            DbTable::PRIMARY_ASSIGNMENT_SESSION_ID,
+            DbTable::PRIMARY_ASSIGNMENT_SESSION_SAVE_PATH,
+            DbTable::PRIMARY_ASSIGNMENT_SESSION_NAME,
+        ),
+    );
+    */
     /**
      * @var Zend\Db\Adapter\AbstractAdapter
      */

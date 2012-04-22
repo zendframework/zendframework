@@ -89,7 +89,7 @@ class HtmlTagTest extends \PHPUnit_Framework_TestCase
 
         try {
             $decorator->setClassList(array());
-            $this->fail('An expected Zend\Tag\Cloud\DecoratorInterface\Exception\InvalidArgumentException was not raised');
+            $this->fail('An expected Zend\Tag\Cloud\Decorator\Exception\InvalidArgumentException was not raised');
         } catch (InvalidArgumentException $e) {
             $this->assertEquals($e->getMessage(), 'Classlist is empty');
         }
@@ -101,7 +101,7 @@ class HtmlTagTest extends \PHPUnit_Framework_TestCase
 
         try {
             $decorator->setClassList(array(array()));
-            $this->fail('An expected Zend\Tag\Cloud\DecoratorInterface\Exception\InvalidArgumentException was not raised');
+            $this->fail('An expected Zend\Tag\Cloud\Decorator\Exception\InvalidArgumentException was not raised');
         } catch (InvalidArgumentException $e) {
             $this->assertEquals($e->getMessage(), 'Classlist contains an invalid classname');
         }
@@ -113,7 +113,7 @@ class HtmlTagTest extends \PHPUnit_Framework_TestCase
 
         try {
             $decorator->setFontSizeUnit('foo');
-            $this->fail('An expected Zend\Tag\Cloud\DecoratorInterface\Exception\InvalidArgumentException was not raised');
+            $this->fail('An expected Zend\Tag\Cloud\Decorator\Exception\InvalidArgumentException was not raised');
         } catch (InvalidArgumentException $e) {
             $this->assertEquals($e->getMessage(), 'Invalid fontsize unit specified');
         }
@@ -125,7 +125,7 @@ class HtmlTagTest extends \PHPUnit_Framework_TestCase
 
         try {
             $decorator->setMinFontSize('foo');
-            $this->fail('An expected Zend\Tag\Cloud\DecoratorInterface\Exception\InvalidArgumentException was not raised');
+            $this->fail('An expected Zend\Tag\Cloud\Decorator\Exception\InvalidArgumentException was not raised');
         } catch (InvalidArgumentException $e) {
             $this->assertEquals($e->getMessage(), 'Fontsize must be numeric');
         }
@@ -137,7 +137,7 @@ class HtmlTagTest extends \PHPUnit_Framework_TestCase
 
         try {
             $decorator->setMaxFontSize('foo');
-            $this->fail('An expected Zend\Tag\Cloud\DecoratorInterface\Exception\InvalidArgumentException was not raised');
+            $this->fail('An expected Zend\Tag\Cloud\Decorator\Exception\InvalidArgumentException was not raised');
         } catch (InvalidArgumentException $e) {
             $this->assertEquals($e->getMessage(), 'Fontsize must be numeric');
         }

@@ -10,7 +10,7 @@ class MaxForwardsTest extends \PHPUnit_Framework_TestCase
     public function testMaxForwardsFromStringCreatesValidMaxForwardsHeader()
     {
         $maxForwardsHeader = MaxForwards::fromString('Max-Forwards: xxx');
-        $this->assertInstanceOf('Zend\Http\Header\HeaderDescription', $maxForwardsHeader);
+        $this->assertInstanceOf('Zend\Http\Header\HeaderInterface', $maxForwardsHeader);
         $this->assertInstanceOf('Zend\Http\Header\MaxForwards', $maxForwardsHeader);
     }
 

@@ -10,7 +10,7 @@ class RetryAfterTest extends \PHPUnit_Framework_TestCase
     public function testRetryAfterFromStringCreatesValidRetryAfterHeader()
     {
         $retryAfterHeader = RetryAfter::fromString('Retry-After: xxx');
-        $this->assertInstanceOf('Zend\Http\Header\HeaderDescription', $retryAfterHeader);
+        $this->assertInstanceOf('Zend\Http\Header\HeaderInterface', $retryAfterHeader);
         $this->assertInstanceOf('Zend\Http\Header\RetryAfter', $retryAfterHeader);
     }
 

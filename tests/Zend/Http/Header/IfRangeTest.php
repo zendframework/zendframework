@@ -10,7 +10,7 @@ class IfRangeTest extends \PHPUnit_Framework_TestCase
     public function testIfRangeFromStringCreatesValidIfRangeHeader()
     {
         $ifRangeHeader = IfRange::fromString('If-Range: xxx');
-        $this->assertInstanceOf('Zend\Http\Header\HeaderDescription', $ifRangeHeader);
+        $this->assertInstanceOf('Zend\Http\Header\HeaderInterface', $ifRangeHeader);
         $this->assertInstanceOf('Zend\Http\Header\IfRange', $ifRangeHeader);
     }
 

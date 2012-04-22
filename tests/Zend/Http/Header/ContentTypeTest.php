@@ -10,7 +10,7 @@ class ContentTypeTest extends \PHPUnit_Framework_TestCase
     public function testContentTypeFromStringCreatesValidContentTypeHeader()
     {
         $contentTypeHeader = ContentType::fromString('Content-Type: xxx');
-        $this->assertInstanceOf('Zend\Http\Header\HeaderDescription', $contentTypeHeader);
+        $this->assertInstanceOf('Zend\Http\Header\HeaderInterface', $contentTypeHeader);
         $this->assertInstanceOf('Zend\Http\Header\ContentType', $contentTypeHeader);
     }
 

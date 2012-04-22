@@ -10,7 +10,7 @@ class ProxyAuthorizationTest extends \PHPUnit_Framework_TestCase
     public function testProxyAuthorizationFromStringCreatesValidProxyAuthorizationHeader()
     {
         $proxyAuthorizationHeader = ProxyAuthorization::fromString('Proxy-Authorization: xxx');
-        $this->assertInstanceOf('Zend\Http\Header\HeaderDescription', $proxyAuthorizationHeader);
+        $this->assertInstanceOf('Zend\Http\Header\HeaderInterface', $proxyAuthorizationHeader);
         $this->assertInstanceOf('Zend\Http\Header\ProxyAuthorization', $proxyAuthorizationHeader);
     }
 

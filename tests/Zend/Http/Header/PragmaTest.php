@@ -10,7 +10,7 @@ class PragmaTest extends \PHPUnit_Framework_TestCase
     public function testPragmaFromStringCreatesValidPragmaHeader()
     {
         $pragmaHeader = Pragma::fromString('Pragma: xxx');
-        $this->assertInstanceOf('Zend\Http\Header\HeaderDescription', $pragmaHeader);
+        $this->assertInstanceOf('Zend\Http\Header\HeaderInterface', $pragmaHeader);
         $this->assertInstanceOf('Zend\Http\Header\Pragma', $pragmaHeader);
     }
 

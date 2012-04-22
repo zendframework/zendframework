@@ -6,7 +6,7 @@ namespace Zend\Http\Header;
  * @throws Exception\InvalidArgumentException
  * @see http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.36
  */
-class Referer implements HeaderDescription
+class Referer implements HeaderInterface
 {
 
     public static function fromString($headerLine)

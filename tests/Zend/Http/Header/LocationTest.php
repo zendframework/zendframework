@@ -10,7 +10,7 @@ class LocationTest extends \PHPUnit_Framework_TestCase
     public function testLocationFromStringCreatesValidLocationHeader()
     {
         $locationHeader = Location::fromString('Location: xxx');
-        $this->assertInstanceOf('Zend\Http\Header\HeaderDescription', $locationHeader);
+        $this->assertInstanceOf('Zend\Http\Header\HeaderInterface', $locationHeader);
         $this->assertInstanceOf('Zend\Http\Header\Location', $locationHeader);
     }
 

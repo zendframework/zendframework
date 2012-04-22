@@ -6,7 +6,7 @@ namespace Zend\Http\Header;
  * @throws Exception\InvalidArgumentException
  * @see http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.6
  */
-class Age implements HeaderDescription
+class Age implements HeaderInterface
 {
 
     protected $deltaSeconds = null;

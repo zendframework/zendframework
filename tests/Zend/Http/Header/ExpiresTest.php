@@ -10,7 +10,7 @@ class ExpiresTest extends \PHPUnit_Framework_TestCase
     public function testExpiresFromStringCreatesValidExpiresHeader()
     {
         $expiresHeader = Expires::fromString('Expires: xxx');
-        $this->assertInstanceOf('Zend\Http\Header\HeaderDescription', $expiresHeader);
+        $this->assertInstanceOf('Zend\Http\Header\HeaderInterface', $expiresHeader);
         $this->assertInstanceOf('Zend\Http\Header\Expires', $expiresHeader);
     }
 

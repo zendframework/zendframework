@@ -10,7 +10,7 @@ class ContentLengthTest extends \PHPUnit_Framework_TestCase
     public function testContentLengthFromStringCreatesValidContentLengthHeader()
     {
         $contentLengthHeader = ContentLength::fromString('Content-Length: xxx');
-        $this->assertInstanceOf('Zend\Http\Header\HeaderDescription', $contentLengthHeader);
+        $this->assertInstanceOf('Zend\Http\Header\HeaderInterface', $contentLengthHeader);
         $this->assertInstanceOf('Zend\Http\Header\ContentLength', $contentLengthHeader);
     }
 

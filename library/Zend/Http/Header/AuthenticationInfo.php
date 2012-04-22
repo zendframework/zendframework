@@ -6,7 +6,7 @@ namespace Zend\Http\Header;
  * @throws Exception\InvalidArgumentException
  * @see http://www.ietf.org/rfc/rfc2617.txt
  */
-class AuthenticationInfo implements HeaderDescription
+class AuthenticationInfo implements HeaderInterface
 {
 
     public static function fromString($headerLine)

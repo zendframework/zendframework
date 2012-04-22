@@ -10,7 +10,7 @@ class AuthorizationTest extends \PHPUnit_Framework_TestCase
     public function testAuthorizationFromStringCreatesValidAuthorizationHeader()
     {
         $authorizationHeader = Authorization::fromString('Authorization: xxx');
-        $this->assertInstanceOf('Zend\Http\Header\HeaderDescription', $authorizationHeader);
+        $this->assertInstanceOf('Zend\Http\Header\HeaderInterface', $authorizationHeader);
         $this->assertInstanceOf('Zend\Http\Header\Authorization', $authorizationHeader);
     }
 

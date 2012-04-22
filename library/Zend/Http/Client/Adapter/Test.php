@@ -20,7 +20,8 @@
  */
 
 namespace Zend\Http\Client\Adapter;
-use Zend\Http\Client\Adapter as HttpAdapter,
+
+use Zend\Http\Client\Adapter\AdapterInterface as HttpAdapter,
     Zend\Http\Client\Adapter\Exception as AdapterException,
     Zend\Http\Response;
 

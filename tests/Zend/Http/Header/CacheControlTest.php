@@ -10,7 +10,7 @@ class CacheControlTest extends \PHPUnit_Framework_TestCase
     public function testCacheControlFromStringCreatesValidCacheControlHeader()
     {
         $cacheControlHeader = CacheControl::fromString('Cache-Control: xxx');
-        $this->assertInstanceOf('Zend\Http\Header\HeaderDescription', $cacheControlHeader);
+        $this->assertInstanceOf('Zend\Http\Header\HeaderInterface', $cacheControlHeader);
         $this->assertInstanceOf('Zend\Http\Header\CacheControl', $cacheControlHeader);
     }
 

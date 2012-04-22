@@ -174,7 +174,7 @@ class Client implements Stdlib\DispatchableInterface
         }
 
         // Pass configuration options to the adapter if it exists
-        if ($this->adapter instanceof Client\Adapter) {
+        if ($this->adapter instanceof Client\Adapter\AdapterInterface) {
             $this->adapter->setConfig($config);
         }
 
@@ -187,7 +187,7 @@ class Client implements Stdlib\DispatchableInterface
      * While this method is not called more than one for a client, it is
      * seperated from ->request() to preserve logic and readability
      *
-     * @param  Client\Adapter|string $adapter
+     * @param  Client\Adapter\AdapterInterface|string $adapter
      * @return Client
      * @throws Client\Exception\InvalidArgumentException
      */
@@ -200,7 +200,7 @@ class Client implements Stdlib\DispatchableInterface
             $adapter = new $adapter;
         }
 
-        if (! $adapter instanceof Client\Adapter) {
+        if (! $adapter instanceof Client\Adapter\AdapterInterface) {
             throw new Client\Exception\InvalidArgumentException('Passed adapter is not a HTTP connection adapter');
         }
 
@@ -214,7 +214,7 @@ class Client implements Stdlib\DispatchableInterface
     /**
      * Load the connection adapter
      *
-     * @return \Zend\Http\Client\Adapter $adapter
+     * @return Client\Adapter\AdapterInterface $adapter
      */
     public function getAdapter()
     {
@@ -743,6 +743,7 @@ class Client implements Stdlib\DispatchableInterface
      *
      * @param  Request $request
      * @return Response
+     * @throws Exception\RuntimeException
      */
     public function send(Request $request = null)
     {
@@ -809,7 +810,7 @@ class Client implements Stdlib\DispatchableInterface
             }
 
             // check that adapter supports streaming before using it
-            if (is_resource($body) && !($this->adapter instanceof Client\Adapter\Stream)) {
+            if (is_resource($body) && !($this->adapter instanceof Client\Adapter\StreamInterface)) {
                 throw new Client\Exception\RuntimeException('Adapter does not support streaming');
             }
 
@@ -1277,7 +1278,7 @@ class Client implements Stdlib\DispatchableInterface
         $this->adapter->connect($uri->getHost(), $uri->getPort(), $secure);
 
         if ($this->config['outputstream']) {
-            if ($this->adapter instanceof Client\Adapter\Stream) {
+            if ($this->adapter instanceof Client\Adapter\StreamInterface) {
                 $stream = $this->openTempStream();
                 $this->adapter->setOutputStream($stream);
             } else {

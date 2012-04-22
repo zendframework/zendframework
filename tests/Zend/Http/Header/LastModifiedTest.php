@@ -10,7 +10,7 @@ class LastModifiedTest extends \PHPUnit_Framework_TestCase
     public function testLastModifiedFromStringCreatesValidLastModifiedHeader()
     {
         $lastModifiedHeader = LastModified::fromString('Last-Modified: xxx');
-        $this->assertInstanceOf('Zend\Http\Header\HeaderDescription', $lastModifiedHeader);
+        $this->assertInstanceOf('Zend\Http\Header\HeaderInterface', $lastModifiedHeader);
         $this->assertInstanceOf('Zend\Http\Header\LastModified', $lastModifiedHeader);
     }
 

@@ -21,7 +21,8 @@
  */
 
 namespace Zend\Http\Client\Adapter;
-use Zend\Http\Client\Adapter as HttpAdapter,
+
+use Zend\Http\Client\Adapter\AdapterInterface as HttpAdapter,
     Zend\Http\Client\Adapter\Exception as AdapterException,
     Zend\Http\Client,
     Zend\Http\Request;
@@ -36,7 +37,7 @@ use Zend\Http\Client\Adapter as HttpAdapter,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Curl implements HttpAdapter, Stream
+class Curl implements HttpAdapter, StreamInterface
 {
     /**
      * Parameters array

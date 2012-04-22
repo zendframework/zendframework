@@ -10,7 +10,7 @@ class ExpectTest extends \PHPUnit_Framework_TestCase
     public function testExpectFromStringCreatesValidExpectHeader()
     {
         $expectHeader = Expect::fromString('Expect: xxx');
-        $this->assertInstanceOf('Zend\Http\Header\HeaderDescription', $expectHeader);
+        $this->assertInstanceOf('Zend\Http\Header\HeaderInterface', $expectHeader);
         $this->assertInstanceOf('Zend\Http\Header\Expect', $expectHeader);
     }
 

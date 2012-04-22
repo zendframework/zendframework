@@ -10,7 +10,7 @@ class IfMatchTest extends \PHPUnit_Framework_TestCase
     public function testIfMatchFromStringCreatesValidIfMatchHeader()
     {
         $ifMatchHeader = IfMatch::fromString('If-Match: xxx');
-        $this->assertInstanceOf('Zend\Http\Header\HeaderDescription', $ifMatchHeader);
+        $this->assertInstanceOf('Zend\Http\Header\HeaderInterface', $ifMatchHeader);
         $this->assertInstanceOf('Zend\Http\Header\IfMatch', $ifMatchHeader);
     }
 

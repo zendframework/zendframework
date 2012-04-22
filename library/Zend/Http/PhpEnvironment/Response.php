@@ -3,7 +3,7 @@
 
 namespace Zend\Http\PhpEnvironment;
 
-use Zend\Http\Header\MultipleHeaderDescription,
+use Zend\Http\Header\MultipleHeaderInterface,
     Zend\Http\Response as HttpResponse,
     Zend\Stdlib\Parameters;
 
@@ -37,7 +37,7 @@ class Response extends HttpResponse
         header($status);
 
         foreach ($this->headers() as $header) {
-            if ($header instanceof MultipleHeaderDescription) {
+            if ($header instanceof MultipleHeaderInterface) {
                 header($header->toString(), false);
                 continue;
             }

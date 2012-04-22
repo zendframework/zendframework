@@ -10,7 +10,7 @@ class EtagTest extends \PHPUnit_Framework_TestCase
     public function testEtagFromStringCreatesValidEtagHeader()
     {
         $etagHeader = Etag::fromString('Etag: xxx');
-        $this->assertInstanceOf('Zend\Http\Header\HeaderDescription', $etagHeader);
+        $this->assertInstanceOf('Zend\Http\Header\HeaderInterface', $etagHeader);
         $this->assertInstanceOf('Zend\Http\Header\Etag', $etagHeader);
     }
 

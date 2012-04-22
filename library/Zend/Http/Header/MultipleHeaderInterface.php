@@ -2,7 +2,7 @@
 
 namespace Zend\Http\Header;
 
-interface MultipleHeaderDescription extends HeaderDescription
+interface MultipleHeaderInterface extends HeaderInterface
 {
     public function toStringMultipleHeaders(array $headers);
 }

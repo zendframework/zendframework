@@ -158,7 +158,7 @@
                     <methodsynopsis>
                         <methodname>addHeader</methodname>
                         <methodparam>
-                            <funcparams>Zend\Http\Header\HeaderDescription $header</funcparams>
+                            <funcparams>Zend\Http\Header\HeaderInterface $header</funcparams>
                         </methodparam>
                     </methodsynopsis>
                     <para>
@@ -177,7 +177,7 @@
                     <methodsynopsis>
                         <methodname>removeHeader</methodname>
                         <methodparam>
-                            <funcparams>Zend\Http\Header\HeaderDescription $header</funcparams>
+                            <funcparams>Zend\Http\Header\HeaderInterface $header</funcparams>
                         </methodparam>
                     </methodsynopsis>
                     <para>Remove a Header from the container</para>
@@ -210,7 +210,7 @@
                     <para>Get all headers of a certain name/type</para>
                     <para></para>
                     <para>Returns
-                        false|<classname>Zend\Http\Header\HeaderDescription</classname>|<classname>ArrayIterator</classname></para>
+                        false|<classname>Zend\Http\Header\HeaderInterface</classname>|<classname>ArrayIterator</classname></para>
                 </listitem>
             </varlistentry>
 
@@ -284,7 +284,7 @@
                         <void/>
                     </methodsynopsis>
                     <para>Return the current value for this iterator, lazy loading it if need be</para>
-                    <para>Returns <classname>Zend\Http\Header\HeaderDescription</classname></para>
+                    <para>Returns <classname>Zend\Http\Header\HeaderInterface</classname></para>
                 </listitem>
             </varlistentry>
 

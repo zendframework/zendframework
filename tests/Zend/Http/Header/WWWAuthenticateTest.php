@@ -10,7 +10,7 @@ class WWWAuthenticateTest extends \PHPUnit_Framework_TestCase
     public function testWWWAuthenticateFromStringCreatesValidWWWAuthenticateHeader()
     {
         $wWWAuthenticateHeader = WWWAuthenticate::fromString('WWW-Authenticate: xxx');
-        $this->assertInstanceOf('Zend\Http\Header\HeaderDescription', $wWWAuthenticateHeader);
+        $this->assertInstanceOf('Zend\Http\Header\HeaderInterface', $wWWAuthenticateHeader);
         $this->assertInstanceOf('Zend\Http\Header\WWWAuthenticate', $wWWAuthenticateHeader);
     }
 

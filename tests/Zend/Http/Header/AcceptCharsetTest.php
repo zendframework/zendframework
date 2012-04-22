@@ -10,7 +10,7 @@ class AcceptCharsetTest extends \PHPUnit_Framework_TestCase
     public function testAcceptCharsetFromStringCreatesValidAcceptCharsetHeader()
     {
         $acceptCharsetHeader = AcceptCharset::fromString('Accept-Charset: xxx');
-        $this->assertInstanceOf('Zend\Http\Header\HeaderDescription', $acceptCharsetHeader);
+        $this->assertInstanceOf('Zend\Http\Header\HeaderInterface', $acceptCharsetHeader);
         $this->assertInstanceOf('Zend\Http\Header\AcceptCharset', $acceptCharsetHeader);
     }
 

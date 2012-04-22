@@ -10,7 +10,7 @@ class ContentLocationTest extends \PHPUnit_Framework_TestCase
     public function testContentLocationFromStringCreatesValidContentLocationHeader()
     {
         $contentLocationHeader = ContentLocation::fromString('Content-Location: xxx');
-        $this->assertInstanceOf('Zend\Http\Header\HeaderDescription', $contentLocationHeader);
+        $this->assertInstanceOf('Zend\Http\Header\HeaderInterface', $contentLocationHeader);
         $this->assertInstanceOf('Zend\Http\Header\ContentLocation', $contentLocationHeader);
     }
 

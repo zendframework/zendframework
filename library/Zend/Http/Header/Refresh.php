@@ -6,7 +6,7 @@ namespace Zend\Http\Header;
  * @throws Exception\InvalidArgumentException
  * @todo FIND SPEC FOR THIS
  */
-class Refresh implements HeaderDescription
+class Refresh implements HeaderInterface
 {
 
     public static function fromString($headerLine)

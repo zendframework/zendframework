@@ -21,8 +21,7 @@
 
 namespace Zend\Config\Reader;
 
-use Zend\Config\Reader,
-    Zend\Config\Exception;
+use Zend\Config\Exception;
 
 /**
  * XML config reader.
@@ -33,7 +32,7 @@ use Zend\Config\Reader,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Ini implements Reader
+class Ini implements ReaderInterface
 {
     /**
      * Separator for nesting levels of configuration data identifiers.
@@ -74,7 +73,7 @@ class Ini implements Reader
     /**
      * fromFile(): defined by Reader interface.
      *
-     * @see    Reader::fromFile()
+     * @see    ReaderInterface::fromFile()
      * @param  string $filename
      * @return array
      */
@@ -102,7 +101,7 @@ class Ini implements Reader
     /**
      * fromString(): defined by Reader interface.
      *
-     * @see    Reader::fromString()
+     * @see    ReaderInterface::fromString()
      * @param  string $string
      * @return array
      */

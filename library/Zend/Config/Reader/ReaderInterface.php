@@ -18,7 +18,7 @@
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Config;
+namespace Zend\Config\Reader;
 
 /**
  * @category  Zend
@@ -26,7 +26,7 @@ namespace Zend\Config;
  * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Reader
+interface ReaderInterface
 {
     /**
      * Read from a file and create an array

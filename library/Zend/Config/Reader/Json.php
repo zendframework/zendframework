@@ -21,8 +21,7 @@
 
 namespace Zend\Config\Reader;
 
-use Zend\Config\Reader,
-    Zend\Config\Exception,
+use Zend\Config\Exception,
     Zend\Json\Json as JsonFormat;
 
 /**
@@ -34,18 +33,18 @@ use Zend\Config\Reader,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Json implements Reader
+class Json implements ReaderInterface
 {
     /**
      * Directory of the JSON file
-     * 
+     *
      * @var string
      */
     protected $directory;
     /**
      * fromFile(): defined by Reader interface.
      *
-     * @see    Reader::fromFile()
+     * @see    ReaderInterface::fromFile()
      * @param  string $filename
      * @return array
      */
@@ -69,7 +68,7 @@ class Json implements Reader
     /**
      * fromString(): defined by Reader interface.
      *
-     * @see    Reader::fromString()
+     * @see    ReaderInterface::fromString()
      * @param  string $string
      * @return array
      */

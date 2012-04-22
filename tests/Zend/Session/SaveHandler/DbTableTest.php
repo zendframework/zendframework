@@ -85,7 +85,7 @@ DbTable::PRIMARY_ASSIGNMENT_SESSION_NAME,
      */
     public function setUp()
     {
-        $this->markTestSkipped('Skipped because Zend\Db is under refactoring.');
+        $this->markTestIncomplete('Skipped because Zend\Db is under refactoring.');
         if (!extension_loaded('pdo_sqlite')) {
             $this->markTestSkipped('Zend\Session\SaveHandler\DbTable tests are not enabled due to missing PDO_Sqlite extension');
         }

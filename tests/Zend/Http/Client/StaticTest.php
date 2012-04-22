@@ -470,7 +470,7 @@ class StaticTest extends \PHPUnit_Framework_TestCase
         $client = new HTTPClient($url, $config);
         try {
             $result = $client->send();
-        } catch (Http\Exception $e) {
+        } catch (Http\Exception\ExceptionInterface $e) {
             $this->fail('Unexpected exception was thrown: ' . $e->getMessage() . "\n" . $e->getTraceAsString());
         }
         // we can safely return until we can verify link is still active

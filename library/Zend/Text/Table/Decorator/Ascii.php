@@ -25,7 +25,6 @@ use Zend\Text\Table\Decorator\DecoratorInterface as Decorator;
 /**
  * ASCII Decorator for Zend_Text_Table
  *
- * @uses      \Zend\Text\Table\Decorator\DecoratorInterface
  * @category  Zend
  * @package   Zend_Text_Table
  * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

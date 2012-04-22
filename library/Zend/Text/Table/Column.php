@@ -24,9 +24,6 @@ use Zend\Text;
 /**
  * Column class for Zend_Text_Table_Row
  *
- * @uses      \Zend\Text\MultiByte
- * @uses      \Zend\Text\Table\Table
- * @uses      \Zend\Text\Table\Exception
  * @category  Zend
  * @package   Zend_Text_Table
  * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

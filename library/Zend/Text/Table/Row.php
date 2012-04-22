@@ -25,8 +25,6 @@ use Zend\Text\Table\Decorator\DecoratorInterface as Decorator;
 /**
  * Row class for Zend_Text_Table
  *
- * @uses      \Zend\Text\Table\Column
- * @uses      \Zend\Text\Table\Exception
  * @category  Zend
  * @package   Zend_Text_Table
  * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

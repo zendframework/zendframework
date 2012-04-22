@@ -24,7 +24,6 @@ use Zend\Config;
 /**
  * Zend_Text_Figlet is a PHP implementation of FIGlet
  *
- * @uses      \Zend\Text\Figlet\Exception\InvalidArgumentException
  * @category  Zend
  * @package   Zend_Text_Figlet
  * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

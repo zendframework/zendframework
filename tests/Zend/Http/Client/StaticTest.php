@@ -20,11 +20,12 @@
  */
 
 namespace ZendTest\Http\Client;
-use \Zend\Uri\Http as UriHttp,
-    \Zend\Http\Client as HTTPClient,
-    \Zend\Http,
-    \Zend\Http\Header\SetCookie,
-    \Zend\Http\Request;
+
+use Zend\Uri\Http as UriHttp,
+    Zend\Http\Client as HTTPClient,
+    Zend\Http,
+    Zend\Http\Header\SetCookie,
+    Zend\Http\Request;
 
 /**
  * This Testsuite includes all Zend_Http_Client tests that do not rely

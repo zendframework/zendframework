@@ -31,6 +31,6 @@ namespace Zend\Text\Figlet\Exception;
  */
 class InvalidArgumentException 
     extends \InvalidArgumentException
-    implements \Zend\Text\Figlet\Exception\ExceptionInterface
+    implements ExceptionInterface
 {
 }

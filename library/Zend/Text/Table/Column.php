@@ -98,8 +98,8 @@ class Column
      *
      * @param  string $content  Content of the column
      * @param  string $charset  The charset of the content
-     * @throws \Zend\Text\Table\Exception\UnexpectedValueException When $content is not a string
-     * @return \Zend\Text\Table\Column
+     * @throws Exception\UnexpectedValueException When $content is not a string
+     * @return Column
      */
     public function setContent($content, $charset = null)
     {
@@ -132,8 +132,8 @@ class Column
      * Set the align
      *
      * @param  string $align Align of the column
-     * @throws \Zend\Text\Table\Exception\OutOfBoundsException When supplied align is invalid
-     * @return \Zend\Text\Table\Column
+     * @throws Exception\OutOfBoundsException When supplied align is invalid
+     * @return Column
      */
     public function setAlign($align)
     {
@@ -150,8 +150,8 @@ class Column
      * Set the colspan
      *
      * @param  int $colSpan
-     * @throws \Zend\Text\Table\Exception\InvalidArgumentException When $colSpan is smaller than 1
-     * @return \Zend\Text\Table\Column
+     * @throws Exception\InvalidArgumentException When $colSpan is smaller than 1
+     * @return Column
      */
     public function setColSpan($colSpan)
     {
@@ -179,8 +179,8 @@ class Column
      *
      * @param  integer $columnWidth The width of the column
      * @param  integer $padding     The padding for the column
-     * @throws \Zend\Text\Table\Exception\InvalidArgumentException When $columnWidth is lower than 1
-     * @throws \Zend\Text\Table\Exception\OutOfBoundsException When padding is greater than columnWidth
+     * @throws Exception\InvalidArgumentException When $columnWidth is lower than 1
+     * @throws Exception\OutOfBoundsException When padding is greater than columnWidth
      * @return string
      */
     public function render($columnWidth, $padding = 0)

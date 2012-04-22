@@ -21,8 +21,6 @@
 
 namespace Zend\Text\Exception;
 
-use InvalidArgumentException;
-
 /**
  * @category   Zend
  * @package    Zend_Text
@@ -31,6 +29,6 @@ use InvalidArgumentException;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class InvalidArgumentException
-    extends InvalidArgumentException
+    extends \InvalidArgumentException
     implements ExceptionInterface
 {}

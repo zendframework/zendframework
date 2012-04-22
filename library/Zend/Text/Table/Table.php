@@ -120,8 +120,8 @@ class Table
      * Create a basic table object
      *
      * @param  array             $columnsWidths List of all column widths
-     * @param  \Zend\Config\Config|array $options       Configuration options
-     * @throws \Zend\Text\Table\Exception\UnexpectedValueException When no columns widths were set
+     * @param  Config\Config|array $options       Configuration options
+     * @throws Exception\UnexpectedValueException When no columns widths were set
      */
     public function __construct($options = null)
     {

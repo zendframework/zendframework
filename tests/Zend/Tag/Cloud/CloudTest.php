@@ -76,7 +76,7 @@ class CloudTest extends \PHPUnit_Framework_TestCase
             $cloud->setCloudDecorator(new \stdClass());
             $this->fail('An expected Zend\Tag\Exception\InvalidArgumentException was not raised');
         } catch (InvalidArgumentException $e) {
-            $this->assertEquals('DecoratorInterface is no instance of Zend\Tag\Cloud\DecoratorInterface\Cloud', $e->getMessage());
+            $this->assertEquals('DecoratorInterface is no instance of Zend\Tag\Cloud\Decorator\Cloud', $e->getMessage());
         }
     }
 
@@ -106,7 +106,7 @@ class CloudTest extends \PHPUnit_Framework_TestCase
             $cloud->setTagDecorator(new \stdClass());
             $this->fail('An expected Zend\Tag\Exception\InvalidArgumentException was not raised');
         } catch (InvalidArgumentException $e) {
-            $this->assertEquals('DecoratorInterface is no instance of Zend\Tag\Cloud\DecoratorInterface\Tag', $e->getMessage());
+            $this->assertEquals('DecoratorInterface is no instance of Zend\Tag\Cloud\Decorator\Tag', $e->getMessage());
         }
     }
 

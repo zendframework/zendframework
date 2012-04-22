@@ -22,8 +22,6 @@
 namespace Zend\Tag;
 
 /**
- * @uses       \Zend\Tag\Exception\InvalidArgumentException
- * @uses       \Zend\Tag\TaggableInterface
  * @category   Zend
  * @package    Zend_Tag
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

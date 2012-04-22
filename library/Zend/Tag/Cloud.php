@@ -36,14 +36,14 @@ class Cloud
     /**
      * DecoratorInterface for the cloud
      *
-     * @var \Zend\Tag\Cloud\DecoratorInterface\Cloud
+     * @var Cloud
      */
     protected $_cloudDecorator = null;
 
     /**
      * DecoratorInterface for the tags
      *
-     * @var \Zend\Tag\Cloud\DecoratorInterface\Tag
+     * @var Tag
      */
     protected $_tagDecorator = null;
 
@@ -232,7 +232,7 @@ class Cloud
         }
 
         if (!($decorator instanceof Cloud\Decorator\Cloud)) {
-            throw new InvalidArgumentException('DecoratorInterface is no instance of Zend\Tag\Cloud\DecoratorInterface\Cloud');
+            throw new InvalidArgumentException('DecoratorInterface is no instance of Zend\Tag\Cloud\Decorator\Cloud');
         }
 
         $this->_cloudDecorator = $decorator;
@@ -243,7 +243,7 @@ class Cloud
     /**
      * Get the decorator for the cloud
      *
-     * @return \Zend\Tag\Cloud\DecoratorInterface\Cloud
+     * @return Cloud
      */
     public function getCloudDecorator()
     {
@@ -279,7 +279,7 @@ class Cloud
         }
 
         if (!($decorator instanceof Cloud\Decorator\Tag)) {
-            throw new InvalidArgumentException('DecoratorInterface is no instance of Zend\Tag\Cloud\DecoratorInterface\Tag');
+            throw new InvalidArgumentException('DecoratorInterface is no instance of Zend\Tag\Cloud\Decorator\Tag');
         }
 
         $this->_tagDecorator = $decorator;
@@ -290,7 +290,7 @@ class Cloud
     /**
      * Get the decorator for the tags
      *
-     * @return \Zend\Tag\Cloud\DecoratorInterface\Tag
+     * @return Tag
      */
     public function getTagDecorator()
     {

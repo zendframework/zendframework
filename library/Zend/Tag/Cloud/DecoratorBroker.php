@@ -51,7 +51,7 @@ class DecoratorBroker extends PluginBroker
     protected function validatePlugin($plugin)
     {
         if (!$plugin instanceof Decorator) {
-            throw new InvalidArgumentException('Tag cloud decorators must implement Zend\Tag\Cloud\DecoratorInterface');
+            throw new InvalidArgumentException('Tag cloud decorators must implement Zend\Tag\Cloud\Decorator\DecoratorInterface');
         }
         return true;
     }

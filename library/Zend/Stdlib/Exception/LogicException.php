@@ -20,8 +20,6 @@
 
 namespace Zend\Stdlib\Exception;
 
-use Zend\Stdlib\Exception\ExceptionInterface;
-
 /**
  * logic exception
  *
@@ -30,6 +28,8 @@ use Zend\Stdlib\Exception\ExceptionInterface;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class LogicException extends \LogicException implements ExceptionInterface
+class LogicException
+    extends \LogicException
+    implements ExceptionInterface
 {
 }

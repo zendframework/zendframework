@@ -20,9 +20,9 @@
  */
 
 namespace ZendTest\Mime;
-use Zend\Mime\Mime;
-use Zend\Mail;
 
+use Zend\Mime,
+    Zend\Mail;
 
 /**
  * @category   Zend
@@ -59,25 +59,25 @@ class MimeTest extends \PHPUnit_Framework_TestCase
     public function testBoundary()
     {
         // check boundary for uniqueness
-        $m1 = new Mime();
-        $m2 = new Mime();
+        $m1 = new Mime\Mime();
+        $m2 = new Mime\Mime();
         $this->assertNotEquals($m1->boundary(), $m2->boundary());
 
         // check instantiating with arbitrary boundary string
         $myBoundary = 'mySpecificBoundary';
-        $m3 = new Mime($myBoundary);
+        $m3 = new Mime\Mime($myBoundary);
         $this->assertEquals($m3->boundary(), $myBoundary);
 
     }
 
     public function testIsPrintable_notPrintable()
     {
-        $this->assertFalse(Mime::isPrintable('Test with special chars: �����'));
+        $this->assertFalse(Mime\Mime::isPrintable('Test with special chars: �����'));
     }
 
     public function testIsPrintable_isPrintable()
     {
-        $this->assertTrue(Mime::isPrintable('Test without special chars'));
+        $this->assertTrue(Mime\Mime::isPrintable('Test without special chars'));
     }
 
     public function testQP()
@@ -89,20 +89,20 @@ class MimeTest extends \PHPUnit_Framework_TestCase
               . ", long, long, long, long, long, long, long, long, long, long"
               . ", long, long, long, long and with ����";
 
-        $qp = Mime::encodeQuotedPrintable($text);
+        $qp = Mime\Mime::encodeQuotedPrintable($text);
         $this->assertEquals(quoted_printable_decode($qp), $text);
     }
 
     public function testBase64()
     {
         $content = str_repeat("\x88\xAA\xAF\xBF\x29\x88\xAA\xAF\xBF\x29\x88\xAA\xAF", 4);
-        $encoded = Mime::encodeBase64($content);
+        $encoded = Mime\Mime::encodeBase64($content);
         $this->assertEquals($content, base64_decode($encoded));
     }
 
     public function testZf1058WhitespaceAtEndOfBodyCausesInfiniteLoop()
     {
-        $this->markTestSkipped();
+        $this->markTestSkipped('Class Zend\Mail\Mail does no longer exist');
         // Set timezone to avoid "date(): It is not safe to rely on the system's timezone settings."
         // message.
         date_default_timezone_set('GMT');
@@ -126,7 +126,7 @@ class MimeTest extends \PHPUnit_Framework_TestCase
      */
     public function testEncodeMailHeaderQuotedPrintable($str, $charset, $result)
     {
-        $this->assertEquals($result, Mime::encodeQuotedPrintableHeader($str, $charset));
+        $this->assertEquals($result, Mime\Mime::encodeQuotedPrintableHeader($str, $charset));
     }
 
     public static function dataTestEncodeMailHeaderQuotedPrintable()
@@ -148,7 +148,7 @@ class MimeTest extends \PHPUnit_Framework_TestCase
      */
     public function testEncodeMailHeaderBase64($str, $charset, $result)
     {
-        $this->assertEquals($result, Mime::encodeBase64Header($str, $charset));
+        $this->assertEquals($result, Mime\Mime::encodeBase64Header($str, $charset));
     }
 
     public static function dataTestEncodeMailHeaderBase64()
@@ -167,14 +167,14 @@ class MimeTest extends \PHPUnit_Framework_TestCase
     public function testLineLengthInQuotedPrintableHeaderEncoding()
     {
         $subject = "Alle meine Entchen schwimmen in dem See, schwimmen in dem See, Köpfchen in das Wasser, Schwänzchen in die Höh!";
-        $encoded = Mime::encodeQuotedPrintableHeader($subject, "UTF-8", 100);
-        foreach(explode(Mime::LINEEND, $encoded) AS $line ) {
+        $encoded = Mime\Mime::encodeQuotedPrintableHeader($subject, "UTF-8", 100);
+        foreach(explode(Mime\Mime::LINEEND, $encoded) AS $line ) {
             if(strlen($line) > 100) {
                 $this->fail("Line '".$line."' is ".strlen($line)." chars long, only 100 allowed.");
             }
         }
-        $encoded = Mime::encodeQuotedPrintableHeader($subject, "UTF-8", 40);
-        foreach(explode(Mime::LINEEND, $encoded) AS $line ) {
+        $encoded = Mime\Mime::encodeQuotedPrintableHeader($subject, "UTF-8", 40);
+        foreach(explode(Mime\Mime::LINEEND, $encoded) AS $line ) {
             if(strlen($line) > 40) {
                 $this->fail("Line '".$line."' is ".strlen($line)." chars long, only 40 allowed.");
             }

@@ -20,7 +20,8 @@
  */
 
 namespace Zend\Mime\Exception;
-use Zend\Mime\Exception\ExceptionInterface;
+
+use RuntimeException;
 
 /**
  * Exception for Zend_Mime component.
@@ -32,7 +33,7 @@ use Zend\Mime\Exception\ExceptionInterface;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class RuntimeException
-    extends \RuntimeException
+    extends RuntimeException
     implements ExceptionInterface
 {
 }

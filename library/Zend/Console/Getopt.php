@@ -328,7 +328,7 @@ class Getopt
      * These are appended to those defined when the constructor was called.
      *
      * @param  array $argv
-     * @throws \Zend\Console\Getopt\Exception When not given an array as parameter
+     * @throws \Zend\Console\Getopt\Exception\ExceptionInterface When not given an array as parameter
      * @return \Zend\Console\Getopt\Getopt Provides a fluent interface
      */
     public function addArguments($argv)
@@ -346,7 +346,7 @@ class Getopt
      * These replace any currently defined.
      *
      * @param  array $argv
-     * @throws \Zend\Console\Getopt\Exception When not given an array as parameter
+     * @throws \Zend\Console\Getopt\Exception\ExceptionInterface When not given an array as parameter
      * @return \Zend\Console\Getopt\Getopt Provides a fluent interface
      */
     public function setArguments($argv)
@@ -613,7 +613,7 @@ class Getopt
      * mapping option name (short or long) to an alias.
      *
      * @param  array $aliasMap
-     * @throws \Zend\Console\Getopt\Exception
+     * @throws \Zend\Console\Getopt\Exception\ExceptionInterface
      * @return \Zend\Console\Getopt\Getopt Provides a fluent interface
      */
     public function setAliases($aliasMap)
@@ -745,7 +745,7 @@ class Getopt
      *
      * @param  string $flag
      * @param  mixed  $argv
-     * @throws \Zend\Console\Getopt\Exception
+     * @throws \Zend\Console\Getopt\Exception\ExceptionInterface
      * @return void
      */
     protected function _parseSingleOption($flag, &$argv)
@@ -882,7 +882,7 @@ class Getopt
      *
      * @param  string $flag
      * @param  string $param
-     * @throws \Zend\Console\Getopt\Exception
+     * @throws \Zend\Console\Getopt\Exception\ExceptionInterface
      * @return bool
      */
     protected function _checkParameterType($flag, $param)
@@ -951,7 +951,7 @@ class Getopt
      * Define legal options using the Zend-style format.
      *
      * @param  array $rules
-     * @throws \Zend\Console\Getopt\Exception
+     * @throws \Zend\Console\Getopt\Exception\ExceptionInterface
      * @return void
      */
     protected function _addRulesModeZend($rules)

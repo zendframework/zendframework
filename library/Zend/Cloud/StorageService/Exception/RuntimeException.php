@@ -21,8 +21,6 @@
 
 namespace Zend\Cloud\StorageService\Exception;
 
-use Zend\Cloud\StorageService\Exception;
-
 /**
  * @package    Zend\Cloud\StorageService
  * @subpackage Exception
@@ -31,6 +29,6 @@ use Zend\Cloud\StorageService\Exception;
  */
 class RuntimeException 
     extends \RuntimeException 
-    implements \Zend\Cloud\StorageService\Exception
+    implements ExceptionInterface
 {
 }

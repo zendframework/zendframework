@@ -20,7 +20,7 @@
 /**
  * namespace
  */
-namespace Zend\Cloud\StorageService;
+namespace Zend\Cloud\StorageService\Adapter;
 
 /**
  * Common interface for unstructured cloud storage.
@@ -31,7 +31,7 @@ namespace Zend\Cloud\StorageService;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Adapter
+interface AdapterInterface
 {
     // HTTP adapter to use for connections
     const HTTP_ADAPTER = 'http_adapter';

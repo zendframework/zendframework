@@ -10,7 +10,7 @@
 namespace Zend\Cloud\Infrastructure\Adapter;
 
 use Zend\Service\Rackspace\Servers as RackspaceServers,
-    Zend\Cloud\Infrastructure\Instance,    
+    Zend\Cloud\Infrastructure\Instance,
     Zend\Cloud\Infrastructure\InstanceList,
     Zend\Cloud\Infrastructure\Image,
     Zend\Cloud\Infrastructure\ImageList;

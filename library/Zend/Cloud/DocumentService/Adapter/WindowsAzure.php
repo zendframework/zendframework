@@ -22,8 +22,7 @@
  */
 namespace Zend\Cloud\DocumentService\Adapter;
 
-use Zend\Cloud\DocumentService\Adapter\AbstractAdapter,
-    Zend\Service\WindowsAzure\Storage,
+use Zend\Service\WindowsAzure\Storage,
     Zend\Service\WindowsAzure\Storage\Table,
     Zend\Service\WindowsAzure\Storage\DynamicTableEntity,
     Zend\Service\DocumentService\Document,

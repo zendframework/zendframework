@@ -10,7 +10,7 @@
 /**
  * namespace
  */
-namespace Zend\Cloud\Infrastructure;
+namespace Zend\Cloud\Infrastructure\Adapter;
 
 /**
  * Adapter interface for infrastructure service
@@ -20,7 +20,7 @@ namespace Zend\Cloud\Infrastructure;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Adapter 
+interface AdapterInterface
 { 
     const HTTP_ADAPTER = 'http_adapter'; 
 

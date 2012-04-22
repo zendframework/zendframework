@@ -20,7 +20,7 @@
 /**
  * namespace
  */
-namespace Zend\Cloud\QueueService;
+namespace Zend\Cloud\QueueService\Adapter;
 
 /**
  * Common interface for queue services in the cloud. This interface supports
@@ -39,7 +39,7 @@ namespace Zend\Cloud\QueueService;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Adapter
+interface AdapterInterface
 {
     /** Ctor HTTP adapter option */
     const HTTP_ADAPTER = 'http_adapter';

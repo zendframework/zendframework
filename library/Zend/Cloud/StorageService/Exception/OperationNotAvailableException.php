@@ -33,6 +33,6 @@ namespace Zend\Cloud\StorageService\Exception;
  */
 class OperationNotAvailableException
     extends \Exception
-    implements \Zend\Cloud\StorageService\Exception
+    implements ExceptionInterface
 {}
 

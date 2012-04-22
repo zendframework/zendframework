@@ -21,7 +21,7 @@
 
 namespace ZendTest\Cloud\Infrastructure;
 
-use Zend\Cloud\Infrastructure\Adapter,
+use Zend\Cloud\Infrastructure\Adapter\AdapterInterface,
     Zend\Cloud\Infrastructure\Instance;
 
 /**

@@ -104,7 +104,7 @@ abstract class TestCase extends PHPUnitTestCase
             try {
                 $messages = $this->_commonQueue->receiveMessages($queueURL);
                 $this->fail('An exception should have been thrown if the queue has been deleted; received ' . var_export($messages, 1));
-            } catch (\Zend\Cloud\QueueService\Exception $e) {
+            } catch (\Zend\Cloud\QueueService\Exception\ExceptionInterface $e) {
                 $this->assertTrue(true);
                 $this->_commonQueue->deleteQueue($queueURL);
                 return;

@@ -37,7 +37,7 @@ use Zend\Cloud\QueueService\Adapter,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class AbstractAdapter implements Adapter
+abstract class AbstractAdapter implements AdapterInterface
 {
     /**@+ option keys */
     const MESSAGE_CLASS    = 'message_class';

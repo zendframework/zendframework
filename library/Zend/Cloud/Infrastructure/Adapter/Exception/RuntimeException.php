@@ -22,8 +22,6 @@
 
 namespace Zend\Cloud\Infrastructure\Adapter\Exception;
 
-use \Zend\Cloud\Infrastructure\Adapter\Exception;
-
 /**
  * @category   Zend
  * @package    Zend\Cloud\Infrastructure\Adapter
@@ -31,6 +29,6 @@ use \Zend\Cloud\Infrastructure\Adapter\Exception;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class RuntimeException extends \RuntimeException implements Exception
+class RuntimeException extends \RuntimeException implements ExceptionInterface
 {
 }

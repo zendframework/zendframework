@@ -25,7 +25,7 @@ namespace Zend\Cloud\QueueService\Exception;
 
 class InvalidArgumentException
     extends \InvalidArgumentException
-    implements \Zend\Cloud\QueueService\Exception
+    implements ExceptionInterface
 {
     
 }

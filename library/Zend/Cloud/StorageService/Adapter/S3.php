@@ -35,7 +35,7 @@ use Zend\Cloud\StorageService\Adapter,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class S3 implements Adapter
+class S3 implements AdapterInterface
 {
     /*
      * Options array keys for the S3 adapter.

@@ -9,7 +9,8 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Cloud\DocumentService;
+namespace Zend\Cloud\Exception;
 
-interface Exception
+interface ExceptionInterface
 {}
+

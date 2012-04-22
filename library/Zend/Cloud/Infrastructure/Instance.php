@@ -56,7 +56,7 @@ class Instance
     const SSH_PASSPHRASE       = 'passphrase';
 
     /**
-     * @var Zend\Cloud\Infrastructure\Adapter
+     * @var Zend\Cloud\Infrastructure\Adapter\AdapterInterface
      */
     protected $adapter;
 
@@ -84,14 +84,14 @@ class Instance
     /**
      * Constructor
      * 
-     * @param  Adapter $adapter
+     * @param  Adapter\AdapterInterface $adapter
      * @param  array $data 
      * @return void
      */
-    public function __construct(Adapter $adapter, $data = null)
+    public function __construct(Adapter\AdapterInterface $adapter, $data = null)
     {
-        if (!($adapter instanceof Adapter)) {
-            throw new Exception\InvalidArgumentException("You must pass a Zend\Cloud\Infrastructure\Adapter instance");
+        if (!($adapter instanceof Adapter\AdapterInterface)) {
+            throw new Exception\InvalidArgumentException("You must pass a Zend\Cloud\Infrastructure\Adapter\AdapterInterface instance");
         }
 
         if (is_object($data)) {

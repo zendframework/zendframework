@@ -36,7 +36,7 @@ use Zend\Cloud\StorageService\Adapter,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class WindowsAzure implements Adapter
+class WindowsAzure implements AdapterInterface
 {
     const ACCOUNT_NAME      = 'storage_accountname';
     const ACCOUNT_KEY       = 'storage_accountkey';

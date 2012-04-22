@@ -21,14 +21,12 @@
 
 namespace Zend\Cloud\Infrastructure\Exception;
 
-use Zend\Cloud\Infrastructure\Exception;
-
 /**
  * @package    Zend\Cloud\Infrastructure
  * @subpackage Infrastructure
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class OutOfBoundsException extends \OutOfBoundsException implements Exception
+class OutOfBoundsException extends \OutOfBoundsException implements ExceptionInterface
 {
 }

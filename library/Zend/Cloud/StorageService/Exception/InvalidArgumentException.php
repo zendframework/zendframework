@@ -26,7 +26,7 @@ namespace Zend\Cloud\StorageService\Exception;
 
 class InvalidArgumentException
     extends \InvalidArgumentException
-    implements \Zend\Cloud\StorageService\Exception
+    implements ExceptionInterface
 {
     
 }

@@ -21,8 +21,6 @@
 
 namespace Zend\Cloud\QueueService\Exception;
 
-use Zend\Cloud\QueueService\Exception;
-
 /**
  * @package    Zend\Cloud\QueueService
  * @subpackage Exception
@@ -31,6 +29,6 @@ use Zend\Cloud\QueueService\Exception;
  */
 class RuntimeException 
     extends \RuntimeException 
-    implements \Zend\Cloud\QueueService\Exception
+    implements ExceptionInterface
 {
 }

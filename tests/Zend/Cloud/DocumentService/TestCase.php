@@ -72,7 +72,7 @@ abstract class TestCase extends PHPUnitTestCase
 
     public function testDocumentService()
     {
-        $this->assertTrue($this->_commonDocument instanceof Zend\Cloud\DocumentService\Adapter);
+        $this->assertTrue($this->_commonDocument instanceof Zend\Cloud\DocumentService\Adapter\AdapterInterface);
     }
 
     public function testGetClient()

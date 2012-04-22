@@ -9,7 +9,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Cloud\Infrastructure\Adapter;
+namespace Zend\Cloud\Infrastructure\Adapter\Exception;
 
-interface Exception
+interface ExceptionInterface
 {}

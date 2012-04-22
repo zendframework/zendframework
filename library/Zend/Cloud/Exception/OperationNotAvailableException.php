@@ -31,6 +31,6 @@ namespace Zend\Cloud\Exception;
  */
 class OperationNotAvailableException
     extends \Exception
-    implements \Zend\Cloud\Exception
+    implements ExceptionInterface
 {}
 

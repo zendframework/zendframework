@@ -44,7 +44,7 @@ class Factory extends AbstractFactory
     /**
      * @var string Interface which adapter must implement to be considered valid
      */
-    protected static $_adapterInterface = 'Zend\Cloud\DocumentService\Adapter';
+    protected static $_adapterInterface = 'Zend\Cloud\DocumentService\Adapter\AdapterInterface';
 
     /**
      * Constructor

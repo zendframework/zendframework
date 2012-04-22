@@ -27,11 +27,6 @@ use Zend\View,
 /**
  * Helper for setting and retrieving stylesheets
  *
- * @uses       stdClass
- * @uses       \Zend\View\Helper\Placeholder\Container\AbstractContainer
- * @uses       \Zend\View\Helper\Placeholder\Container\Exception
- * @uses       \Zend\View\Helper\Placeholder\Container\Standalone
- * @uses       \Zend\View\Exception
  * @package    Zend_View
  * @subpackage Helper
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

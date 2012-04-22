@@ -27,12 +27,6 @@ use Zend\View\Helper\Placeholder\Registry,
 /**
  * Base class for targetted placeholder helpers
  *
- * @uses       ArrayAccess
- * @uses       Countable
- * @uses       IteratorAggregate
- * @uses       \Zend\View\Exception
- * @uses       \Zend\View\Helper\AbstractHelper
- * @uses       \Zend\View\Helper\Placeholder\Registry
  * @package    Zend_View
  * @subpackage Helper
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

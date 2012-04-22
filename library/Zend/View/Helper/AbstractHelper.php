@@ -25,7 +25,6 @@ use Zend\View\Helper\HelperInterface,
     Zend\View\Renderer\RendererInterface as Renderer;
 
 /**
- * @uses       \Zend\View\Helper
  * @category   Zend
  * @package    Zend_View
  * @subpackage Helper

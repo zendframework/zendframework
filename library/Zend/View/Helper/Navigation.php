@@ -31,8 +31,6 @@ use Zend\Loader\ShortNameLocator,
 /**
  * Proxy helper for retrieving navigational helpers and forwarding calls
  *
- * @uses       \Zend\View\Exception
- * @uses       \Zend\View\Helper\Navigation\AbstractHelper
  * @category   Zend
  * @package    Zend_View
  * @subpackage Helper

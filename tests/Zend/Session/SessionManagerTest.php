@@ -40,6 +40,8 @@ class SessionManagerTest extends \PHPUnit_Framework_TestCase
 
     public $cookieDateFormat = 'D, d-M-y H:i:s e';
 
+    protected $manager;
+
     public function setUp()
     {
         $this->forceAutoloader();

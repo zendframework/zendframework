@@ -23,7 +23,7 @@ namespace Zend\Controller\Action\Helper;
 /**
  * @uses       \Zend\Controller\Action\Exception
  * @uses       \Zend\Controller\Action\Helper\AbstractHelper
- * @uses       \Zend\Cache\Manager
+ * @uses       \Zend\Cache\ManagerInterface
  * @category   Zend
  * @package    Zend_Controller
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -33,7 +33,7 @@ class Cache extends AbstractHelper
 {
 
     /**
-     * Local Cache Manager object used by Helper
+     * Local Cache ManagerInterface object used by Helper
      *
      * @var \Zend\Cache\Manager
      */
@@ -192,7 +192,7 @@ class Cache extends AbstractHelper
     }
 
     /**
-     * Set an instance of the Cache Manager for this helper
+     * Set an instance of the Cache ManagerInterface for this helper
      *
      * @param \Zend\Cache\Manager $manager
      * @return void
@@ -204,7 +204,7 @@ class Cache extends AbstractHelper
     }
 
     /**
-     * Get the Cache Manager instance or instantiate the object if not
+     * Get the Cache ManagerInterface instance or instantiate the object if not
      * exists. Attempts to load from bootstrap if available.
      *
      * @return \Zend\Cache\Manager

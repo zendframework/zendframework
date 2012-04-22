@@ -288,7 +288,7 @@ class Movable extends AbstractContainer
     {
         /**
          * We don't clean up swap because of performance considerations
-         * Cleaning is performed by Memory Manager destructor
+         * Cleaning is performed by Memory ManagerInterface destructor
          */
 
         $this->_memManager->unlink($this, $this->_id);

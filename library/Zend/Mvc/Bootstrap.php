@@ -302,7 +302,7 @@ class Bootstrap implements Bootstrapper, EventManagerAware
      * Trigger the "bootstrap" event
      *
      * Triggers with the keys "application" and "config", the latter pointing
-     * to the Module Manager attached to the bootstrap.
+     * to the Module ManagerInterface attached to the bootstrap.
      *
      * @param  AppContext $application
      * @return void

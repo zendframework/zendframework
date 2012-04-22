@@ -24,7 +24,7 @@ use Zend\Validator\Alnum as AlnumValidator,
     Zend\EventManager\EventCollection;
 
 /**
- * Session Manager implementation utilizing ext/session
+ * Session ManagerInterface implementation utilizing ext/session
  *
  * @category   Zend
  * @package    Zend_Session

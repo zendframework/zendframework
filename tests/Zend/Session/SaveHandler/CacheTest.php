@@ -22,8 +22,7 @@
 namespace ZendTest\Session\SaveHandler;
 
 use Zend\Session\SaveHandler\Cache,
-    Zend\Session\SaveHandler\Exception as SaveHandlerException,
-    Zend\Session\Manager,
+    Zend\Session\ManagerInterface as Manager,
     Zend\Cache\StorageFactory as CacheFactory,
     Zend\Cache\Storage\Adapter as CacheAdapter;
 
@@ -42,7 +41,7 @@ use Zend\Session\SaveHandler\Cache,
 class CacheTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Zend\Cache\Storage\Adapter
+     * @var CacheAdapter
      */
     protected $cache;
 

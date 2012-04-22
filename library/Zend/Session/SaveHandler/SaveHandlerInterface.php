@@ -19,7 +19,7 @@
  * @since      Preview Release 0.2
  */
 
-namespace Zend\Session;
+namespace Zend\Session\SaveHandler;
 
 /**
  * SaveHandler Interface
@@ -30,7 +30,7 @@ namespace Zend\Session;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @see        http://php.net/session_set_save_handler
  */
-interface SaveHandler
+interface SaveHandlerInterface
 {
     /**
      * Open Session - retrieve resources

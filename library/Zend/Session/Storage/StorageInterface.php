@@ -18,7 +18,12 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Session;
+namespace Zend\Session\Storage;
+
+use Traversable,
+    ArrayAccess,
+    Serializable,
+    Countable;
 
 /**
  * Session storage interface
@@ -31,7 +36,7 @@ namespace Zend\Session;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Storage extends \Traversable, \ArrayAccess, \Serializable, \Countable
+interface StorageInterface extends Traversable, ArrayAccess, Serializable, Countable
 {
     public function getRequestAccessTime();
     public function lock($key = null);

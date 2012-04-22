@@ -21,7 +21,7 @@
 namespace Zend\Session\Storage;
 
 use ArrayObject,
-    Zend\Session\Storage as Storable,
+    Zend\Session\Storage\StorageInterface as Storable,
     Zend\Session\Exception;
 
 /**

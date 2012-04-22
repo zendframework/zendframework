@@ -21,8 +21,7 @@
 
 namespace Zend\Soap\Wsdl\ComplexTypeStrategy;
 
-use Zend\Soap,
-    Zend\Soap\Exception;
+use Zend\Soap\Exception;
 
 /**
  * Zend_Soap_Wsdl_Strategy_DefaultComplexType

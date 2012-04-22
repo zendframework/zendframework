@@ -34,7 +34,7 @@ use Zend\Soap\Wsdl\ComplexTypeStrategy\ComplexTypeStrategyInterface as ComplexTy
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Composite implements ComplexTypeStrategyInterface
+class Composite implements ComplexTypeStrategy
 {
     /**
      * Typemap of Complex Type => Strategy pairs.
@@ -46,7 +46,7 @@ class Composite implements ComplexTypeStrategyInterface
     /**
      * Default Strategy of this composite
      *
-     * @var string|\Zend\Soap\Wsdl\Strategy
+     * @var string|ComplexTypeStrategy
      */
     protected $_defaultStrategy;
 
@@ -61,9 +61,9 @@ class Composite implements ComplexTypeStrategyInterface
      * Construct Composite WSDL Strategy.
      *
      * @param array $typeMap
-     * @param string|\Zend\Soap\Wsdl\Strategy $defaultStrategy
+     * @param string|ComplexTypeStrategy $defaultStrategy
      */
-    public function __construct(array $typeMap=array(), $defaultStrategy='\Zend\Soap\Wsdl\Strategy\DefaultComplexType')
+    public function __construct(array $typeMap=array(), $defaultStrategy='\Zend\Soap\Wsdl\ComplexTypeStrategy\DefaultComplexType')
     {
         foreach($typeMap AS $type => $strategy) {
             $this->connectTypeToStrategy($type, $strategy);
@@ -76,8 +76,8 @@ class Composite implements ComplexTypeStrategyInterface
      *
      * @throws Exception\InvalidArgumentException
      * @param  string $type
-     * @param  string|\Zend\Soap\Wsdl\Strategy $strategy
-     * @return omposite
+     * @param  string|ComplexTypeStrategy $strategy
+     * @return Composite
      */
     public function connectTypeToStrategy($type, $strategy)
     {
@@ -93,7 +93,7 @@ class Composite implements ComplexTypeStrategyInterface
      *
      * @throws  Exception\InvalidArgumentException
      * @param  string $type
-     * @return \Zend\Soap\Wsdl\Strategy
+     * @return ComplexTypeStrategy
      */
     public function getDefaultStrategy()
     {
@@ -115,7 +115,7 @@ class Composite implements ComplexTypeStrategyInterface
      *
      * @throws  Exception\InvalidArgumentException
      * @param  string $type
-     * @return \Zend\Soap\Wsdl\Strategy
+     * @return ComplexTypeStrategy
      */
     public function getStrategyOfType($type)
     {

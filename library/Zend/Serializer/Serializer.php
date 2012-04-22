@@ -20,7 +20,9 @@
 
 namespace Zend\Serializer;
 
-use Zend\Loader\Broker;
+use Zend\Loader\Broker,
+    Zend\Serializer\Adapter\AdapterInterface as Adapter,
+    Zend\Config\Config;
 
 /**
  * @category   Zend
@@ -40,17 +42,16 @@ class Serializer
     /**
      * The default adapter.
      *
-     * @var string|Zend\Serializer\Adapter
+     * @var string|Adapter
      */
     protected static $_defaultAdapter = 'PhpSerialize';
 
     /**
      * Create a serializer adapter instance.
      *
-     * @param string|Zend\Serializer\Adapter $adapterName Name of the adapter class
-     * @param array |Zend\Config\Config $opts Serializer options
+     * @param string|Adapter $adapterName Name of the adapter class
+     * @param array |Config $opts Serializer options
      * @return Zend\Serializer\Adapter
-     * @throws Zend\Serializer\Exception
      */
     public static function factory($adapterName, $opts = array()) 
     {
@@ -110,8 +111,8 @@ class Serializer
     /**
      * Change the default adapter.
      *
-     * @param string|Zend\Serializer\Adapter $adapter
-     * @param array|Zend\Config\Config $options
+     * @param string|Adapter $adapter
+     * @param array|Config $options
      */
     public static function setDefaultAdapter($adapter, $options = array()) 
     {
@@ -121,7 +122,7 @@ class Serializer
     /**
      * Get the default adapter.
      *
-     * @return Zend\Serializer\Adapter
+     * @return Adapter
      */
     public static function getDefaultAdapter() 
     {
@@ -137,7 +138,6 @@ class Serializer
      * @param mixed $value
      * @param array $options
      * @return string
-     * @throws Zend\Serializer\Exception
      */
     public static function serialize($value, array $options = array()) 
     {
@@ -157,7 +157,6 @@ class Serializer
      * @param string $serialized
      * @param array $options
      * @return mixed
-     * @throws Zend\Serializer\Exception
      */
     public static function unserialize($serialized, array $options = array()) 
     {

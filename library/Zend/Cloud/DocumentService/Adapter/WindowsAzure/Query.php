@@ -22,7 +22,7 @@
  */
 namespace Zend\Cloud\DocumentService\Adapter\WindowsAzure;
 
-use Zend\Cloud\DocumentService\QueryAdapter,
+use Zend\Cloud\DocumentService\QueryAdapter\QueryAdapterInterface,
     Zend\Service\WindowsAzure\Storage\TableEntityQuery,
     Zend\Cloud\DocumentService\Adapter\Exception;
 

@@ -26,11 +26,6 @@ use Zend\Config\Config;
 /**
  * Zend_Soap_Server
  *
- * @uses       DOMDocument
- * @uses       SoapFault
- * @uses       SoapServer
- * @uses       \Zend\Server
- * @uses       \Zend\Soap\ServerException
  * @category   Zend
  * @package    Zend_Soap
  * @subpackage Server
@@ -158,7 +153,7 @@ class Server implements \Zend\Server\Server
      * @param string $wsdl
      * @param array $options
      * @return void
-     * @throws \Zend\Soap\ServerException
+     * @throws Exception\ExtensionNotLoadedException
      */
     public function __construct($wsdl = null, array $options = null)
     {
@@ -271,7 +266,7 @@ class Server implements \Zend\Server\Server
      *
      * @param  string $encoding
      * @return \Zend\Soap\Server
-     * @throws \Zend\Soap\ServerException with invalid encoding argument
+     * @throws \Exception\InvalidArgumentException with invalid encoding argument
      */
     public function setEncoding($encoding)
     {
@@ -298,7 +293,7 @@ class Server implements \Zend\Server\Server
      *
      * @param  int $version One of the SOAP_1_1 or SOAP_1_2 constants
      * @return \Zend\Soap\Server
-     * @throws \Zend\Soap\ServerException with invalid soap version argument
+     * @throws Exception\InvalidArgumentException with invalid soap version argument
      */
     public function setSoapVersion($version)
     {
@@ -325,7 +320,7 @@ class Server implements \Zend\Server\Server
      *
      * @param  string $urn
      * @return true
-     * @throws \Zend\Soap\ServerException on invalid URN
+     * @throws Exception\InvalidArgumentException on invalid URN
      */
     public function validateUrn($urn)
     {
@@ -369,7 +364,6 @@ class Server implements \Zend\Server\Server
      *
      * @param  string $uri
      * @return \Zend\Soap\Server
-     * @throws \Zend\Soap\ServerException with invalid uri argument
      */
     public function setUri($uri)
     {
@@ -393,7 +387,7 @@ class Server implements \Zend\Server\Server
      *
      * @param  array $classmap
      * @return \Zend\Soap\Server
-     * @throws \Zend\Soap\ServerException for any invalid class in the class map
+     * @throws Exception\InvalidArgumentException for any invalid class in the class map
      */
     public function setClassmap($classmap)
     {
@@ -491,7 +485,7 @@ class Server implements \Zend\Server\Server
      * or SOAP_FUNCTIONS_ALL to attach all functions
      * @param  string $namespace Ignored
      * @return \Zend\Soap\Server
-     * @throws \Zend\Soap\ServerException on invalid functions
+     * @throws Exception\InvalidArgumentException on invalid functions
      */
     public function addFunction($function, $namespace = '')
     {
@@ -534,7 +528,7 @@ class Server implements \Zend\Server\Server
      *
      * @param string|object $class Class name or object instance which executes SOAP Requests at endpoint.
      * @return \Zend\Soap\Server
-     * @throws \Zend\Soap\ServerException if called more than once, or if class
+     * @throws Exception\InvalidArgumentException if called more than once, or if class
      * does not exist
      */
     public function setClass($class, $namespace = '', $argv = null)
@@ -614,7 +608,7 @@ class Server implements \Zend\Server\Server
      *
      * @param array $array
      * @return void
-     * @throws \Zend\Soap\ServerException Unimplemented
+     * @throws Exception\RuntimeException Unimplemented
      */
     public function loadFunctions($definition)
     {

@@ -21,22 +21,20 @@
 
 namespace Zend\Soap\Wsdl\ComplexTypeStrategy;
 
-use Zend\Soap\Wsdl\ComplexTypeStrategy,
+use Zend\Soap\Wsdl\ComplexTypeStrategy\ComplexTypeStrategyInterface as ComplexTypeStrategy,
     Zend\Soap\Exception,
     Zend\Soap\Wsdl;
 
 /**
  * Zend_Soap_Wsdl_Strategy_Composite
  *
- * @uses       \Zend\Soap\Wsdl\Exception
- * @uses       \Zend\Soap\Wsdl\Strategy\StrategyInterface
  * @category   Zend
  * @package    Zend_Soap
  * @subpackage WSDL
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Composite implements ComplexTypeStrategy
+class Composite implements ComplexTypeStrategyInterface
 {
     /**
      * Typemap of Complex Type => Strategy pairs.
@@ -62,7 +60,6 @@ class Composite implements ComplexTypeStrategy
     /**
      * Construct Composite WSDL Strategy.
      *
-     * @throws \Zend\Soap\WsdlException
      * @param array $typeMap
      * @param string|\Zend\Soap\Wsdl\Strategy $defaultStrategy
      */
@@ -77,10 +74,10 @@ class Composite implements ComplexTypeStrategy
     /**
      * Connect a complex type to a given strategy.
      *
-     * @throws \Zend\Soap\WsdlException
+     * @throws Exception\InvalidArgumentException
      * @param  string $type
      * @param  string|\Zend\Soap\Wsdl\Strategy $strategy
-     * @return \Zend\Soap\Wsdl\Strategy\Composite
+     * @return omposite
      */
     public function connectTypeToStrategy($type, $strategy)
     {
@@ -94,7 +91,7 @@ class Composite implements ComplexTypeStrategy
     /**
      * Return default strategy of this composite
      *
-     * @throws \Zend\Soap\WsdlException
+     * @throws  Exception\InvalidArgumentException
      * @param  string $type
      * @return \Zend\Soap\Wsdl\Strategy
      */
@@ -116,7 +113,7 @@ class Composite implements ComplexTypeStrategy
     /**
      * Return specific strategy or the default strategy of this type.
      *
-     * @throws \Zend\Soap\WsdlException
+     * @throws  Exception\InvalidArgumentException
      * @param  string $type
      * @return \Zend\Soap\Wsdl\Strategy
      */
@@ -155,7 +152,7 @@ class Composite implements ComplexTypeStrategy
     /**
      * Create a complex type based on a strategy
      *
-     * @throws \Zend\Soap\WsdlException
+     * @throws  Exception\InvalidArgumentException
      * @param  string $type
      * @return string XSD type
      */

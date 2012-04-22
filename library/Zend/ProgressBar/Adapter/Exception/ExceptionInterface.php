@@ -18,18 +18,19 @@
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\ProgressBar\Adapter;
+namespace Zend\ProgressBar\Adapter\Exception;
+
+use Zend\ProgressBar\Exception\ExceptionInterface as ProgressBarException;
 
 /**
  * Exception class for Zend_ProgressBar_Adapter
  *
- * @uses      \Zend\ProgressBar\Exception
  * @category  Zend
  * @package   Zend_ProgressBar
- * @uses      \Zend\ProgressBar\Exception
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Exception extends \Zend\ProgressBar\Exception
+interface ExceptionInterface
+    extends ProgressBarException
 {
 }

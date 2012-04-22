@@ -14,7 +14,7 @@ use Zend\Di\Locator,
     Zend\Mvc\InjectApplicationEvent,
     Zend\Mvc\LocatorAware,
     Zend\Mvc\MvcEvent,
-    Zend\Stdlib\DispatchableInterface,
+    Zend\Stdlib\DispatchableInterface as Dispatchable,
     Zend\Stdlib\RequestInterface as Request,
     Zend\Stdlib\ResponseInterface as Response,
     Zend\View\Model\ViewModel;
@@ -22,7 +22,7 @@ use Zend\Di\Locator,
 /**
  * Basic action controller
  */
-abstract class ActionController implements DispatchableInterface, EventManagerAware, InjectApplicationEvent, LocatorAware, Pluggable
+abstract class ActionController implements Dispatchable, EventManagerAware, InjectApplicationEvent, LocatorAware, Pluggable
 {
     //use \Zend\EventManager\ProvidesEvents;
 
@@ -128,7 +128,7 @@ abstract class ActionController implements DispatchableInterface, EventManagerAw
     /**
      * Get the request object
      *
-     * @return RequestInterface
+     * @return Request
      */
     public function getRequest()
     {
@@ -138,7 +138,7 @@ abstract class ActionController implements DispatchableInterface, EventManagerAw
     /**
      * Get the response object
      *
-     * @return ResponseInterface
+     * @return Response
      */
     public function getResponse()
     {

@@ -26,7 +26,7 @@ use Zend\EventManager\EventCollection,
     Zend\Http\Response as HttpResponse,
     Zend\Mvc\Application,
     Zend\Mvc\MvcEvent,
-    Zend\Stdlib\ResponseInterface,
+    Zend\Stdlib\ResponseInterface as Response,
     Zend\View\Model as ViewModel;
 
 /**
@@ -207,7 +207,7 @@ class RouteNotFoundStrategy implements ListenerAggregate
     public function prepareNotFoundViewModel(MvcEvent $e)
     {
         $vars = $e->getResult();
-        if ($vars instanceof ResponseInterface) {
+        if ($vars instanceof Response) {
             // Already have a response as the result
             return;
         }

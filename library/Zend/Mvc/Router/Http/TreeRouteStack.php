@@ -27,7 +27,7 @@ use Zend\Mvc\Router\Exception,
     Zend\Mvc\Router\SimpleRouteStack,
     Zend\Mvc\Router\Route as BaseRoute,
     Zend\Mvc\Router\Http\Route,
-    Zend\Stdlib\RequestInterface,
+    Zend\Stdlib\RequestInterface as Request,
     Zend\Uri\Http as HttpUri;
 
 /**
@@ -134,10 +134,10 @@ class TreeRouteStack extends SimpleRouteStack
      * match(): defined by BaseRoute interface.
      *
      * @see    BaseRoute::match()
-     * @param  RequestInterface $request
+     * @param  Request $request
      * @return RouteMatch
      */
-    public function match(RequestInterface $request)
+    public function match(Request $request)
     {
         if (!method_exists($request, 'uri')) {
             return null;

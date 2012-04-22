@@ -11,7 +11,7 @@ use Zend\Di\Locator,
     Zend\Http\PhpEnvironment\Response as HttpResponse,
     Zend\Loader\Broker,
     Zend\Loader\Pluggable,
-    Zend\Stdlib\DispatchableInterface,
+    Zend\Stdlib\DispatchableInterface as Dispatchable,
     Zend\Stdlib\RequestInterface as Request,
     Zend\Stdlib\ResponseInterface as Response,
     Zend\Mvc\Exception,
@@ -22,7 +22,7 @@ use Zend\Di\Locator,
 /**
  * Abstract RESTful controller
  */
-abstract class RestfulController implements DispatchableInterface, EventManagerAware, InjectApplicationEvent, LocatorAware, Pluggable
+abstract class RestfulController implements Dispatchable, EventManagerAware, InjectApplicationEvent, LocatorAware, Pluggable
 {
     /**
      * @var Broker
@@ -213,7 +213,7 @@ abstract class RestfulController implements DispatchableInterface, EventManagerA
     /**
      * Get request object
      *
-     * @return RequestInterface
+     * @return Request
      */
     public function getRequest()
     {
@@ -226,7 +226,7 @@ abstract class RestfulController implements DispatchableInterface, EventManagerA
     /**
      * Get response object
      *
-     * @return ResponseInterface
+     * @return Response
      */
     public function getResponse()
     {

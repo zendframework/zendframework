@@ -24,7 +24,7 @@ namespace Zend\Mvc\View;
 use Zend\EventManager\EventCollection,
     Zend\EventManager\ListenerAggregate,
     Zend\Mvc\MvcEvent,
-    Zend\Stdlib\ResponseInterface,
+    Zend\Stdlib\ResponseInterface as Response,
     Zend\View\Model as ViewModel,
     Zend\View\View;
 
@@ -118,12 +118,12 @@ class DefaultRenderingStrategy implements ListenerAggregate
      * Render the view
      *
      * @param  MvcEvent $e
-     * @return ResponseInterface
+     * @return Response
      */
     public function render(MvcEvent $e)
     {
         $result = $e->getResult();
-        if ($result instanceof ResponseInterface) {
+        if ($result instanceof Response) {
             return $result;
         }
 

@@ -23,7 +23,7 @@ namespace Zend\Mvc\Router\Http;
 
 use Traversable,
     Zend\Stdlib\ArrayUtils,
-    Zend\Stdlib\RequestInterface,
+    Zend\Stdlib\RequestInterface as Request,
     Zend\Mvc\Router\Exception;
 
 /**
@@ -117,10 +117,10 @@ class Regex implements Route
      * match(): defined by Route interface.
      *
      * @see    Route::match()
-     * @param  RequestInterface $request
+     * @param  Request $request
      * @return RouteMatch
      */
-    public function match(RequestInterface $request, $pathOffset = null)
+    public function match(Request $request, $pathOffset = null)
     {
         if (!method_exists($request, 'uri')) {
             return null;

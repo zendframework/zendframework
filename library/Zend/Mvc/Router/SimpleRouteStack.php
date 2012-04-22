@@ -24,7 +24,7 @@ use ArrayAccess,
     ArrayIterator,
     Traversable,
     Zend\Stdlib\ArrayUtils,
-    Zend\Stdlib\RequestInterface;
+    Zend\Stdlib\RequestInterface as Request;
 
 /**
  * Simple route stack implementation.
@@ -259,10 +259,10 @@ class SimpleRouteStack implements RouteStack
      * match(): defined by Route interface.
      *
      * @see    Route::match()
-     * @param  RequestInterface $request
+     * @param  Request $request
      * @return RouteMatch|null
      */
-    public function match(RequestInterface $request)
+    public function match(Request $request)
     {
         foreach ($this->routes as $name => $route) {
             if (($match = $route->match($request)) instanceof RouteMatch) {

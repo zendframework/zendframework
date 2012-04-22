@@ -25,7 +25,7 @@ use Zend\Mvc\Router\Http\RouteMatch;
 
 use Traversable,
     Zend\Stdlib\ArrayUtils,
-    Zend\Stdlib\RequestInterface,
+    Zend\Stdlib\RequestInterface as Request,
     Zend\Mvc\Router\Exception;
 
 /**
@@ -92,11 +92,11 @@ class Query implements Route
      * match(): defined by Route interface.
      *
      * @see    Route::match()
-     * @param  RequestInterface $request
+     * @param  Request $request
      * @param  int|null $pathOffset
      * @return RouteMatch
      */
-    public function match(RequestInterface $request, $pathOffset = null)
+    public function match(Request $request, $pathOffset = null)
     {
         $matches = array();
 

@@ -25,11 +25,13 @@ use ArrayIterator,
     Zend\Uri\Http,
     Zend\Http\Header\Cookie,
     Zend\Http\Header\SetCookie,
+    Zend\Http\Request as HttpRequest,
+    Zend\Http\Response as HttpResponse,
+    Zend\Http\Response\Stream as HttpResponseStream,
     Zend\Stdlib\Parameters,
-    Zend\Stdlib\ParametersInterface,
-    Zend\Stdlib\DispatchableInterface,
-    Zend\Stdlib\RequestInterface,
-    Zend\Stdlib\ResponseInterface;
+    Zend\Stdlib\DispatchableInterface as Dispatchable,
+    Zend\Stdlib\RequestInterface as Request,
+    Zend\Stdlib\ResponseInterface as Response;
 
 /**
  * Http client
@@ -39,7 +41,7 @@ use ArrayIterator,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Client implements DispatchableInterface
+class Client implements Dispatchable
 {
     /**
      * @const string Supported HTTP Authentication methods
@@ -124,7 +126,7 @@ class Client implements DispatchableInterface
         'useragent'       => 'Zend\Http\Client',
         'timeout'         => 10,
         'adapter'         => 'Zend\Http\Client\Adapter\Socket',
-        'httpversion'     => Request::VERSION_11,
+        'httpversion'     => HttpRequest::VERSION_11,
         'storeresponse'   => true,
         'keepalive'       => false,
         'outputstream'    => false,
@@ -195,7 +197,7 @@ class Client implements DispatchableInterface
      *
      * @param  Client\Adapter|string $adapter
      * @return Client
-     * @throws \Zend\Http\Client\Exception
+     * @throws Client\Exception\InvalidArgumentException
      */
     public function setAdapter($adapter)
     {
@@ -247,7 +249,7 @@ class Client implements DispatchableInterface
     public function getRequest()
     {
         if (empty($this->request)) {
-            $this->request = new Request();
+            $this->request = new HttpRequest();
         }
         return $this->request;
     }
@@ -272,7 +274,7 @@ class Client implements DispatchableInterface
     public function getResponse()
     {
         if (empty($this->response)) {
-            $this->response = new Response();
+            $this->response = new HttpResponse();
         }
         return $this->response;
     }
@@ -352,8 +354,8 @@ class Client implements DispatchableInterface
     {
         $method = $this->getRequest()->setMethod($method)->getMethod();
 
-        if (($method == Request::METHOD_POST || $method == Request::METHOD_PUT ||
-             $method == Request::METHOD_DELETE || $method == Request::METHOD_PATCH)
+        if (($method == HttpRequest::METHOD_POST || $method == HttpRequest::METHOD_PUT ||
+             $method == HttpRequest::METHOD_DELETE || $method == HttpRequest::METHOD_PATCH)
              && empty($this->encType)) {
             $this->setEncType(self::ENC_URLENCODED);
         }
@@ -732,11 +734,11 @@ class Client implements DispatchableInterface
     /**
      * Dispatch
      *
-     * @param RequestInterface $request
-     * @param ResponseInterface $response
-     * @return ResponseInterface
+     * @param Request $request
+     * @param Response $response
+     * @return Response
      */
-    public function dispatch(RequestInterface $request, ResponseInterface $response = null)
+    public function dispatch(Request $request, Response $response = null)
     {
         $response = $this->send($request);
         return $response;
@@ -846,14 +848,14 @@ class Client implements DispatchableInterface
                 }
                 // cleanup the adapter
                 $this->adapter->setOutputStream(null);
-                $response = Response\Stream::fromStream($response, $stream);
+                $response = HttpResponseStream::fromStream($response, $stream);
                 $response->setStreamName($this->streamName);
                 if (!is_string($this->config['outputstream'])) {
                     // we used temp name, will need to clean up
                     $response->setCleanup(true);
                 }
             } else {
-                $response = Response::fromString($response);
+                $response = HttpResponse::fromString($response);
             }
 
             // Get the cookies from response (if any)
@@ -876,7 +878,7 @@ class Client implements DispatchableInterface
                        $response->getStatusCode() == 301))) {
 
                     $this->resetParameters();
-                    $this->setMethod(Request::METHOD_GET);
+                    $this->setMethod(HttpRequest::METHOD_GET);
                 }
 
                 // If we got a well formed absolute URI
@@ -1016,7 +1018,7 @@ class Client implements DispatchableInterface
         $headers = array();
 
         // Set the host header
-        if ($this->config['httpversion'] == Request::VERSION_11) {
+        if ($this->config['httpversion'] == HttpRequest::VERSION_11) {
             $host = $uri->getHost();
             // If the port is not default, add it
             if (!(($uri->getScheme() == 'http' && $uri->getPort() == 80) ||

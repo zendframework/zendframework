@@ -23,7 +23,7 @@ namespace Zend\Mvc\Router\Http;
 
 use Traversable,
     Zend\Stdlib\ArrayUtils,
-    Zend\Stdlib\RequestInterface,
+    Zend\Stdlib\RequestInterface as Request,
     Zend\Mvc\Router\RouteBroker,
     Zend\Mvc\Router\Exception,
     Zend\Mvc\Router\PriorityList;
@@ -128,11 +128,11 @@ class Part extends TreeRouteStack implements Route
      * match(): defined by Route interface.
      *
      * @see    Route::match()
-     * @param  RequestInterface  $request
+     * @param  Request  $request
      * @param  int|null $pathOffset
      * @return RouteMatch|null
      */
-    public function match(RequestInterface $request, $pathOffset = null)
+    public function match(Request $request, $pathOffset = null)
     {
         if ($pathOffset === null) {
             $pathOffset = 0;

@@ -113,6 +113,10 @@ class Rule
                 return $this->evaluateAstPart($ast['arguments'][0], $number)
                        * $this->evaluateAstPart($ast['arguments'][1], $number);
                 
+            case '%':
+                return $this->evaluateAstPart($ast['arguments'][0], $number)
+                       % $this->evaluateAstPart($ast['arguments'][1], $number);
+                
             case '>':
                 return $this->evaluateAstPart($ast['arguments'][0], $number)
                        > $this->evaluateAstPart($ast['arguments'][1], $number)
@@ -161,6 +165,9 @@ class Rule
                 return $this->evaluateAstPart($ast['arguments'][0], $number)
                        ? $this->evaluateAstPart($ast['arguments'][1], $number)
                        : $this->evaluateAstPart($ast['arguments'][2], $number);
+                
+            default:
+                exit('Unknown token: ' . $ast['id']);
         }
     }
     

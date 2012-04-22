@@ -323,7 +323,7 @@ class Parser
             case '=':
             case '&':
             case '|':
-                if ($this->string[$this->currentPos + 1] === $result) {
+                if ($this->string[$this->currentPos] === $result) {
                     $this->currentPos++;
                     $id = $result . $result;
                 } else {
@@ -334,7 +334,7 @@ class Parser
             case '!':
             case '<':
             case '>':
-                if ($this->string[$this->currentPos + 1] === '=') {
+                if ($this->string[$this->currentPos] === '=') {
                     $this->currentPos++;
                     $result .= '=';
                 }

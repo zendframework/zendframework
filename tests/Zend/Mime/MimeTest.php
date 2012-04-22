@@ -102,7 +102,7 @@ class MimeTest extends \PHPUnit_Framework_TestCase
 
     public function testZf1058WhitespaceAtEndOfBodyCausesInfiniteLoop()
     {
-        $this->markTestSkipped('Class Zend\Mail\Mail does no longer exist');
+        $this->markTestIncomplete('Class Zend\Mail\Mail does no longer exist');
         // Set timezone to avoid "date(): It is not safe to rely on the system's timezone settings."
         // message.
         date_default_timezone_set('GMT');

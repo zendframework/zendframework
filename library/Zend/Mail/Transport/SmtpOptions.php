@@ -163,6 +163,7 @@ class SmtpOptions extends Options
     public function setHost($host)
     {
         $this->host = (string) $host;
+        return $this;
     }
 
     /**

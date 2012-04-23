@@ -465,6 +465,8 @@ class Client implements Dispatchable
      *
      * @param array|ArrayIterator|SetCookie|string $cookie
      * @param string  $value
+     * @param string  $version
+     * @param string  $maxAge
      * @param string  $domain
      * @param string  $expire
      * @param string  $path
@@ -472,7 +474,7 @@ class Client implements Dispatchable
      * @param boolean $httponly
      * @return Client
      */
-    public function addCookie($cookie, $value = null, $domain = null, $expire = null, $path = null, $secure = false, $httponly = true)
+    public function addCookie($cookie, $value = null, $version = null, $maxAge = null, $domain = null, $expire = null, $path = null, $secure = false, $httponly = true)
     {
         if (is_array($cookie) || $cookie instanceof ArrayIterator) {
             foreach ($cookie as $setCookie) {
@@ -485,7 +487,7 @@ class Client implements Dispatchable
         } elseif ($cookie instanceof SetCookie) {
             $this->cookies[$this->getCookieId($cookie)] = $cookie;
         } elseif (is_string($cookie) && $value !== null) {
-            $setCookie = new SetCookie($cookie, $value, null, null, $domain, $expire, $path, $secure, $httponly);
+            $setCookie = new SetCookie($cookie, $value, $version, $maxAge, $domain, $expire, $path, $secure, $httponly);
             $this->cookies[$this->getCookieId($setCookie)] = $setCookie;
         } else {
             throw new Exception\InvalidArgumentException('Invalid parameter type passed as Cookie');

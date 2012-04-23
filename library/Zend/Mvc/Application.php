@@ -48,7 +48,9 @@ class Application implements AppContext
      */
     public function setEventManager(EventCollection $events)
     {
+        $events->setIdentifiers(array(__CLASS__, get_class($this)));
         $this->events = $events;
+        $this->attachDefaultListeners();
         return $this;
     }
 
@@ -192,8 +194,7 @@ class Application implements AppContext
     public function events()
     {
         if (!$this->events instanceof EventCollection) {
-            $this->setEventManager(new EventManager(array(__CLASS__, get_class($this))));
-            $this->attachDefaultListeners();
+            $this->setEventManager(new EventManager());
         }
         return $this->events;
     }

@@ -8,7 +8,7 @@ read/subscribe to the following resources:
  -  ZF2 Requirements:
     http://framework.zend.com/wiki/display/ZFDEV2/Zend+Framework+2.0+Requirements
  -  Coding Standards:
-    http://framework.zend.com/manual/en/coding-standard.html
+    http://framework.zend.com/wiki/display/ZFDEV2/Coding+Standards
  -  ZF Git Guide:
     README-GIT.md
  -  Contributor's Guide:

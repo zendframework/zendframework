@@ -24,7 +24,6 @@ namespace Zend\Cache\Storage;
 use ArrayObject,
     stdClass,
     Zend\Cache\Exception,
-    Zend\EventManager\EventCollection,
     Zend\EventManager\EventManagerAware;
 
 /**

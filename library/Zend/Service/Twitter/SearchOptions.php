@@ -295,8 +295,7 @@ class SearchOptions extends Options
     public function setResultType($resultType)
     {
        $resultType = strtolower($resultType);
-       if(!in_array($resultType,array('mixed', 'popular', 'recent')))
-       {
+       if(!in_array($resultType, array('mixed', 'popular', 'recent'))) {
            throw new UnexpectedValueException(
                'Bad value "' . $resultType . '" on result_type parameter'
            );

@@ -141,6 +141,8 @@ class Search extends Client\RestClient
     /**
      * Performs a Twitter search query.
      *
+     * @param string $query (optional)
+     * @param array|Traversable|SearchOptions $options (optional)
      * @throws Http\Client\Exception
      * @return mixed
      */

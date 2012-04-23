@@ -133,7 +133,7 @@ class SearchOptions extends Options
     {
         $array = array();
         $transform = function($letters) {
-              $letter = array_shift($letters);
+            $letter = array_shift($letters);
             return '_' . strtolower($letter);
         };
         foreach ($this as $key => $value) {

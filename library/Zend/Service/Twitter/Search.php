@@ -57,6 +57,13 @@ class Search extends Client\RestClient
      * @var \Zend\Uri\Http
      */
     protected $uri;
+    
+    /**
+     * Twitter api search options
+     *
+     * @var \Zend\Service\Twitter\SearchOptions
+     */
+    protected $options;
 
     /**
      * Constructor
@@ -64,12 +71,46 @@ class Search extends Client\RestClient
      * @param  string $returnType
      * @return void
      */
-    public function __construct($responseType = 'json')
+    public function __construct($responseType = 'json',$options=null)
     {
         $this->setResponseType($responseType);
         $this->setUri("http://search.twitter.com");
 
         $this->setHeaders('Accept-Charset', 'ISO-8859-1,utf-8');
+        
+        if($options)
+        {
+            $this->setOptions($options);
+        }
+    }
+    
+    /**
+     * Set options.
+     *
+     * @param  array|Traversable|SearchOptions $options
+     * @return SearchOptions
+     * @see    getOptions()
+     */
+	public function setOptions($options)
+    {
+        if (!$options instanceof SearchOptions) {
+            $options = new SearchOptions($options);
+        }
+        $this->options = $options;
+    }
+    
+    /**
+     * Get options.
+     *
+     * @return SearchOptions
+     * @see setOptions()
+     */
+	public function getOptions()
+    {
+        if (!$this->options) {
+            $this->setOptions(new SearchOptions());
+        }
+        return $this->options;
     }
 
     /**
@@ -104,30 +145,23 @@ class Search extends Client\RestClient
      * @throws Http\Client\Exception
      * @return mixed
      */
-    public function execute($query, array $params = array())
+    public function execute($query=null, $options=null)
     {
-        $_query = array();
-
-        $_query['q'] = $query;
-
-        foreach($params as $key=>$param) {
-            switch($key) {
-                case 'geocode':
-                case 'lang':
-                case 'since_id':
-                    $_query[$key] = $param;
-                    break;
-                case 'rpp':
-                    $_query[$key] = (intval($param) > 100) ? 100 : intval($param);
-                    break;
-                case 'page':
-                    $_query[$key] = intval($param);
-                    break;
-                case 'show_user':
-                    $_query[$key] = 'true';
-            }
+    	if($options) {
+    	    $this->setOptions($options);
+    	}
+    	
+        $options = $this->getOptions();
+        if($query) {
+            $options->setQuery($query);
         }
-
+        
+        if(!$options->getQuery()) {
+            throw new Exception\RuntimeException('No query defined');  
+        }
+        
+        $_query = $options->toArray();
+        
         $response = $this->restGet('/search.' . $this->responseType, $_query);
 
         switch($this->responseType) {

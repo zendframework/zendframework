@@ -56,7 +56,7 @@ class Pdf extends AbstractRenderer
     protected $moduleSize = 0.5;
 
     /**
-     * Set an PDF resource to draw the barcode inside
+     * Set a PDF resource to draw the barcode inside
      *
      * @param PdfDocument $pdf
      * @param integer     $page

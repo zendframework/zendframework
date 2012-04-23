@@ -89,7 +89,7 @@ class FilesystemTest extends CommonAdapterTest
 
     public function testNormalizeCacheDir()
     {
-        $cacheDir = $cacheDirExpected = sys_get_temp_dir();
+        $cacheDir = $cacheDirExpected = realpath(sys_get_temp_dir());
 
         if (DIRECTORY_SEPARATOR != '/') {
             $cacheDir = str_replace(DIRECTORY_SEPARATOR, '/', $cacheDir);

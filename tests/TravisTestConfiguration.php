@@ -45,7 +45,7 @@
  * GENERAL SETTINGS
  *
  * OB_ENABLED should be enabled for some tests to check if all functionality
- * works as expected. Such tests include those for Zen\Soap and Zend\Session,
+ * works as expected. Such tests include those for Zend\Soap and Zend\Session,
  * which require that headers not be sent in order to work.
  */
 defined('TESTS_ZEND_OB_ENABLED') || define('TESTS_ZEND_OB_ENABLED', false);

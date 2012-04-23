@@ -220,7 +220,13 @@ abstract class RestfulController implements Dispatchable, EventManagerAware, Inj
      */
     public function setEventManager(EventCollection $events)
     {
+        $events->setIdentifiers(array(
+            'Zend\Stdlib\Dispatchable',
+            __CLASS__,
+            get_class($this)
+        ));
         $this->events = $events;
+        $this->attachDefaultListeners();
         return $this;
     }
 
@@ -234,12 +240,7 @@ abstract class RestfulController implements Dispatchable, EventManagerAware, Inj
     public function events()
     {
         if (!$this->events) {
-            $this->setEventManager(new EventManager(array(
-                'Zend\Stdlib\Dispatchable',
-                __CLASS__,
-                get_called_class(),
-            )));
-            $this->attachDefaultListeners();
+            $this->setEventManager(new EventManager());
         }
         return $this->events;
     }

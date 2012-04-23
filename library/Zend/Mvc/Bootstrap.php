@@ -7,7 +7,6 @@ use Zend\Di\Configuration as DiConfiguration,
     Zend\EventManager\EventCollection as Events,
     Zend\EventManager\EventManager,
     Zend\EventManager\EventManagerAware,
-    Zend\EventManager\StaticEventManager,
     Zend\Mvc\Router\Http\TreeRouteStack as Router;
 
 class Bootstrap implements Bootstrapper, EventManagerAware
@@ -96,17 +95,16 @@ class Bootstrap implements Bootstrapper, EventManagerAware
      */
     protected function setupLocator(AppContext $application)
     {
+        $events       = $this->events();
+        $sharedEvents = $events->getSharedCollections();
+
         $di = new Di;
         $di->instanceManager()->addTypePreference('Zend\Di\Locator', $di);
+        $di->instanceManager()->addSharedInstance($sharedEvents, 'Zend\EventManager\SharedEventManager');
+        $di->instanceManager()->addSharedInstance($sharedEvents, 'Zend\EventManager\SharedEventCollection');
 
         // Default configuration for common MVC classes
         $diConfig = new DiConfiguration(array('definition' => array('class' => array(
-            'Zend\EventManager\SharedEventManager' => array(
-                'instantiator' => array(
-                    'Zend\EventManager\StaticEventManager',
-                    'getInstance'
-                ),
-            ),
             'Zend\Mvc\Router\RouteStack' => array(
                 'instantiator' => array(
                     'Zend\Mvc\Router\Http\TreeRouteStack',
@@ -271,7 +269,7 @@ class Bootstrap implements Bootstrapper, EventManagerAware
         // Basic view strategy
         $locator             = $application->getLocator();
         $events              = $application->events();
-        $staticEvents        = StaticEventManager::getInstance();
+        $sharedEvents        = $locator->get('Zend\EventManager\SharedEventCollection');
         $view                = $locator->get('Zend\View\View');
         $phpRendererStrategy = $locator->get('Zend\View\Strategy\PhpRendererStrategy');
         $defaultViewStrategy = $locator->get('Zend\Mvc\View\DefaultRenderingStrategy');
@@ -288,11 +286,11 @@ class Bootstrap implements Bootstrapper, EventManagerAware
         $createViewModelListener = $locator->get('Zend\Mvc\View\CreateViewModelListener');
         $injectTemplateListener  = $locator->get('Zend\Mvc\View\InjectTemplateListener');
         $injectViewModelListener = $locator->get('Zend\Mvc\View\InjectViewModelListener');
-        $staticEvents->attach('Zend\Stdlib\Dispatchable', MvcEvent::EVENT_DISPATCH, array($createViewModelListener, 'createViewModelFromArray'), -80);
-        $staticEvents->attach('Zend\Stdlib\Dispatchable', MvcEvent::EVENT_DISPATCH, array($createViewModelListener, 'createViewModelFromNull'), -80);
-        $staticEvents->attach('Zend\Stdlib\Dispatchable', MvcEvent::EVENT_DISPATCH, array($injectTemplateListener, 'injectTemplate'), -90);
+        $sharedEvents->attach('Zend\Stdlib\Dispatchable', MvcEvent::EVENT_DISPATCH, array($createViewModelListener, 'createViewModelFromArray'), -80);
+        $sharedEvents->attach('Zend\Stdlib\Dispatchable', MvcEvent::EVENT_DISPATCH, array($createViewModelListener, 'createViewModelFromNull'), -80);
+        $sharedEvents->attach('Zend\Stdlib\Dispatchable', MvcEvent::EVENT_DISPATCH, array($injectTemplateListener, 'injectTemplate'), -90);
         $events->attach(MvcEvent::EVENT_DISPATCH_ERROR, array($injectViewModelListener, 'injectViewModel'), -100);
-        $staticEvents->attach('Zend\Stdlib\Dispatchable', MvcEvent::EVENT_DISPATCH, array($injectViewModelListener, 'injectViewModel'), -100);
+        $sharedEvents->attach('Zend\Stdlib\Dispatchable', MvcEvent::EVENT_DISPATCH, array($injectViewModelListener, 'injectViewModel'), -100);
 
         // Inject MVC Event with view model
         $mvcEvent  = $application->getMvcEvent();
@@ -316,6 +314,9 @@ class Bootstrap implements Bootstrapper, EventManagerAware
      */
     protected function setupEvents(AppContext $application)
     {
+        $application->events()->setSharedCollections(
+            $this->events()->getSharedCollections()
+        );
         $params = array(
             'application' => $application,
             'config'      => $this->config,

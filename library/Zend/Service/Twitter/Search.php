@@ -61,7 +61,7 @@ class Search extends Client\RestClient
     /**
      * Twitter api search options
      *
-     * @var \Zend\Service\Twitter\SearchOptions
+     * @var SearchOptions
      */
     protected $options;
 
@@ -71,15 +71,14 @@ class Search extends Client\RestClient
      * @param  string $returnType
      * @return void
      */
-    public function __construct($responseType = 'json',$options=null)
+    public function __construct($responseType = 'json', $options=null)
     {
         $this->setResponseType($responseType);
         $this->setUri("http://search.twitter.com");
 
         $this->setHeaders('Accept-Charset', 'ISO-8859-1,utf-8');
         
-        if($options)
-        {
+        if($options) {
             $this->setOptions($options);
         }
     }
@@ -91,7 +90,7 @@ class Search extends Client\RestClient
      * @return SearchOptions
      * @see    getOptions()
      */
-	public function setOptions($options)
+    public function setOptions($options)
     {
         if (!$options instanceof SearchOptions) {
             $options = new SearchOptions($options);
@@ -105,7 +104,7 @@ class Search extends Client\RestClient
      * @return SearchOptions
      * @see setOptions()
      */
-	public function getOptions()
+    public function getOptions()
     {
         if (!$this->options) {
             $this->setOptions(new SearchOptions());
@@ -145,11 +144,11 @@ class Search extends Client\RestClient
      * @throws Http\Client\Exception
      * @return mixed
      */
-    public function execute($query=null, $options=null)
+    public function execute($query = null, $options = null)
     {
-    	if($options) {
-    	    $this->setOptions($options);
-    	}
+        if($options) {
+            $this->setOptions($options);
+        }
     	
         $options = $this->getOptions();
         if($query) {

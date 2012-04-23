@@ -93,7 +93,7 @@ abstract class Utils
         // *nix
         if (false === ($meminfo = @file_get_contents('/proc/meminfo'))) {
             $lastErr = error_get_last();
-            throw new Exception\RuntimeException("Can't read '/proc/meminfo': {$lastErr['messagae']}");
+            throw new Exception\RuntimeException("Can't read '/proc/meminfo': {$lastErr['message']}");
         } elseif (!preg_match_all('/(\w+):\s*(\d+\s*\w*)[\r|\n]/i', $meminfo, $matches, PREG_PATTERN_ORDER)) {
             throw new Exception\RuntimeException("Can't parse '/proc/meminfo'");
         }

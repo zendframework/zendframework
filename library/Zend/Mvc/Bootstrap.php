@@ -41,6 +41,11 @@ class Bootstrap implements Bootstrapper, EventManagerAware
      */
     public function setEventManager(Events $events)
     {
+        $events->setIdentifiers(array(
+            __CLASS__,
+            get_called_class(),
+            'bootstrap',
+        ));
         $this->events = $events;
     }
 
@@ -56,11 +61,7 @@ class Bootstrap implements Bootstrapper, EventManagerAware
     public function events()
     {
         if (!$this->events instanceof Events) {
-            $this->setEventManager(new EventManager(array(
-                __CLASS__,
-                get_called_class(),
-                'bootstrap',
-            )));
+            $this->setEventManager(new EventManager());
         }
         return $this->events;
     }
@@ -100,6 +101,12 @@ class Bootstrap implements Bootstrapper, EventManagerAware
 
         // Default configuration for common MVC classes
         $diConfig = new DiConfiguration(array('definition' => array('class' => array(
+            'Zend\EventManager\SharedEventManager' => array(
+                'instantiator' => array(
+                    'Zend\EventManager\StaticEventManager',
+                    'getInstance'
+                ),
+            ),
             'Zend\Mvc\Router\RouteStack' => array(
                 'instantiator' => array(
                     'Zend\Mvc\Router\Http\TreeRouteStack',

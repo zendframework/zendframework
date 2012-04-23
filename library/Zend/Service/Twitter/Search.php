@@ -71,7 +71,7 @@ class Search extends Client\RestClient
      * @param  string $returnType
      * @return void
      */
-    public function __construct($responseType = 'json', $options=null)
+    public function __construct($responseType = 'json', $options = null)
     {
         $this->setResponseType($responseType);
         $this->setUri("http://search.twitter.com");

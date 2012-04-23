@@ -49,14 +49,14 @@ class SearchOptions extends Options
     * arbitrary locations; however you can use this geocode parameter to 
     * search near geocodes directly.
     * 
-    * @var geocode string
+    * @var string
     */
     protected $geocode;
     
     /**
     * Restricts tweets to the given language, given by an ISO 639-1 code.
     * 
-    * @var lang string
+    * @var string
     */
     protected $lang;
     
@@ -65,7 +65,7 @@ class SearchOptions extends Options
     * This is intended for language-specific clients and the default should work in
     * the majority of cases..
     * 
-    * @var locale string
+    * @var string
     */
     protected $locale;
     
@@ -73,22 +73,22 @@ class SearchOptions extends Options
     * The page number (starting at 1) to return, up to a max of
     * roughly 1500 results (based on rpp * page).
     * 
-    * @var page string
+    * @var string
     */
     protected $page;
     
     /**
     * Specifies what type of search results you would prefer to receive.
-    * The current default is "mixed." (mixed|recent|popular)
+    * The current default is "mixed". (mixed|recent|popular)
     * 
-    * @var result_type string
+    * @var string
     */
     protected $result_type = 'mixed';
     
     /**
     * The number of tweets to return per page, up to a max of 100.
     * 
-    * @var rpp string
+    * @var string
     */
     protected $rpp;
     
@@ -96,7 +96,7 @@ class SearchOptions extends Options
     * When true, prepends ":" to the beginning of the tweet. This is useful for 
     * readers that do not display Atom's author field. The default is false.
     * 
-    * @var show_user string
+    * @var string
     */
     protected $show_user = false;
     
@@ -106,21 +106,21 @@ class SearchOptions extends Options
     * If the limit of Tweets has occured since the since_id, the since_id will be forced 
     * to the oldest ID available.
     * 
-    * @var since_id string
+    * @var string
     */
     protected $since_id;
     
     /**
     * Returns results with an ID less than (that is, older than) or equal to the specified ID.
     * 
-    * @var max_id string
+    * @var string
     */
     protected $max_id;
     
     /**
     * When set to either true, t or 1, each tweet will include a node called "entities,".
     * 
-    * @var include_entities string
+    * @var string
     */
     protected $include_entities;
     
@@ -131,14 +131,13 @@ class SearchOptions extends Options
      */
     public function toArray()
     {
-       $array = array();
+        $array = array();
         $transform = function($letters) {
               $letter = array_shift($letters);
             return '_' . strtolower($letter);
         };
         foreach ($this as $key => $value) {
-            if(!is_null($value))
-            {
+            if(!is_null($value)) {
                 $normalizedKey = preg_replace_callback('/([A-Z])/', $transform, $key);
                 $array[$normalizedKey] = $value;
             }
@@ -296,10 +295,10 @@ class SearchOptions extends Options
     public function setResultType($resultType)
     {
        $resultType = strtolower($resultType);
-       if(!in_array($resultType,array('mixed','popular','recent')))
+       if(!in_array($resultType,array('mixed', 'popular', 'recent')))
        {
            throw new UnexpectedValueException(
-               'Bad value "'.$resultType.'" on result_type parameter'
+               'Bad value "' . $resultType . '" on result_type parameter'
            );
        }
         

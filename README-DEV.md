@@ -17,7 +17,7 @@ read/subscribe to the following resources:
     Archives: http://zend-framework-community.634137.n4.nabble.com/ZF-Contributor-f680267.html
     Subscribe: zf-contributors-subscribe@lists.zend.com
  -  ZF Contributor's IRC channel:
-    #zftalk.dev on Freenode.net
+    #zftalk.2 on Freenode.net
 
 If you are working on new features, or refactoring an existing
 component, please create a proposal. You can do this in on the proposals

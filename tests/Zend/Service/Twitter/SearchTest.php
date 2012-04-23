@@ -90,7 +90,11 @@ class SearchTest extends \PHPUnit_Framework_TestCase
     
     public function testSetOptionsWithArray()
     {
-        $this->twitter->setOptions(array('lang'=>'fr','result_type'=>'mixed','show_user'=>true));
+        $this->twitter->setOptions(array(
+            'lang' => 'fr',
+            'result_type' => 'mixed',
+            'show_user' => true
+        ));
         $this->assertEquals('Zend\Service\Twitter\SearchOptions', get_class($this->twitter->getOptions()));
         $this->assertEquals('fr', $this->twitter->getOptions()->getLang());
         $this->assertEquals('mixed', $this->twitter->getOptions()->getResultType());
@@ -98,7 +102,11 @@ class SearchTest extends \PHPUnit_Framework_TestCase
     
     public function testSetOptionsWithConfig()
     {
-        $this->twitter->setOptions(new Config(array('lang'=>'fr','result_type'=>'mixed','show_user'=>true)));
+        $this->twitter->setOptions(new Config(array(
+            'lang' => 'fr',
+            'result_type' => 'mixed',
+            'show_user' => true
+        )));
         $this->assertEquals('Zend\Service\Twitter\SearchOptions', get_class($this->twitter->getOptions()));
         $this->assertEquals('fr', $this->twitter->getOptions()->getLang());
         $this->assertEquals('mixed', $this->twitter->getOptions()->getResultType());
@@ -107,7 +115,12 @@ class SearchTest extends \PHPUnit_Framework_TestCase
     public function testWithQueryInConfig()
     {
         $this->twitter->setResponseType('json');
-        $this->twitter->setOptions(new Config(array('q'=>'zend','lang'=>'fr','result_type'=>'mixed','show_user'=>true)));
+        $this->twitter->setOptions(new Config(array(
+            'q' => 'zend',
+            'lang' => 'fr',
+            'result_type' => 'mixed',
+            'show_user' => true
+        )));
         $response = $this->twitter->execute();
         $this->assertEquals('fr', $this->twitter->getOptions()->getLang());
         $this->assertEquals('mixed', $this->twitter->getOptions()->getResultType());
@@ -118,7 +131,12 @@ class SearchTest extends \PHPUnit_Framework_TestCase
     public function testWithQueryAliasInConfig()
     {
         $this->twitter->setResponseType('json');
-        $this->twitter->setOptions(new Config(array('query'=>'zend','lang'=>'fr','result_type'=>'mixed','show_user'=>true)));
+        $this->twitter->setOptions(new Config(array(
+            'query' => 'zend',
+            'lang' => 'fr',
+            'result_type' => 'mixed',
+            'show_user' => true
+        )));
         $response = $this->twitter->execute();
         $this->assertEquals('zend', $this->twitter->getOptions()->getQuery());
         $this->assertEquals('fr', $this->twitter->getOptions()->getLang());
@@ -130,7 +148,13 @@ class SearchTest extends \PHPUnit_Framework_TestCase
     public function testWithQueryInConfigOnExcecute()
     {
         $this->twitter->setResponseType('json');
-        $response = $this->twitter->execute(null,new Config(array('q'=>'zend','lang'=>'fr','result_type'=>'mixed','show_user'=>true,'include_entities'=>true)));
+        $response = $this->twitter->execute(null,new Config(array(
+            'q' => 'zend',
+            'lang' => 'fr',
+            'result_type' => 'mixed',
+            'show_user' => true,
+            'include_entities' => true
+        )));
         $this->assertEquals('fr', $this->twitter->getOptions()->getLang());
         $this->assertEquals('mixed', $this->twitter->getOptions()->getResultType());
         $this->assertInternalType('array', $response);
@@ -140,7 +164,12 @@ class SearchTest extends \PHPUnit_Framework_TestCase
     
     public function testSetOptionsWithSearchOptions()
     {
-        $this->twitter->setOptions(new SearchOptions(array('lang'=>'fr','result_type'=>'mixed','show_user'=>true,'include_entities'=>false)));
+        $this->twitter->setOptions(new SearchOptions(array(
+            'lang' => 'fr',
+            'result_type' => 'mixed',
+            'show_user' => true,
+            'include_entities' => false
+        )));
         $this->assertEquals('fr', $this->twitter->getOptions()->getLang());
         $this->assertEquals('mixed', $this->twitter->getOptions()->getResultType());
         $response = $this->twitter->execute('zend');
@@ -149,7 +178,12 @@ class SearchTest extends \PHPUnit_Framework_TestCase
     
     public function testSetOptionsWithNoEntities()
     {
-        $this->twitter->setOptions(new SearchOptions(array('lang'=>'fr','result_type'=>'mixed','show_user'=>true,'include_entities'=>false)));
+        $this->twitter->setOptions(new SearchOptions(array(
+            'lang' => 'fr',
+            'result_type' => 'mixed',
+            'show_user' => true,
+            'include_entities' => false
+        )));
         $response = $this->twitter->execute('zend');
         $this->assertTrue((isset($response['results'][0]) && !isset($response['results'][0]['entities'])));
     }
@@ -180,7 +214,11 @@ class SearchTest extends \PHPUnit_Framework_TestCase
     public function testJsonSearchWithArrayOptions()
     {
         $this->twitter->setResponseType('json');
-        $response = $this->twitter->execute('zend', array('lang'=>'fr','result_type'=>'recent','show_user'=>true));
+        $response = $this->twitter->execute('zend', array(
+            'lang' => 'fr',
+            'result_type' => 'recent',
+            'show_user' => true
+        ));
         $this->assertEquals('fr', $this->twitter->getOptions()->getLang());
         $this->assertEquals('recent', $this->twitter->getOptions()->getResultType());
         $this->assertInternalType('array', $response);
@@ -200,7 +238,12 @@ class SearchTest extends \PHPUnit_Framework_TestCase
     public function testJsonSearchReturnTwentyResultsReturnsArray()
     {
         $this->twitter->setResponseType('json');
-        $response = $this->twitter->execute('php', array('rpp' => '20','lang'=>'en','result_type'=>'recent','include_entities'=>false));
+        $response = $this->twitter->execute('php', array(
+            'rpp' => '20',
+            'lang' => 'en',
+            'result_type' => 'recent',
+            'include_entities' => false
+        ));
         $this->assertEquals(20, $this->twitter->getOptions()->getRpp());
         $this->assertInternalType('array', $response);
         $this->assertEquals(count($response['results']),20);
@@ -209,8 +252,12 @@ class SearchTest extends \PHPUnit_Framework_TestCase
     public function testAtomSearchReturnTwentyResultsReturnsObject()
     {
         $this->twitter->setResponseType('atom');
-        $response = $this->twitter->execute('php', array('rpp' => 20,'lang'=>'en','result_type'=>'recent','include_entities'=>false));
-
+        $response = $this->twitter->execute('php', array(
+            'rpp' => 20,
+            'lang' => 'en',
+            'result_type' => 'recent',
+            'include_entities' => false
+        ));
         $this->assertInstanceOf('Zend\Feed\Reader\Feed\Atom', $response);
         $this->assertTrue(($response->count() == 20));
     }
@@ -219,7 +266,6 @@ class SearchTest extends \PHPUnit_Framework_TestCase
     {
         $this->twitter->setResponseType('atom');
         $response = $this->twitter->execute('zend', array('show_user' => 'true'));
-
         $this->assertInstanceOf('Zend\Feed\Reader\Feed\Atom', $response);
     }
 }

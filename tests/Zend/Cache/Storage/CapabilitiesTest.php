@@ -21,7 +21,8 @@
 
 namespace ZendTest\Cache\Storage;
 
-use Zend\Cache\Storage\Capabilities;
+use Zend\Cache\Storage\Capabilities,
+    Zend\Cache\Storage\Adapter\Memory as MemoryAdapter;
 
 /**
  * @category   Zend
@@ -55,13 +56,26 @@ class CapabilitiesTest extends \PHPUnit_Framework_TestCase
      */
     protected $_marker;
 
+    /**
+     * The storage adapter
+     *
+     * @var Zend\Cache\Storage\Adapter
+     */
+    protected $_adapter;
+
     public function setUp()
     {
-        $this->_marker = new \stdClass();
+        $this->_marker  = new \stdClass();
+        $this->_adapter = new MemoryAdapter();
 
-        $this->_baseCapabilities = new Capabilities($this->_marker);
+        $this->_baseCapabilities = new Capabilities($this->_adapter, $this->_marker);
+        $this->_capabilities     = new Capabilities($this->_adapter, $this->_marker, array(), $this->_baseCapabilities);
+    }
 
-        $this->_capabilities = new Capabilities($this->_marker, array(), $this->_baseCapabilities);
+    public function testGetAdapter()
+    {
+        $this->assertSame($this->_adapter, $this->_capabilities->getAdapter());
+        $this->assertSame($this->_adapter, $this->_baseCapabilities->getAdapter());
     }
 
     public function testSetAndGetCapability()
@@ -76,40 +90,23 @@ class CapabilitiesTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(100, $this->_capabilities->getMaxTtl());
     }
 
-    public function testTriggerChangeEvent()
+    public function testTriggerCapabilityEvent()
     {
-        $em = $this->_capabilities->getEventManager();
-        $this->assertInstanceOf('Zend\EventManager\EventManager', $em);
-
+        $em    = $this->_capabilities->getAdapter()->events();
         $event = null;
-        $em->attach('change', function ($eventArg) use (&$event) {
+        $em->attach('capability', function ($eventArg) use (&$event) {
             $event = $eventArg;
         });
 
         $this->_capabilities->setMaxTtl($this->_marker, 100);
 
         $this->assertInstanceOf('Zend\EventManager\Event', $event);
-        $this->assertEquals('change', $event->getName());
-        $this->assertSame($this->_capabilities, $event->getTarget());
-        $this->assertEquals(array('maxTtl' => 100), $event->getParams());
+        $this->assertEquals('capability', $event->getName());
+        $this->assertSame($this->_adapter, $event->getTarget());
+
+        $params = $event->getParams();
+        $this->assertInstanceOf('ArrayObject', $params);
+        $this->assertTrue(isset($params ['maxTtl']));
+        $this->assertEquals(100, $params['maxTtl']);
     }
-
-    public function testTriggerChangeEventOfBaseCapabilities()
-    {
-        $em = $this->_capabilities->getEventManager();
-        $this->assertInstanceOf('Zend\EventManager\EventManager', $em);
-
-        $event = null;
-        $em->attach('change', function ($eventArg) use (&$event) {
-            $event = $eventArg;
-        });
-
-        $this->_baseCapabilities->setMaxTtl($this->_marker, 100);
-
-        $this->assertInstanceOf('Zend\EventManager\Event', $event);
-        $this->assertEquals('change', $event->getName());
-        $this->assertSame($this->_baseCapabilities, $event->getTarget());
-        $this->assertEquals(array('maxTtl' => 100), $event->getParams());
-    }
-
 }

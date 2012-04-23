@@ -21,9 +21,11 @@
 
 namespace Zend\Cache\Storage;
 
-use stdClass,
+use ArrayObject,
+    stdClass,
     Zend\Cache\Exception,
-    Zend\EventManager\EventManager;
+    Zend\EventManager\EventCollection,
+    Zend\EventManager\EventManagerAware;
 
 /**
  * @category   Zend
@@ -35,11 +37,11 @@ use stdClass,
 class Capabilities
 {
     /**
-     * The event manager
+     * The storage adapter
      *
-     * @var null|EventManager
+     * @var Adapter
      */
-    protected $eventManager;
+    protected $adapter;
 
     /**
      * A marker to set/change capabilities
@@ -116,8 +118,8 @@ class Capabilities
     protected $_supportedMetadata;
 
     /**
-     * Supports tagging? 
-     * 
+     * Supports tagging?
+     *
      * @var bool
      */
     protected $_tagging;
@@ -135,63 +137,34 @@ class Capabilities
     /**
      * Constructor
      *
-     * @param stdClass $marker
-     * @param array $capabilities
-     * @param null|Zend\Cache\Storage\Capabilities $baseCapabilities
+     * @param Adapter           $adapter
+     * @param stdClass          $marker
+     * @param array             $capabilities
+     * @param null|Capabilities $baseCapabilities
      */
     public function __construct(
+        Adapter $adapter,
         stdClass $marker,
         array $capabilities = array(),
         Capabilities $baseCapabilities = null
     ) {
-        $this->marker = $marker;
+        $this->adapter = $adapter;
+        $this->marker  = $marker;
         $this->baseCapabilities = $baseCapabilities;
+
         foreach ($capabilities as $name => $value) {
             $this->setCapability($marker, $name, $value);
         }
     }
 
     /**
-     * Returns if the dependency of Zend\EventManager is available
+     * Get the storage adapter
      *
-     * @return boolean
+     * @return Adapter
      */
-    public function hasEventManager()
+    public function getAdapter()
     {
-        return ($this->eventManager !== null || class_exists('Zend\EventManager\EventManager'));
-    }
-
-    /**
-     * Get the event manager
-     *
-     * @return EventManager
-     * @throws Exception\MissingDependencyException
-     */
-    public function getEventManager()
-    {
-        if ($this->eventManager instanceof EventManager) {
-            return $this->eventManager;
-        }
-
-        if (!class_exists('Zend\EventManager\EventManager')) {
-            throw new Exception\MissingDependencyException('Zend\EventManager\EventManager not found');
-        }
-
-        // create a new event manager object
-        $eventManager = new EventManager();
-
-        // trigger change event on change of a base capability
-        if ($this->baseCapabilities && $this->baseCapabilities->hasEventManager()) {
-            $onChange = function ($event) use ($eventManager)  {
-                $eventManager->trigger('change', $event->getTarget(), $event->getParams());
-            };
-            $this->baseCapabilities->getEventManager()->attach('change', $onChange);
-        }
-
-        // register event manager
-        $this->eventManager = $eventManager;
-
-        return $this->eventManager;
+        return $this->adapter;
     }
 
     /**
@@ -550,7 +523,7 @@ class Capabilities
     {
         return $this->setCapability($marker, 'tagging', (bool) $tagging);
     }
-    
+
     /**
      * Get value for tagging
      *
@@ -598,9 +571,13 @@ class Capabilities
         $property = '_' . $name;
         if ($this->$property !== $value) {
             $this->$property = $value;
-            $this->getEventManager()->trigger('change', $this, array(
-                $name => $value
-            ));
+
+            // trigger event
+            if ($this->adapter instanceof EventManagerAware) {
+                $this->adapter->events()->trigger('capability', $this->adapter, new ArrayObject(array(
+                    $name => $value
+                )));
+            }
         }
 
         return $this;

@@ -48,7 +48,7 @@ abstract class AbstractAdapter implements Adapter, EventManagerAware
     /**
      * The used EventManager if any
      *
-     * @var null|EventManager
+     * @var null|EventCollection
      */
     protected $events = null;
 
@@ -237,7 +237,7 @@ abstract class AbstractAdapter implements Adapter, EventManagerAware
     /**
      * Get the event manager
      *
-     * @return EventManager
+     * @return EventCollection
      */
     public function events()
     {
@@ -2432,7 +2432,7 @@ abstract class AbstractAdapter implements Adapter, EventManagerAware
     {
         if ($this->capabilities === null) {
             $this->capabilityMarker = new stdClass();
-            $this->capabilities     = new Capabilities($this->capabilityMarker);
+            $this->capabilities     = new Capabilities($this, $this->capabilityMarker);
         }
         return $this->capabilities;
     }

@@ -853,6 +853,7 @@ class Apc extends AbstractAdapter
         if ($this->capabilities === null) {
             $marker       = new stdClass();
             $capabilities = new Capabilities(
+                $this,
                 $marker,
                 array(
                     'supportedDatatypes' => array(

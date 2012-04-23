@@ -294,6 +294,7 @@ abstract class AbstractZendServer extends AbstractAdapter
         if ($this->capabilities === null) {
             $this->capabilityMarker = new stdClass();
             $this->capabilities     = new Capabilities(
+                $this,
                 $this->capabilityMarker,
                 array(
                     'supportedDatatypes' => array(

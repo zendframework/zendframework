@@ -153,9 +153,7 @@ class Search extends Client\RestClient
         $options = $this->getOptions();
         if($query) {
             $options->setQuery($query);
-        }
-        
-        if(!$options->getQuery()) {
+        } else if(!$options->getQuery()) {
             throw new Exception\RuntimeException('No query defined');  
         }
         

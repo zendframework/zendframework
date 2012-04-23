@@ -173,8 +173,7 @@ class SearchOptions extends Options
      */
     public function setQuery($q)
     {
-       $this->q = $q;
-       return $this;
+       return $this->setQ($q);
     }
 
     /**
@@ -185,7 +184,8 @@ class SearchOptions extends Options
      */
     public function setQ($q)
     {
-       return $this->setQuery($q);
+       $this->q = $q;
+       return $this;
     }
     
     /**

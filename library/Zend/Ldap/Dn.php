@@ -453,6 +453,7 @@ class Dn implements \ArrayAccess
      * Sanitizes the case fold
      *
      * @param  string $caseFold
+     * @param  string $default
      * @return string
      */
     protected static function sanitizeCaseFold($caseFold, $default)
@@ -693,7 +694,7 @@ class Dn implements \ArrayAccess
      * This method supports the creation of multi-valued RDNs
      * $part must contain an even number of elemets.
      *
-     * @param  array  $attribute
+     * @param  array  $part
      * @param  string $caseFold
      * @return string
      * @throws Exception\LdapException
@@ -709,6 +710,7 @@ class Dn implements \ArrayAccess
             $rdnParts[$keyId] = implode('=', array($key, $value));
         }
         ksort($rdnParts, SORT_STRING);
+
         return implode('+', $rdnParts);
     }
 
@@ -752,18 +754,17 @@ class Dn implements \ArrayAccess
         try {
             $keys = array();
             $vals = array();
-            if ($childDn instanceof DN) {
+            if ($childDn instanceof Dn) {
                 $cdn = $childDn->toArray(DN::ATTR_CASEFOLD_LOWER);
             } else {
                 $cdn = self::explodeDn($childDn, $keys, $vals, DN::ATTR_CASEFOLD_LOWER);
             }
-            if ($parentDn instanceof DN) {
+            if ($parentDn instanceof Dn) {
                 $pdn = $parentDn->toArray(DN::ATTR_CASEFOLD_LOWER);
             } else {
                 $pdn = self::explodeDn($parentDn, $keys, $vals, DN::ATTR_CASEFOLD_LOWER);
             }
-        }
-        catch (Exception\LdapException $e) {
+        } catch (Exception\LdapException $e) {
             return false;
         }
 

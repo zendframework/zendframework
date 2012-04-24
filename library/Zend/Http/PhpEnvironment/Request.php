@@ -32,12 +32,6 @@ class Request extends HttpRequest
     protected $requestUri;
 
     /**
-     * Raw request body
-     * @var string
-     */
-    protected $rawBody;
-
-    /**
      * Construct
      *
      * Instantiates request.
@@ -50,7 +44,6 @@ class Request extends HttpRequest
         $this->setPost(new Parameters($_POST));
         $this->setQuery(new Parameters($_GET));
         $this->setServer(new Parameters($_SERVER));
-        $this->setRawBody();
 
         if ($_COOKIE) {
             $this->setCookies($_COOKIE);
@@ -58,6 +51,11 @@ class Request extends HttpRequest
 
         if ($_FILES) {
             $this->setFile(new Parameters($_FILES));
+        }
+
+        $requestBody = file_get_contents('php://input');
+        if(strlen($requestBody) > 0){
+            $this->setContent($requestBody);
         }
     }
 
@@ -386,33 +384,5 @@ class Request extends HttpRequest
 
         // Base path is identical to base URL
         return $baseUrl;
-    }
-
-    /**
-     * Set raw body
-     *
-     * Attempts to capture raw request body if present.
-     *
-     * @return Request
-     */
-    public function setRawBody()
-    {
-        $body = file_get_contents('php://input');
-        if(strlen(trim($body)) > 0){
-            $this->rawBody = $body;
-        }
-        return $this;
-    }
-
-    /**
-     * Get raw body
-     *
-     * Returns raw request body.
-     *
-     * @return string
-     */
-    public function getRawBody()
-    {
-        return $this->rawBody;
     }
 }

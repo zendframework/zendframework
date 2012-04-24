@@ -1,0 +1,25 @@
+{
+    "name": "zendframework/zf2",
+    "description": "Zend Framework 2",
+    "type": "library",
+    "keywords": [
+        "framework"
+    ],
+    "homepage": "http://framework.zend.com/",
+    "require": {
+        "php": ">=5.3.3"
+    },
+    "autoload": {
+        "psr-0": {
+            "Zend": "library/"
+        }
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "2.0-dev"
+        }
+    }
+}

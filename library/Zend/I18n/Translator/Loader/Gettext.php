@@ -23,7 +23,7 @@ namespace Zend\I18n\Translator\Loader;
 use Zend\I18n\Translator\Exception;
 
 /**
- * Loader interface.
+ * Gettext loader.
  *
  * @package    Zend_I18n_Translator
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -137,9 +137,11 @@ class Gettext implements LoaderInterface
             $rawHeaders = explode("\n", $translations['']);
             $headers    = array();
             
-            foreach ($rawHeaders as $header => $content) {
-                if (strtolower($header) === 'plural-forms') {
-                    $headers['plural_forms'] = $content;
+            foreach ($rawHeaders as $rawHeader) {
+                list($header, $content) = explode(':', $rawHeader, 1);
+                
+                if (trim(strtolower($header)) === 'plural-forms') {
+                    $headers['plural_forms'] = trim($content);
                 }
             }
             

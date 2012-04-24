@@ -48,6 +48,13 @@ class Translator
     protected $files = array();
     
     /**
+     * Patterns used for loading messages.
+     * 
+     * @var array
+     */
+    protected $patterns = array();
+    
+    /**
      * Default locale.
      * 
      * @var string
@@ -119,12 +126,16 @@ class Translator
      */
     public function translate($message, $domain = 'default', $locale = null)
     {
+        if ($message === '') {
+            return '';
+        }
+        
         $locale = ($locale ?: $this->getLocale());
         
         if (!isset($this->messages[$domain][$locale])) {
             $this->loadMessages($domain, $locale);
         }
-        
+               
         if (!isset($this->messages[$domain][$locale][$message])) {
             return $message;
         }
@@ -144,9 +155,14 @@ class Translator
      */
     public function translatePlural($singular, $plural, $number, $domain = 'default', $locale = null)
     {
-        $data = $this->translate($singular, $domain, $locale);
+        $data  = $this->translate($singular, $domain, $locale);
+        $index = $this->messages[$domain][$locale]['']->evaluate($number);
         
+        if (!isset($data[$index])) {
+            // Exception!!!
+        }
         
+        return $data[$index];
     }
     
     /**
@@ -177,6 +193,30 @@ class Translator
     }
     
     /**
+     * Add multiple translations with a pattern.
+     * 
+     * @param  string $type
+     * @param  string $baseDir
+     * @param  string $pattern
+     * @param  string $domain 
+     * @return Translator
+     */
+    public function addTranslationPattern($type, $baseDir, $pattern, $domain = 'default')
+    {
+        if (!isset($this->patterns[$domain])) {
+            $this->patterns[$domain] = array();
+        }
+        
+        $this->patterns[$domain][] = array(
+            'type'    => $type,
+            'baseDir' => rtrim($baseDir . '/'),
+            'pattern' => $pattern
+        );
+        
+        return $this;
+    }
+    
+    /**
      * Load messages for a given language and domain.
      * 
      * @param  string $domain
@@ -191,6 +231,23 @@ class Translator
             $this->messages[$domain][$locale] = array();
         }
         
+        // Try to load from pattern
+        if (isset($this->patterns[$domain])) {
+            foreach ($this->patterns[$domain] as $pattern) {
+                $filename = $pattern['baseDir'] . '/' . sprintf($pattern['pattern'], $locale);
+                
+                if (is_file($filename)) {
+                    $data = $this->pluginBroker()->load($pattern['type'])->load($filename);
+                    
+                    $this->messages[$domain][$locale] = array_replace(
+                        $this->messages[$domain][$locale],
+                        $data
+                    );
+                }
+            }
+        }
+        
+        // Load concrete files
         foreach (array($locale, '*') as $locale) {
             if (!isset($this->files[$domain][$locale])) {
                 continue;

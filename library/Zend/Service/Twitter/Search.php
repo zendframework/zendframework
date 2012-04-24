@@ -148,18 +148,20 @@ class Search extends Client\RestClient
      */
     public function execute($query = null, $options = null)
     {
-        if($options) {
-            $this->setOptions($options);
+        if(!$options) {
+            $options = $this->getOptions();
+        }
+        else if (!$options instanceof SearchOptions) {
+            $options = new SearchOptions($options);
         }
     	
-        $options = $this->getOptions();
+        $_query = $options->toArray();
+        
         if($query) {
-            $options->setQuery($query);
+            $_query['q'] = $query;
         } else if(!$options->getQuery()) {
             throw new Exception\RuntimeException('No query defined');  
         }
-        
-        $_query = $options->toArray();
         
         $response = $this->restGet('/search.' . $this->responseType, $_query);
 

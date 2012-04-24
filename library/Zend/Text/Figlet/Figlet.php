@@ -23,7 +23,7 @@ namespace Zend\Text\Figlet;
 use Zend\Config;
 
 /**
- * Zend_Text_Figlet is a PHP implementation of FIGlet
+ * Zend\Text\Figlet is a PHP implementation of FIGlet
  *
  * @category  Zend
  * @package   Zend_Text_Figlet
@@ -158,7 +158,7 @@ class Figlet
      * Justification for the text, according to $_outputWidth
      *
      * For using font default, this parameter should be null, else one of
-     * the values of Zend_Text_Figlet::JUSTIFICATION_*
+     * the values of Zend\Text\Figlet::JUSTIFICATION_*
      *
      * @var integer
      */
@@ -168,7 +168,7 @@ class Figlet
      * Direction of text-writing, namely right to left
      *
      * For using font default, this parameter should be null, else one of
-     * the values of Zend_Text_Figlet::DIRECTION_*
+     * the values of Zend\Text\Figlet::DIRECTION_*
      *
      * @var integer
      */
@@ -375,8 +375,8 @@ class Figlet
 
     /**
      * Set right to left mode. For writing from left to right, use
-     * Zend_Text_Figlet::DIRECTION_LEFT_TO_RIGHT. For writing from right to left,
-     * use Zend_Text_Figlet::DIRECTION_RIGHT_TO_LEFT.
+     * Zend\Text\Figlet::DIRECTION_LEFT_TO_RIGHT. For writing from right to left,
+     * use Zend\Text\Figlet::DIRECTION_RIGHT_TO_LEFT.
      *
      * @param  integer $rightToLeft Right-to-left mode
      * @return Figlet
@@ -390,7 +390,7 @@ class Figlet
     /**
      * Set the smush mode.
      *
-     * Use one of the constants of Zend_Text_Figlet::SM_*, you may combine them.
+     * Use one of the constants of Zend\Text\Figlet::SM_*, you may combine them.
      *
      * @param  integer $smushMode Smush mode to use for generating text
      * @return Figlet

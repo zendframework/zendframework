@@ -25,7 +25,7 @@ use Zend\Config,
     Zend\Text\Table\Decorator\DecoratorInterface as Decorator;
 
 /**
- * Zend_Text_Table enables developers to create tables out of characters
+ * Zend\Text\Table\Table enables developers to create tables out of characters
  *
  * @category  Zend
  * @package   Zend_Text_Table
@@ -167,7 +167,7 @@ class Table
     /**
      * Set options from config object
      *
-     * @param  Config/Config $config Configuration for Table
+     * @param  Config\Config $config Configuration for Table
      * @return Table
      */
     public function setConfig(Config\Config $config)
@@ -316,7 +316,7 @@ class Table
     /**
      * Append a row to the table
      *
-     * @param  array|\Zend\Text\Table\Row $row The row to append to the table
+     * @param  array|Row $row The row to append to the table
      * @throws Exception\InvalidArgumentException When $row is neither an array nor Zend_Zext_Table_Row
      * @throws Exception\OverflowException When a row contains too many columns
      * @return Table
@@ -324,7 +324,7 @@ class Table
     public function appendRow($row)
     {
         if (!is_array($row) && !($row instanceof Row)) {
-            throw new Exception\InvalidArgumentException('$row must be an array or instance of Zend_Text_Table_Row');
+            throw new Exception\InvalidArgumentException('$row must be an array or instance of Zend\Text\Table\Row');
         }
 
         if (is_array($row)) {

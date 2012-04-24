@@ -23,7 +23,7 @@ namespace Zend\Text\Table\Decorator;
 use Zend\Text\Table\Decorator\DecoratorInterface as Decorator;
 
 /**
- * ASCII Decorator for Zend_Text_Table
+ * ASCII Decorator for Zend\Text\Table
  *
  * @category  Zend
  * @package   Zend_Text_Table

@@ -21,7 +21,7 @@
 namespace Zend\Text\Table\Decorator;
 
 /**
- * Interface for Zend_Text_Table decorators
+ * Interface for Zend\Text\Table decorators
  *
  * @category  Zend
  * @package   Zend_Text_Table

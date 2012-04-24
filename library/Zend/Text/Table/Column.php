@@ -22,7 +22,7 @@ namespace Zend\Text\Table;
 use Zend\Text;
 
 /**
- * Column class for Zend_Text_Table_Row
+ * Column class for Zend\Text\Table\Row
  *
  * @category  Zend
  * @package   Zend_Text_Table
@@ -67,7 +67,7 @@ class Column
     protected $_allowedAligns = array(self::ALIGN_LEFT, self::ALIGN_CENTER, self::ALIGN_RIGHT);
 
     /**
-     * Create a column for a Zend_Text_Table_Row object.
+     * Create a column for a Zend\Text\Table\Row object.
      *
      * @param string  $content  The content of the column
      * @param string  $align    The align of the content
@@ -93,18 +93,18 @@ class Column
      * Set the content.
      *
      * If $charset is not defined, it is assumed that $content is encoded in
-     * the charset defined via Zend_Text_Table::setInputCharset() (defaults
+     * the charset defined via Zend\Text\Table::setInputCharset() (defaults
      * to utf-8).
      *
      * @param  string $content  Content of the column
      * @param  string $charset  The charset of the content
-     * @throws Exception\UnexpectedValueException When $content is not a string
+     * @throws Exception\InvalidArgumentException When $content is not a string
      * @return Column
      */
     public function setContent($content, $charset = null)
     {
         if (is_string($content) === false) {
-            throw new Exception\UnexpectedValueException('$content must be a string');
+            throw new Exception\InvalidArgumentException('$content must be a string');
         }
 
         if ($charset === null) {

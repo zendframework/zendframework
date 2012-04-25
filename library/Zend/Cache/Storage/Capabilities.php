@@ -24,7 +24,7 @@ namespace Zend\Cache\Storage;
 use ArrayObject,
     stdClass,
     Zend\Cache\Exception,
-    Zend\EventManager\EventsAware;
+    Zend\EventManager\EventsCapableInterface;
 
 /**
  * @category   Zend
@@ -572,7 +572,7 @@ class Capabilities
             $this->$property = $value;
 
             // trigger event
-            if ($this->adapter instanceof EventsAware) {
+            if ($this->adapter instanceof EventsCapableInterface) {
                 $this->adapter->events()->trigger('capability', $this->adapter, new ArrayObject(array(
                     $name => $value
                 )));

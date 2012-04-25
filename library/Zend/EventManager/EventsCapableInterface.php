@@ -21,14 +21,14 @@
 namespace Zend\EventManager;
 
 /**
- * Interface to automate setter injection for an EventManager instance
+ * Interface providing events that can be attached, detached and triggered.
  *
  * @category   Zend
  * @package    Zend_EventManager
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface EventsAware
+interface EventsCapableInterface
 {
     /**
      * Retrieve the event manager

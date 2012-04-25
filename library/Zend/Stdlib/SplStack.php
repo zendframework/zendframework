@@ -35,7 +35,7 @@ class SplStack extends \SplStack implements Serializable
     /**
      * Serialize to an array representing the stack
      * 
-     * @return void
+     * @return array
      */
     public function toArray()
     {

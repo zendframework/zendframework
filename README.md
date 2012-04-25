@@ -28,7 +28,7 @@ prepare for Release Candidate status.
 
             ```php
             $xml = new Zend\Config\Reader\Xml(); 
-            $config = new Zend\Config\Config($xml->fromFile($filename);
+            $config = new Zend\Config\Config($xml->fromFile($filename));
             ```
             or:
 

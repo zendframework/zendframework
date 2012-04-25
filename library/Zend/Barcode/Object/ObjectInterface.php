@@ -19,17 +19,18 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Barcode;
+namespace Zend\Barcode\Object;
 
 /**
  * Interface for generate Barcode
  *
  * @category   Zend
  * @package    Zend_Barcode
+ * @subpackage Object
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Object
+interface ObjectInterface
 {
     /**
      * Constructor
@@ -41,7 +42,7 @@ interface Object
     /**
      * Set barcode state from options array
      * @param  array $options
-     * @return Object
+     * @return Object\ObjectInterface
      */
     public function setOptions($options);
 
@@ -49,7 +50,7 @@ interface Object
      * Set barcode namespace for autoloading
      *
      * @param string $namespace
-     * @return Object
+     * @return Object\ObjectInterface
      */
     public function setBarcodeNamespace($namespace);
 
@@ -69,7 +70,7 @@ interface Object
     /**
      * Set height of the barcode bar
      * @param integer $value
-     * @return Object
+     * @return Object\ObjectInterface
      */
     public function setBarHeight($value);
 
@@ -82,7 +83,7 @@ interface Object
     /**
      * Set thickness of thin bar
      * @param integer $value
-     * @return Object
+     * @return Object\ObjectInterface
      */
     public function setBarThinWidth($value);
 
@@ -95,7 +96,7 @@ interface Object
     /**
      * Set thickness of thick bar
      * @param integer $value
-     * @return Object
+     * @return Object\ObjectInterface
      */
     public function setBarThickWidth($value);
 
@@ -109,7 +110,7 @@ interface Object
      * Set factor applying to
      * thinBarWidth - thickBarWidth - barHeight - fontSize
      * @param integer $value
-     * @return Object
+     * @return Object\ObjectInterface
      */
     public function setFactor($value);
 
@@ -123,7 +124,7 @@ interface Object
     /**
      * Set color of the barcode and text
      * @param string $value
-     * @return Object
+     * @return Object\ObjectInterface
      */
     public function setForeColor($value);
 
@@ -136,7 +137,7 @@ interface Object
     /**
      * Set the color of the background
      * @param integer $value
-     * @return Object
+     * @return Object\ObjectInterface
      */
     public function setBackgroundColor($value);
 
@@ -149,7 +150,7 @@ interface Object
     /**
      * Activate/deactivate drawing of the bar
      * @param boolean $value
-     * @return Object
+     * @return Object\ObjectInterface
      */
     public function setWithBorder($value);
 
@@ -161,14 +162,14 @@ interface Object
 
     /**
      * Allow fast inversion of font/bars color and background color
-     * @return Object
+     * @return Object\ObjectInterface
      */
     public function setReverseColor();
 
     /**
      * Set orientation of barcode and text
      * @param float $value
-     * @return Object
+     * @return Object\ObjectInterface
      */
     public function setOrientation($value);
 
@@ -181,7 +182,7 @@ interface Object
     /**
      * Set text to encode
      * @param string $value
-     * @return Object
+     * @return Object\ObjectInterface
      */
     public function setText($value);
 
@@ -206,7 +207,7 @@ interface Object
     /**
      * Activate/deactivate drawing of text to encode
      * @param boolean $value
-     * @return Object
+     * @return Object\ObjectInterface
      */
     public function setDrawText($value);
 
@@ -220,7 +221,7 @@ interface Object
      * Activate/deactivate the adjustment of the position
      * of the characters to the position of the bars
      * @param boolean $value
-     * @return Object
+     * @return Object\ObjectInterface
      */
     public function setStretchText($value);
 
@@ -236,7 +237,7 @@ interface Object
      * of the checksum character
      * added to the barcode text
      * @param boolean $value
-     * @return Object
+     * @return Object\ObjectInterface
      */
     public function setWithChecksum($value);
 
@@ -252,7 +253,7 @@ interface Object
      * of the checksum character
      * added to the barcode text
      * @param boolean $value
-     * @return Object
+     * @return Object\ObjectInterface
      */
     public function setWithChecksumInText($value);
 
@@ -268,7 +269,7 @@ interface Object
      *  - if integer between 1 and 5, use gd built-in fonts
      *  - if string, $value is assumed to be the path to a TTF font
      * @param integer|string $value
-     * @return Object
+     * @return Object\ObjectInterface
      */
     public function setFont($value);
 
@@ -281,7 +282,7 @@ interface Object
     /**
      * Set the size of the font in case of TTF
      * @param float $value
-     * @return Object
+     * @return Object\ObjectInterface
      */
     public function setFontSize($value);
 

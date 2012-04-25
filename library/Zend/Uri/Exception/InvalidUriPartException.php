@@ -4,7 +4,7 @@ namespace Zend\Uri\Exception;
 
 class InvalidUriPartException 
     extends \InvalidArgumentException
-    implements \Zend\Uri\Exception
+    implements \Zend\Uri\Exception\ExceptionInterface
 {
     /**
      * Part-specific error codes

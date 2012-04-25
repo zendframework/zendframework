@@ -21,8 +21,6 @@
 
 namespace Zend\Barcode\Object\Exception;
 
-use Zend\Barcode\Object\Exception;
-
 /**
  * Exception for Zend_Barcode component.
  *
@@ -33,6 +31,6 @@ use Zend\Barcode\Object\Exception;
  */
 class InvalidArgumentException
     extends \InvalidArgumentException
-    implements Exception
+    implements ExceptionInterface
 {
 }

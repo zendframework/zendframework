@@ -22,7 +22,6 @@
 namespace Zend\Mail\Protocol;
 use Zend\Mail\Protocol\Exception;
 /**
- * @uses       \Zend\Mail\Protocol\Exception
  * @category   Zend
  * @package    Zend_Mail
  * @subpackage Protocol

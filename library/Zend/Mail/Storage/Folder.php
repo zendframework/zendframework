@@ -23,8 +23,6 @@ namespace Zend\Mail\Storage;
 use Zend\Mail\Storage\Exception;
 
 /**
- * @uses       RecursiveIterator
- * @uses       \Zend\Mail\Storage\Exception
  * @category   Zend
  * @package    Zend_Mail
  * @subpackage Storage

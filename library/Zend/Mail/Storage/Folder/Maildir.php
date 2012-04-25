@@ -27,10 +27,6 @@ use Zend\Mail\Storage\MailFolder,
     Zend\Mail\Storage;
 
 /**
- * @uses       \Zend\Mail\Storage\Exception
- * @uses       \Zend\Mail\Storage\Folder
- * @uses       \Zend\Mail\Storage\Folder\FolderInterface
- * @uses       \Zend\Mail\Storage\Maildir
  * @category   Zend
  * @package    Zend_Mail
  * @subpackage Storage

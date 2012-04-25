@@ -26,7 +26,6 @@ use Zend\Mail\Protocol\Smtp;
 /**
  * Performs LOGIN authentication
  *
- * @uses       \Zend\Mail\Protocol\Smtp
  * @category   Zend
  * @package    Zend_Mail
  * @subpackage Protocol

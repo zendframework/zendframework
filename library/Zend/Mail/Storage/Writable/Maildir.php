@@ -30,13 +30,6 @@ use Zend\Mail\Storage,
     Zend\Mail\Storage\Writable;
 
 /**
- * @uses       RecursiveIteratorIterator
- * @uses       \Zend\Mail\Storage\Storage
- * @uses       \Zend\Mail\Storage\Exception
- * @uses       \Zend\Mail\Storage\Folder
- * @uses       \Zend\Mail\Storage\Folder\Maildir
- * @uses       \Zend\Mail\Storage\Maildir
- * @uses       \Zend\Mail\Storage\Writable\WritableInterface
  * @category   Zend
  * @package    Zend_Mail
  * @subpackage Storage

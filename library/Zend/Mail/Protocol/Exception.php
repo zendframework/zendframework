@@ -22,7 +22,6 @@ namespace Zend\Mail\Protocol;
 use Zend\Mail;
 
 /**
- * @uses       \Zend\Mail\Exception
  * @category   Zend
  * @package    Zend_Mail
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

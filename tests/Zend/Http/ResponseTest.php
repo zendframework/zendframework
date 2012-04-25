@@ -252,6 +252,15 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(strtolower(str_replace("\n", "\r\n", $response_str)), strtolower((string)$response), 'Response convertion to string does not match original string');
     }
 
+    public function testToStringGzip()
+    {
+        $response_str = $this->readResponse('response_gzip');
+        $response = Response::fromString($response_str);
+
+        $this->assertEquals(strtolower($response_str), strtolower($response->toString()), 'Response convertion to string does not match original string');
+        $this->assertEquals(strtolower($response_str), strtolower((string)$response), 'Response convertion to string does not match original string');
+    }
+
     public function testGetHeaders()
     {
         $response = Response::fromString($this->readResponse('response_deflate'));

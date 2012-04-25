@@ -471,7 +471,7 @@ class Response extends Message implements ResponseDescription
         $str  = $this->renderStatusLine() . "\r\n";
         $str .= $this->headers()->toString();
         $str .= "\r\n";
-        $str .= $this->getBody();
+        $str .= $this->getContent();
         return $str;
     }
 

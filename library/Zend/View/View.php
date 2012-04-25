@@ -23,6 +23,7 @@ namespace Zend\View;
 use Zend\EventManager\EventCollection,
     Zend\EventManager\EventManager,
     Zend\EventManager\EventManagerAware,
+    Zend\EventManager\EventsCapableInterface,
     Zend\Mvc\MvcEvent,
     Zend\Stdlib\RequestDescription as Request,
     Zend\Stdlib\ResponseDescription as Response;
@@ -33,7 +34,7 @@ use Zend\EventManager\EventCollection,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class View implements EventManagerAware
+class View implements EventManagerAware, EventsCapableInterface
 {
     /**
      * @var EventCollection

@@ -33,5 +33,5 @@ namespace Zend\XmlRpc\Client\Exception;
  */
 class FaultException
     extends \BadMethodCallException
-    implements \Zend\XmlRpc\Client\Exception
+    implements \Zend\XmlRpc\Client\Exception\ExceptionInterface
 {}

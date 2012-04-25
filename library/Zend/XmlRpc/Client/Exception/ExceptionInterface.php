@@ -14,24 +14,22 @@
  *
  * @category   Zend
  * @package    Zend_XmlRpc
- * @subpackage Server
+ * @subpackage Client
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\XmlRpc\Server;
+namespace Zend\XmlRpc\Client\Exception;
 
 /**
- * Zend_XmlRpc_Server_Exception
+ * Base class for all Zend_XmlRpc_Client_* exceptions
  *
- * @uses       \Zend\XmlRpc\Exception
+ * @uses       Zend\XmlRpc\Exception\ExceptionInterface
  * @category   Zend
  * @package    Zend_XmlRpc
- * @subpackage Server
+ * @subpackage Client
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Exception extends \Zend\XmlRpc\Exception
-{
-}
-
+interface ExceptionInterface extends \Zend\XmlRpc\Exception\ExceptionInterface
+{}

@@ -14,22 +14,24 @@
  *
  * @category   Zend
  * @package    Zend_Barcode
+ * @subpackage Object_Exception
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Barcode\Object;
+namespace Zend\Barcode\Object\Exception;
 
-use Zend\Barcode\Exception as BarcodeException;
+use Zend\Barcode\Exception\ExceptionInterface as BarcodeException;
 
 /**
  * Base exception interface for barcode objects
  *
  * @category   Zend
  * @package    Zend_Barcode
+ * @subpackage Object_Exception
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Exception extends BarcodeException
+interface ExceptionInterface extends BarcodeException
 {
 }

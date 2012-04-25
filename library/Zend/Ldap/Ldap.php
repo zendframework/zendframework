@@ -452,6 +452,7 @@ class Ldap
     }
 
     /**
+     * @param  strint $acctname
      * @return string The LDAP search filter for matching directory accounts
      */
     protected function getAccountFilter($acctname)
@@ -543,7 +544,7 @@ class Ldap
 
     /**
      * @param  string $acctname The name to canonicalize
-     * @param  int    $type     The desired form of canonicalization
+     * @param  int    $form     The desired form of canonicalization
      * @return string The canonicalized name in the desired form
      * @throws Exception\LdapException
      */
@@ -597,8 +598,9 @@ class Ldap
     }
 
     /**
-     * @param  array $attrs An array of names of desired attributes
-     * @return array An array of the attributes representing the account
+     * @param  string $acctname
+     * @param  array  $attrs An array of names of desired attributes
+     * @return array  An array of the attributes representing the account
      * @throws Exception\LdapException
      */
     protected function getAccount($acctname, array $attrs = null)
@@ -622,6 +624,7 @@ class Ldap
         if ($count === 1) {
             $acct = $accounts->getFirst();
             $accounts->close();
+
             return $acct;
         } else {
             if ($count === 0) {

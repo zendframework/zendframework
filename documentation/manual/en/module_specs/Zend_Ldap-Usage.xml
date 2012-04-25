@@ -27,7 +27,7 @@
 
                 <programlisting language="php"><![CDATA[
 $options = array(/* ... */);
-$ldap = new Zend_Ldap($options);
+$ldap = new Zend\Ldap\Ldap($options);
 $ldap->bind();
 $hm = $ldap->getEntry('cn=Hugo Müller,ou=People,dc=my,dc=local');
 /*
@@ -48,7 +48,7 @@ array(
 
                 <programlisting language="php"><![CDATA[
 $options = array(/* ... */);
-$ldap = new Zend_Ldap($options);
+$ldap = new Zend\Ldap\Ldap($options);
 $ldap->bind();
 $isThere = $ldap->exists('cn=Hugo Müller,ou=People,dc=my,dc=local');
 ]]></programlisting>
@@ -59,7 +59,7 @@ $isThere = $ldap->exists('cn=Hugo Müller,ou=People,dc=my,dc=local');
 
                 <programlisting language="php"><![CDATA[
 $options = array(/* ... */);
-$ldap = new Zend_Ldap($options);
+$ldap = new Zend\Ldap\Ldap($options);
 $ldap->bind();
 $childrenCount = $ldap->countChildren(
                             'cn=Hugo Müller,ou=People,dc=my,dc=local');
@@ -71,11 +71,11 @@ $childrenCount = $ldap->countChildren(
 
                 <programlisting language="php"><![CDATA[
 $options = array(/* ... */);
-$ldap = new Zend_Ldap($options);
+$ldap = new Zend\Ldap\Ldap($options);
 $ldap->bind();
 $result = $ldap->search('(objectclass=*)',
                         'ou=People,dc=my,dc=local',
-                        Zend_Ldap::SEARCH_SCOPE_ONE);
+                        Zend\Ldap\Ldap::SEARCH_SCOPE_ONE);
 foreach ($result as $item) {
     echo $item["dn"] . ': ' . $item['cn'][0] . PHP_EOL;
 }
@@ -91,12 +91,12 @@ foreach ($result as $item) {
 
                 <programlisting language="php"><![CDATA[
 $options = array(/* ... */);
-$ldap = new Zend_Ldap($options);
+$ldap = new Zend\Ldap\Ldap($options);
 $ldap->bind();
 $entry = array();
-Zend_Ldap_Attribute::setAttribute($entry, 'cn', 'Hans Meier');
-Zend_Ldap_Attribute::setAttribute($entry, 'sn', 'Meier');
-Zend_Ldap_Attribute::setAttribute($entry, 'objectClass', 'inetOrgPerson');
+Zend\Ldap\Attribute::setAttribute($entry, 'cn', 'Hans Meier');
+Zend\Ldap\Attribute::setAttribute($entry, 'sn', 'Meier');
+Zend\Ldap\Attribute::setAttribute($entry, 'objectClass', 'inetOrgPerson');
 $ldap->add('cn=Hans Meier,ou=People,dc=my,dc=local', $entry);
 ]]></programlisting>
             </example>
@@ -110,7 +110,7 @@ $ldap->add('cn=Hans Meier,ou=People,dc=my,dc=local', $entry);
 
                 <programlisting language="php"><![CDATA[
 $options = array(/* ... */);
-$ldap = new Zend_Ldap($options);
+$ldap = new Zend\Ldap\Ldap($options);
 $ldap->bind();
 $ldap->delete('cn=Hans Meier,ou=People,dc=my,dc=local');
 ]]></programlisting>
@@ -125,13 +125,13 @@ $ldap->delete('cn=Hans Meier,ou=People,dc=my,dc=local');
 
                 <programlisting language="php"><![CDATA[
 $options = array(/* ... */);
-$ldap = new Zend_Ldap($options);
+$ldap = new Zend\Ldap\Ldap($options);
 $ldap->bind();
 $hm = $ldap->getEntry('cn=Hugo Müller,ou=People,dc=my,dc=local');
-Zend_Ldap_Attribute::setAttribute($hm, 'mail', 'mueller@my.local');
-Zend_Ldap_Attribute::setPassword($hm,
+Zend\Ldap\Attribute::setAttribute($hm, 'mail', 'mueller@my.local');
+Zend\Ldap\Attribute::setPassword($hm,
                                  'newPa$$w0rd',
-                                 Zend_Ldap_Attribute::PASSWORD_HASH_SHA1);
+                                 Zend\Ldap\Attribute::PASSWORD_HASH_SHA1);
 $ldap->update('cn=Hugo Müller,ou=People,dc=my,dc=local', $hm);
 ]]></programlisting>
             </example>
@@ -149,7 +149,7 @@ $ldap->update('cn=Hugo Müller,ou=People,dc=my,dc=local', $hm);
 
                 <programlisting language="php"><![CDATA[
 $options = array(/* ... */);
-$ldap = new Zend_Ldap($options);
+$ldap = new Zend\Ldap\Ldap($options);
 $ldap->bind();
 $ldap->copy('cn=Hugo Müller,ou=People,dc=my,dc=local',
             'cn=Hans Meier,ou=People,dc=my,dc=local',
@@ -164,7 +164,7 @@ $ldap->copy('cn=Hugo Müller,ou=People,dc=my,dc=local',
 
                 <programlisting language="php"><![CDATA[
 $options = array(/* ... */);
-$ldap = new Zend_Ldap($options);
+$ldap = new Zend\Ldap\Ldap($options);
 $ldap->bind();
 $ldap->moveToSubtree('cn=Hugo Müller,ou=People,dc=my,dc=local',
                      'ou=Dismissed,dc=my,dc=local',

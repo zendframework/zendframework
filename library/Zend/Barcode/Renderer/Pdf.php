@@ -21,8 +21,7 @@
 
 namespace Zend\Barcode\Renderer;
 
-use Zend\Barcode\Renderer\Exception,
-    Zend\Pdf\Color,
+use Zend\Pdf\Color,
     Zend\Pdf\Font,
     Zend\Pdf\Page,
     Zend\Pdf\PdfDocument;

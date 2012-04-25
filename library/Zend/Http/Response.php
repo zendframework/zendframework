@@ -476,6 +476,16 @@ class Response extends Message implements ResponseDescription
     }
 
     /**
+     * Implements magic __toString()
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->toString();
+    }
+
+    /**
      * Decode a "chunked" transfer-encoded body and return the decoded text
      *
      * @param string $body

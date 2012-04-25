@@ -7,9 +7,10 @@ use Zend\Di\Configuration as DiConfiguration,
     Zend\EventManager\EventCollection as Events,
     Zend\EventManager\EventManager,
     Zend\EventManager\EventManagerAware,
+    Zend\EventManager\EventsCapableInterface,
     Zend\Mvc\Router\Http\TreeRouteStack as Router;
 
-class Bootstrap implements Bootstrapper, EventManagerAware
+class Bootstrap implements Bootstrapper, EventManagerAware, EventsCapableInterface
 {
     /**
      * @var \Zend\Config\Config

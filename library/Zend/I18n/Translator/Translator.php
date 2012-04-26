@@ -120,11 +120,11 @@ class Translator
      * Translate a message.
      * 
      * @param  string $message
-     * @param  string $domain
+     * @param  string $textDomain
      * @param  string $locale
      * @return string 
      */
-    public function translate($message, $domain = 'default', $locale = null)
+    public function translate($message, $textDomain = 'default', $locale = null)
     {
         if ($message === '') {
             return '';
@@ -132,15 +132,15 @@ class Translator
         
         $locale = ($locale ?: $this->getLocale());
         
-        if (!isset($this->messages[$domain][$locale])) {
-            $this->loadMessages($domain, $locale);
+        if (!isset($this->messages[$textDomain][$locale])) {
+            $this->loadMessages($textDomain, $locale);
         }
                
-        if (!isset($this->messages[$domain][$locale][$message])) {
+        if (!isset($this->messages[$textDomain][$locale][$message])) {
             return $message;
         }
         
-        return $this->messages[$domain][$locale][$message];
+        return $this->messages[$textDomain][$locale][$message];
     }
     
     /**
@@ -149,14 +149,15 @@ class Translator
      * @param  type $singular
      * @param  type $plural
      * @param  type $number
-     * @param  type $domain
+     * @param  type $textDomain
      * @param  type $locale 
      * @return string
      */
-    public function translatePlural($singular, $plural, $number, $domain = 'default', $locale = null)
-    {
-        $data  = $this->translate($singular, $domain, $locale);
-        $index = $this->messages[$domain][$locale]['']->evaluate($number);
+    public function translatePlural($singular, $plural, $number,
+        $textDomain = 'default', $locale = null
+    ) {
+        $data  = $this->translate($singular, $textDomain, $locale);
+        $index = $this->messages[$textDomain][$locale]['']->evaluate($number);
         
         if (!isset($data[$index])) {
             // Exception!!!
@@ -170,21 +171,20 @@ class Translator
      * 
      * @param  string $type
      * @param  string $filename
-     * @param  string $domain
+     * @param  string $textDomain
      * @param  string $locale
      * @return Translator 
      */
-    public function addTranslationFile($type, $filename, $domain = 'default', $locale = null)
-    {
+    public function addTranslationFile($type, $filename,
+        $textDomain = 'default', $locale = null
+    ) {
         $locale = ($locale ?: '*');
         
-        if (!isset($this->files[$domain])) {
-            $this->files[$domain] = array();
-        } elseif (!isset($this->files[$domain][$locale])) {
-            $this->files[$domain][$locale] = array();
+        if (!isset($this->files[$textDomain])) {
+            $this->files[$textDomain] = array();
         }
         
-        $this->files[$domain][$locale][] = array(
+        $this->files[$textDomain][$locale] = array(
             'type'     => $type,
             'filename' => $filename
         );
@@ -198,16 +198,17 @@ class Translator
      * @param  string $type
      * @param  string $baseDir
      * @param  string $pattern
-     * @param  string $domain 
+     * @param  string $textDomain 
      * @return Translator
      */
-    public function addTranslationPattern($type, $baseDir, $pattern, $domain = 'default')
-    {
-        if (!isset($this->patterns[$domain])) {
-            $this->patterns[$domain] = array();
+    public function addTranslationPattern($type, $baseDir, $pattern,
+        $textDomain = 'default'
+    ) {
+        if (!isset($this->patterns[$textDomain])) {
+            $this->patterns[$textDomain] = array();
         }
         
-        $this->patterns[$domain][] = array(
+        $this->patterns[$textDomain][] = array(
             'type'    => $type,
             'baseDir' => rtrim($baseDir . '/'),
             'pattern' => $pattern
@@ -219,63 +220,41 @@ class Translator
     /**
      * Load messages for a given language and domain.
      * 
-     * @param  string $domain
+     * @param  string $textDomain
      * @param  string $locale
      * @return void
      */
-    protected function loadMessages($domain, $locale)
+    protected function loadMessages($textDomain, $locale)
     {
-        if (!isset($this->messages[$domain])) {
-            $this->messages[$domain] = array();
-        } elseif (!isset($this->messages[$domain][$locale])) {
-            $this->messages[$domain][$locale] = array();
+        if (!isset($this->messages[$textDomain])) {
+            $this->messages[$textDomain] = array();
         }
         
         // Try to load from pattern
-        if (isset($this->patterns[$domain])) {
-            foreach ($this->patterns[$domain] as $pattern) {
-                $filename = $pattern['baseDir'] . '/' . sprintf($pattern['pattern'], $locale);
+        if (isset($this->patterns[$textDomain])) {
+            foreach ($this->patterns[$textDomain] as $pattern) {
+                $filename = $pattern['baseDir'] . '/'
+                          . sprintf($pattern['pattern'], $locale);
                 
                 if (is_file($filename)) {
-                    $data = $this->pluginBroker()->load($pattern['type'])->load($filename);
-                    
-                    $this->messages[$domain][$locale] = array_replace(
-                        $this->messages[$domain][$locale],
-                        $data
-                    );
+                    $this->messages[$textDomain][$locale] = $this->pluginBroker()
+                        ->load($pattern['type'])->load($filename, $locale);
                 }
             }
         }
         
         // Load concrete files
         foreach (array($locale, '*') as $locale) {
-            if (!isset($this->files[$domain][$locale])) {
+            if (!isset($this->files[$textDomain][$locale])) {
                 continue;
             }
                        
-            foreach ($this->files[$domain][$locale] as $file) {
-                $data = $this->pluginBroker()->load($file['type'])->load($file['filename']);
-                
-                if ($locale === '*') {
-                    foreach ($data as $messageLocale => $messages) {
-                        if (!isset($this->messages[$domain][$messageLocale])) {
-                            $this->messages[$domain][$messageLocale] = array();
-                        }
-                        
-                        $this->messages[$domain][$messageLocale] = array_replace(
-                            $this->messages[$domain][$messageLocale],
-                            $messages
-                        );
-                    }
-                } else {
-                    $this->messages[$domain][$locale] = array_replace(
-                        $this->messages[$domain][$locale],
-                        $data
-                    );
-                }
+            foreach ($this->files[$textDomain][$locale] as $file) {
+                $this->messages[$textDomain][$locale] = $this->pluginBroker()
+                    ->load($pattern['type'])->load($file['filename'], $locale);
             }
             
-            unset($this->files[$domain][$locale]);
+            unset($this->files[$textDomain][$locale]);
         }
     }
 }

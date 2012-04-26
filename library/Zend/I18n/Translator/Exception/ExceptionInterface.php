@@ -18,25 +18,13 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\I18n\Translator\Loader;
-
-use Zend\I18n\Translator\TextDomain;
+namespace Zend\I18n\Translator\Exception;
 
 /**
- * Loader interface.
- *
+ * @category   Zend
  * @package    Zend_I18n_Translator
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Loader
-{
-    /**
-     * Load translations from a file.
-     * 
-     * @param  string $filename
-     * @param  string $locale
-     * @return TextDomain|null
-     */
-    public function load($filename, $locale);
-}
+interface ExceptionInterface
+{}

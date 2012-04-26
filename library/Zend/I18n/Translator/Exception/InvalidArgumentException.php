@@ -28,5 +28,5 @@ namespace Zend\I18n\Translator\Exception;
  */
 class InvalidArgumentException
     extends \InvalidArgumentException
-    implements \Zend\I18n\Translator\Exception
+    implements ExceptionInterface
 {}

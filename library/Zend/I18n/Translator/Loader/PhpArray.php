@@ -21,6 +21,8 @@
 namespace Zend\I18n\Translator\Loader;
 
 use Zend\I18n\Translator\Exception;
+use Zend\I18n\Translator\TextDomain;
+use Zend\I18n\Translator\Plural\Rule as PluralRule;
 
 /**
  * PHP array loader.
@@ -36,9 +38,10 @@ class PhpArray implements LoaderInterface
      * 
      * @see    LoaderInterface::load()
      * @param  string $filename
-     * @return array 
+     * @param  string $locale
+     * @return TextDomain|null
      */
-    public function load($filename)
+    public function load($filename, $locale)
     {
         if (!is_file($filename) || !is_readable($filename)) {
             throw new Exception\InvalidArgumentException(
@@ -46,15 +49,26 @@ class PhpArray implements LoaderInterface
             );
         }
         
-        $translations = include $filename;
+        $messages = include $filename;
         
-        if (!is_array($translations)) {
+        if (!is_array($messages)) {
             throw new Exception\InvalidArgumentException(
                 sprintf('Expected an array, but received %s', gettype($translations))
             );            
         } 
         
+        $textDomain = new TextDomain($messages);
         
-        return $translations;
+        if (array_key_exists('', $textDomain)) {
+            if (isset($textDomain['']['plural_forms'])) {
+                $textDomain->setPluralRule(
+                    PluralRule::fromString($textDomain['']['plural_forms'])
+                );
+            }
+            
+            unset($textDomain['']);
+        }
+        
+        return $textDomain;
     }
 }

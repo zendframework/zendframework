@@ -21,6 +21,8 @@
 namespace Zend\I18n\Translator\Loader;
 
 use Zend\I18n\Translator\Exception;
+use Zend\I18n\Translator\TextDomain;
+use Zend\I18n\Translator\Plural\Rule as PluralRule;
 
 /**
  * Gettext loader.
@@ -50,12 +52,13 @@ class Gettext implements LoaderInterface
      * 
      * @see    LoaderInterface::load()
      * @param  string $filename
-     * @return array 
+     * @param  string $locale
+     * @return TextDomain|null
      */
-    public function load($filename)
+    public function load($filename, $locale)
     {
-        $translations = array();
-        $this->file   = @fopen($filename, 'rb');
+        $textDomain = new TextDomain();
+        $this->file = @fopen($filename, 'rb');
         
         if (!$this->file) {
             throw new Exception\InvalidArgumentException(
@@ -119,38 +122,39 @@ class Gettext implements LoaderInterface
                 $translationString = explode("\0", fread($this->file, $translationStringSize));
                 
                 if (count($originalString) > 1 && count($translationString) > 1) {
-                    $translations[$original[0]] = $translationString;
+                    $textDomain[$original[0]] = $translationString;
                     
                     array_shift($originalString);
                     
                     foreach ($originalString as $string) {
-                        $translations[$string] = '';
+                        $textDomain[$string] = '';
                     }
                 } else {
-                    $translations[$original[0]] = $translationString[0];
+                    $textDomain[$original[0]] = $translationString[0];
                 }
             }
         }
         
         // Read header entries
-        if (isset($translations[''])) {
-            $rawHeaders = explode("\n", $translations['']);
-            $headers    = array();
+        if (array_key_eixsts('', $textDomain)) {
+            $rawHeaders = explode("\n", $textDomain['']);
             
             foreach ($rawHeaders as $rawHeader) {
                 list($header, $content) = explode(':', $rawHeader, 1);
                 
                 if (trim(strtolower($header)) === 'plural-forms') {
-                    $headers['plural_forms'] = trim($content);
+                    $textDomain->setPluralRule(
+                        PluralRule::fromString($content)
+                    );
                 }
             }
             
-            $translations[''] = $headers;
+            unset($textDomain['']);
         }
         
         fclose($this->file);
         
-        return $translations;
+        return $textDomain;
     }
     
     /**

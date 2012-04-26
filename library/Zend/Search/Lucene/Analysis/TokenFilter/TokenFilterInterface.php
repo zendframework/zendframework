@@ -14,43 +14,31 @@
  *
  * @category   Zend
  * @package    Zend_Search_Lucene
- * @subpackage Search
+ * @subpackage Analysis
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Search\Lucene\Search;
+namespace Zend\Search\Lucene\Analysis\TokenFilter;
 
-use Zend\Search\Lucene\Document;
+use Zend\Search\Lucene\Analysis\Token;
 
 /**
- * @uses       \Zend\Search\Lucene\Document
+ * Token filter converts (normalizes) Token ore removes it from a token stream.
+ *
  * @category   Zend
  * @package    Zend_Search_Lucene
- * @subpackage Search
+ * @subpackage Analysis
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Highlighter
+interface TokenFilterInterface
 {
     /**
-     * Set document for highlighting.
+     * Normalize Token or remove it (if null is returned)
      *
-     * @param \Zend\Search\Lucene\Document\HTML $document
+     * @param \Zend\Search\Lucene\Analysis\Token $srcToken
+     * @return \Zend\Search\Lucene\Analysis\Token
      */
-    public function setDocument(Document\HTML $document);
-
-    /**
-     * Get document for highlighting.
-     *
-     * @return \Zend\Search\Lucene\Document\HTML $document
-     */
-    public function getDocument();
-
-    /**
-     * Highlight specified words (method is invoked once per subquery)
-     *
-     * @param string|array $words  Words to highlight. They could be organized using the array or string.
-     */
-    public function highlight($words);
+    public function normalize(Token $srcToken);
 }

@@ -29,19 +29,12 @@ use Zend\Search\Lucene\Storage\Directory,
 /**
  * Multisearcher allows to search through several independent indexes.
  *
- * @uses       \Zend\Search\Lucene\Index
- * @uses       \Zend\Search\Lucene\Exception\InvalidArgumentException
- * @uses	   \Zend\Search\Lucene\Exception\UnsupportedMethodCallException
- * @uses	   \Zend\Search\Lucene\Exception\OutOfRangeException
- * @uses       \Zend\Search\Lucene\Exception\RuntimeException
- * @uses       \Zend\Search\Lucene\SearchIndex
- * @uses       \Zend\Search\Lucene\TermStreamsPriorityQueue
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class MultiSearcher implements SearchIndex
+class MultiSearcher implements SearchIndexInterface
 {
     /**
      * List of indices for searching.
@@ -62,7 +55,7 @@ class MultiSearcher implements SearchIndex
         $this->_indices = $indices;
 
         foreach ($this->_indices as $index) {
-            if (!$index instanceof SearchIndex) {
+            if (!$index instanceof SearchIndexInterface) {
                 throw new InvalidArgumentException('sub-index objects have to implement Zend\Search\Lucene\Interface.');
             }
         }
@@ -71,9 +64,9 @@ class MultiSearcher implements SearchIndex
     /**
      * Add index for searching.
      *
-     * @param \Zend\Search\Lucene\SearchIndex $index
+     * @param \Zend\Search\Lucene\SearchIndexInterface $index
      */
-    public function addIndex(SearchIndex $index)
+    public function addIndex(SearchIndexInterface $index)
     {
         $this->_indices[] = $index;
     }

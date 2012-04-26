@@ -32,9 +32,6 @@ use Zend\Search\Lucene,
  *
  * We do recommend to provide all words in lowercase and concatenate this class after the lowercase filter.
  *
- * @uses       \Zend\Search\Lucene\Analysis\TokenFilter
- * @uses       \Zend\Search\Lucene\Exception\InvalidArgumentException
- * @uses       \Zend\Search\Lucene\Exception\RuntimeException
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Analysis

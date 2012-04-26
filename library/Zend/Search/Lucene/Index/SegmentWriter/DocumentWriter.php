@@ -22,20 +22,12 @@
 namespace Zend\Search\Lucene\Index\SegmentWriter;
 use Zend\Search\Lucene;
 use Zend\Search\Lucene\Index;
-use Zend\Search\Lucene\Analysis\Analyzer;
+use Zend\Search\Lucene\Analysis\Analyzer\AnalyzerInterface;
 use Zend\Search\Lucene\Storage\Directory;
 use Zend\Search\Lucene\Document;
 use Zend\Search\Lucene\Search\Similarity;
 
 /**
- * @uses       \Zend\Search\Lucene\Analysis\Analyzer
- * @uses       \Zend\Search\Lucene\Exception
- * @uses       \Zend\Search\Lucene\Index\SegmentInfo
- * @uses       \Zend\Search\Lucene\Index\SegmentWriter\AbstractSegmentWriter
- * @uses       \Zend\Search\Lucene\Index\Term
- * @uses       \Zend\Search\Lucene\Search\Similarity
- * @uses       \Zend\Search\Lucene\Storage\Directory
- * @uses       \Zend\Search\Lucene\Document;
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Index

@@ -25,8 +25,6 @@ use Zend\Search\Lucene\Search\Highlighter,
     Zend\Search\Lucene\Document;
 
 /**
- * @uses       \Zend\Search\Lucene\Search\Highlighter
- * @uses       \Zend\Search\Lucene\Document;
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Search

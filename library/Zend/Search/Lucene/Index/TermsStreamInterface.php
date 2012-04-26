@@ -14,56 +14,54 @@
  *
  * @category   Zend
  * @package    Zend_Search_Lucene
- * @subpackage Analysis
+ * @subpackage Index
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Search\Lucene\Analysis;
+namespace Zend\Search\Lucene\Index;
 
 /**
- * An Analyzer is used to analyze text.
- *
  * @category   Zend
  * @package    Zend_Search_Lucene
- * @subpackage Analysis
+ * @subpackage Index
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Analyzer
+interface TermsStreamInterface
 {
     /**
-     * Tokenize text to terms
-     * Returns array of Zend\Search\Lucene\Analysis\Token objects
-     *
-     * Tokens are returned in UTF-8 (internal Zend_Search_Lucene encoding)
-     *
-     * @param string $data
-     * @return array
+     * Reset terms stream.
      */
-    public function tokenize($data, $encoding = '');
+    public function resetTermsStream();
 
     /**
-     * Tokenization stream API
-     * Set input
+     * Skip terms stream up to specified term preffix.
      *
-     * @param string $data
+     * Prefix contains fully specified field info and portion of searched term
+     *
+     * @param \Zend\Search\Lucene\Index\Term $prefix
      */
-    public function setInput($data, $encoding = '');
+    public function skipTo(Term $prefix);
 
     /**
-     * Reset token stream
+     * Scans terms dictionary and returns next term
+     *
+     * @return \Zend\Search\Lucene\Index\Term|null
      */
-    public function reset();
+    public function nextTerm();
 
     /**
-     * Tokenization stream API
-     * Get next token
-     * Returns null at the end of stream
+     * Returns term in current position
      *
-     * Tokens are returned in UTF-8 (internal Zend_Search_Lucene encoding)
-     *
-     * @return \Zend\Search\Lucene\Analysis\Token|null
+     * @return \Zend\Search\Lucene\Index\Term|null
      */
-    public function nextToken();
+    public function currentTerm();
+
+    /**
+     * Close terms stream
+     *
+     * Should be used for resources clean up if stream is not read up to the end
+     */
+    public function closeTermsStream();
 }

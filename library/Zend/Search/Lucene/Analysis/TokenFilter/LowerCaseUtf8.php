@@ -29,9 +29,6 @@ use Zend\Search\Lucene\Analysis\TokenFilter,
 /**
  * Lower case Token filter.
  *
- * @uses       \Zend\Search\Lucene\Analysis\Token
- * @uses       \Zend\Search\Lucene\Analysis\TokenFilter
- * @uses       \Zend\Search\Lucene\Exception\ExtensionNotLoadedException
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Analysis

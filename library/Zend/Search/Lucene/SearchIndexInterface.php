@@ -21,16 +21,12 @@
 namespace Zend\Search\Lucene;
 
 /**
- * @uses       \Zend\Search\Lucene\Document
- * @uses       \Zend\Search\Lucene\Index\DocsFilter
- * @uses       \Zend\Search\Lucene\Index\Term
- * @uses       \Zend\Search\Lucene\Index\TermsStream
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface SearchIndex extends Index\TermsStream
+interface SearchIndexInterface extends Index\TermsStreamInterface
 {
     /**
      * Get current generation number
@@ -41,7 +37,7 @@ interface SearchIndex extends Index\TermsStream
      *
      * @param \Zend\Search\Lucene\Storage\Directory $directory
      * @return integer
-     * @throws \Zend\Search\Lucene\Exception
+     * @throws \Zend\Search\Lucene\Exception\ExceptionInterface
      */
     public static function getActualGeneration(Storage\Directory $directory);
 
@@ -65,7 +61,7 @@ interface SearchIndex extends Index\TermsStream
      * Index is converted to this format at the nearest upfdate time
      *
      * @param int $formatVersion
-     * @throws \Zend\Search\Lucene\Exception
+     * @throws \Zend\Search\Lucene\Exception\ExceptionInterface
      */
     public function setFormatVersion($formatVersion);
 
@@ -104,7 +100,7 @@ interface SearchIndex extends Index\TermsStream
      *
      * @param integer $id
      * @return boolean
-     * @throws \Zend\Search\Lucene\Exception    Exception is thrown if $id is out of the range
+     * @throws \Zend\Search\Lucene\Exception\ExceptionInterface    Exception is thrown if $id is out of the range
      */
     public function isDeleted($id);
 
@@ -193,7 +189,7 @@ interface SearchIndex extends Index\TermsStream
      *
      * @param mixed $query
      * @return array \Zend\Search\Lucene\Search\QueryHit
-     * @throws \Zend\Search\Lucene\Exception
+     * @throws \Zend\Search\Lucene\Exception\ExceptionInterface
      */
     public function find($query);
 
@@ -301,7 +297,7 @@ interface SearchIndex extends Index\TermsStream
      * $id is an internal document id
      *
      * @param integer|\Zend\Search\Lucene\Search\QueryHit $id
-     * @throws \Zend\Search\Lucene\Exception
+     * @throws \Zend\Search\Lucene\Exception\ExceptionInterface
      */
     public function delete($id);
 

@@ -27,8 +27,6 @@ use Zend\Search\Lucene\Analysis\TokenFilter,
 /**
  * Token filter that removes short words. What is short word can be configured with constructor.
  *
- * @uses       \Zend\Search\Lucene\Analysis\Token
- * @uses       \Zend\Search\Lucene\Analysis\TokenFilter
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Analysis

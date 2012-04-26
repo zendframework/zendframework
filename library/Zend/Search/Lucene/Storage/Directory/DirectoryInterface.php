@@ -19,7 +19,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Search\Lucene\Storage;
+namespace Zend\Search\Lucene\Storage\Directory;
 
 /**
  * @category   Zend
@@ -28,7 +28,7 @@ namespace Zend\Search\Lucene\Storage;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Directory
+interface DirectoryInterface
 {
 
     /**

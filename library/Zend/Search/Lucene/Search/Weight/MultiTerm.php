@@ -24,9 +24,6 @@ use Zend\Search\Lucene\Search\Query;
 use Zend\Search\Lucene;
 
 /**
- * @uses       \Zend\Search\Lucene\Search\Weight\AbstractWeight
- * @uses       \Zend\Search\Lucene\Search\Query\AbstractQuery
- * @uses       \Zend\Search\Lucene\SearchIndex
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Search
@@ -38,7 +35,7 @@ class MultiTerm extends AbstractWeight
     /**
      * IndexReader.
      *
-     * @var \Zend\Search\Lucene\SearchIndex
+     * @var \Zend\Search\Lucene\SearchIndexInterface
      */
     private $_reader;
 
@@ -64,9 +61,9 @@ class MultiTerm extends AbstractWeight
      * reader - index reader
      *
      * @param \Zend\Search\Lucene\Search\Query\AbstractQuery $query
-     * @param \Zend\Search\Lucene\SearchIndex             $reader
+     * @param \Zend\Search\Lucene\SearchIndexInterface             $reader
      */
-    public function __construct(Query\AbstractQuery $query, Lucene\SearchIndex $reader)
+    public function __construct(Query\AbstractQuery $query, Lucene\SearchIndexInterface $reader)
     {
         $this->_query   = $query;
         $this->_reader  = $reader;

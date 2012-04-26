@@ -425,7 +425,7 @@ class SearchTest extends \PHPUnit_Framework_TestCase
         $hit = $hits[0];
 
         $this->assertTrue($hit instanceof Search\QueryHit);
-        $this->assertTrue($hit->getIndex() instanceof Lucene\SearchIndex);
+        $this->assertTrue($hit->getIndex() instanceof Lucene\SearchIndexInterface);
 
         $doc = $hit->getDocument();
         $this->assertTrue($doc instanceof Document);
@@ -443,11 +443,11 @@ class SearchTest extends \PHPUnit_Framework_TestCase
 
         $hit = $hits[0];
         $this->assertTrue($hit instanceof Search\QueryHit);
-        $this->assertTrue($hit->getIndex() instanceof Lucene\SearchIndex);
+        $this->assertTrue($hit->getIndex() instanceof Lucene\SearchIndexInterface);
 
         $doc = $hit->getDocument();
         $this->assertTrue($doc instanceof Document);
-        $this->assertTrue($hit->getIndex() instanceof Lucene\SearchIndex);
+        $this->assertTrue($hit->getIndex() instanceof Lucene\SearchIndexInterface);
 
         $this->assertEquals($doc->path, 'IndexSource/contributing.html');
     }

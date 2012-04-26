@@ -33,10 +33,24 @@ namespace Zend\EventManager;
 interface SharedEventCollectionAware
 {
     /**
-     * Inject an EventManager instance
+     * Set shared collections container
      * 
      * @param  SharedEventCollection $sharedEventCollection 
      * @return SharedEventCollectionAware
      */
     public function setSharedCollections(SharedEventCollection $sharedEventCollection);
+
+    /**
+     * Get shared collections container
+     *
+     * @return SharedEventCollection|StaticEventManager
+     */
+    public function getSharedCollections();
+
+    /**
+     * Remove any shared collections
+     *
+     * @return void
+     */
+    public function unsetSharedCollections();
 }

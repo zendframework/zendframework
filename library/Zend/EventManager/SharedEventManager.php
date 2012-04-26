@@ -20,7 +20,8 @@
 
 namespace Zend\EventManager;
 
-use Zend\Stdlib\CallbackHandler;
+use Zend\Stdlib\CallbackHandler,
+    Zend\Stdlib\PriorityQueue;
 
 /**
  * Shared/contextual EventManager
@@ -116,7 +117,7 @@ class SharedEventManager implements SharedEventCollection
      * 
      * @param  string|int $id
      * @param  string|int $event 
-     * @return false|\Zend\Stdlib\PriorityQueue
+     * @return false|PriorityQueue
      */
     public function getListeners($id, $event)
     {

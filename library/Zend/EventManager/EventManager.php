@@ -38,7 +38,7 @@ use Zend\Stdlib\CallbackHandler,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class EventManager implements EventCollection, SharedEventCollectionAware
+class EventManager implements EventCollection
 {
     /**
      * Subscribed events and their listeners
@@ -59,7 +59,7 @@ class EventManager implements EventCollection, SharedEventCollectionAware
 
     /**
      * Shared connections
-     * @var false|null|SharedEventCollection
+     * @var null|SharedEventCollection
      */
     protected $sharedCollections = null;
 
@@ -93,7 +93,7 @@ class EventManager implements EventCollection, SharedEventCollectionAware
      * Set shared collections container
      *
      * @param  SharedEventCollection $connections
-     * @return void
+     * @return EventManager
      */
     public function setSharedCollections(SharedEventCollection $sharedEventCollection)
     {
@@ -114,7 +114,7 @@ class EventManager implements EventCollection, SharedEventCollectionAware
     /**
      * Get shared collections container
      *
-     * @return false|SharedEventCollection
+     * @return SharedEventCollection|StaticEventManager
      */
     public function getSharedCollections()
     {
@@ -138,7 +138,7 @@ class EventManager implements EventCollection, SharedEventCollectionAware
      * Set the identifiers (overrides any currently set identifiers)
      *
      * @param string|int|array|Traversable $identifiers
-     * @return ModuleManager
+     * @return EventManager
      */
     public function setIdentifiers($identifiers)
     {
@@ -154,7 +154,7 @@ class EventManager implements EventCollection, SharedEventCollectionAware
      * Add some identifier(s) (appends to any currently set identifiers)
      *
      * @param string|int|array|Traversable $identifiers
-     * @return ModuleManager
+     * @return EventManager
      */
     public function addIdentifiers($identifiers)
     {

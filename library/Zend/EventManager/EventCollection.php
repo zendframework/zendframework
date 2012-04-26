@@ -20,7 +20,9 @@
 
 namespace Zend\EventManager;
 
-use Zend\Stdlib\CallbackHandler;
+use Zend\Stdlib\CallbackHandler,
+    Traversable,
+    ArrayObject;
 
 /**
  * Interface for messengers
@@ -30,7 +32,7 @@ use Zend\Stdlib\CallbackHandler;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface EventCollection
+interface EventCollection extends SharedEventCollectionAware
 {
     /**
      * Trigger an event
@@ -76,7 +78,7 @@ interface EventCollection
      * @param  int $priority Priority at which to register listener
      * @return CallbackHandler
      */
-    public function attach($event, $callback, $priority = 1);
+    public function attach($event, $callback = null, $priority = 1);
 
     /**
      * Detach an event listener
@@ -108,4 +110,64 @@ interface EventCollection
      * @return void
      */
     public function clearListeners($event);
+
+    /**
+     * Set the event class to utilize
+     *
+     * @param  string $class
+     * @return EventCollection
+     */
+    public function setEventClass($class);
+
+    /**
+     * Get the identifier(s) for this EventManager
+     *
+     * @return array
+     */
+    public function getIdentifiers();
+
+    /**
+     * Set the identifiers (overrides any currently set identifiers)
+     *
+     * @param string|int|array|Traversable $identifiers
+     * @return EventCollection
+     */
+    public function setIdentifiers($identifiers);
+
+    /**
+     * Add some identifier(s) (appends to any currently set identifiers)
+     *
+     * @param string|int|array|Traversable $identifiers
+     * @return EventCollection
+     */
+    public function addIdentifiers($identifiers);
+
+    /**
+     * Attach a listener aggregate
+     *
+     * @param  ListenerAggregate $aggregate
+     * @param  int $priority If provided, a suggested priority for the aggregate to use
+     * @return mixed return value of {@link ListenerAggregate::attach()}
+     */
+    public function attachAggregate(ListenerAggregate $aggregate, $priority = 1);
+
+    /**
+     * Detach a listener aggregate
+     *
+     * @param  ListenerAggregate $aggregate
+     * @return mixed return value of {@link ListenerAggregate::detach()}
+     */
+    public function detachAggregate(ListenerAggregate $aggregate);
+
+    /**
+     * Prepare arguments
+     *
+     * @param  array $args
+     * @return ArrayObject
+     */
+    public function prepareArgs(array $args);
+
+
+
+
 }

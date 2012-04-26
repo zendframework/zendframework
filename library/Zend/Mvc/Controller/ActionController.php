@@ -159,7 +159,8 @@ abstract class ActionController implements Dispatchable, EventManagerAware, Inje
         $events->setIdentifiers(array(
             'Zend\Stdlib\Dispatchable',
             __CLASS__,
-            get_class($this)
+            get_class($this),
+            substr(get_class($this), 0, strpos(get_class($this), '\\'))
         ));
         $this->events = $events;
         $this->attachDefaultListeners();

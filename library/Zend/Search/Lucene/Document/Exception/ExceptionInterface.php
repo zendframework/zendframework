@@ -13,19 +13,12 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Search
+ * @package    Zend_Search_Lucene
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Search;
+namespace Zend\Search\Lucene\Document\Exception;
 
-/**
- * @category   Zend
- * @package    Zend_Search
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- */
-interface Exception
+interface ExceptionInterface extends \Zend\Search\Lucene\Exception\ExceptionInterface
 {}
-

@@ -33,6 +33,6 @@ namespace Zend\Search\Lucene\Search\Exception;
  */
 class QueryParserException
     extends \UnexpectedValueException
-    implements \Zend\Search\Lucene\Search\Exception
+    implements ExceptionInterface
 {}
 

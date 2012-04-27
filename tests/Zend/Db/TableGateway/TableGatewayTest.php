@@ -65,9 +65,9 @@ class TableGatewayTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Zend\Db\TableGateway\TableGateway::getTableName
+     * @covers Zend\Db\TableGateway\TableGateway::getTable
      */
-    public function testGetTableName()
+    public function testGetTable()
     {
         $this->assertEquals('foo', $this->table->getTable());
     }

@@ -78,11 +78,15 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
         self::SPECIFICATION_WHERE  => 'WHERE %1$s',
         self::SPECIFICATION_GROUP  => array(
             'GROUP BY %1$s' => array(
-                array(2 => '%1$s %2$s', 'combinedby' => ', ')
+                array(1 => '%1$s', 'combinedby' => ', ')
             )
         ),
         self::SPECIFICATION_HAVING => 'HAVING %1$s',
-        self::SPECIFICATION_ORDER  => 'ORDER BY %1$s',
+        self::SPECIFICATION_ORDER  => array(
+            'ORDER BY %1$s' => array(
+                array(2 => '%1$s %2$s', 'combinedby' => ', ')
+            )
+        ),
         self::SPECIFICATION_LIMIT  => 'LIMIT %1$s',
         self::SPECIFICATION_OFFSET => 'OFFSET %1$s'
     );
@@ -478,7 +482,7 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
             } elseif (stripos($columnName, ' as ') === false) {
                 $columnAs = (is_string($column)) ? $platform->quoteIdentifier($column) : 'Expression' . $expr++;
             }
-            $columns[] = array($columnName, $columnAs);
+            $columns[] = (isset($columnAs)) ? array($columnName, $columnAs) : array($columnName);
         }
 
         $separator = $platform->getIdentifierSeparator();
@@ -500,7 +504,7 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
         return array($columns, $table);
     }
     
-    protected function processJoin(PlatformInterface $platform, Adapter $adapter = null, ParameterContainerInterface $parameterContainer = null, &$sqls)
+    protected function processJoin(PlatformInterface $platform, Adapter $adapter = null, ParameterContainerInterface $parameterContainer = null)
     {
         if (!$this->joins) {
             return null;
@@ -550,7 +554,7 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
             }
             $groups[] = $columnSql;
         }
-        return array(implode(', ', $groups));
+        return array($groups);
     }
 
     protected function processHaving(PlatformInterface $platform, Adapter $adapter = null, ParameterContainerInterface $parameterContainer = null)
@@ -581,12 +585,12 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
                 }
             }
             if (strtoupper($v) == self::ORDER_DESENDING) {
-                $orders[] = $platform->quoteIdentifier($k) . ' ' . self::ORDER_DESENDING;
+                $orders[] = array($platform->quoteIdentifier($k), self::ORDER_DESENDING);
             } else {
-                $orders[] = $platform->quoteIdentifier($k) . ' ' . self::ORDER_ASCENDING;
+                $orders[] = array($platform->quoteIdentifier($k), self::ORDER_ASCENDING);
             }
         }
-        return array(implode(', ', $orders));
+        return array($orders);
     }
 
     protected function processLimit(PlatformInterface $platform, Adapter $adapter = null, ParameterContainerInterface $parameterContainer = null)

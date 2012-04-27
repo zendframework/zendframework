@@ -1,22 +1,6 @@
 Forms TODO
 ==========
 
-MUST HAVE for BETA4
--------------------
-
-### View helpers
-
-* HTML4/XHTML1 element types
-  * formCheckbox(ElementInterface $element)
-    * allows 'checked="checked"' or 'checked=""'
-  * formRadio(ElementInterface $element)
-    * allows 'checked="checked"' or 'checked=""'
-  * formSelect(ElementInterface $element)
-    * allows "multiple"
-    * Creates optgroup and option elements
-      * option: "selected" ("selected" or ""), "disabled" ("disabled" or ""), "label", "value"
-      * optgroup: "disabled" ("disabled" or ""), "label"
-
 WISH LIST
 ---------
 

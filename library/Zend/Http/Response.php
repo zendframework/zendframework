@@ -176,7 +176,7 @@ class Response extends Message implements ResponseDescription
     public static function fromString($string)
     {
         $lines = explode("\r\n", $string);
-        if (!is_array($lines) || count($lines)==1) {
+        if (!is_array($lines) || count($lines) == 1) {
             $lines = explode("\n", $string);
         }
 
@@ -487,13 +487,15 @@ class Response extends Message implements ResponseDescription
 
         while (trim($body)) {
             if (! preg_match("/^([\da-fA-F]+)[^\r\n]*\r\n/sm", $body, $m)) {
-                throw new Exception\RuntimeException("Error parsing body - doesn't seem to be a chunked message");
+                throw new Exception\RuntimeException(
+                    "Error parsing body - doesn't seem to be a chunked message"
+                );
             }
 
-            $length = hexdec(trim($m[1]));
-            $cut = strlen($m[0]);
+            $length   = hexdec(trim($m[1]));
+            $cut      = strlen($m[0]);
             $decBody .= substr($body, $cut, $length);
-            $body = substr($body, $cut + $length + 2);
+            $body     = substr($body, $cut + $length + 2);
         }
 
         return $decBody;

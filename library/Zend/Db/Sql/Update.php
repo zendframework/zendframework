@@ -194,13 +194,8 @@ class Update extends AbstractSql implements SqlInterface, PreparableSqlInterface
             $setSql = array();
             $values = array();
             foreach ($set as $column => $value) {
-                if ($prepareType == 'positional') {
-                    $parameterContainer->offsetSet(null, $value);
-                    $setSql[] = $platform->quoteIdentifier($column) . ' = ' . $driver->formatParameterName(null);
-                } elseif ($prepareType == 'named') {
-                    $parameterContainer->offsetSet($column, $value);
-                    $setSql[] = $platform->quoteIdentifier($column) . ' = ' . $driver->formatParameterName($column);
-                }
+                $parameterContainer->offsetSet($column, $value);
+                $setSql[] = $platform->quoteIdentifier($column) . ' = ' . $driver->formatParameterName($column);
             }
             $set = implode(', ', $setSql);
         }

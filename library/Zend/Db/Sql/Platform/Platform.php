@@ -22,8 +22,8 @@ class Platform implements PlatformInterface
         $this->adapter = $adapter;
         $platform = $adapter->getPlatform();
         switch (strtolower($platform->getName())) {
-            case 'mysql':
-                $this->platform = new Platform\Mysql\Mysql;
+            case 'sqlserver':
+                $this->platform = new SqlServer\SqlServer($adapter);
                 break;
             default:
         }
@@ -40,11 +40,12 @@ class Platform implements PlatformInterface
 
     public function prepareStatementFromSqlObject(PreparableSqlInterface $sqlObject, StatementInterface $statement = null)
     {
+        $statement = ($statement) ?: $this->adapter->createStatement();
+
         if ($this->platform) {
-            return $this->prepareSqlObject($sqlObject);
+            return $this->platform->prepareStatementFromSqlObject($sqlObject, $statement);
         }
 
-        $statement = ($statement) ?: $this->adapter->createStatement();
         $sqlObject->prepareStatement($this->adapter, $statement);
         return $statement;
     }

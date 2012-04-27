@@ -159,8 +159,7 @@ class TableGateway implements TableGatewayInterface
             throw new \RuntimeException('The table name of the provided select object must match that of the table');
         }
 
-        $statement = $this->adapter->createStatement();
-        $select->prepareStatement($this->adapter, $statement);
+        $statement = $this->sql->prepareStatementFromSqlObject($select);
 
         $result = $statement->execute();
         $resultSet = clone $this->selectResultPrototype;
@@ -179,8 +178,7 @@ class TableGateway implements TableGatewayInterface
         $insert = $this->sql->insert();
         $insert->values($set);
 
-        $statement = $this->adapter->createStatement();
-        $insert->prepareStatement($this->adapter, $statement);
+        $statement = $this->sql->prepareStatementFromSqlObject($insert);
 
         $result = $statement->execute();
         $this->lastInsertValue = $this->adapter->getDriver()->getConnection()->getLastGeneratedValue();
@@ -201,8 +199,7 @@ class TableGateway implements TableGatewayInterface
         $update->set($set);
         $update->where($where);
 
-        $statement = $this->adapter->createStatement();
-        $update->prepareStatement($this->adapter, $statement);
+        $statement = $this->sql->prepareStatementFromSqlObject($update);
 
         $result = $statement->execute();
         return $result->getAffectedRows();
@@ -223,8 +220,7 @@ class TableGateway implements TableGatewayInterface
             $delete->where($where);
         }
 
-        $statement = $this->adapter->createStatement();
-        $delete->prepareStatement($this->adapter, $statement);
+        $statement = $this->sql->prepareStatementFromSqlObject($delete);
 
         $result = $statement->execute();
         return $result->getAffectedRows();

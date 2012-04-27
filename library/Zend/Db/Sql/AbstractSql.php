@@ -67,5 +67,41 @@ abstract class AbstractSql
 
         return $return;
     }
+    
+    protected function createSqlFromSpecificationAndParameters($specification, $parameters)
+    {
+        if (is_string($specification)) {
+            return vsprintf($specification, $parameters);
+        }
+        
+        $topSpec = key($specification);
+        $paramSpecs = $specification[$topSpec];
+
+        $topParameters = array();
+        $position = -1;
+        foreach ($parameters as $position => $paramsForPosition) {
+            if (isset($paramSpecs[$position]['combinedby'])) {
+                $multiParamValues = array();
+                foreach ($paramsForPosition as $multiParamsForPosition) {
+                    $ppCount = count($multiParamsForPosition);
+                    if (!isset($paramSpecs[$position][$ppCount])) {
+                        throw new Exception\RuntimeException('A number of parameters (' . $ppCount . ') was found that is not supported by this specification');
+                    }
+                    $multiParamValues[] = vsprintf($paramSpecs[$position][$ppCount], $multiParamsForPosition);
+                }
+                $topParameters[] = implode($paramSpecs[$position]['combinedby'], $multiParamValues);
+            } elseif ($paramSpecs[$position] !== null) {
+                $ppCount = count($paramsForPosition);
+                if (!isset($paramSpecs[$position][$ppCount])) {
+                    //var_dump($specification, $parameters);
+                    throw new Exception\RuntimeException('A number of parameters (' . $ppCount . ') was found that is not supported by this specification');
+                }
+                $topParameters[] = vsprintf($paramSpecs[$position][$ppCount], $paramsForPosition);
+            } else {
+                $topParameters[] = $paramsForPosition;
+            }
+        }
+        return vsprintf($topSpec, $topParameters);
+    }
 
 }

@@ -155,27 +155,15 @@ class Insert implements SqlInterface, PreparableSqlInterface
             $statement->setParameterContainer($parameterContainer);
         }
 
-        $prepareType = $driver->getPrepareType();
-
         $table = $platform->quoteIdentifier($this->table);
-//        if ($this->schema != '') {
-//            $table = $platform->quoteIdentifier($this->schema)
-//                . $platform->getIdentifierSeparator()
-//                . $table;
-//        }
 
         $columns = array();
         $values  = array();
 
         foreach ($this->columns as $cIndex => $column) {
             $columns[$cIndex] = $platform->quoteIdentifier($column);
-            if ($prepareType == 'positional') {
-                $values[$cIndex] = $driver->formatParameterName(null);
-                $parameterContainer->offsetSet(null, $this->values[$cIndex]);
-            } elseif ($prepareType == 'named') {
-                $values[$cIndex] = $driver->formatParameterName($column);
-                $parameterContainer->offsetSet($column, $this->values[$cIndex]);
-            }
+            $values[$cIndex] = $driver->formatParameterName($column);
+            $parameterContainer->offsetSet($column, $this->values[$cIndex]);
         }
 
         $sql = sprintf(

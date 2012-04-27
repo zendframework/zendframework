@@ -82,6 +82,11 @@ class ParameterContainer implements Iterator, ParameterContainerInterface
         return $this->data[$nameOrPosition];
     }
 
+    public function offsetSetReference($nameOrPosition, $from)
+    {
+        $this->data[$nameOrPosition] = &$this->data[$from];
+    }
+    
     /**
      * Offset set
      * 

@@ -32,33 +32,44 @@ use Zend\Db\Adapter\Driver\ResultInterface;
  */
 class Result implements \Iterator, ResultInterface
 {
+    
     /**
      * @var resource
      */
     protected $resource = null;
+
     /**
      * @var boolean 
      */
     protected $currentData = false;
+    
     /**
      *
      * @var boolean
      */
     protected $currentComplete = false;
+
     /**
      *
      * @var integer
      */
     protected $position = -1;
+
+    /**
+     * @var mixed
+     */
+    protected $generatedValue = null;
+
     /**
      * Initialize
      * 
      * @param  resource $resource
      * @return Result 
      */
-    public function initialize($resource)
+    public function initialize($resource, $generatedValue = null)
     {
         $this->resource = $resource;
+        $this->generatedValue = $generatedValue;
         return $this;
     }
     /**
@@ -169,5 +180,10 @@ class Result implements \Iterator, ResultInterface
     public function getAffectedRows()
     {
         return sqlsrv_rows_affected($this->resource);
+    }
+
+    public function getGeneratedValue()
+    {
+        return $this->generatedValue;
     }
 }

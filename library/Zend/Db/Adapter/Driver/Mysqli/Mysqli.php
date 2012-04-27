@@ -184,6 +184,6 @@ class Mysqli implements DriverInterface
      */
     public function getLastGeneratedValue()
     {
-        // TODO: Implement getLastGeneratedValue() method.
+        return $this->getConnection()->getLastGeneratedValue();
     }
 }

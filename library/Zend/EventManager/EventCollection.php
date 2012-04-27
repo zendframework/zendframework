@@ -159,15 +159,4 @@ interface EventCollection extends SharedEventCollectionAware
      */
     public function detachAggregate(ListenerAggregate $aggregate);
 
-    /**
-     * Prepare arguments
-     *
-     * @param  array $args
-     * @return ArrayObject
-     */
-    public function prepareArgs(array $args);
-
-
-
-
 }

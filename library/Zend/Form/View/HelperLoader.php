@@ -45,6 +45,13 @@ class HelperLoader extends PluginClassLoader
         'form_input'          => 'Zend\Form\View\Helper\FormInput',
         'formlabel'           => 'Zend\Form\View\Helper\FormLabel',
         'form_label'          => 'Zend\Form\View\Helper\FormLabel',
+        'formmulticheckbox'   => 'Zend\Form\View\Helper\FormMultiCheckbox',
+        'form_multicheckbox'  => 'Zend\Form\View\Helper\FormMultiCheckbox',
+        'form_multi_checkbox' => 'Zend\Form\View\Helper\FormMultiCheckbox',
+        'formradio'           => 'Zend\Form\View\Helper\FormRadio',
+        'form_radio'          => 'Zend\Form\View\Helper\FormRadio',
+        'formselect'          => 'Zend\Form\View\Helper\FormSelect',
+        'form_select'         => 'Zend\Form\View\Helper\FormSelect',
         'formtextarea'        => 'Zend\Form\View\Helper\FormTextarea',
         'form_textarea'       => 'Zend\Form\View\Helper\FormTextarea',
     );

@@ -62,7 +62,7 @@ class Mbox extends Storage\Mbox implements MailFolder
      *   - folder intial selected folder, default is 'INBOX'
      *
      * @param  $params array mail reader specific parameters
-     * @throws \Zend\Mail\Storage\Exception
+     * @throws \Zend\Mail\Storage\Exception\InvalidArgumentException
      */
     public function __construct($params)
     {
@@ -94,14 +94,13 @@ class Mbox extends Storage\Mbox implements MailFolder
      *
      * @param string $currentDir call with root dir, also used for recursion.
      * @param \Zend\Mail\Storage\Folder|null $parentFolder used for recursion
-     * @param string $parentGlobalName used for rescursion
-     * @return null
-     * @throws \Zend\Mail\Storage\Exception
+     * @param string $parentGlobalName used for recursion
+     * @throws \Zend\Mail\Storage\Exception\InvalidArgumentException
      */
     protected function _buildFolderTree($currentDir, $parentFolder = null, $parentGlobalName = '')
     {
         if (!$parentFolder) {
-            $this->_rootFolder = new Folder('/', '/', false);
+            $this->_rootFolder = new Storage\Folder('/', '/', false);
             $parentFolder = $this->_rootFolder;
         }
 
@@ -117,13 +116,13 @@ class Mbox extends Storage\Mbox implements MailFolder
             $absoluteEntry = $currentDir . $entry;
             $globalName = $parentGlobalName . DIRECTORY_SEPARATOR . $entry;
             if (is_file($absoluteEntry) && $this->_isMboxFile($absoluteEntry)) {
-                $parentFolder->$entry = new Folder($entry, $globalName);
+                $parentFolder->$entry = new Storage\Folder($entry, $globalName);
                 continue;
             }
             if (!is_dir($absoluteEntry) /* || $entry == '.' || $entry == '..' */) {
                 continue;
             }
-            $folder = new Folder($entry, $globalName, false);
+            $folder = new Storage\Folder($entry, $globalName, false);
             $parentFolder->$entry = $folder;
             $this->_buildFolderTree($absoluteEntry . DIRECTORY_SEPARATOR, $folder, $globalName);
         }
@@ -135,8 +134,8 @@ class Mbox extends Storage\Mbox implements MailFolder
      * get root folder or given folder
      *
      * @param string $rootFolder get folder structure for given folder, else root
+     * @throws \Zend\Mail\Storage\Exception\InvalidArgumentException
      * @return \Zend\Mail\Storage\Folder root or wanted folder
-     * @throws \Zend\Mail\Storage\Exception
      */
     public function getFolders($rootFolder = null)
     {
@@ -166,8 +165,8 @@ class Mbox extends Storage\Mbox implements MailFolder
      * folder must be selectable!
      *
      * @param \Zend\Mail\Storage\Folder|string $globalName global name of folder or instance for subfolder
+     * @throws \Zend\Mail\Storage\Exception\RuntimeException
      * @return null
-     * @throws \Zend\Mail\Storage\Exception
      */
     public function selectFolder($globalName)
     {

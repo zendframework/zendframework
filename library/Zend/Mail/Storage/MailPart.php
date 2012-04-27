@@ -85,7 +85,7 @@ interface MailPart extends RecursiveIterator
     public function getHeaders();
 
     /**
-     * Get a header in specificed format
+     * Get a header in specified format
      *
      * Internally headers that occur more than once are saved as array, all other as string. If $format
      * is set to string implode is used to concat the values (with Zend_Mime::LINEEND as delim).
@@ -112,7 +112,7 @@ interface MailPart extends RecursiveIterator
      * @return string|array wanted part or all parts as array($firstName => firstPart, partname => value)
      * @throws Exception
      */
-    public function getHeaderField($name, $wantedPart = 0, $firstName = 0);
+    public function getHeaderField($name, $wantedPart = '0', $firstName = '0');
 
 
     /**

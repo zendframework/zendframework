@@ -63,7 +63,6 @@ class Smtp implements Transport, Pluggable
      * Constructor.
      *
      * @param  null|SmtpOptions $options
-     * @return void
      */
     public function __construct(SmtpOptions $options = null)
     {
@@ -98,7 +97,8 @@ class Smtp implements Transport, Pluggable
     /**
      * Set broker for obtaining SMTP protocol connection
      *
-     * @param  SmtpBroker $value
+     * @param SmtpBroker $broker
+     * @throws Exception\InvalidArgumentException
      * @return $this
      */
     public function setBroker($broker)
@@ -142,7 +142,6 @@ class Smtp implements Transport, Pluggable
     /**
      * Class destructor to ensure all open connections are closed
      *
-     * @return void
      */
     public function __destruct()
     {
@@ -160,9 +159,7 @@ class Smtp implements Transport, Pluggable
     /**
      * Sets the connection protocol instance
      *
-     * @param AbstractProtocol $client
-     *
-     * @return void
+     * @param AbstractProtocol $connection
      */
     public function setConnection(AbstractProtocol $connection)
     {
@@ -173,7 +170,7 @@ class Smtp implements Transport, Pluggable
     /**
      * Gets the connection protocol instance
      *
-     * @return Protocol|null
+     * @return SmtpProtocol|null
      */
     public function getConnection()
     {
@@ -186,7 +183,7 @@ class Smtp implements Transport, Pluggable
      * The connection via the protocol adapter is made just-in-time to allow a
      * developer to add a custom adapter if required before mail is sent.
      *
-     * @return void
+     * @param \Zend\Mail\Message $message
      */
     public function send(Message $message)
     {
@@ -220,9 +217,10 @@ class Smtp implements Transport, Pluggable
     }
 
     /**
-     * Retrieve email address for envelope FROM 
-     * 
-     * @param  Message $message 
+     * Retrieve email address for envelope FROM
+     *
+     * @param  Message $message
+     * @throws Exception\RuntimeException
      * @return string
      */
     protected function prepareFromAddress(Message $message)

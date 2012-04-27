@@ -33,10 +33,11 @@ class Address implements AddressDescription
 
     /**
      * Constructor
-     * 
-     * @param  string $email 
-     * @param  null|string $name 
-     * @return void
+     *
+     * @param  string $email
+     * @param  null|string $name
+     * @throws Exception\InvalidArgumentException
+     * @return \Zend\Mail\Address
      */
     public function __construct($email, $name = null)
     {

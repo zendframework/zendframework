@@ -59,7 +59,7 @@ abstract class AbstractStorage implements Countable, ArrayAccess, SeekableIterat
     protected $_iterationMax = null;
 
     /**
-     * used message class, change it in an extened class to extend the returned message class
+     * used message class, change it in an extended class to extend the returned message class
      * @var string
      */
     protected $_messageClass = 'Zend\Mail\Storage\Message';
@@ -74,8 +74,8 @@ abstract class AbstractStorage implements Countable, ArrayAccess, SeekableIterat
      *   - null is it's not yet known or it can't be know if a feature is supported
      *
      * @param  string $var  property name
+     * @throws Exception\InvalidArgumentException
      * @return bool         supported or not
-     * @throws Exception
      */
     public function __get($var)
     {
@@ -140,7 +140,7 @@ abstract class AbstractStorage implements Countable, ArrayAccess, SeekableIterat
      * Get raw content of message or part
      *
      * @param  int               $id   number of message
-     * @param  null|array|string $part path to part or null for messsage content
+     * @param  null|array|string $part path to part or null for message content
      * @return string raw content
      */
     abstract public function getRawContent($id, $part = null);
@@ -182,6 +182,7 @@ abstract class AbstractStorage implements Countable, ArrayAccess, SeekableIterat
     /**
      * delete a message from current box/folder
      *
+     * @param $id
      * @return null
      */
     abstract public function removeMessage($id);
@@ -244,7 +245,7 @@ abstract class AbstractStorage implements Countable, ArrayAccess, SeekableIterat
       * ArrayAccess::offsetGet()
       *
       * @param    int $id
-      * @return   \Zend\Mail\Message\Message message object
+      * @return   \Zend\Mail\Storage\Message message object
       */
      public function offsetGet($id)
      {
@@ -252,14 +253,13 @@ abstract class AbstractStorage implements Countable, ArrayAccess, SeekableIterat
      }
 
 
-     /**
-      * ArrayAccess::offsetSet()
-      *
-      * @param    id     $id
-      * @param    mixed  $value
-      * @throws   \Zend\Mail\Storage\Exception
-      * @return   void
-      */
+    /**
+     * ArrayAccess::offsetSet()
+     *
+     * @param mixed $id
+     * @param mixed $value
+     * @throws Exception\RuntimeException
+     */
      public function offsetSet($id, $value)
      {
         throw new Exception\RuntimeException('cannot write mail messages via array access');
@@ -284,8 +284,6 @@ abstract class AbstractStorage implements Countable, ArrayAccess, SeekableIterat
       * Rewind always gets the new count from the storage. Thus if you use
       * the interfaces and your scripts take long you should use reset()
       * from time to time.
-      *
-      * @return   void
       */
      public function rewind()
      {
@@ -318,8 +316,6 @@ abstract class AbstractStorage implements Countable, ArrayAccess, SeekableIterat
 
      /**
       * Iterator::next()
-      *
-      * @return   void
       */
      public function next()
      {
@@ -330,7 +326,7 @@ abstract class AbstractStorage implements Countable, ArrayAccess, SeekableIterat
      /**
       * Iterator::valid()
       *
-      * @return   boolean
+      * @return boolean
       */
      public function valid()
      {
@@ -345,7 +341,6 @@ abstract class AbstractStorage implements Countable, ArrayAccess, SeekableIterat
       * SeekableIterator::seek()
       *
       * @param  int $pos
-      * @return void
       * @throws Exception\OutOfBoundsException
       */
      public function seek($pos)

@@ -314,7 +314,7 @@ class Message
      * 
      * @param mixed $emailOrAddress 
      * @param mixed $name 
-     * @return void
+     * @return Message
      */
     public function setSender($emailOrAddress, $name = null)
     {
@@ -370,8 +370,9 @@ class Message
 
     /**
      * Set the message body
-     * 
-     * @param  null|string|MimeMessage|object $body 
+     *
+     * @param  null|string|MimeMessage|object $body
+     * @throws Exception\InvalidArgumentException
      * @return Message
      */
     public function setBody($body)
@@ -471,7 +472,6 @@ class Message
      * Clear a header by name
      * 
      * @param  string $headerName 
-     * @return void
      */
     protected function clearHeaderByName($headerName)
     {
@@ -487,9 +487,10 @@ class Message
      *
      * Used with To, From, Cc, Bcc, and ReplyTo headers. If the header does not
      * exist, instantiates it.
-     * 
-     * @param  string $headerName 
-     * @param  string $headerClass 
+     *
+     * @param  string $headerName
+     * @param  string $headerClass
+     * @throws Exception\DomainException
      * @return AddressList
      */
     protected function getAddressListFromHeader($headerName, $headerClass)
@@ -508,12 +509,12 @@ class Message
      * Update an address list
      *
      * Proxied to this from addFrom, addTo, addCc, addBcc, and addReplyTo.
-     * 
-     * @param  AddressList $addressList 
-     * @param  string|AddressDescription|array|AddressList|Traversable $emailOrAddressOrList 
-     * @param  null|string $name 
-     * @param  string $callingMethod 
-     * @return void
+     *
+     * @param  AddressList $addressList
+     * @param  string|AddressDescription|array|AddressList|Traversable $emailOrAddressOrList
+     * @param  null|string $name
+     * @param  string $callingMethod
+     * @throws Exception\InvalidArgumentException
      */
     protected function updateAddressList(AddressList $addressList, $emailOrAddressOrList, $name, $callingMethod)
     {

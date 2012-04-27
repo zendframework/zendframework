@@ -61,6 +61,7 @@ abstract class AbstractAddressList implements Header
      * Parse string to create header object
      *
      * @param  string $headerLine
+     * @throws Exception\InvalidArgumentException
      * @return AbstractAddressList
      */
     public static function fromString($headerLine)
@@ -180,7 +181,6 @@ abstract class AbstractAddressList implements Header
      * Set address list for this header
      *
      * @param  AddressList $addressList
-     * @return void
      */
     public function setAddressList(AddressList $addressList)
     {

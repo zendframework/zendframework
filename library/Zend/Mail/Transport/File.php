@@ -53,7 +53,6 @@ class File implements Transport
      * Constructor
      *
      * @param  null|FileOptions $options OPTIONAL (Default: null)
-     * @return void
      */
     public function __construct(FileOptions $options = null)
     {
@@ -67,7 +66,6 @@ class File implements Transport
      * Sets options
      *
      * @param  FileOptions $options
-     * @return void
      */
     public function setOptions(FileOptions $options)
     {
@@ -77,9 +75,9 @@ class File implements Transport
     /**
      * Saves e-mail message to a file
      *
-     * @return void
-     * @throws \Zend\Mail\Transport\Exception on not writable target directory
-     * @throws \Zend\Mail\Transport\Exception on file_put_contents() failure
+     * @param Message $message
+     * @throws Exception\RuntimeException on not writable target directory or
+     * on file_put_contents() failure
      */
     public function send(Message $message)
     {

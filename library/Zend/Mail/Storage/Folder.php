@@ -146,8 +146,8 @@ class Folder implements \RecursiveIterator
      * get subfolder named $name
      *
      * @param  string $name wanted subfolder
+     * @throws Exception\InvalidArgumentException
      * @return \Zend\Mail\Storage\Folder folder named $folder
-     * @throws \Zend\Mail\Storage\Exception
      */
     public function __get($name)
     {

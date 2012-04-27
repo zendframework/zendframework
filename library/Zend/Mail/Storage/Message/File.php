@@ -44,7 +44,7 @@ class File extends FilePart implements MailMessage
      * In addition to the parameters of Zend_Mail_Part::__construct() this constructor supports:
      * - flags array with flags for message, keys are ignored, use constants defined in Zend_Mail_Storage
      *
-     * @param  string $rawMessage  full message with or without headers
+     * @param  array $params
      * @throws \Zend\Mail\Storage\Exception
      */
     public function __construct(array $params)

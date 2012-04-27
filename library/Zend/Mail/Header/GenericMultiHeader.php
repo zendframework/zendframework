@@ -48,7 +48,7 @@ class GenericMultiHeader implements MultipleHeaderDescription
     protected $encoding = 'ASCII';
 
     /**
-     * Deserialize from a string
+     * Unserialize from a string
      * 
      * @param  string $headerLine 
      * @return GenericMultiHeader
@@ -91,8 +91,9 @@ class GenericMultiHeader implements MultipleHeaderDescription
 
     /**
      * Set header name
-     * 
+     *
      * @param  string $fieldName
+     * @throws Exception\InvalidArgumentException
      * @return GenericHeader
      */
     public function setFieldName($fieldName)
@@ -189,9 +190,10 @@ class GenericMultiHeader implements MultipleHeaderDescription
     }
 
     /**
-     * Cast multiple header objectss to a single string header
-     * 
-     * @param  array $headers 
+     * Cast multiple header objects to a single string header
+     *
+     * @param  array $headers
+     * @throws Exception\InvalidArgumentException
      * @return string
      */
     public function toStringMultipleHeaders(array $headers)

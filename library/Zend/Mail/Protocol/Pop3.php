@@ -84,8 +84,8 @@ class Pop3
      * @param  string      $host  hostname or IP address of POP3 server
      * @param  int|null    $port  of POP3 server, default is 110 (995 for ssl)
      * @param  string|bool $ssl   use 'SSL', 'TLS' or false
+     * @throws Exception\RuntimeException
      * @return string welcome message
-     * @throws \Zend\Mail\Protocol\Exception
      */
     public function connect($host, $port = null, $ssl = false)
     {
@@ -131,8 +131,7 @@ class Pop3
      * Send a request
      *
      * @param string $request your request without newline
-     * @return null
-     * @throws \Zend\Mail\Protocol\Exception
+     * @throws Exception\RuntimeException
      */
     public function sendRequest($request)
     {
@@ -147,8 +146,8 @@ class Pop3
      * read a response
      *
      * @param  boolean $multiline response has multiple lines and should be read until "<nl>.<nl>"
+     * @throws Exception\RuntimeException
      * @return string response
-     * @throws \Zend\Mail\Protocol\Exception
      */
     public function readResponse($multiline = false)
     {
@@ -186,7 +185,7 @@ class Pop3
 
 
     /**
-     * Send request and get resposne
+     * Send request and get response
      *
      * @see sendRequest(), readResponse()
      *
@@ -238,17 +237,15 @@ class Pop3
     /**
      * Login to POP3 server. Can use APOP
      *
-     * @param  string $user      username
-     * @param  string $password  password
-     * @param  bool   $try_apop  should APOP be tried?
-     * @return void
+     * @param  string $user     username
+     * @param  string $password password
+     * @param  bool   $tryApop  should APOP be tried?
      */
     public function login($user, $password, $tryApop = true)
     {
         if ($tryApop && $this->_timestamp) {
             try {
                 $this->request("APOP $user " . md5($this->_timestamp . $password));
-                return;
             } catch (Exception $e) {
                 // ignore
             }
@@ -263,8 +260,7 @@ class Pop3
      * Make STAT call for message count and size sum
      *
      * @param  int $messages  out parameter with count of messages
-     * @param  int $octets    out parameter with size in octects of messages
-     * @return void
+     * @param  int $octets    out parameter with size in octets of messages
      */
     public function status(&$messages, &$octets)
     {
@@ -339,14 +335,15 @@ class Pop3
      * Make TOP call for getting headers and maybe some body lines
      * This method also sets hasTop - before it it's not known if top is supported
      *
-     * The fallback makes normale RETR call, which retrieves the whole message. Additional
+     * The fallback makes normal RETR call, which retrieves the whole message. Additional
      * lines are not removed.
      *
      * @param  int  $msgno    number of message
      * @param  int  $lines    number of wanted body lines (empty line is inserted after header lines)
      * @param  bool $fallback fallback with full retrieve if top is not supported
+     * @throws Exception
+     * @throws Exception\RuntimeException
      * @return string message headers with wanted body lines
-     * @throws \Zend\Mail\Protocol\Exception
      */
     public function top($msgno, $lines = 0, $fallback = false)
     {
@@ -390,8 +387,6 @@ class Pop3
 
     /**
      * Make a NOOP call, maybe needed for keeping the server happy
-     *
-     * @return null
      */
     public function noop()
     {
@@ -402,7 +397,7 @@ class Pop3
     /**
      * Make a DELE count to remove a message
      *
-     * @return null
+     * @param $msgno
      */
     public function delete($msgno)
     {
@@ -412,8 +407,6 @@ class Pop3
 
     /**
      * Make RSET call, which rollbacks delete requests
-     *
-     * @return null
      */
     public function undelete()
     {

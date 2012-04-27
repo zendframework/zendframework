@@ -83,8 +83,9 @@ class GenericHeader implements Header
 
     /**
      * Set header field name
-     * 
+     *
      * @param  string $fieldName
+     * @throws Exception\InvalidArgumentException
      * @return GenericHeader
      */
     public function setFieldName($fieldName)

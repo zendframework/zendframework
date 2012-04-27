@@ -73,7 +73,7 @@ class Pop3 extends AbstractStorage
      * Fetch a message
      *
      * @param int $id number of message
-     * @return \Zend\Mail\Message\Message
+     * @return \Zend\Mail\Storage\Message
      * @throws \Zend\Mail\Protocol\Exception
      */
     public function getMessage($id)
@@ -109,7 +109,7 @@ class Pop3 extends AbstractStorage
      * Get raw content of message or part
      *
      * @param  int               $id   number of message
-     * @param  null|array|string $part path to part or null for messsage content
+     * @param  null|array|string $part path to part or null for message content
      * @return string raw content
      * @throws \Zend\Mail\Protocol\Exception
      * @throws \Zend\Mail\Storage\Exception
@@ -131,7 +131,7 @@ class Pop3 extends AbstractStorage
 
     /**
      * create instance with parameters
-     * Supported paramters are
+     * Supported parameters are
      *   - host hostname or ip address of POP3 server
      *   - user username
      *   - password password for user 'username' [optional, default = '']
@@ -139,8 +139,8 @@ class Pop3 extends AbstractStorage
      *   - ssl 'SSL' or 'TLS' for secure sockets
      *
      * @param  $params array  mail reader specific parameters
-     * @throws \Zend\Mail\Storage\Exception
-     * @throws \Zend\Mail\Protocol\Exception
+     * @throws \Zend\Mail\Storage\Exception\InvalidArgumentException
+     * @throws \Zend\Mail\Protocol\Exception\RuntimeException
      */
     public function __construct($params)
     {
@@ -174,8 +174,6 @@ class Pop3 extends AbstractStorage
     /**
      * Close resource for mail lib. If you need to control, when the resource
      * is closed. Otherwise the destructor would call this.
-     *
-     * @return null
      */
     public function close()
     {
@@ -185,22 +183,20 @@ class Pop3 extends AbstractStorage
     /**
      * Keep the server busy.
      *
-     * @return null
-     * @throws \Zend\Mail\Protocol\Exception
+     * @throws \Zend\Mail\Protocol\Exception\RuntimeException
      */
     public function noop()
     {
-        return $this->_protocol->noop();
+        $this->_protocol->noop();
     }
 
     /**
-     * Remove a message from server. If you're doing that from a web enviroment
+     * Remove a message from server. If you're doing that from a web environment
      * you should be careful and use a uniqueid as parameter if possible to
      * identify the message.
      *
      * @param  int $id number of message
-     * @return null
-     * @throws \Zend\Mail\Protocol\Exception
+     * @throws \Zend\Mail\Protocol\Exception\RuntimeException
      */
     public function removeMessage($id)
     {
@@ -240,8 +236,8 @@ class Pop3 extends AbstractStorage
      * as parameter and use this method to translate it to message number right before calling removeMessage()
      *
      * @param string $id unique id
+     * @throws Exception\InvalidArgumentException
      * @return int message number
-     * @throws \Zend\Mail\Storage\Exception
      */
     public function getNumberByUniqueId($id)
     {

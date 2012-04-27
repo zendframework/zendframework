@@ -46,8 +46,9 @@ class Subject implements Header, UnstructuredHeader
 
     /**
      * Factory from header line
-     * 
-     * @param  string $headerLine 
+     *
+     * @param  string $headerLine
+     * @throws Exception\InvalidArgumentException
      * @return Subject
      */
     public static function fromString($headerLine)

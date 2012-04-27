@@ -149,6 +149,7 @@ class Sender implements Header
      *
      * @param  string|AddressDescription $emailOrAddress
      * @param  null|string $name
+     * @throws Exception\InvalidArgumentException
      * @return Sender
      */
     public function setAddress($emailOrAddress, $name = null)

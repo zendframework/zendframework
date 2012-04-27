@@ -55,7 +55,6 @@ class Crammd5 extends Smtp
      * @param  string|array $host   (Default: 127.0.0.1)
      * @param  null|int     $port   (Default: null)
      * @param  null|array   $config Auth-specific parameters
-     * @return void
      */
     public function __construct($host = '127.0.0.1', $port = null, $config = null)
     {
@@ -87,7 +86,6 @@ class Crammd5 extends Smtp
     /**
      * @todo Perform CRAM-MD5 authentication with supplied credentials
      *
-     * @return void
      */
     public function auth()
     {
@@ -106,7 +104,7 @@ class Crammd5 extends Smtp
     /**
      * Set value for username
      *
-     * @param  string $value
+     * @param  string $username
      * @return Crammd5
      */
     public function setUsername($username)
@@ -128,7 +126,7 @@ class Crammd5 extends Smtp
     /**
      * Set value for password
      *
-     * @param  string $value
+     * @param  string $password
      * @return Crammd5
      */
     public function setPassword($password)
@@ -152,7 +150,7 @@ class Crammd5 extends Smtp
      *
      * @param  string $key   Challenge key (usually password)
      * @param  string $data  Challenge data
-     * @param  string $block Length of blocks
+     * @param  int    $block Length of blocks
      * @return string
      */
     protected function _hmacMd5($key, $data, $block = 64)

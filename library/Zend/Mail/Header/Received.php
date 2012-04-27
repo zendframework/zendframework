@@ -116,11 +116,12 @@ class Received implements MultipleHeaderDescription
     {
         return 'Received: ' . $this->getFieldValue();
     }
-    
+
     /**
      * Serialize collection of Received headers to string
-     * 
-     * @param  array $headers 
+     *
+     * @param  array $headers
+     * @throws Exception\RuntimeException
      * @return string
      */
     public function toStringMultipleHeaders(array $headers)

@@ -70,7 +70,6 @@ class Sendmail implements Transport
      * Constructor.
      *
      * @param  null|string|array|Traversable $parameters OPTIONAL (Default: null)
-     * @return void
      */
     public function __construct($parameters = null)
     {
@@ -84,8 +83,9 @@ class Sendmail implements Transport
      * Set sendmail parameters
      *
      * Used to populate the additional_parameters argument to mail()
-     * 
-     * @param  null|string|array|Traversable $parameters 
+     *
+     * @param  null|string|array|Traversable $parameters
+     * @throws \Zend\Mail\Exception\InvalidArgumentException
      * @return Sendmail
      */
     public function setParameters($parameters)
@@ -97,7 +97,7 @@ class Sendmail implements Transport
 
         if (!is_array($parameters) && !$parameters instanceof Traversable) {
             throw new Exception\InvalidArgumentException(sprintf(
-                '%s expects a string, array, or Traversable object of paremeters; received "%s"',
+                '%s expects a string, array, or Traversable object of parameters; received "%s"',
                 __METHOD__,
                 (is_object($parameters) ? get_class($parameters) : gettype($parameters))
             ));
@@ -117,8 +117,9 @@ class Sendmail implements Transport
      * Set callback to use for mail
      *
      * Primarily for testing purposes, but could be used to curry arguments.
-     * 
-     * @param  callable $callable 
+     *
+     * @param  callable $callable
+     * @throws \Zend\Mail\Exception\InvalidArgumentException
      * @return Sendmail
      */
     public function setCallable($callable)
@@ -138,7 +139,6 @@ class Sendmail implements Transport
      * Send a message
      * 
      * @param  Message $message 
-     * @return void
      */
     public function send(Message $message)
     {
@@ -153,8 +153,9 @@ class Sendmail implements Transport
 
     /**
      * Prepare recipients list
-     * 
-     * @param  Message $message 
+     *
+     * @param  Message $message
+     * @throws \Zend\Mail\Exception\RuntimeException
      * @return string
      */
     protected function prepareRecipients(Message $message)
@@ -285,8 +286,8 @@ class Sendmail implements Transport
      * @param  string $subject
      * @param  string $message
      * @param  string $headers
-     * @return void
-     * @throws Exception\RuntimeException on mail failure
+     * @param $parameters
+     * @throws \Zend\Mail\Exception\RuntimeException
      */
     public function mailHandler($to, $subject, $message, $headers, $parameters)
     {
@@ -315,7 +316,7 @@ class Sendmail implements Transport
      * @param string $errfile
      * @param string $errline
      * @param array  $errcontext
-     * @return true
+     * @return boolean always true
      */
     public function handleMailErrors($errno, $errstr, $errfile = null, $errline = null, array $errcontext = null)
     {

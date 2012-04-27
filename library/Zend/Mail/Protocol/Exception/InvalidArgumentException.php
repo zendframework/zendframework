@@ -20,6 +20,7 @@
  */
 
 namespace Zend\Mail\Protocol\Exception;
+
 use Zend\Mail\Protocol\Exception;
 
 /**

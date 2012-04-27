@@ -51,8 +51,9 @@ class ContentType implements Header
 
     /**
      * Factory: create Content-Type header object from string
-     * 
-     * @param  string $headerLine 
+     *
+     * @param  string $headerLine
+     * @throws Exception\InvalidArgumentException
      * @return ContentType
      */
     public static function fromString($headerLine)
@@ -147,8 +148,9 @@ class ContentType implements Header
 
     /**
      * Set the content type
-     * 
-     * @param  string $type 
+     *
+     * @param  string $type
+     * @throws Exception\InvalidArgumentException
      * @return ContentType
      */
     public function setType($type)
@@ -167,7 +169,7 @@ class ContentType implements Header
     /**
      * Retrieve the content type
      * 
-     * @return void
+     * @return string
      */
     public function getType()
     {

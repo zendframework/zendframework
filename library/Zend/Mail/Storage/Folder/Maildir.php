@@ -67,7 +67,7 @@ class Maildir extends Storage\Maildir implements MailFolder
      *   - folder intial selected folder, default is 'INBOX'
      *
      * @param  $params array mail reader specific parameters
-     * @throws \Zend\Mail\Storage\Exception
+     * @throws \Zend\Mail\Storage\Exception\InvalidArgumentException
      */
     public function __construct($params)
     {
@@ -95,8 +95,8 @@ class Maildir extends Storage\Maildir implements MailFolder
      * Result is save in \Zend\Mail\Storage\Folder instances with the root in $this->_rootFolder.
      * $parentFolder and $parentGlobalName are only used internally for recursion.
      *
+     * @throws \Zend\Mail\Storage\Exception\RuntimeException
      * @return null
-     * @throws \Zend\Mail\Storage\Exception
      */
     protected function _buildFolderTree()
     {
@@ -154,8 +154,8 @@ class Maildir extends Storage\Maildir implements MailFolder
      * get root folder or given folder
      *
      * @param string $rootFolder get folder structure for given folder, else root
+     * @throws \Zend\Mail\Storage\Exception\InvalidArgumentException
      * @return \Zend\Mail\Storage\Folder root or wanted folder
-     * @throws \Zend\Mail\Storage\Exception
      */
     public function getFolders($rootFolder = null)
     {
@@ -189,8 +189,8 @@ class Maildir extends Storage\Maildir implements MailFolder
      * folder must be selectable!
      *
      * @param \Zend\Mail\Storage\Folder|string $globalName global name of folder or instance for subfolder
+     * @throws \Zend\Mail\Storage\Exception\RuntimeException
      * @return null
-     * @throws \Zend\Mail\Storage\Exception
      */
     public function selectFolder($globalName)
     {
@@ -217,7 +217,6 @@ class Maildir extends Storage\Maildir implements MailFolder
      * get \Zend\Mail\Storage\Folder instance for current folder
      *
      * @return \Zend\Mail\Storage\Folder instance of current folder
-     * @throws \Zend\Mail\Storage\Exception
      */
     public function getCurrentFolder()
     {

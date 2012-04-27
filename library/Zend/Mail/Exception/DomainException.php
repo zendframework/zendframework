@@ -14,28 +14,25 @@
  *
  * @category   Zend
  * @package    Zend_Mail
- * @subpackage Transport
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @version    $Id$
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Mail;
+namespace Zend\Mail\Exception;
+
+use Zend\Mail\Exception;
 
 /**
- * Interface for mail transports
+ * Exception for Zend_Mail component.
  *
  * @category   Zend
  * @package    Zend_Mail
- * @subpackage Transport
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Transport
+class DomainException
+    extends \DomainException
+    implements Exception
 {
-    /**
-     * Send a mail message
-     * 
-     * @param  Message $message 
-     */
-    public function send(Message $message);
 }

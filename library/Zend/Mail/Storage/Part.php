@@ -93,7 +93,7 @@ class Part implements RecursiveIterator, MailPart
      * - content    content as string
      *
      * @param   array $params  full message with or without headers
-     * @throws  Exception
+     * @throws Exception\InvalidArgumentException
      */
     public function __construct(array $params)
     {
@@ -148,8 +148,8 @@ class Part implements RecursiveIterator, MailPart
      *
      * If part is multipart the raw content of this part with all sub parts is returned
      *
+     * @throws Exception\RuntimeException
      * @return string body
-     * @throws Exception
      */
     public function getContent()
     {
@@ -180,8 +180,8 @@ class Part implements RecursiveIterator, MailPart
     /**
      * Cache content and split in parts if multipart
      *
+     * @throws Exception\RuntimeException
      * @return null
-     * @throws Exception
      */
     protected function _cacheContent()
     {
@@ -213,8 +213,8 @@ class Part implements RecursiveIterator, MailPart
      * Get part of multipart message
      *
      * @param  int $num number of part starting with 1 for first part
+     * @throws Exception\RuntimeException
      * @return Part wanted part
-     * @throws Exception
      */
     public function getPart($num)
     {
@@ -292,15 +292,15 @@ class Part implements RecursiveIterator, MailPart
     }
 
     /**
-     * Get a header in specificed format
+     * Get a header in specified format
      *
      * Internally headers that occur more than once are saved as array, all other as string. If $format
      * is set to string implode is used to concat the values (with Mime::LINEEND as delim).
      *
      * @param  string $name   name of header, matches case-insensitive, but camel-case is replaced with dashes
      * @param  string $format change type of return value to 'string' or 'array'
+     * @throws Exception\InvalidArgumentException
      * @return string|array value of header in wanted or internal format
-     * @throws Exception
      */
     public function getHeader($name, $format = null)
     {
@@ -364,9 +364,9 @@ class Part implements RecursiveIterator, MailPart
      * @param  string $wantedPart the wanted part, default is first, if null an array with all parts is returned
      * @param  string $firstName  key name for the first part
      * @return string|array wanted part or all parts as array($firstName => firstPart, partname => value)
-     * @throws Exception
+     * @throws \Zend\Mime\Exception\RuntimeException
      */
-    public function getHeaderField($name, $wantedPart = 0, $firstName = 0)
+    public function getHeaderField($name, $wantedPart = '0', $firstName = '0')
     {
         return Mime\Decode::splitHeaderField(current($this->getHeader($name, 'array')), $wantedPart, $firstName);
     }

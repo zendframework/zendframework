@@ -71,6 +71,7 @@ class Headers implements Iterator, Countable
      * will be lazy loaded)
      *
      * @param  string $string
+     * @throws Exception\RuntimeException
      * @return Headers
      */
     public static function fromString($string)
@@ -187,6 +188,7 @@ class Headers implements Iterator, Countable
      * Expects an array (or Traversable object) of type/value pairs.
      *
      * @param  array|Traversable $headers
+     * @throws Exception\InvalidArgumentException
      * @return Headers
      */
     public function addHeaders($headers)
@@ -309,7 +311,7 @@ class Headers implements Iterator, Countable
      * Get all headers of a certain name/type
      * 
      * @param  string $name
-     * @return false|Header|ArrayIterator
+     * @return boolean|Header|ArrayIterator
      */
     public function get($name)
     {
@@ -359,7 +361,6 @@ class Headers implements Iterator, Countable
     /**
      * Advance the pointer for this object as an interator
      *
-     * @return void
      */
     public function next()
     {
@@ -389,7 +390,6 @@ class Headers implements Iterator, Countable
     /**
      * Reset the internal pointer for this object as an iterator
      *
-     * @return void
      */
     public function rewind()
     {
@@ -491,7 +491,7 @@ class Headers implements Iterator, Countable
 
     /**
      * @param $index
-     * @return mixed|void
+     * @return mixed
      */
     protected function lazyLoadHeader($index)
     {

@@ -42,8 +42,8 @@ class Message extends Part implements MailMessage
      * - file  filename or file handle of a file with raw message content
      * - flags array with flags for message, keys are ignored, use constants defined in \Zend\Mail\Storage
      *
-     * @param  string $rawMessage  full message with or without headers
-     * @throws Exception
+     * @param array $params
+     * @throws Exception\RuntimeException
      */
     public function __construct(array $params)
     {

@@ -21,6 +21,9 @@
 
 namespace Zend\Mail\Storage;
 
+use Zend\Mail;
+use Zend\Mail\Storage;
+
 /**
  * @category   Zend
  * @package    Zend_Mail
@@ -31,7 +34,7 @@ namespace Zend\Mail\Storage;
 class Maildir extends AbstractStorage
 {
     /**
-     * used message class, change it in an extened class to extend the returned message class
+     * used message class, change it in an extended class to extend the returned message class
      * @var string
      */
     protected $_messageClass = '\Zend\Mail\Message\File';
@@ -49,20 +52,20 @@ class Maildir extends AbstractStorage
      *
      * @var array
      */
-    protected static $_knownFlags = array('D' => Storage::FLAG_DRAFT,
-                                          'F' => Storage::FLAG_FLAGGED,
-                                          'P' => Storage::FLAG_PASSED,
-                                          'R' => Storage::FLAG_ANSWERED,
-                                          'S' => Storage::FLAG_SEEN,
-                                          'T' => Storage::FLAG_DELETED);
+    protected static $_knownFlags = array('D' => Mail\Storage::FLAG_DRAFT,
+                                          'F' => Mail\Storage::FLAG_FLAGGED,
+                                          'P' => Mail\Storage::FLAG_PASSED,
+                                          'R' => Mail\Storage::FLAG_ANSWERED,
+                                          'S' => Mail\Storage::FLAG_SEEN,
+                                          'T' => Mail\Storage::FLAG_DELETED);
 
     // TODO: getFlags($id) for fast access if headers are not needed (i.e. just setting flags)?
 
     /**
      * Count messages all messages in current box
      *
+     * @param mixed $flags
      * @return int number of messages
-     * @throws \Zend\Mail\Storage\Exception
      */
     public function countMessages($flags = null)
     {
@@ -97,8 +100,8 @@ class Maildir extends AbstractStorage
      *
      * @param  int         $id    message number
      * @param  string|null $field wanted field
+     * @throws Exception\InvalidArgumentException
      * @return string|array wanted field or all fields as array
-     * @throws \Zend\Mail\Storage\Exception
      */
     protected function _getFileData($id, $field = null)
     {
@@ -122,7 +125,6 @@ class Maildir extends AbstractStorage
      *
      * @param  int|null $id number of message or null for all messages
      * @return int|array size of given message of list with all messages as array(num => size)
-     * @throws \Zend\Mail\Storage\Exception
      */
     public function getSize($id = null)
     {
@@ -145,13 +147,14 @@ class Maildir extends AbstractStorage
      * Fetch a message
      *
      * @param  int $id number of message
-     * @return \Zend\Mail\Message\File
+     * @return \Zend\Mail\Storage\Message\File
      * @throws \Zend\Mail\Storage\Exception
      */
     public function getMessage($id)
     {
         // TODO that's ugly, would be better to let the message class decide
-        if (strtolower($this->_messageClass) == '\zend\mail\message\file' || is_subclass_of($this->_messageClass, '\Zend\Mail\Message\File')) {
+        if (strtolower($this->_messageClass) == '\zend\mail\storage\message\file'
+            || is_subclass_of($this->_messageClass, '\Zend\Mail\Storage\Message\File')) {
             return new $this->_messageClass(array('file'  => $this->_getFileData($id, 'filename'),
                                                   'flags' => $this->_getFileData($id, 'flags')));
         }
@@ -164,10 +167,10 @@ class Maildir extends AbstractStorage
      * Get raw header of message or part
      *
      * @param  int               $id       number of message
-     * @param  null|array|string $part     path to part or null for messsage header
+     * @param  null|array|string $part     path to part or null for message header
      * @param  int               $topLines include this many lines with header (after an empty line)
+     * @throws Exception\RuntimeException
      * @return string raw header
-     * @throws \Zend\Mail\Storage\Exception
      */
     public function getRawHeader($id, $part = null, $topLines = 0)
     {
@@ -195,9 +198,9 @@ class Maildir extends AbstractStorage
      * Get raw content of message or part
      *
      * @param  int               $id   number of message
-     * @param  null|array|string $part path to part or null for messsage content
+     * @param  null|array|string $part path to part or null for message content
+     * @throws Exception\RuntimeException
      * @return string raw content
-     * @throws \Zend\Mail\Storage\Exception
      */
     public function getRawContent($id, $part = null)
     {
@@ -226,7 +229,7 @@ class Maildir extends AbstractStorage
      *   - dirname dirname of mbox file
      *
      * @param  $params array mail reader specific parameters
-     * @throws \Zend\Mail\Storage\Exception
+     * @throws Exception\InvalidArgumentException
      */
     public function __construct($params)
     {
@@ -268,8 +271,8 @@ class Maildir extends AbstractStorage
      * open given dir as current maildir
      *
      * @param string $dirname name of maildir
+     * @throws Exception\RuntimeException
      * @return null
-     * @throws \Zend\Mail\Storage\Exception
      */
     protected function _openMaildir($dirname)
     {
@@ -286,7 +289,7 @@ class Maildir extends AbstractStorage
 
         $dh = @opendir($dirname . '/new/');
         if ($dh) {
-            $this->_getMaildirFiles($dh, $dirname . '/new/', array(Storage::FLAG_RECENT));
+            $this->_getMaildirFiles($dh, $dirname . '/new/', array(Mail\Storage::FLAG_RECENT));
             closedir($dh);
         } else if (file_exists($dirname . '/new/')) {
             throw new Exception\RuntimeException('cannot read recent mails in maildir');
@@ -344,7 +347,6 @@ class Maildir extends AbstractStorage
      * Close resource for mail lib. If you need to control, when the resource
      * is closed. Otherwise the destructor would call this.
      *
-     * @return void
      */
     public function close()
     {
@@ -355,7 +357,7 @@ class Maildir extends AbstractStorage
     /**
      * Waste some CPU cycles doing nothing.
      *
-     * @return void
+     * @return boolean always return true
      */
     public function noop()
     {
@@ -366,8 +368,8 @@ class Maildir extends AbstractStorage
     /**
      * stub for not supported message deletion
      *
-     * @return null
-     * @throws \Zend\Mail\Storage\Exception
+     * @param $id
+     * @throws Exception\RuntimeException
      */
     public function removeMessage($id)
     {
@@ -381,7 +383,6 @@ class Maildir extends AbstractStorage
      *
      * @param int|null $id message number
      * @return array|string message number for given message or all messages as array
-     * @throws \Zend\Mail\Storage\Exception
      */
     public function getUniqueId($id = null)
     {
@@ -403,8 +404,8 @@ class Maildir extends AbstractStorage
      * as parameter and use this method to translate it to message number right before calling removeMessage()
      *
      * @param string $id unique id
+     * @throws Exception\InvalidArgumentException
      * @return int message number
-     * @throws \Zend\Mail\Storage\Exception
      */
     public function getNumberByUniqueId($id)
     {

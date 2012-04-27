@@ -38,9 +38,10 @@ class MimeVersion implements Header
     protected $version = '1.0';
 
     /**
-     * Deserialize from string
+     * Unserialize from string
      *
      * @param  string $headerLine
+     * @throws Exception\InvalidArgumentException
      * @return MimeVersion
      */
     public static function fromString($headerLine)
@@ -85,7 +86,6 @@ class MimeVersion implements Header
      * Set character encoding
      *
      * @param  string $encoding
-     * @return void
      */
     public function setEncoding($encoding)
     {
@@ -95,7 +95,6 @@ class MimeVersion implements Header
     /**
      * Get character encoding
      *
-     * @return void
      */
     public function getEncoding()
     {

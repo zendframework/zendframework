@@ -52,8 +52,9 @@ class Maildir extends MaildirFolder implements Writable
      * If the given dir is already a valid maildir this will not fail.
      *
      * @param string $dir directory for the new maildir (may already exist)
+     * @throws \Zend\Mail\Storage\Exception\RuntimeException
+     * @throws \Zend\Mail\Storage\Exception\InvalidArgumentException
      * @return null
-     * @throws \Zend\Mail\Storage\Exception
      */
     public static function initMaildir($dir)
     {
@@ -111,10 +112,10 @@ class Maildir extends MaildirFolder implements Writable
      * This method also creates parent folders if necessary. Some mail storages may restrict, which folder
      * may be used as parent or which chars may be used in the folder name
      *
-     * @param   string                          $name         global name of folder, local name if $parentFolder is set
-     * @param   string|\Zend\Mail\Storage\Folder\Folder $parentFolder parent folder for new folder, else root folder is parent
+     * @param   string                           $name         global name of folder, local name if $parentFolder is set
+     * @param   string|\Zend\Mail\Storage\Folder $parentFolder parent folder for new folder, else root folder is parent
+     * @throws \Zend\Mail\Storage\Exception\RuntimeException
      * @return  string only used internally (new created maildir)
-     * @throws  \Zend\Mail\Storage\Exception
      */
     public function createFolder($name, $parentFolder = null)
     {
@@ -169,7 +170,7 @@ class Maildir extends MaildirFolder implements Writable
         }
 
         if (!@mkdir($fulldir) || !@mkdir($fulldir . DIRECTORY_SEPARATOR . 'cur')) {
-            throw new Exception\RuntimeException('error while creating new folder, may be created incompletly');
+            throw new Exception\RuntimeException('error while creating new folder, may be created incompletely');
         }
 
         mkdir($fulldir . DIRECTORY_SEPARATOR . 'new');
@@ -184,9 +185,9 @@ class Maildir extends MaildirFolder implements Writable
     /**
      * remove a folder
      *
-     * @param   string|\Zend\Mail\Storage\Folder\Folder $name      name or instance of folder
+     * @param   string|Folder $name      name or instance of folder
+     * @throws \Zend\Mail\Storage\Exception\RuntimeException
      * @return  null
-     * @throws  \Zend\Mail\Storage\Exception
      */
     public function removeFolder($name)
     {
@@ -196,7 +197,7 @@ class Maildir extends MaildirFolder implements Writable
         // all parent folders must be created. What we could do is add a dash to the front of the
         // directory name and it should be ignored as long as other processes obey the standard.
 
-        if ($name instanceof Folder\Folder) {
+        if ($name instanceof Folder) {
             $name = $name->getGlobalName();
         }
 
@@ -261,8 +262,8 @@ class Maildir extends MaildirFolder implements Writable
      *
      * @param   string|\Zend\Mail\Storage\Folder $oldName name or instance of folder
      * @param   string                          $newName new global name of folder
+     * @throws \Zend\Mail\Storage\Exception\RuntimeException
      * @return  null
-     * @throws  \Zend\Mail\Storage\Exception
      */
     public function renameFolder($oldName, $newName)
     {
@@ -351,9 +352,9 @@ class Maildir extends MaildirFolder implements Writable
      * you should close the returned filehandle!
      *
      * @param   string $folder name of current folder without leading .
+     * @throws \Zend\Mail\Storage\Exception\RuntimeException
      * @return  array array('dirname' => dir of maildir folder, 'uniq' => unique id, 'filename' => name of create file
      *                     'handle'  => file opened for writing)
-     * @throws  \Zend\Mail\Storage\Exception
      */
     protected function _createTmpFile($folder = 'INBOX')
     {
@@ -402,8 +403,8 @@ class Maildir extends MaildirFolder implements Writable
      * create an info string for filenames with given flags
      *
      * @param   array $flags wanted flags, with the reference you'll get the set flags with correct key (= char for flag)
+     * @throws \Zend\Mail\Storage\Exception\InvalidArgumentException
      * @return  string info string for version 2 filenames including the leading colon
-     * @throws  \Zend\Mail\Storage\Exception
      */
     protected function _getInfoString(&$flags)
     {
@@ -436,11 +437,11 @@ class Maildir extends MaildirFolder implements Writable
      * append a new message to mail storage
      *
      * @param   string|stream                              $message message as string or stream resource
-     * @param   null|string|\Zend\Mail\Storage\Folder       $folder  folder for new message, else current folder is taken
+     * @param   null|string|\Zend\Mail\Storage\Folder      $folder  folder for new message, else current folder is taken
      * @param   null|array                                 $flags   set flags for new message, else a default set is used
      * @param   bool                                       $recent  handle this mail as if recent flag has been set,
      *                                                              should only be used in delivery
-     * @throws  \Zend\Mail\Storage\Exception
+     * @throws \Zend\Mail\Storage\Exception\RuntimeException
      */
      // not yet * @param string|\Zend\Mail\Message|\Zend\Mime\Message $message message as string or instance of message class
     public function appendMessage($message, $folder = null, $flags = null, $recent = false)
@@ -505,8 +506,8 @@ class Maildir extends MaildirFolder implements Writable
      *
      * @param   int                             $id     number of message
      * @param   string|\Zend\Mail\Storage\Folder $folder name or instance of targer folder
+     * @throws \Zend\Mail\Storage\Exception\RuntimeException
      * @return  null
-     * @throws  \Zend\Mail\Storage\Exception
      */
     public function copyMessage($id, $folder)
     {
@@ -570,10 +571,10 @@ class Maildir extends MaildirFolder implements Writable
     /**
      * move an existing message
      *
-     * @param  int                             $id     number of message
-     * @param  string|\Zend\Mail\Storage\Folder\Folder $folder name or instance of targer folder
+     * @param  int                              $id     number of message
+     * @param  string|\Zend\Mail\Storage\Folder $folder name or instance of targer folder
+     * @throws \Zend\Mail\Storage\Exception\RuntimeException
      * @return null
-     * @throws \Zend\Mail\Storage\Exception
      */
     public function moveMessage($id, $folder) 
     {
@@ -633,7 +634,7 @@ class Maildir extends MaildirFolder implements Writable
      *
      * @param   int   $id    number of message
      * @param   array $flags new flags for message
-     * @throws  \Zend\Mail\Storage\Exception
+     * @throws \Zend\Mail\Storage\Exception\RuntimeException
      */
     public function setFlags($id, $flags)
     {
@@ -657,8 +658,9 @@ class Maildir extends MaildirFolder implements Writable
     /**
      * stub for not supported message deletion
      *
+     * @param $id
+     * @throws \Zend\Mail\Storage\Exception\RuntimeException
      * @return  null
-     * @throws  \Zend\Mail\Storage\Exception
      */
     public function removeMessage($id)
     {
@@ -700,6 +702,8 @@ class Maildir extends MaildirFolder implements Writable
      *
      * @see \Zend\Mail\Storage\Writable\Maildir::setQuota()
      *
+     * @param bool $fromStorage
+     * @throws \Zend\Mail\Storage\Exception\RuntimeException
      * @return bool|array
      */
     public function getQuota($fromStorage = false) 
@@ -728,6 +732,8 @@ class Maildir extends MaildirFolder implements Writable
 
     /**
      * @see http://www.inter7.com/courierimap/README.maildirquota.html "Calculating maildirsize"
+     * @throws \Zend\Mail\Storage\Exception\RuntimeException
+     * @return array
      */
     protected function _calculateMaildirsize() 
     {
@@ -825,6 +831,8 @@ class Maildir extends MaildirFolder implements Writable
 
     /**
      * @see http://www.inter7.com/courierimap/README.maildirquota.html "Calculating the quota for a Maildir++"
+     * @param bool $forceRecalc
+     * @return array
      */
     protected function _calculateQuota($forceRecalc = false) 
     {
@@ -910,6 +918,7 @@ class Maildir extends MaildirFolder implements Writable
      * check if storage is currently over quota
      *
      * @param bool $detailedResponse return known data of quota and current size and message count @see _calculateQuota()
+     * @param bool $forceRecalc
      * @return bool|array over quota state or detailed response
      */
     public function checkQuota($detailedResponse = false, $forceRecalc = false) 

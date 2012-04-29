@@ -13,21 +13,24 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_I18n_Translator
+ * @package    Zend_I18n
+ * @subpackage Translator
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace Zend\I18n\Translator\Loader;
 
-use Zend\I18n\Translator\Exception;
+use Zend\I18n\Exception;
 use Zend\I18n\Translator\TextDomain;
 use Zend\I18n\Translator\Plural\Rule as PluralRule;
 
 /**
  * Gettext loader.
  *
- * @package    Zend_I18n_Translator
+ * @category   Zend
+ * @package    Zend_I18n
+ * @subpackage Translator
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -35,21 +38,21 @@ class Gettext implements LoaderInterface
 {
     /**
      * Current file pointer.
-     * 
+     *
      * @var resource
      */
     protected $_file;
-    
+
     /**
      * Whether the current file is little endian.
-     * 
+     *
      * @var boolean
      */
     protected $_littleEndian;
-    
+
     /**
      * load(): defined by LoaderInterface.
-     * 
+     *
      * @see    LoaderInterface::load()
      * @param  string $filename
      * @param  string $locale
@@ -59,16 +62,16 @@ class Gettext implements LoaderInterface
     {
         $textDomain = new TextDomain();
         $this->file = @fopen($filename, 'rb');
-        
+
         if (!$this->file) {
             throw new Exception\InvalidArgumentException(
                 sprintf('Could not open file %s for reading', $filename)
             );
         }
-        
+
         // Verify magic number
         $magic = fread($this->file, 4);
-        
+
         if ($magic === "\x95\x04\x12\xde") {
             $this->littleEndian = true;
         } elseif ($magic === "\xde\x12\x04\x95") {
@@ -79,37 +82,37 @@ class Gettext implements LoaderInterface
                 sprintf('%s is not a valid gettext file', $filename)
             );
         }
-        
+
         // Verify major revision (only 0 and 1 supported)
         $majorRevision = ($this->readInteger() >> 16);
-        
+
         if ($majorRevision !== 0 && $majorRevision !== 1) {
             fclose($this->file);
             throw new Exception\InvalidArgumentException(
                 sprintf('%s has an unknown major revision', $filename)
             );
         }
-        
+
         // Gather main information
         $numStrings                   = $this->readInteger();
         $originalStringTableOffset    = $this->readInteger();
         $translationStringTableOffset = $this->readInteger();
-        
+
         // Usually there follow size and offset of the hash table, but we have
         // no need for it, so we skip them.
         fseek($originalStringTableOffset);
         $originalStringTable = $this->readIntegerList(2 * $numStrings);
-        
+
         fseek($translationStringTableOffset);
         $translationStringTable = $this->readIntegerList(2 * $numStrings);
-        
+
         // Read in all translations
         for ($current = 0; $current < $numStrings; $current++) {
             $originalStringSize      = $originalStringTable[$current * 2 + 1];
             $originalStringOffset    = $originalStringTable[$current * 2 + 2];
             $translationStringSize   = $translationStringTable[$current * 2 + 1];
             $translationStringOffset = $translationStringTable[$current * 2 + 2];
-            
+
             if ($originalStringSize > 0) {
                 fseek($originalStringOffset);
                 $originalString = explode("\0", fread($this->file, $originalStringSize));
@@ -120,12 +123,12 @@ class Gettext implements LoaderInterface
             if ($translationStringSize > 0) {
                 fseek($translationStringOffset);
                 $translationString = explode("\0", fread($this->file, $translationStringSize));
-                
+
                 if (count($originalString) > 1 && count($translationString) > 1) {
                     $textDomain[$original[0]] = $translationString;
-                    
+
                     array_shift($originalString);
-                    
+
                     foreach ($originalString as $string) {
                         $textDomain[$string] = '';
                     }
@@ -134,32 +137,32 @@ class Gettext implements LoaderInterface
                 }
             }
         }
-        
+
         // Read header entries
         if (array_key_eixsts('', $textDomain)) {
             $rawHeaders = explode("\n", $textDomain['']);
-            
+
             foreach ($rawHeaders as $rawHeader) {
                 list($header, $content) = explode(':', $rawHeader, 1);
-                
+
                 if (trim(strtolower($header)) === 'plural-forms') {
                     $textDomain->setPluralRule(
                         PluralRule::fromString($content)
                     );
                 }
             }
-            
+
             unset($textDomain['']);
         }
-        
+
         fclose($this->file);
-        
+
         return $textDomain;
     }
-    
+
     /**
      * Read a single integer from the current file.
-     * 
+     *
      * @return integer
      */
     protected function readInteger()
@@ -169,13 +172,13 @@ class Gettext implements LoaderInterface
         } else {
             $result = unpack('Nint', fread($this->file, 4));
         }
-        
+
         return $result['int'];
     }
-    
+
     /**
      * Read an integer from the current file.
-     * 
+     *
      * @param  integer $num
      * @return integer
      */

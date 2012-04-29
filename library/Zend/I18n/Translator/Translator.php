@@ -13,7 +13,8 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_I18n_Translator
+ * @package    Zend_I18n
+ * @subpackage Translator
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -28,7 +29,9 @@ use Zend\Cache\Storage\Adapter as CacheAdapter;
 /**
  * Translator.
  *
- * @package    Zend_I18n_Translator
+ * @category   Zend
+ * @package    Zend_I18n
+ * @subpackage Translator
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -186,11 +189,19 @@ class Translator
     public function translatePlural($singular, $plural, $number,
         $textDomain = 'default', $locale = null
     ) {
-        $data  = $this->translate($singular, $textDomain, $locale);
+        $data = $this->translate($singular, $textDomain, $locale);
+
+        if (!is_array($data)) {
+            // Provided message was not translated
+            return ($number != 1 ? $singular : $plural);
+        }
+
         $index = $this->messages[$textDomain][$locale]['']->evaluate($number);
 
         if (!isset($data[$index])) {
-            // Exception!!!
+            throw new Exception\OutOfBoundsException(sprintf(
+                'Provided index %d does not exist in plural array', $index
+            ));
         }
 
         return $data[$index];

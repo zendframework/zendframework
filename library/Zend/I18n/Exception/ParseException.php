@@ -19,52 +19,16 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\I18n\Translator;
-
-use ArrayObject;
-use Zend\I18n\Translator\Plural\Rule as PluralRule;
+namespace Zend\I18n\Exception;
 
 /**
- * Text domain.
- *
  * @category   Zend
  * @package    Zend_I18n
  * @subpackage Translator
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class TextDomain extends ArrayObject
-{
-    /**
-     * Plural rule.
-     *
-     * @var PluralRule
-     */
-    protected $pluralRule;
-
-    /**
-     * Get the plural rule.
-     *
-     * @return PluralRule
-     */
-    public function getPluralRule()
-    {
-        if ($this->pluralRule === null) {
-            $this->pluralRule = PluralRule::fromString('nplurals=2; plural=n==1');
-        }
-
-        return $this->pluralRule;
-    }
-
-    /**
-     * Set the plural rule.
-     *
-     * @param  PluralRule $rule
-     * @return TextDomain
-     */
-    public function setPluralRule(PluralRule $rule)
-    {
-        $this->pluralRule = $rule;
-        return $this;
-    }
-}
+class ParseException
+    extends RuntimeException
+    implements ExceptionInterface
+{}

@@ -13,7 +13,8 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_I18n_Translator
+ * @package    Zend_I18n
+ * @subpackage Translator
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -25,7 +26,9 @@ use Zend\I18n\Translator\TextDomain;
 /**
  * Loader interface.
  *
- * @package    Zend_I18n_Translator
+ * @category   Zend
+ * @package    Zend_I18n
+ * @subpackage Translator
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -33,7 +36,7 @@ interface Loader
 {
     /**
      * Load translations from a file.
-     * 
+     *
      * @param  string $filename
      * @param  string $locale
      * @return TextDomain|null

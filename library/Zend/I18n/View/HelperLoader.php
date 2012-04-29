@@ -14,57 +14,34 @@
  *
  * @category   Zend
  * @package    Zend_I18n
- * @subpackage Translator
+ * @subpackage View
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\I18n\Translator;
+namespace Zend\I18n\View;
 
-use ArrayObject;
-use Zend\I18n\Translator\Plural\Rule as PluralRule;
+use Zend\Loader\PluginClassLoader;
 
 /**
- * Text domain.
+ * Plugin Class Loader implementation for i18n view helpers.
  *
  * @category   Zend
  * @package    Zend_I18n
- * @subpackage Translator
+ * @subpackage View
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class TextDomain extends ArrayObject
+class HelperLoader extends PluginClassLoader
 {
     /**
-     * Plural rule.
+     * $plugins: defined by PluginClassLoader.
      *
-     * @var PluralRule
+     * @see PluginClassLoader::$plugins
+     * @var array
      */
-    protected $pluralRule;
-
-    /**
-     * Get the plural rule.
-     *
-     * @return PluralRule
-     */
-    public function getPluralRule()
-    {
-        if ($this->pluralRule === null) {
-            $this->pluralRule = PluralRule::fromString('nplurals=2; plural=n==1');
-        }
-
-        return $this->pluralRule;
-    }
-
-    /**
-     * Set the plural rule.
-     *
-     * @param  PluralRule $rule
-     * @return TextDomain
-     */
-    public function setPluralRule(PluralRule $rule)
-    {
-        $this->pluralRule = $rule;
-        return $this;
-    }
+    protected $plugins = array(
+        'translate'       => 'Zend\I18n\View\Helper\Translate',
+        'translatePlural' => 'Zend\I18n\View\Helper\TranslatePlural',
+    );
 }

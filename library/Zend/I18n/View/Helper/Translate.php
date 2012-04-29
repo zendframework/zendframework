@@ -14,57 +14,61 @@
  *
  * @category   Zend
  * @package    Zend_I18n
- * @subpackage Translator
+ * @subpackage View
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\I18n\Translator;
+namespace Zend\I18n\View\Helper;
 
-use ArrayObject;
-use Zend\I18n\Translator\Plural\Rule as PluralRule;
+use Zend\View\Helper\AbstractHelper;
+use Zend\I18n\Exception;
+use Zend\I18n\Translator\Translator;
 
 /**
- * Text domain.
+ * View helper for translating messages.
  *
  * @category   Zend
  * @package    Zend_I18n
- * @subpackage Translator
+ * @subpackage View
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class TextDomain extends ArrayObject
+class Translate extends AbstractHelper
 {
     /**
-     * Plural rule.
+     * Translator instance.
      *
-     * @var PluralRule
+     * @var Translator
      */
-    protected $pluralRule;
+    protected $translator;
 
     /**
-     * Get the plural rule.
+     * Set translator.
      *
-     * @return PluralRule
+     * @param  Translator $translator
+     * @return Translate
      */
-    public function getPluralRule()
+    public function setTranslator(Translator $translator)
     {
-        if ($this->pluralRule === null) {
-            $this->pluralRule = PluralRule::fromString('nplurals=2; plural=n==1');
-        }
-
-        return $this->pluralRule;
+        $this->translator = $translator;
+        return $this;
     }
 
     /**
-     * Set the plural rule.
+     * Translate a message.
      *
-     * @param  PluralRule $rule
-     * @return TextDomain
+     * @param  string $message
+     * @param  string $textDomain
+     * @param  string $locale
+     * @return string
      */
-    public function setPluralRule(PluralRule $rule)
+    public function __invoke($message, $textDomain = 'default', $locale = null)
     {
-        $this->pluralRule = $rule;
-        return $this;
+        if ($this->translator === null) {
+            throw new Exception\RuntimeException('Translator has not been set');
+        }
+
+        return $this->translator->translate($message, $textDomain, $locale);
     }
 }

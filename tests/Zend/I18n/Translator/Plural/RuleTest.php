@@ -17,18 +17,18 @@ class RuleTest extends TestCase
             'division'         => array('6 / 3', 2),
             'integer-division' => array('7 / 4', 1),
             'modulo'           => array('7 % 4', 3),
-            
+
             // Boolean NOT
             'boolean-not-0'  => array('!0', 1),
             'boolean-not-1'  => array('!1', 0),
             'boolean-not-15' => array('!1', 0),
-            
+
             // Equal operators
             'equal-true'      => array('5 == 5', 1),
             'equal-false'     => array('5 == 4', 0),
             'not-equal-true'  => array('5 != 5', 0),
             'not-equal-false' => array('5 != 4', 1),
-            
+
             // Compare operators
             'less-than-true'         => array('5 > 4', 1),
             'less-than-false'        => array('5 > 5', 0),
@@ -38,15 +38,26 @@ class RuleTest extends TestCase
             'greater-than-false'     => array('5 < 5', 0),
             'greater-or-equal-true'  => array('5 <= 5', 1),
             'greater-or-equal-false' => array('5 <= 4', 0),
-            
+
             // Boolean operators
             'boolean-and-true'  => array('1 && 1', 1),
             'boolean-and-false' => array('1 && 0', 0),
             'boolean-or-true'   => array('1 || 0', 1),
             'boolean-or-false'  => array('0 || 0', 0),
-            
+
             // Variable injection
             'variable-injection' => array('n', 0)
+        );
+    }
+
+    /**
+     * @dataProvider parseRuleProvider
+     */
+    public function testParseRules($rule, $expectedValue)
+    {
+        $this->assertEquals(
+            $expectedValue,
+            Rule::fromString('nplurals=9; plural=' . $rule)->evaluate(0)
         );
     }
 
@@ -119,14 +130,14 @@ class RuleTest extends TestCase
             ),
         );
     }
-    
+
     /**
-     * @dataProvider completeRuleProvider 
+     * @dataProvider completeRuleProvider
      */
     public function testCompleteRules($rule, $expectedValues)
     {
-        $rule = Rule::fromString($rule);
-        
+        $rule = Rule::fromString('nplurals=9; plural=' . $rule);
+
         for ($i = 0; $i < 200; $i++) {
             $this->assertEquals((int) $expectedValues[$i], $rule->evaluate($i));
         }

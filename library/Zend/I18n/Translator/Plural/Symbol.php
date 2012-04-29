@@ -24,7 +24,7 @@ use \Closure;
 
 /**
  * Parser symbol.
- * 
+ *
  * All properties in the symbol are defined as public for easier and faster
  * access from the applied closures. An exception are the closure properties
  * themself, as they have to be accessed via the appropriate getter and
@@ -38,70 +38,70 @@ class Symbol
 {
     /**
      * Parser instance.
-     * 
+     *
      * @var Parser
      */
     public $parser;
-    
+
     /**
      * Node or token type name.
-     * 
+     *
      * @var string
      */
     public $id;
-    
+
     /**
      * Left binding power (precedence).
-     * 
+     *
      * @var integer
      */
     public $leftBindingPower;
-    
+
     /**
      * Getter for null denotation.
-     * 
+     *
      * @var callable
      */
     protected $nullDenotationGetter;
 
     /**
      * Getter for left denotation.
-     * 
+     *
      * @var callable
      */
     protected $leftDenotationGetter;
-    
+
     /**
      * Value used by literals.
-     * 
+     *
      * @var mixed
      */
     public $value;
-    
+
     /**
      * First node value.
-     * 
+     *
      * @var Symbol
      */
     public $first;
 
     /**
      * Second node value.
-     * 
+     *
      * @var Symbol
      */
     public $second;
 
     /**
      * Third node value.
-     * 
+     *
      * @var Symbol
      */
     public $third;
-    
+
     /**
      * Create a new symbol.
-     * 
+     *
      * @param  Parser  $parser
      * @param  string  $id
      * @param  integer $leftBindingPower
@@ -116,7 +116,7 @@ class Symbol
 
     /**
      * Set the null denotation getter.
-     * 
+     *
      * @param  Closure $getter
      * @return Symbol
      */
@@ -128,7 +128,7 @@ class Symbol
 
     /**
      * Set the left denotation getter.
-     * 
+     *
      * @param  Closure $getter
      * @return Symbol
      */
@@ -137,36 +137,39 @@ class Symbol
         $this->leftDenotationGetter = $getter;
         return $this;
     }
-    
+
     /**
      * Get null denotation.
-     * 
+     *
      * @return Symbol
      */
     public function getNullDenotation()
     {
         if ($this->nullDenotationGetter === null) {
-            // Throw exception
-            exit('Syntax error: ' . $this->id);
+            throw new Exception\ParseException(sprintf(
+                'Syntax error: %s', $this->id
+            ));
         }
-        
+
         $function = $this->nullDenotationGetter;
         return $function($this);
     }
 
     /**
      * Get left denotation.
-     * 
+     *
      * @param  Symbol $left
      * @return Symbol
      */
     public function getLeftDenoation($left)
     {
         if ($this->leftDenotationGetter === null) {
-            exit('Unknown operator: ' . $this->id);
+            throw new Exception\ParseException(sprintf(
+                'Unknown operator: %s', $this->id
+            ));
         }
-        
+
         $function = $this->leftDenotationGetter;
         return $function($this, $left);
     }
-} 
+}

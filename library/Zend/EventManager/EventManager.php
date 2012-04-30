@@ -138,7 +138,7 @@ class EventManager implements EventCollection, SharedEventCollectionAware
      * Set the identifiers (overrides any currently set identifiers)
      *
      * @param string|int|array|Traversable $identifiers
-     * @return ModuleManager
+     * @return EventManager Provides a fluent interface
      */
     public function setIdentifiers($identifiers)
     {
@@ -154,7 +154,7 @@ class EventManager implements EventCollection, SharedEventCollectionAware
      * Add some identifier(s) (appends to any currently set identifiers)
      *
      * @param string|int|array|Traversable $identifiers
-     * @return ModuleManager
+     * @return EventManager Provides a fluent interface
      */
     public function addIdentifiers($identifiers)
     {

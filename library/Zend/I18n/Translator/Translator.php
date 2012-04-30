@@ -159,21 +159,9 @@ class Translator
      */
     public function translate($message, $textDomain = 'default', $locale = null)
     {
-        if ($message === '') {
-            return '';
-        }
+        $translation = $this->getTranslatedMessage($message, $textDomain, $locale);
 
-        $locale = ($locale ?: $this->getLocale());
-
-        if (!isset($this->messages[$textDomain][$locale])) {
-            $this->loadMessages($textDomain, $locale);
-        }
-
-        if (!isset($this->messages[$textDomain][$locale][$message])) {
-            return $message;
-        }
-
-        return $this->messages[$textDomain][$locale][$message];
+        return ($translation === null || $translation === '' ? $message : $translation);
     }
 
     /**
@@ -189,22 +177,49 @@ class Translator
     public function translatePlural($singular, $plural, $number,
         $textDomain = 'default', $locale = null
     ) {
-        $data = $this->translate($singular, $textDomain, $locale);
+        $translation = $this->getTranslatedMessage($message, $textDomain, $locale);
 
-        if (!is_array($data)) {
-            // Provided message was not translated
+        if ($translation === null || $translation === '') {
             return ($number != 1 ? $singular : $plural);
         }
 
         $index = $this->messages[$textDomain][$locale]['']->evaluate($number);
 
-        if (!isset($data[$index])) {
+        if (!isset($translation[$index])) {
             throw new Exception\OutOfBoundsException(sprintf(
                 'Provided index %d does not exist in plural array', $index
             ));
         }
 
-        return $data[$index];
+        return $translation[$index];
+    }
+
+    /**
+     * Get a translated message.
+     *
+     * @param  string $message
+     * @param  string $textDomain
+     * @param  string $locale
+     * @return string|null
+     */
+    protected function getTranslatedMessage($message, $textDomain = 'default',
+        $locale = null
+    ) {
+        if ($message === '') {
+            return '';
+        }
+
+        $locale = ($locale ?: $this->getLocale());
+
+        if (!isset($this->messages[$textDomain][$locale])) {
+            $this->loadMessages($textDomain, $locale);
+        }
+
+        if (!array_key_exists($message, $this->messages[$textDomain][$locale])) {
+            return null;
+        }
+
+        return $this->messages[$textDomain][$locale][$message];
     }
 
     /**
@@ -294,17 +309,16 @@ class Translator
         }
 
         // Load concrete files, may override those loaded from patterns
-        foreach (array($locale, '*') as $locale) {
-            if (!isset($this->files[$textDomain][$locale])) {
+        foreach (array($locale, '*') as $currentLocale) {
+            if (!isset($this->files[$textDomain][$currentLocale])) {
                 continue;
             }
 
-            foreach ($this->files[$textDomain][$locale] as $file) {
-                $this->messages[$textDomain][$locale] = $this->pluginBroker()
-                    ->load($pattern['type'])->load($file['filename'], $locale);
-            }
+            $file = $this->files[$textDomain][$currentLocale];
+            $this->messages[$textDomain][$locale] = $this->pluginBroker()
+                ->load($file['type'])->load($file['filename'], $locale);
 
-            unset($this->files[$textDomain][$locale]);
+            unset($this->files[$textDomain][$currentLocale]);
         }
 
         // Cache the loaded text domain

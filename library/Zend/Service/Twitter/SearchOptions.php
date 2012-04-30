@@ -150,7 +150,7 @@ class SearchOptions extends Options
      *
      * @return string
      */
-    public function getQ()
+    protected function getQ()
     {
        return $this->q;
     }
@@ -182,7 +182,7 @@ class SearchOptions extends Options
      * @param  string $q
      * @return SearchOptions
      */
-    public function setQ($q)
+    protected function setQ($q)
     {
        $this->q = $q;
        return $this;
@@ -209,13 +209,13 @@ class SearchOptions extends Options
        $this->geocode = $geocode;
        return $this;
     }
-
+    
     /**
      * Get lang
      *
      * @return string
      */
-    public function getLang()
+    protected function getLang()
     {
        return $this->lang;
     }
@@ -226,10 +226,31 @@ class SearchOptions extends Options
      * @param  string $lang
      * @return SearchOptions
      */
-    public function setLang($lang)
+    protected function setLang($lang)
     {
        $this->lang = $lang;
        return $this;
+    }
+    
+    /**
+     * Get lang
+     *
+     * @return string
+     */
+    public function getLanguage()
+    {
+       return $this->getLang();
+    }
+    
+    /**
+     * Set the lang parameter
+     *
+     * @param  string $lang
+     * @return SearchOptions
+     */
+    public function setLanguage($lang)
+    {
+       return $this->setLang($lang);
     }
 
     /**
@@ -310,7 +331,28 @@ class SearchOptions extends Options
      *
      * @return int
      */
-    public function getRpp()
+    public function getResultsPerPage()
+    {
+       return $this->getRpp();
+    }
+    
+    /**
+     * Set rpp parameter
+     *
+     * @param  int $rpp
+     * @return SearchOptions
+     */
+    public function setResultsPerPage($rpp)
+    {
+       return $this->setRpp($rpp);
+    }
+    
+    /**
+     * Get rpp parameter
+     *
+     * @return int
+     */
+    protected function getRpp()
     {
        return $this->rpp;
     }
@@ -321,7 +363,7 @@ class SearchOptions extends Options
      * @param  int $rpp
      * @return SearchOptions
      */
-    public function setRpp($rpp)
+    protected function setRpp($rpp)
     {
        $rpp = (intval($rpp) > 100) ? 100 : intval($rpp);
        $this->rpp = $rpp;

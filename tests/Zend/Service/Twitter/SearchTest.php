@@ -47,7 +47,7 @@ class SearchTest extends \PHPUnit_Framework_TestCase
      * @return void
      */
     protected function setUp()
-    {
+    {   
         if (!defined('TESTS_ZEND_SERVICE_TWITTER_ONLINE_ENABLED')
             || !constant('TESTS_ZEND_SERVICE_TWITTER_ONLINE_ENABLED')
         ) {
@@ -96,7 +96,20 @@ class SearchTest extends \PHPUnit_Framework_TestCase
             'show_user' => true
         ));
         $this->assertEquals('Zend\Service\Twitter\SearchOptions', get_class($this->twitter->getOptions()));
-        $this->assertEquals('fr', $this->twitter->getOptions()->getLang());
+        $this->assertEquals('fr', $this->twitter->getOptions()->getLanguage());
+        $this->assertEquals('mixed', $this->twitter->getOptions()->getResultType());
+    }
+    
+    public function testSetOptionsWithArrayLongName()
+    {
+        $this->twitter->setOptions(array(
+            'language' => 'fr',
+            'results_per_page' => '10',
+            'result_type' => 'mixed',
+            'show_user' => true
+        ));
+        $this->assertEquals('Zend\Service\Twitter\SearchOptions', get_class($this->twitter->getOptions()));
+        $this->assertEquals('fr', $this->twitter->getOptions()->getLanguage());
         $this->assertEquals('mixed', $this->twitter->getOptions()->getResultType());
     }
     
@@ -108,7 +121,7 @@ class SearchTest extends \PHPUnit_Framework_TestCase
             'show_user' => true
         )));
         $this->assertEquals('Zend\Service\Twitter\SearchOptions', get_class($this->twitter->getOptions()));
-        $this->assertEquals('fr', $this->twitter->getOptions()->getLang());
+        $this->assertEquals('fr', $this->twitter->getOptions()->getLanguage());
         $this->assertEquals('mixed', $this->twitter->getOptions()->getResultType());
     }
     
@@ -123,7 +136,7 @@ class SearchTest extends \PHPUnit_Framework_TestCase
         )));
         $response = $this->twitter->execute();
         $this->assertEquals('zend', $this->twitter->getOptions()->getQuery());
-        $this->assertEquals('fr', $this->twitter->getOptions()->getLang());
+        $this->assertEquals('fr', $this->twitter->getOptions()->getLanguage());
         $this->assertEquals('mixed', $this->twitter->getOptions()->getResultType());
         $this->assertInternalType('array', $response);
         $this->assertTrue((isset($response['results'][0]) && $response['results'][0]['iso_language_code'] == "fr"));
@@ -140,7 +153,7 @@ class SearchTest extends \PHPUnit_Framework_TestCase
         )));
         $response = $this->twitter->execute();
         $this->assertEquals('zend', $this->twitter->getOptions()->getQuery());
-        $this->assertEquals('fr', $this->twitter->getOptions()->getLang());
+        $this->assertEquals('fr', $this->twitter->getOptions()->getLanguage());
         $this->assertEquals('mixed', $this->twitter->getOptions()->getResultType());
         $this->assertInternalType('array', $response);
         $this->assertTrue((isset($response['results'][0]) && $response['results'][0]['iso_language_code'] == "fr"));
@@ -157,7 +170,25 @@ class SearchTest extends \PHPUnit_Framework_TestCase
             'include_entities' => true
         )));
         $this->assertNotEquals('zend', $this->twitter->getOptions()->getQuery());
-        $this->assertNotEquals('fr', $this->twitter->getOptions()->getLang());
+        $this->assertNotEquals('fr', $this->twitter->getOptions()->getLanguage());
+        $this->assertInternalType('array', $response);
+        $this->assertTrue((isset($response['results'][0]) && $response['results'][0]['iso_language_code'] == "fr"));
+    	$this->assertTrue((isset($response['results'][0]) && isset($response['results'][0]['entities'])));
+    }
+    
+    public function testWithNotQueryAndConfigOnExecuteWithLongName()
+    {
+        $this->twitter->setResponseType('json');
+        $response = $this->twitter->execute(null,new Config(array(
+            'query' => 'zend',
+            'language' => 'fr',
+            'results_per_page' => 10,
+            'result_type' => 'mixed',
+            'show_user' => true,
+            'include_entities' => true
+        )));
+        $this->assertNotEquals('zend', $this->twitter->getOptions()->getQuery());
+        $this->assertNotEquals('fr', $this->twitter->getOptions()->getLanguage());
         $this->assertInternalType('array', $response);
         $this->assertTrue((isset($response['results'][0]) && $response['results'][0]['iso_language_code'] == "fr"));
     	$this->assertTrue((isset($response['results'][0]) && isset($response['results'][0]['entities'])));
@@ -172,7 +203,7 @@ class SearchTest extends \PHPUnit_Framework_TestCase
             'show_user' => true
         )));
         $this->assertNotEquals('zend', $this->twitter->getOptions()->getQuery());
-        $this->assertNotEquals('fr', $this->twitter->getOptions()->getLang());
+        $this->assertNotEquals('fr', $this->twitter->getOptions()->getLanguage());
         $this->assertInternalType('array', $response);
         $this->assertTrue((isset($response['results'][0]) && $response['results'][0]['iso_language_code'] == "fr"));
     }
@@ -185,7 +216,22 @@ class SearchTest extends \PHPUnit_Framework_TestCase
             'show_user' => true,
             'include_entities' => false
         )));
-        $this->assertEquals('fr', $this->twitter->getOptions()->getLang());
+        $this->assertEquals('fr', $this->twitter->getOptions()->getLanguage());
+        $this->assertEquals('mixed', $this->twitter->getOptions()->getResultType());
+        $response = $this->twitter->execute('zend');
+        $this->assertTrue((isset($response['results'][0]) && !isset($response['results'][0]['entities'])));
+    }
+    
+    public function testSetOptionsWithSearchOptionsByGetter()
+    {
+        $searchOptions = new SearchOptions();
+        $searchOptions->setLanguage('en');
+        $searchOptions->setResultType('mixed');
+        $searchOptions->setResultsPerPage(10);
+        $searchOptions->setShowUser(true);
+        $searchOptions->setIncludeEntities(false);
+        $this->twitter->setOptions($searchOptions);
+        $this->assertEquals('en', $this->twitter->getOptions()->getLanguage());
         $this->assertEquals('mixed', $this->twitter->getOptions()->getResultType());
         $response = $this->twitter->execute('zend');
         $this->assertTrue((isset($response['results'][0]) && !isset($response['results'][0]['entities'])));
@@ -194,7 +240,7 @@ class SearchTest extends \PHPUnit_Framework_TestCase
     public function testSetOptionsWithNoEntities()
     {
         $this->twitter->setOptions(new SearchOptions(array(
-            'lang' => 'fr',
+            'lang' => 'en',
             'result_type' => 'mixed',
             'show_user' => true,
             'include_entities' => false
@@ -235,7 +281,7 @@ class SearchTest extends \PHPUnit_Framework_TestCase
             'result_type' => 'recent',
             'show_user' => true
         ));
-        $this->assertNotEquals('fr', $this->twitter->getOptions()->getLang());
+        $this->assertNotEquals('fr', $this->twitter->getOptions()->getLanguage());
         $this->assertNotEquals('recent', $this->twitter->getOptions()->getResultType());
         $this->assertInternalType('array', $response);
         $this->assertTrue((isset($response['results'][0]) && $response['results'][0]['iso_language_code'] == "fr"));
@@ -260,7 +306,7 @@ class SearchTest extends \PHPUnit_Framework_TestCase
             'result_type' => 'recent',
             'include_entities' => false
         ));
-        $this->assertNotEquals(20, $this->twitter->getOptions()->getRpp());
+        $this->assertNotEquals(20, $this->twitter->getOptions()->getResultsPerPage());
         $this->assertInternalType('array', $response);
         $this->assertEquals(count($response['results']),20);
     }

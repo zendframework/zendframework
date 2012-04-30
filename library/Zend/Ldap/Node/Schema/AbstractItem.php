@@ -108,8 +108,7 @@ abstract class AbstractItem implements \ArrayAccess, \Countable
      *
      * @param  string $name
      * @param  mixed  $value
-     * @return null
-     * @throws Exception\BadMethodCallException
+     * @throws \Zend\Ldap\Exception\BadMethodCallException
      */
     public function offsetSet($name, $value)
     {
@@ -134,8 +133,7 @@ abstract class AbstractItem implements \ArrayAccess, \Countable
      * This method is needed for a full implementation of ArrayAccess
      *
      * @param  string $name
-     * @return null
-     * @throws Exception\BadMethodCallException
+     * @throws \Zend\Ldap\Exception\BadMethodCallException
      */
     public function offsetUnset($name)
     {

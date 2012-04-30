@@ -38,7 +38,7 @@ class Collection extends Ldap\Collection
      * Creates the data structure for the given entry data
      *
      * @param  array $data
-     * @return Ldap\Node
+     * @return \Zend\Ldap\Node
      */
     protected function createEntry(array $data)
     {

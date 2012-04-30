@@ -44,8 +44,8 @@ class ChildrenIterator implements \Iterator, \Countable, \RecursiveIterator, \Ar
     /**
      * Constructor.
      *
-     * @param  array $data
-     * @return void
+     * @param array $data
+     * @return \Zend\Ldap\Node\ChildrenIterator
      */
     public function __construct(array $data)
     {
@@ -67,7 +67,7 @@ class ChildrenIterator implements \Iterator, \Countable, \RecursiveIterator, \Ar
      * Return the current child.
      * Implements Iterator
      *
-     * @return Ldap\Node
+     * @return \Zend\Ldap\Node
      */
     public function current()
     {
@@ -149,7 +149,7 @@ class ChildrenIterator implements \Iterator, \Countable, \RecursiveIterator, \Ar
      * Implements ArrayAccess.
      *
      * @param  string $rdn
-     * @return Ldap\node
+     * @return array|null
      */
     public function offsetGet($rdn)
     {
@@ -176,8 +176,7 @@ class ChildrenIterator implements \Iterator, \Countable, \RecursiveIterator, \Ar
      * Does nothing.
      * Implements ArrayAccess.
      *
-     * @param  string $name
-     * @return null
+     * @param $name
      */
     public function offsetUnset($name)
     {
@@ -188,8 +187,7 @@ class ChildrenIterator implements \Iterator, \Countable, \RecursiveIterator, \Ar
      * Implements ArrayAccess.
      *
      * @param  string $name
-     * @param  mixed  $value
-     * @return null
+     * @param         $value
      */
     public function offsetSet($name, $value)
     {

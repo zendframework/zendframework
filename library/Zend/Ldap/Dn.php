@@ -148,6 +148,7 @@ class Dn implements \ArrayAccess
      * Get the parent DN $levelUp levels up the tree
      *
      * @param  int $levelUp
+     * @throws Exception\LdapException
      * @return Dn
      */
     public function getParentDn($levelUp = 1)

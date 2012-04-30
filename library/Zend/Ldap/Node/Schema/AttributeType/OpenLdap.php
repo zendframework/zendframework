@@ -116,7 +116,7 @@ class OpenLdap extends Schema\AbstractItem implements AttributeType
     }
 
     /**
-     * Returns the parent attribute type in the inhertitance tree if one exists
+     * Returns the parent attribute type in the inheritance tree if one exists
      *
      * @return OpenLdap|null
      */
@@ -125,5 +125,7 @@ class OpenLdap extends Schema\AbstractItem implements AttributeType
         if (count($this->_parents) === 1) {
             return $this->_parents[0];
         }
+
+        return null;
     }
 }

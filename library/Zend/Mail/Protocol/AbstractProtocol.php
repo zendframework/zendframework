@@ -114,7 +114,6 @@ abstract class AbstractProtocol
     /**
      * Constructor.
      *
-     * TODO Adapt for Zend\Validator\Hostname
      * @param  string  $host OPTIONAL Hostname of remote connection (default: 127.0.0.1)
      * @param  integer $port OPTIONAL Port number (default: null)
      * @throws Exception\RuntimeException

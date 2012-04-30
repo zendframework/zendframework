@@ -19,6 +19,13 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
+namespace Zend\Service\Twitter;
+
+use Zend\Feed;
+use Zend\Http;
+use Zend\Json;
+use Zend\Rest\Client;
+
 /**
  * @category   Zend
  * @package    Zend_Service
@@ -103,20 +110,20 @@ class Search extends Client\RestClient
         if (!$this->options) {
             $this->setOptions(new SearchOptions());
         }
-        return $this->options;
+        return clone $this->options;
     }
 
     /**
      * set responseType
      *
      * @param string $responseType
-     * @throws Exception\InvalidArgumentException
+     * @throws Exception\UnexpectedValueException
      * @return Search
      */
     public function setResponseType($responseType = 'json')
     {
-        if (!in_array($responseType, $this->responseTypes, TRUE)) {
-            throw new Exception\InvalidArgumentException('Invalid Response Type');
+        if (!in_array($responseType, $this->responseTypes, true)) {
+            throw new Exception\UnexpectedValueException('Invalid Response Type');
         }
         $this->responseType = $responseType;
         return $this;
@@ -135,31 +142,35 @@ class Search extends Client\RestClient
     /**
      * Performs a Twitter search query.
      *
-     * @param string $query (optional)
-     * @param array|Traversable|SearchOptions $options (optional)
-     * @throws Http\Client\Exception
+     * @param  string                           $query   (optional)
+     * @param  array|\Traversable|SearchOptions $options (optional)
+     * @throws Exception\InvalidArgumentException If query is not defined neither $query nor $options or
+     * If query is not a string.
+     * @throws \Zend\Http\Client\Exception
      * @return mixed
      */
     public function execute($query = null, $options = null)
     {
-        if(!$options) {
+        if (!$options) {
             $options = $this->getOptions();
-        }
-        else if (!$options instanceof SearchOptions) {
+        } else if (!$options instanceof SearchOptions) {
             $options = new SearchOptions($options);
         }
-    	
-        $_query = $options->toArray();
-        
-        if($query) {
-            $_query['q'] = $query;
-        } else if(!$options->getQuery()) {
-            throw new Exception\RuntimeException('No query defined');  
-        }
-        
-        $response = $this->restGet('/search.' . $this->responseType, $_query);
 
-        switch($this->responseType) {
+        if (is_string($query)) {
+            $options->setQuery($query);
+        } else {
+            if ($query) {
+                throw new Exception\InvalidArgumentException('query must be a string');
+            }
+
+            if (!$options->getQuery()) {
+                throw new Exception\InvalidArgumentException('No query defined');
+            }
+        }
+
+        $response = $this->restGet('/search.' . $this->responseType, $options->toArray());
+        switch ($this->responseType) {
             case 'json':
                 return Json\Json::decode($response->getBody(), Json\Json::TYPE_ARRAY);
                 break;
@@ -168,6 +179,6 @@ class Search extends Client\RestClient
                 break;
         }
 
-        return ;
+        return null;
     }
 }

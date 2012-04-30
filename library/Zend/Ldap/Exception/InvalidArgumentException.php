@@ -20,14 +20,12 @@
 
 namespace Zend\Ldap\Exception;
 
-use Zend\Ldap\Exception;
-
 /**
  * @category   Zend
  * @package    Zend_Ldap
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class InvalidArgumentException extends \InvalidArgumentException implements Exception
+class InvalidArgumentException extends \InvalidArgumentException implements ExceptionInterface
 {
 }

@@ -24,8 +24,8 @@ namespace Zend\Ldap\Node\Schema;
 use Zend\Ldap\Exception;
 
 /**
- * Zend\Ldap\Node\Schema\AbstractItem provides a base implementation for managing schema
- * items like objectClass and attribute.
+ * This class provides a base implementation for managing schema
+ * items like objectClass and attributeType.
  *
  * @category   Zend
  * @package    Zend_Ldap

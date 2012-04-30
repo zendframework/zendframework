@@ -22,6 +22,7 @@
 namespace ZendTest\Ldap\Dn;
 
 use Zend\Ldap;
+use Zend\Ldap\Exception;
 
 /**
  * @category   Zend
@@ -112,9 +113,9 @@ class CreationTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($dnArray2, $dn31->toArray(Ldap\Dn::ATTR_CASEFOLD_LOWER));
 
         try {
-            $dn = Ldap\Dn::factory(1);
+            Ldap\Dn::factory(1);
             $this->fail('Expected Zend\Ldap\Exception not thrown');
-        } catch (Ldap\Exception $e) {
+        } catch (Exception\LdapException $e) {
             $this->assertEquals('Invalid argument type for $dn', $e->getMessage());
         }
     }
@@ -192,13 +193,13 @@ class CreationTest extends \PHPUnit_Framework_TestCase
         try {
             $dn->getParentDn(0)->toString();
             $this->fail('Expected Zend\Ldap\Exception not thrown');
-        } catch (Ldap\Exception $e) {
+        } catch (Exception\LdapException $e) {
             $this->assertEquals('Cannot retrieve parent DN with given $levelUp', $e->getMessage());
         }
         try {
             $dn->getParentDn(4)->toString();
             $this->fail('Expected Zend\Ldap\Exception not thrown');
-        } catch (Ldap\Exception $e) {
+        } catch (Exception\LdapException $e) {
             $this->assertEquals('Cannot retrieve parent DN with given $levelUp', $e->getMessage());
         }
     }

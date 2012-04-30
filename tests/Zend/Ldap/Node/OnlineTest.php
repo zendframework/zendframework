@@ -22,6 +22,7 @@
 namespace ZendTest\Ldap\Node;
 
 use Zend\Ldap,
+    Zend\Ldap\Exception,
     ZendTest\Ldap as TestLdap;
 
 /**
@@ -61,25 +62,25 @@ class OnlineTest extends TestLdap\AbstractOnlineTestCase
         try {
             $node->setAttribute('createTimestamp', false);
             $this->fail('Expected exception for modification of read-only attribute createTimestamp');
-        } catch (Ldap\Exception $e) {
+        } catch (Exception\ExceptionInterface $e) {
             $this->assertEquals('Cannot change attribute because it\'s read-only', $e->getMessage());
         }
         try {
             $node->createTimestamp = false;
             $this->fail('Expected exception for modification of read-only attribute createTimestamp');
-        } catch (Ldap\Exception $e) {
+        } catch (Exception\ExceptionInterface $e) {
             $this->assertEquals('Cannot change attribute because it\'s read-only', $e->getMessage());
         }
         try {
             $node['createTimestamp'] = false;
             $this->fail('Expected exception for modification of read-only attribute createTimestamp');
-        } catch (Ldap\Exception $e) {
+        } catch (Exception\ExceptionInterface $e) {
             $this->assertEquals('Cannot change attribute because it\'s read-only', $e->getMessage());
         }
         try {
             $node->appendToAttribute('createTimestamp', 'value');
             $this->fail('Expected exception for modification of read-only attribute createTimestamp');
-        } catch (Ldap\Exception $e) {
+        } catch (Exception\ExceptionInterface $e) {
             $this->assertEquals('Cannot change attribute because it\'s read-only', $e->getMessage());
         }
         try {
@@ -87,13 +88,13 @@ class OnlineTest extends TestLdap\AbstractOnlineTestCase
             $attr = key($rdn);
             $node->deleteAttribute($attr);
             $this->fail('Expected exception for modification of read-only attribute ' . $attr);
-        } catch (Ldap\Exception $e) {
+        } catch (Exception\ExceptionInterface $e) {
             $this->assertEquals('Cannot change attribute because it\'s part of the RDN', $e->getMessage());
         }
     }
 
     /**
-     * @expectedException Zend\Ldap\Exception
+     * @expectedException Zend\Ldap\Exception\ExceptionInterface
      */
     public function testLoadFromLDAPIllegalEntry()
     {
@@ -125,7 +126,7 @@ class OnlineTest extends TestLdap\AbstractOnlineTestCase
     }
 
     /**
-     * @expectedException Zend\Ldap\Exception
+     * @expectedException Zend\Ldap\Exception\ExceptionInterface
      */
     public function testAttachToInvalidLDAP()
     {
@@ -188,7 +189,7 @@ class OnlineTest extends TestLdap\AbstractOnlineTestCase
     }
 
     /**
-     * @expectedException Zend\Ldap\Exception
+     * @expectedException Zend\Ldap\Exception\ExceptionInterface
      */
     public function testGetIllegalNode()
     {
@@ -271,7 +272,7 @@ class OnlineTest extends TestLdap\AbstractOnlineTestCase
     }
 
     /**
-     * @expectedException Zend\Ldap\Exception
+     * @expectedException Zend\Ldap\Exception\ExceptionInterface
      */
     public function testGetNonexistantParent()
     {

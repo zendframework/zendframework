@@ -21,8 +21,7 @@
 
 namespace Zend\Ldap\Node\Schema\AttributeType;
 
-use Zend\Ldap\Node\Schema,
-    Zend\Ldap\Node\Schema\AttributeType;
+use Zend\Ldap\Node\Schema;
 
 /**
  * Zend\Ldap\Node\Schema\AttributeType\OpenLdap provides access to the attribute type
@@ -34,7 +33,7 @@ use Zend\Ldap\Node\Schema,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class OpenLdap extends Schema\AbstractItem implements AttributeType
+class OpenLdap extends Schema\AbstractItem implements AttributeTypeInterface
 {
     /**
      * Gets the attribute name

@@ -21,11 +21,11 @@
 
 namespace Zend\Ldap\Node;
 
-use Zend\Ldap,
-    Zend\Ldap\Exception;
+use Zend\Ldap;
+use Zend\Ldap\Exception;
 
 /**
- * Zend\Ldap\Node\AbstractNode provides a bas eimplementation for LDAP nodes
+ * This class provides a base implementation for LDAP nodes
  *
  * @category   Zend
  * @package    Zend_Ldap

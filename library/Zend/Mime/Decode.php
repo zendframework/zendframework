@@ -239,6 +239,6 @@ class Decode
      */
     public static function decodeQuotedPrintable($string)
     {
-        return quoted_printable_decode($string);
+        return iconv_mime_decode($string, ICONV_MIME_DECODE_CONTINUE_ON_ERROR);
     }
 }

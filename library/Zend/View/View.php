@@ -102,6 +102,10 @@ class View implements EventManagerAware
      */
     public function setEventManager(EventCollection $events)
     {
+        $events->setIdentifiers(array(
+            __CLASS__,
+            get_called_class(),
+        ));
         $this->events = $events;
         return $this;
     }
@@ -116,10 +120,7 @@ class View implements EventManagerAware
     public function events()
     {
         if (!$this->events instanceof EventCollection) {
-            $this->setEventManager(new EventManager(array(
-                __CLASS__,
-                get_called_class(),
-            )));
+            $this->setEventManager(new EventManager());
         }
         return $this->events;
     }

@@ -24,9 +24,8 @@ namespace ZendTest\Log\Writer;
 use Zend\Log\Logger,
     Zend\Log\Writer\Mail as MailWriter,
     Zend\Log\Formatter\Simple as SimpleFormatter,
-    Zend\Mail\Message,
-    Zend\Mail\Transport\File as FileTransport,
-    Zend\Mail\Transport\FileOptions;
+    Zend\Mail\Message as MailMessage,
+    Zend\Mail\Transport;
 
 /**
  * @category   Zend
@@ -50,11 +49,11 @@ class MailTest extends \PHPUnit_Framework_TestCase
     
     protected function setUp()
     {
-        $message = new Message();
-        $transport = new FileTransport();
-        $options   = new FileOptions(array(
+        $message = new MailMessage();
+        $transport = new Transport\File();
+        $options   = new Transport\FileOptions(array(
             'path'      => __DIR__,
-            'callback'  => function (FileTransport $transport) {
+            'callback'  => function (Transport\File $transport) {
                 return MailTest::FILENAME;
             },
         ));

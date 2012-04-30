@@ -21,8 +21,7 @@
 
 namespace Zend\Service\Twitter;
 
-use Zend\Stdlib\Options,
-    Zend\Service\Twitter\Exception\UnexpectedValueException;
+use Zend\Stdlib\Options;
 
 /**
  * @category   Zend
@@ -34,96 +33,97 @@ use Zend\Stdlib\Options,
 class SearchOptions extends Options
 {
     /**
-    * Search query. Should be URL encoded. Queries will be limited by complexity.
-    * @var q string
-    */
+     * Search query. Should be URL encoded. Queries will be limited by complexity.
+     *
+     * @var string
+     */
     protected $q;
-    
+
     /**
-    * Returns tweets by users located within a given radius of the given 
-    * latitude/longitude. The location is preferentially taking from the Geotagging 
-    * API, but will fall back to their Twitter profile. The parameter value 
-    * is specified by "latitude,longitude,radius", where radius units must 
-    * be specified as either "mi" (miles) or "km" (kilometers). 
-    * Note that you cannot use the near operator via the API to geocode 
-    * arbitrary locations; however you can use this geocode parameter to 
-    * search near geocodes directly.
-    * 
-    * @var string
-    */
+     * Returns tweets by users located within a given radius of the given
+     * latitude/longitude. The location is preferentially taking from the Geotagging
+     * API, but will fall back to their Twitter profile. The parameter value
+     * is specified by "latitude,longitude,radius", where radius units must
+     * be specified as either "mi" (miles) or "km" (kilometers).
+     * Note that you cannot use the near operator via the API to geocode
+     * arbitrary locations; however you can use this geocode parameter to
+     * search near geocodes directly.
+     *
+     * @var string
+     */
     protected $geocode;
-    
+
     /**
-    * Restricts tweets to the given language, given by an ISO 639-1 code.
-    * 
-    * @var string
-    */
+     * Restricts tweets to the given language, given by an ISO 639-1 code.
+     *
+     * @var string
+     */
     protected $lang;
-    
+
     /**
-    * Specify the language of the query you are sending (only ja is currently effective).
-    * This is intended for language-specific clients and the default should work in
-    * the majority of cases..
-    * 
-    * @var string
-    */
+     * Specify the language of the query you are sending (only ja is currently effective).
+     * This is intended for language-specific clients and the default should work in
+     * the majority of cases..
+     *
+     * @var string
+     */
     protected $locale;
-    
+
     /**
-    * The page number (starting at 1) to return, up to a max of
-    * roughly 1500 results (based on rpp * page).
-    * 
-    * @var string
-    */
+     * The page number (starting at 1) to return, up to a max of
+     * roughly 1500 results (based on rpp * page).
+     *
+     * @var string
+     */
     protected $page;
-    
+
     /**
-    * Specifies what type of search results you would prefer to receive.
-    * The current default is "mixed". (mixed|recent|popular)
-    * 
-    * @var string
-    */
+     * Specifies what type of search results you would prefer to receive.
+     * The current default is "mixed". (mixed|recent|popular)
+     *
+     * @var string
+     */
     protected $result_type = 'mixed';
-    
+
     /**
-    * The number of tweets to return per page, up to a max of 100.
-    * 
-    * @var string
-    */
+     * The number of tweets to return per page, up to a max of 100.
+     *
+     * @var string
+     */
     protected $rpp;
-    
+
     /**
-    * When true, prepends ":" to the beginning of the tweet. This is useful for 
-    * readers that do not display Atom's author field. The default is false.
-    * 
-    * @var string
-    */
+     * When true, prepends ":" to the beginning of the tweet. This is useful for
+     * readers that do not display Atom's author field. The default is false.
+     *
+     * @var string
+     */
     protected $show_user = false;
-    
+
     /**
-    * Returns results with an ID greater than (that is, more recent than) the specified ID.
-    * There are limits to the number of Tweets which can be accessed through the API. 
-    * If the limit of Tweets has occured since the since_id, the since_id will be forced 
-    * to the oldest ID available.
-    * 
-    * @var string
-    */
+     * Returns results with an ID greater than (that is, more recent than) the specified ID.
+     * There are limits to the number of Tweets which can be accessed through the API.
+     * If the limit of Tweets has occurred since the since_id, the since_id will be forced
+     * to the oldest ID available.
+     *
+     * @var string
+     */
     protected $since_id;
-    
+
     /**
-    * Returns results with an ID less than (that is, older than) or equal to the specified ID.
-    * 
-    * @var string
-    */
+     * Returns results with an ID less than (that is, older than) or equal to the specified ID.
+     *
+     * @var string
+     */
     protected $max_id;
-    
+
     /**
-    * When set to either true, t or 1, each tweet will include a node called "entities,".
-    * 
-    * @var string
-    */
+     * When set to either true, t or 1, each tweet will include a node called "entities,".
+     *
+     * @var string
+     */
     protected $include_entities;
-    
+
     /**
      * Cast to array
      *
@@ -131,20 +131,21 @@ class SearchOptions extends Options
      */
     public function toArray()
     {
-        $array = array();
-        $transform = function($letters) {
+        $array     = array();
+        $transform = function($letters)
+        {
             $letter = array_shift($letters);
             return '_' . strtolower($letter);
         };
         foreach ($this as $key => $value) {
-            if(!is_null($value)) {
-                $normalizedKey = preg_replace_callback('/([A-Z])/', $transform, $key);
+            if (!is_null($value)) {
+                $normalizedKey         = preg_replace_callback('/([A-Z])/', $transform, $key);
                 $array[$normalizedKey] = $value;
             }
         }
         return $array;
     }
-    
+
     /**
      * Get query
      *
@@ -152,28 +153,7 @@ class SearchOptions extends Options
      */
     protected function getQ()
     {
-       return $this->q;
-    }
-    
-    /**
-     * Alias to get query
-     *
-     * @return string
-     */
-    public function getQuery()
-    {
-       return $this->getQ();
-    }
-    
-    /**
-     * Set query
-     *
-     * @param  string $q
-     * @return SearchOptions
-     */
-    public function setQuery($q)
-    {
-       return $this->setQ($q);
+        return $this->q;
     }
 
     /**
@@ -184,10 +164,31 @@ class SearchOptions extends Options
      */
     protected function setQ($q)
     {
-       $this->q = $q;
-       return $this;
+        $this->q = $q;
+        return $this;
     }
-    
+
+    /**
+     * Alias to get query
+     *
+     * @return string
+     */
+    public function getQuery()
+    {
+        return $this->getQ();
+    }
+
+    /**
+     * Set query
+     *
+     * @param  string $q
+     * @return SearchOptions
+     */
+    public function setQuery($q)
+    {
+        return $this->setQ($q);
+    }
+
     /**
      * Get geocode
      *
@@ -195,9 +196,9 @@ class SearchOptions extends Options
      */
     public function getGeocode()
     {
-       return $this->geocode;
+        return $this->geocode;
     }
-    
+
     /**
      * Set the geocode parameter
      *
@@ -206,10 +207,10 @@ class SearchOptions extends Options
      */
     public function setGeocode($geocode)
     {
-       $this->geocode = $geocode;
-       return $this;
+        $this->geocode = $geocode;
+        return $this;
     }
-    
+
     /**
      * Get lang
      *
@@ -217,9 +218,9 @@ class SearchOptions extends Options
      */
     protected function getLang()
     {
-       return $this->lang;
+        return $this->lang;
     }
-    
+
     /**
      * Set the lang parameter
      *
@@ -228,10 +229,10 @@ class SearchOptions extends Options
      */
     protected function setLang($lang)
     {
-       $this->lang = $lang;
-       return $this;
+        $this->lang = $lang;
+        return $this;
     }
-    
+
     /**
      * Get lang
      *
@@ -239,9 +240,9 @@ class SearchOptions extends Options
      */
     public function getLanguage()
     {
-       return $this->getLang();
+        return $this->getLang();
     }
-    
+
     /**
      * Set the lang parameter
      *
@@ -250,7 +251,7 @@ class SearchOptions extends Options
      */
     public function setLanguage($lang)
     {
-       return $this->setLang($lang);
+        return $this->setLang($lang);
     }
 
     /**
@@ -260,9 +261,9 @@ class SearchOptions extends Options
      */
     public function getLocale()
     {
-       return $this->locale;
+        return $this->locale;
     }
-    
+
     /**
      * Set the locale parameter
      *
@@ -271,8 +272,8 @@ class SearchOptions extends Options
      */
     public function setLocale($locale)
     {
-       $this->locale = $locale;
-       return $this;
+        $this->locale = $locale;
+        return $this;
     }
 
     /**
@@ -282,9 +283,9 @@ class SearchOptions extends Options
      */
     public function getPage()
     {
-       return $this->page;
+        return $this->page;
     }
-    
+
     /**
      * Set the current page
      *
@@ -293,10 +294,10 @@ class SearchOptions extends Options
      */
     public function setPage($page)
     {
-       $this->page = intval($page);
-       return $this;
+        $this->page = intval($page);
+        return $this;
     }
-    
+
     /**
      * Get result_type
      *
@@ -304,26 +305,27 @@ class SearchOptions extends Options
      */
     public function getResultType()
     {
-       return $this->result_type;
+        return $this->result_type;
     }
-    
+
     /**
      * Set the result_type parameter
      *
      * @param  string $resultType
+     * @throws Exception\UnexpectedValueException
      * @return SearchOptions
      */
     public function setResultType($resultType)
     {
-       $resultType = strtolower($resultType);
-       if(!in_array($resultType, array('mixed', 'popular', 'recent'))) {
-           throw new UnexpectedValueException(
-               'Bad value "' . $resultType . '" on result_type parameter'
-           );
-       }
-        
-       $this->result_type = $resultType;
-       return $this;
+        $resultType = strtolower($resultType);
+        if (!in_array($resultType, array('mixed', 'popular', 'recent'))) {
+            throw new Exception\UnexpectedValueException(
+                'Bad value "' . $resultType . '" on result_type parameter'
+            );
+        }
+
+        $this->result_type = $resultType;
+        return $this;
     }
 
     /**
@@ -333,9 +335,9 @@ class SearchOptions extends Options
      */
     public function getResultsPerPage()
     {
-       return $this->getRpp();
+        return $this->getRpp();
     }
-    
+
     /**
      * Set rpp parameter
      *
@@ -344,9 +346,9 @@ class SearchOptions extends Options
      */
     public function setResultsPerPage($rpp)
     {
-       return $this->setRpp($rpp);
+        return $this->setRpp($rpp);
     }
-    
+
     /**
      * Get rpp parameter
      *
@@ -354,9 +356,9 @@ class SearchOptions extends Options
      */
     protected function getRpp()
     {
-       return $this->rpp;
+        return $this->rpp;
     }
-    
+
     /**
      * Set rpp parameter
      *
@@ -365,9 +367,9 @@ class SearchOptions extends Options
      */
     protected function setRpp($rpp)
     {
-       $rpp = (intval($rpp) > 100) ? 100 : intval($rpp);
-       $this->rpp = $rpp;
-       return $this;
+        $rpp       = (intval($rpp) > 100) ? 100 : intval($rpp);
+        $this->rpp = $rpp;
+        return $this;
     }
 
     /**
@@ -377,9 +379,9 @@ class SearchOptions extends Options
      */
     public function getShowUser()
     {
-       return $this->show_user;
+        return $this->show_user;
     }
-    
+
     /**
      * Set the show_user parameter
      *
@@ -388,8 +390,8 @@ class SearchOptions extends Options
      */
     public function setShowUser($showUser)
     {
-       $this->show_user = (bool)$showUser;
-       return $this;
+        $this->show_user = (bool)$showUser;
+        return $this;
     }
 
     /**
@@ -399,9 +401,9 @@ class SearchOptions extends Options
      */
     public function getSinceId()
     {
-       return $this->since_id;
+        return $this->since_id;
     }
-    
+
     /**
      * Set the since_id parameter
      *
@@ -410,10 +412,10 @@ class SearchOptions extends Options
      */
     public function setSinceId($sinceId)
     {
-       $this->since_id = $sinceId;
-       return $this;
+        $this->since_id = $sinceId;
+        return $this;
     }
-    
+
     /**
      * Get max_id parameter
      *
@@ -421,9 +423,9 @@ class SearchOptions extends Options
      */
     public function getMaxId()
     {
-       return $this->max_id;
+        return $this->max_id;
     }
-    
+
     /**
      * Set the max_id parameter
      *
@@ -432,8 +434,8 @@ class SearchOptions extends Options
      */
     public function setMaxId($maxId)
     {
-       $this->max_id = (int)$maxId;
-       return $this;
+        $this->max_id = (int)$maxId;
+        return $this;
     }
 
     /**
@@ -443,9 +445,9 @@ class SearchOptions extends Options
      */
     public function getIncludeEntities()
     {
-       return $this->include_entities;
+        return $this->include_entities;
     }
-    
+
     /**
      * Set the include_entities parameter
      *
@@ -454,7 +456,7 @@ class SearchOptions extends Options
      */
     public function setIncludeEntities($includeEntities)
     {
-       $this->include_entities = (bool)$includeEntities;
-       return $this;
+        $this->include_entities = (bool)$includeEntities;
+        return $this;
     }
 }

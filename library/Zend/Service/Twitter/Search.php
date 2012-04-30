@@ -26,38 +26,32 @@
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-
-namespace Zend\Service\Twitter;
-
-use Zend\Feed,
-    Zend\Http,
-    Zend\Json,
-    Zend\Rest\Client;
-
 class Search extends Client\RestClient
 {
     /**
      * Return Type
-     * @var String
+     *
+     * @var string
      */
     protected $responseType = 'json';
 
     /**
      * Response Format Types
+     *
      * @var array
      */
     protected $responseTypes = array(
         'atom',
-        'json'
+        'json',
     );
 
     /**
-     * Uri Compoent
+     * Uri Component
      *
      * @var \Zend\Uri\Http
      */
     protected $uri;
-    
+
     /**
      * Twitter api search options
      *
@@ -68,25 +62,25 @@ class Search extends Client\RestClient
     /**
      * Constructor
      *
-     * @param  string $returnType
-     * @return void
+     * @param string                           $responseType Return type
+     * @param array|\Traversable|SearchOptions $options
      */
     public function __construct($responseType = 'json', $options = null)
     {
         $this->setResponseType($responseType);
-        $this->setUri("http://search.twitter.com");
+        $this->setUri('http://search.twitter.com');
 
         $this->setHeaders('Accept-Charset', 'ISO-8859-1,utf-8');
-        
-        if($options) {
+
+        if ($options) {
             $this->setOptions($options);
         }
     }
-    
+
     /**
      * Set options.
      *
-     * @param  array|Traversable|SearchOptions $options
+     * @param  array|\Traversable|SearchOptions $options
      * @return SearchOptions
      * @see    getOptions()
      */
@@ -97,7 +91,7 @@ class Search extends Client\RestClient
         }
         $this->options = $options;
     }
-    
+
     /**
      * Get options.
      *

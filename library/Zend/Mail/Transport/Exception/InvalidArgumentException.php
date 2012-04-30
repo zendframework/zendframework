@@ -20,7 +20,6 @@
  */
 
 namespace Zend\Mail\Transport\Exception;
-use Zend\Mail\Transport\Exception;
 
 /**
  * Exception for Zend_Mail component.
@@ -32,6 +31,6 @@ use Zend\Mail\Transport\Exception;
  */
 class InvalidArgumentException
     extends \InvalidArgumentException
-    implements Exception
+    implements ExceptionInterface
 {
 }

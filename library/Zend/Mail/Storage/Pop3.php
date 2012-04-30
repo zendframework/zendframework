@@ -21,9 +21,9 @@
 
 namespace Zend\Mail\Storage;
 
-use Zend\Mail\Protocol,
-    Zend\Mail,
-    Zend\Mime;
+use Zend\Mail\Exception as MailException;
+use Zend\Mail\Protocol;
+use Zend\Mime;
 
 /**
  * @category   Zend
@@ -45,13 +45,13 @@ class Pop3 extends AbstractStorage
      * Count messages all messages in current box
      *
      * @return int number of messages
-     * @throws \Zend\Mail\Storage\Exception
-     * @throws \Zend\Mail\Protocol\Exception
+     * @throws \Zend\Mail\Storage\Exception\ExceptionInterface
+     * @throws \Zend\Mail\Protocol\Exception\ExceptionInterface
      */
     public function countMessages()
     {
-        $count  = null; // "Declare" variable before first usage.
-        $octets = null; // "Declare" variable since it's passed by reference
+        $count  = 0; // "Declare" variable before first usage.
+        $octets = 0; // "Declare" variable since it's passed by reference
         $this->_protocol->status($count, $octets);
         return (int)$count;
     }
@@ -61,7 +61,7 @@ class Pop3 extends AbstractStorage
      *
      * @param int $id number of message
      * @return int|array size of given message of list with all messages as array(num => size)
-     * @throws \Zend\Mail\Protocol\Exception
+     * @throws \Zend\Mail\Protocol\Exception\ExceptionInterface
      */
     public function getSize($id = 0)
     {
@@ -74,7 +74,7 @@ class Pop3 extends AbstractStorage
      *
      * @param int $id number of message
      * @return \Zend\Mail\Storage\Message
-     * @throws \Zend\Mail\Protocol\Exception
+     * @throws \Zend\Mail\Protocol\Exception\ExceptionInterface
      */
     public function getMessage($id)
     {
@@ -89,11 +89,11 @@ class Pop3 extends AbstractStorage
      * Get raw header of message or part
      *
      * @param  int               $id       number of message
-     * @param  null|array|string $part     path to part or null for messsage header
+     * @param  null|array|string $part     path to part or null for message header
      * @param  int               $topLines include this many lines with header (after an empty line)
      * @return string raw header
-     * @throws \Zend\Mail\Protocol\Exception
-     * @throws \Zend\Mail\Storage\Exception
+     * @throws \Zend\Mail\Protocol\Exception\ExceptionInterface
+     * @throws \Zend\Mail\Storage\Exception\ExceptionInterface
      */
     public function getRawHeader($id, $part = null, $topLines = 0)
     {
@@ -111,8 +111,8 @@ class Pop3 extends AbstractStorage
      * @param  int               $id   number of message
      * @param  null|array|string $part path to part or null for message content
      * @return string raw content
-     * @throws \Zend\Mail\Protocol\Exception
-     * @throws \Zend\Mail\Storage\Exception
+     * @throws \Zend\Mail\Protocol\Exception\ExceptionInterface
+     * @throws \Zend\Mail\Storage\Exception\ExceptionInterface
      */
     public function getRawContent($id, $part = null)
     {
@@ -210,7 +210,7 @@ class Pop3 extends AbstractStorage
      *
      * @param int|null $id message number
      * @return array|string message number for given message or all messages as array
-     * @throws \Zend\Mail\Storage\Exception
+     * @throws \Zend\Mail\Storage\Exception\ExceptionInterface
      */
     public function getUniqueId($id = null)
     {
@@ -259,10 +259,9 @@ class Pop3 extends AbstractStorage
      * Special handling for hasTop and hasUniqueid. The headers of the first message is
      * retrieved if Top wasn't needed/tried yet.
      *
-     * @see \Zend\Mail\Storage\Abstract::__get()
+     * @see AbstractStorage::__get()
      * @param  string $var
      * @return string
-     * @throws \Zend\Mail\Storage\Exception
      */
     public function __get($var)
     {
@@ -276,7 +275,7 @@ class Pop3 extends AbstractStorage
                 // need to make a real call, because not all server are honest in their capas
                 try {
                     $this->_protocol->top(1, 0, false);
-                } catch(Mail\Exception $e) {
+                } catch(MailException\ExceptionInterface $e) {
                     // ignoring error
                 }
             }
@@ -288,7 +287,7 @@ class Pop3 extends AbstractStorage
             $id = null;
             try {
                 $id = $this->_protocol->uniqueid(1);
-            } catch(Mail\Exception $e) {
+            } catch(MailException\ExceptionInterface $e) {
                 // ignoring error
             }
             $this->_has['uniqueid'] = $id ? true : false;

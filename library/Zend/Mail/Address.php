@@ -26,7 +26,7 @@ namespace Zend\Mail;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Address implements AddressDescription
+class Address implements AddressInterface
 {
     protected $email;
     protected $name;
@@ -65,7 +65,7 @@ class Address implements AddressDescription
     /**
      * Retrieve name
      * 
-     * @return null|string
+     * @return string
      */
     public function getName()
     {

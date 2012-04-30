@@ -22,8 +22,6 @@
 
 namespace Zend\Mail\Storage\Exception;
 
-use Zend\Mail\Storage\Exception;
-
 /**
  * Exception for Zend_Mail component.
  *
@@ -35,6 +33,6 @@ use Zend\Mail\Storage\Exception;
  */
 class OutOfBoundsException
     extends \OutOfBoundsException
-    implements Exception
+    implements ExceptionInterface
 {
 }

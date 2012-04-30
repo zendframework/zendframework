@@ -21,8 +21,8 @@
 
 namespace Zend\Mail\Storage;
 
-use RecursiveIterator,
-    Zend\Mime;
+use RecursiveIterator;
+use Zend\Mime;
 
 /**
  * @category   Zend
@@ -31,7 +31,7 @@ use RecursiveIterator,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Part implements RecursiveIterator, MailPart
+class Part implements RecursiveIterator, Part\PartInterface
 {
     /**
      * headers of part as array
@@ -137,7 +137,7 @@ class Part implements RecursiveIterator, MailPart
     {
         try {
             return stripos($this->contentType, 'multipart/') === 0;
-        } catch(Exception $e) {
+        } catch(Exception\ExceptionInterface $e) {
             return false;
         }
     }
@@ -336,7 +336,7 @@ class Part implements RecursiveIterator, MailPart
     }
 
     /**
-     * Check wheater the Mail part has a specific header.
+     * Check whether the Mail part has a specific header.
      *
      * @param  string $name
      * @return boolean
@@ -381,7 +381,7 @@ class Part implements RecursiveIterator, MailPart
      *
      * @param  string $name header name
      * @return string value of header
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     public function __get($name)
     {
@@ -449,8 +449,6 @@ class Part implements RecursiveIterator, MailPart
 
     /**
      * implements Iterator::next()
-     *
-     * @return null
      */
     public function next()
     {
@@ -479,8 +477,6 @@ class Part implements RecursiveIterator, MailPart
 
     /**
      * implements Iterator::rewind()
-     *
-     * @return null
      */
     public function rewind()
     {

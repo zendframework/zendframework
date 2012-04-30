@@ -49,13 +49,13 @@ class Mbox extends AbstractStorage
     protected $_filemtime;
 
     /**
-     * start and end position of messages as array('start' => start, 'seperator' => headersep, 'end' => end)
+     * start and end position of messages as array('start' => start, 'separator' => headersep, 'end' => end)
      * @var array
      */
     protected $_positions;
 
     /**
-     * used message class, change it in an extened class to extend the returned message class
+     * used message class, change it in an extended class to extend the returned message class
      * @var string
      */
     protected $_messageClass = '\Zend\Mail\Storage\Message\File';
@@ -64,7 +64,7 @@ class Mbox extends AbstractStorage
      * Count messages all messages in current box
      *
      * @return int number of messages
-     * @throws \Zend\Mail\Storage\Exception
+     * @throws \Zend\Mail\Storage\Exception\ExceptionInterface
      */
     public function countMessages()
     {
@@ -116,7 +116,7 @@ class Mbox extends AbstractStorage
      *
      * @param  int $id number of message
      * @return \Zend\Mail\Storage\Message\File
-     * @throws \Zend\Mail\Storage\Exception
+     * @throws \Zend\Mail\Storage\Exception\ExceptionInterface
      */
     public function getMessage($id)
     {
@@ -150,8 +150,8 @@ class Mbox extends AbstractStorage
      * @param  null|array|string $part     path to part or null for message header
      * @param  int               $topLines include this many lines with header (after an empty line)
      * @return string raw header
-     * @throws \Zend\Mail\Protocol\Exception
-     * @throws \Zend\Mail\Storage\Exception
+     * @throws \Zend\Mail\Protocol\Exception\ExceptionInterface
+     * @throws \Zend\Mail\Storage\Exception\ExceptionInterface
      */
     public function getRawHeader($id, $part = null, $topLines = 0)
     {
@@ -170,8 +170,8 @@ class Mbox extends AbstractStorage
      * @param  int               $id   number of message
      * @param  null|array|string $part path to part or null for message content
      * @return string raw content
-     * @throws \Zend\Mail\Protocol\Exception
-     * @throws \Zend\Mail\Storage\Exception
+     * @throws \Zend\Mail\Protocol\Exception\ExceptionInterface
+     * @throws \Zend\Mail\Storage\Exception\ExceptionInterface
      */
     public function getRawContent($id, $part = null)
     {
@@ -246,7 +246,6 @@ class Mbox extends AbstractStorage
      * @param  string $filename filename of mbox file
      * @throws Exception\RuntimeException
      * @throws Exception\InvalidArgumentException
-     * @return null
      */
     protected function _openMboxFile($filename)
     {
@@ -331,7 +330,7 @@ class Mbox extends AbstractStorage
      *
      * @param int|null $id message number
      * @return array|string message number for given message or all messages as array
-     * @throws \Zend\Mail\Storage\Exception
+     * @throws \Zend\Mail\Storage\Exception\ExceptionInterface
      */
     public function getUniqueId($id = null)
     {
@@ -353,7 +352,7 @@ class Mbox extends AbstractStorage
      *
      * @param string $id unique id
      * @return int message number
-     * @throws \Zend\Mail\Storage\Exception
+     * @throws \Zend\Mail\Storage\Exception\ExceptionInterface
      */
     public function getNumberByUniqueId($id)
     {
@@ -381,7 +380,6 @@ class Mbox extends AbstractStorage
      * for cache validation the mtime of the mbox file is used
      *
      * @throws Exception\RuntimeException
-     * @return null
      */
     public function __wakeup()
     {

@@ -20,8 +20,8 @@
 
 namespace Zend\Mail;
 
-use Countable,
-    Iterator;
+use Countable;
+use Iterator;
 
 /**
  * @category   Zend
@@ -41,7 +41,7 @@ class AddressList implements Countable, Iterator
     /**
      * Add an address to the list
      *
-     * @param  string|AddressDescription $emailOrAddress
+     * @param  string|AddressInterface $emailOrAddress
      * @param  null|string $name
      * @throws Exception\InvalidArgumentException
      * @return AddressList
@@ -51,7 +51,7 @@ class AddressList implements Countable, Iterator
         if (is_string($emailOrAddress)) {
             $emailOrAddress = $this->createAddress($emailOrAddress, $name);
         }
-        if (!$emailOrAddress instanceof AddressDescription) {
+        if (!$emailOrAddress instanceof AddressInterface) {
             throw new Exception\InvalidArgumentException(sprintf(
                 '%s expects an email address or %s\Address object as its first argument; received "%s"',
                 __METHOD__,
@@ -74,7 +74,7 @@ class AddressList implements Countable, Iterator
      *
      * If an email key is provided, it will be used as the email, and the value
      * as the name. Otherwise, the value is passed as the sole argument to add(),
-     * and, as such, can be either email strings or AddressDescription objects.
+     * and, as such, can be either email strings or AddressInterface objects.
      *
      * @param  array $addresses
      * @throws Exception\RuntimeException
@@ -127,7 +127,7 @@ class AddressList implements Countable, Iterator
      * Get an address by email
      * 
      * @param  string $email 
-     * @return boolean|AddressDescription
+     * @return boolean|AddressInterface
      */
     public function get($email)
     {

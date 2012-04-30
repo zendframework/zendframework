@@ -23,8 +23,7 @@ namespace Zend\Mail\Storage;
 
 use ArrayAccess,
     Countable,
-    SeekableIterator,
-    Zend\Mail\Storage;
+    SeekableIterator;
 
 /**
  * @category   Zend
@@ -91,7 +90,7 @@ abstract class AbstractStorage implements Countable, ArrayAccess, SeekableIterat
     /**
      * Get a full list of features supported by the specific mail lib and the server
      *
-     * @return array list of features as array(featurename => true|false[|null])
+     * @return array list of features as array(feature_name => true|false[|null])
      */
     public function getCapabilities()
     {
@@ -103,7 +102,7 @@ abstract class AbstractStorage implements Countable, ArrayAccess, SeekableIterat
      * Count messages messages in current box/folder
      *
      * @return int number of messages
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     abstract public function countMessages();
 
@@ -130,7 +129,7 @@ abstract class AbstractStorage implements Countable, ArrayAccess, SeekableIterat
      * Get raw header of message or part
      *
      * @param  int               $id       number of message
-     * @param  null|array|string $part     path to part or null for messsage header
+     * @param  null|array|string $part     path to part or null for message header
      * @param  int               $topLines include this many lines with header (after an empty line)
      * @return string raw header
      */
@@ -149,7 +148,7 @@ abstract class AbstractStorage implements Countable, ArrayAccess, SeekableIterat
      * Create instance with parameters
      *
      * @param  array $params mail reader specific parameters
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     abstract public function __construct($params);
 
@@ -166,16 +165,12 @@ abstract class AbstractStorage implements Countable, ArrayAccess, SeekableIterat
     /**
      * Close resource for mail lib. If you need to control, when the resource
      * is closed. Otherwise the destructor would call this.
-     *
-     * @return null
      */
     abstract public function close();
 
 
     /**
      * Keep the resource alive.
-     *
-     * @return null
      */
     abstract public function noop();
 
@@ -183,7 +178,6 @@ abstract class AbstractStorage implements Countable, ArrayAccess, SeekableIterat
      * delete a message from current box/folder
      *
      * @param $id
-     * @return null
      */
     abstract public function removeMessage($id);
 
@@ -194,7 +188,7 @@ abstract class AbstractStorage implements Countable, ArrayAccess, SeekableIterat
      *
      * @param int|null $id message number
      * @return array|string message number for given message or all messages as array
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     abstract public function getUniqueId($id = null);
 
@@ -206,7 +200,7 @@ abstract class AbstractStorage implements Countable, ArrayAccess, SeekableIterat
      *
      * @param string $id unique id
      * @return int message number
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     abstract public function getNumberByUniqueId($id);
 
@@ -235,7 +229,7 @@ abstract class AbstractStorage implements Countable, ArrayAccess, SeekableIterat
             if ($this->getMessage($id)) {
                 return true;
             }
-        } catch(Exception $e) {}
+        } catch(Exception\ExceptionInterface $e) {}
 
         return false;
      }

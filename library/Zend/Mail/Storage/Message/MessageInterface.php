@@ -19,7 +19,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Mail\Storage;
+namespace Zend\Mail\Storage\Message;
 
 /**
  * @category   Zend
@@ -28,33 +28,27 @@ namespace Zend\Mail\Storage;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface MailFolder
+interface MessageInterface
 {
     /**
-     * get root folder or given folder
+     * return toplines as found after headers
      *
-     * @param string $rootFolder get folder structure for given folder, else root
-     * @return \Zend\Mail\Storage\MailFolder root or wanted folder
+     * @return string toplines
      */
-    public function getFolders($rootFolder = null);
+    public function getTopLines();
 
     /**
-     * select given folder
+     * check if flag is set
      *
-     * folder must be selectable!
-     *
-     * @param \Zend\Mail\Storage\MailFolder|string $globalName global name of folder or instance for subfolder
-     * @return null
-     * @throws \Zend\Mail\Storage\Exception
+     * @param mixed $flag a flag name, use constants defined in Zend\Mail\Storage
+     * @return bool true if set, otherwise false
      */
-    public function selectFolder($globalName);
-
+    public function hasFlag($flag);
 
     /**
-     * get Zend_Mail_Storage_Folder instance for current folder
+     * get all set flags
      *
-     * @return \Zend\Mail\Storage\MailFolder instance of current folder
-     * @throws \Zend\Mail\Storage\Exception
+     * @return array array with flags, key and value are the same for easy lookup
      */
-    public function getCurrentFolder();
+    public function getFlags();
 }

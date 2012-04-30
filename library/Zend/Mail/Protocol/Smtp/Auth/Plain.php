@@ -114,7 +114,7 @@ class Plain extends Smtp
     /**
      * Get username
      *
-     * @return null|string
+     * @return string
      */
     public function getUsername()
     {
@@ -136,7 +136,7 @@ class Plain extends Smtp
     /**
      * Get password
      *
-     * @return null|string
+     * @return string
      */
     public function getPassword()
     {

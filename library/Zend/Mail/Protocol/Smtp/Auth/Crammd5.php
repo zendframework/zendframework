@@ -116,7 +116,7 @@ class Crammd5 extends Smtp
     /**
      * Get username
      *
-     * @return null|string
+     * @return string
      */
     public function getUsername()
     {
@@ -138,7 +138,7 @@ class Crammd5 extends Smtp
     /**
      * Get password
      *
-     * @return null|string
+     * @return string
      */
     public function getPassword()
     {

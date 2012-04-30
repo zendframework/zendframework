@@ -14,22 +14,21 @@
  *
  * @category   Zend
  * @package    Zend_Mail
- * @subpackage Header
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Mail\Header;
-
-use Zend\Mail\Exception as MailException;
+namespace Zend\Mail;
 
 /**
  * @category   Zend
  * @package    Zend_Mail
- * @subpackage Header
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Exception extends MailException
+interface AddressInterface
 {
+    public function getEmail();
+    public function getName();
+    public function toString();
 }

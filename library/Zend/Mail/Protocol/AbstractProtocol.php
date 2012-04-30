@@ -25,8 +25,6 @@ namespace Zend\Mail\Protocol;
 use Zend\Validator;
 
 /**
- * Zend_Mail_Protocol_Abstract
- *
  * Provides low-level methods for concrete adapters to communicate with a remote mail server and track requests and responses.
  *
  * @category   Zend

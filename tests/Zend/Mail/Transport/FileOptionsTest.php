@@ -21,8 +21,7 @@
 
 namespace ZendTest\Mail\Transport;
 
-use PHPUnit_Framework_TestCase as TestCase,
-    Zend\Mail\Transport\FileOptions;
+use Zend\Mail\Transport\FileOptions;
 
 /**
  * @category   Zend
@@ -32,7 +31,7 @@ use PHPUnit_Framework_TestCase as TestCase,
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Mail
  */
-class FileOptionsTest extends TestCase
+class FileOptionsTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {

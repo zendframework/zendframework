@@ -227,7 +227,7 @@ class Smtp extends AbstractProtocol
      * Send EHLO or HELO depending on capabilities of smtp host
      *
      * @param  string $host The client hostname or IP address (default: 127.0.0.1)
-     * @throws \Exception|Exception
+     * @throws \Exception|Exception\ExceptionInterface
      */
     protected function _ehlo($host)
     {
@@ -235,7 +235,7 @@ class Smtp extends AbstractProtocol
         try {
             $this->_send('EHLO ' . $host);
             $this->_expect(250, 300); // Timeout set for 5 minutes as per RFC 2821 4.5.3.2
-        } catch (Exception $e) {
+        } catch (Exception\ExceptionInterface $e) {
             $this->_send('HELO ' . $host);
             $this->_expect(250, 300); // Timeout set for 5 minutes as per RFC 2821 4.5.3.2
         } catch (\Exception $e) {

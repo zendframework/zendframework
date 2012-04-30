@@ -39,7 +39,7 @@ class FileOptions extends Options
     protected $path;
 
     /**
-     * @var callable
+     * @var callback
      */
     protected $callback;
 
@@ -81,7 +81,7 @@ class FileOptions extends Options
     /**
      * Set callback used to generate a file name
      *
-     * @param  callable $callback
+     * @param  callback $callback
      * @throws \Zend\Mail\Exception\InvalidArgumentException
      * @return FileOptions
      */
@@ -101,7 +101,7 @@ class FileOptions extends Options
     /**
      * Get callback used to generate a file name
      * 
-     * @return callable
+     * @return callback
      */
     public function getCallback()
     {

@@ -33,6 +33,6 @@ use Zend\Mail\Exception;
  */
 class DomainException
     extends \DomainException
-    implements Exception
+    implements ExceptionInterface
 {
 }

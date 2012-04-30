@@ -63,7 +63,7 @@ class SmtpOptions extends Options
     /**
      * Return the local client hostname
      *
-     * @return null|string
+     * @return string
      */
     public function getName()
     {
@@ -97,7 +97,7 @@ class SmtpOptions extends Options
      * extending it -- typically a class in the Zend\Mail\Protocol\Smtp\Auth
      * namespace.
      *
-     * @return null|string
+     * @return string
      */
     public function getConnectionClass() 
     {

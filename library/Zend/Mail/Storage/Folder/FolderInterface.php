@@ -14,28 +14,46 @@
  *
  * @category   Zend
  * @package    Zend_Mail
- * @subpackage Transport
+ * @subpackage Storage
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Mail;
+namespace Zend\Mail\Storage\Folder;
 
 /**
- * Interface for mail transports
- *
  * @category   Zend
  * @package    Zend_Mail
- * @subpackage Transport
+ * @subpackage Storage
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Transport
+interface FolderInterface
 {
     /**
-     * Send a mail message
-     * 
-     * @param  Message $message 
+     * get root folder or given folder
+     *
+     * @param string $rootFolder get folder structure for given folder, else root
+     * @return FolderInterface root or wanted folder
      */
-    public function send(Message $message);
+    public function getFolders($rootFolder = null);
+
+    /**
+     * select given folder
+     *
+     * folder must be selectable!
+     *
+     * @param FolderInterface|string $globalName global name of folder or instance for subfolder
+     * @throws \Zend\Mail\Storage\Exception\ExceptionInterface
+     */
+    public function selectFolder($globalName);
+
+
+    /**
+     * get Zend\Mail\Storage\Folder instance for current folder
+     *
+     * @return FolderInterface instance of current folder
+     * @throws \Zend\Mail\Storage\Exception\ExceptionInterface
+     */
+    public function getCurrentFolder();
 }

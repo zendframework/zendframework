@@ -21,9 +21,8 @@
 
 namespace Zend\Mail\Storage\Folder;
 
-use Zend\Mail\Storage\MailFolder,
-    Zend\Mail\Storage\Exception,
-    Zend\Mail\Storage;
+use Zend\Mail\Storage;
+use Zend\Mail\Storage\Exception;
 
 /**
  * @category   Zend
@@ -32,7 +31,7 @@ use Zend\Mail\Storage\MailFolder,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Mbox extends Storage\Mbox implements MailFolder
+class Mbox extends Storage\Mbox implements FolderInterface
 {
     /**
      * \Zend\Mail\Storage\Folder root folder for folder structure
@@ -166,7 +165,6 @@ class Mbox extends Storage\Mbox implements MailFolder
      *
      * @param \Zend\Mail\Storage\Folder|string $globalName global name of folder or instance for subfolder
      * @throws \Zend\Mail\Storage\Exception\RuntimeException
-     * @return null
      */
     public function selectFolder($globalName)
     {
@@ -177,7 +175,7 @@ class Mbox extends Storage\Mbox implements MailFolder
 
         try {
             $this->_openMboxFile($this->_rootdir . $folder->getGlobalName());
-        } catch(Storage\Exception $e) {
+        } catch(Exception\ExceptionInterface $e) {
             // check what went wrong
             if (!$folder->isSelectable()) {
                 throw new Exception\RuntimeException("{$this->_currentFolder} is not selectable", 0, $e);
@@ -193,7 +191,7 @@ class Mbox extends Storage\Mbox implements MailFolder
      * get \Zend\Mail\Storage\Folder instance for current folder
      *
      * @return \Zend\Mail\Storage\Folder instance of current folder
-     * @throws \Zend\Mail\Storage\Exception
+     * @throws \Zend\Mail\Storage\Exception\ExceptionInterface
      */
     public function getCurrentFolder()
     {
@@ -213,11 +211,7 @@ class Mbox extends Storage\Mbox implements MailFolder
     }
 
     /**
-     * magic method for unserialize()
-     *
-     * with this method you can cache the mbox class
-     *
-     * @return null
+     * magic method for unserialize(), with this method you can cache the mbox class
      */
     public function __wakeup()
     {

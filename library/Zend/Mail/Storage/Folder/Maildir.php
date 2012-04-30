@@ -21,10 +21,8 @@
 
 namespace Zend\Mail\Storage\Folder;
 
-use Zend\Mail\Storage\MailFolder,
-    Zend\Mail\Storage\Folder,
-    Zend\Mail\Storage\Exception,
-    Zend\Mail\Storage;
+use Zend\Mail\Storage;
+use Zend\Mail\Storage\Exception;
 
 /**
  * @category   Zend
@@ -33,10 +31,10 @@ use Zend\Mail\Storage\MailFolder,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Maildir extends Storage\Maildir implements MailFolder
+class Maildir extends Storage\Maildir implements FolderInterface
 {
     /**
-     * \Zend\Mail\Storage\Folder root folder for folder structure
+     * root folder for folder structure
      * @var \Zend\Mail\Storage\Folder
      */
     protected $_rootFolder;
@@ -63,8 +61,8 @@ class Maildir extends Storage\Maildir implements MailFolder
      * Create instance with parameters
      * Supported parameters are:
      *   - dirname rootdir of maildir structure
-     *   - delim   delim char for folder structur, default is '.'
-     *   - folder intial selected folder, default is 'INBOX'
+     *   - delim   delim char for folder structure, default is '.'
+     *   - folder initial selected folder, default is 'INBOX'
      *
      * @param  $params array mail reader specific parameters
      * @throws \Zend\Mail\Storage\Exception\InvalidArgumentException
@@ -96,23 +94,25 @@ class Maildir extends Storage\Maildir implements MailFolder
      * $parentFolder and $parentGlobalName are only used internally for recursion.
      *
      * @throws \Zend\Mail\Storage\Exception\RuntimeException
-     * @return null
      */
     protected function _buildFolderTree()
     {
-        $this->_rootFolder = new Folder('/', '/', false);
-        $this->_rootFolder->INBOX = new Folder('INBOX', 'INBOX', true);
+        $this->_rootFolder = new Storage\Folder('/', '/', false);
+        $this->_rootFolder->INBOX = new Storage\Folder('INBOX', 'INBOX', true);
 
         $dh = @opendir($this->_rootdir);
         if (!$dh) {
             throw new Exception\RuntimeException("can't read folders in maildir");
         }
         $dirs = array();
+
         while (($entry = readdir($dh)) !== false) {
+
             // maildir++ defines folders must start with .
             if ($entry[0] != '.' || $entry == '.' || $entry == '..') {
                 continue;
             }
+
             if ($this->_isMaildir($this->_rootdir . $entry)) {
                 $dirs[] = $entry;
             }
@@ -134,7 +134,7 @@ class Maildir extends Storage\Maildir implements MailFolder
                     }
                     array_push($stack, $parent);
                     $parent = $dir . $this->_delim;
-                    $folder = new Folder($local, substr($dir, 1), true);
+                    $folder = new Storage\Folder($local, substr($dir, 1), true);
                     $parentFolder->$local = $folder;
                     array_push($folderStack, $parentFolder);
                     $parentFolder = $folder;
@@ -169,6 +169,7 @@ class Maildir extends Storage\Maildir implements MailFolder
         }
         $currentFolder = $this->_rootFolder;
         $subname = trim($rootFolder, $this->_delim);
+        
         while ($currentFolder) {
             @list($entry, $subname) = @explode($this->_delim, $subname, 2);
             $currentFolder = $currentFolder->$entry;
@@ -190,7 +191,6 @@ class Maildir extends Storage\Maildir implements MailFolder
      *
      * @param \Zend\Mail\Storage\Folder|string $globalName global name of folder or instance for subfolder
      * @throws \Zend\Mail\Storage\Exception\RuntimeException
-     * @return null
      */
     public function selectFolder($globalName)
     {
@@ -201,7 +201,7 @@ class Maildir extends Storage\Maildir implements MailFolder
 
         try {
             $this->_openMaildir($this->_rootdir . '.' . $folder->getGlobalName());
-        } catch(Storage\Exception $e) {
+        } catch(Exception\ExceptionInterface $e) {
             // check what went wrong
             if (!$folder->isSelectable()) {
                 throw new Exception\RuntimeException("{$this->_currentFolder} is not selectable", 0, $e);

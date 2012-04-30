@@ -20,7 +20,7 @@
  */
 
 namespace Zend\Mail\Protocol;
-use Zend\Mail\Protocol\Exception;
+
 /**
  * @category   Zend
  * @package    Zend_Mail
@@ -187,8 +187,8 @@ class Pop3
     /**
      * Send request and get response
      *
-     * @see sendRequest(), readResponse()
-     *
+     * @see sendRequest()
+     * @see readResponse()
      * @param  string $request    request
      * @param  bool   $multiline  multiline response?
      * @return string             result from readResponse()
@@ -202,23 +202,19 @@ class Pop3
 
     /**
      * End communication with POP3 server (also closes socket)
-     *
-     * @return null
      */
     public function logout()
     {
-        if (!$this->_socket) {
-            return;
-        }
+        if ($this->_socket) {
+            try {
+                $this->request('QUIT');
+            } catch (Exception\ExceptionInterface $e) {
+                // ignore error - we're closing the socket anyway
+            }
 
-        try {
-            $this->request('QUIT');
-        } catch (Exception $e) {
-            // ignore error - we're closing the socket anyway
+            fclose($this->_socket);
+            $this->_socket = null;
         }
-
-        fclose($this->_socket);
-        $this->_socket = null;
     }
 
 
@@ -246,7 +242,7 @@ class Pop3
         if ($tryApop && $this->_timestamp) {
             try {
                 $this->request("APOP $user " . md5($this->_timestamp . $password));
-            } catch (Exception $e) {
+            } catch (Exception\ExceptionInterface $e) {
                 // ignore
             }
         }
@@ -341,8 +337,8 @@ class Pop3
      * @param  int  $msgno    number of message
      * @param  int  $lines    number of wanted body lines (empty line is inserted after header lines)
      * @param  bool $fallback fallback with full retrieve if top is not supported
-     * @throws Exception
      * @throws Exception\RuntimeException
+     * @throws Exception\ExceptionInterface
      * @return string message headers with wanted body lines
      */
     public function top($msgno, $lines = 0, $fallback = false)
@@ -360,7 +356,7 @@ class Pop3
 
         try {
             $result = $this->request("TOP $msgno $lines", true);
-        } catch (Exception $e) {
+        } catch (Exception\ExceptionInterface $e) {
             $this->hasTop = false;
             if ($fallback) {
                 $result = $this->retrieve($msgno);

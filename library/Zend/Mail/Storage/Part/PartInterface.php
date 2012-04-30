@@ -19,7 +19,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Mail\Storage;
+namespace Zend\Mail\Storage\Part;
 
 use RecursiveIterator;
 
@@ -30,7 +30,7 @@ use RecursiveIterator;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface MailPart extends RecursiveIterator
+interface PartInterface extends RecursiveIterator
 {
     /**
      * Check if part is a multipart message
@@ -46,7 +46,7 @@ interface MailPart extends RecursiveIterator
      * If part is multipart the raw content of this part with all sub parts is returned
      *
      * @return string body
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     public function getContent();
 
@@ -61,8 +61,8 @@ interface MailPart extends RecursiveIterator
      * Get part of multipart message
      *
      * @param  int $num number of part starting with 1 for first part
-     * @return Part wanted part
-     * @throws Exception
+     * @return PartInterface wanted part
+     * @throws Exception\ExceptionInterface
      */
     public function getPart($num);
 
@@ -88,12 +88,12 @@ interface MailPart extends RecursiveIterator
      * Get a header in specified format
      *
      * Internally headers that occur more than once are saved as array, all other as string. If $format
-     * is set to string implode is used to concat the values (with Zend_Mime::LINEEND as delim).
+     * is set to string implode is used to concat the values (with Zend\Mime\Mime::LINEEND as delim).
      *
      * @param  string $name   name of header, matches case-insensitive, but camel-case is replaced with dashes
      * @param  string $format change type of return value to 'string' or 'array'
      * @return string|array value of header in wanted or internal format
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     public function getHeader($name, $format = null);
 
@@ -103,14 +103,14 @@ interface MailPart extends RecursiveIterator
      * If the header occurs more than once, only the value from the first header
      * is returned.
      *
-     * Throws an Exception if the requested header does not exist. If
+     * Throws an exception if the requested header does not exist. If
      * the specific header field does not exist, returns null.
      *
      * @param  string $name       name of header, like in getHeader()
      * @param  string $wantedPart the wanted part, default is first, if null an array with all parts is returned
      * @param  string $firstName  key name for the first part
      * @return string|array wanted part or all parts as array($firstName => firstPart, partname => value)
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     public function getHeaderField($name, $wantedPart = '0', $firstName = '0');
 
@@ -118,13 +118,13 @@ interface MailPart extends RecursiveIterator
     /**
      * Getter for mail headers - name is matched in lowercase
      *
-     * This getter is short for Part::getHeader($name, 'string')
+     * This getter is short for PartInterface::getHeader($name, 'string')
      *
-     * @see Part::getHeader()
+     * @see PartInterface::getHeader()
      *
      * @param  string $name header name
      * @return string value of header
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     public function __get($name);
 

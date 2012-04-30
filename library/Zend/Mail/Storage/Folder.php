@@ -20,7 +20,6 @@
  */
 
 namespace Zend\Mail\Storage;
-use Zend\Mail\Storage\Exception;
 
 /**
  * @category   Zend
@@ -60,7 +59,7 @@ class Folder implements \RecursiveIterator
      *
      * @param string $localName  name of folder in current subdirectory
      * @param string $globalName absolute name of folder
-     * @param bool   $selectable if true folder holds messages, if false it's just a parent for subfolders
+     * @param bool   $selectable if true folder holds messages, if false it's just a parent for subfolders (Default: true)
      * @param array  $folders    init with given instances of \Zend\Mail\Storage\Folder as subfolders
      */
     public function __construct($localName, $globalName = '', $selectable = true, array $folders = array())
@@ -104,8 +103,6 @@ class Folder implements \RecursiveIterator
 
     /**
      * implements Iterator::next()
-     *
-     * @return null
      */
     public function next()
     {
@@ -134,8 +131,6 @@ class Folder implements \RecursiveIterator
 
     /**
      * implements Iterator::rewind()
-     *
-     * @return null
      */
     public function rewind()
     {
@@ -163,7 +158,6 @@ class Folder implements \RecursiveIterator
      *
      * @param string $name local name of subfolder
      * @param \Zend\Mail\Storage\Folder $folder instance for new subfolder
-     * @return null
      */
     public function __set($name, Folder $folder)
     {
@@ -174,7 +168,6 @@ class Folder implements \RecursiveIterator
      * remove subfolder named $name
      *
      * @param string $name local name of subfolder
-     * @return null
      */
     public function __unset($name)
     {

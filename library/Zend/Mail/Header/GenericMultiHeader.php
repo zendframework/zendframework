@@ -28,7 +28,7 @@ namespace Zend\Mail\Header;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class GenericMultiHeader implements MultipleHeaderDescription
+class GenericMultiHeader implements MultipleHeadersInterface
 {
     /**
      * @var string
@@ -75,8 +75,8 @@ class GenericMultiHeader implements MultipleHeaderDescription
     /**
      * Constructor
      * 
-     * @param null|string $fieldName
-     * @param null|string $fieldValue
+     * @param string $fieldName  Optional
+     * @param string $fieldValue Optional
      */
     public function __construct($fieldName = null, $fieldValue = null)
     {

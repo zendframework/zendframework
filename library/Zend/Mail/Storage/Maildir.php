@@ -22,7 +22,6 @@
 namespace Zend\Mail\Storage;
 
 use Zend\Mail;
-use Zend\Mail\Storage;
 
 /**
  * @category   Zend
@@ -37,7 +36,7 @@ class Maildir extends AbstractStorage
      * used message class, change it in an extended class to extend the returned message class
      * @var string
      */
-    protected $_messageClass = '\Zend\Mail\Message\File';
+    protected $_messageClass = '\Zend\Mail\Storage\Message\File';
 
     /**
      * data of found message files in maildir dir
@@ -148,7 +147,7 @@ class Maildir extends AbstractStorage
      *
      * @param  int $id number of message
      * @return \Zend\Mail\Storage\Message\File
-     * @throws \Zend\Mail\Storage\Exception
+     * @throws \Zend\Mail\Storage\Exception\ExceptionInterface
      */
     public function getMessage($id)
     {
@@ -272,7 +271,6 @@ class Maildir extends AbstractStorage
      *
      * @param string $dirname name of maildir
      * @throws Exception\RuntimeException
-     * @return null
      */
     protected function _openMaildir($dirname)
     {
@@ -302,7 +300,6 @@ class Maildir extends AbstractStorage
      * @param resource $dh            dir handle used for search
      * @param string   $dirname       dirname of dir in $dh
      * @param array    $default_flags default flags for given dir
-     * @return null
      */
     protected function _getMaildirFiles($dh, $dirname, $default_flags = array())
     {

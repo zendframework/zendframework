@@ -21,8 +21,7 @@
 
 namespace ZendTest\Mime;
 
-use Zend\Mime,
-    Zend\Mail;
+use Zend\Mime;
 
 /**
  * @category   Zend
@@ -36,6 +35,7 @@ class MimeTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * Stores the original set timezone
+     *
      * @var string
      */
     private $_originaltimezone;
@@ -49,7 +49,7 @@ class MimeTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Teardown environment
+     * Tear down environment
      */
     public function tearDown()
     {
@@ -65,7 +65,7 @@ class MimeTest extends \PHPUnit_Framework_TestCase
 
         // check instantiating with arbitrary boundary string
         $myBoundary = 'mySpecificBoundary';
-        $m3 = new Mime\Mime($myBoundary);
+        $m3         = new Mime\Mime($myBoundary);
         $this->assertEquals($m3->boundary(), $myBoundary);
 
     }
@@ -102,25 +102,13 @@ class MimeTest extends \PHPUnit_Framework_TestCase
 
     public function testZf1058WhitespaceAtEndOfBodyCausesInfiniteLoop()
     {
-        // Set timezone to avoid "date(): It is not safe to rely on the system's timezone settings."
-        // message.
-        date_default_timezone_set('GMT');
-
-        $mail = new \Zend\Mail\Mail();
-        $mail->setSubject('my subject');
-        $mail->setBodyText("my body\r\n\r\n...after two newlines\r\n ");
-        $mail->setFrom('test@email.com');
-        $mail->addTo('test@email.com');
-
-        // test with generic transport
-        $mock = new SendmailTransportMock();
-        $mail->send($mock);
-        $body = quoted_printable_decode($mock->body);
-        $this->assertContains("my body\r\n\r\n...after two newlines", $body, $body);
+        $text   = "my body\r\n\r\n...after two newlines\r\n ";
+        $result = quoted_printable_decode(Mime\Mime::encodeQuotedPrintable($text));
+        $this->assertContains("my body\r\n\r\n...after two newlines", $result, $result);
     }
 
     /**
-     * @group ZF-1688
+     * @group        ZF-1688
      * @dataProvider dataTestEncodeMailHeaderQuotedPrintable
      */
     public function testEncodeMailHeaderQuotedPrintable($str, $charset, $result)
@@ -142,7 +130,7 @@ class MimeTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @group ZF-1688
+     * @group        ZF-1688
      * @dataProvider dataTestEncodeMailHeaderBase64
      */
     public function testEncodeMailHeaderBase64($str, $charset, $result)
@@ -167,39 +155,16 @@ class MimeTest extends \PHPUnit_Framework_TestCase
     {
         $subject = "Alle meine Entchen schwimmen in dem See, schwimmen in dem See, Köpfchen in das Wasser, Schwänzchen in die Höh!";
         $encoded = Mime\Mime::encodeQuotedPrintableHeader($subject, "UTF-8", 100);
-        foreach(explode(Mime\Mime::LINEEND, $encoded) AS $line ) {
-            if(strlen($line) > 100) {
-                $this->fail("Line '".$line."' is ".strlen($line)." chars long, only 100 allowed.");
+        foreach (explode(Mime\Mime::LINEEND, $encoded) AS $line) {
+            if (strlen($line) > 100) {
+                $this->fail("Line '" . $line . "' is " . strlen($line) . " chars long, only 100 allowed.");
             }
         }
         $encoded = Mime\Mime::encodeQuotedPrintableHeader($subject, "UTF-8", 40);
-        foreach(explode(Mime\Mime::LINEEND, $encoded) AS $line ) {
-            if(strlen($line) > 40) {
-                $this->fail("Line '".$line."' is ".strlen($line)." chars long, only 40 allowed.");
+        foreach (explode(Mime\Mime::LINEEND, $encoded) AS $line) {
+            if (strlen($line) > 40) {
+                $this->fail("Line '" . $line . "' is " . strlen($line) . " chars long, only 40 allowed.");
             }
         }
-    }
-}
-
-
-/**
- * Mock mail transport class for testing Sendmail transport
- */
-class SendmailTransportMock extends Mail\Transport\Sendmail
-{
-    /**
-     * @var Zend_Mail
-     */
-    public $mail    = null;
-    public $from    = null;
-    public $subject = null;
-    public $called  = false;
-
-    public function _sendMail()
-    {
-        $this->mail    = $this->_mail;
-        $this->from    = $this->_mail->getFrom();
-        $this->subject = $this->_mail->getSubject();
-        $this->called  = true;
     }
 }

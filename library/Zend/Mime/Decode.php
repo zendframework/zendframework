@@ -234,7 +234,7 @@ class Decode
      *
      * The charset of the returned string depends on your iconv settings.
      *
-     * @param  string encoded string
+     * @param  string $string encoded string
      * @return string decoded string
      */
     public static function decodeQuotedPrintable($string)

@@ -456,7 +456,7 @@ abstract class AbstractHelper extends View\Helper\HtmlElement implements Helper
      * @param  string $method             method name in container
      * @param  array  $arguments          [optional] arguments to pass
      * @return mixed                      returns what the container returns
-     * @throws Navigation\Exception  if method does not exist in container
+     * @throws Navigation\Exception\ExceptionInterface  if method does not exist in container
      */
     public function __call($method, array $arguments = array())
     {

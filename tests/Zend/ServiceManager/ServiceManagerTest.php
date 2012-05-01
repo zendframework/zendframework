@@ -2,7 +2,8 @@
 
 namespace ZendTest\ServiceManager;
 
-use Zend\ServiceManager\ServiceManager;
+use Zend\ServiceManager\ServiceManager,
+    Zend\ServiceManager\Configuration;
 
 class ServiceManagerTest extends \PHPUnit_Framework_TestCase
 {
@@ -18,6 +19,16 @@ class ServiceManagerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @covers Zend\ServiceManager\ServiceManager::__construct
+     */
+    public function testConstructorConfiguration()
+    {
+        $config = new Configuration(array('services' => array('foo' => 'bar')));
+        $serviceManager = new ServiceManager($config);
+        $this->assertEquals('bar', $serviceManager->get('foo'));
+    }
+
+    /**
      * @covers Zend\ServiceManager\ServiceManager::setAllowOverride
      * @covers Zend\ServiceManager\ServiceManager::getAllowOverride
      */
@@ -27,6 +38,18 @@ class ServiceManagerTest extends \PHPUnit_Framework_TestCase
         $ret = $this->serviceManager->setAllowOverride(true);
         $this->assertSame($this->serviceManager, $ret);
         $this->assertTrue($this->serviceManager->getAllowOverride());
+    }
+
+    /**
+     * @covers Zend\ServiceManager\ServiceManager::setThrowExceptionInCreate
+     * @covers Zend\ServiceManager\ServiceManager::getThrowExceptionInCreate
+     */
+    public function testThrowExceptionInCreate()
+    {
+        $this->assertTrue($this->serviceManager->getThrowExceptionInCreate());
+        $ret = $this->serviceManager->setThrowExceptionInCreate(false);
+        $this->assertSame($this->serviceManager, $ret);
+        $this->assertFalse($this->serviceManager->getThrowExceptionInCreate());
     }
 
     /**
@@ -58,28 +81,43 @@ class ServiceManagerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Zend\ServiceManager\ServiceManager::addAbstractSource
-     * @todo   Implement testAddAbstractSource().
+     * @covers Zend\ServiceManager\ServiceManager::addAbstractFactory
      */
-    public function testAddAbstractSource()
+    public function testAddAbstractFactory()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->serviceManager->addAbstractFactory('ZendTest\ServiceManager\TestAsset\FooAbstractFactory');
+
+        $ret = $this->serviceManager->addAbstractFactory(new TestAsset\FooAbstractFactory());
+        $this->assertSame($this->serviceManager, $ret);
+    }
+
+    /**
+     * @covers Zend\ServiceManager\ServiceManager::addAbstractFactory
+     */
+    public function testAddAbstractFactoryThrowsExceptionOnInvalidFactory()
+    {
+        $this->setExpectedException('Zend\ServiceManager\Exception\InvalidArgumentException');
+        $this->serviceManager->addAbstractFactory(10);
     }
 
     /**
      * @covers Zend\ServiceManager\ServiceManager::addInitializer
-     * @todo   Implement testAddInitializer().
      */
     public function testAddInitializer()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $ret = $this->serviceManager->addInitializer(new TestAsset\FooInitializer());
+        $this->assertSame($this->serviceManager, $ret);
     }
+
+    /**
+     * @covers Zend\ServiceManager\ServiceManager::addInitializer
+     */
+    public function testAddInitializerThrowsExceptionOnInvalidInitializer()
+    {
+        $this->setExpectedException('Zend\ServiceManager\Exception\InvalidArgumentException');
+        $this->serviceManager->addInitializer(5);
+    }
+
 
     /**
      * @covers Zend\ServiceManager\ServiceManager::setService
@@ -111,26 +149,96 @@ class ServiceManagerTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Zend\ServiceManager\ServiceManager::get
-     * @todo   Implement testGet().
      */
     public function testGet()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->serviceManager->setService('foo', 'bar');
+        $this->assertEquals('bar', $this->serviceManager->get('foo'));
+    }
+
+    /**
+     * @covers Zend\ServiceManager\ServiceManager::get
+     */
+    public function testGetThrowsExceptionOnUnknownService()
+    {
+        $this->setExpectedException('Zend\ServiceManager\Exception\ServiceNotCreatedException');
+        $this->assertEquals('bar', $this->serviceManager->get('foo'));
+    }
+
+
+    /**
+     * @covers Zend\ServiceManager\ServiceManager::get
+     */
+    public function testGetWithAlias()
+    {
+        $this->serviceManager->setService('foo', 'bar');
+        $this->serviceManager->setAlias('baz', 'foo');
+        $this->assertEquals('bar', $this->serviceManager->get('baz'));
+    }
+
+    /**
+     * @covers Zend\ServiceManager\ServiceManager::get
+     */
+    public function testGetWithScopedContainer()
+    {
+        $this->serviceManager->setService('foo', 'bar');
+        $scopedServiceManager = $this->serviceManager->createScopedServiceManager();
+        $this->assertEquals('bar', $scopedServiceManager->get('foo'));
     }
 
     /**
      * @covers Zend\ServiceManager\ServiceManager::create
-     * @todo   Implement testCreate().
      */
-    public function testCreate()
+    public function testCreateWithInvokableClass()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->serviceManager->setInvokableClass('foo', 'ZendTest\ServiceManager\TestAsset\Foo');
+        $this->assertInstanceOf('ZendTest\ServiceManager\TestAsset\Foo', $this->serviceManager->get('foo'));
+    }
+
+    /**
+     * @covers Zend\ServiceManager\ServiceManager::create
+     */
+    public function testCreateWithFactoryInstance()
+    {
+        $this->serviceManager->setFactory('foo', 'ZendTest\ServiceManager\TestAsset\FooFactory');
+        $this->assertInstanceOf('ZendTest\ServiceManager\TestAsset\Foo', $this->serviceManager->get('foo'));
+    }
+
+    /**
+     * @covers Zend\ServiceManager\ServiceManager::create
+     */
+    public function testCreateWithCallableFactory()
+    {
+        $this->serviceManager->setFactory('foo', function () { return new TestAsset\Foo; });
+        $this->assertInstanceOf('ZendTest\ServiceManager\TestAsset\Foo', $this->serviceManager->get('foo'));
+    }
+
+    /**
+     * @covers Zend\ServiceManager\ServiceManager::create
+     */
+    public function testCreateWithAbstractFactory()
+    {
+        $this->serviceManager->addAbstractFactory('ZendTest\ServiceManager\TestAsset\FooAbstractFactory');
+        $this->assertInstanceOf('ZendTest\ServiceManager\TestAsset\Foo', $this->serviceManager->get('foo'));
+    }
+
+    /**
+     * @covers Zend\ServiceManager\ServiceManager::create
+     */
+    public function testCreateWithCallableAbstractFactory()
+    {
+        $this->serviceManager->addAbstractFactory(function () { return new TestAsset\Foo; });
+        $this->assertInstanceOf('ZendTest\ServiceManager\TestAsset\Foo', $this->serviceManager->get('foo'));
+    }
+
+    public function testCreateWithInitializerObject()
+    {
+        $this->serviceManager->addInitializer(new TestAsset\FooInitializer(array('foo' => 'bar')));
+        $this->serviceManager->setFactory('foo', function () {
+            return new \stdClass();
+        });
+        $obj = $this->serviceManager->get('foo');
+        $this->assertEquals('bar', $obj->foo);
     }
 
     /**
@@ -145,7 +253,6 @@ class ServiceManagerTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Zend\ServiceManager\ServiceManager::setAlias
-     * @todo   Implement testSetAlias().
      */
     public function testSetAlias()
     {
@@ -155,38 +262,71 @@ class ServiceManagerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @covers Zend\ServiceManager\ServiceManager::setAlias
+     */
+    public function testSetAliasThrowsExceptionOnInvalidAliasName()
+    {
+        $this->setExpectedException('Zend\ServiceManager\Exception\InvalidServiceNameException');
+        $this->serviceManager->setAlias(5, 10);
+    }
+
+    /**
+     * @covers Zend\ServiceManager\ServiceManager::setAlias
+     */
+    public function testSetAliasThrowsExceptionOnEmptyAliasName()
+    {
+        $this->setExpectedException('Zend\ServiceManager\Exception\InvalidServiceNameException');
+        $this->serviceManager->setAlias('', 'foo');
+    }
+
+    /**
+     * @covers Zend\ServiceManager\ServiceManager::setAlias
+     */
+    public function testSetAliasThrowsExceptionOnDuplicateAlias()
+    {
+        $this->serviceManager->setService('foo', 'bar');
+        $this->serviceManager->setAlias('baz', 'foo');
+
+        $this->setExpectedException('Zend\ServiceManager\Exception\InvalidServiceNameException');
+        $this->serviceManager->setAlias('baz', 'foo');
+    }
+
+    /**
+     * @covers Zend\ServiceManager\ServiceManager::setAlias
+     */
+    public function testSetAliasThrowExceptionOnServiceNotFound()
+    {
+        $this->setExpectedException('Zend\ServiceManager\Exception\ServiceNotFoundException');
+        $this->serviceManager->setAlias('foo', 'bar');
+    }
+
+    /**
      * @covers Zend\ServiceManager\ServiceManager::hasAlias
-     * @todo   Implement testHasAlias().
      */
     public function testHasAlias()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->assertFalse($this->serviceManager->hasAlias('foo'));
+
+        $this->serviceManager->setService('bar', 'baz');
+        $this->serviceManager->setAlias('foo', 'bar');
+        $this->assertTrue($this->serviceManager->hasAlias('foo'));
     }
 
     /**
      * @covers Zend\ServiceManager\ServiceManager::createScopedServiceManager
-     * @todo   Implement testCreateScopedServiceManager().
      */
     public function testCreateScopedServiceManager()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->serviceManager->setService('foo', 'bar');
+        $scopedServiceManager = $this->serviceManager->createScopedServiceManager();
+        $this->assertNotSame($this->serviceManager, $scopedServiceManager);
+        $this->assertFalse($scopedServiceManager->has('foo', false));
+
+        $this->assertContains($this->serviceManager, $this->readAttribute($scopedServiceManager, 'peeringServiceManagers'));
+
+        // test child scoped
+        $childScopedServiceManager = $this->serviceManager->createScopedServiceManager(ServiceManager::SCOPE_CHILD);
+        $this->assertContains($childScopedServiceManager, $this->readAttribute($this->serviceManager, 'peeringServiceManagers'));
     }
 
-    /**
-     * @covers Zend\ServiceManager\ServiceManager::registerPeerInstanceManager
-     * @todo   Implement testRegisterPeerInstanceManager().
-     */
-    public function testRegisterPeerInstanceManager()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
-    }
 }

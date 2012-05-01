@@ -4,6 +4,6 @@ namespace Zend\ServiceManager\Exception;
 
 use Zend\ServiceManager\Exception;
 
-class InstanceNotCreatedException extends \RuntimeException implements Exception
+class ServiceNotCreatedException extends \RuntimeException implements Exception
 {
 }

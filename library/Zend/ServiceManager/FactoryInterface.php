@@ -4,5 +4,5 @@ namespace Zend\ServiceManager;
 
 interface FactoryInterface
 {
-    public function createService(ServiceManager $serviceManager);
+    public function createService(ServiceLocatorInterface $serviceLocator);
 }

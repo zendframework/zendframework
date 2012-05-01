@@ -4,35 +4,59 @@ namespace Zend\ServiceManager\Di;
 
 
 use Zend\ServiceManager\FactoryInterface,
-    Zend\ServiceManager\ServiceManager,
+    Zend\ServiceManager\ServiceLocatorInterface,
     Zend\ServiceManager\Exception,
     Zend\Di\Di,
     Zend\Di\Exception\ClassNotFoundException as DiClassNotFoundException;
 
 class DiServiceFactory extends Di implements FactoryInterface
 {
-    const USE_SM_BEFORE_DI = 'before';
-    const USE_SM_AFTER_DI  = 'after';
-    const USE_SM_NONE      = 'none';
-
-    protected $di = null;
-    protected $name = null;
-    protected $parameters = array();
-    protected $useServiceManager = self::USE_SM_AFTER_DI;
+    /**@#+
+     * constants
+     */
+    const USE_SL_BEFORE_DI = 'before';
+    const USE_SL_AFTER_DI  = 'after';
+    const USE_SL_NONE      = 'none';
+    /**@#-*/
 
     /**
-     * @var ServiceManager
+     * @var \Zend\Di\Di
      */
-    protected $serviceManager = null;
+    protected $di = null;
 
+    /**
+     * @var \Zend\Di\InstanceManager
+     */
+    protected $name = null;
 
-    public function __construct(Di $di, $name, array $parameters = array(), $useServiceManager = self::USE_SM_NONE)
+    /**
+     * @var array
+     */
+    protected $parameters = array();
+
+    /**
+     * @var string
+     */
+    protected $useServiceLocator = self::USE_SL_AFTER_DI;
+
+    /**
+     * @var ServiceLocatorInterface
+     */
+    protected $serviceLocator = null;
+
+    /**
+     * @param \Zend\Di\Di $di
+     * @param null|\Zend\Di\InstanceManager $name
+     * @param array $parameters
+     * @param string $useServiceLocator
+     */
+    public function __construct(Di $di, $name, array $parameters = array(), $useServiceLocator = self::USE_SL_NONE)
     {
         $this->di = $di;
         $this->name = $name;
         $this->parameters = $parameters;
-        if (in_array($useServiceManager, array(self::USE_SM_BEFORE_DI, self::USE_SM_AFTER_DI, self::USE_SM_NONE))) {
-            $this->useServiceManager = $useServiceManager;
+        if (in_array($useServiceLocator, array(self::USE_SL_BEFORE_DI, self::USE_SL_AFTER_DI, self::USE_SL_NONE))) {
+            $this->useServiceLocator = $useServiceLocator;
         }
 
         // since we are using this in a proxy-fashion, localize state
@@ -40,25 +64,29 @@ class DiServiceFactory extends Di implements FactoryInterface
         $this->instanceManager = $this->di->instanceManager;
     }
 
-
-    public function createService(ServiceManager $serviceManager)
+    /**
+     * @param ServiceLocatorInterface $serviceLocator
+     * @return object
+     */
+    public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        $this->serviceManager = $serviceManager;
+        $this->serviceLocator = $serviceLocator;
         return $this->get($this->name, $this->parameters, true);
     }
 
     /**
      * Override, as we want it to use the functionality defined in the proxy
      *
-     * @param  string $name
-     * @param  array $params
+     * @param string $name
+     * @param array $params
      * @return object
+     * @throws Exception\InvalidServiceNameException
      */
     public function get($name, array $params = array())
     {
         // allow this di service to get dependencies from the service locator BEFORE trying di
-        if ($this->useServiceManager == self::USE_SM_BEFORE_DI && $this->serviceManager->has($name)) {
-            return $this->serviceManager->get($name);
+        if ($this->useServiceLocator == self::USE_SL_BEFORE_DI && $this->serviceLocator->has($name)) {
+            return $this->serviceLocator->get($name);
         }
 
         try {
@@ -69,8 +97,8 @@ class DiServiceFactory extends Di implements FactoryInterface
         } catch (DiClassNotFoundException $e) {
 
             // allow this di service to get dependencies from the service locator AFTER trying di
-            if ($this->useServiceManager == self::USE_SM_AFTER_DI && $this->serviceManager->has($name)) {
-                return $this->serviceManager->get($name);
+            if ($this->useServiceLocator == self::USE_SL_AFTER_DI && $this->serviceLocator->has($name)) {
+                return $this->serviceLocator->get($name);
             } else {
                 throw new Exception\InvalidServiceNameException(
                     sprintf('Service %s was not found in this DI instance', $name),

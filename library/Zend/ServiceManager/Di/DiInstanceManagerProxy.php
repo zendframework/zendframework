@@ -3,28 +3,47 @@
 namespace Zend\ServiceManager\Di;
 
 use Zend\Di\InstanceManager as DiInstanceManager,
-    Zend\ServiceManager\ServiceManager;
+    Zend\ServiceManager\ServiceLocatorInterface;
 
 class DiInstanceManagerProxy extends DiInstanceManager
 {
+    /**
+     * @var DiInstanceManager
+     */
     protected $diInstanceManager = null;
-    protected $serviceManager = null;
 
-    public function __construct(DiInstanceManager $diInstanceManager, ServiceManager $serviceManager)
+    /**
+     * @var ServiceLocatorInterface
+     */
+    protected $serviceLocator = null;
+
+    /**
+     * @param DiInstanceManager $diInstanceManager
+     * @param ServiceLocatorInterface $serviceLocator
+     */
+    public function __construct(DiInstanceManager $diInstanceManager, ServiceLocatorInterface $serviceLocator)
     {
         $this->diInstanceManager = $diInstanceManager;
-        $this->serviceManager = $serviceManager;
+        $this->serviceLocator = $serviceLocator;
     }
 
+    /**
+     * @param $classOrAlias
+     * @return bool
+     */
     public function hasSharedInstance($classOrAlias)
     {
-        return ($this->serviceManager->has($classOrAlias) || $this->diInstanceManager->hasSharedInstance($classOrAlias));
+        return ($this->serviceLocator->has($classOrAlias) || $this->diInstanceManager->hasSharedInstance($classOrAlias));
     }
 
+    /**
+     * @param $classOrAlias
+     * @return mixed
+     */
     public function getSharedInstance($classOrAlias)
     {
-        if ($this->serviceManager->has($classOrAlias)) {
-            return $this->serviceManager->get($classOrAlias);
+        if ($this->serviceLocator->has($classOrAlias)) {
+            return $this->serviceLocator->get($classOrAlias);
         } else {
             return $this->diInstanceManager->getSharedInstance($classOrAlias);
         }

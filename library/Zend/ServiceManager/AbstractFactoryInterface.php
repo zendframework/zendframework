@@ -4,5 +4,6 @@ namespace Zend\ServiceManager;
 
 interface AbstractFactoryInterface
 {
-    public function createServiceWithName(ServiceManager $serviceManager, $name);
+    public function canCreateServiceWithName($name /*, $requestedName */);
+    public function createServiceWithName(ServiceLocatorInterface $serviceLocator, $name /*, $requestedName */);
 }

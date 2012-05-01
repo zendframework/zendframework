@@ -2,7 +2,6 @@
 
 namespace Zend\ServiceManager\Di;
 
-
 use Zend\ServiceManager\FactoryInterface,
     Zend\ServiceManager\ServiceLocatorInterface,
     Zend\ServiceManager\Exception,

@@ -20,6 +20,7 @@
  */
 
 namespace ZendTest\Paginator\Adapter;
+
 use Zend\Paginator\Adapter;
 
 /**

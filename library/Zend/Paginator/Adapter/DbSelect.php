@@ -20,17 +20,12 @@
 
 namespace Zend\Paginator\Adapter;
 
-use Zend\Db\Select,
-    Zend\Db,
-    Zend\Paginator\Adapter,
-    Zend\Paginator\Adapter\Exception;
+use Zend\Db\Select;
+use Zend\Db;
+use Zend\Paginator\Adapter;
+use Zend\Paginator\Adapter\Exception;
 
 /**
- * @uses       \Zend\Db\Db
- * @uses       \Zend\Db\Expr
- * @uses       \Zend\Db\Select
- * @uses       \Zend\Paginator\Adapter
- * @uses       Zend\Paginator\Adapter\Exception
  * @category   Zend
  * @package    Zend_Paginator
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

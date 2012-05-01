@@ -20,6 +20,7 @@
  */
 
 namespace ZendTest\Paginator\Adapter;
+
 use Zend\Db\Adapter\Pdo;
 use Zend\Paginator\Adapter;
 use Zend\Db;
@@ -39,22 +40,22 @@ require_once __DIR__ . '/../_files/TestTable.php';
 class DbSelectTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Zend_Paginator_Adapter_DbSelect
+     * @var \Zend\Paginator\Adapter\DbSelect
      */
     protected $_adapter;
 
     /**
-     * @var Zend_Db_Adapter_Pdo_Sqlite
+     * @var \Zend\Db\Adapter\Pdo\Sqlite
      */
     protected $_db;
 
     /**
-     * @var Zend_Db_Select
+     * @var \Zend\Db\Select
      */
     protected $_query;
 
     /**
-     * @var Zend_Db_Table_Abstract
+     * @var \Zend\Db\Table\Abstract
      */
     protected $_table;
 

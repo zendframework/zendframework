@@ -21,7 +21,6 @@
 
 namespace ZendTest\Paginator\Adapter\DbTableSelect;
 
-
 /**
  * @category   Zend
  * @package    Zend_Paginator

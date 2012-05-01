@@ -21,15 +21,14 @@
 
 namespace ZendTest\Paginator;
 
-use PHPUnit_Framework_TestCase as TestCase,
-    Zend\Cache\StorageFactory as CacheFactory,
-    Zend\Cache\Storage\Adapter\AdapterInterface as CacheAdapter,
-    Zend\Config,
-    Zend\Paginator,
-    Zend\Paginator\Adapter,
-    Zend\Paginator\Exception,
-    Zend\View,
-    Zend\View\Helper;
+use Zend\Cache\StorageFactory as CacheFactory;
+use Zend\Cache\Storage\Adapter\AdapterInterface as CacheAdapter;
+use Zend\Config;
+use Zend\Paginator;
+use Zend\Paginator\Adapter;
+use Zend\Paginator\Exception;
+use Zend\View;
+use Zend\View\Helper;
 
 
 /**
@@ -40,12 +39,12 @@ use PHPUnit_Framework_TestCase as TestCase,
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Paginator
  */
-class PaginatorTest extends TestCase
+class PaginatorTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * Paginator instance
      *
-     * @var Zend_Paginator
+     * @var \Zend\Paginator\Paginator
      */
     protected $_paginator = null;
 
@@ -116,7 +115,7 @@ class PaginatorTest extends TestCase
         }
         unset($file, $dir); // required on windows to remove file handle
         if (!rmdir($path)) {
-            throw new Exception('Unable to remove temporary directory ' . $path
+            throw new Exception\RuntimeException('Unable to remove temporary directory ' . $path
                                 . '; perhaps it has a nested structure?');
         }
     }
@@ -754,7 +753,7 @@ class PaginatorTest extends TestCase
     /**
      * @group ZF-7602
      */
-    public function testAcceptAndHandlePaginatorAdapterAggreageInConstructor()
+    public function testAcceptAndHandlePaginatorAdapterAggregateInConstructor()
     {
         $p = new Paginator\Paginator(new TestArrayAggregate());
 
@@ -768,9 +767,9 @@ class PaginatorTest extends TestCase
      */
     public function testInvalidDataInConstructor_ThrowsException()
     {
-        $this->setExpectedException("Zend\Paginator\Exception");
+        $this->setExpectedException('Zend\Paginator\Exception');
 
-        $p = new Paginator\Paginator(array());
+        new Paginator\Paginator(array());
     }
 
     /**

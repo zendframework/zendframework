@@ -128,7 +128,7 @@ class Navigation extends AbstractNavigationHelper
      *                                    helper is not an instance of the
      *                                    interface specified in
      *                                    {@link findHelper()}
-     * @throws \Zend\Navigation\Exception  if method does not exist in container
+     * @throws \Zend\Navigation\Exception\ExceptionInterface  if method does not exist in container
      */
     public function __call($method, array $arguments = array())
     {

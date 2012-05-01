@@ -27,7 +27,7 @@ use Zend\EventManager\EventCollection,
     Zend\Mvc\Application,
     Zend\Mvc\MvcEvent,
     Zend\Stdlib\ResponseDescription as Response,
-    Zend\View\Model\ModelInterface as ViewModel;
+    Zend\View\Model\ViewModel;
 
 /**
  * @category   Zend
@@ -159,7 +159,7 @@ class ExceptionStrategy implements ListenerAggregate
 
             case Application::ERROR_EXCEPTION:
             default:
-                $model = new ViewModel\ViewModel(array(
+                $model = new ViewModel(array(
                     'message'            => 'An error occurred during execution; please try again later.',
                     'exception'          => $e->getParam('exception'),
                     'display_exceptions' => $this->displayExceptions(),

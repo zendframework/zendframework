@@ -27,7 +27,7 @@ use Zend\EventManager\EventCollection,
     Zend\Mvc\Application,
     Zend\Mvc\MvcEvent,
     Zend\Stdlib\ResponseDescription as Response,
-    Zend\View\Model\ModelInterface as ViewModel;
+    Zend\View\Model\ViewModel;
 
 /**
  * @category   Zend
@@ -218,7 +218,7 @@ class RouteNotFoundStrategy implements ListenerAggregate
             return;
         }
 
-        $model = new ViewModel\ViewModel();
+        $model = new ViewModel();
         $model->setVariable('message', 'Page not found.');
         $model->setTemplate($this->getNotFoundTemplate());
 

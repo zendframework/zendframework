@@ -34,7 +34,7 @@ use Zend\Authentication\Storage\StorageInterface as AuthenticationStorage,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Session implements AuthenticationStorage
+class Session implements StorageInterface
 {
     /**
      * Default session namespace

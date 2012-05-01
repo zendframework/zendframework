@@ -44,8 +44,8 @@ class OracleTest extends DbSelectTest
      */
     protected function setUp ()
     {
-        $this->markTestSkipped('Will skip until Zend\Db is refactored.');
-        
+        $this->markTestIncomplete('Will skip until Zend\Db is refactored.');
+
         if (! extension_loaded('oci8')) {
             $this->markTestSkipped('Oci8 extension is not loaded');
         }
@@ -79,6 +79,7 @@ class OracleTest extends DbSelectTest
      */
     protected function tearDown ()
     {
+        $this->markTestIncomplete('Will skip until Zend\Db is refactored.');
         $this->_dropTable();
         $this->_db = null;
         $this->_adapter = null;

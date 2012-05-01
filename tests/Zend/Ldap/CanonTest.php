@@ -40,7 +40,10 @@ use Zend\Ldap,
  */
 class CanonTest extends \PHPUnit_Framework_TestCase
 {
-    protected $options = null;
+    /**
+     * @var array
+     */
+    protected $options;
 
     public function setUp()
     {
@@ -97,10 +100,8 @@ class CanonTest extends \PHPUnit_Framework_TestCase
         }
 
         foreach ($names as $form => $name) {
-            foreach ($names as $form => $name) {
-                $ret = $ldap->getCanonicalAccountName($name, $form);
-                $this->assertEquals($names[$form], $ret);
-            }
+            $ret = $ldap->getCanonicalAccountName($name, $form);
+            $this->assertEquals($names[$form], $ret);
         }
     }
 

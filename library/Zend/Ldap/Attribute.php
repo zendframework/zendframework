@@ -39,10 +39,10 @@ class Attribute
     /**
      * Sets a LDAP attribute.
      *
-     * @param  array                    $data
-     * @param  string                   $attribName
-     * @param  scalar|array|Traversable $value
-     * @param  boolean                  $append
+     * @param  array                     $data
+     * @param  string                    $attribName
+     * @param  string|array|\Traversable $value
+     * @param  boolean                   $append
      * @return void
      */
     public static function setAttribute(array &$data, $attribName, $value, $append = false)
@@ -50,14 +50,13 @@ class Attribute
         $attribName = strtolower($attribName);
         $valArray   = array();
         if (is_array($value) || ($value instanceof \Traversable)) {
-            foreach ($value as $v)
-            {
+            foreach ($value as $v) {
                 $v = self::valueToLdap($v);
                 if ($v !== null) {
                     $valArray[] = $v;
                 }
             }
-        } elseif ($value !== null) {
+        } else if ($value !== null) {
             $value = self::valueToLdap($value);
             if ($value !== null) {
                 $valArray[] = $value;
@@ -90,8 +89,7 @@ class Attribute
                 return array();
             }
             $retArray = array();
-            foreach ($data[$attribName] as $v)
-            {
+            foreach ($data[$attribName] as $v) {
                 $retArray[] = self::valueFromLDAP($v);
             }
             return $retArray;
@@ -173,8 +171,7 @@ class Attribute
         }
 
         $valArray = array();
-        foreach ($value as $v)
-        {
+        foreach ($value as $v) {
             $v = self::valueToLDAP($v);
             if ($v !== null) {
                 $valArray[] = $v;
@@ -284,16 +281,16 @@ class Attribute
     /**
      * Sets a LDAP password.
      *
-     * @param  array       $data
-     * @param  string      $password
-     * @param  string      $hashType
-     * @param  string|null $attribName
-     * @return null
+     * @param array  $data
+     * @param string $password
+     * @param string $hashType   Optional by default MD5
+     * @param string $attribName Optional
      */
     public static function setPassword(
         array &$data, $password, $hashType = self::PASSWORD_HASH_MD5,
         $attribName = null
-    ) {
+    )
+    {
         if ($attribName === null) {
             if ($hashType === self::PASSWORD_UNICODEPWD) {
                 $attribName = 'unicodePwd';
@@ -360,12 +357,11 @@ class Attribute
     /**
      * Sets a LDAP date/time attribute.
      *
-     * @param  array                     $data
-     * @param  string                    $attribName
-     * @param  integer|array|Traversable $value
-     * @param  boolean                   $utc
-     * @param  boolean                   $append
-     * @return null
+     * @param  array                      $data
+     * @param  string                     $attribName
+     * @param  integer|array|\Traversable $value
+     * @param  boolean                    $utc
+     * @param  boolean                    $append
      */
     public static function setDateTimeAttribute(
         array &$data, $attribName, $value, $utc = false,

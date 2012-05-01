@@ -232,7 +232,7 @@ class ActiveDirectory extends Node\RootDse
     /**
      * Returns the schema DN
      *
-     * @return Ldap\Dn
+     * @return \Zend\Ldap\Dn
      */
     public function getSchemaDn()
     {

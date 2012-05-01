@@ -21,8 +21,8 @@
 
 namespace Zend\Ldap\Node\Schema;
 
-use Zend\Ldap,
-Zend\Ldap\Node;
+use Zend\Ldap;
+use Zend\Ldap\Node;
 
 /**
  * Zend\Ldap\Node\Schema\ActiveDirectory provides a simple data-container for the Schema node of

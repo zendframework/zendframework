@@ -59,7 +59,7 @@ class Memcached extends AbstractAdapter
      * Constructor
      *
      * @param  null|array|Traversable|MemcachedOptions $options
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      * @return void
      */
     public function __construct($options = null)
@@ -162,7 +162,7 @@ class Memcached extends AbstractAdapter
      * @param  string $normalizedKey
      * @param  array  $normalizedOptions
      * @return mixed Data on success or false on failure
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     protected function internalGetItem(& $normalizedKey, array & $normalizedOptions)
     {
@@ -195,7 +195,7 @@ class Memcached extends AbstractAdapter
      * @param  array $normalizedKeys
      * @param  array $normalizedOptions
      * @return array Associative array of existing keys and values
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     protected function internalGetItems(array & $normalizedKeys, array & $normalizedOptions)
     {
@@ -219,7 +219,7 @@ class Memcached extends AbstractAdapter
      * @param  string $normalizedKey
      * @param  array  $normalizedOptions
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     protected function internalHasItem(& $normalizedKey, array & $normalizedOptions)
     {
@@ -250,7 +250,7 @@ class Memcached extends AbstractAdapter
      * @param  array $keys
      * @param  array $options
      * @return array Array of existing keys
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     protected function internalHasItems(array & $normalizedKeys, array & $normalizedOptions)
     {
@@ -278,7 +278,7 @@ class Memcached extends AbstractAdapter
      * @param  array $normalizedKeys
      * @param  array $normalizedOptions
      * @return array
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      *
      * @triggers getMetadatas.pre(PreEvent)
      * @triggers getMetadatas.post(PostEvent)
@@ -315,7 +315,7 @@ class Memcached extends AbstractAdapter
      * @param  mixed  $value
      * @param  array  $normalizedOptions
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     protected function internalSetItem(& $normalizedKey, & $value, array & $normalizedOptions)
     {
@@ -341,7 +341,7 @@ class Memcached extends AbstractAdapter
      * @param  array $normalizedKeyValuePairs
      * @param  array $normalizedOptions
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     protected function internalSetItems(array & $normalizedKeyValuePairs, array & $normalizedOptions)
     {
@@ -368,7 +368,7 @@ class Memcached extends AbstractAdapter
      * @param  mixed  $value
      * @param  array  $normalizedOptions
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     protected function internalAddItem(& $normalizedKey, & $value, array & $normalizedOptions)
     {
@@ -395,7 +395,7 @@ class Memcached extends AbstractAdapter
      * @param  mixed  $value
      * @param  array  $normalizedOptions
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     protected function internalReplaceItem(& $normalizedKey, & $value, array & $normalizedOptions)
     {
@@ -425,7 +425,7 @@ class Memcached extends AbstractAdapter
      * @param  mixed  $value
      * @param  array  $normalizedOptions
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      * @see    getItem()
      * @see    setItem()
      */
@@ -459,7 +459,7 @@ class Memcached extends AbstractAdapter
      * @param  string $normalizedKey
      * @param  array  $normalizedOptions
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     protected function internalRemoveItem(& $normalizedKey, array & $normalizedOptions)
     {
@@ -488,7 +488,7 @@ class Memcached extends AbstractAdapter
      * @param  array $keys
      * @param  array $options
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     protected function internalRemoveItems(array & $normalizedKeys, array & $normalizedOptions)
     {
@@ -534,7 +534,7 @@ class Memcached extends AbstractAdapter
      * @param  int    $value
      * @param  array  $normalizedOptions
      * @return int|boolean The new value or false on failure
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     protected function internalIncrementItem(& $normalizedKey, & $value, array & $normalizedOptions)
     {
@@ -574,7 +574,7 @@ class Memcached extends AbstractAdapter
      * @param  int    $value
      * @param  array  $normalizedOptions
      * @return int|boolean The new value or false on failure
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     protected function internalDecrementItem(& $normalizedKey, & $value, array & $normalizedOptions)
     {
@@ -619,7 +619,7 @@ class Memcached extends AbstractAdapter
      * @param  array $normalizedKeys
      * @param  array $normalizedOptions
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      * @see    fetch()
      * @see    fetchAll()
      */
@@ -672,7 +672,7 @@ class Memcached extends AbstractAdapter
      * Internal method to fetch the next item from result set
      *
      * @return array|boolean The next item or false
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     protected function internalFetch()
     {
@@ -707,7 +707,7 @@ class Memcached extends AbstractAdapter
      * Internal method to return all items of result set.
      *
      * @return array The result set as array containing all items
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      * @see    fetch()
      */
     protected function internalFetchAll()
@@ -735,7 +735,7 @@ class Memcached extends AbstractAdapter
      * @param  int   $normalizedMode Matching mode (Value of Adapter::MATCH_*)
      * @param  array $normalizedOptions
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      * @see    clearByNamespace()
      */
     protected function internalClear(& $normalizedMode, array & $normalizedOptions)
@@ -795,7 +795,7 @@ class Memcached extends AbstractAdapter
      *
      * @param  array $normalizedOptions
      * @return array|boolean Capacity as array or false on failure
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     protected function internalGetCapacity(array & $normalizedOptions)
     {

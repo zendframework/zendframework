@@ -24,7 +24,7 @@ namespace Zend\Cache\Storage\Plugin;
 use Traversable,
     Zend\EventManager\EventCollection,
     Zend\Cache\Exception,
-    Zend\Cache\Storage\Adapter,
+    Zend\Cache\Storage\Adapter\AdapterInterface as Adapter,
     Zend\Cache\Storage\PostEvent;
 
 /**

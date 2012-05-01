@@ -20,7 +20,7 @@
  */
 
 namespace ZendTest\Cache\Storage\Adapter;
-use Zend\Cache\Storage\Adapter,
+use Zend\Cache\Storage\Adapter\AdapterInterface as Adapter,
     Zend\Cache,
     Zend\Stdlib\ErrorHandler;
 
@@ -42,7 +42,7 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
     /**
      * The storage adapter
      *
-     * @var Zend\Cache\Storage\Adapter
+     * @var Zend\Cache\Storage\Adapter\AdapterInterface
      */
     protected $_storage;
 
@@ -59,7 +59,7 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->assertInstanceOf(
-            'Zend\Cache\Storage\Adapter',
+            'Zend\Cache\Storage\Adapter\AdapterInterface',
             $this->_storage,
             'Storage adapter instance is needed for tests'
         );
@@ -651,7 +651,7 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertTrue($this->_storage->setItem('key', 'value'));
 
-        $this->setExpectedException('Zend\Cache\Exception');
+        $this->setExpectedException('Zend\Cache\Exception\ExceptionInterface');
         $this->_storage->addItem('key', 'newValue');
     }
 
@@ -888,7 +888,7 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->_storage->setItem('key', 'value'));
         $this->assertTrue($this->_storage->getDelayed(array('key')));
 
-        $this->setExpectedException('Zend\Cache\Exception');
+        $this->setExpectedException('Zend\Cache\Exception\ExceptionInterface');
         $this->_storage->getDelayed(array('key'));
     }
 
@@ -1127,7 +1127,7 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
     {
         $capabilities = $this->_storage->getCapabilities();
         if (!$capabilities->getClearAllNamespaces()) {
-            $this->setExpectedException('Zend\Cache\Exception');
+            $this->setExpectedException('Zend\Cache\Exception\ExceptionInterface');
             $this->_storage->clear(Adapter::MATCH_ALL);
             return;
         }

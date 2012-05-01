@@ -21,7 +21,7 @@
 
 namespace ZendTest\Measure;
 use Zend\Cache\StorageFactory as CacheFactory,
-    Zend\Cache\Storage\Adapter as CacheAdapter,
+    Zend\Cache\Storage\Adapter\AdapterInterface as CacheAdapter,
     Zend\Locale\Locale;
 
 /**

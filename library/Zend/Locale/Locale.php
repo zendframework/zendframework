@@ -20,7 +20,7 @@
 
 namespace Zend\Locale;
 
-use Zend\Cache\Storage\Adapter as CacheAdapter,
+use Zend\Cache\Storage\Adapter\AdapterInterface as CacheAdapter,
     Zend\Registry;
 
 /**

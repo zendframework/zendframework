@@ -56,7 +56,7 @@ abstract class AbstractZendServer extends AbstractAdapter
      * @param  string $normalizedKey
      * @param  array  $normalizedOptions
      * @return mixed Data on success or false on failure
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     protected function internalGetItem(& $normalizedKey, array & $normalizedOptions)
     {
@@ -83,7 +83,7 @@ abstract class AbstractZendServer extends AbstractAdapter
      * @param  array $normalizedKeys
      * @param  array $normalizedOptions
      * @return array Associative array of existing keys and values
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     protected function internalGetItems(array & $normalizedKeys, array & $normalizedOptions)
     {
@@ -114,7 +114,7 @@ abstract class AbstractZendServer extends AbstractAdapter
      * @param  string $normalizedKey
      * @param  array  $normalizedOptions
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     protected function internalHasItem(& $normalizedKey, array & $normalizedOptions)
     {
@@ -132,7 +132,7 @@ abstract class AbstractZendServer extends AbstractAdapter
      * @param  array $keys
      * @param  array $options
      * @return array Array of existing keys
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     protected function internalHasItems(array & $normalizedKeys, array & $normalizedOptions)
     {
@@ -201,7 +201,7 @@ abstract class AbstractZendServer extends AbstractAdapter
      * @param  mixed  $value
      * @param  array  $normalizedOptions
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     protected function internalSetItem(& $normalizedKey, & $value, array & $normalizedOptions)
     {
@@ -222,7 +222,7 @@ abstract class AbstractZendServer extends AbstractAdapter
      * @param  string $normalizedKey
      * @param  array  $normalizedOptions
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     protected function internalRemoveItem(& $normalizedKey, array & $normalizedOptions)
     {
@@ -242,7 +242,7 @@ abstract class AbstractZendServer extends AbstractAdapter
      * @param  int   $normalizedMode Matching mode (Value of Adapter::MATCH_*)
      * @param  array $normalizedOptions
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      * @see    clearByNamespace()
      */
     protected function internalClear(& $normalizedMode, array & $normalizedOptions)
@@ -267,7 +267,7 @@ abstract class AbstractZendServer extends AbstractAdapter
      * @param  int   $normalizedMode Matching mode (Value of Adapter::MATCH_*)
      * @param  array $normalizedOptions
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      * @see    clear()
      */
     protected function internalClearByNamespace(& $normalizedMode, array & $normalizedOptions)

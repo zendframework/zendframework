@@ -66,7 +66,7 @@ class ExceptionEvent extends Event
      * @param  Exception $exception
      * @return void
      */
-    public function __construct($name, Adapter $storage, ArrayObject $params, Exception $exception)
+    public function __construct($name, Adapter\AdapterInterface $storage, ArrayObject $params, Exception $exception)
     {
         parent::__construct($name, $storage, $params);
         $this->setException($exception);

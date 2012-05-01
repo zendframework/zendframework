@@ -196,7 +196,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
             try {
                 $page->setFragment($invalid);
                 $this->fail('An invalid value was set, but a ' .
-                            'Zend_Navigation_Exception was not thrown');
+                            'Zend\Navigation\Exception\InvalidArgumentException was not thrown');
             } catch (Navigation\Exception\InvalidArgumentException $e) {
                 $this->assertContains(
                     'Invalid argument: $fragment', $e->getMessage()

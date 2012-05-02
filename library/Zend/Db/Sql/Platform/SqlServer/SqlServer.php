@@ -2,35 +2,21 @@
 
 namespace Zend\Db\Sql\Platform\SqlServer;
 
-use Zend\Db\Sql\Platform\PlatformInterface,
+use Zend\Db\Sql\Platform\AbstractPlatform,
     Zend\Db\Sql\PreparableSqlInterface,
     Zend\Db\Adapter\Driver\StatementInterface,
     Zend\Db\Adapter\Adapter,
     Zend\Db\Sql\Select;
 
-class SqlServer implements PlatformInterface
+class SqlServer extends AbstractPlatform
 {
-    protected $adapter = null;
 
-    public function __construct(Adapter $adapter)
+    /**
+     * @param Adapter $adapter
+     */
+    public function __construct(SelectDecorator $selectDecorator = null)
     {
-        $this->adapter = $adapter;
+        $this->setTypeDecorator('Zend\Db\Sql\Select', ($selectDecorator) ?: new SelectDecorator());
     }
 
-    public function supportsSqlObject(PreparableSqlInterface $sqlObject)
-    {
-        if ($sqlObject instanceof Select) {
-            return true;
-        }
-        return false;
-    }
-
-    public function prepareStatementFromSqlObject(PreparableSqlInterface $sqlObject, StatementInterface $statement = null)
-    {
-        if ($sqlObject instanceof Select) {
-            $selectProxy = new SelectProxy($sqlObject);
-            $selectProxy->prepareStatement($this->adapter, ($statement) ?: $this->adapter->createStatement());
-        }
-        return $statement;
-    }
 }

@@ -25,8 +25,7 @@ use Zend\Db\Adapter\Adapter,
     Zend\Db\Adapter\Driver\StatementInterface,
     Zend\Db\Adapter\Platform\PlatformInterface,
     Zend\Db\Adapter\Platform\Sql92 as AdapterSql92Platform,
-    Zend\Db\Adapter\ParameterContainer,
-    Zend\Db\Adapter\ParameterContainerInterface;
+    Zend\Db\Adapter\ParameterContainer;
 
 /**
  * @category   Zend
@@ -380,7 +379,7 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
     {
         // ensure statement has a ParameterContainer
         $parameterContainer = $statement->getParameterContainer();
-        if (!$parameterContainer instanceof ParameterContainerInterface) {
+        if (!$parameterContainer instanceof ParameterContainer) {
             $parameterContainer = new ParameterContainer();
             $statement->setParameterContainer($parameterContainer);
         }
@@ -430,7 +429,7 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
 
 
 
-    protected function processSelect(PlatformInterface $platform, Adapter $adapter = null, ParameterContainerInterface $parameterContainer = null)
+    protected function processSelect(PlatformInterface $platform, Adapter $adapter = null, ParameterContainer $parameterContainer = null)
     {
         $expr = 1;
         
@@ -504,7 +503,7 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
         return array($columns, $table);
     }
     
-    protected function processJoin(PlatformInterface $platform, Adapter $adapter = null, ParameterContainerInterface $parameterContainer = null)
+    protected function processJoin(PlatformInterface $platform, Adapter $adapter = null, ParameterContainer $parameterContainer = null)
     {
         if (!$this->joins) {
             return null;
@@ -522,7 +521,7 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
         return array($joinSpecArgArray);
     }
 
-    protected function processWhere(PlatformInterface $platform, Adapter $adapter = null, ParameterContainerInterface $parameterContainer = null)
+    protected function processWhere(PlatformInterface $platform, Adapter $adapter = null, ParameterContainer $parameterContainer = null)
     {
         if ($this->where->count() == 0) {
             return null;
@@ -534,7 +533,7 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
         return array($whereParts['sql']);
     }
 
-    protected function processGroup(PlatformInterface $platform, Adapter $adapter = null, ParameterContainerInterface $parameterContainer = null)
+    protected function processGroup(PlatformInterface $platform, Adapter $adapter = null, ParameterContainer $parameterContainer = null)
     {
         if ($this->group === null) {
             return null;
@@ -557,7 +556,7 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
         return array($groups);
     }
 
-    protected function processHaving(PlatformInterface $platform, Adapter $adapter = null, ParameterContainerInterface $parameterContainer = null)
+    protected function processHaving(PlatformInterface $platform, Adapter $adapter = null, ParameterContainer $parameterContainer = null)
     {
         if ($this->having->count() == 0) {
             return null;
@@ -569,7 +568,7 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
         return array($whereParts['sql']);
     }
 
-    protected function processOrder(PlatformInterface $platform, Adapter $adapter = null, ParameterContainerInterface $parameterContainer = null)
+    protected function processOrder(PlatformInterface $platform, Adapter $adapter = null, ParameterContainer $parameterContainer = null)
     {
         if (empty($this->order)) {
             return null;
@@ -593,7 +592,7 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
         return array($orders);
     }
 
-    protected function processLimit(PlatformInterface $platform, Adapter $adapter = null, ParameterContainerInterface $parameterContainer = null)
+    protected function processLimit(PlatformInterface $platform, Adapter $adapter = null, ParameterContainer $parameterContainer = null)
     {
         if ($this->limit === null) {
             return null;
@@ -609,7 +608,7 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
         return array($sql);
     }
 
-    protected function processOffset(PlatformInterface $platform, Adapter $adapter = null, ParameterContainerInterface $parameterContainer = null)
+    protected function processOffset(PlatformInterface $platform, Adapter $adapter = null, ParameterContainer $parameterContainer = null)
     {
         if ($this->offset === null) {
             return null;

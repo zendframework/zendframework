@@ -25,7 +25,6 @@ use Zend\Db\Adapter\Adapter,
     Zend\Db\Adapter\Driver\StatementInterface,
     Zend\Db\Adapter\Platform\PlatformInterface,
     Zend\Db\Adapter\Platform\Sql92,
-    Zend\Db\Adapter\ParameterContainerInterface,
     Zend\Db\Adapter\ParameterContainer;
 
 /**
@@ -150,7 +149,7 @@ class Insert implements SqlInterface, PreparableSqlInterface
         $platform = $adapter->getPlatform();
         $parameterContainer = $statement->getParameterContainer();
 
-        if (!$parameterContainer instanceof ParameterContainerInterface) {
+        if (!$parameterContainer instanceof ParameterContainer) {
             $parameterContainer = new ParameterContainer();
             $statement->setParameterContainer($parameterContainer);
         }

@@ -202,13 +202,13 @@ class Adapter
      * Create statement
      * 
      * @param  string $initialSql
-     * @param  ParameterContainerInterface $initialParameters
+     * @param  ParameterContainer $initialParameters
      * @return Driver\StatementInterface 
      */
     public function createStatement($initialSql = null, $initialParameters = null)
     {
         $statement = $this->driver->createStatement($initialSql);
-        if ($initialParameters == null || !$initialParameters instanceof ParameterContainerInterface && is_array($initialParameters)) {
+        if ($initialParameters == null || !$initialParameters instanceof ParameterContainer && is_array($initialParameters)) {
             $initialParameters = new ParameterContainer((is_array($initialParameters) ? $initialParameters : array()));
         }
         $statement->setParameterContainer($initialParameters);

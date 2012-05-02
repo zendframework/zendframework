@@ -21,8 +21,6 @@
 
 namespace Zend\Db\Adapter;
 
-use Iterator;
-
 /**
  * @category   Zend
  * @package    Zend_Db
@@ -30,8 +28,15 @@ use Iterator;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ParameterContainer implements Iterator, ParameterContainerInterface
+class ParameterContainer implements \Iterator, \ArrayAccess
 {
+
+    const TYPE_AUTO    = 'auto';
+    const TYPE_NULL    = 'null';
+    const TYPE_DOUBLE  = 'double';
+    const TYPE_INTEGER = 'integer';
+    const TYPE_STRING  = 'string';
+    const TYPE_LOB     = 'lob';
 
     /**
      * Data
@@ -39,6 +44,10 @@ class ParameterContainer implements Iterator, ParameterContainerInterface
      * @var array
      */
     protected $data = array();
+
+    /**
+     * @var array
+     */
     protected $positions = array();
 
     /**
@@ -63,28 +72,32 @@ class ParameterContainer implements Iterator, ParameterContainerInterface
     /**
      * Offset exists
      * 
-     * @param  string $nameOrPosition
+     * @param  string $name
      * @return boolean 
      */
-    public function offsetExists($nameOrPosition)
+    public function offsetExists($name)
     {
-        return (isset($this->data[$nameOrPosition]));
+        return (isset($this->data[$name]));
     }
 
     /**
      * Offset get
      * 
-     * @param  string $nameOrPosition
+     * @param  string $name
      * @return mixed 
      */
-    public function offsetGet($nameOrPosition)
+    public function offsetGet($name)
     {
-        return $this->data[$nameOrPosition];
+        return (isset($this->data[$name])) ? $this->data[$name] : null;
     }
 
-    public function offsetSetReference($nameOrPosition, $from)
+    /**
+     * @param $name
+     * @param $from
+     */
+    public function offsetSetReference($name, $from)
     {
-        $this->data[$nameOrPosition] = &$this->data[$from];
+        $this->data[$name] =& $this->data[$from];
     }
     
     /**
@@ -110,17 +123,15 @@ class ParameterContainer implements Iterator, ParameterContainerInterface
     /**
      * Offset unset
      * 
-     * @param  string $nameOrPosition
+     * @param  string $name
      * @return ParameterContainer 
      */
-    public function offsetUnset($nameOrPosition)
+    public function offsetUnset($name)
     {
-        if (is_int($nameOrPosition)) {
-            $name = $this->positions[$nameOrPosition];
-        } else {
-            $name = $nameOrPosition;
+        if (is_int($name)) {
+            $name = $this->positions[$name];
         }
-        unset($this->data[$nameOrPosition]);
+        unset($this->data[$name]);
         return $this;
     }
 
@@ -141,15 +152,15 @@ class ParameterContainer implements Iterator, ParameterContainerInterface
     /**
      * Offset set errata
      * 
-     * @param string|integer $nameOrPosition
+     * @param string|integer $name
      * @param mixed $errata 
      */
-    public function offsetSetErrata($nameOrPosition, $errata)
+    public function offsetSetErrata($name, $errata)
     {
-        if (is_int($nameOrPosition)) {
-            $name = $this->positions[$nameOrPosition];
+        if (is_int($name)) {
+            $name = $this->positions[$name];
         } else {
-            $name = $nameOrPosition;
+            $name = $name;
         }
         if (!array_key_exists($name, $this->errata)) {
             throw new \InvalidArgumentException('Data does not exist for this name/position');
@@ -160,15 +171,13 @@ class ParameterContainer implements Iterator, ParameterContainerInterface
     /**
      * Offset get errata
      * 
-     * @param  string|integer $nameOrPosition
+     * @param  string|integer $name
      * @return mixed 
      */
-    public function offsetGetErrata($nameOrPosition)
+    public function offsetGetErrata($name)
     {
-        if (is_int($nameOrPosition)) {
-            $name = $this->positions[$nameOrPosition];
-        } else {
-            $name = $nameOrPosition;
+        if (is_int($name)) {
+            $name = $this->positions[$name];
         }
         if (!array_key_exists($name, $this->errata)) {
             throw new \InvalidArgumentException('Data does not exist for this name/position');
@@ -179,15 +188,13 @@ class ParameterContainer implements Iterator, ParameterContainerInterface
     /**
      * Offset has errata
      * 
-     * @param  string|integer $nameOrPosition
+     * @param  string|integer $name
      * @return boolean 
      */
-    public function offsetHasErrata($nameOrPosition)
+    public function offsetHasErrata($name)
     {
-        if (is_int($nameOrPosition)) {
-            $name = $this->positions[$nameOrPosition];
-        } else {
-            $name = $nameOrPosition;
+        if (is_int($name)) {
+            $name = $this->positions[$name];
         }
         if (!array_key_exists($name, $this->errata)) {
             throw new \InvalidArgumentException('Data does not exist for this name/position');
@@ -198,14 +205,12 @@ class ParameterContainer implements Iterator, ParameterContainerInterface
     /**
      * Offset unset errata
      * 
-     * @param string|integer $nameOrPosition 
+     * @param string|integer $name
      */
-    public function offsetUnsetErrata($nameOrPosition)
+    public function offsetUnsetErrata($name)
     {
-        if (is_int($nameOrPosition)) {
-            $name = $this->positions[$nameOrPosition];
-        } else {
-            $name = $nameOrPosition;
+        if (is_int($name)) {
+            $name = $this->positions[$name];
         }
         if (!array_key_exists($name, $this->errata)) {
             throw new \InvalidArgumentException('Data does not exist for this name/position');

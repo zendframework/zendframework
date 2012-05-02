@@ -816,24 +816,24 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
 
         // find
         $this->checkPreEventCanChangeArguments('find', array(
-            'mode' => Cache\Storage\Adapter::MATCH_ACTIVE,
+            'mode' => Cache\Storage\Adapter\AdapterInterface::MATCH_ACTIVE,
         ), array(
-            'mode'    => Cache\Storage\Adapter::MATCH_ALL,
+            'mode'    => Cache\Storage\Adapter\AdapterInterface::MATCH_ALL,
             'options' => array('ttl' => 456)
         ));
 
         // clear[ByNamespace]
         $this->checkPreEventCanChangeArguments('clear', array(
-            'mode' => Cache\Storage\Adapter::MATCH_ACTIVE,
+            'mode' => Cache\Storage\Adapter\AdapterInterface::MATCH_ACTIVE,
         ), array(
-            'mode'    => Cache\Storage\Adapter::MATCH_ALL,
+            'mode'    => Cache\Storage\Adapter\AdapterInterface::MATCH_ALL,
             'options' => array('ttl' => 456)
         ));
 
         $this->checkPreEventCanChangeArguments('clearByNamespace', array(
-            'mode' => Cache\Storage\Adapter::MATCH_ACTIVE,
+            'mode' => Cache\Storage\Adapter\AdapterInterface::MATCH_ACTIVE,
         ), array(
-            'mode'    => Cache\Storage\Adapter::MATCH_ALL,
+            'mode'    => Cache\Storage\Adapter\AdapterInterface::MATCH_ALL,
             'options' => array('ttl' => 456)
         ));
 

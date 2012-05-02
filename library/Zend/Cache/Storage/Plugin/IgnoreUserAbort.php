@@ -22,7 +22,6 @@
 namespace Zend\Cache\Storage\Plugin;
 
 use Zend\Cache\Exception,
-    Zend\Cache\Storage\Adapter,
     Zend\Cache\Storage\Event,
     Zend\EventManager\EventCollection;
 
@@ -45,7 +44,7 @@ class IgnoreUserAbort extends AbstractPlugin
     /**
      * The storage adapter target who activated ignore_user_abort.
      *
-     * @var null|Adapter\AdapterInterface
+     * @var null|\Zend\Cache\Storage\Adapter\AdapterInterface
      */
     protected $activatedTarget = null;
 

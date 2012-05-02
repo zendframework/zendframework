@@ -9,6 +9,8 @@ class CachingFileScannerTest extends \PHPUnit_Framework_TestCase
 {
     public function testCachingFileScannerWillUseSameInternalFileScannerWithMatchingFileNameAnAnnotationManagerObject()
     {
+        CachingFileScanner::clearCache();
+
         // single entry, based on file
         $cfs1 = new CachingFileScanner(__DIR__ . '/../TestAsset/BarClass.php');
         $this->assertContains('ZendTest\Code\TestAsset\BarClass', $cfs1->getClassNames());

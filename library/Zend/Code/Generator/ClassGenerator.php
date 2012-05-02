@@ -139,7 +139,7 @@ class ClassGenerator extends AbstractGenerator
         $methods = array();
         foreach ($classReflection->getMethods() as $reflectionMethod) {
             /* @var $reflectionMethod \MethodReflection\Code\Reflection\ReflectionMethod */
-            if ($reflectionMethod->getDeclaringClass()->getName() == $cg->getName()) {
+            if ($reflectionMethod->getDeclaringClass()->getName() == $cg->getNamespaceName()."\\".$cg->getName()) {
                 $methods[] = MethodGenerator::fromReflection($reflectionMethod);
             }
         }
@@ -195,14 +195,10 @@ class ClassGenerator extends AbstractGenerator
                     $cg->setImplementedInterfaces($value);
                     break;
                 case 'properties':
-                    foreach ($value as $pValue) {
-                        $cg->setProperty((!$pValue instanceof PropertyGenerator) ?: PropertyGenerator::fromArray($pValue));
-                    }
+                    $cg->setProperties($value);
                     break;
                 case 'methods':
-                    foreach ($value as $mValue) {
-                        $cg->setMethod((!$mValue instanceof MethodGenerator) ?: MethodGenerator::fromArray($mValue));
-                    }
+                    $cg->setMethods($value);
                     break;
             }
         }
@@ -458,10 +454,31 @@ class ClassGenerator extends AbstractGenerator
     public function setProperties(array $properties)
     {
         foreach ($properties as $property) {
-            $this->setProperty($property);
+            if ($property instanceof PropertyGenerator) {
+                $this->setProperty($property);
+            } else {
+                if (is_string($property)) {
+                    $this->addProperty($property);
+                } else if (is_array($property)) {
+                    call_user_func_array(array($this, 'addProperty'), $property);
+                }
+            }
         }
 
         return $this;
+    }
+
+    /**
+     * @see 
+     */
+    public function addProperty($name, $defaultValue = null, $flags = PropertyGenerator::FLAG_PUBLIC)
+    {
+        if (!is_string($name)) {
+            throw new Exception\InvalidArgumentException('setProperty() expects either a string or an instance of Zend\Code\Generator\PropertyGenerator');
+        }
+
+        $property = new PropertyGenerator($name, $defaultValue, $flags);
+        $this->setProperty($property);
     }
 
     /**
@@ -471,6 +488,7 @@ class ClassGenerator extends AbstractGenerator
      * @return ClassGenerator
      */
     public function setProperty(PropertyGenerator $property)
+    //public function addPropertyGenerator(PropertyGenerator $property)
     {
         //if (is_string($property)) {
         //    $property = new PropertyGenerator($property);
@@ -534,10 +552,31 @@ class ClassGenerator extends AbstractGenerator
     public function setMethods(array $methods)
     {
         foreach ($methods as $method) {
-            $this->setMethod($method);
+            if ($method instanceof MethodGenerator) {
+                $this->setMethod($method);
+            } else {
+                if (is_string($method)) {
+                    $this->addMethod($method);
+                } else if (is_array($method)){
+                    call_user_func_array(array($this, 'addMethod'), $method);
+                }
+            }
         }
         return $this;
     }
+
+    /**
+     * Add Method from scalars
+     */
+    public function addMethod($name = null, array $parameters = array(), $flags = MethodGenerator::FLAG_PUBLIC, $body = null, $docblock = null)
+    {
+        if (!is_string($name)) {
+            throw new Exception\InvalidArgumentException('setMethod() expects either a string method name or an instance of Zend\Code\Generator\MethodGenerator');
+        }
+        $method = new MethodGenerator($name, $parameters, $flags, $body, $docblock);
+        $this->setMethod($method);
+    }
+
 
     /**
      * setMethod()
@@ -546,6 +585,7 @@ class ClassGenerator extends AbstractGenerator
      * @return \ClassGenerator\Code\Generator\PhpClass
      */
     public function setMethod(MethodGenerator $method)
+    //public function setMethodGenerator(MethodGenerator $method)
     {
         //if (is_string($method)) {
         //    $method = new MethodGenerator($method);

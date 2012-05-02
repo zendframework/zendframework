@@ -115,6 +115,7 @@ class FileGenerator extends AbstractGenerator
             /* @var $class \Zend\Code\Reflection\ReflectionClass */
             $phpClass = ClassGenerator::fromReflection($class);
             $phpClass->setContainingFileGenerator($file);
+            
             $file->setClass($phpClass);
             $classStartLine = $class->getStartLine(true);
             $classEndLine = $class->getEndLine();
@@ -140,8 +141,9 @@ class FileGenerator extends AbstractGenerator
         }
 
         $namespace = $fileReflection->getNamespace();
+
         if ($namespace != '') {
-            $file->setNamespace($fileReflection->getNamespace());
+            $file->setNamespace($namespace);
         }
 
         $uses = $fileReflection->getUses();
@@ -480,7 +482,13 @@ class FileGenerator extends AbstractGenerator
 
         // if there are markers, put the body into the output
         if (preg_match('#/\* Zend_CodeGenerator_Php_File-(.*?)Marker:#', $body)) {
-            $output .= $body;
+            $tokens = token_get_all($body);
+            foreach($tokens as $token) {
+                if (is_array($token) && in_array($token[0], array(T_OPEN_TAG, T_COMMENT, T_DOC_COMMENT, T_WHITESPACE))) {
+                    $output .= $token[1];
+                }
+            }
+            //$output .= $body;
             $body    = '';
         }
 
@@ -537,6 +545,9 @@ class FileGenerator extends AbstractGenerator
                 if (preg_match('#'.$regex.'#', $output)) {
                     $output = preg_replace('#'.$regex.'#', $class->generate(), $output, 1);
                 } else {
+                    if ($namespace) {
+                        $class->setNamespaceName(null);
+                    }
                     $output .= $class->generate() . self::LINE_FEED;
                 }
             }

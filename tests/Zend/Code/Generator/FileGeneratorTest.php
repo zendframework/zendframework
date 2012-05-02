@@ -20,7 +20,8 @@
  */
 
 namespace ZendTest\Code\Generator;
-use Zend\Code\Generator\FileGenerator,
+use Zend\Code\Generator\ClassGenerator,
+    Zend\Code\Generator\FileGenerator,
     Zend\Code\Reflection\FileReflection;
 
 /**
@@ -59,10 +60,10 @@ class FileGeneratorTest extends \PHPUnit_Framework_TestCase
 
     public function testToString()
     {
-        $codeGenFile = new FileGenerator(array(
+        $codeGenFile = FileGenerator::fromArray(array(
             'requiredFiles' => array('SampleClass.php'),
             'class' => array(
-                'abstract' => true,
+                'flags' => ClassGenerator::FLAG_ABSTRACT,
                 'name' => 'SampleClass',
                 'extendedClass' => 'ExtendedClassName',
                 'implementedInterfaces' => array('Iterator', 'Traversable')
@@ -92,7 +93,7 @@ EOS;
     {
         $tempFile = tempnam(sys_get_temp_dir(), 'UnitFile');
 
-        $codeGenFile = new FileGenerator(array(
+        $codeGenFile = FileGenerator::fromArray(array(
             'class' => array(
                 'name' => 'SampleClass'
                 )
@@ -117,9 +118,9 @@ EOS;
         $file = __DIR__ . '/TestAsset/TestSampleSingleClass.php';
         require_once $file;
 
-        $codeGenFileFromDisk = FileGenerator::fromReflection(new FileReflection($file));
+        $codeGenFileFromDisk = FileGenerator::fromReflection($fileRefl = new FileReflection($file));
 
-        $codeGenFileFromDisk->getClass()->setMethod(array('name' => 'foobar'));
+        $codeGenFileFromDisk->getClass()->addMethod('foobar');
 
         $expectedOutput = <<<EOS
 <?php
@@ -127,25 +128,29 @@ EOS;
  * File header here
  *
  * @author Ralph Schindler <ralph.schindler@zend.com>
- *
  */
+
+ 
+
+/* Zend_CodeGenerator_Php_File-ClassMarker: {ZendTest\Code\Generator\TestAsset\TestSampleSingleClass} */
+
 
 namespace ZendTest\Code\Generator\TestAsset;
 
 /**
  * class docblock
- *
+ * 
  * @package Zend_Reflection_TestSampleSingleClass
- *
+ * 
  */
 class TestSampleSingleClass
 {
 
     /**
      * Enter description here...
-     *
+     * 
      * @return bool
-     *
+     * 
      */
     public function someMethod()
     {
@@ -161,12 +166,14 @@ class TestSampleSingleClass
 
 
 EOS;
+        //echo $codeGenFileFromDisk->generate();die;
         $this->assertEquals($expectedOutput, $codeGenFileFromDisk->generate());
     }
 
     public function testFileLineEndingsAreAlwaysLineFeed()
     {
-        $codeGenFile = new FileGenerator(array(
+        //$codeGenFile = new FileGenerator(array(
+        $codeGenFile = FileGenerator::fromArray(array(
             'requiredFiles' => array('SampleClass.php'),
             'class' => array(
                 'abstract' => true,
@@ -177,7 +184,7 @@ EOS;
             ));
 
         // explode by newline, this would leave CF in place if it were generated
-        $lines = explode("\n", $codeGenFile);
+        $lines = explode("\n", $codeGenFile->generate());
 
         $targetLength = strlen('require_once \'SampleClass.php\';');
         $this->assertEquals($targetLength, strlen($lines[2]));

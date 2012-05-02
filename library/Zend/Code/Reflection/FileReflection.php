@@ -266,7 +266,8 @@ class FileReflection implements Reflection
      */
     public function getContents()
     {
-        return $this->contents;
+        return file_get_contents($this->filePath);
+        //return $this->contents;
     }
 
     public function toString()

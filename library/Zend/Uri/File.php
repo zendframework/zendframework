@@ -57,6 +57,7 @@ class File extends Uri
      *
      * @see    Uri::setUserInfo()
      * @throws Exception\InvalidUriPartException
+     * @return File
      */
     public function setUserInfo($userInfo)
     {
@@ -68,6 +69,7 @@ class File extends Uri
      *
      * @see    Uri::setFragment()
      * @throws Exception\InvalidUriPartException
+     * @return File
      */
     public function setFragment($fragment)
     {

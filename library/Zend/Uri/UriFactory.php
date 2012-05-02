@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -21,6 +20,7 @@
  */
 
 namespace Zend\Uri;
+
 use Zend\Uri\Uri;
 
 /**
@@ -75,6 +75,7 @@ abstract class UriFactory
      *
      * @param  string $uri
      * @param  string $defaultScheme
+     * @throws Exception\InvalidArgumentException
      * @return \Zend\Uri\Uri
      */
     static public function factory($uriString, $defaultScheme = null)

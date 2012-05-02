@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *

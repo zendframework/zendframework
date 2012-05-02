@@ -169,7 +169,7 @@ class Digest implements AuthenticationAdapter
     }
 
     /**
-     * Defined by Zend_Auth_Adapter_Interface
+     * Defined by Zend\Authentication\Adapter\AdapterInterface
      *
      * @throws Zend\Authentication\Adapter\Exception\ExceptionInterface
      * @return Zend\Authentication\Result

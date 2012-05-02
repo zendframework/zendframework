@@ -318,10 +318,10 @@ class DbTable implements AuthenticationAdapter
     }
 
     /**
-     * authenticate() - defined by Zend\Auth\Adapter\AdapterInterface. This method is called to
-     * attempt an authentication.  Previous to this call, this adapter would have already
-     * been configured with all necessary information to successfully connect to a database
-     * table and attempt to find a record matching the provided identity.
+     * This method is called to attempt an authentication. Previous to this
+     * call, this adapter would have already been configured with all
+     * necessary information to successfully connect to a database table and
+     * attempt to find a record matching the provided identity.
      *
      * @throws Exception\RuntimeException if answering the authentication query is impossible
      * @return AuthenticationResult
@@ -488,8 +488,8 @@ class DbTable implements AuthenticationAdapter
     }
 
     /**
-     * _authenticateCreateAuthResult() - Creates a Zend\Auth\Result object from
-     * the information that has been collected during the authenticate() attempt.
+     * Creates a Zend\Authentication\Result object from the information that
+     * has been collected during the authenticate() attempt.
      *
      * @return AuthenticationResult
      */

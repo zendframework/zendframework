@@ -14,7 +14,14 @@ class Forward extends AbstractPlugin
 {
     protected $event;
     protected $locator;
-    protected $actionStack = array();
+    protected $maxNestedForwards = 10;
+    protected $numNestedForwards = 0;
+
+    public function setMaxNestedForwards($maxNestedForwards)
+    {
+        $this->maxNestedForwards = (int) $maxNestedForwards;
+        return $this;
+    }
 
     /**
      * Dispatch another controller
@@ -49,15 +56,14 @@ class Forward extends AbstractPlugin
             $event->setRouteMatch($matches);
         }
 
-        $actionKey = get_class($controller) . ':' . (isset($params['action'])?$params['action']:'index');
-        if (in_array($actionKey, $this->actionStack)) {
-            throw new Exception\DomainException("Circular forwarding detected: $actionKey is already in the stack");
+        if ($this->numNestedForwards > $this->maxNestedForwards) {
+            throw new Exception\DomainException("Circular forwarding detected: greater than $this->maxNestedForwards nested forwards");
         }
-        array_push($this->actionStack, $actionKey);
+        $this->numNestedForwards++;
 
         $return = $controller->dispatch($event->getRequest(), $event->getResponse());
 
-        array_pop($this->actionStack);
+        $this->numNestedForwards--;
 
         if ($cachedMatches) {
             $event->setRouteMatch($cachedMatches);

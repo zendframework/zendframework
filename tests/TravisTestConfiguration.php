@@ -94,7 +94,7 @@ defined('TESTS_ZEND_CONFIG_READER_YAML_CALLBACK') || define('TESTS_ZEND_CONFIG_R
 defined('TESTS_ZEND_CONTROLLER_DISPATCHER_OB') || define('TESTS_ZEND_CONTROLLER_DISPATCHER_OB', false);
 
 /**
- * Zend\Crypt related constantes
+ * Zend\Crypt related constants
  *
  * TESTS_ZEND_CRYPT_OPENSSL_CONF => location of an openssl.cnf file for use
  *     with RSA encryption
@@ -255,7 +255,7 @@ defined('TESTS_ZEND_GDATA_SPREADSHEETS_WORKSHEETID') || define('TESTS_ZEND_GDATA
 defined('TESTS_ZEND_GDATA_CALENDAR_ONLINE_ENABLED') || define('TESTS_ZEND_GDATA_CALENDAR_ONLINE_ENABLED', false);
 
 /*
- * This is the fully-qualified domain name for a domiain hosted using
+ * This is the fully-qualified domain name for a domain hosted using
  * Google Apps. This domain must be registered with Google Apps and
  * have API access enabled. This should be a TEST domain only.
  */

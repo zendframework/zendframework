@@ -21,8 +21,6 @@
 
 namespace Zend\Authentication\Exception;
 
-use Zend\Authentication\Exception;
-
 /**
  * @category   Zend
  * @package    Zend_Authentication

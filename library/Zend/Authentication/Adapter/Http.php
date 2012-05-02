@@ -21,8 +21,7 @@
 
 namespace Zend\Authentication\Adapter;
 
-use Zend\Authentication\Adapter\AdapterInterface as AuthenticationAdapter,
-    Zend\Authentication,
+use Zend\Authentication,
     Zend\Http\Request as HTTPRequest,
     Zend\Http\Response as HTTPResponse,
     Zend\Uri\UriFactory;
@@ -41,7 +40,7 @@ use Zend\Authentication\Adapter\AdapterInterface as AuthenticationAdapter,
  * @todo       Track nonces, nonce-count, opaque for replay protection and stale support
  * @todo       Support Authentication-Info header
  */
-class Http implements AuthenticationAdapter
+class Http implements AdapterInterface
 {
     /**
      * Reference to the HTTP Request object

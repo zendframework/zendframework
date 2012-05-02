@@ -21,8 +21,6 @@
 
 namespace Zend\Authentication\Storage;
 
-use Zend\Authentication\Storage as AuthenticationStorage;
-
 /**
  * Non-Persistent Authentication Storage
  *

@@ -20,8 +20,8 @@
  */
 
 namespace Zend\Authentication\Adapter;
-use Zend\Authentication\Adapter\AdapterInterface as AuthenticationAdapter,
-    Zend\Authentication\Result as AuthenticationResult,
+
+use Zend\Authentication\Result as AuthenticationResult,
     Zend\Db\Adapter\Adapter as DbAdapter,
     Zend\Db\Sql\Select as DbSelect,
     Zend\Db\Sql\Expression,
@@ -34,7 +34,7 @@ use Zend\Authentication\Adapter\AdapterInterface as AuthenticationAdapter,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class DbTable implements AuthenticationAdapter
+class DbTable implements AdapterInterface
 {
 
     /**

@@ -105,7 +105,10 @@ class JsonRenderer implements Renderer, TreeRendererInterface
      */
     public function setJsonpCallback($callback)
     {
-        $this->jsonpCallback = $callback;
+        $callback = (string) $callback;
+        if (!empty($callback)) {
+            $this->jsonpCallback = $callback;
+        }
         return $this;
     }
 

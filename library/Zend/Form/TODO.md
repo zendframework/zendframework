@@ -1,6 +1,25 @@
 Forms TODO
 ==========
 
+BETA4 MUST HAVES
+----------------
+
+* CAPTCHA view helper
+  * Accept an element, pull the "captcha" attribute, and call render() on the
+    captcha
+  * Potentially a "captcha" element, with a dedicated property?
+* Remove "InputFilterAwareInterface" from forms
+
+RFC Items
+---------
+
+* Builder component
+  * Introspect a class for annotations and build a form
+    * Each "element" can specify:
+      * filters and validators to use to build an input for the input filter
+      * attributes for use with the form element
+  * Should be able to generate a form class
+
 WISH LIST
 ---------
 

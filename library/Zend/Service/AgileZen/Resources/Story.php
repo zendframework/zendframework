@@ -161,7 +161,7 @@ class Story extends Entity
         if (isset($data['owner']) && !empty($data['owner'])) {
             $this->owner = new User($service, $data['owner']);
         }
-        if (isset($data['tags']) && is_array($data['tags'])) {
+        if (isset($data['tags']) && is_array($data['tags']) && !empty($data['tags'])) {
             $this->tags = new Container($service, $data['tags'], 'tag', $this->projectId);
         }
 

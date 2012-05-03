@@ -42,7 +42,7 @@ class CommonPatternTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->assertInstanceOf(
-            'Zend\Cache\Pattern',
+            'Zend\Cache\Pattern\PatternInterface',
             $this->_pattern,
             'Internal pattern instance is needed for tests'
         );

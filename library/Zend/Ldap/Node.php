@@ -40,7 +40,7 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
     protected $newDn;
 
     /**
-     * Holds the node's orginal attributes (as loaded).
+     * Holds the node's original attributes (as loaded).
      *
      * @var array
      */
@@ -119,8 +119,6 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
      * Deserialization callback
      *
      * Enforces a detached node.
-     *
-     * @return null
      */
     public function __wakeup()
     {
@@ -322,7 +320,7 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
     }
 
     /**
-     * Tells if the node is consiedered as new (not present on the server)
+     * Tells if the node is considered as new (not present on the server)
      *
      * Please note, that this doesn't tell you if the node is present on the server.
      * Use {@link exits()} to see if a node is already there.
@@ -798,9 +796,7 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
      * This is an offline method.
      *
      * @param  string $name
-     * @param  mixed  $value
-     * @return null
-     * @throws Exception\LdapException
+     * @param         $value
      */
     public function __set($name, $value)
     {
@@ -815,7 +811,6 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
      * This is an offline method.
      *
      * @param  string $name
-     * @return null
      * @throws Exception\LdapException
      */
     public function __unset($name)
@@ -831,7 +826,6 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
      *
      * @param  string $name
      * @param  mixed  $value
-     * @return null
      * @throws Exception\LdapException
      */
     public function offsetSet($name, $value)
@@ -848,7 +842,6 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
      * This is an offline method.
      *
      * @param  string $name
-     * @return null
      * @throws Exception\LdapException
      */
     public function offsetUnset($name)

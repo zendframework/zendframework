@@ -23,7 +23,6 @@ namespace Zend\Cache\Storage\Adapter;
 
 use ArrayObject,
     Zend\Cache\Exception,
-    Zend\Cache\Storage\Adapter,
     Zend\Cache\Storage\Event,
     Zend\Stdlib\Options;
 
@@ -117,10 +116,10 @@ class AdapterOptions extends Options
     /**
      * Adapter using this instance
      *
-     * @param  Adapter|null $adapter
+     * @param  AdapterInterface|null $adapter
      * @return AdapterOptions
      */
-    public function setAdapter(Adapter $adapter = null)
+    public function setAdapter(AdapterInterface $adapter = null)
     {
         $this->adapter = $adapter;
         return $this;

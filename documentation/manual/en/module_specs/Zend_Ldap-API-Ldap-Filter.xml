@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.ldap.api.reference.zend-ldap-filter"><title>Zend_Ldap_Filter</title>
-    
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.ldap.api.reference.zend-ldap-filter"><title>Zend\Ldap\Filter</title>
 
-    <table xml:id="zend.ldap.api.reference.zend-filter.table"><title>Zend_Ldap_Filter API</title>
-        
+
+    <table xml:id="zend.ldap.api.reference.zend-filter.table"><title>Zend\Ldap\Filter API</title>
+
 
         <tgroup cols="2">
             <thead>
@@ -18,7 +18,7 @@
             <tbody>
                 <row>
                     <entry>
-                        <emphasis><code>Zend_Ldap_Filter equals(string $attr,
+                        <emphasis><code>Zend\Ldap\Filter equals(string $attr,
                         string $value)</code> </emphasis>
                     </entry>
 
@@ -30,7 +30,7 @@
 
                 <row>
                     <entry>
-                        <emphasis><code>Zend_Ldap_Filter begins(string $attr,
+                        <emphasis><code>Zend\Ldap\Filter begins(string $attr,
                         string $value)</code> </emphasis>
                     </entry>
 
@@ -42,7 +42,7 @@
 
                 <row>
                     <entry>
-                        <emphasis><code>Zend_Ldap_Filter ends(string $attr, string
+                        <emphasis><code>Zend\Ldap\Filter ends(string $attr, string
                         $value)</code> </emphasis>
                     </entry>
 
@@ -54,7 +54,7 @@
 
                 <row>
                     <entry>
-                        <emphasis><code>Zend_Ldap_Filter contains(string $attr,
+                        <emphasis><code>Zend\Ldap\Filter contains(string $attr,
                         string $value)</code> </emphasis>
                     </entry>
 
@@ -66,7 +66,7 @@
 
                 <row>
                     <entry>
-                        <emphasis><code>Zend_Ldap_Filter greater(string $attr,
+                        <emphasis><code>Zend\Ldap\Filter greater(string $attr,
                         string $value)</code> </emphasis>
                     </entry>
 
@@ -78,7 +78,7 @@
 
                 <row>
                     <entry>
-                        <emphasis><code>Zend_Ldap_Filter greaterOrEqual(string
+                        <emphasis><code>Zend\Ldap\Filter greaterOrEqual(string
                         $attr, string $value)</code> </emphasis>
                     </entry>
 
@@ -90,7 +90,7 @@
 
                 <row>
                     <entry>
-                        <emphasis><code>Zend_Ldap_Filter less(string $attr, string
+                        <emphasis><code>Zend\Ldap\Filter less(string $attr, string
                         $value)</code> </emphasis>
                     </entry>
 
@@ -102,7 +102,7 @@
 
                 <row>
                     <entry>
-                        <emphasis><code>Zend_Ldap_Filter lessOrEqual(string $attr,
+                        <emphasis><code>Zend\Ldap\Filter lessOrEqual(string $attr,
                         string $value)</code> </emphasis>
                     </entry>
 
@@ -114,7 +114,7 @@
 
                 <row>
                     <entry>
-                        <emphasis><code>Zend_Ldap_Filter approx(string $attr,
+                        <emphasis><code>Zend\Ldap\Filter approx(string $attr,
                         string $value)</code> </emphasis>
                     </entry>
 
@@ -126,7 +126,7 @@
 
                 <row>
                     <entry>
-                        <emphasis><code>Zend_Ldap_Filter any(string $attr)</code>
+                        <emphasis><code>Zend\Ldap\Filter any(string $attr)</code>
                         </emphasis>
                     </entry>
 
@@ -135,7 +135,7 @@
 
                 <row>
                     <entry>
-                        <emphasis><code>Zend_Ldap_Filter string(string
+                        <emphasis><code>Zend\Ldap\Filter string(string
                         $filter)</code> </emphasis>
                     </entry>
 
@@ -148,7 +148,7 @@
 
                 <row>
                     <entry>
-                        <emphasis><code>Zend_Ldap_Filter mask(string $mask, string
+                        <emphasis><code>Zend\Ldap\Filter mask(string $mask, string
                         $value,...)</code> </emphasis>
                     </entry>
 
@@ -163,8 +163,8 @@
 
                 <row>
                     <entry>
-                        <emphasis><code>Zend_Ldap_Filter
-                        andFilter(Zend_Ldap_Filter_Abstract $filter,...)</code>
+                        <emphasis><code>Zend\Ldap\Filter
+                        andFilter(Zend\Ldap\Filter\AbstractFilter $filter,...)</code>
                         </emphasis>
                     </entry>
 
@@ -173,8 +173,8 @@
 
                 <row>
                     <entry>
-                        <emphasis><code>Zend_Ldap_Filter
-                        orFilter(Zend_Ldap_Filter_Abstract $filter,...)</code>
+                        <emphasis><code>Zend\Ldap\Filter
+                        orFilter(Zend\Ldap\Filter\AbstractFilter $filter,...)</code>
                         </emphasis>
                     </entry>
 
@@ -207,19 +207,19 @@
 
                     <entry>
                         Returns a string representation of the filter. Proxies to
-                        <methodname>Zend_Ldap_Filter::toString()</methodname>.
+                        <methodname>Zend\Ldap\Filter::toString()</methodname>.
                     </entry>
                 </row>
 
                 <row>
-                    <entry><code>Zend_Ldap_Filter_Abstract negate()</code></entry>
+                    <entry><code>Zend\Ldap\Filter\AbstractFilter negate()</code></entry>
                     <entry>Negates the current filter.</entry>
                 </row>
 
                 <row>
                     <entry>
-                        <code>Zend_Ldap_Filter_Abstract
-                        addAnd(Zend_Ldap_Filter_Abstract $filter,...)</code>
+                        <code>Zend\Ldap\Filter\AbstractFilter
+                        addAnd(Zend\Ldap\Filter\AbstractFilter $filter,...)</code>
                     </entry>
 
                     <entry>
@@ -230,8 +230,8 @@
 
                 <row>
                     <entry>
-                        <code>Zend_Ldap_Filter_Abstract
-                        addOr(Zend_Ldap_Filter_Abstract $filter,...)</code>
+                        <code>Zend\Ldap\Filter\AbstractFilter
+                        addOr(Zend\Ldap\Filter\AbstractFilter $filter,...)</code>
                     </entry>
 
                     <entry>
@@ -266,7 +266,7 @@
 
                     <entry>
                         Undoes the conversion done by
-                        <methodname>Zend_Ldap_Filter::escapeValue()</methodname>. Converts any
+                        <methodname>Zend\Ldap\Filter::escapeValue()</methodname>. Converts any
                         sequences of a backslash followed by two hex digits into the
                         corresponding character.
                     </entry>

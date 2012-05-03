@@ -238,8 +238,8 @@ class SitemapTest extends AbstractTest
         try {
             $this->_helper->setServerUrl('site.example.org');
             $this->fail('An invalid server URL was given, but a ' .
-                        'Zend\URI\Exception was not thrown');
-        } catch (\Zend\URI\Exception $e) {
+                        'Zend\URI\Exception\ExceptionInterface was not thrown');
+        } catch (\Zend\URI\Exception\ExceptionInterface $e) {
             $this->assertContains('Illegal scheme', $e->getMessage());
         }
     }

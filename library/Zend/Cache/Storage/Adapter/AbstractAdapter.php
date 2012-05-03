@@ -26,14 +26,14 @@ use ArrayObject,
     stdClass,
     Traversable,
     Zend\Cache\Exception,
-    Zend\Cache\Storage\Adapter,
     Zend\Cache\Storage\Capabilities,
     Zend\Cache\Storage\Event,
     Zend\Cache\Storage\ExceptionEvent,
     Zend\Cache\Storage\PostEvent,
     Zend\Cache\Storage\Plugin,
     Zend\EventManager\EventCollection,
-    Zend\EventManager\EventManager;
+    Zend\EventManager\EventManager,
+    Zend\EventManager\EventManagerAware;
 
 /**
  * @category   Zend
@@ -42,7 +42,7 @@ use ArrayObject,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class AbstractAdapter implements Adapter
+abstract class AbstractAdapter implements AdapterInterface, EventManagerAware
 {
     /**
      * The used EventManager if any
@@ -110,7 +110,7 @@ abstract class AbstractAdapter implements Adapter
      * Constructor
      *
      * @param  null|array|Traversable|AdapterOptions $options
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      * @return void
      */
     public function __construct($options = null)
@@ -289,7 +289,7 @@ abstract class AbstractAdapter implements Adapter
      * @param  string $eventName
      * @param  ArrayObject $args
      * @param  \Exception $exception
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      * @return mixed
      */
     protected function triggerException($eventName, ArrayObject $args, \Exception $exception)
@@ -311,10 +311,10 @@ abstract class AbstractAdapter implements Adapter
     /**
      * Check if a plugin is registered
      *
-     * @param  Plugin $plugin
+     * @param  Plugin\PluginInterface $plugin
      * @return boolean
      */
-    public function hasPlugin(Plugin $plugin)
+    public function hasPlugin(Plugin\PluginInterface $plugin)
     {
         $registry = $this->getPluginRegistry();
         return $registry->contains($plugin);
@@ -323,11 +323,11 @@ abstract class AbstractAdapter implements Adapter
     /**
      * Register a plugin
      *
-     * @param  Plugin $plugin
+     * @param  Plugin\PluginInterface $plugin
      * @return AbstractAdapter Fluent interface
      * @throws Exception\LogicException
      */
-    public function addPlugin(Plugin $plugin)
+    public function addPlugin(Plugin\PluginInterface $plugin)
     {
         $registry = $this->getPluginRegistry();
         if ($registry->contains($plugin)) {
@@ -346,11 +346,11 @@ abstract class AbstractAdapter implements Adapter
     /**
      * Unregister an already registered plugin
      *
-     * @param  Plugin $plugin
+     * @param  Plugin\PluginInterface $plugin
      * @return AbstractAdapter Fluent interface
      * @throws Exception\LogicException
      */
-    public function removePlugin(Plugin $plugin)
+    public function removePlugin(Plugin\PluginInterface $plugin)
     {
         $registry = $this->getPluginRegistry();
         if ($registry->contains($plugin)) {
@@ -386,7 +386,7 @@ abstract class AbstractAdapter implements Adapter
      * @param  string $key
      * @param  array  $options
      * @return mixed Data on success and false on failure
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      *
      * @triggers getItem.pre(PreEvent)
      * @triggers getItem.post(PostEvent)
@@ -411,7 +411,7 @@ abstract class AbstractAdapter implements Adapter
                 return $eventRs->last();
             }
 
-            $result = $this->internalGetItem($key, $options);
+            $result = $this->internalGetItem($args['key'], $args['options']);
             return $this->triggerPost(__FUNCTION__, $args, $result);
         } catch (\Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
@@ -432,7 +432,7 @@ abstract class AbstractAdapter implements Adapter
      * @param  string $normalizedKey
      * @param  array  $normalizedOptions
      * @return mixed Data on success or false on failure
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     abstract protected function internalGetItem(& $normalizedKey, array &$normalizedOptions);
 
@@ -448,7 +448,7 @@ abstract class AbstractAdapter implements Adapter
      * @param  array $keys
      * @param  array $options
      * @return array Associative array of existing keys and values
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      *
      * @triggers getItems.pre(PreEvent)
      * @triggers getItems.post(PostEvent)
@@ -473,7 +473,7 @@ abstract class AbstractAdapter implements Adapter
                 return $eventRs->last();
             }
 
-            $result = $this->internalGetItems($keys, $options);
+            $result = $this->internalGetItems($args['keys'], $args['options']);
             return $this->triggerPost(__FUNCTION__, $args, $result);
         } catch (\Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
@@ -492,7 +492,7 @@ abstract class AbstractAdapter implements Adapter
      * @param  array $normalizedKeys
      * @param  array $normalizedOptions
      * @return array Associative array of existing keys and values
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     protected function internalGetItems(array & $normalizedKeys, array & $normalizedOptions)
     {
@@ -523,7 +523,7 @@ abstract class AbstractAdapter implements Adapter
      * @param  string $key
      * @param  array  $options
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      *
      * @triggers hasItem.pre(PreEvent)
      * @triggers hasItem.post(PostEvent)
@@ -548,7 +548,7 @@ abstract class AbstractAdapter implements Adapter
                 return $eventRs->last();
             }
 
-            $result = $this->internalHasItem($key, $options);
+            $result = $this->internalHasItem($args['key'], $args['options']);
             return $this->triggerPost(__FUNCTION__, $args, $result);
         } catch (\Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
@@ -567,7 +567,7 @@ abstract class AbstractAdapter implements Adapter
      * @param  string $normalizedKey
      * @param  array  $normalizedOptions
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     protected function internalHasItem(& $normalizedKey, array & $normalizedOptions)
     {
@@ -591,7 +591,7 @@ abstract class AbstractAdapter implements Adapter
      * @param  array $keys
      * @param  array $options
      * @return array Array of existing keys
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      *
      * @triggers hasItems.pre(PreEvent)
      * @triggers hasItems.post(PostEvent)
@@ -616,7 +616,7 @@ abstract class AbstractAdapter implements Adapter
                 return $eventRs->last();
             }
 
-            $result = $this->internalHasItems($keys, $options);
+            $result = $this->internalHasItems($args['keys'], $args['options']);
             return $this->triggerPost(__FUNCTION__, $args, $result);
         } catch (\Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
@@ -635,7 +635,7 @@ abstract class AbstractAdapter implements Adapter
      * @param  array $keys
      * @param  array $options
      * @return array Array of existing keys
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     protected function internalHasItems(array & $normalizedKeys, array & $normalizedOptions)
     {
@@ -660,7 +660,7 @@ abstract class AbstractAdapter implements Adapter
      * @param  string $key
      * @param  array  $options
      * @return array|boolean Metadata or false on failure
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      *
      * @triggers getMetadata.pre(PreEvent)
      * @triggers getMetadata.post(PostEvent)
@@ -685,7 +685,7 @@ abstract class AbstractAdapter implements Adapter
                 return $eventRs->last();
             }
 
-            $result = $this->internalGetMetadata($key, $options);
+            $result = $this->internalGetMetadata($args['key'], $args['options']);
             return $this->triggerPost(__FUNCTION__, $args, $result);
         } catch (\Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
@@ -704,7 +704,7 @@ abstract class AbstractAdapter implements Adapter
      * @param  string $normalizedKey
      * @param  array  $normalizedOptions
      * @return array|boolean Metadata or false on failure
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     protected function internalGetMetadata(& $normalizedKey, array & $normalizedOptions)
     {
@@ -733,7 +733,7 @@ abstract class AbstractAdapter implements Adapter
      * @param  array $keys
      * @param  array $options
      * @return array Associative array of existing cache ids and its metadata
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      *
      * @triggers getMetadatas.pre(PreEvent)
      * @triggers getMetadatas.post(PostEvent)
@@ -758,7 +758,7 @@ abstract class AbstractAdapter implements Adapter
                 return $eventRs->last();
             }
 
-            $result = $this->internalGetMetadatas($keys, $options);
+            $result = $this->internalGetMetadatas($args['keys'], $args['options']);
             return $this->triggerPost(__FUNCTION__, $args, $result);
         } catch (\Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
@@ -777,7 +777,7 @@ abstract class AbstractAdapter implements Adapter
      * @param  array $normalizedKeys
      * @param  array $normalizedOptions
      * @return array Associative array of existing cache ids and its metadata
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     protected function internalGetMetadatas(array & $normalizedKeys, array & $normalizedOptions)
     {
@@ -817,7 +817,7 @@ abstract class AbstractAdapter implements Adapter
      * @param  mixed  $value
      * @param  array  $options
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      *
      * @triggers setItem.pre(PreEvent)
      * @triggers setItem.post(PostEvent)
@@ -843,7 +843,7 @@ abstract class AbstractAdapter implements Adapter
                 return $eventRs->last();
             }
 
-            $result = $this->internalSetItem($key, $value, $options);
+            $result = $this->internalSetItem($args['key'], $args['value'], $args['options']);
             return $this->triggerPost(__FUNCTION__, $args, $result);
         } catch (\Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
@@ -865,7 +865,7 @@ abstract class AbstractAdapter implements Adapter
      * @param  mixed  $value
      * @param  array  $normalizedOptions
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     abstract protected function internalSetItem(& $normalizedKey, & $value, array & $normalizedOptions);
 
@@ -883,7 +883,7 @@ abstract class AbstractAdapter implements Adapter
      * @param  array $keyValuePairs
      * @param  array $options
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      *
      * @triggers setItems.pre(PreEvent)
      * @triggers setItems.post(PostEvent)
@@ -908,7 +908,7 @@ abstract class AbstractAdapter implements Adapter
                 return $eventRs->last();
             }
 
-            $result = $this->internalSetItems($keyValuePairs, $options);
+            $result = $this->internalSetItems($args['keyValuePairs'], $args['options']);
             return $this->triggerPost(__FUNCTION__, $args, $result);
         } catch (\Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
@@ -929,7 +929,7 @@ abstract class AbstractAdapter implements Adapter
      * @param  array $normalizedKeyValuePairs
      * @param  array $normalizedOptions
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     protected function internalSetItems(array & $normalizedKeyValuePairs, array & $normalizedOptions)
     {
@@ -955,7 +955,7 @@ abstract class AbstractAdapter implements Adapter
      * @param  mixed  $value
      * @param  array  $options
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      *
      * @triggers addItem.pre(PreEvent)
      * @triggers addItem.post(PostEvent)
@@ -981,7 +981,7 @@ abstract class AbstractAdapter implements Adapter
                 return $eventRs->last();
             }
 
-            $result = $this->internalAddItem($key, $value, $options);
+            $result = $this->internalAddItem($args['key'], $args['value'], $args['options']);
             return $this->triggerPost(__FUNCTION__, $args, $result);
         } catch (\Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
@@ -1003,7 +1003,7 @@ abstract class AbstractAdapter implements Adapter
      * @param  mixed  $value
      * @param  array  $normalizedOptions
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     protected function internalAddItem(& $normalizedKey, & $value, array & $normalizedOptions)
     {
@@ -1027,7 +1027,7 @@ abstract class AbstractAdapter implements Adapter
      * @param  array $keyValuePairs
      * @param  array $options
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      *
      * @triggers addItems.pre(PreEvent)
      * @triggers addItems.post(PostEvent)
@@ -1052,7 +1052,7 @@ abstract class AbstractAdapter implements Adapter
                 return $eventRs->last();
             }
 
-            $result = $this->internalAddItems($keyValuePairs, $options);
+            $result = $this->internalAddItems($args['keyValuePairs'], $args['options']);
             return $this->triggerPost(__FUNCTION__, $args, $result);
         } catch (\Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
@@ -1073,7 +1073,7 @@ abstract class AbstractAdapter implements Adapter
      * @param  array $normalizedKeyValuePairs
      * @param  array $normalizedOptions
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     protected function internalAddItems(array & $normalizedKeyValuePairs, array & $normalizedOptions)
     {
@@ -1099,7 +1099,7 @@ abstract class AbstractAdapter implements Adapter
      * @param  mixed  $value
      * @param  array  $options
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      *
      * @triggers replaceItem.pre(PreEvent)
      * @triggers replaceItem.post(PostEvent)
@@ -1125,7 +1125,7 @@ abstract class AbstractAdapter implements Adapter
                 return $eventRs->last();
             }
 
-            $result = $this->internalReplaceItem($key, $value, $options);
+            $result = $this->internalReplaceItem($args['key'], $args['value'], $args['options']);
             return $this->triggerPost(__FUNCTION__, $args, $result);
         } catch (\Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
@@ -1147,7 +1147,7 @@ abstract class AbstractAdapter implements Adapter
      * @param  mixed  $value
      * @param  array  $normalizedOptions
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     protected function internalReplaceItem(& $normalizedKey, & $value, array & $normalizedOptions)
     {
@@ -1172,7 +1172,7 @@ abstract class AbstractAdapter implements Adapter
      * @param  array $keyValuePairs
      * @param  array $options
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      *
      * @triggers replaceItems.pre(PreEvent)
      * @triggers replaceItems.post(PostEvent)
@@ -1197,7 +1197,7 @@ abstract class AbstractAdapter implements Adapter
                 return $eventRs->last();
             }
 
-            $result = $this->internalReplaceItems($keyValuePairs, $options);
+            $result = $this->internalReplaceItems($args['keyValuePairs'], $args['options']);
             return $this->triggerPost(__FUNCTION__, $args, $result);
         } catch (\Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
@@ -1218,7 +1218,7 @@ abstract class AbstractAdapter implements Adapter
      * @param  array $normalizedKeyValuePairs
      * @param  array $normalizedOptions
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     protected function internalReplaceItems(array & $normalizedKeyValuePairs, array & $normalizedOptions)
     {
@@ -1249,7 +1249,7 @@ abstract class AbstractAdapter implements Adapter
      * @param  mixed  $value
      * @param  array  $options
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      * @see    getItem()
      * @see    setItem()
      */
@@ -1262,6 +1262,7 @@ abstract class AbstractAdapter implements Adapter
         $this->normalizeOptions($options);
         $this->normalizeKey($key);
         $args = new ArrayObject(array(
+            'token'   => & $token,
             'key'     => & $key,
             'value'   => & $value,
             'options' => & $options,
@@ -1273,7 +1274,7 @@ abstract class AbstractAdapter implements Adapter
                 return $eventRs->last();
             }
 
-            $result = $this->internalCheckAndSetItem($token, $key, $value, $options);
+            $result = $this->internalCheckAndSetItem($args['token'], $args['key'], $args['value'], $args['options']);
             return $this->triggerPost(__FUNCTION__, $args, $result);
         } catch (\Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
@@ -1296,7 +1297,7 @@ abstract class AbstractAdapter implements Adapter
      * @param  mixed  $value
      * @param  array  $normalizedOptions
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      * @see    getItem()
      * @see    setItem()
      */
@@ -1322,7 +1323,7 @@ abstract class AbstractAdapter implements Adapter
      * @param  string $key
      * @param  array  $options
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      *
      * @triggers touchItem.pre(PreEvent)
      * @triggers touchItem.post(PostEvent)
@@ -1347,7 +1348,7 @@ abstract class AbstractAdapter implements Adapter
                 return $eventRs->last();
             }
 
-            $result = $this->internalTouchItem($key, $options);
+            $result = $this->internalTouchItem($args['key'], $args['options']);
             return $this->triggerPost(__FUNCTION__, $args, $result);
         } catch (\Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
@@ -1366,7 +1367,7 @@ abstract class AbstractAdapter implements Adapter
      * @param  string $normalizedKey
      * @param  array  $normalizedOptions
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     protected function internalTouchItem(& $normalizedKey, array & $normalizedOptions)
     {
@@ -1403,7 +1404,7 @@ abstract class AbstractAdapter implements Adapter
      * @param  array $keys
      * @param  array $options
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      *
      * @triggers touchItems.pre(PreEvent)
      * @triggers touchItems.post(PostEvent)
@@ -1428,7 +1429,7 @@ abstract class AbstractAdapter implements Adapter
                 return $eventRs->last();
             }
 
-            $result = $this->internalTouchItems($keys, $options);
+            $result = $this->internalTouchItems($args['keys'], $args['options']);
             return $this->triggerPost(__FUNCTION__, $args, $result);
         } catch (\Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
@@ -1447,7 +1448,7 @@ abstract class AbstractAdapter implements Adapter
      * @param  array $normalizedKeys
      * @param  array $normalizedOptions
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     protected function internalTouchItems(array & $normalizedKeys, array & $normalizedOptions)
     {
@@ -1470,7 +1471,7 @@ abstract class AbstractAdapter implements Adapter
      * @param  string $key
      * @param  array  $options
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      *
      * @triggers removeItem.pre(PreEvent)
      * @triggers removeItem.post(PostEvent)
@@ -1495,7 +1496,7 @@ abstract class AbstractAdapter implements Adapter
                 return $eventRs->last();
             }
 
-            $result = $this->internalRemoveItem($key, $options);
+            $result = $this->internalRemoveItem($args['key'], $args['options']);
             return $this->triggerPost(__FUNCTION__, $args, $result);
         } catch (\Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
@@ -1514,7 +1515,7 @@ abstract class AbstractAdapter implements Adapter
      * @param  string $normalizedKey
      * @param  array  $normalizedOptions
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     abstract protected function internalRemoveItem(& $normalizedKey, array & $normalizedOptions);
 
@@ -1530,7 +1531,7 @@ abstract class AbstractAdapter implements Adapter
      * @param  array $keys
      * @param  array $options
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      *
      * @triggers removeItems.pre(PreEvent)
      * @triggers removeItems.post(PostEvent)
@@ -1555,7 +1556,7 @@ abstract class AbstractAdapter implements Adapter
                 return $eventRs->last();
             }
 
-            $result = $this->internalRemoveItems($keys, $options);
+            $result = $this->internalRemoveItems($args['keys'], $args['options']);
             return $this->triggerPost(__FUNCTION__, $args, $result);
         } catch (\Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
@@ -1574,7 +1575,7 @@ abstract class AbstractAdapter implements Adapter
      * @param  array $keys
      * @param  array $options
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     protected function internalRemoveItems(array & $normalizedKeys, array & $normalizedOptions)
     {
@@ -1612,7 +1613,7 @@ abstract class AbstractAdapter implements Adapter
      * @param  int    $value
      * @param  array  $options
      * @return int|boolean The new value or false on failure
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      *
      * @triggers incrementItem.pre(PreEvent)
      * @triggers incrementItem.post(PostEvent)
@@ -1638,7 +1639,7 @@ abstract class AbstractAdapter implements Adapter
                 return $eventRs->last();
             }
 
-            $result = $this->internalIncrementItem($key, $value, $options);
+            $result = $this->internalIncrementItem($args['key'], $args['value'], $args['options']);
             return $this->triggerPost(__FUNCTION__, $args, $result);
         } catch (\Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
@@ -1660,7 +1661,7 @@ abstract class AbstractAdapter implements Adapter
      * @param  int    $value
      * @param  array  $normalizedOptions
      * @return int|boolean The new value or false on failure
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     protected function internalIncrementItem(& $normalizedKey, & $value, array & $normalizedOptions)
     {
@@ -1685,7 +1686,7 @@ abstract class AbstractAdapter implements Adapter
      * @param  array $keyValuePairs
      * @param  array $options
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      *
      * @triggers incrementItems.pre(PreEvent)
      * @triggers incrementItems.post(PostEvent)
@@ -1710,7 +1711,7 @@ abstract class AbstractAdapter implements Adapter
                 return $eventRs->last();
             }
 
-            $result = $this->internatIncrementItems($keyValuePairs, $options);
+            $result = $this->internalIncrementItems($args['keyValuePairs'], $args['options']);
             return $this->triggerPost(__FUNCTION__, $args, $result);
         } catch (\Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
@@ -1731,13 +1732,13 @@ abstract class AbstractAdapter implements Adapter
      * @param  array $normalizedKeyValuePairs
      * @param  array $normalizedOptions
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
-    protected function internatIncrementItems(array & $normalizedKeyValuePairs, array & $normalizedOptions)
+    protected function internalIncrementItems(array & $normalizedKeyValuePairs, array & $normalizedOptions)
     {
         $ret = true;
         foreach ($normalizedKeyValuePairs as $normalizedKey => $value) {
-            $ret = ($this->incrementItem($normalizedKey, $value, $normalizedOptions) !== false) && $ret;
+            $ret = ($this->internalIncrementItem($normalizedKey, $value, $normalizedOptions) !== false) && $ret;
         }
         return $ret;
     }
@@ -1757,7 +1758,7 @@ abstract class AbstractAdapter implements Adapter
      * @param  int    $value
      * @param  array  $options
      * @return int|boolean The new value or false on failure
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      *
      * @triggers decrementItem.pre(PreEvent)
      * @triggers decrementItem.post(PostEvent)
@@ -1783,7 +1784,7 @@ abstract class AbstractAdapter implements Adapter
                 return $eventRs->last();
             }
 
-            $result = $this->internalDecrementItem($key, $value, $options);
+            $result = $this->internalDecrementItem($args['key'], $args['value'], $args['options']);
             return $this->triggerPost(__FUNCTION__, $args, $result);
         } catch (\Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
@@ -1805,7 +1806,7 @@ abstract class AbstractAdapter implements Adapter
      * @param  int    $value
      * @param  array  $normalizedOptions
      * @return int|boolean The new value or false on failure
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     protected function internalDecrementItem(& $normalizedKey, & $value, array & $normalizedOptions)
     {
@@ -1830,7 +1831,7 @@ abstract class AbstractAdapter implements Adapter
      * @param  array $keyValuePairs
      * @param  array $options
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      *
      * @triggers incrementItems.pre(PreEvent)
      * @triggers incrementItems.post(PostEvent)
@@ -1855,7 +1856,7 @@ abstract class AbstractAdapter implements Adapter
                 return $eventRs->last();
             }
 
-            $result = $this->internatDecrementItems($keyValuePairs, $options);
+            $result = $this->internalDecrementItems($args['keyValuePairs'], $args['options']);
             return $this->triggerPost(__FUNCTION__, $args, $result);
         } catch (\Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
@@ -1876,9 +1877,9 @@ abstract class AbstractAdapter implements Adapter
      * @param  array $normalizedKeyValuePairs
      * @param  array $normalizedOptions
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
-    protected function internatDecrementItems(array & $normalizedKeyValuePairs, array & $normalizedOptions)
+    protected function internalDecrementItems(array & $normalizedKeyValuePairs, array & $normalizedOptions)
     {
         $ret = true;
         foreach ($normalizedKeyValuePairs as $normalizedKey => $value) {
@@ -1908,7 +1909,7 @@ abstract class AbstractAdapter implements Adapter
      * @param  array $keys
      * @param  array $options
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      * @see    fetch()
      * @see    fetchAll()
      *
@@ -1938,7 +1939,7 @@ abstract class AbstractAdapter implements Adapter
                 return $eventRs->last();
             }
 
-            $result = $this->internalGetDelayed($keys, $options);
+            $result = $this->internalGetDelayed($args['keys'], $args['options']);
             return $this->triggerPost(__FUNCTION__, $args, $result);
         } catch (\Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
@@ -1963,7 +1964,7 @@ abstract class AbstractAdapter implements Adapter
      * @param  array $normalizedKeys
      * @param  array $normalizedOptions
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      * @see    fetch()
      * @see    fetchAll()
      */
@@ -2008,7 +2009,7 @@ abstract class AbstractAdapter implements Adapter
      * @param  int   $mode Matching mode (Value of Adapter::MATCH_*)
      * @param  array $options
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      * @see    fetch()
      * @see    fetchAll()
      *
@@ -2035,7 +2036,7 @@ abstract class AbstractAdapter implements Adapter
                 return $eventRs->last();
             }
 
-            $result = $this->internalFind($mode, $options);
+            $result = $this->internalFind($args['mode'], $args['options']);
             return $this->triggerPost(__FUNCTION__, $args, $result);
         } catch (\Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
@@ -2057,7 +2058,7 @@ abstract class AbstractAdapter implements Adapter
      * @param  int   $normalizedMode Matching mode (Value of Adapter::MATCH_*)
      * @param  array $normalizedOptions
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      * @see    fetch()
      * @see    fetchAll()
      */
@@ -2070,7 +2071,7 @@ abstract class AbstractAdapter implements Adapter
      * Fetches the next item from result set
      *
      * @return array|boolean The next item or false
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      * @see    fetchAll()
      *
      * @triggers fetch.pre(PreEvent)
@@ -2098,7 +2099,7 @@ abstract class AbstractAdapter implements Adapter
      * Internal method to fetch the next item from result set
      *
      * @return array|boolean The next item or false
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     protected function internalFetch()
     {
@@ -2160,7 +2161,7 @@ abstract class AbstractAdapter implements Adapter
      * Returns all items of result set.
      *
      * @return array The result set as array containing all items
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      * @see    fetch()
      *
      * @triggers fetchAll.pre(PreEvent)
@@ -2188,7 +2189,7 @@ abstract class AbstractAdapter implements Adapter
      * Internal method to return all items of result set.
      *
      * @return array The result set as array containing all items
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      * @see    fetch()
      */
     protected function internalFetchAll()
@@ -2214,7 +2215,7 @@ abstract class AbstractAdapter implements Adapter
      * @param  int   $mode Matching mode (Value of Adapter::MATCH_*)
      * @param  array $options
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      * @see    clearByNamespace()
      *
      * @triggers clear.pre(PreEvent)
@@ -2240,7 +2241,7 @@ abstract class AbstractAdapter implements Adapter
                 return $eventRs->last();
             }
 
-            $result = $this->internalClear($mode, $options);
+            $result = $this->internalClear($args['mode'], $args['options']);
             return $this->triggerPost(__FUNCTION__, $args, $result);
         } catch (\Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
@@ -2259,7 +2260,7 @@ abstract class AbstractAdapter implements Adapter
      * @param  int   $normalizedMode Matching mode (Value of Adapter::MATCH_*)
      * @param  array $normalizedOptions
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      * @see    clearByNamespace()
      */
     protected function internalClear(& $normalizedMode, array & $normalizedOptions)
@@ -2283,7 +2284,7 @@ abstract class AbstractAdapter implements Adapter
      * @param  int   $mode Matching mode (Value of Adapter::MATCH_*)
      * @param  array $options
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      * @see    clear()
      *
      * @triggers clearByNamespace.pre(PreEvent)
@@ -2309,7 +2310,7 @@ abstract class AbstractAdapter implements Adapter
                 return $eventRs->last();
             }
 
-            $result = $this->internalClearByNamespace($mode, $options);
+            $result = $this->internalClearByNamespace($args['mode'], $args['options']);
             return $this->triggerPost(__FUNCTION__, $args, $result);
         } catch (\Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
@@ -2330,7 +2331,7 @@ abstract class AbstractAdapter implements Adapter
      * @param  int   $normalizedMode Matching mode (Value of Adapter::MATCH_*)
      * @param  array $normalizedOptions
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      * @see    clear()
      */
     protected function internalClearByNamespace(& $normalizedMode, array & $normalizedOptions)
@@ -2349,7 +2350,7 @@ abstract class AbstractAdapter implements Adapter
      *
      * @param  array $options
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      *
      * @triggers optimize.pre(PreEvent)
      * @triggers optimize.post(PostEvent)
@@ -2361,7 +2362,9 @@ abstract class AbstractAdapter implements Adapter
             return false;
         }
 
-        $args = new ArrayObject();
+        $args = new ArrayObject(array(
+            'options' => & $options
+        ));
 
         try {
             $eventRs = $this->triggerPre(__FUNCTION__, $args);
@@ -2369,7 +2372,7 @@ abstract class AbstractAdapter implements Adapter
                 return $eventRs->last();
             }
 
-            $result = $this->internalOptimize();
+            $result = $this->internalOptimize($args['options']);
             return $this->triggerPost(__FUNCTION__, $args, $result);
         } catch (\Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
@@ -2385,7 +2388,7 @@ abstract class AbstractAdapter implements Adapter
      *
      * @param  array $normalizedOptions
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     protected function internalOptimize(array & $normalizedOptions)
     {
@@ -2438,7 +2441,7 @@ abstract class AbstractAdapter implements Adapter
      *
      * @param  array $options
      * @return array|boolean Capacity as array or false on failure
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      *
      * @triggers getCapacity.pre(PreEvent)
      * @triggers getCapacity.post(PostEvent)
@@ -2457,7 +2460,7 @@ abstract class AbstractAdapter implements Adapter
                 return $eventRs->last();
             }
 
-            $result = $this->internalGetCapacity($options);
+            $result = $this->internalGetCapacity($args['options']);
             return $this->triggerPost(__FUNCTION__, $args, $result);
         } catch (\Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
@@ -2469,7 +2472,7 @@ abstract class AbstractAdapter implements Adapter
      *
      * @param  array $normalizedOptions
      * @return array|boolean Capacity as array or false on failure
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     abstract protected function internalGetCapacity(array & $normalizedOptions);
 

@@ -21,8 +21,6 @@
 
 namespace Zend\Barcode\Exception;
 
-use Zend\Barcode\Exception;
-
 /**
  * Exception for Zend_Barcode component.
  *
@@ -33,6 +31,6 @@ use Zend\Barcode\Exception;
  */
 class RendererCreationException
     extends \InvalidArgumentException
-    implements Exception
+    implements ExceptionInterface
 {
 }

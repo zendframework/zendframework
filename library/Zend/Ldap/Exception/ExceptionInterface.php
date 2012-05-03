@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Zend Framework
  *
@@ -13,25 +14,19 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_XmlRpc
- * @subpackage Server
+ * @package    Zend_Ldap
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\XmlRpc\Server;
+namespace Zend\Ldap\Exception;
 
 /**
- * Zend_XmlRpc_Server_Exception
- *
- * @uses       \Zend\XmlRpc\Exception
  * @category   Zend
- * @package    Zend_XmlRpc
- * @subpackage Server
+ * @package    Zend_Ldap
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Exception extends \Zend\XmlRpc\Exception
+interface ExceptionInterface
 {
 }
-

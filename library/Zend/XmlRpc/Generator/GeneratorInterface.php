@@ -13,19 +13,31 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Authentication
+ * @package    Zend_XmlRpc
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Authentication;
+namespace Zend\XmlRpc\Generator;
 
 /**
- * @uses       Zend\Exception
- * @category   Zend
- * @package    Zend_Authentication
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * XML generator adapter interface
  */
-interface Exception
-{}
+interface GeneratorInterface
+{
+    public function getEncoding();
+    public function setEncoding($encoding);
+    public function openElement($name, $value = null);
+    public function closeElement($name);
+
+    /**
+     * Return XML as a string
+     *
+     * @return string
+     */
+    public function saveXML();
+
+    public function stripDeclaration($xml);
+    public function flush();
+    public function __toString();
+}

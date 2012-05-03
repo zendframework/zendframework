@@ -19,10 +19,10 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Ldap\Node\Schema;
+namespace Zend\Ldap\Node\Schema\ObjectClass;
 
 /**
- * Zend\Ldap\Node\Schema\AttributeType provides a contract for schema attribute-types.
+ * This class provides a contract for schema objectClasses.
  *
  * @category   Zend
  * @package    Zend_Ldap
@@ -30,47 +30,55 @@ namespace Zend\Ldap\Node\Schema;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface AttributeType
+interface ObjectClassInterface
 {
     /**
-     * Gets the attribute name
+     * Gets the objectClass name
      *
      * @return string
      */
     public function getName();
 
     /**
-     * Gets the attribute OID
+     * Gets the objectClass OID
      *
      * @return string
      */
     public function getOid();
 
     /**
-     * Gets the attribute syntax
+     * Gets the attributes that this objectClass must contain
      *
-     * @return string
+     * @return array
      */
-    public function getSyntax();
+    public function getMustContain();
 
     /**
-     * Gets the attribute maximum length
+     * Gets the attributes that this objectClass may contain
      *
-     * @return int|null
+     * @return array
      */
-    public function getMaxLength();
+    public function getMayContain();
 
     /**
-     * Returns if the attribute is single-valued.
-     *
-     * @return boolean
-     */
-    public function isSingleValued();
-
-    /**
-     * Gets the attribute description
+     * Gets the objectClass description
      *
      * @return string
      */
     public function getDescription();
+
+    /**
+     * Gets the objectClass type
+     *
+     * @return integer
+     */
+    public function getType();
+
+    /**
+     * Returns the parent objectClasses of this class.
+     * This includes structural, abstract and auxiliary objectClasses
+     *
+     * @return array
+     */
+    public function getParentClasses();
 }

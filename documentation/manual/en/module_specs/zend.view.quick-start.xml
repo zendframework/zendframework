@@ -1005,7 +1005,7 @@ class AcceptStrategy implements ListenerAggregate
     public function detach(EventCollection $events)
     {
         foreach ($this->listeners as $index => $listener) {
-            if ($events->detach($listener) {
+            if ($events->detach($listener)) {
                 unset($this->listeners[$index]);
             }
         }

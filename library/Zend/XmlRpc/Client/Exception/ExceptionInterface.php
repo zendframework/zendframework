@@ -13,19 +13,23 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Mime
+ * @package    Zend_XmlRpc
+ * @subpackage Client
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Mime;
+namespace Zend\XmlRpc\Client\Exception;
 
 /**
+ * Base class for all Zend_XmlRpc_Client_* exceptions
+ *
+ * @uses       Zend\XmlRpc\Exception\ExceptionInterface
  * @category   Zend
- * @package    Zend_Mime
+ * @package    Zend_XmlRpc
+ * @subpackage Client
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Exception
+interface ExceptionInterface extends \Zend\XmlRpc\Exception\ExceptionInterface
 {}
-

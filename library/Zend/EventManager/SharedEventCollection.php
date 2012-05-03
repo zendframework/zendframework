@@ -13,35 +13,22 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Authentication
- * @subpackage Adapter_Http
+ * @package    Zend_EventManager
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Authentication\Adapter\Http;
+namespace Zend\EventManager;
 
 /**
- * Auth HTTP Resolver Interface
- *
- * Defines an interace to resolve a username/realm combination into a shared
- * secret usable by HTTP Authentication.
+ * Interface for shared event listener collections
  *
  * @category   Zend
- * @package    Zend_Authentication
- * @subpackage Adapter_Http
+ * @package    Zend_EventManager
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Resolver
+interface SharedEventCollection
 {
-    /**
-     * Resolve username/realm to password/hash/etc.
-     *
-     * @param  string $username Username
-     * @param  string $realm    Authentication Realm
-     * @return string|false User's shared secret, if the user is found in the
-     *         realm, false otherwise.
-     */
-    public function resolve($username, $realm);
+    public function getListeners($id, $event);
 }

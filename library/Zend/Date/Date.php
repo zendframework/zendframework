@@ -20,7 +20,7 @@
 
 namespace Zend\Date;
 
-use Zend\Cache\Storage\Adapter as CacheAdapter,
+use Zend\Cache\Storage\Adapter\AdapterInterface as CacheAdapter,
     Zend\Locale\Data\Cldr,
     Zend\Locale\Format,
     Zend\Locale\Locale,
@@ -266,7 +266,7 @@ class Date extends DateObject
                             parent::$_cache = null;
                         } else {
                             if (!$value instanceof CacheAdapter) {
-                                throw new Exception\InvalidArgumentException("Instance of Zend\Cache\Storage\Adapter expected");
+                                throw new Exception\InvalidArgumentException("Instance of Zend\Cache\Storage\Adapter\AdapterInterface expected");
                             }
 
                             parent::$_cache     = $value;

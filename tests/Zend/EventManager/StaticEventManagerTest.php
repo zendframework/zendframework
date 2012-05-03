@@ -165,6 +165,7 @@ class StaticEventManagerTest extends TestCase
         $staticEvents->attach('bar', '*', $callback);
 
         $events = new EventManager('bar');
+        $events->setSharedCollections($staticEvents);
 
         foreach (array('foo', 'bar', 'baz') as $event) {
             $events->trigger($event);
@@ -234,9 +235,11 @@ class StaticEventManagerTest extends TestCase
     public function testListenersAttachedToAnyIdentifierProvidedToEventManagerWillBeTriggered()
     {
         $identifiers = array('foo', 'bar');
-        $manager = new EventManager($identifiers);
         $events  = StaticEventManager::getInstance();
-        $test    = new \stdClass;
+        $manager = new EventManager($identifiers);
+        $manager->setSharedCollections($events);
+
+        $test = new \stdClass;
         $test->triggered = 0;
         $events->attach('foo', 'bar', function($e) use ($test) {
             $test->triggered++;

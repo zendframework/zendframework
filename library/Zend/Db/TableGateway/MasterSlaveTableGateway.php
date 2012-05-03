@@ -67,7 +67,7 @@ class MasterSlaveTableGateway extends TableGateway
      * @param  string $where
      * @return type 
      */
-    public function select($where)
+    public function select($where = null)
     {
         $this->adapter = $this->slaveAdapter;
         return parent::select($where);
@@ -90,7 +90,7 @@ class MasterSlaveTableGateway extends TableGateway
      * @param  string $where
      * @return type 
      */
-    public function update($set, $where)
+    public function update($set, $where = null)
     {
         $this->adapter = $this->masterAdapter;
         return parent::update($set, $where);

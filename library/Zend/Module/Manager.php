@@ -203,6 +203,7 @@ class Manager implements ModuleHandler
      */
     public function setEventManager(EventCollection $events)
     {
+        $events->setIdentifiers(array(__CLASS__, get_class($this)));
         $this->events = $events;
         return $this;
     }
@@ -217,7 +218,7 @@ class Manager implements ModuleHandler
     public function events()
     {
         if (!$this->events instanceof EventCollection) {
-            $this->setEventManager(new EventManager(array(__CLASS__, get_class($this))));
+            $this->setEventManager(new EventManager());
         }
         return $this->events;
     }

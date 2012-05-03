@@ -6,6 +6,7 @@ use Zend\Di\Locator,
     Zend\EventManager\EventCollection,
     Zend\EventManager\EventDescription as Event,
     Zend\EventManager\EventManager,
+    Zend\EventManager\EventManagerAware,
     Zend\Http\Request as HttpRequest,
     Zend\Http\PhpEnvironment\Response as HttpResponse,
     Zend\Loader\Broker,
@@ -21,7 +22,7 @@ use Zend\Di\Locator,
 /**
  * Abstract RESTful controller
  */
-abstract class RestfulController implements Dispatchable, InjectApplicationEvent, LocatorAware, Pluggable
+abstract class RestfulController implements Dispatchable, EventManagerAware, InjectApplicationEvent, LocatorAware, Pluggable
 {
     protected $broker;
     protected $request;
@@ -219,7 +220,13 @@ abstract class RestfulController implements Dispatchable, InjectApplicationEvent
      */
     public function setEventManager(EventCollection $events)
     {
+        $events->setIdentifiers(array(
+            'Zend\Stdlib\Dispatchable',
+            __CLASS__,
+            get_class($this)
+        ));
         $this->events = $events;
+        $this->attachDefaultListeners();
         return $this;
     }
 
@@ -233,12 +240,7 @@ abstract class RestfulController implements Dispatchable, InjectApplicationEvent
     public function events()
     {
         if (!$this->events) {
-            $this->setEventManager(new EventManager(array(
-                'Zend\Stdlib\Dispatchable',
-                __CLASS__,
-                get_called_class(),
-            )));
-            $this->attachDefaultListeners();
+            $this->setEventManager(new EventManager());
         }
         return $this->events;
     }

@@ -5,6 +5,7 @@ namespace Zend\Di\Definition;
 use Zend\Code\Scanner\DerivedClassScanner,
     Zend\Code\Scanner\AggregateDirectoryScanner,
     Zend\Code\Scanner\DirectoryScanner,
+    Zend\Code\Scanner\FileScanner,
     
     Zend\Di\Definition\Annotation,
     Zend\Code\Annotation\AnnotationManager,
@@ -408,7 +409,7 @@ class CompilerDefinition implements Definition
      */
     public function getClassSupertypes($class)
     {
-        if (!array_key_exists($class, $this->classes[$class])) {
+        if (!array_key_exists($class, $this->classes)) {
             $this->processClass($class);
         }
         return $this->classes[$class]['supertypes'];

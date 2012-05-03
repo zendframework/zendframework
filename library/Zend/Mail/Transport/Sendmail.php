@@ -236,6 +236,9 @@ class Sendmail implements Transport
             if ('To' == $header->getFieldName()) {
                 continue;
             }
+            if ('Subject' == $header->getFieldName()) {
+                continue;
+            }
             $headersToSend->addHeader($header);
         }
         return $headersToSend->toString();

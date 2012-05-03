@@ -87,7 +87,7 @@ class SmtpProtocolSpy extends Smtp
         $this->connect = false;
         $this->rset();
     }
-
+    
     /**
      * "Reset" connection
      *

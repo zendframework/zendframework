@@ -98,14 +98,28 @@ class Query implements Route
      */
     public function match(Request $request, $pathOffset = null)
     {
-        $matches = array();
-
-        foreach($_GET as $key => $value) {
-            $matches[urldecode($key)] = urldecode($value);
-
-        }
+        $matches = $this->recursiveUrldecode($_GET);
 
         return new RouteMatch(array_merge($this->defaults, $matches));
+    }
+
+    /**
+     * Recursively urldecodes keys and values from an array
+     *
+     * @param array $array
+     * @return array
+     */
+    protected function recursiveUrldecode(array $array)
+    {
+        $matches = array();
+        foreach($array as $key => $value) {
+            if (is_array($value)) {
+                $matches[urldecode($key)] = $this->recursiveUrldecode($value);
+            } else {
+                $matches[urldecode($key)] = urldecode($value);
+            }
+        }
+        return $matches;
     }
 
     /**

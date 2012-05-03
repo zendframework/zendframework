@@ -69,9 +69,9 @@ interface AdapterInterface extends ValidatorInterface
     public function getName();
 
     /**
-     * Get optional private decorator for this captcha type
+     * Get helper name to use when rendering this captcha type
      *
-     * @return \Zend\Form\Decorator|string
+     * @return string
      */
-    public function getDecorator();
+    public function getHelperName();
 }

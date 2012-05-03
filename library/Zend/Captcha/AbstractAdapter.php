@@ -22,7 +22,6 @@
 namespace Zend\Captcha;
 
 use Traversable;
-use Zend\Stdlib\ArrayUtils;
 use Zend\Validator\AbstractValidator;
 
 /**
@@ -39,26 +38,26 @@ use Zend\Validator\AbstractValidator;
 abstract class AbstractAdapter extends AbstractValidator implements AdapterInterface
 {
     /**
-     * Element name
+     * Captcha name
      *
      * Useful to generate/check form fields
      *
      * @var string
      */
-    protected $_name;
+    protected $name;
 
     /**
      * Captcha options
      *
      * @var array
      */
-    protected $_options = array();
+    protected $options = array();
 
     /**
      * Options to skip when processing options
      * @var array
      */
-    protected $_skipOptions = array(
+    protected $skipOptions = array(
         'options',
         'config',
     );
@@ -70,7 +69,7 @@ abstract class AbstractAdapter extends AbstractValidator implements AdapterInter
      */
     public function getName()
     {
-        return $this->_name;
+        return $this->name;
     }
 
     /**
@@ -80,22 +79,19 @@ abstract class AbstractAdapter extends AbstractValidator implements AdapterInter
      */
     public function setName($name)
     {
-        $this->_name = $name;
+        $this->name = $name;
         return $this;
     }
 
     /**
      * Constructor
      *
-     * @param array|Traversable $options
+     * @param  array|Traversable $options
+     * @return void
      */
     public function __construct($options = null)
     {
-        // Set options
-        if ($options instanceof Traversable) {
-            $options = ArrayUtils::iteratorToArray($options);
-        }
-        if (is_array($options)) {
+        if (is_array($options) || $options instanceof Traversable) {
             $this->setOptions($options);
         }
     }
@@ -103,13 +99,13 @@ abstract class AbstractAdapter extends AbstractValidator implements AdapterInter
     /**
      * Set single option for the object
      *
-     * @param string $key
-     * @param string $value
-     * @return Zend_Form_Element
+     * @param  string $key
+     * @param  string $value
+     * @return AbstractAdapter
      */
     public function setOption($key, $value)
     {
-        if (in_array(strtolower($key), $this->_skipOptions)) {
+        if (in_array(strtolower($key), $this->skipOptions)) {
             return $this;
         }
 
@@ -117,11 +113,11 @@ abstract class AbstractAdapter extends AbstractValidator implements AdapterInter
         if (method_exists ($this, $method)) {
             // Setter exists; use it
             $this->$method ($value);
-            $this->_options[$key] = $value;
+            $this->options[$key] = $value;
         } elseif (property_exists($this, $key)) {
             // Assume it's metadata
             $this->$key = $value;
-            $this->_options[$key] = $value;
+            $this->options[$key] = $value;
         }
         return $this;
     }
@@ -130,7 +126,7 @@ abstract class AbstractAdapter extends AbstractValidator implements AdapterInter
      * Set object state from options array
      *
      * @param  array|Traversable $options
-     * @return Zend_Form_Element
+     * @return AbstractAdapter
      */
     public function setOptions($options = array())
     {
@@ -151,18 +147,18 @@ abstract class AbstractAdapter extends AbstractValidator implements AdapterInter
      */
     public function getOptions()
     {
-        return $this->_options;
+        return $this->options;
     }
 
     /**
-     * Get optional decorator
+     * Get helper name used to render captcha
      *
-     * By default, return null, indicating no extra decorator needed.
+     * By default, return empty string, indicating no helper needed.
      *
-     * @return null
+     * @return string
      */
-    public function getDecorator()
+    public function getHelperName()
     {
-        return null;
+        return '';
     }
 }

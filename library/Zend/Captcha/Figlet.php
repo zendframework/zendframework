@@ -22,6 +22,7 @@
 namespace Zend\Captcha;
 
 use Zend\View\Renderer\RendererInterface as Renderer;
+use Zend\Text\Figlet\Figlet as FigletManager;
 
 /**
  * Captcha based on figlet text rendering service
@@ -39,19 +40,30 @@ class Figlet extends Word
     /**
      * Figlet text renderer
      *
-     * @var \Zend\Text\Figlet\Figlet
+     * @var FigletManager
      */
-    protected $_figlet;
+    protected $figlet;
 
     /**
      * Constructor
      *
-     * @param array|\Traversable $options
+     * @param  null|string|array|\Traversable $options
+     * @return void
      */
     public function __construct($options = null)
     {
         parent::__construct($options);
-        $this->_figlet = new \Zend\Text\Figlet\Figlet($options);
+        $this->figlet = new FigletManager($options);
+    }
+
+    /**
+     * Retrieve the composed figlet manager
+     * 
+     * @return FigletManager
+     */
+    public function getFiglet()
+    {
+        return $this->figlet;
     }
 
     /**
@@ -61,7 +73,7 @@ class Figlet extends Word
      */
     public function generate()
     {
-        $this->_useNumbers = false;
+        $this->useNumbers = false;
         return parent::generate();
     }
 
@@ -75,7 +87,17 @@ class Figlet extends Word
     public function render(Renderer $view = null, $element = null)
     {
         return '<pre>'
-             . $this->_figlet->render($this->getWord())
+             . $this->figlet->render($this->getWord())
              . "</pre>\n";
+    }
+
+    /**
+     * Get helper name used to render captcha
+     * 
+     * @return string
+     */
+    public function getHelperName()
+    {
+        return 'captcha/figlet';
     }
 }

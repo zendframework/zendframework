@@ -14,6 +14,14 @@ class Forward extends AbstractPlugin
 {
     protected $event;
     protected $locator;
+    protected $maxNestedForwards = 10;
+    protected $numNestedForwards = 0;
+
+    public function setMaxNestedForwards($maxNestedForwards)
+    {
+        $this->maxNestedForwards = (int) $maxNestedForwards;
+        return $this;
+    }
 
     /**
      * Dispatch another controller
@@ -48,7 +56,14 @@ class Forward extends AbstractPlugin
             $event->setRouteMatch($matches);
         }
 
+        if ($this->numNestedForwards > $this->maxNestedForwards) {
+            throw new Exception\DomainException("Circular forwarding detected: greater than $this->maxNestedForwards nested forwards");
+        }
+        $this->numNestedForwards++;
+
         $return = $controller->dispatch($event->getRequest(), $event->getResponse());
+
+        $this->numNestedForwards--;
 
         if ($cachedMatches) {
             $event->setRouteMatch($cachedMatches);

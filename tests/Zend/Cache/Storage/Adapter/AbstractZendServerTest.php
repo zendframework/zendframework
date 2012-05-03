@@ -15,13 +15,13 @@
  * @category   Zend
  * @package    Zend_Cache
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace ZendTest\Cache\Storage\Adapter;
 
-use Zend\Cache\Storage\Adapter,
+use Zend\Cache\Storage\Adapter\AdapterInterface as Adapter,
     Zend\Cache\Storage\Adapter\AdapterOptions,
     Zend\Cache\Storage\Adapter\AbstractZendServer;
 
@@ -29,7 +29,7 @@ use Zend\Cache\Storage\Adapter,
  * @category   Zend
  * @package    Zend_Cache
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Cache
  */

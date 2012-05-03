@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.akismet"><info><title>Zend_Service_Akismet</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.akismet"><title>Zend_Service_Akismet</title>
     
 
-    <section xml:id="zend.service.akismet.introduction"><info><title>Introduction</title></info>
+    <section xml:id="zend.service.akismet.introduction"><title>Introduction</title>
         
 
         <para>
@@ -32,7 +32,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.service.akismet.verifykey"><info><title>Verify an API key</title></info>
+    <section xml:id="zend.service.akismet.verifykey"><title>Verify an API key</title>
         
 
         <para>
@@ -66,7 +66,7 @@ if ($akismet->verifyKey($apiKey) {
         </para>
     </section>
 
-    <section xml:id="zend.service.akismet.isspam"><info><title>Check for spam</title></info>
+    <section xml:id="zend.service.akismet.isspam"><title>Check for spam</title>
         
 
         <para>
@@ -173,7 +173,7 @@ if ($akismet->verifyKey($apiKey) {
             <acronym>API</acronym> key is invalid.
         </para>
 
-        <example xml:id="zend.service.akismet.isspam.example-1"><info><title>isSpam() Usage</title></info>
+        <example xml:id="zend.service.akismet.isspam.example-1"><title>isSpam() Usage</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -201,7 +201,7 @@ if ($akismet->isSpam($data)) {
         </para>
     </section>
 
-    <section xml:id="zend.service.akismet.submitspam"><info><title>Submitting known spam</title></info>
+    <section xml:id="zend.service.akismet.submitspam"><title>Submitting known spam</title>
         
 
         <para>
@@ -215,7 +215,7 @@ if ($akismet->isSpam($data)) {
             value. An exception will be raised if the <acronym>API</acronym> key used is invalid.
         </para>
 
-        <example xml:id="zend.service.akismet.submitspam.example-1"><info><title>submitSpam() Usage</title></info>
+        <example xml:id="zend.service.akismet.submitspam.example-1"><title>submitSpam() Usage</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -238,7 +238,7 @@ $akismet->submitSpam($data));
         </para>
     </section>
 
-    <section xml:id="zend.service.akismet.submitham"><info><title>Submitting false positives (ham)</title></info>
+    <section xml:id="zend.service.akismet.submitham"><title>Submitting false positives (ham)</title>
         
 
         <para>
@@ -256,7 +256,7 @@ $akismet->submitSpam($data));
             used is invalid.
         </para>
 
-        <example xml:id="zend.service.akismet.submitham.example-1"><info><title>submitHam() Usage</title></info>
+        <example xml:id="zend.service.akismet.submitham.example-1"><title>submitHam() Usage</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -279,7 +279,7 @@ $akismet->submitHam($data));
         </para>
     </section>
 
-    <section xml:id="zend.service.akismet.accessors"><info><title>Zend-specific Methods</title></info>
+    <section xml:id="zend.service.akismet.accessors"><title>Zend-specific Methods</title>
         
 
         <para>

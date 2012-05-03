@@ -21,6 +21,7 @@
 
 namespace ZendTest\Ldap\Node;
 
+use ZendTest\Ldap as TestLdap;
 
 /**
  * @category   Zend
@@ -31,27 +32,28 @@ namespace ZendTest\Ldap\Node;
  * @group      Zend_Ldap
  * @group      Zend_Ldap_Node
  */
-class AttributeIterationTest extends \ZendTest\Ldap\TestCase
+class AttributeIterationTest extends TestLdap\AbstractTestCase
 {
     public function testSimpleIteration()
     {
-        $node=$this->_createTestNode();
-        $i=0;
-        $data=array();
+        $node = $this->createTestNode();
+        $i    = 0;
+        $data = array();
         foreach ($node->getAttributes() as $k => $v) {
             $this->assertNotNull($k);
             $this->assertNotNull($v);
             $this->assertEquals($node->$k, $v);
-            $data[$k]=$v;
+            $data[$k] = $v;
             $i++;
         }
         $this->assertEquals(5, $i);
         $this->assertEquals($i, count($node));
         $this->assertEquals(array(
-            'boolean'     => array(true, false),
-            'cn'          => array('name'),
-            'empty'       => array(),
-            'host'        => array('a', 'b', 'c'),
-            'objectclass' => array('account', 'top')), $data);
+                                 'boolean'     => array(true, false),
+                                 'cn'          => array('name'),
+                                 'empty'       => array(),
+                                 'host'        => array('a', 'b', 'c'),
+                                 'objectclass' => array('account', 'top')), $data
+        );
     }
 }

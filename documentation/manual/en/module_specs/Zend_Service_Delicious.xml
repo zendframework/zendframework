@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.delicious"><info><title>Zend_Service_Delicious</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.delicious"><title>Zend_Service_Delicious</title>
     
 
-    <section xml:id="zend.service.delicious.introduction"><info><title>Introduction</title></info>
+    <section xml:id="zend.service.delicious.introduction"><title>Introduction</title>
         
 
         <para>
@@ -13,7 +13,7 @@
             public data of all users.
         </para>
 
-        <example xml:id="zend.service.delicious.introduction.getAllPosts"><info><title>Get all posts</title></info>
+        <example xml:id="zend.service.delicious.introduction.getAllPosts"><title>Get all posts</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -29,7 +29,7 @@ foreach ($posts as $post) {
         </example>
     </section>
 
-    <section xml:id="zend.service.delicious.retrieving_posts"><info><title>Retrieving posts</title></info>
+    <section xml:id="zend.service.delicious.retrieving_posts"><title>Retrieving posts</title>
         
 
         <para>
@@ -71,7 +71,7 @@ public function getAllPosts($tag = null);
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.service.delicious.postlist"><info><title>Zend_Service_Delicious_PostList</title></info>
+    <section xml:id="zend.service.delicious.postlist"><title>Zend_Service_Delicious_PostList</title>
         
 
         <para>
@@ -86,7 +86,7 @@ public function getAllPosts($tag = null);
             <code>Iterator</code>, and <code>ArrayAccess</code> interfaces.
         </para>
 
-        <example xml:id="zend.service.delicious.postlist.accessing_post_lists"><info><title>Accessing post lists</title></info>
+        <example xml:id="zend.service.delicious.postlist.accessing_post_lists"><title>Accessing post lists</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -123,7 +123,7 @@ echo $posts[0]->getTitle();
             by tags and by <acronym>URL</acronym>.
         </para>
 
-        <example xml:id="zend.service.delicious.postlist.example.withTags"><info><title>Filtering a Post List with Specific Tags</title></info>
+        <example xml:id="zend.service.delicious.postlist.example.withTags"><title>Filtering a Post List with Specific Tags</title>
             
 
             <para>
@@ -144,7 +144,7 @@ foreach ($posts->withTags(array('php', 'zend')) as $post) {
 ]]></programlisting>
         </example>
 
-        <example xml:id="zend.service.delicious.postlist.example.byUrl"><info><title>Filtering a Post List by URL</title></info>
+        <example xml:id="zend.service.delicious.postlist.example.byUrl"><title>Filtering a Post List by URL</title>
             
 
             <para>
@@ -165,10 +165,10 @@ foreach ($posts->withUrl('/help/') as $post) {
         </example>
     </section>
 
-    <section xml:id="zend.service.delicious.editing_posts"><info><title>Editing posts</title></info>
+    <section xml:id="zend.service.delicious.editing_posts"><title>Editing posts</title>
         
 
-        <example xml:id="zend.service.delicious.editing_posts.post_editing"><info><title>Post editing</title></info>
+        <example xml:id="zend.service.delicious.editing_posts.post_editing"><title>Post editing</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -182,7 +182,7 @@ $posts[0]->save();
 ]]></programlisting>
         </example>
 
-        <example xml:id="zend.service.delicious.editing_posts.method_call_chaining"><info><title>Method call chaining</title></info>
+        <example xml:id="zend.service.delicious.editing_posts.method_call_chaining"><title>Method call chaining</title>
             
 
             <para>
@@ -201,7 +201,7 @@ $posts[0]->setTitle('New title')
         </example>
     </section>
 
-    <section xml:id="zend.service.delicious.deleting_posts"><info><title>Deleting posts</title></info>
+    <section xml:id="zend.service.delicious.deleting_posts"><title>Deleting posts</title>
         
 
         <para>
@@ -209,7 +209,7 @@ $posts[0]->setTitle('New title')
             calling the <methodname>delete()</methodname> method upon a post object.
         </para>
 
-        <example xml:id="zend.service.delicious.deleting_posts.deleting_posts"><info><title>Deleting posts</title></info>
+        <example xml:id="zend.service.delicious.deleting_posts.deleting_posts"><title>Deleting posts</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -228,7 +228,7 @@ $delicious->deletePost($posts[0]->getUrl());
         </example>
     </section>
 
-    <section xml:id="zend.service.delicious.adding_posts"><info><title>Adding new posts</title></info>
+    <section xml:id="zend.service.delicious.adding_posts"><title>Adding new posts</title>
         
 
         <para>
@@ -238,7 +238,7 @@ $delicious->deletePost($posts[0]->getUrl());
             <methodname>save()</methodname> method.
         </para>
 
-        <example xml:id="zend.service.delicious.adding_posts.adding_a_post"><info><title>Adding a post</title></info>
+        <example xml:id="zend.service.delicious.adding_posts.adding_a_post"><title>Adding a post</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -258,10 +258,10 @@ $newPost->save();
         </example>
     </section>
 
-    <section xml:id="zend.service.delicious.tags"><info><title>Tags</title></info>
+    <section xml:id="zend.service.delicious.tags"><title>Tags</title>
         
 
-        <example xml:id="zend.service.delicious.tags.tags"><info><title>Tags</title></info>
+        <example xml:id="zend.service.delicious.tags.tags"><title>Tags</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -276,10 +276,10 @@ $delicious->renameTag('ZF', 'zendFramework');
         </example>
     </section>
 
-    <section xml:id="zend.service.delicious.bundles"><info><title>Bundles</title></info>
+    <section xml:id="zend.service.delicious.bundles"><title>Bundles</title>
         
 
-        <example xml:id="zend.service.delicious.bundles.example"><info><title>Bundles</title></info>
+        <example xml:id="zend.service.delicious.bundles.example"><title>Bundles</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -297,7 +297,7 @@ $delicious->addBundle('newBundle', array('tag1', 'tag2'));
         </example>
     </section>
 
-    <section xml:id="zend.service.delicious.public_data"><info><title>Public data</title></info>
+    <section xml:id="zend.service.delicious.public_data"><title>Public data</title>
         
 
         <para>
@@ -305,7 +305,7 @@ $delicious->addBundle('newBundle', array('tag1', 'tag2'));
             users.
         </para>
 
-        <table xml:id="zend.service.delicious.public_data.functions_for_retrieving_public_data"><info><title>Methods for retrieving public data</title></info>
+        <table xml:id="zend.service.delicious.public_data.functions_for_retrieving_public_data"><title>Methods for retrieving public data</title>
             
 
             <tgroup cols="3">
@@ -352,7 +352,7 @@ $delicious->addBundle('newBundle', array('tag1', 'tag2'));
             </para>
         </note>
 
-        <example xml:id="zend.service.delicious.public_data.retrieving_public_data"><info><title>Retrieving public data</title></info>
+        <example xml:id="zend.service.delicious.public_data.retrieving_public_data"><title>Retrieving public data</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -370,7 +370,7 @@ print_r($delicious->getUserTags('someUser'));
 ]]></programlisting>
         </example>
 
-        <section xml:id="zend.service.delicious.public_data.posts"><info><title>Public posts</title></info>
+        <section xml:id="zend.service.delicious.public_data.posts"><title>Public posts</title>
             
 
             <para>
@@ -381,7 +381,7 @@ print_r($delicious->getUserTags('someUser'));
                 title, notes, and tags.
             </para>
 
-            <table xml:id="zend.service.delicious.public_data.posts.SimplePost_methods"><info><title>Methods of the Zend_Service_Delicious_SimplePost class</title></info>
+            <table xml:id="zend.service.delicious.public_data.posts.SimplePost_methods"><title>Methods of the Zend_Service_Delicious_SimplePost class</title>
                 
 
                 <tgroup cols="3">
@@ -423,7 +423,7 @@ print_r($delicious->getUserTags('someUser'));
         </section>
     </section>
 
-    <section xml:id="zend.service.delicious.httpclient"><info><title>HTTP client</title></info>
+    <section xml:id="zend.service.delicious.httpclient"><title>HTTP client</title>
         
 
         <para>
@@ -434,7 +434,7 @@ print_r($delicious->getUserTags('someUser'));
             <acronym>HTTP</acronym> client of <classname>Zend_Rest_Client</classname>.
         </para>
 
-        <example xml:id="zend.service.delicious.httpclient.changing"><info><title>Changing the HTTP client of Zend_Rest_Client</title></info>
+        <example xml:id="zend.service.delicious.httpclient.changing"><title>Changing the HTTP client of Zend_Rest_Client</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -449,7 +449,7 @@ Zend_Rest_Client::setHttpClient($myHttpClient);
             configure your <acronym>HTTP</acronym> client to keep connections alive.
         </para>
 
-        <example xml:id="zend.service.delicious.httpclient.keepalive"><info><title>Configuring your HTTP client to keep connections alive</title></info>
+        <example xml:id="zend.service.delicious.httpclient.keepalive"><title>Configuring your HTTP client to keep connections alive</title>
             
 
             <programlisting language="php"><![CDATA[

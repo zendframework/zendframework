@@ -29,7 +29,7 @@ use Zend\Http;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Response 
+class Response
 {
     /**
      * XML namespace used for SimpleDB responses.
@@ -58,20 +58,6 @@ class Response
      * @var DOMXPath
      */
     private $_xpath = null;
-
-    /**
-     * Last error code
-     *
-     * @var integer
-     */
-    private $_errorCode = 0;
-
-    /**
-     * Last error message
-     *
-     * @var string
-     */
-    private $_errorMessage = '';
 
     /**
      * Creates a new high-level SimpleDB response object
@@ -117,20 +103,20 @@ class Response
         } catch (Http\Exception $e) {
             $body = false;
         }
-       
+
         return simplexml_load_string($body);
     }
-    
+
     /**
      * Get HTTP response object
-     * 
+     *
      * @return Zend\Http\Response
      */
-    public function getHttpResponse() 
+    public function getHttpResponse()
     {
         return $this->_httpResponse;
     }
-    
+
     /**
      * Gets the document object for this response
      *
@@ -153,7 +139,7 @@ class Response
                 if (!$this->_document->loadXML($body)) {
                     $this->_document = false;
                 }
-                
+
                 // reset libxml error handling
                 libxml_clear_errors();
                 libxml_use_internal_errors($errors);

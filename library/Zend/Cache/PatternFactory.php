@@ -42,9 +42,9 @@ class PatternFactory
     /**
      * Instantiate a cache pattern
      *
-     * @param  string|Pattern $patternName
+     * @param  string|Pattern\PatternInterface $patternName
      * @param  array|Traversable|Pattern\PatternOptions $options
-     * @return Pattern
+     * @return Pattern\PatternInterface
      * @throws Exception\RuntimeException
      */
     public static function factory($patternName, $options = array())
@@ -64,7 +64,7 @@ class PatternFactory
             ));
         }
 
-        if ($patternName instanceof Pattern) {
+        if ($patternName instanceof Pattern\PatternInterface) {
             $patternName->setOptions($options);
             return $patternName;
         }

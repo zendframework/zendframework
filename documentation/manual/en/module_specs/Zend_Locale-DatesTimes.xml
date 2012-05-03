@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.locale.date.datesandtimes"><info><title>Working with Dates and Times</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.locale.date.datesandtimes"><title>Working with Dates and Times</title>
     
 
     <para>
@@ -15,7 +15,7 @@
         increase the difficulty of understanding these examples.
     </para>
 
-    <section xml:id="zend.locale.date.normalize"><info><title>Normalizing Dates and Times</title></info>
+    <section xml:id="zend.locale.date.normalize"><title>Normalizing Dates and Times</title>
         
 
         <para>
@@ -37,7 +37,7 @@
             year in the input to fit the format used.
         </para>
 
-        <table xml:id="zend.locale.date.normalize.table-1"><info><title>Key values for getDate() with option 'fix_date'</title></info>
+        <table xml:id="zend.locale.date.normalize.table-1"><title>Key values for getDate() with option 'fix_date'</title>
             
 
             <tgroup cols="2">
@@ -97,7 +97,7 @@
             default, and 'i' using the <acronym>PHP</acronym> date format).
         </para>
 
-        <table xml:id="zend.locale.date.normalize.table-2"><info><title>Return values</title></info>
+        <table xml:id="zend.locale.date.normalize.table-2"><title>Return values</title>
             
 
             <tgroup cols="5">
@@ -163,7 +163,7 @@
             </tgroup>
         </table>
 
-        <example xml:id="zend.locale.date.normalize.example-1"><info><title>Normalizing a date</title></info>
+        <example xml:id="zend.locale.date.normalize.example-1"><title>Normalizing a date</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -217,7 +217,7 @@ Array
             the default date format for <varname>$locale</varname>.
         </para>
 
-        <example xml:id="zend.locale.date.normalize.example-2"><info><title>Normalizing a date by locale</title></info>
+        <example xml:id="zend.locale.date.normalize.example-2"><title>Normalizing a date by locale</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -237,7 +237,7 @@ print_r ($date);
             expected format.
         </para>
 
-        <example xml:id="zend.locale.date.normalize.example-3"><info><title>Normalizing a date with time</title></info>
+        <example xml:id="zend.locale.date.normalize.example-3"><title>Normalizing a date with time</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -258,7 +258,7 @@ print_r ($date);
             (H, m, s, y, M, d), and MMMM and EEEE are supported in the <varname>$format</varname>.
         </para>
 
-        <example xml:id="zend.locale.date.normalize.example-4"><info><title>Normalizing a userdefined date</title></info>
+        <example xml:id="zend.locale.date.normalize.example-4"><title>Normalizing a userdefined date</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -275,7 +275,7 @@ print_r ($date);
             The format can include the following signs :
         </para>
 
-        <table xml:id="zend.locale.date.normalize.table-3"><info><title>Format definition</title></info>
+        <table xml:id="zend.locale.date.normalize.table-3"><title>Format definition</title>
             
 
             <tgroup cols="2">
@@ -329,7 +329,7 @@ print_r ($date);
             Examples for proper formats are
         </para>
 
-        <table xml:id="zend.locale.date.normalize.table-4"><info><title>Example formats</title></info>
+        <table xml:id="zend.locale.date.normalize.table-4"><title>Example formats</title>
             
 
             <tgroup cols="3">
@@ -363,7 +363,7 @@ print_r ($date);
             </tgroup>
         </table>
 
-        <note><info><title>Database date format</title></info>
+        <note><title>Database date format</title>
             
 
             <para>
@@ -379,7 +379,7 @@ print_r ($date);
             kinds of problems with input, such as misplacing the year:
         </para>
 
-        <example xml:id="zend.locale.date.normalize.example-5"><info><title>Automatic correction of input dates</title></info>
+        <example xml:id="zend.locale.date.normalize.example-5"><title>Automatic correction of input dates</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -394,7 +394,7 @@ print_r ($date);
         </example>
     </section>
 
-    <section xml:id="zend.locale.date.test"><info><title>Testing Dates</title></info>
+    <section xml:id="zend.locale.date.test"><title>Testing Dates</title>
         
 
         <para>
@@ -408,7 +408,7 @@ print_r ($date);
             will apply heuristics to "correct" dates before determining their validity.
         </para>
 
-        <example xml:id="zend.locale.date.test.example-1"><info><title>Date testing</title></info>
+        <example xml:id="zend.locale.date.test.example-1"><title>Date testing</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -427,7 +427,7 @@ if (Zend_Locale_Format::checkDateFormat('13.Apr.2006',
         </example>
     </section>
 
-    <section xml:id="zend.locale.time.normalizing"><info><title>Normalizing a Time</title></info>
+    <section xml:id="zend.locale.time.normalizing"><title>Normalizing a Time</title>
         
 
         <para>
@@ -437,7 +437,7 @@ if (Zend_Locale_Format::checkDateFormat('13.Apr.2006',
             format for the selected locale.
         </para>
 
-        <example xml:id="zend.locale.time.normalizing.example-1"><info><title>Normalize an unknown time</title></info>
+        <example xml:id="zend.locale.time.normalizing.example-1"><title>Normalize an unknown time</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -454,7 +454,7 @@ if (Zend_Locale_Format::getTime('13:44:42',
         </example>
     </section>
 
-    <section xml:id="zend.locale.time.test"><info><title>Testing Times</title></info>
+    <section xml:id="zend.locale.time.test"><title>Testing Times</title>
         
 
         <para>
@@ -463,7 +463,7 @@ if (Zend_Locale_Format::getTime('13:44:42',
             <property>date_format</property> should contain the parts which you expect to have.
         </para>
 
-        <example xml:id="zend.locale.time.test.example-1"><info><title>Testing a time</title></info>
+        <example xml:id="zend.locale.time.test.example-1"><title>Testing a time</title>
             
 
             <programlisting language="php"><![CDATA[

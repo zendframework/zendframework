@@ -3,7 +3,7 @@
 <section 
     xmlns="http://docbook.org/ns/docbook" version="5.0"
     xml:id="zend.mvc.controllers">
-  <info><title>Available Controllers</title></info>
+  <title>Available Controllers</title>
 
   <para>
     Controllers in the MVC layer simply need to be objects implementing
@@ -38,10 +38,10 @@ class Foo implements Dispatchable
   </para>
 
   <section xml:id="zend.mvc.controllers.interfaces">
-    <info><title>Common Interfaces Used With Controllers</title></info>
+    <title>Common Interfaces Used With Controllers</title>
 
     <section xml:id="zend.mvc.controllers.interfaces.inject-application-event">
-      <info><title>InjectApplicationEvent</title></info>
+      <title>InjectApplicationEvent</title>
 
       <para>
         The <classname>Zend\Mvc\InjectApplicationEvent</classname> interface
@@ -88,7 +88,7 @@ public function getEvent($event);
     </section>
 
     <section xml:id="zend.mvc.controllers.interfaces.locator-aware">
-      <info><title>LocatorAware</title></info>
+      <title>LocatorAware</title>
 
       <para>
         In most cases, you should define your controllers such that
@@ -120,7 +120,7 @@ public function getLocator($locator);
     </section>
 
     <section xml:id="zend.mvc.controllers.interfaces.pluggable">
-      <info><title>Pluggable</title></info>
+      <title>Pluggable</title>
 
       <para>
         Code re-use is a common goal for developers. Another common goal is
@@ -198,7 +198,7 @@ public function plugin($plugin, array $options = null)
   </section>
 
   <section xml:id="zend.mvc.controllers.action-controller">
-    <info><title>The ActionController</title></info>
+    <title>The ActionController</title>
 
     <para>
       Implementing each of the above interfaces is a lesson in
@@ -276,7 +276,7 @@ class BarController extends ActionController
 ]]></programlisting>
 
     <section xml:id="zend.mvc.controllers.action-controller.interfaces-and-collaborators">
-      <info><title>Interfaces and Collaborators</title></info>
+      <title>Interfaces and Collaborators</title>
 
       <para>
         <classname>ActionController</classname> implements each of the
@@ -358,7 +358,7 @@ class BarController extends ActionController
   </section>
 
   <section xml:id="zend.mvc.controllers.restful-controller">
-    <info><title>The RestfulController</title></info>
+    <title>The RestfulController</title>
 
     <para>
       The second abstract controller ZF2 provides is
@@ -429,7 +429,7 @@ class BarController extends ActionController
     </para>
 
     <section xml:id="zend.mvc.controllers.restful-controller.interfaces-and-collaborators">
-      <info><title>Interfaces and Collaborators</title></info>
+      <title>Interfaces and Collaborators</title>
 
       <para>
         <classname>RestfulController</classname> implements each of the

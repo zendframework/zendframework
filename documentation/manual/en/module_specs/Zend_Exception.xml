@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.exception.using"><info><title>Using Exceptions</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.exception.using"><title>Using Exceptions</title>
     
 
     <para>
@@ -7,7 +7,7 @@
         within Zend Framework.
     </para>
 
-    <example xml:id="zend.exception.using.example"><info><title>Catching an Exception</title></info>
+    <example xml:id="zend.exception.using.example"><title>Catching an Exception</title>
         
 
         <para>

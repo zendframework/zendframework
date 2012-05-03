@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.amazon.s3"><info><title>Zend_Service_Amazon_S3</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.amazon.s3"><title>Zend_Service_Amazon_S3</title>
     
 
-    <section xml:id="zend.service.amazon.s3.introduction"><info><title>Introduction</title></info>
+    <section xml:id="zend.service.amazon.s3.introduction"><title>Introduction</title>
         
 
         <para>
@@ -15,7 +15,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.service.amazon.s3.registering"><info><title>Registering with Amazon S3</title></info>
+    <section xml:id="zend.service.amazon.s3.registering"><title>Registering with Amazon S3</title>
         
 
         <para>
@@ -31,7 +31,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.service.amazon.s3.apiDocumentation"><info><title>API Documentation</title></info>
+    <section xml:id="zend.service.amazon.s3.apiDocumentation"><title>API Documentation</title>
         
 
         <para>
@@ -43,7 +43,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.service.amazon.s3.features"><info><title>Features</title></info>
+    <section xml:id="zend.service.amazon.s3.features"><title>Features</title>
         
 
         <para>
@@ -82,7 +82,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.service.amazon.s3.storing-your-first"><info><title>Getting Started</title></info>
+    <section xml:id="zend.service.amazon.s3.storing-your-first"><title>Getting Started</title>
         
 
         <para>
@@ -97,7 +97,7 @@
             The following example demonstrates creating a bucket, storing and retrieving the data.
         </para>
 
-        <example xml:id="zend.service.amazon.s3.storing-your-first.example"><info><title>Zend_Service_Amazon_S3 Usage Example</title></info>
+        <example xml:id="zend.service.amazon.s3.storing-your-first.example"><title>Zend_Service_Amazon_S3 Usage Example</title>
             
 
              <programlisting language="php"><![CDATA[
@@ -127,7 +127,7 @@ $s3 = new Zend_Service_Amazon_S3();
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.service.amazon.s3.buckets"><info><title>Bucket operations</title></info>
+    <section xml:id="zend.service.amazon.s3.buckets"><title>Bucket operations</title>
         
 
         <para>
@@ -163,7 +163,7 @@ $s3 = new Zend_Service_Amazon_S3();
                     bucket should be empty to be removed.
                 </para>
 
-                <example xml:id="zend.service.amazon.s3.buckets.remove.example"><info><title>Zend_Service_Amazon_S3 Bucket Removal Example</title></info>
+                <example xml:id="zend.service.amazon.s3.buckets.remove.example"><title>Zend_Service_Amazon_S3 Bucket Removal Example</title>
                     
 
                     <programlisting language="php"><![CDATA[
@@ -183,7 +183,7 @@ $s3->removeBucket("my-own-bucket");
                     buckets belonging to the user.
                 </para>
 
-                <example xml:id="zend.service.amazon.s3.buckets.list.example"><info><title>Zend_Service_Amazon_S3 Bucket Listing Example</title></info>
+                <example xml:id="zend.service.amazon.s3.buckets.list.example"><title>Zend_Service_Amazon_S3 Bucket Listing Example</title>
                     
 
                     <programlisting language="php"><![CDATA[
@@ -208,7 +208,7 @@ foreach($list as $bucket) {
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.service.amazon.s3.objects"><info><title>Object operations</title></info>
+    <section xml:id="zend.service.amazon.s3.objects"><title>Object operations</title>
         
 
         <para>
@@ -319,7 +319,7 @@ foreach($list as $bucket) {
                                 By default, all the items are private.
                             </para>
 
-                            <example xml:id="zend.service.amazon.s3.objects.public.example"><info><title>Zend_Service_Amazon_S3 Public Object Example</title></info>
+                            <example xml:id="zend.service.amazon.s3.objects.public.example"><title>Zend_Service_Amazon_S3 Public Object Example</title>
                                 
 
                                 <programlisting language="php"><![CDATA[
@@ -411,7 +411,7 @@ echo "Go to http://s3.amazonaws.com/my-own-bucket/Pictures/Me.png to see me!\n";
                     object keys, contained in the bucket.
                 </para>
 
-                <example xml:id="zend.service.amazon.s3.objects.list.example"><info><title>Zend_Service_Amazon_S3 Object Listing Example</title></info>
+                <example xml:id="zend.service.amazon.s3.objects.list.example"><title>Zend_Service_Amazon_S3 Object Listing Example</title>
                     
 
                     <programlisting language="php"><![CDATA[
@@ -452,7 +452,7 @@ foreach($list as $name) {
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.service.amazon.s3.streaming"><info><title>Data Streaming</title></info>
+    <section xml:id="zend.service.amazon.s3.streaming"><title>Data Streaming</title>
         
 
         <para>
@@ -467,7 +467,7 @@ foreach($list as $name) {
             <classname>Zend_Http_Response_Stream</classname>, which can be used as described in
             <link linkend="zend.http.client.streaming">HTTP Client Data Streaming</link> section.
 
-            <example xml:id="zend.service.amazon.s3.streaming.example1"><info><title>Zend_Service_Amazon_S3 Data Streaming Example</title></info>
+            <example xml:id="zend.service.amazon.s3.streaming.example1"><title>Zend_Service_Amazon_S3 Data Streaming Example</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -500,7 +500,7 @@ stream_copy_to_stream($response->getStream(), $fp);
         </para>
     </section>
 
-    <section xml:id="zend.service.amazon.s3.streams"><info><title>Stream wrapper</title></info>
+    <section xml:id="zend.service.amazon.s3.streams"><title>Stream wrapper</title>
         
 
         <para>
@@ -509,7 +509,7 @@ stream_copy_to_stream($response->getStream(), $fp);
             wrapper. For this, you need to register the client object as the stream wrapper:
         </para>
 
-        <example xml:id="zend.service.amazon.s3.streams.example"><info><title>Zend_Service_Amazon_S3 Streams Example</title></info>
+        <example xml:id="zend.service.amazon.s3.streams.example"><title>Zend_Service_Amazon_S3 Streams Example</title>
             
 
             <programlisting language="php"><![CDATA[

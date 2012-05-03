@@ -177,6 +177,8 @@ class FilterChain extends AbstractFilter
     {
         if (!is_array($options)) {
             $options = (array) $options;
+        } elseif (empty($options)) {
+            $options = null;
         } else {
             if (range(0, count($options) - 1) != array_keys($options)) {
                 $options = array($options);

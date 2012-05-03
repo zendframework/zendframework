@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.interactive-features"><info><title>Interactive Features</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.interactive-features"><title>Interactive Features</title>
     
 
-    <section xml:id="zend.pdf.pages.interactive-features.destinations"><info><title>Destinations</title></info>
+    <section xml:id="zend.pdf.pages.interactive-features.destinations"><title>Destinations</title>
         
 
         <para>
@@ -33,14 +33,14 @@
             the optional document open action can be specified.
         </para>
 
-        <section xml:id="zend.pdf.pages.interactive-features.destinations.types"><info><title>Supported Destination Types</title></info>
+        <section xml:id="zend.pdf.pages.interactive-features.destinations.types"><title>Supported Destination Types</title>
             
 
             <para>
                 The following types are supported by <classname>Zend_Pdf</classname> component.
             </para>
 
-            <section xml:id="zend.pdf.pages.interactive-features.destinations.types.zoom"><info><title>Zend_Pdf_Destination_Zoom</title></info>
+            <section xml:id="zend.pdf.pages.interactive-features.destinations.types.zoom"><title>Zend_Pdf_Destination_Zoom</title>
                 
 
                 <para>
@@ -125,7 +125,7 @@
                 </itemizedlist>
             </section>
 
-            <section xml:id="zend.pdf.pages.interactive-features.destinations.types.fit"><info><title>Zend_Pdf_Destination_Fit</title></info>
+            <section xml:id="zend.pdf.pages.interactive-features.destinations.types.fit"><title>Zend_Pdf_Destination_Fit</title>
                 
 
                 <para>
@@ -151,7 +151,7 @@
                 </para>
             </section>
 
-            <section xml:id="zend.pdf.pages.interactive-features.destinations.types.fit-horizontally"><info><title>Zend_Pdf_Destination_FitHorizontally</title></info>
+            <section xml:id="zend.pdf.pages.interactive-features.destinations.types.fit-horizontally"><title>Zend_Pdf_Destination_FitHorizontally</title>
                 
 
                 <para>
@@ -202,7 +202,7 @@
                 </itemizedlist>
             </section>
 
-            <section xml:id="zend.pdf.pages.interactive-features.destinations.types.fit-vertically"><info><title>Zend_Pdf_Destination_FitVertically</title></info>
+            <section xml:id="zend.pdf.pages.interactive-features.destinations.types.fit-vertically"><title>Zend_Pdf_Destination_FitVertically</title>
                 
 
                 <para>
@@ -253,7 +253,7 @@
                 </itemizedlist>
             </section>
 
-            <section xml:id="zend.pdf.pages.interactive-features.destinations.types.fit-rectangle"><info><title>Zend_Pdf_Destination_FitRectangle</title></info>
+            <section xml:id="zend.pdf.pages.interactive-features.destinations.types.fit-rectangle"><title>Zend_Pdf_Destination_FitRectangle</title>
                 
 
                 <para>
@@ -349,7 +349,7 @@
                 </itemizedlist>
             </section>
 
-            <section xml:id="zend.pdf.pages.interactive-features.destinations.types.fit-bounding-box"><info><title>Zend_Pdf_Destination_FitBoundingBox</title></info>
+            <section xml:id="zend.pdf.pages.interactive-features.destinations.types.fit-bounding-box"><title>Zend_Pdf_Destination_FitBoundingBox</title>
                 
 
                 <para>
@@ -372,7 +372,7 @@
                 </para>
             </section>
 
-            <section xml:id="zend.pdf.pages.interactive-features.destinations.types.fit-bounding-box-horizontally"><info><title>Zend_Pdf_Destination_FitBoundingBoxHorizontally</title></info>
+            <section xml:id="zend.pdf.pages.interactive-features.destinations.types.fit-bounding-box-horizontally"><title>Zend_Pdf_Destination_FitBoundingBoxHorizontally</title>
                 
 
                 <para>
@@ -423,7 +423,7 @@
                 </itemizedlist>
             </section>
 
-            <section xml:id="zend.pdf.pages.interactive-features.destinations.types.fit-bounding-box-vertically"><info><title>Zend_Pdf_Destination_FitBoundingBoxVertically</title></info>
+            <section xml:id="zend.pdf.pages.interactive-features.destinations.types.fit-bounding-box-vertically"><title>Zend_Pdf_Destination_FitBoundingBoxVertically</title>
                 
 
                 <para>
@@ -474,7 +474,7 @@
                 </itemizedlist>
             </section>
 
-            <section xml:id="zend.pdf.pages.interactive-features.destinations.types.named"><info><title>Zend_Pdf_Destination_Named</title></info>
+            <section xml:id="zend.pdf.pages.interactive-features.destinations.types.named"><title>Zend_Pdf_Destination_Named</title>
                 
 
                 <para>
@@ -510,7 +510,7 @@
             </section>
         </section>
 
-        <section xml:id="zend.pdf.pages.interactive-features.destinations.processing"><info><title>Document level destination processing</title></info>
+        <section xml:id="zend.pdf.pages.interactive-features.destinations.processing"><title>Document level destination processing</title>
             
 
             <para>
@@ -571,7 +571,7 @@
                 </para>
             </note>
 
-            <example xml:id="zend.pdf.interactive-features.destinations.example-1"><info><title>Destinations usage example</title></info>
+            <example xml:id="zend.pdf.interactive-features.destinations.example-1"><title>Destinations usage example</title>
                 
 
                 <programlisting language="php"><![CDATA[
@@ -609,7 +609,7 @@ $pdf->resolveDestination(Zend_Pdf_Destination_Named::create('Page3'));
         </section>
     </section>
 
-    <section xml:id="zend.pdf.pages.interactive-features.actions"><info><title>Actions</title></info>
+    <section xml:id="zend.pdf.pages.interactive-features.actions"><title>Actions</title>
         
 
         <para>
@@ -619,7 +619,7 @@ $pdf->resolveDestination(Zend_Pdf_Destination_Named::create('Page3'));
             appearance state.
         </para>
 
-        <section xml:id="zend.pdf.pages.interactive-features.actions.types"><info><title>Supported action types</title></info>
+        <section xml:id="zend.pdf.pages.interactive-features.actions.types"><title>Supported action types</title>
             
 
             <para>
@@ -810,7 +810,7 @@ $pdf->resolveDestination(Zend_Pdf_Destination_Named::create('Page3'));
             </para>
         </section>
 
-        <section xml:id="zend.pdf.pages.interactive-features.actions.chaining"><info><title>Actions chaining</title></info>
+        <section xml:id="zend.pdf.pages.interactive-features.actions.chaining"><title>Actions chaining</title>
             
 
             <para>
@@ -866,7 +866,7 @@ printf("Actions in a tree: %d\n", $actionsCount++);
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.pdf.pages.interactive-features.actions.open-action"><info><title>Document Open Action</title></info>
+        <section xml:id="zend.pdf.pages.interactive-features.actions.open-action"><title>Document Open Action</title>
             
 
             <para>
@@ -888,7 +888,7 @@ printf("Actions in a tree: %d\n", $actionsCount++);
         </section>
     </section>
 
-    <section xml:id="zend.pdf.pages.interactive-features.outlines"><info><title>Document Outline (bookmarks)</title></info>
+    <section xml:id="zend.pdf.pages.interactive-features.outlines"><title>Document Outline (bookmarks)</title>
         
 
         <para>
@@ -1101,7 +1101,7 @@ $pdf->save($path, true);
         </note>
     </section>
 
-    <section xml:id="zend.pdf.pages.interactive-features.annotations"><info><title>Annotations</title></info>
+    <section xml:id="zend.pdf.pages.interactive-features.annotations"><title>Annotations</title>
         
 
         <para>

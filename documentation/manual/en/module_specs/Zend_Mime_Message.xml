@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mime.message"><info><title>Zend_Mime_Message</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mime.message"><title>Zend_Mime_Message</title>
     
 
-    <section xml:id="zend.mime.message.introduction"><info><title>Introduction</title></info>
+    <section xml:id="zend.mime.message.introduction"><title>Introduction</title>
         
 
         <para>
@@ -18,7 +18,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.mime.message.instantiation"><info><title>Instantiation</title></info>
+    <section xml:id="zend.mime.message.instantiation"><title>Instantiation</title>
         
 
         <para>
@@ -26,7 +26,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.mime.message.addparts"><info><title>Adding MIME Parts</title></info>
+    <section xml:id="zend.mime.message.addparts"><title>Adding MIME Parts</title>
         
 
         <para>
@@ -53,7 +53,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.mime.message.bondary"><info><title>Boundary handling</title></info>
+    <section xml:id="zend.mime.message.bondary"><title>Boundary handling</title>
         
 
         <para>
@@ -80,7 +80,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.mime.message.parse"><info><title>parsing a string to create a Zend_Mime_Message object (experimental)</title></info>
+    <section xml:id="zend.mime.message.parse"><title>parsing a string to create a Zend_Mime_Message object (experimental)</title>
         
 
         <para>

@@ -27,6 +27,7 @@ use ArrayIterator,
     Zend\EventManager\EventDescription,
     Zend\EventManager\EventManager,
     Zend\EventManager\ResponseCollection,
+    Zend\EventManager\StaticEventManager,
     Zend\Stdlib\CallbackHandler;
 
 /**
@@ -41,6 +42,8 @@ class EventManagerTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
+        StaticEventManager::resetInstance();
+
         if (isset($this->message)) {
             unset($this->message);
         }

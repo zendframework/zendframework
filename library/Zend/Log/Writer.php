@@ -31,7 +31,7 @@ interface Writer
     /**
      * Add a log filter to the writer
      *
-     * @param  int|\Zend\Log\Filter $filter
+     * @param  int|Filter $filter
      * @return Writer
      */
     public function addFilter($filter);
@@ -39,7 +39,7 @@ interface Writer
     /**
      * Set a message formatter for the writer
      *
-     * @param  \Zend\Log\Formatter|Callable $formatter
+     * @param Formatter $formatter
      * @return Writer
      */
     public function setFormatter(Formatter $formatter);
@@ -47,10 +47,10 @@ interface Writer
     /**
      * Write a log message
      *
-     * @param  array|mixed $event
+     * @param  array $event
      * @return Writer
      */
-    public function write($event);
+    public function write(array $event);
 
     /**
      * Perform shutdown activities

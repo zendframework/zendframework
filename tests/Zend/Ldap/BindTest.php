@@ -20,7 +20,9 @@
  */
 
 namespace ZendTest\Ldap;
-use Zend\Ldap;
+
+use Zend\Ldap,
+    Zend\Ldap\Exception;
 
 /* Note: The ldap_connect function does not actually try to connect. This
  * is why many tests attempt to bind with invalid credentials. If the
@@ -38,10 +40,10 @@ use Zend\Ldap;
  */
 class BindTest extends \PHPUnit_Framework_TestCase
 {
-    protected $_options = null;
-    protected $_principalName = TESTS_ZEND_LDAP_PRINCIPAL_NAME;
-    protected $_altUsername = TESTS_ZEND_LDAP_ALT_USERNAME;
-    protected $_bindRequiresDn = false;
+    protected $options = null;
+    protected $principalName = TESTS_ZEND_LDAP_PRINCIPAL_NAME;
+    protected $altUsername = TESTS_ZEND_LDAP_ALT_USERNAME;
+    protected $bindRequiresDn = false;
 
     public function setUp()
     {
@@ -49,31 +51,40 @@ class BindTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped("Zend_Ldap online tests are not enabled");
         }
 
-        $this->_options = array(
-            'host' => TESTS_ZEND_LDAP_HOST,
+        $this->options = array(
+            'host'     => TESTS_ZEND_LDAP_HOST,
             'username' => TESTS_ZEND_LDAP_USERNAME,
             'password' => TESTS_ZEND_LDAP_PASSWORD,
-            'baseDn' => TESTS_ZEND_LDAP_BASE_DN,
+            'baseDn'   => TESTS_ZEND_LDAP_BASE_DN,
         );
-        if (defined('TESTS_ZEND_LDAP_PORT'))
-            $this->_options['port'] = TESTS_ZEND_LDAP_PORT;
-        if (defined('TESTS_ZEND_LDAP_USE_START_TLS'))
-            $this->_options['useStartTls'] = TESTS_ZEND_LDAP_USE_START_TLS;
-        if (defined('TESTS_ZEND_LDAP_USE_SSL'))
-            $this->_options['useSsl'] = TESTS_ZEND_LDAP_USE_SSL;
-        if (defined('TESTS_ZEND_LDAP_BIND_REQUIRES_DN'))
-            $this->_options['bindRequiresDn'] = TESTS_ZEND_LDAP_BIND_REQUIRES_DN;
-        if (defined('TESTS_ZEND_LDAP_ACCOUNT_FILTER_FORMAT'))
-            $this->_options['accountFilterFormat'] = TESTS_ZEND_LDAP_ACCOUNT_FILTER_FORMAT;
-        if (defined('TESTS_ZEND_LDAP_ACCOUNT_DOMAIN_NAME'))
-            $this->_options['accountDomainName'] = TESTS_ZEND_LDAP_ACCOUNT_DOMAIN_NAME;
-        if (defined('TESTS_ZEND_LDAP_ACCOUNT_DOMAIN_NAME_SHORT'))
-            $this->_options['accountDomainNameShort'] = TESTS_ZEND_LDAP_ACCOUNT_DOMAIN_NAME_SHORT;
-        if (defined('TESTS_ZEND_LDAP_ALT_USERNAME'))
-            $this->_altUsername = TESTS_ZEND_LDAP_ALT_USERNAME;
+        if (defined('TESTS_ZEND_LDAP_PORT')) {
+            $this->options['port'] = TESTS_ZEND_LDAP_PORT;
+        }
+        if (defined('TESTS_ZEND_LDAP_USE_START_TLS')) {
+            $this->options['useStartTls'] = TESTS_ZEND_LDAP_USE_START_TLS;
+        }
+        if (defined('TESTS_ZEND_LDAP_USE_SSL')) {
+            $this->options['useSsl'] = TESTS_ZEND_LDAP_USE_SSL;
+        }
+        if (defined('TESTS_ZEND_LDAP_BIND_REQUIRES_DN')) {
+            $this->options['bindRequiresDn'] = TESTS_ZEND_LDAP_BIND_REQUIRES_DN;
+        }
+        if (defined('TESTS_ZEND_LDAP_ACCOUNT_FILTER_FORMAT')) {
+            $this->options['accountFilterFormat'] = TESTS_ZEND_LDAP_ACCOUNT_FILTER_FORMAT;
+        }
+        if (defined('TESTS_ZEND_LDAP_ACCOUNT_DOMAIN_NAME')) {
+            $this->options['accountDomainName'] = TESTS_ZEND_LDAP_ACCOUNT_DOMAIN_NAME;
+        }
+        if (defined('TESTS_ZEND_LDAP_ACCOUNT_DOMAIN_NAME_SHORT')) {
+            $this->options['accountDomainNameShort'] = TESTS_ZEND_LDAP_ACCOUNT_DOMAIN_NAME_SHORT;
+        }
+        if (defined('TESTS_ZEND_LDAP_ALT_USERNAME')) {
+            $this->altUsername = TESTS_ZEND_LDAP_ALT_USERNAME;
+        }
 
-        if (isset($this->_options['bindRequiresDn']))
-            $this->_bindRequiresDn = $this->_options['bindRequiresDn'];
+        if (isset($this->options['bindRequiresDn'])) {
+            $this->bindRequiresDn = $this->options['bindRequiresDn'];
+        }
     }
 
     public function testEmptyOptionsBind()
@@ -82,26 +93,28 @@ class BindTest extends \PHPUnit_Framework_TestCase
         try {
             $ldap->bind();
             $this->fail('Expected exception for empty options');
-        } catch (Ldap\Exception $zle) {
+        } catch (Exception\LdapException $zle) {
             $this->assertContains('A host parameter is required', $zle->getMessage());
         }
     }
+
     public function testAnonymousBind()
     {
-        $options = $this->_options;
+        $options = $this->options;
         unset($options['password']);
 
         $ldap = new Ldap\Ldap($options);
         try {
             $ldap->bind();
-        } catch (Ldap\Exception $zle) {
+        } catch (Exception\LdapException $zle) {
             // or I guess the server doesn't allow unauthenticated binds
             $this->assertContains('unauthenticated bind', $zle->getMessage());
         }
     }
+
     public function testNoBaseDnBind()
     {
-        $options = $this->_options;
+        $options = $this->options;
         unset($options['baseDn']);
         $options['bindRequiresDn'] = true;
 
@@ -109,40 +122,44 @@ class BindTest extends \PHPUnit_Framework_TestCase
         try {
             $ldap->bind('invalid', 'ignored');
             $this->fail('Expected exception for baseDn missing');
-        } catch (Ldap\Exception $zle) {
+        } catch (Exception\LdapException $zle) {
             $this->assertContains('Base DN not set', $zle->getMessage());
         }
     }
+
     public function testNoDomainNameBind()
     {
-        $options = $this->_options;
+        $options = $this->options;
         unset($options['accountDomainName']);
-        $options['bindRequiresDn'] = false;
+        $options['bindRequiresDn']       = false;
         $options['accountCanonicalForm'] = Ldap\Ldap::ACCTNAME_FORM_PRINCIPAL;
 
         $ldap = new Ldap\Ldap($options);
         try {
             $ldap->bind('invalid', 'ignored');
             $this->fail('Expected exception for missing accountDomainName');
-        } catch (Ldap\Exception $zle) {
+        } catch (Exception\LdapException $zle) {
             $this->assertContains('Option required: accountDomainName', $zle->getMessage());
         }
     }
+
     public function testPlainBind()
     {
-        $ldap = new Ldap\Ldap($this->_options);
+        $ldap = new Ldap\Ldap($this->options);
         $ldap->bind();
         $this->assertNotNull($ldap->getResource());
     }
+
     public function testConnectBind()
     {
-        $ldap = new Ldap\Ldap($this->_options);
+        $ldap = new Ldap\Ldap($this->options);
         $ldap->connect()->bind();
         $this->assertNotNull($ldap->getResource());
     }
+
     public function testExplicitParamsBind()
     {
-        $options = $this->_options;
+        $options  = $this->options;
         $username = $options['username'];
         $password = $options['password'];
 
@@ -153,23 +170,25 @@ class BindTest extends \PHPUnit_Framework_TestCase
         $ldap->bind($username, $password);
         $this->assertNotNull($ldap->getResource());
     }
+
     public function testRequiresDnBind()
     {
-        $options = $this->_options;
+        $options = $this->options;
 
         $options['bindRequiresDn'] = true;
 
         $ldap = new Ldap\Ldap($options);
         try {
-            $ldap->bind($this->_altUsername, 'invalid');
+            $ldap->bind($this->altUsername, 'invalid');
             $this->fail('Expected exception not thrown');
-        } catch (Ldap\Exception $zle) {
+        } catch (Exception\LdapException $zle) {
             $this->assertContains('Invalid credentials', $zle->getMessage());
         }
     }
+
     public function testRequiresDnWithoutDnBind()
     {
-        $options = $this->_options;
+        $options = $this->options;
 
         $options['bindRequiresDn'] = true;
 
@@ -177,9 +196,9 @@ class BindTest extends \PHPUnit_Framework_TestCase
 
         $ldap = new Ldap\Ldap($options);
         try {
-            $ldap->bind($this->_principalName);
+            $ldap->bind($this->principalName);
             $this->fail('Expected exception not thrown');
-        } catch (Ldap\Exception $zle) {
+        } catch (Exception\LdapException $zle) {
             /* Note that if your server actually allows anonymous binds this test will fail.
              */
             $this->assertContains('Failed to retrieve DN', $zle->getMessage());
@@ -188,29 +207,32 @@ class BindTest extends \PHPUnit_Framework_TestCase
 
     public function testBindWithEmptyPassword()
     {
-        $options = $this->_options;
+        $options                       = $this->options;
         $options['allowEmptyPassword'] = false;
-        $ldap = new Ldap\Ldap($options);
+        $ldap                          = new Ldap\Ldap($options);
         try {
-            $ldap->bind($this->_altUsername, '');
+            $ldap->bind($this->altUsername, '');
             $this->fail('Expected exception for empty password');
-        } catch (Ldap\Exception $zle) {
+        } catch (Exception\LdapException $zle) {
             $this->assertContains('Empty password not allowed - see allowEmptyPassword option.',
-                $zle->getMessage());
+                $zle->getMessage()
+            );
         }
 
         $options['allowEmptyPassword'] = true;
-        $ldap = new Ldap\Ldap($options);
+        $ldap                          = new Ldap\Ldap($options);
         try {
-            $ldap->bind($this->_altUsername, '');
-        } catch (Ldap\Exception $zle) {
+            $ldap->bind($this->altUsername, '');
+        } catch (Exception\LdapException $zle) {
             if ($zle->getMessage() ===
-                    'Empty password not allowed - see allowEmptyPassword option.') {
+                'Empty password not allowed - see allowEmptyPassword option.'
+            ) {
                 $this->fail('Exception for empty password');
             } else {
                 $message = $zle->getMessage();
-                $this->assertTrue(strstr($message, 'Invalid credentials') ||
-                    strstr($message, 'Server is unwilling to perform'));
+                $this->assertTrue(strstr($message, 'Invalid credentials')
+                        || strstr($message, 'Server is unwilling to perform')
+                );
                 return;
             }
         }
@@ -219,16 +241,17 @@ class BindTest extends \PHPUnit_Framework_TestCase
 
     public function testBindWithoutDnUsernameAndDnRequired()
     {
-        $options = $this->_options;
-        $options['username'] = TESTS_ZEND_LDAP_ALT_USERNAME;
+        $options                   = $this->options;
+        $options['username']       = TESTS_ZEND_LDAP_ALT_USERNAME;
         $options['bindRequiresDn'] = true;
-        $ldap = new Ldap\Ldap($options);
+        $ldap                      = new Ldap\Ldap($options);
         try {
             $ldap->bind();
             $this->fail('Expected exception for empty password');
-        } catch (Ldap\Exception $zle) {
+        } catch (Exception\LdapException $zle) {
             $this->assertContains('Binding requires username in DN form',
-                $zle->getMessage());
+                $zle->getMessage()
+            );
         }
     }
 
@@ -237,7 +260,7 @@ class BindTest extends \PHPUnit_Framework_TestCase
      */
     public function testBoundUserIsFalseIfNotBoundToLDAP()
     {
-        $ldap = new Ldap\Ldap($this->_options);
+        $ldap = new Ldap\Ldap($this->options);
         $this->assertFalse($ldap->getBoundUser());
     }
 
@@ -246,7 +269,7 @@ class BindTest extends \PHPUnit_Framework_TestCase
      */
     public function testBoundUserIsReturnedAfterBinding()
     {
-        $ldap = new Ldap\Ldap($this->_options);
+        $ldap = new Ldap\Ldap($this->options);
         $ldap->bind();
         $this->assertEquals(TESTS_ZEND_LDAP_USERNAME, $ldap->getBoundUser());
     }
@@ -256,7 +279,7 @@ class BindTest extends \PHPUnit_Framework_TestCase
      */
     public function testResourceIsAlwaysReturned()
     {
-        $ldap = new Ldap\Ldap($this->_options);
+        $ldap = new Ldap\Ldap($this->options);
         $this->assertNotNull($ldap->getResource());
         $this->assertTrue(is_resource($ldap->getResource()));
         $this->assertEquals(TESTS_ZEND_LDAP_USERNAME, $ldap->getBoundUser());

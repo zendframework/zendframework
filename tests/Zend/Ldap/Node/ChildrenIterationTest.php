@@ -20,14 +20,9 @@
  */
 
 namespace ZendTest\Ldap\Node;
-use Zend\Ldap;
 
-/**
- * Zend_Ldap_OnlineTestCase
- */
-/**
- * @see Zend_Ldap_Node
- */
+use Zend\Ldap,
+    ZendTest\Ldap as TestLdap;
 
 /**
  * @category   Zend
@@ -38,66 +33,63 @@ use Zend\Ldap;
  * @group      Zend_Ldap
  * @group      Zend_Ldap_Node
  */
-class ChildrenIterationTest extends \ZendTest\Ldap\OnlineTestCase
+class ChildrenIterationTest extends TestLdap\AbstractOnlineTestCase
 {
     protected function setUp()
     {
         parent::setUp();
-        $this->_prepareLDAPServer();
+        $this->prepareLDAPServer();
     }
 
     protected function tearDown()
     {
-        $this->_cleanupLDAPServer();
+        $this->cleanupLDAPServer();
         parent::tearDown();
     }
 
     public function testSimpleIteration()
     {
-        $node=$this->_getLDAP()->getBaseNode();
-        $children=$node->getChildren();
+        $node     = $this->getLDAP()->getBaseNode();
+        $children = $node->getChildren();
 
-        $i=1;
+        $i = 1;
         foreach ($children as $rdn => $n) {
-            $dn=$n->getDn()->toString(Ldap\Dn::ATTR_CASEFOLD_LOWER);
-            $rdn=Ldap\Dn::implodeRdn($n->getRdnArray(), Ldap\Dn::ATTR_CASEFOLD_LOWER);
-            if ($i==1) {
+            $dn  = $n->getDn()->toString(Ldap\Dn::ATTR_CASEFOLD_LOWER);
+            $rdn = Ldap\Dn::implodeRdn($n->getRdnArray(), Ldap\Dn::ATTR_CASEFOLD_LOWER);
+            if ($i == 1) {
                 $this->assertEquals('ou=Node', $rdn);
-                $this->assertEquals($this->_createDn('ou=Node,'), $dn);
-            }
-            else {
-                $this->assertEquals('ou=Test' . ($i-1), $rdn);
-                $this->assertEquals($this->_createDn('ou=Test' . ($i-1) . ','), $dn);
+                $this->assertEquals($this->createDn('ou=Node,'), $dn);
+            } else {
+                $this->assertEquals('ou=Test' . ($i - 1), $rdn);
+                $this->assertEquals($this->createDn('ou=Test' . ($i - 1) . ','), $dn);
             }
             $i++;
         }
-        $this->assertEquals(6, $i-1);
+        $this->assertEquals(6, $i - 1);
     }
 
     public function testSimpleRecursiveIteration()
     {
-        $node=$this->_getLDAP()->getBaseNode();
-        $ri=new \RecursiveIteratorIterator($node, \RecursiveIteratorIterator::SELF_FIRST);
-        $i=0;
+        $node = $this->getLDAP()->getBaseNode();
+        $ri   = new \RecursiveIteratorIterator($node, \RecursiveIteratorIterator::SELF_FIRST);
+        $i    = 0;
         foreach ($ri as $rdn => $n) {
-            $dn=$n->getDn()->toString(Ldap\Dn::ATTR_CASEFOLD_LOWER);
-            $rdn=Ldap\Dn::implodeRdn($n->getRdnArray(), Ldap\Dn::ATTR_CASEFOLD_LOWER);
-            if ($i==0) {
+            $dn  = $n->getDn()->toString(Ldap\Dn::ATTR_CASEFOLD_LOWER);
+            $rdn = Ldap\Dn::implodeRdn($n->getRdnArray(), Ldap\Dn::ATTR_CASEFOLD_LOWER);
+            if ($i == 0) {
                 $this->assertEquals(Ldap\Dn::fromString(TESTS_ZEND_LDAP_WRITEABLE_SUBTREE)
-                    ->toString(Ldap\Dn::ATTR_CASEFOLD_LOWER), $dn);
-            }
-            else if ($i==1) {
+                        ->toString(Ldap\Dn::ATTR_CASEFOLD_LOWER), $dn
+                );
+            } else if ($i == 1) {
                 $this->assertEquals('ou=Node', $rdn);
-                $this->assertEquals($this->_createDn('ou=Node,'), $dn);
-            }
-            else {
-                if ($i<4) {
-                    $j=$i-1;
-                    $base=$this->_createDn('ou=Node,');
-                }
-                else {
-                    $j=$i-3;
-                    $base=Ldap\Dn::fromString(TESTS_ZEND_LDAP_WRITEABLE_SUBTREE)
+                $this->assertEquals($this->createDn('ou=Node,'), $dn);
+            } else {
+                if ($i < 4) {
+                    $j    = $i - 1;
+                    $base = $this->createDn('ou=Node,');
+                } else {
+                    $j    = $i - 3;
+                    $base = Ldap\Dn::fromString(TESTS_ZEND_LDAP_WRITEABLE_SUBTREE)
                         ->toString(Ldap\Dn::ATTR_CASEFOLD_LOWER);
                 }
                 $this->assertEquals('ou=Test' . $j, $rdn);
@@ -115,7 +107,7 @@ class ChildrenIterationTest extends \ZendTest\Ldap\OnlineTestCase
      */
     public function testCallingNextAfterIterationShouldNotThrowException()
     {
-        $node = $this->_getLDAP()->getBaseNode();
+        $node  = $this->getLDAP()->getBaseNode();
         $nodes = $node->searchChildren('(objectClass=*)');
         foreach ($nodes as $rdn => $n) {
             // do nothing - just iterate

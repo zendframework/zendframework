@@ -78,7 +78,7 @@ class XmlWriter extends AbstractGenerator
      * Close an previously opened XML element
      *
      * @param string $name
-     * @return void
+     * @return XmlWriter
      */
     protected function _closeElement($name)
     {

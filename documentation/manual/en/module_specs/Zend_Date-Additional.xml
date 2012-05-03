@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.date.additional"><info><title>Working Examples</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.date.additional"><title>Working Examples</title>
     
 
     <para>
@@ -9,7 +9,7 @@
         using of them.
     </para>
 
-    <section xml:id="zend.date.additional.checking"><info><title>Checking Dates</title></info>
+    <section xml:id="zend.date.additional.checking"><title>Checking Dates</title>
         
 
         <para>
@@ -50,7 +50,7 @@
             '<command>31.February.2000</command>' because it knows that this date is impossible.
         </para>
 
-        <example xml:id="zend.date.additional.checking.example-1"><info><title>Checking Dates</title></info>
+        <example xml:id="zend.date.additional.checking.example-1"><title>Checking Dates</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -81,7 +81,7 @@ if (Zend_Date::isDate($date,'dd MMMM yyyy', 'en')) {
         </example>
     </section>
 
-    <section xml:id="zend.date.additional.sunrise-sunset"><info><title>Sunrise and Sunset</title></info>
+    <section xml:id="zend.date.additional.sunrise-sunset"><title>Sunrise and Sunset</title>
         
 
         <para>
@@ -105,7 +105,7 @@ if (Zend_Date::isDate($date,'dd MMMM yyyy', 'en')) {
             names of all available predefined cities for the helper class.
         </para>
 
-        <example xml:id="zend.date.additional.sunrise-sunset.example-1"><info><title>Getting all Available Cities</title></info>
+        <example xml:id="zend.date.additional.sunrise-sunset.example-1"><title>Getting all Available Cities</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -127,7 +127,7 @@ print_r (Zend_Date_Cities::getCityList());
             all functions. If it is not set, the '<property>effective</property>' horizon is used.
         </para>
 
-        <table xml:id="zend.date.additional.sunrise-sunset.table"><info><title>Types of Supported Horizons for Sunset and Sunrise</title></info>
+        <table xml:id="zend.date.additional.sunrise-sunset.table"><title>Types of Supported Horizons for Sunset and Sunrise</title>
             
 
             <tgroup cols="3">
@@ -177,7 +177,7 @@ print_r (Zend_Date_Cities::getCityList());
             and optional the '<property>horizon</property>'.
         </para>
 
-        <example xml:id="zend.date.additional.sunrise-sunset.example-2"><info><title>Getting the Location for a City</title></info>
+        <example xml:id="zend.date.additional.sunrise-sunset.example-2"><title>Getting the Location for a City</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -203,7 +203,7 @@ $mylocation = array('latitude' => 41.5, 'longitude' => 13.2446);
             <classname>Zend_Date</classname> object will be returned with the calculated time.
         </para>
 
-        <example xml:id="zend.date.additional.sunrise-sunset.example-3"><info><title>Calculating Sun Information</title></info>
+        <example xml:id="zend.date.additional.sunrise-sunset.example-3"><title>Calculating Sun Information</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -226,7 +226,7 @@ foreach ($info as $sun) {
         </example>
     </section>
 
-    <section xml:id="zend.date.additional.timezones"><info><title>Time Zones</title></info>
+    <section xml:id="zend.date.additional.timezones"><title>Time Zones</title>
         
 
         <para>
@@ -258,7 +258,7 @@ foreach ($info as $sun) {
             automatically when the date object is created.
         </para>
 
-        <example xml:id="zend.date.additional.timezones.example-1"><info><title>Working with Time Zones</title></info>
+        <example xml:id="zend.date.additional.timezones.example-1"><title>Working with Time Zones</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -302,7 +302,7 @@ print $date->getIso();
             effect. It is possible to have several dates with different timezones.
         </para>
 
-        <example xml:id="zend.date.additional.timezones.example-2"><info><title>Multiple Time Zones</title></info>
+        <example xml:id="zend.date.additional.timezones.example-2"><title>Multiple Time Zones</title>
             
 
             <programlisting language="php"><![CDATA[

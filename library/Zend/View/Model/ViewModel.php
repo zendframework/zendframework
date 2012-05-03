@@ -91,7 +91,7 @@ class ViewModel implements Model
         }
         $this->setVariables($variables);
 
-        if(null !== $options) {
+        if (null !== $options) {
             $this->setOptions($options);
         }
     }

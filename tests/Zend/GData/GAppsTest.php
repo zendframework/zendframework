@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_GData_GApps
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -27,7 +27,7 @@ use Zend\GData\GApps;
  * @category   Zend
  * @package    Zend_GData_GApps
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_GData
  * @group      Zend_GData_GApps
@@ -40,7 +40,7 @@ class GAppsTest extends \PHPUnit_Framework_TestCase
     {
         // These tests shouldn't be doing anything online, so we can use
         // bogous auth credentials.
-        $this->gdata = new GApps\GApps(null, self::TEST_DOMAIN);
+        $this->gdata = new GApps(null, self::TEST_DOMAIN);
     }
 
     public function testMagicFactoryProvidesQueriesWithDomains()

@@ -22,15 +22,10 @@
 namespace Zend\Ldap\Node;
 
 use Zend\Ldap;
-use Zend\Ldap\Node\RootDse;
 
 /**
- * Zend_Ldap_Node_Schema provides a simple data-container for the Schema node.
+ * Zend\Ldap\Node\Schema provides a simple data-container for the Schema node.
  *
- * @uses       \Zend\Ldap\Node\AbstractNode
- * @uses       \Zend\Ldap\Node\RootDse\RootDse
- * @uses       \Zend\Ldap\Node\RootDse\ActiveDirectory
- * @uses       \Zend\Ldap\Node\Schema\ActiveDirectory
  * @category   Zend
  * @package    Zend_Ldap
  * @subpackage Schema
@@ -48,12 +43,11 @@ class Schema extends AbstractNode
      * Factory method to create the Schema node.
      *
      * @param  \Zend\Ldap\Ldap $ldap
-     * @return \Zend\Ldap\Node\Schema
-     * @throws \Zend\Ldap\Exception
+     * @return Schema
      */
     public static function create(Ldap\Ldap $ldap)
     {
-        $dn = $ldap->getRootDse()->getSchemaDn();
+        $dn   = $ldap->getRootDse()->getSchemaDn();
         $data = $ldap->getEntry($dn, array('*', '+'), true);
         switch ($ldap->getRootDse()->getServerType()) {
             case RootDse::SERVER_TYPE_ACTIVEDIRECTORY:
@@ -71,24 +65,24 @@ class Schema extends AbstractNode
      *
      * Constructor is protected to enforce the use of factory methods.
      *
-     * @param  \Zend\Ldap\Dn $dn
-     * @param  array        $data
-     * @param  \Zend\Ldap\Ldap    $ldap
+     * @param  \Zend\Ldap\Dn   $dn
+     * @param  array           $data
+     * @param  \Zend\Ldap\Ldap $ldap
      */
     protected function __construct(Ldap\Dn $dn, array $data, Ldap\Ldap $ldap)
     {
         parent::__construct($dn, $data, true);
-        $this->_parseSchema($dn, $ldap);
+        $this->parseSchema($dn, $ldap);
     }
 
     /**
      * Parses the schema
      *
-     * @param  \Zend\Ldap\Dn $dn
-     * @param  \Zend\Ldap\Ldap    $ldap
-     * @return \Zend\Ldap\Node\Schema Provides a fluid interface
+     * @param  \Zend\Ldap\Dn   $dn
+     * @param  \Zend\Ldap\Ldap $ldap
+     * @return Schema Provides a fluid interface
      */
-    protected function _parseSchema(Ldap\Dn $dn, Ldap\Ldap $ldap)
+    protected function parseSchema(Ldap\Dn $dn, Ldap\Ldap $ldap)
     {
         return $this;
     }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.introduction"><info><title>Introduction</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.introduction"><title>Introduction</title>
 
 
     <para>
@@ -9,7 +9,7 @@
         user-defined order.
     </para>
 
-    <section xml:id="zend.validate.introduction.definition"><info><title>What is a validator?</title></info>
+    <section xml:id="zend.validate.introduction.definition"><title>What is a validator?</title>
 
 
         <para>
@@ -30,7 +30,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.validate.introduction.using"><info><title>Basic usage of validators</title></info>
+    <section xml:id="zend.validate.introduction.using"><title>Basic usage of validators</title>
 
 
         <para>
@@ -85,7 +85,7 @@ if ($validator->isValid($email)) {
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.validate.introduction.messages"><info><title>Customizing messages</title></info>
+    <section xml:id="zend.validate.introduction.messages"><title>Customizing messages</title>
 
 
         <para>
@@ -172,7 +172,7 @@ if (!validator->isValid('word')) {
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.validate.introduction.static"><info><title>Using the static is() method</title></info>
+    <section xml:id="zend.validate.introduction.static"><title>Using the static is() method</title>
 
 
         <para>
@@ -227,7 +227,7 @@ if (Zend_Validate::is($value, 'Between', array('min' => 1, 'max' => 12))) {
             <link linkend="zend.filter.input">Zend_Filter_Input</link>.
         </para>
 
-        <section xml:id="zend.validate.introduction.static.namespaces"><info><title>Namespaces</title></info>
+        <section xml:id="zend.validate.introduction.static.namespaces"><title>Namespaces</title>
 
 
             <para>
@@ -303,7 +303,7 @@ if (Zend_Validate::is($value,
         </section>
     </section>
 
-    <section xml:id="zend.validate.introduction.translation"><info><title>Translating messages</title></info>
+    <section xml:id="zend.validate.introduction.translation"><title>Translating messages</title>
 
 
         <para>

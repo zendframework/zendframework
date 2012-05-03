@@ -111,6 +111,17 @@ class FilterChainTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($valueExpected, $chain->filter($value));
     }
 
+    public function testCanRetrieveFilterWithUndefinedConstructor()
+    {
+        $chain = new FilterChain(array(
+            'filters' => array(
+                array('name' => 'int'),
+            ),
+        ));
+        $filtered = $chain->filter('127.1');
+        $this->assertEquals(127, $filtered);
+    }
+
     protected function getChainConfig()
     {
         return array(

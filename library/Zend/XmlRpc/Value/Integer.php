@@ -23,7 +23,7 @@ namespace Zend\XmlRpc\Value;
 use Zend\XmlRpc\Exception;
 
 /**
- * @uses       \Zend\XmlRpc\Value\Exception
+ * @uses       \Zend\XmlRpc\Value\Exception\ExceptionInterface
  * @uses       \Zend\XmlRpc\Value\Scalar
  * @category   Zend
  * @package    Zend_XmlRpc

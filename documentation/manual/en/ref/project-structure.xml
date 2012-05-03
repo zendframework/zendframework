@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<appendix xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="project-structure"><info><title>Recommended Project Structure for Zend Framework MVC Applications</title></info>
+<appendix xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="project-structure"><title>Recommended Project Structure for Zend Framework MVC Applications</title>
     
 
-    <section xml:id="project-structure.overview"><info><title>Overview</title></info>
+    <section xml:id="project-structure.overview"><title>Overview</title>
         
 
         <para>
@@ -32,7 +32,7 @@
         </para>
     </section>
 
-    <section xml:id="project-structure.project"><info><title>Recommended Project Directory Structure</title></info>
+    <section xml:id="project-structure.project"><title>Recommended Project Directory Structure</title>
         
 
         <programlisting language="text"><![CDATA[
@@ -239,7 +239,7 @@
         </itemizedlist>
     </section>
 
-    <section xml:id="project-structure.filesystem"><info><title>Module Structure</title></info>
+    <section xml:id="project-structure.filesystem"><title>Module Structure</title>
         
 
         <para>
@@ -273,7 +273,7 @@
         </para>
     </section>
 
-    <section xml:id="project-structure.rewrite"><info><title>Rewrite Configuration Guide</title></info>
+    <section xml:id="project-structure.rewrite"><title>Rewrite Configuration Guide</title>
         
 
         <para>
@@ -283,7 +283,7 @@
             writing.
         </para>
 
-        <section xml:id="project-structure.rewrite.apache"><info><title>Apache HTTP Server</title></info>
+        <section xml:id="project-structure.rewrite.apache"><title>Apache HTTP Server</title>
             
 
             <para>
@@ -295,7 +295,7 @@
                 version for more information.
             </para>
 
-            <section xml:id="project-structure.rewrite.apache.vhost"><info><title>Rewriting inside a VirtualHost</title></info>
+            <section xml:id="project-structure.rewrite.apache.vhost"><title>Rewriting inside a VirtualHost</title>
                 
 
                 <para>
@@ -328,7 +328,7 @@
                 </para>
             </section>
 
-            <section xml:id="project-structure.rewrite.apache.htaccess"><info><title>Rewriting within a .htaccess file</title></info>
+            <section xml:id="project-structure.rewrite.apache.htaccess"><title>Rewriting within a .htaccess file</title>
                 
 
                 <para>
@@ -356,7 +356,7 @@ RewriteRule ^.*$ index.php [NC,L]
 
         </section>
 
-        <section xml:id="project-structure.rewrite.iis"><info><title>Microsoft Internet Information Server</title></info>
+        <section xml:id="project-structure.rewrite.iis"><title>Microsoft Internet Information Server</title>
             
 
             <para>

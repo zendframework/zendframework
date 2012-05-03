@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.query-language"><info><title>Query Language</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.query-language"><title>Query Language</title>
     
 
     <para>
@@ -16,7 +16,7 @@
         <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://lucene.apache.org/java/2_3_0/queryparsersyntax.html">here</link>.
     </para>
 
-    <section xml:id="zend.search.lucene.query-language.terms"><info><title>Terms</title></info>
+    <section xml:id="zend.search.lucene.query-language.terms"><title>Terms</title>
         
 
         <para>
@@ -42,7 +42,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.search.lucene.query-language.fields"><info><title>Fields</title></info>
+    <section xml:id="zend.search.lucene.query-language.fields"><title>Fields</title>
         
 
         <para>
@@ -115,7 +115,7 @@ title:Do it right
         </para>
     </section>
 
-    <section xml:id="zend.search.lucene.query-language.wildcard"><info><title>Wildcards</title></info>
+    <section xml:id="zend.search.lucene.query-language.wildcard"><title>Wildcards</title>
         
 
         <para>
@@ -186,7 +186,7 @@ test*
         </para>
     </section>
 
-    <section xml:id="zend.search.lucene.query-language.modifiers"><info><title>Term Modifiers</title></info>
+    <section xml:id="zend.search.lucene.query-language.modifiers"><title>Term Modifiers</title>
         
 
         <para>
@@ -199,7 +199,7 @@ test*
         </para>
     </section>
 
-    <section xml:id="zend.search.lucene.query-language.range"><info><title>Range Searches</title></info>
+    <section xml:id="zend.search.lucene.query-language.range"><title>Range Searches</title>
         
 
         <para>
@@ -243,7 +243,7 @@ title:{Aida TO Carmen}
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.search.lucene.query-language.fuzzy"><info><title>Fuzzy Searches</title></info>
+    <section xml:id="zend.search.lucene.query-language.fuzzy"><title>Fuzzy Searches</title>
         
 
         <para>
@@ -272,7 +272,7 @@ roam~0.8
         </para>
     </section>
 
-    <section xml:id="zend.search.lucene.query-language.matched-terms-limitations"><info><title>Matched terms limitation</title></info>
+    <section xml:id="zend.search.lucene.query-language.matched-terms-limitations"><title>Matched terms limitation</title>
         
 
         <para>
@@ -292,7 +292,7 @@ roam~0.8
         </para>
     </section>
 
-    <section xml:id="zend.search.lucene.query-language.proximity-search"><info><title>Proximity Searches</title></info>
+    <section xml:id="zend.search.lucene.query-language.proximity-search"><title>Proximity Searches</title>
         
 
         <para>
@@ -307,7 +307,7 @@ roam~0.8
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.search.lucene.query-language.boosting"><info><title>Boosting a Term</title></info>
+    <section xml:id="zend.search.lucene.query-language.boosting"><title>Boosting a Term</title>
         
 
         <para>
@@ -350,7 +350,7 @@ PHP^4 framework
         </para>
     </section>
 
-    <section xml:id="zend.search.lucene.query-language.boolean"><info><title>Boolean Operators</title></info>
+    <section xml:id="zend.search.lucene.query-language.boolean"><title>Boolean Operators</title>
         
 
         <para>
@@ -372,7 +372,7 @@ PHP^4 framework
             precedence than the OR operator. This differs from Java Lucene behavior.
         </para>
 
-        <section xml:id="zend.search.lucene.query-language.boolean.and"><info><title>AND</title></info>
+        <section xml:id="zend.search.lucene.query-language.boolean.and"><title>AND</title>
             
 
             <para>
@@ -390,7 +390,7 @@ PHP^4 framework
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.search.lucene.query-language.boolean.or"><info><title>OR</title></info>
+        <section xml:id="zend.search.lucene.query-language.boolean.or"><title>OR</title>
             
 
             <para>
@@ -407,7 +407,7 @@ PHP^4 framework
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.search.lucene.query-language.boolean.not"><info><title>NOT</title></info>
+        <section xml:id="zend.search.lucene.query-language.boolean.not"><title>NOT</title>
             
 
             <para>
@@ -426,7 +426,7 @@ PHP^4 framework
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.search.lucene.query-language.boolean.other-form"><info><title>&amp;&amp;, ||, and ! operators</title></info>
+        <section xml:id="zend.search.lucene.query-language.boolean.other-form"><title>&amp;&amp;, ||, and ! operators</title>
             
 
             <para>
@@ -434,7 +434,7 @@ PHP^4 framework
             </para>
         </section>
 
-        <section xml:id="zend.search.lucene.query-language.boolean.plus"><info><title>+</title></info>
+        <section xml:id="zend.search.lucene.query-language.boolean.plus"><title>+</title>
             
 
             <para>
@@ -452,7 +452,7 @@ PHP^4 framework
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.search.lucene.query-language.boolean.minus"><info><title>-</title></info>
+        <section xml:id="zend.search.lucene.query-language.boolean.minus"><title>-</title>
             
 
             <para>
@@ -470,7 +470,7 @@ PHP^4 framework
 ]]></programlisting>
         </section>
 
-        <section xml:id="zend.search.lucene.query-language.boolean.no-operator"><info><title>No Operator</title></info>
+        <section xml:id="zend.search.lucene.query-language.boolean.no-operator"><title>No Operator</title>
             
 
             <para>
@@ -512,7 +512,7 @@ PHP^4 framework
         </section>
     </section>
 
-    <section xml:id="zend.search.lucene.query-language.grouping"><info><title>Grouping</title></info>
+    <section xml:id="zend.search.lucene.query-language.grouping"><title>Grouping</title>
         
 
         <para>
@@ -530,7 +530,7 @@ PHP^4 framework
         </para>
     </section>
 
-    <section xml:id="zend.search.lucene.query-language.field-grouping"><info><title>Field Grouping</title></info>
+    <section xml:id="zend.search.lucene.query-language.field-grouping"><title>Field Grouping</title>
         
 
         <para>
@@ -547,7 +547,7 @@ title:(+return +"pink panther")
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.search.lucene.query-language.escaping"><info><title>Escaping Special Characters</title></info>
+    <section xml:id="zend.search.lucene.query-language.escaping"><title>Escaping Special Characters</title>
         
 
         <para>

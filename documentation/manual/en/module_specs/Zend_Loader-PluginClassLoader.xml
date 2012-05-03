@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.loader.plugin-class-loader"><info><title>The PluginClassLoader</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.loader.plugin-class-loader"><title>The PluginClassLoader</title>
     
 
-    <section xml:id="zend.loader.plugin-class-loader.intro"><info><title>Overview</title></info>
+    <section xml:id="zend.loader.plugin-class-loader.intro"><title>Overview</title>
         
 
         <para>
@@ -29,7 +29,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.loader.plugin-class-loader.quick-start"><info><title>Quick Start</title></info>
+    <section xml:id="zend.loader.plugin-class-loader.quick-start"><title>Quick Start</title>
         
 
         <para>
@@ -57,7 +57,7 @@ $loader->registerPlugin('bugUrl', 'My\Custom\BugUrlHelper');
 $class = $loader->load('url'); // 'My\Custom\UrlHelper'
 ]]></programlisting>
 
-        <note><info><title>Case Sensitivity</title></info>
+        <note><title>Case Sensitivity</title>
             
 
             <para>
@@ -69,10 +69,10 @@ $class = $loader->load('url'); // 'My\Custom\UrlHelper'
         </note>
     </section>
 
-    <section xml:id="zend.loader.plugin-class-loader.options"><info><title>Configuration Options</title></info>
+    <section xml:id="zend.loader.plugin-class-loader.options"><title>Configuration Options</title>
         
 
-        <variablelist><info><title>PluginClassLoader Options</title></info>
+        <variablelist><title>PluginClassLoader Options</title>
             
 
             <varlistentry>
@@ -89,7 +89,7 @@ $class = $loader->load('url'); // 'My\Custom\UrlHelper'
         </variablelist>
     </section>
 
-    <section xml:id="zend.loader.plugin-class-loader.methods"><info><title>Available Methods</title></info>
+    <section xml:id="zend.loader.plugin-class-loader.methods"><title>Available Methods</title>
         
 
         <refentry xml:id="zend.loader.plugin-class-loader.methods.constructor">
@@ -107,7 +107,7 @@ $class = $loader->load('url'); // 'My\Custom\UrlHelper'
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsection><info><title>__construct()</title></info>
+            <refsection><title>__construct()</title>
                 
 
                 <para>
@@ -134,7 +134,7 @@ $class = $loader->load('url'); // 'My\Custom\UrlHelper'
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsection><info><title>addStaticMap()</title></info>
+            <refsection><title>addStaticMap()</title>
                 
 
                 <para>
@@ -197,7 +197,7 @@ $class = $loader->load('url'); // 'My\Custom\UrlHelper'
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsection><info><title>registerPlugin()</title></info>
+            <refsection><title>registerPlugin()</title>
                 
 
                 <para>
@@ -224,7 +224,7 @@ $class = $loader->load('url'); // 'My\Custom\UrlHelper'
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsection><info><title>registerPlugins()</title></info>
+            <refsection><title>registerPlugins()</title>
                 
 
                 <para>
@@ -256,7 +256,7 @@ $class = $loader->load('url'); // 'My\Custom\UrlHelper'
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsection><info><title>unregisterPlugin()</title></info>
+            <refsection><title>unregisterPlugin()</title>
                 
 
                 <para>
@@ -278,7 +278,7 @@ $class = $loader->load('url'); // 'My\Custom\UrlHelper'
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsection><info><title>getRegisteredPlugins()</title></info>
+            <refsection><title>getRegisteredPlugins()</title>
                 
 
                 <para>
@@ -303,7 +303,7 @@ $class = $loader->load('url'); // 'My\Custom\UrlHelper'
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsection><info><title>isLoaded()</title></info>
+            <refsection><title>isLoaded()</title>
                 
 
                 <para>
@@ -328,7 +328,7 @@ $class = $loader->load('url'); // 'My\Custom\UrlHelper'
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsection><info><title>getClassName()</title></info>
+            <refsection><title>getClassName()</title>
                 
 
                 <para>
@@ -353,7 +353,7 @@ $class = $loader->load('url'); // 'My\Custom\UrlHelper'
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsection><info><title>load()</title></info>
+            <refsection><title>load()</title>
                 
 
                 <para>
@@ -376,7 +376,7 @@ $class = $loader->load('url'); // 'My\Custom\UrlHelper'
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsection><info><title>getIterator()</title></info>
+            <refsection><title>getIterator()</title>
                 
 
                 <para>
@@ -389,10 +389,10 @@ $class = $loader->load('url'); // 'My\Custom\UrlHelper'
         </refentry>
     </section>
 
-    <section xml:id="zend.loader.plugin-class-loader.examples"><info><title>Examples</title></info>
+    <section xml:id="zend.loader.plugin-class-loader.examples"><title>Examples</title>
         
 
-        <example xml:id="zend.loader.plugin-class-loader.examples.static-maps"><info><title>Using Static Maps</title></info>
+        <example xml:id="zend.loader.plugin-class-loader.examples.static-maps"><title>Using Static Maps</title>
             
 
             <para>
@@ -422,7 +422,7 @@ $helper = $loader->load('url'); // Zend\View\Helper\Url
 ]]></programlisting>
         </example>
 
-        <example xml:id="zend.loader.plugin-class-loader.examples.extended-loader"><info><title>Creating a pre-loaded map</title></info>
+        <example xml:id="zend.loader.plugin-class-loader.examples.extended-loader"><title>Creating a pre-loaded map</title>
             
 
             <para>
@@ -491,7 +491,7 @@ PluginLoader::addStaticMap(array(
 ]]></programlisting>
         </example>
 
-        <example xml:id="zend.loader.plugin-class-loader.examples.using-as-plugin-map"><info><title>Extending a plugin map using another plugin map</title></info>
+        <example xml:id="zend.loader.plugin-class-loader.examples.using-as-plugin-map"><title>Extending a plugin map using another plugin map</title>
             
 
             <para>

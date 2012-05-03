@@ -14,6 +14,9 @@ use ArrayAccess,
 class ConfigListener extends AbstractListener
     implements ConfigMerger, ListenerAggregate
 {
+	const STATIC_PATH = 'static_path';
+	const GLOB_PATH = 'glob_path';
+
     /**
      * @var array
      */
@@ -37,7 +40,7 @@ class ConfigListener extends AbstractListener
     /**
      * @var array
      */
-    protected $globPaths = array();
+    protected $paths = array();
 
     /**
      * __construct
@@ -55,9 +58,9 @@ class ConfigListener extends AbstractListener
     }
 
     /**
-     * __invoke proxy to loadModule for easier attaching 
-     * 
-     * @param ModuleEvent $e 
+     * __invoke proxy to loadModule for easier attaching
+     *
+     * @param ModuleEvent $e
      * @return ConfigListener
      */
     public function __invoke(ModuleEvent $e)
@@ -80,9 +83,9 @@ class ConfigListener extends AbstractListener
     }
 
     /**
-     * Pass self to the ModuleEvent object early so everyone has access. 
-     * 
-     * @param ModuleEvent $e 
+     * Pass self to the ModuleEvent object early so everyone has access.
+     *
+     * @param ModuleEvent $e
      * @return ConfigListener
      */
     public function loadModulesPre(ModuleEvent $e)
@@ -92,9 +95,9 @@ class ConfigListener extends AbstractListener
     }
 
     /**
-     * Merge the config for each module 
-     * 
-     * @param ModuleEvent $e 
+     * Merge the config for each module
+     *
+     * @param ModuleEvent $e
      * @return ConfigListener
      */
     public function loadModule(ModuleEvent $e)
@@ -114,7 +117,7 @@ class ConfigListener extends AbstractListener
      *
      * This should really only be called by the module manager.
      *
-     * @param ModuleEvent $e 
+     * @param ModuleEvent $e
      * @return ConfigListener
      */
     public function loadModulesPost(ModuleEvent $e)
@@ -122,8 +125,8 @@ class ConfigListener extends AbstractListener
         if (true === $this->skipConfig) {
             return $this;
         }
-        foreach ($this->globPaths as $globPath) {
-            $this->mergeGlobPath($globPath);
+        foreach ($this->paths as $path) {
+            $this->mergePath($path);
         }
         return $this;
     }
@@ -176,20 +179,20 @@ class ConfigListener extends AbstractListener
     }
 
     /**
-     * Add a glob path of config files to merge after loading modules
+     * Add a path of config files to merge after loading modules
      *
-     * @param string $globPath
+     * @param string $path
      * @return ConfigListener
      */
-    public function addConfigGlobPath($globPath)
+    protected function addConfigPath($path, $type)
     {
-        if (!is_string($globPath)) {
+        if (!is_string($path)) {
             throw new Exception\InvalidArgumentException(
                 sprintf('Parameter to %s::%s() must be a string; %s given.',
-                __CLASS__, __METHOD__, gettype($globPath))
+                __CLASS__, __METHOD__, gettype($path))
             );
         }
-        $this->globPaths[] = $globPath;
+        $this->paths[] = array('type' => $type, 'path' => $path);
         return $this;
     }
 
@@ -201,36 +204,92 @@ class ConfigListener extends AbstractListener
      */
     public function addConfigGlobPaths($globPaths)
     {
-        if ($globPaths instanceof Traversable) {
-            $globPaths = ArrayUtils::iteratorToArray($globPaths);
+        $this->addConfigPaths($globPaths, self::GLOB_PATH);
+        return $this;
+    }
+
+    /**
+     * Add a glob path of config files to merge after loading modules
+     *
+     * @param string $globPath
+     * @return ConfigListener
+     */
+    public function addConfigGlobPath($globPath)
+    {
+        $this->addConfigPath($globPath, self::GLOB_PATH);
+        return $this;
+    }
+
+    /**
+     * Add an array of static paths of config files to merge after loading modules
+     *
+     * @param mixed $staticPaths
+     * @return ConfigListener
+     */
+    public function addConfigStaticPaths($staticPaths)
+    {
+    	$this->addConfigPaths($staticPaths, self::STATIC_PATH);
+        return $this;
+    }
+
+    /**
+     * Add a static path of config files to merge after loading modules
+     *
+     * @param string $globPath
+     * @return ConfigListener
+     */
+    public function addConfigStaticPath($staticPath)
+    {
+    	$this->addConfigPath($staticPath, self::STATIC_PATH);
+        return $this;
+    }
+
+    /**
+     * Add an array of paths of config files to merge after loading modules
+     *
+     * @param mixed $paths
+     * @return ConfigListener
+     */
+    protected function addConfigPaths($paths, $type)
+    {
+    	if ($paths instanceof Traversable) {
+            $paths = ArrayUtils::iteratorToArray($paths);
         }
 
-        if (!is_array($globPaths)) {
+        if (!is_array($paths)) {
             throw new Exception\InvalidArgumentException(
                 sprintf('Argument passed to %::%s() must be an array, '
                 . 'implement the \Traversable interface, or be an '
                 . 'instance of Zend\Config\Config. %s given.',
-                __CLASS__, __METHOD__, gettype($globPaths))
+                __CLASS__, __METHOD__, gettype($paths))
             );
         }
 
-        foreach ($globPaths as $globPath) {
-            $this->addConfigGlobPath($globPath);
+        foreach ($paths as $path) {
+            $this->addConfigPath($path, $type);
         }
-
-        return $this;
     }
 
     /**
      * Merge all config files matching a glob
      *
-     * @param mixed $globPath
+     * @param mixed $path
      * @return ConfigListener
      */
-    protected function mergeGlobPath($globPath)
+    protected function mergePath($path)
     {
-        // @TODO Use GlobIterator
-        $config = ConfigFactory::fromFiles(glob($globPath, GLOB_BRACE));
+        if($path['type']==self::STATIC_PATH) {
+    	    $config = ConfigFactory::fromFile($path['path']);
+    	} else if($path['type']==self::GLOB_PATH) {
+    	    // @TODO Use GlobIterator
+    	    $config = ConfigFactory::fromFiles(glob($path['path'], GLOB_BRACE));
+    	} else {
+    	    throw new Exception\InvalidArgumentException(
+                sprintf('Invalid path passed to %::%s(). Path must be '
+                . 'a static or a glob path. % is given',
+                __CLASS__, __METHOD__, $path['type'])
+            );
+    	}
         $this->mergeTraversableConfig($config);
         if ($this->getOptions()->getConfigCacheEnabled()) {
             $this->updateCache();
@@ -285,7 +344,7 @@ class ConfigListener extends AbstractListener
                 . 'instance of Zend\Config\Config. %s given.', gettype($config))
             );
         }
-        $this->setMergedConfig(array_replace_recursive($this->mergedConfig, $config));
+        $this->setMergedConfig(ArrayUtils::merge($this->mergedConfig, $config));
     }
 
     /**

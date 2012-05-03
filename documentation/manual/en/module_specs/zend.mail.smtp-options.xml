@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.smtp-options">
-    <info>
+    
         <title>Zend\Mail\Transport\SmtpOptions</title>
-    </info>
+    
 
     <section xml:id="zend.mail.smtp-options.intro">
-        <info>
+        
             <title>Overview</title>
-        </info>
+        
 
         <para>
             This document details the various options available to the
@@ -16,12 +16,12 @@
     </section>
 
     <section xml:id="zend.mail.smtp-options.quick-start">
-        <info>
+        
             <title>Quick Start</title>
-        </info>
+        
 
         <example xml:id="zend.mail.smtp-options.quick-start.basic-smtp-usage">
-            <info><title>Basic SMTP Transport Usage</title></info>
+            <title>Basic SMTP Transport Usage</title>
 
             <programlisting language="php"><![CDATA[
 use Zend\Mail\Transport\Smtp as SmtpTransport,
@@ -39,7 +39,7 @@ $transport->setOptions($options);
         </example>
 
         <example xml:id="zend.mail.smtp-options.quick-start.plain-smtp-usage">
-            <info><title>SMTP Transport Usage with PLAIN AUTH</title></info>
+            <title>SMTP Transport Usage with PLAIN AUTH</title>
 
             <programlisting language="php"><![CDATA[
 use Zend\Mail\Transport\Smtp as SmtpTransport,
@@ -61,7 +61,7 @@ $transport->setOptions($options);
         </example>
 
         <example xml:id="zend.mail.smtp-options.quick-start.login-smtp-usage">
-            <info><title>SMTP Transport Usage with LOGIN AUTH</title></info>
+            <title>SMTP Transport Usage with LOGIN AUTH</title>
 
             <programlisting language="php"><![CDATA[
 use Zend\Mail\Transport\Smtp as SmtpTransport,
@@ -83,7 +83,7 @@ $transport->setOptions($options);
         </example>
 
         <example xml:id="zend.mail.smtp-options.quick-start.crammd5-smtp-usage">
-            <info><title>SMTP Transport Usage with CRAM-MD5 AUTH</title></info>
+            <title>SMTP Transport Usage with CRAM-MD5 AUTH</title>
 
             <programlisting language="php"><![CDATA[
 use Zend\Mail\Transport\Smtp as SmtpTransport,
@@ -106,9 +106,9 @@ $transport->setOptions($options);
     </section>
 
     <section xml:id="zend.mail.smtp-options.options">
-        <info>
+        
             <title>Configuration Options</title>
-        </info>
+        
 
         <variablelist>
             <title>Configuration Options</title>
@@ -172,9 +172,9 @@ $transport->setOptions($options);
     </section>
 
     <section xml:id="zend.mail.smtp-options.methods">
-        <info>
+        
             <title>Available Methods</title>
-        </info>
+        
 
         <variablelist>
             <varlistentry xml:id="zend.mail.smtp-options.methods.get-name">
@@ -358,9 +358,9 @@ $transport->setOptions($options);
     </section>
 
     <section xml:id="zend.mail.smtp-options.examples">
-        <info>
+        
             <title>Examples</title>
-        </info>
+        
 
         <para>
             Please see the <link linkend="zend.mail.smtp-options.quick-start">Quick Start</link> for

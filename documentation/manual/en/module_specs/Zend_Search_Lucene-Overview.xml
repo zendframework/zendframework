@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.overview"><info><title>Overview</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.overview"><title>Overview</title>
     
 
-    <section xml:id="zend.search.lucene.introduction"><info><title>Introduction</title></info>
+    <section xml:id="zend.search.lucene.introduction"><title>Introduction</title>
         
 
         <para>
@@ -34,7 +34,7 @@
             2.3. For more information on Lucene, visit <uri xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://lucene.apache.org/java/docs/">http://lucene.apache.org/java/docs/</uri>.
         </para>
 
-        <note><info><title/></info>
+        <note><title/>
             
 
             <para>
@@ -52,7 +52,7 @@
         </note>
     </section>
 
-    <section xml:id="zend.search.lucene.index-creation.documents-and-fields"><info><title>Document and Field Objects</title></info>
+    <section xml:id="zend.search.lucene.index-creation.documents-and-fields"><title>Document and Field Objects</title>
         
 
         <para>
@@ -169,7 +169,7 @@ $doc->addField(Zend_Search_Lucene_Field::UnStored('contents', $contents));
         </para>
     </section>
 
-    <section xml:id="zend.search.lucene.index-creation.understanding-field-types"><info><title>Understanding Field Types</title></info>
+    <section xml:id="zend.search.lucene.index-creation.understanding-field-types"><title>Understanding Field Types</title>
         
 
         <itemizedlist>
@@ -218,7 +218,7 @@ $doc->addField(Zend_Search_Lucene_Field::UnStored('contents', $contents));
                     identifier.
                </para>
 
-                <table xml:id="zend.search.lucene.index-creation.understanding-field-types.table"><info><title>Zend_Search_Lucene_Field Types</title></info>
+                <table xml:id="zend.search.lucene.index-creation.understanding-field-types.table"><title>Zend_Search_Lucene_Field Types</title>
                     
 
                     <tgroup cols="5">
@@ -279,7 +279,7 @@ $doc->addField(Zend_Search_Lucene_Field::UnStored('contents', $contents));
        </itemizedlist>
     </section>
 
-    <section xml:id="zend.search.lucene.index-creation.html-documents"><info><title>HTML documents</title></info>
+    <section xml:id="zend.search.lucene.index-creation.html-documents"><title>HTML documents</title>
         
 
         <para>
@@ -382,7 +382,7 @@ $headerLinksArray = $doc->getHeaderLinks();
         </para>
     </section>
 
-    <section xml:id="zend.search.lucene.index-creation.docx-documents"><info><title>Word 2007 documents</title></info>
+    <section xml:id="zend.search.lucene.index-creation.docx-documents"><title>Word 2007 documents</title>
         
 
         <para>
@@ -482,7 +482,7 @@ $index->addDocument($doc);
 
     </section>
 
-    <section xml:id="zend.search.lucene.index-creation.pptx-documents"><info><title>Powerpoint 2007 documents</title></info>
+    <section xml:id="zend.search.lucene.index-creation.pptx-documents"><title>Powerpoint 2007 documents</title>
         
 
         <para>
@@ -579,7 +579,7 @@ $index->addDocument($doc);
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.search.lucene.index-creation.xlsx-documents"><info><title>Excel 2007 documents</title></info>
+    <section xml:id="zend.search.lucene.index-creation.xlsx-documents"><title>Excel 2007 documents</title>
         
         <para>
             <classname>Zend_Search_Lucene</classname> offers a Excel 2007 parsing feature. Documents

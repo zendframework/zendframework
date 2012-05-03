@@ -38,7 +38,6 @@ class XmlTm extends AbstractAdapter
 {
     // Internal variables
     private $_file        = false;
-    private $_cleared     = array();
     private $_lang        = null;
     private $_content     = null;
     private $_tag         = null;

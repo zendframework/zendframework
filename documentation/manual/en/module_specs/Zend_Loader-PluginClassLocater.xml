@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.loader.plugin-class-locater"><info><title>The PluginClassLocater interface</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.loader.plugin-class-locater"><title>The PluginClassLocater interface</title>
     
 
-    <section xml:id="zend.loader.plugin-class-locater.intro"><info><title>Overview</title></info>
+    <section xml:id="zend.loader.plugin-class-locater.intro"><title>Overview</title>
         
 
         <para>
@@ -13,7 +13,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.loader.plugin-class-locater.quick-start"><info><title>Quick Start</title></info>
+    <section xml:id="zend.loader.plugin-class-locater.quick-start"><title>Quick Start</title>
         
 
         <para>
@@ -33,7 +33,7 @@ interface PluginClassLocater
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.loader.plugin-class-locater.options"><info><title>Configuration Options</title></info>
+    <section xml:id="zend.loader.plugin-class-locater.options"><title>Configuration Options</title>
         
 
         <para>
@@ -41,7 +41,7 @@ interface PluginClassLocater
         </para>
     </section>
 
-    <section xml:id="zend.loader.plugin-class-locater.methods"><info><title>Available Methods</title></info>
+    <section xml:id="zend.loader.plugin-class-locater.methods"><title>Available Methods</title>
         
 
         <refentry xml:id="zend.loader.plugin-class-locater.methods.register-plugin">
@@ -59,7 +59,7 @@ interface PluginClassLocater
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsection><info><title>registerPlugin()</title></info>
+            <refsection><title>registerPlugin()</title>
                 
 
                 <para>
@@ -85,7 +85,7 @@ interface PluginClassLocater
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsection><info><title>unregisterPlugin()</title></info>
+            <refsection><title>unregisterPlugin()</title>
                 
 
                 <para>
@@ -107,7 +107,7 @@ interface PluginClassLocater
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsection><info><title>getRegisteredPlugins()</title></info>
+            <refsection><title>getRegisteredPlugins()</title>
                 
 
                 <para>
@@ -118,7 +118,7 @@ interface PluginClassLocater
 
     </section>
 
-    <section xml:id="zend.loader.plugin-class-locater.examples"><info><title>Examples</title></info>
+    <section xml:id="zend.loader.plugin-class-locater.examples"><title>Examples</title>
         
 
 

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.pages"><info><title>Working with Pages</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.pages"><title>Working with Pages</title>
     
 
-    <section xml:id="zend.pdf.pages.creation"><info><title>Page Creation</title></info>
+    <section xml:id="zend.pdf.pages.creation"><title>Page Creation</title>
         
 
         <para>
@@ -47,7 +47,7 @@
             array:
         </para>
 
-        <example xml:id="zend.pdf.pages.example-1"><info><title>PDF document pages management</title></info>
+        <example xml:id="zend.pdf.pages.example-1"><title>PDF document pages management</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -68,7 +68,7 @@ unset($pdf->pages[$id]);
         </example>
     </section>
 
-    <section xml:id="zend.pdf.pages.cloning"><info><title>Page cloning</title></info>
+    <section xml:id="zend.pdf.pages.cloning"><title>Page cloning</title>
         
 
         <para>
@@ -76,7 +76,7 @@ unset($pdf->pages[$id]);
             <classname>\Zend\Pdf\Page</classname> object with existing page as a parameter:
         </para>
 
-        <example xml:id="zend.pdf.pages.example-2"><info><title>Duplicating existing page</title></info>
+        <example xml:id="zend.pdf.pages.example-2"><title>Duplicating existing page</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -122,7 +122,7 @@ unset($pdf->pages[$templatePageIndex]);
             documents to create new one:
         </para>
 
-        <example xml:id="zend.pdf.pages.example-3"><info><title>Cloning existing page</title></info>
+        <example xml:id="zend.pdf.pages.example-3"><title>Cloning existing page</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -144,9 +144,9 @@ $pdf->pages[] = $page2;
             will be created for each cloned page): 
         </para>
 
-        <example xml:id="zend.pdf.pages.example-4"><info><title>
+        <example xml:id="zend.pdf.pages.example-4"><title>
                 Cloning existing page using <classname>\Zend\Pdf\Resource\Extractor</classname> class
-            </title></info>
+            </title>
             
 
             <programlisting language="php"><![CDATA[

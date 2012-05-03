@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.dojo.form.elements"><info><title>Dijit-Specific Form Elements</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.dojo.form.elements"><title>Dijit-Specific Form Elements</title>
     
 
     <para>
@@ -100,7 +100,7 @@ $element->addDecorator('DijitElement')
         Framework distribution.
     </para>
 
-    <section xml:id="zend.dojo.form.elements.button"><info><title>Button</title></info>
+    <section xml:id="zend.dojo.form.elements.button"><title>Button</title>
         
 
         <para>
@@ -134,7 +134,7 @@ $element->addDecorator('DijitElement')
             <classname>DtDdWrapper</classname> are utilized for Button elements.
         </para>
 
-        <example xml:id="zend.dojo.form.elements.button.example"><info><title>Example Button dijit element usage</title></info>
+        <example xml:id="zend.dojo.form.elements.button.example"><title>Example Button dijit element usage</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -149,7 +149,7 @@ $form->addElement(
         </example>
     </section>
 
-    <section xml:id="zend.dojo.form.elements.checkBox"><info><title>CheckBox</title></info>
+    <section xml:id="zend.dojo.form.elements.checkBox"><title>CheckBox</title>
         
 
         <para>
@@ -202,7 +202,7 @@ $form->addElement(
             </listitem>
         </itemizedlist>
 
-        <example xml:id="zend.dojo.form.elements.checkBox.example"><info><title>Example CheckBox dijit element usage</title></info>
+        <example xml:id="zend.dojo.form.elements.checkBox.example"><title>Example CheckBox dijit element usage</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -220,7 +220,7 @@ $form->addElement(
         </example>
     </section>
 
-    <section xml:id="zend.dojo.form.elements.comboBox"><info><title>ComboBox and FilteringSelect</title></info>
+    <section xml:id="zend.dojo.form.elements.comboBox"><title>ComboBox and FilteringSelect</title>
         
 
         <para>
@@ -231,7 +231,7 @@ $form->addElement(
             the same, but do not allow arbitrary input.
         </para>
 
-        <note><info><title>ComboBoxes return the label values</title></info>
+        <note><title>ComboBoxes return the label values</title>
             
 
             <para>
@@ -329,7 +329,7 @@ $form->addElement(
             configuration key.
         </para>
 
-        <example xml:id="zend.dojo.form.elements.comboBox.selectExample"><info><title>ComboBox dijit element usage as select input</title></info>
+        <example xml:id="zend.dojo.form.elements.comboBox.selectExample"><title>ComboBox dijit element usage as select input</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -353,7 +353,7 @@ $form->addElement(
 ]]></programlisting>
         </example>
 
-        <example xml:id="zend.dojo.form.elements.comboBox.datastoreExample"><info><title>ComboBox dijit element usage with datastore</title></info>
+        <example xml:id="zend.dojo.form.elements.comboBox.datastoreExample"><title>ComboBox dijit element usage with datastore</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -381,7 +381,7 @@ $form->addElement(
         </para>
     </section>
 
-    <section xml:id="zend.dojo.form.elements.currencyTextBox"><info><title>CurrencyTextBox</title></info>
+    <section xml:id="zend.dojo.form.elements.currencyTextBox"><title>CurrencyTextBox</title>
         
 
         <para>
@@ -440,7 +440,7 @@ $form->addElement(
             </listitem>
         </itemizedlist>
 
-        <example xml:id="zend.dojo.form.elements.currencyTextBox.example"><info><title>Example CurrencyTextBox dijit element usage</title></info>
+        <example xml:id="zend.dojo.form.elements.currencyTextBox.example"><title>Example CurrencyTextBox dijit element usage</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -460,7 +460,7 @@ $form->addElement(
         </example>
     </section>
 
-    <section xml:id="zend.dojo.form.elements.dateTextBox"><info><title>DateTextBox</title></info>
+    <section xml:id="zend.dojo.form.elements.dateTextBox"><title>DateTextBox</title>
         
 
         <para>
@@ -525,7 +525,7 @@ $form->addElement(
             </listitem>
         </itemizedlist>
 
-        <example xml:id="zend.dojo.form.elements.dateTextBox.example"><info><title>Example DateTextBox dijit element usage</title></info>
+        <example xml:id="zend.dojo.form.elements.dateTextBox.example"><title>Example DateTextBox dijit element usage</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -543,7 +543,7 @@ $form->addElement(
         </example>
     </section>
 
-    <section xml:id="zend.dojo.form.elements.editor"><info><title>Editor</title></info>
+    <section xml:id="zend.dojo.form.elements.editor"><title>Editor</title>
         
 
         <para>
@@ -735,7 +735,7 @@ $form->addElement(
             </listitem>
         </itemizedlist>
 
-        <example xml:id="zend.dojo.form.elements.editor.example"><info><title>Example Editor dijit element usage</title></info>
+        <example xml:id="zend.dojo.form.elements.editor.example"><title>Example Editor dijit element usage</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -750,7 +750,7 @@ $form->addElement('editor', 'content', array(
 ]]></programlisting>
         </example>
 
-        <note><info><title>Editor Dijit uses div by default</title></info>
+        <note><title>Editor Dijit uses div by default</title>
             
 
             <para>
@@ -783,7 +783,7 @@ $editor->degrade = true;
         </note>
     </section>
 
-    <section xml:id="zend.dojo.form.elements.horizontalSlider"><info><title>HorizontalSlider</title></info>
+    <section xml:id="zend.dojo.form.elements.horizontalSlider"><title>HorizontalSlider</title>
         
 
         <para>
@@ -858,7 +858,7 @@ $editor->degrade = true;
             </listitem>
         </itemizedlist>
 
-        <example xml:id="zend.dojo.form.elements.horizontalSlider.example"><info><title>Example HorizontalSlider dijit element usage</title></info>
+        <example xml:id="zend.dojo.form.elements.horizontalSlider.example"><title>Example HorizontalSlider dijit element usage</title>
             
 
             <para>
@@ -917,7 +917,7 @@ $form->addElement(
         </example>
     </section>
 
-    <section xml:id="zend.dojo.form.elements.numberSpinner"><info><title>NumberSpinner</title></info>
+    <section xml:id="zend.dojo.form.elements.numberSpinner"><title>NumberSpinner</title>
         
 
         <para>
@@ -997,7 +997,7 @@ $form->addElement(
             </listitem>
         </itemizedlist>
 
-        <example xml:id="zend.dojo.form.elements.numberSpinner.example"><info><title>Example NumberSpinner dijit element usage</title></info>
+        <example xml:id="zend.dojo.form.elements.numberSpinner.example"><title>Example NumberSpinner dijit element usage</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -1021,7 +1021,7 @@ $form->addElement(
         </example>
     </section>
 
-    <section xml:id="zend.dojo.form.elements.numberTextBox"><info><title>NumberTextBox</title></info>
+    <section xml:id="zend.dojo.form.elements.numberTextBox"><title>NumberTextBox</title>
         
 
         <para>
@@ -1081,7 +1081,7 @@ $form->addElement(
             </listitem>
         </itemizedlist>
 
-        <example xml:id="zend.dojo.form.elements.numberTextBox.example"><info><title>Example NumberTextBox dijit element usage</title></info>
+        <example xml:id="zend.dojo.form.elements.numberTextBox.example"><title>Example NumberTextBox dijit element usage</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -1103,7 +1103,7 @@ $form->addElement(
         </example>
     </section>
 
-    <section xml:id="zend.dojo.form.elements.passwordTextBox"><info><title>PasswordTextBox</title></info>
+    <section xml:id="zend.dojo.form.elements.passwordTextBox"><title>PasswordTextBox</title>
         
 
         <para>
@@ -1118,7 +1118,7 @@ $form->addElement(
             all methods available to those classes are available.
         </para>
 
-        <example xml:id="zend.dojo.form.elements.passwordTextBox.example"><info><title>Example PasswordTextBox dijit element usage</title></info>
+        <example xml:id="zend.dojo.form.elements.passwordTextBox.example"><title>Example PasswordTextBox dijit element usage</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -1139,7 +1139,7 @@ $form->addElement(
         </example>
     </section>
 
-    <section xml:id="zend.dojo.form.elements.radioButton"><info><title>RadioButton</title></info>
+    <section xml:id="zend.dojo.form.elements.radioButton"><title>RadioButton</title>
         
 
         <para>
@@ -1163,7 +1163,7 @@ $form->addElement(
             configuration key.
         </para>
 
-        <example xml:id="zend.dojo.form.elements.radioButton.example"><info><title>Example RadioButton dijit element usage</title></info>
+        <example xml:id="zend.dojo.form.elements.radioButton.example"><title>Example RadioButton dijit element usage</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -1184,7 +1184,7 @@ $form->addElement(
         </example>
     </section>
 
-    <section xml:id="zend.dojo.form.elements.simpletextarea"><info><title>SimpleTextarea</title></info>
+    <section xml:id="zend.dojo.form.elements.simpletextarea"><title>SimpleTextarea</title>
         
 
         <para>
@@ -1194,7 +1194,7 @@ $form->addElement(
             Unlike Textarea, it will not grow automatically
         </para>
 
-        <example xml:id="zend.dojo.form.elements.simpletextarea.example"><info><title>Example SimpleTextarea dijit element usage</title></info>
+        <example xml:id="zend.dojo.form.elements.simpletextarea.example"><title>Example SimpleTextarea dijit element usage</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -1211,7 +1211,7 @@ $form->addElement(
         </example>
     </section>
 
-    <section xml:id="zend.dojo.form.elements.slider"><info><title>Slider abstract element</title></info>
+    <section xml:id="zend.dojo.form.elements.slider"><title>Slider abstract element</title>
         
 
         <para>
@@ -1286,7 +1286,7 @@ $form->addElement(
         </para>
     </section>
 
-    <section xml:id="zend.dojo.form.elements.submitButton"><info><title>SubmitButton</title></info>
+    <section xml:id="zend.dojo.form.elements.submitButton"><title>SubmitButton</title>
         
 
         <para>
@@ -1296,7 +1296,7 @@ $form->addElement(
             the <link linkend="zend.dojo.form.elements.button">Button dijit</link>.
         </para>
 
-        <example xml:id="zend.dojo.form.elements.submitButton.example"><info><title>Example SubmitButton dijit element usage</title></info>
+        <example xml:id="zend.dojo.form.elements.submitButton.example"><title>Example SubmitButton dijit element usage</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -1313,7 +1313,7 @@ $form->addElement(
         </example>
     </section>
 
-    <section xml:id="zend.dojo.form.elements.textBox"><info><title>TextBox</title></info>
+    <section xml:id="zend.dojo.form.elements.textBox"><title>TextBox</title>
         
 
         <para>
@@ -1366,7 +1366,7 @@ $form->addElement(
             </listitem>
         </itemizedlist>
 
-        <example xml:id="zend.dojo.form.elements.textBox.example"><info><title>Example TextBox dijit element usage</title></info>
+        <example xml:id="zend.dojo.form.elements.textBox.example"><title>Example TextBox dijit element usage</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -1384,7 +1384,7 @@ $form->addElement(
         </example>
     </section>
 
-    <section xml:id="zend.dojo.form.elements.textarea"><info><title>Textarea</title></info>
+    <section xml:id="zend.dojo.form.elements.textarea"><title>Textarea</title>
         
 
         <para>
@@ -1395,7 +1395,7 @@ $form->addElement(
             vertically as text is added to it.
         </para>
 
-        <example xml:id="zend.dojo.form.elements.textarea.example"><info><title>Example Textarea dijit element usage</title></info>
+        <example xml:id="zend.dojo.form.elements.textarea.example"><title>Example Textarea dijit element usage</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -1412,7 +1412,7 @@ $form->addElement(
         </example>
     </section>
 
-    <section xml:id="zend.dojo.form.elements.timeTextBox"><info><title>TimeTextBox</title></info>
+    <section xml:id="zend.dojo.form.elements.timeTextBox"><title>TimeTextBox</title>
         
 
         <para>
@@ -1465,7 +1465,7 @@ $form->addElement(
             </listitem>
         </itemizedlist>
 
-        <example xml:id="zend.dojo.form.elements.timeTextBox.example"><info><title>Example TimeTextBox dijit element usage</title></info>
+        <example xml:id="zend.dojo.form.elements.timeTextBox.example"><title>Example TimeTextBox dijit element usage</title>
             
 
             <para>
@@ -1489,7 +1489,7 @@ $form->addElement(
         </example>
     </section>
 
-    <section xml:id="zend.dojo.form.elements.validationTextBox"><info><title>ValidationTextBox</title></info>
+    <section xml:id="zend.dojo.form.elements.validationTextBox"><title>ValidationTextBox</title>
         
 
         <para>
@@ -1558,7 +1558,7 @@ $form->addElement(
             </listitem>
         </itemizedlist>
 
-        <example xml:id="zend.dojo.form.elements.validationTextBox.example"><info><title>Example ValidationTextBox dijit element usage</title></info>
+        <example xml:id="zend.dojo.form.elements.validationTextBox.example"><title>Example ValidationTextBox dijit element usage</title>
             
 
             <para>
@@ -1582,7 +1582,7 @@ $form->addElement(
         </example>
     </section>
 
-    <section xml:id="zend.dojo.form.elements.verticalSlider"><info><title>VerticalSlider</title></info>
+    <section xml:id="zend.dojo.form.elements.verticalSlider"><title>VerticalSlider</title>
         
 
         <para>
@@ -1594,7 +1594,7 @@ $form->addElement(
             used.
         </para>
 
-        <example xml:id="zend.dojo.form.elements.verticalSlider.example"><info><title>Example VerticalSlider dijit element usage</title></info>
+        <example xml:id="zend.dojo.form.elements.verticalSlider.example"><title>Example VerticalSlider dijit element usage</title>
             
 
             <para>

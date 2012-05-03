@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.stringtrim"><info><title>StringTrim</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.stringtrim"><title>StringTrim</title>
     
 
     <para>
@@ -7,7 +7,7 @@
         beginning and end.
     </para>
 
-     <section xml:id="zend.filter.set.stringtrim.options"><info><title>Supported options for Zend_Filter_StringTrim</title></info>
+     <section xml:id="zend.filter.set.stringtrim.options"><title>Supported options for Zend_Filter_StringTrim</title>
         
 
         <para>
@@ -26,7 +26,7 @@
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.filter.set.stringtrim.basic"><info><title>Basic usage</title></info>
+    <section xml:id="zend.filter.set.stringtrim.basic"><title>Basic usage</title>
         
 
         <para>
@@ -45,7 +45,7 @@ print $filter->filter(' This is (my) content: ');
         </para>
     </section>
 
-    <section xml:id="zend.filter.set.stringtrim.types"><info><title>Default behaviour for Zend_Filter_StringTrim</title></info>
+    <section xml:id="zend.filter.set.stringtrim.types"><title>Default behaviour for Zend_Filter_StringTrim</title>
         
 
         <programlisting language="php"><![CDATA[

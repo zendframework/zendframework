@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.ldap.api.reference.zend-ldap-attribute"><info><title>Zend_Ldap_Attribute</title></info>
-    
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.ldap.api.reference.zend-ldap-attribute"><title>Zend\Ldap\Attribute</title>
+
 
     <para>
-        <classname>Zend_Ldap_Attribute</classname> is a helper class providing only static
+        <classname>Zend\Ldap\Attribute</classname> is a helper class providing only static
         methods to manipulate arrays suitable to the structure used in
-        <classname>Zend_Ldap</classname> data modification methods and to the data format required
+        <classname>Zend\Ldap\Ldap</classname> data modification methods and to the data format required
         by the <acronym>LDAP</acronym> server. <acronym>PHP</acronym> data types are converted the
         following way:
     </para>
@@ -69,8 +69,8 @@
         </varlistentry>
     </variablelist>
 
-    <table xml:id="zend.ldap.api.reference.zend-ldap-attribute.table"><info><title>Zend_Ldap_Attribute API</title></info>
-        
+    <table xml:id="zend.ldap.api.reference.zend-ldap-attribute.table"><title>Zend\Ldap\Attribute API</title>
+
 
         <tgroup cols="2">
             <thead>
@@ -223,8 +223,8 @@
                         <varname>$attribName</varname> defaults to <code>'userPassword'</code>
                         which is the standard password attribute. The password hash can be
                         specified with <varname>$hashType</varname>. The default value here is
-                        <constant>Zend_Ldap_Attribute::PASSWORD_HASH_MD5</constant> with
-                        <constant>Zend_Ldap_Attribute::PASSWORD_HASH_SHA</constant> as the other
+                        <constant>Zend\Ldap\Attribute::PASSWORD_HASH_MD5</constant> with
+                        <constant>Zend\Ldap\Attribute::PASSWORD_HASH_SHA</constant> as the other
                         possibilty.
                     </entry>
                 </row>
@@ -238,8 +238,8 @@
                     <entry>
                         Creates a <acronym>LDAP</acronym> password. The password hash can be
                         specified with <varname>$hashType</varname>. The default value here is
-                        <constant>Zend_Ldap_Attribute::PASSWORD_HASH_MD5</constant> with
-                        <constant>Zend_Ldap_Attribute::PASSWORD_HASH_SHA</constant> as the other
+                        <constant>Zend\Ldap\Attribute::PASSWORD_HASH_MD5</constant> with
+                        <constant>Zend\Ldap\Attribute::PASSWORD_HASH_SHA</constant> as the other
                         possibilty.
                     </entry>
                 </row>
@@ -258,7 +258,7 @@
                         (<constant>FALSE</constant> by default) <varname>$value</varname> will be
                         appended to the attribute. <varname>$value</varname> can be an integer value
                         or an array of integers. Date-time-conversion according to
-                        <methodname>Zend_Ldap_Attribute::convertToLdapDateTimeValue()</methodname>
+                        <methodname>Zend\Ldap\Attribute::convertToLdapDateTimeValue()</methodname>
                         will take place.
                     </entry>
                 </row>
@@ -280,7 +280,7 @@
                         value at the given index will be returned. If the index is out of
                         bounds, <constant>NULL</constant> will be returned. Date-time-conversion
                         according to
-                        <methodname>Zend_Ldap_Attribute::convertFromLdapDateTimeValue()</methodname>
+                        <methodname>Zend\Ldap\Attribute::convertFromLdapDateTimeValue()</methodname>
                         will take place.
                     </entry>
                 </row>

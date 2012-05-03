@@ -4,9 +4,9 @@
     xmlns="http://docbook.org/ns/docbook" version="5.0"
     xmlns:xlink="http://www.w3.org/1999/xlink"
     xml:id="zend.module.module-manager">
-    <info>
+    
         <title>The Module Manager</title>
-    </info>
+    
 
     <para>
         The module manager, <classname>Zend\Module\Manager</classname>, is a very simple class which
@@ -16,9 +16,9 @@
     </para>
 
     <section xml:id="zend.module.module-manager.module-manager-events">
-        <info>
+        
             <title>Module Manager Events</title>
-        </info>
+        
 
         <variablelist>
             <title>Events triggered by <classname>Zend\Module\Manager</classname></title>
@@ -93,9 +93,9 @@
     </section>
     
     <section xml:id="zend.module.module-manager.module-manager-listeners">
-        <info>
+        
             <title>Module Manager Listeners</title>
-        </info>
+        
 
         <para>
             By default, Zend Framework provides several useful module manager listeners.

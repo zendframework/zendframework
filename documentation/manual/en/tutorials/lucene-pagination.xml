@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.lucene.pagination"><info><title>Search result pagination</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.lucene.pagination"><title>Search result pagination</title>
     
 
     <para>
@@ -14,7 +14,7 @@
         retrive documents from the index during the next script execution.
     </para>
 
-    <example xml:id="learning.lucene.pagination.example"><info><title>Search result pagination example</title></info>
+    <example xml:id="learning.lucene.pagination.example"><title>Search result pagination example</title>
         
 
         <programlisting language="php"><![CDATA[

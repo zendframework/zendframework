@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.stringtolower"><info><title>StringToLower</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.stringtolower"><title>StringToLower</title>
     
 
     <para>
         This filter converts any input to be lowercased.
     </para>
 
-    <section xml:id="zend.filter.set.stringtolower.options"><info><title>Supported options for Zend_Filter_StringToLower</title></info>
+    <section xml:id="zend.filter.set.stringtolower.options"><title>Supported options for Zend_Filter_StringToLower</title>
         
 
         <para>
@@ -24,7 +24,7 @@
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.filter.set.stringtolower.basic"><info><title>Basic usage</title></info>
+    <section xml:id="zend.filter.set.stringtolower.basic"><title>Basic usage</title>
         
 
         <para>
@@ -39,7 +39,7 @@ print $filter->filter('SAMPLE');
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.filter.set.stringtolower.encoding"><info><title>Different encoded strings</title></info>
+    <section xml:id="zend.filter.set.stringtolower.encoding"><title>Different encoded strings</title>
         
 
         <para>
@@ -62,7 +62,7 @@ $filter = new Zend_Filter_StringToLower(array('encoding' => 'UTF-8'));
 $filter->setEncoding('ISO-8859-1');
 ]]></programlisting>
 
-        <note><info><title>Setting wrong encodings</title></info>
+        <note><title>Setting wrong encodings</title>
             
 
             <para>

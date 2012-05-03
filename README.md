@@ -1,5 +1,7 @@
 ### Welcome to the *Zend Framework 2.0.0* Release!
 
+Master: [![Build Status](https://secure.travis-ci.org/zendframework/zf2.png?branch=master)](http://travis-ci.org/zendframework/zf2)
+
 ## RELEASE INFORMATION
 
 *Zend Framework 2.0.0beta3*
@@ -26,7 +28,7 @@ prepare for Release Candidate status.
 
             ```php
             $xml = new Zend\Config\Reader\Xml(); 
-            $config = new Zend\Config\Config($xml->fromFile($filename);
+            $config = new Zend\Config\Config($xml->fromFile($filename));
             ```
             or:
 

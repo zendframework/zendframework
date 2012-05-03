@@ -4,7 +4,7 @@
     xmlns="http://docbook.org/ns/docbook" version="5.0"
     xmlns:xlink="http://www.w3.org/1999/xlink"
     xml:id="zend.di.definition">
-    <info><title>Zend\Di Definition</title></info>
+    <title>Zend\Di Definition</title>
 
     <para>
         Definitions are the place where Zend\Di attempts to understand
@@ -15,7 +15,7 @@
     </para>
 
     <section xml:id="zend.di.definition.definitionlist">
-        <info><title>DefinitionList</title></info>
+        <title>DefinitionList</title>
 
         <para>
             Definitions are introduced to the Zend\Di\Di object through
@@ -33,7 +33,7 @@
     </section>
 
     <section xml:id="zend.di.definition.runtimedefinition">
-        <info><title>RuntimeDefinition</title></info>
+        <title>RuntimeDefinition</title>
 
         <para>
             The default DefinitionList instantiated by Zend\Di\Di, when no other
@@ -121,7 +121,7 @@ public function __construct(AnnotationManager $annotationManager = null)
 
 
     <section xml:id="zend.di.definition.compilerdefinition">
-        <info><title>CompilerDefinition</title></info>
+        <title>CompilerDefinition</title>
 
         <para>
             The CompilerDefinition is very much similar in nature to the RuntimeDefinition
@@ -188,7 +188,7 @@ protected function setupDi(Application $app)
 
 
     <section xml:id="zend.di.definition.classdefinition">
-        <info><title>ClassDefinition</title></info>
+        <title>ClassDefinition</title>
 
         <para>
             The idea behind using a ClassDefinition is two-fold.  First, you may want to override some

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <appendix xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="doc-standard">
-    <info><title>Zend Framework Documentation Standard</title></info>
+    <title>Zend Framework Documentation Standard</title>
 
     <section xml:id="doc-standard.overview">
-        <info><title>Overview</title></info>
+        <title>Overview</title>
 
         <section xml:id="doc-standard.overview.scope">
-            <info><title>Scope</title></info>
+            <title>Scope</title>
 
             <para>
                 This document provides guidelines for creation of the end-user
@@ -33,10 +33,10 @@
     </section>
 
     <section xml:id="doc-standard.file-formatting">
-        <info><title>Documentation File Formatting</title></info>
+        <title>Documentation File Formatting</title>
 
         <section xml:id="doc-standard.file-formatting.xml-tags">
-            <info><title>XML Tags</title></info>
+            <title>XML Tags</title>
 
             <para>
                 Each manual file must include the following <acronym>XML</acronym> declarations at
@@ -62,7 +62,7 @@
         </section>
 
         <section xml:id="doc-standard.file-formatting.max-line-length">
-            <info><title>Maximum Line Length</title></info>
+            <title>Maximum Line Length</title>
 
             <para>
                 The maximum line length, including tags, attributes, and indentation, is not to
@@ -72,7 +72,7 @@
         </section>
 
         <section xml:id="doc-standard.file-formatting.indentation">
-            <info><title>Indentation</title></info>
+            <title>Indentation</title>
             
 
             <para>Indentation should consist of 4 spaces. Tabs are not allowed.</para>
@@ -116,7 +116,7 @@
         </section>
 
         <section xml:id="doc-standard.file-formatting.line-termination">
-            <info><title>Line Termination</title></info>
+            <title>Line Termination</title>
 
             <para>
                 Line termination follows the Unix text file convention. Lines must end with a
@@ -132,7 +132,7 @@
         </section>
 
         <section xml:id="doc-standard.file-formatting.empty-tags">
-            <info><title>Empty tags</title></info>
+            <title>Empty tags</title>
 
             <para>
                 Empty tags are not allowed; all tags must contain text or child tags.
@@ -150,10 +150,10 @@
         </section>
 
         <section xml:id="doc-standard.file-formatting.whitespace">
-            <info><title>Usage of whitespace within documents</title></info>
+            <title>Usage of whitespace within documents</title>
 
             <section xml:id="doc-standard.file-formatting.whitespace.trailing">
-                <info><title>Whitespace within tags</title></info>
+                <title>Whitespace within tags</title>
 
                 <para>
                     Opening block tags should have no whitespace immediately following them other
@@ -207,7 +207,7 @@ This is the class <classname>Zend_Class</classname>
             </section>
 
             <section xml:id="doc-standard.file-formatting.whitespace.multiple-line-breaks">
-                <info><title>Multiple line breaks</title></info>
+                <title>Multiple line breaks</title>
                 
 
                 <para>
@@ -240,7 +240,7 @@ This is the class <classname>Zend_Class</classname>
             </section>
 
             <section xml:id="doc-standard.file-formatting.whitespace.tag-separation">
-                <info><title>Separation between tags</title></info>
+                <title>Separation between tags</title>
 
                 <para>
                     Tags at the same level must be separated by an empty line to improve
@@ -303,7 +303,7 @@ This is the class <classname>Zend_Class</classname>
         </section>
 
         <section xml:id="doc-standard.file-formatting.program-listing">
-            <info><title>Program Listings</title></info>
+            <title>Program Listings</title>
 
             <para>
                 The opening <emphasis>&lt;programlisting&gt;</emphasis> tag must indicate the
@@ -415,7 +415,7 @@ $render = "xxx";
             </para>
 
             <note>
-                <info><title>Never use short tags</title></info>
+                <title>Never use short tags</title>
 
                 <para>
                     Short tags (e.g., "&lt;?", "&lt;?=") should never be used within
@@ -425,10 +425,10 @@ $render = "xxx";
         </section>
 
         <section xml:id="doc-standard.file-formatting.inline-tags">
-            <info><title>Notes on specific inline tags</title></info>
+            <title>Notes on specific inline tags</title>
             
             <section xml:id="doc-standard.file-formatting.inline-tags.classname">
-                <info><title>classname</title></info>
+                <title>classname</title>
 
                 <para>
                     The tag <emphasis>&lt;classname&gt;</emphasis> must be used each time a class
@@ -445,7 +445,7 @@ $render = "xxx";
             </section>
 
             <section xml:id="doc-standard.file-formatting.inline-tags.varname">
-                <info><title>varname</title></info>
+                <title>varname</title>
                 
                 <para>
                     Variables must be wrapped in the <emphasis>&lt;varname&gt;</emphasis> tag.
@@ -462,7 +462,7 @@ $render = "xxx";
             </section>
 
             <section xml:id="doc-standard.file-formatting.inline-tags.methodname">
-                <info><title>methodname</title></info>
+                <title>methodname</title>
 
                 <para>
                     Methods must be wrapped in the <emphasis>&lt;methodname&gt;</emphasis> tag.
@@ -481,7 +481,7 @@ $render = "xxx";
             </section>
 
             <section xml:id="doc-standard.file-formatting.inline-tags.constant">
-                <info><title>constant</title></info>
+                <title>constant</title>
 
                 <para>
                     Use the <emphasis>&lt;constant&gt;</emphasis> tag when denoting constants.
@@ -499,7 +499,7 @@ $render = "xxx";
             </section>
 
             <section xml:id="doc-standard.file-formatting.inline-tags.filename">
-                <info><title>filename</title></info>
+                <title>filename</title>
 
                 <para>
                     Filenames and paths must be wrapped in the
@@ -515,7 +515,7 @@ $render = "xxx";
             </section>
 
             <section xml:id="doc-standard.file-formatting.inline-tags.command">
-                <info><title>command</title></info>
+                <title>command</title>
 
                 <para>
                     Commands, shell scripts, and program calls must be wrapped in the
@@ -531,7 +531,7 @@ $render = "xxx";
             </section>
 
             <section xml:id="doc-standard.file-formatting.inline-tags.code">
-                <info><title>code</title></info>
+                <title>code</title>
 
                 <para>
                     Usage of the <emphasis>&lt;code&gt;</emphasis> tag is discouraged, in favor of
@@ -541,10 +541,10 @@ $render = "xxx";
         </section>
 
         <section xml:id="doc-standard.file-formatting.block-tags">
-            <info><title>Notes on specific block tags</title></info>
+            <title>Notes on specific block tags</title>
             
             <section xml:id="doc-standard.file-formatting.block-tags.title">
-                <info><title>title</title></info>
+                <title>title</title>
 
                 <para>
                     The <emphasis>&lt;title&gt;</emphasis> tag is not allowed to hold other tags.
@@ -562,10 +562,10 @@ $render = "xxx";
     </section>
 
     <section xml:id="doc-standard.recommendations">
-        <info><title>Recommendations</title></info>
+        <title>Recommendations</title>
 
         <section xml:id="doc-standard.recommendations.editors">
-            <info><title>Use editors without autoformatting or with configurable formatting</title></info>
+            <title>Use editors without autoformatting or with configurable formatting</title>
 
             <para>
                 The style guidelines were written in large part to assist translators in recognizing
@@ -590,7 +590,7 @@ $render = "xxx";
         </section>
 
         <section xml:id="doc-standard.recommendations.images">
-            <info><title>Use Images</title></info>
+            <title>Use Images</title>
 
             <para>
                 Good images and diagrams can improve readability and comprehension. Use them
@@ -601,7 +601,7 @@ $render = "xxx";
         </section>
 
         <section xml:id="doc-standard.recommendations.examples">
-            <info><title>Use Case Examples</title></info>
+            <title>Use Case Examples</title>
 
             <para>
                 Look for good use cases submitted by the community, especially those posted in
@@ -616,7 +616,7 @@ $render = "xxx";
         </section>
 
         <section xml:id="doc-standard.recommendations.links">
-            <info><title>Use Links</title></info>
+            <title>Use Links</title>
 
             <para>
                 Link to other sections of the manual or to external sources

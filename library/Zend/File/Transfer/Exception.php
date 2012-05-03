@@ -21,7 +21,7 @@
 namespace Zend\File\Transfer;
 
 /**
- * Exception class for Zend_File_Transfer
+ * Exception class for Zend\File\Transfer
  *
  * @category   Zend
  * @package    Zend_File_Transfer

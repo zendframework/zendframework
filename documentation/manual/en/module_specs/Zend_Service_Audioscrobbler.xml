@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.audioscrobbler"><info><title>Zend_Service_Audioscrobbler</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.audioscrobbler"><title>Zend_Service_Audioscrobbler</title>
     
 
-    <section xml:id="zend.service.audioscrobbler.introduction"><info><title>Introduction</title></info>
+    <section xml:id="zend.service.audioscrobbler.introduction"><title>Introduction</title>
         
 
         <para>
@@ -17,7 +17,7 @@
         </para>
     </section>
 
-    <section xml:id="zend.service.audioscrobbler.users"><info><title>Users</title></info>
+    <section xml:id="zend.service.audioscrobbler.users"><title>Users</title>
         
 
         <para>
@@ -192,7 +192,7 @@
             </itemizedlist>
         </para>
 
-        <example xml:id="zend.service.audioscrobbler.users.example.profile_information"><info><title>Retrieving User Profile Information</title></info>
+        <example xml:id="zend.service.audioscrobbler.users.example.profile_information"><title>Retrieving User Profile Information</title>
             
 
             <para>
@@ -213,7 +213,7 @@ print "Information for $profileInfo->realname "
 ]]></programlisting>
         </example>
 
-        <example xml:id="zend.service.audioscrobbler.users.example.weekly_artist_chart"><info><title>Retrieving a User's Weekly Artist Chart</title></info>
+        <example xml:id="zend.service.audioscrobbler.users.example.weekly_artist_chart"><title>Retrieving a User's Weekly Artist Chart</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -244,7 +244,7 @@ foreach ($previousWeeklyArtists as $artist) {
         </example>
     </section>
 
-    <section xml:id="zend.service.audioscrobbler.artists"><info><title>Artists</title></info>
+    <section xml:id="zend.service.audioscrobbler.artists"><title>Artists</title>
         
 
         <para>
@@ -290,7 +290,7 @@ foreach ($previousWeeklyArtists as $artist) {
             </itemizedlist>
         </para>
 
-        <example xml:id="zend.service.audioscrobbler.artists.example.related_artists"><info><title>Retrieving Related Artists</title></info>
+        <example xml:id="zend.service.audioscrobbler.artists.example.related_artists"><title>Retrieving Related Artists</title>
             
 
             <programlisting language="php"><![CDATA[
@@ -307,7 +307,7 @@ foreach ($relatedArtists as $artist) {
         </example>
     </section>
 
-    <section xml:id="zend.service.audioscrobbler.tracks"><info><title>Tracks</title></info>
+    <section xml:id="zend.service.audioscrobbler.tracks"><title>Tracks</title>
         
 
         <para>
@@ -333,7 +333,7 @@ foreach ($relatedArtists as $artist) {
         </para>
     </section>
 
-    <section xml:id="zend.service.audioscrobbler.tags"><info><title>Tags</title></info>
+    <section xml:id="zend.service.audioscrobbler.tags"><title>Tags</title>
         
 
         <para>
@@ -376,7 +376,7 @@ foreach ($relatedArtists as $artist) {
         </para>
     </section>
 
-    <section xml:id="zend.service.audioscrobbler.groups"><info><title>Groups</title></info>
+    <section xml:id="zend.service.audioscrobbler.groups"><title>Groups</title>
         
 
         <para>
@@ -457,7 +457,7 @@ foreach ($relatedArtists as $artist) {
         </para>
     </section>
 
-    <section xml:id="zend.service.audioscrobbler.forums"><info><title>Forums</title></info>
+    <section xml:id="zend.service.audioscrobbler.forums"><title>Forums</title>
         
 
         <para>

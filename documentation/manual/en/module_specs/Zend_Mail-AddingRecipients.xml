@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.adding-recipients"><info><title>Adding Recipients</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.adding-recipients"><title>Adding Recipients</title>
     
 
     <para>
@@ -34,7 +34,7 @@
         <methodname>clearRecipients()</methodname> clears the list.
     </para>
 
-    <note><info><title>Additional parameter</title></info>
+    <note><title>Additional parameter</title>
         
 
         <para>
@@ -45,7 +45,7 @@
         </para>
     </note>
 
-    <note><info><title>Optional Usage</title></info>
+    <note><title>Optional Usage</title>
         
 
         <para>

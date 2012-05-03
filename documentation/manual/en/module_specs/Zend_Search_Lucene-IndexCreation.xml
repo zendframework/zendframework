@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.index-creation"><info><title>Building Indexes</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.index-creation"><title>Building Indexes</title>
     
 
-    <section xml:id="zend.search.lucene.index-creation.creating"><info><title>Creating a New Index</title></info>
+    <section xml:id="zend.search.lucene.index-creation.creating"><title>Creating a New Index</title>
         
 
         <para>
@@ -38,7 +38,7 @@ $index->addDocument($doc);
         </para>
     </section>
 
-    <section xml:id="zend.search.lucene.index-creation.updating"><info><title>Updating Index</title></info>
+    <section xml:id="zend.search.lucene.index-creation.updating"><title>Updating Index</title>
         
 
         <para>
@@ -62,7 +62,7 @@ $index->addDocument($doc);
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.search.lucene.index-creation.document-updating"><info><title>Updating Documents</title></info>
+    <section xml:id="zend.search.lucene.index-creation.document-updating"><title>Updating Documents</title>
         
 
         <para>
@@ -84,7 +84,7 @@ foreach ($hits as $hit) {
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.search.lucene.index-creation.counting"><info><title>Retrieving Index Size</title></info>
+    <section xml:id="zend.search.lucene.index-creation.counting"><title>Retrieving Index Size</title>
         
 
         <para>
@@ -128,7 +128,7 @@ for ($count = 0; $count < $index->maxDoc(); $count++) {
         </para>
     </section>
 
-    <section xml:id="zend.search.lucene.index-creation.optimization"><info><title>Index optimization</title></info>
+    <section xml:id="zend.search.lucene.index-creation.optimization"><title>Index optimization</title>
         
 
         <para>
@@ -181,7 +181,7 @@ $index->optimize();
             larger segments and so on.
         </para>
 
-        <section xml:id="zend.search.lucene.index-creation.optimization.maxbuffereddocs"><info><title>MaxBufferedDocs auto-optimization option</title></info>
+        <section xml:id="zend.search.lucene.index-creation.optimization.maxbuffereddocs"><title>MaxBufferedDocs auto-optimization option</title>
             
 
             <para>
@@ -200,7 +200,7 @@ $index->optimize();
             </para>
         </section>
 
-        <section xml:id="zend.search.lucene.index-creation.optimization.maxmergedocs"><info><title>MaxMergeDocs auto-optimization option</title></info>
+        <section xml:id="zend.search.lucene.index-creation.optimization.maxmergedocs"><title>MaxMergeDocs auto-optimization option</title>
             
 
             <para>
@@ -221,7 +221,7 @@ $index->optimize();
             </para>
         </section>
 
-        <section xml:id="zend.search.lucene.index-creation.optimization.mergefactor"><info><title>MergeFactor auto-optimization option</title></info>
+        <section xml:id="zend.search.lucene.index-creation.optimization.mergefactor"><title>MergeFactor auto-optimization option</title>
             
 
             <para>
@@ -277,7 +277,7 @@ $index->optimize();
         </section>
     </section>
 
-    <section xml:id="zend.search.lucene.index-creation.permissions"><info><title>Permissions</title></info>
+    <section xml:id="zend.search.lucene.index-creation.permissions"><title>Permissions</title>
         
 
         <para>
@@ -300,10 +300,10 @@ Zend_Search_Lucene_Storage_Directory_Filesystem::setDefaultFilePermissions(0660)
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.search.lucene.index-creation.limitations"><info><title>Limitations</title></info>
+    <section xml:id="zend.search.lucene.index-creation.limitations"><title>Limitations</title>
         
 
-        <section xml:id="zend.search.lucene.index-creation.limitations.index-size"><info><title>Index size</title></info>
+        <section xml:id="zend.search.lucene.index-creation.limitations.index-size"><title>Index size</title>
             
 
             <para>
@@ -315,7 +315,7 @@ Zend_Search_Lucene_Storage_Directory_Filesystem::setDefaultFilePermissions(0660)
             </para>
         </section>
 
-        <section xml:id="zend.search.lucene.index-creation.limitations.filesystems"><info><title>Supported Filesystems</title></info>
+        <section xml:id="zend.search.lucene.index-creation.limitations.filesystems"><title>Supported Filesystems</title>
             
 
             <para>

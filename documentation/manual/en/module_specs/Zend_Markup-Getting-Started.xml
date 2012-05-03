@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.markup.getting-started"><info><title>Getting Started With Zend_Markup</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.markup.getting-started"><title>Getting Started With Zend_Markup</title>
     
 
     <para>
@@ -8,7 +8,7 @@
         parsers and renderers.
     </para>
 
-    <example xml:id="zend.markup.getting-started.basic-usage"><info><title>Basic Zend_Markup Usage</title></info>
+    <example xml:id="zend.markup.getting-started.basic-usage"><title>Basic Zend_Markup Usage</title>
         
 
         <para>
@@ -33,7 +33,7 @@ echo $bbcode->render('[b]bold text[/b] and [i]cursive text[/i]');
 ]]></programlisting>
     </example>
 
-    <example xml:id="zend.markup.getting-started.complicated-example"><info><title>A more complicated example of Zend_Markup</title></info>
+    <example xml:id="zend.markup.getting-started.complicated-example"><title>A more complicated example of Zend_Markup</title>
         
 
         <para>
@@ -62,7 +62,7 @@ Should output something like:
 ]]></programlisting>
     </example>
 
-    <example xml:id="zend.markup.getting-started.incorrect-input"><info><title>Processing incorrect input</title></info>
+    <example xml:id="zend.markup.getting-started.incorrect-input"><title>Processing incorrect input</title>
         
 
         <para>

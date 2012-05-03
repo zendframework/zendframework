@@ -25,7 +25,7 @@ namespace ZendTest\Service\SlideShare;
 use Zend\Service\SlideShare,
     Zend\Service\SlideShare\SlideShare as SlideShareService,
     Zend\Cache\StorageFactory as CacheFactory,
-    Zend\Cache\Storage\Adapter as CacheAdapter;
+    Zend\Cache\Storage\Adapter\AdapterInterface as CacheAdapter;
 
 /**
  * @see \Zend\Service\SlideShare

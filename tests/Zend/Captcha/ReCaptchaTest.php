@@ -21,8 +21,8 @@
 
 namespace ZendTest\Captcha;
 
-use Zend\Captcha;
-
+use Zend\Captcha\ReCaptcha;
+use Zend\Service\ReCaptcha\ReCaptcha as ReCaptchaService;
 /**
  * @category   Zend
  * @package    Zend_Captcha
@@ -45,16 +45,9 @@ class ReCaptchaTest extends \PHPUnit_Framework_TestCase
             unset($this->word);
         }
 
-        $this->element = new \Zend\Form\Element\Captcha(
-            'captchaR',
-            array(
-                'captcha' => array(
-                    'ReCaptcha',
-                    'sessionClass' => 'ZendTest\\Captcha\\TestAsset\\SessionContainer'
-                )
-            )
-        );
-        $this->captcha =  $this->element->getCaptcha();
+        $this->captcha = new ReCaptcha(array(
+            'sessionClass' => 'ZendTest\Captcha\TestAsset\SessionContainer'
+        ));
     }
 
     public function testConstructorShouldSetOptions()
@@ -65,7 +58,7 @@ class ReCaptchaTest extends \PHPUnit_Framework_TestCase
             'ssl'     => true,
             'xhtml'   => true,
         );
-        $captcha = new Captcha\ReCaptcha($options);
+        $captcha = new ReCaptcha($options);
         $test    = $captcha->getOptions();
         $compare = array('privKey' => $options['privKey'], 'pubKey' => $options['pubKey']);
         $this->assertEquals($compare, $test);
@@ -81,8 +74,8 @@ class ReCaptchaTest extends \PHPUnit_Framework_TestCase
 
     public function testShouldAllowSpecifyingServiceObject()
     {
-        $captcha = new Captcha\ReCaptcha();
-        $try     = new \Zend\Service\ReCaptcha\ReCaptcha();
+        $captcha = new ReCaptcha();
+        $try     = new ReCaptchaService();
         $this->assertNotSame($captcha->getService(), $try);
         $captcha->setService($try);
         $this->assertSame($captcha->getService(), $try);
@@ -90,7 +83,7 @@ class ReCaptchaTest extends \PHPUnit_Framework_TestCase
 
     public function testSetAndGetPublicAndPrivateKeys()
     {
-        $captcha = new Captcha\ReCaptcha();
+        $captcha = new ReCaptcha();
         $pubKey = 'pubKey';
         $privKey = 'privKey';
         $captcha->setPubkey($pubKey)
@@ -107,7 +100,7 @@ class ReCaptchaTest extends \PHPUnit_Framework_TestCase
     public function testConstructorShouldAllowSettingLangOptionOnServiceObject()
     {
         $options = array('lang'=>'fr');
-        $captcha = new Captcha\ReCaptcha($options);
+        $captcha = new ReCaptcha($options);
         $this->assertEquals('fr', $captcha->getService()->getOption('lang'));
     }
 
@@ -115,14 +108,14 @@ class ReCaptchaTest extends \PHPUnit_Framework_TestCase
     public function testConstructorShouldAllowSettingThemeOptionOnServiceObject()
     {
         $options = array('theme'=>'black');
-        $captcha = new Captcha\ReCaptcha($options);
+        $captcha = new ReCaptcha($options);
         $this->assertEquals('black', $captcha->getService()->getOption('theme'));
     }
 
     /** @group ZF-7654 */
     public function testAllowsSettingLangOptionOnServiceObject()
     {
-        $captcha = new Captcha\ReCaptcha;
+        $captcha = new ReCaptcha;
         $captcha->setOption('lang', 'fr');
         $this->assertEquals('fr', $captcha->getService()->getOption('lang'));
     }
@@ -130,33 +123,14 @@ class ReCaptchaTest extends \PHPUnit_Framework_TestCase
     /** @group ZF-7654 */
     public function testAllowsSettingThemeOptionOnServiceObject()
     {
-        $captcha = new Captcha\ReCaptcha;
+        $captcha = new ReCaptcha;
         $captcha->setOption('theme', 'black');
         $this->assertEquals('black', $captcha->getService()->getOption('theme'));
     }
 
-    /** @group ZF-10991 */
-    public function testRenderWillUseElementNameWhenRenderingNoScriptFields()
+    public function testUsesReCaptchaHelper()
     {
-        $captcha = new Captcha\ReCaptcha;
-        $pubKey  = 'pubKey';
-        $privKey = 'privKey';
-        $captcha->setPubkey($pubKey)
-                ->setPrivkey($privKey);
-        $element = new \Zend\Form\Element\Captcha('captcha', array(
-            'captcha'   => $captcha,
-            'belongsTo' => 'contact',
-        ));
-        $view = new \Zend\View\Renderer\PhpRenderer();
-        $html = $captcha->render($view, $element);
-        $this->assertContains('contact[recaptcha_challenge_field]', $html);
-        $this->assertContains('contact[recaptcha_response_field]', $html);
-    }
-
-    /** @group ZF-10991 */
-    public function testUsesReCaptchaSpecificDecorator()
-    {
-        $captcha = new \Zend\Captcha\ReCaptcha;
-        $this->assertEquals('Captcha\ReCaptcha', $captcha->getDecorator());   
+        $captcha = new ReCaptcha;
+        $this->assertEquals('captcha/recaptcha', $captcha->getHelperName());   
     }
 }

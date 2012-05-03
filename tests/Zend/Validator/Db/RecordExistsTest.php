@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend\Validator
+ * @package    Zend_Validator
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -28,7 +28,7 @@ use Zend\Validator\Db\RecordExists as RecordExistsValidator,
 
 /**
  * @category   Zend
- * @package    Zend\Validator
+ * @package    Zend_Validator
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -91,7 +91,9 @@ class RecordExistsTest extends \PHPUnit_Framework_TestCase
      */
     public function testBasicFindsRecord()
     {
-        $validator = new RecordExistsValidator(array('table' => 'users', 'field' => 'field1', 'adapter' => $this->_adapterHasResult));
+        $validator = new RecordExistsValidator(array('table' => 'users',
+                                                            'field' => 'field1',
+                                                            'adapter' => $this->_adapterHasResult));
         $this->assertTrue($validator->isValid('value1'));
     }
 
@@ -102,7 +104,9 @@ class RecordExistsTest extends \PHPUnit_Framework_TestCase
      */
     public function testBasicFindsNoRecord()
     {
-        $validator = new RecordExistsValidator(array('table' => 'users', 'field' => 'field1', 'adapter' => $this->_adapterNoResult));
+        $validator = new RecordExistsValidator(array('table' => 'users',
+                                                            'field' => 'field1',
+                                                            'adapter' => $this->_adapterNoResult));
         $this->assertFalse($validator->isValid('nosuchvalue'));
     }
 
@@ -113,7 +117,10 @@ class RecordExistsTest extends \PHPUnit_Framework_TestCase
      */
     public function testExcludeWithArray()
     {
-        $validator = new RecordExistsValidator(array('table' => 'users', 'field' => 'field1', 'exclude' => array('field' => 'id', 'value' => 1), 'adapter' => $this->_adapterHasResult));
+        $validator = new RecordExistsValidator(array('table' => 'users',
+                                                            'field' => 'field1',
+                                                            'exclude' => array('field' => 'id', 'value' => 1),
+                                                            'adapter' => $this->_adapterHasResult));
         $this->assertTrue($validator->isValid('value3'));
     }
 
@@ -125,7 +132,10 @@ class RecordExistsTest extends \PHPUnit_Framework_TestCase
      */
     public function testExcludeWithArrayNoRecord()
     {
-        $validator = new RecordExistsValidator(array('table' => 'users', 'field' => 'field1', 'exclude' => array('field' => 'id', 'value' => 1), 'adapter' => $this->_adapterNoResult));
+        $validator = new RecordExistsValidator(array('table' => 'users',
+                                                            'field' => 'field1',
+                                                            'exclude' => array('field' => 'id', 'value' => 1),
+                                                            'adapter' => $this->_adapterNoResult));
         $this->assertFalse($validator->isValid('nosuchvalue'));
     }
 
@@ -137,7 +147,10 @@ class RecordExistsTest extends \PHPUnit_Framework_TestCase
      */
     public function testExcludeWithString()
     {
-        $validator = new RecordExistsValidator(array('table' => 'users', 'field' => 'field1', 'exclude' => 'id != 1', 'adapter' => $this->_adapterHasResult));
+        $validator = new RecordExistsValidator(array('table' => 'users',
+                                                            'field' => 'field1',
+                                                            'exclude' => 'id != 1',
+                                                            'adapter' => $this->_adapterHasResult));
         $this->assertTrue($validator->isValid('value3'));
     }
 
@@ -149,7 +162,10 @@ class RecordExistsTest extends \PHPUnit_Framework_TestCase
      */
     public function testExcludeWithStringNoRecord()
     {
-        $validator = new RecordExistsValidator(array('table' => 'users', 'field' => 'field1', 'adapter' => $this->_adapterNoResult, 'exclude' => 'id != 1'));
+        $validator = new RecordExistsValidator(array('table' => 'users',
+                                                            'field' => 'field1',
+                                                            'adapter' => $this->_adapterNoResult,
+                                                            'exclude' => 'id != 1'));
         $this->assertFalse($validator->isValid('nosuchvalue'));
     }
 
@@ -161,7 +177,9 @@ class RecordExistsTest extends \PHPUnit_Framework_TestCase
      */
     public function testThrowsExceptionWithNoAdapter()
     {
-        $validator = new RecordExistsValidator(array('table' => 'users', 'field' => 'field1', 'exclude' => 'id != 1'));
+        $validator = new RecordExistsValidator(array('table' => 'users',
+                                                            'field' => 'field1',
+                                                            'exclude' => 'id != 1'));
         $this->setExpectedException('Zend\Validator\Exception\RuntimeException', 'No database adapter present');
         $valid = $validator->isValid('nosuchvalue');
     }
@@ -173,7 +191,10 @@ class RecordExistsTest extends \PHPUnit_Framework_TestCase
      */
     public function testWithSchema()
     {
-        $validator = new RecordExistsValidator(array('table' => 'users', 'schema' => 'my', 'field' => 'field1', 'adapter' => $this->_adapterHasResult));
+        $validator = new RecordExistsValidator(array('table' => 'users',
+                                                            'schema' => 'my',
+                                                            'field' => 'field1',
+                                                            'adapter' => $this->_adapterHasResult));
         $this->assertTrue($validator->isValid('value1'));
     }
 
@@ -184,13 +205,17 @@ class RecordExistsTest extends \PHPUnit_Framework_TestCase
      */
     public function testWithSchemaNoResult()
     {
-        $validator = new RecordExistsValidator(array('table' => 'users', 'schema' => 'my', 'field' => 'field1', 'adapter' => $this->_adapterNoResult));
+        $validator = new RecordExistsValidator(array('table' => 'users',
+                                                            'schema' => 'my',
+                                                            'field' => 'field1',
+                                                            'adapter' => $this->_adapterNoResult));
         $this->assertFalse($validator->isValid('value1'));
     }
     
     public function testEqualsMessageTemplates()
     {
-        $validator = new RecordExistsValidator(array('table' => 'users', 'field' => 'field1'));
+        $validator = new RecordExistsValidator(array('table' => 'users',
+                                                            'field' => 'field1'));
         $reflection = new ReflectionClass($validator);
         
         if(!$reflection->hasProperty('_messageTemplates')) {
@@ -208,7 +233,8 @@ class RecordExistsTest extends \PHPUnit_Framework_TestCase
     
     public function testEqualsMessageVariables()
     {
-        $validator = new RecordExistsValidator(array('table' => 'users', 'field' => 'field1'));
+        $validator = new RecordExistsValidator(array('table' => 'users',
+                                                            'field' => 'field1'));
         $reflection = new ReflectionClass($validator);
         
         if(!$reflection->hasProperty('_messageVariables')) {

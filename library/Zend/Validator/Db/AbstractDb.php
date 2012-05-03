@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Validate
+ * @package    Zend\Validate
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -25,7 +25,6 @@ use Traversable,
     Zend\Db\Adapter\Adapter as DBAdapter,
     Zend\Db\Db,
     Zend\Db\Sql\Select as DBSelect,
-    Zend\Db\TableGateway\AbstractTableGateway as AbstractTable,
     Zend\Validator\AbstractValidator,
     Zend\Validator\Exception;
 
@@ -33,7 +32,7 @@ use Traversable,
  * Class for Database record validation
  *
  * @category   Zend
- * @package    Zend_Validate
+ * @package    Zend\Validate
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -80,7 +79,7 @@ abstract class AbstractDb extends AbstractValidator
     protected $_exclude = null;
 
     /**
-     * Database adapter to use. If null isValid() will use Zend_Db::getInstance instead
+     * Database adapter to use. If null isValid() will throw an exception
      *
      * @var unknown_type
      */
@@ -164,13 +163,10 @@ abstract class AbstractDb extends AbstractValidator
     public function getAdapter()
     {
         /**
-         * Check for an adapter being defined. If not, fetch the default adapter.
+         * Check for an adapter being defined. If not, throw an exception.
          */
-        if ($this->_adapter === null) {
-            $this->_adapter = AbstractTable::getAdapter();
-            if (null === $this->_adapter) {
-                throw new Exception\RuntimeException('No database adapter present');
-            }
+        if (null === $this->_adapter) {
+            throw new Exception\RuntimeException('No database adapter present');
         }
 
         return $this->_adapter;

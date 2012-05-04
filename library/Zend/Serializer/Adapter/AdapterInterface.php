@@ -19,7 +19,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Serializer;
+namespace Zend\Serializer\Adapter;
 
 /**
  * @category   Zend
@@ -28,7 +28,7 @@ namespace Zend\Serializer;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Adapter 
+interface AdapterInterface
 {
     /**
      * Constructor
@@ -42,7 +42,7 @@ interface Adapter
      * Set serializer options
      *
      * @param  array|Zend\Config\Config $opts Serializer options
-     * @return Zend\Serializer\Adapter
+     * @return AdapterInterface
      */
     public function setOptions($opts);
 
@@ -51,7 +51,7 @@ interface Adapter
      *
      * @param  string $name Option name
      * @param  mixed $value Option value
-     * @return Zend\Serializer\Adapter
+     * @return AdapterInterface
      */
     public function setOption($name, $value);
 
@@ -67,7 +67,7 @@ interface Adapter
      *
      * @param  string $name
      * @return mixed
-     * @throws Zend\Serializer\Exception
+     * @throws AdapterInterface
      */
     public function getOption($name);
 
@@ -77,7 +77,7 @@ interface Adapter
      * @param  mixed $value Data to serialize
      * @param  array $options Serialize options
      * @return string
-     * @throws Zend\Serializer\Exception
+     * @throws \Zend\Serializer\Exception\ExceptionInterface
      */
     public function serialize($value, array $options = array());
 
@@ -87,7 +87,7 @@ interface Adapter
      * @param  string $serialized Serialized string
      * @param  array $options Unserialize options
      * @return mixed
-     * @throws Zend\Serializer\Exception
+     * @throws \Zend\Serializer\Exception\ExceptionInterface
      */
     public function unserialize($serialized, array $options = array());
 }

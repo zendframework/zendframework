@@ -20,7 +20,8 @@
 
 namespace Zend\Serializer;
 
-use Zend\Loader\PluginBroker;
+use Zend\Loader\PluginBroker,
+    Zend\Serializer\Adapter\AdapterInterface as Adapter;
 
 /**
  * Broker for serializer adapter instances
@@ -42,12 +43,14 @@ class AdapterBroker extends PluginBroker
      * 
      * @param  mixed $plugin 
      * @return true
-     * @throws Exception
+     * @throws Exception\RuntimeException
      */
     protected function validatePlugin($plugin)
     {
         if (!$plugin instanceof Adapter) {
-            throw new Exception\RuntimeException('Serializer adapters must implement Zend\Serializer\Adapter');
+            throw new Exception\RuntimeException(
+                'Serializer adapters must implement Zend\Serializer\Adapter\AdapterInterface'
+            );
         }
         return true;
     }

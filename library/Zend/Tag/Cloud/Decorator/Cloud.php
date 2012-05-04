@@ -21,7 +21,7 @@
 
 namespace Zend\Tag\Cloud\Decorator;
 
-use Zend\Tag\Cloud\Decorator;
+use Zend\Tag\Cloud\Decorator\DecoratorInterface as Decorator;
 
 /**
  * Abstract class for cloud decorators

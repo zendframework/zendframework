@@ -21,10 +21,9 @@
 
 namespace ZendTest\Validator\Db;
 
-use Zend\Validator\Db\RecordExists as RecordExistsValidator,
-    Zend\Validator\Db\NoRecordExists as NoRecordExistsValidator,
-    ReflectionClass,
-    Zend\Db\ResultSet\Row;
+use ReflectionClass;
+use Zend\Db\ResultSet\Row;
+use Zend\Validator\Db\RecordExists;
 
 /**
  * @category   Zend
@@ -38,14 +37,14 @@ class RecordExistsTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
-     * @var Zend\Db\Adapter\Adapter
+     * @var \Zend\Db\Adapter\Adapter
      */
-    protected $_adapterHasResult;
+    protected $adapterHasResult;
 
     /**
-     * @var Zend\Db\Adapter\Adapter
+     * @var \Zend\Db\Adapter\Adapter
      */
-    protected $_adapterNoResult;
+    protected $adapterNoResult;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -56,32 +55,48 @@ class RecordExistsTest extends \PHPUnit_Framework_TestCase
         // mock the adapter, driver, and parts
         $mockConnection = $this->getMock('Zend\Db\Adapter\Driver\ConnectionInterface');
 
-        $mockHasResultRow = new Row();
+        $mockHasResultRow      = new Row();
         $mockHasResultRow->one = 'one';
 
         $mockHasResult = $this->getMock('Zend\Db\Adapter\Driver\ResultInterface');
-        $mockHasResult->expects($this->any())->method('current')->will($this->returnValue($mockHasResultRow));
+        $mockHasResult->expects($this->any())
+            ->method('current')
+            ->will($this->returnValue($mockHasResultRow));
 
         $mockHasResultStatement = $this->getMock('Zend\Db\Adapter\Driver\StatementInterface');
-        $mockHasResultStatement->expects($this->any())->method('execute')->will($this->returnValue($mockHasResult));
+        $mockHasResultStatement->expects($this->any())
+            ->method('execute')
+            ->will($this->returnValue($mockHasResult));
 
         $mockHasResultDriver = $this->getMock('Zend\Db\Adapter\Driver\DriverInterface');
-        $mockHasResultDriver->expects($this->any())->method('createStatement')->will($this->returnValue($mockHasResultStatement));
-        $mockHasResultDriver->expects($this->any())->method('getConnection')->will($this->returnValue($mockConnection));
+        $mockHasResultDriver->expects($this->any())
+            ->method('createStatement')
+            ->will($this->returnValue($mockHasResultStatement));
+        $mockHasResultDriver->expects($this->any())
+            ->method('getConnection')
+            ->will($this->returnValue($mockConnection));
 
-        $this->_adapterHasResult = $this->getMock('Zend\Db\Adapter\Adapter', null, array($mockHasResultDriver));
+        $this->adapterHasResult = $this->getMock('Zend\Db\Adapter\Adapter', null, array($mockHasResultDriver));
 
         $mockNoResult = $this->getMock('Zend\Db\Adapter\Driver\ResultInterface');
-        $mockNoResult->expects($this->any())->method('current')->will($this->returnValue(null));
+        $mockNoResult->expects($this->any())
+            ->method('current')
+            ->will($this->returnValue(null));
 
         $mockNoResultStatement = $this->getMock('Zend\Db\Adapter\Driver\StatementInterface');
-        $mockNoResultStatement->expects($this->any())->method('execute')->will($this->returnValue($mockNoResult));
+        $mockNoResultStatement->expects($this->any())
+            ->method('execute')
+            ->will($this->returnValue($mockNoResult));
 
         $mockNoResultDriver = $this->getMock('Zend\Db\Adapter\Driver\DriverInterface');
-        $mockNoResultDriver->expects($this->any())->method('createStatement')->will($this->returnValue($mockNoResultStatement));
-        $mockNoResultDriver->expects($this->any())->method('getConnection')->will($this->returnValue($mockConnection));
+        $mockNoResultDriver->expects($this->any())
+            ->method('createStatement')
+            ->will($this->returnValue($mockNoResultStatement));
+        $mockNoResultDriver->expects($this->any())
+            ->method('getConnection')
+            ->will($this->returnValue($mockConnection));
 
-        $this->_adapterNoResult = $this->getMock('Zend\Db\Adapter\Adapter', null, array($mockNoResultDriver));
+        $this->adapterNoResult = $this->getMock('Zend\Db\Adapter\Adapter', null, array($mockNoResultDriver));
     }
 
     /**
@@ -91,9 +106,9 @@ class RecordExistsTest extends \PHPUnit_Framework_TestCase
      */
     public function testBasicFindsRecord()
     {
-        $validator = new RecordExistsValidator(array('table' => 'users',
-                                                            'field' => 'field1',
-                                                            'adapter' => $this->_adapterHasResult));
+        $validator = new RecordExists(array('table'   => 'users',
+                                            'field'   => 'field1',
+                                            'adapter' => $this->adapterHasResult));
         $this->assertTrue($validator->isValid('value1'));
     }
 
@@ -104,9 +119,9 @@ class RecordExistsTest extends \PHPUnit_Framework_TestCase
      */
     public function testBasicFindsNoRecord()
     {
-        $validator = new RecordExistsValidator(array('table' => 'users',
-                                                            'field' => 'field1',
-                                                            'adapter' => $this->_adapterNoResult));
+        $validator = new RecordExists(array('table'   => 'users',
+                                            'field'   => 'field1',
+                                            'adapter' => $this->adapterNoResult));
         $this->assertFalse($validator->isValid('nosuchvalue'));
     }
 
@@ -117,10 +132,11 @@ class RecordExistsTest extends \PHPUnit_Framework_TestCase
      */
     public function testExcludeWithArray()
     {
-        $validator = new RecordExistsValidator(array('table' => 'users',
-                                                            'field' => 'field1',
-                                                            'exclude' => array('field' => 'id', 'value' => 1),
-                                                            'adapter' => $this->_adapterHasResult));
+        $validator = new RecordExists(array('table'   => 'users',
+                                            'field'   => 'field1',
+                                            'exclude' => array('field' => 'id',
+                                                               'value' => 1),
+                                            'adapter' => $this->adapterHasResult));
         $this->assertTrue($validator->isValid('value3'));
     }
 
@@ -132,10 +148,11 @@ class RecordExistsTest extends \PHPUnit_Framework_TestCase
      */
     public function testExcludeWithArrayNoRecord()
     {
-        $validator = new RecordExistsValidator(array('table' => 'users',
-                                                            'field' => 'field1',
-                                                            'exclude' => array('field' => 'id', 'value' => 1),
-                                                            'adapter' => $this->_adapterNoResult));
+        $validator = new RecordExists(array('table'   => 'users',
+                                            'field'   => 'field1',
+                                            'exclude' => array('field' => 'id',
+                                                               'value' => 1),
+                                            'adapter' => $this->adapterNoResult));
         $this->assertFalse($validator->isValid('nosuchvalue'));
     }
 
@@ -147,10 +164,10 @@ class RecordExistsTest extends \PHPUnit_Framework_TestCase
      */
     public function testExcludeWithString()
     {
-        $validator = new RecordExistsValidator(array('table' => 'users',
-                                                            'field' => 'field1',
-                                                            'exclude' => 'id != 1',
-                                                            'adapter' => $this->_adapterHasResult));
+        $validator = new RecordExists(array('table'   => 'users',
+                                            'field'   => 'field1',
+                                            'exclude' => 'id != 1',
+                                            'adapter' => $this->adapterHasResult));
         $this->assertTrue($validator->isValid('value3'));
     }
 
@@ -162,10 +179,10 @@ class RecordExistsTest extends \PHPUnit_Framework_TestCase
      */
     public function testExcludeWithStringNoRecord()
     {
-        $validator = new RecordExistsValidator(array('table' => 'users',
-                                                            'field' => 'field1',
-                                                            'adapter' => $this->_adapterNoResult,
-                                                            'exclude' => 'id != 1'));
+        $validator = new RecordExists(array('table'   => 'users',
+                                            'field'   => 'field1',
+                                            'adapter' => $this->adapterNoResult,
+                                            'exclude' => 'id != 1'));
         $this->assertFalse($validator->isValid('nosuchvalue'));
     }
 
@@ -177,9 +194,9 @@ class RecordExistsTest extends \PHPUnit_Framework_TestCase
      */
     public function testThrowsExceptionWithNoAdapter()
     {
-        $validator = new RecordExistsValidator(array('table' => 'users',
-                                                            'field' => 'field1',
-                                                            'exclude' => 'id != 1'));
+        $validator = new RecordExists(array('table'   => 'users',
+                                            'field'   => 'field1',
+                                            'exclude' => 'id != 1'));
         $this->setExpectedException('Zend\Validator\Exception\RuntimeException', 'No database adapter present');
         $valid = $validator->isValid('nosuchvalue');
     }
@@ -191,10 +208,10 @@ class RecordExistsTest extends \PHPUnit_Framework_TestCase
      */
     public function testWithSchema()
     {
-        $validator = new RecordExistsValidator(array('table' => 'users',
-                                                            'schema' => 'my',
-                                                            'field' => 'field1',
-                                                            'adapter' => $this->_adapterHasResult));
+        $validator = new RecordExists(array('table'   => 'users',
+                                            'schema'  => 'my',
+                                            'field'   => 'field1',
+                                            'adapter' => $this->adapterHasResult));
         $this->assertTrue($validator->isValid('value1'));
     }
 
@@ -205,23 +222,23 @@ class RecordExistsTest extends \PHPUnit_Framework_TestCase
      */
     public function testWithSchemaNoResult()
     {
-        $validator = new RecordExistsValidator(array('table' => 'users',
-                                                            'schema' => 'my',
-                                                            'field' => 'field1',
-                                                            'adapter' => $this->_adapterNoResult));
+        $validator = new RecordExists(array('table'   => 'users',
+                                            'schema'  => 'my',
+                                            'field'   => 'field1',
+                                            'adapter' => $this->adapterNoResult));
         $this->assertFalse($validator->isValid('value1'));
     }
-    
+
     public function testEqualsMessageTemplates()
     {
-        $validator = new RecordExistsValidator(array('table' => 'users',
-                                                            'field' => 'field1'));
+        $validator  = new RecordExists(array('table' => 'users',
+                                             'field' => 'field1'));
         $reflection = new ReflectionClass($validator);
-        
-        if(!$reflection->hasProperty('_messageTemplates')) {
+
+        if (!$reflection->hasProperty('_messageTemplates')) {
             return;
         }
-        
+
         $property = $reflection->getProperty('_messageTemplates');
         $property->setAccessible(true);
 
@@ -230,17 +247,17 @@ class RecordExistsTest extends \PHPUnit_Framework_TestCase
             $validator->getOption('messageTemplates')
         );
     }
-    
+
     public function testEqualsMessageVariables()
     {
-        $validator = new RecordExistsValidator(array('table' => 'users',
-                                                            'field' => 'field1'));
+        $validator  = new RecordExists(array('table' => 'users',
+                                             'field' => 'field1'));
         $reflection = new ReflectionClass($validator);
-        
-        if(!$reflection->hasProperty('_messageVariables')) {
+
+        if (!$reflection->hasProperty('_messageVariables')) {
             return;
         }
-        
+
         $property = $reflection->getProperty('_messageVariables');
         $property->setAccessible(true);
 

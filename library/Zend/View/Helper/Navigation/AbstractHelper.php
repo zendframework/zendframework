@@ -342,14 +342,14 @@ abstract class AbstractHelper extends View\Helper\HtmlElement implements Helper
     public function setRole($role = null)
     {
         if (null === $role || is_string($role) ||
-            $role instanceof Acl\Role
+            $role instanceof Acl\Role\RoleInterface
         ) {
             $this->role = $role;
         } else {
             throw new Exception\InvalidArgumentException(sprintf(
                 '$role must be a string, null, or an instance of ' 
-                .  'Zend_Acl_Role_Interface; %s given',
-                gettype($role)
+                .  'Zend\Acl\Role\RoleInterface; %s given',
+                (is_object($role) ? get_class($role) : gettype($role))
             ));
         }
 
@@ -803,13 +803,14 @@ abstract class AbstractHelper extends View\Helper\HtmlElement implements Helper
     {
         if (null === $role 
             || is_string($role) 
-            || $role instanceof Acl\Role
+            || $role instanceof Acl\Role\RoleInterface
         ) {
             self::$defaultRole = $role;
         } else {
-            throw new Exception\InvalidArgumentException(
-                '$role must be null|string|Zend\Acl\Role'
-            );
+            throw new Exception\InvalidArgumentException(sprintf(
+                '$role must be null|string|Zend\Acl\Role\RoleInterface; received "%s"',
+                (is_object($role) ? get_class($role) : gettype($role))
+            ));
         }
     }
 }

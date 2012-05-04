@@ -1,25 +1,16 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Crypt
- * @subpackage Math
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Package
  */
 
 namespace Zend\Crypt\Math;
+
+use Zend\Crypt\Math\BigInteger\Exception\InvalidArgumentException;
 
 /**
  * Support for arbitrary precision mathematics in PHP.
@@ -37,18 +28,17 @@ namespace Zend\Crypt\Math;
  * flag. BIG_INT support is available from a big_int PHP library available from
  * only from PECL (a Windows port is not available).
  *
- * @uses       Zend\Crypt\Math\BigInteger\BigIntegerCapable
  * @category   Zend
  * @package    Zend_Crypt
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class BigInteger implements BigInteger\BigIntegerCapable
+class BigInteger implements BigInteger\BigIntegerCapableInterface
 {
     /**
      * Holds an instance of one of the three arbitrary precision wrappers.
      *
-     * @var \Zend\Crypt\Math\BigInteger\BigIntegerCapable
+     * @var \Zend\Crypt\Math\BigInteger\BigIntegerCapableInterface
      */
     protected $_math = null;
 
@@ -58,12 +48,12 @@ class BigInteger implements BigInteger\BigIntegerCapable
      * object.
      *
      * @param  string $extension
-     * @throws Zend\Crypt\Math\BigInteger\Exception
+     * @throws InvalidArgumentException
      */
     public function __construct($extension = null)
     {
         if ($extension !== null && !in_array($extension, array('bcmath', 'gmp', 'bigint'))) {
-            throw new BigInteger\Exception('Invalid extension type; please use one of bcmath, gmp or bigint');
+            throw new InvalidArgumentException('Invalid extension type; please use one of bcmath, gmp or bigint');
         }
         $this->_loadAdapter($extension);
     }
@@ -73,12 +63,14 @@ class BigInteger implements BigInteger\BigIntegerCapable
      *
      * @param   string $methodName
      * @param   array $args
-     * @throws  Zend\Crypt\Math\BigInteger\Exception
+     * @throws  InvalidArgumentException
      */
     public function __call($methodName, $args)
     {
         if(!method_exists($this->_math, $methodName)) {
-            throw new BigInteger\Exception('invalid method call: ' . get_class($this->_math) . '::' . $methodName . '() does not exist');
+            throw new InvalidArgumentException(
+                'Invalid method call: ' . get_class($this->_math) . '::' . $methodName . '() does not exist'
+            );
         }
         return call_user_func_array(array($this->_math, $methodName), $args);
     }
@@ -212,7 +204,7 @@ class BigInteger implements BigInteger\BigIntegerCapable
 
     /**
      * @param  string $extension
-     * @throws Zend\Crypt\Math\BigInteger\Exception
+     * @throws InvalidArgumentException
      */
     protected function _loadAdapter($extension = null)
     {
@@ -228,7 +220,7 @@ class BigInteger implements BigInteger\BigIntegerCapable
         } elseif ($extension == 'bcmath' && extension_loaded('bcmath')) {
             $this->_math = new BigInteger\Bcmath();
         } else {
-            throw new BigInteger\Exception($extension . ' big integer precision math support not detected');
+            throw new InvalidArgumentException($extension . ' big integer precision math support not detected');
         }
     }
 }

@@ -52,7 +52,7 @@ class RSATest extends \PHPUnit_Framework_TestCase
 
         try {
             $math = new \Zend\Crypt\Rsa();
-        } catch (\Zend\Crypt\Rsa\Exception $e) {
+        } catch (\Zend\Crypt\Rsa\Exception\RuntimeException $e) {
             if (strpos($e->getMessage(), 'requires openssl extention') !== false) {
                 $this->markTestSkipped($e->getMessage());
             } else {

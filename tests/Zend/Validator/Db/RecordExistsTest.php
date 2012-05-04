@@ -53,7 +53,6 @@ class RecordExistsTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->markTestSkipped('Skipped because Zend\Db is currently under refactoring');
         $this->_adapterHasResult = new TestAsset\MockHasResult();
         $this->_adapterNoResult = new TestAsset\MockNoResult();
 

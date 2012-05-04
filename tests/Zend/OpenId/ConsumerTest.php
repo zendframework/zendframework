@@ -55,7 +55,7 @@ class ConsumerTest extends TestCase
      */
     public function testLogin()
     {
-        $this->expectOutputRegex('/.*/');
+        $this->expectOutputRegex('/.*/'); // Hide stdout from the component when the test run
         $expiresIn = time() + 600;
 
         $_SERVER['SCRIPT_URI'] = "http://www.zf-test.com/test.php";
@@ -212,7 +212,7 @@ class ConsumerTest extends TestCase
      */
     public function testCheck()
     {
-        $this->expectOutputRegex('/.*/');
+        $this->expectOutputRegex('/.*/'); // Hide stdout from the component when the test run
         $expiresIn = time() + 600;
 
         $_SERVER['SCRIPT_URI'] = "http://www.zf-test.com/test.php";

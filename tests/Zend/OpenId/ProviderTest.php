@@ -737,7 +737,7 @@ class ProviderTest extends \PHPUnit_Framework_TestCase
      */
     public function testRespondToConsumer()
     {
-        $this->expectOutputRegex('/.*/');
+        $this->expectOutputRegex('/.*/'); // Hide stdout from the component when the test run
         $storage = new Provider\Storage\File(__DIR__."/_files/provider");
         $provider = new ProviderHelper(null, null, $this->_user, $storage);
 
@@ -858,7 +858,7 @@ class ProviderTest extends \PHPUnit_Framework_TestCase
      */
     public function testCheckIdImmediate()
     {
-        $this->expectOutputRegex('/.*/');
+        $this->expectOutputRegex('/.*/'); // Hide stdout from the component when the test run
         $_SERVER['SCRIPT_URI'] = "http://www.test.com/server.php";
         $storage = new Provider\Storage\File(__DIR__."/_files/provider");
         $provider = new ProviderHelper(null, null, $this->_user, $storage);
@@ -1297,7 +1297,7 @@ class ProviderTest extends \PHPUnit_Framework_TestCase
      */
     public function testCheckIdSetup()
     {
-        $this->expectOutputRegex('/.*/');
+        $this->expectOutputRegex('/.*/'); // Hide stdout from the component when the test run
         $_SERVER['SCRIPT_URI'] = "http://www.test.com/server.php";
         $storage = new Provider\Storage\File(__DIR__."/_files/provider");
         $provider = new ProviderHelper(null, null, $this->_user, $storage);
@@ -1596,7 +1596,7 @@ class ProviderTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetOpEndpoint()
     {
-        $this->expectOutputRegex('/.*/');
+        $this->expectOutputRegex('/.*/'); // Hide stdout from the component when the test run
         $storage = new Provider\Storage\File(__DIR__."/_files/provider");
         $provider = new ProviderHelper(null, null, $this->_user, $storage);
         $provider->setOpEndpoint("http://www.test.com/real_endpoint.php");

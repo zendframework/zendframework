@@ -402,7 +402,7 @@ class OpenIdTest extends \PHPUnit_Framework_TestCase
      */
     public function testRedirect()
     {
-        $this->expectOutputRegex('/.*/');
+        $this->expectOutputRegex('/.*/'); // Hide stdout from the component when the test run
         $response = new ResponseHelper(true);
         OpenId::redirect("http://www.test.com/", null, $response, 'GET');
         $this->assertSame( 302, $response->getStatusCode() );

@@ -20,6 +20,7 @@
 
 namespace Zend\Paginator\ScrollingStyle;
 
+use Zend\Paginator;
 use Zend\Paginator\ScrollingStyle;
 
 /**
@@ -28,7 +29,6 @@ use Zend\Paginator\ScrollingStyle;
  * the end of the page set, at which point it will continue on to
  * the end of the range and the last page in the set.
  *
- * @uses       \Zend\Paginator\ScrollingStyle
  * @link       http://search.yahoo.com/search?p=Zend+Framework
  * @category   Zend
  * @package    Zend_Paginator
@@ -44,7 +44,7 @@ class Sliding implements ScrollingStyle
      * @param  integer $pageRange (Optional) Page range
      * @return array
      */
-    public function getPages(\Zend\Paginator\Paginator $paginator, $pageRange = null)
+    public function getPages(Paginator\Paginator $paginator, $pageRange = null)
     {
         if ($pageRange === null) {
             $pageRange = $paginator->getPageRange();

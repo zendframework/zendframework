@@ -9,6 +9,11 @@ namespace Zend\Http\Header;
 class CacheControl implements HeaderDescription
 {
 
+    /**
+     * Array of Cache-Control directives
+     *
+	 * @var array
+     */
     protected $directives = array();
 
     /**
@@ -35,38 +40,80 @@ class CacheControl implements HeaderDescription
         return $header;
     }
 
+    /**
+     * Required from HeaderDescription interface
+     *
+     * @return string
+     */
     public function getFieldName()
     {
         return 'Cache-Control';
     }
 
+    /**
+     * Checks if the internal directives array is empty
+     *
+     * @return boolean
+     */
     public function isEmpty()
     {
         return empty($this->directives);
     }
 
+    /**
+     * Add a directive
+     * For directives like 'max-age=60', $value = '60'
+     * For directives like 'private', use the default $value = true
+     *
+     * @param string $key
+     * @param string|boolean $value
+     * @return CacheControl - provides the fluent interface
+     */
     public function addDirective($key, $value = true)
     {
         $this->directives[$key] = $value;
         return $this;
     }
 
+    /**
+     * Check the internal directives array for a directive
+     *
+     * @param string $key
+     * @return boolean
+     */
     public function hasDirective($key)
     {
         return array_key_exists($key, $this->directives);
     }
 
+    /**
+     * Fetch the value of a directive from the internal directive array
+     *
+     * @param string $key
+     * @return string|null
+     */
     public function getDirective($key)
     {
         return array_key_exists($key, $this->directives) ? $this->directives[$key] : null;
     }
 
+    /**
+     * Remove a directive
+     *
+     * @param string $key
+     * @return CacheControl - provides the fluent interface
+     */
     public function removeDirective($key)
     {
         unset($this->directives[$key]);
         return $this;
     }
 
+    /**
+     * Assembles the directives into a comma-delimeted string
+     *
+     * @return string
+     */
     public function getFieldValue()
     {
         $parts = array();
@@ -84,11 +131,24 @@ class CacheControl implements HeaderDescription
         return implode(', ', $parts);
     }
 
+    /**
+     * Returns a string representation of the HTTP Cache-Control header
+     *
+     * @return string
+     */
     public function toString()
     {
         return 'Cache-Control: ' . $this->getFieldValue();
     }
 
+    /**
+     * Internal function for parsing the value part of a
+     * HTTP Cache-Control header
+     *
+     * @param string $value
+     * @throws Exception\InvalidArgumentException
+     * @return array
+     */
     protected static function parseValue($value)
     {
         $value = trim($value);
@@ -149,6 +209,13 @@ class CacheControl implements HeaderDescription
         }
     }
 
+    /**
+     * Internal function used by parseValue to match tokens
+     *
+     * @param array $tokens
+     * @param string $string
+     * @param string $lastMatch
+     */
     protected static function match($tokens, &$string, &$lastMatch)
     {
         foreach ($tokens as $i => $token) {

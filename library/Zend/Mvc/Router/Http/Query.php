@@ -98,7 +98,7 @@ class Query implements Route
      */
     public function match(Request $request, $pathOffset = null)
     {
-        $matches = $this->recursiveUrldecode($_GET);
+        $matches = $this->recursiveUrldecode($request->query()->toArray());
 
         return new RouteMatch(array_merge($this->defaults, $matches));
     }

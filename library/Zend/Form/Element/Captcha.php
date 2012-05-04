@@ -22,7 +22,7 @@
 namespace Zend\Form\Element;
 
 use ReflectionClass,
-    Zend\Captcha\Adapter\AdapterInterface as CaptchaAdapter,
+    Zend\Captcha\AdapterInterface as CaptchaAdapter,
     Zend\View\Renderer as View,
     Zend\Loader\PrefixPathLoader as PluginLoader;
 

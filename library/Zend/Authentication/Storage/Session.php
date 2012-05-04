@@ -105,7 +105,7 @@ class Session implements StorageInterface
     }
 
     /**
-     * Defined by Zend\Auth\Storage
+     * Defined by Zend\Authentication\Storage\StorageInterface
      *
      * @return boolean
      */
@@ -115,7 +115,7 @@ class Session implements StorageInterface
     }
 
     /**
-     * Defined by Zend\Auth\Storage
+     * Defined by Zend\Authentication\Storage\StorageInterface
      *
      * @return mixed
      */
@@ -125,7 +125,7 @@ class Session implements StorageInterface
     }
 
     /**
-     * Defined by Zend\Auth\Storage
+     * Defined by Zend\Authentication\Storage\StorageInterface
      *
      * @param  mixed $contents
      * @return void
@@ -136,7 +136,7 @@ class Session implements StorageInterface
     }
 
     /**
-     * Defined by Zend\Auth\Storage
+     * Defined by Zend\Authentication\Storage\StorageInterface
      *
      * @return void
      */

@@ -10,6 +10,8 @@
 
 namespace Zend\Paginator\ScrollingStyle;
 
+use Zend\Paginator\Paginator;
+
 /**
  * @category   Zend
  * @package    Zend_Paginator
@@ -21,9 +23,9 @@ interface ScrollingStyleInterface
     /**
      * Returns an array of "local" pages given a page number and range.
      *
-     * @param  \Zend\Paginator\Paginator $paginator
+     * @param  Paginator $paginator
      * @param  integer $pageRange (Optional) Page range
      * @return array
      */
-    public function getPages(\Zend\Paginator\Paginator $paginator, $pageRange = null);
+    public function getPages(Paginator $paginator, $pageRange = null);
 }

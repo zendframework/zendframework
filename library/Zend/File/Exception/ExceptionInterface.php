@@ -19,7 +19,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\File;
+namespace Zend\File\Exception;
 
 /**
  * Marker interface for exceptions found in this component
@@ -28,6 +28,6 @@ namespace Zend\File;
  * @subpackage Exception
  * @license    New BSD {@link http://framework.zend.com/license/new-bsd}
  */
-interface Exception
+interface ExceptionInterface
 {
 }

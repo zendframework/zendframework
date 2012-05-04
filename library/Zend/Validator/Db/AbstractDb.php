@@ -81,7 +81,7 @@ abstract class AbstractDb extends AbstractValidator
     /**
      * Database adapter to use. If null isValid() will throw an exception
      *
-     * @var unknown_type
+     * @var \Zend\Db\Adapter\Adapter
      */
     protected $_adapter = null;
 
@@ -99,7 +99,8 @@ abstract class AbstractDb extends AbstractValidator
      * 'exclude' => An optional where clause or field/value pair to exclude from the query
      * 'adapter' => An optional database adapter to use
      *
-     * @param array|Traversable $options Options to use for this validator
+     * @param array|Traversable|DbSelect $options Options to use for this validator
+     * @throws \Zend\Validator\Exception\InvalidArgumentException
      */
     public function __construct($options = null)
     {
@@ -156,11 +157,12 @@ abstract class AbstractDb extends AbstractValidator
     /**
      * Returns the set adapter
      *
+     * @throws \Zend\Validator\Exception\RuntimeException When no database adapter is defined
      * @return DbAdapter
      */
     public function getAdapter()
     {
-        /**
+        /*
          * Check for an adapter being defined. If not, throw an exception.
          */
         if (null === $this->_adapter) {
@@ -342,9 +344,9 @@ abstract class AbstractDb extends AbstractValidator
     protected function _query($value)
     {
         $adapter  = $this->getAdapter();
-        $statment = $adapter->createStatement();
-        $this->getSelect()->prepareStatement($adapter, $statment);
+        $statement = $adapter->createStatement();
+        $this->getSelect()->prepareStatement($adapter, $statement);
 
-        return $statment->execute(array('value' => $value))->current();
+        return $statement->execute(array('value' => $value))->current();
     }
 }

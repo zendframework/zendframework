@@ -779,10 +779,14 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
     public function testInvalidDataInConstructor_ThrowsException()
     {
 <<<<<<< HEAD
+<<<<<<< HEAD
         $this->setExpectedException('Zend\Paginator\Exception');
 =======
         $this->setExpectedException("Zend\Paginator\Exception\ExceptionInterface");
 >>>>>>> [zen-27] Renamed interfaces in Zend\Paginator
+=======
+        $this->setExpectedException("Zend\Paginator\Exception\ExceptionInterface");
+>>>>>>> 843547a... [zen-27] Renamed interfaces in Zend\Paginator
 
         new Paginator\Paginator(array());
     }

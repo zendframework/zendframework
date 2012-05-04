@@ -10,9 +10,6 @@
 
 namespace Zend\Paginator\ScrollingStyle;
 
-use Zend\Paginator,
-    Zend\Paginator\ScrollingStyle\ScrollingStyleInterface;
-
 /**
  * A scrolling style in which the cursor advances to the upper bound
  * of the page range, the page range "jumps" to the next section, and

@@ -21,23 +21,22 @@
 
 namespace Zend\Captcha;
 
-use Traversable,
-    Zend\Config\Config;
+use Traversable;
+use Zend\Config\Config;
+use Zend\Validator\AbstractValidator;
 
 /**
  * Base class for Captcha adapters
  *
  * Provides some utility functionality to build on
  *
- * @uses       Zend\Captcha\Adapter
- * @uses       Zend\Validator\AbstractValidator
  * @category   Zend
  * @package    Zend_Captcha
  * @subpackage Adapter
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class AbstractAdapter extends \Zend\Validator\AbstractValidator implements Adapter\AdapterInterface
+abstract class AbstractAdapter extends AbstractValidator implements AdapterInterface
 {
     /**
      * Element name

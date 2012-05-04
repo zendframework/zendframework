@@ -51,7 +51,7 @@ class Serializer
      *
      * @param string|Adapter $adapterName Name of the adapter class
      * @param array |Config $opts Serializer options
-     * @return Zend\Serializer\Adapter
+     * @return Adapter
      */
     public static function factory($adapterName, $opts = array()) 
     {
@@ -65,7 +65,7 @@ class Serializer
     /**
      * Get the adapter broker
      *
-     * @return Zend\Loader\Broker
+     * @return Broker
      */
     public static function getAdapterBroker() 
     {
@@ -78,7 +78,7 @@ class Serializer
     /**
      * Change the adapter broker
      *
-     * @param  Zend\Loader\Broker $broker
+     * @param  Broker $broker
      * @return void
      */
     public static function setAdapterBroker(Broker $broker) 
@@ -89,7 +89,7 @@ class Serializer
     /**
      * Resets the internal adapter broker
      *
-     * @return Zend\Loader\Broker
+     * @return Broker
      */
     public static function resetAdapterBroker()
     {
@@ -100,7 +100,7 @@ class Serializer
     /**
      * Returns a default adapter broker
      *
-     * @return Zend\Loader\Broker
+     * @return Broker
      */
     protected static function _getDefaultAdapterBroker()
     {

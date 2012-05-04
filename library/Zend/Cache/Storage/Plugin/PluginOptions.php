@@ -22,7 +22,7 @@
 namespace Zend\Cache\Storage\Plugin;
 
 use Zend\Cache\Exception,
-    Zend\Serializer\Adapter as SerializerAdapter,
+    Zend\Serializer\Adapter\AdapterInterface as SerializerAdapter,
     Zend\Serializer\Serializer as SerializerFactory,
     Zend\Stdlib\Options;
 
@@ -241,7 +241,7 @@ class PluginOptions extends Options
     {
         if (!is_string($serializer) && !$serializer instanceof SerializerAdapter) {
             throw new Exception\InvalidArgumentException(sprintf(
-                '%s expects either a string serializer name or Zend\Serializer\Adapter instance; '
+                '%s expects either a string serializer name or Zend\Serializer\Adapter\AdapterInterface instance; '
                 . 'received "%s"',
                 __METHOD__,
                 (is_object($serializer) ? get_class($serializer) : gettype($serializer))

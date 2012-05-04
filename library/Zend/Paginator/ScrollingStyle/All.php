@@ -10,8 +10,8 @@
 
 namespace Zend\Paginator\ScrollingStyle;
 
-use Zend\Paginator;
-use Zend\Paginator\ScrollingStyle;
+use Zend\Paginator,
+    Zend\Paginator\ScrollingStyle\ScrollingStyleInterface;
 
 /**
  * A scrolling style that returns every page in the collection.
@@ -23,7 +23,7 @@ use Zend\Paginator\ScrollingStyle;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class All implements ScrollingStyle
+class All implements ScrollingStyleInterface
 {
     /**
      * Returns an array of all pages given a page number and range.

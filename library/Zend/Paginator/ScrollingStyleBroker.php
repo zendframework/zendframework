@@ -10,7 +10,8 @@
 
 namespace Zend\Paginator;
 
-use Zend\Loader\PluginBroker;
+use Zend\Loader\PluginBroker,
+    Zend\Paginator\ScrollingStyle\ScrollingStyleInterface;
 
 /**
  * Broker for scrolling-style adapter instances
@@ -36,8 +37,10 @@ class ScrollingStyleBroker extends PluginBroker
      */
     protected function validatePlugin($plugin)
     {
-        if (!$plugin instanceof ScrollingStyle) {
-            throw new Exception\InvalidArgumentException('ScrollingStyle adapters must implement Zend\Paginator\ScrollingStyle');
+        if (!$plugin instanceof ScrollingStyleInterface) {
+            throw new Exception\InvalidArgumentException(
+                'ScrollingStyleInterface adapters must implement Zend\Paginator\ScrollingStyle\ScrollingStyleInterface'
+            );
         }
         return true;
     }

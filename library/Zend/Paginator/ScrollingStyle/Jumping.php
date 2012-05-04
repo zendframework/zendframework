@@ -10,8 +10,8 @@
 
 namespace Zend\Paginator\ScrollingStyle;
 
-use Zend\Paginator;
-use Zend\Paginator\ScrollingStyle;
+use Zend\Paginator,
+    Zend\Paginator\ScrollingStyle\ScrollingStyleInterface;
 
 /**
  * A scrolling style in which the cursor advances to the upper bound
@@ -23,7 +23,7 @@ use Zend\Paginator\ScrollingStyle;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Jumping implements ScrollingStyle
+class Jumping implements ScrollingStyleInterface
 {
     /**
      * Returns an array of "local" pages given a page number and range.

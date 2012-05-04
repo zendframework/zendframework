@@ -8,7 +8,7 @@
  * @package   Zend_Paginator
  */
 
-namespace Zend\Paginator;
+namespace Zend\Paginator\ScrollingStyle;
 
 /**
  * @category   Zend
@@ -16,7 +16,7 @@ namespace Zend\Paginator;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface ScrollingStyle
+interface ScrollingStyleInterface
 {
     /**
      * Returns an array of "local" pages given a page number and range.

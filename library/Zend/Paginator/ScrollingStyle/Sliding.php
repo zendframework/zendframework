@@ -10,8 +10,8 @@
 
 namespace Zend\Paginator\ScrollingStyle;
 
-use Zend\Paginator;
-use Zend\Paginator\ScrollingStyle;
+use Zend\Paginator,
+    Zend\Paginator\ScrollingStyle\ScrollingStyleInterface;
 
 /**
  * A Yahoo! Search-like scrolling style.  The cursor will advance to
@@ -25,7 +25,7 @@ use Zend\Paginator\ScrollingStyle;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Sliding implements ScrollingStyle
+class Sliding implements ScrollingStyleInterface
 {
     /**
      * Returns an array of "local" pages given a page number and range.

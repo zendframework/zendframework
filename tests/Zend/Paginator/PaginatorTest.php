@@ -778,7 +778,11 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testInvalidDataInConstructor_ThrowsException()
     {
+<<<<<<< HEAD
         $this->setExpectedException('Zend\Paginator\Exception');
+=======
+        $this->setExpectedException("Zend\Paginator\Exception\ExceptionInterface");
+>>>>>>> [zen-27] Renamed interfaces in Zend\Paginator
 
         new Paginator\Paginator(array());
     }
@@ -804,7 +808,7 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-class TestArrayAggregate implements Paginator\AdapterAggregate
+class TestArrayAggregate implements Paginator\AdapterAggregateInterface
 {
     public function getPaginatorAdapter()
     {

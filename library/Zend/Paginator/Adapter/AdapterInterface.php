@@ -8,7 +8,7 @@
  * @package   Zend_Paginator
  */
 
-namespace Zend\Paginator;
+namespace Zend\Paginator\Adapter;
 
 use Countable;
 
@@ -20,7 +20,7 @@ use Countable;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Adapter extends Countable
+interface AdapterInterface extends Countable
 {
     /**
      * Returns an collection of items for a page.

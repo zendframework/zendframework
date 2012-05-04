@@ -10,8 +10,8 @@
 
 namespace Zend\Paginator\Adapter;
 
-use Zend\Db\Sql;
-use Zend\Paginator;
+use Zend\Db\Sql,
+    Zend\Paginator;
 
 /**
  * @category   Zend
@@ -19,7 +19,7 @@ use Zend\Paginator;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class DbSelect implements Paginator\Adapter
+class DbSelect implements AdapterInterface
 {
     /**
      * Name of the row count column

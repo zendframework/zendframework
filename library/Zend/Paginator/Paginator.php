@@ -10,19 +10,20 @@
 
 namespace Zend\Paginator;
 
-use ArrayIterator;
-use Countable;
-use Iterator;
-use IteratorAggregate;
-use Traversable;
-use Zend\Cache\Storage\Adapter\AdapterInterface as CacheAdapter;
-use Zend\Db\Table\AbstractRowset as DbAbstractRowset;
-use Zend\Db\Table\Select as DbTableSelect;
-use Zend\Db\Sql;
-use Zend\Filter\Filter;
-use Zend\Json\Json;
-use Zend\Stdlib\ArrayUtils;
-use Zend\View;
+use Zend\Paginator\ScrollingStyle\ScrollingStyleInterface,
+    ArrayIterator,
+    Countable,
+    Iterator,
+    IteratorAggregate,
+    Traversable,
+    Zend\Cache\Storage\Adapter\AdapterInterface as CacheAdapter,
+    Zend\Db\Table\AbstractRowset as DbAbstractRowset,
+    Zend\Db\Table\Select as DbTableSelect,
+    Zend\Db\Sql,
+    Zend\Filter\Filter,
+    Zend\Json\Json,
+    Zend\Stdlib\ArrayUtils,
+    Zend\View;
 
 /**
  * @category   Zend
@@ -378,8 +379,8 @@ class Paginator implements Countable, IteratorAggregate
             $this->_adapter = $adapter->getPaginatorAdapter();
         } else {
             throw new Exception\InvalidArgumentException(
-                'Zend\Paginator\Paginator only accepts instances of the type ' .
-                'Zend\Paginator\Adapter or Zend\Paginator\AdapterAggregate.'
+                'Zend_Paginator only accepts instances of the type ' .
+                'Zend\Paginator\Adapter\AdapterInterface or Zend\Paginator\AdapterAggregateInterface.'
             );
         }
 
@@ -1032,7 +1033,7 @@ class Paginator implements Countable, IteratorAggregate
      * Loads a scrolling style.
      *
      * @param string $scrollingStyle
-     * @return ScrollingStyle
+     * @return ScrollingStyleInterface
      * @throws Exception\InvalidArgumentException
      */
     protected function _loadScrollingStyle($scrollingStyle = null)
@@ -1043,9 +1044,9 @@ class Paginator implements Countable, IteratorAggregate
 
         switch (strtolower(gettype($scrollingStyle))) {
             case 'object':
-                if (!$scrollingStyle instanceof ScrollingStyle) {
+                if (!$scrollingStyle instanceof ScrollingStyleInterface) {
                     throw new Exception\InvalidArgumentException(
-                        'Scrolling style must implement Zend\Paginator\ScrollingStyle'
+                        'Scrolling style must implement Zend\Paginator\ScrollingStyle\ScrollingStyleInterface'
                     );
                 }
 
@@ -1060,7 +1061,7 @@ class Paginator implements Countable, IteratorAggregate
             default:
                 throw new Exception\InvalidArgumentException(
                     'Scrolling style must be a class ' .
-                    'name or object implementing Zend\Paginator\ScrollingStyle'
+                    'name or object implementing Zend\Paginator\ScrollingStyle\ScrollingStyleInterface'
                 );
         }
     }

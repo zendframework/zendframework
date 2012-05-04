@@ -24,10 +24,9 @@ namespace Zend\Crypt\Math\BigInteger;
 /**
  * Support for arbitrary precision mathematics in PHP.
  *
- * Zend_Crypt_Math_BigInteger_Bcmath is a wrapper across the PHP BCMath
+ * Zend\Crypt\Math\BigInteger\Bcmath is a wrapper across the PHP BCMath
  * extension.
  *
- * @uses       Zend\Crypt\Math\BigInteger\BigIntegerCapable
  * @category   Zend
  * @package    Zend_Crypt
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -190,13 +189,12 @@ class Bcmath implements BigIntegerCapable
      */
     public function hexToDecimal($operand)
     {
-        $return = '0';
-        while(strlen($hex)) {
-            $hex     = hexdec(substr($operand, 0, 4));
-            $dec     = bcadd(bcmul($return, 65536), $hex);
+        $result = '0';
+        while(strlen($operand)) {
+            $dec     = hexdec(substr($operand, 0, 4));
+            $result  = bcadd(bcmul($result, 65536), $dec);
             $operand = substr($operand, 4);
         }
-        return $return;
+        return $result;
     }
-
 }

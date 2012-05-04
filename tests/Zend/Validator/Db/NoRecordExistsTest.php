@@ -35,68 +35,70 @@ use Zend\Validator\Db\NoRecordExists;
  */
 class NoRecordExistsTest extends \PHPUnit_Framework_TestCase
 {
-
     /**
-     * @var \Zend\Db\Adapter\Adapter
+     * Return a Mock object for a Db result with rows
+     *
+     * @return \Zend\Db\Adapter\Adapter
      */
-    protected $adapterHasResult;
-
-    /**
-     * @var \Zend\Db\Adapter\Adapter
-     */
-    protected $adapterNoResult;
-
-    /**
-     * Sets up the fixture, for example, opens a network connection.
-     * This method is called before a test is executed.
-     */
-    public function setUp()
+    protected function getMockHasResult()
     {
         // mock the adapter, driver, and parts
         $mockConnection = $this->getMock('Zend\Db\Adapter\Driver\ConnectionInterface');
 
+        // Mock has result
         $mockHasResultRow      = new Row();
         $mockHasResultRow->one = 'one';
 
         $mockHasResult = $this->getMock('Zend\Db\Adapter\Driver\ResultInterface');
         $mockHasResult->expects($this->any())
-            ->method('current')
-            ->will($this->returnValue($mockHasResultRow));
+                      ->method('current')
+                      ->will($this->returnValue($mockHasResultRow));
 
         $mockHasResultStatement = $this->getMock('Zend\Db\Adapter\Driver\StatementInterface');
         $mockHasResultStatement->expects($this->any())
-            ->method('execute')
-            ->will($this->returnValue($mockHasResult));
+                               ->method('execute')
+                               ->will($this->returnValue($mockHasResult));
 
         $mockHasResultDriver = $this->getMock('Zend\Db\Adapter\Driver\DriverInterface');
         $mockHasResultDriver->expects($this->any())
-            ->method('createStatement')
-            ->will($this->returnValue($mockHasResultStatement));
+                            ->method('createStatement')
+                            ->will($this->returnValue($mockHasResultStatement));
         $mockHasResultDriver->expects($this->any())
-            ->method('getConnection')
-            ->will($this->returnValue($mockConnection));
+                            ->method('getConnection')
+                            ->will($this->returnValue($mockConnection));
 
-        $this->adapterHasResult = $this->getMock('Zend\Db\Adapter\Adapter', null, array($mockHasResultDriver));
+        return $this->getMock('Zend\Db\Adapter\Adapter', null, array($mockHasResultDriver));
+    }
+
+    /**
+     * Return a Mock object for a Db result without rows
+     *
+     * @return \Zend\Db\Adapter\Adapter
+     */
+    protected function getMockNoResult()
+    {
+        // mock the adapter, driver, and parts
+        $mockConnection = $this->getMock('Zend\Db\Adapter\Driver\ConnectionInterface');
 
         $mockNoResult = $this->getMock('Zend\Db\Adapter\Driver\ResultInterface');
         $mockNoResult->expects($this->any())
-            ->method('current')
-            ->will($this->returnValue(null));
+                     ->method('current')
+                     ->will($this->returnValue(null));
 
         $mockNoResultStatement = $this->getMock('Zend\Db\Adapter\Driver\StatementInterface');
         $mockNoResultStatement->expects($this->any())
-            ->method('execute')
-            ->will($this->returnValue($mockNoResult));
+                              ->method('execute')
+                              ->will($this->returnValue($mockNoResult));
 
         $mockNoResultDriver = $this->getMock('Zend\Db\Adapter\Driver\DriverInterface');
         $mockNoResultDriver->expects($this->any())
-            ->method('createStatement')
-            ->will($this->returnValue($mockNoResultStatement));
+                           ->method('createStatement')
+                           ->will($this->returnValue($mockNoResultStatement));
         $mockNoResultDriver->expects($this->any())
-            ->method('getConnection')
-            ->will($this->returnValue($mockConnection));
+                           ->method('getConnection')
+                           ->will($this->returnValue($mockConnection));
 
-        $this->adapterNoResult = $this->getMock('Zend\Db\Adapter\Adapter', null, array($mockNoResultDriver));
+        return $this->getMock('Zend\Db\Adapter\Adapter', null, array($mockNoResultDriver));
     }
 
     /**
@@ -108,7 +110,7 @@ class NoRecordExistsTest extends \PHPUnit_Framework_TestCase
     {
         $validator = new NoRecordExists(array('table'   => 'users',
                                               'field'   => 'field1',
-                                              'adapter' => $this->adapterHasResult));
+                                              'adapter' => $this->getMockHasResult()));
         $this->assertFalse($validator->isValid('value1'));
     }
 
@@ -121,7 +123,7 @@ class NoRecordExistsTest extends \PHPUnit_Framework_TestCase
     {
         $validator = new NoRecordExists(array('table'   => 'users',
                                               'field'   => 'field1',
-                                              'adapter' => $this->adapterNoResult));
+                                              'adapter' => $this->getMockNoResult()));
         $this->assertTrue($validator->isValid('nosuchvalue'));
     }
 
@@ -134,7 +136,7 @@ class NoRecordExistsTest extends \PHPUnit_Framework_TestCase
     {
         $validator = new NoRecordExists(array('table'   => 'users',
                                               'field'   => 'field1',
-                                              'adapter' => $this->adapterHasResult,
+                                              'adapter' => $this->getMockHasResult(),
                                               'exclude' => array('field' => 'id',
                                                                  'value' => 1)));
         $this->assertFalse($validator->isValid('value3'));
@@ -150,7 +152,7 @@ class NoRecordExistsTest extends \PHPUnit_Framework_TestCase
     {
         $validator = new NoRecordExists(array('table'   => 'users',
                                               'field'   => 'field1',
-                                              'adapter' => $this->adapterNoResult,
+                                              'adapter' => $this->getMockNoResult(),
                                               'exclude' => array('field' => 'id',
                                                                  'value' => 1)));
         $this->assertTrue($validator->isValid('nosuchvalue'));
@@ -166,7 +168,7 @@ class NoRecordExistsTest extends \PHPUnit_Framework_TestCase
     {
         $validator = new NoRecordExists(array('table'   => 'users',
                                               'field'   => 'field1',
-                                              'adapter' => $this->adapterHasResult,
+                                              'adapter' => $this->getMockHasResult(),
                                               'exclude' => 'id != 1'));
         $this->assertFalse($validator->isValid('value3'));
     }
@@ -181,7 +183,7 @@ class NoRecordExistsTest extends \PHPUnit_Framework_TestCase
     {
         $validator = new NoRecordExists(array('table'   => 'users',
                                               'field'   => 'field1',
-                                              'adapter' => $this->adapterNoResult,
+                                              'adapter' => $this->getMockNoResult(),
                                               'exclude' => 'id != 1'));
         $this->assertTrue($validator->isValid('nosuchvalue'));
     }
@@ -199,7 +201,7 @@ class NoRecordExistsTest extends \PHPUnit_Framework_TestCase
                                               'exclude' => 'id != 1'));
         $this->setExpectedException('Zend\Validator\Exception\RuntimeException',
                                     'No database adapter present');
-        $valid = $validator->isValid('nosuchvalue');
+        $validator->isValid('nosuchvalue');
     }
 
     /**
@@ -212,7 +214,7 @@ class NoRecordExistsTest extends \PHPUnit_Framework_TestCase
         $validator = new NoRecordExists(array('table'   => 'users',
                                               'schema'  => 'my',
                                               'field'   => 'field1',
-                                              'adapter' => $this->adapterHasResult));
+                                              'adapter' => $this->getMockHasResult()));
         $this->assertFalse($validator->isValid('value1'));
     }
 
@@ -226,7 +228,7 @@ class NoRecordExistsTest extends \PHPUnit_Framework_TestCase
         $validator = new NoRecordExists(array('table'   => 'users',
                                               'schema'  => 'my',
                                               'field'   => 'field1',
-                                              'adapter' => $this->adapterNoResult));
+                                              'adapter' => $this->getMockNoResult()));
         $this->assertTrue($validator->isValid('value1'));
     }
 

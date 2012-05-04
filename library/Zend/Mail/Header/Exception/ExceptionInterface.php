@@ -14,23 +14,22 @@
  *
  * @category   Zend
  * @package    Zend_Mail
- * @subpackage Storage
+ * @subpackage Header
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
-namespace Zend\Mail\Storage\Part;
+namespace Zend\Mail\Header\Exception;
 
-use Zend\Mail\Storage;
+use Zend\Mail\Exception\ExceptionInterface as MailException;
 
 /**
  * @category   Zend
  * @package    Zend_Mail
- * @subpackage Storage
+ * @subpackage Header
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Exception extends Storage\Exception
+interface ExceptionInterface extends MailException
 {
 }

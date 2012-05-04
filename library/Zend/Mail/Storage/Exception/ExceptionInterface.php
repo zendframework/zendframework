@@ -18,9 +18,9 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Mail\Transport;
+namespace Zend\Mail\Storage\Exception;
 
-use Zend\Mail;
+use Zend\Mail\Exception\ExceptionInterface as MailException;
 
 /**
  * @category   Zend
@@ -28,6 +28,6 @@ use Zend\Mail;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Exception extends Mail\Exception
+interface ExceptionInterface extends MailException
 {
 }

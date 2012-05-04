@@ -14,41 +14,26 @@
  *
  * @category   Zend
  * @package    Zend_Mail
- * @subpackage Storage
+ * @subpackage Header
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Mail\Storage;
+namespace Zend\Mail\Header;
 
 /**
  * @category   Zend
  * @package    Zend_Mail
- * @subpackage Storage
+ * @subpackage Header
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface MailMessage
+interface HeaderInterface
 {
-    /**
-     * return toplines as found after headers
-     *
-     * @return string toplines
-     */
-    public function getTopLines();
-
-    /**
-     * check if flag is set
-     *
-     * @param mixed $flag a flag name, use constants defined in \Zend\Mail\Storage
-     * @return bool true if set, otherwise false
-     */
-    public function hasFlag($flag);
-
-    /**
-     * get all set flags
-     *
-     * @return array array with flags, key and value are the same for easy lookup
-     */
-    public function getFlags();
+    public static function fromString($headerLine);
+    public function getFieldName();
+    public function getFieldValue();
+    public function setEncoding($encoding);
+    public function getEncoding();
+    public function toString();
 }

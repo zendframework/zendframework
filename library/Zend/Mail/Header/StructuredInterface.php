@@ -14,20 +14,26 @@
  *
  * @category   Zend
  * @package    Zend_Mail
+ * @subpackage Header
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Mail\Storage;
-use Zend\Mail;
+namespace Zend\Mail\Header;
 
 /**
- * @uses       \Zend\Mail\Exception
  * @category   Zend
  * @package    Zend_Mail
+ * @subpackage Header
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Exception extends Mail\Exception
+interface StructuredInterface
 {
+    /**
+     * Return the delimiter at which a header line should be wrapped
+     * 
+     * @return string
+     */
+    public function getDelimiter();
 }

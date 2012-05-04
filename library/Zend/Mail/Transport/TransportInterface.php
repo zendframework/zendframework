@@ -14,21 +14,31 @@
  *
  * @category   Zend
  * @package    Zend_Mail
+ * @subpackage Transport
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Mail;
+namespace Zend\Mail\Transport;
+
+use Zend\Mail;
 
 /**
+ * Interface for mail transports
+ *
  * @category   Zend
  * @package    Zend_Mail
+ * @subpackage Transport
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface AddressDescription
+interface TransportInterface
 {
-    public function getEmail();
-    public function getName();
-    public function toString();
+    /**
+     * Send a mail message
+     *
+     * @param \Zend\Mail\Message $message
+     * @return
+     */
+    public function send(Mail\Message $message);
 }

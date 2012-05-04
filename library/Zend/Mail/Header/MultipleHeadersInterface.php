@@ -22,14 +22,12 @@
 namespace Zend\Mail\Header;
 
 /**
- * Marker interface for unstructured headers.
- *
  * @category   Zend
  * @package    Zend_Mail
- * @subpackage Header
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface UnstructuredHeader
+interface MultipleHeadersInterface extends HeaderInterface
 {
+    public function toStringMultipleHeaders(array $headers);
 }

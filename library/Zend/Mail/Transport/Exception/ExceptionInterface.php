@@ -14,26 +14,20 @@
  *
  * @category   Zend
  * @package    Zend_Mail
- * @subpackage Header
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Mail;
+namespace Zend\Mail\Transport\Exception;
+
+use Zend\Mail\Exception\ExceptionInterface as MailException;
 
 /**
  * @category   Zend
  * @package    Zend_Mail
- * @subpackage Header
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Header
+interface ExceptionInterface extends MailException
 {
-    public static function fromString($headerLine);
-    public function getFieldName();
-    public function getFieldValue();
-    public function setEncoding($encoding);
-    public function getEncoding();
-    public function toString();
 }

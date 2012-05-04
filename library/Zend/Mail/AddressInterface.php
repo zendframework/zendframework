@@ -14,26 +14,21 @@
  *
  * @category   Zend
  * @package    Zend_Mail
- * @subpackage Header
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Mail\Header;
+namespace Zend\Mail;
 
 /**
  * @category   Zend
  * @package    Zend_Mail
- * @subpackage Header
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface StructuredHeader
+interface AddressInterface
 {
-    /**
-     * Return the delimiter at which a header line should be wrapped
-     * 
-     * @return string
-     */
-    public function getDelimiter();
+    public function getEmail();
+    public function getName();
+    public function toString();
 }

@@ -20,11 +20,11 @@
 
 namespace Zend\Text\Table;
 
+use Zend\Text\Table\Decorator\DecoratorInterface as Decorator;
+
 /**
- * Row class for Zend_Text_Table
+ * Row class for Zend\Text\Table
  *
- * @uses      \Zend\Text\Table\Column
- * @uses      \Zend\Text\Table\Exception
  * @category  Zend
  * @package   Zend_Text_Table
  * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -51,7 +51,7 @@ class Row
      *
      * @param  string $content
      * @param  array  $options
-     * @return \Zend\Text\Table\Row
+     * @return Row
      */
     public function createColumn($content, array $options = null)
     {
@@ -74,7 +74,7 @@ class Row
      * Append a column to the row
      *
      * @param  \Zend\Text\Table\Column $column The column to append to the row
-     * @return \Zend\Text\Table\Row
+     * @return Row
      */
     public function appendColumn(Column $column)
     {
@@ -89,7 +89,7 @@ class Row
      * Returns null, when the index is out of range
      *
      * @param  integer $index
-     * @return \Zend\Text\Table\Column|null
+     * @return Column|null
      */
     public function getColumn($index)
     {
@@ -113,7 +113,7 @@ class Row
     /**
      * Get the widths of all columns, which were rendered last
      *
-     * @throws \Zend\Text\Table\Exception\UnexpectedValueException When no columns were rendered yet
+     * @throws Exception\UnexpectedValueException When no columns were rendered yet
      * @return integer
      */
     public function getColumnWidths()
@@ -129,9 +129,9 @@ class Row
      * Render the row
      *
      * @param  array                               $columnWidths Width of all columns
-     * @param  \Zend\Text\Table\Decorator $decorator    Decorator for the row borders
+     * @param  Decorator $decorator    Decorator for the row borders
      * @param  integer                             $padding      Padding for the columns
-     * @throws \Zend\Text\Table\Exception\OverflowException When there are too many columns
+     * @throws Exception\OverflowException When there are too many columns
      * @return string
      */
     public function render(array $columnWidths, Decorator $decorator, $padding = 0)

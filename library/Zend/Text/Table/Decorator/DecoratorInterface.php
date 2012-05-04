@@ -18,17 +18,17 @@
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Text\Table;
+namespace Zend\Text\Table\Decorator;
 
 /**
- * Interface for Zend_Text_Table decorators
+ * Interface for Zend\Text\Table decorators
  *
  * @category  Zend
  * @package   Zend_Text_Table
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Decorator
+interface DecoratorInterface
 {
     /**
      * Get a single character for the top left corner

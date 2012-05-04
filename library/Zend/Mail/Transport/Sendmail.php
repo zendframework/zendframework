@@ -21,7 +21,7 @@
 
 namespace Zend\Mail\Transport;
 
-use Zend\Mail\AddressInterface;
+use Zend\Mail\Address\AddressInterface;
 
 use Traversable,
     Zend\Mail,

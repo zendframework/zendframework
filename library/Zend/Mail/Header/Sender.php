@@ -33,7 +33,7 @@ use Zend\Mail;
 class Sender implements HeaderInterface
 {
     /**
-     * @var \Zend\Mail\AddressInterface
+     * @var \Zend\Mail\Address\AddressInterface
      */
     protected $address;
 
@@ -94,7 +94,7 @@ class Sender implements HeaderInterface
      */
     public function getFieldValue()
     {
-        if (!$this->address instanceof Mail\AddressInterface) {
+        if (!$this->address instanceof Mail\Address\AddressInterface) {
             return '';
         }
 
@@ -145,7 +145,7 @@ class Sender implements HeaderInterface
     /**
      * Set the address used in this header
      *
-     * @param  string|\Zend\Mail\AddressInterface $emailOrAddress
+     * @param  string|\Zend\Mail\Address\AddressInterface $emailOrAddress
      * @param  null|string $name
      * @throws Exception\InvalidArgumentException
      * @return Sender
@@ -155,7 +155,7 @@ class Sender implements HeaderInterface
         if (is_string($emailOrAddress)) {
             $emailOrAddress = new Mail\Address($emailOrAddress, $name);
         }
-        if (!$emailOrAddress instanceof Mail\AddressInterface) {
+        if (!$emailOrAddress instanceof Mail\Address\AddressInterface) {
             throw new Exception\InvalidArgumentException(sprintf(
                 '%s expects a string or AddressInterface object; received "%s"',
                 __METHOD__,
@@ -169,7 +169,7 @@ class Sender implements HeaderInterface
     /**
      * Retrieve the internal address from this header
      *
-     * @return \Zend\Mail\AddressInterface|null
+     * @return \Zend\Mail\Address\AddressInterface|null
      */
     public function getAddress()
     {

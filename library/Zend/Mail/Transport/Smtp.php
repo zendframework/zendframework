@@ -46,12 +46,12 @@ class Smtp implements TransportInterface, Pluggable
     protected $options;
 
     /**
-     * @var \Zend\Mail\Protocol\Smtp
+     * @var Protocol\Smtp
      */
     protected $connection;
 
     /**
-     * @var \Zend\Mail\Protocol\SmtpBroker
+     * @var Protocol\SmtpBroker
      */
     protected $broker;
 
@@ -93,7 +93,7 @@ class Smtp implements TransportInterface, Pluggable
     /**
      * Set broker for obtaining SMTP protocol connection
      *
-     * @param \Zend\Mail\Protocol\SmtpBroker $broker
+     * @param  Protocol\SmtpBroker $broker
      * @throws Exception\InvalidArgumentException
      * @return Smtp
      */
@@ -113,7 +113,7 @@ class Smtp implements TransportInterface, Pluggable
     /**
      * Get broker for loading SMTP protocol connection
      *
-     * @return \Zend\Mail\Protocol\SmtpBroker
+     * @return Protocol\SmtpBroker
      */
     public function getBroker()
     {
@@ -128,7 +128,7 @@ class Smtp implements TransportInterface, Pluggable
      * 
      * @param  string $name 
      * @param  array|null $options 
-     * @return \Zend\Mail\Protocol\Smtp
+     * @return Protocol\Smtp
      */
     public function plugin($name, array $options = null)
     {
@@ -154,7 +154,7 @@ class Smtp implements TransportInterface, Pluggable
     /**
      * Sets the connection protocol instance
      *
-     * @param \Zend\Mail\Protocol\AbstractProtocol $connection
+     * @param Protocol\AbstractProtocol $connection
      */
     public function setConnection(Protocol\AbstractProtocol $connection)
     {
@@ -165,7 +165,7 @@ class Smtp implements TransportInterface, Pluggable
     /**
      * Gets the connection protocol instance
      *
-     * @return \Zend\Mail\Protocol\Smtp
+     * @return Protocol\Smtp
      */
     public function getConnection()
     {
@@ -178,7 +178,7 @@ class Smtp implements TransportInterface, Pluggable
      * The connection via the protocol adapter is made just-in-time to allow a
      * developer to add a custom adapter if required before mail is sent.
      *
-     * @param \Zend\Mail\Message $message
+     * @param Mail\Message $message
      */
     public function send(Mail\Message $message)
     {
@@ -214,14 +214,14 @@ class Smtp implements TransportInterface, Pluggable
     /**
      * Retrieve email address for envelope FROM
      *
-     * @param  \Zend\Mail\Message $message
+     * @param  Mail\Message $message
      * @throws Exception\RuntimeException
      * @return string
      */
     protected function prepareFromAddress(Mail\Message $message)
     {
         $sender = $message->getSender();
-        if ($sender instanceof Mail\AddressInterface) {
+        if ($sender instanceof Mail\Address\AddressInterface) {
             return $sender->getEmail();
         }
 
@@ -241,7 +241,7 @@ class Smtp implements TransportInterface, Pluggable
     /**
      * Prepare array of email address recipients
      * 
-     * @param  \Zend\Mail\Message $message
+     * @param  Mail\Message $message
      * @return array
      */
     protected function prepareRecipients(Mail\Message $message)
@@ -263,7 +263,7 @@ class Smtp implements TransportInterface, Pluggable
     /**
      * Prepare header string from message
      * 
-     * @param  \Zend\Mail\Message $message
+     * @param  Mail\Message $message
      * @return string
      */
     protected function prepareHeaders(Mail\Message $message)
@@ -281,7 +281,7 @@ class Smtp implements TransportInterface, Pluggable
     /**
      * Prepare body string from message
      * 
-     * @param  \Zend\Mail\Message $message
+     * @param  Mail\Message $message
      * @return string
      */
     protected function prepareBody(Mail\Message $message)
@@ -292,7 +292,7 @@ class Smtp implements TransportInterface, Pluggable
     /**
      * Lazy load the connection, and pass it helo
      * 
-     * @return \Zend\Mail\Protocol\Smtp
+     * @return Mail\Protocol\Smtp
      */
     protected function lazyLoadConnection()
     {

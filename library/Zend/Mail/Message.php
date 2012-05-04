@@ -123,7 +123,7 @@ class Message
     /**
      * Set (overwrite) From addresses
      * 
-     * @param  string|AddressInterface|array|AddressList|Traversable $emailOrAddressList 
+     * @param  string|Address\AddressInterface|array|AddressList|Traversable $emailOrAddressList 
      * @param  string|null $name 
      * @return Message
      */
@@ -160,7 +160,7 @@ class Message
     /**
      * Overwrite the address list in the To recipients
      * 
-     * @param  string|AddressInterface|array|AddressList|Traversable $emailOrAddressList 
+     * @param  string|Address\AddressInterface|array|AddressList|Traversable $emailOrAddressList 
      * @param  null|string $name 
      * @return Message
      */
@@ -175,7 +175,7 @@ class Message
      *
      * Appends to the list.
      * 
-     * @param  string|AddressInterface|array|AddressList|Traversable $emailOrAddressOrList 
+     * @param  string|Address\AddressInterface|array|AddressList|Traversable $emailOrAddressOrList 
      * @param  null|string $name 
      * @return Message
      */
@@ -199,7 +199,7 @@ class Message
     /**
      * Set (overwrite) CC addresses
      * 
-     * @param  string|AddressInterface|array|AddressList|Traversable $emailOrAddressList 
+     * @param  string|Address\AddressInterface|array|AddressList|Traversable $emailOrAddressList 
      * @param  string|null $name 
      * @return Message
      */
@@ -236,7 +236,7 @@ class Message
     /**
      * Set (overwrite) BCC addresses
      * 
-     * @param  string|AddressInterface|array|AddressList|Traversable $emailOrAddressList 
+     * @param  string|Address\AddressInterface|array|AddressList|Traversable $emailOrAddressList 
      * @param  string|null $name 
      * @return Message
      */
@@ -273,7 +273,7 @@ class Message
     /**
      * Overwrite the address list in the Reply-To recipients
      * 
-     * @param  string|AddressInterface|array|AddressList|Traversable $emailOrAddressList 
+     * @param  string|Address\AddressInterface|array|AddressList|Traversable $emailOrAddressList 
      * @param  null|string $name 
      * @return Message
      */
@@ -288,7 +288,7 @@ class Message
      *
      * Appends to the list.
      * 
-     * @param  string|AddressInterface|array|AddressList|Traversable $emailOrAddressOrList 
+     * @param  string|Address\AddressInterface|array|AddressList|Traversable $emailOrAddressOrList 
      * @param  null|string $name 
      * @return Message
      */
@@ -326,7 +326,7 @@ class Message
     /**
      * Retrieve the sender address, if any
      * 
-     * @return null|AddressInterface
+     * @return null|Address\AddressInterface
      */
     public function getSender()
     {
@@ -511,7 +511,7 @@ class Message
      * Proxied to this from addFrom, addTo, addCc, addBcc, and addReplyTo.
      *
      * @param  AddressList $addressList
-     * @param  string|AddressInterface|array|AddressList|Traversable $emailOrAddressOrList
+     * @param  string|Address\AddressInterface|array|AddressList|Traversable $emailOrAddressOrList
      * @param  null|string $name
      * @param  string $callingMethod
      * @throws Exception\InvalidArgumentException
@@ -528,7 +528,7 @@ class Message
             $addressList->addMany($emailOrAddressOrList);
             return;
         }
-        if (!is_string($emailOrAddressOrList) && !$emailOrAddressOrList instanceof AddressInterface) {
+        if (!is_string($emailOrAddressOrList) && !$emailOrAddressOrList instanceof Address\AddressInterface) {
             throw new Exception\InvalidArgumentException(sprintf(
                 '%s expects a string, AddressInterface, array, AddressList, or Traversable as its first argument; received "%s"',
                 $callingMethod,

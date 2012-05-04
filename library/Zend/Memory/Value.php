@@ -20,20 +20,21 @@
 
 namespace Zend\Memory;
 
+use ArrayAccess,
+    Countable;
+
 /**
  * String value object
  *
  * It's an OO string wrapper.
  * Used to intercept string updates.
  *
- * @uses       ArrayAccess
- * @uses       Countable
  * @category   Zend
  * @package    Zend_Memory
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Value implements \ArrayAccess,\Countable
+class Value implements ArrayAccess, Countable
 {
     /**
      * Value
@@ -45,7 +46,7 @@ class Value implements \ArrayAccess,\Countable
     /**
      * Container
      *
-     * @var \Zend\Memory\Container
+     * @var Container\Movable
      */
     private $_container;
 

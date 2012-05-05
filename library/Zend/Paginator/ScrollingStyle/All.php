@@ -10,6 +10,8 @@
 
 namespace Zend\Paginator\ScrollingStyle;
 
+use Zend\Paginator;
+
 /**
  * A scrolling style that returns every page in the collection.
  * Useful when it is necessary to make every page available at

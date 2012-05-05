@@ -10,6 +10,8 @@
 
 namespace Zend\Paginator\ScrollingStyle;
 
+use Zend\Paginator;
+
 /**
  * A Yahoo! Search-like scrolling style.  The cursor will advance to
  * the middle of the range, then remain there until the user reaches

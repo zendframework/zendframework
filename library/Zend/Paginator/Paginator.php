@@ -370,7 +370,7 @@ class Paginator implements Countable, IteratorAggregate
     /**
      * Constructor.
      *
-     * @param Adapter|AdapterAggregate $adapter
+     * @param AdapterInterface|AdapterAggregateInterface $adapter
      * @throws Exception\InvalidArgumentException
      */
     public function __construct($adapter)

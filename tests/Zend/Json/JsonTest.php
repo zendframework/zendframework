@@ -696,7 +696,7 @@ class JsonTest extends \PHPUnit_Framework_TestCase
     public function testKommaDecimalIsConvertedToCorrectJSONWithDot()
     {
         $localeInfo = localeconv();
-        if($localeInfo['decimal_point'] != ",") {
+        if($localeInfo['decimal_point'] != ',') {
             $this->markTestSkipped("This test only works for platforms where , is the decimal point separator.");
         }
 

@@ -181,9 +181,13 @@ class S3 implements Adapter
     public function copyItem($sourcePath, $destinationPath, $options = array())
     {
         try {
-            // TODO We *really* need to add support for object copying in the S3 adapter
-            $item = $this->fetch($this->_getFullPath(sourcePath), $options);
-            $this->storeItem($item, $destinationPath, $options);
+            $fullSourcePath = $this->_getFullPath($sourcePath, $options);
+            $fullDestPath   = $this->_getFullPath($destinationPath, $options);
+            return $this->_s3->copyObject(
+                $fullSourcePath,
+                $fullDestPath,
+                empty($options[self::METADATA]) ? null : $options[self::METADATA]
+            );
         } catch (Zend\Service\Amazon\S3\Exception  $e) {
             throw new Exception\RunTimeException('Error on copy: '.$e->getMessage(), $e->getCode(), $e);
         }

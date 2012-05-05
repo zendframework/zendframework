@@ -10,8 +10,7 @@
 
 namespace Zend\Paginator\Adapter;
 
-use Zend\Db\Sql,
-    Zend\Paginator\Adapter\Exception;
+use Zend\Db\Sql;
 
 /**
  * @category   Zend

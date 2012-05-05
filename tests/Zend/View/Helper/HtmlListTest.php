@@ -228,8 +228,6 @@ class HtmlListTest extends \PHPUnit_Framework_TestCase
         $this->assertContains('<ul>', $list);
         $this->assertContains('</ul>', $list);
 
-        $this->markTestSkipped('Wrong array_walk_recursive behavior.');
-
         array_walk_recursive($items, array($this, 'validateItems'), $list);
     }
 

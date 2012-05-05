@@ -107,17 +107,11 @@ class FigletTest extends \PHPUnit_Framework_TestCase
 
     public function testIncorrectEncoding()
     {
-        $this->markTestSkipped('Test case not reproducible on all setups');
-        
-        $this->setExpectedException('Zend\Text\Figlet\Exception\RuntimeException');
+        $this->setExpectedException('Zend\Text\Figlet\Exception\UnexpectedValueException',
+                                    'text is not encoded with UTF-8');
+        $isoText = iconv('UTF-8', 'ISO-8859-15', 'Ömläüt');
+
         $figlet  = new Figlet\Figlet();
-
-        if (PHP_OS == 'AIX') {
-            $isoText = iconv('UTF-8', 'ISO-8859-15', 'Ömläüt');
-        } else {
-            $isoText = iconv('UTF-8', 'ISO-8859-15', 'Ömläüt');
-        }
-
         $figlet->render($isoText);
     }
 

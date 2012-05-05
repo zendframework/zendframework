@@ -11,6 +11,8 @@
 namespace Zend\Paginator;
 
 use Zend\Paginator\ScrollingStyle\ScrollingStyleInterface,
+    Zend\Paginator\Adapter\AdapterInterface,
+    Zend\Paginator\AdapterAggregateInterface,
     ArrayIterator,
     Countable,
     Iterator,
@@ -178,7 +180,7 @@ class Paginator implements Countable, IteratorAggregate
     public static function factory($data, $adapter = self::INTERNAL_ADAPTER,
                                    array $prefixPaths = null)
     {
-        if ($data instanceof AdapterAggregate) {
+        if ($data instanceof AdapterAggregateInterface) {
             return new self($data->getPaginatorAdapter());
         }
 
@@ -373,9 +375,9 @@ class Paginator implements Countable, IteratorAggregate
      */
     public function __construct($adapter)
     {
-        if ($adapter instanceof Adapter) {
+        if ($adapter instanceof AdapterInterface) {
             $this->_adapter = $adapter;
-        } else if ($adapter instanceof AdapterAggregate) {
+        } else if ($adapter instanceof AdapterAggregateInterface) {
             $this->_adapter = $adapter->getPaginatorAdapter();
         } else {
             throw new Exception\InvalidArgumentException(

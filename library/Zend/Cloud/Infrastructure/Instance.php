@@ -1,7 +1,7 @@
 <?php
 /**
  * @category   Zend
- * @package    Zend\Cloud
+ * @package    Zend_Cloud
  * @subpackage Infrastructure
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -15,7 +15,7 @@ namespace Zend\Cloud\Infrastructure;
 /**
  * Instance of an infrastructure service
  *
- * @package    Zend\Cloud
+ * @package    Zend_Cloud
  * @subpackage Infrastructure
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -56,7 +56,7 @@ class Instance
     const SSH_PASSPHRASE       = 'passphrase';
 
     /**
-     * @var Zend\Cloud\Infrastructure\Adapter\AdapterInterface
+     * @var \Zend\Cloud\Infrastructure\Adapter\AdapterInterface
      */
     protected $adapter;
 
@@ -91,7 +91,7 @@ class Instance
     public function __construct(Adapter\AdapterInterface $adapter, $data = null)
     {
         if (!($adapter instanceof Adapter\AdapterInterface)) {
-            throw new Exception\InvalidArgumentException("You must pass a Zend\Cloud\Infrastructure\Adapter\AdapterInterface instance");
+            throw new Exception\InvalidArgumentException('You must pass a Zend\Cloud\Infrastructure\Adapter\AdapterInterface instance');
         }
 
         if (is_object($data)) {
@@ -199,7 +199,7 @@ class Instance
      * @param  integer $timeout 
      * @return boolean
      */
-    public function waitStatus($status, $timeout = Adapter::TIMEOUT_STATUS_CHANGE)
+    public function waitStatus($status, $timeout = Adapter\AdapterInterface::TIMEOUT_STATUS_CHANGE)
     {
         return $this->adapter->waitStatusInstance($this->attributes[self::INSTANCE_ID], $status, $timeout);
     }

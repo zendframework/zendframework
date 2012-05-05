@@ -1,7 +1,7 @@
 <?php
 /**
  * @category   Zend
- * @package    Zend\Cloud\Infrastructure
+ * @package    Zend_Cloud_Infrastructure
  * @subpackage Adapter
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -22,7 +22,7 @@ use Zend\Service\Amazon\Ec2\Instance as Ec2Instance,
 /**
  * Amazon EC2 adapter for infrastructure service
  *
- * @package    Zend\Cloud\Infrastructure
+ * @package    Zend_Cloud_Infrastructure
  * @subpackage Adapter
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -117,7 +117,7 @@ class Ec2 extends AbstractAdapter
     /**
      * Constructor
      *
-     * @param  array|Zend\Config\Config $options
+     * @param  array|\Zend\Config\Config $options
      * @return void
      */
     public function __construct($options = array())
@@ -547,7 +547,7 @@ class Ec2 extends AbstractAdapter
     /**
      * Get the last HTTP response
      * 
-     * @return Zend\Http\Response 
+     * @return \Zend\Http\Response
      */
     public function getLastHttpResponse()
     {

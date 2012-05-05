@@ -10,7 +10,7 @@
 
 namespace Zend\Paginator\ScrollingStyle;
 
-use Zend\Paginator;
+use Zend\Paginator\Paginator;
 
 /**
  * A Yahoo! Search-like scrolling style.  The cursor will advance to
@@ -29,11 +29,11 @@ class Sliding implements ScrollingStyleInterface
     /**
      * Returns an array of "local" pages given a page number and range.
      *
-     * @param  \Zend\Paginator\Paginator $paginator
+     * @param  Paginator $paginator
      * @param  integer $pageRange (Optional) Page range
      * @return array
      */
-    public function getPages(Paginator\Paginator $paginator, $pageRange = null)
+    public function getPages(Paginator $paginator, $pageRange = null)
     {
         if ($pageRange === null) {
             $pageRange = $paginator->getPageRange();

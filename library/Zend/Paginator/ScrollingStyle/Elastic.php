@@ -10,7 +10,7 @@
 
 namespace Zend\Paginator\ScrollingStyle;
 
-use Zend\Paginator;
+use Zend\Paginator\Paginator;
 
 /**
  * A Google-like scrolling style.  Incrementally expands the range to about
@@ -28,11 +28,11 @@ class Elastic extends Sliding
     /**
      * Returns an array of "local" pages given a page number and range.
      *
-     * @param  \Zend\Paginator\Paginator $paginator
+     * @param  Paginator $paginator
      * @param  integer $pageRange Unused
      * @return array
      */
-    public function getPages(Paginator\Paginator $paginator, $pageRange = null)
+    public function getPages(Paginator $paginator, $pageRange = null)
     {
         $pageRange  = $paginator->getPageRange();
         $pageNumber = $paginator->getCurrentPageNumber();

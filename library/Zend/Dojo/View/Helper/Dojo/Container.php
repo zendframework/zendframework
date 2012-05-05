@@ -175,7 +175,7 @@ class Container
     /**
      * Set view object
      *
-     * @param  Zend\View\Interface $view
+     * @param  View $view
      * @return void
      */
     public function setView(View $view)

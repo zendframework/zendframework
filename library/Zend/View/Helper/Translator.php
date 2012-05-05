@@ -41,7 +41,7 @@ class Translator extends AbstractHelper
     /**
      * Translation object
      *
-     * @var \Zend\Translator\Adapter\Adapter
+     * @var TranslationAdapter
      */
     protected $translator;
 
@@ -177,7 +177,6 @@ class Translator extends AbstractHelper
     /**
      * Returns the set locale for translations
      *
-     * @throws ViewException 
      * @return string|Locale
      * @throws Exception\RuntimeException When no Translation instance was set
      */

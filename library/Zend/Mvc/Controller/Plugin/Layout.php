@@ -101,7 +101,7 @@ class Layout extends AbstractPlugin
     /**
      * Retrieve the root view model from the event
      * 
-     * @return ViewModel
+     * @return Model
      * @throws Exception\DomainException
      */
     protected function getViewModel()

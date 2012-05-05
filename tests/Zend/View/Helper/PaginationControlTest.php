@@ -38,7 +38,7 @@ use Zend\Paginator,
 class PaginationControlTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Zend_View_Helper_PaginationControl
+     * @var Helper\PaginationControl
      */
     private $_viewHelper;
 
@@ -133,7 +133,7 @@ class PaginationControlTest extends \PHPUnit_Framework_TestCase
 
         try {
             $output = $this->_viewHelper->__invoke();
-        } catch (View\Exception\ExceptionInterface $e) {
+        } catch (\Zend\View\Exception\ExceptionInterface $e) {
             $this->fail('Could not find paginator in the view instance');
         }
 

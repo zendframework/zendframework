@@ -63,9 +63,9 @@ class AbstractFeed
      * Set a single author
      *
      * The following option keys are supported:
-     * 'name'  => The name
-     * 'email' => An optional email
-     * 'uri'   => An optional uri
+     * 'name'  => (string) The name
+     * 'email' => (string) An optional email
+     * 'uri'   => (string) An optional and valid URI
      *
      * @param array $author
      * @throws Exception\InvalidArgumentException If any value of $author not follow the format.

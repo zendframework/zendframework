@@ -41,8 +41,9 @@ class AdapterBroker extends PluginBroker
      */
     protected function validatePlugin($plugin)
     {
-        if (!$plugin instanceof Adapter) {
-            throw new Exception\InvalidArgumentException('Pagination adapters must implement Zend\Paginator\Adapter');
+        if (!$plugin instanceof Adapter\AdapterInterface) {
+            throw new Exception\InvalidArgumentException(
+                'Pagination adapters must implement Zend\Paginator\Adapter\AdapterInterface');
         }
         return true;
     }

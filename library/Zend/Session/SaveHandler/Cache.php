@@ -60,7 +60,7 @@ class Cache implements Savable
      *
      * @param  Zend\Cache\Storage\Adapter $storageAdapter
      * @return void
-     * @throws Zend\Session\Exception
+     * @throws Zend\Session\Exception\ExceptionInterface
      */
     public function __construct(StorageAdapter $storageAdapter)
     {

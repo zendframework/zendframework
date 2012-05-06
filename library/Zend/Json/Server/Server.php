@@ -49,9 +49,11 @@ class Server extends AbstractServer
     protected $returnResponse = false;
 
     /**
+     * Inherited from Zend\Server\AbstractServer
+     *
      * @var bool Flag; allow overwriting existing methods when creating server definition
      */
-    protected $_overwriteExistingMethods = true;
+    protected $overwriteExistingMethods = true;
 
     /**
      * Request object

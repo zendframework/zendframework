@@ -2,7 +2,7 @@
 
 namespace Zend\Di\Definition;
 
-interface Definition
+interface DefinitionInterface
 {
     /**
      * @abstract

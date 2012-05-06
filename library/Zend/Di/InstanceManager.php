@@ -2,7 +2,7 @@
 
 namespace Zend\Di;
 
-class InstanceManager /* implements InstanceCollection */
+class InstanceManager /* implements InstanceManagerInterface */
 {
     /**
      * Array of shared instances

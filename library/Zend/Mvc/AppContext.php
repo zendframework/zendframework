@@ -2,7 +2,7 @@
 
 namespace Zend\Mvc;
 
-use Zend\Di\Locator,
+use Zend\Di\LocatorInterface,
     Zend\EventManager\EventManagerAware,
     Zend\Stdlib\RequestDescription as Request,
     Zend\Stdlib\ResponseDescription as Response;
@@ -12,10 +12,10 @@ interface AppContext extends EventManagerAware
     /**
      * Set a service locator/DI object
      *
-     * @param  Locator $locator 
+     * @param  LocatorInterface $locator
      * @return AppContext
      */
-    public function setLocator(Locator $locator);
+    public function setLocator(LocatorInterface $locator);
 
     /**
      * Set request object that will be consumed
@@ -46,7 +46,7 @@ interface AppContext extends EventManagerAware
     /**
      * Get the locator object
      * 
-     * @return Locator
+     * @return LocatorInterface
      */
     public function getLocator();
 

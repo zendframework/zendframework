@@ -7,7 +7,7 @@ use Zend\Di\Definition\Annotation,
     Zend\Code\Annotation\AnnotationCollection,
     Zend\Code\Reflection;
 
-class RuntimeDefinition implements Definition
+class RuntimeDefinition implements DefinitionInterface
 {
 
     /**

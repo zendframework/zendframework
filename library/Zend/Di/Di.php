@@ -2,7 +2,7 @@
 
 namespace Zend\Di;
 
-class Di implements DependencyInjection
+class Di implements DependencyInjectionInterface
 {
     /**
      * @var DefinitionList

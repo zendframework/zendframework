@@ -2,7 +2,7 @@
 
 namespace Zend\Mvc\Controller\Plugin;
 
-use Zend\Di\Locator,
+use Zend\Di\LocatorInterface,
     Zend\Mvc\InjectApplicationEvent,
     Zend\Mvc\Exception,
     Zend\Mvc\LocatorAware,
@@ -75,7 +75,7 @@ class Forward extends AbstractPlugin
     /**
      * Get the locator
      * 
-     * @return Locator
+     * @return LocatorInterface
      * @throws Exception\DomainException if unable to find locator
      */
     protected function getLocator()
@@ -90,7 +90,7 @@ class Forward extends AbstractPlugin
             throw new Exception\DomainException('Forward plugin requires controller implements LocatorAware');
         }
         $locator = $controller->getLocator();
-        if (!$locator instanceof Locator) {
+        if (!$locator instanceof LocatorInterface) {
             throw new Exception\DomainException('Forward plugin requires controller composes Locator');
         }
         $this->locator = $locator;

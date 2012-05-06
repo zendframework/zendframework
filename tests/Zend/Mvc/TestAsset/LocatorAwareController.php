@@ -2,7 +2,7 @@
 
 namespace ZendTest\Mvc\TestAsset;
 
-use Zend\Di\Locator as DiLocator,
+use Zend\Di\LocatorInterface as DiLocator,
     Zend\Mvc\Controller\ActionController,
     Zend\Mvc\LocatorAware;
 

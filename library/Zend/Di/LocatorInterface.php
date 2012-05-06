@@ -1,7 +1,7 @@
 <?php
 namespace Zend\Di;
 
-interface Locator
+interface LocatorInterface
 {
     /**
      * Retrieve a class instance

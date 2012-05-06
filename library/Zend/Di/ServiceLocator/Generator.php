@@ -4,7 +4,7 @@ namespace Zend\Di\ServiceLocator;
 
 use Zend\Di\Di,
     Zend\CodeGenerator\Php as CodeGen,
-    Zend\Di\DependencyInjection,
+    Zend\Di\DependencyInjectionInterface,
     Zend\Di\Exception;
 
 class Generator
@@ -20,7 +20,7 @@ class Generator
      *
      * Requires a DependencyInjection manager on which to operate.
      * 
-     * @param  DependencyInjection $injector 
+     * @param  DependencyInjectionInterface $injector
      * @return void
      */
     public function __construct(Di $injector)

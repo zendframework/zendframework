@@ -113,9 +113,9 @@ public function getEvent($event);
       </para>
 
       <programlisting language="php"><![CDATA[
-use Zend\Di\Locator;
+use Zend\Di\LocatorInterface;
 
-public function setLocator(Locator $locator);
+public function setLocator(LocatorInterface $locator);
 public function getLocator($locator);
 ]]></programlisting>
     </section>

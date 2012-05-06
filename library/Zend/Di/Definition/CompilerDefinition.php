@@ -12,7 +12,7 @@ use Zend\Code\Scanner\DerivedClassScanner,
     Zend\Code\Reflection,
     Zend\Code\Annotation\AnnotationCollection;
 
-class CompilerDefinition implements Definition
+class CompilerDefinition implements DefinitionInterface
 {
     protected $isCompiled = false;
 

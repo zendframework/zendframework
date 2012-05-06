@@ -2,9 +2,9 @@
 
 namespace ZendTest\Loader\TestAsset;
 
-use Zend\Di\Locator;
+use Zend\Di\LocatorInterface;
 
-class ServiceLocator implements Locator
+class ServiceLocator implements LocatorInterface
 {
     protected $services = array();
 

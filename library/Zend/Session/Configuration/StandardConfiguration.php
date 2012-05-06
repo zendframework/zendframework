@@ -660,7 +660,7 @@ class StandardConfiguration implements Configurable
      * @param  string $method 
      * @param  array $args 
      * @return mixed
-     * @throws BadMethodCallException on non-getter/setter method
+     * @throws Exception\BadMethodCallException on non-getter/setter method
      */
     public function __call($method, $args)
     {

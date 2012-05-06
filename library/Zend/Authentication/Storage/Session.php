@@ -47,7 +47,7 @@ class Session implements AuthenticationStorage
     /**
      * Object to proxy $_SESSION storage
      *
-     * @var Zend\Session\Container
+     * @var SessionContainer
      */
     protected $session;
 

@@ -30,7 +30,7 @@ class PublicKey extends Key
 
     /**
      * @param string $string
-     * @throws Zend\Crypt\Exception
+     * @throws RuntimeException
      */
     protected function _parse($string)
     {

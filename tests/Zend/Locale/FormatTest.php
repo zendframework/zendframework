@@ -647,8 +647,8 @@ class FormatTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue( Format::checkDateFormat('20.01.2006', array('date_format' => 'd-M-y')));
 
         $this->assertFalse(Format::checkDateFormat('20.April',      array('date_format' => 'dd.MMMM.YYYY')));
-        $this->assertTrue(Format::checkDateFormat('20.April',      array('date_format' => 'MMMM.YYYY'   )));
-        $this->assertTrue(Format::checkDateFormat('20',            array('date_format' => 'dd.MMMM.YYYY')));
+        $this->assertTrue( Format::checkDateFormat('20.April',      array('date_format' => 'MMMM.YYYY'   )));
+        $this->assertTrue( Format::checkDateFormat('20',            array('date_format' => 'dd.MMMM.YYYY')));
         $this->assertTrue( Format::checkDateFormat('April.2007',    array('date_format' => 'MMMM.YYYY'   )));
         $this->assertTrue( Format::checkDateFormat('20.April.2007', array('date_format' => 'dd.YYYY'     )));
 
@@ -669,7 +669,7 @@ class FormatTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue( Format::checkDateFormat('11:10:55 am', array('date_format' => 'HH:mm:ss', 'locale' => 'ar_EG')));
         $this->assertFalse(Format::checkDateFormat('notime'));
         $this->assertFalse(Format::checkDateFormat('13:10',       array('date_format' => 'HH:mm:ss', 'locale' => 'de_AT')));
-        $this->assertTrue(Format::checkDateFormat('13',          array('date_format' => 'HH:mm',    'locale' => 'de_AT')));
+        $this->assertTrue( Format::checkDateFormat('13',          array('date_format' => 'HH:mm',    'locale' => 'de_AT')));
         $this->assertFalse(Format::checkDateFormat('00:13',       array('date_format' => 'ss:mm:HH', 'locale' => 'de_AT')));
     }
 

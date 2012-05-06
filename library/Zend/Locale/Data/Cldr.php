@@ -50,8 +50,7 @@ class Cldr extends AbstractLocale
     /**
      * Locale files
      *
-     * @var ressource
-     * @access private
+     * @var resource
      */
     private static $_ldml = array();
 
@@ -59,7 +58,6 @@ class Cldr extends AbstractLocale
      * List of values which are collected
      *
      * @var array
-     * @access private
      */
     private static $_list = array();
 

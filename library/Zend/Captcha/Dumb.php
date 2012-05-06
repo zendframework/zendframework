@@ -36,6 +36,30 @@ namespace Zend\Captcha;
 class Dumb extends Word
 {
     /**
+     * CAPTCHA label
+     * @type string
+     */
+    protected $_label = 'Please type this word backwards';
+
+    /**
+     * Set the label for the CAPTCHA
+     * @param string $label
+     */
+    public function setLabel($label)
+    {
+        $this->_label = $label;
+    }
+
+    /**
+     * Retrieve the label for the CAPTCHA
+     * @return string
+     */
+    public function getLabel()
+    {
+        return $this->_label;
+    }
+
+    /**
      * Render the captcha
      *
      * @param  \Zend\View\Renderer $view
@@ -44,7 +68,7 @@ class Dumb extends Word
      */
     public function render(\Zend\View\Renderer $view = null, $element = null)
     {
-        return 'Please type this word backwards: <b>'
+        return $this->getLabel() . ': <b>'
              . strrev($this->getWord())
              . '</b>';
     }

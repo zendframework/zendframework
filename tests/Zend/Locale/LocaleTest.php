@@ -83,9 +83,8 @@ class LocaleTest extends \PHPUnit_Framework_TestCase
         try {
             $locale = new LocaleTestHelper(Locale::ENVIRONMENT);
             $this->assertTrue($locale instanceof Locale);
-        } catch (InvalidArgumentException $e) {
-            // ignore environments where the locale can not be detected
-            $this->assertContains('Autodetection', $e->getMessage());
+        } catch (UnexpectedValueException $e) {
+            $this->markTestSkipped('Skip environments where the locale cannot be detected');
         }
 
         try {

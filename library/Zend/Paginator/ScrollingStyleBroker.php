@@ -39,7 +39,7 @@ class ScrollingStyleBroker extends PluginBroker
     {
         if (!$plugin instanceof ScrollingStyleInterface) {
             throw new Exception\InvalidArgumentException(
-                'ScrollingStyleInterface adapters must implement Zend\Paginator\ScrollingStyle\ScrollingStyleInterface'
+                'ScrollingStyle adapters must implement Zend\Paginator\ScrollingStyle\ScrollingStyleInterface'
             );
         }
         return true;

@@ -12,7 +12,6 @@ namespace Zend\Paginator;
 
 use Zend\Paginator\ScrollingStyle\ScrollingStyleInterface,
     Zend\Paginator\Adapter\AdapterInterface,
-    Zend\Paginator\AdapterAggregateInterface,
     ArrayIterator,
     Countable,
     Iterator,
@@ -100,7 +99,7 @@ class Paginator implements Countable, IteratorAggregate
     /**
      * Adapter
      *
-     * @var Adapter
+     * @var AdapterInterface
      */
     protected $_adapter = null;
 
@@ -511,7 +510,7 @@ class Paginator implements Countable, IteratorAggregate
     /**
      * Returns the adapter.
      *
-     * @return Adapter
+     * @return AdapterInterface
      */
     public function getAdapter()
     {

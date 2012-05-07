@@ -364,7 +364,7 @@ abstract class Word extends AbstractAdapter
     /**
      * Validate the word
      *
-     * @see    Zend\Validator\Validator::isValid()
+     * @see    Zend\Validator\ValidatorInterface::isValid()
      * @param  mixed $value
      * @return boolean
      */

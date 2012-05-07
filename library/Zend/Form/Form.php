@@ -33,7 +33,7 @@ use Countable,
     Zend\View\Renderer as View,
     Zend\Stdlib\ArrayUtils,
     Zend\Translator,
-    Zend\Validator\Validator;
+    Zend\Validator\ValidatorInterface;
 
 /**
  * Zend_Form
@@ -51,7 +51,7 @@ use Countable,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Form implements Iterator, Countable, Validator
+class Form implements Iterator, Countable, ValidatorInterface
 {
     /**#@+
      * Plugin loader type constants

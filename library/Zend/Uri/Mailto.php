@@ -10,7 +10,7 @@
 
 namespace Zend\Uri;
 
-use Zend\Validator\Validator,
+use Zend\Validator\ValidatorInterface,
     Zend\Validator\EmailAddress as EmailValidator;
 
 /**
@@ -29,7 +29,7 @@ class Mailto extends Uri
 
     /**
      * Validator for use when validating email address
-     * @var Validator
+     * @var ValidatorInterface
      */
     protected $emailValidator;
 

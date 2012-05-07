@@ -44,7 +44,7 @@ class FloatTest extends \PHPUnit_Framework_TestCase
     /**
      * Zend_Validator_Float object
      *
-     * @var Zend_Validator_Float
+     * @var \Zend\Validator\Float
      */
     protected $_validator;
 

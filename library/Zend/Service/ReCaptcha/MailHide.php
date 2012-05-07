@@ -59,7 +59,7 @@ class MailHide extends ReCaptcha
     protected $_email = null;
 
     /**
-     * @var \Zend\Validator\Validator
+     * @var \Zend\Validator\ValidatorInterface
      */
     protected $_emailValidator;
 
@@ -120,7 +120,7 @@ class MailHide extends ReCaptcha
     /**
      * Get emailValidator
      *
-     * @return \Zend\Validator\Validator
+     * @return \Zend\Validator\ValidatorInterface
      */
     public function getEmailValidator()
     {
@@ -133,10 +133,10 @@ class MailHide extends ReCaptcha
     /**
      * Set email validator
      *
-     * @param  \Zend\Validator\Validator $validator
+     * @param  \Zend\Validator\ValidatorInterface $validator
      * @return \Zend\Service\ReCaptcha\MailHide
      */
-    public function setEmailValidator(\Zend\Validator\Validator $validator)
+    public function setEmailValidator(\Zend\Validator\ValidatorInterface $validator)
     {
         $this->_emailValidator = $validator;
         return $this;

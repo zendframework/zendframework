@@ -211,7 +211,7 @@ class ReCaptcha extends AbstractAdapter
     /**
      * Validate captcha
      *
-     * @see    \Zend\Validator\Validator::isValid()
+     * @see    \Zend\Validator\ValidatorInterface::isValid()
      * @param  mixed $value
      * @return boolean
      */

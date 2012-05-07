@@ -109,11 +109,11 @@ class Index implements SearchIndexInterface
      * 0 means pre-2.1 index format
      * -1 means there are no segments files.
      *
-     * @param \Zend\Search\Lucene\Storage\Directory $directory
+     * @param \Zend\Search\Lucene\Storage\Directory\DirectoryInterface $directory
      * @throws \Zend\Search\Lucene\Exception\RuntimeException
      * @return integer
      */
-    public static function getActualGeneration(Directory $directory)
+    public static function getActualGeneration(Directory\DirectoryInterface $directory)
     {
         /**
          * Zend_Search_Lucene uses segments.gen file to retrieve current generation number

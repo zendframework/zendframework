@@ -22,7 +22,7 @@
 namespace Zend\Search\Lucene\Search;
 
 use Zend\Search\Lucene,
-	Zend\Search\Lucene\Analysis\Analyzer\AnalyzerInterface,
+	Zend\Search\Lucene\Analysis\Analyzer,
 	Zend\Search\Lucene\Index,
 	Zend\Search\Lucene\Search\Exception\QueryParserException,
 	Zend\Search\Lucene\Exception\RuntimeException;

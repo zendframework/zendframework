@@ -20,8 +20,8 @@
  */
 
 namespace Zend\Search\Lucene\Analysis\TokenFilter;
+
 use Zend\Search\Lucene,
-    Zend\Search\Lucene\Analysis\TokenFilter,
     Zend\Search\Lucene\Analysis\Token,
     Zend\Search\Lucene\Exception\InvalidArgumentException,
     Zend\Search\Lucene\Exception\RuntimeException;
@@ -38,7 +38,7 @@ use Zend\Search\Lucene,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class StopWords implements TokenFilter
+class StopWords implements TokenFilterInterface
 {
     /**
      * Stop Words

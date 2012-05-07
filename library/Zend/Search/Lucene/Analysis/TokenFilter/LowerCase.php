@@ -21,8 +21,7 @@
 
 namespace Zend\Search\Lucene\Analysis\TokenFilter;
 
-use Zend\Search\Lucene\Analysis\TokenFilter,
-    Zend\Search\Lucene\Analysis\Token;
+use Zend\Search\Lucene\Analysis\Token;
 
 /**
  * Lower case Token filter.
@@ -33,7 +32,7 @@ use Zend\Search\Lucene\Analysis\TokenFilter,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class LowerCase implements TokenFilter
+class LowerCase implements TokenFilterInterface
 {
     /**
      * Normalize Token or remove it (if null is returned)

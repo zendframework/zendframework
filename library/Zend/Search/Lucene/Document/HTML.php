@@ -23,7 +23,7 @@ namespace Zend\Search\Lucene\Document;
 
 use Zend\Search\Lucene\Document,
     Zend\Search\Lucene,
-    Zend\Search\Lucene\Analysis\Analyzer\AnalyzerInterface,
+    Zend\Search\Lucene\Analysis\Analyzer,
     Zend\Search\Lucene\Exception\RuntimeException,
     Zend\Search\Lucene\Exception\InvalidArgumentException;
 

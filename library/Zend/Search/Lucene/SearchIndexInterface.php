@@ -35,11 +35,11 @@ interface SearchIndexInterface extends Index\TermsStreamInterface
      * 0 means pre-2.1 index format
      * -1 means there are no segments files.
      *
-     * @param \Zend\Search\Lucene\Storage\Directory $directory
+     * @param \Zend\Search\Lucene\Storage\Directory\DirectoryInterface $directory
      * @return integer
      * @throws \Zend\Search\Lucene\Exception\ExceptionInterface
      */
-    public static function getActualGeneration(Storage\Directory $directory);
+    public static function getActualGeneration(Storage\Directory\DirectoryInterface $directory);
 
     /**
      * Get segments file name
@@ -66,9 +66,9 @@ interface SearchIndexInterface extends Index\TermsStreamInterface
     public function setFormatVersion($formatVersion);
 
     /**
-     * Returns the Zend_Search_Lucene_Storage_Directory instance for this index.
+     * Returns the Zend\Search\Lucene\Storage\Directory\DirectoryInterface instance for this index.
      *
-     * @return \Zend\Search\Lucene\Storage\Directory
+     * @return \Zend\Search\Lucene\Storage\Directory\DirectoryInterface
      */
     public function getDirectory();
 

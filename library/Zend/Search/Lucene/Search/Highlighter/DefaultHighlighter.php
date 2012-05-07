@@ -21,8 +21,7 @@
 
 namespace Zend\Search\Lucene\Search\Highlighter;
 
-use Zend\Search\Lucene\Search\Highlighter,
-    Zend\Search\Lucene\Document;
+use Zend\Search\Lucene\Document;
 
 /**
  * @category   Zend
@@ -31,7 +30,7 @@ use Zend\Search\Lucene\Search\Highlighter,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class DefaultHighlighter implements Highlighter
+class DefaultHighlighter implements HighlighterInterface
 {
     /**
      * List of colors for text highlighting

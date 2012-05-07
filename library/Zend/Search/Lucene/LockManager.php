@@ -20,7 +20,7 @@
 
 namespace Zend\Search\Lucene;
 
-use Zend\Search\Lucene\Storage\Directory,
+use Zend\Search\Lucene\Storage\Directory\DirectoryInterface as Directory,
 	Zend\Search\Lucene\Exception\RuntimeException;
 
 /**

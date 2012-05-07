@@ -21,8 +21,7 @@
 
 namespace Zend\Search\Lucene\Analysis\TokenFilter;
 
-use Zend\Search\Lucene\Analysis\TokenFilter,
-    Zend\Search\Lucene\Analysis\Token;
+use Zend\Search\Lucene\Analysis\Token;
 
 /**
  * Token filter that removes short words. What is short word can be configured with constructor.
@@ -33,7 +32,7 @@ use Zend\Search\Lucene\Analysis\TokenFilter,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ShortWords implements TokenFilter
+class ShortWords implements TokenFilterInterface
 {
     /**
      * Minimum allowed term length

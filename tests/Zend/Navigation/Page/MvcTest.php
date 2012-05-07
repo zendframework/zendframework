@@ -347,7 +347,7 @@ class MvcTest extends TestCase
             'controller' => 'index'
         ));
 
-        $props    = array('RouteInterface');
+        $props    = array('Route');
         $valids   = array('index', 'help', 'home', 'default', '1', ' ', null);
         $invalids = array(42, (object) null);
 

@@ -13,13 +13,14 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_CodeGenerator
+ * @package    Zend_Code_Generator
  * @subpackage PHP
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace Zend\Code\Generator;
+
 use Zend\Code\Reflection\FileReflection;
 
 /**
@@ -27,7 +28,7 @@ use Zend\Code\Reflection\FileReflection;
  * @uses       \Zend\Code\Generator\PhpClass
  * @uses       \Zend\Code\Generator\Exception
  * @category   Zend
- * @package    Zend_CodeGenerator
+ * @package    Zend_Code_Generator
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -215,7 +216,9 @@ class FileGenerator extends AbstractGenerator
         if (is_array($docblock)) {
             $docblock = new DocblockGenerator($docblock);
         } elseif (!$docblock instanceof DocblockGenerator) {
-            throw new Exception\InvalidArgumentException('setDocblock() is expecting either a string, array or an instance of Zend_CodeGenerator_Php_Docblock');
+            throw new Exception\InvalidArgumentException(
+                'setDocblock() is expecting either a string, array or an instance of Zend\Code\Generator\DocblockGenerator'
+            );
         }
 
         $this->docblock = $docblock;
@@ -376,7 +379,9 @@ class FileGenerator extends AbstractGenerator
         } elseif ($class instanceof ClassGenerator) {
             $className = $class->getName();
         } else {
-            throw new Exception\InvalidArgumentException('Expecting either an array or an instance of Zend_CodeGenerator_Php_Class');
+            throw new Exception\InvalidArgumentException(
+                'setClass() is expecting either a string, array or an instance of Zend\Code\Generator\ClassGenerator'
+            );
         }*/
 
         // @todo check for dup here

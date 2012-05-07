@@ -43,7 +43,7 @@ class Transfer
      * @param  string  $adapter   Adapter to use
      * @param  boolean $direction OPTIONAL False means Download, true means upload
      * @param  array   $options   OPTIONAL Options to set for this adapter
-     * @throws Exception
+     * @throws Exception\InvalidArgumentException
      */
     public function __construct($adapter = 'Http', $direction = false, $options = array())
     {
@@ -57,7 +57,7 @@ class Transfer
      * @param  boolean $direction OPTIONAL False means Download, true means upload
      * @param  array   $options   OPTIONAL Options to set for this adapter
      * @return Transfer
-     * @throws Exception
+     * @throws Exception\InvalidArgumentException
      */
     public function setAdapter($adapter, $direction = false, $options = array())
     {
@@ -72,7 +72,9 @@ class Transfer
         $direction = (integer) $direction;
         $this->adapter[$direction] = new $adapter($options);
         if (!$this->adapter[$direction] instanceof Adapter\AbstractAdapter) {
-            throw new Exception\InvalidArgumentException('Adapter ' . $adapter . ' does not extend Zend\File\Transfer\Adapter\AbstractAdapter');
+            throw new Exception\InvalidArgumentException(
+                'Adapter ' . $adapter . ' does not extend Zend\File\Transfer\Adapter\AbstractAdapter'
+            );
         }
 
         return $this;
@@ -84,7 +86,7 @@ class Transfer
      * @param boolean $direction On null, all directions are returned
      *                           On false, download direction is returned
      *                           On true, upload direction is returned
-     * @return array|Transfer\Adapter
+     * @return array|Adapter\AbstractAdapter
      */
     public function getAdapter($direction = null)
     {

@@ -98,6 +98,10 @@ class Query implements RouteInterface
      */
     public function match(Request $request, $pathOffset = null)
     {
+        if (!method_exists($request, 'query')) {
+            return null;
+        }
+
         $matches = $this->recursiveUrldecode($request->query()->toArray());
 
         return new RouteMatch(array_merge($this->defaults, $matches));

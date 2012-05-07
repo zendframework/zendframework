@@ -82,8 +82,8 @@ class QueryTest extends TestCase
     {
         $route   = new Query();
         $request = new BaseRequest();
-        $match = $route->match($request);
-        $this->assertInstanceOf('Zend\Mvc\Router\RouteMatch', $match);
+        $match   = $route->match($request);
+        $this->assertNull($match);
     }
     
     public function testGetAssembledParams()

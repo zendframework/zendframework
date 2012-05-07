@@ -32,8 +32,7 @@ use ArrayObject,
     Zend\Cache\Storage\PostEvent,
     Zend\Cache\Storage\Plugin,
     Zend\EventManager\EventManager,
-    Zend\EventManager\EventManagerAwareInterface,
-    Zend\EventManager\EventManagerInterface;
+    Zend\EventManager\EventsCapableInterface;
 
 /**
  * @category   Zend
@@ -42,12 +41,12 @@ use ArrayObject,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class AbstractAdapter implements AdapterInterface, EventManagerAwareInterface
+abstract class AbstractAdapter implements AdapterInterface, EventsCapableInterface
 {
     /**
      * The used EventManager if any
      *
-     * @var null|EventManager
+     * @var null|EventCollection
      */
     protected $events = null;
 
@@ -222,30 +221,14 @@ abstract class AbstractAdapter implements AdapterInterface, EventManagerAwareInt
     /* Event/Plugin handling */
 
     /**
-     * Set event manager instance
-     *
-     * @param  EventManagerInterface $events
-     * @return AbstractAdapter
-     */
-    public function setEventManager(EventManagerInterface $events)
-    {
-        $events->setIdentifiers(array(
-            __CLASS__,
-            get_called_class(),
-        ));
-        $this->events = $events;
-        return $this;
-    }
-
-    /**
      * Get the event manager
      *
-     * @return EventManager
+     * @return EventCollection
      */
     public function events()
     {
         if ($this->events === null) {
-            $this->setEventManager(new EventManager());
+            $this->events = new EventManager(array(__CLASS__, get_called_class()));
         }
         return $this->events;
     }
@@ -2432,7 +2415,7 @@ abstract class AbstractAdapter implements AdapterInterface, EventManagerAwareInt
     {
         if ($this->capabilities === null) {
             $this->capabilityMarker = new stdClass();
-            $this->capabilities     = new Capabilities($this->capabilityMarker);
+            $this->capabilities     = new Capabilities($this, $this->capabilityMarker);
         }
         return $this->capabilities;
     }

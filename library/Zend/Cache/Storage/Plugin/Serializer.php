@@ -332,6 +332,7 @@ class Serializer extends AbstractPlugin
 
         if (!isset($this->capabilities[$index])) {
             $this->capabilities[$index] = new Capabilities(
+                $baseCapabilities->getAdapter(),
                 new stdClass(), // marker
                 array('supportedDatatypes' => array(
                     'NULL'     => true,

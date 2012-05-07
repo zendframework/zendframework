@@ -24,6 +24,7 @@ namespace Zend\Cache\Storage\Adapter;
 use ArrayObject,
     Zend\Cache\Exception,
     Zend\Cache\Storage\Event,
+    Zend\EventManager\EventsCapableInterface,
     Zend\Stdlib\Options;
 
 /**
@@ -352,8 +353,8 @@ class AdapterOptions extends Options
     }
 
     /**
-     * Triggers an option.change event
-     * if the this options instance has a connection too an adapter instance
+     * Triggers an option event if this options instance has a connection to
+     * an adapter implements EventsCapableInterface.
      *
      * @param string $optionName
      * @param mixed  $optionValue
@@ -361,12 +362,10 @@ class AdapterOptions extends Options
      */
     protected function triggerOptionEvent($optionName, $optionValue)
     {
-        if (!$this->adapter) {
-            return;
+        if ($this->adapter instanceof EventsCapableInterface) {
+            $event = new Event('option', $this->adapter, new ArrayObject(array($optionName => $optionValue)));
+            $this->adapter->events()->trigger($event);
         }
-
-        $event = new Event('option', $this->adapter, new ArrayObject(array($optionName => $optionValue)));
-        $this->adapter->events()->trigger($event);
     }
 
     /**

@@ -5,10 +5,11 @@ namespace Zend\Mvc;
 use Zend\Di\Locator,
     Zend\EventManager\EventManagerAwareInterface,
     Zend\EventManager\EventManagerAware,
+    Zend\EventManager\EventsCapableInterface,
     Zend\Stdlib\RequestInterface as Request,
     Zend\Stdlib\ResponseInterface as Response;
 
-interface ApplicationInterface extends EventManagerAwareInterface
+interface ApplicationInterface extends EventManagerAwareInterface, EventsCapableInterface
 {
     /**
      * Set a service locator/DI object
@@ -46,44 +47,35 @@ interface ApplicationInterface extends EventManagerAwareInterface
 
     /**
      * Get the locator object
-     * 
+     *
      * @return Locator
      */
     public function getLocator();
 
     /**
      * Get the request object
-     * 
+     *
      * @return Request
      */
     public function getRequest();
 
     /**
      * Get the response object
-     * 
+     *
      * @return Response
      */
     public function getResponse();
 
     /**
      * Get the router object
-     * 
+     *
      * @return Router
      */
     public function getRouter();
 
     /**
-     * Retrieve the event manager
-     *
-     * Lazy-loads an EventManager instance if none registered.
-     * 
-     * @return EventCollection
-     */
-    public function events();
-
-    /**
      * Run the application
-     * 
+     *
      * @return \Zend\Http\Response
      */
     public function run();

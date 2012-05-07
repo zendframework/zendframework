@@ -1,30 +1,18 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Crypt
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Package
  */
-
 namespace Zend\Crypt;
 
-use Zend\Crypt\Exception;
+use Zend\Crypt\Rsa\Exception\RuntimeException,
+    Zend\Crypt\Exception\InvalidArgumentException;
 
 /**
- * @uses       Zend\Crypt\Rsa\PrivateKey
- * @uses       Zend\Crypt\Rsa\PublicKey
  * @category   Zend
  * @package    Zend_Crypt
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -58,12 +46,12 @@ class Rsa
      * Class constructor
      *
      * @param array $options
-     * @throws Zend\Crypt\Rsa\Exception
+     * @throws RuntimeException
      */
     public function __construct(array $options = null)
     {
         if (!extension_loaded('openssl')) {
-            throw new \Zend\Crypt\Rsa\Exception('Zend_Crypt_Rsa requires openssl extention to be loaded.');
+            throw new RuntimeException('Zend\Crypt\Rsa requires openssl extention to be loaded.');
         }
 
         // Set _hashAlgorithm property when we are sure, that openssl extension is loaded
@@ -75,6 +63,12 @@ class Rsa
         }
     }
 
+    /**
+     * Set options
+     *
+     * @param array $options
+     * @return void
+     */
     public function setOptions(array $options)
     {
         if (isset($options['passPhrase'])) {
@@ -113,7 +107,7 @@ class Rsa
 
     /**
      * @param  string $data
-     * @param  Zend\Crypt\Rsa\PrivateKey $privateKey
+     * @param  \Zend\Crypt\Rsa\PrivateKey $privateKey
      * @param  string $format
      * @return string
      */
@@ -232,7 +226,7 @@ class Rsa
         try {
             $this->_privateKey = new Rsa\PrivateKey($this->_pemString, $this->_passPhrase);
             $this->_publicKey = $this->_privateKey->getPublicKey();
-        } catch (Exception $e) {
+        } catch (RuntimeException $e) {
             $this->_privateKey = null;
             $this->_publicKey = new Rsa\PublicKey($this->_pemString);
         }
@@ -257,8 +251,10 @@ class Rsa
     }
 
     /**
+     * Set hash algorithm
+     *
      * @param string $name
-     * @throws \Zend\Crypt\Exception
+     * @throws InvalidArgumentException
      */
     public function setHashAlgorithm($name)
     {
@@ -267,7 +263,7 @@ class Rsa
                 // check if md2 digest is enabled on openssl just for backwards compatibility
                 $digests = openssl_get_md_methods();
                 if (!in_array(strtoupper($name), $digests)) {
-                    throw new Exception('Openssl md2 digest is not enabled  (deprecated)');
+                    throw new InvalidArgumentException('Openssl md2 digest is not enabled  (deprecated)');
                 }
                 $this->_hashAlgorithm = OPENSSL_ALGO_MD2;
                 break;

@@ -38,7 +38,7 @@ class MathTest extends \PHPUnit_Framework_TestCase
     {
         try {
             $math = new \Zend\Crypt\Math\BigInteger();
-        } catch (\Zend\Crypt\Math\BigInteger\Exception $e) {
+        } catch (\Zend\Crypt\Math\BigInteger\Exception\InvalidArgumentException $e) {
             if (strpos($e->getMessage(), 'big integer precision math support not detected') !== false) {
                 $this->markTestSkipped($e->getMessage());
             } else {

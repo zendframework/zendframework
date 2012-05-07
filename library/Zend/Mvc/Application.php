@@ -10,10 +10,8 @@ use ArrayObject,
     Zend\Http\Header\Cookie,
     Zend\Http\PhpEnvironment\Request as PhpHttpRequest,
     Zend\Http\PhpEnvironment\Response as PhpHttpResponse,
-    Zend\Uri\Http as HttpUri,
     Zend\Stdlib\DispatchableInterface as Dispatchable,
     Zend\Stdlib\ArrayUtils,
-    Zend\Stdlib\Parameters,
     Zend\Stdlib\RequestInterface as Request,
     Zend\Stdlib\ResponseInterface as Response;
 

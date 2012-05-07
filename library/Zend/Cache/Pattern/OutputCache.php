@@ -72,8 +72,9 @@ class OutputCache extends AbstractPattern
             throw new Exception\MissingKeyException('Missing key to read/write output from cache');
         }
 
-        $data = $this->getOptions()->getStorage()->getItem($key, $storageOptions);
-        if ($data !== false) {
+        $success = null;
+        $data    = $this->getOptions()->getStorage()->getItem($key, $storageOptions, $success);
+        if ($success) {
             echo $data;
             return true;
         }

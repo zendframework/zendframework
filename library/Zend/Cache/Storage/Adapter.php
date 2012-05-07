@@ -108,12 +108,14 @@ interface Adapter
     /**
      * Get an item.
      *
-     * @param  string $key
-     * @param  array $options
+     * @param  string  $key
+     * @param  array   $options
+     * @param  boolesn $success
+     * @param  mixed   $casToken
      * @return mixed Data on success and false on failure
      * @throws \Zend\Cache\Exception
      */
-    public function getItem($key, array $options = array());
+    public function getItem($key, array $options = array(), & $success = null, & $casToken = null);
 
     /**
      * Get multiple items.

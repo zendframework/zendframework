@@ -109,11 +109,11 @@ class Filesystem extends AbstractAdapter
      *    - The time-to-life (Default: ttl of object)
      *  - namespace <string> optional
      *    - The namespace to use (Default: namespace of object)
-     *  - ignore_missing_items <boolean> optional
-     *    - Throw exception on missing item or return false
      *
-     * @param  string $key
-     * @param  array  $options
+     * @param  string  $key
+     * @param  array   $options
+     * @param  boolean $success
+     * @param  mixed   $casToken
      * @return mixed Data on success and false on failure
      * @throws Exception
      *
@@ -121,14 +121,14 @@ class Filesystem extends AbstractAdapter
      * @triggers getItem.post(PostEvent)
      * @triggers getItem.exception(ExceptionEvent)
      */
-    public function getItem($key, array $options = array())
+    public function getItem($key, array $options = array(), & $success = null, & $casToken = null)
     {
         $baseOptions = $this->getOptions();
         if ($baseOptions->getReadable() && $baseOptions->getClearStatCache()) {
             clearstatcache();
         }
 
-        return parent::getItem($key, $options);
+        return parent::getItem($key, $options, $success, $casToken);
     }
 
     /**
@@ -167,24 +167,19 @@ class Filesystem extends AbstractAdapter
      *    - The time-to-life
      *  - namespace <string>
      *    - The namespace to use
-     *  - ignore_missing_items <boolean>
-     *    - Throw exception on missing item or return false
      *
-     * @param  string $normalizedKey
-     * @param  array  $normalizedOptions
+     * @param  string  $normalizedKey
+     * @param  array   $normalizedOptions
+     * @param  boolean $success
+     * @param  mixed   $casToken
      * @return mixed Data on success or false on failure
      * @throws Exception
      */
-    protected function internalGetItem(& $normalizedKey, array & $normalizedOptions)
+    protected function internalGetItem(& $normalizedKey, array & $normalizedOptions, & $success = null, & $casToken = null)
     {
         if (!$this->internalHasItem($normalizedKey, $normalizedOptions)) {
-            if (!$normalizedOptions['ignore_missing_items']) {
-                throw new Exception\ItemNotFoundException(
-                    "Key '{$normalizedKey}' not found within namespace '{$normalizedOptions['namespace']}'"
-                );
-            }
-
-            return false;
+            $success = false;
+            return null;
         }
 
         try {
@@ -203,14 +198,14 @@ class Filesystem extends AbstractAdapter
                 }
             }
 
-            if (array_key_exists('token', $normalizedOptions)) {
-                // use filemtime + filesize as CAS token
-                $normalizedOptions['token'] = filemtime($filespec . '.dat') . filesize($filespec . '.dat');
-            }
-
+            // use filemtime + filesize as CAS token
+            $casToken = filemtime($filespec . '.dat') . filesize($filespec . '.dat');
+            $success  = true;
             return $data;
 
         } catch (Exception $e) {
+            $success = false;
+
             try {
                 // remove cache file on exception
                 $this->internalRemoveItem($normalizedKey, $normalizedOptions);
@@ -424,17 +419,10 @@ class Filesystem extends AbstractAdapter
      * @param string $normalizedKey
      * @param array  $normalizedOptions
      * @return array|bool
-     * @throws ItemNotFoundException
      */
     protected function internalGetMetadata(& $normalizedKey, array & $normalizedOptions)
     {
         if (!$this->internalHasItem($normalizedKey, $normalizedOptions)) {
-            if (!$normalizedOptions['ignore_missing_items']) {
-                throw new Exception\ItemNotFoundException(
-                    "Key '{$normalizedKey}' not found on namespace '{$normalizedOptions['namespace']}'"
-                );
-            }
-
             return false;
         }
 
@@ -869,7 +857,8 @@ class Filesystem extends AbstractAdapter
             // reset umask
             umask($oldUmask);
 
-            return true;
+            // return OK
+            return array();
 
         } catch (Exception $e) {
             // reset umask on exception
@@ -932,12 +921,6 @@ class Filesystem extends AbstractAdapter
     protected function internalCheckAndSetItem(& $token, & $normalizedKey, & $value, array & $normalizedOptions)
     {
         if (!$this->internalHasItem($normalizedKey, $normalizedOptions)) {
-            if (!$normalizedOptions['ignore_missing_items']) {
-                throw new Exception\ItemNotFoundException(
-                    "Key '{$normalizedKey}' not found within namespace '{$normalizedOptions['namespace']}'"
-                );
-            }
-
             return false;
         }
 
@@ -1020,12 +1003,6 @@ class Filesystem extends AbstractAdapter
     protected function internalTouchItem(& $normalizedKey, array & $normalizedOptions)
     {
         if (!$this->internalHasItem($normalizedKey, $normalizedOptions)) {
-            if (!$normalizedOptions['ignore_missing_items']) {
-                throw new Exception\ItemNotFoundException(
-                    "Key '{$normalizedKey}' not found within namespace '{$normalizedOptions['namespace']}'"
-                );
-            }
-
             return false;
         }
 
@@ -1049,8 +1026,6 @@ class Filesystem extends AbstractAdapter
      * Options:
      *  - namespace <string> optional
      *    - The namespace to use (Default: namespace of object)
-     *  - ignore_missing_items <boolean> optional
-     *    - Throw exception on missing item
      *
      * @param  string $key
      * @param  array  $options
@@ -1077,8 +1052,6 @@ class Filesystem extends AbstractAdapter
      * Options:
      *  - namespace <string> optional
      *    - The namespace to use (Default: namespace of object)
-     *  - ignore_missing_items <boolean> optional
-     *    - Throw exception on missing item
      *
      * @param  array $keys
      * @param  array $options
@@ -1105,8 +1078,6 @@ class Filesystem extends AbstractAdapter
      * Options:
      *  - namespace <string>
      *    - The namespace to use
-     *  - ignore_missing_items <boolean>
-     *    - Throw exception on missing item
      *
      * @param  string $normalizedKey
      * @param  array  $normalizedOptions
@@ -1117,9 +1088,7 @@ class Filesystem extends AbstractAdapter
     {
         $filespec = $this->getFileSpec($normalizedKey, $normalizedOptions);
         if (!file_exists($filespec . '.dat')) {
-            if (!$normalizedOptions['ignore_missing_items']) {
-                throw new Exception\ItemNotFoundException("Key '{$normalizedKey}' with file '{$filespec}.dat' not found");
-            }
+            return false;
         } else {
             $this->unlink($filespec . '.dat');
             $this->unlink($filespec . '.ifo');

@@ -156,28 +156,33 @@ class Memcached extends AbstractAdapter
      * Options:
      *  - namespace <string>
      *    - The namespace to use
-     *  - ignore_missing_items <boolean>
-     *    - Throw exception on missing item or return false
      *
-     * @param  string $normalizedKey
-     * @param  array  $normalizedOptions
+     * @param  string  $normalizedKey
+     * @param  array   $normalizedOptions
+     * @param  boolean $success
+     * @param  mixed   $casToken
      * @return mixed Data on success or false on failure
      * @throws Exception
      */
-    protected function internalGetItem(& $normalizedKey, array & $normalizedOptions)
+    protected function internalGetItem(& $normalizedKey, array & $normalizedOptions, & $success = null, & $casToken = null)
     {
         $this->memcached->setOption(MemcachedResource::OPT_PREFIX_KEY, $normalizedOptions['namespace']);
 
-        if (array_key_exists('token', $normalizedOptions)) {
-            $result = $this->memcached->get($normalizedKey, null, $normalizedOptions['token']);
-        } else {
-            $result = $this->memcached->get($normalizedKey);
-        }
+        // TODO: option to enable CAS feature
+        //if (array_key_exists('token', $normalizedOptions)) {
+            $result = $this->memcached->get($normalizedKey, null, $casToken);
+        //} else {
+        //    $result = $this->memcached->get($normalizedKey);
+        //}
 
-        if ($result === false) {
-            if (($rsCode = $this->memcached->getResultCode()) != 0
-                && ($rsCode != MemcachedResource::RES_NOTFOUND || !$normalizedOptions['ignore_missing_items'])
-            ) {
+        $success = true;
+        if ($result === false || $result === null) {
+            $rsCode = $this->memcached->getResultCode();
+            if ($rsCode == MemcachedResource::RES_NOTFOUND) {
+                $result = null;
+                $success = false;
+            } elseif ($rsCode) {
+                $success = false;
                 throw $this->getExceptionByResultCode($rsCode);
             }
         }
@@ -226,7 +231,7 @@ class Memcached extends AbstractAdapter
         $this->memcached->setOption(MemcachedResource::OPT_PREFIX_KEY, $normalizedOptions['namespace']);
 
         $value = $this->memcached->get($normalizedKey);
-        if ($value === false) {
+        if ($value === false || $value === null) {
             $rsCode = $this->memcached->getResultCode();
             if ($rsCode == MemcachedResource::RES_SUCCESS) {
                 return true;
@@ -261,11 +266,7 @@ class Memcached extends AbstractAdapter
             throw $this->getExceptionByResultCode($this->memcached->getResultCode());
         }
 
-        foreach ($result as $key => & $value) {
-            $value = true;
-        }
-
-        return $result;
+        return array_keys($result);
     }
 
     /**
@@ -352,7 +353,7 @@ class Memcached extends AbstractAdapter
             throw $this->getExceptionByResultCode($this->memcached->getResultCode());
         }
 
-        return true;
+        return array();
     }
 
     /**
@@ -376,6 +377,9 @@ class Memcached extends AbstractAdapter
 
         $expiration = $this->expirationTime($normalizedOptions['ttl']);
         if (!$this->memcached->add($normalizedKey, $value, $expiration)) {
+            if ($this->memcached->getResultCode() == MemcachedResource::RES_NOTSTORED) {
+                return false;
+            }
             throw $this->getExceptionByResultCode($this->memcached->getResultCode());
         }
 
@@ -403,6 +407,9 @@ class Memcached extends AbstractAdapter
 
         $expiration = $this->expirationTime($normalizedOptions['ttl']);
         if (!$this->memcached->replace($normalizedKey, $value, $expiration)) {
+            if ($this->memcached->getResultCode() == MemcachedResource::RES_NOTSTORED) {
+                return false;
+            }
             throw $this->getExceptionByResultCode($this->memcached->getResultCode());
         }
 
@@ -453,8 +460,6 @@ class Memcached extends AbstractAdapter
      * Options:
      *  - namespace <string>
      *    - The namespace to use
-     *  - ignore_missing_items <boolean>
-     *    - Throw exception on missing item
      *
      * @param  string $normalizedKey
      * @param  array  $normalizedOptions
@@ -468,7 +473,9 @@ class Memcached extends AbstractAdapter
 
         if ($result === false) {
             $rsCode = $this->memcached->getResultCode();
-            if ($rsCode != 0 && ($rsCode != MemcachedResource::RES_NOTFOUND || !$normalizedOptions['ignore_missing_items'])) {
+            if ($rsCode == MemcachedResource::RES_NOTFOUND) {
+                return false;
+            } elseif ($rsCode != MemcachedResource::RES_SUCCESS) {
                 throw $this->getExceptionByResultCode($rsCode);
             }
         }
@@ -482,8 +489,6 @@ class Memcached extends AbstractAdapter
      * Options:
      *  - namespace <string>
      *    - The namespace to use
-     *  - ignore_missing_items <boolean>
-     *    - Throw exception on missing item
      *
      * @param  array $keys
      * @param  array $options
@@ -500,9 +505,9 @@ class Memcached extends AbstractAdapter
         $this->memcached->setOption(MemcachedResource::OPT_PREFIX_KEY, $normalizedOptions['namespace']);
         $rsCodes = $this->memcached->deleteMulti($normalizedKeys);
 
-        $missingKeys = null;
+        $missingKeys = array();
         foreach ($rsCodes as $key => $rsCode) {
-            if ($rsCode !== true && $rsCode != 0) {
+            if ($rsCode !== true && $rsCode != MemcachedResource::RES_SUCCESS) {
                 if ($rsCode != MemcachedResource::RES_NOTFOUND) {
                     throw $this->getExceptionByResultCode($rsCode);
                 }
@@ -510,13 +515,7 @@ class Memcached extends AbstractAdapter
             }
         }
 
-        if ($missingKeys && !$normalizedOptions['ignore_missing_items']) {
-            throw new Exception\ItemNotFoundException(
-                "Keys '" . implode("','", $missingKeys) . "' not found within namespace '{$normalizedOptions['namespace']}'"
-            );
-        }
-
-        return true;
+        return $missingKeys;
     }
 
     /**
@@ -527,8 +526,6 @@ class Memcached extends AbstractAdapter
      *    - The time-to-life
      *  - namespace <string>
      *    - The namespace to use
-     *  - ignore_missing_items <boolean>
-     *    - Throw exception on missing item
      *
      * @param  string $normalizedKey
      * @param  int    $value
@@ -545,14 +542,17 @@ class Memcached extends AbstractAdapter
 
         if ($newValue === false) {
             $rsCode = $this->memcached->getResultCode();
-            if ($rsCode != 0 && ($rsCode != MemcachedResource::RES_NOTFOUND || !$normalizedOptions['ignore_missing_items'])) {
-                throw $this->getExceptionByResultCode($rsCode);
+
+            // initial value
+            if ($rsCode == MemcachedResource::RES_NOTFOUND) {
+                $newValue   = $value;
+                $expiration = $this->expirationTime($normalizedOptions['ttl']);
+                $this->memcached->add($normalizedKey, $newValue, $expiration);
+                $rsCode = $this->memcached->getResultCode();
             }
 
-            $newValue   = $value;
-            $expiration = $this->expirationTime($normalizedOptions['ttl']);
-            if (!$this->memcached->add($normalizedKey, $newValue, $expiration)) {
-                throw $this->getExceptionByResultCode($this->memcached->getResultCode());
+            if ($rsCode) {
+                throw $this->getExceptionByResultCode($rsCode);
             }
         }
 
@@ -567,8 +567,6 @@ class Memcached extends AbstractAdapter
      *    - The time-to-life
      *  - namespace <string>
      *    - The namespace to use
-     *  - ignore_missing_items <boolean>
-     *    - Throw exception on missing item
      *
      * @param  string $normalizedKey
      * @param  int    $value
@@ -585,14 +583,17 @@ class Memcached extends AbstractAdapter
 
         if ($newValue === false) {
             $rsCode = $this->memcached->getResultCode();
-            if ($rsCode != 0 && ($rsCode != MemcachedResource::RES_NOTFOUND || !$normalizedOptions['ignore_missing_items'])) {
-                throw $this->getExceptionByResultCode($rsCode);
+
+            // initial value
+            if ($rsCode == MemcachedResource::RES_NOTFOUND) {
+                $newValue   = -$value;
+                $expiration = $this->expirationTime($normalizedOptions['ttl']);
+                $this->memcached->add($normalizedKey, $newValue, $expiration);
+                $rsCode = $this->memcached->getResultCode();
             }
 
-            $newValue   = -$value;
-            $expiration = $this->expirationTime($normalizedOptions['ttl']);
-            if (!$this->memcached->add($normalizedKey, $newValue, $expiration)) {
-                throw $this->getExceptionByResultCode($this->memcached->getResultCode());
+            if ($rsCode) {
+                throw $this->getExceptionByResultCode($rsCode);
             }
         }
 
@@ -840,7 +841,7 @@ class Memcached extends AbstractAdapter
      * Generate exception based of memcached result code
      *
      * @param int $code
-     * @return Exception\RuntimeException|Exception\ItemNotFoundException
+     * @return Exception\RuntimeException
      * @throws Exception\InvalidArgumentException On success code
      */
     protected function getExceptionByResultCode($code)
@@ -850,10 +851,6 @@ class Memcached extends AbstractAdapter
                 throw new Exception\InvalidArgumentException(
                     "The result code '{$code}' (SUCCESS) isn't an error"
                 );
-
-            case MemcachedResource::RES_NOTFOUND:
-            case MemcachedResource::RES_NOTSTORED:
-                return new Exception\ItemNotFoundException($this->memcached->getResultMessage());
 
             default:
                 return new Exception\RuntimeException($this->memcached->getResultMessage());

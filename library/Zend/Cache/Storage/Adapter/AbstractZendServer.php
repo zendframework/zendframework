@@ -50,24 +50,24 @@ abstract class AbstractZendServer extends AbstractAdapter
      * Options:
      *  - namespace <string>
      *    - The namespace to use
-     *  - ignore_missing_items <boolean>
-     *    - Throw exception on missing item or return false
      *
-     * @param  string $normalizedKey
-     * @param  array  $normalizedOptions
+     * @param  string  $normalizedKey
+     * @param  array   $normalizedOptions
+     * @param  boolean $success
+     * @param  mixed   $casToken
      * @return mixed Data on success or false on failure
      * @throws Exception
      */
-    protected function internalGetItem(& $normalizedKey, array & $normalizedOptions)
+    protected function internalGetItem(& $normalizedKey, array & $normalizedOptions, & $success = null, & $casToken = null)
     {
         $internalKey = $normalizedOptions['namespace'] . self::NAMESPACE_SEPARATOR . $normalizedKey;
         $result      = $this->zdcFetch($internalKey);
         if ($result === false) {
-            if (!$normalizedOptions['ignore_missing_items']) {
-                throw new Exception\ItemNotFoundException("Key '{$internalKey}' not found");
-            }
-        } elseif (array_key_exists('token', $normalizedOptions)) {
-            $normalizedOptions['token'] = $result;
+            $success = false;
+            $result  = null;
+        } else {
+            $success  = true;
+            $casToken = $result;
         }
 
         return $result;
@@ -216,8 +216,6 @@ abstract class AbstractZendServer extends AbstractAdapter
      * Options:
      *  - namespace <string>
      *    - The namespace to use
-     *  - ignore_missing_items <boolean>
-     *    - Throw exception on missing item
      *
      * @param  string $normalizedKey
      * @param  array  $normalizedOptions
@@ -227,11 +225,7 @@ abstract class AbstractZendServer extends AbstractAdapter
     protected function internalRemoveItem(& $normalizedKey, array & $normalizedOptions)
     {
         $internalKey = $normalizedOptions['namespace'] . self::NAMESPACE_SEPARATOR . $normalizedKey;
-        if (!$this->zdcDelete($internalKey) && !$normalizedOptions['ignore_missing_items']) {
-            throw new Exception\ItemNotFoundException("Key '{$internalKey}' not found");
-        }
-
-        return true;
+        return $this->zdcDelete($internalKey);
     }
 
     /* cleaning */

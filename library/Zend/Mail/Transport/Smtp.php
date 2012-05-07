@@ -196,7 +196,17 @@ class Smtp implements TransportInterface, Pluggable
     {
         return $this->connection;
     }
-
+    /**
+     * Disconnect the connection protocol instance
+     * 
+     * @return void
+     */
+    public function disconnect()
+    {
+        if (!empty($this->connection) && ($this->connection instanceof Protocol\Smtp)) {
+            $this->connection->disconnect();
+        }
+    }
     /**
      * Send an email via the SMTP connection protocol
      *

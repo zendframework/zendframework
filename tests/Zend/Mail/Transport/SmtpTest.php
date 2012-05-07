@@ -127,4 +127,12 @@ class SmtpTest extends \PHPUnit_Framework_TestCase
         unset($this->transport);
         $this->assertTrue($this->connection->isConnected());
     }
+    
+    public function testDisconnect()
+    {
+        $this->connection->connect();
+        $this->assertTrue($this->connection->isConnected());
+        $this->transport->disconnect();
+        $this->assertFalse($this->connection->isConnected());
+    }
 }

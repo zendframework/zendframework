@@ -308,10 +308,11 @@ abstract class AbstractAdapter implements AdapterInterface, EventsCapableInterfa
      * Register a plugin
      *
      * @param  Plugin\PluginInterface $plugin
+     * @param  int                    $priority
      * @return AbstractAdapter Fluent interface
      * @throws Exception\LogicException
      */
-    public function addPlugin(Plugin\PluginInterface $plugin)
+    public function addPlugin(Plugin\PluginInterface $plugin, $priority = 1)
     {
         $registry = $this->getPluginRegistry();
         if ($registry->contains($plugin)) {
@@ -321,7 +322,7 @@ abstract class AbstractAdapter implements AdapterInterface, EventsCapableInterfa
             ));
         }
 
-        $plugin->attach($this->events());
+        $plugin->attach($this->events(), $priority);
         $registry->attach($plugin);
 
         return $this;

@@ -54,7 +54,7 @@ class SerializerTest extends CommonPluginTest
 
     public function testAddPlugin()
     {
-        $this->_adapter->addPlugin($this->_plugin);
+        $this->_adapter->addPlugin($this->_plugin, 100);
 
         // check attached callbacks
         $expectedListeners = array(
@@ -91,6 +91,15 @@ class SerializerTest extends CommonPluginTest
             $this->assertSame($this->_plugin, $cb[0]);
             $this->assertArrayHasKey(1, $cb);
             $this->assertSame($expectedCallbackMethod, $cb[1]);
+
+            // check expected priority
+            $meta = $listeners->top()->getMetadata();
+            $this->assertArrayHasKey('priority', $meta);
+            if (substr($eventName, -4) == '.pre') {
+                $this->assertSame(100, $meta['priority']);
+            } else {
+                $this->assertSame(-100, $meta['priority']);
+            }
         }
     }
 

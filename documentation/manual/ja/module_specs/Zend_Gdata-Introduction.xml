@@ -55,13 +55,6 @@
             </listitem>
             <listitem>
                 <para>
-                    <link linkend="zend.gdata.gbase">Google Base</link>
-                    は、Google Base のアイテムを取得したり
-                    アイテムを投稿、更新、あるいは削除したりできます。
-                </para>
-            </listitem>
-            <listitem>
-                <para>
                     <link linkend="zend.gdata.youtube">YouTube</link>
                     は、動画やコメント、お気に入り、登録チャンネル、
                     ユーザのプロファイルといった情報を検索して取得できます。

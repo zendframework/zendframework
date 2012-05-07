@@ -62,7 +62,6 @@ class GData extends App
     protected $_registeredPackages = array(
         '\Zend\GData\Kind',
         '\Zend\GData\Extension',
-        '\Zend\GData\GBase',
         '\Zend\GData\App\Extension',
         '\Zend\GData\App'
         );

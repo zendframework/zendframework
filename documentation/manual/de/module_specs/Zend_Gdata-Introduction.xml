@@ -58,13 +58,6 @@
 
             <listitem>
                 <para>
-                    <link linkend="zend.gdata.gbase">Google Base</link> bietet die Möglichkeit
-                    Elemente in Google Base zu empfangen, senden, aktualisieren und zu löschen.
-                </para>
-            </listitem>
-
-            <listitem>
-                <para>
                     <link linkend="zend.gdata.youtube">YouTube</link> bietet die Möglichkeit Videos,
                     Kommentare, Favoriten, Einschreibungen, Benutzerprofile und vieles mehr zu
                     Suchen und zu Empfangen.

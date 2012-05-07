@@ -58,10 +58,10 @@ class EventManager implements EventManagerInterface, SharedEventManagerAwareInte
     protected $identifiers = array();
 
     /**
-     * Shared connections
+     * Shared event manager
      * @var false|null|SharedEventManagerInterface
      */
-    protected $sharedCollections = null;
+    protected $sharedManager = null;
 
     /**
      * Constructor
@@ -90,38 +90,38 @@ class EventManager implements EventManagerInterface, SharedEventManagerAwareInte
     }
 
     /**
-     * Set shared collections container
+     * Set shared event manager
      *
      * @param  SharedEventManagerInterface $connections
      * @return void
      */
-    public function setSharedCollections(SharedEventManagerInterface $sharedEventCollection)
+    public function setSharedManager(SharedEventManagerInterface $sharedEventManager)
     {
-        $this->sharedCollections = $sharedEventCollection;
+        $this->sharedManager = $sharedEventManager;
         return $this;
     }
 
     /**
-     * Remove any shared collections
+     * Remove any shared event manager currently attached
      * 
      * @return void
      */
-    public function unsetSharedCollections()
+    public function unsetSharedManager()
     {
-        $this->sharedCollections = false;
+        $this->sharedManager = false;
     }
 
     /**
-     * Get shared collections container
+     * Get shared event manager
      *
      * @return false|SharedEventManagerInterface
      */
-    public function getSharedCollections()
+    public function getSharedManager()
     {
-        if (null === $this->sharedCollections) {
-            $this->setSharedCollections(StaticEventManager::getInstance());
+        if (null === $this->sharedManager) {
+            $this->setSharedManager(StaticEventManager::getInstance());
         }
-        return $this->sharedCollections;
+        return $this->sharedManager;
     }
 
     /**
@@ -480,7 +480,7 @@ class EventManager implements EventManagerInterface, SharedEventManagerAwareInte
     }
 
     /**
-     * Get list of all listeners attached to the shared collection for
+     * Get list of all listeners attached to the shared event manager for
      * identifiers registered by this instance
      *
      * @param  string $event
@@ -488,7 +488,7 @@ class EventManager implements EventManagerInterface, SharedEventManagerAwareInte
      */
     protected function getSharedListeners($event)
     {
-        if (!$sharedCollections = $this->getSharedCollections()) {
+        if (!$sharedManager = $this->getSharedManager()) {
             return array();
         }
 
@@ -496,7 +496,7 @@ class EventManager implements EventManagerInterface, SharedEventManagerAwareInte
         $sharedListeners = array();
 
         foreach ($identifiers as $id) {
-            if (!$listeners = $sharedCollections->getListeners($id, $event)) {
+            if (!$listeners = $sharedManager->getListeners($id, $event)) {
                 continue;
             }
 

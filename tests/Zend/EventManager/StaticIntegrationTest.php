@@ -52,7 +52,7 @@ class StaticIntegrationTest extends TestCase
             }
         );
         $class = new TestAsset\ClassWithEvents();
-        $class->events()->setSharedCollections($events);
+        $class->events()->setSharedManager($events);
         $class->foo();
         $this->assertEquals(1, $counter->count);
     }
@@ -72,7 +72,7 @@ class StaticIntegrationTest extends TestCase
         $class->events()->attach('foo', function ($e) use ($test) {
             $test->results[] = 'local';
         });
-        $class->events()->setSharedCollections($events);
+        $class->events()->setSharedManager($events);
         $class->foo();
         $this->assertEquals(array('local', 'static'), $test->results);
     }
@@ -99,12 +99,12 @@ class StaticIntegrationTest extends TestCase
         $class->events()->attach('foo', function ($e) use ($test) {
             $test->results[] = 'local3';
         }, 15000); // highest priority
-        $class->events()->setSharedCollections($events);
+        $class->events()->setSharedManager($events);
         $class->foo();
         $this->assertEquals(array('local3', 'static', 'local2', 'local'), $test->results);
     }
 
-    public function testCallingUnsetSharedCollectionsDisablesStaticCollections()
+    public function testCallingUnsetSharedManagerDisablesStaticManager()
     {
         $counter = (object) array('count' => 0);
         StaticEventManager::getInstance()->attach(
@@ -115,7 +115,7 @@ class StaticIntegrationTest extends TestCase
             }
         );
         $class = new TestAsset\ClassWithEvents();
-        $class->events()->unsetSharedCollections();
+        $class->events()->unsetSharedManager();
         $class->foo();
         $this->assertEquals(0, $counter->count);
     }
@@ -132,8 +132,8 @@ class StaticIntegrationTest extends TestCase
         );
         $mockStaticEvents = new TestAsset\StaticEventsMock();
         $class = new TestAsset\ClassWithEvents();
-        $class->events()->setSharedCollections($mockStaticEvents);
-        $this->assertSame($mockStaticEvents, $class->events()->getSharedCollections());
+        $class->events()->setSharedManager($mockStaticEvents);
+        $this->assertSame($mockStaticEvents, $class->events()->getSharedManager());
         $class->foo();
         $this->assertEquals(0, $counter->count);
     }
@@ -154,7 +154,7 @@ class StaticIntegrationTest extends TestCase
         $class->events()->attach('foo', function ($e) use ($test) {
             $test->results[] = 'local';
         }, -100);
-        $class->events()->setSharedCollections($events);
+        $class->events()->setSharedManager($events);
         $class->foo();
         $this->assertEquals(array('static', 'local'), $test->results);
     }

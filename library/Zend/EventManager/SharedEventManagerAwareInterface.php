@@ -33,10 +33,10 @@ namespace Zend\EventManager;
 interface SharedEventManagerAwareInterface
 {
     /**
-     * Inject an EventManager instance
+     * Inject a SharedEventManager instance
      * 
-     * @param  SharedEventManagerInterface $sharedEventCollection
+     * @param  SharedEventManagerInterface $sharedEventManager
      * @return SharedEventManagerAwareInterface
      */
-    public function setSharedCollections(SharedEventManagerInterface $sharedEventCollection);
+    public function setSharedManager(SharedEventManagerInterface $sharedEventManager);
 }

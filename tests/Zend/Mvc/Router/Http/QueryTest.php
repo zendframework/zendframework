@@ -30,6 +30,12 @@ class QueryTest extends TestCase
                 null,
                 array('foo' => 'foo bar')
             ),
+            'nested-params' => array(
+                new Query(),
+                '?foo%5Bbar%5D=baz&foo%5Bbat%5D=foo%20bar',
+                null,
+                array('foo' => array('bar' => 'baz', 'bat' => 'foo bar'))
+            ),
         );
     }
 

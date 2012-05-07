@@ -25,9 +25,6 @@ use Zend\Serializer\Exception\RuntimeException,
     Zend\Serializer\Exception\ExtensionNotLoadedException;
 
 /**
- * @uses       Zend\Serializer\Adapter\AbstractAdapter
- * @uses       Zend\Serializer\Exception\RuntimeException
- * @uses       Zend\Serializer\Exception\ExtensionNotLoadedException
  * @category   Zend
  * @package    Zend_Serializer
  * @subpackage Adapter
@@ -46,7 +43,7 @@ class IgBinary extends AbstractAdapter
      * 
      * @param  array|\Zend\Config\Config $opts 
      * @return void
-     * @throws Zend\Serializer\Exception If igbinary extension is not present
+     * @throws ExtensionNotLoadedException If igbinary extension is not present
      */
     public function __construct($opts = array()) 
     {
@@ -67,7 +64,7 @@ class IgBinary extends AbstractAdapter
      * @param  mixed $value 
      * @param  array $opts 
      * @return string
-     * @throws Zend\Serializer\Exception on igbinary error
+     * @throws RuntimeException on igbinary error
      */
     public function serialize($value, array $opts = array())
     {
@@ -85,7 +82,7 @@ class IgBinary extends AbstractAdapter
      * @param  string|binary $serialized 
      * @param  array $opts 
      * @return mixed
-     * @throws Zend\Serializer\Exception on igbinary error
+     * @throws RuntimeException on igbinary error
      */
     public function unserialize($serialized, array $opts = array())
     {

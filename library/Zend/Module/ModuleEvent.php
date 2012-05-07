@@ -1,5 +1,12 @@
 <?php
-
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Module
+ */
 namespace Zend\Module;
 
 use Zend\EventManager\Event,
@@ -7,11 +14,10 @@ use Zend\EventManager\Event,
 
 /**
  * Custom event for use with module manager
- *
  * Composes Module objects
  *
- * @copyright Copyright (C) 2006-Present, Zend Technologies, Inc.
- * @license New BSD {@link http://framework.zend.com/license}
+ * @category Zend
+ * @package  Zend_Module
  */
 class ModuleEvent extends Event
 {
@@ -28,7 +34,7 @@ class ModuleEvent extends Event
     /**
      * Set the name of a given module
      *
-     * @param string $moduleName
+     * @param  string $moduleName
      * @return ModuleEvent
      */
     public function setModuleName($moduleName)

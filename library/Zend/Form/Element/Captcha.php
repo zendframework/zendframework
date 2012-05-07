@@ -22,7 +22,7 @@
 namespace Zend\Form\Element;
 
 use ReflectionClass,
-    Zend\Captcha\Adapter as CaptchaAdapter,
+    Zend\Captcha\AdapterInterface as CaptchaAdapter,
     Zend\View\Renderer as View,
     Zend\Loader\PrefixPathLoader as PluginLoader;
 
@@ -51,14 +51,14 @@ class Captcha extends Xhtml
     /**
      * Captcha adapter
      *
-     * @var \Zend\Captcha\Adapter
+     * @var \Zend\Captcha\Adapter\AdapterInterface
      */
     protected $_captcha;
 
     /**
      * Get captcha adapter
      *
-     * @return \Zend\Captcha\Adapter
+     * @return \Zend\Captcha\Adapter\AdapterInterface
      */
     public function getCaptcha()
     {
@@ -68,7 +68,7 @@ class Captcha extends Xhtml
     /**
      * Set captcha adapter
      *
-     * @param string|array|\Zend\Captcha\Adapter $captcha
+     * @param string|array|\Zend\Captcha\Adapter\AdapterInterface $captcha
      * @param array $options
      */
     public function setCaptcha($captcha, $options = array())

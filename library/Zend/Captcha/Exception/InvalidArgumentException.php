@@ -20,7 +20,6 @@
 
 namespace Zend\Captcha\Exception;
 
-use Zend\Captcha\Exception;
 
 /**
  * @category   Zend
@@ -30,6 +29,6 @@ use Zend\Captcha\Exception;
  */
 class InvalidArgumentException
     extends \InvalidArgumentException
-    implements Exception
+    implements ExceptionInterface
 {
 }

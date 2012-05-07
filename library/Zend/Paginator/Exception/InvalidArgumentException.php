@@ -23,7 +23,6 @@
 namespace Zend\Paginator\Exception;
 
 /**
- * @uses       Zend\Paginator\Exception
  * @category   Zend
  * @package    Zend\Paginator
  * @subpackage Exception

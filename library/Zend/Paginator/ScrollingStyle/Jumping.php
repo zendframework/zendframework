@@ -20,6 +20,7 @@
 
 namespace Zend\Paginator\ScrollingStyle;
 
+use Zend\Paginator;
 use Zend\Paginator\ScrollingStyle;
 
 /**
@@ -27,7 +28,6 @@ use Zend\Paginator\ScrollingStyle;
  * of the page range, the page range "jumps" to the next section, and
  * the cursor moves back to the beginning of the range.
  *
- * @uses       \Zend\Paginator\ScrollingStyle
  * @category   Zend
  * @package    Zend_Paginator
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -42,7 +42,7 @@ class Jumping implements ScrollingStyle
      * @param  integer $pageRange Unused
      * @return array
      */
-    public function getPages(\Zend\Paginator\Paginator $paginator, $pageRange = null)
+    public function getPages(Paginator\Paginator $paginator, $pageRange = null)
     {
         $pageRange  = $paginator->getPageRange();
         $pageNumber = $paginator->getCurrentPageNumber();

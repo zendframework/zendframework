@@ -23,7 +23,6 @@ namespace Zend\Paginator\Adapter;
 use Zend\Paginator\Adapter;
 
 /**
- * @uses       \Zend\Paginator\Adapter
  * @category   Zend
  * @package    Zend_Paginator
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -41,7 +40,7 @@ class Null implements Adapter
     /**
      * Constructor.
      *
-     * @param array $count Total item count
+     * @param integer $count Total item count (Optional)
      */
     public function __construct($count = 0)
     {;

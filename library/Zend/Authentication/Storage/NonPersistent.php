@@ -21,8 +21,6 @@
 
 namespace Zend\Authentication\Storage;
 
-use Zend\Authentication\Storage as AuthenticationStorage;
-
 /**
  * Non-Persistent Authentication Storage
  *
@@ -37,7 +35,7 @@ use Zend\Authentication\Storage as AuthenticationStorage;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class NonPersistent implements AuthenticationStorage
+class NonPersistent implements StorageInterface
 {
     /**
      * Holds the actual auth data

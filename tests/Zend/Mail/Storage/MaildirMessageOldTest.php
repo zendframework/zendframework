@@ -58,7 +58,7 @@ class MaildirMessageOldTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->_originalMaildir = __DIR__ . '/../_files/test.maildir/';
-        if (!is_dir($this->_originalMaildir . '/cur/')) {
+        if (!constant('TESTS_ZEND_MAIL_MAILDIR_ENABLED')) {
             $this->markTestSkipped('You have to unpack maildir.tar in Zend/Mail/_files/test.maildir/ '
                                  . 'directory before enabling the maildir tests');
             return;

@@ -21,8 +21,7 @@
 
 namespace Zend\Mail\Storage\Message;
 
-use Zend\Mail\Storage\MailMessage,
-    Zend\Mail\Storage\Part\File as FilePart;
+use Zend\Mail\Storage\Part;
 
 /**
  * @category   Zend
@@ -30,7 +29,7 @@ use Zend\Mail\Storage\MailMessage,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class File extends FilePart implements MailMessage
+class File extends Part\File implements MessageInterface
 {
     /**
      * flags for this message
@@ -44,8 +43,8 @@ class File extends FilePart implements MailMessage
      * In addition to the parameters of Zend_Mail_Part::__construct() this constructor supports:
      * - flags array with flags for message, keys are ignored, use constants defined in Zend_Mail_Storage
      *
-     * @param  string $rawMessage  full message with or without headers
-     * @throws \Zend\Mail\Storage\Exception
+     * @param  array $params
+     * @throws \Zend\Mail\Storage\Exception\ExceptionInterface
      */
     public function __construct(array $params)
     {

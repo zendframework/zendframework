@@ -24,7 +24,6 @@ namespace Zend\Paginator;
 /**
  * Interface for pagination adapters.
  *
- * @uses       Countable
  * @category   Zend
  * @package    Paginator
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

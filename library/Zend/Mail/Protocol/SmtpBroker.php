@@ -43,13 +43,13 @@ class SmtpBroker extends PluginBroker
      * Determine if we have a valid extension
      * 
      * @param  mixed $plugin 
-     * @return true
-     * @throws Exception\InvalidHelperException
+     * @return boolean
+     * @throws Exception\InvalidArgumentException
      */
     protected function validatePlugin($plugin)
     {
         if (!$plugin instanceof Smtp) {
-            throw new Exception\InvalidHelperException(
+            throw new Exception\InvalidArgumentException(
                 'SMTP authentication plugins must extend the base SMTP protocol class'
             );
         }

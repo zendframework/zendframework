@@ -23,10 +23,9 @@ namespace Zend\Log\Writer;
 
 use Zend\Log\Formatter\Simple as SimpleFormatter,
     Zend\Log\Exception,
-    Zend\Mail\Message,
+    Zend\Mail\Message as MailMessage,
     Zend\Mail\Transport,
-    Zend\Mail\Transport\Exception as MailException,
-    Zend\Mail\Transport\Sendmail as SendmailTransport;
+    Zend\Mail\Transport\Exception as TransportException;
 
 /**
  * Class used for writing log messages to email via Zend\Mail.
@@ -34,7 +33,8 @@ use Zend\Log\Formatter\Simple as SimpleFormatter,
  * Allows for emailing log messages at and above a certain level via a
  * Zend\Mail\Message object.  Note that this class only sends the email upon
  * completion, so any log entries accumulated are sent in a single email.
- * The email is sent using a Zend\Mail\Transport object (Sendmail is default).
+ * The email is sent using a Zend\Mail\Transport\TransportInterface object
+ * (Sendmail is default).
  * 
  * @category   Zend
  * @package    Zend_Log
@@ -55,14 +55,14 @@ class Mail extends AbstractWriter
     /**
      * Mail message instance to use
      *
-     * @var Message
+     * @var MailMessage
      */
     protected $mail;
 
     /**
      * Mail transport instance to use; optional.
      *
-     * @var Transport
+     * @var Transport\TransportInterface
      */
     protected $transport;
 
@@ -87,17 +87,17 @@ class Mail extends AbstractWriter
     /**
      * Constructor
      * 
-     * @param  Message $mail
-     * @param  Transport $transport
+     * @param  MailMessage $mail
+     * @param  Transport\TransportInterface $transport Optional
      */
-    public function __construct(Message $mail, Transport $transport = null)
+    public function __construct(MailMessage $mail, Transport\TransportInterface $transport = null)
     {
         $this->mail = $mail;
         if (null !== $transport) {
             $this->setTransport($transport);
         } else {
             // default transport
-            $this->setTransport(new SendmailTransport());
+            $this->setTransport(new Transport\Sendmail());
         }
         $this->formatter = new SimpleFormatter();
     }
@@ -105,10 +105,10 @@ class Mail extends AbstractWriter
     /**
      * Set the transport message
      *
-     * @param  Transport $layout
+     * @param  Transport\TransportInterface $transport
      * @return Mail
      */
-    public function setTransport(Transport $transport)
+    public function setTransport(Transport\TransportInterface $transport)
     {
         $this->transport = $transport;
         return $this;
@@ -118,7 +118,6 @@ class Mail extends AbstractWriter
      * Places event line into array of lines to be used as message body.
      *
      * @param array $event Event data
-     * @return void
      */
     protected function doWrite(array $event)
     {
@@ -144,7 +143,6 @@ class Mail extends AbstractWriter
      *
      * @param  string $subject Subject prepend text
      * @return Mail
-     * @throws Exception\RuntimeException
      */
     public function setSubjectPrependText($subject)
     {
@@ -155,8 +153,6 @@ class Mail extends AbstractWriter
     /**
      * Sends mail to recipient(s) if log entries are present.  Note that both
      * plaintext and HTML portions of email are handled here.
-     *
-     * @return void
      */
     public function shutdown()
     {
@@ -181,7 +177,7 @@ class Mail extends AbstractWriter
         // stack frame.
         try {
             $this->transport->send($this->mail);
-        } catch (MailException $e) {
+        } catch (TransportException\ExceptionInterface $e) {
             trigger_error(
                 "unable to send log entries via email; " .
                     "message = {$e->getMessage()}; " .

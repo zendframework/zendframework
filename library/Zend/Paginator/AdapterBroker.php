@@ -38,7 +38,7 @@ class AdapterBroker extends PluginBroker
     protected $defaultClassLoader = 'Zend\Paginator\AdapterLoader';
 
     /**
-     * @var boolean Adapters must not be registred on load
+     * @var boolean Adapters must not be registered on load
      */
     protected $registerPluginsOnLoad = false;
 
@@ -46,13 +46,13 @@ class AdapterBroker extends PluginBroker
      * Determine if we have a valid adapter
      * 
      * @param  mixed $plugin 
-     * @return true
-     * @throws Exception
+     * @return bool
+     * @throws Exception\InvalidArgumentException
      */
     protected function validatePlugin($plugin)
     {
         if (!$plugin instanceof Adapter) {
-            throw new Exception('Pagination adapters must implement Zend\Paginator\Adapter');
+            throw new Exception\InvalidArgumentException('Pagination adapters must implement Zend\Paginator\Adapter');
         }
         return true;
     }

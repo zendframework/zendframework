@@ -19,10 +19,10 @@
  */
 
 namespace Zend\Paginator\Adapter;
-      use Zend\Paginator\Adapter;
+
+use Zend\Paginator\Adapter;
 
 /**
- * @uses       \Zend\Paginator\Adapter
  * @category   Zend
  * @package    Paginator
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

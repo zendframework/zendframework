@@ -99,7 +99,7 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
     {
         $this->response->setVersion('2.0');
         $this->assertEquals('2.0', $this->response->getVersion());
-        foreach (array('a', 1, '1.0', array(), true) as $version) {
+        foreach (array('a', 1, '1.0', true) as $version) {
             $this->response->setVersion($version);
             $this->assertNull($this->response->getVersion());
         }

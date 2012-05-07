@@ -51,7 +51,7 @@ class Server extends AbstractServer
     /**
      * @var bool Flag; allow overwriting existing methods when creating server definition
      */
-    protected $_overwriteExistingMethods = true;
+    protected $overwriteExistingMethods = true;
 
     /**
      * Request object

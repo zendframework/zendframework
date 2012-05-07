@@ -26,9 +26,6 @@ use Zend\Search\Lucene,
 	Zend\Search\Lucene\Search\Exception\QueryParserException;
 
 /**
- * @uses       \Zend\Search\Lucene\Exception\UnexpectedValueException
- * @uses 	   \Zend\Search\Lucene\Search\Exception\QueryParserException
- * @uses       \Zend\Search\Lucene\Search\Query
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Search

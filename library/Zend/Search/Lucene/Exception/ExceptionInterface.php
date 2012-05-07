@@ -18,7 +18,14 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Search\Lucene\Document;
+namespace Zend\Search\Lucene\Exception;
 
-interface Exception extends \Zend\Search\Lucene\Exception
+/**
+ * @category   Zend
+ * @package    Zend_Search_Lucene
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
+interface ExceptionInterface extends \Zend\Search\Exception\ExceptionInterface
 {}
+

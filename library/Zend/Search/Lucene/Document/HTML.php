@@ -23,20 +23,13 @@ namespace Zend\Search\Lucene\Document;
 
 use Zend\Search\Lucene\Document,
     Zend\Search\Lucene,
-    Zend\Search\Lucene\Analysis\Analyzer,
+    Zend\Search\Lucene\Analysis\Analyzer\AnalyzerInterface,
     Zend\Search\Lucene\Exception\RuntimeException,
     Zend\Search\Lucene\Exception\InvalidArgumentException;
 
 /**
  * HTML document.
  *
- * @uses       DOMDocument
- * @uses       DOMXPath
- * @uses       \Zend\Search\Lucene\Analysis\Analyzer
- * @uses       \Zend\Search\Lucene\Document
- * @uses       \Zend\Search\Lucene\Document\Field
- * @uses       \Zend\Search\Lucene\Exception\RuntimeException
- * @uses       \Zend\Search\Lucene\Exception\InvalidArgumentException
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Document

@@ -30,7 +30,6 @@ use Zend\Search\Lucene;
  * Note that terms may represent more than words from text fields, but also
  * things like dates, email addresses, urls, etc.
  *
- * @uses       \Zend\Search\Lucene;
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Index

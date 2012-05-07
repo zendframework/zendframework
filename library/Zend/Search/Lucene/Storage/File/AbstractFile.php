@@ -25,15 +25,13 @@ use Zend\Search\Lucene\Storage\File,
     Zend\Search\Lucene;
 
 /**
- * @uses       \Zend\Search\Lucene\Exception\InvalidArgumentException
- * @uses       \Zend\Search\Lucene\Exception\RuntimeException
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Storage
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class AbstractFile implements File
+abstract class AbstractFile implements FileInterface
 {
     /**
      * Reads a byte from the current position in the file

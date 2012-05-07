@@ -26,11 +26,6 @@ use Zend\Search\Lucene,
 	Zend\Search\Lucene\Exception\RuntimeException;
 
 /**
- * @uses       \Zend\Search\Lucene\Exception\RuntimeException
- * @uses       \Zend\Search\Lucene\Document\Field
- * @uses       \Zend\Search\Lucene\Index\SegmentInfo
- * @uses       \Zend\Search\Lucene\Index\SegmentWriter\StreamWriter
- * @uses       \Zend\Search\Lucene\Index\TermsPriorityQueue
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Index

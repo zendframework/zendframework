@@ -26,12 +26,6 @@ use Zend\Search\Lucene\Document;
 use Zend\Search\Lucene\Storage\File;
 
 /**
- * @uses       \Zend\Search\Lucene\Index\FieldInfo
- * @uses       \Zend\Search\Lucene\Index\Term
- * @uses       \Zend\Search\Lucene\Index\TermInfo
- * @uses       \Zend\Search\Lucene\Storage\Directory
- * @uses       \Zend\Search\Lucene\Storage\File;
- * @uses       \Zend\Search\Lucene\Document;
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Index

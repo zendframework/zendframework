@@ -25,8 +25,6 @@ use Zend\Search\Lucene\Analysis\TokenFilter;
 
 
 /**
- * @uses       \Zend\Search\Lucene\Analysis\Analyzer\Common\Utf8Num\Utf8Num
- * @uses       \Zend\Search\Lucene\Analysis\TokenFilter\LowerCaseUtf8
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Analysis

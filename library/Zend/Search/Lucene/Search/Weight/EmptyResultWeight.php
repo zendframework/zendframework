@@ -22,7 +22,6 @@
 namespace Zend\Search\Lucene\Search\Weight;
 
 /**
- * @uses       \Zend\Search\Lucene\Search\Weight\AbstractWeight
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Search

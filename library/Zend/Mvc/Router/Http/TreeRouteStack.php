@@ -27,7 +27,7 @@ use Zend\Mvc\Router\Exception,
     Zend\Mvc\Router\SimpleRouteStack,
     Zend\Mvc\Router\RouteInterface as BaseRoute,
     Zend\Mvc\Router\Http\RouteInterface,
-    Zend\Stdlib\RequestDescription as Request,
+    Zend\Stdlib\RequestInterface as Request,
     Zend\Uri\Http as HttpUri;
 
 /**

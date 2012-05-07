@@ -20,7 +20,7 @@
 
 namespace Zend\Http\Client;
 
-use Zend\Stdlib\ParametersDescription,
+use Zend\Stdlib\ParametersInterface,
     Zend\Uri,
     Zend\Http\Header\Cookie,
     Zend\Http\Response;
@@ -48,7 +48,7 @@ use Zend\Stdlib\ParametersDescription,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Cookies //implements ParametersDescription
+class Cookies //implements ParametersInterface
 {
     /**
      * Return cookie(s) as a Zend\Http\Header\Cookie object

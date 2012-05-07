@@ -22,8 +22,8 @@ namespace Zend\View;
 
 use ArrayAccess,
     Zend\EventManager\Event,
-    Zend\Stdlib\RequestDescription as Request,
-    Zend\Stdlib\ResponseDescription as Response,
+    Zend\Stdlib\RequestInterface as Request,
+    Zend\Stdlib\ResponseInterface as Response,
     Zend\View\Model\ModelInterface as Model,
     Zend\View\Renderer\RendererInterface as Renderer;
 

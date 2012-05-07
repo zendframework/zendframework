@@ -4,8 +4,9 @@ namespace Zend\Mvc;
 
 use Zend\Di\Locator,
     Zend\EventManager\EventManagerAwareInterface,
-    Zend\Stdlib\RequestDescription as Request,
-    Zend\Stdlib\ResponseDescription as Response;
+    Zend\EventManager\EventManagerAware,
+    Zend\Stdlib\RequestInterface as Request,
+    Zend\Stdlib\ResponseInterface as Response;
 
 interface ApplicationInterface extends EventManagerAwareInterface
 {

@@ -95,7 +95,7 @@ class ActionControllerTest extends TestCase
         $response = new Response();
         $response->setContent('short circuited!');
         $events = new SharedEventManager();
-        $events->attach('Zend\Stdlib\Dispatchable', 'dispatch', function($e) use ($response) {
+        $events->attach('Zend\Stdlib\DispatchableInterface', 'dispatch', function($e) use ($response) {
             return $response;
         }, 10);
         $this->controller->events()->setSharedManager($events);

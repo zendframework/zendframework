@@ -23,7 +23,7 @@ namespace ZendTest\Mvc\Router\TestAsset;
 
 use Zend\Mvc\Router\RouteInterface,
     Zend\Mvc\Router\RouteMatch,
-    Zend\Stdlib\RequestDescription as Request;
+    Zend\Stdlib\RequestInterface;
 
 /**
  * Dummy route.
@@ -40,10 +40,10 @@ class DummyRoute implements RouteInterface
      * match(): defined by RouteInterface interface.
      *
      * @see    Route::match()
-     * @param  Request $request
+     * @param  RequestInterface $request
      * @return RouteMatch
      */
-    public function match(Request $request)
+    public function match(RequestInterface $request)
     {
         return new RouteMatch(array());
     }

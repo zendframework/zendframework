@@ -24,7 +24,7 @@ use ArrayAccess,
     ArrayIterator,
     Traversable,
     Zend\Stdlib\ArrayUtils,
-    Zend\Stdlib\RequestDescription as Request;
+    Zend\Stdlib\RequestInterface as Request;
 
 /**
  * Simple route stack implementation.

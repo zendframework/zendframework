@@ -14,9 +14,9 @@ use Zend\Di\Locator,
     Zend\Mvc\InjectApplicationEventInterface,
     Zend\Mvc\LocatorAwareInterface,
     Zend\Mvc\MvcEvent,
-    Zend\Stdlib\Dispatchable,
-    Zend\Stdlib\RequestDescription as Request,
-    Zend\Stdlib\ResponseDescription as Response,
+    Zend\Stdlib\DispatchableInterface as Dispatchable,
+    Zend\Stdlib\RequestInterface as Request,
+    Zend\Stdlib\ResponseInterface as Response,
     Zend\View\Model\ViewModel;
 
 /**
@@ -157,12 +157,12 @@ abstract class ActionController implements
      * Set the event manager instance used by this context
      *
      * @param  EventManagerInterface $events
-     * @return AppContext
+     * @return ActionController
      */
     public function setEventManager(EventManagerInterface $events)
     {
         $events->setIdentifiers(array(
-            'Zend\Stdlib\Dispatchable',
+            'Zend\Stdlib\DispatchableInterface',
             __CLASS__,
             get_class($this)
         ));

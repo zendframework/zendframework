@@ -24,7 +24,7 @@ namespace Zend\Mvc\View;
 use Zend\EventManager\EventManagerInterface,
     Zend\EventManager\ListenerAggregate,
     Zend\Mvc\MvcEvent,
-    Zend\Stdlib\ResponseDescription as Response,
+    Zend\Stdlib\ResponseInterface as Response,
     Zend\View\Model\ModelInterface as ViewModel,
     Zend\View\View;
 

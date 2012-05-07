@@ -26,7 +26,7 @@ use Zend\EventManager\EventManagerInterface,
     Zend\Http\Response as HttpResponse,
     Zend\Mvc\Application,
     Zend\Mvc\MvcEvent,
-    Zend\Stdlib\ResponseDescription as Response,
+    Zend\Stdlib\ResponseInterface as Response,
     Zend\View\Model\ViewModel;
 
 /**

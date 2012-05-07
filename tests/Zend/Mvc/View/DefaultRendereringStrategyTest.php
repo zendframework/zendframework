@@ -55,6 +55,8 @@ class DefaultRenderingStrategyTest extends TestCase
     protected $request;
     protected $response;
     protected $view;
+    protected $renderer;
+    protected $strategy;
 
     public function setUp()
     {

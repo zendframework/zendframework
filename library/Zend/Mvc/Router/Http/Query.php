@@ -25,7 +25,7 @@ use Zend\Mvc\Router\Http\RouteMatch;
 
 use Traversable,
     Zend\Stdlib\ArrayUtils,
-    Zend\Stdlib\RequestDescription as Request,
+    Zend\Stdlib\RequestInterface as Request,
     Zend\Mvc\Router\Exception;
 
 /**

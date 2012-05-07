@@ -427,7 +427,7 @@ abstract class AbstractAdapter
     public function addValidators(array $validators, $files = null)
     {
         foreach ($validators as $name => $validatorInfo) {
-            if ($validatorInfo instanceof Validator\Validator) {
+            if ($validatorInfo instanceof Validator\ValidatorInterface) {
                 $this->addValidator($validatorInfo, null, null, $files);
             } else if (is_string($validatorInfo)) {
                 if (!is_int($name)) {

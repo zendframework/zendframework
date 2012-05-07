@@ -1521,7 +1521,7 @@ class My_FeedReader_Extension_JungleBooks_Entry
             <programlisting language="php"><![CDATA[
 if(!Zend_Feed_Reader::isRegistered('JungleBooks')) {
     Zend_Feed_Reader::addPrefixPath(
-        '/path/to/My/FeedReader/Extension', 'My_FeedReader_Extension'
+        'My_FeedReader_Extension', '/path/to/My/FeedReader/Extension'
     );
     Zend_Feed_Reader::registerExtension('JungleBooks');
 }
@@ -1578,7 +1578,7 @@ class My_FeedReader_Extension_JungleBooks_Feed
             <programlisting language="php"><![CDATA[
 if(!Zend_Feed_Reader::isRegistered('JungleBooks')) {
     Zend_Feed_Reader::addPrefixPath(
-        '/path/to/My/FeedReader/Extension', 'My_FeedReader_Extension'
+        'My_FeedReader_Extension', '/path/to/My/FeedReader/Extension'
     );
     Zend_Feed_Reader::registerExtension('JungleBooks');
 }

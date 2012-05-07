@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend\Cloud\StorageService\Adapter
+ * @package    ZendTest_Cloud_StorageService_Adapter
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -32,7 +32,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
 
 /**
  * @category   Zend
- * @package    Zend\Cloud\StorageService\Adapter
+ * @package    ZendTest_Cloud_StorageService_Adapter
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -49,8 +49,8 @@ class NirvanixTest extends TestCase
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit_Framework_TestSuite(__CLASS__);
+        $result = \PHPUnit_TextUI_TestRunner::run($suite);
     }
 
     public function testFetchItemStream()
@@ -88,12 +88,12 @@ class NirvanixTest extends TestCase
             $this->markTestSkipped("Nirvanix access not configured, skipping test");
         }
 
-        $config = new Zend\Config\Config(array(
-            Zend\Cloud\StorageService\Factory::STORAGE_ADAPTER_KEY       => 'Zend\Cloud\StorageService\Adapter\Nirvanix',
-            Zend\Cloud\StorageService\Adapter\Nirvanix::USERNAME         => constant('TESTS_ZEND_SERVICE_NIRVANIX_ONLINE_USERNAME'),
-            Zend\Cloud\StorageService\Adapter\Nirvanix::APP_KEY          => constant('TESTS_ZEND_SERVICE_NIRVANIX_ONLINE_ACCESSKEY'),
-            Zend\Cloud\StorageService\Adapter\Nirvanix::PASSWORD         => constant('TESTS_ZEND_SERVICE_NIRVANIX_ONLINE_PASSWORD'),
-            Zend\Cloud\StorageService\Adapter\Nirvanix::REMOTE_DIRECTORY => constant('TESTS_ZEND_CLOUD_STORAGE_NIRVANIX_DIRECTORY'),
+        $config = new \Zend\Config\Config(array(
+            \Zend\Cloud\StorageService\Factory::STORAGE_ADAPTER_KEY       => 'Zend\Cloud\StorageService\Adapter\Nirvanix',
+            \Zend\Cloud\StorageService\Adapter\Nirvanix::USERNAME         => constant('TESTS_ZEND_SERVICE_NIRVANIX_ONLINE_USERNAME'),
+            \Zend\Cloud\StorageService\Adapter\Nirvanix::APP_KEY          => constant('TESTS_ZEND_SERVICE_NIRVANIX_ONLINE_ACCESSKEY'),
+            \Zend\Cloud\StorageService\Adapter\Nirvanix::PASSWORD         => constant('TESTS_ZEND_SERVICE_NIRVANIX_ONLINE_PASSWORD'),
+            \Zend\Cloud\StorageService\Adapter\Nirvanix::REMOTE_DIRECTORY => constant('TESTS_ZEND_CLOUD_STORAGE_NIRVANIX_DIRECTORY'),
         ));
 
         return $config;

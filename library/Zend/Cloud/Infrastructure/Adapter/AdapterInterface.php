@@ -1,7 +1,7 @@
 <?php
 /**
  * @category   Zend
- * @package    Zend\Cloud
+ * @package    Zend_Cloud
  * @subpackage Infrastructure
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -10,17 +10,17 @@
 /**
  * namespace
  */
-namespace Zend\Cloud\Infrastructure;
+namespace Zend\Cloud\Infrastructure\Adapter;
 
 /**
  * Adapter interface for infrastructure service
  * 
- * @package    Zend\Cloud
+ * @package    Zend_Cloud
  * @subpackage Infrastructure
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Adapter 
+interface AdapterInterface
 { 
     const HTTP_ADAPTER = 'http_adapter'; 
 
@@ -37,7 +37,7 @@ interface Adapter
     /**
      * Return a list of the available instances
      *
-     * @return InstanceList
+     * @return \Zend\Cloud\Infrastructure\InstanceList
      */ 
     public function listInstances(); 
  
@@ -111,7 +111,7 @@ interface Adapter
     /**
      * Return all the available instances images
      *
-     * @return ImageList
+     * @return \Zend\Cloud\Infrastructure\ImageList
      */ 
     public function imagesInstance(); 
     
@@ -159,7 +159,7 @@ interface Adapter
     /**
      * Get the last HTTP response
      * 
-     * @return Zend\Http\Response
+     * @return \Zend\Http\Response
      */
     public function getLastHttpResponse();
     

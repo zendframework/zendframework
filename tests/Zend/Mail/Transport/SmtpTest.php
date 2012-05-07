@@ -101,4 +101,38 @@ class SmtpTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('matthew', $connection->getUsername());
         $this->assertEquals('password', $connection->getPassword());
     }
+    
+    public function testSetAutoDisconnect()
+    {
+        $this->transport->setAutoDisconnect(false);
+        $this->assertFalse($this->transport->getAutoDisconnect());
+    }
+    
+    public function testGetDefaultAutoDisconnectValue()
+    {
+        $this->assertTrue($this->transport->getAutoDisconnect());
+    }
+    
+    public function testAutoDisconnectTrue()
+    {
+        $this->connection->connect();
+        unset($this->transport);
+        $this->assertFalse($this->connection->isConnected());
+    }
+    
+    public function testAutoDisconnectFalse()
+    {
+        $this->connection->connect();
+        $this->transport->setAutoDisconnect(false);
+        unset($this->transport);
+        $this->assertTrue($this->connection->isConnected());
+    }
+    
+    public function testDisconnect()
+    {
+        $this->connection->connect();
+        $this->assertTrue($this->connection->isConnected());
+        $this->transport->disconnect();
+        $this->assertFalse($this->connection->isConnected());
+    }
 }

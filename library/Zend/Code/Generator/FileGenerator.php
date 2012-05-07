@@ -128,7 +128,7 @@ class FileGenerator extends AbstractGenerator
                     $bodyReturn[] = str_replace(
                         '?',
                         $class->getName(),
-                        '/* Zend_CodeGenerator_Php_File-ClassMarker: {?} */'
+                        '/* Zend_Code_Generator_Php_File-ClassMarker: {?} */'
                     );
 
                     $lineNum = $classEndLine;
@@ -162,7 +162,7 @@ class FileGenerator extends AbstractGenerator
                     $bodyReturn[] = str_replace(
                         '?',
                         $class->getName(),
-                        '/* Zend_CodeGenerator_Php_File-DocblockMarker */'
+                        '/* Zend_Code_Generator_FileGenerator-DocblockMarker */'
                     );
                     $lineNum = $docblock->getEndLine();
                 } else {
@@ -484,7 +484,7 @@ class FileGenerator extends AbstractGenerator
         }
 
         // if there are markers, put the body into the output
-        if (preg_match('#/\* Zend_CodeGenerator_Php_File-(.*?)Marker:#', $body)) {
+        if (preg_match('#/\* Zend_Code_Generator_FileGenerator-(.*?)Marker:#', $body)) {
             $output .= $body;
             $body    = '';
         }
@@ -493,7 +493,7 @@ class FileGenerator extends AbstractGenerator
         if (null !== ($docblock = $this->getDocblock())) {
             $docblock->setIndentation('');
 
-            if (preg_match('#/* Zend_CodeGenerator_Php_File-DocblockMarker */#', $output)) {
+            if (preg_match('#/* Zend_Code_Generator_FileGenerator-DocblockMarker */#', $output)) {
                 $output = preg_replace('#/* Zend_CodeGenerator_Php_File-DocblockMarker */#', $docblock->generate(), $output, 1);
             } else {
                 $output .= $docblock->generate() . self::LINE_FEED;
@@ -537,7 +537,8 @@ class FileGenerator extends AbstractGenerator
         $classes = $this->getClasses();
         if (!empty($classes)) {
             foreach ($classes as $class) {
-                $regex = str_replace('?', $class->getName(), '/* Zend_CodeGenerator_Php_File-ClassMarker: {?} */');
+                $regex = str_replace('?', $class->getName(),
+                                     '/* Zend_Code_Generator_FileGenerator-ClassMarker: {?} */');
                 $regex = preg_quote($regex, '#');
                 if (preg_match('#'.$regex.'#', $output)) {
                     $output = preg_replace('#'.$regex.'#', $class->generate(), $output, 1);

@@ -9,7 +9,7 @@
  */
 namespace Zend\Module;
 
-use Zend\EventManager\EventManagerAware;
+use Zend\EventManager\EventManagerAwareInterface;
 
 /**
  * Module handler interface
@@ -17,7 +17,7 @@ use Zend\EventManager\EventManagerAware;
  * @category Zend
  * @package  Zend_Module
  */
-interface ModuleHandler extends EventManagerAware
+interface ModuleHandler extends EventManagerAwareInterface
 {
     /**
      * Load the provided modules.

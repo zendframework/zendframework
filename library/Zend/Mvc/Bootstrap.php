@@ -6,10 +6,10 @@ use Zend\Di\Configuration as DiConfiguration,
     Zend\Config\Config,
     Zend\EventManager\EventManagerInterface as Events,
     Zend\EventManager\EventManager,
-    Zend\EventManager\EventManagerAware,
+    Zend\EventManager\EventManagerAwareInterface,
     Zend\Mvc\Router\Http\TreeRouteStack as Router;
 
-class Bootstrap implements BootstrapInterface, EventManagerAware
+class Bootstrap implements BootstrapInterface, EventManagerAwareInterface
 {
     /**
      * @var \Zend\Config\Config
@@ -17,7 +17,7 @@ class Bootstrap implements BootstrapInterface, EventManagerAware
     protected $config;
 
     /**
-     * @var EventCollection
+     * @var EventManagerInterface
      */
     protected $events;
 
@@ -96,12 +96,12 @@ class Bootstrap implements BootstrapInterface, EventManagerAware
     protected function setupLocator(ApplicationInterface $application)
     {
         $events       = $this->events();
-        $sharedEvents = $events->getSharedCollections();
+        $sharedEvents = $events->getSharedManager();
 
         $di = new Di;
         $di->instanceManager()->addTypePreference('Zend\Di\Locator', $di);
         $di->instanceManager()->addSharedInstance($sharedEvents, 'Zend\EventManager\SharedEventManager');
-        $di->instanceManager()->addSharedInstance($sharedEvents, 'Zend\EventManager\SharedEventCollection');
+        $di->instanceManager()->addSharedInstance($sharedEvents, 'Zend\EventManager\SharedEventManagerInterface');
 
         // Default configuration for common MVC classes
         $diConfig = new DiConfiguration(array('definition' => array('class' => array(
@@ -269,7 +269,7 @@ class Bootstrap implements BootstrapInterface, EventManagerAware
         // Basic view strategy
         $locator             = $application->getLocator();
         $events              = $application->events();
-        $sharedEvents        = $locator->get('Zend\EventManager\SharedEventCollection');
+        $sharedEvents        = $locator->get('Zend\EventManager\SharedEventManagerInterface');
         $view                = $locator->get('Zend\View\View');
         $phpRendererStrategy = $locator->get('Zend\View\Strategy\PhpRendererStrategy');
         $defaultViewStrategy = $locator->get('Zend\Mvc\View\DefaultRenderingStrategy');
@@ -315,8 +315,8 @@ class Bootstrap implements BootstrapInterface, EventManagerAware
      */
     protected function setupEvents(ApplicationInterface $application)
     {
-        $application->events()->setSharedCollections(
-            $this->events()->getSharedCollections()
+        $application->events()->setSharedManager(
+            $this->events()->getSharedManager()
         );
         $params = array(
             'application' => $application,

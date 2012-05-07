@@ -3,11 +3,11 @@
 namespace Zend\Mvc;
 
 use Zend\Di\Locator,
-    Zend\EventManager\EventManagerAware,
+    Zend\EventManager\EventManagerAwareInterface,
     Zend\Stdlib\RequestDescription as Request,
     Zend\Stdlib\ResponseDescription as Response;
 
-interface ApplicationInterface extends EventManagerAware
+interface ApplicationInterface extends EventManagerAwareInterface
 {
     /**
      * Set a service locator/DI object

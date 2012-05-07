@@ -6,7 +6,7 @@ use Zend\Di\Locator,
     Zend\EventManager\EventManagerInterface,
     Zend\EventManager\EventInterface as Event,
     Zend\EventManager\EventManager,
-    Zend\EventManager\EventManagerAware,
+    Zend\EventManager\EventManagerAwareInterface,
     Zend\Http\PhpEnvironment\Response as HttpResponse,
     Zend\Loader\Broker,
     Zend\Loader\Pluggable,
@@ -22,7 +22,12 @@ use Zend\Di\Locator,
 /**
  * Basic action controller
  */
-abstract class ActionController implements Dispatchable, EventManagerAware, InjectApplicationEventInterface, LocatorAwareInterface, Pluggable
+abstract class ActionController implements 
+    Dispatchable, 
+    EventManagerAwareInterface, 
+    InjectApplicationEventInterface, 
+    LocatorAwareInterface, 
+    Pluggable
 {
     //use \Zend\EventManager\ProvidesEvents;
 

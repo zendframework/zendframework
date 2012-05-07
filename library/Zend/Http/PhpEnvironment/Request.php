@@ -38,10 +38,6 @@ class Request extends HttpRequest
         $this->setQuery(new Parameters($_GET));
         $this->setServer(new Parameters($_SERVER));
 
-        if ($_COOKIE) {
-            $this->setCookies($_COOKIE);
-        }
-
         if ($_FILES) {
             $this->setFile(new Parameters($_FILES));
         }

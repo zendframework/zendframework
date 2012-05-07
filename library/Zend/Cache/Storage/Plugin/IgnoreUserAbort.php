@@ -51,7 +51,7 @@ class IgnoreUserAbort extends AbstractPlugin
     /**
      * Attach
      *
-     * @param  EventManagerInterface $eventCollection
+     * @param  EventManagerInterface $events
      * @param  int                   $priority
      * @return Serializer
      * @throws Exception\LogicException

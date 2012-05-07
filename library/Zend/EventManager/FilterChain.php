@@ -31,17 +31,17 @@ use Zend\Stdlib\CallbackHandler,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class FilterChain implements FilterInterface
+class FilterChain implements Filter\FilterInterface
 {
     /**
-     * @var FilterInterface\FilterIterator All filters
+     * @var Filter\FilterIterator All filters
      */
     protected $filters;
 
     /**
      * Constructor
      *
-     * Initializes FilterInterface\FilterIterator in which filters will be aggregated
+     * Initializes Filter\FilterIterator in which filters will be aggregated
      * 
      * @return void
      */

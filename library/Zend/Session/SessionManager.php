@@ -20,9 +20,9 @@
 
 namespace Zend\Session;
 
-use Zend\Validator\Alnum as AlnumValidator,
-    Zend\EventManager\EventCollection,
-    Zend\Session\SaveHandler\SaveHandlerInterface;
+use Zend\EventManager\EventManagerInterface,
+    Zend\Session\SaveHandler\SaveHandlerInterface,
+    Zend\Validator\Alnum as AlnumValidator;
 
 /**
  * Session ManagerInterface implementation utilizing ext/session
@@ -51,7 +51,7 @@ class SessionManager extends AbstractManager
     protected $name;
 
     /**
-     * @var EventCollection Validation chain to determine if session is valid
+     * @var EventManagerInterface Validation chain to determine if session is valid
      */
     protected $validatorChain;
 
@@ -301,10 +301,10 @@ class SessionManager extends AbstractManager
      *
      * In most cases, you should use an instance of {@link ValidatorChain}.
      * 
-     * @param  EventCollection $chain 
+     * @param  EventManagerInterface $chain
      * @return SessionManager
      */
-    public function setValidatorChain(EventCollection $chain)
+    public function setValidatorChain(EventManagerInterface $chain)
     {
         $this->validatorChain = $chain;
         return $this;

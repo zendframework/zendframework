@@ -21,7 +21,7 @@ class ApplicationTest extends TestCase
     {
         $app = new Application();
         $events = $app->events();
-        $this->assertInstanceOf('Zend\EventManager\EventCollection', $events);
+        $this->assertInstanceOf('Zend\EventManager\EventManagerInterface', $events);
         $this->assertInstanceOf('Zend\EventManager\EventManager', $events);
     }
 

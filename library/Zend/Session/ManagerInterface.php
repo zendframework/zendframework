@@ -20,7 +20,7 @@
 
 namespace Zend\Session;
 
-use Zend\EventManager\EventCollection,
+use Zend\EventManager\EventManagerInterface,
     Zend\Session\Configuration\ConfigurationInterface as Configuration,
     Zend\Session\Storage\StorageInterface as Storage,
     Zend\Session\SaveHandler\SaveHandlerInterface as SaveHandler;
@@ -56,7 +56,7 @@ interface ManagerInterface
     public function forgetMe();
     public function expireSessionCookie();
 
-    public function setValidatorChain(EventCollection $chain);
+    public function setValidatorChain(EventManagerInterface $chain);
     public function getValidatorChain();
     public function isValid();
 }

@@ -15,7 +15,7 @@ use ArrayAccess,
     Zend\Config\Factory as ConfigFactory,
     Zend\Module\ModuleEvent,
     Zend\Stdlib\ArrayUtils,
-    Zend\EventManager\EventCollection,
+    Zend\EventManager\EventManagerInterface,
     Zend\EventManager\ListenerAggregate;
 
 /**
@@ -85,10 +85,10 @@ class ConfigListener extends AbstractListener
     /**
      * Attach one or more listeners
      *
-     * @param EventCollection $events
+     * @param EventManagerInterface $events
      * @return ConfigListener
      */
-    public function attach(EventCollection $events)
+    public function attach(EventManagerInterface $events)
     {
         $this->listeners[] = $events->attach('loadModule', array($this, 'loadModule'), 1000);
         $this->listeners[] = $events->attach('loadModules.pre', array($this, 'loadModulesPre'), 9000);
@@ -148,10 +148,10 @@ class ConfigListener extends AbstractListener
     /**
      * Detach all previously attached listeners
      *
-     * @param EventCollection $events
+     * @param EventManagerInterface $events
      * @return ConfigListener
      */
-    public function detach(EventCollection $events)
+    public function detach(EventManagerInterface $events)
     {
         foreach ($this->listeners as $key => $listener) {
             $events->detach($listener);

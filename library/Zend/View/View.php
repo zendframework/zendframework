@@ -20,7 +20,7 @@
 
 namespace Zend\View;
 
-use Zend\EventManager\EventCollection,
+use Zend\EventManager\EventManagerInterface,
     Zend\EventManager\EventManager,
     Zend\EventManager\EventManagerAware,
     Zend\Mvc\MvcEvent,
@@ -39,7 +39,7 @@ use Zend\EventManager\EventCollection,
 class View implements EventManagerAware
 {
     /**
-     * @var EventCollection
+     * @var EventManagerInterface
      */
     protected $events;
 
@@ -100,10 +100,10 @@ class View implements EventManagerAware
     /**
      * Set the event manager instance
      *
-     * @param  EventCollection $events
+     * @param  EventManagerInterface $events
      * @return View
      */
-    public function setEventManager(EventCollection $events)
+    public function setEventManager(EventManagerInterface $events)
     {
         $this->events = $events;
         return $this;
@@ -114,11 +114,11 @@ class View implements EventManagerAware
      *
      * Lazy-loads a default instance if none available
      *
-     * @return EventCollection
+     * @return EventManagerInterface
      */
     public function events()
     {
-        if (!$this->events instanceof EventCollection) {
+        if (!$this->events instanceof EventManagerInterface) {
             $this->setEventManager(new EventManager(array(
                 __CLASS__,
                 get_called_class(),

@@ -519,7 +519,7 @@ class Container extends ArrayObject
             // Cannot pass "$this" to a lambda
             $container = $this;
 
-            // Filter out any items not in our container
+            // FilterInterface out any items not in our container
             $expires   = array_filter($vars, function ($value) use ($container) {
                 return $container->offsetExists($value);
             });

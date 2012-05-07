@@ -38,17 +38,17 @@ use Zend\Stdlib\CallbackHandler,
 class GlobalEventManager
 {
     /**
-     * @var EventCollection
+     * @var EventManagerInterface
      */
     protected static $events;
 
     /**
      * Set the event collection on which this will operate
      * 
-     * @param  null|EventCollection $events 
+     * @param  null|EventManagerInterface $events
      * @return void
      */
-    public static function setEventCollection(EventCollection $events = null)
+    public static function setEventCollection(EventManagerInterface $events = null)
     {
         static::$events = $events;
     }

@@ -21,7 +21,7 @@
 
 namespace Zend\Mvc\View;
 
-use Zend\EventManager\EventCollection as Events,
+use Zend\EventManager\EventManagerInterface as Events,
     Zend\EventManager\ListenerAggregate,
     Zend\Mvc\MvcEvent,
     Zend\Mvc\Router\RouteMatch,
@@ -30,7 +30,7 @@ use Zend\EventManager\EventCollection as Events,
 class InjectViewModelListener implements ListenerAggregate
 {
     /**
-     * Filter/inflector used to normalize names for use as template identifiers
+     * FilterInterface/inflector used to normalize names for use as template identifiers
      *
      * @var mixed
      */

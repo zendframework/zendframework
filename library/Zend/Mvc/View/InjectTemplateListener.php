@@ -21,7 +21,7 @@
 
 namespace Zend\Mvc\View;
 
-use Zend\EventManager\EventCollection as Events,
+use Zend\EventManager\EventManagerInterface as Events,
     Zend\EventManager\ListenerAggregate,
     Zend\Filter\Word\CamelCaseToDash as CamelCaseToDashFilter,
     Zend\Mvc\MvcEvent,
@@ -31,7 +31,7 @@ use Zend\EventManager\EventCollection as Events,
 class InjectTemplateListener implements ListenerAggregate
 {
     /**
-     * Filter/inflector used to normalize names for use as template identifiers
+     * FilterInterface/inflector used to normalize names for use as template identifiers
      *
      * @var mixed
      */

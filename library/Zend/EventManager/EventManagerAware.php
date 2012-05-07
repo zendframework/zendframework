@@ -35,8 +35,8 @@ interface EventManagerAware
     /**
      * Inject an EventManager instance
      * 
-     * @param  EventCollection $eventManager 
+     * @param  EventManagerInterface $eventManager
      * @return void
      */
-    public function setEventManager(EventCollection $eventManager);
+    public function setEventManager(EventManagerInterface $eventManager);
 }

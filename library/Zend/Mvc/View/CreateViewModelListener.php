@@ -21,7 +21,7 @@
 
 namespace Zend\Mvc\View;
 
-use Zend\EventManager\EventCollection as Events,
+use Zend\EventManager\EventManagerInterface as Events,
     Zend\EventManager\ListenerAggregate,
     Zend\Mvc\MvcEvent,
     Zend\Stdlib\ArrayUtils,

@@ -14,7 +14,7 @@ use Zend\EventManager\StaticEventManager,
     Zend\EventManager\Event,
     Zend\Module\ModuleEvent,
     Zend\Module\Consumer\LocatorRegistered,
-    Zend\EventManager\EventCollection,
+    Zend\EventManager\EventManagerInterface,
     Zend\EventManager\ListenerAggregate;
 
 /**
@@ -110,10 +110,10 @@ class LocatorRegistrationListener extends AbstractListener implements ListenerAg
     /**
      * Attach one or more listeners
      *
-     * @param EventCollection $events
+     * @param EventManagerInterface $events
      * @return LocatorRegistrationListener
      */
-    public function attach(EventCollection $events)
+    public function attach(EventManagerInterface $events)
     {
         $this->listeners[] = $events->attach('loadModule', array($this, 'loadModule'), 1000);
         $this->listeners[] = $events->attach('loadModules.post', array($this, 'loadModulesPost'), 9000);
@@ -123,10 +123,10 @@ class LocatorRegistrationListener extends AbstractListener implements ListenerAg
     /**
      * Detach all previously attached listeners
      *
-     * @param EventCollection $events
+     * @param EventManagerInterface $events
      * @return LocatorRegistrationListener
      */
-    public function detach(EventCollection $events)
+    public function detach(EventManagerInterface $events)
     {
         foreach ($this->listeners as $key => $listener) {
             $events->detach($listener);

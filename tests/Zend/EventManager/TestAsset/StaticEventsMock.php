@@ -21,7 +21,7 @@
 
 namespace ZendTest\EventManager\TestAsset;
 
-use Zend\EventManager\SharedEventCollection;
+use Zend\EventManager\SharedEventManagerInterface;
 
 /**
  * @category   Zend
@@ -31,7 +31,7 @@ use Zend\EventManager\SharedEventCollection;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class StaticEventsMock implements SharedEventCollection
+class StaticEventsMock implements SharedEventManagerInterface
 {
     public function getListeners($id, $event)
     {

@@ -20,8 +20,6 @@
 
 namespace Zend\Queue\Exception;
 
-use Zend\Queue\Exception;
-
 /**
  * When unsupported method call, throw this exception
  *
@@ -31,6 +29,6 @@ use Zend\Queue\Exception;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class UnsupportedMethodCallException
-    extends \BadMethodCallException implements Exception
+    extends \BadMethodCallException implements ExceptionInterface
 {
 }

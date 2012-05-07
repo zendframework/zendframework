@@ -18,7 +18,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Queue;
+namespace Zend\Queue\Exception;
 
 /**
  * Base exception interface
@@ -28,6 +28,6 @@ namespace Zend\Queue;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Exception
+interface ExceptionInterface
 {
 }

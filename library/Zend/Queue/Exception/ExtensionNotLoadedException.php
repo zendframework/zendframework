@@ -20,10 +20,8 @@
 
 namespace Zend\Queue\Exception;
 
-use Zend\Queue\Exception;
-
 /**
- * Invalid argument exception
+ * Exception for Zend_Queue component.
  *
  * @category   Zend
  * @package    Zend_Queue
@@ -31,6 +29,6 @@ use Zend\Queue\Exception;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class ExtensionNotLoadedException
-    extends \RuntimeException implements Exception
+    extends \RuntimeException implements ExceptionInterface
 {
 }

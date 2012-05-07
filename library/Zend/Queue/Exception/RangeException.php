@@ -20,8 +20,6 @@
 
 namespace Zend\Queue\Exception;
 
-use Zend\Queue\Exception;
-
 /**
  * Exception for Zend_Queue component.
  *
@@ -31,6 +29,6 @@ use Zend\Queue\Exception;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class RangeException 
-    extends \RangeException implements Exception
+    extends \RangeException implements ExceptionInterface
 {
 }

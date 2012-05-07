@@ -20,8 +20,6 @@
 
 namespace Zend\Queue\Exception;
 
-use Zend\Queue\Exception;
-
 /**
  * This Exception will throw, when queue not found
  *
@@ -31,6 +29,6 @@ use Zend\Queue\Exception;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class QueueNotFoundException
-    extends \RuntimeException implements Exception
+    extends \RuntimeException implements ExceptionInterface
 {
 }

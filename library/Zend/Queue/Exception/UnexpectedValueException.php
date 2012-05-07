@@ -20,8 +20,6 @@
 
 namespace Zend\Queue\Exception;
 
-use Zend\Queue\Exception;
-
 /**
  * Exception for Zend_Queue component. 
  *
@@ -31,6 +29,6 @@ use Zend\Queue\Exception;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class UnexpectedValueException
-    extends \UnexpectedValueException implements Exception
+    extends \UnexpectedValueException implements ExceptionInterface
 {
 }

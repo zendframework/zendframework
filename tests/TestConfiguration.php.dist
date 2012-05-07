@@ -265,11 +265,6 @@ defined('TESTS_ZEND_GDATA_GAPPS_EMAIL') || define('TESTS_ZEND_GDATA_GAPPS_EMAIL'
 defined('TESTS_ZEND_GDATA_GAPPS_PASSWORD') || define('TESTS_ZEND_GDATA_GAPPS_PASSWORD', 'password');
 
 /*
- * This is the ONLINE_ENABLED property for Google Base.
- */
-defined('TESTS_ZEND_GDATA_GBASE_ONLINE_ENABLED') || define('TESTS_ZEND_GDATA_GBASE_ONLINE_ENABLED', false);
-
-/*
  * This indicates that online tests for the Books Search data API
  * should be performed.
  */
@@ -307,12 +302,6 @@ defined('TESTS_ZEND_GDATA_DOCS_ONLINE_ENABLED') || define('TESTS_ZEND_GDATA_DOCS
  * be performed.
  */
 defined('TESTS_ZEND_GDATA_PHOTOS_ONLINE_ENABLED') || define('TESTS_ZEND_GDATA_PHOTOS_ONLINE_ENABLED', false);
-
-/*
- * This indicates that online tests for the Google Health API should
- * be performed.
- */
-defined('TESTS_ZEND_GDATA_HEALTH_ONLINE_ENABLED') || define('TESTS_ZEND_GDATA_HEALTH_ONLINE_ENABLED', false);
 
 /**
  * Zend\Http\Client tests

@@ -142,7 +142,7 @@ class Capabilities
      * @param null|Capabilities $baseCapabilities
      */
     public function __construct(
-        Adapter $adapter,
+        Adapter\AdapterInterface $adapter,
         stdClass $marker,
         array $capabilities = array(),
         Capabilities $baseCapabilities = null

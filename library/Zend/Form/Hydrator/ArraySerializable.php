@@ -46,11 +46,10 @@ class ArraySerializable implements HydratorInterface
      */
     public function hydrate(array $data, $object)
     {
-        if (!$object instanceof ArraySerializableInterface) {
+        if (!is_callable(array($object, 'exchangeArray'))) {
             throw new Exception\UnexpectedValueException(sprintf(
-                '%s expects the provided object to be of type Zend\Stlib\ArraySerializable; received "%s"',
-                __METHOD__,
-                get_class($object)
+                '%s expects the provided object to implement exchangeArray()',
+                __METHOD__
             ));
         }
         $object->exchangeArray($data);

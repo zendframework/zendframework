@@ -113,4 +113,13 @@ class BcmathTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($integer, $gmpInteger);
     }
 
+    public function testHexToDecimalConversion()
+    {
+        $hexadecimal = '5A46'; // One byte
+        $expected = '23110';
+
+        $decimal = $this->_math->hexToDecimal($hexadecimal);
+
+        $this->assertEquals($expected, $decimal);
+    }
 }

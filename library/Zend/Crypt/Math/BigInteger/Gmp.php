@@ -13,7 +13,7 @@ namespace Zend\Crypt\Math\BigInteger;
 /**
  * Support for arbitrary precision mathematics in PHP.
  *
- * \Zend\Crypt\Math\BigInteger\Gmp is a wrapper across the PHP BCMath
+ * Zend\Crypt\Math\BigInteger\Gmp is a wrapper across the PHP GMP
  * extension.
  *
  * @category   Zend
@@ -174,17 +174,17 @@ class Gmp implements BigIntegerCapableInterface
     }
 
     /**
-     * @param  string $operand 
+     * @param  string $operand
      * @return string
      */
     public function hexToDecimal($operand)
     {
-        $return = '0';
-        while(strlen($hex)) {
-            $hex = hexdec(substr($operand, 0, 4));
-            $dec = gmp_add(gmp_mul($return, 65536), $hex);
+        $result = '0';
+        while(strlen($operand)) {
+            $dec     = hexdec(substr($operand, 0, 4));
+            $result  = gmp_add(gmp_mul($result, 65536), $dec);
             $operand = substr($operand, 4);
         }
-        return $return;
+        return gmp_strval($result);
     }
 }

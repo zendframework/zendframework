@@ -20,7 +20,8 @@
  */
 
 namespace ZendTest\Cache\Storage\Adapter;
-use Zend\Cache\Storage\Adapter,
+
+use Zend\Cache\Storage\Adapter\AdapterInterface,
     Zend\Cache,
     Zend\Stdlib\ErrorHandler;
 
@@ -42,7 +43,7 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
     /**
      * The storage adapter
      *
-     * @var Zend\Cache\Storage\Adapter
+     * @var AdapterInterface
      */
     protected $_storage;
 
@@ -59,7 +60,7 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->assertInstanceOf(
-            'Zend\Cache\Storage\Adapter',
+            'Zend\Cache\Storage\Adapter\AdapterInterface',
             $this->_storage,
             'Storage adapter instance is needed for tests'
         );
@@ -955,7 +956,7 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->_storage->setItem('key', 'value'));
         $this->assertTrue($this->_storage->getDelayed(array('key')));
 
-        $this->setExpectedException('Zend\Cache\Exception');
+        $this->setExpectedException('Zend\Cache\Exception\ExceptionInterface');
         $this->_storage->getDelayed(array('key'));
     }
 
@@ -1080,7 +1081,7 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
         $capabilities = $this->_storage->getCapabilities();
         if (!$capabilities->getClearByNamespace()) {
             $this->setExpectedException('Zend\Cache\Exception\RuntimeException');
-            $this->_storage->clearByNamespace(Adapter::MATCH_EXPIRED);
+            $this->_storage->clearByNamespace(AdapterInterface::MATCH_EXPIRED);
             return;
         }
 
@@ -1095,7 +1096,7 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue($this->_storage->setItem('key2', 'value2'));
 
-        $this->assertTrue($this->_storage->clearByNamespace(Adapter::MATCH_EXPIRED));
+        $this->assertTrue($this->_storage->clearByNamespace(AdapterInterface::MATCH_EXPIRED));
 
         if ($capabilities->getUseRequestTime()) {
             $this->assertTrue($this->_storage->hasItem('key1'));
@@ -1111,7 +1112,7 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
         $capabilities = $this->_storage->getCapabilities();
         if (!$capabilities->getClearByNamespace()) {
             $this->setExpectedException('Zend\Cache\Exception\RuntimeException');
-            $this->_storage->clearByNamespace(Adapter::MATCH_ACTIVE);
+            $this->_storage->clearByNamespace(AdapterInterface::MATCH_ACTIVE);
             return;
         }
 
@@ -1126,7 +1127,7 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue($this->_storage->setItem('key2', 'value2'));
 
-        $this->assertTrue($this->_storage->clearByNamespace(Adapter::MATCH_ACTIVE));
+        $this->assertTrue($this->_storage->clearByNamespace(AdapterInterface::MATCH_ACTIVE));
 
         if ($capabilities->getExpiredRead() && !$capabilities->getUseRequestTime()) {
             $this->assertTrue($this->_storage->hasItem('key1', array('ttl' => 0)));
@@ -1139,7 +1140,7 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
         $capabilities = $this->_storage->getCapabilities();
         if (!$capabilities->getClearByNamespace()) {
             $this->setExpectedException('Zend\Cache\Exception\RuntimeException');
-            $this->_storage->clearByNamespace(Adapter::MATCH_ALL);
+            $this->_storage->clearByNamespace(AdapterInterface::MATCH_ALL);
             return;
         }
 
@@ -1159,7 +1160,7 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
 
         $clearNs = array_shift($namespaces);
         $this->_options->setNamespace($clearNs);
-        $this->assertTrue($this->_storage->clearByNamespace(Adapter::MATCH_ALL));
+        $this->assertTrue($this->_storage->clearByNamespace(AdapterInterface::MATCH_ALL));
 
         // wait
         usleep($capabilities->getTtlPrecision() * 2000000);
@@ -1180,8 +1181,8 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
     {
         $capabilities = $this->_storage->getCapabilities();
         if (!$capabilities->getClearAllNamespaces()) {
-            $this->setExpectedException('Zend\Cache\Exception');
-            $this->_storage->clear(Adapter::MATCH_ALL);
+            $this->setExpectedException('Zend\Cache\Exception\ExceptionInterface');
+            $this->_storage->clear(AdapterInterface::MATCH_ALL);
             return;
         }
 
@@ -1199,7 +1200,7 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
             }
         }
 
-        $this->assertTrue($this->_storage->clear(Adapter::MATCH_ALL));
+        $this->assertTrue($this->_storage->clear(AdapterInterface::MATCH_ALL));
 
         // wait
         usleep($capabilities->getTtlPrecision() * 2000000);
@@ -1230,7 +1231,7 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->_storage->setItem('key3', 'value3'));
         $this->assertTrue($this->_storage->setItem('key4', 'value4'));
 
-        $this->assertTrue($this->_storage->find(Adapter::MATCH_ACTIVE));
+        $this->assertTrue($this->_storage->find(AdapterInterface::MATCH_ACTIVE));
 
         if ($capabilities->getUseRequestTime()) {
             $expectedItems = array(
@@ -1277,7 +1278,7 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->_storage->setItem('key3', 'value3'));
         $this->assertTrue($this->_storage->setItem('key4', 'value4'));
 
-        $this->assertTrue($this->_storage->find(Adapter::MATCH_EXPIRED));
+        $this->assertTrue($this->_storage->find(AdapterInterface::MATCH_EXPIRED));
 
         if ($capabilities->getExpiredRead() && !$capabilities->getUseRequestTime()) {
             $expectedItems = array(
@@ -1335,7 +1336,7 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
         // Ensure we don't have expired items in the cache for this test
         $this->_options->setTtl(60);
         $this->_storage->setItem('someitem', 'somevalue', array('tags' => array('foo')));
-        $this->assertTrue($this->_storage->find(Cache\Storage\Adapter::MATCH_TAGS_OR, array('tags' => array('foo'))));
+        $this->assertTrue($this->_storage->find(AdapterInterface::MATCH_TAGS_OR, array('tags' => array('foo'))));
         $actualItems = array();
         while (($item = $this->_storage->fetch()) !== false) {
             // check $item

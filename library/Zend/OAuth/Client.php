@@ -20,7 +20,8 @@
 
 namespace Zend\OAuth;
 
-use Zend\Http\Request;
+use Zend\Http\Request as HttpRequest,
+    Zend\Stdlib\RequestInterface as Request;
 
 /**
  * @uses       Zend\Http\Client
@@ -187,18 +188,18 @@ class Client extends \Zend\Http\Client
      * @param  string $method
      * @return Zend\Http\Client
      */
-    public function setMethod($method = Request::METHOD_GET)
+    public function setMethod($method = HttpRequest::METHOD_GET)
     {
-        if ($method == Request::METHOD_GET) {
-            $this->setRequestMethod(Request::METHOD_GET);
-        } elseif($method == Request::METHOD_POST) {
-            $this->setRequestMethod(Request::METHOD_POST);
-        } elseif($method == Request::METHOD_PUT) {
-            $this->setRequestMethod(Request::METHOD_PUT);
-        }  elseif($method == Request::METHOD_DELETE) {
-            $this->setRequestMethod(Request::METHOD_DELETE);
-        }   elseif($method == Request::METHOD_HEAD) {
-            $this->setRequestMethod(Request::METHOD_HEAD);
+        if ($method == HttpRequest::METHOD_GET) {
+            $this->setRequestMethod(HttpRequest::METHOD_GET);
+        } elseif($method == HttpRequest::METHOD_POST) {
+            $this->setRequestMethod(HttpRequest::METHOD_POST);
+        } elseif($method == HttpRequest::METHOD_PUT) {
+            $this->setRequestMethod(HttpRequest::METHOD_PUT);
+        }  elseif($method == HttpRequest::METHOD_DELETE) {
+            $this->setRequestMethod(HttpRequest::METHOD_DELETE);
+        }   elseif($method == HttpRequest::METHOD_HEAD) {
+            $this->setRequestMethod(HttpRequest::METHOD_HEAD);
         }
         return parent::setMethod($method);
     }
@@ -240,7 +241,7 @@ class Client extends \Zend\Http\Client
             );
             $this->setHeaders(array('Authorization' => $oauthHeaderValue));
         } elseif ($requestScheme == OAuth::REQUEST_SCHEME_POSTBODY) {
-            if ($requestMethod == Request::METHOD_GET) {
+            if ($requestMethod == HttpRequest::METHOD_GET) {
                 throw new Exception(
                     'The client is configured to'
                     . ' pass OAuth parameters through a POST body but request method'

@@ -24,7 +24,6 @@ namespace Zend\View\Helper;
 /**
  * Helper for rendering fieldsets
  *
- * @uses       \Zend\View\Helper\FormElement
  * @package    Zend_View
  * @subpackage Helper
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

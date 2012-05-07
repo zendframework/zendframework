@@ -115,7 +115,7 @@ class Filesystem extends AbstractAdapter
      * @param  boolean $success
      * @param  mixed   $casToken
      * @return mixed Data on success and false on failure
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      *
      * @triggers getItem.pre(PreEvent)
      * @triggers getItem.post(PostEvent)
@@ -143,7 +143,7 @@ class Filesystem extends AbstractAdapter
      * @param  array $keys
      * @param  array $options
      * @return array Associative array of existing keys and values
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      *
      * @triggers getItems.pre(PreEvent)
      * @triggers getItems.post(PostEvent)
@@ -173,7 +173,7 @@ class Filesystem extends AbstractAdapter
      * @param  boolean $success
      * @param  mixed   $casToken
      * @return mixed Data on success or false on failure
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     protected function internalGetItem(& $normalizedKey, array & $normalizedOptions, & $success = null, & $casToken = null)
     {
@@ -229,7 +229,7 @@ class Filesystem extends AbstractAdapter
      * @param  array $normalizedKeys
      * @param  array $normalizedOptions
      * @return array Associative array of existing keys and values
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     protected function internalGetItems(array & $normalizedKeys, array & $normalizedOptions)
     {
@@ -294,7 +294,7 @@ class Filesystem extends AbstractAdapter
      * @param  string $key
      * @param  array  $options
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      *
      * @triggers hasItem.pre(PreEvent)
      * @triggers hasItem.post(PostEvent)
@@ -322,7 +322,7 @@ class Filesystem extends AbstractAdapter
      * @param  array $keys
      * @param  array $options
      * @return array Array of existing keys
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      *
      * @triggers hasItems.pre(PreEvent)
      * @triggers hasItems.post(PostEvent)
@@ -350,7 +350,7 @@ class Filesystem extends AbstractAdapter
      * @param  string $normalizedKey
      * @param  array  $normalizedOptions
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     protected function internalHasItem(& $normalizedKey, array & $normalizedOptions)
     {
@@ -460,7 +460,7 @@ class Filesystem extends AbstractAdapter
      * @param  array $normalizedKeys
      * @param  array $normalizedOptions
      * @return array Associative array of existing cache ids and its metadata
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     protected function internalGetMetadatas(array & $normalizedKeys, array & $normalizedOptions)
     {
@@ -529,7 +529,7 @@ class Filesystem extends AbstractAdapter
      * @param  mixed  $value
      * @param  array  $options
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      *
      * @triggers setItem.pre(PreEvent)
      * @triggers setItem.post(PostEvent)
@@ -557,7 +557,7 @@ class Filesystem extends AbstractAdapter
      * @param  array $keyValuePairs
      * @param  array $options
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      *
      * @triggers setItems.pre(PreEvent)
      * @triggers setItems.post(PostEvent)
@@ -586,7 +586,7 @@ class Filesystem extends AbstractAdapter
      * @param  mixed  $value
      * @param  array  $options
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      *
      * @triggers addItem.pre(PreEvent)
      * @triggers addItem.post(PostEvent)
@@ -614,7 +614,7 @@ class Filesystem extends AbstractAdapter
      * @param  array $keyValuePairs
      * @param  array $options
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      *
      * @triggers addItems.pre(PreEvent)
      * @triggers addItems.post(PostEvent)
@@ -643,7 +643,7 @@ class Filesystem extends AbstractAdapter
      * @param  mixed  $value
      * @param  array  $options
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      *
      * @triggers replaceItem.pre(PreEvent)
      * @triggers replaceItem.post(PostEvent)
@@ -671,7 +671,7 @@ class Filesystem extends AbstractAdapter
      * @param  array $keyValuePairs
      * @param  array $options
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      *
      * @triggers replaceItems.pre(PreEvent)
      * @triggers replaceItems.post(PostEvent)
@@ -700,7 +700,7 @@ class Filesystem extends AbstractAdapter
      * @param  mixed  $value
      * @param  array  $normalizedOptions
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     protected function internalSetItem(& $normalizedKey, & $value, array & $normalizedOptions)
     {
@@ -785,7 +785,7 @@ class Filesystem extends AbstractAdapter
      * @param  array $normalizedKeyValuePairs
      * @param  array $normalizedOptions
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     protected function internalSetItems(array & $normalizedKeyValuePairs, array & $normalizedOptions)
     {
@@ -884,7 +884,7 @@ class Filesystem extends AbstractAdapter
      * @param  mixed  $value
      * @param  array  $options
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      * @see    getItem()
      * @see    setItem()
      */
@@ -914,7 +914,7 @@ class Filesystem extends AbstractAdapter
      * @param  mixed  $value
      * @param  array  $normalizedOptions
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      * @see    getItem()
      * @see    setItem()
      */
@@ -944,7 +944,7 @@ class Filesystem extends AbstractAdapter
      * @param  string $key
      * @param  array  $options
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      *
      * @triggers touchItem.pre(PreEvent)
      * @triggers touchItem.post(PostEvent)
@@ -970,7 +970,7 @@ class Filesystem extends AbstractAdapter
      * @param  array $keys
      * @param  array $options
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      *
      * @triggers touchItems.pre(PreEvent)
      * @triggers touchItems.post(PostEvent)
@@ -998,7 +998,7 @@ class Filesystem extends AbstractAdapter
      * @param  string $key
      * @param  array  $options
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     protected function internalTouchItem(& $normalizedKey, array & $normalizedOptions)
     {
@@ -1030,7 +1030,7 @@ class Filesystem extends AbstractAdapter
      * @param  string $key
      * @param  array  $options
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      *
      * @triggers removeItem.pre(PreEvent)
      * @triggers removeItem.post(PostEvent)
@@ -1056,7 +1056,7 @@ class Filesystem extends AbstractAdapter
      * @param  array $keys
      * @param  array $options
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      *
      * @triggers removeItems.pre(PreEvent)
      * @triggers removeItems.post(PostEvent)
@@ -1082,7 +1082,7 @@ class Filesystem extends AbstractAdapter
      * @param  string $normalizedKey
      * @param  array  $normalizedOptions
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     protected function internalRemoveItem(& $normalizedKey, array & $normalizedOptions)
     {
@@ -1110,7 +1110,7 @@ class Filesystem extends AbstractAdapter
      * @param  int   $normalizedMode Matching mode (Value of Adapter::MATCH_*)
      * @param  array $normalizedOptions
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      * @see    fetch()
      * @see    fetchAll()
      */
@@ -1144,7 +1144,7 @@ class Filesystem extends AbstractAdapter
      * Internal method to fetch the next item from result set
      *
      * @return array|boolean The next item or false
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     protected function internalFetch()
     {
@@ -1177,7 +1177,7 @@ class Filesystem extends AbstractAdapter
      * @param  int   $normalizedMode Matching mode (Value of Adapter::MATCH_*)
      * @param  array $normalizedOptions
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      * @see    clearByNamespace()
      */
     protected function internalClear(& $normalizedMode, array & $normalizedOptions)
@@ -1199,7 +1199,7 @@ class Filesystem extends AbstractAdapter
      * @param  int   $normalizedMode Matching mode (Value of Adapter::MATCH_*)
      * @param  array $normalizedOptions
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      * @see    clear()
      */
     protected function internalClearByNamespace(& $normalizedMode, array & $normalizedOptions)
@@ -1217,7 +1217,7 @@ class Filesystem extends AbstractAdapter
      *
      * @param  array $normalizedOptions
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     protected function internalOptimize(array & $normalizedOptions)
     {
@@ -1256,6 +1256,7 @@ class Filesystem extends AbstractAdapter
             }
 
             $capabilities = new Capabilities(
+                $this,
                 $marker,
                 array(
                     'supportedDatatypes' => array(
@@ -1322,7 +1323,7 @@ class Filesystem extends AbstractAdapter
      *
      * @param  array $normalizedOptions
      * @return array|boolean Capacity as array or false on failure
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     protected function internalGetCapacity(array & $normalizedOptions)
     {

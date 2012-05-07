@@ -39,7 +39,7 @@ class ZendServerDisk extends AbstractZendServer
      * Constructor
      *
      * @param  null|array|Traversable|AdapterOptions $options
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      * @return void
      */
     public function __construct($options = array())
@@ -58,7 +58,7 @@ class ZendServerDisk extends AbstractZendServer
      *
      * @param  array $normalizedOptions
      * @return array|boolean Capacity as array or false on failure
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     protected function internalGetCapacity(array & $normalizedOptions)
     {

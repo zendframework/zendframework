@@ -109,7 +109,7 @@
         <programlisting language="php"><![CDATA[
 <?php // setting links in a view script:
 $this->headLink()->appendStylesheet('/styles/basic.css')
-                 ->headLink(array('rel' => 'favicon',
+                 ->headLink(array('rel' => 'icon',
                                   'href' => '/img/favicon.ico'),
                                   'PREPEND')
                  ->prependStylesheet('/styles/moz.css',

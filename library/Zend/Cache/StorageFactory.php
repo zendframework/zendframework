@@ -53,7 +53,7 @@ class StorageFactory
      * This can instantiate storage adapters and plugins.
      *
      * @param array|Traversable $cfg
-     * @return Storage\Adapter
+     * @return Storage\Adapter\AdapterInterface
      * @throws Exception\InvalidArgumentException
      */
     public static function factory($cfg)
@@ -132,14 +132,14 @@ class StorageFactory
     /**
      * Instantiate a storage adapter
      *
-     * @param  string|Storage\Adapter $adapterName
+     * @param  string|Storage\Adapter\AdapterInterface               $adapterName
      * @param  null|array|Traversable|Storage\Adapter\AdapterOptions $options
-     * @return Storage\Adapter
+     * @return Storage\Adapter\AdapterInterface
      * @throws Exception\RuntimeException
      */
     public static function adapterFactory($adapterName, $options = null)
     {
-        if ($adapterName instanceof Storage\Adapter) {
+        if ($adapterName instanceof Storage\Adapter\AdapterInterface) {
             // $adapterName is already an adapter object
             $adapter = $adapterName;
         } else {

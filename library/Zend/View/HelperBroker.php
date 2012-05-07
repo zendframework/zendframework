@@ -20,7 +20,9 @@
 
 namespace Zend\View;
 
-use Zend\Loader\PluginBroker;
+use Zend\Loader\PluginBroker,
+    Zend\View\Renderer\RendererInterface as Renderer,
+    Zend\View\Helper\HelperInterface as Helper;
 
 /**
  * Helper Broker for view instances
@@ -41,7 +43,7 @@ class HelperBroker extends PluginBroker
     protected $defaultClassLoader = 'Zend\View\HelperLoader';
 
     /**
-     * @var Zend\View\Renderer
+     * @var Renderer
      */
     protected $view;
 

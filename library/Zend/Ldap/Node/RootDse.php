@@ -42,9 +42,8 @@ class RootDse extends AbstractNode
     /**
      * Factory method to create the RootDse.
      *
-     * @param  Ldap\Ldap $ldap
+     * @param \Zend\Ldap\Ldap $ldap
      * @return RootDse
-     * @throws Ldap\Exception
      */
     public static function create(Ldap\Ldap $ldap)
     {
@@ -68,8 +67,8 @@ class RootDse extends AbstractNode
      *
      * Constructor is protected to enforce the use of factory methods.
      *
-     * @param  Ldap\Dn $dn
-     * @param  array   $data
+     * @param \Zend\Ldap\Dn $dn
+     * @param array         $data
      */
     protected function __construct(Ldap\Dn $dn, array $data)
     {
@@ -131,7 +130,7 @@ class RootDse extends AbstractNode
     /**
      * Returns the schema DN
      *
-     * @return Ldap\Dn
+     * @return \Zend\Ldap\Dn
      */
     public function getSchemaDn()
     {

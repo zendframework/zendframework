@@ -21,9 +21,7 @@
 
 namespace ZendTest\Mail\Transport;
 
-use PHPUnit_Framework_TestCase as TestCase,
-    Zend\Mail\Message,
-    Zend\Mail\Transport,
+use Zend\Mail\Message,
     Zend\Mail\Transport\Smtp,
     Zend\Mail\Transport\SmtpOptions,
     ZendTest\Mail\TestAsset\SmtpProtocolSpy;
@@ -36,7 +34,7 @@ use PHPUnit_Framework_TestCase as TestCase,
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Mail
  */
-class SmtpTest extends TestCase
+class SmtpTest extends \PHPUnit_Framework_TestCase
 {
     public $transport;
     public $connection;

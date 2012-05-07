@@ -21,8 +21,9 @@
 
 namespace ZendTest\Mail\Storage;
 
-use Zend\Mail\Protocol,
-    Zend\Mail\Storage;
+use Zend\Config;
+use Zend\Mail\Protocol;
+use Zend\Mail\Storage;
 
 /**
  * @category   Zend
@@ -110,7 +111,7 @@ class Pop3Test extends \PHPUnit_Framework_TestCase
     public function testConnectConfig()
     {
         try {
-            $mail = new Storage\Pop3(new \Zend\Config\Config($this->_params));
+            $mail = new Storage\Pop3(new Config\Config($this->_params));
         } catch (\Exception $e) {
             $this->fail('exception raised while loading connection to pop3 server');
         }

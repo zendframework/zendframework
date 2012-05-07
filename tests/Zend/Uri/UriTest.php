@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -1200,6 +1199,9 @@ class UriTest extends \PHPUnit_Framework_TestCase
             array('/foo/bar?url=http%3A%2F%2Fwww.example.com%2Fbaz', '/foo/bar?url=http://www.example.com/baz'),
             array('File:///SitePages/fi%6ce%20has%20spaces', 'file:///SitePages/file%20has%20spaces'),
             array('/foo/bar/../baz?do=action#showFragment', '/foo/baz?do=action#showFragment'),
+
+            //  RFC 3986 Capitalizing letters in escape sequences.
+            array('http://www.example.com/a%c2%b1b', 'http://www.example.com/a%C2%B1b'),
 
             // This should be left unchanged, at least for the generic Uri class
             array('http://example.com:80/file?query=bar', 'http://example.com:80/file?query=bar'),

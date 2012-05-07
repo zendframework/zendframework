@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend\Cloud\QueueService
+ * @package    Zend_Cloud_QueueService
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -31,14 +31,14 @@ use Zend\Config\Factory as ConfigFactory,
     PHPUnit_Framework_TestCase as PHPUnitTestCase;
 
 /**
- * Test class for Zend\Cloud\QueueService\Factory
+ * Test class for \Zend\Cloud\QueueService\Factory
  *
  * @category   Zend
- * @package    Zend\Cloud\QueueService
+ * @package    Zend_Cloud_QueueService
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend\Cloud
+ * @group      Zend_Cloud
  */
 class FactoryTest extends PHPUnitTestCase
 {
@@ -49,8 +49,8 @@ class FactoryTest extends PHPUnitTestCase
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit_Framework_TestSuite(__CLASS__);
+        $result = \PHPUnit_TextUI_TestRunner::run($suite);
     }
 
     public function testGetQueueAdapterKey()
@@ -88,7 +88,7 @@ class FactoryTest extends PHPUnitTestCase
     }
 }
 
-// Call Zend\Cloud\QueueService\FactoryTest::main() if this source file is executed directly.
+// Call \Zend\Cloud\QueueService\FactoryTest::main() if this source file is executed directly.
 if (PHPUnit_MAIN_METHOD == "Zend\Cloud\QueueService\FactoryTest::main") {
     FactoryTest::main();
 }

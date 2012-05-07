@@ -3,7 +3,7 @@
 namespace ZendTest\Application\TestAsset;
 
 use Zend\Session\SaveHandler,
-    Zend\Session\Manager;
+    Zend\Session\ManagerInterface as Manager;
 
 class SessionHandlerMock1 implements SaveHandler
 {

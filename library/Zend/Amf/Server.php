@@ -32,23 +32,6 @@ use Zend\Amf\Exception,
  * Zend Framework
  *
  * @todo       Make the relection methods cache and autoload.
- * @uses       Zend\Acl\Resource\GenericResource
- * @uses       Zend\Amf\Constants
- * @uses       Zend\Amf\Parser\TypeLoader
- * @uses       Zend\Amf\Request\HttpRequest
- * @uses       Zend\Amf\Response\HttpResponse
- * @uses       Zend\Amf\Value\MessageBody
- * @uses       Zend\Amf\Value\MessageHeader
- * @uses       Zend\Amf\Value\Messaging\AcknowledgeMessage
- * @uses       Zend\Amf\Value\Messaging\CommandMessage
- * @uses       Zend\Amf\Value\Messaging\ErrorMessage
- * @uses       Zend\Amf\Server\Exception
- * @uses       Zend\Authentication\AuthenticationService
- * @uses       Zend\Loader\PluginLoader
- * @uses       Zend\Server\Server
- * @uses       Zend\Server\Reflection
- * @uses       Zend\Session\Manager
- * @uses       Zend\Session\Container
  * @package    Zend_Amf
  * @subpackage Server
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

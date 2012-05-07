@@ -27,7 +27,7 @@ use Traversable,
     Zend\Stdlib\ArrayUtils,
     Zend\Translator,
     Zend\View\Renderer\PhpRenderer,
-    Zend\View\Renderer as View;
+    Zend\View\Renderer\RendererInterface as View;
 
 /**
  * Zend_Form_DisplayGroup

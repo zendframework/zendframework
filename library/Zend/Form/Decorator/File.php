@@ -24,7 +24,7 @@ namespace Zend\Form\Decorator;
 use Zend\File\Transfer\Adapter,
     Zend\Loader\Pluggable,
     Zend\Form\Element,
-    Zend\View\Renderer;
+    Zend\View\Renderer\RendererInterface as Renderer;
 
 /**
  * Zend_Form_Decorator_File

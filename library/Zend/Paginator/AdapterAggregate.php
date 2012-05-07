@@ -22,7 +22,7 @@
 namespace Zend\Paginator;
 
 /**
- * Interface that aggregates a Zend_Paginator_Adapter_Abstract just like IteratorAggregate does for Iterators.
+ * Interface that aggregates a Zend\Paginator\Adapter\Abstract just like IteratorAggregate does for Iterators.
  *
  * @category   Zend
  * @package    Zend_Paginator
@@ -35,7 +35,7 @@ interface AdapterAggregate
     /**
      * Return a fully configured Paginator Adapter from this method.
      *
-     * @return Zend_Paginator_Adapter_Interface
+     * @return \Zend\Paginator\Adapter
      */
     public function getPaginatorAdapter();
 }

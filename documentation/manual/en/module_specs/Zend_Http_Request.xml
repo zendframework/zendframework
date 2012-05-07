@@ -147,7 +147,7 @@ $request->post()->set('foo', 'bar');
                     <methodsynopsis>
                         <methodname>setUri</methodname>
                         <methodparam>
-                            <funcparams>string|Zend\Stdlib\RequestDescription\Zend\Stdlib\Message\Zend\Stdlib\ParametersDescription\Zend\Stdlib\Parameters\Zend\Uri\Http $uri</funcparams>
+                            <funcparams>string|\Zend\Stdlib\RequestInterface|\Zend\Stdlib\Message|\Zend\Stdlib\ParametersInterface|\Zend\Stdlib\Parameters|\Zend\Uri\Http $uri</funcparams>
                         </methodparam>
                     </methodsynopsis>
                     <para>
@@ -223,7 +223,7 @@ $request->post()->set('foo', 'bar');
                     <methodsynopsis>
                         <methodname>setQuery</methodname>
                         <methodparam>
-                            <funcparams>Zend\Stdlib\ParametersDescription $query</funcparams>
+                            <funcparams>Zend\Stdlib\ParametersInterface $query</funcparams>
                         </methodparam>
                     </methodsynopsis>
                     <para>
@@ -243,7 +243,7 @@ $request->post()->set('foo', 'bar');
                         <void/>
                     </methodsynopsis>
                     <para>Return the parameter container responsible for query parameters.</para>
-                    <para>Returns <classname>Zend\Stdlib\ParametersDescription</classname></para>
+                    <para>Returns <classname>Zend\Stdlib\ParametersInterface</classname></para>
                 </listitem>
             </varlistentry>
 
@@ -253,7 +253,7 @@ $request->post()->set('foo', 'bar');
                     <methodsynopsis>
                         <methodname>setPost</methodname>
                         <methodparam>
-                            <funcparams>Zend\Stdlib\ParametersDescription $post</funcparams>
+                            <funcparams>Zend\Stdlib\ParametersInterface $post</funcparams>
                         </methodparam>
                     </methodsynopsis>
                     <para>
@@ -274,7 +274,7 @@ $request->post()->set('foo', 'bar');
                         <void/>
                     </methodsynopsis>
                     <para>Return the parameter container responsible for post parameters.</para>
-                    <para>Returns <classname>Zend\Stdlib\ParametersDescription</classname></para>
+                    <para>Returns <classname>Zend\Stdlib\ParametersInterface</classname></para>
                 </listitem>
             </varlistentry>
 
@@ -299,7 +299,7 @@ $request->post()->set('foo', 'bar');
                     <methodsynopsis>
                         <methodname>setFile</methodname>
                         <methodparam>
-                            <funcparams>Zend\Stdlib\ParametersDescription $files</funcparams>
+                            <funcparams>Zend\Stdlib\ParametersInterface $files</funcparams>
                         </methodparam>
                     </methodsynopsis>
                     <para>
@@ -320,7 +320,7 @@ $request->post()->set('foo', 'bar');
                         <void/>
                     </methodsynopsis>
                     <para>Return the parameter container responsible for file parameters</para>
-                    <para>Returns <classname>Zend\Stdlib\ParametersDescription</classname></para>
+                    <para>Returns <classname>Zend\Stdlib\ParametersInterface</classname></para>
                 </listitem>
             </varlistentry>
 
@@ -330,7 +330,7 @@ $request->post()->set('foo', 'bar');
                     <methodsynopsis>
                         <methodname>setServer</methodname>
                         <methodparam>
-                            <funcparams>Zend\Stdlib\ParametersDescription $server</funcparams>
+                            <funcparams>Zend\Stdlib\ParametersInterface $server</funcparams>
                         </methodparam>
                     </methodsynopsis>
                     <para>
@@ -351,7 +351,7 @@ $request->post()->set('foo', 'bar');
                         <void/>
                     </methodsynopsis>
                     <para>Return the parameter container responsible for server parameters</para>
-                    <para>Returns <classname>Zend\Stdlib\ParametersDescription</classname></para>
+                    <para>Returns <classname>Zend\Stdlib\ParametersInterface</classname></para>
                 </listitem>
             </varlistentry>
 
@@ -361,7 +361,7 @@ $request->post()->set('foo', 'bar');
                     <methodsynopsis>
                         <methodname>setEnv</methodname>
                         <methodparam>
-                            <funcparams>Zend\Stdlib\ParametersDescription $env</funcparams>
+                            <funcparams>Zend\Stdlib\ParametersInterface $env</funcparams>
                         </methodparam>
                     </methodsynopsis>
                     <para>
@@ -381,7 +381,7 @@ $request->post()->set('foo', 'bar');
                         <void/>
                     </methodsynopsis>
                     <para>Return the parameter container responsible for env parameters</para>
-                    <para>Returns <classname>Zend\Stdlib\ParametersDescription</classname></para>
+                    <para>Returns <classname>Zend\Stdlib\ParametersInterface</classname></para>
                 </listitem>
             </varlistentry>
 

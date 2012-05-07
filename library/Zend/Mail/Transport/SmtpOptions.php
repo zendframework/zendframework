@@ -63,18 +63,19 @@ class SmtpOptions extends Options
     /**
      * Return the local client hostname
      *
-     * @return null|string
+     * @return string
      */
     public function getName()
     {
         return $this->name;
     }
- 
+
     /**
      * Set the local client hostname or IP
      *
      * @todo   hostname/IP validation
      * @param  string $name
+     * @throws \Zend\Mail\Exception\InvalidArgumentException
      * @return SmtpOptions
      */
     public function setName($name)
@@ -96,7 +97,7 @@ class SmtpOptions extends Options
      * extending it -- typically a class in the Zend\Mail\Protocol\Smtp\Auth
      * namespace.
      *
-     * @return null|string
+     * @return string
      */
     public function getConnectionClass() 
     {
@@ -104,9 +105,10 @@ class SmtpOptions extends Options
     }
 
     /**
-     * Set connection class 
+     * Set connection class
      *
      * @param  string $connectionClass the value to be set
+     * @throws \Zend\Mail\Exception\InvalidArgumentException
      * @return SmtpOptions
      */
     public function setConnectionClass($connectionClass) 
@@ -175,11 +177,12 @@ class SmtpOptions extends Options
     {
         return $this->port;
     }
- 
+
     /**
      * Set the port the SMTP server runs on
      *
      * @param  int $port
+     * @throws \Zend\Mail\Exception\InvalidArgumentException
      * @return SmtpOptions
      */
     public function setPort($port)

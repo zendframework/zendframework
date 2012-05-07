@@ -24,7 +24,6 @@ namespace Zend\View\Helper;
 /**
  * Form label helper
  *
- * @uses       \Zend\View\Helper\FormElement
  * @category   Zend
  * @package    Zend_View
  * @subpackage Helper

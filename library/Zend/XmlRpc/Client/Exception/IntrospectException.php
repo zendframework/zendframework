@@ -33,5 +33,5 @@ namespace Zend\XmlRpc\Client\Exception;
  */
 class IntrospectException
     extends \InvalidArgumentException
-    implements \Zend\XmlRpc\Client\Exception
+    implements \Zend\XmlRpc\Client\Exception\ExceptionInterface
 {}

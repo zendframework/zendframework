@@ -11,7 +11,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend\Cloud\QueueService
+ * @package    Zend_Cloud_QueueService
  * @subpackage Adapter
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -32,12 +32,12 @@ use Zend\Cloud\QueueService\Adapter,
  * Provides functionality around setting message and message set classes.
  *
  * @category   Zend
- * @package    Zend\Cloud\QueueService
+ * @package    Zend_Cloud_QueueService
  * @subpackage Adapter
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class AbstractAdapter implements Adapter
+abstract class AbstractAdapter implements AdapterInterface
 {
     /**@+ option keys */
     const MESSAGE_CLASS    = 'message_class';
@@ -54,7 +54,7 @@ abstract class AbstractAdapter implements Adapter
      * Set class to use for message objects
      *
      * @param  string $class
-     * @return Zend\Cloud\QueueService\Adapter\AbstractAdapter
+     * @return \Zend\Cloud\QueueService\Adapter\AbstractAdapter
      */
     public function setMessageClass($class)
     {
@@ -76,7 +76,7 @@ abstract class AbstractAdapter implements Adapter
      * Set class to use for message collection objects
      *
      * @param  string $class
-     * @return Zend\Cloud\QueueService\Adapter\AbstractAdapter
+     * @return \Zend\Cloud\QueueService\Adapter\AbstractAdapter
      */
     public function setMessageSetClass($class)
     {

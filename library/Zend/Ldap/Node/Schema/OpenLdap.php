@@ -74,9 +74,9 @@ class OpenLdap extends Node\Schema
     /**
      * Parses the schema
      *
-     * @param  Ldap\Dn      $dn
-     * @param  Ldap\Ldap    $ldap
-     * @return Schema Provides a fluid interface
+     * @param \Zend\Ldap\Dn   $dn
+     * @param \Zend\Ldap\Ldap $ldap
+     * @return OpenLdap Provides a fluid interface
      */
     protected function parseSchema(Ldap\Dn $dn, Ldap\Ldap $ldap)
     {

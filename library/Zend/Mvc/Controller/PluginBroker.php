@@ -3,7 +3,7 @@
 namespace Zend\Mvc\Controller;
 
 use Zend\Loader\PluginBroker as PluginBrokerBase,
-    Zend\Stdlib\Dispatchable;
+    Zend\Stdlib\DispatchableInterface as Dispatchable;
 
 class PluginBroker extends PluginBrokerBase
 {

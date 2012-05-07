@@ -708,7 +708,7 @@ $listener = function($e) {
             </para>
  
             <programlisting language="php"><![CDATA[
-class Foo implements Dispatchable
+class Foo implements DispatchableInterface
 {
     // assume composed event manager
 
@@ -733,7 +733,7 @@ class Foo implements Dispatchable
             </para>
  
             <programlisting language="php"><![CDATA[
-class Foo implements Dispatchable
+class Foo implements DispatchableInterface
 {
     // assume composed event manager
 

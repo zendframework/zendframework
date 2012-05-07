@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend\Cloud
+ * @package    Zend_Cloud
  * @subpackage StorageService
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -25,7 +25,7 @@ use Zend\Cloud\AbstractFactory;
 
 /**
  * @category   Zend
- * @package    Zend\Cloud
+ * @package    Zend_Cloud
  * @subpackage StorageService
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -37,7 +37,7 @@ class Factory extends AbstractFactory
     /**
      * @var string Interface which adapter must implement to be considered valid
      */
-    protected static $_adapterInterface = 'Zend\Cloud\StorageService\Adapter';
+    protected static $_adapterInterface = 'Zend\Cloud\StorageService\Adapter\AdapterInterface';
     /**
      * Constructor
      *

@@ -21,17 +21,14 @@
 
 namespace Zend\Session\Validator;
 
-use Zend\Session\Validator as SessionValidator;
-
 /**
- * @uses       Zend\Session\Validator
  * @category   Zend
  * @package    Zend_Session
  * @subpackage Validator
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class HttpUserAgent implements SessionValidator
+class HttpUserAgent implements ValidatorInterface
 {
     /**
      * Constructor - get the current user agent and store it in the session

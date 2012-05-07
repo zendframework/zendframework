@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend\Cloud\StorageService\Adapter
+ * @package    ZendTest_Cloud_StorageService_Adapter
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -27,7 +27,7 @@ use ZendTest\Cloud\StorageService\TestCase,
 
 /**
  * @category   Zend
- * @package    Zend\Cloud\StorageService\Adapter
+ * @package    ZendTest_Cloud_StorageService_Adapter
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License

@@ -1,7 +1,7 @@
 <?php
 /**
  * @category   Zend
- * @package    Zend\Cloud
+ * @package    Zend_Cloud
  * @subpackage Infrastructure
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -18,7 +18,7 @@ use Zend\Cloud\AbstractFactory,
 /**
  * Factory for infrastructure adapters
  * 
- * @package    Zend\Cloud
+ * @package    Zend_Cloud
  * @subpackage Infrastructure
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -30,7 +30,7 @@ class Factory extends AbstractFactory
     /**
      * @var string Interface which adapter must implement to be considered valid
      */
-    protected static $_adapterInterface = 'Zend\Cloud\Infrastructure\Adapter';
+    protected static $_adapterInterface = 'Zend\Cloud\Infrastructure\Adapter\AdapterInterface';
 
     /**
      * Constructor

@@ -26,7 +26,7 @@ use Zend\Config\Config,
     Zend\Loader\PrefixPathMapper,
     Zend\Loader,
     Zend\Json\Json,
-    Zend\View\Renderer as View,
+    Zend\View\Renderer\RendererInterface as View,
     Zend\Translator;
 
 /**
@@ -45,7 +45,7 @@ use Zend\Config\Config,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Form implements \Iterator, \Countable, \Zend\Validator\Validator
+class Form implements \Iterator, \Countable, \Zend\Validator\ValidatorInterface
 {
     /**#@+
      * Plugin loader type constants
@@ -226,8 +226,7 @@ class Form implements \Iterator, \Countable, \Zend\Validator\Validator
     protected $_translatorDisabled = false;
 
     /**
-     * @var \Zend\View\Renderer
-     */
+     * @var \Zend\View\Renderer\RendererInterface     */
     protected $_view;
 
     /**
@@ -2581,7 +2580,7 @@ class Form implements \Iterator, \Countable, \Zend\Validator\Validator
     /**
      * Set view object
      *
-     * @param  \Zend\View\Renderer $view
+     * @param  View $view
      * @return \Zend\Form\Form
      */
     public function setView(View $view = null)
@@ -2595,7 +2594,7 @@ class Form implements \Iterator, \Countable, \Zend\Validator\Validator
      *
      * If none registered, attempts to pull from ViewRenderer.
      *
-     * @return \Zend\View\Renderer|null
+     * @return \Zend\View\Renderer\RendererInterface|null
      */
     public function getView()
     {
@@ -2882,7 +2881,7 @@ class Form implements \Iterator, \Countable, \Zend\Validator\Validator
     /**
      * Render form
      *
-     * @param  \Zend\View\Renderer $view
+     * @param  View $view
      * @return string
      */
     public function render(View $view = null)

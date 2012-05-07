@@ -38,7 +38,7 @@ use Zend\Stdlib\CallbackHandler,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class EventManager implements EventCollection, SharedEventCollectionAware
+class EventManager implements EventManagerInterface, SharedEventManagerAwareInterface
 {
     /**
      * Subscribed events and their listeners
@@ -52,22 +52,22 @@ class EventManager implements EventCollection, SharedEventCollectionAware
     protected $eventClass = 'Zend\EventManager\Event';
 
     /**
-     * Identifiers, used to pull shared signals from SharedEventCollection instance
+     * Identifiers, used to pull shared signals from SharedEventManagerInterface instance
      * @var array
      */
     protected $identifiers = array();
 
     /**
-     * Shared connections
-     * @var false|null|SharedEventCollection
+     * Shared event manager
+     * @var false|null|SharedEventManagerInterface
      */
-    protected $sharedCollections = null;
+    protected $sharedManager = null;
 
     /**
      * Constructor
      *
      * Allows optionally specifying identifier(s) to use to pull signals from a
-     * SharedEventCollection.
+     * SharedEventManagerInterface.
      *
      * @param  null|string|int|array|Traversable $identifiers
      * @return void
@@ -90,38 +90,38 @@ class EventManager implements EventCollection, SharedEventCollectionAware
     }
 
     /**
-     * Set shared collections container
+     * Set shared event manager
      *
-     * @param  SharedEventCollection $connections
+     * @param  SharedEventManagerInterface $connections
      * @return void
      */
-    public function setSharedCollections(SharedEventCollection $sharedEventCollection)
+    public function setSharedManager(SharedEventManagerInterface $sharedEventManager)
     {
-        $this->sharedCollections = $sharedEventCollection;
+        $this->sharedManager = $sharedEventManager;
         return $this;
     }
 
     /**
-     * Remove any shared collections
+     * Remove any shared event manager currently attached
      * 
      * @return void
      */
-    public function unsetSharedCollections()
+    public function unsetSharedManager()
     {
-        $this->sharedCollections = false;
+        $this->sharedManager = false;
     }
 
     /**
-     * Get shared collections container
+     * Get shared event manager
      *
-     * @return false|SharedEventCollection
+     * @return false|SharedEventManagerInterface
      */
-    public function getSharedCollections()
+    public function getSharedManager()
     {
-        if (null === $this->sharedCollections) {
-            $this->setSharedCollections(StaticEventManager::getInstance());
+        if (null === $this->sharedManager) {
+            $this->setSharedManager(StaticEventManager::getInstance());
         }
-        return $this->sharedCollections;
+        return $this->sharedManager;
     }
 
     /**
@@ -138,7 +138,7 @@ class EventManager implements EventCollection, SharedEventCollectionAware
      * Set the identifiers (overrides any currently set identifiers)
      *
      * @param string|int|array|Traversable $identifiers
-     * @return ModuleManager
+     * @return EventManager Provides a fluent interface
      */
     public function setIdentifiers($identifiers)
     {
@@ -154,7 +154,7 @@ class EventManager implements EventCollection, SharedEventCollectionAware
      * Add some identifier(s) (appends to any currently set identifiers)
      *
      * @param string|int|array|Traversable $identifiers
-     * @return ModuleManager
+     * @return EventManager Provides a fluent interface
      */
     public function addIdentifiers($identifiers)
     {
@@ -179,15 +179,15 @@ class EventManager implements EventCollection, SharedEventCollectionAware
      */
     public function trigger($event, $target = null, $argv = array(), $callback = null)
     {
-        if ($event instanceof EventDescription) {
+        if ($event instanceof EventInterface) {
             $e        = $event;
             $event    = $e->getName();
             $callback = $target;
-        } elseif ($target instanceof EventDescription) {
+        } elseif ($target instanceof EventInterface) {
             $e = $target;
             $e->setName($event);
             $callback = $argv;
-        } elseif ($argv instanceof EventDescription) {
+        } elseif ($argv instanceof EventInterface) {
             $e = $argv;
             $e->setName($event);
             $e->setTarget($target);
@@ -220,15 +220,15 @@ class EventManager implements EventCollection, SharedEventCollectionAware
      */
     public function triggerUntil($event, $target, $argv = null, $callback = null)
     {
-        if ($event instanceof EventDescription) {
+        if ($event instanceof EventInterface) {
             $e        = $event;
             $event    = $e->getName();
             $callback = $target;
-        } elseif ($target instanceof EventDescription) {
+        } elseif ($target instanceof EventInterface) {
             $e = $target;
             $e->setName($event);
             $callback = $argv;
-        } elseif ($argv instanceof EventDescription) {
+        } elseif ($argv instanceof EventInterface) {
             $e = $argv;
             $e->setName($event);
             $e->setTarget($target);
@@ -260,15 +260,15 @@ class EventManager implements EventCollection, SharedEventCollectionAware
      * You can specify "*" for the event name. In such cases, the listener will 
      * be triggered for every event.
      *
-     * @param  string|array|ListenerAggregate $event An event or array of event names. If a ListenerAggregate, proxies to {@link attachAggregate()}.
-     * @param  callback|int $callback If string $event provided, expects PHP callback; for a ListenerAggregate $event, this will be the priority
+     * @param  string|array|ListenerAggregateInterface $event An event or array of event names. If a ListenerAggregateInterface, proxies to {@link attachAggregate()}.
+     * @param  callback|int $callback If string $event provided, expects PHP callback; for a ListenerAggregateInterface $event, this will be the priority
      * @param  int $priority If provided, the priority at which to register the callback
      * @return CallbackHandler|mixed CallbackHandler if attaching callback (to allow later unsubscribe); mixed if attaching aggregate
      */
     public function attach($event, $callback = null, $priority = 1)
     {
-        // Proxy ListenerAggregate arguments to attachAggregate()
-        if ($event instanceof ListenerAggregate) {
+        // Proxy ListenerAggregateInterface arguments to attachAggregate()
+        if ($event instanceof ListenerAggregateInterface) {
             return $this->attachAggregate($event, $callback);
         }
 
@@ -305,15 +305,15 @@ class EventManager implements EventCollection, SharedEventCollectionAware
     /**
      * Attach a listener aggregate
      *
-     * Listener aggregates accept an EventCollection instance, and call attach()
+     * Listener aggregates accept an EventManagerInterface instance, and call attach()
      * one or more times, typically to attach to multiple events using local
      * methods.
      *
-     * @param  ListenerAggregate $aggregate
+     * @param  ListenerAggregateInterface $aggregate
      * @param  int $priority If provided, a suggested priority for the aggregate to use
-     * @return mixed return value of {@link ListenerAggregate::attach()}
+     * @return mixed return value of {@link ListenerAggregateInterface::attach()}
      */
-    public function attachAggregate(ListenerAggregate $aggregate, $priority = 1)
+    public function attachAggregate(ListenerAggregateInterface $aggregate, $priority = 1)
     {
         return $aggregate->attach($this, $priority);
     }
@@ -321,19 +321,19 @@ class EventManager implements EventCollection, SharedEventCollectionAware
     /**
      * Unsubscribe a listener from an event
      *
-     * @param  CallbackHandler|ListenerAggregate $listener
+     * @param  CallbackHandler|ListenerAggregateInterface $listener
      * @return bool Returns true if event and listener found, and unsubscribed; returns false if either event or listener not found
      * @throws Exception\InvalidArgumentException if invalid listener provided
      */
     public function detach($listener)
     {
-        if ($listener instanceof ListenerAggregate) {
+        if ($listener instanceof ListenerAggregateInterface) {
             return $this->detachAggregate($listener);
         }
 
         if (!$listener instanceof CallbackHandler) {
             throw new Exception\InvalidArgumentException(sprintf(
-                '%s: expected a ListenerAggregate or CallbackHandler; received "%s"',
+                '%s: expected a ListenerAggregateInterface or CallbackHandler; received "%s"',
                 __METHOD__,
                 (is_object($listener) ? get_class($listener) : gettype($listener))
             ));
@@ -356,13 +356,13 @@ class EventManager implements EventCollection, SharedEventCollectionAware
     /**
      * Detach a listener aggregate
      *
-     * Listener aggregates accept an EventCollection instance, and call detach()
+     * Listener aggregates accept an EventManagerInterface instance, and call detach()
      * of all previously attached listeners.
      *
-     * @param  ListenerAggregate $aggregate
-     * @return mixed return value of {@link ListenerAggregate::detach()}
+     * @param  ListenerAggregateInterface $aggregate
+     * @return mixed return value of {@link ListenerAggregateInterface::detach()}
      */
-    public function detachAggregate(ListenerAggregate $aggregate)
+    public function detachAggregate(ListenerAggregateInterface $aggregate)
     {
         return $aggregate->detach($this);
     }
@@ -426,11 +426,11 @@ class EventManager implements EventCollection, SharedEventCollectionAware
      * delegate.
      *
      * @param  string           $event Event name
-     * @param  EventDescription $e
+     * @param  EventInterface $e
      * @param  null|callback    $callback
      * @return ResponseCollection
      */
-    protected function triggerListeners($event, EventDescription $e, $callback = null)
+    protected function triggerListeners($event, EventInterface $e, $callback = null)
     {
         $responses = new ResponseCollection;
         $listeners = $this->getListeners($event);
@@ -480,7 +480,7 @@ class EventManager implements EventCollection, SharedEventCollectionAware
     }
 
     /**
-     * Get list of all listeners attached to the shared collection for
+     * Get list of all listeners attached to the shared event manager for
      * identifiers registered by this instance
      *
      * @param  string $event
@@ -488,7 +488,7 @@ class EventManager implements EventCollection, SharedEventCollectionAware
      */
     protected function getSharedListeners($event)
     {
-        if (!$sharedCollections = $this->getSharedCollections()) {
+        if (!$sharedManager = $this->getSharedManager()) {
             return array();
         }
 
@@ -496,7 +496,7 @@ class EventManager implements EventCollection, SharedEventCollectionAware
         $sharedListeners = array();
 
         foreach ($identifiers as $id) {
-            if (!$listeners = $sharedCollections->getListeners($id, $event)) {
+            if (!$listeners = $sharedManager->getListeners($id, $event)) {
                 continue;
             }
 

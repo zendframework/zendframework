@@ -1,7 +1,7 @@
 <?php
 /**
  * @category   Zend
- * @package    Zend\Cloud
+ * @package    Zend_Cloud
  * @subpackage Infrastructure
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -18,7 +18,7 @@ use Zend\Cloud\Infrastructure\Image,
 /**
  * List of images
  *
- * @package    Zend\Cloud
+ * @package    Zend_Cloud
  * @subpackage Infrastructure
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -179,7 +179,7 @@ class ImageList implements Countable, Iterator, ArrayAccess
      * Implement ArrayAccess::offsetGet()
      *
      * @param   int     $offset
-     * @throws  OutOfBoundsException
+     * @throws  Exception\OutOfBoundsException
      * @return  Image
      */
     public function offsetGet($offset)

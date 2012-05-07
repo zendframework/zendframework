@@ -20,8 +20,13 @@
 
 namespace Zend\Session;
 
+use Zend\Session\ManagerInterface as Manager,
+    Zend\Session\SaveHandler\SaveHandlerInterface as SaveHandler,
+    Zend\Session\Storage\StorageInterface as Storage,
+    Zend\Session\Configuration\ConfigurationInterface as Configuration;
+
 /**
- * Base Manager implementation
+ * Base ManagerInterface implementation
  *
  * Defines common constructor logic and getters for Storage and Configuration
  *

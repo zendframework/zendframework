@@ -24,7 +24,6 @@ namespace Zend\View\Helper;
 /**
  * Helper to generate a set of checkbox button elements
  *
- * @uses       \Zend\View\Helper\FormRadio
  * @category   Zend
  * @package    Zend_View
  * @subpackage Helper

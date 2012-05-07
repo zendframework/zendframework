@@ -23,7 +23,7 @@ namespace Zend\Cache\Pattern;
 
 use Zend\Cache\Exception,
     Zend\Cache\StorageFactory,
-    Zend\Cache\Storage\Adapter as StorageAdapter;
+    Zend\Cache\Storage\Adapter\AdapterInterface as StorageAdapter;
 
 /**
  * @category   Zend

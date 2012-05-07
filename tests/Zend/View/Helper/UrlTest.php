@@ -65,7 +65,7 @@ class UrlTest extends \PHPUnit_Framework_TestCase
 
     public function testHelperHasHardDependencyWithRouter()
     {
-        $this->setExpectedException('Zend\View\Exception\RuntimeException', 'No RouteStack instance provided');
+        $this->setExpectedException('Zend\View\Exception\RuntimeException', 'No RouteStackInterface instance provided');
         $url = new UrlHelper;
         $url('home');
     }

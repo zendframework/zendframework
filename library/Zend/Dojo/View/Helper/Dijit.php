@@ -22,7 +22,7 @@
 namespace Zend\Dojo\View\Helper;
 
 use Zend\Json\Json,
-    Zend\View\Renderer as View,
+    Zend\View\Renderer\RendererInterface as View,
     Zend\View\Helper\HtmlElement;
 
 /**
@@ -78,7 +78,7 @@ abstract class Dijit extends HtmlElement
      *
      * Set view and enable dojo
      *
-     * @param  \Zend\View\Renderer $view
+     * @param  View $view
      * @return \Zend\Dojo\View\Helper\Dijit
      */
     public function setView(View $view)

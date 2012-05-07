@@ -3,32 +3,63 @@
 namespace Zend\Mvc\Controller;
 
 use Zend\Di\Locator,
-    Zend\EventManager\EventCollection,
-    Zend\EventManager\EventDescription as Event,
+    Zend\EventManager\EventManagerInterface,
+    Zend\EventManager\EventInterface as Event,
     Zend\EventManager\EventManager,
-    Zend\EventManager\EventManagerAware,
+    Zend\EventManager\EventManagerAwareInterface,
+    Zend\EventManager\EventsCapableInterface,
     Zend\Http\Request as HttpRequest,
     Zend\Http\PhpEnvironment\Response as HttpResponse,
     Zend\Loader\Broker,
     Zend\Loader\Pluggable,
-    Zend\Stdlib\Dispatchable,
-    Zend\Stdlib\RequestDescription as Request,
-    Zend\Stdlib\ResponseDescription as Response,
+    Zend\Stdlib\DispatchableInterface as Dispatchable,
+    Zend\Stdlib\RequestInterface as Request,
+    Zend\Stdlib\ResponseInterface as Response,
     Zend\Mvc\Exception,
-    Zend\Mvc\InjectApplicationEvent,
-    Zend\Mvc\LocatorAware,
+    Zend\Mvc\InjectApplicationEventInterface,
+    Zend\Mvc\LocatorAwareInterface,
     Zend\Mvc\MvcEvent;
 
 /**
  * Abstract RESTful controller
  */
-abstract class RestfulController implements Dispatchable, EventManagerAware, InjectApplicationEvent, LocatorAware, Pluggable
+abstract class RestfulController implements 
+    Dispatchable,
+    EventManagerAwareInterface,
+    EventsCapableInterface,
+    InjectApplicationEventInterface,
+    LocatorAwareInterface,
+    Pluggable
 {
+    /**
+     * @var Broker
+     */
     protected $broker;
+
+    /**
+     * @var Request
+     */
     protected $request;
+
+    /**
+     * @var Response
+     */
     protected $response;
+
+    /**
+     * @var Event
+     */
     protected $event;
+
+    /**
+     * @var EventCollection
+     */
     protected $events;
+
+    /**
+     * @var Locator
+     */
+    protected $locator;
 
     /**
      * Return list of resources
@@ -215,13 +246,13 @@ abstract class RestfulController implements Dispatchable, EventManagerAware, Inj
     /**
      * Set the event manager instance used by this context
      *
-     * @param  EventCollection $events
-     * @return AppContext
+     * @param  EventManagerInterface $events
+     * @return RestfulController
      */
-    public function setEventManager(EventCollection $events)
+    public function setEventManager(EventManagerInterface $events)
     {
         $events->setIdentifiers(array(
-            'Zend\Stdlib\Dispatchable',
+            'Zend\Stdlib\DispatchableInterface',
             __CLASS__,
             get_class($this)
         ));
@@ -235,7 +266,7 @@ abstract class RestfulController implements Dispatchable, EventManagerAware, Inj
      *
      * Lazy-loads an EventManager instance if none registered.
      *
-     * @return EventCollection
+     * @return EventManagerInterface
      */
     public function events()
     {

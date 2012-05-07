@@ -25,11 +25,13 @@ use ArrayIterator,
     Zend\Uri\Http,
     Zend\Http\Header\Cookie,
     Zend\Http\Header\SetCookie,
+    Zend\Http\Request as HttpRequest,
+    Zend\Http\Response as HttpResponse,
+    Zend\Http\Response\Stream as HttpResponseStream,
     Zend\Stdlib\Parameters,
-    Zend\Stdlib\ParametersDescription,
-    Zend\Stdlib\Dispatchable,
-    Zend\Stdlib\RequestDescription,
-    Zend\Stdlib\ResponseDescription;
+    Zend\Stdlib\DispatchableInterface as Dispatchable,
+    Zend\Stdlib\RequestInterface as Request,
+    Zend\Stdlib\ResponseInterface as Response;
 
 /**
  * Http client
@@ -124,7 +126,7 @@ class Client implements Dispatchable
         'useragent'       => 'Zend\Http\Client',
         'timeout'         => 10,
         'adapter'         => 'Zend\Http\Client\Adapter\Socket',
-        'httpversion'     => Request::VERSION_11,
+        'httpversion'     => HttpRequest::VERSION_11,
         'storeresponse'   => true,
         'keepalive'       => false,
         'outputstream'    => false,
@@ -195,7 +197,7 @@ class Client implements Dispatchable
      *
      * @param  Client\Adapter|string $adapter
      * @return Client
-     * @throws \Zend\Http\Client\Exception
+     * @throws Client\Exception\InvalidArgumentException
      */
     public function setAdapter($adapter)
     {
@@ -247,7 +249,7 @@ class Client implements Dispatchable
     public function getRequest()
     {
         if (empty($this->request)) {
-            $this->request = new Request();
+            $this->request = new HttpRequest();
         }
         return $this->request;
     }
@@ -272,7 +274,7 @@ class Client implements Dispatchable
     public function getResponse()
     {
         if (empty($this->response)) {
-            $this->response = new Response();
+            $this->response = new HttpResponse();
         }
         return $this->response;
     }
@@ -352,8 +354,8 @@ class Client implements Dispatchable
     {
         $method = $this->getRequest()->setMethod($method)->getMethod();
 
-        if (($method == Request::METHOD_POST || $method == Request::METHOD_PUT ||
-             $method == Request::METHOD_DELETE || $method == Request::METHOD_PATCH)
+        if (($method == HttpRequest::METHOD_POST || $method == HttpRequest::METHOD_PUT ||
+             $method == HttpRequest::METHOD_DELETE || $method == HttpRequest::METHOD_PATCH)
              && empty($this->encType)) {
             $this->setEncType(self::ENC_URLENCODED);
         }
@@ -734,11 +736,11 @@ class Client implements Dispatchable
     /**
      * Dispatch
      *
-     * @param RequestDescription $request
-     * @param ResponseDescription $response
-     * @return ResponseDescription
+     * @param Request $request
+     * @param Response $response
+     * @return Response
      */
-    public function dispatch(RequestDescription $request, ResponseDescription $response = null)
+    public function dispatch(Request $request, Response $response = null)
     {
         $response = $this->send($request);
         return $response;
@@ -848,14 +850,14 @@ class Client implements Dispatchable
                 }
                 // cleanup the adapter
                 $this->adapter->setOutputStream(null);
-                $response = Response\Stream::fromStream($response, $stream);
+                $response = HttpResponseStream::fromStream($response, $stream);
                 $response->setStreamName($this->streamName);
                 if (!is_string($this->config['outputstream'])) {
                     // we used temp name, will need to clean up
                     $response->setCleanup(true);
                 }
             } else {
-                $response = Response::fromString($response);
+                $response = HttpResponse::fromString($response);
             }
 
             // Get the cookies from response (if any)
@@ -878,7 +880,7 @@ class Client implements Dispatchable
                        $response->getStatusCode() == 301))) {
 
                     $this->resetParameters();
-                    $this->setMethod(Request::METHOD_GET);
+                    $this->setMethod(HttpRequest::METHOD_GET);
                 }
 
                 // If we got a well formed absolute URI
@@ -1018,7 +1020,7 @@ class Client implements Dispatchable
         $headers = array();
 
         // Set the host header
-        if ($this->config['httpversion'] == Request::VERSION_11) {
+        if ($this->config['httpversion'] == HttpRequest::VERSION_11) {
             $host = $uri->getHost();
             // If the port is not default, add it
             if (!(($uri->getScheme() == 'http' && $uri->getPort() == 80) ||
@@ -1077,7 +1079,7 @@ class Client implements Dispatchable
                 $fstat = fstat($body);
                 $headers['Content-Length'] = $fstat['size'];
             } else {
-                $headers['Content-Length'] = static::strlen($body);
+                $headers['Content-Length'] = strlen($body);
             }
         }
 
@@ -1204,7 +1206,7 @@ class Client implements Dispatchable
     public function encodeFormData($boundary, $name, $value, $filename = null, $headers = array())
     {
         $ret = "--{$boundary}\r\n" .
-            'Content-Disposition: form-data; name="' . $name .'"';
+            'Content-Disposition: form-data; name="' . $name . '"';
 
         if ($filename) {
             $ret .= '; filename="' . $filename . '"';
@@ -1215,7 +1217,6 @@ class Client implements Dispatchable
             $ret .= "{$hname}: {$hvalue}\r\n";
         }
         $ret .= "\r\n";
-
         $ret .= "{$value}\r\n";
 
         return $ret;
@@ -1297,21 +1298,5 @@ class Client implements Dispatchable
             $uri, $this->config['httpversion'], $headers, $body);
 
         return $this->adapter->read();
-    }
-
-    /**
-     * Returns length of binary string in bytes
-     *
-     * @param string $str
-     * @return int the string length
-     */
-    static public function strlen($str)
-    {
-        if (function_exists('mb_internal_encoding') &&
-            (((int)ini_get('mbstring.func_overload')) & 2)) {
-            return mb_strlen($str, '8bit');
-        } else {
-            return strlen($str);
-        }
     }
 }

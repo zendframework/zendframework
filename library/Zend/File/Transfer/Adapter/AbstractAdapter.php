@@ -371,7 +371,7 @@ abstract class AbstractAdapter
     /**
      * Adds a new validator for this class
      *
-     * @param  string|Validator\Validator $validator           Type of validator to add
+     * @param  string|Validator\ValidatorInterface $validator           Type of validator to add
      * @param  boolean                    $breakChainOnFailure If the validation chain should stop an failure
      * @param  string|array               $options             Options to set for the validator
      * @param  string|array               $files               Files to limit this validator to
@@ -380,7 +380,7 @@ abstract class AbstractAdapter
      */
     public function addValidator($validator, $breakChainOnFailure = false, $options = null, $files = null)
     {
-        if ($validator instanceof Validator\Validator) {
+        if ($validator instanceof Validator\ValidatorInterface) {
             $name = get_class($validator);
         } elseif (is_string($validator)) {
             $name      = $this->getPluginLoader(self::VALIDATOR)->load($validator);
@@ -395,7 +395,7 @@ abstract class AbstractAdapter
                 unset($options['messages']);
             }
         } else {
-            throw new Exception\InvalidArgumentException('Invalid validator provided to addValidator; must be string or Zend\Validator\Validator');
+            throw new Exception\InvalidArgumentException('Invalid validator provided to addValidator; must be string or Zend\Validator\ValidatorInterface');
         }
 
         $this->validators[$name] = $validator;
@@ -427,7 +427,7 @@ abstract class AbstractAdapter
     public function addValidators(array $validators, $files = null)
     {
         foreach ($validators as $name => $validatorInfo) {
-            if ($validatorInfo instanceof Validator\Validator) {
+            if ($validatorInfo instanceof Validator\ValidatorInterface) {
                 $this->addValidator($validatorInfo, null, null, $files);
             } else if (is_string($validatorInfo)) {
                 if (!is_int($name)) {

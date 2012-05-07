@@ -612,7 +612,7 @@ class Menu extends AbstractHelper
     /**
      * Renders menu
      *
-     * Implements {@link Helper::render()}.
+     * Implements {@link HelperInterface::render()}.
      *
      * If a partial view is registered in the helper, the menu will be rendered
      * using the given partial script. If no partial is registered, the menu

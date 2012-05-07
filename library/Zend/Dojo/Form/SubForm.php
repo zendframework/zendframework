@@ -76,7 +76,7 @@ class SubForm extends \Zend\Form\SubForm
     /**
      * Get view
      *
-     * @return \Zend\View\Renderer
+     * @return \Zend\View\Renderer\RendererInterface
      */
     public function getView()
     {

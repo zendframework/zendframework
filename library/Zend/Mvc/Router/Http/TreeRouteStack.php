@@ -25,9 +25,9 @@ use Zend\Mvc\Router\Exception,
     Traversable,
     Zend\Stdlib\ArrayUtils,
     Zend\Mvc\Router\SimpleRouteStack,
-    Zend\Mvc\Router\Route as BaseRoute,
-    Zend\Mvc\Router\Http\Route,
-    Zend\Stdlib\RequestDescription as Request,
+    Zend\Mvc\Router\RouteInterface as BaseRoute,
+    Zend\Mvc\Router\Http\RouteInterface,
+    Zend\Stdlib\RequestInterface as Request,
     Zend\Uri\Http as HttpUri;
 
 /**
@@ -75,17 +75,17 @@ class TreeRouteStack extends SimpleRouteStack
     }
 
     /**
-     * addRoute(): defined by RouteStack interface.
+     * addRoute(): defined by RouteStackInterface interface.
      *
      * @see    RouteStack::addRoute()
      * @param  string  $name
      * @param  mixed   $route
      * @param  integer $priority
-     * @return RouteStack
+     * @return TreeRouteStack
      */
     public function addRoute($name, $route, $priority = null)
     {
-        if (!$route instanceof Route) {
+        if (!$route instanceof RouteInterface) {
             $route = $this->routeFromArray($route);
         }
 
@@ -97,19 +97,19 @@ class TreeRouteStack extends SimpleRouteStack
      *
      * @see    SimpleRouteStack::routeFromArray()
      * @param  array|\Traversable $specs
-     * @return Route
+     * @return RouteInterface
      */
     protected function routeFromArray($specs)
     {
         if ($specs instanceof Traversable) {
             $specs = ArrayUtils::iteratorToArray($specs);
         } elseif (!is_array($specs)) {
-            throw new Exception\InvalidArgumentException('Route definition must be an array or Traversable object');
+            throw new Exception\InvalidArgumentException('RouteInterface definition must be an array or Traversable object');
         }
 
         $route = parent::routeFromArray($specs);
 
-        if (!$route instanceof Route) {
+        if (!$route instanceof RouteInterface) {
             throw new Exception\RuntimeException('Given route does not implement HTTP route interface');
         }
 
@@ -178,7 +178,7 @@ class TreeRouteStack extends SimpleRouteStack
     }
 
     /**
-     * assemble(): defined by Route interface.
+     * assemble(): defined by RouteInterface interface.
      *
      * @see    BaseRoute::assemble()
      * @param  array $params
@@ -195,7 +195,7 @@ class TreeRouteStack extends SimpleRouteStack
         $route = $this->routes->get($names[0]);
 
         if (!$route) {
-            throw new Exception\RuntimeException(sprintf('Route with name "%s" not found', $names[0]));
+            throw new Exception\RuntimeException(sprintf('RouteInterface with name "%s" not found', $names[0]));
         }
 
         if (isset($names[1])) {

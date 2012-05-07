@@ -41,7 +41,7 @@ class ForwardTest extends TestCase
         $controller = new UneventfulController();
         $plugin     = new ForwardPlugin();
         $plugin->setController($controller);
-        $this->setExpectedException('Zend\Mvc\Exception\DomainException', 'InjectApplicationEvent');
+        $this->setExpectedException('Zend\Mvc\Exception\DomainException', 'InjectApplicationEventInterface');
         $plugin->dispatch('forward');
     }
 
@@ -51,7 +51,7 @@ class ForwardTest extends TestCase
         $controller->setEvent($this->controller->getEvent());
         $plugin     = new ForwardPlugin();
         $plugin->setController($controller);
-        $this->setExpectedException('Zend\Mvc\Exception\DomainException', 'implements LocatorAware');
+        $this->setExpectedException('Zend\Mvc\Exception\DomainException', 'implements LocatorAwareInterface');
         $plugin->dispatch('forward');
     }
 
@@ -69,8 +69,18 @@ class ForwardTest extends TestCase
         $locator->add('bogus', function() {
             return new stdClass;
         });
-        $this->setExpectedException('Zend\Mvc\Exception\DomainException', 'Dispatchable');
+        $this->setExpectedException('Zend\Mvc\Exception\DomainException', 'DispatchableInterface');
         $this->plugin->dispatch('bogus');
+    }
+
+    public function testDispatchRaisesDomainExceptionIfCircular()
+    {
+        $this->setExpectedException('Zend\Mvc\Exception\DomainException', 'Circular forwarding');
+        $sampleController = $this->controller;
+        $sampleController->getLocator()->add('sample', function() use ($sampleController) {
+            return $sampleController;
+        });
+        $this->plugin->dispatch('sample', array('action' => 'test-circular'));
     }
 
     public function testPluginDispatchsRequestedControllerWhenFound()

@@ -21,11 +21,10 @@
 
 namespace Zend\Serializer\Adapter;
 
-use Zend\Serializer\Exception\RuntimeException;
+use Zend\Serializer\Exception\RuntimeException,
+    Zend\Config\Config;
 
 /**
- * @uses       Zend\Serializer\Adapter\AbstractAdapter
- * @uses       Zend\Serializer\Exception\RuntimeException
  * @category   Zend
  * @package    Zend_Serializer
  * @subpackage Adapter
@@ -42,7 +41,7 @@ class PhpSerialize extends AbstractAdapter
     /**
      * Constructor
      * 
-     * @param  array|Zend\Config\Config $opts 
+     * @param  array|Config $opts
      * @return void
      */
     public function __construct($opts = array()) 
@@ -62,7 +61,7 @@ class PhpSerialize extends AbstractAdapter
      * @param  mixed $value 
      * @param  array $opts 
      * @return string
-     * @throws Zend\Serializer\Exception On serialize error
+     * @throws RuntimeException On serialize error
      */
     public function serialize($value, array $opts = array())
     {
@@ -87,7 +86,7 @@ class PhpSerialize extends AbstractAdapter
      * @param  string $serialized 
      * @param  array $opts 
      * @return mixed
-     * @throws Zend\Serializer\Exception on unserialize error
+     * @throws RuntimeException on unserialize error
      */
     public function unserialize($serialized, array $opts = array())
     {

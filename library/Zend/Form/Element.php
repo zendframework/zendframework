@@ -1166,7 +1166,7 @@ class Element implements ValidatorInterface
         foreach ($validators as $validatorInfo) {
             if (is_string($validatorInfo)) {
                 $this->addValidator($validatorInfo);
-            } elseif ($validatorInfo instanceof Validator) {
+            } elseif ($validatorInfo instanceof ValidatorInterface) {
                 $this->addValidator($validatorInfo);
             } elseif (is_array($validatorInfo)) {
                 $argc                = count($validatorInfo);

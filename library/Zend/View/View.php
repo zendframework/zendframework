@@ -106,6 +106,10 @@ class View implements EventManagerAwareInterface, EventsCapableInterface
      */
     public function setEventManager(EventManagerInterface $events)
     {
+        $events->setIdentifiers(array(
+            __CLASS__,
+            get_called_class(),
+        ));
         $this->events = $events;
         return $this;
     }
@@ -120,10 +124,7 @@ class View implements EventManagerAwareInterface, EventsCapableInterface
     public function events()
     {
         if (!$this->events instanceof EventManagerInterface) {
-            $this->setEventManager(new EventManager(array(
-                __CLASS__,
-                get_called_class(),
-            )));
+            $this->setEventManager(new EventManager());
         }
         return $this->events;
     }

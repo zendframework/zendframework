@@ -19,7 +19,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Soap\AutoDiscover;
+namespace Zend\Soap\AutoDiscover\DiscoveryStrategy;
 
 use Zend\Server\Reflection\AbstractFunction,
     Zend\Server\Reflection\Prototype,
@@ -34,7 +34,7 @@ use Zend\Server\Reflection\AbstractFunction,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface DiscoveryStrategy
+interface DiscoveryStrategyInterface
 {
     /**
      * Get the function parameters php type.

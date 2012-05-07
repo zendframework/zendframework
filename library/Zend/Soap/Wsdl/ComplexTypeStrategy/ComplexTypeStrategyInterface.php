@@ -19,7 +19,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Soap\Wsdl;
+namespace Zend\Soap\Wsdl\ComplexTypeStrategy;
 
 /**
  * Interface strategies that generate an XSD-Schema for complex data types in WSDL files.
@@ -30,7 +30,7 @@ namespace Zend\Soap\Wsdl;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface ComplexTypeStrategy
+interface ComplexTypeStrategyInterface
 {
     /**
      * Method accepts the current WSDL context file.

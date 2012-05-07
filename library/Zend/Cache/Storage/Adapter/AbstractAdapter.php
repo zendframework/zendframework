@@ -899,13 +899,13 @@ abstract class AbstractAdapter implements AdapterInterface, EventsCapableInterfa
      */
     protected function internalSetItems(array & $normalizedKeyValuePairs, array & $normalizedOptions)
     {
-        $result = array();
+        $failedKeys = array();
         foreach ($normalizedKeyValuePairs as $normalizedKey => $value) {
             if (!$this->internalSetItem($normalizedKey, $value, $normalizedOptions)) {
-                $result[] = $normalizedKey;
+                $failedKeys[] = $normalizedKey;
             }
         }
-        return $result;
+        return $failedKeys;
     }
 
     /**

@@ -35,9 +35,12 @@ class FilesystemTest extends CommonAdapterTest
 {
 
     protected $_tmpCacheDir;
+    protected $_umask;
 
     public function setUp()
     {
+        $this->_umask = umask();
+
         $this->_tmpCacheDir = @tempnam(sys_get_temp_dir(), 'zend_cache_test_');
         if (!$this->_tmpCacheDir) {
             $err = error_get_last();
@@ -47,7 +50,7 @@ class FilesystemTest extends CommonAdapterTest
             $this->fail("Can't remove temporary cache directory-file: {$err['message']}");
         } elseif (!@mkdir($this->_tmpCacheDir, 0777)) {
             $err = error_get_last();
-            $this->fail("Can't create temporaty cache directory: {$err['message']}");
+            $this->fail("Can't create temporary cache directory: {$err['message']}");
         }
 
         $this->_options = new Cache\Storage\Adapter\FilesystemOptions(array(
@@ -62,6 +65,11 @@ class FilesystemTest extends CommonAdapterTest
     public function tearDown()
     {
         $this->_removeRecursive($this->_tmpCacheDir);
+
+        if ($this->_umask != umask()) {
+            umask($this->_umask);
+            $this->fail("Umask wasn't reset");
+        }
 
         parent::tearDown();
     }

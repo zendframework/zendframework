@@ -92,8 +92,8 @@
 
         <para>
             Here is an example of common usage of the autodiscovery functionality. The
-            <methodname>handle()</methodname> function generates the WSDL file and posts it to the
-            browser.
+            <methodname>generate()</methodname> function generates the WSDL object and in conjunction
+            with <methodname>toXml()</methodname> function you can posts it to the browser.
         </para>
 
         <programlisting language="php"><![CDATA[

@@ -260,15 +260,15 @@ class EventManager implements EventManagerInterface, SharedEventManagerAwareInte
      * You can specify "*" for the event name. In such cases, the listener will 
      * be triggered for every event.
      *
-     * @param  string|array|ListenerAggregate $event An event or array of event names. If a ListenerAggregate, proxies to {@link attachAggregate()}.
-     * @param  callback|int $callback If string $event provided, expects PHP callback; for a ListenerAggregate $event, this will be the priority
+     * @param  string|array|ListenerAggregateInterface $event An event or array of event names. If a ListenerAggregateInterface, proxies to {@link attachAggregate()}.
+     * @param  callback|int $callback If string $event provided, expects PHP callback; for a ListenerAggregateInterface $event, this will be the priority
      * @param  int $priority If provided, the priority at which to register the callback
      * @return CallbackHandler|mixed CallbackHandler if attaching callback (to allow later unsubscribe); mixed if attaching aggregate
      */
     public function attach($event, $callback = null, $priority = 1)
     {
-        // Proxy ListenerAggregate arguments to attachAggregate()
-        if ($event instanceof ListenerAggregate) {
+        // Proxy ListenerAggregateInterface arguments to attachAggregate()
+        if ($event instanceof ListenerAggregateInterface) {
             return $this->attachAggregate($event, $callback);
         }
 
@@ -309,11 +309,11 @@ class EventManager implements EventManagerInterface, SharedEventManagerAwareInte
      * one or more times, typically to attach to multiple events using local
      * methods.
      *
-     * @param  ListenerAggregate $aggregate
+     * @param  ListenerAggregateInterface $aggregate
      * @param  int $priority If provided, a suggested priority for the aggregate to use
-     * @return mixed return value of {@link ListenerAggregate::attach()}
+     * @return mixed return value of {@link ListenerAggregateInterface::attach()}
      */
-    public function attachAggregate(ListenerAggregate $aggregate, $priority = 1)
+    public function attachAggregate(ListenerAggregateInterface $aggregate, $priority = 1)
     {
         return $aggregate->attach($this, $priority);
     }
@@ -321,19 +321,19 @@ class EventManager implements EventManagerInterface, SharedEventManagerAwareInte
     /**
      * Unsubscribe a listener from an event
      *
-     * @param  CallbackHandler|ListenerAggregate $listener
+     * @param  CallbackHandler|ListenerAggregateInterface $listener
      * @return bool Returns true if event and listener found, and unsubscribed; returns false if either event or listener not found
      * @throws Exception\InvalidArgumentException if invalid listener provided
      */
     public function detach($listener)
     {
-        if ($listener instanceof ListenerAggregate) {
+        if ($listener instanceof ListenerAggregateInterface) {
             return $this->detachAggregate($listener);
         }
 
         if (!$listener instanceof CallbackHandler) {
             throw new Exception\InvalidArgumentException(sprintf(
-                '%s: expected a ListenerAggregate or CallbackHandler; received "%s"',
+                '%s: expected a ListenerAggregateInterface or CallbackHandler; received "%s"',
                 __METHOD__,
                 (is_object($listener) ? get_class($listener) : gettype($listener))
             ));
@@ -359,10 +359,10 @@ class EventManager implements EventManagerInterface, SharedEventManagerAwareInte
      * Listener aggregates accept an EventManagerInterface instance, and call detach()
      * of all previously attached listeners.
      *
-     * @param  ListenerAggregate $aggregate
-     * @return mixed return value of {@link ListenerAggregate::detach()}
+     * @param  ListenerAggregateInterface $aggregate
+     * @return mixed return value of {@link ListenerAggregateInterface::detach()}
      */
-    public function detachAggregate(ListenerAggregate $aggregate)
+    public function detachAggregate(ListenerAggregateInterface $aggregate)
     {
         return $aggregate->detach($this);
     }

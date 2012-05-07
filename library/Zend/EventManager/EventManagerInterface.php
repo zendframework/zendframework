@@ -81,7 +81,7 @@ interface EventManagerInterface
     /**
      * Detach an event listener
      * 
-     * @param  CallbackHandler|ListenerAggregate $listener 
+     * @param  CallbackHandler|ListenerAggregateInterface $listener 
      * @return void
      */
     public function detach($listener);

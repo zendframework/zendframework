@@ -22,7 +22,7 @@
 namespace ZendTest\EventManager\TestAsset;
 
 use Zend\EventManager\EventManagerInterface,
-    Zend\EventManager\ListenerAggregate;
+    Zend\EventManager\ListenerAggregateInterface;
 
 /**
  * @category   Zend
@@ -32,7 +32,7 @@ use Zend\EventManager\EventManagerInterface,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class MockAggregate implements ListenerAggregate
+class MockAggregate implements ListenerAggregateInterface
 {
 
     protected $listeners = array();

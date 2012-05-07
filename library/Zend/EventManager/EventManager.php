@@ -38,7 +38,7 @@ use Zend\Stdlib\CallbackHandler,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class EventManager implements EventManagerInterface, SharedEventManagerAwareInterface
+class EventManager implements EventManagerInterface
 {
     /**
      * Subscribed events and their listeners
@@ -93,7 +93,7 @@ class EventManager implements EventManagerInterface, SharedEventManagerAwareInte
      * Set shared event manager
      *
      * @param  SharedEventManagerInterface $connections
-     * @return void
+     * @return EventManager
      */
     public function setSharedManager(SharedEventManagerInterface $sharedEventManager)
     {

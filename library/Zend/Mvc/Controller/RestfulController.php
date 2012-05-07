@@ -15,14 +15,14 @@ use Zend\Di\Locator,
     Zend\Stdlib\RequestDescription as Request,
     Zend\Stdlib\ResponseDescription as Response,
     Zend\Mvc\Exception,
-    Zend\Mvc\InjectApplicationEvent,
-    Zend\Mvc\LocatorAware,
+    Zend\Mvc\InjectApplicationEventInterface,
+    Zend\Mvc\LocatorAwareInterface,
     Zend\Mvc\MvcEvent;
 
 /**
  * Abstract RESTful controller
  */
-abstract class RestfulController implements Dispatchable, EventManagerAware, InjectApplicationEvent, LocatorAware, Pluggable
+abstract class RestfulController implements Dispatchable, EventManagerAware, InjectApplicationEventInterface, LocatorAwareInterface, Pluggable
 {
     protected $broker;
     protected $request;

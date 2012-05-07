@@ -67,7 +67,7 @@ class MvcEvent extends Event
      * @param Router\RouteStack $router
      * @return MvcEvent
      */
-    public function setRouter(Router\RouteStack $router)
+    public function setRouter(Router\RouteStackInterface $router)
     {
         $this->setParam('router', $router);
         $this->router = $router;

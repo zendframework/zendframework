@@ -4,7 +4,7 @@ namespace Zend\Mvc;
 
 use Zend\Di\Locator;
 
-interface LocatorAware
+interface LocatorAwareInterface
 {
     public function setLocator(Locator $locator);
     public function getLocator();

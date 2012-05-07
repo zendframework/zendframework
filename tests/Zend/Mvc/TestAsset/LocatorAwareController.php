@@ -4,9 +4,9 @@ namespace ZendTest\Mvc\TestAsset;
 
 use Zend\Di\Locator as DiLocator,
     Zend\Mvc\Controller\ActionController,
-    Zend\Mvc\LocatorAware;
+    Zend\Mvc\LocatorAwareInterface;
 
-class LocatorAwareController extends ActionController implements LocatorAware
+class LocatorAwareController extends ActionController implements LocatorAwareInterface
 {
     protected $locator;
 

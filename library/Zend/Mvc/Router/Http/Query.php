@@ -37,7 +37,7 @@ use Traversable,
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @see        http://manuals.rubyonrails.com/read/chapter/65
  */
-class Query implements Route
+class Query implements RouteInterface
 {
 
     /**
@@ -65,7 +65,7 @@ class Query implements Route
     }
 
     /**
-     * factory(): defined by Route interface.
+     * factory(): defined by RouteInterface interface.
      *
      * @see    Route::factory()
      * @param  array|\Traversable $options
@@ -89,7 +89,7 @@ class Query implements Route
     }
 
     /**
-     * match(): defined by Route interface.
+     * match(): defined by RouteInterface interface.
      *
      * @see    Route::match()
      * @param  Request $request
@@ -109,7 +109,7 @@ class Query implements Route
     }
 
     /**
-     * assemble(): Defined by Route interface.
+     * assemble(): Defined by RouteInterface interface.
      * @see    Route::assemble()
      *
      * @param  array $params
@@ -132,7 +132,7 @@ class Query implements Route
     }
 
     /**
-     * getAssembledParams(): defined by Route interface.
+     * getAssembledParams(): defined by RouteInterface interface.
      *
      * @see    Route::getAssembledParams
      * @return array

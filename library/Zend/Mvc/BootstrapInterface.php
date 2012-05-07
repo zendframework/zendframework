@@ -27,13 +27,13 @@ namespace Zend\Mvc;
  * @copyright Copyright (C) 2005-2011, Zend Technologies, Inc.
  * @license   New BSD {@link http://framework.zend.com/license}
  */
-interface Bootstrapper
+interface BootstrapInterface
 {
     /**
      * Bootstrap an application
      * 
-     * @param  AppContext $application 
+     * @param  ApplicationInterface $application
      * @return void
      */
-    public function bootstrap(AppContext $application);
+    public function bootstrap(ApplicationInterface $application);
 }

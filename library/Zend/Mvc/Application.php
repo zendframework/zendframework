@@ -25,7 +25,7 @@ use ArrayObject,
  * application, first routing, then dispatching the discovered controller. A
  * response will then be returned, which may then be sent to the caller.
  */
-class Application implements AppContext
+class Application implements ApplicationInterface
 {
     const ERROR_CONTROLLER_CANNOT_DISPATCH = 'error-controller-cannot-dispatch';
     const ERROR_CONTROLLER_NOT_FOUND       = 'error-controller-not-found';
@@ -95,10 +95,10 @@ class Application implements AppContext
      *
      * A router should return a metadata object containing a controller key.
      *
-     * @param  Router\RouteStack $router
+     * @param  Router\RouteStackInterface $router
      * @return Application
      */
-    public function setRouter(Router\RouteStack $router)
+    public function setRouter(Router\RouteStackInterface $router)
     {
         $this->router = $router;
         return $this;
@@ -159,7 +159,7 @@ class Application implements AppContext
      */
     public function getRouter()
     {
-        if (!$this->router instanceof Router\RouteStack) {
+        if (!$this->router instanceof Router\RouteStackInterface) {
             $this->setRouter(new Router\SimpleRouteStack());
         }
         return $this->router;
@@ -285,7 +285,7 @@ class Application implements AppContext
     }
 
     /**
-     * Route the request
+     * RouteInterface the request
      *
      * @param  MvcEvent $e
      * @return Router\RouteMatch
@@ -349,7 +349,7 @@ class Application implements AppContext
             goto complete;
         }
 
-        if ($controller instanceof LocatorAware) {
+        if ($controller instanceof LocatorAwareInterface) {
             $controller->setLocator($locator);
         }
 
@@ -371,7 +371,7 @@ class Application implements AppContext
         $request  = $e->getRequest();
         $response = $this->getResponse();
 
-        if ($controller instanceof InjectApplicationEvent) {
+        if ($controller instanceof InjectApplicationEventInterface) {
             $controller->setEvent($e);
         }
 

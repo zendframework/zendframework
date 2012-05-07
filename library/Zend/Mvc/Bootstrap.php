@@ -9,7 +9,7 @@ use Zend\Di\Configuration as DiConfiguration,
     Zend\EventManager\EventManagerAware,
     Zend\Mvc\Router\Http\TreeRouteStack as Router;
 
-class Bootstrap implements Bootstrapper, EventManagerAware
+class Bootstrap implements BootstrapInterface, EventManagerAware
 {
     /**
      * @var \Zend\Config\Config
@@ -78,7 +78,7 @@ class Bootstrap implements Bootstrapper, EventManagerAware
      * @param Application $application
      * @return void
      */
-    public function bootstrap(AppContext $application)
+    public function bootstrap(ApplicationInterface $application)
     {
         $this->setupLocator($application);
         $this->setupRouter($application);
@@ -90,10 +90,10 @@ class Bootstrap implements Bootstrapper, EventManagerAware
     /**
      * Sets up the locator based on the configuration provided
      *
-     * @param  AppContext $application
+     * @param  ApplicationInterface $application
      * @return void
      */
-    protected function setupLocator(AppContext $application)
+    protected function setupLocator(ApplicationInterface $application)
     {
         $events       = $this->events();
         $sharedEvents = $events->getSharedCollections();
@@ -105,7 +105,7 @@ class Bootstrap implements Bootstrapper, EventManagerAware
 
         // Default configuration for common MVC classes
         $diConfig = new DiConfiguration(array('definition' => array('class' => array(
-            'Zend\Mvc\Router\RouteStack' => array(
+            'Zend\Mvc\Router\RouteStackInterface' => array(
                 'instantiator' => array(
                     'Zend\Mvc\Router\Http\TreeRouteStack',
                     'factory'
@@ -248,9 +248,9 @@ class Bootstrap implements Bootstrapper, EventManagerAware
      * @param  Application $application
      * @return void
      */
-    protected function setupRouter(AppContext $application)
+    protected function setupRouter(ApplicationInterface $application)
     {
-        $router = $application->getLocator()->get('Zend\Mvc\Router\RouteStack');
+        $router = $application->getLocator()->get('Zend\Mvc\Router\RouteStackInterface');
         $application->setRouter($router);
     }
 
@@ -310,10 +310,10 @@ class Bootstrap implements Bootstrapper, EventManagerAware
      * Triggers with the keys "application" and "config", the latter pointing
      * to the Module ManagerInterface attached to the bootstrap.
      *
-     * @param  AppContext $application
+     * @param  ApplicationInterface $application
      * @return void
      */
-    protected function setupEvents(AppContext $application)
+    protected function setupEvents(ApplicationInterface $application)
     {
         $application->events()->setSharedCollections(
             $this->events()->getSharedCollections()

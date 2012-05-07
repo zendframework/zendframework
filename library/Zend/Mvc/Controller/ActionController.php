@@ -11,8 +11,8 @@ use Zend\Di\Locator,
     Zend\Loader\Broker,
     Zend\Loader\Pluggable,
     Zend\Mvc\Exception,
-    Zend\Mvc\InjectApplicationEvent,
-    Zend\Mvc\LocatorAware,
+    Zend\Mvc\InjectApplicationEventInterface,
+    Zend\Mvc\LocatorAwareInterface,
     Zend\Mvc\MvcEvent,
     Zend\Stdlib\Dispatchable,
     Zend\Stdlib\RequestDescription as Request,
@@ -22,7 +22,7 @@ use Zend\Di\Locator,
 /**
  * Basic action controller
  */
-abstract class ActionController implements Dispatchable, EventManagerAware, InjectApplicationEvent, LocatorAware, Pluggable
+abstract class ActionController implements Dispatchable, EventManagerAware, InjectApplicationEventInterface, LocatorAwareInterface, Pluggable
 {
     //use \Zend\EventManager\ProvidesEvents;
 

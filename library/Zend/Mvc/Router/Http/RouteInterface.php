@@ -18,48 +18,23 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Mvc\Router;
+namespace Zend\Mvc\Router\Http;
 
-use Zend\Stdlib\RequestDescription as Request;
+use Zend\Mvc\Router\RouteInterface as BaseRoute;
 
 /**
- * Route interface.
- *
+ * Tree specific route interface.
+ * 
  * @package    Zend_Mvc_Router
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Route
+interface RouteInterface extends BaseRoute
 {
     /**
-     * Priority used for route stacks.
-     *
-     * @var integer
-     * public $priority;
+     * Get a list of parameters used while assembling.
+     * 
+     * @return array
      */
-
-    /**
-     * Create a new route with given options.
-     *
-     * @param  array|\Traversable $options
-     * @return void
-     */
-    public static function factory($options = array());
-
-    /**
-     * Match a given request.
-     *
-     * @param  Request $request
-     * @return RouteMatch
-     */
-    public function match(Request $request);
-
-    /**
-     * Assemble the route.
-     *
-     * @param  array $params
-     * @param  array $options
-     * @return mixed
-     */
-    public function assemble(array $params = array(), array $options = array());
+    public function getAssembledParams();
 }

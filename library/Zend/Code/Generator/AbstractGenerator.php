@@ -145,7 +145,7 @@ abstract class AbstractGenerator implements Generator
 //     * setConfig()
 //     *
 //     * @param \Zend\Config\Config $config
-//     * @return \Zend\CodeGenerator\AbstractCodeGenerator
+//     * @return self
 //     */
 //    public function setConfig(Config\Config $config)
 //    {
@@ -157,7 +157,7 @@ abstract class AbstractGenerator implements Generator
 //     * setOptions()
 //     *
 //     * @param array $options
-//     * @return \Zend\CodeGenerator\AbstractCodeGenerator
+//     * @return self
 //     */
 //    public function setOptions(Array $options)
 //    {

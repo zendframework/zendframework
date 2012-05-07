@@ -22,7 +22,7 @@
 namespace Zend\Mvc\View;
 
 use Zend\EventManager\EventManagerInterface,
-    Zend\EventManager\ListenerAggregate,
+    Zend\EventManager\ListenerAggregateInterface,
     Zend\Mvc\MvcEvent,
     Zend\Stdlib\ResponseInterface as Response,
     Zend\View\Model\ModelInterface as ViewModel,
@@ -35,7 +35,7 @@ use Zend\EventManager\EventManagerInterface,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class DefaultRenderingStrategy implements ListenerAggregate
+class DefaultRenderingStrategy implements ListenerAggregateInterface
 {
     /**
      * @var \Zend\Stdlib\CallbackHandler[]

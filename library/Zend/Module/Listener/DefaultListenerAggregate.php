@@ -9,8 +9,8 @@
  */
 namespace Zend\Module\Listener;
 
-use Zend\EventManager\ListenerAggregate,
-    Zend\EventManager\EventManagerInterface,
+use Zend\EventManager\EventManagerInterface,
+    Zend\EventManager\ListenerAggregateInterface,
     Zend\Loader\ModuleAutoloader;
 
 /**
@@ -20,8 +20,7 @@ use Zend\EventManager\ListenerAggregate,
  * @package    Zend_Module
  * @subpackage Listener
  */
-class DefaultListenerAggregate extends AbstractListener
-    implements ListenerAggregate
+class DefaultListenerAggregate extends AbstractListener implements ListenerAggregateInterface
 {
     /**
      * @var array

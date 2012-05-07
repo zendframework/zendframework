@@ -16,7 +16,7 @@ use ArrayAccess,
     Zend\Module\ModuleEvent,
     Zend\Stdlib\ArrayUtils,
     Zend\EventManager\EventManagerInterface,
-    Zend\EventManager\ListenerAggregate;
+    Zend\EventManager\ListenerAggregateInterface;
 
 /**
  * Config listener
@@ -25,8 +25,9 @@ use ArrayAccess,
  * @package    Zend_Module
  * @subpackage Listener
  */
-class ConfigListener extends AbstractListener
-    implements ConfigMerger, ListenerAggregate
+class ConfigListener extends AbstractListener implements 
+    ConfigMerger, 
+    ListenerAggregateInterface
 {
 	const STATIC_PATH = 'static_path';
 	const GLOB_PATH = 'glob_path';

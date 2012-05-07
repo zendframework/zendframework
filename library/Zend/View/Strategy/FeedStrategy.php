@@ -22,7 +22,7 @@
 namespace Zend\View\Strategy;
 
 use Zend\EventManager\EventManagerInterface,
-    Zend\EventManager\ListenerAggregate,
+    Zend\EventManager\ListenerAggregateInterface,
     Zend\Feed\Writer\Feed,
     Zend\Http\Request as HttpRequest,
     Zend\Http\Response as HttpResponse,
@@ -37,7 +37,7 @@ use Zend\EventManager\EventManagerInterface,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class FeedStrategy implements ListenerAggregate
+class FeedStrategy implements ListenerAggregateInterface
 {
     /**
      * @var \Zend\Stdlib\CallbackHandler[]

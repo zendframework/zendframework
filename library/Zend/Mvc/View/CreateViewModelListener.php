@@ -22,12 +22,12 @@
 namespace Zend\Mvc\View;
 
 use Zend\EventManager\EventManagerInterface as Events,
-    Zend\EventManager\ListenerAggregate,
+    Zend\EventManager\ListenerAggregateInterface,
     Zend\Mvc\MvcEvent,
     Zend\Stdlib\ArrayUtils,
     Zend\View\Model\ViewModel;
 
-class CreateViewModelListener implements ListenerAggregate
+class CreateViewModelListener implements ListenerAggregateInterface
 {
     /**
      * Listeners we've registered

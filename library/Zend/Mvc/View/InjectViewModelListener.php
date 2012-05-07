@@ -22,12 +22,12 @@
 namespace Zend\Mvc\View;
 
 use Zend\EventManager\EventManagerInterface as Events,
-    Zend\EventManager\ListenerAggregate,
+    Zend\EventManager\ListenerAggregateInterface,
     Zend\Mvc\MvcEvent,
     Zend\Mvc\Router\RouteMatch,
     Zend\View\Model\ModelInterface as ViewModel;
 
-class InjectViewModelListener implements ListenerAggregate
+class InjectViewModelListener implements ListenerAggregateInterface
 {
     /**
      * FilterInterface/inflector used to normalize names for use as template identifiers

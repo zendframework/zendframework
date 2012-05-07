@@ -22,7 +22,7 @@
 namespace Zend\View\Strategy;
 
 use Zend\EventManager\EventManagerInterface,
-    Zend\EventManager\ListenerAggregate,
+    Zend\EventManager\ListenerAggregateInterface,
     Zend\Http\Request as HttpRequest,
     Zend\Http\Response as HttpResponse,
     Zend\View\Model,
@@ -36,7 +36,7 @@ use Zend\EventManager\EventManagerInterface,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class JsonStrategy implements ListenerAggregate
+class JsonStrategy implements ListenerAggregateInterface
 {
     /**
      * @var \Zend\Stdlib\CallbackHandler[]

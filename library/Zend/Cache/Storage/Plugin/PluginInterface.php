@@ -21,7 +21,7 @@
 
 namespace Zend\Cache\Storage\Plugin;
 
-use Zend\EventManager\ListenerAggregate;
+use Zend\EventManager\ListenerAggregateInterface;
 
 /**
  * Zend Framework
@@ -42,7 +42,7 @@ use Zend\EventManager\ListenerAggregate;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface PluginInterface extends ListenerAggregate
+interface PluginInterface extends ListenerAggregateInterface
 {
     /**
      * Set options

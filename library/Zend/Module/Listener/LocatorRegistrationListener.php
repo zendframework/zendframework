@@ -15,7 +15,7 @@ use Zend\EventManager\StaticEventManager,
     Zend\Module\ModuleEvent,
     Zend\Module\Consumer\LocatorRegistered,
     Zend\EventManager\EventManagerInterface,
-    Zend\EventManager\ListenerAggregate;
+    Zend\EventManager\ListenerAggregateInterface;
 
 /**
  * Locator registration listener
@@ -24,7 +24,7 @@ use Zend\EventManager\StaticEventManager,
  * @package    Zend_Module
  * @subpackage Listener
  */
-class LocatorRegistrationListener extends AbstractListener implements ListenerAggregate
+class LocatorRegistrationListener extends AbstractListener implements ListenerAggregateInterface
 {
     /**
      * @var array

@@ -91,7 +91,7 @@ class Mailto extends Uri
      * @param  Validator $validator
      * @return Mailto
      */
-    public function setValidator(Validator $validator)
+    public function setValidator(ValidatorInterface $validator)
     {
         $this->emailValidator = $validator;
         return $this;

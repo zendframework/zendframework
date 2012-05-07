@@ -166,7 +166,8 @@ abstract class ActionController implements
         $events->setIdentifiers(array(
             'Zend\Stdlib\DispatchableInterface',
             __CLASS__,
-            get_class($this)
+            get_class($this),
+            substr(get_class($this), 0, strpos(get_class($this), '\\'))
         ));
         $this->events = $events;
         $this->attachDefaultListeners();

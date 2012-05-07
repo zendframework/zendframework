@@ -40,6 +40,8 @@ class SessionManagerTest extends \PHPUnit_Framework_TestCase
 
     public $cookieDateFormat = 'D, d-M-y H:i:s e';
 
+    protected $manager;
+
     public function setUp()
     {
         $this->forceAutoloader();
@@ -60,7 +62,7 @@ class SessionManagerTest extends \PHPUnit_Framework_TestCase
      * Hack to allow running tests in separate processes
      *
      * @see    http://matthewturland.com/2010/08/19/process-isolation-in-phpunit/
-     * @param  PHPUnit_Framework_TestResult $result 
+     * @param  \PHPUnit_Framework_TestResult $result
      * @return void
      */
     public function run(\PHPUnit_Framework_TestResult $result = NULL)

@@ -20,7 +20,9 @@
 
 namespace Zend\Session;
 
-use Zend\EventManager\EventManager;
+use Zend\EventManager\EventManager,
+    Zend\Session\Storage\StorageInterface as Storage,
+    Zend\Session\Validator\ValidatorInterface as Validator;
 
 /**
  * Validator chain for validating sessions
@@ -63,7 +65,7 @@ class ValidatorChain extends EventManager
      * @param  string $event
      * @param  callback $callback
      * @param  int $priority 
-     * @return Zend\Stdlib\CallbackHandler
+     * @return \Zend\Stdlib\CallbackHandler
      */
     public function attach($event, $callback, $priority = 1)
     {

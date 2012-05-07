@@ -20,10 +20,9 @@
 
 namespace Zend\Session\Validator;
 
-use Zend\Session\Validator as SessionValidator;
+use Zend\Session\Validator\ValidatorInterface as SessionValidator;
 
 /**
- * @uses       Zend\Session\Validator
  * @category   Zend
  * @package    Zend_Session
  * @subpackage Validator

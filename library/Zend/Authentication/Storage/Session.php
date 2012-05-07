@@ -21,12 +21,11 @@
 
 namespace Zend\Authentication\Storage;
 
-use Zend\Session\Container as SessionContainer,
-    Zend\Session\Manager as SessionManager;
+use Zend\Authentication\Storage\StorageInterface as AuthenticationStorage,
+    Zend\Session\Container as SessionContainer,
+    Zend\Session\ManagerInterface as SessionManager;
 
 /**
- * @uses       Zend\Authentication\Storage
- * @uses       Zend\Session\Manager
  * @category   Zend
  * @package    Zend_Authentication
  * @subpackage Storage
@@ -48,7 +47,7 @@ class Session implements StorageInterface
     /**
      * Object to proxy $_SESSION storage
      *
-     * @var Zend\Session\Container
+     * @var SessionContainer
      */
     protected $session;
 

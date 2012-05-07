@@ -18,7 +18,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Session;
+namespace Zend\Session\Configuration;
 
 /**
  * Standard session configuration
@@ -28,7 +28,7 @@ namespace Zend\Session;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Configuration
+interface ConfigurationInterface
 {
     public function setOptions(array $options);
     public function setOption($option, $value);

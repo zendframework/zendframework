@@ -173,7 +173,7 @@ protected function setupDi(Application $app)
         $runtime = new Definition\RuntimeDefinition(),
     ));
     $di = new Di($definitionList, null, new Configuration($this->config->di));
-    $di->instanceManager()->addTypePreference('Zend\Di\Locator', $di);
+    $di->instanceManager()->addTypePreference('Zend\Di\LocatorInterface', $di);
     $app->setLocator($di);
 }
 ]]></programlisting>

@@ -2,7 +2,7 @@
 
 namespace Zend\Mvc\Controller;
 
-use Zend\Di\Locator,
+use Zend\Di\LocatorInterface,
     Zend\EventManager\EventManagerInterface,
     Zend\EventManager\EventInterface as Event,
     Zend\EventManager\EventManager,
@@ -226,10 +226,10 @@ abstract class ActionController implements
     /**
      * Set locator instance
      *
-     * @param  Locator $locator
+     * @param  LocatorInterface $locator
      * @return void
      */
-    public function setLocator(Locator $locator)
+    public function setLocator(LocatorInterface $locator)
     {
         $this->locator = $locator;
     }
@@ -237,7 +237,7 @@ abstract class ActionController implements
     /**
      * Retrieve locator instance
      *
-     * @return Locator
+     * @return LocatorInterface
      */
     public function getLocator()
     {

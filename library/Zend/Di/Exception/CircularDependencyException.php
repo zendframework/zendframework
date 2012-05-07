@@ -1,9 +1,8 @@
 <?php
 namespace Zend\Di\Exception;
 
-use Zend\Di\Exception,
-    DomainException;
+use DomainException;
 
-class CircularDependencyException extends DomainException implements Exception
+class CircularDependencyException extends DomainException implements ExceptionInterface
 {
 }

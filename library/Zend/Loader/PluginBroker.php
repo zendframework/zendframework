@@ -21,7 +21,7 @@
 
 namespace Zend\Loader;
 
-use Zend\Di\Locator;
+use Zend\Di\LocatorInterface;
 
 /**
  * Plugin broker base implementation
@@ -59,7 +59,7 @@ class PluginBroker implements Broker, LocatorAware
     protected $validator;
 
     /**
-     * @var Zend\Di\Locator
+     * @var Zend\Di\LocatorInterface
      */
     protected $locator;
 
@@ -395,7 +395,7 @@ class PluginBroker implements Broker, LocatorAware
     /**
      * Get locator. 
      * 
-     * @return Zend\Di\Locator
+     * @return Zend\Di\LocatorInterface
      */
     public function getLocator()
     {
@@ -405,9 +405,9 @@ class PluginBroker implements Broker, LocatorAware
     /**
      * Set locator.
      *
-     * @param Zend\Di\Locator $locator
+     * @param Zend\Di\LocatorInterface $locator
      */
-    public function setLocator(Locator $locator)
+    public function setLocator(LocatorInterface $locator)
     {
         $this->locator = $locator;
         return $this;

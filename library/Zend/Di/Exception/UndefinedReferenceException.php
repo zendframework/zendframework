@@ -1,9 +1,8 @@
 <?php
 namespace Zend\Di\Exception;
 
-use Zend\Di\Exception,
-    DomainException;
+use DomainException;
 
-class UndefinedReferenceException extends DomainException implements Exception
+class UndefinedReferenceException extends DomainException implements ExceptionInterface
 {
 }

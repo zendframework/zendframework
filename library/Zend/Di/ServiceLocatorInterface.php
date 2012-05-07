@@ -1,7 +1,7 @@
 <?php
 namespace Zend\Di;
 
-interface ServiceLocation extends Locator
+interface ServiceLocatorInterface extends LocatorInterface
 {
     public function set($name, $service);
 }

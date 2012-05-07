@@ -4,7 +4,7 @@ namespace Zend\Mvc;
 
 use ArrayObject,
     Zend\Di\Exception\ClassNotFoundException,
-    Zend\Di\Locator,
+    Zend\Di\LocatorInterface,
     Zend\EventManager\EventManagerInterface,
     Zend\EventManager\EventManager,
     Zend\Http\Header\Cookie,
@@ -55,10 +55,10 @@ class Application implements ApplicationInterface
     /**
      * Set a service locator/DI object
      *
-     * @param  Locator $locator
+     * @param  LocatorInterface $locator
      * @return Application
      */
-    public function setLocator(Locator $locator)
+    public function setLocator(LocatorInterface $locator)
     {
         $this->locator = $locator;
         return $this;
@@ -117,7 +117,7 @@ class Application implements ApplicationInterface
     /**
      * Get the locator object
      *
-     * @return null|Locator
+     * @return null|LocatorInterface
      */
     public function getLocator()
     {

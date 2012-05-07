@@ -2,7 +2,7 @@
 
 namespace Zend\Di;
 
-class ServiceLocator implements ServiceLocation
+class ServiceLocator implements ServiceLocatorInterface
 {
     /**
      * Map of service names to methods

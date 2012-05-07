@@ -100,7 +100,7 @@ class Bootstrap implements BootstrapInterface, EventManagerAwareInterface, Event
         $sharedEvents = $events->getSharedManager();
 
         $di = new Di;
-        $di->instanceManager()->addTypePreference('Zend\Di\Locator', $di);
+        $di->instanceManager()->addTypePreference('Zend\Di\LocatorInterface', $di);
         $di->instanceManager()->addSharedInstance($sharedEvents, 'Zend\EventManager\SharedEventManager');
         $di->instanceManager()->addSharedInstance($sharedEvents, 'Zend\EventManager\SharedEventManagerInterface');
 

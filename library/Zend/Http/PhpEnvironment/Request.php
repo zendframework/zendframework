@@ -31,6 +31,13 @@ class Request extends HttpRequest
      */
     protected $requestUri;
 
+    /**
+     * Construct
+     *
+     * Instantiates request.
+     *
+     * @return void
+     */
     public function __construct()
     {
         $this->setEnv(new Parameters($_ENV));
@@ -42,8 +49,21 @@ class Request extends HttpRequest
         if ($_FILES) {
             $this->setFile(new Parameters($_FILES));
         }
+
+        $requestBody = file_get_contents('php://input');
+        if(strlen($requestBody) > 0){
+            $this->setContent($requestBody);
+        }
     }
 
+    /**
+     * Set cookies
+     *
+     * Instantiate and set cookies.
+     *
+     * @param $cookie
+     * @return Request
+     */
     public function setCookies($cookie)
     {
         $this->headers()->addHeader(new Cookie((array) $cookie));

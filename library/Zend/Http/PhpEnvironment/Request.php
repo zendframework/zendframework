@@ -157,6 +157,16 @@ class Request extends HttpRequest
     {
         $this->serverParams = $server;
 
+        // This seems to be the only way to get the Authorization header on Apache
+        if (function_exists('apache_request_headers')) {
+            $apacheRequestHeaders = apache_request_headers();
+            if (isset($apacheRequestHeaders['Authorization'])) {
+                if (!$this->serverParams->get('HTTP_AUTHORIZATION')) {
+                    $this->serverParams->set('HTTP_AUTHORIZATION', $apacheRequestHeaders['Authorization']);
+                }
+            }
+        }
+
         $this->headers()->addHeaders($this->serverToHeaders($this->serverParams));
 
         if (isset($this->serverParams['REQUEST_METHOD'])) {

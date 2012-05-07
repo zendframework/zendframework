@@ -1,7 +1,7 @@
 <?php
 /**
  * @category   Zend
- * @package    Zend\Cloud
+ * @package    Zend_Cloud
  * @subpackage Infrastructure
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -16,7 +16,7 @@ use Countable,
 /**
  * List of instances
  *
- * @package    Zend\Cloud
+ * @package    Zend_Cloud
  * @subpackage Infrastructure
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -34,14 +34,14 @@ class InstanceList implements Countable, Iterator, ArrayAccess
     protected $iteratorKey = 0;
 
     /**
-     * @var Zend\Cloud\Infrastructure\Adapter\AdapterInterface
+     * @var \Zend\Cloud\Infrastructure\Adapter\AdapterInterface
      */
     protected $adapter;
 
     /**
      * Constructor
      *
-     * @param  Adapter $adapter
+     * @param  Adapter\AdapterInterface $adapter
      * @param  array $instances
      * @return void
      */

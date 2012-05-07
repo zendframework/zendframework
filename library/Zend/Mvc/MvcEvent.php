@@ -3,10 +3,10 @@
 namespace Zend\Mvc;
 
 use Zend\EventManager\Event,
-    Zend\Stdlib\RequestDescription as Request,
-    Zend\Stdlib\ResponseDescription as Response,
+    Zend\Stdlib\RequestInterface as Request,
+    Zend\Stdlib\ResponseInterface as Response,
     Zend\View\Model\ModelInterface as Model,
-    Zend\View\Model as ViewModel;
+    Zend\View\Model\ViewModel;
 
 class MvcEvent extends Event
 {

@@ -705,24 +705,8 @@ class Filesystem extends AbstractAdapter
     protected function internalSetItem(& $normalizedKey, & $value, array & $normalizedOptions)
     {
         $baseOptions = $this->getOptions();
-        $oldUmask    = null;
         $filespec    = $this->getFileSpec($normalizedKey, $normalizedOptions);
-
-        if ($baseOptions->getDirLevel() > 0) {
-            $path = dirname($filespec);
-            if (!file_exists($path)) {
-                $oldUmask = umask($baseOptions->getDirUmask());
-                ErrorHandler::start();
-                $mkdir = mkdir($path, 0777, true);
-                $error = ErrorHandler::stop();
-                if (!$mkdir) {
-                    umask($oldUmask);
-                    throw new Exception\RuntimeException(
-                        "Error creating directory '{$path}'", 0, $error
-                    );
-                }
-            }
-        }
+        $this->prepareDirectoryStructure($filespec);
 
         $info = null;
         if ($baseOptions->getReadControl()) {
@@ -736,11 +720,7 @@ class Filesystem extends AbstractAdapter
         // write files
         try {
             // set umask for files
-            if ($oldUmask !== null) { // $oldUmask could be defined on create directory
-                umask($baseOptions->getFileUmask());
-            } else {
-                $oldUmask = umask($baseOptions->getFileUmask());
-            }
+            $oldUmask = umask($baseOptions->getFileUmask());
 
             $contents = array($filespec . '.dat' => & $value);
             if ($info) {
@@ -796,23 +776,7 @@ class Filesystem extends AbstractAdapter
         $contents = array();
         foreach ($normalizedKeyValuePairs as $key => & $value) {
             $filespec = $this->getFileSpec($key, $normalizedOptions);
-
-            // init directory level
-            if ($baseOptions->getDirLevel() > 0) {
-                $path = dirname($filespec);
-                if (!file_exists($path)) {
-                    $oldUmask = ($oldUmask === null) ? umask($baseOptions->getDirUmask()) : $oldUmask;
-                    ErrorHandler::start();
-                    $mkdir = mkdir($path, 0777, true);
-                    $error = ErrorHandler::stop();
-                    if (!$mkdir) {
-                        umask($oldUmask);
-                        throw new Exception\RuntimeException(
-                            "Error creating directory '{$path}'", 0, $error
-                        );
-                    }
-                }
-            }
+            $this->prepareDirectoryStructure($filespec);
 
             // *.dat file
             $contents[$filespec . '.dat'] = & $value;
@@ -836,11 +800,7 @@ class Filesystem extends AbstractAdapter
         // write to disk
         try {
             // set umask for files
-            if ($oldUmask !== null) { // $oldUmask could be defined on create directory
-                umask($baseOptions->getFileUmask());
-            } else {
-                $oldUmask = umask($baseOptions->getFileUmask());
-            }
+            $oldUmask = umask($baseOptions->getFileUmask());
 
             while ($contents) {
                 $nonBlocking = count($contents) > 1;
@@ -1708,6 +1668,34 @@ class Filesystem extends AbstractAdapter
 
         ErrorHandler::stop();
         return $res;
+    }
+
+    /**
+     * Prepares a directory structure for the given file(spec)
+     * using the configured directory level.
+     *
+     * @param string $file
+     * @return void
+     * @throws Exception\RuntimeException
+     */
+    protected function prepareDirectoryStructure($file)
+    {
+        $options = $this->getOptions();
+        if ($options->getDirLevel() > 0) {
+            $path = dirname($file);
+            if (!file_exists($path)) {
+                $oldUmask = umask($options->getDirUmask());
+                ErrorHandler::start();
+                $mkdir = mkdir($path, 0777, true);
+                $error = ErrorHandler::stop();
+                umask($oldUmask);
+                if (!$mkdir) {
+                    throw new Exception\RuntimeException(
+                        "Error creating directory '{$path}'", 0, $error
+                    );
+                }
+            }
+        }
     }
 
     /**

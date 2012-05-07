@@ -72,7 +72,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         try {
             $this->server->addFunction(array($this, 'setUp'));
         } catch (\Zend\Server\Reflection\Exception\RuntimeException $e) {
-            $this->markTestSkipped('PHPUnit docblocks may be incorrect');
+            $this->markTestIncomplete('PHPUnit docblocks may be incorrect');
         }
         $methods = $this->server->getFunctions();
         $this->assertTrue($methods->hasMethod('setUp'));
@@ -273,7 +273,6 @@ class ServerTest extends \PHPUnit_Framework_TestCase
 
     public function testHandleValidMethodWithTooFewParamsShouldPassDefaultsOrNullsForMissingParams()
     {
-        $this->markTestSkipped('Problems with Zend_Server conversion');
         $this->server->setClass('ZendTest\Json\Foo')
                      ->setReturnResponse(true);
         $request = $this->server->getRequest();
@@ -292,7 +291,6 @@ class ServerTest extends \PHPUnit_Framework_TestCase
 
     public function testHandleValidMethodWithTooManyParamsShouldWork()
     {
-        $this->markTestSkipped('Problems with Zend_Server conversion');
         $this->server->setClass('ZendTest\Json\Foo')
                      ->setReturnResponse(true);
         $request = $this->server->getRequest();
@@ -394,7 +392,6 @@ class ServerTest extends \PHPUnit_Framework_TestCase
 
     public function testHandleRequestWithExceptionShouldReturnErrorResponse()
     {
-        $this->markTestSkipped('Problems with Zend_Server conversion');
         $this->server->setClass('ZendTest\Json\Foo')
                      ->setReturnResponse(true);
         $request = $this->server->getRequest();
@@ -409,7 +406,6 @@ class ServerTest extends \PHPUnit_Framework_TestCase
 
     public function testHandleShouldEmitResponseByDefault()
     {
-        $this->markTestSkipped('Problems with Zend_Server conversion');
         $this->server->setClass('ZendTest\Json\Foo');
         $request = $this->server->getRequest();
         $request->setMethod('bar')
@@ -431,7 +427,6 @@ class ServerTest extends \PHPUnit_Framework_TestCase
 
     public function testResponseShouldBeEmptyWhenRequestHasNoId()
     {
-        $this->markTestSkipped('Problems with Zend_Server conversion');
         $this->server->setClass('ZendTest\Json\Foo');
         $request = $this->server->getRequest();
         $request->setMethod('bar')

@@ -44,7 +44,7 @@ class AutoloaderMultiVersionTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         if (!$this->isEnabled()) {
-            $this->markTestSkipped();
+            $this->markTestSkipped('Option TESTS_ZEND_LOADER_AUTOLOADER_MULTIVERSION_ENABLED is not enabled');
         }
 
         // Store original autoloaders

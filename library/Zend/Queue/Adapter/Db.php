@@ -22,7 +22,7 @@
 namespace Zend\Queue\Adapter;
 
 use Zend\Queue\Queue,
-    Zend\Queue\Exception as QueueException,
+    Zend\Queue\Exception,
     Zend\Queue\Message,
     Zend\Db as DB_ns,
     Zend\Db\Adapter\AbstractAdapter as AbstractDBAdapter,
@@ -80,7 +80,7 @@ class Db extends AbstractAdapter
         }
 
         if (!is_bool($this->_options['options'][Select::FOR_UPDATE])) {
-            throw new QueueException('Options array item: \Zend\Db\Select::FOR_UPDATE must be boolean');
+            throw new Exception\InvalidArgumentException('Options array item: \Zend\Db\Select::FOR_UPDATE must be boolean');
         }
 
         if (isset($this->_options['dbAdapter'])
@@ -112,23 +112,23 @@ class Db extends AbstractAdapter
     {
         $options = &$this->_options['driverOptions'];
         if (!array_key_exists('type', $options)) {
-            throw new QueueException("Configuration array must have a key for 'type' for the database type to use");
+            throw new Exception\InvalidArgumentException("Configuration array must have a key for 'type' for the database type to use");
         }
 
         if (!array_key_exists('host', $options)) {
-            throw new QueueException("Configuration array must have a key for 'host' for the host to use");
+            throw new Exception\InvalidArgumentException("Configuration array must have a key for 'host' for the host to use");
         }
 
         if (!array_key_exists('username', $options)) {
-            throw new QueueException("Configuration array must have a key for 'username' for the username to use");
+            throw new Exception\InvalidArgumentException("Configuration array must have a key for 'username' for the username to use");
         }
 
         if (!array_key_exists('password', $options)) {
-            throw new QueueException("Configuration array must have a key for 'password' for the password to use");
+            throw new Exception\InvalidArgumentException("Configuration array must have a key for 'password' for the password to use");
         }
 
         if (!array_key_exists('dbname', $options)) {
-            throw new QueueException("Configuration array must have a key for 'dbname' for the database to use");
+            throw new Exception\InvalidArgumentException("Configuration array must have a key for 'dbname' for the database to use");
         }
 
         $type = $options['type'];
@@ -137,7 +137,7 @@ class Db extends AbstractAdapter
         try {
             $db = DB_ns\Db::factory($type, $options);
         } catch (DB_ns\Exception $e) {
-            throw new QueueException('Error connecting to database: ' . $e->getMessage(), $e->getCode(), $e);
+            throw new Exception\ConnectionException('Error connecting to database: ' . $e->getMessage(), $e->getCode(), $e);
         }
 
         return $db;
@@ -164,7 +164,7 @@ class Db extends AbstractAdapter
 
         try {
             $id = $this->getQueueId($name);
-        } catch (QueueException $e) {
+        } catch (Exception $e) {
             return false;
         }
 
@@ -199,7 +199,7 @@ class Db extends AbstractAdapter
                 return true;
             }
         } catch (\Exception $e) {
-            throw new QueueException($e->getMessage(), $e->getCode(), $e);
+            throw new Exception\RuntimeException($e->getMessage(), $e->getCode(), $e);
         }
 
         return false;
@@ -229,7 +229,7 @@ class Db extends AbstractAdapter
             try {
                 $queue->delete();
             } catch (\Exception $e) {
-                throw new QueueException($e->getMessage(), $e->getCode(), $e);
+                throw new Exception\RuntimeException($e->getMessage(), $e->getCode(), $e);
             }
         }
 
@@ -317,7 +317,7 @@ class Db extends AbstractAdapter
         }
 
         if (!$this->isExists($queue->getName())) {
-            throw new QueueException('Queue does not exist:' . $queue->getName());
+            throw new Exception\QueueNotFoundException('Queue does not exist:' . $queue->getName());
         }
 
         $msg           = clone $this->_messageRow;
@@ -330,7 +330,7 @@ class Db extends AbstractAdapter
         try {
             $msg->save();
         } catch (\Exception $e) {
-            throw new QueueException($e->getMessage(), $e->getCode(), $e);
+            throw new Exceptioin\RuntimeException($e->getMessage(), $e->getCode(), $e);
         }
 
         $options = array(
@@ -409,7 +409,7 @@ class Db extends AbstractAdapter
         } catch (\Exception $e) {
             $db->rollBack();
 
-            throw new QueueException($e->getMessage(), $e->getCode(), $e);
+            throw new Exception\RuntimeException($e->getMessage(), $e->getCode(), $e);
         }
 
         $options = array(
@@ -494,7 +494,7 @@ class Db extends AbstractAdapter
         $queue = $this->_queueTable->fetchRow($query);
 
         if ($queue === null) {
-            throw new QueueException('Queue does not exist: ' . $name);
+            throw new Exception\QueueNotFoundException('Queue does not exist: ' . $name);
         }
 
         $this->_queues[$name] = (int)$queue->queue_id;

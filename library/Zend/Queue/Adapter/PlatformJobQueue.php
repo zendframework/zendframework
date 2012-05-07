@@ -20,8 +20,11 @@
  */
 
 namespace Zend\Queue\Adapter;
-use Zend\Queue;
-use Zend\Queue\Message;
+use ZendAPI_Job,
+    ZendAPI_Queue,
+    Zend\Queue\Queue,
+    Zend\Queue\Message,
+    Zend\Queue\Exception;
 
 /**
  * Zend Platform JobQueue adapter
@@ -52,34 +55,34 @@ class PlatformJobQueue extends AbstractAdapter
      * @param  \Zend\Queue\Queue|null $queue
      * @return void
      */
-    public function __construct($options, Queue\Queue $queue = null)
+    public function __construct($options, Queue $queue = null)
     {
         parent::__construct($options, $queue);
 
         if (!extension_loaded("jobqueue_client")) {
-            throw new Queue\Exception('Platform Job Queue extension does not appear to be loaded');
+            throw new Exception\ExtensionNotLoadedException('Platform Job Queue extension does not appear to be loaded');
         }
 
         if (! isset($this->_options['daemonOptions'])) {
-            throw new Queue\Exception('Job Queue host and password should be provided');
+            throw new Exception\InvalidArgumentException('Job Queue host and password should be provided');
         }
 
         $options = $this->_options['daemonOptions'];
 
         if (!array_key_exists('host', $options)) {
-            throw new Queue\Exception('Platform Job Queue host should be provided');
+            throw new Exception\InvalidArgumentException('Platform Job Queue host should be provided');
         }
         if (!array_key_exists('password', $options)) {
-            throw new Queue\Exception('Platform Job Queue password should be provided');
+            throw new Exception\InvalidArgumentException('Platform Job Queue password should be provided');
         }
 
-        $this->_zendQueue = new \ZendAPI_Queue($options['host']);
+        $this->_zendQueue = new ZendAPI_Queue($options['host']);
 
         if (!$this->_zendQueue) {
-            throw new Queue\Exception('Platform Job Queue connection failed');
+            throw new Exception\ConnectionException('Platform Job Queue connection failed');
         }
         if (!$this->_zendQueue->login($options['password'])) {
-            throw new Queue\Exception('Job Queue login failed');
+            throw new Exception\ConnectionException('Job Queue login failed');
         }
 
         if ($this->_queue) {
@@ -100,7 +103,7 @@ class PlatformJobQueue extends AbstractAdapter
      */
     public function isExists($name)
     {
-        throw new Queue\Exception('isExists() is not supported in this adapter');
+        throw new Exception\UnsupportedMethodCallException('isExists() is not supported in this adapter');
     }
 
     /**
@@ -113,7 +116,7 @@ class PlatformJobQueue extends AbstractAdapter
      */
     public function create($name, $timeout=null)
     {
-        throw new Queue\Exception('create() is not supported in ' . get_class($this));
+        throw new Exception\UnsupportedMethodCallException('create() is not supported in ' . get_class($this));
     }
 
     /**
@@ -125,7 +128,7 @@ class PlatformJobQueue extends AbstractAdapter
      */
     public function delete($name)
     {
-        throw new Queue\Exception('delete() is not supported in ' . get_class($this));
+        throw new Exception\UnsupportedMethodCallException('delete() is not supported in ' . get_class($this));
     }
 
     /**
@@ -136,7 +139,7 @@ class PlatformJobQueue extends AbstractAdapter
      */
     public function getQueues()
     {
-        throw new Queue\Exception('getQueues() is not supported in this adapter');
+        throw new Exception\UnsupportedMethodCallException('getQueues() is not supported in this adapter');
     }
 
     /**
@@ -145,10 +148,10 @@ class PlatformJobQueue extends AbstractAdapter
      * @param  \Zend\Queue\Queue|null $queue
      * @return integer
      */
-    public function count(Queue\Queue $queue = null)
+    public function count(Queue $queue = null)
     {
         if ($queue !== null) {
-            throw new Queue\Exception('Queue parameter is not supported');
+            throw new Exception\UnsupportedMethodCallException('Queue parameter is not supported');
         }
 
         return $this->_zendQueue->getNumOfJobsInQueue();
@@ -166,16 +169,16 @@ class PlatformJobQueue extends AbstractAdapter
      * @return \Zend\Queue\Message\Message
      * @throws \Zend\Queue\Exception
      */
-    public function send($message, Queue\Queue $queue = null)
+    public function send($message, Queue $queue = null)
     {
         if ($queue !== null) {
-            throw new Queue\Exception('Queue parameter is not supported');
+            throw new Exception\UnsupportedMethodCallException('Queue parameter is not supported');
         }
 
         // This adapter can work only for this message type
         $classname = $this->_queue->getMessageClass();
 
-        if ($message instanceof \ZendAPI_Job) {
+        if ($message instanceof ZendAPI_Job) {
             $message = array('data' => $message);
         }
 
@@ -187,7 +190,7 @@ class PlatformJobQueue extends AbstractAdapter
         $jobId = $this->_zendQueue->addJob($platformJob);
 
         if (!$jobId) {
-            throw new Queue\Exception('Failed to add a job to queue: '
+            throw new Exception\RuntimeException('Failed to add a job to queue: '
                 . $this->_zendQueue->getLastError());
         }
 
@@ -204,14 +207,14 @@ class PlatformJobQueue extends AbstractAdapter
      * @throws \Zend\Queue\Exception
      * @return ArrayIterator
      */
-    public function receive($maxMessages = null, $timeout = null, Queue\Queue $queue = null)
+    public function receive($maxMessages = null, $timeout = null, Queue $queue = null)
     {
         if ($maxMessages === null) {
             $maxMessages = 1;
         }
 
         if ($queue !== null) {
-            throw new Queue\Exception('Queue shouldn\'t be set');
+            throw new Exception\UnsupportedMethodCallException('Queue shouldn\'t be set');
         }
 
         $jobs = $this->_zendQueue->getJobsInQueue(null, $maxMessages, true);
@@ -231,14 +234,14 @@ class PlatformJobQueue extends AbstractAdapter
      * Returns true if the message is deleted, false if the deletion is
      * unsuccessful.
      *
-     * @param  \Zend\Queue\Message\Message $message
+     * @param  \Zend\Queue\Message $message
      * @return boolean
      * @throws \Zend\Queue\Exception
      */
-    public function deleteMessage(Message\Message $message)
+    public function deleteMessage(Message $message)
     {
         if (get_class($message) != $this->_queue->getMessageClass()) {
-            throw new Queue\Exception(
+            throw new Exception\DomainException(
                 'Failed to remove job from the queue; only messages of type '
                 . '\Zend\Queue\Message\PlatformJob may be used'
             );
@@ -302,13 +305,13 @@ class PlatformJobQueue extends AbstractAdapter
     {
         $options = $this->_options['daemonOptions'];
 
-        $this->_zendQueue = new \ZendAPI_Queue($options['host']);
+        $this->_zendQueue = new ZendAPI_Queue($options['host']);
 
         if (!$this->_zendQueue) {
-            throw new Queue\Exception('Platform Job Queue connection failed');
+            throw new Exception\ConnectionException('Platform Job Queue connection failed');
         }
         if (!$this->_zendQueue->login($options['password'])) {
-            throw new Queue\Exception('Job Queue login failed');
+            throw new Exception\ConnectionException('Job Queue login failed');
         }
     }
 }

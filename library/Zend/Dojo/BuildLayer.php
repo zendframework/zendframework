@@ -22,7 +22,7 @@ namespace Zend\Dojo;
 
 use Zend\Config\Config,
     Zend\Json\Json,
-    Zend\View\Renderer;
+    Zend\View\Renderer\RendererInterface as Renderer;
 
 /**
  * Dojo module layer and custom build profile generation support
@@ -89,7 +89,7 @@ class BuildLayer
 
     /**
      * Zend\View reference
-     * @var \Zend\View\Renderer
+     * @var Renderer
      */
     protected $_view;
 
@@ -135,7 +135,7 @@ class BuildLayer
     /**
      * Set View object
      *
-     * @param  \Zend\View\Renderer $view
+     * @param  Renderer $view
      * @return \Zend\Dojo\BuildLayer
      */
     public function setView(Renderer $view)
@@ -147,7 +147,7 @@ class BuildLayer
     /**
      * Retrieve view object
      *
-     * @return \Zend\View\Renderer|null
+     * @return Renderer|null
      */
     public function getView()
     {

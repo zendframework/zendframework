@@ -97,19 +97,19 @@ class HeadStyleTest extends \PHPUnit_Framework_TestCase
         try {
             $this->helper->append('foo');
             $this->fail('Non-style value should not append');
-        } catch (View\Exception $e) { }
+        } catch (View\Exception\ExceptionInterface $e) { }
         try {
             $this->helper->offsetSet(5, 'foo');
             $this->fail('Non-style value should not offsetSet');
-        } catch (View\Exception $e) { }
+        } catch (View\Exception\ExceptionInterface $e) { }
         try {
             $this->helper->prepend('foo');
             $this->fail('Non-style value should not prepend');
-        } catch (View\Exception $e) { }
+        } catch (View\Exception\ExceptionInterface $e) { }
         try {
             $this->helper->set('foo');
             $this->fail('Non-style value should not set');
-        } catch (View\Exception $e) { }
+        } catch (View\Exception\ExceptionInterface $e) { }
     }
 
     public function testOverloadAppendStyleAppendsStyleToStack()
@@ -287,7 +287,7 @@ class HeadStyleTest extends \PHPUnit_Framework_TestCase
         try {
             $this->helper->bogusMethod();
             $this->fail('Invalid method should raise exception');
-        } catch (View\Exception $e) { }
+        } catch (View\Exception\ExceptionInterface $e) { }
     }
 
     public function testTooFewArgumentsRaisesException()
@@ -295,7 +295,7 @@ class HeadStyleTest extends \PHPUnit_Framework_TestCase
         try {
             $this->helper->appendStyle();
             $this->fail('Too few arguments should raise exception');
-        } catch (View\Exception $e) { }
+        } catch (View\Exception\ExceptionInterface $e) { }
     }
 
     public function testIndentationIsHonored()
@@ -329,7 +329,7 @@ h1 {
 
         try {
             $this->helper->__invoke()->captureStart();
-        } catch (View\Exception $e) {
+        } catch (View\Exception\ExceptionInterface $e) {
             $this->fail('Serial capturing should work');
         }
         $this->helper->__invoke()->captureEnd();
@@ -343,7 +343,7 @@ h1 {
                 $this->helper->__invoke()->captureStart();
                 $this->helper->__invoke()->captureEnd();
                 $this->fail('Nested capturing should fail');
-            } catch (View\Exception $e) {
+            } catch (View\Exception\ExceptionInterface $e) {
                 $this->helper->__invoke()->captureEnd();
                 $this->assertContains('Cannot nest', $e->getMessage());
             }

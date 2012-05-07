@@ -36,7 +36,7 @@ use ArrayAccess,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ViewModel implements Model
+class ViewModel implements ModelInterface
 {
     /**
      * What variable a parent model should capture this model to 
@@ -282,11 +282,11 @@ class ViewModel implements Model
     /**
      * Add a child model
      * 
-     * @param  Model $child 
+     * @param  ModelInterface $child
      * @param  null|string $captureTo Optional; if specified, the "capture to" value to set on the child
      * @return ViewModel
      */
-    public function addChild(Model $child, $captureTo = null)
+    public function addChild(ModelInterface $child, $captureTo = null)
     {
         $this->children[] = $child;
         if (null !== $captureTo) {
@@ -374,7 +374,7 @@ class ViewModel implements Model
     /**
      * Get iterator of children
      * 
-     * @return Iterator
+     * @return ArrayIterator
      */
     public function getIterator()
     {

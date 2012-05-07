@@ -24,7 +24,7 @@ namespace Zend\Mvc\Controller\Plugin;
 use Zend\Mvc\InjectApplicationEvent,
     Zend\Mvc\Exception,
     Zend\Mvc\MvcEvent,
-    Zend\View\Model;
+    Zend\View\Model\ModelInterface as Model;
 
 /**
  * @category   Zend
@@ -101,7 +101,7 @@ class Layout extends AbstractPlugin
     /**
      * Retrieve the root view model from the event
      * 
-     * @return ViewModel
+     * @return Model
      * @throws Exception\DomainException
      */
     protected function getViewModel()

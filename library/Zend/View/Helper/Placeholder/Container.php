@@ -24,7 +24,6 @@ namespace Zend\View\Helper\Placeholder;
 /**
  * Container for placeholder values
  *
- * @uses       \Zend\View\Helper\Placeholder\Container\AbstractContainer
  * @package    Zend_View
  * @subpackage Helper
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

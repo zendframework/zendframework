@@ -20,17 +20,16 @@
 
 namespace Zend\View\Exception;
 
-use Zend\View\Exception;
-
 /**
  * Runtime exception
  *
- * @uses       \RuntimeException
  * @category   Zend
  * @package    Zend_View
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class RuntimeException extends \RuntimeException implements Exception
+class RuntimeException
+    extends \RuntimeException
+    implements ExceptionInterface
 {
 }

@@ -26,8 +26,8 @@ use ArrayObject,
     stdClass,
     Zend\Http\Request,
     Zend\Http\Response,
-    Zend\View\Model,
     Zend\View\Model\ViewModel,
+    Zend\View\Model\JsonModel,
     Zend\View\Renderer\PhpRenderer,
     Zend\View\Renderer,
     Zend\View\Resolver,
@@ -130,7 +130,7 @@ class ViewTest extends TestCase
         });
         $this->view->addRenderingStrategy(function ($e) {
             $model = $e->getModel();
-            if (!$model instanceof Model\JsonModel) {
+            if (!$model instanceof JsonModel) {
                 return;
             }
             return new Renderer\JsonRenderer();
@@ -143,7 +143,7 @@ class ViewTest extends TestCase
         $child1 = new ViewModel(array('foo' => 'bar'));
         $child1->setCaptureTo('child1');
 
-        $child2 = new Model\JsonModel(array('bar' => 'baz'));
+        $child2 = new JsonModel(array('bar' => 'baz'));
         $child2->setCaptureTo('child2');
         $child2->setTerminal(false);
 

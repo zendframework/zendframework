@@ -26,7 +26,9 @@ use PHPUnit_Framework_TestCase as TestCase,
     Zend\Feed\Writer\FeedFactory,
     Zend\Http\Request as HttpRequest,
     Zend\Http\Response as HttpResponse,
-    Zend\View\Model,
+    Zend\View\Model\ModelInterface as Model,
+    Zend\View\Model\FeedModel,
+    Zend\View\Model\ViewModel,
     Zend\View\Renderer\FeedRenderer,
     Zend\View\Strategy\FeedStrategy,
     Zend\View\ViewEvent;
@@ -50,7 +52,7 @@ class FeedStrategyTest extends TestCase
 
     public function testFeedModelSelectsFeedStrategy()
     {
-        $this->event->setModel(new Model\FeedModel());
+        $this->event->setModel(new FeedModel());
         $result = $this->strategy->selectRenderer($this->event);
         $this->assertSame($this->renderer, $result);
     }
@@ -204,7 +206,7 @@ class FeedStrategyTest extends TestCase
 
     public function testReturnsNullWhenUnableToSelectRenderer()
     {
-        $model   = new Model\ViewModel();
+        $model   = new ViewModel();
         $request = new HttpRequest();
         $this->event->setModel($model);
         $this->event->setRequest($request);

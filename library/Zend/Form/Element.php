@@ -32,7 +32,7 @@ use Traversable,
     Zend\Validator\AbstractValidator,
     Zend\Validator\ValidatorInterface,
     Zend\View\Renderer\PhpRenderer,
-    Zend\View\Renderer as View;
+    Zend\View\Renderer\RendererInterface as View;
 
 /**
  * Zend_Form_Element

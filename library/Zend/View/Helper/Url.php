@@ -28,7 +28,6 @@ use Zend\Mvc\Router\RouteStack,
 /**
  * Helper for making easy links and getting urls that depend on the routes and router.
  *
- * @uses       \Zend\View\Helper\AbstractHelper
  * @package    Zend_View
  * @subpackage Helper
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

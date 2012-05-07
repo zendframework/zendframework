@@ -33,13 +33,14 @@ use PHPUnit_Framework_TestCase as TestCase,
     Zend\Mvc\View\DefaultRenderingStrategy,
     Zend\Registry,
     Zend\View\Helper\Placeholder\Registry as PlaceholderRegistry,
-    Zend\View\Model,
+    Zend\View\Model\ModelInterface as Model,
     Zend\View\Renderer\FeedRenderer,
     Zend\View\Renderer\JsonRenderer,
     Zend\View\Renderer\PhpRenderer,
     Zend\View\Resolver\TemplateMapResolver,
     Zend\View\View,
-    Zend\View\ViewEvent;
+    Zend\View\ViewEvent,
+    Zend\View\Model\ViewModel;
 
 /**
  * @category   Zend
@@ -106,7 +107,7 @@ class DefaultRenderingStrategyTest extends TestCase
         $this->view->addRenderingStrategy(function ($e) use ($renderer) {
             return $renderer;
         }, 100);
-        $model = new Model\ViewModel(array('foo' => 'bar'));
+        $model = new ViewModel(array('foo' => 'bar'));
         $model->setOption('template', 'content');
         $this->event->setResult($model);
 
@@ -133,7 +134,7 @@ class DefaultRenderingStrategyTest extends TestCase
         $this->view->addRenderingStrategy(function ($e) use ($renderer) {
             return $renderer;
         }, 100);
-        $model = new Model\ViewModel(array('foo' => 'bar'));
+        $model = new ViewModel(array('foo' => 'bar'));
         $model->setOption('template', 'content');
         $this->event->setViewModel($model);
         $this->event->setResult($this->response);

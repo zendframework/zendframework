@@ -737,7 +737,7 @@ class Links extends AbstractHelper
     /**
      * Renders helper
      *
-     * Implements {@link Helper::render()}.
+     * Implements {@link HelperInterface::render()}.
      *
      * @param  Navigation\Container $container [optional] container to render. 
      *                                         Default is to render the 

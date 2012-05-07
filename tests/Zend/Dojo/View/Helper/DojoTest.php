@@ -26,7 +26,7 @@ use Zend\Dojo\View\Helper\Dojo as DojoHelper,
     Zend\Json\Json,
     Zend\Registry,
     Zend\View\Renderer\PhpRenderer,
-    Zend\View\Renderer;
+    Zend\View\Renderer\RendererInterface as Renderer;
 
 /**
  * Test class for Zend_Dojo_View_Helper_Dojo.

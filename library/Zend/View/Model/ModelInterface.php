@@ -19,7 +19,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\View;
+namespace Zend\View\Model;
 
 use Countable,
     IteratorAggregate;
@@ -38,14 +38,14 @@ use Countable,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Model extends Countable, IteratorAggregate
+interface ModelInterface extends Countable, IteratorAggregate
 {
     /**
      * Set renderer option/hint
      * 
      * @param  string $name 
      * @param  mixed $value 
-     * @return Model
+     * @return ModelInterface
      */
     public function setOption($name, $value);
 
@@ -53,7 +53,7 @@ interface Model extends Countable, IteratorAggregate
      * Set renderer options/hints en masse
      * 
      * @param  array|\Traversable $name 
-     * @return Model
+     * @return ModelInterface
      */
     public function setOptions($options);
 
@@ -69,7 +69,7 @@ interface Model extends Countable, IteratorAggregate
      * 
      * @param  string $name 
      * @param  mixed $value 
-     * @return Model
+     * @return ModelInterface
      */
     public function setVariable($name, $value);
 
@@ -77,7 +77,7 @@ interface Model extends Countable, IteratorAggregate
      * Set view variables en masse
      * 
      * @param  array|\ArrayAccess $variables 
-     * @return Model
+     * @return ModelInterface
      */
     public function setVariables($variables);
 
@@ -92,7 +92,7 @@ interface Model extends Countable, IteratorAggregate
      * Set the template to be used by this model 
      * 
      * @param  string $template
-     * @return Model
+     * @return ModelInterface
      */
     public function setTemplate($template);
 
@@ -106,11 +106,11 @@ interface Model extends Countable, IteratorAggregate
     /**
      * Add a child model
      * 
-     * @param  Model $child 
+     * @param  ModelInterface $child
      * @param  null|string $captureTo Optional; if specified, the "capture to" value to set on the child
-     * @return Model
+     * @return ModelInterface
      */
-    public function addChild(Model $child, $captureTo = null);
+    public function addChild(ModelInterface $child, $captureTo = null);
 
     /**
      * Return all children.
@@ -132,7 +132,7 @@ interface Model extends Countable, IteratorAggregate
      * Set the name of the variable to capture this model to, if it is a child model
      * 
      * @param  string $capture 
-     * @return Model
+     * @return ModelInterface
      */
     public function setCaptureTo($capture);
 
@@ -147,7 +147,7 @@ interface Model extends Countable, IteratorAggregate
      * Set flag indicating whether or not this is considered a terminal or standalone model
      * 
      * @param  bool $terminate 
-     * @return Model
+     * @return ModelInterface
      */
     public function setTerminal($terminate);
 

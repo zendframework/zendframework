@@ -188,7 +188,7 @@ class Bootstrap implements Bootstrapper, EventManagerAware
                 'setResolver' => array(
                     'required' => false,
                     'resolver' => array(
-                        'type'     => 'Zend\View\Resolver',
+                        'type'     => 'Zend\View\Resolver\ResolverInterface',
                         'required' => true,
                     ),
                 ),
@@ -197,7 +197,7 @@ class Bootstrap implements Bootstrapper, EventManagerAware
                 'attach' => array(
                     'resolver' => array(
                         'required' => false,
-                        'type'     => 'Zend\View\Resolver',
+                        'type'     => 'Zend\View\Resolver\ResolverInterface',
                     ),
                 ),
             ),

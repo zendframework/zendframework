@@ -2,20 +2,18 @@
 
 namespace Zend\Code\Scanner;
 
-use Zend\Code\Scanner\DirectoryScanner,
-    Zend\Code\Scanner\ClassScanner,
-    Zend\Code\Exception;
+use Zend\Code\Exception;
 
 class DerivedClassScanner extends ClassScanner
 {
 
     /**
-     * @var Zend\Code\Scanner\DirectoryScanner
+     * @var DirectoryScanner
      */
     protected $directoryScanner = null;
     
     /**
-     * @var Zend\Code\Scanner\ClassScanner
+     * @var ClassScanner
      */  
     protected $classScanner = null;
     protected $parentClassScanners = array();

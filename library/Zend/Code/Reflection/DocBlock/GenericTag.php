@@ -30,7 +30,7 @@ namespace Zend\Code\Reflection\DocBlock;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class GenericTag implements Tag
+class GenericTag implements TagInterface
 {
 
     /**

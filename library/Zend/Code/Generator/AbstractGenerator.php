@@ -22,7 +22,6 @@
 namespace Zend\Code\Generator;
 
 use Traversable;
-use Zend\Code\Generator;
 
 /**
  * @category   Zend
@@ -30,7 +29,7 @@ use Zend\Code\Generator;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class AbstractGenerator implements Generator
+abstract class AbstractGenerator implements GeneratorInterface
 {
 
     /**
@@ -58,7 +57,7 @@ abstract class AbstractGenerator implements Generator
      * setSourceDirty()
      *
      * @param bool $isSourceDirty
-     * @return \Zend\Code\Generator\AbstractPhp
+     * @return AbstractGenerator
      */
     public function setSourceDirty($isSourceDirty = true)
     {
@@ -80,7 +79,7 @@ abstract class AbstractGenerator implements Generator
      * setIndentation()
      *
      * @param string|int $indentation
-     * @return \Zend\Code\Generator\AbstractPhp
+     * @return AbstractGenerator
      */
     public function setIndentation($indentation)
     {
@@ -102,11 +101,12 @@ abstract class AbstractGenerator implements Generator
      * setSourceContent()
      *
      * @param string $sourceContent
+     * @return AbstractGenerator
      */
     public function setSourceContent($sourceContent)
     {
         $this->sourceContent = $sourceContent;
-        return;
+        return $this;
     }
 
     /**

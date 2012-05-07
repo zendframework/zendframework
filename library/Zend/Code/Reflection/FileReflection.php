@@ -20,8 +20,7 @@
 
 namespace Zend\Code\Reflection;
 
-use Zend\Code\Reflection,
-    Zend\Code\NameInformation,
+use Zend\Code\NameInformation,
     Zend\Code\Scanner\CachingFileScanner;
 
 /**
@@ -35,7 +34,7 @@ use Zend\Code\Reflection,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class FileReflection implements Reflection
+class FileReflection implements ReflectionInterface
 {
     /**
      * @var string

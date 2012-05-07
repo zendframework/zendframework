@@ -20,8 +20,7 @@
 
 namespace Zend\Code\Reflection;
 
-use Zend\Code\Reflection,
-    ReflectionClass,
+use ReflectionClass,
     Zend\Code\Reflection\FileReflection,
     Zend\Code\Scanner\FileScanner,
     Zend\Code\Annotation,
@@ -38,7 +37,7 @@ use Zend\Code\Reflection,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ClassReflection extends ReflectionClass implements Reflection
+class ClassReflection extends ReflectionClass implements ReflectionInterface
 {
 
     /**

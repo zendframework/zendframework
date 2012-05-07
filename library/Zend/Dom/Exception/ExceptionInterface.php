@@ -18,7 +18,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Dom;
+namespace Zend\Dom\Exception;
 
 /**
  * Zend_Dom Exceptions
@@ -28,6 +28,6 @@ namespace Zend\Dom;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Exception
+interface ExceptionInterface
 {
 }

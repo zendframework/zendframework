@@ -21,20 +21,18 @@
 
 namespace Zend\Authentication\Storage;
 
-use Zend\Authentication\Storage as AuthenticationStorage,
+use Zend\Authentication\Storage\StorageInterface as AuthenticationStorage,
     Zend\Session\Container as SessionContainer,
-    Zend\Session\Manager as SessionManager;
+    Zend\Session\ManagerInterface as SessionManager;
 
 /**
- * @uses       Zend\Authentication\Storage
- * @uses       Zend\Session\Manager
  * @category   Zend
  * @package    Zend_Authentication
  * @subpackage Storage
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Session implements AuthenticationStorage
+class Session implements StorageInterface
 {
     /**
      * Default session namespace
@@ -49,23 +47,23 @@ class Session implements AuthenticationStorage
     /**
      * Object to proxy $_SESSION storage
      *
-     * @var Zend\Session\Container
+     * @var SessionContainer
      */
-    protected $_session;
+    protected $session;
 
     /**
      * Session namespace
      *
      * @var mixed
      */
-    protected $_namespace;
+    protected $namespace = self::NAMESPACE_DEFAULT;
 
     /**
      * Session object member
      *
      * @var mixed
      */
-    protected $_member;
+    protected $member = self::MEMBER_DEFAULT;
 
     /**
      * Sets session storage options and initializes session namespace object
@@ -74,12 +72,15 @@ class Session implements AuthenticationStorage
      * @param  mixed $member
      * @return void
      */
-    public function __construct(
-        $namespace = self::NAMESPACE_DEFAULT, $member = self::MEMBER_DEFAULT, SessionManager $manager = null
-    ) {
-        $this->_namespace = $namespace;
-        $this->_member    = $member;
-        $this->_session   = new SessionContainer($this->_namespace, $manager);
+    public function __construct($namespace = null, $member = null, SessionManager $manager = null)
+    {
+        if ($namespace !== null) {
+            $this->namespace = $namespace;
+        }
+        if ($member !== null) {
+            $this->member = $member;
+        }
+        $this->session   = new SessionContainer($this->namespace, $manager);
     }
 
     /**
@@ -89,7 +90,7 @@ class Session implements AuthenticationStorage
      */
     public function getNamespace()
     {
-        return $this->_namespace;
+        return $this->namespace;
     }
 
     /**
@@ -99,47 +100,47 @@ class Session implements AuthenticationStorage
      */
     public function getMember()
     {
-        return $this->_member;
+        return $this->member;
     }
 
     /**
-     * Defined by Zend\Auth\Storage
+     * Defined by Zend\Authentication\Storage\StorageInterface
      *
      * @return boolean
      */
     public function isEmpty()
     {
-        return !isset($this->_session->{$this->_member});
+        return !isset($this->session->{$this->member});
     }
 
     /**
-     * Defined by Zend\Auth\Storage
+     * Defined by Zend\Authentication\Storage\StorageInterface
      *
      * @return mixed
      */
     public function read()
     {
-        return $this->_session->{$this->_member};
+        return $this->session->{$this->member};
     }
 
     /**
-     * Defined by Zend\Auth\Storage
+     * Defined by Zend\Authentication\Storage\StorageInterface
      *
      * @param  mixed $contents
      * @return void
      */
     public function write($contents)
     {
-        $this->_session->{$this->_member} = $contents;
+        $this->session->{$this->member} = $contents;
     }
 
     /**
-     * Defined by Zend\Auth\Storage
+     * Defined by Zend\Authentication\Storage\StorageInterface
      *
      * @return void
      */
     public function clear()
     {
-        unset($this->_session->{$this->_member});
+        unset($this->session->{$this->member});
     }
 }

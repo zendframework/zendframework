@@ -23,7 +23,7 @@
 namespace ZendTest\File\Transfer\Adapter;
 
 use Zend\File\Transfer\Adapter,
-    Zend\File\Transfer\Exception,
+    Zend\File\Transfer\Exception\RuntimeException,
     Zend\ProgressBar,
     Zend\ProgressBar\Adapter as AdapterProgressBar,
     Zend\Validator\File as FileValidator;
@@ -124,7 +124,7 @@ class HttpTest extends \PHPUnit_Framework_TestCase
     {
         try {
             $this->assertFalse($this->adapter->receive('unknownFile'));
-        } catch (Exception $e) {
+        } catch (RuntimeException $e) {
             $this->assertContains('not find', $e->getMessage());
         }
     }

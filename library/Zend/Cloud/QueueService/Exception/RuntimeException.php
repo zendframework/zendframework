@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend\Cloud\QueueService
+ * @package    Zend_Cloud_QueueService
  * @subpackage Exception
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -21,16 +21,14 @@
 
 namespace Zend\Cloud\QueueService\Exception;
 
-use Zend\Cloud\QueueService\Exception;
-
 /**
- * @package    Zend\Cloud\QueueService
+ * @package    Zend_Cloud_QueueService
  * @subpackage Exception
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class RuntimeException 
     extends \RuntimeException 
-    implements \Zend\Cloud\QueueService\Exception
+    implements ExceptionInterface
 {
 }

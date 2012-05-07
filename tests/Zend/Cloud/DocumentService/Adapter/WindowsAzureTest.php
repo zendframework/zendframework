@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend\Cloud\DocumentService
+ * @package    Zend_Cloud_DocumentService
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -34,7 +34,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
 
 /**
  * @category   Zend
- * @package    Zend\Cloud
+ * @package    Zend_Cloud
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -49,7 +49,7 @@ class WindowsAzureTest extends TestCase
      */
     protected $_waitPeriod = 10;
 
-    protected $_clientType = '\Zend\Service\WindowsAzure\Storage\Table';
+    protected $_clientType = 'Zend\Service\WindowsAzure\Storage\Table';
 
 	/**
      * Runs the test methods of this class.
@@ -59,15 +59,15 @@ class WindowsAzureTest extends TestCase
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit_Framework_TestSuite(__CLASS__);
+        $result = \PHPUnit_TextUI_TestRunner::run($suite);
     }
 
     public function testQueryStructOrder()
     {
         try {
             parent::testQueryStructOrder();
-        } catch(Zend\Cloud\DocumentService\Adapter\Exception\OperationNotAvailableException $e) {
+        } catch(\Zend\Cloud\DocumentService\Adapter\Exception\OperationNotAvailableException $e) {
             $this->_commonDocument->deleteCollection($this->_collectionName("testStructQuery4"));
             $this->markTestSkipped('Azure query sorting not implemented yet');
         }
@@ -76,7 +76,7 @@ class WindowsAzureTest extends TestCase
     static function getConfigArray()
     {
          return array(
-            \Zend\Cloud\DocumentService\Factory::DOCUMENT_ADAPTER_KEY => '\Zend\Cloud\DocumentService\Adapter\WindowsAzure',
+            \Zend\Cloud\DocumentService\Factory::DOCUMENT_ADAPTER_KEY => 'Zend\Cloud\DocumentService\Adapter\WindowsAzure',
             \Zend\Cloud\DocumentService\Adapter\WindowsAzure::ACCOUNT_NAME => constant('TESTS_ZEND_SERVICE_WINDOWSAZURE_ONLINE_ACCOUNTNAME'),
             \Zend\Cloud\DocumentService\Adapter\WindowsAzure::ACCOUNT_KEY => constant('TESTS_ZEND_SERVICE_WINDOWSAZURE_ONLINE_ACCOUNTKEY'),
             \Zend\Cloud\DocumentService\Adapter\WindowsAzure::HOST => constant('TESTS_ZEND_SERVICE_WINDOWSAZURE_ONLINE_TABLE_HOST'),

@@ -61,7 +61,7 @@ class SerializerTest extends \PHPUnit_Framework_TestCase
     public function testDefaultAdapter()
     {
         $adapter = Serializer::getDefaultAdapter();
-        $this->assertTrue($adapter instanceof Adapter);
+        $this->assertTrue($adapter instanceof Adapter\AdapterInterface);
     }
 
     public function testFactoryValidCall()
@@ -78,7 +78,7 @@ class SerializerTest extends \PHPUnit_Framework_TestCase
     
     public function testFactoryOnADummyClassAdapter()
     {
-        $this->setExpectedException('Zend\\Serializer\\Exception','must implement Zend\\Serializer\\Adapter');
+        $this->setExpectedException('Zend\\Serializer\\Exception\\RuntimeException','must implement Zend\\Serializer\\Adapter\\AdapterInterface');
         $broker = new AdapterBroker();
         $broker->getClassLoader()->registerPlugin('dummy', 'ZendTest\Serializer\TestAsset\Dummy');
         Serializer::setAdapterBroker($broker);

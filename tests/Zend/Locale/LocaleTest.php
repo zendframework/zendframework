@@ -25,7 +25,7 @@ use Zend\Locale\Locale,
     Zend\Locale\Exception\InvalidArgumentException,
     Zend\Locale\Exception\UnexpectedValueException,
     Zend\Cache\StorageFactory as CacheFactory,
-    Zend\Cache\Storage\Adapter as CacheAdapter;
+    Zend\Cache\Storage\Adapter\AdapterInterface as CacheAdapter;
 
 /**
  * @category   Zend

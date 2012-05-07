@@ -32,9 +32,9 @@
         </itemizedlist>
 
         <para>
-            The basic architecture allows you to attach and detach listeners to named events, both on
-            a per-instance basis as well as statically; trigger events; and interrupt execution of
-            listeners.
+            The basic architecture allows you to attach and detach listeners to named events, both
+            on a per-instance basis as well as via shared collections; trigger events; and interrupt
+            execution of listeners.
         </para>
     </section>
  
@@ -47,18 +47,27 @@
 
         <programlisting language="php"><![CDATA[
 use Zend\EventManager\EventCollection,
-    Zend\EventManager\EventManager;
+use Zend\EventManager\EventManager;
+use Zend\EventManager\EventManagerAware;
 
-class Foo
+class Foo implements EventManagerAware
 {
     protected $events;
 
-    public function events(EventCollection $events = null)
+    public function setEventManager(EventCollection $events)
     {
-        if (null !== $events) {
-            $this->events = $events;
-        } elseif (null === $this->events) {
-            $this->events = new EventManager(__CLASS__);
+        $events->setIdentifiers(array(
+            __CLASS__,
+            get_called_class(),
+        ));
+        $this->events = $events;
+        return $this;
+    }
+
+    public function events()
+    {
+        if (null === $this->events) {
+            $this->setEventManager(new EventManager());
         }
         return $this->events;
     }
@@ -133,23 +142,30 @@ $foo->bar('baz', 'bat');
 
         <para>
             Sometimes you may want to specify listeners without yet having an object instance of the
-            class composing an <classname>EventManager</classname>. The
-            <classname>StaticEventManager</classname> allows you to do this. The call to
+            class composing an <classname>EventManager</classname>. Zend Framework enables this
+            through the concept of a <interfacename>SharedEventCollection</interfacename>. Simply
+            put, you can inject individual <classname>EventManager</classname> instances with a
+            well-known <interfacename>SharedEventCollection</interfacename>, and the
+            <classname>EventManager</classname> instance will query it for additional listeners.
+            Listeners attach to a <interfacename>SharedEventCollection</interfacename> in roughly
+            the same way the do normal event managers; the call to
             <methodname>attach</methodname> is identical to the <classname>EventManager</classname>,
             but expects an additional parameter at the beginning: a named instance. Remember the
             example of composing an <classname>EventManager</classname>, how we passed it
             <constant>__CLASS__</constant>? That value, or any strings you provide in an array to
-            the constructor, may be used to identify an instance when using the
-            <classname>StaticEventManager</classname>. As an example, we could change the above
-            example to attach statically:
+            the constructor, may be used to identify an instance when using a
+            <interfacename>SharedEventCollection</interfacename>. As an example, assuming we have a
+            <classname>SharedEventManager</classname> instance that we know has been injected in our
+            <classname>EventManager</classname> instances (for instance, via dependency injection),
+            we could change the above example to attach via the shared collection:
         </para>
 
         <programlisting language="php"><![CDATA[
-use Zend\EventManager\StaticEventManager,
-    Zend\Log\Factory as LogFactory;
+use Zend\Log\Factory as LogFactory;
+
+// Assume $events is a Zend\EventManager\SharedEventManager instance
 
 $log = LogFactory($someConfig);
-$events = StaticEventManager::getInstance();
 $events->attach('Foo', 'bar', function ($e) use ($log) {
     $event  = $e->getName();
     $target = get_class($e->getTarget());
@@ -165,12 +181,32 @@ $events->attach('Foo', 'bar', function ($e) use ($log) {
 
 // Later, instantiate Foo:
 $foo = new Foo();
+$foo->events()->setSharedEventCollection($events);
 
 // And we can still trigger the above event:
 $foo->bar('baz', 'bat');
 // results in log message: 
 // bar called on Foo, using params {"baz" : "baz", "bat" : "bat"}"
 ]]></programlisting>
+
+        <note>
+            <info><title>StaticEventManager</title></info>
+
+            <para>
+                As of 2.0.0beta3, you can use the <classname>StaticEventManager</classname>
+                singleton as a <interfacename>SharedEventCollection</interfacename>. As such, you do
+                not need to worry about where and how to get access to the
+                <interfacename>SharedEventCollection</interfacename>; it's globally available by
+                simply calling <code>StaticEventManager::getInstance()</code>.
+            </para>
+
+            <para>
+                Be aware, however, that its usage is deprecated within the framework, and starting
+                with 2.0.0beta4, you will instead configure a
+                <classname>SharedEventManager</classname> instance that will be injected by the
+                framework into individual <classname>EventManager</classname> instances.
+            </para>
+        </note>
 
         <para>
             The <classname>EventManager</classname> also provides the ability to detach listeners,
@@ -184,8 +220,8 @@ $foo->bar('baz', 'bat');
 
             <para>
                 Sometimes you'll want to attach the same listener to many events or to all events of
-                a given instance -- or potentially, with the static manager, many contexts, and many
-                events. The <classname>EventManager</classname> component allows for this.
+                a given instance -- or potentially, with a shared event collection, many contexts,
+                and many events. The <classname>EventManager</classname> component allows for this.
             </para>
 
             <example xml:id="zend.event-manager.event-manager.quick-start.wildcard.many">
@@ -221,11 +257,11 @@ $events->attach('*', $callback);
                 </para>
             </example>
 
-            <example xml:id="zend.event-manager.event-manager.quick-start.wildcard.static-many">
-                <title>Attaching to many events at once via the StaticEventManager</title>
+            <example xml:id="zend.event-manager.event-manager.quick-start.wildcard.shared-many">
+                <title>Attaching to many events at once via a SharedEventManager</title>
 
                 <programlisting language="php"><![CDATA[
-$events = StaticEventManager::getInstance();
+$events = new SharedEventManager();
 // Attach to many events on the context "foo"
 $events->attach('foo', array('these', 'are', 'event', 'names'), $callback);
 
@@ -239,11 +275,11 @@ $events->attach(array('foo', 'bar'), array('these', 'are', 'event', 'names'), $c
                 </para>
             </example>
 
-            <example xml:id="zend.event-manager.event-manager.quick-start.wildcard.static-wildcard">
-                <title>Attaching to many events at once via the StaticEventManager</title>
+            <example xml:id="zend.event-manager.event-manager.quick-start.wildcard.shared-wildcard">
+                <title>Attaching to many events at once via a SharedEventManager</title>
 
                 <programlisting language="php"><![CDATA[
-$events = StaticEventManager::getInstance();
+$events = new SharedEventManager();
 // Attach to all events on the context "foo"
 $events->attach('foo', '*', $callback);
 
@@ -277,7 +313,7 @@ $events->attach(array('foo', 'bar'), '*', $callback);
                     <para>
                         A string or array of strings to which the given
                         <classname>EventManager</classname> instance can answer when accessed via
-                        the <classname>StaticEventManager</classname>.
+                        a <interfacename>SharedEventManager</interfacename>.
                     </para>
                 </listitem>
             </varlistentry>
@@ -294,16 +330,12 @@ $events->attach(array('foo', 'bar'), '*', $callback);
             </varlistentry>
 
             <varlistentry>
-                <term>static_connections</term>
+                <term>shared_collections</term>
  
                 <listitem>
                     <para>
-                        An instance of a <interfacename>StaticEventCollection</interfacename>
-                        instance to use when triggering events. By default, this will use
-                        the global <classname>StaticEventManager</classname> instance, but that can
-                        be overridden by passing a value to this method. A <constant>null</constant>
-                        value will prevent the instance from triggering any further statically
-                        attached listeners.
+                        An instance of a <interfacename>SharedEventCollection</interfacename>
+                        instance to use when triggering events. 
                     </para>
                 </listitem>
             </varlistentry>
@@ -325,7 +357,7 @@ $events->attach(array('foo', 'bar'), '*', $callback);
                     </methodsynopsis>
                     <para>
                         Constructs a new <classname>EventManager</classname> instance, using the
-                        given identifier, if provided, for purposes of static attachment.
+                        given identifier, if provided, for purposes of shared collections.
                     </para>
                 </listitem>
             </varlistentry>
@@ -346,42 +378,34 @@ $events->attach(array('foo', 'bar'), '*', $callback);
                 </listitem>
             </varlistentry>
 
-            <varlistentry xml:id="zend.event-manager.event-manager.methods.set-static-connections">
-                <term>setStaticConnections</term>
+            <varlistentry xml:id="zend.event-manager.event-manager.methods.set-shared-collections">
+                <term>setSharedCollections</term>
                 <listitem>
                     <methodsynopsis>
-                        <methodname>setStaticConnections</methodname>
+                        <methodname>setSharedCollections</methodname>
                         <methodparam>
-                            <funcparams>StaticEventCollection $connections = null</funcparams>
+                            <funcparams>SharedEventCollection $collections = null</funcparams>
                         </methodparam>
                     </methodsynopsis>
                     <para>
-                        An instance of a <interfacename>StaticEventCollection</interfacename>
-                        instance to use when triggering events. By default, this will use
-                        the global <classname>StaticEventManager</classname> instance, but that can
-                        be overridden by passing a value to this method. A <constant>null</constant>
-                        value will prevent the instance from triggering any further statically
-                        attached listeners.
+                        An instance of a <interfacename>SharedEventCollection</interfacename>
+                        instance to use when triggering events. 
                     </para>
                 </listitem>
             </varlistentry>
 
-            <varlistentry xml:id="zend.event-manager.event-manager.methods.get-static-connections">
-                <term>getStaticConnections</term>
+            <varlistentry xml:id="zend.event-manager.event-manager.methods.get-shared-collections">
+                <term>getSharedCollections</term>
                 <listitem>
                     <methodsynopsis>
-                        <methodname>getStaticConnections</methodname>
+                        <methodname>getSharedCollections</methodname>
                         <void/>
                     </methodsynopsis>
                     <para>
                         Returns the currently attached
-                        <interfacename>StaticEventCollection</interfacename> instance, lazily
-                        retrieving the global <classname>StaticEventManager</classname> instance if
-                        none is attached and usage of static listeners hasn't been disabled by
-                        passing a <constant>null</constant> value to <link
-                            linkend="zend.event-manager.event-manager.methods.set-static-connections">setStaticConnections()</link>.
-                        Returns either a boolean <constant>false</constant> if static listeners are
-                        disabled, or a <interfacename>StaticEventCollection</interfacename> instance
+                        <interfacename>SharedEventCollection</interfacename> instance.
+                        Returns either a <constant>null</constant> if no collection is attached,
+                        or a <interfacename>SharedEventCollection</interfacename> instance
                         otherwise.
                     </para>
                 </listitem>
@@ -684,7 +708,7 @@ $listener = function($e) {
             </para>
  
             <programlisting language="php"><![CDATA[
-class Foo implements Dispatchable
+class Foo implements DispatchableInterface
 {
     // assume composed event manager
 
@@ -709,7 +733,7 @@ class Foo implements Dispatchable
             </para>
  
             <programlisting language="php"><![CDATA[
-class Foo implements Dispatchable
+class Foo implements DispatchableInterface
 {
     // assume composed event manager
 

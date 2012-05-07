@@ -20,19 +20,17 @@
  */
 
 namespace Zend\Authentication\Adapter;
-use Zend\Authentication\Adapter as AuthenticationAdapter,
-    Zend\Authentication\Result as AuthenticationResult;
+
+use Zend\Authentication\Result as AuthenticationResult;
 
 /**
- * @uses       Zend\Authentication\Adapter\Exception
- * @uses       Zend\Authentication\Adapter
  * @category   Zend
  * @package    Zend_Authentication
  * @subpackage Adapter
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Digest implements AuthenticationAdapter
+class Digest implements AdapterInterface
 {
     /**
      * Filename against which authentication queries are performed
@@ -171,9 +169,9 @@ class Digest implements AuthenticationAdapter
     }
 
     /**
-     * Defined by Zend_Auth_Adapter_Interface
+     * Defined by Zend\Authentication\Adapter\AdapterInterface
      *
-     * @throws Zend\Authentication\Adapter\Exception\RuntimeException
+     * @throws Zend\Authentication\Adapter\Exception\ExceptionInterface
      * @return Zend\Authentication\Result
      */
     public function authenticate()

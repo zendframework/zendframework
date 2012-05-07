@@ -4,7 +4,7 @@ namespace ZendTest\Mvc\Controller;
 
 use PHPUnit_Framework_TestCase as TestCase,
     stdClass,
-    Zend\EventManager\StaticEventManager,
+    Zend\EventManager\SharedEventManager,
     Zend\Http\Request,
     Zend\Http\Response,
     Zend\Mvc\MvcEvent,
@@ -26,8 +26,6 @@ class RestfulControllerTest extends TestCase
         $this->event      = new MvcEvent;
         $this->event->setRouteMatch($this->routeMatch);
         $this->controller->setEvent($this->event);
-
-        StaticEventManager::resetInstance();
     }
 
     public function testDispatchInvokesListWhenNoActionPresentAndNoIdentifierOnGet()
@@ -135,10 +133,11 @@ class RestfulControllerTest extends TestCase
     {
         $response = new Response();
         $response->setContent('short circuited!');
-        $events = StaticEventManager::getInstance();
-        $events->attach('Zend\Stdlib\Dispatchable', 'dispatch', function($e) use ($response) {
+        $events = new SharedEventManager();
+        $events->attach('Zend\Stdlib\DispatchableInterface', 'dispatch', function($e) use ($response) {
             return $response;
         }, 10);
+        $this->controller->events()->setSharedManager($events);
         $result = $this->controller->dispatch($this->request, $this->response);
         $this->assertSame($response, $result);
     }
@@ -147,10 +146,11 @@ class RestfulControllerTest extends TestCase
     {
         $response = new Response();
         $response->setContent('short circuited!');
-        $events = StaticEventManager::getInstance();
+        $events = new SharedEventManager();
         $events->attach('Zend\Mvc\Controller\RestfulController', 'dispatch', function($e) use ($response) {
             return $response;
         }, 10);
+        $this->controller->events()->setSharedManager($events);
         $result = $this->controller->dispatch($this->request, $this->response);
         $this->assertSame($response, $result);
     }
@@ -159,10 +159,11 @@ class RestfulControllerTest extends TestCase
     {
         $response = new Response();
         $response->setContent('short circuited!');
-        $events = StaticEventManager::getInstance();
+        $events = new SharedEventManager();
         $events->attach(get_class($this->controller), 'dispatch', function($e) use ($response) {
             return $response;
         }, 10);
+        $this->controller->events()->setSharedManager($events);
         $result = $this->controller->dispatch($this->request, $this->response);
         $this->assertSame($response, $result);
     }
@@ -177,12 +178,12 @@ class RestfulControllerTest extends TestCase
 
     public function testControllerIsLocatorAware()
     {
-        $this->assertInstanceOf('Zend\Mvc\LocatorAware', $this->controller);
+        $this->assertInstanceOf('Zend\Mvc\LocatorAwareInterface', $this->controller);
     }
 
     public function testControllerIsEventAware()
     {
-        $this->assertInstanceOf('Zend\Mvc\InjectApplicationEvent', $this->controller);
+        $this->assertInstanceOf('Zend\Mvc\InjectApplicationEventInterface', $this->controller);
     }
 
     public function testControllerIsPluggable()

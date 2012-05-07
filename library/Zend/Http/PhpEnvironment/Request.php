@@ -6,7 +6,7 @@ use Zend\Http\Request as HttpRequest,
     Zend\Uri\Http as HttpUri,
     Zend\Http\Header\Cookie,
     Zend\Stdlib\Parameters,
-    Zend\Stdlib\ParametersDescription;
+    Zend\Stdlib\ParametersInterface;
 
 class Request extends HttpRequest
 {
@@ -37,10 +37,7 @@ class Request extends HttpRequest
         $this->setPost(new Parameters($_POST));
         $this->setQuery(new Parameters($_GET));
         $this->setServer(new Parameters($_SERVER));
-
-        if ($_COOKIE) {
-            $this->setCookies($_COOKIE);
-        }
+        $this->setCookies(new Parameters($_COOKIE));
 
         if ($_FILES) {
             $this->setFile(new Parameters($_FILES));
@@ -133,10 +130,10 @@ class Request extends HttpRequest
      * Provide an alternate Parameter Container implementation for server parameters in this object, (this is NOT the
      * primary API for value setting, for that see server())
      *
-     * @param \Zend\Stdlib\ParametersDescription $server
+     * @param \Zend\Stdlib\ParametersInterface $server
      * @return Request
      */
-    public function setServer(ParametersDescription $server)
+    public function setServer(ParametersInterface $server)
     {
         $this->serverParams = $server;
 

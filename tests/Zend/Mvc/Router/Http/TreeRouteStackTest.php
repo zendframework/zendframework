@@ -15,7 +15,7 @@ class TreeRouteStackTest extends TestCase
 {
     public function testAddRouteRequiresHttpSpecificRoute()
     {
-        $this->setExpectedException('Zend\Mvc\Router\Exception\InvalidArgumentException', 'Route definition must be an array or Traversable object');
+        $this->setExpectedException('Zend\Mvc\Router\Exception\InvalidArgumentException', 'RouteInterface definition must be an array or Traversable object');
         $stack = new TreeRouteStack();
         $stack->addRoute('foo', new \ZendTest\Mvc\Router\TestAsset\DummyRoute());
     }
@@ -156,7 +156,7 @@ class TreeRouteStackTest extends TestCase
 
     public function testAssembleNonExistentRoute()
     {
-        $this->setExpectedException('Zend\Mvc\Router\Exception\RuntimeException', 'Route with name "foo" not found');
+        $this->setExpectedException('Zend\Mvc\Router\Exception\RuntimeException', 'RouteInterface with name "foo" not found');
         $stack = new TreeRouteStack();
         $stack->assemble(array(), array('name' => 'foo'));
     }

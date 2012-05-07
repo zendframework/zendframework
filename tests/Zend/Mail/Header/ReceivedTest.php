@@ -21,7 +21,7 @@
 
 namespace ZendTest\Mail\Header;
 
-use Zend\Mail\Header\Received;
+use Zend\Mail\Header;
 
 /**
  * @category   Zend
@@ -36,14 +36,14 @@ class ReceivedTest extends \PHPUnit_Framework_TestCase
 
     public function testFromStringCreatesValidReceivedHeader()
     {
-        $receivedHeader = Received::fromString('Received: xxx');
-        $this->assertInstanceOf('Zend\Mail\Header', $receivedHeader);
+        $receivedHeader = Header\Received::fromString('Received: xxx');
+        $this->assertInstanceOf('Zend\Mail\Header\HeaderInterface', $receivedHeader);
         $this->assertInstanceOf('Zend\Mail\Header\Received', $receivedHeader);
     }
 
     public function testGetFieldNameReturnsHeaderName()
     {
-        $receivedHeader = new Received();
+        $receivedHeader = new Header\Received();
         $this->assertEquals('Received', $receivedHeader->getFieldName());
     }
 
@@ -51,7 +51,7 @@ class ReceivedTest extends \PHPUnit_Framework_TestCase
     {
         $this->markTestIncomplete('Received needs to be completed');
 
-        $receivedHeader = new Received();
+        $receivedHeader = new Header\Received();
         $this->assertEquals('xxx', $receivedHeader->getFieldValue());
     }
 
@@ -59,7 +59,7 @@ class ReceivedTest extends \PHPUnit_Framework_TestCase
     {
         $this->markTestIncomplete('Received needs to be completed');
 
-        $receivedHeader = new Received();
+        $receivedHeader = new Header\Received();
 
         // @todo set some values, then test output
         $this->assertEmpty('Received: xxx', $receivedHeader->toString());

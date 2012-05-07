@@ -21,6 +21,8 @@
 
 namespace ZendTest\Mail\Storage;
 
+use Zend\Config;
+use Zend\Mail\Exception as MailException;
 use Zend\Mail\Storage\Folder;
 
 /**
@@ -113,7 +115,7 @@ class MboxFolderTest extends \PHPUnit_Framework_TestCase
     public function testLoadConfig()
     {
         try {
-            $mail = new Folder\Mbox(new \Zend\Config\Config($this->_params));
+            $mail = new Folder\Mbox(new Config\Config($this->_params));
         } catch (\Exception $e) {
             $this->fail('exception raised while loading mbox folder');
         }
@@ -207,7 +209,7 @@ class MboxFolderTest extends \PHPUnit_Framework_TestCase
         try {
             // explicit call of __toString() needed for PHP < 5.2
             $this->assertEquals($mail->getFolders()->subfolder->__toString(), DIRECTORY_SEPARATOR . 'subfolder');
-        } catch (\Zend\Mail\Exception $e) {
+        } catch (MailException\ExceptionInterface $e) {
             $this->fail('exception raised while selecting existing folder and getting global name');
         }
     }

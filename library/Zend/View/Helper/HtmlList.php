@@ -24,8 +24,6 @@ namespace Zend\View\Helper;
 /**
  * Helper for ordered and unordered lists
  *
- * @uses       \Zend\View\Exception
- * @uses       \Zend\View\Helper\FormElement
  * @category   Zend
  * @package    Zend_View
  * @subpackage Helper

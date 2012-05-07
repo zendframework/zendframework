@@ -21,8 +21,6 @@
 
 namespace Zend\Mail\Header\Exception;
 
-use Zend\Mail\Header\Exception;
-
 /**
  * @category   Zend
  * @package    Zend_Mail
@@ -32,6 +30,6 @@ use Zend\Mail\Header\Exception;
  */
 class InvalidArgumentException 
     extends \InvalidArgumentException 
-    implements Exception
+    implements ExceptionInterface
 {
 }

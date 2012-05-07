@@ -22,9 +22,8 @@
 namespace Zend\Cache\Storage\Plugin;
 
 use Zend\Cache\Exception,
-    Zend\Cache\Storage\Adapter,
     Zend\Cache\Storage\Event,
-    Zend\EventManager\EventCollection;
+    Zend\EventManager\EventManagerInterface;
 
 /**
  * @category   Zend
@@ -45,19 +44,19 @@ class IgnoreUserAbort extends AbstractPlugin
     /**
      * The storage adapter target who activated ignore_user_abort.
      *
-     * @var null|Adapter
+     * @var null|\Zend\Cache\Storage\Adapter\AdapterInterface
      */
     protected $activatedTarget = null;
 
     /**
      * Attach
      *
-     * @param  EventCollection $eventCollection
-     * @param  int             $priority
+     * @param  EventManagerInterface $eventCollection
+     * @param  int                   $priority
      * @return Serializer
      * @throws Exception\LogicException
      */
-    public function attach(EventCollection $events, $priority = 1)
+    public function attach(EventManagerInterface $events, $priority = 1)
     {
         $index = spl_object_hash($events);
         if (isset($this->handles[$index])) {
@@ -121,11 +120,11 @@ class IgnoreUserAbort extends AbstractPlugin
     /**
      * Detach
      *
-     * @param  EventCollection $events
+     * @param  EventManagerInterface $events
      * @return Serializer
      * @throws Exception\LogicException
      */
-    public function detach(EventCollection $events)
+    public function detach(EventManagerInterface $events)
     {
         $index = spl_object_hash($events);
         if (!isset($this->handles[$index])) {

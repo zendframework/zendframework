@@ -20,7 +20,7 @@
 
 namespace Zend\Date;
 
-use Zend\Cache\Storage\Adapter as CacheAdapter;
+use Zend\Cache\Storage\Adapter\AdapterInterface as CacheAdapter;
 
 /**
  * @category   Zend

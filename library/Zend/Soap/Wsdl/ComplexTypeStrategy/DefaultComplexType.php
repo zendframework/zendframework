@@ -21,16 +21,11 @@
 
 namespace Zend\Soap\Wsdl\ComplexTypeStrategy;
 
-use Zend\Soap;
-
 use Zend\Soap\Exception;
 
 /**
  * Zend_Soap_Wsdl_Strategy_DefaultComplexType
  *
- * @uses       ReflectionClass
- * @uses       \Zend\Soap\WsdlException
- * @uses       \Zend\Soap\Wsdl\Strategy\AbstractStrategy
  * @category   Zend
  * @package    Zend_Soap
  * @subpackage WSDL

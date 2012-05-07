@@ -40,14 +40,14 @@ class ScrollingStyleBroker extends PluginBroker
     /**
      * Determine if we have a valid adapter
      * 
-     * @param  mixed $plugin 
-     * @return true
-     * @throws Exception
+     * @param  mixed $plugin
+     * @return bool
+     * @throws Exception\InvalidArgumentException
      */
     protected function validatePlugin($plugin)
     {
         if (!$plugin instanceof ScrollingStyle) {
-            throw new Exception('ScrollingStyle adapters must implement Zend\Paginator\ScrollingStyle');
+            throw new Exception\InvalidArgumentException('ScrollingStyle adapters must implement Zend\Paginator\ScrollingStyle');
         }
         return true;
     }

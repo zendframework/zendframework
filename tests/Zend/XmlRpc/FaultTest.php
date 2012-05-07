@@ -37,8 +37,7 @@ use Zend\XmlRpc\Value,
 class FaultTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * Zend_XmlRpc_Fault object
-     * @var Zend_XmlRpc_Fault
+     * @var XmlRpc\Fault
      */
     protected $_fault;
 

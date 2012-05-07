@@ -554,7 +554,7 @@ class OpenId
             return gmp_init(bin2hex($bin), 16);
         } else if (extension_loaded('bcmath')) {
             $bn = 0;
-            $len = self::strlen($bin);
+            $len = strlen($bin);
             for ($i = 0; $i < $len; $i++) {
                 $bn = bcmul($bn, 256);
                 $bn = bcadd($bn, ord($bin[$i]));
@@ -635,7 +635,7 @@ class OpenId
             $bn_p        = self::binToBigNum($p);
             $bn_g        = self::binToBigNum($g);
             if ($priv_key === null) {
-                $priv_key    = self::randomBytes(self::strlen($p));
+                $priv_key    = self::randomBytes(strlen($p));
             }
             $bn_priv_key = self::binToBigNum($priv_key);
             if (extension_loaded('gmp')) {
@@ -731,22 +731,6 @@ class OpenId
             return "\0" . $str;
         }
         return $str;
-    }
-
-    /**
-     * Returns lenght of binary string in bytes
-     *
-     * @param string $str
-     * @return int the string lenght
-     */
-    static public function strlen($str)
-    {
-        if (extension_loaded('mbstring') &&
-            (((int)ini_get('mbstring.func_overload')) & 2)) {
-            return mb_strlen($str, 'latin1');
-        } else {
-            return strlen($str);
-        }
     }
 
 }

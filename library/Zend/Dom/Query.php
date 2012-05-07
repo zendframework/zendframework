@@ -20,12 +20,13 @@
 
 namespace Zend\Dom;
 
+use DOMDocument,
+    DOMNodeList,
+    DOMXPath;
+
 /**
  * Query DOM structures based on CSS selectors and/or XPath
  *
- * @uses       Zend\Dom\Exception
- * @uses       Zend\Dom\Css2Xpath
- * @uses       Zend\Dom\NodeList
  * @package    Zend_Dom
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -210,7 +211,7 @@ class Query
      * Perform a CSS selector query
      *
      * @param  string $query
-     * @return \Zend\Dom\NodeList
+     * @return NodeList
      */
     public function execute($query)
     {
@@ -223,7 +224,8 @@ class Query
      *
      * @param  string|array $xpathQuery
      * @param  string|null  $query      CSS selector query
-     * @return \Zend\Dom\NodeList
+     * @throws Exception\RuntimeException
+     * @return NodeList
      */
     public function queryXpath($xpathQuery, $query = null)
     {
@@ -234,9 +236,9 @@ class Query
         $encoding = $this->getEncoding();
         libxml_use_internal_errors(true);
         if (null === $encoding) {
-            $domDoc = new \DOMDocument('1.0');
+            $domDoc = new DOMDocument('1.0');
         } else {
-            $domDoc = new \DOMDocument('1.0', $encoding);
+            $domDoc = new DOMDocument('1.0', $encoding);
         }
 
         $type   = $this->getDocumentType();
@@ -285,7 +287,7 @@ class Query
      */
     protected function _getNodeList($document, $xpathQuery)
     {
-        $xpath      = new \DOMXPath($document);
+        $xpath      = new DOMXPath($document);
         foreach ($this->_xpathNamespaces as $prefix => $namespaceUri) {
             $xpath->registerNamespace($prefix, $namespaceUri);
         }

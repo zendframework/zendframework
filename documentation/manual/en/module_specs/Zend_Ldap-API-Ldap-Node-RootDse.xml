@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.ldap.api.reference.zend-ldap-node-rootdse"><title>Zend_Ldap_Node_RootDse</title>
-    
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.ldap.api.reference.zend-ldap-node-rootdse"><title>Zend\Ldap\Node\RootDse</title>
+
 
     <para>The following methods are available on all vendor-specific subclasses.</para>
 
     <para>
-        <classname>Zend_Ldap_Node_RootDse</classname> includes the magic property accessors
+        <classname>Zend\Ldap\Node\RootDse</classname> includes the magic property accessors
         <methodname>__get()</methodname> and <methodname>__isset()</methodname> to access the
         attributes by their name. They proxy to
-        <methodname>Zend_Ldap_Node_RootDse::getAttribute()</methodname> and
-        <methodname>Zend_Ldap_Node_RootDse::existsAttribute()</methodname> respectively.
+        <methodname>Zend\Ldap\Node\RootDse::getAttribute()</methodname> and
+        <methodname>Zend\Ldap\Node\RootDse::existsAttribute()</methodname> respectively.
         <methodname>__set()</methodname> and <methodname>__unset()</methodname> are also implemented
         but they throw a <code>BadMethodCallException</code> as modifications are not allowed on
         RootDSE nodes. Furthermore the class implements <code>ArrayAccess</code> for
@@ -20,8 +20,8 @@
         ro obvious reasons.
     </para>
 
-    <table xml:id="zend.ldap.api.reference.zend-ldap-node-rootdse.table"><title>Zend_Ldap_Node_RootDse API</title>
-        
+    <table xml:id="zend.ldap.api.reference.zend-ldap-node-rootdse.table"><title>Zend\Ldap\Node\RootDse API</title>
+
 
         <tgroup cols="2">
             <thead>
@@ -33,10 +33,10 @@
 
             <tbody>
                 <row>
-                    <entry><code>Zend_Ldap_Dn getDn()</code></entry>
+                    <entry><code>Zend\Ldap\Dn getDn()</code></entry>
 
                     <entry>
-                        Gets the DN of the current node as a <classname>Zend_Ldap_Dn</classname>.
+                        Gets the DN of the current node as a <classname>Zend\Ldap\Dn</classname>.
                     </entry>
                 </row>
 
@@ -70,7 +70,7 @@
 
                     <entry>
                         Returns the DN of the current node - proxies to
-                        <methodname>Zend_Ldap_Dn::getDnString()</methodname>.
+                        <methodname>Zend\Ldap\Dn::getDnString()</methodname>.
                     </entry>
                 </row>
 
@@ -79,7 +79,7 @@
 
                     <entry>
                         Casts to string representation - proxies to
-                        <methodname>Zend_Ldap_Dn::toString()</methodname>.
+                        <methodname>Zend\Ldap\Dn::toString()</methodname>.
                     </entry>
                 </row>
 
@@ -91,7 +91,7 @@
                         <varname>$includeSystemAttributes</varname> is <constant>FALSE</constant>
                         (defaults to <constant>TRUE</constant>) the system specific attributes are
                         stripped from the array. Unlike
-                        <methodname>Zend_Ldap_Node_RootDse::getAttributes()</methodname> the
+                        <methodname>Zend\Ldap\Node\RootDse::getAttributes()</methodname> the
                         resulting array contains the DN with key <code>'dn'</code>.
                     </entry>
                 </row>
@@ -101,7 +101,7 @@
 
                     <entry>
                         Returns a <acronym>JSON</acronym> representation of the current node using
-                        <methodname>Zend_Ldap_Node_RootDse::toArray()</methodname>.
+                        <methodname>Zend\Ldap\Node\RootDse::toArray()</methodname>.
                     </entry>
                 </row>
 
@@ -159,7 +159,7 @@
 
                     <entry>
                         Gets a <acronym>LDAP</acronym> attribute. Data conversion is applied using
-                        <methodname>Zend_Ldap_Attribute::getAttribute()</methodname>.
+                        <methodname>Zend\Ldap\Attribute::getAttribute()</methodname>.
                     </entry>
                 </row>
 
@@ -185,12 +185,12 @@
                     <entry>
                         Gets a <acronym>LDAP</acronym> date/time attribute. Data conversion is
                         applied using
-                        <methodname>Zend_Ldap_Attribute::getDateTimeAttribute()</methodname>.
+                        <methodname>Zend\Ldap\Attribute::getDateTimeAttribute()</methodname>.
                     </entry>
                 </row>
 
                 <row>
-                    <entry><code>Zend_Ldap_Node_RootDse reload(Zend_Ldap $ldap)</code></entry>
+                    <entry><code>Zend\Ldap\Node\RootDse reload(Zend\Ldap\Ldap $ldap)</code></entry>
 
                     <entry>
                         Reloads the current node's attributes from the given <acronym>LDAP</acronym>
@@ -200,7 +200,7 @@
 
                 <row>
                     <entry>
-                        <emphasis><code>Zend_Ldap_Node_RootDse create(Zend_Ldap
+                        <emphasis><code>Zend\Ldap\Node\RootDse create(Zend\Ldap\Ldap
                             $ldap)</code></emphasis>
                     </entry>
 
@@ -239,7 +239,7 @@
                         <variablelist>
                             <varlistentry>
                                 <term>
-                                    <constant>Zend_Ldap_Node_RootDse::SERVER_TYPE_GENERIC</constant>
+                                    <constant>Zend\Ldap\Node\RootDse::SERVER_TYPE_GENERIC</constant>
                                 </term>
 
                                 <listitem>
@@ -249,7 +249,7 @@
 
                             <varlistentry>
                                 <term>
-                                    <constant>Zend_Ldap_Node_RootDse::SERVER_TYPE_OPENLDAP</constant>
+                                    <constant>Zend\Ldap\Node\RootDse::SERVER_TYPE_OPENLDAP</constant>
                                 </term>
 
                                 <listitem><para>for OpenLDAP servers</para></listitem>
@@ -257,7 +257,7 @@
 
                             <varlistentry>
                                 <term>
-                                    <constant>Zend_Ldap_Node_RootDse::SERVER_TYPE_ACTIVEDIRECTORY</constant>
+                                    <constant>Zend\Ldap\Node\RootDse::SERVER_TYPE_ACTIVEDIRECTORY</constant>
                                 </term>
 
                                 <listitem>
@@ -267,7 +267,7 @@
 
                             <varlistentry>
                                 <term>
-                                    <constant>Zend_Ldap_Node_RootDse::SERVER_TYPE_EDIRECTORY</constant>
+                                    <constant>Zend\Ldap\Node\RootDse::SERVER_TYPE_EDIRECTORY</constant>
                                 </term>
 
                                 <listitem><para>For Novell eDirectory servers</para></listitem>
@@ -277,7 +277,7 @@
                 </row>
 
                 <row>
-                    <entry><code>Zend_Ldap_Dn getSchemaDn()</code></entry>
+                    <entry><code>Zend\Ldap\Dn getSchemaDn()</code></entry>
                     <entry>Returns the schema DN.</entry>
                 </row>
             </tbody>
@@ -285,24 +285,24 @@
     </table>
 
     <section xml:id="zend.ldap.api.reference.zend-ldap-node-rootdse.openldap"><title>OpenLDAP</title>
-        
+
 
         <para>
             Additionally the common methods above apply to instances of
-            <classname>Zend_Ldap_Node_RootDse_OpenLdap</classname>.
+            <classname>Zend\Ldap\Node\RootDse\OpenLdap</classname>.
         </para>
 
         <note>
             <para>
                 Refer to
                 <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.zytrax.com/books/ldap/ch3/#operational">LDAP
-                Operational Attributes and Objects</link>for information on the attributes
+                Operational Attributes and Objects</link> for information on the attributes
                 of OpenLDAP RootDSE.
             </para>
         </note>
 
-        <table xml:id="zend.ldap.api.reference.zend-ldap-node-rootdse.openldap.table"><title>Zend_Ldap_Node_RootDse_OpenLdap API</title>
-            
+        <table xml:id="zend.ldap.api.reference.zend-ldap-node-rootdse.openldap.table"><title>Zend\Ldap\Node\RootDse\OpenLdap API</title>
+
 
             <tgroup cols="2">
                 <thead>
@@ -318,7 +318,7 @@
 
                         <entry>
                             Gets the server type. Returns
-                            <constant>Zend_Ldap_Node_RootDse::SERVER_TYPE_OPENLDAP</constant>
+                            <constant>Zend\Ldap\Node\RootDse::SERVER_TYPE_OPENLDAP</constant>
                         </entry>
                     </row>
 
@@ -352,24 +352,24 @@
     </section>
 
     <section xml:id="zend.ldap.api.reference.zend-ldap-node-rootdse.activedirectory"><title>ActiveDirectory</title>
-        
+
 
         <para>
             Additionally the common methods above apply to instances of
-            <classname>Zend_Ldap_Node_RootDse_ActiveDirectory</classname>.
+            <classname>Zend\Ldap\Node\RootDse\ActiveDirectory</classname>.
         </para>
 
         <note>
             <para>
                 Refer to
                 <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://msdn.microsoft.com/en-us/library/ms684291(VS.85).aspx">
-                RootDSE</link>for information on the attributes of Microsoft
+                RootDSE</link> for information on the attributes of Microsoft
                 ActiveDirectory RootDSE.
             </para>
         </note>
 
-        <table xml:id="zend.ldap.api.reference.zend-ldap-node-rootdse.activedirectory.table"><title>Zend_Ldap_Node_RootDse_ActiveDirectory API</title>
-            
+        <table xml:id="zend.ldap.api.reference.zend-ldap-node-rootdse.activedirectory.table"><title>Zend\Ldap\Node\RootDse\ActiveDirectory API</title>
+
 
             <tgroup cols="2">
                 <thead>
@@ -385,7 +385,7 @@
 
                         <entry>
                             Gets the server type. Returns
-                            <constant>Zend_Ldap_Node_RootDse::SERVER_TYPE_ACTIVEDIRECTORY</constant>
+                            <constant>Zend\Ldap\Node\RootDse::SERVER_TYPE_ACTIVEDIRECTORY</constant>
                         </entry>
                     </row>
 
@@ -484,23 +484,23 @@
     </section>
 
     <section xml:id="zend.ldap.api.reference.zend-ldap-node-rootdse.edirectory"><title>eDirectory</title>
-        
+
 
         <para>
             Additionally the common methods above apply to instances of
-            <code>Zend_Ldap_Node_RootDse_eDirectory</code>.
+            <code>Zend\Ldap\Node\RootDse\eDirectory</code>.
         </para>
 
         <note>
             <para>
                 Refer to <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.novell.com/documentation/edir88/edir88/index.html?page=/documentation/edir88/edir88/data/ah59jqq.html">Getting
-                    Information about the <acronym>LDAP</acronym> Server</link>for information on
+                    Information about the <acronym>LDAP</acronym> Server</link> for information on
                 the attributes of Novell eDirectory RootDSE.
             </para>
         </note>
 
-        <table xml:id="zend.ldap.api.reference.zend-ldap-node-rootdse.edirectory.table"><title>Zend_Ldap_Node_RootDse_eDirectory API</title>
-            
+        <table xml:id="zend.ldap.api.reference.zend-ldap-node-rootdse.edirectory.table"><title>Zend\Ldap\Node\RootDse\eDirectory API</title>
+
 
             <tgroup cols="2">
                 <thead>
@@ -516,7 +516,7 @@
 
                         <entry>
                             Gets the server type. Returns
-                            <constant>Zend_Ldap_Node_RootDse::SERVER_TYPE_EDIRECTORY</constant>
+                            <constant>Zend\Ldap\Node\RootDse::SERVER_TYPE_EDIRECTORY</constant>
                         </entry>
                     </row>
 

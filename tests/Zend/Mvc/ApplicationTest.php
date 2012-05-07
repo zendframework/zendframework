@@ -8,7 +8,7 @@ use ArrayObject,
     Zend\Di\Di as DependencyInjector,
     Zend\Di\ServiceLocator,
     Zend\EventManager\EventManager,
-    Zend\EventManager\StaticEventManager,
+    Zend\EventManager\SharedEventManager,
     Zend\Http\Request,
     Zend\Http\PhpEnvironment\Response,
     Zend\Mvc\Application,
@@ -17,16 +17,11 @@ use ArrayObject,
 
 class ApplicationTest extends TestCase
 {
-    public function setUp()
-    {
-        StaticEventManager::resetInstance();
-    }
-
     public function testEventManagerIsLazyLoaded()
     {
         $app = new Application();
         $events = $app->events();
-        $this->assertInstanceOf('Zend\EventManager\EventCollection', $events);
+        $this->assertInstanceOf('Zend\EventManager\EventManagerInterface', $events);
         $this->assertInstanceOf('Zend\EventManager\EventManager', $events);
     }
 
@@ -59,7 +54,7 @@ class ApplicationTest extends TestCase
     {
         $app    = new Application();
         $router = $app->getRouter();
-        $this->assertInstanceOf('Zend\Mvc\Router\RouteStack', $router);
+        $this->assertInstanceOf('Zend\Mvc\Router\RouteStackInterface', $router);
     }
 
     public function testRouterMayBeInjected()
@@ -405,14 +400,16 @@ class ApplicationTest extends TestCase
         $router  = $app->getRouter();
         $router->addRoute('locator-aware', $route);
 
+        $events  = new SharedEventManager();
         $locator = new TestAsset\Locator();
-        $locator->add('locator-aware', function() {
-            return new TestAsset\LocatorAwareController;
+        $locator->add('locator-aware', function() use ($events) {
+            $controller = new TestAsset\LocatorAwareController;
+            $controller->events()->setSharedManager($events);
+            return $controller;
         });
         $app->setLocator($locator);
 
         $storage = new ArrayObject();
-        $events  = StaticEventManager::getInstance();
         $events->attach('ZendTest\Mvc\TestAsset\LocatorAwareController', 'dispatch', function ($e) use ($storage) {
             $controller = $e->getTarget();
             $storage['locator'] = $controller->getLocator();
@@ -436,8 +433,10 @@ class ApplicationTest extends TestCase
 
     public function testCanProvideAlternateEventManagerToDisableDefaultRouteAndDispatchEventListeners()
     {
-        $app    = $this->setupActionController();
-        $events = new EventManager();
+        $app          = $this->setupActionController();
+        $events       = new EventManager();
+        $sharedEvents = new SharedEventManager();
+        $events->setSharedManager($sharedEvents);
         $app->setEventManager($events);
 
         $listener1 = function($e) {
@@ -452,9 +451,8 @@ class ApplicationTest extends TestCase
             $content  = (empty($content) ? 'listener2' : $content . '::' . 'listener2');
             $response->setContent($content);
         };
-        $events = StaticEventManager::getInstance();
-        $events->attach('ZendTest\Mvc\Controller\TestAsset\SampleController', 'dispatch', $listener1, 10);
-        $events->attach('ZendTest\Mvc\Controller\TestAsset\SampleController', 'dispatch', $listener2, -10);
+        $sharedEvents->attach('ZendTest\Mvc\Controller\TestAsset\SampleController', 'dispatch', $listener1, 10);
+        $sharedEvents->attach('ZendTest\Mvc\Controller\TestAsset\SampleController', 'dispatch', $listener2, -10);
 
         $app->run();
         $response = $app->getResponse();

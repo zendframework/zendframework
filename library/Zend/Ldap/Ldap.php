@@ -88,8 +88,7 @@ class Ldap
      * Constructor.
      *
      * @param  array|Traversable $options Options used in connecting, binding, etc.
-     * @return void
-     * @throws Exception\LdapException if ext/ldap is not installed
+     * @throws Exception\LdapException
      */
     public function __construct($options = array())
     {
@@ -175,9 +174,8 @@ class Ldap
         $message = '';
         if ($errorCode > 0) {
             $message = '0x' . dechex($errorCode) . ' ';
-        } else {
-            $message = '';
         }
+
         if (count($errorMessages) > 0) {
             $message .= '(' . implode('; ', $errorMessages) . ')';
         } else {
@@ -194,7 +192,7 @@ class Ldap
      * NULL if there has been an anonymous bind
      * username of the currently bound user
      *
-     * @return false|null|string
+     * @return bool|null|string
      */
     public function getBoundUser()
     {
@@ -452,13 +450,13 @@ class Ldap
     }
 
     /**
+     * @param  string $acctname
      * @return string The LDAP search filter for matching directory accounts
      */
     protected function getAccountFilter($acctname)
     {
         $dname = '';
         $aname = '';
-
         $this->splitName($acctname, $dname, $aname);
         $accountFilterFormat = $this->getAccountFilterFormat();
         $aname               = Filter\AbstractFilter::escapeValue($aname);
@@ -543,7 +541,7 @@ class Ldap
 
     /**
      * @param  string $acctname The name to canonicalize
-     * @param  int    $type     The desired form of canonicalization
+     * @param  int    $form     The desired form of canonicalization
      * @return string The canonicalized name in the desired form
      * @throws Exception\LdapException
      */
@@ -597,8 +595,9 @@ class Ldap
     }
 
     /**
-     * @param  array $attrs An array of names of desired attributes
-     * @return array An array of the attributes representing the account
+     * @param  string $acctname
+     * @param  array  $attrs An array of names of desired attributes
+     * @return array  An array of the attributes representing the account
      * @throws Exception\LdapException
      */
     protected function getAccount($acctname, array $attrs = null)
@@ -622,6 +621,7 @@ class Ldap
         if ($count === 1) {
             $acct = $accounts->getFirst();
             $accounts->close();
+
             return $acct;
         } else {
             if ($count === 0) {
@@ -1071,8 +1071,8 @@ class Ldap
      * Prepares an ldap data entry array for insert/update operation
      *
      * @param  array $entry
+     * @throws Exception\InvalidArgumentException
      * @return void
-     * @throws InvalidArgumentException\LdapException
      */
     public static function prepareLdapEntryArray(array &$entry)
     {
@@ -1260,6 +1260,7 @@ class Ldap
      * or {@see copy()}
      *
      * @param  string|Dn $parentDn
+     * @throws Exception\LdapException
      * @return array of DNs
      */
     protected function getChildrenDns($parentDn)
@@ -1335,7 +1336,7 @@ class Ldap
     /**
      * Renames a LDAP entry from one DN to another DN.
      *
-     * This method implicitely moves the entry to another location within the tree.
+     * This method implicitly moves the entry to another location within the tree.
      *
      * @param  string|Dn $from
      * @param  string|Dn $to

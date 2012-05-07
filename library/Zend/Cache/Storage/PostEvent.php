@@ -50,7 +50,7 @@ class PostEvent extends Event
      * @param  mixed $result
      * @return void
      */
-    public function __construct($name, Adapter $storage, ArrayObject $params, &$result)
+    public function __construct($name, Adapter\AdapterInterface $storage, ArrayObject $params, &$result)
     {
         parent::__construct($name, $storage, $params);
         $this->setResult($result);

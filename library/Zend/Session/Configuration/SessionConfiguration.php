@@ -20,7 +20,7 @@
 
 namespace Zend\Session\Configuration;
 
-use Zend\Validator\Hostname\Hostname as HostnameValidator,
+use Zend\Validator\Hostname as HostnameValidator,
     Zend\Session\Exception;
 
 /**
@@ -88,7 +88,7 @@ class SessionConfiguration extends StandardConfiguration
      * 
      * @param  string $storageName 
      * @param  mixed $storageValue 
-     * @return Zend\Session\Configuration\StandardConfiguration
+     * @return SessionConfiguration
      */
     public function setStorageOption($storageName, $storageValue)
     {
@@ -106,6 +106,7 @@ class SessionConfiguration extends StandardConfiguration
         }
 
         ini_set($key, $storageValue);
+        return $this;
     }
 
     /**
@@ -165,7 +166,7 @@ class SessionConfiguration extends StandardConfiguration
      * 
      * @param  string $phpSaveHandler 
      * @return SessionConfiguration
-     * @throws SessionException
+     * @throws Exception\InvalidArgumentException
      */
     public function setPhpSaveHandler($phpSaveHandler)
     {
@@ -186,7 +187,7 @@ class SessionConfiguration extends StandardConfiguration
      * 
      * @param  string $serializeHandler 
      * @return SessionConfiguration
-     * @throws SessionException
+     * @throws Exception\InvalidArgumentException
      */
     public function setSerializeHandler($serializeHandler)
     {
@@ -205,6 +206,13 @@ class SessionConfiguration extends StandardConfiguration
 
     // session.cache_limiter
 
+    /**
+     * Set cache limiter
+     *
+     * @param $cacheLimiter
+     * @return SessionConfiguration
+     * @throws Exception\InvalidArgumentException
+     */
     public function setCacheLimiter($cacheLimiter)
     {
         $cacheLimiter = (string) $cacheLimiter;
@@ -239,7 +247,7 @@ class SessionConfiguration extends StandardConfiguration
      * 
      * @param  string|int $hashFunction 
      * @return SessionConfiguration
-     * @throws SessionException
+     * @throws Exception\InvalidArgumentException
      */
     public function setHashFunction($hashFunction)
     {
@@ -259,7 +267,7 @@ class SessionConfiguration extends StandardConfiguration
      * 
      * @param  int $hashBitsPerCharacter 
      * @return SessionConfiguration
-     * @throws SessionException
+     * @throws Exception\InvalidArgumentException
      */
     public function setHashBitsPerCharacter($hashBitsPerCharacter)
     {

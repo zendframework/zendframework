@@ -33,7 +33,7 @@ use ArrayAccess;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Event implements EventDescription
+class Event implements EventInterface
 {
     /**
      * @var string Event name
@@ -114,8 +114,7 @@ class Event implements EventDescription
     {
         if (!is_array($params) && !is_object($params)) {
             throw new Exception\InvalidArgumentException(sprintf(
-                'Event parameters must be an array or object; received "%s"',
-                (is_object($params) ? get_class($params) : gettype($params))
+                'Event parameters must be an array or object; received "%s"', gettype($params)
             ));
         }
 

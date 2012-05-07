@@ -22,9 +22,9 @@
 namespace Zend\Cache\Storage\Plugin;
 
 use Traversable,
-    Zend\EventManager\EventCollection,
+    Zend\EventManager\EventManagerInterface,
     Zend\Cache\Exception,
-    Zend\Cache\Storage\Adapter,
+    Zend\Cache\Storage\Adapter\AdapterInterface as Adapter,
     Zend\Cache\Storage\PostEvent;
 
 /**
@@ -46,12 +46,12 @@ class ClearByFactor extends AbstractPlugin
     /**
      * Attach
      *
-     * @param  EventCollection $eventCollection
-     * @param  int             $priority
+     * @param  EventManagerInterface $eventCollection
+     * @param  int                   $priority
      * @return ClearByFactor
      * @throws Exception\LogicException
      */
-    public function attach(EventCollection $eventCollection, $priority = 1)
+    public function attach(EventManagerInterface $eventCollection, $priority = 1)
     {
         $index = spl_object_hash($eventCollection);
         if (isset($this->handles[$index])) {
@@ -73,11 +73,11 @@ class ClearByFactor extends AbstractPlugin
     /**
      * Detach
      *
-     * @param  EventCollection $eventCollection
+     * @param  EventManagerInterface $eventCollection
      * @return ClearByFactor
      * @throws Exception\LogicException
      */
-    public function detach(EventCollection $eventCollection)
+    public function detach(EventManagerInterface $eventCollection)
     {
         $index = spl_object_hash($eventCollection);
         if (!isset($this->handles[$index])) {

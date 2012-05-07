@@ -31,10 +31,6 @@ use Zend\Locale\Locale,
 /**
  * Translation view helper
  *
- * @uses      \Zend\Locale\Locale
- * @uses      \Zend\Registry
- * @uses      \Zend\View\Exception
- * @uses      \Zend\View\Helper\AbstractHelper
  * @category  Zend
  * @package   Zend_View
  * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -45,7 +41,7 @@ class Translator extends AbstractHelper
     /**
      * Translation object
      *
-     * @var \Zend\Translator\Adapter\Adapter
+     * @var TranslationAdapter
      */
     protected $translator;
 
@@ -181,7 +177,6 @@ class Translator extends AbstractHelper
     /**
      * Returns the set locale for translations
      *
-     * @throws ViewException 
      * @return string|Locale
      * @throws Exception\RuntimeException When no Translation instance was set
      */

@@ -35,11 +35,11 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * Test class for Zend_Cloud_Infrastructure_Factory
  *
  * @category   Zend
- * @package    Zend\Cloud
+ * @package    Zend_Cloud
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend\Cloud
+ * @group      Zend_Cloud
  */
 class FactoryTest extends \PHPUnit_Framework_TestCase
 {
@@ -50,8 +50,8 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit_Framework_TestSuite(__CLASS__);
+        $result = \PHPUnit_TextUI_TestRunner::run($suite);
     }
 
     public function testGetInfrastructureAdapterKey()
@@ -77,6 +77,6 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 }
 
 // Call Zend\Cloud\Infrastructure\FactoryTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "ZendTest\Cloud\Infrastructure\FactoryTest::main") {
+if (PHPUnit_MAIN_METHOD == 'ZendTest\Cloud\Infrastructure\FactoryTest::main') {
     FactoryTest::main();
 }

@@ -84,7 +84,7 @@ class Barcode extends AbstractValidator
      */
     public function getAdapter()
     {
-        if (!($this->options['adapter'] instanceof Barcode\Adapter)) {
+        if (!($this->options['adapter'] instanceof Barcode\AdapterInterface)) {
             $this->setAdapter('Ean13');
         }
 
@@ -115,9 +115,9 @@ class Barcode extends AbstractValidator
             $this->options['adapter'] = new $adapter($options);
         }
 
-        if (!$this->options['adapter'] instanceof Barcode\Adapter) {
+        if (!$this->options['adapter'] instanceof Barcode\AdapterInterface) {
             throw new Exception\InvalidArgumentException(
-                "Adapter " . $adapter . " does not implement Zend\Validate\Barcode\Adapter"
+                "Adapter " . $adapter . " does not implement Zend\Validate\Barcode\AdapterInterface"
             );
         }
 
@@ -146,7 +146,7 @@ class Barcode extends AbstractValidator
     }
 
     /**
-     * Defined by Zend\Validator\Validator
+     * Defined by Zend\Validator\ValidatorInterface
      *
      * Returns true if and only if $value contains a valid barcode
      *

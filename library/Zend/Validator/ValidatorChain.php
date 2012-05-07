@@ -24,13 +24,13 @@ namespace Zend\Validator;
  * @uses       \Zend\Loader
  * @uses       \Zend\Validator\AbstractValidator
  * @uses       \Zend\Validator\Exception
- * @uses       \Zend\Validator\Validator
+ * @uses       \Zend\Validator\ValidatorInterface
  * @category   Zend
  * @package    Zend_Validate
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ValidatorChain implements Validator
+class ValidatorChain implements ValidatorInterface
 {
     /**
      * Validator chain
@@ -60,11 +60,11 @@ class ValidatorChain implements Validator
      * If $breakChainOnFailure is true, then if the validator fails, the next validator in the chain,
      * if one exists, will not be executed.
      *
-     * @param  \Zend\Validator\Validator $validator
+     * @param  \Zend\Validator\ValidatorInterface $validator
      * @param  boolean                 $breakChainOnFailure
      * @return \Zend\Validator\ValidatorChain Provides a fluent interface
      */
-    public function addValidator(Validator $validator, $breakChainOnFailure = false)
+    public function addValidator(ValidatorInterface $validator, $breakChainOnFailure = false)
     {
         $this->_validators[] = array(
             'instance' => $validator,

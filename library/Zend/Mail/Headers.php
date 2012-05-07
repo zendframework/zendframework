@@ -52,7 +52,7 @@ class Headers implements Iterator, Countable
     protected $headersKeys = array();
 
     /**
-     * @var array Array of header array information or Header instances
+     * @var array Array of header array information or HeaderInterface instances
      */
     protected $headers = array();
 
@@ -71,6 +71,7 @@ class Headers implements Iterator, Countable
      * will be lazy loaded)
      *
      * @param  string $string
+     * @throws Exception\RuntimeException
      * @return Headers
      */
     public static function fromString($string)
@@ -187,6 +188,7 @@ class Headers implements Iterator, Countable
      * Expects an array (or Traversable object) of type/value pairs.
      *
      * @param  array|Traversable $headers
+     * @throws Exception\InvalidArgumentException
      * @return Headers
      */
     public function addHeaders($headers)
@@ -206,7 +208,7 @@ class Headers implements Iterator, Countable
                     $this->addHeaderLine(key($value), current($value));
                 } elseif (is_array($value) && count($value) == 2) {
                     $this->addHeaderLine($value[0], $value[1]);
-                } elseif ($value instanceof Header) {
+                } elseif ($value instanceof Header\HeaderInterface) {
                     $this->addHeader($value);
                 }
             } elseif (is_string($name)) {
@@ -221,7 +223,7 @@ class Headers implements Iterator, Countable
     /**
      * Add a raw header line, either in name => value, or as a single string 'name: value'
      *
-     * This method allows for lazy-loading in that the parsing and instantiation of Header object
+     * This method allows for lazy-loading in that the parsing and instantiation of HeaderInterface object
      * will be delayed until they are retrieved by either get() or current()
      *
      * @throws Exception\InvalidArgumentException
@@ -260,12 +262,12 @@ class Headers implements Iterator, Countable
     }
 
     /**
-     * Add a Header to this container, for raw values @see addHeaderLine() and addHeaders()
-     * 
-     * @param  Header $header
+     * Add a Header\Interface to this container, for raw values see {@link addHeaderLine()} and {@link addHeaders()}
+     *
+     * @param  Header\HeaderInterface $header
      * @return Headers
      */
-    public function addHeader(Header $header)
+    public function addHeader(Header\HeaderInterface $header)
     {
         $key = $this->normalizeFieldName($header->getFieldName());
 
@@ -278,10 +280,10 @@ class Headers implements Iterator, Countable
     /**
      * Remove a Header from the container
      *
-     * @param Header $header
+     * @param Header\HeaderInterface $header
      * @return bool
      */
-    public function removeHeader(Header $header)
+    public function removeHeader(Header\HeaderInterface $header)
     {
         $index = array_search($header, $this->headers, true);
         if ($index !== false) {
@@ -309,7 +311,7 @@ class Headers implements Iterator, Countable
      * Get all headers of a certain name/type
      * 
      * @param  string $name
-     * @return false|Header|ArrayIterator
+     * @return boolean|Header\HeaderInterface|ArrayIterator
      */
     public function get($name)
     {
@@ -320,7 +322,7 @@ class Headers implements Iterator, Countable
 
         $class = ($this->getPluginClassLoader()->load($key)) ?: 'Zend\Mail\Header\GenericHeader';
 
-        if (in_array('Zend\Mail\Header\MultipleHeaderDescription', class_implements($class, true))) {
+        if (in_array('Zend\Mail\Header\MultipleHeadersInterface', class_implements($class, true))) {
             $headers = array();
             foreach (array_keys($this->headersKeys, $key) as $index) {
                 if (is_array($this->headers[$index])) {
@@ -357,9 +359,8 @@ class Headers implements Iterator, Countable
     }
 
     /**
-     * Advance the pointer for this object as an interator
+     * Advance the pointer for this object as an iterator
      *
-     * @return void
      */
     public function next()
     {
@@ -367,7 +368,7 @@ class Headers implements Iterator, Countable
     }
 
     /**
-     * Return the current key for this object as an interator
+     * Return the current key for this object as an iterator
      *
      * @return mixed
      */
@@ -389,7 +390,6 @@ class Headers implements Iterator, Countable
     /**
      * Reset the internal pointer for this object as an iterator
      *
-     * @return void
      */
     public function rewind()
     {
@@ -399,7 +399,7 @@ class Headers implements Iterator, Countable
     /**
      * Return the current value for this iterator, lazy loading it if need be
      *
-     * @return Header
+     * @return Header\HeaderInterface
      */
     public function current()
     {
@@ -455,15 +455,15 @@ class Headers implements Iterator, Countable
     public function toArray()
     {
         $headers = array();
-        /* @var $header Header */
+        /* @var $header Header\HeaderInterface */
         foreach ($this->headers as $header) {
-            if ($header instanceof Header\MultipleHeaderDescription) {
+            if ($header instanceof Header\MultipleHeadersInterface) {
                 $name = $header->getFieldName();
                 if (!isset($headers[$name])) {
                     $headers[$name] = array();
                 }
                 $headers[$name][] = $header->getFieldValue();
-            } elseif ($header instanceof Header) {
+            } elseif ($header instanceof Header\HeaderInterface) {
                 $headers[$header->getFieldName()] = $header->getFieldValue();
             } else {
                 $matches = null;
@@ -491,14 +491,14 @@ class Headers implements Iterator, Countable
 
     /**
      * @param $index
-     * @return mixed|void
+     * @return mixed
      */
     protected function lazyLoadHeader($index)
     {
         $current = $this->headers[$index];
 
         $key = $this->headersKeys[$index];
-        /* @var $class Header */
+        /* @var $class Header\HeaderInterface */
         $class = ($this->getPluginClassLoader()->load($key)) ?: 'Zend\Mail\Header\GenericHeader';
 
         $encoding = $this->getEncoding();

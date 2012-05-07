@@ -39,7 +39,7 @@ use RecursiveIteratorIterator,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class AbstractHelper extends View\Helper\HtmlElement implements Helper
+abstract class AbstractHelper extends View\Helper\HtmlElement implements HelperInterface
 {
     /**
      * Container to operate on by default
@@ -132,7 +132,7 @@ abstract class AbstractHelper extends View\Helper\HtmlElement implements Helper
     /**
      * Sets navigation container the helper operates on by default
      *
-     * Implements {@link Helper::setContainer()}.
+     * Implements {@link HelperInterface::setContainer()}.
      *
      * @param  Navigation\Container $container [optional] container to operate on.  Default is null, meaning container will be reset.
      * @return AbstractHelper  fluent interface, returns self
@@ -146,7 +146,7 @@ abstract class AbstractHelper extends View\Helper\HtmlElement implements Helper
     /**
      * Returns the navigation container helper operates on by default
      *
-     * Implements {@link Helper::getContainer()}.
+     * Implements {@link HelperInterface::getContainer()}.
      *
      * If a helper is not explicitly set in this helper instance by calling
      * {@link setContainer()} or by passing it through the helper entry point,
@@ -259,7 +259,7 @@ abstract class AbstractHelper extends View\Helper\HtmlElement implements Helper
     /**
      * Sets translator to use in helper
      *
-     * Implements {@link Helper::setTranslator()}.
+     * Implements {@link HelperInterface::setTranslator()}.
      *
      * @param  mixed $translator [optional] translator.  Expects an object of 
      *                           type {@link Translator\Adapter\AbstractAdapter}
@@ -282,7 +282,7 @@ abstract class AbstractHelper extends View\Helper\HtmlElement implements Helper
     /**
      * Returns translator used in helper
      *
-     * Implements {@link Helper::getTranslator()}.
+     * Implements {@link HelperInterface::getTranslator()}.
      *
      * @return Translator\Adapter\AbstractAdapter|null  translator or null
      */
@@ -300,7 +300,7 @@ abstract class AbstractHelper extends View\Helper\HtmlElement implements Helper
     /**
      * Sets ACL to use when iterating pages
      *
-     * Implements {@link Helper::setAcl()}.
+     * Implements {@link HelperInterface::setAcl()}.
      *
      * @param  Acl\Acl $acl [optional] ACL object.  Default is null.
      * @return AbstractHelper  fluent interface, returns self
@@ -315,7 +315,7 @@ abstract class AbstractHelper extends View\Helper\HtmlElement implements Helper
      * Returns ACL or null if it isn't set using {@link setAcl()} or
      * {@link setDefaultAcl()}
      *
-     * Implements {@link Helper::getAcl()}.
+     * Implements {@link HelperInterface::getAcl()}.
      *
      * @return Acl\Acl|null  ACL object or null
      */
@@ -331,10 +331,10 @@ abstract class AbstractHelper extends View\Helper\HtmlElement implements Helper
     /**
      * Sets ACL role(s) to use when iterating pages
      *
-     * Implements {@link Helper::setRole()}.
+     * Implements {@link HelperInterface::setRole()}.
      *
      * @param  mixed $role [optional] role to set. Expects a string, an 
-     *                     instance of type {@link Acl\Role}, or null. Default 
+     *                     instance of type {@link Acl\Role\RoleInterface}, or null. Default
      *                     is null, which will set no role.
      * @return AbstractHelper  fluent interface, returns self
      * @throws Exception\InvalidArgumentException if $role is invalid
@@ -342,14 +342,14 @@ abstract class AbstractHelper extends View\Helper\HtmlElement implements Helper
     public function setRole($role = null)
     {
         if (null === $role || is_string($role) ||
-            $role instanceof Acl\Role
+            $role instanceof Acl\Role\RoleInterface
         ) {
             $this->role = $role;
         } else {
             throw new Exception\InvalidArgumentException(sprintf(
                 '$role must be a string, null, or an instance of ' 
-                .  'Zend_Acl_Role_Interface; %s given',
-                gettype($role)
+                .  'Zend\Acl\Role\RoleInterface; %s given',
+                (is_object($role) ? get_class($role) : gettype($role))
             ));
         }
 
@@ -360,9 +360,9 @@ abstract class AbstractHelper extends View\Helper\HtmlElement implements Helper
      * Returns ACL role to use when iterating pages, or null if it isn't set
      * using {@link setRole()} or {@link setDefaultRole()}
      *
-     * Implements {@link Helper::getRole()}.
+     * Implements {@link HelperInterface::getRole()}.
      *
-     * @return string|Acl\Role|null  role or null
+     * @return string|Acl\Role\RoleInterface|null  role or null
      */
     public function getRole()
     {
@@ -376,7 +376,7 @@ abstract class AbstractHelper extends View\Helper\HtmlElement implements Helper
     /**
      * Sets whether ACL should be used
      *
-     * Implements {@link Helper::setUseAcl()}.
+     * Implements {@link HelperInterface::setUseAcl()}.
      *
      * @param  bool $useAcl [optional] whether ACL should be used.  Default is true.
      * @return AbstractHelper  fluent interface, returns self
@@ -390,7 +390,7 @@ abstract class AbstractHelper extends View\Helper\HtmlElement implements Helper
     /**
      * Returns whether ACL should be used
      *
-     * Implements {@link Helper::getUseAcl()}.
+     * Implements {@link HelperInterface::getUseAcl()}.
      *
      * @return bool  whether ACL should be used
      */
@@ -424,7 +424,7 @@ abstract class AbstractHelper extends View\Helper\HtmlElement implements Helper
     /**
      * Sets whether translator should be used
      *
-     * Implements {@link Helper::setUseTranslator()}.
+     * Implements {@link HelperInterface::setUseTranslator()}.
      *
      * @param  bool $useTranslator [optional] whether translator should be used. 
      *                             Default is true.
@@ -439,7 +439,7 @@ abstract class AbstractHelper extends View\Helper\HtmlElement implements Helper
     /**
      * Returns whether translator should be used
      *
-     * Implements {@link Helper::getUseTranslator()}.
+     * Implements {@link HelperInterface::getUseTranslator()}.
      *
      * @return bool  whether translator should be used
      */
@@ -456,7 +456,7 @@ abstract class AbstractHelper extends View\Helper\HtmlElement implements Helper
      * @param  string $method             method name in container
      * @param  array  $arguments          [optional] arguments to pass
      * @return mixed                      returns what the container returns
-     * @throws Navigation\Exception  if method does not exist in container
+     * @throws Navigation\Exception\ExceptionInterface  if method does not exist in container
      */
     public function __call($method, array $arguments = array())
     {
@@ -471,7 +471,7 @@ abstract class AbstractHelper extends View\Helper\HtmlElement implements Helper
      * This method will trigger an E_USER_ERROR if rendering the helper causes
      * an exception to be thrown.
      *
-     * Implements {@link Helper::__toString()}.
+     * Implements {@link HelperInterface::__toString()}.
      *
      * @return string
      */
@@ -563,7 +563,7 @@ abstract class AbstractHelper extends View\Helper\HtmlElement implements Helper
     /**
      * Checks if the helper has a container
      *
-     * Implements {@link Helper::hasContainer()}.
+     * Implements {@link HelperInterface::hasContainer()}.
      *
      * @return bool  whether the helper has a container or not
      */
@@ -575,7 +575,7 @@ abstract class AbstractHelper extends View\Helper\HtmlElement implements Helper
     /**
      * Checks if the helper has an ACL instance
      *
-     * Implements {@link Helper::hasAcl()}.
+     * Implements {@link HelperInterface::hasAcl()}.
      *
      * @return bool  whether the helper has a an ACL instance or not
      */
@@ -587,7 +587,7 @@ abstract class AbstractHelper extends View\Helper\HtmlElement implements Helper
     /**
      * Checks if the helper has an ACL role
      *
-     * Implements {@link Helper::hasRole()}.
+     * Implements {@link HelperInterface::hasRole()}.
      *
      * @return bool  whether the helper has a an ACL role or not
      */
@@ -599,7 +599,7 @@ abstract class AbstractHelper extends View\Helper\HtmlElement implements Helper
     /**
      * Checks if the helper has a translator
      *
-     * Implements {@link Helper::hasTranslator()}.
+     * Implements {@link HelperInterface::hasTranslator()}.
      *
      * @return bool  whether the helper has a translator or not
      */
@@ -794,7 +794,7 @@ abstract class AbstractHelper extends View\Helper\HtmlElement implements Helper
      * set later with {@link setRole()}
      *
      * @param  mixed $role [optional] role to set. Expects null, string, or an 
-     *                     instance of {@link Acl\Role}. Default is null, which 
+     *                     instance of {@link Acl\Role\RoleInterface}. Default is null, which
      *                     sets no default role.
      * @return void
      * @throws Exception\InvalidArgumentException if role is invalid
@@ -803,13 +803,14 @@ abstract class AbstractHelper extends View\Helper\HtmlElement implements Helper
     {
         if (null === $role 
             || is_string($role) 
-            || $role instanceof Acl\Role
+            || $role instanceof Acl\Role\RoleInterface
         ) {
             self::$defaultRole = $role;
         } else {
-            throw new Exception\InvalidArgumentException(
-                '$role must be null|string|Zend\Acl\Role'
-            );
+            throw new Exception\InvalidArgumentException(sprintf(
+                '$role must be null|string|Zend\Acl\Role\RoleInterface; received "%s"',
+                (is_object($role) ? get_class($role) : gettype($role))
+            ));
         }
     }
 }

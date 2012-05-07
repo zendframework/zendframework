@@ -25,7 +25,7 @@ use Zend\Form\Element\Exception,
     Zend\Form\Decorator\FileDecorator,
     Zend\Loader\PrefixPathLoader,
     Zend\Loader\PrefixPathMapper,
-    Zend\View\Renderer as View,
+    Zend\View\Renderer\RendererInterface as View,
     Zend\File\Transfer\Adapter\AbstractAdapter as AbstractFileAdapter;
 
 /**
@@ -211,7 +211,7 @@ class File extends Xhtml
     /**
      * Add Validator; proxy to adapter
      *
-     * @param  string|\Zend\Validator\Validator $validator
+     * @param  string|\Zend\Validator\ValidatorInterface $validator
      * @param  bool $breakChainOnFailure
      * @param  mixed $options
      * @return \Zend\Form\Element\File
@@ -259,7 +259,7 @@ class File extends Xhtml
      * Retrieve validator by name; proxy to adapter
      *
      * @param  string $name
-     * @return \Zend\Validator\Validator|null
+     * @return \Zend\Validator\ValidatorInterface|null
      */
     public function getValidator($name)
     {
@@ -876,7 +876,7 @@ class File extends Xhtml
      * Render form element
      * Checks for decorator interface to prevent errors
      *
-     * @param  \Zend\View\Renderer $view
+     * @param  \Zend\View\Renderer\RendererInterface $view
      * @return string
      */
     public function render(View $view = null)

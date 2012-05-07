@@ -22,10 +22,10 @@
 namespace Zend\Application\Resource;
 
 /**
- * Cache Manager resource
+ * Cache ManagerInterface resource
  *
  * @uses       \Zend\Application\Resource\AbstractResource
- * @uses       \Zend\Cache\Manager
+ * @uses       \Zend\Cache\ManagerInterface
  * @category   Zend
  * @package    Zend_Application
  * @subpackage Resource

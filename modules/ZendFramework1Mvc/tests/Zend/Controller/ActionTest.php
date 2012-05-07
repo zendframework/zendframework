@@ -267,7 +267,7 @@ class ActionTest extends \PHPUnit_Framework_TestCase
             new Response\Cli()
         );
         $view = $controller->initView();
-        $this->assertTrue($view instanceof \Zend\View\Renderer);
+        $this->assertTrue($view instanceof \Zend\View\Renderer\RendererInterface);
         $scriptPath = $view->resolver()->getPaths();
 
         $found = false;

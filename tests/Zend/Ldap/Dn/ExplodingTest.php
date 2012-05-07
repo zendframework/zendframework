@@ -210,7 +210,7 @@ class ExplodingTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Zend\Ldap\Exception
+     * @expectedException Zend\Ldap\Exception\ExceptionInterface
      */
     public function testCreateDnArrayIllegalDn()
     {

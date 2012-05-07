@@ -21,7 +21,7 @@
 
 namespace ZendTest\Cache\Storage\Adapter;
 
-use Zend\Cache\Storage\Adapter,
+use Zend\Cache\Storage\Adapter\AdapterInterface as Adapter,
     Zend\Cache\Storage\Adapter\AdapterOptions,
     Zend\Cache\Storage\Adapter\AbstractZendServer;
 

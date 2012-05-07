@@ -1074,7 +1074,7 @@ class InputFilter
 
     /**
      * @param mixed $classBaseName
-     * @return Zend\Filter\Filter
+     * @return \Zend\Filter\Filter
      */
     protected function _getFilter($classBaseName)
     {
@@ -1083,7 +1083,7 @@ class InputFilter
 
     /**
      * @param mixed $classBaseName
-     * @return Zend\Validator\Validator
+     * @return \Zend\Validator\ValidatorInterface
      */
     protected function _getValidator($classBaseName)
     {
@@ -1093,8 +1093,8 @@ class InputFilter
     /**
      * @param string $type
      * @param mixed $classBaseName
-     * @return Zend\Filter\Filter|Zend\Validator\Validator
-     * @throws Zend\Filter\Exception
+     * @return \Zend\Filter\Filter|\Zend\Validator\ValidatorInterface
+     * @throws \Zend\Filter\Exception
      */
     protected function _getFilterOrValidator($type, $classBaseName)
     {

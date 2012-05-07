@@ -24,7 +24,7 @@ namespace Zend\Translator\Adapter;
 use RecursiveDirectoryIterator,
     RecursiveIteratorIterator,
     RecursiveRegexIterator,
-    Zend\Cache\Storage\Adapter as CacheAdapter,
+    Zend\Cache\Storage\Adapter\AdapterInterface as CacheAdapter,
     Zend\Config\Config,
     Zend\Log,
     Zend\Locale,

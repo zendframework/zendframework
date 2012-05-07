@@ -21,14 +21,12 @@
 
 namespace Zend\XmlRpc\Generator;
 
-use Zend\XmlRpc\Generator as GeneratorAdapter;
-
 /**
  * Abstract XML generator adapter
  *
- * @uses Zend\XmlRpc\Generator
+ * @uses Zend\XmlRpc\Generator\GeneratorInterface
  */
-abstract class AbstractGenerator implements GeneratorAdapter
+abstract class AbstractGenerator implements GeneratorInterface
 {
     /**
      * XML encoding string
@@ -62,7 +60,7 @@ abstract class AbstractGenerator implements GeneratorAdapter
      * 
      * @param string $name XML tag name
      * @param string $value Optional value of the XML tag
-     * @return Zend_XmlRpc_Generator_Abstract Fluent interface
+     * @return AbstractGenerator Fluent interface
      */
     public function openElement($name, $value = null)
     {
@@ -80,7 +78,7 @@ abstract class AbstractGenerator implements GeneratorAdapter
      * Method marks the end of an XML element
      *
      * @param string $name XML tag name
-     * @return Zend_XmlRpc_Generator_Abstract Fluent interface
+     * @return AbstractGenerator Fluent interface
      */
     public function closeElement($name)
     {
@@ -103,7 +101,7 @@ abstract class AbstractGenerator implements GeneratorAdapter
      * Set XML encoding
      * 
      * @param  string $encoding 
-     * @return Zend\XmlRpc\Generator\AbstractGenerator
+     * @return AbstractGenerator
      */
     public function setEncoding($encoding)
     {

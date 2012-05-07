@@ -101,7 +101,7 @@ class Memory extends AbstractAdapter
      * @param  string $normalizedKey
      * @param  array  $normalizedOptions
      * @return mixed Data on success or false on failure
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     protected function internalGetItem(& $normalizedKey, array & $normalizedOptions)
     {
@@ -142,7 +142,7 @@ class Memory extends AbstractAdapter
      * @param  array $normalizedKeys
      * @param  array $normalizedOptions
      * @return array Associative array of existing keys and values
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     protected function internalGetItems(array & $normalizedKeys, array & $normalizedOptions)
     {
@@ -178,7 +178,7 @@ class Memory extends AbstractAdapter
      * @param  string $normalizedKey
      * @param  array  $normalizedOptions
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     protected function internalHasItem(& $normalizedKey, array & $normalizedOptions)
     {
@@ -208,7 +208,7 @@ class Memory extends AbstractAdapter
      * @param  array $keys
      * @param  array $options
      * @return array Array of existing keys
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     protected function internalHasItems(array & $normalizedKeys, array & $normalizedOptions)
     {
@@ -244,7 +244,7 @@ class Memory extends AbstractAdapter
      * @param  string $normalizedKey
      * @param  array  $normalizedOptions
      * @return array|boolean Metadata or false on failure
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      *
      * @triggers getMetadata.pre(PreEvent)
      * @triggers getMetadata.post(PostEvent)
@@ -283,7 +283,7 @@ class Memory extends AbstractAdapter
      * @param  mixed  $value
      * @param  array  $normalizedOptions
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     protected function internalSetItem(& $normalizedKey, & $value, array & $normalizedOptions)
     {
@@ -312,7 +312,7 @@ class Memory extends AbstractAdapter
      * @param  array $normalizedKeyValuePairs
      * @param  array $normalizedOptions
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     protected function internalSetItems(array & $normalizedKeyValuePairs, array & $normalizedOptions)
     {
@@ -349,7 +349,7 @@ class Memory extends AbstractAdapter
      * @param  mixed  $value
      * @param  array  $options
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     protected function internalAddItem(& $normalizedKey, & $value, array & $normalizedOptions)
     {
@@ -381,7 +381,7 @@ class Memory extends AbstractAdapter
      * @param  array $normalizedKeyValuePairs
      * @param  array $normalizedOptions
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     protected function internalAddItems(array & $normalizedKeyValuePairs, array & $normalizedOptions)
     {
@@ -424,7 +424,7 @@ class Memory extends AbstractAdapter
      * @param  mixed  $value
      * @param  array  $normalizedOptions
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     protected function internalReplaceItem(& $normalizedKey, & $value, array & $normalizedOptions)
     {
@@ -451,7 +451,7 @@ class Memory extends AbstractAdapter
      * @param  array $normalizedKeyValuePairs
      * @param  array $normalizedOptions
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     protected function internalReplaceItems(array & $normalizedKeyValuePairs, array & $normalizedOptions)
     {
@@ -483,7 +483,7 @@ class Memory extends AbstractAdapter
      * @param  string $normalizedKey
      * @param  array  $normalizedOptions
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     protected function internalTouchItem(& $normalizedKey, array & $normalizedOptions)
     {
@@ -517,7 +517,7 @@ class Memory extends AbstractAdapter
      * @param  string $normalizedKey
      * @param  array  $normalizedOptions
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     protected function internalRemoveItem(& $normalizedKey, array & $normalizedOptions)
     {
@@ -552,7 +552,7 @@ class Memory extends AbstractAdapter
      * @param  int    $value
      * @param  array  $normalizedOptions
      * @return int|boolean The new value or false on failure
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     protected function internalIncrementItem(& $normalizedKey, & $value, array & $normalizedOptions)
     {
@@ -592,7 +592,7 @@ class Memory extends AbstractAdapter
      * @param  int    $value
      * @param  array  $normalizedOptions
      * @return int|boolean The new value or false on failure
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     protected function internalDecrementItem(& $normalizedKey, & $value, array & $normalizedOptions)
     {
@@ -634,7 +634,7 @@ class Memory extends AbstractAdapter
      * @param  int   $normalizedMode Matching mode (Value of Adapter::MATCH_*)
      * @param  array $normalizedOptions
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      * @see    fetch()
      * @see    fetchAll()
      */
@@ -702,7 +702,7 @@ class Memory extends AbstractAdapter
      * Internal method to fetch the next item from result set
      *
      * @return array|boolean The next item or false
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     protected function internalFetch()
     {
@@ -762,7 +762,7 @@ class Memory extends AbstractAdapter
      * @param  int   $normalizedMode Matching mode (Value of Adapter::MATCH_*)
      * @param  array $normalizedOptions
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      * @see    clearByNamespace()
      */
     protected function internalClear(& $normalizedMode, array & $normalizedOptions)
@@ -792,7 +792,7 @@ class Memory extends AbstractAdapter
      * @param  int   $normalizedMode Matching mode (Value of Adapter::MATCH_*)
      * @param  array $normalizedOptions
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      * @see    clear()
      */
     protected function internalClearByNamespace(& $normalizedMode, array & $normalizedOptions)
@@ -820,6 +820,7 @@ class Memory extends AbstractAdapter
         if ($this->capabilities === null) {
             $this->capabilityMarker = new stdClass();
                 $this->capabilities = new Capabilities(
+                $this,
                 $this->capabilityMarker,
                 array(
                     'supportedDatatypes' => array(
@@ -859,7 +860,7 @@ class Memory extends AbstractAdapter
      *
      * @param  array $normalizedOptions
      * @return array|boolean Capacity as array or false on failure
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     protected function internalGetCapacity(array & $normalizedOptions)
     {

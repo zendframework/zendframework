@@ -31,7 +31,7 @@ namespace Zend\XmlRpc;
  * to instantiate a Zend_XmlRpc_Server_Fault.
  *
  * @uses       SimpleXMLElement
- * @uses       Zend\XmlRpc\Exception
+ * @uses       Zend\XmlRpc\Exception\ExceptionInterface
  * @uses       Zend\XmlRpc\Value\Value
  * @category   Zend
  * @package    Zend_XmlRpc
@@ -118,7 +118,7 @@ class Fault
      * Set the fault code
      *
      * @param int $code
-     * @return Zend\XmlRpc\Fault
+     * @return Fault
      */
     public function setCode($code)
     {
@@ -140,7 +140,7 @@ class Fault
      * Retrieve fault message
      *
      * @param string
-     * @return Zend\XmlRpc\Fault
+     * @return Fault
      */
     public function setMessage($message)
     {
@@ -162,7 +162,7 @@ class Fault
      * Set encoding to use in fault response
      *
      * @param string $encoding
-     * @return Zend\XmlRpc\Fault
+     * @return Fault
      */
     public function setEncoding($encoding)
     {
@@ -187,7 +187,7 @@ class Fault
      * @param string $fault
      * @return boolean Returns true if successfully loaded fault response, false
      * if response was not a fault response
-     * @throws Zend\XmlRpc\Exception if no or faulty XML provided, or if fault
+     * @throws \Zend\XmlRpc\Exception\ExceptionInterface if no or faulty XML provided, or if fault
      * response does not contain either code or message
      */
     public function loadXml($fault)
@@ -258,7 +258,7 @@ class Fault
         $fault = new self();
         try {
             $isFault = $fault->loadXml($xml);
-        } catch (Exception $e) {
+        } catch (Exception\ExceptionInterface $e) {
             $isFault = false;
         }
 

@@ -25,7 +25,6 @@ use Zend\Mail\Protocol\Smtp;
 /**
  * Performs PLAIN authentication
  *
- * @uses       \Zend\Mail\Protocol\Smtp
  * @category   Zend
  * @package    Zend_Mail
  * @subpackage Protocol
@@ -56,7 +55,6 @@ class Plain extends Smtp
      * @param  string $host   (Default: 127.0.0.1)
      * @param  int    $port   (Default: null)
      * @param  array  $config Auth-specific parameters
-     * @return void
      */
     public function __construct($host = '127.0.0.1', $port = null, $config = null)
     {
@@ -88,7 +86,6 @@ class Plain extends Smtp
     /**
      * Perform PLAIN authentication with supplied credentials
      *
-     * @return void
      */
     public function auth()
     {
@@ -105,7 +102,7 @@ class Plain extends Smtp
     /**
      * Set value for username
      *
-     * @param  string $value
+     * @param  string $username
      * @return Plain
      */
     public function setUsername($username)
@@ -117,7 +114,7 @@ class Plain extends Smtp
     /**
      * Get username
      *
-     * @return null|string
+     * @return string
      */
     public function getUsername()
     {
@@ -127,7 +124,7 @@ class Plain extends Smtp
     /**
      * Set value for password
      *
-     * @param  string $value
+     * @param  string $password
      * @return Plain
      */
     public function setPassword($password)
@@ -139,7 +136,7 @@ class Plain extends Smtp
     /**
      * Get password
      *
-     * @return null|string
+     * @return string
      */
     public function getPassword()
     {

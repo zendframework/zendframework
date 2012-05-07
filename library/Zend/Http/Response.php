@@ -3,9 +3,9 @@
 namespace Zend\Http;
 
 use Zend\Stdlib\Message,
-    Zend\Stdlib\ResponseDescription;
+    Zend\Stdlib\ResponseInterface;
 
-class Response extends Message implements ResponseDescription
+class Response extends Message implements ResponseInterface
 {
 
     /**#@+
@@ -176,7 +176,7 @@ class Response extends Message implements ResponseDescription
     public static function fromString($string)
     {
         $lines = explode("\r\n", $string);
-        if (!is_array($lines) || count($lines)==1) {
+        if (!is_array($lines) || count($lines) == 1) {
             $lines = explode("\n", $string);
         }
 
@@ -487,13 +487,15 @@ class Response extends Message implements ResponseDescription
 
         while (trim($body)) {
             if (! preg_match("/^([\da-fA-F]+)[^\r\n]*\r\n/sm", $body, $m)) {
-                throw new Exception\RuntimeException("Error parsing body - doesn't seem to be a chunked message");
+                throw new Exception\RuntimeException(
+                    "Error parsing body - doesn't seem to be a chunked message"
+                );
             }
 
-            $length = hexdec(trim($m[1]));
-            $cut = static::strlen($m[0]);
+            $length   = hexdec(trim($m[1]));
+            $cut      = strlen($m[0]);
             $decBody .= substr($body, $cut, $length);
-            $body = substr($body, $cut + $length + 2);
+            $body     = substr($body, $cut + $length + 2);
         }
 
         return $decBody;
@@ -551,22 +553,6 @@ class Response extends Message implements ResponseDescription
             return gzuncompress($body);
         } else {
             return gzinflate($body);
-        }
-    }
-
-    /**
-     * Returns length of binary string in bytes
-     *
-     * @param string $str
-     * @return int the string length
-     */
-    static public function strlen($str)
-    {
-        if (function_exists('mb_internal_encoding') &&
-            (((int)ini_get('mbstring.func_overload')) & 2)) {
-            return mb_strlen($str, '8bit');
-        } else {
-            return strlen($str);
         }
     }
 }

@@ -24,7 +24,7 @@ namespace ZendTest\Session;
 
 use Zend\Session\Container,
     Zend\Session\Configuration\StandardConfiguration,
-    Zend\Session\Manager,
+    Zend\Session\ManagerInterface as Manager,
     Zend\Session;
 
 /**
@@ -69,7 +69,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
      * Hack to allow running tests in separate processes
      *
      * @see    http://matthewturland.com/2010/08/19/process-isolation-in-phpunit/
-     * @param  PHPUnit_Framework_TestResult $result 
+     * @param  \PHPUnit_Framework_TestResult $result
      * @return void
      */
     public function run(\PHPUnit_Framework_TestResult $result = NULL)
@@ -123,7 +123,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
             try {
                 $container = new Container($try);
                 $this->fail('Invalid container name should raise exception');
-            } catch (\Zend\Session\Exception $e) {
+            } catch (\Zend\Session\Exception\InvalidArgumentException $e) {
                 $this->assertContains('invalid', $e->getMessage());
             }
         }
@@ -179,7 +179,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
     {
         $container = new Container();
         $manager   = $container->getManager();
-        $this->assertTrue($manager instanceof Session\Manager);
+        $this->assertTrue($manager instanceof Manager);
         $config  = $manager->getConfig();
         $this->assertTrue($config instanceof Session\Configuration\SessionConfiguration);
         $storage = $manager->getStorage();

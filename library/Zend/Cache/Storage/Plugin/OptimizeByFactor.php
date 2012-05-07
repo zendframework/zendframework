@@ -24,7 +24,7 @@ namespace Zend\Cache\Storage\Plugin;
 use Traversable,
     Zend\Cache\Exception,
     Zend\Cache\Storage\PostEvent,
-    Zend\EventManager\EventCollection;
+    Zend\EventManager\EventManagerInterface;
 
 /**
  * @category   Zend
@@ -45,12 +45,12 @@ class OptimizeByFactor extends AbstractPlugin
     /**
      * Attach
      *
-     * @param  EventCollection $eventCollection
-     * @param  int             $priority
+     * @param  EventManagerInterface $eventCollection
+     * @param  int                   $priority
      * @return OptimizeByFactor
      * @throws Exception\LogicException
      */
-    public function attach(EventCollection $eventCollection, $priority = 1)
+    public function attach(EventManagerInterface $eventCollection, $priority = 1)
     {
         $index = spl_object_hash($eventCollection);
         if (isset($this->handles[$index])) {
@@ -72,11 +72,11 @@ class OptimizeByFactor extends AbstractPlugin
     /**
      * Detach
      *
-     * @param  EventCollection $eventCollection
+     * @param  EventManagerInterface $eventCollection
      * @return OptimizeByFactor
      * @throws Exception\LogicException
      */
-    public function detach(EventCollection $eventCollection)
+    public function detach(EventManagerInterface $eventCollection)
     {
         $index = spl_object_hash($eventCollection);
         if (!isset($this->handles[$index])) {

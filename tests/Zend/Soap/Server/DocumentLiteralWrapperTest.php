@@ -23,7 +23,6 @@ namespace ZendTest\Soap\Server;
 
 use Zend\Soap\Client\Local as SoapClient,
     Zend\Soap\Server,
-    Zend\Soap\ServerException,
     Zend\Soap\Server\DocumentLiteralWrapper,
     ZendTest\Soap\TestAsset\MyCalculatorService;
 

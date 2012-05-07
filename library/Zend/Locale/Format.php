@@ -21,7 +21,7 @@
 
 namespace Zend\Locale;
 
-use Zend\Cache\Storage\Adapter,
+use Zend\Cache\Storage\Adapter\AdapterInterface as CacheAdapter,
     Zend\Locale\Data\Cldr;
 
 /**

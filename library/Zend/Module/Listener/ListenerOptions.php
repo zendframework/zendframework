@@ -1,10 +1,24 @@
 <?php
-
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Module
+ */
 namespace Zend\Module\Listener;
 
 use Zend\Stdlib\Options,
     Traversable;
 
+/**
+ * Listener options
+ * 
+ * @category   Zend
+ * @package    Zend_Module
+ * @subpackage Listener
+ */
 class ListenerOptions extends Options
 {
     /**
@@ -40,7 +54,7 @@ class ListenerOptions extends Options
     /**
      * Set an array of paths where modules reside
      *
-     * @param array|Traversable $modulePaths
+     * @param  array|Traversable $modulePaths
      * @return ListenerOptions
      */
     public function setModulePaths($modulePaths)
@@ -70,7 +84,7 @@ class ListenerOptions extends Options
     /**
      * Set if the config cache should be enabled or not
      *
-     * @param bool $enabled
+     * @param  bool $enabled
      * @return ListenerOptions
      */
     public function setConfigCacheEnabled($enabled)
@@ -92,7 +106,7 @@ class ListenerOptions extends Options
     /**
      * Set key used to create the cache file name
      *
-     * @param string $configCacheKey the value to be set
+     * @param  string $configCacheKey the value to be set
      * @return ListenerOptions
      */
     public function setConfigCacheKey($configCacheKey)
@@ -127,7 +141,7 @@ class ListenerOptions extends Options
     /**
      * Set the path where cache files can be stored
      *
-     * @param string $cacheDir the value to be set
+     * @param  string $cacheDir the value to be set
      * @return ListenerOptions
      */
     public function setCacheDir($cacheDir)

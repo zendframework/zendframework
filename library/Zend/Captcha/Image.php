@@ -23,7 +23,7 @@ namespace Zend\Captcha;
 
 use Zend\Captcha\Exception,
     Zend\Loader\Pluggable,
-    Zend\View\Renderer;
+    Zend\View\Renderer\RendererInterface as Renderer;
 
 /**
  * Image-based captcha element

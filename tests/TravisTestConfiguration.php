@@ -21,9 +21,9 @@
 
 /**
  * This file defines configuration for running the unit tests for the Zend
- * Framework.  Some tests have dependencies to PHP extensions or databases
- * which may not necessary installed on the target system.  For these cases,
- * the ability to disable or configure testing is provided below.  Tests for
+ * Framework. Some tests have dependencies to PHP extensions or databases
+ * which may not necessary installed on the target system. For these cases,
+ * the ability to disable or configure testing is provided below. Tests for
  * components which should run universally are always run by the master
  * suite and cannot be disabled.
  *
@@ -45,19 +45,19 @@
  * GENERAL SETTINGS
  *
  * OB_ENABLED should be enabled for some tests to check if all functionality
- * works as expected. Such tests include those for Zend_Soap and Zend_Session,
+ * works as expected. Such tests include those for Zend\Soap and Zend\Session,
  * which require that headers not be sent in order to work.
  */
 defined('TESTS_ZEND_OB_ENABLED') || define('TESTS_ZEND_OB_ENABLED', false);
 
 /**
- * Zend_Auth_Adapter_DbTable tests
+ * Zend\Auth\Adapter\DbTable tests
  */
-defined('TESTS_ZEND_AUTH_ADAPTER_DBTABLE_PDO_SQLITE_ENABLED') || define('TESTS_ZEND_AUTH_ADAPTER_DBTABLE_PDO_SQLITE_ENABLED', false);
+defined('TESTS_ZEND_AUTH_ADAPTER_DBTABLE_PDO_SQLITE_ENABLED') || define('TESTS_ZEND_AUTH_ADAPTER_DBTABLE_PDO_SQLITE_ENABLED', true);
 defined('TESTS_ZEND_AUTH_ADAPTER_DBTABLE_PDO_SQLITE_DATABASE') || define('TESTS_ZEND_AUTH_ADAPTER_DBTABLE_PDO_SQLITE_DATABASE', ':memory:');
 
 /**
- * Zend_Auth_Adapter_Ldap online tests
+ * Zend\Auth\Adapter\Ldap online tests
  * (See also TESTS_ZEND_LDAP_* configuration constants below)
  */
 defined('TESTS_ZEND_AUTH_ADAPTER_LDAP_ONLINE_ENABLED') || define('TESTS_ZEND_AUTH_ADAPTER_LDAP_ONLINE_ENABLED', false);
@@ -78,7 +78,7 @@ defined('TESTS_ZEND_CACHE_MEMCACHED_HOST') || define('TESTS_ZEND_CACHE_MEMCACHED
 defined('TESTS_ZEND_CACHE_MEMCACHED_PORT') || define('TESTS_ZEND_CACHE_MEMCACHED_PORT', 11211);
 
 /**
- * Zend_Config
+ * Zend\Config
  */
 defined('TESTS_ZEND_CONFIG_YAML_ENABLED') || define('TESTS_ZEND_CONFIG_YAML_ENABLED', false);
 defined('TESTS_ZEND_CONFIG_YAML_LIB_INCLUDE') || define('TESTS_ZEND_CONFIG_YAML_LIB_INCLUDE', ''); // path to YAML library or empty for YAML PECL extension
@@ -86,7 +86,7 @@ defined('TESTS_ZEND_CONFIG_WRITER_YAML_CALLBACK') || define('TESTS_ZEND_CONFIG_W
 defined('TESTS_ZEND_CONFIG_READER_YAML_CALLBACK') || define('TESTS_ZEND_CONFIG_READER_YAML_CALLBACK', '');
 
 /**
- * Zend_Controller
+ * Zend\Controller
  *
  * TESTS_ZEND_CONTROLLER_DISPATCHER_OB => test disabling output buffering in
  *                                        dispatcher
@@ -94,7 +94,7 @@ defined('TESTS_ZEND_CONFIG_READER_YAML_CALLBACK') || define('TESTS_ZEND_CONFIG_R
 defined('TESTS_ZEND_CONTROLLER_DISPATCHER_OB') || define('TESTS_ZEND_CONTROLLER_DISPATCHER_OB', false);
 
 /**
- * Zend_Crypt related constantes
+ * Zend\Crypt related constants
  *
  * TESTS_ZEND_CRYPT_OPENSSL_CONF => location of an openssl.cnf file for use
  *     with RSA encryption
@@ -102,14 +102,14 @@ defined('TESTS_ZEND_CONTROLLER_DISPATCHER_OB') || define('TESTS_ZEND_CONTROLLER_
 defined('TESTS_ZEND_CRYPT_OPENSSL_CONF') || define('TESTS_ZEND_CRYPT_OPENSSL_CONF', false);
 
 /**
- * Zend_Db_Adapter_Pdo_Mysql and Zend_Db_Adapter_Mysqli
+ * Zend\Db\Adapter\Pdo\Mysql and Zend\Db\Adapter\Mysqli
  *
  * There are separate properties to enable tests for the PDO_MYSQL adapter and
  * the native Mysqli adapters, but the other properties are shared between the
- * two MySQL-related Zend_Db adapters.
+ * two MySQL-related Zend\Db adapters.
  */
-defined('TESTS_ZEND_DB_ADAPTER_PDO_MYSQL_ENABLED') || define('TESTS_ZEND_DB_ADAPTER_PDO_MYSQL_ENABLED',  false);
-defined('TESTS_ZEND_DB_ADAPTER_MYSQLI_ENABLED') || define('TESTS_ZEND_DB_ADAPTER_MYSQLI_ENABLED',  false);
+defined('TESTS_ZEND_DB_ADAPTER_PDO_MYSQL_ENABLED') || define('TESTS_ZEND_DB_ADAPTER_PDO_MYSQL_ENABLED', false);
+defined('TESTS_ZEND_DB_ADAPTER_MYSQLI_ENABLED') || define('TESTS_ZEND_DB_ADAPTER_MYSQLI_ENABLED', false);
 defined('TESTS_ZEND_DB_ADAPTER_MYSQL_HOSTNAME') || define('TESTS_ZEND_DB_ADAPTER_MYSQL_HOSTNAME', '127.0.0.1');
 defined('TESTS_ZEND_DB_ADAPTER_MYSQL_USERNAME') || define('TESTS_ZEND_DB_ADAPTER_MYSQL_USERNAME', null);
 defined('TESTS_ZEND_DB_ADAPTER_MYSQL_PASSWORD') || define('TESTS_ZEND_DB_ADAPTER_MYSQL_PASSWORD', null);
@@ -117,57 +117,57 @@ defined('TESTS_ZEND_DB_ADAPTER_MYSQL_DATABASE') || define('TESTS_ZEND_DB_ADAPTER
 defined('TESTS_ZEND_DB_ADAPTER_MYSQL_PORT') || define('TESTS_ZEND_DB_ADAPTER_MYSQL_PORT', 3306);
 
 /**
- * Zend_Db_Adapter_Pdo_Sqlite
+ * Zend\Db\Adapter\Pdo\Sqlite
  *
  * Username and password are irrelevant for SQLite.
  */
-defined('TESTS_ZEND_DB_ADAPTER_PDO_SQLITE_ENABLED') || define('TESTS_ZEND_DB_ADAPTER_PDO_SQLITE_ENABLED',  false);
+defined('TESTS_ZEND_DB_ADAPTER_PDO_SQLITE_ENABLED') || define('TESTS_ZEND_DB_ADAPTER_PDO_SQLITE_ENABLED', false);
 defined('TESTS_ZEND_DB_ADAPTER_PDO_SQLITE_DATABASE') || define('TESTS_ZEND_DB_ADAPTER_PDO_SQLITE_DATABASE', ':memory:');
 
 /**
- * Zend_Db_Adapter_Pdo_Mssql
+ * Zend\Db\Adapter\Pdo\Mssql
  *
  * Note that you need to patch your ntwdblib.dll, the one that
- * comes with PHP does not work.  See user comments at
+ * comes with PHP does not work. See user comments at
  * http://us2.php.net/manual/en/ref.mssql.php
  */
-defined('TESTS_ZEND_DB_ADAPTER_PDO_MSSQL_ENABLED') || define('TESTS_ZEND_DB_ADAPTER_PDO_MSSQL_ENABLED',  false);
+defined('TESTS_ZEND_DB_ADAPTER_PDO_MSSQL_ENABLED') || define('TESTS_ZEND_DB_ADAPTER_PDO_MSSQL_ENABLED', false);
 defined('TESTS_ZEND_DB_ADAPTER_PDO_MSSQL_HOSTNAME') || define('TESTS_ZEND_DB_ADAPTER_PDO_MSSQL_HOSTNAME', '127.0.0.1');
 defined('TESTS_ZEND_DB_ADAPTER_PDO_MSSQL_USERNAME') || define('TESTS_ZEND_DB_ADAPTER_PDO_MSSQL_USERNAME', null);
 defined('TESTS_ZEND_DB_ADAPTER_PDO_MSSQL_PASSWORD') || define('TESTS_ZEND_DB_ADAPTER_PDO_MSSQL_PASSWORD', null);
 defined('TESTS_ZEND_DB_ADAPTER_PDO_MSSQL_DATABASE') || define('TESTS_ZEND_DB_ADAPTER_PDO_MSSQL_DATABASE', 'test');
 
 /**
- * Zend_Db_Adapter_Pdo_Pgsql
+ * Zend\Db\Adapter\Pdo\Pgsql
  */
-defined('TESTS_ZEND_DB_ADAPTER_PDO_PGSQL_ENABLED') || define('TESTS_ZEND_DB_ADAPTER_PDO_PGSQL_ENABLED',  false);
+defined('TESTS_ZEND_DB_ADAPTER_PDO_PGSQL_ENABLED') || define('TESTS_ZEND_DB_ADAPTER_PDO_PGSQL_ENABLED', false);
 defined('TESTS_ZEND_DB_ADAPTER_PDO_PGSQL_HOSTNAME') || define('TESTS_ZEND_DB_ADAPTER_PDO_PGSQL_HOSTNAME', '127.0.0.1');
 defined('TESTS_ZEND_DB_ADAPTER_PDO_PGSQL_USERNAME') || define('TESTS_ZEND_DB_ADAPTER_PDO_PGSQL_USERNAME', null);
 defined('TESTS_ZEND_DB_ADAPTER_PDO_PGSQL_PASSWORD') || define('TESTS_ZEND_DB_ADAPTER_PDO_PGSQL_PASSWORD', null);
 defined('TESTS_ZEND_DB_ADAPTER_PDO_PGSQL_DATABASE') || define('TESTS_ZEND_DB_ADAPTER_PDO_PGSQL_DATABASE', 'postgres');
 
 /**
- * Zend_Db_Adapter_Oracle and Zend_Db_Adapter_Pdo_Oci
+ * Zend\Db\Adapter\Oracle and Zend\Db\Adapter\Pdo\Oci
  *
  * There are separate properties to enable tests for the PDO_OCI adapter and
  * the native Oracle adapter, but the other properties are shared between the
- * two Oracle-related Zend_Db adapters.
+ * two Oracle-related Zend\Db adapters.
  */
-defined('TESTS_ZEND_DB_ADAPTER_PDO_OCI_ENABLED') || define('TESTS_ZEND_DB_ADAPTER_PDO_OCI_ENABLED',  false);
-defined('TESTS_ZEND_DB_ADAPTER_ORACLE_ENABLED') || define('TESTS_ZEND_DB_ADAPTER_ORACLE_ENABLED',  false);
+defined('TESTS_ZEND_DB_ADAPTER_PDO_OCI_ENABLED') || define('TESTS_ZEND_DB_ADAPTER_PDO_OCI_ENABLED', false);
+defined('TESTS_ZEND_DB_ADAPTER_ORACLE_ENABLED') || define('TESTS_ZEND_DB_ADAPTER_ORACLE_ENABLED', false);
 defined('TESTS_ZEND_DB_ADAPTER_ORACLE_HOSTNAME') || define('TESTS_ZEND_DB_ADAPTER_ORACLE_HOSTNAME', '127.0.0.1');
 defined('TESTS_ZEND_DB_ADAPTER_ORACLE_USERNAME') || define('TESTS_ZEND_DB_ADAPTER_ORACLE_USERNAME', null);
 defined('TESTS_ZEND_DB_ADAPTER_ORACLE_PASSWORD') || define('TESTS_ZEND_DB_ADAPTER_ORACLE_PASSWORD', null);
-defined('TESTS_ZEND_DB_ADAPTER_ORACLE_SID') || define('TESTS_ZEND_DB_ADAPTER_ORACLE_SID',      'xe');
+defined('TESTS_ZEND_DB_ADAPTER_ORACLE_SID') || define('TESTS_ZEND_DB_ADAPTER_ORACLE_SID', 'xe');
 
 /**
- * Zend_Db_Adapter_Db2 and Zend_Db_Adapter_Pdo_Ibm
+ * Zend\Db\Adapter\Db2 and Zend\Db\Adapter\Pdo\Ibm
  * There are separate properties to enable tests for the PDO_IBM adapter and
  * the native DB2 adapter, but the other properties are shared between the
- * two related Zend_Db adapters.
+ * two related Zend\Db adapters.
  */
-defined('TESTS_ZEND_DB_ADAPTER_PDO_IBM_ENABLED') || define('TESTS_ZEND_DB_ADAPTER_PDO_IBM_ENABLED',  false);
-defined('TESTS_ZEND_DB_ADAPTER_DB2_ENABLED') || define('TESTS_ZEND_DB_ADAPTER_DB2_ENABLED',  false);
+defined('TESTS_ZEND_DB_ADAPTER_PDO_IBM_ENABLED') || define('TESTS_ZEND_DB_ADAPTER_PDO_IBM_ENABLED', false);
+defined('TESTS_ZEND_DB_ADAPTER_DB2_ENABLED') || define('TESTS_ZEND_DB_ADAPTER_DB2_ENABLED', false);
 defined('TESTS_ZEND_DB_ADAPTER_DB2_HOSTNAME') || define('TESTS_ZEND_DB_ADAPTER_DB2_HOSTNAME', '127.0.0.1');
 defined('TESTS_ZEND_DB_ADAPTER_DB2_PORT') || define('TESTS_ZEND_DB_ADAPTER_DB2_PORT', 50000);
 defined('TESTS_ZEND_DB_ADAPTER_DB2_USERNAME') || define('TESTS_ZEND_DB_ADAPTER_DB2_USERNAME', null);
@@ -175,19 +175,19 @@ defined('TESTS_ZEND_DB_ADAPTER_DB2_PASSWORD') || define('TESTS_ZEND_DB_ADAPTER_D
 defined('TESTS_ZEND_DB_ADAPTER_DB2_DATABASE') || define('TESTS_ZEND_DB_ADAPTER_DB2_DATABASE', 'sample');
 
 /**
- * Zend_Db_Adapter_Sqlsrv
+ * Zend\Db\Adapter\Sqlsrv
  * Note: Make sure that you create the "test" database and set a
  * username and password
  *
  */
-defined('TESTS_ZEND_DB_ADAPTER_SQLSRV_ENABLED') || define('TESTS_ZEND_DB_ADAPTER_SQLSRV_ENABLED',  false);
+defined('TESTS_ZEND_DB_ADAPTER_SQLSRV_ENABLED') || define('TESTS_ZEND_DB_ADAPTER_SQLSRV_ENABLED', false);
 defined('TESTS_ZEND_DB_ADAPTER_SQLSRV_HOSTNAME') || define('TESTS_ZEND_DB_ADAPTER_SQLSRV_HOSTNAME', 'localhost\SQLEXPRESS');
 defined('TESTS_ZEND_DB_ADAPTER_SQLSRV_USERNAME') || define('TESTS_ZEND_DB_ADAPTER_SQLSRV_USERNAME', null);
 defined('TESTS_ZEND_DB_ADAPTER_SQLSRV_PASSWORD') || define('TESTS_ZEND_DB_ADAPTER_SQLSRV_PASSWORD', null);
 defined('TESTS_ZEND_DB_ADAPTER_SQLSRV_DATABASE') || define('TESTS_ZEND_DB_ADAPTER_SQLSRV_DATABASE', 'test');
 
 /**
- * Zend_Feed_Reader tests
+ * Zend\Feed\Reader tests
  *
  * If the ONLINE_ENABLED property is false, only tests that can be executed
  * without network connectivity are run; when enabled, all tests will run.
@@ -195,25 +195,25 @@ defined('TESTS_ZEND_DB_ADAPTER_SQLSRV_DATABASE') || define('TESTS_ZEND_DB_ADAPTE
 defined('TESTS_ZEND_FEED_READER_ONLINE_ENABLED') || define('TESTS_ZEND_FEED_READER_ONLINE_ENABLED', false);
 
 /**
- * Zend_Gdata tests
+ * Zend\Gdata tests
  *
  * If the ONLINE_ENABLED property is false, only tests that can be executed with
- * a mock HTTP client are run.  No request is sent to the Google Gdata servers.
+ * a mock HTTP client are run. No request is sent to the Google Gdata servers.
  * If ONLINE_ENABLED is true, some tests may make requests to the remote
- * servers.  This does not work if you are running tests on a disconnected
- * client host.  Also, the tests may show as failures if the Google servers
+ * servers. This does not work if you are running tests on a disconnected
+ * client host. Also, the tests may show as failures if the Google servers
  * cannot be reached or if they do not respond for another reason.
  *
  * If the CLIENTLOGIN_ENABLED property below is false, the authenticated
- * tests are reported Skipped in the test run.  Set this property to true
- * to enable tests that require ClientLogin authentication.  Enter your
+ * tests are reported Skipped in the test run. Set this property to true
+ * to enable tests that require ClientLogin authentication. Enter your
  * Google login credentials in the EMAIL and PASSWORD properties below.
  *
  * Edit TestConfiguration.php, not TestConfiguration.php.dist.
  * Never commit plaintext passwords to the source code repository.
  *
  * Note: the GData tests currently require that the TZID env variable
- * be set or the timezone otherwise configured.  You'll see errors from the
+ * be set or the timezone otherwise configured. You'll see errors from the
  * tests if this is not the case.
  */
 defined('TESTS_ZEND_GDATA_ONLINE_ENABLED') || define('TESTS_ZEND_GDATA_ONLINE_ENABLED', false);
@@ -228,10 +228,10 @@ defined('TESTS_ZEND_GDATA_CLIENTLOGIN_EMAIL') || define('TESTS_ZEND_GDATA_CLIENT
 defined('TESTS_ZEND_GDATA_CLIENTLOGIN_PASSWORD') || define('TESTS_ZEND_GDATA_CLIENTLOGIN_PASSWORD', 'password');
 
 /*
- * This is the ID of a blank blog.  There is no need to have
- * any content in this blog.  Also, blogs can only be used
+ * This is the ID of a blank blog. There is no need to have
+ * any content in this blog. Also, blogs can only be used
  * several times for the purpose of these test cases before
- * they must be deleted and recreated.  Otherwise, the tests
+ * they must be deleted and recreated. Otherwise, the tests
  * will start failing, as posts to Blogger will return a 201 Created
  * response even though the entry was not posted to the blog.
  * This problem is being investigated.
@@ -241,7 +241,7 @@ defined('TESTS_ZEND_GDATA_BLOG_ID') || define('TESTS_ZEND_GDATA_BLOG_ID', '11111
 
 /*
  * This is the key for a spreadsheet with data only in the first row of
- * the spreadsheet.  The strings 'a1', 'b1', 'c1', 'd1' should be in the
+ * the spreadsheet. The strings 'a1', 'b1', 'c1', 'd1' should be in the
  * corresponding cell locations.
  */
 defined('TESTS_ZEND_GDATA_SPREADSHEETS_ONLINE_ENABLED') || define('TESTS_ZEND_GDATA_SPREADSHEETS_ONLINE_ENABLED', false);
@@ -255,9 +255,9 @@ defined('TESTS_ZEND_GDATA_SPREADSHEETS_WORKSHEETID') || define('TESTS_ZEND_GDATA
 defined('TESTS_ZEND_GDATA_CALENDAR_ONLINE_ENABLED') || define('TESTS_ZEND_GDATA_CALENDAR_ONLINE_ENABLED', false);
 
 /*
- * This is the fully-qualified domain name for a domiain hosted using
+ * This is the fully-qualified domain name for a domain hosted using
  * Google Apps. This domain must be registered with Google Apps and
- * have API access enabled.  This should be a TEST domain only.
+ * have API access enabled. This should be a TEST domain only.
  */
 defined('TESTS_ZEND_GDATA_GAPPS_ONLINE_ENABLED') || define('TESTS_ZEND_GDATA_GAPPS_ONLINE_ENABLED', false);
 defined('TESTS_ZEND_GDATA_GAPPS_DOMAIN') || define('TESTS_ZEND_GDATA_GAPPS_DOMAIN', 'example.com.invalid');
@@ -315,9 +315,9 @@ defined('TESTS_ZEND_GDATA_PHOTOS_ONLINE_ENABLED') || define('TESTS_ZEND_GDATA_PH
 defined('TESTS_ZEND_GDATA_HEALTH_ONLINE_ENABLED') || define('TESTS_ZEND_GDATA_HEALTH_ONLINE_ENABLED', false);
 
 /**
- * Zend_Http_Client tests
+ * Zend\Http\Client tests
  *
- * To enable the dynamic Zend_Http_Client tests, you will need to symbolically
+ * To enable the dynamic Zend\Http\Client tests, you will need to symbolically
  * link or copy the files in tests/Zend/Http/Client/_files to a directory
  * under your web server(s) document root and set this constant to point to the
  * URL of this directory.
@@ -325,7 +325,7 @@ defined('TESTS_ZEND_GDATA_HEALTH_ONLINE_ENABLED') || define('TESTS_ZEND_GDATA_HE
 defined('TESTS_ZEND_HTTP_CLIENT_BASEURI') || define('TESTS_ZEND_HTTP_CLIENT_BASEURI', false);
 
 /**
- * Zend_Http_Client_Proxy tests
+ * Zend\Http\Client\Proxy tests
  *
  * HTTP proxy to be used for testing the Proxy adapter. Set to a string of
  * the form 'host:port'. Set to null to skip HTTP proxy tests.
@@ -335,7 +335,7 @@ defined('TESTS_ZEND_HTTP_CLIENT_HTTP_PROXY_USER') || define('TESTS_ZEND_HTTP_CLI
 defined('TESTS_ZEND_HTTP_CLIENT_HTTP_PROXY_PASS') || define('TESTS_ZEND_HTTP_CLIENT_HTTP_PROXY_PASS', '');
 
 /**
- * Zend_Loader_Autoloader multi-version support tests
+ * Zend\Loader\Autoloader multi-version support tests
  *
  * ENABLED:      whether or not to run the multi-version tests
  * PATH:         path to a directory containing multiple ZF version installs
@@ -370,12 +370,12 @@ defined('TESTS_ZEND_LOADER_AUTOLOADER_MULTIVERSION_LATEST_MINOR') || define('TES
 defined('TESTS_ZEND_LOADER_AUTOLOADER_MULTIVERSION_SPECIFIC') || define('TESTS_ZEND_LOADER_AUTOLOADER_MULTIVERSION_SPECIFIC', false);
 
 /**
- * Zend_Ldap online tests
+ * Zend\Ldap online tests
  */
 defined('TESTS_ZEND_LDAP_ONLINE_ENABLED') || define('TESTS_ZEND_LDAP_ONLINE_ENABLED', false);
 
-/* These largely map to the options described in the Zend_Ldap and
- * Zend_Auth_Adapter_Ldap documentation.
+/* These largely map to the options described in the Zend\Ldap and
+ * Zend\Auth\Adapter\Ldap documentation.
  *
  * Example Configuration for Active Directory:
  *                      HOST: dc1.w.net
@@ -418,11 +418,11 @@ defined('TESTS_ZEND_LDAP_ACCOUNT_DOMAIN_NAME') || define('TESTS_ZEND_LDAP_ACCOUN
 defined('TESTS_ZEND_LDAP_ACCOUNT_DOMAIN_NAME_SHORT') || define('TESTS_ZEND_LDAP_ACCOUNT_DOMAIN_NAME_SHORT', 'EXAMPLE');
 defined('TESTS_ZEND_LDAP_ALT_USERNAME') || define('TESTS_ZEND_LDAP_ALT_USERNAME', 'anotherUser');
 defined('TESTS_ZEND_LDAP_ALT_DN') || define('TESTS_ZEND_LDAP_ALT_DN', 'CN=Another User,OU=Sales,DC=example,DC=com');
-defined('TESTS_ZEND_LDAP_ALT_PASSWORD') || define('TESTS_ZEND_LDAP_ALT_PASSWORD', null); // Used in Zend_Auth_Adapter_Ldap tests
+defined('TESTS_ZEND_LDAP_ALT_PASSWORD') || define('TESTS_ZEND_LDAP_ALT_PASSWORD', null); // Used in Zend\Auth\Adapter\Ldap tests
 //(defined('TESTS_ZEND_LDAP_WRITEABLE_SUBTREE') || define('TESTS_ZEND_LDAP_WRITEABLE_SUBTREE', 'OU=Test,OU=Sales,DC=example,DC=com');
 
 /**
- * Zend_Locale tests
+ * Zend\Locale tests
  *
  * If the TESTS_ZEND_LOCALE_FORMAT_SETLOCALE property below is a valid,
  * locally recognized locale (try "locale -a"), then all tests in
@@ -439,7 +439,7 @@ defined('TESTS_ZEND_LDAP_ALT_PASSWORD') || define('TESTS_ZEND_LDAP_ALT_PASSWORD'
 defined('TESTS_ZEND_LOCALE_FORMAT_SETLOCALE') || define('TESTS_ZEND_LOCALE_FORMAT_SETLOCALE', false);
 
 /**
- * Zend_Date tests
+ * Zend\Date tests
  *
  * If the BCMATH_ENABLED property below is false, all arithmetic
  * operations will use ordinary PHP math operators and functions.
@@ -454,7 +454,7 @@ defined('TESTS_ZEND_LOCALE_BCMATH_ENABLED') || define('TESTS_ZEND_LOCALE_BCMATH_
 defined('TESTS_ZEND_I18N_EXTENDED_COVERAGE') || define('TESTS_ZEND_I18N_EXTENDED_COVERAGE', true);
 
 /**
- * Zend_Mail_Storage tests
+ * Zend\Mail\Storage tests
  *
  * TESTS_ZEND_MAIL_SERVER_TESTDIR and TESTS_ZEND_MAIL_SERVER_FORMAT are used for POP3 and IMAP tests.
  * TESTS_ZEND_MAIL_SERVER_FORMAT is the format your test mail server uses: 'mbox' or 'maildir'. The mail
@@ -470,7 +470,7 @@ defined('TESTS_ZEND_MAIL_SERVER_FORMAT') || define('TESTS_ZEND_MAIL_SERVER_FORMA
 defined('TESTS_ZEND_MAIL_TEMPDIR') || define('TESTS_ZEND_MAIL_TEMPDIR', null);
 
 /**
- * Zend_Mail_Storage_Pop3 / Zend_Mail_Transport_Pop3
+ * Zend\Mail\Storage\Pop3 / Zend\Mail\Transport\Pop3
  *
  * IMPORTANT: you need to copy tests/Zend/Mail/_files/test.mbox to your mail
  * if you haven't set TESTS_ZEND_MAIL_SERVER_TESTDIR
@@ -488,7 +488,7 @@ defined('TESTS_ZEND_MAIL_POP3_WRONG_PORT') || define('TESTS_ZEND_MAIL_POP3_WRONG
 defined('TESTS_ZEND_MAIL_POP3_INVALID_PORT') || define('TESTS_ZEND_MAIL_POP3_INVALID_PORT', 3141);
 
 /**
- * Zend_Mail_Storage_Imap / Zend_Mail_Transport_Imap
+ * Zend\Mail\Storage\Imap / Zend\Mail\Transport\Imap
  *
  * IMPORTANT: you need to copy tests/Zend/Mail/_files/test.mbox to your mail
  * if you haven't set TESTS_ZEND_MAIL_SERVER_TESTDIR
@@ -507,7 +507,7 @@ defined('TESTS_ZEND_MAIL_IMAP_INVALID_PORT') || define('TESTS_ZEND_MAIL_IMAP_INV
 
 
 /**
- * Zend_Mail_Storage_Maildir test
+ * Zend\Mail\Storage\Maildir test
  *
  * Before enabling this test you have to unpack messages.tar in
  * Zend/Mail/_files/test.maildir/cur/ and remove the tar for this test to work.
@@ -517,7 +517,7 @@ defined('TESTS_ZEND_MAIL_IMAP_INVALID_PORT') || define('TESTS_ZEND_MAIL_IMAP_INV
 defined('TESTS_ZEND_MAIL_MAILDIR_ENABLED') || define('TESTS_ZEND_MAIL_MAILDIR_ENABLED', false);
 
 /**
- * Zend_Mail_Transport_Smtp
+ * Zend\Mail\Transport\Smtp
  *
  * @todo TO be implemented
  */
@@ -530,10 +530,10 @@ defined('TESTS_ZEND_MAIL_SMTP_AUTH') || define('TESTS_ZEND_MAIL_SMTP_AUTH', fals
 // AUTH can be set to false or a string of AUTH method (e.g. LOGIN, PLAIN, CRAMMD5 or DIGESTMD5)
 
 /**
- * Zend_Queue Test Configuration constants
+ * Zend\Queue Test Configuration constants
  *
- * The Zend_Queue_Adapter_Db constant should be a JSON-encoded string
- * representing a configuration object for Zend_Db::factory(). For example:
+ * The Zend\Queue\Adapter\Db constant should be a JSON-encoded string
+ * representing a configuration object for Zend\Db::factory(). For example:
  * {
  *     type: "pdo_mysql",
  *     host: "127.0.0.1",
@@ -570,17 +570,17 @@ defined('TESTS_ZEND_QUEUE_PLATFORMJQ_PASS') || define('TESTS_ZEND_QUEUE_PLATFORM
 /**
  * Zend\Service\AgileZen online tests
  */
-define('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_ENABLED',false);
-define('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_APIKEY','insert the API key');
-define('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_PROJECT_ID','insert the project id');
-define('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_STORY_ID','insert the story id');
-define('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_INVITE_EMAIL','insert email for invitation');
-define('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_INVITE_ROLE_ID','insert role id for invitation');
-define('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_MEMBER_NAME','insert the member name to add to the project');
+defined('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_ENABLED') || define('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_ENABLED', false);
+defined('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_APIKEY') || define('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_APIKEY', 'insert the API key');
+defined('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_PROJECT_ID') || define('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_PROJECT_ID', 'insert the project id');
+defined('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_STORY_ID') || define('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_STORY_ID', 'insert the story id');
+defined('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_INVITE_EMAIL') || define('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_INVITE_EMAIL', 'insert email for invitation');
+defined('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_INVITE_ROLE_ID') || define('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_INVITE_ROLE_ID', 'insert role id for invitation');
+defined('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_MEMBER_NAME') || define('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_MEMBER_NAME', 'insert the member name to add to the project');
 
 
 /**
- * Zend_Service_Amazon online tests
+ * Zend\Service\Amazon online tests
  */
 defined('TESTS_ZEND_SERVICE_AMAZON_ONLINE_ENABLED') || define('TESTS_ZEND_SERVICE_AMAZON_ONLINE_ENABLED', false);
 defined('TESTS_ZEND_SERVICE_AMAZON_ONLINE_ACCESSKEYID') || define('TESTS_ZEND_SERVICE_AMAZON_ONLINE_ACCESSKEYID', 'Enter AWSAccessKeyId here');
@@ -592,12 +592,12 @@ defined('TESTS_ZEND_SERVICE_AMAZON_S3_BUCKET') || define('TESTS_ZEND_SERVICE_AMA
 defined('TESTS_ZEND_SERVICE_AMAZON_SQS_QUEUE') || define('TESTS_ZEND_SERVICE_AMAZON_SQS_QUEUE', 'zftestamazonsqsqueuename');
 
 /**
- * Zend_Service_Delicious tests
+ * Zend\Service\Delicious tests
  */
 defined('TESTS_ZEND_SERVICE_DELICIOUS_ENABLED') || define('TESTS_ZEND_SERVICE_DELICIOUS_ENABLED', false);
 
 /**
- * Zend_Service_DeveloperGarden tests
+ * Zend\Service\DeveloperGarden tests
  * Setup your Username and Password to test this Service
  */
 defined('TESTS_ZEND_SERVICE_DEVELOPERGARDEN_ONLINE_ENABLED') || define('TESTS_ZEND_SERVICE_DEVELOPERGARDEN_ONLINE_ENABLED', false);
@@ -605,22 +605,22 @@ defined('TESTS_ZEND_SERVICE_DEVELOPERGARDEN_ONLINE_LOGIN') || define('TESTS_ZEND
 defined('TESTS_ZEND_SERVICE_DEVELOPERGARDEN_ONLINE_PASSWORD') || define('TESTS_ZEND_SERVICE_DEVELOPERGARDEN_ONLINE_PASSWORD', 'ZF_Password');
 
 /**
- * Zend_Service_Flickr online tests
+ * Zend\Service\Flickr online tests
  */
 defined('TESTS_ZEND_SERVICE_FLICKR_ONLINE_ENABLED') || define('TESTS_ZEND_SERVICE_FLICKR_ONLINE_ENABLED', false);
 defined('TESTS_ZEND_SERVICE_FLICKR_ONLINE_APIKEY') || define('TESTS_ZEND_SERVICE_FLICKR_ONLINE_APIKEY', 'Enter API key here');
 
 /**
- * Zend_Service_GoGrid offline tests
+ * Zend\Service\GoGrid offline tests
  */
 
 defined('TESTS_ZEND_SERVICE_GOGRID_ONLINE_ENABLED') || define('TESTS_ZEND_SERVICE_GOGRID_ONLINE_ENABLED', false);
-defined('TESTS_ZEND_SERVICE_GOGRID_ONLINE_KEY') || define('TESTS_ZEND_SERVICE_GOGRID_ONLINE_KEY','insert key here');
-defined('TESTS_ZEND_SERVICE_GOGRID_ONLINE_SECRET') || define('TESTS_ZEND_SERVICE_GOGRID_ONLINE_SECRET','insert secret here');
-defined('TESTS_ZEND_SERVICE_GOGRID_ONLINE_SERVER_NAME') || define('TESTS_ZEND_SERVICE_GOGRID_ONLINE_SERVER_NAME','test-zf');
-defined('TESTS_ZEND_SERVICE_GOGRID_ONLINE_SERVER_IMAGE') || define('TESTS_ZEND_SERVICE_GOGRID_ONLINE_SERVER_IMAGE','insert image name here');
-defined('TESTS_ZEND_SERVICE_GOGRID_ONLINE_SERVER_RAM') || define('TESTS_ZEND_SERVICE_GOGRID_ONLINE_SERVER_RAM','insert ram name here');
-defined('TESTS_ZEND_SERVICE_GOGRID_ONLINE_SERVER_IP') || define('TESTS_ZEND_SERVICE_GOGRID_ONLINE_SERVER_IP','insert ip here');
+defined('TESTS_ZEND_SERVICE_GOGRID_ONLINE_KEY') || define('TESTS_ZEND_SERVICE_GOGRID_ONLINE_KEY', 'insert key here');
+defined('TESTS_ZEND_SERVICE_GOGRID_ONLINE_SECRET') || define('TESTS_ZEND_SERVICE_GOGRID_ONLINE_SECRET', 'insert secret here');
+defined('TESTS_ZEND_SERVICE_GOGRID_ONLINE_SERVER_NAME') || define('TESTS_ZEND_SERVICE_GOGRID_ONLINE_SERVER_NAME', 'test-zf');
+defined('TESTS_ZEND_SERVICE_GOGRID_ONLINE_SERVER_IMAGE') || define('TESTS_ZEND_SERVICE_GOGRID_ONLINE_SERVER_IMAGE', 'insert image name here');
+defined('TESTS_ZEND_SERVICE_GOGRID_ONLINE_SERVER_RAM') || define('TESTS_ZEND_SERVICE_GOGRID_ONLINE_SERVER_RAM', 'insert ram name here');
+defined('TESTS_ZEND_SERVICE_GOGRID_ONLINE_SERVER_IP') || define('TESTS_ZEND_SERVICE_GOGRID_ONLINE_SERVER_IP', 'insert ip here');
 
 /**
  * Zend\Service\LiveDocx configuration
@@ -639,17 +639,17 @@ defined('TESTS_ZEND_SERVICE_LIVEDOCX_PASSWORD') || define('TESTS_ZEND_SERVICE_LI
  */
 defined('TESTS_ZEND_SERVICE_LIVEDOCX_PREMIUM_USERNAME') || define('TESTS_ZEND_SERVICE_LIVEDOCX_PREMIUM_USERNAME', false);
 defined('TESTS_ZEND_SERVICE_LIVEDOCX_PREMIUM_PASSWORD') || define('TESTS_ZEND_SERVICE_LIVEDOCX_PREMIUM_PASSWORD', false);
-defined('TESTS_ZEND_SERVICE_LIVEDOCX_PREMIUM_WSDL') || define('TESTS_ZEND_SERVICE_LIVEDOCX_PREMIUM_WSDL',     false);
+defined('TESTS_ZEND_SERVICE_LIVEDOCX_PREMIUM_WSDL') || define('TESTS_ZEND_SERVICE_LIVEDOCX_PREMIUM_WSDL', false);
 
 /**
- * Zend_Service_Rackspace tests
+ * Zend\Service\Rackspace tests
  */
 defined('TESTS_ZEND_SERVICE_RACKSPACE_ONLINE_ENABLED') || define('TESTS_ZEND_SERVICE_RACKSPACE_ONLINE_ENABLED', false);
 defined('TESTS_ZEND_SERVICE_RACKSPACE_ONLINE_USER') || define('TESTS_ZEND_SERVICE_RACKSPACE_ONLINE_USER', 'Enter key here');
 defined('TESTS_ZEND_SERVICE_RACKSPACE_ONLINE_KEY') || define('TESTS_ZEND_SERVICE_RACKSPACE_ONLINE_KEY', 'Enter secret here');
 defined('TESTS_ZEND_SERVICE_RACKSPACE_ONLINE_REGION') || define('TESTS_ZEND_SERVICE_RACKSPACE_ONLINE_REGION', 'USA');
 defined('TESTS_ZEND_SERVICE_RACKSPACE_CONTAINER_NAME') || define('TESTS_ZEND_SERVICE_RACKSPACE_CONTAINER_NAME', 'zf-unit-test');
-defined('TESTS_ZEND_SERVICE_RACKSPACE_OBJECT_NAME') || define('TESTS_ZEND_SERVICE_RACKSPACE_OBJECT_NAME','zf-object-test');
+defined('TESTS_ZEND_SERVICE_RACKSPACE_OBJECT_NAME') || define('TESTS_ZEND_SERVICE_RACKSPACE_OBJECT_NAME', 'zf-object-test');
 defined('TESTS_ZEND_SERVICE_RACKSPACE_SERVER_NAME') || define('TESTS_ZEND_SERVICE_RACKSPACE_SERVER_NAME', 'zf-unit-test');
 defined('TESTS_ZEND_SERVICE_RACKSPACE_SERVER_IMAGEID') || define('TESTS_ZEND_SERVICE_RACKSPACE_SERVER_IMAGEID', '49');
 defined('TESTS_ZEND_SERVICE_RACKSPACE_SERVER_NEW_IMAGEID') || define('TESTS_ZEND_SERVICE_RACKSPACE_SERVER_NEW_IMAGEID', '49');
@@ -659,7 +659,7 @@ defined('TESTS_ZEND_SERVICE_RACKSPACE_SERVER_SHARED_IP_GROUP_NAME') || define('T
 defined('TESTS_ZEND_SERVICE_RACKSPACE_TIMEOUT') || define('TESTS_ZEND_SERVICE_RACKSPACE_TIMEOUT', 60);
 
 /**
- * Zend_Service_ReCaptcha tests
+ * Zend\Service\ReCaptcha tests
  */
 defined('TESTS_ZEND_SERVICE_RECAPTCHA_ENABLED') || define('TESTS_ZEND_SERVICE_RECAPTCHA_ENABLED', false);
 defined('TESTS_ZEND_SERVICE_RECAPTCHA_ONLINE_ENABLED') || define('TESTS_ZEND_SERVICE_RECAPTCHA_ONLINE_ENABLED', false);
@@ -669,14 +669,14 @@ defined('TESTS_ZEND_SERVICE_RECAPTCHA_MAILHIDE_PUBLIC_KEY') || define('TESTS_ZEN
 defined('TESTS_ZEND_SERVICE_RECAPTCHA_MAILHIDE_PRIVATE_KEY') || define('TESTS_ZEND_SERVICE_RECAPTCHA_MAILHIDE_PRIVATE_KEY', 'private mailhide key');
 
 /**
- * Zend_Service_Simpy tests
+ * Zend\Service\Simpy tests
  */
 defined('TESTS_ZEND_SERVICE_SIMPY_ENABLED') || define('TESTS_ZEND_SERVICE_SIMPY_ENABLED', false);
 defined('TESTS_ZEND_SERVICE_SIMPY_USERNAME') || define('TESTS_ZEND_SERVICE_SIMPY_USERNAME', 'syapizend');
 defined('TESTS_ZEND_SERVICE_SIMPY_PASSWORD') || define('TESTS_ZEND_SERVICE_SIMPY_PASSWORD', 'mgt37ge');
 
 /**
- * Zend_Service_SlideShare tests
+ * Zend\Service\SlideShare tests
  */
 defined('TESTS_ZEND_SERVICE_SLIDESHARE_USERNAME') || define('TESTS_ZEND_SERVICE_SLIDESHARE_USERNAME', '');
 defined('TESTS_ZEND_SERVICE_SLIDESHARE_PASSWORD') || define('TESTS_ZEND_SERVICE_SLIDESHARE_PASSWORD', '');
@@ -693,7 +693,7 @@ defined('TESTS_ZEND_SERVICE_SLIDESHARE_TAG') || define('TESTS_ZEND_SERVICE_SLIDE
 defined('TESTS_ZEND_SERVICE_SLIDESHARE_GROUP') || define('TESTS_ZEND_SERVICE_SLIDESHARE_GROUP', '');
 
 /**
- * Zend_Service_Twitter tests
+ * Zend\Service\Twitter tests
  *
  * ONLINE_ENABLED indicates whether or not to run tests requiring a network
  * connection.
@@ -706,91 +706,91 @@ defined('TESTS_ZEND_SERVICE_TWITTER_USER') || define('TESTS_ZEND_SERVICE_TWITTER
 defined('TESTS_ZEND_SERVICE_TWITTER_PASS') || define('TESTS_ZEND_SERVICE_TWITTER_PASS', 'zftestuser');
 
 /**
- * Zend_Service_WindowsAzure  tests
+ * Zend\Service\WindowsAzure tests
  */
 
 /**
  * Online
  */
 
-define('TESTS_ZEND_SERVICE_WINDOWSAZURE_ONLINE_ACCOUNTNAME','');
-define('TESTS_ZEND_SERVICE_WINDOWSAZURE_ONLINE_ACCOUNTKEY','');
-define('TESTS_ZEND_SERVICE_WINDOWSAZURE_ONLINE_TABLE_HOST','');
-define('TESTS_ZEND_SERVICE_WINDOWSAZURE_ONLINE_STORAGE_PROXY_HOST','');
-define('TESTS_ZEND_SERVICE_WINDOWSAZURE_ONLINE_STORAGE_PROXY_PORT','');
-define('TESTS_ZEND_SERVICE_WINDOWSAZURE_ONLINE_STORAGE_PROXY_CREDENTIALS','');
+defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_ONLINE_ACCOUNTNAME') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_ONLINE_ACCOUNTNAME', '');
+defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_ONLINE_ACCOUNTKEY') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_ONLINE_ACCOUNTKEY', '');
+defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_ONLINE_TABLE_HOST') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_ONLINE_TABLE_HOST', '');
+defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_ONLINE_STORAGE_PROXY_HOST') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_ONLINE_STORAGE_PROXY_HOST', '');
+defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_ONLINE_STORAGE_PROXY_PORT') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_ONLINE_STORAGE_PROXY_PORT', '');
+defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_ONLINE_STORAGE_PROXY_CREDENTIALS') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_ONLINE_STORAGE_PROXY_CREDENTIALS', '');
 
 /**
  * Proxy settings
  */
-defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_USEPROXY') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_USEPROXY',                false);
-defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_PROXY') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_PROXY',                   '');
-defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_PROXY_PORT') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_PROXY_PORT',              '8080');
-defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_PROXY_CREDENTIALS') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_PROXY_CREDENTIALS',       '');
+defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_USEPROXY') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_USEPROXY', false);
+defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_PROXY') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_PROXY', '');
+defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_PROXY_PORT') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_PROXY_PORT', '8080');
+defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_PROXY_CREDENTIALS') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_PROXY_CREDENTIALS', '');
 
 /**
  * Azure hosts
  */
-defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_HOST_DEV') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_HOST_DEV',                   '127.0.0.1:10000');
-defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_QUEUE_HOST_DEV') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_QUEUE_HOST_DEV',                  '127.0.0.1:10001');
-defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_TABLE_HOST_DEV') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_TABLE_HOST_DEV',                  '127.0.0.1:10002');
-defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_HOST_PROD') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_HOST_PROD',                  'blob.core.windows.net');
-defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_QUEUE_HOST_PROD') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_QUEUE_HOST_PROD',                 'queue.core.windows.net');
-defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_TABLE_HOST_PROD') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_TABLE_HOST_PROD',                 'table.core.windows.net');
+defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_HOST_DEV') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_HOST_DEV', '127.0.0.1:10000');
+defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_QUEUE_HOST_DEV') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_QUEUE_HOST_DEV', '127.0.0.1:10001');
+defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_TABLE_HOST_DEV') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_TABLE_HOST_DEV', '127.0.0.1:10002');
+defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_HOST_PROD') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_HOST_PROD', 'blob.core.windows.net');
+defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_QUEUE_HOST_PROD') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_QUEUE_HOST_PROD', 'queue.core.windows.net');
+defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_TABLE_HOST_PROD') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_TABLE_HOST_PROD', 'table.core.windows.net');
 
 /**
  * Credentials
  */
-defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_ACCOUNT_DEV') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_ACCOUNT_DEV',             'devstoreaccount1');
-defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_KEY_DEV') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_KEY_DEV',                 'Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==');
-defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_ACCOUNT_PROD') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_ACCOUNT_PROD',            'phpazure');
-defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_KEY_PROD') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_KEY_PROD',                'I+ebYPcIDB6BsmfAe6pJSpOw8oXA6jMBZv1BEZcSPRqTpldt44refCl65YpKJqcBOiD21Lxsj8d6Ah8Oc2/gKA==');
+defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_ACCOUNT_DEV') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_ACCOUNT_DEV', 'devstoreaccount1');
+defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_KEY_DEV') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_KEY_DEV', 'Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==');
+defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_ACCOUNT_PROD') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_ACCOUNT_PROD', 'phpazure');
+defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_KEY_PROD') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_KEY_PROD', 'I+ebYPcIDB6BsmfAe6pJSpOw8oXA6jMBZv1BEZcSPRqTpldt44refCl65YpKJqcBOiD21Lxsj8d6Ah8Oc2/gKA==');
 
 /**
  * Blob storage tests
  */
 // Enable this tests only when you have a working account
-defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_RUNTESTS') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_RUNTESTS',                   false);
-defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_RUNONPROD') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_RUNONPROD',                  false);
-defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_RUNLARGEBLOB') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_RUNLARGEBLOB',               true);
-defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_CONTAINER_PREFIX') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_CONTAINER_PREFIX',           'phpazuretestblob');
-defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOBSTREAM_CONTAINER_PREFIX') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOBSTREAM_CONTAINER_PREFIX',     'phpazureteststream');
-defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOBSA_CONTAINER_PREFIX') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOBSA_CONTAINER_PREFIX',         'phpazuretestshared');
+defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_RUNTESTS') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_RUNTESTS', false);
+defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_RUNONPROD') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_RUNONPROD', false);
+defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_RUNLARGEBLOB') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_RUNLARGEBLOB', true);
+defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_CONTAINER_PREFIX') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_CONTAINER_PREFIX', 'phpazuretestblob');
+defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOBSTREAM_CONTAINER_PREFIX') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOBSTREAM_CONTAINER_PREFIX', 'phpazureteststream');
+defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOBSA_CONTAINER_PREFIX') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOBSA_CONTAINER_PREFIX', 'phpazuretestshared');
 
 /**
  * Table storage tests
  */
 // Enable this tests only when you have a working account
-defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_TABLE_RUNTESTS') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_TABLE_RUNTESTS',                  false);
-defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_TABLE_RUNONPROD') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_TABLE_RUNONPROD',                 false);
-defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_TABLE_TABLENAME_PREFIX') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_TABLE_TABLENAME_PREFIX',          'phpazuretesttable');
+defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_TABLE_RUNTESTS') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_TABLE_RUNTESTS', false);
+defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_TABLE_RUNONPROD') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_TABLE_RUNONPROD', false);
+defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_TABLE_TABLENAME_PREFIX') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_TABLE_TABLENAME_PREFIX', 'phpazuretesttable');
 
 /**
  * Queue storage tests
  */
-defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_QUEUE_RUNTESTS') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_QUEUE_RUNTESTS',                  false);
-defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_QUEUE_RUNONPROD') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_QUEUE_RUNONPROD',                 false);
-defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_QUEUE_PREFIX') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_QUEUE_PREFIX',                    'phpazuretestqueue');
+defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_QUEUE_RUNTESTS') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_QUEUE_RUNTESTS', false);
+defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_QUEUE_RUNONPROD') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_QUEUE_RUNONPROD', false);
+defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_QUEUE_PREFIX') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_QUEUE_PREFIX', 'phpazuretestqueue');
 
 /**
  * SessionHandler tests
  */
-defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_SESSIONHANDLER_RUNTESTS') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_SESSIONHANDLER_RUNTESTS',         false);
-defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_SESSIONHANDLER_RUNONPROD') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_SESSIONHANDLER_RUNONPROD',        false);
+defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_SESSIONHANDLER_RUNTESTS') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_SESSIONHANDLER_RUNTESTS', false);
+defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_SESSIONHANDLER_RUNONPROD') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_SESSIONHANDLER_RUNONPROD', false);
 defined('TESTS_ZEND_SERVICE_WINDOWSAZURE_SESSIONHANDLER_TABLENAME_PREFIX') || define('TESTS_ZEND_SERVICE_WINDOWSAZURE_SESSIONHANDLER_TABLENAME_PREFIX', 'phpazuretestsession');
 
 /**
- * Zend_Service_Yahoo online tests
+ * Zend\Service\Yahoo online tests
  */
 defined('TESTS_ZEND_SERVICE_YAHOO_ONLINE_ENABLED') || define('TESTS_ZEND_SERVICE_YAHOO_ONLINE_ENABLED', false);
 defined('TESTS_ZEND_SERVICE_YAHOO_ONLINE_APPID') || define('TESTS_ZEND_SERVICE_YAHOO_ONLINE_APPID', 'Enter APPID here');
 
 /**
- * Zend_Soap_AutoDiscover scenario tests for complex objects and wsdl generation
+ * Zend\Soap\AutoDiscover scenario tests for complex objects and wsdl generation
  *
  * Copy all the files of zf/tests/Zend/Soap/_files/fulltests into a directory
  * that can be reached by webserver and enter the base uri to this directory
- * into the variable. The test "Zend_Soap_AutoDiscover_OnlineTest" makes use
+ * into the variable. The test "Zend\Soap\AutoDiscover\OnlineTest" makes use
  * of the servers and AutoDiscover feature.
  *
  * NOTE: Make sure the servers are using the correct Zend Framework copy,
@@ -799,7 +799,7 @@ defined('TESTS_ZEND_SERVICE_YAHOO_ONLINE_APPID') || define('TESTS_ZEND_SERVICE_Y
 defined('TESTS_ZEND_SOAP_AUTODISCOVER_ONLINE_SERVER_BASEURI') || define('TESTS_ZEND_SOAP_AUTODISCOVER_ONLINE_SERVER_BASEURI', false);
 
 /**
- * Zend_Uri tests
+ * Zend\Uri tests
  *
  * Setting CRASH_TEST_ENABLED to true will enable some tests that may
  * potentially crash PHP on some systems, due to very deep-nesting regular
@@ -810,7 +810,7 @@ defined('TESTS_ZEND_SOAP_AUTODISCOVER_ONLINE_SERVER_BASEURI') || define('TESTS_Z
 defined('TESTS_ZEND_URI_CRASH_TEST_ENABLED') || define('TESTS_ZEND_URI_CRASH_TEST_ENABLED', false);
 
 /**
- * Zend_Validate tests
+ * Zend\Validate tests
  *
  * Set ONLINE_ENABLED if you wish to run validators that require network
  * connectivity.
@@ -822,4 +822,3 @@ defined('TESTS_ZEND_VALIDATE_ONLINE_ENABLED') || define('TESTS_ZEND_VALIDATE_ONL
  */
 defined('TESTS_GENERATE_REPORT') || define('TESTS_GENERATE_REPORT', false);
 defined('TESTS_GENERATE_REPORT_TARGET') || define('TESTS_GENERATE_REPORT_TARGET', '/path/to/target');
-

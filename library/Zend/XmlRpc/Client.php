@@ -275,7 +275,7 @@ class Client implements ServerClient
             $success = true;
             try {
                 $signatures = $this->getIntrospector()->getMethodSignature($method);
-            } catch (\Zend\XmlRpc\Exception $e) {
+            } catch (\Zend\XmlRpc\Exception\ExceptionInterface $e) {
                 $success = false;
             }
             if ($success) {

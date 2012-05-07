@@ -20,8 +20,8 @@
 
 namespace Zend\Mail;
 
-use Countable,
-    Iterator;
+use Countable;
+use Iterator;
 
 /**
  * @category   Zend
@@ -40,9 +40,10 @@ class AddressList implements Countable, Iterator
 
     /**
      * Add an address to the list
-     * 
-     * @param  string|AddressDescription $emailOrAddress 
-     * @param  null|string $name 
+     *
+     * @param  string|Address\AddressInterface $emailOrAddress
+     * @param  null|string $name
+     * @throws Exception\InvalidArgumentException
      * @return AddressList
      */
     public function add($emailOrAddress, $name = null)
@@ -50,7 +51,7 @@ class AddressList implements Countable, Iterator
         if (is_string($emailOrAddress)) {
             $emailOrAddress = $this->createAddress($emailOrAddress, $name);
         }
-        if (!$emailOrAddress instanceof AddressDescription) {
+        if (!$emailOrAddress instanceof Address\AddressInterface) {
             throw new Exception\InvalidArgumentException(sprintf(
                 '%s expects an email address or %s\Address object as its first argument; received "%s"',
                 __METHOD__,
@@ -71,11 +72,12 @@ class AddressList implements Countable, Iterator
     /**
      * Add many addresses at once
      *
-     * If an email key is provided, it will be used as the email, and the value 
-     * as the name. Otherwise, the value is passed as the sole argument to add(), 
-     * and, as such, can be either email strings or AddressDescription objects.
-     * 
-     * @param  array $addresses 
+     * If an email key is provided, it will be used as the email, and the value
+     * as the name. Otherwise, the value is passed as the sole argument to add(),
+     * and, as such, can be either email strings or Address\AddressInterface objects.
+     *
+     * @param  array $addresses
+     * @throws Exception\RuntimeException
      * @return AddressList
      */
     public function addMany(array $addresses)
@@ -125,7 +127,7 @@ class AddressList implements Countable, Iterator
      * Get an address by email
      * 
      * @param  string $email 
-     * @return false|AddressDescription
+     * @return boolean|Address\AddressInterface
      */
     public function get($email)
     {
@@ -166,8 +168,10 @@ class AddressList implements Countable, Iterator
 
     /**
      * Rewind iterator
-     * 
-     * @return void
+     *
+     * @return mixed the value of the first addresses element, or false if the addresses is
+     * empty.
+     * @see addresses
      */
     public function rewind()
     {
@@ -196,8 +200,10 @@ class AddressList implements Countable, Iterator
 
     /**
      * Move to next item
-     * 
-     * @return void
+     *
+     * @return mixed the addresses value in the next place that's pointed to by the
+     * internal array pointer, or false if there are no more elements.
+     * @see addresses
      */
     public function next()
     {

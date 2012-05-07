@@ -4,12 +4,13 @@ namespace Zend\Mvc;
 use Zend\Di\Configuration as DiConfiguration,
     Zend\Di\Di,
     Zend\Config\Config,
-    Zend\EventManager\EventCollection as Events,
+    Zend\EventManager\EventManagerInterface as Events,
     Zend\EventManager\EventManager,
-    Zend\EventManager\StaticEventManager,
+    Zend\EventManager\EventManagerAwareInterface,
+    Zend\EventManager\EventsCapableInterface,
     Zend\Mvc\Router\Http\TreeRouteStack as Router;
 
-class Bootstrap implements Bootstrapper
+class Bootstrap implements BootstrapInterface, EventManagerAwareInterface, EventsCapableInterface
 {
     /**
      * @var \Zend\Config\Config
@@ -17,7 +18,7 @@ class Bootstrap implements Bootstrapper
     protected $config;
 
     /**
-     * @var EventCollection
+     * @var EventManagerInterface
      */
     protected $events;
 
@@ -40,6 +41,11 @@ class Bootstrap implements Bootstrapper
      */
     public function setEventManager(Events $events)
     {
+        $events->setIdentifiers(array(
+            __CLASS__,
+            get_called_class(),
+            'bootstrap',
+        ));
         $this->events = $events;
     }
 
@@ -55,11 +61,7 @@ class Bootstrap implements Bootstrapper
     public function events()
     {
         if (!$this->events instanceof Events) {
-            $this->setEventManager(new EventManager(array(
-                __CLASS__,
-                get_called_class(),
-                'bootstrap',
-            )));
+            $this->setEventManager(new EventManager());
         }
         return $this->events;
     }
@@ -77,7 +79,7 @@ class Bootstrap implements Bootstrapper
      * @param Application $application
      * @return void
      */
-    public function bootstrap(AppContext $application)
+    public function bootstrap(ApplicationInterface $application)
     {
         $this->setupLocator($application);
         $this->setupRouter($application);
@@ -89,17 +91,22 @@ class Bootstrap implements Bootstrapper
     /**
      * Sets up the locator based on the configuration provided
      *
-     * @param  AppContext $application
+     * @param  ApplicationInterface $application
      * @return void
      */
-    protected function setupLocator(AppContext $application)
+    protected function setupLocator(ApplicationInterface $application)
     {
+        $events       = $this->events();
+        $sharedEvents = $events->getSharedManager();
+
         $di = new Di;
         $di->instanceManager()->addTypePreference('Zend\Di\Locator', $di);
+        $di->instanceManager()->addSharedInstance($sharedEvents, 'Zend\EventManager\SharedEventManager');
+        $di->instanceManager()->addSharedInstance($sharedEvents, 'Zend\EventManager\SharedEventManagerInterface');
 
         // Default configuration for common MVC classes
         $diConfig = new DiConfiguration(array('definition' => array('class' => array(
-            'Zend\Mvc\Router\RouteStack' => array(
+            'Zend\Mvc\Router\RouteStackInterface' => array(
                 'instantiator' => array(
                     'Zend\Mvc\Router\Http\TreeRouteStack',
                     'factory'
@@ -182,7 +189,7 @@ class Bootstrap implements Bootstrapper
                 'setResolver' => array(
                     'required' => false,
                     'resolver' => array(
-                        'type'     => 'Zend\View\Resolver',
+                        'type'     => 'Zend\View\Resolver\ResolverInterface',
                         'required' => true,
                     ),
                 ),
@@ -191,7 +198,7 @@ class Bootstrap implements Bootstrapper
                 'attach' => array(
                     'resolver' => array(
                         'required' => false,
-                        'type'     => 'Zend\View\Resolver',
+                        'type'     => 'Zend\View\Resolver\ResolverInterface',
                     ),
                 ),
             ),
@@ -217,7 +224,17 @@ class Bootstrap implements Bootstrapper
                     ),
                 ),
             ),
-        ))));
+        )), 'instance' => array(
+            'preferences' => array(
+                // Use EventManager for EventManagerInterface
+                'Zend\EventManager\EventManagerInterface' => 'Zend\EventManager\EventManager',
+                // Use SharedEventManager for SharedEventManagerInterface
+                'Zend\EventManager\SharedEventManagerInterface' => 'Zend\EventManager\SharedEventManager',
+            ),
+            'Zend\EventManager\EventManager' => array(
+                'shared' => false, // new instance per class needing an instance
+            ),
+        )));
         $diConfig->configure($di);
 
         $config = new DiConfiguration($this->config->di);
@@ -232,9 +249,9 @@ class Bootstrap implements Bootstrapper
      * @param  Application $application
      * @return void
      */
-    protected function setupRouter(AppContext $application)
+    protected function setupRouter(ApplicationInterface $application)
     {
-        $router = $application->getLocator()->get('Zend\Mvc\Router\RouteStack');
+        $router = $application->getLocator()->get('Zend\Mvc\Router\RouteStackInterface');
         $application->setRouter($router);
     }
 
@@ -253,7 +270,7 @@ class Bootstrap implements Bootstrapper
         // Basic view strategy
         $locator             = $application->getLocator();
         $events              = $application->events();
-        $staticEvents        = StaticEventManager::getInstance();
+        $sharedEvents        = $locator->get('Zend\EventManager\SharedEventManagerInterface');
         $view                = $locator->get('Zend\View\View');
         $phpRendererStrategy = $locator->get('Zend\View\Strategy\PhpRendererStrategy');
         $defaultViewStrategy = $locator->get('Zend\Mvc\View\DefaultRenderingStrategy');
@@ -270,11 +287,12 @@ class Bootstrap implements Bootstrapper
         $createViewModelListener = $locator->get('Zend\Mvc\View\CreateViewModelListener');
         $injectTemplateListener  = $locator->get('Zend\Mvc\View\InjectTemplateListener');
         $injectViewModelListener = $locator->get('Zend\Mvc\View\InjectViewModelListener');
-        $staticEvents->attach('Zend\Stdlib\Dispatchable', MvcEvent::EVENT_DISPATCH, array($createViewModelListener, 'createViewModelFromArray'), -80);
-        $staticEvents->attach('Zend\Stdlib\Dispatchable', MvcEvent::EVENT_DISPATCH, array($createViewModelListener, 'createViewModelFromNull'), -80);
-        $staticEvents->attach('Zend\Stdlib\Dispatchable', MvcEvent::EVENT_DISPATCH, array($injectTemplateListener, 'injectTemplate'), -90);
+        $sharedEvents->attach('Zend\Stdlib\DispatchableInterface', MvcEvent::EVENT_DISPATCH, array($createViewModelListener, 'createViewModelFromArray'), -80);
+        $sharedEvents->attach('Zend\Stdlib\DispatchableInterface', MvcEvent::EVENT_DISPATCH, array($noRouteStrategy, 'prepareNotFoundViewModel'), -90);
+        $sharedEvents->attach('Zend\Stdlib\DispatchableInterface', MvcEvent::EVENT_DISPATCH, array($createViewModelListener, 'createViewModelFromNull'), -80);
+        $sharedEvents->attach('Zend\Stdlib\DispatchableInterface', MvcEvent::EVENT_DISPATCH, array($injectTemplateListener, 'injectTemplate'), -90);
         $events->attach(MvcEvent::EVENT_DISPATCH_ERROR, array($injectViewModelListener, 'injectViewModel'), -100);
-        $staticEvents->attach('Zend\Stdlib\Dispatchable', MvcEvent::EVENT_DISPATCH, array($injectViewModelListener, 'injectViewModel'), -100);
+        $sharedEvents->attach('Zend\Stdlib\DispatchableInterface', MvcEvent::EVENT_DISPATCH, array($injectViewModelListener, 'injectViewModel'), -100);
 
         // Inject MVC Event with view model
         $mvcEvent  = $application->getMvcEvent();
@@ -291,13 +309,16 @@ class Bootstrap implements Bootstrapper
      * Trigger the "bootstrap" event
      *
      * Triggers with the keys "application" and "config", the latter pointing
-     * to the Module Manager attached to the bootstrap.
+     * to the Module ManagerInterface attached to the bootstrap.
      *
-     * @param  AppContext $application
+     * @param  ApplicationInterface $application
      * @return void
      */
-    protected function setupEvents(AppContext $application)
+    protected function setupEvents(ApplicationInterface $application)
     {
+        $application->events()->setSharedManager(
+            $this->events()->getSharedManager()
+        );
         $params = array(
             'application' => $application,
             'config'      => $this->config,

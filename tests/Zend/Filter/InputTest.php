@@ -1195,7 +1195,7 @@ class InputFilterTest extends \PHPUnit_Framework_TestCase
         );
         // Zend\Validator\Exception exists, but does not implement the needed interface
         $broker = new Validator\ValidatorBroker();
-        $broker->getClassLoader()->registerPlugin('exception', 'Zend\Validator\Exception');
+        $broker->getClassLoader()->registerPlugin('exception', 'Zend\Validator\Exception\InvalidArgumentException');
         $validators = array(
             'field1' => 'Exception'
         );
@@ -1203,7 +1203,7 @@ class InputFilterTest extends \PHPUnit_Framework_TestCase
         $input = new InputFilter(null, $validators, $data);
         $input->setPluginBroker($broker, InputFilter::VALIDATOR);
 
-        $this->setExpectedException('Zend\Validator\Exception', 'must implement');
+        $this->setExpectedException('Zend\Validator\Exception\ExceptionInterface', 'must implement');
         $this->assertTrue($input->hasInvalid(), 'Expected hasInvalid() to return true');
     }
 

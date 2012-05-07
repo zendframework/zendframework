@@ -37,6 +37,7 @@ class Request extends HttpRequest
         $this->setPost(new Parameters($_POST));
         $this->setQuery(new Parameters($_GET));
         $this->setServer(new Parameters($_SERVER));
+        $this->setCookies(new Parameters($_COOKIE));
 
         if ($_FILES) {
             $this->setFile(new Parameters($_FILES));

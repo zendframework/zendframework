@@ -23,8 +23,7 @@ namespace Zend\Db\Adapter\Driver\Mysqli;
 
 use Zend\Db\Adapter\Driver\StatementInterface,
     Zend\Db\Adapter\Exception,
-    Zend\Db\Adapter\ParameterContainer,
-    Zend\Db\Adapter\ParameterContainerInterface;
+    Zend\Db\Adapter\ParameterContainer;
 
 /**
  * @category   Zend
@@ -54,7 +53,7 @@ class Statement implements StatementInterface
     /**
      * Parameter container
      * 
-     * @var ParameterContainerInterface 
+     * @var ParameterContainer
      */
     protected $parameterContainer = null;
     
@@ -106,9 +105,9 @@ class Statement implements StatementInterface
     /**
      * Set Parameter container
      * 
-     * @param ParameterContainerInterface $parameterContainer 
+     * @param ParameterContainer $parameterContainer
      */
-    public function setParameterContainer(ParameterContainerInterface $parameterContainer)
+    public function setParameterContainer(ParameterContainer $parameterContainer)
     {
         $this->parameterContainer = $parameterContainer;
     }
@@ -200,7 +199,7 @@ class Statement implements StatementInterface
             if (is_array($parameters)) {
                 $parameters = new ParameterContainer($parameters);
             }
-            if (!$parameters instanceof ParameterContainerInterface) {
+            if (!$parameters instanceof ParameterContainer) {
                 throw new \InvalidArgumentException('ParameterContainer expected');
             }
             $this->bindParametersFromContainer($parameters);
@@ -216,25 +215,25 @@ class Statement implements StatementInterface
     /**
      * Bind parameters from container
      * 
-     * @param ParameterContainerInterface $pContainer 
+     * @param ParameterContainer $pContainer
      */
-    protected function bindParametersFromContainer(ParameterContainerInterface $pContainer)
+    protected function bindParametersFromContainer(ParameterContainer $pContainer)
     {
-        $parameters = $pContainer->toArray();
+        $parameters = $pContainer->getPositionalArray();
         $type = '';
         $args = array();
 
         foreach ($parameters as $position => &$value) {
             switch ($pContainer->offsetGetErrata($position)) {
-                case ParameterContainerInterface::TYPE_DOUBLE:
+                case ParameterContainer::TYPE_DOUBLE:
                     $type .= 'd';
                     break;
-                case ParameterContainerInterface::TYPE_NULL:
+                case ParameterContainer::TYPE_NULL:
                     $value = null; // as per @see http://www.php.net/manual/en/mysqli-stmt.bind-param.php#96148
-                case ParameterContainerInterface::TYPE_INTEGER:
+                case ParameterContainer::TYPE_INTEGER:
                     $type .= 'i';
                     break;
-                case ParameterContainerInterface::TYPE_STRING:
+                case ParameterContainer::TYPE_STRING:
                 default:
                     $type .= 's';
                     break;

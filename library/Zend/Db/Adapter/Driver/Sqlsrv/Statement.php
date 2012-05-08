@@ -22,8 +22,7 @@
 namespace Zend\Db\Adapter\Driver\Sqlsrv;
 
 use Zend\Db\Adapter\Driver\StatementInterface,
-    Zend\Db\Adapter\ParameterContainer,
-    Zend\Db\Adapter\ParameterContainerInterface;
+    Zend\Db\Adapter\ParameterContainer;
 
 /**
  * @category   Zend
@@ -104,15 +103,15 @@ class Statement implements StatementInterface
     /**
      * Set parameter container
      * 
-     * @param ParameterContainerInterface $parameterContainer 
+     * @param ParameterContainer $parameterContainer
      */
-    public function setParameterContainer(ParameterContainerInterface $parameterContainer)
+    public function setParameterContainer(ParameterContainer $parameterContainer)
     {
         $this->parameterContainer = $parameterContainer;
     }
 
     /**
-     * @return ParameterContainerInterface
+     * @return ParameterContainer
      */
     public function getParameterContainer()
     {
@@ -175,7 +174,7 @@ class Statement implements StatementInterface
     /**
      * Execute
      * 
-     * @param  array|ParameterContainerInterface $parameters
+     * @param  array|ParameterContainer $parameters
      * @return type 
      */
     public function execute($parameters = null)
@@ -188,7 +187,7 @@ class Statement implements StatementInterface
             if (is_array($parameters)) {
                 $parameters = new ParameterContainer($parameters);
             }
-            if (!$parameters instanceof ParameterContainerInterface) {
+            if (!$parameters instanceof ParameterContainer) {
                 throw new \InvalidArgumentException('ParameterContainer expected');
             }
             $this->parameterContainer = $parameters;
@@ -217,7 +216,7 @@ class Statement implements StatementInterface
      */
     protected function bindParametersFromContainer()
     {
-        $values = $this->parameterContainer->toArray();
+        $values = $this->parameterContainer->getPositionalArray();
         $position = 0;
         foreach ($values as $value) {
             $this->parameterReferences[$position++][0] = $value;

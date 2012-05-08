@@ -32,5 +32,6 @@ interface ResultInterface extends \Countable, \Iterator
 {
     public function isQueryResult();
     public function getAffectedRows();
+    public function getGeneratedValue();
     public function getResource();
 }

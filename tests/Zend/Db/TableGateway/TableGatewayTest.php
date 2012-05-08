@@ -10,12 +10,16 @@ use Zend\Db\TableGateway\TableGateway,
  */
 class TableGatewayTest extends \PHPUnit_Framework_TestCase
 {
-    //protected $mockDriver = null;
 
     /**
      * @var \PHPUnit_Framework_MockObject_Generator
      */
     protected $mockAdapter = null;
+
+    /**
+     * @var \PHPUnit_Framework_MockObject_Generator
+     */
+    protected $mockSql = null;
 
     /**
      * @var TableGateway
@@ -36,16 +40,20 @@ class TableGatewayTest extends \PHPUnit_Framework_TestCase
         $mockStatement->expects($this->any())->method('execute')->will($this->returnValue($mockResult));
 
         $mockConnection = $this->getMock('Zend\Db\Adapter\Driver\ConnectionInterface');
-        $mockConnection->expects($this->any())->method('getLastGeneratedId')->will($this->returnValue(10));
+        $mockConnection->expects($this->any())->method('getLastGeneratedValue')->will($this->returnValue(10));
 
         $mockDriver = $this->getMock('Zend\Db\Adapter\Driver\DriverInterface');
         $mockDriver->expects($this->any())->method('createStatement')->will($this->returnValue($mockStatement));
         $mockDriver->expects($this->any())->method('getConnection')->will($this->returnValue($mockConnection));
 
         $this->mockAdapter = $this->getMock('Zend\Db\Adapter\Adapter', null, array($mockDriver));
+        $this->mockSql = $this->getMock('Zend\Db\Sql\Sql', array('select', 'insert', 'update', 'delete'), array($this->mockAdapter, 'foo'));
+        $this->mockSql->expects($this->any())->method('select')->will($this->returnValue($this->getMock('Zend\Db\Sql\Select', array('where', 'getRawSate'), array('foo'))));
+        $this->mockSql->expects($this->any())->method('insert')->will($this->returnValue($this->getMock('Zend\Db\Sql\Insert', array('prepareStatement', 'values'), array('foo'))));
+        $this->mockSql->expects($this->any())->method('update')->will($this->returnValue($this->getMock('Zend\Db\Sql\Update', array('where'), array('foo'))));
+        $this->mockSql->expects($this->any())->method('delete')->will($this->returnValue($this->getMock('Zend\Db\Sql\Delete', array('where'), array('foo'))));
 
-
-        $this->table = new TableGateway('foo', $this->mockAdapter);
+        $this->table = new TableGateway('foo', $this->mockAdapter, null, $this->mockSql);
     }
 
     /**
@@ -57,11 +65,11 @@ class TableGatewayTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Zend\Db\TableGateway\TableGateway::getTableName
+     * @covers Zend\Db\TableGateway\TableGateway::getTable
      */
-    public function testGetTableName()
+    public function testGetTable()
     {
-        $this->assertEquals('foo', $this->table->getTableName());
+        $this->assertEquals('foo', $this->table->getTable());
     }
 
     /**
@@ -70,89 +78,6 @@ class TableGatewayTest extends \PHPUnit_Framework_TestCase
     public function testGetAdapter()
     {
         $this->assertSame($this->mockAdapter, $this->table->getAdapter());
-    }
-
-    /**
-     * @covers Zend\Db\TableGateway\TableGateway::getDatabaseSchema
-     */
-    public function testGetDatabaseSchema()
-    {
-        $this->assertNull($this->table->getSchema());
-
-        $table = new TableGateway('foo', $this->mockAdapter, 'FooSchema');
-        $this->assertEquals('FooSchema', $table->getSchema());
-    }
-
-    /**
-     * @covers Zend\Db\TableGateway\TableGateway::setSqlDelete
-     */
-    public function testSetSqlDelete()
-    {
-        $delete = new Sql\Delete;
-        $this->table->setSqlDeletePrototype($delete);
-        $this->assertSame($delete, $this->table->getSqlDeletePrototype());
-    }
-
-    /**
-     * @covers Zend\Db\TableGateway\TableGateway::getSqlDelete
-     */
-    public function testGetSqlDelete()
-    {
-        $this->assertInstanceOf('Zend\Db\Sql\Delete', $this->table->getSqlDeletePrototype());
-    }
-
-    /**
-     * @covers Zend\Db\TableGateway\TableGateway::setSqlInsert
-     */
-    public function testSetSqlInsert()
-    {
-        $insert = new Sql\Insert;
-        $this->table->setSqlInsertPrototype($insert);
-        $this->assertSame($insert, $this->table->getSqlInsertPrototype());
-    }
-
-    /**
-     * @covers Zend\Db\TableGateway\TableGateway::getSqlInsert
-     */
-    public function testGetSqlInsert()
-    {
-        $this->assertInstanceOf('Zend\Db\Sql\Insert', $this->table->getSqlInsertPrototype());
-    }
-
-    /**
-     * @covers Zend\Db\TableGateway\TableGateway::setSqlSelect
-     */
-    public function testSetSqlSelect()
-    {
-        $select = new Sql\Select;
-        $this->table->setSqlSelectPrototype($select);
-        $this->assertSame($select, $this->table->getSqlSelectPrototype());
-    }
-
-    /**
-     * @covers Zend\Db\TableGateway\TableGateway::getSqlSelect
-     */
-    public function testGetSqlSelect()
-    {
-        $this->assertInstanceOf('Zend\Db\Sql\Select', $this->table->getSqlSelectPrototype());
-    }
-
-    /**
-     * @covers Zend\Db\TableGateway\TableGateway::setSqlUpdate
-     */
-    public function testSetSqlUpdate()
-    {
-        $update = new Sql\Update;
-        $this->table->setSqlUpdatePrototype($update);
-        $this->assertSame($update, $this->table->getSqlUpdatePrototype());
-    }
-
-    /**
-     * @covers Zend\Db\TableGateway\TableGateway::getSqlUpdate
-     */
-    public function testGetSqlUpdate()
-    {
-        $this->assertInstanceOf('Zend\Db\Sql\Update', $this->table->getSqlUpdatePrototype());
     }
 
     /**
@@ -178,16 +103,6 @@ class TableGatewayTest extends \PHPUnit_Framework_TestCase
      */
     public function testSelectWithNoWhere()
     {
-        $select = $this->getMock('Zend\Db\Sql\Select');
-        $select->expects($this->any())
-            ->method('getRawState')
-            ->will($this->returnValue(array(
-                'table' => $this->table->getTableName(),
-                'schema' => ''
-                ))
-            );
-
-        $this->table->setSqlSelectPrototype($select);
         $resultSet = $this->table->select();
 
         // check return types
@@ -200,21 +115,20 @@ class TableGatewayTest extends \PHPUnit_Framework_TestCase
      */
     public function testSelectWithWhereString()
     {
-        $select = $this->getMock('Zend\Db\Sql\Select');
-        $select->expects($this->any())
+        $mockSelect = $this->mockSql->select();
+
+        $mockSelect->expects($this->any())
             ->method('getRawState')
             ->will($this->returnValue(array(
-                'table' => $this->table->getTableName(),
-                'schema' => ''
+                'table' => $this->table->getTable(),
                 ))
             );
 
         // assert select::from() is called
-        $select->expects($this->once())
+        $mockSelect->expects($this->once())
             ->method('where')
             ->with($this->equalTo('foo'));
 
-        $this->table->setSqlSelectPrototype($select);
         $this->table->select('foo');
     }
 
@@ -223,23 +137,16 @@ class TableGatewayTest extends \PHPUnit_Framework_TestCase
      */
     public function testInsert()
     {
-        $insert = $this->getMock('Zend\Db\Sql\Insert');
+        $mockInsert = $this->mockSql->insert();
 
-        // assert ?
-        $insert->expects($this->once())
-            ->method('into')
-            ->with($this->table->getTableName());
-
-        $insert->expects($this->once())
+        $mockInsert->expects($this->once())
             ->method('prepareStatement')
             ->with($this->mockAdapter);
 
 
-        $insert->expects($this->once())
+        $mockInsert->expects($this->once())
             ->method('values')
             ->with($this->equalTo(array('foo' => 'bar')));
-
-        $this->table->setSqlInsertPrototype($insert);
 
         $affectedRows = $this->table->insert(array('foo' => 'bar'));
         $this->assertEquals(5, $affectedRows);
@@ -250,15 +157,14 @@ class TableGatewayTest extends \PHPUnit_Framework_TestCase
      */
     public function testUpdate()
     {
-        $update = $this->getMock('Zend\Db\Sql\Update');
+        $mockUpdate = $this->mockSql->update();
 
         // assert select::from() is called
-        $update->expects($this->once())
+        $mockUpdate->expects($this->once())
             ->method('where')
-            ->with($this->equalTo('foo'));
+            ->with($this->equalTo('id = 2'));
 
-        $this->table->setSqlUpdatePrototype($update);
-        $this->table->update(array('foo' => 'bar'), 'foo');
+        $this->table->update(array('foo' => 'bar'), 'id = 2');
     }
 
     /**
@@ -266,51 +172,43 @@ class TableGatewayTest extends \PHPUnit_Framework_TestCase
      */
     public function testDelete()
     {
-        $delete = $this->getMock('Zend\Db\Sql\Delete');
+        $mockDelete = $this->mockSql->delete();
 
         // assert select::from() is called
-        $delete->expects($this->once())
+        $mockDelete->expects($this->once())
             ->method('where')
             ->with($this->equalTo('foo'));
 
-        $this->table->setSqlDeletePrototype($delete);
         $this->table->delete('foo');
     }
 
     /**
-     * @covers Zend\Db\TableGateway\TableGateway::getLastInsertId
-     * @todo   Implement testGetLastInsertId().
+     * @covers Zend\Db\TableGateway\TableGateway::getLastInsertValue
      */
-    public function testGetLastInsertId()
+    public function testGetLastInsertValue()
     {
         $this->table->insert(array('foo' => 'bar'));
-        $this->assertEquals(10, $this->table->getLastInsertId());
+        $this->assertEquals(10, $this->table->getLastInsertValue());
     }
 
     /**
      * @covers Zend\Db\TableGateway\TableGateway::__get
-     * @todo   Implement test__get().
      */
     public function test__get()
     {
         $this->table->insert(array('foo')); // trigger last insert id update
 
-        $this->assertEquals(10, $this->table->lastInsertId);
+        $this->assertEquals(10, $this->table->lastInsertValue);
         $this->assertSame($this->mockAdapter, $this->table->adapter);
-        $this->assertEquals('foo', $this->table->tableName);
+        $this->assertEquals('foo', $this->table->table);
     }
 
     /**
      * @covers Zend\Db\TableGateway\TableGateway::__clone
-     * @todo   Implement test__clone().
      */
     public function test__clone()
     {
         $cTable = clone $this->table;
-        //$this->assertNotSame($this->mockAdapter, $cTable->getAdapter());
-        $this->assertNotSame($this->table->getSqlInsertPrototype(), $cTable->getSqlInsertPrototype());
-        $this->assertNotSame($this->table->getSqlUpdatePrototype(), $cTable->getSqlUpdatePrototype());
-        $this->assertNotSame($this->table->getSqlDeletePrototype(), $cTable->getSqlDeletePrototype());
-        $this->assertNotSame($this->table->getSqlSelectPrototype(), $cTable->getSqlSelectPrototype());
+        $this->assertSame($this->mockAdapter, $cTable->getAdapter());
     }
 }

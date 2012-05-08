@@ -24,7 +24,7 @@ namespace Zend\Db\RowGateway;
 use Zend\Db\Adapter\Adapter,
     Zend\Db\ResultSet\Row,
     Zend\Db\ResultSet\RowObjectInterface,
-    Zend\Db\TableGateway\TableGateway;
+    Zend\Db\Sql;
 
 /**
  * @category   Zend
@@ -35,66 +35,76 @@ use Zend\Db\Adapter\Adapter,
  */
 class RowGateway implements RowGatewayInterface, RowObjectInterface
 {
-    /**
-     *
-     * @var type 
-     */
-    protected $tableGateway = null;
+
+    protected $table = null;
+
     /**
      *
      * @var string
      */
     protected $primaryKey = null;
+
     /**
      *
-     * @var type 
+     * @var array
      */
     protected $originalData = null;
+
     /**
      *
-     * @var type 
+     * @var array
      */
-    protected $currentData = null;
+    protected $data = null;
+
+    /**
+     * @var Sql
+     */
+    protected $sql = null;
 
     /**
      * Constructor
      * 
-     * @param TableGateway $tableGateway
-     * @param type $primaryKey 
+     * @param string $tableGateway
+     * @param string|Sql\TableIdentifier $table
+     * @param Adapter $adapter
+     * @param Sql\Sql $sql
      */
-    public function __construct(TableGateway $tableGateway, $primaryKey)
+    public function __construct($primaryKey, $table, Adapter $adapter = null, Sql\Sql $sql = null)
     {
-        $this->tableGateway = clone $tableGateway;
-        $this->tableGateway->getSelectResultPrototype()->setRowObjectPrototype(new Row());
         $this->primaryKey = $primaryKey;
+        $this->table = $table;
+        $this->sql = $sql ?: new Sql\Sql($adapter, $this->table);
     }
 
     /**
      * Populate Original Data
      * 
-     * @param  type $originalData
+     * @param  array $originalData
      * @param  boolean $originalDataIsCurrent
      * @return RowGateway 
      */
-    public function populateOriginalData($originalData, $originalDataIsCurrent = true)
+    public function populateOriginalData(array $originalData)
     {
         $this->originalData = $originalData;
-        if ($originalDataIsCurrent) {
-            $this->populateCurrentData($originalData);
-        }
         return $this;
     }
+
     /**
      * Populate current data
      * 
-     * @param  type $currentData
+     * @param  array $currentData
      * @return RowGateway 
      */
-    public function populateCurrentData($currentData)
+    public function populate(array $rowData, $isOriginal = null)
     {
-        $this->currentData = $currentData;
+        $this->data = $rowData;
+        if ($isOriginal == true || ($isOriginal == null && empty($this->originalData))) {
+            $this->populateOriginalData($rowData);
+        }
+
         return $this;
     }
+
     /**
      * Save
      * 
@@ -107,25 +117,39 @@ class RowGateway implements RowGatewayInterface, RowObjectInterface
         }
 
         if (isset($this->originalData[$this->primaryKey])) {
+
             // UPDATE
             $where = array($this->primaryKey => $this->originalData[$this->primaryKey]);
-            $data = $this->currentData;
+            $data = $this->data;
             unset($data[$this->primaryKey]);
-            $rowsAffected = $this->tableGateway->update($data, $where);
+
+            $uStatement = $this->sql->prepareStatementFromSqlObject($this->sql->update()->set($data)->where($where));
+            $result = $uStatement->execute();
+            $rowsAffected = $result->getAffectedRows();
+
         } else {
+
             // INSERT
-            $rowsAffected = $this->tableGateway->insert($this->currentData);
-            $primaryKey = $this->tableGateway->getLastInsertId();
+            $insert = $this->sql->insert();
+            $insert->values($this->data);
+
+            $statement = $this->sql->prepareStatementFromSqlObject($insert);
+
+            $result = $statement->execute();
+            $primaryKey = $result->getGeneratedValue();
+            $rowsAffected = $result->getAffectedRows();
             $where = array($this->primaryKey => $primaryKey);
         }
 
         // refresh data
-        $result = $this->tableGateway->select($where);
+        $statement = $this->sql->prepareStatementFromSqlObject($this->sql->select()->where($where));
+        $result = $statement->execute();
         $rowData = $result->current();
         $this->populateOriginalData($rowData);
 
         return $rowsAffected;
     }
+
     /**
      * Delete
      * 
@@ -140,6 +164,7 @@ class RowGateway implements RowGatewayInterface, RowObjectInterface
         $where = array($this->primaryKey => $this->originalData[$this->primaryKey]);
         return $this->tableGateway->delete($where);
     }
+
     /**
      * Offset Exists
      * 
@@ -148,8 +173,9 @@ class RowGateway implements RowGatewayInterface, RowObjectInterface
      */
     public function offsetExists($offset)
     {
-        return array_key_exists($offset, $this->currentData);
+        return array_key_exists($offset, $this->data);
     }
+
     /**
      * Offset get
      * 
@@ -158,8 +184,9 @@ class RowGateway implements RowGatewayInterface, RowObjectInterface
      */
     public function offsetGet($offset)
     {
-        return $this->currentData[$offset];
+        return $this->data[$offset];
     }
+
     /**
      * Offset set
      * 
@@ -169,9 +196,10 @@ class RowGateway implements RowGatewayInterface, RowObjectInterface
      */
     public function offsetSet($offset, $value)
     {
-        $this->currentData[$offset] = $value;
+        $this->data[$offset] = $value;
         return $this;
     }
+
     /**
      * Offset unset
      * 
@@ -180,18 +208,7 @@ class RowGateway implements RowGatewayInterface, RowObjectInterface
      */
     public function offsetUnset($offset)
     {
-        $this->currentData[$offset] = null;
-        return $this;
-    }
-    /**
-     * Exchange array
-     * 
-     * @param  string $input
-     * @return RowGateway 
-     */
-    public function exchangeArray($input)
-    {
-        $this->originalData = $this->currentData = $input;
+        $this->data[$offset] = null;
         return $this;
     }
 
@@ -206,7 +223,7 @@ class RowGateway implements RowGatewayInterface, RowObjectInterface
      */
     public function count()
     {
-        return count($this->currentData);
+        return count($this->data);
     }
     /**
      * To array
@@ -215,7 +232,7 @@ class RowGateway implements RowGatewayInterface, RowObjectInterface
      */
     public function toArray()
     {
-        return $this->currentData;
+        return $this->data;
     }
     /**
      * __get
@@ -225,8 +242,8 @@ class RowGateway implements RowGatewayInterface, RowObjectInterface
      */
     public function __get($name)
     {
-        if (array_key_exists($name, $this->currentData)) {
-            return $this->currentData[$name];
+        if (array_key_exists($name, $this->data)) {
+            return $this->data[$name];
         } else {
             throw new \InvalidArgumentException('Not a valid column in this row: ' . $name);
         }

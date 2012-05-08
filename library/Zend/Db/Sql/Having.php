@@ -14,39 +14,26 @@
  *
  * @category   Zend
  * @package    Zend_Db
- * @subpackage Adapter
+ * @subpackage Sql
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Db\Adapter;
+namespace Zend\Db\Sql;
+
+use Zend\Db\Adapter\Adapter,
+Zend\Db\Adapter\Driver\StatementInterface,
+Zend\Db\Adapter\Platform\PlatformInterface,
+Zend\Db\Adapter\Platform\Sql92;
 
 /**
  * @category   Zend
  * @package    Zend_Db
- * @subpackage Adapter
+ * @subpackage Sql
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface ParameterContainerInterface extends \ArrayAccess, \Countable, \Traversable
+class Having extends Predicate\Predicate
 {
-    const POSITION_APPEND = null;
 
-    const TYPE_AUTO    = 'auto';
-    const TYPE_NULL    = 'null';
-    const TYPE_DOUBLE  = 'double';
-    const TYPE_INTEGER = 'integer';
-    const TYPE_STRING  = 'string';
-    const TYPE_LOB     = 'lob';
-
-    public function setFromArray(array $data);
-    public function merge(array $data);
-    
-    public function offsetSetErrata($nameOrPosition, $errata);
-    public function offsetGetErrata($nameOrPosition);
-    public function offsetHasErrata($nameOrPosition);
-    public function offsetUnsetErrata($nameOrPosition);
-    public function getErrataIterator();
-
-    public function toArray();
 }

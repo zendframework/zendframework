@@ -35,7 +35,6 @@ class UpdateTest extends \PHPUnit_Framework_TestCase
     {
         $this->update->table('foo', 'bar');
         $this->assertEquals('foo', $this->readAttribute($this->update, 'table'));
-        $this->assertEquals('bar', $this->readAttribute($this->update, 'schema'));
     }
 
     /**

@@ -35,8 +35,18 @@ class Row extends ArrayObject implements RowObjectInterface
     /**
      * Constructor
      */
-    public function __construct()
+    public function __construct(array $rowData = array())
     {
-        parent::__construct(array(), ArrayObject::ARRAY_AS_PROPS);
+        parent::__construct($rowData, ArrayObject::ARRAY_AS_PROPS);
+    }
+
+    /**
+     * @param array $rowData
+     * @return Row
+     */
+    public function populate(array $rowData)
+    {
+        $this->exchangeArray($rowData);
+        return $this;
     }
 }

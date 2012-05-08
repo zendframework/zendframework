@@ -35,7 +35,6 @@ class DeleteTest extends \PHPUnit_Framework_TestCase
     {
         $this->delete->from('foo', 'bar');
         $this->assertEquals('foo', $this->readAttribute($this->delete, 'table'));
-        $this->assertEquals('bar', $this->readAttribute($this->delete, 'schema'));
     }
 
     /**

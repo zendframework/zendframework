@@ -161,7 +161,7 @@ class Pdo implements DriverInterface
     public function createResult($resource)
     {
         $result = clone $this->resultPrototype;
-        $result->initialize($resource);
+        $result->initialize($resource, $this->connection->getLastGeneratedValue());
         return $result;
     }
 
@@ -187,4 +187,11 @@ class Pdo implements DriverInterface
         }
     }
 
+    /**
+     * @return mixed
+     */
+    public function getLastGeneratedValue()
+    {
+        $this->connection->getLastGeneratedValue();
+    }
 }

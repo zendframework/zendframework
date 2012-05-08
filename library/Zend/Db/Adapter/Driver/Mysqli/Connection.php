@@ -277,12 +277,13 @@ class Connection implements ConnectionInterface
         $resultPrototype = $this->driver->createResult(($resultResource === true) ? $this->resource : $resultResource);
         return $resultPrototype;
     }
+
     /**
      * Get last generated id
      * 
      * @return integer 
      */
-    public function getLastGeneratedId()
+    public function getLastGeneratedValue()
     {
         return $this->resource->insert_id;
     }

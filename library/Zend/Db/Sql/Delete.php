@@ -25,7 +25,6 @@ use Zend\Db\Adapter\Adapter,
     Zend\Db\Adapter\Driver\StatementInterface,
     Zend\Db\Adapter\Platform\PlatformInterface,
     Zend\Db\Adapter\Platform\Sql92,
-    Zend\Db\Adapter\ParameterContainerInterface,
     Zend\Db\Adapter\ParameterContainer;
 
 /**
@@ -60,11 +59,6 @@ class Delete extends AbstractSql implements SqlInterface, PreparableSqlInterface
     protected $table = '';
 
     /**
-     * @var null|string
-     */
-    protected $schema = null;
-
-    /**
      * @var bool
      */
     protected $emptyWhereProtection = true;
@@ -86,10 +80,10 @@ class Delete extends AbstractSql implements SqlInterface, PreparableSqlInterface
      * @param  null|string $schema
      * @return void
      */
-    public function __construct($table = null, $schema = null)
+    public function __construct($table = null)
     {
         if ($table) {
-            $this->from($table, $schema);
+            $this->from($table);
         }
         $this->where = new Where();
     }
@@ -101,12 +95,9 @@ class Delete extends AbstractSql implements SqlInterface, PreparableSqlInterface
      * @param  null|string $schema
      * @return Delete
      */
-    public function from($table, $schema = null)
+    public function from($table)
     {
         $this->table = $table;
-        if ($schema) {
-            $this->schema = $schema;
-        }
         return $this;
     }
 
@@ -155,17 +146,17 @@ class Delete extends AbstractSql implements SqlInterface, PreparableSqlInterface
         $platform = $adapter->getPlatform();
         $parameterContainer = $statement->getParameterContainer();
 
-        if (!$parameterContainer instanceof ParameterContainerInterface) {
+        if (!$parameterContainer instanceof ParameterContainer) {
             $parameterContainer = new ParameterContainer();
             $statement->setParameterContainer($parameterContainer);
         }
 
         $table = $platform->quoteIdentifier($this->table);
-        if ($this->schema != '') {
-            $table = $platform->quoteIdentifier($this->schema)
-                . $platform->getIdentifierSeparator()
-                . $table;
-        }
+//        if ($this->schema != '') {
+//            $table = $platform->quoteIdentifier($this->schema)
+//                . $platform->getIdentifierSeparator()
+//                . $table;
+//        }
 
         $sql = sprintf($this->specifications[self::SPECIFICATION_DELETE], $table);
 
@@ -185,22 +176,22 @@ class Delete extends AbstractSql implements SqlInterface, PreparableSqlInterface
      *
      * Platform defaults to Sql92 if none provided
      * 
-     * @param  null|PlatformInterface $platform 
+     * @param  null|PlatformInterface $adapterPlatform
      * @return string
      */
-    public function getSqlString(PlatformInterface $platform = null)
+    public function getSqlString(PlatformInterface $adapterPlatform = null)
     {
-        $platform = ($platform) ?: new Sql92;
-        $table = $platform->quoteIdentifier($this->table);
+        $adapterPlatform = ($adapterPlatform) ?: new Sql92;
+        $table = $adapterPlatform->quoteIdentifier($this->table);
 
-        if ($this->schema != '') {
-            $table = $platform->quoteIdentifier($this->schema) . $platform->getIdentifierSeparator() . $table;
-        }
+//        if ($this->schema != '') {
+//            $table = $platform->quoteIdentifier($this->schema) . $platform->getIdentifierSeparator() . $table;
+//        }
 
         $sql = sprintf($this->specifications[self::SPECIFICATION_DELETE], $table);
 
         if ($this->where->count() > 0) {
-            $whereParts = $this->processExpression($this->where, $platform, null, 'where');
+            $whereParts = $this->processExpression($this->where, $adapterPlatform, null, 'where');
             $sql .= ' ' . sprintf($this->specifications[self::SPECIFICATION_WHERE], $whereParts['sql']);
         }
 

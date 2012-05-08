@@ -639,6 +639,8 @@ class FormatTest extends \PHPUnit_Framework_TestCase
      */
     public function testIsDate()
     {
+        $this->markTestIncomplete('See https://github.com/zendframework/zf2/pull/1149 for details');
+
         $this->assertTrue( Format::checkDateFormat('13.Nov.2006', array('locale' => 'de_AT')));
         $this->assertFalse(Format::checkDateFormat('13.XXX.2006', array('locale' => 'ar_EG')));
         $this->assertFalse(Format::checkDateFormat('nodate'));

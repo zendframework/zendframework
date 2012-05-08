@@ -220,6 +220,8 @@ class LocaleTest extends \PHPUnit_Framework_TestCase
      */
     public function testgetLanguageTranslationList()
     {
+        $this->markTestIncomplete('See https://github.com/zendframework/zf2/pull/1149 for details');
+
         set_error_handler(array($this, 'errorHandlerIgnore'));
         $list = LocaleTestHelper::getTranslationList('language');
         $this->assertTrue(is_array($list));
@@ -234,6 +236,8 @@ class LocaleTest extends \PHPUnit_Framework_TestCase
      */
     public function testgetLanguageTranslation()
     {
+        $this->markTestIncomplete('See https://github.com/zendframework/zf2/pull/1149 for details');
+
         set_error_handler(array($this, 'errorHandlerIgnore'));
         $this->assertEquals('Deutsch', LocaleTestHelper::getTranslation('de', 'language', 'de_AT'));
         $this->assertEquals('German',  LocaleTestHelper::getTranslation('de', 'language', 'en'));
@@ -248,6 +252,8 @@ class LocaleTest extends \PHPUnit_Framework_TestCase
      */
     public function testgetScriptTranslationList()
     {
+        $this->markTestIncomplete('See https://github.com/zendframework/zf2/pull/1149 for details');
+
         set_error_handler(array($this, 'errorHandlerIgnore'));
         $list = LocaleTestHelper::getTranslationList('script');
         $this->assertTrue(is_array($list));
@@ -263,6 +269,8 @@ class LocaleTest extends \PHPUnit_Framework_TestCase
      */
     public function testgetScriptTranslation()
     {
+        $this->markTestIncomplete('See https://github.com/zendframework/zf2/pull/1149 for details');
+
         set_error_handler(array($this, 'errorHandlerIgnore'));
         $this->assertEquals('Arabisch', LocaleTestHelper::getTranslation('Arab', 'script', 'de_AT'));
         $this->assertEquals('Arabic', LocaleTestHelper::getTranslation('Arab', 'script', 'en'));
@@ -276,6 +284,8 @@ class LocaleTest extends \PHPUnit_Framework_TestCase
      */
     public function testgetCountryTranslationList()
     {
+        $this->markTestIncomplete('See https://github.com/zendframework/zf2/pull/1149 for details');
+
         set_error_handler(array($this, 'errorHandlerIgnore'));
         $list = LocaleTestHelper::getTranslationList('territory');
         $this->assertTrue(is_array($list));
@@ -291,6 +301,8 @@ class LocaleTest extends \PHPUnit_Framework_TestCase
      */
     public function testgetCountryTranslation()
     {
+        $this->markTestIncomplete('See https://github.com/zendframework/zf2/pull/1149 for details');
+
         set_error_handler(array($this, 'errorHandlerIgnore'));
         $this->assertEquals('Deutschland', LocaleTestHelper::getTranslation('DE', 'country', 'de_DE'));
         $this->assertEquals('Germany', LocaleTestHelper::getTranslation('DE', 'country', 'en'));
@@ -304,6 +316,8 @@ class LocaleTest extends \PHPUnit_Framework_TestCase
      */
     public function testgetTerritoryTranslationList()
     {
+        $this->markTestIncomplete('See https://github.com/zendframework/zf2/pull/1149 for details');
+
         set_error_handler(array($this, 'errorHandlerIgnore'));
         $list = LocaleTestHelper::getTranslationList('territory');
         $this->assertTrue(is_array($list));
@@ -319,6 +333,8 @@ class LocaleTest extends \PHPUnit_Framework_TestCase
      */
     public function testgetTerritoryTranslation()
     {
+        $this->markTestIncomplete('See https://github.com/zendframework/zf2/pull/1149 for details');
+
         set_error_handler(array($this, 'errorHandlerIgnore'));
         $this->assertEquals('Afrika', LocaleTestHelper::getTranslation('002', 'territory', 'de_AT'));
         $this->assertEquals('Africa', LocaleTestHelper::getTranslation('002', 'territory', 'en'));
@@ -333,6 +349,8 @@ class LocaleTest extends \PHPUnit_Framework_TestCase
      */
     public function testgetTranslation()
     {
+        $this->markTestIncomplete('See https://github.com/zendframework/zf2/pull/1149 for details');
+
         try {
             $temp = LocaleTestHelper::getTranslation('xx');
             $this->fail();
@@ -423,6 +441,8 @@ class LocaleTest extends \PHPUnit_Framework_TestCase
      */
     public function testgetTranslationList()
     {
+        $this->markTestIncomplete('See https://github.com/zendframework/zf2/pull/1149 for details');
+
         try {
             $temp = LocaleTestHelper::getTranslationList();
             $this->fail();
@@ -768,6 +788,8 @@ class LocaleTest extends \PHPUnit_Framework_TestCase
      */
     public function testFailedLocaleOnPreTranslations()
     {
+        $this->markTestIncomplete('See https://github.com/zendframework/zf2/pull/1149 for details');
+
         $this->assertEquals('Andorra', LocaleTestHelper::getTranslation('AD', 'country', 'gl_GL'));
     }
 

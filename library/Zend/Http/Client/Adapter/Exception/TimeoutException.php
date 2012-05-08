@@ -29,7 +29,7 @@ namespace Zend\Http\Client\Adapter\Exception;
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class TimeoutException
-    extends \RuntimeException
+    extends RuntimeException
     implements ExceptionInterface
 {
     const READ_TIMEOUT = 1000;

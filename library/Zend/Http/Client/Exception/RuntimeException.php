@@ -21,6 +21,8 @@
 
 namespace Zend\Http\Client\Exception;
 
+use Zend\Http\Exception;
+
 /**
  *
  * @category  Zend
@@ -29,6 +31,6 @@ namespace Zend\Http\Client\Exception;
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class RuntimeException
-    extends \RuntimeException
+    extends Exception\RuntimeException
     implements ExceptionInterface
 {}

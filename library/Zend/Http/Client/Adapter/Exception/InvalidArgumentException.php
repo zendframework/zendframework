@@ -21,6 +21,8 @@
 
 namespace Zend\Http\Client\Adapter\Exception;
 
+use Zend\Http\Client\Exception;
+
 /**
  *
  * @category  Zend
@@ -29,6 +31,6 @@ namespace Zend\Http\Client\Adapter\Exception;
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class InvalidArgumentException
-    extends \InvalidArgumentException
+    extends Exception\InvalidArgumentException
     implements ExceptionInterface
 {}

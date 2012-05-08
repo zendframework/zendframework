@@ -119,7 +119,7 @@ class Test implements HttpAdapter
      * @param int     $port
      * @param boolean $secure
      * @param int     $timeout
-     * @throws \Zend\Http\Client\Adapter\Exception
+     * @throws AdapterException\RuntimeException
      */
     public function connect($host, $port = 80, $secure = false)
     {

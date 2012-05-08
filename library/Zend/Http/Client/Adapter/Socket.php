@@ -135,7 +135,7 @@ class Socket implements HttpAdapter, StreamInterface
      * @since  Zend Framework 1.9
      *
      * @param  mixed $context Stream context or array of context options
-     * @return \Zend\Http\Client\Adapter\Socket
+     * @return Socket
      */
     public function setStreamContext($context)
     {
@@ -177,6 +177,7 @@ class Socket implements HttpAdapter, StreamInterface
      * @param string  $host
      * @param int     $port
      * @param boolean $secure
+     * @throws AdapterException\RuntimeException
      */
     public function connect($host, $port = 80, $secure = false)
     {

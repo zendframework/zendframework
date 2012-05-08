@@ -21,8 +21,6 @@
 
 namespace Zend\Captcha;
 
-use Zend\View\Renderer\RendererInterface as Renderer;
-
 /**
  * Example dumb word-based captcha
  *
@@ -41,7 +39,7 @@ class Dumb extends Word
      * CAPTCHA label
      * @type string
      */
-    protected $_label = 'Please type this word backwards';
+    protected $label = 'Please type this word backwards';
 
     /**
      * Set the label for the CAPTCHA
@@ -49,7 +47,7 @@ class Dumb extends Word
      */
     public function setLabel($label)
     {
-        $this->_label = $label;
+        $this->label = $label;
     }
 
     /**
@@ -58,21 +56,7 @@ class Dumb extends Word
      */
     public function getLabel()
     {
-        return $this->_label;
-    }
-
-    /**
-     * Render the captcha
-     *
-     * @param  Renderer $view
-     * @param  mixed $element
-     * @return string
-     */
-    public function render(Renderer $view = null, $element = null)
-    {
-        return $this->getLabel() . ': <b>'
-             . strrev($this->getWord())
-             . '</b>';
+        return $this->label;
     }
 
     /**

@@ -26,7 +26,6 @@ use Zend\Captcha\Exception;
 use Zend\Loader\Pluggable;
 use Zend\Stdlib\ErrorException;
 use Zend\Stdlib\ErrorHandler;
-use Zend\View\Renderer\RendererInterface as Renderer;
 
 /**
  * Image-based captcha element
@@ -627,30 +626,6 @@ class Image extends Word
             }
         }
     }
-
-    /**
-     * Display the captcha
-     *
-     * @param Renderer $view
-     * @param mixed $element
-     * @return string
-    public function render(Renderer $view = null, $element = null)
-    {
-        $endTag = ' />';
-        if ($view instanceof Pluggable) {
-            $doctype = $view->plugin('doctype');
-            if ($doctype && !$doctype->isXhtml()) {
-                $endTag = '>';
-            }
-        }
-
-        return '<img width="' . $this->getWidth() 
-            . '" height="' . $this->getHeight() 
-            . '" alt="' . $this->getImgAlt()
-            . '" src="' . $this->getImgUrl() . $this->getId() . $this->getSuffix() . '"' 
-            . $endTag;
-    }
-     */
 
     /**
      * Get helper name used to render captcha

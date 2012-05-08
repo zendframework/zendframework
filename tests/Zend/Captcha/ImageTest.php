@@ -35,7 +35,7 @@ use Zend\View\Renderer\PhpRenderer as View;
  */
 class ImageTest extends \PHPUnit_Framework_TestCase
 {
-    protected $_tmpDir;
+    protected $tmpDir;
 
     /**
      * Sets up the fixture, for example, open a network connection.
@@ -60,8 +60,8 @@ class ImageTest extends \PHPUnit_Framework_TestCase
             unset($this->word);
         }
         
-        $this->testDir = $this->_getTmpDir() . '/ZF_test_images';
-        if(!is_dir($this->testDir)) {
+        $this->testDir = $this->getTmpDir() . '/ZF_test_images';
+        if (!is_dir($this->testDir)) {
             @mkdir($this->testDir);
         }
 
@@ -94,12 +94,12 @@ class ImageTest extends \PHPUnit_Framework_TestCase
      * @return string
      * @throws Zend_File_Transfer_Exception if unable to determine directory
      */
-    protected function _getTmpDir()
+    protected function getTmpDir()
     {
-        if (null === $this->_tmpDir) {
-            $this->_tmpDir = sys_get_temp_dir();
+        if (null === $this->tmpDir) {
+            $this->tmpDir = sys_get_temp_dir();
         }
-        return $this->_tmpDir;
+        return $this->tmpDir;
     }
 
     public function testCaptchaSetSuffix()

@@ -21,7 +21,6 @@
 
 namespace Zend\Captcha;
 
-use Zend\View\Renderer\RendererInterface as Renderer;
 use Zend\Text\Figlet\Figlet as FigletManager;
 
 /**
@@ -75,20 +74,6 @@ class Figlet extends Word
     {
         $this->useNumbers = false;
         return parent::generate();
-    }
-
-    /**
-     * Display the captcha
-     *
-     * @param Renderer $view
-     * @param mixed $element
-     * @return string
-     */
-    public function render(Renderer $view = null, $element = null)
-    {
-        return '<pre>'
-             . $this->figlet->render($this->getWord())
-             . "</pre>\n";
     }
 
     /**

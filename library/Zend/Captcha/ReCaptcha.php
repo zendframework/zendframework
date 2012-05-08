@@ -24,7 +24,6 @@ namespace Zend\Captcha;
 use Traversable;
 use Zend\Form\Element;
 use Zend\Service\ReCaptcha\ReCaptcha as ReCaptchaService;
-use Zend\View\Renderer\RendererInterface as Renderer;
 
 /**
  * ReCaptcha adapter
@@ -248,23 +247,6 @@ class ReCaptcha extends AbstractAdapter
 
         return true;
     }
-
-    /**
-     * Render captcha
-     *
-     * @param  Renderer $view
-     * @param  mixed $element
-     * @return string
-    public function render(Renderer $view = null, $element = null)
-    {
-        $name = null;
-        if ($element instanceof Element) {
-            $name = $element->getBelongsTo();
-        }
-
-        return $this->getService()->getHTML($name);
-    }
-     */
 
     /**
      * Get helper name used to render captcha

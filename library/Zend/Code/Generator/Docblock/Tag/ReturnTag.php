@@ -41,7 +41,7 @@ class ReturnTag extends \Zend\Code\Generator\Docblock\Tag
      * @param \Zend\Code\Reflection\ReflectionDocblockTag $reflectionTagReturn
      * @return \Zend\Code\Generator\DocBlock\Tag\ReturnTag
      */
-    public static function fromReflection(\Zend\Code\Reflection\ReflectionDocblockTag $reflectionTagReturn)
+    public static function fromReflection(\Zend\Code\Reflection\DocBlock\TagInterface $reflectionTagReturn)
     {
         $returnTag = new self();
 

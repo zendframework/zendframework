@@ -13,13 +13,14 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_CodeGenerator
+ * @package    Zend_Code_Generator
  * @subpackage PHP
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace Zend\Code\Generator;
+
 use Zend\Code\Generator,
     Zend\Code\Generator\Exception;
 
@@ -28,7 +29,7 @@ use Zend\Code\Generator,
  * @uses       \Zend\Code\GeneratorDocblock
  * @uses       \Zend\Code\Generator\Exception
  * @category   Zend
- * @package    Zend_CodeGenerator
+ * @package    Zend_Code_Generator
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -108,7 +109,9 @@ abstract class AbstractMemberGenerator extends AbstractGenerator
         if (is_string($docblock)) {
             $docblock = new DocblockGenerator($docblock);
         } elseif (!$docblock instanceof DocblockGenerator) {
-            throw new Exception\InvalidArgumentException('setDocblock() is expecting either a string, array or an instance of Zend_CodeGenerator_Php_Docblock');
+            throw new Exception\InvalidArgumentException(
+                'setDocblock() is expecting either a string, array or an instance of Zend\Code\Generator\DocblockGenerator'
+            );
         }
 
         $this->docblock = $docblock;

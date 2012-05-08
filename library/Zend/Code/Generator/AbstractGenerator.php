@@ -13,20 +13,21 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_CodeGenerator
+ * @package    Zend_Code_Generator
  * @subpackage PHP
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace Zend\Code\Generator;
+
 use Zend\Code\Generator
     /* Zend\Config */
     ;
 
 /**
  * @category   Zend
- * @package    Zend_CodeGenerator
+ * @package    Zend_Code_Generator
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -144,7 +145,7 @@ abstract class AbstractGenerator implements Generator
 //     * setConfig()
 //     *
 //     * @param \Zend\Config\Config $config
-//     * @return \Zend\CodeGenerator\AbstractCodeGenerator
+//     * @return self
 //     */
 //    public function setConfig(Config\Config $config)
 //    {
@@ -156,7 +157,7 @@ abstract class AbstractGenerator implements Generator
 //     * setOptions()
 //     *
 //     * @param array $options
-//     * @return \Zend\CodeGenerator\AbstractCodeGenerator
+//     * @return self
 //     */
 //    public function setOptions(Array $options)
 //    {

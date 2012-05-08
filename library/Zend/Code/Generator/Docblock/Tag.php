@@ -21,7 +21,7 @@
 
 namespace Zend\Code\Generator\Docblock;
 
-use Zend\Code\Reflection\Docblock\Tag as ReflectionDocblockTag,
+use Zend\Code\Reflection\Docblock\TagInterface as ReflectionDocblockTag,
     Zend\Code\Generator\AbstractGenerator;
 
 /**

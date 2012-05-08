@@ -74,7 +74,7 @@ class ImageTest extends CommonTestCase
      */
     public function tearDown()
     {
-        // remove chaptcha images
+        // remove captcha images
         foreach (new DirectoryIterator($this->testDir) as $file) {
             if (!$file->isDot() && !$file->isDir()) {
                 unlink($file->getPathname());

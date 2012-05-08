@@ -23,15 +23,7 @@ namespace Zend\Http;
 use ArrayIterator,
     Zend\Config\Config,
     Zend\Uri\Http,
-    Zend\Http\Header\Cookie,
-    Zend\Http\Header\SetCookie,
-    Zend\Http\Request as HttpRequest,
-    Zend\Http\Response as HttpResponse,
-    Zend\Http\Response\Stream as HttpResponseStream,
-    Zend\Stdlib\Parameters,
-    Zend\Stdlib\DispatchableInterface as Dispatchable,
-    Zend\Stdlib\RequestInterface as Request,
-    Zend\Stdlib\ResponseInterface as Response;
+    Zend\Stdlib;
 
 /**
  * Http client
@@ -41,7 +33,7 @@ use ArrayIterator,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Client implements Dispatchable
+class Client implements Stdlib\DispatchableInterface
 {
     /**
      * @const string Supported HTTP Authentication methods
@@ -126,7 +118,7 @@ class Client implements Dispatchable
         'useragent'       => 'Zend\Http\Client',
         'timeout'         => 10,
         'adapter'         => 'Zend\Http\Client\Adapter\Socket',
-        'httpversion'     => HttpRequest::VERSION_11,
+        'httpversion'     => Request::VERSION_11,
         'storeresponse'   => true,
         'keepalive'       => false,
         'outputstream'    => false,
@@ -249,7 +241,7 @@ class Client implements Dispatchable
     public function getRequest()
     {
         if (empty($this->request)) {
-            $this->request = new HttpRequest();
+            $this->request = new Request();
         }
         return $this->request;
     }
@@ -274,7 +266,7 @@ class Client implements Dispatchable
     public function getResponse()
     {
         if (empty($this->response)) {
-            $this->response = new HttpResponse();
+            $this->response = new Response();
         }
         return $this->response;
     }
@@ -354,8 +346,8 @@ class Client implements Dispatchable
     {
         $method = $this->getRequest()->setMethod($method)->getMethod();
 
-        if (($method == HttpRequest::METHOD_POST || $method == HttpRequest::METHOD_PUT ||
-             $method == HttpRequest::METHOD_DELETE || $method == HttpRequest::METHOD_PATCH)
+        if (($method == Request::METHOD_POST || $method == Request::METHOD_PUT ||
+             $method == Request::METHOD_DELETE || $method == Request::METHOD_PATCH)
              && empty($this->encType)) {
             $this->setEncType(self::ENC_URLENCODED);
         }
@@ -395,7 +387,7 @@ class Client implements Dispatchable
     /**
      * Get the encoding type
      *
-     * @return type
+     * @return string
      */
     public function getEncType()
     {
@@ -451,12 +443,12 @@ class Client implements Dispatchable
     /**
      * Get the cookie Id (name+domain+path)
      *
-     * @param  SetCookie|Cookie $cookie
+     * @param  Header\SetCookie|Header\Cookie $cookie
      * @return string|boolean
      */
     protected function getCookieId($cookie)
     {
-        if (($cookie instanceof SetCookie) || ($cookie instanceof Cookie)) {
+        if (($cookie instanceof Header\SetCookie) || ($cookie instanceof Header\Cookie)) {
             return $cookie->getName() . $cookie->getDomain() . $cookie->getPath();
         }
         return false;
@@ -465,7 +457,7 @@ class Client implements Dispatchable
     /**
      * Add a cookie
      *
-     * @param array|ArrayIterator|SetCookie|string $cookie
+     * @param array|ArrayIterator|Header\SetCookie|string $cookie
      * @param string  $value
      * @param string  $version
      * @param string  $maxAge
@@ -480,16 +472,16 @@ class Client implements Dispatchable
     {
         if (is_array($cookie) || $cookie instanceof ArrayIterator) {
             foreach ($cookie as $setCookie) {
-                if ($setCookie instanceof SetCookie) {
+                if ($setCookie instanceof Header\SetCookie) {
                     $this->cookies[$this->getCookieId($setCookie)] = $setCookie;
                 } else {
                     throw new Exception\InvalidArgumentException('The cookie parameter is not a valid Set-Cookie type');
                 }
             }
-        } elseif ($cookie instanceof SetCookie) {
+        } elseif ($cookie instanceof Header\SetCookie) {
             $this->cookies[$this->getCookieId($cookie)] = $cookie;
         } elseif (is_string($cookie) && $value !== null) {
-            $setCookie = new SetCookie($cookie, $value, $version, $maxAge, $domain, $expire, $path, $secure, $httponly);
+            $setCookie = new Header\SetCookie($cookie, $value, $version, $maxAge, $domain, $expire, $path, $secure, $httponly);
             $this->cookies[$this->getCookieId($setCookie)] = $setCookie;
         } else {
             throw new Exception\InvalidArgumentException('Invalid parameter type passed as Cookie');
@@ -736,11 +728,11 @@ class Client implements Dispatchable
     /**
      * Dispatch
      *
-     * @param Request $request
-     * @param Response $response
-     * @return Response
+     * @param Stdlib\RequestInterface $request
+     * @param Stdlib\ResponseInterface $response
+     * @return Stdlib\ResponseInterface
      */
-    public function dispatch(Request $request, Response $response = null)
+    public function dispatch(Stdlib\RequestInterface $request, Stdlib\ResponseInterface $response = null)
     {
         $response = $this->send($request);
         return $response;
@@ -850,14 +842,14 @@ class Client implements Dispatchable
                 }
                 // cleanup the adapter
                 $this->adapter->setOutputStream(null);
-                $response = HttpResponseStream::fromStream($response, $stream);
+                $response = Response\Stream::fromStream($response, $stream);
                 $response->setStreamName($this->streamName);
                 if (!is_string($this->config['outputstream'])) {
                     // we used temp name, will need to clean up
                     $response->setCleanup(true);
                 }
             } else {
-                $response = HttpResponse::fromString($response);
+                $response = Response::fromString($response);
             }
 
             // Get the cookies from response (if any)
@@ -880,7 +872,7 @@ class Client implements Dispatchable
                        $response->getStatusCode() == 301))) {
 
                     $this->resetParameters();
-                    $this->setMethod(HttpRequest::METHOD_GET);
+                    $this->setMethod(Request::METHOD_GET);
                 }
 
                 // If we got a well formed absolute URI
@@ -984,7 +976,7 @@ class Client implements Dispatchable
      * @param   string $uri
      * @param   string $domain
      * @param   boolean $secure
-     * @return  Cookie|boolean
+     * @return  Header\Cookie|boolean
      */
     protected function prepareCookies($domain, $path, $secure)
     {
@@ -1004,7 +996,7 @@ class Client implements Dispatchable
             }
         }
 
-        $cookies = Cookie::fromSetCookieArray($validCookies);
+        $cookies = Header\Cookie::fromSetCookieArray($validCookies);
         $cookies->setEncodeValue($this->config['encodecookies']);
 
         return $cookies;
@@ -1020,7 +1012,7 @@ class Client implements Dispatchable
         $headers = array();
 
         // Set the host header
-        if ($this->config['httpversion'] == HttpRequest::VERSION_11) {
+        if ($this->config['httpversion'] == Request::VERSION_11) {
             $host = $uri->getHost();
             // If the port is not default, add it
             if (!(($uri->getScheme() == 'http' && $uri->getPort() == 80) ||

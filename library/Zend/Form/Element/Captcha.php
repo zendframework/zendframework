@@ -1,0 +1,84 @@
+<?php
+/**
+ * Zend Framework
+ *
+ * LICENSE
+ *
+ * This source file is subject to the new BSD license that is bundled
+ * with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://framework.zend.com/license/new-bsd
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@zend.com so we can send you a copy immediately.
+ *
+ * @category   Zend
+ * @package    Zend_Form
+ * @subpackage Element
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
+
+namespace Zend\Form\Element;
+
+use Zend\Captcha as ZendCaptcha;
+use Zend\Form\Element;
+
+/**
+ * @category   Zend
+ * @package    Zend_Form
+ * @subpackage Element
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
+class Captcha extends Element
+{
+    /**
+     * Set a single element attribute
+     * 
+     * @param  string $key 
+     * @param  mixed $value 
+     * @return Element
+     */
+    public function setAttribute($key, $value)
+    {
+        if ('captcha' == strtolower($key)) {
+            $this->setCaptcha($value);
+            return $this;
+        }
+        return parent::setAttribute($key, $value);
+    }
+
+    /**
+     * Set captcha
+     * 
+     * @param  array|ZendCaptcha\AdapterInterface $captcha 
+     * @return Captcha
+     */
+    public function setCaptcha($captcha)
+    {
+        if (is_array($captcha) || $captcha instanceof Traversable) {
+            $captcha = ZendCaptcha\Factory::factory($captcha);
+        }
+
+        if (!$captcha instanceof ZendCaptcha\AdapterInterface) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                '%s expects either a Zend\Captcha\AdapterInterface or specification to pass to Zend\Captcha\Factory; received "%s"',
+                __METHOD__,
+                (is_object($captcha) ? get_class($captcha) : gettype($captcha))
+            ));
+        }
+        $this->attributes['captcha'] = $captcha;
+        return $this;
+    }
+
+    /**
+     * Retrieve captcha (if any)
+     * 
+     * @return null|ZendCaptcha\AdapterInterface
+     */
+    public function getCaptcha()
+    {
+        return $this->getAttribute('captcha');
+    }
+}

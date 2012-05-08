@@ -31,14 +31,14 @@ class UseCaseTest extends \PHPUnit_Framework_TestCase
     /**
      * Common HTTP client
      *
-     * @var Zend_Http_Client
+     * @var \Zend\Http\Client
      */
     protected $client = null;
 
     /**
      * Common HTTP client adapter
      *
-     * @var Zend_Http_Client_Adapter_Interface
+     * @var \Zend\Http\Client\Adapter\AdapterInterface
      */
     protected $adapter = null;
 

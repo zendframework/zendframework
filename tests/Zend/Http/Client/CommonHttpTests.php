@@ -69,7 +69,7 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
     /**
      * Common HTTP client adapter
      *
-     * @var \Zend\Http\Client\Adapter
+     * @var \Zend\Http\Client\Adapter\AdapterInterface
      */
     protected $_adapter = null;
 

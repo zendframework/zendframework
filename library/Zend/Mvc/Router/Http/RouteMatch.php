@@ -45,7 +45,6 @@ class RouteMatch extends BaseRouteMatch
      *
      * @param  array   $params
      * @param  integer $length
-     * @return void
      */
     public function __construct(array $params, $length = 0)
     {

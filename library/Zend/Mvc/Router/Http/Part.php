@@ -67,7 +67,6 @@ class Part extends TreeRouteStack implements RouteInterface
      * @param  boolean     $mayTerminate
      * @param  RouteBroker $routeBroker
      * @param  array|null  $childRoutes
-     * @return void
      */
     public function __construct($route, $mayTerminate, RouteBroker $routeBroker, array $childRoutes = null)
     {

@@ -58,7 +58,6 @@ class TreeRouteStack extends SimpleRouteStack
      * init(): defined by SimpleRouteStack.
      *
      * @see    SimpleRouteStack::init()
-     * @return void
      */
     protected function init()
     {

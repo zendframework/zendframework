@@ -26,7 +26,6 @@ class Bootstrap implements BootstrapInterface, EventManagerAwareInterface, Event
      * Constructor
      *
      * @param Config $config
-     * @return void
      */
     public function __construct(Config $config)
     {

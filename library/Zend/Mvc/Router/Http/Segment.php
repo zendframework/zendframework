@@ -78,7 +78,6 @@ class Segment implements RouteInterface
      * @param  string $route
      * @param  array  $constraints
      * @param  array  $defaults
-     * @return void
      */
     public function __construct($route, array $constraints = array(), array $defaults = array())
     {

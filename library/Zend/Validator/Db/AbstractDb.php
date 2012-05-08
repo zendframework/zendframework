@@ -169,13 +169,6 @@ abstract class AbstractDb extends AbstractValidator
      */
     public function getAdapter()
     {
-        /*
-         * Check for an adapter being defined. If not, throw an exception.
-         */
-        if (null === $this->_adapter) {
-            throw new Exception\RuntimeException('No database adapter present');
-        }
-
         return $this->_adapter;
     }
 

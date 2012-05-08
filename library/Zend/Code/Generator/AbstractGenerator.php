@@ -21,9 +21,8 @@
 
 namespace Zend\Code\Generator;
 
-use Zend\Code\Generator
-    /* Zend\Config */
-    ;
+use Traversable;
+use Zend\Code\Generator;
 
 /**
  * @category   Zend
@@ -120,54 +119,29 @@ abstract class AbstractGenerator implements Generator
         return $this->sourceContent;
     }
 
-//    /**
-//     * __construct()
-//     *
-//     * @param array $options
-//     */
-//    public function __construct($options = array())
-//    {
-//        $this->_init();
-//        if ($options != null) {
-//            // use Zend_Config objects if provided
-//            if ($options instanceof Config\Config) {
-//                $options = $options->toArray();
-//            }
-//            // pass arrays to setOptions
-//            if (is_array($options)) {
-//                $this->setOptions($options);
-//            }
-//        }
-//        $this->_prepare();
-//    }
-//
-//    /**
-//     * setConfig()
-//     *
-//     * @param \Zend\Config\Config $config
-//     * @return self
-//     */
-//    public function setConfig(Config\Config $config)
-//    {
-//        $this->setOptions($config->toArray());
-//        return $this;
-//    }
-//
-//    /**
-//     * setOptions()
-//     *
-//     * @param array $options
-//     * @return self
-//     */
-//    public function setOptions(Array $options)
-//    {
-//        foreach ($options as $optionName => $optionValue) {
-//            $methodName = 'set' . $optionName;
-//            if (method_exists($this, $methodName)) {
-//                $this->{$methodName}($optionValue);
-//            }
-//        }
-//        return $this;
-//    }
+    /**
+     * setOptions()
+     *
+     * @param array $options
+     * @return self
+     */
+    public function setOptions($options)
+    {
+        if (!is_array($options) && !$options instanceof Traversable) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                '%s expects an array or Traversable object; received "%s"',
+                __METHOD__,
+                (is_object($options) ? get_class($options) : gettype($options))
+            ));
+        }
 
+        foreach ($options as $optionName => $optionValue) {
+            $methodName = 'set' . $optionName;
+            if (method_exists($this, $methodName)) {
+                $this->{$methodName}($optionValue);
+            }
+        }
+
+        return $this;
+    }
 }

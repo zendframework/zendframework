@@ -71,6 +71,21 @@ class FileGenerator extends AbstractGenerator
     protected $body = null;
 
     /**
+     * Constructor
+     *
+     * Passes $options to {@link setOptions()}.
+     * 
+     * @param  array|\Traversable $options 
+     * @return void
+     */
+    public function __construct($options = null)
+    {
+        if (null !== $options) {
+            $this->setOptions($options);
+        }
+    }
+
+    /**
      * fromReflectedFilePath() - use this if you intend on generating code generation objects based on the same file.
      * This will keep previous changes to the file in tact during the same PHP process
      *
@@ -113,14 +128,14 @@ class FileGenerator extends AbstractGenerator
         $body = $fileReflection->getContents();
 
         foreach ($fileReflection->getClasses() as $class) {
-            /* @var $class \Zend\Code\Reflection\ReflectionClass */
             $phpClass = ClassGenerator::fromReflection($class);
             $phpClass->setContainingFileGenerator($file);
             $file->setClass($phpClass);
-            $classStartLine = $class->getStartLine(true);
-            $classEndLine = $class->getEndLine();
 
-            $bodyLines = explode("\n", $body);
+            $classStartLine = $class->getStartLine(true);
+            $classEndLine   = $class->getEndLine();
+
+            $bodyLines  = explode("\n", $body);
             $bodyReturn = array();
             for ($lineNum = 1; $lineNum <= count($bodyLines); $lineNum++) {
                 if ($lineNum == $classStartLine) {
@@ -151,7 +166,6 @@ class FileGenerator extends AbstractGenerator
         }
 
         if (($fileReflection->getDocComment() != '')) {
-            /* @var $docblock \DocBlockReflection\Code\Reflection\ReflectionDocblock */
             $docblock = $fileReflection->getDocblock();
             $file->setDocblock(DocblockGenerator::fromReflection($docblock));
 
@@ -188,6 +202,10 @@ class FileGenerator extends AbstractGenerator
                     continue;
                 case 'class':
                     $fileGenerator->setClass(($value instanceof ClassGenerator) ?: ClassGenerator::fromArray($value));
+                    continue;
+                case 'requiredFiles':
+                case 'required_files':
+                    $fileGenerator->setRequiredFiles($value);
                     continue;
                 default:
                     if (property_exists($fileGenerator, $name)) {
@@ -368,21 +386,27 @@ class FileGenerator extends AbstractGenerator
     /**
      * setClass()
      *
-     * @param array|ClassGenerator $class
+     * @param  array|string|ClassGenerator $class
      * @return FileGenerator
      */
-    public function setClass(ClassGenerator $class)
+    public function setClass($class)
     {
-        /*if (is_array($class)) {
+        if (is_array($class)) {
+            $class     = ClassGenerator::fromArray($class);
+            $className = $class->getName();
+        }
+
+        if (is_string($class)) {
             $class = new ClassGenerator($class);
-            $className = $class->getName();
-        } elseif ($class instanceof ClassGenerator) {
-            $className = $class->getName();
-        } else {
+        }
+
+        if (!$class instanceof ClassGenerator) {
             throw new Exception\InvalidArgumentException(
                 'setClass() is expecting either a string, array or an instance of Zend\Code\Generator\ClassGenerator'
             );
-        }*/
+        }
+
+        $className = $class->getName();
 
         // @todo check for dup here
         $className = $class->getName();

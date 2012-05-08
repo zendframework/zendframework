@@ -114,7 +114,6 @@ class ParameterContainer implements \Iterator, \ArrayAccess
         $names = array_keys($this->data);
         $this->positions[array_search($name, $names)] = $name;
 
-        $this->errata[$name] = null;
         if ($errata) {
             $this->offsetSetErrata($name, $errata);
         }
@@ -159,11 +158,6 @@ class ParameterContainer implements \Iterator, \ArrayAccess
     {
         if (is_int($name)) {
             $name = $this->positions[$name];
-        } else {
-            $name = $name;
-        }
-        if (!array_key_exists($name, $this->errata)) {
-            throw new \InvalidArgumentException('Data does not exist for this name/position');
         }
         $this->errata[$name] = $errata;
     }
@@ -179,7 +173,7 @@ class ParameterContainer implements \Iterator, \ArrayAccess
         if (is_int($name)) {
             $name = $this->positions[$name];
         }
-        if (!array_key_exists($name, $this->errata)) {
+        if (!array_key_exists($name, $this->data)) {
             throw new \InvalidArgumentException('Data does not exist for this name/position');
         }
         return $this->errata[$name];
@@ -195,9 +189,6 @@ class ParameterContainer implements \Iterator, \ArrayAccess
     {
         if (is_int($name)) {
             $name = $this->positions[$name];
-        }
-        if (!array_key_exists($name, $this->errata)) {
-            throw new \InvalidArgumentException('Data does not exist for this name/position');
         }
         return (isset($this->errata[$name]));
     }

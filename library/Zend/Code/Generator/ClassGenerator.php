@@ -223,6 +223,12 @@ class ClassGenerator extends AbstractGenerator
         if ($properties !== array()) {
             $this->setProperties($properties);
         }
+        if ($extends !== null) {
+            $this->setExtendedClass($extends);
+        }
+        if (is_array($interfaces)) {
+            $this->setImplementedInterfaces($interfaces);
+        }
         if ($methods !== array()) {
             $this->setMethods($methods);
         }
@@ -469,17 +475,22 @@ class ClassGenerator extends AbstractGenerator
     /**
      * setProperty()
      *
-     * @param PropertyGenerator $property
+     * @param  string|PropertyGenerator $property
      * @return ClassGenerator
      */
-    public function setProperty(PropertyGenerator $property)
+    public function setProperty($property)
     {
-        //if (is_string($property)) {
-        //    $property = new PropertyGenerator($property);
-        //} elseif (!$property instanceof PropertyGenerator) {
-        //    throw new Exception\InvalidArgumentException('setProperty() expects either a string or an instance of Zend\Code\Generator\PropertyGenerator');
-        //}
+        if (is_string($property)) {
+            $property = new PropertyGenerator($property);
+        } 
         
+        if (!$property instanceof PropertyGenerator) {
+            throw new Exception\InvalidArgumentException(
+                'setProperty() expects either a string '
+                . 'or an instance of Zend\Code\Generator\PropertyGenerator'
+            );
+        }
+
         $propertyName = $property->getName();
 
         if (isset($this->properties[$propertyName])) {
@@ -544,16 +555,19 @@ class ClassGenerator extends AbstractGenerator
     /**
      * setMethod()
      *
-     * @param array|\MethodGenerator\Code\Generator\PhpMethod $method
-     * @return \ClassGenerator\Code\Generator\PhpClass
+     * @param  string|MethodGenerator $method
+     * @return ClassGenerator
      */
-    public function setMethod(MethodGenerator $method)
+    public function setMethod($method)
     {
-        //if (is_string($method)) {
-        //    $method = new MethodGenerator($method);
-        //} elseif (!$method instanceof MethodGenerator) {
-        //    throw new Exception\InvalidArgumentException('setMethod() expects either a string method name or an instance of Zend\Code\Generator\MethodGenerator');
-        //}
+        if (is_string($method)) {
+            $method = new MethodGenerator($method);
+        } 
+        
+        if (!$method instanceof MethodGenerator) {
+            throw new Exception\InvalidArgumentException('setMethod() expects either a string method name or an instance of Zend\Code\Generator\MethodGenerator');
+        }
+
         $methodName = $method->getName();
 
         if (isset($this->methods[$methodName])) {

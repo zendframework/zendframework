@@ -313,6 +313,8 @@ abstract class AbstractValidator implements ValidatorInterface
             } else {
                 $value = $value->__toString();
             }
+        } else if (is_array($value)) {
+            $value = implode(', ', $value);
         } else {
             $value = (string)$value;
         }

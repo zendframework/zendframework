@@ -304,9 +304,10 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
 
     public function testAddsPrefixPath()
     {
-        Reader\Reader::addPrefixPath('A\\B\\C', '/A/B/C');
+        $path = str_replace('#', DIRECTORY_SEPARATOR, '#A#B#C');
+        Reader\Reader::addPrefixPath('A\\B\\C', $path);
         $prefixPaths = Reader\Reader::getPluginLoader()->getPaths();
-        $this->assertEquals('/A/B/C/', $prefixPaths['A\\B\\C\\'][0]);
+        $this->assertEquals($path . DIRECTORY_SEPARATOR, $prefixPaths['A\\B\\C\\'][0]);
     }
 
     public function testRegistersUserExtension()

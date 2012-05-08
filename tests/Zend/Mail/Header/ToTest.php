@@ -21,8 +21,7 @@
 
 namespace ZendTest\Mail\Header;
 
-use PHPUnit_Framework_TestCase as TestCase,
-    Zend\Mail\Header\To as ToHeader;
+use Zend\Mail\Header;
 
 /**
  * This test is primarily to test that AbstractAddressList headers perform 
@@ -35,11 +34,11 @@ use PHPUnit_Framework_TestCase as TestCase,
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Mail
  */
-class ToTest extends TestCase
+class ToTest extends \PHPUnit_Framework_TestCase
 {
     public function testHeaderFoldingOccursProperly()
     {
-        $header = new ToHeader();
+        $header = new Header\To();
         $list   = $header->getAddressList();
         for ($i = 0; $i < 10; $i++) {
             $list->add(uniqid() . '@zend.com');

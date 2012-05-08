@@ -1,11 +1,24 @@
 <?php
-
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Module
+ */
 namespace Zend\Module;
 
 use Traversable,
-    Zend\EventManager\EventCollection,
+    Zend\EventManager\EventManagerInterface,
     Zend\EventManager\EventManager;
 
+/**
+ * Module manager
+ * 
+ * @category Zend
+ * @package  Zend_Module
+ */
 class Manager implements ModuleHandler
 {
     /**
@@ -14,7 +27,7 @@ class Manager implements ModuleHandler
     protected $loadedModules = array();
 
     /**
-     * @var EventCollection
+     * @var EventManagerInterface
      */
     protected $events;
 
@@ -38,16 +51,16 @@ class Manager implements ModuleHandler
     protected $modulesAreLoaded = false;
 
     /**
-     * __construct
+     * Constructor
      *
-     * @param array|Traversable $modules
-     * @param EventCollection $eventManager
+     * @param  array|Traversable $modules
+     * @param  EventManagerInterface $eventManager
      * @return void
      */
-    public function __construct($modules, EventCollection $eventManager = null)
+    public function __construct($modules, EventManagerInterface $eventManager = null)
     {
         $this->setModules($modules);
-        if ($eventManager instanceof EventCollection) {
+        if ($eventManager instanceof EventManagerInterface) {
             $this->setEventManager($eventManager);
         }
     }
@@ -57,7 +70,7 @@ class Manager implements ModuleHandler
      *
      * @triggers loadModules.pre
      * @triggers loadModules.post
-     * @return Manager
+     * @return   Manager
      */
     public function loadModules()
     {
@@ -80,10 +93,10 @@ class Manager implements ModuleHandler
     /**
      * Load a specific module by name.
      *
-     * @param string $moduleName
+     * @param    string $moduleName
      * @triggers loadModule.resolve
      * @triggers loadModule
-     * @return mixed Module's Module class
+     * @return   mixed Module's Module class
      */
     public function loadModule($moduleName)
     {
@@ -116,7 +129,7 @@ class Manager implements ModuleHandler
     /**
      * Get an array of the loaded modules.
      *
-     * @param bool $loadModules If true, load modules if they're not already
+     * @param  bool $loadModules If true, load modules if they're not already
      * @return array An array of Module objects, keyed by module name
      */
     public function getLoadedModules($loadModules = false)
@@ -130,7 +143,7 @@ class Manager implements ModuleHandler
     /**
      * Get an instance of a module class by the module name 
      * 
-     * @param string $moduleName 
+     * @param  string $moduleName 
      * @return mixed
      */
     public function getModule($moduleName)
@@ -154,7 +167,7 @@ class Manager implements ModuleHandler
     /**
      * Set an array or Traversable of module names that this module manager should load.
      *
-     * @param mixed $modules array or Traversable of module names
+     * @param  mixed $modules array or Traversable of module names
      * @return ModuleHandler
      */
     public function setModules($modules)
@@ -186,7 +199,7 @@ class Manager implements ModuleHandler
     /**
      * Set the module event
      *
-     * @param ModuleEvent $event
+     * @param  ModuleEvent $event
      * @return Manager
      */
     public function setEvent(ModuleEvent $event)
@@ -198,10 +211,10 @@ class Manager implements ModuleHandler
     /**
      * Set the event manager instance used by this module manager.
      *
-     * @param  EventCollection $events
+     * @param  EventManagerInterface $events
      * @return Manager
      */
-    public function setEventManager(EventCollection $events)
+    public function setEventManager(EventManagerInterface $events)
     {
         $events->setIdentifiers(array(__CLASS__, get_class($this)));
         $this->events = $events;
@@ -213,11 +226,11 @@ class Manager implements ModuleHandler
      *
      * Lazy-loads an EventManager instance if none registered.
      *
-     * @return EventCollection
+     * @return EventManagerInterface
      */
     public function events()
     {
-        if (!$this->events instanceof EventCollection) {
+        if (!$this->events instanceof EventManagerInterface) {
             $this->setEventManager(new EventManager());
         }
         return $this->events;

@@ -31,8 +31,6 @@ use Zend\Search\Lucene\Exception\InvalidArgumentException;
  * process() methods invokes a specified actions which may construct FSM output.
  * Actions may be also used to signal, that we have reached Accept State
  *
- * @uses       \Zend\Search\Lucene\Exception\InvalidArgumentException
- * @uses       \Zend\Search\Lucene\FSMAction
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

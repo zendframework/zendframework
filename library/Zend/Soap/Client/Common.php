@@ -24,7 +24,6 @@ namespace Zend\Soap\Client;
 if (extension_loaded('soap')) {
 
 /**
- * @uses       SoapClient
  * @category   Zend
  * @package    Zend_Soap
  * @subpackage Client

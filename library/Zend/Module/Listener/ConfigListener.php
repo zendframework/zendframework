@@ -1,5 +1,12 @@
 <?php
-
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Module
+ */
 namespace Zend\Module\Listener;
 
 use ArrayAccess,
@@ -8,11 +15,19 @@ use ArrayAccess,
     Zend\Config\Factory as ConfigFactory,
     Zend\Module\ModuleEvent,
     Zend\Stdlib\ArrayUtils,
-    Zend\EventManager\EventCollection,
-    Zend\EventManager\ListenerAggregate;
+    Zend\EventManager\EventManagerInterface,
+    Zend\EventManager\ListenerAggregateInterface;
 
-class ConfigListener extends AbstractListener
-    implements ConfigMerger, ListenerAggregate
+/**
+ * Config listener
+ * 
+ * @category   Zend
+ * @package    Zend_Module
+ * @subpackage Listener
+ */
+class ConfigListener extends AbstractListener implements 
+    ConfigMerger, 
+    ListenerAggregateInterface
 {
 	const STATIC_PATH = 'static_path';
 	const GLOB_PATH = 'glob_path';
@@ -71,10 +86,10 @@ class ConfigListener extends AbstractListener
     /**
      * Attach one or more listeners
      *
-     * @param EventCollection $events
+     * @param EventManagerInterface $events
      * @return ConfigListener
      */
-    public function attach(EventCollection $events)
+    public function attach(EventManagerInterface $events)
     {
         $this->listeners[] = $events->attach('loadModule', array($this, 'loadModule'), 1000);
         $this->listeners[] = $events->attach('loadModules.pre', array($this, 'loadModulesPre'), 9000);
@@ -134,10 +149,10 @@ class ConfigListener extends AbstractListener
     /**
      * Detach all previously attached listeners
      *
-     * @param EventCollection $events
+     * @param EventManagerInterface $events
      * @return ConfigListener
      */
-    public function detach(EventCollection $events)
+    public function detach(EventManagerInterface $events)
     {
         foreach ($this->listeners as $key => $listener) {
             $events->detach($listener);

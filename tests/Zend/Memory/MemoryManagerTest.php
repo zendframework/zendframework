@@ -55,7 +55,7 @@ class MemoryManagerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * tests the Memory Manager creation
+     * tests the Memory ManagerInterface creation
      */
     public function testCreation()
     {
@@ -71,7 +71,7 @@ class MemoryManagerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * tests the Memory Manager settings
+     * tests the Memory ManagerInterface settings
      */
     public function testSettings()
     {

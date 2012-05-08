@@ -22,9 +22,9 @@
 namespace Zend\View\Renderer;
 
 use Zend\View\Exception,
-    Zend\View\Model,
-    Zend\View\Renderer,
-    Zend\View\Resolver;
+    Zend\View\Resolver\ResolverInterface as Resolver,
+    Zend\View\Model\ModelInterface as Model,
+    Zend\View\Model\FeedModel;
 
 /**
  * Interface class for Zend_View compatible template engine implementations
@@ -35,7 +35,7 @@ use Zend\View\Exception,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class FeedRenderer implements Renderer
+class FeedRenderer implements RendererInterface
 {
     /**
      * @var Resolver
@@ -66,7 +66,7 @@ class FeedRenderer implements Renderer
      * 
      * @todo   Determine use case for resolvers for feeds
      * @param  Resolver $resolver 
-     * @return Renderer
+     * @return FeedRenderer
      */
     public function setResolver(Resolver $resolver)
     {
@@ -86,7 +86,7 @@ class FeedRenderer implements Renderer
         if ($nameOrModel instanceof Model) {
             // Use case 1: View Model provided
             // Non-FeedModel: cast to FeedModel
-            if (!$nameOrModel instanceof Model\FeedModel) {
+            if (!$nameOrModel instanceof FeedModel) {
                 $vars    = $nameOrModel->getVariables();
                 $options = $nameOrModel->getOptions();
                 $type    = $this->getFeedType();
@@ -95,11 +95,11 @@ class FeedRenderer implements Renderer
                 } else {
                     $this->setFeedType($type);
                 }
-                $nameOrModel = new Model\FeedModel($vars, array('feed_type' => $type));
+                $nameOrModel = new FeedModel($vars, array('feed_type' => $type));
             }
         } elseif (is_string($nameOrModel)) {
             // Use case 2: string $nameOrModel + array|Traversable|Feed $values
-            $nameOrModel = new Model\FeedModel($values, (array) $nameOrModel);
+            $nameOrModel = new FeedModel($values, (array) $nameOrModel);
         } else {
             // Use case 3: failure
             throw new Exception\InvalidArgumentException(sprintf(

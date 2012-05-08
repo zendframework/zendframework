@@ -21,8 +21,6 @@
 
 namespace ZendTest\Soap;
 use Zend\Soap\Wsdl,
-    Zend\Soap\WsdlException,
-    Zend\Soap\Wsdl\Strategy,
     Zend\Soap\Wsdl\ComplexTypeStrategy;
 
 /**

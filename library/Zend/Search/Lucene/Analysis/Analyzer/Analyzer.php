@@ -21,12 +21,11 @@
 
 namespace Zend\Search\Lucene\Analysis\Analyzer;
 
-use Zend\Search\Lucene\Analysis\Analyzer as LuceneAnalyzer;
+use Zend\Search\Lucene\Analysis\Analyzer\AnalyzerInterface as LuceneAnalyzer;
 
 /**
- * Analyzer manager.
+ * AnalyzerInterface manager.
  *
- * @uses       \Zend\Search\Lucene\Analysis\Analyzer
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Analysis
@@ -36,16 +35,16 @@ use Zend\Search\Lucene\Analysis\Analyzer as LuceneAnalyzer;
 class Analyzer
 {
     /**
-     * The Analyzer implementation used by default.
+     * The AnalyzerInterface implementation used by default.
      *
-     * @var \Zend\Search\Lucene\Analysis\Analyzer
+     * @var \Zend\Search\Lucene\Analysis\Analyzer\AnalyzerInterface
      */
     private static $_defaultImpl = null;
 
     /**
-     * Set the default Analyzer implementation used by indexing code.
+     * Set the default AnalyzerInterface implementation used by indexing code.
      *
-     * @param \Zend\Search\Lucene\Analysis\Analyzer $analyzer
+     * @param \Zend\Search\Lucene\Analysis\Analyzer\AnalyzerInterface $analyzer
      */
     public static function setDefault(LuceneAnalyzer $analyzer)
     {
@@ -53,9 +52,9 @@ class Analyzer
     }
 
     /**
-     * Return the default Analyzer implementation used by indexing code.
+     * Return the default AnalyzerInterface implementation used by indexing code.
      *
-     * @return \Zend\Search\Lucene\Analysis\Analyzer
+     * @return \Zend\Search\Lucene\Analysis\Analyzer\AnalyzerInterface
      */
     public static function getDefault()
     {

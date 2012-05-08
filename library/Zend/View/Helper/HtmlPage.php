@@ -22,7 +22,6 @@
 namespace Zend\View\Helper;
 
 /**
- * @uses       \Zend\View\Helper\HtmlObject
  * @category   Zend
  * @package    Zend_View
  * @subpackage Helper

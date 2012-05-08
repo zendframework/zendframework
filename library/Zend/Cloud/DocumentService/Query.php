@@ -11,7 +11,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend\Cloud
+ * @package    Zend_Cloud
  * @subpackage DocumentService
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -22,7 +22,6 @@
  */
 namespace Zend\Cloud\DocumentService;
 
-use Zend\Cloud\DocumentService\QueryAdapter;
 
 /**
  * Generic query object
@@ -31,12 +30,12 @@ use Zend\Cloud\DocumentService\QueryAdapter;
  * describes the clause type, and the next element describes the criteria.
  *
  * @category   Zend
- * @package    Zend\Cloud
+ * @package    Zend_Cloud
  * @subpackage DocumentService
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Query implements QueryAdapter
+class Query implements QueryAdapter\QueryAdapterInterface
 {
     /**
      * Known query types
@@ -112,7 +111,7 @@ class Query implements QueryAdapter
      * @param string $cond Condition
      * @param array $args Arguments to substitute instead of ?'s in condition
      * @param string $op relation to other clauses - and/or
-     * @return Zend\Cloud\DocumentService\Query
+     * @return \Zend\Cloud\DocumentService\Query
      */
     public function where($cond, $value = null, $op = 'and')
     {
@@ -127,7 +126,7 @@ class Query implements QueryAdapter
      * Select record or fields by ID
      *
      * @param  string|int $value Identifier to select by
-     * @return Zend\Cloud\DocumentService\Query
+     * @return \Zend\Cloud\DocumentService\Query
      */
     public function whereId($value)
     {
@@ -142,7 +141,7 @@ class Query implements QueryAdapter
      * LIMIT clause (how many items to return)
      *
      * @param  int $limit
-     * @return Zend\Cloud\DocumentService\Query
+     * @return \Zend\Cloud\DocumentService\Query
      */
     public function limit($limit)
     {
@@ -158,7 +157,7 @@ class Query implements QueryAdapter
      *
      * @param  string|int|array $sort
      * @param  string $direction
-     * @return Zend\Cloud\DocumentService\Query
+     * @return \Zend\Cloud\DocumentService\Query
      */
     public function order($sort, $direction = 'asc')
     {

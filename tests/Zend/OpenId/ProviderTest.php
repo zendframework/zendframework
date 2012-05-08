@@ -623,7 +623,7 @@ class ProviderTest extends \PHPUnit_Framework_TestCase
             $this->assertSame( '3600', $res['expires_in'] );
             $this->assertTrue( $storage->getAssociation($res['assoc_handle'], $macFunc, $secret, $expires) );
             $this->assertSame( 'sha256', $macFunc );
-        } catch (Zend\OpenId\Exception $e) {
+        } catch (\Zend\OpenId\Exception $e) {
             $this->markTestSkipped($e->getMessage());
         }
     }
@@ -737,6 +737,7 @@ class ProviderTest extends \PHPUnit_Framework_TestCase
      */
     public function testRespondToConsumer()
     {
+        $this->expectOutputRegex('/.*/'); // Hide stdout from the component when the test run
         $storage = new Provider\Storage\File(__DIR__."/_files/provider");
         $provider = new ProviderHelper(null, null, $this->_user, $storage);
 
@@ -857,6 +858,7 @@ class ProviderTest extends \PHPUnit_Framework_TestCase
      */
     public function testCheckIdImmediate()
     {
+        $this->expectOutputRegex('/.*/'); // Hide stdout from the component when the test run
         $_SERVER['SCRIPT_URI'] = "http://www.test.com/server.php";
         $storage = new Provider\Storage\File(__DIR__."/_files/provider");
         $provider = new ProviderHelper(null, null, $this->_user, $storage);
@@ -1295,6 +1297,7 @@ class ProviderTest extends \PHPUnit_Framework_TestCase
      */
     public function testCheckIdSetup()
     {
+        $this->expectOutputRegex('/.*/'); // Hide stdout from the component when the test run
         $_SERVER['SCRIPT_URI'] = "http://www.test.com/server.php";
         $storage = new Provider\Storage\File(__DIR__."/_files/provider");
         $provider = new ProviderHelper(null, null, $this->_user, $storage);
@@ -1593,6 +1596,7 @@ class ProviderTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetOpEndpoint()
     {
+        $this->expectOutputRegex('/.*/'); // Hide stdout from the component when the test run
         $storage = new Provider\Storage\File(__DIR__."/_files/provider");
         $provider = new ProviderHelper(null, null, $this->_user, $storage);
         $provider->setOpEndpoint("http://www.test.com/real_endpoint.php");

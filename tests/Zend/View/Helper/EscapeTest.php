@@ -52,7 +52,7 @@ class EscapeTest extends TestCase
 
     public function testSettingInvalidCallbackRaisesException()
     {
-        $this->setExpectedException('Zend\View\Exception');
+        $this->setExpectedException('Zend\View\Exception\ExceptionInterface');
         $this->helper->setCallback(3.1415);
     }
 

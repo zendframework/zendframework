@@ -21,7 +21,7 @@ class ApplicationTest extends TestCase
     {
         $app = new Application();
         $events = $app->events();
-        $this->assertInstanceOf('Zend\EventManager\EventCollection', $events);
+        $this->assertInstanceOf('Zend\EventManager\EventManagerInterface', $events);
         $this->assertInstanceOf('Zend\EventManager\EventManager', $events);
     }
 
@@ -54,7 +54,7 @@ class ApplicationTest extends TestCase
     {
         $app    = new Application();
         $router = $app->getRouter();
-        $this->assertInstanceOf('Zend\Mvc\Router\RouteStack', $router);
+        $this->assertInstanceOf('Zend\Mvc\Router\RouteStackInterface', $router);
     }
 
     public function testRouterMayBeInjected()
@@ -404,7 +404,7 @@ class ApplicationTest extends TestCase
         $locator = new TestAsset\Locator();
         $locator->add('locator-aware', function() use ($events) {
             $controller = new TestAsset\LocatorAwareController;
-            $controller->events()->setSharedCollections($events);
+            $controller->events()->setSharedManager($events);
             return $controller;
         });
         $app->setLocator($locator);
@@ -436,7 +436,7 @@ class ApplicationTest extends TestCase
         $app          = $this->setupActionController();
         $events       = new EventManager();
         $sharedEvents = new SharedEventManager();
-        $events->setSharedCollections($sharedEvents);
+        $events->setSharedManager($sharedEvents);
         $app->setEventManager($events);
 
         $listener1 = function($e) {

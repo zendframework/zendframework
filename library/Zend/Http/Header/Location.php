@@ -15,7 +15,8 @@ class Location implements HeaderDescription
     {
         $header = new static();
 
-        list($name, $value) = explode(': ', $headerLine, 2);
+        list($name, $value) = explode(':', $headerLine, 2);
+        $value = trim($value);
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'location') {

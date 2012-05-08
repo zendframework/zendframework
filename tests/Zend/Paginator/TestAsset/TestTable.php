@@ -2,7 +2,9 @@
 
 namespace ZendTest\Paginator\TestAsset;
 
-class TestTable extends \Zend\Db\Table\AbstractTable
+use Zend\Db\TableGateway;
+
+class TestTable extends TableGateway\TableGateway
 {
     protected $_primary = 'number';
     protected $_name = 'test';

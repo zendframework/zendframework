@@ -28,7 +28,7 @@ namespace Zend\Console\Exception;
  */
 class RuntimeException
     extends \RuntimeException
-    implements \Zend\Console\Exception
+    implements ExceptionInterface
 {
     /**
      * Usage

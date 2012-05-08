@@ -21,7 +21,7 @@
 
 namespace ZendTest\Cloud\Infrastructure;
 
-use Zend\Cloud\Infrastructure\Adapter,
+use Zend\Cloud\Infrastructure\Adapter\AdapterInterface,
     Zend\Cloud\Infrastructure\Instance;
 
 /**
@@ -29,7 +29,7 @@ use Zend\Cloud\Infrastructure\Adapter,
  * Zend\Cloud\Infrastructure.
  *
  * @category   Zend
- * @package    Zend\Cloud
+ * @package    Zend_Cloud
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -39,7 +39,7 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
     /**
      * Reference to Infrastructure adapter to test
      *
-     * @var Zend\Cloud\Infrastructure
+     * @var \Zend\Cloud\Infrastructure
      */
     protected $_commonInfrastructure;
 
@@ -54,7 +54,7 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
     /**
      * Config object
      *
-     * @var Zend\Config
+     * @var \Zend\Config
      */
 
     protected $_config;
@@ -276,7 +276,7 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->_config = $this->_getConfig();
-        $this->_commonInfrastructure = Zend\Cloud\Infrastructure\Factory::getAdapter($this->_config);
+        $this->_commonInfrastructure = \Zend\Cloud\Infrastructure\Factory::getAdapter($this->_config);
         parent::setUp();
     }
 

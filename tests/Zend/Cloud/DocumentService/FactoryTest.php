@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend\Cloud\DocumentService
+ * @package    Zend_Cloud_DocumentService
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -23,7 +23,7 @@ namespace ZendTest\Cloud\DocumentService;
 
 // Call ZendTest\Cloud\DocumentService\FactoryTest::main() if this source file is executed directly.
 if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "ZendTest\Cloud\DocumentService\FactoryTest::main");
+    define("PHPUnit_MAIN_METHOD", 'ZendTest\Cloud\DocumentService\FactoryTest::main');
 }
 
 use Zend\Cloud\DocumentService\Factory as DocumentFactory,
@@ -36,11 +36,11 @@ use Zend\Cloud\DocumentService\Factory as DocumentFactory,
  * Test class for Zend\Cloud\DocumentService\Factory
  *
  * @category   Zend
- * @package    Zend\Cloud\DocumentService
+ * @package    Zend_Cloud_DocumentService
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend\Cloud
+ * @group      Zend_Cloud
  */
 class FactoryTest extends PHPUnitTestCase
 {
@@ -51,8 +51,8 @@ class FactoryTest extends PHPUnitTestCase
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit_Framework_TestSuite(__CLASS__);
+        $result = \PHPUnit_TextUI_TestRunner::run($suite);
     }
 
     public function testGetDocumentAdapterKey()
@@ -81,6 +81,6 @@ class FactoryTest extends PHPUnitTestCase
 }
 
 // Call ZendTest\Cloud\DocumentService\FactoryTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "ZendTest\Cloud\DocumentService\FactoryTest::main") {
+if (PHPUnit_MAIN_METHOD == 'ZendTest\Cloud\DocumentService\FactoryTest::main') {
     FactoryTest::main();
 }

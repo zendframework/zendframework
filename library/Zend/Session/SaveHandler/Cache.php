@@ -20,9 +20,9 @@
 
 namespace Zend\Session\SaveHandler;
 
-use Zend\Session\SaveHandler as Savable,
-    Zend\Cache\Storage\Adapter\AdapterInterface as StorageAdapter,
-    Zend\Session\Exception;
+use Zend\Cache\Storage\Adapter\AdapterInterface as StorageAdapter,
+    Zend\Session\Exception,
+    Zend\Session\SaveHandler\SaveHandlerInterface as Savable;
 
 /**
  * Cache session save handler
@@ -60,7 +60,7 @@ class Cache implements Savable
      *
      * @param  Zend\Cache\Storage\Adapter\AdapterInterface $storageAdapter
      * @return void
-     * @throws Zend\Session\Exception
+     * @throws Zend\Session\Exception\ExceptionInterface
      */
     public function __construct(StorageAdapter $storageAdapter)
     {

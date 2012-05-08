@@ -153,9 +153,7 @@ class DbTable
      * overrideLifetime  => (boolean) Whether or not the lifetime of an existing session should be overridden
      *      (optional; default: false)
      *
-     * @param  Configuration      User-provided configuration
-     * @return void
-     * @throws Zend_Session_SaveHandler_Exception
+     * @param  Configuration $config  User-provided configuration
      */
     public function __construct(Configuration $config)
     {
@@ -387,7 +385,6 @@ class DbTable
      * Initialize table and schema names
      *
      * @return void
-     * @throws Exception
      */
     protected function _setupTableName()
     {
@@ -400,7 +397,7 @@ class DbTable
      * Initialize session table primary key value assignment
      *
      * @return void
-     * @throws Exception
+     * @throws Exception\RuntimeException
      */
     protected function _setupPrimaryAssignment()
     {
@@ -429,7 +426,7 @@ class DbTable
      * Check for required session table columns
      *
      * @return void
-     * @throws Exception
+     * @throws Exception\RuntimeException
      */
     protected function _checkRequiredColumns()
     {

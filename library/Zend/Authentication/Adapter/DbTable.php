@@ -20,8 +20,8 @@
  */
 
 namespace Zend\Authentication\Adapter;
-use Zend\Authentication\Adapter\AdapterInterface as AuthenticationAdapter,
-    Zend\Authentication\Result as AuthenticationResult,
+
+use Zend\Authentication\Result as AuthenticationResult,
     Zend\Db\Adapter\Adapter as DbAdapter,
     Zend\Db\Sql\Select as DbSelect,
     Zend\Db\Sql\Expression,
@@ -34,7 +34,7 @@ use Zend\Authentication\Adapter\AdapterInterface as AuthenticationAdapter,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class DbTable implements AuthenticationAdapter
+class DbTable implements AdapterInterface
 {
 
     /**
@@ -117,12 +117,12 @@ class DbTable implements AuthenticationAdapter
     /**
      * __construct() - Sets configuration options
      *
-     * @param  DbAdapter                $zendDb
-     * @param  string                   $tableName
-     * @param  string                   $identityColumn
-     * @param  string                   $credentialColumn
-     * @param  string                   $credentialTreatment
-     * @return void
+     * @param  DbAdapter $zendDb
+     * @param  string    $tableName           Optional
+     * @param  string    $identityColumn      Optional
+     * @param  string    $credentialColumn    Optional
+     * @param  string    $credentialTreatment Optional
+     * @return \Zend\Authentication\Adapter\DbTable
      */
     public function __construct(DbAdapter $zendDb, $tableName = null, $identityColumn = null,
                                 $credentialColumn = null, $credentialTreatment = null)
@@ -183,12 +183,12 @@ class DbTable implements AuthenticationAdapter
     }
 
     /**
-     * setCredentialTreatment() - allows the developer to pass a parameterized string that is
+     * setCredentialTreatment() - allows the developer to pass a parametrized string that is
      * used to transform or treat the input credential data.
      *
      * In many cases, passwords and other sensitive data are encrypted, hashed, encoded,
      * obscured, or otherwise treated through some function or algorithm. By specifying a
-     * parameterized treatment string with this method, a developer may apply arbitrary SQL
+     * parametrized treatment string with this method, a developer may apply arbitrary SQL
      * upon input credential data.
      *
      * Examples:
@@ -219,7 +219,7 @@ class DbTable implements AuthenticationAdapter
 
     /**
      * setCredential() - set the credential value to be used, optionally can specify a treatment
-     * to be used, should be supplied in parameterized form, such as 'MD5(?)' or 'PASSWORD(?)'
+     * to be used, should be supplied in parametrized form, such as 'MD5(?)' or 'PASSWORD(?)'
      *
      * @param  string $credential
      * @return DbTable Provides a fluent interface
@@ -250,7 +250,7 @@ class DbTable implements AuthenticationAdapter
 
     /**
      * getAmbiguityIdentity() - returns TRUE for usage of multiple identical
-     * identies with different credentials, FALSE if not used.
+     * identities with different credentials, FALSE if not used.
      *
      * @return bool
      */
@@ -290,7 +290,7 @@ class DbTable implements AuthenticationAdapter
         if (null !== $returnColumns) {
 
             $availableColumns = array_keys($this->_resultRow);
-            foreach ( (array) $returnColumns as $returnColumn) {
+            foreach ((array)$returnColumns as $returnColumn) {
                 if (in_array($returnColumn, $availableColumns)) {
                     $returnObject->{$returnColumn} = $this->_resultRow[$returnColumn];
                 }
@@ -299,7 +299,7 @@ class DbTable implements AuthenticationAdapter
 
         } elseif (null !== $omitColumns) {
 
-            $omitColumns = (array) $omitColumns;
+            $omitColumns = (array)$omitColumns;
             foreach ($this->_resultRow as $resultColumn => $resultValue) {
                 if (!in_array($resultColumn, $omitColumns)) {
                     $returnObject->{$resultColumn} = $resultValue;
@@ -318,21 +318,21 @@ class DbTable implements AuthenticationAdapter
     }
 
     /**
-     * authenticate() - defined by Zend_Auth_Adapter_Interface.  This method is called to
-     * attempt an authentication.  Previous to this call, this adapter would have already
-     * been configured with all necessary information to successfully connect to a database
-     * table and attempt to find a record matching the provided identity.
+     * This method is called to attempt an authentication. Previous to this
+     * call, this adapter would have already been configured with all
+     * necessary information to successfully connect to a database table and
+     * attempt to find a record matching the provided identity.
      *
-     * @throws Exception if answering the authentication query is impossible
+     * @throws Exception\RuntimeException if answering the authentication query is impossible
      * @return AuthenticationResult
      */
     public function authenticate()
     {
         $this->_authenticateSetup();
-        $dbSelect = $this->_authenticateCreateSelect();
+        $dbSelect         = $this->_authenticateCreateSelect();
         $resultIdentities = $this->_authenticateQuerySelect($dbSelect);
 
-        if ( ($authResult = $this->_authenticateValidateResultSet($resultIdentities)) instanceof AuthenticationResult) {
+        if (($authResult = $this->_authenticateValidateResultSet($resultIdentities)) instanceof AuthenticationResult) {
             return $authResult;
         }
 
@@ -352,8 +352,8 @@ class DbTable implements AuthenticationAdapter
      * making sure that this adapter was indeed setup properly with all
      * required pieces of information.
      *
-     * @throws Exception\ExceptionInterface - in the event that setup was not done properly
-     * @return true
+     * @throws Exception\RuntimeException in the event that setup was not done properly
+     * @return boolean
      */
     protected function _authenticateSetup()
     {
@@ -379,7 +379,7 @@ class DbTable implements AuthenticationAdapter
             'code'     => AuthenticationResult::FAILURE,
             'identity' => $this->_identity,
             'messages' => array()
-            );
+        );
 
         return true;
     }
@@ -419,10 +419,10 @@ class DbTable implements AuthenticationAdapter
      * performs a query against the database with that object.
      *
      * @param  DbSelect $dbSelect
-     * @throws Exception - when an invalid select object is encountered
+     * @throws Exception\RuntimeException when an invalid select object is encountered
      * @return array
      */
-    protected function _authenticateQuerySelect(DBSelect $dbSelect)
+    protected function _authenticateQuerySelect(DbSelect $dbSelect)
     {
         $statement = $this->_zendDb->createStatement();
         $dbSelect->prepareStatement($this->_zendDb, $statement);
@@ -433,8 +433,8 @@ class DbTable implements AuthenticationAdapter
         } catch (\Exception $e) {
             throw new Exception\RuntimeException(
                 'The supplied parameters to DbTable failed to '
-                . 'produce a valid sql statement, please check table and column names '
-                . 'for validity.', 0, $e
+                    . 'produce a valid sql statement, please check table and column names '
+                    . 'for validity.', 0, $e
             );
         }
         return $resultIdentities;
@@ -444,18 +444,18 @@ class DbTable implements AuthenticationAdapter
      * _authenticateValidateResultSet() - This method attempts to make
      * certain that only one record was returned in the resultset
      *
-     * @param array $resultIdentities
-     * @return true|Zend\Authentication\Result
+     * @param  array $resultIdentities
+     * @return boolean|\Zend\Authentication\Result
      */
     protected function _authenticateValidateResultSet(array $resultIdentities)
     {
 
         if (count($resultIdentities) < 1) {
-            $this->_authenticateResultInfo['code'] = AuthenticationResult::FAILURE_IDENTITY_NOT_FOUND;
+            $this->_authenticateResultInfo['code']       = AuthenticationResult::FAILURE_IDENTITY_NOT_FOUND;
             $this->_authenticateResultInfo['messages'][] = 'A record with the supplied identity could not be found.';
             return $this->_authenticateCreateAuthResult();
         } elseif (count($resultIdentities) > 1 && false === $this->getAmbiguityIdentity()) {
-            $this->_authenticateResultInfo['code'] = AuthenticationResult::FAILURE_IDENTITY_AMBIGUOUS;
+            $this->_authenticateResultInfo['code']       = AuthenticationResult::FAILURE_IDENTITY_AMBIGUOUS;
             $this->_authenticateResultInfo['messages'][] = 'More than one record matches the supplied identity.';
             return $this->_authenticateCreateAuthResult();
         }
@@ -474,7 +474,7 @@ class DbTable implements AuthenticationAdapter
     protected function _authenticateValidateResult($resultIdentity)
     {
         if ($resultIdentity['zend_auth_credential_match'] != '1') {
-            $this->_authenticateResultInfo['code'] = AuthenticationResult::FAILURE_CREDENTIAL_INVALID;
+            $this->_authenticateResultInfo['code']       = AuthenticationResult::FAILURE_CREDENTIAL_INVALID;
             $this->_authenticateResultInfo['messages'][] = 'Supplied credential is invalid.';
             return $this->_authenticateCreateAuthResult();
         }
@@ -482,14 +482,14 @@ class DbTable implements AuthenticationAdapter
         unset($resultIdentity['zend_auth_credential_match']);
         $this->_resultRow = $resultIdentity;
 
-        $this->_authenticateResultInfo['code'] = AuthenticationResult::SUCCESS;
+        $this->_authenticateResultInfo['code']       = AuthenticationResult::SUCCESS;
         $this->_authenticateResultInfo['messages'][] = 'Authentication successful.';
         return $this->_authenticateCreateAuthResult();
     }
 
     /**
-     * _authenticateCreateAuthResult() - Creates a Zend_Auth_Result object from
-     * the information that has been collected during the authenticate() attempt.
+     * Creates a Zend\Authentication\Result object from the information that
+     * has been collected during the authenticate() attempt.
      *
      * @return AuthenticationResult
      */

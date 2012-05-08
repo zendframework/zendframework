@@ -439,7 +439,7 @@ class StandardConfig implements OAuthConfig
     public function getRequestTokenUrl()
     {
         if (!$this->_requestTokenUrl && $this->_siteUrl) {
-            return $this->_siteUrl . '/request_token';
+            return rtrim($this->_siteUrl, '/') . '/request_token';
         }
         return $this->_requestTokenUrl;
     }
@@ -469,7 +469,7 @@ class StandardConfig implements OAuthConfig
     public function getAccessTokenUrl()
     {
         if (!$this->_accessTokenUrl && $this->_siteUrl) {
-            return $this->_siteUrl . '/access_token';
+            return rtrim($this->_siteUrl, '/') . '/access_token';
         }
         return $this->_accessTokenUrl;
     }
@@ -521,7 +521,7 @@ class StandardConfig implements OAuthConfig
     public function getAuthorizeUrl()
     {
         if (!$this->_authorizeUrl && $this->_siteUrl) {
-            return $this->_siteUrl . '/authorize';
+            return rtrim($this->_siteUrl, '/') . '/authorize';
         }
         return $this->_authorizeUrl;
     }

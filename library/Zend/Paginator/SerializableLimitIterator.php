@@ -20,9 +20,9 @@
 
 namespace Zend\Paginator;
 
+use Iterator;
+
 /**
- * @uses       LimitIterator
- * @uses       Serializable
  * @category   Zend
  * @package    Zend_Paginator
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -46,14 +46,14 @@ class SerializableLimitIterator extends \LimitIterator implements \Serializable,
     private $_count;
 
     /**
-     * Construct a Zend_Paginator_SerializableLimitIterator
+     * Construct a Zend\Paginator\SerializableLimitIterator
      *
      * @param Iterator $it Iterator to limit (must be serializable by un-/serialize)
      * @param int $offset Offset to first element
      * @param int $count Maximum number of elements to show or -1 for all
      * @see LimitIterator::__construct
      */
-    public function __construct (\Iterator $it, $offset=0, $count=-1)
+    public function __construct (Iterator $it, $offset=0, $count=-1)
     {
         parent::__construct($it, $offset, $count);
         $this->_offset = $offset;
@@ -113,6 +113,7 @@ class SerializableLimitIterator extends \LimitIterator implements \Serializable,
      * Determine if a value of Iterator is set and is not NULL
      *
      * @param int $offset
+     * @return bool
      */
     public function offsetExists($offset)
     {

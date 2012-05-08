@@ -21,6 +21,8 @@
 
 namespace Zend\Captcha;
 
+use Zend\View\Renderer\RendererInterface as Renderer;
+
 /**
  * Captcha based on figlet text rendering service
  *
@@ -69,11 +71,11 @@ class Figlet extends Word
     /**
      * Display the captcha
      *
-     * @param \Zend\View\Renderer $view
+     * @param Renderer $view
      * @param mixed $element
      * @return string
      */
-    public function render(\Zend\View\Renderer $view = null, $element = null)
+    public function render(Renderer $view = null, $element = null)
     {
         return '<pre>'
              . $this->_figlet->render($this->getWord())

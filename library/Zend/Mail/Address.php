@@ -26,17 +26,18 @@ namespace Zend\Mail;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Address implements AddressDescription
+class Address implements Address\AddressInterface
 {
     protected $email;
     protected $name;
 
     /**
      * Constructor
-     * 
-     * @param  string $email 
-     * @param  null|string $name 
-     * @return void
+     *
+     * @param  string $email
+     * @param  null|string $name
+     * @throws Exception\InvalidArgumentException
+     * @return Address
      */
     public function __construct($email, $name = null)
     {
@@ -64,7 +65,7 @@ class Address implements AddressDescription
     /**
      * Retrieve name
      * 
-     * @return null|string
+     * @return string
      */
     public function getName()
     {

@@ -20,15 +20,14 @@
  */
 
 namespace Zend\Search\Lucene\Search\Query;
-use Zend\Search\Lucene;
-use Zend\Search\Lucene\Search\Weight;
-use Zend\Search\Lucene\Search\Highlighter;
+
+use Zend\Search\Lucene,
+    Zend\Search\Lucene\Search\Weight,
+    Zend\Search\Lucene\Search\Highlighter\HighlighterInterface as Highlighter;
 
 /**
  * The insignificant query returns empty result, but doesn't limit result set as a part of other queries
  *
- * @uses       \Zend\Search\Lucene\Search\Query\AbstractQuery
- * @uses       \Zend\Search\Lucene\Search\Weight\EmptyResultWeight
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Search
@@ -40,10 +39,10 @@ class Insignificant extends AbstractQuery
     /**
      * Re-write query into primitive queries in the context of specified index
      *
-     * @param \Zend\Search\Lucene\SearchIndex $index
+     * @param \Zend\Search\Lucene\SearchIndexInterface $index
      * @return \Zend\Search\Lucene\Search\Query\AbstractQuery
      */
-    public function rewrite(Lucene\SearchIndex $index)
+    public function rewrite(Lucene\SearchIndexInterface $index)
     {
         return $this;
     }
@@ -51,10 +50,10 @@ class Insignificant extends AbstractQuery
     /**
      * Optimize query in the context of specified index
      *
-     * @param \Zend\Search\Lucene\SearchIndex $index
+     * @param \Zend\Search\Lucene\SearchIndexInterface $index
      * @return \Zend\Search\Lucene\Search\Query\AbstractQuery
      */
-    public function optimize(Lucene\SearchIndex $index)
+    public function optimize(Lucene\SearchIndexInterface $index)
     {
         return $this;
     }
@@ -62,10 +61,10 @@ class Insignificant extends AbstractQuery
     /**
      * Constructs an appropriate Weight implementation for this query.
      *
-     * @param \Zend\Search\Lucene\SearchIndex $reader
+     * @param \Zend\Search\Lucene\SearchIndexInterface $reader
      * @return \Zend\Search\Lucene\Search\Weight\Weight
      */
-    public function createWeight(Lucene\SearchIndex $reader)
+    public function createWeight(Lucene\SearchIndexInterface $reader)
     {
         return new Weight\EmptyResultWeight();
     }
@@ -74,10 +73,10 @@ class Insignificant extends AbstractQuery
      * Execute query in context of index reader
      * It also initializes necessary internal structures
      *
-     * @param \Zend\Search\Lucene\SearchIndex $reader
+     * @param \Zend\Search\Lucene\SearchIndexInterface $reader
      * @param \Zend\Search\Lucene\Index\DocsFilter|null $docsFilter
      */
-    public function execute(Lucene\SearchIndex $reader, $docsFilter = null)
+    public function execute(Lucene\SearchIndexInterface $reader, $docsFilter = null)
     {
         // Do nothing
     }
@@ -98,10 +97,10 @@ class Insignificant extends AbstractQuery
      * Score specified document
      *
      * @param integer $docId
-     * @param \Zend\Search\Lucene\SearchIndex $reader
+     * @param \Zend\Search\Lucene\SearchIndexInterface $reader
      * @return float
      */
-    public function score($docId, Lucene\SearchIndex $reader)
+    public function score($docId, Lucene\SearchIndexInterface $reader)
     {
         return 0;
     }
@@ -119,7 +118,7 @@ class Insignificant extends AbstractQuery
     /**
      * Query specific matches highlighting
      *
-     * @param \Zend\Search\Lucene\Search\Highlighter $highlighter  Highlighter object (also contains doc for highlighting)
+     * @param Highlighter $highlighter  Highlighter object (also contains doc for highlighting)
      */
     protected function _highlightMatches(Highlighter $highlighter)
     {

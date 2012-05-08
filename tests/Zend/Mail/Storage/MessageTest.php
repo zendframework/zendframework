@@ -21,10 +21,12 @@
 
 namespace ZendTest\Mail\Storage;
 
-use Zend\Mime,
-    Zend\Mail\Storage,
-    Zend\Mail\Storage\Exception,
-    Zend\Mail\Storage\Message;
+use Zend\Mime;
+use Zend\Mime\Exception as MimeException;
+use Zend\Mail\Exception as MailException;
+use Zend\Mail\Storage;
+use Zend\Mail\Storage\Exception;
+use Zend\Mail\Storage\Message;
 
 /**
  * @category   Zend
@@ -161,7 +163,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
     {
         try {
             Mime\Decode::splitMessageStruct("--xxx\n", 'xxx');
-        } catch (\Zend\Mime\Exception\ExceptionInterface $e) {
+        } catch (MimeException\ExceptionInterface $e) {
             return; // ok
         }
 
@@ -229,7 +231,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
         $header = '';
         try {
             Mime\Decode::splitHeaderField($header);
-        } catch (\Zend\Mime\Exception\ExceptionInterface $e) {
+        } catch (MimeException\ExceptionInterface $e) {
             return; // ok
         }
 
@@ -242,8 +244,8 @@ class MessageTest extends \PHPUnit_Framework_TestCase
         $body   = 'body';
         $newlines = array("\r\n", "\n\r", "\n", "\r");
 
-        $decoded_body   = null; // "Declare" variable befor first "read" usage to avoid IDEs warning
-        $decoded_header = null; // "Declare" variable befor first "read" usage to avoid IDEs warning
+        $decoded_body   = null; // "Declare" variable before first "read" usage to avoid IDEs warning
+        $decoded_header = null; // "Declare" variable before first "read" usage to avoid IDEs warning
 
         foreach ($newlines as $contentEOL) {
             foreach ($newlines as $decodeEOL) {
@@ -414,7 +416,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
         $message = new Message(array('file' => $this->_file));
         try {
             $message->getHeaderField('fake-header-name', 'foo');
-        } catch (\Zend\Mail\Exception $e) {
+        } catch (MailException\ExceptionInterface $e) {
             return;
         }
         $this->fail('No exception thrown while requesting invalid field name');

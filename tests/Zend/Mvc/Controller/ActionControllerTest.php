@@ -32,7 +32,7 @@ class ActionControllerTest extends TestCase
         $result = $this->controller->dispatch($this->request, $this->response);
         $response = $this->controller->getResponse();
         $this->assertEquals(404, $response->getStatusCode());
-        $this->assertInstanceOf('Zend\View\Model', $result);
+        $this->assertInstanceOf('Zend\View\Model\ModelInterface', $result);
         $this->assertEquals('content', $result->captureTo());
         $vars = $result->getVariables();
         $this->assertArrayHasKey('content', $vars, var_export($vars, 1));
@@ -45,7 +45,7 @@ class ActionControllerTest extends TestCase
         $result = $this->controller->dispatch($this->request, $this->response);
         $response = $this->controller->getResponse();
         $this->assertEquals(404, $response->getStatusCode());
-        $this->assertInstanceOf('Zend\View\Model', $result);
+        $this->assertInstanceOf('Zend\View\Model\ModelInterface', $result);
         $this->assertEquals('content', $result->captureTo());
         $vars = $result->getVariables();
         $this->assertArrayHasKey('content', $vars, var_export($vars, 1));
@@ -95,10 +95,10 @@ class ActionControllerTest extends TestCase
         $response = new Response();
         $response->setContent('short circuited!');
         $events = new SharedEventManager();
-        $events->attach('Zend\Stdlib\Dispatchable', 'dispatch', function($e) use ($response) {
+        $events->attach('Zend\Stdlib\DispatchableInterface', 'dispatch', function($e) use ($response) {
             return $response;
         }, 10);
-        $this->controller->events()->setSharedCollections($events);
+        $this->controller->events()->setSharedManager($events);
         $result = $this->controller->dispatch($this->request, $this->response);
         $this->assertSame($response, $result);
     }
@@ -111,7 +111,7 @@ class ActionControllerTest extends TestCase
         $events->attach('Zend\Mvc\Controller\ActionController', 'dispatch', function($e) use ($response) {
             return $response;
         }, 10);
-        $this->controller->events()->setSharedCollections($events);
+        $this->controller->events()->setSharedManager($events);
         $result = $this->controller->dispatch($this->request, $this->response);
         $this->assertSame($response, $result);
     }
@@ -124,7 +124,7 @@ class ActionControllerTest extends TestCase
         $events->attach(get_class($this->controller), 'dispatch', function($e) use ($response) {
             return $response;
         }, 10);
-        $this->controller->events()->setSharedCollections($events);
+        $this->controller->events()->setSharedManager($events);
         $result = $this->controller->dispatch($this->request, $this->response);
         $this->assertSame($response, $result);
     }
@@ -139,12 +139,12 @@ class ActionControllerTest extends TestCase
 
     public function testControllerIsLocatorAware()
     {
-        $this->assertInstanceOf('Zend\Mvc\LocatorAware', $this->controller);
+        $this->assertInstanceOf('Zend\Mvc\LocatorAwareInterface', $this->controller);
     }
 
     public function testControllerIsEventAware()
     {
-        $this->assertInstanceOf('Zend\Mvc\InjectApplicationEvent', $this->controller);
+        $this->assertInstanceOf('Zend\Mvc\InjectApplicationEventInterface', $this->controller);
     }
 
     public function testControllerIsPluggable()

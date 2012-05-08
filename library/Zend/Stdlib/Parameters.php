@@ -4,7 +4,7 @@ namespace Zend\Stdlib;
 
 use ArrayObject;
 
-class Parameters extends ArrayObject implements ParametersDescription
+class Parameters extends ArrayObject implements ParametersInterface
 {
     /**
      * Constructor

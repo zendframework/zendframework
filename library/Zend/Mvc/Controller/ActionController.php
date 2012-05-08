@@ -3,26 +3,33 @@
 namespace Zend\Mvc\Controller;
 
 use Zend\Di\Locator,
-    Zend\EventManager\EventCollection,
-    Zend\EventManager\EventDescription as Event,
+    Zend\EventManager\EventManagerInterface,
+    Zend\EventManager\EventInterface as Event,
     Zend\EventManager\EventManager,
-    Zend\EventManager\EventManagerAware,
+    Zend\EventManager\EventManagerAwareInterface,
+    Zend\EventManager\EventsCapableInterface,
     Zend\Http\PhpEnvironment\Response as HttpResponse,
     Zend\Loader\Broker,
     Zend\Loader\Pluggable,
     Zend\Mvc\Exception,
-    Zend\Mvc\InjectApplicationEvent,
-    Zend\Mvc\LocatorAware,
+    Zend\Mvc\InjectApplicationEventInterface,
+    Zend\Mvc\LocatorAwareInterface,
     Zend\Mvc\MvcEvent,
-    Zend\Stdlib\Dispatchable,
-    Zend\Stdlib\RequestDescription as Request,
-    Zend\Stdlib\ResponseDescription as Response,
+    Zend\Stdlib\DispatchableInterface as Dispatchable,
+    Zend\Stdlib\RequestInterface as Request,
+    Zend\Stdlib\ResponseInterface as Response,
     Zend\View\Model\ViewModel;
 
 /**
  * Basic action controller
  */
-abstract class ActionController implements Dispatchable, EventManagerAware, InjectApplicationEvent, LocatorAware, Pluggable
+abstract class ActionController implements 
+    Dispatchable, 
+    EventManagerAwareInterface, 
+    EventsCapableInterface,
+    InjectApplicationEventInterface, 
+    LocatorAwareInterface, 
+    Pluggable
 {
     //use \Zend\EventManager\ProvidesEvents;
 
@@ -151,15 +158,16 @@ abstract class ActionController implements Dispatchable, EventManagerAware, Inje
     /**
      * Set the event manager instance used by this context
      *
-     * @param  EventCollection $events
-     * @return AppContext
+     * @param  EventManagerInterface $events
+     * @return ActionController
      */
-    public function setEventManager(EventCollection $events)
+    public function setEventManager(EventManagerInterface $events)
     {
         $events->setIdentifiers(array(
-            'Zend\Stdlib\Dispatchable',
+            'Zend\Stdlib\DispatchableInterface',
             __CLASS__,
-            get_class($this)
+            get_class($this),
+            substr(get_class($this), 0, strpos(get_class($this), '\\'))
         ));
         $this->events = $events;
         $this->attachDefaultListeners();
@@ -171,11 +179,11 @@ abstract class ActionController implements Dispatchable, EventManagerAware, Inje
      *
      * Lazy-loads an EventManager instance if none registered.
      *
-     * @return EventCollection
+     * @return EventManagerInterface
      */
     public function events()
     {
-        if (!$this->events instanceof EventCollection) {
+        if (!$this->events instanceof EventManagerInterface) {
             $this->setEventManager(new EventManager());
         }
         return $this->events;

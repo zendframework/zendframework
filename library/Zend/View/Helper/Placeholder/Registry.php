@@ -26,12 +26,6 @@ use Zend\View\Exception;
 /**
  * Registry for placeholder containers
  *
- * @uses       ReflectionClass
- * @uses       \Zend\Loader
- * @uses       \Zend\Registry
- * @uses       \Zend\View\Helper\Placeholder\Container
- * @uses       \Zend\View\Helper\Placeholder\Container\AbstractContainer
- * @uses       \Zend\View\Helper\Placeholder\Registry\Exception
  * @package    Zend_View
  * @subpackage Helper
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

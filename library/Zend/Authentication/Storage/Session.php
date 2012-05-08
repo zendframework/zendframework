@@ -23,18 +23,16 @@ namespace Zend\Authentication\Storage;
 
 use Zend\Authentication\Storage\StorageInterface as AuthenticationStorage,
     Zend\Session\Container as SessionContainer,
-    Zend\Session\Manager as SessionManager;
+    Zend\Session\ManagerInterface as SessionManager;
 
 /**
- * @uses       Zend\Authentication\Storage
- * @uses       Zend\Session\Manager
  * @category   Zend
  * @package    Zend_Authentication
  * @subpackage Storage
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Session implements AuthenticationStorage
+class Session implements StorageInterface
 {
     /**
      * Default session namespace
@@ -49,7 +47,7 @@ class Session implements AuthenticationStorage
     /**
      * Object to proxy $_SESSION storage
      *
-     * @var Zend\Session\Container
+     * @var SessionContainer
      */
     protected $session;
 
@@ -106,7 +104,7 @@ class Session implements AuthenticationStorage
     }
 
     /**
-     * Defined by Zend\Auth\Storage
+     * Defined by Zend\Authentication\Storage\StorageInterface
      *
      * @return boolean
      */
@@ -116,7 +114,7 @@ class Session implements AuthenticationStorage
     }
 
     /**
-     * Defined by Zend\Auth\Storage
+     * Defined by Zend\Authentication\Storage\StorageInterface
      *
      * @return mixed
      */
@@ -126,7 +124,7 @@ class Session implements AuthenticationStorage
     }
 
     /**
-     * Defined by Zend\Auth\Storage
+     * Defined by Zend\Authentication\Storage\StorageInterface
      *
      * @param  mixed $contents
      * @return void
@@ -137,7 +135,7 @@ class Session implements AuthenticationStorage
     }
 
     /**
-     * Defined by Zend\Auth\Storage
+     * Defined by Zend\Authentication\Storage\StorageInterface
      *
      * @return void
      */

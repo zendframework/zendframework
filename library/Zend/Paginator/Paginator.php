@@ -20,19 +20,19 @@
 
 namespace Zend\Paginator;
 
-use ArrayIterator,
-    Countable,
-    Iterator,
-    IteratorAggregate,
-    Traversable,
-    Zend\Cache\Storage\Adapter\AdapterInterface as CacheAdapter,
-    Zend\Db\Select as DbSelect,
-    Zend\Db\Table\AbstractRowset as DbAbstractRowset,
-    Zend\Db\Table\Select as DbTableSelect,
-    Zend\Filter\Filter,
-    Zend\Json\Json,
-    Zend\Stdlib\ArrayUtils,
-    Zend\View;
+use ArrayIterator;
+use Countable;
+use Iterator;
+use IteratorAggregate;
+use Traversable;
+use Zend\Cache\Storage\Adapter\AdapterInterface as CacheAdapter;
+use Zend\Db\Table\AbstractRowset as DbAbstractRowset;
+use Zend\Db\Table\Select as DbTableSelect;
+use Zend\Db\Sql;
+use Zend\Filter\Filter;
+use Zend\Json\Json;
+use Zend\Stdlib\ArrayUtils;
+use Zend\View;
 
 /**
  * @category   Zend
@@ -98,7 +98,7 @@ class Paginator implements Countable, IteratorAggregate
     protected static $_cache;
 
     /**
-     * Enable or desable the cache by Zend_Paginator instance
+     * Enable or disable the cache by Zend\Paginator\Paginator instance
      *
      * @var bool
      */
@@ -171,16 +171,17 @@ class Paginator implements Countable, IteratorAggregate
     /**
      * View instance used for self rendering
      *
-     * @var View\Renderer
+     * @var \Zend\View\Renderer\RendererInterface
      */
     protected $_view = null;
 
     /**
      * Factory.
      *
-     * @param  mixed $data
+     * @param  mixed  $data
      * @param  string $adapter
-     * @param  array $prefixPaths
+     * @param  array  $prefixPaths
+     * @throws Exception\InvalidArgumentException
      * @return Paginator
      */
     public static function factory($data, $adapter = self::INTERNAL_ADAPTER,
@@ -214,9 +215,9 @@ class Paginator implements Countable, IteratorAggregate
 
     /**
      * Set the adapter broker
-     * 
-     * @param  Broker $broker 
-     * @return void
+     *
+     * @param string|\Zend\Loader\PluginBroker $broker
+     * @throws Exception\InvalidArgumentException
      */
     public static function setAdapterBroker($broker)
     {
@@ -255,7 +256,8 @@ class Paginator implements Countable, IteratorAggregate
     /**
      * Set a global config
      *
-     * @param array|Traversable $config
+     * @param array|\Traversable $config
+     * @throws Exception\InvalidArgumentException
      */
     public static function setConfig($config)
     {
@@ -376,6 +378,7 @@ class Paginator implements Countable, IteratorAggregate
      * Constructor.
      *
      * @param Adapter|AdapterAggregate $adapter
+     * @throws Exception\InvalidArgumentException
      */
     public function __construct($adapter)
     {
@@ -385,8 +388,8 @@ class Paginator implements Countable, IteratorAggregate
             $this->_adapter = $adapter->getPaginatorAdapter();
         } else {
             throw new Exception\InvalidArgumentException(
-                'Zend_Paginator only accepts instances of the type ' .
-                'Zend_Paginator_Adapter_Interface or Zend_Paginator_AdapterAggregate.'
+                'Zend\Paginator\Paginator only accepts instances of the type ' .
+                'Zend\Paginator\Adapter or Zend\Paginator\AdapterAggregate.'
             );
         }
 
@@ -600,10 +603,11 @@ class Paginator implements Countable, IteratorAggregate
 
     /**
      * Returns an item from a page.  The current page is used if there's no
-     * page sepcified.
+     * page specified.
      *
      * @param  integer $itemNumber Item number (1 to itemCountPerPage)
      * @param  integer $pageNumber
+     * @throws Exception\InvalidArgumentException
      * @return mixed
      */
     public function getItem($itemNumber, $pageNumber = null)
@@ -690,7 +694,8 @@ class Paginator implements Countable, IteratorAggregate
     /**
      * Returns the items for a given page.
      *
-     * @return Traversable
+     * @param integer $pageNumber
+     * @return mixed
      */
     public function getItemsByPage($pageNumber)
     {
@@ -731,6 +736,7 @@ class Paginator implements Countable, IteratorAggregate
     /**
      * Returns a foreach-compatible iterator.
      *
+     * @throws Exception\RuntimeException
      * @return Traversable
      */
     public function getIterator()
@@ -831,7 +837,7 @@ class Paginator implements Countable, IteratorAggregate
      *
      * If none registered, instantiates a PhpRenderer instance.
      *
-     * @return View\Renderer|null
+     * @return \Zend\View\Renderer\RendererInterface|null
      */
     public function getView()
     {
@@ -845,10 +851,10 @@ class Paginator implements Countable, IteratorAggregate
     /**
      * Sets the view object.
      *
-     * @param  View\Renderer $view
+     * @param  \Zend\View\Renderer\RendererInterface $view
      * @return Paginator
      */
-    public function setView(View\Renderer $view = null)
+    public function setView(View\Renderer\RendererInterface $view = null)
     {
         $this->_view = $view;
 
@@ -902,10 +908,10 @@ class Paginator implements Countable, IteratorAggregate
     /**
      * Renders the paginator.
      *
-     * @param  View\Renderer $view
+     * @param  \Zend\View\Renderer\RendererInterface $view
      * @return string
      */
-    public function render(View\Renderer $view = null)
+    public function render(View\Renderer\RendererInterface $view = null)
     {
         if (null !== $view) {
             $this->setView($view);
@@ -934,7 +940,7 @@ class Paginator implements Countable, IteratorAggregate
 
     /**
      * Tells if there is an active cache object
-     * and if the cache has not been desabled
+     * and if the cache has not been disabled
      *
      * @return bool
      */
@@ -1049,7 +1055,7 @@ class Paginator implements Countable, IteratorAggregate
             case 'object':
                 if (!$scrollingStyle instanceof ScrollingStyle) {
                     throw new Exception\InvalidArgumentException(
-                        'Scrolling style must implement Zend_Paginator_ScrollingStyle_Interface'
+                        'Scrolling style must implement Zend\Paginator\ScrollingStyle'
                     );
                 }
 

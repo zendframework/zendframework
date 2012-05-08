@@ -175,7 +175,7 @@ abstract class Word extends AbstractAdapter
      *
      * @return string
      */
-    public function getId ()
+    public function getId()
     {
         if (null === $this->_id) {
             $this->_setId($this->_generateRandomId());
@@ -189,7 +189,7 @@ abstract class Word extends AbstractAdapter
      * @param string $id
      * return Zend_Captcha_Word
      */
-    protected function _setId ($id)
+    protected function _setId($id)
     {
         $this->_id = $id;
         return $this;
@@ -364,7 +364,7 @@ abstract class Word extends AbstractAdapter
     /**
      * Validate the word
      *
-     * @see    Zend\Validator\Validator::isValid()
+     * @see    Zend\Validator\ValidatorInterface::isValid()
      * @param  mixed $value
      * @return boolean
      */

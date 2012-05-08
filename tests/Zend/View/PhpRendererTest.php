@@ -105,7 +105,7 @@ class PhpRendererTest extends \PHPUnit_Framework_TestCase
 
     public function testPassingStringOfUndefinedClassToSetBrokerRaisesException()
     {
-        $this->setExpectedException('Zend\View\Exception', 'Invalid');
+        $this->setExpectedException('Zend\View\Exception\ExceptionInterface', 'Invalid');
         $this->renderer->setBroker('__foo__');
     }
 
@@ -131,7 +131,7 @@ class PhpRendererTest extends \PHPUnit_Framework_TestCase
      */
     public function testPassingInvalidArgumentToSetBrokerRaisesException($broker)
     {
-        $this->setExpectedException('Zend\View\Exception', 'must extend');
+        $this->setExpectedException('Zend\View\Exception\ExceptionInterface', 'must extend');
         $this->renderer->setBroker($broker);
     }
 

@@ -1287,6 +1287,7 @@ class Filesystem extends AbstractAdapter
             }
 
             $capabilities = new Capabilities(
+                $this,
                 $marker,
                 array(
                     'supportedDatatypes' => array(

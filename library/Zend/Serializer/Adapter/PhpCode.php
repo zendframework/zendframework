@@ -24,8 +24,6 @@ namespace Zend\Serializer\Adapter;
 use Zend\Serializer\Exception\RuntimeException;
 
 /**
- * @uses       Zend\Serializer\Adapter\AbstractAdapter
- * @uses       Zend\Serializer\Exception\RuntimeException
  * @category   Zend
  * @package    Zend_Serializer
  * @subpackage Adapter
@@ -54,7 +52,7 @@ class PhpCode extends AbstractAdapter
      * @param  string $code 
      * @param  array $opts 
      * @return mixed
-     * @throws Zend\Serializer\Exception on eval error
+     * @throws RuntimeException on eval error
      */
     public function unserialize($code, array $opts = array())
     {

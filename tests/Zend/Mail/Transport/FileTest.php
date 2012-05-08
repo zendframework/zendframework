@@ -21,10 +21,8 @@
 
 namespace ZendTest\Mail\Transport;
 
-use PHPUnit_Framework_TestCase as TestCase,
-    Zend\Mail\Message,
-    Zend\Mail\Transport,
-    Zend\Mail\Transport\File as FileTransport,
+use Zend\Mail\Message,
+    Zend\Mail\Transport\File,
     Zend\Mail\Transport\FileOptions;
 
 /**
@@ -35,7 +33,7 @@ use PHPUnit_Framework_TestCase as TestCase,
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Mail
  */
-class FileTest extends TestCase
+class FileTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
@@ -49,7 +47,7 @@ class FileTest extends TestCase
         $fileOptions = new FileOptions(array(
             'path' => $this->tempDir,
         ));
-        $this->transport  = new FileTransport($fileOptions);
+        $this->transport  = new File($fileOptions);
     }
 
     public function tearDown()

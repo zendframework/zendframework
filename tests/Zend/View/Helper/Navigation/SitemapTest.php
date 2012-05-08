@@ -210,7 +210,7 @@ class SitemapTest extends AbstractTest
 
         try {
             $this->_helper->render($nav);
-        } catch (View\Exception $e) {
+        } catch (View\Exception\ExceptionInterface $e) {
             $expected = sprintf(
                     'Encountered an invalid URL for Sitemap XML: "%s"',
                     'http://w.');
@@ -279,7 +279,7 @@ class SitemapTest extends AbstractTest
 
         try {
             $this->_helper->render($nav);
-        } catch (View\Exception $e) {
+        } catch (View\Exception\ExceptionInterface $e) {
             $expected = sprintf(
                     'Sitemap is invalid according to XML Schema at "%s"',
                     \Zend\View\Helper\Navigation\Sitemap::SITEMAP_XSD);

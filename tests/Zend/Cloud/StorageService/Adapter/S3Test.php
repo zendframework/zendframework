@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend\Cloud\StorageService\Adapter
+ * @package    ZendTest_Cloud_StorageService_Adapter
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -32,7 +32,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
 
 /**
  * @category   Zend
- * @package    Zend\Cloud\StorageService\Adapter
+ * @package    ZendTest_Cloud_StorageService_Adapter
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -49,8 +49,8 @@ class S3Test extends TestCase
      */
     public static function main()
     {
-        $suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
+        $suite  = new \PHPUnit_Framework_TestSuite(__CLASS__);
+        $result = \PHPUnit_TextUI_TestRunner::run($suite);
     }
 
     /**
@@ -64,12 +64,12 @@ class S3Test extends TestCase
 
         // Create the bucket here
         $s3 = new AmazonS3(
-            $this->_config->get(Zend\Cloud\StorageService\Adapter\S3::AWS_ACCESS_KEY),
-            $this->_config->get(Zend\Cloud\StorageService\Adapter\S3::AWS_SECRET_KEY)
+            $this->_config->get(\Zend\Cloud\StorageService\Adapter\S3::AWS_ACCESS_KEY),
+            $this->_config->get(\Zend\Cloud\StorageService\Adapter\S3::AWS_SECRET_KEY)
         );
 
         $s3->createBucket(
-            $this->_config->get(Zend\Cloud\StorageService\Adapter\S3::BUCKET_NAME)
+            $this->_config->get(\Zend\Cloud\StorageService\Adapter\S3::BUCKET_NAME)
         );
     }
 
@@ -103,11 +103,11 @@ class S3Test extends TestCase
 
         // Delete the bucket here
         $s3 = new AmazonS3(
-            $this->_config->get(Zend\Cloud\StorageService\Adapter\S3::AWS_ACCESS_KEY),
-            $this->_config->get(Zend\Cloud\StorageService\Adapter\S3::AWS_SECRET_KEY)
+            $this->_config->get(\Zend\Cloud\StorageService\Adapter\S3::AWS_ACCESS_KEY),
+            $this->_config->get(\Zend\Cloud\StorageService\Adapter\S3::AWS_SECRET_KEY)
         );
         $s3->removeBucket(
-            $this->_config->get(Zend\Cloud\StorageService\Adapter\S3::BUCKET_NAME)
+            $this->_config->get(\Zend\Cloud\StorageService\Adapter\S3::BUCKET_NAME)
         );
         parent::tearDown();
     }
@@ -123,11 +123,11 @@ class S3Test extends TestCase
             $this->markTestSkipped("Amazon S3 access not configured, skipping test");
         }
 
-        $config = new Zend\Config\Config(array(
-            Zend\Cloud\StorageService\Factory::STORAGE_ADAPTER_KEY => 'Zend\Cloud\StorageService\Adapter\S3',
-            Zend\Cloud\StorageService\Adapter\S3::AWS_ACCESS_KEY   => constant('TESTS_ZEND_SERVICE_AMAZON_ONLINE_ACCESSKEYID'),
-            Zend\Cloud\StorageService\Adapter\S3::AWS_SECRET_KEY   => constant('TESTS_ZEND_SERVICE_AMAZON_ONLINE_SECRETKEY'),
-            Zend\Cloud\StorageService\Adapter\S3::BUCKET_NAME      => constant('TESTS_ZEND_SERVICE_AMAZON_S3_BUCKET'),
+        $config = new \Zend\Config\Config(array(
+            \Zend\Cloud\StorageService\Factory::STORAGE_ADAPTER_KEY => 'Zend\Cloud\StorageService\Adapter\S3',
+            \Zend\Cloud\StorageService\Adapter\S3::AWS_ACCESS_KEY   => constant('TESTS_ZEND_SERVICE_AMAZON_ONLINE_ACCESSKEYID'),
+            \Zend\Cloud\StorageService\Adapter\S3::AWS_SECRET_KEY   => constant('TESTS_ZEND_SERVICE_AMAZON_ONLINE_SECRETKEY'),
+            \Zend\Cloud\StorageService\Adapter\S3::BUCKET_NAME      => constant('TESTS_ZEND_SERVICE_AMAZON_S3_BUCKET'),
         ));
 
         return $config;

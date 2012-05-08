@@ -679,12 +679,12 @@ class GenericConsumer
             $secret = $sec ^ base64_decode($ret['enc_mac_key']);
         }
         if ($macFunc == 'sha1') {
-            if (OpenId\OpenId::strlen($secret) != 20) {
+            if (strlen($secret) != 20) {
                 $this->_setError("The length of the sha1 secret must be 20");
                 return false;
             }
         } else if ($macFunc == 'sha256') {
-            if (OpenId\OpenId::strlen($secret) != 32) {
+            if (strlen($secret) != 32) {
                 $this->_setError("The length of the sha256 secret must be 32");
                 return false;
             }

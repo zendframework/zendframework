@@ -2,7 +2,7 @@
 
 namespace Zend\Mvc\Controller\Plugin;
 
-use Zend\Stdlib\Dispatchable;
+use Zend\Stdlib\DispatchableInterface as Dispatchable;
 
 abstract class AbstractPlugin
 {

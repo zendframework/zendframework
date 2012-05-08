@@ -20,14 +20,16 @@
  */
 
 namespace Zend\Controller\Action\Helper;
+
 use Zend\Session,
-    Zend\Stdlib\SplQueue;
+    Zend\Stdlib\SplQueue,
+    Zend\Session\ManagerInterface as Manager;
 
 /**
  * Flash Messenger - implement session-based messages
  *
  * @uses       \Zend\Controller\Action\Helper\AbstractHelper
- * @uses       \Zend\Session\Manager
+ * @uses       \Zend\Session\ManagerInterface
  * @category   Zend
  * @package    Zend_Controller
  * @subpackage Zend_Controller_Action_Helper
@@ -46,7 +48,7 @@ class FlashMessenger extends AbstractHelper implements \IteratorAggregate, \Coun
     /**
      * $_session - Zend_Session storage object
      *
-     * @var \Zend\Session\Manager
+     * @var Manager
      */
     static protected $_session = null;
 

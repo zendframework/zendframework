@@ -33,12 +33,15 @@ use Zend\Session\SessionManager,
  * @group      Zend_Session
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @preserveGlobalState disabled
  */
 class SessionManagerTest extends \PHPUnit_Framework_TestCase
 {
     public $error;
 
     public $cookieDateFormat = 'D, d-M-y H:i:s e';
+
+    protected $manager;
 
     public function setUp()
     {
@@ -54,19 +57,6 @@ class SessionManagerTest extends \PHPUnit_Framework_TestCase
         if (!$splAutoloadFunctions || !in_array('ZendTest_Autoloader', $splAutoloadFunctions)) {
             include __DIR__ . '/../../_autoload.php';
         }
-    }
-
-    /**
-     * Hack to allow running tests in separate processes
-     *
-     * @see    http://matthewturland.com/2010/08/19/process-isolation-in-phpunit/
-     * @param  PHPUnit_Framework_TestResult $result 
-     * @return void
-     */
-    public function run(\PHPUnit_Framework_TestResult $result = NULL)
-    {
-        $this->setPreserveGlobalState(false);
-        return parent::run($result);
     }
 
     public function handleErrors($errno, $errstr)

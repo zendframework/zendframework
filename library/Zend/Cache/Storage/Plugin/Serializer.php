@@ -27,7 +27,7 @@ use stdClass,
     Zend\Cache\Storage\Capabilities,
     Zend\Cache\Storage\Event,
     Zend\Cache\Storage\PostEvent,
-    Zend\EventManager\EventCollection;
+    Zend\EventManager\EventManagerInterface;
 
 /**
  * @category   Zend
@@ -53,11 +53,11 @@ class Serializer extends AbstractPlugin
     /**
      * Attach
      *
-     * @param  EventCollection $eventCollection
+     * @param  EventManagerInterface $eventCollection
      * @return Serializer
      * @throws Exception\LogicException
      */
-    public function attach(EventCollection $events)
+    public function attach(EventManagerInterface $events)
     {
         $index = spl_object_hash($events);
         if (isset($this->handles[$index])) {
@@ -103,11 +103,11 @@ class Serializer extends AbstractPlugin
     /**
      * Detach
      *
-     * @param  EventCollection $events
+     * @param  EventManagerInterface $events
      * @return Serializer
      * @throws Exception\LogicException
      */
-    public function detach(EventCollection $events)
+    public function detach(EventManagerInterface $events)
     {
         $index = spl_object_hash($events);
         if (!isset($this->handles[$index])) {
@@ -332,6 +332,7 @@ class Serializer extends AbstractPlugin
 
         if (!isset($this->capabilities[$index])) {
             $this->capabilities[$index] = new Capabilities(
+                $baseCapabilities->getAdapter(),
                 new stdClass(), // marker
                 array('supportedDatatypes' => array(
                     'NULL'     => true,

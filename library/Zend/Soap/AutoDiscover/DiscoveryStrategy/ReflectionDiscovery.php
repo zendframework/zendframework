@@ -21,8 +21,7 @@
 
 namespace Zend\Soap\AutoDiscover\DiscoveryStrategy;
 
-use Zend\Soap\AutoDiscover\DiscoveryStrategy,
-    Zend\Server\Reflection\AbstractFunction,
+use Zend\Server\Reflection\AbstractFunction,
     Zend\Server\Reflection\Prototype,
     Zend\Server\Reflection\ReflectionParameter;
 
@@ -36,7 +35,7 @@ use Zend\Soap\AutoDiscover\DiscoveryStrategy,
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-class ReflectionDiscovery implements DiscoveryStrategy
+class ReflectionDiscovery implements DiscoveryStrategyInterface
 {
     public function getFunctionDocumentation(AbstractFunction $function)
     {

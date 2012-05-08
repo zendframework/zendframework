@@ -536,7 +536,7 @@ class LinksTest extends AbstractTest
             $this->_helper->findRelation($active, 'foo', 'bar');
             $this->fail('An invalid value was given, but a ' .
                         'Zend_View_Exception was not thrown');
-        } catch (View\Exception $e) {
+        } catch (View\Exception\ExceptionInterface $e) {
             $this->assertContains('Invalid argument: $rel', $e->getMessage());
         }
     }
@@ -548,7 +548,7 @@ class LinksTest extends AbstractTest
             $this->_helper->renderLink($active, 'foo', 'bar');
             $this->fail('An invalid value was given, but a ' .
                         'Zend_View_Exception was not thrown');
-        } catch (View\Exception $e) {
+        } catch (View\Exception\ExceptionInterface $e) {
             $this->assertContains('Invalid relation attribute', $e->getMessage());
         }
     }

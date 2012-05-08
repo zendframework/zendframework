@@ -24,7 +24,7 @@ namespace Zend\Dojo\View\Helper\Dojo;
 use Zend\Dojo\View\Exception,
     Zend\Dojo\View\Helper\Dojo as DojoHelper,
     Zend\Config\Config,
-    Zend\View\Renderer as View,
+    Zend\View\Renderer\RendererInterface as View,
     Zend\Json\Json;
 
 /**
@@ -42,7 +42,7 @@ use Zend\Dojo\View\Exception,
 class Container
 {
     /**
-     * @var \Zend\View\Renderer
+     * @var \Zend\View\Renderer\RendererInterface
      */
     public $view;
 
@@ -175,7 +175,7 @@ class Container
     /**
      * Set view object
      *
-     * @param  Zend\View\Interface $view
+     * @param  View $view
      * @return void
      */
     public function setView(View $view)

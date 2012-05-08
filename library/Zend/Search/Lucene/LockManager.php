@@ -20,15 +20,12 @@
 
 namespace Zend\Search\Lucene;
 
-use Zend\Search\Lucene\Storage\Directory,
+use Zend\Search\Lucene\Storage\Directory\DirectoryInterface as Directory,
 	Zend\Search\Lucene\Exception\RuntimeException;
 
 /**
  * This is an utility class which provides index locks processing functionality
  *
- * @uses       \Zend\Search\Lucene\Exception\RuntimeException
- * @uses       \Zend\Search\Lucene\Storage\Directory
- * @uses       \Zend\Search\Lucene\Storage\File
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

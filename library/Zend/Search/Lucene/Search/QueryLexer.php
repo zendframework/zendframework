@@ -25,9 +25,6 @@ use Zend\Search\Lucene,
 	Zend\Search\Lucene\Search\Exception\QueryParserException;
 
 /**
- * @uses       \Zend\Search\Lucene\AbstractFSM
- * @uses       \Zend\Search\Lucene\FSMAction
- * @uses	   \Zend\Search\Lucene\Search\Exception\QueryParserException
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Search

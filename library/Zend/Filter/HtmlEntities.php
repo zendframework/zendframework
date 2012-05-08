@@ -184,12 +184,13 @@ class HtmlEntities extends AbstractFilter
     }
 
     /**
-     * Defined by Zend_Filter_Interface
+     * Defined by Zend\Filter\Filter
      *
      * Returns the string $value, converting characters to their corresponding HTML entity
      * equivalents where they exist
      *
      * @param  string $value
+     * @throws Exception\DomainException
      * @return string
      */
     public function filter($value)
@@ -200,7 +201,7 @@ class HtmlEntities extends AbstractFilter
                 throw new Exception\DomainException('Encoding mismatch has resulted in htmlentities errors');
             }
             $enc      = $this->getEncoding();
-            $value    = iconv('', $enc . '//IGNORE', (string) $value);
+            $value    = iconv('', $this->getEncoding() . '//IGNORE', (string) $value);
             $filtered = htmlentities($value, $this->getQuoteStyle(), $enc, $this->getDoubleQuote());
             if (!strlen($filtered)) {
                 throw new Exception\DomainException('Encoding mismatch has resulted in htmlentities errors');

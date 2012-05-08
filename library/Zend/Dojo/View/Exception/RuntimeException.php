@@ -2,7 +2,9 @@
 
 namespace Zend\Dojo\View\Exception;
 
+use Zend\Dojo\Exception;
+
 class RuntimeException
-    extends \RuntimeException
-    implements \Zend\Dojo\View\Exception
+    extends Exception\RuntimeException
+    implements ExceptionInterface
 {}

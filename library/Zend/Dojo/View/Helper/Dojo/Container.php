@@ -30,10 +30,6 @@ use Zend\Dojo\View\Exception,
 /**
  * Container for  Dojo View Helper
  *
- * @uses       \Zend\Dojo\Dojo
- * @uses       \Zend\Dojo\View\Exception
- * @uses       \Zend\Dojo\View\Helper\Dojo
- * @uses       \Zend\Json\Json
  * @package    Zend_Dojo
  * @subpackage View
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

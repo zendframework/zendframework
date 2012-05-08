@@ -2,7 +2,7 @@
 
 namespace Zend\Dojo\Exception;
 
-class RuntimeException
-    extends \RuntimeException
+class BadMethodCallException
+    extends \BadMethodCallException
     implements ExceptionInterface
 {}

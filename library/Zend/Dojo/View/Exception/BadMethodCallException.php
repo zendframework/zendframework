@@ -2,7 +2,9 @@
 
 namespace Zend\Dojo\View\Exception;
 
+use Zend\Dojo\Exception;
+
 class BadMethodCallException
-    extends \BadMethodCallException
-    implements \Zend\Dojo\View\Exception
+    extends Exception\BadMethodCallException
+    implements ExceptionInterface
 {}

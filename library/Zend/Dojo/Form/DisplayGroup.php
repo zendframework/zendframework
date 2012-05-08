@@ -27,7 +27,6 @@ use Zend\Loader\PrefixPathMapper as PluginLoader,
 /**
  * Dijit-enabled DisplayGroup
  *
- * @uses       \Zend\Form\DisplayGroup
  * @package    Zend_Dojo
  * @subpackage Form
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

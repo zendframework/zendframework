@@ -26,8 +26,6 @@ use Zend\Form\Exception\InvalidArgumentException;
 /**
  * Editor dijit
  *
- * @uses       \Zend\Dojo\Form\Element\Dijit
- * @uses       \Zend\Form\Element\Exception
  * @category   Zend
  * @package    Zend_Dojo
  * @subpackage Form_Element

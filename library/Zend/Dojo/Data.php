@@ -19,16 +19,12 @@
  */
 
 namespace Zend\Dojo;
+
 use Zend\Json\Json;
 
 /**
  * dojo.data support for Zend Framework
  *
- * @uses       ArrayAccess
- * @uses       IteratorAggregate
- * @uses       Countable
- * @uses       \Zend\Dojo\Exception
- * @uses       \Zend\Json\Json
  * @package    Zend_Dojo
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License

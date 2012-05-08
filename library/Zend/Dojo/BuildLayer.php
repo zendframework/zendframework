@@ -27,7 +27,6 @@ use Zend\Config\Config,
 /**
  * Dojo module layer and custom build profile generation support
  *
- * @uses       \Zend\Json\Json
  * @package    Zend_Dojo
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License

@@ -136,10 +136,15 @@ class Rename extends Filter\AbstractFilter
      * @param  string  $value  Full path of file to change
      * @param  boolean $source Return internal informations
      * @return string The new filename which has been set
+     * @throws Exception\InvalidArgumentException If the target file already exists.
      */
     public function getNewName($value, $source = false)
     {
         $file = $this->_getFileName($value);
+        if (!is_array($file)) {
+            return $file;
+        }
+
         if ($file['source'] == $file['target']) {
             return $value;
         }
@@ -153,7 +158,9 @@ class Rename extends Filter\AbstractFilter
         }
 
         if (file_exists($file['target'])) {
-            throw new Exception\InvalidArgumentException(sprintf("File '%s' could not be renamed. It already exists.", $value));
+            throw new Exception\InvalidArgumentException(
+                sprintf("File '%s' could not be renamed. It already exists.", $value)
+            );
         }
 
         if ($source) {
@@ -260,7 +267,7 @@ class Rename extends Filter\AbstractFilter
      * and return all other related parameters
      *
      * @param  string $file Filename to get the informations for
-     * @return array
+     * @return array|string
      */
     protected function _getFileName($file)
     {

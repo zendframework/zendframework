@@ -24,11 +24,6 @@ use Zend\Code\NameInformation,
     Zend\Code\Scanner\CachingFileScanner;
 
 /**
- * @uses       Reflector
- * @uses       \Zend\Loader
- * @uses       \Zend\Code\Reflection\ReflectionClass
- * @uses       \Zend\Code\Reflection\Exception
- * @uses       \Zend\Code\Reflection\ReflectionFunction
  * @category   Zend
  * @package    Zend_Reflection
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

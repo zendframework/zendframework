@@ -27,11 +27,6 @@ use ReflectionClass,
     Zend\Code\Scanner\AnnotationScanner;
 
 /**
- * @uses       ReflectionClass
- * @uses       Zend_Reflection_Docblock
- * @uses       \Zend\Code\Reflection\Exception
- * @uses       \Zend\Code\Reflection\ReflectionMethod
- * @uses       \Zend\Code\Reflection\ReflectionProperty
  * @category   Zend
  * @package    Zend_Reflection
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

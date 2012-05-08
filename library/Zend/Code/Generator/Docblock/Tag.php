@@ -25,7 +25,6 @@ use Zend\Code\Reflection\Docblock\TagInterface as ReflectionDocblockTag,
     Zend\Code\Generator\AbstractGenerator;
 
 /**
- * @uses       \Zend\Loader\PluginLoader
  * @category   Zend
  * @package    Zend_Code_Generator
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

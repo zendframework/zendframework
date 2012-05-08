@@ -22,7 +22,6 @@
 namespace Zend\Code\Generator\Docblock\Tag;
 
 /**
- * @uses       \Zend\Code\Generator\DocBlock\Tag
  * @category   Zend
  * @package    Zend_Code_Generator
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

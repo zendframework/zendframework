@@ -24,8 +24,6 @@ use Zend\Code\Scanner\DocBlockScanner,
     Zend\Code\Annotation\AnnotationManager;
 
 /**
- * @uses       Reflector
- * @uses       \Zend\Code\Reflection\ReflectionDocblockTag
  * @category   Zend
  * @package    Zend_Reflection
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

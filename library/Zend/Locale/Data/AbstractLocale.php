@@ -111,7 +111,7 @@ abstract class AbstractLocale
     /**
      * Clears all set cache data
      *
-     * @param string $tag Tag to clear when the default tag name is not used
+     * @param string $tag Tag to clear when the default tag name is not used (Optional)
      * @return void
      */
     public static function clearCache($tag = null)

@@ -117,6 +117,7 @@ abstract class AbstractDb extends AbstractValidator
             $options       = func_get_args();
             $temp['table'] = array_shift($options);
             $temp['field'] = array_shift($options);
+
             if (!empty($options)) {
                 $temp['exclude'] = array_shift($options);
             }

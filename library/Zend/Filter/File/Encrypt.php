@@ -25,8 +25,6 @@ use Zend\Filter,
 /**
  * Encrypts a given file and stores the encrypted file content
  *
- * @uses       \Zend\Filter\Encrypt\Encrypt
- * @uses       \Zend\Filter\Exception
  * @category   Zend
  * @package    Zend_Filter
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

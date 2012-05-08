@@ -23,8 +23,6 @@ use Zend\Filter,
     Zend\Filter\Exception;
 
 /**
- * @uses       Zend\Filter\Exception
- * @uses       Zend\Filter\AbstractFilter
  * @category   Zend
  * @package    Zend_Filter
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -170,7 +168,7 @@ class Rename extends Filter\AbstractFilter
      * Returns the file $value, removing all but digit characters
      *
      * @param  string $value Full path of file to change
-     * @throws \Zend\Filter\Exception
+     * @throws Exception\RuntimeException
      * @return string The new filename which has been set, or false when there were errors
      */
     public function filter($value)

@@ -402,8 +402,8 @@ class InputFilter
     }
 
     /**
-     * @return Zend\Filter\InputFilter
-     * @throws Zend\Filter\Exception
+     * @return InputFilter
+     * @throws Exception\RuntimeException
      */
     public function process()
     {
@@ -420,7 +420,7 @@ class InputFilter
 
     /**
      * @param array $data
-     * @return Zend\Filter\InputFilter
+     * @return InputFilter
      */
     public function setData(array $data)
     {
@@ -460,8 +460,8 @@ class InputFilter
 
     /**
      * @param array $options
-     * @return Zend\Filter\InputFilter
-     * @throws Zend\Filter\Exception if an unknown option is given
+     * @return InputFilter
+     * @throws Exception\ExceptionInterface if an unknown option is given
      */
     public function setOptions(array $options)
     {
@@ -496,7 +496,7 @@ class InputFilter
      * Set translation object
      *
      * @param  Zend_Translator|Zend\Translator\Adapter\Adapter|null $translator
-     * @return Zend\Filter\InputFilter
+     * @return InputFilter
      */
     public function setTranslator($translator = null)
     {
@@ -540,7 +540,7 @@ class InputFilter
      * Indicate whether or not translation should be disabled
      *
      * @param  bool $flag
-     * @return Zend\Filter\InputFilter
+     * @return InputFilter
      */
     public function setDisableTranslator($flag)
     {
@@ -1060,7 +1060,7 @@ class InputFilter
     /**
      * Check a validatorRule for the presence of a NotEmpty validator instance.
      * The purpose is to preserve things like a custom message, that may have been
-     * set on the validator outside \Zend\Filter\InputFilter.
+     * set on the validator outside InputFilter.
      * @param  array $validatorRule
      * @return mixed False if none is found, \Zend\Validator\NotEmpty instance if found
      */

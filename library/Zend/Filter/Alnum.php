@@ -25,8 +25,6 @@ use Zend\Config\Config,
     Zend\Registry;
 
 /**
- * @uses       Zend\Filter\AbstractFilter
- * @uses       Zend\Locale\Locale
  * @category   Zend
  * @package    Zend_Filter
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

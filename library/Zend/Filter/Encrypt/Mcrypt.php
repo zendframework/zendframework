@@ -26,8 +26,6 @@ use Zend\Filter\Exception,
 /**
  * Encryption adapter for mcrypt
  *
- * @uses       \Zend\Filter\Encrypt\EncryptionAlgorithmInterface
- * @uses       \Zend\Filter\Exception
  * @category   Zend
  * @package    Zend_Filter
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -274,7 +272,7 @@ class Mcrypt implements EncryptionAlgorithmInterface
     /**
      * Open a cipher
      *
-     * @throws \Zend\Filter\Exception When the cipher can not be opened
+     * @throws Exception\RuntimeException When the cipher can not be opened
      * @return resource Returns the opened cipher
      */
     protected function _openCipher()

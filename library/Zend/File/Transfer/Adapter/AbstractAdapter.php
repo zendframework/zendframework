@@ -512,7 +512,7 @@ abstract class AbstractAdapter
      * Retrieve individual validator
      *
      * @param  string $name
-     * @return Validator\Validator|null
+     * @return Validator\ValidatorInterface|null
      */
     public function getValidator($name)
     {
@@ -862,7 +862,7 @@ abstract class AbstractAdapter
      *
      * @param  array        $filters Filter to set
      * @param  string|array $files   Files to limit this filter to
-     * @return AbstractFilter
+     * @return Filter\AbstractFilter
      */
     public function setFilters(array $filters, $files = null)
     {
@@ -901,7 +901,7 @@ abstract class AbstractAdapter
      *
      * @param  string|array $files (Optional) Returns the filter for this files
      * @return array List of set filters
-     * @throws Exception When file not found
+     * @throws Exception\RuntimeException When file not found
      */
     public function getFilters($files = null)
     {

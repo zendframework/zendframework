@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_CodeGenerator
+ * @package    Zend_Code_Generator
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -28,13 +28,13 @@ use Zend\Code\Generator\ClassGenerator,
 
 /**
  * @category   Zend
- * @package    Zend_CodeGenerator
+ * @package    Zend_Code_Generator
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  *
- * @group Zend_CodeGenerator
- * @group Zend_CodeGenerator_Php
+ * @group Zend_Code_Generator
+ * @group Zend_Code_Generator_Php
  */
 class ClassGeneratorTest extends \PHPUnit_Framework_TestCase
 {
@@ -82,7 +82,6 @@ class ClassGeneratorTest extends \PHPUnit_Framework_TestCase
 
     public function testPropertyAccessors()
     {
-
         $classGenerator = new ClassGenerator();
         $classGenerator->setProperties(array(
             'propOne',
@@ -91,10 +90,10 @@ class ClassGeneratorTest extends \PHPUnit_Framework_TestCase
 
         $properties = $classGenerator->getProperties();
         $this->assertEquals(count($properties), 2);
-        $this->assertInstanceOf('PropertyGenerator', current($properties));
+        $this->assertInstanceOf('Zend\Code\Generator\PropertyGenerator', current($properties));
 
         $property = $classGenerator->getProperty('propTwo');
-        $this->assertInstanceOf('PropertyGenerator', $property);
+        $this->assertInstanceOf('Zend\Code\Generator\PropertyGenerator', $property);
         $this->assertEquals($property->getName(), 'propTwo');
 
         // add a new property
@@ -205,20 +204,13 @@ class ClassGeneratorTest extends \PHPUnit_Framework_TestCase
     {
         $classGenerator = new ClassGenerator(
             'SampleClass',
-
-
-            array(
-            'abstract' => true,
-            'name' => 'SampleClass',
-            'extendedClass' => 'ExtendedClassName',
-            'implementedInterfaces' => array('Iterator', 'Traversable'),
-            'properties' => array('foo',
-                array('name' => 'bar')
-                ),
-            'methods' => array(
-                array('name' => 'baz')
-                ),
-            ));
+            null,
+            ClassGenerator::FLAG_ABSTRACT,
+            'ExtendedClassName',
+            array('Iterator', 'Traversable'),
+            array('foo', 'bar'),
+            array('baz')
+        );
 
         $expectedOutput = <<<EOS
 abstract class SampleClass extends ExtendedClassName implements Iterator, Traversable

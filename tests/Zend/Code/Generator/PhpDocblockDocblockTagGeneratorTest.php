@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_CodeGenerator
+ * @package    Zend_Code_Generator
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -22,24 +22,20 @@
 namespace ZendTest\Code\Generator;
 
 /**
- * @see Zend_CodeGenerator_Php_Class
- */
-
-/**
  * @category   Zend
- * @package    Zend_CodeGenerator
+ * @package    Zend_Code_Generator
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  *
- * @group Zend_CodeGenerator
- * @group Zend_CodeGenerator_Php
+ * @group Zend_Code_Generator
+ * @group Zend_Code_Generator_Php
  */
 class DocblockTagGeneratorTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
-     * @var Zend_CodeGenerator_Php_Docblock_Tag
+     * @var \Zend\Code\Generator\Docblock\Tag
      */
     protected $_tag = null;
 

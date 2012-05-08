@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_CodeGenerator
+ * @package    Zend_Code_Generator
  * @subpackage PHP
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -21,14 +21,13 @@
 
 namespace Zend\Code\Generator\Docblock;
 
-use Zend\Code\Reflection\ReflectionDocblockTag,
+use Zend\Code\Reflection\Docblock\Tag as ReflectionDocblockTag,
     Zend\Code\Generator\AbstractGenerator;
 
 /**
- * @uses       \Zend\CodeGenerator\AbstractCodeGenerator
  * @uses       \Zend\Loader\PluginLoader
  * @category   Zend
- * @package    Zend_CodeGenerator
+ * @package    Zend_Code_Generator
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */

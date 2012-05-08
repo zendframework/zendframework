@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_CodeGenerator
+ * @package    Zend_Code_Generator
  * @subpackage PHP
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -31,7 +31,7 @@ use Zend\Code\Reflection\ClassReflection;
  * @uses       \Zend\Code\Generator\PhpMethod
  * @uses       \Zend\Code\Generator\PhpProperty
  * @category   Zend
- * @package    Zend_CodeGenerator
+ * @package    Zend_Code_Generator
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -223,6 +223,12 @@ class ClassGenerator extends AbstractGenerator
         if ($properties !== array()) {
             $this->setProperties($properties);
         }
+        if ($extends !== null) {
+            $this->setExtendedClass($extends);
+        }
+        if (is_array($interfaces)) {
+            $this->setImplementedInterfaces($interfaces);
+        }
         if ($methods !== array()) {
             $this->setMethods($methods);
         }
@@ -318,7 +324,9 @@ class ClassGenerator extends AbstractGenerator
         if (is_array($docblock)) {
             $docblock = new DocblockGenerator($docblock);
         } elseif (!$docblock instanceof DocblockGenerator) {
-            throw new Exception\InvalidArgumentException('setDocblock() is expecting either a string, array or an instance of Zend_CodeGenerator_Php_Docblock');
+            throw new Exception\InvalidArgumentException(
+                'setDocblock() is expecting either a string, array or an instance of Zend\Code\Generator\DocblockGenerator'
+            );
         }
         */
 
@@ -467,17 +475,22 @@ class ClassGenerator extends AbstractGenerator
     /**
      * setProperty()
      *
-     * @param PropertyGenerator $property
+     * @param  string|PropertyGenerator $property
      * @return ClassGenerator
      */
-    public function setProperty(PropertyGenerator $property)
+    public function setProperty($property)
     {
-        //if (is_string($property)) {
-        //    $property = new PropertyGenerator($property);
-        //} elseif (!$property instanceof PropertyGenerator) {
-        //    throw new Exception\InvalidArgumentException('setProperty() expects either a string or an instance of Zend\Code\Generator\PropertyGenerator');
-        //}
+        if (is_string($property)) {
+            $property = new PropertyGenerator($property);
+        } 
         
+        if (!$property instanceof PropertyGenerator) {
+            throw new Exception\InvalidArgumentException(
+                'setProperty() expects either a string '
+                . 'or an instance of Zend\Code\Generator\PropertyGenerator'
+            );
+        }
+
         $propertyName = $property->getName();
 
         if (isset($this->properties[$propertyName])) {
@@ -542,16 +555,19 @@ class ClassGenerator extends AbstractGenerator
     /**
      * setMethod()
      *
-     * @param array|\MethodGenerator\Code\Generator\PhpMethod $method
-     * @return \ClassGenerator\Code\Generator\PhpClass
+     * @param  string|MethodGenerator $method
+     * @return ClassGenerator
      */
-    public function setMethod(MethodGenerator $method)
+    public function setMethod($method)
     {
-        //if (is_string($method)) {
-        //    $method = new MethodGenerator($method);
-        //} elseif (!$method instanceof MethodGenerator) {
-        //    throw new Exception\InvalidArgumentException('setMethod() expects either a string method name or an instance of Zend\Code\Generator\MethodGenerator');
-        //}
+        if (is_string($method)) {
+            $method = new MethodGenerator($method);
+        } 
+        
+        if (!$method instanceof MethodGenerator) {
+            throw new Exception\InvalidArgumentException('setMethod() expects either a string method name or an instance of Zend\Code\Generator\MethodGenerator');
+        }
+
         $methodName = $method->getName();
 
         if (isset($this->methods[$methodName])) {

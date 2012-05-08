@@ -13,26 +13,28 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_CodeGenerator
+ * @package    Zend_Code_Generator
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace ZendTest\Code\Generator;
-use Zend\Code\Generator\FileGenerator,
-    Zend\Code\Reflection\FileReflection;
+
+use Zend\Code\Generator\ClassGenerator;
+use Zend\Code\Generator\FileGenerator;
+use Zend\Code\Reflection\FileReflection;
 
 /**
  * @category   Zend
- * @package    Zend_CodeGenerator
+ * @package    Zend_Code_Generator
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  *
- * @group Zend_CodeGenerator
- * @group Zend_CodeGenerator_Php
- * @group Zend_CodeGenerator_Php_File
+ * @group Zend_Code_Generator
+ * @group Zend_Code_Generator_Php
+ * @group Zend_Code_Generator_Php_File
  */
 class FileGeneratorTest extends \PHPUnit_Framework_TestCase
 {
@@ -62,7 +64,7 @@ class FileGeneratorTest extends \PHPUnit_Framework_TestCase
         $codeGenFile = new FileGenerator(array(
             'requiredFiles' => array('SampleClass.php'),
             'class' => array(
-                'abstract' => true,
+                'flags' => ClassGenerator::FLAG_ABSTRACT,
                 'name' => 'SampleClass',
                 'extendedClass' => 'ExtendedClassName',
                 'implementedInterfaces' => array('Iterator', 'Traversable')
@@ -93,10 +95,8 @@ EOS;
         $tempFile = tempnam(sys_get_temp_dir(), 'UnitFile');
 
         $codeGenFile = new FileGenerator(array(
-            'class' => array(
-                'name' => 'SampleClass'
-                )
-            ));
+            'class' => 'SampleClass',
+        ));
 
         file_put_contents($tempFile, $codeGenFile->generate());
 
@@ -113,13 +113,14 @@ EOS;
 
     public function testFromFileReflection()
     {
-        //$this->markTestSkipped('Must support namespaces');
+        $this->markTestIncomplete('Some scanning capabilities are incomplete, including file docblock comment retrieval and method scanning');
+
         $file = __DIR__ . '/TestAsset/TestSampleSingleClass.php';
         require_once $file;
 
         $codeGenFileFromDisk = FileGenerator::fromReflection(new FileReflection($file));
 
-        $codeGenFileFromDisk->getClass()->setMethod(array('name' => 'foobar'));
+        $codeGenFileFromDisk->getClass()->setMethod('foobar');
 
         $expectedOutput = <<<EOS
 <?php
@@ -177,7 +178,7 @@ EOS;
             ));
 
         // explode by newline, this would leave CF in place if it were generated
-        $lines = explode("\n", $codeGenFile);
+        $lines = explode("\n", $codeGenFile->generate());
 
         $targetLength = strlen('require_once \'SampleClass.php\';');
         $this->assertEquals($targetLength, strlen($lines[2]));

@@ -85,7 +85,7 @@ class FileReflection implements Reflection
     /**
      * @var string
      */
-    //protected $contents        = null;
+    protected $contents        = null;
 
     /**
      * Constructor

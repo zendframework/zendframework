@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_CodeGenerator
+ * @package    Zend_Code_Generator
  * @subpackage PHP
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -29,7 +29,7 @@ use Zend\Code\Reflection\MethodReflection;
  * @uses       \Zend\Code\Generator\PhpMember\AbstractMember
  * @uses       \Zend\Code\Generator\PhpParameter
  * @category   Zend
- * @package    Zend_CodeGenerator
+ * @package    Zend_Code_Generator
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -139,7 +139,9 @@ class MethodGenerator extends AbstractMemberGenerator
         if (is_string($parameter)) {
             $parameter = new ParameterGenerator($parameter);
         } elseif (!$parameter instanceof ParameterGenerator) {
-            throw new Exception\InvalidArgumentException('setParameter() expects either an array of method options or an instance of Zend_CodeGenerator_Php_Parameter');
+            throw new Exception\InvalidArgumentException(
+                'setParameter() is expecting either a string, array or an instance of Zend\Code\Generator\ParameterGenerator'
+            );
         }
         $parameterName = $parameter->getName();
 

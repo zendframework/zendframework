@@ -115,7 +115,13 @@ abstract class AbstractDb extends AbstractValidator
             $options = ArrayUtils::iteratorToArray($options);
         } else if (func_num_args() > 1) {
             $options       = func_get_args();
-            $temp['table'] = array_shift($options);
+            $firstArgument = array_shift($options);
+            if (is_array($firstArgument)) {
+                $temp = ArrayUtils::iteratorToArray($firstArgument);
+            } else {
+                $temp['table'] = $firstArgument;
+            }
+
             $temp['field'] = array_shift($options);
 
             if (!empty($options)) {

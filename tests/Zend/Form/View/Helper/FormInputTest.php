@@ -416,7 +416,12 @@ class FormInputTest extends CommonTestCase
         $element->setAttribute($attribute, false);
         $markup = $this->helper->render($element);
         $expect = sprintf('%s="%s"', $attribute, $off);
-        $this->assertContains($expect, $markup, sprintf("Disabled value for %s should be '%s'; received %s", $attribute, $off, $markup));
+
+        if ($off !== '') {
+            $this->assertContains($expect, $markup, sprintf("Disabled value for %s should be '%s'; received %s", $attribute, $off, $markup));
+        } else {
+            $this->assertNotContains($expect, $markup, sprintf("Disabled value for %s should not be rendered; received %s", $attribute, $markup));
+        }
     }
 
     public function testInvokeProxiesToRender()

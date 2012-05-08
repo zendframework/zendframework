@@ -211,6 +211,13 @@ abstract class AbstractHelper extends BaseAbstractHelper
         $escape  = $this->getEscapeHelper();
         $strings = array();
         foreach ($attributes as $key => $value) {
+            $key = strtolower($key);
+            if (!$value && isset($this->booleanAttributes[$key])) {
+                // Skip boolean attributes that expect empty string as false value
+                if ('' === $this->booleanAttributes[$key]['off']) {
+                    continue;
+                }
+            }
             $strings[] = sprintf('%s="%s"', $key, $escape($value));
         }
         return implode(' ', $strings);

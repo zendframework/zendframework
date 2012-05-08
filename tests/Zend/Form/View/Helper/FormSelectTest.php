@@ -147,4 +147,16 @@ class FormSelectTest extends CommonTestCase
         $markup = $this->helper->render($element);
         $this->assertRegexp('#optgroup .*?label="This is the second label"[^>]*?disabled="disabled"[^>]*?>\s*<option[^>]*?value="bar"[^>]*?>foo.*?</optgroup>#', $markup);
     }
+
+    /**
+     * @group ZF2-290
+     */
+    public function testFalseDisabledValueWillNotRenderOptionsWithDisabledAttribute()
+    {
+        $element = $this->getElement();
+        $element->setAttribute('disabled', false);
+        $markup = $this->helper->render($element);
+
+        $this->assertNotRegexp('#<option.*?(disabled="")#', $markup);
+    }
 }

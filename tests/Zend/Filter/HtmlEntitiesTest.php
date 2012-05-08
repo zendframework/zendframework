@@ -213,6 +213,10 @@ class HtmlEntitiesTest extends \PHPUnit_Framework_TestCase
      */
     public function testCorrectsForEncodingMismatch()
     {
+        if (version_compare(phpversion(), '5.4', '>=')) {
+            $this->markTestIncomplete('Code to test is not compatible with PHP 5.4 ');
+        }
+
         $string = file_get_contents(dirname(__FILE__) . '/_files/latin-1-text.txt');
 
         // restore_error_handler can emit an E_WARNING; let's ignore that, as 

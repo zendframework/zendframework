@@ -27,14 +27,14 @@ use Zend\Filter\Exception,
 /**
  * Encryption adapter for openssl
  *
- * @uses       \Zend\Filter\Encrypt\EncryptionAlgorithm
+ * @uses       \Zend\Filter\Encrypt\EncryptionAlgorithmInterface
  * @uses       \Zend\Filter\Exception
  * @category   Zend
  * @package    Zend_Filter
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Openssl implements EncryptionAlgorithm
+class Openssl implements EncryptionAlgorithmInterface
 {
     /**
      * Definitions for encryption
@@ -405,7 +405,7 @@ class Openssl implements EncryptionAlgorithm
     }
 
     /**
-     * Defined by Zend_Filter_Interface
+     * Defined by Zend\Filter\FilterInterface
      *
      * Decrypts $value with the defined settings
      *

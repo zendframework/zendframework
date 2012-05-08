@@ -105,7 +105,7 @@ class InputFilter
     protected $unknownFields = array();
 
     /**
-     * @var Zend\Filter\Filter The filter object that is run on values
+     * @var Zend\Filter\FilterInterface The filter object that is run on values
      * returned by the getEscaped() method.
      */
     protected $defaultEscapeFilter = null;
@@ -442,15 +442,17 @@ class InputFilter
 
     /**
      * @param mixed $escapeFilter
-     * @return Zend\Filter\Filter
+     * @return FilterInterface
      */
     public function setDefaultEscapeFilter($escapeFilter)
     {
         if (is_string($escapeFilter) || is_array($escapeFilter)) {
             $escapeFilter = $this->_getFilter($escapeFilter);
         }
-        if (!$escapeFilter instanceof Filter) {
-            throw new Exception\InvalidArgumentException('Escape filter specified does not implement Zend\Filter\Filter');
+        if (!$escapeFilter instanceof FilterInterface) {
+            throw new Exception\InvalidArgumentException(
+                'Escape filter specified does not implement Zend\Filter\FilterInterface'
+            );
         }
         $this->defaultEscapeFilter = $escapeFilter;
         return $escapeFilter;
@@ -643,7 +645,7 @@ class InputFilter
     }
 
     /**
-     * @return Zend\Filter\Filter
+     * @return Zend\Filter\FilterInterface
      */
     protected function _getDefaultEscapeFilter()
     {
@@ -1074,7 +1076,7 @@ class InputFilter
 
     /**
      * @param mixed $classBaseName
-     * @return \Zend\Filter\Filter
+     * @return \Zend\Filter\FilterInterface
      */
     protected function _getFilter($classBaseName)
     {
@@ -1093,8 +1095,8 @@ class InputFilter
     /**
      * @param string $type
      * @param mixed $classBaseName
-     * @return \Zend\Filter\Filter|\Zend\Validator\ValidatorInterface
-     * @throws \Zend\Filter\Exception
+     * @return \Zend\Filter\FilterInterface|\Zend\Validator\ValidatorInterface
+     * @throws Exception\ExceptionInterface
      */
     protected function _getFilterOrValidator($type, $classBaseName)
     {

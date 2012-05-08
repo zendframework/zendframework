@@ -23,7 +23,7 @@ namespace Zend\Form;
 
 use Traversable,
     Zend\Config\Config,
-    Zend\Filter\Filter,
+    Zend\Filter\FilterInterface,
     Zend\Form\Element\Exception as ElementException,
     Zend\Loader\PrefixPathLoader,
     Zend\Loader\PrefixPathMapper,
@@ -1603,12 +1603,12 @@ class Element implements ValidatorInterface
     /**
      * Add a filter to the element
      *
-     * @param  string|Filter $filter
+     * @param  string|FilterInterface $filter
      * @return Element
      */
     public function addFilter($filter, $options = array())
     {
-        if ($filter instanceof Filter) {
+        if ($filter instanceof FilterInterface) {
             $name = get_class($filter);
         } elseif (is_string($filter)) {
             $name = $filter;
@@ -1637,7 +1637,7 @@ class Element implements ValidatorInterface
         foreach ($filters as $filterInfo) {
             if (is_string($filterInfo)) {
                 $this->addFilter($filterInfo);
-            } elseif ($filterInfo instanceof Filter) {
+            } elseif ($filterInfo instanceof FilterInterface) {
                 $this->addFilter($filterInfo);
             } elseif (is_array($filterInfo)) {
                 $argc                = count($filterInfo);
@@ -1685,7 +1685,7 @@ class Element implements ValidatorInterface
      * Retrieve a single filter by name
      *
      * @param  string $name
-     * @return Filter
+     * @return FilterInterface
      */
     public function getFilter($name)
     {
@@ -1722,7 +1722,7 @@ class Element implements ValidatorInterface
     {
         $filters = array();
         foreach ($this->_filters as $key => $value) {
-            if ($value instanceof Filter) {
+            if ($value instanceof FilterInterface) {
                 $filters[$key] = $value;
                 continue;
             }
@@ -2046,7 +2046,7 @@ class Element implements ValidatorInterface
      * Lazy-load a filter
      *
      * @param  array $filter
-     * @return Filter
+     * @return FilterInterface
      */
     protected function _loadFilter(array $filter)
     {

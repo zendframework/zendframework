@@ -74,7 +74,7 @@ class StringTrim extends AbstractFilter
      * Sets the charList option
      *
      * @param  string|null $charList
-     * @return \Zend\Filter\StringTrim Provides a fluent interface
+     * @return StringTrim Provides a fluent interface
      */
     public function setCharList($charList)
     {
@@ -83,7 +83,7 @@ class StringTrim extends AbstractFilter
     }
 
     /**
-     * Defined by Zend_Filter_Interface
+     * Defined by Zend\Filter\FilterInterface
      *
      * Returns the string $value with characters stripped from the beginning and end
      *

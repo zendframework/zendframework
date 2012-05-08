@@ -60,7 +60,7 @@ class RealPath extends AbstractFilter
      * FALSE when not existing paths can be given
      *
      * @param boolean|\Zend\Config\Config $exists Path must exist
-     * @return \Zend\Filter\RealPath
+     * @return RealPath
      */
     public function setExists($exists)
     {
@@ -79,7 +79,7 @@ class RealPath extends AbstractFilter
     }
 
     /**
-     * Defined by Zend_Filter_Interface
+     * Defined by Zend\Filter\FilterInterface
      *
      * Returns realpath($value)
      *

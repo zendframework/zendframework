@@ -41,6 +41,7 @@ class StringToUpper extends AbstractFilter
      * Constructor
      *
      * @param string|array $options OPTIONAL
+     * @return void
      */
     public function __construct($options = null)
     {
@@ -78,8 +79,8 @@ class StringToUpper extends AbstractFilter
      * Set the input encoding for the given string
      *
      * @param  string $encoding
-     * @return \Zend\Filter\StringToUpper Provides a fluent interface
-     * @throws \Zend\Filter\Exception
+     * @return StringToUpper Provides a fluent interface
+     * @throws Exception\ExceptionInterface
      */
     public function setEncoding($encoding = null)
     {
@@ -99,7 +100,7 @@ class StringToUpper extends AbstractFilter
     }
 
     /**
-     * Defined by Zend_Filter_Interface
+     * Defined by Zend\Filter\FilterInterface
      *
      * Returns the string $value, converting characters to uppercase as necessary
      *

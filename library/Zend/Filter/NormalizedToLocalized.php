@@ -74,7 +74,7 @@ class NormalizedToLocalized extends AbstractFilter
      * Sets options to use
      *
      * @param  array $options (Optional) Options to use
-     * @return \Zend\Filter\LocalizedToNormalized
+     * @return NormalizedToLocalized
      */
     public function setOptions(array $options = null)
     {
@@ -83,7 +83,7 @@ class NormalizedToLocalized extends AbstractFilter
     }
 
     /**
-     * Defined by Zend_Filter_Interface
+     * Defined by Zend\Filter\FilterInterface
      *
      * Normalizes the given input
      *

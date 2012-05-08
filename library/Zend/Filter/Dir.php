@@ -30,7 +30,7 @@ namespace Zend\Filter;
 class Dir extends AbstractFilter
 {
     /**
-     * Defined by Zend_Filter_Interface
+     * Defined by Zend\Filter\FilterInterface
      *
      * Returns dirname($value)
      *

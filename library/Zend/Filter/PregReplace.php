@@ -116,7 +116,7 @@ class PregReplace extends AbstractFilter
      * Set the match pattern for the regex being called within filter()
      *
      * @param mixed $match - same as the first argument of preg_replace
-     * @return \Zend\Filter\PregReplace
+     * @return PregReplace
      */
     public function setMatchPattern($match)
     {
@@ -138,7 +138,7 @@ class PregReplace extends AbstractFilter
      * Set the Replacement pattern/string for the preg_replace called in filter
      *
      * @param mixed $replacement - same as the second argument of preg_replace
-     * @return \Zend\Filter\PregReplace
+     * @return PregReplace
      */
     public function setReplacement($replacement)
     {

@@ -109,7 +109,7 @@ class Alpha extends AbstractFilter
      * Sets the allowWhiteSpace option
      *
      * @param boolean $allowWhiteSpace
-     * @return \Zend\Filter\Alpha Provides a fluent interface
+     * @return Alpha Provides a fluent interface
      */
     public function setAllowWhiteSpace($allowWhiteSpace)
     {
@@ -169,7 +169,7 @@ class Alpha extends AbstractFilter
      * Sets the locale option
      *
      * @param boolean $locale
-     * @return \Zend\Filter\Alnum Provides a fluent interface
+     * @return Alpha Provides a fluent interface
      */
     public function setLocale($locale = null)
     {
@@ -178,7 +178,7 @@ class Alpha extends AbstractFilter
     }
 
     /**
-     * Defined by Zend_Filter_Interface
+     * Defined by Zend\Filter\FilterInterface
      *
      * Returns the string $value, removing all but alphabetic characters
      *

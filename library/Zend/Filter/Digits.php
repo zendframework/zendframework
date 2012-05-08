@@ -51,7 +51,7 @@ class Digits extends AbstractFilter
     }
 
     /**
-     * Defined by Zend_Filter_Interface
+     * Defined by Zend\Filter\FilterInterface
      *
      * Returns the string $value, removing all but digit characters
      *

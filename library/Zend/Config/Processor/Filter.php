@@ -23,7 +23,7 @@ namespace Zend\Config\Processor;
 use Zend\Config\Config,
     Zend\Config\Processor,
     Zend\Config\Exception,
-    Zend\Filter\Filter as ZendFilter,
+    Zend\Filter\FilterInterface as ZendFilter,
     \Traversable,
     \ArrayObject;
 
@@ -36,14 +36,14 @@ use Zend\Config\Config,
 class Filter implements Processor
 {
     /**
-     * @var \Zend\Filter\Filter
+     * @var \Zend\Filter\FilterInterface
      */
     protected $filter;
 
     /**
      * Filter all config values using the supplied Zend\Filter
      *
-     * @param \Zend\Filter\Filter $filter
+     * @param \Zend\Filter\FilterInterface $filter
      * @return \Zend\Config\Processor\Filter
      */
     public function __construct(ZendFilter $filter)
@@ -52,7 +52,7 @@ class Filter implements Processor
     }
 
     /**
-     * @return \Zend\Filter\Filter
+     * @return \Zend\Filter\FilterInterface
      */
     public function getFilter()
     {
@@ -60,7 +60,7 @@ class Filter implements Processor
     }
 
     /**
-     * @param \Zend\Filter\Filter $filter
+     * @param \Zend\Filter\FilterInterface $filter
      */
     public function setFilter(ZendFilter $filter)
     {

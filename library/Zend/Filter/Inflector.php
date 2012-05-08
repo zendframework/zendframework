@@ -111,7 +111,7 @@ class Inflector extends AbstractFilter
      * Set plugin broker
      *
      * @param \Zend\Loader\Broker $broker
-     * @return \Zend\Filter\Inflector
+     * @return Inflector
      */
     public function setPluginBroker(Broker $broker)
     {
@@ -124,7 +124,7 @@ class Inflector extends AbstractFilter
      *
      * @deprecated Use setOptions() instead
      * @param  \Zend\Config\Config $config
-     * @return \Zend\Filter\Inflector
+     * @return Inflector
      */
     public function setConfig(Config\Config $config)
     {
@@ -135,7 +135,7 @@ class Inflector extends AbstractFilter
      * Set options
      *
      * @param  array $options
-     * @return \Zend\Filter\Inflector
+     * @return Inflector
      */
     public function setOptions($options)
     {
@@ -175,7 +175,7 @@ class Inflector extends AbstractFilter
      * identifier is still found within an inflected target.
      *
      * @param bool $throwTargetExceptions
-     * @return \Zend\Filter\Inflector
+     * @return Inflector
      */
     public function setThrowTargetExceptionsOn($throwTargetExceptionsOn)
     {
@@ -197,7 +197,7 @@ class Inflector extends AbstractFilter
      * Set the Target Replacement Identifier, by default ':'
      *
      * @param string $targetReplacementIdentifier
-     * @return \Zend\Filter\Inflector
+     * @return Inflector
      */
     public function setTargetReplacementIdentifier($targetReplacementIdentifier)
     {
@@ -223,7 +223,7 @@ class Inflector extends AbstractFilter
      * ex: 'scripts/:controller/:action.:suffix'
      *
      * @param string
-     * @return \Zend\Filter\Inflector
+     * @return Inflector
      */
     public function setTarget($target)
     {
@@ -245,7 +245,7 @@ class Inflector extends AbstractFilter
      * Set Target Reference
      *
      * @param reference $target
-     * @return \Zend\Filter\Inflector
+     * @return Inflector
      */
     public function setTargetReference(&$target)
     {
@@ -258,7 +258,7 @@ class Inflector extends AbstractFilter
      * clears the rules before adding them.
      *
      * @param array $rules
-     * @return \Zend\Filter\Inflector
+     * @return Inflector
      */
     public function setRules(Array $rules)
     {
@@ -281,7 +281,7 @@ class Inflector extends AbstractFilter
      *     );
      *
      * @param array
-     * @return \Zend\Filter\Inflector
+     * @return Inflector
      */
     public function addRules(Array $rules)
     {
@@ -324,7 +324,7 @@ class Inflector extends AbstractFilter
      *
      * @param string $spec
      * @param int $index
-     * @return \Zend\Filter\Filter|false
+     * @return FilterInterface|false
      */
     public function getRule($spec, $index)
     {
@@ -340,7 +340,7 @@ class Inflector extends AbstractFilter
     /**
      * ClearRules() clears the rules currently in the inflector
      *
-     * @return \Zend\Filter\Inflector
+     * @return Inflector
      */
     public function clearRules()
     {
@@ -353,8 +353,8 @@ class Inflector extends AbstractFilter
      * or an array of strings or filter objects.
      *
      * @param string $spec
-     * @param array|string|\Zend\Filter\Filter $ruleSet
-     * @return \Zend\Filter\Inflector
+     * @param array|string|\Zend\Filter\FilterInterface $ruleSet
+     * @return Inflector
      */
     public function setFilterRule($spec, $ruleSet)
     {
@@ -368,7 +368,7 @@ class Inflector extends AbstractFilter
      *
      * @param mixed $spec
      * @param mixed $ruleSet
-     * @return void
+     * @return Inflector
      */
     public function addFilterRule($spec, $ruleSet)
     {
@@ -399,7 +399,7 @@ class Inflector extends AbstractFilter
      *
      * @param string $name
      * @param string $value
-     * @return \Zend\Filter\Inflector
+     * @return Inflector
      */
     public function setStaticRule($name, $value)
     {
@@ -417,7 +417,7 @@ class Inflector extends AbstractFilter
      *
      * @param string $name
      * @param mixed $reference
-     * @return \Zend\Filter\Inflector
+     * @return Inflector
      */
     public function setStaticRuleReference($name, &$reference)
     {
@@ -484,11 +484,11 @@ class Inflector extends AbstractFilter
      * Resolve named filters and convert them to filter objects.
      *
      * @param  string $rule
-     * @return \Zend\Filter\Filter
+     * @return FilterInterface
      */
     protected function _getRule($rule)
     {
-        if ($rule instanceof Filter) {
+        if ($rule instanceof FilterInterface) {
             return $rule;
         }
 

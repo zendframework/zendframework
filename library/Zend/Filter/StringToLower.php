@@ -78,8 +78,8 @@ class StringToLower extends AbstractFilter
      * Set the input encoding for the given string
      *
      * @param  string $encoding
-     * @return \Zend\Filter\StringToLower Provides a fluent interface
-     * @throws \Zend\Filter\Exception
+     * @return StringToLower Provides a fluent interface
+     * @throws Exception\ExceptionInterface
      */
     public function setEncoding($encoding = null)
     {
@@ -99,7 +99,7 @@ class StringToLower extends AbstractFilter
     }
 
     /**
-     * Defined by Zend_Filter_Interface
+     * Defined by Zend\Filter\FilterInterface
      *
      * Returns the string $value, converting characters to lowercase as necessary
      *

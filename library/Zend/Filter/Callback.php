@@ -90,8 +90,8 @@ class Callback extends AbstractFilter
     /**
      * Sets a new callback for this filter
      *
-     * @param unknown_type $callback
-     * @return unknown
+     * @param \callable $callback
+     * @return Callback
      */
     public function setCallback($callback, $options = null)
     {
@@ -118,7 +118,7 @@ class Callback extends AbstractFilter
      * Sets new default options to the callback filter
      *
      * @param mixed $options Default options to set
-     * @return \Zend\Filter\Callback
+     * @return Callback
      */
     public function setOptions($options)
     {

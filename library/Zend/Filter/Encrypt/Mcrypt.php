@@ -26,14 +26,14 @@ use Zend\Filter\Exception,
 /**
  * Encryption adapter for mcrypt
  *
- * @uses       \Zend\Filter\Encrypt\EncryptionAlgorithm
+ * @uses       \Zend\Filter\Encrypt\EncryptionAlgorithmInterface
  * @uses       \Zend\Filter\Exception
  * @category   Zend
  * @package    Zend_Filter
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Mcrypt implements EncryptionAlgorithm
+class Mcrypt implements EncryptionAlgorithmInterface
 {
     /**
      * Definitions for encryption
@@ -212,7 +212,7 @@ class Mcrypt implements EncryptionAlgorithm
     }
 
     /**
-     * Defined by Zend_Filter_Interface
+     * Defined by Zend\Filter\FilterInterface
      *
      * Encrypts $value with the defined settings
      *
@@ -237,7 +237,7 @@ class Mcrypt implements EncryptionAlgorithm
     }
 
     /**
-     * Defined by Zend_Filter_Interface
+     * Defined by Zend\Filter\FilterInterface
      *
      * Decrypts $value with the defined settings
      *

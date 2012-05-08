@@ -31,7 +31,7 @@ class StripNewlines extends AbstractFilter
 {
 
     /**
-     * Defined by Zend_Filter_Interface
+     * Defined by Zend\Filter\FilterInterface
      *
      * Returns $value without newline control characters
      *

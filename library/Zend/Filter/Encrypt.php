@@ -66,7 +66,7 @@ class Encrypt extends AbstractFilter
      * Sets new encryption options
      *
      * @param  string|array $options (Optional) Encryption options
-     * @return \Zend\Filter\Encrypt\Encrypt
+     * @return Encrypt
      */
     public function setAdapter($options = null)
     {
@@ -92,8 +92,8 @@ class Encrypt extends AbstractFilter
         }
 
         $this->_adapter = new $adapter($options);
-        if (!$this->_adapter instanceof Encrypt\EncryptionAlgorithm) {
-            throw new Exception\InvalidArgumentException("Encoding adapter '" . $adapter . "' does not implement Zend\\Filter\\Encrypt\\EncryptionAlgorithm");
+        if (!$this->_adapter instanceof Encrypt\EncryptionAlgorithmInterface) {
+            throw new Exception\InvalidArgumentException("Encoding adapter '" . $adapter . "' does not implement Zend\\Filter\\Encrypt\\EncryptionAlgorithmInterface");
         }
 
         return $this;

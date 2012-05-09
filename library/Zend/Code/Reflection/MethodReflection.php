@@ -21,23 +21,17 @@
 namespace Zend\Code\Reflection;
 
 use ReflectionMethod as PhpReflectionMethod,
-    Zend\Code\Reflection,
     Zend\Code\Annotation,
     Zend\Code\Scanner\CachingFileScanner,
     Zend\Code\Scanner\AnnotationScanner;
 
 /**
- * @uses       ReflectionMethod
- * @uses       Zend\Code\Reflection\ReflectionClass
- * @uses       Zend_Reflection_Docblock
- * @uses       Zend\Code\Reflection\Exception
- * @uses       Zend\Code\Reflection\ReflectionParameter
  * @category   Zend
  * @package    Zend_Reflection
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class MethodReflection extends PhpReflectionMethod implements Reflection
+class MethodReflection extends PhpReflectionMethod implements ReflectionInterface
 {
 
     /**

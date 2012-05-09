@@ -20,20 +20,15 @@
 
 namespace Zend\Code\Reflection;
 
-use ReflectionFunction,
-    Zend\Code\Reflection;
+use ReflectionFunction;
 
 /**
- * @uses       ReflectionFunction
- * @uses       \Zend\Code\Reflection\ReflectionDocblockTag
- * @uses       \Zend\Code\Reflection\Exception
- * @uses       \Zend\Code\Reflection\ReflectionParameter
  * @category   Zend
  * @package    Zend_Reflection
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class FunctionReflection extends ReflectionFunction implements Reflection
+class FunctionReflection extends ReflectionFunction implements ReflectionInterface
 {
     /**
      * Get function docblock

@@ -2,7 +2,7 @@
 
 namespace Zend\Code\Reflection\DocBlock;
 
-interface Tag
+interface TagInterface
 {
     public function getName();
     public function initialize($content);

@@ -2,7 +2,10 @@
 
 namespace Zend\Code\Reflection\Exception;
 
+use Zend\Code\Exception;
+
+
 class RuntimeException
-    extends \RuntimeException
-    implements \Zend\Code\Reflection\Exception
+    extends Exception\RuntimeException
+    implements ExceptionInterface
 {}

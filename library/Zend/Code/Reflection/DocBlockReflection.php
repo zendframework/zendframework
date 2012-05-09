@@ -20,19 +20,16 @@
 
 namespace Zend\Code\Reflection;
 
-use Zend\Code\Reflection,
-    Zend\Code\Scanner\DocBlockScanner,
+use Zend\Code\Scanner\DocBlockScanner,
     Zend\Code\Annotation\AnnotationManager;
 
 /**
- * @uses       Reflector
- * @uses       \Zend\Code\Reflection\ReflectionDocblockTag
  * @category   Zend
  * @package    Zend_Reflection
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class DocBlockReflection implements Reflection
+class DocBlockReflection implements ReflectionInterface
 {
     /**
      * @var Reflector

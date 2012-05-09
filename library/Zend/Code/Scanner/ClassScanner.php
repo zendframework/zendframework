@@ -2,12 +2,11 @@
 
 namespace Zend\Code\Scanner;
 
-use Zend\Code\Scanner,
-    Zend\Code\NameInformation,
+use Zend\Code\NameInformation,
     Zend\Code\Annotation\AnnotationManager,
     Zend\Code\Exception;
 
-class ClassScanner implements Scanner
+class ClassScanner implements ScannerInterface
 {
     /**
      * @var bool

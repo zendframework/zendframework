@@ -24,9 +24,6 @@ namespace Zend\Code\Generator;
 use Zend\Code\Reflection\FileReflection;
 
 /**
- * @uses       \Zend\Code\Generator\AbstractPhp
- * @uses       \Zend\Code\Generator\PhpClass
- * @uses       \Zend\Code\Generator\Exception
  * @category   Zend
  * @package    Zend_Code_Generator
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -303,7 +300,7 @@ class FileGenerator extends AbstractGenerator
      * setNamespace()
      * 
      * @param $namespace
-     * @return Zend\Code\Generator\PhpFile
+     * @return FileGenerator
      */
     public function setNamespace($namespace)
     {
@@ -344,7 +341,7 @@ class FileGenerator extends AbstractGenerator
      * setUses()
      *
      * @param array $uses
-     * @return Zend\Code\Generator\PhpFile
+     * @return FileGenerator
      */
     public function setUses(array $uses)
     {
@@ -359,7 +356,7 @@ class FileGenerator extends AbstractGenerator
      *
      * @param string $use
      * @param string $as
-     * @return Zend\Code\Generator\PhpFile
+     * @return FileGenerator
      */
     public function setUse($use, $as = null)
     {
@@ -418,7 +415,7 @@ class FileGenerator extends AbstractGenerator
      * setFilename()
      *
      * @param string $filename
-     * @return \FileGenerator\Code\Generator\PhpFile
+     * @return FileGenerator
      */
     public function setFilename($filename)
     {
@@ -450,7 +447,7 @@ class FileGenerator extends AbstractGenerator
      * setBody()
      *
      * @param string $body
-     * @return \FileGenerator\Code\Generator\PhpFile
+     * @return FileGenerator
      */
     public function setBody($body)
     {

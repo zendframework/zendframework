@@ -91,6 +91,14 @@ class TableGatewayTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @covers Zend\Db\TableGateway\TableGateway::getSql
+     */
+    public function testGetSql()
+    {
+        $this->assertInstanceOf('Zend\Db\Sql\Sql', $this->table->getSql());
+    }
+
+    /**
      * @covers Zend\Db\TableGateway\TableGateway::getSelectResultPrototype
      */
     public function testGetSelectResultPrototype()
@@ -100,6 +108,7 @@ class TableGatewayTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Zend\Db\TableGateway\TableGateway::select
+     * @covers Zend\Db\TableGateway\TableGateway::selectWith
      */
     public function testSelectWithNoWhere()
     {
@@ -112,6 +121,7 @@ class TableGatewayTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Zend\Db\TableGateway\TableGateway::select
+     * @covers Zend\Db\TableGateway\TableGateway::selectWith
      */
     public function testSelectWithWhereString()
     {

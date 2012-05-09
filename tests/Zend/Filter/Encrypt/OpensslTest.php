@@ -89,6 +89,10 @@ PIDs9E7uuizAKDhRRRvho8BS
      */
     public function testEncryptionWithDecryptionOpenssl()
     {
+        if (version_compare(phpversion(), '5.4', '>=')) {
+            $this->markTestIncomplete('Code to test is not compatible with PHP 5.4 ');
+        }
+
         $filter = new OpensslEncryption();
         $filter->setPublicKey(__DIR__ . '/../_files/publickey.pem');
         $output = $filter->encrypt('teststring');

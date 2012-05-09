@@ -35,7 +35,7 @@ class OnBootstrapListener extends AbstractListener
 
         $moduleManager = $e->getTarget();
         $events        = $moduleManager->events();
-        $sharedEvents  = $events->getSharedCollections();
+        $sharedEvents  = $events->getSharedManager();
         $sharedEvents->attach('bootstrap', 'bootstrap', array($module, 'onBootstrap'));
     }
 }

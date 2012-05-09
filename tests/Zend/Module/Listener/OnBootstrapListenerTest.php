@@ -37,9 +37,9 @@ class OnBootstrapListenerTest extends TestCase
 
         $sharedEvents = new SharedEventManager();
         $this->bootstrap   = new Bootstrap(new Config(array('di' => array())));
-        $this->bootstrap->events()->setSharedCollections($sharedEvents);
+        $this->bootstrap->events()->setSharedManager($sharedEvents);
         $this->moduleManager = new Manager(array());
-        $this->moduleManager->events()->setSharedCollections($sharedEvents);
+        $this->moduleManager->events()->setSharedManager($sharedEvents);
         $this->moduleManager->events()->attach('loadModule.resolve', new ModuleResolverListener, 1000);
         $this->moduleManager->events()->attach('loadModule', new OnBootstrapListener, 1000);
     }

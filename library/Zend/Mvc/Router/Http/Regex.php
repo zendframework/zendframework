@@ -73,7 +73,6 @@ class Regex implements RouteInterface
      * @param  string $regex
      * @param  string $spec
      * @param  array  $defaults
-     * @return void
      */
     public function __construct($regex, $spec, array $defaults = array())
     {

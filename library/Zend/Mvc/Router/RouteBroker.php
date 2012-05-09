@@ -55,7 +55,6 @@ class RouteBroker implements Broker
      * Allow configuration via options; see {@link setOptions()} for details.
      *
      * @param  null|array|\Traversable $options
-     * @return void
      */
     public function __construct($options = null)
     {

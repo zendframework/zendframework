@@ -54,8 +54,17 @@ class Fieldset extends Element implements FieldsetInterface
      * @param  array $flags
      * @return FieldsetInterface
      */
-    public function add(ElementInterface $elementOrFieldset, array $flags = array())
+    public function add($elementOrFieldset, array $flags = array())
     {
+        if (!$elementOrFieldset instanceof ElementInterface) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                '%s requires that $elementOrFieldset be an object implementing %s; received "%s"',
+                __METHOD__,
+                __NAMESPACE__ . '\ElementInterface',
+                (is_object($elementOrFieldset) ? get_class($elementOrFieldset) : gettype($elementOrFieldset))
+            ));
+        }
+
         $name = $elementOrFieldset->getName();
         if (empty($name) && (!array_key_exists('name', $flags) || empty($flags['name']))) {
             throw new Exception\InvalidArgumentException(sprintf(

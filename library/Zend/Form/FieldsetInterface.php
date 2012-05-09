@@ -40,11 +40,13 @@ interface FieldsetInterface extends
      * $flags could contain metadata such as the alias under which to register 
      * the element or fieldset, order in which to prioritize it, etc.
      * 
-     * @param  ElementInterface $elementOrFieldset 
+     * @param  array|ElementInterface $elementOrFieldset Typically, only allow objects implementing ElementInterface; 
+     *                                                   however, keeping it flexible to allow a factory-based form 
+     *                                                   implementation as well
      * @param  array $flags
      * @return FieldsetInterface
      */
-    public function add(ElementInterface $elementOrFieldset, array $flags = array());
+    public function add($elementOrFieldset, array $flags = array());
 
     /**
      * Does the fieldset have an element/fieldset by the given name?

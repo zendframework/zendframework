@@ -29,6 +29,10 @@ class CachingFileScanner extends FileScanner
         }
     }
 
+    public static function clearCache() {
+        static::$cache = array();
+    }
+
     public function getAnnotationManager()
     {
         return $this->fileScanner->getAnnotationManager();

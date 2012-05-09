@@ -2,9 +2,9 @@
 
 namespace Zend\Di\Definition\Annotation;
 
-use Zend\Code\Annotation\Annotation;
+use Zend\Code\Annotation\AnnotationInterface;
 
-class Inject implements Annotation
+class Inject implements AnnotationInterface
 {
 
     protected $content = null;

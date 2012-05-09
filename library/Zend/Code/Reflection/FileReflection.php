@@ -198,7 +198,7 @@ class FileReflection implements Reflection
     /**
      * getUses()
      *
-     * @return array
+     * @return string[]
      */
     public function getUses()
     {

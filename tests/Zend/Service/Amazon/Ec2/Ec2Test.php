@@ -42,22 +42,6 @@ class Ec2Test extends \PHPUnit_Framework_TestCase
      */
     private $ec2Instance;
 
-    /**
-     * Prepares the environment before running a test.
-     */
-    protected function setUp()
-    {
-        parent::setUp();
-    }
-
-    /**
-     * Cleans up the environment after running a test.
-     */
-    protected function tearDown()
-    {
-        parent::tearDown();
-    }
-
     public function testFactoryReturnsKeyPairObject()
     {
         $object = Ec2\Ec2::factory('keypair', 'access_key', 'secret_access_key');

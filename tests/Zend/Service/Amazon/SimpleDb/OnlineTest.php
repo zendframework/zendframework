@@ -75,10 +75,7 @@ class OnlineTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         if (!constant('TESTS_ZEND_SERVICE_AMAZON_ONLINE_ENABLED')) {
-            $this->markTestSkipped('Zend_Service_Amazon_S3 online tests are not enabled');
-        }
-        if(!defined('TESTS_ZEND_SERVICE_AMAZON_ONLINE_ACCESSKEYID') || !defined('TESTS_ZEND_SERVICE_AMAZON_ONLINE_SECRETKEY')) {
-            $this->markTestSkipped('Constants AccessKeyId and SecretKey have to be set.');
+            $this->markTestSkipped('Zend_Service_Amazon online tests are not enabled');
         }
 
         $this->_amazon = new SimpleDb\SimpleDb(

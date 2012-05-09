@@ -305,7 +305,7 @@ class Client implements Stdlib\DispatchableInterface
     /**
      * Set Uri (to the request)
      *
-     * @param string|\Zend\Uri\Http $uri
+     * @param string|Http $uri
      * @return Client
      */
     public function setUri($uri)
@@ -783,7 +783,7 @@ class Client implements Stdlib\DispatchableInterface
                         $newUri .= '?' . $queryString;
                     }
 
-                    $uri = new \Zend\Uri\Http($newUri);
+                    $uri = new Http($newUri);
                 }
             }
             // If we have no ports, set the defaults
@@ -1150,7 +1150,7 @@ class Client implements Stdlib\DispatchableInterface
      *
      * This method will try to detect the MIME type of a file. If the fileinfo
      * extension is available, it will be used. If not, the mime_magic
-     * extension which is deprected but is still available in many PHP setups
+     * extension which is deprecated but is still available in many PHP setups
      * will be tried.
      *
      * If neither extension is available, the default application/octet-stream

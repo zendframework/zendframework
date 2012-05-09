@@ -31,19 +31,6 @@ namespace Zend\XmlRpc;
  * Using this function, users/Zend\XmlRpc\Client object can create the Zend\XmlRpc\Value objects
  * from PHP variables, XML string or by specifing the exact XML-RPC natvie type
  *
- * @uses       Zend\XmlRpc\Generator\DomDocument
- * @uses       Zend\XmlRpc\Generator\XmlWriter
- * @uses       Zend\XmlRpc\Value\ArrayValue
- * @uses       Zend\XmlRpc\Value\Base64
- * @uses       Zend\XmlRpc\Value\BigInteger
- * @uses       Zend\XmlRpc\Value\Boolean
- * @uses       Zend\XmlRpc\Value\DateTime
- * @uses       Zend\XmlRpc\Value\Double
- * @uses       Zend\XmlRpc\Value\Exception
- * @uses       Zend\XmlRpc\Value\Integer
- * @uses       Zend\XmlRpc\Value\Nil
- * @uses       Zend\XmlRpc\Value\String
- * @uses       Zend\XmlRpc\Value\Struct
  * @package    Zend_XmlRpc
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -195,10 +182,9 @@ abstract class Value
      *
      * By default the value type is autodetected according to it's PHP type
      *
-     * @param mixed $value
-     * @param Zend\XmlRpc\Value::constant $type
-     *
-     * @return self
+     * @param  mixed $value
+     * @param  Zend\XmlRpc\Value::constant $type
+     * @return Value
      */
     public static function getXmlRpcValue($value, $type = self::AUTO_DETECT_TYPE)
     {

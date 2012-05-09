@@ -20,9 +20,8 @@
 
 namespace Zend\Session\SaveHandler;
 
-use Zend\Cache\Storage\Adapter\AdapterInterface as StorageAdapter,
-    Zend\Session\Exception,
-    Zend\Session\SaveHandler\SaveHandlerInterface as Savable;
+use Zend\Cache\Storage\Adapter\AdapterInterface as StorageAdapter;
+use Zend\Session\Exception;
 
 /**
  * Cache session save handler
@@ -33,7 +32,7 @@ use Zend\Cache\Storage\Adapter\AdapterInterface as StorageAdapter,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Cache implements Savable
+class Cache implements SaveHandlerInterface
 {
     /**
      * Session Save Path

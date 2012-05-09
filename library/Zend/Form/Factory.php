@@ -64,6 +64,43 @@ class Factory
     }
 
     /**
+     * Create an element, fieldset, or form
+     *
+     * Introspects the 'type' key of the provided $spec, and determines what 
+     * type is being requested; if none is provided, assumes the spec 
+     * represents simply an element.
+     * 
+     * @param  array|Traversable $spec 
+     * @return ElementInterface
+     */
+    public function create($spec)
+    {
+        $spec = $this->validateSpecification($spec, __METHOD__);
+        $type = isset($spec['type']) ? $spec['type'] : 'Zend\Form\Element';
+
+        if (is_subclass_of($type, 'Zend\Form\FormInterface', true)) {
+            return $this->createForm($spec);
+        }
+        
+        if (is_subclass_of($type, 'Zend\Form\FieldsetInterface', true)) {
+            return $this->createFieldset($spec);
+        }
+
+        if (!is_subclass_of($type, 'Zend\Form\ElementInterface', true)) {
+            throw new Exception\DomainException(sprintf(
+                '%s expects the $spec["type"] to implement one of %s, %s, or %s; received %s',
+                __METHOD__,
+                'Zend\Form\ElementInterface',
+                'Zend\Form\FieldsetInterface',
+                'Zend\Form\FormInterface',
+                $type
+            ));
+        }
+
+        return $this->createElement($spec);
+    }
+
+    /**
      * Create an element based on the provided specification
      *
      * Specification can contain any of the following:

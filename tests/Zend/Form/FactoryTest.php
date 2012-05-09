@@ -484,4 +484,53 @@ class FactoryTest extends TestCase
         $hydrator = $form->getHydrator();
         $this->assertInstanceOf('Zend\Form\Hydrator\ObjectProperty', $hydrator);
     }
+
+    public function testCanCreateFormUsingCreate()
+    {
+        $form = $this->factory->create(array(
+            'type'       => 'Zend\Form\BaseForm',
+            'name'       => 'foo',
+            'attributes' => array(
+                'method' => 'get',
+            ),
+        ));
+        $this->assertInstanceOf('Zend\Form\FormInterface', $form);
+        $this->assertEquals('foo', $form->getName());
+        $this->assertEquals('get', $form->getAttribute('method'));
+    }
+
+    public function testCanCreateFieldsetUsingCreate()
+    {
+        $fieldset = $this->factory->create(array(
+            'type'       => 'Zend\Form\Fieldset',
+            'name'       => 'foo',
+            'attributes' => array(
+                'type'         => 'fieldset',
+                'class'        => 'foo-class',
+                'data-js-type' => 'my.form.fieldset',
+            ),
+        ));
+        $this->assertInstanceOf('Zend\Form\FieldsetInterface', $fieldset);
+        $this->assertEquals('foo', $fieldset->getName());
+        $this->assertEquals('fieldset', $fieldset->getAttribute('type'));
+        $this->assertEquals('foo-class', $fieldset->getAttribute('class'));
+        $this->assertEquals('my.form.fieldset', $fieldset->getAttribute('data-js-type'));
+    }
+
+    public function testCanCreateElementUsingCreate()
+    {
+        $element = $this->factory->create(array(
+            'name'       => 'foo',
+            'attributes' => array(
+                'type'         => 'text',
+                'class'        => 'foo-class',
+                'data-js-type' => 'my.form.text',
+            ),
+        ));
+        $this->assertInstanceOf('Zend\Form\ElementInterface', $element);
+        $this->assertEquals('foo', $element->getName());
+        $this->assertEquals('text', $element->getAttribute('type'));
+        $this->assertEquals('foo-class', $element->getAttribute('class'));
+        $this->assertEquals('my.form.text', $element->getAttribute('data-js-type'));
+    }
 }

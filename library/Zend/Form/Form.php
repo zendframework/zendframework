@@ -20,11 +20,7 @@
 
 namespace Zend\Form;
 
-use IteratorAggregate;
 use Traversable;
-use Zend\InputFilter\InputFilterAwareInterface;
-use Zend\InputFilter\InputFilterInterface;
-use Zend\Stdlib\ArrayUtils;
 
 /**
  * @category   Zend
@@ -32,312 +28,61 @@ use Zend\Stdlib\ArrayUtils;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Form extends Fieldset implements FormInterface
+class Form extends BaseForm implements FormFactoryAwareInterface
 {
     /**
-     * Seed attributes
-     * 
-     * @var array
+     * @var Factory
      */
-    protected $attributes = array(
-        'method' => 'POST',
-    );
+    protected $factory;
 
     /**
-     * How to bind values to the model
+     * Compose a form factory to use when calling add() with a non-element/fieldset
      * 
-     * @var int
-     */
-    protected $bindAs = FormInterface::VALUES_NORMALIZED;
-
-    /**
-     * Data being validated
-     * 
-     * @var null|array|\Traversable
-     */
-    protected $data;
- 
-    /**
-     * @var null|InputFilterInterface
-     */
-    protected $filter;
-
-    /**
-     * Whether or not validation has occurred
-     * 
-     * @var bool
-     */
-    protected $hasValidated = false;
-
-    /**
-     * Hydrator to use with bound model
-     * 
-     * @var Hydrator\HydratorInterface
-     */
-    protected $hydrator;
-
-    /**
-     * The model bound to this form, if any
-     * 
-     * @var null|object
-     */
-    protected $model;
-
-    /**
-     * Validation group, if any
-     * 
-     * @var null|array
-     */
-    protected $validationGroup;
-
-    /**
-     * Set data to validate and/or populate elements
-     *
-     * Typically, also passes data on to the composed input filter.
-     * 
-     * @param  array|\ArrayAccess $data 
+     * @param  Factory $factory 
      * @return Form
      */
-    public function setData($data)
+    public function setFormFactory(Factory $factory)
     {
-        if ($data instanceof Traversable) {
-            $data = ArrayUtils::iteratorToArray($data);
-        }
-        if (!is_array($data)) {
-            throw new Exception\InvalidArgumentException(sprintf(
-                '%s expects an array or Traversable argument; received "%s"',
-                __METHOD__,
-                (is_object($data) ? get_class($data) : gettype($data))
-            ));
-        }
-
-        $this->hasValidated = false;
-        $this->data         = $data;
-        $this->populateValues($data);
-
+        $this->factory = $factory;
         return $this;
     }
 
     /**
-     * Bind a model to the form
+     * Retrieve composed form factory
      *
-     * Ensures the model is populated with validated values.
+     * Lazy-loads one if none present.
      * 
-     * @param  object $model 
-     * @return void
+     * @return Factory
      */
-    public function bind($model, $flags = FormInterface::VALUES_NORMALIZED)
+    public function getFormFactory()
     {
-        if (!is_object($model)) {
-            throw new Exception\InvalidArgumentException(sprintf(
-                '%s expects an object argument; received "%s"',
-                __METHOD__,
-                $model
-            ));
+        if (null === $this->factory) {
+            $this->setFormFactory(new Factory());
         }
-
-        if (!in_array($flags, array(FormInterface::VALUES_NORMALIZED, FormInterface::VALUES_RAW))) {
-            throw new Exception\InvalidArgumentException(sprintf(
-                '%s expects the $flags argument to be one of "%s" or "%s"; received "%s"',
-                __METHOD__,
-                'Zend\Form\FormInterface::VALUES_NORMALIZED',
-                'Zend\Form\FormInterface::VALUES_RAW',
-                $flags
-            ));
-        }
-
-        $this->bindAs = $flags;
-        $this->model  = $model;
+        return $this->factory;
     }
 
     /**
-     * Set the hydrator to use when binding an object to the form
+     * Add an element or fieldset
+     *
+     * If $elementOrFieldset is an array or Traversable, passes the argument on
+     * to the composed factory to create the object before attaching it.
+     *
+     * $flags could contain metadata such as the alias under which to register 
+     * the element or fieldset, order in which to prioritize it, etc.
      * 
-     * @param  Hydrator\HydratorInterface $hydrator 
+     * @param  array|Traversable|ElementInterface $elementOrFieldset 
+     * @param  array $flags 
      * @return Form
      */
-    public function setHydrator(Hydrator\HydratorInterface $hydrator)
+    public function add($elementOrFieldset, array $flags = array())
     {
-        $this->hydrator = $hydrator;
-        return $this;
-    }
-
-    /**
-     * Get the hydrator used when binding an object to the form
-     *
-     * Will lazy-load Hydrator\ArraySerializable if none is present.
-     * 
-     * @return null|Hydrator\HydratorInterface
-     */
-    public function getHydrator()
-    {
-        if (!$this->hydrator instanceof Hydrator\HydratorInterface) {
-            $this->setHydrator(new Hydrator\ArraySerializable());
+        if (is_array($elementOrFieldset) 
+            || ($elementOrFieldset instanceof Traversable && !$elementOrFieldset instanceof ElementInterface)
+        ) {
+            $factory = $this->getFormFactory();
+            $elementOrFieldset = $factory->create($elementOrFieldset);
         }
-        return $this->hydrator;
-    }
-
-    /**
-     * Validate the form
-     *
-     * Typically, will proxy to the composed input filter.
-     * 
-     * @return bool
-     */
-    public function isValid()
-    {
-        if (!is_array($this->data)) {
-            throw new Exception\DomainException(sprintf(
-                '%s is unable to validate as there is no data currently set',
-                __METHOD__
-            ));
-        }
-
-        $filter = $this->getInputFilter();
-        if (!$filter instanceof InputFilterInterface) {
-            throw new Exception\DomainException(sprintf(
-                '%s is unable to validate as there is no input filter present',
-                __METHOD__
-            ));
-        }
-
-        $filter->setData($this->data);
-        $filter->setValidationGroup(InputFilterInterface::VALIDATE_ALL);
-
-        if ($this->validationGroup !== null) {
-            $filter->setValidationGroup($this->validationGroup);
-        }
-
-        $result = $filter->isValid();
-        if ($result) {
-            $this->hydrate();
-        }
-
-        if (!$result) {
-            $this->setMessages($filter->getMessages());
-        }
-
-        $this->hasValidated = true;
-        return $result;
-    }
-
-    /**
-     * Retrieve the validated data
-     *
-     * By default, retrieves normalized values; pass one of the 
-     * FormInterface::VALUES_* constants to shape the behavior.
-     * 
-     * @param  int $flag 
-     * @return array|object
-     */
-    public function getData($flag = FormInterface::VALUES_NORMALIZED)
-    {
-        if (!$this->hasValidated) {
-            throw new Exception\DomainException(sprintf(
-                '%s cannot return data as validation has not yet occurred',
-                __METHOD__
-            ));
-        }
-
-        if (($flag !== FormInterface::VALUES_AS_ARRAY) && is_object($this->model)) {
-            return $this->model;
-        }
-
-        $filter = $this->getInputFilter();
-
-        if ($flag === FormInterface::VALUES_RAW) {
-            return $filter->getRawValues();
-        }
-
-        return $filter->getValues();
-    }
-
-    /**
-     * Set the validation group (set of values to validate)
-     *
-     * Typically, proxies to the composed input filter
-     *
-     * @return FormInterface
-     */
-    public function setValidationGroup()
-    {
-        $argc = func_num_args();
-        if (0 === $argc) {
-            throw new Exception\InvalidArgumentException(sprintf(
-                '%s expects at least one argument; none provided',
-                __METHOD__
-            ));
-        }
-
-        $argv = func_get_args();
-        $this->hasValidated = false;
-
-        if (1 < $argc) {
-            $this->validationGroup = $argv;
-            return $this;
-        }
-
-        $arg = array_shift($argv);
-        if ($arg === FormInterface::VALIDATE_ALL) {
-            $this->validationGroup = null;
-            return $this;
-        }
-
-        if (!is_array($arg)) {
-            $arg = (array) $arg;
-        }
-        $this->validationGroup = $arg;
-        return $this;
-    }
-
-    /**
-     * Set the input filter used by this form
-     * 
-     * @param  InputFilterInterface $inputFilter 
-     * @return Form
-     */
-    public function setInputFilter(InputFilterInterface $inputFilter)
-    {
-        $this->hasValidated = false;
-        $this->filter       = $inputFilter;
-        return $this;
-    }
-
-    /**
-     * Retrive input filter used by this form
-     * 
-     * @return null|InputFilterInterface
-     */
-    public function getInputFilter()
-    {
-        if ($this->model instanceof InputFilterAwareInterface) {
-            return $this->model->getInputFilter();
-        }
-        return $this->filter;
-    }
-
-    /**
-     * Hydrate the attached model
-     * 
-     * @return void
-     */
-    protected function hydrate()
-    {
-        if (!is_object($this->model)) {
-            return;
-        }
-        $hydrator = $this->getHydrator();
-        $filter   = $this->getInputFilter();
-
-        switch ($this->bindAs) {
-            case FormInterface::VALUES_RAW:
-                $data = $filter->getRawValues();
-                break;
-            case FormInterface::VALUES_NORMALIZED:
-            default:
-                $data = $filter->getValues();
-                break;
-        }
-        $hydrator->hydrate($data, $this->model);
+        return parent::add($elementOrFieldset, $flags);
     }
 }

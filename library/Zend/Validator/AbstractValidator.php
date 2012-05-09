@@ -314,7 +314,7 @@ abstract class AbstractValidator implements ValidatorInterface
                 $value = $value->__toString();
             }
         } else if (is_array($value)) {
-            $value = implode(', ', $value);
+            $value = '[' . implode(', ', $value) . ']';
         } else {
             $value = (string)$value;
         }
@@ -326,10 +326,14 @@ abstract class AbstractValidator implements ValidatorInterface
         $message = str_replace('%value%', (string) $value, $message);
         foreach ($this->abstractOptions['messageVariables'] as $ident => $property) {
             if (is_array($property)) {
-                $message = str_replace("%$ident%", (string) $this->{key($property)}[current($property)], $message);
+                $value = $this->{key($property)}[current($property)];
+                if (is_array($value)) {
+                    $value = '[' . implode(', ', $value) . ']';
+                }
             } else {
-                $message = str_replace("%$ident%", (string) $this->$property, $message);
+                $value = $this->$property;
             }
+            $message = str_replace("%$ident%", (string)$value, $message);
         }
 
         $length = self::getMessageLength();

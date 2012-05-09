@@ -143,6 +143,10 @@ class MimeTypeTest extends \PHPUnit_Framework_TestCase
 
     public function testSetAndGetMagicFile()
     {
+        if (!extension_loaded('fileinfo')) {
+            $this->markTestSkipped('This PHP Version has no finfo installed');
+        }
+
         $validator = new File\MimeType('image/gif');
         $magic     = getenv('magic');
         if (!empty($magic)) {

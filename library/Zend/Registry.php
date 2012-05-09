@@ -108,9 +108,6 @@ class Registry extends ArrayObject
             throw new RuntimeException("Argument is not a class name");
         }
 
-        /**
-         * @see Zend\\Loader
-         */
         if (!class_exists($registryClassName)) {
             throw new DomainException(sprintf(
                 '%s expects a valid registry class name; received "%s", which did not resolve',

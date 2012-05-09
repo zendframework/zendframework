@@ -20,6 +20,9 @@
 
 namespace Zend\Filter;
 
+use Zend\Config;
+use Zend\Loader;
+
 /**
  * Encrypts a given string
  *
@@ -42,7 +45,7 @@ class Encrypt extends AbstractFilter
      */
     public function __construct($options = null)
     {
-        if ($options instanceof \Zend\Config\Config) {
+        if ($options instanceof Config\Config) {
             $options = $options->toArray();
         }
 
@@ -80,12 +83,16 @@ class Encrypt extends AbstractFilter
             $options = array();
         }
 
-        if (\Zend\Loader::isReadable('Zend/Filter/Encrypt/' . ucfirst($adapter). '.php')) {
+        if (Loader::isReadable('Zend/Filter/Encrypt/' . ucfirst($adapter). '.php')) {
             $adapter = 'Zend\\Filter\\Encrypt\\' . ucfirst($adapter);
         }
 
         if (!class_exists($adapter)) {
-            \Zend\Loader::loadClass($adapter);
+            throw new Exception\DomainException(
+                sprintf('%s expects a valid registry class name; received "%s", which did not resolve',
+                        __METHOD__,
+                        $adapter
+                ));
         }
 
         $this->_adapter = new $adapter($options);

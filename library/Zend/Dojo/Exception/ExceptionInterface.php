@@ -14,21 +14,19 @@
  *
  * @category   Zend
  * @package    Zend_Dojo
- * @subpackage View
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Dojo\View;
+namespace Zend\Dojo\Exception;
 
 /**
- * @uses       \Zend\Dojo\Exception
- * @category   Zend
+ * Exception class for Zend_Dojo
+ *
  * @package    Zend_Dojo
- * @subpackage View
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Exception extends \Zend\Dojo\Exception
+interface ExceptionInterface
 {
 }

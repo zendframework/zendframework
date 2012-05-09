@@ -24,7 +24,6 @@ namespace Zend\Dojo\Form;
 /**
  * Dijit-enabled SubForm
  *
- * @uses       \Zend\Form\SubForm
  * @package    Zend_Dojo
  * @subpackage Form
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

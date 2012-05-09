@@ -26,7 +26,6 @@ namespace Zend\Dojo\Form\Element;
  *
  * Note: this would be easier with mixins or traits...
  *
- * @uses       \Zend\Dojo\Form\Element\Dijit
  * @package    Zend_Dojo
  * @subpackage Form_Element
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

@@ -28,7 +28,6 @@ namespace Zend\Dojo\Form\Decorator;
  * Accepts the following options:
  * - helper:    the name of the view helper to use
  *
- * @uses       \Zend\Dojo\Form\Decorator\DijitContainer
  * @package    Zend_Dojo
  * @subpackage Form_Decorator
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

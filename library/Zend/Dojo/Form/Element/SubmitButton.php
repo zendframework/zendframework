@@ -24,7 +24,6 @@ namespace Zend\Dojo\Form\Element;
 /**
  * Submit button dijit
  *
- * @uses       \Zend\Dojo\Form\Element\Button
  * @category   Zend
  * @package    Zend_Dojo
  * @subpackage Form_Element

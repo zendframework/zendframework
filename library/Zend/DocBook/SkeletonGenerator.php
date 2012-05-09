@@ -1,9 +1,21 @@
 <?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_DocBook
+ */
 
-namespace Zend\Docbook;
+namespace Zend\DocBook;
 
 use DOMDocument;
 
+/**
+ * @category   Zend
+ * @package    Zend_DocBook
+ */
 class SkeletonGenerator
 {
     /**
@@ -15,7 +27,7 @@ class SkeletonGenerator
      * Constructor
      *
      * @param  ClassParser $parser
-     * @return void
+     * @return self
      */
     public function __construct(ClassParser $parser)
     {
@@ -23,7 +35,7 @@ class SkeletonGenerator
     }
 
     /**
-     * Generate docbook
+     * Generate DocBook
      *
      * @return string
      */
@@ -31,8 +43,8 @@ class SkeletonGenerator
     {
         $baseId = $this->parser->getId();
 
-        $dom = new DOMDocument('1.0', 'utf-8');
-        $dom->formatOutput  = true;
+        $dom               = new DOMDocument('1.0', 'utf-8');
+        $dom->formatOutput = true;
 
         $root = $dom->createElement('section');
         $root->setAttribute('xmlns', 'http://docbook.org/ns/docbook');
@@ -83,9 +95,9 @@ class SkeletonGenerator
             $entry = $dom->createElement('varlistentry');
             $entry->setAttribute('xml:id', $method->getId());
 
-            $term   = $dom->createElement('term', $method->getName());
+            $term = $dom->createElement('term', $method->getName());
 
-            $item1 = $dom->createElement('listitem');
+            $item1  = $dom->createElement('listitem');
             $synop  = $dom->createElement('methodsynopsis');
             $mname  = $dom->createElement('methodname', $method->getName());
             $mparam = $dom->createElement('methodparam');

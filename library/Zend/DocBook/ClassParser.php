@@ -1,11 +1,23 @@
 <?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_DocBook
+ */
 
-namespace Zend\Docbook;
+namespace Zend\DocBook;
 
-use ReflectionMethod,
-    Zend\Filter\Word\CamelCaseToDash as CamelCaseToDashFilter,
-    Zend\Code\Reflection\ClassReflection;
+use ReflectionMethod;
+use Zend\Filter\Word\CamelCaseToDash as CamelCaseToDashFilter;
+use Zend\Code\Reflection\ClassReflection;
 
+/**
+ * @category   Zend
+ * @package    Zend_DocBook
+ */
 class ClassParser
 {
     /**
@@ -14,20 +26,20 @@ class ClassParser
     protected $reflection;
 
     /**
-     * @var string Normalized Docbook ID
+     * @var string Normalized DocBook ID
      */
     protected $id;
 
     /**
-     * @var array Array of ClassMethod objects representing public methods
+     * @var ClassMethod[] Array of ClassMethod objects representing public methods
      */
     protected $methods;
 
     /**
      * Constructor
-     * 
-     * @param  ReflectionClass $class 
-     * @return void
+     *
+     * @param ClassReflection $class
+     * @return self
      */
     public function __construct(ClassReflection $class)
     {
@@ -35,8 +47,8 @@ class ClassParser
     }
 
     /**
-     * Retrieve docbook ID for this class
-     * 
+     * Retrieve DocBook ID for this class
+     *
      * @return string
      */
     public function getId()
@@ -45,9 +57,9 @@ class ClassParser
             return $this->id;
         }
 
-        $class     = $this->reflection->getName();
-        $id        = '';
-        $filter    = new CamelCaseToDashFilter();
+        $class  = $this->reflection->getName();
+        $id     = '';
+        $filter = new CamelCaseToDashFilter();
 
         foreach (explode('\\', $class) as $segment) {
             $id .= $filter->filter($segment) . '.';
@@ -61,7 +73,7 @@ class ClassParser
 
     /**
      * Get class name
-     * 
+     *
      * @return string
      */
     public function getName()
@@ -71,8 +83,8 @@ class ClassParser
 
     /**
      * Retrieve parsed methods for this class
-     * 
-     * @return array Array of ClassMethod objects
+     *
+     * @return ClassMethod[] Array of ClassMethod objects
      */
     public function getMethods()
     {
@@ -85,7 +97,7 @@ class ClassParser
         foreach ($rMethods as $method) {
             $methods[] = new ClassMethod($method);
         }
-        
+
         $this->methods = $methods;
         return $this->methods;
     }

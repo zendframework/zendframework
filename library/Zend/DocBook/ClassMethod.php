@@ -1,20 +1,35 @@
 <?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_DocBook
+ */
 
-namespace Zend\Docbook;
+namespace Zend\DocBook;
 
-use Zend\Filter\Word\CamelCaseToDash as CamelCaseToDashFilter,
-    Zend\Code\Reflection\MethodReflection,
-    Zend\Code\Reflection\DocBlockReflection;
+use Zend\Code\NameInformation;
+use Zend\Code\Reflection\MethodReflection;
+use Zend\Code\Reflection\DocBlockReflection;
+use Zend\Filter\Word\CamelCaseToDash as CamelCaseToDashFilter;
 
+
+/**
+ * @category   Zend
+ * @package    Zend_DocBook
+ */
 class ClassMethod
 {
     /**
-     * @var ReflectionMethod
+     * @var MethodReflection
      */
     protected $reflection;
 
     /**
      * PHP internal types
+     *
      * @var array
      */
     protected $internalTypes = array(
@@ -34,12 +49,12 @@ class ClassMethod
     );
 
     /**
-     * @var array Imports in play for this method
+     * @var string[] Imports in play for this method
      */
     protected $uses;
 
     /**
-     * @var string Normalized docbook identifier
+     * @var string Normalized DocBook identifier
      */
     protected $id;
 
@@ -54,15 +69,15 @@ class ClassMethod
     protected $namespace;
 
     /**
-     * @var array Array of Zend\Reflection\ReflectionDocblockTag
+     * @var \Zend\Code\Reflection\DocBlock\ParamTag[] Array of DocBlock tags
      */
     protected $parameterAnnotations;
 
     /**
      * Constructor
      *
-     * @param  ReflectionMethod $reflection
-     * @return void
+     * @param  MethodReflection $reflection
+     * @return self
      */
     public function __construct(MethodReflection $reflection)
     {
@@ -100,8 +115,8 @@ class ClassMethod
             $id .= $filter->filter($segment) . '.';
         }
         $id .= $filter->filter($class)
-            . '.methods.'
-            . $filter->filter($name);
+               . '.methods.'
+               . $filter->filter($name);
 
         $this->id = strtolower($id);
         return $this->id;
@@ -114,9 +129,9 @@ class ClassMethod
      */
     public function getShortDescription()
     {
-        $rDocblock = $this->reflection->getDocblock();
-        if ($rDocblock instanceof DocBlockReflection) {
-            return $rDocblock->getShortDescription();
+        $rDocBlock = $this->reflection->getDocBlock();
+        if ($rDocBlock instanceof DocBlockReflection) {
+            return $rDocBlock->getShortDescription();
         }
         return '';
     }
@@ -128,9 +143,9 @@ class ClassMethod
      */
     public function getLongDescription()
     {
-        $rDocblock = $this->reflection->getDocblock();
-        if ($rDocblock instanceof DocBlockReflection) {
-            return $rDocblock->getLongDescription();
+        $rDocBlock = $this->reflection->getDocBlock();
+        if ($rDocBlock instanceof DocBlockReflection) {
+            return $rDocBlock->getLongDescription();
         }
         return '';
     }
@@ -142,12 +157,12 @@ class ClassMethod
      */
     public function getReturnType()
     {
-        $rDocblock = $this->reflection->getDocblock();
-        if (!$rDocblock instanceof DocBlockReflection) {
+        $rDocBlock = $this->reflection->getDocBlock();
+        if (!$rDocBlock instanceof DocBlockReflection) {
             return 'void';
         }
 
-        $return = $rDocblock->getTag('return');
+        $return = $rDocBlock->getTag('return');
 
         if (!$return) {
             return 'void';
@@ -185,8 +200,8 @@ class ClassMethod
                 }
             }
 
-            $proto = sprintf('%s $%s%s', $types, $param->getName(), $default);
-            $params[] = $proto;
+            $prototype = sprintf('%s $%s%s', $types, $param->getName(), $default);
+            $params[]  = $prototype;
         }
 
         return implode(', ', $params);
@@ -203,7 +218,7 @@ class ClassMethod
         $values = explode('|', trim($value));
         array_walk($values, 'trim');
 
-        $nameInformation = new \Zend\Code\NameInformation(
+        $nameInformation = new NameInformation(
             $this->getNamespace(),
             $this->getUses()
         );
@@ -230,7 +245,7 @@ class ClassMethod
             return $this->namespace;
         }
 
-        $r = $this->reflection->getDeclaringClass();
+        $r               = $this->reflection->getDeclaringClass();
         $this->namespace = $r->getNamespaceName();
         return $this->namespace;
     }
@@ -246,7 +261,7 @@ class ClassMethod
             return $this->class;
         }
 
-        $r = $this->reflection->getDeclaringClass();
+        $r               = $this->reflection->getDeclaringClass();
         $this->class     = $r->getShortName();
         $this->namespace = $r->getNamespaceName();
 
@@ -256,7 +271,7 @@ class ClassMethod
     /**
      * Get import statements and aliases from the class containing this method
      *
-     * @return array
+     * @return string[]
      */
     protected function getUses()
     {
@@ -273,9 +288,9 @@ class ClassMethod
     }
 
     /**
-     * Get parameter annotations from docblock
+     * Get parameter annotations from DocBlock
      *
-     * @return array
+     * @return \Zend\Code\Reflection\DocBlock\ParamTag[]
      */
     protected function getParameterTags()
     {
@@ -283,9 +298,9 @@ class ClassMethod
             return $this->parameterAnnotations;
         }
 
-        $rDocblock = $this->reflection->getDocblock();
-        if ($rDocblock instanceof DocBlockReflection) {
-            $params    = $rDocblock->getTags('param');
+        $rDocBlock = $this->reflection->getDocBlock();
+        if ($rDocBlock instanceof DocBlockReflection) {
+            $params = $rDocBlock->getTags('param');
         } else {
             $params = array();
         }

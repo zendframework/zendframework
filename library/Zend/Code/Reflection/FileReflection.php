@@ -192,7 +192,7 @@ class FileReflection implements ReflectionInterface
     /**
      * getUses()
      *
-     * @return array
+     * @return string[]
      */
     public function getUses()
     {

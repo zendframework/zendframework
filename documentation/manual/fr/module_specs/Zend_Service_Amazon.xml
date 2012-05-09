@@ -150,7 +150,7 @@ $item = $amazon->itemLookup('B0000A432X');
         <para>
             La méthode <methodname>itemLookup()</methodname> accepte aussi un second paramètre optionnel
             pour gérer les options de recherche. Pour les détails complets et une liste des options
-            disponibles, visitez <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.amazon.com/gp/aws/sdk/main.html/103-9285448-4703844?s=AWSEcommerceService&amp;v=2005-10-05&amp;p=ApiReference/ItemLookupOperation">
+            disponibles, visitez <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.amazon.com/gp/aws/sdk/main.html/103-9285448-4703844?s=AWSEcommerceService&amp;v=2011-08-01&amp;p=ApiReference/ItemLookupOperation">
             la documentation Amazon correspondante. </link>.
         </para>
 
@@ -213,7 +213,7 @@ foreach ($results as $result) {
         <para>
             La méthode <methodname>itemSearch()</methodname> accepte un seul tableau en paramètre pour
             gérer les options de recherche. Pour plus de détails et une liste des options
-            disponibles, visitez <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.amazon.com/gp/aws/sdk/main.html/103-9285448-4703844?s=AWSEcommerceService&amp;v=2005-10-05&amp;p=ApiReference/ItemSearchOperation">
+            disponibles, visitez <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.amazon.com/gp/aws/sdk/main.html/103-9285448-4703844?s=AWSEcommerceService&amp;v=2011-08-01&amp;p=ApiReference/ItemSearchOperation">
             la documentation Amazon correspondante </link>
         </para>
 
@@ -272,7 +272,7 @@ foreach ($results as $result) {
 
                 <para>
                     Pour plus d'information sur les options disponibles, vous pouvez vous
-                    référer à la <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.amazon.com/gp/aws/sdk/main.html/102-9041115-9057709?s=AWSEcommerceService&amp;v=2005-10-05&amp;p=ApiReference/ItemSearchOperation">documentation
+                    référer à la <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.amazon.com/gp/aws/sdk/main.html/102-9041115-9057709?s=AWSEcommerceService&amp;v=2011-08-01&amp;p=ApiReference/ItemSearchOperation">documentation
                     spécifique</link>.
                 </para>
             </example>

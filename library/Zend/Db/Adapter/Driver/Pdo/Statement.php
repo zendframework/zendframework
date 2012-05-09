@@ -224,10 +224,10 @@ class Statement implements StatementInterface
     protected function bindParametersFromContainer(ParameterContainer $container)
     {
         $parameters = $container->getNamedArray();
-        foreach ($parameters as $position => &$value) {
+        foreach ($parameters as $name => &$value) {
             $type = \PDO::PARAM_STR;
-            if ($container->offsetHasErrata($position)) {
-                switch ($container->offsetGetErrata($position)) {
+            if ($container->offsetHasErrata($name)) {
+                switch ($container->offsetGetErrata($name)) {
                     case ParameterContainer::TYPE_INTEGER:
                         $type = \PDO::PARAM_INT;
                         break;
@@ -244,7 +244,7 @@ class Statement implements StatementInterface
             }
 
             // parameter is named or positional, value is reference
-            $parameter = is_int($position) ? ($position + 1) : $position;
+            $parameter = is_int($name) ? ($name + 1) : $name;
             $this->resource->bindParam($parameter, $value, $type);
         }
     }

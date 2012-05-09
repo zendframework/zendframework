@@ -40,9 +40,15 @@ class IsCompressedTest extends \PHPUnit_Framework_TestCase
 {
     protected function getMagicMime()
     {
+        $travisVersion = getenv('TRAVIS_PHP_VERSION');
+        if ($travisVersion === '5.3') {
+            return __DIR__ . '/_files/magic.lte.5.3.10.mime';
+        }
+
         if (version_compare(PHP_VERSION, '5.3.10', 'lte')) {
             return __DIR__ . '/_files/magic.lte.5.3.10.mime';
         }
+
         return __DIR__ . '/_files/magic.mime';
     }
 

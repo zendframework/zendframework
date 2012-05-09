@@ -129,6 +129,14 @@ class TableGateway implements TableGatewayInterface
     }
 
     /**
+     * @return \Zend\Db\Sql\Sql
+     */
+    public function getSql()
+    {
+        return $this->sql;
+    }
+
+    /**
      * Select
      * 
      * @param string|array|\Closure $where

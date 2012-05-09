@@ -38,6 +38,14 @@ use Zend\Validator\File;
  */
 class IsImageTest extends \PHPUnit_Framework_TestCase
 {
+    protected function getMagicMime()
+    {
+        if (version_compare(PHP_VERSION, '5.3.10', 'lte')) {
+            return __DIR__ . '/_files/magic.lte.5.3.10.mime';
+        }
+        return __DIR__ . '/_files/magic.mime';
+    }
+
     /**
      * Ensures that the validator follows expected behavior
      *
@@ -163,13 +171,14 @@ class IsImageTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped('This PHP Version has no finfo installed');
         }
 
+        $magicFile = $this->getMagicMime();
         $validator = new File\IsImage(array(
             'image/gif',
             'image/jpg',
-            'magicFile'   => __DIR__ . '/_files/magic.mime',
+            'magicFile'   => $magicFile,
             'enableHeaderCheck' => true));
 
-        $this->assertEquals(__DIR__ . '/_files/magic.mime', $validator->getMagicFile());
+        $this->assertEquals($magicFile, $validator->getMagicFile());
         $this->assertTrue($validator->getHeaderCheck());
         $this->assertEquals('image/gif,image/jpg', $validator->getMimeType());
     }

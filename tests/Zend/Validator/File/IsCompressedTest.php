@@ -38,6 +38,14 @@ use Zend\Validator\File;
  */
 class IsCompressedTest extends \PHPUnit_Framework_TestCase
 {
+    protected function getMagicMime()
+    {
+        if (version_compare(PHP_VERSION, '5.3.10', 'lte')) {
+            return __DIR__ . '/_files/magic.lte.5.3.10.mime';
+        }
+        return __DIR__ . '/_files/magic.mime';
+    }
+
     /**
      * Ensures that the validator follows expected behavior
      *
@@ -172,7 +180,7 @@ class IsCompressedTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped('This PHP Version has no finfo installed');
         }
 
-        $magicFile = dirname(__FILE__) . '/_files/magic.mime';
+        $magicFile = $this->getMagicMime();
         $validator = new File\IsCompressed(array(
             'image/gif',
             'image/jpg',

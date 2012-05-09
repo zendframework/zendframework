@@ -48,8 +48,6 @@ class KeypairTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        parent::setUp();
-
         $this->keypairInstance = new Ec2\Keypair('access_key', 'secret_access_key');
 
         $adapter = new \Zend\Http\Client\Adapter\Test();
@@ -58,8 +56,6 @@ class KeypairTest extends \PHPUnit_Framework_TestCase
         ));
         $this->adapter = $adapter;
         Ec2\Keypair::setDefaultHTTPClient($client);
-
-
     }
 
     /**
@@ -70,8 +66,6 @@ class KeypairTest extends \PHPUnit_Framework_TestCase
         unset($this->adapter);
 
         $this->keypairInstance = null;
-
-        parent::tearDown();
     }
 
     public function testCreateKeyPairNoNameThrowsException()

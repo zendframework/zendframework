@@ -47,11 +47,6 @@ class S3Test extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        parent::setUp();
-        
-        // TODO Auto-generated Zend_Service_Amazon_Authentication_S3Test::setUp()
-        
-
         $this->_amazon = new Authentication\S3('0PN5J17HBGZHT7JJ3X82', 'uV3F3YluFJax1cknvbcGwgjvx4QpvB+leU8dUj2o', '2006-03-01');
     
     }
@@ -61,11 +56,7 @@ class S3Test extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
-        // TODO Auto-generated Zend_Service_Amazon_Authentication_S3Test::tearDown()
-
         $this->_amazon = null;
-        
-        parent::tearDown();
     }
 
     

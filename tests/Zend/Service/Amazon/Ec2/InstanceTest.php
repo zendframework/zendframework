@@ -48,8 +48,6 @@ class InstanceTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        parent::setUp();
-
         $this->instance = new Instance('access_key', 'secret_access_key');
 
         $adapter = new \Zend\Http\Client\Adapter\Test();
@@ -69,8 +67,6 @@ class InstanceTest extends \PHPUnit_Framework_TestCase
         unset($this->adapter);
 
         $this->instance = null;
-
-        parent::tearDown();
     }
 
     public function testConstants()

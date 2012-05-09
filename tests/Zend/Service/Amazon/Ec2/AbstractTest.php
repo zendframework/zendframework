@@ -35,22 +35,6 @@ use Zend\Service\Amazon,
  */
 class AbstractTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Prepares the environment before running a test.
-     */
-    protected function setUp()
-    {
-        parent::setUp();
-    }
-
-    /**
-     * Cleans up the environment after running a test.
-     */
-    protected function tearDown()
-    {
-        parent::tearDown();
-    }
-
     public function testNoKeysThrowException()
     {
         Amazon\AbstractAmazon::setKeys(null, null); // to make sure there's NO DEFAULTS

@@ -21,6 +21,8 @@
 namespace Zend\Form;
 
 use Traversable;
+use Zend\InputFilter\InputFilterInterface;
+use Zend\InputFilter\InputProviderInterface;
 
 /**
  * @category   Zend
@@ -84,5 +86,51 @@ class Form extends BaseForm implements FormFactoryAwareInterface
             $elementOrFieldset = $factory->create($elementOrFieldset);
         }
         return parent::add($elementOrFieldset, $flags);
+    }
+
+    /**
+     * Retrieve input filter used by this form.
+     *
+     * Attaches defaults from attached elements, if no corresponding input
+     * exists for the given element in the input filter.
+     * 
+     * @return InputFilterInterface
+     */
+    public function getInputFilter()
+    {
+        $filter = parent::getInputFilter();
+        if ($filter instanceof InputFilterInterface) {
+            $this->attachInputFilterDefaults($filter);
+        }
+        return $this->filter;
+    }
+
+    /**
+     * Attach defaults provided by the elements to the input filter
+     * 
+     * @param  InputFilterInterface $inputFilter 
+     * @return void
+     */
+    public function attachInputFilterDefaults(InputFilterInterface $inputFilter)
+    {
+        $formFactory  = $this->getFormFactory();
+        $inputFactory = $formFactory->getInputFilterFactory();
+        foreach ($this->getElements() as $element) {
+            if (!$element instanceof InputProviderInterface) {
+                // only interested in the element if it provides input information
+                continue;
+            }
+
+            $name = $element->getName();
+            if ($inputFilter->has($name)) {
+                // if we already have an input by this name, use it
+                continue;
+            }
+
+            // Create an input based on the specification returned from the element
+            $spec  = $element->getInputSpecification();
+            $input = $inputFactory->createInput($spec);
+            $inputFilter->add($input, $name);
+        }
     }
 }

@@ -50,6 +50,14 @@ interface InputFilterInterface extends Countable
     public function get($name);
 
     /**
+     * Test if an input or input filter by the given name is attached
+     * 
+     * @param  string $name 
+     * @return bool
+     */
+    public function has($name);
+
+    /**
      * Set data to use when validating and filtering
      * 
      * @param  array|Traversable $data 

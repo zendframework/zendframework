@@ -97,6 +97,17 @@ class InputFilter implements InputFilterInterface
     }
 
     /**
+     * Test if an input or input filter by the given name is attached
+     * 
+     * @param  string $name 
+     * @return bool
+     */
+    public function has($name)
+    {
+        return (array_key_exists($name, $this->inputs));
+    }
+
+    /**
      * Set data to use when validating and filtering
      * 
      * @param  array|Traversable $data 

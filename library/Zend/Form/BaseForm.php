@@ -304,7 +304,7 @@ class BaseForm extends Fieldset implements FormInterface
     }
 
     /**
-     * Retrive input filter used by this form
+     * Retrieve input filter used by this form
      * 
      * @return null|InputFilterInterface
      */

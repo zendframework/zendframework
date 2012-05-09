@@ -24,6 +24,7 @@ namespace ZendTest\Form;
 use PHPUnit_Framework_TestCase as TestCase;
 use Zend\Form\Factory;
 use Zend\Form\Form;
+use Zend\InputFilter\InputFilter;
 
 class FormTest extends TestCase
 {
@@ -82,5 +83,38 @@ class FormTest extends TestCase
         $this->assertEquals('fieldset', $fieldset->getAttribute('type'));
         $this->assertEquals('foo-class', $fieldset->getAttribute('class'));
         $this->assertEquals('my.form.fieldset', $fieldset->getAttribute('data-js-type'));
+    }
+
+    public function testWillUseInputSpecificationFromElementInInputFilterIfNoMatchingInputFound()
+    {
+        $element = new TestAsset\ElementWithFilter('foo');
+        $filter  = new InputFilter();
+        $this->form->setInputFilter($filter);
+        $this->form->add($element);
+
+        $test = $this->form->getInputFilter();
+        $this->assertSame($filter, $test);
+
+        // Check with valid data
+        $data = array('foo' => '  This1sVal1d ');
+        $filter->setData($data);
+        $this->assertTrue($filter->isValid());
+        $test = $filter->getValues();
+        $this->assertArrayHasKey('foo', $test);
+        $this->assertEquals('This1sVal1d', $test['foo']);
+        
+        // Check with invalid data
+        $data = array('foo' => '  This1sN0tV@l1d ');
+        $filter->setData($data);
+        $this->assertFalse($filter->isValid());
+        $test = $filter->getInvalidInput();
+        $this->assertArrayHasKey('foo', $test);
+
+        // Check with no data
+        $data = array();
+        $filter->setData($data);
+        $this->assertFalse($filter->isValid());
+        $test = $filter->getInvalidInput();
+        $this->assertArrayHasKey('foo', $test);
     }
 }

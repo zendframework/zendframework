@@ -219,24 +219,28 @@ class Statement implements StatementInterface
      */
     protected function bindParametersFromContainer(ParameterContainer $pContainer)
     {
-        $parameters = $pContainer->getPositionalArray();
+        $parameters = $pContainer->getNamedArray();
         $type = '';
         $args = array();
 
-        foreach ($parameters as $position => &$value) {
-            switch ($pContainer->offsetGetErrata($position)) {
-                case ParameterContainer::TYPE_DOUBLE:
-                    $type .= 'd';
-                    break;
-                case ParameterContainer::TYPE_NULL:
-                    $value = null; // as per @see http://www.php.net/manual/en/mysqli-stmt.bind-param.php#96148
-                case ParameterContainer::TYPE_INTEGER:
-                    $type .= 'i';
-                    break;
-                case ParameterContainer::TYPE_STRING:
-                default:
-                    $type .= 's';
-                    break;
+        foreach ($parameters as $name => &$value) {
+            if ($pContainer->offsetHasErrata($name)) {
+                switch ($pContainer->offsetGetErrata($name)) {
+                    case ParameterContainer::TYPE_DOUBLE:
+                        $type .= 'd';
+                        break;
+                    case ParameterContainer::TYPE_NULL:
+                        $value = null; // as per @see http://www.php.net/manual/en/mysqli-stmt.bind-param.php#96148
+                    case ParameterContainer::TYPE_INTEGER:
+                        $type .= 'i';
+                        break;
+                    case ParameterContainer::TYPE_STRING:
+                    default:
+                        $type .= 's';
+                        break;
+                }
+            } else {
+                $type .= 's';
             }
             $args[] = &$value;
         }

@@ -117,4 +117,14 @@ class FormTest extends TestCase
         $test = $filter->getInvalidInput();
         $this->assertArrayHasKey('foo', $test);
     }
+
+    public function testWillUseInputFilterSpecificationFromFieldsetInInputFilterIfNoMatchingInputFilterFound()
+    {
+        $this->markTestIncomplete();
+    }
+
+    public function testWillPopulateSubInputFilterFromInputSpecificationsOnFieldsetElements()
+    {
+        $this->markTestIncomplete();
+    }
 }

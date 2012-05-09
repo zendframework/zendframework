@@ -22,6 +22,7 @@ namespace Zend\Form;
 
 use Traversable;
 use Zend\InputFilter\InputFilterInterface;
+use Zend\InputFilter\InputFilterProviderInterface;
 use Zend\InputFilter\InputProviderInterface;
 
 /**
@@ -100,7 +101,7 @@ class Form extends BaseForm implements FormFactoryAwareInterface
     {
         $filter = parent::getInputFilter();
         if ($filter instanceof InputFilterInterface) {
-            $this->attachInputFilterDefaults($filter);
+            $this->attachInputFilterDefaults($filter, $this);
         }
         return $this->filter;
     }
@@ -109,13 +110,14 @@ class Form extends BaseForm implements FormFactoryAwareInterface
      * Attach defaults provided by the elements to the input filter
      * 
      * @param  InputFilterInterface $inputFilter 
+     * @param  FieldsetInterface $fieldset Fieldset to traverse when looking for default inputs 
      * @return void
      */
-    public function attachInputFilterDefaults(InputFilterInterface $inputFilter)
+    public function attachInputFilterDefaults(InputFilterInterface $inputFilter, FieldsetInterface $fieldset)
     {
         $formFactory  = $this->getFormFactory();
         $inputFactory = $formFactory->getInputFilterFactory();
-        foreach ($this->getElements() as $element) {
+        foreach ($fieldset->getElements() as $element) {
             if (!$element instanceof InputProviderInterface) {
                 // only interested in the element if it provides input information
                 continue;
@@ -131,6 +133,38 @@ class Form extends BaseForm implements FormFactoryAwareInterface
             $spec  = $element->getInputSpecification();
             $input = $inputFactory->createInput($spec);
             $inputFilter->add($input, $name);
+        }
+
+        foreach ($fieldset->getFieldsets() as $fieldset) {
+            $name = $fieldset->getName();
+            if (!$fieldset instanceof InputFilterProviderInterface) {
+                if (!$inputFilter->has($name)) {
+                    // Not an input filter provider, and no matching input for this fieldset.
+                    // Nothing more to do for this one.
+                    continue;
+                }
+
+                $fieldsetFilter = $inputFilter->get($name);
+                if (!$fieldsetFilter instanceof InputFilterInterface) {
+                    // Input attached for fieldset, not input filter; nothing more to do.
+                    continue;
+                }
+
+                // Traverse the elements of the fieldset, and attach any 
+                // defaults to the fieldset's input filter
+                $this->attachInputFilterDefaults($fieldsetFilter, $fieldset);
+                continue;
+            }
+
+            if ($inputFilter->has($name)) {
+                // if we already have an input/filter by this name, use it
+                continue;
+            }
+
+            // Create an inputfilter based on the specification returned from the fieldset
+            $spec   = $element->getInputFilterSpecification();
+            $filter = $inputFactory->createInputFilter($spec);
+            $inputFilter->add($filter, $name);
         }
     }
 }

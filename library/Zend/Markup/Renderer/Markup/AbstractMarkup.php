@@ -23,7 +23,7 @@ namespace Zend\Markup\Renderer\Markup;
 
 use Zend\Markup\Renderer\Markup,
     Zend\Markup\Renderer\AbstractRenderer,
-    Zend\Filter\Filter,
+    Zend\Filter\FilterInterface,
     Zend\Filter\FilterChain;
 
 /**
@@ -129,11 +129,11 @@ abstract class AbstractMarkup implements Markup
     /**
      * Adds a filter to the chain
      *
-     * @param  \Zend\Filter\Filter $filter
+     * @param  \Zend\Filter\FilterInterface $filter
      * @param  int $priority Priority at which to add filter; higher numbers are executed earlier. Defaults to 0
      * @return \Zend\Markup\Renderer\AbstractMarkup
      */
-    public function addFilter(Filter $filter, $priority = 0)
+    public function addFilter(FilterInterface $filter, $priority = 0)
     {
         $this->getFilterChain()->attach($filter, $priority);
 

@@ -21,7 +21,7 @@ use Zend\Paginator\ScrollingStyle\ScrollingStyleInterface,
     Zend\Db\Table\AbstractRowset as DbAbstractRowset,
     Zend\Db\Table\Select as DbTableSelect,
     Zend\Db\Sql,
-    Zend\Filter\Filter,
+    Zend\Filter\FilterInterface,
     Zend\Json\Json,
     Zend\Stdlib\ArrayUtils,
     Zend\View;
@@ -127,7 +127,7 @@ class Paginator implements Countable, IteratorAggregate
     /**
      * Result filter
      *
-     * @var Filter
+     * @var FilterInterface
      */
     protected $_filter = null;
 
@@ -573,7 +573,7 @@ class Paginator implements Countable, IteratorAggregate
     /**
      * Get the filter
      *
-     * @return Filter
+     * @return FilterInterface
      */
     public function getFilter()
     {
@@ -583,10 +583,10 @@ class Paginator implements Countable, IteratorAggregate
     /**
      * Set a filter chain
      *
-     * @param  Filter $filter
+     * @param  FilterInterface $filter
      * @return Paginator
      */
-    public function setFilter(Filter $filter)
+    public function setFilter(FilterInterface $filter)
     {
         $this->_filter = $filter;
 

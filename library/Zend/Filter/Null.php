@@ -21,8 +21,6 @@
 namespace Zend\Filter;
 
 /**
- * @uses       Zend\Filter\Exception
- * @uses       Zend\Filter\AbstractFilter
  * @category   Zend
  * @package    Zend_Filter
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -94,8 +92,8 @@ class Null extends AbstractFilter
      * Set the null types
      *
      * @param  integer|array $type
-     * @throws \Zend\Filter\Exception
-     * @return \Zend\Filter\Null
+     * @throws Exception\InvalidArgumentException
+     * @return Null
      */
     public function setType($type = null)
     {
@@ -125,7 +123,7 @@ class Null extends AbstractFilter
     }
 
     /**
-     * Defined by Zend_Filter_Interface
+     * Defined by Zend\Filter\FilterInterface
      *
      * Returns null representation of $value, if value is empty and matches
      * types that should be considered null.

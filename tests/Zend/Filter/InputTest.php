@@ -1150,7 +1150,7 @@ class InputFilterTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Zend\Filter\FilterBroker', $broker,
             'Expected object of type Zend\Filter\FilterBroker, got ' , get_class($broker));
 
-        $this->setExpectedException('Zend\Filter\Exception', 'Invalid type');
+        $this->setExpectedException('Zend\Filter\Exception\ExceptionInterface', 'Invalid type');
         $loader = $input->getPluginBroker('foo');
     }
 
@@ -1169,7 +1169,7 @@ class InputFilterTest extends \PHPUnit_Framework_TestCase
 
         $loader = new PluginBroker();
 
-        $this->setExpectedException('Zend\Filter\Exception', 'Invalid type');
+        $this->setExpectedException('Zend\Filter\Exception\ExceptionInterface', 'Invalid type');
         $input->setPluginBroker($loader, 'foo');
     }
 

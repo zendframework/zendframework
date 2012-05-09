@@ -438,7 +438,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(is_array($filters));
         $this->assertEquals(3, count($filters));
         foreach ($filters as $filter) {
-            $this->assertTrue($filter instanceof Filter\Filter);
+            $this->assertTrue($filter instanceof Filter\FilterInterface);
         }
     }
 

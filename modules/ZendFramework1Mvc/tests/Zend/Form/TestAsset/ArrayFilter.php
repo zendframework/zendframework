@@ -2,11 +2,11 @@
 
 namespace ZendTest\Form\TestAsset;
 
-use Zend\Filter\Filter,
+use Zend\Filter\FilterInterface,
     Zend\Form\Element,
     Zend\Form\Form;
 
-class ArrayFilter implements Filter
+class ArrayFilter implements FilterInterface
 {
     public function filter($value)
     {

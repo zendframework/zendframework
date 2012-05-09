@@ -26,7 +26,7 @@ namespace Zend\Filter;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class AbstractFilter implements Filter
+abstract class AbstractFilter implements FilterInterface
 {
     /**
      * Invoke filter as a command
@@ -34,7 +34,7 @@ abstract class AbstractFilter implements Filter
      * Proxies to {@link filter()}
      *
      * @param  mixed $value
-     * @throws Zend\Filter\RuntimeException If filtering $value is impossible
+     * @throws Exception\ExceptionInterface If filtering $value is impossible
      * @return mixed
      */
     public function __invoke($value)

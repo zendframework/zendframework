@@ -22,9 +22,6 @@ namespace Zend\Filter;
 use Zend\Locale\Locale;
 
 /**
- * @uses       Zend\Filter\Exception
- * @uses       Zend\Filter\AbstractFilter
- * @uses       Zend\Locale\Locale
  * @category   Zend
  * @package    Zend_Filter
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -133,8 +130,8 @@ class Boolean extends AbstractFilter
      * Set the null types
      *
      * @param  integer|array $type
-     * @throws \Zend\Filter\Exception
-     * @return \Zend\Filter\Boolean
+     * @throws Exception\InvalidArgumentException
+     * @return Boolean
      */
     public function setType($type = null)
     {
@@ -175,8 +172,8 @@ class Boolean extends AbstractFilter
      * Set the locales which are accepted
      *
      * @param  string|array|\Zend\Locale\Locale $locale
-     * @throws \Zend\Filter\Exception
-     * @return \Zend\Filter\Boolean
+     * @throws Exception\ExceptionInterface
+     * @return Boolean
      */
     public function setLocale($locale = null)
     {
@@ -214,8 +211,7 @@ class Boolean extends AbstractFilter
      * @param  boolean $locale When true this filter works like cast
      *                         When false it recognises only true and false
      *                         and all other values are returned as is
-     * @throws \Zend\Filter\Exception
-     * @return \Zend\Filter\Boolean
+     * @return Boolean
      */
     public function setCasting($casting = true)
     {
@@ -224,7 +220,7 @@ class Boolean extends AbstractFilter
     }
 
     /**
-     * Defined by Zend_Filter_Interface
+     * Defined by Zend\Filter\FilterInterface
      *
      * Returns a boolean representation of $value
      *

@@ -73,6 +73,10 @@ class FilterChainTest extends \PHPUnit_Framework_TestCase
 
     public function testAllowsConnectingViaClassShortName()
     {
+        if (!function_exists('mb_strtolower')) {
+            $this->markTestSkipped('mbstring required');
+        }
+
         $chain = new FilterChain();
         $chain->attachByName('string_trim', array('encoding' => 'utf-8'), 100)
               ->attachByName('strip_tags')

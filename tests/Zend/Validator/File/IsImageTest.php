@@ -40,8 +40,7 @@ class IsImageTest extends \PHPUnit_Framework_TestCase
 {
     protected function getMagicMime()
     {
-        $travisVersion = getenv('TRAVIS_PHP_VERSION');
-        if ($travisVersion === '5.3') {
+        if (false !== getenv('TRAVIS_PHP_VERSION')) {
             return __DIR__ . '/_files/magic.lte.5.3.10.mime';
         }
 

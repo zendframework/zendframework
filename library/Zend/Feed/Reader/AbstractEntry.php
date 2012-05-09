@@ -203,7 +203,7 @@ abstract class AbstractEntry
      * @param  string $method
      * @param  array $args
      * @return mixed
-     * @throws \Zend\Feed\Exception if no extensions implements the method
+     * @throws Exception\BadMethodCallException if no extensions implements the method
      */
     public function __call($method, $args)
     {
@@ -212,7 +212,7 @@ abstract class AbstractEntry
                 return call_user_func_array(array($extension, $method), $args);
             }
         }
-        throw new \Zend\Feed\Exception('Method: ' . $method
+        throw new Exception\BadMethodCallException('Method: ' . $method
             . 'does not exist and could not be located on a registered Extension');
     }
 

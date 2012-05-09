@@ -19,7 +19,10 @@
  */
 
 namespace Zend\Feed\Reader\Extension;
-use Zend\Feed\Reader;
+
+use Zend\Feed\Reader,
+    DOMDocument,
+    DOMXPath;
 
 /**
 * @category Zend

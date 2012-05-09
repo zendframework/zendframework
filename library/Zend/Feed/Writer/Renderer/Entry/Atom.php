@@ -34,13 +34,12 @@ use DOMDocument,
  * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license http://framework.zend.com/license/new-bsd New BSD License
  */
-class Atom extends Renderer\AbstractRenderer implements Renderer\Renderer
+class Atom extends Renderer\AbstractRenderer implements Renderer\RendererInterface
 {
     /**
      * Constructor
      *
-     * @param  Zend_Feed_Writer_Entry $container
-     * @return void
+     * @param  Writer\Entry $container
      */
     public function __construct (Writer\Entry $container)
     {
@@ -50,7 +49,7 @@ class Atom extends Renderer\AbstractRenderer implements Renderer\Renderer
     /**
      * Render atom entry
      *
-     * @return Zend_Feed_Writer_Renderer_Entry_Atom
+     * @return Atom
      */
     public function render()
     {

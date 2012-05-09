@@ -19,8 +19,9 @@
  */
 
 namespace Zend\Feed\Reader\Feed;
-use Zend\Feed\Reader;
-use Zend\Date;
+
+use Zend\Feed\Reader,
+    Zend\Date;
 
 /**
 * @category Zend

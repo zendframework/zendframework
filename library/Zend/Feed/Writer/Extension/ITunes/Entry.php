@@ -222,7 +222,7 @@ class Entry
         if (!method_exists($this, 'setItunes' . ucfirst($point))
             && !method_exists($this, 'addItunes' . ucfirst($point))
         ) {
-            throw new Writer\Exception\InvalidMethodException(
+            throw new Writer\Exception\BadMethodCallException(
                 'invalid method: ' . $method
             );
         }

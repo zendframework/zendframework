@@ -25,8 +25,6 @@ namespace Zend\Feed\Writer\Exception;
  *
  * Interface to represent exceptions that occur during Feed operations.
  *
- * @todo This Exception is pending of exception's milestone
- *
  * @category  Zend
  * @package   Zend_Feed
  * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

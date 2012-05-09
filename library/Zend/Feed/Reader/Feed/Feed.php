@@ -18,7 +18,10 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Feed\Reader;
+namespace Zend\Feed\Reader\Feed;
+
+use Iterator,
+    Countable;
 
 /**
 * @category Zend
@@ -26,7 +29,7 @@ namespace Zend\Feed\Reader;
 * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
 * @license http://framework.zend.com/license/new-bsd New BSD License
 */
-interface Feed extends \Iterator, \Countable
+interface FeedInterface extends Iterator, Countable
 {
     /**
      * Get a single author

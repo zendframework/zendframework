@@ -21,6 +21,8 @@
 
 namespace Zend\Feed\Writer\Exception;
 
+use Zend\Feed\Exception;
+
 /**
  * Feed exceptions
  *
@@ -33,6 +35,6 @@ namespace Zend\Feed\Writer\Exception;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class InvalidArgumentException 
-    extends \InvalidArgumentException 
+    extends Exception\InvalidArgumentException
     implements ExceptionInterface
 {}

@@ -21,7 +21,9 @@
 namespace Zend\Feed\Reader\Feed;
 
 use Zend\Feed\Reader,
-    Zend\Feed\Reader\Exception;
+    Zend\Feed\Reader\Exception,
+    DOMXPath,
+    DOMDocument;
 
 /**
 * @category Zend
@@ -29,7 +31,7 @@ use Zend\Feed\Reader,
 * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
 * @license http://framework.zend.com/license/new-bsd New BSD License
 */
-abstract class AbstractFeed implements Reader\Feed
+abstract class AbstractFeed implements FeedInterface
 {
     /**
      * Parsed feed data
@@ -83,13 +85,13 @@ abstract class AbstractFeed implements Reader\Feed
     /**
      * Constructor
      *
-     * @param DomDocument The DOM object for the feed's XML
+     * @param DOMDocument The DOM object for the feed's XML
      * @param string $type Feed type
      */
-    public function __construct(\DomDocument $domDocument, $type = null)
+    public function __construct(DOMDocument $domDocument, $type = null)
     {
         $this->_domDocument = $domDocument;
-        $this->_xpath = new \DOMXPath($this->_domDocument);
+        $this->_xpath = new DOMXPath($this->_domDocument);
 
         if ($type !== null) {
             $this->_data['type'] = $type;
@@ -138,7 +140,7 @@ abstract class AbstractFeed implements Reader\Feed
     /**
      * Return the current entry
      *
-     * @return Zend_Feed_Reader_EntryInterface
+     * @return \Zend\Feed\Reader\Entry\EntryInterface
      */
     public function current()
     {

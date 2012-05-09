@@ -59,6 +59,7 @@ class PubSubHubbub
      *
      * @param  \Zend\Feed\Reader\AbstractFeed|string $source
      * @return array
+     * @throws Exception\InvalidArgumentException
      */
     public static function detectHubs($source)
     {
@@ -67,7 +68,7 @@ class PubSubHubbub
         } elseif (is_object($source) && $source instanceof Reader\Feed\AbstractFeed) {
             $feed = $source;
         } else {
-            throw new Exception('The source parameter was'
+            throw new Exception\InvalidArgumentException('The source parameter was'
             . ' invalid, i.e. not a URL string or an instance of type'
             . ' Zend\Feed\Reader\FeedAbstract or Zend\Feed\Abstract');
         }

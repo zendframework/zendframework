@@ -28,7 +28,7 @@ namespace Zend\Feed\PubSubHubbub;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Callback
+interface CallbackInterface
 {
     /**
      * Handle any callback from a Hub Server responding to a subscription or

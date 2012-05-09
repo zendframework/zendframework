@@ -151,14 +151,14 @@ class HttpResponse
      * Can we send headers?
      *
      * @param  boolean $throw Whether or not to throw an exception if headers have been sent; defaults to false
-     * @return boolean
-     * @throws \Zend\Feed\PubSubHubbub\Exception
+     * @return HttpResponse
+     * @throws Exception\RuntimeException
      */
     public function canSendHeaders($throw = false)
     {
         $ok = headers_sent($file, $line);
         if ($ok && $throw) {
-            throw new Exception('Cannot send headers; headers already sent in ' . $file . ', line ' . $line);
+            throw new Exception\RuntimeException('Cannot send headers; headers already sent in ' . $file . ', line ' . $line);
         }
         return !$ok;
     }
@@ -167,12 +167,13 @@ class HttpResponse
      * Set HTTP response code to use with headers
      *
      * @param  int $code
-     * @return \Zend\Feed\PubSubHubbub\HttpResponse
+     * @return HttpResponse
+     * @throws Exception\InvalidArgumentException
      */
     public function setHttpResponseCode($code)
     {
         if (!is_int($code) || (100 > $code) || (599 < $code)) {
-            throw new Exception('Invalid HTTP response'
+            throw new Exception\InvalidArgumentException('Invalid HTTP response'
             . ' code:' . $code);
         }
         $this->_httpResponseCode = $code;

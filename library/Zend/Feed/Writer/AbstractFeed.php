@@ -756,11 +756,12 @@ class AbstractFeed
         foreach ($this->_extensions as $extension) {
             try {
                 return call_user_func_array(array($extension, $method), $args);
-            } catch (Exception\InvalidMethodException $e) {
+            } catch (Exception\BadMethodCallException $e) {
             }
         }
-        throw new Exception('Method: ' . $method
-            . ' does not exist and could not be located on a registered Extension');
+        throw new Exception\BadMethodCallException(
+            'Method: ' . $method . ' does not exist and could not be located on a registered Extension'
+        );
     }
 
     /**
@@ -774,7 +775,7 @@ class AbstractFeed
         $exts = $all['feed'];
         foreach ($exts as $ext) {
             if (!$className = Writer::getPluginLoader()->getClassName($ext)) {
-                throw new Exception(sprintf('Unable to load extension "%s"; could not resolve to class', $ext));
+                throw new Exception\RuntimeException(sprintf('Unable to load extension "%s"; could not resolve to class', $ext));
             }
             $this->_extensions[$ext] = new $className();
             $this->_extensions[$ext]->setEncoding($this->getEncoding());

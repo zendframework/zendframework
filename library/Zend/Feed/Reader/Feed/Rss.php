@@ -19,9 +19,11 @@
  */
 
 namespace Zend\Feed\Reader\Feed;
-use Zend\Feed\Reader;
-use Zend\Feed\Reader\Collection;
-use Zend\Date;
+
+use Zend\Feed\Reader,
+    Zend\Feed\Reader\Collection,
+    Zend\Date,
+    DOMDocument;
 
 /**
 * @category Zend
@@ -38,7 +40,7 @@ class Rss extends AbstractFeed
      * @param  DOMDocument $dom
      * @param  string $type
      */
-    public function __construct(\DomDocument $dom, $type = null)
+    public function __construct(DOMDocument $dom, $type = null)
     {
         parent::__construct($dom, $type);
 

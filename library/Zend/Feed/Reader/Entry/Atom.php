@@ -19,7 +19,9 @@
  */
 
 namespace Zend\Feed\Reader\Entry;
-use Zend\Feed\Reader;
+
+use Zend\Feed\Reader,
+    DOMElement;
 
 /**
 * @category Zend
@@ -27,7 +29,7 @@ use Zend\Feed\Reader;
 * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
 * @license http://framework.zend.com/license/new-bsd New BSD License
 */
-class Atom extends AbstractEntry implements Reader\Entry
+class Atom extends AbstractEntry implements EntryInterface
 {
     /**
      * XPath query
@@ -44,7 +46,7 @@ class Atom extends AbstractEntry implements Reader\Entry
      * @param  string $type
      * @return void
      */
-    public function __construct(\DOMElement $entry, $entryKey, $type = null)
+    public function __construct(DOMElement $entry, $entryKey, $type = null)
     {
         parent::__construct($entry, $entryKey, $type);
 

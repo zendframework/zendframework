@@ -55,7 +55,7 @@ class ClassGeneratorTest extends \PHPUnit_Framework_TestCase
 
     public function testClassDocblockAccessors()
     {
-        $this->markTestSkipped();
+        $this->markTestIncomplete();
     }
 
     public function testAbstractAccessors()

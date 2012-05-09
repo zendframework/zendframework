@@ -141,9 +141,7 @@ class SkeletonGeneratorTest extends TestCase
             }
 
             $long = $method->getLongDescription();
-            if (empty($long)) {
-                $this->assertContains('<para/>', $xml);
-            } else {
+            if (!empty($long)) {
                 $this->assertContains($long, $xml);
             }
         }

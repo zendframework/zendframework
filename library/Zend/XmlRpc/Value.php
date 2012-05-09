@@ -198,8 +198,7 @@ abstract class Value
      * @param mixed $value
      * @param Zend\XmlRpc\Value::constant $type
      *
-     * @return Zend\XmlRpc\Value
-     * @static
+     * @return self
      */
     public static function getXmlRpcValue($value, $type = self::AUTO_DETECT_TYPE)
     {
@@ -433,7 +432,6 @@ abstract class Value
     protected static function _extractTypeAndValue(\SimpleXMLElement $xml, &$type, &$value)
     {
         list($type, $value) = each($xml);
-
         if (!$type and $value === null) {
             $namespaces = array('ex' => 'http://ws.apache.org/xmlrpc/namespaces/extensions');
             foreach ($namespaces as $namespaceName => $namespaceUri) {

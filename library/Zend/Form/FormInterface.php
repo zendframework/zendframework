@@ -21,7 +21,7 @@
 namespace Zend\Form;
 
 use IteratorAggregate;
-use Zend\InputFilter\InputFilterAwareInterface;
+use Zend\InputFilter\InputFilterInterface;
 use Zend\Stdlib\Hydrator;
 
 /**
@@ -30,7 +30,7 @@ use Zend\Stdlib\Hydrator;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface FormInterface extends InputFilterAwareInterface, FieldsetInterface
+interface FormInterface extends FieldsetInterface
 {
     const VALIDATE_ALL      = 1;
     const VALUES_NORMALIZED = 2;
@@ -56,6 +56,21 @@ interface FormInterface extends InputFilterAwareInterface, FieldsetInterface
      * @return void
      */
     public function bind($model);
+
+    /**
+     * Set input filter
+     * 
+     * @param  InputFilterInterface $inputFilter 
+     * @return InputFilterAwareInterface
+     */
+    public function setInputFilter(InputFilterInterface $inputFilter);
+
+    /**
+     * Retrieve input filter
+     * 
+     * @return InputFilterInterface
+     */
+    public function getInputFilter();
 
     /**
      * Set the hydrator to use when binding an object to the form

@@ -476,4 +476,20 @@ class BaseFormTest extends TestCase
         $bar = $this->form->get('bar');
         $this->assertEquals('barbaz', $bar->getAttribute('value'));
     }
+
+    public function testUsesBoundObjectAsDataSourceWhenNoDataSet()
+    {
+        $this->populateForm();
+        $object         = new stdClass();
+        $object->foo    = 'foos';
+        $object->bar    = 'bar';
+        $object->foobar = array(
+            'foo' => 'foos',
+            'bar' => 'bar',
+        );
+        $this->form->setHydrator(new Hydrator\ObjectProperty());
+        $this->form->bind($object);
+
+        $this->assertTrue($this->form->isValid());
+    }
 }

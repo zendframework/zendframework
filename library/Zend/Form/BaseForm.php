@@ -188,11 +188,29 @@ class BaseForm extends Fieldset implements FormInterface
      */
     public function isValid()
     {
-        if (!is_array($this->data)) {
+        if (!is_array($this->data) && !is_object($this->object)) {
             throw new Exception\DomainException(sprintf(
                 '%s is unable to validate as there is no data currently set',
                 __METHOD__
             ));
+        }
+
+        if (!is_array($this->data)) {
+            $hydrator = $this->getHydrator();
+            if (!$hydrator instanceof Hydrator\HydratorInterface) {
+                throw new Exception\DomainException(sprintf(
+                    '%s is unable to validate as there is no data currently set',
+                    __METHOD__
+                ));
+            }
+            $data = $hydrator->extract($this->object);
+            if (!is_array($data)) {
+                throw new Exception\DomainException(sprintf(
+                    '%s is unable to validate as there is no data currently set',
+                    __METHOD__
+                ));
+            }
+            $this->data = $data;
         }
 
         $filter = $this->getInputFilter();

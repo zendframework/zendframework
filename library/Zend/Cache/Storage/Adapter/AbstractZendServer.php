@@ -55,7 +55,7 @@ abstract class AbstractZendServer extends AbstractAdapter
      * @param  array   $normalizedOptions
      * @param  boolean $success
      * @param  mixed   $casToken
-     * @return mixed Data on success or false on failure
+     * @return mixed Data on success, null on failure
      * @throws Exception\ExceptionInterface
      */
     protected function internalGetItem(& $normalizedKey, array & $normalizedOptions, & $success = null, & $casToken = null)
@@ -82,7 +82,7 @@ abstract class AbstractZendServer extends AbstractAdapter
      *
      * @param  array $normalizedKeys
      * @param  array $normalizedOptions
-     * @return array Associative array of existing keys and values
+     * @return array Associative array of keys and values
      * @throws Exception\ExceptionInterface
      */
     protected function internalGetItems(array & $normalizedKeys, array & $normalizedOptions)
@@ -131,7 +131,7 @@ abstract class AbstractZendServer extends AbstractAdapter
      *
      * @param  array $keys
      * @param  array $options
-     * @return array Array of existing keys
+     * @return array Array of found keys
      * @throws Exception\ExceptionInterface
      */
     protected function internalHasItems(array & $normalizedKeys, array & $normalizedOptions)
@@ -162,7 +162,7 @@ abstract class AbstractZendServer extends AbstractAdapter
      *
      * @param  array $normalizedKeys
      * @param  array $normalizedOptions
-     * @return array|boolean
+     * @return array Associative array of keys and metadata
      *
      * @triggers getMetadatas.pre(PreEvent)
      * @triggers getMetadatas.post(PostEvent)

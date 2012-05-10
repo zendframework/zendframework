@@ -371,7 +371,7 @@ abstract class AbstractAdapter implements AdapterInterface, EventsCapableInterfa
      * @param  array   $options
      * @param  boolean $success
      * @param  mixed   $casToken
-     * @return mixed Data on success and null on failure
+     * @return mixed Data on success, null on failure
      * @throws Exception\ExceptionInterface
      *
      * @triggers getItem.pre(PreEvent)
@@ -421,7 +421,7 @@ abstract class AbstractAdapter implements AdapterInterface, EventsCapableInterfa
      * @param  array   $normalizedOptions
      * @param  boolean $success
      * @param  mixed   $casToken
-     * @return mixed Data on success or null on failure
+     * @return mixed Data on success, null on failure
      * @throws Exception\ExceptionInterface
      */
     abstract protected function internalGetItem(& $normalizedKey, array & $normalizedOptions, & $success = null, & $casToken = null);
@@ -437,7 +437,7 @@ abstract class AbstractAdapter implements AdapterInterface, EventsCapableInterfa
      *
      * @param  array $keys
      * @param  array $options
-     * @return array Associative array of existing keys and values
+     * @return array Associative array of keys and values
      * @throws Exception\ExceptionInterface
      *
      * @triggers getItems.pre(PreEvent)
@@ -482,7 +482,7 @@ abstract class AbstractAdapter implements AdapterInterface, EventsCapableInterfa
      *
      * @param  array $normalizedKeys
      * @param  array $normalizedOptions
-     * @return array Associative array of existing keys and values
+     * @return array Associative array of keys and values
      * @throws Exception\ExceptionInterface
      */
     protected function internalGetItems(array & $normalizedKeys, array & $normalizedOptions)
@@ -576,7 +576,7 @@ abstract class AbstractAdapter implements AdapterInterface, EventsCapableInterfa
      *
      * @param  array $keys
      * @param  array $options
-     * @return array Array of existing keys
+     * @return array Array of found keys
      * @throws Exception\ExceptionInterface
      *
      * @triggers hasItems.pre(PreEvent)
@@ -621,7 +621,7 @@ abstract class AbstractAdapter implements AdapterInterface, EventsCapableInterfa
      *
      * @param  array $keys
      * @param  array $options
-     * @return array Array of existing keys
+     * @return array Array of found keys
      * @throws Exception\ExceptionInterface
      */
     protected function internalHasItems(array & $normalizedKeys, array & $normalizedOptions)
@@ -646,7 +646,7 @@ abstract class AbstractAdapter implements AdapterInterface, EventsCapableInterfa
      *
      * @param  string $key
      * @param  array  $options
-     * @return array|boolean Metadata or false on failure
+     * @return array|boolean Metadata on success, false on failure
      * @throws Exception\ExceptionInterface
      *
      * @triggers getMetadata.pre(PreEvent)
@@ -691,7 +691,7 @@ abstract class AbstractAdapter implements AdapterInterface, EventsCapableInterfa
      *
      * @param  string $normalizedKey
      * @param  array  $normalizedOptions
-     * @return array|boolean Metadata or false on failure
+     * @return array|boolean Metadata on success, false on failure
      * @throws Exception\ExceptionInterface
      */
     protected function internalGetMetadata(& $normalizedKey, array & $normalizedOptions)
@@ -714,7 +714,7 @@ abstract class AbstractAdapter implements AdapterInterface, EventsCapableInterfa
      *
      * @param  array $keys
      * @param  array $options
-     * @return array Associative array of existing cache ids and its metadata
+     * @return array Associative array of keys and metadata
      * @throws Exception\ExceptionInterface
      *
      * @triggers getMetadatas.pre(PreEvent)
@@ -759,7 +759,7 @@ abstract class AbstractAdapter implements AdapterInterface, EventsCapableInterfa
      *
      * @param  array $normalizedKeys
      * @param  array $normalizedOptions
-     * @return array Associative array of existing cache ids and its metadata
+     * @return array Associative array of keys and metadata
      * @throws Exception\ExceptionInterface
      */
     protected function internalGetMetadatas(array & $normalizedKeys, array & $normalizedOptions)
@@ -857,7 +857,7 @@ abstract class AbstractAdapter implements AdapterInterface, EventsCapableInterfa
      *
      * @param  array $keyValuePairs
      * @param  array $options
-     * @return boolean
+     * @return array Array of not stored keys
      * @throws Exception\ExceptionInterface
      *
      * @triggers setItems.pre(PreEvent)
@@ -904,7 +904,7 @@ abstract class AbstractAdapter implements AdapterInterface, EventsCapableInterfa
      *
      * @param  array $normalizedKeyValuePairs
      * @param  array $normalizedOptions
-     * @return boolean
+     * @return array Array of not stored keys
      * @throws Exception\ExceptionInterface
      */
     protected function internalSetItems(array & $normalizedKeyValuePairs, array & $normalizedOptions)
@@ -1005,7 +1005,7 @@ abstract class AbstractAdapter implements AdapterInterface, EventsCapableInterfa
      *
      * @param  array $keyValuePairs
      * @param  array $options
-     * @return boolean
+     * @return array Array of not stored keys
      * @throws Exception\ExceptionInterface
      *
      * @triggers addItems.pre(PreEvent)
@@ -1052,7 +1052,7 @@ abstract class AbstractAdapter implements AdapterInterface, EventsCapableInterfa
      *
      * @param  array $normalizedKeyValuePairs
      * @param  array $normalizedOptions
-     * @return boolean
+     * @return array Array of not stored keys
      * @throws Exception\ExceptionInterface
      */
     protected function internalAddItems(array & $normalizedKeyValuePairs, array & $normalizedOptions)
@@ -1154,7 +1154,7 @@ abstract class AbstractAdapter implements AdapterInterface, EventsCapableInterfa
      *
      * @param  array $keyValuePairs
      * @param  array $options
-     * @return boolean
+     * @return array Array of not stored keys
      * @throws Exception\ExceptionInterface
      *
      * @triggers replaceItems.pre(PreEvent)
@@ -1201,7 +1201,7 @@ abstract class AbstractAdapter implements AdapterInterface, EventsCapableInterfa
      *
      * @param  array $normalizedKeyValuePairs
      * @param  array $normalizedOptions
-     * @return boolean
+     * @return array Array of not stored keys
      * @throws Exception\ExceptionInterface
      */
     protected function internalReplaceItems(array & $normalizedKeyValuePairs, array & $normalizedOptions)
@@ -1386,7 +1386,7 @@ abstract class AbstractAdapter implements AdapterInterface, EventsCapableInterfa
      *
      * @param  array $keys
      * @param  array $options
-     * @return boolean
+     * @return array Array of not updated keys
      * @throws Exception\ExceptionInterface
      *
      * @triggers touchItems.pre(PreEvent)
@@ -1430,7 +1430,7 @@ abstract class AbstractAdapter implements AdapterInterface, EventsCapableInterfa
      *
      * @param  array $normalizedKeys
      * @param  array $normalizedOptions
-     * @return boolean
+     * @return array Array of not updated keys
      * @throws Exception\ExceptionInterface
      */
     protected function internalTouchItems(array & $normalizedKeys, array & $normalizedOptions)
@@ -1510,7 +1510,7 @@ abstract class AbstractAdapter implements AdapterInterface, EventsCapableInterfa
      *
      * @param  array $keys
      * @param  array $options
-     * @return boolean
+     * @return array Array of not removed keys
      * @throws Exception\ExceptionInterface
      *
      * @triggers removeItems.pre(PreEvent)
@@ -1552,7 +1552,7 @@ abstract class AbstractAdapter implements AdapterInterface, EventsCapableInterfa
      *
      * @param  array $keys
      * @param  array $options
-     * @return boolean
+     * @return array Array of not removed keys
      * @throws Exception\ExceptionInterface
      */
     protected function internalRemoveItems(array & $normalizedKeys, array & $normalizedOptions)
@@ -1578,7 +1578,7 @@ abstract class AbstractAdapter implements AdapterInterface, EventsCapableInterfa
      * @param  string $key
      * @param  int    $value
      * @param  array  $options
-     * @return int|boolean The new value or false on failure
+     * @return int|boolean The new value on success, false on failure
      * @throws Exception\ExceptionInterface
      *
      * @triggers incrementItem.pre(PreEvent)
@@ -1625,7 +1625,7 @@ abstract class AbstractAdapter implements AdapterInterface, EventsCapableInterfa
      * @param  string $normalizedKey
      * @param  int    $value
      * @param  array  $normalizedOptions
-     * @return int|boolean The new value or false on failure
+     * @return int|boolean The new value on success, false on failure
      * @throws Exception\ExceptionInterface
      */
     protected function internalIncrementItem(& $normalizedKey, & $value, array & $normalizedOptions)
@@ -1655,7 +1655,7 @@ abstract class AbstractAdapter implements AdapterInterface, EventsCapableInterfa
      *
      * @param  array $keyValuePairs
      * @param  array $options
-     * @return boolean
+     * @return array Associative array of keys and new values
      * @throws Exception\ExceptionInterface
      *
      * @triggers incrementItems.pre(PreEvent)
@@ -1700,7 +1700,7 @@ abstract class AbstractAdapter implements AdapterInterface, EventsCapableInterfa
      *
      * @param  array $normalizedKeyValuePairs
      * @param  array $normalizedOptions
-     * @return boolean
+     * @return array Associative array of keys and new values
      * @throws Exception\ExceptionInterface
      */
     protected function internalIncrementItems(array & $normalizedKeyValuePairs, array & $normalizedOptions)
@@ -1727,7 +1727,7 @@ abstract class AbstractAdapter implements AdapterInterface, EventsCapableInterfa
      * @param  string $key
      * @param  int    $value
      * @param  array  $options
-     * @return int|boolean The new value or false on failure
+     * @return int|boolean The new value on success, false on failure
      * @throws Exception\ExceptionInterface
      *
      * @triggers decrementItem.pre(PreEvent)
@@ -1774,7 +1774,7 @@ abstract class AbstractAdapter implements AdapterInterface, EventsCapableInterfa
      * @param  string $normalizedKey
      * @param  int    $value
      * @param  array  $normalizedOptions
-     * @return int|boolean The new value or false on failure
+     * @return int|boolean The new value on success, false on failure
      * @throws Exception\ExceptionInterface
      */
     protected function internalDecrementItem(& $normalizedKey, & $value, array & $normalizedOptions)
@@ -1804,7 +1804,7 @@ abstract class AbstractAdapter implements AdapterInterface, EventsCapableInterfa
      *
      * @param  array $keyValuePairs
      * @param  array $options
-     * @return boolean
+     * @return array Associative array of keys and new values
      * @throws Exception\ExceptionInterface
      *
      * @triggers incrementItems.pre(PreEvent)
@@ -1849,7 +1849,7 @@ abstract class AbstractAdapter implements AdapterInterface, EventsCapableInterfa
      *
      * @param  array $normalizedKeyValuePairs
      * @param  array $normalizedOptions
-     * @return boolean
+     * @return array Associative array of keys and new values
      * @throws Exception\ExceptionInterface
      */
     protected function internalDecrementItems(array & $normalizedKeyValuePairs, array & $normalizedOptions)
@@ -2425,7 +2425,7 @@ abstract class AbstractAdapter implements AdapterInterface, EventsCapableInterfa
      * Get storage capacity.
      *
      * @param  array $options
-     * @return array|boolean Capacity as array or false on failure
+     * @return array|boolean Associative array of capacity, false on failure
      * @throws Exception\ExceptionInterface
      *
      * @triggers getCapacity.pre(PreEvent)
@@ -2457,7 +2457,7 @@ abstract class AbstractAdapter implements AdapterInterface, EventsCapableInterfa
      * Internal method to get storage capacity.
      *
      * @param  array $normalizedOptions
-     * @return array|boolean Capacity as array or false on failure
+     * @return array|boolean Associative array of capacity, false on failure
      * @throws Exception\ExceptionInterface
      */
     abstract protected function internalGetCapacity(array & $normalizedOptions);

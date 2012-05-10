@@ -114,7 +114,7 @@ class Filesystem extends AbstractAdapter
      * @param  array   $options
      * @param  boolean $success
      * @param  mixed   $casToken
-     * @return mixed Data on success and false on failure
+     * @return mixed Data on success, null on failure
      * @throws Exception\ExceptionInterface
      *
      * @triggers getItem.pre(PreEvent)
@@ -142,7 +142,7 @@ class Filesystem extends AbstractAdapter
      *
      * @param  array $keys
      * @param  array $options
-     * @return array Associative array of existing keys and values
+     * @return array Associative array of keys and values
      * @throws Exception\ExceptionInterface
      *
      * @triggers getItems.pre(PreEvent)
@@ -172,7 +172,7 @@ class Filesystem extends AbstractAdapter
      * @param  array   $normalizedOptions
      * @param  boolean $success
      * @param  mixed   $casToken
-     * @return mixed Data on success or false on failure
+     * @return mixed Data on success, null on failure
      * @throws Exception\ExceptionInterface
      */
     protected function internalGetItem(& $normalizedKey, array & $normalizedOptions, & $success = null, & $casToken = null)
@@ -228,7 +228,7 @@ class Filesystem extends AbstractAdapter
      *
      * @param  array $normalizedKeys
      * @param  array $normalizedOptions
-     * @return array Associative array of existing keys and values
+     * @return array Associative array of keys and values
      * @throws Exception\ExceptionInterface
      */
     protected function internalGetItems(array & $normalizedKeys, array & $normalizedOptions)
@@ -321,7 +321,7 @@ class Filesystem extends AbstractAdapter
      *
      * @param  array $keys
      * @param  array $options
-     * @return array Array of existing keys
+     * @return array Array of found keys
      * @throws Exception\ExceptionInterface
      *
      * @triggers hasItems.pre(PreEvent)
@@ -382,9 +382,9 @@ class Filesystem extends AbstractAdapter
     /**
      * Get metadata
      *
-     * @param $key
-     * @param array $options
-     * @return array|bool|mixed|null
+     * @param string $key
+     * @param array  $options
+     * @return array|boolean Metadata on success, false on failure
      */
     public function getMetadata($key, array $options = array())
     {
@@ -401,7 +401,7 @@ class Filesystem extends AbstractAdapter
      *
      * @param array $keys
      * @param array $options
-     * @return array
+     * @return array Associative array of keys and metadata
      */
     public function getMetadatas(array $keys, array $options = array())
     {
@@ -418,7 +418,7 @@ class Filesystem extends AbstractAdapter
      *
      * @param string $normalizedKey
      * @param array  $normalizedOptions
-     * @return array|bool
+     * @return array|boolean Metadata on success, false on failure
      */
     protected function internalGetMetadata(& $normalizedKey, array & $normalizedOptions)
     {
@@ -459,7 +459,7 @@ class Filesystem extends AbstractAdapter
      *
      * @param  array $normalizedKeys
      * @param  array $normalizedOptions
-     * @return array Associative array of existing cache ids and its metadata
+     * @return array Associative array of keys and metadata
      * @throws Exception\ExceptionInterface
      */
     protected function internalGetMetadatas(array & $normalizedKeys, array & $normalizedOptions)
@@ -556,7 +556,7 @@ class Filesystem extends AbstractAdapter
      *
      * @param  array $keyValuePairs
      * @param  array $options
-     * @return boolean
+     * @return array Array of not stored keys
      * @throws Exception\ExceptionInterface
      *
      * @triggers setItems.pre(PreEvent)
@@ -764,7 +764,7 @@ class Filesystem extends AbstractAdapter
      *
      * @param  array $normalizedKeyValuePairs
      * @param  array $normalizedOptions
-     * @return boolean
+     * @return array Array of not stored keys
      * @throws Exception\ExceptionInterface
      */
     protected function internalSetItems(array & $normalizedKeyValuePairs, array & $normalizedOptions)
@@ -929,7 +929,7 @@ class Filesystem extends AbstractAdapter
      *
      * @param  array $keys
      * @param  array $options
-     * @return boolean
+     * @return array Array of not updated keys
      * @throws Exception\ExceptionInterface
      *
      * @triggers touchItems.pre(PreEvent)
@@ -1015,7 +1015,7 @@ class Filesystem extends AbstractAdapter
      *
      * @param  array $keys
      * @param  array $options
-     * @return boolean
+     * @return array Array of not removed keys
      * @throws Exception\ExceptionInterface
      *
      * @triggers removeItems.pre(PreEvent)
@@ -1282,7 +1282,7 @@ class Filesystem extends AbstractAdapter
      * Internal method to get storage capacity.
      *
      * @param  array $normalizedOptions
-     * @return array|boolean Capacity as array or false on failure
+     * @return array|boolean Associative array of capacity, false on failure
      * @throws Exception\ExceptionInterface
      */
     protected function internalGetCapacity(array & $normalizedOptions)

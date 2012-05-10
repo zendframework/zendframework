@@ -112,12 +112,10 @@ class WinCache extends AbstractAdapter
      *    - The time-to-life
      *  - namespace <string>
      *    - The namespace to use
-     *  - ignore_missing_items <boolean>
-     *    - Throw exception on missing item or return false
      *
      * @param  string $normalizedKey
      * @param  array  $normalizedOptions
-     * @return mixed Data on success or false on failure
+     * @return mixed Data on success, null on failure
      * @throws Exception\ExceptionInterface
      */
     protected function internalGetItem(& $normalizedKey, array & $normalizedOptions)
@@ -148,7 +146,7 @@ class WinCache extends AbstractAdapter
      *
      * @param  array $normalizedKeys
      * @param  array $normalizedOptions
-     * @return array Associative array of existing keys and values
+     * @return array Associative array of keys and values
      * @throws Exception\ExceptionInterface
      */
     protected function internalGetItems(array & $normalizedKeys, array & $normalizedOptions)
@@ -201,12 +199,10 @@ class WinCache extends AbstractAdapter
      * Options:
      *  - namespace <string> optional
      *    - The namespace to use (Default: namespace of object)
-     *  - ignore_missing_items <boolean> optional
-     *    - Throw exception on missing item or return false
      *
      * @param  string $normalizedKey
      * @param  array  $normalizedOptions
-     * @return array|boolean Metadata or false on failure
+     * @return array|boolean Metadata on success, false on failure
      * @throws Exception\ExceptionInterface
      *
      * @triggers getMetadata.pre(PreEvent)
@@ -274,7 +270,7 @@ class WinCache extends AbstractAdapter
      *
      * @param  array $normalizedKeyValuePairs
      * @param  array $normalizedOptions
-     * @return boolean
+     * @return array Array of not stored keys
      * @throws Exception\ExceptionInterface
      */
     protected function internalSetItems(array & $normalizedKeyValuePairs, array & $normalizedOptions)
@@ -342,7 +338,7 @@ class WinCache extends AbstractAdapter
      *
      * @param  array $normalizedKeyValuePairs
      * @param  array $normalizedOptions
-     * @return boolean
+     * @return array Array of not stored keys
      * @throws Exception\ExceptionInterface
      */
     protected function internalAddItems(array & $normalizedKeyValuePairs, array & $normalizedOptions)
@@ -405,8 +401,6 @@ class WinCache extends AbstractAdapter
      * Options:
      *  - namespace <string>
      *    - The namespace to use
-     *  - ignore_missing_items <boolean>
-     *    - Throw exception on missing item
      *
      * @param  string $normalizedKey
      * @param  array  $normalizedOptions
@@ -431,13 +425,11 @@ class WinCache extends AbstractAdapter
      *    - The time-to-life
      *  - namespace <string>
      *    - The namespace to use
-     *  - ignore_missing_items <boolean>
-     *    - Throw exception on missing item
      *
      * @param  string $normalizedKey
      * @param  int    $value
      * @param  array  $normalizedOptions
-     * @return int|boolean The new value or false on failure
+     * @return int|boolean The new value on success, false on failure
      * @throws Exception\ExceptionInterface
      */
     protected function internalIncrementItem(& $normalizedKey, & $value, array & $normalizedOptions)
@@ -469,13 +461,11 @@ class WinCache extends AbstractAdapter
      *    - The time-to-life
      *  - namespace <string>
      *    - The namespace to use
-     *  - ignore_missing_items <boolean>
-     *    - Throw exception on missing item
      *
      * @param  string $normalizedKey
      * @param  int    $value
      * @param  array  $normalizedOptions
-     * @return int|boolean The new value or false on failure
+     * @return int|boolean The new value on success, false on failure
      * @throws Exception\ExceptionInterface
      */
     protected function internalDecrementItem(& $normalizedKey, & $value, array & $normalizedOptions)
@@ -583,7 +573,7 @@ class WinCache extends AbstractAdapter
      * Internal method to get storage capacity.
      *
      * @param  array $normalizedOptions
-     * @return array|boolean Capacity as array or false on failure
+     * @return array|boolean Associative array of capacity, false on failure
      * @throws Exception\ExceptionInterface
      */
     protected function internalGetCapacity(array & $normalizedOptions)

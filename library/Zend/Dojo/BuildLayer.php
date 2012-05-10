@@ -101,17 +101,15 @@ class BuildLayer
      */
     public function __construct($options = null)
     {
-        if ($options instanceof Traversable) {
-            $options = ArrayUtils::iteratorToArray($options);
-        }
-        if (is_array($options)) {
+        if (null !== $options) {
+            if ($options instanceof Traversable) {
+                $options = ArrayUtils::iteratorToArray($options);
+            }
+            if (!is_array($options)) {
+                throw new Exception\InvalidArgumentException('Invalid options provided to constructor');
+            }
             $this->setOptions($options);
         }
-
-        if (!is_array($options)) {
-            throw new Exception\InvalidArgumentException('Invalid options provided to constructor');
-        }
-        $this->setOptions($options);
     }
 
     /**

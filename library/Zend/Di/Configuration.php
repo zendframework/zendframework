@@ -22,9 +22,6 @@ class Configuration
         if ($options instanceof Traversable) {
             $options = ArrayUtils::iteratorToArray($options);
         }
-        if (is_array($options)) {
-            $this->setOptions($options);
-        }
 
         if (!is_array($options)) {
             throw new Exception\InvalidArgumentException(

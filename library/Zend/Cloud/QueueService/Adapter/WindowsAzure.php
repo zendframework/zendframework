@@ -73,9 +73,6 @@ class WindowsAzure extends AbstractAdapter
         if ($options instanceof Traversable) {
             $options = ArrayUtils::iteratorToArray($options);
         }
-        if (is_array($options)) {
-            $this->setOptions($options);
-        }
 
         if (!is_array($options)) {
             throw new Exception\InvalidArgumentException('Invalid options provided');

@@ -271,7 +271,6 @@ class Factory
     protected function populateValidators(ValidatorChain $chain, $validators)
     {
         foreach ($validators as $validator) {
-echo "Attempting to add validator: " . (is_object($validator) ? get_class($validator) : var_export($validator, 1)) . "<br />\n";
             if ($validator instanceof ValidatorInterface) {
                 $chain->addValidator($validator);
                 continue;

@@ -33,7 +33,7 @@ use Zend\InfoCard\Cipher;
  */
 class AES256CBC
     extends AbstractAdapter
-    implements Cipher\Symmetric\AES256CBC
+    implements Cipher\Symmetric\AES256CBCInterface
 {
     /**
      * The MCRYPT Cipher constant for this encryption
@@ -53,14 +53,14 @@ class AES256CBC
     /**
      * The object constructor
      *
-     * @throws \Zend\InfoCard\Cipher\Exception
+     * @throws Cipher\Exception\ExtensionNotLoadedException
      */
     public function __construct()
     {
         // Can't test for this
         // @codeCoverageIgnoreStart
         if(!extension_loaded('mcrypt')) {
-            throw new Cipher\Exception\ExtensionNoLoadedException("Use of the AES256CBC Cipher requires the mcrypt extension");
+            throw new Cipher\Exception\ExtensionNotLoadedException("Use of the AES256CBC Cipher requires the mcrypt extension");
         }
         // @codeCoveregIgnoreEnd
     }
@@ -68,7 +68,7 @@ class AES256CBC
     /**
      * Decrypts data using the AES Algorithm using the mCrypt extension
      *
-     * @throws \Zend\InfoCard\Cipher\Exception
+     * @throws Cipher\Exception\RuntimeException
      * @param string $encryptedData The encrypted data in binary format
      * @param string $decryptionKey The decryption key
      * @param integer $iv_length The IV length to use

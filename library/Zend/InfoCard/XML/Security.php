@@ -68,7 +68,6 @@ class Security
     /**
      * Constructor  (disabled)
      *
-     * @return void
      */
     private function __construct()
     {
@@ -79,7 +78,7 @@ class Security
      *
      * @param  string $strXMLInput An XML block containing a Signature
      * @return bool True if the signature validated, false otherwise
-     * @throws \Zend\InfoCard\XML\Security\Exception
+     * @throws Security\Exception\ExceptionInterface
      */
     static public function validateXMLSignature($strXMLInput)
     {
@@ -243,7 +242,7 @@ class Security
      * @param string $data The data to encode
      * @param const $type The encoding format constant
      * @return string The encoded value
-     * @throws \Zend\InfoCard\XML\Security\Exception
+     * @throws Security\Exception\RuntimeException
      */
     static protected function _encodeValue($data, $type)
     {
@@ -269,7 +268,6 @@ class Security
                 throw new Security\Exception\RuntimeException("Could not encode value");
         }
 
-        throw new Security\Exception\RuntimeException("Invalid code path");
     }
 
     /**

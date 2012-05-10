@@ -2,7 +2,9 @@
 
 namespace Zend\InfoCard\XML\Security\Exception;
 
+use Zend\InfoCard\XML\Exception;
+
 class InvalidArgumentException
-    extends \InvalidArgumentException
-    implements \Zend\InfoCard\XML\Security\Exception
+    extends Exception\InvalidArgumentException
+    implements ExceptionInterface
 {}

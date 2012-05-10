@@ -29,6 +29,6 @@ namespace Zend\InfoCard\Cipher\Symmetric\Adapter;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class AbstractAdapter
-    implements \Zend\InfoCard\Cipher\Symmetric
+    implements \Zend\InfoCard\Cipher\Symmetric\SymmetricInterface
 {
 }

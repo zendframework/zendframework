@@ -21,8 +21,7 @@
 
 namespace Zend\InfoCard\XML\Security\Transform;
 
-use Zend\InfoCard\XML\Security\Transform,
-    Zend\InfoCard\XML\Security\Exception;
+use Zend\InfoCard\XML\Security\Exception;
 
 /**
  * A object implementing the EnvelopedSignature XML Transform
@@ -33,12 +32,12 @@ use Zend\InfoCard\XML\Security\Transform,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class EnvelopedSignature implements Transform
+class EnvelopedSignature implements TransformInterface
 {
     /**
      * Transforms the XML Document according to the EnvelopedSignature Transform
      *
-     * @throws \Zend\InfoCard\XML\Security\Transform\Exception
+     * @throws Exception\InvalidArgumentException
      * @param string $strXMLData The input XML data
      * @return string the transformed XML data
      */

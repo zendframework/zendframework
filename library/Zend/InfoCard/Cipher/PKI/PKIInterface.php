@@ -14,21 +14,22 @@
  *
  * @category   Zend
  * @package    Zend_InfoCard
- * @subpackage Zend_InfoCard
+ * @subpackage Zend_InfoCard_Cipher
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\InfoCard;
+namespace Zend\InfoCard\Cipher\PKI;
 
 /**
- * Base Exception class for the InfoCard component
+ * Empty Interface represents a Pki cipher object
  *
  * @category   Zend
  * @package    Zend_InfoCard
+ * @subpackage Zend_InfoCard_Cipher
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Exception
+interface PKIInterface
 {
 }

@@ -14,26 +14,20 @@
  *
  * @category   Zend
  * @package    Zend_InfoCard
- * @subpackage Zend_InfoCard_Xml
+ * @subpackage Zend_InfoCard_Cipher
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\InfoCard\XML;
+namespace Zend\InfoCard\Cipher\Symmetric;
 
 /**
  * @category   Zend
  * @package    Zend_InfoCard
- * @subpackage Zend_InfoCard_Xml
+ * @subpackage Zend_InfoCard_Cipher
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface KeyInfo
+interface AES128CBCInterface extends AES256CBCInterface
 {
-    /**
-     * Return an object representing a KeyInfo data type
-     *
-     * @return \Zend\InfoCard\XML\KeyInfo
-     */
-    public function getKeyInfo();
 }

@@ -19,7 +19,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\InfoCard\Cipher;
+namespace Zend\InfoCard\Cipher\Symmetric;
 
 /**
  * @category   Zend
@@ -28,6 +28,7 @@ namespace Zend\InfoCard\Cipher;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Symmetric
+interface AES256CBCInterface
 {
+    public function decrypt($encryptedData, $decryptionKey, $iv_length = null);
 }

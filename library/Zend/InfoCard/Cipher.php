@@ -56,7 +56,6 @@ class Cipher
     /**
      * Constructor (disabled)
      *
-     * @return void
      * @codeCoverageIgnoreStart
      */
     protected function __construct()
@@ -66,7 +65,7 @@ class Cipher
     /**
      * Returns an instance of a cipher object supported based on the URI provided
      *
-     * @throws \Zend\InfoCard\Cipher\Exception
+     * @throws Cipher\Exception\InvalidArgumentException
      * @param string $uri The URI of the encryption method wantde
      * @return mixed an Instance of Zend\InfoCard\Cipher\Symmetric or Zend\InfoCard\Cipher\PKI
      *               depending on URI

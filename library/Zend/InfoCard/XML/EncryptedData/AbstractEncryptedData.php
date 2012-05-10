@@ -50,7 +50,7 @@ abstract class AbstractEncryptedData extends AbstractElement
      * Return the Encryption method used to encrypt the assertion document
      * (the symmetric cipher)
      *
-     * @throws \Zend\InfoCard\XML\Exception
+     * @throws XML\Exception\RuntimeException
      * @return string The URI of the Symmetric Encryption Method used
      */
     public function getEncryptionMethod()

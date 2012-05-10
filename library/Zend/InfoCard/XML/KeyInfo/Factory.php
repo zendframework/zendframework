@@ -36,7 +36,6 @@ class Factory
     /**
      * Constructor (disabled)
      *
-     * @return void
      */
     private function __construct()
     {
@@ -47,7 +46,7 @@ class Factory
      *
      * @param string $xmlData The KeyInfo XML Block
      * @return \Zend\InfoCard\XML\KeyInfo\AbstractKeyInfo
-     * @throws \Zend\InfoCard\XML\Exception
+     * @throws XML\Exception\InvalidArgumentException
      */
     static public function getInstance($xmlData)
     {

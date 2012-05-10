@@ -19,7 +19,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\InfoCard\XML;
+namespace Zend\InfoCard\XML\Assertion;
 
 /**
  * The Interface required by any InfoCard Assertion Object implemented within the component
@@ -30,7 +30,7 @@ namespace Zend\InfoCard\XML;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Assertion
+interface AssertionInterface
 {
     /**
      * Get the Assertion ID of the assertion

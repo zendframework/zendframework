@@ -19,7 +19,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\InfoCard;
+namespace Zend\InfoCard\Adapter;
 
 /**
  * The interface required by all Zend_InfoCard Adapter classes to implement. It represents
@@ -31,7 +31,7 @@ namespace Zend\InfoCard;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Adapter
+interface AdapterInterface
 {
     /**
      * Store the assertion's claims in persistent storage

@@ -32,13 +32,14 @@ use Zend\InfoCard\Cipher;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class RSA extends AbstractAdapter implements Cipher\PKI\RSA
+class RSA extends AbstractAdapter implements Cipher\PKI\RSAInterface
 {
 
     /**
      * Object Constructor
      *
      * @param integer $padding The type of Padding to use
+     * @throws Cipher\Exception\ExtensionNotLoadedException
      */
     public function __construct($padding = AbstractAdapter::NO_PADDING)
     {
@@ -55,7 +56,7 @@ class RSA extends AbstractAdapter implements Cipher\PKI\RSA
     /**
      * Decrypts RSA encrypted data using the given private key
      *
-     * @throws \Zend\InfoCard\Cipher\Exception
+     * @throws Cipher\Exception\RuntimeException
      * @param string $encryptedData The encrypted data in binary format
      * @param string $privateKey The private key in binary format
      * @param string $password The private key passphrase

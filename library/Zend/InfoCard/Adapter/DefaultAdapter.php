@@ -21,8 +21,6 @@
 
 namespace Zend\InfoCard\Adapter;
 
-use Zend\InfoCard\Adapter;
-
 /**
  * The default InfoCard component Adapter which serves as a pass-thru placeholder
  * for developers. Initially developed to provide a callback mechanism to store and retrieve
@@ -35,7 +33,7 @@ use Zend\InfoCard\Adapter;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class DefaultAdapter implements Adapter
+class DefaultAdapter implements AdapterInterface
 {
     /**
      * Store the assertion (pass-thru does nothing)

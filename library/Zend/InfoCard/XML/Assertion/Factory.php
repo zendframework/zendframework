@@ -42,7 +42,6 @@ final class Factory
     /**
      * Constructor (disabled)
      *
-     * @return void
      */
     private function __construct()
     {
@@ -51,10 +50,9 @@ final class Factory
     /**
      * Returns an instance of a InfoCard Assertion object based on the XML data provided
      *
-     * @throws \Zend\InfoCard\XML\Exception
+     * @throws XML\Exception\InvalidArgumentException
      * @param string $xmlData The XML-Formatted Assertion
-     * @return \Zend\InfoCard\XML\Assertion
-     * @throws \Zend\InfoCard\XML\Exception
+     * @return object
      */
     static public function getInstance($xmlData)
     {

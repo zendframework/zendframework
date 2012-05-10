@@ -37,7 +37,6 @@ final class Factory
     /**
      * Constructor (disabled)
      *
-     * @return void
      */
     private function __construct()
     {
@@ -48,7 +47,7 @@ final class Factory
      *
      * @param string $xmlData The XML EncryptedData String
      * @return \Zend\InfoCard\XML\EncryptedData\AbstractEncryptedData
-     * @throws \Zend\InfoCard\XML\Exception
+     * @throws XML\Exception\InvalidArgumentException
      */
     static public function getInstance($xmlData)
     {

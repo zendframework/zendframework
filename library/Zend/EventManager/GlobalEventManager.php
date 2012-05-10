@@ -80,7 +80,7 @@ class GlobalEventManager
     }
 
     /**
-     * Trigger listeenrs until return value of one causes a callback to evaluate 
+     * Trigger listeners until return value of one causes a callback to evaluate 
      * to true.
      * 
      * @param  string $event 

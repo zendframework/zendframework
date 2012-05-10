@@ -145,7 +145,7 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
     {
         if (ini_get('phar.readonly')) {
             $this->markTestSkipped(
-                "creating phar archive is disabled by the php.ini setting 'phar.readonly'"
+                'creating phar archive is disabled by the php.ini setting "phar.readonly"'
             );
         }
 

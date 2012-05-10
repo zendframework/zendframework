@@ -46,7 +46,7 @@ class CacheTest extends \PHPUnit_Framework_TestCase
     protected $cache;
 
     /**
-     * @var string
+     * @var array
      */
     protected $testArray;
 
@@ -66,7 +66,7 @@ class CacheTest extends \PHPUnit_Framework_TestCase
 
     public function testReadWrite()
     {
-        $this->_usedSaveHandlers[] = $saveHandler = new Cache($this->cache);
+        $this->usedSaveHandlers[] = $saveHandler = new Cache($this->cache);
 
         $id = '242';
 
@@ -78,7 +78,7 @@ class CacheTest extends \PHPUnit_Framework_TestCase
 
     public function testReadWriteComplex()
     {
-        $saveHandler = new Cache($this->cache);
+        $this->usedSaveHandlers[] = $saveHandler = new Cache($this->cache);
         $saveHandler->open('savepath', 'sessionname');
 
         $id = '242';
@@ -90,7 +90,7 @@ class CacheTest extends \PHPUnit_Framework_TestCase
 
     public function testReadWriteTwice()
     {
-        $this->_usedSaveHandlers[] = $saveHandler = new Cache($this->cache);
+        $this->usedSaveHandlers[] = $saveHandler = new Cache($this->cache);
 
         $id = '242';
 

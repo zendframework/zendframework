@@ -14,56 +14,55 @@
  *
  * @category   Zend
  * @package    Zend_Markup
- * @subpackage Renderer_Markup_Html
+ * @subpackage Renderer_Markup
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Markup\Renderer\Markup\Html;
-use Zend\Markup;
+namespace Zend\Markup\Renderer\Markup;
+
+use Zend\Markup\Token,
+    Zend\Filter\FilterInterface,
+    Zend\Markup\Renderer\AbstractRenderer;
 
 /**
- * Simple replace markup for HTML
+ * Interface for a markup
  *
+ * @uses       \Zend\Markup\Renderer\AbstractRenderer
  * @category   Zend
  * @package    Zend_Markup
- * @subpackage Renderer_Markup_Html
+ * @subpackage Renderer_Markup
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Replace extends AbstractHtml
+interface MarkupInterface extends FilterInterface
 {
 
     /**
-     * Markup's replacement
+     * Set the encoding on this markup
      *
-     * @var string
+     * @param string $encoding
+     *
+     * @return MarkupInterface
      */
-    protected $_replace;
-
+    public function setEncoding($encoding = 'UTF-8');
 
     /**
-     * Constructor
+     * Set the renderer on this markup
      *
-     * @param string $replace
+     * @param AbstractRenderer $renderer
+     *
+     * @return MarkupInterface
      */
-    public function __construct($replace)
-    {
-        $this->_replace = $replace;
-
-        parent::__construct();
-    }
+    public function setRenderer(AbstractRenderer $renderer);
 
     /**
-     * Invoke the markup on the token
+     * Invoke the markup
      *
-     * @param \Zend\Markup\Token $token
+     * @param Token $token
      * @param string $text
      *
      * @return string
      */
-    public function __invoke(Markup\Token $token, $text)
-    {
-        return "<{$this->_replace}>{$text}</{$this->_replace}>";
-    }
+    public function __invoke(Token $token, $text);
 }

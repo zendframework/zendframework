@@ -21,7 +21,8 @@
 
 namespace Zend\Markup\Renderer;
 
-use Zend\Markup\Renderer\Markup\Html\Root as RootMarkup;
+use Zend\Markup\Renderer\Markup\Html\Root as RootMarkup,
+    Zend\Config\Config;
 
 /**
  * HTML renderer
@@ -41,8 +42,6 @@ class Html extends AbstractRenderer
      * @param array|\Zend\Config\Config $options
      *
      * @todo make constructor compliant with new configuration standards
-     *
-     * @return void
      */
     public function __construct($options = array())
     {

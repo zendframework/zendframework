@@ -14,38 +14,12 @@
  *
  * @category   Zend
  * @package    Zend_Markup
- * @subpackage Parser
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace ZendTest\Markup\TestAsset\Parser;
+namespace Zend\Markup\Exception;
 
-use Zend\Markup\Parser;
-
-/**
- * @category   Zend
- * @package    Zend_Markup
- * @subpackage Parser
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- */
-class MockParser implements Parser\ParserInterface
+interface ExceptionInterface
 {
-
-    public function __construct($options = array())
-    {
-    }
-
-    public function parse($value)
-    {
-    }
-
-    public function buildTree(array $tokens, $strategy = 'default')
-    {
-    }
-
-    public function tokenize($value)
-    {
-    }
 }

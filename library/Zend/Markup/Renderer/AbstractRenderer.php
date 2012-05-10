@@ -20,6 +20,7 @@
  */
 
 namespace Zend\Markup\Renderer;
+
 use Zend\Markup\Token,
     Zend\Markup\TokenList,
     Zend\Markup\Parser,
@@ -48,14 +49,14 @@ abstract class AbstractRenderer
     /**
      * The current markup
      *
-     * @var Markup
+     * @var Markup\MarkupInterface
      */
     protected $_markup;
 
     /**
      * Parser
      *
-     * @var \Zend\Markup\Parser
+     * @var \Zend\Markup\Parser\ParserInterface
      */
     protected $_parser;
 
@@ -80,8 +81,6 @@ abstract class AbstractRenderer
      * @param array|\Zend\Config\Config $options
      *
      * @todo make constructor compliant with new configuration standards
-     *
-     * @return void
      */
     public function __construct($options = array())
     {
@@ -103,11 +102,10 @@ abstract class AbstractRenderer
     /**
      * Set the parser
      *
-     * @param  \Zend\Markup\Parser $parser
-     *
-     * @return \Zend\Markup\Renderer\RendererAbstract
+     * @param Parser\ParserInterface $parser
+     * @return AbstractRenderer
      */
-    public function setParser(Parser $parser)
+    public function setParser(Parser\ParserInterface $parser)
     {
         $this->_parser = $parser;
 
@@ -117,7 +115,7 @@ abstract class AbstractRenderer
     /**
      * Get the parser
      *
-     * @return \Zend\Markup\Parser
+     * @return Parser\ParserInterface
      */
     public function getParser()
     {
@@ -166,11 +164,11 @@ abstract class AbstractRenderer
      * Add a new markup
      *
      * @param string $name
-     * @param Markup $markup
+     * @param Markup\MarkupInterface $markup
      *
      * @return AbstractRenderer
      */
-    public function addMarkup($name, Markup $markup)
+    public function addMarkup($name, Markup\MarkupInterface $markup)
     {
         $markup->setRenderer($this);
 
@@ -186,7 +184,7 @@ abstract class AbstractRenderer
      *
      * @throws Exception\RuntimeException if the markup doesn't exist
      *
-     * @return Markup
+     * @return Markup\MarkupInterface
      */
     public function getMarkup($name)
     {
@@ -222,7 +220,7 @@ abstract class AbstractRenderer
     /**
      * Render function
      *
-     * @param  \Zend\Markup\TokenList|string $tokenList
+     * @param TokenList|string $tokenList
      *
      * @throws Exception\RuntimeException when there is no root markup given
      * @return string

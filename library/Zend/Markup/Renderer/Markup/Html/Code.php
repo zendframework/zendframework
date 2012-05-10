@@ -41,7 +41,6 @@ class Code extends AbstractHtml
      * with PHP's highlight_string() function), we simply override the
      * constructor.
      *
-     * @return void
      */
     public function __construct()
     {

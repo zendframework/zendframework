@@ -42,12 +42,14 @@ class ParserBroker extends PluginBroker
      * 
      * @param  mixed $plugin 
      * @return true
-     * @throws Exception
+     * @throws Exception\InvalidArgumentException
      */
     protected function validatePlugin($plugin)
     {
-        if (!$plugin instanceof Parser) {
-            throw new Exception('Markup parsers must implement Zend\Markup\Parser');
+        if (!$plugin instanceof Parser\ParserInterface) {
+            throw new Exception\InvalidArgumentException(
+                'Markup parsers must implement Zend\Markup\Parser\ParserInterface'
+            );
         }
         return true;
     }

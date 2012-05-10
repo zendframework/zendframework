@@ -47,13 +47,6 @@ class AdapterOptions extends Options
     protected $adapter;
 
     /**
-     * Ignore missing items
-     *
-     * @var boolean
-     */
-    protected $ignoreMissingItems = true;
-
-    /**
      * Validate key against pattern
      *
      * @var string
@@ -124,43 +117,6 @@ class AdapterOptions extends Options
     {
         $this->adapter = $adapter;
         return $this;
-    }
-
-    /**
-     * Enables or disables ignoring of missing items.
-     *
-     * - If enabled and a missing item was requested:
-     *   - getItem, getMetadata: return false
-     *   - removeItem[s]: return true
-     *   - incrementItem[s], decrementItem[s]: add a new item with 0 as base
-     *   - touchItem[s]: add new empty item
-     *
-     * - If disabled and a missing item was requested:
-     *   - getItem, getMetadata, incrementItem[s], decrementItem[s], touchItem[s]
-     *     throws ItemNotFoundException
-     *
-     * @param  boolean $flag
-     * @return AdapterOptions
-     */
-    public function setIgnoreMissingItems($flag)
-    {
-        $flag = (bool) $flag;
-        if ($this->ignoreMissingItems !== $flag) {
-            $this->triggerOptionEvent('ignore_missing_items', $flag);
-            $this->ignoreMissingItems = $flag;
-        }
-        return $this;
-    }
-
-    /**
-     * Ignore missing items
-     *
-     * @return boolean
-     * @see    setIgnoreMissingItems()
-     */
-    public function getIgnoreMissingItems()
-    {
-        return $this->ignoreMissingItems;
     }
 
     /**

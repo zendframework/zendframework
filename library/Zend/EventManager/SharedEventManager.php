@@ -53,7 +53,7 @@ class SharedEventManager implements SharedEventManagerInterface
      * <code>
      * SharedEventManager::getInstance()->connect(
      *     array('My\Resource\AbstractResource', 'My\Resource\EntityResource'),
-     *     'getOne',
+     *     'getAll',
      *     function ($e) use ($cache) {
      *         if (!$id = $e->getParam('id', false)) {
      *             return;

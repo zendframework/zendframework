@@ -42,8 +42,8 @@ class IsImageTest extends \PHPUnit_Framework_TestCase
     {
         // As of PHP >= 5.3.11 and >= 5.4.1 the magic database format has changed.
         // http://doc.php.net/downloads/pdf/split/de/File-Information.pdf (page 11)
-        if (version_compare(phpversion(), '5.3.10', '<=') || (version_compare(phpversion(), '5.4', '>=') &&
-             version_compare(phpversion(), '5.4.1', '<'))) {
+        if (version_compare(PHP_VERSION, '5.3.10', '<=') || (version_compare(PHP_VERSION, '5.4', '>=') &&
+                                                             version_compare(PHP_VERSION, '5.4.1', '<'))) {
             return __DIR__ . '/_files/magic.lte.5.3.10.mime';
         }
 

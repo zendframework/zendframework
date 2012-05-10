@@ -358,9 +358,7 @@ class WinCache extends AbstractAdapter
     {
         $internalKey = $normalizedOptions['namespace'] . $this->getOptions()->getNamespaceSeparator() . $normalizedKey;
         if (!wincache_ucache_exists($internalKey)) {
-            throw new Exception\ItemNotFoundException(
-                "Key '{$internalKey}' doesn't exist"
-            );
+            return false;
         }
 
         if (!wincache_ucache_set($internalKey, $value, $normalizedOptions['ttl'])) {

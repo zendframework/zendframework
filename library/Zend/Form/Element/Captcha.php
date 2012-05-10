@@ -23,6 +23,7 @@ namespace Zend\Form\Element;
 
 use Zend\Captcha as ZendCaptcha;
 use Zend\Form\Element;
+use Zend\InputFilter\InputProviderInterface;
 
 /**
  * @category   Zend
@@ -31,7 +32,7 @@ use Zend\Form\Element;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Captcha extends Element
+class Captcha extends Element implements InputProviderInterface
 {
     /**
      * Set a single element attribute
@@ -80,5 +81,31 @@ class Captcha extends Element
     public function getCaptcha()
     {
         return $this->getAttribute('captcha');
+    }
+
+    /**
+     * Provide default input rules for this element
+     *
+     * Attaches the captcha as a validator.
+     * 
+     * @return array
+     */
+    public function getInputSpecification()
+    {
+        $spec = array(
+            'name' => $this->getName(),
+            'required' => true,
+            'filters' => array(
+                array('name' => 'Zend\Filter\StringTrim'),
+            ),
+        );
+
+        // Test that we have a captcha before adding it to the spec
+        $captcha = $this->getCaptcha();
+        if ($captcha instanceof ZendCaptcha\AdapterInterface) {
+            $spec['validators'] = array($captcha);
+        }
+
+        return $spec;
     }
 }

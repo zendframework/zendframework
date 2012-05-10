@@ -73,4 +73,19 @@ class CaptchaTest extends TestCase
         $captcha = $element->getCaptcha();
         $this->assertInstanceOf('Zend\Captcha\Dumb', $captcha);
     }
+
+    public function testProvidesInputSpecificationThatIncludesCaptchaAsValidator()
+    {
+        $element = new CaptchaElement();
+        $captcha = new Captcha\Dumb(array(
+            'sessionClass' => 'ZendTest\Captcha\TestAsset\SessionContainer',
+        ));
+        $element->setCaptcha($captcha);
+
+        $inputSpec = $element->getInputSpecification();
+        $this->assertArrayHasKey('validators', $inputSpec);
+        $this->assertInternalType('array', $inputSpec['validators']);
+        $test = array_shift($inputSpec['validators']);
+        $this->assertSame($captcha, $test);
+    }
 }

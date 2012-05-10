@@ -26,8 +26,6 @@ use Zend\GData\Extension;
 /**
  * Represents the gd:when element
  *
- * @uses       \Zend\GData\Extension
- * @uses       \Zend\GData\Extension\Reminder
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Gdata

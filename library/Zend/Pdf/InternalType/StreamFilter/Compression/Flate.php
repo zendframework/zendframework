@@ -26,8 +26,6 @@ use Zend\Pdf;
 /**
  * Flate stream filter
  *
- * @uses       \Zend\Pdf\Exception
- * @uses       \Zend\Pdf\InternalType\StreamFilter\Compression\AbstractCompression
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Internal
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

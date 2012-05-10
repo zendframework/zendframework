@@ -23,8 +23,6 @@ use Zend\Feed\Reader;
 use Zend\Feed\Reader\Exception;
 
 /**
-* @uses \Zend\Feed\Reader\Exception
-* @uses \Zend\Feed\Reader\Reader
 * @category Zend
 * @package Zend_Feed_Reader
 * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

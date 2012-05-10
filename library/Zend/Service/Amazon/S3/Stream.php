@@ -26,8 +26,6 @@ use Zend\Service\Amazon,
 /**
  * Amazon S3 PHP stream wrapper
  *
- * @uses       Zend_Service_Amazon_S3
- * @uses       Zend\Service\Amazon\S3\Exception
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Amazon_S3

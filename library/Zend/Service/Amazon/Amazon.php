@@ -26,13 +26,6 @@ use Zend\Service,
     Zend\Crypt;
 
 /**
- * @uses       DOMDocument
- * @uses       DOMXPath
- * @uses       Zend_Crypt_Hmac
- * @uses       Zend_Rest_Client
- * @uses       Zend_Service_Amazon_Item
- * @uses       Zend_Service_Amazon_ResultSet
- * @uses       Zend\Service\Amazon\Exception
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Amazon

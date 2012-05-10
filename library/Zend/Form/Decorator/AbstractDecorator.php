@@ -27,8 +27,6 @@ use Zend\Form\Decorator,
 /**
  * Zend_Form_Decorator_Abstract
  *
- * @uses       \Zend\Form\Decorator\Exception
- * @uses       \Zend\Form\Decorator
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Decorator

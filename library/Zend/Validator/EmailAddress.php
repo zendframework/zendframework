@@ -21,9 +21,6 @@
 namespace Zend\Validator;
 
 /**
- * @uses       \Zend\Validator\AbstractValidator
- * @uses       \Zend\Validator\Exception
- * @uses       \Zend\Validator\Hostname
  * @category   Zend
  * @package    Zend_Validate
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

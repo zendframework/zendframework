@@ -26,9 +26,6 @@ use Zend\Pdf;
 /**
  * PDF file 'array' element implementation
  *
- * @uses       ArrayObject
- * @uses       \Zend\Pdf\InternalType\AbstractTypeObject
- * @uses       \Zend\Pdf\Exception
  * @category   Zend
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Internal

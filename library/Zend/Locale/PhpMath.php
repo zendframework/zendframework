@@ -26,7 +26,6 @@ namespace Zend\Locale;
  * Sampling of PHP environments and platforms suggests that at least 80% to 90% support bcmath.
  * This file should only be loaded for the 10% to 20% lacking access to the bcmath extension.
  *
- * @uses       \Zend\Locale\Exception\MathException
  * @category   Zend
  * @package    Zend_Locale
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

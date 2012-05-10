@@ -27,8 +27,6 @@ use Zend\Pdf\Color,
 /**
  * GrayScale color implementation
  *
- * @uses       \Zend\Pdf\Color
- * @uses       \Zend\Pdf\InternalType\NumericObject
  * @category   Zend
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Color

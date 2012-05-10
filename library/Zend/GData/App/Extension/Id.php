@@ -26,7 +26,6 @@ use Zend\GData\App\Extension;
 /**
  * Represents the atom:id element
  *
- * @uses       \Zend\GData\App\Extension
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage App

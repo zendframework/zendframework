@@ -24,7 +24,6 @@ namespace Zend\OpenId;
 /**
  * Exception class for Zend\OpenId
  *
- * @uses       \Exception
  * @category   Zend
  * @package    Zend_OpenId
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

@@ -24,7 +24,6 @@ namespace Zend\Authentication\Adapter\Http\Exception;
 /**
  * HTTP Auth Resolver Exception
  *
- * @uses       Zend\Authentication\Exception
  * @category   Zend
  * @package    Zend_Authentication
  * @subpackage Adapter_Http_Exception

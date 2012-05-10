@@ -26,9 +26,6 @@ namespace Zend\InfoCard\XML\KeyInfo;
  * In this context, it is assumed to mean that it is the type of KeyInfo block which
  * contains the SecurityTokenReference
  *
- * @uses       \Zend\InfoCard\XML\Exception
- * @uses       \Zend\InfoCard\XML\KeyInfo\AbstractKeyInfo
- * @uses       \Zend\InfoCard\XML\SecurityTokenReference
  * @category   Zend
  * @package    Zend_InfoCard
  * @subpackage Zend_InfoCard_Xml

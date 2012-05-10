@@ -26,7 +26,6 @@ use Zend\InfoCard\Cipher\PKI\Adapter;
 /**
  * The interface which defines the RSA Public-key encryption object
  *
- * @uses       Zend_InfoCard_Cipher_PKI_Adapter_Abstract
  * @category   Zend
  * @package    Zend_InfoCard
  * @subpackage Zend_InfoCard_Cipher

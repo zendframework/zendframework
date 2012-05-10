@@ -26,7 +26,6 @@ namespace Zend\Form\Decorator;
  *
  * Adds captcha adapter output
  *
- * @uses       \Zend\Form\Decorator\AbstractDecorator
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Decorator

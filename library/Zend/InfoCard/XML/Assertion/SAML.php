@@ -28,9 +28,6 @@ use Zend\InfoCard\XML\Assertion as XMLAssertion,
 /**
  * A Xml Assertion Document in SAML Token format
  *
- * @uses       \Zend\InfoCard\Exception
- * @uses       \Zend\InfoCard\XML\Assertion
- * @uses       \Zend\InfoCard\XML\AbstractElement
  * @category   Zend
  * @package    Zend_InfoCard
  * @subpackage Zend_InfoCard_Xml

@@ -22,7 +22,6 @@ namespace Zend\Feed\Writer\Extension\ITunes\Renderer;
 use Zend\Feed\Writer\Extension;
 
 /**
-* @uses \Zend\Feed\Writer\Extension\AbstractRenderer
 * @category Zend
 * @package Zend_Feed_Writer
 * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

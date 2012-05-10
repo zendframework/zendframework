@@ -24,7 +24,6 @@ namespace Zend\Form\Decorator;
 /**
  * Exception for Zend_Form component.
  *
- * @uses       \Zend\Form\Exception
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Decorator

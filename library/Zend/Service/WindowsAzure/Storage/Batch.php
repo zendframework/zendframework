@@ -20,10 +20,6 @@
  */
 
 /**
- * @uses       Zend_Http_Client
- * @uses       Zend_Service_WindowsAzure_Exception
- * @uses       Zend_Service_WindowsAzure_Storage
- * @uses       Zend_Service_WindowsAzure_Storage_AbstractBatchStorage
  * @category   Zend
  * @package    Zend_Service_WindowsAzure
  * @subpackage Storage

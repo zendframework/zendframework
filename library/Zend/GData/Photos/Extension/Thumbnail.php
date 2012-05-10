@@ -25,8 +25,6 @@ namespace Zend\GData\Photos\Extension;
  * Represents the gphoto:thumbnail element used by the API.
  * This class represents the URI for a thumbnail image.
  *
- * @uses       \Zend\GData\Extension
- * @uses       \Zend\GData\Photos
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Photos

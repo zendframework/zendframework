@@ -22,9 +22,6 @@
 namespace Zend\Service\Amazon\Ec2;
 
 /**
- * @uses       DOMDocument
- * @uses       DOMXPath
- * @uses       Zend_Http_Response
  * @category   Zend
  * @package    Zend_Service_Amazon
  * @subpackage Ec2

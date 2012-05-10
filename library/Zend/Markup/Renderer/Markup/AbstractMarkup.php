@@ -29,8 +29,6 @@ use Zend\Markup\Renderer\Markup,
 /**
  * Abstract markup
  *
- * @uses       \Zend\Markup\Renderer\Markup
- * @uses       \Zend\Markup\Renderer\AbstractRenderer
  * @category   Zend
  * @package    Zend_Markup
  * @subpackage Renderer_Markup

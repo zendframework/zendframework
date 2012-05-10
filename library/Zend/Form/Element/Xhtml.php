@@ -26,7 +26,6 @@ use Zend\Form\Element;
 /**
  * Base element for XHTML elements
  *
- * @uses       \Zend\Form\Element
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Element

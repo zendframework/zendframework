@@ -26,7 +26,6 @@ namespace Zend\Locale;
  * Sampling of PHP environments and platforms suggests that at least 80% to 90% support bcmath.
  * Thus, this file should be as light as possible.
  *
- * @uses       Zend\Locale\PhpMath
  * @category   Zend
  * @package    Zend_Locale
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

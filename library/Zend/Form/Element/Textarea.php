@@ -24,7 +24,6 @@ namespace Zend\Form\Element;
 /**
  * Textarea form element
  *
- * @uses       \Zend\Form\Element\Xhtml
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Element

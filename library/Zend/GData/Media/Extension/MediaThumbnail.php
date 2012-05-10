@@ -25,8 +25,6 @@ namespace Zend\GData\Media\Extension;
 /**
  * Represents the media:thumbnail element
  *
- * @uses       \Zend\GData\Extension
- * @uses       \Zend\GData\Media
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Media

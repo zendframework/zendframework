@@ -26,9 +26,6 @@ use Zend\Locale\Math;
 /**
  * Abstract class for all measurements
  *
- * @uses       Zend\Locale\Locale
- * @uses       Zend\Locale\Locale\Math
- * @uses       Zend\Registry
  * @category   Zend
  * @package    Zend_Measure
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

@@ -12,7 +12,6 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @uses       \Zend\Service\Amazon\S3\Exception
  * @category   Zend
  * @package    Zend_Service_Amazon
  * @subpackage S3

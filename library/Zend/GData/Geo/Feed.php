@@ -26,9 +26,6 @@ use Zend\GData\Geo;
 /**
  * Feed for Gdata Geographic data entries.
  *
- * @uses       \Zend\GData\Feed
- * @uses       \Zend\GData\Geo
- * @uses       \Zend\GData\Geo\Entry
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Geo

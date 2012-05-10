@@ -30,9 +30,6 @@ namespace Zend\XmlRpc;
  * To allow method chaining, you may only use the {@link getInstance()} factory
  * to instantiate a Zend_XmlRpc_Server_Fault.
  *
- * @uses       SimpleXMLElement
- * @uses       Zend\XmlRpc\Exception\ExceptionInterface
- * @uses       Zend\XmlRpc\Value\Value
  * @category   Zend
  * @package    Zend_XmlRpc
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

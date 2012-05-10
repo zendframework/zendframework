@@ -24,7 +24,6 @@ namespace Zend\XmlRpc\Client\Exception;
 /**
  * Thrown by Zend_XmlRpc_Client when an XML-RPC fault response is returned.
  *
- * @uses       Zend\XmlRpc\Client\Exception
  * @category   Zend
  * @package    Zend_XmlRpc
  * @subpackage Client

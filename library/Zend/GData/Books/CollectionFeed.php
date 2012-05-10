@@ -26,8 +26,6 @@ use Zend\GData\Books;
 /**
  * Describes a Book Search collection feed
  *
- * @uses       \Zend\GData\Books
- * @uses       \Zend\GData\Feed
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Books

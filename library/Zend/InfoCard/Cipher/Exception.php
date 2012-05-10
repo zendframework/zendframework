@@ -22,7 +22,6 @@
 namespace Zend\InfoCard\Cipher;
 
 /**
- * @uses       \Zend\InfoCard\Exception
  * @category   Zend
  * @package    Zend_InfoCard
  * @subpackage Zend_InfoCard_Cipher

@@ -28,9 +28,6 @@ use Zend\GData\YouTube;
  * Represents a list of individual playlists, where each contained entry is
  * a playlist.
  *
- * @uses       \Zend\GData\Media\Feed
- * @uses       \Zend\GData\YouTube
- * @uses       \Zend\GData\YouTube\PlaylistListEntry
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage YouTube

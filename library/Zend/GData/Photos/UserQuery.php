@@ -32,9 +32,6 @@ use Zend\GData\Photos,
  * For information on submitting queries to a server, see the
  * service class, Zend_Gdata_Photos.
  *
- * @uses       \Zend\GData\App\InvalidArgumentException
- * @uses       \Zend\GData\GApps\Query
- * @uses       \Zend\GData\Photos
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Photos

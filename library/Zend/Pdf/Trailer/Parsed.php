@@ -27,10 +27,6 @@ use Zend\Pdf\Exception;
  * PDF file trailer.
  * Stores and provides access to the trailer parced from a PDF file
  *
- * @uses       \Zend\Pdf\Exception
- * @uses       \Zend\Pdf\Trailer\AbstractTrailer
- * @uses       \Zend\Pdf\InternalType\DirctionaryObject
- * @uses       \Zend\Pdf\InternalType\IndirectObjectReference\Context
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Internal
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

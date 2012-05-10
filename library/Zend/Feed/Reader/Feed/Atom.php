@@ -23,9 +23,6 @@ use Zend\Feed\Reader;
 use Zend\Date;
 
 /**
-* @uses \Zend\Feed\Reader\Reader
-* @uses \Zend\Feed\Reader\Extension\Atom\Feed
-* @uses \Zend\Feed\Reader\Feed\AbstractFeed
 * @category Zend
 * @package Reader
 * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

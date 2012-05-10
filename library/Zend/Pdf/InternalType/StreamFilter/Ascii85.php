@@ -27,8 +27,6 @@ use Zend\Pdf\InternalType\StreamFilter;
 /**
  * ASCII85 stream filter
  *
- * @uses       \Zend\Pdf\Exception
- * @uses       \Zend\Pdf\InternalType\StreamFilter
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Internal
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

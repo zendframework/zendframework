@@ -22,9 +22,6 @@
 namespace Zend\Feed\PubSubHubbub;
 
 /**
- * @uses       \Zend\Feed\PubSubHubbub\Callback
- * @uses       \Zend\Feed\PubSubHubbub\Exception
- * @uses       \Zend\Feed\PubSubHubbub\HttpResponse
  * @category   Zend
  * @package    Zend_Feed_Pubsubhubbub
  * @subpackage Callback

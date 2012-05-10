@@ -20,7 +20,6 @@
  */
 
 /**
- * @uses       Zend\Service\Exception
  * @category   Zend
  * @package    Zend_Service_WindowsAzure
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

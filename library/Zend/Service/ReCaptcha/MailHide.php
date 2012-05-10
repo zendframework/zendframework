@@ -24,9 +24,6 @@ namespace Zend\Service\ReCaptcha;
 /**
  * Zend_Service_ReCaptcha_MailHide
  *
- * @uses       \Zend\Service\ReCaptcha\ReCaptcha
- * @uses       \Zend\Service\ReCaptcha\MailHideException
- * @uses       \Zend\Validator\EmailAddress
  * @category   Zend
  * @package    Zend_Service
  * @subpackage ReCaptcha

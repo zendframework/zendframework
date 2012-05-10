@@ -24,7 +24,6 @@ namespace Zend\Server\Method;
 /**
  * Method prototype metadata
  *
- * @uses       \Zend\Server\Method\Parameter
  * @category   Zend
  * @package    Zend_Server
  * @subpackage Zend_Server_Method

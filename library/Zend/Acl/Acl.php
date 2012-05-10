@@ -112,7 +112,6 @@ class Acl
      *
      * @param  Role\RoleInterface              $role
      * @param  Role\RoleInterface|string|array $parents
-     * @uses   Role\Registry::add()
      * @throws Exception\InvalidArgumentException
      * @return Acl Provides a fluent interface
      */
@@ -138,7 +137,6 @@ class Acl
      * The $role parameter can either be a Role or Role identifier.
      *
      * @param  Role\RoleInterface|string $role
-     * @uses   Role\Registry::get()
      * @return Role
      */
     public function getRole($role)
@@ -152,7 +150,6 @@ class Acl
      * The $role parameter can either be a Role or a Role identifier.
      *
      * @param  Role\RoleInterface|string $role
-     * @uses   Role\Registry::has()
      * @return boolean
      */
     public function hasRole($role)
@@ -169,7 +166,6 @@ class Acl
      * through the entire inheritance DAG to determine whether $role
      * inherits from $inherit through its ancestor Roles.
      *
-     * @uses   Role\Registry::inherits()
      * @param  Role\RoleInterface|string    $role
      * @param  Role\RoleInterface|string    $inherit
      * @param  boolean                      $onlyParents
@@ -186,7 +182,6 @@ class Acl
      * The $role parameter can either be a Role or a Role identifier.
      *
      * @param  Role\RoleInterface|string $role
-     * @uses   Role\Registry::remove()
      * @return Acl Provides a fluent interface
      */
     public function removeRole($role)
@@ -220,7 +215,6 @@ class Acl
     /**
      * Removes all Roles from the registry
      *
-     * @uses   Role\Registry::removeAll()
      * @return Acl Provides a fluent interface
      */
     public function removeRoleAll()
@@ -441,7 +435,6 @@ class Acl
     /**
      * Adds an "allow" rule to the ACL
      *
-     * @uses   Acl::setRule()
      * @param  Role\RoleInterface|string|array          $roles
      * @param  Resource\ResourceInterface|string|array  $resources
      * @param  string|array                             $privileges
@@ -456,7 +449,6 @@ class Acl
     /**
      * Adds a "deny" rule to the ACL
      *
-     * @uses   Acl::setRule()
      * @param  Role\RoleInterface|string|array          $roles
      * @param  Resource\ResourceInterface|string|array  $resources
      * @param  string|array                             $privileges
@@ -471,7 +463,6 @@ class Acl
     /**
      * Removes "allow" permissions from the ACL
      *
-     * @uses   Acl::setRule()
      * @param  Role\RoleInterface|string|array          $roles
      * @param  Resource\ResourceInterface|string|array  $resources
      * @param  string|array                             $privileges
@@ -485,7 +476,6 @@ class Acl
     /**
      * Removes "deny" restrictions from the ACL
      *
-     * @uses   Acl::setRule()
      * @param  Role|string|array     $roles
      * @param  Resource|string|array $resources
      * @param  string|array          $privileges
@@ -537,8 +527,6 @@ class Acl
      * when the rule's assertion fails. This is because the ACL needs to provide expected
      * behavior when an assertion upon the default ACL rule fails.
      *
-     * @uses   Role\Registry::get()
-     * @uses   Acl::get()
      * @param  string                                   $operation
      * @param  string                                   $type
      * @param  Role\RoleInterface|string|array          $roles
@@ -691,8 +679,6 @@ class Acl
      * and its respective parents are checked similarly before the lower-priority parents of
      * the Role are checked.
      *
-     * @uses   Acl::get()
-     * @uses   Role\Registry::get()
      * @param  Role\RoleInterface|string            $role
      * @param  Resource\ResourceInterface|string    $resource
      * @param  string                               $privilege

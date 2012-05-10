@@ -26,8 +26,6 @@ use Zend\InfoCard\XML;
  * A factory class for producing Zend_InfoCard_Xml_EncryptedData objects based on
  * the type of XML document provided
  *
- * @uses       \Zend\InfoCard\XML\EncryptedData\XMLEnc
- * @uses       \Zend\InfoCard\XML\Exception
  * @category   Zend
  * @package    Zend_InfoCard
  * @subpackage Zend_InfoCard_Xml

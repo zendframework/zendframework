@@ -20,11 +20,6 @@
  */
 
 /**
- * @uses       Zend_Service_DeveloperGarden_Client_AbstractClient
- * @uses       Zend_Service_DeveloperGarden_LocalSearch_SearchParameters
- * @uses       Zend_Service_DeveloperGarden_Request_LocalSearch_LocalSearchRequest
- * @uses       Zend_Service_DeveloperGarden_Response_LocalSearch_LocalSearchResponse
- * @uses       Zend_Service_DeveloperGarden_Response_LocalSearch_LocalSearchResponseType
  * @category   Zend
  * @package    Zend_Service
  * @subpackage DeveloperGarden

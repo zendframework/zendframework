@@ -26,8 +26,6 @@ namespace Zend\GData\Photos\Extension;
  * class represents the number of comments attached to an entry and is usually contained
  * within an instance of Zend_Gdata_Photos_PhotoEntry or AlbumEntry.
  *
- * @uses       \Zend\GData\Extension
- * @uses       \Zend\GData\Photos
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Photos

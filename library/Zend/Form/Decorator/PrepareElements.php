@@ -33,7 +33,6 @@ use Zend\Form;
  *
  * Any other options passed will be used as HTML attributes of the form tag.
  *
- * @uses       \Zend\Form\Decorator\FormElements
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Decorator

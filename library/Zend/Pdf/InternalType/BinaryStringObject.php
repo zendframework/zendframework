@@ -25,7 +25,6 @@ use Zend\Pdf;
 /**
  * PDF file 'binary string' element implementation
  *
- * @uses       \Zend\Pdf\InternalType\StringObject
  * @category   Zend
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Internal

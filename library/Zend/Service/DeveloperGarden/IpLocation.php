@@ -20,13 +20,6 @@
  */
 
 /**
- * @uses       Zend_Service_DeveloperGarden_Client_AbstractClient
- * @uses       Zend_Service_DeveloperGarden_Request_IpLocation_LocateIPRequest
- * @uses       Zend_Service_DeveloperGarden_Response_IpLocation_CityType
- * @uses       Zend_Service_DeveloperGarden_Response_IpLocation_GeoCoordinatesType
- * @uses       Zend_Service_DeveloperGarden_Response_IpLocation_IPAddressLocationType
- * @uses       Zend_Service_DeveloperGarden_Response_IpLocation_LocateIPResponse
- * @uses       Zend_Service_DeveloperGarden_Response_IpLocation_LocateIPResponseType
  * @category   Zend
  * @package    Zend_Service
  * @subpackage DeveloperGarden

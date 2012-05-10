@@ -21,8 +21,6 @@
 namespace Zend\Form\Exception;
 
 /**
- * @uses       Zend\Form\Exception
- * @uses       \BadMethodCallException
  * @category   Zend
  * @package    Zend_Form
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

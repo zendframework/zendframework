@@ -25,8 +25,6 @@ use Zend\Loader;
 /**
  * Validator for counting all words in a file
  *
- * @uses      \Zend\Loader
- * @uses      \Zend\Validator\File\Count
  * @category  Zend
  * @package   Zend_Validate
  * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

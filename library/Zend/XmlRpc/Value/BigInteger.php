@@ -22,8 +22,6 @@
 namespace Zend\XmlRpc\Value;
 
 /**
- * @uses       \Zend\Crypt\Math\BigInteger
- * @uses       \Zend\XmlRpc\Value\Integer
  * @category   Zend
  * @package    Zend_XmlRpc
  * @subpackage Value

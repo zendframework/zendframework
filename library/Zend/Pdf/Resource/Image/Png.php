@@ -28,10 +28,6 @@ use Zend\Pdf\InternalType;
 /**
  * PNG image
  *
- * @uses       \Zend\Pdf\ObjectFactory
- * @uses       \Zend\Pdf\InternalType
- * @uses       \Zend\Pdf\Exception
- * @uses       \Zend\Pdf\Resource\Image\AbstractImage
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Image
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

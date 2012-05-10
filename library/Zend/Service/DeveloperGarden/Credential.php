@@ -20,7 +20,6 @@
  */
 
 /**
- * @uses       Zend_Service_DeveloperGarden_Client_Exception
  * @category   Zend
  * @package    Zend_Service
  * @subpackage DeveloperGarden

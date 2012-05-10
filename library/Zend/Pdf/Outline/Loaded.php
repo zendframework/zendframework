@@ -34,14 +34,6 @@ use Zend\Pdf\ObjectFactory;
  * Instances of this class trace object update uperations. That allows to avoid outlines PDF tree update
  * which should be performed at each document update otherwise.
  *
- * @uses       SplObjectStorage
- * @uses       \Zend\Pdf\Action
- * @uses       \Zend\Pdf\Color
- * @uses       \Zend\Pdf\Destination
- * @uses       \Zend\Pdf\InternalType
- * @uses       \Zend\Pdf\Exception
- * @uses       \Zend\Pdf\Outline
- * @uses       \Zend\Pdf\ObjectFactory
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Outline
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

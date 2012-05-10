@@ -30,7 +30,6 @@ namespace Zend\GData\GApps;
  * the error code returned by the server. For a list of error codes
  * available at the time of this writing, see getErrorCode.
  *
- * @uses       \Zend\GData\App\Base
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage GApps

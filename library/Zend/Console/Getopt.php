@@ -96,8 +96,6 @@ namespace Zend\Console;
  *
  * @todo  Feature request to implement callbacks.
  *        e.g. if -a is specified, run function 'handleOptionA'().
- * @uses  \Zend\Console\GetoptException
- * @uses  \Zend\Json\Json
  */
 class Getopt
 {

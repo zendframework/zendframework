@@ -22,9 +22,6 @@ namespace Zend\TimeSync;
 use Zend\TimeSync\Exception;
 
 /**
- * @uses       \Zend\Date\Date
- * @uses       \Zend\Loader
- * @uses       \Zend\TimeSync\Exception
  * @category   Zend
  * @package    Zend_TimeSync
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

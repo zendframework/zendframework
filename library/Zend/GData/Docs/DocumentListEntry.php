@@ -27,8 +27,6 @@ use Zend\GData\Docs;
  * Represents a Documents List entry in the Documents List data API meta feed
  * of a user's documents.
  *
- * @uses       \Zend\GData\Docs
- * @uses       \Zend\GData\Entry
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Docs

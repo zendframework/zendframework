@@ -25,10 +25,6 @@ use Zend\InfoCard\XML;
 /**
  * Factory class to return a XML KeyInfo block based on input XML
  *
- * @uses       \Zend\InfoCard\XML\AbstractElement
- * @uses       \Zend\InfoCard\XML\Exception
- * @uses       \Zend\InfoCard\XML\KeyInfo\Default
- * @uses       \Zend\InfoCard\XML\KeyInfo\XMLDSig
  * @category   Zend
  * @package    Zend_InfoCard
  * @subpackage Zend_InfoCard_Xml

@@ -26,8 +26,6 @@ namespace Zend\Captcha;
  *
  * Generates random word which user should recognise
  *
- * @uses       Zend\Captcha\AbstractAdapter
- * @uses       Zend\Loader
  * @category   Zend
  * @package    Zend_Captcha
  * @subpackage Adapter

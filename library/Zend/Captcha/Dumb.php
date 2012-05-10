@@ -28,7 +28,6 @@ use Zend\View\Renderer\RendererInterface as Renderer;
  *
  * Note that only rendering is necessary for word-based captcha
  *
- * @uses       Zend\Captcha\Word
  * @category   Zend
  * @package    Zend_Captcha
  * @subpackage Adapter

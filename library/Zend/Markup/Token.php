@@ -22,7 +22,6 @@
 namespace Zend\Markup;
 
 /**
- * @uses       \Zend\Markup\TokenList
  * @category   Zend
  * @package    Zend_Markup
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

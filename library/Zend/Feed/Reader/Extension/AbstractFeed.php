@@ -22,10 +22,6 @@ namespace Zend\Feed\Reader\Extension;
 use Zend\Feed\Reader;
 
 /**
-* @uses \DOMXPath
-* @uses \Zend\Feed\Reader\Reader
-* @uses \Zend\Feed\Reader\Entry\Atom
-* @uses \Zend\Feed\Reader\Entry\RSS
 * @category Zend
 * @package Zend_Feed_Reader
 * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

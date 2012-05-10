@@ -47,11 +47,6 @@ use Zend\Pdf;
  * @todo Write code for \Zend\Pdf\Cmap\TrimmedArray class.
  * @todo Write code for \Zend\Pdf\Cmap\SegmentedCoverage class.
  *
- * @uses       \Zend\Pdf\Cmap\ByteEncoding
- * @uses       \Zend\Pdf\Cmap\StaticByteEncoding
- * @uses       \Zend\Pdf\Cmap\SegmentToDelta
- * @uses       \Zend\Pdf\Cmap\TrimmedTable
- * @uses       \Zend\Pdf\Exception
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Font
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

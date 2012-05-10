@@ -27,9 +27,6 @@ use Iterator,
     Zend\Queue\Exception;
 
 /**
- * @uses       \Countable
- * @uses       \Iterator
- * @uses       \Zend\Queue\Exception
  * @category   Zend
  * @package    Zend_Queue
  * @subpackage Message

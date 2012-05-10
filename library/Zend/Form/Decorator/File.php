@@ -31,9 +31,6 @@ use Zend\File\Transfer\Adapter,
  *
  * Fixes the rendering for all subform and multi file elements
  *
- * @uses       \Zend\Form\Decorator\AbstractDecorator
- * @uses       \Zend\Form\Decorator\FileDecorator
- * @uses       \Zend\File\Transfer\Adapter\Http
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Decorator

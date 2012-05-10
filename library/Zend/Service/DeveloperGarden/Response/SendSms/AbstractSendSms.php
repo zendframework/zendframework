@@ -20,8 +20,6 @@
  */
 
 /**
- * @uses       Zend_Service_DeveloperGarden_Response_Exception
- * @uses       Zend_Service_DeveloperGarden_Response_AbstractResponse
  * @category   Zend
  * @package    Zend_Service
  * @subpackage DeveloperGarden

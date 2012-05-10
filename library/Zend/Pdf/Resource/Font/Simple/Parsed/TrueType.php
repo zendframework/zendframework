@@ -31,10 +31,6 @@ use Zend\Pdf\BinaryParser\Font\OpenType as OpenTypeFontParser;
  * Font objects should be normally be obtained from the factory methods
  * {@link \Zend\Pdf\Font::fontWithName} and {@link \Zend\Pdf\Font::fontWithPath}.
  *
- * @uses       \Zend\Pdf\InternalType
- * @uses       \Zend\Pdf\Font
- * @uses       \Zend\Pdf\Resource\Font\FontDescriptor
- * @uses       \Zend\Pdf\Resource\Font\Simple\Parsed\AbstractParsed
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Fonts
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

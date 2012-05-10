@@ -29,12 +29,6 @@ use Zend\Amf\Parser\AbstractDeserializer,
  *
  * @todo       Implement Typed Object Class Mapping
  * @todo       Class could be implmented as Factory Class with each data type it's own class
- * @uses       Zend\Amf\Constants
- * @uses       Zend\Amf\Exception
- * @uses       Zend\Amf\Parser\Amf3\Deserializer
- * @uses       Zend\Amf\Parser\Deserializer
- * @uses       Zend\Amf\Parser\TypeLoader
- * @uses       Zend\Date\Date
  * @package    Zend_Amf
  * @subpackage Parse_Amf0
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

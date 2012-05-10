@@ -26,8 +26,6 @@ namespace Zend\GData\GApps\Extension;
  * class represents properties of an email list and is usually contained
  * within an instance of Zend_Gdata_GApps_EmailListEntry.
  *
- * @uses       \Zend\GData\Extension
- * @uses       \Zend\GData\GApps
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage GApps

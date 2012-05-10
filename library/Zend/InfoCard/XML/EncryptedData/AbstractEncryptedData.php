@@ -27,8 +27,6 @@ use Zend\InfoCard\XML;
  * An abstract class representing a generic EncryptedData XML block. This class is extended
  * into a specific type of EncryptedData XML block (i.e. XmlEnc) as necessary
  *
- * @uses       \Zend\InfoCard\XML\AbstractElement
- * @uses       \Zend\InfoCard\XML\KeyInfo\Factory
  * @category   Zend
  * @package    Zend_InfoCard
  * @subpackage Zend_InfoCard_Xml

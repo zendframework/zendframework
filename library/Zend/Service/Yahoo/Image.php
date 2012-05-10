@@ -20,8 +20,6 @@
  */
 
 /**
- * @uses       DOMXPath
- * @uses       Zend_Uri
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Yahoo

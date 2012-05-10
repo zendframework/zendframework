@@ -25,9 +25,6 @@ use Zend\Queue\Exception;
 /**
  * Class for managing Zend Platform JobQueue jobs via Zend_Queue
  *
- * @uses       \ZendAPI_Job
- * @uses       \Zend\Queue\Exception
- * @uses       \Zend\Queue\Message\Message
  * @category   Zend
  * @package    Zend_Queue
  * @subpackage Message

@@ -23,7 +23,6 @@ namespace Zend\Validator\File;
 /**
  * Validator which checks if the destination file does not exist
  *
- * @uses      \Zend\Validator\File\Exists
  * @category  Zend
  * @package   Zend_Validate
  * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

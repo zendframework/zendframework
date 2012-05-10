@@ -26,9 +26,6 @@ use Zend\InfoCard\Cipher;
  * RSA Public Key Encryption Cipher Object for the InfoCard component. Relies on OpenSSL
  * to implement the RSA algorithm
  *
- * @uses       \Zend\InfoCard\Cipher\Exception
- * @uses       \Zend\InfoCard\Cipher\PKI\Adapter\AbstractAdapter
- * @uses       \Zend\InfoCard\Cipher\PKI\RSA
  * @category   Zend
  * @package    Zend_InfoCard
  * @subpackage Zend_InfoCard_Cipher

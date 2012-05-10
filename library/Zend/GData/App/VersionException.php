@@ -26,7 +26,6 @@ namespace Zend\GData\App;
  *
  * Class to represent version exceptions that occur during Gdata APP operations.
  *
- * @uses       \Zend\GData\App\Exception
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage App

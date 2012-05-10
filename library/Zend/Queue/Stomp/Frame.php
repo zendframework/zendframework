@@ -26,8 +26,6 @@ use Zend\Queue\Exception;
 /**
  * This class represents a Stomp Frame
  *
- * @uses       \Zend\Queue\Exception
- * @uses       \Zend\Queue\Stomp\StompFrame
  * @category   Zend
  * @package    Zend_Queue
  * @subpackage Stomp

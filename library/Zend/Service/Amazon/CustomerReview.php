@@ -22,7 +22,6 @@
 namespace Zend\Service\Amazon;
 
 /**
- * @uses       DOMXPath
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Amazon

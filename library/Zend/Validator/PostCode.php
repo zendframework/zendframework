@@ -26,8 +26,6 @@ use Zend\Locale;
  * @see        Zend_Locale
  * @see        Zend_Locale_Format
  * @see        Zend_Registry
- * @uses       \Zend\Validator\AbstractValidator
- * @uses       \Zend\Validator\Exception
  * @category   Zend
  * @package    Zend_Validate
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

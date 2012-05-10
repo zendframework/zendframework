@@ -27,8 +27,6 @@ use Zend\InfoCard\XML\Security\Transform,
 /**
  * A object implementing the EnvelopedSignature XML Transform
  *
- * @uses       \Zend\InfoCard\XML\Security\Transform\Exception
- * @uses       \Zend\InfoCard\XML\Security\Transform
  * @category   Zend
  * @package    Zend_InfoCard
  * @subpackage Zend_InfoCard_Xml_Security

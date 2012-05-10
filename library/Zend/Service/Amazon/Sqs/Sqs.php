@@ -27,10 +27,6 @@ use Zend\Service\Amazon,
 /**
  * Class for connecting to the Amazon Simple Queue Service (SQS)
  *
- * @uses       SimpleXMLElement
- * @uses       Zend_Crypt_Hmac
- * @uses       Zend_Service_Amazon_Abstract
- * @uses       \Zend\Service\Amazon\Sqs\Exception
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Amazon_Sqs

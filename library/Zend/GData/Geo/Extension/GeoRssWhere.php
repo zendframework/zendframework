@@ -24,9 +24,6 @@ namespace Zend\GData\Geo\Extension;
 /**
  * Represents the georss:where element used by the Gdata Geo extensions.
  *
- * @uses       \Zend\GData\Extension
- * @uses       \Zend\GData\Geo
- * @uses       \Zend\GData\Geo\Extension\GmlPoint
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Geo

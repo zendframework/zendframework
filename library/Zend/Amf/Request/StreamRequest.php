@@ -29,12 +29,6 @@ use Zend\Amf\Request as AMFRequest,
  * types and storing the data for Zend_Amf_Server to handle for processing.
  *
  * @todo       Currently not checking if the object needs to be Type Mapped to a server object.
- * @uses       \Zend\Amf\Constants
- * @uses       \Zend\Amf\Exception
- * @uses       \Zend\Amf\Parser\Amf0\Deserializer
- * @uses       \Zend\Amf\Parser\InputStream
- * @uses       \Zend\Amf\Value\MessageBody
- * @uses       \Zend\Amf\Value\MessageHeader
  * @package    Zend_Amf
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License

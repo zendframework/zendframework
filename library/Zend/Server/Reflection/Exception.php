@@ -24,7 +24,6 @@ namespace Zend\Server\Reflection;
 /**
  * Zend_Server_Reflection exceptions
  *
- * @uses       \Zend\Server\Exception
  * @category   Zend
  * @package    Zend_Server
  * @subpackage Zend_Server_Reflection

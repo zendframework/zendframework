@@ -22,8 +22,6 @@
 namespace Zend\Rest\Client;
 
 /**
- * @uses       IteratorAggregate
- * @uses       \Zend\Rest\Client\Exception\ResultException
  * @category   Zend
  * @package    Zend_Rest
  * @subpackage Client

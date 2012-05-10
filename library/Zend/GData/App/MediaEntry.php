@@ -24,10 +24,6 @@ namespace Zend\GData\App;
 /**
  * Concrete class for working with Atom entries containing multi-part data.
  *
- * @uses       \Zend\GData\App\InvalidArgumentException
- * @uses       \Zend\GData\App\Entry
- * @uses       \Zend\GData\App\MediaSource
- * @uses       \Zend\GData\MediaMimeStream
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage App

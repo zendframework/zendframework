@@ -24,7 +24,6 @@ namespace Zend\Service\ReCaptcha;
 /**
  * Zend_Service_ReCaptcha_Exception
  *
- * @uses       \Zend\Service\Exception
  * @category   Zend
  * @package    Zend_Service
  * @subpackage ReCaptcha

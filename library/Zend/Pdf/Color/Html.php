@@ -31,10 +31,6 @@ use Zend\Pdf\Color,
  * Factory class which vends \Zend\Pdf\Color objects from typical HTML
  * representations.
  *
- * @uses       \Zend\Pdf\Color
- * @uses       \Zend\Pdf\Color\GrayScale
- * @uses       \Zend\Pdf\Color\Rgb
- * @uses       \Zend\Pdf\Exception
  * @category   Zend
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Color

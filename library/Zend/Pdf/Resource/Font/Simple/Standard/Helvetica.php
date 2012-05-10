@@ -36,10 +36,6 @@ use Zend\Pdf\Cmap;
  * standard fonts. You should modify the script and regenerate the classes
  * instead of changing this class file by hand.
  *
- * @uses       \Zend\Pdf\Cmap\AbstractCmap
- * @uses       \Zend\Pdf\InternalType\NameObject
- * @uses       \Zend\Pdf\Font
- * @uses       \Zend\Pdf\Resource\Font\Simple\Standard\AbstractStandard
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Fonts
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

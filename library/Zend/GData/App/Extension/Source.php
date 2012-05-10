@@ -22,8 +22,6 @@
 namespace Zend\GData\App\Extension;
 
 /**
- * @uses       \Zend\GData\App\Entry
- * @uses       \Zend\GData\App\FeedSourceParent
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage App

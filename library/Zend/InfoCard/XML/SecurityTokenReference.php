@@ -24,8 +24,6 @@ namespace Zend\InfoCard\XML;
 /**
  * Represents a SecurityTokenReference XML block
  *
- * @uses       \Zend\InfoCard\XML\AbstractElement
- * @uses       \Zend\InfoCard\XML\Exception
  * @category   Zend
  * @package    Zend_InfoCard
  * @subpackage Zend_InfoCard_Xml

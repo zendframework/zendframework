@@ -24,7 +24,6 @@ namespace Zend\Form\Element;
 /**
  * Select.php form element
  *
- * @uses       \Zend\Form\Element\Multi
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Element

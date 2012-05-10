@@ -28,7 +28,6 @@ namespace Zend\Amf\Value\Messaging;
  *
  * flex.messaging.messages.AcknowledgeMessage
  *
- * @uses       \Zend\Amf\Value\Messaging\AsyncMessage
  * @package    Zend_Amf
  * @subpackage Value
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

@@ -32,12 +32,6 @@ use Zend\Http\Client as HttpClient,
 /**
  * OpenID consumer implementation
  *
- * @uses       Zend\Http\Client
- * @uses       Zend\OpenId\OpenId
- * @uses       Zend\OpenId\Consumer\Storage
- * @uses       Zend\OpenId\Consumer\Storage\File
- * @uses       Zend\OpenId\Extension
- * @uses       Zend\Session\Container
  * @category   Zend
  * @package    Zend_OpenId
  * @subpackage Zend_OpenId_Consumer

@@ -27,9 +27,6 @@ use Zend\InfoCard\XML\Security\Transform,
 /**
  * A Transform to perform C14n XML Exclusive Canonicalization
  *
- * @uses       DOMDocument
- * @uses       \Zend\InfoCard\XML\Security\Transform\Exception
- * @uses       \Zend\InfoCard\XML\Security\Transform
  * @category   Zend
  * @package    Zend_InfoCard
  * @subpackage Zend_InfoCard_Xml_Security

@@ -27,7 +27,6 @@ namespace Zend\Amf\Value\Messaging;
  *
  * Corresponds to flex.messaging.messages.RemotingMessage
  *
- * @uses       \Zend\Amf\Value\Messaging\AbstractMessage
  * @package    Zend_Amf
  * @subpackage Value
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

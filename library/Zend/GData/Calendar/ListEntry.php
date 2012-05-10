@@ -27,15 +27,6 @@ use Zend\GData\Calendar;
  * Represents a Calendar entry in the Calendar data API meta feed of a user's
  * calendars.
  *
- * @uses       \Zend\GData\Calendar
- * @uses       \Zend\GData\Calendar\Extension\AccessLevel
- * @uses       \Zend\GData\Calendar\Extension\Color
- * @uses       \Zend\GData\Calendar\Extension\Hidden
- * @uses       \Zend\GData\Calendar\Extension\Selected
- * @uses       \Zend\GData\Entry
- * @uses       \Zend\GData\Extension\EventStatus
- * @uses       \Zend\GData\Extension\Visibility
- * @uses       \Zend\GData\Extension\Where
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Calendar

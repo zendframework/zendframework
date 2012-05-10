@@ -28,7 +28,6 @@ namespace Zend\Form\Element;
  * as labelled checkboxes; these will return an array of values for those
  * checkboxes selected.
  *
- * @uses       \Zend\Form\Element\Multi
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Element

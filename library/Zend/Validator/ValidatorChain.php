@@ -21,10 +21,6 @@
 namespace Zend\Validator;
 
 /**
- * @uses       \Zend\Loader
- * @uses       \Zend\Validator\AbstractValidator
- * @uses       \Zend\Validator\Exception
- * @uses       \Zend\Validator\ValidatorInterface
  * @category   Zend
  * @package    Zend_Validate
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

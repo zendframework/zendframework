@@ -24,11 +24,6 @@ namespace Zend\InfoCard\XML;
 /**
  * An abstract class representing a an XML data block
  *
- * @uses       ReflectionClass
- * @uses       SimpleXMLElement
- * @uses       \Zend\InfoCard\XML\Element
- * @uses       \Zend\InfoCard\XML\Exception
- * @uses       \Zend\Loader
  * @category   Zend
  * @package    Zend_InfoCard
  * @subpackage Zend_InfoCard_Xml

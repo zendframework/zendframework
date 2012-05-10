@@ -53,23 +53,32 @@ class ArraySerializable implements HydratorInterface
     }
 
     /**
-     * Hydrate an object the implements the exchangeArray() method
+     * Hydrate an object
      *
-     * Hydrates an object by passing $data to its exchangeArray() method.
+     * Hydrates an object by passing $data to either its exchangeArray() or 
+     * populate() method.
      * 
      * @param  array $data 
      * @param  object $object 
      * @return void
-     * @throws Exception\BadMethodCallException for an $object not implementing exchangeArray()
+     * @throws Exception\BadMethodCallException for an $object not implementing exchangeArray() or populate()
      */
     public function hydrate(array $data, $object)
     {
-        if (!is_callable(array($object, 'exchangeArray'))) {
+        if (!is_callable(array($object, 'exchangeArray'))
+            && !is_callable(array($object, 'populate'))
+        ) {
             throw new Exception\BadMethodCallException(sprintf(
-                '%s expects the provided object to implement exchangeArray()',
+                '%s expects the provided object to implement exchangeArray() or populate()',
                 __METHOD__
             ));
         }
-        $object->exchangeArray($data);
+
+        if (is_callable(array($object, 'exchangeArray'))) {
+            $object->exchangeArray($data);
+            return;
+        }
+
+        $object->populate($data);
     }
 }

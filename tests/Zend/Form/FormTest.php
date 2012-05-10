@@ -168,4 +168,22 @@ class FormTest extends TestCase
         $this->assertSame($fieldsetFilter, $test->get('set'));
         $this->assertEquals(0, count($fieldsetFilter));
     }
+
+    public function testCallingPrepareEnsuresInputFilterRetrievesDefaults()
+    {
+        $element = new TestAsset\ElementWithFilter('foo');
+        $filter  = new InputFilter();
+        $this->form->setInputFilter($filter);
+        $this->form->add($element);
+        $this->form->prepare();
+
+        $this->assertTrue($filter->has('foo'));
+        $input = $filter->get('foo');
+        $filters = $input->getFilterChain();
+        $this->assertEquals(1, count($filters));
+        $validators = $input->getValidatorChain();
+        $this->assertEquals(2, count($validators));
+        $this->assertTrue($input->isRequired());
+        $this->assertEquals('foo', $input->getName());
+    }
 }

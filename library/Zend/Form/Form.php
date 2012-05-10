@@ -120,6 +120,19 @@ class Form extends BaseForm implements FormFactoryAwareInterface
     }
 
     /**
+     * Ensures state is ready for use
+     *
+     * Currently, simply ensures that if using input filter defaults, all input 
+     * is marshalled.
+     * 
+     * @return void
+     */
+    public function prepare()
+    {
+        $this->getInputFilter();
+    }
+
+    /**
      * Retrieve input filter used by this form.
      *
      * Attaches defaults from attached elements, if no corresponding input

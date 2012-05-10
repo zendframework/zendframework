@@ -468,7 +468,7 @@ class Client implements Stdlib\DispatchableInterface
      * @param boolean $httponly
      * @return Client
      */
-    public function addCookie($cookie, $value = null, $version = null, $maxAge = null, $domain = null, $expire = null, $path = null, $secure = false, $httponly = true)
+    public function addCookie($cookie, $value = null, $expire = null, $path = null, $domain = null, $secure = false, $httponly = true, $maxAge = null, $version = null)
     {
         if (is_array($cookie) || $cookie instanceof ArrayIterator) {
             foreach ($cookie as $setCookie) {
@@ -481,7 +481,7 @@ class Client implements Stdlib\DispatchableInterface
         } elseif ($cookie instanceof Header\SetCookie) {
             $this->cookies[$this->getCookieId($cookie)] = $cookie;
         } elseif (is_string($cookie) && $value !== null) {
-            $setCookie = new Header\SetCookie($cookie, $value, $version, $maxAge, $domain, $expire, $path, $secure, $httponly);
+            $setCookie = new Header\SetCookie($cookie, $value, $expire, $path, $domain, $secure, $httponly, $maxAge, $version);
             $this->cookies[$this->getCookieId($setCookie)] = $setCookie;
         } else {
             throw new Exception\InvalidArgumentException('Invalid parameter type passed as Cookie');

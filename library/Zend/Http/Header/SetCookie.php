@@ -148,14 +148,16 @@ class SetCookie implements MultipleHeaderDescription
      *
      * @param string $name
      * @param string $value
-     * @param string $domain
      * @param int $expires
      * @param string $path
+     * @param string $domain
      * @param bool $secure
      * @param bool $httponly
+     * @param string $maxAge
+     * @param int $version
      * @return SetCookie
      */
-    public function __construct($name = null, $value = null, $version = null, $maxAge = null, $domain = null, $expires = null, $path = null, $secure = false, $httponly = false)
+    public function __construct($name = null, $value = null, $expires = null, $path = null, $domain = null, $secure = false, $httponly = false, $maxAge = null, $version = null)
     {
         $this->type = 'Cookie';
 

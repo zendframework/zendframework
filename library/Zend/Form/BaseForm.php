@@ -45,7 +45,7 @@ class BaseForm extends Fieldset implements FormInterface
     );
 
     /**
-     * How to bind values to the model
+     * How to bind values to the attached object
      * 
      * @var int
      */
@@ -71,18 +71,18 @@ class BaseForm extends Fieldset implements FormInterface
     protected $hasValidated = false;
 
     /**
-     * Hydrator to use with bound model
+     * Hydrator to use with bound object
      * 
      * @var Hydrator\HydratorInterface
      */
     protected $hydrator;
 
     /**
-     * The model bound to this form, if any
+     * The object bound to this form, if any
      * 
      * @var null|object
      */
-    protected $model;
+    protected $object;
 
     /**
      * Validation group, if any
@@ -120,20 +120,20 @@ class BaseForm extends Fieldset implements FormInterface
     }
 
     /**
-     * Bind a model to the form
+     * Bind an object to the form
      *
-     * Ensures the model is populated with validated values.
+     * Ensures the object is populated with validated values.
      * 
-     * @param  object $model 
+     * @param  object $object 
      * @return void
      */
-    public function bind($model, $flags = FormInterface::VALUES_NORMALIZED)
+    public function bind($object, $flags = FormInterface::VALUES_NORMALIZED)
     {
-        if (!is_object($model)) {
+        if (!is_object($object)) {
             throw new Exception\InvalidArgumentException(sprintf(
                 '%s expects an object argument; received "%s"',
                 __METHOD__,
-                $model
+                $object
             ));
         }
 
@@ -148,7 +148,8 @@ class BaseForm extends Fieldset implements FormInterface
         }
 
         $this->bindAs = $flags;
-        $this->model  = $model;
+        $this->object = $object;
+        $this->extract();
     }
 
     /**
@@ -240,8 +241,8 @@ class BaseForm extends Fieldset implements FormInterface
             ));
         }
 
-        if (($flag !== FormInterface::VALUES_AS_ARRAY) && is_object($this->model)) {
-            return $this->model;
+        if (($flag !== FormInterface::VALUES_AS_ARRAY) && is_object($this->object)) {
+            return $this->object;
         }
 
         $filter = $this->getInputFilter();
@@ -311,20 +312,20 @@ class BaseForm extends Fieldset implements FormInterface
      */
     public function getInputFilter()
     {
-        if ($this->model instanceof InputFilterAwareInterface) {
-            return $this->model->getInputFilter();
+        if ($this->object instanceof InputFilterAwareInterface) {
+            return $this->object->getInputFilter();
         }
         return $this->filter;
     }
 
     /**
-     * Hydrate the attached model
+     * Hydrate the attached object
      * 
      * @return void
      */
     protected function hydrate()
     {
-        if (!is_object($this->model)) {
+        if (!is_object($this->object)) {
             return;
         }
         $hydrator = $this->getHydrator();
@@ -339,6 +340,31 @@ class BaseForm extends Fieldset implements FormInterface
                 $data = $filter->getValues();
                 break;
         }
-        $hydrator->hydrate($data, $this->model);
+        $hydrator->hydrate($data, $this->object);
+    }
+
+    /**
+     * Extract values from the bound object and populate
+     * the form elements
+     * 
+     * @return void
+     */
+    protected function extract()
+    {
+        if (!is_object($this->object)) {
+            return;
+        }
+        $hydrator = $this->getHydrator();
+        if (!$hydrator instanceof Hydrator\HydratorInterface) {
+            return;
+        }
+
+        $values = $hydrator->extract($this->object);
+        if (!is_array($values)) {
+            // Do nothing if the hydrator returned a non-array
+            return;
+        }
+
+        $this->populateValues($values);
     }
 }

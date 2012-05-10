@@ -461,4 +461,19 @@ class BaseFormTest extends TestCase
             $this->assertEquals($data[$name], $element->getAttribute('value'));
         }
     }
+
+    public function testElementValuesArePopulatedFollowingBind()
+    {
+        $this->populateForm();
+        $object = new stdClass();
+        $object->foo = 'foobar';
+        $object->bar = 'barbaz';
+        $this->form->setHydrator(new Hydrator\ObjectProperty());
+        $this->form->bind($object);
+
+        $foo = $this->form->get('foo');
+        $this->assertEquals('foobar', $foo->getAttribute('value'));
+        $bar = $this->form->get('bar');
+        $this->assertEquals('barbaz', $bar->getAttribute('value'));
+    }
 }

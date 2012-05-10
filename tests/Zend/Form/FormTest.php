@@ -150,4 +150,22 @@ class FormTest extends TestCase
         $this->assertTrue($input->isRequired());
         $this->assertEquals('foo', $input->getName());
     }
+
+    public function testDisablingUseInputFilterDefaultsFlagDisablesInputFilterScanning()
+    {
+        $element        = new TestAsset\ElementWithFilter('foo');
+        $fieldset       = new Fieldset('set');
+        $filter         = new InputFilter();
+        $fieldsetFilter = new InputFilter();
+        $fieldset->add($element);
+        $filter->add($fieldsetFilter, 'set');
+        $this->form->setInputFilter($filter);
+        $this->form->add($fieldset);
+
+        $this->form->setUseInputFilterDefaults(false);
+        $test = $this->form->getInputFilter();
+        $this->assertSame($filter, $test);
+        $this->assertSame($fieldsetFilter, $test->get('set'));
+        $this->assertEquals(0, count($fieldsetFilter));
+    }
 }

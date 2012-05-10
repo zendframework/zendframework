@@ -39,6 +39,14 @@ class Form extends BaseForm implements FormFactoryAwareInterface
     protected $factory;
 
     /**
+     * Whether or not to automatically scan for input filter defaults on 
+     * attached fieldsets and elements
+     * 
+     * @var bool
+     */
+    protected $useInputFilterDefaults = true;
+
+    /**
      * Compose a form factory to use when calling add() with a non-element/fieldset
      * 
      * @param  Factory $factory 
@@ -63,6 +71,28 @@ class Form extends BaseForm implements FormFactoryAwareInterface
             $this->setFormFactory(new Factory());
         }
         return $this->factory;
+    }
+
+    /**
+     * Set flag indicating whether or not to scan elements and fieldsets for defaults
+     *
+     * @param  bool $useInputFilterDefaults
+     * @return Form
+     */
+    public function setUseInputFilterDefaults($useInputFilterDefaults)
+    {
+        $this->useInputFilterDefaults = (bool) $useInputFilterDefaults;
+        return $this;
+    }
+    
+    /**
+     * Should we use input filter defaults from elements and fieldsets?
+     *
+     * @return bool
+     */
+    public function useInputFilterDefaults()
+    {
+        return $this->useInputFilterDefaults;
     }
 
     /**
@@ -100,7 +130,7 @@ class Form extends BaseForm implements FormFactoryAwareInterface
     public function getInputFilter()
     {
         $filter = parent::getInputFilter();
-        if ($filter instanceof InputFilterInterface) {
+        if ($filter instanceof InputFilterInterface && $this->useInputFilterDefaults()) {
             $this->attachInputFilterDefaults($filter, $this);
         }
         return $this->filter;

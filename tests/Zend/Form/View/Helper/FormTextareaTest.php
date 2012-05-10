@@ -46,7 +46,7 @@ class FormTextareaTest extends CommonTestCase
         $this->helper->render($element);
     }
 
-    public function testGeneratesEmptyTextareaWhenNoContentAttributePresent()
+    public function testGeneratesEmptyTextareaWhenNoValueAttributePresent()
     {
         $element = new Element('foo');
         $markup  = $this->helper->render($element);
@@ -285,10 +285,10 @@ class FormTextareaTest extends CommonTestCase
         }
     }
 
-    public function testRendersContentAttributeAsTextareaContent()
+    public function testRendersValueAttributeAsTextareaContent()
     {
         $element = new Element('foo');
-        $element->setAttribute('content', 'Initial content');
+        $element->setAttribute('value', 'Initial content');
         $markup = $this->helper->render($element);
         $this->assertContains('>Initial content</textarea>', $markup);
     }

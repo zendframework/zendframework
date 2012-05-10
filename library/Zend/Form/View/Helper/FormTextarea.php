@@ -71,7 +71,7 @@ class FormTextarea extends AbstractHelper
 
         $attributes         = $element->getAttributes();
         $attributes['name'] = $name;
-        $content            = (string) $element->getAttribute('content');
+        $content            = (string) $element->getAttribute('value');
         $escape             = $this->getEscapeHelper();
 
         return sprintf(

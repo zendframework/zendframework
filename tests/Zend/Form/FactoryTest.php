@@ -319,11 +319,11 @@ class FactoryTest extends TestCase
     {
         $form = $this->factory->createForm(array(
             'name'     => 'foo',
-            'hydrator' => 'Zend\Form\Hydrator\ObjectProperty',
+            'hydrator' => 'Zend\Stdlib\Hydrator\ObjectProperty',
         ));
         $this->assertInstanceOf('Zend\Form\FormInterface', $form);
         $hydrator = $form->getHydrator();
-        $this->assertInstanceOf('Zend\Form\Hydrator\ObjectProperty', $hydrator);
+        $this->assertInstanceOf('Zend\Stdlib\Hydrator\ObjectProperty', $hydrator);
     }
 
     public function testCanCreateFormWithHydratorAndInputFilterAndElementsAndFieldsets()
@@ -414,7 +414,7 @@ class FactoryTest extends TestCase
                 ),
             ),
             'input_filter' => 'ZendTest\Form\TestAsset\InputFilter',
-            'hydrator'     => 'Zend\Form\Hydrator\ObjectProperty',
+            'hydrator'     => 'Zend\Stdlib\Hydrator\ObjectProperty',
         ));
         $this->assertInstanceOf('Zend\Form\FormInterface', $form);
 
@@ -482,7 +482,7 @@ class FactoryTest extends TestCase
 
         // hydrator
         $hydrator = $form->getHydrator();
-        $this->assertInstanceOf('Zend\Form\Hydrator\ObjectProperty', $hydrator);
+        $this->assertInstanceOf('Zend\Stdlib\Hydrator\ObjectProperty', $hydrator);
     }
 
     public function testCanCreateFormUsingCreate()

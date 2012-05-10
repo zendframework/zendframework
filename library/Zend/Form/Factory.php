@@ -25,6 +25,7 @@ use Traversable;
 use Zend\InputFilter\Factory as InputFilterFactory;
 use Zend\InputFilter\InputFilterInterface;
 use Zend\Stdlib\ArrayUtils;
+use Zend\Stdlib\Hydrator;
 
 /**
  * @category   Zend

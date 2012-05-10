@@ -13,20 +13,19 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Form
+ * @package    Zend_Stdlib
  * @subpackage Hydrator
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Form\Hydrator;
+namespace Zend\Stdlib\Hydrator;
 
-use Zend\Form\Exception;
-use Zend\Stdlib\ArraySerializableInterface;
+use Zend\Stdlib\Exception;
 
 /**
  * @category   Zend
- * @package    Zend_Form
+ * @package    Zend_Stdlib
  * @subpackage Hydrator
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -34,20 +33,19 @@ use Zend\Stdlib\ArraySerializableInterface;
 class ArraySerializable implements HydratorInterface
 {
     /**
-     * Hydrate an object implementing ArraySerializableInterface
+     * Hydrate an object the implements the exchangeArray() method
      *
-     * Hydrates an object implementing ArraySerializableInterface by passing 
-     * $data to its exchangeArray() method.
+     * Hydrates an object by passing $data to its exchangeArray() method.
      * 
      * @param  array $data 
      * @param  object $object 
      * @return void
-     * @throws Exception\UnexpectedValueException for an $object not implementing ArraySerializableInterface
+     * @throws Exception\BadMethodCallException for an $object not implementing exchangeArray()
      */
     public function hydrate(array $data, $object)
     {
         if (!is_callable(array($object, 'exchangeArray'))) {
-            throw new Exception\UnexpectedValueException(sprintf(
+            throw new Exception\BadMethodCallException(sprintf(
                 '%s expects the provided object to implement exchangeArray()',
                 __METHOD__
             ));

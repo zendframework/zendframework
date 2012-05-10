@@ -26,9 +26,9 @@ use stdClass;
 use Zend\Form\Element;
 use Zend\Form\Fieldset;
 use Zend\Form\BaseForm as Form;
-use Zend\Form\Hydrator;
 use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\Factory as InputFilterFactory;
+use Zend\Stdlib\Hydrator;
 
 /**
  * @category   Zend

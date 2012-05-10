@@ -22,6 +22,7 @@ namespace Zend\Form;
 
 use IteratorAggregate;
 use Zend\InputFilter\InputFilterAwareInterface;
+use Zend\Stdlib\Hydrator;
 
 /**
  * @category   Zend

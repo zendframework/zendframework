@@ -13,17 +13,17 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Form
+ * @package    Zend_Stdlib
  * @subpackage Hydrator
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Form\Hydrator;
+namespace Zend\Stdlib\Hydrator;
 
 /**
  * @category   Zend
- * @package    Zend_Form
+ * @package    Zend_Stdlib
  * @subpackage Hydrator
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License

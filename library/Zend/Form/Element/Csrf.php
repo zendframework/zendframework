@@ -35,6 +35,15 @@ use Zend\Validator\Csrf as CsrfValidator;
 class Csrf extends Element implements InputProviderInterface
 {
     /**
+     * Seed attributes
+     * 
+     * @var array
+     */
+    protected $attributes = array(
+        'type' => 'hidden',
+    );
+
+    /**
      * @var CsrfValidator
      */
     protected $validator;

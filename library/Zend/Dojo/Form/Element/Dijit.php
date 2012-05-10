@@ -26,7 +26,6 @@ use Zend\View\Renderer\RendererInterface as View;
 /**
  * Base element for dijit elements
  *
- * @uses       \Zend\Form\Element
  * @category   Zend
  * @package    Zend_Dojo
  * @subpackage Form_Element

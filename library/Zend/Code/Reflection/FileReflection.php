@@ -20,22 +20,16 @@
 
 namespace Zend\Code\Reflection;
 
-use Zend\Code\Reflection,
-    Zend\Code\NameInformation,
+use Zend\Code\NameInformation,
     Zend\Code\Scanner\CachingFileScanner;
 
 /**
- * @uses       Reflector
- * @uses       \Zend\Loader
- * @uses       \Zend\Code\Reflection\ReflectionClass
- * @uses       \Zend\Code\Reflection\Exception
- * @uses       \Zend\Code\Reflection\ReflectionFunction
  * @category   Zend
  * @package    Zend_Reflection
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class FileReflection implements Reflection
+class FileReflection implements ReflectionInterface
 {
     /**
      * @var string
@@ -198,7 +192,7 @@ class FileReflection implements Reflection
     /**
      * getUses()
      *
-     * @return array
+     * @return string[]
      */
     public function getUses()
     {

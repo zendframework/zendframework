@@ -13,12 +13,12 @@ use Zend\Di\Configuration as DiConfiguration,
 class Bootstrap implements BootstrapInterface, EventManagerAwareInterface, EventsCapableInterface
 {
     /**
-     * @var \Zend\Config\Config
+     * @var Config
      */
     protected $config;
 
     /**
-     * @var EventManagerInterface
+     * @var Events
      */
     protected $events;
 
@@ -26,7 +26,6 @@ class Bootstrap implements BootstrapInterface, EventManagerAwareInterface, Event
      * Constructor
      *
      * @param Config $config
-     * @return void
      */
     public function __construct(Config $config)
     {

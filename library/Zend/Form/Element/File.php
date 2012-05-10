@@ -359,7 +359,7 @@ class File extends Xhtml
      * Retrieve individual filter; proxy to adapter
      *
      * @param  string $name
-     * @return \Zend\Filter\Filter|null
+     * @return \Zend\Filter\FilterInterface|null
      */
     public function getFilter($name)
     {

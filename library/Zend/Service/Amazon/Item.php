@@ -132,7 +132,7 @@ class Item
             throw new Exception\InvalidArgumentException('Item passed to Amazon\Item must be instace of DOMElement');
         }
         $xpath = new \DOMXPath($dom->ownerDocument);
-        $xpath->registerNamespace('az', 'http://webservices.amazon.com/AWSECommerceService/2005-10-05');
+        $xpath->registerNamespace('az', 'http://webservices.amazon.com/AWSECommerceService/2011-08-01');
         $this->ASIN = $xpath->query('./az:ASIN/text()', $dom)->item(0)->data;
 
         $result = $xpath->query('./az:DetailPageURL/text()', $dom);

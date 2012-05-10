@@ -129,7 +129,7 @@ class Paginator implements Countable, IteratorAggregate
     /**
      * Result filter
      *
-     * @var \Zend\Filter\Filter
+     * @var \Zend\Filter\FilterInterface
      */
     protected $_filter = null;
 
@@ -552,7 +552,7 @@ class Paginator implements Countable, IteratorAggregate
     /**
      * Get the filter
      *
-     * @return \Zend\Filter\Filter
+     * @return \Zend\Filter\FilterInterface
      */
     public function getFilter()
     {
@@ -562,10 +562,10 @@ class Paginator implements Countable, IteratorAggregate
     /**
      * Set a filter chain
      *
-     * @param \Zend\Filter\Filter $filter
+     * @param \Zend\Filter\FilterInterface $filter
      * @return \Zend\Paginator\Paginator
      */
-    public function setFilter(\Zend\Filter\Filter $filter)
+    public function setFilter(\Zend\Filter\FilterInterface $filter)
     {
         $this->_filter = $filter;
 

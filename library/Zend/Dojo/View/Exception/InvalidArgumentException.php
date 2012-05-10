@@ -2,7 +2,9 @@
 
 namespace Zend\Dojo\View\Exception;
 
+use Zend\Dojo\Exception;
+
 class InvalidArgumentException
-    extends \InvalidArgumentException
-    implements \Zend\Dojo\View\Exception
+    extends Exception\InvalidArgumentException
+    implements ExceptionInterface
 {}

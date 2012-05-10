@@ -191,12 +191,8 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
 
     public function testRegistryExceptionClassNotFound()
     {
-        try {
-            $registry = @Registry::setClassName('classdoesnotexist');
-            $this->fail('Expected exception, because we cannot initialize the registry using a non-existent class.');
-        } catch (\Zend\Loader\Exception $e) {
-            $this->assertRegExp('/file .* does not exist or .*/i', $e->getMessage());
-        }
+        $this->setExpectedException('DomainException', 'resolve');
+        $registry = @Registry::setClassName('classdoesnotexist');
     }
 
     public function testDefaultRegistryArrayAsPropsZF4654()

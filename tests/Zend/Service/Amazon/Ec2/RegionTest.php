@@ -46,10 +46,7 @@ class RegionTest extends \PHPUnit_Framework_TestCase
      * Prepares the environment before running a test.
      */
     protected function setUp()
-    {
-        parent::setUp();
-
-        $this->regionInstance = new Ec2\Region('access_key', 'secret_access_key');
+    {$this->regionInstance = new Ec2\Region('access_key', 'secret_access_key');
 
         $adapter = new \Zend\Http\Client\Adapter\Test();
         $client = new \Zend\Http\Client(null, array(
@@ -68,8 +65,6 @@ class RegionTest extends \PHPUnit_Framework_TestCase
         unset($this->adapter);
 
         $this->Zend_Service_Amazon_Ec2_Availabilityzones = null;
-
-        parent::tearDown();
     }
 
     public function testDescribeSingleRegion()

@@ -32,9 +32,6 @@ use Zend\Dojo\View\Exception,
  * Allows specifying stylesheets, path to dojo, module paths, and onLoad
  * events.
  *
- * @uses       \Zend\Dojo\View\Exception
- * @uses       \Zend\Dojo\View\Helper\DojoContainer
- * @uses       \Zend\Registry
  * @package    Zend_Dojo
  * @subpackage View
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

@@ -2,11 +2,10 @@
 
 namespace Zend\Code\Scanner;
 
-use Zend\Code\Scanner,
-    Zend\Code\NameInformation,
+use Zend\Code\NameInformation,
     Zend\Code\Annotation\AnnotationManager;
 
-class DocBlockScanner implements Scanner
+class DocBlockScanner implements ScannerInterface
 {
     /**
      * @var bool

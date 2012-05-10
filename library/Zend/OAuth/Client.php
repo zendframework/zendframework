@@ -20,8 +20,8 @@
 
 namespace Zend\OAuth;
 
-use Zend\Http\Request as HttpRequest,
-    Zend\Stdlib\RequestInterface as Request;
+use Zend\Http\Client as HttpClient;
+use Zend\Http\Request as HttpRequest;
 
 /**
  * @uses       Zend\Http\Client
@@ -34,7 +34,7 @@ use Zend\Http\Request as HttpRequest,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Client extends \Zend\Http\Client
+class Client extends HttpClient
 {
     /**
      * Flag to indicate that the client has detected the server as supporting
@@ -212,7 +212,7 @@ class Client extends \Zend\Http\Client
      * @param  null|Zend\Http\Request $method
      * @return Zend\Http\Response
      */
-    public function send(Request $request = null)
+    public function send(HttpRequest $request = null)
     {
         $this->prepareOAuth();
         return parent::send($request);

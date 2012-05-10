@@ -56,7 +56,7 @@ abstract class Collection extends XmlRpcValue
     /**
      * Return the value of this object, convert the XML-RPC native collection values into a PHP array
      *
-     * @return arary
+     * @return array
      */
     public function getValue()
     {

@@ -37,12 +37,12 @@ class MvcEvent extends Event
     protected $result;
 
     /**
-     * @var \Zend\Mvc\Router\RouteStack
+     * @var Router\RouteStackInterface
      */
     protected $router;
 
     /**
-     * @var \Zend\Mvc\Router\RouteMatch
+     * @var Router\RouteMatch
      */
     protected $routeMatch;
 
@@ -54,7 +54,7 @@ class MvcEvent extends Event
     /**
      * Get router
      *
-     * @return Router\RouteStack
+     * @return Router\RouteStackInterface
      */
     public function getRouter()
     {
@@ -64,7 +64,7 @@ class MvcEvent extends Event
     /**
      * Set router
      *
-     * @param Router\RouteStack $router
+     * @param Router\RouteStackInterface $router
      * @return MvcEvent
      */
     public function setRouter(Router\RouteStackInterface $router)
@@ -212,6 +212,12 @@ class MvcEvent extends Event
         return $this->getParam('controller');
     }
 
+    /**
+     * Set controller
+     *
+     * @param $name
+     * @return MvcEvent
+     */
     public function setController($name)
     {
         $this->setParam('controller', $name);

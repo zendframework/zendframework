@@ -52,7 +52,7 @@ class DocblockGeneratorTest extends \PHPUnit_Framework_TestCase
 
     public function testTagGettersAndSetters()
     {
-        $this->markTestSkipped('Must refactor DocBlock like Reflecion tag first.');
+        $this->markTestIncomplete('Must refactor DocBlock like Reflecion tag first.');
 //        $this->_docblock->setTag(array('name' => 'blah'));
 //        $this->_docblock->setTag(new \Zend\Code\Generator\DocBlock\Tag\Param(array('datatype' => 'string')));
 //        $this->_docblock->setTag(new \Zend\Code\Generator\DocBlock\Tag\Return(array('datatype' => 'int')));

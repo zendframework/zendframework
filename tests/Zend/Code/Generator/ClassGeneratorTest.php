@@ -55,7 +55,7 @@ class ClassGeneratorTest extends \PHPUnit_Framework_TestCase
 
     public function testClassDocblockAccessors()
     {
-        $this->markTestSkipped();
+        $this->markTestIncomplete();
     }
 
     public function testAbstractAccessors()
@@ -150,7 +150,7 @@ class ClassGeneratorTest extends \PHPUnit_Framework_TestCase
         $classGenerator = new ClassGenerator();
 
         $this->setExpectedException(
-            'Zend\Code\Generator\Exception',
+            'Zend\Code\Generator\Exception\ExceptionInterface',
             'setMethod() expects either a string method name or an instance of Zend\Code\Generator\MethodGenerator'
             );
 

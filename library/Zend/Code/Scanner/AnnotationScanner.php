@@ -2,12 +2,11 @@
 
 namespace Zend\Code\Scanner;
 
-use Zend\Code\Scanner,
-    Zend\Code\NameInformation,
+use Zend\Code\NameInformation,
     Zend\Code\Annotation\AnnotationManager,
     Zend\Code\Annotation\AnnotationCollection;
 
-class AnnotationScanner extends AnnotationCollection implements Scanner
+class AnnotationScanner extends AnnotationCollection implements ScannerInterface
 {
     /**
      * @var bool

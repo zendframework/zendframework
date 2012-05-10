@@ -24,9 +24,6 @@ use Zend\Loader\Broker,
     Zend\Stdlib\SplPriorityQueue;
 
 /**
- * @uses       Zend\Filter\Exception
- * @uses       Zend\Filter\AbstractFilter
- * @uses       Zend\Loader
  * @category   Zend
  * @package    Zend_Filter
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -120,7 +117,7 @@ class FilterChain extends AbstractFilter
      * 
      * @param  null|Broker|string $name 
      * @param array $options 
-     * @return Broker|Filter
+     * @return Broker|FilterInterface
      */
     public function broker($name = null, $options = array())
     {
@@ -143,14 +140,14 @@ class FilterChain extends AbstractFilter
     /**
      * Attach a filter to the chain
      * 
-     * @param  callback|Filter $callback A Filter implementation or valid PHP callback
+     * @param  callback|FilterInterface $callback A Filter implementation or valid PHP callback
      * @param  int $priority Priority at which to enqueue filter; defaults to 1000 (higher executes earlier)
      * @return FilterChain
      */
     public function attach($callback, $priority = self::DEFAULT_PRIORITY)
     {
         if (!is_callable($callback)) {
-            if (!$callback instanceof Filter) {
+            if (!$callback instanceof FilterInterface) {
                 throw new Exception\InvalidArgumentException(sprintf(
                     'Expected a valid PHP callback; received "%s"',
                     (is_object($callback) ? get_class($callback) : gettype($callback))

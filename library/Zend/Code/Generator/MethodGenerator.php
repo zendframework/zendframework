@@ -24,10 +24,6 @@ namespace Zend\Code\Generator;
 use Zend\Code\Reflection\MethodReflection;
 
 /**
- * @uses       \Zend\Code\GeneratorDocblock
- * @uses       \Zend\Code\Generator\Exception
- * @uses       \Zend\Code\Generator\PhpMember\AbstractMember
- * @uses       \Zend\Code\Generator\PhpParameter
  * @category   Zend
  * @package    Zend_Code_Generator
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -118,7 +114,7 @@ class MethodGenerator extends AbstractMemberGenerator
      * setParameters()
      *
      * @param array $parameters
-     * @return \MethodGenerator\Code\Generator\PhpMethod
+     * @return MethodGenerator
      */
     public function setParameters(array $parameters)
     {
@@ -132,7 +128,7 @@ class MethodGenerator extends AbstractMemberGenerator
      * setParameter()
      *
      * @param ParameterGenerator|string $parameter
-     * @return \MethodGenerator\Code\Generator\PhpMethod
+     * @return MethodGenerator
      */
     public function setParameter($parameter)
     {
@@ -163,7 +159,7 @@ class MethodGenerator extends AbstractMemberGenerator
      * setBody()
      *
      * @param string $body
-     * @return \MethodGenerator\Code\Generator\PhpMethod
+     * @return MethodGenerator
      */
     public function setBody($body)
     {

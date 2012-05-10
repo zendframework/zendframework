@@ -24,12 +24,6 @@ namespace Zend\Code\Generator;
 use Zend\Code\Reflection\ClassReflection;
 
 /**
- * @uses       \Zend\Code\Generator\AbstractPhp
- * @uses       \Zend\Code\GeneratorDocblock
- * @uses       \Zend\Code\Generator\Exception
- * @uses       \Zend\Code\Generator\PhpMember\MemberContainer
- * @uses       \Zend\Code\Generator\PhpMethod
- * @uses       \Zend\Code\Generator\PhpProperty
  * @category   Zend
  * @package    Zend_Code_Generator
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

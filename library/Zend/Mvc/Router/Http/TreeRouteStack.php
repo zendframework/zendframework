@@ -58,7 +58,6 @@ class TreeRouteStack extends SimpleRouteStack
      * init(): defined by SimpleRouteStack.
      *
      * @see    SimpleRouteStack::init()
-     * @return void
      */
     protected function init()
     {
@@ -184,6 +183,7 @@ class TreeRouteStack extends SimpleRouteStack
      * @param  array $params
      * @param  array $options
      * @return mixed
+     * @throws Exception\ExceptionInterface
      */
     public function assemble(array $params = array(), array $options = array())
     {

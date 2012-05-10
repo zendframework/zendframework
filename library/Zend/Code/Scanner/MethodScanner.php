@@ -2,12 +2,11 @@
 
 namespace Zend\Code\Scanner;
 
-use Zend\Code\Scanner,
-    Zend\Code\NameInformation,
+use Zend\Code\NameInformation,
     Zend\Code\Exception,
     Zend\Code\Annotation;
 
-class MethodScanner implements Scanner
+class MethodScanner implements ScannerInterface
 {
     protected $isScanned    = false;
 

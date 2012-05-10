@@ -75,7 +75,7 @@ class CustomerReview
     public function __construct(\DOMElement $dom)
     {
         $xpath = new \DOMXPath($dom->ownerDocument);
-        $xpath->registerNamespace('az', 'http://webservices.amazon.com/AWSECommerceService/2005-10-05');
+        $xpath->registerNamespace('az', 'http://webservices.amazon.com/AWSECommerceService/2011-08-01');
         foreach (array('Rating', 'HelpfulVotes', 'CustomerId', 'TotalVotes', 'Date', 'Summary', 'Content') as $el) {
             $result = $xpath->query("./az:$el/text()", $dom);
             if ($result->length == 1) {

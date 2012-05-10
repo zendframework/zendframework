@@ -25,9 +25,6 @@ use Zend\Code\Generator,
     Zend\Code\Generator\Exception;
 
 /**
- * @uses       \Zend\Code\Generator\AbstractPhp
- * @uses       \Zend\Code\GeneratorDocblock
- * @uses       \Zend\Code\Generator\Exception
  * @category   Zend
  * @package    Zend_Code_Generator
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -56,7 +53,7 @@ abstract class AbstractMemberGenerator extends AbstractGenerator
     /**#@-*/
 
     /**
-     * @var \Zend\Code\GeneratorDocblock
+     * @var \Zend\Code\Generator\DocblockGenerator
      */
     protected $docblock = null;
 
@@ -70,6 +67,12 @@ abstract class AbstractMemberGenerator extends AbstractGenerator
      */
     protected $flags = self::FLAG_PUBLIC;
 
+    /**
+     * Set flags
+     *
+     * @param $flags
+     * @return AbstractMemberGenerator
+     */
     public function setFlags($flags)
     {
 
@@ -85,12 +88,24 @@ abstract class AbstractMemberGenerator extends AbstractGenerator
         return $this;
     }
 
+    /**
+     * Add flag
+     *
+     * @param $flag
+     * @return AbstractMemberGenerator
+     */
     public function addFlag($flag)
     {
         $this->setFlags($this->flags | $flag);
         return $this;
     }
 
+    /**
+     * Remove flag
+     *
+     * @param $flag
+     * @return AbstractMemberGenerator
+     */
     public function removeFlag($flag)
     {
         $this->setFlags($this->flags & ~$flag);
@@ -99,7 +114,7 @@ abstract class AbstractMemberGenerator extends AbstractGenerator
 
 
     /**
-     * setDocblock() Set the docblock
+     * Set the docblock
      *
      * @param DocblockGenerator|string $docblock
      * @return AbstractMemberGenerator
@@ -132,7 +147,7 @@ abstract class AbstractMemberGenerator extends AbstractGenerator
      * setAbstract()
      *
      * @param bool $isAbstract
-     * @return \AbstractMemberGenerator\Code\Generator\PhpMember\AbstractMember
+     * @return AbstractMemberGenerator
      */
     public function setAbstract($isAbstract)
     {
@@ -153,7 +168,7 @@ abstract class AbstractMemberGenerator extends AbstractGenerator
      * setFinal()
      *
      * @param bool $isFinal
-     * @return \AbstractMemberGenerator\Code\Generator\PhpMember\AbstractMember
+     * @return AbstractMemberGenerator
      */
     public function setFinal($isFinal)
     {
@@ -174,7 +189,7 @@ abstract class AbstractMemberGenerator extends AbstractGenerator
      * setStatic()
      *
      * @param bool $isStatic
-     * @return \AbstractMemberGenerator\Code\Generator\PhpMember\AbstractMember
+     * @return AbstractMemberGenerator
      */
     public function setStatic($isStatic)
     {
@@ -219,7 +234,7 @@ abstract class AbstractMemberGenerator extends AbstractGenerator
     /**
      * getVisibility()
      *
-     * @return const
+     * @return string
      */
     public function getVisibility()
     {
@@ -237,7 +252,7 @@ abstract class AbstractMemberGenerator extends AbstractGenerator
      * setName()
      *
      * @param string $name
-     * @return \AbstractMemberGenerator\Code\Generator\PhpMember\AbstractMember
+     * @return AbstractMemberGenerator
      */
     public function setName($name)
     {

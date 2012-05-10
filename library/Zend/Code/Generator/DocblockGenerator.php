@@ -24,9 +24,6 @@ namespace Zend\Code\Generator;
 use Zend\Code\Reflection\DocBlockReflection;
 
 /**
- * @uses       \Zend\Code\Generator\AbstractGenerator
- * @uses       \Zend\Code\Generator\DocBlock\Tag
- * @uses       \Zend\Code\Generator\Exception
  * @category   Zend
  * @package    Zend_Code_Generator
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -62,7 +59,7 @@ class DocblockGenerator extends AbstractGenerator
      */
     public static function fromReflection(DocBlockReflection $reflectionDocblock)
     {
-        $docblock = new self();
+        $docblock = new static();
 
         $docblock->setSourceContent($reflectionDocblock->getContents());
         $docblock->setSourceDirty(false);

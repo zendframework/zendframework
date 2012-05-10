@@ -23,8 +23,6 @@ use Zend\Filter,
     Zend\Filter\Exception;
 
 /**
- * @uses       \Zend\Filter\Exception
- * @uses       \Zend\Filter\StringToLower
  * @category   Zend
  * @package    Zend_Filter
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -51,7 +49,7 @@ class LowerCase extends Filter\StringToLower
      *
      * @param  string $value Full path of file to change
      * @return string The given $value
-     * @throws \Zend\Filter\Exception
+     * @throws Exception\ExceptionInterface
      */
     public function __invoke($value)
     {

@@ -22,7 +22,7 @@
 namespace Zend\Markup\Renderer;
 
 use Zend\Markup\Token,
-    Zend\Filter\Filter;
+    Zend\Filter\FilterInterface;
 
 /**
  * Interface for a markup
@@ -34,7 +34,7 @@ use Zend\Markup\Token,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Markup extends Filter
+interface Markup extends FilterInterface
 {
 
     /**

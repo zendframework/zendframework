@@ -47,8 +47,6 @@ class V1Test extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        parent::setUp();
-
         $this->_amazon = new Authentication\V1('0PN5J17HBGZHT7JJ3X82', 'uV3F3YluFJax1cknvbcGwgjvx4QpvB+leU8dUj2o', '2007-12-01');
     }
 
@@ -58,8 +56,6 @@ class V1Test extends \PHPUnit_Framework_TestCase
     protected function tearDown()
     {
         $this->_amazon = null;
-
-        parent::tearDown();
     }
 
     /**

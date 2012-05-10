@@ -25,7 +25,6 @@ use Zend\Code\Reflection\ParameterReflection;
 
 /**
  *
- * @uses       \Zend\Code\Generator\AbstractPhp
  * @category   Zend
  * @package    Zend_Code_Generator
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -116,7 +115,7 @@ class ParameterGenerator extends AbstractGenerator
      * setType()
      *
      * @param string $type
-     * @return \Zend\Code\Generator\PhpParameter\Parameter
+     * @return ParameterGenerator
      */
     public function setType($type)
     {
@@ -138,7 +137,7 @@ class ParameterGenerator extends AbstractGenerator
      * setName()
      *
      * @param string $name
-     * @return \Zend\Code\Generator\PhpParameter\Parameter
+     * @return ParameterGenerator
      */
     public function setName($name)
     {
@@ -161,8 +160,8 @@ class ParameterGenerator extends AbstractGenerator
      *
      * Certain variables are difficult to expres
      *
-     * @param null|bool|string|int|float|\Zend\Code\Generator\PhpParameter\DefaultValue $defaultValue
-     * @return \Zend\Code\Generator\PhpParameter\Parameter
+     * @param null|bool|string|int|float|ValueGenerator $defaultValue
+     * @return ParameterGenerator
      */
     public function setDefaultValue($defaultValue)
     {
@@ -206,7 +205,7 @@ class ParameterGenerator extends AbstractGenerator
      * setPosition()
      *
      * @param int $position
-     * @return \Zend\Code\Generator\PhpParameter\Parameter
+     * @return ParameterGenerator
      */
     public function setPosition($position)
     {

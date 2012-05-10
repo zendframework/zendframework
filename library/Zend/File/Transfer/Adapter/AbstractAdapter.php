@@ -787,7 +787,7 @@ abstract class AbstractAdapter
     /**
      * Adds a new filter for this class
      *
-     * @param  string|Filter\Filter $filter Type of filter to add
+     * @param  string|Filter\FilterInterface $filter Type of filter to add
      * @param  string|array         $options   Options to set for the filter
      * @param  string|array         $files     Files to limit this filter to
      * @return AbstractAdapter
@@ -795,7 +795,7 @@ abstract class AbstractAdapter
      */
     public function addFilter($filter, $options = null, $files = null)
     {
-        if ($filter instanceof Filter\Filter) {
+        if ($filter instanceof Filter\FilterInterface) {
             $class = get_class($filter);
         } elseif (is_string($filter)) {
             $class  = $this->getPluginLoader(self::FILTER)->load($filter);
@@ -823,7 +823,7 @@ abstract class AbstractAdapter
     public function addFilters(array $filters, $files = null)
     {
         foreach ($filters as $key => $spec) {
-            if ($spec instanceof Filter\Filter) {
+            if ($spec instanceof Filter\FilterInterface) {
                 $this->addFilter($spec, null, $files);
                 continue;
             }
@@ -885,7 +885,7 @@ abstract class AbstractAdapter
      * Retrieve individual filter
      *
      * @param  string $name
-     * @return Filter\Filter|null
+     * @return Filter\FilterInterface|null
      */
     public function getFilter($name)
     {

@@ -162,7 +162,7 @@ class Form extends BaseForm implements FormFactoryAwareInterface
             }
 
             // Create an inputfilter based on the specification returned from the fieldset
-            $spec   = $element->getInputFilterSpecification();
+            $spec   = $fieldset->getInputFilterSpecification();
             $filter = $inputFactory->createInputFilter($spec);
             $inputFilter->add($filter, $name);
         }

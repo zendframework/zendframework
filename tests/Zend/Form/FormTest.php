@@ -23,6 +23,7 @@ namespace ZendTest\Form;
 
 use PHPUnit_Framework_TestCase as TestCase;
 use Zend\Form\Factory;
+use Zend\Form\Fieldset;
 use Zend\Form\Form;
 use Zend\InputFilter\InputFilter;
 
@@ -94,37 +95,59 @@ class FormTest extends TestCase
 
         $test = $this->form->getInputFilter();
         $this->assertSame($filter, $test);
-
-        // Check with valid data
-        $data = array('foo' => '  This1sVal1d ');
-        $filter->setData($data);
-        $this->assertTrue($filter->isValid());
-        $test = $filter->getValues();
-        $this->assertArrayHasKey('foo', $test);
-        $this->assertEquals('This1sVal1d', $test['foo']);
-        
-        // Check with invalid data
-        $data = array('foo' => '  This1sN0tV@l1d ');
-        $filter->setData($data);
-        $this->assertFalse($filter->isValid());
-        $test = $filter->getInvalidInput();
-        $this->assertArrayHasKey('foo', $test);
-
-        // Check with no data
-        $data = array();
-        $filter->setData($data);
-        $this->assertFalse($filter->isValid());
-        $test = $filter->getInvalidInput();
-        $this->assertArrayHasKey('foo', $test);
+        $this->assertTrue($filter->has('foo'));
+        $input = $filter->get('foo');
+        $filters = $input->getFilterChain();
+        $this->assertEquals(1, count($filters));
+        $validators = $input->getValidatorChain();
+        $this->assertEquals(2, count($validators));
+        $this->assertTrue($input->isRequired());
+        $this->assertEquals('foo', $input->getName());
     }
 
     public function testWillUseInputFilterSpecificationFromFieldsetInInputFilterIfNoMatchingInputFilterFound()
     {
-        $this->markTestIncomplete();
+        $fieldset = new TestAsset\FieldsetWithInputFilter('set');
+        $filter   = new InputFilter();
+        $this->form->setInputFilter($filter);
+        $this->form->add($fieldset);
+
+        $test = $this->form->getInputFilter();
+        $this->assertSame($filter, $test);
+        $this->assertTrue($filter->has('set'));
+        $input = $filter->get('set');
+        $this->assertInstanceOf('Zend\InputFilter\InputFilterInterface', $input);
+        $this->assertEquals(2, count($input));
+        $this->assertTrue($input->has('foo'));
+        $this->assertTrue($input->has('bar'));
     }
 
     public function testWillPopulateSubInputFilterFromInputSpecificationsOnFieldsetElements()
     {
-        $this->markTestIncomplete();
+        $element        = new TestAsset\ElementWithFilter('foo');
+        $fieldset       = new Fieldset('set');
+        $filter         = new InputFilter();
+        $fieldsetFilter = new InputFilter();
+        $fieldset->add($element);
+        $filter->add($fieldsetFilter, 'set');
+        $this->form->setInputFilter($filter);
+        $this->form->add($fieldset);
+
+        $test = $this->form->getInputFilter();
+        $this->assertSame($filter, $test);
+        $test = $filter->get('set');
+        $this->assertSame($fieldsetFilter, $test);
+
+        $this->assertEquals(1, count($fieldsetFilter));
+        $this->assertTrue($fieldsetFilter->has('foo'));
+
+        $input = $fieldsetFilter->get('foo');
+        $this->assertInstanceOf('Zend\InputFilter\InputInterface', $input);
+        $filters = $input->getFilterChain();
+        $this->assertEquals(1, count($filters));
+        $validators = $input->getValidatorChain();
+        $this->assertEquals(2, count($validators));
+        $this->assertTrue($input->isRequired());
+        $this->assertEquals('foo', $input->getName());
     }
 }

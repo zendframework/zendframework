@@ -331,7 +331,7 @@ class BaseForm extends Fieldset implements FormInterface
     public function getInputFilter()
     {
         if ($this->object instanceof InputFilterAwareInterface) {
-            return $this->object->getInputFilter();
+            $this->filter = $this->object->getInputFilter();
         }
         return $this->filter;
     }

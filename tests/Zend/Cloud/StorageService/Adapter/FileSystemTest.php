@@ -26,8 +26,8 @@ use ZendTest\Cloud\StorageService\TestCase,
     Zend\Config\Config;
 
 // Call ZendTest\Cloud\StorageService\Adapter\FileSystemTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "ZendTest\Cloud\StorageService\Adapter\FileSystemTest::main");
+if (!defined('PHPUnit_MAIN_METHOD')) {
+    define('PHPUnit_MAIN_METHOD', 'ZendTest\Cloud\StorageService\Adapter\FileSystemTest::main');
 }
 
 /**
@@ -77,23 +77,23 @@ class FileSystemTest extends TestCase
 
     public function testNoParams()
     {
-	$this->markTestSkipped('No config params needed for FileSystem');
+	    $this->markTestIncomplete('No config params needed for FileSystem');
     }
 
     // TODO: Create a custom test for FileSystem that checks fetchMetadata() with file system MD.
     public function testFetchMetadata()
     {
-        $this->markTestIncomplete('FileSystem doesn\'t support writable metadata.');
+        $this->markTestIncomplete("FileSystem doesn't support writable metadata.");
     }
 
     public function testStoreMetadata()
     {
-        $this->markTestSkipped('FileSystem doesn\'t support writable metadata.');
+        $this->markTestIncomplete("FileSystem doesn't support writable metadata.");
     }
 
     public function testDeleteMetadata()
     {
-        $this->markTestSkipped('FileSystem doesn\'t support writable metadata.');
+        $this->markTestIncomplete("FileSystem doesn't support writable metadata.");
     }
 
 	/**

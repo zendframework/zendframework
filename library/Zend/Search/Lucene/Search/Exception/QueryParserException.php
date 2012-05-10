@@ -21,6 +21,8 @@
 
 namespace Zend\Search\Lucene\Search\Exception;
 
+use Zend\Search\Lucene\Exception;
+
 /**
  * @category   Zend
  * @package    Zend_Search_Lucene
@@ -31,7 +33,7 @@ namespace Zend\Search\Lucene\Search\Exception;
  * Special exception type, which may be used to intercept wrong user input
  */
 class QueryParserException
-    extends \UnexpectedValueException
+    extends Exception\UnexpectedValueException
     implements ExceptionInterface
 {}
 

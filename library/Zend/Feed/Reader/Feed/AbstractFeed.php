@@ -269,7 +269,7 @@ abstract class AbstractFeed implements FeedInterface
                 return call_user_func_array(array($extension, $method), $args);
             }
         }
-        throw new Exception('Method: ' . $method
+        throw new Exception\BadMethodCallException('Method: ' . $method
         . 'does not exist and could not be located on a registered Extension');
     }
 
@@ -277,7 +277,7 @@ abstract class AbstractFeed implements FeedInterface
      * Return an Extension object with the matching name (postfixed with _Feed)
      *
      * @param string $name
-     * @return Zend_Feed_Reader_Extension_FeedAbstract
+     * @return \Zend\Feed\Reader\Extension\AbstractFeed
      */
     public function getExtension($name)
     {
@@ -299,7 +299,7 @@ abstract class AbstractFeed implements FeedInterface
                 continue;
             }
             if (!class_exists($className)) {
-                throw new Exception(sprintf('Unable to load extension "%s"; cannot find class', $extension));
+                throw new Exception\RuntimeException(sprintf('Unable to load extension "%s"; cannot find class', $extension));
             }
             $this->_extensions[$extension] = new $className(
                 $this->getDomDocument(), $this->_data['type'], $this->_xpath

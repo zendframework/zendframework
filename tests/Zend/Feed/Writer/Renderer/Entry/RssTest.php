@@ -98,7 +98,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Zend\Feed\Writer\Exception
+     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
      */
     public function testEntryTitleIfMissingThrowsExceptionIfDescriptionAlsoMissing()
     {
@@ -126,7 +126,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Zend\Feed\Writer\Exception
+     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
      */
     public function testEntryDescriptionIfMissingThrowsExceptionIfAlsoNoTitle()
     {
@@ -230,7 +230,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Zend\Feed\Writer\Exception
+     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
      */
     public function testAddsEnclosureThrowsExceptionOnMissingType()
     {
@@ -243,7 +243,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Zend\Feed\Writer\Exception
+     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
      */
     public function testAddsEnclosureThrowsExceptionOnMissingLength()
     {
@@ -256,7 +256,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Zend\Feed\Writer\Exception
+     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
      */
     public function testAddsEnclosureThrowsExceptionOnNonNumericLength()
     {
@@ -270,7 +270,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Zend\Feed\Writer\Exception
+     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
      */
     public function testAddsEnclosureThrowsExceptionOnNegativeLength()
     {

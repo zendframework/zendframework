@@ -145,9 +145,13 @@ class Entry extends Extension\AbstractEntry
 
         return $this->_data['content'];
     }
-    
+
     /**
      * Parse out XHTML to remove the namespacing
+     *
+     * @param $xhtml
+     * @param $prefix
+     * @return mixed
      */
     protected function _collectXhtml($xhtml, $prefix)
     {
@@ -490,7 +494,7 @@ class Entry extends Extension\AbstractEntry
     /**
      * Get all categories
      *
-     * @return Reader\Reader_Collection_Category
+     * @return Collection\Category
      */
     public function getCategories()
     {
@@ -556,6 +560,9 @@ class Entry extends Extension\AbstractEntry
     /**
      *  Attempt to absolutise the URI, i.e. if a relative URI apply the
      *  xml:base value as a prefix to turn into an absolute URI.
+     *
+     * @param $link
+     * @return string
      */
     protected function _absolutiseUri($link)
     {

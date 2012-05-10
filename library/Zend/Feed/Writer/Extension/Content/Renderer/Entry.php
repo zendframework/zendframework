@@ -19,7 +19,10 @@
  */
  
 namespace Zend\Feed\Writer\Extension\Content\Renderer;
-use Zend\Feed\Writer\Extension;
+
+use Zend\Feed\Writer\Extension,
+    DOMDocument,
+    DOMElement;
 
 /**
 * @category Zend
@@ -69,11 +72,11 @@ class Entry extends Extension\AbstractRenderer
     /**
      * Set entry content
      * 
-     * @param  \DOMDocument $dom 
-     * @param  \DOMElement $root 
+     * @param  DOMDocument $dom
+     * @param  DOMElement $root
      * @return void
      */
-    protected function _setContent(\DOMDocument $dom, \DOMElement $root)
+    protected function _setContent(DOMDocument $dom, DOMElement $root)
     {
         $content = $this->getDataContainer()->getContent();
         if (!$content) {

@@ -676,7 +676,7 @@ class Subscriber
      * client's POST body that are specific to the current Hub Server URL
      *
      * @param  string $hubUrl
-     * @param  mode $hubUrl
+     * @param  string $mode
      * @return string
      * @throws Exception\InvalidArgumentException
      */
@@ -766,7 +766,6 @@ class Subscriber
      * requests to a Hub Server. Follows no particular method, which means
      * it might be improved/changed in future.
      *
-     * @param  string $hubUrl The Hub Server URL for which this token will apply
      * @return string
      */
     protected function _generateVerifyToken()

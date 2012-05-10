@@ -146,7 +146,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Zend\Feed\Writer\Exception
+     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
      */
     public function testAddsEnclosureThrowsExceptionOnMissingUri()
     {
@@ -159,7 +159,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Zend\Feed\Writer\Exception
+     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
      */
     public function testAddsEnclosureThrowsExceptionWhenUriIsInvalid()
     {
@@ -185,7 +185,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         try {
             $entry->setCopyright('');
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
 
@@ -202,7 +202,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         try {
             $entry->setContent('');
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
 
@@ -304,7 +304,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         try {
             $entry->setDateCreated('abc');
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
 
@@ -314,7 +314,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         try {
             $entry->setDateModified('abc');
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
 
@@ -355,7 +355,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         try {
             $entry->setDescription('');
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
 
@@ -378,7 +378,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         try {
             $entry->setId('');
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
 
@@ -401,7 +401,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         try {
             $entry->setLink('');
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
 
@@ -411,7 +411,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         try {
             $entry->setLink('http://');
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
 
@@ -434,7 +434,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         try {
             $entry->setCommentLink('');
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
 
@@ -444,7 +444,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         try {
             $entry->setCommentLink('http://');
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
 
@@ -472,7 +472,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
             $entry->setCommentFeedLink(array('uri' => '',
                                              'type'=> 'rdf'));
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
 
@@ -483,7 +483,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
             $entry->setCommentFeedLink(array('uri' => 'http://',
                                              'type'=> 'rdf'));
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
 
@@ -494,7 +494,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
             $entry->setCommentFeedLink(array('uri' => 'http://www.example.com/id/comments',
                                              'type'=> 'foo'));
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
 
@@ -517,7 +517,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         try {
             $entry->setTitle('');
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
 
@@ -540,7 +540,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         try {
             $entry->setCommentCount('');
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
 
@@ -550,7 +550,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         try {
             $entry->setCommentCount('a');
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
 

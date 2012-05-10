@@ -21,6 +21,8 @@
 
 namespace Zend\Feed\Writer;
 
+use Traversable;
+
 /**
  * @category   Zend
  * @package    Zend_Feed
@@ -39,7 +41,7 @@ abstract class FeedFactory
     public static function factory($data)
     {
         if (!is_array($data) && !$data instanceof Traversable) {
-            throw Exception\InvalidArgumentException(sprintf(
+            throw new Exception\InvalidArgumentException(sprintf(
                 '%s expects an array or Traversable argument; received "%s"',
                 __METHOD__,
                 (is_object($data) ? get_class($data) : gettype($data))
@@ -113,7 +115,7 @@ abstract class FeedFactory
 
         foreach ($entries as $data) {
             if (!is_array($data) && !$data instanceof Traversable && !$data instanceof Entry) {
-                throw Exception\InvalidArgumentException(sprintf(
+                throw new Exception\InvalidArgumentException(sprintf(
                     '%s expects an array, Traversable, or Zend\Feed\Writer\Entry argument; received "%s"',
                     __METHOD__,
                     (is_object($data) ? get_class($data) : gettype($data))

@@ -42,7 +42,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @expectedException Zend\Feed\Writer\Exception
+     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
      */
     public function testSetBlockThrowsExceptionOnNonAlphaValue()
     {
@@ -51,7 +51,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @expectedException Zend\Feed\Writer\Exception
+     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
      */
     public function testSetBlockThrowsExceptionIfValueGreaterThan255CharsLength()
     {
@@ -74,7 +74,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @expectedException Zend\Feed\Writer\Exception
+     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
      */
     public function testAddAuthorThrowsExceptionIfValueGreaterThan255CharsLength()
     {
@@ -94,7 +94,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @expectedException Zend\Feed\Writer\Exception
+     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
      */
     public function testSetCategoriesThrowsExceptionIfAnyCatNameGreaterThan255CharsLength()
     {
@@ -122,7 +122,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @expectedException Zend\Feed\Writer\Exception
+     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
      */
     public function testSetImageThrowsExceptionOnInvalidUri()
     {
@@ -131,7 +131,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @expectedException Zend\Feed\Writer\Exception
+     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
      */
     public function testSetImageThrowsExceptionOnInvalidImageExtension()
     {
@@ -161,7 +161,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @expectedException Zend\Feed\Writer\Exception
+     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
      */
     public function testSetDurationThrowsExceptionOnUnknownFormat()
     {
@@ -170,7 +170,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @expectedException Zend\Feed\Writer\Exception
+     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
      */
     public function testSetDurationThrowsExceptionOnInvalidSeconds()
     {
@@ -179,7 +179,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @expectedException Zend\Feed\Writer\Exception
+     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
      */
     public function testSetDurationThrowsExceptionOnInvalidMinutes()
     {
@@ -209,7 +209,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @expectedException Zend\Feed\Writer\Exception
+     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
      */
     public function testSetExplicitThrowsExceptionOnUnknownTerm()
     {
@@ -228,7 +228,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @expectedException Zend\Feed\Writer\Exception
+     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
      */
     public function testSetKeywordsThrowsExceptionIfMaxKeywordsExceeded()
     {
@@ -240,7 +240,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @expectedException Zend\Feed\Writer\Exception
+     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
      */
     public function testSetKeywordsThrowsExceptionIfFormattedKeywordsExceeds255CharLength()
     {
@@ -259,7 +259,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @expectedException Zend\Feed\Writer\Exception
+     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
      */
     public function testSetNewFeedUrlThrowsExceptionOnInvalidUri()
     {
@@ -289,7 +289,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @expectedException Zend\Feed\Writer\Exception
+     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
      */
     public function testSetSubtitleThrowsExceptionWhenValueExceeds255Chars()
     {
@@ -305,7 +305,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @expectedException Zend\Feed\Writer\Exception
+     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
      */
     public function testSetSummaryThrowsExceptionWhenValueExceeds4000Chars()
     {

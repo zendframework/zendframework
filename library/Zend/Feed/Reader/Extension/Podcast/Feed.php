@@ -20,7 +20,8 @@
 
 namespace Zend\Feed\Reader\Extension\Podcast;
 
-use Zend\Feed\Reader\Extension;
+use Zend\Feed\Reader\Extension,
+    DOMText;
 
 /**
 * @category Zend
@@ -97,7 +98,7 @@ class Feed extends Extension\AbstractFeed
                     $children = array();
 
                     foreach ($node->childNodes as $childNode) {
-                        if (!($childNode instanceof \DOMText)) {
+                        if (!($childNode instanceof DOMText)) {
                             $children[$childNode->getAttribute('text')] = null;
                         }
                     }

@@ -67,7 +67,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $feed = new Renderer\Feed\Rss($this->_validWriter);
         try {
             $feed->render();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
             $this->fail('Valid Writer object caused an exception when building which should never happen');
         }
     }
@@ -98,7 +98,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Zend\Feed\Writer\Exception
+     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
      */
     public function testFeedTitleIfMissingThrowsException()
     {
@@ -128,7 +128,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Zend\Feed\Writer\Exception
+     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
      */
     public function testFeedDescriptionThrowsExceptionIfMissing()
     {
@@ -232,7 +232,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Zend\Feed\Writer\Exception
+     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
      */
     public function testFeedLinkToHtmlVersionOfFeedIfMissingThrowsException()
     {
@@ -421,7 +421,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Zend\Feed\Writer\Exception
+     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
      */
     public function testImageThrowsExceptionOnMissingLink()
     {
@@ -434,7 +434,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Zend\Feed\Writer\Exception
+     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
      */
     public function testImageThrowsExceptionOnMissingTitle()
     {
@@ -447,7 +447,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Zend\Feed\Writer\Exception
+     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
      */
     public function testImageThrowsExceptionOnMissingUri()
     {
@@ -460,7 +460,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Zend\Feed\Writer\Exception
+     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
      */
     public function testImageThrowsExceptionIfOptionalDescriptionInvalid()
     {
@@ -475,7 +475,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Zend\Feed\Writer\Exception
+     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
      */
     public function testImageThrowsExceptionIfOptionalDescriptionEmpty()
     {
@@ -490,7 +490,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Zend\Feed\Writer\Exception
+     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
      */
     public function testImageThrowsExceptionIfOptionalHeightNotAnInteger()
     {
@@ -506,7 +506,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Zend\Feed\Writer\Exception
+     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
      */
     public function testImageThrowsExceptionIfOptionalHeightEmpty()
     {
@@ -522,7 +522,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Zend\Feed\Writer\Exception
+     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
      */
     public function testImageThrowsExceptionIfOptionalHeightGreaterThan400()
     {
@@ -538,7 +538,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Zend\Feed\Writer\Exception
+     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
      */
     public function testImageThrowsExceptionIfOptionalWidthNotAnInteger()
     {
@@ -554,7 +554,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Zend\Feed\Writer\Exception
+     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
      */
     public function testImageThrowsExceptionIfOptionalWidthEmpty()
     {
@@ -570,7 +570,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Zend\Feed\Writer\Exception
+     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
      */
     public function testImageThrowsExceptionIfOptionalWidthGreaterThan144()
     {

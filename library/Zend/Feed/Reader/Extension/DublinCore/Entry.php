@@ -97,7 +97,7 @@ class Entry extends Extension\AbstractEntry
     /**
      * Get categories (subjects under DC)
      *
-     * @return Reader\Reader_Collection_Category
+     * @return Collection\Category
      */
     public function getCategories()
     {

@@ -19,7 +19,10 @@
  */
  
 namespace Zend\Feed\Writer\Extension\Atom\Renderer;
-use Zend\Feed\Writer\Extension;
+
+use Zend\Feed\Writer\Extension,
+    DOMDocument,
+    DOMElement;
 
 /**
 * @category Zend
@@ -78,7 +81,7 @@ class Feed extends Extension\AbstractRenderer
      * @param  DOMElement $root 
      * @return void
      */
-    protected function _setFeedLinks(\DOMDocument $dom, \DOMElement $root)
+    protected function _setFeedLinks(DOMDocument $dom, DOMElement $root)
     {
         $flinks = $this->getDataContainer()->getFeedLinks();
         if(!$flinks || empty($flinks)) {
@@ -102,7 +105,7 @@ class Feed extends Extension\AbstractRenderer
      * @param  DOMElement $root 
      * @return void
      */
-    protected function _setHubs(\DOMDocument $dom, \DOMElement $root)
+    protected function _setHubs(DOMDocument $dom, DOMElement $root)
     {
         $hubs = $this->getDataContainer()->getHubs();
         if (!$hubs || empty($hubs)) {

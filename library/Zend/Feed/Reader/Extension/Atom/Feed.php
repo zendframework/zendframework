@@ -24,7 +24,8 @@ use Zend\Date,
     Zend\Feed\Reader,
     Zend\Feed\Reader\Collection,
     Zend\Feed\Reader\Extension,
-    Zend\Uri;
+    Zend\Uri,
+    DOMElement;
 
 /**
 * @category Zend
@@ -424,7 +425,7 @@ class Feed extends Extension\AbstractFeed
     /**
      * Get all categories
      *
-     * @return Reader\Reader_Collection_Category
+     * @return Collection\Category
      */
     public function getCategories()
     {
@@ -468,7 +469,7 @@ class Feed extends Extension\AbstractFeed
      * @param  DOMElement $element
      * @return string
      */
-    protected function _getAuthor(\DOMElement $element)
+    protected function _getAuthor(DOMElement $element)
     {
         $author = array();
 

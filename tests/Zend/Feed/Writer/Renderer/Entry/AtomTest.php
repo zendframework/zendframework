@@ -109,7 +109,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Zend\Feed\Writer\Exception
+     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
      */
     public function testFeedTitleIfMissingThrowsException()
     {
@@ -138,7 +138,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Zend\Feed\Writer\Exception
+     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
      */
     public function testFeedContentIfMissingThrowsExceptionIfThereIsNoLink()
     {
@@ -157,7 +157,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Zend\Feed\Writer\Exception
+     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
      */
     public function testFeedUpdatedDateIfMissingThrowsException()
     {
@@ -247,7 +247,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Zend\Feed\Writer\Exception
+     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
      */
     public function testFeedIdIfMissingThrowsException()
     {
@@ -258,7 +258,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Zend\Feed\Writer\Exception
+     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
      */
     public function testFeedIdThrowsExceptionIfNotUri()
     {

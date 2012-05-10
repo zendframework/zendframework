@@ -20,6 +20,9 @@
 
 namespace Zend\Feed\Writer\Extension;
 
+use DOMDocument,
+    DOMElement;
+
 /**
 * @category Zend
 * @package Zend_Feed_Writer
@@ -39,11 +42,11 @@ interface Renderer
     /**
      * Set DOMDocument and DOMElement on which to operate
      * 
-     * @param  \DOMDocument $dom 
-     * @param  \DOMElement $base 
+     * @param  DOMDocument $dom 
+     * @param  DOMElement $base 
      * @return void
      */
-    public function setDomDocument(\DOMDocument $dom, \DOMElement $base);
+    public function setDomDocument(DOMDocument $dom, DOMElement $base);
     
     /**
      * Render

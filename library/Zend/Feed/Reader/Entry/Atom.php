@@ -21,7 +21,8 @@
 namespace Zend\Feed\Reader\Entry;
 
 use Zend\Feed\Reader,
-    DOMElement;
+    DOMElement,
+    DOMXPath;
 
 /**
 * @category Zend
@@ -332,7 +333,7 @@ class Atom extends AbstractEntry implements EntryInterface
     /**
      * Get category data as a Reader\Reader_Collection_Category object
      *
-     * @return Reader\Reader_Collection_Category
+     * @return Reader\Collection\Category
      */
     public function getCategories()
     {
@@ -354,7 +355,7 @@ class Atom extends AbstractEntry implements EntryInterface
     /**
      * Get source feed metadata from the entry
      *
-     * @return Reader\Reader_Feed_Atom_Source|null
+     * @return Reader\Feed\Atom\Source|null
      */
     public function getSource()
     {
@@ -372,9 +373,9 @@ class Atom extends AbstractEntry implements EntryInterface
     /**
      * Set the XPath query (incl. on all Extensions)
      *
-     * @param \DOMXPath $xpath
+     * @param DOMXPath $xpath
      */
-    public function setXpath(\DOMXPath $xpath)
+    public function setXpath(DOMXPath $xpath)
     {
         parent::setXpath($xpath);
         foreach ($this->_extensions as $extension) {

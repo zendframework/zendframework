@@ -179,7 +179,7 @@ class Entry
     /**
      * Set the feed creation date
      *
-     * @return string|null
+     * @return string|null|Date\Date
      * @throws Exception\InvalidArgumentException
      */
     public function setDateCreated($date = null)
@@ -512,11 +512,12 @@ class Entry
      * Add a entry category
      *
      * @param string $category
+     * @throws Exception\InvalidArgumentException
      */
     public function addCategory(array $category)
     {
         if (!isset($category['term'])) {
-            throw new Exception('Each category must be an array and '
+            throw new Exception\InvalidArgumentException('Each category must be an array and '
             . 'contain at least a "term" element containing the machine '
             . ' readable category name');
         }
@@ -525,7 +526,7 @@ class Entry
                 || !is_string($category['scheme'])
                 || !Uri\UriFactory::factory($category['scheme'])->isValid()
             ) {
-                throw new Exception('The Atom scheme or RSS domain of'
+                throw new Exception\InvalidArgumentException('The Atom scheme or RSS domain of'
                 . ' a category must be a valid URI');
             }
         }
@@ -567,14 +568,15 @@ class Entry
      * will throw an Exception.
      *
      * @param array $enclosure
+     * @throws Exception\InvalidArgumentException
      */
     public function setEnclosure(array $enclosure)
     {
         if (!isset($enclosure['uri'])) {
-            throw new Exception('Enclosure "uri" is not set');
+            throw new Exception\InvalidArgumentException('Enclosure "uri" is not set');
         }
         if (!Uri\UriFactory::factory($enclosure['uri'])->isValid()) {
-            throw new Exception('Enclosure "uri" is not a valid URI/IRI');
+            throw new Exception\InvalidArgumentException('Enclosure "uri" is not a valid URI/IRI');
         }
         $this->_data['enclosure'] = $enclosure;
     }
@@ -656,17 +658,17 @@ class Entry
      * @param  string $method
      * @param  array $args
      * @return mixed
-     * @throws Exception if no extensions implements the method
+     * @throws Exception\BadMethodCallException if no extensions implements the method
      */
     public function __call($method, $args)
     {
         foreach ($this->_extensions as $extension) {
             try {
                 return call_user_func_array(array($extension, $method), $args);
-            } catch (BadMethodCallException $e) {
+            } catch (\BadMethodCallException $e) {
             }
         }
-        throw new Exception('Method: ' . $method
+        throw new Exception\BadMethodCallException('Method: ' . $method
             . ' does not exist and could not be located on a registered Extension');
     }
 
@@ -675,7 +677,7 @@ class Entry
      * added to the current feed automatically, but is necessary to create a
      * container with some initial values preset based on the current feed data.
      *
-     * @return Zend_Feed_Writer_Source
+     * @return Source
      */
     public function createSource()
     {
@@ -691,7 +693,7 @@ class Entry
      * Appends a Zend_Feed_Writer_Entry object representing a new entry/item
      * the feed data container's internal group of entries.
      *
-     * @param Zend_Feed_Writer_Source $source
+     * @param Source $source
      */
     public function setSource(Source $source)
     {
@@ -699,7 +701,7 @@ class Entry
     }
 
     /**
-     * @return Zend_Feed_Writer_Source
+     * @return Source
      */
     public function getSource()
     {

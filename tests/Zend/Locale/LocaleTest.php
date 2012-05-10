@@ -49,7 +49,7 @@ class LocaleTest extends \PHPUnit_Framework_TestCase
 
         LocaleTestHelper::resetObject();
         LocaleTestHelper::setCache($this->_cache);
-        putenv("HTTP_ACCEPT_LANGUAGE=,de,en-UK-US;q=0.5,fr_FR;q=0.2");
+        putenv('HTTP_ACCEPT_LANGUAGE=,de,en-UK-US;q=0.5,fr_FR;q=0.2');
     }
 
     public function tearDown()

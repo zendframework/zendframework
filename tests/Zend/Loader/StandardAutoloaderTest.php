@@ -101,10 +101,10 @@ class StandardAutoloaderTest extends \PHPUnit_Framework_TestCase
     {
         $options = array(
             'namespaces' => array(
-                'Zend\\'   => dirname(__DIR__) . '/',
+                'Zend\\'   => dirname(__DIR__) . DIRECTORY_SEPARATOR,
             ),
             'prefixes'   => array(
-                'Zend_'  => dirname(__DIR__) . '/',
+                'Zend_'  => dirname(__DIR__) . DIRECTORY_SEPARATOR,
             ),
             'fallback_autoloader' => true,
         );
@@ -118,10 +118,10 @@ class StandardAutoloaderTest extends \PHPUnit_Framework_TestCase
     public function testPassingTraversableOptionsPopulatesProperties()
     {
         $namespaces = new \ArrayObject(array(
-            'Zend\\' => dirname(__DIR__) . '/',
+            'Zend\\' => dirname(__DIR__) . DIRECTORY_SEPARATOR,
         ));
         $prefixes = new \ArrayObject(array(
-            'Zend_' => dirname(__DIR__) . '/',
+            'Zend_' => dirname(__DIR__) . DIRECTORY_SEPARATOR,
         ));
         $options = new \ArrayObject(array(
             'namespaces' => $namespaces,

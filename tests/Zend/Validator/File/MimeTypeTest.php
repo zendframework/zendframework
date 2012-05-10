@@ -164,7 +164,7 @@ class MimeTypeTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped('This PHP Version has no finfo installed');
         }
 
-        $this->setExpectedException('Zend\Validator\Exception\InvalidArgumentException', 'could not be used by ext/finfo');
+        $this->setExpectedException('Zend\Validator\Exception\InvalidMagicMimeFileException', 'could not be used by ext/finfo');
         $validator = new File\MimeType(array('image/gif', 'magicFile' => __FILE__));
     }
 

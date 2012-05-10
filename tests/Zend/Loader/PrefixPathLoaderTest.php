@@ -108,13 +108,13 @@ class PrefixPathLoaderTest extends \PHPUnit_Framework_TestCase
     public function testCanAddMultiplePathsToSamePrefix()
     {
         $this->loader->addPrefixPath('foo', __DIR__)
-                     ->addPrefixPath('foo', __DIR__ . '/TestAsset');
+                     ->addPrefixPath('foo', __DIR__ . DIRECTORY_SEPARATOR . 'TestAsset');
         $paths = $this->loader->getPaths('foo');
         $this->assertInstanceOf('SplStack', $paths);
         $this->assertEquals(2, count($paths));
 
         $expected = array(
-            rtrim(realpath(__DIR__ . '/TestAsset'), DIRECTORY_SEPARATOR),
+            rtrim(realpath(__DIR__ . DIRECTORY_SEPARATOR . 'TestAsset'), DIRECTORY_SEPARATOR),
             rtrim(__DIR__, DIRECTORY_SEPARATOR), 
         );
         $test  = array();
@@ -507,36 +507,53 @@ class PrefixPathLoaderTest extends \PHPUnit_Framework_TestCase
         $paths  = $loader->getPaths('loader');
         $this->assertEquals(1, count($paths));
         foreach ($paths as $path) {
-            $this->assertContains(__DIR__ . '/TestAsset', $path);
+            $this->assertContains(__DIR__ . DIRECTORY_SEPARATOR . 'TestAsset', $path);
         }
 
-        TestAsset\ExtendedPrefixPathLoader::addStaticPaths(array(
-            array('prefix' => 'loader', 'path' => __DIR__),
-        ));
+        TestAsset\ExtendedPrefixPathLoader::addStaticPaths(
+            array(
+                 array('prefix' => 'loader',
+                       'path'   => __DIR__),
+            ));
         $loader = new TestAsset\ExtendedPrefixPathLoader();
-        $paths = $loader->getPaths('loader');
+        $paths  = $loader->getPaths('loader');
         $this->assertEquals(2, count($paths));
-        $test = $paths->toArray();
-        $expected = array(__DIR__ . DIRECTORY_SEPARATOR, __DIR__ . DIRECTORY_SEPARATOR . 'TestAsset' . DIRECTORY_SEPARATOR);
+        $test     = $paths->toArray();
+        $expected = array(__DIR__ . DIRECTORY_SEPARATOR,
+                          __DIR__ . DIRECTORY_SEPARATOR . 'TestAsset' . DIRECTORY_SEPARATOR);
         $this->assertSame($expected, $test);
 
-        $loader = new TestAsset\ExtendedPrefixPathLoader(array(
-            array('prefix' => 'loader', 'path' => __DIR__ . '/TestAsset/plugins'),
-        ));
-        $paths = $loader->getPaths('loader');
+        $loader = new TestAsset\ExtendedPrefixPathLoader(
+            array(
+                 array('prefix' => 'loader',
+                       'path'   =>
+                       __DIR__ . DIRECTORY_SEPARATOR . 'TestAsset' .
+                       DIRECTORY_SEPARATOR . 'plugins'),
+            ));
+        $paths  = $loader->getPaths('loader');
         $this->assertEquals(3, count($paths));
-        $test = $paths->toArray();
-        $expected = array(__DIR__ . DIRECTORY_SEPARATOR . 'TestAsset' . DIRECTORY_SEPARATOR . 'plugins' . DIRECTORY_SEPARATOR, __DIR__ . DIRECTORY_SEPARATOR, __DIR__ . DIRECTORY_SEPARATOR . 'TestAsset' . DIRECTORY_SEPARATOR);
+        $test     = $paths->toArray();
+        $expected = array(
+            __DIR__ . DIRECTORY_SEPARATOR . 'TestAsset' . DIRECTORY_SEPARATOR . 'plugins' . DIRECTORY_SEPARATOR,
+            __DIR__ . DIRECTORY_SEPARATOR, __DIR__ . DIRECTORY_SEPARATOR . 'TestAsset' . DIRECTORY_SEPARATOR);
         $this->assertSame($expected, $test);
 
-        $loader = new TestAsset\ExtendedPrefixPathLoader(array(
-            array('prefix' => 'loader', 'path' => __DIR__ . '/TestAsset/plugins'),
-        ));
-        $loader->addPrefixPath('loader', __DIR__ . '/TestAsset/TestNamespace');
+        $loader = new TestAsset\ExtendedPrefixPathLoader(
+            array(
+                 array('prefix' => 'loader',
+                       'path'   =>
+                       __DIR__ . DIRECTORY_SEPARATOR . 'TestAsset' .
+                       DIRECTORY_SEPARATOR . 'plugins'),
+            ));
+        $loader->addPrefixPath('loader', __DIR__ . DIRECTORY_SEPARATOR . 'TestAsset' .
+                                         DIRECTORY_SEPARATOR . 'TestNamespace');
         $paths = $loader->getPaths('loader');
         $this->assertEquals(4, count($paths));
-        $test = $paths->toArray();
-        $expected = array(__DIR__ . DIRECTORY_SEPARATOR . 'TestAsset' . DIRECTORY_SEPARATOR . 'TestNamespace' . DIRECTORY_SEPARATOR, __DIR__ . DIRECTORY_SEPARATOR . 'TestAsset' . DIRECTORY_SEPARATOR . 'plugins' . DIRECTORY_SEPARATOR, __DIR__ . DIRECTORY_SEPARATOR, __DIR__ . DIRECTORY_SEPARATOR . 'TestAsset' . DIRECTORY_SEPARATOR);
+        $test     = $paths->toArray();
+        $expected = array(
+            __DIR__ . DIRECTORY_SEPARATOR . 'TestAsset' . DIRECTORY_SEPARATOR . 'TestNamespace' . DIRECTORY_SEPARATOR,
+            __DIR__ . DIRECTORY_SEPARATOR . 'TestAsset' . DIRECTORY_SEPARATOR . 'plugins' . DIRECTORY_SEPARATOR,
+            __DIR__ . DIRECTORY_SEPARATOR, __DIR__ . DIRECTORY_SEPARATOR . 'TestAsset' . DIRECTORY_SEPARATOR);
         $this->assertSame($expected, $test);
     }
 }

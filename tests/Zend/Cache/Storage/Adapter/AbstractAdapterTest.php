@@ -250,6 +250,7 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
         $plugin = new \ZendTest\Cache\Storage\TestAsset\MockPlugin();
         $this->_storage->addPlugin($plugin);
 
+        $result = null;
         $params = new \ArrayObject(array(
             'key'   => 'key1',
             'value' => 'value1'
@@ -260,7 +261,7 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
         $method->setAccessible(true);
 
         $this->setExpectedException('Zend\Cache\Exception\RuntimeException', 'test');
-        $method->invokeArgs($this->_storage, array('setItem', $params, new Exception\RuntimeException('test')));
+        $method->invokeArgs($this->_storage, array('setItem', $params, & $result, new Exception\RuntimeException('test')));
     }
 
     public function testGetItemCallsInternalGetItem()

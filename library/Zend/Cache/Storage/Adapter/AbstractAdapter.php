@@ -248,12 +248,12 @@ abstract class AbstractAdapter implements AdapterInterface, EventsCapableInterfa
     /**
      * Triggers the PostEvent and return the result value.
      *
-     * @param  string $eventName
+     * @param  string      $eventName
      * @param  ArrayObject $args
-     * @param  mixed $result
+     * @param  mixed       $result
      * @return mixed
      */
-    protected function triggerPost($eventName, ArrayObject $args, &$result)
+    protected function triggerPost($eventName, ArrayObject $args, & $result)
     {
         $postEvent = new PostEvent($eventName . '.post', $this, $args, $result);
         $eventRs   = $this->events()->trigger($postEvent);
@@ -270,15 +270,16 @@ abstract class AbstractAdapter implements AdapterInterface, EventsCapableInterfa
      * If the ExceptionEvent has the flag "throwException" enabled throw the
      * exception after trigger else return the result.
      *
-     * @param  string $eventName
+     * @param  string      $eventName
      * @param  ArrayObject $args
-     * @param  \Exception $exception
+     * @param  mixed       $result
+     * @param  \Exception  $exception
      * @throws Exception\ExceptionInterface
      * @return mixed
      */
-    protected function triggerException($eventName, ArrayObject $args, \Exception $exception)
+    protected function triggerException($eventName, ArrayObject $args, & $result, \Exception $exception)
     {
-        $exceptionEvent = new ExceptionEvent($eventName . '.exception', $this, $args, $exception);
+        $exceptionEvent = new ExceptionEvent($eventName . '.exception', $this, $args, $result, $exception);
         $eventRs        = $this->events()->trigger($exceptionEvent);
 
         if ($exceptionEvent->getThrowException()) {
@@ -402,7 +403,8 @@ abstract class AbstractAdapter implements AdapterInterface, EventsCapableInterfa
             $result = $this->internalGetItem($args['key'], $args['options'], $args['success'], $args['casToken']);
             return $this->triggerPost(__FUNCTION__, $args, $result);
         } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
+            $result = false;
+            return $this->triggerException(__FUNCTION__, $args, $result, $e);
         }
     }
 
@@ -464,7 +466,8 @@ abstract class AbstractAdapter implements AdapterInterface, EventsCapableInterfa
             $result = $this->internalGetItems($args['keys'], $args['options']);
             return $this->triggerPost(__FUNCTION__, $args, $result);
         } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
+            $result = array();
+            return $this->triggerException(__FUNCTION__, $args, $result, $e);
         }
     }
 
@@ -536,7 +539,8 @@ abstract class AbstractAdapter implements AdapterInterface, EventsCapableInterfa
             $result = $this->internalHasItem($args['key'], $args['options']);
             return $this->triggerPost(__FUNCTION__, $args, $result);
         } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
+            $result = false;
+            return $this->triggerException(__FUNCTION__, $args, $result, $e);
         }
     }
 
@@ -601,7 +605,8 @@ abstract class AbstractAdapter implements AdapterInterface, EventsCapableInterfa
             $result = $this->internalHasItems($args['keys'], $args['options']);
             return $this->triggerPost(__FUNCTION__, $args, $result);
         } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
+            $result = array();
+            return $this->triggerException(__FUNCTION__, $args, $result, $e);
         }
     }
 
@@ -670,7 +675,8 @@ abstract class AbstractAdapter implements AdapterInterface, EventsCapableInterfa
             $result = $this->internalGetMetadata($args['key'], $args['options']);
             return $this->triggerPost(__FUNCTION__, $args, $result);
         } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
+            $result = false;
+            return $this->triggerException(__FUNCTION__, $args, $result, $e);
         }
     }
 
@@ -737,7 +743,8 @@ abstract class AbstractAdapter implements AdapterInterface, EventsCapableInterfa
             $result = $this->internalGetMetadatas($args['keys'], $args['options']);
             return $this->triggerPost(__FUNCTION__, $args, $result);
         } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
+            $result = array();
+            return $this->triggerException(__FUNCTION__, $args, $result, $e);
         }
     }
 
@@ -813,7 +820,8 @@ abstract class AbstractAdapter implements AdapterInterface, EventsCapableInterfa
             $result = $this->internalSetItem($args['key'], $args['value'], $args['options']);
             return $this->triggerPost(__FUNCTION__, $args, $result);
         } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
+            $result = false;
+            return $this->triggerException(__FUNCTION__, $args, $result, $e);
         }
     }
 
@@ -878,7 +886,8 @@ abstract class AbstractAdapter implements AdapterInterface, EventsCapableInterfa
             $result = $this->internalSetItems($args['keyValuePairs'], $args['options']);
             return $this->triggerPost(__FUNCTION__, $args, $result);
         } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
+            $result = array_keys($keyValuePairs);
+            return $this->triggerException(__FUNCTION__, $args, $result, $e);
         }
     }
 
@@ -953,7 +962,8 @@ abstract class AbstractAdapter implements AdapterInterface, EventsCapableInterfa
             $result = $this->internalAddItem($args['key'], $args['value'], $args['options']);
             return $this->triggerPost(__FUNCTION__, $args, $result);
         } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
+            $result = false;
+            return $this->triggerException(__FUNCTION__, $args, $result, $e);
         }
     }
 
@@ -1024,7 +1034,8 @@ abstract class AbstractAdapter implements AdapterInterface, EventsCapableInterfa
             $result = $this->internalAddItems($args['keyValuePairs'], $args['options']);
             return $this->triggerPost(__FUNCTION__, $args, $result);
         } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
+            $result = array_keys($keyValuePairs);
+            return $this->triggerException(__FUNCTION__, $args, $result, $e);
         }
     }
 
@@ -1099,7 +1110,8 @@ abstract class AbstractAdapter implements AdapterInterface, EventsCapableInterfa
             $result = $this->internalReplaceItem($args['key'], $args['value'], $args['options']);
             return $this->triggerPost(__FUNCTION__, $args, $result);
         } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
+            $result = false;
+            return $this->triggerException(__FUNCTION__, $args, $result, $e);
         }
     }
 
@@ -1171,7 +1183,8 @@ abstract class AbstractAdapter implements AdapterInterface, EventsCapableInterfa
             $result = $this->internalReplaceItems($args['keyValuePairs'], $args['options']);
             return $this->triggerPost(__FUNCTION__, $args, $result);
         } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
+            $result = array_keys($keyValuePairs);
+            return $this->triggerException(__FUNCTION__, $args, $result, $e);
         }
     }
 
@@ -1249,7 +1262,8 @@ abstract class AbstractAdapter implements AdapterInterface, EventsCapableInterfa
             $result = $this->internalCheckAndSetItem($args['token'], $args['key'], $args['value'], $args['options']);
             return $this->triggerPost(__FUNCTION__, $args, $result);
         } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
+            $result = false;
+            return $this->triggerException(__FUNCTION__, $args, $result, $e);
         }
     }
 
@@ -1323,7 +1337,8 @@ abstract class AbstractAdapter implements AdapterInterface, EventsCapableInterfa
             $result = $this->internalTouchItem($args['key'], $args['options']);
             return $this->triggerPost(__FUNCTION__, $args, $result);
         } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
+            $result = false;
+            return $this->triggerException(__FUNCTION__, $args, $result, $e);
         }
     }
 
@@ -1400,7 +1415,7 @@ abstract class AbstractAdapter implements AdapterInterface, EventsCapableInterfa
             $result = $this->internalTouchItems($args['keys'], $args['options']);
             return $this->triggerPost(__FUNCTION__, $args, $result);
         } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
+            return $this->triggerException(__FUNCTION__, $args, $keys, $e);
         }
     }
 
@@ -1467,7 +1482,8 @@ abstract class AbstractAdapter implements AdapterInterface, EventsCapableInterfa
             $result = $this->internalRemoveItem($args['key'], $args['options']);
             return $this->triggerPost(__FUNCTION__, $args, $result);
         } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
+            $result = false;
+            return $this->triggerException(__FUNCTION__, $args, $result, $e);
         }
     }
 
@@ -1523,7 +1539,7 @@ abstract class AbstractAdapter implements AdapterInterface, EventsCapableInterfa
             $result = $this->internalRemoveItems($args['keys'], $args['options']);
             return $this->triggerPost(__FUNCTION__, $args, $result);
         } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
+            return $this->triggerException(__FUNCTION__, $args, $keys, $e);
         }
     }
 
@@ -1592,7 +1608,8 @@ abstract class AbstractAdapter implements AdapterInterface, EventsCapableInterfa
             $result = $this->internalIncrementItem($args['key'], $args['value'], $args['options']);
             return $this->triggerPost(__FUNCTION__, $args, $result);
         } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
+            $result = false;
+            return $this->triggerException(__FUNCTION__, $args, $result, $e);
         }
     }
 
@@ -1667,7 +1684,8 @@ abstract class AbstractAdapter implements AdapterInterface, EventsCapableInterfa
             $result = $this->internalIncrementItems($args['keyValuePairs'], $args['options']);
             return $this->triggerPost(__FUNCTION__, $args, $result);
         } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
+            $result = array();
+            return $this->triggerException(__FUNCTION__, $args, $result, $e);
         }
     }
 
@@ -1739,7 +1757,8 @@ abstract class AbstractAdapter implements AdapterInterface, EventsCapableInterfa
             $result = $this->internalDecrementItem($args['key'], $args['value'], $args['options']);
             return $this->triggerPost(__FUNCTION__, $args, $result);
         } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
+            $result = false;
+            return $this->triggerException(__FUNCTION__, $args, $result, $e);
         }
     }
 
@@ -1814,7 +1833,8 @@ abstract class AbstractAdapter implements AdapterInterface, EventsCapableInterfa
             $result = $this->internalDecrementItems($args['keyValuePairs'], $args['options']);
             return $this->triggerPost(__FUNCTION__, $args, $result);
         } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
+            $result = array();
+            return $this->triggerException(__FUNCTION__, $args, $result, $e);
         }
     }
 
@@ -1898,7 +1918,8 @@ abstract class AbstractAdapter implements AdapterInterface, EventsCapableInterfa
             $result = $this->internalGetDelayed($args['keys'], $args['options']);
             return $this->triggerPost(__FUNCTION__, $args, $result);
         } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
+            $result = false;
+            return $this->triggerException(__FUNCTION__, $args, $result, $e);
         }
     }
 
@@ -1995,7 +2016,8 @@ abstract class AbstractAdapter implements AdapterInterface, EventsCapableInterfa
             $result = $this->internalFind($args['mode'], $args['options']);
             return $this->triggerPost(__FUNCTION__, $args, $result);
         } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
+            $result = false;
+            return $this->triggerException(__FUNCTION__, $args, $result, $e);
         }
     }
 
@@ -2047,7 +2069,8 @@ abstract class AbstractAdapter implements AdapterInterface, EventsCapableInterfa
             $result = $this->internalFetch();
             return $this->triggerPost(__FUNCTION__, $args, $result);
         } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
+            $result = false;
+            return $this->triggerException(__FUNCTION__, $args, $result, $e);
         }
     }
 
@@ -2138,7 +2161,8 @@ abstract class AbstractAdapter implements AdapterInterface, EventsCapableInterfa
             $result = $this->internalFetchAll();
             return $this->triggerPost(__FUNCTION__, $args, $result);
         } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
+            $result = array();
+            return $this->triggerException(__FUNCTION__, $args, $result, $e);
         }
     }
 
@@ -2201,7 +2225,8 @@ abstract class AbstractAdapter implements AdapterInterface, EventsCapableInterfa
             $result = $this->internalClear($args['mode'], $args['options']);
             return $this->triggerPost(__FUNCTION__, $args, $result);
         } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
+            $result = false;
+            return $this->triggerException(__FUNCTION__, $args, $result, $e);
         }
     }
 
@@ -2270,7 +2295,8 @@ abstract class AbstractAdapter implements AdapterInterface, EventsCapableInterfa
             $result = $this->internalClearByNamespace($args['mode'], $args['options']);
             return $this->triggerPost(__FUNCTION__, $args, $result);
         } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
+            $result = false;
+            return $this->triggerException(__FUNCTION__, $args, $result, $e);
         }
     }
 
@@ -2332,7 +2358,8 @@ abstract class AbstractAdapter implements AdapterInterface, EventsCapableInterfa
             $result = $this->internalOptimize($args['options']);
             return $this->triggerPost(__FUNCTION__, $args, $result);
         } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
+            $result = false;
+            return $this->triggerException(__FUNCTION__, $args, $result, $e);
         }
     }
 
@@ -2375,7 +2402,8 @@ abstract class AbstractAdapter implements AdapterInterface, EventsCapableInterfa
             $result = $this->internalGetCapabilities();
             return $this->triggerPost(__FUNCTION__, $args, $result);
         } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
+            $result = false;
+            return $this->triggerException(__FUNCTION__, $args, $result, $e);
         }
     }
 
@@ -2420,7 +2448,8 @@ abstract class AbstractAdapter implements AdapterInterface, EventsCapableInterfa
             $result = $this->internalGetCapacity($args['options']);
             return $this->triggerPost(__FUNCTION__, $args, $result);
         } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
+            $result = false;
+            return $this->triggerException(__FUNCTION__, $args, $result, $e);
         }
     }
 

@@ -31,7 +31,7 @@ use ArrayObject,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ExceptionEvent extends Event
+class ExceptionEvent extends PostEvent
 {
     /**
      * The exception to be thrown
@@ -48,27 +48,20 @@ class ExceptionEvent extends Event
     protected $throwException = true;
 
     /**
-     * The result/return value
-     * if the exception shouldn't throw
-     *
-     * @var mixed
-     */
-    protected $result = false;
-
-    /**
      * Constructor
      *
      * Accept a target and its parameters.
      *
-     * @param  string $name Event name
-     * @param  Adapter $storage
+     * @param  string      $name
+     * @param  Adapter     $storage
      * @param  ArrayObject $params
-     * @param  Exception $exception
+     * @param  mixed       $result
+     * @param  Exception   $exception
      * @return void
      */
-    public function __construct($name, Adapter\AdapterInterface $storage, ArrayObject $params, Exception $exception)
+    public function __construct($name, Adapter\AdapterInterface $storage, ArrayObject $params, & $result, Exception $exception)
     {
-        parent::__construct($name, $storage, $params);
+        parent::__construct($name, $storage, $params, $result);
         $this->setException($exception);
     }
 
@@ -114,27 +107,5 @@ class ExceptionEvent extends Event
     public function getThrowException()
     {
         return $this->throwException;
-    }
-
-    /**
-     * Set the result/return value
-     *
-     * @param  mixed $value
-     * @return ExceptionEvent
-     */
-    public function setResult(&$value)
-    {
-        $this->result = & $value;
-        return $this;
-    }
-
-    /**
-     * Get the result/return value
-     *
-     * @return mixed
-     */
-    public function & getResult()
-    {
-        return $this->result;
     }
 }

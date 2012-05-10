@@ -26,7 +26,6 @@ use Zend\Pdf\PdfParser;
  * PDF reference object context
  * Reference context is defined by PDF parser and PDF Refernce table
  *
- * @uses       Zend\Pdf\PdfParser\DataParser
  * @category   Zend
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Internal

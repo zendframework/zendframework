@@ -29,8 +29,6 @@ namespace Zend\GData\Photos;
  * For information on submitting queries to a server, see the
  * service class, Zend_Gdata_Photos.
  *
- * @uses       \Zend\GData\App\InvalidArgumentException
- * @uses       \Zend\GData\Photos\AlbumQuery
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Photos

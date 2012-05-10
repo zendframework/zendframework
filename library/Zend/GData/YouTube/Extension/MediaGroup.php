@@ -27,15 +27,6 @@ namespace Zend\GData\YouTube\Extension;
  * different representations of the same content.  When it exists,
  * it is a child of an Entry (Atom) or Item (RSS).
  *
- * @uses       \Zend\GData\Media\Extension\MediaGroup
- * @uses       \Zend\GData\YouTube
- * @uses       \Zend\GData\YouTube\Extension\Duration
- * @uses       \Zend\GData\YouTube\Extension\MediaContent
- * @uses       \Zend\GData\YouTube\Extension\MediaCredit
- * @uses       \Zend\GData\YouTube\Extension\MediaRating
- * @uses       \Zend\GData\YouTube\Extension\Private
- * @uses       \Zend\GData\YouTube\Extension\Uploaded
- * @uses       \Zend\GData\YouTube\Extension\VideoId
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage YouTube

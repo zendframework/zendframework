@@ -28,10 +28,6 @@ use Zend\Queue\Queue,
 /**
  * Class testing.  No supported functions.  Also used to disable a Zend_Queue.
  *
- * @uses       \Zend\Queue\Adapter\AdapterAbstract
- * @uses       \Zend\Queue\Queue
- * @uses       \Zend\Queue\Exception
- * @uses       \Zend\Queue\Message
  * @category   Zend
  * @package    Zend_Queue
  * @subpackage Adapter

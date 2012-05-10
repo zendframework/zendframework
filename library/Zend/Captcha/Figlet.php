@@ -28,8 +28,6 @@ use Zend\View\Renderer\RendererInterface as Renderer;
  *
  * Note that this engine seems not to like numbers
  *
- * @uses       Zend\Captcha\Word
- * @uses       Zend\Text\Figlet\Figlet
  * @category   Zend
  * @package    Zend_Captcha
  * @subpackage Adapter

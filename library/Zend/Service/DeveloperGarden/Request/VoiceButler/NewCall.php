@@ -20,7 +20,6 @@
  */
 
 /**
- * @uses       Zend_Service_DeveloperGarden_VoiceButler_AbstractVoiceButler
  * @category   Zend
  * @package    Zend_Service
  * @subpackage DeveloperGarden

@@ -26,9 +26,6 @@ use Zend\Json\Exception\RecursionException,
 /**
  * Encode PHP constructs to JSON
  *
- * @uses       ReflectionClass
- * @uses       Zend\Json\Exception\RecursionException
- * @uses       Zend\Json\Exception\InvalidArgumentException
  * @category   Zend
  * @package    Zend_Json
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

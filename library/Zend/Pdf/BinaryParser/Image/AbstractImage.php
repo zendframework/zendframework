@@ -25,8 +25,6 @@ use Zend\Pdf\BinaryParser;
 /**
  * \Zend\Pdf\Image related file parsers abstract class.
  *
- * @uses       \Zend\Pdf\BinaryParser\AbstractBinaryParser
- * @uses       \Zend\Pdf\Image
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Image
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

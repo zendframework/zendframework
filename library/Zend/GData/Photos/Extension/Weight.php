@@ -26,8 +26,6 @@ namespace Zend\GData\Photos\Extension;
  * This indicates the weight of a tag, based on the number of times
  * it appears in photos under the current element.
  *
- * @uses       \Zend\GData\Extension
- * @uses       \Zend\GData\Photos
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Photos

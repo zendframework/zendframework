@@ -24,7 +24,6 @@ use Zend\Measure;
 /**
  * Class for handling flow mass conversions
  *
- * @uses       Zend\Measure\AbstractMeasure
  * @category   Zend
  * @package    Zend_Measure
  * @subpackage Zend_Measure_Flow

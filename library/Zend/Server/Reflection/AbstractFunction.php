@@ -31,14 +31,6 @@ namespace Zend\Server\Reflection;
  * method invocation arguments, and retrieving the
  * method {@link \Zend\Server\Reflection\Prototype prototypes}.
  *
- * @uses       ReflectionClass
- * @uses       ReflectionFunction
- * @uses       ReflectionMethod
- * @uses       \Zend\Server\Reflection\Exception
- * @uses       \Zend\Server\Reflection\Node
- * @uses       \Zend\Server\Reflection\ReflectionParameter
- * @uses       \Zend\Server\Reflection\Prototype
- * @uses       \Zend\Server\Reflection\ReflectionReturnValue
  * @category   Zend
  * @package    Zend_Server
  * @subpackage Zend_Server_Reflection

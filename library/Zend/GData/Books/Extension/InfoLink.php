@@ -23,8 +23,6 @@ namespace Zend\GData\Books\Extension;
 /**
  * Describes an info link
  *
- * @uses       \Zend\GData\Books
- * @uses       \Zend\GData\Books\Extension\BooksLink
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Books

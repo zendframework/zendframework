@@ -26,7 +26,6 @@ use Zend\GData\Extension;
 /**
  * Data model class to represent an attendee's status (gd:attendeeStatus)
  *
- * @uses       \Zend\GData\Extension
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Gdata

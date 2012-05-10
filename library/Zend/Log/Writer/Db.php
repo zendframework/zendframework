@@ -26,9 +26,6 @@ use Zend\Log\Formatter,
     Zend\Db\Adapter\Adapter;
 
 /**
- * @uses       \Zend\Log\Exception\InvalidArgumentException
- * @uses       \Zend\Log\Exception\RuntimeException
- * @uses       \Zend\Log\Writer\AbstractWriter
  * @category   Zend
  * @package    Zend_Log
  * @subpackage Writer

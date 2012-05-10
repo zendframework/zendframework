@@ -21,9 +21,6 @@
 namespace Zend\Feed\Writer\Renderer\Feed\Atom;
 
 /**
- * @uses       DOMDocument
- * @uses       \Zend\Feed\Writer\Renderer\Feed\Atom\AbstractAtom
- * @uses       \Zend\Feed\Writer\Renderer
  * @category   Zend
  * @package    Zend_Feed_Writer
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

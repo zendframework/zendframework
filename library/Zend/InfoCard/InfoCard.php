@@ -21,14 +21,6 @@
 namespace Zend\InfoCard;
 
 /**
- * @uses       \Zend\InfoCard\Adapter\Default
- * @uses       \Zend\InfoCard\Adapter
- * @uses       \Zend\InfoCard\Claims
- * @uses       \Zend\InfoCard\Exception
- * @uses       \Zend\InfoCard\XML\Assertion\Factory
- * @uses       Zend_InfoCard_Xml_Cipher
- * @uses       \Zend\InfoCard\XML\EncryptedData\Factory
- * @uses       \Zend\InfoCard\XML\Security
  * @category   Zend
  * @package    Zend_InfoCard
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

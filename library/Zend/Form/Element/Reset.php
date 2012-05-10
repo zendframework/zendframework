@@ -24,7 +24,6 @@ namespace Zend\Form\Element;
 /**
  * Reset form element
  *
- * @uses       \Zend\Form\Element\Submit
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Element

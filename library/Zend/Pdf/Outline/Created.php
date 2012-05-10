@@ -33,14 +33,6 @@ use Zend\Pdf\ObjectFactory;
  *
  * @todo Implement an ability to associate an outline item with a structure element (PDF 1.3 feature)
  *
- * @uses       SplObjectStorage
- * @uses       \Zend\Pdf\Action
- * @uses       \Zend\Pdf\Destination
- * @uses       \Zend\Pdf\InternalType
- * @uses       \Zend\Pdf\InternalStructure
- * @uses       \Zend\Pdf\Exception
- * @uses       \Zend\Pdf\ObjectFactory
- * @uses       \Zend\Pdf\Outline\AbstractOutline
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Outline
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

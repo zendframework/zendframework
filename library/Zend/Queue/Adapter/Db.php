@@ -31,15 +31,6 @@ use Zend\Queue\Queue,
 /**
  * Class for using connecting to a Zend_DB-based queuing system
  *
- * @uses       \Zend\Db\Db
- * @uses       \Zend\Db\Expr
- * @uses       \Zend\Db\Select
- * @uses       \Zend\Db\Adapter\AbstractAdapter
- * @uses       \Zend\Db\Table\AbstractRow
- * @uses       \Zend\Queue\Adapter\AdapterAbstract
- * @uses       \Zend\Queue\Adapter\Db\Message
- * @uses       \Zend\Queue\Adapter\Db\Queue
- * @uses       \Zend\Queue\Exception
  * @category   Zend
  * @package    Zend_Queue
  * @subpackage Adapter

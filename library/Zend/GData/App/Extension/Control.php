@@ -26,8 +26,6 @@ use Zend\GData\App\Extension;
 /**
  * Represents the app:control element
  *
- * @uses       \Zend\GData\App\Extension
- * @uses       \Zend\GData\App\Extension\Draft
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage App

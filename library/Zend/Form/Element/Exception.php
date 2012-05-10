@@ -23,7 +23,6 @@
 namespace Zend\Form\Element;
 
 /**
- * @uses       \Zend\Form\Exception
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Element

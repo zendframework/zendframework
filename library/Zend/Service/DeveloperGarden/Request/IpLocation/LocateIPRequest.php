@@ -20,9 +20,6 @@
  */
 
 /**
- * @uses       Zend_Service_DeveloperGarden_IpLocation_IpAddress
- * @uses       Zend_Service_DeveloperGarden_Request_AbstractRequest
- * @uses       Zend_Service_DeveloperGarden_Request_Exception
  * @category   Zend
  * @package    Zend_Service
  * @subpackage DeveloperGarden

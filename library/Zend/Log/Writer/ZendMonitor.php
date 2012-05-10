@@ -22,7 +22,6 @@
 namespace Zend\Log\Writer;
 
 /**
- * @uses       \Zend\Log\Writer\AbstractWriter
  * @category   Zend
  * @package    Zend_Log
  * @subpackage Writer

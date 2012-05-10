@@ -30,7 +30,6 @@ namespace Zend\Amf\Value\Messaging;
  *
  * Note: THESE VALUES MUST BE THE SAME ON CLIENT AND SERVER
  *
- * @uses       \Zend\Amf\Value\Messaging\AsyncMessage
  * @package    Zend_Amf
  * @subpackage Value
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

@@ -31,7 +31,6 @@ use Zend\Form,
  *
  * Any options passed will be used as HTML attributes of the ul tag for the errors.
  *
- * @uses       \Zend\Form\Decorator\AbstractDecorator
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Decorator

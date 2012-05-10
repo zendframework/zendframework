@@ -32,16 +32,6 @@ use Zend\GData\Photos;
  *
  * This class represents <atom:entry> in the Google Data protocol.
  *
- * @uses       \Zend\GData\App\Extension\Category
- * @uses       \Zend\GData\Entry
- * @uses       \Zend\GData\GApps
- * @uses       \Zend\GData\Photos
- * @uses       \Zend\GData\Photos\Extension\MaxPhotosPerAlbum
- * @uses       \Zend\GData\Photos\Extension\Nickname
- * @uses       \Zend\GData\Photos\Extension\QuotaCurrent
- * @uses       \Zend\GData\Photos\Extension\QuotaLimit
- * @uses       \Zend\GData\Photos\Extension\Thumbnail
- * @uses       \Zend\GData\Photos\Extension\User
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Photos

@@ -29,23 +29,6 @@ use Zend\GData\YouTube,
 /**
  * Represents the YouTube video flavor of an Atom entry
  *
- * @uses       \Zend\GData\App\Exception
- * @uses       \Zend\GData\App\InvalidArgumentException
- * @uses       \Zend\GData\App\VersionException
- * @uses       \Zend\GData\Extension\Comments
- * @uses       \Zend\GData\Extension\FeedLink
- * @uses       \Zend\GData\Extension\Rating
- * @uses       \Zend\GData\Geo\Extension\GeoRssWhere
- * @uses       \Zend\GData\YouTube
- * @uses       \Zend\GData\YouTube\Extension\Control
- * @uses       \Zend\GData\YouTube\Extension\Link
- * @uses       \Zend\GData\YouTube\Extension\Location
- * @uses       \Zend\GData\YouTube\Extension\MediaGroup
- * @uses       \Zend\GData\YouTube\Extension\NoEmbed
- * @uses       \Zend\GData\YouTube\Extension\Racy
- * @uses       \Zend\GData\YouTube\Extension\Recorded
- * @uses       \Zend\GData\YouTube\Extension\Statistics
- * @uses       \Zend\GData\YouTube\MediaEntry
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage YouTube

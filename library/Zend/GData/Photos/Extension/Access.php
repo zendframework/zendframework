@@ -26,8 +26,6 @@ namespace Zend\GData\Photos\Extension;
  * This determines the visibility for an album, and can be either
  * the strings 'private' or 'public'.
  *
- * @uses       \Zend\GData\Extension
- * @uses       \Zend\GData\Photos
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Photos

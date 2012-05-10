@@ -41,8 +41,6 @@ namespace Zend\Form\Decorator;
  * Any options other than separator, placement, and viewScript are passed to
  * the partial as local variables.
  *
- * @uses       \Zend\Form\Decorator\AbstractDecorator
- * @uses       \Zend\Form\Decorator\Exception
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Decorator

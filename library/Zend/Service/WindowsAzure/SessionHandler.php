@@ -20,9 +20,6 @@
  */
 
 /**
- * @uses       Zend_Service_WindowsAzure_Exception
- * @uses       Zend_Service_WindowsAzure_Storage_DynamicTableEntity
- * @uses       Zend_Service_WindowsAzure_Storage_Table
  * @category   Zend
  * @package    Zend_Service_WindowsAzure
  * @subpackage Session

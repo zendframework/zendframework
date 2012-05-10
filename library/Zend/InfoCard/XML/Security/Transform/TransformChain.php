@@ -28,8 +28,6 @@ use Zend\InfoCard\XML\Security\Transform,
  * A class to create a transform rule set based on XML URIs and then apply those rules
  * in the correct order to a given XML input
  *
- * @uses       \Zend\InfoCard\XML\Security\Exception
- * @uses       \Zend\Loader
  * @category   Zend
  * @package    Zend_InfoCard
  * @subpackage Zend_InfoCard_Xml_Security

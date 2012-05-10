@@ -25,8 +25,6 @@ use Countable,
 /**
  * Class for connecting to queues performing common operations.
  *
- * @uses       \Zend\Queue\Adapter\Null
- * @uses       \Zend\Queue\Exception
  * @category   Zend
  * @package    Zend_Queue
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

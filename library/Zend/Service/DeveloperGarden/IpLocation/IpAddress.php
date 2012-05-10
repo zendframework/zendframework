@@ -20,8 +20,6 @@
  */
 
 /**
- * @uses       Zend\Validator\Ip
- * @uses       Zend_Service_DeveloperGarden_Exception
  * @category   Zend
  * @package    Zend_Service
  * @subpackage DeveloperGarden

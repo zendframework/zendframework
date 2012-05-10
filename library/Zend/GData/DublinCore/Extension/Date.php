@@ -25,8 +25,6 @@ namespace Zend\GData\DublinCore\Extension;
  * Point or period of time associated with an event in the lifecycle of the
  * resource
  *
- * @uses       \Zend\GData\DublinCore
- * @uses       \Zend\GData\Extension
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage DublinCore

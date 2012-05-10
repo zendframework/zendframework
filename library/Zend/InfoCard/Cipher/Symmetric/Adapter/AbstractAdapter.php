@@ -22,7 +22,6 @@
 namespace Zend\InfoCard\Cipher\Symmetric\Adapter;
 
 /**
- * @uses       \Zend\InfoCard\Cipher\Symmetric
  * @category   Zend
  * @package    Zend_InfoCard
  * @subpackage Zend_InfoCard_Cipher

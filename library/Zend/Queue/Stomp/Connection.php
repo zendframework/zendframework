@@ -26,8 +26,6 @@ use Zend\Queue\Exception;
 /**
  * The Stomp client interacts with a Stomp server.
  *
- * @uses       \Zend\Queue\Exception
- * @uses       \Zend\Queue\Stomp\StompConnection
  * @category   Zend
  * @package    Zend_Queue
  * @subpackage Stomp

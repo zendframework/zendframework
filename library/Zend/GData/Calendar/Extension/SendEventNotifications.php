@@ -24,8 +24,6 @@ namespace Zend\GData\Calendar\Extension;
 /**
  * Data model class to represent an entry's sendEventNotifications
  *
- * @uses       \Zend\GData\Calendar
- * @uses       \Zend\GData\Extension
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Calendar

@@ -27,7 +27,6 @@ use Zend\Service\Amazon,
  * An Amazon EC2 interface to create, describe, attach, detach and delete Elastic Block
  * Storage Volumes and Snaphsots.
  *
- * @uses       Zend_Service_Amazon_Ec2_Abstract
  * @category   Zend
  * @package    Zend_Service_Amazon
  * @subpackage Ec2

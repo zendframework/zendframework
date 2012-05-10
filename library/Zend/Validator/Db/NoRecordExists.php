@@ -25,7 +25,6 @@ use Zend\Validator\Exception;
 /**
  * Confirms a record does not exist in a table.
  *
- * @uses       \Zend\Validator\Db\AbstractDb
  * @category   Zend
  * @package    Zend_Validate
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

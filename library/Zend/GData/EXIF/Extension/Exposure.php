@@ -24,8 +24,6 @@ namespace Zend\GData\EXIF\Extension;
 /**
  * Represents the exif:exposure element used by the Gdata Exif extensions.
  *
- * @uses       \Zend\GData\EXIF
- * @uses       \Zend\GData\Extension
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Exif

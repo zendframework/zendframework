@@ -24,8 +24,6 @@ namespace Zend\Queue;
 /**
  * Interface for common queue operations
  *
- * @uses       \Zend\Queue\Queue
- * @uses       \Zend\Queue\Message
  * @category   Zend
  * @package    Zend_Queue
  * @subpackage Adapter

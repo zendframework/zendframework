@@ -24,9 +24,6 @@ use Zend\TimeSync\Exception;
 /**
  * NTP Protocol handling class
  *
- * @uses      \Zend\TimeSync\TimeSync
- * @uses      \Zend\TimeSync\Exception
- * @uses      \Zend\TimeSync\Protocol
  * @category  Zend
  * @package   Zend_TimeSync
  * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

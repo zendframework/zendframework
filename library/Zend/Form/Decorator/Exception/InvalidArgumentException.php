@@ -23,8 +23,6 @@
 namespace Zend\Form\Decorator\Exception;
 
 /**
- * @uses       Zend\Form\Decorator\Exception
- * @uses       \InvalidArgumentException
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Element

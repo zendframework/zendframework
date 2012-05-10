@@ -24,7 +24,6 @@ namespace Zend\Form\Element;
 /**
  * Multiselect form element
  *
- * @uses       \Zend\Form\Element\Select
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Element

@@ -29,12 +29,6 @@ use ZendAPI_Job,
 /**
  * Zend Platform JobQueue adapter
  *
- * @uses       \ZendAPI_Queue
- * @uses       \ZendAPI_Job
- * @uses       \Zend\Queue\Adapter\AdapterAbstract
- * @uses       \Zend\Queue\Queue
- * @uses       \Zend\Queue\Exception
- * @uses       \Zend\Queue\Message\Message
  * @category   Zend
  * @package    Zend_Queue
  * @subpackage Adapter

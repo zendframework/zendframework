@@ -23,8 +23,6 @@ use Zend\OAuth\Http,
     Zend\OAuth\Exception as OAuthException;
 
 /**
- * @uses       Zend\OAuth\Http\Utility
- * @uses       Zend\OAuth\Token\AbstractToken
  * @category   Zend
  * @package    Zend_OAuth
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

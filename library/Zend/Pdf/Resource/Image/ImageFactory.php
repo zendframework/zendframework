@@ -28,10 +28,6 @@ use Zend\Pdf;
  *
  * Helps manage the diverse set of supported image file types.
  *
- * @uses       \Zend\Pdf\Exception
- * @uses       \Zend\Pdf\Resource\Image\Jpeg
- * @uses       \Zend\Pdf\Resource\Image\Png
- * @uses       \Zend\Pdf\Resource\Image\Tiff
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Image
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

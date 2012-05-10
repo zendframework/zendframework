@@ -26,8 +26,6 @@ use Zend\GData\Extension;
 /**
  * Represents the gd:feedLink element
  *
- * @uses       \Zend\GData\Extension
- * @uses       \Zend\GData\Feed
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Gdata

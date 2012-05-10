@@ -26,8 +26,6 @@ namespace Zend\OpenId\Provider\User;
  * Class to get/store information about logged in user in Web Browser using
  * PHP session
  *
- * @uses       Zend\OpenId\Provider\User\AbstractUser
- * @uses       Zend\Session\Container
  * @category   Zend
  * @package    Zend_OpenId
  * @subpackage Zend_OpenId_Provider

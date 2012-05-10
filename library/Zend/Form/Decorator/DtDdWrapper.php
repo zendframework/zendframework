@@ -27,7 +27,6 @@ namespace Zend\Form\Decorator;
  * Creates an empty <dt> item, and wraps the content in a <dd>. Used as a
  * default decorator for subforms and display groups.
  *
- * @uses       \Zend\Form\Decorator\AbstractDecorator
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Decorator

@@ -27,9 +27,6 @@ use Zend\Json\Server\Smd,
  * Create Service Mapping Description for a method
  *
  * @todo       Revised method regex to allow NS; however, should SMD be revised to strip PHP NS instead when attaching functions?
- * @uses       Zend\Json\Json
- * @uses       Zend\Json\Server\Exception\InvalidArgumentException
- * @uses       Zend\Json\Server\Smd\Smd
  * @package    Zend_Json
  * @subpackage Server
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

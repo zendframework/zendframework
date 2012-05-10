@@ -27,9 +27,6 @@ use Zend\GData\App;
  *
  * @link http://code.google.com/apis/gdata/spreadsheets/
  *
- * @uses       \Zend\GData\App\Exception
- * @uses       \Zend\GData\App\Util
- * @uses       \Zend\GData\Query
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Spreadsheets

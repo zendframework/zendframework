@@ -24,8 +24,6 @@ namespace Zend\XmlRpc\Generator;
 /**
  * DOMDocument based implementation of a XML/RPC generator
  *
- * @uses       DOMDocument
- * @uses       Zend\XmlRpc\Generator\AbstractGenerator
  * @category   Zend
  * @package    Zend_XmlRpc
  * @subpackage Generator

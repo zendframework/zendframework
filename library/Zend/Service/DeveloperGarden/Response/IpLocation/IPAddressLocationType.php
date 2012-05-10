@@ -20,10 +20,6 @@
  */
 
 /**
- * @uses       Zend_Service_DeveloperGarden_Response_BaseType
- * @uses       Zend_Service_DeveloperGarden_Response_IpLocation_CityType
- * @uses       Zend_Service_DeveloperGarden_Response_IpLocation_GeoCoordinatesType
- * @uses       Zend_Service_DeveloperGarden_Response_IpLocation_RegionType
  * @category   Zend
  * @package    Zend_Service
  * @subpackage DeveloperGarden

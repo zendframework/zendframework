@@ -24,8 +24,6 @@ namespace Zend\GData\YouTube\Extension;
 /**
  * Represents the yt:status element
  *
- * @uses       \Zend\GData\Extension
- * @uses       \Zend\GData\YouTube
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage YouTube

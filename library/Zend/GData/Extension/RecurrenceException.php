@@ -26,9 +26,6 @@ use Zend\GData\Extension;
 /**
  * Data model class to represent an entry's recurrenceException
  *
- * @uses       \Zend\GData\Extension
- * @uses       \Zend\GData\Extension\EntryLink
- * @uses       \Zend\GData\Extension\OriginalEvent
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Gdata

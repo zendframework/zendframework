@@ -27,8 +27,6 @@ use Zend\Pdf;
  * Concrete subclass of {@link \Zend\Pdf\BinaryParser\DataSource\AbstractDataSource}
  * that provides an interface to binary strings.
  *
- * @uses       \Zend\Pdf\Exception
- * @uses       \Zend\Pdf\BinaryParser\DataSource\AbstractDataSource
  * @package    Zend_PDF
  * @subpackage Zend_PDF_BinaryParser
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

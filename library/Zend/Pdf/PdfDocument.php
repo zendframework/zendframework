@@ -33,21 +33,6 @@ use Zend\Memory;
  * Class agregates document level properties and entities (pages, bookmarks,
  * document level actions, attachments, form object, etc)
  *
- * @uses       \Zend\Memory\MemoryManager
- * @uses       \Zend\Pdf\Color
- * @uses       \Zend\Pdf\Exception
- * @uses       \Zend\Pdf\Font
- * @uses       \Zend\Pdf\Image
- * @uses       \Zend\Pdf\InternalStructure
- * @uses       \Zend\Pdf\InternalType
- * @uses       \Zend\Pdf\ObjectFactory
- * @uses       \Zend\Pdf\Outline
- * @uses       \Zend\Pdf\Page
- * @uses       \Zend\Pdf\PdfParser\StructureParser
- * @uses       \Zend\Pdf\Resource\Font\Extracted
- * @uses       \Zend\Pdf\Style
- * @uses       \Zend\Pdf\Trailer
- * @uses       \Zend\Pdf\Util
  * @category   Zend
  * @package    Zend_PDF
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

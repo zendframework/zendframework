@@ -25,8 +25,6 @@ namespace Zend\GData\Photos\Extension;
  * Represents the gphoto:position element used by the API.
  * The ordinal position of a photo within an album.
  *
- * @uses       \Zend\GData\Extension
- * @uses       \Zend\GData\Photos
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Photos

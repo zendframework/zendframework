@@ -20,7 +20,6 @@
  */
 
 /**
- * @uses       Zend_Service_WindowsAzure_Exception
  * @category   Zend
  * @package    Zend_Service_WindowsAzure
  * @subpackage Storage

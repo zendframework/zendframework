@@ -24,7 +24,6 @@ namespace Zend\XmlRpc\Server\Exception;
 /**
  * Zend_XmlRpc_Server_Exception
  *
- * @uses       Zend\XmlRpc\Exception\ExceptionInterface
  * @category   Zend
  * @package    Zend_XmlRpc
  * @subpackage Server

@@ -30,11 +30,6 @@ use Zend\Amf\Parser\AbstractDeserializer,
  * @todo       readObject to handle Typed Objects
  * @todo       readXMLStrimg to be implemented.
  * @todo       Class could be implemented as Factory Class with each data type it's own class.
- * @uses       Zend\Amf\Constants
- * @uses       Zend\Amf\Exception
- * @uses       Zend\Amf\Parser\Deserializer
- * @uses       Zend\Amf\Parser\TypeLoader
- * @uses       Zend\Date\Date
  * @package    Zend_Amf
  * @subpackage Parse_Amf3
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

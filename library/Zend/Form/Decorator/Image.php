@@ -31,8 +31,6 @@ namespace Zend\Form\Decorator;
  *
  * Any other options passed will be used as HTML attributes of the image tag.
  *
- * @uses       \Zend\Form\Decorator\AbstractDecorator
- * @uses       \Zend\Form\Decorator\HtmlTag;
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Decorator

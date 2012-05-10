@@ -28,7 +28,6 @@ use Zend\Form\Decorator\AbstractDecorator;
  *
  * Adds hidden field for ID and text input field for captcha text
  *
- * @uses       \Zend\Form\Decorator\AbstractDecorator
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Element

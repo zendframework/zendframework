@@ -22,7 +22,6 @@
 namespace Zend\InfoCard\Cipher\Symmetric;
 
 /**
- * @uses       \Zend\InfoCard\Cipher\Symmetric\AES256CBC
  * @category   Zend
  * @package    Zend_InfoCard
  * @subpackage Zend_InfoCard_Cipher

@@ -27,8 +27,6 @@ use Zend\Locale\Math;
  *
  * This class can only handle numbers without precision
  *
- * @uses       Zend\Locale
- * @uses       Zend\Locale\Math
  * @category   Zend
  * @package    Zend_Measure
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

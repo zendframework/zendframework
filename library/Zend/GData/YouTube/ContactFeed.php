@@ -28,9 +28,6 @@ use Zend\GData\YouTube;
  * Represents a list of individual contacts, where each contained entry is
  * a contact.
  *
- * @uses       \Zend\GData\Media\Feed
- * @uses       \Zend\GData\YouTube
- * @uses       \Zend\GData\YouTube\ContactEntry
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage YouTube

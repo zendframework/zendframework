@@ -26,9 +26,6 @@ use Zend\Loader,
 /**
  * Validator for the sha1 hash of given files
  *
- * @uses      \Zend\Loader
- * @uses      \Zend\Validator\Exception
- * @uses      \Zend\Validator\File\Hash
  * @category  Zend
  * @package   Zend_Validate
  * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

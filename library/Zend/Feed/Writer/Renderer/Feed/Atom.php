@@ -23,15 +23,6 @@ use Zend\Feed\Writer\Renderer;
 use Zend\Feed\Writer;
 
 /**
-* @uses DOMDocument
-* @uses \Zend\Feed\Writer\Writer
-* @uses \Zend\Feed\Writer\Feed\Feed
-* @uses \Zend\Feed\Writer\Renderer\Entry\Atom\Atom
-* @uses \Zend\Feed\Writer\Renderer\Entry\Atom\Deleted
-* @uses \Zend\Feed\Writer\Renderer\Feed\Atom\AtomAbstract
-* @uses \Zend\Feed\Writer\Renderer\RendererAbstract
-* @uses \Zend\Feed\Writer\Renderer\RendererInterface
-* @uses \Zend\Version
 * @category Zend
 * @package Zend_Feed_Writer
 * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

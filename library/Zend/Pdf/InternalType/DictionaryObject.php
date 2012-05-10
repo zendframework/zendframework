@@ -26,9 +26,6 @@ use Zend\Pdf;
 /**
  * PDF file 'dictionary' element implementation
  *
- * @uses       \Zend\Pdf\InternalType\AbstractTypeObject
- * @uses       \Zend\Pdf\InternalType\NameObject
- * @uses       \Zend\Pdf\Exception
  * @category   Zend
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Internal

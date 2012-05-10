@@ -24,11 +24,6 @@ use Zend\Http\Client as HttpClient;
 use Zend\Http\Request as HttpRequest;
 
 /**
- * @uses       Zend\Http\Client
- * @uses       Zend\OAuth\OAuth
- * @uses       Zend\OAuth\Config\StandardConfig
- * @uses       Zend\OAuth\Exception
- * @uses       Zend\OAuth\Http\Utility
  * @category   Zend
  * @package    Zend_OAuth
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

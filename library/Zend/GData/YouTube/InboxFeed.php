@@ -28,9 +28,6 @@ use Zend\GData\YouTube;
  * Represents a list of individual inbox entries, where each contained entry is
  * a message.
  *
- * @uses       \Zend\GData\Media\Feed
- * @uses       \Zend\GData\YouTube
- * @uses       \Zend\GData\YouTube\InboxEntry
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage YouTube

@@ -26,7 +26,6 @@ namespace Zend\Validator\Sitemap;
  *
  * @link       http://www.sitemaps.org/protocol.php Sitemaps XML format
  *
- * @uses       \Zend\Validator\AbstractValidator
  * @category   Zend
  * @package    Zend_Validate
  * @subpackage Sitemap

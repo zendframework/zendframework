@@ -24,8 +24,6 @@ namespace Zend\GData\App;
 /**
  * Utility class for static functions needed by \Zend\Gdata\App
  *
- * @uses       \Zend\GData\App\Exception
- * @uses       \Zend\GData\App\InvalidArgumentException
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage App

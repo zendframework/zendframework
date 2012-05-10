@@ -24,7 +24,6 @@ namespace Zend\Amf\Response;
 /**
  * Creates the proper http headers and send the serialized AMF stream to standard out.
  *
- * @uses       \Zend\Amf\Response\StreamResponse
  * @package    Zend_Amf
  * @subpackage Response
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

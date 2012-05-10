@@ -40,8 +40,6 @@ namespace Zend\Form\Decorator;
  * content. To replace the content, specify a placement of boolean false;
  * defaults to append content.
  *
- * @uses       \Zend\Form\Decorator\AbstractDecorator
- * @uses       \Zend\Form\Decorator\Exception
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Decorator

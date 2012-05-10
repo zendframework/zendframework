@@ -24,13 +24,6 @@ use Zend\Feed\Reader\Collection;
 use Zend\Date;
 
 /**
-* @uses \Zend\Date\Date
-* @uses \Zend\Feed\Reader\Exception
-* @uses \Zend\Feed\Reader\Reader
-* @uses \Zend\Feed\Reader\Collection\Author
-* @uses \Zend\Feed\Reader\Extension\Atom\Feed
-* @uses \Zend\Feed\Reader\Extension\DublinCore\Feed
-* @uses \Zend\Feed\Reader\Feed\AbstractFeed
 * @category Zend
 * @package Reader
 * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

@@ -20,8 +20,6 @@
  */
 
 /**
- * @uses       Zend_Service_WindowsAzure_RetryPolicy_AbstractRetryPolicy
- * @uses       Zend_Service_WindowsAzure_RetryPolicy_Exception
  * @category   Zend
  * @package    Zend_Service_WindowsAzure
  * @subpackage RetryPolicy

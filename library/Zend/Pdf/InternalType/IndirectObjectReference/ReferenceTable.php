@@ -26,7 +26,6 @@ use Zend\Pdf;
 /**
  * PDF file reference table
  *
- * @uses       \Zend\Pdf\Exception
  * @category   Zend
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Internal

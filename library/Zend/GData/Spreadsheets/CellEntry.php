@@ -26,9 +26,6 @@ use Zend\GData\Spreadsheets;
 /**
  * Concrete class for working with Cell entries.
  *
- * @uses       \Zend\GData\Entry
- * @uses       \Zend\GData\Spreadsheets
- * @uses       \Zend\GData\Spreadsheets\Extension\Cell
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Spreadsheets

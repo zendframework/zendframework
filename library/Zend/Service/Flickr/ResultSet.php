@@ -20,10 +20,6 @@
  */
 
 /**
- * @uses       DOMXPath
- * @uses       OutOfBoundsException
- * @uses       SeekableIterator
- * @uses       Zend_Service_Flickr_Result
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Flickr

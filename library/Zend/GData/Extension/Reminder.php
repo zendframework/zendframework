@@ -26,7 +26,6 @@ use Zend\GData\Extension;
 /**
  * Implements the gd:reminder element used to set/retrieve notifications
  *
- * @uses       \Zend\GData\Extension
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Gdata

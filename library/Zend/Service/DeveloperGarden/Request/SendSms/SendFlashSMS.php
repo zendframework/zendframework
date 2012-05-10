@@ -20,7 +20,6 @@
  */
 
 /**
- * @uses       Zend_Service_DeveloperGarden_Request_SendSms_AbstractSendSms
  * @category   Zend
  * @package    Zend_Service
  * @subpackage DeveloperGarden

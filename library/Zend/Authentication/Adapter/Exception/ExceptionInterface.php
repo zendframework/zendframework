@@ -22,7 +22,6 @@
 namespace Zend\Authentication\Adapter\Exception;
 
 /**
- * @uses       Zend\Authentication\Exception
  * @category   Zend
  * @package    Zend_Authentication
  * @subpackage Adapter_Exception

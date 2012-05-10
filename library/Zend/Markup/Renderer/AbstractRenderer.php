@@ -29,8 +29,6 @@ use Zend\Markup\Token,
 /**
  * Defines the basic rendering functionality
  *
- * @uses       \Zend\Markup\Renderer\Exception
- * @uses       \Zend\Markup\Renderer\Markup\MarkupInterface
  * @category   Zend
  * @package    Zend_Markup
  * @subpackage Renderer

@@ -24,7 +24,6 @@ namespace Zend\XmlRpc\Client\Exception;
 /**
  * Base class for all Zend_XmlRpc_Client_* exceptions
  *
- * @uses       Zend\XmlRpc\Exception\ExceptionInterface
  * @category   Zend
  * @package    Zend_XmlRpc
  * @subpackage Client

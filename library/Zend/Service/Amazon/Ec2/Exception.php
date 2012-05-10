@@ -22,7 +22,6 @@
 namespace Zend\Service\Amazon\Ec2;
 
 /**
- * @uses       \Zend\Service\Amazon\Exception
  * @category   Zend
  * @package    Zend_Service_Amazon
  * @subpackage Ec2

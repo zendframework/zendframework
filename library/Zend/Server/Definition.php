@@ -23,10 +23,6 @@ namespace Zend\Server;
 /**
  * Server methods metadata
  *
- * @uses       Countable
- * @uses       Iterator
- * @uses       \Zend\Server\Exception
- * @uses       \Zend\Server\Method\Definition
  * @category   Zend
  * @package    Zend_Server
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

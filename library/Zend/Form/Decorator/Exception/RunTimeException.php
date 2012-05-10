@@ -23,8 +23,6 @@
 namespace Zend\Form\Decorator\Exception;
 
 /**
- * @uses       Zend\Form\Decorator\Exception
- * @uses       \RunTimeException
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Element

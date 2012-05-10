@@ -24,7 +24,6 @@ namespace Zend\InfoCard;
  * Result value of the InfoCard component, contains any error messages and claims
  * from the processing of an information card.
  *
- * @uses       \Zend\InfoCard\Exception
  * @category   Zend
  * @package    Zend_InfoCard
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

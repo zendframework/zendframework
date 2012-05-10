@@ -26,8 +26,6 @@ use Zend\GData\Docs;
 /**
  * Data model for a Google Documents List feed of documents
  *
- * @uses       \Zend\GData\Docs
- * @uses       \Zend\GData\Feed
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Docs

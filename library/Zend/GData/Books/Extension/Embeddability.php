@@ -24,8 +24,6 @@ namespace Zend\GData\Books\Extension;
 /**
  * Describes an embeddability
  *
- * @uses       \Zend\GData\Books
- * @uses       \Zend\GData\Extension
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Books

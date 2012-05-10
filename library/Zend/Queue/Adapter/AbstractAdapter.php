@@ -29,10 +29,6 @@ use Zend\Queue\Adapter,
 /**
  * Class for connecting to queues performing common operations.
  *
- * @uses       \Zend\Queue\Queue
- * @uses       \Zend\Queue\Adapter
- * @uses       \Zend\Queue\Message
- * @uses       \Zend\Queue\Exception
  * @category   Zend
  * @package    Zend_Queue
  * @subpackage Adapter

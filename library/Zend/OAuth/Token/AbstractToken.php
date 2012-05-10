@@ -25,8 +25,6 @@ use Zend\Http\Response as HTTPResponse,
     Zend\OAuth\Exception as OAuthException;
 
 /**
- * @uses       Zend\Http\Response
- * @uses       Zend\OAuth\Http\Utility
  * @category   Zend
  * @package    Zend_OAuth
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

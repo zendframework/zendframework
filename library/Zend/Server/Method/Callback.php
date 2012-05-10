@@ -25,7 +25,6 @@ use Zend\Server;
 /**
  * Method callback metadata
  *
- * @uses       \Zend\Server\Exception
  * @category   Zend
  * @package    Zend_Server
  * @subpackage Zend_Server_Method

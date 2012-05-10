@@ -26,9 +26,6 @@ use Zend\GData\YouTube;
 /**
  * The YouTube video flavor of an Atom Feed with media support
  *
- * @uses       \Zend\GData\Media\Feed
- * @uses       \Zend\GData\YouTube
- * @uses       \Zend\GData\YouTube\VideoEntry
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage YouTube

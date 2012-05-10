@@ -28,11 +28,6 @@ use Zend\Queue\Queue,
 /**
  * Class for using Stomp to talk to an Stomp compliant server
  *
- * @uses       \Zend\Queue\Adapter\AdapterAbstract
- * @uses       \Zend\Queue\Queue
- * @uses       \Zend\Queue\Exception
- * @uses       \Zend\Queue\Message\Message
- * @uses       \Zend\Queue\Stomp\Client
  * @category   Zend
  * @package    Zend_Queue
  * @subpackage Adapter

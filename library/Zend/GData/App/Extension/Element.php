@@ -27,7 +27,6 @@ use Zend\GData\App\Extension;
  * Class that represents elements which were not handled by other parsing
  * code in the library.
  *
- * @uses       \Zend\GData\App\Extension
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage App

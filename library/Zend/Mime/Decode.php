@@ -21,8 +21,6 @@
 namespace Zend\Mime;
 
 /**
- * @uses       \Zend\Mime\Exception\RuntimeException
- * @uses       \Zend\Mime\Mime
  * @category   Zend
  * @package    Zend_Mime
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

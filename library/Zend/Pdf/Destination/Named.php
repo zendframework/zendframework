@@ -33,10 +33,6 @@ use Zend\Pdf;
  * the smaller of the two, centering the page within the window in the other
  * dimension.
  *
- * @uses       \Zend\Pdf\Destination\AbstractDestination
- * @uses       \Zend\Pdf\InternalType\AbstractTypeObject
- * @uses       \Zend\Pdf\InternalType\StringObject
- * @uses       \Zend\Pdf\Exception
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Destination
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

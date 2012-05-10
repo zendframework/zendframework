@@ -27,12 +27,6 @@ use Zend\Loader\PluginBroker;
  * Loads a local class and executes the instantiation of that class.
  *
  * @todo       PHP 5.3 can drastically change this class w/ namespace and the new call_user_func w/ namespace
- * @uses       Zend\Amf\Exception
- * @uses       Zend\Amf\Value\Messaging\AcknowledgeMessage
- * @uses       Zend\Amf\Value\Messaging\AsyncMessage
- * @uses       Zend\Amf\Value\Messaging\CommandMessage
- * @uses       Zend\Amf\Value\Messaging\ErrorMessage
- * @uses       Zend\Amf\Value\Messaging\RemotingMessage
  * @package    Zend_Amf
  * @subpackage Parser
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

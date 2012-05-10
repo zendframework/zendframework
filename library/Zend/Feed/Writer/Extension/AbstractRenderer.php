@@ -21,7 +21,6 @@
 namespace Zend\Feed\Writer\Extension;
 
 /**
-* @uses \Zend\Feed\Writer\Extension\RendererInterface
 * @category Zend
 * @package Zend_Feed_Writer_Entry_Rss
 * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

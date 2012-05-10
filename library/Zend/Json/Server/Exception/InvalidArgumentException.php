@@ -21,8 +21,6 @@
 namespace Zend\Json\Server\Exception;
 
 /**
- * @uses       InvalidArgumentException
- * @uses       Zend\Json\Server\Exception
  * @category   Zend
  * @package    Zend_Json
  * @subpackage Server

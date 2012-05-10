@@ -25,8 +25,6 @@ use Zend\Markup\Token;
 /**
  * Simple replace markup
  *
- * @uses       \Zend\Markup\Renderer\Markup\AbstractMarkup
- * @uses       \Zend\Markup\Token
  * @category   Zend
  * @package    Zend_Markup
  * @subpackage Renderer_Markup_Html

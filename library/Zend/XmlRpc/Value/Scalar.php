@@ -24,7 +24,6 @@ namespace Zend\XmlRpc\Value;
 use Zend\XmlRpc\Value as XmlRpcValue;
 
 /**
- * @uses       Zend\XmlRpc\Value
  * @category   Zend
  * @package    Zend_XmlRpc
  * @subpackage Value

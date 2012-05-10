@@ -26,9 +26,6 @@ use Zend\Pdf;
 /**
  * Abstract base class for Image file parsers.
  *
- * @uses       \Zend\Pdf\Exception
- * @uses       \Zend\Pdf\BinaryParser\Image\AbstractImage
- * @uses       \Zend\Pdf\Image
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Image
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

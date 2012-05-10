@@ -29,11 +29,6 @@ use Memcache,
 /**
  * Class for using connecting to a Memcache-based queuing system
  *
- * @uses       \Memcache
- * @uses       \Zend\Queue\Adapter\AdapterAbstract
- * @uses       \Zend\Queue\Queue
- * @uses       \Zend\Queue\Exception
- * @uses       \Zend\Queue\Message
  * @category   Zend
  * @package    Zend_Queue
  * @subpackage Adapter

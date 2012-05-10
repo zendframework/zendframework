@@ -22,7 +22,6 @@
 namespace Zend\XmlRpc\Value;
 
 /**
- * @uses       Zend\XmlRpc\Value\Collection
  * @category   Zend
  * @package    Zend_XmlRpc
  * @subpackage Value

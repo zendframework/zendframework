@@ -19,10 +19,6 @@
  */
 
 /**
- * @uses       Zend_Http_Client
- * @uses       Zend_Service_WindowsAzure_Credentials_AbstractCredentials
- * @uses       Zend_Service_WindowsAzure_Credentials_SharedKey
- * @uses       Zend_Service_WindowsAzure_Storage
  * @category   Zend
  * @package    Zend_Service_WindowsAzure
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

@@ -24,7 +24,6 @@ namespace Zend\Server\Reflection;
 /**
  * Function Reflection
  *
- * @uses       \Zend\Server\Reflection\AbstractFunction
  * @category   Zend
  * @package    Zend_Server
  * @subpackage Zend_Server_Reflection

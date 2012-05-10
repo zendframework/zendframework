@@ -20,10 +20,6 @@
  */
 
 /**
- * @uses       Zend_Service_DeveloperGarden_Client_AbstractClient
- * @uses       Zend_Service_DeveloperGarden_Response_SecurityTokenServer_GetTokensResponse
- * @uses       Zend_Service_DeveloperGarden_Response_SecurityTokenServer_SecurityTokenResponse
- * @uses       Zend_Service_DeveloperGarden_SecurityTokenServer_Cache
  * @category   Zend
  * @package    Zend_Service
  * @subpackage DeveloperGarden

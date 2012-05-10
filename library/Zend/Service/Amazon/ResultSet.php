@@ -23,10 +23,6 @@ namespace Zend\Service\Amazon;
 use Zend\Service\Amazon\Exception;
 
 /**
- * @uses       DOMXPath
- * @uses       \Zend\Service\Amazon\OutOfBoundsException
- * @uses       SeekableIterator
- * @uses       Zend_Service_Amazon_Item
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Amazon

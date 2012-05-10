@@ -24,7 +24,6 @@ namespace Zend\Queue;
 /**
  * Class for managing queue messages
  *
- * @uses       \Zend\Queue\Exception
  * @category   Zend
  * @package    Zend_Queue
  * @subpackage Message

@@ -26,11 +26,6 @@ use Zend\Json\Exception\RuntimeException,
 /**
  * Class for encoding to and decoding from JSON.
  *
- * @uses       Zend\Json\Decoder
- * @uses       Zend\Json\Encoder
- * @uses       Zend\Json\Exception\RuntimeException
- * @uses       Zend\Json\Exception\RecursionException
- * @uses       Zend\Json\Expr
  * @category   Zend
  * @package    Zend_Json
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

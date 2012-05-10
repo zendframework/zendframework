@@ -24,9 +24,6 @@ namespace Zend\GData\Calendar\Extension;
 /**
  * Represents the gCal:selected element used by the Calendar data API
  *
- * @uses       \Zend\GData\App\InvalidArgumentException
- * @uses       \Zend\GData\Calendar
- * @uses       \Zend\GData\Extension
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Calendar

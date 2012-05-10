@@ -27,8 +27,6 @@ use Zend\Session\Container as SessionContainer,
 /**
  * CSRF form protection
  *
- * @uses       \Zend\Form\Element\Xhtml
- * @uses       \Zend\Session\Container
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Element

@@ -30,9 +30,6 @@ use Zend\GData\GApps;
  * This class should never be instantiated directly. Instead, instantiate a
  * class which inherits from this class.
  *
- * @uses       \Zend\GData\App\InvalidArgumentException
- * @uses       \Zend\GData\GApps
- * @uses       \Zend\GData\Query
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage GApps

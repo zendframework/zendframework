@@ -27,10 +27,6 @@ use Zend\Queue\Queue,
 /**
  * Class for using a standard PHP array as a queue
  *
- * @uses       \Zend\Queue\Adapter\AdapterAbstract
- * @uses       \Zend\Queue\Queue
- * @uses       \Zend\Queue\Exception
- * @uses       \Zend\Queue\Message
  * @category   Zend
  * @package    Zend_Queue
  * @subpackage Adapter

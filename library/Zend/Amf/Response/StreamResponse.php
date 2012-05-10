@@ -28,9 +28,6 @@ use Zend\Amf\Response as AMFResponse,
 /**
  * Handles converting the PHP object ready for response back into AMF
  *
- * @uses       \Zend\Amf\Constants
- * @uses       \Zend\Amf\Parser\Amf0\Serializer
- * @uses       \Zend\Amf\Parser\OutputStream
  * @package    Zend_Amf
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License

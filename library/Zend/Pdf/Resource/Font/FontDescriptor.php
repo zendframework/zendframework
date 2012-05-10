@@ -34,11 +34,6 @@ use Zend\Pdf\BinaryParser\Font\OpenType as OpenTypeFontParser;
  * substitute font or select a similar font when the font program is unavailable. The
  * font descriptor may also be used to embed the font program in the PDF file.
  *
- * @uses       \Zend\Pdf\InternalType\ArrayObject
- * @uses       \Zend\Pdf\InternalType\DictionaryObject
- * @uses       \Zend\Pdf\InternalType\NameObject
- * @uses       \Zend\Pdf\InternalType\NumericObject
- * @uses       \Zend\Pdf\Exception
  * @subpackage Zend_PDF_Fonts
  * @subpackage Fonts
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

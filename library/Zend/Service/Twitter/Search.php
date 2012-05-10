@@ -146,7 +146,7 @@ class Search extends Client\RestClient
      * @param  array|\Traversable|SearchOptions $options (optional)
      * @throws Exception\InvalidArgumentException If query is not defined neither $query nor $options or
      * If query is not a string.
-     * @throws \Zend\Http\Client\Exception
+     * @throws Http\Client\Exception\ExceptionInterface
      * @return mixed
      */
     public function execute($query = null, $options = null)

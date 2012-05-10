@@ -447,7 +447,7 @@ class SimpleDb extends \Zend\Service\Amazon\AbstractAmazon
             $request->setRawData(implode('&', $params_out), Http\Client::ENC_URLENCODED);
              */
             $httpResponse = $request->send();
-        } catch (Http\Client\Exception $zhce) {
+        } catch (Http\Client\Exception\ExceptionInterface $zhce) {
             $message = 'Error in request to AWS service: ' . $zhce->getMessage();
             throw new Exception\RuntimeException($message, $zhce->getCode(), $zhce);
         } 

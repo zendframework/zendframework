@@ -486,7 +486,7 @@ class Socket implements HttpAdapter, StreamInterface
      * Check if the socket has timed out - if so close connection and throw
      * an exception
      *
-     * @throws \Zend\Http\Client\Adapter\Exception with READ_TIMEOUT code
+     * @throws AdapterException\TimeoutException with READ_TIMEOUT code
      */
     protected function _checkSocketReadTimeout()
     {

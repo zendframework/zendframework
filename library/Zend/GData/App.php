@@ -665,7 +665,7 @@ class App
             if ($usingMimeStream) {
                 $this->_httpClient->setAdapter($oldHttpAdapter);
             }
-        } catch (\Zend\Http\Client\Exception $e) {
+        } catch (\Zend\Http\Client\Exception\ExceptionInterface $e) {
             // reset adapter
             if ($usingMimeStream) {
                 $this->_httpClient->setAdapter($oldHttpAdapter);

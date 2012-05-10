@@ -167,7 +167,7 @@ class Http
         $status   = null;
         try {
             $response = $this->_attemptRequest($params);
-        } catch (\Zend\Http\Client\Exception $e) {
+        } catch (\Zend\Http\Client\Exception\ExceptionInterface $e) {
             throw new Exception(sprintf(
                 'Error in HTTP request: %s',
                 $e->getMessage()

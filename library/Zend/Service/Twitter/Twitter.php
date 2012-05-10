@@ -121,7 +121,7 @@ class Twitter extends Client\RestClient
      * @param  array $options Optional options array
      * @return void
      */
-    public function __construct($options = null, Oauth\Consumer $consumer = null)
+    public function __construct($options = null, OAuth\Consumer $consumer = null)
     {
         $this->setUri('http://api.twitter.com');
         if (!is_array($options)) $options = array();
@@ -950,17 +950,17 @@ class Twitter extends Client\RestClient
     }
 
     /**
-     * Call a remote REST web service URI and return the Zend_Http_Response object
+     * Call a remote REST web service URI
      *
-     * @param  string $path            The path to append to the URI
-     * @throws Client\Exception
+     * @param  string $path The path to append to the URI
+     * @throws Client\Exception\UnexpectedValueException
      * @return void
      */
     protected function prepare($path)
     {
         // Get the URI object and configure it
         if (!$this->uri instanceof Uri\Uri) {
-            throw new Client\Exception(
+            throw new Client\Exception\UnexpectedValueException(
                 'URI object must be set before performing call'
             );
         }

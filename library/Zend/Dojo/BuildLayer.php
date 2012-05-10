@@ -20,8 +20,9 @@
 
 namespace Zend\Dojo;
 
-use Zend\Config\Config,
-    Zend\Json\Json,
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
+use Zend\Json\Json,
     Zend\View\Renderer\RendererInterface as Renderer;
 
 /**
@@ -95,20 +96,22 @@ class BuildLayer
     /**
      * Constructor
      *
-     * @param  array|\Zend\Config\Config $options
-     * @return void
-     * @throws \Zend\Dojo\Exception for invalid option argument
+     * @param  array|Traversable $options
+     * @throws \Zend\Dojo\Exception\InvalidArgumentException for invalid option argument
      */
     public function __construct($options = null)
     {
-        if (null !== $options) {
-            if ($options instanceof Config) {
-                $options = $options->toArray();
-            } elseif (!is_array($options)) {
-                throw new Exception\InvalidArgumentException('Invalid options provided to constructor');
-            }
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
+        }
+        if (is_array($options)) {
             $this->setOptions($options);
         }
+
+        if (!is_array($options)) {
+            throw new Exception\InvalidArgumentException('Invalid options provided to constructor');
+        }
+        $this->setOptions($options);
     }
 
     /**

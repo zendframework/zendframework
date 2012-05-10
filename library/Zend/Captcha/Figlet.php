@@ -46,8 +46,7 @@ class Figlet extends Word
     /**
      * Constructor
      *
-     * @param  null|string|array|\Zend\Config\Config $options
-     * @return void
+     * @param array|\Traversable $options
      */
     public function __construct($options = null)
     {

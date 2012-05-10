@@ -90,7 +90,7 @@ class Count extends Validator\AbstractValidator
      * 'min': Minimum filecount
      * 'max': Maximum filecount
      *
-     * @param  integer|array|\Zend\Config\Config $options Options for the adapter
+     * @param  integer|array|\Traversable $options Options for the adapter
      * @return void
      */
     public function __construct($options = null)

@@ -20,10 +20,12 @@
  */
 
 namespace Zend\Markup\Parser;
+
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
 use Zend\Markup\Parser,
     Zend\Markup\Token,
-    Zend\Markup\TokenList,
-    Zend\Config\Config;
+    Zend\Markup\TokenList;
 
 /**
  * @category   Zend
@@ -127,14 +129,14 @@ class Bbcode implements Parser
     /**
      * Constructor
      *
-     * @param \Zend\Config\Config|array $config
+     * @param  array|Traversable $options
      *
      * @return array
      */
     public function __construct($options = array())
     {
-        if ($options instanceof Config) {
-            $options = $options->toArray();
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
         }
 
         if (isset($options['groups'])) {

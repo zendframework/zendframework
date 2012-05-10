@@ -22,8 +22,7 @@
 namespace Zend\Log\Formatter;
 
 use Zend\Log\Formatter,
-    Zend\Log\Exception,
-    Zend\Config\Config;
+    Zend\Log\Exception;
 
 /**
  * @category   Zend

@@ -20,7 +20,8 @@
 
 namespace Zend\Text\Figlet;
 
-use Zend\Config;
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
 
 /**
  * Zend\Text\Figlet is a PHP implementation of FIGlet
@@ -274,15 +275,16 @@ class Figlet
      * the $options variable, which can either be an array or an instance of
      * Zend_Config.
      *
-     * @param array|\Zend\Config\Config $options Options for the output
+     * @param array|Traversable $options Options for the output
      */
     public function __construct($options = null)
     {
         // Set options
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
+        }
         if (is_array($options)) {
             $this->setOptions($options);
-        } else if ($options instanceof Config\Config) {
-            $this->setConfig($options);
         }
 
         // If no font was defined, load default font
@@ -310,17 +312,6 @@ class Figlet
             }
         }
         return $this;
-    }
-
-    /**
-     * Set options from config object
-     *
-     * @param  Config\Config $config Configuration for Figlet
-     * @return Figlet
-     */
-    public function setConfig(Config\Config $config)
-    {
-        return $this->setOptions($config->toArray());
     }
 
     /**

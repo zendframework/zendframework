@@ -35,7 +35,7 @@ interface Adapter
     /**
      * Constructor
      *
-     * @param  array|\Zend\Config\Config $options
+     * @param  array|\Traversable $options
      * @param  \Zend\Queue\Queue $queue
      * @return void
      */

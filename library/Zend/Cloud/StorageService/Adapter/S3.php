@@ -17,11 +17,10 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * namespace
- */
 namespace Zend\Cloud\StorageService\Adapter;
 
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
 use Zend\Cloud\StorageService\Adapter,
     Zend\Cloud\StorageService\Exception,
     Zend\Service\Amazon\S3\S3 as AmazonS3;
@@ -62,13 +61,12 @@ class S3 implements AdapterInterface
     /**
      * Constructor
      *
-     * @param  array|\Zend\Config\Config $options
-     * @return void
+     * @param  array|Traversable $options
      */
     public function __construct($options = array())
     {
-        if ($options instanceof \Zend\Config\Config) {
-            $options = $options->toArray();
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
         }
 
         if (!is_array($options)) {

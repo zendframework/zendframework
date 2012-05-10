@@ -20,6 +20,9 @@
 
 namespace Zend\Filter;
 
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
+
 /**
  * @category   Zend
  * @package    Zend_Filter
@@ -56,13 +59,14 @@ class Null extends AbstractFilter
     /**
      * Constructor
      *
-     * @param string|array|\Zend\Config\Config $options OPTIONAL
+     * @param string|array|Traversable $options OPTIONAL
      */
     public function __construct($options = null)
     {
-        if ($options instanceof \Zend\Config\Config) {
-            $options = $options->toArray();
-        } elseif (!is_array($options)) {
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
+        }
+        if (!is_array($options)) {
             $options = func_get_args();
             $temp    = array();
             if (!empty($options)) {

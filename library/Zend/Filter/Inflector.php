@@ -20,8 +20,9 @@
 
 namespace Zend\Filter;
 
-use Zend\Config,
-    Zend\Loader\Broker;
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
+use Zend\Loader\Broker;
 
 /**
  * Filter chain for string inflection
@@ -61,13 +62,14 @@ class Inflector extends AbstractFilter
     /**
      * Constructor
      *
-     * @param string|array $options Options to set
+     * @param string|array|Traversable $options Options to set
      */
     public function __construct($options = null)
     {
-        if ($options instanceof Config\Config) {
-            $options = $options->toArray();
-        } else if (!is_array($options)) {
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
+        }
+        if (!is_array($options)) {
             $options = func_get_args();
             $temp    = array();
 
@@ -120,27 +122,15 @@ class Inflector extends AbstractFilter
     }
 
     /**
-     * Use Zend_Config object to set object state
-     *
-     * @deprecated Use setOptions() instead
-     * @param  \Zend\Config\Config $config
-     * @return Inflector
-     */
-    public function setConfig(Config\Config $config)
-    {
-        return $this->setOptions($config);
-    }
-
-    /**
      * Set options
      *
-     * @param  array $options
+     * @param  array|Traversable $options
      * @return Inflector
      */
     public function setOptions($options)
     {
-        if ($options instanceof Config\Config) {
-            $options = $options->toArray();
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
         }
 
         // Set broker

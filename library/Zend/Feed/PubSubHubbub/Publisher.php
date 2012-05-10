@@ -20,6 +20,8 @@
 
 namespace Zend\Feed\PubSubHubbub;
 
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
 use Zend\Uri;
 
 /**
@@ -67,38 +69,42 @@ class Publisher
      * options for the Publisher without calling all supported setter
      * methods in turn.
      *
-     * @param  array|\Zend\Config\Config $options Options array or \Zend\Config\Config instance
-     * @return void
+     * @param  array|Traversable $options
      */
-    public function __construct($config = null)
+    public function __construct($options = null)
     {
-        if ($config !== null) {
-            $this->setConfig($config);
+        if ($options !== null) {
+            $this->setOptions($options);
         }
     }
 
     /**
      * Process any injected configuration options
      *
-     * @param  array|\Zend\Config\Config $options Options array or \Zend\Config\Config instance
+     * @param  array|Traversable $options Options array or Traversable object
      * @return \Zend\Feed\PubSubHubbub\Publisher
      */
-    public function setConfig($config)
+    public function setOptions($options)
     {
-        if ($config instanceof \Zend\Config\Config) {
-            $config = $config->toArray();
-        } elseif (!is_array($config)) {
-            throw new Exception('Array or Zend_Config object'
-                . 'expected, got ' . gettype($config));
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
         }
-        if (array_key_exists('hubUrls', $config)) {
-            $this->addHubUrls($config['hubUrls']);
+        if (is_array($options)) {
+            $this->setOptions($options);
         }
-        if (array_key_exists('updatedTopicUrls', $config)) {
-            $this->addUpdatedTopicUrls($config['updatedTopicUrls']);
+
+        if (!is_array($options)) {
+            throw new Exception('Array or Traversable object'
+                                . 'expected, got ' . gettype($options));
         }
-        if (array_key_exists('parameters', $config)) {
-            $this->setParameters($config['parameters']);
+        if (array_key_exists('hubUrls', $options)) {
+            $this->addHubUrls($options['hubUrls']);
+        }
+        if (array_key_exists('updatedTopicUrls', $options)) {
+            $this->addUpdatedTopicUrls($options['updatedTopicUrls']);
+        }
+        if (array_key_exists('parameters', $options)) {
+            $this->setParameters($options['parameters']);
         }
         return $this;
     }
@@ -382,7 +388,7 @@ class Publisher
     {
         $client = PubSubHubbub::getHttpClient();
         $client->setMethod(\Zend\Http\Request::METHOD_POST);
-        $client->setConfig(array(
+        $client->setOptions(array(
             'useragent' => 'Zend_Feed_Pubsubhubbub_Publisher/' . \Zend\Version::VERSION,
         ));
         $params   = array();

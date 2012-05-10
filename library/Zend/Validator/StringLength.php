@@ -58,8 +58,7 @@ class StringLength extends AbstractValidator
     /**
      * Sets validator options
      *
-     * @param  integer|array|\Zend\Config\Config $options
-     * @return void
+     * @param  integer|array|\Traversable $options
      */
     public function __construct($options = array())
     {

@@ -20,6 +20,9 @@
 
 namespace Zend\Cloud;
 
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
+
 /**
  * Abstract factory for Zend\Cloud resources
  *
@@ -44,13 +47,13 @@ class AbstractFactory
      * Get an individual adapter instance
      *
      * @param  string $adapterOption
-     * @param  array|\Zend\Config\Config $options
+     * @param  array|Traversable $options
      * @return null|DocumentService\Adapter\AdapterInterface|QueueService\Adapter\AdapterInterface|StorageService\Adapter\AdapterInterface|Infrastructure\Adapter\AdapterInterface
      */
     protected static function _getAdapter($adapterOption, $options)
     {
-        if ($options instanceof \Zend\Config\Config) {
-            $options = $options->toArray();
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
         }
 
         if (!isset($options[$adapterOption])) {

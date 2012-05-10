@@ -17,6 +17,7 @@
  */
 
 namespace Zend\ProgressBar\Adapter;
+
 use Zend\ProgressBar\Adapter\Exception;
 
 /**
@@ -147,7 +148,7 @@ class Console extends AbstractAdapter
     /**
      * Defined by Zend_ProgressBar_Adapter
      *
-     * @param null|array|\Zend\Config\Config $options
+     * @param  array|\Traversable $options
      */
     public function __construct($options = null)
     {

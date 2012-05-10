@@ -71,8 +71,7 @@ class Upload extends \Zend\Validator\AbstractValidator
      * If no files are given the $_FILES array will be used automatically.
      * NOTE: This validator will only work with HTTP POST uploads!
      *
-     * @param  array|Zend_Config $options Array of files in syntax of \Zend\File\Transfer\Transfer
-     * @return void
+     * @param  array|\Traversable $options Array of files in syntax of \Zend\File\Transfer\Transfer
      */
     public function __construct($options = array())
     {

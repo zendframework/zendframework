@@ -20,11 +20,13 @@
  */
 
 namespace Zend\Markup\Renderer;
+
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
 use Zend\Markup\Token,
     Zend\Markup\TokenList,
     Zend\Markup\Parser,
-    Zend\Markup\Renderer\Markup,
-    Zend\Config\Config;
+    Zend\Markup\Renderer\Markup;
 
 /**
  * Defines the basic rendering functionality
@@ -77,16 +79,12 @@ abstract class AbstractRenderer
     /**
      * Constructor
      *
-     * @param array|\Zend\Config\Config $options
-     *
-     * @todo make constructor compliant with new configuration standards
-     *
-     * @return void
+     * @param  array|Traversable $options
      */
     public function __construct($options = array())
     {
-        if ($options instanceof Config) {
-            $options = $options->toArray();
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
         }
 
         if (isset($options['encoding'])) {

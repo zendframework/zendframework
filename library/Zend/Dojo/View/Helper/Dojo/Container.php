@@ -21,9 +21,10 @@
 
 namespace Zend\Dojo\View\Helper\Dojo;
 
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
 use Zend\Dojo\View\Exception,
     Zend\Dojo\View\Helper\Dojo as DojoHelper,
-    Zend\Config\Config,
     Zend\View\Renderer\RendererInterface as View,
     Zend\Json\Json;
 
@@ -214,13 +215,12 @@ class Container
     /**
      * Add options for the Dojo Container to use
      *
-     * @param array|\Zend\Config\Config Array or \Zend\Config\Config object with options to use
-     * @return \Zend\Dojo\View\Helper\Dojo\Container
+     * @param  array|Traversable $options Options to use
      */
     public function setOptions($options)
     {
-        if($options instanceof Config) {
-            $options = $options->toArray();
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
         }
 
         foreach($options as $key => $value) {

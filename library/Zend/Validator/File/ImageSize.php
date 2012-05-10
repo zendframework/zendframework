@@ -103,8 +103,7 @@ class ImageSize extends Validator\AbstractValidator
      * - maxheight
      * - maxwidth
      *
-     * @param  \Zend\Config\Config|array $options
-     * @return void
+     * @param  array|\Traversable $options
      */
     public function __construct($options = null)
     {

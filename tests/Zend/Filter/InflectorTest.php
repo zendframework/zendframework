@@ -365,7 +365,7 @@ class InflectorTest extends \PHPUnit_Framework_TestCase
     {
         $config = $this->getConfig();
         $inflector = new InflectorFilter();
-        $inflector->setConfig($config);
+        $inflector->setOptions($config);
         $this->_testOptions($inflector);
     }
 

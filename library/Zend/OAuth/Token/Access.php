@@ -83,7 +83,7 @@ class Access extends AbstractToken
      * 
      * @param  array $oauthOptions 
      * @param  null|string $uri 
-     * @param  null|array|Zend\Config\Config $config 
+     * @param  null|array|\Traversable $config
      * @param  bool $excludeCustomParamsFromHeader 
      * @return Zend\OAuth\Client
      */

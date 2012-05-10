@@ -52,7 +52,7 @@ class Ini implements Reader
     /**
      * Set nest separator.
      *
-     * @param  stirng $separator
+     * @param  string $separator
      * @return self
      */
     public function setNestSeparator($separator)

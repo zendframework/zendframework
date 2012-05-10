@@ -246,8 +246,7 @@ class Form implements Iterator, Countable, ValidatorInterface
      *
      * Registers form view helper as decorator
      *
-     * @param mixed $options
-     * @return void
+     * @param  array|Traversable $options
      */
     public function __construct($options = null)
     {

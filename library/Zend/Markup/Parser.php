@@ -34,9 +34,7 @@ interface Parser
     /**
      * Constructor
      *
-     * @param \Zend\Config\Config|array $options
-     *
-     * @return array
+     * @param array|\Traversable $options
      */
     public function __construct($options = array());
 

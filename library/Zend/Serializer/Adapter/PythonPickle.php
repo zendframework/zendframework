@@ -145,9 +145,9 @@ class PythonPickle extends AbstractAdapter
      *
      * @link Zend_Serializer_Adapter_AdapterAbstract::__construct()
      */
-    public function __construct($opts=array())
+    public function __construct($options=array())
     {
-        parent::__construct($opts);
+        parent::__construct($options);
 
         // init
         if (self::$_isLittleEndian === null) {

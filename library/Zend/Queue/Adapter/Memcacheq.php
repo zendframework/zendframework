@@ -68,7 +68,7 @@ class Memcacheq extends AbstractAdapter
     /**
      * Constructor
      *
-     * @param  array|\Zend\Config\Config $options
+     * @param  array|\Traversable $options
      * @param  null|\Zend\Queue\Queue $queue
      * @return void
      */

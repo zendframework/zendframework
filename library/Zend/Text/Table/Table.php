@@ -20,8 +20,9 @@
 
 namespace Zend\Text\Table;
 
-use Zend\Config,
-    Zend\Loader\PrefixPathLoader,
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
+use Zend\Loader\PrefixPathLoader,
     Zend\Text\Table\Decorator\DecoratorInterface as Decorator;
 
 /**
@@ -35,7 +36,7 @@ use Zend\Config,
 class Table
 {
     /**
-     * Auto seperator settings
+     * Auto separator settings
      */
     const AUTO_SEPARATE_NONE   = 0x0;
     const AUTO_SEPARATE_HEADER = 0x1;
@@ -119,17 +120,18 @@ class Table
     /**
      * Create a basic table object
      *
-     * @param  array             $columnsWidths List of all column widths
-     * @param  Config\Config|array $options       Configuration options
+     * @param  array             $columns Widths List of all column widths
+     * @param  array|Traversable $options Configuration options
      * @throws Exception\UnexpectedValueException When no columns widths were set
      */
     public function __construct($options = null)
     {
         // Set options
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
+        }
         if (is_array($options)) {
             $this->setOptions($options);
-        } else if ($options instanceof Config\Config) {
-            $this->setConfig($options);
         }
 
         // If no decorator was given, use default unicode decorator
@@ -162,17 +164,6 @@ class Table
         }
 
         return $this;
-    }
-
-    /**
-     * Set options from config object
-     *
-     * @param  Config\Config $config Configuration for Table
-     * @return Table
-     */
-    public function setConfig(Config\Config $config)
-    {
-        return $this->setOptions($config->toArray());
     }
 
     /**

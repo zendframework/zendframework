@@ -135,7 +135,7 @@ class Image extends Word
     /**
      * Constructor
      *
-     * @param  array|Zend\Config\Config $options
+     * @param  array|\Traversable $options
      * @return void
      */
     public function __construct($options = null)

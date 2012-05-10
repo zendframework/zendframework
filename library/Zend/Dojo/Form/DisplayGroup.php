@@ -21,6 +21,8 @@
 
 namespace Zend\Dojo\Form;
 
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
 use Zend\Loader\PrefixPathMapper as PluginLoader,
     Zend\View\Renderer\RendererInterface as View;
 
@@ -39,8 +41,7 @@ class DisplayGroup extends \Zend\Form\DisplayGroup
      *
      * @param  string $name
      * @param  \Zend\Loader\PrefixPathMapper $loader
-     * @param  array|\Zend\Config\Config|null $options
-     * @return void
+     * @param  array|\Traversable $options
      */
     public function __construct($name, PluginLoader $loader, $options = null)
     {

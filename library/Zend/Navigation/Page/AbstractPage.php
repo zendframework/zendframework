@@ -886,8 +886,7 @@ abstract class AbstractPage extends Container
 
         $method = 'set' . self::normalizePropertyName($property);
 
-        if ($method != 'setOptions' && $method != 'setConfig'
-            && method_exists($this, $method)
+        if ($method != 'setOptions' && method_exists($this, $method)
         ) {
             $this->$method($value);
         } else {

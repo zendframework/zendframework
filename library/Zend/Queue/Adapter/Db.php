@@ -57,9 +57,8 @@ class Db extends AbstractAdapter
     /**
      * Constructor
      *
-     * @param  array|\Zend\Config\Config $options
+     * @param  array|\Traversable $options
      * @param  \Zend\Queue\Queue|null $queue
-     * @return void
      */
     public function __construct($options, Queue $queue = null)
     {

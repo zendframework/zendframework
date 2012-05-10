@@ -20,7 +20,8 @@
 
 namespace Zend\Validator;
 
-use Zend\Config\Config;
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
 
 /**
  * @category   Zend
@@ -72,14 +73,14 @@ class LessThan extends AbstractValidator
     /**
      * Sets validator options
      *
-     * @param  mixed|array|Config $options
-     * @return void
+     * @param  array|Traversable $options
      */
     public function __construct($options = null)
     {
-        if ($options instanceof Config) {
-            $options = $options->toArray();
-        } else if (!is_array($options)) {
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
+        }
+        if (!is_array($options)) {
             $options = func_get_args();
             $temp['max'] = array_shift($options);
 

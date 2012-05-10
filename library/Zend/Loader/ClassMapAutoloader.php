@@ -53,8 +53,7 @@ class ClassMapAutoloader implements SplAutoloader
      *
      * Create a new instance, and optionally configure the autoloader.
      * 
-     * @param  null|array|Traversable $options 
-     * @return void
+     * @param  null|array|\Traversable $options
      */
     public function __construct($options = null)
     {

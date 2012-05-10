@@ -17,16 +17,14 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * namespace
- */
 namespace Zend\Cloud\DocumentService\Adapter;
 
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
 use Zend\Cloud\DocumentService\Document,
     Zend\Service\WindowsAzure\Storage,
     Zend\Service\WindowsAzure\Storage\Table,
-    Zend\Service\WindowsAzure\Storage\DynamicTableEntity,
-    Zend\Config\Config;
+    Zend\Service\WindowsAzure\Storage\DynamicTableEntity;
 
 
 /**
@@ -82,13 +80,12 @@ class WindowsAzure extends AbstractAdapter
     /**
      * Constructor
      *
-     * @param array $options
-     * @return void
+     * @param array|Traversable $options
      */
     public function __construct($options = array())
     {
-        if ($options instanceof Config) {
-            $options = $options->toArray();
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
         }
 
         if (empty($options)) {

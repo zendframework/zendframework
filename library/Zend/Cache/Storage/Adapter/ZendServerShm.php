@@ -37,7 +37,7 @@ class ZendServerShm extends AbstractZendServer
     /**
      * Constructor
      *
-     * @param  null|array|Traversable|AdapterOptions $options
+     * @param  null|array|\Traversable|AdapterOptions $options
      * @throws Exception\ExceptionInterface
      * @return void
      */

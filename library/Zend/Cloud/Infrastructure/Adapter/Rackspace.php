@@ -9,6 +9,8 @@
 
 namespace Zend\Cloud\Infrastructure\Adapter;
 
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
 use Zend\Service\Rackspace\Servers as RackspaceServers,
     Zend\Cloud\Infrastructure\Instance,
     Zend\Cloud\Infrastructure\InstanceList,
@@ -91,19 +93,15 @@ class Rackspace extends AbstractAdapter
     /**
      * Constructor
      *
-     * @param  array|\Zend\Config\Config $options
+     * @param  array|Traversable $options
      * @return void
      */
     public function __construct($options = array())
     {
-        if (is_object($options)) {
-            if (method_exists($options, 'toArray')) {
-                $options= $options->toArray();
-            } elseif ($options instanceof \Traversable) {
-                $options = iterator_to_array($options);
-            }
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
         }
-        
+
         if (empty($options) || !is_array($options)) {
             throw new Exception\InvalidArgumentException('Invalid options provided');
         }

@@ -21,6 +21,8 @@
 
 namespace Zend\Soap;
 
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
 use Zend\Server\Client as ServerClient;
 
 /**
@@ -130,9 +132,9 @@ class Client implements ServerClient
     /**
      * Constructor
      *
-     * @param string $wsdl
-     * @param array $options
-     * @throws \Zend\Soap\Client\Exception
+     * @param  string $wsdl
+     * @param  array|Traversable $options
+     * @throws Exception\ExtensionNotLoadedException
      */
     public function __construct($wsdl = null, $options = null)
     {
@@ -177,14 +179,14 @@ class Client implements ServerClient
      *
      * Allows setting options as an associative array of option => value pairs.
      *
-     * @param  array|\Zend\Config\Config $options
+     * @param  array|Traversable $options
      * @return \Zend\Soap\Client\Client
-     * @throws \Zend\Soap\Client\Exception
+     * @throws Exception\InvalidArgumentException
      */
     public function setOptions($options)
     {
-        if($options instanceof \Zend\Config\Config) {
-            $options = $options->toArray();
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
         }
 
         foreach ($options as $key => $value) {

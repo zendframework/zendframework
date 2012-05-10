@@ -23,7 +23,7 @@ namespace Zend\Search\Lucene\Document;
 
 use Zend\Search\Lucene,
 	Zend\Search\Lucene\Exception\RuntimeException,
-	Zend\Search\Lucene\Exception\ExtensionNotLoadedExtension;
+	Zend\Search\Lucene\Exception\ExtensionNotLoadedException;
 
 /**
  * Xlsx document.

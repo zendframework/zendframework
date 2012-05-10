@@ -21,6 +21,8 @@
 
 namespace Zend\Tag\Cloud\Decorator;
 
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
 use Zend\Tag\Cloud\Decorator\DecoratorInterface as Decorator;
 
 /**
@@ -46,14 +48,13 @@ abstract class Cloud implements Decorator
     /**
      * Create a new cloud decorator with options
      *
-     * @param mixed $options
+     * @param  array|Traversable $options
      */
     public function __construct($options = null)
     {
-        if ($options instanceof \Zend\Config\Config) {
-            $options = $options->toArray();
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
         }
-
         if (is_array($options)) {
             $this->setOptions($options);
         }

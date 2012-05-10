@@ -97,7 +97,7 @@ class ProxyAdapterTest extends SocketTest
      */
     public function testFallbackToSocket()
     {
-        $this->_adapter->setConfig(array(
+        $this->_adapter->setOptions(array(
             'proxy_host' => null,
         ));
 

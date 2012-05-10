@@ -17,9 +17,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * namespace
- */
 namespace Zend\Cloud\DocumentService;
 
 /**
@@ -64,7 +61,7 @@ class DocumentSet implements \Countable, \IteratorAggregate
     /**
      * IteratorAggregate: retrieve iterator
      *
-     * @return Traversable
+     * @return \Traversable
      */
     public function getIterator()
     {

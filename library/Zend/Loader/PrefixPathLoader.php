@@ -130,7 +130,7 @@ class PrefixPathLoader implements ShortNameLocator, PrefixPathMapper
      *
      * Proxies to {@link addPrefixPaths()}.
      * 
-     * @param  array|Traversable $options 
+     * @param  array|\Traversable $options
      * @return PrefixPathLoader
      */
     public function setOptions($options)

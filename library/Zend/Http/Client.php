@@ -20,8 +20,9 @@
 
 namespace Zend\Http;
 
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
 use ArrayIterator,
-    Zend\Config\Config,
     Zend\Uri\Http,
     Zend\Stdlib;
 
@@ -108,7 +109,7 @@ class Client implements Stdlib\DispatchableInterface
     protected $redirectCounter = 0;
 
     /**
-     * Configuration array, set using the constructor or using ::setConfig()
+     * Configuration array, set using the constructor or using ::setOptions()
      *
      * @var array
      */
@@ -140,42 +141,42 @@ class Client implements Stdlib\DispatchableInterface
      * Constructor
      *
      * @param string $uri
-     * @param array  $config
+     * @param array|Traversable $options
      */
-    public function __construct($uri = null, $config = null)
+    public function __construct($uri = null, $options = null)
     {
         if ($uri !== null) {
             $this->setUri($uri);
         }
-        if ($config !== null) {
-            $this->setConfig($config);
+        if ($options !== null) {
+            $this->setOptions($options);
         }
     }
 
     /**
      * Set configuration parameters for this HTTP client
      *
-     * @param  Config|array $config
+     * @param  array|Traversable $options
      * @return Client
-     * @throws Client\Exception
+     * @throws Client\Exception\InvalidArgumentException
      */
-    public function setConfig($config = array())
+    public function setOptions($options = array())
     {
-        if ($config instanceof Config) {
-            $config = $config->toArray();
-
-        } elseif (!is_array($config)) {
-            throw new Exception\InvalidArgumentException('Config parameter is not valid');
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
+        }
+        if (!is_array($options)) {
+            throw new Client\Exception\InvalidArgumentException('Config parameter is not valid');
         }
 
         /** Config Key Normalization */
-        foreach ($config as $k => $v) {
+        foreach ($options as $k => $v) {
             $this->config[str_replace(array('-', '_', ' ', '.'), '', strtolower($k))] = $v; // replace w/ normalized
         }
 
         // Pass configuration options to the adapter if it exists
         if ($this->adapter instanceof Client\Adapter) {
-            $this->adapter->setConfig($config);
+            $this->adapter->setOptions($options);
         }
 
         return $this;
@@ -207,7 +208,7 @@ class Client implements Stdlib\DispatchableInterface
         $this->adapter = $adapter;
         $config = $this->config;
         unset($config['adapter']);
-        $this->adapter->setConfig($config);
+        $this->adapter->setOptions($config);
         return $this;
     }
 
@@ -579,7 +580,7 @@ class Client implements Stdlib\DispatchableInterface
      */
     public function setStream($streamfile = true)
     {
-        $this->setConfig(array("outputstream" => $streamfile));
+        $this->setOptions(array("outputstream" => $streamfile));
         return $this;
     }
 

@@ -141,7 +141,7 @@ class SlideShare
 
         if (!($this->httpclient instanceof Http\Client)) {
             $client = new Http\Client();
-            $client->setConfig(array('maxredirects' => 2,
+            $client->setOptions(array('maxredirects' => 2,
                                      'timeout'      => 5));
 
             $this->setHttpClient($client);

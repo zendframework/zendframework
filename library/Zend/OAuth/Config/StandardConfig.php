@@ -20,6 +20,8 @@
 
 namespace Zend\OAuth\Config;
 
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
 use Zend\OAuth\Config as OAuthConfig,
     Zend\OAuth,
     Zend\Uri;
@@ -144,27 +146,26 @@ class StandardConfig implements OAuthConfig
     protected $_token = null;
 
     /**
-     * Constructor; create a new object with an optional array|Zend_Config
+     * Constructor; create a new object with an optional array|Traversable
      * instance containing initialising options.
      *
-     * @param  array|\Zend\Config\Config $options
-     * @return void
+     * @param  array|Traversable $options
      */
     public function __construct($options = null)
     {
-        if ($options !== null) {
-            if ($options instanceof \Zend\Config\Config) {
-                $options = $options->toArray();
-            }
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
+        }
+        if (is_array($options)) {
             $this->setOptions($options);
         }
     }
 
     /**
-     * Parse option array or Zend_Config instance and setup options using their
+     * Parse option array and setup options using their
      * relevant mutators.
      *
-     * @param  array|\Zend\Config\Config $options
+     * @param  array $options
      * @return \Zend\OAuth\Config
      */
     public function setOptions(array $options)

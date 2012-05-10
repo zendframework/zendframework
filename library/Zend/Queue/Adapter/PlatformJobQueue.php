@@ -45,7 +45,7 @@ class PlatformJobQueue extends AbstractAdapter
     /**
      * Constructor
      *
-     * @param  array|\Zend\Config\Config $options
+     * @param  array|\Traversable $options
      * @param  \Zend\Queue\Queue|null $queue
      * @return void
      */

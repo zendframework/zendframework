@@ -95,7 +95,7 @@ class ClientLogin
         $client->setUri($loginUri);
         $client->setMethod('POST');
         $useragent = $source . ' Zend_Framework_Gdata/' . \Zend\Version::VERSION;
-        $client->setConfig(array(
+        $client->setOptions(array(
                 'maxredirects'    => 0,
                 'strictredirects' => true,
                 'useragent' => $useragent
@@ -147,7 +147,7 @@ class ClientLogin
         if ($response->getStatusCode() == 200) {
             $client->setClientLoginToken($goog_resp['Auth']);
             $useragent = $source . ' Zend_Framework_Gdata/' . \Zend\Version::VERSION;
-            $client->setConfig(array(
+            $client->setOptions(array(
                     'strictredirects' => true,
                     'useragent' => $useragent
                 )

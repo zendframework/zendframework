@@ -20,6 +20,9 @@
  */
 
 namespace Zend\Http\Client\Adapter;
+
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
 use Zend\Http\Client\Adapter as HttpAdapter,
     Zend\Http\Client\Adapter\Exception as AdapterException,
     Zend\Http\Response;
@@ -70,8 +73,7 @@ class Test implements HttpAdapter
     protected $_nextRequestWillFail = false;
 
     /**
-     * Adapter constructor, currently empty. Config is set using setConfig()
-     *
+     * Adapter constructor, currently empty. Config is set using setOptions()
      */
     public function __construct()
     { }
@@ -92,20 +94,21 @@ class Test implements HttpAdapter
     /**
      * Set the configuration array for the adapter
      *
-     * @param \Zend\Config\Config | array $config
+     * @param  array|Traversable $options
      */
-    public function setConfig($config = array())
+    public function setOptions($options = array())
     {
-        if ($config instanceof \Zend\Config\Config) {
-            $config = $config->toArray();
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
+        }
 
-        } elseif (! is_array($config)) {
+        if (! is_array($options)) {
             throw new AdapterException\InvalidArgumentException(
-                'Array or Zend\Config\Config object expected, got ' . gettype($config)
+                'Array or Traversable object expected, got ' . gettype($options)
             );
         }
 
-        foreach ($config as $k => $v) {
+        foreach ($options as $k => $v) {
             $this->config[strtolower($k)] = $v;
         }
     }

@@ -20,6 +20,9 @@
 
 namespace Zend\Filter;
 
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
+
 /**
  * Compresses a given string
  *
@@ -43,12 +46,12 @@ class Compress extends AbstractFilter
     /**
      * Class constructor
      *
-     * @param string|array $options (Optional) Options to set
+     * @param string|array|Traversable $options (Optional) Options to set
      */
     public function __construct($options = null)
     {
-        if ($options instanceof \Zend\Config\Config) {
-            $options = $options->toArray();
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
         }
         if (is_string($options)) {
             $this->setAdapter($options);

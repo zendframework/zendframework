@@ -81,7 +81,7 @@ class PluginBroker implements Broker, LocatorAware
     /**
      * Configure plugin broker
      * 
-     * @param  array|Traversable $options 
+     * @param  array|\Traversable $options
      * @return PluginBroker
      */
     public function setOptions($options)

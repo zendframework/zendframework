@@ -69,7 +69,7 @@ class SocketTest extends CommonHttpTests
             'someoption' => 'hasvalue'
         );
 
-        $this->_adapter->setConfig($config);
+        $this->_adapter->setOptions($config);
 
         $hasConfig = $this->_adapter->getConfig();
         foreach($config as $k => $v) {
@@ -92,7 +92,7 @@ class SocketTest extends CommonHttpTests
             )
         ));
 
-        $this->_adapter->setConfig($config);
+        $this->_adapter->setOptions($config);
 
         $hasConfig = $this->_adapter->getConfig();
         $this->assertEquals($config->timeout, $hasConfig['timeout']);
@@ -110,7 +110,7 @@ class SocketTest extends CommonHttpTests
             'Zend\Http\Client\Adapter\Exception\InvalidArgumentException',
             'Array or Zend_Config object expected');
 
-        $this->_adapter->setConfig($config);
+        $this->_adapter->setOptions($config);
     }
 
     /**
@@ -198,7 +198,7 @@ class SocketTest extends CommonHttpTests
     public function testExceptionOnReadTimeout()
     {
         // Set 1 second timeout
-        $this->client->setConfig(array('timeout' => 1));
+        $this->client->setOptions(array('timeout' => 1));
 
         $start = microtime(true);
 

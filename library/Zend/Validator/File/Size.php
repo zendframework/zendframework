@@ -86,7 +86,7 @@ class Size extends Validator\AbstractValidator
      * 'max': Maximum filesize
      * 'useByteString': Use bytestring or real size for messages
      *
-     * @param  integer|array $options Options for the adapter
+     * @param  integer|array|\Traversable $options Options for the adapter
      */
     public function __construct($options = null)
     {

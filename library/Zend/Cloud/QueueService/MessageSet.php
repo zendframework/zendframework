@@ -17,9 +17,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * namespace
- */
 namespace Zend\Cloud\QueueService;
 
 /**
@@ -64,7 +61,7 @@ class MessageSet implements \Countable, \IteratorAggregate
     /**
      * IteratorAggregate: return iterable object
      *
-     * @return Traversable
+     * @return \Traversable
      */
     public function getIterator()
     {

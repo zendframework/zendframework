@@ -21,6 +21,9 @@
 
 namespace Zend\Service\ReCaptcha;
 
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
+
 /**
  * Zend_Service_ReCaptcha_MailHide
  *
@@ -87,7 +90,7 @@ class MailHide extends ReCaptcha
      * @param string $publicKey
      * @param string $privateKey
      * @param string $email
-     * @param array|\Zend\Config\Config $options
+     * @param array|Traversable $options
      */
     public function __construct($publicKey = null, $privateKey = null, $email = null, $options = null)
     {
@@ -95,8 +98,8 @@ class MailHide extends ReCaptcha
         $this->_requireMcrypt();
 
         /* If options is a Zend_Config object we want to convert it to an array so we can merge it with the default options */
-        if ($options instanceof \Zend\Config\Config) {
-            $options = $options->toArray();
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
         }
 
         /* Merge if needed */

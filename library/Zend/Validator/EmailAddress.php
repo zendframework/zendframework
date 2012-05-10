@@ -98,7 +98,7 @@ class EmailAddress extends AbstractValidator
      * 'useMxCheck'        => If MX check should be enabled, boolean
      * 'useDeepMxCheck'    => If a deep MX check should be done, boolean
      *
-     * @param array|\Zend\Config\Config $options OPTIONAL
+     * @param array|\Traversable $options OPTIONAL
      * @return void
      */
     public function __construct($options = array())

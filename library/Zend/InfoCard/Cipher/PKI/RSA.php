@@ -44,5 +44,5 @@ interface RSA
      * @param integer $padding The padding to use during decryption (of not provided object value will be used)
      * @return string The decrypted data
      */
-    public function decrypt($encryptedData, $privateKey, $password = null, $padding = Adapter\AbstractAdapterAdapter\AbstractAdapter::NO_PADDING);
+    public function decrypt($encryptedData, $privateKey, $password = null, $padding = Adapter\AbstractAdapter::NO_PADDING);
 }

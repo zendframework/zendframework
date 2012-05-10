@@ -62,8 +62,7 @@ class Alnum extends AbstractValidator
     /**
      * Sets default option values for this instance
      *
-     * @param  boolean|\Zend\Config\Config $allowWhiteSpace
-     * @return void
+     * @param array|\Traversable $options
      */
     public function __construct($options = array())
     {

@@ -107,34 +107,33 @@ class Iban extends AbstractValidator
     /**
      * Sets validator options
      *
-     * @param  null|string|Locale|array|Traversable $locale OPTIONAL
+     * @param  null|string|Locale|array|Traversable $options OPTIONAL
      * @return void
      */
-    public function __construct($locale = null)
+    public function __construct($options = null)
     {
-        $options = array();
-        if ($locale instanceof Traversable) {
-            $locale = ArrayUtils::iteratorToArray($locale);
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
         }
 
-        if (is_array($locale)) {
-            $options = $locale;
-            if (array_key_exists('locale', $locale)) {
-                $locale  = $locale['locale'];
+        if (is_array($options)) {
+            $options = $options;
+            if (array_key_exists('locale', $options)) {
+                $options  = $options['locale'];
                 unset($options['locale']);
             } else {
-                $locale = null;
+                $options = null;
             }
         }
 
-        if (empty($locale) && ($locale !== false)) {
+        if (empty($options) && ($options !== false)) {
             if (Registry::isRegistered('Zend_Locale')) {
-                $locale = Registry::get('Zend_Locale');
+                $options = Registry::get('Zend_Locale');
             }
         }
 
-        if ($locale !== null) {
-            $this->setLocale($locale);
+        if ($options !== null) {
+            $this->setLocale($options);
         }
         
         parent::__construct($options);

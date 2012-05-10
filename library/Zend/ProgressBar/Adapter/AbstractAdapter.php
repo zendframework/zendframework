@@ -20,7 +20,8 @@
 
 namespace Zend\ProgressBar\Adapter;
 
-use Zend\Config\Config;
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
 
 /**
  * Abstract class for Zend_ProgressBar_Adapters
@@ -48,28 +49,16 @@ abstract class AbstractAdapter
      * $options may be either be an array or a Zend_Config object which
      * specifies adapter related options.
      *
-     * @param null|array|\Zend\Config\Config $options
+     * @param  array|Traversable $options
      */
     public function __construct($options = null)
     {
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
+        }
         if (is_array($options)) {
             $this->setOptions($options);
-        } elseif ($options instanceof Config) {
-            $this->setConfig($options);
         }
-    }
-
-    /**
-     * Set options via a Zend_Config instance
-     *
-     * @param  \Zend\Config\Config $config
-     * @return \Zend\ProgressBar\Adapter\Adapter
-     */
-    public function setConfig(Config $config)
-    {
-        $this->setOptions($config->toArray());
-
-        return $this;
     }
 
     /**

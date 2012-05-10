@@ -52,8 +52,7 @@ class IsCompressed extends MimeType
     /**
      * Sets validator options
      *
-     * @param  string|array|\Zend\Config\Config $compression
-     * @return void
+     * @param  string|array|Traversable $compression
      */
     public function __construct($options = array())
     {

@@ -20,7 +20,8 @@
 
 namespace Zend\Filter;
 
-use Zend\Config;
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
 use Zend\Loader;
 
 /**
@@ -41,12 +42,12 @@ class Encrypt extends AbstractFilter
     /**
      * Class constructor
      *
-     * @param string|array $options (Optional) Options to set, if null mcrypt is used
+     * @param string|array|Traversable $options (Optional) Options to set, if null mcrypt is used
      */
     public function __construct($options = null)
     {
-        if ($options instanceof Config\Config) {
-            $options = $options->toArray();
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
         }
 
         $this->setAdapter($options);
@@ -97,7 +98,9 @@ class Encrypt extends AbstractFilter
 
         $this->_adapter = new $adapter($options);
         if (!$this->_adapter instanceof Encrypt\EncryptionAlgorithmInterface) {
-            throw new Exception\InvalidArgumentException("Encoding adapter '" . $adapter . "' does not implement Zend\\Filter\\Encrypt\\EncryptionAlgorithmInterface");
+            throw new Exception\InvalidArgumentException(
+                "Encoding adapter '" . $adapter
+                . "' does not implement Zend\\Filter\\Encrypt\\EncryptionAlgorithmInterface");
         }
 
         return $this;

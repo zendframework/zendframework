@@ -20,6 +20,8 @@
 
 namespace Zend\Translator\Adapter;
 
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
 use Zend\Translator\Adapter\AbstractAdapter,
     Zend\Translator\Exception\InvalidArgumentException;
 
@@ -34,7 +36,7 @@ class Csv extends AbstractAdapter
     /**
      * Generates the adapter
      *
-     * @param  array|Zend_Config $options Translation content
+     * @param  array|Traversable $options Translation content
      */
     public function __construct($options = array())
     {
@@ -42,8 +44,8 @@ class Csv extends AbstractAdapter
         $this->_options['length']    = 0;
         $this->_options['enclosure'] = '"';
 
-        if ($options instanceof \Zend\Config\Config) {
-            $options = $options->toArray();
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
         } else if (func_num_args() > 1) {
             $args               = func_get_args();
             $options            = array();

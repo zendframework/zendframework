@@ -246,7 +246,7 @@ class App
         $userAgent = $applicationId . ' Zend_Framework_Gdata/' .
             \Zend\Version::VERSION;
         $client->getRequest()->headers()->addHeaderLine('User-Agent', $userAgent);
-        $client->setConfig(array(
+        $client->setOptions(array(
             'strictredirects' => true
             )
         );
@@ -280,7 +280,7 @@ class App
             $client = new Http\Client();
             $userAgent = 'Zend_Framework_Gdata/' . \Zend\Version::VERSION;
             $client->setHeaders('User-Agent', $userAgent);
-            $client->setConfig(array(
+            $client->setOptions(array(
                 'strictredirects' => true
                 )
             );
@@ -637,7 +637,7 @@ class App
         }
 
 
-        $this->_httpClient->setConfig(array('maxredirects' => 0));
+        $this->_httpClient->setOptions(array('maxredirects' => 0));
 
         // Set the proper adapter if we are handling a streaming upload
         $usingMimeStream = false;
@@ -1099,7 +1099,7 @@ class App
      */
     public function enableRequestDebugLogging($logfile)
     {
-        $this->_httpClient->setConfig(array(
+        $this->_httpClient->setOptions(array(
             'adapter' => 'Zend\GData\App\LoggingHttpClientAdapterSocket',
             'logfile' => $logfile
             ));

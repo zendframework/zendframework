@@ -28,7 +28,7 @@ namespace Zend\Amf;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class AbstractAuthentication implements \Zend\Authentication\Adapter
+abstract class AbstractAuthentication implements \Zend\Authentication\Adapter\AdapterInterface
 {
     protected $_username;
     protected $_password;

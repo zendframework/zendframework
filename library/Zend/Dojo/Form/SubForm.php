@@ -40,8 +40,7 @@ class SubForm extends \Zend\Form\SubForm
     /**
      * Constructor
      *
-     * @param  array|\Zend\Config\Config|null $options
-     * @return void
+     * @param  array|\Traversable $options
      */
     public function __construct($options = null)
     {

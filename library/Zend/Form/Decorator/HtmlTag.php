@@ -39,10 +39,6 @@ use Zend\Filter;
  *
  * Any other options passed are processed as HTML attributes of the tag.
  *
- * @uses       \Zend\Filter\FilterChain
- * @uses       \Zend\Filter\Alnum
- * @uses       \Zend\Filter\StringToLower
- * @uses       \Zend\Form\Decorator\AbstractDecorator
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Decorator

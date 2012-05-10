@@ -24,9 +24,6 @@ namespace Zend\GData\App;
 /**
  * Atom feed class
  *
- * @uses       \Zend\GData\App\Entry
- * @uses       \Zend\GData\App\FeedSourceParent
- * @uses       \Zend\GData\App\HttpException
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage App

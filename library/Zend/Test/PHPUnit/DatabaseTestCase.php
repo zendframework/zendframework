@@ -24,14 +24,6 @@ namespace Zend\Test\PHPUnit;
 /**
  * Generic Testcase for Zend Framework related DbUnit Testing with PHPUnit
  *
- * @uses       PHPUnit_Extensions_Database_Operation_Composite
- * @uses       PHPUnit_Extensions_Database_TestCase
- * @uses       \Zend\Test\PHPUnit\Db\Connection
- * @uses       \Zend\Test\PHPUnit\Db\DataSet\DbTable
- * @uses       \Zend\Test\PHPUnit\Db\DataSet\DbTableDataSet
- * @uses       \Zend\Test\PHPUnit\Db\DataSet\DbRowset
- * @uses       \Zend\Test\PHPUnit\Db\Operation\Insert
- * @uses       \Zend\Test\PHPUnit\Db\Operation\Truncate
  * @category   Zend
  * @package    Zend_Test
  * @subpackage PHPUnit

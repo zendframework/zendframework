@@ -29,8 +29,6 @@ use Zend\Pdf;
  * Thes class allows to extract fonts already mentioned within PDF document and use them
  * for text drawing.
  *
- * @uses       \Zend\Pdf\Exception
- * @uses       \Zend\Pdf\Resource\Font\AbstractFont
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Fonts
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

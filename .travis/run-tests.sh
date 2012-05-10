@@ -8,7 +8,7 @@ for tested in "${testedcomponents[@]}"
     do
         echo "$tested:"
         phpunit -c $testdir/phpunit.xml $testdir/$tested
-        let "result = $result || $?"
+        result=$(($result || $?))
 done
 
 exit $result

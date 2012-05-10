@@ -39,4 +39,18 @@ interface SharedEventManagerAwareInterface
      * @return SharedEventManagerAwareInterface
      */
     public function setSharedManager(SharedEventManagerInterface $sharedEventManager);
+
+    /**
+     * Get shared collections container
+     *
+     * @return SharedEventManagerInterface
+     */
+    public function getSharedManager();
+
+    /**
+     * Remove any shared collections
+     *
+     * @return void
+     */
+    public function unsetSharedManager();
 }

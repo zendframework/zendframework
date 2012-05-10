@@ -28,7 +28,6 @@ use Zend\View\Renderer\RendererInterface as Renderer;
  *
  * Note that only rendering is necessary for word-based captcha
  *
- * @uses       Zend\Captcha\Word
  * @category   Zend
  * @package    Zend_Captcha
  * @subpackage Adapter
@@ -38,6 +37,30 @@ use Zend\View\Renderer\RendererInterface as Renderer;
 class Dumb extends Word
 {
     /**
+     * CAPTCHA label
+     * @type string
+     */
+    protected $_label = 'Please type this word backwards';
+
+    /**
+     * Set the label for the CAPTCHA
+     * @param string $label
+     */
+    public function setLabel($label)
+    {
+        $this->_label = $label;
+    }
+
+    /**
+     * Retrieve the label for the CAPTCHA
+     * @return string
+     */
+    public function getLabel()
+    {
+        return $this->_label;
+    }
+
+    /**
      * Render the captcha
      *
      * @param  Renderer $view
@@ -46,7 +69,7 @@ class Dumb extends Word
      */
     public function render(Renderer $view = null, $element = null)
     {
-        return 'Please type this word backwards: <b>'
+        return $this->getLabel() . ': <b>'
              . strrev($this->getWord())
              . '</b>';
     }

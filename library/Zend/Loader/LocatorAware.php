@@ -2,10 +2,10 @@
 
 namespace Zend\Loader;
 
-use Zend\Di\Locator;
+use Zend\Di\LocatorInterface;
 
 interface LocatorAware
 {
-    public function setLocator(Locator $locator);
+    public function setLocator(LocatorInterface $locator);
     public function getLocator();
 }

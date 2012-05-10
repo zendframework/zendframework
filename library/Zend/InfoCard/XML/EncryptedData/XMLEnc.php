@@ -26,8 +26,6 @@ use Zend\InfoCard\XML\AbstractElement,
 /**
  * An XmlEnc formatted EncryptedData XML block
  *
- * @uses       \Zend\InfoCard\XML\EncryptedData\AbstractEncryptedData
- * @uses       \Zend\InfoCard\XML\Exception
  * @category   Zend
  * @package    Zend_InfoCard
  * @subpackage Zend_InfoCard_Xml

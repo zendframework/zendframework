@@ -69,61 +69,50 @@ class Entry
     /**
      * Set a single author
      *
-     * @param  int $index
-     * @return string|null
+     * The following option keys are supported:
+     * 'name'  => (string) The name
+     * 'email' => (string) An optional email
+     * 'uri'   => (string) An optional and valid URI
+     *
+     * @param array $author
+     * @throws Exception\InvalidArgumentException If any value of $author not follow the format.
+     * @return void
      */
-    public function addAuthor($name, $email = null, $uri = null)
+    public function addAuthor(array $author)
     {
-        $author = array();
-        if (is_array($name)) {
-            if (!array_key_exists('name', $name)
-                || empty($name['name'])
-                || !is_string($name['name'])
-            ) {
-                throw new Exception('Invalid parameter: author array must include a "name" key with a non-empty string value');
-            }
-            $author['name'] = $name['name'];
-            if (isset($name['email'])) {
-                if (empty($name['email']) || !is_string($name['email'])) {
-                    throw new Exception('Invalid parameter: "email" array value must be a non-empty string');
-                }
-                $author['email'] = $name['email'];
-            }
-            if (isset($name['uri'])) {
-                if (empty($name['uri']) || !is_string($name['uri']) || !Uri\UriFactory::factory($name['uri'])->isValid()) {
-                    throw new Exception('Invalid parameter: "uri" array value must be a non-empty string and valid URI/IRI');
-                }
-                $author['uri'] = $name['uri'];
-            }
-        /**
-         * @deprecated
-         * Array notation (above) is preferred and will be the sole supported input from ZF 2.0
-         */
-        } else {
-            if (empty($name['name']) || !is_string($name['name'])) {
-                throw new Exception('Invalid parameter: "name" must be a non-empty string value');
-            }
-            $author['name'] = $name;
-            if (isset($email)) {
-                if (empty($email) || !is_string($email)) {
-                    throw new Exception('Invalid parameter: "email" value must be a non-empty string');
-                }
-                $author['email'] = $email;
-            }
-            if (isset($uri)) {
-                if (empty($uri) || !is_string($uri) || !Uri\UriFactory::factory($uri)->isValid()) {
-                    throw new Exception('Invalid parameter: "uri" array value must be a non-empty string and valid URI/IRI');
-                }
-                $author['uri'] = $uri;
+        // Check array values
+        if (!array_key_exists('name', $author)
+            || empty($author['name'])
+            || !is_string($author['name'])
+        ) {
+            throw new Exception\InvalidArgumentException(
+                'Invalid parameter: author array must include a "name" key with a non-empty string value');
+        }
+
+        if (isset($author['email'])) {
+            if (empty($author['email']) || !is_string($author['email'])) {
+                throw new Exception\InvalidArgumentException(
+                    'Invalid parameter: "email" array value must be a non-empty string');
             }
         }
+        if (isset($author['uri'])) {
+            if (empty($author['uri']) || !is_string($author['uri']) ||
+                !Uri\UriFactory::factory($author['uri'])->isValid()
+            ) {
+                throw new Exception\InvalidArgumentException(
+                    'Invalid parameter: "uri" array value must be a non-empty string and valid URI/IRI');
+            }
+        }
+
         $this->_data['authors'][] = $author;
     }
 
     /**
      * Set an array with feed authors
      *
-     * @return array
+     * @see addAuthor
+     * @param array $authors
+     * @return void
      */
     public function addAuthors(array $authors)
     {

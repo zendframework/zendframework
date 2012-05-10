@@ -22,8 +22,6 @@
 namespace Zend\InfoCard\XML;
 
 /**
- * @uses       \Zend\InfoCard\XML\Security\Exception
- * @uses       \Zend\InfoCard\XML\Security\Transform\TransformChain
  * @category   Zend
  * @package    Zend_InfoCard
  * @subpackage Zend_InfoCard_Xml_Security

@@ -347,7 +347,7 @@ class MvcTest extends TestCase
             'controller' => 'index'
         ));
 
-        $props    = array('RouteInterface');
+        $props    = array('Route');
         $valids   = array('index', 'help', 'home', 'default', '1', ' ', null);
         $invalids = array(42, (object) null);
 
@@ -418,13 +418,19 @@ class MvcTest extends TestCase
 
         $toArray = $page->toArray();
 
-        $options['route']        = null;
-        $options['params']       = array();
-        $options['rel']          = array();
-        $options['rev']          = array();
+        $options['route']  = null;
+        $options['params'] = array();
+        $options['rel']    = array();
+        $options['rev']    = array();
 
-        $this->assertEquals(array(),
-            array_diff_assoc($options, $page->toArray()));
+        $options['privilege'] = null;
+        $options['resource']  = null;
+        $options['pages']     = array();
+        $options['type']      = 'Zend\Navigation\Page\Mvc';
+
+        ksort($options);
+        ksort($toArray);
+        $this->assertEquals($options, $toArray);
     }
 
     public function testSpecifyingAnotherUrlHelperToGenerateHrefs()

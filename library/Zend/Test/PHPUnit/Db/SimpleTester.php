@@ -26,14 +26,6 @@ use Zend\Test\PHPUnit\Db\Exception\InvalidArgumentException;
 /**
  * Simple Tester for Database Tests when the Abstract Test Case cannot be used.
  *
- * @uses       PHPUnit_Extensions_Database_DataSet_IDataSet
- * @uses       PHPUnit_Extensions_Database_DB_IDatabaseConnection
- * @uses       PHPUnit_Extensions_Database_DefaultTester
- * @uses       PHPUnit_Extensions_Database_Operation_Composite
- * @uses       PHPUnit_Extensions_Database_Operation_Factory
- * @uses       \Zend\Test\PHPUnit\Db\Exception\InvalidArgumentException
- * @uses       \Zend\Test\PHPUnit\Db\Operation\Insert
- * @uses       \Zend\Test\PHPUnit\Db\Operation\Truncate
  * @category   Zend
  * @package    Zend_Test
  * @subpackage PHPUnit

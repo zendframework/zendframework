@@ -20,8 +20,8 @@
  */
 
 namespace Zend\Search\Lucene\Analysis\TokenFilter;
+
 use Zend\Search\Lucene,
-    Zend\Search\Lucene\Analysis\TokenFilter,
     Zend\Search\Lucene\Analysis\Token,
     Zend\Search\Lucene\Exception\InvalidArgumentException,
     Zend\Search\Lucene\Exception\RuntimeException;
@@ -32,16 +32,13 @@ use Zend\Search\Lucene,
  *
  * We do recommend to provide all words in lowercase and concatenate this class after the lowercase filter.
  *
- * @uses       \Zend\Search\Lucene\Analysis\TokenFilter
- * @uses       \Zend\Search\Lucene\Exception\InvalidArgumentException
- * @uses       \Zend\Search\Lucene\Exception\RuntimeException
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Analysis
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class StopWords implements TokenFilter
+class StopWords implements TokenFilterInterface
 {
     /**
      * Stop Words

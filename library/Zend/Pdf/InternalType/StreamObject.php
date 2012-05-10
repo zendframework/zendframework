@@ -28,14 +28,6 @@ use Zend\Pdf;
 /**
  * PDF file 'stream object' element implementation
  *
- * @uses       \Zend\Pdf\InternalType\AbstractTypeObject
- * @uses       \Zend\Pdf\InternalType\DictionaryObject
- * @uses       \Zend\Pdf\InternalType\NumericObject
- * @uses       \Zend\Pdf\InternalType\IndirectObject
- * @uses       \Zend\Pdf\InternalType\StreamContent
- * @uses       \Zend\Pdf\Exception
- * @uses       \Zend\Pdf\InternalType\StreamFilter
- * @uses       \Zend\Pdf\InternalType\StreamFilter\Compression;
  * @category   Zend
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Internal

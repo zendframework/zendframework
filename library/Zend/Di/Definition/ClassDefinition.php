@@ -2,7 +2,7 @@
 
 namespace Zend\Di\Definition;
 
-class ClassDefinition implements Definition, PartialMarker
+class ClassDefinition implements DefinitionInterface, PartialMarker
 {
 
     protected $class = null;

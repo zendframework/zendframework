@@ -215,6 +215,10 @@ class McryptTest extends \PHPUnit_Framework_TestCase
      */
     public function testEncryptionWithDecryptionAndCompressionMcrypt()
     {
+        if (version_compare(phpversion(), '5.4', '>=')) {
+            $this->markTestIncomplete('Code to test is not compatible with PHP 5.4 ');
+        }
+
         if (!extension_loaded('bz2')) {
             $this->markTestSkipped('This adapter needs the bz2 extension');
         }

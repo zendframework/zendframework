@@ -27,10 +27,6 @@ use Zend\Wildfire\Plugin,
 /**
  * Encodes messages into the Wildfire JSON Stream Communication Protocol.
  *
- * @uses       \Zend\Json\Json
- * @uses       \Zend\Wildfire\Channel
- * @uses       \Zend\Wildfire\Exception
- * @uses       \Zend\Wildfire\Plugin
  * @category   Zend
  * @package    Zend_Wildfire
  * @subpackage Protocol

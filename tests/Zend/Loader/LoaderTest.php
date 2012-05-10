@@ -145,7 +145,7 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
     {
         if (ini_get('phar.readonly')) {
             $this->markTestSkipped(
-                "creating phar archive is disabled by the php.ini setting 'phar.readonly'"
+                'creating phar archive is disabled by the php.ini setting "phar.readonly"'
             );
         }
 
@@ -164,7 +164,7 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
     public function testExplodeIncludePathProperlyIdentifiesStreamSchemes()
     {
         if (PATH_SEPARATOR != ':') {
-            $this->markTestSkipped();
+            $this->markTestSkipped('This test only works for platforms where the path separator is not ":"');
         }
         $path = 'phar://zlt.phar:/var/www:.:filter://[a-z]:glob://*';
         $paths = Loader::explodeIncludePath($path);

@@ -29,7 +29,6 @@ namespace Zend\GData\App;
  * challenge is a visual puzzle presented to the user to prove that they are
  * not an automated system.
  *
- * @uses       \Zend\GData\App\AuthException
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage App

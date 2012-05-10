@@ -24,7 +24,6 @@ namespace Zend\Form\Element;
 /**
  * Base class for multi-option form elements
  *
- * @uses       \Zend\Form\Element\Xhtml
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Element

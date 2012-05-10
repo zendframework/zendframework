@@ -40,7 +40,6 @@ class ProgressBarTest extends \PHPUnit_Framework_TestCase
 
     public function testPersistence()
     {
-        $this->markTestSkipped('Waiting for Zend\Session Conversion to namespace');
         $progressBar = $this->_getProgressBar(0, 100, 'foobar');
         $progressBar->update(25);
 

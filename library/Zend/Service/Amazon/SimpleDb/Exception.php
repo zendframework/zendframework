@@ -22,7 +22,6 @@
 namespace Zend\Service\Amazon\SimpleDb;
 
 /**
- * @uses       Zend\Service\Amazon\Exception
  * @category   Zend
  * @package    Zend_Service_Amazon
  * @subpackage SimpleDb

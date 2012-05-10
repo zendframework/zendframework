@@ -25,9 +25,6 @@ use Zend\Locale\Format,
 /**
  * Localizes given normalized input
  *
- * @uses       Zend\Date\Date
- * @uses       Zend\Filter\AbstractFilter
- * @uses       Zend\Locale\Format
  * @category   Zend
  * @package    Zend_Filter
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -74,7 +71,7 @@ class NormalizedToLocalized extends AbstractFilter
      * Sets options to use
      *
      * @param  array $options (Optional) Options to use
-     * @return \Zend\Filter\LocalizedToNormalized
+     * @return NormalizedToLocalized
      */
     public function setOptions(array $options = null)
     {
@@ -83,7 +80,7 @@ class NormalizedToLocalized extends AbstractFilter
     }
 
     /**
-     * Defined by Zend_Filter_Interface
+     * Defined by Zend\Filter\FilterInterface
      *
      * Normalizes the given input
      *

@@ -22,18 +22,16 @@
 namespace Zend\Search\Lucene;
 
 /**
- * @uses       \Zend\Search\Lucene\Index\TermsPriorityQueue
- * @uses       \Zend\Search\Lucene\Index\TermsStream
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Index
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class TermStreamsPriorityQueue implements Index\TermsStream
+class TermStreamsPriorityQueue implements Index\TermsStreamInterface
 {
     /**
-     * Array of term streams (Zend_Search_Lucene_Index_TermsStream_Interface objects)
+     * Array of term streams (Zend\Search\Lucene\Index\TermsStreamInterface objects)
      *
      * @var array
      */
@@ -57,7 +55,7 @@ class TermStreamsPriorityQueue implements Index\TermsStream
     /**
      * Object constructor
      *
-     * @param array $termStreams  array of term streams (\Zend\Search\Lucene\Index\TermsStream objects)
+     * @param array $termStreams  array of term streams (\Zend\Search\Lucene\Index\TermsStreamInterface objects)
      */
     public function __construct(array $termStreams)
     {

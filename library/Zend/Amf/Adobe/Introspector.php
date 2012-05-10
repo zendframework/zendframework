@@ -30,10 +30,6 @@ use Zend\Amf\Exception,
 /**
  * This class implements a service for generating AMF service descriptions as XML.
  *
- * @uses       Zend\Amf\Parser\TypeLoader
- * @uses       Zend\Loader
- * @uses       Zend\Reflection\ReflectionClass
- * @uses       Zend\Server\Reflection
  * @package    Zend_Amf
  * @subpackage Adobe
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

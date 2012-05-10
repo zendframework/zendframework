@@ -46,13 +46,14 @@ class ClearByFactor extends AbstractPlugin
     /**
      * Attach
      *
-     * @param  EventManagerInterface $eventCollection
+     * @param  EventManagerInterface $events
+     * @param  int                   $priority
      * @return ClearByFactor
      * @throws Exception\LogicException
      */
-    public function attach(EventManagerInterface $eventCollection)
+    public function attach(EventManagerInterface $events, $priority = 1)
     {
-        $index = spl_object_hash($eventCollection);
+        $index = spl_object_hash($events);
         if (isset($this->handles[$index])) {
             throw new Exception\LogicException('Plugin already attached');
         }
@@ -60,10 +61,11 @@ class ClearByFactor extends AbstractPlugin
         $handles = array();
         $this->handles[$index] = & $handles;
 
-        $handles[] = $eventCollection->attach('setItem.post',  array($this, 'clearByFactor'));
-        $handles[] = $eventCollection->attach('setItems.post', array($this, 'clearByFactor'));
-        $handles[] = $eventCollection->attach('addItem.post',  array($this, 'clearByFactor'));
-        $handles[] = $eventCollection->attach('addItems.post', array($this, 'clearByFactor'));
+        $callback = array($this, 'clearByFactor');
+        $handles[] = $events->attach('setItem.post',  $callback, $priority);
+        $handles[] = $events->attach('setItems.post', $callback, $priority);
+        $handles[] = $events->attach('addItem.post',  $callback, $priority);
+        $handles[] = $events->attach('addItems.post', $callback, $priority);
 
         return $this;
     }
@@ -71,20 +73,20 @@ class ClearByFactor extends AbstractPlugin
     /**
      * Detach
      *
-     * @param  EventManagerInterface $eventCollection
+     * @param  EventManagerInterface $events
      * @return ClearByFactor
      * @throws Exception\LogicException
      */
-    public function detach(EventManagerInterface $eventCollection)
+    public function detach(EventManagerInterface $events)
     {
-        $index = spl_object_hash($eventCollection);
+        $index = spl_object_hash($events);
         if (!isset($this->handles[$index])) {
             throw new Exception\LogicException('Plugin not attached');
         }
 
         // detach all handles of this index
         foreach ($this->handles[$index] as $handle) {
-            $eventCollection->detach($handle);
+            $events->detach($handle);
         }
 
         // remove all detached handles

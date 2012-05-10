@@ -26,8 +26,6 @@ namespace Zend\GData\Photos\Extension;
  * This is an optional field that can be used to indicate the
  * client which created a photo.
  *
- * @uses       \Zend\GData\Extension
- * @uses       \Zend\GData\Photos
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Photos

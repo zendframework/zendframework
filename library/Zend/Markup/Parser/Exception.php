@@ -24,7 +24,6 @@ namespace Zend\Markup\Parser;
 /**
  * Exception class for Zend_Markup_Parser
  *
- * @uses       \Zend\Markup\Exception
  * @category   Zend 
  * @package    Zend_Markup
  * @subpackage Parser

@@ -21,7 +21,8 @@
 
 namespace ZendTest\Filter;
 
-use Zend\Filter\HtmlEntities as HtmlEntitiesFilter;
+use Zend\Filter\HtmlEntities as HtmlEntitiesFilter,
+    Zend\Filter\Exception;
 
 /**
  * @category   Zend
@@ -34,14 +35,14 @@ use Zend\Filter\HtmlEntities as HtmlEntitiesFilter;
 class HtmlEntitiesTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * Zend_Filter_HtmlEntities object
+     * Zend\Filter\HtmlEntities object
      *
-     * @var Zend_Filter_HtmlEntities
+     * @var \Zend\Filter\HtmlEntities
      */
     protected $_filter;
 
     /**
-     * Creates a new Zend_Filter_HtmlEntities object for each test method
+     * Creates a new Zend\Filter\HtmlEntities object for each test method
      *
      * @return void
      */
@@ -205,5 +206,75 @@ class HtmlEntitiesTest extends \PHPUnit_Framework_TestCase
 
         $this->_filter->setQuoteStyle(ENT_NOQUOTES);
         $this->assertEquals($result, $this->_filter->filter($input));
+    }
+
+    /**
+     * @group ZF-11344
+     */
+    public function testCorrectsForEncodingMismatch()
+    {
+        if (version_compare(phpversion(), '5.4', '>=')) {
+            $this->markTestIncomplete('Code to test is not compatible with PHP 5.4 ');
+        }
+
+        $string = file_get_contents(dirname(__FILE__) . '/_files/latin-1-text.txt');
+
+        // restore_error_handler can emit an E_WARNING; let's ignore that, as 
+        // we want to test the returned value
+        set_error_handler(array($this, 'errorHandler'), E_NOTICE | E_WARNING);
+        $result = $this->_filter->filter($string);
+        restore_error_handler();
+
+        $this->assertTrue(strlen($result) > 0);
+    }
+
+    /**
+     * @group ZF-11344
+     */
+    public function testStripsUnknownCharactersWhenEncodingMismatchDetected()
+    {
+        if (version_compare(phpversion(), '5.4', '>=')) {
+            $this->markTestIncomplete('Code to test is not compatible with PHP 5.4 ');
+        }
+
+        $string = file_get_contents(dirname(__FILE__) . '/_files/latin-1-text.txt');
+
+        // restore_error_handler can emit an E_WARNING; let's ignore that, as 
+        // we want to test the returned value
+        set_error_handler(array($this, 'errorHandler'), E_NOTICE | E_WARNING);
+        $result = $this->_filter->filter($string);
+        restore_error_handler();
+
+        $this->assertContains('&quot;&quot;', $result);
+    }
+
+    /**
+     * @group ZF-11344
+     */
+    public function testRaisesExceptionIfEncodingMismatchDetectedAndFinalStringIsEmpty()
+    {
+        if (version_compare(phpversion(), '5.4', '>=')) {
+            $this->markTestIncomplete('Code to test is not compatible with PHP 5.4 ');
+        }
+
+        $string = file_get_contents(dirname(__FILE__) . '/_files/latin-1-dash-only.txt');
+
+        // restore_error_handler can emit an E_WARNING; let's ignore that, as 
+        // we want to test the returned value
+        // Also, explicit try, so that we don't mess up PHPUnit error handlers
+        set_error_handler(array($this, 'errorHandler'), E_NOTICE | E_WARNING);
+        try {
+            $result = $this->_filter->filter($string);
+            $this->fail('Expected exception from single non-utf-8 character');
+        } catch (\Exception $e) {
+            $this->assertTrue($e instanceof Exception\DomainException);
+        }
+    }
+
+    /**
+     * Null error handler; used when wanting to ignore specific error types
+     */
+    public function errorHandler($errno, $errstr)
+    {
     }
 }

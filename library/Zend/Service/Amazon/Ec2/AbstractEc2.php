@@ -27,13 +27,6 @@ use Zend\Service\Amazon,
 /**
  * Provides the basic functionality to send a request to the Amazon Ec2 Query API
  *
- * @uses       DOMXPath
- * @uses       Zend_Crypt_Hmac
- * @uses       Zend_Http_Client
- * @uses       Zend_Service_Amazon_Abstract
- * @uses       Zend\Service\Amazon\Exception
- * @uses       Zend\Service\Amazon\Ec2\Exception
- * @uses       Zend_Service_Amazon_Ec2_Response
  * @category   Zend
  * @package    Zend_Service_Amazon
  * @subpackage Ec2

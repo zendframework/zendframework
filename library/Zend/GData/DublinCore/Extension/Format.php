@@ -24,8 +24,6 @@ namespace Zend\GData\DublinCore\Extension;
 /**
  * File format, physical medium, or dimensions of the resource
  *
- * @uses       \Zend\GData\DublinCore
- * @uses       \Zend\GData\Extension
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage DublinCore

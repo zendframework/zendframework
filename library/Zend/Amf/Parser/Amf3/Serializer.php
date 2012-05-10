@@ -29,10 +29,6 @@ use Zend\Amf\Parser\AbstractSerializer,
 /**
  * Detect PHP object type and convert it to a corresponding AMF3 object type
  *
- * @uses       Zend\Amf\Constants
- * @uses       Zend\Amf\Exception
- * @uses       Zend\Amf\Parser\Serializer
- * @uses       Zend\Amf\Parser\TypeLoader
  * @package    Zend_Amf
  * @subpackage Parse_Amf3
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

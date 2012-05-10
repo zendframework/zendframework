@@ -30,9 +30,6 @@ use Zend\Log;
  * for parsing the raw binary data from the font file on disk. Also provides
  * a debug logging interface and a couple of shared utility methods.
  *
- * @uses       \Zend\Log\Logger
- * @uses       \Zend\Pdf\BinaryParser\AbstractBinaryParser
- * @uses       \Zend\Pdf\Font
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Fonts
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

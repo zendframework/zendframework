@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_CodeGenerator
+ * @package    Zend_Code_Generator
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -24,18 +24,14 @@ namespace ZendTest\Code\Generator;
 use Zend\Code\Generator\DocblockGenerator;
 
 /**
- * @see Zend_CodeGenerator_Php_Class
- */
-
-/**
  * @category   Zend
- * @package    Zend_CodeGenerator
+ * @package    Zend_Code_Generator
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  *
- * @group Zend_CodeGenerator
- * @group Zend_CodeGenerator_Php
+ * @group Zend_Code_Generator
+ * @group Zend_Code_Generator_Php
  */
 class DocblockGeneratorTest extends \PHPUnit_Framework_TestCase
 {
@@ -56,7 +52,7 @@ class DocblockGeneratorTest extends \PHPUnit_Framework_TestCase
 
     public function testTagGettersAndSetters()
     {
-        $this->markTestSkipped('Must refactor DocBlock like Reflecion tag first.');
+        $this->markTestIncomplete('Must refactor DocBlock like Reflecion tag first.');
 //        $this->_docblock->setTag(array('name' => 'blah'));
 //        $this->_docblock->setTag(new \Zend\Code\Generator\DocBlock\Tag\Param(array('datatype' => 'string')));
 //        $this->_docblock->setTag(new \Zend\Code\Generator\DocBlock\Tag\Return(array('datatype' => 'int')));

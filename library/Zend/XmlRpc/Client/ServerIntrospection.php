@@ -26,8 +26,6 @@ use Zend\XmlRpc\Client as XMLRPCClient;
 /**
  * Wraps the XML-RPC system.* introspection methods
  *
- * @uses       Zend\XmlRpc\Client\FaultException
- * @uses       Zend\XmlRpc\Client\IntrospectException
  * @category   Zend
  * @package    Zend_XmlRpc
  * @subpackage Client

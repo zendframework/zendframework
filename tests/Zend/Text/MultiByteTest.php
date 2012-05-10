@@ -250,4 +250,31 @@ class MultiByteTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('Zend\Text\Exception\InvalidArgumentException', "Cannot force cut when width is zero");
         Text\MultiByte::wordWrap('a', 0, "\n", true);
     }
+
+    /**
+     * @group ZF-12186
+     */
+    public function testPadInputLongerThanPadLength()
+    {
+        $text = Text\MultiByte::strPad('äääöö', 2, 'ö');
+        $this->assertEquals('äääöö', $text);
+    }
+
+    /**
+     * @group ZF-12186
+     */
+    public function testPadInputSameAsPadLength()
+    {
+        $text = Text\MultiByte::strPad('äääöö', 5, 'ö');
+        $this->assertEquals('äääöö', $text);
+    }
+
+    /**
+     * @group ZF-12186
+     */
+    public function testPadNegativePadLength()
+    {
+        $text = Text\MultiByte::strPad('äääöö', -2, 'ö');
+        $this->assertEquals('äääöö', $text);
+    }
 }

@@ -26,9 +26,6 @@ use Zend\InfoCard\XML;
 /**
  * Factory object to retrieve an Assertion object based on the type of XML document provided
  *
- * @uses       \Zend\InfoCard\XML\Assertion
- * @uses       \Zend\InfoCard\XML\Assertion\SAML
- * @uses       \Zend\InfoCard\XML\Exception
  * @category   Zend
  * @package    Zend_InfoCard
  * @subpackage Zend_InfoCard_Xml

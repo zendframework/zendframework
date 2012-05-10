@@ -20,15 +20,6 @@
  */
 
 /**
- * @uses       Zend_Http_Client
- * @uses       Zend_Http_Response
- * @uses       Zend_Service_WindowsAzure_Credentials_AbstractCredentials
- * @uses       Zend_Service_WindowsAzure_Credentials_SharedKey
- * @uses       Zend_Service_WindowsAzure_Exception
- * @uses       Zend_Service_WindowsAzure_RetryPolicy_AbstractRetryPolicy
- * @uses       Zend_Service_WindowsAzure_Storage
- * @uses       Zend_Service_WindowsAzure_Storage_QueueInstance
- * @uses       Zend_Service_WindowsAzure_Storage_QueueMessage
  * @category   Zend
  * @package    Zend_Service_WindowsAzure
  * @subpackage Storage

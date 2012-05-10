@@ -24,11 +24,6 @@ namespace Zend\Test\PHPUnit\Db\DataSet;
 /**
  * Aggregate several Zend_Db_Table instances into a dataset.
  *
- * @uses       \Zend\Test\PHPUnit\Db\Exception\InvalidArgumentException
- * @uses       PHPUnit_Extensions_Database_DataSet_DefaultTableIterator
- * @uses       PHPUnit_Extensions_Database_DataSet_QueryDataSet
- * @uses       PHPUnit_Extensions_Database_DB_IDatabaseConnection
- * @uses       \Zend\Test\PHPUnit\Db\DataSet\DbTable
  * @category   Zend
  * @package    Zend_Test
  * @subpackage PHPUnit

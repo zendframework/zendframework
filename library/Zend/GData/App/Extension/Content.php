@@ -24,7 +24,6 @@ namespace Zend\GData\App\Extension;
 /**
  * Represents the atom:content element
  *
- * @uses       \Zend\GData\App\Extension\Text
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage App

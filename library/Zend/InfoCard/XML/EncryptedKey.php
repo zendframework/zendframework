@@ -24,11 +24,6 @@ namespace Zend\InfoCard\XML;
 /**
  * An object representing an Xml EncryptedKEy block
  *
- * @uses       \Zend\InfoCard\XML\AbstractElement
- * @uses       \Zend\InfoCard\XML\EncryptedKey
- * @uses       \Zend\InfoCard\XML\Exception
- * @uses       \Zend\InfoCard\XML\KeyInfo\Factory
- * @uses       \Zend\InfoCard\XML\KeyInfo
  * @category   Zend
  * @package    Zend_InfoCard
  * @subpackage Zend_InfoCard_Xml

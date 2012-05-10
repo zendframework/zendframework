@@ -62,7 +62,7 @@ class DocBlockReflectionTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($classReflection->getMethod('doSomething')->getDocblock()->hasTag('return'));
 
         $returnTag = $classReflection->getMethod('doSomething')->getDocblock()->getTag('return');
-        $this->assertInstanceOf('Zend\Code\Reflection\DocBlock\Tag', $returnTag);
+        $this->assertInstanceOf('Zend\Code\Reflection\DocBlock\TagInterface', $returnTag);
         $this->assertEquals('mixed', $returnTag->getType());
     }
 

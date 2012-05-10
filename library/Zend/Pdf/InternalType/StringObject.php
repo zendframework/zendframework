@@ -25,7 +25,6 @@ use Zend\Pdf;
 /**
  * PDF file 'string' element implementation
  *
- * @uses       \Zend\Pdf\InternalType\AbstractTypeObject
  * @category   Zend
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Internal

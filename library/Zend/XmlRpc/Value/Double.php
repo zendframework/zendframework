@@ -22,7 +22,6 @@
 namespace Zend\XmlRpc\Value;
 
 /**
- * @uses       \Zend\XmlRpc\Value\Scalar
  * @category   Zend
  * @package    Zend_XmlRpc
  * @subpackage Value

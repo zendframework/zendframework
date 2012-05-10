@@ -26,9 +26,6 @@ use Zend\GData\Extension;
 /**
  * Data model class to represent an entry's recurrenceException
  *
- * @uses       \Zend\GData\Extension
- * @uses       \Zend\GData\Extension\EntryLink
- * @uses       \Zend\GData\Extension\OriginalEvent
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Gdata
@@ -72,7 +69,7 @@ class RecurrenceException extends Extension
     {
         $element = parent::getDOM($doc, $majorVersion, $minorVersion);
         if ($this->_specialized !== null) {
-            $element->setAttribute('specialized', ($this->_specialized ? "true" : "false"));
+            $element->setAttribute('specialized', $this->_specialized);
         }
         if ($this->_entryLink !== null) {
             $element->appendChild($this->_entryLink->getDOM($element->ownerDocument));
@@ -94,15 +91,11 @@ class RecurrenceException extends Extension
     {
         switch ($attribute->localName) {
         case 'specialized':
-            if ($attribute->nodeValue == "true") {
-                $this->_specialized = true;
+            if ($attribute->nodeValue != "true" && $attribute->nodeValue != "false") {
+                throw new \Zend\GData\App\InvalidArgumentException(
+                    "Expected 'true' or 'false' for gCal:selected#value.");
             }
-            else if ($attribute->nodeValue == "false") {
-                $this->_specialized = false;
-            }
-            else {
-                throw new \Zend\GData\App\InvalidArgumentException("Expected 'true' or 'false' for gCal:selected#value.");
-            }
+            $this->_specialized = $attribute->nodeValue;
             break;
         default:
             parent::takeAttributeFromDOM($attribute);

@@ -26,8 +26,6 @@ namespace Zend\GData\Photos\Extension;
  * The rotation of a photo in degrees. Will only be shown if the
  * rotation has not already been applied to the image.
  *
- * @uses       \Zend\GData\Extension
- * @uses       \Zend\GData\Photos
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Photos

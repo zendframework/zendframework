@@ -22,7 +22,6 @@
 namespace Zend\Http\Client\Adapter;
 
 /**
- * @uses       \Zend\Http\Client\Exception
  * @category   Zend
  * @package    Zend_Http
  * @subpackage Client_Adapter

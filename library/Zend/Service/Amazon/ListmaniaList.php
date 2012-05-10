@@ -22,7 +22,6 @@
 namespace Zend\Service\Amazon;
 
 /**
- * @uses       DOMElement
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Amazon
@@ -50,7 +49,7 @@ class ListmaniaList
     public function __construct(\DOMElement $dom)
     {
         $xpath = new \DOMXPath($dom->ownerDocument);
-        $xpath->registerNamespace('az', 'http://webservices.amazon.com/AWSECommerceService/2005-10-05');
+        $xpath->registerNamespace('az', 'http://webservices.amazon.com/AWSECommerceService/2011-08-01');
         foreach (array('ListId', 'ListName') as $el) {
             $this->$el = (string) $xpath->query("./az:$el/text()", $dom)->item(0)->data;
         }

@@ -20,7 +20,8 @@
 
 namespace Zend\EventManager;
 
-use Zend\Stdlib\CallbackHandler;
+use Zend\Stdlib\CallbackHandler,
+    Zend\Stdlib\PriorityQueue;
 
 /**
  * Shared/contextual EventManager
@@ -52,7 +53,7 @@ class SharedEventManager implements SharedEventManagerInterface
      * <code>
      * SharedEventManager::getInstance()->connect(
      *     array('My\Resource\AbstractResource', 'My\Resource\EntityResource'),
-     *     'getOne',
+     *     'getAll',
      *     function ($e) use ($cache) {
      *         if (!$id = $e->getParam('id', false)) {
      *             return;
@@ -116,7 +117,7 @@ class SharedEventManager implements SharedEventManagerInterface
      * 
      * @param  string|int $id
      * @param  string|int $event 
-     * @return false|\Zend\Stdlib\PriorityQueue
+     * @return false|PriorityQueue
      */
     public function getListeners($id, $event)
     {

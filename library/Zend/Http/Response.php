@@ -471,8 +471,18 @@ class Response extends Message implements ResponseInterface
         $str  = $this->renderStatusLine() . "\r\n";
         $str .= $this->headers()->toString();
         $str .= "\r\n";
-        $str .= $this->getBody();
+        $str .= $this->getContent();
         return $str;
+    }
+
+    /**
+     * Implements magic __toString()
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->toString();
     }
 
     /**

@@ -21,8 +21,6 @@
 
 namespace Zend\Feed\Writer\Exception;
 
-use Zend\Feed\Writer\Exception;
-
 /**
  * Feed exceptions
  *
@@ -36,5 +34,5 @@ use Zend\Feed\Writer\Exception;
  */
 class InvalidArgumentException 
     extends \InvalidArgumentException 
-    implements Exception
+    implements ExceptionInterface
 {}

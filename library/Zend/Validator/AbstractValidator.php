@@ -26,9 +26,6 @@ use Traversable,
     Zend\Validator\Exception\InvalidArgumentException;
 
 /**
- * @uses       \Zend\Registry
- * @uses       \Zend\Validator\Exception
- * @uses       \Zend\Validator\ValidatorInterface
  * @category   Zend
  * @package    Zend_Validate
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -313,6 +310,8 @@ abstract class AbstractValidator implements ValidatorInterface
             } else {
                 $value = $value->__toString();
             }
+        } else if (is_array($value)) {
+            $value = '[' . implode(', ', $value) . ']';
         } else {
             $value = (string)$value;
         }
@@ -324,10 +323,14 @@ abstract class AbstractValidator implements ValidatorInterface
         $message = str_replace('%value%', (string) $value, $message);
         foreach ($this->abstractOptions['messageVariables'] as $ident => $property) {
             if (is_array($property)) {
-                $message = str_replace("%$ident%", (string) $this->{key($property)}[current($property)], $message);
+                $value = $this->{key($property)}[current($property)];
+                if (is_array($value)) {
+                    $value = '[' . implode(', ', $value) . ']';
+                }
             } else {
-                $message = str_replace("%$ident%", (string) $this->$property, $message);
+                $value = $this->$property;
             }
+            $message = str_replace("%$ident%", (string)$value, $message);
         }
 
         $length = self::getMessageLength();

@@ -30,8 +30,6 @@ namespace Zend\Validator;
  * The second is tests/Zend/Validator/HostnameTestForm.php which is designed to be run via HTML
  * to allow users to test entering UTF-8 characters in a form.
  *
- * @uses       \Zend\Validator\AbstractValidator
- * @uses       \Zend\Validator\Ip
  * @category   Zend
  * @package    Zend_Validator
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

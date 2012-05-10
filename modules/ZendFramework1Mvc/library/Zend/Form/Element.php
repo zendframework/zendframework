@@ -25,7 +25,7 @@ use Zend\Config\Config,
     Zend\Loader\PrefixPathLoader,
     Zend\Loader\PrefixPathMapper,
     Zend\Validator\ValidatorInterface,
-    Zend\Filter\Filter,
+    Zend\Filter\FilterInterface,
     Zend\Validator\AbstractValidator,
     Zend\Form\Element\Exception as ElementException,
     Zend\View\Renderer\RendererInterface as View;
@@ -1590,12 +1590,12 @@ class Element implements Validator
     /**
      * Add a filter to the element
      *
-     * @param  string|\Zend\Filter\Filter $filter
+     * @param  string|\Zend\Filter\FilterInterface $filter
      * @return \Zend\Form\Element
      */
     public function addFilter($filter, $options = array())
     {
-        if ($filter instanceof Filter) {
+        if ($filter instanceof FilterInterface) {
             $name = get_class($filter);
         } elseif (is_string($filter)) {
             $name = $filter;
@@ -1624,7 +1624,7 @@ class Element implements Validator
         foreach ($filters as $filterInfo) {
             if (is_string($filterInfo)) {
                 $this->addFilter($filterInfo);
-            } elseif ($filterInfo instanceof Filter) {
+            } elseif ($filterInfo instanceof FilterInterface) {
                 $this->addFilter($filterInfo);
             } elseif (is_array($filterInfo)) {
                 $argc                = count($filterInfo);
@@ -1672,7 +1672,7 @@ class Element implements Validator
      * Retrieve a single filter by name
      *
      * @param  string $name
-     * @return \Zend\Filter\Filter
+     * @return \Zend\Filter\FilterInterface
      */
     public function getFilter($name)
     {
@@ -1709,7 +1709,7 @@ class Element implements Validator
     {
         $filters = array();
         foreach ($this->_filters as $key => $value) {
-            if ($value instanceof Filter) {
+            if ($value instanceof FilterInterface) {
                 $filters[$key] = $value;
                 continue;
             }
@@ -2035,7 +2035,7 @@ class Element implements Validator
      * Lazy-load a filter
      *
      * @param  array $filter
-     * @return \Zend\Filter\Filter
+     * @return \Zend\Filter\FilterInterface
      */
     protected function _loadFilter(array $filter)
     {

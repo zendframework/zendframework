@@ -154,7 +154,9 @@ class Connection implements ConnectionInterface
         }
         
         $serverName = '.';
-        $params = array();
+        $params = array(
+            'ReturnDatesAsStrings' => true
+        );
         foreach ($this->connectionParameters as $key => $value) {
             switch (strtolower($key)) {
                 case 'hostname':
@@ -302,9 +304,9 @@ class Connection implements ConnectionInterface
      * 
      * @return mixed 
      */
-    public function getLastGeneratedId()
+    public function getLastGeneratedValue()
     {
-        $sql = 'SELECT SCOPE_IDENTITY() as Current_Identity';
+        $sql = 'SELECT @@IDENTITY as Current_Identity';
         $result = sqlsrv_query($this->resource, $sql);
         $row = sqlsrv_fetch_array($result);
         return $row['Current_Identity'];

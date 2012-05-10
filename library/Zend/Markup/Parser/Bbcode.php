@@ -26,10 +26,6 @@ use Zend\Markup\Parser,
     Zend\Config\Config;
 
 /**
- * @uses       \Zend\Markup\Parser\Exception
- * @uses       \Zend\Markup\Parser\ParserInterface
- * @uses       \Zend\Markup\Token
- * @uses       \Zend\Markup\TokenList
  * @category   Zend
  * @package    Zend_Markup
  * @subpackage Parser

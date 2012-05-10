@@ -2,10 +2,22 @@
 
 namespace Zend\Mvc;
 
-use Zend\Di\Locator;
+use Zend\Di\LocatorInterface;
 
 interface LocatorAwareInterface
 {
-    public function setLocator(Locator $locator);
+    /**
+     * Set locator
+     *
+     * @param LocatorInterface $locator
+     * @return LocatorAwareInterface
+     */
+    public function setLocator(LocatorInterface $locator);
+
+    /**
+     * Get locator
+     *
+     * @return LocatorInterface
+     */
     public function getLocator();
 }

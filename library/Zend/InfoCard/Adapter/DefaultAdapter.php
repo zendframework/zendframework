@@ -29,7 +29,6 @@ use Zend\InfoCard\Adapter;
  * assertions as part of the validation process it can be used anytime callback facilities
  * are necessary
  *
- * @uses       \Zend\InfoCard\Adapter
  * @category   Zend
  * @package    Zend_InfoCard
  * @subpackage Adapter

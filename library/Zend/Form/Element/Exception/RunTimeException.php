@@ -23,8 +23,6 @@
 namespace Zend\Form\Element\Exception;
 
 /**
- * @uses       Zend\Form\Element\Exception
- * @uses       \RunTimeException
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Element

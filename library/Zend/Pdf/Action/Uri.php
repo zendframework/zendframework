@@ -29,13 +29,6 @@ use Zend\Pdf\InternalType;
  *
  * A URI action causes a URI to be resolved.
  *
- * @uses       SplObjectStorage
- * @uses       \Zend\Pdf\Action\AbstractAction
- * @uses       \Zend\Pdf\InternalType\BooleanObject
- * @uses       \Zend\Pdf\InternalType\DictionaryObject
- * @uses       \Zend\Pdf\InternalType\NameObject
- * @uses       \Zend\Pdf\InternalType\StringObject
- * @uses       \Zend\Pdf\Exception
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Action
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

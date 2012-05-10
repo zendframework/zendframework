@@ -26,10 +26,6 @@ use Zend\Json\Exception\RuntimeException,
 /**
  * Decode JSON encoded string to PHP variable constructs
  *
- * @uses       stdClass
- * @uses       Zend\Json\Json
- * @uses       Zend\Json\Exception\RuntimeException
- * @uses       Zend\Json\Exception\InvalidArgumentException
  * @category   Zend
  * @package    Zend_Json
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

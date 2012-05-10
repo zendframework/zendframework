@@ -27,14 +27,6 @@ use \Zend\Rest\Client as RestClient,
 /**
  * Zend_Service_Delicious is a concrete implementation of the del.icio.us web service
  *
- * @uses       DOMDocument
- * @uses       Zend_Date
- * @uses       Zend_Json_Decoder
- * @uses       Zend_Rest_Client
- * @uses       Zend_Service_Delicious_Exception
- * @uses       Zend_Service_Delicious_Post
- * @uses       Zend_Service_Delicious_PostList
- * @uses       Zend_Service_Delicious_SimplePost
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Delicious

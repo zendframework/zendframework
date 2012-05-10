@@ -20,7 +20,7 @@
     <listitem>
       <para>
         <classname>Zend\Di</classname>, specifically its
-        <classname>Locator</classname> interface, but by default the dependency
+        <classname>LocatorInterface</classname> interface, but by default the dependency
         injection container
       </para>
     </listitem>

@@ -26,13 +26,6 @@ use Zend\Http\Header\Etag;
 /**
  * Concrete class for working with Atom entries.
  *
- * @uses       \Zend\GData\App\Extension\Content
- * @uses       \Zend\GData\App\Extension\Control
- * @uses       \Zend\GData\App\Extension\Edited
- * @uses       \Zend\GData\App\Extension\Published
- * @uses       \Zend\GData\App\Extension\Source
- * @uses       \Zend\GData\App\Extension\Summary
- * @uses       \Zend\GData\App\FeedEntryParent
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage App

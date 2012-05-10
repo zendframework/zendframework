@@ -242,7 +242,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(is_array($validators));
         $this->assertEquals(4, count($validators));
         foreach ($validators as $validator) {
-            $this->assertTrue($validator instanceof Validator\Validator);
+            $this->assertTrue($validator instanceof Validator\ValidatorInterface);
         }
     }
 
@@ -438,7 +438,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(is_array($filters));
         $this->assertEquals(3, count($filters));
         foreach ($filters as $filter) {
-            $this->assertTrue($filter instanceof Filter\Filter);
+            $this->assertTrue($filter instanceof Filter\FilterInterface);
         }
     }
 

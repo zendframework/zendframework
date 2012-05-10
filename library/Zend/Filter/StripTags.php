@@ -20,8 +20,9 @@
 
 namespace Zend\Filter;
 
+use Zend\Config\Config;
+
 /**
- * @uses       Zend\Filter\AbstractFilter
  * @category   Zend
  * @package    Zend_Filter
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -60,12 +61,12 @@ class StripTags extends AbstractFilter
      *     'allowAttribs'  => Attributes which are allowed
      *     'allowComments' => Are comments allowed ?
      *
-     * @param  string|array|\Zend\Config\Config $options
+     * @param  string|array|Config $options
      * @return void
      */
     public function __construct($options = null)
     {
-        if ($options instanceof \Zend\Config\Config) {
+        if ($options instanceof Config) {
             $options = $options->toArray();
         } else if ((!is_array($options)) || (is_array($options) && !array_key_exists('allowTags', $options) &&
             !array_key_exists('allowAttribs', $options) && !array_key_exists('allowComments', $options))) {
@@ -105,7 +106,7 @@ class StripTags extends AbstractFilter
      * Sets the tagsAllowed option
      *
      * @param  array|string $tagsAllowed
-     * @return \Zend\Filter\StripTags Provides a fluent interface
+     * @return StripTags Provides a fluent interface
      */
     public function setTagsAllowed($tagsAllowed)
     {
@@ -158,7 +159,7 @@ class StripTags extends AbstractFilter
      * Sets the attributesAllowed option
      *
      * @param  array|string $attributesAllowed
-     * @return \Zend\Filter\StripTags Provides a fluent interface
+     * @return StripTags Provides a fluent interface
      */
     public function setAttributesAllowed($attributesAllowed)
     {
@@ -179,7 +180,7 @@ class StripTags extends AbstractFilter
     }
 
     /**
-     * Defined by Zend_Filter_Interface
+     * Defined by Zend\Filter\FilterInterface
      *
      * @todo improve docblock descriptions
      *

@@ -24,8 +24,7 @@ use Traversable,
     Zend\Loader,
     Zend\Stdlib\ArrayUtils,
     Zend\Validator\AbstractValidator,
-    Zend\Validator\Exception\ExceptionInterface,
-    Zend\Validator\Exception\InvalidArgumentException;
+    Zend\Validator\Exception;
 
 /**
  * Validator for the mime type of a file
@@ -106,7 +105,7 @@ class MimeType extends AbstractValidator
      *
      * Mimetype to accept
      * - NULL means default PHP usage by using the environment variable 'magic'
-     * - FALSE means disabling searching for mimetype, shoule be used for PHP 5.3
+     * - FALSE means disabling searching for mimetype, should be used for PHP 5.3
      * - A string is the mimetype file to use
      *
      * @param  string|array $options
@@ -168,7 +167,7 @@ class MimeType extends AbstractValidator
                         if ($this->options['magicFile'] !== null) {
                             break;
                         }
-                    } catch (ExceptionInterface $e) {
+                    } catch (Exception\ExceptionInterface $e) {
                         // Intentionally, catch and fall through
                     }
                 }
@@ -185,11 +184,11 @@ class MimeType extends AbstractValidator
     /**
      * Sets the magicfile to use
      * if null, the MAGIC constant from php is used
-     * if the MAGIC file is errorous, no file will be set
+     * if the MAGIC file is erroneous, no file will be set
      * if false, the default MAGIC file from PHP will be used
      *
      * @param  string $file
-     * @throws InvalidArgumentException When finfo can not read the magicfile
+     * @throws Exception\InvalidArgumentException When finfo can not read the magicfile
      * @return MimeType Provides fluid interface
      */
     public function setMagicFile($file)
@@ -200,9 +199,9 @@ class MimeType extends AbstractValidator
             $this->options['magicFile'] = null;
         } else if (!(class_exists('finfo', false))) {
             $this->options['magicFile'] = null;
-            throw new InvalidArgumentException('Magicfile can not be set; there is no finfo extension installed');
+            throw new Exception\RuntimeException('Magicfile can not be set; there is no finfo extension installed');
         } else if (!is_file($file) || !is_readable($file)) {
-            throw new InvalidArgumentException(sprintf(
+            throw new Exception\InvalidArgumentException(sprintf(
                 'The given magicfile ("%s") could not be read',
                 $file
             ));
@@ -211,7 +210,7 @@ class MimeType extends AbstractValidator
             $this->finfo = @finfo_open($const, $file);
             if (empty($this->finfo)) {
                 $this->finfo = null;
-                throw new InvalidArgumentException(sprintf(
+                throw new Exception\InvalidMagicMimeFileException(sprintf(
                     'The given magicfile ("%s") could not be used by ext/finfo',
                     $file
                 ));
@@ -271,7 +270,7 @@ class MimeType extends AbstractValidator
     /**
      * Returns the set mimetypes
      *
-     * @param  boolean $asArray Returns the values as array, when false an concated string is returned
+     * @param  boolean $asArray Returns the values as array, when false a concatenated string is returned
      * @return string|array
      */
     public function getMimeType($asArray = false)

@@ -20,9 +20,10 @@
  */
 
 namespace Zend\Search\Lucene\Analysis\Analyzer\Common;
-use Zend\Search\Lucene\Analysis\Analyzer;
-use Zend\Search\Lucene\Analysis;
-use Zend\Search\Lucene\Analysis\TokenFilter;
+
+use Zend\Search\Lucene\Analysis\Analyzer\AnalyzerInterface,
+    Zend\Search\Lucene\Analysis,
+    Zend\Search\Lucene\Analysis\TokenFilter;
 
 /**
  * AbstractCommon implementation of the analyzerfunctionality.
@@ -30,27 +31,24 @@ use Zend\Search\Lucene\Analysis\TokenFilter;
  * There are several standard standard subclasses provided
  * by Analysis subpackage.
  *
- * @uses       \Zend\Search\Lucene\Analysis\Analyzer
- * @uses       \Zend\Search\Lucene\Analysis\Token
- * @uses       \Zend\Search\Lucene\Analysis\TokenFilter
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Analysis
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class AbstractCommon extends Analyzer\AbstractAnalyzer
+abstract class AbstractCommon extends Analysis\Analyzer\AbstractAnalyzer
 {
     /**
      * The set of Token filters applied to the Token stream.
-     * Array of \Zend\Search\Lucene\Analysis\TokenFilter objects.
+     * Array of \Zend\Search\Lucene\Analysis\TokenFilterInterface objects.
      *
      * @var array
      */
     private $_filters = array();
 
     /**
-     * Add Token filter to the Analyzer
+     * Add Token filter to the AnalyzerInterface
      *
      * @param \Zend\Search\Lucene\Analysis\TokenFilter $filter
      */

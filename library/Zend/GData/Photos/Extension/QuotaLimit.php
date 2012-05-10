@@ -26,8 +26,6 @@ namespace Zend\GData\Photos\Extension;
  * This class represents the number of bytes of storage available for
  * a user.
  *
- * @uses       \Zend\GData\Extension
- * @uses       \Zend\GData\Photos
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Photos

@@ -26,7 +26,6 @@ use Zend\GData\Extension;
 /**
  * Represents the gd:recurrence element
  *
- * @uses       \Zend\GData\Extension
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Gdata

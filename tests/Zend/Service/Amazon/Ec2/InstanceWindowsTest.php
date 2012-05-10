@@ -49,7 +49,6 @@ class InstanceWindowsTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        parent::setUp();
         $this->instance = new WindowsInstance('access_key', 'secret_access_key');
 
         $adapter = new \Zend\Http\Client\Adapter\Test();
@@ -67,8 +66,6 @@ class InstanceWindowsTest extends \PHPUnit_Framework_TestCase
     {
         unset($this->adapter);
         $this->instance = null;
-
-        parent::tearDown();
     }
 
     /**

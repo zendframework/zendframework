@@ -20,14 +20,11 @@
  */
 
 namespace Zend\Queue\Message;
-use Zend\Queue;
+use Zend\Queue\Exception;
 
 /**
  * Class for managing Zend Platform JobQueue jobs via Zend_Queue
  *
- * @uses       \ZendAPI_Job
- * @uses       \Zend\Queue\Exception
- * @uses       \Zend\Queue\Message\Message
  * @category   Zend
  * @package    Zend_Queue
  * @subpackage Message
@@ -68,7 +65,7 @@ class PlatformJob extends Message
     {
         if (isset($options['data'])) {
             if (!($options['data'] instanceof \ZendAPI_Job)) {
-                throw new Queue\Exception('Data must be an instance of \ZendAPI_Job');
+                throw new Exception\InvalidArgumentException('Data must be an instance of \ZendAPI_Job');
             }
             $this->_job = $options['data'];
             parent::__construct($this->_job->getProperties());
@@ -76,7 +73,7 @@ class PlatformJob extends Message
             parent::__construct($options);
 
             if (!isset($options['script'])) {
-                throw new Queue\Exception('The script is mandatory data');
+                throw new Exception\InvalidArgumentException('The script is mandatory data');
             }
 
             $this->_job = new \ZendAPI_Job($options['script']);

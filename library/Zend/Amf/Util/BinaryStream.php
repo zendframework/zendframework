@@ -25,7 +25,6 @@ use Zend\Amf\Exception;
 /**
  * Utility class to walk through a data stream byte by byte with conventional names
  *
- * @uses       Zend\Amf\Exception
  * @package    Zend_Amf
  * @subpackage Util
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

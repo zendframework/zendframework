@@ -27,29 +27,6 @@ use Zend\GData\YouTube,
 /**
  * Represents the YouTube video playlist flavor of an Atom entry
  *
- * @uses       \Zend\GData\App\VersionException
- * @uses       \Zend\GData\Entry
- * @uses       \Zend\GData\Extension\FeedLink
- * @uses       \Zend\GData\Media\Extension\MediaThumbnail
- * @uses       \Zend\GData\YouTube
- * @uses       \Zend\GData\YouTube\Extension\AboutMe
- * @uses       \Zend\GData\YouTube\Extension\Age
- * @uses       \Zend\GData\YouTube\Extension\Books
- * @uses       \Zend\GData\YouTube\Extension\Company
- * @uses       \Zend\GData\YouTube\Extension\Description
- * @uses       \Zend\GData\YouTube\Extension\FirstName
- * @uses       \Zend\GData\YouTube\Extension\Gender
- * @uses       \Zend\GData\YouTube\Extension\Hobbies
- * @uses       \Zend\GData\YouTube\Extension\Hometown
- * @uses       \Zend\GData\YouTube\Extension\LastName
- * @uses       \Zend\GData\YouTube\Extension\Location
- * @uses       \Zend\GData\YouTube\Extension\Movies
- * @uses       \Zend\GData\YouTube\Extension\Music
- * @uses       \Zend\GData\YouTube\Extension\Occupation
- * @uses       \Zend\GData\YouTube\Extension\Relationship
- * @uses       \Zend\GData\YouTube\Extension\School
- * @uses       \Zend\GData\YouTube\Extension\Statistics
- * @uses       \Zend\GData\YouTube\Extension\Username
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage YouTube

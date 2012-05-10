@@ -41,5 +41,5 @@ interface ConnectionInterface
     public function rollback();
     public function execute($sql); // return result set
 
-    public function getLastGeneratedId();
+    public function getLastGeneratedValue();
 }

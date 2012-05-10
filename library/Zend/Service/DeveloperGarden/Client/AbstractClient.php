@@ -20,12 +20,6 @@
  */
 
 /**
- * @uses       ReflectionClass
- * @uses       Zend_Service_DeveloperGarden_Client_Exception
- * @uses       Zend_Service_DeveloperGarden_Client_Soap
- * @uses       Zend_Service_DeveloperGarden_Credential
- * @uses       Zend_Service_DeveloperGarden_Exception
- * @uses       Zend_Service_DeveloperGarden_SecurityTokenServer
  * @category   Zend
  * @package    Zend_Service
  * @subpackage DeveloperGarden

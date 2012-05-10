@@ -26,8 +26,6 @@ use Zend\Loader\ShortNameLocator,
     Zend\Loader\Exception\PluginLoaderException;
 
 /**
-* @uses \Zend\Feed\Exception
-* @uses \Zend\Loader\PluginLoader
 * @category Zend
 * @package Zend_Feed_Writer
 * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

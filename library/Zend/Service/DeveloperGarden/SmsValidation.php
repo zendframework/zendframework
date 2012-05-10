@@ -20,16 +20,6 @@
  */
 
 /**
- * @uses       Zend_Service_DeveloperGarden_Client_AbstractClient
- * @uses       Zend_Service_DeveloperGarden_Request_SmsValidation_GetValidatedNumbers
- * @uses       Zend_Service_DeveloperGarden_Request_SmsValidation_Invalidate
- * @uses       Zend_Service_DeveloperGarden_Request_SmsValidation_SendValidationKeyword
- * @uses       Zend_Service_DeveloperGarden_Request_SmsValidation_Validate
- * @uses       Zend_Service_DeveloperGarden_Response_SmsValidation_GetValidatedNumbersResponse
- * @uses       Zend_Service_DeveloperGarden_Response_SmsValidation_InvalidateResponse
- * @uses       Zend_Service_DeveloperGarden_Response_SmsValidation_SendValidationKeywordResponse
- * @uses       Zend_Service_DeveloperGarden_Response_SmsValidation_ValidatedNumber
- * @uses       Zend_Service_DeveloperGarden_Response_SmsValidation_ValidateResponse
  * @category   Zend
  * @package    Zend_Service
  * @subpackage DeveloperGarden

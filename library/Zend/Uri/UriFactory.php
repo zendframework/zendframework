@@ -22,12 +22,6 @@ use Zend\Uri\Uri;
  * Note that this class contains only static methods and should not be
  * instanciated
  *
- * @uses      \Zend\Uri\Uri
- * @uses      \Zend\Uri\Http
- * @uses      \Zend\Uri\File
- * @uses      \Zend\Uri\Mailto
- * @uses      \Zend\Uri\Exception\ExceptionInterface
- * @uses      \Zend\Loader
  * @category  Zend
  * @package   Zend_Uri
  * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

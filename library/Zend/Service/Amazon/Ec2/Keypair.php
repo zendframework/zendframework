@@ -26,8 +26,6 @@ use Zend\Service\Amazon,
 /**
  * An Amazon EC2 interface to create, delete and describe Ec2 KeyPairs.
  *
- * @uses       Zend\Service\Amazon\AbstractEc2
- * @uses       Zend\Service\Amazon\Ec2\Exception
  * @category   Zend
  * @package    Zend_Service_Amazon
  * @subpackage Ec2

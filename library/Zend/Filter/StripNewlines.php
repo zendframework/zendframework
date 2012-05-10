@@ -21,7 +21,6 @@
 namespace Zend\Filter;
 
 /**
- * @uses       Zend\Filter\AbstractFilter
  * @category   Zend
  * @package    Zend_Filter
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -31,7 +30,7 @@ class StripNewlines extends AbstractFilter
 {
 
     /**
-     * Defined by Zend_Filter_Interface
+     * Defined by Zend\Filter\FilterInterface
      *
      * Returns $value without newline control characters
      *

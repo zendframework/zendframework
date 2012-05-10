@@ -26,9 +26,6 @@ use Zend\GData\Calendar;
 /**
  * Represents the meta-feed list of calendars
  *
- * @uses       \Zend\GData\Calendar
- * @uses       Zend_Gdata_Extension_Timezone
- * @uses       \Zend\GData\Feed
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Calendar

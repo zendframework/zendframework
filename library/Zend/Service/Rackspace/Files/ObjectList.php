@@ -27,11 +27,6 @@ use Zend\Service\Rackspace\Files\Object,
 /**
  * List of servers retrived from the GoGrid web service
  *
- * @uses       ArrayAccess
- * @uses       Countable
- * @uses       Iterator
- * @uses       OutOfBoundsException
- * @uses       Zend\Service\Rackspace\Files\Container
  * @category   Zend
  * @package    Zend\Service\Rackspace
  * @subpackage Files

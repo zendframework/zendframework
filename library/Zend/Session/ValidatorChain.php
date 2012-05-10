@@ -67,7 +67,7 @@ class ValidatorChain extends EventManager
      * @param  int $priority 
      * @return \Zend\Stdlib\CallbackHandler
      */
-    public function attach($event, $callback, $priority = 1)
+    public function attach($event, $callback = null, $priority = 1)
     {
         $context = null;
         if ($callback instanceof Validator) {

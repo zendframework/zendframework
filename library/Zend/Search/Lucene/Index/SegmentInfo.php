@@ -29,23 +29,13 @@ use Zend\Search\Lucene,
 	Zend\Search\Lucene\Exception\InvalidArgumentException;
 
 /**
- * @uses       \Zend\Search\Lucene\Exception\RuntimeException
- * @uses	   \Zend\Search\Lucene\Exception\InvalidArgumentException
- * @uses       \Zend\Search\Lucene\Exception\InvalidFileFormatException
- * @uses       \Zend\Search\Lucene\Index\DictionaryLoader
- * @uses       \Zend\Search\Lucene\Index\FieldInfo
- * @uses       \Zend\Search\Lucene\Index\Term
- * @uses       \Zend\Search\Lucene\Index\TermInfo
- * @uses       \Zend\Search\Lucene\Index\TermsStream
- * @uses       \Zend\Search\Lucene\Search\Similarity
- * @uses       \Zend\Search\Lucene\Storage\Directory;
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Index
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class SegmentInfo implements TermsStream
+class SegmentInfo implements TermsStreamInterface
 {
     /**
      * "Full scan vs fetch" boundary.
@@ -163,7 +153,7 @@ class SegmentInfo implements TermsStream
     /**
      * File system adapter.
      *
-     * @var \Zend\Search\Lucene\Storage\Directory\Filesystem
+     * @var \Zend\Search\Lucene\Storage\DirectoryInterface\Filesystem
      */
     private $_directory;
 

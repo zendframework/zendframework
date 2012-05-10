@@ -49,6 +49,11 @@ class Smtp implements TransportInterface, Pluggable
      * @var Protocol\Smtp
      */
     protected $connection;
+    
+    /**
+     * @var boolean
+     */
+    protected $autoDisconnect = true;
 
     /**
      * @var Protocol\SmtpBroker
@@ -122,7 +127,26 @@ class Smtp implements TransportInterface, Pluggable
         }
         return $this->broker;
     }
-
+    /**
+     * Set the automatic disconnection when destruct
+     * 
+     * @param  boolean $flag
+     * @return Smtp
+     */
+    public function setAutoDisconnect($flag) 
+    {
+        $this->autoDisconnect = (bool) $flag;
+        return $this;
+    }
+    /**
+     * Get the automatic disconnection value
+     * 
+     * @return boolean
+     */
+    public function getAutoDisconnect()
+    {
+        return $this->autoDisconnect;
+    }
     /**
      * Return an SMTP connection
      * 
@@ -146,10 +170,11 @@ class Smtp implements TransportInterface, Pluggable
             } catch (ProtocolException\ExceptionInterface $e) {
                 // ignore
             }
-            $this->connection->disconnect();
+            if ($this->autoDisconnect) {
+                $this->connection->disconnect();
+            }    
         }
     }
-
 
     /**
      * Sets the connection protocol instance
@@ -171,7 +196,17 @@ class Smtp implements TransportInterface, Pluggable
     {
         return $this->connection;
     }
-
+    /**
+     * Disconnect the connection protocol instance
+     * 
+     * @return void
+     */
+    public function disconnect()
+    {
+        if (!empty($this->connection) && ($this->connection instanceof Protocol\Smtp)) {
+            $this->connection->disconnect();
+        }
+    }
     /**
      * Send an email via the SMTP connection protocol
      *

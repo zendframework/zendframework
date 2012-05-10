@@ -2,7 +2,7 @@
 
 namespace Zend\Di;
 
-class Di implements DependencyInjection
+class Di implements DependencyInjectionInterface
 {
     /**
      * @var DefinitionList
@@ -34,8 +34,10 @@ class Di implements DependencyInjection
     protected $references = array();
 
     /**
+     * @param null|DefinitionList $definitions
+     * @param null|InstanceManager $instanceManager
      * @param null|Configuration $config
-     * @return \Di\Di\DependencyInjector
+     * @return Di
      */
     public function __construct(DefinitionList $definitions = null, InstanceManager $instanceManager = null, Configuration $config = null)
     {
@@ -59,7 +61,7 @@ class Di implements DependencyInjection
     }
 
     /**
-     * @param Definition $definition
+     * @param DefinitionList $definition
      * @return Di
      */
     public function setDefinitionList(DefinitionList $definitions)
@@ -145,8 +147,8 @@ class Di implements DependencyInjection
      */
     public function newInstance($name, array $params = array(), $isShared = true)
     {
-        // localize dependencies (this also will serve as poka-yoke)
-        $definitions      = $this->definitions;
+        // localize dependencies
+        $definitions     = $this->definitions;
         $instanceManager = $this->instanceManager();
 
         if ($instanceManager->hasAlias($name)) {
@@ -195,7 +197,7 @@ class Di implements DependencyInjection
                     $name
                 );
             }
-            throw new \RuntimeException($msg);
+            throw new Exception\RuntimeException($msg);
         }
 
         if ($isShared) {
@@ -206,104 +208,109 @@ class Di implements DependencyInjection
             }
         }
 
-        if ($injectionMethods || $supertypeInjectionMethods) {
-            foreach ($injectionMethods as $injectionMethod => $methodIsRequired) {
-                if ($injectionMethod !== '__construct') {
-                    $this->handleInjectionMethodForInstance($instance, $injectionMethod, $params, $alias, $methodIsRequired);
-                }
-            }
-            foreach ($supertypeInjectionMethods as $supertype => $supertypeInjectionMethod) {
-                foreach ($supertypeInjectionMethod as $injectionMethod => $methodIsRequired) {
-                    if ($injectionMethod !== '__construct') {
-                        $this->handleInjectionMethodForInstance($instance, $injectionMethod, $params, $alias, $methodIsRequired, $supertype);
-                    }
-                }
-            }
-
-            $instanceConfiguration = $instanceManager->getConfiguration($name);
-
-            if ($instanceConfiguration['injections']) {
-                $objectsToInject = $methodsToCall = array();
-                foreach ($instanceConfiguration['injections'] as $injectName => $injectValue) {
-                    if (is_int($injectName) && is_string($injectValue)) {
-                        $objectsToInject[] = $this->get($injectValue, $params);
-                    } elseif (is_string($injectName) && is_array($injectValue)) {
-                        if (is_string(key($injectValue))) {
-                            $methodsToCall[] = array('method' => $injectName, 'args' => $injectValue);
-                        } else {
-                            foreach ($injectValue as $methodCallArgs) {
-                                $methodsToCall[] = array('method' => $injectName, 'args' => $methodCallArgs);
-                            }
-                        }
-                    } elseif (is_object($injectValue)) {
-                        $objectsToInject[] = $injectValue;
-                    } elseif (is_int($injectName) && is_array($injectValue)) {
-                        // @todo must find method name somehow
-                        throw new Exception\RuntimeException(
-                            'An injection was provided with a keyed index and an array of data, try using'
-                            . ' the name of a particular method as a key for your injection data.'
-                        );
-                    }
-                }
-                if ($objectsToInject) {
-                    foreach ($objectsToInject as $objectToInject) {
-                        foreach ($injectionMethods as $injectionMethod => $methodIsRequired) {
-                            $methodParams = $definitions->getMethodParameters($class, $injectionMethod);
-                            if ($methodParams) {
-                                foreach ($methodParams as $methodParam) {
-                                    if (get_class($objectToInject) == $methodParam[1] ||
-                                        $this->isSubclassOf(get_class($objectToInject), $methodParam[1])) {
-                                        $callParams = $this->resolveMethodParameters(get_class($instance), $injectionMethod,
-                                            array($methodParam[0] => $objectToInject), false, $alias, true
-                                        );
-                                        if ($callParams) {
-                                            call_user_func_array(array($instance, $injectionMethod), $callParams);
-                                        }
-                                        continue 3;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-                if ($methodsToCall) {
-                    foreach ($methodsToCall as $methodInfo) {
-                        $callParams = $this->resolveMethodParameters(get_class($instance), $methodInfo['method'],
-                            $methodInfo['args'], false, $alias, true
-                        );
-                        call_user_func_array(array($instance, $methodInfo['method']), $callParams);
-                    }
-                }
-            }
-        }
-
-
+        $this->handleInjectDependencies($instance, $class, $injectionMethods, $supertypeInjectionMethods, $params, $alias);
 
         array_pop($this->instanceContext);
         return $instance;
     }
 
     /**
-     * @todo
-     * @param unknown_type $object
+     * @param object $instance
+     * @param array $params
+     * @return void
      */
-    /*
-    public function injectObjects($targetObject, array $objects = array())
+    public function injectDependencies($instance, array $params = array())
     {
-        if ($objects === array()) {
-            throw new \Exception('Not yet implmeneted');
+        $definitions = $this->definitions();
+        $class = get_class($instance);
+        $injectionMethods = ($definitions->hasClass($class)) ? $definitions->getMethods($class) : array();
+        $superTypeInjectionMethods = array();
+        $parent = $class;
+        while ($parent = get_parent_class($parent)) {
+            if ($definitions->hasClass($parent)) {
+                $superTypeInjectionMethods[$parent] = $definitions->getMethods($parent);
+            }
         }
-
-        $targetClass = get_class($targetObject);
-        if (!$this->definitions()->hasClass($targetClass)) {
-            throw new Exception\RuntimeException('A definition for this object type cannot be found');
+        foreach (class_implements($class) as $interface) {
+            if ($definitions->hasClass($interface)) {
+                $superTypeInjectionMethods[$interface] = $definitions->getMethods($interface);
+            }
         }
+        $this->handleInjectDependencies($instance, null, $injectionMethods, $superTypeInjectionMethods, $params, null);
+    }
 
-        foreach ($objects as $objectToInject) {
 
+    protected function handleInjectDependencies($instance, $name, $injectionMethods, $supertypeInjectionMethods, $params, $alias)
+    {
+        $class = get_class($instance);
+
+        // localize dependencies
+        $definitions     = $this->definitions;
+        $instanceManager = $this->instanceManager();
+
+        if ($injectionMethods || $supertypeInjectionMethods) {
+            foreach ($injectionMethods as $injectionMethod => $methodIsRequired) {
+                if ($injectionMethod !== '__construct'){
+                    $this->resolveAndCallInjectionMethodForInstance($instance, $injectionMethod, $params, $alias, $methodIsRequired, $class);
+                }
+            }
+            foreach ($supertypeInjectionMethods as $supertype => $supertypeInjectionMethod) {
+                foreach ($supertypeInjectionMethod as $injectionMethod => $methodIsRequired) {
+                    if ($injectionMethod !== '__construct') {
+                        $this->resolveAndCallInjectionMethodForInstance($instance, $injectionMethod, $params, $alias, $methodIsRequired, $supertype);
+                    }
+                }
+            }
+
+            if ($name) {
+                $instanceConfiguration = $instanceManager->getConfiguration($name);
+
+                if ($instanceConfiguration['injections']) {
+                    $objectsToInject = $methodsToCall = array();
+                    foreach ($instanceConfiguration['injections'] as $injectName => $injectValue) {
+                        if (is_int($injectName) && is_string($injectValue)) {
+                            $objectsToInject[] = $this->get($injectValue, $params);
+                        } elseif (is_string($injectName) && is_array($injectValue)) {
+                            if (is_string(key($injectValue))) {
+                                $methodsToCall[] = array('method' => $injectName, 'args' => $injectValue);
+                            } else {
+                                foreach ($injectValue as $methodCallArgs) {
+                                    $methodsToCall[] = array('method' => $injectName, 'args' => $methodCallArgs);
+                                }
+                            }
+                        } elseif (is_object($injectValue)) {
+                            $objectsToInject[] = $injectValue;
+                        } elseif (is_int($injectName) && is_array($injectValue)) {
+                            throw new Exception\RuntimeException(
+                                'An injection was provided with a keyed index and an array of data, try using'
+                                    . ' the name of a particular method as a key for your injection data.'
+                            );
+                        }
+                    }
+                    if ($objectsToInject) {
+                        foreach ($objectsToInject as $objectToInject) {
+                            foreach ($injectionMethods as $injectionMethod => $methodIsRequired) {
+                                $methodParams = $definitions->getMethodParameters($class, $injectionMethod);
+                                if ($methodParams) {
+                                    foreach ($methodParams as $methodParam) {
+                                        if (get_class($objectToInject) == $methodParam[1] || $this->isSubclassOf(get_class($objectToInject), $methodParam[1])) {
+                                            $this->resolveAndCallInjectionMethodForInstance($instance, $injectionMethod, array($methodParam[0] => $objectToInject), $alias, true, get_class($instance));
+                                            continue 3;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    if ($methodsToCall) {
+                        foreach ($methodsToCall as $methodInfo) {
+                            $this->resolveAndCallInjectionMethodForInstance($instance, $methodInfo['method'], $methodInfo['args'], $alias, true, get_class($instance));
+                        }
+                    }
+                }
+            }
         }
     }
-    */
 
     /**
      * Retrieve a class instance based on class name
@@ -321,7 +328,7 @@ class Di implements DependencyInjection
     {
         $callParameters = array();
         if ($this->definitions->hasMethod($class, '__construct')) {
-            $callParameters = $this->resolveMethodParameters($class, '__construct', $params, true, $alias, true);
+            $callParameters = $this->resolveMethodParameters($class, '__construct', $params, $alias, true, true);
         }
 
         // Hack to avoid Reflection in most common use cases
@@ -366,7 +373,7 @@ class Di implements DependencyInjection
 
         $callParameters = array();
         if ($this->definitions->hasMethod($class, $method)) {
-            $callParameters = $this->resolveMethodParameters($class, $method, $params, true, $alias, true);
+            $callParameters = $this->resolveMethodParameters($class, $method, $params, $alias, true, true);
         }
         return call_user_func_array($callback, $callParameters);
     }
@@ -380,11 +387,10 @@ class Di implements DependencyInjection
      * @param array $params
      * @param string $alias
      */
-    protected function handleInjectionMethodForInstance($instance, $method, $params, $alias, $methodIsRequired, $methodClass = null)
+    protected function resolveAndCallInjectionMethodForInstance($instance, $method, $params, $alias, $methodIsRequired, $methodClass = null)
     {
         $methodClass = ($methodClass) ?: get_class($instance);
-        // @todo make sure to resolve the supertypes for both the object & definition
-        $callParameters = $this->resolveMethodParameters($methodClass, $method, $params, false, $alias, $methodIsRequired);
+        $callParameters = $this->resolveMethodParameters($methodClass, $method, $params, $alias, $methodIsRequired);
         if ($callParameters == false) {
             return;
         }
@@ -403,7 +409,7 @@ class Di implements DependencyInjection
      * @param string $alias
      * @return array
      */
-    protected function resolveMethodParameters($class, $method, array $callTimeUserParams, $isInstantiator, $alias, $methodIsRequired)
+    protected function resolveMethodParameters($class, $method, array $callTimeUserParams, $alias, $methodIsRequired, $isInstantiator = false)
     {
         // parameters for this method, in proper order, to be returned
         $resolvedParams = array();
@@ -433,9 +439,13 @@ class Di implements DependencyInjection
         }
 
         // for the parent class, provided we are deeper than one node
-        list($requestedClass, $requestedAlias) = ($this->instanceContext[0][0] == 'NEW')
-            ? array($this->instanceContext[0][1], $this->instanceContext[0][2])
-            : array($this->instanceContext[1][1], $this->instanceContext[1][2]);
+        if (isset($this->instanceContext[0])) {
+            list($requestedClass, $requestedAlias) = ($this->instanceContext[0][0] == 'NEW')
+                ? array($this->instanceContext[0][1], $this->instanceContext[0][2])
+                : array($this->instanceContext[1][1], $this->instanceContext[1][2]);
+        } else {
+            $requestedClass = $requestedAlias = null;
+        }
 
         if ($requestedClass != $class && $this->instanceManager->hasConfiguration($requestedClass)) {
             $iConfig['requestedClass'] = $this->instanceManager->getConfiguration($requestedClass);

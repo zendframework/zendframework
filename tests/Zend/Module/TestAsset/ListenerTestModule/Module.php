@@ -3,13 +3,16 @@
 namespace ListenerTestModule;
 
 use Zend\Module\Consumer\AutoloaderProvider,
-    Zend\Module\Consumer\LocatorRegistered;
+    Zend\Module\Consumer\LocatorRegistered,
+    Zend\Module\Consumer\BootstrapListenerInterface,
+    Zend\EventManager\Event;
 
-class Module implements AutoloaderProvider, LocatorRegistered
+class Module implements AutoloaderProvider, LocatorRegistered, BootstrapListenerInterface
 {
     public $initCalled = false;
     public $getConfigCalled = false;
     public $getAutoloaderConfigCalled = false;
+    public $onBootstrapCalled = false;
 
     public function init($moduleManager = null)
     {
@@ -34,5 +37,10 @@ class Module implements AutoloaderProvider, LocatorRegistered
                 ),
             ),
         );
+    }
+
+    public function onBootstrap(Event $e)
+    {
+        $this->onBootstrapCalled = true;
     }
 }

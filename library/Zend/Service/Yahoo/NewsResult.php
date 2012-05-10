@@ -20,7 +20,6 @@
  */
 
 /**
- * @uses       Zend_Service_Yahoo_Result
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Yahoo

@@ -25,9 +25,6 @@ use Zend\InfoCard\Cipher;
 /**
  * Implements AES256 with CBC encryption implemented using the mCrypt extension
  *
- * @uses       \Zend\InfoCard\Cipher\Exception
- * @uses       \Zend\InfoCard\Cipher\Symmetric\Adapter\AbstractAdapter
- * @uses       \Zend\InfoCard\Cipher\Symmetric\AES256CBC
  * @category   Zend
  * @package    Zend_InfoCard
  * @subpackage Zend_InfoCard_Cipher

@@ -26,13 +26,6 @@ use Zend\GData\Calendar;
 /**
  * Data model class for a Google Calendar Event Entry
  *
- * @uses       \Zend\GData\Calendar
- * @uses       \Zend\GData\Calendar\Extension\Link
- * @uses       \Zend\GData\Calendar\Extension\SendEventNotifications
- * @uses       \Zend\GData\Calendar\Extension\QuickAdd
- * @uses       \Zend\GData\Calendar\Extension\Timezone
- * @uses       \Zend\GData\Entry
- * @uses       \Zend\GData\Kind\EventEntry
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Calendar

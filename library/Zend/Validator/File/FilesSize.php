@@ -25,9 +25,6 @@ use Zend\Loader;
 /**
  * Validator for the size of all files which will be validated in sum
  *
- * @uses      \Zend\Loader
- * @uses      \Zend\Validator\File\Size
- * @uses      \Zend\Validator\Exception
  * @category  Zend
  * @package   Zend_Validate
  * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

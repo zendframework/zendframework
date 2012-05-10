@@ -26,8 +26,6 @@ use Zend\GData\Extension;
 /**
  * Represents the gd:feedLink element
  *
- * @uses       \Zend\GData\Extension
- * @uses       \Zend\GData\Feed
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Gdata
@@ -65,7 +63,7 @@ class FeedLink extends Extension
             $element->setAttribute('href', $this->_href);
         }
         if ($this->_readOnly !== null) {
-            $element->setAttribute('readOnly', ($this->_readOnly ? "true" : "false"));
+            $element->setAttribute('readOnly', $this->_readOnly);
         }
         if ($this->_rel !== null) {
             $element->setAttribute('rel', $this->_rel);
@@ -101,15 +99,11 @@ class FeedLink extends Extension
             $this->_href = $attribute->nodeValue;
             break;
         case 'readOnly':
-            if ($attribute->nodeValue == "true") {
-                $this->_readOnly = true;
+            if ($attribute->nodeValue != "true" && $attribute->nodeValue != "false") {
+                throw new \Zend\GData\App\InvalidArgumentException(
+                    "Expected 'true' or 'false' for gCal:selected#value.");
             }
-            else if ($attribute->nodeValue == "false") {
-                $this->_readOnly = false;
-            }
-            else {
-                throw new \Zend\GData\App\InvalidArgumentException("Expected 'true' or 'false' for gCal:selected#value.");
-            }
+            $this->_readOnly = $attribute->nodeValue;
             break;
         case 'rel':
             $this->_rel = $attribute->nodeValue;

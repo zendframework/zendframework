@@ -30,12 +30,6 @@ use Zend\Pdf\ObjectFactory\UpdateInfoContainer,
  * PDF element factory.
  * Responsibility is to log PDF changes
  *
- * @uses       SplObjectStorage
- * @uses       \Zend\Pdf\ObjectFactory
- * @uses       \Zend\Pdf\ObjectFactory\UpdateInfoContainer
- * @uses       \Zend\Pdf\InternalType\IndirectObject
- * @uses       \Zend\Pdf\InternalType\StreamObject
- * @uses       \Zend\Pdf\Exception
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Internal
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

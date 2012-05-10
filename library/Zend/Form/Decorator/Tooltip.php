@@ -26,7 +26,6 @@ namespace Zend\Form\Decorator;
  *
  * Will translate the title attribute, if available
  *
- * @uses       \Zend\Form\Decorator\AbstractDecorator
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Decorator

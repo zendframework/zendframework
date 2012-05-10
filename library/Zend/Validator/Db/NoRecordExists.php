@@ -20,10 +20,11 @@
 
 namespace Zend\Validator\Db;
 
+use Zend\Validator\Exception;
+
 /**
  * Confirms a record does not exist in a table.
  *
- * @uses       \Zend\Validator\Db\AbstractDb
  * @category   Zend
  * @package    Zend_Validate
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -33,6 +34,13 @@ class NoRecordExists extends AbstractDb
 {
     public function isValid($value)
     {
+        /*
+         * Check for an adapter being defined. If not, throw an exception.
+         */
+        if (null === $this->_adapter) {
+            throw new Exception\RuntimeException('No database adapter present');
+        }
+
         $valid = true;
         $this->setValue($value);
 

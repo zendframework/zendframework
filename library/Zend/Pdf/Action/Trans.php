@@ -25,7 +25,6 @@ namespace Zend\Pdf\Action;
  * PDF 'Updates the display of a document, using a transition dictionary' action
  * PDF 1.5+ feature
  *
- * @uses       \Zend\Pdf\Action\AbstractAction
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Action
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

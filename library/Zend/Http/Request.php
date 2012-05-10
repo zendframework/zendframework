@@ -6,7 +6,8 @@ use Zend\Stdlib\RequestInterface,
     Zend\Stdlib\Message,
     Zend\Stdlib\ParametersInterface,
     Zend\Stdlib\Parameters,
-    Zend\Uri\Http as HttpUri;
+    Zend\Uri\Http as HttpUri,
+    Zend\Uri\Exception as ExceptionUri;
 
 class Request extends Message implements RequestInterface
 {
@@ -177,7 +178,7 @@ class Request extends Message implements RequestInterface
         if (is_string($uri)) {
             try {
                 $uri = new HttpUri($uri);
-            } catch (Exception\InvalidUriPartException $e) {
+            } catch (ExceptionUri\InvalidUriPartException $e) {
                 throw new Exception\InvalidArgumentException(
                         sprintf('Invalid URI passed as string (%s)', (string) $uri),
                         $e->getCode(),
@@ -213,7 +214,7 @@ class Request extends Message implements RequestInterface
     public function uri()
     {
         if ($this->uri === null || is_string($this->uri)) {
-            $this->uri = new \Zend\Uri\Http($this->uri);
+            $this->uri = new HttpUri($this->uri);
         }
         return $this->uri;
     }

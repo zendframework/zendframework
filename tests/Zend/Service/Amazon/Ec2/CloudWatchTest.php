@@ -47,7 +47,6 @@ class CloudWatchTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        parent::setUp();
         $this->cloudWatchInstance = new Ec2\CloudWatch('access_key', 'secret_access_key');
         $adapter = new \Zend\Http\Client\Adapter\Test();
         $client = new \Zend\Http\Client(null, array(
@@ -64,8 +63,6 @@ class CloudWatchTest extends \PHPUnit_Framework_TestCase
     {
         unset($this->adapter);
         $this->cloudWatchInstance = null;
-
-        parent::tearDown();
     }
 
     /**

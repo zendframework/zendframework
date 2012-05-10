@@ -22,7 +22,6 @@
 namespace Zend\Db\Adapter\Driver\Pdo;
 
 use Zend\Db\Adapter\Driver\StatementInterface,
-    Zend\Db\Adapter\ParameterContainerInterface,
     Zend\Db\Adapter\ParameterContainer,
     Zend\Db\Adapter\Exception;
 
@@ -94,12 +93,6 @@ class Statement implements StatementInterface
         return $this;
     }
 
-    /*
-    public function setParameterContainer(ParameterContainer $parameterContainer)
-    {
-        $this->parameterContainer = $parameterContainer;
-    }
-    */
     /**
      * Set resource
      * 
@@ -143,16 +136,16 @@ class Statement implements StatementInterface
     }
 
     /**
-     * @param ParameterContainerInterface $parameterContainer
+     * @param ParameterContainer $parameterContainer
      */
-    public function setParameterContainer(ParameterContainerInterface $parameterContainer)
+    public function setParameterContainer(ParameterContainer $parameterContainer)
     {
         $this->parameterContainer = $parameterContainer;
         return $this;
     }
 
     /**
-     * @return ParameterContainerInterface
+     * @return ParameterContainer
      */
     public function getParameterContainer()
     {
@@ -208,7 +201,7 @@ class Statement implements StatementInterface
             if (is_array($parameters)) {
                 $parameters = new ParameterContainer($parameters);
             }
-            if (!$parameters instanceof ParameterContainerInterface) {
+            if (!$parameters instanceof ParameterContainer) {
                 throw new \InvalidArgumentException('ParameterContainer expected');
             }
             $this->bindParametersFromContainer($parameters);
@@ -226,22 +219,22 @@ class Statement implements StatementInterface
     /**
      * Bind parameters from container
      * 
-     * @param ParameterContainerInterface $container 
+     * @param ParameterContainer $container
      */
-    protected function bindParametersFromContainer(ParameterContainerInterface $container)
+    protected function bindParametersFromContainer(ParameterContainer $container)
     {
-        $parameters = $container->toArray();
-        foreach ($parameters as $position => &$value) {
+        $parameters = $container->getNamedArray();
+        foreach ($parameters as $name => &$value) {
             $type = \PDO::PARAM_STR;
-            if ($container->offsetHasErrata($position)) {
-                switch ($container->offsetGetErrata($position)) {
-                    case ParameterContainerInterface::TYPE_INTEGER:
+            if ($container->offsetHasErrata($name)) {
+                switch ($container->offsetGetErrata($name)) {
+                    case ParameterContainer::TYPE_INTEGER:
                         $type = \PDO::PARAM_INT;
                         break;
-                    case ParameterContainerInterface::TYPE_NULL:
+                    case ParameterContainer::TYPE_NULL:
                         $type = \PDO::PARAM_NULL;
                         break;
-                    case ParameterContainerInterface::TYPE_LOB:
+                    case ParameterContainer::TYPE_LOB:
                         $type = \PDO::PARAM_LOB;
                         break;
                     case (is_bool($value)):
@@ -251,7 +244,7 @@ class Statement implements StatementInterface
             }
 
             // parameter is named or positional, value is reference
-            $parameter = is_int($position) ? ($position + 1) : $position;
+            $parameter = is_int($name) ? ($name + 1) : $name;
             $this->resource->bindParam($parameter, $value, $type);
         }
     }

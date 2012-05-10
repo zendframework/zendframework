@@ -20,25 +20,18 @@
  */
 
 namespace Zend\Search\Lucene\Search\Query\Preprocessing;
-use Zend\Search\Lucene;
-use Zend\Search\Lucene\Index;
-use Zend\Search\Lucene\Search\Query;
-use Zend\Search\Lucene\Analysis\Analyzer;
-use Zend\Search\Lucene\Search\Highlighter;
+
+use Zend\Search\Lucene,
+    Zend\Search\Lucene\Index,
+    Zend\Search\Lucene\Search\Query,
+    Zend\Search\Lucene\Analysis\Analyzer\AnalyzerInterface,
+    Zend\Search\Lucene\Search\Highlighter\HighlighterInterface as Highlighter,
+    Zend\Search\Lucene\Analysis\Analyzer\Analyzer;
 
 /**
  * It's an internal abstract class intended to finalize ase a query processing after query parsing.
  * This type of query is not actually involved into query execution.
  *
- * @uses       \Zend\Search\Lucene\Index
- * @uses       \Zend\Search\Lucene\Analysis\Analyzer
- * @uses       \Zend\Search\Lucene\Index\Term
- * @uses       \Zend\Search\Lucene\Search\Query\Boolean
- * @uses       \Zend\Search\Lucene\Search\Query\Insignificant
- * @uses       \Zend\Search\Lucene\Search\Query\Phrase
- * @uses       \Zend\Search\Lucene\Search\Query\Preprocessing\AbstractPreprocessing
- * @uses       \Zend\Search\Lucene\Search\Query\Preprocessing\Phrase
- * @uses       \Zend\Search\Lucene\Search\Query\Term
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Search
@@ -127,10 +120,10 @@ class Phrase extends AbstractPreprocessing
     /**
      * Re-write query into primitive queries in the context of specified index
      *
-     * @param \Zend\Search\Lucene\SearchIndex $index
+     * @param \Zend\Search\Lucene\SearchIndexInterface $index
      * @return \Zend\Search\Lucene\Search\Query\AbstractQuery
      */
-    public function rewrite(Lucene\SearchIndex $index)
+    public function rewrite(Lucene\SearchIndexInterface $index)
     {
 // Allow to use wildcards within phrases
 // They are either removed by text analyzer or used as a part of keyword for keyword fields
@@ -209,7 +202,7 @@ class Phrase extends AbstractPreprocessing
     /**
      * Query specific matches highlighting
      *
-     * @param \Zend\Search\Lucene\Search\Highlighter $highlighter  Highlighter object (also contains doc for highlighting)
+     * @param Highlighter $highlighter  Highlighter object (also contains doc for highlighting)
      */
     protected function _highlightMatches(Highlighter $highlighter)
     {
@@ -221,7 +214,7 @@ class Phrase extends AbstractPreprocessing
 
 
         // tokenize phrase using current analyzer and process it as a phrase query
-        $tokens = Analyzer\Analyzer::getDefault()->tokenize($this->_phrase, $this->_phraseEncoding);
+        $tokens = Analyzer::getDefault()->tokenize($this->_phrase, $this->_phraseEncoding);
 
         if (count($tokens) == 0) {
             // Do nothing

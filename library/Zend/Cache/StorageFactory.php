@@ -98,6 +98,8 @@ class StorageFactory
             }
 
             foreach ($cfg['plugins'] as $k => $v) {
+                $pluginPrio = 1; // default priority
+
                 if (is_string($k)) {
                     if (!is_array($v)) {
                         throw new Exception\InvalidArgumentException(
@@ -111,10 +113,15 @@ class StorageFactory
                         throw new Exception\InvalidArgumentException("Invalid plugins[{$k}] or missing plugins[{$k}].name");
                     }
                     $pluginName = (string) $v['name'];
+
                     if (isset($v['options'])) {
                         $pluginOptions = $v['options'];
                     } else {
                         $pluginOptions = array();
+                    }
+
+                    if (isset($v['priority'])) {
+                        $pluginPrio = $v['priority'];
                     }
                 } else {
                     $pluginName    = $v;
@@ -122,7 +129,7 @@ class StorageFactory
                 }
 
                 $plugin = static::pluginFactory($pluginName, $pluginOptions);
-                $adapter->addPlugin($plugin);
+                $adapter->addPlugin($plugin, $pluginPrio);
             }
         }
 

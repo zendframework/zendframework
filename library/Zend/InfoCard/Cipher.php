@@ -25,10 +25,6 @@ namespace Zend\InfoCard;
  * Provides an abstraction for encryption ciphers used in an Information Card
  * implementation
  *
- * @uses       \Zend\InfoCard\Cipher\Exception
- * @uses       \Zend\InfoCard\Cipher\PKI\Adapter\RSA
- * @uses       \Zend\InfoCard\Cipher\Symmetric\Adapter\AES128CBC
- * @uses       \Zend\InfoCard\Cipher\Symmetric\Adapter\AES256CBC
  * @category   Zend
  * @package    Zend_InfoCard
  * @subpackage Zend_InfoCard_Cipher

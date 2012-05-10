@@ -30,9 +30,6 @@ use Zend\GData\App;
  * Several different errors may be represented by this exception. For a list
  * of error codes available, see getErrorCode.
  *
- * @uses       \Exception
- * @uses       \Zend\GData\App\Exception
- * @uses       \Zend\GData\GApps\Error
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage GApps

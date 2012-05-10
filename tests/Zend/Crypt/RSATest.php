@@ -20,6 +20,7 @@
  */
 
 namespace ZendTest\Crypt;
+
 use Zend\Crypt\Rsa as RSA,
     Zend\Crypt;
 
@@ -52,7 +53,7 @@ class RSATest extends \PHPUnit_Framework_TestCase
 
         try {
             $math = new \Zend\Crypt\Rsa();
-        } catch (\Zend\Crypt\Rsa\Exception $e) {
+        } catch (\Zend\Crypt\Rsa\Exception\RuntimeException $e) {
             if (strpos($e->getMessage(), 'requires openssl extention') !== false) {
                 $this->markTestSkipped($e->getMessage());
             } else {
@@ -334,7 +335,7 @@ CERT;
                 'pemString'  => $keys->privateKey->toString()
             ));
             $this->fail('Expected exception not thrown');
-        } catch (Crypt\Exception $e) {
+        } catch (Crypt\Exception\RuntimeException $e) {
         }
     }
 
@@ -355,7 +356,7 @@ CERT;
                 'passPhrase' => '0987654321',
                 'pemString'  => $keys->privateKey->toString()
             ));
-        } catch (Crypt\Exception $e) {
+        } catch (Crypt\Exception\RuntimeException $e) {
             $this->fail('Passphrase loading failed of a private key');
         }
     }

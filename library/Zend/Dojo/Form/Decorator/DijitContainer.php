@@ -33,8 +33,6 @@ use Zend\Form\Decorator\Exception\RunTimeException as DecoratorException;
  * Assumes the view helper accepts four parameters, the id, content, dijit
  * parameters, and (X)HTML attributes; these will be provided by the element.
  *
- * @uses       \Zend\Form\Decorator\AbstractDecorator
- * @uses       \Zend\Form\Decorator\Exception
  * @package    Zend_Dojo
  * @subpackage Form_Decorator
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

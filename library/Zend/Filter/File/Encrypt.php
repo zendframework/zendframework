@@ -25,8 +25,6 @@ use Zend\Filter,
 /**
  * Encrypts a given file and stores the encrypted file content
  *
- * @uses       \Zend\Filter\Encrypt\Encrypt
- * @uses       \Zend\Filter\Exception
  * @category   Zend
  * @package    Zend_Filter
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -55,7 +53,7 @@ class Encrypt extends Filter\Encrypt
      * Sets the new filename where the content will be stored
      *
      * @param  string $filename (Optional) New filename to set
-     * @return Zend_Filter_File_Encryt
+     * @return Encrypt
      */
     public function setFilename($filename = null)
     {
@@ -70,6 +68,7 @@ class Encrypt extends Filter\Encrypt
      *
      * @param  string $value Full path of file to change
      * @return string The filename which has been set, or false when there were errors
+     * @throws Exception\ExceptionInterface
      */
     public function filter($value)
     {

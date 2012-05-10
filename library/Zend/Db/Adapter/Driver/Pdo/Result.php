@@ -74,16 +74,22 @@ class Result implements Iterator, ResultInterface
      * @var int
      */
     protected $position = -1;
-    
+
+    /**
+     * @var mixed
+     */
+    protected $generatedValue = null;
+
     /**
      * Initialize
      * 
      * @param  PDOStatement $resource
      * @return Result 
      */
-    public function initialize(PDOStatement $resource)
+    public function initialize(PDOStatement $resource, $generatedValue)
     {
         $this->resource = $resource;
+        $this->generatedValue = $generatedValue;
         return $this;
     }
     /**
@@ -177,5 +183,13 @@ class Result implements Iterator, ResultInterface
     public function getAffectedRows()
     {
         return $this->resource->rowCount();
+    }
+
+    /**
+     * @return mixed|false
+     */
+    public function getGeneratedValue()
+    {
+        return $this->generatedValue;
     }
 }

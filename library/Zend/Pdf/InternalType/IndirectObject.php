@@ -27,9 +27,6 @@ use Zend\Pdf;
 /**
  * PDF file 'indirect object' element implementation
  *
- * @uses       \Zend\Pdf\InternalType\AbstractTypeObject
- * @uses       \Zend\Pdf\ObjectFactory
- * @uses       \Zend\Pdf\Exception
  * @category   Zend
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Internal

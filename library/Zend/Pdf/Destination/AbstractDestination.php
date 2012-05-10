@@ -27,19 +27,6 @@ use Zend\Pdf;
 /**
  * Abstract PDF destination representation class
  *
- * @uses       \Zend\Pdf\Destination\Fit
- * @uses       \Zend\Pdf\Destination\FitBoundingBox
- * @uses       \Zend\Pdf\Destination\FitBoundingBoxHorizontally
- * @uses       \Zend\Pdf\Destination\FitBoundingBoxVertically
- * @uses       \Zend\Pdf\Destination\FitHorizontally
- * @uses       \Zend\Pdf\Destination\FitRectangle
- * @uses       \Zend\Pdf\Destination\FitVertically
- * @uses       \Zend\Pdf\Destination\Named
- * @uses       \Zend\Pdf\Destination\Unknown
- * @uses       \Zend\Pdf\Destination\Zoom
- * @uses       \Zend\Pdf\InternalType\AbstractTypeObject
- * @uses       \Zend\Pdf\Exception
- * @uses       \Zend\Pdf\InternalStructure\NavigationTarget
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Destination
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

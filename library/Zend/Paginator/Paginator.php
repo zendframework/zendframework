@@ -1,38 +1,30 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Paginator
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Paginator
  */
 
 namespace Zend\Paginator;
 
-use ArrayIterator;
-use Countable;
-use Iterator;
-use IteratorAggregate;
-use Traversable;
-use Zend\Cache\Storage\Adapter\AdapterInterface as CacheAdapter;
-use Zend\Db\Table\AbstractRowset as DbAbstractRowset;
-use Zend\Db\Table\Select as DbTableSelect;
-use Zend\Db\Sql;
-use Zend\Filter\Filter;
-use Zend\Json\Json;
-use Zend\Stdlib\ArrayUtils;
-use Zend\View;
+use Zend\Paginator\ScrollingStyle\ScrollingStyleInterface,
+    Zend\Paginator\Adapter\AdapterInterface,
+    ArrayIterator,
+    Countable,
+    Iterator,
+    IteratorAggregate,
+    Traversable,
+    Zend\Cache\Storage\Adapter\AdapterInterface as CacheAdapter,
+    Zend\Db\Table\AbstractRowset as DbAbstractRowset,
+    Zend\Db\Table\Select as DbTableSelect,
+    Zend\Db\Sql,
+    Zend\Filter\FilterInterface,
+    Zend\Json\Json,
+    Zend\Stdlib\ArrayUtils,
+    Zend\View;
 
 /**
  * @category   Zend
@@ -107,7 +99,7 @@ class Paginator implements Countable, IteratorAggregate
     /**
      * Adapter
      *
-     * @var Adapter
+     * @var AdapterInterface
      */
     protected $_adapter = null;
 
@@ -135,7 +127,7 @@ class Paginator implements Countable, IteratorAggregate
     /**
      * Result filter
      *
-     * @var Filter
+     * @var FilterInterface
      */
     protected $_filter = null;
 
@@ -187,7 +179,7 @@ class Paginator implements Countable, IteratorAggregate
     public static function factory($data, $adapter = self::INTERNAL_ADAPTER,
                                    array $prefixPaths = null)
     {
-        if ($data instanceof AdapterAggregate) {
+        if ($data instanceof AdapterAggregateInterface) {
             return new self($data->getPaginatorAdapter());
         }
 
@@ -377,19 +369,19 @@ class Paginator implements Countable, IteratorAggregate
     /**
      * Constructor.
      *
-     * @param Adapter|AdapterAggregate $adapter
+     * @param AdapterInterface|AdapterAggregateInterface $adapter
      * @throws Exception\InvalidArgumentException
      */
     public function __construct($adapter)
     {
-        if ($adapter instanceof Adapter) {
+        if ($adapter instanceof AdapterInterface) {
             $this->_adapter = $adapter;
-        } else if ($adapter instanceof AdapterAggregate) {
+        } else if ($adapter instanceof AdapterAggregateInterface) {
             $this->_adapter = $adapter->getPaginatorAdapter();
         } else {
             throw new Exception\InvalidArgumentException(
-                'Zend\Paginator\Paginator only accepts instances of the type ' .
-                'Zend\Paginator\Adapter or Zend\Paginator\AdapterAggregate.'
+                'Zend_Paginator only accepts instances of the type ' .
+                'Zend\Paginator\Adapter\AdapterInterface or Zend\Paginator\AdapterAggregateInterface.'
             );
         }
 
@@ -518,7 +510,7 @@ class Paginator implements Countable, IteratorAggregate
     /**
      * Returns the adapter.
      *
-     * @return Adapter
+     * @return AdapterInterface
      */
     public function getAdapter()
     {
@@ -581,7 +573,7 @@ class Paginator implements Countable, IteratorAggregate
     /**
      * Get the filter
      *
-     * @return Filter
+     * @return FilterInterface
      */
     public function getFilter()
     {
@@ -591,10 +583,10 @@ class Paginator implements Countable, IteratorAggregate
     /**
      * Set a filter chain
      *
-     * @param  Filter $filter
+     * @param  FilterInterface $filter
      * @return Paginator
      */
-    public function setFilter(Filter $filter)
+    public function setFilter(FilterInterface $filter)
     {
         $this->_filter = $filter;
 
@@ -1042,7 +1034,7 @@ class Paginator implements Countable, IteratorAggregate
      * Loads a scrolling style.
      *
      * @param string $scrollingStyle
-     * @return ScrollingStyle
+     * @return ScrollingStyleInterface
      * @throws Exception\InvalidArgumentException
      */
     protected function _loadScrollingStyle($scrollingStyle = null)
@@ -1053,9 +1045,9 @@ class Paginator implements Countable, IteratorAggregate
 
         switch (strtolower(gettype($scrollingStyle))) {
             case 'object':
-                if (!$scrollingStyle instanceof ScrollingStyle) {
+                if (!$scrollingStyle instanceof ScrollingStyleInterface) {
                     throw new Exception\InvalidArgumentException(
-                        'Scrolling style must implement Zend\Paginator\ScrollingStyle'
+                        'Scrolling style must implement Zend\Paginator\ScrollingStyle\ScrollingStyleInterface'
                     );
                 }
 
@@ -1070,7 +1062,7 @@ class Paginator implements Countable, IteratorAggregate
             default:
                 throw new Exception\InvalidArgumentException(
                     'Scrolling style must be a class ' .
-                    'name or object implementing Zend\Paginator\ScrollingStyle'
+                    'name or object implementing Zend\Paginator\ScrollingStyle\ScrollingStyleInterface'
                 );
         }
     }

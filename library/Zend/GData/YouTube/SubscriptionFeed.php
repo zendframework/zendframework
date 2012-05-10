@@ -28,9 +28,6 @@ use Zend\GData\YouTube;
  * Represents a list of individual subscriptions, where each contained entry is
  * a subscription.
  *
- * @uses       \Zend\GData\Media\Feed
- * @uses       \Zend\GData\YouTube
- * @uses       \Zend\GData\YouTube\SubscriptionEntry
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage YouTube

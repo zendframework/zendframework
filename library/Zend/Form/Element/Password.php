@@ -26,7 +26,6 @@ use Zend\Validator\AbstractValidator;
 /**
  * Password form element
  *
- * @uses       \Zend\Form\Element\Xhtml
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Element

@@ -44,10 +44,6 @@ use Zend\Pdf\Cmap;
  *  <li>{@link http://partners.adobe.com/public/developer/opentype/index_spec.html}
  * </ul>
  *
- * @uses       \Zend\Pdf\Cmap\AbstractCmap
- * @uses       \Zend\Pdf\Exception
- * @uses       \Zend\Pdf\BinaryParser\Font\AbstractFont
- * @uses       \Zend\Pdf\Font
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Fonts
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

@@ -67,6 +67,7 @@ class Sqlsrv implements DriverInterface
         $this->registerStatementPrototype(($statementPrototype) ?: new Statement());
         $this->registerResultPrototype(($resultPrototype) ?: new Result());
     }
+    
     /**
      * Register connection
      * 
@@ -79,6 +80,7 @@ class Sqlsrv implements DriverInterface
         $this->connection->setDriver($this);
         return $this;
     }
+    
     /**
      * Register statement prototype
      * 
@@ -89,6 +91,7 @@ class Sqlsrv implements DriverInterface
         $this->statementPrototype = $statementPrototype;
         $this->statementPrototype->setDriver($this);
     }
+    
     /**
      * Register result prototype
      * 
@@ -98,6 +101,7 @@ class Sqlsrv implements DriverInterface
     {
         $this->resultPrototype = $resultPrototype;
     }
+    
     /**
      * Get database paltform name
      * 
@@ -112,6 +116,7 @@ class Sqlsrv implements DriverInterface
             return 'SQLServer';
         }
     }
+    
     /**
      * Check environment
      */
@@ -153,7 +158,7 @@ class Sqlsrv implements DriverInterface
     public function createResult($resource)
     {
         $result = clone $this->resultPrototype;
-        $result->initialize($resource);
+        $result->initialize($resource, $this->connection->getLastGeneratedValue());
         return $result;
     }
 
@@ -172,6 +177,14 @@ class Sqlsrv implements DriverInterface
     public function formatParameterName($name, $type = null)
     {
         return '?';
+    }
+    
+    /**
+     * @return mixed
+     */
+    public function getLastGeneratedValue()
+    {
+        return $this->getConnection()->getLastGeneratedValue();
     }
 
 }

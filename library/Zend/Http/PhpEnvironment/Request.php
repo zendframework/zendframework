@@ -31,6 +31,13 @@ class Request extends HttpRequest
      */
     protected $requestUri;
 
+    /**
+     * Construct
+     *
+     * Instantiates request.
+     *
+     * @return void
+     */
     public function __construct()
     {
         $this->setEnv(new Parameters($_ENV));
@@ -42,8 +49,21 @@ class Request extends HttpRequest
         if ($_FILES) {
             $this->setFile(new Parameters($_FILES));
         }
+
+        $requestBody = file_get_contents('php://input');
+        if(strlen($requestBody) > 0){
+            $this->setContent($requestBody);
+        }
     }
 
+    /**
+     * Set cookies
+     *
+     * Instantiate and set cookies.
+     *
+     * @param $cookie
+     * @return Request
+     */
     public function setCookies($cookie)
     {
         $this->headers()->addHeader(new Cookie((array) $cookie));
@@ -136,6 +156,16 @@ class Request extends HttpRequest
     public function setServer(ParametersInterface $server)
     {
         $this->serverParams = $server;
+
+        // This seems to be the only way to get the Authorization header on Apache
+        if (function_exists('apache_request_headers')) {
+            $apacheRequestHeaders = apache_request_headers();
+            if (isset($apacheRequestHeaders['Authorization'])) {
+                if (!$this->serverParams->get('HTTP_AUTHORIZATION')) {
+                    $this->serverParams->set('HTTP_AUTHORIZATION', $apacheRequestHeaders['Authorization']);
+                }
+            }
+        }
 
         $this->headers()->addHeaders($this->serverToHeaders($this->serverParams));
 

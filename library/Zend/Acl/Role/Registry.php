@@ -151,7 +151,6 @@ class Registry
      *
      * If the Role does not have any parents, then an empty array is returned.
      *
-     * @uses   Zend\Acl\Role\Registry::get()
      * @param  \Zend\Acl\Role\RoleInterface|string $role
      * @return array
      */

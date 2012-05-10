@@ -21,7 +21,6 @@
 namespace Zend\Json\Server;
 
 /**
- * @uses       Zend\Json\Exception
  * @category   Zend
  * @package    Zend_Json
  * @subpackage Server

@@ -25,9 +25,6 @@ use Zend\Markup\Token;
 /**
  * URL markup for HTML
  *
- * @uses       \Zend\Markup\Renderer\Html
- * @uses       \Zend\Markup\Renderer\Markup\Html\AbstractHtml
- * @uses       \Zend\Markup\Token
  * @category   Zend
  * @package    Zend_Markup
  * @subpackage Renderer_Markup_Html

@@ -125,7 +125,6 @@ class FeedSet extends ArrayObject
      *
      * @param string $offset
      * @return mixed
-     * @uses Zend_Feed_Reader
      */
     public function offsetGet($offset)
     {

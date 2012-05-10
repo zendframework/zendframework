@@ -25,8 +25,6 @@ namespace Zend\GData\Photos\Extension;
  * Represents the gphoto:size element used by the API.
  * The size of a photo in bytes.
  *
- * @uses       \Zend\GData\Extension
- * @uses       \Zend\GData\Photos
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Photos

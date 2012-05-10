@@ -76,13 +76,13 @@ class StaticAdapterTableGateway extends TableGateway
     /**
      * Constructor
      * 
-     * @param string $tableName
+     * @param string $table
      * @param string $databaseSchema
      * @param ResultSet $selectResultPrototype 
      */
-    public function __construct($tableName, $databaseSchema = null, ResultSet $selectResultPrototype = null)
+    public function __construct($table, $databaseSchema = null, ResultSet $selectResultPrototype = null)
     {
         $adapter = static::getStaticAdapter();
-        parent::__construct($tableName, $adapter, $databaseSchema, $selectResultPrototype);
+        parent::__construct($table, $adapter, $databaseSchema, $selectResultPrototype);
     }
 }

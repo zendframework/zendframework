@@ -25,7 +25,6 @@ namespace Zend\Amf\Value\Messaging;
  * This type of message contains information necessary to perform
  * point-to-point or publish-subscribe messaging.
  *
- * @uses       \Zend\Amf\Value\Messaging\AbstractMessage
  * @package    Zend_Amf
  * @subpackage Value
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

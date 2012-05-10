@@ -27,8 +27,6 @@ use Zend\Pdf\Color,
 /**
  * RGB color implementation
  *
- * @uses       \Zend\Pdf\Color
- * @uses       \Zend\Pdf\InternalType\NumericObject
  * @category   Zend
  * @subpackage Zend_PDF_Color
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

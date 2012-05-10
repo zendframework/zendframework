@@ -22,12 +22,6 @@
 namespace Zend\Feed\Writer\Exception;
 
 /**
- * @see Zend_Feed_Exception
- */
-require_once 'Zend/Feed/Exception.php';
-
-
-/**
  * Feed exceptions
  *
  * Class to represent exceptions that occur during Feed operations.
@@ -37,5 +31,5 @@ require_once 'Zend/Feed/Exception.php';
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class InvalidMethodException extends \Exception
+class InvalidMethodException extends \Exception implements ExceptionInterface
 {}

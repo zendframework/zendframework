@@ -28,7 +28,6 @@ namespace Zend\Authentication\Storage;
  * re-populated. So there's no need to use sessions, this simple value class
  * will hold the data for rest of the current request.
  *
- * @uses       Zend\Authentication\Storage
  * @category   Zend
  * @package    Zend_Authentication
  * @subpackage Storage

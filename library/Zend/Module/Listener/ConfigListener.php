@@ -293,18 +293,15 @@ class ConfigListener extends AbstractListener implements
      */
     protected function mergePath($path)
     {
-        if($path['type']==self::STATIC_PATH) {
-    	    $config = ConfigFactory::fromFile($path['path']);
-    	} else if($path['type']==self::GLOB_PATH) {
-    	    // @TODO Use GlobIterator
-    	    $config = ConfigFactory::fromFiles(glob($path['path'], GLOB_BRACE));
-    	} else {
-    	    throw new Exception\InvalidArgumentException(
-                sprintf('Invalid path passed to %::%s(). Path must be '
-                . 'a static or a glob path. % is given',
-                __CLASS__, __METHOD__, $path['type'])
-            );
-    	}
+        switch ($path['type']) {
+            case self::STATIC_PATH:
+                $config = ConfigFactory::fromFile($path['path']);
+                break;
+
+            case self::GLOB_PATH:
+                $config = ConfigFactory::fromFiles(glob($path['path'], GLOB_BRACE));
+                break;
+        }
         $this->mergeTraversableConfig($config);
         if ($this->getOptions()->getConfigCacheEnabled()) {
             $this->updateCache();

@@ -35,8 +35,6 @@ use Zend\Form as ZendForm;
  *
  * Any other options passed will be used as HTML attributes of the form tag.
  *
- * @uses       \Zend\Form\Form
- * @uses       \Zend\Form\Decorator\AbstractDecorator
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Decorator

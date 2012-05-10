@@ -26,7 +26,6 @@ use Zend\Wildfire;
  * A message envelope that can be passed to Zend_Wildfire_Plugin_FirePhp to be
  * logged to Firebug instead of a variable.
  *
- * @uses       \Zend\Wildfire\Exception
  * @category   Zend
  * @package    Zend_Wildfire
  * @subpackage Plugin

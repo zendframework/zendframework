@@ -24,10 +24,6 @@ use Zend\Feed\PubSubHubbub;
 use Zend\Date;
 
 /**
- * @uses       \Zend\Date\Date
- * @uses       \Zend\Feed\PubSubHubbub\Exception
- * @uses       \Zend\Feed\PubSubHubbub\Model\AbstractModel
- * @uses       \Zend\Feed\PubSubHubbub\Model\SubscriptionPersistence
  * @category   Zend
  * @package    Zend_Feed_Pubsubhubbub
  * @subpackage Entity

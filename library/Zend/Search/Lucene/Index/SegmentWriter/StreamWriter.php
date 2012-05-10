@@ -24,9 +24,6 @@ use Zend\Search\Lucene\Storage\Directory;
 use Zend\Search\Lucene\Index as LuceneIndex;
 
 /**
- * @uses       \Zend\Search\Lucene\Index\SegmentInfo
- * @uses       \Zend\Search\Lucene\Index\SegmentWriter\AbstractSegmentWriter
- * @uses       \Zend\Search\Lucene\Storage\Directory
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Index

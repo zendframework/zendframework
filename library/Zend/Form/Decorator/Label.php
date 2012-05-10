@@ -35,9 +35,6 @@ namespace Zend\Form\Decorator;
  *
  * Any other options passed will be used as HTML attributes of the label tag.
  *
- * @uses       \Zend\Form\Decorator\AbstractDecorator
- * @uses       \Zend\Form\Decorator\HtmlTag
- * @uses       \Zend\Form\Decorator\Exception
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Decorator

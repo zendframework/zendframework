@@ -21,7 +21,6 @@
 namespace Zend\OAuth\Signature;
 
 /**
- * @uses       Zend\OAuth\Signature\AbstractSignature;
  * @category   Zend
  * @package    Zend_OAuth
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

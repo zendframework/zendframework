@@ -21,7 +21,7 @@
 
 namespace Zend\Db\Adapter\Driver;
 
-use Zend\Db\Adapter\ParameterContainerInterface;
+use Zend\Db\Adapter\ParameterContainer;
 
 /**
  * @category   Zend
@@ -51,13 +51,13 @@ interface StatementInterface
 
     /**
      * @abstract
-     * @param ParameterContainerInterface $parameterContainer
+     * @param ParameterContainer $parameterContainer
      */
-    public function setParameterContainer(ParameterContainerInterface $parameterContainer);
+    public function setParameterContainer(ParameterContainer $parameterContainer);
 
     /**
      * @abstract
-     * @return ParameterContainerInterface
+     * @return ParameterContainer
      */
     public function getParameterContainer();
 

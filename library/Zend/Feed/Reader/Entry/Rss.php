@@ -23,18 +23,6 @@ use Zend\Feed\Reader;
 use Zend\Date;
 
 /**
-* @uses \Zend\Date\Date
-* @uses \Zend\Feed\Exception
-* @uses \Zend\Feed\Reader\Reader
-* @uses \Zend\Feed\Reader\Collection\Category
-* @uses \Zend\Feed\Reader\EntryAbstract
-* @uses \Zend\Feed\Reader\EntryInterface
-* @uses \Zend\Feed\Reader\Extension\Atom\Entry
-* @uses \Zend\Feed\Reader\Extension\Content\Entry
-* @uses \Zend\Feed\Reader\Extension\DublinCore\Entry
-* @uses \Zend\Feed\Reader\Extension\Slash\Entry
-* @uses \Zend\Feed\Reader\Extension\Thread\Entry
-* @uses \Zend\Feed\Reader\Extension\WellformedWeb\Entry
 * @category Zend
 * @package Reader\Reader
 * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

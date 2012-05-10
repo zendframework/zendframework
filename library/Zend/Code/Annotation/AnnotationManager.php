@@ -17,6 +17,12 @@ class AnnotationManager
      */
     protected $annotations = array();
 
+    /**
+     * Constructor
+     *
+     * @param array $annotations
+     * @return void
+     */
     public function __construct(array $annotations = array())
     {
         if ($annotations) {
@@ -26,7 +32,13 @@ class AnnotationManager
         }
     }
 
-    public function registerAnnotation(Annotation $annotation)
+    /**
+     * Register annotations
+     *
+     * @param AnnotationInterface $annotation
+     * @throws Exception\InvalidArgumentException
+     */
+    public function registerAnnotation(AnnotationInterface $annotation)
     {
         $class = get_class($annotation);
 
@@ -38,12 +50,26 @@ class AnnotationManager
         $this->annotationNames[] = $class;
     }
 
+    /**
+     * Checks if the manager has annotations for a class
+     *
+     * @param $class
+     * @return bool
+     */
     public function hasAnnotation($class)
     {
         // otherwise, only if its name exists as a key
         return in_array($class, $this->annotationNames);
     }
 
+    /**
+     * Create Annotation
+     *
+     * @param string $class
+     * @param $content
+     * @return AnnotationInterface
+     * @throws Exception\RuntimeException
+     */
     public function createAnnotation($class, $content = null)
     {
         if (!$this->hasAnnotation($class)) {

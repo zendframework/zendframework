@@ -26,8 +26,6 @@ use Zend\GData\YouTube;
 /**
  * The YouTube comments flavor of an Atom Entry
  *
- * @uses       \Zend\GData\Media\Feed
- * @uses       \Zend\GData\YouTube
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage YouTube

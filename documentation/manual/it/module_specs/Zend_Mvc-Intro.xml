@@ -20,7 +20,7 @@
     <listitem>
       <para>
         <classname>Zend\Di</classname>, nello specifico la sua
-        interfaccia <classname>Locator</classname>, comunque  
+        interfaccia <classname>LocatorInterface</classname>, comunque
         il Dependency Injection Container (DiC).
       </para>
     </listitem>

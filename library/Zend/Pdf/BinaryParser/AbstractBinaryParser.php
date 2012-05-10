@@ -35,7 +35,6 @@ use Zend\Pdf;
  * This allows the same parser code to work with many different data sources:
  * in-memory objects, filesystem files, etc.
  *
- * @uses       \Zend\Pdf\Exception
  * @package    Zend_PDF
  * @subpackage Zend_PDF_BinaryParser
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

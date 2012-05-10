@@ -26,8 +26,6 @@ use Zend\Dojo\View\Exception;
 /**
  * Abstract class for Dojo Slider dijits
  *
- * @uses       \Zend\Dojo\View\Exception
- * @uses       \Zend\Dojo\View\Helper\Dijit
  * @package    Zend_Dojo
  * @subpackage View
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

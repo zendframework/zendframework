@@ -21,10 +21,12 @@
 
 namespace Zend\Service\Amazon\S3;
 
-use Zend\Crypt,
-    Zend\Service\Amazon,
-    Zend\Service\Amazon\S3\Exception,
-    Zend\Uri;
+use Zend\Crypt;
+use Zend\Http\Header;
+use Zend\Http\Response\Stream as StreamResponse;
+use Zend\Service\Amazon;
+use Zend\Service\Amazon\S3\Exception;
+use Zend\Uri;
 
 /**
  * Amazon S3 PHP connection class
@@ -214,7 +216,7 @@ class S3 extends \Zend\Service\Amazon\AbstractAmazon
             
             //Prevents from the fatal error method call on a non-object
             foreach ($info as $key => $value)
-                if($value instanceof \Zend\Http\Header\HeaderDescription) {
+                if ($value instanceof Header\HeaderDescription) {
                     $info[$key] = $value->getFieldValue();
                 }
                 
@@ -408,7 +410,7 @@ class S3 extends \Zend\Service\Amazon\AbstractAmazon
      * @param  string $object Object path
      * @param  string $streamfile File to write the stream to
      * @param  bool   $paidobject This is "requestor pays" object
-     * @return Zend_Http_Response_Stream|false
+     * @return StreamResponse|false
      */
     public function getObjectStream($object, $streamfile = null, $paidobject=false)
     {
@@ -422,7 +424,7 @@ class S3 extends \Zend\Service\Amazon\AbstractAmazon
         }
         $this->getHttpClient()->setStream(null);
 
-        if ($response->getStatusCode() != 200 || !($response instanceof \Zend\Http\Response\Stream)) {
+        if ($response->getStatusCode() != 200 || !($response instanceof StreamResponse)) {
             return false;
         }
 
@@ -455,11 +457,11 @@ class S3 extends \Zend\Service\Amazon\AbstractAmazon
 
         // Check the MD5 Etag returned by S3 against and MD5 of the buffer
         if ($response->getStatusCode() == 200) {
+            $etag       = '';
             $etagHeader = $response->headers()->get('Etag');
-            if($etagHeader instanceof \Zend\Http\Header\Etag)
+            if ($etagHeader instanceof Header\Etag) {
                 $etag = $etagHeader->getFieldValue();
-            else
-                $etag = '';
+            }
             
             // It is escaped by double quotes for some reason
             $etag = str_replace('"', '', $etag);
@@ -597,12 +599,12 @@ class S3 extends \Zend\Service\Amazon\AbstractAmazon
     /**
      * Make a request to Amazon S3
      *
-     * @param  string $method    Request method
-     * @param  string $path        Path to requested object
-     * @param  array  $params    Request parameters
-     * @param  array  $headers    HTTP headers
-     * @param  string|resource $data        Request data
-     * @return Zend_Http_Response
+     * @param  string $method         Request method
+     * @param  string $path           Path to requested object
+     * @param  array  $params         Request parameters
+     * @param  array  $headers        HTTP headers
+     * @param  string|resource $data  Request data
+     * @return \Zend\Http\Response
      */
     public function _makeRequest($method, $path='', $params=null, $headers=array(), $data=null)
     {
@@ -639,16 +641,17 @@ class S3 extends \Zend\Service\Amazon\AbstractAmazon
         $client->resetParameters();
         
         $hasContentType = false;
-        foreach($headers as $key => $value)
-            if(strtolower($key) == 'content-type')
+        foreach($headers as $key => $value) {
+            if (strtolower($key) == 'content-type') {
                 $hasContentType = true;
+            }
+        }
         
         if (($method == 'PUT') && ($data !== null)) {
-            if(!$hasContentType)
+            if (!$hasContentType) {
                 $headers['Content-Type'] = self::getMimeType($path);
-
+            }
             $hasContentType = true;
-
             $client->setRawBody($data);
         }
 
@@ -656,8 +659,9 @@ class S3 extends \Zend\Service\Amazon\AbstractAmazon
         $client->setMethod($method);
         
         //Prevents from Http\Client adding up a content-type header, which would break signature
-        if(!$hasContentType)
+        if (!$hasContentType) {
             $headers['Content-Type'] = 'application/xml';
+        }
         
         $headers = $this->addSignature($method, $path, $headers);
         $client->setHeaders($headers);
@@ -672,10 +676,10 @@ class S3 extends \Zend\Service\Amazon\AbstractAmazon
             }
             $client->setRawBody($data);
         }
-        do {
-            $retry = false;
 
-            $response = $client->send();
+        do {
+            $retry         = false;
+            $response      = $client->send();
             $response_code = $response->getStatusCode();
 
             // Some 5xx errors are expected, so retry automatically
@@ -683,12 +687,10 @@ class S3 extends \Zend\Service\Amazon\AbstractAmazon
                 $retry = true;
                 $retry_count++;
                 sleep($retry_count / 4 * $retry_count);
-            }
-            else if ($response_code == 307) {
+            } elseif ($response_code == 307) {
                 // Need to redirect, new S3 endpoint given
                 // This should never happen as Zend_Http_Client will redirect automatically
-            }
-            else if ($response_code == 100) {
+            } elseif ($response_code == 100) {
                 // echo 'OK to Continue';
             }
         } while ($retry);

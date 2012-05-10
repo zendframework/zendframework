@@ -99,7 +99,7 @@ class DiServiceFactory extends Di implements FactoryInterface
             if ($this->useServiceLocator == self::USE_SL_AFTER_DI && $this->serviceLocator->has($name)) {
                 return $this->serviceLocator->get($name);
             } else {
-                throw new Exception\InvalidServiceNameException(
+                throw new Exception\ServiceNotCreatedException(
                     sprintf('Service %s was not found in this DI instance', $name),
                     null,
                     $e

@@ -266,6 +266,7 @@ class ServiceManager implements ServiceLocatorInterface
             foreach ($this->peeringServiceManagers as $peeringServiceManager) {
                 try {
                     $instance = $peeringServiceManager->get($name);
+                    break;
                 } catch (Exception\ServiceNotCreatedException $e) {
                     continue;
                 }

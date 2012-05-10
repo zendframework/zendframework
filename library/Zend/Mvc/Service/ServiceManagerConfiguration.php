@@ -45,8 +45,9 @@ class ServiceManagerConfiguration implements ConfigurationInterface
     );
 
     protected $aliases = array(
-        'EM'                                => 'EventManager',
-        'Zend\EventManager\EventCollection' => 'EventManager',
+        'EM' => 'EventManager',
+        'Zend\EventManager\EventManagerInterface' => 'EventManager',
+        'Zend\Di\LocatorInterface' => 'DependencyInjector',
 
         'MM'     => 'ModuleManager',
         'Config' => 'Configuration',

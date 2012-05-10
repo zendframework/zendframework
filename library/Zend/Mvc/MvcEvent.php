@@ -21,6 +21,8 @@ class MvcEvent extends Event
     const EVENT_ROUTE          = 'route';
     /**#@-*/
 
+    protected $application;
+
     /**
      * @var Request
      */
@@ -50,6 +52,18 @@ class MvcEvent extends Event
      * @var Model
      */
     protected $viewModel;
+
+    public function setApplication(ApplicationInterface $application)
+    {
+        $this->setParam('application', $application);
+        $this->application = $application;
+        return $this;
+    }
+
+    public function getApplication()
+    {
+        return $this->application;
+    }
 
     /**
      * Get router

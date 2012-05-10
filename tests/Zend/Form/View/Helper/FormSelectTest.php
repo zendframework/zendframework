@@ -157,6 +157,18 @@ class FormSelectTest extends CommonTestCase
         $element->setAttribute('disabled', false);
         $markup = $this->helper->render($element);
 
-        $this->assertNotRegexp('#<option.*?(disabled="")#', $markup);
+        $this->assertNotContains('disabled', $markup);
+    }
+
+    /**
+     * @group ZF2-290
+     */
+    public function testOmittingDisabledValueWillNotRenderOptionsWithDisabledAttribute()
+    {
+        $element = $this->getElement();
+        $element->setAttribute('type', 'select');
+        $markup = $this->helper->render($element);
+
+        $this->assertNotContains('disabled', $markup);
     }
 }

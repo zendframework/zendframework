@@ -56,7 +56,6 @@ class Csrf extends Element implements InputProviderInterface
      */
     public function setValidator(CsrfValidator $validator)
     {
-        $this->setAttribute('value', $validator->getHash());
         $this->validator = $validator;
         return $this;
     }
@@ -74,6 +73,58 @@ class Csrf extends Element implements InputProviderInterface
             )));
         }
         return $this->validator;
+    }
+
+    /**
+     * Override: set a single element attribute
+     *
+     * Does not allow setting value attribute; this will always be
+     * retrieved from the validator.
+     * 
+     * @param  string $name 
+     * @param  mixed $value 
+     * @return Csrf
+     */
+    public function setAttribute($name, $value)
+    {
+        if ('value' == $name) {
+            // Do not allow setting this
+            return;
+        }
+        return parent::setAttribute($name, $value);
+    }
+
+    /**
+     * Override: retrieve a single element attribute
+     *
+     * Retrieves validator hash when asked for 'value' attribute;
+     * otherwise, proxies to parent.
+     * 
+     * @param  string $name 
+     * @return mixed
+     */
+    public function getAttribute($name)
+    {
+        if ($name != 'value') {
+            return parent::getAttribute($name);
+        }
+        $validator = $this->getValidator();
+        return $validator->getHash();
+    }
+
+    /**
+     * Override: get attributes
+     *
+     * Seeds 'value' attribute with validator hash
+     * 
+     * @return array
+     */
+    public function getAttributes()
+    {
+        $attributes = parent::getAttributes();
+        $validator  = $this->getValidator();
+        $attributes['value'] = $validator->getHash();
+        return $attributes;
     }
 
     /**

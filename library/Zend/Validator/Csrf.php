@@ -114,7 +114,6 @@ class Csrf extends AbstractValidator
                     break;
             }
         }
-        $this->initCsrfToken();
     }
 
     /**
@@ -128,7 +127,7 @@ class Csrf extends AbstractValidator
     {
         $this->setValue((string) $value);
 
-        $hash = $this->getHash();
+        $hash = $this->getValidationToken();
 
         if ($value !== $hash) {
             $this->error(self::NOT_SAME);
@@ -296,5 +295,22 @@ class Csrf extends AbstractValidator
             static::$hashCache[$this->getSessionName()] = $this->hash;
         }
         $this->setValue($this->hash);
+        $this->initCsrfToken();
+    }
+
+    /**
+     * Get validation token
+     *
+     * Retrieve token from session, if it exists.
+     * 
+     * @return null|string
+     */
+    protected function getValidationToken()
+    {
+        $session = $this->getSession();
+        if (isset($session->hash)) {
+            return $session->hash;
+        }
+        return null;
     }
 }

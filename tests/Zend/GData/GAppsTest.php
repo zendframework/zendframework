@@ -66,7 +66,6 @@ class GAppsTest extends \PHPUnit_Framework_TestCase
     public function testEmptyResponseExceptionRaisesException()
     {
       $e = new \Zend\GData\App\HttpException();
-      $e->setResponse(null);
       $success = false;
       try {
         $this->gdata->throwServiceExceptionIfDetected($e);

@@ -7,7 +7,7 @@ result=0
 for tested in "${testedcomponents[@]}"
     do
         echo "$tested:"
-        phpunit -c $testdir/phpunit.xml $testdir/$tested
+        phpunit -c $testdir/phpunit.xml.dist $testdir/$tested
         result=$(($result || $?))
 done
 

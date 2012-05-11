@@ -22,9 +22,9 @@
 namespace Zend\Service\ReCaptcha;
 
 use Traversable;
+use Zend\Http\Request;
+use Zend\Service\AbstractService;
 use Zend\Stdlib\ArrayUtils;
-use Zend\Http\Request,
-    Zend\Service\AbstractService;
 
 /**
  * Zend_Service_ReCaptcha
@@ -214,17 +214,19 @@ class ReCaptcha extends AbstractService
     public function setParams($params)
     {
         if ($params instanceof Traversable) {
-            $options = ArrayUtils::iteratorToArray($params);
+            $params = ArrayUtils::iteratorToArray($params);
         }
 
-        if (is_array($params)) {
-            foreach ($params as $k => $v) {
-                $this->setParam($k, $v);
-            }
-        } else {
-            throw new Exception(
-                'Expected array or Traversable object'
-            );
+        if (!is_array($params)) {
+            throw new Exception(sprintf(
+                '%s expects an array or Traversable set of params; received "%s"',
+                __METHOD__,
+                (is_object($params) ? get_class($params) : gettype($params))
+            ));
+        }
+
+        foreach ($params as $k => $v) {
+            $this->setParam($k, $v);
         }
 
         return $this;

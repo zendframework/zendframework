@@ -519,7 +519,7 @@ abstract class AbstractAdapter
                     return $this->setLocale($this->_options['route'][$temp[0]]);
                 } else if (!$this->_options['disableNotices']) {
                     if ($this->_options['log']) {
-                        $this->_options['log']->log("The language '{$locale}' has to be added before it can be used.", $this->_options['logPriority']);
+                        $this->_options['log']->log($this->_options['logPriority'], "The language '{$locale}' has to be added before it can be used.");
                     } else {
                         trigger_error("The language '{$locale}' has to be added before it can be used.", E_USER_NOTICE);
                     }
@@ -532,7 +532,7 @@ abstract class AbstractAdapter
         if (empty($this->_translate[$locale])) {
             if (!$this->_options['disableNotices']) {
                 if ($this->_options['log']) {
-                    $this->_options['log']->log("No translation for the language '{$locale}' available.", $this->_options['logPriority']);
+                    $this->_options['log']->log($this->_options['logPriority'], "No translation for the language '{$locale}' available.");
                 } else {
                     trigger_error("No translation for the language '{$locale}' available.", E_USER_NOTICE);
                 }
@@ -915,7 +915,7 @@ abstract class AbstractAdapter
             $message = str_replace('%message%', $message, $this->_options['logMessage']);
             $message = str_replace('%locale%', $locale, $message);
             if ($this->_options['log']) {
-                $this->_options['log']->log($message, $this->_options['logPriority']);
+                $this->_options['log']->log($this->_options['logPriority'], $message);
             } else {
                 trigger_error($message, E_USER_NOTICE);
             }
@@ -1069,7 +1069,7 @@ abstract class AbstractAdapter
         if (!self::$_cache->hasItem($id)) {
             if (!$this->_options['disableNotices']) {
                 if ($this->_options['log']) {
-                    $this->_options['log']->log("Writing to cache failed.", $this->_options['logPriority']);
+                    $this->_options['log']->log($this->_options['logPriority'], "Writing to cache failed.");
                 } else {
                     trigger_error("Writing to cache failed.", E_USER_NOTICE);
                 }

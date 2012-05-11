@@ -265,9 +265,11 @@ class Logger implements Loggable, Pluggable
     public function log($priority, $message, $extra = array())
     {
         if (!is_int($priority) || ($priority<0) || ($priority>=count($this->priorities))) {
-            throw new Exception\InvalidArgumentException(
-                '$priority must be an integer > 0 and < ' . count($this->priorities)
-            );
+            throw new Exception\InvalidArgumentException(sprintf(
+                '$priority must be an integer > 0 and < %d; received %s',
+                count($this->priorities),
+                var_export($priority, 1)
+            ));
         }
         if (is_object($message) && !method_exists($message, '__toString')) {
             throw new Exception\InvalidArgumentException(

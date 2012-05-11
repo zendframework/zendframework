@@ -51,6 +51,7 @@ Zend/Stdlib
 Zend/Tag
 Zend/Text
 Zend/TimeSync
+Zend/Translator
 Zend/Uri
 Zend/Validator
 Zend/VersionTest.php

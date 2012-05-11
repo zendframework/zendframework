@@ -63,7 +63,6 @@ class Application implements
      */
     protected $moduleManager;
 
-
     public function __construct($configuration, ServiceManager $instanceManager = null)
     {
         $this->configuration = $configuration;
@@ -85,16 +84,16 @@ class Application implements
 //            $appManager->configureInstanceManager($instanceManager);
 //        }
 
+        $this->serviceManager = $instanceManager;
         $this->setEventManager($instanceManager->get('EventManager'));
-        $this->moduleManager = $instanceManager->get('ModuleManager');
 
+        $this->moduleManager = $instanceManager->get('ModuleManager');
+        $this->request       = $instanceManager->get('Request');
+        $this->response      = $instanceManager->get('Response');
+
+        $this->events->attach($instanceManager->get('ViewManager'));
         $this->events->attach($instanceManager->get('RouteListener'));
         $this->events->attach($instanceManager->get('DispatchListener'));
-        $this->events->attach($instanceManager->get('ViewDefaultRenderingStrategy'));
-        $this->request  = $instanceManager->get('Request');
-        $this->response = $instanceManager->get('Response');
-
-        $this->serviceManager = $instanceManager;
     }
 
     public function getConfiguration()
@@ -105,43 +104,14 @@ class Application implements
     public function bootstrap()
     {
         $serviceManager = $this->serviceManager;
-        $events          = $this->events();
-        $sharedEvents    = $events->getSharedManager();
-
-        // Setup error strategies
-        $noRouteStrategy   = $serviceManager->get('ViewRouteNotFoundStrategy');
-        $exceptionStrategy = $serviceManager->get('ViewExceptionStrategy');
-        $events->attach($noRouteStrategy);
-        $events->attach($exceptionStrategy);
-
-        // Setup default view events
-        $createViewModelListener = new View\CreateViewModelListener();
-        $injectTemplateListener  = new View\InjectTemplateListener();
-        $injectViewModelListener = new View\InjectViewModelListener();
-
-        $sharedEvents->attach('Zend\Stdlib\DispatchableInterface', MvcEvent::EVENT_DISPATCH, array($createViewModelListener, 'createViewModelFromArray'), -80);
-        $sharedEvents->attach('Zend\Stdlib\DispatchableInterface', MvcEvent::EVENT_DISPATCH, array($noRouteStrategy, 'prepareNotFoundViewModel'), -90);
-        $sharedEvents->attach('Zend\Stdlib\DispatchableInterface', MvcEvent::EVENT_DISPATCH, array($createViewModelListener, 'createViewModelFromNull'), -80);
-        $sharedEvents->attach('Zend\Stdlib\DispatchableInterface', MvcEvent::EVENT_DISPATCH, array($injectTemplateListener, 'injectTemplate'), -90);
-        $sharedEvents->attach('Zend\Stdlib\DispatchableInterface', MvcEvent::EVENT_DISPATCH, array($injectViewModelListener, 'injectViewModel'), -100);
-        $events->attach(MvcEvent::EVENT_DISPATCH_ERROR, array($injectViewModelListener, 'injectViewModel'), -100);
 
         // Setup MVC Event
         $this->event = $event  = new MvcEvent();
         $event->setTarget($this);
         $event->setApplication($this)
-            ->setRequest($this->getRequest())
-            ->setResponse($this->getResponse())
-            ->setRouter($serviceManager->get('Router'));
-
-        // Setup "layout" view model for event
-        $renderingStrategy = $serviceManager->get('ViewDefaultRenderingStrategy');
-        $viewModel         = $event->getViewModel();
-        $viewModel->setTemplate($renderingStrategy->getLayoutTemplate());
-
-        $renderer    = $this->serviceManager->get('ViewPhpRenderer');
-        $modelHelper = $renderer->plugin('view_model');
-        $modelHelper->setRoot($viewModel);
+              ->setRequest($this->getRequest())
+              ->setResponse($this->getResponse())
+              ->setRouter($serviceManager->get('Router'));
 
         // Trigger bootstrap events
         $this->events()->trigger('bootstrap', $event);

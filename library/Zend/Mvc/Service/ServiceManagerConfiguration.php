@@ -13,7 +13,8 @@ class ServiceManagerConfiguration implements ConfigurationInterface
         'Request'                      => 'Zend\Http\PhpEnvironment\Request',
         'Response'                     => 'Zend\Http\PhpEnvironment\Response',
         'RouteListener'                => 'Zend\Mvc\RouteListener',
-        'DispatchListener'             => 'Zend\Mvc\DispatchListener'
+        'DispatchListener'             => 'Zend\Mvc\DispatchListener',
+        'ViewManager'                  => 'Zend\Mvc\View\ViewManager',
     );
 
     protected $factories = array(
@@ -26,18 +27,6 @@ class ServiceManagerConfiguration implements ConfigurationInterface
         'Application'                  => 'Zend\Mvc\Service\ApplicationFactory',
         'DependencyInjector'           => 'Zend\Mvc\Service\DiFactory',
         'ControllerLoader'             => 'Zend\Mvc\Service\ControllerLoaderFactory',
-
-        // view related stuffs
-        'View'                         => 'Zend\Mvc\Service\ViewFactory',
-        'ViewAggregateResolver'        => 'Zend\Mvc\Service\ViewAggregateResolverFactory',
-        'ViewDefaultRenderingStrategy' => 'Zend\Mvc\Service\ViewDefaultRenderingStrategyFactory',
-        'ViewExceptionStrategy'        => 'Zend\Mvc\Service\ViewExceptionStrategyFactory',
-        'ViewHelperLoader'             => 'Zend\Mvc\Service\ViewHelperLoaderFactory',
-        'ViewPhpRenderer'              => 'Zend\Mvc\Service\ViewPhpRendererFactory',
-        'ViewPhpRendererStrategy'      => 'Zend\Mvc\Service\ViewPhpRendererStrategyFactory',
-        'ViewRouteNotFoundStrategy'    => 'Zend\Mvc\Service\ViewRouteNotFoundStrategyFactory',
-        'ViewTemplateMapResolver'      => 'Zend\Mvc\Service\ViewTemplateMapResolverFactory',
-        'ViewTemplatePathStack'        => 'Zend\Mvc\Service\ViewTemplatePathStackFactory',
     );
 
     protected $abstractFactories = array(

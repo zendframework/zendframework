@@ -9,6 +9,7 @@ use Zend\EventManager\EventManagerAwareInterface;
 use Zend\Http\Header\Cookie;
 use Zend\Http\PhpEnvironment\Request as PhpHttpRequest;
 use Zend\Http\PhpEnvironment\Response as PhpHttpResponse;
+use Zend\Mvc\MvcEvent;
 use Zend\ServiceManager\ServiceManager;
 use Zend\ServiceManager\ConfigurationInterface as InstanceConfigurationInterface;
 use Zend\Uri\Http as HttpUri;
@@ -118,11 +119,12 @@ class Application implements
         $injectTemplateListener  = new View\InjectTemplateListener();
         $injectViewModelListener = new View\InjectViewModelListener();
 
-        $sharedEvents->attach('Zend\Stdlib\Dispatchable', 'dispatch', array($createViewModelListener, 'createViewModelFromArray'), -80);
-        $sharedEvents->attach('Zend\Stdlib\Dispatchable', 'dispatch', array($createViewModelListener, 'createViewModelFromNull'), -80);
-        $sharedEvents->attach('Zend\Stdlib\Dispatchable', 'dispatch', array($injectTemplateListener,  'injectTemplate'), -90);
-        $sharedEvents->attach('Zend\Stdlib\Dispatchable', 'dispatch', array($injectViewModelListener, 'injectViewModel'), -100);
-        $events->attach('dispatch.error', array($injectViewModelListener, 'injectViewModel'), -100);
+        $sharedEvents->attach('Zend\Stdlib\DispatchableInterface', MvcEvent::EVENT_DISPATCH, array($createViewModelListener, 'createViewModelFromArray'), -80);
+        $sharedEvents->attach('Zend\Stdlib\DispatchableInterface', MvcEvent::EVENT_DISPATCH, array($noRouteStrategy, 'prepareNotFoundViewModel'), -90);
+        $sharedEvents->attach('Zend\Stdlib\DispatchableInterface', MvcEvent::EVENT_DISPATCH, array($createViewModelListener, 'createViewModelFromNull'), -80);
+        $sharedEvents->attach('Zend\Stdlib\DispatchableInterface', MvcEvent::EVENT_DISPATCH, array($injectTemplateListener, 'injectTemplate'), -90);
+        $sharedEvents->attach('Zend\Stdlib\DispatchableInterface', MvcEvent::EVENT_DISPATCH, array($injectViewModelListener, 'injectViewModel'), -100);
+        $events->attach(MvcEvent::EVENT_DISPATCH_ERROR, array($injectViewModelListener, 'injectViewModel'), -100);
 
         // Setup MVC Event
         $this->event = $event  = new MvcEvent();

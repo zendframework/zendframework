@@ -2,7 +2,7 @@
 
 namespace Zend\Http\Header;
 
-class GenericHeader implements HeaderDescription
+class GenericHeader implements HeaderInterface
 {
     /**
      * @var string

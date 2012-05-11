@@ -10,7 +10,7 @@ class AuthenticationInfoTest extends \PHPUnit_Framework_TestCase
     public function testAuthenticationInfoFromStringCreatesValidAuthenticationInfoHeader()
     {
         $authenticationInfoHeader = AuthenticationInfo::fromString('Authentication-Info: xxx');
-        $this->assertInstanceOf('Zend\Http\Header\HeaderDescription', $authenticationInfoHeader);
+        $this->assertInstanceOf('Zend\Http\Header\HeaderInterface', $authenticationInfoHeader);
         $this->assertInstanceOf('Zend\Http\Header\AuthenticationInfo', $authenticationInfoHeader);
     }
 

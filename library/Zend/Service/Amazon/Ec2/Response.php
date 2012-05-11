@@ -98,7 +98,7 @@ class Response
     {
         try {
             $body = $this->_httpResponse->getBody();
-        } catch (\Zend\Http\Exception $e) {
+        } catch (\Zend\Http\Exception\ExceptionInterface $e) {
             $body = false;
         }
 

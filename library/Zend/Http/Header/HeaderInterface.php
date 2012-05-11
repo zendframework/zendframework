@@ -2,7 +2,7 @@
 
 namespace Zend\Http\Header;
 
-interface HeaderDescription
+interface HeaderInterface
 {
     public static function fromString($headerLine);
     public function getFieldName();

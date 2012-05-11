@@ -20,7 +20,8 @@
  */
 
 namespace Zend\Http\Client\Adapter;
-use Zend\Http\Client\Adapter as HttpAdapter,
+
+use Zend\Http\Client\Adapter\AdapterInterface as HttpAdapter,
     Zend\Http\Client\Adapter\Exception as AdapterException,
     Zend\Http\Response;
 
@@ -34,7 +35,7 @@ use Zend\Http\Client\Adapter as HttpAdapter,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Socket implements HttpAdapter, Stream
+class Socket implements HttpAdapter, StreamInterface
 {
     /**
      * The socket for server connection
@@ -134,7 +135,7 @@ class Socket implements HttpAdapter, Stream
      * @since  Zend Framework 1.9
      *
      * @param  mixed $context Stream context or array of context options
-     * @return \Zend\Http\Client\Adapter\Socket
+     * @return Socket
      */
     public function setStreamContext($context)
     {
@@ -176,6 +177,7 @@ class Socket implements HttpAdapter, Stream
      * @param string  $host
      * @param int     $port
      * @param boolean $secure
+     * @throws AdapterException\RuntimeException
      */
     public function connect($host, $port = 80, $secure = false)
     {
@@ -484,7 +486,7 @@ class Socket implements HttpAdapter, Stream
      * Check if the socket has timed out - if so close connection and throw
      * an exception
      *
-     * @throws \Zend\Http\Client\Adapter\Exception with READ_TIMEOUT code
+     * @throws AdapterException\TimeoutException with READ_TIMEOUT code
      */
     protected function _checkSocketReadTimeout()
     {

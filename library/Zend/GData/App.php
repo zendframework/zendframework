@@ -665,7 +665,7 @@ class App
             if ($usingMimeStream) {
                 $this->_httpClient->setAdapter($oldHttpAdapter);
             }
-        } catch (\Zend\Http\Client\Exception $e) {
+        } catch (\Zend\Http\Client\Exception\ExceptionInterface $e) {
             // reset adapter
             if ($usingMimeStream) {
                 $this->_httpClient->setAdapter($oldHttpAdapter);
@@ -757,7 +757,7 @@ class App
         $header = $response->headers()->get('GData-Version');
         $majorProtocolVersion = null;
         $minorProtocolVersion = null;
-        if ($header instanceof Http\Header\HeaderDescription) {
+        if ($header instanceof Http\Header\HeaderInterface) {
             $protocolVersionStr = $header->getFieldValue();
             // Extract protocol major and minor version from header
             $delimiterPos = strpos($protocolVersionStr, '.');

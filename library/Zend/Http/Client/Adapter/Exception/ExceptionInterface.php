@@ -19,7 +19,9 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Http\Client\Adapter;
+namespace Zend\Http\Client\Adapter\Exception;
+
+use Zend\Http\Client\Exception\ExceptionInterface as HttpClientException;
 
 /**
  * @category   Zend
@@ -28,5 +30,6 @@ namespace Zend\Http\Client\Adapter;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Exception extends \Zend\Http\Client\Exception
+interface ExceptionInterface
+    extends HttpClientException
 {}

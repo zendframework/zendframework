@@ -10,7 +10,7 @@ class RangeTest extends \PHPUnit_Framework_TestCase
     public function testRangeFromStringCreatesValidRangeHeader()
     {
         $rangeHeader = Range::fromString('Range: xxx');
-        $this->assertInstanceOf('Zend\Http\Header\HeaderDescription', $rangeHeader);
+        $this->assertInstanceOf('Zend\Http\Header\HeaderInterface', $rangeHeader);
         $this->assertInstanceOf('Zend\Http\Header\Range', $rangeHeader);
     }
 

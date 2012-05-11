@@ -10,7 +10,7 @@ class TransferEncodingTest extends \PHPUnit_Framework_TestCase
     public function testTransferEncodingFromStringCreatesValidTransferEncodingHeader()
     {
         $transferEncodingHeader = TransferEncoding::fromString('Transfer-Encoding: xxx');
-        $this->assertInstanceOf('Zend\Http\Header\HeaderDescription', $transferEncodingHeader);
+        $this->assertInstanceOf('Zend\Http\Header\HeaderInterface', $transferEncodingHeader);
         $this->assertInstanceOf('Zend\Http\Header\TransferEncoding', $transferEncodingHeader);
     }
 

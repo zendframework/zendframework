@@ -2,8 +2,7 @@
 
 namespace Zend\Http\Exception;
 
-class RuntimeException
-    extends \RuntimeException 
+class OutOfRangeException
+    extends \OutOfRangeException
     implements ExceptionInterface
-{
-}
+{}

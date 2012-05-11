@@ -23,7 +23,8 @@ namespace Zend\Http\Client;
 use Zend\Stdlib\ParametersInterface,
     Zend\Uri,
     Zend\Http\Header\Cookie,
-    Zend\Http\Response;
+    Zend\Http\Response,
+    ArrayIterator;
 
 /**
  * A Cookies object is designed to contain and maintain HTTP cookies, and should
@@ -377,7 +378,7 @@ class Cookies //implements ParametersInterface
      */
     public function getIterator()
     {
-        return new \ArrayIterator($this->_rawCookies);
+        return new ArrayIterator($this->_rawCookies);
     }
 
     /**

@@ -129,7 +129,7 @@ class ClientLogin
         ob_start();
         try {
             $response = $client->send();
-        } catch (\Zend\Http\Client\Exception $e) {
+        } catch (\Zend\Http\Client\Exception\ExceptionInterface $e) {
             throw new App\HttpException($e->getMessage(), $e);
         }
         ob_end_clean();

@@ -10,7 +10,7 @@ class ConnectionTest extends \PHPUnit_Framework_TestCase
     public function testConnectionFromStringCreatesValidConnectionHeader()
     {
         $connectionHeader = Connection::fromString('Connection: xxx');
-        $this->assertInstanceOf('Zend\Http\Header\HeaderDescription', $connectionHeader);
+        $this->assertInstanceOf('Zend\Http\Header\HeaderInterface', $connectionHeader);
         $this->assertInstanceOf('Zend\Http\Header\Connection', $connectionHeader);
     }
 

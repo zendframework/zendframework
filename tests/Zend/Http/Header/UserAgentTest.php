@@ -10,7 +10,7 @@ class UserAgentTest extends \PHPUnit_Framework_TestCase
     public function testUserAgentFromStringCreatesValidUserAgentHeader()
     {
         $userAgentHeader = UserAgent::fromString('User-Agent: xxx');
-        $this->assertInstanceOf('Zend\Http\Header\HeaderDescription', $userAgentHeader);
+        $this->assertInstanceOf('Zend\Http\Header\HeaderInterface', $userAgentHeader);
         $this->assertInstanceOf('Zend\Http\Header\UserAgent', $userAgentHeader);
     }
 

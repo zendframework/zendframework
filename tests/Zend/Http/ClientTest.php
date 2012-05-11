@@ -3,6 +3,7 @@
 namespace ZendTest\Http;
 
 use Zend\Http\Client,
+    Zend\Http\Exception,
     Zend\Http\Header\SetCookie;
 
 class ClientTest extends \PHPUnit_Framework_TestCase

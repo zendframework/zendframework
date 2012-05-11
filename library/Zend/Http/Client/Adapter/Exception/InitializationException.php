@@ -29,6 +29,6 @@ namespace Zend\Http\Client\Adapter\Exception;
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class InitializationException
-    extends \RuntimeException
-    implements \Zend\Http\Client\Adapter\Exception
+    extends RuntimeException
+    implements ExceptionInterface
 {}

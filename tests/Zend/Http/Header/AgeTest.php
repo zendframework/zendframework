@@ -10,7 +10,7 @@ class AgeTest extends \PHPUnit_Framework_TestCase
     public function testAgeFromStringCreatesValidAgeHeader()
     {
         $ageHeader = Age::fromString('Age: 12');
-        $this->assertInstanceOf('Zend\Http\Header\HeaderDescription', $ageHeader);
+        $this->assertInstanceOf('Zend\Http\Header\HeaderInterface', $ageHeader);
         $this->assertInstanceOf('Zend\Http\Header\Age', $ageHeader);
         $this->assertEquals('12', $ageHeader->getDeltaSeconds());
     }

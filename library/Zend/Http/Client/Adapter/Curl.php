@@ -21,7 +21,8 @@
  */
 
 namespace Zend\Http\Client\Adapter;
-use Zend\Http\Client\Adapter as HttpAdapter,
+
+use Zend\Http\Client\Adapter\AdapterInterface as HttpAdapter,
     Zend\Http\Client\Adapter\Exception as AdapterException,
     Zend\Http\Client,
     Zend\Http\Request;
@@ -36,7 +37,7 @@ use Zend\Http\Client\Adapter as HttpAdapter,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Curl implements HttpAdapter, Stream
+class Curl implements HttpAdapter, StreamInterface
 {
     /**
      * Parameters array
@@ -86,7 +87,7 @@ class Curl implements HttpAdapter, Stream
      * Config is set using setConfig()
      *
      * @return void
-     * @throws \Zend\Http\Client\Adapter\Exception
+     * @throws AdapterException\InitializationException
      */
     public function __construct()
     {
@@ -115,7 +116,7 @@ class Curl implements HttpAdapter, Stream
     /**
      * Set the configuration array for the adapter
      *
-     * @throws \Zend\Http\Client\Adapter\Exception
+     * @throws AdapterException\InvalidArgumentException
      * @param  \Zend\Config\Config | array $config
      * @return \Zend\Http\Client\Adapter\Curl
      */
@@ -173,7 +174,7 @@ class Curl implements HttpAdapter, Stream
      *
      * @param  string|int $option
      * @param  mixed $value
-     * @return Zend\Http\Adapter\Curl
+     * @return Curl
      */
     public function setCurlOption($option, $value)
     {
@@ -191,7 +192,7 @@ class Curl implements HttpAdapter, Stream
      * @param  int     $port
      * @param  boolean $secure
      * @return void
-     * @throws \Zend\Http\Client\Adapter\Exception if unable to connect
+     * @throws AdapterException\RuntimeException if unable to connect
      */
     public function connect($host, $port = 80, $secure = false)
     {
@@ -250,7 +251,7 @@ class Curl implements HttpAdapter, Stream
      * @param  array         $headers
      * @param  string        $body
      * @return string        $request
-     * @throws \Zend\Http\Client\Adapter\Exception If connection fails, connected to wrong host, no PUT file defined, unsupported method, or unsupported cURL option
+     * @throws AdapterException\RuntimeException If connection fails, connected to wrong host, no PUT file defined, unsupported method, or unsupported cURL option
      */
     public function write($method, $uri, $httpVersion = 1.1, $headers = array(), $body = '')
     {
@@ -474,7 +475,7 @@ class Curl implements HttpAdapter, Stream
      * Set output stream for the response
      *
      * @param resource $stream
-     * @return \Zend\Http\Client\Adapter\Socket
+     * @return Curl
      */
     public function setOutputStream($stream)
     {

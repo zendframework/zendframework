@@ -20,7 +20,8 @@
  */
 
 namespace Zend\Http\Client\Adapter;
-use Zend\Http\Client\Adapter as HttpAdapter,
+
+use Zend\Http\Client\Adapter\AdapterInterface as HttpAdapter,
     Zend\Http\Client\Adapter\Exception as AdapterException,
     Zend\Http\Response;
 
@@ -118,7 +119,7 @@ class Test implements HttpAdapter
      * @param int     $port
      * @param boolean $secure
      * @param int     $timeout
-     * @throws \Zend\Http\Client\Adapter\Exception
+     * @throws AdapterException\RuntimeException
      */
     public function connect($host, $port = 80, $secure = false)
     {

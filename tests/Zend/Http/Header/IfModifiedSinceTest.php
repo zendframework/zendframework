@@ -10,7 +10,7 @@ class IfModifiedSinceTest extends \PHPUnit_Framework_TestCase
     public function testIfModifiedSinceFromStringCreatesValidIfModifiedSinceHeader()
     {
         $ifModifiedSinceHeader = IfModifiedSince::fromString('If-Modified-Since: xxx');
-        $this->assertInstanceOf('Zend\Http\Header\HeaderDescription', $ifModifiedSinceHeader);
+        $this->assertInstanceOf('Zend\Http\Header\HeaderInterface', $ifModifiedSinceHeader);
         $this->assertInstanceOf('Zend\Http\Header\IfModifiedSince', $ifModifiedSinceHeader);
     }
 

@@ -19,7 +19,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Http\Client;
+namespace Zend\Http\Client\Adapter;
 
 /**
  * An interface description for Zend_Http_Client_Adapter classes.
@@ -33,7 +33,7 @@ namespace Zend\Http\Client;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Adapter
+interface AdapterInterface
 {
     /**
      * Set the configuration array for the adapter

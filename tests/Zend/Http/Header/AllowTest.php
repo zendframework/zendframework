@@ -10,7 +10,7 @@ class AllowTest extends \PHPUnit_Framework_TestCase
     public function testAllowFromStringCreatesValidAllowHeader()
     {
         $allowHeader = Allow::fromString('Allow: GET, POST');
-        $this->assertInstanceOf('Zend\Http\Header\HeaderDescription', $allowHeader);
+        $this->assertInstanceOf('Zend\Http\Header\HeaderInterface', $allowHeader);
         $this->assertInstanceOf('Zend\Http\Header\Allow', $allowHeader);
         $this->assertEquals(array('GET', 'POST'), $allowHeader->getAllowedMethods());
     }

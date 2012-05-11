@@ -10,7 +10,7 @@ class DateTest extends \PHPUnit_Framework_TestCase
     public function testDateFromStringCreatesValidDateHeader()
     {
         $dateHeader = Date::fromString('Date: xxx');
-        $this->assertInstanceOf('Zend\Http\Header\HeaderDescription', $dateHeader);
+        $this->assertInstanceOf('Zend\Http\Header\HeaderInterface', $dateHeader);
         $this->assertInstanceOf('Zend\Http\Header\Date', $dateHeader);
     }
 

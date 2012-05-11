@@ -10,7 +10,7 @@ class ViaTest extends \PHPUnit_Framework_TestCase
     public function testViaFromStringCreatesValidViaHeader()
     {
         $viaHeader = Via::fromString('Via: xxx');
-        $this->assertInstanceOf('Zend\Http\Header\HeaderDescription', $viaHeader);
+        $this->assertInstanceOf('Zend\Http\Header\HeaderInterface', $viaHeader);
         $this->assertInstanceOf('Zend\Http\Header\Via', $viaHeader);
     }
 

@@ -18,7 +18,9 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Json\Server;
+namespace Zend\Json\Server\Exception;
+
+use Zend\Json\Exception\ExceptionInterface as Exception;
 
 /**
  * @category   Zend
@@ -27,5 +29,5 @@ namespace Zend\Json\Server;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Exception extends \Zend\Json\Exception
+interface ExceptionInterface extends Exception
 {}

@@ -24,11 +24,11 @@ namespace ZendTest\InputFilter;
 use PHPUnit_Framework_TestCase as TestCase;
 use stdClass;
 use Zend\InputFilter\Input;
-use Zend\InputFilter\InputFilter;
+use Zend\InputFilter\BaseInputFilter as InputFilter;
 use Zend\Filter;
 use Zend\Validator;
 
-class InputFilterTest extends TestCase
+class BaseInputFilterTest extends TestCase
 {
     public function testInputFilterIsEmptyByDefault()
     {

@@ -32,7 +32,7 @@ use Zend\Stdlib\ArrayUtils;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class InputFilter implements InputFilterInterface
+class BaseInputFilter implements InputFilterInterface
 {
     protected $data;
     protected $inputs = array();

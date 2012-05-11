@@ -75,9 +75,9 @@ class SubscriberTest extends \PHPUnit_Framework_TestCase
         ), $this->_subscriber->getHubUrls());
     }
 
-    public function testAddsHubServerUrlsFromArrayUsingSetConfig()
+    public function testAddsHubServerUrlsFromArrayUsingSetOptions()
     {
-        $this->_subscriber->setConfig(array('hubUrls' => array(
+        $this->_subscriber->setOptions(array('hubUrls' => array(
             'http://www.example.com/hub', 'http://www.example.com/hub2'
         )));
         $this->assertEquals(array(
@@ -157,9 +157,9 @@ class SubscriberTest extends \PHPUnit_Framework_TestCase
         ), $this->_subscriber->getParameters());
     }
 
-    public function testAddsParametersFromArrayUsingSetConfig()
+    public function testAddsParametersFromArrayUsingSetOptions()
     {
-        $this->_subscriber->setConfig(array('parameters' => array(
+        $this->_subscriber->setOptions(array('parameters' => array(
             'foo' => 'bar', 'boo' => 'baz'
         )));
         $this->assertEquals(array(

@@ -95,39 +95,32 @@ class Memory extends AbstractAdapter
      *    - The time-to-life
      *  - namespace <string>
      *    - The namespace to use
-     *  - ignore_missing_items <boolean>
-     *    - Throw exception on missing item or return false
      *
-     * @param  string $normalizedKey
-     * @param  array  $normalizedOptions
-     * @return mixed Data on success or false on failure
+     * @param  string  $normalizedKey
+     * @param  array   $normalizedOptions
+     * @param  boolean $success
+     * @param  mixed   $casToken
+     * @return mixed Data on success, null on failure
      * @throws Exception\ExceptionInterface
      */
-    protected function internalGetItem(& $normalizedKey, array & $normalizedOptions)
+    protected function internalGetItem(& $normalizedKey, array & $normalizedOptions, & $success = null, & $casToken = null)
     {
-        $ns    = $normalizedOptions['namespace'];
-        $exist = isset($this->data[$ns][$normalizedKey]);
-        if ($exist) {
+        $ns      = $normalizedOptions['namespace'];
+        $success = isset($this->data[$ns][$normalizedKey]);
+        if ($success) {
             $data = & $this->data[$ns][$normalizedKey];
             $ttl  = $normalizedOptions['ttl'];
             if ($ttl && microtime(true) >= ($data[1] + $ttl) ) {
-                $exist = false;
+                $success = false;
             }
         }
 
-        if (!$exist) {
-            if (!$normalizedOptions['ignore_missing_items']) {
-                throw new Exception\ItemNotFoundException("Key '{$normalizedKey}' not found on namespace '{$ns}'");
-            }
-            $result = false;
-        } else {
-            $result = $data[0];
-            if (array_key_exists('token', $normalizedOptions)) {
-                $normalizedOptions['token'] = $data[0];
-            }
+        if (!$success) {
+            return null;
         }
 
-        return $result;
+        $casToken = $data[0];
+        return $data[0];
     }
 
     /**
@@ -141,7 +134,7 @@ class Memory extends AbstractAdapter
      *
      * @param  array $normalizedKeys
      * @param  array $normalizedOptions
-     * @return array Associative array of existing keys and values
+     * @return array Associative array of keys and values
      * @throws Exception\ExceptionInterface
      */
     protected function internalGetItems(array & $normalizedKeys, array & $normalizedOptions)
@@ -207,7 +200,7 @@ class Memory extends AbstractAdapter
      *
      * @param  array $keys
      * @param  array $options
-     * @return array Array of existing keys
+     * @return array Array of found keys
      * @throws Exception\ExceptionInterface
      */
     protected function internalHasItems(array & $normalizedKeys, array & $normalizedOptions)
@@ -222,8 +215,10 @@ class Memory extends AbstractAdapter
 
         $result = array();
         foreach ($normalizedKeys as $normalizedKey) {
-            if (!$ttl || microtime(true) < ($data[$normalizedKey][1] + $ttl) ) {
-                $result[$normalizedKey] = true;
+            if (isset($data[$normalizedKey])) {
+                if (!$ttl || microtime(true) < ($data[$normalizedKey][1] + $ttl) ) {
+                    $result[] = $normalizedKey;
+                }
             }
         }
 
@@ -238,12 +233,10 @@ class Memory extends AbstractAdapter
      *    - The time-to-life (Default: ttl of object)
      *  - namespace <string> optional
      *    - The namespace to use (Default: namespace of object)
-     *  - ignore_missing_items <boolean> optional
-     *    - Throw exception on missing item or return false
      *
      * @param  string $normalizedKey
      * @param  array  $normalizedOptions
-     * @return array|boolean Metadata or false on failure
+     * @return array|boolean Metadata on success, false on failure
      * @throws Exception\ExceptionInterface
      *
      * @triggers getMetadata.pre(PreEvent)
@@ -253,11 +246,6 @@ class Memory extends AbstractAdapter
     protected function internalGetMetadata(& $normalizedKey, array & $normalizedOptions)
     {
         if (!$this->internalHasItem($normalizedKey, $normalizedOptions)) {
-            if (!$normalizedOptions['ignore_missing_items']) {
-                throw new Exception\ItemNotFoundException(
-                    "Key '{$normalizedKey}' not found on namespace '{$normalizedOptions['namespace']}'"
-                );
-            }
             return false;
         }
 
@@ -311,7 +299,7 @@ class Memory extends AbstractAdapter
      *
      * @param  array $normalizedKeyValuePairs
      * @param  array $normalizedOptions
-     * @return boolean
+     * @return array Array of not stored keys
      * @throws Exception\ExceptionInterface
      */
     protected function internalSetItems(array & $normalizedKeyValuePairs, array & $normalizedOptions)
@@ -333,7 +321,7 @@ class Memory extends AbstractAdapter
             $data[$normalizedKey] = array($value, microtime(true), $normalizedOptions['tags']);
         }
 
-        return true;
+        return array();
     }
 
     /**
@@ -356,16 +344,16 @@ class Memory extends AbstractAdapter
         if (!$this->hasFreeCapacity()) {
             $memoryLimit = $this->getOptions()->getMemoryLimit();
             throw new Exception\OutOfCapacityException(
-                'Memory usage exceeds limit ({$memoryLimit}).'
+                "Memory usage exceeds limit ({$memoryLimit})."
             );
         }
 
         $ns = $normalizedOptions['namespace'];
         if (isset($this->data[$ns][$normalizedKey])) {
-            throw new Exception\RuntimeException("Key '{$normalizedKey}' already exists within namespace '$ns'");
+            return false;
         }
-        $this->data[$ns][$normalizedKey] = array($value, microtime(true), $normalizedOptions['tags']);
 
+        $this->data[$ns][$normalizedKey] = array($value, microtime(true), $normalizedOptions['tags']);
         return true;
     }
 
@@ -380,7 +368,7 @@ class Memory extends AbstractAdapter
      *
      * @param  array $normalizedKeyValuePairs
      * @param  array $normalizedOptions
-     * @return boolean
+     * @return array Array of not stored keys
      * @throws Exception\ExceptionInterface
      */
     protected function internalAddItems(array & $normalizedKeyValuePairs, array & $normalizedOptions)
@@ -397,16 +385,18 @@ class Memory extends AbstractAdapter
             $this->data[$ns] = array();
         }
 
-        $data = & $this->data[$ns];
-        $now  = microtime(true);
+        $result = array();
+        $data   = & $this->data[$ns];
+        $now    = microtime(true);
         foreach ($normalizedKeyValuePairs as $normalizedKey => $value) {
             if (isset($data[$normalizedKey])) {
-                throw new Exception\RuntimeException("Key '{$normalizedKey}' already exists within namespace '{$ns}'");
+                $result[] = $normalizedKey;
+            } else {
+                $data[$normalizedKey] = array($value, $now, $normalizedOptions['tags']);
             }
-            $data[$normalizedKey] = array($value, $now, $normalizedOptions['tags']);
         }
 
-        return true;
+        return $result;
     }
 
     /**
@@ -430,7 +420,7 @@ class Memory extends AbstractAdapter
     {
         $ns = $normalizedOptions['namespace'];
         if (!isset($this->data[$ns][$normalizedKey])) {
-            throw new Exception\ItemNotFoundException("Key '{$normalizedKey}' doesn't exist within namespace '{$ns}'");
+            return false;
         }
         $this->data[$ns][$normalizedKey] = array($value, microtime(true), $normalizedOptions['tags']);
 
@@ -450,27 +440,27 @@ class Memory extends AbstractAdapter
      *
      * @param  array $normalizedKeyValuePairs
      * @param  array $normalizedOptions
-     * @return boolean
+     * @return array Array of not stored keys
      * @throws Exception\ExceptionInterface
      */
     protected function internalReplaceItems(array & $normalizedKeyValuePairs, array & $normalizedOptions)
     {
         $ns = $normalizedOptions['namespace'];
         if (!isset($this->data[$ns])) {
-            throw new Exception\ItemNotFoundException("Namespace '$ns' doesn't exist");
+            return array_keys($normalizedKeyValuePairs);
         }
 
-        $data = & $this->data[$ns];
+        $result = array();
+        $data   = & $this->data[$ns];
         foreach ($normalizedKeyValuePairs as $normalizedKey => $value) {
             if (!isset($data[$normalizedKey])) {
-                throw new Exception\ItemNotFoundException(
-                    "Key '{$normalizedKey}' doesn't exist within namespace '{$ns}'"
-                );
+                $result[] = $normalizedKey;
+            } else {
+                $data[$normalizedKey] = array($value, microtime(true), $normalizedOptions['tags']);
             }
-            $data[$normalizedKey] = array($value, microtime(true), $normalizedOptions['tags']);
         }
 
-        return true;
+        return $result;
     }
 
     /**
@@ -488,20 +478,12 @@ class Memory extends AbstractAdapter
     protected function internalTouchItem(& $normalizedKey, array & $normalizedOptions)
     {
         $ns = $normalizedOptions['namespace'];
-        if (isset($this->data[$ns][$normalizedKey])) {
-            // update mtime
-            $this->data[$ns][$normalizedKey][1] = microtime(true);
-        } else {
-            if (!$normalizedOptions['ignore_missing_items']) {
-                throw new Exception\ItemNotFoundException(
-                    "Key '{$normalizedKey}' not found within namespace '{$ns}'"
-                );
-            }
 
-            // add an empty item
-            $this->data[$ns][$normalizedKey] = array('', microtime(true), null);
+        if (!isset($this->data[$ns][$normalizedKey])) {
+            return false;
         }
 
+        $this->data[$ns][$normalizedKey][1] = microtime(true);
         return true;
     }
 
@@ -511,8 +493,6 @@ class Memory extends AbstractAdapter
      * Options:
      *  - namespace <string>
      *    - The namespace to use
-     *  - ignore_missing_items <boolean>
-     *    - Throw exception on missing item
      *
      * @param  string $normalizedKey
      * @param  array  $normalizedOptions
@@ -522,16 +502,15 @@ class Memory extends AbstractAdapter
     protected function internalRemoveItem(& $normalizedKey, array & $normalizedOptions)
     {
         $ns = $normalizedOptions['namespace'];
-        if (isset($this->data[$ns][$normalizedKey])) {
-            unset($this->data[$ns][$normalizedKey]);
+        if (!isset($this->data[$ns][$normalizedKey])) {
+            return false;
+        }
 
-            // remove empty namespace
-            if (!$this->data[$ns]) {
-                unset($this->data[$ns]);
-            }
+        unset($this->data[$ns][$normalizedKey]);
 
-        } elseif (!$normalizedOptions['ignore_missing_items']) {
-            throw new Exception\ItemNotFoundException("Key '{$normalizedKey}' not found on namespace '{$ns}'");
+        // remove empty namespace
+        if (!$this->data[$ns]) {
+            unset($this->data[$ns]);
         }
 
         return true;
@@ -545,13 +524,11 @@ class Memory extends AbstractAdapter
      *    - The time-to-life
      *  - namespace <string>
      *    - The namespace to use
-     *  - ignore_missing_items <boolean>
-     *    - Throw exception on missing item
      *
      * @param  string $normalizedKey
      * @param  int    $value
      * @param  array  $normalizedOptions
-     * @return int|boolean The new value or false on failure
+     * @return int|boolean The new value on success, false on failure
      * @throws Exception\ExceptionInterface
      */
     protected function internalIncrementItem(& $normalizedKey, & $value, array & $normalizedOptions)
@@ -563,13 +540,7 @@ class Memory extends AbstractAdapter
             $data[$normalizedKey][1] = microtime(true);
             $newValue = $data[$normalizedKey][0];
         } else {
-            if (!$normalizedOptions['ignore_missing_items']) {
-                throw new Exception\ItemNotFoundException(
-                    "Key '{$normalizedKey}' not found within namespace '{$ns}'"
-                );
-            }
-
-            // add a new item
+            // initial value
             $newValue             = $value;
             $data[$normalizedKey] = array($newValue, microtime(true), null);
         }
@@ -585,13 +556,11 @@ class Memory extends AbstractAdapter
      *    - The time-to-life
      *  - namespace <string>
      *    - The namespace to use
-     *  - ignore_missing_items <boolean>
-     *    - Throw exception on missing item
      *
      * @param  string $normalizedKey
      * @param  int    $value
      * @param  array  $normalizedOptions
-     * @return int|boolean The new value or false on failure
+     * @return int|boolean The new value on success, false on failure
      * @throws Exception\ExceptionInterface
      */
     protected function internalDecrementItem(& $normalizedKey, & $value, array & $normalizedOptions)
@@ -603,13 +572,7 @@ class Memory extends AbstractAdapter
             $data[$normalizedKey][1] = microtime(true);
             $newValue = $data[$normalizedKey][0];
         } else {
-            if (!$normalizedOptions['ignore_missing_items']) {
-                throw new Exception\ItemNotFoundException(
-                    "Key '{$normalizedKey}' not found within namespace '{$ns}'"
-                );
-            }
-
-            // add a new item
+            // initial value
             $newValue             = -$value;
             $data[$normalizedKey] = array($newValue, microtime(true), null);
         }
@@ -859,7 +822,7 @@ class Memory extends AbstractAdapter
      * Internal method to get storage capacity.
      *
      * @param  array $normalizedOptions
-     * @return array|boolean Capacity as array or false on failure
+     * @return array|boolean Associative array of capacity, false on failure
      * @throws Exception\ExceptionInterface
      */
     protected function internalGetCapacity(array & $normalizedOptions)

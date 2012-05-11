@@ -148,32 +148,25 @@ class Apc extends AbstractAdapter
      * Options:
      *  - namespace <string>
      *    - The namespace to use
-     *  - ignore_missing_items <boolean>
-     *    - Throw exception on missing item or return false
      *
-     * @param  string $normalizedKey
-     * @param  array  $normalizedOptions
-     * @return mixed Data on success or false on failure
+     * @param  string  $normalizedKey
+     * @param  array   $normalizedOptions
+     * @param  boolean $success
+     * @param  mixed   $casToken
+     * @return mixed Data on success, null on failure
      * @throws Exception\ExceptionInterface
      */
-    protected function internalGetItem(& $normalizedKey, array & $normalizedOptions)
+    protected function internalGetItem(& $normalizedKey, array & $normalizedOptions, & $success = null, & $casToken = null)
     {
         $prefix      = $normalizedOptions['namespace'] . $this->getOptions()->getNamespaceSeparator();
         $internalKey = $prefix . $normalizedKey;
-        $success     = false;
         $result      = apc_fetch($internalKey, $success);
 
         if (!$success) {
-            if (!$normalizedOptions['ignore_missing_items']) {
-                throw new Exception\ItemNotFoundException("Key '{$internalKey}' not found");
-            }
-            $result = false;
-        } else {
-            if (array_key_exists('token', $normalizedOptions)) {
-                $normalizedOptions['token'] = $result;
-            }
+            return null;
         }
 
+        $casToken = $result;
         return $result;
     }
 
@@ -186,7 +179,7 @@ class Apc extends AbstractAdapter
      *
      * @param  array $normalizedKeys
      * @param  array $normalizedOptions
-     * @return array Associative array of existing keys and values
+     * @return array Associative array of keys and values
      * @throws Exception\ExceptionInterface
      */
     protected function internalGetItems(array & $normalizedKeys, array & $normalizedOptions)
@@ -200,12 +193,6 @@ class Apc extends AbstractAdapter
         }
 
         $fetch = apc_fetch($internalKeys);
-        if (!$normalizedOptions['ignore_missing_items']) {
-            if (count($normalizedKeys) != count($fetch)) {
-                $missing = implode("', '", array_diff($internalKeys, array_keys($fetch)));
-                throw new Exception\ItemNotFoundException('Keys not found: ' . $missing);
-            }
-        }
 
         // remove namespace prefix
         $prefixL = strlen($prefix);
@@ -244,7 +231,7 @@ class Apc extends AbstractAdapter
      *
      * @param  array $keys
      * @param  array $options
-     * @return array Array of existing keys
+     * @return array Array of found keys
      * @throws Exception\ExceptionInterface
      */
     protected function internalHasItems(array & $normalizedKeys, array & $normalizedOptions)
@@ -273,12 +260,10 @@ class Apc extends AbstractAdapter
      * Options:
      *  - namespace <string> optional
      *    - The namespace to use (Default: namespace of object)
-     *  - ignore_missing_items <boolean> optional
-     *    - Throw exception on missing item or return false
      *
      * @param  string $normalizedKey
      * @param  array  $normalizedOptions
-     * @return array|boolean Metadata or false on failure
+     * @return array|boolean Metadata on success, false on failure
      * @throws Exception\ExceptionInterface
      *
      * @triggers getMetadata.pre(PreEvent)
@@ -300,13 +285,10 @@ class Apc extends AbstractAdapter
         }
 
         if (!$metadata) {
-            if (!$normalizedOptions['ignore_missing_items']) {
-                throw new Exception\ItemNotFoundException("Key '{$internalKey}' not found");
-            }
-        } else {
-            $this->normalizeMetadata($metadata);
+            return false;
         }
 
+        $this->normalizeMetadata($metadata);
         return $metadata;
     }
 
@@ -319,8 +301,7 @@ class Apc extends AbstractAdapter
      *
      * @param  array $normalizedKeys
      * @param  array $normalizedOptions
-     * @return array
-     * @throws Exception\ItemNotFoundException
+     * @return array Associative array of keys and metadata
      *
      * @triggers getMetadatas.pre(PreEvent)
      * @triggers getMetadatas.post(PostEvent)
@@ -393,7 +374,7 @@ class Apc extends AbstractAdapter
      *
      * @param  array $normalizedKeyValuePairs
      * @param  array $normalizedOptions
-     * @return boolean
+     * @return array Array of not stored keys
      * @throws Exception\ExceptionInterface
      */
     protected function internalSetItems(array & $normalizedKeyValuePairs, array & $normalizedOptions)
@@ -406,15 +387,16 @@ class Apc extends AbstractAdapter
             $internalKeyValuePairs[$internalKey] = &$value;
         }
 
-        $errKeys = apc_store($internalKeyValuePairs, null, $normalizedOptions['ttl']);
-        if ($errKeys) {
-            throw new Exception\RuntimeException(
-                "apc_store(<array>, null, {$normalizedOptions['ttl']}) failed for keys: "
-                . "'" . implode("','", $errKeys) . "'"
-            );
+        $failedKeys = apc_store($internalKeyValuePairs, null, $normalizedOptions['ttl']);
+        $failedKeys = array_keys($failedKeys);
+
+        // remove prefix
+        $prefixL = strlen($prefix);
+        foreach ($failedKeys as & $key) {
+            $key = substr($key, $prefixL);
         }
 
-        return true;
+        return $failedKeys;
     }
 
     /**
@@ -437,7 +419,7 @@ class Apc extends AbstractAdapter
         $internalKey = $normalizedOptions['namespace'] . $this->getOptions()->getNamespaceSeparator() . $normalizedKey;
         if (!apc_add($internalKey, $value, $normalizedOptions['ttl'])) {
             if (apc_exists($internalKey)) {
-                throw new Exception\RuntimeException("Key '{$internalKey}' already exists");
+                return false;
             }
 
             $type = is_object($value) ? get_class($value) : gettype($value);
@@ -460,7 +442,7 @@ class Apc extends AbstractAdapter
      *
      * @param  array $normalizedKeyValuePairs
      * @param  array $normalizedOptions
-     * @return boolean
+     * @return array Array of not stored keys
      * @throws Exception\ExceptionInterface
      */
     protected function internalAddItems(array & $normalizedKeyValuePairs, array & $normalizedOptions)
@@ -472,15 +454,16 @@ class Apc extends AbstractAdapter
             $internalKeyValuePairs[$internalKey] = $value;
         }
 
-        $errKeys = apc_add($internalKeyValuePairs, null, $normalizedOptions['ttl']);
-        if ($errKeys) {
-            throw new Exception\RuntimeException(
-                "apc_add(<array>, null, {$normalizedOptions['ttl']}) failed for keys: "
-                . "'" . implode("','", $errKeys) . "'"
-            );
+        $failedKeys = apc_add($internalKeyValuePairs, null, $normalizedOptions['ttl']);
+        $failedKeys = array_keys($failedKeys);
+
+        // remove prefix
+        $prefixL = strlen($prefix);
+        foreach ($failedKeys as & $key) {
+            $key = substr($key, $prefixL);
         }
 
-        return true;
+        return $failedKeys;
     }
 
     /**
@@ -502,9 +485,7 @@ class Apc extends AbstractAdapter
     {
         $internalKey = $normalizedOptions['namespace'] . $this->getOptions()->getNamespaceSeparator() . $normalizedKey;
         if (!apc_exists($internalKey)) {
-            throw new Exception\ItemNotFoundException(
-                "Key '{$internalKey}' doesn't exist"
-            );
+            return false;
         }
 
         if (!apc_store($internalKey, $value, $normalizedOptions['ttl'])) {
@@ -523,8 +504,6 @@ class Apc extends AbstractAdapter
      * Options:
      *  - namespace <string>
      *    - The namespace to use
-     *  - ignore_missing_items <boolean>
-     *    - Throw exception on missing item
      *
      * @param  string $normalizedKey
      * @param  array  $normalizedOptions
@@ -534,11 +513,7 @@ class Apc extends AbstractAdapter
     protected function internalRemoveItem(& $normalizedKey, array & $normalizedOptions)
     {
         $internalKey = $normalizedOptions['namespace'] . $this->getOptions()->getNamespaceSeparator() . $normalizedKey;
-        if (!apc_delete($internalKey) && !$normalizedOptions['ignore_missing_items']) {
-            throw new Exception\ItemNotFoundException("Key '{$internalKey}' not found");
-        }
-
-        return true;
+        return apc_delete($internalKey);
     }
 
     /**
@@ -547,12 +522,10 @@ class Apc extends AbstractAdapter
      * Options:
      *  - namespace <string>
      *    - The namespace to use
-     *  - ignore_missing_items <boolean>
-     *    - Throw exception on missing item
      *
      * @param  array $keys
      * @param  array $options
-     * @return boolean
+     * @return array Array of not removed keys
      * @throws Exception\ExceptionInterface
      */
     protected function internalRemoveItems(array & $normalizedKeys, array & $normalizedOptions)
@@ -563,12 +536,15 @@ class Apc extends AbstractAdapter
             $internalKeys[] = $prefix . $normalizedKey;
         }
 
-        $errKeys = apc_delete($internalKeys);
-        if ($errKeys && !$normalizedOptions['ignore_missing_items']) {
-            throw new Exception\ItemNotFoundException("Keys '" . implode("','", $errKeys) . "' not found");
+        $failedKeys = apc_delete($internalKeys);
+
+        // remove prefix
+        $prefixL = strlen($prefix);
+        foreach ($failedKeys as & $key) {
+            $key = substr($key, $prefixL);
         }
 
-        return true;
+        return $failedKeys;
     }
 
     /**
@@ -579,13 +555,11 @@ class Apc extends AbstractAdapter
      *    - The time-to-life
      *  - namespace <string>
      *    - The namespace to use
-     *  - ignore_missing_items <boolean>
-     *    - Throw exception on missing item
      *
      * @param  string $normalizedKey
      * @param  int    $value
      * @param  array  $normalizedOptions
-     * @return int|boolean The new value or false on failure
+     * @return int|boolean The new value on success, false on failure
      * @throws Exception\ExceptionInterface
      */
     protected function internalIncrementItem(& $normalizedKey, & $value, array & $normalizedOptions)
@@ -593,15 +567,9 @@ class Apc extends AbstractAdapter
         $internalKey = $normalizedOptions['namespace'] . $this->getOptions()->getNamespaceSeparator() . $normalizedKey;
         $value       = (int)$value;
         $newValue    = apc_inc($internalKey, $value);
-        if ($newValue === false) {
-            if (apc_exists($internalKey)) {
-                throw new Exception\RuntimeException("apc_inc('{$internalKey}', {$value}) failed");
-            } elseif (!$normalizedOptions['ignore_missing_items']) {
-                throw new Exception\ItemNotFoundException(
-                    "Key '{$internalKey}' not found"
-                );
-            }
 
+        // initial value
+        if ($newValue === false) {
             $newValue = $value;
             if (!apc_add($internalKey, $newValue, $normalizedOptions['ttl'])) {
                 throw new Exception\RuntimeException(
@@ -621,13 +589,11 @@ class Apc extends AbstractAdapter
      *    - The time-to-life
      *  - namespace <string>
      *    - The namespace to use
-     *  - ignore_missing_items <boolean>
-     *    - Throw exception on missing item
      *
      * @param  string $normalizedKey
      * @param  int    $value
      * @param  array  $normalizedOptions
-     * @return int|boolean The new value or false on failure
+     * @return int|boolean The new value on success, false on failure
      * @throws Exception\ExceptionInterface
      */
     protected function internalDecrementItem(& $normalizedKey, & $value, array & $normalizedOptions)
@@ -635,15 +601,10 @@ class Apc extends AbstractAdapter
         $internalKey = $normalizedOptions['namespace'] . $this->getOptions()->getNamespaceSeparator() . $normalizedKey;
         $value       = (int)$value;
         $newValue    = apc_dec($internalKey, $value);
-        if ($newValue === false) {
-            if (apc_exists($internalKey)) {
-                throw new Exception\RuntimeException("apc_dec('{$internalKey}', {$value}) failed");
-            } elseif (!$normalizedOptions['ignore_missing_items']) {
-                throw new Exception\ItemNotFoundException(
-                    "Key '{$internalKey}' not found"
-                );
-            }
 
+        // initial value
+        if ($newValue === false) {
+            // initial value
             $newValue = -$value;
             if (!apc_add($internalKey, $newValue, $normalizedOptions['ttl'])) {
                 throw new Exception\RuntimeException(
@@ -912,7 +873,7 @@ class Apc extends AbstractAdapter
      * Internal method to get storage capacity.
      *
      * @param  array $normalizedOptions
-     * @return array|boolean Capacity as array or false on failure
+     * @return array|boolean Associative array of capacity, false on failure
      * @throws Exception\ExceptionInterface
      */
     protected function internalGetCapacity(array & $normalizedOptions)

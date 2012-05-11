@@ -50,24 +50,24 @@ abstract class AbstractZendServer extends AbstractAdapter
      * Options:
      *  - namespace <string>
      *    - The namespace to use
-     *  - ignore_missing_items <boolean>
-     *    - Throw exception on missing item or return false
      *
-     * @param  string $normalizedKey
-     * @param  array  $normalizedOptions
-     * @return mixed Data on success or false on failure
+     * @param  string  $normalizedKey
+     * @param  array   $normalizedOptions
+     * @param  boolean $success
+     * @param  mixed   $casToken
+     * @return mixed Data on success, null on failure
      * @throws Exception\ExceptionInterface
      */
-    protected function internalGetItem(& $normalizedKey, array & $normalizedOptions)
+    protected function internalGetItem(& $normalizedKey, array & $normalizedOptions, & $success = null, & $casToken = null)
     {
         $internalKey = $normalizedOptions['namespace'] . self::NAMESPACE_SEPARATOR . $normalizedKey;
         $result      = $this->zdcFetch($internalKey);
         if ($result === false) {
-            if (!$normalizedOptions['ignore_missing_items']) {
-                throw new Exception\ItemNotFoundException("Key '{$internalKey}' not found");
-            }
-        } elseif (array_key_exists('token', $normalizedOptions)) {
-            $normalizedOptions['token'] = $result;
+            $success = false;
+            $result  = null;
+        } else {
+            $success  = true;
+            $casToken = $result;
         }
 
         return $result;
@@ -82,7 +82,7 @@ abstract class AbstractZendServer extends AbstractAdapter
      *
      * @param  array $normalizedKeys
      * @param  array $normalizedOptions
-     * @return array Associative array of existing keys and values
+     * @return array Associative array of keys and values
      * @throws Exception\ExceptionInterface
      */
     protected function internalGetItems(array & $normalizedKeys, array & $normalizedOptions)
@@ -131,7 +131,7 @@ abstract class AbstractZendServer extends AbstractAdapter
      *
      * @param  array $keys
      * @param  array $options
-     * @return array Array of existing keys
+     * @return array Array of found keys
      * @throws Exception\ExceptionInterface
      */
     protected function internalHasItems(array & $normalizedKeys, array & $normalizedOptions)
@@ -162,7 +162,7 @@ abstract class AbstractZendServer extends AbstractAdapter
      *
      * @param  array $normalizedKeys
      * @param  array $normalizedOptions
-     * @return array|boolean
+     * @return array Associative array of keys and metadata
      *
      * @triggers getMetadatas.pre(PreEvent)
      * @triggers getMetadatas.post(PostEvent)
@@ -216,8 +216,6 @@ abstract class AbstractZendServer extends AbstractAdapter
      * Options:
      *  - namespace <string>
      *    - The namespace to use
-     *  - ignore_missing_items <boolean>
-     *    - Throw exception on missing item
      *
      * @param  string $normalizedKey
      * @param  array  $normalizedOptions
@@ -227,11 +225,7 @@ abstract class AbstractZendServer extends AbstractAdapter
     protected function internalRemoveItem(& $normalizedKey, array & $normalizedOptions)
     {
         $internalKey = $normalizedOptions['namespace'] . self::NAMESPACE_SEPARATOR . $normalizedKey;
-        if (!$this->zdcDelete($internalKey) && !$normalizedOptions['ignore_missing_items']) {
-            throw new Exception\ItemNotFoundException("Key '{$internalKey}' not found");
-        }
-
-        return true;
+        return $this->zdcDelete($internalKey);
     }
 
     /* cleaning */

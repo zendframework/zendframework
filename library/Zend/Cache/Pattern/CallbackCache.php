@@ -63,14 +63,17 @@ class CallbackCache extends AbstractPattern
     public function call($callback, array $args = array(), array $options = array())
     {
         $classOptions = $this->getOptions();
-        $key = $this->_generateKey($callback, $args, $options);
-        if ( ($rs = $classOptions->getStorage()->getItem($key, $options)) !== false ) {
-            if (!isset($rs[0])) {
+
+        $success = null;
+        $key     = $this->_generateKey($callback, $args, $options);
+        $result  = $classOptions->getStorage()->getItem($key, $options, $success);
+        if ($success) {
+            if (!isset($result[0])) {
                 throw new Exception\RuntimeException("Invalid cached data for key '{$key}'");
             }
 
-            echo isset($rs[1]) ? $rs[1] : '';
-            return $rs[0];
+            echo isset($result[1]) ? $result[1] : '';
+            return $result[0];
         }
 
         $cacheOutput = $classOptions->getCacheOutput();

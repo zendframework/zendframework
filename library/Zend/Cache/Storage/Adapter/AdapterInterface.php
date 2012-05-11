@@ -108,19 +108,21 @@ interface AdapterInterface
     /**
      * Get an item.
      *
-     * @param  string $key
-     * @param  array $options
-     * @return mixed Data on success and false on failure
+     * @param  string  $key
+     * @param  array   $options
+     * @param  boolean $success
+     * @param  mixed   $casToken
+     * @return mixed Data on success, null on failure
      * @throws \Zend\Cache\Exception\ExceptionInterface
      */
-    public function getItem($key, array $options = array());
+    public function getItem($key, array $options = array(), & $success = null, & $casToken = null);
 
     /**
      * Get multiple items.
      *
      * @param  array $keys
      * @param  array $options
-     * @return array Associative array of existing keys and values
+     * @return array Associative array of keys and values
      * @throws \Zend\Cache\Exception\ExceptionInterface
      */
     public function getItems(array $keys, array $options = array());
@@ -140,7 +142,7 @@ interface AdapterInterface
      *
      * @param  array $keys
      * @param  array $options
-     * @return array Array of existing keys
+     * @return array Array of found keys
      * @throws \Zend\Cache\Exception\ExceptionInterface
      */
     public function hasItems(array $keys, array $options = array());
@@ -150,7 +152,7 @@ interface AdapterInterface
      *
      * @param  string $key
      * @param  array $options
-     * @return array|boolean Metadata or false on failure
+     * @return array|boolean Metadata on success, false on failure
      * @throws \Zend\Cache\Exception\ExceptionInterface
      */
     public function getMetadata($key, array $options = array());
@@ -160,7 +162,7 @@ interface AdapterInterface
      *
      * @param  array $keys
      * @param  array $options
-     * @return array Associative array of existing cache ids and its metadata
+     * @return array Associative array of keys and metadata
      * @throws \Zend\Cache\Exception\ExceptionInterface
      */
     public function getMetadatas(array $keys, array $options = array());
@@ -171,8 +173,8 @@ interface AdapterInterface
      * Store an item.
      *
      * @param  string $key
-     * @param  mixed $value
-     * @param  array $options
+     * @param  mixed  $value
+     * @param  array  $options
      * @return boolean
      * @throws \Zend\Cache\Exception\ExceptionInterface
      */
@@ -183,7 +185,7 @@ interface AdapterInterface
      *
      * @param  array $keyValuePairs
      * @param  array $options
-     * @return boolean
+     * @return array Array of not stored keys
      * @throws \Zend\Cache\Exception\ExceptionInterface
      */
     public function setItems(array $keyValuePairs, array $options = array());
@@ -204,7 +206,7 @@ interface AdapterInterface
      *
      * @param  array $keyValuePairs
      * @param  array $options
-     * @return boolean
+     * @return array Array of not stored keys
      * @throws \Zend\Cache\Exception\ExceptionInterface
      */
     public function addItems(array $keyValuePairs, array $options = array());
@@ -225,7 +227,7 @@ interface AdapterInterface
      *
      * @param  array $keyValuePairs
      * @param  array $options
-     * @return boolean
+     * @return array Array of not stored keys
      * @throws \Zend\Cache\Exception\ExceptionInterface
      */
     public function replaceItems(array $keyValuePairs, array $options = array());
@@ -262,7 +264,7 @@ interface AdapterInterface
      *
      * @param  array $keys
      * @param  array $options
-     * @return boolean
+     * @return array Array of not updated keys
      * @throws \Zend\Cache\Exception\ExceptionInterface
      */
     public function touchItems(array $keys, array $options = array());
@@ -282,7 +284,7 @@ interface AdapterInterface
      *
      * @param  array $keys
      * @param  array $options
-     * @return boolean
+     * @return array Array of not removed keys
      * @throws \Zend\Cache\Exception\ExceptionInterface
      */
     public function removeItems(array $keys, array $options = array());
@@ -293,7 +295,7 @@ interface AdapterInterface
      * @param  string $key
      * @param  int    $value
      * @param  array  $options
-     * @return int|boolean The new value or false on failure
+     * @return int|boolean The new value on success, false on failure
      * @throws \Zend\Cache\Exception\ExceptionInterface
      */
     public function incrementItem($key, $value, array $options = array());
@@ -303,7 +305,7 @@ interface AdapterInterface
      *
      * @param  array $keyValuePairs
      * @param  array $options
-     * @return boolean
+     * @return array Associative array of keys and new values
      * @throws \Zend\Cache\Exception\ExceptionInterface
      */
     public function incrementItems(array $keyValuePairs, array $options = array());
@@ -314,7 +316,7 @@ interface AdapterInterface
      * @param  string $key
      * @param  int    $value
      * @param  array  $options
-     * @return int|boolean The new value or false on failure
+     * @return int|boolean The new value on success, false on failure
      * @throws \Zend\Cache\Exception\ExceptionInterface
      */
     public function decrementItem($key, $value, array $options = array());
@@ -324,7 +326,7 @@ interface AdapterInterface
      *
      * @param  array $keyValuePairs
      * @param  array $options
-     * @return boolean
+     * @return array Associative array of keys and new values
      * @throws \Zend\Cache\Exception\ExceptionInterface
      */
     public function decrementItems(array $keyValuePairs, array $options = array());
@@ -419,7 +421,7 @@ interface AdapterInterface
      * Get storage capacity.
      *
      * @param  array $options
-     * @return array|boolean Capacity as array or false on failure
+     * @return array|boolean Associative array of capacity, false on failure
      * @throws \Zend\Cache\Exception\ExceptionInterface
      */
     public function getCapacity(array $options = array());

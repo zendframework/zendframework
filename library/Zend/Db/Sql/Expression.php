@@ -92,6 +92,7 @@ class Expression implements ExpressionInterface
     public function setTypes(array $types)
     {
         $this->types = $types;
+        return $this;
     }
 
     /**
@@ -112,8 +113,8 @@ class Expression implements ExpressionInterface
 
         $types = array();
         for ($i = 0; $i < count($parameters); $i++) {
-            $types[$i] = (isset($this->types[$i]) && $this->types[$i] == self::TYPE_IDENTIFIER)
-                ? self::TYPE_IDENTIFIER : self::TYPE_VALUE;
+            $types[$i] = (isset($this->types[$i]) && ($this->types[$i] == self::TYPE_IDENTIFIER || $this->types[$i] == self::TYPE_LITERAL))
+                ? $this->types[$i] : self::TYPE_VALUE;
         }
 
         $expression = $this->expression;

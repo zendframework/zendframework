@@ -20,7 +20,7 @@ class ExpressionTest extends \PHPUnit_Framework_TestCase
     {
         $expression = new Expression();
         $return = $expression->setExpression('Foo Bar');
-        $this->assertInstanceOf('Zend\Db\Sql\Expression', $return);
+        $this->assertSame($expression, $return);
         return $return;
     }
 
@@ -40,7 +40,7 @@ class ExpressionTest extends \PHPUnit_Framework_TestCase
     {
         $expression = new Expression();
         $return = $expression->setParameters('foo');
-        $this->assertInstanceOf('Zend\Db\Sql\Expression', $return);
+        $this->assertSame($expression, $return);
         return $return;
     }
 
@@ -55,37 +55,46 @@ class ExpressionTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Zend\Db\Sql\Expression::setTypes
-     * @todo   Implement testSetTypes().
      */
     public function testSetTypes()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $expression = new Expression();
+        $return = $expression->setTypes(array(Expression::TYPE_IDENTIFIER, Expression::TYPE_VALUE, Expression::TYPE_LITERAL));
+        $this->assertSame($expression, $return);
+        return $expression;
     }
 
     /**
      * @covers Zend\Db\Sql\Expression::getTypes
-     * @todo   Implement testGetTypes().
+     * @depends testSetTypes
      */
-    public function testGetTypes()
+    public function testGetTypes(Expression $expression)
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
+        $this->assertEquals(
+            array(Expression::TYPE_IDENTIFIER, Expression::TYPE_VALUE, Expression::TYPE_LITERAL),
+            $expression->getTypes()
         );
     }
 
     /**
      * @covers Zend\Db\Sql\Expression::getExpressionData
-     * @todo   Implement testGetExpressionData().
      */
     public function testGetExpressionData()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
+        $expression = new Expression(
+            'X SAME AS ? AND Y = ? BUT LITERALLY ?',
+            array('foo', 5, 'FUNC(FF%X)'),
+            array(Expression::TYPE_IDENTIFIER, Expression::TYPE_VALUE, Expression::TYPE_LITERAL)
         );
+
+        $this->assertEquals(
+            array(array(
+                'X SAME AS %s AND Y = %s BUT LITERALLY %s',
+                array('foo', 5, 'FUNC(FF%X)'),
+                array(Expression::TYPE_IDENTIFIER, Expression::TYPE_VALUE, Expression::TYPE_LITERAL)
+            )),
+            $expression->getExpressionData()
+        );
+
     }
 }

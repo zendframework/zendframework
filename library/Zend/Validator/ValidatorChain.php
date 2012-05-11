@@ -171,6 +171,21 @@ class ValidatorChain implements
     }
 
     /**
+     * Use the plugin broker to prepend a validator by name
+     * 
+     * @param  string $name 
+     * @param  array $options 
+     * @param  bool $breakChainOnFailure 
+     * @return ValidatorChain
+     */
+    public function prependByName($name, $options = array(), $breakChainOnFailure = false)
+    {
+        $validator = $this->plugin($name, $options);
+        $this->prependValidator($validator, $breakChainOnFailure);
+        return $this;
+    }
+
+    /**
      * Returns true if and only if $value passes all validations in the chain
      *
      * Validators are run in the order in which they were added to the chain (FIFO).

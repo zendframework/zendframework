@@ -84,19 +84,6 @@ abstract class AbstractAdapter extends AbstractValidator implements AdapterInter
     }
 
     /**
-     * Constructor
-     *
-     * @param  array|Traversable $options
-     * @return void
-     */
-    public function __construct($options = null)
-    {
-        if (is_array($options) || $options instanceof Traversable) {
-            $this->setOptions($options);
-        }
-    }
-
-    /**
      * Set single option for the object
      *
      * @param  string $key

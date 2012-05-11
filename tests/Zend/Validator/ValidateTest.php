@@ -142,6 +142,15 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($translator->getAdapter(), Validator\AbstractValidator::getDefaultTranslator());
     }
 
+    public function testAllowsPrependingValidators()
+    {
+        $this->_validator->addValidator(new ValidatorTrue())
+                         ->prependValidator(new ValidatorFalse(), true);
+        $this->assertFalse($this->_validator->isValid(true));
+        $messages = $this->_validator->getMessages();
+        $this->assertArrayHasKey('error', $messages);
+    }
+
     /**
      * Handle file not found errors
      *

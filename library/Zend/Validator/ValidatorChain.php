@@ -109,7 +109,7 @@ class ValidatorChain implements
      * 
      * @param  string     $plugin  Name of validator to return
      * @param  null|array $options Options to pass to validator constructor (if not already instantiated)
-     * @return Validator
+     * @return ValidatorInterface
      */
     public function plugin($name, array $options = null)
     {
@@ -123,16 +123,35 @@ class ValidatorChain implements
      * If $breakChainOnFailure is true, then if the validator fails, the next validator in the chain,
      * if one exists, will not be executed.
      *
-     * @param  \Zend\Validator\ValidatorInterface $validator
+     * @param  ValidatorInterface $validator
      * @param  boolean                 $breakChainOnFailure
-     * @return \Zend\Validator\ValidatorChain Provides a fluent interface
+     * @return ValidatorChain Provides a fluent interface
      */
     public function addValidator(ValidatorInterface $validator, $breakChainOnFailure = false)
     {
         $this->validators[] = array(
-            'instance' => $validator,
+            'instance'            => $validator,
             'breakChainOnFailure' => (boolean) $breakChainOnFailure
-            );
+        );
+        return $this;
+    }
+
+    /**
+     * Adds a validator to the beginning of the chain
+     *
+     * If $breakChainOnFailure is true, then if the validator fails, the next validator in the chain,
+     * if one exists, will not be executed.
+     *
+     * @param  ValidatorInterface $validator
+     * @param  boolean                 $breakChainOnFailure
+     * @return ValidatorChain Provides a fluent interface
+     */
+    public function prependValidator(ValidatorInterface $validator, $breakChainOnFailure = false)
+    {
+        array_unshift($this->validators, array(
+            'instance'            => $validator,
+            'breakChainOnFailure' => (boolean) $breakChainOnFailure
+        ));
         return $this;
     }
 

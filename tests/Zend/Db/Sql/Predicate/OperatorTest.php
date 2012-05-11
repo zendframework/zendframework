@@ -50,6 +50,9 @@ class OperatorTest extends TestCase
         $this->assertEquals('foo.bar', $operator->getRight());
         $this->assertEquals(Operator::TYPE_VALUE, $operator->getLeftType());
         $this->assertEquals(Operator::TYPE_IDENTIFIER, $operator->getRightType());
+
+        $operator = new Operator('bar', '>=', 0);
+        $this->assertEquals(0, $operator->getRight());
     }
 
     public function testLeftIsMutable()

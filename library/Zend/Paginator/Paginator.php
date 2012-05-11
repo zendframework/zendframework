@@ -695,7 +695,7 @@ class Paginator implements Countable, IteratorAggregate
 
         if ($this->_cacheEnabled()) {
             $data = self::$_cache->getItem($this->_getCacheId($pageNumber));
-            if ($data !== false) {
+            if ($data) {
                 return $data;
             }
         }

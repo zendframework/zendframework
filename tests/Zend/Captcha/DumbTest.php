@@ -104,16 +104,4 @@ class DumbTest extends CommonWordTest
         $this->captcha->setLabel('Testing');
         $this->assertEquals('Testing', $this->captcha->getLabel());
     }
-
-    /**
-     * @group ZF-11522
-     */
-    public function testRendersLabelUsingProvidedValue()
-    {
-        $this->captcha->setLabel('Testing 123');
-
-        $id = $this->captcha->generate('test');
-        $html = $this->captcha->render(new \Zend\View\Renderer\PhpRenderer);
-        $this->assertContains('Testing 123', $html);
-    }
 }

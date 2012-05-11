@@ -35,13 +35,13 @@ use \PHPUnit_Framework_TestCase as TestCase,
 abstract class AbstractWriterTestCase extends TestCase
 {
     /**
-     * @var Reader
+     * @var ReaderInterface
      */
     protected $reader;
     
     /**
      *
-     * @var Writer
+     * @var WriterInterface
      */
     protected $writer;
     

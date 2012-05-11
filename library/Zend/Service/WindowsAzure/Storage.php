@@ -355,7 +355,7 @@ class Zend_Service_WindowsAzure_Storage
 		$this->_httpClientChannel->resetParameters(true);
 		$this->_httpClientChannel->setUri($requestUrl);
 		$this->_httpClientChannel->setHeaders($requestHeaders);
-		$this->_httpClientChannel->setRawData($rawData);
+		$this->_httpClientChannel->setRawBody($rawData);
 		
 		// Execute request
 		$response = $this->_retryPolicy->execute(

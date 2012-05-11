@@ -103,4 +103,13 @@ class FormRadioTest extends CommonTestCase
             $this->assertContains(sprintf('<label>%s<', $label), $markup);
         }
     }
+
+    public function testDoesNotRenderCheckedAttributeIfNotPassed()
+    {
+        $element = $this->getElement();
+        $options = $element->getAttribute('options');
+        $markup  = $this->helper->render($element);
+
+        $this->assertNotContains('checked', $markup);
+    }
 }

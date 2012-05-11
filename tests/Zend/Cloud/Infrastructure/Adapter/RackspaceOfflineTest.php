@@ -271,7 +271,3 @@ class RackspaceOfflineTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->infrastructure->isSuccessful());
     }
 }
-
-if (PHPUnit_MAIN_METHOD == 'ZendTest\Cloud\Infrastructure\Adapter\RackspaceOfflineTest::main') {
-    RackspaceOfflineTest::main();
-}

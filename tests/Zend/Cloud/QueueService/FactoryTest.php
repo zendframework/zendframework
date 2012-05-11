@@ -21,11 +21,6 @@
 
 namespace ZendTest\Cloud\QueueService;
 
-// Call ZendTest\Cloud\StorageService\FactoryTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend\Cloud\StorageService\FactoryTest::main");
-}
-
 use Zend\Config\Factory as ConfigFactory,
     Zend\Cloud\QueueService\Factory,
     PHPUnit_Framework_TestCase as PHPUnitTestCase;
@@ -42,17 +37,6 @@ use Zend\Config\Factory as ConfigFactory,
  */
 class FactoryTest extends PHPUnitTestCase
 {
-    /**
-     * Runs the test methods of this class.
-     *
-     * @return void
-     */
-    public static function main()
-    {
-        $suite  = new \PHPUnit_Framework_TestSuite(__CLASS__);
-        $result = \PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
     public function testGetQueueAdapterKey()
     {
         $this->assertTrue(is_string(Factory::QUEUE_ADAPTER_KEY));
@@ -86,9 +70,4 @@ class FactoryTest extends PHPUnitTestCase
 
         $this->assertEquals('Zend\Cloud\QueueService\Adapter\ZendQueue', get_class($zq));
     }
-}
-
-// Call \Zend\Cloud\QueueService\FactoryTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend\Cloud\QueueService\FactoryTest::main") {
-    FactoryTest::main();
 }

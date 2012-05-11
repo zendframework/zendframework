@@ -21,11 +21,6 @@
 
 namespace ZendTest\Cloud\DocumentService;
 
-// Call ZendTest\Cloud\DocumentService\FactoryTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", 'ZendTest\Cloud\DocumentService\FactoryTest::main');
-}
-
 use Zend\Cloud\DocumentService\Factory as DocumentFactory,
     Zend\Config\Config,
     ZendTest\Cloud\DocumentService\Adapter\SimpleDbTest,
@@ -44,17 +39,6 @@ use Zend\Cloud\DocumentService\Factory as DocumentFactory,
  */
 class FactoryTest extends PHPUnitTestCase
 {
-    /**
-     * Runs the test methods of this class.
-     *
-     * @return void
-     */
-    public static function main()
-    {
-        $suite  = new \PHPUnit_Framework_TestSuite(__CLASS__);
-        $result = \PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
     public function testGetDocumentAdapterKey()
     {
         $this->assertTrue(is_string(\Zend\Cloud\DocumentService\Factory::DOCUMENT_ADAPTER_KEY));
@@ -78,9 +62,4 @@ class FactoryTest extends PHPUnitTestCase
         $this->assertEquals('Zend\Cloud\DocumentService\Adapter\WindowsAzure', get_class($azureAdapter));
          */
     }
-}
-
-// Call ZendTest\Cloud\DocumentService\FactoryTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == 'ZendTest\Cloud\DocumentService\FactoryTest::main') {
-    FactoryTest::main();
 }

@@ -19,6 +19,7 @@
  */
 
 namespace Zend\Feed\Reader\Extension\Thread;
+
 use Zend\Feed\Reader\Extension;
 
 /**

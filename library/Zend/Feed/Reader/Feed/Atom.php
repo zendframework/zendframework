@@ -19,8 +19,10 @@
  */
 
 namespace Zend\Feed\Reader\Feed;
-use Zend\Feed\Reader;
-use Zend\Date;
+
+use Zend\Feed\Reader,
+    Zend\Date,
+    DOMDocument;
 
 /**
 * @category Zend
@@ -37,7 +39,7 @@ class Atom extends AbstractFeed
      * @param  DOMDocument $dom
      * @param  string $type
      */
-    public function __construct(\DOMDocument $dom, $type = null)
+    public function __construct(DOMDocument $dom, $type = null)
     {
         parent::__construct($dom, $type);
         $atomClass = Reader\Reader::getPluginLoader()->getClassName('Atom\\Feed');
@@ -359,7 +361,7 @@ class Atom extends AbstractFeed
     /**
      * Get all categories
      *
-     * @return Reader_Collection_Category
+     * @return Reader\Collection\Category
      */
     public function getCategories()
     {

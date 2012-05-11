@@ -138,7 +138,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         try {
             $writer->setCopyright('');
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
 
@@ -241,7 +241,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         try {
             $writer->setDateCreated('abc');
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
 
@@ -251,7 +251,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         try {
             $writer->setDateModified('abc');
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
 
@@ -320,7 +320,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         try {
             $writer->setLastBuildDate('abc');
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
 
@@ -349,7 +349,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         try {
             $writer->setDescription('');
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
 
@@ -394,7 +394,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         try {
             $writer->setId('');
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
 
@@ -404,7 +404,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         try {
             $writer->setId('http://');
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
 
@@ -427,7 +427,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         try {
             $writer->setLanguage('');
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
 
@@ -450,7 +450,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         try {
             $writer->setLink('');
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
 
@@ -460,7 +460,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         try {
             $writer->setLink('http://');
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
 
@@ -483,7 +483,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         try {
             $writer->setEncoding('');
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
 
@@ -506,7 +506,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         try {
             $writer->setTitle('');
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
 
@@ -547,7 +547,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         try {
             $writer->setGenerator(array());
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
 
@@ -558,7 +558,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
             $writer->setGenerator(array('name'   => 'ZFW',
                                         'version'=> ''));
             $this->fail('Should have failed since version is empty');
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
 
@@ -570,7 +570,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
             $writer->setGenerator(array('name'=> 'ZFW',
                                         'uri' => 'notauri'));
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
 
@@ -615,7 +615,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         try {
             $writer->setGenerator('');
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
 
@@ -628,7 +628,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         try {
             $writer->setGenerator('ZFW', '');
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
 
@@ -642,7 +642,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         try {
             $writer->setGenerator('ZFW', null, 'notauri');
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
 
@@ -665,7 +665,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         try {
             $writer->setFeedLink('http://www.example.com/rss', 'abc');
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
 
@@ -675,7 +675,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         try {
             $writer->setFeedLink('http://', 'rss');
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
 
@@ -698,7 +698,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         try {
             $writer->setBaseUrl('http://');
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
 
@@ -728,7 +728,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         try {
             $writer->addHub('http://');
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
 
@@ -766,7 +766,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
             $writer->addCategory(array('label'  => 'Cats & Dogs',
                                        'scheme' => 'http://www.example.com/schema1'));
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
 
@@ -777,7 +777,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
             $writer->addCategory(array('term'   => 'cat_dog',
                                        'scheme' => 'http://'));
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
 
@@ -795,7 +795,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Zend\Feed\Writer\Exception
+     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
      */
     public function testSetsImageUriThrowsExceptionOnEmptyUri()
     {
@@ -806,7 +806,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Zend\Feed\Writer\Exception
+     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
      */
     public function testSetsImageUriThrowsExceptionOnMissingUri()
     {
@@ -815,7 +815,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Zend\Feed\Writer\Exception
+     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
      */
     public function testSetsImageUriThrowsExceptionOnInvalidUri()
     {

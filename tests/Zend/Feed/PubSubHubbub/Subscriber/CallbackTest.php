@@ -92,7 +92,7 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
         try {
             $this->_callback->setHttpResponse(new \stdClass);
             $this->fail('Should not fail as an Exception would be raised and caught');
-        } catch (PubSubHubbub\Exception $e) {}
+        } catch (PubSubHubbub\Exception\ExceptionInterface $e) {}
     }
 
     public function testThrowsExceptionIfNonObjectSetAsHttpResponseObject()
@@ -100,7 +100,7 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
         try {
             $this->_callback->setHttpResponse('');
             $this->fail('Should not fail as an Exception would be raised and caught');
-        } catch (PubSubHubbub\Exception $e) {}
+        } catch (PubSubHubbub\Exception\ExceptionInterface $e) {}
     }
 
     public function testCanSetSubscriberCount()
@@ -119,7 +119,7 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
         try {
             $this->_callback->setSubscriberCount(0);
             $this->fail('Should not fail as an Exception would be raised and caught');
-        } catch (PubSubHubbub\Exception $e) {}
+        } catch (PubSubHubbub\Exception\ExceptionInterface $e) {}
     }
 
     public function testThrowsExceptionOnSettingLessThanZeroAsSubscriberCount()
@@ -127,7 +127,7 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
         try {
             $this->_callback->setSubscriberCount(-1);
             $this->fail('Should not fail as an Exception would be raised and caught');
-        } catch (PubSubHubbub\Exception $e) {}
+        } catch (PubSubHubbub\Exception\ExceptionInterface $e) {}
     }
 
     public function testThrowsExceptionOnSettingAnyScalarTypeCastToAZeroOrLessIntegerAsSubscriberCount()
@@ -135,7 +135,7 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
         try {
             $this->_callback->setSubscriberCount('0aa');
             $this->fail('Should not fail as an Exception would be raised and caught');
-        } catch (PubSubHubbub\Exception $e) {}
+        } catch (PubSubHubbub\Exception\ExceptionInterface $e) {}
     }
 
 

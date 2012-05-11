@@ -19,9 +19,12 @@
  */
 
 namespace Zend\Feed\Reader\Feed;
-use Zend\Feed\Reader;
-use Zend\Feed\Reader\Collection;
-use Zend\Date;
+
+use Zend\Feed\Reader,
+    Zend\Feed\Reader\Collection,
+    Zend\Feed\Reader\Exception,
+    Zend\Date,
+    DOMDocument;
 
 /**
 * @category Zend
@@ -38,7 +41,7 @@ class Rss extends AbstractFeed
      * @param  DOMDocument $dom
      * @param  string $type
      */
-    public function __construct(\DomDocument $dom, $type = null)
+    public function __construct(DOMDocument $dom, $type = null)
     {
         parent::__construct($dom, $type);
 
@@ -188,6 +191,7 @@ class Rss extends AbstractFeed
      * Get the feed modification date
      *
      * @return Date\Date
+     * @throws Exception\RuntimeException
      */
     public function getDateModified()
     {
@@ -218,7 +222,7 @@ class Rss extends AbstractFeed
                             break;
                         } catch (Date\Exception $e) {
                             if ($standard == Date\Date::DATES) {
-                                throw new Exception(
+                                throw new Exception\RuntimeException(
                                     'Could not load date due to unrecognised'
                                     .' format (should follow RFC 822 or 2822):'
                                     . $e->getMessage(),
@@ -279,7 +283,7 @@ class Rss extends AbstractFeed
                             break;
                         } catch (Date\Exception $e) {
                             if ($standard == Date\Date::DATES) {
-                                throw new Exception(
+                                throw new Exception\RuntimeException(
                                     'Could not load date due to unrecognised'
                                     .' format (should follow RFC 822 or 2822):'
                                     . $e->getMessage(),
@@ -633,7 +637,7 @@ class Rss extends AbstractFeed
     /**
      * Get all categories
      *
-     * @return Reader_Collection_Category
+     * @return Reader\Collection\Category
      */
     public function getCategories()
     {

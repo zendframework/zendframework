@@ -19,7 +19,10 @@
  */
  
 namespace Zend\Feed\Writer\Extension\Slash\Renderer;
-use Zend\Feed\Writer\Extension;
+
+use Zend\Feed\Writer\Extension,
+    DOMDocument,
+    DOMElement;
 
 /**
 * @category Zend
@@ -73,7 +76,7 @@ class Entry extends Extension\AbstractRenderer
      * @param  DOMElement $root 
      * @return void
      */
-    protected function _setCommentCount(\DOMDocument $dom, \DOMElement $root)
+    protected function _setCommentCount(DOMDocument $dom, DOMElement $root)
     {
         $count = $this->getDataContainer()->getCommentCount();
         if (!$count) {

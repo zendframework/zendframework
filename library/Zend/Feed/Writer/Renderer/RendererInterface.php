@@ -18,15 +18,18 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Feed\Writer;
+namespace Zend\Feed\Writer\Renderer;
+
+use DOMDocument,
+    DOMElement;
 
 /**
- * @category   Zend
- * @package    Zend_Feed_Writer
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- */
-interface Renderer
+* @category Zend
+* @package Zend_Feed_Writer
+* @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+* @license http://framework.zend.com/license/new-bsd New BSD License
+*/
+interface RendererInterface
 {
     /**
      * Render feed/entry
@@ -101,7 +104,7 @@ interface Renderer
      *
      * @param DOMElement $root
      */
-    public function setRootElement(\DOMElement $root);
+    public function setRootElement(DOMElement $root);
     
     /**
      * Retrieve the absolute root element for the XML feed being generated.

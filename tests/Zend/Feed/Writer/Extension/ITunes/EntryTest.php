@@ -42,7 +42,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @expectedException Zend\Feed\Writer\Exception
+     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
      */
     public function testSetBlockThrowsExceptionOnNonAlphaValue()
     {
@@ -51,7 +51,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @expectedException Zend\Feed\Writer\Exception
+     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
      */
     public function testSetBlockThrowsExceptionIfValueGreaterThan255CharsLength()
     {
@@ -74,7 +74,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @expectedException Zend\Feed\Writer\Exception
+     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
      */
     public function testAddAuthorThrowsExceptionIfValueGreaterThan255CharsLength()
     {
@@ -104,7 +104,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @expectedException Zend\Feed\Writer\Exception
+     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
      */
     public function testSetDurationThrowsExceptionOnUnknownFormat()
     {
@@ -113,7 +113,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @expectedException Zend\Feed\Writer\Exception
+     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
      */
     public function testSetDurationThrowsExceptionOnInvalidSeconds()
     {
@@ -122,7 +122,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @expectedException Zend\Feed\Writer\Exception
+     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
      */
     public function testSetDurationThrowsExceptionOnInvalidMinutes()
     {
@@ -152,7 +152,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @expectedException Zend\Feed\Writer\Exception
+     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
      */
     public function testSetExplicitThrowsExceptionOnUnknownTerm()
     {
@@ -171,7 +171,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @expectedException Zend\Feed\Writer\Exception
+     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
      */
     public function testSetKeywordsThrowsExceptionIfMaxKeywordsExceeded()
     {
@@ -183,7 +183,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @expectedException Zend\Feed\Writer\Exception
+     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
      */
     public function testSetKeywordsThrowsExceptionIfFormattedKeywordsExceeds255CharLength()
     {
@@ -202,7 +202,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @expectedException Zend\Feed\Writer\Exception
+     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
      */
     public function testSetSubtitleThrowsExceptionWhenValueExceeds255Chars()
     {
@@ -218,7 +218,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @expectedException Zend\Feed\Writer\Exception
+     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
      */
     public function testSetSummaryThrowsExceptionWhenValueExceeds255Chars()
     {

@@ -19,7 +19,10 @@
  */
 
 namespace Zend\Feed\Reader\Entry;
-use Zend\Feed\Reader;
+
+use Zend\Feed\Reader,
+    DOMElement,
+    DOMXPath;
 
 /**
 * @category Zend
@@ -27,7 +30,7 @@ use Zend\Feed\Reader;
 * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
 * @license http://framework.zend.com/license/new-bsd New BSD License
 */
-class Atom extends AbstractEntry implements Reader\Entry
+class Atom extends AbstractEntry implements EntryInterface
 {
     /**
      * XPath query
@@ -44,7 +47,7 @@ class Atom extends AbstractEntry implements Reader\Entry
      * @param  string $type
      * @return void
      */
-    public function __construct(\DOMElement $entry, $entryKey, $type = null)
+    public function __construct(DOMElement $entry, $entryKey, $type = null)
     {
         parent::__construct($entry, $entryKey, $type);
 
@@ -330,7 +333,7 @@ class Atom extends AbstractEntry implements Reader\Entry
     /**
      * Get category data as a Reader\Reader_Collection_Category object
      *
-     * @return Reader\Reader_Collection_Category
+     * @return Reader\Collection\Category
      */
     public function getCategories()
     {
@@ -352,7 +355,7 @@ class Atom extends AbstractEntry implements Reader\Entry
     /**
      * Get source feed metadata from the entry
      *
-     * @return Reader\Reader_Feed_Atom_Source|null
+     * @return Reader\Feed\Atom\Source|null
      */
     public function getSource()
     {
@@ -370,9 +373,9 @@ class Atom extends AbstractEntry implements Reader\Entry
     /**
      * Set the XPath query (incl. on all Extensions)
      *
-     * @param \DOMXPath $xpath
+     * @param DOMXPath $xpath
      */
-    public function setXpath(\DOMXPath $xpath)
+    public function setXpath(DOMXPath $xpath)
     {
         parent::setXpath($xpath);
         foreach ($this->_extensions as $extension) {

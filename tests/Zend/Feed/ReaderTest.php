@@ -170,7 +170,7 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
      */
     public function testImportsUriAndThrowsExceptionIfNotAFeed()
     {
-        $this->setExpectedException('Zend\Feed\Exception');
+        $this->setExpectedException('Zend\Feed\Exception\ExceptionInterface');
         if (!defined('TESTS_ZEND_FEED_READER_ONLINE_ENABLED')
             || !constant('TESTS_ZEND_FEED_READER_ONLINE_ENABLED')
         ) {

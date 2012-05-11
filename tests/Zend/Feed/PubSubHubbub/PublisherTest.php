@@ -99,7 +99,7 @@ class PublisherTest extends \PHPUnit_Framework_TestCase
         try {
             $this->_publisher->addHubUrl('');
             $this->fail('Should not fail as an Exception would be raised and caught');
-        } catch (PubSubHubbub\Exception $e) {}
+        } catch (PubSubHubbub\Exception\ExceptionInterface $e) {}
     }
 
 
@@ -108,7 +108,7 @@ class PublisherTest extends \PHPUnit_Framework_TestCase
         try {
             $this->_publisher->addHubUrl(123);
             $this->fail('Should not fail as an Exception would be raised and caught');
-        } catch (PubSubHubbub\Exception $e) {}
+        } catch (PubSubHubbub\Exception\ExceptionInterface $e) {}
     }
 
 
@@ -117,7 +117,7 @@ class PublisherTest extends \PHPUnit_Framework_TestCase
         try {
             $this->_publisher->addHubUrl('http://');
             $this->fail('Should not fail as an Exception would be raised and caught');
-        } catch (PubSubHubbub\Exception $e) {}
+        } catch (PubSubHubbub\Exception\ExceptionInterface $e) {}
     }
 
     public function testAddsUpdatedTopicUrl()
@@ -173,7 +173,7 @@ class PublisherTest extends \PHPUnit_Framework_TestCase
         try {
             $this->_publisher->addUpdatedTopicUrl('');
             $this->fail('Should not fail as an Exception would be raised and caught');
-        } catch (PubSubHubbub\Exception $e) {}
+        } catch (PubSubHubbub\Exception\ExceptionInterface $e) {}
     }
 
 
@@ -182,7 +182,7 @@ class PublisherTest extends \PHPUnit_Framework_TestCase
         try {
             $this->_publisher->addUpdatedTopicUrl(123);
             $this->fail('Should not fail as an Exception would be raised and caught');
-        } catch (PubSubHubbub\Exception $e) {}
+        } catch (PubSubHubbub\Exception\ExceptionInterface $e) {}
     }
 
 
@@ -191,7 +191,7 @@ class PublisherTest extends \PHPUnit_Framework_TestCase
         try {
             $this->_publisher->addUpdatedTopicUrl('http://');
             $this->fail('Should not fail as an Exception would be raised and caught');
-        } catch (PubSubHubbub\Exception $e) {}
+        } catch (PubSubHubbub\Exception\ExceptionInterface $e) {}
     }
 
     public function testAddsParameter()

@@ -19,6 +19,7 @@
  */
 
 namespace Zend\Feed\Reader\Extension\WellFormedWeb;
+
 use Zend\Feed\Reader\Extension;
 
 /**

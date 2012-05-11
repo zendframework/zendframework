@@ -19,8 +19,10 @@
  */
 
 namespace Zend\Feed\Writer\Renderer\Feed;
-use Zend\Feed\Writer\Renderer;
-use Zend\Feed\Writer;
+
+use Zend\Feed\Writer\Renderer,
+    Zend\Feed\Writer,
+    DOMDocument;
 
 /**
 * @category Zend
@@ -28,12 +30,12 @@ use Zend\Feed\Writer;
 * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
 * @license http://framework.zend.com/license/new-bsd New BSD License
 */
-class Atom extends AbstractAtom implements Renderer\Renderer
+class Atom extends AbstractAtom implements Renderer\RendererInterface
 {
     /**
      * Constructor
      * 
-     * @param  Zend_Feed_Writer_Feed $container 
+     * @param  Writer\Feed $container
      * @return void
      */
     public function __construct (Writer\Feed $container)
@@ -44,14 +46,14 @@ class Atom extends AbstractAtom implements Renderer\Renderer
     /**
      * Render Atom feed
      * 
-     * @return Zend_Feed_Writer_Renderer_Feed_Atom
+     * @return Atom
      */
     public function render()
     {
         if (!$this->_container->getEncoding()) {
             $this->_container->setEncoding('UTF-8');
         }
-        $this->_dom = new \DOMDocument('1.0', $this->_container->getEncoding());
+        $this->_dom = new DOMDocument('1.0', $this->_container->getEncoding());
         $this->_dom->formatOutput = true;
         $root = $this->_dom->createElementNS(
             Writer\Writer::NAMESPACE_ATOM_10, 'feed'

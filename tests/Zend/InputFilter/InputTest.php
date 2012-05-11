@@ -188,4 +188,14 @@ class InputTest extends TestCase
         $input->setBreakOnFailure(true);
         $this->assertTrue($input->breakOnFailure());
     }
+
+    public function testNotEmptyValidatorAddedWhenIsValidIsCalled()
+    {
+        $input = new Input('foo');
+        $this->assertTrue($input->isRequired());
+        $input->setValue('');
+        $this->assertFalse($input->isValid());
+        $messages = $input->getMessages();
+        $this->assertArrayHasKey('isEmpty', $messages);
+    }
 }

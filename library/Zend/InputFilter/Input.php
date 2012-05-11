@@ -36,6 +36,7 @@ class Input implements InputInterface
     protected $errorMessage;
     protected $filterChain;
     protected $name;
+    protected $notEmptyValidator = false;
     protected $required = true;
     protected $validatorChain;
     protected $value;
@@ -144,6 +145,7 @@ class Input implements InputInterface
 
     public function isValid($context = null)
     {
+        $this->injectNotEmptyValidator();
         $validator = $this->getValidatorChain();
         $value     = $this->getValue();
         return $validator->isValid($value, $context);
@@ -158,5 +160,14 @@ class Input implements InputInterface
         $validator = $this->getValidatorChain();
         return $validator->getMessages();
     }
-}
 
+    protected function injectNotEmptyValidator()
+    {
+        if (!$this->isRequired() && $this->allowEmpty() && !$this->notEmptyValidator) {
+            return;
+        }
+        $chain = $this->getValidatorChain();
+        $chain->prependByName('NotEmpty', array(), true);
+        $this->notEmptyValidator = true;
+    }
+}

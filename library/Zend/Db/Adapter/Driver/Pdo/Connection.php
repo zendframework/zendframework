@@ -209,6 +209,7 @@ class Connection implements ConnectionInterface
                     if (isset($hostname)) {
                         $dsn[] = "host={$hostname}";
                     }
+                    break;
             }
             $dsn = $pdoDriver . ':' . implode(';', $dsn);
         } elseif (!isset($dsn)) {

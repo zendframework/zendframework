@@ -34,12 +34,6 @@ class InTest extends TestCase
         $this->assertNull($in->getValueSet());
     }
 
-    public function testSpecificationHasSaneDefaultValue()
-    {
-        $in = new In();
-        $this->assertEquals('%1$s IN (%2$s)', $in->getSpecification());
-    }
-
     public function testCanPassIdentifierAndValueSetToConstructor()
     {
         $in = new In();
@@ -62,20 +56,13 @@ class InTest extends TestCase
         $this->assertEquals(array(1, 2), $in->getValueSet());
     }
 
-    public function testSpecificationIsMutable()
-    {
-        $in = new In();
-        $in->setSpecification('%1$s IS IN (%2$s)');
-        $this->assertEquals('%1$s IS IN (%2$s)', $in->getSpecification());
-    }
-
     public function testRetrievingWherePartsReturnsSpecificationArrayOfIdentifierAndValuesAndArrayOfTypes()
     {
         $in = new In();
         $in->setIdentifier('foo.bar')
-                        ->setValueSet(array(1, 2, 3));
+            ->setValueSet(array(1, 2, 3));
         $expected = array(array(
-            $in->getSpecification(),
+            '%s IN (%s, %s, %s)',
             array('foo.bar', 1, 2, 3),
             array(In::TYPE_IDENTIFIER, In::TYPE_VALUE, In::TYPE_VALUE, In::TYPE_VALUE),
         ));

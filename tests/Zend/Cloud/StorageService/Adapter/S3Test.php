@@ -25,11 +25,6 @@ use ZendTest\Cloud\StorageService\TestCase,
     Zend\Service\Amazon\S3\S3 as AmazonS3,
     Zend\Config\Config;
 
-// Call ZendTest\Cloud\StorageService\Adapter\S3Test::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "ZendTest\Cloud\StorageService\Adapter\S3Test::main");
-}
-
 /**
  * @category   Zend
  * @package    ZendTest_Cloud_StorageService_Adapter
@@ -40,18 +35,6 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
 class S3Test extends TestCase
 {
 	protected $_clientType = 'Zend\Service\Amazon\S3\S3';
-
-	/**
-     * Runs the test methods of this class.
-     *
-     * @access public
-     * @static
-     */
-    public static function main()
-    {
-        $suite  = new \PHPUnit_Framework_TestSuite(__CLASS__);
-        $result = \PHPUnit_TextUI_TestRunner::run($suite);
-    }
 
     /**
      * Sets up this test case
@@ -132,8 +115,4 @@ class S3Test extends TestCase
 
         return $config;
     }
-}
-
-if (PHPUnit_MAIN_METHOD == 'ZendTest\Cloud\StorageService\Adapter\S3Test::main') {
-    S3Test::main();
 }

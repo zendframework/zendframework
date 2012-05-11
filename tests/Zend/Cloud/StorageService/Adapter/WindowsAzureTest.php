@@ -25,11 +25,6 @@ use ZendTest\Cloud\StorageService\TestCase,
     Zend\Cloud\StorageService\Adapter\WindowsAzure,
     Zend\Config\Config;
 
-// Call ZendTest\Cloud\StorageService\Adapter\WindowsAzureTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "ZendTest\Cloud\StorageService\Adapter\WindowsAzureTest::main");
-}
-
 /**
  * @category   Zend
  * @package    ZendTest_Cloud_StorageService_Adapter
@@ -40,17 +35,6 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
 class WindowsAzureTest extends TestCase
 {
 	protected $_clientType = 'Zend\Service\WindowsAzure\Storage\Blob';
-	/**
-     * Runs the test methods of this class.
-     *
-     * @access public
-     * @static
-     */
-    public static function main()
-    {
-        $suite  = new \PHPUnit_Framework_TestSuite(__CLASS__);
-        $result = \PHPUnit_TextUI_TestRunner::run($suite);
-    }
 
     protected function _getConfig()
     {
@@ -76,8 +60,4 @@ class WindowsAzureTest extends TestCase
 
         return $config;
     }
-}
-
-if (PHPUnit_MAIN_METHOD == 'ZendTest\Cloud\StorageService\Adapter\WindowsAzureTest::main') {
-    WindowsAzureTest::main();
 }

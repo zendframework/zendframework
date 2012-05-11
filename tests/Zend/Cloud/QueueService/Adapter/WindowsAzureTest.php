@@ -22,11 +22,6 @@
 
 namespace ZendTest\Cloud\QueueService\Adapter;
 
-// Call Zend\Cloud\QueueService\Adapter\WindowsAzureTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Cloud_QueueService_Adapter_WindowsAzureTest::main");
-}
-
 use ZendTest\Cloud\QueueService\TestCase,
     Zend\Cloud\QueueService\Adapter\WindowsAzure,
     Zend\Config\Config,
@@ -50,18 +45,6 @@ class WindowsAzureTest extends TestCase
     protected $_waitPeriod = 10;
     
     protected $_clientType = 'Zend\Service\WindowsAzure\Storage\Queue';
-
-	/**
-     * Runs the test methods of this class.
-     *
-     * @access public
-     * @static
-     */
-    public static function main()
-    {
-        $suite  = new \PHPUnit_Framework_TestSuite(__CLASS__);
-        $result = \PHPUnit_TextUI_TestRunner::run($suite);
-    }
 
     /**
      * Sets up this test case
@@ -95,8 +78,4 @@ class WindowsAzureTest extends TestCase
 
         return $config;
     }
-}
-
-if (PHPUnit_MAIN_METHOD == 'Zend\Cloud\QueueService\Adapter\WindowsAzureTest::main') {
-    WindowsAzureTest::main();
 }

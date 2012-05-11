@@ -27,11 +27,6 @@ use ZendTest\Cloud\DocumentService\TestCase,
     Zend\Cloud\DocumentService\Factory,
     Zend\Config;
 
-// Call ZendTest\Cloud\DocumentService\Adapter\SimpleDbTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "ZendTest\Cloud\DocumentService\Adapter\SimpleDbTest::main");
-}
-
 /**
  * @category   Zend
  * @package    ZendTest_Cloud_DocumentService_Adapter
@@ -50,18 +45,6 @@ class SimpleDbTest extends TestCase
     protected $_waitPeriod = 10;
 
     protected $_clientType = 'Zend\Service\Amazon\SimpleDb';
-
-	/**
-     * Runs the test methods of this class.
-     *
-     * @access public
-     * @static
-     */
-    public static function main()
-    {
-        $suite  = new \PHPUnit_Framework_TestSuite(__CLASS__);
-        $result = \PHPUnit_TextUI_TestRunner::run($suite);
-    }
 
     public function testUpdateDocumentMergeAll()
     {
@@ -178,8 +161,4 @@ class SimpleDbTest extends TestCase
         return "select * from $domain where itemName() = '$s1' OR itemName() = '$s2'";
     }
 
-}
-
-if (PHPUnit_MAIN_METHOD == 'ZendTest\Cloud\DocumentService\Adapter\SimpleDbTest::main') {
-    ZendTest\Cloud\DocumentService\Adapter\SimpleDbTest::main();
 }

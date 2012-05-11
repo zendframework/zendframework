@@ -26,11 +26,6 @@ use ZendTest\Cloud\QueueService\TestCase,
     Zend\Config\Config,
     Zend\Cloud\QueueService\Factory;
 
-// Call Zend\Cloud\QueueService\Adapter\ZendQueueTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend\Cloud\QueueService\Adapter\ZendQueueTest::main");
-}
-
 /**
  * @category   Zend
  * @package    ZendTest_Cloud_Queue_Adapter
@@ -50,18 +45,6 @@ class ZendQueueTest extends TestCase
     
     protected $_clientType = 'Zend\Queue\Queue';
 
-	/**
-     * Runs the test methods of this class.
-     *
-     * @access public
-     * @static
-     */
-    public static function main()
-    {
-        $suite  = new \PHPUnit_Framework_TestSuite(__CLASS__);
-        $result = \PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
     public function testPeekMessages()
     {
         $this->markTestSkipped('ZendQueue does not currently support peeking messages');
@@ -77,8 +60,4 @@ class ZendQueueTest extends TestCase
         return $config;
     }
 
-}
-
-if (PHPUnit_MAIN_METHOD == 'Zend\Cloud\QueueService\Adapter\ZendQueueTest::main') {
-    ZendQueueTest::main();
 }

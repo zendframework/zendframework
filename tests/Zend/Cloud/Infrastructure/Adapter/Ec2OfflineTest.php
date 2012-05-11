@@ -253,7 +253,3 @@ class Ec2OfflineTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->infrastructure->isSuccessful());
     }
 }
-
-if (PHPUnit_MAIN_METHOD == 'ZendTest\Cloud\Infrastructure\Adapter\Ec2OfflineTest::main') {
-    Ec2OfflineTest::main();
-}

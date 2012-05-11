@@ -31,11 +31,6 @@ use Zend\Config\Factory as ConfigFactory,
     Zend\Http\Response as HttpResponse,
     PHPUnit_Framework_TestCase as PHPUnitTestCase;
 
-// Call Zend_Cloud_StorageService_FactoryTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend\Cloud\StorageService\FactoryTest::main");
-}
-
 /**
  * Test class for \Zend\Cloud\StorageService\Factory
  *
@@ -48,17 +43,6 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  */
 class FactoryTest extends PHPUnitTestCase
 {
-    /**
-     * Runs the test methods of this class.
-     *
-     * @return void
-     */
-    public static function main()
-    {
-        $suite  = new \PHPUnit_Framework_TestSuite(__CLASS__);
-        $result = \PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
     public function testGetStorageAdapterKey()
     {
         $this->assertTrue(is_string(Factory::STORAGE_ADAPTER_KEY));
@@ -141,9 +125,4 @@ class FactoryTest extends PHPUnitTestCase
         $fileSystemAdapter = Factory::getAdapter($fileSystemConfig);
         $this->assertEquals('Zend\Cloud\StorageService\Adapter\FileSystem', get_class($fileSystemAdapter));
     }
-}
-
-// Call \Zend\Cloud\StorageService\FactoryTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend\Cloud\StorageService\FactoryTest::main") {
-    FactoryTest::main();
 }

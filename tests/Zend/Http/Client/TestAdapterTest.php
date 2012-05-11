@@ -67,14 +67,14 @@ class TestAdapterTest extends \PHPUnit_Framework_TestCase
     {
         $this->setExpectedException(
             'Zend\Http\Client\Adapter\Exception\InvalidArgumentException',
-            'Array or Zend\Config\Config object expected');
+            'Array or Traversable object expected');
 
-        $this->adapter->setConfig('foo');
+        $this->adapter->setOptions('foo');
     }
 
     public function testSetConfigReturnsQuietly()
     {
-        $this->adapter->setConfig(array('foo' => 'bar'));
+        $this->adapter->setOptions(array('foo' => 'bar'));
     }
 
     public function testConnectReturnsQuietly()

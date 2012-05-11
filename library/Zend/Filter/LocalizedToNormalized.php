@@ -19,6 +19,9 @@
  */
 
 namespace Zend\Filter;
+
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
 use Zend\Locale\Format;
 
 /**
@@ -44,12 +47,12 @@ class LocalizedToNormalized extends AbstractFilter
     /**
      * Class constructor
      *
-     * @param string|\Zend\Locale\Locale $locale (Optional) Locale to set
+     * @param array|Traversable $options (Optional) Locale to set
      */
     public function __construct($options = null)
     {
-        if ($options instanceof \Zend\Config\Config) {
-            $options = $options->toArray();
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
         }
 
         if (null !== $options) {

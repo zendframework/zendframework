@@ -19,6 +19,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
+
 namespace Zend\Feed\Writer;
 
 use Traversable;
@@ -33,9 +34,9 @@ use Traversable;
 abstract class FeedFactory
 {
     /**
-     * Create and return a Feed basd on data provided.
+     * Create and return a Feed based on data provided.
      * 
-     * @param  array|Traversable $data 
+     * @param  array|\Traversable $data
      * @return Feed
      */
     public static function factory($data)

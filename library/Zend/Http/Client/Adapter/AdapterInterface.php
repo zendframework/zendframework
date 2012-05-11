@@ -38,9 +38,9 @@ interface AdapterInterface
     /**
      * Set the configuration array for the adapter
      *
-     * @param array $config
+     * @param array $options
      */
-    public function setConfig($config = array());
+    public function setOptions($options = array());
 
     /**
      * Connect to the remote server

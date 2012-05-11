@@ -21,11 +21,12 @@
 
 namespace Zend\Translator\Adapter;
 
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
 use RecursiveDirectoryIterator,
     RecursiveIteratorIterator,
     RecursiveRegexIterator,
     Zend\Cache\Storage\Adapter\AdapterInterface as CacheAdapter,
-    Zend\Config\Config,
     Zend\Log,
     Zend\Locale,
     Zend\Translator,
@@ -125,14 +126,13 @@ abstract class AbstractAdapter
     /**
      * Generates the adapter
      *
-     * @param  array|Zend_Config $options Translation options for this adapter
+     * @param  array|Traversable $options Translation options for this adapter
      * @throws \Zend\Translator\Exception\InvalidArgumentException
-     * @return void
      */
     public function __construct($options = array())
     {
-        if ($options instanceof Config) {
-            $options = $options->toArray();
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
         } else if (func_num_args() > 1) {
             $args               = func_get_args();
             $options            = array();
@@ -215,14 +215,14 @@ abstract class AbstractAdapter
      * If the key 'clear' is true, then translations for the specified
      * language will be replaced and added otherwise
      *
-     * @param  array|Zend_Config $options Options and translations to be added
+     * @param  array|Traversable $options Options and translations to be added
      * @throws \Zend\Translator\Exception\InvalidArgumentException
      * @return \Zend\Translator\Adapter\AbstractAdapter Provides fluent interface
      */
     public function addTranslation($options = array())
     {
-        if ($options instanceof Config) {
-            $options = $options->toArray();
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
         } else if (func_num_args() > 1) {
             $args = func_get_args();
             $options            = array();
@@ -650,14 +650,14 @@ abstract class AbstractAdapter
      * language is replaced and added otherwise
      *
      * @see    Zend_Locale
-     * @param  array|\Zend\Config $content Translation data to add
+     * @param  array|Traversable $options Translation data to add
      * @throws \Zend\Translator\Exception\InvalidArgumentException
      * @return \Zend\Translator\Adapter\AbstractAdapter Provides fluent interface
      */
     private function _addTranslationData($options = array())
     {
-        if ($options instanceof Config) {
-            $options = $options->toArray();
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
         } else if (func_num_args() > 1) {
             $args = func_get_args();
             $options['content'] = array_shift($args);
@@ -692,7 +692,7 @@ abstract class AbstractAdapter
         try {
             $options['locale'] = Locale\Locale::findLocale($options['locale']);
         } catch (Locale\Exception $e) {
-            throw new Exception\InvalidArgumentException("The given Language '{$locale}' does not exist", 0, $e);
+            throw new Exception\InvalidArgumentException("The given Language '{$options['locale']}' does not exist", 0, $e);
         }
 
         if ($options['clear'] || !isset($this->_translate[$options['locale']])) {

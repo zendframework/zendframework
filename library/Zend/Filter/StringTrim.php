@@ -20,6 +20,9 @@
 
 namespace Zend\Filter;
 
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
+
 /**
  * @category   Zend
  * @package    Zend_Filter
@@ -41,14 +44,14 @@ class StringTrim extends AbstractFilter
     /**
      * Sets filter options
      *
-     * @param  string|array|\Zend\Config\Config $options
-     * @return void
+     * @param  string|array|Traversable $options
      */
     public function __construct($options = null)
     {
-        if ($options instanceof \Zend\Config\Config) {
-            $options = $options->toArray();
-        } elseif (!is_array($options)) {
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
+        }
+        if (!is_array($options)) {
             $options          = func_get_args();
             $temp['charlist'] = array_shift($options);
             $options          = $temp;

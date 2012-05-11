@@ -79,7 +79,7 @@ class Data implements \ArrayAccess,\IteratorAggregate,\Countable
     /**
      * Set the items to collect
      *
-     * @param array|Traversable $items
+     * @param array|\Traversable $items
      * @return \Zend\Dojo\Data
      */
     public function setItems($items)

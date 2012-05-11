@@ -19,8 +19,10 @@
  */
 
 namespace Zend\Queue;
-use Countable,
-    Zend\Config\Config;
+
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
+use Countable;
 
 /**
  * Class for connecting to queues performing common operations.
@@ -88,9 +90,8 @@ class Queue implements Countable
      * - or -
      * $queue = new \Zend\Queue\Queue(null, $config); // \Zend\Queue\Queue->createQueue();
      *
-     * @param  string|\Zend\Queue\AdapterAbstract|array|\Zend\Config\Config|null String or adapter instance, or options array or \Zend\Config\Config instance
-     * @param  \Zend\Config\Config|array $options \Zend\Config\Config or a configuration array
-     * @return void
+     * @param  string|Queue\AdapterAbstract|array|\Traversable|null $spec
+     * @param  \Traversable|array $options
      */
     public function __construct($spec, $options = array())
     {
@@ -99,23 +100,24 @@ class Queue implements Countable
             $adapter = $spec;
         } elseif (is_string($spec)) {
             $adapter = $spec;
-        } elseif ($spec instanceof Config) {
-            $options = $spec->toArray();
+        } elseif ($spec instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($spec);
         } elseif (is_array($spec)) {
             $options = $spec;
         }
 
         // last minute error checking
         if ((null === $adapter)
-            && (!is_array($options) && (!$options instanceof Config))
+            && (!is_array($options) && (!$options instanceof Traversable))
         ) {
             throw new Exception\InvalidArgumentException('No valid params passed to constructor');
         }
 
         // Now continue as we would if we were a normal constructor
-        if ($options instanceof Config) {
-            $options = $options->toArray();
-        } elseif (!is_array($options)) {
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
+        }
+        if (!is_array($options)) {
             $options = array();
         }
 

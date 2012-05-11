@@ -21,6 +21,9 @@
 
 namespace Zend\Tag;
 
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
+
 /**
  * @category   Zend
  * @package    Zend_Tag
@@ -63,7 +66,7 @@ class Item implements TaggableInterface
     /**
      * Create a new tag according to the options
      *
-     * @param  array|\Zend\Config\Config $options
+     * @param  array|Traversable $options
      * @throws \Zend\Tag\Exception\InvalidArgumentException When invalid options are provided
      * @throws \Zend\Tag\Exception\InvalidArgumentException When title was not set
      * @throws \Zend\Tag\Exception\InvalidArgumentException When weight was not set
@@ -71,8 +74,8 @@ class Item implements TaggableInterface
      */
     public function __construct($options)
     {
-        if ($options instanceof \Zend\Config\Config) {
-            $options = $options->toArray();
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
         }
 
         if (!is_array($options)) {

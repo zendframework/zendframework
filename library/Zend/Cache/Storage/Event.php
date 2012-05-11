@@ -63,7 +63,7 @@ class Event extends BaseEvent
     /**
      * Alias of setTarget
      *
-     * @param  Adapter $adapter
+     * @param  Adapter\AdapterInterface $adapter
      * @return Event
      * @see    \Zend\EventManager\Event::setTarget()
      */

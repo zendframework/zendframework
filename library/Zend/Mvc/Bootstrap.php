@@ -1,9 +1,10 @@
 <?php
+
 namespace Zend\Mvc;
 
+use Traversable;
 use Zend\Di\Configuration as DiConfiguration,
     Zend\Di\Di,
-    Zend\Config\Config,
     Zend\EventManager\EventManagerInterface as Events,
     Zend\EventManager\EventManager,
     Zend\EventManager\EventManagerAwareInterface,
@@ -13,7 +14,7 @@ use Zend\Di\Configuration as DiConfiguration,
 class Bootstrap implements BootstrapInterface, EventManagerAwareInterface, EventsCapableInterface
 {
     /**
-     * @var Config
+     * @var Traversable
      */
     protected $config;
 
@@ -25,9 +26,9 @@ class Bootstrap implements BootstrapInterface, EventManagerAwareInterface, Event
     /**
      * Constructor
      *
-     * @param Config $config
+     * @param Traversable $config
      */
-    public function __construct(Config $config)
+    public function __construct(Traversable $config)
     {
         $this->config = $config;
     }

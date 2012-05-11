@@ -120,8 +120,7 @@ class DisplayGroup implements \Iterator,\Countable
      *
      * @param  string $name
      * @param  PrefixPathMapper $loader
-     * @param  array|Config $options
-     * @return void
+     * @param  array|Traversable $options
      */
     public function __construct($name, PrefixPathMapper $loader, $options = null)
     {

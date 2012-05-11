@@ -21,8 +21,7 @@
 namespace Zend\Serializer;
 
 use Zend\Loader\Broker,
-    Zend\Serializer\Adapter\AdapterInterface as Adapter,
-    Zend\Config\Config;
+    Zend\Serializer\Adapter\AdapterInterface as Adapter;
 
 /**
  * @category   Zend
@@ -50,7 +49,7 @@ class Serializer
      * Create a serializer adapter instance.
      *
      * @param string|Adapter $adapterName Name of the adapter class
-     * @param array |Config $opts Serializer options
+     * @param array |\Traversable $opts Serializer options
      * @return Adapter
      */
     public static function factory($adapterName, $opts = array()) 
@@ -112,7 +111,7 @@ class Serializer
      * Change the default adapter.
      *
      * @param string|Adapter $adapter
-     * @param array|Config $options
+     * @param array|\Traversable $options
      */
     public static function setDefaultAdapter($adapter, $options = array()) 
     {

@@ -20,6 +20,7 @@
  */
 
 namespace Zend\Pdf;
+
 use Zend\Pdf\Exception;
 
 /**
@@ -474,7 +475,7 @@ abstract class Font
          *   file paths in a configuration file for frequently used custom
          *   fonts. This would allow a user to use custom fonts without having
          *   to hard-code file paths all over the place. Table this idea until
-         *   {@link \Zend\Config} is ready.
+         *   {@link \Traversable} is ready.
          */
 
         /* Not an existing font and no mapping in the config file. Check to see

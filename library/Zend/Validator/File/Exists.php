@@ -63,7 +63,7 @@ class Exists extends Validator\AbstractValidator
     /**
      * Sets validator options
      *
-     * @param  string|array|\Zend\Config\Config $options
+     * @param  string|array|\Traversable $options
      * @return void
      */
     public function __construct($options = null)

@@ -21,6 +21,8 @@
 
 namespace Zend\View\Helper\Navigation;
 
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
 use RecursiveIteratorIterator,
     Zend\Navigation,
     Zend\Navigation\Page\AbstractPage,
@@ -643,28 +645,27 @@ class Links extends AbstractHelper
      */
     protected function convertToPages($mixed, $recursive = true)
     {
-        if (is_object($mixed)) {
-            if ($mixed instanceof AbstractPage) {
-                // value is a page instance; return directly
-                return $mixed;
-            } elseif ($mixed instanceof Navigation\Container) {
-                // value is a container; return pages in it
-                $pages = array();
-                foreach ($mixed as $page) {
-                    $pages[] = $page;
-                }
-                return $pages;
-            } elseif ($mixed instanceof \Zend\Config\Config) {
-                // convert config object to array and extract
-                return $this->convertToPages($mixed->toArray(), $recursive);
+        if ($mixed instanceof AbstractPage) {
+            // value is a page instance; return directly
+            return $mixed;
+        } elseif ($mixed instanceof Navigation\Container) {
+            // value is a container; return pages in it
+            $pages = array();
+            foreach ($mixed as $page) {
+                $pages[] = $page;
             }
+            return $pages;
+        } elseif ($mixed instanceof Traversable) {
+            $mixed = ArrayUtils::iteratorToArray($mixed);
         } elseif (is_string($mixed)) {
             // value is a string; make an URI page
             return AbstractPage::factory(array(
                 'type' => 'uri',
                 'uri'  => $mixed
             ));
-        } elseif (is_array($mixed) && !empty($mixed)) {
+        }
+
+        if (is_array($mixed) && !empty($mixed)) {
             if ($recursive && is_numeric(key($mixed))) {
                 // first key is numeric; assume several pages
                 $pages = array();

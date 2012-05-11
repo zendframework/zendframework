@@ -21,7 +21,8 @@
 
 namespace Zend\Feed\PubSubHubbub;
 
-use Zend\Config\Config;
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
 
 /**
  * @category   Zend
@@ -58,36 +59,43 @@ abstract class AbstractCallbackInterface implements CallbackInterface
     protected $_subscriberCount = 1;
 
     /**
-     * Constructor; accepts an array or Zend\Config instance to preset
+     * Constructor; accepts an array or Traversable object to preset
      * options for the Subscriber without calling all supported setter
      * methods in turn.
      *
-     * @param array|\Zend\Config\Config $options Options array or \Zend\Config\Config instance
+     * @param  array|Traversable $options Options array or Traversable object
      */
-    public function __construct($config = null)
+    public function __construct($options = null)
     {
-        if ($config !== null) {
-            $this->setConfig($config);
+        if ($options !== null) {
+            $this->setOptions($options);
         }
     }
 
     /**
      * Process any injected configuration options
      *
-     * @param  array|\Zend\Config\Config $options Options array or \Zend\Config\Config instance
+     * @param  array|Traversable $options Options array or Traversable object
      * @return AbstractCallbackInterface
      * @throws Exception\InvalidArgumentException
      */
-    public function setConfig($config)
+    public function setOptions($options)
     {
-        if ($config instanceof Config) {
-            $config = $config->toArray();
-        } elseif (!is_array($config)) {
-            throw new Exception\InvalidArgumentException('Array or Zend_Config object'
-            . 'expected, got ' . gettype($config));
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
         }
-        if (array_key_exists('storage', $config)) {
-            $this->setStorage($config['storage']);
+
+        if (!is_array($options)) {
+            throw new Exception('Array or Traversable object'
+            . 'expected, got ' . gettype($options));
+        }
+
+        if (is_array($options)) {
+            $this->setOptions($options);
+        }
+
+        if (array_key_exists('storage', $options)) {
+            $this->setStorage($options['storage']);
         }
         return $this;
     }

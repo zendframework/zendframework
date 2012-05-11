@@ -20,8 +20,9 @@
 
 namespace Zend\Filter;
 
-use Zend\Config\Config,
-    Zend\Locale\Locale as ZendLocale,
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
+use Zend\Locale\Locale as ZendLocale,
     Zend\Registry;
 
 /**
@@ -56,14 +57,14 @@ class Alnum extends AbstractFilter
     /**
      * Sets default option values for this instance
      *
-     * @param  boolean $allowWhiteSpace
-     * @return void
+     * @param  boolean|Traversable|array $allowWhiteSpace
      */
     public function __construct($options = false)
     {
-        if ($options instanceof Config) {
-            $options = $options->toArray();
-        } elseif (!is_array($options)) {
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
+        }
+        if (!is_array($options)) {
             $options = func_get_args();
             $temp    = array();
             if (!empty($options)) {

@@ -20,6 +20,9 @@
 
 namespace Zend\OAuth;
 
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
+
 /**
  * @category   Zend
  * @package    Zend_OAuth
@@ -45,7 +48,7 @@ class Consumer extends OAuth
     protected $_accessToken = null;
 
     /**
-     * @var \Zend\OAuth\Config\Config
+     * @var \Zend\OAuth\Config
      */
     protected $_config = null;
 
@@ -53,15 +56,14 @@ class Consumer extends OAuth
      * Constructor; create a new object with an optional array|Zend_Config
      * instance containing initialising options.
      *
-     * @param  array|\Zend\Config\Config $options
-     * @return void
+     * @param  array|Traversable $options
      */
     public function __construct($options = null)
     {
         $this->_config = new Config\StandardConfig;
         if ($options !== null) {
-            if ($options instanceof \Zend\Config\Config) {
-                $options = $options->toArray();
+            if ($options instanceof Traversable) {
+                $options = ArrayUtils::iteratorToArray($options);
             }
             $this->_config->setOptions($options);
         }

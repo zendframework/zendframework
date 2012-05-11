@@ -20,7 +20,8 @@
 
 namespace Zend\Filter;
 
-use Zend\Config\Config;
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
 
 /**
  * @category   Zend
@@ -61,14 +62,15 @@ class StripTags extends AbstractFilter
      *     'allowAttribs'  => Attributes which are allowed
      *     'allowComments' => Are comments allowed ?
      *
-     * @param  string|array|Config $options
+     * @param  string|array|Traversable $options
      * @return void
      */
     public function __construct($options = null)
     {
-        if ($options instanceof Config) {
-            $options = $options->toArray();
-        } else if ((!is_array($options)) || (is_array($options) && !array_key_exists('allowTags', $options) &&
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
+        }
+        if ((!is_array($options)) || (is_array($options) && !array_key_exists('allowTags', $options) &&
             !array_key_exists('allowAttribs', $options) && !array_key_exists('allowComments', $options))) {
             $options = func_get_args();
             $temp['allowTags'] = array_shift($options);

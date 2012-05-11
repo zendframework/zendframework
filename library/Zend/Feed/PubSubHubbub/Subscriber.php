@@ -20,6 +20,8 @@
 
 namespace Zend\Feed\PubSubHubbub;
 
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
 use Zend\Date,
     Zend\Uri;
 
@@ -134,62 +136,63 @@ class Subscriber
     protected $_usePathParameter = false;
 
     /**
-     * Constructor; accepts an array or Zend\Config instance to preset
+     * Constructor; accepts an array or Traversable instance to preset
      * options for the Subscriber without calling all supported setter
      * methods in turn.
      *
-     * @param  array|\Zend\Config\Config $options Options array or \Zend\Config\Config instance
-     * @return void
+     * @param  array|Traversable $options
      */
     public function __construct($config = null)
     {
         if ($config !== null) {
-            $this->setConfig($config);
+            $this->setOptions($config);
         }
     }
 
     /**
      * Process any injected configuration options
      *
-     * @param  array|\Zend\Config\Config $options Options array or \Zend\Config\Config instance
+     * @param  array|Traversable $options
      * @return Subscriber
      * @throws Exception\InvalidArgumentException
      */
-    public function setConfig($config)
+    public function setOptions($options)
     {
-        if ($config instanceof \Zend\Config\Config) {
-            $config = $config->toArray();
-        } elseif (!is_array($config)) {
-            throw new Exception\InvalidArgumentException('Array or Zend\Config object'
-                . ' expected, got ' . gettype($config));
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
         }
-        if (array_key_exists('hubUrls', $config)) {
-            $this->addHubUrls($config['hubUrls']);
+
+        if (!is_array($options)) {
+            throw new Exception('Array or Traversable object'
+                                . 'expected, got ' . gettype($options));
         }
-        if (array_key_exists('callbackUrl', $config)) {
-            $this->setCallbackUrl($config['callbackUrl']);
+        if (array_key_exists('hubUrls', $options)) {
+            $this->addHubUrls($options['hubUrls']);
         }
-        if (array_key_exists('topicUrl', $config)) {
-            $this->setTopicUrl($config['topicUrl']);
+        if (array_key_exists('callbackUrl', $options)) {
+            $this->setCallbackUrl($options['callbackUrl']);
         }
-        if (array_key_exists('storage', $config)) {
-            $this->setStorage($config['storage']);
+        if (array_key_exists('topicUrl', $options)) {
+            $this->setTopicUrl($options['topicUrl']);
         }
-        if (array_key_exists('leaseSeconds', $config)) {
-            $this->setLeaseSeconds($config['leaseSeconds']);
+        if (array_key_exists('storage', $options)) {
+            $this->setStorage($options['storage']);
         }
-        if (array_key_exists('parameters', $config)) {
-            $this->setParameters($config['parameters']);
+        if (array_key_exists('leaseSeconds', $options)) {
+            $this->setLeaseSeconds($options['leaseSeconds']);
         }
-        if (array_key_exists('authentications', $config)) {
-            $this->addAuthentications($config['authentications']);
+        if (array_key_exists('parameters', $options)) {
+            $this->setParameters($options['parameters']);
         }
-        if (array_key_exists('usePathParameter', $config)) {
-            $this->usePathParameter($config['usePathParameter']);
+        if (array_key_exists('authentications', $options)) {
+            $this->addAuthentications($options['authentications']);
         }
-        if (array_key_exists('preferredVerificationMode', $config)) {
+        if (array_key_exists('usePathParameter', $options)) {
+            $this->usePathParameter($options['usePathParameter']);
+        }
+        if (array_key_exists('preferredVerificationMode', $options)) {
             $this->setPreferredVerificationMode(
-                $config['preferredVerificationMode']
+                $options['preferredVerificationMode']
             );
         }
         return $this;
@@ -666,7 +669,7 @@ class Subscriber
     {
         $client = PubSubHubbub::getHttpClient();
         $client->setMethod(\Zend\Http\Client::POST);
-        $client->setConfig(array('useragent' => 'Zend_Feed_Pubsubhubbub_Subscriber/'
+        $client->setOptions(array('useragent' => 'Zend_Feed_Pubsubhubbub_Subscriber/'
             . \Zend\Version::VERSION));
         return $client;
     }

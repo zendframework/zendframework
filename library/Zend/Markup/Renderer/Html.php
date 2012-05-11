@@ -21,8 +21,9 @@
 
 namespace Zend\Markup\Renderer;
 
-use Zend\Markup\Renderer\Markup\Html\Root as RootMarkup,
-    Zend\Config\Config;
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
+use Zend\Markup\Renderer\Markup\Html\Root as RootMarkup;
 
 /**
  * HTML renderer
@@ -39,14 +40,13 @@ class Html extends AbstractRenderer
     /**
      * Constructor
      *
-     * @param array|\Zend\Config\Config $options
-     *
-     * @todo make constructor compliant with new configuration standards
+     * @param  array|Traversable $options
+     * @return void
      */
     public function __construct($options = array())
     {
-        if ($options instanceof Config) {
-            $options = $options->toArray();
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
         }
 
         if (isset($options['markups'])) {

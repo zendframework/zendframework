@@ -138,7 +138,7 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
         Paginator\Paginator::setDefaultScrollingStyle();
         Helper\PaginationControl::setDefaultViewPartial(null);
 
-        Paginator\Paginator::setConfig($this->_config->default);
+        Paginator\Paginator::setOptions($this->_config->default);
 
         Paginator\Paginator::setScrollingStyleBroker(new Paginator\ScrollingStyleBroker());
 
@@ -219,7 +219,7 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
 
     public function testLoadsFromConfig()
     {
-        Paginator\Paginator::setConfig($this->_config->testing);
+        Paginator\Paginator::setOptions($this->_config->testing);
         $this->assertEquals('Scrolling', Paginator\Paginator::getDefaultScrollingStyle());
 
         $broker = Paginator\Paginator::getScrollingStyleBroker();
@@ -310,7 +310,7 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
 
     public function testGetsAndSetsItemCountPerPage()
     {
-        Paginator\Paginator::setConfig(new Config\Config(array()));
+        Paginator\Paginator::setOptions(new Config\Config(array()));
         $this->_paginator = new Paginator\Paginator(new Adapter\ArrayAdapter(range(1, 101)));
         $this->assertEquals(10, $this->_paginator->getItemCountPerPage());
         $this->_paginator->setItemCountPerPage(15);
@@ -325,7 +325,7 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetsAndSetsItemCounterPerPageOfNegativeOne()
     {
-        Paginator\Paginator::setConfig(new Config\Config(array()));
+        Paginator\Paginator::setOptions(new Config\Config(array()));
         $this->_paginator = new Paginator\Paginator(new Paginator\Adapter\ArrayAdapter(range(1, 101)));
         $this->_paginator->setItemCountPerPage(-1);
         $this->assertEquals(101, $this->_paginator->getItemCountPerPage());
@@ -337,7 +337,7 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetsAndSetsItemCounterPerPageOfZero()
     {
-        Paginator\Paginator::setConfig(new Config\Config(array()));
+        Paginator\Paginator::setOptions(new Config\Config(array()));
         $this->_paginator = new Paginator\Paginator(new Paginator\Adapter\ArrayAdapter(range(1, 101)));
         $this->_paginator->setItemCountPerPage(0);
         $this->assertEquals(101, $this->_paginator->getItemCountPerPage());
@@ -349,7 +349,7 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetsAndSetsItemCounterPerPageOfNull()
     {
-        Paginator\Paginator::setConfig(new Config\Config(array()));
+        Paginator\Paginator::setOptions(new Config\Config(array()));
         $this->_paginator = new Paginator\Paginator(new Paginator\Adapter\ArrayAdapter(range(1, 101)));
         $this->_paginator->setItemCountPerPage();
         $this->assertEquals(101, $this->_paginator->getItemCountPerPage());
@@ -716,7 +716,7 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetSetDefaultItemCountPerPage()
     {
-        Paginator\Paginator::setConfig(new Config\Config(array()));
+        Paginator\Paginator::setOptions(new Config\Config(array()));
 
         $paginator = Paginator\Paginator::factory(range(1, 10));
         $this->assertEquals(10, $paginator->getItemCountPerPage());

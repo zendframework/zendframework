@@ -220,7 +220,7 @@ class Akismet extends \Zend\Service\AbstractService
         $uri    = 'http://' . $host . ':' . $this->getPort() . $path;
         $client = $this->getHttpClient();
         $client->setUri($uri);
-        $client->setConfig(array(
+        $client->setOptions(array(
             'useragent'    => $this->getUserAgent(),
         ));
 

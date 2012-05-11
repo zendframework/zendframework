@@ -3,6 +3,7 @@
 namespace Zend\Di;
 
 use Traversable;
+use Zend\Stdlib\ArrayUtils;
 
 class Configuration
 {
@@ -12,21 +13,22 @@ class Configuration
      * @var Zend\Di\DependencyInjector
      */
     protected $di = null;
-    
-    public function __construct($data)
+
+    /**
+     * @param  array|Traversable $options
+     */
+    public function __construct($options)
     {
-        if ($data instanceof Traversable) {
-            if (method_exists($data, 'toArray')) {
-                $data = $data->toArray();
-            } else {
-                $data = iterator_to_array($data, true);
-            }
-        } elseif (!is_array($data)) {
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
+        }
+
+        if (!is_array($options)) {
             throw new Exception\InvalidArgumentException(
-                'Configuration data must be of type Zend\Config\Config or an array'
+                'Configuration data must be of type Traversable or an array'
             );
         }
-        $this->data = $data;
+        $this->data = $options;
     }
     
     public function configure(Di $di)

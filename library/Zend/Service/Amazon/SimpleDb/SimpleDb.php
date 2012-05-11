@@ -155,7 +155,7 @@ class SimpleDb extends \Zend\Service\Amazon\AbstractAmazon
      *
      * @param  string $domainName
      * @param  string $itemName
-     * @param  array|Traverable $attributes
+     * @param  array|\Traverable $attributes
      * @param  array $replace
      * @return void
      */
@@ -432,7 +432,7 @@ class SimpleDb extends \Zend\Service\Amazon\AbstractAmazon
             $request = self::getHttpClient();
             $request->resetParameters();
 
-            $request->setConfig(array(
+            $request->setOptions(array(
                 'timeout' => $this->_httpTimeout
             ));
 

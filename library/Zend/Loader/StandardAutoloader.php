@@ -90,7 +90,7 @@ class StandardAutoloader implements SplAutoloader
      * )
      * </code>
      *
-     * @param  array|Traversable $options
+     * @param  array|\Traversable $options
      * @return StandardAutoloader
      */
     public function setOptions($options)

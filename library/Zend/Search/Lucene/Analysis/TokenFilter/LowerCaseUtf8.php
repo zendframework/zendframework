@@ -23,7 +23,7 @@ namespace Zend\Search\Lucene\Analysis\TokenFilter;
 
 use Zend\Search\Lucene\Analysis\Token,
     Zend\Search\Lucene,
-    Zend\Search\Lucene\Exception\ExtensionNotLoadedExtension;
+    Zend\Search\Lucene\Exception\ExtensionNotLoadedException;
 
 /**
  * Lower case Token filter.

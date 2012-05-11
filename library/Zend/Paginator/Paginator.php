@@ -251,7 +251,7 @@ class Paginator implements Countable, IteratorAggregate
      * @param array|\Traversable $config
      * @throws Exception\InvalidArgumentException
      */
-    public static function setConfig($config)
+    public static function setOptions($config)
     {
         if ($config instanceof Traversable) {
             $config = ArrayUtils::iteratorToArray($config);

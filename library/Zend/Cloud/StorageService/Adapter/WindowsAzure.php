@@ -17,11 +17,10 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * namespace
- */
 namespace Zend\Cloud\StorageService\Adapter;
 
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
 use Zend\Cloud\StorageService\Adapter,
     Zend\Cloud\StorageService\Exception,
     Zend\Service\WindowsAzure\Storage\Blob;
@@ -77,12 +76,12 @@ class WindowsAzure implements AdapterInterface
     /**
      * Creates a new \Zend\Cloud\Storage\WindowsAzure instance
      *
-     * @param array|\Zend\Config\Config  $options   Options for the \Zend\Cloud\Storage\WindowsAzure instance
+     * @param  array|Traversable $options Options for the \Zend\Cloud\Storage\WindowsAzure instance
      */
     public function __construct($options = array())
     {
-        if ($options instanceof \Zend\Config\Config) {
-            $options = $options->toArray();
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
         }
 
         if (!is_array($options)) {

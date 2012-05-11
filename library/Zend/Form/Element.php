@@ -240,8 +240,8 @@ class Element implements ValidatorInterface
      * - array: options with which to configure element
      * - Zend_Config: Zend_Config with options for configuring element
      *
-     * @param  string|array|Config $spec
-     * @param  array|Traversable $options
+     * @param  array|string|Traversable $spec
+     * @param  array|string|Traversable $options
      * @return void
      * @throws ElementException if no element name after initialization
      */

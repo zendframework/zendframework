@@ -20,6 +20,8 @@
 
 namespace Zend\Validator;
 
+use Traversable;
+
 /**
  * @category   Zend
  * @package    Zend_Validate
@@ -63,7 +65,7 @@ class Barcode extends AbstractValidator
      */
     public function __construct($options = null)
     {
-        if (!is_array($options) && !($options instanceof \Zend\Config\Config)) {
+        if (!is_array($options) && !($options instanceof Traversable)) {
             $options = array('adapter' => $options);
         }
 

@@ -65,7 +65,7 @@ class PostCode extends AbstractValidator
      * Accepts either a string locale, a Zend_Locale object, or an array or
      * Zend_Config object containing the keys "locale" and/or "format".
      *
-     * @param string|Zend_Locale|array|\Zend\Config\Config $options
+     * @param string|Zend_Locale|array|\Traversable $options
      * @throws \Zend\Validator\Exception On empty format
      */
     public function __construct($options = null)

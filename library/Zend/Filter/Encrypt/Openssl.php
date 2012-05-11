@@ -20,6 +20,8 @@
 
 namespace Zend\Filter\Encrypt;
 
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
 use Zend\Filter\Exception,
     Zend\Filter\Compress,
     Zend\Filter\Decompress;
@@ -79,7 +81,7 @@ class Openssl implements EncryptionAlgorithmInterface
      *   'compression' => compress value with this compression adapter
      *   'package'     => pack envelope keys into encrypted string, simplifies decryption
      *
-     * @param string|array $options Options for this adapter
+     * @param string|array|Traversable $options Options for this adapter
      */
     public function __construct($options = array())
     {
@@ -87,8 +89,8 @@ class Openssl implements EncryptionAlgorithmInterface
             throw new Exception\ExtensionNotLoadedException('This filter needs the openssl extension');
         }
 
-        if ($options instanceof \Zend\Config\Config) {
-            $options = $options->toArray();
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
         }
 
         if (!is_array($options)) {

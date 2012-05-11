@@ -72,7 +72,7 @@ class Filesystem extends AbstractAdapter
     /**
      * Set options.
      *
-     * @param  array|Traversable|FilesystemOptions $options
+     * @param  array|\Traversable|FilesystemOptions $options
      * @return Filesystem
      * @see    getOptions()
      */

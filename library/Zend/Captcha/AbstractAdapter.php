@@ -22,7 +22,7 @@
 namespace Zend\Captcha;
 
 use Traversable;
-use Zend\Config\Config;
+use Zend\Stdlib\ArrayUtils;
 use Zend\Validator\AbstractValidator;
 
 /**
@@ -87,16 +87,16 @@ abstract class AbstractAdapter extends AbstractValidator implements AdapterInter
     /**
      * Constructor
      *
-     * @param  array|Zend\Config\Config $options
-     * @return void
+     * @param array|Traversable $options
      */
     public function __construct($options = null)
     {
         // Set options
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
+        }
         if (is_array($options)) {
             $this->setOptions($options);
-        } else if ($options instanceof Config) {
-            $this->setConfig($options);
         }
     }
 
@@ -152,17 +152,6 @@ abstract class AbstractAdapter extends AbstractValidator implements AdapterInter
     public function getOptions()
     {
         return $this->_options;
-    }
-
-    /**
-     * Set object state from config object
-     *
-     * @param  Zend\Config\Config $config
-     * @return Zend\Captcha\AbstractAdapter
-     */
-    public function setConfig(Config $config)
-    {
-        return $this->setOptions($config->toArray());
     }
 
     /**

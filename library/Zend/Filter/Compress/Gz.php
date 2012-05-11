@@ -102,7 +102,7 @@ class Gz extends AbstractCompressionAlgorithm
      *
      * @param  string $mode Supported are 'compress', 'deflate' and 'file'
      * @return Gz
-     * @throws Exceptin\InvalidArgumentException for invalid $mode value
+     * @throws Exception\InvalidArgumentException for invalid $mode value
      */
     public function setMode($mode)
     {

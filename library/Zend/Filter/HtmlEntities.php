@@ -20,7 +20,8 @@
 
 namespace Zend\Filter;
 
-use Zend\Config\Config;
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
 
 /**
  * @category   Zend
@@ -47,22 +48,21 @@ class HtmlEntities extends AbstractFilter
     /**
      * Corresponds to the forth htmlentities() argument
      *
-     * @var Config
+     * @var boolean
      */
     protected $_doubleQuote;
 
     /**
      * Sets filter options
      *
-     * @param  integer|array $quoteStyle
-     * @param  string  $charSet
-     * @return void
+     * @param array|Traversable $options
      */
     public function __construct($options = array())
     {
-        if ($options instanceof Config) {
-            $options = $options->toArray();
-        } elseif (!is_array($options)) {
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
+        }
+        if (!is_array($options)) {
             $options = func_get_args();
             $temp['quotestyle'] = array_shift($options);
             if (!empty($options)) {

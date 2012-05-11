@@ -21,8 +21,7 @@
 
 namespace Zend\Serializer\Adapter;
 
-use Zend\Serializer\Exception\RuntimeException,
-    Zend\Config\Config;
+use Zend\Serializer\Exception\RuntimeException;
 
 /**
  * @category   Zend
@@ -41,12 +40,12 @@ class PhpSerialize extends AbstractAdapter
     /**
      * Constructor
      * 
-     * @param  array|Config $opts
+     * @param  array|\Traversable $options
      * @return void
      */
-    public function __construct($opts = array()) 
+    public function __construct($options = array())
     {
-        parent::__construct($opts);
+        parent::__construct($options);
 
         // needed to check if a returned false is based on a serialize false
         // or based on failure (igbinary can overwrite [un]serialize functions)

@@ -20,6 +20,9 @@
 
 namespace Zend\Filter;
 
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
+
 /**
  * @category   Zend
  * @package    Zend_Filter
@@ -38,14 +41,14 @@ class StringToUpper extends AbstractFilter
     /**
      * Constructor
      *
-     * @param string|array $options OPTIONAL
-     * @return void
+     * @param string|array|Traversable $options OPTIONAL
      */
     public function __construct($options = null)
     {
-        if ($options instanceof \Zend\Config\Config) {
-            $options = $options->toArray();
-        } else if (!is_array($options)) {
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
+        }
+        if (!is_array($options)) {
             $options = func_get_args();
             $temp    = array();
             if (!empty($options)) {

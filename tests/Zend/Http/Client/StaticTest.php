@@ -227,7 +227,7 @@ class StaticTest extends \PHPUnit_Framework_TestCase
             'someoption' => 'hasvalue'
         );
 
-        $this->_client->setConfig($config);
+        $this->_client->setOptions($config);
 
         $hasConfig = $this->_client->config;
 
@@ -251,7 +251,7 @@ class StaticTest extends \PHPUnit_Framework_TestCase
             )
         ));
 
-        $this->_client->setConfig($config);
+        $this->_client->setOptions($config);
 
         $hasConfig = $this->_client->config;
         $this->assertEquals($config->timeout, $hasConfig['timeout']);
@@ -266,10 +266,10 @@ class StaticTest extends \PHPUnit_Framework_TestCase
     public function testConfigSetInvalid($config)
     {
         $this->setExpectedException(
-            'Zend\Http\Exception\InvalidArgumentException',
+            'Zend\Http\Client\Exception\InvalidArgumentException',
             'Config parameter is not valid');
 
-        $this->_client->setConfig($config);
+        $this->_client->setOptions($config);
     }
 
     /**
@@ -284,13 +284,13 @@ class StaticTest extends \PHPUnit_Framework_TestCase
         $adapter = new MockAdapter();
 
         // test that config passes when we set the adapter
-        $this->_client->setConfig(array('param' => 'value1'));
+        $this->_client->setOptions(array('param' => 'value1'));
         $this->_client->setAdapter($adapter);
         $adapterCfg = $adapter->config;
         $this->assertEquals('value1', $adapterCfg['param']);
 
         // test that adapter config value changes when we set client config
-        $this->_client->setConfig(array('param' => 'value2'));
+        $this->_client->setOptions(array('param' => 'value2'));
         $adapterCfg = $adapter->config;
         $this->assertEquals('value2', $adapterCfg['param']);
     }
@@ -327,7 +327,7 @@ class StaticTest extends \PHPUnit_Framework_TestCase
         // Now, test we get a proper response after the request
         $this->_client->setUri('http://example.com/foo/bar');
         $this->_client->setAdapter('Zend\Http\Client\Adapter\Test');
-        $this->_client->setConfig(array('storeresponse' => false));
+        $this->_client->setOptions(array('storeresponse' => false));
 
         $response = $this->_client->send();
 
@@ -367,7 +367,7 @@ class StaticTest extends \PHPUnit_Framework_TestCase
         $this->_client->setUri('http://255.255.255.255');
 
         // Reduce timeout to 3 seconds to avoid waiting
-        $this->_client->setConfig(array('timeout' => 3));
+        $this->_client->setOptions(array('timeout' => 3));
 
         // This call should cause an exception
         $this->_client->send();
@@ -520,7 +520,7 @@ class StaticTest extends \PHPUnit_Framework_TestCase
      */
     public function testRawCookiesInRequestHeaders()
     {
-        $this->_client->setConfig(array('encodecookies' => false));
+        $this->_client->setOptions(array('encodecookies' => false));
         $this->_client->addCookie('foo', 'bar=baz');
         $this->_client->send();
         $cookieValue = 'Cookie: foo=bar=baz';

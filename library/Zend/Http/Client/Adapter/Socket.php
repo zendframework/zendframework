@@ -21,9 +21,11 @@
 
 namespace Zend\Http\Client\Adapter;
 
-use Zend\Http\Client\Adapter\AdapterInterface as HttpAdapter,
-    Zend\Http\Client\Adapter\Exception as AdapterException,
-    Zend\Http\Response;
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
+use Zend\Http\Client\Adapter\AdapterInterface as HttpAdapter;
+use Zend\Http\Client\Adapter\Exception as AdapterException;
+use Zend\Http\Response;
 
 /**
  * A sockets based (stream\socket\client) adapter class for Zend\Http\Client. Can be used
@@ -86,7 +88,7 @@ class Socket implements HttpAdapter, StreamInterface
     protected $_context = null;
 
     /**
-     * Adapter constructor, currently empty. Config is set using setConfig()
+     * Adapter constructor, currently empty. Config is set using setOptions()
      *
      */
     public function __construct()
@@ -96,20 +98,20 @@ class Socket implements HttpAdapter, StreamInterface
     /**
      * Set the configuration array for the adapter
      *
-     * @param \Zend\Config\Config | array $config
+     * @param  array|Traversable $options
      */
-    public function setConfig($config = array())
+    public function setOptions($options = array())
     {
-        if ($config instanceof \Zend\Config\Config) {
-            $config = $config->toArray();
-
-        } elseif (! is_array($config)) {
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
+        }
+        if (!is_array($options)) {
             throw new AdapterException\InvalidArgumentException(
-                'Array or Zend_Config object expected, got ' . gettype($config)
+                'Array or Zend_Config object expected, got ' . gettype($options)
             );
         }
 
-        foreach ($config as $k => $v) {
+        foreach ($options as $k => $v) {
             $this->config[strtolower($k)] = $v;
         }
     }

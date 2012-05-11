@@ -17,15 +17,13 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * namespace
- */
 namespace Zend\Cloud\QueueService\Adapter;
 
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
 use Zend\Cloud\QueueService\Exception,
     Zend\Cloud\QueueService\Message,
-    Zend\Service\WindowsAzure\Storage\Queue,
-    Zend\Config\Config;
+    Zend\Service\WindowsAzure\Storage\Queue;
 
 /**
  * WindowsAzure adapter for simple queue service.
@@ -60,20 +58,20 @@ class WindowsAzure extends AbstractAdapter
     /**
      * Storage client
      *
-     * @var \Zend\Servic\WindowsAzure\Storage\Queue
+     * @var \Zend\Service\WindowsAzure\Storage\Queue
      */
     protected $_storageClient = null;
 
     /**
      * Constructor
      *
-     * @param  array|\Zend\Config\Config $options
+     * @param  array|Traversable $options
      * @return void
      */
     public function __construct($options = array())
     {
-        if ($options instanceof Config) {
-            $options = $options->toArray();
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
         }
 
         if (!is_array($options)) {

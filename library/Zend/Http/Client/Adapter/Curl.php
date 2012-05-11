@@ -22,10 +22,12 @@
 
 namespace Zend\Http\Client\Adapter;
 
-use Zend\Http\Client\Adapter\AdapterInterface as HttpAdapter,
-    Zend\Http\Client\Adapter\Exception as AdapterException,
-    Zend\Http\Client,
-    Zend\Http\Request;
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
+use Zend\Http\Client\Adapter\AdapterInterface as HttpAdapter;
+use Zend\Http\Client\Adapter\Exception as AdapterException;
+use Zend\Http\Client;
+use Zend\Http\Request;
 
 /**
  * An adapter class for Zend\Http\Client based on the curl extension.
@@ -84,7 +86,7 @@ class Curl implements HttpAdapter, StreamInterface
     /**
      * Adapter constructor
      *
-     * Config is set using setConfig()
+     * Config is set using setOptions()
      *
      * @return void
      * @throws AdapterException\InitializationException
@@ -116,32 +118,33 @@ class Curl implements HttpAdapter, StreamInterface
     /**
      * Set the configuration array for the adapter
      *
+     * @param  array|Traversable $options
+     * @return Curl
      * @throws AdapterException\InvalidArgumentException
-     * @param  \Zend\Config\Config | array $config
-     * @return \Zend\Http\Client\Adapter\Curl
      */
-    public function setConfig($config = array())
+    public function setOptions($options = array())
     {
-        if ($config instanceof \Zend\Config\Config) {
-            $config = $config->toArray();
-        } elseif (!is_array($config)) {
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
+        }
+        if (!is_array($options)) {
             throw new AdapterException\InvalidArgumentException(
-                'Array or Zend\Config\Config object expected, got ' . gettype($config)
+                'Array or Traversable object expected, got ' . gettype($options)
             );
         }
 
         /** Config Key Normalization */
-        foreach ($config as $k => $v) {
-            unset($config[$k]); // unset original value
-            $config[str_replace(array('-', '_', ' ', '.'), '', strtolower($k))] = $v; // replace w/ normalized
+        foreach ($options as $k => $v) {
+            unset($options[$k]); // unset original value
+            $options[str_replace(array('-', '_', ' ', '.'), '', strtolower($k))] = $v; // replace w/ normalized
         }
 
-        if (isset($config['proxyuser']) && isset($config['proxypass'])) {
-            $this->setCurlOption(CURLOPT_PROXYUSERPWD, $config['proxyuser'].":".$config['proxypass']);
-            unset($config['proxyuser'], $config['proxypass']);
+        if (isset($options['proxyuser']) && isset($options['proxypass'])) {
+            $this->setCurlOption(CURLOPT_PROXYUSERPWD, $options['proxyuser'].":".$options['proxypass']);
+            unset($options['proxyuser'], $options['proxypass']);
         }
 
-        foreach ($config as $k => $v) {
+        foreach ($options as $k => $v) {
             $option = strtolower($k);
             switch($option) {
                 case 'proxyhost':

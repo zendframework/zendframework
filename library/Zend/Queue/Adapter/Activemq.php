@@ -20,6 +20,7 @@
  */
 
 namespace Zend\Queue\Adapter;
+
 use Zend\Queue\Queue,
     Zend\Queue\Message,
     Zend\Queue\Stomp\Client,
@@ -53,9 +54,8 @@ class Activemq extends AbstractAdapter
     /**
      * Constructor
      *
-     * @param  array|\Zend\Config\Config $config An array having configuration data
+     * @param  array|\Traversable $options An array having configuration data
      * @param  \Zend\Queue\Queue The \Zend\Queue\Queue object that created this class
-     * @return void
      */
     public function __construct($options, Queue $queue = null)
     {

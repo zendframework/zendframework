@@ -33,18 +33,17 @@ interface AdapterInterface
     /**
      * Constructor
      *
-     * @param  array|Zend\Config\Config $opts Serializer options
-     * @return void
+     * @param  array|\Traversable $options Serializer options
      */
-    public function __construct($opts = array());
+    public function __construct($options = array());
 
     /**
      * Set serializer options
      *
-     * @param  array|Zend\Config\Config $opts Serializer options
+     * @param  array|\Traversable $options Serializer options
      * @return AdapterInterface
      */
-    public function setOptions($opts);
+    public function setOptions($options);
 
     /**
      * Set a serializer option

@@ -68,9 +68,9 @@ abstract class AbstractValidator implements ValidatorInterface
      *  - nothing f.e. Validator()
      *  - one or multiple scalar values f.e. Validator($first, $second, $third)
      *  - an array f.e. Validator(array($first => 'first', $second => 'second', $third => 'third'))
-     *  - an instance of Zend_Config f.e. Validator($config_instance)
+     *  - an instance of Traversable f.e. Validator($config_instance)
      *
-     * @param mixed $options
+     * @param array|Traversable $options
      */
     public function __construct($options = null)
     {

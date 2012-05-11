@@ -21,9 +21,10 @@
 
 namespace Zend\Serializer\Adapter;
 
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
 use Zend\Serializer\Adapter\AdapterInterface as SerializationAdapter,
-    Zend\Serializer\Exception\InvalidArgumentException,
-    Zend\Config\Config;
+    Zend\Serializer\Exception\InvalidArgumentException;
 
 /**
  * @category   Zend
@@ -44,28 +45,28 @@ abstract class AbstractAdapter implements SerializationAdapter
     /**
      * Constructor
      *
-     * @param array|Config $opts Serializer options
+     * @param  array|Traversable $options Serializer options
      */
-    public function __construct($opts = array()) 
+    public function __construct($options = array())
     {
-        $this->setOptions($opts);
+        $this->setOptions($options);
     }
 
     /**
      * Set serializer options
      *
-     * @param  array|Config $opts Serializer options
+     * @param  array|Traversable $options Serializer options
      * @return AbstractAdapter
      */
-    public function setOptions($opts) 
+    public function setOptions($options)
     {
-        if ($opts instanceof Config) {
-            $opts = $opts->toArray();
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
         } else {
-            $opts = (array) $opts;
+            $options = (array) $options;
         }
 
-        foreach ($opts as $k => $v) {
+        foreach ($options as $k => $v) {
             $this->setOption($k, $v);
         }
         return $this;

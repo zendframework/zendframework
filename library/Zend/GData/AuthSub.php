@@ -225,7 +225,7 @@ class AuthSub
             throw new App\HttpException('Client is not an instance of Zend_Http_Client.');
         }
         $useragent = 'Zend_Framework_Gdata/' . \Zend\Version::VERSION;
-        $client->setConfig(array(
+        $client->setOptions(array(
                 'strictredirects' => true,
                 'useragent' => $useragent
             )

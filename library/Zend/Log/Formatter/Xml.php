@@ -21,10 +21,11 @@
 
 namespace Zend\Log\Formatter;
 
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
 use DOMDocument,
     DOMElement,
-    Zend\Log\Formatter,
-    Zend\Config\Config;
+    Zend\Log\Formatter;
 
 /**
  * @category   Zend
@@ -54,14 +55,15 @@ class Xml implements Formatter
      * Class constructor
      * (the default encoding is UTF-8)
      *
-     * @param array|Config $options
-     * @return void
+     * @param  array|Traversable $options
      */
     public function __construct($options = array())
     {
-        if ($options instanceof Config) {
-            $options = $options->toArray();
-        } elseif (!is_array($options)) {
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
+        }
+
+        if (!is_array($options)) {
             $args = func_get_args();
 
             $options = array(

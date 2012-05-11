@@ -45,17 +45,17 @@ class Wddx extends AbstractAdapter
     /**
      * Constructor
      * 
-     * @param  array $opts 
+     * @param  array $options
      * @return void
      * @throws ExtensionNotLoadedException if wddx extension not found
      */
-    public function __construct($opts = array())
+    public function __construct($options = array())
     {
         if (!extension_loaded('wddx')) {
             throw new ExtensionNotLoadedException('PHP extension "wddx" is required for this adapter');
         }
 
-        parent::__construct($opts);
+        parent::__construct($options);
     }
 
     /**

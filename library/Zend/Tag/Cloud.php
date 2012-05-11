@@ -21,8 +21,9 @@
 
 namespace Zend\Tag;
 
-use Zend\Config,
-    Zend\Tag\Exception\InvalidArgumentException,
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
+use Zend\Tag\Exception\InvalidArgumentException,
     Zend\Loader\Broker;
 
 /**
@@ -74,30 +75,16 @@ class Cloud
     /**
      * Create a new tag cloud with options
      *
-     * @param mixed $options
+     * @param  array|Traversable $options
      */
     public function __construct($options = null)
     {
-        if ($options instanceof Config\Config) {
-            $this->setConfig($options);
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
         }
-
         if (is_array($options)) {
             $this->setOptions($options);
         }
-    }
-
-    /**
-     * Set options from Zend_Config
-     *
-     * @param  \Zend\Config\Config $config
-     * @return \Zend\Tag\Cloud
-     */
-    public function setConfig(Config\Config $config)
-    {
-        $this->setOptions($config->toArray());
-
-        return $this;
     }
 
     /**

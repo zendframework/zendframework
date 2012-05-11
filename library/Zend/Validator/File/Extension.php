@@ -20,6 +20,8 @@
 
 namespace Zend\Validator\File;
 
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
 use Zend\Loader;
 
 /**
@@ -66,13 +68,12 @@ class Extension extends \Zend\Validator\AbstractValidator
     /**
      * Sets validator options
      *
-     * @param  string|array|\Zend\Config\Config $options
-     * @return void
+     * @param  string|array|\Traversable $options
      */
     public function __construct($options = null)
     {
-        if ($options instanceof \Zend\Config\Config) {
-            $options = $options->toArray();
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
         }
 
         $case = null;

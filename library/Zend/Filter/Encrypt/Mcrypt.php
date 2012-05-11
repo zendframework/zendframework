@@ -19,6 +19,9 @@
  */
 
 namespace Zend\Filter\Encrypt;
+
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
 use Zend\Filter\Exception,
     Zend\Filter\Compress,
     Zend\Filter\Decompress;
@@ -63,7 +66,7 @@ class Mcrypt implements EncryptionAlgorithmInterface
     /**
      * Class constructor
      *
-     * @param string|array|\Zend\Config\Config $options Cryption Options
+     * @param string|array|\Traversable $options Encryption Options
      */
     public function __construct($options)
     {
@@ -71,8 +74,8 @@ class Mcrypt implements EncryptionAlgorithmInterface
             throw new Exception\ExtensionNotLoadedException('This filter needs the mcrypt extension');
         }
 
-        if ($options instanceof \Zend\Config\Config) {
-            $options = $options->toArray();
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
         } elseif (is_string($options)) {
             $options = array('key' => $options);
         } elseif (!is_array($options)) {

@@ -34,7 +34,7 @@ interface ObjectInterface
 {
     /**
      * Constructor
-     * @param array|Traversable $options
+     * @param array|\Traversable $options
      * @return void
      */
     public function __construct($options = null);

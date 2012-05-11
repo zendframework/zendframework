@@ -95,7 +95,7 @@ class Delicious
     public function __construct($uname = null, $pass = null)
     {
         $this->_rest = new RestClient\RestClient();
-        $this->_rest->getHttpClient()->setConfig(array('ssltransport' => 'ssl'));
+        $this->_rest->getHttpClient()->setOptions(array('ssltransport' => 'ssl'));
         $this->setAuth($uname, $pass);
     }
 

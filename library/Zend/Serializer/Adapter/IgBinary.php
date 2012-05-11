@@ -41,17 +41,17 @@ class IgBinary extends AbstractAdapter
     /**
      * Constructor
      * 
-     * @param  array|\Zend\Config\Config $opts 
+     * @param  array|\Traversable $options
      * @return void
      * @throws ExtensionNotLoadedException If igbinary extension is not present
      */
-    public function __construct($opts = array()) 
+    public function __construct($options = array())
     {
         if (!extension_loaded('igbinary')) {
             throw new ExtensionNotLoadedException('PHP extension "igbinary" is required for this adapter');
         }
 
-        parent::__construct($opts);
+        parent::__construct($options);
 
         if (self::$_serializedNull === null) {
             self::$_serializedNull = igbinary_serialize(null);

@@ -84,7 +84,7 @@ class Client implements ServerClient
      *
      * @param  string $server      Full address of the XML-RPC service
      *                             (e.g. http://time.xmlrpc.com/RPC2)
-     * @param  Zend\Http\Client $httpClient HTTP Client to use for requests
+     * @param  \Zend\Http\Client $httpClient HTTP Client to use for requests
      * @return void
      */
     public function __construct($server, Http\Client $httpClient = null)

@@ -21,8 +21,9 @@
 
 namespace Zend\Soap;
 
-use Zend\Config\Config,
-    DOMDocument,
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
+use DOMDocument,
     DOMNode,
     SimpleXMLElement,
     stdClass;
@@ -179,13 +180,13 @@ class Server implements \Zend\Server\Server
      *
      * Allows setting options as an associative array of option => value pairs.
      *
-     * @param  array|\Zend\Config\Config $options
+     * @param  array|Traversable $options
      * @return \Zend\Soap\Server
      */
     public function setOptions($options)
     {
-        if($options instanceof Config) {
-            $options = $options->toArray();
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
         }
 
         foreach ($options as $key => $value) {

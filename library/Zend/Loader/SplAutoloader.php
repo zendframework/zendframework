@@ -37,8 +37,7 @@ interface SplAutoloader
      *
      * Allow configuration of the autoloader via the constructor.
      * 
-     * @param  null|array|Traversable $options 
-     * @return void
+     * @param  null|array|\Traversable $options
      */
     public function __construct($options = null);
 

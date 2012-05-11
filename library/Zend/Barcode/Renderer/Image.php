@@ -79,8 +79,7 @@ class Image extends AbstractRenderer
 
     /**
      * Constructor
-     * @param array|\Zend\Config\Config $options
-     * @return void
+     * @param array|\Traversable $options
      */
     public function __construct($options = null)
     {

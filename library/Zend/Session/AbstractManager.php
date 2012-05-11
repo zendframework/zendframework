@@ -78,7 +78,7 @@ abstract class AbstractManager implements Manager
      */
     public function __construct(Configuration $config = null, Storage $storage = null, SaveHandler $saveHandler = null)
     {
-        $this->setConfig($config);
+        $this->setOptions($config);
         $this->setStorage($storage);
         if ($saveHandler) {
             $this->setSaveHandler($saveHandler);
@@ -91,7 +91,7 @@ abstract class AbstractManager implements Manager
      * @param  null|Configuration $config 
      * @return void
      */
-    public function setConfig(Configuration $config = null)
+    public function setOptions(Configuration $config = null)
     {
         if (null === $config) {
             $config = new $this->configDefaultClass();

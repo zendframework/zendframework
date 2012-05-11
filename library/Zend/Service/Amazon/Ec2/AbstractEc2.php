@@ -144,7 +144,7 @@ abstract class AbstractEc2 extends Amazon\AbstractAmazon
             $request = $this->getHttpClient();
             $request->resetParameters();
 
-            $request->setConfig(array(
+            $request->setOptions(array(
                 'timeout' => $this->_httpTimeout
             ));
 

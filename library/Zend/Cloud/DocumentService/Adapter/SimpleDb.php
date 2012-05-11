@@ -17,11 +17,10 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * namespace
- */
 namespace Zend\Cloud\DocumentService\Adapter;
 
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
 use Zend\Cloud\DocumentService\Adapter\SimpleDb\Query,
     Zend\Service\Amazon\Exception as AmazonException,
     Zend\Service\Amazon\SimpleDb\SimpleDb as SimpleDbService,
@@ -68,13 +67,12 @@ class SimpleDb extends AbstractAdapter
     /**
      * Constructor
      *
-     * @param  array|\Zend\Config\Config $options
-     * @return void
+     * @param array|Traversable $options
      */
     public function __construct($options = array())
     {
-        if ($options instanceof \Zend\Config\Config) {
-            $options = $options->toArray();
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
         }
 
         if (!is_array($options)) {

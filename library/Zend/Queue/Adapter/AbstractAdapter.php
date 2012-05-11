@@ -21,10 +21,11 @@
 
 namespace Zend\Queue\Adapter;
 
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
 use Zend\Queue\Adapter,
     Zend\Queue\Queue,
-    Zend\Queue\Exception,
-    Zend\Config\Config;
+    Zend\Queue\Exception;
 
 /**
  * Class for connecting to queues performing common operations.
@@ -43,7 +44,7 @@ abstract class AbstractAdapter implements Adapter
     const CREATE_TIMEOUT_DEFAULT = 30;
 
     /**
-     * Default timeout for recieve() function
+     * Default timeout for receive() function
      */
     const RECEIVE_TIMEOUT_DEFAULT = 30;
 
@@ -86,15 +87,15 @@ abstract class AbstractAdapter implements Adapter
      * host           => (string) What host to connect to, defaults to localhost
      * port           => (string) The port of the database
      *
-     * @param  array|\Zend\Config\Config $config An array having configuration data
+     * @param  array|Traversable $options An array having configuration data
      * @param  \Zend\Queue\Queue The \Zend\Queue\Queue object that created this class
      * @return void
      * @throws \Zend\Queue\Exception
      */
     public function __construct($options, Queue $queue = null)
     {
-        if ($options instanceof Config) {
-            $options = $options->toArray();
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
         }
 
         /*

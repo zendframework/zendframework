@@ -58,6 +58,8 @@ abstract class AbstractSql
 
                     // if not a preparable statement, simply quote the value and move on
                     $values[$vIndex] = $platform->quoteValue($value);
+                } elseif (isset($types[$vIndex]) && $types[$vIndex] == ExpressionInterface::TYPE_LITERAL) {
+                    $values[$vIndex] = $value;
                 }
             }
 
@@ -78,7 +80,6 @@ abstract class AbstractSql
         $paramSpecs = $specification[$topSpec];
 
         $topParameters = array();
-        $position = -1;
         foreach ($parameters as $position => $paramsForPosition) {
             if (isset($paramSpecs[$position]['combinedby'])) {
                 $multiParamValues = array();
@@ -93,7 +94,6 @@ abstract class AbstractSql
             } elseif ($paramSpecs[$position] !== null) {
                 $ppCount = count($paramsForPosition);
                 if (!isset($paramSpecs[$position][$ppCount])) {
-                    //var_dump($specification, $parameters);
                     throw new Exception\RuntimeException('A number of parameters (' . $ppCount . ') was found that is not supported by this specification');
                 }
                 $topParameters[] = vsprintf($paramSpecs[$position][$ppCount], $paramsForPosition);

@@ -1,5 +1,6 @@
 Zend/Acl
 Zend/Authentication
+Zend/Barcode
 Zend/Cache
 Zend/Captcha
 Zend/Cloud
@@ -14,8 +15,7 @@ Zend/DocBook
 Zend/Dojo
 Zend/Dom
 Zend/EventManager
-Zend/Feed/Reader
-Zend/Feed/Writer
+Zend/Feed
 Zend/File
 Zend/Filter
 Zend/Form

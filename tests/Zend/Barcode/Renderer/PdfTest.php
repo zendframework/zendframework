@@ -50,16 +50,6 @@ class PdfTest extends TestCommon
         $this->renderer->setResource($pdfResource, 10);
     }
 
-    public function testObjectPdfResource()
-    {
-        $this->setExpectedException('\Zend\Barcode\Renderer\Exception\ExceptionInterface');
-        $pdfResource = new \StdClass();
-        $this->renderer->setResource($pdfResource);
-    }
-
-    /**
-     * @group fml
-     */
     public function testDrawReturnResource()
     {
         Barcode\Barcode::setBarcodeFont(__DIR__ . '/../Object/_fonts/Vera.ttf');

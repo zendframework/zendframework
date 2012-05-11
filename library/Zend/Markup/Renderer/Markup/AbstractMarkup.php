@@ -35,7 +35,7 @@ use Zend\Markup\Renderer\Markup,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class AbstractMarkup implements Markup
+abstract class AbstractMarkup implements Markup\MarkupInterface
 {
 
     /**
@@ -129,7 +129,7 @@ abstract class AbstractMarkup implements Markup
      *
      * @param  \Zend\Filter\FilterInterface $filter
      * @param  int $priority Priority at which to add filter; higher numbers are executed earlier. Defaults to 0
-     * @return \Zend\Markup\Renderer\AbstractMarkup
+     * @return AbstractMarkup
      */
     public function addFilter(FilterInterface $filter, $priority = 0)
     {

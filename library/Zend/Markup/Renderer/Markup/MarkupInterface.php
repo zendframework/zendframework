@@ -14,22 +14,55 @@
  *
  * @category   Zend
  * @package    Zend_Markup
- * @subpackage Renderer
+ * @subpackage Renderer_Markup
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Markup\Renderer;
+namespace Zend\Markup\Renderer\Markup;
+
+use Zend\Markup\Token,
+    Zend\Filter\FilterInterface,
+    Zend\Markup\Renderer\AbstractRenderer;
 
 /**
- * Exception class for Zend_Markup_Renderer
+ * Interface for a markup
  *
+ * @uses       \Zend\Markup\Renderer\AbstractRenderer
  * @category   Zend
  * @package    Zend_Markup
- * @subpackage Renderer
+ * @subpackage Renderer_Markup
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Exception extends \Zend\Markup\Exception
+interface MarkupInterface extends FilterInterface
 {
+
+    /**
+     * Set the encoding on this markup
+     *
+     * @param string $encoding
+     *
+     * @return MarkupInterface
+     */
+    public function setEncoding($encoding = 'UTF-8');
+
+    /**
+     * Set the renderer on this markup
+     *
+     * @param AbstractRenderer $renderer
+     *
+     * @return MarkupInterface
+     */
+    public function setRenderer(AbstractRenderer $renderer);
+
+    /**
+     * Invoke the markup
+     *
+     * @param Token $token
+     * @param string $text
+     *
+     * @return string
+     */
+    public function __invoke(Token $token, $text);
 }

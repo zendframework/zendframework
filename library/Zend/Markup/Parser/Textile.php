@@ -21,8 +21,7 @@
 
 namespace Zend\Markup\Parser;
 
-use Zend\Markup\Parser,
-    Zend\Markup;
+use Zend\Markup;
 
 /**
  * @category   Zend
@@ -31,8 +30,18 @@ use Zend\Markup\Parser,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Textile implements Parser
+class Textile implements ParserInterface
 {
+
+    /**
+     * Constructor
+     *
+     * @param \Zend\Config\Config|array $options
+     */
+    public function __construct($options = array())
+    {
+        // TODO: Implement __construct() method.
+    }
 
     /**
      * Parse a string
@@ -71,4 +80,5 @@ class Textile implements Parser
     public function tokenize($value)
     {
     }
+
 }

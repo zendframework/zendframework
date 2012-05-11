@@ -111,7 +111,7 @@ class TokenList implements \RecursiveIterator
     /**
      * Check if the element is valid
      *
-     * @return void
+     * @return bool
      */
     public function valid()
     {

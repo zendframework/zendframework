@@ -14,20 +14,55 @@
  *
  * @category   Zend
  * @package    Zend_Markup
+ * @subpackage Parser
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Markup;
+namespace Zend\Markup\Parser;
 
 /**
- * Exception class for Zend_Markup
- *
  * @category   Zend
  * @package    Zend_Markup
+ * @subpackage Parser
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Exception
+interface ParserInterface
 {
+
+    /**
+     * Constructor
+     *
+     * @param \Zend\Config\Config|array $options
+     */
+    public function __construct($options = array());
+
+    /**
+     * Parse a string
+     *
+     * @param  string $value
+     *
+     * @return array
+     */
+    public function parse($value);
+
+    /**
+     * Build a tree with a certain strategy
+     *
+     * @param array $tokens
+     * @param string $strategy
+     *
+     * @return \Zend\Markup\TokenList
+     */
+    public function buildTree(array $tokens, $strategy = 'default');
+
+    /**
+     * Tokenize a string
+     *
+     * @param string $value
+     *
+     * @return array
+     */
+    public function tokenize($value);
 }

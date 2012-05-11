@@ -41,7 +41,6 @@ abstract class AbstractHtml extends AbstractMarkup
     /**
      * Constructor, adds default filters for the filter chain
      *
-     * @return void
      */
     public function __construct()
     {

@@ -20,8 +20,7 @@
 
 namespace Zend\OAuth\Signature;
 
-use Zend\OAuth\Signature as OAuthSignature,
-    Zend\OAuth\Http\Utility as HTTPUtility,
+use Zend\OAuth\Http\Utility as HTTPUtility,
     Zend\OAuth\Exception as OAuthException,
     Zend\Uri;
 
@@ -31,7 +30,7 @@ use Zend\OAuth\Signature as OAuthSignature,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class AbstractSignature implements OAuthSignature
+abstract class AbstractSignature implements SignatureInterface
 {
     /**
      * Hash algorithm to use when generating signature

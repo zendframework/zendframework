@@ -18,13 +18,13 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\OAuth;
+namespace Zend\OAuth\Token;
 
 use Zend\Http\Response as HTTPResponse,
     Zend\OAuth\Http\Utility as HTTPUtility;
 
 
-interface Token
+interface TokenInterface
 {
 
     /**
@@ -38,7 +38,7 @@ interface Token
     /**
      * Retrieve the response object this token is operating on
      * 
-     * @return Zend\Http\Response
+     * @return HTTPResponse
      */
     public function getResponse();
 

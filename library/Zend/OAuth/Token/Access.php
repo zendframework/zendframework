@@ -20,7 +20,7 @@
 
 namespace Zend\OAuth\Token;
 
-use Zend\OAuth\Config,
+use Zend\OAuth\Config\ConfigInterface as Config,
     Zend\OAuth,
     Zend\Uri;
 
@@ -36,7 +36,7 @@ class Access extends AbstractToken
      * Cast to HTTP header
      * 
      * @param  string $url 
-     * @param  \Zend\OAuth\Config $config 
+     * @param  Config $config
      * @param  null|array $customParams 
      * @param  null|string $realm 
      * @return string

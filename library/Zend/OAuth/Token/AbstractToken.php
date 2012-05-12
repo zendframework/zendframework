@@ -19,8 +19,8 @@
  */
 
 namespace Zend\OAuth\Token;
+
 use Zend\Http\Response as HTTPResponse,
-    Zend\OAuth\Token as OAuthToken,
     Zend\OAuth\Http\Utility as HTTPUtility,
     Zend\OAuth\Exception as OAuthException;
 
@@ -30,7 +30,7 @@ use Zend\Http\Response as HTTPResponse,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class AbstractToken implements OAuthToken
+abstract class AbstractToken implements TokenInterface
 {
     /**@+
      * Token constants

@@ -18,7 +18,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\OAuth;
+namespace Zend\OAuth\Exception;
 
 /**
  * @category   Zend
@@ -26,4 +26,5 @@ namespace Zend\OAuth;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Exception extends \Exception {}
+interface ExceptionInterface
+{}

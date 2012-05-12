@@ -101,7 +101,7 @@ class Table extends AbstractBatchStorage
 
         // Perform request
         $response = $this->_performRequest('Tables', $queryString, Request::METHOD_GET, null, true);
-        if ($response->isSuccessful()) {
+        if ($response->isSuccess()) {
             // Parse result
             $result = $this->_parseResponse($response);
 
@@ -131,9 +131,10 @@ class Table extends AbstractBatchStorage
             }
 
             // More tables?
-            if ($response->getHeader('x-ms-continuation-NextTableName') !== null) {
+            if ($response->headers()->get('x-ms-continuation-NextTableName') !== null) {
                 $returnValue = array_merge($returnValue,
-                                           $this->listTables($response->getHeader('x-ms-continuation-NextTableName')));
+                                           $this->listTables($response->headers()
+                                                                 ->get('x-ms-continuation-NextTableName')));
             }
 
             return $returnValue;
@@ -190,7 +191,7 @@ class Table extends AbstractBatchStorage
 
         // Perform request
         $response = $this->_performRequest('Tables', '', Request::METHOD_POST, $headers, true, $requestBody);
-        if ($response->isSuccessful()) {
+        if ($response->isSuccess()) {
             // Parse response
             $entry = $this->_parseResponse($response);
 
@@ -228,7 +229,7 @@ class Table extends AbstractBatchStorage
         // Perform request
         $response = $this->_performRequest(
             'Tables(\'' . $tableName . '\')', '', Request::METHOD_DELETE, $headers, true, null);
-        if (!$response->isSuccessful()) {
+        if (!$response->isSuccess()) {
             throw new RuntimeException($this->_getErrorMessage($response, 'Resource could not be accessed.'));
         }
     }
@@ -285,7 +286,7 @@ class Table extends AbstractBatchStorage
         } else {
             $response = $this->_performRequest($tableName, '', Request::METHOD_POST, $headers, true, $requestBody);
         }
-        if ($response->isSuccessful()) {
+        if ($response->isSuccess()) {
             // Parse result
             $result = $this->_parseResponse($response);
 
@@ -350,7 +351,7 @@ class Table extends AbstractBatchStorage
                 $tableName . '(PartitionKey=\'' . $entity->getPartitionKey() . '\', RowKey=\'' . $entity->getRowKey() .
                 '\')', '', Request::METHOD_DELETE, $headers, true, null);
         }
-        if (!$response->isSuccessful()) {
+        if (!$response->isSuccess()) {
             throw new RuntimeException($this->_getErrorMessage($response, 'Resource could not be accessed.'));
         }
     }
@@ -512,7 +513,7 @@ class Table extends AbstractBatchStorage
             $response = $this->_performRequest($tableName, $queryString, Request::METHOD_GET, array(), true, null);
         }
 
-        if ($response->isSuccessful()) {
+        if ($response->isSuccess()) {
             // Parse result
             $result = $this->_parseResponse($response);
             if (!$result) {
@@ -568,13 +569,15 @@ class Table extends AbstractBatchStorage
             }
 
             // More entities?
-            if ($response->getHeader('x-ms-continuation-NextPartitionKey') !== null &&
-                $response->getHeader('x-ms-continuation-NextRowKey') !== null
+            if ($response->headers()->get('x-ms-continuation-NextPartitionKey') !== null &&
+                $response->headers()->get('x-ms-continuation-NextRowKey') !== null
             ) {
                 if (strpos($queryString, '$top') === false) {
                     $returnValue = array_merge($returnValue, $this->retrieveEntities($tableName, $filter, $entityClass,
-                                                                                     $response->getHeader('x-ms-continuation-NextPartitionKey'),
-                                                                                     $response->getHeader('x-ms-continuation-NextRowKey')));
+                                                                                     $response->headers()
+                                                                                         ->get('x-ms-continuation-NextPartitionKey'),
+                                                                                     $response->headers()
+                                                                                         ->get('x-ms-continuation-NextRowKey')));
                 }
             }
 
@@ -618,7 +621,7 @@ class Table extends AbstractBatchStorage
 
             // Keep only values mentioned in $properties
             $azureValues = $entity->getAzureValues();
-            foreach ($azureValues as $key => $value) {
+            foreach ($azureValues as $value) {
                 if (in_array($value->Name, $properties)) {
                     $mergeEntity->setAzureProperty($value->Name, $value->Value, $value->Type);
                 }
@@ -720,10 +723,10 @@ class Table extends AbstractBatchStorage
                 $tableName . '(PartitionKey=\'' . $entity->getPartitionKey() . '\', RowKey=\'' . $entity->getRowKey() .
                 '\')', '', $httpVerb, $headers, true, $requestBody);
         }
-        if ($response->isSuccessful()) {
+        if ($response->isSuccess()) {
             // Update properties
-            $entity->setEtag($response->getHeader('Etag'));
-            $entity->setTimestamp($response->getHeader('Last-modified'));
+            $entity->setEtag($response->headers()->get('Etag'));
+            $entity->setTimestamp($response->headers()->get('Last-modified'));
 
             return $entity;
         } else {

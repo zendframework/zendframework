@@ -182,11 +182,11 @@ class Blob extends Storage\Storage
         $response = $this->_performRequest($containerName, '?restype=container', Request::METHOD_PUT, $headers, false,
                                            null, Storage\Storage::RESOURCE_CONTAINER,
                                            Credentials\AbstractCredentials::PERMISSION_WRITE);
-        if ($response->isSuccessful()) {
+        if ($response->isSuccess()) {
             return new Storage\BlobContainer(
                 $containerName,
-                $response->getHeader('Etag'),
-                $response->getHeader('Last-modified'),
+                $response->headers()->get('Etag'),
+                $response->headers()->get('Last-modified'),
                 $metadata
             );
         } else {
@@ -215,10 +215,10 @@ class Blob extends Storage\Storage
         $response = $this->_performRequest($containerName, '?restype=container&comp=acl', Request::METHOD_GET, array(),
                                            false, null, Storage\Storage::RESOURCE_CONTAINER,
                                            Credentials\AbstractCredentials::PERMISSION_READ);
-        if ($response->isSuccessful()) {
+        if ($response->isSuccess()) {
             if ($signedIdentifiers == false) {
                 // Only public/private
-                return $response->getHeader('x-ms-prop-publicaccess') == 'True';
+                return $response->headers()->get('x-ms-prop-publicaccess') == 'True';
             } else {
                 // Parse result
                 $result = $this->_parseResponse($response);
@@ -302,7 +302,7 @@ class Blob extends Storage\Storage
                                            array('x-ms-prop-publicaccess' => $acl), false, $policies,
                                            Storage\Storage::RESOURCE_CONTAINER,
                                            Credentials\AbstractCredentials::PERMISSION_WRITE);
-        if (!$response->isSuccessful()) {
+        if (!$response->isSuccess()) {
             throw new RuntimeException($this->_getErrorMessage($response, 'Resource could not be accessed.'));
         }
     }
@@ -327,15 +327,15 @@ class Blob extends Storage\Storage
         $response = $this->_performRequest($containerName, '?restype=container', Request::METHOD_GET, array(), false,
                                            null, Storage\Storage::RESOURCE_CONTAINER,
                                            Credentials\AbstractCredentials::PERMISSION_READ);
-        if ($response->isSuccessful()) {
+        if ($response->isSuccess()) {
             // Parse metadata
-            $metadata = $this->_parseMetadataHeaders($response->getHeaders());
+            $metadata = $this->_parseMetadataHeaders($response->headers()->toArray());
 
             // Return container
             return new Storage\BlobContainer(
                 $containerName,
-                $response->getHeader('Etag'),
-                $response->getHeader('Last-modified'),
+                $response->headers()->get('Etag'),
+                $response->headers()->get('Last-modified'),
                 $metadata
             );
         } else {
@@ -397,7 +397,7 @@ class Blob extends Storage\Storage
         $response = $this->_performRequest($containerName, '?restype=container&comp=metadata', Request::METHOD_PUT,
                                            $headers, false, null, Storage\Storage::RESOURCE_CONTAINER,
                                            Credentials\AbstractCredentials::PERMISSION_WRITE);
-        if (!$response->isSuccessful()) {
+        if (!$response->isSuccess()) {
             throw new RuntimeException($this->_getErrorMessage($response, 'Resource could not be accessed.'));
         }
     }
@@ -428,7 +428,7 @@ class Blob extends Storage\Storage
         $response = $this->_performRequest($containerName, '?restype=container', Request::METHOD_DELETE, $headers,
                                            false, null, Storage\Storage::RESOURCE_CONTAINER,
                                            Credentials\AbstractCredentials::PERMISSION_WRITE);
-        if (!$response->isSuccessful()) {
+        if (!$response->isSuccess()) {
             throw new RuntimeException($this->_getErrorMessage($response, 'Resource could not be accessed.'));
         }
     }
@@ -461,7 +461,7 @@ class Blob extends Storage\Storage
         $response = $this->_performRequest('', $queryString, Request::METHOD_GET, array(), false, null,
                                            Storage\Storage::RESOURCE_CONTAINER,
                                            Credentials\AbstractCredentials::PERMISSION_LIST);
-        if ($response->isSuccessful()) {
+        if ($response->isSuccess()) {
             $xmlContainers = $this->_parseResponse($response)->Containers->Container;
             $xmlMarker     = (string)$this->_parseResponse($response)->NextMarker;
 
@@ -549,12 +549,12 @@ class Blob extends Storage\Storage
         $response = $this->_performRequest($resourceName, '', Request::METHOD_PUT, $headers, false, $fileContents,
                                            Storage\Storage::RESOURCE_BLOB,
                                            Credentials\AbstractCredentials::PERMISSION_WRITE);
-        if ($response->isSuccessful()) {
+        if ($response->isSuccess()) {
             return new Storage\BlobInstance(
                 $containerName,
                 $blobName,
-                $response->getHeader('Etag'),
-                $response->getHeader('Last-modified'),
+                $response->headers()->get('Etag'),
+                $response->headers()->get('Last-modified'),
                 $this->getBaseUrl() . '/' . $containerName . '/' . $blobName,
                 strlen($fileContents),
                 '',
@@ -680,9 +680,9 @@ class Blob extends Storage\Storage
 
         // Upload
         $response = $this->_performRequest($resourceName, '?comp=block&blockid=' . base64_encode($identifier),
-                                           Request::METHOD_PUT, null, false, $contents, Storage\Storage::RESOURCE_BLOB,
+                                           Request::METHOD_PUT, array(), false, $contents, Storage\Storage::RESOURCE_BLOB,
                                            Credentials\AbstractCredentials::PERMISSION_WRITE);
-        if (!$response->isSuccessful()) {
+        if (!$response->isSuccess()) {
             throw new RuntimeException($this->_getErrorMessage($response, 'Resource could not be accessed.'));
         }
     }
@@ -749,7 +749,7 @@ class Blob extends Storage\Storage
         $response = $this->_performRequest($resourceName, '?comp=blocklist', Request::METHOD_PUT, $headers, false,
                                            $fileContents, Storage\Storage::RESOURCE_BLOB,
                                            Credentials\AbstractCredentials::PERMISSION_WRITE);
-        if (!$response->isSuccessful()) {
+        if (!$response->isSuccess()) {
             throw new RuntimeException($this->_getErrorMessage($response, 'Resource could not be accessed.'));
         }
     }
@@ -795,7 +795,7 @@ class Blob extends Storage\Storage
         $response = $this->_performRequest($resourceName, '?comp=blocklist&blocklisttype=' . $blockListType,
                                            Request::METHOD_GET, array(), false, null, Storage\Storage::RESOURCE_BLOB,
                                            Credentials\AbstractCredentials::PERMISSION_READ);
-        if ($response->isSuccessful()) {
+        if ($response->isSuccess()) {
             // Parse response
             $blockList = $this->_parseResponse($response);
 
@@ -888,12 +888,12 @@ class Blob extends Storage\Storage
         $response = $this->_performRequest($destinationResourceName, '', Request::METHOD_PUT, $headers, false, null,
                                            Storage\Storage::RESOURCE_BLOB,
                                            Credentials\AbstractCredentials::PERMISSION_WRITE);
-        if ($response->isSuccessful()) {
+        if ($response->isSuccess()) {
             return new Storage\BlobInstance(
                 $destinationContainerName,
                 $destinationBlobName,
-                $response->getHeader('Etag'),
-                $response->getHeader('Last-modified'),
+                $response->headers()->get('Etag'),
+                $response->headers()->get('Last-modified'),
                 $this->getBaseUrl() . '/' . $destinationContainerName . '/' . $destinationBlobName,
                 0,
                 '',
@@ -945,7 +945,7 @@ class Blob extends Storage\Storage
         $response = $this->_performRequest($resourceName, '', Request::METHOD_GET, $headers, false, null,
                                            Storage\Storage::RESOURCE_BLOB,
                                            Credentials\AbstractCredentials::PERMISSION_READ);
-        if ($response->isSuccessful()) {
+        if ($response->isSuccess()) {
             file_put_contents($localFileName, $response->getBody());
         } else {
             throw new RuntimeException($this->_getErrorMessage($response, 'Resource could not be accessed.'));
@@ -992,21 +992,21 @@ class Blob extends Storage\Storage
         $response = $this->_performRequest($resourceName, '', Request::METHOD_HEAD, $headers, false, null,
                                            Storage\Storage::RESOURCE_BLOB,
                                            Credentials\AbstractCredentials::PERMISSION_READ);
-        if ($response->isSuccessful()) {
+        if ($response->isSuccess()) {
             // Parse metadata
-            $metadata = $this->_parseMetadataHeaders($response->getHeaders());
+            $metadata = $this->_parseMetadataHeaders($response->headers()->toArray());
 
             // Return blob
             return new Storage\BlobInstance(
                 $containerName,
                 $blobName,
-                $response->getHeader('Etag'),
-                $response->getHeader('Last-modified'),
+                $response->headers()->get('Etag'),
+                $response->headers()->get('Last-modified'),
                 $this->getBaseUrl() . '/' . $containerName . '/' . $blobName,
-                $response->getHeader('Content-Length'),
-                $response->getHeader('Content-Type'),
-                $response->getHeader('Content-Encoding'),
-                $response->getHeader('Content-Language'),
+                $response->headers()->get('Content-Length'),
+                $response->headers()->get('Content-Type'),
+                $response->headers()->get('Content-Encoding'),
+                $response->headers()->get('Content-Language'),
                 false,
                 $metadata
             );
@@ -1089,7 +1089,7 @@ class Blob extends Storage\Storage
         $response = $this->_performRequest(
             $containerName . '/' . $blobName, '?comp=metadata', Request::METHOD_PUT, $headers, false, null,
             Storage\Storage::RESOURCE_BLOB, Credentials\AbstractCredentials::PERMISSION_WRITE);
-        if (!$response->isSuccessful()) {
+        if (!$response->isSuccess()) {
             throw new RuntimeException($this->_getErrorMessage($response, 'Resource could not be accessed.'));
         }
     }
@@ -1133,7 +1133,7 @@ class Blob extends Storage\Storage
         $response = $this->_performRequest($resourceName, '', Request::METHOD_DELETE, $headers, false, null,
                                            Storage\Storage::RESOURCE_BLOB,
                                            Credentials\AbstractCredentials::PERMISSION_WRITE);
-        if (!$response->isSuccessful()) {
+        if (!$response->isSuccess()) {
             throw new RuntimeException($this->_getErrorMessage($response, 'Resource could not be accessed.'));
         }
     }
@@ -1179,7 +1179,7 @@ class Blob extends Storage\Storage
         $response = $this->_performRequest($containerName, $queryString, Request::METHOD_GET, array(), false, null,
                                            Storage\Storage::RESOURCE_BLOB,
                                            Credentials\AbstractCredentials::PERMISSION_LIST);
-        if ($response->isSuccessful()) {
+        if ($response->isSuccess()) {
             // Return value
             $blobs = array();
 

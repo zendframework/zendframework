@@ -427,7 +427,7 @@ class Storage
             if (strpos($value, "\r") !== false || strpos($value, "\n") !== false) {
                 throw new DomainException('Metadata cannot contain newline characters.');
             }
-            $headers["x-ms-meta-" . strtolower($key)] = $value;
+            $headers['x-ms-meta-' . strtolower($key)] = $value;
         }
         return $headers;
     }
@@ -448,8 +448,8 @@ class Storage
         // Return metadata
         $metadata = array();
         foreach ($headers as $key => $value) {
-            if (substr(strtolower($key), 0, 10) == "x-ms-meta-") {
-                $metadata[str_replace("x-ms-meta-", '', strtolower($key))] = $value;
+            if (substr(strtolower($key), 0, 10) == 'x-ms-meta-') {
+                $metadata[str_replace('x-ms-meta-', '', strtolower($key))] = $value;
             }
         }
         return $metadata;

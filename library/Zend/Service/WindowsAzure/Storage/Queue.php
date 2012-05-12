@@ -119,7 +119,7 @@ class Queue extends Storage
 
         // Perform request
         $response = $this->_performRequest($queueName, '', Request::METHOD_PUT, $headers);
-        if ($response->isSuccessful()) {
+        if ($response->isSuccess()) {
             return new QueueInstance(
                 $queueName,
                 $metadata
@@ -148,16 +148,16 @@ class Queue extends Storage
 
         // Perform request
         $response = $this->_performRequest($queueName, '?comp=metadata', Request::METHOD_GET);
-        if ($response->isSuccessful()) {
+        if ($response->isSuccess()) {
             // Parse metadata
-            $metadata = $this->_parseMetadataHeaders($response->getHeaders());
+            $metadata = $this->_parseMetadataHeaders($response->headers()->toArray());
 
             // Return queue
             $queue                          = new QueueInstance(
                 $queueName,
                 $metadata
             );
-            $queue->ApproximateMessageCount = intval($response->getHeader('x-ms-approximate-message-count'));
+            $queue->ApproximateMessageCount = intval($response->headers()->get('x-ms-approximate-message-count'));
             return $queue;
         } else {
             throw new RuntimeException($this->_getErrorMessage($response, 'Resource could not be accessed.'));
@@ -213,7 +213,7 @@ class Queue extends Storage
         // Perform request
         $response = $this->_performRequest($queueName, '?comp=metadata', Request::METHOD_PUT, $headers);
 
-        if (!$response->isSuccessful()) {
+        if (!$response->isSuccess()) {
             throw new RuntimeException($this->_getErrorMessage($response, 'Resource could not be accessed.'));
         }
     }
@@ -236,7 +236,7 @@ class Queue extends Storage
 
         // Perform request
         $response = $this->_performRequest($queueName, '', Request::METHOD_DELETE);
-        if (!$response->isSuccessful()) {
+        if (!$response->isSuccess()) {
             throw new RuntimeException($this->_getErrorMessage($response, 'Resource could not be accessed.'));
         }
     }
@@ -267,7 +267,7 @@ class Queue extends Storage
 
         // Perform request
         $response = $this->_performRequest('', $queryString, Request::METHOD_GET);
-        if ($response->isSuccessful()) {
+        if ($response->isSuccess()) {
             $xmlQueues = $this->_parseResponse($response)->Queues->Queue;
             $xmlMarker = (string)$this->_parseResponse($response)->NextMarker;
 
@@ -342,7 +342,7 @@ class Queue extends Storage
         $response = $this->_performRequest(
             $queueName . '/messages', $queryString, Request::METHOD_POST, array(), false, $rawData);
 
-        if (!$response->isSuccessful()) {
+        if (!$response->isSuccess()) {
             throw new RuntimeException('Error putting message into queue.');
         }
     }
@@ -390,7 +390,7 @@ class Queue extends Storage
 
         // Perform request
         $response = $this->_performRequest($queueName . '/messages', $queryString, Request::METHOD_GET);
-        if ($response->isSuccessful()) {
+        if ($response->isSuccess()) {
             // Parse results
             $result = $this->_parseResponse($response);
             if (!$result) {
@@ -453,7 +453,7 @@ class Queue extends Storage
 
         // Perform request
         $response = $this->_performRequest($queueName . '/messages', '', Request::METHOD_DELETE);
-        if (!$response->isSuccessful()) {
+        if (!$response->isSuccess()) {
             throw new RuntimeException('Error clearing messages from queue.');
         }
     }
@@ -482,7 +482,7 @@ class Queue extends Storage
         $response = $this->_performRequest(
             $queueName . '/messages/' . $message->MessageId, '?popreceipt=' . $message->PopReceipt,
             Request::METHOD_DELETE);
-        if (!$response->isSuccessful()) {
+        if (!$response->isSuccess()) {
             throw new RuntimeException($this->_getErrorMessage($response, 'Resource could not be accessed.'));
         }
     }

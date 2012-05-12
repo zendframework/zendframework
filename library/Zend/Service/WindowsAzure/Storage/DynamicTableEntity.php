@@ -153,7 +153,7 @@ class DynamicTableEntity extends TableEntity
     public function getAzurePropertyType($name)
     {
         if (!array_key_exists(strtolower($name), $this->_dynamicProperties)) {
-            $this->setAzureProperty($name, '', $type);
+            $this->setAzureProperty($name, '');
         }
 
         return $this->_dynamicProperties[strtolower($name)]->Type;

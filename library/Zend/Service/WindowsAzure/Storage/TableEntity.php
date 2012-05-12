@@ -221,12 +221,12 @@ class TableEntity
                         case 'edm.boolean':
                             if ($values[$accessor->AzurePropertyName] == 'true' ||
                                 $values[$accessor->AzurePropertyName] == '1'
-                            )
+                            ) {
                                 $values[$accessor->AzurePropertyName] = true;
-                            else
-                                    {
-                                        $values[$accessor->AzurePropertyName] = false;
-                                    }
+                            }
+                            else {
+                                $values[$accessor->AzurePropertyName] = false;
+                            }
                             break;
                         case 'edm.double':
                             $values[$accessor->AzurePropertyName] = floatval($values[$accessor->AzurePropertyName]);
@@ -245,7 +245,8 @@ class TableEntity
                     $this->$method($values[$accessor->AzurePropertyName]);
                 }
             } else if ($throwOnError) {
-                throw new UnknownPropertyException("Property '" . $accessor->AzurePropertyName . "' was not found in \$values array");
+                throw new UnknownPropertyException(
+                    "Property '" . $accessor->AzurePropertyName . "' was not found in \$values array");
             }
         }
 

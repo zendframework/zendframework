@@ -19,7 +19,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Service\WindowsAzure;
+namespace Zend\Service\WindowsAzure\Exception;
 
 /**
  * @category   Zend
@@ -27,5 +27,6 @@ namespace Zend\Service\WindowsAzure;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Exception extends \Exception
-{}
+interface ExceptionInterface
+{
+}

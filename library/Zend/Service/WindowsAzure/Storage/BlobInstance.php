@@ -20,15 +20,16 @@
  */
 
 namespace Zend\Service\WindowsAzure\Storage;
-use Zend\Service\WindowsAzure;
+
+use Zend\Service\WindowsAzure\Exception\UnknownPropertyException;
 
 /**
- * @category   Zend
- * @package    Zend_Service_WindowsAzure
- * @subpackage Storage
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * 
+ * @category                          Zend
+ * @package                           Zend_Service_WindowsAzure
+ * @subpackage                        Storage
+ * @copyright                         Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license                           http://framework.zend.com/license/new-bsd     New BSD License
+ *
  * @property string  $Container       Container name
  * @property string  $Name            Name
  * @property string  $Etag            Etag
@@ -45,14 +46,14 @@ class BlobInstance
 {
     /**
      * Data
-     * 
+     *
      * @var array
      */
     protected $_data = null;
-    
+
     /**
      * Constructor
-     * 
+     *
      * @param string  $containerName   Container name
      * @param string  $name            Name
      * @param string  $etag            Etag
@@ -65,8 +66,9 @@ class BlobInstance
      * @param boolean $isPrefix        Is Prefix?
      * @param array   $metadata        Key/value pairs of meta data
      */
-    public function __construct($containerName, $name, $etag, $lastModified, $url = '', $size = 0, $contentType = '', $contentEncoding = '', $contentLanguage = '', $isPrefix = false, $metadata = array()) 
-    {	        
+    public function __construct($containerName, $name, $etag, $lastModified, $url = '', $size = 0, $contentType = '',
+                                $contentEncoding = '', $contentLanguage = '', $isPrefix = false, $metadata = array())
+    {
         $this->_data = array(
             'container'        => $containerName,
             'name'             => $name,
@@ -81,32 +83,38 @@ class BlobInstance
             'metadata'         => $metadata
         );
     }
-    
+
     /**
      * Magic overload for setting properties
-     * 
+     *
      * @param string $name     Name of the property
      * @param string $value    Value to set
+     * @throws UnknownPropertyException
+     * @return
      */
-    public function __set($name, $value) {
+    public function __set($name, $value)
+    {
         if (array_key_exists(strtolower($name), $this->_data)) {
             $this->_data[strtolower($name)] = $value;
             return;
         }
 
-        throw new WindowsAzure\Exception("Unknown property: " . $name);
+        throw new UnknownPropertyException('Unknown property: ' . $name);
     }
 
     /**
      * Magic overload for getting properties
-     * 
+     *
      * @param string $name     Name of the property
+     * @throws UnknownPropertyException
+     * @return
      */
-    public function __get($name) {
+    public function __get($name)
+    {
         if (array_key_exists(strtolower($name), $this->_data)) {
             return $this->_data[strtolower($name)];
         }
 
-        throw new WindowsAzure\Exception("Unknown property: " . $name);
+        throw new UnknownPropertyException('Unknown property: ' . $name);
     }
 }

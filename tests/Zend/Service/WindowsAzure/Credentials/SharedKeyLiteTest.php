@@ -19,11 +19,10 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Service\WindowsAzure\Credentials;
+namespace ZendTest\Service\WindowsAzure\Credentials;
 
-/**
- * @see Zend_Service_WindowsAzure_Credentials_SharedKeyLite
- */
+use Zend\Service\WindowsAzure\Credentials\AbstractCredentials;
+use Zend\Service\WindowsAzure\Credentials\SharedKeyLite;
 
 /**
  * @category   Zend
@@ -34,14 +33,14 @@ namespace Zend\Service\WindowsAzure\Credentials;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class SharedKeyLiteTest extends \PHPUnit\Framework\TestCase
+class SharedKeyLiteTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * Test signing for devstore with root path
      */
     public function testSignForDevstoreWithRootPath()
     {
-        $credentials = new \Zend\Service\WindowsAzure\Credentials\SharedKeyLite(\Zend\Service\WindowsAzure\Credentials\AbstractCredentials::DEVSTORE_ACCOUNT, \Zend\Service\WindowsAzure\Credentials\AbstractCredentials::DEVSTORE_KEY, true);
+        $credentials = new SharedKeyLite(AbstractCredentials::DEVSTORE_ACCOUNT, AbstractCredentials::DEVSTORE_KEY, true);
         $signedHeaders = $credentials->signRequestHeaders(
                               'GET',
                               '/',
@@ -60,7 +59,7 @@ class SharedKeyLiteTest extends \PHPUnit\Framework\TestCase
      */
     public function testSignForDevstoreWithOtherPath()
     {
-        $credentials = new \Zend\Service\WindowsAzure\Credentials\SharedKeyLite(\Zend\Service\WindowsAzure\Credentials\AbstractCredentials::DEVSTORE_ACCOUNT, \Zend\Service\WindowsAzure\Credentials\AbstractCredentials::DEVSTORE_KEY, true);
+        $credentials = new SharedKeyLite(AbstractCredentials::DEVSTORE_ACCOUNT, AbstractCredentials::DEVSTORE_KEY, true);
         $signedHeaders = $credentials->signRequestHeaders(
                               'GET',
                               '/test',
@@ -79,7 +78,7 @@ class SharedKeyLiteTest extends \PHPUnit\Framework\TestCase
      */
     public function testSignForDevstoreWithQueryString()
     {
-        $credentials = new \Zend\Service\WindowsAzure\Credentials\SharedKeyLite(\Zend\Service\WindowsAzure\Credentials\AbstractCredentials::DEVSTORE_ACCOUNT, \Zend\Service\WindowsAzure\Credentials\AbstractCredentials::DEVSTORE_KEY, true);
+        $credentials = new SharedKeyLite(AbstractCredentials::DEVSTORE_ACCOUNT, AbstractCredentials::DEVSTORE_KEY, true);
         $signedHeaders = $credentials->signRequestHeaders(
                               'GET',
                               '/',
@@ -98,7 +97,7 @@ class SharedKeyLiteTest extends \PHPUnit\Framework\TestCase
      */
     public function testSignForProductionWithRootPath()
     {
-        $credentials = new \Zend\Service\WindowsAzure\Credentials\SharedKeyLite('testing', 'abcdefg');
+        $credentials = new SharedKeyLite('testing', 'abcdefg');
         $signedHeaders = $credentials->signRequestHeaders(
                               'GET',
                               '/',
@@ -117,7 +116,7 @@ class SharedKeyLiteTest extends \PHPUnit\Framework\TestCase
      */
     public function testSignForProductionWithOtherPath()
     {
-        $credentials = new \Zend\Service\WindowsAzure\Credentials\SharedKeyLite('testing', 'abcdefg');
+        $credentials = new SharedKeyLite('testing', 'abcdefg');
         $signedHeaders = $credentials->signRequestHeaders(
                               'GET',
                               '/test',
@@ -136,7 +135,7 @@ class SharedKeyLiteTest extends \PHPUnit\Framework\TestCase
      */
     public function testSignForProductionWithQueryString()
     {
-        $credentials = new \Zend\Service\WindowsAzure\Credentials\SharedKeyLite('testing', 'abcdefg');
+        $credentials = new SharedKeyLite('testing', 'abcdefg');
         $signedHeaders = $credentials->signRequestHeaders(
                               'GET',
                               '/',

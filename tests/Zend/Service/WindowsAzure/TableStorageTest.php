@@ -19,11 +19,11 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Service\WindowsAzure;
+namespace ZendTest\Service\WindowsAzure;
 
-/**
- * @see Zend_Service_WindowsAzure_Storage_Table
- */
+use Zend\Service\WindowsAzure\RetryPolicy\AbstractRetryPolicy;
+use Zend\Service\WindowsAzure\Storage\DynamicTableEntity;
+use Zend\Service\WindowsAzure\Storage\Table;
 
 /**
  * @category   Zend
@@ -34,7 +34,7 @@ namespace Zend\Service\WindowsAzure;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class TableStorageTest extends \PHPUnit\Framework\TestCase
+class TableStorageTest extends \PHPUnit_Framework_TestCase
 {
     public function __construct()
     {
@@ -55,6 +55,9 @@ class TableStorageTest extends \PHPUnit\Framework\TestCase
      */
     protected function tearDown()
     {
+        if (!TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_RUNTESTS) {
+            return;
+        }
         $storageClient = $this->createStorageInstance();
         for ($i = 1; $i <= self::$uniqId; $i++) {
             try { $storageClient->deleteTable(TESTS_ZEND_SERVICE_WINDOWSAZURE_TABLE_TABLENAME_PREFIX . $i); } catch (\Exception $e) { }
@@ -65,9 +68,9 @@ class TableStorageTest extends \PHPUnit\Framework\TestCase
     {
         $storageClient = null;
         if (TESTS_ZEND_SERVICE_WINDOWSAZURE_TABLE_RUNONPROD) {
-            $storageClient = new \Zend\Service\WindowsAzure\Storage\Table(TESTS_ZEND_SERVICE_WINDOWSAZURE_TABLE_HOST_PROD, TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_ACCOUNT_PROD, TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_KEY_PROD, false, \Zend\Service\WindowsAzure\RetryPolicy\AbstractRetryPolicy::retryN(10, 250));
+            $storageClient = new Table(TESTS_ZEND_SERVICE_WINDOWSAZURE_TABLE_HOST_PROD, TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_ACCOUNT_PROD, TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_KEY_PROD, false, AbstractRetryPolicy::retryN(10, 250));
         } else {
-            $storageClient = new \Zend\Service\WindowsAzure\Storage\Table(TESTS_ZEND_SERVICE_WINDOWSAZURE_TABLE_HOST_DEV, TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_ACCOUNT_DEV, TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_KEY_DEV, true, \Zend\Service\WindowsAzure\RetryPolicy\AbstractRetryPolicy::retryN(10, 250));
+            $storageClient = new Table(TESTS_ZEND_SERVICE_WINDOWSAZURE_TABLE_HOST_DEV, TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_ACCOUNT_DEV, TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_KEY_DEV, true, AbstractRetryPolicy::retryN(10, 250));
         }
 
         if (TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_USEPROXY) {
@@ -339,7 +342,7 @@ class TableStorageTest extends \PHPUnit\Framework\TestCase
 
         $storageClient->insertEntity($tableName, $entity);
 
-        $dynamicEntity = new \Zend\Service\WindowsAzure\Storage\DynamicTableEntity($entity->getPartitionKey(), $entity->getRowKey());
+        $dynamicEntity = new DynamicTableEntity($entity->getPartitionKey(), $entity->getRowKey());
         $dynamicEntity->Myproperty = 10;
         $dynamicEntity->Otherproperty = "Test";
         $dynamicEntity->Age = 0;
@@ -370,7 +373,7 @@ class TableStorageTest extends \PHPUnit\Framework\TestCase
 
         $storageClient->insertEntity($tableName, $entity);
 
-        $dynamicEntity = new \Zend\Service\WindowsAzure\Storage\DynamicTableEntity($entity->getPartitionKey(), $entity->getRowKey());
+        $dynamicEntity = new DynamicTableEntity($entity->getPartitionKey(), $entity->getRowKey());
         $dynamicEntity->Myproperty = 10;
         $dynamicEntity->Otherproperty = "Test";
         $dynamicEntity->Age = 0;
@@ -674,7 +677,7 @@ class TableStorageTest extends \PHPUnit\Framework\TestCase
         $returnValue = array();
 
         for ($i = 0; $i < $amount; $i++) {
-            $entity = new \TSTest\TestEntity('partition1', 'row' . ($i + 1));
+            $entity = new TestAsset\Entity('partition1', 'row' . ($i + 1));
             $entity->FullName = md5(uniqid(rand(), true));
             $entity->Age      = rand(1, 130);
             $entity->Visible  = rand(1,2) == 1;
@@ -684,25 +687,4 @@ class TableStorageTest extends \PHPUnit\Framework\TestCase
 
         return $returnValue;
     }
-}
-
-/**
- * Test Zend_Service_WindowsAzure_Storage_TableEntity class
- */
-class TableStorageTest extends \Zend\Service\WindowsAzure\Storage\TableEntity
-{
-    /**
-     * @azure Name
-     */
-    public $FullName;
-
-    /**
-     * @azure Age Edm.Int64
-     */
-    public $Age;
-
-    /**
-     * @azure Visible Edm.Boolean
-     */
-    public $Visible = false;
 }

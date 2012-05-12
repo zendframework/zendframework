@@ -19,124 +19,130 @@
  */
 
 namespace Zend\Service\WindowsAzure\Credentials;
+
 use Zend\Service\WindowsAzure\Storage;
-use Zend\Http\Client;
+use Zend\Http\Request;
 
 /**
  * @category   Zend
  * @package    Zend_Service_WindowsAzure
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- */ 
+ */
 class SharedKey
     extends AbstractCredentials
 {
     /**
-	 * Sign request URL with credentials
-	 *
-	 * @param string $requestUrl Request URL
-	 * @param string $resourceType Resource type
-	 * @param string $requiredPermission Required permission
-	 * @return string Signed request URL
-	 */
-	public function signRequestUrl(
-		$requestUrl = '',
-		$resourceType = Storage\StorageStorage\Storage::RESOURCE_UNKNOWN,
-		$requiredPermission = AbstractCredentialsAbstractCredentials::PERMISSION_READ
-	) {
-	    return $requestUrl;
-	}
-	
-	/**
-	 * Sign request headers with credentials
-	 *
-	 * @param string $httpVerb HTTP verb the request will use
-	 * @param string $path Path for the request
-	 * @param string $queryString Query string for the request
-	 * @param array $headers x-ms headers to add
-	 * @param boolean $forTableStorage Is the request for table storage?
-	 * @param string $resourceType Resource type
-	 * @param string $requiredPermission Required permission
-	 * @return array Array of headers
-	 */
-	public function signRequestHeaders(
-		$httpVerb = Client\ClientClient\Client::GET,
-		$path = '/',
-		$queryString = '',
-		$headers = null,
-		$forTableStorage = false,
-		$resourceType = Storage\StorageStorage\Storage::RESOURCE_UNKNOWN,
-		$requiredPermission = AbstractCredentialsAbstractCredentials::PERMISSION_READ
-	) {
-		// http://github.com/sriramk/winazurestorage/blob/214010a2f8931bac9c96dfeb337d56fe084ca63b/winazurestorage.py
+     * Sign request URL with credentials
+     *
+     * @param string $requestUrl         Request URL
+     * @param string $resourceType       Resource type
+     * @param string $requiredPermission Required permission
+     * @return string Signed request URL
+     */
+    public function signRequestUrl(
+        $requestUrl = '',
+        $resourceType = Storage\Storage::RESOURCE_UNKNOWN,
+        $requiredPermission = AbstractCredentials::PERMISSION_READ
+    )
+    {
+        return $requestUrl;
+    }
 
-		// Determine path
-		if ($this->_usePathStyleUri) {
-			$path = substr($path, strpos($path, '/'));
-		}
+    /**
+     * Sign request headers with credentials
+     *
+     * @param string  $httpVerb           HTTP verb the request will use
+     * @param string  $path               Path for the request
+     * @param string  $queryString        Query string for the request
+     * @param array   $headers            x-ms headers to add
+     * @param boolean $forTableStorage    Is the request for table storage?
+     * @param string  $resourceType       Resource type
+     * @param string  $requiredPermission Required permission
+     * @return array Array of headers
+     */
+    public function signRequestHeaders(
+        $httpVerb = Request::METHOD_GET,
+        $path = '/',
+        $queryString = '',
+        $headers = null,
+        $forTableStorage = false,
+        $resourceType = Storage\Storage::RESOURCE_UNKNOWN,
+        $requiredPermission = AbstractCredentials::PERMISSION_READ
+    )
+    {
+        // http://github.com/sriramk/winazurestorage/blob/214010a2f8931bac9c96dfeb337d56fe084ca63b/winazurestorage.py
 
-		// Determine query
-		$queryString = $this->_prepareQueryStringForSigning($queryString);
-	
-		// Canonicalized headers
-		$canonicalizedHeaders = array();
-		
-		// Request date
-		$requestDate = '';
-		if (isset($headers[AbstractCredentials::PREFIX_STORAGE_HEADER . 'date'])) {
-		    $requestDate = $headers[AbstractCredentials::PREFIX_STORAGE_HEADER . 'date'];
-		} else {
-		    $requestDate = gmdate('D, d M Y H:i:s', time()) . ' GMT'; // RFC 1123
-		    $canonicalizedHeaders[] = AbstractCredentials::PREFIX_STORAGE_HEADER . 'date:' . $requestDate;
-		}
-		
-		// Build canonicalized headers
-		if ($headers !== null) {
-			foreach ($headers as $header => $value) {
-				if (is_bool($value)) {
-					$value = $value === true ? 'True' : 'False';
-				}
+        // Determine path
+        if ($this->_usePathStyleUri) {
+            $path = substr($path, strpos($path, '/'));
+        }
 
-				$headers[$header] = $value;
-				if (substr($header, 0, strlen(AbstractCredentials::PREFIX_STORAGE_HEADER)) == AbstractCredentials::PREFIX_STORAGE_HEADER) {
-				    $canonicalizedHeaders[] = strtolower($header) . ':' . $value;
-				}
-			}
-		}
-		sort($canonicalizedHeaders);
+        // Determine query
+        $queryString = $this->_prepareQueryStringForSigning($queryString);
 
-		// Build canonicalized resource string
-		$canonicalizedResource  = '/' . $this->_accountName;
-		if ($this->_usePathStyleUri) {
-			$canonicalizedResource .= '/' . $this->_accountName;
-		}
-		$canonicalizedResource .= $path;
-		if ($queryString !== '') {
-		    $canonicalizedResource .= $queryString;
-		}
+        // Canonicalized headers
+        $canonicalizedHeaders = array();
 
-		// Create string to sign   
-		$stringToSign   = array();
-		$stringToSign[] = strtoupper($httpVerb); 	// VERB
-    	$stringToSign[] = "";						// Content-MD5
-    	$stringToSign[] = "";						// Content-Type
-    	$stringToSign[] = "";
+        // Request date
+        $requestDate = '';
+        if (isset($headers[AbstractCredentials::PREFIX_STORAGE_HEADER . 'date'])) {
+            $requestDate = $headers[AbstractCredentials::PREFIX_STORAGE_HEADER . 'date'];
+        } else {
+            $requestDate            = gmdate('D, d M Y H:i:s', time()) . ' GMT'; // RFC 1123
+            $canonicalizedHeaders[] = AbstractCredentials::PREFIX_STORAGE_HEADER . 'date:' . $requestDate;
+        }
+
+        // Build canonicalized headers
+        if ($headers !== null) {
+            foreach ($headers as $header => $value) {
+                if (is_bool($value)) {
+                    $value = $value === true ? 'True' : 'False';
+                }
+
+                $headers[$header] = $value;
+                if (substr($header, 0, strlen(AbstractCredentials::PREFIX_STORAGE_HEADER)) ==
+                    AbstractCredentials::PREFIX_STORAGE_HEADER
+                ) {
+                    $canonicalizedHeaders[] = strtolower($header) . ':' . $value;
+                }
+            }
+        }
+        sort($canonicalizedHeaders);
+
+        // Build canonicalized resource string
+        $canonicalizedResource = '/' . $this->_accountName;
+        if ($this->_usePathStyleUri) {
+            $canonicalizedResource .= '/' . $this->_accountName;
+        }
+        $canonicalizedResource .= $path;
+        if ($queryString !== '') {
+            $canonicalizedResource .= $queryString;
+        }
+
+        // Create string to sign
+        $stringToSign   = array();
+        $stringToSign[] = strtoupper($httpVerb); // VERB
+        $stringToSign[] = ""; // Content-MD5
+        $stringToSign[] = ""; // Content-Type
+        $stringToSign[] = "";
         // Date already in $canonicalizedHeaders
-    	// $stringToSign[] = self::PREFIX_STORAGE_HEADER . 'date:' . $requestDate; // Date
-    	
-    	if (!$forTableStorage && count($canonicalizedHeaders) > 0) {
-    		$stringToSign[] = implode("\n", $canonicalizedHeaders); // Canonicalized headers
-    	}
-    		
-    	$stringToSign[] = $canonicalizedResource;		 			// Canonicalized resource
-    	$stringToSign   = implode("\n", $stringToSign);
-    	$signString     = base64_encode(hash_hmac('sha256', $stringToSign, $this->_accountKey, true));
+        // $stringToSign[] = self::PREFIX_STORAGE_HEADER . 'date:' . $requestDate; // Date
 
-    	// Sign request
-    	$headers[AbstractCredentials::PREFIX_STORAGE_HEADER . 'date'] = $requestDate;
-    	$headers['Authorization'] = 'SharedKey ' . $this->_accountName . ':' . $signString;
-    	
-    	// Return headers
-    	return $headers;
-	}
+        if (!$forTableStorage && count($canonicalizedHeaders) > 0) {
+            $stringToSign[] = implode("\n", $canonicalizedHeaders); // Canonicalized headers
+        }
+
+        $stringToSign[] = $canonicalizedResource; // Canonicalized resource
+        $stringToSign   = implode("\n", $stringToSign);
+        $signString     = base64_encode(hash_hmac('sha256', $stringToSign, $this->_accountKey, true));
+
+        // Sign request
+        $headers[AbstractCredentials::PREFIX_STORAGE_HEADER . 'date'] = $requestDate;
+        $headers['Authorization']                                     =
+            'SharedKey ' . $this->_accountName . ':' . $signString;
+
+        // Return headers
+        return $headers;
+    }
 }

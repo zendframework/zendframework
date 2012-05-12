@@ -14,12 +14,14 @@
  *
  * @category   Zend
  * @package    Zend_Service_WindowsAzure
- * @subpackage RetryPolicy
+ * @subpackage Exception
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Service\WindowsAzure\RetryPolicy;
+namespace Zend\Service\WindowsAzure\RetryPolicy\Exception;
+
+use Zend\Service\WindowsAzure\Exception;
 
 /**
  * @category   Zend
@@ -28,36 +30,6 @@ namespace Zend\Service\WindowsAzure\RetryPolicy;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class AbstractRetryPolicy
+interface ExceptionInterface extends Exception\ExceptionInterface
 {
-    /**
-     * Execute function under retry policy
-     *
-     * @param string|array $function       Function to execute
-     * @param array        $parameters     Parameters for function call
-     * @return mixed
-     */
-    public abstract function execute($function, $parameters = array());
-
-    /**
-     * Create a NoRetry instance
-     *
-     * @return NoRetry
-     */
-    public static function noRetry()
-    {
-        return new NoRetry();
-    }
-
-    /**
-     * Create a RetryN instance
-     *
-     * @param int $count                    Number of retries
-     * @param int $intervalBetweenRetries   Interval between retries (in milliseconds)
-     * @return RetryN
-     */
-    public static function retryN($count = 1, $intervalBetweenRetries = 0)
-    {
-        return new RetryN($count, $intervalBetweenRetries);
-    }
 }

@@ -19,15 +19,11 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Service\WindowsAzure;
+namespace ZendTest\Service\WindowsAzure;
 
-/**
- * @see Zend_Service_WindowsAzure_SessionHandler
- */
-
-/**
- * @see Zend_Service_WindowsAzure_Storage_Table
- */
+use Zend\Service\WindowsAzure\SessionHandler;
+use Zend\Service\WindowsAzure\RetryPolicy\AbstractRetryPolicy;
+use Zend\Service\WindowsAzure\Storage\Table;
 
 /**
  * @category   Zend
@@ -38,7 +34,7 @@ namespace Zend\Service\WindowsAzure;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class SessionHandlerTest extends \PHPUnit\Framework\TestCase
+class SessionHandlerTest extends \PHPUnit_Framework_TestCase
 {
     public function __construct()
     {
@@ -70,9 +66,9 @@ class SessionHandlerTest extends \PHPUnit\Framework\TestCase
     {
         $storageClient = null;
         if (TESTS_ZEND_SERVICE_WINDOWSAZURE_SESSIONHANDLER_RUNONPROD) {
-            $storageClient = new \Zend\Service\WindowsAzure\Storage\Table(TESTS_ZEND_SERVICE_WINDOWSAZURE_TABLE_HOST_PROD, TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_ACCOUNT_PROD, TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_KEY_PROD, false, \Zend\Service\WindowsAzure\RetryPolicy\AbstractRetryPolicy::retryN(10, 250));
+            $storageClient = new Table(TESTS_ZEND_SERVICE_WINDOWSAZURE_TABLE_HOST_PROD, TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_ACCOUNT_PROD, TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_KEY_PROD, false, AbstractRetryPolicy::retryN(10, 250));
         } else {
-            $storageClient = new \Zend\Service\WindowsAzure\Storage\Table(TESTS_ZEND_SERVICE_WINDOWSAZURE_TABLE_HOST_DEV, TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_ACCOUNT_DEV, TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_KEY_DEV, true, \Zend\Service\WindowsAzure\RetryPolicy\AbstractRetryPolicy::retryN(10, 250));
+            $storageClient = new Table(TESTS_ZEND_SERVICE_WINDOWSAZURE_TABLE_HOST_DEV, TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_ACCOUNT_DEV, TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_KEY_DEV, true, AbstractRetryPolicy::retryN(10, 250));
         }
 
         if (TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_USEPROXY) {
@@ -84,7 +80,7 @@ class SessionHandlerTest extends \PHPUnit\Framework\TestCase
 
     protected function createSessionHandler($storageInstance, $tableName)
     {
-        $sessionHandler = new \Zend\Service\WindowsAzure\SessionHandler(
+        $sessionHandler = new SessionHandler(
             $storageInstance,
             $tableName
         );
@@ -104,6 +100,9 @@ class SessionHandlerTest extends \PHPUnit\Framework\TestCase
      */
     public function testRegister()
     {
+        if (!TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_RUNTESTS) {
+            return;
+        }
         $storageClient = $this->createStorageInstance();
         $tableName = $this->generateName();
         $sessionHandler = $this->createSessionHandler($storageClient, $tableName);

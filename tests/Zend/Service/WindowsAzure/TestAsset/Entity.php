@@ -14,50 +14,39 @@
  *
  * @category   Zend
  * @package    Zend_Service_WindowsAzure
- * @subpackage RetryPolicy
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Service\WindowsAzure\RetryPolicy;
+namespace ZendTest\Service\WindowsAzure\TestAsset;
+
+use Zend\Service\WindowsAzure\Storage\TableEntity;
 
 /**
+ * Test entity
  * @category   Zend
  * @package    Zend_Service_WindowsAzure
- * @subpackage RetryPolicy
+ * @subpackage UnitTests
+ * @group      Zend_Service
+ * @group      Zend_Service_WindowsAzure
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class AbstractRetryPolicy
+class Entity extends TableEntity
 {
     /**
-     * Execute function under retry policy
-     *
-     * @param string|array $function       Function to execute
-     * @param array        $parameters     Parameters for function call
-     * @return mixed
+     * @azure Name
      */
-    public abstract function execute($function, $parameters = array());
+    public $FullName;
 
     /**
-     * Create a NoRetry instance
-     *
-     * @return NoRetry
+     * @azure Age Edm.Int64
      */
-    public static function noRetry()
-    {
-        return new NoRetry();
-    }
+    public $Age;
 
     /**
-     * Create a RetryN instance
-     *
-     * @param int $count                    Number of retries
-     * @param int $intervalBetweenRetries   Interval between retries (in milliseconds)
-     * @return RetryN
+     * @azure Visible Edm.Boolean
      */
-    public static function retryN($count = 1, $intervalBetweenRetries = 0)
-    {
-        return new RetryN($count, $intervalBetweenRetries);
-    }
+    public $Visible = false;
 }

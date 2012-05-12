@@ -19,11 +19,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Service\WindowsAzure;
-
-/**
- * @see Zend_Service_WindowsAzure_Storage_TableEntity
- */
+namespace ZendTest\Service\WindowsAzure;
 
 /**
  * @category   Zend
@@ -34,14 +30,14 @@ namespace Zend\Service\WindowsAzure;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class TableEntityTest extends \PHPUnit\Framework\TestCase
+class TableEntityTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * Test constructor
      */
     public function testConstructor()
     {
-        $target = new \TSETTest\TestEntity('partition1', '000001');
+        $target = new TestAsset\Entity('partition1', '000001');
         $this->assertEquals('partition1', $target->getPartitionKey());
         $this->assertEquals('000001',     $target->getRowKey());
     }
@@ -51,7 +47,7 @@ class TableEntityTest extends \PHPUnit\Framework\TestCase
      */
     public function testGetAzureValues()
     {
-        $target = new \TSETTest\TestEntity('partition1', '000001');
+        $target = new TestAsset\Entity('partition1', '000001');
         $result = $target->getAzureValues();
 
         $this->assertEquals('Name',       $result[0]->Name);
@@ -80,7 +76,7 @@ class TableEntityTest extends \PHPUnit\Framework\TestCase
             'Visible' => true
         );
 
-        $target = new \TSETTest\TestEntity();
+        $target = new TestAsset\Entity();
         $target->setAzureValues($values);
 
         $this->assertEquals('partition1', $target->getPartitionKey());
@@ -101,7 +97,7 @@ class TableEntityTest extends \PHPUnit\Framework\TestCase
         );
 
         $exceptionRaised = false;
-        $target = new \TSETTest\TestEntity();
+        $target = new TestAsset\Entity();
         try
         {
             $target->setAzureValues($values, true);
@@ -112,25 +108,4 @@ class TableEntityTest extends \PHPUnit\Framework\TestCase
 
         $this->assertTrue($exceptionRaised);
     }
-}
-
-/**
- * Test entity
- */
-class TableEntityTest extends \Zend\Service\WindowsAzure\Storage\TableEntity
-{
-    /**
-     * @azure Name
-     */
-    public $FullName;
-
-    /**
-     * @azure Age Edm.Int64
-     */
-    public $Age;
-
-    /**
-     * @azure Visible Edm.Boolean
-     */
-    public $Visible = false;
 }

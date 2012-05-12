@@ -19,11 +19,9 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Service\WindowsAzure;
+namespace ZendTest\Service\WindowsAzure;
 
-/**
- * @see Zend_Service_WindowsAzure_Storage_TableEntityQuery
- */
+use Zend\Service\WindowsAzure\Storage\TableEntityQuery;
 
 /**
  * @category   Zend
@@ -34,14 +32,14 @@ namespace Zend\Service\WindowsAzure;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class TableEntityQueryTest extends \PHPUnit\Framework\TestCase
+class TableEntityQueryTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * Test all records query
      */
     public function testAllRecordsQuery()
     {
-        $target = new \Zend\Service\WindowsAzure\Storage\TableEntityQuery();
+        $target = new TableEntityQuery();
         $target->select()
                ->from('MyTable');
 
@@ -53,7 +51,7 @@ class TableEntityQueryTest extends \PHPUnit\Framework\TestCase
      */
     public function testPartitionKeyQuery()
     {
-        $target = new \Zend\Service\WindowsAzure\Storage\TableEntityQuery();
+        $target = new TableEntityQuery();
         $target->select()
                ->from('MyTable')
                ->wherePartitionKey('test');
@@ -66,7 +64,7 @@ class TableEntityQueryTest extends \PHPUnit\Framework\TestCase
      */
     public function testRowKeyQuery()
     {
-        $target = new \Zend\Service\WindowsAzure\Storage\TableEntityQuery();
+        $target = new TableEntityQuery();
         $target->select()
                ->from('MyTable')
                ->whereRowKey('test');
@@ -79,7 +77,7 @@ class TableEntityQueryTest extends \PHPUnit\Framework\TestCase
      */
     public function testIdentifierQuery()
     {
-        $target = new \Zend\Service\WindowsAzure\Storage\TableEntityQuery();
+        $target = new TableEntityQuery();
         $target->select()
                ->from('MyTable')
                ->wherePartitionKey('test')
@@ -93,7 +91,7 @@ class TableEntityQueryTest extends \PHPUnit\Framework\TestCase
      */
     public function testTopQuery()
     {
-        $target = new \Zend\Service\WindowsAzure\Storage\TableEntityQuery();
+        $target = new TableEntityQuery();
         $target->select()
                ->from('MyTable')
                ->top(10);
@@ -106,7 +104,7 @@ class TableEntityQueryTest extends \PHPUnit\Framework\TestCase
      */
     public function testOrderByQuery()
     {
-        $target = new \Zend\Service\WindowsAzure\Storage\TableEntityQuery();
+        $target = new TableEntityQuery();
         $target->select()
                ->from('MyTable')
                ->orderBy('Name', 'asc');
@@ -119,7 +117,7 @@ class TableEntityQueryTest extends \PHPUnit\Framework\TestCase
      */
     public function testOrderByMultipleQuery()
     {
-        $target = new \Zend\Service\WindowsAzure\Storage\TableEntityQuery();
+        $target = new TableEntityQuery();
         $target->select()
                ->from('MyTable')
                ->orderBy('Name', 'asc')
@@ -133,7 +131,7 @@ class TableEntityQueryTest extends \PHPUnit\Framework\TestCase
      */
     public function testWhereQuery()
     {
-        $target = new \Zend\Service\WindowsAzure\Storage\TableEntityQuery();
+        $target = new TableEntityQuery();
         $target->select()
                ->from('MyTable')
                ->where('Name eq ?', 'Maarten');
@@ -146,7 +144,7 @@ class TableEntityQueryTest extends \PHPUnit\Framework\TestCase
      */
     public function testWhereArrayQuery()
     {
-        $target = new \Zend\Service\WindowsAzure\Storage\TableEntityQuery();
+        $target = new TableEntityQuery();
         $target->select()
                ->from('MyTable')
                ->where('Name eq ? or Name eq ?', array('Maarten', 'Vijay'));
@@ -159,7 +157,7 @@ class TableEntityQueryTest extends \PHPUnit\Framework\TestCase
      */
     public function testWhereMultipleQuery()
     {
-        $target = new \Zend\Service\WindowsAzure\Storage\TableEntityQuery();
+        $target = new TableEntityQuery();
         $target->select()
                ->from('MyTable')
                ->where('Name eq ?', 'Maarten')

@@ -19,11 +19,9 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Service\WindowsAzure;
+namespace ZendTest\Service\WindowsAzure;
 
-/**
- * @see Zend_Service_WindowsAzure_RetryPolicy_AbstractRetryPolicy
- */
+use Zend\Service\WindowsAzure\RetryPolicy\AbstractRetryPolicy;
 
 /**
  * @category   Zend
@@ -34,7 +32,7 @@ namespace Zend\Service\WindowsAzure;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class RetryPolicyTest extends \PHPUnit\Framework\TestCase
+class RetryPolicyTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * Helper variable for counting retries
@@ -56,7 +54,7 @@ class RetryPolicyTest extends \PHPUnit\Framework\TestCase
     public function testNoRetry()
     {
         $this->_executedRetries = 0;
-        $policy = \Zend\Service\WindowsAzure\RetryPolicy\AbstractRetryPolicy::noRetry();
+        $policy = AbstractRetryPolicy::noRetry();
         $retries = $policy->execute(
             array($this, '_countRetries')
         );
@@ -71,7 +69,7 @@ class RetryPolicyTest extends \PHPUnit\Framework\TestCase
         $this->_executedRetries = 0;
         $this->_exceptionCount = 9;
 
-        $policy = \Zend\Service\WindowsAzure\RetryPolicy\AbstractRetryPolicy::retryN(10, 100);
+        $policy = AbstractRetryPolicy::retryN(10, 100);
         $retries = $policy->execute(
             array($this, '_countRetriesAndThrowExceptions')
         );

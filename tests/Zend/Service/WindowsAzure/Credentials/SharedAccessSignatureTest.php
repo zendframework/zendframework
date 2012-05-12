@@ -19,11 +19,10 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Service\WindowsAzure\Credentials;
+namespace ZendTest\Service\WindowsAzure\Credentials;
 
-/**
- * @see Zend_Service_WindowsAzure_Credentials_SharedAccessSignature
- */
+use Zend\Service\WindowsAzure\Credentials\SharedAccessSignature;
+use Zend\Service\WindowsAzure\Storage\Storage;
 
 /**
  * @category   Zend
@@ -34,14 +33,14 @@ namespace Zend\Service\WindowsAzure\Credentials;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class SharedAccessSignatureTest extends \PHPUnit\Framework\TestCase
+class SharedAccessSignatureTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * Test signing a container
      */
     public function testGenerateSignatureContainer()
     {
-        $credentials = new \Zend\Service\WindowsAzure\Credentials\SharedAccessSignature('myaccount', 'WXuEUKMijV/pxUu5/RhDn1bYRuFlLSbmLUJJWRqYQ/uxbMpEx+7S/jo9sT3ZIkEucZGbEafDuxD1kwFOXf3xyw==', false);
+        $credentials = new SharedAccessSignature('myaccount', 'WXuEUKMijV/pxUu5/RhDn1bYRuFlLSbmLUJJWRqYQ/uxbMpEx+7S/jo9sT3ZIkEucZGbEafDuxD1kwFOXf3xyw==', false);
         $result = $credentials->createSignature(
             'pictures',
             'c',
@@ -58,7 +57,7 @@ class SharedAccessSignatureTest extends \PHPUnit\Framework\TestCase
      */
     public function testGenerateSignatureBlob()
     {
-        $credentials = new \Zend\Service\WindowsAzure\Credentials\SharedAccessSignature('myaccount', 'WXuEUKMijV/pxUu5/RhDn1bYRuFlLSbmLUJJWRqYQ/uxbMpEx+7S/jo9sT3ZIkEucZGbEafDuxD1kwFOXf3xyw==', false);
+        $credentials = new SharedAccessSignature('myaccount', 'WXuEUKMijV/pxUu5/RhDn1bYRuFlLSbmLUJJWRqYQ/uxbMpEx+7S/jo9sT3ZIkEucZGbEafDuxD1kwFOXf3xyw==', false);
         $result = $credentials->createSignature(
             'pictures/blob.txt',
             'b',
@@ -74,7 +73,7 @@ class SharedAccessSignatureTest extends \PHPUnit\Framework\TestCase
      */
     public function testContainerSignedQueryString()
     {
-        $credentials = new \Zend\Service\WindowsAzure\Credentials\SharedAccessSignature('myaccount', '', false);
+        $credentials = new SharedAccessSignature('myaccount', '', false);
         $result = $credentials->createSignedQueryString(
             'pictures',
             '',
@@ -92,7 +91,7 @@ class SharedAccessSignatureTest extends \PHPUnit\Framework\TestCase
      */
     public function testBlobSignedQueryString()
     {
-        $credentials = new \Zend\Service\WindowsAzure\Credentials\SharedAccessSignature('myaccount', '', false);
+        $credentials = new SharedAccessSignature('myaccount', '', false);
         $result = $credentials->createSignedQueryString(
             'pictures/blob.txt',
         	'',
@@ -109,7 +108,7 @@ class SharedAccessSignatureTest extends \PHPUnit\Framework\TestCase
      */
     public function testSignRequestUrl()
     {
-        $credentials = new \Zend\Service\WindowsAzure\Credentials\SharedAccessSignature('myaccount', '', false);
+        $credentials = new SharedAccessSignature('myaccount', '', false);
         $queryString = $credentials->createSignedQueryString('pictures/blob.txt', '', 'b', 'r', '2009-02-09', '2009-02-10');
 
         $credentials->setPermissionSet(array(
@@ -117,7 +116,7 @@ class SharedAccessSignatureTest extends \PHPUnit\Framework\TestCase
         ));
 
         $requestUrl = 'http://blob.core.windows.net/myaccount/pictures/blob.txt?comp=metadata';
-        $result = $credentials->signRequestUrl($requestUrl, \Zend\Service\WindowsAzure\Storage::RESOURCE_BLOB);
+        $result = $credentials->signRequestUrl($requestUrl, Storage::RESOURCE_BLOB);
 
         $this->assertEquals('http://blob.core.windows.net/myaccount/pictures/blob.txt?comp=metadata&' . $queryString, $result);
     }

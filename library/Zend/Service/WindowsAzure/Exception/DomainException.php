@@ -14,34 +14,19 @@
  *
  * @category   Zend
  * @package    Zend_Service_WindowsAzure
- * @subpackage RetryPolicy
+ * @subpackage Exception
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Service\WindowsAzure\RetryPolicy;
+namespace Zend\Service\WindowsAzure\Exception;
 
 /**
  * @category   Zend
  * @package    Zend_Service_WindowsAzure
- * @subpackage RetryPolicy
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class NoRetry extends AbstractRetryPolicy
+class DomainException extends RuntimeException
 {
-    /**
-     * Execute function under retry policy
-     *
-     * @param string|array $function   Function to execute
-     * @param array        $parameters Parameters for function call
-     * @return mixed
-     */
-    public function execute($function, $parameters = array())
-    {
-        $returnValue = null;
-
-        $returnValue = call_user_func_array($function, $parameters);
-        return $returnValue;
-    }
 }

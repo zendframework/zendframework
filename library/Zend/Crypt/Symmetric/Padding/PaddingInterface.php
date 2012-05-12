@@ -1,5 +1,5 @@
 <?php
-namespace Zend\Crypt\Padding;
+namespace Zend\Crypt\Symmetric\Padding;
 
 interface PaddingInterface {
 

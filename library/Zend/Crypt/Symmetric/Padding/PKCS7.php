@@ -1,6 +1,6 @@
 <?php
 
-namespace Zend\Crypt\Padding;
+namespace Zend\Crypt\Symmetric\Padding;
 
 class PKCS7 implements PaddingInterface {
 

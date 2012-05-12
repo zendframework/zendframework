@@ -22,7 +22,7 @@
 namespace ZendTest\Crypt\Symmetric;
 
 use Zend\Crypt\Symmetric\Mcrypt,
-    Zend\Crypt\Padding\PKCS7,
+    Zend\Crypt\Symmetric\Padding\PKCS7,
     Zend\Config\Config;
 
 /**
@@ -57,11 +57,11 @@ class McryptTest extends \PHPUnit_Framework_TestCase
     public function testConstructByParams()
     {
         $options = array(
-            'algorithm' => MCRYPT_BLOWFISH,
-            'mode'      => MCRYPT_MODE_CFB,
+            'algorithm' => 'blowfish',
+            'mode'      => 'cfb',
             'key'       => $this->key,
             'salt'      => $this->salt,
-            'padding'   => new PKCS7()
+            'padding'   => 'pkcs7'
         );
         $mcrypt = new Mcrypt($options);
         $this->assertTrue($mcrypt instanceof Mcrypt);
@@ -75,11 +75,11 @@ class McryptTest extends \PHPUnit_Framework_TestCase
     public function testConstructByConfig()
     {
         $options = array(
-            'algorithm' => MCRYPT_BLOWFISH,
-            'mode'      => MCRYPT_MODE_CFB,
+            'algorithm' => 'blowfish',
+            'mode'      => 'cfb',
             'key'       => $this->key,
             'salt'      => $this->salt,
-            'padding'   => new PKCS7()
+            'padding'   => 'pkcs7'
         );
         $config = new Config($options);
         $mcrypt = new Mcrypt($config);
@@ -89,7 +89,6 @@ class McryptTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($mcrypt->getKey(), $this->key);
         $this->assertEquals($mcrypt->getSalt(), $this->salt);
         $this->assertTrue($mcrypt->getPadding() instanceof PKCS7);
-        
     }
     
     public function testConstructWrongParam()

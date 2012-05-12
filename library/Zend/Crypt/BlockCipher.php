@@ -23,7 +23,7 @@ namespace Zend\Crypt;
 use Zend\Crypt\Symmetric\SymmetricInterface,
     Zend\Crypt\Hmac,
     Zend\Crypt\Tool,
-    Zend\Crypt\Key\Derivation\PBKDF2,
+    Zend\Crypt\Key\Derivation\PBKDF2,      
     Zend\Math\Math;
 
 /**
@@ -47,6 +47,12 @@ class BlockCipher
      * @var SymmetricInterface 
      */
     protected $cipher;   
+    /**
+     * Symmetric cipher broker
+     *
+     * @var SymmetricBroker
+     */
+    protected static $symmetricBroker = null;
     /**
      * Hash algorithm fot HMAC
      * 
@@ -74,11 +80,67 @@ class BlockCipher
     /**
      * Constructor
      * 
-     * @param array $options 
+     * @param Symmetric\SymmetricInterface $cipher
      */
-    public function __construct(SymmetricInterface $cipher = null) 
+    public function __construct($cipher) 
     { 
+        if (!$cipher instanceof Symmetric\SymmetricInterface) {
+            throw new Exception\InvalidArgumentException(
+                    __CLASS__ . ' only accepts instances of type Zend\Crypt\Symmetric\SymmetricInterface'
+            );
+        }
         $this->cipher = $cipher; 
+    }
+    /**
+     * Factory.
+     *
+     * @param  string $adapter
+     * @param  array $options
+     * @return BlockCipher
+     */
+    public static function factory($adapter, $options = array())
+    {
+        $broker  = self::getSymmetricBroker();
+        $adapter = $broker->load($adapter, array($options));
+        return new self($adapter);
+    }
+    /**
+     * Returns the symmetric cipher broker.  If it doesn't exist it's created.
+     *
+     * @return SymmetricBroker
+     */
+    public static function getSymmetricBroker()
+    {
+        if (self::$symmetricBroker === null) {
+            self::setSymmetricBroker(new SymmetricBroker());
+        }
+
+        return self::$symmetricBroker;
+    }
+    /**
+     * Set the symmetric cipher broker
+     * 
+     * @param  Broker $broker 
+     * @return void
+     */
+    public static function setSymmetricBroker($broker)
+    {
+        if (is_string($broker)) {
+            if (!class_exists($broker)) {
+                throw new Exception\InvalidArgumentException(sprintf(
+                    'Unable to locate symmetric cipher broker of class "%s"',
+                    $broker
+                ));
+            }
+            $broker = new $broker();
+        }
+        if (!$broker instanceof SymmetricBroker) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                'Symmetric cipher broker must extend SymmetricBroker; received "%s"',
+                (is_object($broker) ? get_class($broker) : gettype($broker))
+            ));
+        }
+        self::$symmetricBroker = $broker;
     }
     /**
      * Set the symmetric cipher

@@ -2,8 +2,7 @@
 
 namespace Zend\Crypt\Symmetric;
 
-use Zend\Crypt\Padding\PaddingInterface,
-    Zend\Config\Config;
+use Zend\Config\Config;
 
 /**
  * Simmetric encryption using the Mcrypt extension
@@ -15,11 +14,43 @@ use Zend\Crypt\Padding\PaddingInterface,
  */
 class Mcrypt implements SymmetricInterface
 {
+    const DEFAULT_PADDING = 'pkcs7';
+    /**
+     * Key
+     * 
+     * @var string 
+     */
     protected $key;
+    /**
+     * IV
+     * 
+     * @var string 
+     */
     protected $iv;
+    /**
+     * Encryption algorithm
+     * 
+     * @var string 
+     */
     protected $algo = 'aes';
+    /**
+     * Encryption mode
+     * 
+     * @var sting 
+     */
     protected $mode = 'cbc';
+    /**
+     * Padding
+     * 
+     * @var Padding\PaddingInterface 
+     */
     protected $padding;
+    /**
+     * Padding broker
+     *
+     * @var PaddingBroker
+     */
+    protected static $paddingBroker = null;
     /**
      * Supported cipher algorithms
      * 
@@ -90,11 +121,69 @@ class Mcrypt implements SymmetricInterface
                         $this->setSalt($value);
                         break;
                     case 'padding':
-                        $this->setPadding($value);
+                        $broker  = self::getPaddingBroker();
+                        $padding = $broker->load($value, array());
+                        $this->padding = $padding;
                         break;
                 }
             }
         }
+        $this->setDefaultOptions($options);
+    }
+    /**
+     * Set default options
+     * 
+     * @param  array $options
+     * @return void 
+     */
+    protected function setDefaultOptions($options = array())
+    {
+        if (empty($options)) {
+            return;
+        }
+        if (!isset($options['padding'])) {
+            $broker  = self::getPaddingBroker();
+            $padding = $broker->load(seld::DEFAULT_PADDING, array());
+            $this->padding = $padding;
+        }
+    }
+    /**
+     * Returns the padding broker.  If it doesn't exist it's created.
+     *
+     * @return PaddingBroker
+     */
+    public static function getPaddingBroker()
+    {
+        if (self::$paddingBroker === null) {
+            self::setPaddingBroker(new PaddingBroker());
+        }
+
+        return self::$paddingBroker;
+    }
+    /**
+     * Set the symmetric cipher broker
+     * 
+     * @param  PaddingBroker $broker 
+     * @return void
+     */
+    public static function setPaddingBroker($broker)
+    {
+        if (is_string($broker)) {
+            if (!class_exists($broker)) {
+                throw new Exception\InvalidArgumentException(sprintf(
+                    'Unable to locate padding broker of class "%s"',
+                    $broker
+                ));
+            }
+            $broker = new $broker();
+        }
+        if (!$broker instanceof PaddingBroker) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                'Padding broker must extend PaddingBroker; received "%s"',
+                (is_object($broker) ? get_class($broker) : gettype($broker))
+            ));
+        }
+        self::$paddingBroker = $broker;
     }
     /**
      * Get the maximum key size for the selected cipher and mode of operation
@@ -163,7 +252,7 @@ class Mcrypt implements SymmetricInterface
      * @param  PaddingInterface $padding 
      * @return BlockCipher
      */
-    public function setPadding(PaddingInterface $padding)
+    public function setPadding(Padding\PaddingInterface $padding)
     {
         $this->padding = $padding;
         return $this;

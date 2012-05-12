@@ -19,9 +19,9 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace ZendTest\Crypt\Padding;
+namespace ZendTest\Crypt\Symmetric\Padding;
 
-use Zend\Crypt\Padding\PKCS7;
+use Zend\Crypt\Symmetric\Padding\PKCS7;
 
 /**
  * @category   Zend

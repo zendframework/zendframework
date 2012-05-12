@@ -22,7 +22,6 @@
 namespace ZendTest\Crypt;
 
 use Zend\Crypt\BlockCipher,
-    Zend\Crypt\Padding\PKCS7,
     Zend\Crypt\Symmetric\Mcrypt;
 
 /**
@@ -44,7 +43,7 @@ class BlockCipherTest extends \PHPUnit_Framework_TestCase
             $cipher = new Mcrypt(array(
                     'algorithm' => 'aes',
                     'mode'      => 'cbc',
-                    'padding'   =>  new PKCS7()
+                    'padding'   => 'pkcs7'
             ));
             $this->blockCipher = new BlockCipher($cipher);
         } catch (Exception\RuntimeException $e) {
@@ -56,12 +55,17 @@ class BlockCipherTest extends \PHPUnit_Framework_TestCase
     public function testSetCipher()
     {
         $mcrypt = new Mcrypt();
-        $blockCipher = new BlockCipher();
-        $result = $blockCipher->setCipher($mcrypt);
-        $this->assertEquals($result, $blockCipher);
-        $this->assertEquals($mcrypt, $blockCipher->getCipher());      
+        $result = $this->blockCipher->setCipher($mcrypt);
+        $this->assertEquals($result, $this->blockCipher);
+        $this->assertEquals($mcrypt, $this->blockCipher->getCipher());      
     }
         
+    public function testFactory()
+    {
+        $this->blockCipher = BlockCipher::factory('mcrypt');
+        $this->assertTrue($this->blockCipher->getCipher() instanceof Mcrypt);
+    }
+    
     public function testSetKey()
     {
         $result = $this->blockCipher->setKey('test');

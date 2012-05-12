@@ -543,7 +543,7 @@ class Currency
             } else {
                 throw new Exception\InvalidArgumentException("No region found within the locale '" . (string) $locale . "'");
             }
-        } catch (Locale\Exception $e) {
+        } catch (Locale\Exception\ExceptionInterface $e) {
             throw new Exception\InvalidArgumentException($e->getMessage());
         }
 
@@ -857,7 +857,7 @@ class Currency
                 case 'script':
                     try {
                         Locale\Format::convertNumerals(0, $options['script']);
-                    } catch (Locale\Exception $e) {
+                    } catch (Locale\Exception\ExceptionInterface $e) {
                         throw new Exception\InvalidArgumentException($e->getMessage());
                     }
                     break;

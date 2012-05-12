@@ -1,29 +1,35 @@
 <?php
 /**
- * Zend Framework (http://framework.zend.com/)
+ * Zend Framework
  *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Crypt
- */
-
-namespace Zend\Crypt;
-
-use Zend\Crypt\Exception\HmacException;
-
-/**
- * PHP implementation of the RFC 2104 Hash based Message Authentication Code
- * algorithm.
+ * LICENSE
  *
- * @todo  Patch for refactoring failed tests (key block sizes >80 using internal algo)
- * @todo       Check if mhash() is a required alternative (will be PECL-only soon)
+ * This source file is subject to the new BSD license that is bundled
+ * with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://framework.zend.com/license/new-bsd
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@zend.com so we can send you a copy immediately.
+ *
  * @category   Zend
  * @package    Zend_Crypt
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Hmac extends Crypt
+
+namespace Zend\Crypt;
+
+/**
+ * PHP implementation of the RFC 2104 Hash based Message Authentication Code
+ * algorithm.
+ *
+ * @category   Zend
+ * @package    Zend_Crypt
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
+class Hmac
 {
 
     /**
@@ -94,10 +100,10 @@ class Hmac extends Crypt
     {
         // set the key
         if (!isset($key) || empty($key)) {
-            throw new HmacException('provided key is null or empty');
+            throw new Exception\InvalidArgumentException('Provided key is null or empty');
         }
         self::$_key = $key;
-
+        
         // set the hash
         self::_setHashAlgorithm($hash);
 
@@ -105,6 +111,10 @@ class Hmac extends Crypt
         return self::_hash($data, $output);
     }
 
+    public static function getOutputSize($hash, $output = self::STRING)
+    {
+        return strlen(self::compute('key', $hash, 'data', $output));
+    }
     /**
      * Setter for the hash method.
      *
@@ -114,65 +124,39 @@ class Hmac extends Crypt
     protected static function _setHashAlgorithm($hash)
     {
         if (!isset($hash) || empty($hash)) {
-            throw new HmacException('provided hash string is null or empty');
+            throw new Exception\InvalidArgumentException('Provided hash string is null or empty');
         }
 
         $hash = strtolower($hash);
         $hashSupported = false;
 
-        if (function_exists('hash_algos') && in_array($hash, hash_algos())) {
-            $hashSupported = true;
+        if (!in_array($hash, self::$_supportedMhashAlgorithms)) {
+            throw new Exception\InvalidArgumentException('Hash algorithm provided is not supported on this PHP installation');
         }
-
-        if ($hashSupported === false && function_exists('mhash') && in_array($hash, self::$_supportedAlgosMhash)) {
-            $hashSupported = true;
-        }
-
-        if ($hashSupported === false) {
-            throw new HmacException('hash algorithm provided is not supported on this PHP installation; please enable the hash or mhash extensions');
-        }
+        
         self::$_hashAlgorithm = $hash;
+        
+        return true;
     }
 
     /**
      * Perform HMAC and return the keyed data
      *
-     * @param string $data
-     * @param string $output
-     * @param bool $internal Option to not use hash() functions for testing
+     * @param  string $data
+     * @param  string $output
      * @return string
      */
-    protected static function _hash($data, $output = self::STRING, $internal = false)
+    protected static function _hash($data, $output = self::STRING)
     {
-        if (function_exists('hash_hmac')) {
-            if ($output == self::BINARY) {
-                return hash_hmac(self::$_hashAlgorithm, $data, self::$_key, 1);
-            }
+        if ($output == self::BINARY) {
+            return hash_hmac(self::$_hashAlgorithm, $data, self::$_key, 1);
+        } else {
             return hash_hmac(self::$_hashAlgorithm, $data, self::$_key);
         }
-
-        if (function_exists('mhash')) {
-            if ($output == self::BINARY) {
-                return mhash(self::_getMhashDefinition(self::$_hashAlgorithm), $data, self::$_key);
-            }
-            $bin = mhash(self::_getMhashDefinition(self::$_hashAlgorithm), $data, self::$_key);
-            return bin2hex($bin);
-        }
     }
-
-    /**
-     * Since MHASH accepts an integer constant representing the hash algorithm
-     * we need to make a small detour to get the correct integer matching our
-     * algorithm's name.
-     *
-     * @param string $hashAlgorithm
-     * @return integer
-     */
-    protected static function _getMhashDefinition($hashAlgorithm)
+    
+    public static function getSupportedAlgorithms()
     {
-        for ($i = 0; $i <= mhash_count(); $i++) {
-            $types[mhash_get_hash_name($i)] = $i;
-        }
-        return $types[strtoupper($hashAlgorithm)];
+        return self::$_supportedMhashAlgorithms;
     }
 }

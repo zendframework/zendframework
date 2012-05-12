@@ -14,23 +14,23 @@
  *
  * @category   Zend
  * @package    Zend_Crypt
- * @subpackage Exception
+ * @subpackage Rsa_Exception
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Crypt\Exception;
+namespace Zend\Crypt\PublicKey\Rsa\Exception;
 
 /**
- * Invalid argument exception
+ * Runtime argument exception
  *
  * @category   Zend
  * @package    Zend_Crypt
- * @subpackage Exception
+ * @subpackage Rsa_Exception
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class InvalidArgumentException
-    extends \InvalidArgumentException
-    implements \Zend\Crypt\Exception\ExceptionInterface
+class RuntimeException
+    extends \RuntimeException
+    implements \Zend\Crypt\PublicKey\Rsa\Exception\ExceptionInterface
 {}

@@ -14,23 +14,41 @@
  *
  * @category   Zend
  * @package    Zend_Crypt
- * @subpackage Exception
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Crypt\Exception;
+namespace ZendTest\Crypt\Key\Derivation;
+
+use Zend\Crypt\Key\Derivation\PBKDF2;
 
 /**
- * Invalid argument exception
- *
  * @category   Zend
  * @package    Zend_Crypt
- * @subpackage Exception
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class InvalidArgumentException
-    extends \InvalidArgumentException
-    implements \Zend\Crypt\Exception\ExceptionInterface
-{}
+class PBKDF2Test extends \PHPUnit_Framework_TestCase
+{
+        
+    public function setUp()
+    {
+        $this->salt = '12345678901234567890123456789012';
+    }
+    
+    public function testCalc()
+    {
+        $password = PBKDF2::calc('sha256', 'test', $this->salt, 5000, 32);
+        $this->assertEquals(32, strlen($password));
+        $this->assertEquals(base64_encode($password), '323tCTB8Z/KVrJYWPvMoKqbL34gMziymMdvYTfELpKI=');
+    }
+    
+    public function testCalcWithWrongHash()
+    {
+        $this->setExpectedException('Zend\Crypt\Key\Derivation\Exception\InvalidArgumentException','The hash algorihtm wrong is not supported by Zend\Crypt\Key\Derivation\PBKDF2');
+        $password = PBKDF2::calc('wrong', 'test', $this->salt, 5000, 32);
+    }
+    
+}

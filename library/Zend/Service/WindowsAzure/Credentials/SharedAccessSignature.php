@@ -18,14 +18,18 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
+namespace Zend\Service\WindowsAzure\Credentials;
+use Zend\Service\WindowsAzure\Storage;
+use Zend\Http\Client;
+
 /**
  * @category   Zend
  * @package    Zend_Service_WindowsAzure
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */ 
-class Zend_Service_WindowsAzure_Credentials_SharedAccessSignature
-    extends Zend_Service_WindowsAzure_Credentials_AbstractCredentials
+class SharedAccessSignature
+    extends AbstractCredentials
 {
     /**
      * Permission set
@@ -43,8 +47,8 @@ class Zend_Service_WindowsAzure_Credentials_SharedAccessSignature
 	 * @param array $permissionSet Permission set
 	 */
 	public function __construct(
-		$accountName = Zend_Service_WindowsAzure_Credentials_AbstractCredentials::DEVSTORE_ACCOUNT,
-		$accountKey  = Zend_Service_WindowsAzure_Credentials_AbstractCredentials::DEVSTORE_KEY,
+		$accountName = AbstractCredentialsAbstractCredentials::DEVSTORE_ACCOUNT,
+		$accountKey  = AbstractCredentialsAbstractCredentials::DEVSTORE_KEY,
 		$usePathStyleUri = false, $permissionSet = array()
 	) {
 	    parent::__construct($accountName, $accountKey, $usePathStyleUri);
@@ -77,7 +81,7 @@ class Zend_Service_WindowsAzure_Credentials_SharedAccessSignature
 	{
 		foreach ($value as $url) {
 			if (strpos($url, $this->_accountName) === false) {
-				throw new Zend_Service_WindowsAzure_Exception('The permission set can only contain URLs for the account name specified in the Zend_Service_WindowsAzure_Credentials_SharedAccessSignature instance.');
+				throw new \Zend\Service\WindowsAzure\Exception('The permission set can only contain URLs for the account name specified in the Zend_Service_WindowsAzure_Credentials_SharedAccessSignature instance.');
 			}
 		}
 	    $this->_permissionSet = $value;
@@ -188,13 +192,13 @@ class Zend_Service_WindowsAzure_Credentials_SharedAccessSignature
     public function permissionMatchesRequest(
     	$permissionUrl = '',
     	$requestUrl = '',
-    	$resourceType = Zend_Service_WindowsAzure_Storage::RESOURCE_UNKNOWN,
-    	$requiredPermission = Zend_Service_WindowsAzure_Credentials_AbstractCredentials::PERMISSION_READ
+    	$resourceType = Storage\StorageStorage\Storage::RESOURCE_UNKNOWN,
+    	$requiredPermission = AbstractCredentialsAbstractCredentials::PERMISSION_READ
     ) {
         // Build requirements
         $requiredResourceType = $resourceType;
-        if ($requiredResourceType == Zend_Service_WindowsAzure_Storage::RESOURCE_BLOB) {
-            $requiredResourceType .= Zend_Service_WindowsAzure_Storage::RESOURCE_CONTAINER;
+        if ($requiredResourceType == Storage\Storage::RESOURCE_BLOB) {
+            $requiredResourceType .= Storage\Storage::RESOURCE_CONTAINER;
         }
 
         // Parse permission url
@@ -237,8 +241,8 @@ class Zend_Service_WindowsAzure_Credentials_SharedAccessSignature
 	 */
 	public function signRequestUrl(
 		$requestUrl = '',
-		$resourceType = Zend_Service_WindowsAzure_Storage::RESOURCE_UNKNOWN,
-		$requiredPermission = Zend_Service_WindowsAzure_Credentials_AbstractCredentials::PERMISSION_READ
+		$resourceType = Storage\StorageStorage\Storage::RESOURCE_UNKNOWN,
+		$requiredPermission = AbstractCredentialsAbstractCredentials::PERMISSION_READ
 	) {
 	    // Look for a matching permission
 	    foreach ($this->getPermissionSet() as $permittedUrl) {
@@ -276,13 +280,13 @@ class Zend_Service_WindowsAzure_Credentials_SharedAccessSignature
 	 * @return array Array of headers
 	 */
 	public function signRequestHeaders(
-		$httpVerb = Zend_Http_Client::GET,
+		$httpVerb = Client\ClientClient\Client::GET,
 		$path = '/',
 		$queryString = '',
 		$headers = null,
 		$forTableStorage = false,
-		$resourceType = Zend_Service_WindowsAzure_Storage::RESOURCE_UNKNOWN,
-		$requiredPermission = Zend_Service_WindowsAzure_Credentials_AbstractCredentials::PERMISSION_READ
+		$resourceType = Storage\StorageStorage\Storage::RESOURCE_UNKNOWN,
+		$requiredPermission = AbstractCredentialsAbstractCredentials::PERMISSION_READ
 	) {
 	    return $headers;
 	}

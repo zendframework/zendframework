@@ -19,6 +19,9 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
+namespace Zend\Service\WindowsAzure\Storage;
+use Zend\Service\WindowsAzure;
+
 /**
  * @category   Zend
  * @package    Zend_Service_WindowsAzure
@@ -31,7 +34,7 @@
  * @property string  $Href            Href
  * @property string  $Updated         Updated
  */
-class Zend_Service_WindowsAzure_Storage_TableInstance
+class TableInstance
 {
     /**
      * Data
@@ -70,7 +73,7 @@ class Zend_Service_WindowsAzure_Storage_TableInstance
             return;
         }
 
-        throw new Zend_Service_WindowsAzure_Exception("Unknown property: " . $name);
+        throw new WindowsAzure\Exception("Unknown property: " . $name);
     }
 
     /**
@@ -83,6 +86,6 @@ class Zend_Service_WindowsAzure_Storage_TableInstance
             return $this->_data[strtolower($name)];
         }
 
-        throw new Zend_Service_WindowsAzure_Exception("Unknown property: " . $name);
+        throw new WindowsAzure\Exception("Unknown property: " . $name);
     }
 }

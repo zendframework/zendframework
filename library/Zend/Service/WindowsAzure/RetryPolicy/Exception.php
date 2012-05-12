@@ -19,6 +19,8 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
+namespace Zend\Service\WindowsAzure\RetryPolicy;
+
 /**
  * @category   Zend
  * @package    Zend_Service_WindowsAzure
@@ -26,5 +28,5 @@
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Service_WindowsAzure_RetryPolicy_Exception extends Zend_Service_WindowsAzure_Exception
+class Exception extends \Zend\Service\WindowsAzure\Exception
 {}

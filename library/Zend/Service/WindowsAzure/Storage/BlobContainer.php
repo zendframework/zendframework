@@ -19,6 +19,9 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
+namespace Zend\Service\WindowsAzure\Storage;
+use Zend\Service\WindowsAzure;
+
 /**
  * @category   Zend
  * @package    Zend_Service_WindowsAzure
@@ -31,7 +34,7 @@
  * @property string $LastModified  Last modified date of the container
  * @property array  $Metadata      Key/value pairs of meta data
  */
-class Zend_Service_WindowsAzure_Storage_BlobContainer
+class BlobContainer
 {
     /**
      * Data
@@ -71,7 +74,7 @@ class Zend_Service_WindowsAzure_Storage_BlobContainer
             return;
         }
 
-        throw new Zend_Service_WindowsAzure_Exception("Unknown property: " . $name);
+        throw new WindowsAzure\Exception("Unknown property: " . $name);
     }
 
     /**
@@ -85,6 +88,6 @@ class Zend_Service_WindowsAzure_Storage_BlobContainer
             return $this->_data[strtolower($name)];
         }
 
-        throw new Zend_Service_WindowsAzure_Exception("Unknown property: " . $name);
+        throw new WindowsAzure\Exception("Unknown property: " . $name);
     }
 }

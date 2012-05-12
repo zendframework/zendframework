@@ -19,6 +19,11 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
+namespace Zend\Service\WindowsAzure\Storage;
+use Zend\Service\WindowsAzure\Credentials;
+use Zend\Service\WindowsAzure\RetryPolicy;
+use Zend\Service\WindowsAzure;
+
 /**
  * @category   Zend
  * @package    Zend_Service_WindowsAzure
@@ -26,7 +31,7 @@
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Service_WindowsAzure_Storage
+class Storage
 {
 	/**
 	 * Development storage URLS
@@ -147,10 +152,10 @@ class Zend_Service_WindowsAzure_Storage
 	 */
 	public function __construct(
 		$host            = self::URL_DEV_BLOB,
-		$accountName     = Zend_Service_WindowsAzure_Credentials_AbstractCredentials::DEVSTORE_ACCOUNT,
-		$accountKey      = Zend_Service_WindowsAzure_Credentials_AbstractCredentials::DEVSTORE_KEY,
+		$accountName     = Credentials\AbstractCredentialsCredentials\AbstractCredentials::DEVSTORE_ACCOUNT,
+		$accountKey      = Credentials\AbstractCredentialsCredentials\AbstractCredentials::DEVSTORE_KEY,
 		$usePathStyleUri = false,
-		Zend_Service_WindowsAzure_RetryPolicy_AbstractRetryPolicy $retryPolicy = null
+		RetryPolicy\AbstractRetryPolicy $retryPolicy = null
 	) {
 		$this->_host = $host;
 		$this->_accountName = $accountName;
@@ -168,13 +173,13 @@ class Zend_Service_WindowsAzure_Storage
 		}
 		
 		if ($this->_credentials === null) {
-		    $this->_credentials = new Zend_Service_WindowsAzure_Credentials_SharedKey(
+		    $this->_credentials = new WindowsAzure\Credentials\SharedKey(
 		    	$this->_accountName, $this->_accountKey, $this->_usePathStyleUri);
 		}
 		
 		$this->_retryPolicy = $retryPolicy;
 		if ($this->_retryPolicy === null) {
-		    $this->_retryPolicy = Zend_Service_WindowsAzure_RetryPolicy_AbstractRetryPolicy::noRetry();
+		    $this->_retryPolicy = RetryPolicy\AbstractRetryPolicy::noRetry();
 		}
 		
 		// Setup default Zend_Http_Client channel
@@ -188,7 +193,7 @@ class Zend_Service_WindowsAzure_Storage
 					CURLOPT_TIMEOUT => 120,
 			);
 		}
-		$this->_httpClientChannel = new Zend\Http\Client(null, $options);
+		$this->_httpClientChannel = new \Zend\Http\Client(null, $options);
 	}
 	
 	/**
@@ -206,11 +211,11 @@ class Zend_Service_WindowsAzure_Storage
 	 *
 	 * @param Zend_Service_WindowsAzure_RetryPolicy_AbstractRetryPolicy $retryPolicy Retry policy to use when making requests
 	 */
-	public function setRetryPolicy(Zend_Service_WindowsAzure_RetryPolicy_AbstractRetryPolicy $retryPolicy = null)
+	public function setRetryPolicy(RetryPolicy\AbstractRetryPolicy $retryPolicy = null)
 	{
 		$this->_retryPolicy = $retryPolicy;
 		if ($this->_retryPolicy === null) {
-		    $this->_retryPolicy = Zend_Service_WindowsAzure_RetryPolicy_AbstractRetryPolicy::noRetry();
+		    $this->_retryPolicy = RetryPolicy\AbstractRetryPolicy::noRetry();
 		}
 	}
 	
@@ -279,7 +284,7 @@ class Zend_Service_WindowsAzure_Storage
 	 * 
 	 * @param Zend_Service_WindowsAzure_Credentials_AbstractCredentials $credentials Zend_Service_WindowsAzure_Credentials_AbstractCredentials instance to use for request signing.
 	 */
-	public function setCredentials(Zend_Service_WindowsAzure_Credentials_AbstractCredentials $credentials)
+	public function setCredentials(Credentials\AbstractCredentials $credentials)
 	{
 	    $this->_credentials = $credentials;
 	    $this->_credentials->setAccountName($this->_accountName);
@@ -313,12 +318,12 @@ class Zend_Service_WindowsAzure_Storage
 	protected function _performRequest(
 		$path = '/',
 		$queryString = '',
-		$httpVerb = Zend\Http\Client::GET,
+		$httpVerb = \Zend\\Http\\Client\Client::GET,
 		$headers = array(),
 		$forTableStorage = false,
 		$rawData = null,
-		$resourceType = Zend_Service_WindowsAzure_Storage::RESOURCE_UNKNOWN,
-		$requiredPermission = Zend_Service_WindowsAzure_Credentials_AbstractCredentials::PERMISSION_READ
+		$resourceType = Storage::RESOURCE_UNKNOWN,
+		$requiredPermission = Credentials\AbstractCredentials::PERMISSION_READ
 	) {
 	    // Clean path
 		if (strpos($path, '/') !== 0) {
@@ -373,10 +378,10 @@ class Zend_Service_WindowsAzure_Storage
 	 * @return object
 	 * @throws Zend_Service_WindowsAzure_Exception
 	 */
-	protected function _parseResponse(Zend\Http\Response $response = null)
+	protected function _parseResponse(\Zend\\Http\\Response $response = null)
 	{
 		if ($response === null) {
-			throw new Zend_Service_WindowsAzure_Exception('Response should not be null.');
+			throw new WindowsAzure\Exception('Response should not be null.');
 		}
 		
         $xml = @simplexml_load_string($response->getBody());
@@ -413,7 +418,7 @@ class Zend_Service_WindowsAzure_Storage
 		$headers = array();
 		foreach ($metadata as $key => $value) {
 			if (strpos($value, "\r") !== false || strpos($value, "\n") !== false) {
-				throw new Zend_Service_WindowsAzure_Exception('Metadata cannot contain newline characters.');
+				throw new WindowsAzure\Exception('Metadata cannot contain newline characters.');
 			}
 		    $headers["x-ms-meta-" . strtolower($key)] = $value;
 		}

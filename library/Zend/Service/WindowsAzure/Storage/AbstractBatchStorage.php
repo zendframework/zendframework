@@ -19,6 +19,8 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
+namespace Zend\Service\WindowsAzure\Storage;
+
 /**
  * @category   Zend
  * @package    Zend_Service_WindowsAzure
@@ -26,8 +28,8 @@
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class Zend_Service_WindowsAzure_Storage_AbstractBatchStorage
-    extends Zend_Service_WindowsAzure_Storage
+abstract class AbstractBatchStorage
+    extends Storage
 {	
     /**
      * Current batch
@@ -42,10 +44,10 @@ abstract class Zend_Service_WindowsAzure_Storage_AbstractBatchStorage
      * @param Zend_Service_WindowsAzure_Storage_Batch $batch Current batch
      * @throws Zend_Service_WindowsAzure_Exception
      */
-    public function setCurrentBatch(Zend_Service_WindowsAzure_Storage_Batch $batch = null)
+    public function setCurrentBatch(Batch $batch = null)
     {
         if ($batch !== null && $this->isInBatch()) {
-            throw new Zend_Service_WindowsAzure_Exception('Only one batch can be active at a time.');
+            throw new \Zend\Service\WindowsAzure\Exception('Only one batch can be active at a time.');
         }
         $this->_currentBatch = $batch;
     }
@@ -78,7 +80,7 @@ abstract class Zend_Service_WindowsAzure_Storage_AbstractBatchStorage
      */
     public function startBatch()
     {
-        return new Zend_Service_WindowsAzure_Storage_Batch($this, $this->getBaseUrl());
+        return new Batch($this, $this->getBaseUrl());
     }
 	
 	/**
@@ -91,7 +93,7 @@ abstract class Zend_Service_WindowsAzure_Storage_AbstractBatchStorage
 	 * @param string $requiredPermission Required permission
 	 * @return Zend_Http_Response
 	 */
-	public function performBatch($operations = array(), $forTableStorage = false, $isSingleSelect = false, $resourceType = Zend_Service_WindowsAzure_Storage::RESOURCE_UNKNOWN, $requiredPermission = Zend_Service_WindowsAzure_Credentials_AbstractCredentials::PERMISSION_READ)
+	public function performBatch($operations = array(), $forTableStorage = false, $isSingleSelect = false, $resourceType = Storage::RESOURCE_UNKNOWN, $requiredPermission = \Zend\Service\WindowsAzure\Credentials\AbstractCredentials::PERMISSION_READ)
 	{
 	    // Generate boundaries
 	    $batchBoundary = 'batch_' . md5(time() . microtime());
@@ -111,7 +113,7 @@ abstract class Zend_Service_WindowsAzure_Storage_AbstractBatchStorage
 		$queryString    = '';
 		
 		// Set verb
-		$httpVerb = Zend_Http_Client::POST;
+		$httpVerb = \Zend\Http\Client\Client::POST;
 		
 		// Generate raw data
     	$rawData = '';

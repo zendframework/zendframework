@@ -19,12 +19,14 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
+namespace Zend\Service\WindowsAzure;
+
 /**
- * @see Zend_Service_WindowsAzure_Storage_Blob 
+ * @see Zend_Service_WindowsAzure_Storage_Blob
  */
 
 /**
- * @see Zend_Service_WindowsAzure_Credentials_SharedAccessSignature 
+ * @see Zend_Service_WindowsAzure_Credentials_SharedAccessSignature
  */
 
 /**
@@ -36,7 +38,7 @@
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Service_WindowsAzure_BlobStorageSharedAccessTest extends PHPUnit_Framework_TestCase
+class BlobStorageSharedAccessTest extends \PHPUnit\Framework\TestCase
 {
     static $path;
 
@@ -60,23 +62,23 @@ class Zend_Service_WindowsAzure_BlobStorageSharedAccessTest extends PHPUnit_Fram
         $storageClient = $this->createAdministrativeStorageInstance();
         for ($i = 1; $i <= self::$uniqId; $i++)
         {
-            try { $storageClient->deleteContainer(TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOBSA_CONTAINER_PREFIX . $i); } catch (Exception $e) { }
+            try { $storageClient->deleteContainer(TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOBSA_CONTAINER_PREFIX . $i); } catch (\Exception $e) { }
         }
-        try { $storageClient->deleteContainer('$root'); } catch (Exception $e) { }
+        try { $storageClient->deleteContainer('$root'); } catch (\Exception $e) { }
     }
 
     protected function createStorageInstance()
     {
         $storageClient = null;
         if (TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_RUNONPROD) {
-            $storageClient = new Zend_Service_WindowsAzure_Storage_Blob(TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_HOST_PROD, TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_ACCOUNT_PROD, TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_KEY_PROD, false, Zend_Service_WindowsAzure_RetryPolicy_AbstractRetryPolicy::retryN(10, 250));
+            $storageClient = new \Zend\Service\WindowsAzure\Storage\Blob(TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_HOST_PROD, TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_ACCOUNT_PROD, TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_KEY_PROD, false, \Zend\Service\WindowsAzure\RetryPolicy\AbstractRetryPolicy::retryN(10, 250));
             $storageClient->setCredentials(
-                new Zend_Service_WindowsAzure_Credentials_SharedAccessSignature(TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_ACCOUNT_PROD, TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_KEY_PROD, false)
+                new \Zend\Service\WindowsAzure\Credentials\SharedAccessSignature(TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_ACCOUNT_PROD, TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_KEY_PROD, false)
             );
         } else {
-            $storageClient = new Zend_Service_WindowsAzure_Storage_Blob(TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_HOST_DEV, TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_ACCOUNT_DEV, TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_KEY_DEV, true, Zend_Service_WindowsAzure_RetryPolicy_AbstractRetryPolicy::retryN(10, 250));
+            $storageClient = new \Zend\Service\WindowsAzure\Storage\Blob(TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_HOST_DEV, TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_ACCOUNT_DEV, TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_KEY_DEV, true, \Zend\Service\WindowsAzure\RetryPolicy\AbstractRetryPolicy::retryN(10, 250));
             $storageClient->setCredentials(
-                new Zend_Service_WindowsAzure_Credentials_SharedAccessSignature(TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_ACCOUNT_DEV, TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_KEY_DEV, true)
+                new \Zend\Service\WindowsAzure\Credentials\SharedAccessSignature(TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_ACCOUNT_DEV, TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_KEY_DEV, true)
             );
         }
 
@@ -91,9 +93,9 @@ class Zend_Service_WindowsAzure_BlobStorageSharedAccessTest extends PHPUnit_Fram
     {
         $storageClient = null;
         if (TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_RUNONPROD) {
-            $storageClient = new Zend_Service_WindowsAzure_Storage_Blob(TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_HOST_PROD, TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_ACCOUNT_PROD, TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_KEY_PROD, false, Zend_Service_WindowsAzure_RetryPolicy_AbstractRetryPolicy::retryN(10, 250));
+            $storageClient = new \Zend\Service\WindowsAzure\Storage\Blob(TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_HOST_PROD, TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_ACCOUNT_PROD, TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_KEY_PROD, false, \Zend\Service\WindowsAzure\RetryPolicy\AbstractRetryPolicy::retryN(10, 250));
         } else {
-            $storageClient = new Zend_Service_WindowsAzure_Storage_Blob(TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_HOST_DEV, TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_ACCOUNT_DEV, TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_KEY_DEV, true, Zend_Service_WindowsAzure_RetryPolicy_AbstractRetryPolicy::retryN(10, 250));
+            $storageClient = new \Zend\Service\WindowsAzure\Storage\Blob(TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_HOST_DEV, TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_ACCOUNT_DEV, TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_KEY_DEV, true, \Zend\Service\WindowsAzure\RetryPolicy\AbstractRetryPolicy::retryN(10, 250));
         }
 
         if (TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_USEPROXY) {
@@ -126,7 +128,7 @@ class Zend_Service_WindowsAzure_BlobStorageSharedAccessTest extends PHPUnit_Fram
             $sharedAccessUrl = $administrativeStorageClient->generateSharedAccessUrl(
                 $containerName,
                 '',
-            	'c', 
+            	'c',
             	'w',
             	$administrativeStorageClient->isoDate(time() - 500),
             	$administrativeStorageClient->isoDate(time() + 3000)
@@ -151,7 +153,7 @@ class Zend_Service_WindowsAzure_BlobStorageSharedAccessTest extends PHPUnit_Fram
             $exceptionThrown = false;
             try {
                 $storageClient->getBlob($containerName, 'images/WindowsAzure.gif', self::$path . 'WindowsAzure.gif');
-            } catch (Exception $ex) {
+            } catch (\Exception $ex) {
                 $exceptionThrown = true;
             }
             $this->assertTrue($exceptionThrown);
@@ -173,7 +175,7 @@ class Zend_Service_WindowsAzure_BlobStorageSharedAccessTest extends PHPUnit_Fram
             $sharedAccessUrl1 = $administrativeStorageClient->generateSharedAccessUrl(
                 $containerName,
                 '',
-            	'c', 
+            	'c',
             	'w',
             	$administrativeStorageClient->isoDate(time() - 500),
             	$administrativeStorageClient->isoDate(time() + 3000)
@@ -192,7 +194,7 @@ class Zend_Service_WindowsAzure_BlobStorageSharedAccessTest extends PHPUnit_Fram
 	                $sharedAccessUrl1,
 	                $sharedAccessUrl2
 	            ));
-            } catch (Exception $ex) {
+            } catch (\Exception $ex) {
                 $exceptionThrown = true;
             }
             $this->assertTrue($exceptionThrown);

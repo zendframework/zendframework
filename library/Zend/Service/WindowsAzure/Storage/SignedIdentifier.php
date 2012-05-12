@@ -19,6 +19,9 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
+namespace Zend\Service\WindowsAzure\Storage;
+use Zend\Service\WindowsAzure;
+
 /**
  * @category   Zend
  * @package    Zend_Service_WindowsAzure
@@ -31,7 +34,7 @@
  * @property string $Expiry       The time at which the Shared Access Signature becomes invalid.
  * @property string $Permissions  Signed permissions - read (r), write (w), delete (d) and list (l)
  */
-class Zend_Service_WindowsAzure_Storage_SignedIdentifier
+class SignedIdentifier
 {
     /**
      * Data
@@ -70,7 +73,7 @@ class Zend_Service_WindowsAzure_Storage_SignedIdentifier
             return;
         }
 
-        throw new Zend_Service_WindowsAzure_Exception("Unknown property: " . $name);
+        throw new WindowsAzure\Exception("Unknown property: " . $name);
     }
 
     /**
@@ -83,6 +86,6 @@ class Zend_Service_WindowsAzure_Storage_SignedIdentifier
             return $this->_data[strtolower($name)];
         }
 
-        throw new Zend_Service_WindowsAzure_Exception("Unknown property: " . $name);
+        throw new WindowsAzure\Exception("Unknown property: " . $name);
     }
 }

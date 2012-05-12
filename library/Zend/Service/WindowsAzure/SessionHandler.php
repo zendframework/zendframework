@@ -19,6 +19,8 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
+namespace Zend\Service\WindowsAzure;
+
 /**
  * @category   Zend
  * @package    Zend_Service_WindowsAzure
@@ -26,7 +28,7 @@
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Service_WindowsAzure_SessionHandler
+class SessionHandler
 {
     /**
      * Table storage
@@ -56,7 +58,7 @@ class Zend_Service_WindowsAzure_SessionHandler
      * @param string $sessionTable Session table name
      * @param string $sessionTablePartition Session table partition
      */
-    public function __construct(Zend_Service_WindowsAzure_Storage_Table $tableStorage, $sessionTable = 'phpsessions', $sessionTablePartition = 'sessions')
+    public function __construct(Storage\Table $tableStorage, $sessionTable = 'phpsessions', $sessionTablePartition = 'sessions')
 	{
 	    // Set properties
 		$this->_tableStorage = $tableStorage;
@@ -124,7 +126,7 @@ class Zend_Service_WindowsAzure_SessionHandler
             );
             return base64_decode($sessionRecord->serializedData);
         }
-        catch (Zend_Service_WindowsAzure_Exception $ex)
+        catch (Exception $ex)
         {
             return '';
         }
@@ -138,7 +140,7 @@ class Zend_Service_WindowsAzure_SessionHandler
      */
     public function write($id, $serializedData)
     {
-        $sessionRecord = new Zend_Service_WindowsAzure_Storage_DynamicTableEntity($this->_sessionTablePartition, $id);
+        $sessionRecord = new Storage\DynamicTableEntity($this->_sessionTablePartition, $id);
         $sessionRecord->sessionExpires = time();
         $sessionRecord->serializedData = base64_encode($serializedData);
         
@@ -148,7 +150,7 @@ class Zend_Service_WindowsAzure_SessionHandler
         {
             $this->_tableStorage->updateEntity($this->_sessionTable, $sessionRecord);
         }
-        catch (Zend_Service_WindowsAzure_Exception $unknownRecord)
+        catch (Exception $unknownRecord)
         {
             $this->_tableStorage->insertEntity($this->_sessionTable, $sessionRecord);
         }
@@ -173,7 +175,7 @@ class Zend_Service_WindowsAzure_SessionHandler
             
             return true;
         }
-        catch (Zend_Service_WindowsAzure_Exception $ex)
+        catch (Exception $ex)
         {
             return false;
         }
@@ -200,7 +202,7 @@ class Zend_Service_WindowsAzure_SessionHandler
             }
             return true;
         }
-        catch (Zend_Service_WindowsAzure_exception $ex)
+        catch (\Zend\Service\WindowsAzure\exception $ex)
         {
             return false;
         }

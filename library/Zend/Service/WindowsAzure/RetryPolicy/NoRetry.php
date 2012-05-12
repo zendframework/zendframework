@@ -19,6 +19,8 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
+namespace Zend\Service\WindowsAzure\RetryPolicy;
+
 /**
  * @category   Zend
  * @package    Zend_Service_WindowsAzure
@@ -26,7 +28,7 @@
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Service_WindowsAzure_RetryPolicy_NoRetry extends Zend_Service_WindowsAzure_RetryPolicy_AbstractRetryPolicy
+class NoRetry extends AbstractRetryPolicy
 {
     /**
      * Execute function under retry policy
@@ -44,7 +46,7 @@ class Zend_Service_WindowsAzure_RetryPolicy_NoRetry extends Zend_Service_Windows
             $returnValue = call_user_func_array($function, $parameters);
             return $returnValue;
         }
-        catch (Exception $ex)
+        catch (\Exception $ex)
         {
             throw $ex;
         }

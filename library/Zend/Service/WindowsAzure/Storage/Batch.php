@@ -19,6 +19,10 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
+namespace Zend\Service\WindowsAzure\Storage;
+use Zend\Http\Client;
+use Zend\Service\WindowsAzure;
+
 /**
  * @category   Zend
  * @package    Zend_Service_WindowsAzure
@@ -26,7 +30,7 @@
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Service_WindowsAzure_Storage_Batch
+class Batch
 {	
     /**
      * Storage client the batch is defined on
@@ -68,7 +72,7 @@ class Zend_Service_WindowsAzure_Storage_Batch
      * 
      * @param Zend_Service_WindowsAzure_Storage_AbstractBatchStorage $storageClient Storage client the batch is defined on
      */
-    public function __construct(Zend_Service_WindowsAzure_Storage_AbstractBatchStorage $storageClient = null, $baseUrl = '')
+    public function __construct(AbstractBatchStorage $storageClient = null, $baseUrl = '')
     {
         $this->_storageClient = $storageClient;
         $this->_baseUrl       = $baseUrl;
@@ -117,7 +121,7 @@ class Zend_Service_WindowsAzure_Storage_Batch
 	 * @param mixed $rawData Optional RAW HTTP data to be sent over the wire
 	 * @throws Zend_Service_WindowsAzure_Exception
 	 */
-	public function enlistOperation($path = '/', $queryString = '', $httpVerb = Zend_Http_Client::GET, $headers = array(), $forTableStorage = false, $rawData = null)
+	public function enlistOperation($path = '/', $queryString = '', $httpVerb = Client\ClientClient\Client::GET, $headers = array(), $forTableStorage = false, $rawData = null)
 	{
 	    // Set _forTableStorage
 	    if ($forTableStorage) {
@@ -125,9 +129,9 @@ class Zend_Service_WindowsAzure_Storage_Batch
 	    }
 	    
 	    // Set _isSingleSelect
-	    if ($httpVerb == Zend_Http_Client::GET) {
+	    if ($httpVerb == Client\Client::GET) {
 	        if (count($this->_operations) > 0) {
-	            throw new Zend_Service_WindowsAzure_Exception("Select operations can only be performed in an empty batch transaction.");
+	            throw new WindowsAzure\Exception("Select operations can only be performed in an empty batch transaction.");
 	        }
 	        $this->_isSingleSelect = true;
 	    }
@@ -143,8 +147,8 @@ class Zend_Service_WindowsAzure_Storage_Batch
 		}
 		    
 		// URL encoding
-		$path           = Zend_Service_WindowsAzure_Storage::urlencode($path);
-		$queryString    = Zend_Service_WindowsAzure_Storage::urlencode($queryString);
+		$path           = Storage::urlencode($path);
+		$queryString    = Storage::urlencode($queryString);
 
 		// Generate URL
 		$requestUrl     = $this->getBaseUrl() . $path . $queryString;
@@ -155,9 +159,9 @@ class Zend_Service_WindowsAzure_Storage_Batch
 		}
 		    
 		// Add headers
-		if ($httpVerb != Zend_Http_Client::GET) {
+		if ($httpVerb != Client\Client::GET) {
     		$headers['Content-ID'] = count($this->_operations) + 1;
-    		if ($httpVerb != Zend_Http_Client::DELETE) {
+    		if ($httpVerb != Client\Client::DELETE) {
     		    $headers['Content-Type'] = 'application/atom+xml;type=entry';
     		}
     		$headers['Content-Length'] = strlen($rawData);
@@ -199,7 +203,7 @@ class Zend_Service_WindowsAzure_Storage_Batch
         
         // Error?
         if (count($errors[2]) > 0) {
-            throw new Zend_Service_WindowsAzure_Exception('An error has occured while committing a batch: ' . $errors[2][0]);
+            throw new WindowsAzure\Exception('An error has occured while committing a batch: ' . $errors[2][0]);
         }
         
         // Return

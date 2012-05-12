@@ -18,13 +18,17 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
+namespace Zend\Service\WindowsAzure\Credentials;
+use Zend\Service\WindowsAzure\Storage;
+use Zend\Http\Client;
+
 /**
  * @category   Zend
  * @package    Zend_Service_WindowsAzure
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */ 
-abstract class Zend_Service_WindowsAzure_Credentials_AbstractCredentials
+abstract class AbstractCredentials
 {
 	/**
 	 * Development storage account and key
@@ -76,8 +80,8 @@ abstract class Zend_Service_WindowsAzure_Credentials_AbstractCredentials
 	 * @param boolean $usePathStyleUri Use path-style URI's
 	 */
 	public function __construct(
-		$accountName = Zend_Service_WindowsAzure_Credentials_AbstractCredentials::DEVSTORE_ACCOUNT,
-		$accountKey  = Zend_Service_WindowsAzure_Credentials_AbstractCredentials::DEVSTORE_KEY,
+		$accountName = AbstractCredentialsAbstractCredentials::DEVSTORE_ACCOUNT,
+		$accountKey  = AbstractCredentialsAbstractCredentials::DEVSTORE_KEY,
 		$usePathStyleUri = false
 	) {
 		$this->_accountName = $accountName;
@@ -91,7 +95,7 @@ abstract class Zend_Service_WindowsAzure_Credentials_AbstractCredentials
 	 * @param  string $value
 	 * @return Zend_Service_WindowsAzure_Credentials_AbstractCredentials
 	 */
-	public function setAccountName($value = Zend_Service_WindowsAzure_Credentials_AbstractCredentials::DEVSTORE_ACCOUNT)
+	public function setAccountName($value = AbstractCredentialsAbstractCredentials::DEVSTORE_ACCOUNT)
 	{
 		$this->_accountName = $value;
 		return $this;
@@ -103,7 +107,7 @@ abstract class Zend_Service_WindowsAzure_Credentials_AbstractCredentials
 	 * @param  string $value
 	 * @return Zend_Service_WindowsAzure_Credentials_AbstractCredentials
 	 */
-	public function setAccountkey($value = Zend_Service_WindowsAzure_Credentials_AbstractCredentials::DEVSTORE_KEY)
+	public function setAccountkey($value = AbstractCredentialsAbstractCredentials::DEVSTORE_KEY)
 	{
 		$this->_accountKey = base64_decode($value);
 		return $this;
@@ -131,8 +135,8 @@ abstract class Zend_Service_WindowsAzure_Credentials_AbstractCredentials
 	 */
 	abstract public function signRequestUrl(
 		$requestUrl = '',
-		$resourceType = Zend_Service_WindowsAzure_Storage::RESOURCE_UNKNOWN,
-		$requiredPermission = Zend_Service_WindowsAzure_Credentials_AbstractCredentials::PERMISSION_READ
+		$resourceType = Storage\StorageStorage\Storage::RESOURCE_UNKNOWN,
+		$requiredPermission = AbstractCredentialsAbstractCredentials::PERMISSION_READ
 	);
 	
 	/**
@@ -148,13 +152,13 @@ abstract class Zend_Service_WindowsAzure_Credentials_AbstractCredentials
 	 * @return array Array of headers
 	 */
 	abstract public function signRequestHeaders(
-		$httpVerb = Zend_Http_Client::GET,
+		$httpVerb = Client\ClientClient\Client::GET,
 		$path = '/',
 		$queryString = '',
 		$headers = null,
 		$forTableStorage = false,
-		$resourceType = Zend_Service_WindowsAzure_Storage::RESOURCE_UNKNOWN,
-		$requiredPermission = Zend_Service_WindowsAzure_Credentials_AbstractCredentials::PERMISSION_READ
+		$resourceType = Storage\StorageStorage\Storage::RESOURCE_UNKNOWN,
+		$requiredPermission = AbstractCredentialsAbstractCredentials::PERMISSION_READ
 	);
 	
 	

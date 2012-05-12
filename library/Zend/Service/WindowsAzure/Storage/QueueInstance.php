@@ -19,6 +19,9 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
+namespace Zend\Service\WindowsAzure\Storage;
+use Zend\Service\WindowsAzure;
+
 /**
  * @category   Zend
  * @package    Zend_Service_WindowsAzure
@@ -30,7 +33,7 @@
  * @property array   $Metadata                 Key/value pairs of meta data
  * @property integer $ApproximateMessageCount  The approximate number of messages in the queue
  */
-class Zend_Service_WindowsAzure_Storage_QueueInstance
+class QueueInstance
 {
     /**
      * Data
@@ -66,7 +69,7 @@ class Zend_Service_WindowsAzure_Storage_QueueInstance
             return;
         }
 
-        throw new Zend_Service_WindowsAzure_Exception("Unknown property: " . $name);
+        throw new WindowsAzure\Exception("Unknown property: " . $name);
     }
 
     /**
@@ -79,6 +82,6 @@ class Zend_Service_WindowsAzure_Storage_QueueInstance
             return $this->_data[strtolower($name)];
         }
 
-        throw new Zend_Service_WindowsAzure_Exception("Unknown property: " . $name);
+        throw new WindowsAzure\Exception("Unknown property: " . $name);
     }
 }

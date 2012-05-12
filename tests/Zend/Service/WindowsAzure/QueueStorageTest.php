@@ -19,8 +19,10 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
+namespace Zend\Service\WindowsAzure;
+
 /**
- * @see Zend_Service_WindowsAzure_Storage_Queue 
+ * @see Zend_Service_WindowsAzure_Storage_Queue
  */
 
 /**
@@ -32,7 +34,7 @@
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Service_WindowsAzure_QueueStorageTest extends PHPUnit_Framework_TestCase
+class QueueStorageTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Test setup
@@ -52,7 +54,7 @@ class Zend_Service_WindowsAzure_QueueStorageTest extends PHPUnit_Framework_TestC
         $storageClient = $this->createStorageInstance();
         for ($i = 1; $i <= self::$uniqId; $i++)
         {
-            try { $storageClient->deleteQueue(TESTS_ZEND_SERVICE_WINDOWSAZURE_QUEUE_PREFIX . $i); } catch (Exception $e) { }
+            try { $storageClient->deleteQueue(TESTS_ZEND_SERVICE_WINDOWSAZURE_QUEUE_PREFIX . $i); } catch (\Exception $e) { }
         }
     }
 
@@ -60,9 +62,9 @@ class Zend_Service_WindowsAzure_QueueStorageTest extends PHPUnit_Framework_TestC
     {
         $storageClient = null;
         if (TESTS_ZEND_SERVICE_WINDOWSAZURE_QUEUE_RUNONPROD) {
-            $storageClient = new Zend_Service_WindowsAzure_Storage_Queue(TESTS_ZEND_SERVICE_WINDOWSAZURE_QUEUE_HOST_PROD, TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_ACCOUNT_PROD, TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_KEY_PROD, false, Zend_Service_WindowsAzure_RetryPolicy_AbstractRetryPolicy::retryN(10, 250));
+            $storageClient = new \Zend\Service\WindowsAzure\Storage\Queue(TESTS_ZEND_SERVICE_WINDOWSAZURE_QUEUE_HOST_PROD, TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_ACCOUNT_PROD, TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_KEY_PROD, false, \Zend\Service\WindowsAzure\RetryPolicy\AbstractRetryPolicy::retryN(10, 250));
         } else {
-            $storageClient = new Zend_Service_WindowsAzure_Storage_Queue(TESTS_ZEND_SERVICE_WINDOWSAZURE_QUEUE_HOST_DEV, TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_ACCOUNT_DEV, TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_KEY_DEV, true, Zend_Service_WindowsAzure_RetryPolicy_AbstractRetryPolicy::retryN(10, 250));
+            $storageClient = new \Zend\Service\WindowsAzure\Storage\Queue(TESTS_ZEND_SERVICE_WINDOWSAZURE_QUEUE_HOST_DEV, TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_ACCOUNT_DEV, TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_KEY_DEV, true, \Zend\Service\WindowsAzure\RetryPolicy\AbstractRetryPolicy::retryN(10, 250));
         }
 
         if (TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_USEPROXY) {

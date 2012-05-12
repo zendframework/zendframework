@@ -19,6 +19,8 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
+namespace Zend\Service\WindowsAzure\RetryPolicy;
+
 /**
  * @category   Zend
  * @package    Zend_Service_WindowsAzure
@@ -26,7 +28,7 @@
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class Zend_Service_WindowsAzure_RetryPolicy_AbstractRetryPolicy
+abstract class AbstractRetryPolicy
 {
     /**
      * Execute function under retry policy
@@ -44,7 +46,7 @@ abstract class Zend_Service_WindowsAzure_RetryPolicy_AbstractRetryPolicy
      */
     public static function noRetry()
     {
-        return new Zend_Service_WindowsAzure_RetryPolicy_NoRetry();
+        return new NoRetry();
     }
     
     /**
@@ -56,6 +58,6 @@ abstract class Zend_Service_WindowsAzure_RetryPolicy_AbstractRetryPolicy
      */
     public static function retryN($count = 1, $intervalBetweenRetries = 0)
     {
-        return new Zend_Service_WindowsAzure_RetryPolicy_RetryN($count, $intervalBetweenRetries);
+        return new RetryN($count, $intervalBetweenRetries);
     }
 }

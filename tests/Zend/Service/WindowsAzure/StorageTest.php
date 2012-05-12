@@ -19,6 +19,8 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
+namespace Zend\Service\WindowsAzure;
+
 /**
  * @see Zend_Service_WindowsAzure_Storage
  */
@@ -32,23 +34,23 @@
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Service_WindowsAzure_StorageTest extends PHPUnit_Framework_TestCase
+class StorageTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Test constructor for devstore
      */
     public function testConstructorForDevstore()
     {
-        $storage = new Zend_Service_WindowsAzure_Storage();
+        $storage = new \Zend\Service\WindowsAzure\Storage();
         $this->assertEquals('http://127.0.0.1:10000/devstoreaccount1', $storage->getBaseUrl());
     }
-    
+
     /**
      * Test constructor for production
      */
     public function testConstructorForProduction()
     {
-        $storage = new Zend_Service_WindowsAzure_Storage(Zend_Service_WindowsAzure_Storage::URL_CLOUD_BLOB, 'testing', '');
+        $storage = new \Zend\Service\WindowsAzure\Storage(\Zend\Service\WindowsAzure\Storage::URL_CLOUD_BLOB, 'testing', '');
         $this->assertEquals('http://testing.blob.core.windows.net', $storage->getBaseUrl());
     }
 }

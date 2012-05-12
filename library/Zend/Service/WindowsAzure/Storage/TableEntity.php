@@ -19,6 +19,8 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
+namespace Zend\Service\WindowsAzure\Storage;
+
 /**
  * @category   Zend
  * @package    Zend_Service_WindowsAzure
@@ -26,7 +28,7 @@
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Service_WindowsAzure_Storage_TableEntity
+class TableEntity
 {
     /**
      * Partition key
@@ -230,7 +232,7 @@ class Zend_Service_WindowsAzure_Storage_TableEntity
                     $this->$method($values[$accessor->AzurePropertyName]);
                 }
             } else if ($throwOnError) {
-                throw new Zend_Service_WindowsAzure_Exception("Property '" . $accessor->AzurePropertyName . "' was not found in \$values array");    
+                throw new \Zend\Service\WindowsAzure\Exception("Property '" . $accessor->AzurePropertyName . "' was not found in \$values array");    
             }
         }
         
@@ -250,7 +252,7 @@ class Zend_Service_WindowsAzure_Storage_TableEntity
         $azureAccessors = array();
         
         // Get all types
-        $type = new ReflectionClass($className);
+        $type = new \ReflectionClass($className);
         
         // Loop all properties
         $properties = $type->getProperties();

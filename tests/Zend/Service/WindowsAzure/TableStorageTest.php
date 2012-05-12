@@ -19,8 +19,10 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
+namespace Zend\Service\WindowsAzure;
+
 /**
- * @see Zend_Service_WindowsAzure_Storage_Table 
+ * @see Zend_Service_WindowsAzure_Storage_Table
  */
 
 /**
@@ -32,7 +34,7 @@
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Service_WindowsAzure_TableStorageTest extends PHPUnit_Framework_TestCase
+class TableStorageTest extends \PHPUnit\Framework\TestCase
 {
     public function __construct()
     {
@@ -55,7 +57,7 @@ class Zend_Service_WindowsAzure_TableStorageTest extends PHPUnit_Framework_TestC
     {
         $storageClient = $this->createStorageInstance();
         for ($i = 1; $i <= self::$uniqId; $i++) {
-            try { $storageClient->deleteTable(TESTS_ZEND_SERVICE_WINDOWSAZURE_TABLE_TABLENAME_PREFIX . $i); } catch (Exception $e) { }
+            try { $storageClient->deleteTable(TESTS_ZEND_SERVICE_WINDOWSAZURE_TABLE_TABLENAME_PREFIX . $i); } catch (\Exception $e) { }
         }
     }
 
@@ -63,9 +65,9 @@ class Zend_Service_WindowsAzure_TableStorageTest extends PHPUnit_Framework_TestC
     {
         $storageClient = null;
         if (TESTS_ZEND_SERVICE_WINDOWSAZURE_TABLE_RUNONPROD) {
-            $storageClient = new Zend_Service_WindowsAzure_Storage_Table(TESTS_ZEND_SERVICE_WINDOWSAZURE_TABLE_HOST_PROD, TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_ACCOUNT_PROD, TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_KEY_PROD, false, Zend_Service_WindowsAzure_RetryPolicy_AbstractRetryPolicy::retryN(10, 250));
+            $storageClient = new \Zend\Service\WindowsAzure\Storage\Table(TESTS_ZEND_SERVICE_WINDOWSAZURE_TABLE_HOST_PROD, TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_ACCOUNT_PROD, TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_KEY_PROD, false, \Zend\Service\WindowsAzure\RetryPolicy\AbstractRetryPolicy::retryN(10, 250));
         } else {
-            $storageClient = new Zend_Service_WindowsAzure_Storage_Table(TESTS_ZEND_SERVICE_WINDOWSAZURE_TABLE_HOST_DEV, TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_ACCOUNT_DEV, TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_KEY_DEV, true, Zend_Service_WindowsAzure_RetryPolicy_AbstractRetryPolicy::retryN(10, 250));
+            $storageClient = new \Zend\Service\WindowsAzure\Storage\Table(TESTS_ZEND_SERVICE_WINDOWSAZURE_TABLE_HOST_DEV, TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_ACCOUNT_DEV, TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_KEY_DEV, true, \Zend\Service\WindowsAzure\RetryPolicy\AbstractRetryPolicy::retryN(10, 250));
         }
 
         if (TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_USEPROXY) {
@@ -210,7 +212,7 @@ class Zend_Service_WindowsAzure_TableStorageTest extends PHPUnit_Framework_TestC
         $exceptionThrown = false;
         try {
             $storageClient->deleteEntity($tableName, $entity, true);
-        } catch (Exception $ex) {
+        } catch (\Exception $ex) {
             $exceptionThrown = true;
         }
         $this->assertTrue($exceptionThrown);
@@ -317,7 +319,7 @@ class Zend_Service_WindowsAzure_TableStorageTest extends PHPUnit_Framework_TestC
         $exceptionThrown = false;
         try {
             $storageClient->updateEntity($tableName, $entity, true);
-        } catch (Exception $ex) {
+        } catch (\Exception $ex) {
             $exceptionThrown = true;
         }
         $this->assertTrue($exceptionThrown);
@@ -337,7 +339,7 @@ class Zend_Service_WindowsAzure_TableStorageTest extends PHPUnit_Framework_TestC
 
         $storageClient->insertEntity($tableName, $entity);
 
-        $dynamicEntity = new Zend_Service_WindowsAzure_Storage_DynamicTableEntity($entity->getPartitionKey(), $entity->getRowKey());
+        $dynamicEntity = new \Zend\Service\WindowsAzure\Storage\DynamicTableEntity($entity->getPartitionKey(), $entity->getRowKey());
         $dynamicEntity->Myproperty = 10;
         $dynamicEntity->Otherproperty = "Test";
         $dynamicEntity->Age = 0;
@@ -368,7 +370,7 @@ class Zend_Service_WindowsAzure_TableStorageTest extends PHPUnit_Framework_TestC
 
         $storageClient->insertEntity($tableName, $entity);
 
-        $dynamicEntity = new Zend_Service_WindowsAzure_Storage_DynamicTableEntity($entity->getPartitionKey(), $entity->getRowKey());
+        $dynamicEntity = new \Zend\Service\WindowsAzure\Storage\DynamicTableEntity($entity->getPartitionKey(), $entity->getRowKey());
         $dynamicEntity->Myproperty = 10;
         $dynamicEntity->Otherproperty = "Test";
         $dynamicEntity->Age = 0;
@@ -379,7 +381,7 @@ class Zend_Service_WindowsAzure_TableStorageTest extends PHPUnit_Framework_TestC
         $exceptionThrown = false;
         try {
             $storageClient->mergeEntity($tableName, $dynamicEntity, true);
-        } catch (Exception $ex) {
+        } catch (\Exception $ex) {
             $exceptionThrown = true;
         }
         $this->assertTrue($exceptionThrown);
@@ -620,7 +622,7 @@ class Zend_Service_WindowsAzure_TableStorageTest extends PHPUnit_Framework_TestC
         $exceptionThrown = false;
         try {
             $batch->commit();
-        } catch (Exception $ex) {
+        } catch (\Exception $ex) {
             $exceptionThrown = true;
         }
         $this->assertTrue($exceptionThrown);
@@ -651,7 +653,7 @@ class Zend_Service_WindowsAzure_TableStorageTest extends PHPUnit_Framework_TestC
         $exceptionThrown = false;
         try {
             $batch->commit();
-        } catch (Exception $ex) {
+        } catch (\Exception $ex) {
             $exceptionThrown = true;
         }
         $this->assertTrue($exceptionThrown);
@@ -672,7 +674,7 @@ class Zend_Service_WindowsAzure_TableStorageTest extends PHPUnit_Framework_TestC
         $returnValue = array();
 
         for ($i = 0; $i < $amount; $i++) {
-            $entity = new TSTest_TestEntity('partition1', 'row' . ($i + 1));
+            $entity = new \TSTest\TestEntity('partition1', 'row' . ($i + 1));
             $entity->FullName = md5(uniqid(rand(), true));
             $entity->Age      = rand(1, 130);
             $entity->Visible  = rand(1,2) == 1;
@@ -687,7 +689,7 @@ class Zend_Service_WindowsAzure_TableStorageTest extends PHPUnit_Framework_TestC
 /**
  * Test Zend_Service_WindowsAzure_Storage_TableEntity class
  */
-class TSTest_TestEntity extends Zend_Service_WindowsAzure_Storage_TableEntity
+class TableStorageTest extends \Zend\Service\WindowsAzure\Storage\TableEntity
 {
     /**
      * @azure Name

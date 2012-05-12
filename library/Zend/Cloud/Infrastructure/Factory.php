@@ -32,7 +32,7 @@ class Factory extends AbstractFactory
     /**
      * Constructor
      *
-     * Private ctor - should not be used
+     * Private constructor - should not be used
      *
      * @return void
      */

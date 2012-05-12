@@ -41,7 +41,7 @@ namespace Zend\Cloud\QueueService\Adapter;
  */
 interface AdapterInterface
 {
-    /** Ctor HTTP adapter option */
+    /** HTTP adapter option */
     const HTTP_ADAPTER = 'http_adapter';
 
     /** Message visibility timeout option */
@@ -113,8 +113,8 @@ interface AdapterInterface
     public function sendMessage($queueId, $message,  $options = null);
 
     /**
-     * Recieve at most $max messages from the specified queue and return the
-     * message IDs for messages recieved.
+     * Receive at most $max messages from the specified queue and return the
+     * message IDs for messages received.
      *
      * @param  string $queueId
      * @param  int    $max

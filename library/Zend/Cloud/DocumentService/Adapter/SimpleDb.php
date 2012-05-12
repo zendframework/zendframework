@@ -54,7 +54,7 @@ class SimpleDb extends AbstractAdapter
 
     /**
      * SQS service instance.
-     * @var \Zend\Service\Amazon\SimpleDb
+     * @var \Zend\Service\Amazon\SimpleDb\SimpleDb
      */
     protected $_simpleDb;
 
@@ -371,7 +371,7 @@ class SimpleDb extends AbstractAdapter
     /**
      * Get the concrete service client
      *
-     * @return \Zend\Service\Amazon\SimpleDb
+     * @return \Zend\Service\Amazon\SimpleDb\SimpleDb
      */
     public function getClient()
     {
@@ -447,7 +447,7 @@ class SimpleDb extends AbstractAdapter
     }
 
     /**
-     * Create a DocumentSet from a SimpleDb resultset
+     * Create a DocumentSet from a SimpleDb resultSet
      *
      * @param  \Zend\Service\Amazon\SimpleDb\Page $resultSet
      * @param  bool $returnDocs

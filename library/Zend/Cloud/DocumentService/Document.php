@@ -78,7 +78,7 @@ class Document
      * Set document identifier
      *
      * @param  mixed $id
-     * @return Zend\Cloud\DocumentService\Document
+     * @return \Zend\Cloud\DocumentService\Document
      */
     public function setId($id)
     {

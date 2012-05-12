@@ -121,7 +121,7 @@ class Instance
      * Get Attribute with a specific key
      *
      * @param array $data
-     * @return misc|false
+     * @return mixed|false
      */
     public function getAttribute($key) 
     {

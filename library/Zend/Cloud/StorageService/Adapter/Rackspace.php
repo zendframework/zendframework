@@ -282,7 +282,7 @@ class Rackspace implements AdapterInterface
                 'prefix'    => $path
             );
         }    
-        $files = $this->rackspace->getObjects($this->container,$options);
+        $files = $this->rackspace->getObjects($this->container, $options);
         if (!$this->rackspace->isSuccessful()) {
             throw new Exception\RuntimeException('Error on get all folders: '.$this->rackspace->getErrorMsg());
         }

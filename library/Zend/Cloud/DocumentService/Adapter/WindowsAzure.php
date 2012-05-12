@@ -22,7 +22,8 @@ namespace Zend\Cloud\DocumentService\Adapter;
 use Traversable;
 use Zend\Stdlib\ArrayUtils;
 use Zend\Cloud\DocumentService\Document,
-    Zend\Service\WindowsAzure\Storage,
+    Zend\Service\WindowsAzure\Exception as WindowsAzureException,
+    Zend\Service\WindowsAzure\Storage\Storage,
     Zend\Service\WindowsAzure\Storage\Table,
     Zend\Service\WindowsAzure\Storage\DynamicTableEntity;
 
@@ -137,7 +138,7 @@ class WindowsAzure extends AbstractAdapter
             if (isset($options[self::HTTP_ADAPTER])) {
                 $this->_storageClient->setHttpClientChannel($options[self::HTTP_ADAPTER]);
             }
-        } catch(\Zend\Service\WindowsAzure\Exception $e) {
+        } catch(WindowsAzureException\ExceptionInterface $e) {
             throw new Exception\RuntimeException('Error on document service creation: '.$e->getMessage(), $e->getCode(), $e);
         }
     }
@@ -179,7 +180,7 @@ class WindowsAzure extends AbstractAdapter
         }
         try {
             $this->_storageClient->createTable($name);
-        } catch(\Zend\Service\WindowsAzure\Exception $e) {
+        } catch(WindowsAzureException\ExceptionInterface $e) {
             if (strpos($e->getMessage(), "table specified already exists") === false) {
                 throw new Exception\RunTimeException('Error on collection creation: '.$e->getMessage(), $e->getCode(), $e);
             }
@@ -198,7 +199,7 @@ class WindowsAzure extends AbstractAdapter
     {
         try {
             $this->_storageClient->deleteTable($name);
-        } catch(\Zend\Service\WindowsAzure\Exception $e) {
+        } catch(WindowsAzureException\ExceptionInterface $e) {
             if (strpos($e->getMessage(), "does not exist") === false) {
                 throw new Exception\RuntimeException('Error on collection deletion: '.$e->getMessage(), $e->getCode(), $e);
             }
@@ -221,7 +222,7 @@ class WindowsAzure extends AbstractAdapter
                 $restables[] = $table->name;
             }
             return $restables;
-        } catch(\Zend\Service\WindowsAzure\Exception $e) {
+        } catch(WindowsAzureException\ExceptionInterface $e) {
             throw new Exception\RuntimeException('Error on collection list: '.$e->getMessage(), $e->getCode(), $e);
         }
 
@@ -300,7 +301,7 @@ class WindowsAzure extends AbstractAdapter
             $entity = new DynamicTableEntity($key[0], $key[1]);
             $entity->setAzureValues($document->getFields(), true);
             $this->_storageClient->insertEntity($collectionName, $entity);
-        } catch(\Zend\Service\WindowsAzure\Exception $e) {
+        } catch(WindowsAzureException\ExceptionInterface $e) {
             throw new Exception\RuntimeException('Error on document insertion: '.$e->getMessage(), $e->getCode(), $e);
         }
     }
@@ -334,7 +335,7 @@ class WindowsAzure extends AbstractAdapter
             }
 
             $this->_storageClient->updateEntity($collectionName, $entity, isset($options[self::VERIFY_ETAG]));
-        } catch(\Zend\Service\WindowsAzure\Exception $e) {
+        } catch(WindowsAzureException\ExceptionInterface $e) {
             throw new Exception\RuntimeException('Error on document replace: '.$e->getMessage(), $e->getCode(), $e);
         }
     }
@@ -345,7 +346,7 @@ class WindowsAzure extends AbstractAdapter
      * The new document is merged the existing document.
      *
      * @param  string $collectionName
-     * @param  mixed|\Zend\Cloud\DocumentService\Document $documentId Document identifier or document contaiing updates
+     * @param  mixed|\Zend\Cloud\DocumentService\Document $documentId Document identifier or document containing updates
      * @param  null|array|\Zend\Cloud\DocumentService\Document Fields to update (or new fields))
      * @param  array $options
      * @return boolean
@@ -379,7 +380,7 @@ class WindowsAzure extends AbstractAdapter
             }
 
             $this->_storageClient->mergeEntity($collectionName, $entity, isset($options[self::VERIFY_ETAG]));
-        } catch(\Zend\Service\WindowsAzure\Exception $e) {
+        } catch(WindowsAzureException\ExceptionInterface $e) {
             throw new Exception\RuntimeException('Error on document update: '.$e->getMessage(), $e->getCode(), $e);
         }
     }
@@ -405,7 +406,7 @@ class WindowsAzure extends AbstractAdapter
                 $entity->setEtag($options[self::VERIFY_ETAG]);
             }
             $this->_storageClient->deleteEntity($collectionName, $entity, isset($options[self::VERIFY_ETAG]));
-        } catch(\Zend\Service\WindowsAzure\Exception $e) {
+        } catch(WindowsAzureException\ExceptionInterface $e) {
             if (strpos($e->getMessage(), "does not exist") === false) {
                 throw new Exception\RuntimeException('Error on document deletion: '.$e->getMessage(), $e->getCode(), $e);
             }
@@ -427,7 +428,7 @@ class WindowsAzure extends AbstractAdapter
             $entity = $this->_storageClient->retrieveEntityById($collectionName, $documentId[0], $documentId[1]);
             $documentClass = $this->getDocumentClass();
             return new $documentClass($this->_resolveAttributes($entity), array($entity->getPartitionKey(), $entity->getRowKey()));
-        } catch (\Zend\Service\WindowsAzure\Exception $e) {
+        } catch (WindowsAzureException\ExceptionInterface $e) {
             if (strpos($e->getMessage(), "does not exist") !== false) {
                 return false;
             }
@@ -461,7 +462,7 @@ class WindowsAzure extends AbstractAdapter
                     array($entity->getPartitionKey(), $entity->getRowKey())
                 );
             }
-        } catch(\Zend\Service\WindowsAzure\Exception $e) {
+        } catch(WindowsAzureException\ExceptionInterface $e) {
             throw new Exception\RuntimeException('Error on document query: '.$e->getMessage(), $e->getCode(), $e);
         }
 

@@ -143,7 +143,7 @@ class Mcrypt implements SymmetricInterface
         }
         if (!isset($options['padding'])) {
             $broker  = self::getPaddingBroker();
-            $padding = $broker->load(seld::DEFAULT_PADDING, array());
+            $padding = $broker->load(self::DEFAULT_PADDING, array());
             $this->padding = $padding;
         }
     }

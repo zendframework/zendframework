@@ -62,6 +62,13 @@ class BlockCipherTest extends \PHPUnit_Framework_TestCase
         
     public function testFactory()
     {
+        $this->blockCipher = BlockCipher::factory('mcrypt',array('algo' => 'blowfish'));
+        $this->assertTrue($this->blockCipher->getCipher() instanceof Mcrypt);
+        $this->assertEquals('blowfish', $this->blockCipher->getCipher()->getAlgorithm());
+    }
+    
+    public function testFactoryEmptyOptions()
+    {
         $this->blockCipher = BlockCipher::factory('mcrypt');
         $this->assertTrue($this->blockCipher->getCipher() instanceof Mcrypt);
     }

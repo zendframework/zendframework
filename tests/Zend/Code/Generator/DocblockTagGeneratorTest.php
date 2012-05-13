@@ -42,7 +42,6 @@ class DocblockTagGeneratorTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        //$this->markTestIncomplete('Tag support needs refactoring');
         $this->_tag = new Tag();
     }
 
@@ -63,26 +62,33 @@ class DocblockTagGeneratorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Foo foo foo', $this->_tag->getDescription());
     }
 
+    public function testDatatypeGetterAndSetterPersistValue()
+    {
+        $this->markTestIncomplete('Docbook tag is not completed');
+        $this->_tag->setDatatype('Foo');
+        $this->assertEquals('Foo', $this->_tag->getDatatype());
+    }
 
+    public function testParamNameGetterAndSetterPersistValue()
+    {
+        $this->markTestIncomplete('Docbook tag is not completed');
+        $this->_tag->setParamName('Foo');
+        $this->assertEquals('Foo', $this->_tag->getParamName());
+    }
 
-//    public function testDatatypeGetterAndSetterPersistValue()
-//    {
-//        $this->_tag->setDatatype('Foo');
-//        $this->assertEquals('Foo', $this->_tag->getDatatype());
-//    }
-//
-//    public function testParamNameGetterAndSetterPersistValue()
-//    {
-//        $this->_tag->setParamName('Foo');
-//        $this->assertEquals('Foo', $this->_tag->getParamName());
-//    }
-//
-//    public function testParamProducesCorrectDocBlockLine()
-//    {
-//        $this->_tag->setParamName('foo');
-//        $this->_tag->setDatatype('string');
-//        $this->_tag->setDescription('bar bar bar');
-//        $this->assertEquals('@param string $foo bar bar bar', $this->_tag->generate());
-//    }
+    public function testParamProducesCorrectDocBlockLine()
+    {
+        $this->markTestIncomplete('Docbook tag is not completed');
+        $this->_tag->setParamName('foo');
+        $this->_tag->setDatatype('string');
+        $this->_tag->setDescription('bar bar bar');
+        $this->assertEquals('@param string $foo bar bar bar', $this->_tag->generate());
+    }
 
+    public function testParamProducesCorrectDocBlockTag()
+    {
+        $this->_tag->setName('foo');
+        $this->_tag->setDescription('bar bar bar');
+        $this->assertEquals('@foo bar bar bar', $this->_tag->generate());
+    }
 }

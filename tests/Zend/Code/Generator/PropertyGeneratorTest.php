@@ -160,9 +160,7 @@ EOS;
      */
     public function testPropertyWillLoadFromReflection()
     {
-        $this->markTestIncomplete('Skipped for now');
-
-        $reflectionClass = new \Zend\Code\Reflection\ReflectionClass('\ZendTest\Code\Generator\TestAsset\TestClassWithManyProperties');
+        $reflectionClass = new \Zend\Code\Reflection\ClassReflection('\ZendTest\Code\Generator\TestAsset\TestClassWithManyProperties');
 
         // test property 1
         $reflProp = $reflectionClass->getProperty('_bazProperty');

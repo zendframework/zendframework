@@ -121,7 +121,7 @@ EOS;
 
     public function testStartLine()
     {
-        $this->markTestIncomplete('Line numbers not complete yet');
+    //    $this->markTestIncomplete('Line numbers not complete yet');
 
         $reflectionClass = new ClassReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass5');
 

@@ -203,7 +203,7 @@ abstract class AbstractMemberGenerator extends AbstractGenerator
      */
     public function isStatic()
     {
-        return ($this->flags & self::FLAG_STATIC); // is FLAG_STATIC in flags
+        return (bool) ($this->flags & self::FLAG_STATIC); // is FLAG_STATIC in flags
     }
 
     /**

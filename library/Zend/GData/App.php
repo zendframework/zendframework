@@ -461,7 +461,7 @@ class App
      *
      * @param string $method The HTTP method for the request - 'GET', 'POST',
      *                       'PUT', 'DELETE'
-     * @param string $url The URL to which this request is being performed,
+     * @param string $uri The URL to which this request is being performed,
      *                    or null if found in $data
      * @param array $headers An associative array of HTTP headers for this
      *                       request
@@ -473,7 +473,7 @@ class App
      *               'method', 'url', 'data', 'headers', 'contentType'
      */
     public function prepareRequest($method,
-                                   $url = null,
+                                   $uri = null,
                                    $headers = array(),
                                    $data = null,
                                    $contentTypeOverride = null)
@@ -486,8 +486,8 @@ class App
 
         $rawData = null;
         $finalContentType = null;
-        if ($url == null) {
-            $url = $this->_defaultPostUri;
+        if ($uri == null) {
+            $uri = $this->_defaultPostUri;
         }
 
         if (is_string($data)) {
@@ -506,8 +506,8 @@ class App
             }
             if ($method == 'PUT' || $method == 'DELETE') {
                 $editLink = $data->getEditLink();
-                if ($editLink != null && $url == null) {
-                    $url = $editLink->getHref();
+                if ($editLink != null && $uri == null) {
+                    $uri = $editLink->getHref();
                 }
             }
         } elseif ($data instanceof App\Entry) {
@@ -516,7 +516,7 @@ class App
             if ($method == 'PUT' || $method == 'DELETE') {
                 $editLink = $data->getEditLink();
                 if ($editLink != null) {
-                    $url = $editLink->getHref();
+                    $uri = $editLink->getHref();
                 }
             }
         } elseif ($data instanceof App\MediaSource) {
@@ -556,7 +556,7 @@ class App
             $finalContentType = $contentTypeOverride;
         }
 
-        return array('method' => $method, 'url' => $url,
+        return array('method' => $method, 'url' => $uri,
             'data' => $rawData, 'headers' => $headers,
             'contentType' => $finalContentType);
     }
@@ -628,10 +628,10 @@ class App
 
         // Set the params for the new request to be performed
         $this->_httpClient->setHeaders($headers);
-        $urlObj = Uri\UriFactory::factory($url);
+        $uriObj = Uri\UriFactory::factory($url);
         preg_match("/^(.*?)(\?.*)?$/", $url, $matches);
         $this->_httpClient->setUri($matches[1]);
-        $queryArray = $urlObj->getQueryAsArray();
+        $queryArray = $uriObj->getQueryAsArray();
         foreach ($queryArray as $name => $value) {
           $this->_httpClient->setParameterGet($name, $value);
         }

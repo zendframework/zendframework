@@ -30,7 +30,7 @@ namespace ZendTest\GData\TestAsset;
  */
 class Request
 {
-    public $methd;
+    public $method;
     public $uri;
     public $http_ver;
     public $headers;

@@ -23,8 +23,6 @@ namespace Zend\Http\Client\Adapter;
 
 use Traversable;
 use Zend\Stdlib\ArrayUtils;
-use Zend\Http\Client\Adapter\AdapterInterface as HttpAdapter;
-use Zend\Http\Client\Adapter\Exception as AdapterException;
 use Zend\Http\Response;
 
 /**
@@ -41,7 +39,7 @@ use Zend\Http\Response;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Test implements HttpAdapter
+class Test implements AdapterInterface
 {
     /**
      * Parameters array
@@ -103,7 +101,7 @@ class Test implements HttpAdapter
         }
 
         if (! is_array($options)) {
-            throw new AdapterException\InvalidArgumentException(
+            throw new Exception\InvalidArgumentException(
                 'Array or Traversable object expected, got ' . gettype($options)
             );
         }
@@ -121,13 +119,13 @@ class Test implements HttpAdapter
      * @param int     $port
      * @param boolean $secure
      * @param int     $timeout
-     * @throws AdapterException\RuntimeException
+     * @throws Exception\RuntimeException
      */
     public function connect($host, $port = 80, $secure = false)
     {
         if ($this->_nextRequestWillFail) {
             $this->_nextRequestWillFail = false;
-            throw new AdapterException\RuntimeException('Request failed');
+            throw new Exception\RuntimeException('Request failed');
         }
     }
 
@@ -224,7 +222,7 @@ class Test implements HttpAdapter
     public function setResponseIndex($index)
     {
         if ($index < 0 || $index >= count($this->responses)) {
-            throw new AdapterException\OutOfRangeException(
+            throw new Exception\OutOfRangeException(
                 'Index out of range of response buffer size');
         }
         $this->responseIndex = $index;

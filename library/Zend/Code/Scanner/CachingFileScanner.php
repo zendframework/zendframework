@@ -29,7 +29,8 @@ class CachingFileScanner extends FileScanner
         }
     }
 
-    public static function clearCache() {
+    public static function clearCache()
+    {
         static::$cache = array();
     }
 

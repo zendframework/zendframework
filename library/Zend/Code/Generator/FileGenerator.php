@@ -71,8 +71,8 @@ class FileGenerator extends AbstractGenerator
      * Constructor
      *
      * Passes $options to {@link setOptions()}.
-     * 
-     * @param  array|\Traversable $options 
+     *
+     * @param  array|\Traversable $options
      * @return void
      */
     public function __construct($options = null)
@@ -127,6 +127,7 @@ class FileGenerator extends AbstractGenerator
         foreach ($fileReflection->getClasses() as $class) {
             $phpClass = ClassGenerator::fromReflection($class);
             $phpClass->setContainingFileGenerator($file);
+
             $file->setClass($phpClass);
 
             $classStartLine = $class->getStartLine(true);
@@ -153,8 +154,9 @@ class FileGenerator extends AbstractGenerator
         }
 
         $namespace = $fileReflection->getNamespace();
+
         if ($namespace != '') {
-            $file->setNamespace($fileReflection->getNamespace());
+            $file->setNamespace($namespace);
         }
 
         $uses = $fileReflection->getUses();
@@ -298,7 +300,7 @@ class FileGenerator extends AbstractGenerator
 
     /**
      * setNamespace()
-     * 
+     *
      * @param $namespace
      * @return FileGenerator
      */
@@ -310,7 +312,7 @@ class FileGenerator extends AbstractGenerator
 
     /**
      * getUses()
-     * 
+     *
      * Returns an array with the first element the use statement, second is the as part.
      * If $withResolvedAs is set to true, there will be a third element that is the
      * "resolved" as statement, as the second part is not required in use statements
@@ -506,7 +508,12 @@ class FileGenerator extends AbstractGenerator
 
         // if there are markers, put the body into the output
         if (preg_match('#/\* Zend_Code_Generator_FileGenerator-(.*?)Marker:#', $body)) {
-            $output .= $body;
+            $tokens = token_get_all($body);
+            foreach($tokens as $token) {
+                if (is_array($token) && in_array($token[0], array(T_OPEN_TAG, T_COMMENT, T_DOC_COMMENT, T_WHITESPACE))) {
+                    $output .= $token[1];
+                }
+            }
             $body    = '';
         }
 
@@ -564,6 +571,9 @@ class FileGenerator extends AbstractGenerator
                 if (preg_match('#'.$regex.'#', $output)) {
                     $output = preg_replace('#'.$regex.'#', $class->generate(), $output, 1);
                 } else {
+                    if ($namespace) {
+                        $class->setNamespaceName(null);
+                    }
                     $output .= $class->generate() . self::LINE_FEED;
                 }
             }

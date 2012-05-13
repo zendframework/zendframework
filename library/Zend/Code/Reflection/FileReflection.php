@@ -260,7 +260,7 @@ class FileReflection implements ReflectionInterface
      */
     public function getContents()
     {
-        return $this->contents;
+        return file_get_contents($this->filePath);
     }
 
     public function toString()

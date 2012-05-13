@@ -21,6 +21,8 @@
 
 namespace ZendTest\Code\Generator;
 
+use Zend\Code\Generator\Docblock\Tag;
+
 /**
  * @category   Zend
  * @package    Zend_Code_Generator
@@ -33,15 +35,15 @@ namespace ZendTest\Code\Generator;
  */
 class DocblockTagGeneratorTest extends \PHPUnit_Framework_TestCase
 {
-
     /**
-     * @var \Zend\Code\Generator\Docblock\Tag
+     * @var Tag
      */
     protected $_tag = null;
 
     public function setUp()
     {
-        $this->markTestIncomplete('Tag support needs refactoring');
+        //$this->markTestIncomplete('Tag support needs refactoring');
+        $this->_tag = new Tag();
     }
 
     public function tearDown()

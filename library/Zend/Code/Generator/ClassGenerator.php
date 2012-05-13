@@ -133,7 +133,7 @@ class ClassGenerator extends AbstractGenerator
         $methods = array();
         foreach ($classReflection->getMethods() as $reflectionMethod) {
             /* @var $reflectionMethod \MethodReflection\Code\Reflection\ReflectionMethod */
-            if ($reflectionMethod->getDeclaringClass()->getName() == $cg->getName()) {
+            if ($reflectionMethod->getDeclaringClass()->getName() == $cg->getNamespaceName()."\\".$cg->getName()) {
                 $methods[] = MethodGenerator::fromReflection($reflectionMethod);
             }
         }
@@ -151,7 +151,7 @@ class ClassGenerator extends AbstractGenerator
      * @configkey docblock       string        The docblock information
      * @configkey flags          int           Flags, one of ClassGenerator::FLAG_ABSTRACT ClassGenerator::FLAG_FINAL
      * @configkey extendedclass  string        Class which this class is extending
-     * @configkey implementedinterfaces 
+     * @configkey implementedinterfaces
      * @configkey properties
      * @configkey methods
      *
@@ -189,14 +189,10 @@ class ClassGenerator extends AbstractGenerator
                     $cg->setImplementedInterfaces($value);
                     break;
                 case 'properties':
-                    foreach ($value as $pValue) {
-                        $cg->setProperty((!$pValue instanceof PropertyGenerator) ?: PropertyGenerator::fromArray($pValue));
-                    }
+                    $cg->setProperties($value);
                     break;
                 case 'methods':
-                    foreach ($value as $mValue) {
-                        $cg->setMethod((!$mValue instanceof MethodGenerator) ?: MethodGenerator::fromArray($mValue));
-                    }
+                    $cg->setMethods($value);
                     break;
             }
         }
@@ -301,7 +297,7 @@ class ClassGenerator extends AbstractGenerator
     {
         return $this->containingFileGenerator;
     }
-    
+
     /**
      * setDocblock() Set the docblock
      *
@@ -328,7 +324,7 @@ class ClassGenerator extends AbstractGenerator
         return $this;
     }
 
-    
+
     /**
      * getDocblock()
      *
@@ -460,10 +456,31 @@ class ClassGenerator extends AbstractGenerator
     public function setProperties(array $properties)
     {
         foreach ($properties as $property) {
-            $this->setProperty($property);
+            if ($property instanceof PropertyGenerator) {
+                $this->setProperty($property);
+            } else {
+                if (is_string($property)) {
+                    $this->addProperty($property);
+                } else if (is_array($property)) {
+                    call_user_func_array(array($this, 'addProperty'), $property);
+                }
+            }
         }
 
         return $this;
+    }
+
+    /**
+     * @see
+     */
+    public function addProperty($name, $defaultValue = null, $flags = PropertyGenerator::FLAG_PUBLIC)
+    {
+        if (!is_string($name)) {
+            throw new Exception\InvalidArgumentException('setProperty() expects either a string or an instance of Zend\Code\Generator\PropertyGenerator');
+        }
+
+        $property = new PropertyGenerator($name, $defaultValue, $flags);
+        $this->setProperty($property);
     }
 
     /**
@@ -476,8 +493,8 @@ class ClassGenerator extends AbstractGenerator
     {
         if (is_string($property)) {
             $property = new PropertyGenerator($property);
-        } 
-        
+        }
+
         if (!$property instanceof PropertyGenerator) {
             throw new Exception\InvalidArgumentException(
                 'setProperty() expects either a string '
@@ -541,10 +558,31 @@ class ClassGenerator extends AbstractGenerator
     public function setMethods(array $methods)
     {
         foreach ($methods as $method) {
-            $this->setMethod($method);
+            if ($method instanceof MethodGenerator) {
+                $this->setMethod($method);
+            } else {
+                if (is_string($method)) {
+                    $this->addMethod($method);
+                } else if (is_array($method)){
+                    call_user_func_array(array($this, 'addMethod'), $method);
+                }
+            }
         }
         return $this;
     }
+
+    /**
+     * Add Method from scalars
+     */
+    public function addMethod($name = null, array $parameters = array(), $flags = MethodGenerator::FLAG_PUBLIC, $body = null, $docblock = null)
+    {
+        if (!is_string($name)) {
+            throw new Exception\InvalidArgumentException('setMethod() expects either a string method name or an instance of Zend\Code\Generator\MethodGenerator');
+        }
+        $method = new MethodGenerator($name, $parameters, $flags, $body, $docblock);
+        $this->setMethod($method);
+    }
+
 
     /**
      * setMethod()
@@ -556,8 +594,8 @@ class ClassGenerator extends AbstractGenerator
     {
         if (is_string($method)) {
             $method = new MethodGenerator($method);
-        } 
-        
+        }
+
         if (!$method instanceof MethodGenerator) {
             throw new Exception\InvalidArgumentException('setMethod() expects either a string method name or an instance of Zend\Code\Generator\MethodGenerator');
         }

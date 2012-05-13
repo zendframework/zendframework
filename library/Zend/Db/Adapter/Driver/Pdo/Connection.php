@@ -203,7 +203,7 @@ class Connection implements ConnectionInterface
                     $dsn .= $database;
                     break;
                 default:
-                    $dsn .= (isset($hostname)) ? 'hostname=' . $hostname : '';
+                    $dsn .= (isset($hostname)) ? 'host=' . $hostname : '';
                     $dsn .= (isset($hostname) && isset($database)) ? ';' : '';
                     $dsn .= (isset($database)) ? 'dbname=' . $database : '';
             }

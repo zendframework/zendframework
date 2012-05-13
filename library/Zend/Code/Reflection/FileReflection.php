@@ -162,7 +162,7 @@ class FileReflection implements ReflectionInterface
      *
      * @return DocBlockReflection
      */
-    public function getDocblock()
+    public function getDocBlock()
     {
         if (!($docComment = $this->getDocComment())) {
             return false;

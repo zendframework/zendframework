@@ -29,7 +29,7 @@ use Zend\Code\Reflection\DocBlockReflection;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class DocblockGenerator extends AbstractGenerator
+class DocBlockGenerator extends AbstractGenerator
 {
     /**
      * @var string
@@ -54,21 +54,21 @@ class DocblockGenerator extends AbstractGenerator
     /**
      * fromReflection() - Build a docblock generator object from a reflection object
      *
-     * @param ReflectionDocblock $reflectionDocblock
-     * @return DocblockGenerator
+     * @param ReflectionDocBlock $reflectionDocBlock
+     * @return DocBlockGenerator
      */
-    public static function fromReflection(DocBlockReflection $reflectionDocblock)
+    public static function fromReflection(DocBlockReflection $reflectionDocBlock)
     {
         $docblock = new static();
 
-        $docblock->setSourceContent($reflectionDocblock->getContents());
+        $docblock->setSourceContent($reflectionDocBlock->getContents());
         $docblock->setSourceDirty(false);
 
-        $docblock->setShortDescription($reflectionDocblock->getShortDescription());
-        $docblock->setLongDescription($reflectionDocblock->getLongDescription());
+        $docblock->setShortDescription($reflectionDocBlock->getShortDescription());
+        $docblock->setLongDescription($reflectionDocBlock->getLongDescription());
 
-        foreach ($reflectionDocblock->getTags() as $tag) {
-            $docblock->setTag(Docblock\Tag::fromReflection($tag));
+        foreach ($reflectionDocBlock->getTags() as $tag) {
+            $docblock->setTag(DocBlock\Tag::fromReflection($tag));
         }
 
         return $docblock;
@@ -92,7 +92,7 @@ class DocblockGenerator extends AbstractGenerator
      * setShortDescription()
      *
      * @param string $shortDescription
-     * @return DocblockGenerator
+     * @return DocBlockGenerator
      */
     public function setShortDescription($shortDescription)
     {
@@ -114,7 +114,7 @@ class DocblockGenerator extends AbstractGenerator
      * setLongDescription()
      *
      * @param string $longDescription
-     * @return \Zend\Code\GeneratorDocblock
+     * @return \Zend\Code\GeneratorDocBlock
      */
     public function setLongDescription($longDescription)
     {
@@ -136,7 +136,7 @@ class DocblockGenerator extends AbstractGenerator
      * setTags()
      *
      * @param array $tags
-     * @return \Zend\Code\GeneratorDocblock
+     * @return \Zend\Code\GeneratorDocBlock
      */
     public function setTags(array $tags)
     {
@@ -151,13 +151,13 @@ class DocblockGenerator extends AbstractGenerator
      * setTag()
      *
      * @param array|\Zend\Code\Generator\DocBlock\Tag $tag
-     * @return \Zend\Code\GeneratorDocblock
+     * @return \Zend\Code\GeneratorDocBlock
      */
     public function setTag($tag)
     {
         if (is_array($tag)) {
-            $tag = new Docblock\Tag($tag);
-        } elseif (!$tag instanceof Docblock\Tag) {
+            $tag = new DocBlock\Tag($tag);
+        } elseif (!$tag instanceof DocBlock\Tag) {
             throw new Exception\InvalidArgumentException(
                 'setTag() expects either an array of method options or an '
                 . 'instance of Zend\\Code\\Generator\\DocBlock\\Tag'

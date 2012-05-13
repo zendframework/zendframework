@@ -32,7 +32,7 @@ use Zend\Code\Reflection\MethodReflection;
 class MethodGenerator extends AbstractMemberGenerator
 {
     /**
-     * @var DocblockGenerator
+     * @var DocBlockGenerator
      */
     protected $docblock = null;
 
@@ -65,7 +65,7 @@ class MethodGenerator extends AbstractMemberGenerator
         $method->setSourceDirty(false);
 
         if ($reflectionMethod->getDocComment() != '') {
-            $method->setDocblock(DocblockGenerator::fromReflection($reflectionMethod->getDocblock()));
+            $method->setDocBlock(DocBlockGenerator::fromReflection($reflectionMethod->getDocBlock()));
         }
 
         $method->setFinal($reflectionMethod->isFinal());
@@ -106,7 +106,7 @@ class MethodGenerator extends AbstractMemberGenerator
             $this->setBody($body);
         }
         if ($docblock !== null) {
-            $this->setDocblock($docblock);
+            $this->setDocBlock($docblock);
         }
     }
 
@@ -188,7 +188,7 @@ class MethodGenerator extends AbstractMemberGenerator
 
         $indent = $this->getIndentation();
 
-        if (($docblock = $this->getDocblock()) !== null) {
+        if (($docblock = $this->getDocBlock()) !== null) {
             $docblock->setIndentation($indent);
             $output .= $docblock->generate();
         }

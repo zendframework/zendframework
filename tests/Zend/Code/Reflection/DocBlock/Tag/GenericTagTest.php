@@ -29,7 +29,7 @@ use Zend\Code\Reflection\DocBlock\GenericTag;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Reflection
- * @group      Zend_Reflection_Docblock
+ * @group      Zend_Reflection_DocBlock
  */
 class GenericTagTest extends \PHPUnit_Framework_TestCase
 {

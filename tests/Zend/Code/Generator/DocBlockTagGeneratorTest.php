@@ -21,7 +21,7 @@
 
 namespace ZendTest\Code\Generator;
 
-use Zend\Code\Generator\Docblock\Tag;
+use Zend\Code\Generator\DocBlock\Tag;
 
 /**
  * @category   Zend
@@ -33,7 +33,7 @@ use Zend\Code\Generator\Docblock\Tag;
  * @group Zend_Code_Generator
  * @group Zend_Code_Generator_Php
  */
-class DocblockTagGeneratorTest extends \PHPUnit_Framework_TestCase
+class DocBlockTagGeneratorTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Tag

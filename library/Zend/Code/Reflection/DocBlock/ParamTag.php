@@ -56,12 +56,12 @@ class ParamTag implements TagInterface
     /**
      * Initializer
      *
-     * @param string $tagDocblockLine
+     * @param string $tagDocBlockLine
      */
-    public function initialize($tagDocblockLine)
+    public function initialize($tagDocBlockLine)
     {
         $matches = array();
-        preg_match('#([\w|\\\]+)(?:\s+(\$\S+)){0,1}(?:\s+(.*))?#s', $tagDocblockLine, $matches);
+        preg_match('#([\w|\\\]+)(?:\s+(\$\S+)){0,1}(?:\s+(.*))?#s', $tagDocBlockLine, $matches);
 
         $this->type = $matches[1];
 

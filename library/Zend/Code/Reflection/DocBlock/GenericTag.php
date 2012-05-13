@@ -58,12 +58,12 @@ class GenericTag implements TagInterface
     /**
      * Constructor
      *
-     * @param string $tagDocblockLine
-     * @return ReflectionDocblockTag
+     * @param string $tagDocBlockLine
+     * @return ReflectionDocBlockTag
      */
-    public function initialize($tagDocblockLine)
+    public function initialize($tagDocBlockLine)
     {
-        $this->parse($tagDocblockLine);
+        $this->parse($tagDocBlockLine);
     }
 
     /**

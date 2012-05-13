@@ -19,7 +19,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Code\Generator\Docblock\Tag;
+namespace Zend\Code\Generator\DocBlock\Tag;
 
 /**
  * @category   Zend
@@ -27,7 +27,7 @@ namespace Zend\Code\Generator\Docblock\Tag;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ReturnTag extends \Zend\Code\Generator\Docblock\Tag
+class ParamTag extends \Zend\Code\Generator\DocBlock\Tag
 {
 
     /**
@@ -36,27 +36,33 @@ class ReturnTag extends \Zend\Code\Generator\Docblock\Tag
     protected $_datatype = null;
 
     /**
+     * @var string
+     */
+    protected $_paramName = null;
+
+    /**
      * fromReflection()
      *
-     * @param \Zend\Code\Reflection\ReflectionDocblockTag $reflectionTagReturn
-     * @return \Zend\Code\Generator\DocBlock\Tag\ReturnTag
+     * @param \Zend\Code\Reflection\ReflectionDocBlockTag $reflectionTagParam
+     * @return \Zend\Code\Generator\DocBlock\Tag\ParamTag
      */
-    public static function fromReflection(\Zend\Code\Reflection\DocBlock\TagInterface $reflectionTagReturn)
+    public static function fromReflection(\Zend\Code\Reflection\ReflectionDocBlockTag $reflectionTagParam)
     {
-        $returnTag = new self();
+        $paramTag = new self();
 
-        $returnTag->setName('return');
-        $returnTag->setDatatype($reflectionTagReturn->getType()); // @todo rename
-        $returnTag->setDescription($reflectionTagReturn->getDescription());
+        $paramTag->setName('param');
+        $paramTag->setDatatype($reflectionTagParam->getType()); // @todo rename
+        $paramTag->setParamName($reflectionTagParam->getVariableName());
+        $paramTag->setDescription($reflectionTagParam->getDescription());
 
-        return $returnTag;
+        return $paramTag;
     }
 
     /**
      * setDatatype()
      *
      * @param string $datatype
-     * @return \Zend\Code\Generator\DocBlock\Tag\ReturnTag
+     * @return \Zend\Code\Generator\DocBlock\Tag\ParamTag
      */
     public function setDatatype($datatype)
     {
@@ -65,7 +71,7 @@ class ReturnTag extends \Zend\Code\Generator\Docblock\Tag
     }
 
     /**
-     * getDatatype()
+     * getDatatype
      *
      * @return string
      */
@@ -74,6 +80,27 @@ class ReturnTag extends \Zend\Code\Generator\Docblock\Tag
         return $this->_datatype;
     }
 
+    /**
+     * setParamName()
+     *
+     * @param string $paramName
+     * @return \Zend\Code\Generator\DocBlock\Tag\ParamTag
+     */
+    public function setParamName($paramName)
+    {
+        $this->_paramName = $paramName;
+        return $this;
+    }
+
+    /**
+     * getParamName()
+     *
+     * @return string
+     */
+    public function getParamName()
+    {
+        return $this->_paramName;
+    }
 
     /**
      * generate()
@@ -82,7 +109,10 @@ class ReturnTag extends \Zend\Code\Generator\Docblock\Tag
      */
     public function generate()
     {
-        $output = '@return ' . $this->_datatype . ' ' . $this->description;
+        $output = '@param '
+            . (($this->_datatype  != null) ? $this->_datatype : 'unknown')
+            . (($this->_paramName != null) ? ' $' . $this->_paramName : '')
+            . (($this->description != null) ? ' ' . $this->description : '');
         return $output;
     }
 

@@ -84,7 +84,7 @@ class MethodReflection extends PhpReflectionMethod implements ReflectionInterfac
     {
         if ($includeDocComment) {
             if ($this->getDocComment() != '') {
-                return $this->getDocblock()->getStartLine();
+                return $this->getDocBlock()->getStartLine();
             }
         }
 
@@ -127,13 +127,13 @@ class MethodReflection extends PhpReflectionMethod implements ReflectionInterfac
     /**
      * Get method contents
      *
-     * @param  bool $includeDocblock
+     * @param  bool $includeDocBlock
      * @return string
      */
-    public function getContents($includeDocblock = true)
+    public function getContents($includeDocBlock = true)
     {
         $fileContents = file($this->getFileName());
-        $startNum = $this->getStartLine($includeDocblock);
+        $startNum = $this->getStartLine($includeDocBlock);
         $endNum = ($this->getEndLine() - $this->getStartLine());
 
         return implode("\n", array_splice($fileContents, $startNum, $endNum, true));

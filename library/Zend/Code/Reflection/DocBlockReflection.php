@@ -203,7 +203,7 @@ class DocBlockReflection implements ReflectionInterface
      * Retrieve the given docblock tag
      *
      * @param  string $name
-     * @return \Zend\Code\Reflection\ReflectionDocblockTag|false
+     * @return \Zend\Code\Reflection\ReflectionDocBlockTag|false
      */
     public function getTag($name)
     {
@@ -221,7 +221,7 @@ class DocBlockReflection implements ReflectionInterface
      * Get all docblock annotation tags
      *
      * @param string $filter
-     * @return array Array of \Zend\Code\Reflection\ReflectionDocblockTag
+     * @return array Array of \Zend\Code\Reflection\ReflectionDocBlockTag
      */
     public function getTags($filter = null)
     {

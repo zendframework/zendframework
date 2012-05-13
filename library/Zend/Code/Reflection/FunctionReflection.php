@@ -34,9 +34,9 @@ class FunctionReflection extends ReflectionFunction implements ReflectionInterfa
      * Get function docblock
      *
      * @param  string $reflectionClass Name of reflection class to use
-     * @return Zend_Reflection_Docblock
+     * @return Zend_Reflection_DocBlock
      */
-    public function getDocblock()
+    public function getDocBlock()
     {
         if ('' == ($comment = $this->getDocComment())) {
             throw new Exception\InvalidArgumentException($this->getName() . ' does not have a docblock');
@@ -55,7 +55,7 @@ class FunctionReflection extends ReflectionFunction implements ReflectionInterfa
     {
         if ($includeDocComment) {
             if ($this->getDocComment() != '') {
-                return $this->getDocblock()->getStartLine();
+                return $this->getDocBlock()->getStartLine();
             }
         }
 
@@ -65,15 +65,15 @@ class FunctionReflection extends ReflectionFunction implements ReflectionInterfa
     /**
      * Get contents of function
      *
-     * @param  bool $includeDocblock
+     * @param  bool $includeDocBlock
      * @return string
      */
-    public function getContents($includeDocblock = true)
+    public function getContents($includeDocBlock = true)
     {
         return implode("\n",
             array_splice(
                 file($this->getFileName()),
-                $this->getStartLine($includeDocblock),
+                $this->getStartLine($includeDocBlock),
                 ($this->getEndLine() - $this->getStartLine()),
                 true
                 )
@@ -106,12 +106,12 @@ class FunctionReflection extends ReflectionFunction implements ReflectionInterfa
      */
     public function getReturn()
     {
-        $docblock = $this->getDocblock();
+        $docblock = $this->getDocBlock();
         if (!$docblock->hasTag('return')) {
             throw new Exception\InvalidArgumentException('Function does not specify an @return annotation tag; cannot determine return type');
         }
         $tag    = $docblock->getTag('return');
-        $return = ReflectionDocblockTag::factory('@return ' . $tag->getDescription());
+        $return = ReflectionDocBlockTag::factory('@return ' . $tag->getDescription());
         return $return;
     }
 

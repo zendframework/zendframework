@@ -38,7 +38,7 @@ class FileGenerator extends AbstractGenerator
     protected $filename = null;
 
     /**
-     * @var \Zend\Code\GeneratorDocblock
+     * @var \Zend\Code\GeneratorDocBlock
      */
     protected $docblock = null;
 
@@ -165,8 +165,8 @@ class FileGenerator extends AbstractGenerator
         }
 
         if (($fileReflection->getDocComment() != '')) {
-            $docblock = $fileReflection->getDocblock();
-            $file->setDocblock(DocblockGenerator::fromReflection($docblock));
+            $docblock = $fileReflection->getDocBlock();
+            $file->setDocBlock(DocBlockGenerator::fromReflection($docblock));
 
             $bodyLines = explode("\n", $body);
             $bodyReturn = array();
@@ -175,7 +175,7 @@ class FileGenerator extends AbstractGenerator
                     $bodyReturn[] = str_replace(
                         '?',
                         $class->getName(),
-                        '/* Zend_Code_Generator_FileGenerator-DocblockMarker */'
+                        '/* Zend_Code_Generator_FileGenerator-DocBlockMarker */'
                     );
                     $lineNum = $docblock->getEndLine();
                 } else {
@@ -219,22 +219,22 @@ class FileGenerator extends AbstractGenerator
 
 
     /**
-     * setDocblock() Set the docblock
+     * setDocBlock() Set the docblock
      *
-     * @param DocblockGenerator|string $docblock
+     * @param DocBlockGenerator|string $docblock
      * @return FileGenerator
      */
-    public function setDocblock($docblock)
+    public function setDocBlock($docblock)
     {
         if (is_string($docblock)) {
             $docblock = array('shortDescription' => $docblock);
         }
 
         if (is_array($docblock)) {
-            $docblock = new DocblockGenerator($docblock);
-        } elseif (!$docblock instanceof DocblockGenerator) {
+            $docblock = new DocBlockGenerator($docblock);
+        } elseif (!$docblock instanceof DocBlockGenerator) {
             throw new Exception\InvalidArgumentException(
-                'setDocblock() is expecting either a string, array or an instance of Zend\Code\Generator\DocblockGenerator'
+                'setDocBlock() is expecting either a string, array or an instance of Zend\Code\Generator\DocBlockGenerator'
             );
         }
 
@@ -245,9 +245,9 @@ class FileGenerator extends AbstractGenerator
     /**
      * Get docblock
      *
-     * @return DocblockGenerator
+     * @return DocBlockGenerator
      */
-    public function getDocblock()
+    public function getDocBlock()
     {
         return $this->docblock;
     }
@@ -474,7 +474,7 @@ class FileGenerator extends AbstractGenerator
      */
     public function isSourceDirty()
     {
-        if (($docblock = $this->getDocblock()) && $docblock->isSourceDirty()) {
+        if (($docblock = $this->getDocBlock()) && $docblock->isSourceDirty()) {
             return true;
         }
 
@@ -518,11 +518,11 @@ class FileGenerator extends AbstractGenerator
         }
 
         // Add file docblock, if any
-        if (null !== ($docblock = $this->getDocblock())) {
+        if (null !== ($docblock = $this->getDocBlock())) {
             $docblock->setIndentation('');
 
-            if (preg_match('#/* Zend_Code_Generator_FileGenerator-DocblockMarker */#', $output)) {
-                $output = preg_replace('#/* Zend_CodeGenerator_Php_File-DocblockMarker */#', $docblock->generate(), $output, 1);
+            if (preg_match('#/* Zend_Code_Generator_FileGenerator-DocBlockMarker */#', $output)) {
+                $output = preg_replace('#/* Zend_CodeGenerator_Php_File-DocBlockMarker */#', $docblock->generate(), $output, 1);
             } else {
                 $output .= $docblock->generate() . self::LINE_FEED;
             }

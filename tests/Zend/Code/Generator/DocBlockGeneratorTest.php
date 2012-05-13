@@ -21,7 +21,7 @@
 
 namespace ZendTest\Code\Generator;
 
-use Zend\Code\Generator\DocblockGenerator;
+use Zend\Code\Generator\DocBlockGenerator;
 
 /**
  * @category   Zend
@@ -33,19 +33,19 @@ use Zend\Code\Generator\DocblockGenerator;
  * @group Zend_Code_Generator
  * @group Zend_Code_Generator_Php
  */
-class DocblockGeneratorTest extends \PHPUnit_Framework_TestCase
+class DocBlockGeneratorTest extends \PHPUnit_Framework_TestCase
 {
 
     public function testShortDescriptionGetterAndSetter()
     {
-        $docblockGenerator = new DocblockGenerator();
+        $docblockGenerator = new DocBlockGenerator();
         $docblockGenerator->setShortDescription('Short Description');
         $this->assertEquals('Short Description', $docblockGenerator->getShortDescription());
     }
 
     public function testLongDescriptionGetterAndSetter()
     {
-        $docblockGenerator = new DocblockGenerator();
+        $docblockGenerator = new DocBlockGenerator();
         $docblockGenerator->setLongDescription('Long Description');
         $this->assertEquals('Long Description', $docblockGenerator->getLongDescription());
     }
@@ -71,13 +71,13 @@ class DocblockGeneratorTest extends \PHPUnit_Framework_TestCase
 
     }
 
-    public function testGenerationOfDocblock()
+    public function testGenerationOfDocBlock()
     {
-        $docblockGenerator = new DocblockGenerator();
+        $docblockGenerator = new DocBlockGenerator();
         $docblockGenerator->setShortDescription('@var Foo this is foo bar');
 
-        $expected = '/**' . DocblockGenerator::LINE_FEED . ' * @var Foo this is foo bar'
-            . DocblockGenerator::LINE_FEED . ' */' . DocblockGenerator::LINE_FEED;
+        $expected = '/**' . DocBlockGenerator::LINE_FEED . ' * @var Foo this is foo bar'
+            . DocBlockGenerator::LINE_FEED . ' */' . DocBlockGenerator::LINE_FEED;
         $this->assertEquals($expected, $docblockGenerator->generate());
     }
 

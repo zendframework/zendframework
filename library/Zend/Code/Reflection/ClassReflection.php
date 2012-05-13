@@ -109,14 +109,14 @@ class ClassReflection extends ReflectionClass implements ReflectionInterface
     /**
      * Return the contents of the class
      *
-     * @param bool $includeDocblock
+     * @param bool $includeDocBlock
      * @return string
      */
-    public function getContents($includeDocblock = true)
+    public function getContents($includeDocBlock = true)
     {
         $filename  = $this->getFileName();
         $filelines = file($filename);
-        $startnum  = $this->getStartLine($includeDocblock);
+        $startnum  = $this->getStartLine($includeDocBlock);
         $endnum    = $this->getEndLine() - $this->getStartLine();
 
         return implode('', array_splice($filelines, $startnum, $endnum, true));

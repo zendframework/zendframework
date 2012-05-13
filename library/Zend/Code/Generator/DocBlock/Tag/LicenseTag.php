@@ -19,7 +19,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Code\Generator\Docblock\Tag;
+namespace Zend\Code\Generator\DocBlock\Tag;
 
 /**
  * @category   Zend
@@ -27,7 +27,7 @@ namespace Zend\Code\Generator\Docblock\Tag;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class LicenseTag extends \Zend\Code\Generator\Docblock\Tag
+class LicenseTag extends \Zend\Code\Generator\DocBlock\Tag
 {
 
     /**
@@ -38,10 +38,10 @@ class LicenseTag extends \Zend\Code\Generator\Docblock\Tag
     /**
      * fromReflection()
      *
-     * @param \Zend\Code\Reflection\ReflectionDocblockTag $reflectionTagReturn
+     * @param \Zend\Code\Reflection\ReflectionDocBlockTag $reflectionTagReturn
      * @return \Zend\Code\Generator\DocBlock\Tag\LicenseTag
      */
-    public static function fromReflection(\Zend\Code\Reflection\ReflectionDocblockTag $reflectionTagLicense)
+    public static function fromReflection(\Zend\Code\Reflection\ReflectionDocBlockTag $reflectionTagLicense)
     {
         $returnTag = new self();
 

@@ -51,13 +51,13 @@ class ReturnTag implements TagInterface
     /**
      * Constructor
      *
-     * @param  string $tagDocblockLine
+     * @param  string $tagDocBlockLine
      * @return void
      */
-    public function initialize($tagDocblockLine)
+    public function initialize($tagDocBlockLine)
     {
         $matches = array();
-        preg_match('#([\w|\\\]+)(?:\s+(.*))?#', $tagDocblockLine, $matches);
+        preg_match('#([\w|\\\]+)(?:\s+(.*))?#', $tagDocBlockLine, $matches);
 
         $this->type = $matches[1];
 

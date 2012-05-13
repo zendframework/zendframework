@@ -61,7 +61,7 @@ class PropertyGenerator extends AbstractMemberGenerator
         $property->setDefaultValue($allDefaultProperties[$reflectionProperty->getName()]);
 
         if ($reflectionProperty->getDocComment() != '') {
-            $property->setDocblock(DocblockGenerator::fromReflection($reflectionProperty->getDocComment()));
+            $property->setDocBlock(DocBlockGenerator::fromReflection($reflectionProperty->getDocComment()));
         }
 
         if ($reflectionProperty->isStatic()) {
@@ -165,7 +165,7 @@ class PropertyGenerator extends AbstractMemberGenerator
 
         $output = '';
 
-        if (($docblock = $this->getDocblock()) !== null) {
+        if (($docblock = $this->getDocBlock()) !== null) {
             $docblock->setIndentation('    ');
             $output .= $docblock->generate();
         }

@@ -6,7 +6,7 @@ class TestSampleClass7
 {
     /**
      * @param Zend\Foo\Bar $var desc
-     * @return Zend\Code\Reflection\Docblock
+     * @return Zend\Code\Reflection\DocBlock
      */
     public function doSomething()
     {

@@ -19,9 +19,9 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Code\Generator\Docblock;
+namespace Zend\Code\Generator\DocBlock;
 
-use Zend\Code\Reflection\Docblock\TagInterface as ReflectionDocblockTag,
+use Zend\Code\Reflection\DocBlock\TagInterface as ReflectionDocBlockTag,
     Zend\Code\Generator\AbstractGenerator;
 
 /**
@@ -61,28 +61,28 @@ class Tag extends AbstractGenerator
     /**
      * fromReflection()
      *
-     * @param ReflectionDocblockTag $reflectionTag
+     * @param ReflectionDocBlockTag $reflectionTag
      * @return Tag
      */
-    public static function fromReflection(ReflectionDocblockTag $reflectionTag)
+    public static function fromReflection(ReflectionDocBlockTag $reflectionTag)
     {
         $tagName = $reflectionTag->getName();
 
-        $codeGenDocblockTag = new self();
-        $codeGenDocblockTag->setName($tagName);
+        $codeGenDocBlockTag = new self();
+        $codeGenDocBlockTag->setName($tagName);
 
         // transport any properties via accessors and mutators from reflection to codegen object
         $reflectionClass = new \ReflectionClass($reflectionTag);
         foreach ($reflectionClass->getMethods(\ReflectionMethod::IS_PUBLIC) as $method) {
             if (substr($method->getName(), 0, 3) == 'get') {
                 $propertyName = substr($method->getName(), 3);
-                if (method_exists($codeGenDocblockTag, 'set' . $propertyName)) {
-                    $codeGenDocblockTag->{'set' . $propertyName}($reflectionTag->{'get' . $propertyName}());
+                if (method_exists($codeGenDocBlockTag, 'set' . $propertyName)) {
+                    $codeGenDocBlockTag->{'set' . $propertyName}($reflectionTag->{'get' . $propertyName}());
                 }
             }
         }
 
-        return $codeGenDocblockTag;
+        return $codeGenDocBlockTag;
     }
 
     /**

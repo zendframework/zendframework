@@ -46,7 +46,7 @@ class ClassGenerator extends AbstractGenerator
     protected $namespaceName = null;
 
     /**
-     * @var DocblockGenerator
+     * @var DocBlockGenerator
      */
     protected $docblock = null;
 
@@ -95,7 +95,7 @@ class ClassGenerator extends AbstractGenerator
         $cg->setSourceDirty(false);
 
         if ($classReflection->getDocComment() != '') {
-            $cg->setDocblock(DocblockGenerator::fromReflection($classReflection->getDocblock()));
+            $cg->setDocBlock(DocBlockGenerator::fromReflection($classReflection->getDocBlock()));
         }
 
         $cg->setAbstract($classReflection->isAbstract());
@@ -177,7 +177,7 @@ class ClassGenerator extends AbstractGenerator
                     $cg->setNamespaceName($value);
                     break;
                 case 'docblock':
-                    $cg->setDocblock((!$value instanceof DocblockGenerator) ?: DocblockGenerator::fromArray($value));
+                    $cg->setDocBlock((!$value instanceof DocBlockGenerator) ?: DocBlockGenerator::fromArray($value));
                     break;
                 case 'flags':
                     $cg->setFlags($value);
@@ -223,7 +223,7 @@ class ClassGenerator extends AbstractGenerator
             $this->setMethods($methods);
         }
         if ($docblock !== null) {
-            $this->setDocblock($docblock);
+            $this->setDocBlock($docblock);
         }
     }
 
@@ -299,12 +299,12 @@ class ClassGenerator extends AbstractGenerator
     }
 
     /**
-     * setDocblock() Set the docblock
+     * setDocBlock() Set the docblock
      *
-     * @param \Zend\Code\GeneratorDocblock|array|string $docblock
+     * @param \Zend\Code\GeneratorDocBlock|array|string $docblock
      * @return \FileGenerator\Code\Generator\PhpFile
      */
-    public function setDocblock(DocblockGenerator $docblock)
+    public function setDocBlock(DocBlockGenerator $docblock)
     {
         /*
         if (is_string($docblock)) {
@@ -312,10 +312,10 @@ class ClassGenerator extends AbstractGenerator
         }
 
         if (is_array($docblock)) {
-            $docblock = new DocblockGenerator($docblock);
-        } elseif (!$docblock instanceof DocblockGenerator) {
+            $docblock = new DocBlockGenerator($docblock);
+        } elseif (!$docblock instanceof DocBlockGenerator) {
             throw new Exception\InvalidArgumentException(
-                'setDocblock() is expecting either a string, array or an instance of Zend\Code\Generator\DocblockGenerator'
+                'setDocBlock() is expecting either a string, array or an instance of Zend\Code\Generator\DocBlockGenerator'
             );
         }
         */
@@ -326,11 +326,11 @@ class ClassGenerator extends AbstractGenerator
 
 
     /**
-     * getDocblock()
+     * getDocBlock()
      *
-     * @return DocblockGenerator
+     * @return DocBlockGenerator
      */
-    public function getDocblock()
+    public function getDocBlock()
     {
         return $this->docblock;
     }
@@ -654,7 +654,7 @@ class ClassGenerator extends AbstractGenerator
      */
     public function isSourceDirty()
     {
-        if (($docblock = $this->getDocblock()) && $docblock->isSourceDirty()) {
+        if (($docblock = $this->getDocBlock()) && $docblock->isSourceDirty()) {
             return true;
         }
 
@@ -693,7 +693,7 @@ class ClassGenerator extends AbstractGenerator
             $output .= 'namespace ' . $namespace . ';' . self::LINE_FEED . self::LINE_FEED;
         }
 
-        if (null !== ($docblock = $this->getDocblock())) {
+        if (null !== ($docblock = $this->getDocBlock())) {
             $docblock->setIndentation('');
             $output .= $docblock->generate();
         }

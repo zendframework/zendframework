@@ -151,8 +151,8 @@ class ViewManager implements ListenerAggregateInterface
         }
 
         $map = array();
-        if (isset($this->config->view) && isset($this->config->view->helper_map)) {
-            $map = $this->config->view->helper_map;
+        if (isset($this->config['view_manager']) && isset($this->config['view_manager']['helper_map'])) {
+            $map = $this->config['view_manager']['helper_map'];
         }
         $this->helperLoader = new ViewHelperLoader($map);
         return $this->helperLoader;
@@ -177,8 +177,8 @@ class ViewManager implements ListenerAggregateInterface
         $url->setRouter($router);
 
         $basePath = '/';
-        if (isset($this->config->view) && isset($this->config->view->base_path)) {
-            $basePath = $this->config->view->base_path;
+        if (isset($this->config['view_manager']) && isset($this->config['view_manager']['base_path'])) {
+            $basePath = $this->config['view_manager']['base_path'];
         }
         $basePathHelper = $this->helperBroker->load('basePath');
         $basePathHelper->setBasePath($basePath);
@@ -198,14 +198,14 @@ class ViewManager implements ListenerAggregateInterface
         }
 
         $map = array();
-        if (isset($this->config->view) && isset($this->config->view->template_map)) {
-            $map = $this->config->view->template_map;
+        if (isset($this->config['view_manager']) && isset($this->config['view_manager']['template_map'])) {
+            $map = $this->config['view_manager']['template_map'];
         }
         $templateMapResolver = new ViewResolver\TemplateMapResolver($map);
 
         $stack = array();
-        if (isset($this->config->view) && isset($this->config->view->template_path_stack)) {
-            $stack = $this->config->view->template_path_stack;
+        if (isset($this->config['view_manager']) && isset($this->config['view_manager']['template_path_stack'])) {
+            $stack = $this->config['view_manager']['template_path_stack'];
         }
         $templatePathStack = new ViewResolver\TemplatePathStack($stack);
 
@@ -288,8 +288,8 @@ class ViewManager implements ListenerAggregateInterface
     protected function getLayoutTemplate()
     {
         $layout = 'layout/layout';
-        if (isset($this->config->view) && isset($this->config->view->layout)) {
-            $layout = $this->config->view->layout;
+        if (isset($this->config['view_manager']) && isset($this->config['view_manager']['layout'])) {
+            $layout = $this->config['view_manager']['layout'];
         }
         return $layout;
     }
@@ -326,11 +326,11 @@ class ViewManager implements ListenerAggregateInterface
         $displayExceptions = false;
         $exceptionTemplate = 'error';
 
-        if (isset($this->config->view) && isset($this->config->view->display_exceptions)) {
-            $displayExceptions = $this->config->view->display_exceptions;
+        if (isset($this->config['view_manager']) && isset($this->config['view_manager']['display_exceptions'])) {
+            $displayExceptions = $this->config['view_manager']['display_exceptions'];
         }
-        if (isset($this->config->view) && isset($this->config->view->exception_template)) {
-            $exceptionTemplate = $this->config->view->exception_template;
+        if (isset($this->config['view_manager']) && isset($this->config['view_manager']['exception_template'])) {
+            $exceptionTemplate = $this->config['view_manager']['exception_template'];
         }
 
         $this->exceptionStrategy->setDisplayExceptions($displayExceptions);
@@ -354,11 +354,11 @@ class ViewManager implements ListenerAggregateInterface
         $displayNotFoundReason = false;
         $notFoundTemplate      = '404';
 
-        if (isset($this->config->view) && isset($this->config->view->display_not_found_reason)) {
-            $displayNotFoundReason = $this->config->view->display_not_found_reason;
+        if (isset($this->config['view_manager']) && isset($this->config['view_manager']['display_not_found_reason'])) {
+            $displayNotFoundReason = $this->config['view_manager']['display_not_found_reason'];
         }
-        if (isset($this->config->view) && isset($this->config->view->not_found_template)) {
-            $notFoundTemplate = $this->config->view->not_found_template;
+        if (isset($this->config['view_manager']) && isset($this->config['view_manager']['not_found_template'])) {
+            $notFoundTemplate = $this->config['view_manager']['not_found_template'];
         }
 
         $this->routeNotFoundStrategy->setDisplayNotFoundReason($displayNotFoundReason);

@@ -1,31 +1,65 @@
 <?php
+/**
+ * Zend Framework
+ *
+ * LICENSE
+ *
+ * This source file is subject to the new BSD license that is bundled
+ * with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://framework.zend.com/license/new-bsd
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@zend.com so we can send you a copy immediately.
+ *
+ * @category   Zend
+ * @package    Zend_Mvc
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
 
 namespace Zend\Mvc;
 
-use ArrayObject;
 use Zend\EventManager\EventManagerInterface;
-use Zend\EventManager\EventManager;
 use Zend\EventManager\EventManagerAwareInterface;
-use Zend\Http\Header\Cookie;
-use Zend\Http\PhpEnvironment\Request as PhpHttpRequest;
-use Zend\Http\PhpEnvironment\Response as PhpHttpResponse;
 use Zend\Mvc\MvcEvent;
 use Zend\ServiceManager\ServiceManager;
-use Zend\ServiceManager\ConfigurationInterface as InstanceConfigurationInterface;
-use Zend\Uri\Http as HttpUri;
-use Zend\Stdlib\DispatchableInterface;
-use Zend\Stdlib\ArrayUtils;
-use Zend\Stdlib\Parameters;
 use Zend\Stdlib\RequestInterface;
 use Zend\Stdlib\ResponseInterface;
 
 /**
  * Main application class for invoking applications
  *
- * Expects the user will provide a Service Locator or Dependency Injector, as
- * well as a configured router. Once done, calling run() will invoke the
- * application, first routing, then dispatching the discovered controller. A
- * response will then be returned, which may then be sent to the caller.
+ * Expects the user will provide a configured ServiceManager, configured with
+ * the following services:
+ *
+ * - EventManager
+ * - ModuleManager
+ * - Request
+ * - Response
+ * - RouteListener
+ * - Router
+ * - DispatchListener
+ * - ViewManager
+ *
+ * The most common workflow is:
+ * <code>
+ * $services = new Zend\ServiceManager\ServiceManager($servicesConfig);
+ * $app      = new Application($appConfig, $services);
+ * $app->bootstrap();
+ * $response = $app->run();
+ * $response->send();
+ * </code>
+ *
+ * bootstrap() opts in to the default route, dispatch, and view listeners, 
+ * sets up the MvcEvent, and triggers the bootstrap event. This can be omitted
+ * if you wish to setup your own listeners and/or workflow; alternately, you
+ * can simply extend the class to override such behavior.
+ *
+ * @category   Zend
+ * @package    Zend_Mvc
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Application implements
     ApplicationInterface,
@@ -37,11 +71,16 @@ class Application implements
     const ERROR_EXCEPTION                  = 'error-exception';
     const ERROR_ROUTER_NO_MATCH            = 'error-router-no-match';
 
-    protected $event;
+    /**
+     * @var array
+     */
+    protected $configuration = null;
 
-    protected $request;
-    protected $response;
-    protected $router;
+    /**
+     * MVC event token
+     * @var MvcEvent
+     */
+    protected $event;
 
     /**
      * @var EventManager
@@ -49,9 +88,14 @@ class Application implements
     protected $events;
 
     /**
-     * @var array
+     * @var RequestInterface
      */
-    protected $configuration = null;
+    protected $request;
+
+    /**
+     * @var ResponseInterface
+     */
+    protected $response;
 
     /**
      * @var ServiceManager
@@ -63,47 +107,45 @@ class Application implements
      */
     protected $moduleManager;
 
-    public function __construct($configuration, ServiceManager $instanceManager = null)
+    public function __construct($configuration, ServiceManager $serviceManager = null)
     {
-        $this->configuration = $configuration;
+        $this->configuration  = $configuration;
+        $this->serviceManager = $serviceManager;
 
-//        if ((null === $instanceManager) && isset($configuration['instance_manager'])) {
-//            if ($configuration['instance_manager'] instanceof ServiceManager) {
-//                $instanceManager = $configuration['instance_manager'];
-//            }
-//            if (is_string($configuration['instance_manager']) && class_exists($configuration['instance_manager'])) {
-//                $instanceManager = new $configuration['instance_manager']();
-//            }
-//        }
-//        if (null === $instanceManager) {
-//            $instanceManager = new ServiceManager();
-//        }
-//
-//        if (!isset($configuration['use_application_manager']) || $configuration['use_application_manager']) {
-//            $appManager = new ApplicationManager($configuration);
-//            $appManager->configureInstanceManager($instanceManager);
-//        }
+        $this->setEventManager($serviceManager->get('EventManager'));
 
-        $this->serviceManager = $instanceManager;
-        $this->setEventManager($instanceManager->get('EventManager'));
-
-        $this->moduleManager = $instanceManager->get('ModuleManager');
-        $this->request       = $instanceManager->get('Request');
-        $this->response      = $instanceManager->get('Response');
-
-        $this->events->attach($instanceManager->get('ViewManager'));
-        $this->events->attach($instanceManager->get('RouteListener'));
-        $this->events->attach($instanceManager->get('DispatchListener'));
+        $this->moduleManager  = $serviceManager->get('ModuleManager');
+        $this->request        = $serviceManager->get('Request');
+        $this->response       = $serviceManager->get('Response');
     }
 
+    /**
+     * Retrieve the application configuration
+     * 
+     * @return array|object
+     */
     public function getConfiguration()
     {
         $this->serviceManager->get('config');
     }
 
+    /**
+     * Bootstrap the application
+     *
+     * Defines and binds the MvcEvent, and passes it the request, response, and 
+     * router. Attaches the ViewManager as a listener. Triggers the bootstrap 
+     * event.
+     * 
+     * @return Application
+     */
     public function bootstrap()
     {
         $serviceManager = $this->serviceManager;
+        $events         = $this->events();
+
+        $events->attach($serviceManager->get('RouteListener'));
+        $events->attach($serviceManager->get('DispatchListener'));
+        $events->attach($serviceManager->get('ViewManager'));
 
         // Setup MVC Event
         $this->event = $event  = new MvcEvent();
@@ -114,10 +156,15 @@ class Application implements
               ->setRouter($serviceManager->get('Router'));
 
         // Trigger bootstrap events
-        $this->events()->trigger('bootstrap', $event);
+        $events->trigger('bootstrap', $event);
         return $this;
     }
 
+    /**
+     * Retrieve the service manager
+     * 
+     * @return ServiceManager
+     */
     public function getServiceManager()
     {
         return $this->serviceManager;
@@ -141,16 +188,6 @@ class Application implements
     public function getResponse()
     {
         return $this->response;
-    }
-
-    /**
-     * Get the router object
-     *
-     * @return Router
-     */
-    public function getRouter()
-    {
-        return $this->router;
     }
 
     /**
@@ -215,7 +252,7 @@ class Application implements
 
         // Define callback used to determine whether or not to short-circuit
         $shortCircuit = function ($r) use ($event) {
-            if ($r instanceof Response) {
+            if ($r instanceof ResponseInterface) {
                 return true;
             }
             if ($event->getError()) {
@@ -228,7 +265,7 @@ class Application implements
         $result = $events->trigger('route', $event, $shortCircuit);
         if ($result->stopped()) {
             $response = $result->last();
-            if ($response instanceof Response) {
+            if ($response instanceof ResponseInterface) {
                 $event->setTarget($this);
                 $events->trigger('finish', $event);
                 return $response;
@@ -247,7 +284,7 @@ class Application implements
 
         // Complete response
         $response = $result->last();
-        if ($response instanceof Response) {
+        if ($response instanceof ResponseInterface) {
             $event->setTarget($this);
             $events->trigger('finish', $event);
             return $response;

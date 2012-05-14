@@ -21,7 +21,7 @@
 namespace Zend\OAuth\Signature;
 
 use Zend\OAuth\Http\Utility as HTTPUtility,
-    Zend\OAuth\Exception as OAuthException,
+    Zend\OAuth\Exception,
     Zend\Uri;
 
 /**
@@ -81,6 +81,7 @@ abstract class AbstractSignature implements SignatureInterface
      * 
      * @param  string $url 
      * @return string
+     * @throws Exception\InvalidArgumentException
      */
     public function normaliseBaseSignatureUrl($url)
     {
@@ -91,7 +92,7 @@ abstract class AbstractSignature implements SignatureInterface
         } elseif ($uri->getScheme() == 'https' && $uri->getPort() == '443') {
             $uri->setPort('');
         } elseif (!in_array($uri->getScheme(), array('http', 'https'))) {
-            throw new OAuthException('Invalid URL provided; must be an HTTP or HTTPS scheme');
+            throw new Exception\InvalidArgumentException('Invalid URL provided; must be an HTTP or HTTPS scheme');
         }
         $uri->setQuery('');
         $uri->setFragment('');

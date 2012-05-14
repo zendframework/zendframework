@@ -20,6 +20,8 @@
 
 namespace Zend\OAuth\Config;
 
+use Zend\OAuth\Token\TokenInterface;
+
 /**
  * @category   Zend
  * @package    Zend_OAuth
@@ -70,7 +72,7 @@ interface ConfigInterface
 
     public function getUserAuthorizationUrl();
 
-    public function setToken(Token $token);
+    public function setToken(TokenInterface $token);
 
     public function getToken();
 }

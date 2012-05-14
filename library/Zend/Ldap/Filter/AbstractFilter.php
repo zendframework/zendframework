@@ -21,7 +21,7 @@
 
 namespace Zend\Ldap\Filter;
 
-use Zend\Ldap;
+use Zend\Ldap\Converter\Converter;
 
 /**
  * Zend\Ldap\Filter\AbstractFilter provides a base implementation for filters.
@@ -110,7 +110,7 @@ abstract class AbstractFilter
             // Escaping of filter meta characters
             $val = str_replace(array('\\', '*', '(', ')'), array('\5c', '\2a', '\28', '\29'), $val);
             // ASCII < 32 escaping
-            $val = Ldap\Converter::ascToHex32($val);
+            $val = Converter::ascToHex32($val);
             if (null === $val) {
                 $val = '\0'; // apply escaped "null" if string is empty
             }
@@ -137,7 +137,7 @@ abstract class AbstractFilter
         }
         foreach ($values as $key => $value) {
             // Translate hex code into ascii
-            $values[$key] = Ldap\Converter::hex32ToAsc($value);
+            $values[$key] = Converter::hex32ToAsc($value);
         }
         return (count($values) == 1) ? $values[0] : $values;
     }

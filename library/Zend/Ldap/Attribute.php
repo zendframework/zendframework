@@ -20,6 +20,8 @@
 
 namespace Zend\Ldap;
 
+use DateTime;
+
 /**
  * Zend\Ldap\Attribute is a collection of LDAP attribute related functions.
  *
@@ -195,87 +197,25 @@ class Attribute
      */
     private static function valueToLdap($value)
     {
-        if (is_string($value)) {
-            return $value;
-        }
-        else if (is_int($value) || is_float($value)) {
-            return (string)$value;
-        }
-        else if (is_bool($value)) {
-            return ($value === true) ? 'TRUE' : 'FALSE';
-        }
-        else if (is_object($value) || is_array($value)) {
-            return serialize($value);
-        }
-        else if (is_resource($value) && get_resource_type($value) === 'stream') {
-            return stream_get_contents($value);
-        }
-        else {
-            return null;
-        }
+        return Converter\Converter::toLdap($value);
     }
 
     /**
-     * @param  string $value
-     * @return string|boolean
-     */
-    private static function valueFromLdap($value)
-    {
-        $value = (string)$value;
-        if ($value === 'TRUE') {
-            return true;
-        }
-        else if ($value === 'FALSE') {
-            return false;
-        }
-        else {
-            return $value;
-        }
-    }
-
-    /**
-     * Converts a PHP data type into its LDAP representation
-     *
-     * @param  mixed $value
-     * @return string|null - null if the PHP data type cannot be converted.
-     */
-    public static function convertToLdapValue($value)
-    {
-        return self::valueToLdap($value);
-    }
-
-    /**
-     * Converts an LDAP value into its PHP data type
-     *
      * @param  string $value
      * @return mixed
      */
-    public static function convertFromLdapValue($value)
+    private static function valueFromLdap($value)
     {
-        return self::valueFromLdap($value);
-    }
-
-    /**
-     * Converts a timestamp into its LDAP date/time representation
-     *
-     * @param  integer $value
-     * @param  boolean $utc
-     * @return string|null - null if the value cannot be converted.
-     */
-    public static function convertToLdapDateTimeValue($value, $utc = false)
-    {
-        return self::valueToLdapDateTime($value, $utc);
-    }
-
-    /**
-     * Converts LDAP date/time representation into a timestamp
-     *
-     * @param  string $value
-     * @return integer|null - null if the value cannot be converted.
-     */
-    public static function convertFromLdapDateTimeValue($value)
-    {
-        return self::valueFromLdapDateTime($value);
+        try {
+            $return = Converter\Converter::fromLdap($value, Converter\Converter::STANDARD, false);
+            if ($return instanceof DateTime) {
+                return Converter\Converter::toLdapDateTime($return, false);
+            } else {
+                return $return;
+            }
+        } catch (Exception\InvalidArgumentException $e) {
+            return $value;
+        }
     }
 
     /**
@@ -390,17 +330,13 @@ class Attribute
      * @param  boolean $utc
      * @return string|null
      */
-    private static function valueToLDAPDateTime($value, $utc)
+    private static function valueToLdapDateTime($value, $utc)
     {
         if (is_int($value)) {
-            if ($utc === true) {
-                return gmdate('YmdHis', $value) . 'Z';
-            } else {
-                return date('YmdHisO', $value);
-            }
-        } else {
-            return null;
+            return Converter\Converter::toLdapDateTime($value, $utc);
         }
+
+        return null;
     }
 
     /**
@@ -416,49 +352,35 @@ class Attribute
         $values = self::getAttribute($data, $attribName, $index);
         if (is_array($values)) {
             for ($i = 0; $i < count($values); $i++) {
-                $newVal = self::valueFromLDAPDateTime($values[$i]);
+                $newVal = self::valueFromLdapDateTime($values[$i]);
                 if ($newVal !== null) {
                     $values[$i] = $newVal;
                 }
             }
         } else {
-            $newVal = self::valueFromLDAPDateTime($values);
+            $newVal = self::valueFromLdapDateTime($values);
             if ($newVal !== null) {
                 $values = $newVal;
             }
         }
+
         return $values;
     }
 
     /**
-     * @param  string $value
+     * @param  string|DateTime $value
      * @return integer|null
      */
-    private static function valueFromLDAPDateTime($value)
+    private static function valueFromLdapDateTime($value)
     {
-        $matches = array();
-        if (preg_match('/^(\d{4})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})(?:\.0)?([+-]\d{4}|Z)$/', $value, $matches)) {
-            $year     = $matches[1];
-            $month    = $matches[2];
-            $day      = $matches[3];
-            $hour     = $matches[4];
-            $minute   = $matches[5];
-            $second   = $matches[6];
-            $timezone = $matches[7];
-            $date     = gmmktime($hour, $minute, $second, $month, $day, $year);
-            if ($timezone !== 'Z') {
-                $tzDirection    = substr($timezone, 0, 1);
-                $tzOffsetHour   = substr($timezone, 1, 2);
-                $tzOffsetMinute = substr($timezone, 3, 2);
-                $tzOffset       = ($tzOffsetHour * 60 * 60) + ($tzOffsetMinute * 60);
-                if ($tzDirection == '+') {
-                    $date -= $tzOffset;
-                } else if ($tzDirection == '-') {
-                    $date += $tzOffset;
-                }
+        if ($value instanceof DateTime) {
+            return $value->format('U');
+        } else if (is_string($value)) {
+            try {
+                return Converter\Converter::fromLdapDateTime($value, false)->format('U');
+            } catch (Converter\Exception\InvalidArgumentException $e) {
+                return null;
             }
-
-            return $date;
         }
 
         return null;

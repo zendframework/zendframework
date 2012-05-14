@@ -21,8 +21,8 @@
 
 namespace ZendTest\Ldap\Node;
 
-use Zend\Ldap,
-    ZendTest\Ldap as TestLdap;
+use Zend\Ldap;
+use ZendTest\Ldap as TestLdap;
 
 /**
  * @category   Zend
@@ -31,13 +31,22 @@ use Zend\Ldap,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Ldap
- * @group      Zend_Ldap_Node
+ * @group      Ldap\Node
  */
 class OfflineTest extends TestLdap\AbstractTestCase
 {
     protected function assertLocalDateTimeString($timestamp, $value)
     {
-        $this->assertEquals(date('YmdHisO', $timestamp), $value);
+        $tsValue = date('YmdHisO', $timestamp);
+
+        if(date('O', strtotime('20120101'))) {
+            // Local timezone is +0000 when DST is off. Zend_Ldap converts
+            // +0000 to "Z" (see Zend\Ldap\Converter\Converter:toLdapDateTime()), so
+            // take account of that here
+            $tsValue = str_replace('+0000', 'Z', $tsValue);
+        }
+
+        $this->assertEquals($tsValue, $value);
     }
 
     protected function assertUtcDateTimeString($localTimestamp, $value)
@@ -177,11 +186,11 @@ class OfflineTest extends TestLdap\AbstractTestCase
     {
         $node = $this->createTestNode();
         $this->assertEquals('{"dn":"cn=name,dc=example,dc=org",' .
-                '"boolean":[true,false],' .
-                '"cn":["name"],' .
-                '"empty":[],' .
-                '"host":["a","b","c"],' .
-                '"objectclass":["account","top"]}', $node->toJson()
+                            '"boolean":[true,false],' .
+                            '"cn":["name"],' .
+                            '"empty":[],' .
+                            '"host":["a","b","c"],' .
+                            '"objectclass":["account","top"]}', $node->toJson()
         );
     }
 
@@ -595,5 +604,74 @@ class OfflineTest extends TestLdap\AbstractTestCase
         $node->test = array('value1', 'value2', 'value3', 'value3');
         $node->removeFromAttribute('test', array('value1', 'value3'));
         $this->assertEquals(array('value2'), $node->test);
+    }
+
+    /**
+     * ZF-11611
+     */
+    public function testRdnAttributesHandleMultiValuedAttribute()
+    {
+        $data = array(
+            'dn'          => 'cn=funkygroup,ou=Groupes,dc=domain,dc=local',
+            'objectClass' => array(
+                'groupOfNames',
+                'top',
+            ),
+            'cn'          => array(
+                'The Funkygroup',
+                'funkygroup',
+            ),
+            'member'      => 'uid=john-doe,ou=Users,dc=domain,dc=local',
+        );
+
+        $node        = Ldap\Node::fromArray($data, true);
+        $changedData = $node->getChangedData();
+        $this->assertEmpty($changedData);
+    }
+
+    /**
+     * ZF-11611
+     */
+    public function testRdnAttributesHandleMultiValuedAttribute2()
+    {
+        $data = array(
+            'dn'          => 'cn=funkygroup,ou=Groupes,dc=domain,dc=local',
+            'objectClass' => array(
+                'groupOfNames',
+                'top',
+            ),
+            'member'      => 'uid=john-doe,ou=Users,dc=domain,dc=local',
+        );
+
+        $node = Ldap\Node::fromArray($data, true);
+        $cn   = $node->getAttribute('cn');
+        $this->assertEquals(array(
+                                 0 => 'funkygroup'
+                            ), $cn);
+    }
+
+    /**
+     * ZF-11611
+     */
+    public function testRdnAttributesHandleMultiValuedAttribute3()
+    {
+        $data = array(
+            'dn'          => 'cn=funkygroup,ou=Groupes,dc=domain,dc=local',
+            'objectClass' => array(
+                'groupOfNames',
+                'top',
+            ),
+            'cn'          => array(
+                0 => 'The Funkygroup'
+            ),
+            'member'      => 'uid=john-doe,ou=Users,dc=domain,dc=local',
+        );
+
+        $node = Ldap\Node::fromArray($data, true);
+        $cn   = $node->getAttribute('cn');
+        $this->assertEquals(array(
+                                 0 => 'The Funkygroup',
+                                 1 => 'funkygroup',
+                            ), $cn);
     }
 }

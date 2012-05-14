@@ -298,12 +298,17 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
     /**
      * Ensures that teh RDN attributes are correctly set.
      *
+     * @param  boolean $overwrite True to overwrite the RDN attributes
      * @return void
      */
-    protected function ensureRdnAttributeValues()
+    protected function ensureRdnAttributeValues($overwrite = false)
     {
         foreach ($this->getRdnArray() as $key => $value) {
-            Attribute::setAttribute($this->currentData, $key, $value, false);
+            if (!array_key_exists($key, $this->currentData) || $overwrite) {
+                Attribute::setAttribute($this->currentData, $key, $value, false);
+            } else if (!in_array($value, $this->currentData[$key])) {
+                Attribute::setAttribute($this->currentData, $key, $value, true);
+            }
         }
     }
 
@@ -404,20 +409,26 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
 
         if ($this->willBeDeleted()) {
             if ($ldap->exists($this->dn)) {
+                $this->preDelete();
                 $ldap->delete($this->dn);
+                $this->postDelete();
             }
             return $this;
         }
 
         if ($this->isNew()) {
+            $this->preAdd();
             $data = $this->getData();
             $ldap->add($this->_getDn(), $data);
             $this->loadData($data, true);
+            $this->postAdd();
+
             return $this;
         }
 
         $changedData = $this->getChangedData();
         if ($this->willBeMoved()) {
+            $this->preRename();
             $recursive = $this->hasChildren();
             $ldap->rename($this->dn, $this->newDn, $recursive, false);
             foreach ($this->newDn->getRdn() as $key => $value) {
@@ -427,9 +438,12 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
             }
             $this->dn    = $this->newDn;
             $this->newDn = null;
+            $this->postRename();
         }
         if (count($changedData) > 0) {
+            $this->preUpdate();
             $ldap->update($this->_getDn(), $changedData);
+            $this->postUpdate();
         }
         $this->originalData = $this->currentData;
 
@@ -479,7 +493,7 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
         } else {
             $this->newDn = Dn::factory($newDn);
         }
-        $this->ensureRdnAttributeValues();
+        $this->ensureRdnAttributeValues(true);
 
         return $this;
     }
@@ -1064,4 +1078,73 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
     {
         return $this->iteratorRewind;
     }
+
+
+    ####################################################
+    # Empty method bodies for overriding in subclasses #
+    ####################################################
+
+    /**
+     * Allows pre-delete logic to be applied to node.
+     * Subclasses may override this method.
+     *
+     * @return void
+     */
+    protected function preDelete() { }
+
+    /**
+     * Allows post-delete logic to be applied to node.
+     * Subclasses may override this method.
+     *
+     * @return void
+     */
+    protected function postDelete() { }
+
+    /**
+     * Allows pre-add logic to be applied to node.
+     * Subclasses may override this method.
+     *
+     * @return void
+     */
+    protected function preAdd() { }
+
+    /**
+     * Allows post-add logic to be applied to node.
+     * Subclasses may override this method.
+     *
+     * @return void
+     */
+    protected function postAdd() { }
+
+    /**
+     * Allows pre-rename logic to be applied to node.
+     * Subclasses may override this method.
+     *
+     * @return void
+     */
+    protected function preRename() { }
+
+    /**
+     * Allows post-rename logic to be applied to node.
+     * Subclasses may override this method.
+     *
+     * @return void
+     */
+    protected function postRename() { }
+
+    /**
+     * Allows pre-update logic to be applied to node.
+     * Subclasses may override this method.
+     *
+     * @return void
+     */
+    protected function preUpdate() { }
+
+    /**
+     * Allows post-update logic to be applied to node.
+     * Subclasses may override this method.
+     *
+     * @return void
+     */
+    protected function postUpdate() { }
 }

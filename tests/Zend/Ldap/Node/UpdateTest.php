@@ -21,8 +21,8 @@
 
 namespace ZendTest\Ldap\Node;
 
-use Zend\Ldap,
-    ZendTest\Ldap as TestLdap;
+use Zend\Ldap;
+use ZendTest\Ldap as TestLdap;
 
 /**
  * @category   Zend

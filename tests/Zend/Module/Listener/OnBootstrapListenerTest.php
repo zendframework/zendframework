@@ -12,8 +12,9 @@ use PHPUnit_Framework_TestCase as TestCase,
     Zend\Module\Manager,
     Zend\Mvc\Application,
     Zend\Config\Config,
+    Zend\EventManager\EventManager,
     Zend\EventManager\SharedEventManager,
-    Zend\Mvc\Bootstrap;
+    ZendTest\Module\TestAsset\MockApplication;
 
 class OnBootstrapListenerTest extends TestCase
 {
@@ -36,12 +37,15 @@ class OnBootstrapListenerTest extends TestCase
         $autoloader->register();
 
         $sharedEvents = new SharedEventManager();
-        $this->bootstrap   = new Bootstrap(new Config(array('di' => array())));
-        $this->bootstrap->events()->setSharedManager($sharedEvents);
         $this->moduleManager = new Manager(array());
         $this->moduleManager->events()->setSharedManager($sharedEvents);
         $this->moduleManager->events()->attach('loadModule.resolve', new ModuleResolverListener, 1000);
         $this->moduleManager->events()->attach('loadModule', new OnBootstrapListener, 1000);
+
+        $this->application = new MockApplication;
+        $events            = new EventManager(array('Zend\Mvc\Application', 'ZendTest\Module\TestAsset\MockApplication', 'application'));
+        $events->setSharedManager($sharedEvents);
+        $this->application->setEventManager($events);
     }
 
     public function tearDown()
@@ -68,7 +72,7 @@ class OnBootstrapListenerTest extends TestCase
         $moduleManager = $this->moduleManager;
         $moduleManager->setModules(array('ListenerTestModule'));
         $moduleManager->loadModules();
-        $this->bootstrap->bootstrap(new Application);
+        $this->application->bootstrap();
         $modules = $moduleManager->getLoadedModules();
         $this->assertTrue($modules['ListenerTestModule']->onBootstrapCalled);
     }

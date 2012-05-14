@@ -21,27 +21,30 @@
 
 namespace Zend\Code\Generator\DocBlock\Tag;
 
+use Zend\Code\Generator\DocBlock\Tag;
+use Zend\Code\Reflection\DocBlock\Tag\TagInterface as ReflectionDocBlockTag;
+
 /**
  * @category   Zend
  * @package    Zend_Code_Generator
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ReturnTag extends \Zend\Code\Generator\DocBlock\Tag
+class ReturnTag extends Tag
 {
 
     /**
      * @var string
      */
-    protected $_datatype = null;
+    protected $datatype = null;
 
     /**
      * fromReflection()
      *
-     * @param \Zend\Code\Reflection\ReflectionDocBlockTag $reflectionTagReturn
-     * @return \Zend\Code\Generator\DocBlock\Tag\ReturnTag
+     * @param ReflectionDocBlockTag $reflectionTagReturn
+     * @return ReturnTag
      */
-    public static function fromReflection(\Zend\Code\Reflection\DocBlock\TagInterface $reflectionTagReturn)
+    public static function fromReflection(ReflectionDocBlockTag $reflectionTagReturn)
     {
         $returnTag = new self();
 
@@ -56,11 +59,11 @@ class ReturnTag extends \Zend\Code\Generator\DocBlock\Tag
      * setDatatype()
      *
      * @param string $datatype
-     * @return \Zend\Code\Generator\DocBlock\Tag\ReturnTag
+     * @return ReturnTag
      */
     public function setDatatype($datatype)
     {
-        $this->_datatype = $datatype;
+        $this->datatype = $datatype;
         return $this;
     }
 
@@ -71,7 +74,7 @@ class ReturnTag extends \Zend\Code\Generator\DocBlock\Tag
      */
     public function getDatatype()
     {
-        return $this->_datatype;
+        return $this->datatype;
     }
 
 
@@ -82,7 +85,7 @@ class ReturnTag extends \Zend\Code\Generator\DocBlock\Tag
      */
     public function generate()
     {
-        $output = '@return ' . $this->_datatype . ' ' . $this->description;
+        $output = '@return ' . $this->datatype . ' ' . $this->description;
         return $output;
     }
 

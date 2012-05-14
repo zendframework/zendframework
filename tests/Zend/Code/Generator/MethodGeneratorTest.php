@@ -20,10 +20,10 @@
  */
 
 namespace ZendTest\Code\Generator;
-use Zend\Code\Generator\MethodGenerator,
-    Zend\Code\Generator\ParameterGenerator,
-    Zend\Code\Generator\ValueGenerator,
-    Zend\Code\Reflection\MethodReflection;
+use Zend\Code\Generator\MethodGenerator;
+use Zend\Code\Generator\ParameterGenerator;
+use Zend\Code\Generator\ValueGenerator;
+use Zend\Code\Reflection\MethodReflection;
 
 /**
  * @category   Zend

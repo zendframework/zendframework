@@ -21,8 +21,8 @@
 
 namespace Zend\Code\Generator\DocBlock;
 
-use Zend\Code\Reflection\DocBlock\TagInterface as ReflectionDocBlockTag,
-    Zend\Code\Generator\AbstractGenerator;
+use Zend\Code\Reflection\DocBlock\Tag\TagInterface as ReflectionDocBlockTag;
+use Zend\Code\Generator\AbstractGenerator;
 
 /**
  * @category   Zend
@@ -33,20 +33,20 @@ use Zend\Code\Reflection\DocBlock\TagInterface as ReflectionDocBlockTag,
 class Tag extends AbstractGenerator
 {
 
-    protected static $_typeFormats = array(
+    protected static $typeFormats = array(
         array(
             'param',
             '@param <type> <variable> <description>'
-            ),
+        ),
         array(
             'return',
             '@return <type> <description>'
-            ),
+        ),
         array(
             'tag',
             '@<name> <description>'
-            )
-        );
+        )
+    );
 
     /**
      * @var string

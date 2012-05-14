@@ -20,8 +20,9 @@
  */
 
 namespace ZendTest\Code\Reflection;
-use Zend\Code\Reflection\DocBlockReflection,
-    Zend\Code\Reflection\ClassReflection;
+
+use Zend\Code\Reflection\DocBlockReflection;
+use Zend\Code\Reflection\ClassReflection;
 
 /**
  * @category   Zend
@@ -62,7 +63,7 @@ class DocBlockReflectionTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($classReflection->getMethod('doSomething')->getDocBlock()->hasTag('return'));
 
         $returnTag = $classReflection->getMethod('doSomething')->getDocBlock()->getTag('return');
-        $this->assertInstanceOf('Zend\Code\Reflection\DocBlock\TagInterface', $returnTag);
+        $this->assertInstanceOf('Zend\Code\Reflection\DocBlock\Tag\TagInterface', $returnTag);
         $this->assertEquals('mixed', $returnTag->getType());
     }
 

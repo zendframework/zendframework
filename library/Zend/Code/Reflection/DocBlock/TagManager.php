@@ -25,12 +25,12 @@ class TagManager
 
     public function useDefaultPrototypes()
     {
-        $this->addTagPrototype(new ParamTag());
-        $this->addTagPrototype(new ReturnTag());
-        $this->addTagPrototype(new GenericTag());
+        $this->addTagPrototype(new Tag\ParamTag());
+        $this->addTagPrototype(new Tag\ReturnTag());
+        $this->addTagPrototype(new Tag\GenericTag());
     }
 
-    public function addTagPrototype(TagInterface $tag)
+    public function addTagPrototype(Tag\TagInterface $tag)
     {
         $tagName = strtolower(str_replace(array('-', '_'), '', $tag->getName()));
 
@@ -39,9 +39,9 @@ class TagManager
         }
 
         $this->tagNames[] = $tagName;
-        $this->tags[] = $tag;
+        $this->tags[]     = $tag;
 
-        if ($tag instanceof GenericTag) {
+        if ($tag instanceof Tag\GenericTag) {
             $this->genericTag = $tag;
         }
     }
@@ -62,7 +62,7 @@ class TagManager
 
         $index = array_search($tagName, $this->tagNames);
 
-        /* @var $tag TagInterface */
+        /* @var Tag\TagInterface $tag */
         $tag = ($index !== false) ? $this->tags[$index] : $this->genericTag;
 
         $newTag = clone $tag;
@@ -70,7 +70,7 @@ class TagManager
             $newTag->initialize($content);
         }
 
-        if ($newTag instanceof GenericTag) {
+        if ($newTag instanceof Tag\GenericTag) {
             $newTag->setName($tagName);
         }
 

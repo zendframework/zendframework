@@ -2,8 +2,8 @@
 
 namespace Zend\Code\Scanner;
 
-use Zend\Code\Exception,
-    Zend\Code\Annotation\AnnotationManager;
+use Zend\Code\Exception;
+use Zend\Code\Annotation\AnnotationManager;
 
 class CachingFileScanner extends FileScanner
 {
@@ -14,8 +14,8 @@ class CachingFileScanner extends FileScanner
     {
         if (!file_exists($file)) {
             throw new Exception\InvalidArgumentException(sprintf(
-                'File "%s" not found', $file
-            ));
+                                                             'File "%s" not found', $file
+                                                         ));
         }
         $file = realpath($file);
 
@@ -24,7 +24,7 @@ class CachingFileScanner extends FileScanner
         if (isset(static::$cache[$cacheId])) {
             $this->fileScanner = static::$cache[$cacheId];
         } else {
-            $this->fileScanner = new FileScanner($file, $annotationManager);
+            $this->fileScanner       = new FileScanner($file, $annotationManager);
             static::$cache[$cacheId] = $this->fileScanner;
         }
     }

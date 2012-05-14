@@ -65,7 +65,7 @@ class ParameterGenerator extends AbstractGenerator
     /**
      * fromReflection()
      *
-     * @param ReflectionParameter $reflectionParameter
+     * @param ParameterReflection $reflectionParameter
      * @return ParameterGenerator
      */
     public static function fromReflection(ParameterReflection $reflectionParameter)
@@ -77,7 +77,7 @@ class ParameterGenerator extends AbstractGenerator
             $param->setType('array');
         } else {
             $typeClass = $reflectionParameter->getClass();
-            if($typeClass !== null) {
+            if ($typeClass !== null) {
                 $param->setType($typeClass->getName());
             }
         }
@@ -92,7 +92,8 @@ class ParameterGenerator extends AbstractGenerator
         return $param;
     }
 
-    public function __construct($name = null, $type = null, $defaultValue = null, $position = null, $passByReference = false)
+    public function __construct($name = null, $type = null, $defaultValue = null, $position = null,
+                                $passByReference = false)
     {
         if ($name !== null) {
             $this->setName($name);
@@ -158,7 +159,7 @@ class ParameterGenerator extends AbstractGenerator
     /**
      * Set the default value of the parameter.
      *
-     * Certain variables are difficult to expres
+     * Certain variables are difficult to express
      *
      * @param null|bool|string|int|float|ValueGenerator $defaultValue
      * @return ParameterGenerator
@@ -254,7 +255,7 @@ class ParameterGenerator extends AbstractGenerator
             $output .= $this->type . ' ';
         }
 
-        if($this->passedByReference === true) {
+        if ($this->passedByReference === true) {
             $output .= '&';
         }
 
@@ -264,9 +265,9 @@ class ParameterGenerator extends AbstractGenerator
             $output .= ' = ';
             if (is_string($this->defaultValue)) {
                 $output .= ValueGenerator::escape($this->defaultValue);
-            } else if($this->defaultValue instanceof ValueGenerator) {
+            } else if ($this->defaultValue instanceof ValueGenerator) {
                 $this->defaultValue->setOutputMode(ValueGenerator::OUTPUT_SINGLE_LINE);
-                $output .= (string) $this->defaultValue;
+                $output .= (string)$this->defaultValue;
             } else {
                 $output .= $this->defaultValue;
             }

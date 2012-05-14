@@ -20,7 +20,8 @@
  */
 
 namespace ZendTest\Code\Reflection\DocBlock\Tag;
-use Zend\Code\Reflection\DocBlock\GenericTag;
+
+use Zend\Code\Reflection\DocBlock\Tag\GenericTag;
 
 /**
  * @category   Zend

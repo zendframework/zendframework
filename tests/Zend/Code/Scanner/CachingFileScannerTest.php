@@ -2,8 +2,8 @@
 
 namespace ZendTest\Code\Scanner;
 
-use Zend\Code\Scanner\CachingFileScanner,
-    Zend\Code\Annotation\AnnotationManager;
+use Zend\Code\Scanner\CachingFileScanner;
+use Zend\Code\Annotation\AnnotationManager;
 
 class CachingFileScannerTest extends \PHPUnit_Framework_TestCase
 {

@@ -22,6 +22,7 @@
 namespace ZendTest\Code\Generator;
 
 use Zend\Code\Generator\DocBlockGenerator;
+use Zend\Code\Generator\DocBlock\Tag;
 
 /**
  * @category   Zend
@@ -30,55 +31,58 @@ use Zend\Code\Generator\DocBlockGenerator;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  *
- * @group Zend_Code_Generator
- * @group Zend_Code_Generator_Php
+ * @group      Zend_Code_Generator
+ * @group      Zend_Code_Generator_Php
  */
 class DocBlockGeneratorTest extends \PHPUnit_Framework_TestCase
 {
+    /** @var DocBlockGenerator */
+    protected $docBlockGenerator;
+
+    protected function setUp()
+    {
+        $this->docBlockGenerator = $this->docBlockGenerator = new DocBlockGenerator();
+    }
 
     public function testShortDescriptionGetterAndSetter()
     {
-        $docblockGenerator = new DocBlockGenerator();
-        $docblockGenerator->setShortDescription('Short Description');
-        $this->assertEquals('Short Description', $docblockGenerator->getShortDescription());
+        $this->docBlockGenerator->setShortDescription('Short Description');
+        $this->assertEquals('Short Description', $this->docBlockGenerator->getShortDescription());
     }
 
     public function testLongDescriptionGetterAndSetter()
     {
-        $docblockGenerator = new DocBlockGenerator();
-        $docblockGenerator->setLongDescription('Long Description');
-        $this->assertEquals('Long Description', $docblockGenerator->getLongDescription());
+        $this->docBlockGenerator->setLongDescription('Long Description');
+        $this->assertEquals('Long Description', $this->docBlockGenerator->getLongDescription());
     }
 
     public function testTagGettersAndSetters()
     {
-        $this->markTestIncomplete('Must refactor DocBlock like Reflecion tag first.');
-//        $this->_docblock->setTag(array('name' => 'blah'));
-//        $this->_docblock->setTag(new \Zend\Code\Generator\DocBlock\Tag\Param(array('datatype' => 'string')));
-//        $this->_docblock->setTag(new \Zend\Code\Generator\DocBlock\Tag\Return(array('datatype' => 'int')));
-//        $this->assertEquals(3, count($this->_docblock->getTags()));
-//
-//        $target = <<<EOS
-///**
-// * @blah 
-// * @param string
-// * @return int
-// */
-//
-//EOS;
-//
-//        $this->assertEquals($target, $this->_docblock->generate());
+        $this->docBlockGenerator->setTag(array('name' => 'blah'));
+        $this->docBlockGenerator->setTag(new Tag\ParamTag(array('datatype' => 'string')));
+        $this->docBlockGenerator->setTag(new Tag\ReturnTag(array('datatype' => 'int')));
+        $this->assertEquals(3, count($this->docBlockGenerator->getTags()));
+
+        $target = <<<EOS
+/**
+ * @blah
+ * @param string
+ * @return int
+ */
+
+EOS;
+
+        $this->assertEquals($target, $this->docBlockGenerator->generate());
 
     }
 
     public function testGenerationOfDocBlock()
     {
-        $docblockGenerator = new DocBlockGenerator();
-        $docblockGenerator->setShortDescription('@var Foo this is foo bar');
+        $this->docBlockGenerator->setShortDescription('@var Foo this is foo bar');
 
         $expected = '/**' . DocBlockGenerator::LINE_FEED . ' * @var Foo this is foo bar'
             . DocBlockGenerator::LINE_FEED . ' */' . DocBlockGenerator::LINE_FEED;
-        $this->assertEquals($expected, $docblockGenerator->generate());
+        $this->assertEquals($expected, $this->docBlockGenerator->generate());
     }
 
 }

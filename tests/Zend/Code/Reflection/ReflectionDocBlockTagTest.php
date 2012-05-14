@@ -19,7 +19,8 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace ZendTest\Code\Reflection\DocBlock;
+namespace ZendTest\Code\Reflection;
+
 use Zend\Code\Reflection;
 
 /**
@@ -34,23 +35,17 @@ use Zend\Code\Reflection;
  */
 class ReflectionDocBlockTagTest extends \PHPUnit_Framework_TestCase
 {
-
-    public function setup()
-    {
-        $this->markTestIncomplete('Not refactored yet');
-    }
-
     public function testTagDescriptionIsReturned()
     {
-        $classReflection = new Reflection\ReflectionClass('ZendTest\Code\Reflection\TestAsset\TestSampleClass5');
+        $classReflection = new Reflection\ClassReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass5');
 
         $authorTag = $classReflection->getDocBlock()->getTag('author');
-        $this->assertEquals('Ralph Schindler <ralph.schindler@zend.com>', $authorTag->getDescription());
+        $this->assertEquals('Ralph Schindler <ralph.schindler@zend.com>', $authorTag->getContent());
     }
 
     public function testTagShouldAllowJustTagNameInDocBlockTagLine()
     {
-        $classReflection = new Reflection\ReflectionClass('ZendTest\Code\Reflection\TestAsset\TestSampleClass6');
+        $classReflection = new Reflection\ClassReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass6');
 
         $tag = $classReflection->getMethod('doSomething')->getDocBlock()->getTag('emptyTag');
         $this->assertEquals($tag->getName(), 'emptyTag', 'Factory First Match Failed');
@@ -58,7 +53,7 @@ class ReflectionDocBlockTagTest extends \PHPUnit_Framework_TestCase
 
     public function testTagShouldAllowMultipleWhitespacesBeforeDescription()
     {
-        $classReflection = new Reflection\ReflectionClass('ZendTest\Code\Reflection\TestAsset\TestSampleClass6');
+        $classReflection = new Reflection\ClassReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass6');
 
         $tag = $classReflection->getMethod('doSomething')->getDocBlock()->getTag('descriptionTag');
         $this->assertEquals('          A tag with just a description', $tag->getDescription(), 'Final Match Failed');
@@ -67,11 +62,13 @@ class ReflectionDocBlockTagTest extends \PHPUnit_Framework_TestCase
 
     public function testToString()
     {
-        $classReflection = new Reflection\ReflectionClass('ZendTest\Code\Reflection\TestAsset\TestSampleClass6');
+        $this->markTestIncomplete('DocBlock Tag not completed yet');
+
+        $classReflection = new Reflection\ClassReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass6');
 
         $tag = $classReflection->getMethod('doSomething')->getDocBlock()->getTag('descriptionTag');
 
-        $expectedString = "DocBlock Tag [ * @descriptionTag ]".PHP_EOL;
+        $expectedString = "DocBlock Tag [ * @descriptionTag ]" . PHP_EOL;
 
         $this->assertEquals($expectedString, (string)$tag);
     }
@@ -79,7 +76,7 @@ class ReflectionDocBlockTagTest extends \PHPUnit_Framework_TestCase
 
     public function testTypeParam()
     {
-        $classReflection = new Reflection\ReflectionClass('ZendTest\Code\Reflection\TestAsset\TestSampleClass5');
+        $classReflection = new Reflection\ClassReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass5');
 
         $paramTag = $classReflection->getMethod('doSomething')->getDocBlock()->getTag('param');
 
@@ -88,15 +85,15 @@ class ReflectionDocBlockTagTest extends \PHPUnit_Framework_TestCase
 
     public function testVariableName()
     {
-        $classReflection = new Reflection\ReflectionClass('ZendTest\Code\Reflection\TestAsset\TestSampleClass5');
+        $classReflection = new Reflection\ClassReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass5');
 
         $paramTag = $classReflection->getMethod('doSomething')->getDocBlock()->getTag('param');
-        $this->assertEquals($paramTag->getVariable(), '$one');
+        $this->assertEquals($paramTag->getVariableName(), '$one');
     }
 
     public function testAllowsMultipleSpacesInDocBlockTagLine()
     {
-        $classReflection = new Reflection\ReflectionClass('ZendTest\Code\Reflection\TestAsset\TestSampleClass6');
+        $classReflection = new Reflection\ClassReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass6');
 
         $paramTag = $classReflection->getMethod('doSomething')->getDocBlock()->getTag('param');
 
@@ -112,20 +109,20 @@ class ReflectionDocBlockTagTest extends \PHPUnit_Framework_TestCase
      * @group ZF-8307
      */
     public function testNamespaceInParam()
-    {    
-        $classReflection = new Reflection\ReflectionClass('ZendTest\Code\Reflection\TestAsset\TestSampleClass7');
-        $paramTag = $classReflection->getMethod('doSomething')->getDocBlock()->getTag('param');
+    {
+        $classReflection = new Reflection\ClassReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass7');
+        $paramTag        = $classReflection->getMethod('doSomething')->getDocBlock()->getTag('param');
 
         $trimOpt = Reflection\ReflectionDocBlockTag::TRIM_WHITESPACE;
-        
+
         $this->assertEquals('Zend\Foo\Bar', $paramTag->getType($trimOpt));
         $this->assertEquals('$var', $paramTag->getVariable($trimOpt));
         $this->assertEquals('desc', $paramTag->getDescription($trimOpt));
     }
-    
+
     public function testType()
     {
-        $classReflection = new Reflection\ReflectionClass('ZendTest\Code\Reflection\TestAsset\TestSampleClass5');
+        $classReflection = new Reflection\ClassReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass5');
 
         $paramTag = $classReflection->getMethod('doSomething')->getDocBlock()->getTag('return');
         $this->assertEquals($paramTag->getType(), 'mixed');
@@ -133,16 +130,13 @@ class ReflectionDocBlockTagTest extends \PHPUnit_Framework_TestCase
 
     public function testAllowsMultipleSpacesInDocBlockTagLine2()
     {
-        $classReflection = new Reflection\ReflectionClass('ZendTest\Code\Reflection\TestAsset\TestSampleClass6');
+        $classReflection = new Reflection\ClassReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass6');
 
-        $trimOpt = Reflection\ReflectionDocBlockTag::TRIM_WHITESPACE;
-        
         $paramTag = $classReflection->getMethod('doSomething')->getDocBlock()->getTag('return');
 
-        $this->assertEquals($paramTag->getType($trimOpt), 'string', 'Second Match Failed');
-        $this->assertEquals($paramTag->getDescription($trimOpt),'Description of return value', 'Final Match Failed');
+        $this->assertEquals($paramTag->getType(), 'string', 'Second Match Failed');
+        $this->assertEquals($paramTag->getDescription(), 'Description of return value', 'Final Match Failed');
     }
-    
 
 
     /**
@@ -150,16 +144,14 @@ class ReflectionDocBlockTagTest extends \PHPUnit_Framework_TestCase
      */
     public function testReturnClassWithNamespace()
     {
-        $classReflection = new Reflection\ReflectionClass('ZendTest\Code\Reflection\TestAsset\TestSampleClass7');
+        $classReflection = new Reflection\ClassReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass7');
 
         $paramTag = $classReflection->getMethod('doSomething')->getDocBlock()->getTag('return');
 
-        $trimOpt = Reflection\ReflectionDocBlockTag::TRIM_WHITESPACE;
-        $this->assertEquals('Zend\Code\Reflection\DocBlock', $paramTag->getType($trimOpt));
+        $this->assertEquals('Zend\Code\Reflection\DocBlock', $paramTag->getType());
     }
-    
-    
-    
+
+
 }
 
 

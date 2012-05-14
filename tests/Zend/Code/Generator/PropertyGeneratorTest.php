@@ -20,8 +20,8 @@
  */
 
 namespace ZendTest\Code\Generator;
-use Zend\Code\Generator\PropertyGenerator,
-    Zend\Code\Generator\PropertyValueGenerator;
+use Zend\Code\Generator\PropertyGenerator;
+use Zend\Code\Generator\PropertyValueGenerator;
 
 /**
  * @category   Zend

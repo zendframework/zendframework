@@ -2,9 +2,9 @@
 
 namespace ZendTest\Code\Scanner;
 
-use Zend\Code\Scanner\DirectoryScanner,
-    Zend\Code\Scanner\AggregateDirectoryScanner,
-    Zend\Code\Scanner\DerivedClassScanner;
+use Zend\Code\Scanner\DirectoryScanner;
+use Zend\Code\Scanner\AggregateDirectoryScanner;
+use Zend\Code\Scanner\DerivedClassScanner;
 
 class DerivedClassScannerTest extends \PHPUnit_Framework_TestCase
 {

@@ -21,10 +21,10 @@
 
 namespace ZendTest\Code\Generator;
 
-use Zend\Code\Generator\ClassGenerator,
-    Zend\Code\Generator\PropertyGenerator,
-    Zend\Code\Generator\MethodGenerator,
-    Zend\Code\Reflection\ClassReflection;
+use Zend\Code\Generator\ClassGenerator;
+use Zend\Code\Generator\PropertyGenerator;
+use Zend\Code\Generator\MethodGenerator;
+use Zend\Code\Reflection\ClassReflection;
 
 /**
  * @category   Zend

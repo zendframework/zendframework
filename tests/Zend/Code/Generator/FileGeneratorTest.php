@@ -115,7 +115,7 @@ EOS;
 
     public function testFromFileReflection()
     {
-        $this->markTestIncomplete('Some scanning capabilities are incomplete, including file docblock comment retrieval and method scanning');
+        $this->markTestIncomplete('Some scanning capabilities are incomplete, including file DocBlock comment retrieval and method scanning');
 
         $file = __DIR__ . '/TestAsset/TestSampleSingleClass.php';
         require_once $file;

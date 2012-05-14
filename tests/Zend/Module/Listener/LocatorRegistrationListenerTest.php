@@ -2,18 +2,18 @@
 
 namespace ZendTest\Module\Listener;
 
-use ArrayObject,
-    InvalidArgumentException,
-    PHPUnit_Framework_TestCase as TestCase,
-    Zend\Loader\AutoloaderFactory,
+use PHPUnit_Framework_TestCase as TestCase,
+    Zend\EventManager\EventManager,
+    Zend\EventManager\SharedEventManager,
     Zend\Loader\ModuleAutoloader,
-    Zend\Mvc\Bootstrap,
     Zend\Mvc\Application,
-    Zend\Config\Config,
     Zend\Module\Listener\LocatorRegistrationListener,
     Zend\Module\Listener\ModuleResolverListener,
-    Zend\Module\Listener\ListenerOptions,
-    Zend\Module\Manager;
+    Zend\Module\Manager,
+    Zend\ServiceManager\ServiceManager,
+    ZendTest\Module\TestAsset\MockApplication;
+
+require_once dirname(__DIR__) . '/TestAsset/ListenerTestModule/src/Foo/Bar.php';
 
 class LocatorRegistrationTest extends TestCase
 {
@@ -37,8 +37,20 @@ class LocatorRegistrationTest extends TestCase
         ));
         $autoloader->register();
 
+        $this->sharedEvents = new SharedEventManager();
+
         $this->moduleManager = new Manager(array('ListenerTestModule'));
+        $this->moduleManager->events()->setSharedManager($this->sharedEvents);
         $this->moduleManager->events()->attach('loadModule.resolve', new ModuleResolverListener, 1000);
+
+        $this->application = new MockApplication;
+        $events            = new EventManager(array('Zend\Mvc\Application', 'ZendTest\Module\TestAsset\MockApplication', 'application'));
+        $events->setSharedManager($this->sharedEvents);
+        $this->application->setEventManager($events);
+
+        $this->serviceManager = new ServiceManager();
+        $this->serviceManager->setService('ModuleManager', $this->moduleManager);
+        $this->application->setServiceManager($this->serviceManager);
     }
 
     public function tearDown()
@@ -62,6 +74,14 @@ class LocatorRegistrationTest extends TestCase
 
     public function testModuleClassIsRegisteredWithDiAndInjectedWithSharedInstances()
     {
+        $locator         = $this->serviceManager;
+        $locator->setFactory('Foo\Bar', function($s) {
+            $module   = $s->get('ListenerTestModule\Module');
+            $manager  = $s->get('Zend\Module\Manager');
+            $instance = new \Foo\Bar($module, $manager);
+            return $instance;
+        });
+
         $locatorRegistrationListener = new LocatorRegistrationListener;
         $this->moduleManager->events()->attachAggregate($locatorRegistrationListener);
         $test = $this;
@@ -70,12 +90,9 @@ class LocatorRegistrationTest extends TestCase
         }, -1000);
         $this->moduleManager->loadModules();
 
-        $bootstrap       = new Bootstrap(new Config(array('di' => array())));
-        $application     = new Application;
-        $bootstrap->bootstrap($application);
-        $locator         = $application->getLocator();
-        $sharedInstance1 = $locator->instanceManager()->getSharedInstance('ListenerTestModule\Module');
-        $sharedInstance2 = $locator->instanceManager()->getSharedInstance('Zend\Module\Manager');
+        $this->application->bootstrap();
+        $sharedInstance1 = $locator->get('ListenerTestModule\Module');
+        $sharedInstance2 = $locator->get('Zend\Module\Manager');
 
         $this->assertInstanceOf('ListenerTestModule\Module', $sharedInstance1);
         $this->assertSame($this->module, $locator->get('Foo\Bar')->module);

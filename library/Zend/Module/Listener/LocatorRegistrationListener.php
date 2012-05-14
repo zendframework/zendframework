@@ -9,13 +9,11 @@
  */
 namespace Zend\Module\Listener;
 
-use Zend\EventManager\StaticEventManager,
-    Zend\Di\InstanceManager,
-    Zend\EventManager\Event,
-    Zend\Module\ModuleEvent,
-    Zend\Module\Consumer\LocatorRegistered,
-    Zend\EventManager\EventManagerInterface,
-    Zend\EventManager\ListenerAggregateInterface;
+use Zend\EventManager\Event;
+use Zend\EventManager\EventManagerInterface;
+use Zend\EventManager\ListenerAggregateInterface;
+use Zend\Module\Consumer\LocatorRegistered;
+use Zend\Module\ModuleEvent;
 
 /**
  * Locator registration listener
@@ -63,15 +61,16 @@ class LocatorRegistrationListener extends AbstractListener implements ListenerAg
      */
     public function loadModulesPost(Event $e)
     {
-        $events = StaticEventManager::getInstance();
         $moduleManager = $e->getTarget();
+        $events        = $moduleManager->events()->getSharedManager();
 
         // Shared instance for module manager
-        $events->attach('bootstrap', 'bootstrap', function ($e) use ($moduleManager) {
+        $events->attach('application', 'bootstrap', function ($e) use ($moduleManager) {
             $moduleClassName = get_class($moduleManager);
-            $im = $e->getParam('application')->getLocator()->instanceManager();
-            if (!$im->hasSharedInstance($moduleClassName)) {
-                $im->addSharedInstance($moduleManager, $moduleClassName);
+            $application     = $e->getApplication();
+            $services        = $application->getServiceManager();
+            if (!$services->has($moduleClassName)) {
+                $services->setService($moduleClassName, $moduleManager);
             }
         }, 1000);
 
@@ -80,8 +79,7 @@ class LocatorRegistrationListener extends AbstractListener implements ListenerAg
         }
 
         // Attach to the bootstrap event if there are modules we need to process
-        $events = StaticEventManager::getInstance();
-        $events->attach('bootstrap', 'bootstrap', array($this, 'onBootstrap'), 1000);
+        $events->attach('application', 'bootstrap', array($this, 'onBootstrap'), 1000);
     }
 
     /**
@@ -97,12 +95,13 @@ class LocatorRegistrationListener extends AbstractListener implements ListenerAg
      */
     public function onBootstrap(Event $e)
     {
-        $im = $e->getParam('application')->getLocator()->instanceManager();
+        $application = $e->getApplication();
+        $services    = $application->getServiceManager();
 
         foreach ($this->modules as $module) {
             $moduleClassName = get_class($module);
-            if (!$im->hasSharedInstance($moduleClassName)) {
-                $im->addSharedInstance($module, $moduleClassName);
+            if (!$services->has($moduleClassName)) {
+                $services->setService($moduleClassName, $module);
             }
         }
     }
@@ -129,10 +128,10 @@ class LocatorRegistrationListener extends AbstractListener implements ListenerAg
     public function detach(EventManagerInterface $events)
     {
         foreach ($this->listeners as $key => $listener) {
-            $events->detach($listener);
-            unset($this->listeners[$key]);
+            if ($events->detach($listener)) {
+                unset($this->listeners[$key]);
+            }
         }
-        $this->listeners = array();
         return $this;
     }
 }

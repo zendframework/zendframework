@@ -29,150 +29,62 @@ namespace Zend\Crypt;
  */
 class Hash
 {
-    const TYPE_OPENSSL = 'openssl';
-    const TYPE_HASH    = 'hash';
-    const TYPE_MHASH   = 'mhash';
-    const BCRYPT_COST  = '14';
-
-    protected static $_type = null;
-
+    const STRING = 'string';
+    const BINARY = 'binary';
     /**
+     * List of hash algorithms supported
+     *
      * @var array
      */
-    protected static $_supportedAlgosOpenssl = array(
-        'md2',
-        'md4',
-        'mdc2',
-        'rmd160',
-        'sha',
-        'sha1',
-        'sha224',
-        'sha256',
-        'sha384',
-        'sha512',
-    );
-
-    /**
-     * @var array
-     */
-    protected static $_supportedAlgosMhash = array(
-        'adler32',
-        'crc32',
-        'crc32b',
-        'gost',
-        'haval128',
-        'haval160',
-        'haval192',
-        'haval256',
-        'md4',
-        'md5',
-        'ripemd160',
-        'sha1',
-        'sha256',
-        'tiger',
-        'tiger128',
-        'tiger160',
-    );
+    protected static $supportedAlgorithms = array();
     
     /**
-     * @param  string $algorithm
+     * @param  string $algo
      * @param  string $data
-     * @param  bool $binaryOutput
-     * @return void
+     * @param  string $binaryOutput
+     * @return string
      */
-    public static function compute($algorithm, $data, $binaryOutput = false)
+    public static function compute($hash, $data, $output = self::STRING)
     {
-        $algorithm = strtolower($algorithm);
-        if (function_exists($algorithm)) {
-            return $algorithm($data, $binaryOutput);
+        $hash = strtolower($hash);
+        if (!self::isSupported($hash)) {
+            throw new Exception\InvalidArgumentException('Hash algorithm provided is not supported on this PHP installation');
         }
-        self::detectHashSupport($algorithm);
-        $supportedMethod = '_digest' . ucfirst(self::$_type);
-        return self::$supportedMethod($algorithm, $data, $binaryOutput);
-    }
-
-    /**
-     * @param  string $algorithm
-     * @throws Zend\Crypt\Exception
-     */
-    protected static function detectHashSupport($algorithm)
-    {
-        if (function_exists('hash')) {
-            self::$_type = self::TYPE_HASH;
-            if (in_array($algorithm, hash_algos())) {
-               return;
-            }
-        }
-        if (function_exists('mhash')) {
-            self::$_type = self::TYPE_MHASH;
-            if (in_array($algorithm, self::$_supportedAlgosMhash)) {
-               return;
-            }
-        }
-        if (function_exists('openssl_digest')) {
-            if ($algorithm == 'ripemd160') {
-                $algorithm = 'rmd160';
-            }
-            self::$_type = self::TYPE_OPENSSL;
-            if (in_array($algorithm, self::$_supportedAlgosOpenssl)) {
-               return;
-            }
-        }
-        throw new Exception\RuntimeException('\'' . $algorithm . '\' is not supported by any available extension or native function');
+        
+        $output = ($output === self::BINARY);
+        return hash($hash, $data, $output);
     }
     /**
-     * Check is a hash function is supported
+     * Get the output size according to the hash algorithm and the output format
      * 
-     * @param  string $algorithm 
-     * @return boolean
+     * @param  string $hash
+     * @param  string $output
+     * @return integer 
      */
-    public static function isSupported($algorithm) 
+    public static function getOutputSize($hash, $output = self::STRING)
     {
-        try {
-            $supported = self::detectHashSupport($algorithm);
-        } catch (Exception\RuntimeException $e) {
-            return false;
-        }
-        return true;
+        return strlen(self::compute($hash, 'data', $output));
     }
     /**
-     * @param  string $algorithm
-     * @param  string $data
-     * @param  bool $binaryOutput
-     * @return string
+     * Get the supported algorithm
+     * 
+     * @return array 
      */
-    protected static function _digestHash($algorithm, $data, $binaryOutput)
+    public static function getSupportedAlgorithms()
     {
-        return hash($algorithm, $data, $binaryOutput);
-    }
-
-    /**
-     * @param  string $algorithm
-     * @param  string $data
-     * @param  bool $binaryOutput
-     * @return string
-     */
-    protected static function _digestMhash($algorithm, $data, $binaryOutput)
-    {
-        $constant = constant('MHASH_' . strtoupper($algorithm));
-        $binary = mhash($constant, $data);
-        if ($binaryOutput) {
-            return $binary;
+        if (empty(self::$supportedAlgorithms)) {
+            self::$supportedAlgorithms = hash_algos();
         }
-        return bin2hex($binary);
+        return self::$supportedAlgorithms;
     }
-
     /**
-     * @param  string $algorithm
-     * @param  string $data
-     * @param  bool $binaryOutput
-     * @return string
+     * Is the hash algorithm supported?
+     * 
+     * @param  string $algo
+     * @return boolean 
      */
-    protected static function _digestOpenssl($algorithm, $data, $binaryOutput)
+    public static function isSupported($algo) 
     {
-        if ($algorithm == 'ripemd160') {
-            $algorithm = 'rmd160';
-        }
-        return openssl_digest($data, $algorithm, $binaryOutput);
+        return in_array($algo, self::getSupportedAlgorithms());
     }
 }

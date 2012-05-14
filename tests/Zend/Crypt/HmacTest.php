@@ -212,4 +212,23 @@ class HmacTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('69ea60798d71616cce5fd0871e23754cd75d5a0a', $hmac);
     }
 
+    public function testEmptyKey()
+    {
+        $this->setExpectedException('Zend\Crypt\Exception\InvalidArgumentException',
+                                    'Provided key is null or empty');
+        $hash = HMAC::compute(null, 'md5', 'test');
+    }
+    
+    public function testWrongHashAlgorithm()
+    {
+        $this->setExpectedException('Zend\Crypt\Exception\InvalidArgumentException',
+                                    'Hash algorithm provided is not supported on this PHP installation');
+        $hash = HMAC::compute('key', 'wrong', 'test');
+    }
+    
+    public function testBinaryOutput()
+    {
+        $data = HMAC::compute('key', 'sha256', 'test', HMAC::BINARY);
+        $this->assertEquals('Aq+1YwSQLGVvy3N83QPeYgW7bUAdooEu/ZstNqCK8Vk=', base64_encode($data));
+    }
 }

@@ -59,6 +59,19 @@ class Tag extends AbstractGenerator
     protected $description = null;
 
     /**
+     * @param array $options
+     */
+    public function __construct(array $options = array())
+    {
+        if (key_exists('name', $options)) {
+            $this->setName($options['name']);
+        }
+        if (key_exists('description', $options)) {
+            $this->setName($options['description']);
+        }
+    }
+
+    /**
      * fromReflection()
      *
      * @param ReflectionDocBlockTag $reflectionTag
@@ -136,7 +149,9 @@ class Tag extends AbstractGenerator
      */
     public function generate()
     {
-        return '@' . $this->name . ' ' . $this->description;
+        $output = '@' . $this->name
+            . (($this->description != null) ? ' ' . $this->description : '');
+        return $output;
     }
 
 }

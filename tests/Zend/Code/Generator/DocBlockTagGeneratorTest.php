@@ -35,60 +35,58 @@ use Zend\Code\Generator\DocBlock\Tag;
  */
 class DocBlockTagGeneratorTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * @var Tag
-     */
-    protected $_tag = null;
+    /** @var Tag */
+    protected $tag;
 
     public function setUp()
     {
-        $this->_tag = new Tag();
+        $this->tag = new Tag();
     }
 
     public function tearDown()
     {
-        $this->_tag = null;
+        $this->tag = null;
     }
 
     public function testNameGetterAndSetterPersistValue()
     {
-        $this->_tag->setName('Foo');
-        $this->assertEquals('Foo', $this->_tag->getName());
+        $this->tag->setName('Foo');
+        $this->assertEquals('Foo', $this->tag->getName());
     }
 
     public function testDescriptionGetterAndSetterPersistValue()
     {
-        $this->_tag->setDescription('Foo foo foo');
-        $this->assertEquals('Foo foo foo', $this->_tag->getDescription());
+        $this->tag->setDescription('Foo foo foo');
+        $this->assertEquals('Foo foo foo', $this->tag->getDescription());
     }
 
     public function testDatatypeGetterAndSetterPersistValue()
     {
-        $this->markTestIncomplete('Docbook tag is not completed');
-        $this->_tag->setDatatype('Foo');
-        $this->assertEquals('Foo', $this->_tag->getDatatype());
+        $this->tag = new Tag\ParamTag();
+        $this->tag->setDatatype('Foo');
+        $this->assertEquals('Foo', $this->tag->getDatatype());
     }
 
     public function testParamNameGetterAndSetterPersistValue()
     {
-        $this->markTestIncomplete('Docbook tag is not completed');
-        $this->_tag->setParamName('Foo');
-        $this->assertEquals('Foo', $this->_tag->getParamName());
+        $this->tag = new Tag\ParamTag();
+        $this->tag->setParamName('Foo');
+        $this->assertEquals('Foo', $this->tag->getParamName());
     }
 
     public function testParamProducesCorrectDocBlockLine()
     {
-        $this->markTestIncomplete('Docbook tag is not completed');
-        $this->_tag->setParamName('foo');
-        $this->_tag->setDatatype('string');
-        $this->_tag->setDescription('bar bar bar');
-        $this->assertEquals('@param string $foo bar bar bar', $this->_tag->generate());
+        $this->tag = new Tag\ParamTag();
+        $this->tag->setParamName('foo');
+        $this->tag->setDatatype('string');
+        $this->tag->setDescription('bar bar bar');
+        $this->assertEquals('@param string $foo bar bar bar', $this->tag->generate());
     }
 
     public function testParamProducesCorrectDocBlockTag()
     {
-        $this->_tag->setName('foo');
-        $this->_tag->setDescription('bar bar bar');
-        $this->assertEquals('@foo bar bar bar', $this->_tag->generate());
+        $this->tag->setName('foo');
+        $this->tag->setDescription('bar bar bar');
+        $this->assertEquals('@foo bar bar bar', $this->tag->generate());
     }
 }

@@ -37,6 +37,8 @@ class ReflectionDocBlockTagTest extends \PHPUnit_Framework_TestCase
 {
     public function testTagDescriptionIsReturned()
     {
+        $this->markTestIncomplete('DocBlock Tag not completed yet');
+
         $classReflection = new Reflection\ClassReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass5');
 
         $authorTag = $classReflection->getDocBlock()->getTag('author');
@@ -45,6 +47,8 @@ class ReflectionDocBlockTagTest extends \PHPUnit_Framework_TestCase
 
     public function testTagShouldAllowJustTagNameInDocBlockTagLine()
     {
+        $this->markTestIncomplete('DocBlock Tag not completed yet');
+
         $classReflection = new Reflection\ClassReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass6');
 
         $tag = $classReflection->getMethod('doSomething')->getDocBlock()->getTag('emptyTag');
@@ -53,6 +57,7 @@ class ReflectionDocBlockTagTest extends \PHPUnit_Framework_TestCase
 
     public function testTagShouldAllowMultipleWhitespacesBeforeDescription()
     {
+        $this->markTestIncomplete('DocBlock Tag not completed yet');
         $classReflection = new Reflection\ClassReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass6');
 
         $tag = $classReflection->getMethod('doSomething')->getDocBlock()->getTag('descriptionTag');
@@ -68,7 +73,7 @@ class ReflectionDocBlockTagTest extends \PHPUnit_Framework_TestCase
 
         $tag = $classReflection->getMethod('doSomething')->getDocBlock()->getTag('descriptionTag');
 
-        $expectedString = "DocBlock Tag [ * @descriptionTag ]" . PHP_EOL;
+        $expectedString = 'DocBlock Tag [ * @descriptionTag ]' . PHP_EOL;
 
         $this->assertEquals($expectedString, (string)$tag);
     }
@@ -93,6 +98,8 @@ class ReflectionDocBlockTagTest extends \PHPUnit_Framework_TestCase
 
     public function testAllowsMultipleSpacesInDocBlockTagLine()
     {
+        $this->markTestIncomplete('DocBlock Tag not completed yet');
+
         $classReflection = new Reflection\ClassReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass6');
 
         $paramTag = $classReflection->getMethod('doSomething')->getDocBlock()->getTag('param');
@@ -110,6 +117,8 @@ class ReflectionDocBlockTagTest extends \PHPUnit_Framework_TestCase
      */
     public function testNamespaceInParam()
     {
+        $this->markTestIncomplete('DocBlock Tag not completed yet');
+
         $classReflection = new Reflection\ClassReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass7');
         $paramTag        = $classReflection->getMethod('doSomething')->getDocBlock()->getTag('param');
 

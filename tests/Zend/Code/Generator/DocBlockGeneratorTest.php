@@ -58,9 +58,15 @@ class DocBlockGeneratorTest extends \PHPUnit_Framework_TestCase
 
     public function testTagGettersAndSetters()
     {
+        $paramTag = new Tag\ParamTag();
+        $paramTag->setDatatype('string');
+
+        $returnTag = new Tag\ReturnTag();
+        $returnTag->setDatatype('int');
+
         $this->docBlockGenerator->setTag(array('name' => 'blah'));
-        $this->docBlockGenerator->setTag(new Tag\ParamTag(array('datatype' => 'string')));
-        $this->docBlockGenerator->setTag(new Tag\ReturnTag(array('datatype' => 'int')));
+        $this->docBlockGenerator->setTag($paramTag);
+        $this->docBlockGenerator->setTag($returnTag);
         $this->assertEquals(3, count($this->docBlockGenerator->getTags()));
 
         $target = <<<EOS

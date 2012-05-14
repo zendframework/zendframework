@@ -284,7 +284,7 @@ class PluginBrokerTest extends \PHPUnit_Framework_TestCase
 
         $loader = $this->broker->getClassLoader();
         $loader->registerPlugin('foo', 'ZendTest\Loader\TestAsset\Foo');
-        $this->broker->setLocator($locator);
+        $this->broker->setServiceLocator($locator);
 
         $test = $this->broker->load('foo');
         $this->assertSame($plugin, $test);

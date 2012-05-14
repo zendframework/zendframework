@@ -5,6 +5,7 @@ namespace ZendTest\Module\Listener;
 use PHPUnit_Framework_TestCase as TestCase,
     Zend\EventManager\EventManager,
     Zend\EventManager\SharedEventManager,
+    Zend\Loader\AutoloaderFactory,
     Zend\Loader\ModuleAutoloader,
     Zend\Mvc\Application,
     Zend\Module\Listener\LocatorRegistrationListener,

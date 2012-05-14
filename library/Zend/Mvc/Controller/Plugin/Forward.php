@@ -25,8 +25,8 @@ use Zend\Mvc\InjectApplicationEventInterface;
 use Zend\Mvc\Exception;
 use Zend\Mvc\MvcEvent;
 use Zend\Mvc\Router\RouteMatch;
-use Zend\ServiceLocator\ServiceLocatorAwareInterface;
-use Zend\ServiceLocator\ServiceLocatorInterface;
+use Zend\ServiceManager\ServiceLocatorAwareInterface;
+use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\Stdlib\DispatchableInterface as Dispatchable;
 
 /**
@@ -76,8 +76,8 @@ class Forward extends AbstractPlugin
         if ($controller instanceof InjectApplicationEventInterface) {
             $controller->setEvent($event);
         }
-        if ($controller instanceof LocatorAwareInterface) {
-            $controller->setLocator($locator);
+        if ($controller instanceof ServiceLocatorAwareInterface) {
+            $controller->setServiceLocator($locator);
         }
 
         // Allow passing parameters to seed the RouteMatch with

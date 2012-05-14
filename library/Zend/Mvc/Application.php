@@ -107,7 +107,16 @@ class Application implements
      */
     protected $moduleManager;
 
-    public function __construct($configuration, ServiceManager $serviceManager = null)
+    /**
+     * Constructor
+     *
+     * 
+     * 
+     * @param mixed $configuration 
+     * @param ServiceManager $serviceManager 
+     * @return void
+     */
+    public function __construct($configuration, ServiceManager $serviceManager)
     {
         $this->configuration  = $configuration;
         $this->serviceManager = $serviceManager;
@@ -126,7 +135,7 @@ class Application implements
      */
     public function getConfiguration()
     {
-        $this->serviceManager->get('config');
+        return $this->serviceManager->get('Configuration');
     }
 
     /**

@@ -20,27 +20,20 @@
 
 namespace Zend\Mvc;
 
+use Zend\EventManager\EventsCapableInterface;
+
 /**
  * @category   Zend
  * @package    Zend_Mvc
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface ApplicationInterface
+interface ApplicationInterface extends EventsCapableInterface
 {
-    /**
-     * Retrieve the event manager
-     *
-     * Lazy-loads an EventManager instance if none registered.
-     *
-     * @return EventCollection
-     */
-    public function events();
-
     /**
      * Get the locator object
      *
-     * @return ServiceManager
+     * @return \Zend\ServiceManager\ServiceLocatorInterface
      */
     public function getServiceManager();
 

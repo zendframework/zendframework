@@ -138,11 +138,20 @@ class Callback extends AbstractValidator
             throw new Exception\InvalidArgumentException('No callback given');
         }
 
-        $args     = func_get_args();
-        $options  = array_merge($args, $options);
+        $args = array($value);
+        if (empty($options) && !empty($context)) {
+            $args[] = $context;
+        }
+        if (!empty($options) && empty($context)) {
+            $args = array_merge($args, $options);
+        }
+        if (!empty($options) && !empty($context)) {
+            $args[] = $context;
+            $args   = array_merge($args, $options);
+        }
 
         try {
-            if (!call_user_func_array($callback, $options)) {
+            if (!call_user_func_array($callback, $args)) {
                 $this->error(self::INVALID_VALUE);
                 return false;
             }

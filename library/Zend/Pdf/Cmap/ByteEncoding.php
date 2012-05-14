@@ -141,7 +141,7 @@ class ByteEncoding extends AbstractCmap
      * malformed.
      *
      * @param string $cmapData Raw binary cmap table data.
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
     public function __construct($cmapData)
     {

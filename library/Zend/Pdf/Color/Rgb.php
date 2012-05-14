@@ -21,8 +21,7 @@
 
 namespace Zend\Pdf\Color;
 
-use Zend\Pdf\Color,
-    Zend\Pdf\InternalType;
+use Zend\Pdf\InternalType;
 
 /**
  * RGB color implementation
@@ -32,7 +31,7 @@ use Zend\Pdf\Color,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Rgb implements Color
+class Rgb implements ColorInterface
 {
     /**
      * Red level.

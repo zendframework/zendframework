@@ -190,7 +190,7 @@ class Created extends AbstractOutline
      *
      * @param \Zend\Pdf\InternalStructure\NavigationTarget|string $target
      * @return \Zend\Pdf\Outline\AbstractOutline
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
     public function setTarget($target = null)
     {
@@ -212,7 +212,7 @@ class Created extends AbstractOutline
      * Object constructor
      *
      * @param array $options
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
     public function __construct($options = array())
     {
@@ -235,7 +235,7 @@ class Created extends AbstractOutline
      * @param \Zend\Pdf\InternalType\AbstractTypeObject $prev     Previous outline dictionary reference
      * @param SplObjectStorage $processedOutlines  List of already processed outlines
      * @return \Zend\Pdf\InternalType\AbstractTypeObject
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
     public function dumpOutline(ObjectFactory $factory,
                                               $updateNavigation,

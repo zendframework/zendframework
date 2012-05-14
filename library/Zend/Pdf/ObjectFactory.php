@@ -258,7 +258,7 @@ class ObjectFactory
      *
      * @param \Zend\Pdf\ObjectFactory $factory
      * @return integer
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
     public function getEnumerationShift(ObjectFactory $factory)
     {
@@ -273,7 +273,7 @@ class ObjectFactory
      * Mark object as modified in context of current factory.
      *
      * @param \Zend\Pdf\InternalType\IndirectObject $obj
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
     public function markAsModified(InternalType\IndirectObject $obj)
     {
@@ -289,7 +289,7 @@ class ObjectFactory
      * Remove object in context of current factory.
      *
      * @param \Zend\Pdf\InternalType\IndirectObject $obj
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
     public function remove(InternalType\IndirectObject $obj)
     {

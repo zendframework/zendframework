@@ -21,10 +21,9 @@
  */
 
 namespace Zend\Pdf\Exception;
-use Zend\Pdf\Exception;
 
 /**
- * Exception class for Zend_Application
+ * Exception class for Zend\Pdf.
  *
  * @category  Zend
  * @package    Zend_PDF
@@ -33,7 +32,6 @@ use Zend\Pdf\Exception;
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class IOException
-    extends \RuntimeException
-    implements Exception
+    extends RuntimeException
 {
 }

@@ -45,7 +45,7 @@ class Markup extends AbstractAnnotation
     /**
      * Annotation object constructor
      *
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
     public function __construct(InternalType\AbstractTypeObject $annotationDictionary)
     {
@@ -99,7 +99,7 @@ class Markup extends AbstractAnnotation
      * @param string $subType
      * @param array $quadPoints  [x1 y1 x2 y2 x3 y3 x4 y4]
      * @return \Zend\Pdf\Annotation\Markup
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
     public static function create($x1, $y1, $x2, $y2, $text, $subType, $quadPoints)
     {

@@ -38,7 +38,7 @@ class FileAttachment extends AbstractAnnotation
     /**
      * Annotation object constructor
      *
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
     public function __construct(InternalType\AbstractTypeObject $annotationDictionary)
     {

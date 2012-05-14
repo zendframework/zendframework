@@ -41,7 +41,7 @@ abstract class NavigationTarget
      *
      * $param \Zend\Pdf\InternalType $resource
      * @return \Zend\Pdf\Destination\AbstractDestination|\Zend\Pdf\Action\AbstractAction
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
     public static function load(InternalType\AbstractTypeObject $resource)
     {

@@ -287,7 +287,7 @@ class ClassGenerator extends AbstractGenerator
         return $this;
     }
 
-    /***
+    /**
      * @return FileGenerator
      */
     public function getContainingFileGenerator()

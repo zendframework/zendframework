@@ -164,6 +164,13 @@ abstract class AbstractWord extends FormInput
     {
         $attributes['type']  = 'hidden';
         $attributes['name'] .= '[id]';
+        if (method_exists($captcha, 'getId')) {
+            $attributes['value'] = $captcha->getId();
+        } elseif (array_key_exists('value', $attributes)) {
+            if (is_array($attributes['value']) && array_key_exists('id', $attributes['value'])) {
+                $attributes['value'] = $attributes['value']['id'];
+            }
+        }
         $closingBracket      = $this->getInlineClosingBracket();
         $hidden              = sprintf(
             '<input %s%s', 
@@ -184,6 +191,9 @@ abstract class AbstractWord extends FormInput
     {
         $attributes['type']  = 'text';
         $attributes['name'] .= '[input]';
+        if (array_key_exists('value', $attributes)) {
+            unset($attributes['value']);
+        }
         $closingBracket      = $this->getInlineClosingBracket();
         $input               = sprintf(
             '<input %s%s', 

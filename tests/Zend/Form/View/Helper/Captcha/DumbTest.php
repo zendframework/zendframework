@@ -56,6 +56,7 @@ class DumbTest extends CommonTestCase
         $element = $this->getElement();
         $markup  = $this->helper->render($element);
         $this->assertRegExp('#(name="' . $element->getName() . '\[id\]").*?(type="hidden")#', $markup);
+        $this->assertRegExp('#(name="' . $element->getName() . '\[id\]").*?(value="' . $this->captcha->getId() . '")#', $markup);
     }
 
     public function testRendersTextInputForInput()

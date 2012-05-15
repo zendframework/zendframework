@@ -21,6 +21,7 @@
 
 namespace ZendTest\Filter;
 
+use stdClass;
 use Zend\Filter\StringTrim as StringTrimFilter;
 
 /**
@@ -134,5 +135,27 @@ class StringTrimTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Зенд', $filter->filter('。  Зенд  。'));
 
 
+    }
+
+    public function getNonStringValues()
+    {
+        return array(
+            array(1),
+            array(1.0),
+            array(true),
+            array(false),
+            array(null),
+            array(array(1, 2, 3)),
+            array(new stdClass()),
+        );
+    }
+
+    /**
+     * @dataProvider getNonStringValues
+     */
+    public function testShouldNotFilterNonStringValues($value)
+    {
+        $filtered = $this->_filter->filter($value);
+        $this->assertSame($value, $filtered);
     }
 }

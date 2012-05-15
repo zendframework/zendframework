@@ -74,7 +74,11 @@ class Form extends AbstractHelper
         );
 
         if ($form instanceof FormInterface) {
-            $attributes = array_merge($attributes, $form->getAttributes());
+            $formAttributes = $form->getAttributes();
+            if (!array_key_exists('id', $formAttributes) && array_key_exists('name', $formAttributes)) {
+                $formAttributes['id'] = $formAttributes['name'];
+            }
+            $attributes = array_merge($attributes, $formAttributes);
         }
 
         $tag = sprintf('<form %s>', $this->createAttributesString($attributes));

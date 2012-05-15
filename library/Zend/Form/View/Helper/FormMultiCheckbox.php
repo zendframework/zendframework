@@ -144,8 +144,13 @@ class FormMultiCheckbox extends FormInput
         $closingBracket = $this->getInlineClosingBracket();
         $template       = $labelOpen . '%s%s' . $labelClose;
         $combinedMarkup = array();
+        $count          = 0;
 
         foreach ($options as $label => $value) {
+            $count++;
+            if ($attributes > 1 && array_key_exists('id', $attributes)) {
+                unset($attributes['id']);
+            }
             $attributes['value']   = $value;
             $attributes['checked'] = '';
             if (in_array($value, $values, true)) {

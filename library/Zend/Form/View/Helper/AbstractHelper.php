@@ -315,10 +315,6 @@ abstract class AbstractHelper extends BaseAbstractHelper
      */
     protected function prepareAttributes(array $attributes)
     {
-        if (isset($attributes['name']) && !isset($attributes['id'])) {
-            $attributes['id'] = $attributes['name'];
-        }
-
         foreach ($attributes as $key => $value) {
             $attribute = strtolower($key);
 

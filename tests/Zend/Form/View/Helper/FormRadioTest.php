@@ -112,4 +112,12 @@ class FormRadioTest extends CommonTestCase
 
         $this->assertNotContains('checked', $markup);
     }
+
+    public function testIdShouldNotBeRenderedForEachRadio()
+    {
+        $element = $this->getElement();
+        $element->setAttribute('id', 'foo');
+        $markup  = $this->helper->render($element);
+        $this->assertTrue(1 >= substr_count($markup, 'id="foo"'));
+    }
 }

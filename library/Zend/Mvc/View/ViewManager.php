@@ -172,16 +172,24 @@ class ViewManager implements ListenerAggregateInterface
         $this->helperBroker = new ViewHelperBroker();
         $this->helperBroker->setClassLoader($this->getHelperLoader());
 
+        // Configure URL view helper with router
         $router = $this->services->get('Router');
         $url    = $this->helperBroker->load('url');
         $url->setRouter($router);
 
+        // Configure basePath view helper with base path from configuration, if available
         $basePath = '/';
         if (isset($this->config['view_manager']) && isset($this->config['view_manager']['base_path'])) {
             $basePath = $this->config['view_manager']['base_path'];
         }
         $basePathHelper = $this->helperBroker->load('basePath');
         $basePathHelper->setBasePath($basePath);
+
+        // Configure doctype view helper with doctype from configuration, if available
+        if (isset($this->config['view_manager']) && isset($this->config['view_manager']['doctype'])) {
+            $doctype = $this->helperBroker->load('doctype');
+            $doctype->setDoctype($this->config['view_manager']['doctype']);
+        }
 
         return $this->helperBroker;
     }

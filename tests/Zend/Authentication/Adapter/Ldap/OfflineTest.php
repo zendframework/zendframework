@@ -19,7 +19,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace ZendTest\Auth\Adapter\Ldap;
+namespace ZendTest\Authentication\Adapter\Ldap;
 
 use Zend\Authentication\Adapter,
     Zend\Ldap;

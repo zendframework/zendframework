@@ -41,7 +41,7 @@ class Utility
      */
     public function assembleParams(
         $url, 
-        OAuth\Config $config, 
+        OAuth\Config\ConfigInterface $config,
         array $serviceProviderParams = null
     ) {
         $params = array(

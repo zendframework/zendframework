@@ -18,9 +18,9 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\OAuth;
+namespace Zend\OAuth\Signature;
 
-interface Signature
+interface SignatureInterface
 {
     /**
      * Constructor

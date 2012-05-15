@@ -20,10 +20,11 @@
 
 namespace Zend\OAuth;
 
-use Traversable;
-use Zend\Stdlib\ArrayUtils;
-use Zend\Http\Client as HttpClient;
-use Zend\Http\Request as HttpRequest;
+use Traversable,
+    Zend\Stdlib\ArrayUtils,
+    Zend\Http\Client as HttpClient,
+    Zend\Http\Request as HttpRequest,
+    Zend\Http\Response as HttpResponse;
 
 /**
  * @category   Zend
@@ -151,7 +152,7 @@ class Client extends HttpClient
     /**
      * Clear all custom parameters we set.
      *
-     * @return Zend\Http\Client
+     * @return HttpClient
      */
     public function resetParameters($clearAll = false)
     {
@@ -168,7 +169,7 @@ class Client extends HttpClient
      *
      * @param string $data The request data
      * @param string $enctype The encoding type
-     * @return Zend\Http\Client
+     * @return HttpClient
      */
     public function setRawDataStream($data, $enctype = null)
     {
@@ -182,7 +183,7 @@ class Client extends HttpClient
      * Might be defunct and removed in a later iteration.
      *
      * @param  string $method
-     * @return Zend\Http\Client
+     * @return HttpClient
      */
     public function setMethod($method = HttpRequest::METHOD_GET)
     {
@@ -206,7 +207,7 @@ class Client extends HttpClient
      * sign the request using the relevant signature method.
      *
      * @param  null|Zend\Http\Request $method
-     * @return Zend\Http\Response
+     * @return HttpResponse
      */
     public function send(HttpRequest $request = null)
     {
@@ -222,7 +223,7 @@ class Client extends HttpClient
      * being used.
      *
      * @return void
-     * @throws Zend\OAuth\Exception If POSTBODY scheme requested, but GET request method used; or if invalid request scheme provided
+     * @throws \Zend\OAuth\Exception\RuntimeException If POSTBODY scheme requested, but GET request method used; or if invalid request scheme provided
      */
     public function prepareOAuth()
     {
@@ -238,7 +239,7 @@ class Client extends HttpClient
             $this->setHeaders(array('Authorization' => $oauthHeaderValue));
         } elseif ($requestScheme == OAuth::REQUEST_SCHEME_POSTBODY) {
             if ($requestMethod == HttpRequest::METHOD_GET) {
-                throw new Exception(
+                throw new Exception\RuntimeException(
                     'The client is configured to'
                     . ' pass OAuth parameters through a POST body but request method'
                     . ' is set to GET'
@@ -274,7 +275,7 @@ class Client extends HttpClient
             $this->getUri()->setQuery($query);
             $this->paramsGet = array();
         } else {
-            throw new Exception('Invalid request scheme: ' . $requestScheme);
+            throw new Exception\RuntimeException('Invalid request scheme: ' . $requestScheme);
         }
     }
 
@@ -311,12 +312,12 @@ class Client extends HttpClient
      * @param  string $method
      * @param  array $args
      * @return mixed
-     * @throws Zend\OAuth\Exception if method does not exist in config object
+     * @throws Exception\BadMethodCallException if method does not exist in config object
      */
     public function __call($method, array $args)
     {
         if (!method_exists($this->_config, $method)) {
-            throw new Exception('Method does not exist: ' . $method);
+            throw new Exception\BadMethodCallException('Method does not exist: ' . $method);
         }
         return call_user_func_array(array($this->_config,$method), $args);
     }

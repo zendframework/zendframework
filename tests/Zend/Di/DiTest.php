@@ -634,8 +634,8 @@ class DiTest extends \PHPUnit_Framework_TestCase
         $classDef->addMethod('setA', false);
         $classDef->addMethodParameter('setA', 'a', array('type' => 'ZendTest\Di\TestAsset\SetterInjection\A', 'required' => false));
         $di->definitions()->addDefinition($classDef, false);
-        $di->instanceManager()->setInjections('b_alias', array('ZendTest\Di\TestAsset\SetterInjection\A'));
         $di->instanceManager()->addAlias('b_alias', 'ZendTest\Di\TestAsset\SetterInjection\B');
+        $di->instanceManager()->setInjections('b_alias', array('ZendTest\Di\TestAsset\SetterInjection\A'));
 
         $b = $di->get('b_alias');
         $this->assertInstanceOf('ZendTest\Di\TestAsset\SetterInjection\A', $b->a);

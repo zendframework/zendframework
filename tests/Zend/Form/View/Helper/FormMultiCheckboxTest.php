@@ -57,7 +57,7 @@ class FormMultiCheckboxTest extends CommonTestCase
         $options = $element->getAttribute('options');
         $markup  = $this->helper->render($element);
 
-        $this->assertEquals(3, substr_count($markup, 'name="foo"'));
+        $this->assertEquals(3, substr_count($markup, 'name="foo'));
         $this->assertEquals(3, substr_count($markup, 'type="checkbox"'));
         $this->assertEquals(3, substr_count($markup, '<input'));
         $this->assertEquals(3, substr_count($markup, '<label'));
@@ -94,7 +94,7 @@ class FormMultiCheckboxTest extends CommonTestCase
         $this->helper->setLabelPosition(FormMultiCheckboxHelper::LABEL_PREPEND);
         $markup  = $this->helper->render($element);
 
-        $this->assertEquals(3, substr_count($markup, 'name="foo"'));
+        $this->assertEquals(3, substr_count($markup, 'name="foo'));
         $this->assertEquals(3, substr_count($markup, 'type="checkbox"'));
         $this->assertEquals(3, substr_count($markup, '<input'));
         $this->assertEquals(3, substr_count($markup, '<label'));
@@ -110,5 +110,12 @@ class FormMultiCheckboxTest extends CommonTestCase
         $element->setAttribute('id', 'foo');
         $markup  = $this->helper->render($element);
         $this->assertTrue(1 >= substr_count($markup, 'id="foo"'));
+    }
+
+    public function testNameShouldHaveBracketsAppended()
+    {
+        $element = $this->getElement();
+        $markup  = $this->helper->render($element);
+        $this->assertContains('foo[]', $markup);
     }
 }

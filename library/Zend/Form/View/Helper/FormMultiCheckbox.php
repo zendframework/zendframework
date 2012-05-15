@@ -104,7 +104,7 @@ class FormMultiCheckbox extends FormInput
      */
     public function render(ElementInterface $element)
     {
-        $name   = $element->getName();
+        $name   = static::getName($element);
         if (empty($name)) {
             throw new Exception\DomainException(sprintf(
                 '%s requires that the element has an assigned name; none discovered',
@@ -245,5 +245,16 @@ class FormMultiCheckbox extends FormInput
         }
 
         return $this->labelHelper;
+    }
+
+    /**
+     * Get element name
+     * 
+     * @param  ElementInterface $element 
+     * @return string
+     */
+    protected static function getName(ElementInterface $element)
+    {
+        return $element->getName() . '[]';
     }
 }

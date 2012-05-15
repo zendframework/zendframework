@@ -120,4 +120,11 @@ class FormRadioTest extends CommonTestCase
         $markup  = $this->helper->render($element);
         $this->assertTrue(1 >= substr_count($markup, 'id="foo"'));
     }
+
+    public function testNameShouldNotHaveBracketsAppended()
+    {
+        $element = $this->getElement();
+        $markup  = $this->helper->render($element);
+        $this->assertNotContains('foo[]', $markup);
+    }
 }

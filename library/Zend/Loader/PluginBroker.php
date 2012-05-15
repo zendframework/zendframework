@@ -199,7 +199,7 @@ class PluginBroker implements Broker, ServiceLocatorAwareInterface
         }
 
         $locator = $this->getServiceLocator();
-        if ($locator) {
+        if ($locator && $locator->has($class)) {
             if (!empty($options) && $this->isAssocArray($options)) {
                 // This might be inconsistent with what $options should be?
                 $instance = $locator->get($class, $options);

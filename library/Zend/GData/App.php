@@ -566,7 +566,7 @@ class App
      *
      * @param string $method The HTTP method for the request - 'GET', 'POST',
      *                       'PUT', 'DELETE'
-     * @param string $url The URL to which this request is being performed
+     * @param string $uri The URL to which this request is being performed
      * @param array $headers An associative array of HTTP headers
      *                       for this request
      * @param string $body The body of the HTTP request
@@ -576,7 +576,7 @@ class App
      *                              s results in one
      * @return \Zend\Http\Response The response object
      */
-    public function performHttpRequest($method, $url, $headers = null,
+    public function performHttpRequest($method, $uri, $headers = null,
         $body = null, $contentType = null, $remainingRedirects = null)
     {
         if ($remainingRedirects === null) {
@@ -602,7 +602,7 @@ class App
                         'You must specify the data to post as either a ' .
                         'string or a child of Zend\GData\App\Entry');
         }
-        if ($url === null) {
+        if ($uri === null) {
             throw new App\InvalidArgumentException(
                 'You must specify an URI to which to post.');
         }
@@ -628,8 +628,8 @@ class App
 
         // Set the params for the new request to be performed
         $this->_httpClient->setHeaders($headers);
-        $uriObj = Uri\UriFactory::factory($url);
-        preg_match("/^(.*?)(\?.*)?$/", $url, $matches);
+        $uriObj = Uri\UriFactory::factory($uri);
+        preg_match("/^(.*?)(\?.*)?$/", $uri, $matches);
         $this->_httpClient->setUri($matches[1]);
         $queryArray = $uriObj->getQueryAsArray();
         foreach ($queryArray as $name => $value) {

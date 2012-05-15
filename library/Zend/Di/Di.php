@@ -208,7 +208,7 @@ class Di implements DependencyInjectionInterface
             }
         }
 
-        $this->handleInjectDependencies($instance, $class, $injectionMethods, $supertypeInjectionMethods, $params, $alias);
+        $this->handleInjectDependencies($instance, $name, $injectionMethods, $supertypeInjectionMethods, $params, $alias);
 
         array_pop($this->instanceContext);
         return $instance;

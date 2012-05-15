@@ -492,4 +492,50 @@ class BaseFormTest extends TestCase
 
         $this->assertTrue($this->form->isValid());
     }
+
+    public function testBindOnValidateIsTrueByDefault()
+    {
+        $this->assertTrue($this->form->bindOnValidate());
+    }
+
+    public function testCanDisableBindOnValidateFunctionality()
+    {
+        $this->form->setBindOnValidate(false);
+        $this->assertFalse($this->form->bindOnValidate());
+    }
+
+    public function testCallingBindValuesWhenBindOnValidateIsDisabledPopulatesBoundObject()
+    {
+        $model = new stdClass;
+        $validSet = array(
+            'foo' => 'abcde',
+            'bar' => ' ALWAYS valid ',
+            'foobar' => array(
+                'foo' => 'abcde',
+                'bar' => ' always VALID',
+            ),
+        );
+        $this->populateForm();
+        $this->form->setHydrator(new Hydrator\ObjectProperty());
+        $this->form->setBindOnValidate(false);
+        $this->form->bind($model);
+        $this->form->setData($validSet);
+        $this->form->isValid();
+
+        $this->assertObjectNotHasAttribute('foo', $model);
+        $this->assertObjectNotHasAttribute('bar', $model);
+        $this->assertObjectNotHasAttribute('foobar', $model);
+
+        $this->form->bindValues();
+
+        $this->assertObjectHasAttribute('foo', $model);
+        $this->assertEquals($validSet['foo'], $model->foo);
+        $this->assertObjectHasAttribute('bar', $model);
+        $this->assertEquals('always valid', $model->bar);
+        $this->assertObjectHasAttribute('foobar', $model);
+        $this->assertEquals(array(
+            'foo' => 'abcde',
+            'bar' => 'always valid',
+        ), $model->foobar);
+    }
 }

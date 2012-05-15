@@ -52,6 +52,13 @@ class BaseForm extends Fieldset implements FormInterface
     protected $bindAs = FormInterface::VALUES_NORMALIZED;
 
     /**
+     * Whether or not to bind values to the bound object on successful validation
+     * 
+     * @var int
+     */
+    protected $bindOnValidate = self::BIND_ON_VALIDATE;
+
+    /**
      * Data being validated
      * 
      * @var null|array|\Traversable
@@ -69,6 +76,13 @@ class BaseForm extends Fieldset implements FormInterface
      * @var bool
      */
     protected $hasValidated = false;
+
+    /**
+     * Result of last validation operation
+     * 
+     * @var bool
+     */
+    protected $isValid = false;
 
     /**
      * Hydrator to use with bound object
@@ -153,6 +167,67 @@ class BaseForm extends Fieldset implements FormInterface
     }
 
     /**
+     * Bind values to the bound object
+     * 
+     * @return void
+     */
+    public function bindValues()
+    {
+        if (!is_object($this->object)) {
+            return;
+        }
+        if (!$this->isValid) {
+            return;
+        }
+
+        $hydrator = $this->getHydrator();
+        $filter   = $this->getInputFilter();
+
+        switch ($this->bindAs) {
+            case FormInterface::VALUES_RAW:
+                $data = $filter->getRawValues();
+                break;
+            case FormInterface::VALUES_NORMALIZED:
+            default:
+                $data = $filter->getValues();
+                break;
+        }
+        $hydrator->hydrate($data, $this->object);
+    }
+
+    /**
+     * Set flag indicating whether or not to bind values on successful validation
+     * 
+     * @param  int $bindOnValidateFlag 
+     * @return BaseForm
+     */
+    public function setBindOnValidate($bindOnValidateFlag)
+    {
+        if (!in_array($bindOnValidateFlag, array(self::BIND_ON_VALIDATE, self::BIND_MANUAL))) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                '%s expects the flag to be one of %s::%s or %s::%s',
+                __METHOD__,
+                get_class($this),
+                'BIND_ON_VALIDATE',
+                get_class($this),
+                'BIND_MANUAL'
+            ));
+        }
+        $this->bindOnValidate = $bindOnValidateFlag;
+        return $this;
+    }
+
+    /**
+     * Will we bind values to the bound object on successful validation?
+     * 
+     * @return bool
+     */
+    public function bindOnValidate()
+    {
+        return (self::BIND_ON_VALIDATE === $this->bindOnValidate);
+    }
+
+    /**
      * Set the hydrator to use when binding an object to the form
      * 
      * @param  Hydrator\HydratorInterface $hydrator 
@@ -188,6 +263,8 @@ class BaseForm extends Fieldset implements FormInterface
      */
     public function isValid()
     {
+        $this->isValid = false;
+
         if (!is_array($this->data) && !is_object($this->object)) {
             throw new Exception\DomainException(sprintf(
                 '%s is unable to validate as there is no data currently set',
@@ -228,9 +305,9 @@ class BaseForm extends Fieldset implements FormInterface
             $filter->setValidationGroup($this->validationGroup);
         }
 
-        $result = $filter->isValid();
-        if ($result) {
-            $this->hydrate();
+        $this->isValid = $result = $filter->isValid();
+        if ($result && $this->bindOnValidate()) {
+            $this->bindValues();
         }
 
         if (!$result) {
@@ -334,31 +411,6 @@ class BaseForm extends Fieldset implements FormInterface
             $this->filter = $this->object->getInputFilter();
         }
         return $this->filter;
-    }
-
-    /**
-     * Hydrate the attached object
-     * 
-     * @return void
-     */
-    protected function hydrate()
-    {
-        if (!is_object($this->object)) {
-            return;
-        }
-        $hydrator = $this->getHydrator();
-        $filter   = $this->getInputFilter();
-
-        switch ($this->bindAs) {
-            case FormInterface::VALUES_RAW:
-                $data = $filter->getRawValues();
-                break;
-            case FormInterface::VALUES_NORMALIZED:
-            default:
-                $data = $filter->getValues();
-                break;
-        }
-        $hydrator->hydrate($data, $this->object);
     }
 
     /**

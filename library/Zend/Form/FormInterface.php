@@ -32,10 +32,12 @@ use Zend\Stdlib\Hydrator;
  */
 interface FormInterface extends FieldsetInterface
 {
-    const VALIDATE_ALL      = 1;
-    const VALUES_NORMALIZED = 2;
-    const VALUES_RAW        = 3;
-    const VALUES_AS_ARRAY   = 4;
+    const BIND_ON_VALIDATE  = 0x00;
+    const BIND_MANUAL       = 0x01;
+    const VALIDATE_ALL      = 0x10;
+    const VALUES_NORMALIZED = 0x11;
+    const VALUES_RAW        = 0x12;
+    const VALUES_AS_ARRAY   = 0x13;
  
     /**
      * Set data to validate and/or populate elements
@@ -48,14 +50,29 @@ interface FormInterface extends FieldsetInterface
     public function setData($data);
 
     /**
-     * Bind a model to the form
+     * Bind an object to the form
      *
-     * Ensures the model is populated with validated values.
+     * Allows populating the object with validated values.
      * 
-     * @param  object $model 
+     * @param  object $object 
      * @return void
      */
-    public function bind($model);
+    public function bind($object);
+
+    /**
+     * Bind values to the bound object
+     * 
+     * @return void
+     */
+    public function bindValues();
+
+    /**
+     * Whether or not to bind values to the bound object when validation succeeds
+     * 
+     * @param  int $bindOnValidateFlag 
+     * @return void
+     */
+    public function setBindOnValidate($bindOnValidateFlag);
 
     /**
      * Set input filter

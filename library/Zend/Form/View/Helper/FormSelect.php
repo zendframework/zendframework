@@ -130,11 +130,18 @@ class FormSelect extends AbstractHelper
         $optionStrings = array();
         $escape        = $this->getEscapeHelper();
 
-        foreach ($options as $optionSpec) {
+        foreach ($options as $key => $optionSpec) {
             $value    = '';
             $label    = '';
             $selected = false;
             $disabled = false;
+
+            if (is_string($optionSpec)) {
+                $optionSpec = array(
+                    'label' => $key,
+                    'value' => $optionSpec,
+                );
+            }
 
             if (isset($optionSpec['options']) && is_array($optionSpec['options'])) {
                 $optionStrings[] = $this->renderOptgroup($optionSpec, $selectedOptions);

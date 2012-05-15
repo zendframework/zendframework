@@ -113,6 +113,7 @@ class FormElementTest extends TestCase
 
     /**
      * @dataProvider getMultiElements
+     * @group multi
      */
     public function testRendersMultiElementsAsExpected($type, $inputType, $additionalMarkup)
     {
@@ -123,10 +124,14 @@ class FormElementTest extends TestCase
             'label'  => 'value2',
             'last'   => 'value3',
         ));
+        $element->setAttribute('value', 'value2');
         $markup  = $this->helper->render($element);
 
         $this->assertEquals(3, substr_count($markup, '<' . $inputType), $markup);
         $this->assertContains($additionalMarkup, $markup);
+        if ($type == 'select') {
+            $this->assertRegexp('#value="value2"[^>]*?(selected="selected")#', $markup);
+        }
     }
 
     public function testRendersCaptchaAsExpected()

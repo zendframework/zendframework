@@ -24,8 +24,6 @@
  */
 namespace Zend\Log\Formatter;
 
-use Zend\Log\Formatter;
-
 /**
  * @category   Zend
  * @package    Zend_Log
@@ -33,7 +31,7 @@ use Zend\Log\Formatter;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ExceptionHandler implements Formatter
+class ExceptionHandler implements FormatterInterface
 {
     /**
      * This method formats the event for the PHP Exception

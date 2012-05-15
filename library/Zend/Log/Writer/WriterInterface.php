@@ -14,56 +14,51 @@
  *
  * @category   Zend
  * @package    Zend_Log
- * @subpackage Filter
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Log\Filter;
+namespace Zend\Log\Writer;
 
-use Zend\Log\Exception,
-    Zend\Validator\ValidatorInterface as ZendValidator;
+use Zend\Log\Formatter\FormatterInterface as Formatter,
+    Zend\Log\Filter\FilterInterface as Filter;
 
 /**
  * @category   Zend
  * @package    Zend_Log
- * @subpackage Filter
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Validator implements FilterInterface
+interface WriterInterface
 {
     /**
-     * Regex to match
+     * Add a log filter to the writer
      *
-     * @var ZendValidator
+     * @param  int|Filter $filter
+     * @return WriterInterface
      */
-    protected $validator;
+    public function addFilter($filter);
 
     /**
-     * Filter out any log messages not matching the validator
+     * Set a message formatter for the writer
      *
-     * @param  ZendValidator $validator
-     * @throws Exception\InvalidArgumentException
+     * @param Formatter $formatter
+     * @return WriterInterface
      */
-    public function __construct($validator)
-    {
-        if (!$validator instanceof ZendValidator) {
-            throw new Exception\InvalidArgumentException(sprintf(
-                'Expected Zend\Validator object'
-            ));
-        }
-        $this->validator = $validator;
-    }
+    public function setFormatter(Formatter $formatter);
 
     /**
-     * Returns TRUE to accept the message, FALSE to block it.
+     * Write a log message
      *
-     * @param array $event event data
-     * @return boolean 
+     * @param  array $event
+     * @return WriterInterface
      */
-    public function filter(array $event)
-    {
-        return $this->validator->isValid($event['message']);
-    }
+    public function write(array $event);
+
+    /**
+     * Perform shutdown activities
+     *
+     * @return void
+     */
+    public function shutdown();
 }

@@ -21,7 +21,8 @@
 
 namespace Zend\Db\Adapter\Driver\Mysqli;
 
-use Zend\Db\Adapter\Driver\ConnectionInterface;
+use Zend\Db\Adapter\Driver\ConnectionInterface,
+    Zend\Db\Adapter\Exception;
 
 /**
  * @category   Zend
@@ -36,6 +37,7 @@ class Connection implements ConnectionInterface
      * @var Mysqli
      */
     protected $driver = null;
+
     /**
      * Connection paramters
      * 
@@ -100,6 +102,7 @@ class Connection implements ConnectionInterface
     {
         return $this->connectionParameters;
     }
+
     /**
      * Get default catalog
      * 
@@ -149,6 +152,7 @@ class Connection implements ConnectionInterface
         $this->connect();
         return $this->resource;
     }
+
     /**
      * Connect
      * 
@@ -183,7 +187,11 @@ class Connection implements ConnectionInterface
         $this->resource = new \Mysqli($hostname, $username, $password, $database, $port, $socket);
 
         if ($this->resource->connect_error) {
-            throw new \Exception('Connect Error (' . $this->resource->connect_errno . ') ' . $this->resource->connect_error);
+            throw new Exception\RuntimeException(
+                'Connection error',
+                null,
+                new Exception\ErrorException($this->resource->connect_error, $this->resource->connect_errno)
+            );
         }
 
         if (!empty($p['charset'])) {
@@ -244,11 +252,11 @@ class Connection implements ConnectionInterface
     public function rollback()
     {
         if (!$this->resource) {
-            throw new \Exception('Must be connected before you can rollback.');
+            throw new Exception\RuntimeException('Must be connected before you can rollback.');
         }
         
         if (!$this->inTransaction) {
-            throw new \Exception('Must call commit() before you can rollback.');
+            throw new Exception\RuntimeException('Must call commit() before you can rollback.');
         }
         
         $this->resource->rollback();
@@ -271,7 +279,7 @@ class Connection implements ConnectionInterface
 
         // if the returnValue is something other than a mysqli_result, bypass wrapping it
         if ($resultResource === false) {
-            throw new \Zend\Db\Adapter\Exception\InvalidQueryException($this->resource->error);
+            throw new Exception\InvalidQueryException($this->resource->error);
         }
 
         $resultPrototype = $this->driver->createResult(($resultResource === true) ? $this->resource : $resultResource);

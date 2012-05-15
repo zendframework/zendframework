@@ -63,12 +63,6 @@ interface StatementInterface
 
     /**
      * @abstract
-     * @return bool
-     */
-    // public function isQuery();
-
-    /**
-     * @abstract
      * @param string $sql
      */
     public function prepare($sql = null);
@@ -84,5 +78,5 @@ interface StatementInterface
      * @param null $parameters
      * @return ResultInterface
      */
-    public function execute($parameters = null);
+    public function execute();
 }

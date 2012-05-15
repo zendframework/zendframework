@@ -72,6 +72,15 @@ class Result implements \Iterator, ResultInterface
         $this->generatedValue = $generatedValue;
         return $this;
     }
+
+    /**
+     * @return null
+     */
+    public function buffer()
+    {
+        return null;
+    }
+
     /**
      * Get resource
      * 
@@ -81,6 +90,7 @@ class Result implements \Iterator, ResultInterface
     {
         return $this->resource;
     }
+
     /**
      * Current
      * 
@@ -95,6 +105,7 @@ class Result implements \Iterator, ResultInterface
         $this->load();
         return $this->currentData;
     }
+
     /**
      * Next
      * 
@@ -105,6 +116,7 @@ class Result implements \Iterator, ResultInterface
         $this->load();
         return true;
     }
+
     /**
      * Load
      * 
@@ -118,6 +130,7 @@ class Result implements \Iterator, ResultInterface
         $this->position++;
         return ($this->currentData);
     }
+
     /**
      * Key
      * 
@@ -127,6 +140,7 @@ class Result implements \Iterator, ResultInterface
     {
         return $this->position;
     }
+
     /**
      * Rewind
      * 
@@ -138,6 +152,7 @@ class Result implements \Iterator, ResultInterface
         $this->load(SQLSRV_SCROLL_FIRST);
         return true;
     }
+
     /**
      * Valid
      * 
@@ -151,6 +166,7 @@ class Result implements \Iterator, ResultInterface
 
         return $this->load();
     }
+
     /**
      * Count
      * 
@@ -160,6 +176,7 @@ class Result implements \Iterator, ResultInterface
     {
         return sqlsrv_num_rows($this->resource);
     }
+
     /**
      * Is query result
      * 
@@ -172,6 +189,7 @@ class Result implements \Iterator, ResultInterface
         }
         return (sqlsrv_num_fields($this->resource) > 0);
     }
+
     /**
      * Get affected rows
      * 
@@ -182,6 +200,9 @@ class Result implements \Iterator, ResultInterface
         return sqlsrv_rows_affected($this->resource);
     }
 
+    /**
+     * @return mixed|null
+     */
     public function getGeneratedValue()
     {
         return $this->generatedValue;

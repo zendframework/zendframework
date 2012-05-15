@@ -32,8 +32,6 @@ use Zend\Db\Adapter\Driver\ResultInterface,
  * @subpackage Adapter
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
- * @todo Use PDO's native interface for fetching into named objects?
  */
 class Result implements Iterator, ResultInterface
 {
@@ -81,17 +79,32 @@ class Result implements Iterator, ResultInterface
     protected $generatedValue = null;
 
     /**
+     * @var null
+     */
+    protected $rowCount = null;
+
+    /**
      * Initialize
      * 
      * @param  PDOStatement $resource
      * @return Result 
      */
-    public function initialize(PDOStatement $resource, $generatedValue)
+    public function initialize(PDOStatement $resource, $generatedValue, $rowCount = null)
     {
         $this->resource = $resource;
         $this->generatedValue = $generatedValue;
+        $this->rowCount = $rowCount;
         return $this;
     }
+
+    /**
+     * @return null
+     */
+    public function buffer()
+    {
+        return null;
+    }
+
     /**
      * Get resource
      * 
@@ -103,7 +116,8 @@ class Result implements Iterator, ResultInterface
     }
     
     /**
-     * @todo Should we allow passing configuration flags to the fetch() call?
+     * Get the data
+     * @return array
      */
     public function current()
     {
@@ -114,6 +128,7 @@ class Result implements Iterator, ResultInterface
         $this->currentData = $this->resource->fetch(\PDO::FETCH_ASSOC);
         return $this->currentData;
     }
+
     /**
      * Next
      * 
@@ -126,6 +141,7 @@ class Result implements Iterator, ResultInterface
         $this->position++;
         return $this->currentData;
     }
+
     /** 
      * Key
      * 
@@ -142,12 +158,13 @@ class Result implements Iterator, ResultInterface
     public function rewind()
     {
         if ($this->statementMode == self::STATEMENT_MODE_FORWARD && $this->position > 0) {
-            throw new \Exception('This result is a forward only result set, calling rewind() after moving forward is not supported');
+            throw new Exception\RuntimeException('This result is a forward only result set, calling rewind() after moving forward is not supported');
         }
         $this->currentData = $this->resource->fetch(\PDO::FETCH_ASSOC);
         $this->currentComplete = true;
         $this->position = 0;
     }
+
     /**
      * Valid
      * 
@@ -157,6 +174,7 @@ class Result implements Iterator, ResultInterface
     {
         return ($this->currentData != false);
     }
+
     /**
      * Count
      * 
@@ -164,8 +182,17 @@ class Result implements Iterator, ResultInterface
      */
     public function count()
     {
-        return $this->resource->rowCount();
+        if (is_int($this->rowCount)) {
+            return $this->rowCount;
+        }
+        if ($this->rowCount instanceof \Closure) {
+            $this->rowCount = call_user_func($this->rowCount);
+        } else {
+            $this->rowCount = $this->resource->rowCount();
+        }
+        return $this->rowCount;
     }
+
     /**
      * Is query result
      * 
@@ -175,6 +202,7 @@ class Result implements Iterator, ResultInterface
     {
         return ($this->resource->columnCount() > 0);
     }
+
     /**
      * Get affected rows
      * 
@@ -186,10 +214,11 @@ class Result implements Iterator, ResultInterface
     }
 
     /**
-     * @return mixed|false
+     * @return mixed|null
      */
     public function getGeneratedValue()
     {
         return $this->generatedValue;
     }
+
 }

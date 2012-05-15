@@ -21,7 +21,8 @@
 
 namespace Zend\Db\Adapter\Driver\Sqlsrv;
 
-use Zend\Db\Adapter\Driver\DriverInterface;
+use Zend\Db\Adapter\Driver\DriverInterface,
+    Zend\Db\Adapter\Exception;
 
 /**
  * @category   Zend
@@ -60,7 +61,7 @@ class Sqlsrv implements DriverInterface
         }
 
         if (!$connection instanceof Connection) {
-            throw new \InvalidArgumentException('$connection must be an array of parameters or a Pdo\Connection object');
+            throw new Exception\InvalidArgumentException('$connection must be an array of parameters or a Pdo\Connection object');
         }
 
         $this->registerConnection($connection);
@@ -123,7 +124,7 @@ class Sqlsrv implements DriverInterface
     public function checkEnvironment()
     {
         if (!extension_loaded('sqlsrv')) {
-            throw new \Exception('The Sqlsrv extension is required for this adapter but the extension is not loaded');
+            throw new Exception\RuntimeException('The Sqlsrv extension is required for this adapter but the extension is not loaded');
         }
     }
 

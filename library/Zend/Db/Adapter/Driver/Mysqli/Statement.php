@@ -70,6 +70,11 @@ class Statement implements StatementInterface
     protected $isPrepared = false;
 
     /**
+     * @var bool
+     */
+    protected $bufferResults = false;
+
+    /**
      * Set driver
      * 
      * @param  Mysqli $driver
@@ -80,6 +85,7 @@ class Statement implements StatementInterface
         $this->driver = $driver;
         return $this;
     }
+
     /**
      * Initialize
      * 
@@ -91,6 +97,7 @@ class Statement implements StatementInterface
         $this->mysqli = $mysqli;
         return $this;
     }
+
     /**
      * Set sql
      * 
@@ -102,6 +109,7 @@ class Statement implements StatementInterface
         $this->sql = $sql;
         return $this;
     }
+
     /**
      * Set Parameter container
      * 
@@ -111,6 +119,7 @@ class Statement implements StatementInterface
     {
         $this->parameterContainer = $parameterContainer;
     }
+
     /**
      * Get resource
      * 
@@ -120,6 +129,7 @@ class Statement implements StatementInterface
     {
         return $this->resource;
     }
+
     /**
      * Set resource
      * 
@@ -132,6 +142,7 @@ class Statement implements StatementInterface
         $this->isPrepared = true;
         return $this;
     }
+
     /**
      * Get sql
      * 
@@ -164,7 +175,7 @@ class Statement implements StatementInterface
     public function prepare($sql = null)
     {
         if ($this->isPrepared) {
-            throw new \Exception('This statement has already been prepared');
+            throw new Exception\RuntimeException('This statement has already been prepared');
         }
 
         $sql = ($sql) ?: $this->sql;
@@ -200,18 +211,26 @@ class Statement implements StatementInterface
                 $parameters = new ParameterContainer($parameters);
             }
             if (!$parameters instanceof ParameterContainer) {
-                throw new \InvalidArgumentException('ParameterContainer expected');
+                throw new Exception\InvalidArgumentException('ParameterContainer expected');
             }
             $this->bindParametersFromContainer($parameters);
         }
             
         if ($this->resource->execute() === false) {
-            throw new \RuntimeException($this->resource->error);
+            throw new Exception\RuntimeException($this->resource->error);
         }
 
-        $result = $this->driver->createResult($this->resource);
+        if ($this->bufferResults === true) {
+            $this->resource->store_result();
+            $buffered = true;
+        } else {
+            $buffered = false;
+        }
+
+        $result = $this->driver->createResult($this->resource, $buffered);
         return $result;
     }
+
     /**
      * Bind parameters from container
      * 

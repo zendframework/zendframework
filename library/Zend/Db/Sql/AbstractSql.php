@@ -69,7 +69,13 @@ abstract class AbstractSql
 
         return $return;
     }
-    
+
+    /**
+     * @param $specification
+     * @param $parameters
+     * @return string
+     * @throws Exception\RuntimeException
+     */
     protected function createSqlFromSpecificationAndParameters($specification, $parameters)
     {
         if (is_string($specification)) {

@@ -22,7 +22,8 @@
 namespace Zend\Db\Adapter\Driver\Sqlsrv;
 
 use Zend\Db\Adapter\Driver\StatementInterface,
-    Zend\Db\Adapter\ParameterContainer;
+    Zend\Db\Adapter\ParameterContainer,
+    Zend\Db\Adapter\Exception;
 
 /**
  * @category   Zend
@@ -150,7 +151,7 @@ class Statement implements StatementInterface
     public function prepare($sql = null)
     {
         if ($this->isPrepared) {
-            throw new \Exception('Already prepared');
+            throw new Exception\RuntimeException('Already prepared');
         }
         $sql = ($sql) ?: $this->sql;
 
@@ -188,7 +189,7 @@ class Statement implements StatementInterface
                 $parameters = new ParameterContainer($parameters);
             }
             if (!$parameters instanceof ParameterContainer) {
-                throw new \InvalidArgumentException('ParameterContainer expected');
+                throw new Exception\InvalidArgumentException('ParameterContainer expected');
             }
             $this->parameterContainer = $parameters;
         }
@@ -203,7 +204,7 @@ class Statement implements StatementInterface
             $errors = sqlsrv_errors();
             // ignore general warnings
             if ($errors[0]['SQLSTATE'] != '01000') {
-                throw new \RuntimeException($errors[0]['message']);
+                throw new Exception\RuntimeException($errors[0]['message']);
             }
         }
 

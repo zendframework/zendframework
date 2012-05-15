@@ -21,7 +21,8 @@
 
 namespace Zend\Db\Adapter\Driver\Mysqli;
 
-use Zend\Db\Adapter\Driver\ResultInterface;
+use Zend\Db\Adapter\Driver\ResultInterface,
+    Zend\Db\Adapter\Exception;
 
 /**
  * @category   Zend
@@ -32,27 +33,16 @@ use Zend\Db\Adapter\Driver\ResultInterface;
  */
 class Result implements \Iterator, ResultInterface
 {
-    const MODE_STATEMENT = 'statement';
-    const MODE_RESULT = 'result';
-    
-    /**
-     * Mode
-     * 
-     * @var string
-     */
-    protected $mode = null;
 
     /**
-     * Is query result
-     * 
-     * @var boolean 
-     */
-    protected $isQueryResult = true;
-
-    /**
-     * @var \mysqli_result|\mysqli_stmt
+     * @var \mysqli|\mysqli_result|\mysqli_stmt
      */
     protected $resource = null;
+
+    /**
+     * @var bool
+     */
+    protected $isBuffered = null;
 
     /**
      * Cursor position
@@ -73,12 +63,11 @@ class Result implements \Iterator, ResultInterface
     protected $currentComplete = false;
 
     /**
-     *
      * @var bool
      */
     protected $nextComplete = false;
+
     /**
-     *
      * @var bool
      */
     protected $currentData = false;
@@ -96,26 +85,48 @@ class Result implements \Iterator, ResultInterface
 
     /**
      * Initialize
-     * 
-     * @param  mixed $resource
+     * @param mixed $resource
+     * @param mixed $generatedValue
+     * @param bool|null $isBuffered
      * @return Result 
      */
-    public function initialize($resource, $generatedValue)
+    public function initialize($resource, $generatedValue, $isBuffered = null)
     {
         if (!$resource instanceof \mysqli && !$resource instanceof \mysqli_result && !$resource instanceof \mysqli_stmt) {
-            throw new \InvalidArgumentException('Invalid resource provided.');
+            throw new Exception\InvalidArgumentException('Invalid resource provided.');
         }
 
-        $this->isQueryResult = (!$resource instanceof \mysqli);
+        if ($isBuffered !== null) {
+            $this->isBuffered = $isBuffered;
+        } else {
+            if ($resource instanceof \mysqli || $resource instanceof \mysqli_result
+                || $resource instanceof \mysqli_stmt && $resource->num_rows != 0) {
+                $this->isBuffered = true;
+            }
+        }
 
         $this->resource = $resource;
         $this->generatedValue = $generatedValue;
-        $this->mode = ($this->resource instanceof \mysqli_stmt) ? self::MODE_STATEMENT : self::MODE_RESULT;
         return $this;
     }
-    
+
     /**
-     *
+     * Force buffering
+     * @throws Exception\RuntimeException
+     */
+    public function buffer()
+    {
+        if ($this->resource instanceof \mysqli_stmt && $this->isBuffered !== true) {
+            if ($this->position > 0) {
+                throw new Exception\RuntimeException('Cannot buffer a result set that has started iteration.');
+            }
+            $this->resource->store_result();
+            $this->isBuffered = true;
+        }
+    }
+
+    /**
+     * Return the resource
      * @return mixed 
      */
     public function getResource()
@@ -124,29 +135,18 @@ class Result implements \Iterator, ResultInterface
     }
 
     /**
-     * Set is query result
-     * 
-     * @param boolean $isQueryResult 
-     */
-    public function setIsQueryResult($isQueryResult)
-    {
-        $this->isQueryResult = $isQueryResult;
-    }
-
-    /**
-     * Is query result
+     * Is query result?
      * 
      * @return boolean 
      */
     public function isQueryResult()
     {
-        return $this->isQueryResult;
+        return ($this->resource->field_count > 0);
     }
 
     /**
      * Get affected rows
-     * 
-     * @return integer 
+     * @return integer
      */
     public function getAffectedRows()
     {
@@ -156,10 +156,10 @@ class Result implements \Iterator, ResultInterface
             return $this->resource->num_rows;
         }
     }
+
     /**
      * Current
-     * 
-     * @return mixed 
+     * @return mixed
      */
     public function current()
     {
@@ -167,7 +167,7 @@ class Result implements \Iterator, ResultInterface
             return $this->currentData;
         }
         
-        if ($this->mode == self::MODE_STATEMENT) {
+        if ($this->resource instanceof \mysqli_stmt) {
             $this->loadDataFromMysqliStatement();
             return $this->currentData;
         } else {
@@ -207,7 +207,7 @@ class Result implements \Iterator, ResultInterface
         if (($r = $this->resource->fetch()) === null) {
             return false;
         } elseif ($r === false) {
-            throw new \RuntimeException($this->resource->error);
+            throw new Exception\RuntimeException($this->resource->error);
         }
 
         // dereference
@@ -219,6 +219,7 @@ class Result implements \Iterator, ResultInterface
         $this->position++;
         return true;
     }
+
     /**
      * Load from mysqli result
      * 
@@ -239,6 +240,7 @@ class Result implements \Iterator, ResultInterface
         $this->position++;
         return true;
     }
+
     /**
      * Next
      */
@@ -252,33 +254,34 @@ class Result implements \Iterator, ResultInterface
         
         $this->nextComplete = false;
     }
+
     /**
      * Key
-     * 
-     * @return mixed 
+     * @return mixed
      */
     public function key()
     {
         return $this->position;
     }
+
     /**
      * Rewind
-     * 
      */
     public function rewind()
     {
+        if ($this->position !== 0) {
+            if ($this->isBuffered === false) {
+                throw new Exception\RuntimeException('Unbuffered results cannot be rewound for multiple iterations');
+            }
+        }
+        $this->resource->data_seek(0); // works for both mysqli_result & mysqli_stmt
         $this->currentComplete = false;
         $this->position = 0;
-        if ($this->resource instanceof \mysqli_stmt) {
-            //$this->resource->reset();
-        } else {
-            $this->resource->data_seek(0); // works for both mysqli_result & mysqli_stmt
-        }
     }
+
     /**
      * Valid
-     * 
-     * @return boolean 
+     * @return boolean
      */
     public function valid()
     {
@@ -286,24 +289,31 @@ class Result implements \Iterator, ResultInterface
             return true;
         }
         
-        if ($this->mode == self::MODE_STATEMENT) {
+        if ($this->resource instanceof \mysqli_stmt) {
             return $this->loadDataFromMysqliStatement();
         } else {
             return $this->loadFromMysqliResult();
         }
     }
+
     /**
      * Count
-     * 
-     * @return integer 
+     * @return integer
      */
     public function count()
     {
+        if ($this->isBuffered === false) {
+            throw new Exception\RuntimeException('Row count is not availabe in unbuffered result sets.');
+        }
         return $this->resource->num_rows;
     }
 
+    /**
+     * @return mixed|null
+     */
     public function getGeneratedValue()
     {
         return $this->generatedValue;
     }
+
 }

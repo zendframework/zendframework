@@ -20,7 +20,7 @@
  */
 
 
-namespace Zend\Db\Adapter\Driver\Mysqli;
+namespace Zend\Db\Adapter\Exception;
 
 /**
  * @category   Zend
@@ -29,7 +29,7 @@ namespace Zend\Db\Adapter\Driver\Mysqli;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ErrorException extends \Exception
+class ErrorException extends \Exception implements ExceptionInterface
 {
 
 }

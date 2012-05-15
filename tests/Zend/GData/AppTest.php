@@ -107,35 +107,20 @@ class AppTest extends \PHPUnit_Framework_TestCase
 
     public function testMajorProtocolVersionCannotBeLessThanOne()
     {
-        $exceptionCaught = false;
-        try {
-            $this->service->setMajorProtocolVersion(0);
-        } catch (App\InvalidArgumentException $e) {
-            $exceptionCaught = true;
-        }
-        $this->assertTrue($exceptionCaught, 'Expected exception not caught: Zend_GData_App_InvalidArgumentException');
+        $this->setExpectedException('\Zend\GData\App\InvalidArgumentException');
+        $this->service->setMajorProtocolVersion(0);
     }
 
     public function testMajorProtocolVersionCannotBeNull()
     {
-        $exceptionCaught = false;
-        try {
-            $this->service->setMajorProtocolVersion(null);
-        } catch (App\InvalidArgumentException $e) {
-            $exceptionCaught = true;
-        }
-        $this->assertTrue($exceptionCaught, 'Expected exception not caught: Zend_GData_App_InvalidArgumentException');
+        $this->setExpectedException('\Zend\GData\App\InvalidArgumentException');
+        $this->service->setMajorProtocolVersion(null);
     }
 
     public function testMinorProtocolVersionCannotBeLessThanZero()
     {
-        $exceptionCaught = false;
-        try {
-            $this->service->setMinorProtocolVersion(-1);
-        } catch (App\InvalidArgumentException $e) {
-            $exceptionCaught = true;
-        }
-        $this->assertTrue($exceptionCaught, 'Expected exception not caught: Zend_GData_App_InvalidArgumentException');
+        $this->setExpectedException('\Zend\GData\App\InvalidArgumentException');
+        $this->service->setMinorProtocolVersion(-1);
     }
 
     public function testNoGDataVersionHeaderSentWhenUsingV1()

@@ -175,6 +175,9 @@ class ViewManager implements ListenerAggregateInterface
         $this->helperBroker = new ViewHelperBroker();
         $this->helperBroker->setClassLoader($this->getHelperLoader());
 
+        // Seed with service manager
+        $this->helperBroker->setServiceLocator($this->services);
+
         // Configure URL view helper with router
         $router = $this->services->get('Router');
         $url    = $this->helperBroker->load('url');

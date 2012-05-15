@@ -14,23 +14,24 @@
  *
  * @category   Zend
  * @package    Zend_Captcha
+ * @subpackage Exception
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @version    $Id$
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace Zend\Captcha\Exception;
+
+use RuntimeException;
 
 /**
  * Exception for Zend_Form component.
  *
  * @category   Zend
  * @package    Zend_Captcha
+ * @subpackage Exception
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ExtensionNotLoadedException
-    extends \RuntimeException
-    implements ExceptionInterface
+class ExtensionNotLoadedException extends RuntimeException implements ExceptionInterface
 {
 }

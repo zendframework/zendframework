@@ -22,7 +22,6 @@
 namespace Zend\Captcha;
 
 use Zend\Validator\ValidatorInterface;
-use Zend\View\Renderer\RendererInterface as Renderer;
 
 /**
  * Generic Captcha adapter interface
@@ -45,15 +44,6 @@ interface AdapterInterface extends ValidatorInterface
     public function generate();
 
     /**
-     * Display the captcha
-     *
-     * @param  Renderer $view
-     * @param  mixed $element
-     * @return string
-     */
-    public function render(Renderer $view = null, $element = null);
-
-    /**
      * Set captcha name
      *
      * @param  string $name
@@ -69,9 +59,9 @@ interface AdapterInterface extends ValidatorInterface
     public function getName();
 
     /**
-     * Get optional private decorator for this captcha type
+     * Get helper name to use when rendering this captcha type
      *
-     * @return \Zend\Form\Decorator|string
+     * @return string
      */
-    public function getDecorator();
+    public function getHelperName();
 }

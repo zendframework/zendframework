@@ -21,13 +21,12 @@
 
 namespace Zend\Captcha;
 
-use Zend\View\Renderer\RendererInterface as Renderer;
-
 /**
  * Example dumb word-based captcha
  *
  * Note that only rendering is necessary for word-based captcha
  *
+ * @todo       This likely needs its own validation since it expects the word entered to be the strrev of the word stored.
  * @category   Zend
  * @package    Zend_Captcha
  * @subpackage Adapter
@@ -40,7 +39,7 @@ class Dumb extends Word
      * CAPTCHA label
      * @type string
      */
-    protected $_label = 'Please type this word backwards';
+    protected $label = 'Please type this word backwards';
 
     /**
      * Set the label for the CAPTCHA
@@ -48,7 +47,7 @@ class Dumb extends Word
      */
     public function setLabel($label)
     {
-        $this->_label = $label;
+        $this->label = $label;
     }
 
     /**
@@ -57,20 +56,16 @@ class Dumb extends Word
      */
     public function getLabel()
     {
-        return $this->_label;
+        return $this->label;
     }
 
     /**
-     * Render the captcha
-     *
-     * @param  Renderer $view
-     * @param  mixed $element
+     * Retrieve optional view helper name to use when rendering this captcha
+     * 
      * @return string
      */
-    public function render(Renderer $view = null, $element = null)
+    public function getHelperName()
     {
-        return $this->getLabel() . ': <b>'
-             . strrev($this->getWord())
-             . '</b>';
+        return 'captcha/dumb';
     }
 }

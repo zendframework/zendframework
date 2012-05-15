@@ -300,7 +300,7 @@ class CurlTest extends CommonHttpTests
 
         $this->assertTrue(is_resource($adapter->getHandle()));
     }
-    
+
     /**
      * @group ZF-9857
      */
@@ -312,5 +312,27 @@ class CurlTest extends CommonHttpTests
         $this->client->setMethod('HEAD');
         $this->client->send();
         $this->assertEquals('', $this->client->getResponse()->getBody());
+    }
+
+    public function testAuthorizeHeader()
+    {
+        // We just need someone to talk to
+        $this->client->setUri($this->baseuri. 'testHttpAuth.php');
+        $adapter = new Adapter\Curl();
+        $this->client->setAdapter($adapter);
+
+        $uid = 'alice';
+        $pwd = 'secret';
+
+        $hash   = base64_encode($uid . ':' . $pwd);
+        $header = 'Authorization: Basic ' . $hash;
+
+        $this->client->setAuth($uid, $pwd);
+        $res = $this->client->send();
+
+        $curlInfo = curl_getinfo($adapter->getHandle());
+        $this->assertArrayHasKey('request_header', $curlInfo, 'Expecting request_header in curl_getinfo() return value');
+
+        $this->assertContains($header, $curlInfo['request_header'], 'Expecting valid basic authorization header');
     }
 }

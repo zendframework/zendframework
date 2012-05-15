@@ -24,7 +24,7 @@ use ArrayObject;
 use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateInterface;
 use Zend\ServiceManager\ServiceManager;
-use Zend\ServiceManager\Exception as InstanceException;
+use Zend\ServiceManager\Exception\ExceptionInterface as InstanceException;
 use Zend\Stdlib\ArrayUtils;
 use Zend\Stdlib\DispatchableInterface;
 
@@ -100,11 +100,9 @@ class DispatchListener implements ListenerAggregateInterface
         $wasLoaded = false;
         $exception = false;
         try {
-            if ($controllerLoader->has($controllerName)) {
-                $controller = $controllerLoader->get($controllerName);
-                $wasLoaded  = true;
-            }
-        } catch (InstanceException $exception) {
+            $controller = $controllerLoader->get($controllerName);
+            $wasLoaded  = true;
+        } catch (\Exception $exception) {
             $wasLoaded =false;
         }
 

@@ -17,7 +17,7 @@ class DiAbstractServiceFactory extends DiServiceFactory implements AbstractFacto
     {
         $this->di = $di;
         if (in_array($useServiceLocator, array(self::USE_SL_BEFORE_DI, self::USE_SL_AFTER_DI, self::USE_SL_NONE))) {
-            $this->useServiceManager = $useServiceLocator;
+            $this->useServiceLocator = $useServiceLocator;
         }
 
         // since we are using this in a proxy-fashion, localize state

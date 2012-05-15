@@ -112,6 +112,14 @@ class FormMultiCheckboxTest extends CommonTestCase
         $this->assertTrue(1 >= substr_count($markup, 'id="foo"'));
     }
 
+    public function testIdShouldBeRenderedOnceIfProvided()
+    {
+        $element = $this->getElement();
+        $element->setAttribute('id', 'foo');
+        $markup  = $this->helper->render($element);
+        $this->assertEquals(1, substr_count($markup, 'id="foo"'));
+    }
+
     public function testNameShouldHaveBracketsAppended()
     {
         $element = $this->getElement();

@@ -148,7 +148,7 @@ class FormMultiCheckbox extends FormInput
 
         foreach ($options as $label => $value) {
             $count++;
-            if ($attributes > 1 && array_key_exists('id', $attributes)) {
+            if ($count > 1 && array_key_exists('id', $attributes)) {
                 unset($attributes['id']);
             }
             $attributes['value']   = $value;

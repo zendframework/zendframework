@@ -97,6 +97,9 @@ class FormSelect extends AbstractHelper
         };
 
         $attributes['name'] = $name;
+        if (array_key_exists('multiple', $attributes) && $attributes['multiple']) {
+            $attributes['name'] .= '[]';
+        }
         $this->validTagAttributes = $this->validSelectAttributes;
 
         return sprintf(

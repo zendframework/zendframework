@@ -171,4 +171,13 @@ class FormSelectTest extends CommonTestCase
 
         $this->assertNotContains('disabled', $markup);
     }
+
+    public function testNameShouldHaveArrayNotationWhenMultipleIsSpecified()
+    {
+        $element = $this->getElement();
+        $element->setAttribute('multiple', true);
+        $element->setAttribute('value', array('value1', 'value2'));
+        $markup = $this->helper->render($element);
+        $this->assertRegexp('#<select[^>]*?(name="foo\[\]")#', $markup);
+    }
 }

@@ -223,6 +223,9 @@ class Decoder
                 // Create new StdClass and populate with $members
                 $result = new \stdClass();
                 foreach ($members as $key => $value) {
+                    if ($key === '') {
+                        $key = '_empty_';
+                    }
                     $result->$key = $value;
                 }
                 break;

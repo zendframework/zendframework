@@ -847,6 +847,19 @@ EOB;
         $this->assertEquals($expected, $json);
     }
 
+    /**
+     * @group ZF-7586
+     */
+    public function testWillDecodeStructureWithEmptyKeyToObjectProperly()
+    {
+        Json\Json::$useBuiltinEncoderDecoder = true;
+
+        $json = '{"":"test"}';
+        $object = Json\Json::decode($json, Json\Json::TYPE_OBJECT);
+        $this->assertTrue(isset($object->_empty_));
+        $this->assertEquals('test', $object->_empty_);
+    }
+
 }
 
 /**

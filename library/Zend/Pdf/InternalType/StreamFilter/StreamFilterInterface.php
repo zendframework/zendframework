@@ -14,25 +14,40 @@
  *
  * @category   Zend
  * @package    Zend_PDF
- * @subpackage Zend_PDF_Exception
+ * @subpackage Zend_PDF_Internal
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
-namespace Zend\Pdf\Exception;
+namespace Zend\Pdf\InternalType\StreamFilter;
 
 /**
- * Exception class for Zend\Pdf.
+ * PDF stream filter
  *
- * @category  Zend
  * @package    Zend_PDF
- * @subpackage Zend_PDF_Exception
+ * @subpackage Zend_PDF_Internal
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd     New BSD License
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class LengthException
-    extends \LengthException
-    implements ExceptionInterface
+interface StreamFilterInterface
 {
+    /**
+     * Encode data
+     *
+     * @param string $data
+     * @param array $params
+     * @return string
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
+     */
+    public static function encode($data, $params = null);
+
+    /**
+     * Decode data
+     *
+     * @param string $data
+     * @param array $params
+     * @return string
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
+     */
+    public static function decode($data, $params = null);
 }

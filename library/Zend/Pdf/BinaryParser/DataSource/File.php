@@ -69,7 +69,7 @@ class File extends AbstractDataSource
      * Throws an exception if the file is missing or cannot be opened.
      *
      * @param string $filePath Fully-qualified path to the file.
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
     public function __construct($filePath)
     {
@@ -111,7 +111,7 @@ class File extends AbstractDataSource
      *
      * @param integer $byteCount Number of bytes to read.
      * @return string
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
     public function readBytes($byteCount)
     {
@@ -161,7 +161,7 @@ class File extends AbstractDataSource
      * moved beyond EOF (end of file).
      *
      * @param integer $offset Destination byte offset.
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
     public function moveToOffset($offset)
     {

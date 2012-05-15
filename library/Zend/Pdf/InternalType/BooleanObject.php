@@ -46,7 +46,7 @@ class BooleanObject extends AbstractTypeObject
      * Object constructor
      *
      * @param boolean $val
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
     public function __construct($val)
     {

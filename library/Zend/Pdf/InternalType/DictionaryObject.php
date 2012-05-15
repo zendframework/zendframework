@@ -47,7 +47,7 @@ class DictionaryObject extends AbstractTypeObject
      * Object constructor
      *
      * @param array $val   - array of \Zend\Pdf\InternalType\AbstractTypeObject objects
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
     public function __construct($val = null)
     {
@@ -74,7 +74,7 @@ class DictionaryObject extends AbstractTypeObject
      *
      * @name \Zend\Pdf\InternalType\NameObject $name
      * @param \Zend\Pdf\InternalType\AbstractTypeObject $val   - \Zend\Pdf\InternalType\AbstractTypeObject object
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
     public function add(NameObject $name, AbstractTypeObject $val)
     {
@@ -167,7 +167,7 @@ class DictionaryObject extends AbstractTypeObject
      * @param array &$processed List of already processed indirect objects, used to avoid objects duplication
      * @param integer $mode  Cloning mode (defines filter for objects cloning)
      * @returns \Zend\Pdf\InternalType\AbstractTypeObject
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
     public function makeClone(Pdf\ObjectFactory $factory, array &$processed, $mode)
     {

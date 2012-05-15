@@ -33,8 +33,8 @@ class MethodTest extends TestCase
 
     /**
      * @dataProvider routeProvider
-     * @param        HttpMethod $route
-     * @param $verb
+     * @param    HttpMethod $route
+     * @param    $verb
      * @internal param string $path
      * @internal param int $offset
      * @internal param bool $shouldMatch
@@ -49,9 +49,6 @@ class MethodTest extends TestCase
         $this->assertInstanceOf('Zend\Mvc\Router\Http\RouteMatch', $match);
     }
 
-    /**
-     *
-     */
     public function testNoMatchWithoutVerb()
     {
         $route   = new HttpMethod('get');
@@ -60,9 +57,6 @@ class MethodTest extends TestCase
         $this->assertNull($route->match($request));
     }
 
-    /**
-     *
-     */
     public function testFactory()
     {
         $tester = new FactoryTester($this);

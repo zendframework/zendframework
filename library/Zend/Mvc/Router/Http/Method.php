@@ -66,8 +66,8 @@ class Method implements RouteInterface
      * factory(): defined by RouteInterface interface.
      *
      * @see    Route::factory()
-     * @param  array|\Traversable $options
-     * @throws \Zend\Mvc\Router\Exception\InvalidArgumentException
+     * @param  array|Traversable $options
+     * @throws Exception\InvalidArgumentException
      * @return Method
      */
     public static function factory($options = array())
@@ -93,8 +93,7 @@ class Method implements RouteInterface
      * match(): defined by RouteInterface interface.
      *
      * @see    Route::match()
-     * @param  Request  $request
-     * @internal param int|null $pathOffset
+     * @param  Request $request
      * @return RouteMatch|null
      */
     public function match(Request $request)
@@ -105,7 +104,6 @@ class Method implements RouteInterface
 
         $requestVerb = strtoupper($request->getMethod());
         $matchVerbs = explode(',', strtoupper($this->verb));
-        // Trim any whitespace that got in there
         $matchVerbs = array_map('trim', $matchVerbs);
 
         if (in_array($requestVerb, $matchVerbs)) {
@@ -125,6 +123,7 @@ class Method implements RouteInterface
      */
     public function assemble(array $params = array(), array $options = array())
     {
+        // The request method does not contribute to the path, thus nothing is returned.
         return '';
     }
 

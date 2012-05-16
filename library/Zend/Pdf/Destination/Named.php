@@ -51,7 +51,7 @@ class Named extends AbstractDestination
      * Named destination object constructor
      *
      * @param $resource
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
     public function __construct(InternalType\AbstractTypeObject $resource)
     {

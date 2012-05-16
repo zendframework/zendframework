@@ -41,7 +41,7 @@ class TrueType extends AbstractOpenType
     /**
      * Verifies that the font file actually contains TrueType outlines.
      *
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
     public function screen()
     {

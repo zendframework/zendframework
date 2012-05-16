@@ -46,7 +46,7 @@ class NumericObject extends AbstractTypeObject
      * Object constructor
      *
      * @param numeric $val
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
     public function __construct($val)
     {

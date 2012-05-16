@@ -21,10 +21,9 @@
 
 namespace Zend\Captcha;
 
-use Traversable,
-    Zend\Form\Element,
-    Zend\Service\ReCaptcha\ReCaptcha as ReCaptchaService,
-    Zend\View\Renderer\RendererInterface as Renderer;
+use Traversable;
+use Zend\Form\Element;
+use Zend\Service\ReCaptcha\ReCaptcha as ReCaptchaService;
 
 /**
  * ReCaptcha adapter
@@ -45,8 +44,8 @@ class ReCaptcha extends AbstractAdapter
      * ReCaptcha Field names
      * @var string
      */
-    protected $_CHALLENGE = 'recaptcha_challenge_field';
-    protected $_RESPONSE  = 'recaptcha_response_field';
+    protected $CHALLENGE = 'recaptcha_challenge_field';
+    protected $RESPONSE  = 'recaptcha_response_field';
     /**@-*/
 
     /**
@@ -54,21 +53,21 @@ class ReCaptcha extends AbstractAdapter
      *
      * @var Zend_Service_Recaptcha
      */
-    protected $_service;
+    protected $service;
 
     /**
      * Parameters defined by the service
      *
      * @var array
      */
-    protected $_serviceParams = array();
+    protected $serviceParams = array();
 
     /**
      * Options defined by the service
      *
      * @var array
      */
-    protected $_serviceOptions = array();
+    protected $serviceOptions = array();
 
     /**#@+
      * Error codes
@@ -111,7 +110,7 @@ class ReCaptcha extends AbstractAdapter
     /**
      * Set ReCaptcha Private key
      *
-     * @param string $privkey
+     * @param  string $privkey
      * @return ReCaptcha
      */
     public function setPrivkey($privkey)
@@ -123,7 +122,7 @@ class ReCaptcha extends AbstractAdapter
     /**
      * Set ReCaptcha public key
      *
-     * @param string $pubkey
+     * @param  string $pubkey
      * @return ReCaptcha
      */
     public function setPubkey($pubkey)
@@ -135,13 +134,14 @@ class ReCaptcha extends AbstractAdapter
     /**
      * Constructor
      *
-     * @param  array|\Traversable $options
+     * @param  null|array|Traversable $options
+     * @return void
      */
     public function __construct($options = null)
     {
         $this->setService(new ReCaptchaService());
-        $this->_serviceParams = $this->getService()->getParams();
-        $this->_serviceOptions = $this->getService()->getOptions();
+        $this->serviceParams  = $this->getService()->getParams();
+        $this->serviceOptions = $this->getService()->getOptions();
 
         parent::__construct($options);
 
@@ -158,7 +158,7 @@ class ReCaptcha extends AbstractAdapter
      */
     public function setService(ReCaptchaService $service)
     {
-        $this->_service = $service;
+        $this->service = $service;
         return $this;
     }
 
@@ -169,7 +169,7 @@ class ReCaptcha extends AbstractAdapter
      */
     public function getService()
     {
-        return $this->_service;
+        return $this->service;
     }
 
     /**
@@ -185,11 +185,11 @@ class ReCaptcha extends AbstractAdapter
     public function setOption($key, $value)
     {
         $service = $this->getService();
-        if (isset($this->_serviceParams[$key])) {
+        if (isset($this->serviceParams[$key])) {
             $service->setParam($key, $value);
             return $this;
         }
-        if (isset($this->_serviceOptions[$key])) {
+        if (isset($this->serviceOptions[$key])) {
             $service->setOption($key, $value);
             return $this;
         }
@@ -225,14 +225,14 @@ class ReCaptcha extends AbstractAdapter
             $value = $context;
         }
 
-        if (empty($value[$this->_CHALLENGE]) || empty($value[$this->_RESPONSE])) {
+        if (empty($value[$this->CHALLENGE]) || empty($value[$this->RESPONSE])) {
             $this->error(self::MISSING_VALUE);
             return false;
         }
 
         $service = $this->getService();
 
-        $res = $service->verify($value[$this->_CHALLENGE], $value[$this->_RESPONSE]);
+        $res = $service->verify($value[$this->CHALLENGE], $value[$this->RESPONSE]);
 
         if (!$res) {
             $this->error(self::ERR_CAPTCHA);
@@ -249,29 +249,12 @@ class ReCaptcha extends AbstractAdapter
     }
 
     /**
-     * Render captcha
-     *
-     * @param  Renderer $view
-     * @param  mixed $element
-     * @return string
-     */
-    public function render(Renderer $view = null, $element = null)
-    {
-        $name = null;
-        if ($element instanceof Element) {
-            $name = $element->getBelongsTo();
-        }
-
-        return $this->getService()->getHTML($name);
-    }
-
-    /**
-     * Get captcha decorator
+     * Get helper name used to render captcha
      *
      * @return string
      */
-    public function getDecorator()
+    public function getHelperName()
     {
-        return "Captcha\ReCaptcha";
+        return "captcha/recaptcha";
     }
 }

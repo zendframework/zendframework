@@ -28,7 +28,7 @@ namespace Zend\Locale\Exception;
  */
 class MathException 
     extends \LogicException
-    implements \Zend\Locale\Exception
+    implements ExceptionInterface
 {
     protected $op1 = null;
     protected $op2 = null;

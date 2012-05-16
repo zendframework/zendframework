@@ -58,10 +58,12 @@ class ApplicationTest extends TestCase
         );
         $config = function($s) {
             return new Config(array(
-                'controllers' => array(
-                    'bad'    => 'ZendTest\Mvc\Controller\TestAsset\BadController',
-                    'path'   => 'ZendTest\Mvc\TestAsset\PathController',
-                    'sample' => 'ZendTest\Mvc\Controller\TestAsset\SampleController',
+                'controller' => array(
+                    'classes' => array(
+                        'bad'    => 'ZendTest\Mvc\Controller\TestAsset\BadController',
+                        'path'   => 'ZendTest\Mvc\TestAsset\PathController',
+                        'sample' => 'ZendTest\Mvc\Controller\TestAsset\SampleController',
+                    ),
                 ),
             ));
         };

@@ -7,12 +7,13 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Module
  */
+
 namespace Zend\Module\Listener;
 
 use Zend\EventManager\Event;
 use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateInterface;
-use Zend\Module\Consumer\LocatorRegistered;
+use Zend\Module\Feature\LocatorRegistered;
 use Zend\Module\ModuleEvent;
 
 /**

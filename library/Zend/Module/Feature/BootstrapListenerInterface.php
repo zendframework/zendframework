@@ -7,21 +7,24 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Module
  */
-namespace Zend\Module\Consumer;
+
+namespace Zend\Module\Feature;
+
+use Zend\EventManager\Event;
 
 /**
- * Autoloader provider interface
+ * Boostrap listener provider interface
  *
  * @category   Zend
  * @package    Zend_Module
- * @subpackage Consumer
+ * @subpackage Feature
  */
-interface AutoloaderProvider
+interface BootstrapListenerInterface
 {
     /**
      * Return an array for passing to Zend\Loader\AutoloaderFactory.
      *
      * @return array
      */
-    public function getAutoloaderConfig();
+    public function onBootstrap(Event $e);
 }

@@ -7,10 +7,11 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Module
  */
+
 namespace Zend\Module\Listener;
 
-use Zend\Module\Consumer\BootstrapListenerInterface,
-    Zend\Module\ModuleEvent;
+use Zend\Module\Feature\BootstrapListenerInterface;
+use Zend\Module\ModuleEvent;
 
 /**
  * Autoloader listener
@@ -29,7 +30,9 @@ class OnBootstrapListener extends AbstractListener
     public function __invoke(ModuleEvent $e)
     {
         $module = $e->getModule();
-        if (!$module instanceof BootstrapListenerInterface) {
+        if (!$module instanceof BootstrapListenerInterface
+            && !method_exists($module, 'onBootstrap')
+        ) {
             return;
         }
 

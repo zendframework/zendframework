@@ -57,18 +57,20 @@ class ControllerLoaderFactory implements FactoryInterface
             return $serviceLocator;
         }
 
-        /** @var $controllerLoader ServiceManager */
         $controllerLoader = $serviceLocator->createScopedServiceManager();
         $configuration    = $serviceLocator->get('Configuration');
-        foreach ($configuration['controller'] as $type => $specs) {
-            if ($type == 'classes') {
-                foreach ($specs as $name => $value) {
-                    $controllerLoader->setInvokableClass($name, $value);
+
+        if (isset($configuration['controller'])) {
+            foreach ($configuration['controller'] as $type => $specs) {
+                if ($type == 'classes') {
+                    foreach ($specs as $name => $value) {
+                        $controllerLoader->setInvokableClass($name, $value);
+                    }
                 }
-            }
-            if ($type == 'factories') {
-                foreach ($specs as $name => $value) {
-                    $controllerLoader->setFactory($name, $value);
+                if ($type == 'factories') {
+                    foreach ($specs as $name => $value) {
+                        $controllerLoader->setFactory($name, $value);
+                    }
                 }
             }
         }

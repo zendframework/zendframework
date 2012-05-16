@@ -64,13 +64,13 @@ class AutoloaderListenerTest extends TestCase
         $this->assertTrue(class_exists('Foo\Bar'));
     }
 
-    public function testAutoloadersNotRegisteredIfModuleDoesNotInheritAutoloaderProviderInterface()
+    public function testAutoloadersRegisteredIfModuleDoesNotInheritAutoloaderProviderInterfaceButDefinesGetAutoloaderConfigMethod()
     {
         $moduleManager = $this->moduleManager;
         $moduleManager->setModules(array('NotAutoloaderModule'));
         $moduleManager->loadModules();
         $modules = $moduleManager->getLoadedModules();
-        $this->assertFalse($modules['NotAutoloaderModule']->getAutoloaderConfigCalled);
-        $this->assertFalse(class_exists('Foo\Baz'));
+        $this->assertTrue($modules['NotAutoloaderModule']->getAutoloaderConfigCalled);
+        $this->assertTrue(class_exists('Foo\Bar'));
     }
 }

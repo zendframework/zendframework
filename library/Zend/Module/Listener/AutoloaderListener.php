@@ -7,11 +7,12 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Module
  */
+
 namespace Zend\Module\Listener;
 
-use Zend\Loader\AutoloaderFactory,
-    Zend\Module\Consumer\AutoloaderProvider,
-    Zend\Module\ModuleEvent;
+use Zend\Loader\AutoloaderFactory;
+use Zend\Module\Feature\AutoloaderProvider;
+use Zend\Module\ModuleEvent;
 
 /**
  * Autoloader listener
@@ -30,7 +31,9 @@ class AutoloaderListener extends AbstractListener
     public function __invoke(ModuleEvent $e)
     {
         $module = $e->getModule();
-        if (!$module instanceof AutoloaderProvider) {
+        if (!$module instanceof AutoloaderProvider
+            && !method_exists($module, 'getAutoloaderConfig')
+        ) {
             return;
         }
         $autoloaderConfig = $module->getAutoloaderConfig();

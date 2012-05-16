@@ -7,7 +7,8 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Module
  */
-namespace Zend\Module\Consumer;
+
+namespace Zend\Module\Feature;
 
 /**
  * LocatorRegistered 
@@ -20,6 +21,8 @@ namespace Zend\Module\Consumer;
  * 
  * @category   Zend
  * @package    Zend_Module
- * @subpackage Consumer
+ * @subpackage Feature
  */
-interface LocatorRegistered {}
+interface LocatorRegistered 
+{
+}

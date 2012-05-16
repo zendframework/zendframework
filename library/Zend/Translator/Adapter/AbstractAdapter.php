@@ -264,7 +264,7 @@ abstract class AbstractAdapter
                 $originate = (string) $this->_options['locale'];
                 $options['locale'] = $options['content']->getLocale();
             }
-        } catch (Locale\Exception $e) {
+        } catch (Locale\Exception\ExceptionInterface $e) {
             throw new Exception\InvalidArgumentException("The given Language '{$options['locale']}' does not exist", 0, $e);
         }
 
@@ -502,7 +502,7 @@ abstract class AbstractAdapter
 
         try {
             $locale = Locale\Locale::findLocale($locale);
-        } catch (Locale\Exception $e) {
+        } catch (Locale\Exception\ExceptionInterface $e) {
             throw new Exception\InvalidArgumentException("The given Language ({$locale}) does not exist", 0, $e);
         }
 
@@ -691,7 +691,7 @@ abstract class AbstractAdapter
 
         try {
             $options['locale'] = Locale\Locale::findLocale($options['locale']);
-        } catch (Locale\Exception $e) {
+        } catch (Locale\Exception\ExceptionInterface $e) {
             throw new Exception\InvalidArgumentException("The given Language '{$options['locale']}' does not exist", 0, $e);
         }
 

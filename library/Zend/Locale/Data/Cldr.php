@@ -139,7 +139,7 @@ class Cldr extends AbstractLocale
         if (empty(self::$_ldml[(string) $locale])) {
             $filename = self::getPath() . '/' . $locale . '.xml';
             if (!file_exists($filename)) {
-                throw new InvalidArgumentException(
+                throw new Exception\InvalidArgumentException(
                   "Missing locale file '$filename'"
                 );
             }
@@ -1362,7 +1362,7 @@ class Cldr extends AbstractLocale
     /**
      * Internal function for checking the locale
      *
-     * @param string|\Zend\Locale $locale Locale to check
+     * @param string|Locale $locale Locale to check
      * @return string
      */
     protected static function _checkLocale($locale)

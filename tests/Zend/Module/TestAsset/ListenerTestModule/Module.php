@@ -21,10 +21,10 @@
 
 namespace ListenerTestModule;
 
-use Zend\Module\Feature\AutoloaderProvider,
-    Zend\Module\Feature\LocatorRegistered,
-    Zend\Module\Feature\BootstrapListenerInterface,
-    Zend\EventManager\Event;
+use Zend\Module\Feature\AutoloaderProviderInterface;
+use Zend\Module\Feature\LocatorRegisteredInterface;
+use Zend\Module\Feature\BootstrapListenerInterface;
+use Zend\EventManager\Event;
 
 /**
  * @category   Zend
@@ -33,7 +33,10 @@ use Zend\Module\Feature\AutoloaderProvider,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Module implements AutoloaderProvider, LocatorRegistered, BootstrapListenerInterface
+class Module implements 
+    AutoloaderProviderInterface,
+    LocatorRegisteredInterface,
+    BootstrapListenerInterface
 {
     public $initCalled = false;
     public $getConfigCalled = false;

@@ -13,7 +13,7 @@ namespace Zend\Module\Listener;
 use Zend\EventManager\Event;
 use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateInterface;
-use Zend\Module\Feature\LocatorRegistered;
+use Zend\Module\Feature\LocatorRegisteredInterface;
 use Zend\Module\ModuleEvent;
 
 /**
@@ -46,7 +46,7 @@ class LocatorRegistrationListener extends AbstractListener implements ListenerAg
      */
     public function loadModule(ModuleEvent $e)
     {
-        if (!$e->getModule() instanceof LocatorRegistered) {
+        if (!$e->getModule() instanceof LocatorRegisteredInterface) {
             return;
         }
         $this->modules[] = $e->getModule();

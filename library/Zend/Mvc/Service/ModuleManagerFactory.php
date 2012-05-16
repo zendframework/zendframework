@@ -23,6 +23,7 @@ namespace Zend\Mvc\Service;
 
 use Zend\Module\Listener\DefaultListenerAggregate;
 use Zend\Module\Listener\ListenerOptions;
+use Zend\Module\Listener\ServiceListener;
 use Zend\Module\Manager as ModuleManager;
 use Zend\Module\ModuleEvent;
 use Zend\ServiceManager\FactoryInterface;
@@ -58,9 +59,11 @@ class ModuleManagerFactory implements FactoryInterface
         $listenerOptions  = new ListenerOptions($configuration['module_listener_options']);
         $defaultListeners = new DefaultListenerAggregate($listenerOptions);
         $defaultListeners->getConfigListener()->addConfigGlobPath("config/autoload/{,*.}{global,local}.php");
+        $serviceListener  = new ServiceListener($serviceLocator);
 
         $events        = $serviceLocator->get('EventManager');
         $events->attach($defaultListeners);
+        $events->attach($serviceListener);
 
         $moduleEvent   = new ModuleEvent;
         $moduleEvent->setParam('ServiceManager', $serviceLocator);

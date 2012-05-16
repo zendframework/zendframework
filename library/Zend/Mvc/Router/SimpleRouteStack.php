@@ -237,7 +237,7 @@ class SimpleRouteStack implements RouteStackInterface
         if ($specs instanceof Traversable) {
             $specs = ArrayUtils::iteratorToArray($specs);
         } elseif (!is_array($specs)) {
-            throw new Exception\InvalidArgumentException('RouteInterface definition must be an array or Traversable object');
+            throw new Exception\InvalidArgumentException('Route definition must be an array or Traversable object');
         }
 
         if (!isset($specs['type'])) {
@@ -298,7 +298,7 @@ class SimpleRouteStack implements RouteStackInterface
         $route = $this->routes->get($options['name']);
 
         if (!$route) {
-            throw new Exception\RuntimeException(sprintf('RouteInterface with name "%s" not found', $options['name']));
+            throw new Exception\RuntimeException(sprintf('Route with name "%s" not found', $options['name']));
         }
 
         unset($options['name']);

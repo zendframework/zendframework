@@ -9,14 +9,15 @@
  */
 namespace Zend\Module\Listener;
 
-use ArrayAccess,
-    Traversable,
-    Zend\Config\Config,
-    Zend\Config\Factory as ConfigFactory,
-    Zend\Module\ModuleEvent,
-    Zend\Stdlib\ArrayUtils,
-    Zend\EventManager\EventManagerInterface,
-    Zend\EventManager\ListenerAggregateInterface;
+use ArrayAccess;
+use Traversable;
+use Zend\Config\Config;
+use Zend\Config\Factory as ConfigFactory;
+use Zend\Module\Feature\ConfigProviderInterface;
+use Zend\Module\ModuleEvent;
+use Zend\Stdlib\ArrayUtils;
+use Zend\EventManager\EventManagerInterface;
+use Zend\EventManager\ListenerAggregateInterface;
 
 /**
  * Config listener
@@ -317,25 +318,30 @@ class ConfigListener extends AbstractListener implements
      */
     protected function mergeModuleConfig($module)
     {
-        if ((false === $this->skipConfig)
-            && (is_callable(array($module, 'getConfig')))
+        if (false !== $this->skipConfig
+            || (!$module instanceof ConfigProviderInterface
+                && !is_callable(array($module, 'getConfig')))
         ) {
-            $config = $module->getConfig();
-            try {
-                $this->mergeTraversableConfig($config);
-            } catch (Exception\InvalidArgumentException $e) {
-                // Throw a more descriptive exception
-                throw new Exception\InvalidArgumentException(
-                    sprintf('getConfig() method of %s must be an array, '
-                    . 'implement the \Traversable interface, or be an '
-                    . 'instance of Zend\Config\Config. %s given.',
-                    get_class($module), gettype($config))
-                );
-            }
-            if ($this->getOptions()->getConfigCacheEnabled()) {
-                $this->updateCache();
-            }
+            return $this;
         }
+
+        $config = $module->getConfig();
+        try {
+            $this->mergeTraversableConfig($config);
+        } catch (Exception\InvalidArgumentException $e) {
+            // Throw a more descriptive exception
+            throw new Exception\InvalidArgumentException(
+                sprintf('getConfig() method of %s must be an array, '
+                . 'implement the \Traversable interface, or be an '
+                . 'instance of Zend\Config\Config. %s given.',
+                get_class($module), gettype($config))
+            );
+        }
+
+        if ($this->getOptions()->getConfigCacheEnabled()) {
+            $this->updateCache();
+        }
+
         return $this;
     }
 

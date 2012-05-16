@@ -21,10 +21,12 @@
 
 namespace Zend\Mvc\View;
 
+use Traversable;
 use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateInterface;
 use Zend\Mvc\ApplicationInterface;
 use Zend\Mvc\MvcEvent;
+use Zend\Stdlib\ArrayUtils;
 use Zend\View\HelperBroker as ViewHelperBroker;
 use Zend\View\HelperLoader as ViewHelperLoader;
 use Zend\View\Renderer\PhpRenderer as ViewPhpRenderer;
@@ -220,8 +222,12 @@ class ViewManager implements ListenerAggregateInterface
         $stack = array();
         if (isset($this->config['view_manager']) && isset($this->config['view_manager']['template_path_stack'])) {
             $stack = $this->config['view_manager']['template_path_stack'];
+            if ($stack instanceof Traversable) {
+                $stack = ArrayUtils::iteratorToArray($stack);
+            }
         }
-        $templatePathStack = new ViewResolver\TemplatePathStack($stack);
+        $templatePathStack = new ViewResolver\TemplatePathStack();
+        $templatePathStack->addPaths($stack);
 
         $this->resolver = new ViewResolver\AggregateResolver();
         $this->resolver->attach($templateMapResolver);

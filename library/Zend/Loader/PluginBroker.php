@@ -187,7 +187,8 @@ class PluginBroker implements Broker, ServiceLocatorAwareInterface
             return $this->plugins[$pluginName];
         }
 
-        if (class_exists($plugin)) {
+        $locator = $this->getServiceLocator();
+        if (class_exists($plugin) || ($locator && $locator->has($plugin))) {
             // Allow loading fully-qualified class names via the broker
             $class = $plugin;
         } else {
@@ -198,7 +199,6 @@ class PluginBroker implements Broker, ServiceLocatorAwareInterface
             }
         }
 
-        $locator = $this->getServiceLocator();
         if ($locator && $locator->has($class)) {
             if (!empty($options) && $this->isAssocArray($options)) {
                 // This might be inconsistent with what $options should be?

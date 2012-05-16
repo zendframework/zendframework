@@ -44,6 +44,7 @@ class ControllerPluginBrokerFactory implements FactoryInterface
     {
         $broker = new ControllerPluginBroker();
         $broker->setClassLoader($serviceLocator->get('ControllerPluginLoader'));
+        $broker->setServiceLocator($serviceLocator);
         return $broker;
     }
 }

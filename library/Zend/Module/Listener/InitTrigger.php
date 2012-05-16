@@ -9,6 +9,7 @@
  */
 namespace Zend\Module\Listener;
 
+use Zend\Module\Feature\InitProviderInterface;
 use Zend\Module\ModuleEvent;
 
 /**
@@ -27,8 +28,12 @@ class InitTrigger extends AbstractListener
     public function __invoke(ModuleEvent $e)
     {
         $module = $e->getModule();
-        if (is_callable(array($module, 'init'))) {
-            $module->init($e->getTarget());
+        if (!$module instanceof InitProviderInterface
+            && !method_exists($module, 'init')
+        ) {
+            return;
         }
+
+        $module->init($e->getTarget());
     }
 }

@@ -27,7 +27,7 @@ namespace Zend\Math\BigInteger;
  * Zend_Crypt_Math_BigInteger_Bcmath is a wrapper across the PHP BCMath
  * extension.
  *
- * @uses       Zend\Crypt\Math\BigInteger\BigIntegerCapable
+ * @uses       Zend\Math\BigInteger\BigIntegerCapable
  * @category   Zend
  * @package    Zend_Crypt
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

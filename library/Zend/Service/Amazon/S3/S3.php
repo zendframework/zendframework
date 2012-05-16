@@ -21,7 +21,7 @@
 
 namespace Zend\Service\Amazon\S3;
 
-use Zend\Crypt;
+use Zend\Crypt\Hmac;
 use Zend\Http\Header;
 use Zend\Http\Response\Stream as StreamResponse;
 use Zend\Service\Amazon;
@@ -765,7 +765,7 @@ class S3 extends \Zend\Service\Amazon\AbstractAmazon
             $sig_str .= '?torrent';
         }
 
-        $signature = base64_encode(Crypt\Hmac::compute($this->_getSecretKey(), 'sha1', utf8_encode($sig_str), Crypt\Hmac::BINARY));
+        $signature = base64_encode(Hmac::compute($this->_getSecretKey(), 'sha1', utf8_encode($sig_str), Hmac::BINARY));
         $headers['Authorization'] = 'AWS '.$this->_getAccessKey().':'.$signature;
 
         return $headers;

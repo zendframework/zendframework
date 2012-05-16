@@ -20,7 +20,9 @@
  */
 
 namespace ZendTest\Crypt;
-use Zend\Crypt\PublicKey\DiffieHellman;
+
+use Zend\Crypt\PublicKey\DiffieHellman,
+    Zend\Math\BigInteger;
 
 /**
  * @category   Zend
@@ -36,7 +38,7 @@ class DiffieHellmanTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         try {
-            $math = new \Zend\Math\BigInteger();
+            $math = new BigInteger();
         } catch (\Zend\Math\BigInteger\Exception $e) {
             if (strpos($e->getMessage(), 'big integer precision math support not detected') !== false) {
                 $this->markTestSkipped($e->getMessage());

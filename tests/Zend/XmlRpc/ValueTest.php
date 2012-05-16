@@ -22,7 +22,7 @@
 namespace ZendTest\XmlRpc;
 use Zend\XmlRpc\Value;
 use Zend\XmlRpc\Generator\GeneratorInterface as Generator;
-use Zend\Crypt\Math\BigInteger;
+use Zend\Math\BigInteger;
 use Zend\Date;
 
 /**

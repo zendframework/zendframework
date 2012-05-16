@@ -28,7 +28,7 @@ use Zend\Math\Math;
  * Allows two unassociated parties to establish a joint shared secret key
  * to be used in encrypting subsequent communications.
  *
- * @uses       Zend\Crypt\Math
+ * @uses       Zend\Math\Math
  * @category   Zend
  * @package    Zend_Crypt
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -71,7 +71,7 @@ class DiffieHellman
     /**
      * BigInteger support object courtesy of Zend_Crypt_Math
      *
-     * @var Zend\Crypt\Math\BigInteger
+     * @var Zend\Math\BigInteger
      */
     private $_math = null;
 

@@ -20,7 +20,7 @@
  */
 
 namespace ZendTest\Crypt;
-use Zend\Crypt\Hash as Hash;
+use Zend\Crypt\Hash;
 
 /**
  * Outside the Internal Function tests, tests do not distinguish between hash and mhash

@@ -20,8 +20,8 @@
 
 namespace Zend\Form;
 
-use Countable;
-use IteratorAggregate;
+use Countable,
+    IteratorAggregate;
 
 /**
  * @category   Zend

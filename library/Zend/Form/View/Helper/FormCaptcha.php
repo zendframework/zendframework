@@ -21,11 +21,11 @@
 
 namespace Zend\Form\View\Helper;
 
-use Zend\Captcha\AdapterInterface as CaptchaAdapter;
-use Zend\Form\ElementInterface;
-use Zend\Form\Exception;
-use Zend\Loader\Pluggable;
-use Zend\View\Helper\AbstractHelper as BaseAbstractHelper;
+use Zend\Captcha\AdapterInterface as CaptchaAdapter,
+    Zend\Form\ElementInterface,
+    Zend\Form\Exception,
+    Zend\Loader\Pluggable,
+    Zend\View\Helper\AbstractHelper as BaseAbstractHelper;
 
 /**
  * @category   Zend

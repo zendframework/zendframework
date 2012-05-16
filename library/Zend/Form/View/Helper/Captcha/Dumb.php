@@ -21,8 +21,8 @@
 
 namespace Zend\Form\View\Helper\Captcha;
 
-use Zend\Captcha\Dumb as CaptchaAdapter;
-use Zend\Form\ElementInterface;
+use Zend\Captcha\Dumb as CaptchaAdapter,
+    Zend\Form\ElementInterface;
 
 /**
  * @category   Zend

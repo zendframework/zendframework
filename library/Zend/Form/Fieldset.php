@@ -20,8 +20,8 @@
 
 namespace Zend\Form;
 
-use Traversable;
-use Zend\Stdlib\PriorityQueue;
+use Traversable,
+    Zend\Stdlib\PriorityQueue;
 
 /**
  * @category   Zend
@@ -31,12 +31,36 @@ use Zend\Stdlib\PriorityQueue;
  */
 class Fieldset extends Element implements FieldsetInterface
 {
+    /**
+     * @var array
+     */
     protected $byName    = array();
+
+    /**
+     * @var array
+     */
     protected $elements  = array();
+
+    /**
+     * @var array
+     */
     protected $fieldsets = array();
+
+    /**
+     * @var array
+     */
     protected $messages  = array();
+
+    /**
+     * @var PriorityQueue
+     */
     protected $iterator;
 
+    /**
+     * Constructor
+     *
+     * @param null|string|int $name Optional name for the element
+     */
     public function __construct($name = null)
     {
         $this->iterator = new PriorityQueue();
@@ -153,7 +177,7 @@ class Fieldset extends Element implements FieldsetInterface
      *
      * Storage is an implementation detail of the concrete class.
      * 
-     * @return array|\Traversable
+     * @return array|Traversable
      */
     public function getElements()
     {
@@ -165,7 +189,7 @@ class Fieldset extends Element implements FieldsetInterface
      * 
      * Storage is an implementation detail of the concrete class.
      * 
-     * @return array|\Traversable
+     * @return array|Traversable
      */
     public function getFieldsets()
     {
@@ -175,7 +199,7 @@ class Fieldset extends Element implements FieldsetInterface
     /**
      * Set a hash of element names/messages to use when validation fails
      *
-     * @param  array|\Traversable $messages
+     * @param  array|Traversable $messages
      * @return FieldsetInterface
      */
     public function setMessages($messages)

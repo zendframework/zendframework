@@ -20,10 +20,10 @@
 
 namespace Zend\Form;
 
-use Traversable;
-use Zend\InputFilter\InputFilterInterface;
-use Zend\InputFilter\InputFilterProviderInterface;
-use Zend\InputFilter\InputProviderInterface;
+use Traversable,
+    Zend\InputFilter\InputFilterInterface,
+    Zend\InputFilter\InputFilterProviderInterface,
+    Zend\InputFilter\InputProviderInterface;
 
 /**
  * @category   Zend

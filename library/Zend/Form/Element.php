@@ -148,7 +148,7 @@ class Element implements ElementInterface
     /**
      * Set a list of messages to report when validation fails
      *
-     * @param  array|\Traversable $messages
+     * @param  array|Traversable $messages
      * @return ElementInterface
      */
     public function setMessages($messages)
@@ -170,7 +170,7 @@ class Element implements ElementInterface
      *
      * Returns a list of validation failure messages, if any.
      * 
-     * @return array|\Traversable
+     * @return array|Traversable
      */
     public function getMessages()
     {

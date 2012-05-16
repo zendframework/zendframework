@@ -20,12 +20,12 @@
 
 namespace Zend\Form;
 
-use IteratorAggregate;
-use Traversable;
-use Zend\InputFilter\InputFilterAwareInterface;
-use Zend\InputFilter\InputFilterInterface;
-use Zend\Stdlib\ArrayUtils;
-use Zend\Stdlib\Hydrator;
+use IteratorAggregate,
+    Traversable,
+    Zend\InputFilter\InputFilterAwareInterface,
+    Zend\InputFilter\InputFilterInterface,
+    Zend\Stdlib\ArrayUtils,
+    Zend\Stdlib\Hydrator;
 
 /**
  * @category   Zend
@@ -61,7 +61,7 @@ class BaseForm extends Fieldset implements FormInterface
     /**
      * Data being validated
      * 
-     * @var null|array|\Traversable
+     * @var null|array|Traversable
      */
     protected $data;
  

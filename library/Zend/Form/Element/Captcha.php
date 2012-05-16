@@ -21,9 +21,9 @@
 
 namespace Zend\Form\Element;
 
-use Zend\Captcha as ZendCaptcha;
-use Zend\Form\Element;
-use Zend\InputFilter\InputProviderInterface;
+use Zend\Captcha as ZendCaptcha,
+    Zend\Form\Element,
+    Zend\InputFilter\InputProviderInterface;
 
 /**
  * @category   Zend

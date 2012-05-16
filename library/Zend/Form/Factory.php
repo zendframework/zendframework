@@ -20,12 +20,12 @@
 
 namespace Zend\Form;
 
-use ArrayAccess;
-use Traversable;
-use Zend\InputFilter\Factory as InputFilterFactory;
-use Zend\InputFilter\InputFilterInterface;
-use Zend\Stdlib\ArrayUtils;
-use Zend\Stdlib\Hydrator;
+use ArrayAccess,
+    Traversable,
+    Zend\InputFilter\Factory as InputFilterFactory,
+    Zend\InputFilter\InputFilterInterface,
+    Zend\Stdlib\ArrayUtils,
+    Zend\Stdlib\Hydrator;
 
 /**
  * @category   Zend
@@ -35,6 +35,9 @@ use Zend\Stdlib\Hydrator;
  */
 class Factory
 {
+    /**
+     * @var InputFilterFactory
+     */
     protected $inputFilterFactory;
 
     /**

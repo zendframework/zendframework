@@ -21,11 +21,11 @@
 
 namespace Zend\Form\View\Helper\Captcha;
 
-use Traversable;
-use Zend\Captcha\ReCaptcha as CaptchaAdapter;
-use Zend\Form\ElementInterface;
-use Zend\Form\Exception;
-use Zend\Form\View\Helper\FormInput;
+use Traversable,
+    Zend\Captcha\ReCaptcha as CaptchaAdapter,
+    Zend\Form\ElementInterface,
+    Zend\Form\Exception,
+    Zend\Form\View\Helper\FormInput;
 
 /**
  * @category   Zend

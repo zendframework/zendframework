@@ -367,7 +367,6 @@ class ServiceManager implements ServiceLocatorInterface
             ));
         }
 
-        /** @var $initializer InitializerInterface */
         foreach ($this->initializers as $initializer) {
             if ($initializer instanceof InitializerInterface) {
                 $initializer->initialize($instance);
@@ -506,7 +505,15 @@ class ServiceManager implements ServiceLocatorInterface
         }
 
         $circularDependencyResolver[spl_object_hash($this) . '-' . $cName] = true;
-        $instance = call_user_func($callable, $this, $cName, $rName);
+        try {
+            $instance = call_user_func($callable, $this, $cName, $rName);
+        } catch (\Exception $e) {
+            throw new Exception\ServiceNotCreatedException(
+                'Abstract factory raised an exception; no instance returned',
+                $e->getCode(),
+                $e
+            );
+        }
         if ($instance === null) {
             throw new Exception\ServiceNotCreatedException('The factory was called but did not return an instance.');
         }

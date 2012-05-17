@@ -58,6 +58,7 @@ class ApplicationTest extends TestCase
         );
         $config = function($s) {
             return new Config(array(
+                /*
                 'controller' => array(
                     'classes' => array(
                         'bad'    => 'ZendTest\Mvc\Controller\TestAsset\BadController',
@@ -65,6 +66,7 @@ class ApplicationTest extends TestCase
                         'sample' => 'ZendTest\Mvc\Controller\TestAsset\SampleController',
                     ),
                 ),
+                 */
             ));
         };
         $sm = $this->serviceManager = new ServiceManager(
@@ -229,7 +231,8 @@ class ApplicationTest extends TestCase
         $router->addRoute('path', $route);
 
         if ($addService) {
-            $this->serviceManager->setFactory('ZendTest\Mvc\TestAsset\PathController', function() {
+            $controllerLoader = $this->serviceManager->get('ControllerLoader');
+            $controllerLoader->setFactory('path', function() {
                 return new TestAsset\PathController;
             });
         }
@@ -252,7 +255,8 @@ class ApplicationTest extends TestCase
         ));
         $router->addRoute('sample', $route);
 
-        $this->serviceManager->setFactory('ZendTest\Mvc\Controller\TestAsset\SampleController', function() {
+        $controllerLoader = $this->serviceManager->get('ControllerLoader');
+        $controllerLoader->setFactory('sample', function() {
             return new Controller\TestAsset\SampleController;
         });
         $this->application->bootstrap();
@@ -275,7 +279,8 @@ class ApplicationTest extends TestCase
         $router->addRoute('bad', $route);
 
         if ($addService) {
-            $this->serviceManager->setFactory('ZendTest\Mvc\Controller\TestAsset\BadController', function() {
+            $controllerLoader = $this->serviceManager->get('ControllerLoader');
+            $controllerLoader->setFactory('bad', function() {
                 return new Controller\TestAsset\BadController;
             });
         }
@@ -372,10 +377,9 @@ class ApplicationTest extends TestCase
      */
     public function testInabilityToRetrieveControllerShouldTriggerDispatchError()
     {
-        $this->markTestIncomplete('Cannot determine how to get ControllerLoader and/or ServiceManager to raise expected exception');
-        $this->serviceManager->get('ControllerLoader');
         $this->setupBadController(false);
-        $this->serviceManager->setInvokableClass('bad', 'DoesNotExist');
+        $controllerLoader = $this->serviceManager->get('ControllerLoader');
+        $controllerLoader->setInvokableClass('bad', 'DoesNotExist');
         $response = $this->application->getResponse();
         $events   = $this->application->events();
         $events->attach('dispatch.error', function ($e) use ($response) {
@@ -442,10 +446,9 @@ class ApplicationTest extends TestCase
      */
     public function testLocatorExceptionShouldTriggerDispatchError()
     {
-        $this->markTestIncomplete('Cannot determine how to force controller loader to fail loading the class');
-        $this->serviceManager->get('ControllerLoader');
         $this->setupPathController(false);
-        $this->serviceManager->setInvokableClass('path', 'InvalidClassName');
+        $controllerLoader = $this->serviceManager->get('ControllerLoader');
+        $controllerLoader->setInvokableClass('path', 'InvalidClassName');
         $response = new Response();
         $this->application->events()->attach('dispatch.error', function($e) use ($response) {
             return $response;

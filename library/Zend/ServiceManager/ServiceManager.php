@@ -231,13 +231,17 @@ class ServiceManager implements ServiceLocatorInterface
      */
     public function setShared($name, $isShared)
     {
-        $name = $this->canonicalizeName($name);
+        $cName = $this->canonicalizeName($name);
 
-        if (!isset($this->invokableClasses[$name]) && !isset($this->factories[$name])) {
-            throw new Exception\ServiceNotFoundException('A service by the name provided was not found and could not be marked as shared.');
+        if (!isset($this->invokableClasses[$cName]) && !isset($this->factories[$cName])) {
+            throw new Exception\ServiceNotFoundException(sprintf(
+                '%s: A service by the name "%s" was not found and could not be marked as shared',
+                __METHOD__,
+                $name
+            ));
         }
 
-        $this->shared[$name] = (bool) $isShared;
+        $this->shared[$cName] = (bool) $isShared;
         return $this;
     }
 

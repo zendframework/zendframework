@@ -136,17 +136,19 @@ class Query implements RouteInterface
      */
     public function assemble(array $params = array(), array $options = array())
     {
-        $mergedParams = array_merge($this->defaults, $params);
+        $mergedParams          = array_merge($this->defaults, $params);
+        $this->assembledParams = array();
 
-        if (count($mergedParams)) {
+        if (isset($options['uri']) && count($mergedParams)) {
             foreach ($mergedParams as $key => $value) {
                 $this->assembledParams[] = $key;
             }
 
-            return '?' . str_replace('+', '%20', http_build_query($mergedParams));
+            $options['uri']->setQuery($mergedParams);
         }
 
-        return null;
+        // A query does not contribute to the path, thus nothing is returned.
+        return '';
     }
 
     /**

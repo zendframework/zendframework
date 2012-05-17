@@ -77,10 +77,12 @@ class ServiceManagerConfiguration implements ConfigurationInterface
      * @var array
      */
     protected $aliases = array(
-        'Zend\EventManager\EventManagerInterface' => 'EventManager',
-        'Zend\Di\LocatorInterface'                => 'DependencyInjector',
         'Config'                                  => 'Configuration',
         'Di'                                      => 'DependencyInjector',
+        'Zend\Di\LocatorInterface'                => 'DependencyInjector',
+        'Zend\EventManager\EventManagerInterface' => 'EventManager',
+        'Zend\Mvc\Controller\PluginLoader'        => 'ControllerPluginLoader',
+        'Zend\Mvc\Controller\PluginBroker'        => 'ControllerPluginBroker',
     );
 
     /**

@@ -22,6 +22,7 @@
 namespace Zend\Mvc\Service;
 
 use Zend\Loader\Pluggable;
+use Zend\ServiceManager\Di\DiAbstractServiceFactory;
 use Zend\ServiceManager\Di\DiServiceInitializer;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
@@ -60,6 +61,7 @@ class ControllerLoaderFactory implements FactoryInterface
         $controllerLoader = $serviceLocator->createScopedServiceManager();
         $configuration    = $serviceLocator->get('Configuration');
 
+
         if (isset($configuration['controller'])) {
             foreach ($configuration['controller'] as $type => $specs) {
                 if ($type == 'classes') {
@@ -75,9 +77,15 @@ class ControllerLoaderFactory implements FactoryInterface
             }
         }
 
-        $controllerLoader->addInitializer(
-            new DiServiceInitializer($serviceLocator->get('Di'), $serviceLocator)
-        );
+        if ($serviceLocator->has('Di')) {
+            $di = $serviceLocator->get('Di');
+            $controllerLoader->addAbstractFactory(
+                new DiAbstractServiceFactory($di, DiAbstractServiceFactory::USE_SL_BEFORE_DI)
+            );
+            $controllerLoader->addInitializer(
+                new DiServiceInitializer($di, $serviceLocator)
+            );
+        }
 
         $controllerLoader->addInitializer(function ($instance) use ($serviceLocator) {
             if ($instance instanceof Pluggable) {

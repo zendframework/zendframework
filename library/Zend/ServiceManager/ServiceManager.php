@@ -524,7 +524,7 @@ class ServiceManager implements ServiceLocatorInterface
 
         if (isset($circularDependencyResolver[spl_object_hash($this) . '-' . $cName])) {
             $circularDependencyResolver = array();
-            throw new Exception\CircularDependencyFoundException('Circular dependency for LazyServiceLoader was found for instance ' . $name);
+            throw new Exception\CircularDependencyFoundException('Circular dependency for LazyServiceLoader was found for instance ' . $rName);
         }
 
         $circularDependencyResolver[spl_object_hash($this) . '-' . $cName] = true;

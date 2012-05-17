@@ -21,4 +21,5 @@ namespace Zend\Crypt\Password\Exception;
 class RuntimeException
     extends \RuntimeException
     implements \Zend\Crypt\Password\Exception\ExceptionInterface
-{}
+{
+}

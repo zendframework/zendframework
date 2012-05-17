@@ -23,7 +23,7 @@ use Zend\Loader\PluginClassLoader;
 class SymmetricLoader extends PluginClassLoader
 {
     /**
-     * @var array Pre-aliased adapters 
+     * @var array Pre-aliased adapters
      */
     protected $plugins = array(
         'mcrypt' => 'Zend\Crypt\Symmetric\Mcrypt'

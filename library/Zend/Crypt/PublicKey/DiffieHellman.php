@@ -114,14 +114,14 @@ class DiffieHellman
     public function generateKeys()
     {
         if (function_exists('openssl_dh_compute_key') && self::$useOpenssl !== false) {
-            $details = array();
+            $details      = array();
             $details['p'] = $this->getPrime();
             $details['g'] = $this->getGenerator();
             if ($this->hasPrivateKey()) {
                 $details['priv_key'] = $this->getPrivateKey();
             }
-            $opensslKeyResource = openssl_pkey_new( array('dh' => $details) );
-            $data = openssl_pkey_get_details($opensslKeyResource);
+            $opensslKeyResource = openssl_pkey_new(array('dh' => $details));
+            $data               = openssl_pkey_get_details($opensslKeyResource);
             $this->setPrivateKey($data['dh']['priv_key'], self::BINARY);
             $this->setPublicKey($data['dh']['pub_key'], self::BINARY);
         } else {
@@ -147,7 +147,7 @@ class DiffieHellman
         if (!preg_match("/^\d+$/", $number)) {
             throw new Exception\InvalidArgumentException('Invalid parameter; not a positive natural number');
         }
-        $this->_publicKey = (string) $number;
+        $this->_publicKey = (string)$number;
         return $this;
     }
 
@@ -232,7 +232,7 @@ class DiffieHellman
         if (!preg_match("/^\d+$/", $number) || $number < 11) {
             throw new Exception\InvalidArgumentException('Invalid parameter; not a positive natural number or too small: should be a large natural number prime');
         }
-        $this->_prime = (string) $number;
+        $this->_prime = (string)$number;
         return $this;
     }
 
@@ -261,7 +261,7 @@ class DiffieHellman
         if (!preg_match("/^\d+$/", $number) || $number < 2) {
             throw new Exception\InvalidArgumentException('Invalid parameter; not a positive natural number greater than 1');
         }
-        $this->_generator = (string) $number;
+        $this->_generator = (string)$number;
         return $this;
     }
 
@@ -293,7 +293,7 @@ class DiffieHellman
         if (!preg_match("/^\d+$/", $number)) {
             throw new Exception\InvalidArgumentException('Invalid parameter; not a positive natural number');
         }
-        $this->_privateKey = (string) $number;
+        $this->_privateKey = (string)$number;
         return $this;
     }
 

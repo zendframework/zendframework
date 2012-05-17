@@ -36,22 +36,23 @@ use Zend\Crypt\Hash;
  * @group      Zend_Crypt
  */
 class HashTest extends \PHPUnit_Framework_TestCase
-{   
+{
     // SHA1 tests taken from RFC 3174
-    
+
     public static function provideTestSHA1Data()
     {
         return array(
-            array ('abc', 
-                   strtolower('A9993E364706816ABA3E25717850C26C9CD0D89D')),
-            array ('abcdbcdecdefdefgefghfghighijhijkijkljklmklmnlmnomnopnopq',
-                   strtolower('84983E441C3BD26EBAAE4AA1F95129E5E54670F1')),
-            array (str_repeat('a',1000000), 
-                   strtolower('34AA973CD4C4DAA4F61EEB2BDBAD27316534016F')),
-            array (str_repeat('01234567', 80),
-                   strtolower('DEA356A2CDDD90C7A7ECEDC5EBB563934F460452'))
+            array('abc',
+                  strtolower('A9993E364706816ABA3E25717850C26C9CD0D89D')),
+            array('abcdbcdecdefdefgefghfghighijhijkijkljklmklmnlmnomnopnopq',
+                  strtolower('84983E441C3BD26EBAAE4AA1F95129E5E54670F1')),
+            array(str_repeat('a', 1000000),
+                  strtolower('34AA973CD4C4DAA4F61EEB2BDBAD27316534016F')),
+            array(str_repeat('01234567', 80),
+                  strtolower('DEA356A2CDDD90C7A7ECEDC5EBB563934F460452'))
         );
     }
+
     /**
      * @dataProvider provideTestSHA1Data
      */
@@ -60,19 +61,20 @@ class HashTest extends \PHPUnit_Framework_TestCase
         $hash = Hash::compute('sha1', $data);
         $this->assertEquals($output, $hash);
     }
-    
+
     // SHA-224 tests taken from RFC 3874
-    
+
     public static function provideTestSHA224Data()
     {
         return array(
-            array ('abc', '23097d223405d8228642a477bda255b32aadbce4bda0b3f7e36c9da7'),
-            array ('abcdbcdecdefdefgefghfghighijhijkijkljklmklmnlmnomnopnopq',
-                   '75388b16512776cc5dba5da1fd890150b0c6455cb4f58b1952522525'),
-            array (str_repeat('a',1000000),
-                   '20794655980c91d8bbb4c1ea97618a4bf03f42581948b2ee4ee7ad67')
+            array('abc', '23097d223405d8228642a477bda255b32aadbce4bda0b3f7e36c9da7'),
+            array('abcdbcdecdefdefgefghfghighijhijkijkljklmklmnlmnomnopnopq',
+                  '75388b16512776cc5dba5da1fd890150b0c6455cb4f58b1952522525'),
+            array(str_repeat('a', 1000000),
+                  '20794655980c91d8bbb4c1ea97618a4bf03f42581948b2ee4ee7ad67')
         );
     }
+
     /**
      * @dataProvider provideTestSHA224Data
      */
@@ -81,9 +83,9 @@ class HashTest extends \PHPUnit_Framework_TestCase
         $hash = Hash::compute('sha224', $data);
         $this->assertEquals($output, $hash);
     }
-   
+
     // MD5 test suite talen from RFC 1321
-    
+
     public static function provideTestMD5Data()
     {
         return array(
@@ -94,9 +96,10 @@ class HashTest extends \PHPUnit_Framework_TestCase
             array('abcdefghijklmnopqrstuvwxyz', 'c3fcd3d76192e4007dfb496cca67e13b'),
             array('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789',
                   'd174ab98d277d9f5a5611c2c9f419d9f'),
-            array(str_repeat('1234567890',8), '57edf4a22be3c955ac49da2e2107b67a')
+            array(str_repeat('1234567890', 8), '57edf4a22be3c955ac49da2e2107b67a')
         );
     }
+
     /**
      * @dataProvider provideTestMD5Data
      */
@@ -105,14 +108,14 @@ class HashTest extends \PHPUnit_Framework_TestCase
         $hash = Hash::compute('md5', $data);
         $this->assertEquals($output, $hash);
     }
-    
+
     public function testWrongHashAlgorithm()
     {
         $this->setExpectedException('Zend\Crypt\Exception\InvalidArgumentException',
                                     'Hash algorithm provided is not supported on this PHP installation');
         $hash = Hash::compute('wrong', 'test');
     }
-    
+
     public function testBinaryOutput()
     {
         $hash = Hash::compute('sha1', 'test', Hash::BINARY);

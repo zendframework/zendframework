@@ -40,7 +40,7 @@ class Bcmath implements BigIntegerCapable
      * applicable to BCMath.
      *
      * @param  string $operand
-     * @param  int $base
+     * @param  int    $base
      * @return string
      */
     public function init($operand, $base = 10)
@@ -148,7 +148,7 @@ class Bcmath implements BigIntegerCapable
     }
 
     /**
-     * @param  string $operand 
+     * @param  string $operand
      * @return integer
      */
     public function binaryToInteger($operand)
@@ -164,12 +164,12 @@ class Bcmath implements BigIntegerCapable
 
 
     /**
-     * @param  integer $operand 
+     * @param  integer $operand
      * @return string
      */
     public function integerToBinary($operand)
     {
-        $cmp = bccomp($operand, 0);
+        $cmp    = bccomp($operand, 0);
         $return = '';
         if ($cmp == 0) {
             return "\0";
@@ -185,13 +185,13 @@ class Bcmath implements BigIntegerCapable
     }
 
     /**
-     * @param  string $operand 
+     * @param  string $operand
      * @return string
      */
     public function hexToDecimal($operand)
     {
         $return = '0';
-        while(strlen($hex)) {
+        while (strlen($hex)) {
             $hex     = hexdec(substr($operand, 0, 4));
             $dec     = bcadd(bcmul($return, 65536), $hex);
             $operand = substr($operand, 4);

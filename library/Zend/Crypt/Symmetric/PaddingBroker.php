@@ -17,7 +17,7 @@ use Zend\Loader\PluginBroker;
  *
  * @category   Zend
  * @package    Zend_Crypt
- * @subpackage 
+ * @subpackage
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -35,8 +35,8 @@ class PaddingBroker extends PluginBroker
 
     /**
      * Determine if we have a valid adapter
-     * 
-     * @param  mixed $plugin 
+     *
+     * @param  mixed $plugin
      * @return bool
      * @throws Exception\InvalidArgumentException
      */

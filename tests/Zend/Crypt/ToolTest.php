@@ -37,10 +37,10 @@ use Zend\Crypt\Tool;
  * @group      Zend_Crypt
  */
 class ToolTest extends \PHPUnit_Framework_TestCase
-{   
+{
     public function testCompare()
     {
-        $this->assertTrue(Tool::compareString('test','test'));
-	$this->assertFalse(Tool::compareString('test','Test'));
+        $this->assertTrue(Tool::compareString('test', 'test'));
+        $this->assertFalse(Tool::compareString('test', 'Test'));
     }
 }

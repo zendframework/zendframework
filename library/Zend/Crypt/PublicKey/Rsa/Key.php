@@ -48,7 +48,7 @@ class Key implements \Countable
 
     /**
      * To string
-     * 
+     *
      * @return string
      * @throws Exception\RuntimeException
      */
@@ -72,8 +72,8 @@ class Key implements \Countable
 
     /**
      * Count
-     * 
-     * @return integer 
+     *
+     * @return integer
      */
     public function count()
     {
@@ -82,8 +82,8 @@ class Key implements \Countable
 
     /**
      * Get type
-     * 
-     * @return string 
+     *
+     * @return string
      */
     public function getType()
     {

@@ -21,4 +21,5 @@ namespace Zend\Crypt\Symmetric\Exception;
 class RuntimeException
     extends \RuntimeException
     implements ExceptionInterface
-{}
+{
+}

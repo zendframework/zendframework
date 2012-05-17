@@ -43,7 +43,7 @@ class PublicKey extends Key
         }
 
         $this->_opensslKeyResource = $result;
-        $this->_details = openssl_pkey_get_details($this->_opensslKeyResource);
+        $this->_details            = openssl_pkey_get_details($this->_opensslKeyResource);
     }
 
     public function getCertificate()

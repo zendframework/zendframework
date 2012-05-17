@@ -9,7 +9,7 @@
  */
 namespace Zend\Crypt\Password;
 
-interface PasswordInterface 
+interface PasswordInterface
 {
     /**
      * Create a password hash for a given plain text password
@@ -18,6 +18,7 @@ interface PasswordInterface
      * @return string The formatted password hash
      */
     public function create($password);
+
     /**
      * Verify a password hash against a given plain text password
      *

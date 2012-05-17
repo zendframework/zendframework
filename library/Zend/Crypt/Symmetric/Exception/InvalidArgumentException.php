@@ -21,4 +21,5 @@ namespace Zend\Crypt\Symmetric\Exception;
 class InvalidArgumentException
     extends \InvalidArgumentException
     implements ExceptionInterface
-{}
+{
+}

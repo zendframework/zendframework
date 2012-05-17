@@ -39,7 +39,7 @@ class Gmp implements BigIntegerCapable
      * Initialise a big integer into an extension specific type.
      *
      * @param  string $operand
-     * @param  int $base
+     * @param  int    $base
      * @return string
      */
     public function init($operand, $base = 10)
@@ -89,6 +89,7 @@ class Gmp implements BigIntegerCapable
     /**
      * Divide two big integers and return result or NULL if the denominator
      * is zero.
+     *
      * @param  string $left_operand
      * @param  string $right_operand
      * @return string|null
@@ -145,7 +146,7 @@ class Gmp implements BigIntegerCapable
 
     /**
      * @param  string $left_operand
-     * @param string $right_operand
+     * @param string  $right_operand
      * @return string
      */
     public function sqrt($operand)
@@ -155,22 +156,22 @@ class Gmp implements BigIntegerCapable
     }
 
     /**
-     * @param  string $operand 
+     * @param  string $operand
      * @return integer
      */
     public function binaryToInteger($operand)
     {
         $result = '0';
         while (strlen($operand)) {
-            $ord = ord(substr($operand, 0, 1));
-            $result = gmp_add(gmp_mul($result, 256), $ord);
+            $ord     = ord(substr($operand, 0, 1));
+            $result  = gmp_add(gmp_mul($result, 256), $ord);
             $operand = substr($operand, 1);
         }
         return gmp_strval($result);
     }
 
     /**
-     * @param  string|integer $operand 
+     * @param  string|integer $operand
      * @return string
      */
     public function integerToBinary($operand)
@@ -186,15 +187,15 @@ class Gmp implements BigIntegerCapable
     }
 
     /**
-     * @param  string $operand 
+     * @param  string $operand
      * @return string
      */
     public function hexToDecimal($operand)
     {
         $return = '0';
-        while(strlen($hex)) {
-            $hex = hexdec(substr($operand, 0, 4));
-            $dec = gmp_add(gmp_mul($return, 65536), $hex);
+        while (strlen($hex)) {
+            $hex     = hexdec(substr($operand, 0, 4));
+            $dec     = gmp_add(gmp_mul($return, 65536), $hex);
             $operand = substr($operand, 4);
         }
         return $return;

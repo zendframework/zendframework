@@ -48,33 +48,35 @@ class Hmac
         if (!isset($key) || empty($key)) {
             throw new Exception\InvalidArgumentException('Provided key is null or empty');
         }
-        
+
         $hash = strtolower($hash);
         if (!self::isSupported($hash)) {
             throw new Exception\InvalidArgumentException('Hash algorithm provided is not supported on this PHP installation');
         }
-        
+
         if ($output == self::BINARY) {
             return hash_hmac($hash, $data, $key, 1);
         } else {
             return hash_hmac($hash, $data, $key);
         }
     }
+
     /**
      * Get the output size according to the hash algorithm and the output format
-     * 
+     *
      * @param  string $hash
      * @param  string $output
-     * @return integer 
+     * @return integer
      */
     public static function getOutputSize($hash, $output = self::STRING)
     {
         return strlen(self::compute('key', $hash, 'data', $output));
     }
+
     /**
      * Get the supported algorithm
-     * 
-     * @return array 
+     *
+     * @return array
      */
     public static function getSupportedAlgorithms()
     {
@@ -83,13 +85,14 @@ class Hmac
         }
         return self::$supportedAlgorithms;
     }
+
     /**
      * Is the hash algorithm supported?
-     * 
+     *
      * @param  string $algo
-     * @return boolean 
+     * @return boolean
      */
-    public static function isSupported($algo) 
+    public static function isSupported($algo)
     {
         return in_array($algo, self::getSupportedAlgorithms());
     }

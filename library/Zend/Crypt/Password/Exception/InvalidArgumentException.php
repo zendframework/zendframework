@@ -21,4 +21,5 @@ namespace Zend\Crypt\Password\Exception;
 class InvalidArgumentException
     extends \InvalidArgumentException
     implements ExceptionInterface
-{}
+{
+}

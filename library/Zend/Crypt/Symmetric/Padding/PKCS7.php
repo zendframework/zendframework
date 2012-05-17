@@ -17,7 +17,8 @@ namespace Zend\Crypt\Symmetric\Padding;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class PKCS7 implements PaddingInterface {
+class PKCS7 implements PaddingInterface
+{
 
     /**
      * Pad the string to the specified size
@@ -27,7 +28,8 @@ class PKCS7 implements PaddingInterface {
      *
      * @return string The padded string
      */
-    public function pad($string, $blockSize = 32) {
+    public function pad($string, $blockSize = 32)
+    {
         $pad = $blockSize - (strlen($string) % $blockSize);
         return $string . str_repeat(chr($pad), $pad);
     }
@@ -39,7 +41,8 @@ class PKCS7 implements PaddingInterface {
      *
      * @return string The unpadded string
      */
-    public function strip($string) {
+    public function strip($string)
+    {
         $end  = substr($string, -1);
         $last = ord($end);
         $len  = strlen($string) - $last;

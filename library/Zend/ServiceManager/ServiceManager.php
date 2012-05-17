@@ -267,7 +267,21 @@ class ServiceManager implements ServiceLocatorInterface
 
         if (isset($this->instances[$cName])) {
             $instance = $this->instances[$cName];
-        } elseif ($usePeeringServiceManagers) {
+        } 
+        
+        if (!$instance && $usePeeringServiceManagers) {
+            try {
+                $instance = $this->create(array($cName, $rName));
+            } catch (Exception\ServiceNotCreatedException $e) {
+                // do nothing -- we'll try to grab from the peering manager next
+            }
+        } elseif (!$instance) {
+            // No try/catch here; this _should_ raise an exception, as there is
+            // no peering manager
+            $instance = $this->create(array($cName, $rName));
+        }
+
+        if (!$instance && $usePeeringServiceManagers) {
             foreach ($this->peeringServiceManagers as $peeringServiceManager) {
                 try {
                     $instance = $peeringServiceManager->get($name);
@@ -276,10 +290,15 @@ class ServiceManager implements ServiceLocatorInterface
                     continue;
                 }
             }
-        }
 
-        if (!$instance) {
-            $instance = $this->create(array($cName, $rName));
+            // Still no instance? raise an exception
+            if (!$instance) {
+                throw new Exception\ServiceNotCreatedException(sprintf(
+                    '%s was unable to fetch or create an instance for %s',
+                    __METHOD__,
+                    $name
+                ));
+            }
         }
 
         if (isset($this->shared[$cName]) && $this->shared[$cName] === true) {

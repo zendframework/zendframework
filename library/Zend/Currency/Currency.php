@@ -84,7 +84,7 @@ class Currency
      *
      * @param  string|array       $options OPTIONAL Options array or currency short name
      *                                              when string is given
-     * @param  string|Zend\Locale\Locale $locale  OPTIONAL locale name
+     * @param  string|\Zend\Locale\Locale $locale  OPTIONAL locale name
      * @throws Zend\Currency\Exception   When currency is invalid
      */
     public function __construct($options = null, $locale = null)
@@ -284,9 +284,9 @@ class Currency
     /**
      * Internal function for checking static given locale parameter
      *
-     * @param  string                    $currency (Optional) Currency name
-     * @param  string|Zend\Locale\Locale $locale   (Optional) Locale to display informations
-     * @throws Zend\Currency\Exception   When locale contains no region
+     * @param  string                     $currency (Optional) Currency name
+     * @param  string|\Zend\Locale\Locale $locale   (Optional) Locale to display informations
+     * @throws Zend\Currency\Exception    When locale contains no region
      * @return string The extracted locale representation as string
      */
     private function _checkParams($currency = null, $locale = null)
@@ -321,8 +321,8 @@ class Currency
      * Returns the actual or details of other currency symbols,
      * when no symbol is available it returns the currency shortname (f.e. FIM for Finnian Mark)
      *
-     * @param  string                    $currency (Optional) Currency name
-     * @param  string|Zend\Locale\Locale $locale   (Optional) Locale to display informations
+     * @param  string                     $currency (Optional) Currency name
+     * @param  string|\Zend\Locale\Locale $locale   (Optional) Locale to display informations
      * @return string
      */
     public function getSymbol($currency = null, $locale = null)
@@ -349,8 +349,8 @@ class Currency
     /**
      * Returns the actual or details of other currency shortnames
      *
-     * @param  string                    $currency OPTIONAL Currency's name
-     * @param  string|Zend\Locale\Locale $locale   OPTIONAL The locale
+     * @param  string                     $currency OPTIONAL Currency's name
+     * @param  string|\Zend\Locale\Locale $locale   OPTIONAL The locale
      * @return string
      */
     public function getShortName($currency = null, $locale = null)
@@ -384,8 +384,8 @@ class Currency
     /**
      * Returns the actual or details of other currency names
      *
-     * @param  string                    $currency (Optional) Currency's short name
-     * @param  string|Zend\Locale\Locale $locale   (Optional) The locale
+     * @param  string                     $currency (Optional) Currency's short name
+     * @param  string|\Zend\Locale\Locale $locale   (Optional) The locale
      * @return string
      */
     public function getName($currency = null, $locale = null)
@@ -530,7 +530,7 @@ class Currency
      * Example: 'de_XX' will be set to 'de' because 'de_XX' does not exist
      * 'xx_YY' will be set to 'root' because 'xx' does not exist
      *
-     * @param  string|Zend\Locale\Locale $locale (Optional) Locale for parsing input
+     * @param  string|\Zend\Locale\Locale $locale (Optional) Locale for parsing input
      * @throws Zend\Currency\Exception When the given locale does not exist
      * @return Zend\Currency Provides fluent interface
      */
@@ -543,7 +543,7 @@ class Currency
             } else {
                 throw new Exception\InvalidArgumentException("No region found within the locale '" . (string) $locale . "'");
             }
-        } catch (Locale\Exception $e) {
+        } catch (Locale\Exception\ExceptionInterface $e) {
             throw new Exception\InvalidArgumentException($e->getMessage());
         }
 
@@ -857,7 +857,7 @@ class Currency
                 case 'script':
                     try {
                         Locale\Format::convertNumerals(0, $options['script']);
-                    } catch (Locale\Exception $e) {
+                    } catch (Locale\Exception\ExceptionInterface $e) {
                         throw new Exception\InvalidArgumentException($e->getMessage());
                     }
                     break;

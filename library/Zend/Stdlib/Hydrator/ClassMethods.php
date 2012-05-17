@@ -48,7 +48,7 @@ class ClassMethods implements HydratorInterface
     }
     
     /**
-     * Extract values from an object
+     * Extract values from an object with class methods
      *
      * Extracts the getter/setter of the given $object.
      * 
@@ -73,7 +73,7 @@ class ClassMethods implements HydratorInterface
         $attributes = array();
         $methods = get_class_methods($object);
         foreach($methods as $method) {
-            if(preg_match('/^get[A-Z]{1}\w*/', $method)) {
+            if(preg_match('/^get[A-Z]\w*/', $method)) {
                 // setter verification
                 $setter = preg_replace('/^get/', 'set', $method);
                 if(!in_array($setter, $methods)) {
@@ -92,7 +92,7 @@ class ClassMethods implements HydratorInterface
     }
 
     /**
-     * Hydrate an object by populating public properties
+     * Hydrate an object by populating getter/setter methods
      *
      * Hydrates an object by getter/setter methods of the object.
      * 

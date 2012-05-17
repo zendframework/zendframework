@@ -31,7 +31,7 @@
 
         <para>
             Additionally the component abstracts <acronym>LDAP</acronym> schema browsing
-            for OpenLDAP and ActiveDirectoy servers <classname>Zend\Ldap\Node\Schema</classname>
+            for OpenLDAP and ActiveDirectory servers <classname>Zend\Ldap\Node\Schema</classname>
             and server information retrieval for OpenLDAP-, ActiveDirectory- and Novell
             eDirectory servers (<classname>Zend\Ldap\Node\RootDse</classname>).
         </para>

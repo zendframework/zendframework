@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.ldap.api.reference.zend-ldap-node"><title>Zend\Ldap\Node</title>
-
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.ldap.api.reference.zend-ldap-node">
+    <title>Zend\Ldap\Node</title>
 
     <para>
         <classname>Zend\Ldap\Node</classname> includes the magic property accessors
@@ -15,7 +15,7 @@
         <methodname>Zend\Ldap\Node::existsAttribute()</methodname> respectively. Furthermore the
         class implements <code>ArrayAccess</code> for array-style-access to the attributes.
         <classname>Zend\Ldap\Node</classname> also implements <code>Iterator</code> and
-        <code>RecursiveIterato</code> to allow for recursive tree-traversal.
+        <code>RecursiveIterator</code> to allow for recursive tree-traversal.
     </para>
 
     <table xml:id="zend.ldap.api.reference.zend-ldap-node.table"><title>Zend\Ldap\Node API</title>
@@ -104,7 +104,7 @@
                         Factory method to create a detached <classname>Zend\Ldap\Node</classname>
                         from array data <varname>$data</varname>. if
                         <varname>$fromDataSource</varname> is <constant>TRUE</constant>
-                        (<constant>FALSE</constant> by default), the data is treated as beeing
+                        (<constant>FALSE</constant> by default), the data is treated as being
                         present in a <acronym>LDAP</acronym> tree.
                     </entry>
                 </row>
@@ -113,7 +113,7 @@
                     <entry><code>boolean isNew()</code></entry>
 
                     <entry>
-                        Tells if the node is consiedered as new (not present on the
+                        Tells if the node is considered as new (not present on the
                         server). Please note, that this doesn't tell if the node is really
                         present on the server. Use <methodname>Zend\Ldap\Node::exists()</methodname>
                         to see if a node is already there.

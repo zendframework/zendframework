@@ -91,7 +91,7 @@ class Converter
      *
      * @param mixed $value The value to convert
      * @param int   $type  The conversion type to use
-     * @return string
+     * @return string|null
      * @throws Exception\ConverterException
      */
     public static function toLdap($value, $type = self::STANDARD)
@@ -137,7 +137,7 @@ class Converter
      * Converts a date-entity to an LDAP-compatible date-string
      *
      * The date-entity <var>$date</var> can be either a timestamp, a
-     * DateTime Object, a string that is parseable by strtotime() or a Zend_Date
+     * DateTime Object, a string that is parseable by strtotime() or a Zend\Date\Date
      * Object.
      *
      * @param integer|string|DateTime|Date $date  The date-entity
@@ -207,9 +207,11 @@ class Converter
      * Convert an LDAP-compatible value to a corresponding PHP-value.
      *
      * By setting the <var>$type</var>-parameter the conversion of a certain
-     * type can be forced
-     * .
+     * type can be forced.
      *
+     * @see Converter::STANDARD
+     * @see Converter::BOOLEAN
+     * @see Converter::GENERALIZED_TIME
      * @param string  $value         The value to convert
      * @param int     $type          The conversion type to use
      * @param boolean $dateTimeAsUtc Return DateTime values in UTC timezone

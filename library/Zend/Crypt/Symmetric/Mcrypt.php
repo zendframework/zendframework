@@ -1,8 +1,16 @@
 <?php
-
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Crypt
+ */
 namespace Zend\Crypt\Symmetric;
 
-use Zend\Config\Config;
+use Traversable,
+    Zend\Stdlib\ArrayUtils;
 
 /**
  * Simmetric encryption using the Mcrypt extension
@@ -11,6 +19,10 @@ use Zend\Config\Config;
  * This class doesn't provide authentication and integrity check over the data.
  * PLEASE USE Zend\Crypt\BlockCipher instead!
  * 
+ * @category   Zend
+ * @package    Zend_Crypt
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Mcrypt implements SymmetricInterface
 {
@@ -95,10 +107,8 @@ class Mcrypt implements SymmetricInterface
             );
         }
         if (!empty($options)) {
-            if ($options instanceof Config) {
-                $options = $options->toArray();
-            } elseif ($options instanceof Traversable) {
-                $options = iterator_to_array($options);
+            if ($options instanceof Traversable) {
+                $options = ArrayUtils::iteratorToArray($options);
             } elseif (!is_array($options)) {
                 throw new Exception\InvalidArgumentException(
                     'The options parameter must be an array, a Zend\Config\Config object or a Traversable'

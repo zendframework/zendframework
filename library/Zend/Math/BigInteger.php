@@ -36,7 +36,6 @@ namespace Zend\Math;
  * flag. BIG_INT support is available from a big_int PHP library available from
  * only from PECL (a Windows port is not available).
  *
- * @uses       Zend\Math\BigInteger\BigIntegerCapable
  * @category   Zend
  * @package    Zend_Math
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -57,12 +56,12 @@ class BigInteger implements BigInteger\BigIntegerCapable
      * object.
      *
      * @param  string $extension
-     * @throws Zend\Math\BigInteger\Exception
+     * @throws Exception\RuntimeException
      */
     public function __construct($extension = null)
     {
         if ($extension !== null && !in_array($extension, array('bcmath', 'gmp', 'bigint'))) {
-            throw new Exception\InvalidArgumentException('Invalid extension type; please use one of bcmath, gmp or bigint');
+            throw new Exception\RuntimeException('Invalid extension type; please use one of bcmath, gmp or bigint');
         }
         $this->_loadAdapter($extension);
     }
@@ -72,7 +71,7 @@ class BigInteger implements BigInteger\BigIntegerCapable
      *
      * @param   string $methodName
      * @param   array $args
-     * @throws  Zend\Math\BigInteger\Exception
+     * @throws  Exception\RuntimeException
      */
     public function __call($methodName, $args)
     {
@@ -211,7 +210,7 @@ class BigInteger implements BigInteger\BigIntegerCapable
 
     /**
      * @param  string $extension
-     * @throws Zend\Math\Exception\InvalidArgumentException
+     * @throws Exception\RuntimeException
      */
     protected function _loadAdapter($extension = null)
     {
@@ -227,7 +226,7 @@ class BigInteger implements BigInteger\BigIntegerCapable
         } elseif ($extension == 'bcmath' && extension_loaded('bcmath')) {
             $this->_math = new BigInteger\Bcmath();
         } else {
-            throw new Exception\InvalidArgumentException($extension . ' big integer precision math support not detected');
+            throw new Exception\RuntimeException($extension . ' big integer precision math support not detected');
         }
     }
 }

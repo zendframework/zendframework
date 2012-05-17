@@ -563,13 +563,8 @@ class StandardConfig implements ConfigInterface
     /**
      * Set RSA public key
      *
-<<<<<<< HEAD
-     * @param  \Zend\Crypt\Rsa\PublicKey $key
-     * @return StandardConfig
-=======
      * @param  \Zend\Crypt\PublicKey\Rsa\PublicKey $key
-     * @return \Zend\OAuth\Config
->>>>>>> Integrate new Zend\Crypt and Zend\Math in consuming components
+     * @return StandardConfig
      */
     public function setRsaPublicKey(\Zend\Crypt\PublicKey\Rsa\PublicKey $key)
     {
@@ -590,13 +585,8 @@ class StandardConfig implements ConfigInterface
     /**
      * Set RSA private key
      *
-<<<<<<< HEAD
-     * @param  \Zend\Crypt\Rsa\PrivateKey $key
-     * @return StandardConfig
-=======
      * @param  \Zend\Crypt\PublicKey\Rsa\PrivateKey $key
-     * @return \Zend\OAuth\Config
->>>>>>> Integrate new Zend\Crypt and Zend\Math in consuming components
+     * @return StandardConfig
      */
     public function setRsaPrivateKey(\Zend\Crypt\PublicKey\Rsa\PrivateKey $key)
     {

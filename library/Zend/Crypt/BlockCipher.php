@@ -1,23 +1,12 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Crypt
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Crypt
  */
-
 namespace Zend\Crypt;
 
 use Zend\Crypt\Symmetric\SymmetricInterface,
@@ -29,10 +18,6 @@ use Zend\Crypt\Symmetric\SymmetricInterface,
 /**
  * Encrypt using a symmetric cipher then authenticate using HMAC (SHA-256)
  * 
- * @uses       Zend\Crypt\Hmac
- * @uses       Zend\Crypt\Tool
- * @uses       Zend\Crypt\Key\Derivation\PBKDF2
- * @uses       Zend\Math\Math
  * @category   Zend
  * @package    Zend_Crypt
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -80,15 +65,10 @@ class BlockCipher
     /**
      * Constructor
      * 
-     * @param Symmetric\SymmetricInterface $cipher
+     * @param SymmetricInterface $cipher
      */
-    public function __construct($cipher) 
+    public function __construct(SymmetricInterface $cipher) 
     { 
-        if (!$cipher instanceof Symmetric\SymmetricInterface) {
-            throw new Exception\InvalidArgumentException(
-                    __CLASS__ . ' only accepts instances of type Zend\Crypt\Symmetric\SymmetricInterface'
-            );
-        }
         $this->cipher = $cipher; 
     }
     /**
@@ -120,7 +100,7 @@ class BlockCipher
     /**
      * Set the symmetric cipher broker
      * 
-     * @param  Broker $broker 
+     * @param  string|roker $broker 
      * @return void
      */
     public static function setSymmetricBroker($broker)

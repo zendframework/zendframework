@@ -633,7 +633,7 @@ class App
         $this->_httpClient->setUri($matches[1]);
         $queryArray = $urlObj->getQueryAsArray();
         foreach ($queryArray as $name => $value) {
-          $this->_httpClient->setParameterGet($name, $value);
+          $this->_httpClient->setParameterGet(array($name, $value));
         }
 
 

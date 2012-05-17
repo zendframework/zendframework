@@ -1,24 +1,12 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Db
- * @subpackage Sql
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Db
  */
-
 namespace Zend\Db\Sql;
 
 use Zend\Db\Adapter\Adapter,
@@ -31,8 +19,6 @@ use Zend\Db\Adapter\Adapter,
  * @category   Zend
  * @package    Zend_Db
  * @subpackage Sql
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  *
  * @property Where $where
  */
@@ -144,7 +130,6 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
      * @var int|null
      */
     protected $offset = null;
-
 
     /**
      * Constructor
@@ -396,11 +381,10 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
         }
 
         $sql = implode(' ', $sqls);
-        
+
         $statement->setSql($sql);
         return;
     }
-
 
     /**
      * Get SQL string for statement
@@ -427,12 +411,10 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
         return $sql;
     }
 
-
-
     protected function processSelect(PlatformInterface $platform, Adapter $adapter = null, ParameterContainer $parameterContainer = null)
     {
         $expr = 1;
-        
+
         if (!$this->table) {
             return null;
         }
@@ -459,7 +441,7 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
                 $columns[] = array($quotedTable . self::SQL_STAR);
                 continue;
             } 
-            
+
             if ($column instanceof Expression) {
                 $columnParts = $this->processExpression(
                     $column,
@@ -474,7 +456,7 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
             } else {
                 $columnName .= $quotedTable . $platform->quoteIdentifier($column);
             }
-            
+
             // process As portion
             if (is_string($columnIndexOrAs)) {
                 $columnAs = $platform->quoteIdentifier($columnIndexOrAs);
@@ -487,7 +469,7 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
         $separator = $platform->getIdentifierSeparator();
 
         // process join columns
-        foreach ($this->joins as $j => $join) {
+        foreach ($this->joins as $join) {
             foreach ($join['columns'] as $jKey => $jColumn) {
                 $jColumns = array();
                 $jColumns[] = $platform->quoteIdentifier($join['name']) . $separator . $platform->quoteIdentifierInFragment($jColumn);
@@ -502,13 +484,13 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
 
         return array($columns, $table);
     }
-    
+
     protected function processJoin(PlatformInterface $platform, Adapter $adapter = null, ParameterContainer $parameterContainer = null)
     {
         if (!$this->joins) {
             return null;
         }
-        
+
         // process joins
         $joinSpecArgArray = array();
         foreach ($this->joins as $j => $join) {
@@ -540,7 +522,7 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
         }
         // process table columns
         $groups = array();
-        foreach ($this->group as $k => $column) {
+        foreach ($this->group as $column) {
             $columnSql = '';
             if ($column instanceof Expression) {
                 $columnParts = $this->processExpression($column, $platform, ($adapter) ? $adapter->getDriver() : null, 'group');

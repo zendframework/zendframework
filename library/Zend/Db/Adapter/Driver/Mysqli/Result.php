@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Db
- * @subpackage Adapter
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Db
  */
 
 namespace Zend\Db\Adapter\Driver\Mysqli;
@@ -28,8 +17,6 @@ use Zend\Db\Adapter\Driver\ResultInterface,
  * @category   Zend
  * @package    Zend_Db
  * @subpackage Adapter
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Result implements \Iterator, ResultInterface
 {
@@ -71,7 +58,7 @@ class Result implements \Iterator, ResultInterface
      * @var bool
      */
     protected $currentData = false;
-    
+
     /**
      *
      * @var array
@@ -166,7 +153,7 @@ class Result implements \Iterator, ResultInterface
         if ($this->currentComplete) {
             return $this->currentData;
         }
-        
+
         if ($this->resource instanceof \mysqli_stmt) {
             $this->loadDataFromMysqliStatement();
             return $this->currentData;
@@ -175,7 +162,7 @@ class Result implements \Iterator, ResultInterface
             return $this->currentData;
         }
     }
-    
+
     /**
      * Mysqli's binding and returning of statement values
      * 
@@ -203,7 +190,7 @@ class Result implements \Iterator, ResultInterface
             }
             call_user_func_array(array($this->resource, 'bind_result'), $this->statementBindValues['values']);
         }
-        
+
         if (($r = $this->resource->fetch()) === null) {
             return false;
         } elseif ($r === false) {
@@ -228,11 +215,11 @@ class Result implements \Iterator, ResultInterface
     protected function loadFromMysqliResult()
     {
         $this->currentData = null;
-        
+
         if (($data = $this->resource->fetch_assoc()) === null) {
             return false;
         }
-        
+
         $this->position++;
         $this->currentData = $data;
         $this->currentComplete = true;
@@ -247,11 +234,11 @@ class Result implements \Iterator, ResultInterface
     public function next()
     {
         $this->currentComplete = false;
-        
+
         if ($this->nextComplete == false) {
             $this->position++;
         }
-        
+
         $this->nextComplete = false;
     }
 
@@ -288,7 +275,7 @@ class Result implements \Iterator, ResultInterface
         if ($this->currentComplete) {
             return true;
         }
-        
+
         if ($this->resource instanceof \mysqli_stmt) {
             return $this->loadDataFromMysqliStatement();
         } else {

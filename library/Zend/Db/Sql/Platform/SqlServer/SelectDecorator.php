@@ -1,4 +1,12 @@
 <?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Db
+ */
 
 namespace Zend\Db\Sql\Platform\SqlServer;
 
@@ -34,7 +42,7 @@ class SelectDecorator extends Select implements PlatformDecoratorInterface
         foreach (get_object_vars($this->select) as $name => $value) {
             $this->{$name} = $value;
         }
-        
+
         // set specifications
         unset($this->specifications[self::SPECIFICATION_LIMIT]);
         unset($this->specifications[self::SPECIFICATION_OFFSET]);
@@ -75,9 +83,9 @@ class SelectDecorator extends Select implements PlatformDecoratorInterface
         if ($this->limit === null && $this->offset === null) {
             return null;
         }
-        
+
         $selectParameters = $parameters[self::SPECIFICATION_SELECT];
-        
+
         $starSuffix = $platform->getIdentifierSeparator() . self::SQL_STAR;
         foreach ($selectParameters[0] as $i => $columnParameters) {
             if ($columnParameters[0] == self::SQL_STAR || (isset($columnParameters[1]) && $columnParameters[1] == self::SQL_STAR) || strpos($columnParameters[0], $starSuffix)) {
@@ -123,7 +131,7 @@ class SelectDecorator extends Select implements PlatformDecoratorInterface
             $this->specifications[self::SPECIFICATION_SELECT],
             $parameters[self::SPECIFICATION_SELECT]
         );
-    
+
     }
 
 }

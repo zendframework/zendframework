@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Db
- * @subpackage Metadata
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Db
  */
 
 namespace Zend\Db\Metadata\Source;
@@ -29,8 +18,6 @@ use Zend\Db\Metadata\MetadataInterface,
  * @category   Zend
  * @package    Zend_Db
  * @subpackage Metadata
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class SqliteMetadata implements MetadataInterface
 {
@@ -40,21 +27,25 @@ class SqliteMetadata implements MetadataInterface
      * @var Adapter
      */
     protected $adapter = null;
+
     /**
      *
      * @var string
      */
     protected $defaultSchema = null;
+
     /**
      *
      * @var array
      */
     protected $tableData = array();
+
     /**
      *
      * @var array
      */
     protected $constraintData = array();
+
     /**
      * Constructor
      * 
@@ -64,6 +55,7 @@ class SqliteMetadata implements MetadataInterface
     {
         $this->adapter = $adapter;
     }
+
     /**
      * Get schemas
      * 
@@ -73,6 +65,7 @@ class SqliteMetadata implements MetadataInterface
     {
         return null;
     }
+
     /**
      * Get table names
      * 
@@ -92,6 +85,7 @@ class SqliteMetadata implements MetadataInterface
         }
         return $tables;
     }
+
     /**
      * Get tables
      * 
@@ -107,6 +101,7 @@ class SqliteMetadata implements MetadataInterface
         }
         return $tables;
     }
+
     /**
      * Get table
      * 
@@ -123,6 +118,7 @@ class SqliteMetadata implements MetadataInterface
 
         return $tableObj;
     }
+
     /**
      * Get views
      * 
@@ -133,6 +129,7 @@ class SqliteMetadata implements MetadataInterface
     {
 
     }
+
     /**
      * Get column names
      * 
@@ -144,6 +141,7 @@ class SqliteMetadata implements MetadataInterface
     {
 
     }
+
     /**
      * Get column
      * 
@@ -177,6 +175,7 @@ class SqliteMetadata implements MetadataInterface
         $column->setColumnDefault($found['dflt_value']);
         return $column;
     }
+
     /**
      * Get columns
      * 
@@ -195,6 +194,7 @@ class SqliteMetadata implements MetadataInterface
         }
         return $columns;
     }
+
     /**
      * Get constraints
      * 
@@ -216,6 +216,7 @@ class SqliteMetadata implements MetadataInterface
 
         return $constraints;
     }
+
     /**
      * Get constraint
      * 
@@ -250,6 +251,7 @@ class SqliteMetadata implements MetadataInterface
         $constraint->setKeys($this->getConstraintKeys($found['name'], $table, $schema, $database));
         return $constraint;
     }
+
     /**
      * Get constraint keys
      * 
@@ -292,6 +294,7 @@ class SqliteMetadata implements MetadataInterface
 
         return $keys;
     }
+
     /**
      * Get view names
      * 
@@ -303,6 +306,7 @@ class SqliteMetadata implements MetadataInterface
     {
         return array();
     }
+
     /**
      * Get view
      * 
@@ -315,6 +319,7 @@ class SqliteMetadata implements MetadataInterface
     {
         return array();
     }
+
     /**
      * Get triggers
      * 
@@ -326,6 +331,7 @@ class SqliteMetadata implements MetadataInterface
     {
         return array();
     }
+
     /**
      * Get trigger names
      * 
@@ -337,6 +343,7 @@ class SqliteMetadata implements MetadataInterface
     {
         return array();
     }
+
     /**
      * Get trigger
      * 
@@ -349,6 +356,7 @@ class SqliteMetadata implements MetadataInterface
     {
         return array();
     }
+
     /**
      * Load table column data
      */

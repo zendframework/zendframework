@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Db
- * @subpackage Metadata
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Db
  */
 
 namespace Zend\Db\Metadata\Display;
@@ -25,11 +14,10 @@ namespace Zend\Db\Metadata\Display;
  * @category   Zend
  * @package    Zend_Db
  * @subpackage Metadata
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class TextUi
 {
+
     /**
      *
      * @var 
@@ -48,6 +36,7 @@ class TextUi
         $output .= $this->renderTables($metadata->getTables());
         return $output;
     }
+
     /**
      * Render tables
      * 
@@ -58,10 +47,11 @@ class TextUi
     {
         $output = '';
         foreach ($tables as $table) {
-            $output .= $this->renderTable($tableMetadata); 
+            $output .= $this->renderTable($table);
         }
         return $output;
     }
+
     /**
      * Render table
      * 
@@ -76,6 +66,7 @@ class TextUi
         $output .= $this->renderConstraints($table->getConstraintCollection()) . "\n\n";
         return $output;
     }
+
     /**
      * Render columns
      * 
@@ -97,7 +88,7 @@ class TextUi
             array('characterSetName', "Charset\nName", 8),
             array('collationName', "Collation\nName", 12),
             );
-        
+
         $rows = $rowWidths = array();
         // make header
         foreach ($columnAttributes as $cAttrIndex => $cAttrData) {
@@ -105,9 +96,9 @@ class TextUi
             $row[$cAttrIndex] = $cAttrDisplayName;
             $rowWidths[$cAttrIndex] = $cAttrDefaultLength; // default width
         }
-        
+
         $rows[] = $row;
-        
+
         foreach ($columnCollection as $columnMetadata) {
             $row = array();
             foreach ($columnAttributes as $cAttrIndex => $cAttrData) {
@@ -120,7 +111,7 @@ class TextUi
             }
             $rows[] = $row;
         }
-        
+
         $table = new \Zend\Text\Table\Table(array(
             'columnWidths' => $rowWidths,
             'decorator' => 'ascii'
@@ -128,9 +119,10 @@ class TextUi
         foreach ($rows as $row) {
             $table->appendRow($row);
         }
-        
+
         return 'Columns' . PHP_EOL . $table->render();
     }
+
     /**
      * Render constraints
      * 
@@ -146,7 +138,7 @@ class TextUi
             $row[] = $constraint->getType();
             $rows[] = $row;
         }
-        
+
         $table = new \Zend\Text\Table\Table(array(
             'columnWidths' => array(25, 25),
             'decorator' => 'ascii'
@@ -154,8 +146,8 @@ class TextUi
         foreach ($rows as $row) {
             $table->appendRow($row);
         }
-        
+
         return 'Constraints: ' . PHP_EOL . $table->render();
     }
-    
+
 }

@@ -1,11 +1,25 @@
 <?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Package
+ */
 
 namespace Zend\Db\Adapter\Driver\Pdo\Feature;
 
 use Zend\Db\Adapter\Driver\Feature\AbstractFeature,
     Zend\Db\Adapter\Driver\Pdo;
 
-
+/**
+ * SqliteRowCounter
+ *
+ * @category   Zend
+ * @package    Zend_Db
+ * @subpackage Adapter
+ */
 class SqliteRowCounter extends AbstractFeature
 {
 
@@ -52,6 +66,10 @@ class SqliteRowCounter extends AbstractFeature
         return $countRow['count'];
     }
 
+    /**
+     * @param $context
+     * @return closure
+     */
     public function getRowCountClosure($context)
     {
         $sqliteRowCounter = $this;

@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Db
- * @subpackage Sql
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Db
  */
 
 namespace Zend\Db\Sql;
@@ -31,8 +20,6 @@ use Zend\Db\Adapter\Adapter,
  * @category   Zend
  * @package    Zend_Db
  * @subpackage Sql
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  *
  * @property Where $where
  */
@@ -47,7 +34,6 @@ class Update extends AbstractSql implements SqlInterface, PreparableSqlInterface
     const VALUES_MERGE = 'merge';
     const VALUES_SET   = 'set';
     /**@#-**/
-
 
     protected $specifications = array(
         self::SPECIFICATION_UPDATE => 'UPDATE %1$s SET %2$s',
@@ -179,19 +165,11 @@ class Update extends AbstractSql implements SqlInterface, PreparableSqlInterface
             $statement->setParameterContainer($parameterContainer);
         }
 
-        $prepareType = $driver->getPrepareType();
-
         $table = $platform->quoteIdentifier($this->table);
-//        if ($this->schema != '') {
-//            $table = $platform->quoteIdentifier($this->schema)
-//                . $platform->getIdentifierSeparator()
-//                . $table;
-//        }
 
         $set = $this->set;
         if (is_array($set)) {
             $setSql = array();
-            $values = array();
             foreach ($set as $column => $value) {
                 $parameterContainer->offsetSet($column, $value);
                 $setSql[] = $platform->quoteIdentifier($column) . ' = ' . $driver->formatParameterName($column);

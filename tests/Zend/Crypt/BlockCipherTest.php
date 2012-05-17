@@ -23,6 +23,7 @@ namespace ZendTest\Crypt;
 
 use Zend\Crypt\BlockCipher;
 use Zend\Crypt\Symmetric\Mcrypt;
+use Zend\Crypt\Symmetric\Exception;
 
 /**
  * @category   Zend
@@ -34,6 +35,7 @@ use Zend\Crypt\Symmetric\Mcrypt;
  */
 class BlockCipherTest extends \PHPUnit_Framework_TestCase
 {
+    /** @var BlockCipher */
     protected $blockCipher;
     protected $plaintext;
 

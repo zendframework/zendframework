@@ -27,9 +27,9 @@ class Hash
     protected static $supportedAlgorithms = array();
 
     /**
-     * @param  string $algo
+     * @param  string $hash
      * @param  string $data
-     * @param  string $binaryOutput
+     * @param  string $output
      * @return string
      */
     public static function compute($hash, $data, $output = self::STRING)

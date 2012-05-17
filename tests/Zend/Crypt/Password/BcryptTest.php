@@ -34,6 +34,15 @@ use Zend\Config\Config;
  */
 class BcryptTest extends \PHPUnit_Framework_TestCase
 {
+    /** @var Bcrypt */
+    public $bcrypt;
+    /** @var string */
+    public $salt;
+    /** @var string */
+    public $bcryptPassword;
+    /** @var string */
+    public $password;
+
     public function setUp()
     {
         $this->bcrypt         = new Bcrypt();

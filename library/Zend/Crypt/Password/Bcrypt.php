@@ -36,7 +36,7 @@ class Bcrypt implements PasswordInterface
     /**
      * Constructor
      *
-     * @param array $options
+     * @param array|Traversable $options
      */
     public function __construct($options = array())
     {
@@ -64,9 +64,7 @@ class Bcrypt implements PasswordInterface
     /**
      * Bcrypt
      *
-     * @param  string $data
-     * @param  string $cost
-     * @param  string $salt
+     * @param  string $password
      * @return string
      */
     public function create($password)

@@ -24,10 +24,9 @@ namespace Zend\Math\BigInteger;
 /**
  * Support for arbitrary precision mathematics in PHP.
  *
- * \Zend\Math\BigInteger\Gmp is a wrapper across the PHP BCMath
+ * Zend\Math\BigInteger\Gmp is a wrapper across the PHP GMP
  * extension.
  *
- * @uses       Zend\Math\BigInteger\BigIntegerCapable
  * @category   Zend
  * @package    Zend_Math
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -96,7 +95,7 @@ class Gmp implements BigIntegerCapable
      */
     public function divide($left_operand, $right_operand)
     {
-        $result = gmp_div($left_operand, $right_operand);
+        $result = gmp_div_q($left_operand, $right_operand);
         return gmp_strval($result);
     }
 
@@ -192,12 +191,12 @@ class Gmp implements BigIntegerCapable
      */
     public function hexToDecimal($operand)
     {
-        $return = '0';
-        while (strlen($hex)) {
-            $hex     = hexdec(substr($operand, 0, 4));
-            $dec     = gmp_add(gmp_mul($return, 65536), $hex);
+        $result = '0';
+        while(strlen($operand)) {
+            $dec     = hexdec(substr($operand, 0, 4));
+            $result  = gmp_add(gmp_mul($result, 65536), $dec);
             $operand = substr($operand, 4);
         }
-        return $return;
+        return gmp_strval($result);
     }
 }

@@ -21,6 +21,7 @@
 
 namespace ZendTest\Crypt\Symmetric;
 
+use Zend\Crypt\Symmetric\Exception;
 use Zend\Crypt\Symmetric\Mcrypt;
 use Zend\Crypt\Symmetric\Padding\PKCS7;
 use Zend\Config\Config;
@@ -35,6 +36,7 @@ use Zend\Config\Config;
  */
 class McryptTest extends \PHPUnit_Framework_TestCase
 {
+    /** @var Mcrypt */
     protected $mcrypt;
     protected $key;
     protected $salt;

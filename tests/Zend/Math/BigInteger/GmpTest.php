@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Crypt
+ * @package    Zend_Math
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -25,21 +25,22 @@ use Zend\Math\BigInteger\Gmp;
 
 /**
  * @category   Zend
- * @package    Zend_Crypt
+ * @package    Zend_Math
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_Crypt
+ * @group      Zend_Math
  */
 class GmpTest extends \PHPUnit_Framework_TestCase
 {
 
+    /** @var Gmp */
     private $_math = null;
 
     public function setUp()
     {
         if (!extension_loaded('gmp')) {
-            $this->markTestSkipped('Skipped: Zend_Crypt_Math_BigInteger_GmpTest due to ext/gmp being unavailable');
+            $this->markTestSkipped('Skipped: Zend\Math\BigInteger\GmpTest due to ext/gmp being unavailable');
             return;
         }
         $this->_math = new Gmp;
@@ -113,4 +114,13 @@ class GmpTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($integer, $gmpInteger);
     }
 
+    public function testHexToDecimalConversion()
+    {
+        $hexadecimal = '5A46'; // Two bytes
+        $expected = '23110';
+
+        $decimal = $this->_math->hexToDecimal($hexadecimal);
+
+        $this->assertEquals($expected, $decimal);
+    }
 }

@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Crypt
+ * @package    Zend_Math
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -25,15 +25,15 @@ use Zend\Math\BigInteger\Bcmath;
 
 /**
  * @category   Zend
- * @package    Zend_Crypt
+ * @package    Zend_Math
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_Crypt
+ * @group      Zend_Math
  */
 class BcmathTest extends \PHPUnit_Framework_TestCase
 {
-
+    /** @var Bcmath */
     private $_math = null;
 
     public function setUp()
@@ -113,4 +113,13 @@ class BcmathTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($integer, $gmpInteger);
     }
 
+    public function testHexToDecimalConversion()
+    {
+        $hexadecimal = '5A46'; // Two bytes
+        $expected = '23110';
+
+        $decimal = $this->_math->hexToDecimal($hexadecimal);
+
+        $this->assertEquals($expected, $decimal);
+    }
 }

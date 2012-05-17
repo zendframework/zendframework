@@ -27,7 +27,7 @@ class BlockCipher
 {
     const KEY_DERIV_HMAC = 'sha256';
     /**
-     * Simmetric cipher
+     * Symmetric cipher
      *
      * @var SymmetricInterface
      */
@@ -104,25 +104,26 @@ class BlockCipher
     /**
      * Set the symmetric cipher broker
      *
-     * @param  string|roker $broker
-     * @return void
+     * @param  string|SymmetricBroker $broker
      */
     public static function setSymmetricBroker($broker)
     {
         if (is_string($broker)) {
             if (!class_exists($broker)) {
-                throw new Exception\InvalidArgumentException(sprintf(
-                                                                 'Unable to locate symmetric cipher broker of class "%s"',
-                                                                 $broker
-                                                             ));
+                throw new Exception\InvalidArgumentException(
+                    sprintf(
+                        'Unable to locate symmetric cipher broker of class "%s"',
+                        $broker
+                    ));
             }
             $broker = new $broker();
         }
         if (!$broker instanceof SymmetricBroker) {
-            throw new Exception\InvalidArgumentException(sprintf(
-                                                             'Symmetric cipher broker must extend SymmetricBroker; received "%s"',
-                                                             (is_object($broker) ? get_class($broker) : gettype($broker))
-                                                         ));
+            throw new Exception\InvalidArgumentException(
+                sprintf(
+                    'Symmetric cipher broker must extend SymmetricBroker; received "%s"',
+                    (is_object($broker) ? get_class($broker) : gettype($broker))
+                ));
         }
         self::$symmetricBroker = $broker;
     }
@@ -175,6 +176,7 @@ class BlockCipher
      * Enable/disable the binary output
      *
      * @param boolean $value
+     * @return BlockCipher
      */
     public function setBinaryOutput($value)
     {

@@ -22,11 +22,11 @@ class Rsa
     const BINARY = 'binary';
     const BASE64 = 'base64';
     /**
-     * @var string
+     * @var string|Rsa\PrivateKey
      */
     protected $_privateKey;
     /**
-     * @var string
+     * @var Rsa\PublicKey
      */
     protected $_publicKey;
     /**
@@ -58,12 +58,12 @@ class Rsa
      * Class constructor
      *
      * @param array $options
-     * @throws Zend\Crypt\Rsa\Exception
+     * @throws Rsa\Exception\RuntimeException
      */
     public function __construct(array $options = null)
     {
         if (!extension_loaded('openssl')) {
-            throw new \Zend\Crypt\Rsa\Exception('Zend_Crypt_Rsa requires openssl extention to be loaded.');
+            throw new Rsa\Exception\RuntimeException('Zend\Crypt\PublicKey\Rsa requires openssl extension to be loaded.');
         }
 
         // Set _hashAlgorithm property when we are sure, that openssl extension is loaded
@@ -109,7 +109,7 @@ class Rsa
     /**
      * Get the private key
      *
-     * @return string
+     * @return Rsa\PrivateKey
      */
     public function getPrivateKey()
     {
@@ -119,7 +119,7 @@ class Rsa
     /**
      * Get the public key
      *
-     * @return string
+     * @return Rsa\PublicKey
      */
     public function getPublicKey()
     {
@@ -129,9 +129,9 @@ class Rsa
     /**
      * Sign
      *
-     * @param  string     $data
-     * @param  PrivateKey $privateKey
-     * @param  string     $format
+     * @param  string         $data
+     * @param  Rsa\PrivateKey $privateKey
+     * @param  string         $format
      * @return string
      */
     public function sign($data, Rsa\PrivateKey $privateKey = null, $format = null)
@@ -175,9 +175,9 @@ class Rsa
     /**
      * Encrypt
      *
-     * @param string             $data
-     * @param Zend\Crypt\Rsa\Key $key
-     * @param string             $format
+     * @param string  $data
+     * @param Rsa\Key $key
+     * @param string  $format
      * @return string
      */
     public function encrypt($data, Rsa\Key $key, $format = null)
@@ -197,9 +197,9 @@ class Rsa
     /**
      * Decrypt
      *
-     * @param string              $data
-     * @param \Zend\Crypt\Rsa\Key $key
-     * @param string              $format
+     * @param string  $data
+     * @param Rsa\Key $key
+     * @param string  $format
      * @return string
      */
     public function decrypt($data, Rsa\Key $key, $format = null)
@@ -263,7 +263,7 @@ class Rsa
         try {
             $this->_privateKey = new Rsa\PrivateKey($this->_pemString, $this->_passPhrase);
             $this->_publicKey  = $this->_privateKey->getPublicKey();
-        } catch (Exception $e) {
+        } catch (Rsa\Exception\RuntimeException $e) {
             $this->_privateKey = null;
             $this->_publicKey  = new Rsa\PublicKey($this->_pemString);
         }

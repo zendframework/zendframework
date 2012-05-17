@@ -7,13 +7,14 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Crypt
  */
+
 namespace Zend\Crypt\Symmetric;
 
 use Traversable;
 use Zend\Stdlib\ArrayUtils;
 
 /**
- * Simmetric encryption using the Mcrypt extension
+ * Symmetric encryption using the Mcrypt extension
  *
  * NOTE: DO NOT USE only this class to encrypt data.
  * This class doesn't provide authentication and integrity check over the data.
@@ -48,7 +49,7 @@ class Mcrypt implements SymmetricInterface
     /**
      * Encryption mode
      *
-     * @var sting
+     * @var string
      */
     protected $mode = 'cbc';
     /**
@@ -98,7 +99,7 @@ class Mcrypt implements SymmetricInterface
     /**
      * Constructor
      *
-     * @param array $options
+     * @param array|Traversable $options
      */
     public function __construct($options = array())
     {
@@ -215,7 +216,7 @@ class Mcrypt implements SymmetricInterface
      * Set the encryption key
      *
      * @param  string $key
-     * @return BlockCipher
+     * @return Mcrypt
      */
     public function setKey($key)
     {
@@ -243,7 +244,7 @@ class Mcrypt implements SymmetricInterface
      * Set the encryption algorithm (cipher)
      *
      * @param  string $algo
-     * @return BlockCipher
+     * @return Mcrypt
      */
     public function setAlgorithm($algo)
     {
@@ -269,8 +270,8 @@ class Mcrypt implements SymmetricInterface
     /**
      * Set the padding object
      *
-     * @param  PaddingInterface $padding
-     * @return BlockCipher
+     * @param  Padding\PaddingInterface $padding
+     * @return Mcrypt
      */
     public function setPadding(Padding\PaddingInterface $padding)
     {
@@ -281,7 +282,7 @@ class Mcrypt implements SymmetricInterface
     /**
      * Get the padding object
      *
-     * @return PaddingInterface
+     * @return Padding\PaddingInterface
      */
     public function getPadding()
     {
@@ -377,8 +378,8 @@ class Mcrypt implements SymmetricInterface
     /**
      * Set the salt (IV)
      *
-     * @param  string $iv
-     * @return BlockCipher
+     * @param  string $salt
+     * @return Mcrypt
      */
     public function setSalt($salt)
     {
@@ -408,7 +409,7 @@ class Mcrypt implements SymmetricInterface
      * Set the cipher mode
      *
      * @param  string $mode
-     * @return BlockCipher
+     * @return Mcrypt
      */
     public function setMode($mode)
     {

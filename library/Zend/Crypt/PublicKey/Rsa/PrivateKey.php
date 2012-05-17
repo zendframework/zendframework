@@ -38,11 +38,11 @@ class PrivateKey extends Key
 
     /**
      * @param string $passPhrase
-     * @throws Zend\Crypt\Exception
+     * @throws Exception\RuntimeException
      */
     protected function _parse($passPhrase)
     {
-        $result = openssl_get_privatekey($this->_pemString, $passPhrase);
+        $result = openssl_pkey_get_private($this->_pemString, $passPhrase);
         if (!$result) {
             throw new Exception\RuntimeException('Unable to load private key');
         }

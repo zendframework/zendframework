@@ -33,6 +33,9 @@ use Zend\Crypt\Key\Derivation\PBKDF2;
 class PBKDF2Test extends \PHPUnit_Framework_TestCase
 {
 
+    /** @var string */
+    public $salt;
+
     public function setUp()
     {
         $this->salt = '12345678901234567890123456789012';

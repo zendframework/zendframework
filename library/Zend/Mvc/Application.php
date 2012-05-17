@@ -103,7 +103,7 @@ class Application implements
     protected $serviceManager = null;
 
     /**
-     * @var \Zend\Module\Manager
+     * @var \Zend\ModuleManager\ModuleManager
      */
     protected $moduleManager;
 

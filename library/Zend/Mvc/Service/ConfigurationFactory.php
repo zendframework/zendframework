@@ -38,7 +38,7 @@ class ConfigurationFactory implements FactoryInterface
      * Create the application configuration service
      *
      * Retrieves the Module Manager from the service locator, and executes 
-     * {@link Zend\Module\Manager::loadModules()}.
+     * {@link Zend\ModuleManager\ModuleManager::loadModules()}.
      *
      * It then retrieves the config listener from the module manager, and from
      * that the merged configuration.

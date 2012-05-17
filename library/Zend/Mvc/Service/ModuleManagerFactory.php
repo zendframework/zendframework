@@ -21,11 +21,11 @@
 
 namespace Zend\Mvc\Service;
 
-use Zend\Module\Listener\DefaultListenerAggregate;
-use Zend\Module\Listener\ListenerOptions;
-use Zend\Module\Listener\ServiceListener;
-use Zend\Module\Manager as ModuleManager;
-use Zend\Module\ModuleEvent;
+use Zend\ModuleManager\Listener\DefaultListenerAggregate;
+use Zend\ModuleManager\Listener\ListenerOptions;
+use Zend\ModuleManager\Listener\ServiceListener;
+use Zend\ModuleManager\ModuleEvent;
+use Zend\ModuleManager\ModuleManager;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 

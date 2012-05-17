@@ -28,7 +28,7 @@ use Zend\Config\Config;
 use Zend\EventManager\EventManager;
 use Zend\Http\Request;
 use Zend\Http\PhpEnvironment\Response;
-use Zend\Module\Manager as ModuleManager;
+use Zend\Modulemanager\ModuleManager;
 use Zend\Mvc\Application;
 use Zend\Mvc\Router;
 use Zend\Mvc\Service\ServiceManagerConfiguration;
@@ -93,7 +93,7 @@ class ApplicationTest extends TestCase
                 continue;
             }
             $object = array_shift($callback);
-            if (!$object instanceof \Zend\Module\Listener\ConfigListener) {
+            if (!$object instanceof \Zend\ModuleManager\Listener\ConfigListener) {
                 continue;
             }
             return $object;

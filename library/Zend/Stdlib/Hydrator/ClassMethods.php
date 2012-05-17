@@ -65,23 +65,21 @@ class ClassMethods implements HydratorInterface
             ));
         }
         
-        $attributes = array();
-        $methods = get_class_methods($object);
-        foreach($methods as $method) {
-            if(preg_match('/^set[A-Z]{1}\w*/', $method)) {
-                $attributes[] = substr($method, 3);
-            }
-        }
-        
         $transform = function($letters)
         {
             $letter = array_shift($letters);
             return '_' . strtolower($letter);
         };
-        foreach($attributes as &$attribute) {
-            $attribute = lcfirst($attribute);
-            if (!$this->useCamelCase) {
-                $attribute = preg_replace_callback('/([A-Z])/', $transform, $attribute);
+        $attributes = array();
+        $methods = get_class_methods($object);
+        foreach($methods as $method) {
+            if(preg_match('/^get[A-Z]{1}\w*/', $method)) {
+                $attribute = substr($method, 3);
+                $attribute = lcfirst($attribute);
+                if (!$this->useCamelCase) {
+                    $attribute = preg_replace_callback('/([A-Z])/', $transform, $attribute);
+                }
+                 $attributes[$attribute] = $object->$method();
             }
         }
         

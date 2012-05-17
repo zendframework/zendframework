@@ -513,7 +513,7 @@ class ServiceManager implements ServiceLocatorInterface
             $instance = call_user_func($callable, $this, $cName, $rName);
         } catch (\Exception $e) {
             throw new Exception\ServiceNotCreatedException(
-                'Abstract factory raised an exception; no instance returned',
+                sprintf('Abstract factory raised an exception when creating "%s"; no instance returned', $rName),
                 $e->getCode(),
                 $e
             );

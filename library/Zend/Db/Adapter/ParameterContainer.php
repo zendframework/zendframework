@@ -174,7 +174,7 @@ class ParameterContainer implements \Iterator, \ArrayAccess
             $name = $this->positions[$name];
         }
         if (!array_key_exists($name, $this->data)) {
-            throw new \InvalidArgumentException('Data does not exist for this name/position');
+            throw new Exception\InvalidArgumentException('Data does not exist for this name/position');
         }
         return $this->errata[$name];
     }
@@ -204,7 +204,7 @@ class ParameterContainer implements \Iterator, \ArrayAccess
             $name = $this->positions[$name];
         }
         if (!array_key_exists($name, $this->errata)) {
-            throw new \InvalidArgumentException('Data does not exist for this name/position');
+            throw new Exception\InvalidArgumentException('Data does not exist for this name/position');
         }
         $this->errata[$name] = null;
     }

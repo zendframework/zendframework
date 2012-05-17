@@ -21,7 +21,8 @@
 
 namespace Zend\Db\Adapter\Driver\Sqlsrv;
 
-use Zend\Db\Adapter\Driver\ConnectionInterface;
+use Zend\Db\Adapter\Driver\ConnectionInterface,
+    Zend\Db\Adapter\Exception;
 
 /**
  * @category   Zend
@@ -129,7 +130,7 @@ class Connection implements ConnectionInterface
     public function setResource($resource)
     {
         if (get_resource_type($resource) !== 'SQL Server Connection') {
-            throw new \Exception('Resource provided was not of type SQL Server Connection');
+            throw new Exception\InvalidArgumentException('Resource provided was not of type SQL Server Connection');
         }
         $this->resource = $resource;
         return $this;
@@ -186,8 +187,11 @@ class Connection implements ConnectionInterface
         $this->resource = sqlsrv_connect($serverName, $params);
 
         if (!$this->resource) {
-            $prevErrorException = new ErrorException(sqlsrv_errors());
-            throw new \Exception('Connect Error', null, $prevErrorException);
+            throw new Exception\RuntimeException(
+                'Connect Error',
+                null,
+                new Exception\ErrorException(sqlsrv_errors())
+            );
         }
 
     }
@@ -277,7 +281,11 @@ class Connection implements ConnectionInterface
             $errors = sqlsrv_errors();
             // ignore general warnings
             if ($errors[0]['SQLSTATE'] != '01000') {
-                throw new \RuntimeException($errors[0]['message']);
+                throw new Exception\RuntimeException(
+                    'An exception occured while trying to execute the provided $sql',
+                    null,
+                    new Exception\ErrorException($errors)
+                );
             }
         }
 

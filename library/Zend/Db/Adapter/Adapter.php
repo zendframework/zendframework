@@ -91,7 +91,7 @@ class Adapter
         }
 
         if (!$driver instanceof Driver\DriverInterface) {
-            throw new \InvalidArgumentException(
+            throw new Exception\InvalidArgumentException(
                 'The supplied or instantiated driver object does not implement Zend\Db\Adapter\Driver\DriverInterface'
             );
         }
@@ -116,7 +116,7 @@ class Adapter
     public function getDriver()
     {
         if ($this->driver == null) {
-            throw new \Exception('Driver has not been set or configured for this adapter.');
+            throw new Exception\RuntimeException('Driver has not been set or configured for this adapter.');
         }
         return $this->driver;
     }
@@ -129,7 +129,7 @@ class Adapter
     public function setQueryMode($queryMode)
     {
         if (!in_array($queryMode, array(self::QUERY_MODE_EXECUTE, self::QUERY_MODE_PREPARE))) {
-            throw new \InvalidArgumentException(
+            throw new Exception\InvalidArgumentException(
                 sprintf('Query Mode must be one of "%s" or "%s"', self::QUERY_MODE_EXECUTE, self::QUERY_MODE_PREPARE)
             );
         }
@@ -161,7 +161,7 @@ class Adapter
      *
      * @param string $sql
      * @param string|array $parametersOrQueryMode
-     * @return Driver\StatementInterface
+     * @return Driver\StatementInterface|ResultSet\ResultSet
      */
     public function query($sql, $parametersOrQueryMode = self::QUERY_MODE_PREPARE)
     {
@@ -172,7 +172,7 @@ class Adapter
             $mode = self::QUERY_MODE_PREPARE;
             $parameters = $parametersOrQueryMode;
         } else {
-            throw new \Exception('Parameter 2 to this method must be a flag, an array, or ParameterContainer');
+            throw new Exception\InvalidArgumentException('Parameter 2 to this method must be a flag, an array, or ParameterContainer');
         }
 
         if ($mode == self::QUERY_MODE_PREPARE) {
@@ -245,7 +245,7 @@ class Adapter
             case 'platform':
                 return $this->platform;
             default:
-                throw new \InvalidArgumentException('Invalid magic property on adapter');
+                throw new Exception\InvalidArgumentException('Invalid magic property on adapter');
         }
 
     }
@@ -258,7 +258,7 @@ class Adapter
     protected function createDriverFromParameters(array $parameters)
     {
         if (!isset($parameters['driver']) || !is_string($parameters['driver'])) {
-            throw new \InvalidArgumentException('createDriverFromParameters() expects a "driver" key to be present inside the parameters');
+            throw new Exception\InvalidArgumentException('createDriverFromParameters() expects a "driver" key to be present inside the parameters');
         }
 
         $driverName = strtolower($parameters['driver']);
@@ -277,7 +277,7 @@ class Adapter
         }
 
         if (!isset($driver) || !$driver instanceof Driver\DriverInterface) {
-            throw new \InvalidArgumentException('DriverInterface expected', null, null);
+            throw new Exception\InvalidArgumentException('DriverInterface expected', null, null);
         }
 
         return $driver;

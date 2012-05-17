@@ -268,36 +268,36 @@ class ServiceManager implements ServiceLocatorInterface
         if (isset($this->instances[$cName])) {
             $instance = $this->instances[$cName];
         } 
-        
-        if (!$instance && $usePeeringServiceManagers) {
+
+        $selfException = null;
+
+        if (!$instance) {
             try {
                 $instance = $this->create(array($cName, $rName));
-            } catch (Exception\ServiceNotCreatedException $e) {
-                // do nothing -- we'll try to grab from the peering manager next
-            }
-        } elseif (!$instance) {
-            // No try/catch here; this _should_ raise an exception, as there is
-            // no peering manager
-            $instance = $this->create(array($cName, $rName));
-        }
-
-        if (!$instance && $usePeeringServiceManagers) {
-            foreach ($this->peeringServiceManagers as $peeringServiceManager) {
-                try {
-                    $instance = $peeringServiceManager->get($name);
-                    break;
-                } catch (Exception\ServiceNotCreatedException $e) {
-                    continue;
+            } catch (Exception\ServiceNotCreatedException $selfException) {
+                foreach ($this->peeringServiceManagers as $peeringServiceManager) {
+                    try {
+                        $instance = $peeringServiceManager->get($name);
+                        break;
+                    } catch (Exception\ServiceNotCreatedException $e) {
+                        continue;
+                    }
                 }
             }
+        }
+
+        if (!$instance) {
 
             // Still no instance? raise an exception
             if (!$instance) {
                 throw new Exception\ServiceNotCreatedException(sprintf(
-                    '%s was unable to fetch or create an instance for %s',
-                    __METHOD__,
-                    $name
-                ));
+                        '%s was unable to fetch or create an instance for %s',
+                        __METHOD__,
+                        $name
+                    ),
+                    null,
+                    ($selfException === null) ? null : $selfException->getPrevious()
+                );
             }
         }
 

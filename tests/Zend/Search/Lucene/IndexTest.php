@@ -20,13 +20,10 @@
  */
 
 namespace ZendTest\Search\Lucene;
+
 use Zend\Search\Lucene;
 use Zend\Search\Lucene\Document;
 use Zend\Search\Lucene\Index;
-
-/**
- * Zend_Search_Lucene
- */
 
 /**
  * @category   Zend
@@ -49,7 +46,7 @@ class IndexTest extends \PHPUnit_Framework_TestCase
             return;
         }
 
-        // remove files from temporary direcytory
+        // remove files from temporary directory
         $dir = opendir($dirName);
         while (($file = readdir($dir)) !== false) {
             if (!is_dir($dirName . '/' . $file)) {

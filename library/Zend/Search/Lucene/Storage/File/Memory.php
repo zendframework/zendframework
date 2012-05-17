@@ -87,7 +87,7 @@ class Memory extends AbstractFile
      * @param integer $whence
      * @return integer
      */
-    public function seek($offset, $whence=\SEEK\SET)
+    public function seek($offset, $whence=SEEK_SET)
     {
         switch ($whence) {
             case SEEK_SET:

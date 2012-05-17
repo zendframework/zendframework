@@ -20,15 +20,8 @@
  */
 
 namespace ZendTest\Search\Lucene\Index;
+
 use Zend\Search\Lucene\Index;
-
-/**
- * Zend_Search_Lucene_Index_Term
- */
-
-/**
- * PHPUnit test case
- */
 
 /**
  * @category   Zend

@@ -114,7 +114,7 @@ class Term extends AbstractQuery
      * Constructs an appropriate Weight implementation for this query.
      *
      * @param \Zend\Search\Lucene\SearchIndexInterface $reader
-     * @return \Zend\Search\Lucene\Search\Weight\Weight
+     * @return \Zend\Search\Lucene\Search\Weight\Term
      */
     public function createWeight(Lucene\SearchIndexInterface $reader)
     {

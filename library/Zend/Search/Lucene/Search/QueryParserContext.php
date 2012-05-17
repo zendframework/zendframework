@@ -23,6 +23,7 @@ namespace Zend\Search\Lucene\Search;
 
 use Zend\Search\Lucene,
 	Zend\Search\Lucene\Exception\UnexpectedValueException,
+    Zend\Search\Lucene\Exception\ExceptionInterface,
 	Zend\Search\Lucene\Search\Exception\QueryParserException;
 
 /**
@@ -78,7 +79,7 @@ class QueryParserContext
      * Entries signs.
      * Used in GM_SIGNS grouping mode
      *
-     * @var arrays
+     * @var array
      */
     private $_signs = array();
 
@@ -314,7 +315,7 @@ class QueryParserContext
             }
 
             $conjuctions = $expressionRecognizer->finishExpression();
-        } catch (\Zend\Search\Lucene\Exception $e) {
+        } catch (ExceptionInterface $e) {
             // It's query syntax error message and it should be user friendly. So FSM message is omitted
             throw new QueryParserException('Boolean expression error.', 0, $e);
         }

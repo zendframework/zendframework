@@ -257,7 +257,6 @@ class Wildcard extends AbstractQuery
      *
      * @param \Zend\Search\Lucene\SearchIndexInterface $reader
      * @throws \Zend\Search\Lucene\Exception\UnsupportedMethodCallException
-     * @return \Zend\Search\Lucene\Search\Weight\Weight
      */
     public function createWeight(Lucene\SearchIndexInterface $reader)
     {

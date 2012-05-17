@@ -220,6 +220,9 @@ class Headers implements Iterator, Countable
         } else {
             $headerName = $headerFieldNameOrLine;
             $headerKey = str_replace(array('-', '_', ' ', '.'), '', strtolower($headerFieldNameOrLine));
+            if (is_array($fieldValue)) {
+                $fieldValue = implode(', ', $fieldValue);
+            }
             $line = $headerFieldNameOrLine . ': ' . $fieldValue;
         }
 

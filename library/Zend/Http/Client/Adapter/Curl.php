@@ -336,7 +336,7 @@ class Curl implements HttpAdapter, StreamInterface
 
             default:
                 // For now, through an exception for unsupported request methods
-                throw new AdapterException\InvalidArgumentException("Method currently not supported");
+                throw new AdapterException\InvalidArgumentException("Method '$method' currently not supported");
         }
 
         if (is_resource($body) && $curlMethod != CURLOPT_UPLOAD) {
@@ -365,7 +365,9 @@ class Curl implements HttpAdapter, StreamInterface
         }
 
         // set additional headers
-        $headers['Accept'] = '';
+        if (!isset($headers['Accept'])) {
+            $headers['Accept'] = '';
+        }
         $curlHeaders = array();
         foreach ($headers as $key => $value) {
             $curlHeaders[] = $key . ': ' . $value;

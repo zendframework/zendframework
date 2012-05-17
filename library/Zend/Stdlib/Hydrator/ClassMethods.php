@@ -74,6 +74,11 @@ class ClassMethods implements HydratorInterface
         $methods = get_class_methods($object);
         foreach($methods as $method) {
             if(preg_match('/^get[A-Z]{1}\w*/', $method)) {
+                // setter verification
+                $setter = preg_replace('/^get/', 'set', $method);
+                if(!in_array($setter, $methods)) {
+                    continue;
+                }
                 $attribute = substr($method, 3);
                 $attribute = lcfirst($attribute);
                 if (!$this->useCamelCase) {

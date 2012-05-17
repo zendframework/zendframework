@@ -24,7 +24,8 @@ namespace ZendTest\Stdlib;
 
 use Zend\Stdlib\Hydrator\ClassMethods;
 use ZendTest\Stdlib\TestAsset\ClassMethodsCamelCase,
-    ZendTest\Stdlib\TestAsset\ClassMethodsUnderscore;
+    ZendTest\Stdlib\TestAsset\ClassMethodsUnderscore,
+    ZendTest\Stdlib\TestAsset\ClassMethodsCamelCaseMissing;
 
 /**
  * @category   Zend
@@ -39,6 +40,7 @@ class HydratorTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->classMethodsCamelCase = new ClassMethodsCamelCase();
+        $this->classMethodsCamelCaseMissing = new ClassMethodsCamelCaseMissing();
         $this->classMethodsUnderscore = new ClassMethodsUnderscore();
     }
     
@@ -46,6 +48,8 @@ class HydratorTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertEquals($this->classMethodsCamelCase->getFooBar(), '1');
         $this->assertEquals($this->classMethodsCamelCase->getFooBarBaz(), '2');
+        $this->assertEquals($this->classMethodsUnderscore->getFooBar(), '1');
+        $this->assertEquals($this->classMethodsUnderscore->getFooBarBaz(), '2');
     }
 
     public function testHydratorClassMethodsCamelCase()
@@ -59,6 +63,19 @@ class HydratorTest extends \PHPUnit_Framework_TestCase
         $hydrator->hydrate(array('fooBar' => 'foo', 'fooBarBaz' => 'bar'), $this->classMethodsCamelCase);
         $this->assertEquals($this->classMethodsCamelCase->getFooBar(), 'foo');
         $this->assertEquals($this->classMethodsCamelCase->getFooBarBaz(), 'bar');
+    }
+    
+    public function testHydratorClassMethodsCamelCaseWithSetterMissing()
+    {
+        $hydrator = new ClassMethods(true);
+        $datas = $hydrator->extract($this->classMethodsCamelCaseMissing);
+        $this->assertTrue(isset($datas['fooBar']));
+        $this->assertEquals($datas['fooBar'], '1');
+        $this->assertFalse(isset($datas['fooBarBaz']));
+        $this->assertFalse(isset($datas['foo_bar']));
+        $hydrator->hydrate(array('fooBar' => 'foo'), $this->classMethodsCamelCaseMissing);
+        $this->assertEquals($this->classMethodsCamelCaseMissing->getFooBar(), 'foo');
+        $this->assertEquals($this->classMethodsCamelCaseMissing->getFooBarBaz(), '2');
     }
     
     public function testHydratorClassMethodsUnderscore()

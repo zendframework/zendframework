@@ -1,120 +1,111 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Db
- * @subpackage Metadata
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Db
  */
-
 namespace Zend\Db\Metadata\Object;
 
 /**
  * @category   Zend
  * @package    Zend_Db
  * @subpackage Metadata
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class ColumnObject
 {
-    /*
-    protected $catalogName = null;
-    protected $schemaName = null;
-    */
+
     /**
      *
      * @var string
      */
     protected $name = null;
+
     /**
      *
      * @var string
      */
     protected $tableName = null;
+
     /**
      *
      * @var string
      */
     protected $schemaName = null;
+
     /**
      *
      * @var 
      */
     protected $ordinalPosition = null;
+
     /**
      *
      * @var string
      */
     protected $columnDefault = null;
+
     /**
      *
      * @var boolean 
      */
     protected $isNullable = null;
+
     /**
      *
      * @var string
      */
     protected $dataType = null;
+
     /**
      *
      * @var integer
      */
     protected $characterMaximumLength = null;
+
     /**
      *
      * @var integer
      */
     protected $characterOctetLength = null;
+
     /**
      *
      * @var type
      */
     protected $numericPrecision = null;
+
     /**
      *
      * @var type 
      */
     protected $numericScale = null;
-//    protected $characterSetName = null;
-//    protected $collationName = null;
+
     /**
      *
      * @var array
      */
     protected $errata = array();
 
-
     /*
     public function getCatalogName()
     {
         return $this->catalogName;
     }
-    
+
     public function setCatalogName($catalogName)
     {
         $this->catalogName = $catalogName;
         return $this;
     }
-    
+
     public function getSchemaName()
     {
         return $this->schemaName;
     }
-    
+
     public function setSchemaName($schemaName)
     {
         $this->schemaName = $schemaName;
@@ -135,6 +126,7 @@ class ColumnObject
         $this->setTableName($tableName);
         $this->setSchemaName($schemaName);
     }
+
     /**
      * Set name
      * 
@@ -144,6 +136,7 @@ class ColumnObject
     {
         $this->name = $name;
     }
+
     /**
      * Get name
      * 
@@ -174,6 +167,7 @@ class ColumnObject
         $this->tableName = $tableName;
         return $this;
     }
+
     /**
      * Set schema name
      * 
@@ -183,6 +177,7 @@ class ColumnObject
     {
         $this->schemaName = $schemaName;
     }
+
     /**
      * Get schema name
      * 
@@ -364,7 +359,6 @@ class ColumnObject
 //        return $this;
 //    }
 
-
     /**
      * @return the $errata
      */
@@ -383,8 +377,5 @@ class ColumnObject
         $this->errata[$errataName] = $errataValue;
         return $this;
     }
-
-
-
 
 }

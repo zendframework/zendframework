@@ -259,4 +259,18 @@ class PluginClassLoaderTest extends \PHPUnit_Framework_TestCase
         $loader->registerPlugin('loader', __CLASS__);
         $this->assertEquals(__CLASS__, $loader->getClassName('loader'));
     }
+
+    public function testRegisterPluginsCanAcceptArrayElementWithClassNameProvidingAMap()
+    {
+        $this->loader->registerPlugins(array('ZendTest\Loader\TestAsset\TestPluginMap'));
+        $pluginMap = new TestAsset\TestPluginMap;
+        $this->assertEquals($pluginMap->map, $this->loader->getRegisteredPlugins());
+    }
+
+    public function testRegisterPluginsCanAcceptArrayElementWithObjectProvidingAMap()
+    {
+        $pluginMap = new TestAsset\TestPluginMap;
+        $this->loader->registerPlugins(array($pluginMap));
+        $this->assertEquals($pluginMap->map, $this->loader->getRegisteredPlugins());
+    }
 }

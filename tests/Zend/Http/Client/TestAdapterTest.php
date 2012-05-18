@@ -67,14 +67,14 @@ class TestAdapterTest extends \PHPUnit_Framework_TestCase
     {
         $this->setExpectedException(
             'Zend\Http\Client\Adapter\Exception\InvalidArgumentException',
-            'Array or Zend\Config\Config object expected');
+            'Array or Traversable object expected');
 
-        $this->adapter->setConfig('foo');
+        $this->adapter->setOptions('foo');
     }
 
     public function testSetConfigReturnsQuietly()
     {
-        $this->adapter->setConfig(array('foo' => 'bar'));
+        $this->adapter->setOptions(array('foo' => 'bar'));
     }
 
     public function testConnectReturnsQuietly()
@@ -95,7 +95,7 @@ class TestAdapterTest extends \PHPUnit_Framework_TestCase
             // Make a connection that will fail
             $this->adapter->connect('http://foo');
             $this->fail();
-        } catch (\Zend\Http\Client\Adapter\Exception $e) {
+        } catch (\Zend\Http\Client\Adapter\Exception\RuntimeException $e) {
             // Connect again to see that the next request does not fail
             $this->adapter->connect('http://foo');
         }
@@ -192,7 +192,7 @@ class TestAdapterTest extends \PHPUnit_Framework_TestCase
                 $this->adapter->setResponseIndex($i);
                 $this->fail();
             } catch (\Exception $e) {
-                $this->assertInstanceOf('Zend\\Http\\Client\\Adapter\\Exception', $e);
+                $this->assertInstanceOf('Zend\\Http\\Client\\Adapter\\Exception\\OutOfRangeException', $e);
                 $this->assertRegexp('/out of range/i', $e->getMessage());
             }
         }

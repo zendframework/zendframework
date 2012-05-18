@@ -23,7 +23,7 @@ namespace Zend\Mvc\Router\Http;
 
 use Traversable,
     Zend\Stdlib\ArrayUtils,
-    Zend\Stdlib\RequestDescription as Request,
+    Zend\Stdlib\RequestInterface as Request,
     Zend\Mvc\Router\Exception;
 
 /**
@@ -35,10 +35,10 @@ use Traversable,
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @see        http://manuals.rubyonrails.com/read/chapter/65
  */
-class Literal implements Route
+class Literal implements RouteInterface
 {
     /**
-     * Route to match.
+     * RouteInterface to match.
      *
      * @var string
      */
@@ -64,7 +64,7 @@ class Literal implements Route
     }
 
     /**
-     * factory(): defined by Route interface.
+     * factory(): defined by RouteInterface interface.
      *
      * @see    Route::factory()
      * @param  array|\Traversable $options
@@ -91,7 +91,7 @@ class Literal implements Route
     }
 
     /**
-     * match(): defined by Route interface.
+     * match(): defined by RouteInterface interface.
      *
      * @see    Route::match()
      * @param  Request  $request
@@ -125,7 +125,7 @@ class Literal implements Route
     }
 
     /**
-     * assemble(): Defined by Route interface.
+     * assemble(): Defined by RouteInterface interface.
      *
      * @see    Route::assemble()
      * @param  array $params
@@ -138,7 +138,7 @@ class Literal implements Route
     }
 
     /**
-     * getAssembledParams(): defined by Route interface.
+     * getAssembledParams(): defined by RouteInterface interface.
      *
      * @see    Route::getAssembledParams
      * @return array

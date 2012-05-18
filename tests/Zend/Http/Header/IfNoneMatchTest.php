@@ -10,7 +10,7 @@ class IfNoneMatchTest extends \PHPUnit_Framework_TestCase
     public function testIfNoneMatchFromStringCreatesValidIfNoneMatchHeader()
     {
         $ifNoneMatchHeader = IfNoneMatch::fromString('If-None-Match: xxx');
-        $this->assertInstanceOf('Zend\Http\Header\HeaderDescription', $ifNoneMatchHeader);
+        $this->assertInstanceOf('Zend\Http\Header\HeaderInterface', $ifNoneMatchHeader);
         $this->assertInstanceOf('Zend\Http\Header\IfNoneMatch', $ifNoneMatchHeader);
     }
 

@@ -26,9 +26,6 @@ use Zend\Crypt;
  * An Amazon EC2 interface that allows yout to run, terminate, reboot and describe Amazon
  * Ec2 Instances.
  *
- * @uses       Zend_Crypt_Hmac
- * @uses       Zend_Json
- * @uses       Zend_Service_Amazon_Ec2_Abstract
  * @category   Zend
  * @package    Zend_Service_Amazon
  * @subpackage Ec2

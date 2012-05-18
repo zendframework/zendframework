@@ -61,7 +61,7 @@ class HtmlObjectTest extends \PHPUnit_Framework_TestCase
 
     public function testViewObjectIsSet()
     {
-        $this->assertInstanceof('Zend\View\Renderer', $this->helper->getView());
+        $this->assertInstanceof('Zend\View\Renderer\RendererInterface', $this->helper->getView());
     }
 
     public function testMakeHtmlObjectWithoutAttribsWithoutParams()

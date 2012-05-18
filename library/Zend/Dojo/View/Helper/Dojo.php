@@ -23,7 +23,7 @@ namespace Zend\Dojo\View\Helper;
 
 use Zend\Dojo\View\Exception,
     Zend\Registry,
-    Zend\View\Renderer as View,
+    Zend\View\Renderer\RendererInterface as View,
     Zend\View\Helper\AbstractHelper as AbstractViewHelper;
 
 /**
@@ -32,9 +32,6 @@ use Zend\Dojo\View\Exception,
  * Allows specifying stylesheets, path to dojo, module paths, and onLoad
  * events.
  *
- * @uses       \Zend\Dojo\View\Exception
- * @uses       \Zend\Dojo\View\Helper\DojoContainer
- * @uses       \Zend\Registry
  * @package    Zend_Dojo
  * @subpackage View
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -50,7 +47,7 @@ class Dojo extends AbstractViewHelper
     /**#@-*/
 
     /**
-     * @var \Zend\View\Renderer
+     * @var View
      */
     public $view;
 
@@ -86,7 +83,7 @@ class Dojo extends AbstractViewHelper
     /**
      * Set view object
      *
-     * @param  Zend\View\Renderer $view
+     * @param  View $view
      * @return void
      */
     public function setView(View $view)
@@ -111,7 +108,7 @@ class Dojo extends AbstractViewHelper
      * @param  string $method
      * @param  array $args
      * @return mixed
-     * @throws \Zend\Dojo\View\Exception For invalid method calls
+     * @throws \Zend\Dojo\View\Exception\BadMethodCallException For invalid method calls
      */
     public function __call($method, $args)
     {

@@ -21,7 +21,7 @@
 
 namespace ZendTest\Cache\Storage\Adapter;
 
-use Zend\Cache\Storage\Adapter,
+use Zend\Cache\Storage\Adapter\AdapterInterface as Adapter,
     Zend\Cache\Storage\Adapter\AdapterOptions,
     Zend\Cache\Storage\Adapter\AbstractZendServer;
 
@@ -56,7 +56,6 @@ class AbstractZendServerTest extends \PHPUnit_Framework_TestCase
         $this->assertInternalType('string', $options->getNamespace());
         $this->assertInternalType('string', $options->getNamespacePattern());
         $this->assertInternalType('string', $options->getKeyPattern());
-        $this->assertInternalType('boolean', $options->getIgnoreMissingItems());
     }
 
     public function testGetWithDefaultNamespace()

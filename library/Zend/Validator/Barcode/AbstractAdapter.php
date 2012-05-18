@@ -21,13 +21,12 @@
 namespace Zend\Validator\Barcode;
 
 /**
- * @uses       \Zend\Validator\Barcode\Adapter
  * @category   Zend
  * @package    Zend_Validate
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class AbstractAdapter implements Adapter
+abstract class AbstractAdapter implements AdapterInterface
 {
     /**
      * Allowed options for this adapter

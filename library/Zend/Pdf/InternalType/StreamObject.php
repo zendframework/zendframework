@@ -28,14 +28,6 @@ use Zend\Pdf;
 /**
  * PDF file 'stream object' element implementation
  *
- * @uses       \Zend\Pdf\InternalType\AbstractTypeObject
- * @uses       \Zend\Pdf\InternalType\DictionaryObject
- * @uses       \Zend\Pdf\InternalType\NumericObject
- * @uses       \Zend\Pdf\InternalType\IndirectObject
- * @uses       \Zend\Pdf\InternalType\StreamContent
- * @uses       \Zend\Pdf\Exception
- * @uses       \Zend\Pdf\InternalType\StreamFilter
- * @uses       \Zend\Pdf\InternalType\StreamFilter\Compression;
  * @category   Zend
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Internal
@@ -78,7 +70,7 @@ class StreamObject extends IndirectObject
      * @param integer $genNum
      * @param \Zend\Pdf\ObjectFactory $factory
      * @param \Zend\Pdf\InternalType\DictionaryObject|null $dictionary
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
     public function __construct($val, $objNum, $genNum, ObjectFactory $factory, $dictionary = null)
     {
@@ -175,7 +167,7 @@ class StreamObject extends IndirectObject
     /**
      * Decode stream
      *
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
     private function _decodeStream()
     {
@@ -229,7 +221,7 @@ class StreamObject extends IndirectObject
     /**
      * Encode stream
      *
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
     private function _encodeStream()
     {
@@ -283,7 +275,7 @@ class StreamObject extends IndirectObject
      *
      * @param string $property
      * @return mixed
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
     public function __get($property)
     {

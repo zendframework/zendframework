@@ -20,17 +20,15 @@
  */
 
 namespace Zend\Queue\Adapter;
-use Zend\Queue;
-use Zend\Queue\Message;
+
+use Memcache,
+    Zend\Queue\Queue,
+    Zend\Queue\Message,
+    Zend\Queue\Exception;
 
 /**
  * Class for using connecting to a Memcache-based queuing system
  *
- * @uses       \Memcache
- * @uses       \Zend\Queue\Adapter\AdapterAbstract
- * @uses       \Zend\Queue\Queue
- * @uses       \Zend\Queue\Exception
- * @uses       \Zend\Queue\Message
  * @category   Zend
  * @package    Zend_Queue
  * @subpackage Adapter
@@ -70,14 +68,14 @@ class Memcacheq extends AbstractAdapter
     /**
      * Constructor
      *
-     * @param  array|\Zend\Config\Config $options
+     * @param  array|\Traversable $options
      * @param  null|\Zend\Queue\Queue $queue
      * @return void
      */
-    public function __construct($options, Queue\Queue $queue = null)
+    public function __construct($options, Queue $queue = null)
     {
         if (!extension_loaded('memcache')) {
-            throw new Queue\Exception('Memcache extension does not appear to be loaded');
+            throw new Exception\ExtensionNotLoadedException('Memcache extension does not appear to be loaded');
         }
 
         parent::__construct($options, $queue);
@@ -91,12 +89,12 @@ class Memcacheq extends AbstractAdapter
             $options['port'] = self::DEFAULT_PORT;
         }
 
-        $this->_cache = new \Memcache();
+        $this->_cache = new Memcache();
 
         $result = $this->_cache->connect($options['host'], $options['port']);
 
         if ($result === false) {
-            throw new Queue\Exception('Could not connect to MemcacheQ');
+            throw new Exception\ConnectionException('Could not connect to MemcacheQ');
         }
 
         $this->_host = $options['host'];
@@ -232,9 +230,9 @@ class Memcacheq extends AbstractAdapter
      * @return integer
      * @throws \Zend\Queue\Exception (not supported)
      */
-    public function count(Queue\Queue $queue=null)
+    public function count(Queue $queue=null)
     {
-        throw new Queue\Exception('count() is not supported in this adapter');
+        throw new Exception\UnsupportedMethodCallException('count() is not supported in this adapter');
     }
 
     /********************************************************************
@@ -249,14 +247,14 @@ class Memcacheq extends AbstractAdapter
      * @return \Zend\Queue\Message
      * @throws \Zend\Queue\Exception
      */
-    public function send($message, Queue\Queue $queue=null)
+    public function send($message, Queue $queue=null)
     {
         if ($queue === null) {
             $queue = $this->_queue;
         }
 
         if (!$this->isExists($queue->getName())) {
-            throw new Queue\Exception('Queue does not exist:' . $queue->getName());
+            throw new Exception\QueueNotFoundException('Queue does not exist:' . $queue->getName());
         }
 
         $message = (string) $message;
@@ -269,7 +267,7 @@ class Memcacheq extends AbstractAdapter
 
         $result = $this->_cache->set($queue->getName(), $message, 0, 0);
         if ($result === false) {
-            throw new Queue\Exception('failed to insert message into queue:' . $queue->getName());
+            throw new Exception\RuntimeException('failed to insert message into queue:' . $queue->getName());
         }
 
         $options = array(
@@ -289,7 +287,7 @@ class Memcacheq extends AbstractAdapter
      * @return \Zend\Queue\Message\MessageIterator
      * @throws \Zend\Queue\Exception
      */
-    public function receive($maxMessages=null, $timeout=null, Queue\Queue $queue=null)
+    public function receive($maxMessages=null, $timeout=null, Queue $queue=null)
     {
         if ($maxMessages === null) {
             $maxMessages = 1;
@@ -335,7 +333,7 @@ class Memcacheq extends AbstractAdapter
      */
     public function deleteMessage(Message $message)
     {
-        throw new Queue\Exception('deleteMessage() is not supported in  ' . get_class($this));
+        throw new Exception\UnsupportedMethodCallException('deleteMessage() is not supported in  ' . get_class($this));
     }
 
     /********************************************************************
@@ -388,7 +386,7 @@ class Memcacheq extends AbstractAdapter
             $this->_socket = fsockopen($this->_host, $this->_port, $errno, $errstr, 10);
         }
         if ($this->_socket === false) {
-            throw new Queue\Exception("Could not open a connection to $this->_host:$this->_port errno=$errno : $errstr");
+            throw new Exception\ConnectionException("Could not open a connection to $this->_host:$this->_port errno=$errno : $errstr");
         }
 
         $response = array();

@@ -1,15 +1,39 @@
 <?php
+/**
+ * Zend Framework
+ *
+ * LICENSE
+ *
+ * This source file is subject to the new BSD license that is bundled
+ * with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://framework.zend.com/license/new-bsd
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@zend.com so we can send you a copy immediately.
+ *
+ * @category   Zend
+ * @package    Zend_Mvc
+ * @subpackage Controller
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
 
 namespace Zend\Mvc\Controller\Plugin;
 
 use Zend\Http\Response,
-    Zend\Mvc\InjectApplicationEvent,
+    Zend\Mvc\InjectApplicationEventInterface,
     Zend\Mvc\Exception,
     Zend\Mvc\MvcEvent,
-    Zend\Mvc\Router\RouteStack;
+    Zend\Mvc\Router\RouteStackInterface;
 
 /**
- * @todo allow specifying status code as a default, or as an option to methods
+ * @todo       allow specifying status code as a default, or as an option to methods
+ * @category   Zend
+ * @package    Zend_Mvc
+ * @subpackage Controller
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Redirect extends AbstractPlugin
 {
@@ -20,11 +44,11 @@ class Redirect extends AbstractPlugin
     /**
      * Generates a URL based on a route
      *
-     * @param  string $route Route name
+     * @param  string $route RouteInterface name
      * @param  array $params Parameters to use in url generation, if any
-     * @param  array $options Route-specific options to use in url generation, if any
+     * @param  array $options RouteInterface-specific options to use in url generation, if any
      * @return Response
-     * @throws Exception\DomainException if composed controller does not implement InjectApplicationEvent, or
+     * @throws Exception\DomainException if composed controller does not implement InjectApplicationEventInterface, or
      *         router cannot be found in controller event
      */
     public function toRoute($route, array $params = array(), array $options = array())
@@ -56,7 +80,7 @@ class Redirect extends AbstractPlugin
     /**
      * Get the router
      *
-     * @return RouteStack
+     * @return RouteStackInterface
      * @throws Exception\DomainException if unable to find router
      */
     protected function getRouter()
@@ -67,7 +91,7 @@ class Redirect extends AbstractPlugin
 
         $event  = $this->getEvent();
         $router = $event->getRouter();
-        if (!$router instanceof RouteStack) {
+        if (!$router instanceof RouteStackInterface) {
             throw new Exception\DomainException('Redirect plugin requires event compose a router');
         }
         $this->router = $router;
@@ -108,8 +132,8 @@ class Redirect extends AbstractPlugin
         }
 
         $controller = $this->getController();
-        if (!$controller instanceof InjectApplicationEvent) {
-            throw new Exception\DomainException('Redirect plugin requires a controller that implements InjectApplicationEvent');
+        if (!$controller instanceof InjectApplicationEventInterface) {
+            throw new Exception\DomainException('Redirect plugin requires a controller that implements InjectApplicationEventInterface');
         }
 
         $event = $controller->getEvent();

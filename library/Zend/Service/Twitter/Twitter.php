@@ -21,11 +21,12 @@
 
 namespace Zend\Service\Twitter;
 
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
 use Zend\Http,
     Zend\OAuth,
     Zend\Rest,
     Zend\Uri,
-    Zend\Config,
     Zend\Rest\Client;
 
 /**
@@ -118,16 +119,15 @@ class Twitter extends Client\RestClient
     /**
      * Constructor
      *
-     * @param  array $options Optional options array
-     * @return void
+     * @param  array|Traversable $options
      */
-    public function __construct($options = null, Oauth\Consumer $consumer = null)
+    public function __construct($options = null, OAuth\Consumer $consumer = null)
     {
         $this->setUri('http://api.twitter.com');
         if (!is_array($options)) $options = array();
         $options['siteUrl'] = self::OAUTH_BASE_URI;
-        if ($options instanceof Config\Config) {
-            $options = $options->toArray();
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
         }
         $this->options = $options;
         if (isset($options['username'])) {
@@ -950,17 +950,17 @@ class Twitter extends Client\RestClient
     }
 
     /**
-     * Call a remote REST web service URI and return the Zend_Http_Response object
+     * Call a remote REST web service URI
      *
-     * @param  string $path            The path to append to the URI
-     * @throws Client\Exception
+     * @param  string $path The path to append to the URI
+     * @throws Client\Exception\UnexpectedValueException
      * @return void
      */
     protected function prepare($path)
     {
         // Get the URI object and configure it
         if (!$this->uri instanceof Uri\Uri) {
-            throw new Client\Exception(
+            throw new Exception\UnexpectedValueException(
                 'URI object must be set before performing call'
             );
         }

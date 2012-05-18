@@ -19,12 +19,11 @@
  */
 
 namespace Zend\Feed\Reader\Extension\CreativeCommons;
-use Zend\Feed\Reader;
-use Zend\Feed\Reader\Extension;
+
+use Zend\Feed\Reader,
+    Zend\Feed\Reader\Extension;
 
 /**
-* @uses \Zend\Feed\Reader\Reader
-* @uses Reader\Reader_Entry_EntryAbstract
 * @category Zend
 * @package Reader\Reader
 * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

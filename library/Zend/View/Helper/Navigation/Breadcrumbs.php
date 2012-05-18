@@ -295,7 +295,7 @@ class Breadcrumbs extends AbstractHelper
     /**
      * Renders helper
      *
-     * Implements {@link Helper::render()}.
+     * Implements {@link HelperInterface::render()}.
      *
      * @param  Container $container [optional] container to render. Default is
      *                              to render the container registered in the helper.

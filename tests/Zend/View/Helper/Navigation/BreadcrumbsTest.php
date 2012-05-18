@@ -23,7 +23,7 @@ namespace ZendTest\View\Helper\Navigation;
 
 use Zend\Registry,
     Zend\Navigation\Navigation,
-    Zend\View\Exception;
+    Zend\View\Exception\ExceptionInterface;
 
 /**
  * Tests Zend_View_Helper_Navigation_Breadcrumbs
@@ -48,7 +48,7 @@ class BreadcrumbsTest extends AbstractTest
     /**
      * View helper
      *
-     * @var Zend\View\Helper\Navigation\Breadcrumbs
+     * @var \Zend\View\Helper\Navigation\Breadcrumbs
      */
     protected $_helper;
 
@@ -233,8 +233,8 @@ class BreadcrumbsTest extends AbstractTest
         try {
             $this->_helper->render();
             $this->fail(
-                '$partial was invalid, but no Zend\View\Exception was thrown');
-        } catch (Exception $e) {
+                '$partial was invalid, but no Zend\View\Exception\ExceptionInterface was thrown');
+        } catch (ExceptionInterface $e) {
         }
     }
 

@@ -33,11 +33,6 @@ use Zend\Pdf;
  * at the left edge of the window and the contents of the page magnified
  * just enough to fit the entire height of the page within the window.
  *
- * @uses       \Zend\Pdf\Destination\Explicit
- * @uses       \Zend\Pdf\InternalType\ArrayObject
- * @uses       \Zend\Pdf\InternalType\NameObject
- * @uses       \Zend\Pdf\InternalType\NumericObject
- * @uses       \Zend\Pdf\Exception
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Destination
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -51,7 +46,7 @@ class FitVertically extends Explicit
      * @param \Zend\Pdf\Page|integer $page  Page object or page number
      * @param float $left  Left edge of displayed page
      * @return \Zend\Pdf\Destination\FitVertically
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
     public static function create($page, $left)
     {

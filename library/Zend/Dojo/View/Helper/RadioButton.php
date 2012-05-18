@@ -26,8 +26,6 @@ use Zend\Filter\Alnum as AlnumFilter;
 /**
  * Dojo RadioButton dijit
  *
- * @uses       \Zend\Dojo\View\Helper\Dijit
- * @uses       \Zend\Filter\Alnum
  * @package    Zend_Dojo
  * @subpackage View
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

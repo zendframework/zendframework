@@ -10,7 +10,7 @@ class VaryTest extends \PHPUnit_Framework_TestCase
     public function testVaryFromStringCreatesValidVaryHeader()
     {
         $varyHeader = Vary::fromString('Vary: xxx');
-        $this->assertInstanceOf('Zend\Http\Header\HeaderDescription', $varyHeader);
+        $this->assertInstanceOf('Zend\Http\Header\HeaderInterface', $varyHeader);
         $this->assertInstanceOf('Zend\Http\Header\Vary', $varyHeader);
     }
 

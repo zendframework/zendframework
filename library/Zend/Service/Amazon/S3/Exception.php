@@ -22,7 +22,6 @@
 namespace Zend\Service\Amazon\S3;
 
 /**
- * @uses       \Zend\Service\Amazon\Exception
  * @category   Zend
  * @package    Zend_Service_Amazon
  * @subpackage S3

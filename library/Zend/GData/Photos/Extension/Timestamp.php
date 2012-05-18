@@ -26,8 +26,6 @@ namespace Zend\GData\Photos\Extension;
  * The timestamp of a photo in milliseconds since January 1, 1970.
  * This date is either set externally or based on EXIF data.
  *
- * @uses       \Zend\GData\Extension
- * @uses       \Zend\GData\Photos
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Photos

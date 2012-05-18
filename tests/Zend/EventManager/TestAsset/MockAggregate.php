@@ -21,8 +21,8 @@
 
 namespace ZendTest\EventManager\TestAsset;
 
-use Zend\EventManager\EventCollection,
-    Zend\EventManager\ListenerAggregate;
+use Zend\EventManager\EventManagerInterface,
+    Zend\EventManager\ListenerAggregateInterface;
 
 /**
  * @category   Zend
@@ -32,13 +32,13 @@ use Zend\EventManager\EventCollection,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class MockAggregate implements ListenerAggregate
+class MockAggregate implements ListenerAggregateInterface
 {
 
     protected $listeners = array();
     public $priority;
 
-    public function attach(EventCollection $events, $priority = null)
+    public function attach(EventManagerInterface $events, $priority = null)
     {
         $this->priority = $priority;
 
@@ -51,7 +51,7 @@ class MockAggregate implements ListenerAggregate
         return __METHOD__;
     }
 
-    public function detach(EventCollection $events)
+    public function detach(EventManagerInterface $events)
     {
         foreach ($this->listeners[ \spl_object_hash($events) ] as $listener) {
             $events->detach($listener);

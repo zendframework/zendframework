@@ -22,8 +22,7 @@
 namespace Zend\Log\Filter;
 
 use Zend\Log\Exception,
-    Zend\Log\Filter,
-    Zend\Validator\Validator as ZendValidator;
+    Zend\Validator\ValidatorInterface as ZendValidator;
 
 /**
  * @category   Zend
@@ -32,7 +31,7 @@ use Zend\Log\Exception,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Validator implements Filter
+class Validator implements FilterInterface
 {
     /**
      * Regex to match

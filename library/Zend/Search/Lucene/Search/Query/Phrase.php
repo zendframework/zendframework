@@ -24,19 +24,12 @@ namespace Zend\Search\Lucene\Search\Query;
 use Zend\Search\Lucene\Index,
 	Zend\Search\Lucene,
 	Zend\Search\Lucene\Search\Weight,
-	Zend\Search\Lucene\Search\Highlighter,
+	Zend\Search\Lucene\Search\Highlighter\HighlighterInterface as Highlighter,
 	Zend\Search\Lucene\Exception\InvalidArgumentException;
 	
 /**
  * A Query that matches documents containing a particular sequence of terms.
  *
- * @uses       \Zend\Search\Lucene\Exception\InvalidArgumentException
- * @uses       \Zend\Search\Lucene\Index\Term
- * @uses       \Zend\Search\Lucene\Search\Query\AbstractQuery
- * @uses       \Zend\Search\Lucene\Search\Query\Boolean
- * @uses       \Zend\Search\Lucene\Search\Query\EmptyResult
- * @uses       \Zend\Search\Lucene\Search\Query\Term
- * @uses       \Zend\Search\Lucene\Search\Weight\Phrase
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Search
@@ -188,10 +181,10 @@ class Phrase extends AbstractQuery
     /**
      * Re-write query into primitive queries in the context of specified index
      *
-     * @param \Zend\Search\Lucene\SearchIndex $index
+     * @param \Zend\Search\Lucene\SearchIndexInterface $index
      * @return \Zend\Search\Lucene\Search\Query\AbstractQuery
      */
-    public function rewrite(Lucene\SearchIndex $index)
+    public function rewrite(Lucene\SearchIndexInterface $index)
     {
         if (count($this->_terms) == 0) {
             return new EmptyResult();
@@ -221,10 +214,10 @@ class Phrase extends AbstractQuery
     /**
      * Optimize query in the context of specified index
      *
-     * @param \Zend\Search\Lucene\SearchIndex $index
+     * @param \Zend\Search\Lucene\SearchIndexInterface $index
      * @return \Zend\Search\Lucene\Search\Query\AbstractQuery
      */
-    public function optimize(Lucene\SearchIndex $index)
+    public function optimize(Lucene\SearchIndexInterface $index)
     {
         // Check, that index contains all phrase terms
         foreach ($this->_terms as $term) {
@@ -275,10 +268,10 @@ class Phrase extends AbstractQuery
     /**
      * Constructs an appropriate Weight implementation for this query.
      *
-     * @param \Zend\Search\Lucene\SearchIndex $reader
+     * @param \Zend\Search\Lucene\SearchIndexInterface $reader
      * @return \Zend\Search\Lucene\Search\Weight\Weight
      */
-    public function createWeight(Lucene\SearchIndex $reader)
+    public function createWeight(Lucene\SearchIndexInterface $reader)
     {
         $this->_weight = new Weight\Phrase($this, $reader);
         return $this->_weight;
@@ -334,10 +327,10 @@ class Phrase extends AbstractQuery
      * Score calculator for sloppy phrase queries (terms sequence is fixed)
      *
      * @param integer $docId
-     * @param \Zend\Search\Lucene\SearchIndex $reader
+     * @param \Zend\Search\Lucene\SearchIndexInterface $reader
      * @return float
      */
-    public function _sloppyPhraseFreq($docId, Lucene\SearchIndex $reader)
+    public function _sloppyPhraseFreq($docId, Lucene\SearchIndexInterface $reader)
     {
         $freq = 0;
 
@@ -410,10 +403,10 @@ class Phrase extends AbstractQuery
      * Execute query in context of index reader
      * It also initializes necessary internal structures
      *
-     * @param \Zend\Search\Lucene\SearchIndex $reader
+     * @param \Zend\Search\Lucene\SearchIndexInterface $reader
      * @param \Zend\Search\Lucene\Index\DocsFilter|null $docsFilter
      */
-    public function execute(Lucene\SearchIndex $reader, $docsFilter = null)
+    public function execute(Lucene\SearchIndexInterface $reader, $docsFilter = null)
     {
         $this->_resVector = null;
 
@@ -483,10 +476,10 @@ class Phrase extends AbstractQuery
      * Score specified document
      *
      * @param integer $docId
-     * @param \Zend\Search\Lucene\SearchIndex $reader
+     * @param \Zend\Search\Lucene\SearchIndexInterface $reader
      * @return float
      */
-    public function score($docId, Lucene\SearchIndex $reader)
+    public function score($docId, Lucene\SearchIndexInterface $reader)
     {
         if (isset($this->_resVector[$docId])) {
             if ($this->_slop == 0) {
@@ -523,7 +516,7 @@ class Phrase extends AbstractQuery
     /**
      * Query specific matches highlighting
      *
-     * @param \Zend\Search\Lucene\Search\Highlighter $highlighter  Highlighter object (also contains doc for highlighting)
+     * @param Highlighter $highlighter  Highlighter object (also contains doc for highlighting)
      */
     protected function _highlightMatches(Highlighter $highlighter)
     {

@@ -62,16 +62,16 @@ class Http
     /**
      * Instance of the general Zend\OAuth\Http\Utility class.
      *
-     * @var Zend\OAuth\Http\Utility
+     * @var \Zend\OAuth\Http\Utility
      */
     protected $_httpUtility = null;
 
     /**
      * Constructor
      *
-     * @param  Zend\OAuth\Consumer $consumer
+     * @param  \Zend\OAuth\Consumer $consumer
      * @param  null|array $parameters
-     * @param  null|Zend\OAuth\Http\Utility $utility
+     * @param  null|\Zend\OAuth\Http\Utility $utility
      * @return void
      */
     public function __construct(
@@ -95,12 +95,13 @@ class Http
      * Set a preferred HTTP request method.
      *
      * @param  string $method
-     * @return Zend\OAuth\Http
+     * @return Http
+     * @throws Exception\InvalidArgumentException
      */
     public function setMethod($method)
     {
         if (!in_array($method, array(OAuth::POST, OAuth::GET))) {
-            throw new Exception('invalid HTTP method: ' . $method);
+            throw new Exception\InvalidArgumentException('invalid HTTP method: ' . $method);
         }
         $this->_preferredRequestMethod = $method;
         return $this;
@@ -120,7 +121,7 @@ class Http
      * Mutator to set an array of custom parameters for the HTTP request.
      *
      * @param  array $customServiceParameters
-     * @return Zend\OAuth\Http
+     * @return Http
      */
     public function setParameters(array $customServiceParameters)
     {
@@ -141,7 +142,7 @@ class Http
     /**
      * Return the Consumer instance in use.
      *
-     * @return Zend\OAuth\Consumer
+     * @return Consumer
      */
     public function getConsumer()
     {
@@ -157,8 +158,8 @@ class Http
      *
      * @todo   Remove cycling?; Replace with upfront do-or-die configuration
      * @param  array $params
-     * @return Zend\Http\Response
-     * @throws Zend\OAuth\Exception on HTTP request errors
+     * @return \Zend\Http\Response
+     * @throws Exception\InvalidArgumentException on HTTP request errors
      */
     public function startRequestCycle(array $params)
     {
@@ -167,8 +168,8 @@ class Http
         $status   = null;
         try {
             $response = $this->_attemptRequest($params);
-        } catch (\Zend\Http\Client\Exception $e) {
-            throw new Exception(sprintf(
+        } catch (\Zend\Http\Client\Exception\ExceptionInterface $e) {
+            throw new Exception\InvalidArgumentException(sprintf(
                 'Error in HTTP request: %s',
                 $e->getMessage()
             ), null, $e);
@@ -195,7 +196,7 @@ class Http
      *
      * @param array $params
      * @param string $url
-     * @return Zend\Http\Client
+     * @return \Zend\Http\Client
      */
     public function getRequestSchemeQueryStringClient(array $params, $url)
     {
@@ -214,7 +215,7 @@ class Http
      *
      * @param  Zend\Http\Response
      * @return void
-     * @throws Zend\OAuth\Exception if unable to retrieve valid token response
+     * @throws Exception\RuntimeException if unable to retrieve valid token response
      */
     protected function _assessRequestAttempt(\Zend\Http\Response $response = null)
     {
@@ -226,7 +227,7 @@ class Http
                 $this->_preferredRequestScheme = OAuth::REQUEST_SCHEME_QUERYSTRING;
                 break;
             default:
-                throw new Exception(
+                throw new Exception\RuntimeException(
                     'Could not retrieve a valid Token response from Token URL:'
                     . ($response !== null 
                         ? PHP_EOL . $response->getBody()
@@ -264,7 +265,7 @@ class Http
      * return the resulting HTTP Response.
      *
      * @param  array $params
-     * @return Zend\Http\Response
+     * @return \Zend\Http\Response
      */
     protected function _attemptRequest(array $params)
     {

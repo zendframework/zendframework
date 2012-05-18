@@ -22,7 +22,7 @@
 namespace ZendTest\Translator;
 
 use Zend\Cache\StorageFactory as CacheFactory,
-    Zend\Cache\Storage\Adapter as CacheAdapter,
+    Zend\Cache\Storage\Adapter\AdapterInterface as CacheAdapter,
     Zend\Locale,
     Zend\Log,
     Zend\Log\Writer,
@@ -317,7 +317,8 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
 
         $stream = fopen('php://memory', 'w+');
         $writer = new Writer\Stream($stream);
-        $log    = new Log\Logger($writer);
+        $log    = new Log\Logger();
+        $log->addWriter($writer);
 
         $lang->setOptions(array('logUntranslated' => true, 'log' => $log));
         $this->assertEquals('ignored', $lang->translate('ignored'));
@@ -343,7 +344,8 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
 
         $stream = fopen('php://memory', 'w+');
         $writer = new Writer\Stream($stream);
-        $log    = new Log\Logger($writer);
+        $log    = new Log\Logger();
+        $log->addWriter($writer);
 
         $lang->setOptions(array('log' => $log));
         $lang->setLocale('ru');
@@ -366,7 +368,8 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
 
         $stream = fopen('php://memory', 'w+');
         $writer = new Writer\Stream($stream);
-        $log    = new Log\Logger($writer);
+        $log    = new Log\Logger();
+        $log->addWriter($writer);
 
         $lang->setOptions(array('logUntranslated' => true, 'log' => $log, 'logMessage' => 'Self defined log message'));
         $this->assertEquals('ignored', $lang->translate('ignored'));
@@ -880,7 +883,8 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
     {
         $stream = fopen('php://memory', 'w+');
         $writer = new Writer\Stream($stream);
-        $log    = new Log\Logger($writer);
+        $log    = new Log\Logger();
+        $log->addWriter($writer);
 
         $lang = new Translator\Translator(array(
             'adapter'     => Translator\Translator::AN_CSV,

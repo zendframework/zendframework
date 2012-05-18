@@ -21,7 +21,7 @@
 
 namespace ZendTest\XmlRpc;
 
-use Zend\XmlRpc\Generator;
+use Zend\XmlRpc\Generator\GeneratorInterface as Generator;
 
 /**
  * Test case for Zend_XmlRpc_Generator_*

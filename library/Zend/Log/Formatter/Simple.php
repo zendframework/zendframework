@@ -21,9 +21,7 @@
 
 namespace Zend\Log\Formatter;
 
-use Zend\Log\Formatter,
-    Zend\Log\Exception,
-    Zend\Config\Config;
+use Zend\Log\Exception;
 
 /**
  * @category   Zend
@@ -32,7 +30,7 @@ use Zend\Log\Formatter,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Simple implements Formatter
+class Simple implements FormatterInterface
 {
     /**
      * @var string

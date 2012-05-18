@@ -21,7 +21,6 @@
 namespace Zend\Locale\Exception;
 
 /**
- * @uses       \Zend\Locale\Exception
  * @category   Zend
  * @package    Zend_Locale
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -29,7 +28,7 @@ namespace Zend\Locale\Exception;
  */
 class MathException 
     extends \LogicException
-    implements \Zend\Locale\Exception
+    implements ExceptionInterface
 {
     protected $op1 = null;
     protected $op2 = null;

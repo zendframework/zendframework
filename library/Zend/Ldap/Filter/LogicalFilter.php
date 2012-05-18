@@ -56,6 +56,7 @@ abstract class LogicalFilter extends AbstractFilter
      *
      * @param array  $subfilters
      * @param string $symbol
+     * @throws Exception\FilterException
      */
     protected function __construct(array $subfilters, $symbol)
     {

@@ -21,45 +21,43 @@
 
 namespace Zend\Captcha;
 
-use Traversable,
-    Zend\Config\Config;
+use Traversable;
+use Zend\Validator\AbstractValidator;
 
 /**
  * Base class for Captcha adapters
  *
  * Provides some utility functionality to build on
  *
- * @uses       Zend\Captcha\Adapter
- * @uses       Zend\Validator\AbstractValidator
  * @category   Zend
  * @package    Zend_Captcha
  * @subpackage Adapter
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class AbstractAdapter extends \Zend\Validator\AbstractValidator implements Adapter
+abstract class AbstractAdapter extends AbstractValidator implements AdapterInterface
 {
     /**
-     * Element name
+     * Captcha name
      *
      * Useful to generate/check form fields
      *
      * @var string
      */
-    protected $_name;
+    protected $name;
 
     /**
      * Captcha options
      *
      * @var array
      */
-    protected $_options = array();
+    protected $options = array();
 
     /**
      * Options to skip when processing options
      * @var array
      */
-    protected $_skipOptions = array(
+    protected $skipOptions = array(
         'options',
         'config',
     );
@@ -71,7 +69,7 @@ abstract class AbstractAdapter extends \Zend\Validator\AbstractValidator impleme
      */
     public function getName()
     {
-        return $this->_name;
+        return $this->name;
     }
 
     /**
@@ -81,36 +79,20 @@ abstract class AbstractAdapter extends \Zend\Validator\AbstractValidator impleme
      */
     public function setName($name)
     {
-        $this->_name = $name;
+        $this->name = $name;
         return $this;
-    }
-
-    /**
-     * Constructor
-     *
-     * @param  array|Zend\Config\Config $options
-     * @return void
-     */
-    public function __construct($options = null)
-    {
-        // Set options
-        if (is_array($options)) {
-            $this->setOptions($options);
-        } else if ($options instanceof Config) {
-            $this->setConfig($options);
-        }
     }
 
     /**
      * Set single option for the object
      *
-     * @param string $key
-     * @param string $value
-     * @return Zend_Form_Element
+     * @param  string $key
+     * @param  string $value
+     * @return AbstractAdapter
      */
     public function setOption($key, $value)
     {
-        if (in_array(strtolower($key), $this->_skipOptions)) {
+        if (in_array(strtolower($key), $this->skipOptions)) {
             return $this;
         }
 
@@ -118,11 +100,11 @@ abstract class AbstractAdapter extends \Zend\Validator\AbstractValidator impleme
         if (method_exists ($this, $method)) {
             // Setter exists; use it
             $this->$method ($value);
-            $this->_options[$key] = $value;
+            $this->options[$key] = $value;
         } elseif (property_exists($this, $key)) {
             // Assume it's metadata
             $this->$key = $value;
-            $this->_options[$key] = $value;
+            $this->options[$key] = $value;
         }
         return $this;
     }
@@ -131,7 +113,7 @@ abstract class AbstractAdapter extends \Zend\Validator\AbstractValidator impleme
      * Set object state from options array
      *
      * @param  array|Traversable $options
-     * @return Zend_Form_Element
+     * @return AbstractAdapter
      */
     public function setOptions($options = array())
     {
@@ -152,29 +134,18 @@ abstract class AbstractAdapter extends \Zend\Validator\AbstractValidator impleme
      */
     public function getOptions()
     {
-        return $this->_options;
+        return $this->options;
     }
 
     /**
-     * Set object state from config object
+     * Get helper name used to render captcha
      *
-     * @param  Zend\Config\Config $config
-     * @return Zend\Captcha\AbstractAdapter
+     * By default, return empty string, indicating no helper needed.
+     *
+     * @return string
      */
-    public function setConfig(Config $config)
+    public function getHelperName()
     {
-        return $this->setOptions($config->toArray());
-    }
-
-    /**
-     * Get optional decorator
-     *
-     * By default, return null, indicating no extra decorator needed.
-     *
-     * @return null
-     */
-    public function getDecorator()
-    {
-        return null;
+        return '';
     }
 }

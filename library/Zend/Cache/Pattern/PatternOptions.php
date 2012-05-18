@@ -23,7 +23,7 @@ namespace Zend\Cache\Pattern;
 
 use Zend\Cache\Exception,
     Zend\Cache\StorageFactory,
-    Zend\Cache\Storage\Adapter as StorageAdapter,
+    Zend\Cache\Storage\Adapter\AdapterInterface as StorageAdapter,
     Zend\Stdlib\Options;
 
 /**
@@ -869,7 +869,7 @@ class PatternOptions extends Options
             $storage = StorageFactory::adapterFactory($storage);
         } elseif ( !($storage instanceof StorageAdapter) ) {
             throw new Exception\InvalidArgumentException(
-                'The storage must be an instanceof Zend\Cache\Storage\Adapter '
+                'The storage must be an instanceof Zend\Cache\Storage\Adapter\AdapterInterface '
                 . 'or an array passed to Zend\Cache\Storage::factory '
                 . 'or simply the name of the storage adapter'
             );

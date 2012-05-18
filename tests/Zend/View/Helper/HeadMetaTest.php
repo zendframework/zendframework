@@ -24,7 +24,7 @@ use Zend\Registry,
     Zend\View\Helper\Placeholder\Registry as PlaceholderRegistry,
     Zend\View\Renderer\PhpRenderer as View,
     Zend\View\Helper,
-    Zend\View\Exception as ViewException;
+    Zend\View\Exception\ExceptionInterface as ViewException;
 
 /**
  * Test class for Zend_View_Helper_HeadMeta.
@@ -230,13 +230,13 @@ class HeadMetaTest extends \PHPUnit_Framework_TestCase
 
     public function testOverloadingThrowsExceptionWithFewerThanTwoArgs()
     {
-        $this->setExpectedException('Zend\View\Exception');
+        $this->setExpectedException('Zend\View\Exception\ExceptionInterface');
         $this->helper->setName('foo');
     }
 
     public function testOverloadingThrowsExceptionWithInvalidMethodType()
     {
-        $this->setExpectedException('Zend\View\Exception');
+        $this->setExpectedException('Zend\View\Exception\ExceptionInterface');
         $this->helper->setFoo('foo');
     }
 
@@ -414,7 +414,7 @@ class HeadMetaTest extends \PHPUnit_Framework_TestCase
 		$view = new View();
 		$view->plugin('doctype')->__invoke('HTML4_STRICT');
 
-        $this->setExpectedException('Zend\View\Exception');
+        $this->setExpectedException('Zend\View\Exception\ExceptionInterface');
         $view->plugin('headMeta')->setCharset('utf-8');
 	}
 

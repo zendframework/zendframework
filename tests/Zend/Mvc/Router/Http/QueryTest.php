@@ -30,6 +30,12 @@ class QueryTest extends TestCase
                 null,
                 array('foo' => 'foo bar')
             ),
+            'nested-params' => array(
+                new Query(),
+                '?foo%5Bbar%5D=baz&foo%5Bbat%5D=foo%20bar',
+                null,
+                array('foo' => array('bar' => 'baz', 'bat' => 'foo bar'))
+            ),
         );
     }
 
@@ -76,8 +82,8 @@ class QueryTest extends TestCase
     {
         $route   = new Query();
         $request = new BaseRequest();
-        $match = $route->match($request);
-        $this->assertInstanceOf('Zend\Mvc\Router\RouteMatch', $match);
+        $match   = $route->match($request);
+        $this->assertNull($match);
     }
     
     public function testGetAssembledParams()

@@ -19,10 +19,12 @@
  */
  
 namespace Zend\Feed\Writer\Extension\ITunes\Renderer;
-use Zend\Feed\Writer\Extension;
+
+use Zend\Feed\Writer\Extension,
+    DOMDocument,
+    DOMElement;
 
 /**
-* @uses \Zend\Feed\Writer\Extension\AbstractRenderer
 * @category Zend
 * @package Zend_Feed_Writer
 * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -77,11 +79,11 @@ class Feed extends Extension\AbstractRenderer
     /**
      * Set feed authors
      * 
-     * @param  \DOMDocument $dom 
-     * @param  \DOMElement $root 
+     * @param  DOMDocument $dom 
+     * @param  DOMElement $root 
      * @return void
      */
-    protected function _setAuthors(\DOMDocument $dom, \DOMElement $root)
+    protected function _setAuthors(DOMDocument $dom, DOMElement $root)
     {
         $authors = $this->getDataContainer()->getItunesAuthors();
         if (!$authors || empty($authors)) {
@@ -99,11 +101,11 @@ class Feed extends Extension\AbstractRenderer
     /**
      * Set feed itunes block
      * 
-     * @param  \DOMDocument $dom 
-     * @param  \DOMElement $root 
+     * @param  DOMDocument $dom 
+     * @param  DOMElement $root 
      * @return void
      */
-    protected function _setBlock(\DOMDocument $dom, \DOMElement $root)
+    protected function _setBlock(DOMDocument $dom, DOMElement $root)
     {
         $block = $this->getDataContainer()->getItunesBlock();
         if ($block === null) {
@@ -119,11 +121,11 @@ class Feed extends Extension\AbstractRenderer
     /**
      * Set feed categories
      * 
-     * @param  \DOMDocument $dom 
-     * @param  \DOMElement $root 
+     * @param  DOMDocument $dom 
+     * @param  DOMElement $root 
      * @return void
      */
-    protected function _setCategories(\DOMDocument $dom, \DOMElement $root)
+    protected function _setCategories(DOMDocument $dom, DOMElement $root)
     {
         $cats = $this->getDataContainer()->getItunesCategories();
         if (!$cats || empty($cats)) {
@@ -151,11 +153,11 @@ class Feed extends Extension\AbstractRenderer
     /**
      * Set feed image (icon)
      * 
-     * @param  \DOMDocument $dom 
-     * @param  \DOMElement $root 
+     * @param  DOMDocument $dom 
+     * @param  DOMElement $root 
      * @return void
      */
-    protected function _setImage(\DOMDocument $dom, \DOMElement $root)
+    protected function _setImage(DOMDocument $dom, DOMElement $root)
     {
         $image = $this->getDataContainer()->getItunesImage();
         if (!$image) {
@@ -170,11 +172,11 @@ class Feed extends Extension\AbstractRenderer
     /**
      * Set feed cumulative duration
      * 
-     * @param  \DOMDocument $dom 
-     * @param  \DOMElement $root 
+     * @param  DOMDocument $dom 
+     * @param  DOMElement $root 
      * @return void
      */
-    protected function _setDuration(\DOMDocument $dom, \DOMElement $root)
+    protected function _setDuration(DOMDocument $dom, DOMElement $root)
     {
         $duration = $this->getDataContainer()->getItunesDuration();
         if (!$duration) {
@@ -190,11 +192,11 @@ class Feed extends Extension\AbstractRenderer
     /**
      * Set explicit flag
      * 
-     * @param  \DOMDocument $dom 
-     * @param  \DOMElement $root 
+     * @param  DOMDocument $dom 
+     * @param  DOMElement $root 
      * @return void
      */
-    protected function _setExplicit(\DOMDocument $dom, \DOMElement $root)
+    protected function _setExplicit(DOMDocument $dom, DOMElement $root)
     {
         $explicit = $this->getDataContainer()->getItunesExplicit();
         if ($explicit === null) {
@@ -210,11 +212,11 @@ class Feed extends Extension\AbstractRenderer
     /**
      * Set feed keywords
      * 
-     * @param  \DOMDocument $dom 
-     * @param  \DOMElement $root 
+     * @param  DOMDocument $dom 
+     * @param  DOMElement $root 
      * @return void
      */
-    protected function _setKeywords(\DOMDocument $dom, \DOMElement $root)
+    protected function _setKeywords(DOMDocument $dom, DOMElement $root)
     {
         $keywords = $this->getDataContainer()->getItunesKeywords();
         if (!$keywords || empty($keywords)) {
@@ -230,11 +232,11 @@ class Feed extends Extension\AbstractRenderer
     /**
      * Set feed's new URL
      * 
-     * @param  \DOMDocument $dom 
-     * @param  \DOMElement $root 
+     * @param  DOMDocument $dom 
+     * @param  DOMElement $root 
      * @return void
      */
-    protected function _setNewFeedUrl(\DOMDocument $dom, \DOMElement $root)
+    protected function _setNewFeedUrl(DOMDocument $dom, DOMElement $root)
     {
         $url = $this->getDataContainer()->getItunesNewFeedUrl();
         if (!$url) {
@@ -250,11 +252,11 @@ class Feed extends Extension\AbstractRenderer
     /**
      * Set feed owners 
      * 
-     * @param  \DOMDocument $dom 
-     * @param  \DOMElement $root 
+     * @param  DOMDocument $dom 
+     * @param  DOMElement $root 
      * @return void
      */
-    protected function _setOwners(\DOMDocument $dom, \DOMElement $root)
+    protected function _setOwners(DOMDocument $dom, DOMElement $root)
     {
         $owners = $this->getDataContainer()->getItunesOwners();
         if (!$owners || empty($owners)) {
@@ -278,11 +280,11 @@ class Feed extends Extension\AbstractRenderer
     /**
      * Set feed subtitle
      * 
-     * @param  \DOMDocument $dom 
-     * @param  \DOMElement $root 
+     * @param  DOMDocument $dom 
+     * @param  DOMElement $root 
      * @return void
      */
-    protected function _setSubtitle(\DOMDocument $dom, \DOMElement $root)
+    protected function _setSubtitle(DOMDocument $dom, DOMElement $root)
     {
         $subtitle = $this->getDataContainer()->getItunesSubtitle();
         if (!$subtitle) {
@@ -298,11 +300,11 @@ class Feed extends Extension\AbstractRenderer
     /**
      * Set feed summary
      * 
-     * @param  \DOMDocument $dom 
-     * @param  \DOMElement $root 
+     * @param  DOMDocument $dom 
+     * @param  DOMElement $root 
      * @return void
      */
-    protected function _setSummary(\DOMDocument $dom, \DOMElement $root)
+    protected function _setSummary(DOMDocument $dom, DOMElement $root)
     {
         $summary = $this->getDataContainer()->getItunesSummary();
         if (!$summary) {

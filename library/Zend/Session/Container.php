@@ -20,7 +20,10 @@
 
 namespace Zend\Session;
 
-use ArrayObject;
+use ArrayObject,
+    Iterator,
+    Zend\Session\ManagerInterface as Manager,
+    Zend\Session\Storage\StorageInterface as Storage;
 
 /**
  * Session storage container
@@ -53,14 +56,14 @@ class Container extends ArrayObject
     protected static $managerDefaultClass = 'Zend\\Session\\SessionManager';
 
     /**
-     * @var Manager Default manager to use when instantiating a container without providing a Manager
+     * @var Manager Default manager to use when instantiating a container without providing a ManagerInterface
      */
     protected static $defaultManager;
 
     /**
      * Constructor
      *
-     * Provide a name ('Default' if none provided) and a Manager instance.
+     * Provide a name ('Default' if none provided) and a ManagerInterface instance.
      * 
      * @param  null|string $name 
      * @param  Manager $manager 
@@ -82,7 +85,7 @@ class Container extends ArrayObject
     }
 
     /**
-     * Set the default Manager instance to use when none provided to constructor
+     * Set the default ManagerInterface instance to use when none provided to constructor
      * 
      * @param  Manager $manager 
      * @return void
@@ -93,19 +96,19 @@ class Container extends ArrayObject
     }
 
     /**
-     * Get the default Manager instance
+     * Get the default ManagerInterface instance
      *
      * If none provided, instantiates one of type {@link $managerDefaultClass}
      * 
      * @return Manager
-     * @throws Exception if invalid manager default class provided
+     * @throws Exception\InvalidArgumentException if invalid manager default class provided
      */
     public static function getDefaultManager()
     {
         if (null === self::$defaultManager) {
             $manager = new self::$managerDefaultClass();
             if (!$manager instanceof Manager) {
-                throw new Exception\InvalidArgumentException('Invalid default manager type provided; must implement Manager');
+                throw new Exception\InvalidArgumentException('Invalid default manager type provided; must implement ManagerInterface');
             }
             self::$defaultManager = $manager;
         }
@@ -143,7 +146,7 @@ class Container extends ArrayObject
         if (null === $manager) {
             $manager = self::getDefaultManager();
             if (!$manager instanceof Manager) {
-                throw new Exception\InvalidArgumentException('Manager provided is invalid; must implement Manager interface');
+                throw new Exception\InvalidArgumentException('Manager provided is invalid; must implement ManagerInterface interface');
             }
         }
         $this->manager = $manager;
@@ -153,7 +156,7 @@ class Container extends ArrayObject
     /**
      * Get session storage object
      *
-     * Proxies to Manager::getStorage()
+     * Proxies to ManagerInterface::getStorage()
      * 
      * @return Storage
      */
@@ -182,7 +185,7 @@ class Container extends ArrayObject
      * 
      * @param  bool $createContainer Whether or not to create the container for the namespace
      * @return Storage|null Returns null only if $createContainer is false
-     * @throws Exception
+     * @throws Exception\RuntimeException
      */
     protected function verifyNamespace($createContainer = true)
     {
@@ -516,7 +519,7 @@ class Container extends ArrayObject
             // Cannot pass "$this" to a lambda
             $container = $this;
 
-            // Filter out any items not in our container
+            // FilterInterface out any items not in our container
             $expires   = array_filter($vars, function ($value) use ($container) {
                 return $container->offsetExists($value);
             });

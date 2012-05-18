@@ -21,18 +21,17 @@
 namespace Zend\Feed\Reader\Feed;
 
 use Zend\Feed\Reader,
-    Zend\Feed\Reader\Exception;
+    Zend\Feed\Reader\Exception,
+    DOMXPath,
+    DOMDocument;
 
 /**
-* @uses \Zend\Feed\Exception
-* @uses \Zend\Feed\Reader\Reader
-* @uses \Zend\Feed\Reader\Feed
 * @category Zend
 * @package Zend_Feed_Reader
 * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
 * @license http://framework.zend.com/license/new-bsd New BSD License
 */
-abstract class AbstractFeed implements Reader\Feed
+abstract class AbstractFeed implements FeedInterface
 {
     /**
      * Parsed feed data
@@ -86,13 +85,13 @@ abstract class AbstractFeed implements Reader\Feed
     /**
      * Constructor
      *
-     * @param DomDocument The DOM object for the feed's XML
+     * @param DOMDocument The DOM object for the feed's XML
      * @param string $type Feed type
      */
-    public function __construct(\DomDocument $domDocument, $type = null)
+    public function __construct(DOMDocument $domDocument, $type = null)
     {
         $this->_domDocument = $domDocument;
-        $this->_xpath = new \DOMXPath($this->_domDocument);
+        $this->_xpath = new DOMXPath($this->_domDocument);
 
         if ($type !== null) {
             $this->_data['type'] = $type;
@@ -141,7 +140,7 @@ abstract class AbstractFeed implements Reader\Feed
     /**
      * Return the current entry
      *
-     * @return Zend_Feed_Reader_EntryInterface
+     * @return \Zend\Feed\Reader\Entry\EntryInterface
      */
     public function current()
     {
@@ -270,7 +269,7 @@ abstract class AbstractFeed implements Reader\Feed
                 return call_user_func_array(array($extension, $method), $args);
             }
         }
-        throw new Exception('Method: ' . $method
+        throw new Exception\BadMethodCallException('Method: ' . $method
         . 'does not exist and could not be located on a registered Extension');
     }
 
@@ -278,7 +277,7 @@ abstract class AbstractFeed implements Reader\Feed
      * Return an Extension object with the matching name (postfixed with _Feed)
      *
      * @param string $name
-     * @return Zend_Feed_Reader_Extension_FeedAbstract
+     * @return \Zend\Feed\Reader\Extension\AbstractFeed
      */
     public function getExtension($name)
     {
@@ -300,7 +299,7 @@ abstract class AbstractFeed implements Reader\Feed
                 continue;
             }
             if (!class_exists($className)) {
-                throw new Exception(sprintf('Unable to load extension "%s"; cannot find class', $extension));
+                throw new Exception\RuntimeException(sprintf('Unable to load extension "%s"; cannot find class', $extension));
             }
             $this->_extensions[$extension] = new $className(
                 $this->getDomDocument(), $this->_data['type'], $this->_xpath

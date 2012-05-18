@@ -29,11 +29,6 @@ use Zend\Pdf;
  *
  * OpenType fonts can contain either TrueType or PostScript Type 1 outlines.
  *
- * @uses       \Zend\Pdf\InternalType\ArrayObject
- * @uses       \Zend\Pdf\InternalType\NameObject
- * @uses       \Zend\Pdf\InternalType\NumericObject
- * @uses       \Zend\Pdf\Font
- * @uses       \Zend\Pdf\Resource\Font\Simple\AbstractSimple
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Fonts
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -45,7 +40,7 @@ abstract class AbstractParsed extends \Zend\Pdf\Resource\Font\Simple\AbstractSim
      * Object constructor
      *
      * @param \Zend\Pdf\BinaryParser\Font\OpenType\AbstractOpenType $fontParser Font parser object containing OpenType file.
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
     public function __construct(OpenTypeFontParser\AbstractOpenType $fontParser)
     {

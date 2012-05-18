@@ -131,7 +131,7 @@ $item = $amazon->itemLookup('B0000A432X');
         <para>
             <methodname>itemLookup()</methodname> メソッドにオプションの第 2 パラメータを渡すことで、
             検索オプションを指定できます。使用可能なオプションを含む詳細は、
-            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.amazon.com/gp/aws/sdk/main.html/103-9285448-4703844?s=AWSEcommerceService&amp;v=2005-10-05&amp;p=ApiReference/ItemLookupOperation">関連する Amazon の文書</link>
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.amazon.com/gp/aws/sdk/main.html/103-9285448-4703844?s=AWSEcommerceService&amp;v=2011-08-01&amp;p=ApiReference/ItemLookupOperation">関連する Amazon の文書</link>
             を参照ください。
         </para>
         <note><info><title>画像の情報</title></info>
@@ -182,7 +182,7 @@ foreach ($results as $result) {
         <para>
             <methodname>itemSearch()</methodname> は配列のパラメータをひとつ受け取り、
             このパラメータで検索オプションを指定します。使用可能なオプションを含む詳細は、
-            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.amazon.com/gp/aws/sdk/main.html/103-9285448-4703844?s=AWSEcommerceService&amp;v=2005-10-05&amp;p=ApiReference/ItemSearchOperation">関連する Amazon の文書</link>
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.amazon.com/gp/aws/sdk/main.html/103-9285448-4703844?s=AWSEcommerceService&amp;v=2011-08-01&amp;p=ApiReference/ItemSearchOperation">関連する Amazon の文書</link>
             を参照ください。
         </para>
         <tip>
@@ -228,7 +228,7 @@ foreach ($results as $result) {
                 </para>
                 <para>
                     使用可能なオプションについての詳細な情報は、
-                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.amazon.com/gp/aws/sdk/main.html/102-9041115-9057709?s=AWSEcommerceService&amp;v=2005-10-05&amp;p=ApiReference/ItemSearchOperation">関連する Amazon の文書</link>
+                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.amazon.com/gp/aws/sdk/main.html/102-9041115-9057709?s=AWSEcommerceService&amp;v=2011-08-01&amp;p=ApiReference/ItemSearchOperation">関連する Amazon の文書</link>
                     を参照ください。
                 </para>
             </example>

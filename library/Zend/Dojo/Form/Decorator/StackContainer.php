@@ -25,7 +25,6 @@ namespace Zend\Dojo\Form\Decorator;
  *
  * Render a dijit StackContainer
  *
- * @uses       \Zend\Dojo\Form\Decorator\DijitContainer
  * @package    Zend_Dojo
  * @subpackage Form_Decorator
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

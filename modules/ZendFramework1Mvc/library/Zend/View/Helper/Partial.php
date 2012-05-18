@@ -108,8 +108,7 @@ class Partial extends AbstractHelper
     /**
      * Clone the current View
      *
-     * @return \Zend\View\Renderer
-     */
+     * @return \Zend\View\Renderer\RendererInterface     */
     public function cloneView()
     {
         $view = clone $this->view;

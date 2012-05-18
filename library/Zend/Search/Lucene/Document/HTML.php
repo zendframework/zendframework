@@ -30,13 +30,6 @@ use Zend\Search\Lucene\Document,
 /**
  * HTML document.
  *
- * @uses       DOMDocument
- * @uses       DOMXPath
- * @uses       \Zend\Search\Lucene\Analysis\Analyzer
- * @uses       \Zend\Search\Lucene\Document
- * @uses       \Zend\Search\Lucene\Document\Field
- * @uses       \Zend\Search\Lucene\Exception\RuntimeException
- * @uses       \Zend\Search\Lucene\Exception\InvalidArgumentException
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Document

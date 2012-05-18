@@ -21,8 +21,12 @@
 
 namespace ZendTest\Mail\Storage;
 
-use Zend\Mail\Protocol,
-    Zend\Mail\Storage;
+use Zend\Config;
+use Zend\Mail\Exception as MailException; 
+use Zend\Mail\Protocol;
+use Zend\Mail\Protocol\Exception as ProtocolException;
+use Zend\Mail\Storage;
+use Zend\Mail\Storage\Exception;
 
 /**
  * @category   Zend
@@ -108,7 +112,7 @@ class ImapTest extends \PHPUnit_Framework_TestCase
     public function testConnectConfig()
     {
         try {
-            $mail = new Storage\Imap(new \Zend\Config\Config($this->_params));
+            $mail = new Storage\Imap(new Config\Config($this->_params));
         } catch (\Exception $e) {
             $this->fail('exception raised while loading connection to imap server');
         }
@@ -220,7 +224,7 @@ class ImapTest extends \PHPUnit_Framework_TestCase
         $protocol = new Protocol\Imap();
         try {
             $mail = new Storage\Imap($protocol);
-        } catch (Protocol\Exception $e) {
+        } catch (ProtocolException\ExceptionInterface $e) {
             return; // test ok
         }
 
@@ -232,7 +236,7 @@ class ImapTest extends \PHPUnit_Framework_TestCase
         $protocol = new Protocol\Imap($this->_params['host']);
         try {
             $mail = new Storage\Imap($protocol);
-        } catch (Storage\Exception $e) {
+        } catch (Exception\ExceptionInterface $e) {
             return; // test ok
         }
 
@@ -429,7 +433,7 @@ class ImapTest extends \PHPUnit_Framework_TestCase
         $mail = new Storage\Imap($this->_params);
         try {
             $this->assertEquals($mail->getFolders()->subfolder->key(), 'test');
-        } catch (\Zend\Mail\Exception $e) {
+        } catch (MailException\ExceptionInterface $e) {
             $this->fail('exception raised while selecting existing folder and getting local name');
         }
     }

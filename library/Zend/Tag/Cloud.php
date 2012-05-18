@@ -21,8 +21,9 @@
 
 namespace Zend\Tag;
 
-use Zend\Config,
-    Zend\Tag\Exception\InvalidArgumentException,
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
+use Zend\Tag\Exception\InvalidArgumentException,
     Zend\Loader\Broker;
 
 /**
@@ -34,16 +35,16 @@ use Zend\Config,
 class Cloud
 {
     /**
-     * Decorator for the cloud
+     * DecoratorInterface for the cloud
      *
-     * @var \Zend\Tag\Cloud\Decorator\Cloud
+     * @var Cloud
      */
     protected $_cloudDecorator = null;
 
     /**
-     * Decorator for the tags
+     * DecoratorInterface for the tags
      *
-     * @var \Zend\Tag\Cloud\Decorator\Tag
+     * @var Tag
      */
     protected $_tagDecorator = null;
 
@@ -74,30 +75,16 @@ class Cloud
     /**
      * Create a new tag cloud with options
      *
-     * @param mixed $options
+     * @param  array|Traversable $options
      */
     public function __construct($options = null)
     {
-        if ($options instanceof Config\Config) {
-            $this->setConfig($options);
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
         }
-
         if (is_array($options)) {
             $this->setOptions($options);
         }
-    }
-
-    /**
-     * Set options from Zend_Config
-     *
-     * @param  \Zend\Config\Config $config
-     * @return \Zend\Tag\Cloud
-     */
-    public function setConfig(Config\Config $config)
-    {
-        $this->setOptions($config->toArray());
-
-        return $this;
     }
 
     /**
@@ -146,12 +133,12 @@ class Cloud
         $itemList = $this->getItemList();
 
         foreach ($tags as $tag) {
-            if ($tag instanceof Taggable) {
+            if ($tag instanceof TaggableInterface) {
                 $itemList[] = $tag;
             } else if (is_array($tag)) {
                 $itemList[] = new Item($tag);
             } else {
-                throw new InvalidArgumentException('Tag must be an instance of Zend\Tag\Taggable or an array');
+                throw new InvalidArgumentException('Tag must be an instance of Zend\Tag\TaggableInterface or an array');
             }
         }
 
@@ -161,19 +148,19 @@ class Cloud
     /**
      * Append a single tag to the cloud
      *
-     * @param  \Zend\Tag\Taggable|array $tag
+     * @param  \Zend\Tag\TaggableInterface|array $tag
      * @throws \Zend\Tag\Exception\InvalidArgumentException
      * @return \Zend\Tag\Cloud
      */
     public function appendTag($tag)
     {
         $tags = $this->getItemList();
-        if ($tag instanceof Taggable) {
+        if ($tag instanceof TaggableInterface) {
             $tags[] = $tag;
         } else if (is_array($tag)) {
             $tags[] = new Item($tag);
         } else {
-            throw new InvalidArgumentException('Tag must be an instance of Zend\Tag\Taggable or an array');
+            throw new InvalidArgumentException('Tag must be an instance of Zend\Tag\TaggableInterface or an array');
         }
 
         return $this;
@@ -232,7 +219,7 @@ class Cloud
         }
 
         if (!($decorator instanceof Cloud\Decorator\Cloud)) {
-            throw new InvalidArgumentException('Decorator is no instance of Zend\Tag\Cloud\Decorator\Cloud');
+            throw new InvalidArgumentException('DecoratorInterface is no instance of Zend\Tag\Cloud\Decorator\Cloud');
         }
 
         $this->_cloudDecorator = $decorator;
@@ -243,7 +230,7 @@ class Cloud
     /**
      * Get the decorator for the cloud
      *
-     * @return \Zend\Tag\Cloud\Decorator\Cloud
+     * @return Cloud
      */
     public function getCloudDecorator()
     {
@@ -279,7 +266,7 @@ class Cloud
         }
 
         if (!($decorator instanceof Cloud\Decorator\Tag)) {
-            throw new InvalidArgumentException('Decorator is no instance of Zend\Tag\Cloud\Decorator\Tag');
+            throw new InvalidArgumentException('DecoratorInterface is no instance of Zend\Tag\Cloud\Decorator\Tag');
         }
 
         $this->_tagDecorator = $decorator;
@@ -290,7 +277,7 @@ class Cloud
     /**
      * Get the decorator for the tags
      *
-     * @return \Zend\Tag\Cloud\Decorator\Tag
+     * @return Tag
      */
     public function getTagDecorator()
     {

@@ -19,13 +19,11 @@
  */
 
 namespace Zend\Validator;
-use Zend;
+
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
 
 /**
- * @uses       \Zend\Locale\Locale
- * @uses       \Zend\Locale\Format
- * @uses       \Zend\Registry
- * @uses       \Zend\Validator\AbstractValidator
  * @category   Zend
  * @package    Zend_Validate
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -49,30 +47,30 @@ class Int extends AbstractValidator
     /**
      * Constructor for the integer validator
      *
-     * @param string|Zend_Config|\Zend\Locale\Locale $locale
+     * @param  array|Traversable|\Zend\Locale\Locale|string $options
      */
-    public function __construct($locale = null)
+    public function __construct($options = null)
     {
-        if ($locale instanceof \Zend\Config\Config) {
-            $locale = $locale->toArray();
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
         }
 
-        if (is_array($locale)) {
-            if (array_key_exists('locale', $locale)) {
-                $locale = $locale['locale'];
+        if (is_array($options)) {
+            if (array_key_exists('locale', $options)) {
+                $options = $options['locale'];
             } else {
-                $locale = null;
+                $options = null;
             }
         }
 
-        if (empty($locale)) {
+        if (empty($options)) {
             if (\Zend\Registry::isRegistered('Zend_Locale')) {
-                $locale = \Zend\Registry::get('Zend_Locale');
+                $options = \Zend\Registry::get('Zend_Locale');
             }
         }
 
-        if ($locale !== null) {
-            $this->setLocale($locale);
+        if ($options !== null) {
+            $this->setLocale($options);
         }
         
         parent::__construct();
@@ -131,7 +129,7 @@ class Int extends AbstractValidator
                     $this->error(self::NOT_INT);
                     return false;
                 }
-            } catch (\Zend\Locale\Exception $e) {
+            } catch (\Zend\Locale\Exception\ExceptionInterface $e) {
                 $this->error(self::NOT_INT);
                 return false;
             }

@@ -35,12 +35,6 @@ use Zend\Pdf;
  * or zoom specifies that the current value of that parameter is to be retained unchanged.
  * A zoom value of 0 has the same meaning as a null value.
  *
- * @uses       \Zend\Pdf\Destination\Explicit
- * @uses       \Zend\Pdf\InternalType\ArrayObject
- * @uses       \Zend\Pdf\InternalType\NameObject
- * @uses       \Zend\Pdf\InternalType\NullObject
- * @uses       \Zend\Pdf\InternalType\NumericObject
- * @uses       \Zend\Pdf\Exception
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Destination
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -56,7 +50,7 @@ class Zoom extends Explicit
      * @param float $top   Top edge of displayed page
      * @param float $zoom  Zoom factor
      * @return \Zend\Pdf\Destination\Zoom
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
     public static function create($page, $left = null, $top = null, $zoom = null)
     {

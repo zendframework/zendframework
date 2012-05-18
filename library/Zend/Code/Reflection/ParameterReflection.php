@@ -20,18 +20,15 @@
 
 namespace Zend\Code\Reflection;
 
-use ReflectionParameter,
-    Zend\Code\Reflection;
+use ReflectionParameter;
 
 /**
- * @uses       ReflectionParameter
- * @uses       \Zend\Code\Reflection\Exception
  * @category   Zend
  * @package    Zend_Reflection
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ParameterReflection extends ReflectionParameter implements Reflection
+class ParameterReflection extends ReflectionParameter implements ReflectionInterface
 {
     /**
      * @var bool

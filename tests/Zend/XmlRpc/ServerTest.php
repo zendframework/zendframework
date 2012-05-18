@@ -331,7 +331,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $help = $this->_server->methodHelp('system.methodHelp', 'system.listMethods');
         $this->assertContains('Display help message for an XMLRPC method', $help);
 
-        $this->setExpectedException('Zend\\XmlRpc\\Server\\Exception', 'Method "foo" does not exist');
+        $this->setExpectedException('Zend\\XmlRpc\\Server\\Exception\\ExceptionInterface', 'Method "foo" does not exist');
         $this->_server->methodHelp('foo');
     }
 
@@ -351,7 +351,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(is_array($sig));
         $this->assertEquals(1, count($sig), var_export($sig, 1));
 
-        $this->setExpectedException('Zend\XmlRpc\Server\Exception', 'Method "foo" does not exist');
+        $this->setExpectedException('Zend\XmlRpc\Server\Exception\ExceptionInterface', 'Method "foo" does not exist');
         $this->_server->methodSignature('foo');
     }
 
@@ -646,7 +646,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
 
     public function testCallingUnregisteredMethod()
     {
-        $this->setExpectedException('Zend\\XmlRpc\\Server\\Exception',
+        $this->setExpectedException('Zend\\XmlRpc\\Server\\Exception\\ExceptionInterface',
             'Unknown instance method called on server: foobarbaz');
         $this->_server->foobarbaz();
     }
@@ -659,13 +659,13 @@ class ServerTest extends \PHPUnit_Framework_TestCase
 
     public function testPassingInvalidRequestClassThrowsException()
     {
-        $this->setExpectedException('Zend\\XmlRpc\\Server\\Exception', 'Invalid request class');
+        $this->setExpectedException('Zend\\XmlRpc\\Server\\Exception\\ExceptionInterface', 'Invalid request class');
         $this->_server->setRequest('stdClass');
     }
 
     public function testPassingInvalidResponseClassThrowsException()
     {
-        $this->setExpectedException('Zend\\XmlRpc\\Server\\Exception', 'Invalid response class');
+        $this->setExpectedException('Zend\\XmlRpc\\Server\\Exception\\ExceptionInterface', 'Invalid response class');
         $this->_server->setResponseClass('stdClass');
     }
 

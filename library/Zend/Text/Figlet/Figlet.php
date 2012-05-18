@@ -19,12 +19,13 @@
  */
 
 namespace Zend\Text\Figlet;
-use Zend\Config;
+
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
 
 /**
- * Zend_Text_Figlet is a PHP implementation of FIGlet
+ * Zend\Text\Figlet is a PHP implementation of FIGlet
  *
- * @uses      \Zend\Text\Figlet\Exception\InvalidArgumentException
  * @category  Zend
  * @package   Zend_Text_Figlet
  * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -158,7 +159,7 @@ class Figlet
      * Justification for the text, according to $_outputWidth
      *
      * For using font default, this parameter should be null, else one of
-     * the values of Zend_Text_Figlet::JUSTIFICATION_*
+     * the values of Zend\Text\Figlet::JUSTIFICATION_*
      *
      * @var integer
      */
@@ -168,7 +169,7 @@ class Figlet
      * Direction of text-writing, namely right to left
      *
      * For using font default, this parameter should be null, else one of
-     * the values of Zend_Text_Figlet::DIRECTION_*
+     * the values of Zend\Text\Figlet::DIRECTION_*
      *
      * @var integer
      */
@@ -274,15 +275,16 @@ class Figlet
      * the $options variable, which can either be an array or an instance of
      * Zend_Config.
      *
-     * @param array|\Zend\Config\Config $options Options for the output
+     * @param array|Traversable $options Options for the output
      */
     public function __construct($options = null)
     {
         // Set options
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
+        }
         if (is_array($options)) {
             $this->setOptions($options);
-        } else if ($options instanceof Config\Config) {
-            $this->setConfig($options);
         }
 
         // If no font was defined, load default font
@@ -294,8 +296,8 @@ class Figlet
     /**
      * Set options from array
      *
-     * @param  array $options Configuration for \Zend\Text\Figlet\Figlet
-     * @return \Zend\Text\Figlet\Figlet
+     * @param  array $options Configuration for Figlet
+     * @return Figlet
      */
     public function setOptions(array $options)
     {
@@ -313,21 +315,10 @@ class Figlet
     }
 
     /**
-     * Set options from config object
-     *
-     * @param  Zend_Config $config Configuration for \Zend\Text\Figlet\Figlet
-     * @return \Zend\Text\Figlet\Figlet
-     */
-    public function setConfig(Config\Config $config)
-    {
-        return $this->setOptions($config->toArray());
-    }
-
-    /**
      * Set a font to use
      *
      * @param  string $font Path to the font
-     * @return \Zend\Text\Figlet\Figlet
+     * @return Figlet
      */
     public function setFont($font)
     {
@@ -339,7 +330,7 @@ class Figlet
      * Set handling of paragraphs
      *
      * @param  boolean $handleParagraphs Wether to handle paragraphs or not
-     * @return \Zend\Text\Figlet\Figlet
+     * @return Figlet
      */
     public function setHandleParagraphs($handleParagraphs)
     {
@@ -352,7 +343,7 @@ class Figlet
      * for right aligned.
      *
      * @param  integer $justification Justification of the output text
-     * @return \Zend\Text\Figlet\Figlet
+     * @return Figlet
      */
     public function setJustification($justification)
     {
@@ -365,7 +356,7 @@ class Figlet
      *
      * @param  integer $outputWidth Output with which should be used for word
      *                              wrapping and justification
-     * @return \Zend\Text\Figlet\Figlet
+     * @return Figlet
      */
     public function setOutputWidth($outputWidth)
     {
@@ -375,11 +366,11 @@ class Figlet
 
     /**
      * Set right to left mode. For writing from left to right, use
-     * Zend_Text_Figlet::DIRECTION_LEFT_TO_RIGHT. For writing from right to left,
-     * use Zend_Text_Figlet::DIRECTION_RIGHT_TO_LEFT.
+     * Zend\Text\Figlet::DIRECTION_LEFT_TO_RIGHT. For writing from right to left,
+     * use Zend\Text\Figlet::DIRECTION_RIGHT_TO_LEFT.
      *
      * @param  integer $rightToLeft Right-to-left mode
-     * @return \Zend\Text\Figlet\Figlet
+     * @return Figlet
      */
     public function setRightToLeft($rightToLeft)
     {
@@ -390,10 +381,10 @@ class Figlet
     /**
      * Set the smush mode.
      *
-     * Use one of the constants of Zend_Text_Figlet::SM_*, you may combine them.
+     * Use one of the constants of Zend\Text\Figlet::SM_*, you may combine them.
      *
      * @param  integer $smushMode Smush mode to use for generating text
-     * @return \Zend\Text\Figlet\Figlet
+     * @return Figlet
      */
     public function setSmushMode($smushMode)
     {
@@ -423,8 +414,8 @@ class Figlet
      *
      * @param  string $text     Text to convert to a figlet text
      * @param  string $encoding Encoding of the input string
-     * @throws \Zend\Text\Figlet\Exception\InvalidArgumentException When $text is not a string
-     * @throws \Zend\Text\Figlet\Exception\UnexpectedValueException When $text it not properly encoded
+     * @throws Exception\InvalidArgumentException When $text is not a string
+     * @throws Exception\UnexpectedValueException When $text it not properly encoded
      * @return string
      */
     public function render($text, $encoding = 'UTF-8')
@@ -961,10 +952,10 @@ class Figlet
      * Load the specified font
      *
      * @param  string $fontFile Font file to load
-     * @throws \Zend\Text\Figlet\Exception\RuntimeException When font file was not found
-     * @throws \Zend\Text\Figlet\Exception\RuntimeException When GZIP library is required but not found
-     * @throws \Zend\Text\Figlet\Exception\RuntimeException When font file is not readable
-     * @throws \Zend\Text\Figlet\Exception\UnexpectedValueException When font file is not a FIGlet 2 font file
+     * @throws Exception\RuntimeException When font file was not found
+     * @throws Exception\RuntimeException When GZIP library is required but not found
+     * @throws Exception\RuntimeException When font file is not readable
+     * @throws Exception\UnexpectedValueException When font file is not a FIGlet 2 font file
      * @return void
      */
     protected function _loadFont($fontFile)

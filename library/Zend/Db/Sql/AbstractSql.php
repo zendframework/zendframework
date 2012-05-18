@@ -1,4 +1,12 @@
 <?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Db
+ */
 
 namespace Zend\Db\Sql;
 
@@ -14,18 +22,14 @@ abstract class AbstractSql
         // static counter for the number of times this method was invoked across the PHP runtime
         static $runtimeExpressionPrefix = 0;
 
+        if ($driver && ((!is_string($namedParameterPrefix) || $namedParameterPrefix == ''))) {
+            $namedParameterPrefix = sprintf('expr%04dParam', ++$runtimeExpressionPrefix);
+        }
+
         $return = array(
             'sql' => '',
             'parameters' => array()
         );
-
-        // get the prepare type from the driver,
-        if ($driver !== null) {
-            $prepareType = $driver->getPrepareType();
-            if ((!is_string($namedParameterPrefix) || $namedParameterPrefix == '') && $prepareType == 'named') {
-                $namedParameterPrefix = sprintf('expr%04dParam', ++$runtimeExpressionPrefix);
-            }
-        }
 
         // initialize variables
         $parts = $expression->getExpressionData();
@@ -53,20 +57,17 @@ abstract class AbstractSql
 
                     // if prepareType is set, it means that this particular value must be
                     // passed back to the statement in a way it can be used as a placeholder value
-                    if (isset($prepareType)) {
-                        if ($prepareType == 'positional') {
-                            $return['parameters'][] = $value;
-                            $values[$vIndex] = $driver->formatParameterName(null);
-                        } elseif ($prepareType == 'named') {
-                            $name = $namedParameterPrefix . $expressionParamIndex++;
-                            $return['parameters'][$name] = $value;
-                            $values[$vIndex] = $driver->formatParameterName($name);
-                        }
+                    if ($driver) {
+                        $name = $namedParameterPrefix . $expressionParamIndex++;
+                        $return['parameters'][$name] = $value;
+                        $values[$vIndex] = $driver->formatParameterName($name);
                         continue;
                     }
 
                     // if not a preparable statement, simply quote the value and move on
                     $values[$vIndex] = $platform->quoteValue($value);
+                } elseif (isset($types[$vIndex]) && $types[$vIndex] == ExpressionInterface::TYPE_LITERAL) {
+                    $values[$vIndex] = $value;
                 }
             }
 
@@ -77,12 +78,44 @@ abstract class AbstractSql
         return $return;
     }
 
-    protected function applySpecification($name, array $vArgs)
+    /**
+     * @param $specification
+     * @param $parameters
+     * @return string
+     * @throws Exception\RuntimeException
+     */
+    protected function createSqlFromSpecificationAndParameters($specification, $parameters)
     {
-        if (!array_key_exists($name, $this->specifications)) {
-            throw new \RuntimeException('Invalid specification index');
+        if (is_string($specification)) {
+            return vsprintf($specification, $parameters);
         }
 
-        return vsprintf($this->specifications[$name], $vArgs);
+        $topSpec = key($specification);
+        $paramSpecs = $specification[$topSpec];
+
+        $topParameters = array();
+        foreach ($parameters as $position => $paramsForPosition) {
+            if (isset($paramSpecs[$position]['combinedby'])) {
+                $multiParamValues = array();
+                foreach ($paramsForPosition as $multiParamsForPosition) {
+                    $ppCount = count($multiParamsForPosition);
+                    if (!isset($paramSpecs[$position][$ppCount])) {
+                        throw new Exception\RuntimeException('A number of parameters (' . $ppCount . ') was found that is not supported by this specification');
+                    }
+                    $multiParamValues[] = vsprintf($paramSpecs[$position][$ppCount], $multiParamsForPosition);
+                }
+                $topParameters[] = implode($paramSpecs[$position]['combinedby'], $multiParamValues);
+            } elseif ($paramSpecs[$position] !== null) {
+                $ppCount = count($paramsForPosition);
+                if (!isset($paramSpecs[$position][$ppCount])) {
+                    throw new Exception\RuntimeException('A number of parameters (' . $ppCount . ') was found that is not supported by this specification');
+                }
+                $topParameters[] = vsprintf($paramSpecs[$position][$ppCount], $paramsForPosition);
+            } else {
+                $topParameters[] = $paramsForPosition;
+            }
+        }
+        return vsprintf($topSpec, $topParameters);
     }
+
 }

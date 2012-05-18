@@ -25,8 +25,6 @@ use Zend\Markup;
 /**
  * Simple replace markup for HTML
  *
- * @uses       \Zend\Markup\Renderer\Markup\Html\AbstractHtml
- * @uses       \Zend\Markup\Token
  * @category   Zend
  * @package    Zend_Markup
  * @subpackage Renderer_Markup_Html
@@ -48,8 +46,6 @@ class Replace extends AbstractHtml
      * Constructor
      *
      * @param string $replace
-     * 
-     * @return void
      */
     public function __construct($replace)
     {

@@ -122,7 +122,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
             $this->fail('An invalid argument was given to the constructor, ' .
                         'but a Zend\Navigation\Exception\InvalidArgumentException was ' .
                         'not thrown');
-        } catch (Navigation\Exception $e) {
+        } catch (Navigation\Exception\ExceptionInterface $e) {
             $this->assertContains('Invalid argument: $pages', $e->getMessage());
         }
     }

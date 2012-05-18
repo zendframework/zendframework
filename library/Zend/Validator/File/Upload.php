@@ -23,8 +23,6 @@ namespace Zend\Validator\File;
 /**
  * Validator for the maximum size of a file up to a max of 2GB
  *
- * @uses      \Zend\Validator\AbstractValidator
- * @uses      \Zend\Validator\Exception
  * @category  Zend
  * @package   Zend_Validate
  * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -73,8 +71,7 @@ class Upload extends \Zend\Validator\AbstractValidator
      * If no files are given the $_FILES array will be used automatically.
      * NOTE: This validator will only work with HTTP POST uploads!
      *
-     * @param  array|Zend_Config $options Array of files in syntax of \Zend\File\Transfer\Transfer
-     * @return void
+     * @param  array|\Traversable $options Array of files in syntax of \Zend\File\Transfer\Transfer
      */
     public function __construct($options = array())
     {

@@ -28,14 +28,6 @@ use Zend\Wildfire,
 /**
  * Implements communication via HTTP request and response headers for Wildfire Protocols.
  *
- * @uses       \Zend\Controller\Front
- * @uses       \Zend\Controller\Plugin\AbstractPlugin
- * @uses       \Zend\Controller\Request\AbstractRequest
- * @uses       \Zend\Controller\Response\AbstractResponse
- * @uses       \Zend\Loader
- * @uses       \Zend\Wildfire\Channel
- * @uses       \Zend\Wildfire\Exception
- * @uses       \Zend\Wildfire\Protocol\JsonStream
  * @category   Zend
  * @package    Zend_Wildfire
  * @subpackage Channel

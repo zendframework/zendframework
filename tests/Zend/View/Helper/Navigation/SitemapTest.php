@@ -210,7 +210,7 @@ class SitemapTest extends AbstractTest
 
         try {
             $this->_helper->render($nav);
-        } catch (View\Exception $e) {
+        } catch (View\Exception\ExceptionInterface $e) {
             $expected = sprintf(
                     'Encountered an invalid URL for Sitemap XML: "%s"',
                     'http://w.');
@@ -238,8 +238,8 @@ class SitemapTest extends AbstractTest
         try {
             $this->_helper->setServerUrl('site.example.org');
             $this->fail('An invalid server URL was given, but a ' .
-                        'Zend\URI\Exception was not thrown');
-        } catch (\Zend\URI\Exception $e) {
+                        'Zend\URI\Exception\ExceptionInterface was not thrown');
+        } catch (\Zend\URI\Exception\ExceptionInterface $e) {
             $this->assertContains('Illegal scheme', $e->getMessage());
         }
     }
@@ -279,7 +279,7 @@ class SitemapTest extends AbstractTest
 
         try {
             $this->_helper->render($nav);
-        } catch (View\Exception $e) {
+        } catch (View\Exception\ExceptionInterface $e) {
             $expected = sprintf(
                     'Sitemap is invalid according to XML Schema at "%s"',
                     \Zend\View\Helper\Navigation\Sitemap::SITEMAP_XSD);

@@ -23,7 +23,7 @@ namespace Zend\Service\SlideShare;
 
 use SimpleXMLElement,
     Zend\Cache\StorageFactory as CacheFactory,
-    Zend\Cache\Storage\Adapter as CacheAdapter,
+    Zend\Cache\Storage\Adapter\AdapterInterface as CacheAdapter,
     Zend\Http,
     Zend\Http\Client;
 
@@ -141,7 +141,7 @@ class SlideShare
 
         if (!($this->httpclient instanceof Http\Client)) {
             $client = new Http\Client();
-            $client->setConfig(array('maxredirects' => 2,
+            $client->setOptions(array('maxredirects' => 2,
                                      'timeout'      => 5));
 
             $this->setHttpClient($client);

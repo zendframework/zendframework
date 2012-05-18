@@ -22,7 +22,6 @@
 namespace Zend\Cache\Pattern;
 
 use Zend\Cache\Exception,
-    Zend\Cache\Pattern,
     Traversable;
 
 /**
@@ -32,7 +31,7 @@ use Zend\Cache\Exception,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class AbstractPattern implements Pattern
+abstract class AbstractPattern implements PatternInterface
 {
     /**
      * @var PatternOptions

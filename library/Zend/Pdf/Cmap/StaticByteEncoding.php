@@ -29,8 +29,6 @@ use Zend\Pdf;
  * Just like {@link \Zend\Pdf\Cmap\ByteEncoding} except that the constructor
  * takes a predefined array of glyph numbers and can cover any Unicode character.
  *
- * @uses       \Zend\Pdf\Cmap\ByteEncoding
- * @uses       \Zend\Pdf\Exception
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Font
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -48,7 +46,7 @@ class StaticByteEncoding extends ByteEncoding
      *
      * @param array $cmapData Array whose keys are Unicode character codes and
      *   values are glyph numbers.
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
     public function __construct($cmapData)
     {

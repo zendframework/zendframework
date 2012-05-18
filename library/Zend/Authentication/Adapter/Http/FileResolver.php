@@ -24,15 +24,13 @@ namespace Zend\Authentication\Adapter\Http;
 /**
  * HTTP Authentication File Resolver
  *
- * @uses       Zend\Authentication\Adapter\Http\Exception
- * @uses       Zend\Authentication\Adapter\Http\Resolver
  * @category   Zend
  * @package    Zend_Authentication
  * @subpackage Adapter_Http
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class FileResolver implements Resolver
+class FileResolver implements ResolverInterface
 {
     /**
      * Path to credentials file
@@ -59,12 +57,12 @@ class FileResolver implements Resolver
      *
      * @param  string $path
      * @return Zend\Authentication\Adapter\Http\FileResolver Provides a fluent interface
-     * @throws Zend\Authentication\Adapter\Http\Exception
+     * @throws Zend\Authentication\Adapter\Http\Exception\ExceptionInterface
      */
     public function setFile($path)
     {
         if (empty($path) || !is_readable($path)) {
-            throw new InvalidArgumentException('Path not readable: ' . $path);
+            throw new Exception\InvalidArgumentException('Path not readable: ' . $path);
         }
         $this->_file = $path;
 
@@ -100,27 +98,27 @@ class FileResolver implements Resolver
      * @param  string $realm    Authentication Realm
      * @return string|false User's shared secret, if the user is found in the
      *         realm, false otherwise.
-     * @throws Zend\Authentication\Adapter\Http\Exception
+     * @throws Zend\Authentication\Adapter\Http\Exception\ExceptionInterface
      */
     public function resolve($username, $realm)
     {
         if (empty($username)) {
-            throw new InvalidArgumentException('Username is required');
+            throw new Exception\InvalidArgumentException('Username is required');
         } else if (!ctype_print($username) || strpos($username, ':') !== false) {
-            throw new InvalidArgumentException('Username must consist only of printable characters, '
+            throw new Exception\InvalidArgumentException('Username must consist only of printable characters, '
                                                               . 'excluding the colon');
         }
         if (empty($realm)) {
-            throw new InvalidArgumentException('Realm is required');
+            throw new Exception\InvalidArgumentException('Realm is required');
         } else if (!ctype_print($realm) || strpos($realm, ':') !== false) {
-            throw new InvalidArgumentException('Realm must consist only of printable characters, '
+            throw new Exception\InvalidArgumentException('Realm must consist only of printable characters, '
                                                               . 'excluding the colon.');
         }
 
         // Open file, read through looking for matching credentials
         $fp = @fopen($this->_file, 'r');
         if (!$fp) {
-            throw new RuntimeException('Unable to open password file: ' . $this->_file);
+            throw new Exception\RuntimeException('Unable to open password file: ' . $this->_file);
         }
 
         // No real validation is done on the contents of the password file. The

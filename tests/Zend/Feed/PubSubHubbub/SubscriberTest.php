@@ -75,9 +75,9 @@ class SubscriberTest extends \PHPUnit_Framework_TestCase
         ), $this->_subscriber->getHubUrls());
     }
 
-    public function testAddsHubServerUrlsFromArrayUsingSetConfig()
+    public function testAddsHubServerUrlsFromArrayUsingSetOptions()
     {
-        $this->_subscriber->setConfig(array('hubUrls' => array(
+        $this->_subscriber->setOptions(array('hubUrls' => array(
             'http://www.example.com/hub', 'http://www.example.com/hub2'
         )));
         $this->assertEquals(array(
@@ -112,7 +112,7 @@ class SubscriberTest extends \PHPUnit_Framework_TestCase
         try {
             $this->_subscriber->addHubUrl('');
             $this->fail('Should not fail as an Exception would be raised and caught');
-        } catch (PubSubHubbub\Exception $e) {}
+        } catch (PubSubHubbub\Exception\ExceptionInterface $e) {}
     }
 
     public function testThrowsExceptionOnSettingNonStringHubServerUrl()
@@ -120,7 +120,7 @@ class SubscriberTest extends \PHPUnit_Framework_TestCase
         try {
             $this->_subscriber->addHubUrl(123);
             $this->fail('Should not fail as an Exception would be raised and caught');
-        } catch (PubSubHubbub\Exception $e) {}
+        } catch (PubSubHubbub\Exception\ExceptionInterface $e) {}
     }
 
     public function testThrowsExceptionOnSettingInvalidHubServerUrl()
@@ -128,7 +128,7 @@ class SubscriberTest extends \PHPUnit_Framework_TestCase
         try {
             $this->_subscriber->addHubUrl('http://');
             $this->fail('Should not fail as an Exception would be raised and caught');
-        } catch (PubSubHubbub\Exception $e) {}
+        } catch (PubSubHubbub\Exception\ExceptionInterface $e) {}
     }
 
     public function testAddsParameter()
@@ -157,9 +157,9 @@ class SubscriberTest extends \PHPUnit_Framework_TestCase
         ), $this->_subscriber->getParameters());
     }
 
-    public function testAddsParametersFromArrayUsingSetConfig()
+    public function testAddsParametersFromArrayUsingSetOptions()
     {
-        $this->_subscriber->setConfig(array('parameters' => array(
+        $this->_subscriber->setOptions(array('parameters' => array(
             'foo' => 'bar', 'boo' => 'baz'
         )));
         $this->assertEquals(array(
@@ -200,7 +200,7 @@ class SubscriberTest extends \PHPUnit_Framework_TestCase
         try {
             $this->_subscriber->setTopicUrl('');
             $this->fail('Should not fail as an Exception would be raised and caught');
-        } catch (PubSubHubbub\Exception $e) {}
+        } catch (PubSubHubbub\Exception\ExceptionInterface $e) {}
     }
 
 
@@ -209,7 +209,7 @@ class SubscriberTest extends \PHPUnit_Framework_TestCase
         try {
             $this->_subscriber->setTopicUrl(123);
             $this->fail('Should not fail as an Exception would be raised and caught');
-        } catch (PubSubHubbub\Exception $e) {}
+        } catch (PubSubHubbub\Exception\ExceptionInterface $e) {}
     }
 
 
@@ -218,7 +218,7 @@ class SubscriberTest extends \PHPUnit_Framework_TestCase
         try {
             $this->_subscriber->setTopicUrl('http://');
             $this->fail('Should not fail as an Exception would be raised and caught');
-        } catch (PubSubHubbub\Exception $e) {}
+        } catch (PubSubHubbub\Exception\ExceptionInterface $e) {}
     }
 
     public function testThrowsExceptionOnMissingTopicUrl()
@@ -226,7 +226,7 @@ class SubscriberTest extends \PHPUnit_Framework_TestCase
         try {
             $this->_subscriber->getTopicUrl();
             $this->fail('Should not fail as an Exception would be raised and caught');
-        } catch (PubSubHubbub\Exception $e) {}
+        } catch (PubSubHubbub\Exception\ExceptionInterface $e) {}
     }
 
     public function testCanSetCallbackUrl()
@@ -240,7 +240,7 @@ class SubscriberTest extends \PHPUnit_Framework_TestCase
         try {
             $this->_subscriber->setCallbackUrl('');
             $this->fail('Should not fail as an Exception would be raised and caught');
-        } catch (PubSubHubbub\Exception $e) {}
+        } catch (PubSubHubbub\Exception\ExceptionInterface $e) {}
     }
 
 
@@ -249,7 +249,7 @@ class SubscriberTest extends \PHPUnit_Framework_TestCase
         try {
             $this->_subscriber->setCallbackUrl(123);
             $this->fail('Should not fail as an Exception would be raised and caught');
-        } catch (PubSubHubbub\Exception $e) {}
+        } catch (PubSubHubbub\Exception\ExceptionInterface $e) {}
     }
 
 
@@ -258,7 +258,7 @@ class SubscriberTest extends \PHPUnit_Framework_TestCase
         try {
             $this->_subscriber->setCallbackUrl('http://');
             $this->fail('Should not fail as an Exception would be raised and caught');
-        } catch (PubSubHubbub\Exception $e) {}
+        } catch (PubSubHubbub\Exception\ExceptionInterface $e) {}
     }
 
     public function testThrowsExceptionOnMissingCallbackUrl()
@@ -266,7 +266,7 @@ class SubscriberTest extends \PHPUnit_Framework_TestCase
         try {
             $this->_subscriber->getCallbackUrl();
             $this->fail('Should not fail as an Exception would be raised and caught');
-        } catch (PubSubHubbub\Exception $e) {}
+        } catch (PubSubHubbub\Exception\ExceptionInterface $e) {}
     }
 
     public function testCanSetLeaseSeconds()
@@ -280,7 +280,7 @@ class SubscriberTest extends \PHPUnit_Framework_TestCase
         try {
             $this->_subscriber->setLeaseSeconds(0);
             $this->fail('Should not fail as an Exception would be raised and caught');
-        } catch (PubSubHubbub\Exception $e) {}
+        } catch (PubSubHubbub\Exception\ExceptionInterface $e) {}
     }
 
     public function testThrowsExceptionOnSettingLessThanZeroAsLeaseSeconds()
@@ -288,7 +288,7 @@ class SubscriberTest extends \PHPUnit_Framework_TestCase
         try {
             $this->_subscriber->setLeaseSeconds(-1);
             $this->fail('Should not fail as an Exception would be raised and caught');
-        } catch (PubSubHubbub\Exception $e) {}
+        } catch (PubSubHubbub\Exception\ExceptionInterface $e) {}
     }
 
     public function testThrowsExceptionOnSettingAnyScalarTypeCastToAZeroOrLessIntegerAsLeaseSeconds()
@@ -296,7 +296,7 @@ class SubscriberTest extends \PHPUnit_Framework_TestCase
         try {
             $this->_subscriber->setLeaseSeconds('0aa');
             $this->fail('Should not fail as an Exception would be raised and caught');
-        } catch (PubSubHubbub\Exception $e) {}
+        } catch (PubSubHubbub\Exception\ExceptionInterface $e) {}
     }
 
     public function testCanSetPreferredVerificationMode()
@@ -310,7 +310,7 @@ class SubscriberTest extends \PHPUnit_Framework_TestCase
         try {
             $this->_subscriber->setPreferredVerificationMode('abc');
             $this->fail('Should not fail as an Exception would be raised and caught');
-        } catch (PubSubHubbub\Exception $e) {}
+        } catch (PubSubHubbub\Exception\ExceptionInterface $e) {}
     }
 
     public function testPreferredVerificationModeDefaultsToSync()
@@ -328,7 +328,7 @@ class SubscriberTest extends \PHPUnit_Framework_TestCase
 
     public function testGetStorageThrowsExceptionIfNoneSet()
     {
-        $this->setExpectedException('Zend\Feed\PubSubHubbub\Exception');
+        $this->setExpectedException('Zend\Feed\PubSubHubbub\Exception\ExceptionInterface');
         $this->_subscriber->getStorage();
     }
     

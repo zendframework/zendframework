@@ -22,7 +22,6 @@
 namespace Zend\Queue\Adapter\Db;
 
 /**
- * @uses       \Zend\Db\Table\AbstractTable
  * @category   Zend
  * @package    Zend_Queue
  * @subpackage Adapter

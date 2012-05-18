@@ -51,7 +51,7 @@ class AlphaTest extends \PHPUnit_Framework_TestCase
     /**
      * Locale in browser.
      *
-     * @var Zend_Locale object
+     * @var Locale object
      */
     protected $_locale;
 

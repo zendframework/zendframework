@@ -13,18 +13,21 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend\Cloud
+ * @package    Zend_Cloud
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace Zend\Cloud;
 
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
+
 /**
  * Abstract factory for Zend\Cloud resources
  *
  * @category   Zend
- * @package    Zend\Cloud
+ * @package    Zend_Cloud
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -44,13 +47,13 @@ class AbstractFactory
      * Get an individual adapter instance
      *
      * @param  string $adapterOption
-     * @param  array|Zend\Config $options
-     * @return null|DocumentService\Adapter|QueueService\Adapter|StorageService\Adapter|Infrastructure\Adapter
+     * @param  array|Traversable $options
+     * @return null|DocumentService\Adapter\AdapterInterface|QueueService\Adapter\AdapterInterface|StorageService\Adapter\AdapterInterface|Infrastructure\Adapter\AdapterInterface
      */
     protected static function _getAdapter($adapterOption, $options)
     {
-        if ($options instanceof \Zend\Config\Config) {
-            $options = $options->toArray();
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
         }
 
         if (!isset($options[$adapterOption])) {

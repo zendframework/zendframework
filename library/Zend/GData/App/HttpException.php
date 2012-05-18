@@ -21,13 +21,14 @@
 
 namespace Zend\GData\App;
 
+use Zend\Http;
+use Zend\Http\Client\Exception\ExceptionInterface as ClientExceptionInterface;
+
 /**
  * Gdata exceptions
  *
  * Class to represent exceptions that occur during Gdata operations.
  *
- * @uses       \Zend\GData\App\Exception
- * @uses       \Zend\Http\Client\Exception
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage App
@@ -36,18 +37,19 @@ namespace Zend\GData\App;
  */
 class HttpException extends Exception
 {
-
+    /** @var null|ExceptionInterface */
     protected $_httpClientException = null;
+    /** @var null|Http\Response */
     protected $_response = null;
 
     /**
      * Create a new \Zend\Gdata\App\HttpException
      *
-     * @param  string $message Optionally set a message
-     * @param \Zend\Http\Client\Exception Optionally pass in a \Zend\Http\Client\Exception
+     * @param string $message Optionally set a message
+     * @param ClientExceptionInterface $e Optionally pass in a Zend\Http\Client\Exception\ExceptionInterface
      * @param \Zend\Http\Response Optionally pass in a \Zend\Http\Response
      */
-    public function __construct($message = null, $e = null, $response = null)
+    public function __construct($message = null, ClientExceptionInterface $e = null, $response = null)
     {
         $this->_httpClientException = $e;
         $this->_response = $response;
@@ -57,7 +59,7 @@ class HttpException extends Exception
     /**
      * Get the Zend_Http_Client_Exception.
      *
-     * @return \Zend\Http\Client\Exception
+     * @return ClientExceptionInterface
      */
     public function getHttpClientException()
     {
@@ -65,31 +67,33 @@ class HttpException extends Exception
     }
 
     /**
-     * Set the Zend_Http_Client_Exception.
+     * Set the Http Client Exception.
      *
-     * @param \Zend\Http\Client\Exception $value
+     * @param  ClientExceptionInterface $value
+     * @return self
      */
-    public function setHttpClientException($value)
+    public function setHttpClientException(ClientExceptionInterface $value)
     {
         $this->_httpClientException = $value;
         return $this;
     }
 
     /**
-     * Set the Zend_Http_Response.
+     * Set the Http Response.
      *
      * @param \Zend\Http\Response $response
+     * @return self
      */
-    public function setResponse($response)
+    public function setResponse(Http\Response $response)
     {
         $this->_response = $response;
         return $this;
     }
 
     /**
-     * Get the Zend_Http_Response.
+     * Get the Http Response.
      *
-     * @return \Zend\Http\Response
+     * @return Http\Response
      */
     public function getResponse()
     {
@@ -97,9 +101,9 @@ class HttpException extends Exception
     }
 
     /**
-     * Get the body of the Zend_Http_Response
+     * Get the body of the Http Response
      *
-     * @return string
+     * @return null|string
      */
     public function getRawResponseBody()
     {

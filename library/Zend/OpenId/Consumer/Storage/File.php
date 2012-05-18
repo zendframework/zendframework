@@ -26,8 +26,6 @@ use Zend\OpenId;
 /**
  * External storage implemmentation using serialized files
  *
- * @uses       Zend\OpenId\Consumer\Storage\AbstractStorage
- * @uses       Zend\OpenId\Exception
  * @category   Zend
  * @package    Zend_OpenId
  * @subpackage Zend_OpenId_Consumer

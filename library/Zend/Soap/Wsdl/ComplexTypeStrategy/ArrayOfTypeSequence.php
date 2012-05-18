@@ -25,7 +25,6 @@ use Zend\Soap\Wsdl;
 /**
  * Zend_Soap_Wsdl_Strategy_ArrayOfTypeSequence
  *
- * @uses       \Zend\Soap\Wsdl\Strategy\DefaultComplexType
  * @category   Zend
  * @package    Zend_Soap
  * @subpackage WSDL

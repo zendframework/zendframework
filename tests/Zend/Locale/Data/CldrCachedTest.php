@@ -25,7 +25,7 @@ use Zend\Locale\Data\Cldr,
     Zend\Locale\Exception\InvalidArgumentException,
     Zend\Locale\Locale,
     Zend\Cache\StorageFactory as CacheFactory,
-    Zend\Cache\Storage\Adapter as CacheAdapter,
+    Zend\Cache\Storage\Adapter\AdapterInterface as CacheAdapter,
     ZendTest\Locale\Data\CldrTest;
 
 /**

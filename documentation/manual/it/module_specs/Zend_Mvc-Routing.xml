@@ -27,7 +27,7 @@
   <programlisting language="php"><![CDATA[
 namespace Zend\Mvc\Router;
 
-use zend\Stdlib\RequestDescription as Request;
+use zend\Stdlib\RequestInterface as Request;
 
 interface Route
 {

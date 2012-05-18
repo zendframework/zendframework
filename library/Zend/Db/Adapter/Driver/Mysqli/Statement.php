@@ -1,37 +1,23 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Db
- * @subpackage Adapter
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Db
  */
 
 namespace Zend\Db\Adapter\Driver\Mysqli;
 
 use Zend\Db\Adapter\Driver\StatementInterface,
     Zend\Db\Adapter\Exception,
-    Zend\Db\Adapter\ParameterContainer,
-    Zend\Db\Adapter\ParameterContainerInterface;
+    Zend\Db\Adapter\ParameterContainer;
 
 /**
  * @category   Zend
  * @package    Zend_Db
  * @subpackage Adapter
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Statement implements StatementInterface
 {
@@ -54,10 +40,10 @@ class Statement implements StatementInterface
     /**
      * Parameter container
      * 
-     * @var ParameterContainerInterface 
+     * @var ParameterContainer
      */
     protected $parameterContainer = null;
-    
+
     /**
      * @var \mysqli_stmt
      */
@@ -71,6 +57,11 @@ class Statement implements StatementInterface
     protected $isPrepared = false;
 
     /**
+     * @var bool
+     */
+    protected $bufferResults = false;
+
+    /**
      * Set driver
      * 
      * @param  Mysqli $driver
@@ -81,6 +72,7 @@ class Statement implements StatementInterface
         $this->driver = $driver;
         return $this;
     }
+
     /**
      * Initialize
      * 
@@ -92,6 +84,7 @@ class Statement implements StatementInterface
         $this->mysqli = $mysqli;
         return $this;
     }
+
     /**
      * Set sql
      * 
@@ -103,15 +96,17 @@ class Statement implements StatementInterface
         $this->sql = $sql;
         return $this;
     }
+
     /**
      * Set Parameter container
      * 
-     * @param ParameterContainerInterface $parameterContainer 
+     * @param ParameterContainer $parameterContainer
      */
-    public function setParameterContainer(ParameterContainerInterface $parameterContainer)
+    public function setParameterContainer(ParameterContainer $parameterContainer)
     {
         $this->parameterContainer = $parameterContainer;
     }
+
     /**
      * Get resource
      * 
@@ -121,6 +116,7 @@ class Statement implements StatementInterface
     {
         return $this->resource;
     }
+
     /**
      * Set resource
      * 
@@ -133,6 +129,7 @@ class Statement implements StatementInterface
         $this->isPrepared = true;
         return $this;
     }
+
     /**
      * Get sql
      * 
@@ -165,7 +162,7 @@ class Statement implements StatementInterface
     public function prepare($sql = null)
     {
         if ($this->isPrepared) {
-            throw new \Exception('This statement has already been prepared');
+            throw new Exception\RuntimeException('This statement has already been prepared');
         }
 
         $sql = ($sql) ?: $this->sql;
@@ -200,44 +197,56 @@ class Statement implements StatementInterface
             if (is_array($parameters)) {
                 $parameters = new ParameterContainer($parameters);
             }
-            if (!$parameters instanceof ParameterContainerInterface) {
-                throw new \InvalidArgumentException('ParameterContainer expected');
+            if (!$parameters instanceof ParameterContainer) {
+                throw new Exception\InvalidArgumentException('ParameterContainer expected');
             }
             $this->bindParametersFromContainer($parameters);
         }
-            
+
         if ($this->resource->execute() === false) {
-            throw new \RuntimeException($this->resource->error);
+            throw new Exception\RuntimeException($this->resource->error);
         }
 
-        $result = $this->driver->createResult($this->resource);
+        if ($this->bufferResults === true) {
+            $this->resource->store_result();
+            $buffered = true;
+        } else {
+            $buffered = false;
+        }
+
+        $result = $this->driver->createResult($this->resource, $buffered);
         return $result;
     }
+
     /**
      * Bind parameters from container
      * 
-     * @param ParameterContainerInterface $pContainer 
+     * @param ParameterContainer $pContainer
      */
-    protected function bindParametersFromContainer(ParameterContainerInterface $pContainer)
+    protected function bindParametersFromContainer(ParameterContainer $pContainer)
     {
-        $parameters = $pContainer->toArray();
+        $parameters = $pContainer->getNamedArray();
         $type = '';
         $args = array();
 
-        foreach ($parameters as $position => &$value) {
-            switch ($pContainer->offsetGetErrata($position)) {
-                case ParameterContainerInterface::TYPE_DOUBLE:
-                    $type .= 'd';
-                    break;
-                case ParameterContainerInterface::TYPE_NULL:
-                    $value = null; // as per @see http://www.php.net/manual/en/mysqli-stmt.bind-param.php#96148
-                case ParameterContainerInterface::TYPE_INTEGER:
-                    $type .= 'i';
-                    break;
-                case ParameterContainerInterface::TYPE_STRING:
-                default:
-                    $type .= 's';
-                    break;
+        foreach ($parameters as $name => &$value) {
+            if ($pContainer->offsetHasErrata($name)) {
+                switch ($pContainer->offsetGetErrata($name)) {
+                    case ParameterContainer::TYPE_DOUBLE:
+                        $type .= 'd';
+                        break;
+                    case ParameterContainer::TYPE_NULL:
+                        $value = null; // as per @see http://www.php.net/manual/en/mysqli-stmt.bind-param.php#96148
+                    case ParameterContainer::TYPE_INTEGER:
+                        $type .= 'i';
+                        break;
+                    case ParameterContainer::TYPE_STRING:
+                    default:
+                        $type .= 's';
+                        break;
+                }
+            } else {
+                $type .= 's';
             }
             $args[] = &$value;
         }

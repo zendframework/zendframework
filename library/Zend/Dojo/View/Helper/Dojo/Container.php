@@ -21,19 +21,16 @@
 
 namespace Zend\Dojo\View\Helper\Dojo;
 
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
 use Zend\Dojo\View\Exception,
     Zend\Dojo\View\Helper\Dojo as DojoHelper,
-    Zend\Config\Config,
-    Zend\View\Renderer as View,
+    Zend\View\Renderer\RendererInterface as View,
     Zend\Json\Json;
 
 /**
  * Container for  Dojo View Helper
  *
- * @uses       \Zend\Dojo\Dojo
- * @uses       \Zend\Dojo\View\Exception
- * @uses       \Zend\Dojo\View\Helper\Dojo
- * @uses       \Zend\Json\Json
  * @package    Zend_Dojo
  * @subpackage View
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -42,7 +39,7 @@ use Zend\Dojo\View\Exception,
 class Container
 {
     /**
-     * @var \Zend\View\Renderer
+     * @var \Zend\View\Renderer\RendererInterface
      */
     public $view;
 
@@ -175,7 +172,7 @@ class Container
     /**
      * Set view object
      *
-     * @param  Zend\View\Interface $view
+     * @param  View $view
      * @return void
      */
     public function setView(View $view)
@@ -218,13 +215,12 @@ class Container
     /**
      * Add options for the Dojo Container to use
      *
-     * @param array|\Zend\Config\Config Array or \Zend\Config\Config object with options to use
-     * @return \Zend\Dojo\View\Helper\Dojo\Container
+     * @param  array|Traversable $options Options to use
      */
     public function setOptions($options)
     {
-        if($options instanceof Config) {
-            $options = $options->toArray();
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
         }
 
         foreach($options as $key => $value) {

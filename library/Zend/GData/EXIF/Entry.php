@@ -26,9 +26,6 @@ use Zend\GData\EXIF;
 /**
  * An Atom entry containing EXIF metadata.
  *
- * @uses       \Zend\GData\Entry
- * @uses       \Zend\GData\EXIF
- * @uses       \Zend\GData\EXIF\Extension\Tags
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Exif

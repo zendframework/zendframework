@@ -21,12 +21,12 @@
 
 namespace Zend\Serializer\Adapter;
 
-use Zend\Serializer\Adapter as SerializationAdapter,
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
+use Zend\Serializer\Adapter\AdapterInterface as SerializationAdapter,
     Zend\Serializer\Exception\InvalidArgumentException;
 
 /**
- * @uses       \Zend\Serializer\Adapter
- * @uses       \Zend\Serializer\Exception\InvalidArgumentException
  * @category   Zend
  * @package    Zend_Serializer
  * @subpackage Adapter
@@ -45,28 +45,28 @@ abstract class AbstractAdapter implements SerializationAdapter
     /**
      * Constructor
      *
-     * @param array|Zend\Config\Config $opts Serializer options
+     * @param  array|Traversable $options Serializer options
      */
-    public function __construct($opts = array()) 
+    public function __construct($options = array())
     {
-        $this->setOptions($opts);
+        $this->setOptions($options);
     }
 
     /**
      * Set serializer options
      *
-     * @param  array|Zend\Config\Config $opts Serializer options
-     * @return Zend\Serializer\Adapter\AbstractAdapter
+     * @param  array|Traversable $options Serializer options
+     * @return AbstractAdapter
      */
-    public function setOptions($opts) 
+    public function setOptions($options)
     {
-        if ($opts instanceof \Zend\Config\Config) {
-            $opts = $opts->toArray();
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
         } else {
-            $opts = (array) $opts;
+            $options = (array) $options;
         }
 
-        foreach ($opts as $k => $v) {
+        foreach ($options as $k => $v) {
             $this->setOption($k, $v);
         }
         return $this;
@@ -77,7 +77,7 @@ abstract class AbstractAdapter implements SerializationAdapter
      *
      * @param  string $name Option name
      * @param  mixed $value Option value
-     * @return Zend\Serializer\Adapter\AbstractAdapter
+     * @return AbstractAdapter
      */
     public function setOption($name, $value) 
     {
@@ -100,7 +100,7 @@ abstract class AbstractAdapter implements SerializationAdapter
      *
      * @param  string $name
      * @return mixed
-     * @throws Zend\Serializer\Exception
+     * @throws InvalidArgumentException
      */
     public function getOption($name) 
     {

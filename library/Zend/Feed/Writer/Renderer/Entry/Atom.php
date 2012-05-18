@@ -29,19 +29,17 @@ use DOMDocument,
     Zend\Validator;
 
 /**
- * @uses tidy
  * @category Zend
  * @package Zend_Feed_Writer
  * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license http://framework.zend.com/license/new-bsd New BSD License
  */
-class Atom extends Renderer\AbstractRenderer implements Renderer\Renderer
+class Atom extends Renderer\AbstractRenderer implements Renderer\RendererInterface
 {
     /**
      * Constructor
      *
-     * @param  Zend_Feed_Writer_Entry $container
-     * @return void
+     * @param  Writer\Entry $container
      */
     public function __construct (Writer\Entry $container)
     {
@@ -51,7 +49,7 @@ class Atom extends Renderer\AbstractRenderer implements Renderer\Renderer
     /**
      * Render atom entry
      *
-     * @return Zend_Feed_Writer_Renderer_Entry_Atom
+     * @return Atom
      */
     public function render()
     {
@@ -94,7 +92,7 @@ class Atom extends Renderer\AbstractRenderer implements Renderer\Renderer
         if(!$this->getDataContainer()->getTitle()) {
             $message = 'Atom 1.0 entry elements MUST contain exactly one'
             . ' atom:title element but a title has not been set';
-            $exception = new Writer\Exception($message);
+            $exception = new Writer\Exception\InvalidArgumentException($message);
             if (!$this->_ignoreExceptions) {
                 throw $exception;
             } else {
@@ -142,7 +140,7 @@ class Atom extends Renderer\AbstractRenderer implements Renderer\Renderer
         if(!$this->getDataContainer()->getDateModified()) {
             $message = 'Atom 1.0 entry elements MUST contain exactly one'
             . ' atom:updated element but a modification date has not been set';
-            $exception = new Writer\Exception($message);
+            $exception = new Writer\Exception\InvalidArgumentException($message);
             if (!$this->_ignoreExceptions) {
                 throw $exception;
             } else {
@@ -270,7 +268,7 @@ class Atom extends Renderer\AbstractRenderer implements Renderer\Renderer
             . 'atom:id element, or as an alternative, we can use the same '
             . 'value as atom:link however neither a suitable link nor an '
             . 'id have been set';
-            $exception = new Writer\Exception($message);
+            $exception = new Writer\Exception\InvalidArgumentException($message);
             if (!$this->_ignoreExceptions) {
                 throw $exception;
             } else {
@@ -344,7 +342,7 @@ class Atom extends Renderer\AbstractRenderer implements Renderer\Renderer
             . 'atom:content element, or as an alternative, at least one link '
             . 'with a rel attribute of "alternate" to indicate an alternate '
             . 'method to consume the content.';
-            $exception = new Writer\Exception($message);
+            $exception = new Writer\Exception\InvalidArgumentException($message);
             if (!$this->_ignoreExceptions) {
                 throw $exception;
             } else {

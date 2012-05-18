@@ -1,48 +1,37 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Paginator
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Paginator
  */
 
 namespace Zend\Paginator\ScrollingStyle;
 
-use Zend\Paginator\ScrollingStyle;
+use Zend\Paginator\Paginator;
 
 /**
  * A scrolling style that returns every page in the collection.
  * Useful when it is necessary to make every page available at
- * once--for example, when using a dropdown menu pagination control.
+ * once--for example, when using a drop-down menu pagination control.
  *
- * @uses       \Zend\Paginator\ScrollingStyle
  * @category   Zend
  * @package    Zend_Paginator
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class All implements ScrollingStyle
+class All implements ScrollingStyleInterface
 {
     /**
      * Returns an array of all pages given a page number and range.
      *
-     * @param  \Zend\Paginator\Paginator $paginator
+     * @param  Paginator $paginator
      * @param  integer $pageRange Unused
      * @return array
      */
-    public function getPages(\Zend\Paginator\Paginator $paginator, $pageRange = null)
+    public function getPages(Paginator $paginator, $pageRange = null)
     {
         return $paginator->getPagesInRange(1, $paginator->count());
     }

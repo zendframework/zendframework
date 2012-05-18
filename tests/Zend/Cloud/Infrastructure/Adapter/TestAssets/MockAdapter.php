@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend\Cloud\Infrastructure\Adapter\TestAssets
+ * @package    ZendTest_Cloud_Infrastructure_Adapter_TestAssets
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -200,7 +200,7 @@ class MockAdapter extends AbstractAdapter
     /**
      * Get the last HTTP response
      * 
-     * @return Zend\Http\Response
+     * @return \Zend\Http\Response
      */
     public function getLastHttpResponse()
     {

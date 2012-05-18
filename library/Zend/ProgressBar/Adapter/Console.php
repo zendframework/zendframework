@@ -17,18 +17,15 @@
  */
 
 namespace Zend\ProgressBar\Adapter;
+
 use Zend\ProgressBar\Adapter\Exception;
 
 /**
  * Zend_ProgressBar_Adapter_Console offers a text-based progressbar for console
  * applications
  *
- * @uses      \Zend\ProgressBar\Adapter\Adapter
- * @uses      \Zend\ProgressBar\Adapter\Exception
- * @uses      \Zend\Text\MultiByte
  * @category  Zend
  * @package   Zend_ProgressBar
- * @uses      Zend_ProgressBar_Adapter_Interface
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -151,7 +148,7 @@ class Console extends AbstractAdapter
     /**
      * Defined by Zend_ProgressBar_Adapter
      *
-     * @param null|array|\Zend\Config\Config $options
+     * @param  array|\Traversable $options
      */
     public function __construct($options = null)
     {
@@ -370,7 +367,7 @@ class Console extends AbstractAdapter
     }
 
     /**
-     * Defined by Zend_ProgressBar_Adapter_Interface
+     * Defined by Zend\ProgressBar\Adapter\AbstractAdapter
      *
      * @param  float   $current       Current progress value
      * @param  float   $max           Max progress value
@@ -457,7 +454,7 @@ class Console extends AbstractAdapter
     }
 
     /**
-     * Defined by Zend_ProgressBar_Adapter_Interface
+     * Defined by Zend\ProgressBar\Adapter\AbstractAdapter
      *
      * @return void
      */

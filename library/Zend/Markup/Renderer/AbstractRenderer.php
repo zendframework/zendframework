@@ -20,17 +20,17 @@
  */
 
 namespace Zend\Markup\Renderer;
-use Zend\Markup\Token,
-    Zend\Markup\TokenList,
-    Zend\Markup\Parser,
-    Zend\Markup\Renderer\Markup,
-    Zend\Config\Config;
+
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
+use Zend\Markup\Token;
+use Zend\Markup\TokenList;
+use Zend\Markup\Parser;
+use Zend\Markup\Renderer\Markup;
 
 /**
  * Defines the basic rendering functionality
  *
- * @uses       \Zend\Markup\Renderer\Exception
- * @uses       \Zend\Markup\Renderer\Markup\MarkupInterface
  * @category   Zend
  * @package    Zend_Markup
  * @subpackage Renderer
@@ -50,14 +50,14 @@ abstract class AbstractRenderer
     /**
      * The current markup
      *
-     * @var Markup
+     * @var Markup\MarkupInterface
      */
     protected $_markup;
 
     /**
      * Parser
      *
-     * @var \Zend\Markup\Parser
+     * @var \Zend\Markup\Parser\ParserInterface
      */
     protected $_parser;
 
@@ -79,16 +79,13 @@ abstract class AbstractRenderer
     /**
      * Constructor
      *
-     * @param array|\Zend\Config\Config $options
-     *
-     * @todo make constructor compliant with new configuration standards
-     *
+     * @param  array|Traversable $options
      * @return void
      */
     public function __construct($options = array())
     {
-        if ($options instanceof Config) {
-            $options = $options->toArray();
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
         }
 
         if (isset($options['encoding'])) {
@@ -105,11 +102,10 @@ abstract class AbstractRenderer
     /**
      * Set the parser
      *
-     * @param  \Zend\Markup\Parser $parser
-     *
-     * @return \Zend\Markup\Renderer\RendererAbstract
+     * @param Parser\ParserInterface $parser
+     * @return AbstractRenderer
      */
-    public function setParser(Parser $parser)
+    public function setParser(Parser\ParserInterface $parser)
     {
         $this->_parser = $parser;
 
@@ -119,7 +115,7 @@ abstract class AbstractRenderer
     /**
      * Get the parser
      *
-     * @return \Zend\Markup\Parser
+     * @return Parser\ParserInterface
      */
     public function getParser()
     {
@@ -168,11 +164,11 @@ abstract class AbstractRenderer
      * Add a new markup
      *
      * @param string $name
-     * @param Markup $markup
+     * @param Markup\MarkupInterface $markup
      *
      * @return AbstractRenderer
      */
-    public function addMarkup($name, Markup $markup)
+    public function addMarkup($name, Markup\MarkupInterface $markup)
     {
         $markup->setRenderer($this);
 
@@ -188,7 +184,7 @@ abstract class AbstractRenderer
      *
      * @throws Exception\RuntimeException if the markup doesn't exist
      *
-     * @return Markup
+     * @return Markup\MarkupInterface
      */
     public function getMarkup($name)
     {
@@ -224,7 +220,7 @@ abstract class AbstractRenderer
     /**
      * Render function
      *
-     * @param  \Zend\Markup\TokenList|string $tokenList
+     * @param TokenList|string $tokenList
      *
      * @throws Exception\RuntimeException when there is no root markup given
      * @return string

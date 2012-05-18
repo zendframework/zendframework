@@ -26,9 +26,6 @@ use Zend\Pdf;
 /**
  * Parses an OpenType font file containing TrueType outlines.
  *
- * @uses       \Zend\Pdf\Exception
- * @uses       \Zend\Pdf\BinaryParser\Font\OpenType\AbstractOpenType
- * @uses       \Zend\Pdf\Font
  * @package    Zend_PDF
  * @subpackage FileParser
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -44,7 +41,7 @@ class TrueType extends AbstractOpenType
     /**
      * Verifies that the font file actually contains TrueType outlines.
      *
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
     public function screen()
     {

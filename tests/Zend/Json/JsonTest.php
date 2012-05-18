@@ -20,6 +20,7 @@
  */
 
 namespace ZendTest\Json;
+
 use Zend\Json;
 
 /**
@@ -693,17 +694,16 @@ class JsonTest extends \PHPUnit_Framework_TestCase
     /**
      * @group ZF-4437
      */
-    public function testKommaDecimalIsConvertedToCorrectJSONWithDot()
+    public function testCommaDecimalIsConvertedToCorrectJSONWithDot()
     {
-        $localeInfo = localeconv();
-        if($localeInfo['decimal_point'] != ",") {
-            $this->markTestSkipped("This test only works for platforms where , is the decimal point separator.");
+        setlocale(LC_ALL, 'Spanish_Spain', 'es_ES', 'es_ES.utf-8');
+        if (strcmp('1,2', (string)floatval(1.20)) != 0) {
+            $this->markTestSkipped('This test only works for platforms where "," is the decimal point separator.');
         }
-
         Json\Json::$useBuiltinEncoderDecoder = true;
-        $this->assertEquals("[1.20, 1.68]", Json\Encoder::encode(array(
-            (float)"1,20", (float)"1,68"
-        )));
+
+        $actual = Json\Encoder::encode(array(floatval(1.20), floatval(1.68)));
+        $this->assertEquals('[1.2,1.68]', $actual);
     }
 
     public function testEncodeObjectImplementingIterator()
@@ -845,6 +845,19 @@ EOB;
         Json\Json::$useBuiltinEncoderDecoder = true;
         $json = Json\Encoder::encode($array);
         $this->assertEquals($expected, $json);
+    }
+
+    /**
+     * @group ZF-7586
+     */
+    public function testWillDecodeStructureWithEmptyKeyToObjectProperly()
+    {
+        Json\Json::$useBuiltinEncoderDecoder = true;
+
+        $json = '{"":"test"}';
+        $object = Json\Json::decode($json, Json\Json::TYPE_OBJECT);
+        $this->assertTrue(isset($object->_empty_));
+        $this->assertEquals('test', $object->_empty_);
     }
 
 }

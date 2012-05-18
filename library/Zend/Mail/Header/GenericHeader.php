@@ -21,8 +21,6 @@
 
 namespace Zend\Mail\Header;
 
-use Zend\Mail\Header;
-
 /**
  * @category   Zend
  * @package    Zend_Mail
@@ -30,7 +28,7 @@ use Zend\Mail\Header;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class GenericHeader implements Header
+class GenericHeader implements HeaderInterface
 {
     /**
      * @var string
@@ -52,7 +50,6 @@ class GenericHeader implements Header
     /**
      * Factory to generate a header object from a string
      *
-     * @static
      * @param string $headerLine
      * @return GenericHeader
      */
@@ -67,8 +64,8 @@ class GenericHeader implements Header
     /**
      * Constructor
      * 
-     * @param null|string $fieldName
-     * @param null|string $fieldValue
+     * @param string $fieldName  Optional
+     * @param string $fieldValue Optional
      */
     public function __construct($fieldName = null, $fieldValue = null)
     {
@@ -83,8 +80,9 @@ class GenericHeader implements Header
 
     /**
      * Set header field name
-     * 
+     *
      * @param  string $fieldName
+     * @throws Exception\InvalidArgumentException
      * @return GenericHeader
      */
     public function setFieldName($fieldName)

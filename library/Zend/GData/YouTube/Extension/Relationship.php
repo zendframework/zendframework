@@ -24,8 +24,6 @@ namespace Zend\GData\YouTube\Extension;
 /**
  * Represents the yt:relationship element
  *
- * @uses       \Zend\GData\Extension
- * @uses       \Zend\GData\YouTube
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage YouTube

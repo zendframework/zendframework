@@ -27,7 +27,6 @@ use Zend\GData\Extension;
  * Data model for gd:extendedProperty element, used by some Gdata
  * services to implement arbitrary name/value pair storage
  *
- * @uses       \Zend\GData\Extension
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Gdata

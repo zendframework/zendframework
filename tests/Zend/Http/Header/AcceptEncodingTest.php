@@ -10,7 +10,7 @@ class AcceptEncodingTest extends \PHPUnit_Framework_TestCase
     public function testAcceptEncodingFromStringCreatesValidAcceptEncodingHeader()
     {
         $acceptEncodingHeader = AcceptEncoding::fromString('Accept-Encoding: xxx');
-        $this->assertInstanceOf('Zend\Http\Header\HeaderDescription', $acceptEncodingHeader);
+        $this->assertInstanceOf('Zend\Http\Header\HeaderInterface', $acceptEncodingHeader);
         $this->assertInstanceOf('Zend\Http\Header\AcceptEncoding', $acceptEncodingHeader);
     }
 

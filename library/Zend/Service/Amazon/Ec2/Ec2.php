@@ -26,8 +26,6 @@ use Zend\Service\Amazon,
 /**
  * Amazon Ec2 Interface to allow easy creation of the Ec2 Components
  *
- * @uses       Zend_Loader
- * @uses       Zend\Service\Amazon\Ec2\Exception
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Amazon

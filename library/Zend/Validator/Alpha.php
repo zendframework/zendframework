@@ -62,7 +62,7 @@ class Alpha extends AbstractValidator
     /**
      * Sets default option values for this instance
      *
-     * @param  boolean|\Zend\Config\Config $allowWhiteSpace
+     * @param  boolean|\Traversable $allowWhiteSpace
      * @return void
      */
     public function __construct($allowWhiteSpace = false)

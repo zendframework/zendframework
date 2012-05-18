@@ -26,7 +26,6 @@ namespace Zend\Log;
 use Zend\Loader\PluginBroker;
 
 /**
- * @uses       \Zend\Loader\PluginBroker
  * @category   Zend
  * @package    Zend_Log
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -48,7 +47,7 @@ class WriterBroker extends PluginBroker
      */
     protected function validatePlugin($plugin)
     {
-        if (!$plugin instanceof Writer) {
+        if (!$plugin instanceof Writer\WriterInterface) {
             throw new Exception\InvalidArgumentException('Writer must implement Zend\Log\Writer');
         }
 

@@ -19,19 +19,20 @@
  */
 
 namespace Zend\Queue;
-use Zend\Config;
+
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
+use Countable;
 
 /**
  * Class for connecting to queues performing common operations.
  *
- * @uses       \Zend\Queue\Adapter\Null
- * @uses       \Zend\Queue\Exception
  * @category   Zend
  * @package    Zend_Queue
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Queue implements \Countable
+class Queue implements Countable
 {
     /**
      * Use the TIMEOUT constant in the config of a \Zend\Queue\Queue
@@ -89,9 +90,8 @@ class Queue implements \Countable
      * - or -
      * $queue = new \Zend\Queue\Queue(null, $config); // \Zend\Queue\Queue->createQueue();
      *
-     * @param  string|\Zend\Queue\AdapterAbstract|array|\Zend\Config\Config|null String or adapter instance, or options array or \Zend\Config\Config instance
-     * @param  \Zend\Config\Config|array $options \Zend\Config\Config or a configuration array
-     * @return void
+     * @param  string|Queue\AdapterAbstract|array|\Traversable|null $spec
+     * @param  \Traversable|array $options
      */
     public function __construct($spec, $options = array())
     {
@@ -100,23 +100,24 @@ class Queue implements \Countable
             $adapter = $spec;
         } elseif (is_string($spec)) {
             $adapter = $spec;
-        } elseif ($spec instanceof Config\Config) {
-            $options = $spec->toArray();
+        } elseif ($spec instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($spec);
         } elseif (is_array($spec)) {
             $options = $spec;
         }
 
         // last minute error checking
         if ((null === $adapter)
-            && (!is_array($options) && (!$options instanceof Config\Config))
+            && (!is_array($options) && (!$options instanceof Traversable))
         ) {
-            throw new Exception('No valid params passed to constructor');
+            throw new Exception\InvalidArgumentException('No valid params passed to constructor');
         }
 
         // Now continue as we would if we were a normal constructor
-        if ($options instanceof Config\Config) {
-            $options = $options->toArray();
-        } elseif (!is_array($options)) {
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
+        }
+        if (!is_array($options)) {
             $options = array();
         }
 
@@ -227,7 +228,7 @@ class Queue implements \Countable
         }
 
         if (!$adapter instanceof Adapter) {
-            throw new Exception('Adapter class \'' . get_class($adapterName) . '\' does not implement \Zend\Queue\Adapter\'');
+            throw new Exception\InvalidArgumentException('Adapter class \'' . get_class($adapterName) . '\' does not implement \Zend\Queue\Adapter\'');
         }
 
         $this->_adapter = $adapter;
@@ -311,11 +312,11 @@ class Queue implements \Countable
     public function createQueue($name, $timeout = null)
     {
         if (!is_string($name)) {
-            throw new Exception('$name is not a string');
+            throw new Exception\InvalidArgumentException('$name is not a string');
         }
 
         if ((null !== $timeout) && !is_integer($timeout)) {
-            throw new Exception('$timeout must be an integer');
+            throw new Exception\InvalidArgumentException('$timeout must be an integer');
         }
 
         // Default to standard timeout
@@ -423,11 +424,11 @@ class Queue implements \Countable
     public function receive($maxMessages=null, $timeout=null)
     {
         if (($maxMessages !== null) && !is_integer($maxMessages)) {
-            throw new Exception('$maxMessages must be an integer or null');
+            throw new Exception\InvalidArgumentException('$maxMessages must be an integer or null');
         }
 
         if (($timeout !== null) && !is_integer($timeout)) {
-            throw new Exception('$timeout must be an integer or null');
+            throw new Exception\InvalidArgumentException('$timeout must be an integer or null');
         }
 
         // Default to returning only one message
@@ -486,7 +487,7 @@ class Queue implements \Countable
     public function getQueues()
     {
         if (!$this->isSupported('getQueues')) {
-            throw new Exception( __FUNCTION__ . '() is not supported by ' . get_class($this->getAdapter()));
+            throw new Exception\UnsupportedMethodCallException(__FUNCTION__ . '() is not supported by ' . get_class($this->getAdapter()));
         }
 
         return $this->getAdapter()->getQueues();
@@ -503,7 +504,7 @@ class Queue implements \Countable
     protected function _setName($name)
     {
         if (!is_string($name)) {
-            throw new Exception("$name is not a string");
+            throw new Exception\InvalidArgumentException("$name is not a string");
         }
 
         if ($this->getAdapter()->isSupported('create')) {

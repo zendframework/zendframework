@@ -20,7 +20,8 @@
  */
 
 namespace ZendTest\Cache\Storage\Adapter;
-use Zend\Cache\Storage\Adapter,
+
+use Zend\Cache\Storage\Adapter\AdapterInterface,
     Zend\Cache,
     Zend\Stdlib\ErrorHandler;
 
@@ -42,7 +43,7 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
     /**
      * The storage adapter
      *
-     * @var Zend\Cache\Storage\Adapter
+     * @var AdapterInterface
      */
     protected $_storage;
 
@@ -59,7 +60,7 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->assertInstanceOf(
-            'Zend\Cache\Storage\Adapter',
+            'Zend\Cache\Storage\Adapter\AdapterInterface',
             $this->_storage,
             'Storage adapter instance is needed for tests'
         );
@@ -210,24 +211,82 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
         $this->assertInternalType('string', $capabilities->getNamespaceSeparator());
     }
 
-    public function testGetItemReturnsFalseIfIgnoreMissingItemsEnabled()
+    public function testHasItemReturnsTrueOnValidItem()
     {
-        $this->_options->setIgnoreMissingItems(true);
-        $this->assertFalse($this->_storage->getItem('unknown'));
+        $this->assertTrue($this->_storage->setItem('key', 'value'));
+        $this->assertTrue($this->_storage->hasItem('key'));
     }
 
-    public function testGetItemThrowsItemNotFoundExceptionIfIgnoreMissingItemsDisabled()
+    public function testHasItemReturnsFalseOnMissingItem()
     {
-        $this->_options->setIgnoreMissingItems(false);
-
-        $this->setExpectedException('Zend\Cache\Exception\ItemNotFoundException');
-        $this->_storage->getItem('unknown');
+        $this->assertFalse($this->_storage->hasItem('key'));
     }
 
-    public function testGetItemThrowsItemNotFoundExceptionIfIgnoreMissingItemsDisabledAndItemExpired()
+    public function testHasItemReturnsFalseOnExpiredItem()
     {
-        $this->_options->setIgnoreMissingItems(false);
+        $capabilities = $this->_storage->getCapabilities();
 
+        $ttl = $capabilities->getTtlPrecision();
+        $this->_options->setTtl($ttl);
+
+        $this->assertTrue($this->_storage->setItem('key', 'value'));
+
+        // wait until the item expired
+        $wait = $ttl + $capabilities->getTtlPrecision();
+        usleep($wait * 2000000);
+
+        $this->assertFalse($this->_storage->hasItem('key'));
+    }
+
+    public function testHasItemNonReadable()
+    {
+        $this->assertTrue($this->_storage->setItem('key', 'value'));
+
+        $this->_options->setReadable(false);
+        $this->assertFalse($this->_storage->hasItem('key'));
+    }
+
+    public function testHasItemsReturnsKeysOfFoundItems()
+    {
+        $this->assertTrue($this->_storage->setItem('key1', 'value1'));
+        $this->assertTrue($this->_storage->setItem('key2', 'value2'));
+
+        $result = $this->_storage->hasItems(array('missing', 'key1', 'key2'));
+        sort($result);
+
+        $exprectedResult = array('key1', 'key2');
+        $this->assertEquals($exprectedResult, $result);
+    }
+
+    public function testHasItemsReturnsEmptyArrayIfNonReadable()
+    {
+        $this->assertTrue($this->_storage->setItem('key', 'value'));
+
+        $this->_options->setReadable(false);
+        $this->assertEquals(array(), $this->_storage->hasItems(array('key')));
+    }
+
+    public function testGetItemReturnsNullOnMissingItem()
+    {
+        $this->assertNull($this->_storage->getItem('unknwon'));
+    }
+
+    public function testGetItemSetsSuccessFlag()
+    {
+        $success = null;
+
+        // $success = false on get missing item
+        $this->_storage->getItem('unknown', array(), $success);
+        $this->assertFalse($success);
+
+        // $success = true on get valid item
+        $this->_storage->setItem('test', 'test');
+        $this->_storage->getItem('test', array(), $success);
+        $this->assertTrue($success);
+    }
+
+    public function testGetItemReturnsNullOnExpiredItem()
+    {
         $capabilities = $this->_storage->getCapabilities();
         if ($capabilities->getUseRequestTime()) {
             $this->markTestSkipped("Can't test get expired item if request time will be used");
@@ -242,16 +301,30 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
         $wait = $ttl + $capabilities->getTtlPrecision();
         usleep($wait * 2000000);
 
-        $this->setExpectedException('Zend\Cache\Exception\ItemNotFoundException');
-        $this->_storage->getItem('key');
+        $this->assertNull($this->_storage->getItem('key'));
     }
 
-    public function testGetItemReturnsFalseIfNonReadable()
+    public function testGetItemReturnsNullIfNonReadable()
     {
         $this->_options->setReadable(false);
 
         $this->assertTrue($this->_storage->setItem('key', 'value'));
-        $this->assertFalse($this->_storage->getItem('key'));
+        $this->assertNull($this->_storage->getItem('key'));
+    }
+
+    public function testGetItemsReturnsKeyValuePairsOfFoundItems()
+    {
+        $this->assertTrue($this->_storage->setItem('key1', 'value1'));
+        $this->assertTrue($this->_storage->setItem('key2', 'value2'));
+
+        $result = $this->_storage->getItems(array('missing', 'key1', 'key2'));
+        ksort($result);
+
+        $exprectedResult = array(
+            'key1' => 'value1',
+            'key2' => 'value2',
+        );
+        $this->assertEquals($exprectedResult, $result);
     }
 
     public function testGetItemsReturnsEmptyArrayIfNonReadable()
@@ -276,18 +349,9 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
         }
     }
 
-    public function testGetMetadataReturnsFalseIfIgnoreMissingItemsEnabled()
+    public function testGetMetadataReturnsFalseOnMissingItem()
     {
-        $this->_options->setIgnoreMissingItems(true);
         $this->assertFalse($this->_storage->getMetadata('unknown'));
-    }
-
-    public function testGetMetadataThrowsItemNotFoundExceptionIfIgnoreMissingItemsDisabled()
-    {
-        $this->_options->setIgnoreMissingItems(false);
-
-        $this->setExpectedException('Zend\Cache\Exception\ItemNotFoundException');
-        $this->_storage->getMetadata('unknown');
     }
 
     public function testGetMetadataReturnsFalseIfNonReadable()
@@ -307,7 +371,7 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
             'key1' => 'value1',
             'key2' => 'value2'
         );
-        $this->assertTrue($this->_storage->setItems($items));
+        $this->assertSame(array(), $this->_storage->setItems($items));
 
         $metadatas = $this->_storage->getMetadatas(array_keys($items));
         $this->assertInternalType('array', $metadatas);
@@ -335,7 +399,7 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->_storage->hasItem('key'));
         $this->assertTrue($this->_storage->removeItem('key'));
         $this->assertFalse($this->_storage->hasItem('key'));
-        $this->assertFalse($this->_storage->getItem('key'));
+        $this->assertNull($this->_storage->getItem('key'));
     }
 
     public function testSetGetHasAndRemoveItems()
@@ -346,7 +410,7 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
             'key3' => 'value3',
         );
 
-        $this->assertTrue( $this->_storage->setItems($items) );
+        $this->assertSame(array(), $this->_storage->setItems($items));
 
         $rs = $this->_storage->getItems(array_keys($items));
         $this->assertInternalType('array', $rs);
@@ -362,8 +426,7 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
             $this->assertContains($key, $rs);
         }
 
-        // remove the first and the last item
-        $this->assertTrue($this->_storage->removeItems(array('key1', 'key3')));
+        $this->assertSame(array('missing'), $this->_storage->removeItems(array('missing', 'key1', 'key3')));
         unset($items['key1'], $items['key3']);
 
         $rs = $this->_storage->getItems(array_keys($items));
@@ -420,10 +483,10 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
         );
 
         $this->_options->setNamespace('defaultns1');
-        $this->assertTrue( $this->_storage->setItems($items) );
+        $this->assertSame(array(), $this->_storage->setItems($items));
 
         $this->_options->setNamespace('defaultns2');
-        $this->assertEquals(array(),  $this->_storage->hasItems(array_keys($items)));
+        $this->assertSame(array(),  $this->_storage->hasItems(array_keys($items)));
 
         $this->_options->setNamespace('defaultns1');
         $rs = $this->_storage->getItems(array_keys($items));
@@ -441,7 +504,7 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
         }
 
         // remove the first and the last item
-        $this->assertTrue($this->_storage->removeItems(array('key1', 'key3')));
+        $this->assertSame(array('missing'), $this->_storage->removeItems(array('missing', 'key1', 'key3')));
         unset($items['key1'], $items['key3']);
 
         $rs = $this->_storage->getItems(array_keys($items));
@@ -504,7 +567,7 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
             'key3' => 'value3',
         );
 
-        $this->assertTrue( $this->_storage->setItems($items, array('namespace' => 'specificns')) );
+        $this->assertSame(array(), $this->_storage->setItems($items, array('namespace' => 'specificns')));
         $this->assertEquals(array(),  $this->_storage->hasItems(array_keys($items)));
 
         $rs = $this->_storage->getItems(array_keys($items), array('namespace' => 'specificns'));
@@ -523,7 +586,7 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
         }
 
         // remove the first and the last item
-        $this->assertTrue($this->_storage->removeItems(array('key1', 'key3'), array('namespace' => 'specificns')));
+        $this->assertSame(array('missing'), $this->_storage->removeItems(array('missing', 'key1', 'key3'), array('namespace' => 'specificns')));
         unset($items['key1'], $items['key3']);
 
         $rs = $this->_storage->getItems(array_keys($items), array('namespace' => 'specificns'));
@@ -555,13 +618,15 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
         usleep($wait * 2000000);
 
         if (!$capabilities->getUseRequestTime()) {
-            $this->assertFalse($this->_storage->getItem('key'));
+            $this->assertNull($this->_storage->getItem('key'));
         } else {
             $this->assertEquals('value', $this->_storage->getItem('key'));
         }
 
         if ($capabilities->getExpiredRead()) {
             $this->assertEquals('value', $this->_storage->getItem('key', array('ttl' => 0)));
+        } else {
+            $this->assertNull($this->_storage->getItem('key', array('ttl' => 0)));
         }
     }
 
@@ -577,7 +642,7 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
             'key2' => 'value2',
             'key3' => 'value3'
         );
-        $this->assertTrue($this->_storage->setItems($items));
+        $this->assertSame(array(), $this->_storage->setItems($items));
 
         // wait until expired
         $wait = $ttl + $capabilities->getTtlPrecision();
@@ -647,12 +712,10 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->_storage->hasItem('key'));
     }
 
-    public function testAddItemThrowsExceptionIfItemAlreadyExists()
+    public function testAddItemReturnsFalseIfItemAlreadyExists()
     {
         $this->assertTrue($this->_storage->setItem('key', 'value'));
-
-        $this->setExpectedException('Zend\Cache\Exception');
-        $this->_storage->addItem('key', 'newValue');
+        $this->assertFalse($this->_storage->addItem('key', 'newValue'));
     }
 
     public function testAddItemReturnsFalseIfNonWritable()
@@ -663,6 +726,20 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($this->_storage->hasItem('key'));
     }
 
+    public function testAddItemsReturnsFailedKeys()
+    {
+        $this->assertTrue($this->_storage->setItem('key1', 'value1'));
+
+        $failedKeys = $this->_storage->addItems(array(
+            'key1' => 'XYZ',
+            'key2' => 'value2',
+        ));
+
+        $this->assertSame(array('key1'), $failedKeys);
+        $this->assertSame('value1', $this->_storage->getItem('key1'));
+        $this->assertTrue($this->_storage->hasItem('key2'));
+    }
+
     public function testReplaceExistingItem()
     {
         $this->assertTrue($this->_storage->setItem('key', 'value'));
@@ -670,10 +747,9 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('anOtherValue', $this->_storage->getItem('key'));
     }
 
-    public function testReplaceItemThrowsItemNotFoundException()
+    public function testReplaceItemReturnsFalseOnMissingItem()
     {
-        $this->setExpectedException('Zend\Cache\Exception\ItemNotFoundException');
-        $this->_storage->replaceItem('missingKey', 'value');
+        $this->assertFalse($this->_storage->replaceItem('missingKey', 'value'));
     }
 
     public function testReplaceItemReturnsFalseIfNonWritable()
@@ -685,48 +761,42 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('value', $this->_storage->getItem('key'));
     }
 
-    public function testRemoveMissingItemReturnsTrueIfIgnoreMissingItemsEnabled()
+    public function testReplaceItemsReturnsFailedKeys()
     {
-        $this->_options->setIgnoreMissingItems(true);
+        $this->assertTrue($this->_storage->setItem('key1', 'value1'));
 
-        $this->assertTrue($this->_storage->removeItem('missing'));
+        $failedKeys = $this->_storage->replaceItems(array(
+            'key1' => 'XYZ',
+            'key2' => 'value2',
+        ));
+
+        $this->assertSame(array('key2'), $failedKeys);
+        $this->assertSame('XYZ', $this->_storage->getItem('key1'));
+        $this->assertFalse($this->_storage->hasItem('key2'));
     }
 
-    public function testRemoveMissingItemThrowsExceptionIfIgnoreMissingItemsDisabled()
+    public function testRemoveItemReturnsFalseOnMissingItem()
     {
-        $this->_options->setIgnoreMissingItems(false);
-
-        $this->setExpectedException('Zend\Cache\Exception\ItemNotFoundException');
-        $this->_storage->removeItem('missing');
+        $this->assertFalse($this->_storage->removeItem('missing'));
     }
 
-    public function testRemoveMissingItemsReturnsTrueIfIgnoreMissingItemsEnabled()
+    public function testRemoveItemsReturnsMissingKeys()
     {
-        $this->_options->setIgnoreMissingItems(true);
         $this->_storage->setItem('key', 'value');
-
-        $this->assertTrue($this->_storage->removeItems(array('key', 'missing')));
-    }
-
-    public function testRemoveMissingItemsThrowsExceptionIfIgnoreMissingItemsDisabled()
-    {
-        $this->_options->setIgnoreMissingItems(false);
-        $this->_storage->setItem('key', 'value');
-
-        $this->setExpectedException('Zend\Cache\Exception\ItemNotFoundException');
-        $this->_storage->removeItems(array('key', 'missing'));
+        $this->assertSame(array('missing'), $this->_storage->removeItems(array('key', 'missing')));
     }
 
     public function testCheckAndSetItem()
     {
         $this->assertTrue($this->_storage->setItem('key', 'value'));
 
-        $token = null;
-        $this->assertEquals('value', $this->_storage->getItem('key', array('token' => &$token)));
-        $this->assertNotNull($token);
+        $success  = null;
+        $casToken = null;
+        $this->assertEquals('value', $this->_storage->getItem('key', array(), $success, $casToken));
+        $this->assertNotNull($casToken);
 
-        $this->assertTrue($this->_storage->checkAndSetItem($token, 'key', 'newValue'));
-        $this->assertFalse($this->_storage->checkAndSetItem($token, 'key', 'failedValue'));
+        $this->assertTrue($this->_storage->checkAndSetItem($casToken, 'key', 'newValue'));
+        $this->assertFalse($this->_storage->checkAndSetItem($casToken, 'key', 'failedValue'));
         $this->assertEquals('newValue', $this->_storage->getItem('key'));
     }
 
@@ -738,9 +808,9 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
             'key3' => 'value3'
         );
 
-        $this->assertTrue($this->_storage->setItems($items));
-
+        $this->assertSame(array(), $this->_storage->setItems($items));
         $this->assertTrue($this->_storage->getDelayed(array_keys($items)));
+
         $fetchedKeys = array();
         while ( $item = $this->_storage->fetch() ) {
             $this->assertArrayHasKey('key', $item);
@@ -762,8 +832,7 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
             'key3' => 'value3'
         );
 
-        $this->assertTrue($this->_storage->setItems($items));
-
+        $this->assertSame(array(), $this->_storage->setItems($items));
         $this->assertTrue($this->_storage->getDelayed(array_keys($items)));
 
         $fetchedItems = $this->_storage->fetchAll();
@@ -783,8 +852,7 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
             'key3' => 'value3'
         );
 
-        $this->assertTrue($this->_storage->setItems($items));
-
+        $this->assertSame(array(), $this->_storage->setItems($items));
         $this->assertTrue($this->_storage->getDelayed(array_keys($items), array(
             'select' => 'value'
         )));
@@ -806,7 +874,7 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
             'key3' => 'value3'
         );
 
-        $this->assertTrue($this->_storage->setItems($items));
+        $this->assertSame(array(), $this->_storage->setItems($items));
 
         $capabilities = $this->_storage->getCapabilities();
         $this->assertTrue($this->_storage->getDelayed(array_keys($items), array(
@@ -833,7 +901,7 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
             'key3' => 'value3'
         );
 
-        $this->assertTrue($this->_storage->setItems($items));
+        $this->assertSame(array(), $this->_storage->setItems($items));
 
         $fetchedItems = array();
         $this->assertTrue($this->_storage->getDelayed(array_keys($items), array(
@@ -861,7 +929,7 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
             'key3' => 'value3'
         );
 
-        $this->assertTrue($this->_storage->setItems($items));
+        $this->assertSame(array(), $this->_storage->setItems($items));
 
         $fetchedItems = array();
         $capabilities = $this->_storage->getCapabilities();
@@ -888,7 +956,7 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->_storage->setItem('key', 'value'));
         $this->assertTrue($this->_storage->getDelayed(array('key')));
 
-        $this->setExpectedException('Zend\Cache\Exception');
+        $this->setExpectedException('Zend\Cache\Exception\ExceptionInterface');
         $this->_storage->getDelayed(array('key'));
     }
 
@@ -899,20 +967,10 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
        $this->assertEquals(15, $this->_storage->getItem('counter'));
     }
 
-    public function testIncrementInitialValue()
+    public function testIncrementItemInitialValue()
     {
-        $this->_options->setIgnoreMissingItems(true);
-
         $this->assertEquals(5, $this->_storage->incrementItem('counter', 5));
         $this->assertEquals(5, $this->_storage->getItem('counter'));
-    }
-
-    public function testIncrementItemThrowsItemNotFoundException()
-    {
-        $this->_options->setIgnoreMissingItems(false);
-
-        $this->setExpectedException('Zend\Cache\Exception\ItemNotFoundException');
-        $this->_storage->incrementItem(5, 'counter');
     }
 
     public function testIncrementItemReturnsFalseIfNonWritable()
@@ -924,12 +982,28 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(10, $this->_storage->getItem('key'));
     }
 
-    public function testIncrementItemsReturnsFalseIfNonWritable()
+    public function testIncrementItemsResturnsKeyValuePairsOfWrittenItems()
+    {
+        $this->assertTrue($this->_storage->setItem('key1', 10));
+
+        $result = $this->_storage->incrementItems(array(
+            'key1' => 10,
+            'key2' => 10,
+        ));
+        ksort($result);
+
+        $this->assertSame(array(
+            'key1' => 20,
+            'key2' => 10,
+        ), $result);
+    }
+
+    public function testIncrementItemsReturnsEmptyArrayIfNonWritable()
     {
         $this->_storage->setItem('key', 10);
         $this->_options->setWritable(false);
 
-        $this->assertFalse($this->_storage->incrementItems(array('key' => 5)));
+        $this->assertSame(array(), $this->_storage->incrementItems(array('key' => 5)));
         $this->assertEquals(10, $this->_storage->getItem('key'));
     }
 
@@ -940,18 +1014,10 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
        $this->assertEquals(25, $this->_storage->getItem('counter'));
     }
 
-    public function testDecrmentInitialValue()
+    public function testDecrementItemInitialValue()
     {
-        $this->_options->setIgnoreMissingItems(true);
         $this->assertEquals(-5, $this->_storage->decrementItem('counter', 5));
         $this->assertEquals(-5, $this->_storage->getItem('counter'));
-    }
-
-    public function testDecrementItemThrowsItemNotFoundException()
-    {
-        $this->_options->setIgnoreMissingItems(false);
-        $this->setExpectedException('Zend\Cache\Exception\ItemNotFoundException');
-        $this->_storage->decrementItem(5, 'counter');
     }
 
     public function testDecrementItemReturnsFalseIfNonWritable()
@@ -963,12 +1029,12 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(10, $this->_storage->getItem('key'));
     }
 
-    public function testDecrementItemsReturnsFalseIfNonWritable()
+    public function testDecrementItemsReturnsEmptyArrayIfNonWritable()
     {
         $this->_storage->setItem('key', 10);
         $this->_options->setWritable(false);
 
-        $this->assertFalse($this->_storage->decrementItems(array('key' => 5)));
+        $this->assertSame(array(), $this->_storage->decrementItems(array('key' => 5)));
         $this->assertEquals(10, $this->_storage->getItem('key'));
     }
 
@@ -992,20 +1058,9 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
         }
     }
 
-    public function testTouchInitialValueIfIgnoreMissingItemsEnabled()
+    public function testTouchItemReturnsFalseOnMissingItem()
     {
-        $this->_options->setIgnoreMissingItems(true);
-
-        $this->_storage->touchItem('newkey');
-        $this->assertEquals('', $this->_storage->getItem('newkey'));
-    }
-
-    public function testTouchItemThrowsItemNotFoundExceptionIfIgnoreMissingItemsDisabled()
-    {
-        $this->_options->setIgnoreMissingItems(false);
-
-        $this->setExpectedException('Zend\Cache\Exception\ItemNotFoundException');
-        $this->_storage->touchItem('newkey');
+        $this->assertFalse($this->_storage->touchItem('missing'));
     }
 
     public function testTouchItemReturnsFalseIfNonWritable()
@@ -1015,11 +1070,10 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($this->_storage->touchItem('key'));
     }
 
-    public function testTouchItemsReturnsFalseIfNonWritable()
+    public function testTouchItemsReturnsGivenKeysIfNonWritable()
     {
         $this->_options->setWritable(false);
-
-        $this->assertFalse($this->_storage->touchItems(array('key')));
+        $this->assertSame(array('key'), $this->_storage->touchItems(array('key')));
     }
 
     public function testClearExpiredByNamespace()
@@ -1027,7 +1081,7 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
         $capabilities = $this->_storage->getCapabilities();
         if (!$capabilities->getClearByNamespace()) {
             $this->setExpectedException('Zend\Cache\Exception\RuntimeException');
-            $this->_storage->clearByNamespace(Adapter::MATCH_EXPIRED);
+            $this->_storage->clearByNamespace(AdapterInterface::MATCH_EXPIRED);
             return;
         }
 
@@ -1042,7 +1096,7 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue($this->_storage->setItem('key2', 'value2'));
 
-        $this->assertTrue($this->_storage->clearByNamespace(Adapter::MATCH_EXPIRED));
+        $this->assertTrue($this->_storage->clearByNamespace(AdapterInterface::MATCH_EXPIRED));
 
         if ($capabilities->getUseRequestTime()) {
             $this->assertTrue($this->_storage->hasItem('key1'));
@@ -1058,7 +1112,7 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
         $capabilities = $this->_storage->getCapabilities();
         if (!$capabilities->getClearByNamespace()) {
             $this->setExpectedException('Zend\Cache\Exception\RuntimeException');
-            $this->_storage->clearByNamespace(Adapter::MATCH_ACTIVE);
+            $this->_storage->clearByNamespace(AdapterInterface::MATCH_ACTIVE);
             return;
         }
 
@@ -1073,7 +1127,7 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue($this->_storage->setItem('key2', 'value2'));
 
-        $this->assertTrue($this->_storage->clearByNamespace(Adapter::MATCH_ACTIVE));
+        $this->assertTrue($this->_storage->clearByNamespace(AdapterInterface::MATCH_ACTIVE));
 
         if ($capabilities->getExpiredRead() && !$capabilities->getUseRequestTime()) {
             $this->assertTrue($this->_storage->hasItem('key1', array('ttl' => 0)));
@@ -1086,7 +1140,7 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
         $capabilities = $this->_storage->getCapabilities();
         if (!$capabilities->getClearByNamespace()) {
             $this->setExpectedException('Zend\Cache\Exception\RuntimeException');
-            $this->_storage->clearByNamespace(Adapter::MATCH_ALL);
+            $this->_storage->clearByNamespace(AdapterInterface::MATCH_ALL);
             return;
         }
 
@@ -1106,7 +1160,7 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
 
         $clearNs = array_shift($namespaces);
         $this->_options->setNamespace($clearNs);
-        $this->assertTrue($this->_storage->clearByNamespace(Adapter::MATCH_ALL));
+        $this->assertTrue($this->_storage->clearByNamespace(AdapterInterface::MATCH_ALL));
 
         // wait
         usleep($capabilities->getTtlPrecision() * 2000000);
@@ -1127,8 +1181,8 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
     {
         $capabilities = $this->_storage->getCapabilities();
         if (!$capabilities->getClearAllNamespaces()) {
-            $this->setExpectedException('Zend\Cache\Exception');
-            $this->_storage->clear(Adapter::MATCH_ALL);
+            $this->setExpectedException('Zend\Cache\Exception\ExceptionInterface');
+            $this->_storage->clear(AdapterInterface::MATCH_ALL);
             return;
         }
 
@@ -1146,7 +1200,7 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
             }
         }
 
-        $this->assertTrue($this->_storage->clear(Adapter::MATCH_ALL));
+        $this->assertTrue($this->_storage->clear(AdapterInterface::MATCH_ALL));
 
         // wait
         usleep($capabilities->getTtlPrecision() * 2000000);
@@ -1177,7 +1231,7 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->_storage->setItem('key3', 'value3'));
         $this->assertTrue($this->_storage->setItem('key4', 'value4'));
 
-        $this->assertTrue($this->_storage->find(Adapter::MATCH_ACTIVE));
+        $this->assertTrue($this->_storage->find(AdapterInterface::MATCH_ACTIVE));
 
         if ($capabilities->getUseRequestTime()) {
             $expectedItems = array(
@@ -1224,7 +1278,7 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->_storage->setItem('key3', 'value3'));
         $this->assertTrue($this->_storage->setItem('key4', 'value4'));
 
-        $this->assertTrue($this->_storage->find(Adapter::MATCH_EXPIRED));
+        $this->assertTrue($this->_storage->find(AdapterInterface::MATCH_EXPIRED));
 
         if ($capabilities->getExpiredRead() && !$capabilities->getUseRequestTime()) {
             $expectedItems = array(
@@ -1249,23 +1303,7 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expectedItems, $actualItems);
     }
 
-    public function testHasItemWithNonReadable()
-    {
-        $this->assertTrue($this->_storage->setItem('key', 'value'));
-
-        $this->_options->setReadable(false);
-        $this->assertFalse($this->_storage->hasItem('key'));
-    }
-
     /*
-    public function testHasItemsWithNonReadable()
-    {
-        $this->assertTrue($this->_storage->setItem('key', 'value'));
-
-        $this->_options->setReadable(false);
-        $this->assertEquals(array(), $this->_storage->hasItems(array('key')));
-    }
-
     public function testGetCapacity()
     {
         $capacity = $this->_storage->getCapacity();
@@ -1298,7 +1336,7 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
         // Ensure we don't have expired items in the cache for this test
         $this->_options->setTtl(60);
         $this->_storage->setItem('someitem', 'somevalue', array('tags' => array('foo')));
-        $this->assertTrue($this->_storage->find(Cache\Storage\Adapter::MATCH_TAGS_OR, array('tags' => array('foo'))));
+        $this->assertTrue($this->_storage->find(AdapterInterface::MATCH_TAGS_OR, array('tags' => array('foo'))));
         $actualItems = array();
         while (($item = $this->_storage->fetch()) !== false) {
             // check $item
@@ -1311,5 +1349,5 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
         $this->assertArrayHasKey('someitem', $actualItems);
         $this->assertEquals('somevalue', $actualItems['someitem']);
     }
-     */
+    */
 }

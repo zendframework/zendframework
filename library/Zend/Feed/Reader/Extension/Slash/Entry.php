@@ -22,8 +22,6 @@ namespace Zend\Feed\Reader\Extension\Slash;
 use Zend\Feed\Reader\Extension;
 
 /**
-* @uses \Zend\Feed\Reader\Reader
-* @uses \Zend\Feed\Reader\Extension\EntryAbstract
 * @category Zend
 * @package Zend_Feed_Reader
 * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

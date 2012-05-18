@@ -26,9 +26,6 @@ use Zend\Markup\Token;
 /**
  * Image markup for HTML
  *
- * @uses       \Zend\Markup\Renderer\Html
- * @uses       \Zend\Markup\Renderer\Markup\Html\AbstractHtml
- * @uses       \Zend\Markup\Token
  * @category   Zend
  * @package    Zend_Markup
  * @subpackage Renderer_Html

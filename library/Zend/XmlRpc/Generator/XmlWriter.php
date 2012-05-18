@@ -24,8 +24,6 @@ namespace Zend\XmlRpc\Generator;
 /**
  * XML generator adapter based on XMLWriter
  *
- * @uses       XMLWriter
- * @uses       Zend\XmlRpc\Generator\AbstractGenerator
  * @category   Zend
  * @package    Zend_XmlRpc
  * @subpackage Generator
@@ -78,7 +76,7 @@ class XmlWriter extends AbstractGenerator
      * Close an previously opened XML element
      *
      * @param string $name
-     * @return void
+     * @return XmlWriter
      */
     protected function _closeElement($name)
     {

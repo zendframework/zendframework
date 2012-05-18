@@ -47,11 +47,6 @@ use Zend\Pdf;
  * @todo Write code for \Zend\Pdf\Cmap\TrimmedArray class.
  * @todo Write code for \Zend\Pdf\Cmap\SegmentedCoverage class.
  *
- * @uses       \Zend\Pdf\Cmap\ByteEncoding
- * @uses       \Zend\Pdf\Cmap\StaticByteEncoding
- * @uses       \Zend\Pdf\Cmap\SegmentToDelta
- * @uses       \Zend\Pdf\Cmap\TrimmedTable
- * @uses       \Zend\Pdf\Exception
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Font
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -147,7 +142,7 @@ abstract class AbstractCmap
      * @param integer $cmapType Type of cmap.
      * @param mixed $cmapData CMap table data. Usually a string or array.
      * @return \Zend\Pdf\Cmap\AbstractCmap
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
     public static function cmapWithTypeData($cmapType, $cmapData)
     {
@@ -191,7 +186,7 @@ abstract class AbstractCmap
      * malformed.
      *
      * @param string $cmapData Raw binary cmap table data.
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
     abstract public function __construct($cmapData);
 
@@ -258,7 +253,7 @@ abstract class AbstractCmap
      * @param string &$data
      * @param integer $index Position in string of integer.
      * @return integer
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
     protected function _extractInt2(&$data, $index)
     {
@@ -283,7 +278,7 @@ abstract class AbstractCmap
      * @param string &$data
      * @param integer $index Position in string of integer.
      * @return integer
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
     protected function _extractUInt2(&$data, $index)
     {
@@ -308,7 +303,7 @@ abstract class AbstractCmap
      * @param string &$data
      * @param integer $index Position in string of integer.
      * @return integer
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
     protected function _extractUInt4(&$data, $index)
     {

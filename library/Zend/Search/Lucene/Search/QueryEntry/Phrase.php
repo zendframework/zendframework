@@ -22,8 +22,6 @@
 namespace Zend\Search\Lucene\Search\QueryEntry;
 
 /**
- * @uses       \Zend\Search\Lucene\Search\QueryEntry\AbstractQueryEntry
- * @uses       \Zend\Search\Lucene\Search\Query\Preprocessing\Phrase
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Search

@@ -26,8 +26,6 @@ namespace Zend\GData\Photos\Extension;
  * This number is used for optimistic concurrency, and does not
  * increase linearly.
  *
- * @uses       \Zend\GData\Extension
- * @uses       \Zend\GData\Photos
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Photos

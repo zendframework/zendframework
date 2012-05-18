@@ -26,11 +26,6 @@ use Zend\Service\Rackspace\Servers as RackspaceServers;
 /**
  * List of shared Ip group of Rackspace
  *
- * @uses       ArrayAccess
- * @uses       Countable
- * @uses       Iterator
- * @uses       OutOfBoundsException
- * @uses       Zend\Service\Rackspace\Servers
  * @category   Zend
  * @package    Zend\Service\Rackspace
  * @subpackage Servers

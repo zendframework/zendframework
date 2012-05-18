@@ -22,7 +22,7 @@
 namespace ZendTest\Memory;
 
 use Zend\Cache\StorageFactory as CacheFactory,
-    Zend\Cache\Storage\Adapter as CacheAdapter,
+    Zend\Cache\Storage\Adapter\AdapterInterface as CacheAdapter,
     Zend\Memory,
     Zend\Memory\Container;
 
@@ -55,7 +55,7 @@ class MemoryManagerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * tests the Memory Manager creation
+     * tests the Memory ManagerInterface creation
      */
     public function testCreation()
     {
@@ -71,7 +71,7 @@ class MemoryManagerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * tests the Memory Manager settings
+     * tests the Memory ManagerInterface settings
      */
     public function testSettings()
     {

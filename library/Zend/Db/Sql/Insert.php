@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Db
- * @subpackage Sql
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Db
  */
 
 namespace Zend\Db\Sql;
@@ -25,15 +14,12 @@ use Zend\Db\Adapter\Adapter,
     Zend\Db\Adapter\Driver\StatementInterface,
     Zend\Db\Adapter\Platform\PlatformInterface,
     Zend\Db\Adapter\Platform\Sql92,
-    Zend\Db\Adapter\ParameterContainerInterface,
     Zend\Db\Adapter\ParameterContainer;
 
 /**
  * @category   Zend
  * @package    Zend_Db
  * @subpackage Sql
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Insert implements SqlInterface, PreparableSqlInterface
 {
@@ -58,15 +44,6 @@ class Insert implements SqlInterface, PreparableSqlInterface
      * @var string
      */
     protected $table            = null;
-
-    /**
-     * @var string
-     */
-    protected $schema           = null;
-
-    /**
-     * @var array
-     */
     protected $columns          = array();
 
     /**
@@ -81,10 +58,10 @@ class Insert implements SqlInterface, PreparableSqlInterface
      * @param  null|string $schema
      * @return void
      */
-    public function __construct($table = null, $schema = null)
+    public function __construct($table = null)
     {
         if ($table) {
-            $this->into($table, $schema);
+            $this->into($table);
         }
     }
 
@@ -95,12 +72,9 @@ class Insert implements SqlInterface, PreparableSqlInterface
      * @param  null|string $databaseOrSchema 
      * @return Insert
      */
-    public function into($table, $databaseOrSchema = null)
+    public function into($table)
     {
         $this->table = $table;
-        if ($databaseOrSchema) {
-            $this->schema = $databaseOrSchema;
-        }
         return $this;
     }
 
@@ -148,7 +122,6 @@ class Insert implements SqlInterface, PreparableSqlInterface
         return $this;
     }
 
-
     /**
      * Prepare statement
      *
@@ -162,32 +135,20 @@ class Insert implements SqlInterface, PreparableSqlInterface
         $platform = $adapter->getPlatform();
         $parameterContainer = $statement->getParameterContainer();
 
-        if (!$parameterContainer instanceof ParameterContainerInterface) {
+        if (!$parameterContainer instanceof ParameterContainer) {
             $parameterContainer = new ParameterContainer();
             $statement->setParameterContainer($parameterContainer);
         }
 
-        $prepareType = $driver->getPrepareType();
-
         $table = $platform->quoteIdentifier($this->table);
-        if ($this->schema != '') {
-            $table = $platform->quoteIdentifier($this->schema)
-                . $platform->getIdentifierSeparator()
-                . $table;
-        }
 
         $columns = array();
         $values  = array();
 
         foreach ($this->columns as $cIndex => $column) {
             $columns[$cIndex] = $platform->quoteIdentifier($column);
-            if ($prepareType == 'positional') {
-                $values[$cIndex] = $driver->formatParameterName(null);
-                $parameterContainer->offsetSet(null, $this->values[$cIndex]);
-            } elseif ($prepareType == 'named') {
-                $values[$cIndex] = $driver->formatParameterName($column);
-                $parameterContainer->offsetSet($column, $this->values[$cIndex]);
-            }
+            $values[$cIndex] = $driver->formatParameterName($column);
+            $parameterContainer->offsetSet($column, $this->values[$cIndex]);
         }
 
         $sql = sprintf(
@@ -203,22 +164,22 @@ class Insert implements SqlInterface, PreparableSqlInterface
     /**
      * Get SQL string for this statement
      * 
-     * @param  null|PlatformInterface $platform Defaults to Sql92 if none provided
+     * @param  null|PlatformInterface $adapterPlatform Defaults to Sql92 if none provided
      * @return string
      */
-    public function getSqlString(PlatformInterface $platform = null)
+    public function getSqlString(PlatformInterface $adapterPlatform = null)
     {
-        $platform = ($platform) ?: new Sql92;
-        $table = $platform->quoteIdentifier($this->table);
+        $adapterPlatform = ($adapterPlatform) ?: new Sql92;
+        $table = $adapterPlatform->quoteIdentifier($this->table);
 
-        if ($this->schema != '') {
-            $table = $platform->quoteIdentifier($this->schema) . $platform->getIdentifierSeparator() . $table;
-        }
+//        if ($this->schema != '') {
+//            $table = $platform->quoteIdentifier($this->schema) . $platform->getIdentifierSeparator() . $table;
+//        }
 
-        $columns = array_map(array($platform, 'quoteIdentifier'), $this->columns);
+        $columns = array_map(array($adapterPlatform, 'quoteIdentifier'), $this->columns);
         $columns = implode(', ', $columns);
 
-        $values = array_map(array($platform, 'quoteValue'), $this->values);
+        $values = array_map(array($adapterPlatform, 'quoteValue'), $this->values);
         $values = implode(', ', $values);
 
         return sprintf($this->specifications[self::SPECIFICATION_INSERT], $table, $columns, $values);

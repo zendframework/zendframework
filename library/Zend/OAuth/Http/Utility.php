@@ -23,8 +23,6 @@ namespace Zend\OAuth\Http;
 use Zend\OAuth;
 
 /**
- * @uses       Zend\OAuth\OAuth
- * @uses       Zend\OAuth\Http
  * @category   Zend
  * @package    Zend_OAuth
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -43,7 +41,7 @@ class Utility
      */
     public function assembleParams(
         $url, 
-        OAuth\Config $config, 
+        OAuth\Config\ConfigInterface $config,
         array $serviceProviderParams = null
     ) {
         $params = array(

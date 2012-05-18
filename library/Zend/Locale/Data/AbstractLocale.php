@@ -21,9 +21,10 @@
 
 namespace Zend\Locale\Data;
 
-use Zend\Cache\Storage\Adapter as CacheAdapter,
+use Zend\Cache\Storage\Adapter\AdapterInterface as CacheAdapter,
     Zend\Locale\Locale,
-    Zend\Locale\Exception\InvalidArgumentException;
+    Zend\Locale\Exception\InvalidArgumentException,
+    Zend\Locale\Exception\UnsupportedMethodException;
 
 /**
  * Locale data reader, handles the CLDR
@@ -111,7 +112,7 @@ abstract class AbstractLocale
     /**
      * Clears all set cache data
      *
-     * @param string $tag Tag to clear when the default tag name is not used
+     * @param string $tag Tag to clear when the default tag name is not used (Optional)
      * @return void
      */
     public static function clearCache($tag = null)
@@ -194,7 +195,7 @@ abstract class AbstractLocale
      */
     public static function getDisplayLanguage($locale, $invert = false, $detail = null)
     {
-        throw new UnsupportedMethod('This implementation does not support the selected locale information');
+        throw new UnsupportedMethodException('This implementation does not support the selected locale information');
     }
 
     /**
@@ -208,7 +209,7 @@ abstract class AbstractLocale
      */
     public static function getDisplayScript($locale, $invert = false, $detail = null)
     {
-        throw new UnsupportedMethod('This implementation does not support the selected locale information');
+        throw new UnsupportedMethodException('This implementation does not support the selected locale information');
     }
 
     /**
@@ -222,7 +223,7 @@ abstract class AbstractLocale
      */
     public static function getDisplayTerritory($locale, $invert = false, $detail = null)
     {
-        throw new UnsupportedMethod('This implementation does not support the selected locale information');
+        throw new UnsupportedMethodException('This implementation does not support the selected locale information');
     }
 
     /**
@@ -236,7 +237,7 @@ abstract class AbstractLocale
      */
     public static function getDisplayVariant($locale, $invert = false, $detail = null)
     {
-        throw new UnsupportedMethod('This implementation does not support the selected locale information');
+        throw new UnsupportedMethodException('This implementation does not support the selected locale information');
     }
 
 /**

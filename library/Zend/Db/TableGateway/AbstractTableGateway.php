@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Db
- * @subpackage TableGateway
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Db
  */
 
 namespace Zend\Db\TableGateway;
@@ -28,8 +17,6 @@ use Zend\Db\Adapter\Adapter,
  * @category   Zend
  * @package    Zend_Db
  * @subpackage TableGateway
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class AbstractTableGateway extends TableGateway
 {
@@ -38,6 +25,7 @@ abstract class AbstractTableGateway extends TableGateway
      * @var boolean
      */
     protected $initialized = false;
+
     /**
      *
      * @var boolean
@@ -54,6 +42,7 @@ abstract class AbstractTableGateway extends TableGateway
             $this->initialize();
         }
     }
+
     /**
      * Set adapter
      * 
@@ -71,6 +60,7 @@ abstract class AbstractTableGateway extends TableGateway
     {
         // filled in by the child class
     }
+
     /**
      * Initialize
      * 
@@ -90,7 +80,6 @@ abstract class AbstractTableGateway extends TableGateway
             // what to do?
         }
 
-
         if ($this->schema == null) {
             $this->schema = $this->adapter->getDefaultSchema();
         }
@@ -102,6 +91,7 @@ abstract class AbstractTableGateway extends TableGateway
         $this->initializeSqlObjects();
         $this->initialized = true;
     }
+
     /**
      * Select
      * 
@@ -113,6 +103,7 @@ abstract class AbstractTableGateway extends TableGateway
         $this->initialize();
         return parent::select($where);
     }
+
     /**
      * Insert
      * 
@@ -124,6 +115,7 @@ abstract class AbstractTableGateway extends TableGateway
         $this->initialize();
         return parent::insert($set);
     }
+
     /**
      * Update
      * 
@@ -136,6 +128,7 @@ abstract class AbstractTableGateway extends TableGateway
         $this->initialize();
         return parent::update($set, $where);
     }
+
     /**
      * Delete
      * 
@@ -147,4 +140,5 @@ abstract class AbstractTableGateway extends TableGateway
         $this->initialize();
         return parent::delete($where);
     }
+
 }

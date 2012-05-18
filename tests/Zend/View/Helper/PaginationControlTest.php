@@ -38,7 +38,7 @@ use Zend\Paginator,
 class PaginationControlTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Zend_View_Helper_PaginationControl
+     * @var Helper\PaginationControl
      */
     private $_viewHelper;
 
@@ -76,7 +76,7 @@ class PaginationControlTest extends \PHPUnit_Framework_TestCase
         $helper = new Helper\PaginationControl();
         $this->assertNull($helper->getView());
         $helper->setView($view);
-        $this->assertInstanceOf('Zend\View\Renderer', $helper->getView());
+        $this->assertInstanceOf('Zend\View\Renderer\RendererInterface', $helper->getView());
     }
 
     public function testGetsAndSetsDefaultViewPartial()
@@ -100,7 +100,7 @@ class PaginationControlTest extends \PHPUnit_Framework_TestCase
         try {
             $this->_viewHelper->__invoke($this->_paginator);
         } catch (\Exception $e) {
-            $this->assertInstanceOf('Zend\View\Exception', $e);
+            $this->assertInstanceOf('Zend\View\Exception\ExceptionInterface', $e);
             $this->assertEquals('No view partial provided and no default set', $e->getMessage());
         }
     }
@@ -133,7 +133,7 @@ class PaginationControlTest extends \PHPUnit_Framework_TestCase
 
         try {
             $output = $this->_viewHelper->__invoke();
-        } catch (View\Exception $e) {
+        } catch (\Zend\View\Exception\ExceptionInterface $e) {
             $this->fail('Could not find paginator in the view instance');
         }
 
@@ -150,7 +150,7 @@ class PaginationControlTest extends \PHPUnit_Framework_TestCase
         try {
             $output = $this->_viewHelper->__invoke();
         } catch (\Exception $e) {
-            $this->assertInstanceOf('Zend\View\Exception', $e);
+            $this->assertInstanceOf('Zend\View\Exception\ExceptionInterface', $e);
             $this->assertEquals('No paginator instance provided or incorrect type', $e->getMessage());
         }
     }

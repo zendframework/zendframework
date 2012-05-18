@@ -19,7 +19,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace ZendTest\Auth\Adapter\Http;
+namespace ZendTest\Authentication\Adapter\Http;
 
 use Zend\Authentication\Adapter\Http,
     Zend\Http\Headers,

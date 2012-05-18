@@ -20,6 +20,8 @@
 
 namespace Zend\Filter\Encrypt;
 
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
 use Zend\Filter\Exception,
     Zend\Filter\Compress,
     Zend\Filter\Decompress;
@@ -27,14 +29,12 @@ use Zend\Filter\Exception,
 /**
  * Encryption adapter for openssl
  *
- * @uses       \Zend\Filter\Encrypt\EncryptionAlgorithm
- * @uses       \Zend\Filter\Exception
  * @category   Zend
  * @package    Zend_Filter
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Openssl implements EncryptionAlgorithm
+class Openssl implements EncryptionAlgorithmInterface
 {
     /**
      * Definitions for encryption
@@ -81,7 +81,7 @@ class Openssl implements EncryptionAlgorithm
      *   'compression' => compress value with this compression adapter
      *   'package'     => pack envelope keys into encrypted string, simplifies decryption
      *
-     * @param string|array $options Options for this adapter
+     * @param string|array|Traversable $options Options for this adapter
      */
     public function __construct($options = array())
     {
@@ -89,8 +89,8 @@ class Openssl implements EncryptionAlgorithm
             throw new Exception\ExtensionNotLoadedException('This filter needs the openssl extension');
         }
 
-        if ($options instanceof \Zend\Config\Config) {
-            $options = $options->toArray();
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
         }
 
         if (!is_array($options)) {
@@ -347,7 +347,7 @@ class Openssl implements EncryptionAlgorithm
      *
      * @param  string $value Content to encrypt
      * @return string The encrypted content
-     * @throws \Zend\Filter\Exception
+     * @throws Exception\RuntimeException
      */
     public function encrypt($value)
     {
@@ -405,13 +405,13 @@ class Openssl implements EncryptionAlgorithm
     }
 
     /**
-     * Defined by Zend_Filter_Interface
+     * Defined by Zend\Filter\FilterInterface
      *
      * Decrypts $value with the defined settings
      *
      * @param  string $value Content to decrypt
      * @return string The decrypted content
-     * @throws \Zend\Filter\Exception
+     * @throws Exception\RuntimeException
      */
     public function decrypt($value)
     {

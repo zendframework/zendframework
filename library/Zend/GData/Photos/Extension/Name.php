@@ -25,8 +25,6 @@ namespace Zend\GData\Photos\Extension;
  * Represents the gphoto:name element used by the API.
  * This indicates the URL-usable name for an album.
  *
- * @uses       \Zend\GData\Extension
- * @uses       \Zend\GData\Photos
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Photos

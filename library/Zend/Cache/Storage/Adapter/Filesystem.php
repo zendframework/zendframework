@@ -72,7 +72,7 @@ class Filesystem extends AbstractAdapter
     /**
      * Set options.
      *
-     * @param  array|Traversable|FilesystemOptions $options
+     * @param  array|\Traversable|FilesystemOptions $options
      * @return Filesystem
      * @see    getOptions()
      */
@@ -109,26 +109,26 @@ class Filesystem extends AbstractAdapter
      *    - The time-to-life (Default: ttl of object)
      *  - namespace <string> optional
      *    - The namespace to use (Default: namespace of object)
-     *  - ignore_missing_items <boolean> optional
-     *    - Throw exception on missing item or return false
      *
-     * @param  string $key
-     * @param  array  $options
-     * @return mixed Data on success and false on failure
-     * @throws Exception
+     * @param  string  $key
+     * @param  array   $options
+     * @param  boolean $success
+     * @param  mixed   $casToken
+     * @return mixed Data on success, null on failure
+     * @throws Exception\ExceptionInterface
      *
      * @triggers getItem.pre(PreEvent)
      * @triggers getItem.post(PostEvent)
      * @triggers getItem.exception(ExceptionEvent)
      */
-    public function getItem($key, array $options = array())
+    public function getItem($key, array $options = array(), & $success = null, & $casToken = null)
     {
         $baseOptions = $this->getOptions();
         if ($baseOptions->getReadable() && $baseOptions->getClearStatCache()) {
             clearstatcache();
         }
 
-        return parent::getItem($key, $options);
+        return parent::getItem($key, $options, $success, $casToken);
     }
 
     /**
@@ -142,8 +142,8 @@ class Filesystem extends AbstractAdapter
      *
      * @param  array $keys
      * @param  array $options
-     * @return array Associative array of existing keys and values
-     * @throws Exception
+     * @return array Associative array of keys and values
+     * @throws Exception\ExceptionInterface
      *
      * @triggers getItems.pre(PreEvent)
      * @triggers getItems.post(PostEvent)
@@ -167,24 +167,19 @@ class Filesystem extends AbstractAdapter
      *    - The time-to-life
      *  - namespace <string>
      *    - The namespace to use
-     *  - ignore_missing_items <boolean>
-     *    - Throw exception on missing item or return false
      *
-     * @param  string $normalizedKey
-     * @param  array  $normalizedOptions
-     * @return mixed Data on success or false on failure
-     * @throws Exception
+     * @param  string  $normalizedKey
+     * @param  array   $normalizedOptions
+     * @param  boolean $success
+     * @param  mixed   $casToken
+     * @return mixed Data on success, null on failure
+     * @throws Exception\ExceptionInterface
      */
-    protected function internalGetItem(& $normalizedKey, array & $normalizedOptions)
+    protected function internalGetItem(& $normalizedKey, array & $normalizedOptions, & $success = null, & $casToken = null)
     {
         if (!$this->internalHasItem($normalizedKey, $normalizedOptions)) {
-            if (!$normalizedOptions['ignore_missing_items']) {
-                throw new Exception\ItemNotFoundException(
-                    "Key '{$normalizedKey}' not found within namespace '{$normalizedOptions['namespace']}'"
-                );
-            }
-
-            return false;
+            $success = false;
+            return null;
         }
 
         try {
@@ -203,14 +198,14 @@ class Filesystem extends AbstractAdapter
                 }
             }
 
-            if (array_key_exists('token', $normalizedOptions)) {
-                // use filemtime + filesize as CAS token
-                $normalizedOptions['token'] = filemtime($filespec . '.dat') . filesize($filespec . '.dat');
-            }
-
+            // use filemtime + filesize as CAS token
+            $casToken = filemtime($filespec . '.dat') . filesize($filespec . '.dat');
+            $success  = true;
             return $data;
 
         } catch (Exception $e) {
+            $success = false;
+
             try {
                 // remove cache file on exception
                 $this->internalRemoveItem($normalizedKey, $normalizedOptions);
@@ -233,8 +228,8 @@ class Filesystem extends AbstractAdapter
      *
      * @param  array $normalizedKeys
      * @param  array $normalizedOptions
-     * @return array Associative array of existing keys and values
-     * @throws Exception
+     * @return array Associative array of keys and values
+     * @throws Exception\ExceptionInterface
      */
     protected function internalGetItems(array & $normalizedKeys, array & $normalizedOptions)
     {
@@ -299,7 +294,7 @@ class Filesystem extends AbstractAdapter
      * @param  string $key
      * @param  array  $options
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      *
      * @triggers hasItem.pre(PreEvent)
      * @triggers hasItem.post(PostEvent)
@@ -326,8 +321,8 @@ class Filesystem extends AbstractAdapter
      *
      * @param  array $keys
      * @param  array $options
-     * @return array Array of existing keys
-     * @throws Exception
+     * @return array Array of found keys
+     * @throws Exception\ExceptionInterface
      *
      * @triggers hasItems.pre(PreEvent)
      * @triggers hasItems.post(PostEvent)
@@ -355,7 +350,7 @@ class Filesystem extends AbstractAdapter
      * @param  string $normalizedKey
      * @param  array  $normalizedOptions
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     protected function internalHasItem(& $normalizedKey, array & $normalizedOptions)
     {
@@ -387,9 +382,9 @@ class Filesystem extends AbstractAdapter
     /**
      * Get metadata
      *
-     * @param $key
-     * @param array $options
-     * @return array|bool|mixed|null
+     * @param string $key
+     * @param array  $options
+     * @return array|boolean Metadata on success, false on failure
      */
     public function getMetadata($key, array $options = array())
     {
@@ -406,7 +401,7 @@ class Filesystem extends AbstractAdapter
      *
      * @param array $keys
      * @param array $options
-     * @return array
+     * @return array Associative array of keys and metadata
      */
     public function getMetadatas(array $keys, array $options = array())
     {
@@ -423,18 +418,11 @@ class Filesystem extends AbstractAdapter
      *
      * @param string $normalizedKey
      * @param array  $normalizedOptions
-     * @return array|bool
-     * @throws ItemNotFoundException
+     * @return array|boolean Metadata on success, false on failure
      */
     protected function internalGetMetadata(& $normalizedKey, array & $normalizedOptions)
     {
         if (!$this->internalHasItem($normalizedKey, $normalizedOptions)) {
-            if (!$normalizedOptions['ignore_missing_items']) {
-                throw new Exception\ItemNotFoundException(
-                    "Key '{$normalizedKey}' not found on namespace '{$normalizedOptions['namespace']}'"
-                );
-            }
-
             return false;
         }
 
@@ -471,8 +459,8 @@ class Filesystem extends AbstractAdapter
      *
      * @param  array $normalizedKeys
      * @param  array $normalizedOptions
-     * @return array Associative array of existing cache ids and its metadata
-     * @throws Exception
+     * @return array Associative array of keys and metadata
+     * @throws Exception\ExceptionInterface
      */
     protected function internalGetMetadatas(array & $normalizedKeys, array & $normalizedOptions)
     {
@@ -541,7 +529,7 @@ class Filesystem extends AbstractAdapter
      * @param  mixed  $value
      * @param  array  $options
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      *
      * @triggers setItem.pre(PreEvent)
      * @triggers setItem.post(PostEvent)
@@ -568,8 +556,8 @@ class Filesystem extends AbstractAdapter
      *
      * @param  array $keyValuePairs
      * @param  array $options
-     * @return boolean
-     * @throws Exception
+     * @return array Array of not stored keys
+     * @throws Exception\ExceptionInterface
      *
      * @triggers setItems.pre(PreEvent)
      * @triggers setItems.post(PostEvent)
@@ -598,7 +586,7 @@ class Filesystem extends AbstractAdapter
      * @param  mixed  $value
      * @param  array  $options
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      *
      * @triggers addItem.pre(PreEvent)
      * @triggers addItem.post(PostEvent)
@@ -626,7 +614,7 @@ class Filesystem extends AbstractAdapter
      * @param  array $keyValuePairs
      * @param  array $options
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      *
      * @triggers addItems.pre(PreEvent)
      * @triggers addItems.post(PostEvent)
@@ -655,7 +643,7 @@ class Filesystem extends AbstractAdapter
      * @param  mixed  $value
      * @param  array  $options
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      *
      * @triggers replaceItem.pre(PreEvent)
      * @triggers replaceItem.post(PostEvent)
@@ -683,7 +671,7 @@ class Filesystem extends AbstractAdapter
      * @param  array $keyValuePairs
      * @param  array $options
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      *
      * @triggers replaceItems.pre(PreEvent)
      * @triggers replaceItems.post(PostEvent)
@@ -712,29 +700,13 @@ class Filesystem extends AbstractAdapter
      * @param  mixed  $value
      * @param  array  $normalizedOptions
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     protected function internalSetItem(& $normalizedKey, & $value, array & $normalizedOptions)
     {
         $baseOptions = $this->getOptions();
-        $oldUmask    = null;
         $filespec    = $this->getFileSpec($normalizedKey, $normalizedOptions);
-
-        if ($baseOptions->getDirLevel() > 0) {
-            $path = dirname($filespec);
-            if (!file_exists($path)) {
-                $oldUmask = umask($baseOptions->getDirUmask());
-                ErrorHandler::start();
-                $mkdir = mkdir($path, 0777, true);
-                $error = ErrorHandler::stop();
-                if (!$mkdir) {
-                    umask($oldUmask);
-                    throw new Exception\RuntimeException(
-                        "Error creating directory '{$path}'", 0, $error
-                    );
-                }
-            }
-        }
+        $this->prepareDirectoryStructure($filespec);
 
         $info = null;
         if ($baseOptions->getReadControl()) {
@@ -748,11 +720,7 @@ class Filesystem extends AbstractAdapter
         // write files
         try {
             // set umask for files
-            if ($oldUmask !== null) { // $oldUmask could be defined on create directory
-                umask($baseOptions->getFileUmask());
-            } else {
-                $oldUmask = umask($baseOptions->getFileUmask());
-            }
+            $oldUmask = umask($baseOptions->getFileUmask());
 
             $contents = array($filespec . '.dat' => & $value);
             if ($info) {
@@ -796,8 +764,8 @@ class Filesystem extends AbstractAdapter
      *
      * @param  array $normalizedKeyValuePairs
      * @param  array $normalizedOptions
-     * @return boolean
-     * @throws Exception
+     * @return array Array of not stored keys
+     * @throws Exception\ExceptionInterface
      */
     protected function internalSetItems(array & $normalizedKeyValuePairs, array & $normalizedOptions)
     {
@@ -808,23 +776,7 @@ class Filesystem extends AbstractAdapter
         $contents = array();
         foreach ($normalizedKeyValuePairs as $key => & $value) {
             $filespec = $this->getFileSpec($key, $normalizedOptions);
-
-            // init directory level
-            if ($baseOptions->getDirLevel() > 0) {
-                $path = dirname($filespec);
-                if (!file_exists($path)) {
-                    $oldUmask = ($oldUmask === null) ? umask($baseOptions->getDirUmask()) : $oldUmask;
-                    ErrorHandler::start();
-                    $mkdir = mkdir($path, 0777, true);
-                    $error = ErrorHandler::stop();
-                    if (!$mkdir) {
-                        umask($oldUmask);
-                        throw new Exception\RuntimeException(
-                            "Error creating directory '{$path}'", 0, $error
-                        );
-                    }
-                }
-            }
+            $this->prepareDirectoryStructure($filespec);
 
             // *.dat file
             $contents[$filespec . '.dat'] = & $value;
@@ -848,11 +800,7 @@ class Filesystem extends AbstractAdapter
         // write to disk
         try {
             // set umask for files
-            if ($oldUmask !== null) { // $oldUmask could be defined on create directory
-                umask($baseOptions->getFileUmask());
-            } else {
-                $oldUmask = umask($baseOptions->getFileUmask());
-            }
+            $oldUmask = umask($baseOptions->getFileUmask());
 
             while ($contents) {
                 $nonBlocking = count($contents) > 1;
@@ -869,7 +817,8 @@ class Filesystem extends AbstractAdapter
             // reset umask
             umask($oldUmask);
 
-            return true;
+            // return OK
+            return array();
 
         } catch (Exception $e) {
             // reset umask on exception
@@ -895,7 +844,7 @@ class Filesystem extends AbstractAdapter
      * @param  mixed  $value
      * @param  array  $options
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      * @see    getItem()
      * @see    setItem()
      */
@@ -925,19 +874,13 @@ class Filesystem extends AbstractAdapter
      * @param  mixed  $value
      * @param  array  $normalizedOptions
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      * @see    getItem()
      * @see    setItem()
      */
     protected function internalCheckAndSetItem(& $token, & $normalizedKey, & $value, array & $normalizedOptions)
     {
         if (!$this->internalHasItem($normalizedKey, $normalizedOptions)) {
-            if (!$normalizedOptions['ignore_missing_items']) {
-                throw new Exception\ItemNotFoundException(
-                    "Key '{$normalizedKey}' not found within namespace '{$normalizedOptions['namespace']}'"
-                );
-            }
-
             return false;
         }
 
@@ -961,7 +904,7 @@ class Filesystem extends AbstractAdapter
      * @param  string $key
      * @param  array  $options
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      *
      * @triggers touchItem.pre(PreEvent)
      * @triggers touchItem.post(PostEvent)
@@ -986,8 +929,8 @@ class Filesystem extends AbstractAdapter
      *
      * @param  array $keys
      * @param  array $options
-     * @return boolean
-     * @throws Exception
+     * @return array Array of not updated keys
+     * @throws Exception\ExceptionInterface
      *
      * @triggers touchItems.pre(PreEvent)
      * @triggers touchItems.post(PostEvent)
@@ -1015,17 +958,11 @@ class Filesystem extends AbstractAdapter
      * @param  string $key
      * @param  array  $options
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     protected function internalTouchItem(& $normalizedKey, array & $normalizedOptions)
     {
         if (!$this->internalHasItem($normalizedKey, $normalizedOptions)) {
-            if (!$normalizedOptions['ignore_missing_items']) {
-                throw new Exception\ItemNotFoundException(
-                    "Key '{$normalizedKey}' not found within namespace '{$normalizedOptions['namespace']}'"
-                );
-            }
-
             return false;
         }
 
@@ -1049,13 +986,11 @@ class Filesystem extends AbstractAdapter
      * Options:
      *  - namespace <string> optional
      *    - The namespace to use (Default: namespace of object)
-     *  - ignore_missing_items <boolean> optional
-     *    - Throw exception on missing item
      *
      * @param  string $key
      * @param  array  $options
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      *
      * @triggers removeItem.pre(PreEvent)
      * @triggers removeItem.post(PostEvent)
@@ -1077,13 +1012,11 @@ class Filesystem extends AbstractAdapter
      * Options:
      *  - namespace <string> optional
      *    - The namespace to use (Default: namespace of object)
-     *  - ignore_missing_items <boolean> optional
-     *    - Throw exception on missing item
      *
      * @param  array $keys
      * @param  array $options
-     * @return boolean
-     * @throws Exception
+     * @return array Array of not removed keys
+     * @throws Exception\ExceptionInterface
      *
      * @triggers removeItems.pre(PreEvent)
      * @triggers removeItems.post(PostEvent)
@@ -1105,21 +1038,17 @@ class Filesystem extends AbstractAdapter
      * Options:
      *  - namespace <string>
      *    - The namespace to use
-     *  - ignore_missing_items <boolean>
-     *    - Throw exception on missing item
      *
      * @param  string $normalizedKey
      * @param  array  $normalizedOptions
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     protected function internalRemoveItem(& $normalizedKey, array & $normalizedOptions)
     {
         $filespec = $this->getFileSpec($normalizedKey, $normalizedOptions);
         if (!file_exists($filespec . '.dat')) {
-            if (!$normalizedOptions['ignore_missing_items']) {
-                throw new Exception\ItemNotFoundException("Key '{$normalizedKey}' with file '{$filespec}.dat' not found");
-            }
+            return false;
         } else {
             $this->unlink($filespec . '.dat');
             $this->unlink($filespec . '.ifo');
@@ -1141,7 +1070,7 @@ class Filesystem extends AbstractAdapter
      * @param  int   $normalizedMode Matching mode (Value of Adapter::MATCH_*)
      * @param  array $normalizedOptions
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      * @see    fetch()
      * @see    fetchAll()
      */
@@ -1175,7 +1104,7 @@ class Filesystem extends AbstractAdapter
      * Internal method to fetch the next item from result set
      *
      * @return array|boolean The next item or false
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     protected function internalFetch()
     {
@@ -1208,7 +1137,7 @@ class Filesystem extends AbstractAdapter
      * @param  int   $normalizedMode Matching mode (Value of Adapter::MATCH_*)
      * @param  array $normalizedOptions
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      * @see    clearByNamespace()
      */
     protected function internalClear(& $normalizedMode, array & $normalizedOptions)
@@ -1230,7 +1159,7 @@ class Filesystem extends AbstractAdapter
      * @param  int   $normalizedMode Matching mode (Value of Adapter::MATCH_*)
      * @param  array $normalizedOptions
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      * @see    clear()
      */
     protected function internalClearByNamespace(& $normalizedMode, array & $normalizedOptions)
@@ -1248,7 +1177,7 @@ class Filesystem extends AbstractAdapter
      *
      * @param  array $normalizedOptions
      * @return boolean
-     * @throws Exception
+     * @throws Exception\ExceptionInterface
      */
     protected function internalOptimize(array & $normalizedOptions)
     {
@@ -1287,6 +1216,7 @@ class Filesystem extends AbstractAdapter
             }
 
             $capabilities = new Capabilities(
+                $this,
                 $marker,
                 array(
                     'supportedDatatypes' => array(
@@ -1352,8 +1282,8 @@ class Filesystem extends AbstractAdapter
      * Internal method to get storage capacity.
      *
      * @param  array $normalizedOptions
-     * @return array|boolean Capacity as array or false on failure
-     * @throws Exception
+     * @return array|boolean Associative array of capacity, false on failure
+     * @throws Exception\ExceptionInterface
      */
     protected function internalGetCapacity(array & $normalizedOptions)
     {
@@ -1738,6 +1668,34 @@ class Filesystem extends AbstractAdapter
 
         ErrorHandler::stop();
         return $res;
+    }
+
+    /**
+     * Prepares a directory structure for the given file(spec)
+     * using the configured directory level.
+     *
+     * @param string $file
+     * @return void
+     * @throws Exception\RuntimeException
+     */
+    protected function prepareDirectoryStructure($file)
+    {
+        $options = $this->getOptions();
+        if ($options->getDirLevel() > 0) {
+            $path = dirname($file);
+            if (!file_exists($path)) {
+                $oldUmask = umask($options->getDirUmask());
+                ErrorHandler::start();
+                $mkdir = mkdir($path, 0777, true);
+                $error = ErrorHandler::stop();
+                umask($oldUmask);
+                if (!$mkdir) {
+                    throw new Exception\RuntimeException(
+                        "Error creating directory '{$path}'", 0, $error
+                    );
+                }
+            }
+        }
     }
 
     /**

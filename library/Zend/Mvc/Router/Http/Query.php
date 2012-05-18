@@ -25,7 +25,7 @@ use Zend\Mvc\Router\Http\RouteMatch;
 
 use Traversable,
     Zend\Stdlib\ArrayUtils,
-    Zend\Stdlib\RequestDescription as Request,
+    Zend\Stdlib\RequestInterface as Request,
     Zend\Mvc\Router\Exception;
 
 /**
@@ -37,7 +37,7 @@ use Traversable,
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @see        http://manuals.rubyonrails.com/read/chapter/65
  */
-class Query implements Route
+class Query implements RouteInterface
 {
 
     /**
@@ -65,7 +65,7 @@ class Query implements Route
     }
 
     /**
-     * factory(): defined by Route interface.
+     * factory(): defined by RouteInterface interface.
      *
      * @see    Route::factory()
      * @param  array|\Traversable $options
@@ -89,7 +89,7 @@ class Query implements Route
     }
 
     /**
-     * match(): defined by Route interface.
+     * match(): defined by RouteInterface interface.
      *
      * @see    Route::match()
      * @param  Request $request
@@ -98,18 +98,36 @@ class Query implements Route
      */
     public function match(Request $request, $pathOffset = null)
     {
-        $matches = array();
-
-        foreach($_GET as $key => $value) {
-            $matches[urldecode($key)] = urldecode($value);
-
+        if (!method_exists($request, 'query')) {
+            return null;
         }
+
+        $matches = $this->recursiveUrldecode($request->query()->toArray());
 
         return new RouteMatch(array_merge($this->defaults, $matches));
     }
 
     /**
-     * assemble(): Defined by Route interface.
+     * Recursively urldecodes keys and values from an array
+     *
+     * @param array $array
+     * @return array
+     */
+    protected function recursiveUrldecode(array $array)
+    {
+        $matches = array();
+        foreach($array as $key => $value) {
+            if (is_array($value)) {
+                $matches[urldecode($key)] = $this->recursiveUrldecode($value);
+            } else {
+                $matches[urldecode($key)] = urldecode($value);
+            }
+        }
+        return $matches;
+    }
+
+    /**
+     * assemble(): Defined by RouteInterface interface.
      * @see    Route::assemble()
      *
      * @param  array $params
@@ -132,7 +150,7 @@ class Query implements Route
     }
 
     /**
-     * getAssembledParams(): defined by Route interface.
+     * getAssembledParams(): defined by RouteInterface interface.
      *
      * @see    Route::getAssembledParams
      * @return array

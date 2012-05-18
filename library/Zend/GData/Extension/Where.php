@@ -26,8 +26,6 @@ use Zend\GData\Extension;
 /**
  * Data model class to represent a location (gd:where element)
  *
- * @uses       \Zend\GData\Extension
- * @uses       \Zend\GData\Extension\EntryLink
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Gdata

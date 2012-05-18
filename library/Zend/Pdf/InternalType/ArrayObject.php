@@ -26,9 +26,6 @@ use Zend\Pdf;
 /**
  * PDF file 'array' element implementation
  *
- * @uses       ArrayObject
- * @uses       \Zend\Pdf\InternalType\AbstractTypeObject
- * @uses       \Zend\Pdf\Exception
  * @category   Zend
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Internal
@@ -51,7 +48,7 @@ class ArrayObject extends AbstractTypeObject
      * Object constructor
      *
      * @param array $val   - array of \Zend\Pdf\InternalType\AbstractTypeObject objects
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
     public function __construct($val = null)
     {
@@ -74,7 +71,7 @@ class ArrayObject extends AbstractTypeObject
      * Getter
      *
      * @param string $property
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
     public function __get($property)
     {
@@ -87,7 +84,7 @@ class ArrayObject extends AbstractTypeObject
      *
      * @param mixed $offset
      * @param mixed $value
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
     public function __set($property, $value)
     {

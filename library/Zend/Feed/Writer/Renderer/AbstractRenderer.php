@@ -19,12 +19,12 @@
  */
  
 namespace Zend\Feed\Writer\Renderer;
-use Zend\Feed\Writer;
+
+use Zend\Feed\Writer,
+    DOMDocument,
+    DOMElement;
 
 /**
-* @uses \Zend\Feed\Exception
-* @uses \Zend\Feed\Writer\Writer
-* @uses \Zend\Version
 * @category Zend
 * @package Zend_Feed_Writer
 * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -135,7 +135,7 @@ class AbstractRenderer
      * Set feed encoding
      * 
      * @param  string $enc 
-     * @return Zend_Feed_Writer_Renderer_RendererAbstract
+     * @return AbstractRenderer
      */
     public function setEncoding($enc)
     {
@@ -157,12 +157,13 @@ class AbstractRenderer
      * Indicate whether or not to ignore exceptions
      * 
      * @param  bool $bool 
-     * @return Zend_Feed_Writer_Renderer_RendererAbstract
+     * @return AbstractRenderer
+     * @throws Writer\Exception\InvalidArgumentException
      */
     public function ignoreExceptions($bool = true)
     {
         if (!is_bool($bool)) {
-            throw new Writer\Exception('Invalid parameter: $bool. Should be TRUE or FALSE (defaults to TRUE if null)');
+            throw new Writer\Exception\InvalidArgumentException('Invalid parameter: $bool. Should be TRUE or FALSE (defaults to TRUE if null)');
         }
         $this->_ignoreExceptions = $bool;
         return $this;
@@ -208,7 +209,7 @@ class AbstractRenderer
      *
      * @param DOMElement $root
      */
-    public function setRootElement(\DOMElement $root)
+    public function setRootElement(DOMElement $root)
     {
         $this->_rootElement = $root;
     }

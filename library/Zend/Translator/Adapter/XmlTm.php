@@ -25,10 +25,6 @@ use Zend\Translator\Adapter\AbstractAdapter,
     Zend\Translator\Exception\InvalidFileTypeException;
 
 /**
- * @uses       \Zend\Locale\Locale
- * @uses       \Zend\Translator\Adapter\AbstractAdapter
- * @uses       \Zend\Translator\Exception\InvalidArgumentException
- * @uses       \Zend\Translator\Exception\InvalidFileTypeException
  * @category   Zend
  * @package    Zend_Translator
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

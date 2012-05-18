@@ -2,7 +2,9 @@
 
 namespace Zend\Markup\Parser\Exception;
 
+use Zend\Markup\Exception;
+
 class InvalidArgumentException
-    extends \InvalidArgumentException
-    implements \Zend\Markup\Parser\Exception
+    extends Exception\InvalidArgumentException
+    implements ExceptionInterface
 {}

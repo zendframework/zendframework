@@ -25,7 +25,9 @@ use PHPUnit_Framework_TestCase as TestCase,
     Zend\EventManager\EventManager,
     Zend\Http\Request as HttpRequest,
     Zend\Http\Response as HttpResponse,
-    Zend\View\Model,
+    Zend\View\Model\ModelInterface as Model,
+    Zend\View\Model\JsonModel,
+    Zend\View\Model\ViewModel,
     Zend\View\Renderer\JsonRenderer,
     Zend\View\Strategy\JsonStrategy,
     Zend\View\ViewEvent;
@@ -49,7 +51,7 @@ class JsonStrategyTest extends TestCase
 
     public function testJsonModelSelectsJsonStrategy()
     {
-        $this->event->setModel(new Model\JsonModel());
+        $this->event->setModel(new JsonModel());
         $result = $this->strategy->selectRenderer($this->event);
         $this->assertSame($this->renderer, $result);
     }
@@ -120,7 +122,7 @@ class JsonStrategyTest extends TestCase
 
     public function testReturnsNullWhenCannotSelectRenderer()
     {
-        $model   = new Model\ViewModel();
+        $model   = new ViewModel();
         $request = new HttpRequest();
         $this->event->setModel($model);
         $this->event->setRequest($request);

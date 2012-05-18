@@ -21,8 +21,6 @@
  */
 
 /**
- * @uses       Zend_Service_DeveloperGarden_Request_Exception
- * @uses       Zend_Service_DeveloperGarden_Request_AbstractRequest
  * @category   Zend
  * @package    Zend_Service
  * @subpackage DeveloperGarden

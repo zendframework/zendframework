@@ -127,7 +127,7 @@ class TableTest extends \PHPUnit_Framework_TestCase
 
     public function testColumnSetContentInvalidArgument()
     {
-        $this->setExpectedException('Zend\Text\Table\Exception\UnexpectedValueException', 'must be a string');
+        $this->setExpectedException('Zend\Text\Table\Exception\InvalidArgumentException', 'must be a string');
         $column = new Table\Column(1);
     }
 

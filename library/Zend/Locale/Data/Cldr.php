@@ -22,7 +22,7 @@
 namespace Zend\Locale\Data;
 
 use Zend\Cache\StorageFactory as CacheFactory,
-    Zend\Cache\Storage\Adapter as CacheAdapter,
+    Zend\Cache\Storage\Adapter\AdapterInterface as CacheAdapter,
     Zend\Locale\Locale,
     Zend\Locale\Exception;
 
@@ -50,8 +50,7 @@ class Cldr extends AbstractLocale
     /**
      * Locale files
      *
-     * @var ressource
-     * @access private
+     * @var resource
      */
     private static $_ldml = array();
 
@@ -59,7 +58,6 @@ class Cldr extends AbstractLocale
      * List of values which are collected
      *
      * @var array
-     * @access private
      */
     private static $_list = array();
 
@@ -141,7 +139,7 @@ class Cldr extends AbstractLocale
         if (empty(self::$_ldml[(string) $locale])) {
             $filename = self::getPath() . '/' . $locale . '.xml';
             if (!file_exists($filename)) {
-                throw new InvalidArgumentException(
+                throw new Exception\InvalidArgumentException(
                   "Missing locale file '$filename'"
                 );
             }
@@ -1364,7 +1362,7 @@ class Cldr extends AbstractLocale
     /**
      * Internal function for checking the locale
      *
-     * @param string|\Zend\Locale $locale Locale to check
+     * @param string|Locale $locale Locale to check
      * @return string
      */
     protected static function _checkLocale($locale)

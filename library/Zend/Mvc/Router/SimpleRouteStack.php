@@ -24,7 +24,7 @@ use ArrayAccess,
     ArrayIterator,
     Traversable,
     Zend\Stdlib\ArrayUtils,
-    Zend\Stdlib\RequestDescription as Request;
+    Zend\Stdlib\RequestInterface as Request;
 
 /**
  * Simple route stack implementation.
@@ -33,7 +33,7 @@ use ArrayAccess,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class SimpleRouteStack implements RouteStack
+class SimpleRouteStack implements RouteStackInterface
 {
     /**
      * Stack containing all routes.
@@ -68,7 +68,7 @@ class SimpleRouteStack implements RouteStack
     }
 
     /**
-     * factory(): defined by Route interface.
+     * factory(): defined by RouteInterface interface.
      *
      * @see    Route::factory()
      * @param  array|\Traversable $options
@@ -131,7 +131,7 @@ class SimpleRouteStack implements RouteStack
     }
 
     /**
-     * addRoutes(): defined by RouteStack interface.
+     * addRoutes(): defined by RouteStackInterface interface.
      *
      * @see    RouteStack::addRoutes()
      * @param  array|\Traversable $routes
@@ -151,7 +151,7 @@ class SimpleRouteStack implements RouteStack
     }
 
     /**
-     * addRoute(): defined by RouteStack interface.
+     * addRoute(): defined by RouteStackInterface interface.
      *
      * @see    RouteStack::addRoute()
      * @param  string  $name
@@ -161,7 +161,7 @@ class SimpleRouteStack implements RouteStack
      */
     public function addRoute($name, $route, $priority = null)
     {
-        if (!$route instanceof Route) {
+        if (!$route instanceof RouteInterface) {
             $route = $this->routeFromArray($route);
         }
 
@@ -175,7 +175,7 @@ class SimpleRouteStack implements RouteStack
     }
 
     /**
-     * removeRoute(): defined by RouteStack interface.
+     * removeRoute(): defined by RouteStackInterface interface.
      *
      * @see    RouteStack::removeRoute()
      * @param  string  $name
@@ -189,7 +189,7 @@ class SimpleRouteStack implements RouteStack
 
 
     /**
-     * setRoutes(): defined by RouteStack interface.
+     * setRoutes(): defined by RouteStackInterface interface.
      *
      * @param  array|\Traversable $routes
      * @return SimpleRouteStack
@@ -256,7 +256,7 @@ class SimpleRouteStack implements RouteStack
     }
 
     /**
-     * match(): defined by Route interface.
+     * match(): defined by RouteInterface interface.
      *
      * @see    Route::match()
      * @param  Request $request
@@ -282,7 +282,7 @@ class SimpleRouteStack implements RouteStack
     }
 
     /**
-     * assemble(): defined by Route interface.
+     * assemble(): defined by RouteInterface interface.
      *
      * @see    Route::assemble()
      * @param  array $params

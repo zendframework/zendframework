@@ -2,8 +2,7 @@
 
 namespace Zend\Http;
 
-use Zend\Stdlib\ParametersDescription,
-    Zend\Uri,
+use Zend\Uri,
     Zend\Http\Header\Cookie,
     Zend\Http\Response;
 

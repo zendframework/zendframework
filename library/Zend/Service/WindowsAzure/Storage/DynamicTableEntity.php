@@ -20,8 +20,6 @@
  */
 
 /**
- * @uses       Zend_Service_WindowsAzure_Exception
- * @uses       Zend_Service_WindowsAzure_Storage_TableEntity
  * @category   Zend
  * @package    Zend_Service_WindowsAzure
  * @subpackage Storage

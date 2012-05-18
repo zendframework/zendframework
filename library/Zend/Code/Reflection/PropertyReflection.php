@@ -20,19 +20,16 @@
 
 namespace Zend\Code\Reflection;
 
-use ReflectionProperty as PhpReflectionProperty,
-    Zend\Code\Reflection;
+use ReflectionProperty as PhpReflectionProperty;
 
 /**
  * @todo       implement line numbers
- * @uses       ReflectionProperty
- * @uses       \Zend\Code\Reflection\ReflectionClass
  * @category   Zend
  * @package    Zend_Reflection
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class PropertyReflection extends PhpReflectionProperty implements Reflection
+class PropertyReflection extends PhpReflectionProperty implements ReflectionInterface
 {
     /**
      * Get declaring class reflection object

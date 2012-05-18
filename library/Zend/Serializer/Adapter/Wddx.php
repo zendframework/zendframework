@@ -27,10 +27,6 @@ use Zend\Serializer\Exception\RuntimeException,
 /**
  * @link       http://www.infoloom.com/gcaconfs/WEB/chicago98/simeonov.HTM
  * @link       http://en.wikipedia.org/wiki/WDDX
- * @uses       SimpleXMLElement
- * @uses       Zend\Serializer\Adapter\AbstractAdapter
- * @uses       Zend\Serializer\Exception\RuntimeException
- * @uses       Zend\Serializer\Exception\ExtensionNotLoadedException
  * @category   Zend
  * @package    Zend_Serializer
  * @subpackage Adapter
@@ -49,17 +45,17 @@ class Wddx extends AbstractAdapter
     /**
      * Constructor
      * 
-     * @param  array $opts 
+     * @param  array $options
      * @return void
-     * @throws Zend\Serializer\Exception if wddx extension not found
+     * @throws ExtensionNotLoadedException if wddx extension not found
      */
-    public function __construct($opts = array())
+    public function __construct($options = array())
     {
         if (!extension_loaded('wddx')) {
             throw new ExtensionNotLoadedException('PHP extension "wddx" is required for this adapter');
         }
 
-        parent::__construct($opts);
+        parent::__construct($options);
     }
 
     /**
@@ -68,7 +64,7 @@ class Wddx extends AbstractAdapter
      * @param  mixed $value 
      * @param  array $opts 
      * @return string
-     * @throws Zend\Serializer\Exception on wddx error
+     * @throws RuntimeException on wddx error
      */
     public function serialize($value, array $opts = array())
     {
@@ -93,7 +89,7 @@ class Wddx extends AbstractAdapter
      * @param  string $wddx 
      * @param  array $opts 
      * @return mixed
-     * @throws Zend\Serializer\Exception on wddx error
+     * @throws RuntimeException on wddx error
      */
     public function unserialize($wddx, array $opts = array())
     {

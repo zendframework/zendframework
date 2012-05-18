@@ -24,7 +24,6 @@ namespace Zend\View\Helper;
 use Zend\View\Exception\InvalidArgumentException;
 
 /**
- * @uses       \Zend\View\Helper\HtmlElement
  * @category   Zend
  * @package    Zend_View
  * @subpackage Helper

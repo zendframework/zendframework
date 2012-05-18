@@ -69,7 +69,7 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
     /**
      * Common HTTP client adapter
      *
-     * @var \Zend\Http\Client\Adapter
+     * @var \Zend\Http\Client\Adapter\AdapterInterface
      */
     protected $_adapter = null;
 
@@ -496,7 +496,7 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
         $this->client->setParameterPost(array('Camelot' => 'A silly place'));
 
         // Set strict redirections
-        $this->client->setConfig(array('strictredirects' => true));
+        $this->client->setOptions(array('strictredirects' => true));
 
         // Request
         $this->client->setMethod('POST');
@@ -523,7 +523,7 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
 
         // Set lower max redirections
         // Try with strict redirections first
-        $this->client->setConfig(array('strictredirects' => true, 'maxredirects' => 2));
+        $this->client->setOptions(array('strictredirects' => true, 'maxredirects' => 2));
 
         $this->client->setMethod('POST');
         $res = $this->client->send();
@@ -532,7 +532,7 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
 
         // Then try with normal redirections
         $this->client->setParameterGet(array('redirection' => '0'));
-        $this->client->setConfig(array('strictredirects' => false));
+        $this->client->setOptions(array('strictredirects' => false));
         $this->client->setMethod('POST');
         $res = $this->client->send();
         $this->assertTrue($res->isRedirect(),
@@ -547,7 +547,7 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
     {
         $this->client->setUri($this->baseuri . 'testRelativeRedirections.php');
         $this->client->setParameterGet(array('redirect' => 'abpath'));
-        $this->client->setConfig(array('maxredirects' => 1));
+        $this->client->setOptions(array('maxredirects' => 1));
 
         // Get the host and port part of our baseuri
         $port = ($this->client->getUri()->getPort() == 80) ? '' : ':' .$this->client->getUri()->getPort();
@@ -567,7 +567,7 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
     {
         $this->client->setUri($this->baseuri . 'testRelativeRedirections.php');
         $this->client->setParameterGet(array('redirect' => 'relpath'));
-        $this->client->setConfig(array('maxredirects' => 1));
+        $this->client->setOptions(array('maxredirects' => 1));
 
         // Set the new expected URI
         $uri = clone $this->client->getUri();
@@ -858,7 +858,7 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
 
     public function testStreamResponse()
     {
-        if(!($this->client->getAdapter() instanceof Adapter\Stream)) {
+        if(!($this->client->getAdapter() instanceof Adapter\StreamInterface)) {
               $this->markTestSkipped('Current adapter does not support streaming');
               return;
         }
@@ -885,7 +885,7 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
     {
         $this->markTestSkipped('To check with the new ZF2 implementation');
 
-        if(!($this->client->getAdapter() instanceof Adapter\Stream)) {
+        if(!($this->client->getAdapter() instanceof Adapter\StreamInterface)) {
               $this->markTestSkipped('Current adapter does not support streaming');
               return;
         }
@@ -905,7 +905,7 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
 
     public function testStreamResponseNamed()
     {
-        if(!($this->client->getAdapter() instanceof Adapter\Stream)) {
+        if(!($this->client->getAdapter() instanceof Adapter\StreamInterface)) {
               $this->markTestSkipped('Current adapter does not support streaming');
               return;
         }
@@ -931,7 +931,7 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
 
     public function testStreamRequest()
     {
-        if(!($this->client->getAdapter() instanceof Adapter\Stream)) {
+        if(!($this->client->getAdapter() instanceof Adapter\StreamInterface)) {
               $this->markTestSkipped('Current adapter does not support streaming');
               return;
         }

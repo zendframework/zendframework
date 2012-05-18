@@ -20,19 +20,20 @@
 
 namespace Zend\Filter;
 
-use Zend\Loader\Broker,
-    Zend\Stdlib\SplPriorityQueue;
+use Countable;
+use Zend\Loader\Broker;
+use Zend\Loader\Pluggable;
+use Zend\Stdlib\SplPriorityQueue;
 
 /**
- * @uses       Zend\Filter\Exception
- * @uses       Zend\Filter\AbstractFilter
- * @uses       Zend\Loader
  * @category   Zend
  * @package    Zend_Filter
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class FilterChain extends AbstractFilter
+class FilterChain extends AbstractFilter implements 
+    Pluggable, 
+    Countable
 {
     /**
      * Default priority at which filters are added
@@ -105,6 +106,61 @@ class FilterChain extends AbstractFilter
     }
 
     /**
+     * Return the count of attached filters
+     * 
+     * @return int
+     */
+    public function count()
+    {
+        return count($this->filters);
+    }
+
+    /**
+     * Get plugin broker instance
+     * 
+     * @return Zend\Loader\Broker
+     */
+    public function getBroker()
+    {
+        if (!$this->broker) {
+            $this->setBroker(new FilterBroker());
+        }
+        return $this->broker;
+    }
+
+    /**
+     * Set plugin broker instance
+     * 
+     * @param  string|Broker $broker Plugin broker to load plugins
+     * @return FilterChain
+     */
+    public function setBroker($broker)
+    {
+        if (!$broker instanceof Broker) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                '%s expects an argument of type Zend\Loader\Broker; received "%s"',
+                __METHOD__,
+                (is_object($broker) ? get_class($broker) : gettype($broker))
+            ));
+        }
+        $this->broker = $broker;
+        return $this;
+    }
+
+    /**
+     * Retrieve a filter plugin by name
+     * 
+     * @param  mixed $name 
+     * @param  array $options 
+     * @return Filter
+     */
+    public function plugin($name, array $options = array())
+    {
+        $broker = $this->getBroker();
+        return $broker->load($name, $options);
+    }
+
+    /**
      * Plugin Broker
      *
      * Set or retrieve the plugin broker, or retrieve a specific plugin from it.
@@ -120,37 +176,35 @@ class FilterChain extends AbstractFilter
      * 
      * @param  null|Broker|string $name 
      * @param array $options 
-     * @return Broker|Filter
+     * @return Broker|FilterInterface
      */
     public function broker($name = null, $options = array())
     {
         if ($name instanceof Broker) {
-            $this->broker = $name;
+            $this->setBroker($name);
             return $this->broker;
         } 
 
-        if (null === $this->broker) {
-            $this->broker = new FilterBroker();
-        }
+        $broker = $this->getBroker();
 
         if (null === $name) {
-            return $this->broker;
+            return $broker;
         }
 
-        return $this->broker->load($name, $options);
+        return $broker->load($name, $options);
     }
 
     /**
      * Attach a filter to the chain
      * 
-     * @param  callback|Filter $callback A Filter implementation or valid PHP callback
+     * @param  callback|FilterInterface $callback A Filter implementation or valid PHP callback
      * @param  int $priority Priority at which to enqueue filter; defaults to 1000 (higher executes earlier)
      * @return FilterChain
      */
     public function attach($callback, $priority = self::DEFAULT_PRIORITY)
     {
         if (!is_callable($callback)) {
-            if (!$callback instanceof Filter) {
+            if (!$callback instanceof FilterInterface) {
                 throw new Exception\InvalidArgumentException(sprintf(
                     'Expected a valid PHP callback; received "%s"',
                     (is_object($callback) ? get_class($callback) : gettype($callback))
@@ -177,6 +231,8 @@ class FilterChain extends AbstractFilter
     {
         if (!is_array($options)) {
             $options = (array) $options;
+        } elseif (empty($options)) {
+            $options = null;
         } else {
             if (range(0, count($options) - 1) != array_keys($options)) {
                 $options = array($options);

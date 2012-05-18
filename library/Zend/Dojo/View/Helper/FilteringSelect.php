@@ -24,7 +24,6 @@ namespace Zend\Dojo\View\Helper;
 /**
  * Dojo FilteringSelect dijit
  *
- * @uses       \Zend\Dojo\View\Helper\ComboBox
  * @package    Zend_Dojo
  * @subpackage View
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

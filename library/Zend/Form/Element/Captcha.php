@@ -21,292 +21,91 @@
 
 namespace Zend\Form\Element;
 
-use ReflectionClass,
-    Zend\Captcha\Adapter as CaptchaAdapter,
-    Zend\View\Renderer as View,
-    Zend\Loader\PrefixPathLoader as PluginLoader;
+use Zend\Captcha as ZendCaptcha;
+use Zend\Form\Element;
+use Zend\InputFilter\InputProviderInterface;
 
 /**
- * Generic captcha element
- *
- * This element allows to insert CAPTCHA into the form in order
- * to validate that human is submitting the form. The actual
- * logic is contained in the captcha adapter.
- *
- * @see http://en.wikipedia.org/wiki/Captcha
- *
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Element
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Captcha extends Xhtml
+class Captcha extends Element implements InputProviderInterface
 {
     /**
-     * Captcha plugin type constant
+     * Set a single element attribute
+     * 
+     * @param  string $key 
+     * @param  mixed $value 
+     * @return Element
      */
-    const CAPTCHA = 'CAPTCHA';
+    public function setAttribute($key, $value)
+    {
+        if ('captcha' == strtolower($key)) {
+            $this->setCaptcha($value);
+            return $this;
+        }
+        return parent::setAttribute($key, $value);
+    }
 
     /**
-     * Captcha adapter
-     *
-     * @var \Zend\Captcha\Adapter
+     * Set captcha
+     * 
+     * @param  array|ZendCaptcha\AdapterInterface $captcha 
+     * @return Captcha
      */
-    protected $_captcha;
+    public function setCaptcha($captcha)
+    {
+        if (is_array($captcha) || $captcha instanceof Traversable) {
+            $captcha = ZendCaptcha\Factory::factory($captcha);
+        }
+
+        if (!$captcha instanceof ZendCaptcha\AdapterInterface) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                '%s expects either a Zend\Captcha\AdapterInterface or specification to pass to Zend\Captcha\Factory; received "%s"',
+                __METHOD__,
+                (is_object($captcha) ? get_class($captcha) : gettype($captcha))
+            ));
+        }
+        $this->attributes['captcha'] = $captcha;
+        return $this;
+    }
 
     /**
-     * Get captcha adapter
-     *
-     * @return \Zend\Captcha\Adapter
+     * Retrieve captcha (if any)
+     * 
+     * @return null|ZendCaptcha\AdapterInterface
      */
     public function getCaptcha()
     {
-        return $this->_captcha;
+        return $this->getAttribute('captcha');
     }
 
     /**
-     * Set captcha adapter
+     * Provide default input rules for this element
      *
-     * @param string|array|\Zend\Captcha\Adapter $captcha
-     * @param array $options
-     */
-    public function setCaptcha($captcha, $options = array())
-    {
-        if ($captcha instanceof CaptchaAdapter) {
-            $instance = $captcha;
-        } else {
-            if (is_array($captcha)) {
-                if (array_key_exists('captcha', $captcha)) {
-                    $name = $captcha['captcha'];
-                    unset($captcha['captcha']);
-                } else {
-                    $name = array_shift($captcha);
-                }
-                $options = array_merge($options, $captcha);
-            } else {
-                $name = $captcha;
-            }
-
-            $name = $this->getPluginLoader(self::CAPTCHA)->load($name);
-            if (empty($options)) {
-                $instance = new $name;
-            } else {
-                $r = new ReflectionClass($name);
-                if ($r->hasMethod('__construct')) {
-                    $instance = $r->newInstanceArgs(array($options));
-                } else {
-                    $instance = $r->newInstance();
-                }
-            }
-        }
-
-        $this->_captcha = $instance;
-        $this->_captcha->setName($this->getName());
-        return $this;
-    }
-
-    /**
-     * Constructor
-     *
-     * $spec may be:
-     * - string: name of element
-     * - array: options with which to configure element
-     * - Zend_Config: Zend_Config with options for configuring element
-     *
-     * @param  string|array|\Zend\Config\Config $spec
-     * @return void
-     */
-    public function __construct($spec, $options = null)
-    {
-        parent::__construct($spec, $options);
-        $this->setAllowEmpty(true)
-             ->setRequired(true)
-             ->setAutoInsertNotEmptyValidator(false)
-             ->addValidator($this->getCaptcha(), true);
-    }
-
-    /**
-     * Return all attributes
-     *
+     * Attaches the captcha as a validator.
+     * 
      * @return array
      */
-    public function getAttribs()
+    public function getInputSpecification()
     {
-        $attribs = get_object_vars($this);
-        unset($attribs['helper']);
-        foreach ($attribs as $key => $value) {
-            if ('_' == substr($key, 0, 1)) {
-                unset($attribs[$key]);
-            }
+        $spec = array(
+            'name' => $this->getName(),
+            'required' => true,
+            'filters' => array(
+                array('name' => 'Zend\Filter\StringTrim'),
+            ),
+        );
+
+        // Test that we have a captcha before adding it to the spec
+        $captcha = $this->getCaptcha();
+        if ($captcha instanceof ZendCaptcha\AdapterInterface) {
+            $spec['validators'] = array($captcha);
         }
 
-        return $attribs;
-    }
-
-    /**
-     * Set options
-     *
-     * Overrides to allow passing captcha options
-     *
-     * @param  array $options
-     * @return \Zend\Form\Element\Captcha
-     */
-    public function setOptions(array $options)
-    {
-        if (array_key_exists('captcha', $options)) {
-            if (array_key_exists('captchaOptions', $options)) {
-                $this->setCaptcha($options['captcha'], $options['captchaOptions']);
-                unset($options['captchaOptions']);
-            } else {
-                $this->setCaptcha($options['captcha']);
-            }
-            unset($options['captcha']);
-        }
-        parent::setOptions($options);
-        return $this;
-    }
-
-    /**
-     * Render form element
-     *
-     * @param  \Zend\View\Renderer $view
-     * @return string
-     */
-    public function render(View $view = null)
-    {
-        $captcha    = $this->getCaptcha();
-        $captcha->setName($this->getFullyQualifiedName());
-
-        if (!$this->loadDefaultDecoratorsIsDisabled()) {
-            $decorators = $this->getDecorators();
-            $decorator  = $captcha->getDecorator();
-            $key        = get_class($this->_getDecorator($decorator, null));
-
-            if (!empty($decorator) && !array_key_exists($key, $decorators)) {
-                array_unshift($decorators, $decorator);
-            }
-
-            $decorator = array('Captcha', array('captcha' => $captcha));
-            $key       = get_class($this->_getDecorator($decorator[0], $decorator[1]));
-
-            if ($captcha instanceof \Zend\Captcha\Word && !array_key_exists($key, $decorators)) {
-                array_unshift($decorators, $decorator);
-            }
-
-            $this->setDecorators($decorators);
-        }
-
-        $this->setValue($this->getCaptcha()->generate());
-
-        return parent::render($view);
-    }
-
-    /**
-     * Retrieve plugin loader for validator or filter chain
-     *
-     * Support for plugin loader for Captcha adapters
-     *
-     * @param  string $type
-     * @return \Zend\Loader\PrefixPathMapper
-     * @throws \Zend\Loader\Exception on invalid type.
-     */
-    public function getPluginLoader($type)
-    {
-        $type = strtoupper($type);
-        if ($type == self::CAPTCHA) {
-            if (!isset($this->_loaders[$type])) {
-                $this->_loaders[$type] = new PluginLoader(
-                    array('Zend\\Captcha' => 'Zend/Captcha/')
-                );
-            }
-            return $this->_loaders[$type];
-        } else {
-            return parent::getPluginLoader($type);
-        }
-    }
-
-    /**
-     * Add prefix path for plugin loader for captcha adapters
-     *
-     * This method handles the captcha type, the rest is handled by
-     * the parent
-     * @param  string $prefix
-     * @param  string $path
-     * @param  string $type
-     * @return \Zend\Form\Element
-     * @see Zend_Form_Element::addPrefixPath
-     */
-    public function addPrefixPath($prefix, $path, $type = null)
-    {
-        $type = strtoupper($type);
-        switch ($type) {
-            case null:
-                $loader = $this->getPluginLoader(self::CAPTCHA);
-                $cPrefix = rtrim($prefix, '\\') . '\Captcha';
-                $cPath   = rtrim($path, '/\\') . '/Captcha';
-                $loader->addPrefixPath($cPrefix, $cPath);
-                return parent::addPrefixPath($prefix, $path);
-            case self::CAPTCHA:
-                $loader = $this->getPluginLoader($type);
-                $loader->addPrefixPath($prefix, $path);
-                return $this;
-            default:
-                return parent::addPrefixPath($prefix, $path, $type);
-        }
-    }
-
-    /**
-     * Load default decorators
-     *
-     * @return \Zend\Form\Element\Captcha
-     */
-    public function loadDefaultDecorators()
-    {
-        if ($this->loadDefaultDecoratorsIsDisabled()) {
-            return $this;
-        }
-
-        $decorators = $this->getDecorators();
-        if (empty($decorators)) {
-            $this->addDecorator('Errors')
-                 ->addDecorator('Description', array('tag' => 'p', 'class' => 'description'))
-                 ->addDecorator('HtmlTag', array('tag' => 'dd', 'id' => $this->getName() . '-element'))
-                 ->addDecorator('Label', array('tag' => 'dt'));
-        }
-        return $this;
-    }
-
-    /**
-     * Is the captcha valid?
-     *
-     * @param  mixed $value
-     * @param  mixed $context
-     * @return boolean
-     */
-    public function isValid($value, $context = null)
-    {
-        $this->getCaptcha()->setName($this->getName());
-        $belongsTo = $this->getBelongsTo();
-        if (empty($belongsTo) || !is_array($context)) {
-            return parent::isValid($value, $context);
-        }
-
-        $name     = $this->getFullyQualifiedName();
-        $root     = substr($name, 0, strpos($name, '['));
-        $segments = substr($name, strpos($name, '['));
-        $segments = ltrim($segments, '[');
-        $segments = rtrim($segments, ']');
-        $segments = explode('][', $segments);
-        array_unshift($segments, $root);
-        array_pop($segments);
-        $newContext = $context;
-        foreach ($segments as $segment) {
-            if (array_key_exists($segment, $newContext)) {
-                $newContext = $newContext[$segment];
-            }
-        }
-
-        return parent::isValid($value, $newContext);
+        return $spec;
     }
 }

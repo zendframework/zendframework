@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Db
- * @subpackage Sql
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Db
  */
 
 namespace Zend\Db\Sql;
@@ -25,15 +14,12 @@ use Zend\Db\Adapter\Adapter,
     Zend\Db\Adapter\Driver\StatementInterface,
     Zend\Db\Adapter\Platform\PlatformInterface,
     Zend\Db\Adapter\Platform\Sql92,
-    Zend\Db\Adapter\ParameterContainerInterface,
     Zend\Db\Adapter\ParameterContainer;
 
 /**
  * @category   Zend
  * @package    Zend_Db
  * @subpackage Sql
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  *
  * @property Where $where
  */
@@ -60,11 +46,6 @@ class Delete extends AbstractSql implements SqlInterface, PreparableSqlInterface
     protected $table = '';
 
     /**
-     * @var null|string
-     */
-    protected $schema = null;
-
-    /**
      * @var bool
      */
     protected $emptyWhereProtection = true;
@@ -86,10 +67,10 @@ class Delete extends AbstractSql implements SqlInterface, PreparableSqlInterface
      * @param  null|string $schema
      * @return void
      */
-    public function __construct($table = null, $schema = null)
+    public function __construct($table = null)
     {
         if ($table) {
-            $this->from($table, $schema);
+            $this->from($table);
         }
         $this->where = new Where();
     }
@@ -101,12 +82,9 @@ class Delete extends AbstractSql implements SqlInterface, PreparableSqlInterface
      * @param  null|string $schema
      * @return Delete
      */
-    public function from($table, $schema = null)
+    public function from($table)
     {
         $this->table = $table;
-        if ($schema) {
-            $this->schema = $schema;
-        }
         return $this;
     }
 
@@ -151,21 +129,15 @@ class Delete extends AbstractSql implements SqlInterface, PreparableSqlInterface
      */
     public function prepareStatement(Adapter $adapter, StatementInterface $statement)
     {
-        $driver   = $adapter->getDriver();
         $platform = $adapter->getPlatform();
         $parameterContainer = $statement->getParameterContainer();
 
-        if (!$parameterContainer instanceof ParameterContainerInterface) {
+        if (!$parameterContainer instanceof ParameterContainer) {
             $parameterContainer = new ParameterContainer();
             $statement->setParameterContainer($parameterContainer);
         }
 
         $table = $platform->quoteIdentifier($this->table);
-        if ($this->schema != '') {
-            $table = $platform->quoteIdentifier($this->schema)
-                . $platform->getIdentifierSeparator()
-                . $table;
-        }
 
         $sql = sprintf($this->specifications[self::SPECIFICATION_DELETE], $table);
 
@@ -185,22 +157,22 @@ class Delete extends AbstractSql implements SqlInterface, PreparableSqlInterface
      *
      * Platform defaults to Sql92 if none provided
      * 
-     * @param  null|PlatformInterface $platform 
+     * @param  null|PlatformInterface $adapterPlatform
      * @return string
      */
-    public function getSqlString(PlatformInterface $platform = null)
+    public function getSqlString(PlatformInterface $adapterPlatform = null)
     {
-        $platform = ($platform) ?: new Sql92;
-        $table = $platform->quoteIdentifier($this->table);
+        $adapterPlatform = ($adapterPlatform) ?: new Sql92;
+        $table = $adapterPlatform->quoteIdentifier($this->table);
 
-        if ($this->schema != '') {
-            $table = $platform->quoteIdentifier($this->schema) . $platform->getIdentifierSeparator() . $table;
-        }
+//        if ($this->schema != '') {
+//            $table = $platform->quoteIdentifier($this->schema) . $platform->getIdentifierSeparator() . $table;
+//        }
 
         $sql = sprintf($this->specifications[self::SPECIFICATION_DELETE], $table);
 
         if ($this->where->count() > 0) {
-            $whereParts = $this->processExpression($this->where, $platform, null, 'where');
+            $whereParts = $this->processExpression($this->where, $adapterPlatform, null, 'where');
             $sql .= ' ' . sprintf($this->specifications[self::SPECIFICATION_WHERE], $whereParts['sql']);
         }
 

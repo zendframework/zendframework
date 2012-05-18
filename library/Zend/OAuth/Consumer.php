@@ -20,6 +20,9 @@
 
 namespace Zend\OAuth;
 
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
+
 /**
  * @category   Zend
  * @package    Zend_OAuth
@@ -45,7 +48,7 @@ class Consumer extends OAuth
     protected $_accessToken = null;
 
     /**
-     * @var \Zend\OAuth\Config\Config
+     * @var \Zend\OAuth\Config
      */
     protected $_config = null;
 
@@ -53,15 +56,14 @@ class Consumer extends OAuth
      * Constructor; create a new object with an optional array|Zend_Config
      * instance containing initialising options.
      *
-     * @param  array|\Zend\Config\Config $options
-     * @return void
+     * @param  array|Traversable $options
      */
     public function __construct($options = null)
     {
         $this->_config = new Config\StandardConfig;
         if ($options !== null) {
-            if ($options instanceof \Zend\Config\Config) {
-                $options = $options->toArray();
+            if ($options instanceof Traversable) {
+                $options = ArrayUtils::iteratorToArray($options);
             }
             $this->_config->setOptions($options);
         }
@@ -149,11 +151,11 @@ class Consumer extends OAuth
      * Request Token.
      *
      * @param  array $queryData GET data returned in user's redirect from Provider
-     * @param  Zend\OAuth\Token\Request Request Token information
+     * @param  \Zend\OAuth\Token\Request Request Token information
      * @param  string $httpMethod
-     * @param  Zend\OAuth\Http\AccessToken $request
-     * @return Zend\OAuth\Token\Access
-     * @throws Zend\OAuth\Exception on invalid authorization token, non-matching response authorization token, or unprovided authorization token
+     * @param  \Zend\OAuth\Http\AccessToken $request
+     * @return \Zend\OAuth\Token\Access
+     * @throws Exception\InvalidArgumentException on invalid authorization token, non-matching response authorization token, or unprovided authorization token
      */
     public function getAccessToken(
         $queryData, 
@@ -163,7 +165,7 @@ class Consumer extends OAuth
     ) {
         $authorizedToken = new Token\AuthorizedRequest($queryData);
         if (!$authorizedToken->isValid()) {
-            throw new Exception(
+            throw new Exception\InvalidArgumentException(
                 'Response from Service Provider is not a valid authorized request token');
         }
         if ($request === null) {
@@ -184,13 +186,13 @@ class Consumer extends OAuth
         }
         if (isset($token)) {
             if ($authorizedToken->getToken() !== $token->getToken()) {
-                throw new Exception(
+                throw new Exception\InvalidArgumentException(
                     'Authorized token from Service Provider does not match'
                     . ' supplied Request Token details'
                 );
             }
         } else {
-            throw new Exception('Request token must be passed to method');
+            throw new Exception\InvalidArgumentException('Request token must be passed to method');
         }
         $this->_requestToken = $token;
         $this->_accessToken = $request->execute();
@@ -201,7 +203,7 @@ class Consumer extends OAuth
      * Return whatever the last Request Token retrieved was while using the
      * current Consumer instance.
      *
-     * @return Zend\OAuth\Token\Request
+     * @return \Zend\OAuth\Token\Request
      */
     public function getLastRequestToken()
     {
@@ -212,7 +214,7 @@ class Consumer extends OAuth
      * Return whatever the last Access Token retrieved was while using the
      * current Consumer instance.
      *
-     * @return Zend\OAuth\Token\Access
+     * @return \Zend\OAuth\Token\Access
      */
     public function getLastAccessToken()
     {
@@ -222,7 +224,7 @@ class Consumer extends OAuth
     /**
      * Alias to self::getLastAccessToken()
      *
-     * @return Zend\OAuth\Token\Access
+     * @return \Zend\OAuth\Token\Access
      */
     public function getToken()
     {
@@ -237,12 +239,12 @@ class Consumer extends OAuth
      * @param  string $method
      * @param  array $args
      * @return mixed
-     * @throws \Zend\OAuth\Exception if method does not exist in config object
+     * @throws Exception\BadMethodCallException if method does not exist in config object
      */
     public function __call($method, array $args)
     {
         if (!method_exists($this->_config, $method)) {
-            throw new Exception('Method does not exist: '.$method);
+            throw new Exception\BadMethodCallException('Method does not exist: '.$method);
         }
         return call_user_func_array(array($this->_config,$method), $args);
     }

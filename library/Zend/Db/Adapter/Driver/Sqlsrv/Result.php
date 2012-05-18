@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Db
- * @subpackage Adapter
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Db
  */
 
 namespace Zend\Db\Adapter\Driver\Sqlsrv;
@@ -27,40 +16,58 @@ use Zend\Db\Adapter\Driver\ResultInterface;
  * @category   Zend
  * @package    Zend_Db
  * @subpackage Adapter
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Result implements \Iterator, ResultInterface
 {
+
     /**
      * @var resource
      */
     protected $resource = null;
+
     /**
      * @var boolean 
      */
     protected $currentData = false;
+
     /**
      *
      * @var boolean
      */
     protected $currentComplete = false;
+
     /**
      *
      * @var integer
      */
     protected $position = -1;
+
+    /**
+     * @var mixed
+     */
+    protected $generatedValue = null;
+
     /**
      * Initialize
      * 
      * @param  resource $resource
      * @return Result 
      */
-    public function initialize($resource)
+    public function initialize($resource, $generatedValue = null)
     {
         $this->resource = $resource;
+        $this->generatedValue = $generatedValue;
         return $this;
     }
+
+    /**
+     * @return null
+     */
+    public function buffer()
+    {
+        return null;
+    }
+
     /**
      * Get resource
      * 
@@ -70,6 +77,7 @@ class Result implements \Iterator, ResultInterface
     {
         return $this->resource;
     }
+
     /**
      * Current
      * 
@@ -80,10 +88,11 @@ class Result implements \Iterator, ResultInterface
         if ($this->currentComplete) {
             return $this->currentData;
         }
-        
+
         $this->load();
         return $this->currentData;
     }
+
     /**
      * Next
      * 
@@ -94,6 +103,7 @@ class Result implements \Iterator, ResultInterface
         $this->load();
         return true;
     }
+
     /**
      * Load
      * 
@@ -107,6 +117,7 @@ class Result implements \Iterator, ResultInterface
         $this->position++;
         return ($this->currentData);
     }
+
     /**
      * Key
      * 
@@ -116,6 +127,7 @@ class Result implements \Iterator, ResultInterface
     {
         return $this->position;
     }
+
     /**
      * Rewind
      * 
@@ -127,6 +139,7 @@ class Result implements \Iterator, ResultInterface
         $this->load(SQLSRV_SCROLL_FIRST);
         return true;
     }
+
     /**
      * Valid
      * 
@@ -140,6 +153,7 @@ class Result implements \Iterator, ResultInterface
 
         return $this->load();
     }
+
     /**
      * Count
      * 
@@ -149,6 +163,7 @@ class Result implements \Iterator, ResultInterface
     {
         return sqlsrv_num_rows($this->resource);
     }
+
     /**
      * Is query result
      * 
@@ -161,6 +176,7 @@ class Result implements \Iterator, ResultInterface
         }
         return (sqlsrv_num_fields($this->resource) > 0);
     }
+
     /**
      * Get affected rows
      * 
@@ -169,5 +185,13 @@ class Result implements \Iterator, ResultInterface
     public function getAffectedRows()
     {
         return sqlsrv_rows_affected($this->resource);
+    }
+
+    /**
+     * @return mixed|null
+     */
+    public function getGeneratedValue()
+    {
+        return $this->generatedValue;
     }
 }

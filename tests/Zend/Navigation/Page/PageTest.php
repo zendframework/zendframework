@@ -196,7 +196,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
             try {
                 $page->setFragment($invalid);
                 $this->fail('An invalid value was set, but a ' .
-                            'Zend_Navigation_Exception was not thrown');
+                            'Zend\Navigation\Exception\InvalidArgumentException was not thrown');
             } catch (Navigation\Exception\InvalidArgumentException $e) {
                 $this->assertContains(
                     'Invalid argument: $fragment', $e->getMessage()
@@ -1118,12 +1118,41 @@ class PageTest extends \PHPUnit_Framework_TestCase
 
             'pages'    => array(
                 array(
-                    'label' => 'foo.bar',
-                    'uri'   => 'http://www.example.com/foo.html'
+                    'type'      => 'Zend\Navigation\Page\Uri',
+                    'label'     => 'foo.bar',
+                    'fragment'  => null,
+                    'id'        => null,
+                    'class'     => null,
+                    'title'     => null,
+                    'target'    => null,
+                    'rel'       => array(),
+                    'rev'       => array(),
+                    'order'     => null,
+                    'resource'  => null,
+                    'privilege' => null,
+                    'active'    => null,
+                    'visible'   => 1,
+                    'pages'     => array(),
+                    'uri'       => 'http://www.example.com/foo.html',
                 ),
                 array(
-                    'label' => 'foo.baz',
-                    'uri'   => 'http://www.example.com/foo.html'
+                    'label'     => 'foo.baz',
+                    'type'      => 'Zend\Navigation\Page\Uri',
+                    'label'     => 'foo.bar',
+                    'fragment'  => null,
+                    'id'        => null,
+                    'class'     => null,
+                    'title'     => null,
+                    'target'    => null,
+                    'rel'       => array(),
+                    'rev'       => array(),
+                    'order'     => null,
+                    'resource'  => null,
+                    'privilege' => null,
+                    'active'    => null,
+                    'visible'   => 1,
+                    'pages'     => array(),
+                    'uri'       => 'http://www.example.com/foo.html'
                 )
             )
         );
@@ -1134,38 +1163,8 @@ class PageTest extends \PHPUnit_Framework_TestCase
         // tweak options to what we expect toArray() to contain
         $options['type'] = 'Zend\Navigation\Page\Uri';
 
-        // calculate diff between toArray() and $options
-        $diff = array_diff_assoc($toArray, $options);
-
-        // should be no diff
-        $this->assertEquals(array(), $diff);
-
-        // $toArray should have 2 sub pages
-        $this->assertEquals(2, count($toArray['pages']));
-
-        // tweak options to what we expect sub page 1 to be
-        $options['label'] = 'foo.bar';
-        $options['fragment'] = null;
-        $options['order'] = null;
-        $options['id'] = null;
-        $options['class'] = null;
-        $options['title'] = null;
-        $options['target'] = null;
-        $options['resource'] = null;
-        $options['active'] = false;
-        $options['visible'] = true;
-        unset($options['foo']);
-        unset($options['meaning']);
-
-        // assert that there is no diff from what we expect
-        $subPageOneDiff = array_diff_assoc($toArray['pages'][0], $options);
-        $this->assertEquals(array(), $subPageOneDiff);
-
-        // tweak options to what we expect sub page 2 to be
-        $options['label'] = 'foo.baz';
-
-        // assert that there is no diff from what we expect
-        $subPageTwoDiff = array_diff_assoc($toArray['pages'][1], $options);
-        $this->assertEquals(array(), $subPageTwoDiff);
+        ksort($options);
+        ksort($toArray);
+        $this->assertEquals($options, $toArray);
     }
 }

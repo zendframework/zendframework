@@ -25,8 +25,6 @@ use Zend\Markup\Token;
 /**
  * Code markup for HTML
  *
- * @uses       \Zend\Markup\Renderer\Markup\Html\AbstractHtml
- * @uses       \Zend\Markup\Token
  * @category   Zend
  * @package    Zend_Markup
  * @subpackage Renderer_Markup_Html
@@ -43,7 +41,6 @@ class Code extends AbstractHtml
      * with PHP's highlight_string() function), we simply override the
      * constructor.
      *
-     * @return void
      */
     public function __construct()
     {

@@ -21,12 +21,11 @@
 
 namespace Zend\Dojo\Form;
 
-use Zend\View\Renderer as View;
+use Zend\View\Renderer\RendererInterface as View;
 
 /**
  * Dijit-enabled Form
  *
- * @uses       \Zend\Form\Form
  * @package    Zend_Dojo
  * @subpackage Form
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -37,8 +36,7 @@ class Form extends \Zend\Form\Form
     /**
      * Constructor
      *
-     * @param  array|\Zend\Config\Config|null $options
-     * @return void
+     * @param  array|\Traversable $options
      */
     public function __construct($options = null)
     {
@@ -74,7 +72,7 @@ class Form extends \Zend\Form\Form
      *
      * Ensures that the view object has the dojo view helper path set.
      *
-     * @param  \Zend\View\Renderer $view
+     * @param  View $view
      * @return \Zend\Dojo\Form\Element\Dijit
      */
     public function setView(View $view = null)

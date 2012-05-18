@@ -10,7 +10,7 @@ class RefererTest extends \PHPUnit_Framework_TestCase
     public function testRefererFromStringCreatesValidRefererHeader()
     {
         $refererHeader = Referer::fromString('Referer: xxx');
-        $this->assertInstanceOf('Zend\Http\Header\HeaderDescription', $refererHeader);
+        $this->assertInstanceOf('Zend\Http\Header\HeaderInterface', $refererHeader);
         $this->assertInstanceOf('Zend\Http\Header\Referer', $refererHeader);
     }
 

@@ -29,10 +29,6 @@ use Zend\Pdf\ObjectFactory;
 /**
  * PDF string parser
  *
- * @uses       \Zend\Pdf\InternalType
- * @uses       \Zend\Pdf\InternalType\IndirectObjectReference
- * @uses       \Zend\Pdf\ObjectFactory
- * @uses       \Zend\Pdf\Exception
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Internal
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -272,7 +268,7 @@ class DataParser
      * Read elemental object from a PDF stream
      *
      * @return \Zend\Pdf\InternalType\AbstractTypeObject
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
     public function readElement($nextLexeme = null)
     {
@@ -341,7 +337,7 @@ class DataParser
      * Also reads trailing ')' from a pdf stream
      *
      * @return \Zend\Pdf\InternalType\StringObject
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
     private function _readString()
     {
@@ -387,7 +383,7 @@ class DataParser
      * Also reads trailing '>' from a pdf stream
      *
      * @return \Zend\Pdf\InternalType\BinaryStringObject
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
     private function _readBinaryString()
     {
@@ -415,7 +411,7 @@ class DataParser
      * Also reads trailing ']' from a pdf stream
      *
      * @return \Zend\Pdf\InternalType\ArrayObject
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
     private function _readArray()
     {
@@ -438,7 +434,7 @@ class DataParser
      * Also reads trailing '>>' from a pdf stream
      *
      * @return \Zend\Pdf\InternalType\DictionaryObject
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
     private function _readDictionary()
     {

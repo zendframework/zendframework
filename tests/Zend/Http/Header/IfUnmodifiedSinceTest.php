@@ -10,7 +10,7 @@ class IfUnmodifiedSinceTest extends \PHPUnit_Framework_TestCase
     public function testIfUnmodifiedSinceFromStringCreatesValidIfUnmodifiedSinceHeader()
     {
         $ifUnmodifiedSinceHeader = IfUnmodifiedSince::fromString('If-Unmodified-Since: xxx');
-        $this->assertInstanceOf('Zend\Http\Header\HeaderDescription', $ifUnmodifiedSinceHeader);
+        $this->assertInstanceOf('Zend\Http\Header\HeaderInterface', $ifUnmodifiedSinceHeader);
         $this->assertInstanceOf('Zend\Http\Header\IfUnmodifiedSince', $ifUnmodifiedSinceHeader);
     }
 

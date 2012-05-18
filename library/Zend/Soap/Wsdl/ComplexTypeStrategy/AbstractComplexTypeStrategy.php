@@ -21,19 +21,16 @@
 
 namespace Zend\Soap\Wsdl\ComplexTypeStrategy;
 
-use Zend\Soap\Wsdl\ComplexTypeStrategy;
-
 /**
  * Abstract class for Zend_Soap_Wsdl_Strategy.
  *
- * @uses       \Zend\Soap\Wsdl\Strategy
  * @category   Zend
  * @package    Zend_Soap
  * @subpackage WSDL
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class AbstractComplexTypeStrategy implements ComplexTypeStrategy
+abstract class AbstractComplexTypeStrategy implements ComplexTypeStrategyInterface
 {
     /**
      * Context object

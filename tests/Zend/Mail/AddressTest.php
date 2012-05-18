@@ -21,8 +21,7 @@
 
 namespace ZendTest\Mail;
 
-use PHPUnit_Framework_TestCase as TestCase,
-    Zend\Mail\Address;
+use Zend\Mail\Address;
 
 /**
  * @category   Zend
@@ -32,7 +31,7 @@ use PHPUnit_Framework_TestCase as TestCase,
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Mail
  */
-class AddressTest extends TestCase
+class AddressTest extends \PHPUnit_Framework_TestCase
 {
     public function testDoesNotRequireNameForInstantiation()
     {

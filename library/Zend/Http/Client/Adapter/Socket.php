@@ -20,9 +20,12 @@
  */
 
 namespace Zend\Http\Client\Adapter;
-use Zend\Http\Client\Adapter as HttpAdapter,
-    Zend\Http\Client\Adapter\Exception as AdapterException,
-    Zend\Http\Response;
+
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
+use Zend\Http\Client\Adapter\AdapterInterface as HttpAdapter;
+use Zend\Http\Client\Adapter\Exception as AdapterException;
+use Zend\Http\Response;
 
 /**
  * A sockets based (stream\socket\client) adapter class for Zend\Http\Client. Can be used
@@ -34,7 +37,7 @@ use Zend\Http\Client\Adapter as HttpAdapter,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Socket implements HttpAdapter, Stream
+class Socket implements HttpAdapter, StreamInterface
 {
     /**
      * The socket for server connection
@@ -85,7 +88,7 @@ class Socket implements HttpAdapter, Stream
     protected $_context = null;
 
     /**
-     * Adapter constructor, currently empty. Config is set using setConfig()
+     * Adapter constructor, currently empty. Config is set using setOptions()
      *
      */
     public function __construct()
@@ -95,20 +98,20 @@ class Socket implements HttpAdapter, Stream
     /**
      * Set the configuration array for the adapter
      *
-     * @param \Zend\Config\Config | array $config
+     * @param  array|Traversable $options
      */
-    public function setConfig($config = array())
+    public function setOptions($options = array())
     {
-        if ($config instanceof \Zend\Config\Config) {
-            $config = $config->toArray();
-
-        } elseif (! is_array($config)) {
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
+        }
+        if (!is_array($options)) {
             throw new AdapterException\InvalidArgumentException(
-                'Array or Zend_Config object expected, got ' . gettype($config)
+                'Array or Zend_Config object expected, got ' . gettype($options)
             );
         }
 
-        foreach ($config as $k => $v) {
+        foreach ($options as $k => $v) {
             $this->config[strtolower($k)] = $v;
         }
     }
@@ -134,7 +137,7 @@ class Socket implements HttpAdapter, Stream
      * @since  Zend Framework 1.9
      *
      * @param  mixed $context Stream context or array of context options
-     * @return \Zend\Http\Client\Adapter\Socket
+     * @return Socket
      */
     public function setStreamContext($context)
     {
@@ -176,6 +179,7 @@ class Socket implements HttpAdapter, Stream
      * @param string  $host
      * @param int     $port
      * @param boolean $secure
+     * @throws AdapterException\RuntimeException
      */
     public function connect($host, $port = 80, $secure = false)
     {
@@ -207,7 +211,9 @@ class Socket implements HttpAdapter, Stream
 
             $flags = STREAM_CLIENT_CONNECT;
             if ($this->config['persistent']) $flags |= STREAM_CLIENT_PERSISTENT;
-            
+
+            $errno = null;
+            $errstr = '';
             $this->socket = @stream_socket_client($host . ':' . $port,
                                                   $errno,
                                                   $errstr,
@@ -482,7 +488,7 @@ class Socket implements HttpAdapter, Stream
      * Check if the socket has timed out - if so close connection and throw
      * an exception
      *
-     * @throws \Zend\Http\Client\Adapter\Exception with READ_TIMEOUT code
+     * @throws AdapterException\TimeoutException with READ_TIMEOUT code
      */
     protected function _checkSocketReadTimeout()
     {

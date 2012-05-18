@@ -14,7 +14,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Docbook
+ * @package    Zend_DocBook
  * @subpackage Exception
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -37,8 +37,8 @@
  */
 
 use Zend\Console\Getopt,
-    Zend\Docbook\ClassParser,
-    Zend\Docbook\SkeletonGenerator,
+    Zend\DocBook\ClassParser,
+    Zend\DocBook\SkeletonGenerator,
     Zend\Code\Reflection\ClassReflection as ReflectionClass;
 
 $libPath = getenv('LIB_PATH') ? getenv('LIB_PATH') : __DIR__ . '/../library';

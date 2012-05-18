@@ -30,14 +30,6 @@ use Zend\GData\Photos;
  * For information on requesting this feed from a server, see the
  * service class, Zend_Gdata_Photos.
  *
- * @uses       \Zend\GData\App\Exception
- * @uses       \Zend\GData\Feed
- * @uses       \Zend\GData\Photos
- * @uses       \Zend\GData\Photos\AlbumEntry
- * @uses       \Zend\GData\Photos\CommentEntry
- * @uses       \Zend\GData\Photos\PhotoEntry
- * @uses       \Zend\GData\Photos\TagEntry
- * @uses       \Zend\GData\Photos\UserEntry
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Photos

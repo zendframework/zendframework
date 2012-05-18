@@ -20,16 +20,6 @@
  */
 
 /**
- * @uses       Zend_Service_DeveloperGarden_Client_AbstractClient
- * @uses       Zend_Service_DeveloperGarden_Request_VoiceButler_CallStatus
- * @uses       Zend_Service_DeveloperGarden_Request_VoiceButler_NewCall
- * @uses       Zend_Service_DeveloperGarden_Request_VoiceButler_NewCallSequenced
- * @uses       Zend_Service_DeveloperGarden_Request_VoiceButler_TearDownCall
- * @uses       Zend_Service_DeveloperGarden_Response_VoiceButler_CallStatus2Response
- * @uses       Zend_Service_DeveloperGarden_Response_VoiceButler_CallStatusResponse
- * @uses       Zend_Service_DeveloperGarden_Response_VoiceButler_NewCallResponse
- * @uses       Zend_Service_DeveloperGarden_Response_VoiceButler_NewCallSequencedResponse
- * @uses       Zend_Service_DeveloperGarden_Response_VoiceButler_TearDownCallResponse
  * @category   Zend
  * @package    Zend_Service
  * @subpackage DeveloperGarden

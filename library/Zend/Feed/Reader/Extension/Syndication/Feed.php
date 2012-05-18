@@ -19,13 +19,12 @@
  */
 
 namespace Zend\Feed\Reader\Extension\Syndication;
-use Zend\Feed\Reader;
-use Zend\Feed\Reader\Extension;
-use Zend\Date;
+
+use Zend\Feed\Reader,
+    Zend\Feed\Reader\Extension,
+    Zend\Date;
 
 /**
- * @uses       \Zend\Date\Date
- * @uses       \Zend\Feed\Reader\Extension\AbstractFeed
  * @category   Zend
  * @package    Zend_Feed_Reader
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -35,7 +34,9 @@ class Feed extends \Zend\Feed\Reader\Extension\AbstractFeed
 {
     /**
      * Get update period
+     *
      * @return string
+     * @throws Reader\Exception\InvalidArgumentException
      */
     public function getUpdatePeriod()
     {
@@ -55,7 +56,7 @@ class Feed extends \Zend\Feed\Reader\Extension\AbstractFeed
             case 'yearly':
                 return $period;
             default:
-                throw new Reader\Exception("Feed specified invalid update period: '$period'."
+                throw new Reader\Exception\InvalidArgumentException("Feed specified invalid update period: '$period'."
                     .  " Must be one of hourly, daily, weekly or yearly"
                 );
         }

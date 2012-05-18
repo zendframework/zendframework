@@ -35,7 +35,7 @@ use DateTime,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Logger implements Loggable, Pluggable
+class Logger implements LoggableInterface, Pluggable
 {
     /**
      * @const int defined from the BSD Syslog message severities
@@ -211,7 +211,7 @@ class Logger implements Loggable, Pluggable
     {
         if (is_string($writer)) {
             $writer = $this->plugin($writer);
-        } elseif (!$writer instanceof Writer) {
+        } elseif (!$writer instanceof Writer\WriterInterface) {
             throw new Exception\InvalidArgumentException(sprintf(
                 'Writer must implement Zend\Log\Writer; received "%s"',
                 is_object($writer) ? get_class($writer) : gettype($writer)
@@ -245,7 +245,7 @@ class Logger implements Loggable, Pluggable
             throw new Exception\InvalidArgumentException('Writers must be a SplPriorityQueue of Zend\Log\Writer');
         }
         foreach ($writers->toArray() as $writer) {
-            if (!$writer instanceof Writer) {
+            if (!$writer instanceof Writer\WriterInterface) {
                 throw new Exception\InvalidArgumentException('Writers must be a SplPriorityQueue of Zend\Log\Writer');
             }
         }
@@ -265,9 +265,11 @@ class Logger implements Loggable, Pluggable
     public function log($priority, $message, $extra = array())
     {
         if (!is_int($priority) || ($priority<0) || ($priority>=count($this->priorities))) {
-            throw new Exception\InvalidArgumentException(
-                '$priority must be an integer > 0 and < ' . count($this->priorities)
-            );
+            throw new Exception\InvalidArgumentException(sprintf(
+                '$priority must be an integer > 0 and < %d; received %s',
+                count($this->priorities),
+                var_export($priority, 1)
+            ));
         }
         if (is_object($message) && !method_exists($message, '__toString')) {
             throw new Exception\InvalidArgumentException(

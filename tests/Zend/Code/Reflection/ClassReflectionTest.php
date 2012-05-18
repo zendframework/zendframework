@@ -115,7 +115,8 @@ class ClassReflectionTest extends \PHPUnit_Framework_TestCase
 
 }
 EOS;
-        $this->assertEquals($target, $reflectionClass->getContents());
+        $contents = $reflectionClass->getContents();
+        $this->assertEquals(trim($target), trim($contents));
     }
 
     public function testStartLine()

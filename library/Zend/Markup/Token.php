@@ -22,7 +22,6 @@
 namespace Zend\Markup;
 
 /**
- * @uses       \Zend\Markup\TokenList
  * @category   Zend
  * @package    Zend_Markup
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -91,7 +90,6 @@ class Token
      * @param  string $name
      * @param  array $attributes
      * @param  \Zend\Markup\Token $parent
-     * @return void
      */
     public function __construct(
         $content,
@@ -199,7 +197,9 @@ class Token
     /**
      * Add an attribute
      *
-     * @return \Zend\Markup\Token
+     * @param string $name
+     * @param $value
+     * @return Token
      */
     public function addAttribute($name, $value)
     {
@@ -225,6 +225,7 @@ class Token
     /**
      * Add a child token
      *
+     * @param Token $child
      * @return void
      */
     public function addChild(Token $child)

@@ -26,7 +26,7 @@ use Zend\Loader\Broker,
     Zend\Mvc\Router\Exception;
 
 /**
- * Route broker.
+ * RouteInterface broker.
  *
  * @category   Zend
  * @package    Zend_Mvc_Router
@@ -55,7 +55,6 @@ class RouteBroker implements Broker
      * Allow configuration via options; see {@link setOptions()} for details.
      *
      * @param  null|array|\Traversable $options
-     * @return void
      */
     public function __construct($options = null)
     {
@@ -142,7 +141,7 @@ class RouteBroker implements Broker
      * @see    Broker::load()
      * @param  string $route
      * @param  array  $options
-     * @return Route
+     * @return RouteInterface
      */
     public function load($route, array $options = array())
     {

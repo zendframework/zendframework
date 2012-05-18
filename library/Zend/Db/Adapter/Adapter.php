@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Db
- * @subpackage Adapter
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Db
  */
 
 namespace Zend\Db\Adapter;
@@ -27,9 +16,6 @@ use Zend\Db\ResultSet;
  * @category   Zend
  * @package    Zend_Db
  * @subpackage Adapter
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  *
  * @property Driver\DriverInterface $driver
  * @property Platform\PlatformInterface $platform
@@ -52,6 +38,7 @@ class Adapter
     const FUNCTION_QUOTE_IDENTIFIER = 'quoteIdentifier';
     const FUNCTION_QUOTE_VALUE = 'quoteValue';
 
+    const VALUE_QUOTE_SEPARATOR = 'quoteSeparator';
 
     /**
      * @var Driver\DriverInterface
@@ -90,7 +77,7 @@ class Adapter
         }
 
         if (!$driver instanceof Driver\DriverInterface) {
-            throw new \InvalidArgumentException(
+            throw new Exception\InvalidArgumentException(
                 'The supplied or instantiated driver object does not implement Zend\Db\Adapter\Driver\DriverInterface'
             );
         }
@@ -115,7 +102,7 @@ class Adapter
     public function getDriver()
     {
         if ($this->driver == null) {
-            throw new \Exception('Driver has not been set or configured for this adapter.');
+            throw new Exception\RuntimeException('Driver has not been set or configured for this adapter.');
         }
         return $this->driver;
     }
@@ -128,11 +115,11 @@ class Adapter
     public function setQueryMode($queryMode)
     {
         if (!in_array($queryMode, array(self::QUERY_MODE_EXECUTE, self::QUERY_MODE_PREPARE))) {
-            throw new \InvalidArgumentException(
+            throw new Exception\InvalidArgumentException(
                 sprintf('Query Mode must be one of "%s" or "%s"', self::QUERY_MODE_EXECUTE, self::QUERY_MODE_PREPARE)
             );
         }
-        
+
         $this->queryMode = $queryMode;
         return $this;
     }
@@ -160,7 +147,7 @@ class Adapter
      *
      * @param string $sql
      * @param string|array $parametersOrQueryMode
-     * @return Driver\StatementInterface
+     * @return Driver\StatementInterface|ResultSet\ResultSet
      */
     public function query($sql, $parametersOrQueryMode = self::QUERY_MODE_PREPARE)
     {
@@ -171,7 +158,7 @@ class Adapter
             $mode = self::QUERY_MODE_PREPARE;
             $parameters = $parametersOrQueryMode;
         } else {
-            throw new \Exception('Parameter 2 to this method must be a flag, an array, or ParameterContainer');
+            throw new Exception\InvalidArgumentException('Parameter 2 to this method must be a flag, an array, or ParameterContainer');
         }
 
         if ($mode == self::QUERY_MODE_PREPARE) {
@@ -201,17 +188,34 @@ class Adapter
      * Create statement
      * 
      * @param  string $initialSql
-     * @param  ParameterContainerInterface $initialParameters
+     * @param  ParameterContainer $initialParameters
      * @return Driver\StatementInterface 
      */
     public function createStatement($initialSql = null, $initialParameters = null)
     {
         $statement = $this->driver->createStatement($initialSql);
-        if ($initialParameters == null || !$initialParameters instanceof ParameterContainerInterface && is_array($initialParameters)) {
+        if ($initialParameters == null || !$initialParameters instanceof ParameterContainer && is_array($initialParameters)) {
             $initialParameters = new ParameterContainer((is_array($initialParameters) ? $initialParameters : array()));
         }
         $statement->setParameterContainer($initialParameters);
         return $statement;
+    }
+
+    public function getHelpers(/* $functions */)
+    {
+        $functions = array();
+        $platform = $this->platform;
+        foreach (func_get_args() as $arg) {
+            switch ($arg) {
+                case self::FUNCTION_QUOTE_IDENTIFIER:
+                    $functions[] = function ($value) use ($platform) { return $platform->quoteIdentifier($value); };
+                    break;
+                case self::FUNCTION_QUOTE_VALUE:
+                    $functions[] = function ($value) use ($platform) { return $platform->quoteValue($value); };
+                    break;
+
+            }
+        }
     }
 
     /**
@@ -226,7 +230,7 @@ class Adapter
             case 'platform':
                 return $this->platform;
             default:
-                throw new \InvalidArgumentException('Invalid magic property on adapter');
+                throw new Exception\InvalidArgumentException('Invalid magic property on adapter');
         }
 
     }
@@ -239,7 +243,7 @@ class Adapter
     protected function createDriverFromParameters(array $parameters)
     {
         if (!isset($parameters['driver']) || !is_string($parameters['driver'])) {
-            throw new \InvalidArgumentException('createDriverFromParameters() expects a "driver" key to be present inside the parameters');
+            throw new Exception\InvalidArgumentException('createDriverFromParameters() expects a "driver" key to be present inside the parameters');
         }
 
         $driverName = strtolower($parameters['driver']);
@@ -258,7 +262,7 @@ class Adapter
         }
 
         if (!isset($driver) || !$driver instanceof Driver\DriverInterface) {
-            throw new \InvalidArgumentException('DriverInterface expected', null, null);
+            throw new Exception\InvalidArgumentException('DriverInterface expected', null, null);
         }
 
         return $driver;

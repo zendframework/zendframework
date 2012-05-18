@@ -20,17 +20,22 @@
 
 namespace Zend\Dom;
 
+use Iterator,
+    Countable,
+    DOMDocument,
+    DOMNodeList,
+    DOMXPath,
+    DOMElement;
+
 /**
  * Nodelist for DOM XPath query
  *
- * @uses       Iterator
- * @uses       Countable
  * @package    Zend_Dom
  * @subpackage Query
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class NodeList implements \Iterator,\Countable
+class NodeList implements Iterator, Countable
 {
     /**
      * Number of results
@@ -80,7 +85,7 @@ class NodeList implements \Iterator,\Countable
      * @param  DOMNodeList $nodeList
      * @return void
      */
-    public function  __construct($cssQuery, $xpathQuery, \DOMDocument $document, \DOMNodeList $nodeList)
+    public function  __construct($cssQuery, $xpathQuery, DOMDocument $document, DOMNodeList $nodeList)
     {
         $this->_cssQuery   = $cssQuery;
         $this->_xpathQuery = $xpathQuery;

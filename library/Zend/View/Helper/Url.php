@@ -21,14 +21,13 @@
 
 namespace Zend\View\Helper;
 
-use Zend\Mvc\Router\RouteStack,
+use Zend\Mvc\Router\RouteStackInterface,
     Zend\Mvc\Router\RouteMatch,
     Zend\View\Exception;
 
 /**
  * Helper for making easy links and getting urls that depend on the routes and router.
  *
- * @uses       \Zend\View\Helper\AbstractHelper
  * @package    Zend_View
  * @subpackage Helper
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -37,14 +36,14 @@ use Zend\Mvc\Router\RouteStack,
 class Url extends AbstractHelper
 {
     /**
-     * RouteStack instance.
+     * RouteStackInterface instance.
      * 
-     * @var RouteStack
+     * @var RouteStackInterface
      */
     protected $router;
     
     /**
-     * Route match returned by the router.
+     * RouteInterface match returned by the router.
      * 
      * @var RouteMatch.
      */
@@ -53,10 +52,10 @@ class Url extends AbstractHelper
     /**
      * Set the router to use for assembling.
      * 
-     * @param RouteStack $router
+     * @param RouteStackInterface $router
      * @return Url
      */
-    public function setRouter(RouteStack $router)
+    public function setRouter(RouteStackInterface $router)
     {
         $this->router = $router;
         return $this;
@@ -77,20 +76,20 @@ class Url extends AbstractHelper
     /**
      * Generates an url given the name of a route.
      *
-     * @see    Zend\Mvc\Router\Route::assemble()
+     * @see    Zend\Mvc\Router\RouteInterface::assemble()
      * @param  string  $name               Name of the route
      * @param  array   $params             Parameters for the link
      * @param  array   $options            Options for the route
      * @param  boolean $reuseMatchedParams Whether to reuse matched parameters
      * @return string Url                  For the link href attribute
-     * @throws Exception\RuntimeException  If no RouteStack was provided
+     * @throws Exception\RuntimeException  If no RouteStackInterface was provided
      * @throws Exception\RuntimeException  If no RouteMatch was provided
      * @throws Exception\RuntimeException  If RouteMatch didn't contain a matched route name
      */
     public function __invoke($name = null, array $params = array(), array $options = array(), $reuseMatchedParams = false)
     {
         if (null === $this->router) {
-            throw new Exception\RuntimeException('No RouteStack instance provided');
+            throw new Exception\RuntimeException('No RouteStackInterface instance provided');
         }
 
         if ($name === null) {

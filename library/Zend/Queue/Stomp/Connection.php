@@ -21,13 +21,11 @@
 
 namespace Zend\Queue\Stomp;
 
-use Zend\Queue\Exception as QueueException;
+use Zend\Queue\Exception;
 
 /**
  * The Stomp client interacts with a Stomp server.
  *
- * @uses       \Zend\Queue\Exception
- * @uses       \Zend\Queue\Stomp\StompConnection
  * @category   Zend
  * @package    Zend_Queue
  * @subpackage Stomp
@@ -71,7 +69,7 @@ class Connection implements StompConnection
         if ($this->_socket === false) {
             // aparently there is some reason that fsockopen will return false
             // but it normally throws an error.
-            throw new QueueException("Unable to connect to $str; error = $errstr ( errno = $errno )");
+            throw new Exception\ConnectionException("Unable to connect to $str; error = $errstr ( errno = $errno )");
         }
 
         if (!isset($options['timeout_sec'])) {
@@ -134,7 +132,7 @@ class Connection implements StompConnection
     public function ping()
     {
         if (!is_resource($this->_socket)) {
-            throw new QueueException('Not connected to Stomp server');
+            throw new Exception\ConnectionException('Not connected to Stomp server');
         }
         return true;
     }
@@ -154,7 +152,7 @@ class Connection implements StompConnection
 
         $bytes = fwrite($this->_socket, $output, strlen($output));
         if ($bytes === false || $bytes == 0) {
-            throw new QueueException('No bytes written');
+            throw new Exception\RangeException('No bytes written');
         }
 
         return $this;
@@ -294,7 +292,7 @@ class Connection implements StompConnection
         $frame = new $class();
 
         if (!$frame instanceof StompFrame) {
-            throw new QueueException('Invalid Frame class provided; must implement \Zend\Queue\Stomp\StompFrame');
+            throw new Exception\LogicException('Invalid Frame class provided; must implement \Zend\Queue\Stomp\StompFrame');
         }
 
         return $frame;
@@ -314,7 +312,7 @@ class Connection implements StompConnection
         $timedout = $info['timed_out'];
         if ($timedout) {
             $this->close();
-            throw new QueueException(
+            throw new Exception\ConnectionException(
                 "Read timed out after {$this->_options['timeout_sec']} seconds"
             );
         }

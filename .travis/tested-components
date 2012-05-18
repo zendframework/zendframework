@@ -1,5 +1,6 @@
 Zend/Acl
 Zend/Authentication
+Zend/Barcode
 Zend/Cache
 Zend/Captcha
 Zend/Cloud
@@ -10,12 +11,11 @@ Zend/Crypt
 Zend/Currency
 Zend/Db
 Zend/Di
-Zend/Docbook
+Zend/DocBook
 Zend/Dojo
 Zend/Dom
 Zend/EventManager
-Zend/Feed/Reader
-Zend/Feed/Writer
+Zend/Feed
 Zend/File
 Zend/Filter
 Zend/Form
@@ -51,6 +51,7 @@ Zend/Stdlib
 Zend/Tag
 Zend/Text
 Zend/TimeSync
+Zend/Translator
 Zend/Uri
 Zend/Validator
 Zend/VersionTest.php

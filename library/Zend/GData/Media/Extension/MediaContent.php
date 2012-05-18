@@ -27,8 +27,6 @@ namespace Zend\GData\Media\Extension;
  * the same content can be represented using a
  * media:group (Zend_Gdata_Media_Extension_MediaGroup) element.
  *
- * @uses       \Zend\GData\Extension
- * @uses       \Zend\GData\Media
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Media

@@ -20,10 +20,6 @@
  */
 
 /**
- * @uses       Zend_Service_DeveloperGarden_LocalSearch_Exception
- * @uses       Zend\Validator\Between
- * @uses       Zend\Validator\Int
- * @uses       Zend\Validator\NotEmpty
  * @category   Zend
  * @package    Zend_Service
  * @subpackage DeveloperGarden

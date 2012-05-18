@@ -21,8 +21,7 @@
 
 namespace ZendTest\Mail\Header;
 
-use PHPUnit_Framework_TestCase as TestCase,
-    Zend\Mail\Address,
+use Zend\Mail\Address,
     Zend\Mail\AddressList,
     Zend\Mail\Header\AbstractAddressList,
     Zend\Mail\Header\Bcc,
@@ -39,7 +38,7 @@ use PHPUnit_Framework_TestCase as TestCase,
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Mail
  */
-class AddressListHeaderTest extends TestCase
+class AddressListHeaderTest extends \PHPUnit_Framework_TestCase
 {
     public static function getHeaderInstances()
     {

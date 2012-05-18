@@ -90,10 +90,15 @@ abstract class Utils
             return self::getSystemMemoryCapacityWin();
         }
 
+        // Darwin
+        if (substr(\PHP_OS, 0, 6) == 'Darwin') {
+            return self::getSystemMemoryCapacityOSX();
+        }
+
         // *nix
         if (false === ($meminfo = @file_get_contents('/proc/meminfo'))) {
             $lastErr = error_get_last();
-            throw new Exception\RuntimeException("Can't read '/proc/meminfo': {$lastErr['messagae']}");
+            throw new Exception\RuntimeException("Can't read '/proc/meminfo': {$lastErr['message']}");
         } elseif (!preg_match_all('/(\w+):\s*(\d+\s*\w*)[\r|\n]/i', $meminfo, $matches, PREG_PATTERN_ORDER)) {
             throw new Exception\RuntimeException("Can't parse '/proc/meminfo'");
         }
@@ -171,6 +176,62 @@ abstract class Utils
         return array(
             'total' => $memstat['total_phys'],
             'free'  => $memstat['avail_phys'],
+        );
+    }
+
+    /**
+     * Get system memory capacity on windows systems
+     *
+     * @return array
+     * @throws Exception\RuntimeException
+     */
+    static protected function getSystemMemoryCapacityOSX()
+    {
+        $total = 0;
+        $free = 0;
+
+        if (!function_exists('exec')) {
+            throw new Exception\RuntimeException(
+                "Built-in function 'exec' is disabled"
+            );
+        } else {
+            // sysctl will tell us the total amount of memory
+            $cmd  = 'sysctl -n hw.memsize';
+            $out  = $ret = null;
+            $line = exec($cmd, $out, $ret);
+           
+            if ($ret) {
+                $out = implode("\n", $out);
+                throw new Exception\RuntimeException(
+                    "Command '{$cmd}' failed"
+                    . ", return: '{$ret}'"
+                    . ", output: '{$out}'"
+                );
+            }
+            $total = $line;
+
+            // now work out amount used using vm_stat
+            $cmd  = 'vm_stat | grep free';
+            $out  = $ret = null;
+            $line = exec($cmd, $out, $ret);
+           
+            if ($ret) {
+                $out = implode("\n", $out);
+                throw new Exception\RuntimeException(
+                    "Command '{$cmd}' failed"
+                    . ", return: '{$ret}'"
+                    . ", output: '{$out}'"
+                );
+            }
+            preg_match('/([\d]+)/', $line, $matches);
+            if (isset($matches[1])) {
+                $free = $matches[1] * 4096;
+            }
+        }
+
+        return array(
+            'total' => $total,
+            'free'  => $free,
         );
     }
 

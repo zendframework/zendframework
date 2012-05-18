@@ -24,8 +24,7 @@
  */
 namespace Zend\Log\Filter;
 
-use Zend\Log\Exception,
-    Zend\Log\Filter;
+use Zend\Log\Exception;
 
 /**
  * @category   Zend
@@ -34,7 +33,7 @@ use Zend\Log\Exception,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Regex implements Filter
+class Regex implements FilterInterface
 {
     /**
      * Regex to match
@@ -47,7 +46,6 @@ class Regex implements Filter
      * Filter out any log messages not matching the pattern
      *
      * @param string $regex Regular expression to test the log message
-     * @return Message
      * @throws Exception\InvalidArgumentException
      */
     public function __construct($regex)

@@ -24,9 +24,10 @@ namespace ZendTest\EventManager;
 use ArrayIterator,
     stdClass,
     Zend\EventManager\Event,
-    Zend\EventManager\EventDescription,
+    Zend\EventManager\EventInterface,
     Zend\EventManager\EventManager,
     Zend\EventManager\ResponseCollection,
+    Zend\EventManager\StaticEventManager,
     Zend\Stdlib\CallbackHandler;
 
 /**
@@ -41,6 +42,8 @@ class EventManagerTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
+        StaticEventManager::resetInstance();
+
         if (isset($this->message)) {
             unset($this->message);
         }
@@ -457,7 +460,7 @@ class EventManagerTest extends \PHPUnit_Framework_TestCase
             return $e;
         });
         $responses = $this->events->triggerUntil($event, function ($r) {
-            return ($r instanceof EventDescription);
+            return ($r instanceof EventInterface);
         });
         $this->assertTrue($responses->stopped());
         $this->assertSame($event, $responses->last());
@@ -472,7 +475,7 @@ class EventManagerTest extends \PHPUnit_Framework_TestCase
             return $e;
         });
         $responses = $this->events->triggerUntil(__FUNCTION__, $event, function ($r) {
-            return ($r instanceof EventDescription);
+            return ($r instanceof EventInterface);
         });
         $this->assertTrue($responses->stopped());
         $this->assertSame($event, $responses->last());
@@ -487,7 +490,7 @@ class EventManagerTest extends \PHPUnit_Framework_TestCase
             return $e;
         });
         $responses = $this->events->triggerUntil(__FUNCTION__, $this, $event, function ($r) {
-            return ($r instanceof EventDescription);
+            return ($r instanceof EventInterface);
         });
         $this->assertTrue($responses->stopped());
         $this->assertSame($event, $responses->last());
@@ -504,14 +507,14 @@ class EventManagerTest extends \PHPUnit_Framework_TestCase
         // Four scenarios:
         // First: normal signature:
         $responses = $this->events->trigger(__FUNCTION__, $this, array(), function ($r) {
-            return ($r instanceof EventDescription);
+            return ($r instanceof EventInterface);
         });
         $this->assertTrue($responses->stopped());
 
         // Second: Event as $argv parameter:
         $event = new Event();
         $responses = $this->events->trigger(__FUNCTION__, $this, $event, function ($r) {
-            return ($r instanceof EventDescription);
+            return ($r instanceof EventInterface);
         });
         $this->assertTrue($responses->stopped());
 
@@ -519,7 +522,7 @@ class EventManagerTest extends \PHPUnit_Framework_TestCase
         $event = new Event();
         $event->setTarget($this);
         $responses = $this->events->trigger(__FUNCTION__, $event, function ($r) {
-            return ($r instanceof EventDescription);
+            return ($r instanceof EventInterface);
         });
         $this->assertTrue($responses->stopped());
 
@@ -528,7 +531,7 @@ class EventManagerTest extends \PHPUnit_Framework_TestCase
         $event->setTarget($this);
         $event->setName(__FUNCTION__);
         $responses = $this->events->trigger($event, function ($r) {
-            return ($r instanceof EventDescription);
+            return ($r instanceof EventInterface);
         });
         $this->assertTrue($responses->stopped());
     }

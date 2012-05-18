@@ -21,11 +21,11 @@
 
 namespace Zend\Mvc\View;
 
-use Zend\EventManager\EventCollection,
-    Zend\EventManager\ListenerAggregate,
+use Zend\EventManager\EventManagerInterface,
+    Zend\EventManager\ListenerAggregateInterface,
     Zend\Mvc\MvcEvent,
-    Zend\Stdlib\ResponseDescription as Response,
-    Zend\View\Model as ViewModel,
+    Zend\Stdlib\ResponseInterface as Response,
+    Zend\View\Model\ModelInterface as ViewModel,
     Zend\View\View;
 
 /**
@@ -35,7 +35,7 @@ use Zend\EventManager\EventCollection,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class DefaultRenderingStrategy implements ListenerAggregate
+class DefaultRenderingStrategy implements ListenerAggregateInterface
 {
     /**
      * @var \Zend\Stdlib\CallbackHandler[]
@@ -69,10 +69,10 @@ class DefaultRenderingStrategy implements ListenerAggregate
     /**
      * Attach the aggregate to the specified event manager
      *
-     * @param  EventCollection $events
+     * @param  EventManagerInterface $events
      * @return void
      */
-    public function attach(EventCollection $events)
+    public function attach(EventManagerInterface $events)
     {
         $this->listeners[] = $events->attach(MvcEvent::EVENT_RENDER, array($this, 'render'), -10000);
     }
@@ -80,10 +80,10 @@ class DefaultRenderingStrategy implements ListenerAggregate
     /**
      * Detach aggregate listeners from the specified event manager
      *
-     * @param  EventCollection $events
+     * @param  EventManagerInterface $events
      * @return void
      */
-    public function detach(EventCollection $events)
+    public function detach(EventManagerInterface $events)
     {
         foreach ($this->listeners as $index => $listener) {
             if ($events->detach($listener)) {

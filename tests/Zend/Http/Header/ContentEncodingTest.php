@@ -10,7 +10,7 @@ class ContentEncodingTest extends \PHPUnit_Framework_TestCase
     public function testContentEncodingFromStringCreatesValidContentEncodingHeader()
     {
         $contentEncodingHeader = ContentEncoding::fromString('Content-Encoding: xxx');
-        $this->assertInstanceOf('Zend\Http\Header\HeaderDescription', $contentEncodingHeader);
+        $this->assertInstanceOf('Zend\Http\Header\HeaderInterface', $contentEncodingHeader);
         $this->assertInstanceOf('Zend\Http\Header\ContentEncoding', $contentEncodingHeader);
     }
 

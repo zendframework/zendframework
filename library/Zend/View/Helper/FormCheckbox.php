@@ -24,7 +24,6 @@ namespace Zend\View\Helper;
 /**
  * Helper to generate a "checkbox" element
  *
- * @uses       \Zend\View\Helper\FormElement
  * @category   Zend
  * @package    Zend_View
  * @subpackage Helper

@@ -19,13 +19,14 @@
  */
 
 namespace Zend\Filter;
+
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
 use Zend\Locale\Format;
 
 /**
  * Normalizes given localized input
  *
- * @uses       Zend\Filter\AbstractFilter
- * @uses       Zend\Locale\Format
  * @category   Zend
  * @package    Zend_Filter
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -46,12 +47,12 @@ class LocalizedToNormalized extends AbstractFilter
     /**
      * Class constructor
      *
-     * @param string|\Zend\Locale\Locale $locale (Optional) Locale to set
+     * @param array|Traversable $options (Optional) Locale to set
      */
     public function __construct($options = null)
     {
-        if ($options instanceof \Zend\Config\Config) {
-            $options = $options->toArray();
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
         }
 
         if (null !== $options) {
@@ -73,7 +74,7 @@ class LocalizedToNormalized extends AbstractFilter
      * Sets options to use
      *
      * @param  array $options (Optional) Options to use
-     * @return \Zend\Filter\LocalizedToNormalized
+     * @return LocalizedToNormalized
      */
     public function setOptions(array $options = null)
     {
@@ -82,7 +83,7 @@ class LocalizedToNormalized extends AbstractFilter
     }
 
     /**
-     * Defined by Zend_Filter_Interface
+     * Defined by Zend\Filter\FilterInterface
      *
      * Normalizes the given input
      *

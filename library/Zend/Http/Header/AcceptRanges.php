@@ -28,7 +28,7 @@ namespace Zend\Http\Header;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @see        http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.5
  */
-class AcceptRanges implements HeaderDescription
+class AcceptRanges implements HeaderInterface
 {
 
     protected $rangeUnit = null;

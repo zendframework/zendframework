@@ -20,11 +20,13 @@
 
 namespace Zend\Text\Table;
 
-use Zend\Config,
-    Zend\Loader\PrefixPathLoader;
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
+use Zend\Loader\PrefixPathLoader,
+    Zend\Text\Table\Decorator\DecoratorInterface as Decorator;
 
 /**
- * Zend_Text_Table enables developers to create tables out of characters
+ * Zend\Text\Table\Table enables developers to create tables out of characters
  *
  * @category  Zend
  * @package   Zend_Text_Table
@@ -34,7 +36,7 @@ use Zend\Config,
 class Table
 {
     /**
-     * Auto seperator settings
+     * Auto separator settings
      */
     const AUTO_SEPARATE_NONE   = 0x0;
     const AUTO_SEPARATE_HEADER = 0x1;
@@ -44,7 +46,7 @@ class Table
     /**
      * Decorator used for the table borders
      *
-     * @var \Zend\Text\Table\Decorator
+     * @var Decorator
      */
     protected $_decorator = null;
 
@@ -118,17 +120,18 @@ class Table
     /**
      * Create a basic table object
      *
-     * @param  array             $columnsWidths List of all column widths
-     * @param  \Zend\Config\Config|array $options       Configuration options
-     * @throws \Zend\Text\Table\Exception\UnexpectedValueException When no columns widths were set
+     * @param  array             $columns Widths List of all column widths
+     * @param  array|Traversable $options Configuration options
+     * @throws Exception\UnexpectedValueException When no columns widths were set
      */
     public function __construct($options = null)
     {
         // Set options
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
+        }
         if (is_array($options)) {
             $this->setOptions($options);
-        } else if ($options instanceof Config\Config) {
-            $this->setConfig($options);
         }
 
         // If no decorator was given, use default unicode decorator
@@ -144,8 +147,8 @@ class Table
     /**
      * Set options from array
      *
-     * @param  array $options Configuration for \Zend\Text\Table\Table
-     * @return \Zend\Text\Table\Table
+     * @param  array $options Configuration for Table
+     * @return Table
      */
     public function setOptions(array $options)
     {
@@ -164,23 +167,12 @@ class Table
     }
 
     /**
-     * Set options from config object
-     *
-     * @param  Zend_Config $config Configuration for \Zend\Text\Table\Table
-     * @return \Zend\Text\Table\Table
-     */
-    public function setConfig(Config\Config $config)
-    {
-        return $this->setOptions($config->toArray());
-    }
-
-    /**
      * Set column widths
      *
      * @param  array $columnWidths Widths of all columns
-     * @throws \Zend\Text\Table\Exception\InvalidArgumentException When no columns were supplied
-     * @throws \Zend\Text\Table\Exception\InvalidArgumentException When a column has an invalid width
-     * @return \Zend\Text\Table\Table
+     * @throws Exception\InvalidArgumentException When no columns were supplied
+     * @throws Exception\InvalidArgumentException When a column has an invalid width
+     * @return Table
      */
     public function setColumnWidths(array $columnWidths)
     {
@@ -204,7 +196,7 @@ class Table
      * Set auto separation mode
      *
      * @param  integer $autoSeparate Auto separation mode
-     * @return \Zend\Text\Table\Table
+     * @return Table
      */
     public function setAutoSeparate($autoSeparate)
     {
@@ -215,8 +207,8 @@ class Table
     /**
      * Set decorator
      *
-     * @param  \Zend\Text\Table\Decorator|string $decorator Decorator to use
-     * @return \Zend\Text\Table\Table
+     * @param  Decorator|string $decorator Decorator to use
+     * @return Table
      */
     public function setDecorator($decorator)
     {
@@ -234,7 +226,7 @@ class Table
      * Set the column padding
      *
      * @param  integer $padding The padding for the columns
-     * @return \Zend\Text\Table\Table
+     * @return Table
      */
     public function setPadding($padding)
     {
@@ -263,7 +255,7 @@ class Table
      *
      * @param  integer $columnNum
      * @param  string  $align
-     * @return \Zend\Text\Table\Table
+     * @return Table
      */
     public function setDefaultColumnAlign($columnNum, $align)
     {
@@ -315,15 +307,15 @@ class Table
     /**
      * Append a row to the table
      *
-     * @param  array|\Zend\Text\Table\Row $row The row to append to the table
-     * @throws Zend_Text_Table_Exception\InvalidArgumentException When $row is neither an array nor Zend_Zext_Table_Row
-     * @throws \Zend\Text\Table\Exception\OverflowException When a row contains too many columns
-     * @return \Zend\Text\Table\Table
+     * @param  array|Row $row The row to append to the table
+     * @throws Exception\InvalidArgumentException When $row is neither an array nor Zend_Zext_Table_Row
+     * @throws Exception\OverflowException When a row contains too many columns
+     * @return Table
      */
     public function appendRow($row)
     {
         if (!is_array($row) && !($row instanceof Row)) {
-            throw new Exception\InvalidArgumentException('$row must be an array or instance of Zend_Text_Table_Row');
+            throw new Exception\InvalidArgumentException('$row must be an array or instance of Zend\Text\Table\Row');
         }
 
         if (is_array($row)) {
@@ -354,7 +346,7 @@ class Table
     /**
      * Render the table
      *
-     * @throws \Zend\Text\Table\Exception\UnexpectedValueException When no rows were added to the table
+     * @throws Exception\UnexpectedValueException When no rows were added to the table
      * @return string
      */
     public function render()

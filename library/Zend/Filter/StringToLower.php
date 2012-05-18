@@ -20,9 +20,10 @@
 
 namespace Zend\Filter;
 
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
+
 /**
- * @uses       Zend\Filter\Exception
- * @uses       Zend\Filter\AbstractFilter
  * @category   Zend
  * @package    Zend_Filter
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -40,13 +41,14 @@ class StringToLower extends AbstractFilter
     /**
      * Constructor
      *
-     * @param string|array|\Zend\Config\Config $options OPTIONAL
+     * @param string|array|Traversable $options OPTIONAL
      */
     public function __construct($options = null)
     {
-        if ($options instanceof \Zend\Config\Config) {
-            $options = $options->toArray();
-        } else if (!is_array($options)) {
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
+        }
+        if (!is_array($options)) {
             $options = func_get_args();
             $temp    = array();
             if (!empty($options)) {
@@ -78,8 +80,8 @@ class StringToLower extends AbstractFilter
      * Set the input encoding for the given string
      *
      * @param  string $encoding
-     * @return \Zend\Filter\StringToLower Provides a fluent interface
-     * @throws \Zend\Filter\Exception
+     * @return StringToLower Provides a fluent interface
+     * @throws Exception\ExceptionInterface
      */
     public function setEncoding($encoding = null)
     {
@@ -99,7 +101,7 @@ class StringToLower extends AbstractFilter
     }
 
     /**
-     * Defined by Zend_Filter_Interface
+     * Defined by Zend\Filter\FilterInterface
      *
      * Returns the string $value, converting characters to lowercase as necessary
      *

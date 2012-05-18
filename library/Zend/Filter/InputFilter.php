@@ -105,7 +105,7 @@ class InputFilter
     protected $unknownFields = array();
 
     /**
-     * @var Zend\Filter\Filter The filter object that is run on values
+     * @var Zend\Filter\FilterInterface The filter object that is run on values
      * returned by the getEscaped() method.
      */
     protected $defaultEscapeFilter = null;
@@ -402,8 +402,8 @@ class InputFilter
     }
 
     /**
-     * @return Zend\Filter\InputFilter
-     * @throws Zend\Filter\Exception
+     * @return InputFilter
+     * @throws Exception\RuntimeException
      */
     public function process()
     {
@@ -420,7 +420,7 @@ class InputFilter
 
     /**
      * @param array $data
-     * @return Zend\Filter\InputFilter
+     * @return InputFilter
      */
     public function setData(array $data)
     {
@@ -442,15 +442,17 @@ class InputFilter
 
     /**
      * @param mixed $escapeFilter
-     * @return Zend\Filter\Filter
+     * @return FilterInterface
      */
     public function setDefaultEscapeFilter($escapeFilter)
     {
         if (is_string($escapeFilter) || is_array($escapeFilter)) {
             $escapeFilter = $this->_getFilter($escapeFilter);
         }
-        if (!$escapeFilter instanceof Filter) {
-            throw new Exception\InvalidArgumentException('Escape filter specified does not implement Zend\Filter\Filter');
+        if (!$escapeFilter instanceof FilterInterface) {
+            throw new Exception\InvalidArgumentException(
+                'Escape filter specified does not implement Zend\Filter\FilterInterface'
+            );
         }
         $this->defaultEscapeFilter = $escapeFilter;
         return $escapeFilter;
@@ -458,8 +460,8 @@ class InputFilter
 
     /**
      * @param array $options
-     * @return Zend\Filter\InputFilter
-     * @throws Zend\Filter\Exception if an unknown option is given
+     * @return InputFilter
+     * @throws Exception\ExceptionInterface if an unknown option is given
      */
     public function setOptions(array $options)
     {
@@ -494,7 +496,7 @@ class InputFilter
      * Set translation object
      *
      * @param  Zend_Translator|Zend\Translator\Adapter\Adapter|null $translator
-     * @return Zend\Filter\InputFilter
+     * @return InputFilter
      */
     public function setTranslator($translator = null)
     {
@@ -538,7 +540,7 @@ class InputFilter
      * Indicate whether or not translation should be disabled
      *
      * @param  bool $flag
-     * @return Zend\Filter\InputFilter
+     * @return InputFilter
      */
     public function setDisableTranslator($flag)
     {
@@ -643,7 +645,7 @@ class InputFilter
     }
 
     /**
-     * @return Zend\Filter\Filter
+     * @return Zend\Filter\FilterInterface
      */
     protected function _getDefaultEscapeFilter()
     {
@@ -1058,7 +1060,7 @@ class InputFilter
     /**
      * Check a validatorRule for the presence of a NotEmpty validator instance.
      * The purpose is to preserve things like a custom message, that may have been
-     * set on the validator outside \Zend\Filter\InputFilter.
+     * set on the validator outside InputFilter.
      * @param  array $validatorRule
      * @return mixed False if none is found, \Zend\Validator\NotEmpty instance if found
      */
@@ -1074,7 +1076,7 @@ class InputFilter
 
     /**
      * @param mixed $classBaseName
-     * @return Zend\Filter\Filter
+     * @return \Zend\Filter\FilterInterface
      */
     protected function _getFilter($classBaseName)
     {
@@ -1083,7 +1085,7 @@ class InputFilter
 
     /**
      * @param mixed $classBaseName
-     * @return Zend\Validator\Validator
+     * @return \Zend\Validator\ValidatorInterface
      */
     protected function _getValidator($classBaseName)
     {
@@ -1093,8 +1095,8 @@ class InputFilter
     /**
      * @param string $type
      * @param mixed $classBaseName
-     * @return Zend\Filter\Filter|Zend\Validator\Validator
-     * @throws Zend\Filter\Exception
+     * @return \Zend\Filter\FilterInterface|\Zend\Validator\ValidatorInterface
+     * @throws Exception\ExceptionInterface
      */
     protected function _getFilterOrValidator($type, $classBaseName)
     {

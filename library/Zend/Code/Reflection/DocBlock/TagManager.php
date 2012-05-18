@@ -30,7 +30,7 @@ class TagManager
         $this->addTagPrototype(new GenericTag());
     }
 
-    public function addTagPrototype(Tag $tag)
+    public function addTagPrototype(TagInterface $tag)
     {
         $tagName = strtolower(str_replace(array('-', '_'), '', $tag->getName()));
 
@@ -62,7 +62,7 @@ class TagManager
 
         $index = array_search($tagName, $this->tagNames);
 
-        /* @var $tag Tag */
+        /* @var $tag TagInterface */
         $tag = ($index !== false) ? $this->tags[$index] : $this->genericTag;
 
         $newTag = clone $tag;

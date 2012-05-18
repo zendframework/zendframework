@@ -32,12 +32,6 @@ use Zend\Http\Client as HttpClient,
 /**
  * OpenID consumer implementation
  *
- * @uses       Zend\Http\Client
- * @uses       Zend\OpenId\OpenId
- * @uses       Zend\OpenId\Consumer\Storage
- * @uses       Zend\OpenId\Consumer\Storage\File
- * @uses       Zend\OpenId\Extension
- * @uses       Zend\Session\Container
  * @category   Zend
  * @package    Zend_OpenId
  * @subpackage Zend_OpenId_Consumer
@@ -679,12 +673,12 @@ class GenericConsumer
             $secret = $sec ^ base64_decode($ret['enc_mac_key']);
         }
         if ($macFunc == 'sha1') {
-            if (OpenId\OpenId::strlen($secret) != 20) {
+            if (strlen($secret) != 20) {
                 $this->_setError("The length of the sha1 secret must be 20");
                 return false;
             }
         } else if ($macFunc == 'sha256') {
-            if (OpenId\OpenId::strlen($secret) != 32) {
+            if (strlen($secret) != 32) {
                 $this->_setError("The length of the sha256 secret must be 32");
                 return false;
             }

@@ -4,7 +4,7 @@ namespace ZendTest\Cache\Storage\TestAsset;
 
 use Zend\Cache\Storage\Plugin,
     Zend\Cache\Storage\Plugin\AbstractPlugin,
-    Zend\EventManager\EventCollection,
+    Zend\EventManager\EventManagerInterface,
     Zend\EventManager\Event;
 
 class MockPlugin extends AbstractPlugin
@@ -39,7 +39,7 @@ class MockPlugin extends AbstractPlugin
         return $this->options;
     }
 
-    public function attach(EventCollection $eventCollection)
+    public function attach(EventManagerInterface $eventCollection)
     {
         $handles = array();
         foreach ($this->eventCallbacks as $eventName => $method) {
@@ -48,7 +48,7 @@ class MockPlugin extends AbstractPlugin
         $this->handles[ \spl_object_hash($eventCollection) ] = $handles;
     }
 
-    public function detach(EventCollection $eventCollection)
+    public function detach(EventManagerInterface $eventCollection)
     {
         $index = \spl_object_hash($eventCollection);
         foreach ($this->handles[$index] as $i => $handle) {

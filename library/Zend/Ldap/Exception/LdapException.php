@@ -20,8 +20,7 @@
 
 namespace Zend\Ldap\Exception;
 
-use Zend\Ldap\Ldap,
-    Zend\Ldap\Exception;
+use Zend\Ldap\Ldap;
 
 /**
  * @category   Zend
@@ -29,7 +28,7 @@ use Zend\Ldap\Ldap,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class LdapException extends \Exception implements Exception
+class LdapException extends \Exception implements ExceptionInterface
 {
     const LDAP_SUCCESS                        = 0x00;
     const LDAP_OPERATIONS_ERROR               = 0x01;
@@ -114,9 +113,9 @@ class LdapException extends \Exception implements Exception
     const LDAP_X_EXTENSION_NOT_LOADED = 0x7002;
 
     /**
-     * @param Ldap   $ldap A Zend\Ldap\Ldap object
-     * @param string $str  An informtive exception message
-     * @param int    $code An LDAP error code
+     * @param Ldap   $ldap Zend\Ldap\Ldap object
+     * @param string $str  Informative exception message
+     * @param int    $code LDAP error code
      */
     public function __construct(Ldap $ldap = null, $str = null, $code = 0)
     {

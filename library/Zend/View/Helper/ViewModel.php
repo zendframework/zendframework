@@ -21,7 +21,7 @@
 
 namespace Zend\View\Helper;
 
-use Zend\View\Model;
+use Zend\View\Model\ModelInterface as Model;
 
 /**
  * Helper for storing and retrieving the root and current view model

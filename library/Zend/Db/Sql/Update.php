@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Db
- * @subpackage Sql
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Db
  */
 
 namespace Zend\Db\Sql;
@@ -25,15 +14,12 @@ use Zend\Db\Adapter\Adapter,
     Zend\Db\Adapter\Driver\StatementInterface,
     Zend\Db\Adapter\Platform\PlatformInterface,
     Zend\Db\Adapter\Platform\Sql92,
-    Zend\Db\Adapter\ParameterContainerInterface,
     Zend\Db\Adapter\ParameterContainer;
 
 /**
  * @category   Zend
  * @package    Zend_Db
  * @subpackage Sql
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  *
  * @property Where $where
  */
@@ -49,7 +35,6 @@ class Update extends AbstractSql implements SqlInterface, PreparableSqlInterface
     const VALUES_SET   = 'set';
     /**@#-**/
 
-
     protected $specifications = array(
         self::SPECIFICATION_UPDATE => 'UPDATE %1$s SET %2$s',
         self::SPECIFICATION_WHERE => 'WHERE %1$s'
@@ -59,11 +44,6 @@ class Update extends AbstractSql implements SqlInterface, PreparableSqlInterface
      * @var string
      */
     protected $table = '';
-
-    /**
-     * @var null|string
-     */
-    protected $schema = null;
 
     /**
      * @var bool
@@ -87,10 +67,10 @@ class Update extends AbstractSql implements SqlInterface, PreparableSqlInterface
      * @param  null|string $schema
      * @return void
      */
-    public function __construct($table = null, $schema = null)
+    public function __construct($table = null)
     {
         if ($table) {
-            $this->table($table, $schema);
+            $this->table($table);
         }
         $this->where = new Where();
     }
@@ -102,12 +82,9 @@ class Update extends AbstractSql implements SqlInterface, PreparableSqlInterface
      * @param  null|string $schema
      * @return Update
      */
-    public function table($table, $schema = null)
+    public function table($table)
     {
         $this->table = $table;
-        if ($schema) {
-            $this->schema = $schema;
-        }
         return $this;
     }
 
@@ -183,33 +160,19 @@ class Update extends AbstractSql implements SqlInterface, PreparableSqlInterface
         $platform = $adapter->getPlatform();
         $parameterContainer = $statement->getParameterContainer();
 
-        if (!$parameterContainer instanceof ParameterContainerInterface) {
+        if (!$parameterContainer instanceof ParameterContainer) {
             $parameterContainer = new ParameterContainer();
             $statement->setParameterContainer($parameterContainer);
         }
 
-        $prepareType = $driver->getPrepareType();
-
         $table = $platform->quoteIdentifier($this->table);
-        if ($this->schema != '') {
-            $table = $platform->quoteIdentifier($this->schema)
-                . $platform->getIdentifierSeparator()
-                . $table;
-        }
 
         $set = $this->set;
         if (is_array($set)) {
             $setSql = array();
-            $values = array();
             foreach ($set as $column => $value) {
-                if ($prepareType == 'positional') {
-                    $parameterContainer->offsetSet(null, $value);
-                    $name = $driver->formatParameterName(null);
-                } elseif ($prepareType == 'named') {
-                    $parameterContainer->offsetSet($column, $value);
-                    $name = $driver->formatParameterName($column);
-                }
-                $setSql[] = $platform->quoteIdentifier($column) . ' = ' . $name;
+                $parameterContainer->offsetSet($column, $value);
+                $setSql[] = $platform->quoteIdentifier($column) . ' = ' . $driver->formatParameterName($column);
             }
             $set = implode(', ', $setSql);
         }
@@ -230,30 +193,30 @@ class Update extends AbstractSql implements SqlInterface, PreparableSqlInterface
     /**
      * Get SQL string for statement
      * 
-     * @param  null|PlatformInterface $platform If null, defaults to Sql92
+     * @param  null|PlatformInterface $adapterPlatform If null, defaults to Sql92
      * @return string
      */
-    public function getSqlString(PlatformInterface $platform = null)
+    public function getSqlString(PlatformInterface $adapterPlatform = null)
     {
-        $platform = ($platform) ?: new Sql92;
-        $table = $platform->quoteIdentifier($this->table);
+        $adapterPlatform = ($adapterPlatform) ?: new Sql92;
+        $table = $adapterPlatform->quoteIdentifier($this->table);
 
-        if ($this->schema != '') {
-            $table = $platform->quoteIdentifier($this->schema) . $platform->getIdentifierSeparator() . $table;
-        }
+//        if ($this->schema != '') {
+//            $table = $platform->quoteIdentifier($this->schema) . $platform->getIdentifierSeparator() . $table;
+//        }
 
         $set = $this->set;
         if (is_array($set)) {
             $setSql = array();
             foreach ($set as $setName => $setValue) {
-                $setSql[] = $platform->quoteIdentifier($setName) . ' = ' . $platform->quoteValue($setValue);
+                $setSql[] = $adapterPlatform->quoteIdentifier($setName) . ' = ' . $adapterPlatform->quoteValue($setValue);
             }
             $set = implode(', ', $setSql);
         }
 
         $sql = sprintf($this->specifications[self::SPECIFICATION_UPDATE], $table, $set);
         if ($this->where->count() > 0) {
-            $whereParts = $this->processExpression($this->where, $platform, null, 'where');
+            $whereParts = $this->processExpression($this->where, $adapterPlatform, null, 'where');
             $sql .= ' ' . sprintf($this->specifications[self::SPECIFICATION_WHERE], $whereParts['sql']);
         }
         return $sql;

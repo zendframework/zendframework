@@ -21,21 +21,18 @@
 
 namespace Zend\Pdf\Color;
 
-use Zend\Pdf\Color,
-    Zend\Pdf\InternalType;
+use Zend\Pdf\InternalType;
 
 /**
  * GrayScale color implementation
  *
- * @uses       \Zend\Pdf\Color
- * @uses       \Zend\Pdf\InternalType\NumericObject
  * @category   Zend
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Color
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class GrayScale implements Color
+class GrayScale implements ColorInterface
 {
     /**
      * GrayLevel.

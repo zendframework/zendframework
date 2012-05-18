@@ -23,7 +23,7 @@ namespace Zend\Cache\Pattern;
 
 use Zend\Cache\Exception,
     Zend\Cache\StorageFactory,
-    Zend\Cache\Storage\Adapter as StorageAdapter;
+    Zend\Cache\Storage\Adapter\AdapterInterface as StorageAdapter;
 
 /**
  * @category   Zend
@@ -62,7 +62,7 @@ class OutputCache extends AbstractPattern
      * else start buffering output until end() is called or the script ends.
      *
      * @param  string  $key            Key
-     * @param  array   $storageOptions Options passing to Zend\Cache\Storage\Adapter::getItem
+     * @param  array   $storageOptions Options passing to Zend\Cache\Storage\Adapter\AdapterInterface::getItem
      * @return boolean
      * @throws Exception
      */
@@ -72,8 +72,9 @@ class OutputCache extends AbstractPattern
             throw new Exception\MissingKeyException('Missing key to read/write output from cache');
         }
 
-        $data = $this->getOptions()->getStorage()->getItem($key, $storageOptions);
-        if ($data !== false) {
+        $success = null;
+        $data    = $this->getOptions()->getStorage()->getItem($key, $storageOptions, $success);
+        if ($success) {
             echo $data;
             return true;
         }
@@ -88,7 +89,7 @@ class OutputCache extends AbstractPattern
      * Stops bufferung output, write buffered data to cache using the given key on start()
      * and displays the buffer.
      *
-     * @param  array   $storageOptions Options passed to Zend\Cache\Storage\Adapter::setItem
+     * @param  array   $storageOptions Options passed to Zend\Cache\Storage\Adapter\AdapterInterface::setItem
      * @return boolean TRUE on success, FALSE on failure writing to cache
      * @throws Exception
      */

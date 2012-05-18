@@ -25,7 +25,7 @@ use ArrayIterator,
     Countable,
     IteratorAggregate,
     Zend\Session\Container,
-    Zend\Session\Manager,
+    Zend\Session\ManagerInterface as Manager,
     Zend\Session\SessionManager,
     Zend\Stdlib\SplQueue;
 

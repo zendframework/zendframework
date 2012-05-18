@@ -20,18 +20,15 @@
  */
 
 namespace Zend\Queue\Adapter;
-use Zend\Queue;
-use Zend\Queue\Message;
-use Zend\Queue\Stomp\Client;
+
+use Zend\Queue\Queue,
+    Zend\Queue\Message,
+    Zend\Queue\Stomp\Client,
+    Zend\Queue\Exception;
 
 /**
  * Class for using Stomp to talk to an Stomp compliant server
  *
- * @uses       \Zend\Queue\Adapter\AdapterAbstract
- * @uses       \Zend\Queue\Queue
- * @uses       \Zend\Queue\Exception
- * @uses       \Zend\Queue\Message\Message
- * @uses       \Zend\Queue\Stomp\Client
  * @category   Zend
  * @package    Zend_Queue
  * @subpackage Adapter
@@ -57,11 +54,10 @@ class Activemq extends AbstractAdapter
     /**
      * Constructor
      *
-     * @param  array|\Zend\Config\Config $config An array having configuration data
+     * @param  array|\Traversable $options An array having configuration data
      * @param  \Zend\Queue\Queue The \Zend\Queue\Queue object that created this class
-     * @return void
      */
-    public function __construct($options, Queue\Queue $queue = null)
+    public function __construct($options, Queue $queue = null)
     {
         parent::__construct($options);
 
@@ -97,7 +93,7 @@ class Activemq extends AbstractAdapter
         if ((false !== $response)
             && ($response->getCommand() != 'CONNECTED')
         ) {
-            throw new Queue\Exception(
+            throw new Exception\ConnectionException(
                 "Unable to authenticate to '{$options['scheme']}://{$options['host']}:{$options['port']}'"
             );
         }
@@ -127,7 +123,7 @@ class Activemq extends AbstractAdapter
      */
     public function create($name, $timeout=null)
     {
-        throw new Queue\Exception('create() is not supported in ' . get_class($this));
+        throw new Exception\UnsupportedMethodCallException('create() is not supported in ' . get_class($this));
     }
 
     /**
@@ -139,7 +135,7 @@ class Activemq extends AbstractAdapter
      */
     public function delete($name)
     {
-        throw new Queue\Exception('delete() is not supported in ' . get_class($this));
+        throw new Exception\UnsupportedMethodCallException('delete() is not supported in ' . get_class($this));
     }
 
     /**
@@ -148,10 +144,10 @@ class Activemq extends AbstractAdapter
      * Returns true if the message is deleted, false if the deletion is
      * unsuccessful.
      *
-     * @param  \Zend\Queue\Message\Message $message
+     * @param  \Zend\Queue\Message $message
      * @return boolean
      */
-    public function deleteMessage(Message\Message $message)
+    public function deleteMessage(Message $message)
     {
         $frame = $this->_client->createFrame();
         $frame->setCommand('ACK');
@@ -170,7 +166,7 @@ class Activemq extends AbstractAdapter
      */
     public function getQueues()
     {
-        throw new Queue\Exception('getQueues() is not supported in this adapter');
+        throw new Exception\UnsupportedMethodCallException('getQueues() is not supported in this adapter');
     }
 
     /**
@@ -179,7 +175,7 @@ class Activemq extends AbstractAdapter
      * @param  \Zend\Queue\Queue $queue
      * @return boolean
      */
-    protected function isSubscribed(Queue\Queue $queue)
+    protected function isSubscribed(Queue $queue)
     {
         return isset($this->_subscribed[$queue->getName()]);
     }
@@ -190,7 +186,7 @@ class Activemq extends AbstractAdapter
      * @param  \Zend\Queue\Queue $queue
      * @return void
      */
-    protected function subscribe(Queue\Queue $queue)
+    protected function subscribe(Queue $queue)
     {
         $frame = $this->_client->createFrame();
         $frame->setCommand('SUBSCRIBE');
@@ -208,7 +204,7 @@ class Activemq extends AbstractAdapter
      * @param  \Zend\Queue\Queue $queue
      * @return \Zend\Queue\Message\MessageIterator
      */
-    public function receive($maxMessages=null, $timeout=null, Queue\Queue $queue=null)
+    public function receive($maxMessages=null, $timeout=null, Queue $queue=null)
     {
         if ($maxMessages === null) {
             $maxMessages = 1;
@@ -245,7 +241,7 @@ class Activemq extends AbstractAdapter
                             break;
                         default:
                             $block = print_r($response, true);
-                            throw new Queue\Exception('Invalid response received: ' . $block);
+                            throw new Exception\UnexpectedValueException('Invalid response received: ' . $block);
                     }
                 }
             }
@@ -267,7 +263,7 @@ class Activemq extends AbstractAdapter
      * @param  \Zend\Queue\Queue $queue
      * @return \Zend\Queue\Message\Message
      */
-    public function send($message, Queue\Queue $queue=null)
+    public function send($message, Queue $queue=null)
     {
         if ($queue === null) {
             $queue = $this->_queue;
@@ -302,9 +298,9 @@ class Activemq extends AbstractAdapter
      * @return integer
      * @throws \Zend\Queue\Exception (not supported)
      */
-    public function count(Queue\Queue $queue=null)
+    public function count(Queue $queue=null)
     {
-        throw new Queue\Exception('count() is not supported in this adapter');
+        throw new Exception\UnsupportedMethodCallException('count() is not supported in this adapter');
     }
 
     /**
@@ -316,7 +312,7 @@ class Activemq extends AbstractAdapter
      */
     public function isExists($name)
     {
-        throw new Queue\Exception('isExists() is not supported in this adapter');
+        throw new Exception\UnsupportedMethodCallException('isExists() is not supported in this adapter');
     }
 
     /**

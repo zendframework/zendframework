@@ -24,6 +24,13 @@
  */
 error_reporting( E_ALL | E_STRICT );
 
+$phpUnitVersion = PHPUnit_Runner_Version::id();
+if ('@package_version@' !== $phpUnitVersion && version_compare($phpUnitVersion, '3.5.0', '<')) {
+    echo 'This version of PHPUnit (' . PHPUnit_Runner_Version::id() . ') is not supported in Zend Framework 2.x unit tests.' . PHP_EOL;
+    exit(1);
+}
+unset($phpUnitVersion);
+
 /*
  * Determine the root, library, and tests directories of the framework
  * distribution.
@@ -60,12 +67,9 @@ if (is_readable($zfCoreTests . DIRECTORY_SEPARATOR . 'TestConfiguration.php')) {
     require_once $zfCoreTests . DIRECTORY_SEPARATOR . 'TestConfiguration.php.dist';
 }
 
-if (defined('TESTS_GENERATE_REPORT') 
-    && TESTS_GENERATE_REPORT === true 
-    && version_compare(PHPUnit_Runner_Version::id(), '3.1.6', '>=')
-) {
+if (defined('TESTS_GENERATE_REPORT') && TESTS_GENERATE_REPORT === true) {
     $codeCoverageFilter = PHP_CodeCoverage_Filter::getInstance();
-        
+
     $lastArg = end($_SERVER['argv']);
     if (is_dir($zfCoreTests . '/' . $lastArg)) {
         $codeCoverageFilter->addDirectoryToWhitelist($zfCoreLibrary . '/' . $lastArg);

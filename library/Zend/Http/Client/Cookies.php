@@ -20,10 +20,11 @@
 
 namespace Zend\Http\Client;
 
-use Zend\Stdlib\ParametersDescription,
+use Zend\Stdlib\ParametersInterface,
     Zend\Uri,
     Zend\Http\Header\Cookie,
-    Zend\Http\Response;
+    Zend\Http\Response,
+    ArrayIterator;
 
 /**
  * A Cookies object is designed to contain and maintain HTTP cookies, and should
@@ -48,7 +49,7 @@ use Zend\Stdlib\ParametersDescription,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Cookies //implements ParametersDescription
+class Cookies //implements ParametersInterface
 {
     /**
      * Return cookie(s) as a Zend\Http\Header\Cookie object
@@ -377,7 +378,7 @@ class Cookies //implements ParametersDescription
      */
     public function getIterator()
     {
-        return new \ArrayIterator($this->_rawCookies);
+        return new ArrayIterator($this->_rawCookies);
     }
 
     /**

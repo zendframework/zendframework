@@ -10,7 +10,7 @@ class RefreshTest extends \PHPUnit_Framework_TestCase
     public function testRefreshFromStringCreatesValidRefreshHeader()
     {
         $refreshHeader = Refresh::fromString('Refresh: xxx');
-        $this->assertInstanceOf('Zend\Http\Header\HeaderDescription', $refreshHeader);
+        $this->assertInstanceOf('Zend\Http\Header\HeaderInterface', $refreshHeader);
         $this->assertInstanceOf('Zend\Http\Header\Refresh', $refreshHeader);
     }
 

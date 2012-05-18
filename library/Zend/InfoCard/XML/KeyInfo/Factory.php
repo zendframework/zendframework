@@ -25,10 +25,6 @@ use Zend\InfoCard\XML;
 /**
  * Factory class to return a XML KeyInfo block based on input XML
  *
- * @uses       \Zend\InfoCard\XML\AbstractElement
- * @uses       \Zend\InfoCard\XML\Exception
- * @uses       \Zend\InfoCard\XML\KeyInfo\Default
- * @uses       \Zend\InfoCard\XML\KeyInfo\XMLDSig
  * @category   Zend
  * @package    Zend_InfoCard
  * @subpackage Zend_InfoCard_Xml
@@ -40,7 +36,6 @@ class Factory
     /**
      * Constructor (disabled)
      *
-     * @return void
      */
     private function __construct()
     {
@@ -51,7 +46,7 @@ class Factory
      *
      * @param string $xmlData The KeyInfo XML Block
      * @return \Zend\InfoCard\XML\KeyInfo\AbstractKeyInfo
-     * @throws \Zend\InfoCard\XML\Exception
+     * @throws XML\Exception\InvalidArgumentException
      */
     static public function getInstance($xmlData)
     {

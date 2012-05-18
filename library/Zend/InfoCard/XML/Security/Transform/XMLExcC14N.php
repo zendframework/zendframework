@@ -27,21 +27,18 @@ use Zend\InfoCard\XML\Security\Transform,
 /**
  * A Transform to perform C14n XML Exclusive Canonicalization
  *
- * @uses       DOMDocument
- * @uses       \Zend\InfoCard\XML\Security\Transform\Exception
- * @uses       \Zend\InfoCard\XML\Security\Transform
  * @category   Zend
  * @package    Zend_InfoCard
  * @subpackage Zend_InfoCard_Xml_Security
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class XMLExcC14N implements Transform
+class XMLExcC14N implements TransformInterface
 {
     /**
      * Transform the input XML based on C14n XML Exclusive Canonicalization rules
      *
-     * @throws \Zend\InfoCard\XML\Security\Transform\Exception
+     * @throws Exception\RuntimeException
      * @param string $strXMLData The input XML
      * @return string The output XML
      */

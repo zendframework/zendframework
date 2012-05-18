@@ -29,11 +29,6 @@ use Zend\Amf\Parser\AbstractSerializer,
 /**
  * Serializer PHP misc types back to there corresponding AMF0 Type Marker.
  *
- * @uses       Zend\Amf\Constants
- * @uses       Zend\Amf\Exception
- * @uses       Zend\Amf\Parser\Amf3\Serializer
- * @uses       Zend\Amf\Parser\Serializer
- * @uses       Zend\Amf\Parser\TypeLoader
  * @package    Zend_Amf
  * @subpackage Parse_Amf0
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

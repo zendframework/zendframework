@@ -23,14 +23,12 @@ namespace Zend\Code\Reflection\DocBlock;
 use Zend\Code\Reflection\Exception;
 
 /**
- * @uses       \Zend\Code\Reflection\Exception
- * @uses       \Zend\Code\Reflection\ReflectionDocblockTag
  * @category   Zend
  * @package    Zend_Reflection
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ReturnTag implements Tag
+class ReturnTag implements TagInterface
 {
     /**
      * @var string

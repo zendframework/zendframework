@@ -147,7 +147,7 @@ class Barcode
         try {
             $barcode  = self::makeBarcode($barcode, $barcodeConfig);
             $renderer = self::makeRenderer($renderer, $rendererConfig);
-        } catch (Exception $e) {
+        } catch (Exception\ExceptionInterface $e) {
             if ($automaticRenderError && !($e instanceof Exception\RendererCreationException)) {
                 $barcode  = self::makeBarcode('error', array( 'text' => $e->getMessage() ));
                 $renderer = self::makeRenderer($renderer, array());
@@ -169,7 +169,7 @@ class Barcode
      */
     public static function makeBarcode($barcode, $barcodeConfig = array())
     {
-        if ($barcode instanceof Object) {
+        if ($barcode instanceof Object\ObjectInterface) {
             return $barcode;
         }
 
@@ -222,7 +222,7 @@ class Barcode
      */
     public static function makeRenderer($renderer = 'image', $rendererConfig = array())
     {
-        if ($renderer instanceof Renderer) {
+        if ($renderer instanceof Renderer\RendererInterface) {
             return $renderer;
         }
 
@@ -267,7 +267,7 @@ class Barcode
     /**
      * Proxy to renderer render() method
      *
-     * @param string | Object | array | Traversable $barcode
+     * @param string | Object\ObjectInterface | array | Traversable $barcode
      * @param string | Renderer $renderer
      * @param array  | Traversable $barcodeConfig
      * @param array  | Traversable $rendererConfig
@@ -283,7 +283,7 @@ class Barcode
     /**
      * Proxy to renderer draw() method
      *
-     * @param string | Object | array | Traversable $barcode
+     * @param string | Object\ObjectInterface | array | Traversable $barcode
      * @param string | Renderer $renderer
      * @param array | Traversable $barcodeConfig
      * @param array | Traversable $rendererConfig

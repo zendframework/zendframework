@@ -10,7 +10,7 @@ class ContentMD5Test extends \PHPUnit_Framework_TestCase
     public function testContentMD5FromStringCreatesValidContentMD5Header()
     {
         $contentMD5Header = ContentMD5::fromString('Content-MD5: xxx');
-        $this->assertInstanceOf('Zend\Http\Header\HeaderDescription', $contentMD5Header);
+        $this->assertInstanceOf('Zend\Http\Header\HeaderInterface', $contentMD5Header);
         $this->assertInstanceOf('Zend\Http\Header\ContentMD5', $contentMD5Header);
     }
 

@@ -102,29 +102,6 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Ensures that we can call the static method is()
-     * to instantiate a named validator by its class basename
-     * and it returns the result of isValid() with the input.
-     */
-    public function testStaticFactory()
-    {
-        $this->markTestSkipped('is() method should not try to implement its own plugin loader- refactor this');
-        $this->assertTrue(Validator\ValidatorChain::execute('1234', 'Digits'));
-        $this->assertFalse(Validator\ValidatorChain::execute('abc', 'Digits'));
-    }
-
-    /**
-     * Ensures that a validator with constructor arguments can be called
-     * with the static method is().
-     */
-    public function testStaticFactoryWithConstructorArguments()
-    {
-        $this->markTestSkipped('is() method should not try to implement its own plugin loader - refactor this');
-        $this->assertTrue(Validator\ValidatorChain::execute('12', 'Between', array('min' => 1, 'max' => 12)));
-        $this->assertFalse(Validator\ValidatorChain::execute('24', 'Between', array('min' => 1, 'max' => 12)));
-    }
-
-    /**
      * Ensures that if we specify a validator class basename that doesn't
      * exist in the namespace, is() throws an exception.
      *
@@ -163,6 +140,24 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
         restore_error_handler();
         Validator\AbstractValidator::setDefaultTranslator($translator);
         $this->assertSame($translator->getAdapter(), Validator\AbstractValidator::getDefaultTranslator());
+    }
+
+    public function testAllowsPrependingValidators()
+    {
+        $this->_validator->addValidator(new ValidatorTrue())
+                         ->prependValidator(new ValidatorFalse(), true);
+        $this->assertFalse($this->_validator->isValid(true));
+        $messages = $this->_validator->getMessages();
+        $this->assertArrayHasKey('error', $messages);
+    }
+
+    public function testAllowsPrependingValidatorsByName()
+    {
+        $this->_validator->addValidator(new ValidatorTrue())
+                         ->prependByName('NotEmpty', array(), true);
+        $this->assertFalse($this->_validator->isValid(''));
+        $messages = $this->_validator->getMessages();
+        $this->assertArrayHasKey('isEmpty', $messages);
     }
 
     /**

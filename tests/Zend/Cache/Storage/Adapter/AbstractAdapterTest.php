@@ -59,7 +59,6 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
         $this->assertInternalType('string', $options->getNamespace());
         $this->assertInternalType('string', $options->getNamespacePattern());
         $this->assertInternalType('string', $options->getKeyPattern());
-        $this->assertInternalType('boolean', $options->getIgnoreMissingItems());
     }
 
     public function testSetWritable()
@@ -152,15 +151,6 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
     {
         $this->setExpectedException('Zend\Cache\Exception\InvalidArgumentException');
         $this->_options->setKeyPattern('#');
-    }
-
-    public function testSetIgnoreMissingItems()
-    {
-        $this->_options->setIgnoreMissingItems(true);
-        $this->assertTrue($this->_options->getIgnoreMissingItems());
-
-        $this->_options->setIgnoreMissingItems(false);
-        $this->assertFalse($this->_options->getIgnoreMissingItems());
     }
 
     public function testPluginRegistry()
@@ -260,6 +250,7 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
         $plugin = new \ZendTest\Cache\Storage\TestAsset\MockPlugin();
         $this->_storage->addPlugin($plugin);
 
+        $result = null;
         $params = new \ArrayObject(array(
             'key'   => 'key1',
             'value' => 'value1'
@@ -270,7 +261,7 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
         $method->setAccessible(true);
 
         $this->setExpectedException('Zend\Cache\Exception\RuntimeException', 'test');
-        $method->invokeArgs($this->_storage, array('setItem', $params, new Exception\RuntimeException('test')));
+        $method->invokeArgs($this->_storage, array('setItem', $params, & $result, new Exception\RuntimeException('test')));
     }
 
     public function testGetItemCallsInternalGetItem()
@@ -311,22 +302,36 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
 
     public function testInternalGetItemsCallsInternalGetItemForEachKey()
     {
+        $this->markTestSkipped(
+            "This test doesn't work because of an issue with PHPUnit: "
+            . 'https://github.com/sebastianbergmann/phpunit-mock-objects/issues/81'
+        );
+
         $this->_storage = $this->getMockForAbstractAdapter(array('internalGetItem'));
 
         $options = array('ttl' => 123);
         $items   = array('key1' => 'value1', 'notFound' => false, 'key2' => 'value2');
         $result  = array('key1' => 'value1', 'key2' => 'value2');
 
-        $normalizedOptions = $this->normalizeOptions($options);
-        $normalizedOptions['ignore_missing_items'] = false;
-
         $i = 0; // method call counter
         foreach ($items as $k => $v) {
             $this->_storage->expects($this->at($i++))
                 ->method('internalGetItem')
-                ->with($this->equalTo($k), $this->equalTo($normalizedOptions))
-                // return value or throw ItemNotFoundException
-                ->will($v ? $this->returnValue($v) : $this->throwException(new Exception\ItemNotFoundException()));
+                ->with(
+                    $this->equalTo($k),
+                    $this->equalTo($this->normalizeOptions($options)),
+                    $this->equalTo(null),
+                    $this->equalTo(null)
+                )
+                ->will($this->returnCallback(function ($k, $options, & $success, & $casToken) use ($items) {
+                    if ($items[$k]) {
+                        $success = true;
+                        return $items[$k];
+                    } else {
+                        $success = false;
+                        return null;
+                    }
+                }));
         }
 
         $rs = $this->_storage->getItems(array_keys($items), $options);
@@ -349,40 +354,6 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
 
         $rs = $this->_storage->hasItem($key, $options);
         $this->assertSame($result, $rs);
-    }
-
-    public function testInternalHasItemCallsInternalGetItemReturnsTrueOnValidFalseValue()
-    {
-        $this->_storage = $this->getMockForAbstractAdapter(array('internalGetItem'));
-
-        $options = array('ttl' => 123);
-        $key     = 'key1';
-
-        $this->_storage
-            ->expects($this->once())
-            ->method('internalGetItem')
-            ->with($this->equalTo($key), $this->equalTo($this->normalizeOptions($options)))
-            ->will($this->returnValue(false)); // return a valid false value
-
-        $rs = $this->_storage->hasItem($key, $options);
-        $this->assertTrue($rs);
-    }
-
-    public function testInternalHasItemCallsInternalGetItemReturnsFalseOnItemNotFoundException()
-    {
-        $this->_storage = $this->getMockForAbstractAdapter(array('internalGetItem'));
-
-        $options = array('ttl' => 123);
-        $key     = 'key1';
-
-        $this->_storage
-            ->expects($this->once())
-            ->method('internalGetItem')
-            ->with($this->equalTo($key), $this->equalTo($this->normalizeOptions($options)))
-            ->will($this->throwException(new Exception\ItemNotFoundException())); // throw ItemNotFoundException
-
-        $rs = $this->_storage->hasItem($key, $options);
-        $this->assertFalse($rs);
     }
 
     public function testHasItemsCallsInternalHasItems()
@@ -632,6 +603,248 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
     // TODO: incrementItem[s] + decrementItem[s]
     // TODO: touchItem[s]
 
+    public function testPreEventsCanChangeArguments()
+    {
+        // getItem(s)
+        $this->checkPreEventCanChangeArguments('getItem', array(
+            'key' => 'key'
+        ), array(
+            'key'     => 'changedKey',
+            'options' => array('ttl' => 456)
+        ));
+
+        $this->checkPreEventCanChangeArguments('getItems', array(
+            'keys' => array('key')
+        ), array(
+            'keys'    => array('changedKey'),
+            'options' => array('ttl' => 456)
+        ));
+
+        // hasItem(s)
+        $this->checkPreEventCanChangeArguments('hasItem', array(
+            'key' => 'key'
+        ), array(
+            'key'     => 'changedKey',
+            'options' => array('ttl' => 456)
+        ));
+
+        $this->checkPreEventCanChangeArguments('hasItems', array(
+            'keys' => array('key'),
+        ), array(
+            'keys'    => array('changedKey'),
+            'options' => array('ttl' => 456)
+        ));
+
+        // getMetadata(s)
+        $this->checkPreEventCanChangeArguments('getMetadata', array(
+            'key' => 'key'
+        ), array(
+            'key'     => 'changedKey',
+            'options' => array('ttl' => 456)
+        ));
+
+        $this->checkPreEventCanChangeArguments('getMetadatas', array(
+            'keys' => array('key'),
+        ), array(
+            'keys'    => array('changedKey'),
+            'options' => array('ttl' => 456)
+        ));
+
+        // setItem(s)
+        $this->checkPreEventCanChangeArguments('setItem', array(
+            'key'   => 'key',
+            'value' => 'value',
+        ), array(
+            'key'     => 'changedKey',
+            'value'   => 'changedValue',
+            'options' => array('ttl' => 456)
+        ));
+
+        $this->checkPreEventCanChangeArguments('setItems', array(
+            'keyValuePairs' => array('key' => 'value'),
+        ), array(
+            'keyValuePairs' => array('changedKey' => 'changedValue'),
+            'options'       => array('ttl' => 456)
+        ));
+
+        // addItem(s)
+        $this->checkPreEventCanChangeArguments('addItem', array(
+            'key'   => 'key',
+            'value' => 'value',
+        ), array(
+            'key'     => 'changedKey',
+            'value'   => 'changedValue',
+            'options' => array('ttl' => 456)
+        ));
+
+        $this->checkPreEventCanChangeArguments('addItems', array(
+            'keyValuePairs' => array('key' => 'value'),
+        ), array(
+            'keyValuePairs' => array('changedKey' => 'changedValue'),
+            'options'       => array('ttl' => 456)
+        ));
+
+        // replaceItem(s)
+        $this->checkPreEventCanChangeArguments('replaceItem', array(
+            'key'   => 'key',
+            'value' => 'value',
+        ), array(
+            'key'     => 'changedKey',
+            'value'   => 'changedValue',
+            'options' => array('ttl' => 456)
+        ));
+
+        $this->checkPreEventCanChangeArguments('replaceItems', array(
+            'keyValuePairs' => array('key' => 'value'),
+        ), array(
+            'keyValuePairs' => array('changedKey' => 'changedValue'),
+            'options'       => array('ttl' => 456)
+        ));
+
+        // CAS
+        $this->checkPreEventCanChangeArguments('checkAndSetItem', array(
+            'token' => 'token',
+            'key'   => 'key',
+            'value' => 'value',
+        ), array(
+            'token'   => 'changedToken',
+            'key'     => 'changedKey',
+            'value'   => 'changedValue',
+            'options' => array('ttl' => 456)
+        ));
+
+        // touchItem(s)
+        $this->checkPreEventCanChangeArguments('touchItem', array(
+            'key' => 'key',
+        ), array(
+            'key'     => 'changedKey',
+            'options' => array('ttl' => 456)
+        ));
+
+        $this->checkPreEventCanChangeArguments('touchItems', array(
+            'keys' => array('key'),
+        ), array(
+            'keys'    => array('changedKey'),
+            'options' => array('ttl' => 456)
+        ));
+
+        // removeItem(s)
+        $this->checkPreEventCanChangeArguments('removeItem', array(
+            'key' => 'key',
+        ), array(
+            'key'     => 'changedKey',
+            'options' => array('ttl' => 456)
+        ));
+
+        $this->checkPreEventCanChangeArguments('removeItems', array(
+            'keys' => array('key'),
+        ), array(
+            'keys'    => array('changedKey'),
+            'options' => array('ttl' => 456)
+        ));
+
+        // incrementItem(s)
+        $this->checkPreEventCanChangeArguments('incrementItem', array(
+            'key'   => 'key',
+            'value' => 1
+        ), array(
+            'key'     => 'changedKey',
+            'value'   => 2,
+            'options' => array('ttl' => 456)
+        ));
+
+        $this->checkPreEventCanChangeArguments('incrementItems', array(
+            'keyValuePairs' => array('key' => 1),
+        ), array(
+            'keyValuePairs' => array('changedKey' => 2),
+            'options'       => array('ttl' => 456)
+        ));
+
+        // decrementItem(s)
+        $this->checkPreEventCanChangeArguments('decrementItem', array(
+            'key'   => 'key',
+            'value' => 1
+        ), array(
+            'key'     => 'changedKey',
+            'value'   => 2,
+            'options' => array('ttl' => 456)
+        ));
+
+        $this->checkPreEventCanChangeArguments('decrementItems', array(
+            'keyValuePairs' => array('key' => 1),
+        ), array(
+            'keyValuePairs' => array('changedKey' => 2),
+            'options'       => array('ttl' => 456)
+        ));
+
+        // getDelayed
+        $this->checkPreEventCanChangeArguments('getDelayed', array(
+            'keys' => array('key'),
+        ), array(
+            'keys'    => array('changedKey'),
+            'options' => array('ttl' => 456)
+        ));
+
+        // find
+        $this->checkPreEventCanChangeArguments('find', array(
+            'mode' => Cache\Storage\Adapter\AdapterInterface::MATCH_ACTIVE,
+        ), array(
+            'mode'    => Cache\Storage\Adapter\AdapterInterface::MATCH_ALL,
+            'options' => array('ttl' => 456)
+        ));
+
+        // clear[ByNamespace]
+        $this->checkPreEventCanChangeArguments('clear', array(
+            'mode' => Cache\Storage\Adapter\AdapterInterface::MATCH_ACTIVE,
+        ), array(
+            'mode'    => Cache\Storage\Adapter\AdapterInterface::MATCH_ALL,
+            'options' => array('ttl' => 456)
+        ));
+
+        $this->checkPreEventCanChangeArguments('clearByNamespace', array(
+            'mode' => Cache\Storage\Adapter\AdapterInterface::MATCH_ACTIVE,
+        ), array(
+            'mode'    => Cache\Storage\Adapter\AdapterInterface::MATCH_ALL,
+            'options' => array('ttl' => 456)
+        ));
+
+        // optimize
+        $this->checkPreEventCanChangeArguments('optimize', array(), array(
+            'options' => array('ttl' => 456)
+        ));
+
+        // getCapacity
+        $this->checkPreEventCanChangeArguments('getCapacity', array(), array(
+            'options' => array('ttl' => 456)
+        ));
+    }
+
+    protected function checkPreEventCanChangeArguments($method, array $args, array $expectedArgs)
+    {
+        $internalMethod = 'internal' . ucfirst($method);
+        $eventName      = $method . '.pre';
+
+        // init mock
+        $this->_storage = $this->getMockForAbstractAdapter(array($internalMethod));
+        $this->_storage->events()->attach($eventName, function ($event) use ($expectedArgs) {
+            $params = $event->getParams();
+            foreach ($expectedArgs as $k => $v) {
+                $params[$k] = $v;
+            }
+        });
+
+        // set expected arguments of internal method call
+        $tmp = $this->_storage->expects($this->once())->method($internalMethod);
+        $equals = array();
+        foreach ($expectedArgs as $v) {
+            $equals[] = $this->equalTo($v);
+        }
+        call_user_func_array(array($tmp, 'with'), $equals);
+
+        // run
+        call_user_func_array(array($this->_storage, $method), $args);
+    }
+
     /**
      * Generates a mock of the abstract storage adapter by mocking all abstract and the given methods
      * Also sets the adapter options
@@ -669,11 +882,6 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
         // namespace
         if (!isset($options['namespace'])) {
             $options['namespace'] = $this->_options->getNamespace();
-        }
-
-        // ignore_missing_items
-        if (!isset($options['ignore_missing_items'])) {
-            $options['ignore_missing_items'] = $this->_options->getIgnoreMissingItems();
         }
 
         // tags

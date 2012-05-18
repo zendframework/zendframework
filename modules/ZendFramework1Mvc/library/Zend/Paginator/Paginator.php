@@ -20,9 +20,13 @@
 
 namespace Zend\Paginator;
 
-use Zend\Controller\Front as FrontController,
+use Zend\Paginator\ScrollingStyle\ScrollingStyleInterface,
+    Zend\Controller\Front as FrontController,
     Zend\View,
-    Zend\Json\Json;
+    Zend\Json\Json,
+    Traversable,
+    Countable,
+    IteratorAggregate;
 
 /**
  * @category   Zend
@@ -30,7 +34,7 @@ use Zend\Controller\Front as FrontController,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Paginator implements \Countable, \IteratorAggregate
+class Paginator implements Countable, IteratorAggregate
 {
     /**
      * Specifies that the factory should try to detect the proper adapter type first
@@ -97,7 +101,7 @@ class Paginator implements \Countable, \IteratorAggregate
     /**
      * Adapter
      *
-     * @var \Zend\Paginator\Adapter
+     * @var \Zend\Paginator\Adapter\AdapterInterface
      */
     protected $_adapter = null;
 
@@ -125,7 +129,7 @@ class Paginator implements \Countable, \IteratorAggregate
     /**
      * Result filter
      *
-     * @var \Zend\Filter\Filter
+     * @var \Zend\Filter\FilterInterface
      */
     protected $_filter = null;
 
@@ -161,8 +165,7 @@ class Paginator implements \Countable, \IteratorAggregate
     /**
      * View instance used for self rendering
      *
-     * @var \Zend\View\Renderer
-     */
+     * @var \Zend\View\Renderer\RendererInterface     */
     protected $_view = null;
 
     /**
@@ -549,7 +552,7 @@ class Paginator implements \Countable, \IteratorAggregate
     /**
      * Get the filter
      *
-     * @return \Zend\Filter\Filter
+     * @return \Zend\Filter\FilterInterface
      */
     public function getFilter()
     {
@@ -559,10 +562,10 @@ class Paginator implements \Countable, \IteratorAggregate
     /**
      * Set a filter chain
      *
-     * @param \Zend\Filter\Filter $filter
+     * @param \Zend\Filter\FilterInterface $filter
      * @return \Zend\Paginator\Paginator
      */
-    public function setFilter(\Zend\Filter\Filter $filter)
+    public function setFilter(\Zend\Filter\FilterInterface $filter)
     {
         $this->_filter = $filter;
 
@@ -790,7 +793,7 @@ class Paginator implements \Countable, \IteratorAggregate
      * Retrieves the view instance.  If none registered, attempts to pull f
      * rom ViewRenderer.
      *
-     * @return \Zend\View\Renderer|null
+     * @return \Zend\View\Renderer\RendererInterface|null
      */
     public function getView()
     {
@@ -809,10 +812,10 @@ class Paginator implements \Countable, \IteratorAggregate
     /**
      * Sets the view object.
      *
-     * @param  \Zend\View\Renderer $view
+     * @param  \Zend\View\Renderer\RendererInterface $view
      * @return \Zend\Paginator\Paginator
      */
-    public function setView(View\Renderer $view = null)
+    public function setView(View\Renderer\RendererInterface $view = null)
     {
         $this->_view = $view;
 
@@ -866,10 +869,10 @@ class Paginator implements \Countable, \IteratorAggregate
     /**
      * Renders the paginator.
      *
-     * @param  \Zend\View\Renderer $view
+     * @param  \Zend\View\Renderer\RendererInterface $view
      * @return string
      */
-    public function render(View\Renderer $view = null)
+    public function render(View\Renderer\RendererInterface $view = null)
     {
         if (null !== $view) {
             $this->setView($view);
@@ -1000,7 +1003,7 @@ class Paginator implements \Countable, \IteratorAggregate
      * Loads a scrolling style.
      *
      * @param string $scrollingStyle
-     * @return \Zend\Paginator\ScrollingStyle
+     * @return \Zend\Paginator\ScrollingStyle\ScrollingStyleInterface
      * @throws Exception\InvalidArgumentException
      */
     protected function _loadScrollingStyle($scrollingStyle = null)
@@ -1011,7 +1014,7 @@ class Paginator implements \Countable, \IteratorAggregate
 
         switch (strtolower(gettype($scrollingStyle))) {
             case 'object':
-                if (!$scrollingStyle instanceof ScrollingStyle) {
+                if (!$scrollingStyle instanceof ScrollingStyleInterface) {
                     throw new Exception\InvalidArgumentException(
                         'Scrolling style must implement Zend_Paginator_ScrollingStyle_Interface'
                     );
@@ -1028,7 +1031,7 @@ class Paginator implements \Countable, \IteratorAggregate
             default:
                 throw new Exception\InvalidArgumentException(
                     'Scrolling style must be a class ' .
-                    'name or object implementing Zend\Paginator\ScrollingStyle'
+                    'name or object implementing Zend\Paginator\ScrollingStyleInterface'
                 );
         }
     }

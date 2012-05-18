@@ -21,19 +21,19 @@
 
 namespace Zend\Queue\Message;
 
-use Zend\Queue\Queue;
+use Iterator,
+    Countable,
+    Zend\Queue\Queue,
+    Zend\Queue\Exception;
 
 /**
- * @uses       \Countable
- * @uses       \Iterator
- * @uses       \Zend\Queue\Exception
  * @category   Zend
  * @package    Zend_Queue
  * @subpackage Message
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class MessageIterator implements \Iterator, \Countable
+class MessageIterator implements Iterator, Countable
 {
     /**
      * The data for the queue message
@@ -99,7 +99,7 @@ class MessageIterator implements \Iterator, \Countable
         }
 
         if (!is_array($options['data'])) {
-            throw new \Zend\Queue\Exception('array optionsuration must have $options[\'data\'] = array');
+            throw new Exception\InvalidArgumentException('array optionsuration must have $options[\'data\'] = array');
         }
 
         // set the message class

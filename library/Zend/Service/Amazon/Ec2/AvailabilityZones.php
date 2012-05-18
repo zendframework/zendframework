@@ -26,7 +26,6 @@ use Zend\Service\Amazon,
 /**
  * An Amazon EC2 interface to query which Availibity Zones your account has access to.
  *
- * @uses       Zend_Service_Amazon_Ec2_Abstract
  * @category   Zend
  * @package    Zend_Service_Amazon
  * @subpackage Ec2

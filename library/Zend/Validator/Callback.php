@@ -21,8 +21,6 @@
 namespace Zend\Validator;
 
 /**
- * @uses       \Zend\Validator\AbstractValidator
- * @uses       \Zend\Validator\Exception
  * @category   Zend
  * @package    Zend_Validate
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -127,9 +125,10 @@ class Callback extends AbstractValidator
      * for the provided $value
      *
      * @param  mixed $value
+     * @param  mixed $context Additional context to provide to the callback
      * @return boolean
      */
-    public function isValid($value)
+    public function isValid($value, $context = null)
     {
         $this->setValue($value);
 
@@ -139,11 +138,20 @@ class Callback extends AbstractValidator
             throw new Exception\InvalidArgumentException('No callback given');
         }
 
-        $args     = func_get_args();
-        $options  = array_merge($args, $options);
+        $args = array($value);
+        if (empty($options) && !empty($context)) {
+            $args[] = $context;
+        }
+        if (!empty($options) && empty($context)) {
+            $args = array_merge($args, $options);
+        }
+        if (!empty($options) && !empty($context)) {
+            $args[] = $context;
+            $args   = array_merge($args, $options);
+        }
 
         try {
-            if (!call_user_func_array($callback, $options)) {
+            if (!call_user_func_array($callback, $args)) {
                 $this->error(self::INVALID_VALUE);
                 return false;
             }

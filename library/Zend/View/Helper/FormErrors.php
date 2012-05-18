@@ -24,7 +24,6 @@ namespace Zend\View\Helper;
 /**
  * Helper to render errors for a form element
  *
- * @uses       \Zend\View\Helper\FormElement
  * @category   Zend
  * @package    Zend_View
  * @subpackage Helper

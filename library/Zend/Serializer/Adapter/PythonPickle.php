@@ -22,17 +22,15 @@
 namespace Zend\Serializer\Adapter;
 
 use Zend\Serializer\Exception\InvalidArgumentException,
-    Zend\Serializer\Exception\RuntimeException;
+    Zend\Serializer\Exception\RuntimeException,
+    stdClass,
+    Traversable;
 
 /**
  * @link       http://www.python.org
  * @see        Phython3.1/Lib/pickle.py
  * @see        Phython3.1/Modules/_pickle.c
  * @link       http://pickle-js.googlecode.com
- * @uses       stdClass
- * @uses       Zend\Serializer\Adapter\AbstractAdapter
- * @uses       Zend\Serializer\Exception\InvalidArgumentException
- * @uses       Zend\Serializer\Exception\RuntimeException
  * @category   Zend
  * @package    Zend_Serializer
  * @subpackage Adapter
@@ -147,16 +145,16 @@ class PythonPickle extends AbstractAdapter
      *
      * @link Zend_Serializer_Adapter_AdapterAbstract::__construct()
      */
-    public function __construct($opts=array())
+    public function __construct($options=array())
     {
-        parent::__construct($opts);
+        parent::__construct($options);
 
         // init
         if (self::$_isLittleEndian === null) {
             self::$_isLittleEndian = (pack('l', 1) === "\x01\x00\x00\x00");
         }
 
-        $this->_marker = new \stdClass();
+        $this->_marker = new stdClass();
     }
 
     /**
@@ -165,7 +163,8 @@ class PythonPickle extends AbstractAdapter
      * @link   Zend_Serializer_Adapter_AdapterAbstract::setOption()
      * @param  string $name
      * @param  mixed $value
-     * @return Zend\Serializer\Adapter\PythonPickle
+     * @return PythonPickle
+     * @throws InvalidArgumentException
      */
     public function setOption($name, $value)
     {
@@ -187,7 +186,6 @@ class PythonPickle extends AbstractAdapter
      *
      * @param  int $number
      * @return int
-     * @throws Zend\Serializer\Exception
      */
     protected function _checkProtocolNumber($number)
     {
@@ -238,7 +236,7 @@ class PythonPickle extends AbstractAdapter
      *
      * @param  mixed $value
      * @return void
-     * @throws Zend\Serializer\Exception on invalid or unrecognized value type
+     * @throws RuntimeException on invalid or unrecognized value type
      */
     protected function _write($value)
     {
@@ -612,7 +610,7 @@ class PythonPickle extends AbstractAdapter
      * @param  string $pickle
      * @param  array $opts
      * @return mixed
-     * @throws Zend\Serializer\Exception on invalid Pickle string
+     * @throws RuntimeException on invalid Pickle string
      */
     public function unserialize($pickle, array $opts = array())
     {
@@ -649,7 +647,7 @@ class PythonPickle extends AbstractAdapter
      *
      * @param  string $op
      * @return void
-     * @throws Zend\Serializer\Exception on invalid opcode
+     * @throws RuntimeException on invalid opcode
      */
     protected function _load($op)
     {
@@ -780,7 +778,7 @@ class PythonPickle extends AbstractAdapter
      * Load a PUT opcode
      *
      * @return void
-     * @throws Zend\Serializer\Exception on missing stack
+     * @throws RuntimeException on missing stack
      */
     protected function _loadPut()
     {
@@ -797,7 +795,7 @@ class PythonPickle extends AbstractAdapter
      * Load a binary PUT
      *
      * @return void
-     * @throws Zend\Serializer\Exception on missing stack
+     * @throws RuntimeException on missing stack
      */
     protected function _loadBinPut()
     {
@@ -814,7 +812,7 @@ class PythonPickle extends AbstractAdapter
      * Load a long binary PUT
      *
      * @return void
-     * @throws Zend\Serializer\Exception on missing stack
+     * @throws RuntimeException on missing stack
      */
     protected function _loadLongBinPut()
     {
@@ -835,7 +833,7 @@ class PythonPickle extends AbstractAdapter
      * Load a GET operation
      *
      * @return void
-     * @throws Zend\Serializer\Exception on missing GET identifier
+     * @throws RuntimeException on missing GET identifier
      */
     protected function _loadGet()
     {
@@ -851,7 +849,7 @@ class PythonPickle extends AbstractAdapter
      * Load a binary GET operation
      *
      * @return void
-     * @throws Zend\Serializer\Exception on missing GET identifier
+     * @throws RuntimeException on missing GET identifier
      */
     protected function _loadBinGet()
     {
@@ -867,7 +865,7 @@ class PythonPickle extends AbstractAdapter
      * Load a long binary GET operation
      *
      * @return void
-     * @throws Zend\Serializer\Exception on missing GET identifier
+     * @throws RuntimeException on missing GET identifier
      */
     protected function _loadLongBinGet()
     {
@@ -1130,7 +1128,7 @@ class PythonPickle extends AbstractAdapter
      *
      * @param  string $sequence
      * @return string
-     * @throws \Zend\Serializer\Exception on unmatched unicode sequence
+     * @throws \RuntimeException on unmatched unicode sequence
      */
     protected function _hex2Utf8($hex)
     {
@@ -1359,7 +1357,7 @@ class PythonPickle extends AbstractAdapter
      * Load a proto value
      *
      * @return void
-     * @throws Zend\Serializer\Exception if Pickle version does not support this feature
+     * @throws RuntimeException if Pickle version does not support this feature
      */
     protected function _loadProto()
     {
@@ -1377,7 +1375,7 @@ class PythonPickle extends AbstractAdapter
      *
      * @param  mixed $len
      * @return string
-     * @throws Zend\Serializer\Exception if position matches end of data
+     * @throws RuntimeException if position matches end of data
      */
     protected function _read($len)
     {
@@ -1393,7 +1391,7 @@ class PythonPickle extends AbstractAdapter
      * Read a line of the pickle at once
      *
      * @return string
-     * @throws Zend\Serializer\Exception if no EOL character found
+     * @throws RuntimeException if no EOL character found
      */
     protected function _readline()
     {

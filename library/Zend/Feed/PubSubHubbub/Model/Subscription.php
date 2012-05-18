@@ -24,17 +24,13 @@ use Zend\Feed\PubSubHubbub;
 use Zend\Date;
 
 /**
- * @uses       \Zend\Date\Date
- * @uses       \Zend\Feed\PubSubHubbub\Exception
- * @uses       \Zend\Feed\PubSubHubbub\Model\AbstractModel
- * @uses       \Zend\Feed\PubSubHubbub\Model\SubscriptionPersistence
  * @category   Zend
  * @package    Zend_Feed_Pubsubhubbub
  * @subpackage Entity
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Subscription extends AbstractModel implements SubscriptionPersistence
+class Subscription extends AbstractModel implements SubscriptionPersistenceInterface
 {
     
     /**
@@ -42,11 +38,12 @@ class Subscription extends AbstractModel implements SubscriptionPersistence
      *
      * @param array $data
      * @return bool
+     * @throws PubSubHubbub\Exception\InvalidArgumentException
      */
     public function setSubscription(array $data)
     {
         if (!isset($data['id'])) {
-            throw new PubSubHubbub\Exception(
+            throw new PubSubHubbub\Exception\InvalidArgumentException(
                 'ID must be set before attempting a save'
             );
         }
@@ -76,11 +73,12 @@ class Subscription extends AbstractModel implements SubscriptionPersistence
      * 
      * @param  string $key 
      * @return array
+     * @throws PubSubHubbub\Exception\InvalidArgumentException
      */
     public function getSubscription($key)
     {
         if (empty($key) || !is_string($key)) {
-            throw new PubSubHubbub\Exception('Invalid parameter "key"'
+            throw new PubSubHubbub\Exception\InvalidArgumentException('Invalid parameter "key"'
                 .' of "' . $key . '" must be a non-empty string');
         }
         $result = $this->_db->select(array('id' => $key));
@@ -95,11 +93,12 @@ class Subscription extends AbstractModel implements SubscriptionPersistence
      * 
      * @param  string $key 
      * @return bool
+     * @throws PubSubHubbub\Exception\InvalidArgumentException
      */
     public function hasSubscription($key)
     {
         if (empty($key) || !is_string($key)) {
-            throw new PubSubHubbub\Exception('Invalid parameter "key"'
+            throw new PubSubHubbub\Exception\InvalidArgumentException('Invalid parameter "key"'
                 .' of "' . $key . '" must be a non-empty string');
         }
         $result = $this->_db->select(array('id' => $key));

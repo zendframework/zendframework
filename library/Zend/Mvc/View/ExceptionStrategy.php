@@ -21,13 +21,13 @@
 
 namespace Zend\Mvc\View;
 
-use Zend\EventManager\EventCollection,
-    Zend\EventManager\ListenerAggregate,
+use Zend\EventManager\EventManagerInterface,
+    Zend\EventManager\ListenerAggregateInterface,
     Zend\Http\Response as HttpResponse,
     Zend\Mvc\Application,
     Zend\Mvc\MvcEvent,
-    Zend\Stdlib\ResponseDescription as Response,
-    Zend\View\Model as ViewModel;
+    Zend\Stdlib\ResponseInterface as Response,
+    Zend\View\Model\ViewModel;
 
 /**
  * @category   Zend
@@ -36,7 +36,7 @@ use Zend\EventManager\EventCollection,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ExceptionStrategy implements ListenerAggregate
+class ExceptionStrategy implements ListenerAggregateInterface
 {
     /**
      * Display exceptions?
@@ -58,10 +58,10 @@ class ExceptionStrategy implements ListenerAggregate
     /**
      * Attach the aggregate to the specified event manager
      *
-     * @param  EventCollection $events
+     * @param  EventManagerInterface $events
      * @return void
      */
-    public function attach(EventCollection $events)
+    public function attach(EventManagerInterface $events)
     {
         $this->listeners[] = $events->attach(MvcEvent::EVENT_DISPATCH_ERROR, array($this, 'prepareExceptionViewModel'));
     }
@@ -69,10 +69,10 @@ class ExceptionStrategy implements ListenerAggregate
     /**
      * Detach aggregate listeners from the specified event manager
      *
-     * @param  EventCollection $events
+     * @param  EventManagerInterface $events
      * @return void
      */
-    public function detach(EventCollection $events)
+    public function detach(EventManagerInterface $events)
     {
         foreach ($this->listeners as $index => $listener) {
             if ($events->detach($listener)) {
@@ -159,7 +159,7 @@ class ExceptionStrategy implements ListenerAggregate
 
             case Application::ERROR_EXCEPTION:
             default:
-                $model = new ViewModel\ViewModel(array(
+                $model = new ViewModel(array(
                     'message'            => 'An error occurred during execution; please try again later.',
                     'exception'          => $e->getParam('exception'),
                     'display_exceptions' => $this->displayExceptions(),

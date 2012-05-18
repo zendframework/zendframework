@@ -48,7 +48,7 @@ class DeletedTest extends \PHPUnit_Framework_TestCase
         try {
             $entry->setReference('');
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
 
@@ -110,7 +110,7 @@ class DeletedTest extends \PHPUnit_Framework_TestCase
         try {
             $entry->setWhen('abc');
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
     
@@ -147,7 +147,7 @@ class DeletedTest extends \PHPUnit_Framework_TestCase
         try {
             $entry->setBy(array('name'=>''));
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
 
@@ -157,7 +157,7 @@ class DeletedTest extends \PHPUnit_Framework_TestCase
         try {
             $entry->setBy(array('name'=>'Joe','email'=>''));
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
 
@@ -168,7 +168,7 @@ class DeletedTest extends \PHPUnit_Framework_TestCase
         try {
             $entry->setBy(array('name'=>'Joe','uri'=>'notauri'));
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
 
@@ -178,7 +178,7 @@ class DeletedTest extends \PHPUnit_Framework_TestCase
         try {
             $entry->setBy(array('uri'=>'notauri'));
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
 

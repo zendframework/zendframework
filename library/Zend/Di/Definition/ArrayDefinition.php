@@ -2,7 +2,7 @@
 
 namespace Zend\Di\Definition;
 
-class ArrayDefinition implements Definition
+class ArrayDefinition implements DefinitionInterface
 {
     
     protected $dataArray = array();

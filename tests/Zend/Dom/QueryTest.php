@@ -22,7 +22,7 @@
 namespace ZendTest\Dom;
 use Zend\Dom\Query,
     Zend\Dom\NodeList,
-    Zend\Dom\Exception as DOMException;
+    Zend\Dom\Exception\ExceptionInterface as DOMException;
 
 /**
  * Test class for Zend_Dom_Query.

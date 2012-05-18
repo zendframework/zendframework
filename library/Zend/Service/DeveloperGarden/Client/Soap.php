@@ -20,10 +20,6 @@
  */
 
 /**
- * @uses       DOMDocument
- * @uses       SoapHeader
- * @uses       SoapVar
- * @uses       Zend_Soap_Client
  * @category   Zend
  * @package    Zend_Service
  * @subpackage DeveloperGarden

@@ -6,7 +6,7 @@ namespace Zend\Http\Header;
  * @throws Exception\InvalidArgumentException
  * @todo Search for RFC for this header
  */
-class KeepAlive implements HeaderDescription
+class KeepAlive implements HeaderInterface
 {
 
     public static function fromString($headerLine)

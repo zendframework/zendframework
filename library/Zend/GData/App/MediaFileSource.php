@@ -24,8 +24,6 @@ namespace Zend\GData\App;
 /**
  * Concrete class to use a file handle as an attachment within a MediaEntry.
  *
- * @uses       \Zend\GData\App\IOException
- * @uses       \Zend\Gdata\App\MediaData
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage App

@@ -28,10 +28,6 @@ namespace Zend\Pdf;
  * the true base class ({@link \Zend\Pdf\Resource\Image\AbstractImage}) is not intuitive
  * for the end user.
  *
- * @uses       \Zend\Pdf\Exception
- * @uses       \Zend\Pdf\BinaryParser\DataSource
- * @uses       \Zend\Pdf\BinaryParser\Image
- * @uses       \Zend\Pdf\Resource\Image
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Image
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -118,7 +114,7 @@ abstract class Image
      *
      * @param string $filePath Full path to the image file.
      * @return \Zend\Pdf\Resource\Image\AbstractImage
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
     public static function imageWithPath($filePath)
     {
@@ -190,7 +186,7 @@ abstract class Image
      * @param \Zend\Pdf\BinaryParser\DataSource\AbstractDataSource $dataSource
      * @return \Zend\Pdf\Resource\Image\Jpeg May also return null if
      *   the data source does not appear to contain valid image data.
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
     protected static function _extractJpegImage($dataSource)
     {
@@ -225,7 +221,7 @@ abstract class Image
      * @param \Zend\Pdf\BinaryParser\DataSource\AbstractDataSource $dataSource
      * @return \Zend\Pdf\Resource\Image\Tiff May also return null if
      *   the data source does not appear to contain valid image data.
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
     protected static function _extractTiffImage($dataSource)
     {

@@ -24,11 +24,11 @@ use Zend\Config\Config,
     Zend\Controller\Front as FrontController,
     Zend\Loader\PrefixPathLoader,
     Zend\Loader\PrefixPathMapper,
-    Zend\Validator\Validator,
-    Zend\Filter\Filter,
+    Zend\Validator\ValidatorInterface,
+    Zend\Filter\FilterInterface,
     Zend\Validator\AbstractValidator,
     Zend\Form\Element\Exception as ElementException,
-    Zend\View\Renderer as View;
+    Zend\View\Renderer\RendererInterface as View;
 
 /**
  * Zend_Form_Element
@@ -214,7 +214,7 @@ class Element implements Validator
     protected $_value;
 
     /**
-     * @var \Zend\View\Renderer
+     * @var \Zend\View\Renderer\RendererInterface
      */
     protected $_view;
 
@@ -1118,7 +1118,7 @@ class Element implements Validator
      *
      * Note: will overwrite existing validators if they are of the same class.
      *
-     * @param  string|\Zend\Validator\Validator $validator
+     * @param  string|\Zend\Validator\ValidatorInterface $validator
      * @param  bool $breakChainOnFailure
      * @param  array $options
      * @return \Zend\Form\Element
@@ -1126,7 +1126,7 @@ class Element implements Validator
      */
     public function addValidator($validator, $breakChainOnFailure = false, $options = array())
     {
-        if ($validator instanceof Validator) {
+        if ($validator instanceof ValidatorInterface) {
             $name = get_class($validator);
 
             if (!isset($validator->zfBreakChainOnFailure)) {
@@ -1140,7 +1140,7 @@ class Element implements Validator
                 'options'             => $options,
             );
         } else {
-            throw new ElementException\InvalidArgumentException('Invalid validator provided to addValidator; must be string or Zend\Validator\Validator');
+            throw new ElementException\InvalidArgumentException('Invalid validator provided to addValidator; must be string or Zend\Validator\ValidatorInterface');
         }
 
 
@@ -1160,7 +1160,7 @@ class Element implements Validator
         foreach ($validators as $validatorInfo) {
             if (is_string($validatorInfo)) {
                 $this->addValidator($validatorInfo);
-            } elseif ($validatorInfo instanceof Validator) {
+            } elseif ($validatorInfo instanceof ValidatorInterface) {
                 $this->addValidator($validatorInfo);
             } elseif (is_array($validatorInfo)) {
                 $argc                = count($validatorInfo);
@@ -1214,7 +1214,7 @@ class Element implements Validator
      * Retrieve a single validator by name
      *
      * @param  string $name
-     * @return \Zend\Validator\Validator|false False if not found, validator otherwise
+     * @return \Zend\Validator\ValidatorInterface|false False if not found, validator otherwise
      */
     public function getValidator($name)
     {
@@ -1250,7 +1250,7 @@ class Element implements Validator
     {
         $validators = array();
         foreach ($this->_validators as $key => $value) {
-            if ($value instanceof Validator) {
+            if ($value instanceof ValidatorInterface) {
                 $validators[$key] = $value;
                 continue;
             }
@@ -1590,12 +1590,12 @@ class Element implements Validator
     /**
      * Add a filter to the element
      *
-     * @param  string|\Zend\Filter\Filter $filter
+     * @param  string|\Zend\Filter\FilterInterface $filter
      * @return \Zend\Form\Element
      */
     public function addFilter($filter, $options = array())
     {
-        if ($filter instanceof Filter) {
+        if ($filter instanceof FilterInterface) {
             $name = get_class($filter);
         } elseif (is_string($filter)) {
             $name = $filter;
@@ -1624,7 +1624,7 @@ class Element implements Validator
         foreach ($filters as $filterInfo) {
             if (is_string($filterInfo)) {
                 $this->addFilter($filterInfo);
-            } elseif ($filterInfo instanceof Filter) {
+            } elseif ($filterInfo instanceof FilterInterface) {
                 $this->addFilter($filterInfo);
             } elseif (is_array($filterInfo)) {
                 $argc                = count($filterInfo);
@@ -1672,7 +1672,7 @@ class Element implements Validator
      * Retrieve a single filter by name
      *
      * @param  string $name
-     * @return \Zend\Filter\Filter
+     * @return \Zend\Filter\FilterInterface
      */
     public function getFilter($name)
     {
@@ -1709,7 +1709,7 @@ class Element implements Validator
     {
         $filters = array();
         foreach ($this->_filters as $key => $value) {
-            if ($value instanceof Filter) {
+            if ($value instanceof FilterInterface) {
                 $filters[$key] = $value;
                 continue;
             }
@@ -1761,7 +1761,7 @@ class Element implements Validator
     /**
      * Set view object
      *
-     * @param  \Zend\View\Renderer $view
+     * @param  View $view
      * @return \Zend\Form\Element
      */
     public function setView(View $view = null)
@@ -1775,7 +1775,7 @@ class Element implements Validator
      *
      * Retrieves from ViewRenderer if none previously set.
      *
-     * @return null|\Zend\View\Renderer
+     * @return null|View
      */
     public function getView()
     {
@@ -2035,7 +2035,7 @@ class Element implements Validator
      * Lazy-load a filter
      *
      * @param  array $filter
-     * @return \Zend\Filter\Filter
+     * @return \Zend\Filter\FilterInterface
      */
     protected function _loadFilter(array $filter)
     {
@@ -2083,7 +2083,7 @@ class Element implements Validator
      * Lazy-load a validator
      *
      * @param  array $validator Validator definition
-     * @return \Zend\Validator\Validator
+     * @return \Zend\Validator\ValidatorInterface
      */
     protected function _loadValidator(array $validator)
     {

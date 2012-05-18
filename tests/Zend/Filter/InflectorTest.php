@@ -100,7 +100,7 @@ class InflectorTest extends \PHPUnit_Framework_TestCase
         $rules = $this->inflector->getRules('controller');
         $this->assertEquals(1, count($rules));
         $filter = $rules[0];
-        $this->assertTrue($filter instanceof \Zend\Filter\Filter);
+        $this->assertTrue($filter instanceof \Zend\Filter\FilterInterface);
     }
 
     public function testSetFilterRuleWithFilterObjectCreatesRuleEntryWithFilterObject()
@@ -112,7 +112,7 @@ class InflectorTest extends \PHPUnit_Framework_TestCase
         $rules = $this->inflector->getRules('controller');
         $this->assertEquals(1, count($rules));
         $received = $rules[0];
-        $this->assertTrue($received instanceof \Zend\Filter\Filter);
+        $this->assertTrue($received instanceof \Zend\Filter\FilterInterface);
         $this->assertSame($filter, $received);
     }
 
@@ -123,8 +123,8 @@ class InflectorTest extends \PHPUnit_Framework_TestCase
         $this->inflector->setFilterRule('controller', array('PregReplace', 'Alpha'));
         $rules = $this->inflector->getRules('controller');
         $this->assertEquals(2, count($rules));
-        $this->assertTrue($rules[0] instanceof \Zend\Filter\Filter);
-        $this->assertTrue($rules[1] instanceof \Zend\Filter\Filter);
+        $this->assertTrue($rules[0] instanceof \Zend\Filter\FilterInterface);
+        $this->assertTrue($rules[1] instanceof \Zend\Filter\FilterInterface);
     }
 
     public function testAddFilterRuleAppendsRuleEntries()
@@ -365,7 +365,7 @@ class InflectorTest extends \PHPUnit_Framework_TestCase
     {
         $config = $this->getConfig();
         $inflector = new InflectorFilter();
-        $inflector->setConfig($config);
+        $inflector->setOptions($config);
         $this->_testOptions($inflector);
     }
 

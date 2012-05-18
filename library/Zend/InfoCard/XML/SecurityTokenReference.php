@@ -24,8 +24,6 @@ namespace Zend\InfoCard\XML;
 /**
  * Represents a SecurityTokenReference XML block
  *
- * @uses       \Zend\InfoCard\XML\AbstractElement
- * @uses       \Zend\InfoCard\XML\Exception
  * @category   Zend
  * @package    Zend_InfoCard
  * @subpackage Zend_InfoCard_Xml
@@ -43,8 +41,8 @@ class SecurityTokenReference extends AbstractElement
      * Return an instance of the object based on the input XML
      *
      * @param string $xmlData The SecurityTokenReference XML Block
-     * @return \Zend\InfoCard\XML\SecurityTokenReference
-     * @throws \Zend\InfoCard\XML\Exception
+     * @return SecurityTokenReference
+     * @throws Exception\InvalidArgumentException
      */
     static public function getInstance($xmlData)
     {
@@ -69,7 +67,7 @@ class SecurityTokenReference extends AbstractElement
      * Return the Key Identifier XML Object
      *
      * @return \Zend\InfoCard\XML\AbstractElement
-     * @throws \Zend\InfoCard\XML\Exception
+     * @throws Exception\RuntimeException
      */
     protected function _getKeyIdentifier()
     {
@@ -87,7 +85,7 @@ class SecurityTokenReference extends AbstractElement
      * Return the Key URI identifying the thumbprint type used
      *
      * @return string The thumbprint type URI
-     * @throws  \Zend\InfoCard\XML\Exception
+     * @throws  Exception\RuntimeException
      */
     public function getKeyThumbprintType()
     {
@@ -108,7 +106,7 @@ class SecurityTokenReference extends AbstractElement
      * Return the thumbprint encoding type used as a URI
      *
      * @return string the URI of the thumbprint encoding used
-     * @throws \Zend\InfoCard\XML\Exception
+     * @throws Exception\RuntimeException
      */
     public function getKeyThumbprintEncodingType()
     {
@@ -129,7 +127,7 @@ class SecurityTokenReference extends AbstractElement
      *
      * @param bool $decode if true, will return a decoded version of the key
      * @return string the key reference thumbprint, either in binary or encoded form
-     * @throws \Zend\InfoCard\XML\Exception
+     * @throws Exception\ExceptionInterface
      */
     public function getKeyReference($decode = true)
     {

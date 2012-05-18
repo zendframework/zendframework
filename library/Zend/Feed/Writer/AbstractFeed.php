@@ -62,54 +62,50 @@ class AbstractFeed
     /**
      * Set a single author
      *
-     * @param  int $index
-     * @return string|null
+     * The following option keys are supported:
+     * 'name'  => (string) The name
+     * 'email' => (string) An optional email
+     * 'uri'   => (string) An optional and valid URI
+     *
+     * @param array $author
+     * @throws Exception\InvalidArgumentException If any value of $author not follow the format.
+     * @return void
      */
-    public function addAuthor($name, $email = null, $uri = null)
+    public function addAuthor(array $author)
     {
-        $author = array();
-        if (is_array($name)) {
-            if (!array_key_exists('name', $name) || empty($name['name']) || !is_string($name['name'])) {
-                throw new Exception('Invalid parameter: author array must include a "name" key with a non-empty string value');
-            }
-            $author['name'] = $name['name'];
-            if (isset($name['email'])) {
-                if (empty($name['email']) || !is_string($name['email'])) {
-                    throw new Exception('Invalid parameter: "email" array value must be a non-empty string');
-                }
-                $author['email'] = $name['email'];
-            }
-            if (isset($name['uri'])) {
-                if (empty($name['uri']) || !is_string($name['uri']) || !Uri\UriFactory::factory($name['uri'])->isValid()) {
-                    throw new Exception('Invalid parameter: "uri" array value must be a non-empty string and valid URI/IRI');
-                }
-                $author['uri'] = $name['uri'];
-            }
-        } else {
-            if (empty($name['name']) || !is_string($name['name'])) {
-                throw new Exception('Invalid parameter: "name" must be a non-empty string value');
-            }
-            $author['name'] = $name;
-            if (isset($email)) {
-                if (empty($email) || !is_string($email)) {
-                    throw new Exception('Invalid parameter: "email" value must be a non-empty string');
-                }
-                $author['email'] = $email;
-            }
-            if (isset($uri)) {
-                if (empty($uri) || !is_string($uri) || !Uri\UriFactory::factory($uri)->isValid()) {
-                    throw new Exception('Invalid parameter: "uri" value must be a non-empty string and valid URI/IRI');
-                }
-                $author['uri'] = $uri;
+        // Check array values
+        if (!array_key_exists('name', $author)
+            || empty($author['name'])
+            || !is_string($author['name'])
+        ) {
+            throw new Exception\InvalidArgumentException(
+                'Invalid parameter: author array must include a "name" key with a non-empty string value');
+        }
+
+        if (isset($author['email'])) {
+            if (empty($author['email']) || !is_string($author['email'])) {
+                throw new Exception\InvalidArgumentException(
+                    'Invalid parameter: "email" array value must be a non-empty string');
             }
         }
+        if (isset($author['uri'])) {
+            if (empty($author['uri']) || !is_string($author['uri']) ||
+                !Uri\UriFactory::factory($author['uri'])->isValid()
+            ) {
+                throw new Exception\InvalidArgumentException(
+                    'Invalid parameter: "uri" array value must be a non-empty string and valid URI/IRI');
+            }
+        }
+
         $this->_data['authors'][] = $author;
     }
 
     /**
      * Set an array with feed authors
      *
-     * @return array
+     * @see addAuthor
+     * @param array $authors
+     * @return void
      */
     public function addAuthors(array $authors)
     {
@@ -122,11 +118,12 @@ class AbstractFeed
      * Set the copyright entry
      *
      * @return string|null
+     * @throws Exception\InvalidArgumentException
      */
     public function setCopyright($copyright)
     {
         if (empty($copyright) || !is_string($copyright)) {
-            throw new Exception('Invalid parameter: parameter must be a non-empty string');
+            throw new Exception\InvalidArgumentException('Invalid parameter: parameter must be a non-empty string');
         }
         $this->_data['copyright'] = $copyright;
     }
@@ -135,6 +132,7 @@ class AbstractFeed
      * Set the feed creation date
      *
      * @param null|integer|Date\Date
+     * @throws Exception\InvalidArgumentException
      */
     public function setDateCreated($date = null)
     {
@@ -146,7 +144,7 @@ class AbstractFeed
         } elseif ($date instanceof Date\Date) {
             $zdate = $date;
         } else {
-            throw new Exception('Invalid Date\Date object or UNIX Timestamp passed as parameter');
+            throw new Exception\InvalidArgumentException('Invalid Date\Date object or UNIX Timestamp passed as parameter');
         }
         $this->_data['dateCreated'] = $zdate;
     }
@@ -155,6 +153,7 @@ class AbstractFeed
      * Set the feed modification date
      *
      * @param null|integer|Date\Date
+     * @throws Exception\InvalidArgumentException
      */
     public function setDateModified($date = null)
     {
@@ -166,7 +165,7 @@ class AbstractFeed
         } elseif ($date instanceof Date\Date) {
             $zdate = $date;
         } else {
-            throw new Exception('Invalid Date\Date object or UNIX Timestamp passed as parameter');
+            throw new Exception\InvalidArgumentException('Invalid Date\Date object or UNIX Timestamp passed as parameter');
         }
         $this->_data['dateModified'] = $zdate;
     }
@@ -175,6 +174,7 @@ class AbstractFeed
      * Set the feed last-build date. Ignored for Atom 1.0.
      *
      * @param null|integer|Date\Date
+     * @throws Exception\InvalidArgumentException
      */
     public function setLastBuildDate($date = null)
     {
@@ -186,7 +186,7 @@ class AbstractFeed
         } elseif ($date instanceof Date\Date) {
             $zdate = $date;
         } else {
-            throw new Exception('Invalid Date\Date object or UNIX Timestamp passed as parameter');
+            throw new Exception\InvalidArgumentException('Invalid Date\Date object or UNIX Timestamp passed as parameter');
         }
         $this->_data['lastBuildDate'] = $zdate;
     }
@@ -195,11 +195,12 @@ class AbstractFeed
      * Set the feed description
      *
      * @return string|null
+     * @throws Exception\InvalidArgumentException
      */
     public function setDescription($description)
     {
         if (empty($description) || !is_string($description)) {
-            throw new Exception('Invalid parameter: parameter must be a non-empty string');
+            throw new Exception\InvalidArgumentException('Invalid parameter: parameter must be a non-empty string');
         }
         $this->_data['description'] = $description;
     }
@@ -208,41 +209,42 @@ class AbstractFeed
      * Set the feed generator entry
      *
      * @return string|null
+     * @throws Exception\InvalidArgumentException
      */
     public function setGenerator($name, $version = null, $uri = null)
     {
         if (is_array($name)) {
             $data = $name;
             if (empty($data['name']) || !is_string($data['name'])) {
-                throw new Exception('Invalid parameter: "name" must be a non-empty string');
+                throw new Exception\InvalidArgumentException('Invalid parameter: "name" must be a non-empty string');
             }
             $generator = array('name' => $data['name']);
             if (isset($data['version'])) {
                 if (empty($data['version']) || !is_string($data['version'])) {
-                    throw new Exception('Invalid parameter: "version" must be a non-empty string');
+                    throw new Exception\InvalidArgumentException('Invalid parameter: "version" must be a non-empty string');
                 }
                 $generator['version'] = $data['version'];
             }
             if (isset($data['uri'])) {
                 if (empty($data['uri']) || !is_string($data['uri']) || !Uri\UriFactory::factory($data['uri'])->isValid()) {
-                    throw new Exception('Invalid parameter: "uri" must be a non-empty string and a valid URI/IRI');
+                    throw new Exception\InvalidArgumentException('Invalid parameter: "uri" must be a non-empty string and a valid URI/IRI');
                 }
                 $generator['uri'] = $data['uri'];
             }
         } else {
             if (empty($name) || !is_string($name)) {
-                throw new Exception('Invalid parameter: "name" must be a non-empty string');
+                throw new Exception\InvalidArgumentException('Invalid parameter: "name" must be a non-empty string');
             }
             $generator = array('name' => $name);
             if (isset($version)) {
                 if (empty($version) || !is_string($version)) {
-                    throw new Exception('Invalid parameter: "version" must be a non-empty string');
+                    throw new Exception\InvalidArgumentException('Invalid parameter: "version" must be a non-empty string');
                 }
                 $generator['version'] = $version;
             }
             if (isset($uri)) {
                 if (empty($uri) || !is_string($uri) || !Uri\UriFactory::factory($uri)->isValid()) {
-                    throw new Exception('Invalid parameter: "uri" must be a non-empty string and a valid URI/IRI');
+                    throw new Exception\InvalidArgumentException('Invalid parameter: "uri" must be a non-empty string and a valid URI/IRI');
                 }
                 $generator['uri'] = $uri;
             }
@@ -254,6 +256,7 @@ class AbstractFeed
      * Set the feed ID - URI or URN (via PCRE pattern) supported
      *
      * @param string $id
+     * @throws Exception\InvalidArgumentException
      */
     public function setId($id)
     {
@@ -261,7 +264,7 @@ class AbstractFeed
             && !preg_match("#^urn:[a-zA-Z0-9][a-zA-Z0-9\-]{1,31}:([a-zA-Z0-9\(\)\+\,\.\:\=\@\;\$\_\!\*\-]|%[0-9a-fA-F]{2})*#", $id)
             && !$this->_validateTagUri($id)
         ) {
-            throw new Exception('Invalid parameter: parameter must be a non-empty string and valid URI/IRI');
+            throw new Exception\InvalidArgumentException('Invalid parameter: parameter must be a non-empty string and valid URI/IRI');
         }
         $this->_data['id'] = $id;
     }
@@ -305,13 +308,14 @@ class AbstractFeed
      * 'height' and 'description'. Only 'uri' is required and used for Atom rendering.
      *
      * @param array $data
+     * @throws Exception\InvalidArgumentException
      */
     public function setImage(array $data)
     {
         if (empty($data['uri']) || !is_string($data['uri'])
             || !Uri\UriFactory::factory($data['uri'])->isValid()
         ) {
-            throw new Exception('Invalid parameter: parameter \'uri\''
+            throw new Exception\InvalidArgumentException('Invalid parameter: parameter \'uri\''
             . ' must be a non-empty string and valid URI/IRI');
         }
         $this->_data['image'] = $data;
@@ -321,11 +325,12 @@ class AbstractFeed
      * Set the feed language
      *
      * @return string|null
+     * @throws Exception\InvalidArgumentException
      */
     public function setLanguage($language)
     {
         if (empty($language) || !is_string($language)) {
-            throw new Exception('Invalid parameter: parameter must be a non-empty string');
+            throw new Exception\InvalidArgumentException('Invalid parameter: parameter must be a non-empty string');
         }
         $this->_data['language'] = $language;
     }
@@ -334,11 +339,12 @@ class AbstractFeed
      * Set a link to the HTML source
      *
      * @param string $link
+     * @throws Exception\InvalidArgumentException
      */
     public function setLink($link)
     {
         if (empty($link) || !is_string($link) || !Uri\UriFactory::factory($link)->isValid()) {
-            throw new Exception('Invalid parameter: parameter must be a non-empty string and valid URI/IRI');
+            throw new Exception\InvalidArgumentException('Invalid parameter: parameter must be a non-empty string and valid URI/IRI');
         }
         $this->_data['link'] = $link;
     }
@@ -347,14 +353,15 @@ class AbstractFeed
      * Set a link to an XML feed for any feed type/version
      *
      * @return string|null
+     * @throws Exception\InvalidArgumentException
      */
     public function setFeedLink($link, $type)
     {
         if (empty($link) || !is_string($link) || !Uri\UriFactory::factory($link)->isValid()) {
-            throw new Exception('Invalid parameter: "link"" must be a non-empty string and valid URI/IRI');
+            throw new Exception\InvalidArgumentException('Invalid parameter: "link"" must be a non-empty string and valid URI/IRI');
         }
         if (!in_array(strtolower($type), array('rss', 'rdf', 'atom'))) {
-            throw new Exception('Invalid parameter: "type"; You must declare the type of feed the link points to, i.e. RSS, RDF or Atom');
+            throw new Exception\InvalidArgumentException('Invalid parameter: "type"; You must declare the type of feed the link points to, i.e. RSS, RDF or Atom');
         }
         $this->_data['feedLinks'][strtolower($type)] = $link;
     }
@@ -363,11 +370,12 @@ class AbstractFeed
      * Set the feed title
      *
      * @return string|null
+     * @throws Exception\InvalidArgumentException
      */
     public function setTitle($title)
     {
         if (empty($title) || !is_string($title)) {
-            throw new Exception('Invalid parameter: parameter must be a non-empty string');
+            throw new Exception\InvalidArgumentException('Invalid parameter: parameter must be a non-empty string');
         }
         $this->_data['title'] = $title;
     }
@@ -376,11 +384,12 @@ class AbstractFeed
      * Set the feed character encoding
      *
      * @param string $encoding
+     * @throws Exception\InvalidArgumentException
      */
     public function setEncoding($encoding)
     {
         if (empty($encoding) || !is_string($encoding)) {
-            throw new Exception('Invalid parameter: parameter must be a non-empty string');
+            throw new Exception\InvalidArgumentException('Invalid parameter: parameter must be a non-empty string');
         }
         $this->_data['encoding'] = $encoding;
     }
@@ -389,11 +398,12 @@ class AbstractFeed
      * Set the feed's base URL
      *
      * @param string $url
+     * @throws Exception\InvalidArgumentException
      */
     public function setBaseUrl($url)
     {
         if (empty($url) || !is_string($url) || !Uri\UriFactory::factory($url)->isValid()) {
-            throw new Exception('Invalid parameter: "url" array value'
+            throw new Exception\InvalidArgumentException('Invalid parameter: "url" array value'
             . ' must be a non-empty string and valid URI/IRI');
         }
         $this->_data['baseUrl'] = $url;
@@ -403,11 +413,12 @@ class AbstractFeed
      * Add a Pubsubhubbub hub endpoint URL
      *
      * @param string $url
+     * @throws Exception\InvalidArgumentException
      */
     public function addHub($url)
     {
         if (empty($url) || !is_string($url) || !Uri\UriFactory::factory($url)->isValid()) {
-            throw new Exception('Invalid parameter: "url" array value'
+            throw new Exception\InvalidArgumentException('Invalid parameter: "url" array value'
             . ' must be a non-empty string and valid URI/IRI');
         }
         if (!isset($this->_data['hubs'])) {
@@ -432,11 +443,12 @@ class AbstractFeed
      * Add a feed category
      *
      * @param string $category
+     * @throws Exception\InvalidArgumentException
      */
     public function addCategory(array $category)
     {
         if (!isset($category['term'])) {
-            throw new Exception('Each category must be an array and '
+            throw new Exception\InvalidArgumentException('Each category must be an array and '
             . 'contain at least a "term" element containing the machine '
             . ' readable category name');
         }
@@ -445,7 +457,7 @@ class AbstractFeed
                 || !is_string($category['scheme'])
                 || !Uri\UriFactory::factory($category['scheme'])->isValid()
             ) {
-                throw new Exception('The Atom scheme or RSS domain of'
+                throw new Exception\InvalidArgumentException('The Atom scheme or RSS domain of'
                 . ' a category must be a valid URI');
             }
         }
@@ -753,18 +765,19 @@ class AbstractFeed
      * @param  string $method
      * @param  array $args
      * @return mixed
-     * @throws Exception if no extensions implements the method
+     * @throws Exception\BadMethodCallException if no extensions implements the method
      */
     public function __call($method, $args)
     {
         foreach ($this->_extensions as $extension) {
             try {
                 return call_user_func_array(array($extension, $method), $args);
-            } catch (Exception\InvalidMethodException $e) {
+            } catch (Exception\BadMethodCallException $e) {
             }
         }
-        throw new Exception('Method: ' . $method
-            . ' does not exist and could not be located on a registered Extension');
+        throw new Exception\BadMethodCallException(
+            'Method: ' . $method . ' does not exist and could not be located on a registered Extension'
+        );
     }
 
     /**
@@ -778,7 +791,7 @@ class AbstractFeed
         $exts = $all['feed'];
         foreach ($exts as $ext) {
             if (!$className = Writer::getPluginLoader()->getClassName($ext)) {
-                throw new Exception(sprintf('Unable to load extension "%s"; could not resolve to class', $ext));
+                throw new Exception\RuntimeException(sprintf('Unable to load extension "%s"; could not resolve to class', $ext));
             }
             $this->_extensions[$ext] = new $className();
             $this->_extensions[$ext]->setEncoding($this->getEncoding());

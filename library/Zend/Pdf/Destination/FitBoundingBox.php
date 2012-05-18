@@ -35,11 +35,6 @@ use Zend\Pdf;
  * factors are different, use the smaller of the two, centering the bounding box
  * within the window in the other dimension.
  *
- * @uses       \Zend\Pdf\Destination\Explicit
- * @uses       \Zend\Pdf\InternalType\ArrayObject
- * @uses       \Zend\Pdf\InternalType\NameObject
- * @uses       \Zend\Pdf\InternalType\NumericObject
- * @uses       \Zend\Pdf\Exception
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Destination
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -52,7 +47,7 @@ class FitBoundingBox extends Explicit
      *
      * @param \Zend\Pdf\Page|integer $page  Page object or page number
      * @return \Zend\Pdf\Destination\FitBoundingBox
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
     public static function create($page)
     {

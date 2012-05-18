@@ -28,7 +28,7 @@ prepare for Release Candidate status.
 
             ```php
             $xml = new Zend\Config\Reader\Xml(); 
-            $config = new Zend\Config\Config($xml->fromFile($filename);
+            $config = new Zend\Config\Config($xml->fromFile($filename));
             ```
             or:
 
@@ -128,7 +128,7 @@ If you find code in this release behaving in an unexpected manner or
 contrary to its documented behavior, please create an issue in the Zend
 Framework issue tracker at:
 
-http://framework.zend.com/issues
+http://framework.zend.com/issues/browse/ZF2
 
 If you would like to be notified of new releases, you can subscribe to
 the fw-announce mailing list by sending a blank message to

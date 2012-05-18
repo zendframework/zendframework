@@ -21,8 +21,9 @@
 
 namespace Zend\Service\LiveDocx;
 
-use Zend\Config\Config,
-    Zend\Soap\Client as SoapClient;
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
+use Zend\Soap\Client as SoapClient;
 
 /**
  * @category   Zend
@@ -74,18 +75,17 @@ abstract class AbstractLiveDocx
     /**
      * Constructor.
      *
-     * Optionally, pass an array of options (or \Zend\Config\Config object).
+     * Optionally, pass an array of options or Traversable object.
      *
-     * @param  array|Config $options
-     * @return void
+     * @param  array|Traversable $options
      * @since  LiveDocx 1.0
      */
     public function __construct($options = null)
     {
         $this->setIsLoggedIn(false);
 
-        if ($options instanceof Config) {
-            $options = $options->toArray();
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
         }
 
         if (is_array($options)) {
@@ -106,8 +106,8 @@ abstract class AbstractLiveDocx
 
     /**
      * Set options. Valid options are username, password and soapClient.
-     * 
-     * @param  $options
+     *
+     * @param  array $options
      * @throws Exception\InvalidArgumentException
      * @return AbstractLiveDocx
      * @since  LiveDocx 1.2

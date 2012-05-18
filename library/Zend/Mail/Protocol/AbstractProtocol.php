@@ -22,12 +22,9 @@
 
 namespace Zend\Mail\Protocol;
 
-use Zend\Validator\Hostname as HostnameValidator,
-    Zend\Validator;
+use Zend\Validator;
 
 /**
- * Zend_Mail_Protocol_Abstract
- *
  * Provides low-level methods for concrete adapters to communicate with a remote mail server and track requests and responses.
  *
  * @category   Zend
@@ -73,7 +70,7 @@ abstract class AbstractProtocol
 
     /**
      * Instance of Zend\Validator\ValidatorChain to check hostnames
-     * @var Validator\ValidatorChain
+     * @var \Zend\Validator\ValidatorChain
      */
     protected $_validHost;
 
@@ -120,12 +117,11 @@ abstract class AbstractProtocol
      * @param  string  $host OPTIONAL Hostname of remote connection (default: 127.0.0.1)
      * @param  integer $port OPTIONAL Port number (default: null)
      * @throws Exception\RuntimeException
-     * @return void
      */
     public function __construct($host = '127.0.0.1', $port = null)
     {
         $this->_validHost = new Validator\ValidatorChain();
-        $this->_validHost->addValidator(new HostnameValidator(HostnameValidator::ALLOW_ALL));
+        $this->_validHost->addValidator(new Validator\Hostname(Validator\Hostname::ALLOW_ALL));
 
         if (!$this->_validHost->isValid($host)) {
             throw new Exception\RuntimeException(implode(', ', $this->_validHost->getMessages()));
@@ -139,7 +135,6 @@ abstract class AbstractProtocol
     /**
      * Class destructor to cleanup open resources
      *
-     * @return void
      */
     public function __destruct()
     {
@@ -150,7 +145,6 @@ abstract class AbstractProtocol
      * Set the maximum log size 
      * 
      * @param integer $maximumLog Maximum log size
-     * @return void
      */
     public function setMaximumLog($maximumLog)
     {
@@ -213,7 +207,6 @@ abstract class AbstractProtocol
     /**
      * Reset the transaction log
      *
-     * @return void
      */
     public function resetLog()
     {
@@ -223,8 +216,7 @@ abstract class AbstractProtocol
     /**
      * Add the transaction log
      *
-     * @param  string new transaction
-     * @return void
+     * @param  string $value new transaction
      */
     protected function _addLog($value)
     {
@@ -270,7 +262,6 @@ abstract class AbstractProtocol
     /**
      * Disconnect from remote host and free resource
      *
-     * @return void
      */
     protected function _disconnect()
     {
@@ -311,7 +302,7 @@ abstract class AbstractProtocol
     /**
      * Get a line from the stream.
      *
-     * @var    integer $timeout Per-request timeout value if applicable
+     * @param  integer $timeout Per-request timeout value if applicable
      * @throws Exception\RuntimeException
      * @return string
      */
@@ -327,10 +318,10 @@ abstract class AbstractProtocol
         }
 
         // Retrieve response
-        $reponse = fgets($this->_socket, 1024);
+        $response = fgets($this->_socket, 1024);
 
         // Save request to internal log
-        $this->_addLog($reponse);
+        $this->_addLog($response);
 
         // Check meta data to ensure connection is still valid
         $info = stream_get_meta_data($this->_socket);
@@ -339,11 +330,11 @@ abstract class AbstractProtocol
             throw new Exception\RuntimeException($this->_host . ' has timed out');
         }
 
-        if ($reponse === false) {
+        if ($response === false) {
             throw new Exception\RuntimeException('Could not read from ' . $this->_host);
         }
 
-        return $reponse;
+        return $response;
     }
 
 
@@ -354,6 +345,7 @@ abstract class AbstractProtocol
      * Throws a Zend_Mail_Protocol_Exception if an unexpected code is returned.
      *
      * @param  string|array $code One or more codes that indicate a successful response
+     * @param  integer $timeout Per-request timeout value if applicable
      * @throws Exception\RuntimeException
      * @return string Last line of response string
      */

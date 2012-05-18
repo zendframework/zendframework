@@ -19,6 +19,9 @@
  */
 
 namespace Zend\Filter\Encrypt;
+
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
 use Zend\Filter\Exception,
     Zend\Filter\Compress,
     Zend\Filter\Decompress;
@@ -26,14 +29,12 @@ use Zend\Filter\Exception,
 /**
  * Encryption adapter for mcrypt
  *
- * @uses       \Zend\Filter\Encrypt\EncryptionAlgorithm
- * @uses       \Zend\Filter\Exception
  * @category   Zend
  * @package    Zend_Filter
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Mcrypt implements EncryptionAlgorithm
+class Mcrypt implements EncryptionAlgorithmInterface
 {
     /**
      * Definitions for encryption
@@ -65,7 +66,7 @@ class Mcrypt implements EncryptionAlgorithm
     /**
      * Class constructor
      *
-     * @param string|array|\Zend\Config\Config $options Cryption Options
+     * @param string|array|\Traversable $options Encryption Options
      */
     public function __construct($options)
     {
@@ -73,8 +74,8 @@ class Mcrypt implements EncryptionAlgorithm
             throw new Exception\ExtensionNotLoadedException('This filter needs the mcrypt extension');
         }
 
-        if ($options instanceof \Zend\Config\Config) {
-            $options = $options->toArray();
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
         } elseif (is_string($options)) {
             $options = array('key' => $options);
         } elseif (!is_array($options)) {
@@ -212,7 +213,7 @@ class Mcrypt implements EncryptionAlgorithm
     }
 
     /**
-     * Defined by Zend_Filter_Interface
+     * Defined by Zend\Filter\FilterInterface
      *
      * Encrypts $value with the defined settings
      *
@@ -237,7 +238,7 @@ class Mcrypt implements EncryptionAlgorithm
     }
 
     /**
-     * Defined by Zend_Filter_Interface
+     * Defined by Zend\Filter\FilterInterface
      *
      * Decrypts $value with the defined settings
      *
@@ -274,7 +275,7 @@ class Mcrypt implements EncryptionAlgorithm
     /**
      * Open a cipher
      *
-     * @throws \Zend\Filter\Exception When the cipher can not be opened
+     * @throws Exception\RuntimeException When the cipher can not be opened
      * @return resource Returns the opened cipher
      */
     protected function _openCipher()

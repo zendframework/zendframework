@@ -20,13 +20,12 @@
 
 namespace Zend\Filter;
 
-use Zend\Config\Config,
-    Zend\Locale\Locale as ZendLocale,
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
+use Zend\Locale\Locale as ZendLocale,
     Zend\Registry;
 
 /**
- * @uses       Zend\Filter\AbstractFilter
- * @uses       Zend\Locale\Locale
  * @category   Zend
  * @package    Zend_Filter
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -51,21 +50,21 @@ class Alnum extends AbstractFilter
     /**
      * Locale to use
      *
-     * @var \Zend\Locale\Locale object
+     * @var ZendLocale object
      */
     protected $locale;
 
     /**
      * Sets default option values for this instance
      *
-     * @param  boolean $allowWhiteSpace
-     * @return void
+     * @param  boolean|Traversable|array $allowWhiteSpace
      */
     public function __construct($options = false)
     {
-        if ($options instanceof Config) {
-            $options = $options->toArray();
-        } elseif (!is_array($options)) {
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
+        }
+        if (!is_array($options)) {
             $options = func_get_args();
             $temp    = array();
             if (!empty($options)) {
@@ -108,7 +107,7 @@ class Alnum extends AbstractFilter
      * Sets the allowWhiteSpace option
      *
      * @param boolean $allowWhiteSpace
-     * @return \Zend\Filter\Alnum Provides a fluent interface
+     * @return Alnum Provides a fluent interface
      */
     public function setAllowWhiteSpace($allowWhiteSpace)
     {
@@ -130,7 +129,7 @@ class Alnum extends AbstractFilter
      * Sets the locale option
      *
      * @param boolean $locale
-     * @return \Zend\Filter\Alnum Provides a fluent interface
+     * @return Alnum Provides a fluent interface
      */
     public function setLocale($locale = null)
     {
@@ -139,7 +138,7 @@ class Alnum extends AbstractFilter
     }
 
     /**
-     * Defined by Zend_Filter_Interface
+     * Defined by Zend\Filter\FilterInterface
      *
      * Returns the string $value, removing all but alphabetic and digit characters
      *

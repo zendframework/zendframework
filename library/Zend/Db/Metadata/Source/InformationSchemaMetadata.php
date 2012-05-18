@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Db
- * @subpackage Metadata
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Db
  */
 
 namespace Zend\Db\Metadata\Source;
@@ -29,21 +18,22 @@ use Zend\Db\Metadata\MetadataInterface,
  * @category   Zend
  * @package    Zend_Db
  * @subpackage Metadata
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class InformationSchemaMetadata implements MetadataInterface
 {
+
     /**
      *
      * @var Adapter 
      */
     protected $adapter = null;
+
     /**
      *
      * @var string
      */
     protected $defaultSchema = null;
+
     /**
      *
      * @var array
@@ -69,6 +59,7 @@ class InformationSchemaMetadata implements MetadataInterface
     {
         // TODO: Implement getSchemas() method.
     }
+
     /**
      * Get table names
      * 
@@ -110,6 +101,7 @@ class InformationSchemaMetadata implements MetadataInterface
         $this->data[$database][$schema]['tables'] = $tables;
         return $tables;
     }
+
     /**
      * Get tables
      * 
@@ -131,6 +123,7 @@ class InformationSchemaMetadata implements MetadataInterface
         }
         return $tables;
     }
+
     /**
      * Get table
      * 
@@ -151,6 +144,7 @@ class InformationSchemaMetadata implements MetadataInterface
         $table->setColumns($this->getColumns($tableName, $schema, $database));
         return $table;
     }
+
     /**
      * Get view names
      * 
@@ -161,6 +155,7 @@ class InformationSchemaMetadata implements MetadataInterface
     {
         // TODO: Implement getViewNames() method.
     }
+
     /**
      * Get views
      * 
@@ -171,6 +166,7 @@ class InformationSchemaMetadata implements MetadataInterface
     {
         // TODO: Implement getViews() method.
     }
+
     /**
      * Get view
      * 
@@ -182,6 +178,7 @@ class InformationSchemaMetadata implements MetadataInterface
     {
         // TODO: Implement getView() method.
     }
+
     /**
      * Gt column names
      * 
@@ -208,6 +205,7 @@ class InformationSchemaMetadata implements MetadataInterface
         }
         return $columns;
     }
+
     /**
      * Get columns
      * 
@@ -234,6 +232,7 @@ class InformationSchemaMetadata implements MetadataInterface
         }
         return $columns;
     }
+
     /**
      * Get column
      * 
@@ -302,6 +301,7 @@ class InformationSchemaMetadata implements MetadataInterface
 
         return $constraints;
     }
+
     /**
      * Get constraint
      * 
@@ -340,6 +340,7 @@ class InformationSchemaMetadata implements MetadataInterface
         $constraint->setKeys($this->getConstraintKeys($constraintName, $table, $schema, $database));
         return $constraint;
     }
+
     /**
      * Get constraint keys
      * 
@@ -397,6 +398,7 @@ class InformationSchemaMetadata implements MetadataInterface
     {
         // TODO: Implement getTriggerNames() method.
     }
+
     /**
      * Get triggers
      * 
@@ -407,6 +409,7 @@ class InformationSchemaMetadata implements MetadataInterface
     {
         // TODO: Implement getTriggers() method.
     }
+
     /**
      * Get trigger
      * 
@@ -418,6 +421,7 @@ class InformationSchemaMetadata implements MetadataInterface
     {
         // TODO: Implement getTrigger() method.
     }
+
     /**
      * Load column data
      * 
@@ -470,7 +474,7 @@ class InformationSchemaMetadata implements MetadataInterface
         $this->prepareDataHeirarchy($database, $schema, array('columns'));
         $this->data[$database][$schema]['columns'] = $columnByTableInfos;
     }
-    
+
     /**
      * Load constraint data
      * 
@@ -483,7 +487,7 @@ class InformationSchemaMetadata implements MetadataInterface
         $this->loadConstraintDataKeys($schema, $database);
         $this->loadConstraintReferences($schema, $database);
     }
-    
+
     /**
      * Load constraint data names
      * 
@@ -524,6 +528,7 @@ class InformationSchemaMetadata implements MetadataInterface
         $this->prepareDataHeirarchy($database, $schema, array('constraints', 'names'));
         $this->data[$database][$schema]['constraints']['names'] = $constraintData;
     }
+
     /**
      * Load constraint data keys
      * 
@@ -568,6 +573,7 @@ class InformationSchemaMetadata implements MetadataInterface
         $this->prepareDataHeirarchy($database, $schema, array('constraints', 'keys'));
         $this->data[$database][$schema]['constraints']['keys'] = $constraintKeyData;
     }
+
     /**
      * Load constraint references
      * 
@@ -629,6 +635,7 @@ class InformationSchemaMetadata implements MetadataInterface
         $this->prepareDataHeirarchy($database, $schema, array('constraints', 'keys'));
         $this->data[$database][$schema]['constraints']['references'] = $constraintRefData;
     }
+
     /**
      * Prepare data heirarchy
      * 

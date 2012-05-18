@@ -20,11 +20,10 @@
 
 namespace Zend\Validator;
 
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
+
 /**
- * @uses       RecursiveArrayIterator
- * @uses       RecursiveIteratorIterator
- * @uses       \Zend\Validator\AbstractValidator
- * @uses       \Zend\Validator\Exception
  * @category   Zend
  * @package    Zend_Validate
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -65,14 +64,14 @@ class InArray extends AbstractValidator
     /**
      * Sets validator options
      *
-     * @param  array|\Zend\Config\Config $haystack
-     * @return void
+     * @param  array|Traversable $options
      */
     public function __construct($options = null)
     {
-        if ($options instanceof \Zend\Config\Config) {
-            $options = $options->toArray();
-        } else if (!is_array($options)) {
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
+        }
+        if (!is_array($options)) {
             throw new Exception\InvalidArgumentException('Array expected as parameter');
         } else {
             $count = func_num_args();

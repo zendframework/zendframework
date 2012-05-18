@@ -183,7 +183,7 @@ class Headers implements Iterator, Countable
                     $this->addHeaderLine(key($value), current($value));
                 } elseif (is_array($value) && count($value) == 2) {
                     $this->addHeaderLine($value[0], $value[1]);
-                } elseif ($value instanceof Header\HeaderDescription) {
+                } elseif ($value instanceof Header\HeaderInterface) {
                     $this->addHeader($value);
                 }
             } elseif (is_string($name)) {
@@ -231,10 +231,10 @@ class Headers implements Iterator, Countable
     /**
      * Add a Header to this container, for raw values @see addHeaderLine() and addHeaders()
      * 
-     * @param  Header\HeaderDescription $header
+     * @param  Header\HeaderInterface $header
      * @return Headers
      */
-    public function addHeader(Header\HeaderDescription $header)
+    public function addHeader(Header\HeaderInterface $header)
     {
         $key = str_replace(array('-', '_', ' ', '.'), '', strtolower($header->getFieldName()));
 
@@ -246,10 +246,10 @@ class Headers implements Iterator, Countable
     /**
      * Remove a Header from the container
      *
-     * @param Header\HeaderDescription $header
+     * @param Header\HeaderInterface $header
      * @return bool
      */
-    public function removeHeader(Header\HeaderDescription $header)
+    public function removeHeader(Header\HeaderInterface $header)
     {
         $index = array_search($header, $this->headers, true);
         if ($index !== false) {
@@ -277,7 +277,7 @@ class Headers implements Iterator, Countable
      * Get all headers of a certain name/type
      * 
      * @param  string $name
-     * @return false|Header\HeaderDescription|\ArrayIterator
+     * @return false|Header\HeaderInterface|\ArrayIterator
      */
     public function get($name)
     {
@@ -288,7 +288,7 @@ class Headers implements Iterator, Countable
 
         $class = ($this->getPluginClassLoader()->load($key)) ?: 'Zend\Http\Header\GenericHeader';
 
-        if (in_array('Zend\Http\Header\MultipleHeaderDescription', class_implements($class, true))) {
+        if (in_array('Zend\Http\Header\MultipleHeaderInterface', class_implements($class, true))) {
             $headers = array();
             foreach (array_keys($this->headersKeys, $key) as $index) {
                 if (is_array($this->headers[$index])) {
@@ -367,7 +367,7 @@ class Headers implements Iterator, Countable
     /**
      * Return the current value for this iterator, lazy loading it if need be
      *
-     * @return Header\HeaderDescription
+     * @return Header\HeaderInterface
      */
     public function current()
     {
@@ -423,15 +423,15 @@ class Headers implements Iterator, Countable
     public function toArray()
     {
         $headers = array();
-        /* @var $header Header\HeaderDescription */
+        /* @var $header Header\HeaderInterface */
         foreach ($this->headers as $header) {
-            if ($header instanceof Header\MultipleHeaderDescription) {
+            if ($header instanceof Header\MultipleHeaderInterface) {
                 $name = $header->getFieldName();
                 if (!isset($headers[$name])) {
                     $headers[$name] = array();
                 }
                 $headers[$name][] = $header->getFieldValue();
-            } elseif ($header instanceof Header\HeaderDescription) {
+            } elseif ($header instanceof Header\HeaderInterface) {
                 $headers[$header->getFieldName()] = $header->getFieldValue();
             } else {
                 $matches = null;
@@ -466,7 +466,7 @@ class Headers implements Iterator, Countable
         $current = $this->headers[$index];
 
         $key = $this->headersKeys[$index];
-        /* @var $class Header\HeaderDescription */
+        /* @var $class Header\HeaderInterface */
         $class = ($this->getPluginClassLoader()->load($key)) ?: 'Zend\Http\Header\GenericHeader';
 
         $headers = $class::fromString($current['line']);

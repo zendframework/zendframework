@@ -11,19 +11,15 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend\Cloud\DocumentService
+ * @package    Zend_Cloud_DocumentService
  * @subpackage Adapter
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * namespace
- */
 namespace Zend\Cloud\DocumentService\Adapter;
 
-use Zend\Cloud\DocumentService\Adapter,
-    Zend\Cloud\DocumentService\Document,
+use Zend\Cloud\DocumentService\Document,
     Zend\Cloud\DocumentService\DocumentSet,
     Zend\Cloud\DocumentService\Query;
 
@@ -36,12 +32,12 @@ use Zend\Cloud\DocumentService\Adapter,
  * - query class objects
  *
  * @category   Zend
- * @package    Zend\Cloud\DocumentService
+ * @package    Zend_Cloud_DocumentService
  * @subpackage Adapter
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class AbstractAdapter implements Adapter
+abstract class AbstractAdapter implements AdapterInterface
 {
     const DOCUMENT_CLASS    = 'document_class';
     const DOCUMENTSET_CLASS = 'documentset_class';
@@ -70,7 +66,7 @@ abstract class AbstractAdapter implements Adapter
      * Set the class for document objects
      *
      * @param  string $class
-     * @return Zend\Cloud\DocumentService\Adapter\AbstractAdapter
+     * @return \Zend\Cloud\DocumentService\Adapter\AbstractAdapter
      */
     public function setDocumentClass($class)
     {
@@ -92,7 +88,7 @@ abstract class AbstractAdapter implements Adapter
      * Set the class for document set objects
      *
      * @param  string $class
-     * @return Zend\Cloud\DocumentService\Adapter\AbstractAdapter
+     * @return \Zend\Cloud\DocumentService\Adapter\AbstractAdapter
      */
     public function setDocumentSetClass($class)
     {
@@ -114,7 +110,7 @@ abstract class AbstractAdapter implements Adapter
      * Set the query class for query objects
      *
      * @param  string $class
-     * @return Zend\Cloud\DocumentService\Adapter\AbstractAdapter
+     * @return \Zend\Cloud\DocumentService\Adapter\AbstractAdapter
      */
     public function setQueryClass($class)
     {

@@ -29,8 +29,6 @@ use Zend\Markup\Renderer\Markup\AbstractMarkup,
 /**
  * Abstract markup
  *
- * @uses       \Zend\Markup\Renderer\Markup\AbstractMarkup
- * @uses       \Zend\Markup\Renderer\AbstractRenderer
  * @category   Zend
  * @package    Zend_Markup
  * @subpackage Renderer_Markup_Html
@@ -43,7 +41,6 @@ abstract class AbstractHtml extends AbstractMarkup
     /**
      * Constructor, adds default filters for the filter chain
      *
-     * @return void
      */
     public function __construct()
     {

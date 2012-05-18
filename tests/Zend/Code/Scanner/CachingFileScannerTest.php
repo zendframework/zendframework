@@ -7,6 +7,10 @@ use Zend\Code\Scanner\CachingFileScanner,
 
 class CachingFileScannerTest extends \PHPUnit_Framework_TestCase
 {
+    protected function setUp(){
+        CachingFileScanner::clearCache();
+    }
+
     public function testCachingFileScannerWillUseSameInternalFileScannerWithMatchingFileNameAnAnnotationManagerObject()
     {
         // single entry, based on file

@@ -39,11 +39,11 @@ class Event extends BaseEvent
      * Accept a storage adapter and its parameters.
      *
      * @param  string $name Event name
-     * @param  Adapter $storage
+     * @param  Adapter\AdapterInterface $storage
      * @param  ArrayObject $params
      * @return void
      */
-    public function __construct($name, Adapter $storage, ArrayObject $params)
+    public function __construct($name, Adapter\AdapterInterface $storage, ArrayObject $params)
     {
         parent::__construct($name, $storage, $params);
     }
@@ -63,11 +63,11 @@ class Event extends BaseEvent
     /**
      * Alias of setTarget
      *
-     * @param  Adapter $adapter
+     * @param  Adapter\AdapterInterface $adapter
      * @return Event
      * @see    \Zend\EventManager\Event::setTarget()
      */
-    public function setStorage(Adapter $adapter)
+    public function setStorage(Adapter\AdapterInterface $adapter)
     {
         $this->target = $adapter;
         return $this;
@@ -76,7 +76,7 @@ class Event extends BaseEvent
     /**
      * Alias of getTarget
      *
-     * @return Adapter
+     * @return Adapter\AdapterInterface
      */
     public function getStorage()
     {

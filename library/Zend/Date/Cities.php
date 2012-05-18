@@ -26,7 +26,6 @@ namespace Zend\Date;
  * Holds the geographical data for all capital cities and many others worldwide
  * Original data from http://www.fallingrain.com/world/
  *
- * @uses       \Zend\Date\Exception
  * @category   Zend
  * @package    Zend_Date
  * @subpackage Zend_Date_Cities

@@ -38,17 +38,17 @@ class RendererBroker extends PluginBroker
     protected $defaultClassLoader = 'Zend\Markup\RendererLoader';
 
     /**
-     * @var Parser instance to inject in renderer
+     * @var Parser\ParserInterface instance to inject in renderer
      */
     protected $parser;
 
     /**
      * Inject parser into broker, for injecting into renderer
      * 
-     * @param  Parser $parser 
+     * @param  Parser\ParserInterface $parser
      * @return RendererBroker
      */
-    public function setParser(Parser $parser)
+    public function setParser(Parser\ParserInterface $parser)
     {
         $this->parser = $parser;
         return $this;
@@ -57,7 +57,7 @@ class RendererBroker extends PluginBroker
     /**
      * Retrieve parser instance
      * 
-     * @return null|Parser
+     * @return null|Parser\ParserInterface
      */
     public function getParser()
     {
@@ -89,12 +89,14 @@ class RendererBroker extends PluginBroker
      * 
      * @param  mixed $plugin 
      * @return true
-     * @throws Exception
+     * @throws Exception\InvalidArgumentException
      */
     protected function validatePlugin($plugin)
     {
         if (!$plugin instanceof Renderer\AbstractRenderer) {
-            throw new Exception('Markup renderers must extend Zend\Markup\Renderer\AbstractRenderer');
+            throw new Exception\InvalidArgumentException(
+                'Markup renderers must extend Zend\Markup\Renderer\AbstractRenderer'
+            );
         }
         return true;
     }

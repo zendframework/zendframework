@@ -22,9 +22,8 @@
 namespace Zend\Cache\Storage\Plugin;
 
 use Zend\Cache\Exception,
-    Zend\Cache\Storage\Adapter,
     Zend\Cache\Storage\Event,
-    Zend\EventManager\EventCollection;
+    Zend\EventManager\EventManagerInterface;
 
 /**
  * @category   Zend
@@ -45,18 +44,19 @@ class IgnoreUserAbort extends AbstractPlugin
     /**
      * The storage adapter target who activated ignore_user_abort.
      *
-     * @var null|Adapter
+     * @var null|\Zend\Cache\Storage\Adapter\AdapterInterface
      */
     protected $activatedTarget = null;
 
     /**
      * Attach
      *
-     * @param  EventCollection $eventCollection
+     * @param  EventManagerInterface $events
+     * @param  int                   $priority
      * @return Serializer
      * @throws Exception\LogicException
      */
-    public function attach(EventCollection $events)
+    public function attach(EventManagerInterface $events, $priority = 1)
     {
         $index = spl_object_hash($events);
         if (isset($this->handles[$index])) {
@@ -69,50 +69,50 @@ class IgnoreUserAbort extends AbstractPlugin
         $cbOnBefore = array($this, 'onBefore');
         $cbOnAfter  = array($this, 'onAfter');
 
-        $handles[] = $events->attach('setItem.pre',       $cbOnBefore);
-        $handles[] = $events->attach('setItem.post',      $cbOnAfter);
-        $handles[] = $events->attach('setItem.exception', $cbOnAfter);
+        $handles[] = $events->attach('setItem.pre',       $cbOnBefore, $priority);
+        $handles[] = $events->attach('setItem.post',      $cbOnAfter, $priority);
+        $handles[] = $events->attach('setItem.exception', $cbOnAfter, $priority);
 
-        $handles[] = $events->attach('setItems.pre',       $cbOnBefore);
-        $handles[] = $events->attach('setItems.post',      $cbOnAfter);
-        $handles[] = $events->attach('setItems.exception', $cbOnAfter);
+        $handles[] = $events->attach('setItems.pre',       $cbOnBefore, $priority);
+        $handles[] = $events->attach('setItems.post',      $cbOnAfter, $priority);
+        $handles[] = $events->attach('setItems.exception', $cbOnAfter, $priority);
 
-        $handles[] = $events->attach('addItem.pre',       $cbOnBefore);
-        $handles[] = $events->attach('addItem.post',      $cbOnAfter);
-        $handles[] = $events->attach('addItem.exception', $cbOnAfter);
+        $handles[] = $events->attach('addItem.pre',       $cbOnBefore, $priority);
+        $handles[] = $events->attach('addItem.post',      $cbOnAfter, $priority);
+        $handles[] = $events->attach('addItem.exception', $cbOnAfter, $priority);
 
-        $handles[] = $events->attach('addItems.pre',       $cbOnBefore);
-        $handles[] = $events->attach('addItems.post',      $cbOnAfter);
-        $handles[] = $events->attach('addItems.exception', $cbOnAfter);
+        $handles[] = $events->attach('addItems.pre',       $cbOnBefore, $priority);
+        $handles[] = $events->attach('addItems.post',      $cbOnAfter, $priority);
+        $handles[] = $events->attach('addItems.exception', $cbOnAfter, $priority);
 
-        $handles[] = $events->attach('replaceItem.pre',       $cbOnBefore);
-        $handles[] = $events->attach('replaceItem.post',      $cbOnAfter);
-        $handles[] = $events->attach('replaceItem.exception', $cbOnAfter);
+        $handles[] = $events->attach('replaceItem.pre',       $cbOnBefore, $priority);
+        $handles[] = $events->attach('replaceItem.post',      $cbOnAfter, $priority);
+        $handles[] = $events->attach('replaceItem.exception', $cbOnAfter, $priority);
 
-        $handles[] = $events->attach('replaceItems.pre',       $cbOnBefore);
-        $handles[] = $events->attach('replaceItems.post',      $cbOnAfter);
-        $handles[] = $events->attach('replaceItems.exception', $cbOnAfter);
+        $handles[] = $events->attach('replaceItems.pre',       $cbOnBefore, $priority);
+        $handles[] = $events->attach('replaceItems.post',      $cbOnAfter, $priority);
+        $handles[] = $events->attach('replaceItems.exception', $cbOnAfter, $priority);
 
-        $handles[] = $events->attach('checkAndSetItem.pre',       $cbOnBefore);
-        $handles[] = $events->attach('checkAndSetItem.post',      $cbOnAfter);
-        $handles[] = $events->attach('checkAndSetItem.exception', $cbOnAfter);
+        $handles[] = $events->attach('checkAndSetItem.pre',       $cbOnBefore, $priority);
+        $handles[] = $events->attach('checkAndSetItem.post',      $cbOnAfter, $priority);
+        $handles[] = $events->attach('checkAndSetItem.exception', $cbOnAfter, $priority);
 
         // increment / decrement item(s)
-        $handles[] = $events->attach('incrementItem.pre',       $cbOnBefore);
-        $handles[] = $events->attach('incrementItem.post',      $cbOnAfter);
-        $handles[] = $events->attach('incrementItem.exception', $cbOnAfter);
+        $handles[] = $events->attach('incrementItem.pre',       $cbOnBefore, $priority);
+        $handles[] = $events->attach('incrementItem.post',      $cbOnAfter, $priority);
+        $handles[] = $events->attach('incrementItem.exception', $cbOnAfter, $priority);
 
-        $handles[] = $events->attach('incrementItems.pre',       $cbOnBefore);
-        $handles[] = $events->attach('incrementItems.post',      $cbOnAfter);
-        $handles[] = $events->attach('incrementItems.exception', $cbOnAfter);
+        $handles[] = $events->attach('incrementItems.pre',       $cbOnBefore, $priority);
+        $handles[] = $events->attach('incrementItems.post',      $cbOnAfter, $priority);
+        $handles[] = $events->attach('incrementItems.exception', $cbOnAfter, $priority);
 
-        $handles[] = $events->attach('decrementItem.pre',       $cbOnBefore);
-        $handles[] = $events->attach('decrementItem.post',      $cbOnAfter);
-        $handles[] = $events->attach('decrementItem.exception', $cbOnAfter);
+        $handles[] = $events->attach('decrementItem.pre',       $cbOnBefore, $priority);
+        $handles[] = $events->attach('decrementItem.post',      $cbOnAfter, $priority);
+        $handles[] = $events->attach('decrementItem.exception', $cbOnAfter, $priority);
 
-        $handles[] = $events->attach('decrementItems.pre',       $cbOnBefore);
-        $handles[] = $events->attach('decrementItems.post',      $cbOnAfter);
-        $handles[] = $events->attach('decrementItems.exception', $cbOnAfter);
+        $handles[] = $events->attach('decrementItems.pre',       $cbOnBefore, $priority);
+        $handles[] = $events->attach('decrementItems.post',      $cbOnAfter, $priority);
+        $handles[] = $events->attach('decrementItems.exception', $cbOnAfter, $priority);
 
         return $this;
     }
@@ -120,11 +120,11 @@ class IgnoreUserAbort extends AbstractPlugin
     /**
      * Detach
      *
-     * @param  EventCollection $events
+     * @param  EventManagerInterface $events
      * @return Serializer
      * @throws Exception\LogicException
      */
-    public function detach(EventCollection $events)
+    public function detach(EventManagerInterface $events)
     {
         $index = spl_object_hash($events);
         if (!isset($this->handles[$index])) {

@@ -11,7 +11,7 @@ class AcceptTest extends \PHPUnit_Framework_TestCase
     public function testAcceptFromStringCreatesValidAcceptHeader()
     {
         $acceptHeader = Accept::fromString('Accept: xxx');
-        $this->assertInstanceOf('Zend\Http\Header\HeaderDescription', $acceptHeader);
+        $this->assertInstanceOf('Zend\Http\Header\HeaderInterface', $acceptHeader);
         $this->assertInstanceOf('Zend\Http\Header\Accept', $acceptHeader);
     }
 

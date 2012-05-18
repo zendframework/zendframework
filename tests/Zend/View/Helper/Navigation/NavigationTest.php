@@ -284,7 +284,7 @@ class NavigationTest extends AbstractTest
             $this->_helper->setRole(1337);
             $this->fail('An invalid argument was given, but a ' .
                         'Zend_View_Exception was not thrown');
-        } catch (View\Exception $e) {
+        } catch (View\Exception\ExceptionInterface $e) {
             $this->assertContains('$role must be a string', $e->getMessage());
         }
     }
@@ -295,7 +295,7 @@ class NavigationTest extends AbstractTest
             $this->_helper->setRole(new \stdClass());
             $this->fail('An invalid argument was given, but a ' .
                         'Zend_View_Exception was not thrown');
-        } catch (View\Exception $e) {
+        } catch (View\Exception\ExceptionInterface $e) {
             $this->assertContains('$role must be a string', $e->getMessage());
         }
     }
@@ -336,7 +336,7 @@ class NavigationTest extends AbstractTest
             Navigation\AbstractHelper::setDefaultRole(1337);
             $this->fail('An invalid argument was given, but a ' .
                         'Zend_View_Exception was not thrown');
-        } catch (View\Exception $e) {
+        } catch (View\Exception\ExceptionInterface $e) {
             $this->assertContains('$role must be', $e->getMessage());
         }
     }
@@ -347,7 +347,7 @@ class NavigationTest extends AbstractTest
             Navigation\AbstractHelper::setDefaultRole(new \stdClass());
             $this->fail('An invalid argument was given, but a ' .
                         'Zend_View_Exception was not thrown');
-        } catch (View\Exception $e) {
+        } catch (View\Exception\ExceptionInterface $e) {
             $this->assertContains('$role must be', $e->getMessage());
         }
     }

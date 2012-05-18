@@ -20,8 +20,10 @@
 
 namespace Zend\Filter;
 
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
+
 /**
- * @uses       Zend\Filter\AbstractFilter
  * @category   Zend
  * @package    Zend_Filter
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -42,14 +44,14 @@ class StringTrim extends AbstractFilter
     /**
      * Sets filter options
      *
-     * @param  string|array|\Zend\Config\Config $options
-     * @return void
+     * @param  string|array|Traversable $options
      */
     public function __construct($options = null)
     {
-        if ($options instanceof \Zend\Config\Config) {
-            $options = $options->toArray();
-        } elseif (!is_array($options)) {
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
+        }
+        if (!is_array($options)) {
             $options          = func_get_args();
             $temp['charlist'] = array_shift($options);
             $options          = $temp;
@@ -74,7 +76,7 @@ class StringTrim extends AbstractFilter
      * Sets the charList option
      *
      * @param  string|null $charList
-     * @return \Zend\Filter\StringTrim Provides a fluent interface
+     * @return StringTrim Provides a fluent interface
      */
     public function setCharList($charList)
     {
@@ -83,7 +85,7 @@ class StringTrim extends AbstractFilter
     }
 
     /**
-     * Defined by Zend_Filter_Interface
+     * Defined by Zend\Filter\FilterInterface
      *
      * Returns the string $value with characters stripped from the beginning and end
      *
@@ -92,6 +94,11 @@ class StringTrim extends AbstractFilter
      */
     public function filter($value)
     {
+        // Do not filter non-string values
+        if (!is_string($value)) {
+            return $value;
+        }
+
         if (null === $this->_charList) {
             return $this->_unicodeTrim((string) $value);
         }

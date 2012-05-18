@@ -24,8 +24,6 @@ namespace Zend\View\Helper;
 /**
  * Helper to generate a set of radio button elements
  *
- * @uses       \Zend\Filter\Alnum
- * @uses       \Zend\View\Helper\FormElement
  * @category   Zend
  * @package    Zend_View
  * @subpackage Helper

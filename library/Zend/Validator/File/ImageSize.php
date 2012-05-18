@@ -27,9 +27,6 @@ use Zend\Loader,
 /**
  * Validator for the image size of a image file
  *
- * @uses      \Zend\Loader
- * @uses      \Zend\Validator\AbstractValidator
- * @uses      \Zend\Validator\Exception
  * @category  Zend
  * @package   Zend_Validate
  * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -106,8 +103,7 @@ class ImageSize extends Validator\AbstractValidator
      * - maxheight
      * - maxwidth
      *
-     * @param  \Zend\Config\Config|array $options
-     * @return void
+     * @param  array|\Traversable $options
      */
     public function __construct($options = null)
     {

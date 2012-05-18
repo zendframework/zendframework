@@ -19,11 +19,11 @@
  */
 
 namespace Zend\Feed\Reader\Extension\Podcast;
-use Zend\Feed\Reader\Extension;
+
+use Zend\Feed\Reader\Extension,
+    DOMText;
 
 /**
-* @uses \Zend\Feed\Reader\Reader
-* @uses \Zend\Feed\Reader\Extension\EntryAbstract
 * @category Zend
 * @package Zend_Feed_Reader
 * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -98,7 +98,7 @@ class Feed extends Extension\AbstractFeed
                     $children = array();
 
                     foreach ($node->childNodes as $childNode) {
-                        if (!($childNode instanceof \DOMText)) {
+                        if (!($childNode instanceof DOMText)) {
                             $children[$childNode->getAttribute('text')] = null;
                         }
                     }

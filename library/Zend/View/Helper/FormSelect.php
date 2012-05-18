@@ -24,7 +24,6 @@ namespace Zend\View\Helper;
 /**
  * Helper to generate "select" list of options
  *
- * @uses       \Zend\View\Helper\FormElement
  * @category   Zend
  * @package    Zend_View
  * @subpackage Helper

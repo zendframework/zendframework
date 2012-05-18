@@ -30,7 +30,7 @@ use Zend\Markup\Parser;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class MockParser implements Parser
+class MockParser implements Parser\ParserInterface
 {
 
     public function __construct($options = array())

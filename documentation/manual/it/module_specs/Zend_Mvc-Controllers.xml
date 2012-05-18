@@ -7,16 +7,16 @@
 
   <para>
     I controller del layer MVC semplicemente devono essere oggetti che
-    implementano l'interfaccia <classname>Zend\Stdlib\Dispatchable</classname>.
+    implementano l'interfaccia <classname>Zend\Stdlib\DispatchableInterface</classname>.
     Questa interfaccia descrive un singolo metodo:
   </para>
 
   <programlisting language="php"><![CDATA[
-use Zend\Stdlib\Dispatchable,
-    Zend\Stdlib\RequestDescription as Request,
-    Zend\Stdlib\ResponseDescription as Response;
+use Zend\Stdlib\DispatchableInterface,
+    Zend\Stdlib\RequestInterface as Request,
+    Zend\Stdlib\ResponseInterface as Response;
 
-class Foo implements Dispatchable
+class Foo implements DispatchableInterface
 {
     public function dispatch(Request $request, Response $response = null)
     {
@@ -113,9 +113,9 @@ public function getEvent($event);
       </para>
 
       <programlisting language="php"><![CDATA[
-use Zend\Di\Locator;
+use Zend\Di\LocatorInterface;
 
-public function setLocator(Locator $locator);
+public function setLocator(LocatorInterface $locator);
 public function getLocator($locator);
 ]]></programlisting>
     </section>
@@ -288,7 +288,7 @@ class BarController extends ActionController
       <itemizedlist>
         <listitem>
           <para>
-            <classname>Zend\Stdlib\Dispatchable</classname>
+            <classname>Zend\Stdlib\DispatchableInterface</classname>
           </para>
         </listitem>
 
@@ -340,7 +340,7 @@ class BarController extends ActionController
       <itemizedlist>
         <listitem>
           <para>
-            <classname>Zend\Stdlib\Dispatchable</classname>
+            <classname>Zend\Stdlib\DispatchableInterface</classname>
           </para>
         </listitem>
 
@@ -439,7 +439,7 @@ class BarController extends ActionController
       <itemizedlist>
         <listitem>
           <para>
-            <classname>Zend\Stdlib\Dispatchable</classname>
+            <classname>Zend\Stdlib\DispatchableInterface</classname>
           </para>
         </listitem>
 
@@ -492,7 +492,7 @@ class BarController extends ActionController
       <itemizedlist>
         <listitem>
           <para>
-            <classname>Zend\Stdlib\Dispatchable</classname>
+            <classname>Zend\Stdlib\DispatchableInterface</classname>
           </para>
         </listitem>
 

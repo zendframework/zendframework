@@ -20,16 +20,17 @@
 
 namespace Zend\Feed\Reader;
 
+use DOMDocument,
+    DOMElement,
+    DOMXPath;
+
 /**
- * @uses       \Zend\Feed\Exception
- * @uses       \Zend\Feed\Reader\Reader
- * @uses       Zend\Feed\Reader\Feed
  * @category   Zend
  * @package    Zend_Feed_Reader
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class AbstractFeed implements Feed
+abstract class AbstractFeed implements Feed\FeedInterface
 {
     /**
      * Parsed feed data
@@ -86,10 +87,10 @@ abstract class AbstractFeed implements Feed
      * @param DomDocument The DOM object for the feed's XML
      * @param string $type Feed type
      */
-    public function __construct(\DomDocument $domDocument, $type = null)
+    public function __construct(DOMDocument $domDocument, $type = null)
     {
         $this->_domDocument = $domDocument;
-        $this->_xpath = new \DOMXPath($this->_domDocument);
+        $this->_xpath = new DOMXPath($this->_domDocument);
 
         if ($type !== null) {
             $this->_data['type'] = $type;
@@ -267,7 +268,7 @@ abstract class AbstractFeed implements Feed
                 return call_user_func_array(array($extension, $method), $args);
             }
         }
-        throw new \Zend\Feed\Exception('Method: ' . $method
+        throw new Exception\BadMethodCallException('Method: ' . $method
         . 'does not exist and could not be located on a registered Extension');
     }
 

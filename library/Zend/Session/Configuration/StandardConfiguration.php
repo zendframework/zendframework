@@ -20,7 +20,7 @@
 
 namespace Zend\Session\Configuration;
 
-use Zend\Session\Configuration as Configurable,
+use Zend\Session\Configuration\ConfigurationInterface as Configurable,
     Zend\Session\Exception,
     Zend\Validator\Hostname as HostnameValidator,
     Zend\Filter\Word\CamelCaseToUnderscore as CamelCaseToUnderscoreFilter;
@@ -99,7 +99,7 @@ class StandardConfiguration implements Configurable
      * 
      * @param  string $storageName 
      * @param  mixed $storageValue 
-     * @return Zend\Session\Configuration\StandardConfiguration
+     * @return StandardConfiguration
      */
     public function setStorageOption($storageName, $storageValue)
     {
@@ -123,7 +123,7 @@ class StandardConfiguration implements Configurable
      * 
      * @param  string $savePath 
      * @return StandardConfiguration
-     * @throws SessionException on invalid path
+     * @throws Exception\InvalidArgumentException on invalid path
      */
     public function setSavePath($savePath)
     {
@@ -153,7 +153,7 @@ class StandardConfiguration implements Configurable
      * 
      * @param  string $name 
      * @return StandardConfiguration
-     * @throws SessionException
+     * @throws Exception\InvalidArgumentException
      */
     public function setName($name)
     {
@@ -183,7 +183,7 @@ class StandardConfiguration implements Configurable
      * 
      * @param  int $gcProbability 
      * @return StandardConfiguration
-     * @throws SessionException
+     * @throws Exception\InvalidArgumentException
      */
     public function setGcProbability($gcProbability)
     {
@@ -204,7 +204,7 @@ class StandardConfiguration implements Configurable
      * 
      * @param  int $gcDivisor 
      * @return StandardConfiguration
-     * @throws SessionException
+     * @throws Exception\InvalidArgumentException
      */
     public function setGcDivisor($gcDivisor)
     {
@@ -225,7 +225,7 @@ class StandardConfiguration implements Configurable
      * 
      * @param  int $gcMaxlifetime 
      * @return StandardConfiguration
-     * @throws SessionException
+     * @throws Exception\InvalidArgumentException
      */
     public function setGcMaxlifetime($gcMaxlifetime)
     {
@@ -248,7 +248,7 @@ class StandardConfiguration implements Configurable
      * 
      * @param  int $cookieLifetime 
      * @return StandardConfiguration
-     * @throws SessionException
+     * @throws Exception\InvalidArgumentException
      */
     public function setCookieLifetime($cookieLifetime)
     {
@@ -282,7 +282,7 @@ class StandardConfiguration implements Configurable
      * 
      * @param  string $cookiePath 
      * @return StandardConfiguration
-     * @throws SessionException
+     * @throws Exception\InvalidArgumentException
      */
     public function setCookiePath($cookiePath)
     {
@@ -316,7 +316,7 @@ class StandardConfiguration implements Configurable
      * 
      * @param  string $cookieDomain 
      * @return StandardConfiguration
-     * @throws SessionException
+     * @throws Exception\InvalidArgumentException
      */
     public function setCookieDomain($cookieDomain)
     {
@@ -434,7 +434,7 @@ class StandardConfiguration implements Configurable
      * 
      * @param  string $entropyFile
      * @return StandardConfiguration
-     * @throws SessionException
+     * @throws Exception\InvalidArgumentException
      */
     public function setEntropyFile($entropyFile)
     {
@@ -451,7 +451,7 @@ class StandardConfiguration implements Configurable
      * 
      * @param  int $entropyLength 
      * @return StandardConfiguration
-     * @throws SessionException
+     * @throws Exception\InvalidArgumentException
      */
     public function setEntropyLength($entropyLength)
     {
@@ -472,7 +472,7 @@ class StandardConfiguration implements Configurable
      * 
      * @param  int $cacheExpire 
      * @return StandardConfiguration
-     * @throws SessionException
+     * @throws Exception\InvalidArgumentException
      */
     public function setCacheExpire($cacheExpire)
     {
@@ -495,7 +495,7 @@ class StandardConfiguration implements Configurable
      * 
      * @param  int $hashBitsPerCharacter 
      * @return StandardConfiguration
-     * @throws SessionException
+     * @throws Exception\InvalidArgumentException
      */
     public function setHashBitsPerCharacter($hashBitsPerCharacter)
     {
@@ -513,7 +513,7 @@ class StandardConfiguration implements Configurable
      * 
      * @param  int $rememberMeSeconds 
      * @return StandardConfiguration
-     * @throws SessionException
+     * @throws Exception\InvalidArgumentException
      */
     public function setRememberMeSeconds($rememberMeSeconds)
     {
@@ -660,7 +660,7 @@ class StandardConfiguration implements Configurable
      * @param  string $method 
      * @param  array $args 
      * @return mixed
-     * @throws BadMethodCallException on non-getter/setter method
+     * @throws Exception\BadMethodCallException on non-getter/setter method
      */
     public function __call($method, $args)
     {

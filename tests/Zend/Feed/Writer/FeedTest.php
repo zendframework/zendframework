@@ -20,19 +20,20 @@
  */
 
 namespace ZendTest\Feed\Writer;
+
 use Zend\Feed\Writer;
 use Zend\Feed\Writer\Feed;
 use Zend\Date;
 
 /**
-* @category Zend
-* @package Zend_Feed
-* @subpackage UnitTests
-* @group Zend_Feed
-* @group Zend_Feed_Writer
-* @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
-* @license http://framework.zend.com/license/new-bsd New BSD License
-*/
+ * @category   Zend
+ * @package    Zend_Feed
+ * @subpackage UnitTests
+ * @group      Zend_Feed
+ * @group      Zend_Feed_Writer
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd New BSD License
+ */
 class FeedTest extends \PHPUnit_Framework_TestCase
 {
 
@@ -43,86 +44,38 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         $this->_feedSamplePath = dirname(__FILE__) . '/Writer/_files';
     }
 
-    public function testAddsAuthorName()
-    {
-        $writer = new Writer\Feed;
-        $writer->addAuthor('Joe');
-        $this->assertEquals(array('name'=>'Joe'), $writer->getAuthor());
-    }
-
-    public function testAddsAuthorEmail()
-    {
-        $writer = new Writer\Feed;
-        $writer->addAuthor('Joe', 'joe@example.com');
-        $this->assertEquals(array('name'=>'Joe', 'email' => 'joe@example.com'), $writer->getAuthor());
-    }
-
-    public function testAddsAuthorUri()
-    {
-        $writer = new Writer\Feed;
-        $writer->addAuthor('Joe', null, 'http://www.example.com');
-        $this->assertEquals(array('name'=>'Joe', 'uri' => 'http://www.example.com'), $writer->getAuthor());
-    }
-
-    public function testAddAuthorThrowsExceptionOnInvalidName()
-    {
-        $writer = new Writer\Feed;
-        try {
-            $writer->addAuthor('');
-            $this->fail();
-        } catch (Writer\Exception $e) {
-        }
-    }
-
-    public function testAddAuthorThrowsExceptionOnInvalidEmail()
-    {
-        $writer = new Writer\Feed;
-        try {
-            $writer->addAuthor('Joe', '');
-            $this->fail();
-        } catch (Writer\Exception $e) {
-        }
-    }
-
-    public function testAddAuthorThrowsExceptionOnInvalidUri()
-    {
-        $this->markTestIncomplete('Pending Zend\URI fix for validation');
-        $writer = new Writer\Feed;
-        try {
-            $writer->addAuthor('Joe', null, 'notauri');
-            $this->fail();
-        } catch (Writer\Exception $e) {
-        }
-    }
-
     public function testAddsAuthorNameFromArray()
     {
         $writer = new Writer\Feed;
-        $writer->addAuthor(array('name'=>'Joe'));
-        $this->assertEquals(array('name'=>'Joe'), $writer->getAuthor());
+        $writer->addAuthor(array('name'=> 'Joe'));
+        $this->assertEquals(array('name'=> 'Joe'), $writer->getAuthor());
     }
 
     public function testAddsAuthorEmailFromArray()
     {
         $writer = new Writer\Feed;
-        $writer->addAuthor(array('name'=>'Joe','email'=>'joe@example.com'));
-        $this->assertEquals(array('name'=>'Joe', 'email' => 'joe@example.com'), $writer->getAuthor());
+        $writer->addAuthor(array('name' => 'Joe',
+                                 'email'=> 'joe@example.com'));
+        $this->assertEquals(array('name'  => 'Joe',
+                                  'email' => 'joe@example.com'), $writer->getAuthor());
     }
 
     public function testAddsAuthorUriFromArray()
     {
         $writer = new Writer\Feed;
-        $writer->addAuthor(array('name'=>'Joe','uri'=>'http://www.example.com'));
-        $this->assertEquals(array('name'=>'Joe', 'uri' => 'http://www.example.com'), $writer->getAuthor());
+        $writer->addAuthor(array('name'=> 'Joe',
+                                 'uri' => 'http://www.example.com'));
+        $this->assertEquals(array('name'=> 'Joe',
+                                  'uri' => 'http://www.example.com'), $writer->getAuthor());
     }
 
     public function testAddAuthorThrowsExceptionOnInvalidNameFromArray()
     {
         $writer = new Writer\Feed;
         try {
-            $writer->addAuthor(array('name'=>''));
+            $writer->addAuthor(array('name'=> ''));
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\InvalidArgumentException $e) {
         }
     }
 
@@ -130,9 +83,10 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     {
         $writer = new Writer\Feed;
         try {
-            $writer->addAuthor(array('name'=>'Joe','email'=>''));
+            $writer->addAuthor(array('name' => 'Joe',
+                                     'email'=> ''));
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\InvalidArgumentException $e) {
         }
     }
 
@@ -141,9 +95,10 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         $this->markTestIncomplete('Pending Zend\URI fix for validation');
         $writer = new Writer\Feed;
         try {
-            $writer->addAuthor(array('name'=>'Joe','uri'=>'notauri'));
+            $writer->addAuthor(array('name'=> 'Joe',
+                                     'uri' => 'notauri'));
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\InvalidArgumentException $e) {
         }
     }
 
@@ -151,9 +106,9 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     {
         $writer = new Writer\Feed;
         try {
-            $writer->addAuthor(array('uri'=>'notauri'));
+            $writer->addAuthor(array('uri'=> 'notauri'));
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\InvalidArgumentException $e) {
         }
     }
 
@@ -161,10 +116,13 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     {
         $writer = new Writer\Feed;
         $writer->addAuthors(array(
-            array('name'=>'Joe','uri'=>'http://www.example.com'),
-            array('name'=>'Jane','uri'=>'http://www.example.com')
-        ));
-        $this->assertEquals(array('name'=>'Jane', 'uri' => 'http://www.example.com'), $writer->getAuthor(1));
+                                 array('name'=> 'Joe',
+                                       'uri' => 'http://www.example.com'),
+                                 array('name'=> 'Jane',
+                                       'uri' => 'http://www.example.com')
+                            ));
+        $this->assertEquals(array('name'=> 'Jane',
+                                  'uri' => 'http://www.example.com'), $writer->getAuthor(1));
     }
 
     public function testSetsCopyright()
@@ -180,7 +138,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         try {
             $writer->setCopyright('');
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
 
@@ -235,7 +193,8 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         $writer = new Writer\Feed;
         $writer->setDateModified();
         $dateNow = new Date\Date;
-        $this->assertTrue($dateNow->isLater($writer->getDateModified()) || $dateNow->equals($writer->getDateModified()));
+        $this->assertTrue(
+            $dateNow->isLater($writer->getDateModified()) || $dateNow->equals($writer->getDateModified()));
     }
 
     public function testSetDateModifiedUsesGivenUnixTimestamp()
@@ -245,7 +204,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         $myDate = new Date\Date('1234567890', Date\Date::TIMESTAMP);
         $this->assertTrue($myDate->equals($writer->getDateModified()));
     }
-    
+
     /**
      * @group ZF-12023
      */
@@ -267,7 +226,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         $myDate = new Date\Date('123', Date\Date::TIMESTAMP);
         $this->assertTrue($myDate->equals($writer->getDateModified()));
     }
-    
+
     public function testSetDateModifiedUsesZendDateObject()
     {
         $writer = new Writer\Feed;
@@ -282,7 +241,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         try {
             $writer->setDateCreated('abc');
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
 
@@ -292,7 +251,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         try {
             $writer->setDateModified('abc');
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
 
@@ -313,7 +272,8 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         $writer = new Writer\Feed;
         $writer->setLastBuildDate();
         $dateNow = new Date\Date;
-        $this->assertTrue($dateNow->isLater($writer->getLastBuildDate()) || $dateNow->equals($writer->getLastBuildDate()));
+        $this->assertTrue(
+            $dateNow->isLater($writer->getLastBuildDate()) || $dateNow->equals($writer->getLastBuildDate()));
     }
 
     public function testSetLastBuildDateUsesGivenUnixTimestamp()
@@ -334,7 +294,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         $myDate = new Date\Date('123456789', Date\Date::TIMESTAMP);
         $this->assertTrue($myDate->equals($writer->getLastBuildDate()));
     }
-    
+
     /**
      * @group ZF-11610
      */
@@ -345,7 +305,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         $myDate = new Date\Date('123', Date\Date::TIMESTAMP);
         $this->assertTrue($myDate->equals($writer->getLastBuildDate()));
     }
-    
+
     public function testSetLastBuildDateUsesZendDateObject()
     {
         $writer = new Writer\Feed;
@@ -360,7 +320,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         try {
             $writer->setLastBuildDate('abc');
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
 
@@ -389,7 +349,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         try {
             $writer->setDescription('');
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
 
@@ -412,19 +372,20 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         $writer->setId('urn:uuid:60a76c80-d399-11d9-b93C-0003939e0af6');
         $this->assertEquals('urn:uuid:60a76c80-d399-11d9-b93C-0003939e0af6', $writer->getId());
     }
-    
+
     public function testSetsIdAcceptsSimpleTagUri()
     {
         $writer = new Writer\Feed;
         $writer->setId('tag:example.org,2010:/foo/bar/');
         $this->assertEquals('tag:example.org,2010:/foo/bar/', $writer->getId());
     }
-    
+
     public function testSetsIdAcceptsComplexTagUri()
     {
         $writer = new Writer\Feed;
         $writer->setId('tag:diveintomark.org,2004-05-27:/archives/2004/05/27/howto-atom-linkblog');
-        $this->assertEquals('tag:diveintomark.org,2004-05-27:/archives/2004/05/27/howto-atom-linkblog', $writer->getId());
+        $this->assertEquals('tag:diveintomark.org,2004-05-27:/archives/2004/05/27/howto-atom-linkblog',
+                            $writer->getId());
     }
 
     public function testSetIdThrowsExceptionOnInvalidParameter()
@@ -433,7 +394,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         try {
             $writer->setId('');
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
 
@@ -443,7 +404,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         try {
             $writer->setId('http://');
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
 
@@ -466,7 +427,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         try {
             $writer->setLanguage('');
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
 
@@ -489,7 +450,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         try {
             $writer->setLink('');
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
 
@@ -499,7 +460,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         try {
             $writer->setLink('http://');
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
 
@@ -522,7 +483,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         try {
             $writer->setEncoding('');
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
 
@@ -545,7 +506,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         try {
             $writer->setTitle('');
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
 
@@ -558,22 +519,26 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     public function testSetsGeneratorName()
     {
         $writer = new Writer\Feed;
-        $writer->setGenerator(array('name'=>'ZFW'));
-        $this->assertEquals(array('name'=>'ZFW'), $writer->getGenerator());
+        $writer->setGenerator(array('name'=> 'ZFW'));
+        $this->assertEquals(array('name'=> 'ZFW'), $writer->getGenerator());
     }
 
     public function testSetsGeneratorVersion()
     {
         $writer = new Writer\Feed;
-        $writer->setGenerator(array('name'=>'ZFW', 'version' => '1.0'));
-        $this->assertEquals(array('name'=>'ZFW', 'version' => '1.0'), $writer->getGenerator());
+        $writer->setGenerator(array('name'    => 'ZFW',
+                                    'version' => '1.0'));
+        $this->assertEquals(array('name'    => 'ZFW',
+                                  'version' => '1.0'), $writer->getGenerator());
     }
 
     public function testSetsGeneratorUri()
     {
         $writer = new Writer\Feed;
-        $writer->setGenerator(array('name'=>'ZFW', 'uri'=>'http://www.example.com'));
-        $this->assertEquals(array('name'=>'ZFW', 'uri' => 'http://www.example.com'), $writer->getGenerator());
+        $writer->setGenerator(array('name'=> 'ZFW',
+                                    'uri' => 'http://www.example.com'));
+        $this->assertEquals(array('name'=> 'ZFW',
+                                  'uri' => 'http://www.example.com'), $writer->getGenerator());
     }
 
     public function testSetsGeneratorThrowsExceptionOnInvalidName()
@@ -582,7 +547,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         try {
             $writer->setGenerator(array());
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
 
@@ -590,9 +555,10 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     {
         $writer = new Writer\Feed;
         try {
-            $writer->setGenerator(array('name'=>'ZFW', 'version'=>''));
+            $writer->setGenerator(array('name'   => 'ZFW',
+                                        'version'=> ''));
             $this->fail('Should have failed since version is empty');
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
 
@@ -601,9 +567,10 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         $this->markTestIncomplete('Pending Zend\URI fix for validation');
         $writer = new Writer\Feed;
         try {
-            $writer->setGenerator(array('name'=>'ZFW','uri'=>'notauri'));
+            $writer->setGenerator(array('name'=> 'ZFW',
+                                        'uri' => 'notauri'));
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
 
@@ -614,7 +581,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     {
         $writer = new Writer\Feed;
         $writer->setGenerator('ZFW');
-        $this->assertEquals(array('name'=>'ZFW'), $writer->getGenerator());
+        $this->assertEquals(array('name'=> 'ZFW'), $writer->getGenerator());
     }
 
     /**
@@ -624,7 +591,8 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     {
         $writer = new Writer\Feed;
         $writer->setGenerator('ZFW', '1.0');
-        $this->assertEquals(array('name'=>'ZFW', 'version' => '1.0'), $writer->getGenerator());
+        $this->assertEquals(array('name'    => 'ZFW',
+                                  'version' => '1.0'), $writer->getGenerator());
     }
 
     /**
@@ -634,7 +602,8 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     {
         $writer = new Writer\Feed;
         $writer->setGenerator('ZFW', null, 'http://www.example.com');
-        $this->assertEquals(array('name'=>'ZFW', 'uri' => 'http://www.example.com'), $writer->getGenerator());
+        $this->assertEquals(array('name'=> 'ZFW',
+                                  'uri' => 'http://www.example.com'), $writer->getGenerator());
     }
 
     /**
@@ -646,7 +615,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         try {
             $writer->setGenerator('');
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
 
@@ -659,7 +628,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         try {
             $writer->setGenerator('ZFW', '');
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
 
@@ -673,7 +642,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         try {
             $writer->setGenerator('ZFW', null, 'notauri');
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
 
@@ -687,7 +656,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     {
         $writer = new Writer\Feed;
         $writer->setFeedLink('http://www.example.com/rss', 'RSS');
-        $this->assertEquals(array('rss'=>'http://www.example.com/rss'), $writer->getFeedLinks());
+        $this->assertEquals(array('rss'=> 'http://www.example.com/rss'), $writer->getFeedLinks());
     }
 
     public function testSetsFeedLinkThrowsExceptionOnInvalidType()
@@ -696,7 +665,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         try {
             $writer->setFeedLink('http://www.example.com/rss', 'abc');
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
 
@@ -706,7 +675,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         try {
             $writer->setFeedLink('http://', 'rss');
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
 
@@ -715,7 +684,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         $writer = new Writer\Feed;
         $this->assertTrue(is_null($writer->getFeedLinks()));
     }
-    
+
     public function testSetsBaseUrl()
     {
         $writer = new Writer\Feed;
@@ -729,7 +698,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         try {
             $writer->setBaseUrl('http://');
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
 
@@ -738,14 +707,14 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         $writer = new Writer\Feed;
         $this->assertTrue(is_null($writer->getBaseUrl()));
     }
-    
+
     public function testAddsHubUrl()
     {
         $writer = new Writer\Feed;
         $writer->addHub('http://www.example.com/hub');
         $this->assertEquals(array('http://www.example.com/hub'), $writer->getHubs());
     }
-    
+
     public function testAddsManyHubUrls()
     {
         $writer = new Writer\Feed;
@@ -759,7 +728,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         try {
             $writer->addHub('http://');
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
 
@@ -772,41 +741,43 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     public function testCreatesNewEntryDataContainer()
     {
         $writer = new Writer\Feed;
-        $entry = $writer->createEntry();
+        $entry  = $writer->createEntry();
         $this->assertTrue($entry instanceof Writer\Entry);
     }
-    
+
     public function testAddsCategory()
     {
         $writer = new Writer\Feed;
-        $writer->addCategory(array('term'=>'cat_dog'));
-        $this->assertEquals(array(array('term'=>'cat_dog')), $writer->getCategories());
+        $writer->addCategory(array('term'=> 'cat_dog'));
+        $this->assertEquals(array(array('term'=> 'cat_dog')), $writer->getCategories());
     }
-    
+
     public function testAddsManyCategories()
     {
         $writer = new Writer\Feed;
-        $writer->addCategories(array(array('term'=>'cat_dog'),array('term'=>'cat_mouse')));
-        $this->assertEquals(array(array('term'=>'cat_dog'),array('term'=>'cat_mouse')), $writer->getCategories());
+        $writer->addCategories(array(array('term'=> 'cat_dog'), array('term'=> 'cat_mouse')));
+        $this->assertEquals(array(array('term'=> 'cat_dog'), array('term'=> 'cat_mouse')), $writer->getCategories());
     }
 
     public function testAddingCategoryWithoutTermThrowsException()
     {
         $writer = new Writer\Feed;
         try {
-            $writer->addCategory(array('label' => 'Cats & Dogs', 'scheme' => 'http://www.example.com/schema1'));
+            $writer->addCategory(array('label'  => 'Cats & Dogs',
+                                       'scheme' => 'http://www.example.com/schema1'));
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
-    
+
     public function testAddingCategoryWithInvalidUriAsSchemeThrowsException()
     {
         $writer = new Writer\Feed;
         try {
-            $writer->addCategory(array('term' => 'cat_dog', 'scheme' => 'http://'));
+            $writer->addCategory(array('term'   => 'cat_dog',
+                                       'scheme' => 'http://'));
             $this->fail();
-        } catch (Writer\Exception $e) {
+        } catch (Writer\Exception\ExceptionInterface $e) {
         }
     }
 
@@ -816,26 +787,26 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     {
         $writer = new Writer\Feed;
         $writer->setImage(array(
-            'uri' => 'http://www.example.com/logo.gif'
-        ));
+                               'uri' => 'http://www.example.com/logo.gif'
+                          ));
         $this->assertEquals(array(
-            'uri' => 'http://www.example.com/logo.gif'
-        ), $writer->getImage());
+                                 'uri' => 'http://www.example.com/logo.gif'
+                            ), $writer->getImage());
     }
 
     /**
-     * @expectedException Zend\Feed\Writer\Exception
+     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
      */
     public function testSetsImageUriThrowsExceptionOnEmptyUri()
     {
         $writer = new Writer\Feed;
         $writer->setImage(array(
-            'uri' => ''
-        ));
+                               'uri' => ''
+                          ));
     }
 
     /**
-     * @expectedException Zend\Feed\Writer\Exception
+     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
      */
     public function testSetsImageUriThrowsExceptionOnMissingUri()
     {
@@ -844,79 +815,79 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Zend\Feed\Writer\Exception
+     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
      */
     public function testSetsImageUriThrowsExceptionOnInvalidUri()
     {
         $writer = new Writer\Feed;
         $writer->setImage(array(
-            'uri' => 'http://'
-        ));
+                               'uri' => 'http://'
+                          ));
     }
 
     public function testSetsImageLink()
     {
         $writer = new Writer\Feed;
         $writer->setImage(array(
-            'uri' => 'http://www.example.com/logo.gif',
-            'link' => 'http://www.example.com'
-        ));
+                               'uri'  => 'http://www.example.com/logo.gif',
+                               'link' => 'http://www.example.com'
+                          ));
         $this->assertEquals(array(
-            'uri' => 'http://www.example.com/logo.gif',
-            'link' => 'http://www.example.com'
-        ), $writer->getImage());
+                                 'uri'  => 'http://www.example.com/logo.gif',
+                                 'link' => 'http://www.example.com'
+                            ), $writer->getImage());
     }
 
     public function testSetsImageTitle()
     {
         $writer = new Writer\Feed;
         $writer->setImage(array(
-            'uri' => 'http://www.example.com/logo.gif',
-            'title' => 'Image title'
-        ));
+                               'uri'   => 'http://www.example.com/logo.gif',
+                               'title' => 'Image title'
+                          ));
         $this->assertEquals(array(
-            'uri' => 'http://www.example.com/logo.gif',
-            'title' => 'Image title'
-        ), $writer->getImage());
+                                 'uri'   => 'http://www.example.com/logo.gif',
+                                 'title' => 'Image title'
+                            ), $writer->getImage());
     }
 
     public function testSetsImageHeight()
     {
         $writer = new Writer\Feed;
         $writer->setImage(array(
-            'uri' => 'http://www.example.com/logo.gif',
-            'height' => '88'
-        ));
+                               'uri'    => 'http://www.example.com/logo.gif',
+                               'height' => '88'
+                          ));
         $this->assertEquals(array(
-            'uri' => 'http://www.example.com/logo.gif',
-            'height' => '88'
-        ), $writer->getImage());
+                                 'uri'    => 'http://www.example.com/logo.gif',
+                                 'height' => '88'
+                            ), $writer->getImage());
     }
 
     public function testSetsImageWidth()
     {
         $writer = new Writer\Feed;
         $writer->setImage(array(
-            'uri' => 'http://www.example.com/logo.gif',
-            'width' => '88'
-        ));
+                               'uri'   => 'http://www.example.com/logo.gif',
+                               'width' => '88'
+                          ));
         $this->assertEquals(array(
-            'uri' => 'http://www.example.com/logo.gif',
-            'width' => '88'
-        ), $writer->getImage());
+                                 'uri'   => 'http://www.example.com/logo.gif',
+                                 'width' => '88'
+                            ), $writer->getImage());
     }
-    
+
     public function testSetsImageDescription()
     {
         $writer = new Writer\Feed;
         $writer->setImage(array(
-            'uri' => 'http://www.example.com/logo.gif',
-            'description' => 'Image description'
-        ));
+                               'uri'         => 'http://www.example.com/logo.gif',
+                               'description' => 'Image description'
+                          ));
         $this->assertEquals(array(
-            'uri' => 'http://www.example.com/logo.gif',
-            'description' => 'Image description'
-        ), $writer->getImage());
+                                 'uri'         => 'http://www.example.com/logo.gif',
+                                 'description' => 'Image description'
+                            ), $writer->getImage());
     }
 
     public function testGetCategoriesReturnsNullIfNotSet()
@@ -928,7 +899,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     public function testAddsAndOrdersEntriesByDateIfRequested()
     {
         $writer = new Writer\Feed;
-        $entry = $writer->createEntry();
+        $entry  = $writer->createEntry();
         $entry->setDateCreated(1234567890);
         $entry2 = $writer->createEntry();
         $entry2->setDateCreated(1230000000);

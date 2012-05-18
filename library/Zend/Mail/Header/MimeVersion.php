@@ -21,8 +21,6 @@
 
 namespace Zend\Mail\Header;
 
-use Zend\Mail\Header;
-
 /**
  * @category   Zend
  * @package    Zend_Mail
@@ -30,7 +28,7 @@ use Zend\Mail\Header;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class MimeVersion implements Header
+class MimeVersion implements HeaderInterface
 {
     /**
      * @var string Version string
@@ -38,9 +36,10 @@ class MimeVersion implements Header
     protected $version = '1.0';
 
     /**
-     * Deserialize from string
+     * Unserialize from string
      *
      * @param  string $headerLine
+     * @throws Exception\InvalidArgumentException
      * @return MimeVersion
      */
     public static function fromString($headerLine)
@@ -85,7 +84,6 @@ class MimeVersion implements Header
      * Set character encoding
      *
      * @param  string $encoding
-     * @return void
      */
     public function setEncoding($encoding)
     {
@@ -95,7 +93,6 @@ class MimeVersion implements Header
     /**
      * Get character encoding
      *
-     * @return void
      */
     public function getEncoding()
     {

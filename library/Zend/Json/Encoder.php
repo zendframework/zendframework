@@ -26,9 +26,6 @@ use Zend\Json\Exception\RecursionException,
 /**
  * Encode PHP constructs to JSON
  *
- * @uses       ReflectionClass
- * @uses       Zend\Json\Exception\RecursionException
- * @uses       Zend\Json\Exception\InvalidArgumentException
  * @category   Zend
  * @package    Zend_Json
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -235,7 +232,7 @@ class Encoder
      * If value type is not a string, number, boolean, or null, the string
      * 'null' is returned.
      *
-     * @param $value mixed
+     * @param  mixed $value
      * @return string
      */
     protected function _encodeDatum(&$value)
@@ -244,7 +241,7 @@ class Encoder
 
         if (is_int($value) || is_float($value)) {
             $result = (string) $value;
-            $result = str_replace(",", ".", $result);
+            $result = str_replace(',', '.', $result);
         } elseif (is_string($value)) {
             $result = $this->_encodeString($value);
         } elseif (is_bool($value)) {

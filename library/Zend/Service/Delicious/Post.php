@@ -25,10 +25,6 @@ use \Zend\Date\Date;
 /**
  * Zend_Service_Delicious_Post represents a post of a user that can be edited
  *
- * @uses       Zend_Date
- * @uses       Zend_Service_Delicious
- * @uses       Zend_Service_Delicious_Exception
- * @uses       Zend_Service_Delicious_SimplePost
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Delicious

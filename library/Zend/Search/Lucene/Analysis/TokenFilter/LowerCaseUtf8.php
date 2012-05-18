@@ -21,24 +21,20 @@
 
 namespace Zend\Search\Lucene\Analysis\TokenFilter;
 
-use Zend\Search\Lucene\Analysis\TokenFilter,
-    Zend\Search\Lucene\Analysis\Token,
+use Zend\Search\Lucene\Analysis\Token,
     Zend\Search\Lucene,
-    Zend\Search\Lucene\Exception\ExtensionNotLoadedExtension;
+    Zend\Search\Lucene\Exception\ExtensionNotLoadedException;
 
 /**
  * Lower case Token filter.
  *
- * @uses       \Zend\Search\Lucene\Analysis\Token
- * @uses       \Zend\Search\Lucene\Analysis\TokenFilter
- * @uses       \Zend\Search\Lucene\Exception\ExtensionNotLoadedException
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Analysis
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class LowerCaseUtf8 implements TokenFilter
+class LowerCaseUtf8 implements TokenFilterInterface
 {
     /**
      * Object constructor

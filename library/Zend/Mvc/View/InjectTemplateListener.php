@@ -21,17 +21,17 @@
 
 namespace Zend\Mvc\View;
 
-use Zend\EventManager\EventCollection as Events,
-    Zend\EventManager\ListenerAggregate,
+use Zend\EventManager\EventManagerInterface as Events,
+    Zend\EventManager\ListenerAggregateInterface,
     Zend\Filter\Word\CamelCaseToDash as CamelCaseToDashFilter,
     Zend\Mvc\MvcEvent,
     Zend\Mvc\Router\RouteMatch,
-    Zend\View\Model as ViewModel;
+    Zend\View\Model\ModelInterface as ViewModel;
 
-class InjectTemplateListener implements ListenerAggregate
+class InjectTemplateListener implements ListenerAggregateInterface
 {
     /**
-     * Filter/inflector used to normalize names for use as template identifiers
+     * FilterInterface/inflector used to normalize names for use as template identifiers
      *
      * @var mixed
      */

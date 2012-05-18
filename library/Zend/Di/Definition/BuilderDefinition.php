@@ -4,7 +4,7 @@ namespace Zend\Di\Definition;
 
 use Zend\Di\Exception;
 
-class BuilderDefinition implements Definition
+class BuilderDefinition implements DefinitionInterface
 {
     protected $defaultClassBuilder = 'Zend\Di\Definition\Builder\PhpClass';
     protected $classes = array();

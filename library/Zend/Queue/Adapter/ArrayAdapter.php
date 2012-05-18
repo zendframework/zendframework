@@ -22,15 +22,11 @@
 namespace Zend\Queue\Adapter;
 use Zend\Queue\Queue,
     Zend\Queue\Message,
-    Zend\Queue\Exception as QueueException;
+    Zend\Queue\Exception;
 
 /**
  * Class for using a standard PHP array as a queue
  *
- * @uses       \Zend\Queue\Adapter\AdapterAbstract
- * @uses       \Zend\Queue\Queue
- * @uses       \Zend\Queue\Exception
- * @uses       \Zend\Queue\Message
  * @category   Zend
  * @package    Zend_Queue
  * @subpackage Adapter
@@ -44,17 +40,6 @@ class ArrayAdapter extends AbstractAdapter
      */
     protected $_data = array();
 
-    /**
-     * Constructor
-     *
-     * @param  array|\Zend\Config\Config $options
-     * @param  \Zend\Queue\Queue|null $queue
-     * @return void
-     */
-    public function __construct($options, Queue $queue = null)
-    {
-        parent::__construct($options, $queue);
-    }
 
     /********************************************************************
     * Queue management functions
@@ -146,7 +131,7 @@ class ArrayAdapter extends AbstractAdapter
         }
 
         if (!isset($this->_data[$queue->getName()])) {
-            throw new QueueException('Queue does not exist');
+            throw new Exception\QueueNotFoundException('Queue does not exist');
         }
 
         return count($this->_data[$queue->getName()]);
@@ -171,7 +156,7 @@ class ArrayAdapter extends AbstractAdapter
         }
 
         if (!$this->isExists($queue->getName())) {
-            throw new QueueException('Queue does not exist:' . $queue->getName());
+            throw new Exception\QueueNotFoundException('Queue does not exist:' . $queue->getName());
         }
 
         // create the message

@@ -23,8 +23,8 @@
  * @namespace
  */
 namespace Zend\Log\Formatter;
-use Zend\Log\Formatter,
-    Zend\Log\Exception;
+
+use Zend\Log\Exception;
 
 /**
  * @category   Zend
@@ -33,7 +33,7 @@ use Zend\Log\Formatter,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ErrorHandler implements Formatter
+class ErrorHandler implements FormatterInterface
 {
     const DEFAULT_FORMAT = '%timestamp% %priorityName% (%priority%) %message% (errno %extra[errno]%) in %extra[file]% on line %extra[line]%';
     
@@ -48,7 +48,6 @@ class ErrorHandler implements Formatter
      * Class constructor
      *
      * @param  null|string  $format  Format specifier for log messages
-     * @return void
      * @throws Zend\Log\Exception\InvalidArgumentException
      */
     public function __construct($format = null)

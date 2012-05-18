@@ -44,8 +44,8 @@ class PluginBroker extends BasePluginBroker
 
     /**
      * Determine if we have a valid adapter
-     * 
-     * @param  mixed $plugin 
+     *
+     * @param  mixed $plugin
      * @return true
      * @throws Exception
      */

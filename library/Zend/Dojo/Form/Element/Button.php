@@ -24,7 +24,6 @@ namespace Zend\Dojo\Form\Element;
 /**
  * Button dijit
  *
- * @uses       \Zend\Dojo\Form\Element\Dijit
  * @category   Zend
  * @package    Zend_Dojo
  * @subpackage Form_Element
@@ -42,9 +41,8 @@ class Button extends Dijit
     /**
      * Constructor
      *
-     * @param  string|array|\Zend\Config\Config $spec Element name or configuration
-     * @param  string|array|\Zend\Config\Config $options Element value or configuration
-     * @return void
+     * @param  array|string|\Traversable $spec Element name or configuration
+     * @param  array|string|\Traversable $options Element value or configuration
      */
     public function __construct($spec, $options = null)
     {

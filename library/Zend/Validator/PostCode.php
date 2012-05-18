@@ -26,8 +26,6 @@ use Zend\Locale;
  * @see        Zend_Locale
  * @see        Zend_Locale_Format
  * @see        Zend_Registry
- * @uses       \Zend\Validator\AbstractValidator
- * @uses       \Zend\Validator\Exception
  * @category   Zend
  * @package    Zend_Validate
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -67,7 +65,7 @@ class PostCode extends AbstractValidator
      * Accepts either a string locale, a Zend_Locale object, or an array or
      * Zend_Config object containing the keys "locale" and/or "format".
      *
-     * @param string|Zend_Locale|array|\Zend\Config\Config $options
+     * @param string|\Zend\Locale\Locale|array|\Traversable $options
      * @throws \Zend\Validator\Exception On empty format
      */
     public function __construct($options = null)
@@ -163,7 +161,7 @@ class PostCode extends AbstractValidator
         $this->options['format'] = $format;
         return $this;
     }
-    
+
     /**
      * Returns the actual set service
      *
@@ -220,7 +218,7 @@ class PostCode extends AbstractValidator
                 return false;
             }
         }
-        
+
         $format = $this->getFormat();
         if (!preg_match($format, $value)) {
             $this->error(self::NO_MATCH);

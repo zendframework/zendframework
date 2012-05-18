@@ -121,7 +121,7 @@ class MultiByte
         $lengthOfPadding = $padLength - iconv_strlen($input, $charset);
         $padStringLength = iconv_strlen($padString, $charset);
 
-        if ($padStringLength === 0 || $lengthOfPadding === 0) {
+        if ($padStringLength === 0 || $lengthOfPadding <= 0) {
             $return = $input;
         } else {
             $repeatCount = floor($lengthOfPadding / $padStringLength);

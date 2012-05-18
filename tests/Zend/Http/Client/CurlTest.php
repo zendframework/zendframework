@@ -79,7 +79,7 @@ class CurlTest extends CommonHttpTests
             'someoption' => 'hasvalue'
         );
 
-        $this->_adapter->setConfig($config);
+        $this->_adapter->setOptions($config);
 
         $hasConfig = $this->_adapter->getConfig();
         foreach($config as $k => $v) {
@@ -102,7 +102,7 @@ class CurlTest extends CommonHttpTests
             )
         ));
 
-        $this->_adapter->setConfig($config);
+        $this->_adapter->setOptions($config);
 
         $hasConfig = $this->_adapter->getConfig();
         $this->assertEquals($config->timeout, $hasConfig['timeout']);
@@ -120,7 +120,7 @@ class CurlTest extends CommonHttpTests
             'Zend\Http\Client\Adapter\Exception\InvalidArgumentException',
             'Array or Zend\Config\Config object expected');
 
-        $this->_adapter->setConfig($config);
+        $this->_adapter->setOptions($config);
     }
 
     /**
@@ -178,7 +178,7 @@ class CurlTest extends CommonHttpTests
 
         $adapter = new Adapter\Curl();
         $this->client->setAdapter($adapter);
-        $adapter->setConfig(array(
+        $adapter->setOptions(array(
             'curloptions' => array(
                 CURLOPT_FOLLOWLOCATION => true,
                 CURLOPT_TIMEOUT => 1,
@@ -229,7 +229,7 @@ class CurlTest extends CommonHttpTests
 
         $adapter = new Adapter\Curl();
         $this->client->setAdapter($adapter);
-        $adapter->setConfig(array(
+        $adapter->setOptions(array(
             'curloptions' => array(CURLOPT_INFILE => $putFileHandle, CURLOPT_INFILESIZE => $putFileSize)
         ));
         $this->client->setMethod('PUT');
@@ -250,7 +250,7 @@ class CurlTest extends CommonHttpTests
         $this->setExpectedException('Zend\Http\Client\Adapter\Exception');
 
         $adapter = new Adapter\Curl();
-        $adapter->setConfig("foo");
+        $adapter->setOptions("foo");
     }
 
     public function testSetCurlOptions()
@@ -269,7 +269,7 @@ class CurlTest extends CommonHttpTests
     public function testWorkWithProxyConfiguration()
     {
         $adapter = new Adapter\Curl();
-        $adapter->setConfig(array(
+        $adapter->setOptions(array(
             'proxy_host' => 'localhost',
             'proxy_port' => 80,
             'proxy_user' => 'foo',
@@ -295,12 +295,12 @@ class CurlTest extends CommonHttpTests
     public function testGetCurlHandle()
     {
         $adapter = new Adapter\Curl();
-        $adapter->setConfig(array('timeout' => 2, 'maxredirects' => 1));
+        $adapter->setOptions(array('timeout' => 2, 'maxredirects' => 1));
         $adapter->connect("http://framework.zend.com");
 
         $this->assertTrue(is_resource($adapter->getHandle()));
     }
-    
+
     /**
      * @group ZF-9857
      */
@@ -312,5 +312,27 @@ class CurlTest extends CommonHttpTests
         $this->client->setMethod('HEAD');
         $this->client->send();
         $this->assertEquals('', $this->client->getResponse()->getBody());
+    }
+
+    public function testAuthorizeHeader()
+    {
+        // We just need someone to talk to
+        $this->client->setUri($this->baseuri. 'testHttpAuth.php');
+        $adapter = new Adapter\Curl();
+        $this->client->setAdapter($adapter);
+
+        $uid = 'alice';
+        $pwd = 'secret';
+
+        $hash   = base64_encode($uid . ':' . $pwd);
+        $header = 'Authorization: Basic ' . $hash;
+
+        $this->client->setAuth($uid, $pwd);
+        $res = $this->client->send();
+
+        $curlInfo = curl_getinfo($adapter->getHandle());
+        $this->assertArrayHasKey('request_header', $curlInfo, 'Expecting request_header in curl_getinfo() return value');
+
+        $this->assertContains($header, $curlInfo['request_header'], 'Expecting valid basic authorization header');
     }
 }

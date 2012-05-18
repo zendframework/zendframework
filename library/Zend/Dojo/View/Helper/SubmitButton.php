@@ -24,7 +24,6 @@ namespace Zend\Dojo\View\Helper;
 /**
  * Dojo Button dijit tied to submit input
  *
- * @uses       \Zend\Dojo\View\Helper\Button
  * @package    Zend_Dojo
  * @subpackage View
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

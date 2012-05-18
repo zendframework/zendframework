@@ -31,11 +31,6 @@ use Zend\GData\Gapps;
  *
  * This class represents <atom:entry> in the Google Data protocol.
  *
- * @uses       \Zend\GData\Entry
- * @uses       \Zend\GData\Extension\FeedLink
- * @uses       \Zend\GData\GApps
- * @uses       \Zend\GData\Docs\Extension\ACLRole
- * @uses       \Zend\GData\Docs\Extension\ACLScope
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage GApps

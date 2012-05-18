@@ -21,10 +21,10 @@
 
 namespace Zend\Log\Formatter;
 
-use DOMDocument,
-    DOMElement,
-    Zend\Log\Formatter,
-    Zend\Config\Config;
+use Traversable,
+    Zend\Stdlib\ArrayUtils,
+    DOMDocument,
+    DOMElement;
 
 /**
  * @category   Zend
@@ -33,7 +33,7 @@ use DOMDocument,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Xml implements Formatter
+class Xml implements FormatterInterface
 {
     /**
      * @var string Name of root element
@@ -54,14 +54,15 @@ class Xml implements Formatter
      * Class constructor
      * (the default encoding is UTF-8)
      *
-     * @param array|Config $options
-     * @return void
+     * @param  array|Traversable $options
      */
     public function __construct($options = array())
     {
-        if ($options instanceof Config) {
-            $options = $options->toArray();
-        } elseif (!is_array($options)) {
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
+        }
+
+        if (!is_array($options)) {
             $args = func_get_args();
 
             $options = array(

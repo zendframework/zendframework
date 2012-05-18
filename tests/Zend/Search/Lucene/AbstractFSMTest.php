@@ -93,7 +93,7 @@ class AbstractFSMTest extends \PHPUnit_Framework_TestCase
         $wrongInputExceptionCatched = false;
         try {
             $doorFSM->process(testFSMClass::LOCK);
-        } catch(\Zend\Search\Lucene\Exception $e) {
+        } catch(\Zend\Search\Lucene\Exception\ExceptionInterface $e) {
             $wrongInputExceptionCatched = true;
         }
         $this->assertTrue($wrongInputExceptionCatched);

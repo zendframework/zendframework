@@ -610,4 +610,18 @@ class DiTest extends \PHPUnit_Framework_TestCase
         $this->assertNotSame($movie->lister, $venue->lister);
         $this->assertSame($movie->lister->sharedLister, $venue->lister->sharedLister);
     }
+
+    public function testDiWillInjectDependenciesForInstance()
+    {
+        $di = new Di;
+
+        // for setter injection, the dependency is not required, thus it must be forced
+        $classDef = new Definition\ClassDefinition('ZendTest\Di\TestAsset\SetterInjection\B');
+        $classDef->addMethod('setA', true);
+        $di->definitions()->addDefinition($classDef, false); // top of stack b/c Runtime is already there
+
+        $b = new TestAsset\SetterInjection\B;
+        $di->injectDependencies($b);
+        $this->assertInstanceOf('ZendTest\Di\TestAsset\SetterInjection\A', $b->a);
+    }
 }

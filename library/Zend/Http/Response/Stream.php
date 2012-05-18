@@ -28,7 +28,6 @@ use Zend\Http\Response;
  * includes easy access to all the response's different elemts, as well as some
  * convenience methods for parsing and validating HTTP responses.
  *
- * @uses       \Zend\Http\Response
  * @package    Zend_Http
  * @subpackage Response
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -73,7 +72,7 @@ class Stream extends Response
      * Set the response stream
      *
      * @param resourse $stream
-     * @return \Zend\Http\Response\Stream
+     * @return Stream
      */
     public function setStream($stream)
     {
@@ -115,7 +114,7 @@ class Stream extends Response
      * Set file name associated with the stream
      *
      * @param string $stream_name Name to set
-     * @return \Zend\Http\Response\Stream
+     * @return Stream
      */
     public function setStreamName($stream_name)
     {

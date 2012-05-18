@@ -21,10 +21,10 @@
 
 namespace ZendTest\Authentication\Adapter;
 
-use Zend\Authentication\Adapter,
-    Zend\Authentication,
-    Zend\Db\Adapter\Adapter as DbAdapter,
-    Zend\Db\Sql\Select as DBSelect;
+use Zend\Authentication;
+use Zend\Authentication\Adapter;
+use Zend\Db\Adapter\Adapter as DbAdapter;
+use Zend\Db\Sql\Select as DBSelect;
 
 /**
  * @category   Zend
@@ -38,23 +38,21 @@ use Zend\Authentication\Adapter,
 class DbTableTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * Sqlite database connection
+     * SQLite database connection
      *
-     * @var Zend\Db\Adapter
+     * @var \Zend\Db\Adapter\Adapter
      */
     protected $_db = null;
 
     /**
      * Database table authentication adapter
      *
-     * @var Zend\Authentication\Adapter\DbTable
+     * @var \Zend\Authentication\Adapter\DbTable
      */
     protected $_adapter = null;
 
     /**
      * Set up test configuration
-     *
-     * @return void
      */
     public function setUp()
     {
@@ -78,7 +76,7 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
     public function tearDown()
     {
         $this->_adapter = null;
-        if ($this->_db instanceof Db\Adapter\AbstractAdapter) {
+        if ($this->_db instanceof DbAdapter) {
             $this->_db->query('DROP TABLE [users]');
         }
         $this->_db = null;
@@ -86,8 +84,6 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Ensures expected behavior for authentication success
-     *
-     * @return void
      */
     public function testAuthenticateSuccess()
     {
@@ -99,8 +95,6 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Ensures expected behavior for authentication success
-     *
-     * @return void
      */
     public function testAuthenticateSuccessWithTreatment()
     {
@@ -114,7 +108,6 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
     /**
      * Ensures expected behavior for for authentication failure
      * reason: Identity not found.
-     *
      */
     public function testAuthenticateFailureIdentityNotFound()
     {
@@ -132,9 +125,8 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
     /**
      * Ensures expected behavior for for authentication failure
      * reason: Identity not found.
-     *
      */
-    public function testAuthenticateFailureIdentityAmbigious()
+    public function testAuthenticateFailureIdentityAmbiguous()
     {
         $sqlInsert = 'INSERT INTO users (username, password, real_name) VALUES ("my_username", "my_password", "My Real Name")';
         $this->_db->query($sqlInsert, DbAdapter::QUERY_MODE_EXECUTE);
@@ -152,8 +144,6 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Ensures expected behavior for authentication failure because of a bad password
-     *
-     * @return void
      */
     public function testAuthenticateFailureInvalidCredential()
     {
@@ -165,42 +155,40 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Ensures that getResultRowObject() works for successful authentication
-     *
-     * @return void
      */
     public function testGetResultRow()
     {
         $this->_adapter->setIdentity('my_username');
         $this->_adapter->setCredential('my_password');
-        $result = $this->_adapter->authenticate();
+        $this->_adapter->authenticate();
         $resultRow = $this->_adapter->getResultRowObject();
         $this->assertEquals($resultRow->username, 'my_username');
     }
 
     /**
      * Ensure that ResultRowObject returns only what told to be included
-     *
      */
     public function testGetSpecificResultRow()
     {
         $this->_adapter->setIdentity('my_username');
         $this->_adapter->setCredential('my_password');
-        $result = $this->_adapter->authenticate();
+        $this->_adapter->authenticate();
         $resultRow = $this->_adapter->getResultRowObject(array('username', 'real_name'));
-        $this->assertEquals('O:8:"stdClass":2:{s:8:"username";s:11:"my_username";s:9:"real_name";s:12:"My Real Name";}', serialize($resultRow));
+        $this->assertEquals('O:8:"stdClass":2:{s:8:"username";s:11:"my_username";s:9:"real_name";s:12:"My Real Name";}',
+                            serialize($resultRow));
     }
 
     /**
      * Ensure that ResultRowObject returns an object has specific omissions
-     *
      */
     public function testGetOmittedResultRow()
     {
         $this->_adapter->setIdentity('my_username');
         $this->_adapter->setCredential('my_password');
-        $result = $this->_adapter->authenticate();
+        $this->_adapter->authenticate();
         $resultRow = $this->_adapter->getResultRowObject(null, 'password');
-        $this->assertEquals('O:8:"stdClass":3:{s:2:"id";s:1:"1";s:8:"username";s:11:"my_username";s:9:"real_name";s:12:"My Real Name";}', serialize($resultRow));
+        $this->assertEquals('O:8:"stdClass":3:{s:2:"id";s:1:"1";s:8:"username";s:11:"my_username";s:9:"real_name";s:12:"My Real Name";}',
+                            serialize($resultRow));
     }
 
     /**
@@ -239,9 +227,10 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
         $this->_adapter->setCredential('my_password');
         $this->_adapter->authenticate();
         $selectAfterAuth = $this->_adapter->getDbSelect();
-        $whereParts = $selectAfterAuth->where->getPredicates();
+        $whereParts      = $selectAfterAuth->where->getPredicates();
         $this->assertEquals(1, count($whereParts));
-        $lastWherePart = array_pop($whereParts);
+
+        $lastWherePart  = array_pop($whereParts);
         $expressionData = $lastWherePart[1]->getExpressionData();
         $this->assertEquals('1 = 1', $expressionData[0][0]);
     }
@@ -251,9 +240,10 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
      */
     public function testCatchExceptionNoTable()
     {
-        $this->setExpectedException('Zend\Authentication\Adapter\Exception\RuntimeException', 'A table must be supplied for');
+        $this->setExpectedException('Zend\Authentication\Adapter\Exception\RuntimeException',
+                                    'A table must be supplied for');
         $adapter = new Adapter\DbTable($this->_db);
-        $result = $adapter->authenticate();
+        $adapter->authenticate();
     }
 
     /**
@@ -261,9 +251,10 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
      */
     public function testCatchExceptionNoIdentityColumn()
     {
-        $this->setExpectedException('Zend\Authentication\Adapter\Exception\RuntimeException', 'An identity column must be supplied for the');
+        $this->setExpectedException('Zend\Authentication\Adapter\Exception\RuntimeException',
+                                    'An identity column must be supplied for the');
         $adapter = new Adapter\DbTable($this->_db, 'users');
-        $result = $adapter->authenticate();
+        $adapter->authenticate();
     }
 
     /**
@@ -271,9 +262,10 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
      */
     public function testCatchExceptionNoCredentialColumn()
     {
-        $this->setExpectedException('Zend\Authentication\Adapter\Exception\RuntimeException', 'A credential column must be supplied');
+        $this->setExpectedException('Zend\Authentication\Adapter\Exception\RuntimeException',
+                                    'A credential column must be supplied');
         $adapter = new Adapter\DbTable($this->_db, 'users', 'username');
-        $result = $adapter->authenticate();
+        $adapter->authenticate();
     }
 
     /**
@@ -281,8 +273,9 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
      */
     public function testCatchExceptionNoIdentity()
     {
-        $this->setExpectedException('Zend\Authentication\Adapter\Exception\RuntimeException', 'A value for the identity was not provided prior');
-        $result = $this->_adapter->authenticate();
+        $this->setExpectedException('Zend\Authentication\Adapter\Exception\RuntimeException',
+                                    'A value for the identity was not provided prior');
+        $this->_adapter->authenticate();
     }
 
     /**
@@ -290,9 +283,10 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
      */
     public function testCatchExceptionNoCredential()
     {
-        $this->setExpectedException('Zend\Authentication\Adapter\Exception\RuntimeException', 'A credential value was not provided prior');
+        $this->setExpectedException('Zend\Authentication\Adapter\Exception\RuntimeException',
+                                    'A credential value was not provided prior');
         $this->_adapter->setIdentity('my_username');
-        $result = $this->_adapter->authenticate();
+        $this->_adapter->authenticate();
     }
 
     /**
@@ -300,11 +294,12 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
      */
     public function testCatchExceptionBadSql()
     {
-        $this->setExpectedException('Zend\Authentication\Adapter\Exception\RuntimeException', 'The supplied parameters to');
+        $this->setExpectedException('Zend\Authentication\Adapter\Exception\RuntimeException',
+                                    'The supplied parameters to');
         $this->_adapter->setTableName('bad_table_name');
         $this->_adapter->setIdentity('value');
         $this->_adapter->setCredential('value');
-        $result = $this->_adapter->authenticate();
+        $this->_adapter->authenticate();
     }
 
     /**
@@ -317,7 +312,7 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
     public function testEqualUsernamesDifferentPasswordShouldNotAuthenticateWhenFlagIsNotSet()
     {
         $sqlInsert = 'INSERT INTO users (username, password, real_name) '
-        . 'VALUES ("my_username", "my_otherpass", "Test user 2")';
+                   . 'VALUES ("my_username", "my_otherpass", "Test user 2")';
         $this->_db->query($sqlInsert, DbAdapter::QUERY_MODE_EXECUTE);
 
         // test if user 1 can authenticate
@@ -325,7 +320,7 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
                        ->setCredential('my_password');
         $result = $this->_adapter->authenticate();
         $this->assertTrue(in_array('More than one record matches the supplied identity.',
-            $result->getMessages()));
+                                   $result->getMessages()));
         $this->assertFalse($result->isValid());
     }
 
@@ -338,7 +333,7 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
     public function testEqualUsernamesDifferentPasswordShouldAuthenticateWhenFlagIsSet()
     {
         $sqlInsert = 'INSERT INTO users (username, password, real_name) '
-        . 'VALUES ("my_username", "my_otherpass", "Test user 2")';
+                   . 'VALUES ("my_username", "my_otherpass", "Test user 2")';
         $this->_db->query($sqlInsert, DbAdapter::QUERY_MODE_EXECUTE);
 
         // test if user 1 can authenticate
@@ -347,7 +342,7 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
                        ->setAmbiguityIdentity(true);
         $result = $this->_adapter->authenticate();
         $this->assertFalse(in_array('More than one record matches the supplied identity.',
-            $result->getMessages()));
+                                    $result->getMessages()));
         $this->assertTrue($result->isValid());
         $this->assertEquals('my_username', $result->getIdentity());
 
@@ -360,7 +355,7 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
                        ->setAmbiguityIdentity(true);
         $result2 = $this->_adapter->authenticate();
         $this->assertFalse(in_array('More than one record matches the supplied identity.',
-            $result->getMessages()));
+                                    $result->getMessages()));
         $this->assertTrue($result2->isValid());
         $this->assertEquals('my_username', $result2->getIdentity());
     }

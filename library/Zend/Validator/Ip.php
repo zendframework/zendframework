@@ -21,10 +21,9 @@
 namespace Zend\Validator;
 
 use Traversable;
+use Zend\Stdlib\ArrayUtils;
 
 /**
- * @uses       \Zend\Validator\AbstractValidator
- * @uses       \Zend\Validator\Exception
  * @category   Zend
  * @package    Zend_Validate
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -56,14 +55,14 @@ class Ip extends AbstractValidator
     /**
      * Sets validator options
      *
-     * @param array $options OPTIONAL Options to set, see the manual for all available options
-     * @return void
+     * @param  array|Traversable $options OPTIONAL Options to set, see the manual for all available options
      */
     public function __construct($options = array())
     {
-        if ($options instanceof \Zend\Config\Config) {
-            $options = $options->toArray();
-        } else if (!is_array($options)) {
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
+        }
+        if (!is_array($options)) {
             $options = func_get_args();
             $temp['allowipv6'] = array_shift($options);
             if (!empty($options)) {

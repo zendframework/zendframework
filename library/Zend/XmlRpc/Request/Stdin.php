@@ -30,8 +30,6 @@ use Zend\XmlRpc\Request as XmlRpcRequest,
  * built at construction time using data from STDIN; if no data is available, the
  * request is declared a fault.
  *
- * @uses       \Zend\XmlRpc\Request\Request
- * @uses       \Zend\XmlRpc\Server\Exception
  * @category   Zend
  * @package    Zend_XmlRpc
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

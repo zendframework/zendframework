@@ -28,10 +28,6 @@ use Zend\View\Exception,
 /**
  * Helper for setting and retrieving the doctype
  *
- * @uses       ArrayObject
- * @uses       \Zend\Registry
- * @uses       \Zend\View\Exception
- * @uses       \Zend\View\Helper\AbstractHelper
  * @package    Zend_View
  * @subpackage Helper
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

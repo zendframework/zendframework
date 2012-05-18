@@ -22,9 +22,6 @@
 namespace Zend\Service\Amazon\Ec2;
 
 /**
- * @uses       DOMDocument
- * @uses       DOMXPath
- * @uses       Zend_Http_Response
  * @category   Zend
  * @package    Zend_Service_Amazon
  * @subpackage Ec2
@@ -101,7 +98,7 @@ class Response
     {
         try {
             $body = $this->_httpResponse->getBody();
-        } catch (\Zend\Http\Exception $e) {
+        } catch (\Zend\Http\Exception\ExceptionInterface $e) {
             $body = false;
         }
 

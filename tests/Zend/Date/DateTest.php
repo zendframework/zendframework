@@ -22,10 +22,11 @@
 namespace ZendTest\Date;
 
 use Zend\Cache\StorageFactory as CacheFactory,
-    Zend\Cache\Storage\Adapter as CacheAdapter,
+    Zend\Cache\Storage\Adapter\AdapterInterface as CacheAdapter,
     Zend\Date\Date,
     Zend\Date\Cities,
     Zend\Locale\Locale,
+    Zend\Locale\Exception\ExceptionInterface as LocaleException,
     Zend\TimeSync\TimeSync,
     Zend\Registry;
 
@@ -91,7 +92,7 @@ class DateTest extends \PHPUnit_Framework_TestCase
         // look if locale is detectable
         try {
             $locale = new Locale();
-        } catch (\Zend\Locale\Exception $e) {
+        } catch (LocaleException $e) {
             $this->markTestSkipped('Autodetection of locale failed');
             return;
         }
@@ -108,7 +109,7 @@ class DateTest extends \PHPUnit_Framework_TestCase
         // look if locale is detectable
         try {
             $locale = new Locale();
-        } catch (\Zend\Locale\Exception $e) {
+        } catch (LocaleException $e) {
             $this->markTestSkipped('Autodetection of locale failed');
             return;
         }
@@ -130,7 +131,7 @@ class DateTest extends \PHPUnit_Framework_TestCase
         // look if locale is detectable
         try {
             $locale = new Locale();
-        } catch (\Zend\Locale\Exception $e) {
+        } catch (LocaleException $e) {
             $this->markTestSkipped('Autodetection of locale failed');
             return;
         }
@@ -168,7 +169,7 @@ class DateTest extends \PHPUnit_Framework_TestCase
         // look if locale is detectable
         try {
             $locale = new Locale();
-        } catch (\Zend\Locale\Exception $e) {
+        } catch (LocaleException $e) {
             $this->markTestSkipped('Autodetection of locale failed');
             return;
         }
@@ -185,7 +186,7 @@ class DateTest extends \PHPUnit_Framework_TestCase
         // look if locale is detectable
         try {
             $locale = new Locale();
-        } catch (\Zend\Locale\Exception $e) {
+        } catch (LocaleException $e) {
             $this->markTestSkipped('Autodetection of locale failed');
             return;
         }
@@ -225,7 +226,7 @@ class DateTest extends \PHPUnit_Framework_TestCase
         // look if locale is detectable
         try {
             $locale = new Locale();
-        } catch (\Zend\Locale\Exception $e) {
+        } catch (LocaleException $e) {
             $this->markTestSkipped('Autodetection of locale failed');
             return;
         }

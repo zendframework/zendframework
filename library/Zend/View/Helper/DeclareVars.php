@@ -24,7 +24,6 @@ namespace Zend\View\Helper;
 /**
  * Helper for declaring default values of template variables
  *
- * @uses       \Zend\View\Helper\AbstractHelper
  * @package    Zend_View
  * @subpackage Helper
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

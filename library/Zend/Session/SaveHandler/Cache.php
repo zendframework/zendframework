@@ -20,23 +20,19 @@
 
 namespace Zend\Session\SaveHandler;
 
-use Zend\Session\SaveHandler as Savable,
-    Zend\Cache\Storage\Adapter as StorageAdapter,
-    Zend\Session\Exception;
+use Zend\Cache\Storage\Adapter\AdapterInterface as StorageAdapter;
+use Zend\Session\Exception;
 
 /**
  * Cache session save handler
  *
- * @uses       Zend\Config
- * @uses       Zend\Cache\Storage\Adapter
- * @uses       Zend\Session\SaveHandler\Exception
  * @category   Zend
  * @package    Zend_Session
  * @subpackage SaveHandler
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Cache implements Savable
+class Cache implements SaveHandlerInterface
 {
     /**
      * Session Save Path
@@ -61,9 +57,9 @@ class Cache implements Savable
     /**
      * Constructor
      *
-     * @param  Zend\Cache\Storage\Adapter $storageAdapter
+     * @param  Zend\Cache\Storage\Adapter\AdapterInterface $storageAdapter
      * @return void
-     * @throws Zend\Session\Exception
+     * @throws Zend\Session\Exception\ExceptionInterface
      */
     public function __construct(StorageAdapter $storageAdapter)
     {
@@ -146,7 +142,7 @@ class Cache implements Savable
      *
      * Allows passing a string class name or StorageAdapter object.
      *
-     * @param Zend\Cache\Storage\Adapter
+     * @param Zend\Cache\Storage\Adapter\AdapterInterface
      * @return void
      */
     public function setStorageAdapter(StorageAdapter $storageAdapter)
@@ -157,7 +153,7 @@ class Cache implements Savable
     /**
      * Get Cache Storage Adapter Object
      *
-     * @return Zend\Cache\Storage\Adapter
+     * @return Zend\Cache\Storage\Adapter\AdapterInterface
      */
     public function getStorageAdapter()
     {

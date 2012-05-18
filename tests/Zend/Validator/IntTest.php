@@ -46,7 +46,7 @@ class IntTest extends \PHPUnit_Framework_TestCase
     /**
      * Zend_Validator_Int object
      *
-     * @var Zend_Validator_Int
+     * @var \Zend\Validator\Int
      */
     protected $_validator;
 

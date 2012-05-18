@@ -41,7 +41,7 @@ class CookieTest extends \PHPUnit_Framework_TestCase
     public function testCookieFromStringCreatesValidCookieHeader()
     {
         $cookieHeader = Cookie::fromString('Cookie: name=value');
-        $this->assertInstanceOf('Zend\Http\Header\HeaderDescription', $cookieHeader);
+        $this->assertInstanceOf('Zend\Http\Header\HeaderInterface', $cookieHeader);
         $this->assertInstanceOf('ArrayObject', $cookieHeader);
         $this->assertInstanceOf('Zend\Http\Header\Cookie', $cookieHeader);
     }

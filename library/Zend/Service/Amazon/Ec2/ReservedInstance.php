@@ -24,7 +24,6 @@ namespace Zend\Service\Amazon\Ec2;
 /**
  * Allows you to interface with the reserved instances on Amazon Ec2
  *
- * @uses       Zend_Service_Amazon_Ec2_Abstract
  * @category   Zend
  * @package    Zend_Service_Amazon
  * @subpackage Ec2

@@ -27,7 +27,6 @@ namespace ZendTest\View\Helper;
  *
  * Tests formTextarea helper
  *
- * @uses PHPUnit_Framework_TestCase
  *
  * @category   Zend
  * @package    Zend_View

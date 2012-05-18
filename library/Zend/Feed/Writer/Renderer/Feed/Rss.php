@@ -33,7 +33,7 @@ use DOMDocument,
 * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
 * @license http://framework.zend.com/license/new-bsd New BSD License
 */
-class Rss extends Renderer\AbstractRenderer implements Renderer\Renderer
+class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterface
 {
     /**
      * Constructor
@@ -139,7 +139,7 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\Renderer
         if(!$this->getDataContainer()->getTitle()) {
             $message = 'RSS 2.0 feed elements MUST contain exactly one'
             . ' title element but a title has not been set';
-            $exception = new Writer\Exception($message);
+            $exception = new Writer\Exception\InvalidArgumentException($message);
             if (!$this->_ignoreExceptions) {
                 throw $exception;
             } else {
@@ -166,7 +166,7 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\Renderer
         if(!$this->getDataContainer()->getDescription()) {
             $message = 'RSS 2.0 feed elements MUST contain exactly one'
             . ' description element but one has not been set';
-            $exception = new Writer\Exception($message);
+            $exception = new Writer\Exception\InvalidArgumentException($message);
             if (!$this->_ignoreExceptions) {
                 throw $exception;
             } else {
@@ -242,7 +242,7 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\Renderer
         if(!$value) {
             $message = 'RSS 2.0 feed elements MUST contain exactly one'
             . ' link element but one has not been set';
-            $exception = new Writer\Exception($message);
+            $exception = new Writer\Exception\InvalidArgumentException($message);
             if (!$this->_ignoreExceptions) {
                 throw $exception;
             } else {
@@ -321,7 +321,7 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\Renderer
             || !is_string($image['title'])
         ) {
             $message = 'RSS 2.0 feed images must include a title';
-            $exception = new Writer\Exception($message);
+            $exception = new Writer\Exception\InvalidArgumentException($message);
             if (!$this->_ignoreExceptions) {
                 throw $exception;
             } else {
@@ -335,7 +335,7 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\Renderer
         ) {
             $message = 'Invalid parameter: parameter \'link\''
             . ' must be a non-empty string and valid URI/IRI';
-            $exception = new Writer\Exception($message);
+            $exception = new Writer\Exception\InvalidArgumentException($message);
             if (!$this->_ignoreExceptions) {
                 throw $exception;
             } else {
@@ -367,7 +367,7 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\Renderer
             if (!ctype_digit((string) $image['height']) || $image['height'] > 400) {
                 $message = 'Invalid parameter: parameter \'height\''
                          . ' must be an integer not exceeding 400';
-                $exception = new Writer\Exception($message);
+                $exception = new Writer\Exception\InvalidArgumentException($message);
                 if (!$this->_ignoreExceptions) {
                     throw $exception;
                 } else {
@@ -384,7 +384,7 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\Renderer
             if (!ctype_digit((string) $image['width']) || $image['width'] > 144) {
                 $message = 'Invalid parameter: parameter \'width\''
                          . ' must be an integer not exceeding 144';
-                $exception = new Writer\Exception($message);
+                $exception = new Writer\Exception\InvalidArgumentException($message);
                 if (!$this->_ignoreExceptions) {
                     throw $exception;
                 } else {
@@ -401,7 +401,7 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\Renderer
             if (empty($image['description']) || !is_string($image['description'])) {
                 $message = 'Invalid parameter: parameter \'description\''
                          . ' must be a non-empty string';
-                $exception = new Writer\Exception($message);
+                $exception = new Writer\Exception\InvalidArgumentException($message);
                 if (!$this->_ignoreExceptions) {
                     throw $exception;
                 } else {

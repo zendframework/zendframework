@@ -23,7 +23,7 @@ namespace Zend\Mvc\Router\Http;
 
 use Traversable,
     Zend\Stdlib\ArrayUtils,
-    Zend\Stdlib\RequestDescription as Request,
+    Zend\Stdlib\RequestInterface as Request,
     Zend\Mvc\Router\Exception;
 
 /**
@@ -35,10 +35,10 @@ use Traversable,
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @see        http://manuals.rubyonrails.com/read/chapter/65
  */
-class Hostname implements Route
+class Hostname implements RouteInterface
 {
     /**
-     * Route to match.
+     * RouteInterface to match.
      *
      * @var array
      */
@@ -80,7 +80,7 @@ class Hostname implements Route
     }
 
     /**
-     * factory(): defined by Route interface.
+     * factory(): defined by RouteInterface interface.
      *
      * @see    Route::factory()
      * @param  array|\Traversable $options
@@ -111,7 +111,7 @@ class Hostname implements Route
     }
 
     /**
-     * match(): defined by Route interface.
+     * match(): defined by RouteInterface interface.
      *
      * @see    Route::match()
      * @param  Request $request
@@ -147,7 +147,7 @@ class Hostname implements Route
     }
 
     /**
-     * assemble(): Defined by Route interface.
+     * assemble(): Defined by RouteInterface interface.
      *
      * @see    Route::assemble()
      * @param  array $params
@@ -184,7 +184,7 @@ class Hostname implements Route
     }
 
     /**
-     * getAssembledParams(): defined by Route interface.
+     * getAssembledParams(): defined by RouteInterface interface.
      *
      * @see    Route::getAssembledParams
      * @return array

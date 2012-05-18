@@ -20,7 +20,8 @@
  */
 
 namespace ZendTest\Search\Lucene;
-use Zend\Search\Lucene\Analysis\Analyzer;
+use Zend\Search\Lucene\Analysis\Analyzer\Analyzer;
+use Zend\Search\Lucene\Analysis\Analyzer\AnalyzerInterface;
 use Zend\Search\Lucene\Analysis\Analyzer\Common;
 use Zend\Search\Lucene\Analysis\Analyzer\Common\Text;
 use Zend\Search\Lucene\Analysis\Analyzer\Common\TextNum;
@@ -47,8 +48,8 @@ class AnalysisTest extends \PHPUnit_Framework_TestCase
 {
     public function testAnalyzer()
     {
-        $currentAnalyzer = Analyzer\Analyzer::getDefault();
-        $this->assertTrue($currentAnalyzer instanceof Analyzer);
+        $currentAnalyzer = Analyzer::getDefault();
+        $this->assertTrue($currentAnalyzer instanceof AnalyzerInterface);
 
         /** Zend_Search_Lucene_Analysis_Analyzer_Common_Utf8Num */
 

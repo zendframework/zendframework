@@ -29,7 +29,7 @@ use Zend\Feed\PubSubHubbub,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Callback extends PubSubHubbub\AbstractCallback
+class Callback extends PubSubHubbub\AbstractCallbackInterface
 {
     /**
      * Contains the content of any feeds sent as updates to the Callback URL

@@ -20,12 +20,13 @@
 
 namespace Zend\Filter;
 
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
+use Zend\Loader;
+
 /**
  * Encrypts a given string
  *
- * @uses       Zend\Filter\Exception
- * @uses       Zend\Filter\AbstractFilter
- * @uses       Zend\Loader
  * @category   Zend
  * @package    Zend_Filter
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -41,12 +42,12 @@ class Encrypt extends AbstractFilter
     /**
      * Class constructor
      *
-     * @param string|array $options (Optional) Options to set, if null mcrypt is used
+     * @param string|array|Traversable $options (Optional) Options to set, if null mcrypt is used
      */
     public function __construct($options = null)
     {
-        if ($options instanceof \Zend\Config\Config) {
-            $options = $options->toArray();
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
         }
 
         $this->setAdapter($options);
@@ -66,7 +67,7 @@ class Encrypt extends AbstractFilter
      * Sets new encryption options
      *
      * @param  string|array $options (Optional) Encryption options
-     * @return \Zend\Filter\Encrypt\Encrypt
+     * @return Encrypt
      */
     public function setAdapter($options = null)
     {
@@ -83,17 +84,23 @@ class Encrypt extends AbstractFilter
             $options = array();
         }
 
-        if (\Zend\Loader::isReadable('Zend/Filter/Encrypt/' . ucfirst($adapter). '.php')) {
+        if (Loader::isReadable('Zend/Filter/Encrypt/' . ucfirst($adapter). '.php')) {
             $adapter = 'Zend\\Filter\\Encrypt\\' . ucfirst($adapter);
         }
 
         if (!class_exists($adapter)) {
-            \Zend\Loader::loadClass($adapter);
+            throw new Exception\DomainException(
+                sprintf('%s expects a valid registry class name; received "%s", which did not resolve',
+                        __METHOD__,
+                        $adapter
+                ));
         }
 
         $this->_adapter = new $adapter($options);
-        if (!$this->_adapter instanceof Encrypt\EncryptionAlgorithm) {
-            throw new Exception\InvalidArgumentException("Encoding adapter '" . $adapter . "' does not implement Zend\\Filter\\Encrypt\\EncryptionAlgorithm");
+        if (!$this->_adapter instanceof Encrypt\EncryptionAlgorithmInterface) {
+            throw new Exception\InvalidArgumentException(
+                "Encoding adapter '" . $adapter
+                . "' does not implement Zend\\Filter\\Encrypt\\EncryptionAlgorithmInterface");
         }
 
         return $this;

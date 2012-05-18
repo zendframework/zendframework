@@ -21,22 +21,19 @@
 
 namespace ZendTest\Authentication\Adapter\TestAsset;
 
-use Zend\Controller\Response\AbstractResponse;
+use Zend\Http\Response;
+use Zend\OpenId\OpenId;
 
-/**
- * Zend_OpenId
- */
-
-\Zend\OpenID\OpenID::$exitOnRedirect = false;
+OpenId::$exitOnRedirect = false;
 
 /**
  * @category   Zend
- * @package    Zend_OpenId
+ * @package    Zend_Authentication
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class OpenIdResponseHelper extends AbstractResponse
+class ResponseHelper extends Response
 {
     private $_canSendHeaders;
 

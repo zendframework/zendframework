@@ -24,9 +24,9 @@ namespace ZendTest\Date;
 use Zend\Date\Date,
     Zend\Date\DateObject,
     Zend\Cache\StorageFactory as CacheFactory,
-    Zend\Cache\Storage\Adapter as CacheAdapter,
-    Zend\Locale\Locale;
-
+    Zend\Cache\Storage\Adapter\AdapterInterface as CacheAdapter,
+    Zend\Locale\Locale,
+    Zend\Locale\Exception\ExceptionInterface as LocaleException;
 /**
  * @category   Zend
  * @package    Zend_Date
@@ -67,7 +67,7 @@ class DateObjectTest extends \PHPUnit_Framework_TestCase
         // look if locale is detectable
         try {
             $locale = new Locale();
-        } catch (\Zend\Locale\Exception $e) {
+        } catch (LocaleException $e) {
             $this->markTestSkipped('Autodetection of locale failed');
             return;
         }
@@ -84,7 +84,7 @@ class DateObjectTest extends \PHPUnit_Framework_TestCase
         // look if locale is detectable
         try {
             $locale = new Locale();
-        } catch (\Zend\Locale\Exception $e) {
+        } catch (LocaleException $e) {
             $this->markTestSkipped('Autodetection of locale failed');
             return;
         }
@@ -101,7 +101,7 @@ class DateObjectTest extends \PHPUnit_Framework_TestCase
         // look if locale is detectable
         try {
             $locale = new Locale();
-        } catch (\Zend\Locale\Exception $e) {
+        } catch (LocaleException $e) {
             $this->markTestSkipped('Autodetection of locale failed');
             return;
         }

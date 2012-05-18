@@ -21,8 +21,6 @@
 
 namespace Zend\Mail\Header;
 
-use Zend\Mail\Header;
-
 /**
  * @category   Zend
  * @package    Zend_Mail
@@ -30,7 +28,7 @@ use Zend\Mail\Header;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ContentType implements Header
+class ContentType implements HeaderInterface
 {
     /**
      * Header encoding
@@ -51,8 +49,9 @@ class ContentType implements Header
 
     /**
      * Factory: create Content-Type header object from string
-     * 
-     * @param  string $headerLine 
+     *
+     * @param  string $headerLine
+     * @throws Exception\InvalidArgumentException
      * @return ContentType
      */
     public static function fromString($headerLine)
@@ -147,8 +146,9 @@ class ContentType implements Header
 
     /**
      * Set the content type
-     * 
-     * @param  string $type 
+     *
+     * @param  string $type
+     * @throws Exception\InvalidArgumentException
      * @return ContentType
      */
     public function setType($type)
@@ -167,7 +167,7 @@ class ContentType implements Header
     /**
      * Retrieve the content type
      * 
-     * @return void
+     * @return string
      */
     public function getType()
     {

@@ -42,9 +42,8 @@ class Schema extends AbstractNode
     /**
      * Factory method to create the Schema node.
      *
-     * @param  Ldap\Ldap $ldap
+     * @param  \Zend\Ldap\Ldap $ldap
      * @return Schema
-     * @throws Exception\LdapException
      */
     public static function create(Ldap\Ldap $ldap)
     {
@@ -66,9 +65,9 @@ class Schema extends AbstractNode
      *
      * Constructor is protected to enforce the use of factory methods.
      *
-     * @param  Ldap\Dn   $dn
-     * @param  array     $data
-     * @param  Ldap\Ldap $ldap
+     * @param  \Zend\Ldap\Dn   $dn
+     * @param  array           $data
+     * @param  \Zend\Ldap\Ldap $ldap
      */
     protected function __construct(Ldap\Dn $dn, array $data, Ldap\Ldap $ldap)
     {
@@ -79,8 +78,8 @@ class Schema extends AbstractNode
     /**
      * Parses the schema
      *
-     * @param  Dn   $dn
-     * @param  Ldap $ldap
+     * @param  \Zend\Ldap\Dn   $dn
+     * @param  \Zend\Ldap\Ldap $ldap
      * @return Schema Provides a fluid interface
      */
     protected function parseSchema(Ldap\Dn $dn, Ldap\Ldap $ldap)

@@ -98,10 +98,9 @@ class MailHideTest extends \PHPUnit_Framework_TestCase
         $server = ReCaptcha\MailHide::MAILHIDE_SERVER;
         $pubKey = $this->publicKey;
 
-        // Static value of the encrypter version of mail@example.com
-        $encryptedEmail = 'XydrEdd6Eo90PE-LpxkmTEsq2G6SCeDzWkEQpF6f7v8=';
-
-        $this->assertNotSame(false, strstr($html, 'm<a href="' . $server . '?k=' . $pubKey . '&amp;c=' . $encryptedEmail . '" onclick="window.open(\'' . $server . '?k=' . $pubKey . '&amp;c=' . $encryptedEmail . '\', \'\', \'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=500,height=300\'); return false;" title="Reveal this e-mail address">...</a>@example.com'));
+        $this->assertEquals(2, substr_count($html, 'k=' . $pubKey));
+        $this->assertRegexp('/c\=[a-zA-Z0-9_=-]+"/', $html);
+        $this->assertRegexp('/c\=[a-zA-Z0-9_=-]+\\\'/', $html);
     }
 
     public function testGetHtml() {
@@ -123,13 +122,13 @@ class MailHideTest extends \PHPUnit_Framework_TestCase
     }
 
     public function testGetHtmlWithMissingPublicKey() {
-        $this->setExpectedException('Zend\\Service\\ReCaptcha\\MailHideException');
 
         $mail = 'mail@example.com';
 
         $this->mailHide->setEmail($mail);
         $this->mailHide->setPrivateKey($this->privateKey);
 
+        $this->setExpectedException('Zend\\Service\\ReCaptcha\\MailHideException');
         $html = $this->mailHide->getHtml();
     }
 

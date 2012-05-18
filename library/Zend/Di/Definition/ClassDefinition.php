@@ -2,7 +2,7 @@
 
 namespace Zend\Di\Definition;
 
-class ClassDefinition implements Definition, PartialMarker
+class ClassDefinition implements DefinitionInterface, PartialMarker
 {
 
     protected $class = null;
@@ -20,11 +20,13 @@ class ClassDefinition implements Definition, PartialMarker
     public function setInstantiator($instantiator)
     {
         $this->instantiator = $instantiator;
+        return $this;
     }
 
     public function setSupertypes(array $supertypes)
     {
         $this->supertypes = $supertypes;
+        return $this;
     }
 
     public function addMethod($method, $isRequired = null)
@@ -33,6 +35,8 @@ class ClassDefinition implements Definition, PartialMarker
             $isRequired = ($method === '__construct') ? true : false;
         }
         $this->methods[$method] = (bool) $isRequired;
+
+        return $this;
     }
 
     /**
@@ -57,6 +61,8 @@ class ClassDefinition implements Definition, PartialMarker
         $this->methodParameters[$method][$fqName] = array(
             $parameterName, $type, $required
         );
+        
+        return $this;
     }
 
     /**

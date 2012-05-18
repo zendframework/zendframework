@@ -20,21 +20,18 @@
  */
 
 namespace Zend\Pdf\InternalType\StreamFilter;
-use Zend\Pdf\Exception;
 
-use Zend\Pdf\InternalType\StreamFilter;
+use Zend\Pdf\Exception;
 
 /**
  * ASCII85 stream filter
  *
- * @uses       \Zend\Pdf\Exception
- * @uses       \Zend\Pdf\InternalType\StreamFilter
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Internal
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Ascii85 implements StreamFilter
+class Ascii85 implements StreamFilterInterface
 {
     /**
      * Encode data
@@ -42,7 +39,7 @@ class Ascii85 implements StreamFilter
      * @param string $data
      * @param array $params
      * @return string
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
     public static function encode($data, $params = null)
     {
@@ -113,7 +110,7 @@ class Ascii85 implements StreamFilter
      * @param string $data
      * @param array $params
      * @return string
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
     public static function decode($data, $params = null)
     {

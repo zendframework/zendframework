@@ -82,14 +82,26 @@ class RequestTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('GET', $request->getMethod());
     }
 
-    public function testRequestCanSetAndRetrieveUri()
+    /**
+     * @dataProvider uriDataProvider
+     */
+    public function testRequestCanSetAndRetrieveUri($uri)
     {
         $request = new Request();
-        $request->setUri('/foo');
-        $this->assertEquals('/foo', $request->getUri());
+        $request->setUri($uri);
+        $this->assertEquals($uri, $request->getUri());
         $this->assertInstanceOf('Zend\Uri\Uri', $request->uri());
-        $this->assertEquals('/foo', $request->uri()->toString());
-        $this->assertEquals('/foo', $request->getUri());
+        $this->assertEquals($uri, $request->uri()->toString());
+        $this->assertEquals($uri, $request->getUri());
+    }
+
+    public function uriDataProvider()
+    {
+        return array(
+            array('/foo'),
+            array('/foo#test'),
+            array('/hello?what=true#noway')
+        );
     }
 
     public function testRequestSetUriWillThrowExceptionOnInvalidArgument()

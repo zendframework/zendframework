@@ -8,14 +8,15 @@ use Zend\Uri\Uri;
  * @throws Exception\InvalidArgumentException
  * @see http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30
  */
-class Location implements HeaderDescription
+class Location implements HeaderInterface
 {
 
     public static function fromString($headerLine)
     {
         $header = new static();
 
-        list($name, $value) = explode(': ', $headerLine, 2);
+        list($name, $value) = explode(':', $headerLine, 2);
+        $value = trim($value);
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'location') {

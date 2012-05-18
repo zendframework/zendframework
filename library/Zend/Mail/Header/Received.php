@@ -29,7 +29,7 @@ namespace Zend\Mail\Header;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Received implements MultipleHeaderDescription
+class Received implements MultipleHeadersInterface
 {
     /**
      * @var string
@@ -116,11 +116,12 @@ class Received implements MultipleHeaderDescription
     {
         return 'Received: ' . $this->getFieldValue();
     }
-    
+
     /**
      * Serialize collection of Received headers to string
-     * 
-     * @param  array $headers 
+     *
+     * @param  array $headers
+     * @throws Exception\RuntimeException
      * @return string
      */
     public function toStringMultipleHeaders(array $headers)

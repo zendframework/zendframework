@@ -126,7 +126,7 @@ $matches = $event->getRouteMatch();
         The base <classname>Bootstrap</classname> class shipped with the
         framework has an <classname>EventManager</classname> associated with it,
         and once the locator and router instances are initialized, it triggers a
-        "bootstrap" event, with "application" and "modules" parameters.
+        "bootstrap" event, with "application" and "config" parameters.
       </para>
 
       <para>

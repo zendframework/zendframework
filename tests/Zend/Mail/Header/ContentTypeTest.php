@@ -37,7 +37,7 @@ class ContentTypeTest extends \PHPUnit_Framework_TestCase
     public function testContentTypeFromStringCreatesValidContentTypeHeader()
     {
         $contentTypeHeader = ContentType::fromString('Content-Type: xxx/yyy');
-        $this->assertInstanceOf('Zend\Mail\Header', $contentTypeHeader);
+        $this->assertInstanceOf('Zend\Mail\Header\HeaderInterface', $contentTypeHeader);
         $this->assertInstanceOf('Zend\Mail\Header\ContentType', $contentTypeHeader);
     }
 

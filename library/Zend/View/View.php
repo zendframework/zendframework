@@ -20,11 +20,16 @@
 
 namespace Zend\View;
 
-use Zend\EventManager\EventCollection,
+use Zend\EventManager\EventManagerInterface,
     Zend\EventManager\EventManager,
+    Zend\EventManager\EventManagerAwareInterface,
+    Zend\EventManager\EventsCapableInterface,
     Zend\Mvc\MvcEvent,
-    Zend\Stdlib\RequestDescription as Request,
-    Zend\Stdlib\ResponseDescription as Response;
+    Zend\Stdlib\RequestInterface as Request,
+    Zend\Stdlib\ResponseInterface as Response,
+    Zend\View\Renderer\RendererInterface as Renderer,
+    Zend\View\Model\ModelInterface as Model,
+    Zend\View\Renderer\TreeRendererInterface;
 
 /**
  * @category   Zend
@@ -32,10 +37,10 @@ use Zend\EventManager\EventCollection,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class View
+class View implements EventManagerAwareInterface, EventsCapableInterface
 {
     /**
-     * @var EventCollection
+     * @var EventManagerInterface
      */
     protected $events;
 
@@ -96,11 +101,15 @@ class View
     /**
      * Set the event manager instance
      *
-     * @param  EventCollection $events
+     * @param  EventManagerInterface $events
      * @return View
      */
-    public function setEventManager(EventCollection $events)
+    public function setEventManager(EventManagerInterface $events)
     {
+        $events->setIdentifiers(array(
+            __CLASS__,
+            get_called_class(),
+        ));
         $this->events = $events;
         return $this;
     }
@@ -110,15 +119,12 @@ class View
      *
      * Lazy-loads a default instance if none available
      *
-     * @return EventCollection
+     * @return EventManagerInterface
      */
     public function events()
     {
-        if (!$this->events instanceof EventCollection) {
-            $this->setEventManager(new EventManager(array(
-                __CLASS__,
-                get_called_class(),
-            )));
+        if (!$this->events instanceof EventManagerInterface) {
+            $this->setEventManager(new EventManager());
         }
         return $this->events;
     }
@@ -197,7 +203,7 @@ class View
         // a) the renderer does not implement TreeRendererInterface, or
         // b) it does, but canRenderTrees() returns false
         if ($model->hasChildren()
-            && (!$renderer instanceof Renderer\TreeRendererInterface
+            && (!$renderer instanceof TreeRendererInterface
                 || !$renderer->canRenderTrees())
         ) {
             $this->renderChildren($model);

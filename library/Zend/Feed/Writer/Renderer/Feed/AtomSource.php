@@ -19,19 +19,19 @@
  */
  
 namespace Zend\Feed\Writer\Renderer\Feed;
-use Zend\Feed\Writer\Renderer;
-use Zend\Feed\Writer;
+
+use Zend\Feed\Writer\Renderer,
+    Zend\Feed\Writer,
+    DOMElement,
+    DOMDocument;
 
 /**
-* @uses DOMDocument
-* @uses \Zend\Feed\Writer\Renderer\Feed\Atom\AtomAbstract
-* @uses \Zend\Feed\Writer\Renderer\RendererInterface
 * @category Zend
 * @package Zend_Feed_Writer
 * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
 * @license http://framework.zend.com/license/new-bsd New BSD License
 */
-class AtomSource extends AtomAbstract implements Renderer\Renderer
+class AtomSource extends AtomAbstract implements Renderer\RendererInterface
 {
 
     /**
@@ -55,7 +55,7 @@ class AtomSource extends AtomAbstract implements Renderer\Renderer
         if (!$this->_container->getEncoding()) {
             $this->_container->setEncoding('UTF-8');
         }
-        $this->_dom = new \DOMDocument('1.0', $this->_container->getEncoding());
+        $this->_dom = new DOMDocument('1.0', $this->_container->getEncoding());
         $this->_dom->formatOutput = true;
         $root = $this->_dom->createElement('source');
         $this->setRootElement($root);
@@ -86,11 +86,11 @@ class AtomSource extends AtomAbstract implements Renderer\Renderer
     /**
      * Set feed generator string
      * 
-     * @param  \DOMDocument $dom 
-     * @param  \DOMElement $root 
+     * @param  DOMDocument $dom
+     * @param  DOMElement $root
      * @return void
      */
-    protected function _setGenerator(\DOMDocument $dom, \DOMElement $root)
+    protected function _setGenerator(DOMDocument $dom, DOMElement $root)
     {
         if(!$this->getDataContainer()->getGenerator()) {
             return;

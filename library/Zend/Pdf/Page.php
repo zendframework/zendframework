@@ -23,11 +23,6 @@ namespace Zend\Pdf;
 /**
  * PDF Page
  *
- * @uses       \Zend\Pdf\PdfDocument
- * @uses       \Zend\Pdf\ObjectFactory
- * @uses       \Zend\Pdf\InternalType
- * @uses       \Zend\Pdf\Exception
- * @uses       \Zend\Pdf\Resource\Font
  * @package    Zend_PDF
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -213,7 +208,7 @@ class Page
      * @param mixed $param1
      * @param mixed $param2
      * @param mixed $param3
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
     public function __construct($param1, $param2 = null, $param3 = null)
     {
@@ -477,7 +472,7 @@ class Page
      *
      * @todo Don't forget to close all current graphics operations (like path drawing)
      *
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
     public function flush()
     {
@@ -536,7 +531,7 @@ class Page
      * @todo Don't forget to close all current graphics operations (like path drawing)
      *
      * @param \Zend\Pdf\ObjectFactory $objFactory
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
     public function render(ObjectFactory $objFactory)
     {
@@ -559,10 +554,10 @@ class Page
     /**
      * Set fill color.
      *
-     * @param \Zend\Pdf\Color $color
+     * @param Color\ColorInterface $color
      * @return \Zend\Pdf\Page
      */
-    public function setFillColor(Color $color)
+    public function setFillColor(Color\ColorInterface $color)
     {
         $this->_addProcSet('PDF');
         $this->_contents .= $color->instructions(false);
@@ -573,10 +568,10 @@ class Page
     /**
      * Set line color.
      *
-     * @param \Zend\Pdf\Color $color
+     * @param ColorInterface $color
      * @return \Zend\Pdf\Page
      */
-    public function setLineColor(Color $color)
+    public function setLineColor(Color\ColorInterface $color)
     {
         $this->_addProcSet('PDF');
         $this->_contents .= $color->instructions(true);
@@ -686,7 +681,7 @@ class Page
      *
      * @param float $alpha
      * @param string $mode
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      * @return \Zend\Pdf\Page
      */
     public function setAlpha($alpha, $mode = 'Normal')
@@ -764,7 +759,7 @@ class Page
      * returns array of \Zend\Pdf\Resource\Font\Extracted objects
      *
      * @return array
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
     public function extractFonts()
     {
@@ -812,7 +807,7 @@ class Page
      * $fontName should be specified in UTF-8 encoding
      *
      * @return \Zend\Pdf\Resource\Font\Extracted|null
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
     public function extractFont($fontName)
     {
@@ -888,7 +883,7 @@ class Page
      * any rotation/translation/scaling that has been applied.
      *
      * @todo check for the open paths
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      * @return \Zend\Pdf\Page
      */
     public function saveGS()
@@ -904,7 +899,7 @@ class Page
     /**
      * Restore the graphics state that was saved with the last call to saveGS().
      *
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      * @return \Zend\Pdf\Page
      */
     public function restoreGS()
@@ -1588,7 +1583,7 @@ class Page
      * @param float $y
      * @param string $charEncoding (optional) Character encoding of source text.
      *   Defaults to current locale.
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      * @return \Zend\Pdf\Page
      */
     public function drawText($text, $x, $y, $charEncoding = '')
@@ -1664,7 +1659,7 @@ class Page
      /**
      * Close the path by drawing a straight line back to it's beginning.
      *
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      * @return \Zend\Pdf\Page
      */
     public function pathClose()

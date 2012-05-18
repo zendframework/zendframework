@@ -21,8 +21,8 @@
 
 namespace Zend\Ldap\Node\Schema;
 
-use Zend\Ldap,
-    Zend\Ldap\Node;
+use Zend\Ldap;
+use Zend\Ldap\Node;
 
 /**
  * Zend\Ldap\Node\Schema\ActiveDirectory provides a simple data-container for the Schema node of
@@ -52,8 +52,8 @@ class ActiveDirectory extends Node\Schema
     /**
      * Parses the schema
      *
-     * @param  Ldap\Dn      $dn
-     * @param  Ldap\Ldap    $ldap
+     * @param \Zend\Ldap\Dn   $dn
+     * @param \Zend\Ldap\Ldap $ldap
      * @return ActiveDirectory Provides a fluid interface
      */
     protected function parseSchema(Ldap\Dn $dn, Ldap\Ldap $ldap)

@@ -21,14 +21,13 @@
 
 namespace Zend\InfoCard\XML\KeyInfo;
 
+use Zend\InfoCard\XML;
+
 /**
  * An object representation of a XML <KeyInfo> block which doesn't provide a namespace
  * In this context, it is assumed to mean that it is the type of KeyInfo block which
  * contains the SecurityTokenReference
  *
- * @uses       \Zend\InfoCard\XML\Exception
- * @uses       \Zend\InfoCard\XML\KeyInfo\AbstractKeyInfo
- * @uses       \Zend\InfoCard\XML\SecurityTokenReference
  * @category   Zend
  * @package    Zend_InfoCard
  * @subpackage Zend_InfoCard_Xml
@@ -40,8 +39,8 @@ class DefaultKeyInfo extends AbstractKeyInfo
     /**
      * Returns the object representation of the SecurityTokenReference block
      *
-     * @throws \Zend\InfoCard\XML\Exception
-     * @return \Zend\InfoCard\XML\SecurityTokenReference
+     * @throws XML\Exception\RuntimeException
+     * @return XML\SecurityTokenReference
      */
     public function getSecurityTokenReference()
     {
@@ -49,10 +48,10 @@ class DefaultKeyInfo extends AbstractKeyInfo
 
         list($sectokenref) = $this->xpath('//o:SecurityTokenReference');
 
-        if(!($sectokenref instanceof \Zend\InfoCard\XML\AbstractElement)) {
-            throw new \Zend\InfoCard\XML\Exception\RuntimeException('Could not locate the Security Token Reference');
+        if(!($sectokenref instanceof XML\AbstractElement)) {
+            throw new XML\Exception\RuntimeException('Could not locate the Security Token Reference');
         }
 
-        return \Zend\InfoCard\XML\SecurityTokenReference::getInstance($sectokenref);
+        return XML\SecurityTokenReference::getInstance($sectokenref);
     }
 }

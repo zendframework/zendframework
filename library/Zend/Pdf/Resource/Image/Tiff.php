@@ -27,11 +27,6 @@ use Zend\Pdf\InternalType;
 /**
  * TIFF image
  *
- * @uses       \Zend\Pdf\InternalType\ArrayObject
- * @uses       \Zend\Pdf\InternalType\NameObject
- * @uses       \Zend\Pdf\InternalType\NumericObject
- * @uses       \Zend\Pdf\Exception
- * @uses       \Zend\Pdf\Resource\Image\AbstractImage
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Image
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -102,7 +97,7 @@ class Tiff extends AbstractImage
      *
      * @param int $type
      * @param string $bytes
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
     protected function unpackBytes($type, $bytes) {
         if(!isset($this->_endianType)) {
@@ -138,7 +133,7 @@ class Tiff extends AbstractImage
      * Object constructor
      *
      * @param string $imageFileName
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
     public function __construct($imageFileName)
     {

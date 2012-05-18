@@ -28,32 +28,6 @@ use Zend\Pdf;
 /**
  * Abstract PDF action representation class
  *
- * @uses       Countable
- * @uses       RecursiveIterator
- * @uses       SplObjectStorage
- * @uses       \Zend\Pdf\Action\GoToAction
- * @uses       \Zend\Pdf\Action\GoTo3DView
- * @uses       \Zend\Pdf\Action\GoToE
- * @uses       \Zend\Pdf\Action\GoToR
- * @uses       \Zend\Pdf\Action\Hide
- * @uses       \Zend\Pdf\Action\ImportData
- * @uses       \Zend\Pdf\Action\JavaScript
- * @uses       \Zend\Pdf\Action\Launch
- * @uses       \Zend\Pdf\Action\Movie
- * @uses       \Zend\Pdf\Action\Named
- * @uses       \Zend\Pdf\Action\Rendition
- * @uses       \Zend\Pdf\Action\ResetForm
- * @uses       \Zend\Pdf\Action\SetOCGState
- * @uses       \Zend\Pdf\Action\Sound
- * @uses       \Zend\Pdf\Action\SubmitForm
- * @uses       \Zend\Pdf\Action\Thread
- * @uses       \Zend\Pdf\Action\Trans
- * @uses       \Zend\Pdf\Action\Unknown
- * @uses       \Zend\Pdf\Action\Uri
- * @uses       \Zend\Pdf\InternalType\AbstractTypeObject
- * @uses       \Zend\Pdf\InternalType\ArrayObject
- * @uses       \Zend\Pdf\Exception
- * @uses       \Zend\Pdf\InternalStructure\NavigationTarget
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Action
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -91,7 +65,7 @@ abstract class AbstractAction extends Pdf\InternalStructure\NavigationTarget imp
      * @param \Zend\Pdf\InternalType\DictionaryObject $dictionary
      * @param SplObjectStorage      $processedActions  list of already processed action dictionaries,
      *                                                 used to avoid cyclic references
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
     public function __construct(InternalType\AbstractTypeObject $dictionary, \SplObjectStorage $processedActions)
     {
@@ -131,7 +105,7 @@ abstract class AbstractAction extends Pdf\InternalStructure\NavigationTarget imp
      * @param \Zend\Pdf\InternalType\AbstractTypeObject $dictionary (It's actually Dictionary or Dictionary Object or Reference to a Dictionary Object)
      * @param SplObjectStorage $processedActions  list of already processed action dictionaries, used to avoid cyclic references
      * @return \Zend\Pdf\Action\AbstractAction
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
     public static function load(InternalType\AbstractTypeObject $dictionary, \SplObjectStorage $processedActions = null)
     {

@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_CodeGenerator
+ * @package    Zend_Code_Generator
  * @subpackage PHP
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -24,12 +24,8 @@ namespace Zend\Code\Generator;
 use Zend\Code\Reflection\MethodReflection;
 
 /**
- * @uses       \Zend\Code\GeneratorDocblock
- * @uses       \Zend\Code\Generator\Exception
- * @uses       \Zend\Code\Generator\PhpMember\AbstractMember
- * @uses       \Zend\Code\Generator\PhpParameter
  * @category   Zend
- * @package    Zend_CodeGenerator
+ * @package    Zend_Code_Generator
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -118,7 +114,7 @@ class MethodGenerator extends AbstractMemberGenerator
      * setParameters()
      *
      * @param array $parameters
-     * @return \MethodGenerator\Code\Generator\PhpMethod
+     * @return MethodGenerator
      */
     public function setParameters(array $parameters)
     {
@@ -132,14 +128,16 @@ class MethodGenerator extends AbstractMemberGenerator
      * setParameter()
      *
      * @param ParameterGenerator|string $parameter
-     * @return \MethodGenerator\Code\Generator\PhpMethod
+     * @return MethodGenerator
      */
     public function setParameter($parameter)
     {
         if (is_string($parameter)) {
             $parameter = new ParameterGenerator($parameter);
         } elseif (!$parameter instanceof ParameterGenerator) {
-            throw new Exception\InvalidArgumentException('setParameter() expects either an array of method options or an instance of Zend_CodeGenerator_Php_Parameter');
+            throw new Exception\InvalidArgumentException(
+                'setParameter() is expecting either a string, array or an instance of Zend\Code\Generator\ParameterGenerator'
+            );
         }
         $parameterName = $parameter->getName();
 
@@ -161,7 +159,7 @@ class MethodGenerator extends AbstractMemberGenerator
      * setBody()
      *
      * @param string $body
-     * @return \MethodGenerator\Code\Generator\PhpMethod
+     * @return MethodGenerator
      */
     public function setBody($body)
     {

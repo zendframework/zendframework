@@ -26,9 +26,6 @@ use Zend\GData\YouTube;
 /**
  * Represents the YouTube video playlist flavor of an Atom entry
  *
- * @uses       \Zend\GData\YouTube\Extension\Position
- * @uses       \Zend\GData\YouTube
- * @uses       \Zend\GData\YouTube\VideoEntry
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage YouTube

@@ -20,9 +20,10 @@
 
 namespace Zend\Filter;
 
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
+
 /**
- * @uses       Zend\Filter\Exception
- * @uses       Zend\Filter\AbstractFilter
  * @category   Zend
  * @package    Zend_Filter
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -58,13 +59,14 @@ class Null extends AbstractFilter
     /**
      * Constructor
      *
-     * @param string|array|\Zend\Config\Config $options OPTIONAL
+     * @param string|array|Traversable $options OPTIONAL
      */
     public function __construct($options = null)
     {
-        if ($options instanceof \Zend\Config\Config) {
-            $options = $options->toArray();
-        } elseif (!is_array($options)) {
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
+        }
+        if (!is_array($options)) {
             $options = func_get_args();
             $temp    = array();
             if (!empty($options)) {
@@ -94,8 +96,8 @@ class Null extends AbstractFilter
      * Set the null types
      *
      * @param  integer|array $type
-     * @throws \Zend\Filter\Exception
-     * @return \Zend\Filter\Null
+     * @throws Exception\InvalidArgumentException
+     * @return Null
      */
     public function setType($type = null)
     {
@@ -125,7 +127,7 @@ class Null extends AbstractFilter
     }
 
     /**
-     * Defined by Zend_Filter_Interface
+     * Defined by Zend\Filter\FilterInterface
      *
      * Returns null representation of $value, if value is empty and matches
      * types that should be considered null.

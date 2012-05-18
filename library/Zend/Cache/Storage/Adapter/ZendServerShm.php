@@ -37,8 +37,8 @@ class ZendServerShm extends AbstractZendServer
     /**
      * Constructor
      *
-     * @param  null|array|Traversable|AdapterOptions $options
-     * @throws Exception
+     * @param  null|array|\Traversable|AdapterOptions $options
+     * @throws Exception\ExceptionInterface
      * @return void
      */
     public function __construct($options = array())
@@ -56,8 +56,8 @@ class ZendServerShm extends AbstractZendServer
      * Internal method to get storage capacity.
      *
      * @param  array $normalizedOptions
-     * @return array|boolean Capacity as array or false on failure
-     * @throws Exception
+     * @return array|boolean Associative array of capacity, false on failure
+     * @throws Exception\ExceptionInterface
      */
     protected function internalGetCapacity(array & $normalizedOptions)
     {

@@ -33,56 +33,56 @@ interface Loggable
 {
     /**
      * @param string $message
-     * @param array|Traversable $extra
+     * @param array|\Traversable $extra
      * @return Loggabble
      */
     public function emerg($message, $extra = array());
 
     /**
      * @param string $message
-     * @param array|Traversable $extra
+     * @param array|\Traversable $extra
      * @return Loggabble
      */
     public function alert($message, $extra = array());
 
     /**
      * @param string $message
-     * @param array|Traversable $extra
+     * @param array|\Traversable $extra
      * @return Loggabble
      */
     public function crit($message, $extra = array());
 
     /**
      * @param string $message
-     * @param array|Traversable $extra
+     * @param array|\Traversable $extra
      * @return Loggabble
      */
     public function err($message, $extra = array());
 
     /**
      * @param string $message
-     * @param array|Traversable $extra
+     * @param array|\Traversable $extra
      * @return Loggabble
      */
     public function warn($message, $extra = array());
 
     /**
      * @param string $message
-     * @param array|Traversable $extra
+     * @param array|\Traversable $extra
      * @return Loggabble
      */
     public function notice($message, $extra = array());
 
     /**
      * @param string $message
-     * @param array|Traversable $extra
+     * @param array|\Traversable $extra
      * @return Loggabble
      */
     public function info($message, $extra = array());
 
     /**
      * @param string $message
-     * @param array|Traversable $extra
+     * @param array|\Traversable $extra
      * @return Loggabble
      */
     public function debug($message, $extra = array());

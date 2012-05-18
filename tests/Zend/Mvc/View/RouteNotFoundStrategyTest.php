@@ -80,7 +80,7 @@ class RouteNotFoundStrategyTest extends TestCase
                 $this->strategy->detectNotFoundError($event);
                 $this->strategy->prepareNotFoundViewModel($event);
                 $viewModel = $event->getResult();
-                $this->assertInstanceOf('Zend\View\Model', $viewModel);
+                $this->assertInstanceOf('Zend\View\Model\ModelInterface', $viewModel);
                 $variables = $viewModel->getVariables();
                 if ($allow) {
                     $this->assertTrue(isset($variables['reason']));
@@ -150,7 +150,7 @@ class RouteNotFoundStrategyTest extends TestCase
 
         $this->strategy->prepareNotFoundViewModel($event);
         $model = $event->getResult();
-        $this->assertInstanceOf('Zend\View\Model', $model);
+        $this->assertInstanceOf('Zend\View\Model\ModelInterface', $model);
         $this->assertEquals($this->strategy->getNotFoundTemplate(), $model->getTemplate());
         $variables = $model->getVariables();
         $this->assertTrue(isset($variables['message']));
@@ -167,7 +167,7 @@ class RouteNotFoundStrategyTest extends TestCase
             $event->setResponse($response);
             $this->strategy->prepareNotFoundViewModel($event);
             $model = $event->getResult();
-            $this->assertInstanceOf('Zend\View\Model', $model);
+            $this->assertInstanceOf('Zend\View\Model\ModelInterface', $model);
             $variables = $model->getVariables();
             if ($allow) {
                 $this->assertTrue(isset($variables['reason']));
@@ -191,7 +191,7 @@ class RouteNotFoundStrategyTest extends TestCase
             $event->setResponse($response);
             $this->strategy->prepareNotFoundViewModel($event);
             $model = $event->getResult();
-            $this->assertInstanceOf('Zend\View\Model', $model);
+            $this->assertInstanceOf('Zend\View\Model\ModelInterface', $model);
             $variables = $model->getVariables();
             if ($allow) {
                 $this->assertTrue(isset($variables['exception']));
@@ -218,7 +218,7 @@ class RouteNotFoundStrategyTest extends TestCase
                 $event->setResponse($response);
                 $this->strategy->prepareNotFoundViewModel($event);
                 $model = $event->getResult();
-                $this->assertInstanceOf('Zend\View\Model', $model);
+                $this->assertInstanceOf('Zend\View\Model\ModelInterface', $model);
                 $variables = $model->getVariables();
                 if ($allow) {
                     $this->assertTrue(isset($variables['controller']));

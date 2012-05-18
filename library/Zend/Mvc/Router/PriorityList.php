@@ -65,11 +65,11 @@ class PriorityList implements Iterator, Countable
      * Insert a new route.
      *
      * @param  string  $name
-     * @param  Route   $route
+     * @param  RouteInterface   $route
      * @param  integer $priority
      * @return void
      */
-    public function insert($name, Route $route, $priority)
+    public function insert($name, RouteInterface $route, $priority)
     {
         $this->sorted = false;
         $this->count++;
@@ -115,7 +115,7 @@ class PriorityList implements Iterator, Countable
      * Get a route.
      * 
      * @param  string $name 
-     * @return Route
+     * @return RouteInterface
      */
     public function get($name)
     {
@@ -172,7 +172,7 @@ class PriorityList implements Iterator, Countable
      * current(): defined by Iterator interface.
      *
      * @see    Iterator::current()
-     * @return Route
+     * @return RouteInterface
      */
     public function current() 
     {
@@ -195,7 +195,7 @@ class PriorityList implements Iterator, Countable
      * next(): defined by Iterator interface.
      *
      * @see    Iterator::next()
-     * @return Route
+     * @return RouteInterface
      */
     public function next() 
     {

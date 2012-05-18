@@ -24,8 +24,6 @@ namespace Zend\GData\Books\Extension;
 /**
  * Extends the base Link class with Books extensions
  *
- * @uses       \Zend\GData\App\Extension\Link
- * @uses       \Zend\GData\Books
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Books

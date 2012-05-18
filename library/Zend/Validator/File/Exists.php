@@ -25,8 +25,6 @@ use Zend\Validator,
 /**
  * Validator which checks if the file already exists in the directory
  *
- * @uses      \Zend\Validator\AbstractValidator
- * @uses      \Zend\Validator\Exception
  * @category  Zend
  * @package   Zend_Validate
  * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -65,7 +63,7 @@ class Exists extends Validator\AbstractValidator
     /**
      * Sets validator options
      *
-     * @param  string|array|\Zend\Config\Config $options
+     * @param  string|array|\Traversable $options
      * @return void
      */
     public function __construct($options = null)

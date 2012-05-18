@@ -23,10 +23,6 @@ use Zend;
 use Zend\Locale;
 
 /**
- * @uses       \Zend\Locale\Locale
- * @uses       \Zend\Locale\Format
- * @uses       \Zend\Registry
- * @uses       \Zend\Validator\AbstractValidator
  * @category   Zend
  * @package    Zend_Validate
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -72,7 +68,7 @@ class Float extends AbstractValidator
     /**
      * Returns the set locale
      *
-     * @return \Zend\Locale
+     * @return \Zend\Locale\Locale
      */
     public function getLocale()
     {
@@ -113,7 +109,7 @@ class Float extends AbstractValidator
                 $this->error(self::NOT_FLOAT);
                 return false;
             }
-        } catch (Locale\Exception $e) {
+        } catch (Locale\Exception\ExceptionInterface $e) {
             $this->error(self::NOT_FLOAT);
             return false;
         }

@@ -26,11 +26,6 @@ use Zend\Server\Reflection\ReflectionClass,
 /**
  * Reflection for determining method signatures to use with server classes
  *
- * @uses       ReflectionClass
- * @uses       ReflectionObject
- * @uses       \Zend\Server\Reflection\ReflectionClass
- * @uses       \Zend\Server\Reflection\Exception
- * @uses       \Zend\Server\Reflection\ReflectionFunction
  * @category   Zend
  * @package    Zend_Server
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

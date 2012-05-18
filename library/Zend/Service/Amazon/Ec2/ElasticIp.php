@@ -27,7 +27,6 @@ use Zend\Service\Amazon,
  * An Amazon EC2 interface to allocate, associate, describe and release Elastic IP address
  * from your account.
  *
- * @uses       Zend_Service_Amazon_Ec2_Abstract
  * @category   Zend
  * @package    Zend_Service_Amazon
  * @subpackage Ec2

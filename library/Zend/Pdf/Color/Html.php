@@ -20,9 +20,8 @@
  */
 
 namespace Zend\Pdf\Color;
-use Zend\Pdf\Exception;
 
-use Zend\Pdf\Color,
+use Zend\Pdf\Exception,
     Zend\Pdf;
 
 /**
@@ -31,23 +30,19 @@ use Zend\Pdf\Color,
  * Factory class which vends \Zend\Pdf\Color objects from typical HTML
  * representations.
  *
- * @uses       \Zend\Pdf\Color
- * @uses       \Zend\Pdf\Color\GrayScale
- * @uses       \Zend\Pdf\Color\Rgb
- * @uses       \Zend\Pdf\Exception
  * @category   Zend
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Color
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Html implements Color
+class Html implements ColorInterface
 {
 
     /**
      * Color
      *
-     * @var \Zend\Pdf\Color
+     * @var ColorInterface
      */
     private $_color;
 
@@ -55,7 +50,7 @@ class Html implements Color
      * Class constructor.
      *
      * @param mixed $color
-     * @throws \Zend\Pdf\Exception
+     * @throws Exception\ExceptionInterface
      */
     public function __construct($color)
     {

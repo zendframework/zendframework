@@ -24,9 +24,6 @@ namespace Zend\GData\YouTube\Extension;
 /**
  * Specialized Link class for use with YouTube. Enables use of yt extension elements.
  *
- * @uses       \Zend\GData\App\Extension\Link
- * @uses       \Zend\GData\YouTube
- * @uses       \Zend\GData\YouTube\Extension\Token
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage YouTube

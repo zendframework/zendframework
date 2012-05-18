@@ -19,7 +19,10 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
+
 namespace Zend\Feed\Writer;
+
+use Traversable;
 
 /**
  * @category   Zend
@@ -31,15 +34,15 @@ namespace Zend\Feed\Writer;
 abstract class FeedFactory
 {
     /**
-     * Create and return a Feed basd on data provided.
+     * Create and return a Feed based on data provided.
      * 
-     * @param  array|Traversable $data 
+     * @param  array|\Traversable $data
      * @return Feed
      */
     public static function factory($data)
     {
         if (!is_array($data) && !$data instanceof Traversable) {
-            throw Exception\InvalidArgumentException(sprintf(
+            throw new Exception\InvalidArgumentException(sprintf(
                 '%s expects an array or Traversable argument; received "%s"',
                 __METHOD__,
                 (is_object($data) ? get_class($data) : gettype($data))
@@ -113,7 +116,7 @@ abstract class FeedFactory
 
         foreach ($entries as $data) {
             if (!is_array($data) && !$data instanceof Traversable && !$data instanceof Entry) {
-                throw Exception\InvalidArgumentException(sprintf(
+                throw new Exception\InvalidArgumentException(sprintf(
                     '%s expects an array, Traversable, or Zend\Feed\Writer\Entry argument; received "%s"',
                     __METHOD__,
                     (is_object($data) ? get_class($data) : gettype($data))

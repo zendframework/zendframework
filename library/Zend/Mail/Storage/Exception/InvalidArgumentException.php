@@ -20,12 +20,10 @@
  */
 
 namespace Zend\Mail\Storage\Exception;
-use Zend\Mail\Storage\Exception;
 
 /**
  * Exception for Zend_Mail component.
  *
- * @uses       Zend\Exception
  * @category   Zend
  * @package    Zend_Mail
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -33,6 +31,6 @@ use Zend\Mail\Storage\Exception;
  */
 class InvalidArgumentException
     extends \InvalidArgumentException
-    implements Exception
+    implements ExceptionInterface
 {
 }

@@ -19,17 +19,13 @@
  */
 
 namespace Zend\Feed\Reader\Extension\DublinCore;
-use Zend\Feed\Reader;
-use Zend\Feed\Reader\Collection;
-use Zend\Feed\Reader\Extension;
-use Zend\Date;
+
+use Zend\Feed\Reader,
+    Zend\Feed\Reader\Collection,
+    Zend\Feed\Reader\Extension,
+    Zend\Date;
 
 /**
-* @uses \Zend\Date\Date
-* @uses \Zend\Feed\Reader\Reader
-* @uses \Zend\Feed\Reader\Collection\Author
-* @uses \Zend\Feed\Reader\Collection\Category
-* @uses \Zend\Feed\Reader\Extension\AbstractEntry
 * @category Zend
 * @package Zend_Feed_Reader
 * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -259,7 +255,7 @@ class Feed extends Extension\AbstractFeed
     /**
      * Get categories (subjects under DC)
      *
-     * @return Reader\Reader_Collection_Category
+     * @return Collection\Category
      */
     public function getCategories()
     {

@@ -26,7 +26,6 @@ use Traversable,
 /**
  * Validator which checks if the file already exists in the directory
  *
- * @uses      \Zend\Validator\File\MimeType
  * @category  Zend
  * @package   Zend_Validate
  * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -53,8 +52,7 @@ class IsCompressed extends MimeType
     /**
      * Sets validator options
      *
-     * @param  string|array|\Zend\Config\Config $compression
-     * @return void
+     * @param  string|array|Traversable $compression
      */
     public function __construct($options = array())
     {

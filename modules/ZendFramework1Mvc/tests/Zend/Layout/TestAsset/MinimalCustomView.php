@@ -28,8 +28,7 @@ namespace ZendTest\Layout\TestAsset;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class MinimalCustomView implements \Zend\View\Renderer
-{
+class MinimalCustomView implements \Zend\View\Renderer\RendererInterface{
     public function getEngine() {}
 
     public function render($name) {}

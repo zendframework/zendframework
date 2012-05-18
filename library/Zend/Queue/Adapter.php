@@ -24,8 +24,6 @@ namespace Zend\Queue;
 /**
  * Interface for common queue operations
  *
- * @uses       \Zend\Queue\Queue
- * @uses       \Zend\Queue\Message
  * @category   Zend
  * @package    Zend_Queue
  * @subpackage Adapter
@@ -37,7 +35,7 @@ interface Adapter
     /**
      * Constructor
      *
-     * @param  array|\Zend\Config\Config $options
+     * @param  array|\Traversable $options
      * @param  \Zend\Queue\Queue $queue
      * @return void
      */

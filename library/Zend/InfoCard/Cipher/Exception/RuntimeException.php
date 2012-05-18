@@ -2,7 +2,9 @@
 
 namespace Zend\InfoCard\Cipher\Exception;
 
+use Zend\InfoCard\Exception;
+
 class RuntimeException
-    extends \RuntimeException
-    implements \Zend\InfoCard\Cipher\Exception
+    extends Exception\RuntimeException
+    implements ExceptionInterface
 {}

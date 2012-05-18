@@ -6,7 +6,7 @@ use Zend\Http\Request as HttpRequest,
     Zend\Uri\Http as HttpUri,
     Zend\Http\Header\Cookie,
     Zend\Stdlib\Parameters,
-    Zend\Stdlib\ParametersDescription;
+    Zend\Stdlib\ParametersInterface;
 
 class Request extends HttpRequest
 {
@@ -31,22 +31,39 @@ class Request extends HttpRequest
      */
     protected $requestUri;
 
+    /**
+     * Construct
+     *
+     * Instantiates request.
+     *
+     * @return void
+     */
     public function __construct()
     {
         $this->setEnv(new Parameters($_ENV));
         $this->setPost(new Parameters($_POST));
         $this->setQuery(new Parameters($_GET));
         $this->setServer(new Parameters($_SERVER));
-
-        if ($_COOKIE) {
-            $this->setCookies($_COOKIE);
-        }
+        $this->setCookies(new Parameters($_COOKIE));
 
         if ($_FILES) {
             $this->setFile(new Parameters($_FILES));
         }
+
+        $requestBody = file_get_contents('php://input');
+        if(strlen($requestBody) > 0){
+            $this->setContent($requestBody);
+        }
     }
 
+    /**
+     * Set cookies
+     *
+     * Instantiate and set cookies.
+     *
+     * @param $cookie
+     * @return Request
+     */
     public function setCookies($cookie)
     {
         $this->headers()->addHeader(new Cookie((array) $cookie));
@@ -133,12 +150,22 @@ class Request extends HttpRequest
      * Provide an alternate Parameter Container implementation for server parameters in this object, (this is NOT the
      * primary API for value setting, for that see server())
      *
-     * @param \Zend\Stdlib\ParametersDescription $server
+     * @param \Zend\Stdlib\ParametersInterface $server
      * @return Request
      */
-    public function setServer(ParametersDescription $server)
+    public function setServer(ParametersInterface $server)
     {
         $this->serverParams = $server;
+
+        // This seems to be the only way to get the Authorization header on Apache
+        if (function_exists('apache_request_headers')) {
+            $apacheRequestHeaders = apache_request_headers();
+            if (isset($apacheRequestHeaders['Authorization'])) {
+                if (!$this->serverParams->get('HTTP_AUTHORIZATION')) {
+                    $this->serverParams->set('HTTP_AUTHORIZATION', $apacheRequestHeaders['Authorization']);
+                }
+            }
+        }
 
         $this->headers()->addHeaders($this->serverToHeaders($this->serverParams));
 

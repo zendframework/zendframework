@@ -21,8 +21,6 @@
 namespace Zend\Validator;
 
 /**
- * @uses       \Zend\Filter\Alnum
- * @uses       \Zend\Validator\AbstractValidator
  * @category   Zend
  * @package    Zend_Validate
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -64,8 +62,7 @@ class Alnum extends AbstractValidator
     /**
      * Sets default option values for this instance
      *
-     * @param  boolean|\Zend\Config\Config $allowWhiteSpace
-     * @return void
+     * @param array|\Traversable $options
      */
     public function __construct($options = array())
     {

@@ -28,8 +28,6 @@ use Traversable,
  * Helper for rendering a template fragment in its own variable scope; iterates
  * over data provided and renders for each iteration.
  *
- * @uses       \Zend\View\Helper\Partial\Partial
- * @uses       \Zend\View\Exception\InvalidArgumentException
  * @package    Zend_View
  * @subpackage Helper
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

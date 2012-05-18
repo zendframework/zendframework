@@ -24,25 +24,20 @@ namespace Zend\InfoCard\XML;
 /**
  * An object representing an Xml EncryptedKEy block
  *
- * @uses       \Zend\InfoCard\XML\AbstractElement
- * @uses       \Zend\InfoCard\XML\EncryptedKey
- * @uses       \Zend\InfoCard\XML\Exception
- * @uses       \Zend\InfoCard\XML\KeyInfo\Factory
- * @uses       \Zend\InfoCard\XML\KeyInfo
  * @category   Zend
  * @package    Zend_InfoCard
  * @subpackage Zend_InfoCard_Xml
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class EncryptedKey extends AbstractElement implements KeyInfo
+class EncryptedKey extends AbstractElement implements KeyInfo\KeyInfoInterface
 {
     /**
      * Return an instance of the object based on input XML Data
      *
-     * @throws \Zend\InfoCard\XML\Exception
+     * @throws Exception\InvalidArgumentException
      * @param string $xmlData The EncryptedKey XML Block
-     * @return \Zend\InfoCard\XML\EncryptedKey
+     * @return EncryptedKey
      */
     static public function getInstance($xmlData)
     {
@@ -66,7 +61,7 @@ class EncryptedKey extends AbstractElement implements KeyInfo
     /**
      * Returns the Encyption Method Algorithm URI of the block
      *
-     * @throws \Zend\InfoCard\XML\Exception
+     * @throws Exception\RuntimeException
      * @return string the Encryption method algorithm URI
      */
     public function getEncryptionMethod()
@@ -92,7 +87,7 @@ class EncryptedKey extends AbstractElement implements KeyInfo
     /**
      * Returns the Digest Method Algorithm URI used
      *
-     * @throws \Zend\InfoCard\XML\Exception
+     * @throws Exception\RuntimeException
      * @return string the Digest Method Algorithm URI
      */
     public function getDigestMethod()
@@ -121,7 +116,7 @@ class EncryptedKey extends AbstractElement implements KeyInfo
     /**
      * Returns the KeyInfo block object
      *
-     * @throws \Zend\InfoCard\XML\Exception
+     * @throws Exception\RuntimeException
      * @return \Zend\InfoCard\XML\KeyInfo\AbstractKeyInfo
      */
     public function getKeyInfo()
@@ -137,7 +132,7 @@ class EncryptedKey extends AbstractElement implements KeyInfo
     /**
      * Return the encrypted value of the block in base64 format
      *
-     * @throws \Zend\InfoCard\XML\Exception
+     * @throws Exception\RuntimeException
      * @return string The Value of the CipherValue block in base64 format
      */
     public function getCipherValue()

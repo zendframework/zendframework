@@ -21,8 +21,9 @@
 namespace Zend\Soap;
 
 use DOMDocument,
+    DOMElement,
     Zend\Uri\Uri,
-    Zend\Soap\Wsdl\ComplexTypeStrategy;
+    Zend\Soap\Wsdl\ComplexTypeStrategy\ComplexTypeStrategyInterface as ComplexTypeStrategy;
 
 /**
  * \Zend\Soap\Wsdl
@@ -78,7 +79,7 @@ class Wsdl
      *
      * @param string  $name Name of the Web Service being Described
      * @param string|Uri $uri URI where the WSDL will be available
-     * @param \Zend\Soap\Wsdl\ComplexTypeStrategy $strategy
+     * @param ComplexTypeStrategy $strategy
      */
     public function __construct($name, $uri, ComplexTypeStrategy $strategy = null, array $classMap = array())
     {
@@ -156,7 +157,7 @@ class Wsdl
     /**
      * Set a strategy for complex type detection and handling
      *
-     * @param \Zend\Soap\Wsdl\ComplexTypeStrategy $strategy
+     * @param ComplexTypeStrategy $strategy
      * @return \Zend\Soap\Wsdl
      */
     public function setComplexTypeStrategy(ComplexTypeStrategy $strategy)
@@ -168,7 +169,7 @@ class Wsdl
     /**
      * Get the current complex type strategy
      *
-     * @return \Zend\Soap\Wsdl\ComplexTypeStrategy
+     * @return ComplexTypeStrategy
      */
     public function getComplexTypeStrategy()
     {

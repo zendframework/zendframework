@@ -58,14 +58,6 @@
 
             <listitem>
                 <para>
-                    <link linkend="zend.gdata.gbase">Google Base</link>
-                    provides the ability to retrieve, post, update, and
-                    delete items in Google Base.
-                </para>
-            </listitem>
-
-            <listitem>
-                <para>
                     <link linkend="zend.gdata.youtube">YouTube</link>
                     provides the ability to search and retrieve videos,
                     comments, favorites, subscriptions, user profiles

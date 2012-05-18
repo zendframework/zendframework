@@ -24,9 +24,6 @@ namespace Zend\GData\Calendar\Extension;
 /**
  * Specialized Link class for use with Calendar. Enables use of gCal extension elements.
  *
- * @uses       \Zend\GData\App\Extension\Link
- * @uses       \Zend\GData\Calendar
- * @uses       \Zend\GData\Calendar\Extension\WebContent
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Calendar

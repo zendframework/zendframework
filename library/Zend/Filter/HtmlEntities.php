@@ -20,8 +20,10 @@
 
 namespace Zend\Filter;
 
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
+
 /**
- * @uses       Zend\Filter\AbstractFilter
  * @category   Zend
  * @package    Zend_Filter
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -46,22 +48,21 @@ class HtmlEntities extends AbstractFilter
     /**
      * Corresponds to the forth htmlentities() argument
      *
-     * @var unknown_type
+     * @var boolean
      */
     protected $_doubleQuote;
 
     /**
      * Sets filter options
      *
-     * @param  integer|array $quoteStyle
-     * @param  string  $charSet
-     * @return void
+     * @param array|Traversable $options
      */
     public function __construct($options = array())
     {
-        if ($options instanceof \Zend\Config\Config) {
-            $options = $options->toArray();
-        } elseif (!is_array($options)) {
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
+        }
+        if (!is_array($options)) {
             $options = func_get_args();
             $temp['quotestyle'] = array_shift($options);
             if (!empty($options)) {
@@ -105,7 +106,7 @@ class HtmlEntities extends AbstractFilter
      * Sets the quoteStyle option
      *
      * @param  integer $quoteStyle
-     * @return \Zend\Filter\HtmlEntities Provides a fluent interface
+     * @return HtmlEntities Provides a fluent interface
      */
     public function setQuoteStyle($quoteStyle)
     {
@@ -128,7 +129,7 @@ class HtmlEntities extends AbstractFilter
      * Set encoding
      *
      * @param  string $value
-     * @return \Zend\Filter\HtmlEntities
+     * @return HtmlEntities
      */
     public function setEncoding($value)
     {
@@ -154,7 +155,7 @@ class HtmlEntities extends AbstractFilter
      * Proxies to {@link setEncoding()}
      *
      * @param  string $charSet
-     * @return \Zend\Filter\HtmlEntities Provides a fluent interface
+     * @return HtmlEntities Provides a fluent interface
      */
     public function setCharSet($charSet)
     {
@@ -175,7 +176,7 @@ class HtmlEntities extends AbstractFilter
      * Sets the doubleQuote option
      *
      * @param boolean $doubleQuote
-     * @return \Zend\Filter\HtmlEntities Provides a fluent interface
+     * @return HtmlEntities Provides a fluent interface
      */
     public function setDoubleQuote($doubleQuote)
     {
@@ -184,21 +185,29 @@ class HtmlEntities extends AbstractFilter
     }
 
     /**
-     * Defined by Zend_Filter_Interface
+     * Defined by Zend\Filter\FilterInterface
      *
      * Returns the string $value, converting characters to their corresponding HTML entity
      * equivalents where they exist
      *
      * @param  string $value
+     * @throws Exception\DomainException
      * @return string
      */
     public function filter($value)
     {
-        return htmlentities(
-            (string) $value, 
-            $this->getQuoteStyle(), 
-            $this->getEncoding(), 
-            $this->getDoubleQuote()
-        );
+        $filtered = htmlentities((string) $value, $this->getQuoteStyle(), $this->getEncoding(), $this->getDoubleQuote());
+        if (strlen((string) $value) && !strlen($filtered)) {
+            if (!function_exists('iconv')) {
+                throw new Exception\DomainException('Encoding mismatch has resulted in htmlentities errors');
+            }
+            $enc      = $this->getEncoding();
+            $value    = iconv('', $this->getEncoding() . '//IGNORE', (string) $value);
+            $filtered = htmlentities($value, $this->getQuoteStyle(), $enc, $this->getDoubleQuote());
+            if (!strlen($filtered)) {
+                throw new Exception\DomainException('Encoding mismatch has resulted in htmlentities errors');
+            }
+        }
+        return $filtered;
     }
 }

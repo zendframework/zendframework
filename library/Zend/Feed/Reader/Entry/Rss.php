@@ -19,28 +19,20 @@
  */
 
 namespace Zend\Feed\Reader\Entry;
-use Zend\Feed\Reader;
-use Zend\Date;
+
+use Zend\Feed\Reader,
+    Zend\Date,
+    Zend\Feed\Reader\Exception,
+    DOMElement,
+    DOMXPath;
 
 /**
-* @uses \Zend\Date\Date
-* @uses \Zend\Feed\Exception
-* @uses \Zend\Feed\Reader\Reader
-* @uses \Zend\Feed\Reader\Collection\Category
-* @uses \Zend\Feed\Reader\EntryAbstract
-* @uses \Zend\Feed\Reader\EntryInterface
-* @uses \Zend\Feed\Reader\Extension\Atom\Entry
-* @uses \Zend\Feed\Reader\Extension\Content\Entry
-* @uses \Zend\Feed\Reader\Extension\DublinCore\Entry
-* @uses \Zend\Feed\Reader\Extension\Slash\Entry
-* @uses \Zend\Feed\Reader\Extension\Thread\Entry
-* @uses \Zend\Feed\Reader\Extension\WellformedWeb\Entry
 * @category Zend
 * @package Reader\Reader
 * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
 * @license http://framework.zend.com/license/new-bsd New BSD License
 */
-class Rss extends AbstractEntry implements Reader\Entry
+class Rss extends AbstractEntry implements EntryInterface
 {
 
     /**
@@ -60,12 +52,12 @@ class Rss extends AbstractEntry implements Reader\Entry
     /**
      * Constructor
      *
-     * @param  Zend_Feed_Entry_Abstract $entry
+     * @param  DOMElement $entry
      * @param  string $entryKey
      * @param  string $type
      * @return void
      */
-    public function __construct(\DOMElement $entry, $entryKey, $type = null)
+    public function __construct(DOMElement $entry, $entryKey, $type = null)
     {
         parent::__construct($entry, $entryKey, $type);
         $this->_xpathQueryRss = '//item[' . ($this->_entryKey+1) . ']';
@@ -238,8 +230,7 @@ class Rss extends AbstractEntry implements Reader\Entry
                             break;
                         } catch (Date\Exception $e) {
                             if ($standard == Date\Date::DATES) {
-                                require_once 'Zend/Feed/Exception.php';
-                                throw new Exception(
+                                throw new Exception\RuntimeException(
                                     'Could not load date due to unrecognised'
                                     .' format (should follow RFC 822 or 2822):'
                                     . $e->getMessage(),
@@ -436,7 +427,7 @@ class Rss extends AbstractEntry implements Reader\Entry
     /**
      * Get all categories
      *
-     * @return Reader\Reader_Collection_Category
+     * @return Reader\Collection\Category
      */
     public function getCategories()
     {
@@ -616,9 +607,9 @@ class Rss extends AbstractEntry implements Reader\Entry
     /**
      * Set the XPath query (incl. on all Extensions)
      *
-     * @param \DOMXPath $xpath
+     * @param DOMXPath $xpath
      */
-    public function setXpath(\DOMXPath $xpath)
+    public function setXpath(DOMXPath $xpath)
     {
         parent::setXpath($xpath);
         foreach ($this->_extensions as $extension) {

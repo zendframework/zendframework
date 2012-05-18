@@ -26,19 +26,15 @@ use Zend\Search\Lucene\Storage\Directory,
     Zend\Search\Lucene;
 
 /**
- * FileSystem implementation of Directory abstraction.
+ * FileSystem implementation of DirectoryInterface abstraction.
  *
- * @uses       \Zend\Search\Lucene\Exception\InvalidArgumentException
- * @uses       \Zend\Search\Lucene\Exception\RuntimeException
- * @uses       \Zend\Search\Lucene\Storage\Directory
- * @uses       \Zend\Search\Lucene\Storage\File\Filesystem
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Storage
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Filesystem implements Directory
+class Filesystem implements DirectoryInterface
 {
     /**
      * Filesystem path to the directory
@@ -52,7 +48,7 @@ class Filesystem implements Directory
      * Array: filename => Zend_Search_Lucene_Storage_File object
      *
      * @var array
-     * @throws \Zend\Search\Lucene\Exception
+     * @throws \Zend\Search\Lucene\Exception\ExceptionInterface
      */
     protected $_fileHandlers;
 

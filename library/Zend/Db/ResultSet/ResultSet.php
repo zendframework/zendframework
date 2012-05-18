@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Db
- * @subpackage ResultSet
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Db
  */
 
 namespace Zend\Db\ResultSet;
@@ -31,8 +20,6 @@ use ArrayIterator,
  * @category   Zend
  * @package    Zend_Db
  * @subpackage ResultSet
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class ResultSet implements Countable, Iterator /*, ResultSetInterface */
 {
@@ -202,7 +189,7 @@ class ResultSet implements Countable, Iterator /*, ResultSetInterface */
         $this->fieldCount = count($row);
         return $this->fieldCount;
     }
-    
+
     /**
      * Iterator: move pointer to next item
      * 
@@ -210,7 +197,7 @@ class ResultSet implements Countable, Iterator /*, ResultSetInterface */
      */
     public function next()
     {
-        return $this->dataSource->next();
+        $this->dataSource->next();
     }
 
     /**
@@ -222,7 +209,7 @@ class ResultSet implements Countable, Iterator /*, ResultSetInterface */
     {
         return $this->dataSource->key();
     }
-    
+
     /**
      * Iterator: get current item
      * 
@@ -234,13 +221,13 @@ class ResultSet implements Countable, Iterator /*, ResultSetInterface */
 
         if ($this->returnType === self::TYPE_OBJECT && is_array($data)) {
             $row = clone $this->rowObjectPrototype;
-            $row->exchangeArray($data);
+            $row->populate($data);
             return $row;
         } else {
             return $data;
         }
     }
-    
+
     /**
      * Iterator: is pointer valid?
      * 
@@ -297,7 +284,5 @@ class ResultSet implements Countable, Iterator /*, ResultSetInterface */
         }
         return $return;
     }
-
-
 
 }

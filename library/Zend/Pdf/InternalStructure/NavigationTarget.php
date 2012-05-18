@@ -29,10 +29,6 @@ use Zend\Pdf;
 /**
  * PDF target (action or destination)
  *
- * @uses       \Zend\Pdf\Action\AbstractAction
- * @uses       \Zend\Pdf\Destination\AbstractDestination
- * @uses       \Zend\Pdf\InternalType\AbstractTypeObject
- * @uses       \Zend\Pdf\Exception
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Internal
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -45,7 +41,7 @@ abstract class NavigationTarget
      *
      * $param \Zend\Pdf\InternalType $resource
      * @return \Zend\Pdf\Destination\AbstractDestination|\Zend\Pdf\Action\AbstractAction
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
     public static function load(InternalType\AbstractTypeObject $resource)
     {

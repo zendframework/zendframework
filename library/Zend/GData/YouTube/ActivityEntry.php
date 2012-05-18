@@ -28,11 +28,6 @@ use Zend\GData\YouTube;
  *
  * @link http://code.google.com/apis/youtube/
  *
- * @uses       \Zend\GData\Entry
- * @uses       \Zend\GData\YouTube
- * @uses       Zend_Gdata_YouTube_Extension_Rating
- * @uses       \Zend\GData\YouTube\Extension\Username
- * @uses       \Zend\GData\YouTube\Extension\VideoId
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage YouTube

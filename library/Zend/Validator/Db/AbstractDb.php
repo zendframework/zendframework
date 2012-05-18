@@ -20,14 +20,13 @@
 
 namespace Zend\Validator\Db;
 
-use Traversable,
-    Zend\Config\Config,
-    Zend\Db\Adapter\AbstractAdapter as AbstractDBAdapter,
-    Zend\Db\Db,
-    Zend\Db\Select as DBSelect,
-    Zend\Db\Table\AbstractTable as AbstractTable,
-    Zend\Validator\AbstractValidator,
-    Zend\Validator\Exception;
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
+use Zend\Db\Adapter\Adapter as DbAdapter;
+use Zend\Db\Adapter\Driver\DriverInterface as DbDriverInterface;
+use Zend\Db\Sql\Select as DbSelect;
+use Zend\Validator\AbstractValidator;
+use Zend\Validator\Exception;
 
 /**
  * Class for Database record validation
@@ -55,7 +54,8 @@ abstract class AbstractDb extends AbstractValidator
 
     /**
      * Select object to use. can be set, or will be auto-generated
-     * @var DBSelect
+     *
+     * @var DbSelect
      */
     protected $_select;
 
@@ -80,9 +80,9 @@ abstract class AbstractDb extends AbstractValidator
     protected $_exclude = null;
 
     /**
-     * Database adapter to use. If null isValid() will use Zend_Db::getInstance instead
+     * Database adapter to use. If null isValid() will throw an exception
      *
-     * @var unknown_type
+     * @var \Zend\Db\Adapter\Adapter
      */
     protected $_adapter = null;
 
@@ -100,25 +100,31 @@ abstract class AbstractDb extends AbstractValidator
      * 'exclude' => An optional where clause or field/value pair to exclude from the query
      * 'adapter' => An optional database adapter to use
      *
-     * @param array|Config $options Options to use for this validator
+     * @param array|Traversable|DbSelect $options Options to use for this validator
+     * @throws \Zend\Validator\Exception\InvalidArgumentException
      */
     public function __construct($options = null)
     {
         parent::__construct();
-    
-        if ($options instanceof DBSelect) {
+
+        if ($options instanceof DbSelect) {
             $this->setSelect($options);
             return;
         }
 
-        if ($options instanceof Config) {
-            $options = $options->toArray();
-        } elseif ($options instanceof Traversable) {
-            $options = iterator_to_array($options);
-        } elseif (func_num_args() > 1) {
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
+        } else if (func_num_args() > 1) {
             $options       = func_get_args();
-            $temp['table'] = array_shift($options);
+            $firstArgument = array_shift($options);
+            if (is_array($firstArgument)) {
+                $temp = ArrayUtils::iteratorToArray($firstArgument);
+            } else {
+                $temp['table'] = $firstArgument;
+            }
+
             $temp['field'] = array_shift($options);
+
             if (!empty($options)) {
                 $temp['exclude'] = array_shift($options);
             }
@@ -159,30 +165,21 @@ abstract class AbstractDb extends AbstractValidator
     /**
      * Returns the set adapter
      *
-     * @return AbstractDBAdapter
+     * @throws \Zend\Validator\Exception\RuntimeException When no database adapter is defined
+     * @return DbAdapter
      */
     public function getAdapter()
     {
-        /**
-         * Check for an adapter being defined. If not, fetch the default adapter.
-         */
-        if ($this->_adapter === null) {
-            $this->_adapter = AbstractTable::getDefaultAdapter();
-            if (null === $this->_adapter) {
-                throw new Exception\RuntimeException('No database adapter present');
-            }
-        }
-
         return $this->_adapter;
     }
 
     /**
      * Sets a new database adapter
      *
-     * @param  AbstractDBAdapter $adapter
-     * @return AbstractDb
+     * @param  DbAdapter $adapter
+     * @return self Provides a fluent interface
      */
-    public function setAdapter(AbstractDBAdapter $adapter)
+    public function setAdapter(DbAdapter $adapter)
     {
         $this->_adapter = $adapter;
         return $this;
@@ -202,7 +199,7 @@ abstract class AbstractDb extends AbstractValidator
      * Sets a new exclude clause
      *
      * @param string|array $exclude
-     * @return AbstractDb
+     * @return self Provides a fluent interface
      */
     public function setExclude($exclude)
     {
@@ -228,7 +225,7 @@ abstract class AbstractDb extends AbstractValidator
      */
     public function setField($field)
     {
-        $this->_field = (string) $field;
+        $this->_field = (string)$field;
         return $this;
     }
 
@@ -246,11 +243,11 @@ abstract class AbstractDb extends AbstractValidator
      * Sets a new table
      *
      * @param string $table
-     * @return AbstractDb
+     * @return self Provides a fluent interface
      */
     public function setTable($table)
     {
-        $this->_table = (string) $table;
+        $this->_table = (string)$table;
         return $this;
     }
 
@@ -268,7 +265,7 @@ abstract class AbstractDb extends AbstractValidator
      * Sets a new schema
      *
      * @param string $schema
-     * @return AbstractDb
+     * @return self Provides a fluent interface
      */
     public function setSchema($schema)
     {
@@ -279,10 +276,10 @@ abstract class AbstractDb extends AbstractValidator
     /**
      * Sets the select object to be used by the validator
      *
-     * @param  DBSelect $select
-     * @return AbstractDb
+     * @param  DbSelect $select
+     * @return self Provides a fluent interface
      */
-    public function setSelect(DBSelect $select)
+    public function setSelect(DbSelect $select)
     {
         $this->_select = $select;
         return $this;
@@ -294,42 +291,45 @@ abstract class AbstractDb extends AbstractValidator
      * then it will auto-generate one from the given table,
      * schema, field, and adapter options.
      *
-     * @return DBSelect The Select object which will be used
+     * @return DbSelect The Select object which will be used
      */
     public function getSelect()
     {
         if (null === $this->_select) {
-            $db = $this->getAdapter();
+            $adapter  = $this->getAdapter();
+            $driver   = $adapter->getDriver();
+            $platform = $adapter->getPlatform();
 
             /**
              * Build select object
              */
-            $select = new DBSelect($db);
-            $select->from($this->_table, array($this->_field), $this->_schema);
+            $select = new DbSelect();
+            $select->from($this->_table, $this->_schema)->columns(
+                array($this->_field)
+            );
 
             // Support both named and positional parameters
-            if ($db->supportsParameters('named')) {
+            if (DbDriverInterface::PARAMETERIZATION_NAMED == $driver->getPrepareType()) {
                 $select->where(
-                    $db->quoteIdentifier($this->_field, true) . ' = :value'
+                    $platform->quoteIdentifier($this->_field, true) . ' = :value'
                 );
             } else {
                 $select->where(
-                    $db->quoteIdentifier($this->_field, true) . ' = ?'
+                    $platform->quoteIdentifier($this->_field, true) . ' = ?'
                 );
             }
 
             if ($this->_exclude !== null) {
                 if (is_array($this->_exclude)) {
                     $select->where(
-                          $db->quoteIdentifier($this->_exclude['field'], true) .
-                            ' != ?', $this->_exclude['value']
+                        $platform->quoteIdentifier($this->_exclude['field'], true) .
+                        ' != ?', $this->_exclude['value']
                     );
                 } else {
                     $select->where($this->_exclude);
                 }
             }
 
-            $select->limit(1);
             $this->_select = $select;
         }
 
@@ -344,14 +344,10 @@ abstract class AbstractDb extends AbstractValidator
      */
     protected function _query($value)
     {
-        $select = $this->getSelect();
+        $adapter  = $this->getAdapter();
+        $statement = $adapter->createStatement();
+        $this->getSelect()->prepareStatement($adapter, $statement);
 
-        $result = $select->getAdapter()->fetchRow(
-            $select,
-            array('value' => $value),
-            Db::FETCH_ASSOC
-        );
-
-        return $result;
+        return $statement->execute(array('value' => $value))->current();
     }
 }

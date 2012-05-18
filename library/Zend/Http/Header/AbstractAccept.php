@@ -30,7 +30,7 @@ use Zend\Stdlib\PriorityQueue;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @see        http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.1
  */
-abstract class AbstractAccept implements HeaderDescription
+abstract class AbstractAccept implements HeaderInterface
 {
 
     protected $values = array();

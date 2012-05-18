@@ -19,12 +19,10 @@
  */
 
 namespace Zend\OAuth\Token;
-use Zend\OAuth\Http,
-    Zend\OAuth\Exception as OAuthException;
+
+use Zend\OAuth\Http;
 
 /**
- * @uses       Zend\OAuth\Http\Utility
- * @uses       Zend\OAuth\Token\AbstractToken
  * @category   Zend
  * @package    Zend_OAuth
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -41,7 +39,7 @@ class AuthorizedRequest extends AbstractToken
      * Constructor
      *
      * @param  null|array $data
-     * @param  null|Zend\OAuth\Http\Utility $utility
+     * @param  null|\Zend\OAuth\Http\Utility $utility
      * @return void
      */
     public function __construct(array $data = null, Http\Utility $utility = null)

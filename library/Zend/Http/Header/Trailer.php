@@ -6,7 +6,7 @@ namespace Zend\Http\Header;
  * @throws Exception\InvalidArgumentException
  * @see http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.40
  */
-class Trailer implements HeaderDescription
+class Trailer implements HeaderInterface
 {
 
     public static function fromString($headerLine)

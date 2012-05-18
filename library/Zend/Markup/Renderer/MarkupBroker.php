@@ -44,12 +44,14 @@ class MarkupBroker extends PluginBroker
      * 
      * @param  mixed $plugin 
      * @return true
-     * @throws Exception
+     * @throws Exception\InvalidArgumentException
      */
     protected function validatePlugin($plugin)
     {
-        if (!$plugin instanceof Markup) {
-            throw new Exception('Markup converters must implement Zend\Markup\Renderer\Markup');
+        if (!$plugin instanceof Markup\MarkupInterface) {
+            throw new Exception\InvalidArgumentException(
+                'Markup converters must implement Zend\Markup\Renderer\Markup\MarkupInterface'
+            );
         }
         return true;
     }

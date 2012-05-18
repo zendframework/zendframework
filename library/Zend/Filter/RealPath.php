@@ -20,8 +20,10 @@
 
 namespace Zend\Filter;
 
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
+
 /**
- * @uses       Zend\Filter\AbstractFilter
  * @category   Zend
  * @package    Zend_Filter
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -37,7 +39,7 @@ class RealPath extends AbstractFilter
     /**
      * Class constructor
      *
-     * @param boolean|\Zend\Config\Config $options Options to set
+     * @param boolean|\Traversable $options Options to set
      */
     public function __construct($options = true)
     {
@@ -59,27 +61,27 @@ class RealPath extends AbstractFilter
      * TRUE when the path must exist
      * FALSE when not existing paths can be given
      *
-     * @param boolean|\Zend\Config\Config $exists Path must exist
-     * @return \Zend\Filter\RealPath
+     * @param boolean|array|Traversable $options Path must exist
+     * @return RealPath
      */
-    public function setExists($exists)
+    public function setExists($options)
     {
-        if ($exists instanceof \Zend\Config\Config) {
-            $exists = $exists->toArray();
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
         }
 
-        if (is_array($exists)) {
-            if (isset($exists['exists'])) {
-                $exists = (boolean) $exists['exists'];
+        if (is_array($options)) {
+            if (isset($options['exists'])) {
+                $options = (boolean) $options['exists'];
             }
         }
 
-        $this->_exists = (boolean) $exists;
+        $this->_exists = (boolean) $options;
         return $this;
     }
 
     /**
-     * Defined by Zend_Filter_Interface
+     * Defined by Zend\Filter\FilterInterface
      *
      * Returns realpath($value)
      *

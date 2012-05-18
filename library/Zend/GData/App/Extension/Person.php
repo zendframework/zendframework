@@ -26,10 +26,6 @@ use Zend\GData\App\Extension;
 /**
  * Base class for people (currently used by atom:author, atom:contributor)
  *
- * @uses       \Zend\GData\App\Extension
- * @uses       \Zend\GData\App\Extension\Name
- * @uses       \Zend\GData\App\Extension\Email
- * @uses       \Zend\GData\App\Extension\Uri
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage App

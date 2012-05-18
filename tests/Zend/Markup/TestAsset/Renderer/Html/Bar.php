@@ -32,7 +32,7 @@ use Zend\Markup\Renderer\AbstractRenderer;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Bar implements \Zend\Markup\Renderer\Markup
+class Bar implements \Zend\Markup\Renderer\Markup\MarkupInterface
 {
     public function setEncoding($encoding = 'UTF-8')
     {
@@ -61,4 +61,15 @@ class Bar implements \Zend\Markup\Renderer\Markup
         return "[foo{$bar}]" . $text . '[/foo]';
     }
 
+    /**
+     * Returns the result of filtering $value
+     *
+     * @param  mixed $value
+     * @throws Zend\Filter\Exception\RuntimeException If filtering $value is impossible
+     * @return mixed
+     */
+    public function filter($value)
+    {
+        // TODO: Implement filter() method.
+    }
 }

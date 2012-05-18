@@ -26,10 +26,6 @@ use Zend\Serializer\Exception\InvalidArgumentException,
     Zend\Json\Json as ZendJson;
 
 /**
- * @uses       Zend\Serializer\Adapter\AbstractAdapter
- * @uses       Zend\Serializer\Exception\InvalidArgumentException
- * @uses       Zend\Serializer\Exception\RuntimeException
- * @uses       Zend\Json\Json
  * @category   Zend
  * @package    Zend_Serializer
  * @subpackage Adapter
@@ -53,7 +49,7 @@ class Json extends AbstractAdapter
      * @param  mixed $value 
      * @param  array $opts 
      * @return string
-     * @throws Zend\Serializer\Exception on JSON encoding exception
+     * @throws InvalidArgumentException|RuntimeException on JSON encoding exception
      */
     public function serialize($value, array $opts = array())
     {
@@ -74,6 +70,7 @@ class Json extends AbstractAdapter
      * @param  string $json 
      * @param  array $opts 
      * @return mixed
+     * @throws InvalidArgumentException|RuntimeException
      */
     public function unserialize($json, array $opts = array())
     {

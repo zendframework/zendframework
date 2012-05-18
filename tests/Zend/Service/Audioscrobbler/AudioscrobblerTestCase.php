@@ -54,7 +54,7 @@ class AudioscrobblerTestCase extends \PHPUnit_Framework_TestCase
     {
         $this->_httpTestAdapter = new Http\Client\Adapter\Test();
         $this->_httpClient = new Http\Client();
-        $this->_httpClient->setConfig(array('adapter' => $this->_httpTestAdapter));
+        $this->_httpClient->setOptions(array('adapter' => $this->_httpTestAdapter));
         $this->_asService = new Audioscrobbler\Audioscrobbler();
         $this->_asService->setHttpClient($this->_httpClient);
     }

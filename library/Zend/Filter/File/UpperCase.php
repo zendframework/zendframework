@@ -23,8 +23,6 @@ use Zend\Filter,
     Zend\Filter\Exception;
 
 /**
- * @uses       \Zend\Filter\Exception
- * @uses       \Zend\Filter\StringToUpper
  * @category   Zend
  * @package    Zend_Filter
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -45,13 +43,13 @@ class UpperCase extends Filter\StringToUpper
     }
 
     /**
-     * Defined by Zend_Filter_Interface
+     * Defined by Zend\Filter\FilterInterface
      *
      * Does a lowercase on the content of the given file
      *
      * @param  string $value Full path of file to change
      * @return string The given $value
-     * @throws \Zend\Filter\Exception
+     * @throws \Zend\Filter\Exception\ExceptionInterface
      */
     public function __invoke($value)
     {

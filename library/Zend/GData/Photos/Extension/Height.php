@@ -25,8 +25,6 @@ namespace Zend\GData\Photos\Extension;
  * Represents the gphoto:height element used by the API.
  * The height of a photo in pixels.
  *
- * @uses       \Zend\GData\Extension
- * @uses       \Zend\GData\Photos
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Photos

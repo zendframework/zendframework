@@ -22,18 +22,6 @@
 namespace ZendTest\Paginator\ScrollingStyle;
 
 /**
- * @see Zend_Paginator
- */
-
-/**
- * @see Zend_Paginator_ScrollingStyle_Jumping
- */
-
-/**
- * @see PHPUnit_Framework_TestCase
- */
-
-/**
  * @category   Zend
  * @package    Zend_Paginator
  * @subpackage UnitTests
@@ -44,11 +32,11 @@ namespace ZendTest\Paginator\ScrollingStyle;
 class JumpingTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Zend_Paginator_ScrollingStyle_Jumping
+     * @var \Zend\Paginator\ScrollingStyle\Jumping
      */
     private $_scrollingStyle;
     /**
-     * @var Zend_Paginator
+     * @var \Zend\Paginator\Paginator
      */
     private $_paginator;
 

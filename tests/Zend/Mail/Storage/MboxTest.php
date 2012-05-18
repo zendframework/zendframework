@@ -21,6 +21,7 @@
 
 namespace ZendTest\Mail\Storage;
 
+use Zend\Config;
 use Zend\Mail\Storage;
 
 /**
@@ -83,7 +84,7 @@ class MboxTest extends \PHPUnit_Framework_TestCase
     public function testLoadConfig()
     {
         try {
-            $mail = new Storage\Mbox(new \Zend\Config\Config(array('filename' => $this->_mboxFile)));
+            $mail = new Storage\Mbox(new Config\Config(array('filename' => $this->_mboxFile)));
         } catch (\Exception $e) {
             $this->fail('exception raised while loading mbox folder');
         }

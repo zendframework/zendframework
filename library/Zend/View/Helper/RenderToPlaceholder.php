@@ -25,7 +25,6 @@ namespace Zend\View\Helper;
  * Renders a template and stores the rendered output as a placeholder
  * variable for later use.
  *
- * @uses       \Zend\View\Helper\AbstractHelper
  * @package    Zend_View
  * @subpackage Helper
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)

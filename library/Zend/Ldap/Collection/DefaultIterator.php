@@ -20,8 +20,8 @@
 
 namespace Zend\Ldap\Collection;
 
-use Zend\Ldap,
-    Zend\Ldap\Exception;
+use Zend\Ldap;
+use Zend\Ldap\Exception;
 
 /**
  * Zend\Ldap\Collection\DefaultIterator is the default collection iterator implementation
@@ -41,7 +41,7 @@ class DefaultIterator implements \Iterator, \Countable
     /**
      * LDAP Connection
      *
-     * @var Ldap\Ldap
+     * @var \Zend\Ldap\Ldap
      */
     protected $ldap = null;
 
@@ -76,10 +76,10 @@ class DefaultIterator implements \Iterator, \Countable
     /**
      * Constructor.
      *
-     * @param  Ldap\Ldap $ldap
-     * @param  resource  $resultId
-     * @return void
-     * @throws Exception\LdapException if no entries was found.
+     * @param  \Zend\Ldap\Ldap $ldap
+     * @param  resource        $resultId
+     * @throws \Zend\Ldap\Exception\LdapException if no entries was found.
+     * @return DefaultIterator
      */
     public function __construct(Ldap\Ldap $ldap, $resultId)
     {
@@ -115,7 +115,7 @@ class DefaultIterator implements \Iterator, \Countable
     /**
      * Gets the current LDAP connection.
      *
-     * @return Ldap\Ldap
+     * @return \Zend\Ldap\Ldap
      */
     public function getLDAP()
     {
@@ -190,7 +190,7 @@ class DefaultIterator implements \Iterator, \Countable
      * Implements Iterator
      *
      * @return array|null
-     * @throws Exception\LdapException
+     * @throws \Zend\Ldap\Exception\LdapException
      */
     public function current()
     {
@@ -239,8 +239,8 @@ class DefaultIterator implements \Iterator, \Countable
      * Return the result item key
      * Implements Iterator
      *
+     * @throws \Zend\Ldap\Exception\LdapException
      * @return string|null
-     * @throws Exception\LdapException if can't get Dn.
      */
     public function key()
     {
@@ -263,7 +263,8 @@ class DefaultIterator implements \Iterator, \Countable
      * Move forward to next result item
      * Implements Iterator
      *
-     * @throws Exception\LdapException
+     * @throws \Zend\Ldap\Exception\LdapException
+     * @return
      */
     public function next()
     {
@@ -289,7 +290,8 @@ class DefaultIterator implements \Iterator, \Countable
      * Rewind the Iterator to the first result item
      * Implements Iterator
      *
-     * @throws Exception\LdapException
+     *
+     * @throws \Zend\Ldap\Exception\LdapException
      */
     public function rewind()
     {

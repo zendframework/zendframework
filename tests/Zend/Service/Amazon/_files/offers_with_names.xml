@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<ItemLookupResponse xmlns="http://webservices.amazon.com/AWSECommerceService/2005-10-05">
+<ItemLookupResponse xmlns="http://webservices.amazon.com/AWSECommerceService/2011-08-01">
   <OperationRequest>
     <HTTPHeaders>
       <Header Name="UserAgent" Value="Zend_Http_Client"/>
@@ -11,7 +11,7 @@
       <Argument Name="Service" Value="AWSECommerceService"/>
       <Argument Name="Signature" Value="xxxxxxxxxxxxxxxxx"/>
       <Argument Name="MerchantId" Value="All"/>
-      <Argument Name="Version" Value="2005-10-05"/>
+      <Argument Name="Version" Value="2011-08-01"/>
       <Argument Name="ItemId" Value="0439774098,B00000194U"/>
       <Argument Name="IdType" Value="ASIN"/>
       <Argument Name="AWSAccessKeyId" Value="xxxxxxxxxxxx"/>

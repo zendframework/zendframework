@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category  Zend
- * @package   Zend_Uri
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd     New BSD License
- * @version   $Id$
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Uri
  */
 
 namespace Zend\Uri;
@@ -280,11 +269,14 @@ class Uri
      * Compose the URI into a string
      *
      * @return string
+     * @throws Exception\InvalidUriException
      */
     public function toString()
     {
         if (!$this->isValid()) {
-            throw new Exception\InvalidUriException('URI is not valid and cannot be converted into a string');
+            throw new Exception\InvalidUriException(
+                'URI is not valid and cannot be converted into a string'
+            );
         }
 
         $uri = '';
@@ -379,6 +371,7 @@ class Uri
      * (@link http://tools.ietf.org/html/rfc3986#section-5.2)
      *
      * @param  Uri|string $baseUri
+     * @throws Exception\InvalidUriTypeException
      * @return Uri
      */
     public function resolve($baseUri)
@@ -486,8 +479,10 @@ class Uri
             return $this;
         }
 
-        $pathParts = preg_split('|(/)|', $this->getPath(),    null, PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY);
-        $baseParts = preg_split('|(/)|', $baseUri->getPath(), null, PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY);
+        $pathParts = preg_split('|(/)|', $this->getPath(), null,
+                                PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY);
+        $baseParts = preg_split('|(/)|', $baseUri->getPath(), null,
+                                PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY);
 
         // Get the intersection of existing path parts and those from the
         // provided URI
@@ -656,6 +651,7 @@ class Uri
      * are allowed in HTTP URIs.
      *
      * @param  string $host
+     * @throws Exception\InvalidUriPartException
      * @return Uri
      */
     public function setHost($host)
@@ -939,6 +935,7 @@ class Uri
      *
      * @param  string $input
      * @return string
+     * @throws Exception\InvalidArgumentException
      */
     public static function encodeQueryFragment($input)
     {
@@ -968,8 +965,8 @@ class Uri
      * still be valid, but not full)
      *
      * @param  string $uriString
+     * @throws Exception\InvalidArgumentException
      * @return string|null
-     * @throws InvalidArgumentException
      */
     public static function parseScheme($uriString)
     {
@@ -1245,6 +1242,7 @@ class Uri
      *
      * @param string $input
      * @param string $allowed Pattern of allowed characters
+     * @return mixed
      */
     protected static function decodeUrlEncodedChars($input, $allowed = '')
     {
@@ -1253,7 +1251,7 @@ class Uri
             if (preg_match($allowed, $char)) {
                 return $char;
             }
-            return $match[0];
+            return strtoupper($match[0]);
         };
 
         return preg_replace_callback('/%[A-Fa-f0-9]{2}/', $decodeCb, $input);

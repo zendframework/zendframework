@@ -24,8 +24,6 @@ namespace Zend\GData\YouTube\Extension;
 /**
  * Represents the YouTube specific media:credit element
  *
- * @uses       \Zend\GData\Extension
- * @uses       \Zend\GData\Media
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Media

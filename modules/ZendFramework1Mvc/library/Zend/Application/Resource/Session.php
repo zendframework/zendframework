@@ -23,14 +23,15 @@ namespace Zend\Application\Resource;
 
 use Zend\Application\ResourceException,
     Zend\Session\SessionManager,
-    Zend\Session\SaveHandler;
+    Zend\Session\SaveHandler,
+    Zend\Session\ManagerInterface as Manager;
 
 /**
  * Resource for setting session options
  *
  * @uses       \Zend\Application\ResourceException
  * @uses       \Zend\Application\Resource\AbstractResource
- * @uses       \Zend\Session\Manager
+ * @uses       \Zend\Session\ManagerInterface
  * @category   Zend
  * @package    Zend_Application
  * @subpackage Resource
@@ -103,7 +104,7 @@ class Session extends AbstractResource
 
             // Inject session manager
             $manager = $this->getManager();
-            if ($manager instanceof \Zend\Session\Manager) {
+            if ($manager instanceof Manager) {
                 $this->_saveHandler->setManager($manager);
             }
         }

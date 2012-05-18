@@ -27,10 +27,6 @@ use Zend\Pdf\Exception;
  * PDF file trailer.
  * Stores and provides access to the trailer parced from a PDF file
  *
- * @uses       \Zend\Pdf\Exception
- * @uses       \Zend\Pdf\Trailer\AbstractTrailer
- * @uses       \Zend\Pdf\InternalType\DirctionaryObject
- * @uses       \Zend\Pdf\InternalType\IndirectObjectReference\Context
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Internal
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -125,14 +121,14 @@ class Parsed extends AbstractTrailer
      * Get header of free objects list
      * Returns object number of last free object
      *
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      * @return integer
      */
     public function getLastFreeObject()
     {
         try {
             $this->_context->getRefTable()->getNextFree('0 65535 R');
-        } catch (Exception $e) {
+        } catch (Exception\ExceptionInterface $e) {
             if ($e->getMessage() == 'Object not found.') {
                 /**
                  * Here is work around for some wrong generated PDFs.

@@ -22,8 +22,6 @@
 namespace Zend\View\Helper;
 
 /**
- * @uses       \Zend\Json\Json
- * @uses       \Zend\View\Helper\AbstractHelper
  * @category   Zend
  * @package    Zend_View
  * @subpackage Helper

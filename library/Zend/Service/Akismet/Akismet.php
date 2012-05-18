@@ -220,7 +220,7 @@ class Akismet extends \Zend\Service\AbstractService
         $uri    = 'http://' . $host . ':' . $this->getPort() . $path;
         $client = $this->getHttpClient();
         $client->setUri($uri);
-        $client->setConfig(array(
+        $client->setOptions(array(
             'useragent'    => $this->getUserAgent(),
         ));
 
@@ -264,7 +264,7 @@ class Akismet extends \Zend\Service\AbstractService
      *
      * @param string $path
      * @param array $params
-     * @return Zend_Http_Response
+     * @return Zend\Http\Response
      * @throws Zend\Service\Exception if missing user_ip or user_agent fields
      */
     protected function _makeApiCall($path, $params)

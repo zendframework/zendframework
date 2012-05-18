@@ -21,7 +21,8 @@
 
 namespace Zend\Loader;
 
-use Zend\Di\Locator;
+use Zend\ServiceManager\ServiceLocatorAwareInterface;
+use Zend\ServiceManager\ServiceLocatorInterface;
 
 /**
  * Plugin broker base implementation
@@ -31,7 +32,7 @@ use Zend\Di\Locator;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class PluginBroker implements Broker, LocatorAware
+class PluginBroker implements Broker, ServiceLocatorAwareInterface
 {
     /**
      * @var string Default class loader to utilize with this broker
@@ -59,7 +60,7 @@ class PluginBroker implements Broker, LocatorAware
     protected $validator;
 
     /**
-     * @var Zend\Di\Locator
+     * @var Zend\Di\LocatorInterface
      */
     protected $locator;
 
@@ -81,7 +82,7 @@ class PluginBroker implements Broker, LocatorAware
     /**
      * Configure plugin broker
      * 
-     * @param  array|Traversable $options 
+     * @param  array|\Traversable $options
      * @return PluginBroker
      */
     public function setOptions($options)
@@ -186,7 +187,8 @@ class PluginBroker implements Broker, LocatorAware
             return $this->plugins[$pluginName];
         }
 
-        if (class_exists($plugin)) {
+        $locator = $this->getServiceLocator();
+        if (class_exists($plugin) || ($locator && $locator->has($plugin))) {
             // Allow loading fully-qualified class names via the broker
             $class = $plugin;
         } else {
@@ -197,15 +199,12 @@ class PluginBroker implements Broker, LocatorAware
             }
         }
 
-        if ($this->getLocator()) {
-            if (empty($options)) {
-                $instance = $this->getLocator()->get($class);
-            } elseif ($this->isAssocArray($options)) {
+        if ($locator && $locator->has($class)) {
+            if (!empty($options) && $this->isAssocArray($options)) {
                 // This might be inconsistent with what $options should be?
-                $instance = $this->getLocator()->get($class, $options);
+                $instance = $locator->get($class, $options);
             } else {
-                // @TODO: Clean this up, somehow?
-                $instance = $this->getLocator()->get($class);
+                $instance = $locator->get($class);
             }
         } else {
             if (empty($options)) {
@@ -395,9 +394,9 @@ class PluginBroker implements Broker, LocatorAware
     /**
      * Get locator. 
      * 
-     * @return Zend\Di\Locator
+     * @return ServiceLocatorInterface
      */
-    public function getLocator()
+    public function getServiceLocator()
     {
         return $this->locator;
     }
@@ -405,9 +404,9 @@ class PluginBroker implements Broker, LocatorAware
     /**
      * Set locator.
      *
-     * @param Zend\Di\Locator $locator
+     * @param ServiceLocatorInterface $locator
      */
-    public function setLocator(Locator $locator)
+    public function setServiceLocator(ServiceLocatorInterface $locator)
     {
         $this->locator = $locator;
         return $this;

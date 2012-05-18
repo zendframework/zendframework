@@ -22,9 +22,9 @@
 namespace ZendTest\Mvc\View\TestAsset;
 
 use ArrayObject,
-    Zend\View\Model,
-    Zend\View\Renderer,
-    Zend\View\Resolver;
+    Zend\View\Model\ModelInterface as Model,
+    Zend\View\Renderer\RendererInterface as Renderer,
+    Zend\View\Resolver\ResolverInterface as Resolver;
 
 /**
  * Mock renderer

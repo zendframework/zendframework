@@ -20,23 +20,21 @@
  */
 
 namespace Zend\Markup\Parser;
-use Zend\Markup\Parser,
-    Zend\Markup\Token,
-    Zend\Markup\TokenList,
-    Zend\Config\Config;
+
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
+use Zend\Markup\Parser;
+use Zend\Markup\Token;
+use Zend\Markup\TokenList;
 
 /**
- * @uses       \Zend\Markup\Parser\Exception
- * @uses       \Zend\Markup\Parser\ParserInterface
- * @uses       \Zend\Markup\Token
- * @uses       \Zend\Markup\TokenList
  * @category   Zend
  * @package    Zend_Markup
  * @subpackage Parser
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Bbcode implements Parser
+class Bbcode implements ParserInterface
 {
     const NEWLINE   = "[newline\0]";
 
@@ -131,14 +129,13 @@ class Bbcode implements Parser
     /**
      * Constructor
      *
-     * @param \Zend\Config\Config|array $config
-     *
+     * @param  array|Traversable $options
      * @return array
      */
     public function __construct($options = array())
     {
-        if ($options instanceof Config) {
-            $options = $options->toArray();
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
         }
 
         if (isset($options['groups'])) {
@@ -160,8 +157,8 @@ class Bbcode implements Parser
      *
      * @param string $group
      * @param string $inside
-     *
      * @return Bbcode
+     * @throws Exception\InvalidArgumentException
      */
     public function allowInside($group, $inside)
     {
@@ -420,6 +417,7 @@ class Bbcode implements Parser
      *
      * @param  string $value
      * @return \Zend\Markup\TokenList
+     * @throws Exception\InvalidArgumentException
      */
     public function parse($value)
     {
@@ -582,7 +580,7 @@ class Bbcode implements Parser
      * @throws Exception\RuntimeException If there are no groups defined
      * @throws Exception\RuntimeException If there is no initial group defined
      * @throws Exception\RuntimeException If there is no default group defined
-     *
+     * @throws Exception\InvalidArgumentException If there is no treebuilding strategy
      * @return \Zend\Markup\TokenList/
      */
     public function buildTree(array $tokens, $strategy = 'default')

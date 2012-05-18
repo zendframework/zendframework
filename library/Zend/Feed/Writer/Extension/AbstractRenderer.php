@@ -20,8 +20,10 @@
 
 namespace Zend\Feed\Writer\Extension;
 
+use DOMDocument,
+    DOMElement;
+
 /**
-* @uses \Zend\Feed\Writer\Extension\RendererInterface
 * @category Zend
 * @package Zend_Feed_Writer_Entry_Rss
 * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -30,7 +32,7 @@ namespace Zend\Feed\Writer\Extension;
 abstract class AbstractRenderer implements Renderer
 {
     /**
-     * @var \DOMDocument
+     * @var DOMDocument
      */
     protected $_dom = null;
     
@@ -55,7 +57,7 @@ abstract class AbstractRenderer implements Renderer
     protected $_type = null;
     
     /**
-     * @var \DOMElement
+     * @var DOMElement
      */
     protected $_rootElement = null;
     
@@ -81,7 +83,7 @@ abstract class AbstractRenderer implements Renderer
      * Set feed encoding
      * 
      * @param  string $enc 
-     * @return Zend_Feed_Writer_Extension_RendererAbstract
+     * @return AbstractRenderer
      */
     public function setEncoding($enc)
     {
@@ -92,7 +94,7 @@ abstract class AbstractRenderer implements Renderer
     /**
      * Get feed encoding
      * 
-     * @return void
+     * @return string
      */
     public function getEncoding()
     {
@@ -102,11 +104,11 @@ abstract class AbstractRenderer implements Renderer
     /**
      * Set DOMDocument and DOMElement on which to operate
      * 
-     * @param  \DOMDocument $dom 
-     * @param  \DOMElement $base 
-     * @return Zend_Feed_Writer_Extension_RendererAbstract
+     * @param  DOMDocument $dom
+     * @param  DOMElement $base
+     * @return AbstractRenderer
      */
-    public function setDomDocument(\DOMDocument $dom, \DOMElement $base)
+    public function setDomDocument(DOMDocument $dom, DOMElement $base)
     {
         $this->_dom  = $dom;
         $this->_base = $base;
@@ -127,7 +129,7 @@ abstract class AbstractRenderer implements Renderer
      * Set feed type
      * 
      * @param  string $type 
-     * @return Zend_Feed_Writer_Extension_RendererAbstract
+     * @return AbstractRenderer
      */
     public function setType($type)
     {
@@ -149,9 +151,9 @@ abstract class AbstractRenderer implements Renderer
      * Set root element of document 
      * 
      * @param  DOMElement $root 
-     * @return Zend_Feed_Writer_Extension_RendererAbstract
+     * @return AbstractRenderer
      */
-    public function setRootElement(\DOMElement $root)
+    public function setRootElement(DOMElement $root)
     {
         $this->_rootElement = $root;
         return $this;

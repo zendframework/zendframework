@@ -21,9 +21,10 @@
 
 namespace Zend\Service\ReCaptcha;
 
-use Zend\Config\Config,
-    Zend\Http\Request,
-    Zend\Service\AbstractService;
+use Traversable;
+use Zend\Http\Request;
+use Zend\Service\AbstractService;
+use Zend\Stdlib\ArrayUtils;
 
 /**
  * Zend_Service_ReCaptcha
@@ -115,10 +116,9 @@ class ReCaptcha extends AbstractService
      *
      * @param string $publicKey
      * @param string $privateKey
-     * @param array $params
-     * @param array $options
+     * @param array|Traversable $params
+     * @param array|Traversable $options
      * @param string $ip
-     * @param array|\Zend\Config\Config $params
      */
     public function __construct($publicKey = null, $privateKey = null,
                                 $params = null, $options = null, $ip = null)
@@ -207,24 +207,26 @@ class ReCaptcha extends AbstractService
     /**
      * Set parameters
      *
-     * @param array|\Zend\Config\Config $params
+     * @param  array|Traversable $params
      * @return \Zend\Service\ReCaptcha\ReCaptcha
      * @throws \Zend\Service\ReCaptcha\Exception
      */
     public function setParams($params)
     {
-        if ($params instanceof Config) {
-            $params = $params->toArray();
+        if ($params instanceof Traversable) {
+            $params = ArrayUtils::iteratorToArray($params);
         }
 
-        if (is_array($params)) {
-            foreach ($params as $k => $v) {
-                $this->setParam($k, $v);
-            }
-        } else {
-            throw new Exception(
-                'Expected array or Zend\\Config\\Config object'
-            );
+        if (!is_array($params)) {
+            throw new Exception(sprintf(
+                '%s expects an array or Traversable set of params; received "%s"',
+                __METHOD__,
+                (is_object($params) ? get_class($params) : gettype($params))
+            ));
+        }
+
+        foreach ($params as $k => $v) {
+            $this->setParam($k, $v);
         }
 
         return $this;
@@ -268,14 +270,14 @@ class ReCaptcha extends AbstractService
     /**
      * Set options
      *
-     * @param array|\Zend\Config\Config $options
+     * @param  array|Traversable $options
      * @return \Zend\Service\ReCaptcha\ReCaptcha
      * @throws \Zend\Service\ReCaptcha\Exception
      */
     public function setOptions($options)
     {
-        if ($options instanceof Config) {
-            $options = $options->toArray();
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
         }
 
         if (is_array($options)) {
@@ -284,7 +286,7 @@ class ReCaptcha extends AbstractService
             }
         } else {
             throw new Exception(
-                'Expected array or Zend\\Config\\Config object'
+                'Expected array or Traversable object'
             );
         }
 

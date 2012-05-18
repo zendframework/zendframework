@@ -24,10 +24,6 @@ namespace Zend\Test\PHPUnit\Db\DataSet;
 /**
  * Use a Zend_Db Rowset as a datatable for assertions with other PHPUnit Database extension tables.
  *
- * @uses       PHPUnit_Extensions_Database_DataSet_AbstractTable
- * @uses       PHPUnit_Extensions_Database_DataSet_DefaultTableMetaData
- * @uses       \Zend\Db\Table\AbstractRowset
- * @uses       \Zend\Test\PHPUnit\Db\Exception\InvalidArgumentException
  * @category   Zend
  * @package    Zend_Test
  * @subpackage PHPUnit

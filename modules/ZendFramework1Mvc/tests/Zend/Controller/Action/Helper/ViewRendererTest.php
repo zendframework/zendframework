@@ -137,7 +137,7 @@ class ViewRendererTest extends \PHPUnit_Framework_TestCase
     protected function _checkDefaults($module = 'foo', $count = 1)
     {
         $this->assertTrue(isset($this->helper->view));
-        $this->assertTrue($this->helper->view instanceof View\Renderer);
+        $this->assertTrue($this->helper->view instanceof View\Renderer\RendererInterface);
         $this->assertFalse($this->helper->getNeverRender());
         $this->assertFalse($this->helper->getNoRender());
         $this->assertNull($this->helper->getResponseSegment());

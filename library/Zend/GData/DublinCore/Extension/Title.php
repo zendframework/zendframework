@@ -24,8 +24,6 @@ namespace Zend\GData\DublinCore\Extension;
 /**
  * Name given to the resource
  *
- * @uses       \Zend\GData\DublinCore
- * @uses       \Zend\GData\Extension
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage DublinCore

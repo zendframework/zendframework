@@ -22,7 +22,7 @@
 namespace Zend\Navigation\Page;
 
 use Traversable,
-    Zend\Acl\Resource as AclResource,
+    Zend\Acl\Resource\ResourceInterface as AclResource,
     Zend\Navigation\Container,
     Zend\Navigation\Exception,
     Zend\Stdlib\ArrayUtils;
@@ -886,8 +886,7 @@ abstract class AbstractPage extends Container
 
         $method = 'set' . self::normalizePropertyName($property);
 
-        if ($method != 'setOptions' && $method != 'setConfig'
-            && method_exists($this, $method)
+        if ($method != 'setOptions' && method_exists($this, $method)
         ) {
             $this->$method($value);
         } else {

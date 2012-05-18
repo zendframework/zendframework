@@ -25,8 +25,6 @@ use Zend\Markup;
 /**
  * List item markup
  *
- * @uses       \Zend\Markup\Renderer\Markup\Html\AbstractHtml
- * @uses       \Zend\Markup\Token
  * @category   Zend
  * @package    Zend_Markup
  * @subpackage Renderer_Markup_Html

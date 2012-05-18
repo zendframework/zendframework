@@ -2,13 +2,13 @@
 
 namespace ZendTest\Mvc\TestAsset;
 
-use Zend\Di\Locator as LocatorDefinition,
+use Zend\ServiceManager\ServiceLocatorInterface,
     Zend\Di\Exception\ClassNotFoundException;
 
 /**
  * Dummy locator used to test handling of locator objects by Application
  */
-class Locator implements LocatorDefinition
+class Locator implements ServiceLocatorInterface
 {
     protected $services = array();
 
@@ -20,6 +20,11 @@ class Locator implements LocatorDefinition
 
         $service = call_user_func_array($this->services[$name], $params);
         return $service;
+    }
+
+    public function has($name)
+    {
+        return (isset($this->services[$name]));
     }
 
     public function add($name, $callback)

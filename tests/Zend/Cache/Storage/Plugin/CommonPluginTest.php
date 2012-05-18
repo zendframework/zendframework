@@ -39,7 +39,7 @@ abstract class CommonPluginTest extends \PHPUnit_Framework_TestCase
     /**
      * The storage plugin
      *
-     * @var Zend\Cache\Storage\Plugin
+     * @var \Zend\Cache\Storage\Plugin\PluginInterface
      */
     protected $_plugin;
 

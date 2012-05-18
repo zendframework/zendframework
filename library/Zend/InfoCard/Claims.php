@@ -24,7 +24,6 @@ namespace Zend\InfoCard;
  * Result value of the InfoCard component, contains any error messages and claims
  * from the processing of an information card.
  *
- * @uses       \Zend\InfoCard\Exception
  * @category   Zend
  * @package    Zend_InfoCard
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -110,7 +109,7 @@ class Claims
      * set, it figures out which one to consider 'default' by taking the first namespace sorted by use-count
      * in claims
      *
-     * @throws \Zend\InfoCard\Exception
+     * @throws Exception\RuntimeException
      * @return string The default namespace
      */
     public function getDefaultNamespace()
@@ -131,7 +130,7 @@ class Claims
             }
 
             if(empty($leader)) {
-                throw new Exception("Failed to determine default namespace");
+                throw new Exception\RuntimeException("Failed to determine default namespace");
             }
 
             $this->setDefaultNamespace($leader);
@@ -143,7 +142,7 @@ class Claims
     /**
      * Set the default namespace, overriding any existing default
      *
-     * @throws \Zend\InfoCard\Exception
+     * @throws Exception\InvalidArgumentException
      * @param string $namespace The default namespace to use
      * @return \Zend\InfoCard\Claims
      */
@@ -197,9 +196,9 @@ class Claims
      * Set the claims for the claims object. Can only be set once and is done
      * by the component itself. Internal use only.
      *
-     * @throws \Zend\InfoCard\Exception
+     * @throws Exception\InvalidArgumentException
      * @param array $claims
-     * @return \Zend\InfoCard\Claims
+     * @return Claims
      */
     public function setClaims(Array $claims)
     {
@@ -214,9 +213,9 @@ class Claims
     /**
      * Set the result code of the claims object.
      *
-     * @throws \Zend\InfoCard\Exception
+     * @throws Exception\InvalidArgumentException
      * @param int $code The result code
-     * @return \Zend\InfoCard\Claims
+     * @return Claims
      */
     public function setCode($code)
     {
@@ -269,7 +268,9 @@ class Claims
 
     /**
      * Magic helper function
-     * @throws \Zend\InfoCard\Exception
+     *
+     * @param $k
+     * @throws Exception\InvalidArgumentException
      */
     public function __unset($k)
     {
@@ -278,6 +279,9 @@ class Claims
 
     /**
      * Magic helper function
+     *
+     * @param $k
+     * @return bool
      */
     public function __isset($k)
     {
@@ -286,6 +290,9 @@ class Claims
 
     /**
      * Magic helper function
+     *
+     * @param $k
+     * @return mixed
      */
     public function __get($k)
     {
@@ -294,7 +301,10 @@ class Claims
 
     /**
      * Magic helper function
-     * @throws \Zend\InfoCard\Exception
+     *
+     * @param $k
+     * @param $v
+     * @throws Exception\InvalidArgumentException
      */
     public function __set($k, $v)
     {

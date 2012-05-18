@@ -68,7 +68,7 @@ class OfflineTest extends TestLdap\AbstractTestCase
     }
 
     /**
-     * @expectedException Zend\Ldap\Exception
+     * @expectedException Zend\Ldap\Exception\ExceptionInterface
      */
     public function testCreateFromArrayMissingDn()
     {
@@ -78,7 +78,7 @@ class OfflineTest extends TestLdap\AbstractTestCase
     }
 
     /**
-     * @expectedException Zend\Ldap\Exception
+     * @expectedException Zend\Ldap\Exception\ExceptionInterface
      */
     public function testCreateFromArrayIllegalDn()
     {
@@ -88,7 +88,7 @@ class OfflineTest extends TestLdap\AbstractTestCase
     }
 
     /**
-     * @expectedException Zend\Ldap\Exception
+     * @expectedException Zend\Ldap\Exception\ExceptionInterface
      */
     public function testCreateFromArrayMalformedDn()
     {
@@ -323,7 +323,7 @@ class OfflineTest extends TestLdap\AbstractTestCase
     }
 
     /**
-     * @expectedException Zend\Ldap\Exception
+     * @expectedException Zend\Ldap\Exception\ExceptionInterface
      */
     public function testIllegalAttributeAccessRdnAttributeSet()
     {
@@ -332,7 +332,7 @@ class OfflineTest extends TestLdap\AbstractTestCase
     }
 
     /**
-     * @expectedException Zend\Ldap\Exception
+     * @expectedException Zend\Ldap\Exception\ExceptionInterface
      */
     public function testIllegalAttributeAccessDnSet()
     {

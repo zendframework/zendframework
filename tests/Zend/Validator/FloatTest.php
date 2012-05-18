@@ -20,15 +20,12 @@
  */
 
 namespace ZendTest\Validator;
+
 use Zend\Validator,
     ReflectionClass;
 
 /**
  * Test helper
- */
-
-/**
- * @see Zend_Validator_Float
  */
 
 /**
@@ -44,7 +41,7 @@ class FloatTest extends \PHPUnit_Framework_TestCase
     /**
      * Zend_Validator_Float object
      *
-     * @var Zend_Validator_Float
+     * @var \Zend\Validator\Float
      */
     protected $_validator;
 
@@ -82,23 +79,25 @@ class FloatTest extends \PHPUnit_Framework_TestCase
     /**
      * Ensures that the validator follows expected behavior
      *
+     * @dataProvider basicProvider
      * @return void
      */
-    public function testBasic()
+    public function testBasic($value, $expected)
     {
-        $valuesExpected = array(
+        $this->assertEquals($expected, $this->_validator->isValid($value),
+                            'Failed expecting ' . $value . ' being ' . ($expected ? 'true' : 'false'));
+    }
+
+    public function basicProvider() {
+        return array(
             array(1.00, true),
             array(0.01, true),
             array(-0.1, true),
             array('10.1', true),
             array(1, true),
             array('not a float', false),
-            );
-        foreach ($valuesExpected as $element) {
-            $this->assertEquals($element[1], $this->_validator->isValid($element[0]), 'Failed expecting ' . $element[0] . ' being ' . ($element[1] ? 'true' : 'false'));
-        }
+        );
     }
-
     /**
      * Ensures that getMessages() returns expected default value
      *

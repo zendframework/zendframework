@@ -27,7 +27,7 @@ namespace Zend\Mail\Storage;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Message extends Part implements MailMessage
+class Message extends Part implements Message\MessageInterface
 {
     /**
      * flags for this message
@@ -42,8 +42,8 @@ class Message extends Part implements MailMessage
      * - file  filename or file handle of a file with raw message content
      * - flags array with flags for message, keys are ignored, use constants defined in \Zend\Mail\Storage
      *
-     * @param  string $rawMessage  full message with or without headers
-     * @throws Exception
+     * @param array $params
+     * @throws Exception\RuntimeException
      */
     public function __construct(array $params)
     {

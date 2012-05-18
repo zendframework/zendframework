@@ -23,8 +23,8 @@ namespace Zend\Cache\Storage\Adapter;
 
 use ArrayObject,
     Zend\Cache\Exception,
-    Zend\Cache\Storage\Adapter,
     Zend\Cache\Storage\Event,
+    Zend\EventManager\EventsCapableInterface,
     Zend\Stdlib\Options;
 
 /**
@@ -45,13 +45,6 @@ class AdapterOptions extends Options
      * @var null|Filesystem
      */
     protected $adapter;
-
-    /**
-     * Ignore missing items
-     *
-     * @var boolean
-     */
-    protected $ignoreMissingItems = true;
 
     /**
      * Validate key against pattern
@@ -117,50 +110,13 @@ class AdapterOptions extends Options
     /**
      * Adapter using this instance
      *
-     * @param  Adapter|null $adapter
+     * @param  AdapterInterface|null $adapter
      * @return AdapterOptions
      */
-    public function setAdapter(Adapter $adapter = null)
+    public function setAdapter(AdapterInterface $adapter = null)
     {
         $this->adapter = $adapter;
         return $this;
-    }
-
-    /**
-     * Enables or disables ignoring of missing items.
-     *
-     * - If enabled and a missing item was requested:
-     *   - getItem, getMetadata: return false
-     *   - removeItem[s]: return true
-     *   - incrementItem[s], decrementItem[s]: add a new item with 0 as base
-     *   - touchItem[s]: add new empty item
-     *
-     * - If disabled and a missing item was requested:
-     *   - getItem, getMetadata, incrementItem[s], decrementItem[s], touchItem[s]
-     *     throws ItemNotFoundException
-     *
-     * @param  boolean $flag
-     * @return AdapterOptions
-     */
-    public function setIgnoreMissingItems($flag)
-    {
-        $flag = (bool) $flag;
-        if ($this->ignoreMissingItems !== $flag) {
-            $this->triggerOptionEvent('ignore_missing_items', $flag);
-            $this->ignoreMissingItems = $flag;
-        }
-        return $this;
-    }
-
-    /**
-     * Ignore missing items
-     *
-     * @return boolean
-     * @see    setIgnoreMissingItems()
-     */
-    public function getIgnoreMissingItems()
-    {
-        return $this->ignoreMissingItems;
     }
 
     /**
@@ -353,8 +309,8 @@ class AdapterOptions extends Options
     }
 
     /**
-     * Triggers an option.change event
-     * if the this options instance has a connection too an adapter instance
+     * Triggers an option event if this options instance has a connection to
+     * an adapter implements EventsCapableInterface.
      *
      * @param string $optionName
      * @param mixed  $optionValue
@@ -362,12 +318,10 @@ class AdapterOptions extends Options
      */
     protected function triggerOptionEvent($optionName, $optionValue)
     {
-        if (!$this->adapter) {
-            return;
+        if ($this->adapter instanceof EventsCapableInterface) {
+            $event = new Event('option', $this->adapter, new ArrayObject(array($optionName => $optionValue)));
+            $this->adapter->events()->trigger($event);
         }
-
-        $event = new Event('option', $this->adapter, new ArrayObject(array($optionName => $optionValue)));
-        $this->adapter->events()->trigger($event);
     }
 
     /**

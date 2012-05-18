@@ -65,10 +65,10 @@ class InfoCard implements AdapterInterface
     /**
      * Sets the InfoCard component Adapter to use
      *
-     * @param  Zend\InfoCard\Adapter $a
+     * @param  Zend\InfoCard\Adapter\AdapterInterface $a
      * @return Zend\Authentication\Adapter\InfoCard Provides a fluent interface
      */
-    public function setAdapter(ZendInfoCard\Adapter $a)
+    public function setAdapter(ZendInfoCard\Adapter\AdapterInterface $a)
     {
         $this->_infoCard->setAdapter($a);
         return $this;
@@ -77,7 +77,7 @@ class InfoCard implements AdapterInterface
     /**
      * Retrieves the InfoCard component adapter being used
      *
-     * @return Zend\InfoCard\Adapter
+     * @return Zend\InfoCard\Adapter\AdapterInterface
      */
     public function getAdapter()
     {
@@ -87,7 +87,7 @@ class InfoCard implements AdapterInterface
     /**
      * Retrieves the InfoCard public key cipher object being used
      *
-     * @return Zend\InfoCard\Cipher\PKI
+     * @return Zend\InfoCard\Cipher\PKI\PKIInterface
      */
     public function getPKCipherObject()
     {
@@ -97,10 +97,10 @@ class InfoCard implements AdapterInterface
     /**
      * Sets the InfoCard public key cipher object to use
      *
-     * @param  Zend\InfoCard\Cipher\PKI $cipherObj
+     * @param  Zend\InfoCard\Cipher\PKI\PKIInterface $cipherObj
      * @return \Zend\Authentication\Adapter\InfoCard Provides a fluent interface
      */
-    public function setPKICipherObject(ZendInfoCard\Cipher\PKI $cipherObj)
+    public function setPKICipherObject(ZendInfoCard\Cipher\PKI\PKIInterface $cipherObj)
     {
         $this->_infoCard->setPKICipherObject($cipherObj);
         return $this;
@@ -109,7 +109,7 @@ class InfoCard implements AdapterInterface
     /**
      * Retrieves the Symmetric cipher object being used
      *
-     * @return Zend\InfoCard\Cipher\Symmetric
+     * @return Zend\InfoCard\Cipher\Symmetric\AES128CBCInterface
      */
     public function getSymCipherObject()
     {
@@ -119,10 +119,10 @@ class InfoCard implements AdapterInterface
     /**
      * Sets the InfoCard symmetric cipher object to use
      *
-     * @param  Zend\InfoCard\Cipher\Symmetric $cipherObj
+     * @param  Zend\InfoCard\Cipher\Symmetric\AES128CBCInterface $cipherObj
      * @return Zend\Authentication\Adapter\InfoCard Provides a fluent interface
      */
-    public function setSymCipherObject(ZendInfoCard\Cipher\Symmetric $cipherObj)
+    public function setSymCipherObject(ZendInfoCard\Cipher\Symmetric\AES128CBCInterface $cipherObj)
     {
         $this->_infoCard->setSymCipherObject($cipherObj);
         return $this;

@@ -218,7 +218,7 @@ class Pdo implements DriverInterface, DriverFeatureInterface
         if ($this->connection->getDriverName() == 'sqlite'
             && ($sqliteRowCounter = $this->getFeature('SqliteRowCounter'))
             && $resource->columnCount() > 0) {
-            $rowCount = $sqliteRowCounter->getRowCountClosure();
+            $rowCount = $sqliteRowCounter->getRowCountClosure($context);
         }
 
         $result->initialize($resource, $this->connection->getLastGeneratedValue(), $rowCount);

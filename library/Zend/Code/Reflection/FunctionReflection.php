@@ -31,17 +31,18 @@ use ReflectionFunction;
 class FunctionReflection extends ReflectionFunction implements ReflectionInterface
 {
     /**
-     * Get function docblock
+     * Get function DocBlock
      *
-     * @param  string $reflectionClass Name of reflection class to use
-     * @return Zend_Reflection_Docblock
+     * @throws Exception\InvalidArgumentException
+     * @return DocBlockReflection
      */
-    public function getDocblock()
+    public function getDocBlock()
     {
         if ('' == ($comment = $this->getDocComment())) {
-            throw new Exception\InvalidArgumentException($this->getName() . ' does not have a docblock');
+            throw new Exception\InvalidArgumentException($this->getName() . ' does not have a DocBlock');
         }
         $instance = new DocBlockReflection($comment);
+
         return $instance;
     }
 
@@ -55,7 +56,7 @@ class FunctionReflection extends ReflectionFunction implements ReflectionInterfa
     {
         if ($includeDocComment) {
             if ($this->getDocComment() != '') {
-                return $this->getDocblock()->getStartLine();
+                return $this->getDocBlock()->getStartLine();
             }
         }
 
@@ -65,33 +66,32 @@ class FunctionReflection extends ReflectionFunction implements ReflectionInterfa
     /**
      * Get contents of function
      *
-     * @param  bool $includeDocblock
+     * @param  bool $includeDocBlock
      * @return string
      */
-    public function getContents($includeDocblock = true)
+    public function getContents($includeDocBlock = true)
     {
         return implode("\n",
-            array_splice(
-                file($this->getFileName()),
-                $this->getStartLine($includeDocblock),
-                ($this->getEndLine() - $this->getStartLine()),
-                true
-                )
-            );
+                       array_splice(
+                           file($this->getFileName()),
+                           $this->getStartLine($includeDocBlock),
+                           ($this->getEndLine() - $this->getStartLine()),
+                           true
+                       )
+        );
     }
 
     /**
      * Get function parameters
      *
-     * @param  string $reflectionClass Name of reflection class to use
-     * @return array Array of \Zend\Code\Reflection\ReflectionParameter
+     * @return ReflectionParameter[]
      */
     public function getParameters()
     {
         $phpReflections  = parent::getParameters();
         $zendReflections = array();
         while ($phpReflections && ($phpReflection = array_shift($phpReflections))) {
-            $instance = new ParameterReflection($this->getName(), $phpReflection->getName());
+            $instance          = new ParameterReflection($this->getName(), $phpReflection->getName());
             $zendReflections[] = $instance;
             unset($phpReflection);
         }
@@ -102,16 +102,17 @@ class FunctionReflection extends ReflectionFunction implements ReflectionInterfa
     /**
      * Get return type tag
      *
-     * @return \Zend\Code\Reflection\DocBlock\Tag\Return
+     * @throws Exception\InvalidArgumentException
+     * @return DocBlock\Tag\ReturnTag
      */
     public function getReturn()
     {
-        $docblock = $this->getDocblock();
-        if (!$docblock->hasTag('return')) {
+        $docBlock = $this->getDocBlock();
+        if (!$docBlock->hasTag('return')) {
             throw new Exception\InvalidArgumentException('Function does not specify an @return annotation tag; cannot determine return type');
         }
-        $tag    = $docblock->getTag('return');
-        $return = ReflectionDocblockTag::factory('@return ' . $tag->getDescription());
+        $tag    = $docBlock->getTag('return');
+        $return = DocBlockReflection::factory('@return ' . $tag->getDescription());
         return $return;
     }
 
@@ -122,7 +123,8 @@ class FunctionReflection extends ReflectionFunction implements ReflectionInterfa
 
     /**
      * Required due to bug in php
-     * @return void
+     *
+     * @return string
      */
     public function __toString()
     {

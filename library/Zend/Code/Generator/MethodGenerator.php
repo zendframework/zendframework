@@ -32,18 +32,16 @@ use Zend\Code\Reflection\MethodReflection;
 class MethodGenerator extends AbstractMemberGenerator
 {
     /**
-     * @var DocblockGenerator
+     * @var DocBlockGenerator
      */
-    protected $docblock = null;
+    protected $docBlock = null;
 
     /**
      * @var bool
      */
     protected $isFinal = false;
 
-    /**
-     * @var array
-     */
+    /** @var ParameterGenerator[] */
     protected $parameters = array();
 
     /**
@@ -54,8 +52,8 @@ class MethodGenerator extends AbstractMemberGenerator
     /**
      * fromReflection()
      *
-     * @param \Zend\Code\Reflection\MethodReflection $reflectionMethod
-     * @return \MethodGenerator\Code\Generator\PhpMethod
+     * @param  MethodReflection $reflectionMethod
+     * @return MethodGenerator
      */
     public static function fromReflection(MethodReflection $reflectionMethod)
     {
@@ -65,7 +63,7 @@ class MethodGenerator extends AbstractMemberGenerator
         $method->setSourceDirty(false);
 
         if ($reflectionMethod->getDocComment() != '') {
-            $method->setDocblock(DocblockGenerator::fromReflection($reflectionMethod->getDocblock()));
+            $method->setDocBlock(DocBlockGenerator::fromReflection($reflectionMethod->getDocBlock()));
         }
 
         $method->setFinal($reflectionMethod->isFinal());
@@ -91,7 +89,8 @@ class MethodGenerator extends AbstractMemberGenerator
         return $method;
     }
 
-    public function __construct($name = null, array $parameters = array(), $flags = self::FLAG_PUBLIC, $body = null, $docblock = null)
+    public function __construct($name = null, array $parameters = array(), $flags = self::FLAG_PUBLIC, $body = null,
+                                $docBlock = null)
     {
         if ($name !== null) {
             $this->setName($name);
@@ -105,8 +104,8 @@ class MethodGenerator extends AbstractMemberGenerator
         if ($body !== null) {
             $this->setBody($body);
         }
-        if ($docblock !== null) {
-            $this->setDocblock($docblock);
+        if ($docBlock !== null) {
+            $this->setDocBlock($docBlock);
         }
     }
 
@@ -128,6 +127,7 @@ class MethodGenerator extends AbstractMemberGenerator
      * setParameter()
      *
      * @param ParameterGenerator|string $parameter
+     * @throws Exception\InvalidArgumentException
      * @return MethodGenerator
      */
     public function setParameter($parameter)
@@ -148,7 +148,7 @@ class MethodGenerator extends AbstractMemberGenerator
     /**
      * getParameters()
      *
-     * @return array Array of \Zend\Code\Generator\Parameter\Parameter
+     * @return ParameterGenerator[]
      */
     public function getParameters()
     {
@@ -188,9 +188,9 @@ class MethodGenerator extends AbstractMemberGenerator
 
         $indent = $this->getIndentation();
 
-        if (($docblock = $this->getDocblock()) !== null) {
-            $docblock->setIndentation($indent);
-            $output .= $docblock->generate();
+        if (($docBlock = $this->getDocBlock()) !== null) {
+            $docBlock->setIndentation($indent);
+            $output .= $docBlock->generate();
         }
 
         $output .= $indent;
@@ -208,17 +208,17 @@ class MethodGenerator extends AbstractMemberGenerator
         $parameters = $this->getParameters();
         if (!empty($parameters)) {
             foreach ($parameters as $parameter) {
-                $parameterOuput[] = $parameter->generate();
+                $parameterOutput[] = $parameter->generate();
             }
 
-            $output .= implode(', ', $parameterOuput);
+            $output .= implode(', ', $parameterOutput);
         }
 
         $output .= ')' . self::LINE_FEED . $indent . '{' . self::LINE_FEED;
 
         if ($this->body) {
             $output .= preg_replace('#^(.+?)$#m', $indent . $indent . '$1', trim($this->body))
-                    .  self::LINE_FEED;
+                . self::LINE_FEED;
         }
 
         $output .= $indent . '}' . self::LINE_FEED;

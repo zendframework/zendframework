@@ -20,8 +20,8 @@
  */
 
 namespace ZendTest\Code\Generator;
-use Zend\Code\Generator\PropertyGenerator,
-    Zend\Code\Generator\PropertyValueGenerator;
+use Zend\Code\Generator\PropertyGenerator;
+use Zend\Code\Generator\PropertyValueGenerator;
 
 /**
  * @category   Zend
@@ -199,7 +199,7 @@ EOS;
     /**
      * @group ZF-7205
      */
-    public function testPropertyCanHaveDocblock()
+    public function testPropertyCanHaveDocBlock()
     {
         $codeGenProperty = new PropertyGenerator(
             'someVal',
@@ -207,7 +207,7 @@ EOS;
             PropertyGenerator::FLAG_STATIC | PropertyGenerator::FLAG_PROTECTED
         );
 
-        $codeGenProperty->setDocblock('@var string $someVal This is some val');
+        $codeGenProperty->setDocBlock('@var string $someVal This is some val');
 
         $expected = <<<EOS
     /**

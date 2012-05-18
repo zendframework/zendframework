@@ -61,7 +61,7 @@ class FileGeneratorTest extends \PHPUnit_Framework_TestCase
 
     public function testToString()
     {
-        $codeGenFile = new FileGenerator(array(
+        $codeGenFile = FileGenerator::fromArray(array(
             'requiredFiles' => array('SampleClass.php'),
             'class' => array(
                 'flags' => ClassGenerator::FLAG_ABSTRACT,
@@ -94,8 +94,10 @@ EOS;
     {
         $tempFile = tempnam(sys_get_temp_dir(), 'UnitFile');
 
-        $codeGenFile = new FileGenerator(array(
-            'class' => 'SampleClass',
+        $codeGenFile = FileGenerator::fromArray(array(
+            'class' => array(
+                'name' => 'SampleClass'
+            )
         ));
 
         file_put_contents($tempFile, $codeGenFile->generate());
@@ -113,14 +115,14 @@ EOS;
 
     public function testFromFileReflection()
     {
-        $this->markTestIncomplete('Some scanning capabilities are incomplete, including file docblock comment retrieval and method scanning');
+        $this->markTestIncomplete('Some scanning capabilities are incomplete, including file DocBlock comment retrieval and method scanning');
 
         $file = __DIR__ . '/TestAsset/TestSampleSingleClass.php';
         require_once $file;
 
-        $codeGenFileFromDisk = FileGenerator::fromReflection(new FileReflection($file));
+        $codeGenFileFromDisk = FileGenerator::fromReflection($fileRefl = new FileReflection($file));
 
-        $codeGenFileFromDisk->getClass()->setMethod('foobar');
+        $codeGenFileFromDisk->getClass()->addMethod('foobar');
 
         $expectedOutput = <<<EOS
 <?php
@@ -128,8 +130,12 @@ EOS;
  * File header here
  *
  * @author Ralph Schindler <ralph.schindler@zend.com>
- *
  */
+
+
+
+/* Zend_Code_Generator_FileGenerator-ClassMarker: {ZendTest\Code\Generator\TestAsset\TestSampleSingleClass} */
+
 
 namespace ZendTest\Code\Generator\TestAsset;
 
@@ -167,7 +173,7 @@ EOS;
 
     public function testFileLineEndingsAreAlwaysLineFeed()
     {
-        $codeGenFile = new FileGenerator(array(
+        $codeGenFile = FileGenerator::fromArray(array(
             'requiredFiles' => array('SampleClass.php'),
             'class' => array(
                 'abstract' => true,

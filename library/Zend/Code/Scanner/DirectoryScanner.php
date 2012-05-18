@@ -2,17 +2,18 @@
 
 namespace Zend\Code\Scanner;
 
-use Zend\Code\Exception,
-    RecursiveDirectoryIterator,
-    RecursiveIteratorIterator;
+use Zend\Code\Exception;
+use RecursiveDirectoryIterator;
+use RecursiveIteratorIterator;
 
 class DirectoryScanner implements ScannerInterface
 {
-    protected $isScanned            = false;
-    protected $directories          = array();
-    protected $fileScanners         = array();
-    protected $classToFileScanner   = null;
-    
+    protected $isScanned = false;
+    /** @var string[]|DirectoryScanner[] */
+    protected $directories = array();
+    protected $fileScanners = array();
+    protected $classToFileScanner = null;
+
     public function __construct($directory = null)
     {
         if ($directory) {
@@ -25,7 +26,7 @@ class DirectoryScanner implements ScannerInterface
             }
         }
     }
-    
+
     public function addDirectory($directory)
     {
         if ($directory instanceof DirectoryScanner) {
@@ -33,9 +34,8 @@ class DirectoryScanner implements ScannerInterface
         } elseif (is_string($directory)) {
             $realDir = realpath($directory);
             if (!$realDir || !is_dir($realDir)) {
-                throw new Exception\InvalidArgumentException(sprintf(
-                    'Directory "%s" does not exist', $realDir
-                ));
+                throw new Exception\InvalidArgumentException(
+                    sprintf('Directory "%s" does not exist', $realDir));
             }
             $this->directories[] = $realDir;
         } else {
@@ -44,23 +44,23 @@ class DirectoryScanner implements ScannerInterface
             );
         }
     }
-    
+
     public function addDirectoryScanner(DirectoryScanner $directoryScanner)
     {
         $this->addDirectory($directoryScanner);
     }
-    
+
     public function addFileScanner(FileScanner $fileScanner)
     {
         $this->fileScanners[] = $fileScanner;
     }
-    
+
     protected function scan()
     {
         if ($this->isScanned) {
             return;
         }
-        
+
         // iterate directories creating file scanners
         foreach ($this->directories as $directory) {
             if ($directory instanceof DirectoryScanner) {
@@ -77,10 +77,10 @@ class DirectoryScanner implements ScannerInterface
                 }
             }
         }
-        
+
         $this->isScanned = true;
     }
-    
+
     public function getNamespaces()
     {
     }
@@ -111,7 +111,7 @@ class DirectoryScanner implements ScannerInterface
     public function getClasses($returnDerivedScannerClass = false)
     {
         $this->scan();
-        
+
         if ($this->classToFileScanner === null) {
             $this->createClassToFileScannerCache();
         }
@@ -124,37 +124,37 @@ class DirectoryScanner implements ScannerInterface
             }
             $returnClasses[] = $classScanner;
         }
-        
+
         return $returnClasses;
     }
-    
+
     public function hasClass($class)
     {
         $this->scan();
-        
+
         if ($this->classToFileScanner === null) {
             $this->createClassToFileScannerCache();
         }
-        
+
         return (isset($this->classToFileScanner[$class]));
     }
 
     public function getClass($class, $returnDerivedScannerClass = false)
     {
         $this->scan();
-        
+
         if ($this->classToFileScanner === null) {
             $this->createClassToFileScannerCache();
         }
-        
+
         if (!isset($this->classToFileScanner[$class])) {
             throw new Exception\InvalidArgumentException('Class not found.');
         }
 
         /** @var FileScanner $fs */
-        $fs = $this->fileScanners[$this->classToFileScanner[$class]];
+        $fs          = $this->fileScanners[$this->classToFileScanner[$class]];
         $returnClass = $fs->getClass($class);
-        
+
         if (($returnClass instanceof ClassScanner) && $returnDerivedScannerClass) {
             return new DerivedClassScanner($returnClass, $this);
         }
@@ -167,7 +167,7 @@ class DirectoryScanner implements ScannerInterface
         if ($this->classToFileScanner !== null) {
             return;
         }
-        
+
         $this->classToFileScanner = array();
         /** @var FileScanner $fileScanner */
         foreach ($this->fileScanners as $fsIndex => $fileScanner) {
@@ -177,7 +177,12 @@ class DirectoryScanner implements ScannerInterface
             }
         }
     }
-    
-    public static function export() {}
-    public function __toString() {} 
+
+    public static function export()
+    {
+    }
+
+    public function __toString()
+    {
+    }
 }

@@ -41,10 +41,10 @@ class FunctionReflectionTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Zend\Code\Reflection\ParameterReflection', array_shift($parameters));
     }
 
-    public function testFunctionDocblockReturn()
+    public function testFunctionDocBlockReturn()
     {
         require_once __DIR__ . '/TestAsset/functions.php';
         $function = new FunctionReflection('ZendTest\Code\Reflection\TestAsset\function6');
-        $this->assertInstanceOf('Zend\Code\Reflection\DocBlockReflection', $function->getDocblock());
+        $this->assertInstanceOf('Zend\Code\Reflection\DocBlockReflection', $function->getDocBlock());
     }
 }

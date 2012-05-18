@@ -107,14 +107,14 @@ class FileReflectionTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(24, $reflectionFile->getEndLine());
     }
 
-    public function testFileGetDocblockReturnsFileDocblock()
+    public function testFileGetDocBlockReturnsFileDocBlock()
     {
         $this->markTestIncomplete('File docblocks not implemented yet');
 
         $fileToReflect = __DIR__ . '/TestAsset/TestSampleClass.php';
         include_once $fileToReflect;
         $reflectionFile = new FileReflection($fileToReflect);
-        $this->assertTrue($reflectionFile->getDocblock() instanceof \Zend\Code\Reflection\DocBlockReflection);
+        $this->assertTrue($reflectionFile->getDocBlock() instanceof \Zend\Code\Reflection\DocBlockReflection);
     }
 
     public function testFileGetFunctionsReturnsFunctions()

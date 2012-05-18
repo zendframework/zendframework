@@ -19,7 +19,10 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Code\Generator\Docblock\Tag;
+namespace Zend\Code\Generator\DocBlock\Tag;
+
+use Zend\Code\Generator\DocBlock\Tag;
+use Zend\Code\Reflection\DocBlock\Tag\TagInterface as ReflectionDocBlockTag;
 
 /**
  * @category   Zend
@@ -27,21 +30,21 @@ namespace Zend\Code\Generator\Docblock\Tag;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class LicenseTag extends \Zend\Code\Generator\Docblock\Tag
+class LicenseTag extends Tag
 {
 
     /**
      * @var string
      */
-    protected $_url = null;
+    protected $url = null;
 
     /**
      * fromReflection()
      *
-     * @param \Zend\Code\Reflection\ReflectionDocblockTag $reflectionTagReturn
-     * @return \Zend\Code\Generator\DocBlock\Tag\LicenseTag
+     * @param ReflectionDocBlockTag $reflectionTagLicense
+     * @return LicenseTag
      */
-    public static function fromReflection(\Zend\Code\Reflection\ReflectionDocblockTag $reflectionTagLicense)
+    public static function fromReflection(ReflectionDocBlockTag $reflectionTagLicense)
     {
         $returnTag = new self();
 
@@ -56,11 +59,11 @@ class LicenseTag extends \Zend\Code\Generator\Docblock\Tag
      * setUrl()
      *
      * @param string $url
-     * @return \Zend\Code\Generator\DocBlock\Tag\LicenseTag
+     * @return LicenseTag
      */
     public function setUrl($url)
     {
-        $this->_url = $url;
+        $this->url = $url;
         return $this;
     }
 
@@ -71,9 +74,8 @@ class LicenseTag extends \Zend\Code\Generator\Docblock\Tag
      */
     public function getUrl()
     {
-        return $this->_url;
+        return $this->url;
     }
-
 
     /**
      * generate()
@@ -82,7 +84,7 @@ class LicenseTag extends \Zend\Code\Generator\Docblock\Tag
      */
     public function generate()
     {
-        $output = '@license ' . $this->_url . ' ' . $this->description . self::LINE_FEED;
+        $output = '@license ' . $this->url . ' ' . $this->description . self::LINE_FEED;
         return $output;
     }
 

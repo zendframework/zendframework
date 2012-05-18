@@ -18,9 +18,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Code\Reflection\DocBlock;
-
-use Zend\Code\Reflection\Exception;
+namespace Zend\Code\Reflection\DocBlock\Tag;
 
 /**
  * @category   Zend
@@ -28,12 +26,17 @@ use Zend\Code\Reflection\Exception;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ReturnTag implements TagInterface
+class ParamTag implements TagInterface
 {
     /**
      * @var string
      */
     protected $type = null;
+
+    /**
+     * @var string
+     */
+    protected $variableName = null;
 
     /**
      * @var string
@@ -45,35 +48,48 @@ class ReturnTag implements TagInterface
      */
     public function getName()
     {
-        return 'return';
+        return 'param';
     }
 
     /**
-     * Constructor
+     * Initializer
      *
-     * @param  string $tagDocblockLine
-     * @return void
+     * @param string $tagDocBlockLine
      */
-    public function initialize($tagDocblockLine)
+    public function initialize($tagDocBlockLine)
     {
         $matches = array();
-        preg_match('#([\w|\\\]+)(?:\s+(.*))?#', $tagDocblockLine, $matches);
+        preg_match('#([\w|\\\]+)(?:\s+(\$\S+)){0,1}(?:\s+(.*))?#s', $tagDocBlockLine, $matches);
 
         $this->type = $matches[1];
 
         if (isset($matches[2])) {
-            $this->description = $matches[2];
+            $this->variableName = $matches[2];
+        }
+
+        if (isset($matches[3])) {
+            $this->description = preg_replace('#\s+#', ' ', $matches[3]);
         }
     }
 
     /**
-     * Get return variable type
+     * Get parameter variable type
      *
      * @return string
      */
     public function getType()
     {
         return $this->type;
+    }
+
+    /**
+     * Get parameter name
+     *
+     * @return string
+     */
+    public function getVariableName()
+    {
+        return $this->variableName;
     }
 
     public function getDescription()

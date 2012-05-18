@@ -80,7 +80,7 @@ class NameInformation
         }
         $use = trim($use, '\\');
         if ($as === null) {
-            $as = trim($use, '\\');
+            $as                  = trim($use, '\\');
             $nsSeparatorPosition = strrpos($as, '\\');
             if ($nsSeparatorPosition !== false && $nsSeparatorPosition !== 0 && $nsSeparatorPosition != strlen($as)) {
                 $as = substr($as, $nsSeparatorPosition + 1);
@@ -106,7 +106,7 @@ class NameInformation
 
         if ($this->namespace || $this->uses) {
             $firstPart = $name;
-            if (($firstPartEnd = strpos($firstPart, '\\')) !== false)  {
+            if (($firstPartEnd = strpos($firstPart, '\\')) !== false) {
                 $firstPart = substr($firstPart, 0, $firstPartEnd);
             } else {
                 $firstPartEnd = strlen($firstPart);

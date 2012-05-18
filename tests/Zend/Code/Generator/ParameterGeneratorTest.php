@@ -21,8 +21,8 @@
 
 namespace ZendTest\Code\Generator;
 
-use Zend\Code\Generator\ParameterGenerator,
-    Zend\Code\Generator\ValueGenerator;
+use Zend\Code\Generator\ParameterGenerator;
+use Zend\Code\Generator\ValueGenerator;
 
 /**
  * @category   Zend

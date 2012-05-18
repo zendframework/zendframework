@@ -18,8 +18,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Code\Reflection\DocBlock;
-
+namespace Zend\Code\Reflection\DocBlock\Tag;
 
 /**
  * @category   Zend
@@ -40,6 +39,7 @@ class GenericTag implements TagInterface
      */
     protected $content = null;
 
+    /** @var null|string */
     protected $contentSplitCharacter = null;
 
     /**
@@ -56,14 +56,12 @@ class GenericTag implements TagInterface
     }
 
     /**
-     * Constructor
-     *
-     * @param string $tagDocblockLine
-     * @return ReflectionDocblockTag
+     * @param string $tagDocBlockLine
+     * @return void
      */
-    public function initialize($tagDocblockLine)
+    public function initialize($tagDocBlockLine)
     {
-        $this->parse($tagDocblockLine);
+        $this->parse($tagDocBlockLine);
     }
 
     /**
@@ -103,10 +101,10 @@ class GenericTag implements TagInterface
     {
         return 'DocBlock Tag [ * @' . $this->name . ' ]' . PHP_EOL;
     }
-    
-    protected function parse($docblockLine)
+
+    protected function parse($docBlockLine)
     {
-        $this->values = explode($this->contentSplitCharacter, $docblockLine);
+        $this->values = explode($this->contentSplitCharacter, $docBlockLine);
     }
-    
+
 }

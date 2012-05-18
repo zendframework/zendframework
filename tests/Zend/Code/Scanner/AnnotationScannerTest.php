@@ -2,9 +2,9 @@
 
 namespace ZendTest\Code\Scanner;
 
-use Zend\Code\Scanner\AnnotationScanner,
-    Zend\Code\NameInformation,
-    Zend\Code\Annotation\AnnotationManager;
+use Zend\Code\Scanner\AnnotationScanner;
+use Zend\Code\NameInformation;
+use Zend\Code\Annotation\AnnotationManager;
 
 class AnnotationScannerTest extends \PHPUnit_Framework_TestCase
 {

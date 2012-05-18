@@ -122,17 +122,19 @@ abstract class AbstractGenerator implements GeneratorInterface
     /**
      * setOptions()
      *
-     * @param array $options
+     * @param array|Traversable $options
+     * @throws Exception\InvalidArgumentException
      * @return self
      */
     public function setOptions($options)
     {
         if (!is_array($options) && !$options instanceof Traversable) {
-            throw new Exception\InvalidArgumentException(sprintf(
-                '%s expects an array or Traversable object; received "%s"',
-                __METHOD__,
-                (is_object($options) ? get_class($options) : gettype($options))
-            ));
+            throw new Exception\InvalidArgumentException(
+                sprintf(
+                    '%s expects an array or Traversable object; received "%s"',
+                    __METHOD__,
+                    (is_object($options) ? get_class($options) : gettype($options))
+                ));
         }
 
         foreach ($options as $optionName => $optionValue) {

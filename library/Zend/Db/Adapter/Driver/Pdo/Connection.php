@@ -55,7 +55,6 @@ class Connection implements ConnectionInterface
             $this->setConnectionParameters($connectionParameters);
         } elseif ($connectionParameters instanceof \PDO) {
             $this->setResource($connectionParameters);
-            $this->driverName = strtolower($connectionParameters->getAttribute(\PDO::ATTR_DRIVER_NAME));
         }
     }
 
@@ -140,6 +139,7 @@ class Connection implements ConnectionInterface
     public function setResource(\PDO $resource)
     {
         $this->resource = $resource;
+        $this->driverName = strtolower($this->resource->getAttribute(\PDO::ATTR_DRIVER_NAME));
         return $this;
     }
 

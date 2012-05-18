@@ -25,11 +25,11 @@ class Hash
      * @var array
      */
     protected static $supportedAlgorithms = array();
-    
+
     /**
-     * @param  string $algo
+     * @param  string $hash
      * @param  string $data
-     * @param  string $binaryOutput
+     * @param  string $output
      * @return string
      */
     public static function compute($hash, $data, $output = self::STRING)
@@ -38,25 +38,27 @@ class Hash
         if (!self::isSupported($hash)) {
             throw new Exception\InvalidArgumentException('Hash algorithm provided is not supported on this PHP installation');
         }
-        
+
         $output = ($output === self::BINARY);
         return hash($hash, $data, $output);
     }
+
     /**
      * Get the output size according to the hash algorithm and the output format
-     * 
+     *
      * @param  string $hash
      * @param  string $output
-     * @return integer 
+     * @return integer
      */
     public static function getOutputSize($hash, $output = self::STRING)
     {
         return strlen(self::compute($hash, 'data', $output));
     }
+
     /**
      * Get the supported algorithm
-     * 
-     * @return array 
+     *
+     * @return array
      */
     public static function getSupportedAlgorithms()
     {
@@ -65,13 +67,14 @@ class Hash
         }
         return self::$supportedAlgorithms;
     }
+
     /**
      * Is the hash algorithm supported?
-     * 
+     *
      * @param  string $algo
-     * @return boolean 
+     * @return boolean
      */
-    public static function isSupported($algo) 
+    public static function isSupported($algo)
     {
         return in_array($algo, self::getSupportedAlgorithms());
     }

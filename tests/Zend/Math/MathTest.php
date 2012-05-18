@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Crypt
+ * @package    Zend_Math
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -25,11 +25,11 @@ use Zend\Math\Math;
 
 /**
  * @category   Zend
- * @package    Zend_Crypt
+ * @package    Zend_Math
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_Crypt
+ * @group      Zend_Math
  */
 class MathTest extends \PHPUnit_Framework_TestCase
 {
@@ -56,7 +56,7 @@ class MathTest extends \PHPUnit_Framework_TestCase
     {
         try {
             $math = new \Zend\Math\BigInteger();
-        } catch (\Zend\Math\BigInteger\Exception $e) {
+        } catch (\Zend\Math\Exception\ExceptionInterface $e) {
             if (strpos($e->getMessage(), 'big integer precision math support not detected') !== false) {
                 $this->markTestSkipped($e->getMessage());
             } else {

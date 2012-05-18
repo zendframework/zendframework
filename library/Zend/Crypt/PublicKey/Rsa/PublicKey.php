@@ -27,7 +27,7 @@ class PublicKey extends Key
 
     /**
      * @param string $string
-     * @throws Zend\Crypt\Exception
+     * @throws Exception\RuntimeException
      */
     protected function _parse($string)
     {
@@ -37,13 +37,13 @@ class PublicKey extends Key
             $this->_pemString = $string;
         }
 
-        $result = openssl_get_publickey($string);
+        $result = openssl_pkey_get_public($string);
         if (!$result) {
             throw new Exception\RuntimeException('Unable to load public key');
         }
 
         $this->_opensslKeyResource = $result;
-        $this->_details = openssl_pkey_get_details($this->_opensslKeyResource);
+        $this->_details            = openssl_pkey_get_details($this->_opensslKeyResource);
     }
 
     public function getCertificate()

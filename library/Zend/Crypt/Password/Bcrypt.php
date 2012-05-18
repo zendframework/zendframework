@@ -9,9 +9,9 @@
  */
 namespace Zend\Crypt\Password;
 
-use Zend\Math\Math,
-    Traversable,
-    Zend\Stdlib\ArrayUtils;
+use Zend\Math\Math;
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
 
 /**
  * Bcrypt algorithm using crypt() function of PHP
@@ -32,15 +32,16 @@ class Bcrypt implements PasswordInterface
      * @var string
      */
     protected $salt;
+
     /**
      * Constructor
-     * 
-     * @param array $options 
+     *
+     * @param array|Traversable $options
      */
-    public function __construct($options=array())
+    public function __construct($options = array())
     {
         if (!empty($options)) {
-	    if ($options instanceof Traversable) {
+            if ($options instanceof Traversable) {
                 $options = ArrayUtils::iteratorToArray($options);
             } elseif (!is_array($options)) {
                 throw new Exception\InvalidArgumentException(
@@ -57,14 +58,13 @@ class Bcrypt implements PasswordInterface
                         break;
                 }
             }
-        }    
+        }
     }
+
     /**
-     * Bcrypt 
-     * 
-     * @param  string $data
-     * @param  string $cost
-     * @param  string $salt 
+     * Bcrypt
+     *
+     * @param  string $password
      * @return string
      */
     public function create($password)
@@ -74,35 +74,37 @@ class Bcrypt implements PasswordInterface
         } else {
             $salt = $this->salt;
         }
-        $salt64 = substr(str_replace('+', '.', base64_encode($salt)), 0, 22); 
-        $hash = crypt($password, '$2a$' . $this->cost . '$' . $salt64);
-        if (strlen($hash)<=13) {
+        $salt64 = substr(str_replace('+', '.', base64_encode($salt)), 0, 22);
+        $hash   = crypt($password, '$2a$' . $this->cost . '$' . $salt64);
+        if (strlen($hash) <= 13) {
             throw new Exception\RuntimeException('Error during the bcrypt generation');
         }
         return $hash;
     }
+
     /**
      * Verify if a password is correct against an hash value
-     * 
+     *
      * @param  string $password
      * @param  string $hash
-     * @return boolean 
+     * @return boolean
      */
     public function verify($password, $hash)
     {
         return ($hash === crypt($password, $hash));
     }
+
     /**
      * Set the cost parameter
-     * 
+     *
      * @param  integer|string $cost
-     * @return Bcrypt 
+     * @return Bcrypt
      */
     public function setCost($cost)
     {
         if (!empty($cost)) {
-            $cost = (int) $cost;
-            if ($cost<4 || $cost>31) {
+            $cost = (int)$cost;
+            if ($cost < 4 || $cost > 31) {
                 throw new Exception\InvalidArgumentException(
                     'The cost parameter of bcrypt must be in range 04-31'
                 );
@@ -111,20 +113,22 @@ class Bcrypt implements PasswordInterface
         }
         return $this;
     }
+
     /**
      * Get the cost parameter
-     * 
-     * @return string 
+     *
+     * @return string
      */
     public function getCost()
     {
         return $this->cost;
     }
+
     /**
      * Set the salt value
-     * 
+     *
      * @param  string $salt
-     * @return Bcrypt 
+     * @return Bcrypt
      */
     public function setSalt($salt)
     {
@@ -136,10 +140,11 @@ class Bcrypt implements PasswordInterface
         $this->salt = $salt;
         return $this;
     }
+
     /**
      * Get the salt value
-     * 
-     * @return string 
+     *
+     * @return string
      */
     public function getSalt()
     {

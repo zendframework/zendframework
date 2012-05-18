@@ -21,8 +21,9 @@
 
 namespace ZendTest\Crypt;
 
-use Zend\Crypt\BlockCipher,
-    Zend\Crypt\Symmetric\Mcrypt;
+use Zend\Crypt\BlockCipher;
+use Zend\Crypt\Symmetric\Mcrypt;
+use Zend\Crypt\Symmetric\Exception;
 
 /**
  * @category   Zend
@@ -34,95 +35,98 @@ use Zend\Crypt\BlockCipher,
  */
 class BlockCipherTest extends \PHPUnit_Framework_TestCase
 {
+    /** @var BlockCipher */
     protected $blockCipher;
     protected $plaintext;
-    
+
     public function setUp()
     {
         try {
-            $cipher = new Mcrypt(array(
-                    'algorithm' => 'aes',
-                    'mode'      => 'cbc',
-                    'padding'   => 'pkcs7'
-            ));
+            $cipher            = new Mcrypt(array(
+                                                 'algorithm' => 'aes',
+                                                 'mode'      => 'cbc',
+                                                 'padding'   => 'pkcs7'
+                                            ));
             $this->blockCipher = new BlockCipher($cipher);
         } catch (Exception\RuntimeException $e) {
             $this->markTestSkipped('Mcrypt is not installed, I cannot execute the BlockCipherTest');
         }
         $this->plaintext = file_get_contents(__DIR__ . '/_files/plaintext');
     }
-    
+
     public function testSetCipher()
     {
         $mcrypt = new Mcrypt();
         $result = $this->blockCipher->setCipher($mcrypt);
         $this->assertEquals($result, $this->blockCipher);
-        $this->assertEquals($mcrypt, $this->blockCipher->getCipher());      
+        $this->assertEquals($mcrypt, $this->blockCipher->getCipher());
     }
-        
+
     public function testFactory()
     {
-        $this->blockCipher = BlockCipher::factory('mcrypt',array('algo' => 'blowfish'));
+        $this->blockCipher = BlockCipher::factory('mcrypt', array('algo' => 'blowfish'));
         $this->assertTrue($this->blockCipher->getCipher() instanceof Mcrypt);
         $this->assertEquals('blowfish', $this->blockCipher->getCipher()->getAlgorithm());
     }
-    
+
     public function testFactoryEmptyOptions()
     {
         $this->blockCipher = BlockCipher::factory('mcrypt');
         $this->assertTrue($this->blockCipher->getCipher() instanceof Mcrypt);
     }
-    
+
     public function testSetKey()
     {
         $result = $this->blockCipher->setKey('test');
         $this->assertEquals($result, $this->blockCipher);
         $this->assertEquals('test', $this->blockCipher->getKey());
     }
-    
+
     public function testSetAlgorithm()
     {
         $result = $this->blockCipher->setCipherAlgorithm('blowfish');
         $this->assertEquals($result, $this->blockCipher);
         $this->assertEquals('blowfish', $this->blockCipher->getCipherAlgorithm());
     }
-    
+
     public function testSetAlgorithmFail()
     {
         $this->setExpectedException('Zend\Crypt\Exception\InvalidArgumentException',
                                     'The algorithm unknown is not supported by Zend\Crypt\Symmetric\Mcrypt');
         $result = $this->blockCipher->setCipherAlgorithm('unknown');
-        
+
     }
-    
+
     public function testSetHashAlgorithm()
     {
         $result = $this->blockCipher->setHashAlgorithm('sha1');
         $this->assertEquals($result, $this->blockCipher);
         $this->assertEquals('sha1', $this->blockCipher->getHashAlgorithm());
     }
-    
+
     public function testSetKeyIteration()
     {
         $result = $this->blockCipher->setKeyIteration(1000);
         $this->assertEquals($result, $this->blockCipher);
         $this->assertEquals(1000, $this->blockCipher->getKeyIteration());
     }
-    
+
     public function testEncryptWithoutData()
     {
         $plaintext = '';
-        $this->setExpectedException('Zend\Crypt\Exception\InvalidArgumentException','The data to encrypt cannot be empty');
+        $this->setExpectedException('Zend\Crypt\Exception\InvalidArgumentException',
+                                    'The data to encrypt cannot be empty');
         $ciphertext = $this->blockCipher->encrypt($plaintext);
     }
-    
+
     public function testEncryptErrorKey()
     {
         $plaintext = 'test';
-        $this->setExpectedException('Zend\Crypt\Exception\InvalidArgumentException','No key specified for the encryption');
+        $this->setExpectedException('Zend\Crypt\Exception\InvalidArgumentException',
+                                    'No key specified for the encryption');
         $ciphertext = $this->blockCipher->encrypt($plaintext);
     }
-    
+
     public function testEncryptDecrypt()
     {
         $this->blockCipher->setKey('test');
@@ -133,9 +137,9 @@ class BlockCipherTest extends \PHPUnit_Framework_TestCase
             $this->assertTrue(!empty($encrypted));
             $decrypted = $this->blockCipher->decrypt($encrypted);
             $this->assertEquals($decrypted, $this->plaintext);
-        }   
+        }
     }
-    
+
     public function testEncryptDecryptUsingBinary()
     {
         $this->blockCipher->setKey('test');
@@ -147,9 +151,9 @@ class BlockCipherTest extends \PHPUnit_Framework_TestCase
             $this->assertTrue(!empty($encrypted));
             $decrypted = $this->blockCipher->decrypt($encrypted);
             $this->assertEquals($decrypted, $this->plaintext);
-        }   
+        }
     }
-    
+
     public function testDecryptAuthFail()
     {
         $this->blockCipher->setKey('test');

@@ -21,8 +21,8 @@
 
 namespace ZendTest\Crypt\Password;
 
-use Zend\Crypt\Password\Bcrypt,
-    Zend\Config\Config;
+use Zend\Crypt\Password\Bcrypt;
+use Zend\Config\Config;
 
 /**
  * @category   Zend
@@ -34,84 +34,95 @@ use Zend\Crypt\Password\Bcrypt,
  */
 class BcryptTest extends \PHPUnit_Framework_TestCase
 {
+    /** @var Bcrypt */
+    public $bcrypt;
+    /** @var string */
+    public $salt;
+    /** @var string */
+    public $bcryptPassword;
+    /** @var string */
+    public $password;
+
     public function setUp()
     {
-        $this->bcrypt = new Bcrypt();    
-        $this->salt = '1234567890123456';
-        $this->password = 'test';
+        $this->bcrypt         = new Bcrypt();
+        $this->salt           = '1234567890123456';
+        $this->password       = 'test';
         $this->bcryptPassword = '$2a$14$MTIzNDU2Nzg5MDEyMzQ1NeWUUefVlefsTbFhsbqKFv/vPSZBrSFVm';
     }
-    
+
     public function testConstructByOptions()
     {
-        $options = array (
+        $options = array(
             'cost'       => '15',
             'salt'       => $this->salt
         );
-        $bcrypt = new Bcrypt($options);
+        $bcrypt  = new Bcrypt($options);
         $this->assertTrue($bcrypt instanceof Bcrypt);
         $this->assertEquals('15', $bcrypt->getCost());
         $this->assertEquals($this->salt, $bcrypt->getSalt());
     }
-    
+
     public function testConstructByConfig()
     {
-        $options = array (
+        $options = array(
             'cost'       => '15',
             'salt'       => $this->salt
         );
-        $config = new Config($options);
-        $bcrypt = new Bcrypt($config);
+        $config  = new Config($options);
+        $bcrypt  = new Bcrypt($config);
         $this->assertTrue($bcrypt instanceof Bcrypt);
         $this->assertEquals('15', $bcrypt->getCost());
         $this->assertEquals($this->salt, $bcrypt->getSalt());
     }
-    
+
     public function testWrongConstruct()
     {
-        $this->setExpectedException('Zend\Crypt\Password\Exception\InvalidArgumentException','The options parameter must be an array, a Zend\Config\Config object or a Traversable');
+        $this->setExpectedException('Zend\Crypt\Password\Exception\InvalidArgumentException',
+                                    'The options parameter must be an array, a Zend\Config\Config object or a Traversable');
         $bcrypt = new Bcrypt('test');
     }
-    
+
     public function testSetCost()
     {
         $this->bcrypt->setCost('16');
         $this->assertEquals('16', $this->bcrypt->getCost());
     }
-    
+
     public function testSetWrongCost()
     {
-        $this->setExpectedException('Zend\Crypt\Password\Exception\InvalidArgumentException','The cost parameter of bcrypt must be in range 04-31');
+        $this->setExpectedException('Zend\Crypt\Password\Exception\InvalidArgumentException',
+                                    'The cost parameter of bcrypt must be in range 04-31');
         $this->bcrypt->setCost('3');
     }
-    
+
     public function testSetSalt()
     {
         $this->bcrypt->setSalt($this->salt);
         $this->assertEquals($this->salt, $this->bcrypt->getSalt());
     }
-    
+
     public function testSetSmallSalt()
     {
         $this->setExpectedException('Zend\Crypt\Password\Exception\InvalidArgumentException',
-                'The length of the salt must be at lest ' . Bcrypt::MIN_SALT_SIZE . ' bytes');
+                                    'The length of the salt must be at lest ' . Bcrypt::MIN_SALT_SIZE . ' bytes');
         $this->bcrypt->setSalt('small salt');
     }
-    
+
     public function testCreateWithRandomSalt()
     {
         $password = $this->bcrypt->create('test');
         $this->assertTrue(!empty($password));
         $this->assertTrue(strlen($password) === 60);
     }
-    
+
     public function testCreateWithSalt()
     {
         $this->bcrypt->setSalt($this->salt);
         $password = $this->bcrypt->create($this->password);
         $this->assertEquals($password, $this->bcryptPassword);
     }
-    
+
     public function testVerify()
     {
         $this->assertTrue($this->bcrypt->verify($this->password, $this->bcryptPassword));

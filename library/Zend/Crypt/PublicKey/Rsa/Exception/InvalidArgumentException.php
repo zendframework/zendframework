@@ -21,4 +21,5 @@ namespace Zend\Crypt\PublicKey\Rsa\Exception;
 class InvalidArgumentException
     extends \InvalidArgumentException
     implements ExceptionInterface
-{}
+{
+}

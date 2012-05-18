@@ -21,4 +21,5 @@ namespace Zend\Crypt\PublicKey\Rsa\Exception;
 class RuntimeException
     extends \RuntimeException
     implements ExceptionInterface
-{}
+{
+}

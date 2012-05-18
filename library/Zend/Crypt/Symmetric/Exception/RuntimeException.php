@@ -7,6 +7,7 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Crypt
  */
+
 namespace Zend\Crypt\Symmetric\Exception;
 
 /**
@@ -21,4 +22,5 @@ namespace Zend\Crypt\Symmetric\Exception;
 class RuntimeException
     extends \RuntimeException
     implements ExceptionInterface
-{}
+{
+}

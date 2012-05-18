@@ -22,11 +22,11 @@ class Rsa
     const BINARY = 'binary';
     const BASE64 = 'base64';
     /**
-     * @var string
+     * @var string|Rsa\PrivateKey
      */
     protected $_privateKey;
     /**
-     * @var string
+     * @var Rsa\PublicKey
      */
     protected $_publicKey;
     /**
@@ -53,16 +53,17 @@ class Rsa
      * @var string
      */
     protected $_passPhrase;
+
     /**
      * Class constructor
      *
      * @param array $options
-     * @throws Zend\Crypt\Rsa\Exception
+     * @throws Rsa\Exception\RuntimeException
      */
     public function __construct(array $options = null)
     {
         if (!extension_loaded('openssl')) {
-            throw new \Zend\Crypt\Rsa\Exception('Zend_Crypt_Rsa requires openssl extention to be loaded.');
+            throw new Rsa\Exception\RuntimeException('Zend\Crypt\PublicKey\Rsa requires openssl extension to be loaded.');
         }
 
         // Set _hashAlgorithm property when we are sure, that openssl extension is loaded
@@ -73,10 +74,11 @@ class Rsa
             $this->setOptions($options);
         }
     }
+
     /**
      * Set options
-     * 
-     * @param array $options 
+     *
+     * @param array $options
      */
     public function setOptions(array $options)
     {
@@ -103,30 +105,33 @@ class Rsa
             }
         }
     }
+
     /**
      * Get the private key
-     * 
-     * @return string 
+     *
+     * @return Rsa\PrivateKey
      */
     public function getPrivateKey()
     {
         return $this->_privateKey;
     }
+
     /**
      * Get the public key
-     * 
-     * @return string 
+     *
+     * @return Rsa\PublicKey
      */
     public function getPublicKey()
     {
         return $this->_publicKey;
     }
+
     /**
      * Sign
-     * 
-     * @param  string $data
-     * @param  PrivateKey $privateKey
-     * @param  string $format
+     *
+     * @param  string         $data
+     * @param  Rsa\PrivateKey $privateKey
+     * @param  string         $format
      * @return string
      */
     public function sign($data, Rsa\PrivateKey $privateKey = null, $format = null)
@@ -147,9 +152,10 @@ class Rsa
         }
         return $signature;
     }
+
     /**
      * Verify signature
-     * 
+     *
      * @param  string $data
      * @param  string $signature
      * @param  string $format
@@ -161,22 +167,23 @@ class Rsa
             $signature = base64_decode($signature);
         }
         $result = openssl_verify($data, $signature,
-            $this->getPublicKey()->getOpensslKeyResource(),
-            $this->getHashAlgorithm());
+                                 $this->getPublicKey()->getOpensslKeyResource(),
+                                 $this->getHashAlgorithm());
         return $result;
     }
+
     /**
      * Encrypt
-     * 
-     * @param string $data
-     * @param Zend\Crypt\Rsa\Key $key
-     * @param string $format
+     *
+     * @param string  $data
+     * @param Rsa\Key $key
+     * @param string  $format
      * @return string
      */
     public function encrypt($data, Rsa\Key $key, $format = null)
     {
         $encrypted = '';
-        $function = 'openssl_public_encrypt';
+        $function  = 'openssl_public_encrypt';
         if ($key instanceof Rsa\PrivateKey) {
             $function = 'openssl_private_encrypt';
         }
@@ -189,10 +196,10 @@ class Rsa
 
     /**
      * Decrypt
-     * 
-     * @param string $data
-     * @param \Zend\Crypt\Rsa\Key $key
-     * @param string $format
+     *
+     * @param string  $data
+     * @param Rsa\Key $key
+     * @param string  $format
      * @return string
      */
     public function decrypt($data, Rsa\Key $key, $format = null)
@@ -208,11 +215,12 @@ class Rsa
         $function($data, $decrypted, $key->getOpensslKeyResource());
         return $decrypted;
     }
+
     /**
      * Generate keys
-     * 
+     *
      * @param  array $configargs
-     * @return \ArrayObject 
+     * @return \ArrayObject
      */
     public function generateKeys(array $configargs = null)
     {
@@ -238,15 +246,15 @@ class Rsa
         $details    = openssl_pkey_get_details($resource);
         $publicKey  = new Rsa\PublicKey($details['key']);
         $return     = new \ArrayObject(array(
-           'privateKey' => $privateKey,
-           'publicKey'  => $publicKey
-        ), \ArrayObject::ARRAY_AS_PROPS);
+                                            'privateKey' => $privateKey,
+                                            'publicKey'  => $publicKey
+                                       ), \ArrayObject::ARRAY_AS_PROPS);
         return $return;
     }
 
     /**
      * Set PEM string
-     * 
+     *
      * @param string $value
      */
     public function setPemString($value)
@@ -254,36 +262,39 @@ class Rsa
         $this->_pemString = $value;
         try {
             $this->_privateKey = new Rsa\PrivateKey($this->_pemString, $this->_passPhrase);
-            $this->_publicKey = $this->_privateKey->getPublicKey();
-        } catch (Exception $e) {
+            $this->_publicKey  = $this->_privateKey->getPublicKey();
+        } catch (Rsa\Exception\RuntimeException $e) {
             $this->_privateKey = null;
-            $this->_publicKey = new Rsa\PublicKey($this->_pemString);
+            $this->_publicKey  = new Rsa\PublicKey($this->_pemString);
         }
     }
+
     /**
      * Set PEM path
-     * 
-     * @param string $value 
+     *
+     * @param string $value
      */
     public function setPemPath($value)
     {
         $this->_pemPath = $value;
         $this->setPemString(file_get_contents($this->_pemPath));
     }
+
     /**
      * Set certificate string
-     * 
-     * @param string $value 
+     *
+     * @param string $value
      */
     public function setCertificateString($value)
     {
         $this->_certificateString = $value;
-        $this->_publicKey = new Rsa\PublicKey($this->_certificateString, $this->_passPhrase);
+        $this->_publicKey         = new Rsa\PublicKey($this->_certificateString, $this->_passPhrase);
     }
+
     /**
      * Set certificate path
-     * 
-     * @param string $value 
+     *
+     * @param string $value
      */
     public function setCertificatePath($value)
     {
@@ -293,7 +304,7 @@ class Rsa
 
     /**
      * Set hash algorithm
-     * 
+     *
      * @param  string $name
      * @throws Exception\RuntimeException
      */
@@ -322,56 +333,62 @@ class Rsa
                 break;
         }
     }
+
     /**
      * Get PEM string
-     * 
+     *
      * @return string
      */
     public function getPemString()
     {
         return $this->_pemString;
     }
+
     /**
      * Get PEM path
-     * 
-     * @return string 
+     *
+     * @return string
      */
     public function getPemPath()
     {
         return $this->_pemPath;
     }
+
     /**
      * Get certificate string
-     * 
-     * @return string 
+     *
+     * @return string
      */
     public function getCertificateString()
     {
         return $this->_certificateString;
     }
+
     /**
      * Get certificate path
-     * 
-     * @return string 
+     *
+     * @return string
      */
     public function getCertificatePath()
     {
         return $this->_certificatePath;
     }
+
     /**
      * Get hash algorithm
-     * 
-     * @return string 
+     *
+     * @return string
      */
     public function getHashAlgorithm()
     {
         return $this->_hashAlgorithm;
     }
+
     /**
      * Parse config arguments
-     * 
+     *
      * @param  array $config
-     * @return array 
+     * @return array
      */
     protected function _parseConfigArgs(array $config = null)
     {

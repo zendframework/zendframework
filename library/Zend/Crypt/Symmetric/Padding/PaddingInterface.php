@@ -9,7 +9,8 @@
  */
 namespace Zend\Crypt\Symmetric\Padding;
 
-interface PaddingInterface {
+interface PaddingInterface
+{
     /**
      * Pad the string to the specified size
      *

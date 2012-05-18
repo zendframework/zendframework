@@ -24,10 +24,9 @@ namespace Zend\Math\BigInteger;
 /**
  * Support for arbitrary precision mathematics in PHP.
  *
- * \Zend\Math\BigInteger\Gmp is a wrapper across the PHP BCMath
+ * Zend\Math\BigInteger\Gmp is a wrapper across the PHP GMP
  * extension.
  *
- * @uses       Zend\Math\BigInteger\BigIntegerCapable
  * @category   Zend
  * @package    Zend_Math
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -39,7 +38,7 @@ class Gmp implements BigIntegerCapable
      * Initialise a big integer into an extension specific type.
      *
      * @param  string $operand
-     * @param  int $base
+     * @param  int    $base
      * @return string
      */
     public function init($operand, $base = 10)
@@ -89,13 +88,14 @@ class Gmp implements BigIntegerCapable
     /**
      * Divide two big integers and return result or NULL if the denominator
      * is zero.
+     *
      * @param  string $left_operand
      * @param  string $right_operand
      * @return string|null
      */
     public function divide($left_operand, $right_operand)
     {
-        $result = gmp_div($left_operand, $right_operand);
+        $result = gmp_div_q($left_operand, $right_operand);
         return gmp_strval($result);
     }
 
@@ -145,7 +145,7 @@ class Gmp implements BigIntegerCapable
 
     /**
      * @param  string $left_operand
-     * @param string $right_operand
+     * @param string  $right_operand
      * @return string
      */
     public function sqrt($operand)
@@ -155,22 +155,22 @@ class Gmp implements BigIntegerCapable
     }
 
     /**
-     * @param  string $operand 
+     * @param  string $operand
      * @return integer
      */
     public function binaryToInteger($operand)
     {
         $result = '0';
         while (strlen($operand)) {
-            $ord = ord(substr($operand, 0, 1));
-            $result = gmp_add(gmp_mul($result, 256), $ord);
+            $ord     = ord(substr($operand, 0, 1));
+            $result  = gmp_add(gmp_mul($result, 256), $ord);
             $operand = substr($operand, 1);
         }
         return gmp_strval($result);
     }
 
     /**
-     * @param  string|integer $operand 
+     * @param  string|integer $operand
      * @return string
      */
     public function integerToBinary($operand)
@@ -186,17 +186,17 @@ class Gmp implements BigIntegerCapable
     }
 
     /**
-     * @param  string $operand 
+     * @param  string $operand
      * @return string
      */
     public function hexToDecimal($operand)
     {
-        $return = '0';
-        while(strlen($hex)) {
-            $hex = hexdec(substr($operand, 0, 4));
-            $dec = gmp_add(gmp_mul($return, 65536), $hex);
+        $result = '0';
+        while(strlen($operand)) {
+            $dec     = hexdec(substr($operand, 0, 4));
+            $result  = gmp_add(gmp_mul($result, 65536), $dec);
             $operand = substr($operand, 4);
         }
-        return $return;
+        return gmp_strval($result);
     }
 }

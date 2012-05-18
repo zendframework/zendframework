@@ -32,33 +32,41 @@ use Zend\Crypt\Symmetric\Padding\PKCS7;
  */
 class PKCS7Test extends \PHPUnit_Framework_TestCase
 {
+    /** @var PKCS7 */
+    public $padding;
+    /** @var integer */
+    public $start;
+    /** @var integer */
+    public $end;
+
     public function setUp()
     {
         $this->padding = new PKCS7();
-        $this->start = 1;
-        $this->end   = 32;
+        $this->start   = 1;
+        $this->end     = 32;
     }
+
     public function testPad()
     {
-        for ($blockSize=$this->start;$blockSize<=$this->end;$blockSize++) {
-            for ($i=1;$i<=$blockSize;$i++) {
-                $input = str_repeat(chr(rand(0,255)), $i);
+        for ($blockSize = $this->start; $blockSize <= $this->end; $blockSize++) {
+            for ($i = 1; $i <= $blockSize; $i++) {
+                $input  = str_repeat(chr(rand(0, 255)), $i);
                 $output = $this->padding->pad($input, $blockSize);
-                $num = $blockSize - ($i % $blockSize);
+                $num    = $blockSize - ($i % $blockSize);
                 $this->assertEquals($output, $input . str_repeat(chr($num), $num));
             }
         }
     }
-    
+
     public function testStrip()
     {
-        for ($blockSize=$this->start;$blockSize<=$this->end;$blockSize++) {
-            for ($i=1;$i<$blockSize;$i++) {
-                $input = str_repeat('a', $i);
-                $num = $blockSize - ($i % $blockSize);
+        for ($blockSize = $this->start; $blockSize <= $this->end; $blockSize++) {
+            for ($i = 1; $i < $blockSize; $i++) {
+                $input  = str_repeat('a', $i);
+                $num    = $blockSize - ($i % $blockSize);
                 $output = $this->padding->strip($input . str_repeat(chr($num), $num));
                 $this->assertEquals($output, $input);
-            }   
-        }    
+            }
+        }
     }
 }

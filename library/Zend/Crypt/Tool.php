@@ -29,8 +29,8 @@ class Tool
      */
     public static function compareString($stringA, $stringB)
     {
-        $stringA = (string) $stringA;
-        $stringB = (string) $stringB;
+        $stringA = (string)$stringA;
+        $stringB = (string)$stringB;
         if (strlen($stringA) === 0) {
             return false;
         }

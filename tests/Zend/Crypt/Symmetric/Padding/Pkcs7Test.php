@@ -30,7 +30,7 @@ use Zend\Crypt\Symmetric\Padding\Pkcs7;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class PKCS7Test extends \PHPUnit_Framework_TestCase
+class Pkcs7Test extends \PHPUnit_Framework_TestCase
 {
     /** @var Pkcs7 */
     public $padding;

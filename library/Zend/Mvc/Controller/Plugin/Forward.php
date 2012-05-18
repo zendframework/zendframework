@@ -68,15 +68,25 @@ class Forward extends AbstractPlugin
     {
         $event   = $this->getEvent();
         $locator = $this->getLocator();
+        $scoped  = false;
 
         // Use the controller loader when possible
         if ($locator->has('ControllerLoader')) {
             $locator = $locator->get('ControllerLoader');
+            $scoped  = true;
         }
 
         $controller = $locator->get($name);
         if (!$controller instanceof Dispatchable) {
             throw new Exception\DomainException('Can only forward to DispatchableInterface classes; class of type ' . get_class($controller) . ' received');
+        }
+        if (!$scoped) {
+            if ($controller instanceof InjectApplicationEventInterface) {
+                $controller->setEvent($event);
+            }
+            if ($controller instanceof ServiceLocatorAwareInterface) {
+                $controller->setServiceLocator($locator);
+            }
         }
 
         // Allow passing parameters to seed the RouteMatch with

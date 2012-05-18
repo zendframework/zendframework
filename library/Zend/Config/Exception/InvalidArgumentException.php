@@ -29,9 +29,4 @@ namespace Zend\Config\Exception;
 class InvalidArgumentException
     extends \InvalidArgumentException
     implements ExceptionInterface
-<<<<<<< Updated upstream
-{
-}
-=======
 {}
->>>>>>> Stashed changes

@@ -29,9 +29,4 @@ namespace Zend\Config\Exception;
 class RuntimeException
     extends \RuntimeException
     implements ExceptionInterface
-<<<<<<< Updated upstream
-{
-}
-=======
 {}
->>>>>>> Stashed changes

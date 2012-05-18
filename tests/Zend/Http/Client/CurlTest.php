@@ -53,7 +53,10 @@ class CurlTest extends CommonHttpTests
      * @var array
      */
     protected $config = array(
-        'adapter'     => 'Zend\Http\Client\Adapter\Curl'
+        'adapter'     => 'Zend\Http\Client\Adapter\Curl',
+        'curloptions' => array(
+            CURLOPT_INFILESIZE => 102400000,
+        ),
     );
 
     protected function setUp()

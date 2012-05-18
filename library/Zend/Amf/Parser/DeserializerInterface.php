@@ -30,12 +30,12 @@ namespace Zend\Amf\Parser;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Deserializer
+interface DeserializerInterface
 {
     /**
      * Constructor
      *
-     * @param  Zend\Amf\Parser\InputStream $stream
+     * @param  InputStream $stream
      * @return void
      */
     public function __construct(InputStream $stream);

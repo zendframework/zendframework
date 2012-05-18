@@ -2,8 +2,10 @@
 
 namespace Zend\Amf\Parser\Exception;
 
+use Zend\Amf\Exception;
+
 class InvalidArgumentException
-    extends \InvalidArgumentException
-    implements \Zend\Amf\Parser\Exception
+    extends Exception\InvalidArgumentException
+    implements ExceptionInterface
 {
 }

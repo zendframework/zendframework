@@ -18,7 +18,10 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Amf;
+namespace Zend\Amf\Request;
+
+use Zend\Amf\Parser,
+    Zend\Amf\Value;
 
 /**
  * Handle the incoming AMF request by deserializing the data to php object
@@ -29,21 +32,21 @@ namespace Zend\Amf;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Request
+interface RequestInterface
 {
     /**
      * Prepare the AMF InputStream for parsing.
      *
      * @param  string $request
-     * @return Zend\Amf\Request
+     * @return RequestInterface
      */
     public function initialize($request);
 
     /**
      * Takes the raw AMF input stream and converts it into valid PHP objects
      *
-     * @param  Zend\Amf\Parser\InputStream
-     * @return Zend\Amf\Request
+     * @param  Parser\InputStream
+     * @return RequestInterface
      */
     public function readMessage(Parser\InputStream $stream);
 
@@ -56,14 +59,14 @@ interface Request
      * - LENGTH Int
      * - DATA Object
      *
-     * @return Zend\Amf\Value\MessageHeader
+     * @return Value\MessageHeader
      */
     public function readHeader();
 
     /**
      * Deserialize a message body from the input stream
      *
-     * @return Zend\Amf\Value\MessageBody
+     * @return Value\MessageBody
      */
     public function readBody();
 
@@ -77,8 +80,8 @@ interface Request
     /**
      * Accessor to private array of message bodies.
      *
-     * @param  Zend\Amf\Value\MessageBody $message
-     * @return Zend\Amf\Request
+     * @param  Value\MessageBody $message
+     * @return RequestInterface
      */
     public function addAmfBody(Value\MessageBody $message);
 
@@ -100,7 +103,7 @@ interface Request
      * Set the object response encoding
      *
      * @param  mixed $int
-     * @return Zend\Amf\Request
+     * @return RequestInterface
      */
     public function setObjectEncoding($int);
 }

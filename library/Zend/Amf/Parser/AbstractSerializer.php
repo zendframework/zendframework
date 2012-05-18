@@ -29,7 +29,7 @@ namespace Zend\Amf\Parser;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class AbstractSerializer implements Serializer
+abstract class AbstractSerializer implements SerializerInterface
 {
     /**
      * Reference to the current output stream being constructed

@@ -140,6 +140,7 @@ class Connection implements ConnectionInterface
     public function setResource(\PDO $resource)
     {
         $this->resource = $resource;
+        $this->driverName = strtolower($this->resource->getAttribute(\PDO::ATTR_DRIVER_NAME));
         return $this;
     }
 

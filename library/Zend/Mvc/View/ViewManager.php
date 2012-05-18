@@ -186,9 +186,10 @@ class ViewManager implements ListenerAggregateInterface
         $url->setRouter($router);
 
         // Configure basePath view helper with base path from configuration, if available
-        $basePath = '/';
         if (isset($this->config['view_manager']) && isset($this->config['view_manager']['base_path'])) {
             $basePath = $this->config['view_manager']['base_path'];
+        } else {
+            $basePath = $this->services->get('Request')->getBasePath();
         }
         $basePathHelper = $this->helperBroker->load('basePath');
         $basePathHelper->setBasePath($basePath);

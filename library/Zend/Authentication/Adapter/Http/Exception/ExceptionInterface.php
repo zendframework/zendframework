@@ -21,6 +21,8 @@
 
 namespace Zend\Authentication\Adapter\Http\Exception;
 
+use Zend\Authentication\Adapter\Exception\ExceptionInterface as Exception;
+
 /**
  * HTTP Auth Resolver Exception
  *
@@ -30,5 +32,5 @@ namespace Zend\Authentication\Adapter\Http\Exception;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface ExceptionInterface extends \Zend\Authentication\Adapter\Exception\ExceptionInterface
+interface ExceptionInterface extends Exception
 {}

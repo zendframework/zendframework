@@ -19,9 +19,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\ProgressBar\Adapter\Exception;
-
-use Zend\ProgressBar\Exception;
+namespace Zend\ProgressBar\Exception;
 
 /**
  * Exception for Zend_Progressbar component.
@@ -32,6 +30,6 @@ use Zend\ProgressBar\Exception;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class RuntimeException
-    extends Exception\RuntimeException
+    extends \RuntimeException
     implements ExceptionInterface
 {}

@@ -21,6 +21,8 @@
 
 namespace Zend\ProgressBar\Adapter\Exception;
 
+use Zend\ProgressBar\Exception;
+
 /**
  * Exception for Zend_Progressbar component.
  *
@@ -30,7 +32,6 @@ namespace Zend\ProgressBar\Adapter\Exception;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class InvalidArgumentException
-    extends \InvalidArgumentException
+    extends Exception\InvalidArgumentException
     implements ExceptionInterface
-{
-}
+{}

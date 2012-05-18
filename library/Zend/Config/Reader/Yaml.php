@@ -21,8 +21,7 @@
 
 namespace Zend\Config\Reader;
 
-use Zend\Config\Reader,
-    Zend\Config\Exception;
+use Zend\Config\Exception;
 
 /**
  * Yaml config reader.
@@ -33,7 +32,7 @@ use Zend\Config\Reader,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Yaml implements Reader
+class Yaml implements ReaderInterface
 {
     /**
      * Directory of the JSON file
@@ -87,7 +86,7 @@ class Yaml implements Reader
     /**
      * fromFile(): defined by Reader interface.
      *
-     * @see    Reader::fromFile()
+     * @see    ReaderInterface::fromFile()
      * @param  string $filename
      * @return array
      */
@@ -113,7 +112,7 @@ class Yaml implements Reader
     /**
      * fromString(): defined by Reader interface.
      *
-     * @see    Reader::fromString()
+     * @see    ReaderInterface::fromString()
      * @param  string $string
      * @return array
      */

@@ -22,7 +22,6 @@
 namespace Zend\Config\Reader;
 
 use XMLReader,
-    Zend\Config\Reader,    
     Zend\Config\Exception;
 
 /**
@@ -34,7 +33,7 @@ use XMLReader,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Xml implements Reader
+class Xml implements ReaderInterface
 {
     /**
      * XML Reader instance.
@@ -63,7 +62,7 @@ class Xml implements Reader
     /**
      * fromFile(): defined by Reader interface.
      *
-     * @see    Reader::fromFile()
+     * @see    ReaderInterface::fromFile()
      * @param  string $filename
      * @return array
      */
@@ -95,7 +94,7 @@ class Xml implements Reader
     /**
      * fromString(): defined by Reader interface.
      *
-     * @see    Reader::fromString()
+     * @see    ReaderInterface::fromString()
      * @param  string $string
      * @return array
      */

@@ -28,6 +28,6 @@ namespace Zend\Config\Exception;
  */
 class RuntimeException
     extends \RuntimeException
-    implements \Zend\Config\Exception
+    implements ExceptionInterface
 {
 }

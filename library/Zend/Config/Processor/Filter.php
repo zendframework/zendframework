@@ -21,7 +21,6 @@
 namespace Zend\Config\Processor;
 
 use Zend\Config\Config,
-    Zend\Config\Processor,
     Zend\Config\Exception,
     Zend\Filter\FilterInterface as ZendFilter,
     \Traversable,
@@ -33,7 +32,7 @@ use Zend\Config\Config,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Filter implements Processor
+class Filter implements ProcessorInterface
 {
     /**
      * @var \Zend\Filter\FilterInterface

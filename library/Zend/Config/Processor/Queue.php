@@ -21,7 +21,6 @@
 namespace Zend\Config\Processor;
 
 use Zend\Config\Config,
-    Zend\Config\Processor,
     Zend\Config\Exception\InvalidArgumentException,
     Zend\Stdlib\PriorityQueue;
 
@@ -31,7 +30,7 @@ use Zend\Config\Config,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Queue extends PriorityQueue implements Processor
+class Queue extends PriorityQueue implements ProcessorInterface
 {
     /**
      * Process the whole config structure with each parser in the queue.
@@ -46,7 +45,7 @@ class Queue extends PriorityQueue implements Processor
         }
 
         foreach ($this as $parser) {
-            /** @var $parser \Zend\Config\Processor */
+            /** @var $parser \Zend\Config\Processor\ProcessorInterface */
             $parser->process($config);
         }
     }
@@ -60,7 +59,7 @@ class Queue extends PriorityQueue implements Processor
     public function processValue($value)
     {
         foreach ($this as $parser) {
-            /** @var $parser \Zend\Config\Processor */
+            /** @var $parser \Zend\Config\Processor\ProcessorInterface */
             $value = $parser->processValue($value);
         }
 

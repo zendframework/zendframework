@@ -21,7 +21,6 @@
 namespace Zend\Config\Processor;
 
 use Zend\Config\Config,
-    Zend\Config\Processor,
     Zend\Config\Exception\InvalidArgumentException,
     Zend\Translator\Translator as ZendTranslator,
     Zend\Locale\Locale,
@@ -34,7 +33,7 @@ use Zend\Config\Config,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Translator implements Processor
+class Translator implements ProcessorInterface
 {
     /**
      * @var \Zend\Translator\Translator

@@ -26,7 +26,7 @@ use Zend\GData,
     Zend\GData\App\Extension,
     Zend\Http,
     Zend\Http\Header\Etag,
-    Zend\URI,
+    Zend\Uri,
     ZendTest\GData\TestAsset;
 
 /**
@@ -40,11 +40,16 @@ use Zend\GData,
  */
 class EntryTest extends \PHPUnit_Framework_TestCase
 {
-
-    /**
-     * @var \Zend\GData\App
-     */
-    protected $service = null;
+    public $entryText;
+    public $httpEntrySample;
+    /** @var \Zend\GData\App */
+    public $entry;
+    /** @var \Zend\Http\Client\Adapter\AdapterInterface */
+    public $adapter;
+    /** @var \Zend\GData\HttpClient */
+    public $client;
+    /** @var App */
+    public $service;
 
     public function setUp()
     {
@@ -236,7 +241,6 @@ class EntryTest extends \PHPUnit_Framework_TestCase
 
     public function testIfMatchHeaderCanBeSetOnSave()
     {
-        $this->markTestIncomplete('Problem with Etag and If-Match');
         $etagOverride = 'foo';
         $etag = Etag::fromString('Etag: ABCD1234');
         $this->service->setMajorProtocolVersion(2);
@@ -252,7 +256,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         $headers = $this->adapter->popRequest()->headers;
         $found = false;
         foreach ($headers as $header => $value) {
-            if ($header == 'If-Match: ' && $value == $etagOverride)
+            if ($header == 'If-Match' && $value == $etagOverride)
                 $found = true;
         }
         $this->assertTrue($found,
@@ -285,10 +289,9 @@ class EntryTest extends \PHPUnit_Framework_TestCase
 
     public function testCanSetUriOnSave()
     {
-        $this->markTestIncomplete('Problem with default port');
-        $uri = 'http://example.net/foo/bar';
+        $uri = 'http://example.net:8080/foo/bar';
         $uriObject = new Uri\Http($uri);
-        $uriObject->setPort('80');
+        $uriObject->setPort('8080');
         $this->adapter->setResponse($this->httpEntrySample);
         $entry = $this->service->newEntry();
         $newEntry = $entry->save($uri);
@@ -312,7 +315,6 @@ class EntryTest extends \PHPUnit_Framework_TestCase
 
     public function testIfNoneMatchSetOnReload()
     {
-        $this->markTestIncomplete('Problem with Etag and If-Match');
         $etag = Etag::fromString('Etag: ABCD1234');
         $this->adapter->setResponse($this->httpEntrySample);
         $entry = $this->service->newEntry();
@@ -325,16 +327,14 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         $headers = $this->adapter->popRequest()->headers;
         $found = false;
         foreach ($headers as $header => $value) {
-            if ($header == 'If-None-Match: ' && $value == $etag)
+            if ($header == 'If-None-Match' && $value == $etag->getFieldValue())
                 $found = true;
         }
-        $this->assertTrue($found,
-                'If-None-Match header not found or incorrect');
+        $this->assertTrue($found, 'If-None-Match header not found or incorrect');
     }
 
     public function testIfNoneMatchCanBeSetOnReload()
     {
-        $this->markTestIncomplete('Problem with Etag and If-Match');
         $etagOverride = 'foo';
         $etag = Etag::fromString('Etag: ABCD1234');
         $this->adapter->setResponse($this->httpEntrySample);
@@ -349,11 +349,10 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         $headers = $this->adapter->popRequest()->headers;
         $found = false;
         foreach ($headers as $header => $value) {
-            if ($header == 'If-None-Match: ' && $value == $etagOverride)
+            if ($header == 'If-None-Match' && $value == $etagOverride)
                 $found = true;
         }
-        $this->assertTrue($found,
-                'If-None-Match header not found or incorrect');
+        $this->assertTrue($found,'If-None-Match header not found or incorrect');
     }
 
     public function testReloadReturnsEntryObject()
@@ -398,8 +397,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
 
     public function testReloadExtractsURIFromEditLink()
     {
-        $this->markTestIncomplete('Problem with default port');
-        $expectedUri = 'http://www.example.com';
+        $expectedUri = 'http://www.example.com:81';
         $etag = Etag::fromString('Etag: ABCD1234');
         $this->service->setMajorProtocolVersion(2);
         $this->adapter->setResponse($this->httpEntrySample);
@@ -412,13 +410,12 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         $newEntry = $entry->reload();
         $requestUri = $this->adapter->popRequest()->uri;
         $expectedUriObject = new Uri\Http($expectedUri);
-        $expectedUriObject->setPort('80');
+        $expectedUriObject->setPort('81');
         $this->assertEquals($expectedUriObject, $requestUri);
     }
 
     public function testReloadAllowsCustomURI()
     {
-        $this->markTestIncomplete('Problem with default port');
         $uriOverride = 'http://www.example.org';
         $etag = Etag::fromString('Etag: ABCD1234');
         $this->service->setMajorProtocolVersion(2);
@@ -432,7 +429,6 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         $newEntry = $entry->reload($uriOverride);
         $requestUri = $this->adapter->popRequest()->uri;
         $uriOverrideObject = new Uri\Http($uriOverride);
-        $uriOverrideObject->setPort('80');
         $this->assertEquals($uriOverrideObject, $requestUri);
     }
 

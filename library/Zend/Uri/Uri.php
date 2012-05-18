@@ -123,7 +123,7 @@ class Uri
     /**
      * Create a new URI object
      *
-     * @param  \Zend\Uri\Uri|string|null $uri
+     * @param  Uri|string|null $uri
      * @throws Exception\InvalidArgumentException
      */
     public function __construct($uri = null)

@@ -84,19 +84,18 @@ class FileReflection implements ReflectionInterface
     /**
      * Constructor
      *
-     * @param string $file
+     * @param string $filename
+     * @throws Exception\RuntimeException
      * @return FileReflection
      */
-    public function __construct($file)
+    public function __construct($filename)
     {
-        $fileName = $file;
-
-        if (($fileRealPath = realpath($fileName)) === false) {
-            $fileRealPath = stream_resolve_include_path($fileName);
+        if (($fileRealPath = realpath($filename)) === false) {
+            $fileRealPath = stream_resolve_include_path($filename);
         }
 
         if (!$fileRealPath || !in_array($fileRealPath, get_included_files())) {
-            throw new Exception\RuntimeException('File ' . $file . ' must be required before it can be reflected');
+            throw new Exception\RuntimeException('File ' . $filename . ' must be required before it can be reflected');
         }
 
         $this->filePath = $fileRealPath;

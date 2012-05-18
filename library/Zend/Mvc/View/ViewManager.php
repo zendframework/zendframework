@@ -42,6 +42,21 @@ use Zend\View\View;
  * object (and its associated rendering strategies), and the various MVC
  * strategies and listeners.
  *
+ * Defines and manages the following services:
+ *
+ * - ViewHelperLoader (also aliased to Zend\View\HelperLoader)
+ * - ViewHelperBroker (also aliased to Zend\View\HelperBroker)
+ * - ViewTemplateMapResolver (also aliased to Zend\View\Resolver\TemplateMapResolver)
+ * - ViewTemplatePathStack (also aliased to Zend\View\Resolver\TemplatePathStack)
+ * - ViewResolver (also aliased to Zend\View\Resolver\AggregateResolver and ResolverInterface)
+ * - ViewRenderer (also aliased to Zend\View\Renderer\PhpRenderer and RendererInterface)
+ * - ViewPhpRendererStrategy (also aliased to Zend\View\Strategy\PhpRendererStrategy)
+ * - View (also aliased to Zend\View\View)
+ * - DefaultRenderingStrategy (also aliased to Zend\Mvc\View\DefaultRenderingStrategy)
+ * - ExceptionStrategy (also aliased to Zend\Mvc\View\ExceptionStrategy)
+ * - RouteNotFoundStrategy (also aliased to Zend\Mvc\View\RouteNotFoundStrategy and 404Strategy)
+ * - ViewModel
+ *
  * @category   Zend
  * @package    Zend_Mvc
  * @subpackage View
@@ -149,7 +164,7 @@ class ViewManager implements ListenerAggregateInterface
      * 
      * @return ViewHelperLoader
      */
-    protected function getHelperLoader()
+    public function getHelperLoader()
     {
         if ($this->helperLoader) {
             return $this->helperLoader;
@@ -160,6 +175,10 @@ class ViewManager implements ListenerAggregateInterface
             $map = $this->config['view_manager']['helper_map'];
         }
         $this->helperLoader = new ViewHelperLoader($map);
+
+        $this->services->setService('ViewHelperLoader', $this->helperLoader);
+        $this->services->setAlias('Zend\View\HelperLoader', 'ViewHelperLoader');
+
         return $this->helperLoader;
     }
 
@@ -168,7 +187,7 @@ class ViewManager implements ListenerAggregateInterface
      * 
      * @return ViewHelperBroker
      */
-    protected function getHelperBroker()
+    public function getHelperBroker()
     {
         if ($this->helperBroker) {
             return $this->helperBroker;
@@ -200,6 +219,9 @@ class ViewManager implements ListenerAggregateInterface
             $doctype->setDoctype($this->config['view_manager']['doctype']);
         }
 
+        $this->services->setService('ViewHelperBroker', $this->helperBroker);
+        $this->services->setAlias('Zend\View\HelperBroker', 'ViewHelperBroker');
+
         return $this->helperBroker;
     }
 
@@ -208,7 +230,7 @@ class ViewManager implements ListenerAggregateInterface
      * 
      * @return ViewAggregateResolver
      */
-    protected function getResolver()
+    public function getResolver()
     {
         if ($this->resolver) {
             return $this->resolver;
@@ -238,6 +260,11 @@ class ViewManager implements ListenerAggregateInterface
         $this->services->setService('ViewTemplatePathStack', $templatePathStack);
         $this->services->setService('ViewResolver', $this->resolver);
 
+        $this->services->setAlias('Zend\View\Resolver\TemplateMapResolver', 'ViewTemplateMapResolver');
+        $this->services->setAlias('Zend\View\Resolver\TemplatePathStack', 'ViewTemplatePathStack');
+        $this->services->setAlias('Zend\View\Resolver\AggregateResolver', 'ViewResolver');
+        $this->services->setAlias('Zend\View\Resolver\ResolverInterface', 'ViewResolver');
+
         return $this->resolver;
     }
 
@@ -246,7 +273,7 @@ class ViewManager implements ListenerAggregateInterface
      * 
      * @return ViewPhpRenderer
      */
-    protected function getRenderer()
+    public function getRenderer()
     {
         if ($this->renderer) {
             return $this->renderer;
@@ -261,6 +288,8 @@ class ViewManager implements ListenerAggregateInterface
         $modelHelper->setRoot($model);
 
         $this->services->setService('ViewRenderer', $this->renderer);
+        $this->services->setAlias('Zend\View\Renderer\PhpRenderer', 'ViewRenderer');
+        $this->services->setAlias('Zend\View\Renderer\RendererInterface', 'ViewRenderer');
 
         return $this->renderer;
     }
@@ -270,7 +299,7 @@ class ViewManager implements ListenerAggregateInterface
      * 
      * @return PhpRendererStrategy
      */
-    protected function getRendererStrategy()
+    public function getRendererStrategy()
     {
         if ($this->rendererStrategy) {
             return $this->rendererStrategy;
@@ -279,6 +308,10 @@ class ViewManager implements ListenerAggregateInterface
         $this->rendererStrategy = new PhpRendererStrategy(
             $this->getRenderer()
         );
+
+        $this->services->setService('ViewPhpRendererStrategy', $this->rendererStrategy);
+        $this->services->setAlias('Zend\View\Strategy\PhpRendererStrategy', 'ViewPhpRendererStrategy');
+
         return $this->rendererStrategy;
     }
 
@@ -287,7 +320,7 @@ class ViewManager implements ListenerAggregateInterface
      * 
      * @return View
      */
-    protected function getView()
+    public function getView()
     {
         if ($this->view) {
             return $this->view;
@@ -298,6 +331,8 @@ class ViewManager implements ListenerAggregateInterface
         $this->view->events()->attach($this->getRendererStrategy());
 
         $this->services->setService('View', $this->view);
+        $this->services->setAlias('Zend\View\View', 'View');
+
         return $this->view;
     }
 
@@ -306,7 +341,7 @@ class ViewManager implements ListenerAggregateInterface
      * 
      * @return string
      */
-    protected function getLayoutTemplate()
+    public function getLayoutTemplate()
     {
         $layout = 'layout/layout';
         if (isset($this->config['view_manager']) && isset($this->config['view_manager']['layout'])) {
@@ -320,7 +355,7 @@ class ViewManager implements ListenerAggregateInterface
      * 
      * @return DefaultRenderingStrategy
      */
-    protected function getMvcRenderingStrategy()
+    public function getMvcRenderingStrategy()
     {
         if ($this->mvcRenderingStrategy) {
             return $this->mvcRenderingStrategy;
@@ -328,6 +363,10 @@ class ViewManager implements ListenerAggregateInterface
 
         $this->mvcRenderingStrategy = new DefaultRenderingStrategy($this->getView());
         $this->mvcRenderingStrategy->setLayoutTemplate($this->getLayoutTemplate());
+
+        $this->services->setService('DefaultRenderingStrategy', $this->mvcRenderingStrategy);
+        $this->services->setAlias('Zend\Mvc\View\DefaultRenderingStrategy', 'DefaultRenderingStrategy');
+
         return $this->mvcRenderingStrategy;
     }
 
@@ -336,7 +375,7 @@ class ViewManager implements ListenerAggregateInterface
      * 
      * @return ExceptionStrategy
      */
-    protected function getExceptionStrategy()
+    public function getExceptionStrategy()
     {
         if ($this->exceptionStrategy) {
             return $this->exceptionStrategy;
@@ -356,6 +395,10 @@ class ViewManager implements ListenerAggregateInterface
 
         $this->exceptionStrategy->setDisplayExceptions($displayExceptions);
         $this->exceptionStrategy->setExceptionTemplate($exceptionTemplate);
+
+        $this->services->setService('ExceptionStrategy', $this->exceptionStrategy);
+        $this->services->setAlias('Zend\Mvc\View\ExceptionStrategy', 'ExceptionStrategy');
+
         return $this->exceptionStrategy;
     }
 
@@ -364,7 +407,7 @@ class ViewManager implements ListenerAggregateInterface
      * 
      * @return RouteNotFoundStrategy
      */
-    protected function getRouteNotFoundStrategy()
+    public function getRouteNotFoundStrategy()
     {
         if ($this->routeNotFoundStrategy) {
             return $this->routeNotFoundStrategy;
@@ -384,6 +427,11 @@ class ViewManager implements ListenerAggregateInterface
 
         $this->routeNotFoundStrategy->setDisplayNotFoundReason($displayNotFoundReason);
         $this->routeNotFoundStrategy->setNotFoundTemplate($notFoundTemplate);
+
+        $this->services->setService('RouteNotFoundStrategy', $this->routeNotFoundStrategy);
+        $this->services->setAlias('Zend\Mvc\View\RouteNotFoundStrategy', 'RouteNotFoundStrategy');
+        $this->services->setAlias('404Strategy', 'RouteNotFoundStrategy');
+
         return $this->routeNotFoundStrategy;
     }
 
@@ -392,7 +440,7 @@ class ViewManager implements ListenerAggregateInterface
      * 
      * @return \Zend\Mvc\View\Model\ModelInterface
      */
-    protected function getViewModel()
+    public function getViewModel()
     {
         if ($this->viewModel) {
             return $this->viewModel;
@@ -400,6 +448,9 @@ class ViewManager implements ListenerAggregateInterface
 
         $this->viewModel = $model = $this->event->getViewModel();
         $model->setTemplate($this->getLayoutTemplate());
+
+        $this->services->setService('ViewModel', $this->viewModel);
+
         return $this->viewModel;
     }
 }

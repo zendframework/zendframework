@@ -167,7 +167,7 @@ class Xml implements ReaderInterface
                 }
 
                 if (isset($children[$name])) {
-                    if (!is_array($children[$name]) || !$children[$name]) {
+                    if (!is_array($children[$name]) || !array_key_exists(0, $children[$name])) {
                         $children[$name] = array($children[$name]);
                     }
 

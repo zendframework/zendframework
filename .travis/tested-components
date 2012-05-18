@@ -29,6 +29,7 @@ Zend/Locale
 Zend/Log
 Zend/Mail
 Zend/Markup
+Zend/Math
 Zend/Measure
 Zend/Memory
 Zend/Mime

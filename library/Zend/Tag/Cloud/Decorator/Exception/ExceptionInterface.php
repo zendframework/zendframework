@@ -21,6 +21,8 @@
 
 namespace Zend\Tag\Cloud\Decorator\Exception;
 
+use Zend\Tag\Exception\ExceptionInterface as Exception;
+
 /**
  * Exception class for Zend_Tag_Cloud_Decorator
  *
@@ -29,6 +31,5 @@ namespace Zend\Tag\Cloud\Decorator\Exception;
  * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface ExceptionInterface extends \Zend\Tag\Exception\ExceptionInterface
-{
-}
+interface ExceptionInterface extends Exception
+{}

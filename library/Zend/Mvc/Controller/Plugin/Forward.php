@@ -66,8 +66,8 @@ class Forward extends AbstractPlugin
      */
     public function dispatch($name, array $params = null)
     {
-        $event          = $this->getEvent();
-        $locator        = $this->getLocator();
+        $event   = $this->getEvent();
+        $locator = $this->getLocator();
 
         // Use the controller loader when possible
         if ($locator->has('ControllerLoader')) {

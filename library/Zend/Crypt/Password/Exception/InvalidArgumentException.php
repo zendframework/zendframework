@@ -9,6 +9,8 @@
  */
 namespace Zend\Crypt\Password\Exception;
 
+use Zend\Crypt\Exception;
+
 /**
  * Invalid argument exception
  *
@@ -19,7 +21,13 @@ namespace Zend\Crypt\Password\Exception;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class InvalidArgumentException
+<<<<<<< Updated upstream
     extends \InvalidArgumentException
     implements ExceptionInterface
 {
 }
+=======
+    extends Exception\InvalidArgumentException
+    implements ExceptionInterface
+{}
+>>>>>>> Stashed changes

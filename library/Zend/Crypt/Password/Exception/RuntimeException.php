@@ -10,6 +10,8 @@
 
 namespace Zend\Crypt\Password\Exception;
 
+use Zend\Crypt\Exception;
+
 /**
  * Runtime argument exception
  *
@@ -20,7 +22,13 @@ namespace Zend\Crypt\Password\Exception;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class RuntimeException
+<<<<<<< Updated upstream
     extends \RuntimeException
     implements ExceptionInterface
 {
 }
+=======
+    extends Exception\RuntimeException
+    implements ExceptionInterface
+{}
+>>>>>>> Stashed changes

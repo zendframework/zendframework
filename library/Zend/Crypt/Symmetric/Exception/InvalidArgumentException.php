@@ -21,13 +21,6 @@ use Zend\Crypt\Math\Exception;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class InvalidArgumentException
-<<<<<<< Updated upstream
-    extends \InvalidArgumentException
-    implements ExceptionInterface
-{
-}
-=======
     extends Exception\InvalidArgumentException
     implements ExceptionInterface
 {}
->>>>>>> Stashed changes

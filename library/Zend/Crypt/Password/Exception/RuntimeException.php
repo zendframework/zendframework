@@ -22,13 +22,6 @@ use Zend\Crypt\Exception;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class RuntimeException
-<<<<<<< Updated upstream
-    extends \RuntimeException
-    implements ExceptionInterface
-{
-}
-=======
     extends Exception\RuntimeException
     implements ExceptionInterface
 {}
->>>>>>> Stashed changes

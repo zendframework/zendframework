@@ -19,7 +19,9 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Server\Reflection;
+namespace Zend\Server\Reflection\Exception;
+
+use Zend\Server\Exception\ExceptionInterface as Exception;
 
 /**
  * Zend_Server_Reflection exceptions
@@ -30,6 +32,5 @@ namespace Zend\Server\Reflection;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Exception extends \Zend\Server\Exception
-{
-}
+interface ExceptionInterface extends Exception
+{}

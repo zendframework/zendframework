@@ -9,7 +9,7 @@
  */
 namespace Zend\Crypt\Symmetric\Exception;
 
-use Zend\Crypt\Math\Exception;
+use Zend\Crypt\Exception;
 
 /**
  * Invalid argument exception

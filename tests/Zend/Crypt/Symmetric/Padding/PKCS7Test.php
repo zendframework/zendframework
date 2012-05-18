@@ -21,7 +21,7 @@
 
 namespace ZendTest\Crypt\Symmetric\Padding;
 
-use Zend\Crypt\Symmetric\Padding\PKCS7;
+use Zend\Crypt\Symmetric\Padding\Pkcs7;
 
 /**
  * @category   Zend
@@ -32,7 +32,7 @@ use Zend\Crypt\Symmetric\Padding\PKCS7;
  */
 class PKCS7Test extends \PHPUnit_Framework_TestCase
 {
-    /** @var PKCS7 */
+    /** @var Pkcs7 */
     public $padding;
     /** @var integer */
     public $start;
@@ -41,7 +41,7 @@ class PKCS7Test extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->padding = new PKCS7();
+        $this->padding = new Pkcs7();
         $this->start   = 1;
         $this->end     = 32;
     }

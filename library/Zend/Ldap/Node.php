@@ -21,6 +21,8 @@
 
 namespace Zend\Ldap;
 
+use Zend\EventManager\EventManager;
+
 /**
  * Zend\Ldap\Node provides an object oriented view into a LDAP node.
  *
@@ -58,8 +60,8 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
      *
      * @var boolean
      */
-
     protected $delete;
+
     /**
      * Holds the connection to the LDAP server if in connected mode.
      *
@@ -70,7 +72,7 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
     /**
      * Holds an array of the current node's children.
      *
-     * @var array
+     * @var Node[]
      */
     protected $children;
 
@@ -80,6 +82,9 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
      * @var boolean
      */
     private $iteratorRewind = false;
+
+    /** @var EventManager */
+    protected $events;
 
     /**
      * Constructor.
@@ -198,6 +203,24 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
     public function isAttached()
     {
         return ($this->ldap !== null);
+    }
+
+    /**
+     * Trigger an event
+     *
+     * @param  string             $event Event name
+     * @param  array|\ArrayAccess $argv  Array of arguments; typically, should be associative
+     */
+    protected function triggerEvent($event, $argv = array())
+    {
+        if (null === $this->events) {
+            if (class_exists('\Zend\EventManager\EventManager')) {
+                $this->events = new EventManager(__CLASS__);
+            } else {
+                return;
+            }
+        }
+        $this->events->trigger($event, $this, $argv);
     }
 
     /**
@@ -396,6 +419,14 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
      * @param  Ldap $ldap
      * @return Node Provides a fluid interface
      * @throws Exception\LdapException
+     * @trigger pre-delete
+     * @trigger post-delete
+     * @trigger pre-add
+     * @trigger post-add
+     * @trigger pre-rename
+     * @trigger post-rename
+     * @trigger pre-update
+     * @trigger post-update
      */
     public function update(Ldap $ldap = null)
     {
@@ -409,26 +440,26 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
 
         if ($this->willBeDeleted()) {
             if ($ldap->exists($this->dn)) {
-                $this->preDelete();
+                $this->triggerEvent('pre-delete');
                 $ldap->delete($this->dn);
-                $this->postDelete();
+                $this->triggerEvent('post-delete');
             }
             return $this;
         }
 
         if ($this->isNew()) {
-            $this->preAdd();
+            $this->triggerEvent('pre-add');
             $data = $this->getData();
             $ldap->add($this->_getDn(), $data);
             $this->loadData($data, true);
-            $this->postAdd();
+            $this->triggerEvent('post-add');
 
             return $this;
         }
 
         $changedData = $this->getChangedData();
         if ($this->willBeMoved()) {
-            $this->preRename();
+            $this->triggerEvent('pre-rename');
             $recursive = $this->hasChildren();
             $ldap->rename($this->dn, $this->newDn, $recursive, false);
             foreach ($this->newDn->getRdn() as $key => $value) {
@@ -438,12 +469,12 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
             }
             $this->dn    = $this->newDn;
             $this->newDn = null;
-            $this->postRename();
+            $this->triggerEvent('post-rename');
         }
         if (count($changedData) > 0) {
-            $this->preUpdate();
+            $this->triggerEvent('pre-update');
             $ldap->update($this->_getDn(), $changedData);
-            $this->postUpdate();
+            $this->triggerEvent('post-update');
         }
         $this->originalData = $this->currentData;
 
@@ -1078,73 +1109,4 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
     {
         return $this->iteratorRewind;
     }
-
-
-    ####################################################
-    # Empty method bodies for overriding in subclasses #
-    ####################################################
-
-    /**
-     * Allows pre-delete logic to be applied to node.
-     * Subclasses may override this method.
-     *
-     * @return void
-     */
-    protected function preDelete() { }
-
-    /**
-     * Allows post-delete logic to be applied to node.
-     * Subclasses may override this method.
-     *
-     * @return void
-     */
-    protected function postDelete() { }
-
-    /**
-     * Allows pre-add logic to be applied to node.
-     * Subclasses may override this method.
-     *
-     * @return void
-     */
-    protected function preAdd() { }
-
-    /**
-     * Allows post-add logic to be applied to node.
-     * Subclasses may override this method.
-     *
-     * @return void
-     */
-    protected function postAdd() { }
-
-    /**
-     * Allows pre-rename logic to be applied to node.
-     * Subclasses may override this method.
-     *
-     * @return void
-     */
-    protected function preRename() { }
-
-    /**
-     * Allows post-rename logic to be applied to node.
-     * Subclasses may override this method.
-     *
-     * @return void
-     */
-    protected function postRename() { }
-
-    /**
-     * Allows pre-update logic to be applied to node.
-     * Subclasses may override this method.
-     *
-     * @return void
-     */
-    protected function preUpdate() { }
-
-    /**
-     * Allows post-update logic to be applied to node.
-     * Subclasses may override this method.
-     *
-     * @return void
-     */
-    protected function postUpdate() { }
 }

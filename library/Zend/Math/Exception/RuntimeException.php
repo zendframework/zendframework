@@ -32,6 +32,6 @@ namespace Zend\Math\Exception;
  */
 class RuntimeException
     extends \RuntimeException
-    implements \Zend\Math\Exception\ExceptionInterface
+    implements ExceptionInterface
 {
 }

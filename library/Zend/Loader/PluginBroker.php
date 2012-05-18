@@ -194,33 +194,50 @@ class PluginBroker implements Broker, ServiceLocatorAwareInterface
         if ($locator) {
             try {
                 $instance = $locator->get($pluginName);
+            } catch (ServiceManagerException $e) {
+                // not returning an instance is okay; there are other ways to 
+                // retrieve the plugin later
+                $instance = false;
+            }
+
+            if ($instance) {
                 if ($this->getRegisterPluginsOnLoad()) {
                     $this->register($pluginName, $instance);
                 }
                 return $instance;
-            } catch (ServiceManagerException $e) {
-                // do nothing; this is an expected condition
-                $instance = false;
             }
         }
 
-        $class = $this->getClassLoader()->load($plugin);
-        if (empty($class)) {
+        $class = $this->getClassLoader()->load($pluginName);
+        if (empty($class) && !class_exists($pluginName)) {
             throw new Exception\RuntimeException('Unable to locate class associated with "' . $pluginName . '"');
+        }
+
+        if (empty($class) && class_exists($pluginName)) {
+            $class = $pluginName;
         }
 
         // Pulling by resolved class name
         if ($locator) {
             try {
                 $instance = $locator->get($class);
+            } catch (ServiceManagerException $e) {
+                // not returning an instance is okay; there are other ways to 
+                // retrieve the plugin later
+                $instance = false;
+            }
+
+            if ($instance) {
                 if ($this->getRegisterPluginsOnLoad()) {
                     $this->register($pluginName, $instance);
                 }
                 return $instance;
-            } catch (ServiceManagerException $e) {
-                $instance = false;
             }
         } 
+
+        if (!class_exists($class)) {
+            throw new Exception\RuntimeException('Unable to locate class associated with "' . $pluginName . '"');
+        }
 
         // Did not find in the locator, so instantiate directly
         if (empty($options)) {

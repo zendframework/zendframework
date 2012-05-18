@@ -21,6 +21,10 @@
 namespace Zend\Config\Processor;
 
 use Zend\Config\Config,
+<<<<<<< Updated upstream
+=======
+    Zend\Config\Processor\Token,
+>>>>>>> Stashed changes
     Zend\Config\Exception\InvalidArgumentException,
     \Traversable,
     \ArrayObject;

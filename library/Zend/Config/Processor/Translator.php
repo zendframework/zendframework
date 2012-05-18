@@ -24,8 +24,8 @@ use Zend\Config\Config,
     Zend\Config\Exception\InvalidArgumentException,
     Zend\Translator\Translator as ZendTranslator,
     Zend\Locale\Locale,
-    \Traversable,
-    \ArrayObject;
+    Traversable,
+    ArrayObject;
 
 /**
  * @category   Zend
@@ -36,12 +36,12 @@ use Zend\Config\Config,
 class Translator implements ProcessorInterface
 {
     /**
-     * @var \Zend\Translator\Translator
+     * @var ZendTranslator
      */
     protected $translator;
 
     /**
-     * @var \Zend\Locale\Locale|string|null
+     * @var Locale|string|null
      */
     protected $locale = null;
 
@@ -60,7 +60,7 @@ class Translator implements ProcessorInterface
     }
 
     /**
-     * @return \Zend\Translator\Translator
+     * @return ZendTranslator
      */
     public function getTranslator()
     {
@@ -68,7 +68,7 @@ class Translator implements ProcessorInterface
     }
 
     /**
-     * @param \Zend\Translator\Translator $translator
+     * @param ZendTranslator $translator
      */
     public function setTranslator(ZendTranslator $translator)
     {
@@ -76,7 +76,7 @@ class Translator implements ProcessorInterface
     }
 
     /**
-     * @return \Zend\Locale\Locale|string|null
+     * @return Locale|string|null
      */
     public function getLocale()
     {
@@ -84,13 +84,20 @@ class Translator implements ProcessorInterface
     }
 
     /**
-     * @param \Zend\Locale\Locale|string|null $locale
+     * @param Locale|string|null $locale
      */
     public function setLocale($locale)
     {
         $this->locale = $locale;
     }
 
+    /**
+     * Process
+     *
+     * @param Config $config
+     * @return Config
+     * @throws InvalidArgumentException
+     */
     public function process(Config $config)
     {
         if ($config->isReadOnly()) {

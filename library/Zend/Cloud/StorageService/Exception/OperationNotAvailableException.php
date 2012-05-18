@@ -21,6 +21,8 @@
 
 namespace Zend\Cloud\StorageService\Exception;
 
+use Zend\Cloud\Exception;
+
 /**
  * @category   Zend
  * @package    Zend_Cloud_StorageService
@@ -29,7 +31,6 @@ namespace Zend\Cloud\StorageService\Exception;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class OperationNotAvailableException
-    extends \Exception
+    extends Exception\OperationNotAvailableException
     implements ExceptionInterface
 {}
-

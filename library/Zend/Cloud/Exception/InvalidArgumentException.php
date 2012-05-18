@@ -29,6 +29,4 @@ namespace Zend\Cloud\Exception;
 class InvalidArgumentException
     extends \InvalidArgumentException
     implements ExceptionInterface
-{
-    
-}
+{}

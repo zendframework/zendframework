@@ -30,4 +30,3 @@ class OperationNotAvailableException
     extends \Exception
     implements ExceptionInterface
 {}
-

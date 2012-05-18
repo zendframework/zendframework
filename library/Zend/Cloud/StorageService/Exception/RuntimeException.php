@@ -21,6 +21,8 @@
 
 namespace Zend\Cloud\StorageService\Exception;
 
+use Zend\Cloud\Exception;
+
 /**
  * @package    Zend_Cloud_StorageService
  * @subpackage Exception
@@ -28,7 +30,6 @@ namespace Zend\Cloud\StorageService\Exception;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class RuntimeException 
-    extends \RuntimeException 
+    extends Exception\RuntimeException
     implements ExceptionInterface
-{
-}
+{}

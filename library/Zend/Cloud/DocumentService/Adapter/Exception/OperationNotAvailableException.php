@@ -20,6 +20,8 @@
 
 namespace Zend\Cloud\DocumentService\Adapter\Exception;
 
+use Zend\Cloud\DocumentService\Exception;
+
 /**
  * @category   Zend
  * @package    Zend_Cloud_DocumentService_Adapter
@@ -28,7 +30,6 @@ namespace Zend\Cloud\DocumentService\Adapter\Exception;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class OperationNotAvailableException
-    extends \Exception
+    extends Exception\OperationNotAvailableException
     implements ExceptionInterface
 {}
-

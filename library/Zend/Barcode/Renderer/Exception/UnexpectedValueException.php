@@ -21,6 +21,8 @@
 
 namespace Zend\Barcode\Renderer\Exception;
 
+use Zend\Barcode\Exception;
+
 /**
  * Exception for Zend_Barcode component.
  *
@@ -30,7 +32,7 @@ namespace Zend\Barcode\Renderer\Exception;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class UnexpectedValueException
-    extends \UnexpectedValueException
+    extends Exception\UnexpectedValueException
     implements ExceptionInterface
 {
 }

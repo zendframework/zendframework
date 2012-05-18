@@ -30,7 +30,6 @@ namespace Zend\Barcode\Object\Exception;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class BarcodeValidationException
-    extends \Exception
-    implements ExceptionInterface
+    extends InvalidArgumentException
 {
 }

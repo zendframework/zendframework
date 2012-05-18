@@ -32,6 +32,6 @@ namespace Zend\Math\Exception;
  */
 class InvalidArgumentException
     extends \InvalidArgumentException
-    implements \Zend\Math\Exception\ExceptionInterface
+    implements ExceptionInterface
 {
 }

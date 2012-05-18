@@ -232,7 +232,7 @@ class BlockCipher
         }
         try {
             $this->cipher->setAlgorithm($algo);
-        } catch (\Zend\Crypt\Symmetric\Exception\InvalidArgumentException $e) {
+        } catch (Symmetric\Exception\InvalidArgumentException $e) {
             throw new Exception\InvalidArgumentException($e->getMessage());
         }
         return $this;

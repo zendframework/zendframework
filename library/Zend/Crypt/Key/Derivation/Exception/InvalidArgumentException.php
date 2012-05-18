@@ -20,6 +20,6 @@ namespace Zend\Crypt\Key\Derivation\Exception;
  */
 class InvalidArgumentException
     extends \InvalidArgumentException
-    implements \Zend\Crypt\Password\Exception\ExceptionInterface
+    implements ExceptionInterface
 {
 }

@@ -163,6 +163,11 @@ class CallbackHandler
     {
         $callback = $this->getCallback();
 
+        // WeakRef object will return null if the real object was disposed
+        if (null === $callback) {
+            return null;
+        }
+
         $isPhp54 = version_compare(PHP_VERSION, '5.4.0rc1', '>=');
 
         if ($isPhp54 && is_string($callback)) {

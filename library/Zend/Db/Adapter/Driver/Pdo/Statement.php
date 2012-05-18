@@ -185,19 +185,35 @@ class Statement implements StatementInterface
      * @param mixed $parameters
      * @return Result
      */
-    public function execute()
+    public function execute($parameters = null)
     {
         if (!$this->isPrepared) {
             $this->prepare();
         }
 
-        if ($this->parameterContainer) {
-            $this->bindParametersFromContainer($this->parameterContainer);
+        /** START Standard ParameterContainer Merging Block */
+        if (!$this->parameterContainer instanceof ParameterContainer) {
+            if ($parameters instanceof ParameterContainer) {
+                $this->parameterContainer = $parameters;
+                $parameters = null;
+            } else {
+                $this->parameterContainer = new ParameterContainer();
+            }
         }
 
-        if ($this->resource->execute() === false) {
-            $error = $this->resource->errorInfo();
-            throw new Exception\InvalidQueryException($error[2]);
+        if (is_array($parameters)) {
+            $this->parameterContainer->setFromArray($parameters);
+        }
+
+        if ($this->parameterContainer->count() > 0) {
+            $this->bindParametersFromContainer();
+        }
+        /** END Standard ParameterContainer Merging Block */
+
+        try {
+            $this->resource->execute();
+        } catch (\PDOException $e) {
+            throw new Exception\InvalidQueryException('Statement could not be executed', null, $e);
         }
 
         $result = $this->driver->createResult($this->resource, $this);
@@ -209,17 +225,17 @@ class Statement implements StatementInterface
      * 
      * @param ParameterContainer $container
      */
-    protected function bindParametersFromContainer(ParameterContainer $container)
+    protected function bindParametersFromContainer()
     {
         if ($this->parametersBound) {
             return;
         }
 
-        $parameters = $container->getNamedArray();
+        $parameters = $this->parameterContainer->getNamedArray();
         foreach ($parameters as $name => &$value) {
             $type = \PDO::PARAM_STR;
-            if ($container->offsetHasErrata($name)) {
-                switch ($container->offsetGetErrata($name)) {
+            if ($this->parameterContainer->offsetHasErrata($name)) {
+                switch ($this->parameterContainer->offsetGetErrata($name)) {
                     case ParameterContainer::TYPE_INTEGER:
                         $type = \PDO::PARAM_INT;
                         break;

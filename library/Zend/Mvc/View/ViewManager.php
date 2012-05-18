@@ -149,7 +149,7 @@ class ViewManager implements ListenerAggregateInterface
      * 
      * @return ViewHelperLoader
      */
-    protected function getHelperLoader()
+    public function getHelperLoader()
     {
         if ($this->helperLoader) {
             return $this->helperLoader;
@@ -168,7 +168,7 @@ class ViewManager implements ListenerAggregateInterface
      * 
      * @return ViewHelperBroker
      */
-    protected function getHelperBroker()
+    public function getHelperBroker()
     {
         if ($this->helperBroker) {
             return $this->helperBroker;
@@ -207,7 +207,7 @@ class ViewManager implements ListenerAggregateInterface
      * 
      * @return ViewAggregateResolver
      */
-    protected function getResolver()
+    public function getResolver()
     {
         if ($this->resolver) {
             return $this->resolver;
@@ -245,7 +245,7 @@ class ViewManager implements ListenerAggregateInterface
      * 
      * @return ViewPhpRenderer
      */
-    protected function getRenderer()
+    public function getRenderer()
     {
         if ($this->renderer) {
             return $this->renderer;
@@ -269,7 +269,7 @@ class ViewManager implements ListenerAggregateInterface
      * 
      * @return PhpRendererStrategy
      */
-    protected function getRendererStrategy()
+    public function getRendererStrategy()
     {
         if ($this->rendererStrategy) {
             return $this->rendererStrategy;
@@ -286,7 +286,7 @@ class ViewManager implements ListenerAggregateInterface
      * 
      * @return View
      */
-    protected function getView()
+    public function getView()
     {
         if ($this->view) {
             return $this->view;
@@ -305,7 +305,7 @@ class ViewManager implements ListenerAggregateInterface
      * 
      * @return string
      */
-    protected function getLayoutTemplate()
+    public function getLayoutTemplate()
     {
         $layout = 'layout/layout';
         if (isset($this->config['view_manager']) && isset($this->config['view_manager']['layout'])) {
@@ -319,7 +319,7 @@ class ViewManager implements ListenerAggregateInterface
      * 
      * @return DefaultRenderingStrategy
      */
-    protected function getMvcRenderingStrategy()
+    public function getMvcRenderingStrategy()
     {
         if ($this->mvcRenderingStrategy) {
             return $this->mvcRenderingStrategy;
@@ -335,7 +335,7 @@ class ViewManager implements ListenerAggregateInterface
      * 
      * @return ExceptionStrategy
      */
-    protected function getExceptionStrategy()
+    public function getExceptionStrategy()
     {
         if ($this->exceptionStrategy) {
             return $this->exceptionStrategy;
@@ -363,7 +363,7 @@ class ViewManager implements ListenerAggregateInterface
      * 
      * @return RouteNotFoundStrategy
      */
-    protected function getRouteNotFoundStrategy()
+    public function getRouteNotFoundStrategy()
     {
         if ($this->routeNotFoundStrategy) {
             return $this->routeNotFoundStrategy;
@@ -391,7 +391,7 @@ class ViewManager implements ListenerAggregateInterface
      * 
      * @return \Zend\Mvc\View\Model\ModelInterface
      */
-    protected function getViewModel()
+    public function getViewModel()
     {
         if ($this->viewModel) {
             return $this->viewModel;

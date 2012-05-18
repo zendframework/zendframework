@@ -21,9 +21,9 @@
 
 namespace Zend\Form\Element;
 
-use Zend\Form\Element,
-    Zend\InputFilter\InputProviderInterface,
-    Zend\Validator\Csrf as CsrfValidator;
+use Zend\Form\Element;
+use Zend\InputFilter\InputProviderInterface;
+use Zend\Validator\Csrf as CsrfValidator;
 
 /**
  * @category   Zend

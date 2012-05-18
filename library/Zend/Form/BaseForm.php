@@ -20,12 +20,12 @@
 
 namespace Zend\Form;
 
-use IteratorAggregate,
-    Traversable,
-    Zend\InputFilter\InputFilterAwareInterface,
-    Zend\InputFilter\InputFilterInterface,
-    Zend\Stdlib\ArrayUtils,
-    Zend\Stdlib\Hydrator;
+use IteratorAggregate;
+use Traversable;
+use Zend\InputFilter\InputFilterAwareInterface;
+use Zend\InputFilter\InputFilterInterface;
+use Zend\Stdlib\ArrayUtils;
+use Zend\Stdlib\Hydrator;
 
 /**
  * @category   Zend

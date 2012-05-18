@@ -21,11 +21,11 @@
 
 namespace Zend\Form\View\Helper;
 
-use Zend\Form\ElementInterface,
-    Zend\Loader\Pluggable,
-    Zend\View\Helper\AbstractHelper as BaseAbstractHelper,
-    Zend\View\Helper\Doctype,
-    Zend\View\Helper\Escape;
+use Zend\Form\ElementInterface;
+use Zend\Loader\Pluggable;
+use Zend\View\Helper\AbstractHelper as BaseAbstractHelper;
+use Zend\View\Helper\Doctype;
+use Zend\View\Helper\Escape;
 
 /**
  * Base functionality for all form view helpers

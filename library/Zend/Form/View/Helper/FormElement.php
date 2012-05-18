@@ -21,10 +21,10 @@
 
 namespace Zend\Form\View\Helper;
 
-use Zend\Form\Element,
-    Zend\Form\ElementInterface,
-    Zend\Loader\Pluggable,
-    Zend\View\Helper\AbstractHelper as BaseAbstractHelper;
+use Zend\Form\Element;
+use Zend\Form\ElementInterface;
+use Zend\Loader\Pluggable;
+use Zend\View\Helper\AbstractHelper as BaseAbstractHelper;
 
 /**
  * @category   Zend

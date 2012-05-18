@@ -20,9 +20,9 @@
 
 namespace Zend\Form;
 
-use IteratorAggregate,
-    Zend\InputFilter\InputFilterInterface,
-    Zend\Stdlib\Hydrator;
+use IteratorAggregate;
+use Zend\InputFilter\InputFilterInterface;
+use Zend\Stdlib\Hydrator;
 
 /**
  * @category   Zend

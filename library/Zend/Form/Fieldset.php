@@ -20,8 +20,8 @@
 
 namespace Zend\Form;
 
-use Traversable,
-    Zend\Stdlib\PriorityQueue;
+use Traversable;
+use Zend\Stdlib\PriorityQueue;
 
 /**
  * @category   Zend

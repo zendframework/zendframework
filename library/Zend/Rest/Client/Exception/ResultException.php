@@ -31,5 +31,5 @@ namespace Zend\Rest\Client\Exception;
  */
 class ResultException 
     extends \Exception
-    implements \Zend\Rest\Client\Exception
+    implements ExceptionInterface
 {}

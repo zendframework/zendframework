@@ -2102,6 +2102,14 @@
                         parse="xml"/>
                 </xi:fallback>
             </xi:include>
+
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+                href="module_specs/zend.service-manager.quick-start.xml" parse="xml">
+                <xi:fallback>
+                    <xi:include href="../en/module_specs/zend.service-manager.quick-start.xml"
+                        parse="xml"/>
+                </xi:fallback>
+            </xi:include>
         </chapter>
 
         <!--<chapter xml:id="zend.session"><title>Zend_Session</title>-->

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<section 
+    xmlns="http://docbook.org/ns/docbook" version="5.0" 
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    xml:id="zend.service-manager.quick-start">
+    <info><title>Zend\ServiceManager Quick Start</title></info>
+
+    <para>
+        By default, Zend Framework utilizes <classname>Zend\ServiceManager</classname> within the
+        MVC layer. As such, in most cases you'll be providing services, invokable classes, aliases,
+        and factories via your module classes.
+    </para>
+
+    <para>
+        In order to do this, your module class must either implement
+        <classname>Zend\ModuleManager\Feature\ServiceProviderInterface</classname> or simply the
+        method <methodname>getServiceConfiguration()</methodname> (which is also defined in the
+        interface).  This method must return one of the following:
+    </para>
+
+    <itemizedlist>
+        <listitem>
+            <para>
+                An array of configuration compatible with
+                <classname>Zend\ServiceManager\Configuration</classname>.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                A string providing the name of a class implementing
+                <classname>Zend\ServiceManager\ConfigurationInterface</classname>.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                An instance of either <classname>Zend\ServiceManager\Configuration</classname>, or
+                an object implementing
+                <classname>Zend\ServiceManager\ConfigurationInterface</classname>.
+            </para>
+        </listitem>
+    </itemizedlist>
+
+    <para>
+        A module listener will see one of those, and use it to configure the
+        <classname>ServiceManager</classname> instance.
+    </para>
+
+    <example id="zend.service-manager.quick-start.return-array">
+        <info><title>Returning an array</title></info>
+
+        <para>
+            The following demonstrates returning an array of configuration from a module class.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+namespace MyCoolFunctionality;
+
+class Module
+{
+    public function getServiceConfiguration()
+    {
+        return array(
+        );
+    }
+}
+]]></programlisting>
+    </example>
+
+    <example id="zend.service-manager.quick-start.return-config-instance">
+        <info><title>Returning a Configuration instance</title></info>
+
+        <para>
+            First, let's create a class that holds configuration.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+namespace MyCoolFunctionality\Service;
+
+use Zend\ServiceManager\ConfigurationInterface;
+use Zend\ServiceManager\ServiceManager;
+
+class ServiceConfiguration
+{
+    public function configureServiceManager(ServiceManager $serviceManager)
+    {
+        $serviceManager->setInvokableClass('foo', 'MyCoolFunctionality\Foo');
+        $serviceManager->setAlias('cool-foo', 'foo');
+        $serviceManager->setFactory('db', function ($sm) {
+        });
+    }
+}
+]]></programlisting>
+
+        <programlisting language="php"><![CDATA[
+namespace MyCoolFunctionality;
+
+class Module
+{
+    public function getServiceConfiguration()
+    {
+        return array(
+        );
+    }
+}
+]]></programlisting>
+    </example>
+
+</section>

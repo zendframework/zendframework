@@ -21,8 +21,8 @@
 
 namespace ZendTest\Ldap;
 
-use Zend\Ldap,
-    Zend\Ldap\Exception;
+use Zend\Ldap;
+use Zend\Ldap\Exception;
 
 /* Note: The ldap_connect function does not actually try to connect. This
  * is why many tests attempt to bind with invalid credentials. If the

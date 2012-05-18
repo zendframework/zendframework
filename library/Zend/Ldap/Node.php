@@ -21,6 +21,8 @@
 
 namespace Zend\Ldap;
 
+use Zend\EventManager\EventManager;
+
 /**
  * Zend\Ldap\Node provides an object oriented view into a LDAP node.
  *
@@ -58,8 +60,8 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
      *
      * @var boolean
      */
-
     protected $delete;
+
     /**
      * Holds the connection to the LDAP server if in connected mode.
      *
@@ -70,7 +72,7 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
     /**
      * Holds an array of the current node's children.
      *
-     * @var array
+     * @var Node[]
      */
     protected $children;
 
@@ -80,6 +82,9 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
      * @var boolean
      */
     private $iteratorRewind = false;
+
+    /** @var EventManager */
+    protected $events;
 
     /**
      * Constructor.
@@ -201,6 +206,24 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
     }
 
     /**
+     * Trigger an event
+     *
+     * @param  string             $event Event name
+     * @param  array|\ArrayAccess $argv  Array of arguments; typically, should be associative
+     */
+    protected function triggerEvent($event, $argv = array())
+    {
+        if (null === $this->events) {
+            if (class_exists('\Zend\EventManager\EventManager')) {
+                $this->events = new EventManager(__CLASS__);
+            } else {
+                return;
+            }
+        }
+        $this->events->trigger($event, $this, $argv);
+    }
+
+    /**
      * @param  array   $data
      * @param  boolean $fromDataSource
      * @throws Exception\LdapException
@@ -298,12 +321,17 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
     /**
      * Ensures that teh RDN attributes are correctly set.
      *
+     * @param  boolean $overwrite True to overwrite the RDN attributes
      * @return void
      */
-    protected function ensureRdnAttributeValues()
+    protected function ensureRdnAttributeValues($overwrite = false)
     {
         foreach ($this->getRdnArray() as $key => $value) {
-            Attribute::setAttribute($this->currentData, $key, $value, false);
+            if (!array_key_exists($key, $this->currentData) || $overwrite) {
+                Attribute::setAttribute($this->currentData, $key, $value, false);
+            } else if (!in_array($value, $this->currentData[$key])) {
+                Attribute::setAttribute($this->currentData, $key, $value, true);
+            }
         }
     }
 
@@ -391,6 +419,14 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
      * @param  Ldap $ldap
      * @return Node Provides a fluid interface
      * @throws Exception\LdapException
+     * @trigger pre-delete
+     * @trigger post-delete
+     * @trigger pre-add
+     * @trigger post-add
+     * @trigger pre-rename
+     * @trigger post-rename
+     * @trigger pre-update
+     * @trigger post-update
      */
     public function update(Ldap $ldap = null)
     {
@@ -404,20 +440,26 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
 
         if ($this->willBeDeleted()) {
             if ($ldap->exists($this->dn)) {
+                $this->triggerEvent('pre-delete');
                 $ldap->delete($this->dn);
+                $this->triggerEvent('post-delete');
             }
             return $this;
         }
 
         if ($this->isNew()) {
+            $this->triggerEvent('pre-add');
             $data = $this->getData();
             $ldap->add($this->_getDn(), $data);
             $this->loadData($data, true);
+            $this->triggerEvent('post-add');
+
             return $this;
         }
 
         $changedData = $this->getChangedData();
         if ($this->willBeMoved()) {
+            $this->triggerEvent('pre-rename');
             $recursive = $this->hasChildren();
             $ldap->rename($this->dn, $this->newDn, $recursive, false);
             foreach ($this->newDn->getRdn() as $key => $value) {
@@ -427,9 +469,12 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
             }
             $this->dn    = $this->newDn;
             $this->newDn = null;
+            $this->triggerEvent('post-rename');
         }
         if (count($changedData) > 0) {
+            $this->triggerEvent('pre-update');
             $ldap->update($this->_getDn(), $changedData);
+            $this->triggerEvent('post-update');
         }
         $this->originalData = $this->currentData;
 
@@ -479,7 +524,7 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
         } else {
             $this->newDn = Dn::factory($newDn);
         }
-        $this->ensureRdnAttributeValues();
+        $this->ensureRdnAttributeValues(true);
 
         return $this;
     }

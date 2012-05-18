@@ -6,7 +6,7 @@
         <classname>Zend\Ldap\Dn</classname> provides an object-oriented interface to
         manipulating <acronym>LDAP</acronym> distinguished names (DN). The parameter
         <varname>$caseFold</varname> that is used in several methods determines the way DN
-        attributes are handled regarding their case. Allowed values for this paraneter are:
+        attributes are handled regarding their case. Allowed values for this parameter are:
     </para>
 
     <variablelist>
@@ -30,7 +30,7 @@
         The default case-folding is <constant>Zend\Ldap\Dn::ATTR_CASEFOLD_NONE</constant> and
         can be set with <methodname>Zend\Ldap\Dn::setDefaultCaseFold()</methodname>. Each instance
         of <classname>Zend\Ldap\Dn</classname> can have its own case-folding-setting. If the
-        <varname>$caseFold</varname> parameter is ommitted in method-calls it defaults to the
+        <varname>$caseFold</varname> parameter is omitted in method-calls it defaults to the
         instance's case-folding setting.
     </para>
 
@@ -261,7 +261,7 @@
                     <entry>
                         <para>
                             Explodes the DN <varname>$dn</varname> into an array containing
-                            all parts of the given DN. <varname>$keys</varname> optinally receive DN
+                            all parts of the given DN. <varname>$keys</varname> optionally receive DN
                             keys (e.g. CN, OU, DC, ...). <varname>$vals</varname> optionally receive
                             DN values. The resulting array will be of type
                         </para>

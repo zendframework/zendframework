@@ -21,8 +21,8 @@
 
 namespace ZendTest\Ldap\Ldif;
 
-use Zend\Ldap\Ldif,
-    ZendTest\Ldap as TestLdap;
+use Zend\Ldap\Ldif;
+use ZendTest\Ldap as TestLdap;
 
 /**
  * @category   Zend

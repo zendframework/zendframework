@@ -35,7 +35,16 @@ class AttributeTest extends \PHPUnit_Framework_TestCase
 {
     protected function assertLocalDateTimeString($timestamp, $value)
     {
-        $this->assertEquals(date('YmdHisO', $timestamp), $value);
+        $tsValue = date('YmdHisO', $timestamp);
+
+        if(date('O', strtotime('20120101'))) {
+            // Local timezone is +0000 when DST is off. Zend_Ldap converts
+            // +0000 to "Z" (see Zend\Ldap\Converter\Converter:toLdapDateTime()), so
+            // take account of that here
+            $tsValue = str_replace('+0000', 'Z', $tsValue);
+        }
+
+        $this->assertEquals($tsValue, $value);
     }
 
     protected function assertUtcDateTimeString($localTimestamp, $value)
@@ -391,33 +400,6 @@ class AttributeTest extends \PHPUnit_Framework_TestCase
         $this->assertContains('3', $data['test']);
         $this->assertNotContains('2', $data['test']);
         $this->assertNotContains('4', $data['test']);
-    }
-
-    public function testConvertFromLDAPValue()
-    {
-        $this->assertEquals(true, Attribute::convertFromLDAPValue('TRUE'));
-        $this->assertEquals(false, Attribute::convertFromLDAPValue('FALSE'));
-    }
-
-    public function testConvertToLDAPValue()
-    {
-        $this->assertEquals('string', Attribute::convertToLDAPValue('string'));
-        $this->assertEquals('1', Attribute::convertToLDAPValue(1));
-        $this->assertEquals('TRUE', Attribute::convertToLDAPValue(true));
-    }
-
-    public function testConvertFromLDAPDateTimeValue()
-    {
-        $ldap = '20080625123030+0200';
-        $this->assertEquals(gmmktime(10, 30, 30, 6, 25, 2008),
-            Attribute::convertFromLDAPDateTimeValue($ldap)
-        );
-    }
-
-    public function testConvertToLDAPDateTimeValue()
-    {
-        $ts = mktime(12, 30, 30, 6, 25, 2008);
-        $this->assertLocalDateTimeString($ts, Attribute::convertToLDAPDateTimeValue($ts));
     }
 
     public function testRemoveDuplicates()

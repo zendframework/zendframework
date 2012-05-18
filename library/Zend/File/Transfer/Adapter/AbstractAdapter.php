@@ -23,8 +23,10 @@ namespace Zend\File\Transfer\Adapter;
 use Zend\File\Transfer,
     Zend\File\Transfer\Exception,
     Zend\Filter,
+    Zend\Filter\Exception as FilterException,
     Zend\Loader,
     Zend\Translator,
+    Zend\Translator\Adapter as AdapterTranslator,
     Zend\Validator;
 
 /**
@@ -80,7 +82,7 @@ abstract class AbstractAdapter
     protected $messages = array();
 
     /**
-     * @var Translator\Translator
+     * @var AdapterTranslator\AbstractAdapter
      */
     protected $translator;
 
@@ -1091,14 +1093,14 @@ abstract class AbstractAdapter
     /**
      * Set translator object for localization
      *
-     * @param  Translator\Translator|AbstractAdapter|null $translator
+     * @param  Translator\Translator|AdapterTranslator\AbstractAdapter|null $translator
      * @return AbstractAdapter
      */
     public function setTranslator($translator = null)
     {
         if (null === $translator) {
             $this->translator = null;
-        } elseif ($translator instanceof AbstractAdapter) {
+        } elseif ($translator instanceof AdapterTranslator\AbstractAdapter) {
             $this->translator = $translator;
         } elseif ($translator instanceof Translator\Translator) {
             $this->translator = $translator->getAdapter();
@@ -1112,7 +1114,7 @@ abstract class AbstractAdapter
     /**
      * Retrieve localization translator object
      *
-     * @return Translator\Adapter\Adapter|null
+     * @return AdapterTranslator\AbstractAdapter|null
      */
     public function getTranslator()
     {
@@ -1337,7 +1339,7 @@ abstract class AbstractAdapter
 
                         $this->files[$name]['destination'] = dirname($result);
                         $this->files[$name]['name']        = basename($result);
-                    } catch (Filter\Exception $e) {
+                    } catch (FilterException\ExceptionInterface $e) {
                         $this->messages += array($e->getMessage());
                     }
                 }

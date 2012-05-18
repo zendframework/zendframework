@@ -113,7 +113,7 @@ class TreeRouteStackTest extends TestCase
         $stack = new TreeRouteStack();
 
         $stack->addRoute('foo', new TestAsset\DummyRoute());
-        $this->assertEquals('http://example.com:8080', $stack->assemble(array(), array('name' => 'foo', 'uri' => $uri, 'force_canonical' => true)));
+        $this->assertEquals('http://example.com:8080/', $stack->assemble(array(), array('name' => 'foo', 'uri' => $uri, 'force_canonical' => true)));
     }
 
     public function testAssembleCanonicalUriWithHostnameRoute()
@@ -145,6 +145,38 @@ class TreeRouteStackTest extends TestCase
         $stack->addRoute('foo', new Hostname('example.com'));
 
         $this->assertEquals('http://example.com', $stack->assemble(array(), array('name' => 'foo')));
+    }
+
+    public function testAssembleCanonicalUriWithHostnameRouteAndQueryRoute()
+    {
+        $uri   = new HttpUri();
+        $uri->setScheme('http');
+        $stack = new TreeRouteStack();
+        $stack->setRequestUri($uri);
+        $stack->addRoute(
+        	'foo',
+            array(
+                'type' => 'Hostname',
+                'options' => array(
+                    'route' => 'example.com',
+                ),
+                'child_routes' => array(
+                    'index' => array(
+                        'type' => 'Literal',
+                        'options' => array(
+                            'route' => '/',
+                        ),
+                        'child_routes' => array(
+                            'query' => array(
+                                'type' => 'Query',
+                            ),
+                        ),
+                    ),
+                ),
+            )
+        );
+
+        $this->assertEquals('http://example.com/?bar=baz', $stack->assemble(array('bar' => 'baz'), array('name' => 'foo/index/query')));
     }
 
     public function testAssembleWithoutNameOption()

@@ -2,7 +2,7 @@
 
 namespace Zend\ServiceManager\Exception;
 
-class InvalidArgumentException 
-    extends \InvalidArgumentException
+class RuntimeException
+    extends \RuntimeException
     implements ExceptionInterface
 {}

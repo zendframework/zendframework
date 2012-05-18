@@ -21,6 +21,8 @@
 
 namespace Zend\Mail\Transport\Exception;
 
+use Zend\Mail\Exception;
+
 /**
  * Exception for Zend_Mail component.
  *
@@ -30,7 +32,6 @@ namespace Zend\Mail\Transport\Exception;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class InvalidArgumentException
-    extends \InvalidArgumentException
+    extends Exception\InvalidArgumentException
     implements ExceptionInterface
-{
-}
+{}

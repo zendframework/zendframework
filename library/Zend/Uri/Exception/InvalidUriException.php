@@ -19,6 +19,5 @@ namespace Zend\Uri\Exception;
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class InvalidUriException
-    extends \InvalidArgumentException
-    implements ExceptionInterface
+    extends InvalidArgumentException
 {}

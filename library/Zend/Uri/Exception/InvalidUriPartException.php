@@ -11,8 +11,7 @@
 namespace Zend\Uri\Exception;
 
 class InvalidUriPartException 
-    extends \InvalidArgumentException
-    implements ExceptionInterface
+    extends InvalidArgumentException
 {
     /**
      * Part-specific error codes

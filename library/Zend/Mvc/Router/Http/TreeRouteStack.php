@@ -70,6 +70,7 @@ class TreeRouteStack extends SimpleRouteStack
             'segment'  => __NAMESPACE__ . '\Segment',
             'wildcard' => __NAMESPACE__ . '\Wildcard',
             'query'    => __NAMESPACE__ . '\Query',
+            'method'   => __NAMESPACE__ . '\Method',
         ));
     }
 

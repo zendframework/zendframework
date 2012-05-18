@@ -21,6 +21,8 @@
 
 namespace Zend\Loader;
 
+use ReflectionClass;
+use Zend\ServiceManager\Exception\ExceptionInterface as ServiceManagerException;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
@@ -187,34 +189,47 @@ class PluginBroker implements Broker, ServiceLocatorAwareInterface
             return $this->plugins[$pluginName];
         }
 
-        $locator = $this->getServiceLocator();
-        if (class_exists($plugin) || ($locator && $locator->has($plugin))) {
-            // Allow loading fully-qualified class names via the broker
-            $class = $plugin;
-        } else {
-            // Unqualified class names are then passed to the class loader
-            $class = $this->getClassLoader()->load($plugin);
-            if (empty($class)) {
-                throw new Exception\RuntimeException('Unable to locate class associated with "' . $pluginName . '"');
+        $locator  = $this->getServiceLocator();
+        // Pulling by alias
+        if ($locator) {
+            try {
+                $instance = $locator->get($pluginName);
+                if ($this->getRegisterPluginsOnLoad()) {
+                    $this->register($pluginName, $instance);
+                }
+                return $instance;
+            } catch (ServiceManagerException $e) {
+                // do nothing; this is an expected condition
+                $instance = false;
             }
         }
 
-        if ($locator && $locator->has($class)) {
-            if (!empty($options) && $this->isAssocArray($options)) {
-                // This might be inconsistent with what $options should be?
-                $instance = $locator->get($class, $options);
-            } else {
+        $class = $this->getClassLoader()->load($plugin);
+        if (empty($class)) {
+            throw new Exception\RuntimeException('Unable to locate class associated with "' . $pluginName . '"');
+        }
+
+        // Pulling by resolved class name
+        if ($locator) {
+            try {
                 $instance = $locator->get($class);
+                if ($this->getRegisterPluginsOnLoad()) {
+                    $this->register($pluginName, $instance);
+                }
+                return $instance;
+            } catch (ServiceManagerException $e) {
+                $instance = false;
             }
+        } 
+
+        // Did not find in the locator, so instantiate directly
+        if (empty($options)) {
+            $instance = new $class();
+        } elseif ($this->isAssocArray($options)) {
+            $instance = new $class($options);
         } else {
-            if (empty($options)) {
-                $instance = new $class();
-            } elseif ($this->isAssocArray($options)) {
-                $instance = new $class($options);
-            } else {
-                $r = new \ReflectionClass($class);
-                $instance = $r->newInstanceArgs($options);
-            }
+            $r = new ReflectionClass($class);
+            $instance = $r->newInstanceArgs($options);
         }
 
         if ($this->getRegisterPluginsOnLoad()) {

@@ -21,8 +21,6 @@
 
 namespace Zend\Captcha\Exception;
 
-use RuntimeException;
-
 /**
  * Exception for Zend_Form component.
  *
@@ -32,6 +30,7 @@ use RuntimeException;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ExtensionNotLoadedException extends RuntimeException implements ExceptionInterface
+class ExtensionNotLoadedException
+    extends RuntimeException
 {
 }

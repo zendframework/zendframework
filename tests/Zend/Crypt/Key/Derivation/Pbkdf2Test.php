@@ -21,7 +21,7 @@
 
 namespace ZendTest\Crypt\Key\Derivation;
 
-use Zend\Crypt\Key\Derivation\PBKDF2;
+use Zend\Crypt\Key\Derivation\Pbkdf2;
 
 /**
  * @category   Zend
@@ -30,7 +30,7 @@ use Zend\Crypt\Key\Derivation\PBKDF2;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class PBKDF2Test extends \PHPUnit_Framework_TestCase
+class Pbkdf2Test extends \PHPUnit_Framework_TestCase
 {
 
     /** @var string */
@@ -43,7 +43,7 @@ class PBKDF2Test extends \PHPUnit_Framework_TestCase
 
     public function testCalc()
     {
-        $password = PBKDF2::calc('sha256', 'test', $this->salt, 5000, 32);
+        $password = Pbkdf2::calc('sha256', 'test', $this->salt, 5000, 32);
         $this->assertEquals(32, strlen($password));
         $this->assertEquals(base64_encode($password), '323tCTB8Z/KVrJYWPvMoKqbL34gMziymMdvYTfELpKI=');
     }
@@ -51,8 +51,8 @@ class PBKDF2Test extends \PHPUnit_Framework_TestCase
     public function testCalcWithWrongHash()
     {
         $this->setExpectedException('Zend\Crypt\Key\Derivation\Exception\InvalidArgumentException',
-                                    'The hash algorihtm wrong is not supported by Zend\Crypt\Key\Derivation\PBKDF2');
-        $password = PBKDF2::calc('wrong', 'test', $this->salt, 5000, 32);
+                                    'The hash algorihtm wrong is not supported by Zend\Crypt\Key\Derivation\Pbkdf2');
+        $password = Pbkdf2::calc('wrong', 'test', $this->salt, 5000, 32);
     }
 
 }

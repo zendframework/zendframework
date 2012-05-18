@@ -12,7 +12,7 @@ namespace Zend\Crypt;
 use Zend\Crypt\Symmetric\SymmetricInterface;
 use Zend\Crypt\Hmac;
 use Zend\Crypt\Tool;
-use Zend\Crypt\Key\Derivation\PBKDF2;
+use Zend\Crypt\Key\Derivation\Pbkdf2;
 use Zend\Math\Math;
 
 /**
@@ -57,7 +57,7 @@ class BlockCipher
      */
     protected $key;
     /**
-     * Number of iterations for PBKDF2
+     * Number of iterations for Pbkdf2
      *
      * @var string
      */
@@ -151,7 +151,7 @@ class BlockCipher
     }
 
     /**
-     * Set the number of iterations for PBKDF2
+     * Set the number of iterations for Pbkdf2
      *
      * @param  integer $num
      * @return BlockCipher
@@ -163,7 +163,7 @@ class BlockCipher
     }
 
     /**
-     * Get the number of iterations for PBKDF2
+     * Get the number of iterations for Pbkdf2
      *
      * @return integer
      */

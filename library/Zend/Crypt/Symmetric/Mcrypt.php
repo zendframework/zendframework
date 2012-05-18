@@ -178,7 +178,7 @@ class Mcrypt implements SymmetricInterface
     /**
      * Set the symmetric cipher broker
      *
-     * @param  PaddingBroker $broker
+     * @param  string|PaddingBroker $broker
      * @return void
      */
     public static function setPaddingBroker($broker)

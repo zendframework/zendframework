@@ -19,7 +19,7 @@ use Zend\Crypt\Hmac;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class PBKDF2
+class Pbkdf2
 {
     /**
      * Generate the new key

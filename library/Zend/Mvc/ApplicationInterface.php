@@ -1,56 +1,41 @@
 <?php
+/**
+ * Zend Framework
+ *
+ * LICENSE
+ *
+ * This source file is subject to the new BSD license that is bundled
+ * with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://framework.zend.com/license/new-bsd
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@zend.com so we can send you a copy immediately.
+ *
+ * @category   Zend
+ * @package    Zend_Mvc
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
 
 namespace Zend\Mvc;
 
-use Zend\Di\LocatorInterface,
-    Zend\EventManager\EventManagerAwareInterface,
-    Zend\EventManager\EventManagerAware,
-    Zend\EventManager\EventsCapableInterface,
-    Zend\Stdlib\RequestInterface as Request,
-    Zend\Stdlib\ResponseInterface as Response;
+use Zend\EventManager\EventsCapableInterface;
 
-interface ApplicationInterface extends EventManagerAwareInterface, EventsCapableInterface
+/**
+ * @category   Zend
+ * @package    Zend_Mvc
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
+interface ApplicationInterface extends EventsCapableInterface
 {
     /**
-     * Set a service locator/DI object
-     *
-     * @param  LocatorInterface $locator
-     * @return ApplicationInterface
-     */
-    public function setLocator(LocatorInterface $locator);
-
-    /**
-     * Set request object that will be consumed
-     * 
-     * @param  Request $request 
-     * @return ApplicationInterface
-     */
-    public function setRequest(Request $request);
-
-    /**
-     * Set response object that will be returned
-     * 
-     * @param  Response $request 
-     * @return ApplicationInterface
-     */
-    public function setResponse(Response $response);
-
-    /**
-     * Set the router used to decompose the request
-     *
-     * A router should return a metadata object containing a controller key.
-     * 
-     * @param  Router\RouteStackInterface $router
-     * @return ApplicationInterface
-     */
-    public function setRouter(Router\RouteStackInterface $router);
-
-    /**
      * Get the locator object
-     * 
-     * @return LocatorInterface
+     *
+     * @return \Zend\ServiceManager\ServiceLocatorInterface
      */
-    public function getLocator();
+    public function getServiceManager();
 
     /**
      * Get the request object
@@ -65,13 +50,6 @@ interface ApplicationInterface extends EventManagerAwareInterface, EventsCapable
      * @return Response
      */
     public function getResponse();
-
-    /**
-     * Get the router object
-     *
-     * @return Router
-     */
-    public function getRouter();
 
     /**
      * Run the application

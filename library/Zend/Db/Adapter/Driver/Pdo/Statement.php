@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Db
- * @subpackage Adapter
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Db
  */
 
 namespace Zend\Db\Adapter\Driver\Pdo;
@@ -29,8 +18,6 @@ use Zend\Db\Adapter\Driver\StatementInterface,
  * @category   Zend
  * @package    Zend_Db
  * @subpackage Adapter
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Statement implements StatementInterface
 {
@@ -44,22 +31,30 @@ class Statement implements StatementInterface
      * @var Pdo
      */
     protected $driver = null;
+
     /**
      *
      * @var string
      */
     protected $sql = '';
+
     /**
      *
      * @var boolean 
      */
     protected $isQuery = null;
+
     /**
      *
      * @var ParameterContainer 
      */
     protected $parameterContainer = null;
-    
+
+    /**
+     * @var bool
+     */
+    protected $parametersBound = false;
+
     /**
      * @var \PDOStatement
      */
@@ -70,6 +65,7 @@ class Statement implements StatementInterface
      * @var boolean
      */
     protected $isPrepared = false;
+
     /**
      * Set driver
      * 
@@ -81,6 +77,7 @@ class Statement implements StatementInterface
         $this->driver = $driver;
         return $this;
     }
+
     /**
      * Initialize
      * 
@@ -104,6 +101,7 @@ class Statement implements StatementInterface
         $this->resource = $pdoStatement;
         return $this;
     }
+
     /**
      * Get resource
      * 
@@ -113,7 +111,6 @@ class Statement implements StatementInterface
     {
         return $this->resource;
     }
-
 
     /**
      * Set sql
@@ -125,6 +122,7 @@ class Statement implements StatementInterface
         $this->sql = $sql;
         return $this;
     }
+
     /**
      * Get sql
      * 
@@ -158,7 +156,7 @@ class Statement implements StatementInterface
     public function prepare($sql = null)
     {
         if ($this->isPrepared) {
-            throw new \Exception('This statement has been prepared already');
+            throw new Exception\RuntimeException('This statement has been prepared already');
         }
 
         if ($sql == null) {
@@ -169,7 +167,7 @@ class Statement implements StatementInterface
 
         if ($this->resource === false) {
             $error = $this->pdo->errorInfo();
-            throw new \Exception($error[2]);
+            throw new Exception\RuntimeException($error[2]);
         }
 
         $this->isPrepared = true;
@@ -183,28 +181,18 @@ class Statement implements StatementInterface
         return $this->isPrepared;
     }
 
-
     /**
-     * @todo  Should this use the ability of PDOStatement to return objects of a specified class?
      * @param mixed $parameters
      * @return Result
      */
-    public function execute($parameters = null)
+    public function execute()
     {
         if (!$this->isPrepared) {
             $this->prepare();
         }
 
-        $parameters = ($parameters) ?: $parameters = $this->parameterContainer;
-
-        if ($parameters != null) {
-            if (is_array($parameters)) {
-                $parameters = new ParameterContainer($parameters);
-            }
-            if (!$parameters instanceof ParameterContainer) {
-                throw new \InvalidArgumentException('ParameterContainer expected');
-            }
-            $this->bindParametersFromContainer($parameters);
+        if ($this->parameterContainer) {
+            $this->bindParametersFromContainer($this->parameterContainer);
         }
 
         if ($this->resource->execute() === false) {
@@ -212,7 +200,7 @@ class Statement implements StatementInterface
             throw new Exception\InvalidQueryException($error[2]);
         }
 
-        $result = $this->driver->createResult($this->resource);
+        $result = $this->driver->createResult($this->resource, $this);
         return $result;
     }
 
@@ -223,6 +211,10 @@ class Statement implements StatementInterface
      */
     protected function bindParametersFromContainer(ParameterContainer $container)
     {
+        if ($this->parametersBound) {
+            return;
+        }
+
         $parameters = $container->getNamedArray();
         foreach ($parameters as $name => &$value) {
             $type = \PDO::PARAM_STR;
@@ -247,6 +239,22 @@ class Statement implements StatementInterface
             $parameter = is_int($name) ? ($name + 1) : $name;
             $this->resource->bindParam($parameter, $value, $type);
         }
+
+    }
+
+    /**
+     * Perform a deep clone
+     * @return Statement A cloned statement
+     */
+    public function __clone()
+    {
+        $this->isPrepared = false;
+        $this->parametersBound = false;
+        $this->resource = null;
+        if ($this->parameterContainer) {
+            $this->parameterContainer = clone $this->parameterContainer;
+        }
+
     }
 
 }

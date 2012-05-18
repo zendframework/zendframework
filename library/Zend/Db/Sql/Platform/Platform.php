@@ -1,21 +1,24 @@
 <?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Db
+ */
 
 namespace Zend\Db\Sql\Platform;
 
-use Zend\Db\Adapter\Adapter,
-    Zend\Db\Sql\PreparableSqlInterface,
-    Zend\Db\Sql\SqlInterface,
-    Zend\Db\Adapter\Driver\StatementInterface;
+use Zend\Db\Adapter\Adapter;
 
 class Platform extends AbstractPlatform
 {
 
-    protected $adapter = null;
-
     /**
-     * @var PlatformInterface
+     * @var Adapter
      */
-    protected $actualPlatform = null;
+    protected $adapter = null;
 
     public function __construct(Adapter $adapter)
     {

@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Db
- * @subpackage Metadata
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Db
  */
 
 namespace Zend\Db\Metadata;
@@ -28,8 +17,6 @@ use Zend\Db\Adapter\Adapter,
  * @category   Zend
  * @package    Zend_Db
  * @subpackage Metadata
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Metadata implements MetadataInterface
 {
@@ -55,6 +42,7 @@ class Metadata implements MetadataInterface
         $this->adapter = $adapter;
         $this->source = $this->createSourceFromAdapter($adapter);
     }
+
     /**
      * Create source from adapter
      * 
@@ -85,6 +73,7 @@ class Metadata implements MetadataInterface
     {
         return $this->source->getTables();
     }
+
     /**
      * Get views
      * 
@@ -96,6 +85,7 @@ class Metadata implements MetadataInterface
     {
         return $this->source->getViews();
     }
+
     /**
      * Get triggers
      * 
@@ -107,6 +97,7 @@ class Metadata implements MetadataInterface
     {
         return $this->source->getTriggers();
     }
+
     /**
      * Get constraints
      * 
@@ -119,6 +110,7 @@ class Metadata implements MetadataInterface
     {
         return $this->source->getConstraints($table, $schema, $database);
     }
+
     /**
      * Get columns
      * 
@@ -131,6 +123,7 @@ class Metadata implements MetadataInterface
     {
         return $this->source->getColumns($table);
     }
+
     /**
      * Get constraint keys
      * 
@@ -144,6 +137,7 @@ class Metadata implements MetadataInterface
     {
         return $this->source->getConstraintKeys($constraint, $table);
     }
+
     /**
      * Get constraints
      * 
@@ -157,6 +151,7 @@ class Metadata implements MetadataInterface
     {
         return $this->source->getConstraint($constraintName, $table, $schema, $database);
     }
+
     /**
      * Get schemas
      */
@@ -164,6 +159,7 @@ class Metadata implements MetadataInterface
     {
         // TODO: Implement getSchemas() method.
     }
+
     /**
      * Get table names
      * 
@@ -175,6 +171,7 @@ class Metadata implements MetadataInterface
     {
         return $this->source->getTableNames($schema, $database);
     }
+
     /**
      * Get table
      * 
@@ -187,6 +184,7 @@ class Metadata implements MetadataInterface
     {
         return $this->source->getTable($tableName, $schema, $database);
     }
+
     /**
      * Get views names
      * 
@@ -197,6 +195,7 @@ class Metadata implements MetadataInterface
     {
         // TODO: Implement getViewNames() method.
     }
+
     /**
      * Get view
      * 
@@ -208,6 +207,7 @@ class Metadata implements MetadataInterface
     {
         // TODO: Implement getView() method.
     }
+
     /**
      * Get trigger names
      * 
@@ -218,6 +218,7 @@ class Metadata implements MetadataInterface
     {
         // TODO: Implement getTriggerNames() method.
     }
+
     /**
      * Get trigger
      * 
@@ -229,6 +230,7 @@ class Metadata implements MetadataInterface
     {
         // TODO: Implement getTrigger() method.
     }
+
     /**
      * Get column names
      * 
@@ -240,6 +242,7 @@ class Metadata implements MetadataInterface
     {
         // TODO: Implement getColumnNames() method.
     }
+
     /**
      * Get column
      * 

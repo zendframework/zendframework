@@ -1,7 +1,7 @@
 <?php
 namespace Zend\Locale\Exception;
 
-class UnsupportedMethod
+class UnsupportedTokenException
     extends \RuntimeException
     implements ExceptionInterface
 {}

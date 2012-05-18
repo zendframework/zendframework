@@ -55,7 +55,7 @@ class CurrencyTest extends \PHPUnit_Framework_TestCase
         // look if locale is detectable
         try {
             $locale = new Locale\Locale();
-        } catch (Locale\Exception $e) {
+        } catch (Locale\Exception\ExceptionInterface $e) {
             $this->markTestSkipped('Autodetection of locale failed');
             return;
         }
@@ -476,7 +476,7 @@ class CurrencyTest extends \PHPUnit_Framework_TestCase
         // look if locale is detectable
         try {
             $locale = new Locale\Locale();
-        } catch (Locale\Exception $e) {
+        } catch (Locale\Exception\ExceptionInterface $e) {
             $this->markTestSkipped('Autodetection of locale failed');
             return;
         }
@@ -510,7 +510,7 @@ class CurrencyTest extends \PHPUnit_Framework_TestCase
         // look if locale is detectable
         try {
             $locale = new Locale\Locale();
-        } catch (Locale\Exception $e) {
+        } catch (Locale\Exception\ExceptionInterface $e) {
             $this->markTestSkipped('Autodetection of locale failed');
             return;
         }

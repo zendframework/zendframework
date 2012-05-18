@@ -129,7 +129,7 @@ class Int extends AbstractValidator
                     $this->error(self::NOT_INT);
                     return false;
                 }
-            } catch (\Zend\Locale\Exception $e) {
+            } catch (\Zend\Locale\Exception\ExceptionInterface $e) {
                 $this->error(self::NOT_INT);
                 return false;
             }

@@ -1,13 +1,37 @@
 <?php
+/**
+ * Zend Framework
+ *
+ * LICENSE
+ *
+ * This source file is subject to the new BSD license that is bundled
+ * with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://framework.zend.com/license/new-bsd
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@zend.com so we can send you a copy immediately.
+ *
+ * @category   Zend
+ * @package    Zend_Mvc
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
 
 namespace Zend\Mvc;
 
-use Zend\EventManager\Event,
-    Zend\Stdlib\RequestInterface as Request,
-    Zend\Stdlib\ResponseInterface as Response,
-    Zend\View\Model\ModelInterface as Model,
-    Zend\View\Model\ViewModel;
+use Zend\EventManager\Event;
+use Zend\Stdlib\RequestInterface as Request;
+use Zend\Stdlib\ResponseInterface as Response;
+use Zend\View\Model\ModelInterface as Model;
+use Zend\View\Model\ViewModel;
 
+/**
+ * @category   Zend
+ * @package    Zend_Mvc
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
 class MvcEvent extends Event
 {
     /**#@+
@@ -20,6 +44,8 @@ class MvcEvent extends Event
     const EVENT_RENDER         = 'render';
     const EVENT_ROUTE          = 'route';
     /**#@-*/
+
+    protected $application;
 
     /**
      * @var Request
@@ -50,6 +76,29 @@ class MvcEvent extends Event
      * @var Model
      */
     protected $viewModel;
+
+    /**
+     * Set application instance
+     * 
+     * @param  ApplicationInterface $application 
+     * @return Mvc
+     */
+    public function setApplication(ApplicationInterface $application)
+    {
+        $this->setParam('application', $application);
+        $this->application = $application;
+        return $this;
+    }
+
+    /**
+     * Get application instance
+     * 
+     * @return ApplicationInterface
+     */
+    public function getApplication()
+    {
+        return $this->application;
+    }
 
     /**
      * Get router
@@ -144,9 +193,9 @@ class MvcEvent extends Event
     }
 
     /**
-     * Set value for viewModel
+     * Set the view model
      *
-     * @param  Model viewModel
+     * @param  Model $viewModel
      * @return MvcEvent
      */
     public function setViewModel(Model $viewModel)
@@ -156,7 +205,7 @@ class MvcEvent extends Event
     }
 
     /**
-     * Get value for viewModel
+     * Get the view model
      *
      * @return Model
      */
@@ -191,31 +240,52 @@ class MvcEvent extends Event
         return $this;
     }
 
+    /**
+     * Does the event represent an error response?
+     * 
+     * @return bool
+     */
     public function isError()
     {
         return $this->getParam('error', false);
     }
 
+    /**
+     * Set the error message (indicating error in handling request)
+     * 
+     * @param  string $message 
+     * @return MvcEvent
+     */
     public function setError($message)
     {
         $this->setParam('error', $message);
         return $this;
     }
 
+    /**
+     * Retrieve the error message, if any
+     * 
+     * @return string
+     */
     public function getError()
     {
         return $this->getParam('error', '');
     }
 
+    /**
+     * Get the currently registered controller name
+     * 
+     * @return string
+     */
     public function getController()
     {
         return $this->getParam('controller');
     }
 
     /**
-     * Set controller
+     * Set controller name
      *
-     * @param $name
+     * @param  string $name
      * @return MvcEvent
      */
     public function setController($name)

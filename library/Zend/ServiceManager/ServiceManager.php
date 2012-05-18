@@ -426,7 +426,17 @@ class ServiceManager implements ServiceLocatorInterface
         }
 
         // check abstract factories
-        foreach ($this->abstractFactories as $abstractFactory) {
+        foreach ($this->abstractFactories as $index => $abstractFactory) {
+            // Support string abstract factory class names
+            if (is_string($abstractFactory) && class_exists($abstractFactory, true)) {
+                $this->abstractFactory[$index] = $abstractFactory = new $abstractFactory();
+            }
+
+            // Bad abstract factory; skip
+            if (!$abstractFactory instanceof AbstractFactoryInterface) {
+                continue;
+            }
+            
             if ($abstractFactory->canCreateServiceWithName($cName, $rName)) {
                 return true;
             }

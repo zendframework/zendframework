@@ -329,4 +329,28 @@ class ServiceManagerTest extends \PHPUnit_Framework_TestCase
         $this->assertContains($childScopedServiceManager, $this->readAttribute($this->serviceManager, 'peeringServiceManagers'));
     }
 
+    public function testConfigureWithInvokableClass()
+    {
+        $config = new Configuration(array(
+            'invokables' => array(
+                'foo' => 'ZendTest\ServiceManager\TestAsset\Foo',
+            ),
+        ));
+        $serviceManager = new ServiceManager($config);
+        $foo = $serviceManager->get('foo');
+        $this->assertInstanceOf('ZendTest\ServiceManager\TestAsset\Foo', $foo);
+    }
+
+    public function testCanUseStringAbstractFactoryClassName()
+    {
+        $config = new Configuration(array(
+            'abstract_factories' => array(
+                'ZendTest\ServiceManager\TestAsset\FooAbstractFactory',
+            ),
+        ));
+        $serviceManager = new ServiceManager($config);
+        $serviceManager->setFactory('foo', 'ZendTest\ServiceManager\TestAsset\FooFactory');
+        $foo = $serviceManager->get('unknownObject');
+        $this->assertInstanceOf('ZendTest\ServiceManager\TestAsset\Foo', $foo);
+    }
 }

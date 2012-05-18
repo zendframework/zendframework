@@ -179,7 +179,7 @@ class Rackspace extends AbstractAdapter
         return $result;
     }
     /**
-     * Return a list of the available instancies
+     * Return a list of the available instances
      *
      * @return InstanceList|boolean
      */ 

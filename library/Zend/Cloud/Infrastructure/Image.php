@@ -94,7 +94,7 @@ class Image
      * Get Attribute with a specific key
      *
      * @param array $data
-     * @return misc|boolean
+     * @return mixed|boolean
      */
     public function getAttribute($key) 
     {

@@ -33,7 +33,7 @@ use Zend\Cloud\Infrastructure\Instance;
 abstract class AbstractAdapter implements AdapterInterface
 {
     /**
-     * Store the last response from the adpter
+     * Store the last response from the adapter
      * 
      * @var array
      */
@@ -125,7 +125,7 @@ abstract class AbstractAdapter implements AdapterInterface
         if (empty($params) 
             || empty($params[Instance::SSH_USERNAME]) 
             || (empty($params[Instance::SSH_PASSWORD]) 
-                && empty($params[Instance::SSH_KEY]))
+                && empty($params[Instance::SSH_PRIVATE_KEY]))
         ) {
             throw new Exception\InvalidArgumentException('You must specify the params for the SSH connection');
         }

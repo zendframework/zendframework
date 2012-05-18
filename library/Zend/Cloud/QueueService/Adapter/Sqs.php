@@ -49,7 +49,7 @@ class Sqs extends AbstractAdapter
 
     /**
      * SQS service instance.
-     * @var \Zend\Service\Amazon\Sqs
+     * @var \Zend\Service\Amazon\Sqs\Sqs
      */
     protected $_sqs;
 
@@ -195,8 +195,8 @@ class Sqs extends AbstractAdapter
     }
 
     /**
-     * Recieve at most $max messages from the specified queue and return the
-     * message IDs for messages recieved.
+     * Receive at most $max messages from the specified queue and return the
+     * message IDs for messages received.
      *
      * @param  string $queueId
      * @param  int    $max
@@ -208,7 +208,7 @@ class Sqs extends AbstractAdapter
         try {
             return $this->_makeMessages($this->_sqs->receive($queueId, $max, $options[self::VISIBILITY_TIMEOUT]));
         } catch(\Zend\Service\Amazon\Exception $e) {
-            throw new Exception\RuntimeException('Error on recieving messages: '.$e->getMessage(), $e->getCode(), $e);
+            throw new Exception\RuntimeException('Error on receiving messages: '.$e->getMessage(), $e->getCode(), $e);
         }
     }
 
@@ -270,7 +270,7 @@ class Sqs extends AbstractAdapter
 
     /**
      * Get SQS implementation
-     * @return \Zend\Service\Amazon\Sqs
+     * @return \Zend\Service\Amazon\Sqs\Sqs
      */
     public function getClient()
     {

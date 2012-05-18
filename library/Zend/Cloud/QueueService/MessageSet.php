@@ -33,7 +33,7 @@ class MessageSet implements \Countable, \IteratorAggregate
     /** @var int */
     protected $_messageCount;
 
-    /** @var ArrayAccess Messages */
+    /** @var \ArrayAccess Messages */
     protected $_messages;
 
     /**

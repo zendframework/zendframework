@@ -21,9 +21,11 @@ namespace Zend\Cloud\StorageService\Adapter;
 
 use Traversable;
 use Zend\Stdlib\ArrayUtils;
-use Zend\Cloud\StorageService\Adapter,
-    Zend\Cloud\StorageService\Exception,
-    Zend\Service\WindowsAzure\Storage\Blob;
+use Zend\Cloud\StorageService\Adapter;
+use Zend\Cloud\StorageService\Exception;
+use Zend\Service\WindowsAzure\Exception as WindowsAzureException;
+use Zend\Service\WindowsAzure\Storage\Storage;
+use Zend\Service\WindowsAzure\Storage\Blob\Blob;
 
 /**
  *
@@ -57,7 +59,7 @@ class WindowsAzure implements AdapterInterface
     const RETURN_LIST  = 1;   // return native list
     const RETURN_NAMES = 2;  // return only names
 
-    const DEFAULT_HOST = \Zend\Service\WindowsAzure\Storage::URL_CLOUD_BLOB;
+    const DEFAULT_HOST = Storage::URL_CLOUD_BLOB;
 
     /**
      * Storage container to operate on
@@ -69,7 +71,7 @@ class WindowsAzure implements AdapterInterface
     /**
      * Storage client
      *
-     * @var \Zend\Service\WindowsAzure\Storage\Blob
+     * @var \Zend\Service\WindowsAzure\Storage\Blob\Blob
      */
     protected $_storageClient = null;
 
@@ -163,7 +165,7 @@ class WindowsAzure implements AdapterInterface
                 $path,
                 $returnPath
             );
-        } catch (\Zend\Service\WindowsAzure\Exception $e) {
+        } catch (WindowsAzureException\ExceptionInterface $e) {
             if (strpos($e->getMessage(), "does not exist") !== false) {
                 return false;
             }
@@ -226,7 +228,7 @@ class WindowsAzure implements AdapterInterface
                 $destinationPath,
                 $temporaryFilePath
             );
-        } catch(\Zend\Service\WindowsAzure\Exception $e) {
+        } catch(WindowsAzureException\ExceptionInterface $e) {
             @unlink($temporaryFilePath);
             throw new Exception\RuntimeException('Error on store: '.$e->getMessage(), $e->getCode(), $e);
         }
@@ -249,7 +251,7 @@ class WindowsAzure implements AdapterInterface
                 $this->_container,
                 $path
             );
-        } catch (\Zend\Service\WindowsAzure\Exception $e) {
+        } catch (WindowsAzureException\ExceptionInterface $e) {
             throw new Exception\RuntimeException('Error on delete: '.$e->getMessage(), $e->getCode(), $e);
         }
     }
@@ -271,7 +273,7 @@ class WindowsAzure implements AdapterInterface
                 $this->_container,
                 $destinationPath
             );
-        } catch (\Zend\Service\WindowsAzure\Exception $e) {
+        } catch (WindowsAzureException\ExceptionInterface $e) {
             throw new Exception\RuntimeException('Error on copy: '.$e->getMessage(), $e->getCode(), $e);
         }
     }
@@ -298,7 +300,7 @@ class WindowsAzure implements AdapterInterface
                 $this->_container,
                 $sourcePath
             );
-        } catch (\Zend\Service\WindowsAzure\Exception $e) {
+        } catch (WindowsAzureException\ExceptionInterface $e) {
             throw new Exception\RunTimeException('Error on move: '.$e->getMessage(), $e->getCode(), $e);
         }
 
@@ -344,7 +346,7 @@ class WindowsAzure implements AdapterInterface
                 $this->_container,
                 $path
             );
-        } catch (\Zend\Service\WindowsAzure\Exception $e) {
+        } catch (WindowsAzureException\ExceptionInterface $e) {
             throw new Exception\RuntimeException('Error on list: '.$e->getMessage(), $e->getCode(), $e);
         }
 
@@ -375,7 +377,7 @@ class WindowsAzure implements AdapterInterface
                 $this->_container,
                 $path
             );
-        } catch (\Zend\Service\WindowsAzure\Exception $e) {
+        } catch (WindowsAzureException\ExceptionInterface $e) {
             if (strpos($e->getMessage(), "could not be accessed") !== false) {
                 return false;
             }
@@ -396,7 +398,7 @@ class WindowsAzure implements AdapterInterface
     {
         try    {
             $this->_storageClient->setBlobMetadata($this->_container, $destinationPath, $metadata);
-        } catch (\Zend\Service\WindowsAzure\Exception $e) {
+        } catch (WindowsAzureException\ExceptionInterface $e) {
             if (strpos($e->getMessage(), "could not be accessed") === false) {
                 throw new Exception\RuntimeException('Error on store metadata: '.$e->getMessage(), $e->getCode(), $e);
             }
@@ -414,7 +416,7 @@ class WindowsAzure implements AdapterInterface
     {
         try {
             $this->_storageClient->setBlobMetadata($this->_container, $destinationPath, array());
-        } catch (\Zend\Service\WindowsAzure\Exception $e) {
+        } catch (WindowsAzureException\ExceptionInterface $e) {
             if (strpos($e->getMessage(), "could not be accessed") === false) {
                 throw new Exception\RuntimeException('Error on delete metadata: '.$e->getMessage(), $e->getCode(), $e);
             }
@@ -430,14 +432,14 @@ class WindowsAzure implements AdapterInterface
     {
         try {
             $this->_storageClient->deleteContainer($this->_container);
-        } catch (\Zend\Service\WindowsAzure\Exception $e) {
+        } catch (WindowsAzureException\ExceptionInterface $e) {
             throw new Exception\RuntimeException('Error on delete: '.$e->getMessage(), $e->getCode(), $e);
         }
     }
 
     /**
      * Get the concrete adapter.
-     * @return \Zend\Service\WindowsAzure\Storage\Blob
+     * @return \Zend\Service\WindowsAzure\Storage\Blob\Blob
      */
     public function getClient()
     {

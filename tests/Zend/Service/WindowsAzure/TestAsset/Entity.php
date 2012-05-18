@@ -14,17 +14,39 @@
  *
  * @category   Zend
  * @package    Zend_Service_WindowsAzure
- * @subpackage Exception
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
+namespace ZendTest\Service\WindowsAzure\TestAsset;
+
+use Zend\Service\WindowsAzure\Storage\TableEntity;
+
 /**
+ * Test entity
  * @category   Zend
  * @package    Zend_Service_WindowsAzure
- * @subpackage RetryPolicy
+ * @subpackage UnitTests
+ * @group      Zend_Service
+ * @group      Zend_Service_WindowsAzure
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Service_WindowsAzure_RetryPolicy_Exception extends Zend_Service_WindowsAzure_Exception
-{}
+class Entity extends TableEntity
+{
+    /**
+     * @azure Name
+     */
+    public $FullName;
+
+    /**
+     * @azure Age Edm.Int64
+     */
+    public $Age;
+
+    /**
+     * @azure Visible Edm.Boolean
+     */
+    public $Visible = false;
+}

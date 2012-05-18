@@ -84,7 +84,7 @@ class ZendQueue extends AbstractAdapter
         }
         try {
             $this->_queue = new Queue($adapter, $options);
-        } catch (\Zend\Queue\Exception $e) {
+        } catch (\Zend\Queue\Exception\ExceptionInterface $e) {
             throw new Exception\RunTimeException('Error on create: '.$e->getMessage(), $e->getCode(), $e);
         }
     }
@@ -103,7 +103,7 @@ class ZendQueue extends AbstractAdapter
         try {
             $this->_queues[$name] = $this->_queue->createQueue($name, isset($options[Queue::TIMEOUT])?$options[Queue::TIMEOUT]:null);
             return $name;
-        } catch (\Zend\Queue\Exception $e) {
+        } catch (\Zend\Queue\Exception\ExceptionInterface $e) {
             throw new Exception\RuntimeException('Error on queue creation: '.$e->getMessage(), $e->getCode(), $e);
         }
     }
@@ -125,7 +125,7 @@ class ZendQueue extends AbstractAdapter
                 unset($this->_queues[$queueId]);
                 return true;
             }
-        } catch (\Zend\Queue\Exception $e) {
+        } catch (\Zend\Queue\Exception\ExceptionInterface $e) {
             throw new Exception\RuntimeException('Error on queue deletion: '.$e->getMessage(), $e->getCode(), $e);
         }
     }
@@ -140,7 +140,7 @@ class ZendQueue extends AbstractAdapter
     {
         try {
             return $this->_queue->getQueues();
-        } catch (\Zend\Queue\Exception $e) {
+        } catch (\Zend\Queue\Exception\ExceptionInterface $e) {
             throw new Exception\RuntimeException('Error on listing queues: '.$e->getMessage(), $e->getCode(), $e);
         }
     }
@@ -159,7 +159,7 @@ class ZendQueue extends AbstractAdapter
         }
         try {
             return $this->_queues[$queueId]->getOptions();
-        } catch (\Zend\Queue\Exception $e) {
+        } catch (\Zend\Queue\Exception\ExceptionInterface $e) {
             throw new Exception\RuntimeException('Error on fetching queue metadata: '.$e->getMessage(), $e->getCode(), $e);
         }
     }
@@ -181,7 +181,7 @@ class ZendQueue extends AbstractAdapter
         }
         try {
             return $this->_queues[$queueId]->setOptions($metadata);
-        } catch (\Zend\Queue\Exception $e) {
+        } catch (\Zend\Queue\Exception\ExceptionInterface $e) {
             throw new Exception\RuntimeException('Error on setting queue metadata: '.$e->getMessage(), $e->getCode(), $e);
         }
     }
@@ -201,14 +201,14 @@ class ZendQueue extends AbstractAdapter
         }
         try {
             return $this->_queues[$queueId]->send($message);
-        } catch (\Zend\Queue\Exception $e) {
+        } catch (\Zend\Queue\Exception\ExceptionInterface $e) {
             throw new Exception\RunTimeException('Error on sending message: '.$e->getMessage(), $e->getCode(), $e);
         }
     }
 
     /**
-     * Recieve at most $max messages from the specified queue and return the
-     * message IDs for messages recieved.
+     * Receive at most $max messages from the specified queue and return the
+     * message IDs for messages received.
      *
      * @param  string $queueId
      * @param  int    $max
@@ -227,8 +227,8 @@ class ZendQueue extends AbstractAdapter
             } else {
                 return $this->_makeMessages(array($res));
             }
-        } catch (\Zend\Queue\Exception $e) {
-            throw new Exception\RuntimeException('Error on recieving messages: '.$e->getMessage(), $e->getCode(), $e);
+        } catch (\Zend\Queue\Exception\ExceptionInterface $e) {
+            throw new Exception\RuntimeException('Error on receiving messages: '.$e->getMessage(), $e->getCode(), $e);
         }
     }
 
@@ -271,7 +271,7 @@ class ZendQueue extends AbstractAdapter
             }
 
             return $this->_queues[$queueId]->deleteMessage($message);
-        } catch (\Zend\Queue\Exception $e) {
+        } catch (\Zend\Queue\Exception\ExceptionInterface $e) {
             throw new Exception\RuntimeException('Error on deleting a message: '.$e->getMessage(), $e->getCode(), $e);
         }
     }

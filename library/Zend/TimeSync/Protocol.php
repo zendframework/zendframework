@@ -93,7 +93,7 @@ abstract class Protocol
      * Connect to the specified timeserver.
      *
      * @return void
-     * @throws \Zend\TimeSync\Exception When the connection failed
+     * @throws Exception\ExceptionInterface When the connection failed
      */
     protected function _connect()
     {

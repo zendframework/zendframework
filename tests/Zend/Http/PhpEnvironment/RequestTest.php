@@ -48,7 +48,7 @@ class RequestTest extends TestCase
     /**
      * Data provider for testing base URL and path detection.
      */
-    public static function baseUrlandPathProvider()
+    public static function baseUrlAndPathProvider()
     {
         return array(
             array(
@@ -164,7 +164,7 @@ class RequestTest extends TestCase
     }
 
     /**
-     * @dataProvider baseUrlandPathProvider
+     * @dataProvider baseUrlAndPathProvider
      * @param array  $server
      * @param string $baseUrl
      * @param string $basePath

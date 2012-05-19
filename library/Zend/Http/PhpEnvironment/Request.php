@@ -370,7 +370,7 @@ class Request extends HttpRequest
     /**
      * Autodetect the base path of the request
      *
-     * Uses several crtieria to determine the base path of the request.
+     * Uses several criteria to determine the base path of the request.
      * 
      * @return string
      */
@@ -386,7 +386,7 @@ class Request extends HttpRequest
         
         // basename() matches the script filename; return the directory
         if (basename($baseUrl) === $filename) {
-            return dirname($baseUrl);
+            return str_replace('\\', '/', dirname($baseUrl));
         }
 
         // Base path is identical to base URL

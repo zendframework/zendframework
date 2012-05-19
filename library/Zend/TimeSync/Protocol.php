@@ -19,6 +19,7 @@
  */
 
 namespace Zend\TimeSync;
+
 use Zend\TimeSync\Exception;
 
 /**

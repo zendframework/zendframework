@@ -19,6 +19,7 @@
  */
 
 namespace Zend\TimeSync;
+
 use Zend\TimeSync\Exception;
 
 /**
@@ -196,7 +197,7 @@ class Ntp extends Protocol
      * This will return an array with binary data listing:
      *
      * @return array
-     * @throws \Zend\TimeSync\Exception When timeserver can not be connected
+     * @throws Exception\ExceptionInterface When timeserver can not be connected
      */
     protected function _read()
     {

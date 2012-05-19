@@ -69,7 +69,7 @@ class Metadata implements MetadataInterface
      * @param null $database
      * @return Object\TableObject[]
      */
-    public function getTables($schema = null, $database = null)
+    public function getTables($schema = null)
     {
         return $this->source->getTables();
     }
@@ -81,7 +81,7 @@ class Metadata implements MetadataInterface
      * @param  string $database
      * @return array 
      */
-    public function getViews($schema = null, $database = null)
+    public function getViews($schema = null)
     {
         return $this->source->getViews();
     }
@@ -93,7 +93,7 @@ class Metadata implements MetadataInterface
      * @param  string $database
      * @return array 
      */
-    public function getTriggers($schema = null, $database = null)
+    public function getTriggers($schema = null)
     {
         return $this->source->getTriggers();
     }
@@ -106,9 +106,9 @@ class Metadata implements MetadataInterface
      * @param  string $database
      * @return array 
      */
-    public function getConstraints($table, $schema = null, $database = null)
+    public function getConstraints($table, $schema = null)
     {
-        return $this->source->getConstraints($table, $schema, $database);
+        return $this->source->getConstraints($table, $schema);
     }
 
     /**
@@ -119,7 +119,7 @@ class Metadata implements MetadataInterface
      * @param  string $database
      * @return array 
      */
-    public function getColumns($table, $schema = null, $database = null)
+    public function getColumns($table, $schema = null)
     {
         return $this->source->getColumns($table);
     }
@@ -133,7 +133,7 @@ class Metadata implements MetadataInterface
      * @param  string $database
      * @return array 
      */
-    public function getConstraintKeys($constraint, $table, $schema = null, $database = null)
+    public function getConstraintKeys($constraint, $table, $schema = null)
     {
         return $this->source->getConstraintKeys($constraint, $table);
     }
@@ -147,9 +147,9 @@ class Metadata implements MetadataInterface
      * @param  string $database
      * @return Object\ConstraintObject 
      */
-    public function getConstraint($constraintName, $table, $schema = null, $database = null)
+    public function getConstraint($constraintName, $table, $schema = null)
     {
-        return $this->source->getConstraint($constraintName, $table, $schema, $database);
+        return $this->source->getConstraint($constraintName, $table, $schema);
     }
 
     /**
@@ -167,9 +167,9 @@ class Metadata implements MetadataInterface
      * @param  string $database
      * @return array 
      */
-    public function getTableNames($schema = null, $database = null)
+    public function getTableNames($schema = null)
     {
-        return $this->source->getTableNames($schema, $database);
+        return $this->source->getTableNames($schema);
     }
 
     /**
@@ -180,9 +180,9 @@ class Metadata implements MetadataInterface
      * @param  string $database
      * @return Object\TableObject 
      */
-    public function getTable($tableName, $schema = null, $database = null)
+    public function getTable($tableName, $schema = null)
     {
-        return $this->source->getTable($tableName, $schema, $database);
+        return $this->source->getTable($tableName, $schema);
     }
 
     /**
@@ -191,7 +191,7 @@ class Metadata implements MetadataInterface
      * @param string $schema
      * @param string $database 
      */
-    public function getViewNames($schema = null, $database = null)
+    public function getViewNames($schema = null)
     {
         // TODO: Implement getViewNames() method.
     }
@@ -203,7 +203,7 @@ class Metadata implements MetadataInterface
      * @param string $schema
      * @param string $database 
      */
-    public function getView($viewName, $schema = null, $database = null)
+    public function getView($viewName, $schema = null)
     {
         // TODO: Implement getView() method.
     }
@@ -214,7 +214,7 @@ class Metadata implements MetadataInterface
      * @param string $schema
      * @param string $database 
      */
-    public function getTriggerNames($schema = null, $database = null)
+    public function getTriggerNames($schema = null)
     {
         // TODO: Implement getTriggerNames() method.
     }
@@ -226,7 +226,7 @@ class Metadata implements MetadataInterface
      * @param string $schema
      * @param string $database 
      */
-    public function getTrigger($triggerName, $schema = null, $database = null)
+    public function getTrigger($triggerName, $schema = null)
     {
         // TODO: Implement getTrigger() method.
     }
@@ -238,9 +238,9 @@ class Metadata implements MetadataInterface
      * @param string $schema
      * @param string $database 
      */
-    public function getColumnNames($table, $schema = null, $database = null)
+    public function getColumnNames($table, $schema = null)
     {
-        // TODO: Implement getColumnNames() method.
+        return $this->source->getColumnNames($table, $schema);
     }
 
     /**
@@ -249,9 +249,8 @@ class Metadata implements MetadataInterface
      * @param string $columnName
      * @param string $table
      * @param string $schema
-     * @param string $database 
      */
-    public function getColumn($columnName, $table, $schema = null, $database = null)
+    public function getColumn($columnName, $table, $schema = null)
     {
         // TODO: Implement getColumn() method.
     }

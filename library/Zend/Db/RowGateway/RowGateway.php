@@ -29,7 +29,7 @@ class RowGateway implements RowGatewayInterface, RowObjectInterface
      *
      * @var string
      */
-    protected $primaryKey = null;
+    protected $primaryKeyColumn = null;
 
     /**
      *
@@ -56,11 +56,16 @@ class RowGateway implements RowGatewayInterface, RowObjectInterface
      * @param Adapter $adapter
      * @param Sql\Sql $sql
      */
-    public function __construct($primaryKey, $table, Adapter $adapter = null, Sql\Sql $sql = null)
+    public function __construct($primaryKeyColumn, $table, $adapterOrSql = null)
     {
-        $this->primaryKey = $primaryKey;
+        $this->primaryKeyColumn = $primaryKeyColumn;
         $this->table = $table;
         $this->sql = $sql ?: new Sql\Sql($adapter, $this->table);
+    }
+
+    public function populateFromDatabase()
+    {
+        // @todo
     }
 
     /**
@@ -99,18 +104,18 @@ class RowGateway implements RowGatewayInterface, RowObjectInterface
      */
     public function save()
     {
-        if (is_array($this->primaryKey)) {
+        if (is_array($this->primaryKeyColumn)) {
             // @todo compound primary keys
         }
 
-        if (isset($this->originalData[$this->primaryKey])) {
+        if (isset($this->originalData[$this->primaryKeyColumn])) {
 
             // UPDATE
-            $where = array($this->primaryKey => $this->originalData[$this->primaryKey]);
+            $where = array($this->primaryKeyColumn => $this->originalData[$this->primaryKeyColumn]);
             $data = $this->data;
-            unset($data[$this->primaryKey]);
+            unset($data[$this->primaryKeyColumn]);
 
-            $uStatement = $this->sql->prepareStatementFromSqlObject($this->sql->update()->set($data)->where($where));
+            $uStatement = $this->sql->prepareStatementForSqlObject($this->sql->update()->set($data)->where($where));
             $result = $uStatement->execute();
             $rowsAffected = $result->getAffectedRows();
 
@@ -120,16 +125,16 @@ class RowGateway implements RowGatewayInterface, RowObjectInterface
             $insert = $this->sql->insert();
             $insert->values($this->data);
 
-            $statement = $this->sql->prepareStatementFromSqlObject($insert);
+            $statement = $this->sql->prepareStatementForSqlObject($insert);
 
             $result = $statement->execute();
             $primaryKey = $result->getGeneratedValue();
             $rowsAffected = $result->getAffectedRows();
-            $where = array($this->primaryKey => $primaryKey);
+            $where = array($this->primaryKeyColumn => $primaryKey);
         }
 
         // refresh data
-        $statement = $this->sql->prepareStatementFromSqlObject($this->sql->select()->where($where));
+        $statement = $this->sql->prepareStatementForSqlObject($this->sql->select()->where($where));
         $result = $statement->execute();
         $rowData = $result->current();
         $this->populateOriginalData($rowData);
@@ -144,12 +149,12 @@ class RowGateway implements RowGatewayInterface, RowObjectInterface
      */
     public function delete()
     {
-        if (is_array($this->primaryKey)) {
+        if (is_array($this->primaryKeyColumn)) {
             // @todo compound primary keys
         }
 
-        $where = array($this->primaryKey => $this->originalData[$this->primaryKey]);
-        return $this->tableGateway->delete($where);
+        $where = array($this->primaryKeyColumn => $this->originalData[$this->primaryKeyColumn]);
+        //return $this->tableGateway->delete($where);
     }
 
     /**

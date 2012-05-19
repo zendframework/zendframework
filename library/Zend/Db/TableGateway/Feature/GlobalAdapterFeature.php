@@ -8,27 +8,28 @@
  * @package   Zend_Db
  */
 
-namespace Zend\Db\TableGateway;
+namespace Zend\Db\TableGateway\Feature;
 
 use Zend\Db\Adapter\Adapter,
-    Zend\Db\ResultSet\ResultSet;
+    Zend\Db\TableGateway\Exception;
 
 /**
  * @category   Zend
  * @package    Zend_Db
  * @subpackage TableGateway
  */
-class StaticAdapterTableGateway extends TableGateway
+class GlobalAdapterFeature extends AbstractFeature
 {
+
     /**
-     * @var \Zend\Db\Adapter\Adapter[]
+     * @var Adapter[]
      */
     protected static $staticAdapters = array();
 
     /**
      * Set static adapter
-     * 
-     * @param Adapter $adapter 
+     *
+     * @param Adapter $adapter
      */
     public static function setStaticAdapter(Adapter $adapter)
     {
@@ -42,8 +43,8 @@ class StaticAdapterTableGateway extends TableGateway
 
     /**
      * Get static adapter
-     * 
-     * @return type 
+     *
+     * @return Adapter
      */
     public static function getStaticAdapter()
     {
@@ -59,20 +60,16 @@ class StaticAdapterTableGateway extends TableGateway
             return static::$staticAdapters[__CLASS__];
         }
 
-        throw new \Exception('No database adapter was found.');
+        throw new Exception\RuntimeException('No database adapter was found in the static registry.');
     }
 
     /**
-     * Constructor
-     * 
-     * @param string $table
-     * @param string $databaseSchema
-     * @param ResultSet $selectResultPrototype 
+     * after initialization, retrieve the original adapter as "master"
      */
-    public function __construct($table, $databaseSchema = null, ResultSet $selectResultPrototype = null)
+    public function preInitialize()
     {
-        $adapter = static::getStaticAdapter();
-        parent::__construct($table, $adapter, $databaseSchema, $selectResultPrototype);
+        $this->tableGateway->adapter = self::getStaticAdapter();
     }
+
 
 }

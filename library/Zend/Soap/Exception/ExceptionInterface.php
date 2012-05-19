@@ -29,5 +29,4 @@ namespace Zend\Soap\Exception;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 interface ExceptionInterface
-{
-}
+{}

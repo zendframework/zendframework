@@ -70,6 +70,8 @@ class ConfigListener extends AbstractListener implements
         if ($this->hasCachedConfig()) {
             $this->skipConfig = true;
             $this->setMergedConfig($this->getCachedConfig());
+        } else {
+            $this->addConfigGlobPaths($this->getOptions()->getConfigGlobPaths());
         }
     }
 

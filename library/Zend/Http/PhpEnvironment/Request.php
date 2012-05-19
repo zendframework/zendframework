@@ -311,21 +311,10 @@ class Request extends HttpRequest
         } else {
             // Backtrack up the SCRIPT_FILENAME to find the portion
             // matching PHP_SELF.
-            $path = $phpSelf ?: '';
-            if (!isset($path[1]) || $path[1] !== '~') {
-                $segments = array_reverse(explode('/', trim($filename, '/')));
-            } else {
-                $segments = array_reverse(explode('/', trim($path, '/')));
-            }
-            $index    = 0;
-            $last     = count($segments);
-            $baseUrl  = '';
 
-            do {
-                $segment = $segments[$index];
-                $baseUrl = '/' . $segment . $baseUrl;
-                $index++;
-            } while ($last > $index && false !== ($pos = strpos($path, $baseUrl)) && 0 !== $pos);
+            $basename = basename($filename);
+            $path = ($phpSelf ? trim($phpSelf, '/') : '');
+            $baseUrl = '/'. substr($path, 0, strpos($path, $basename)) . $basename;
         }
 
         // Does the base URL have anything in common with the request URI?

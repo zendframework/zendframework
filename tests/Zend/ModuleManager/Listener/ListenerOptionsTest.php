@@ -35,16 +35,16 @@ class ListenerOptionsTest extends TestCase
             'cache_dir'               => __DIR__,
             'config_cache_enabled'    => true,
             'config_cache_key'        => 'foo',
-            'module_paths'            => array('foo','bar'),
-            'config_glob_paths'       => array('foo','bar'),
+            'module_paths'            => array('module','paths'),
+            'config_glob_paths'       => array('glob','paths'),
         ));
         $this->assertSame($options->getCacheDir(), __DIR__);
         $this->assertTrue($options->getConfigCacheEnabled());
         $this->assertNotNull(strstr($options->getConfigCacheFile(), __DIR__));
         $this->assertNotNull(strstr($options->getConfigCacheFile(), '.php'));
         $this->assertSame('foo', $options->getConfigCacheKey());
-        $this->assertSame(array('foo', 'bar'), $options->getModulePaths());
-        $this->assertSame(array('foo', 'bar'), $options->getConfigGlobPaths());
+        $this->assertSame(array('module', 'paths'), $options->getModulePaths());
+        $this->assertSame(array('glob', 'paths'), $options->getConfigGlobPaths());
     }
 
     public function testCanAccessKeysAsProperties()
@@ -53,8 +53,8 @@ class ListenerOptionsTest extends TestCase
             'cache_dir'               => __DIR__,
             'config_cache_enabled'    => true,
             'config_cache_key'        => 'foo',
-            'module_paths'            => array('foo','bar'),
-            'config_glob_paths'       => array('foo','bar'),
+            'module_paths'            => array('module','paths'),
+            'config_glob_paths'       => array('glob','paths'),
         ));
         $this->assertSame($options->cache_dir, __DIR__);
         $options->cache_dir = 'foo';
@@ -68,8 +68,8 @@ class ListenerOptionsTest extends TestCase
         $this->assertFalse($options->config_cache_enabled);
 
         $this->assertEquals('foo', $options->config_cache_key);
-        $this->assertSame(array('foo', 'bar'), $options->module_paths);
-        $this->assertSame(array('foo', 'bar'), $options->config_glob_paths);
+        $this->assertSame(array('module', 'paths'), $options->module_paths);
+        $this->assertSame(array('glob', 'paths'), $options->config_glob_paths);
     }
 
     public function testSetModulePathsAcceptsConfigOrTraverable()

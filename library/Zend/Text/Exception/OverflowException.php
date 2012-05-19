@@ -1,10 +1,10 @@
 <?php
 
-namespace Zend\Text\Table\Exception;
+namespace Zend\Text\Exception;
 
 use Zend\Text\Exception;
 
 class OverflowException
-    extends Exception\OverflowException
+    extends \OverflowException
     implements ExceptionInterface
 {}

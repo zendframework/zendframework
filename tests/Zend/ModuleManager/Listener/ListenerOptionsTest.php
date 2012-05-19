@@ -36,6 +36,7 @@ class ListenerOptionsTest extends TestCase
             'config_cache_enabled'    => true,
             'config_cache_key'        => 'foo',
             'module_paths'            => array('foo','bar'),
+            'config_glob_paths'       => array('foo','bar'),
         ));
         $this->assertSame($options->getCacheDir(), __DIR__);
         $this->assertTrue($options->getConfigCacheEnabled());
@@ -43,6 +44,7 @@ class ListenerOptionsTest extends TestCase
         $this->assertNotNull(strstr($options->getConfigCacheFile(), '.php'));
         $this->assertSame('foo', $options->getConfigCacheKey());
         $this->assertSame(array('foo', 'bar'), $options->getModulePaths());
+        $this->assertSame(array('foo', 'bar'), $options->getConfigGlobPaths());
     }
 
     public function testCanAccessKeysAsProperties()
@@ -52,6 +54,7 @@ class ListenerOptionsTest extends TestCase
             'config_cache_enabled'    => true,
             'config_cache_key'        => 'foo',
             'module_paths'            => array('foo','bar'),
+            'config_glob_paths'       => array('foo','bar'),
         ));
         $this->assertSame($options->cache_dir, __DIR__);
         $options->cache_dir = 'foo';
@@ -66,6 +69,7 @@ class ListenerOptionsTest extends TestCase
 
         $this->assertEquals('foo', $options->config_cache_key);
         $this->assertSame(array('foo', 'bar'), $options->module_paths);
+        $this->assertSame(array('foo', 'bar'), $options->config_glob_paths);
     }
 
     public function testSetModulePathsAcceptsConfigOrTraverable()
@@ -81,5 +85,20 @@ class ListenerOptionsTest extends TestCase
         $this->setExpectedException('InvalidArgumentException');
         $options = new ListenerOptions;
         $options->setModulePaths('asd');
+    }
+
+    public function testSetConfigGlobPathsAcceptsConfigOrTraverable()
+    {
+        $config = new Config(array(__DIR__));
+        $options = new ListenerOptions;
+        $options->setConfigGlobPaths($config);
+        $this->assertSame($config, $options->getConfigGlobPaths());
+    }
+
+    public function testSetConfigGlobPathsThrowsInvalidArgumentException()
+    {
+        $this->setExpectedException('InvalidArgumentException');
+        $options = new ListenerOptions;
+        $options->setConfigGlobPaths('asd');
     }
 }

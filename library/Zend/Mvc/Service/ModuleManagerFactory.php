@@ -58,7 +58,6 @@ class ModuleManagerFactory implements FactoryInterface
         $configuration    = $serviceLocator->get('ApplicationConfiguration');
         $listenerOptions  = new ListenerOptions($configuration['module_listener_options']);
         $defaultListeners = new DefaultListenerAggregate($listenerOptions);
-        $defaultListeners->getConfigListener()->addConfigGlobPath("config/autoload/{,*.}{global,local}.php");
         $serviceListener  = new ServiceListener($serviceLocator);
 
         $events        = $serviceLocator->get('EventManager');

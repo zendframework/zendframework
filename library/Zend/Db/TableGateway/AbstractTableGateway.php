@@ -271,14 +271,14 @@ abstract class AbstractTableGateway implements TableGatewayInterface
         }
 
         // apply preInsert features
-        $this->applyFeatures('preInsert', array($insert));
+        $this->featureSet->apply('preInsert', array($insert));
 
         $statement = $this->sql->prepareStatementForSqlObject($insert);
         $result = $statement->execute();
         $this->lastInsertValue = $this->adapter->getDriver()->getConnection()->getLastGeneratedValue();
 
         // apply postInsert features
-        $this->applyFeatures('postInsert', array($statement, $result));
+        $this->featureSet->apply('postInsert', array($statement, $result));
 
         return $result->getAffectedRows();
     }
@@ -327,13 +327,13 @@ abstract class AbstractTableGateway implements TableGatewayInterface
         }
 
         // apply preUpdate features
-        $this->applyFeatures('preUpdate', array($update));
+        $this->featureSet->apply('preUpdate', array($update));
 
         $statement = $this->sql->prepareStatementForSqlObject($update);
         $result = $statement->execute();
 
         // apply postUpdate features
-        $this->applyFeatures('postUpdate', array($statement, $result));
+        $this->featureSet->apply('postUpdate', array($statement, $result));
 
         return $result->getAffectedRows();
     }
@@ -380,15 +380,14 @@ abstract class AbstractTableGateway implements TableGatewayInterface
             throw new Exception\RuntimeException('The table name of the provided Update object must match that of the table');
         }
 
-        if ($this->featureSet instanceof Feature\FeatureSet) {
-            $this->featureSet->apply(__METHOD__, array($delete));
-        }
+        // pre delete update
+        $this->featureSet->apply('preDelete', array($delete));
 
         $statement = $this->sql->prepareStatementForSqlObject($delete);
         $result = $statement->execute();
 
         // apply postDelete features
-        $this->applyFeatures('postDelete', array($statement, $result));
+        $this->featureSet->apply('postDelete', array($statement, $result));
 
         return $result->getAffectedRows();
     }

@@ -13,40 +13,16 @@ namespace Zend\Db\RowGateway;
 use Zend\Db\Adapter\Adapter,
     Zend\Db\ResultSet\Row,
     Zend\Db\ResultSet\RowObjectInterface,
-    Zend\Db\Sql;
+    Zend\Db\Sql\Sql;
 
 /**
  * @category   Zend
  * @package    Zend_Db
  * @subpackage RowGateway
  */
-class RowGateway implements RowGatewayInterface, RowObjectInterface
+class RowGateway extends AbstractRowGateway
 {
 
-    protected $table = null;
-
-    /**
-     *
-     * @var string
-     */
-    protected $primaryKeyColumn = null;
-
-    /**
-     *
-     * @var array
-     */
-    protected $originalData = null;
-
-    /**
-     *
-     * @var array
-     */
-    protected $data = null;
-
-    /**
-     * @var Sql
-     */
-    protected $sql = null;
 
     /**
      * Constructor
@@ -60,186 +36,18 @@ class RowGateway implements RowGatewayInterface, RowObjectInterface
     {
         $this->primaryKeyColumn = $primaryKeyColumn;
         $this->table = $table;
-        $this->sql = $sql ?: new Sql\Sql($adapter, $this->table);
-    }
-
-    public function populateFromDatabase()
-    {
-        // @todo
-    }
-
-    /**
-     * Populate Original Data
-     * 
-     * @param  array $originalData
-     * @param  boolean $originalDataIsCurrent
-     * @return RowGateway 
-     */
-    public function populateOriginalData(array $originalData)
-    {
-        $this->originalData = $originalData;
-        return $this;
-    }
-
-    /**
-     * Populate current data
-     * 
-     * @param  array $currentData
-     * @return RowGateway 
-     */
-    public function populate(array $rowData, $isOriginal = null)
-    {
-        $this->data = $rowData;
-        if ($isOriginal == true || ($isOriginal == null && empty($this->originalData))) {
-            $this->populateOriginalData($rowData);
+        if ($adapterOrSql instanceof Sql) {
+            $this->sql = $adapterOrSql;
+        } elseif ($adapterOrSql instanceof Adapter) {
+            $this->sql = new Sql($adapterOrSql, $this->table);
+        }
+        if ($this->sql == null) {
+            throw new Exception\InvalidArgumentException('A valid Sql object was not provided.');
+        } elseif ($this->sql->getTable() !== $this->table) {
+            throw new Exception\InvalidArgumentException('The Sql object provided does not have a table that matches this row object');
         }
 
-        return $this;
+        $this->initialize();
     }
 
-    /**
-     * Save
-     * 
-     * @return integer 
-     */
-    public function save()
-    {
-        if (is_array($this->primaryKeyColumn)) {
-            // @todo compound primary keys
-        }
-
-        if (isset($this->originalData[$this->primaryKeyColumn])) {
-
-            // UPDATE
-            $where = array($this->primaryKeyColumn => $this->originalData[$this->primaryKeyColumn]);
-            $data = $this->data;
-            unset($data[$this->primaryKeyColumn]);
-
-            $uStatement = $this->sql->prepareStatementForSqlObject($this->sql->update()->set($data)->where($where));
-            $result = $uStatement->execute();
-            $rowsAffected = $result->getAffectedRows();
-
-        } else {
-
-            // INSERT
-            $insert = $this->sql->insert();
-            $insert->values($this->data);
-
-            $statement = $this->sql->prepareStatementForSqlObject($insert);
-
-            $result = $statement->execute();
-            $primaryKey = $result->getGeneratedValue();
-            $rowsAffected = $result->getAffectedRows();
-            $where = array($this->primaryKeyColumn => $primaryKey);
-        }
-
-        // refresh data
-        $statement = $this->sql->prepareStatementForSqlObject($this->sql->select()->where($where));
-        $result = $statement->execute();
-        $rowData = $result->current();
-        $this->populateOriginalData($rowData);
-
-        return $rowsAffected;
-    }
-
-    /**
-     * Delete
-     * 
-     * @return type 
-     */
-    public function delete()
-    {
-        if (is_array($this->primaryKeyColumn)) {
-            // @todo compound primary keys
-        }
-
-        $where = array($this->primaryKeyColumn => $this->originalData[$this->primaryKeyColumn]);
-        //return $this->tableGateway->delete($where);
-    }
-
-    /**
-     * Offset Exists
-     * 
-     * @param  string $offset
-     * @return boolean
-     */
-    public function offsetExists($offset)
-    {
-        return array_key_exists($offset, $this->data);
-    }
-
-    /**
-     * Offset get
-     * 
-     * @param  string $offset
-     * @return type 
-     */
-    public function offsetGet($offset)
-    {
-        return $this->data[$offset];
-    }
-
-    /**
-     * Offset set
-     * 
-     * @param  string $offset
-     * @param  type $value
-     * @return RowGateway 
-     */
-    public function offsetSet($offset, $value)
-    {
-        $this->data[$offset] = $value;
-        return $this;
-    }
-
-    /**
-     * Offset unset
-     * 
-     * @param  string $offset
-     * @return RowGateway 
-     */
-    public function offsetUnset($offset)
-    {
-        $this->data[$offset] = null;
-        return $this;
-    }
-
-    /**
-     * (PHP 5 &gt;= 5.1.0)<br/>
-     * Count elements of an object
-     * @link http://php.net/manual/en/countable.count.php
-     * @return int The custom count as an integer.
-     * </p>
-     * <p>
-     * The return value is cast to an integer.
-     */
-    public function count()
-    {
-        return count($this->data);
-    }
-
-    /**
-     * To array
-     * 
-     * @return array 
-     */
-    public function toArray()
-    {
-        return $this->data;
-    }
-
-    /**
-     * __get
-     * 
-     * @param  string $name
-     * @return type 
-     */
-    public function __get($name)
-    {
-        if (array_key_exists($name, $this->data)) {
-            return $this->data[$name];
-        } else {
-            throw new \InvalidArgumentException('Not a valid column in this row: ' . $name);
-        }
-    }
 }

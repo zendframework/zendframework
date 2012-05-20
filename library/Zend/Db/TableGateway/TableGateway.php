@@ -28,10 +28,11 @@ class TableGateway extends AbstractTableGateway
      *
      * @param string $table
      * @param Adapter $adapter
+     * @param Feature\AbstractFeature|Feature\FeatureSet|Feature\AbstractFeature[] $features
      * @param ResultSet $selectResultPrototype
      * @param Sql\Sql $selectResultPrototype
      */
-    public function __construct($table, Adapter $adapter, Feature\FeatureSet $featureSet = null, ResultSet $selectResultPrototype = null, Sql $sql = null)
+    public function __construct($table, Adapter $adapter, $features = null, ResultSet $selectResultPrototype = null, Sql $sql = null)
     {
         // table
         if (!(is_string($table) || $table instanceof TableIdentifier)) {

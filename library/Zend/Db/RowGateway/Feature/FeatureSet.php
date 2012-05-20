@@ -1,14 +1,25 @@
 <?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Db
+ */
 
-namespace Zend\Db\TableGateway\Feature;
+namespace Zend\Db\RowGateway\Feature;
 
-use Zend\Db\TableGateway\AbstractTableGateway;
+use Zend\Db\RowGateway\AbstractRowGateway;
 
 class FeatureSet
 {
     const APPLY_HALT = 'halt';
 
-    protected $tableGateway = null;
+    /**
+     * @var AbstractRowGateway
+     */
+    protected $rowGateway = null;
 
     /**
      * @var AbstractFeature[]
@@ -20,6 +31,9 @@ class FeatureSet
      */
     protected $magicSpecifications = array();
 
+    /**
+     * @param array $features
+     */
     public function __construct(array $features = array())
     {
         if ($features) {
@@ -27,11 +41,11 @@ class FeatureSet
         }
     }
 
-    public function setTableGateway(AbstractTableGateway $tableGateway)
+    public function setRowGateway(AbstractRowGateway $rowGateway)
     {
-        $this->tableGateway = $tableGateway;
+        $this->rowGateway = $rowGateway;
         foreach ($this->features as $feature) {
-            $feature->setTableGateway($this->tableGateway);
+            $feature->setRowGateway($this->rowGateway);
         }
         return $this;
     }
@@ -59,7 +73,7 @@ class FeatureSet
     public function addFeature(AbstractFeature $feature)
     {
         $this->features[] = $feature;
-        $feature->setTableGateway($feature);
+        $feature->setRowGateway($feature);
         return $this;
     }
 

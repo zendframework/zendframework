@@ -34,7 +34,7 @@ interface ProcessorInterface
      * Process the whole Config structure and recursively parse all its values.
      *
      * @param Config $value
-     * @return \Zend\Config\Config
+     * @return Config
      */
     public function process(Config $value);
 

@@ -59,7 +59,7 @@ class Index implements SearchIndexInterface
     /**
      * Array of Zend_Search_Lucene_Index_SegmentInfo objects for current version of index.
      *
-     * @var array \Zend\Search\Lucene\Index\SegmentInfo
+     * @var array|\Zend\Search\Lucene\Index\SegmentInfo
      */
     private $_segmentInfos = array();
 
@@ -660,7 +660,7 @@ class Index implements SearchIndexInterface
      * Input is a string or Zend_Search_Lucene_Search_Query.
      *
      * @param \Zend\Search\Lucene\Search\QueryParser|string $query
-     * @return array \Zend\Search\Lucene\Search\QueryHit
+     * @return array|\Zend\Search\Lucene\Search\QueryHit
      * @throws \Zend\Search\Lucene\Exception\InvalidArgumentException
      * @throws \Zend\Search\Lucene\Exception\RuntimeException
      */
@@ -842,7 +842,7 @@ class Index implements SearchIndexInterface
     public function getDocument($id)
     {
         if ($id instanceof Search\QueryHit) {
-            /* @var $id Zend\Search\Lucene\Search\QueryHit */
+            /* @var $id \Zend\Search\Lucene\Search\QueryHit */
             $id = $id->id;
         }
 
@@ -1113,7 +1113,7 @@ class Index implements SearchIndexInterface
     public function delete($id)
     {
         if ($id instanceof Search\QueryHit) {
-            /* @var $id Zend\Search\Lucene\Search\QueryHit */
+            /* @var $id \Zend\Search\Lucene\Search\QueryHit */
             $id = $id->id;
         }
 

@@ -20,12 +20,14 @@
  */
 
 namespace Zend\Search\Lucene\Index\SegmentWriter;
+
 use Zend\Search\Lucene;
-use Zend\Search\Lucene\Index;
-use Zend\Search\Lucene\Analysis\Analyzer\AnalyzerInterface;
-use Zend\Search\Lucene\Storage\Directory;
+use Zend\Search\Lucene\Analysis\Analyzer;
 use Zend\Search\Lucene\Document;
+use Zend\Search\Lucene\Exception as LuceneException;
+use Zend\Search\Lucene\Index;
 use Zend\Search\Lucene\Search\Similarity;
+use Zend\Search\Lucene\Storage\Directory;
 
 /**
  * @category   Zend
@@ -55,10 +57,10 @@ class DocumentWriter extends AbstractSegmentWriter
     /**
      * Object constructor.
      *
-     * @param \Zend\Search\Lucene\Storage\Directory $directory
+     * @param Directory\DirectoryInterface $directory
      * @param string $name
      */
-    public function __construct(Directory $directory, $name)
+    public function __construct(Directory\DirectoryInterface $directory, $name)
     {
         parent::__construct($directory, $name);
 
@@ -71,7 +73,7 @@ class DocumentWriter extends AbstractSegmentWriter
      * Adds a document to this segment.
      *
      * @param \Zend\Search\Lucene\Document $document
-     * @throws \Zend\Search\Lucene\Exception
+     * @throws LuceneException\UnsupportedMethodCallException
      */
     public function addDocument(Document $document)
     {
@@ -86,7 +88,7 @@ class DocumentWriter extends AbstractSegmentWriter
                 /**
                  * @todo term vector storing support
                  */
-                throw new Lucene\Exception('Store term vector functionality is not supported yet.');
+                throw new LuceneException\UnsupportedMethodCallException('Store term vector functionality is not supported yet.');
             }
 
             if ($field->isIndexed) {

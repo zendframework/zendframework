@@ -20,19 +20,8 @@
  */
 
 namespace ZendTest\Search\Lucene\Storage;
+
 use Zend\Search\Lucene\Storage\File;
-
-/**
- * Zend_Search_Lucene_Storage_File_Filesystem
- */
-
-/**
- * Zend_Search_Lucene_Storage_File_Memory
- */
-
-/**
- * PHPUnit test case
- */
 
 /**
  * @category   Zend
@@ -47,7 +36,7 @@ class FileTest extends \PHPUnit_Framework_TestCase
     public function testFilesystem()
     {
         $file = new File\Filesystem(__DIR__ . '/_files/sample_data'); // open file object for reading
-        $this->assertTrue($file instanceof  File);
+        $this->assertTrue($file instanceof  File\FileInterface);
 
         $fileSize = filesize(__DIR__ . '/_files/sample_data');
 
@@ -109,7 +98,7 @@ class FileTest extends \PHPUnit_Framework_TestCase
         unset($file);
 
         $file = new File\Memory($fileData);
-        $this->assertTrue($file instanceof  File);
+        $this->assertTrue($file instanceof  File\FileInterface);
 
         $fileSize = strlen($fileData);
 

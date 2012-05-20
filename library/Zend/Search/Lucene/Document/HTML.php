@@ -55,12 +55,12 @@ class HTML extends Document
     /**
      * Stored DOM representation
      *
-     * @var DOMDocument
+     * @var \DOMDocument
      */
     private $_doc;
 
     /**
-     * Exclud nofollow links flag
+     * Exclude nofollow links flag
      *
      * If true then links with rel='nofollow' attribute are not included into
      * document links.
@@ -212,7 +212,7 @@ class HTML extends Document
      *
      * We should exclude scripts, which may be not included into comment tags, CDATA sections,
      *
-     * @param DOMNode $node
+     * @param \DOMNode $node
      * @param string &$text
      */
     private function _retrieveNodeText(\DOMNode $node, &$text)
@@ -279,7 +279,7 @@ class HTML extends Document
     /**
      * Highlight text in text node
      *
-     * @param DOMText $node
+     * @param \DOMText $node
      * @param array   $wordsToHighlight
      * @param callback $callback   Callback method, used to transform (highlighting) text.
      * @param array    $params     Array of additionall callback parameters (first non-optional parameter is a text to transform)
@@ -343,7 +343,7 @@ class HTML extends Document
     /**
      * highlight words in content of the specified node
      *
-     * @param DOMNode $contextNode
+     * @param \DOMNode $contextNode
      * @param array $wordsToHighlight
      * @param callback $callback   Callback method, used to transform (highlighting) text.
      * @param array    $params     Array of additionall callback parameters (first non-optional parameter is a text to transform)

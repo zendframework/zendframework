@@ -89,7 +89,7 @@ abstract class AbstractSegmentWriter
     /**
      * File system adapter.
      *
-     * @var \Zend\Search\Lucene\Storage\Directory
+     * @var \Zend\Search\Lucene\Storage\Directory\DirectoryInterface
      */
     protected $_directory;
 
@@ -97,7 +97,7 @@ abstract class AbstractSegmentWriter
      * List of the index files.
      * Used for automatic compound file generation
      *
-     * @var unknown_type
+     * @var array
      */
     protected $_files = array();
 
@@ -124,14 +124,14 @@ abstract class AbstractSegmentWriter
     /**
      * '.fdx'  file - Stored Fields, the field index.
      *
-     * @var \Zend\Search\Lucene\Storage\File
+     * @var \Zend\Search\Lucene\Storage\File\FileInterface
      */
     protected $_fdxFile = null;
 
     /**
      * '.fdt'  file - Stored Fields, the field data.
      *
-     * @var \Zend\Search\Lucene\Storage\File
+     * @var \Zend\Search\Lucene\Storage\File\FileInterface
      */
     protected $_fdtFile = null;
 
@@ -139,10 +139,10 @@ abstract class AbstractSegmentWriter
     /**
      * Object constructor.
      *
-     * @param \Zend\Search\Lucene\Storage\Directory $directory
+     * @param \Zend\Search\Lucene\Storage\Directory\DirectoryInterface $directory
      * @param string $name
      */
-    public function __construct(Directory $directory, $name)
+    public function __construct(Directory\DirectoryInterface $directory, $name)
     {
         $this->_directory = $directory;
         $this->_name      = $name;
@@ -307,28 +307,28 @@ abstract class AbstractSegmentWriter
     /**
      * Term Dictionary file
      *
-     * @var \Zend\Search\Lucene\Storage\File
+     * @var \Zend\Search\Lucene\Storage\File\FileInterface
      */
     private $_tisFile = null;
 
     /**
      * Term Dictionary index file
      *
-     * @var \Zend\Search\Lucene\Storage\File
+     * @var \Zend\Search\Lucene\Storage\File\FileInterface
      */
     private $_tiiFile = null;
 
     /**
      * Frequencies file
      *
-     * @var \Zend\Search\Lucene\Storage\File
+     * @var \Zend\Search\Lucene\Storage\File\FileInterface
      */
     private $_frqFile = null;
 
     /**
      * Positions file
      *
-     * @var \Zend\Search\Lucene\Storage\File
+     * @var \Zend\Search\Lucene\Storage\File\FileInterface
      */
     private $_prxFile = null;
 
@@ -496,13 +496,13 @@ abstract class AbstractSegmentWriter
      * Dump Term Dictionary segment file entry.
      * Used to write entry to .tis or .tii files
      *
-     * @param \Zend\Search\Lucene\Storage\File $dicFile
+     * @param \Zend\Search\Lucene\Storage\File\FileInterface $dicFile
      * @param \Zend\Search\Lucene\Index\Term $prevTerm
      * @param \Zend\Search\Lucene\Index\Term $term
      * @param \Zend\Search\Lucene\Index\TermInfo $prevTermInfo
      * @param \Zend\Search\Lucene\Index\TermInfo $termInfo
      */
-    protected function _dumpTermDictEntry(File $dicFile,
+    protected function _dumpTermDictEntry(File\FileInterface $dicFile,
                                           &$prevTerm,     Index\Term     $term,
                                           &$prevTermInfo, Index\TermInfo $termInfo)
     {

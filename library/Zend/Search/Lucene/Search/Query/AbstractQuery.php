@@ -130,7 +130,7 @@ abstract class AbstractQuery
      * Re-write query into primitive queries in the context of specified index
      *
      * @param \Zend\Search\Lucene\SearchIndexInterface $index
-     * @return \Zend\Search\Lucene\Search\AbstractQuery\AbstractQuery
+     * @return \Zend\Search\Lucene\Search\Query\AbstractQuery
      */
     abstract public function rewrite(Lucene\SearchIndexInterface $index);
 
@@ -138,7 +138,7 @@ abstract class AbstractQuery
      * Optimize query in the context of specified index
      *
      * @param \Zend\Search\Lucene\SearchIndexInterface $index
-     * @return \Zend\Search\Lucene\Search\AbstractQuery\AbstractQuery
+     * @return \Zend\Search\Lucene\Search\Query\AbstractQuery
      */
     abstract public function optimize(Lucene\SearchIndexInterface $index);
 

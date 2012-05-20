@@ -234,7 +234,7 @@ class Xlsx extends AbstractOpenXML
     /**
      * Parse rich text XML
      *
-     * @param SimpleXMLElement $is
+     * @param \SimpleXMLElement $is
      * @return string
      */
     private function _parseRichText($is = null) {

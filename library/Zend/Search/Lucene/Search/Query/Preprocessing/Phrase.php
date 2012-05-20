@@ -170,7 +170,7 @@ class Phrase extends AbstractPreprocessing
 
 
         // tokenize phrase using current analyzer and process it as a phrase query
-        $tokens = Analyzer\Analyzer::getDefault()->tokenize($this->_phrase, $this->_phraseEncoding);
+        $tokens = Analyzer::getDefault()->tokenize($this->_phrase, $this->_phraseEncoding);
 
         if (count($tokens) == 0) {
             $this->_matches = array();

@@ -23,7 +23,8 @@ namespace Zend\Search\Lucene\Index;
 
 use Zend\Search\Lucene,
 	Zend\Search\Lucene\Document,
-	Zend\Search\Lucene\Exception\RuntimeException;
+	Zend\Search\Lucene\Exception\RuntimeException,
+    Zend\Search\Lucene\Storage\Directory;
 
 /**
  * @category   Zend
@@ -51,7 +52,7 @@ class SegmentMerger
     /**
      * A set of segments to be merged
      *
-     * @var array \Zend\Search\Lucene\Index\SegmentInfo
+     * @var array|\Zend\Search\Lucene\Index\SegmentInfo
      */
     private $_segmentInfos = array();
 
@@ -78,10 +79,10 @@ class SegmentMerger
      * Creates new segment merger with $directory as target to merge segments into
      * and $name as a name of new segment
      *
-     * @param \Zend\Search\Lucene\Storage\Directory $directory
+     * @param \Zend\Search\Lucene\Storage\Directory\DirectoryInterface $directory
      * @param string $name
      */
-    public function __construct($directory, $name)
+    public function __construct(Directory\DirectoryInterface $directory, $name)
     {
         /** \Zend\Search\Lucene\Index\SegmentWriter\StreamWriter */
         $this->_writer = new SegmentWriter\StreamWriter($directory, $name);

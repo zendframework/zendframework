@@ -193,7 +193,7 @@ class PluginBroker implements Broker, ServiceLocatorAwareInterface
         // Pulling by alias
         if ($locator) {
             try {
-                $instance = $locator->get($pluginName);
+                $instance = $locator->get($plugin);
             } catch (ServiceManagerException $e) {
                 // not returning an instance is okay; there are other ways to 
                 // retrieve the plugin later
@@ -209,12 +209,12 @@ class PluginBroker implements Broker, ServiceLocatorAwareInterface
         }
 
         $class = $this->getClassLoader()->load($pluginName);
-        if (empty($class) && !class_exists($pluginName)) {
+        if (empty($class) && !class_exists($plugin)) {
             throw new Exception\RuntimeException('Unable to locate class associated with "' . $pluginName . '"');
         }
 
-        if (empty($class) && class_exists($pluginName)) {
-            $class = $pluginName;
+        if (empty($class) && class_exists($plugin)) {
+            $class = $plugin;
         }
 
         // Pulling by resolved class name

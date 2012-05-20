@@ -65,6 +65,7 @@ class ServiceListener implements ListenerAggregateInterface
     public function attach(EventManagerInterface $events)
     {
         $this->listeners[] = $events->attach('loadModule', array($this, 'onLoadModule'), 1500);
+        $this->listeners[] = $events->attach('loadModules.post', array($this, 'onLoadModulesPost'), 8500);
         return $this;
     }
 
@@ -115,5 +116,29 @@ class ServiceListener implements ListenerAggregateInterface
         }
 
         $config->configureServiceManager($this->services);
+    }
+
+    /**
+     * Use merged configuration to configure service manager
+     *
+     * If the merged configuration has a non-empty, array 'service_manager' 
+     * key, it will be passed to a ServiceManager Configuration object, and
+     * used to configure the service manager.
+     * 
+     * @param  ModuleEvent $e 
+     * @return void
+     */
+    public function onLoadModulesPost(ModuleEvent $e)
+    {
+        $configListener = $e->getConfigListener();
+        $config         = $configListener->getMergedConfig(false);
+        if (!isset($config['service_manager'])
+            || !is_array($config['service_manager'])
+            || empty($config['service_manager'])
+        ) {
+            return;
+        }
+        $serviceConfig  = new ServiceConfiguration($config['service_manager']);
+        $serviceConfig->configureServiceManager($this->services);
     }
 }

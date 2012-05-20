@@ -27,6 +27,5 @@ namespace Zend\File\Transfer\Exception;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class PhpEnvironmentException
-    extends \RuntimeException
-    implements ExceptionInterface
+    extends RuntimeException
 {}

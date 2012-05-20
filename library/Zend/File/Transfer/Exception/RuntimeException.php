@@ -20,6 +20,8 @@
 
 namespace Zend\File\Transfer\Exception;
 
+use Zend\File\Exception;
+
 /**
  * @category   Zend
  * @package    Zend_File_Transfer
@@ -27,6 +29,6 @@ namespace Zend\File\Transfer\Exception;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class RuntimeException
-    extends \RuntimeException
+    extends Exception\RuntimeException
     implements ExceptionInterface
 {}

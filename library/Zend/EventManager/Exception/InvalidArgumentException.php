@@ -29,6 +29,7 @@ namespace Zend\EventManager\Exception;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class InvalidArgumentException 
-    extends \InvalidArgumentException implements ExceptionInterface
+    extends \InvalidArgumentException
+    implements ExceptionInterface
 {
 }

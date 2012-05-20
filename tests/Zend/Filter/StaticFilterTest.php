@@ -108,7 +108,7 @@ class StaticFilterTest extends \PHPUnit_Framework_TestCase
      */
     public function testStaticFactoryClassNotFound()
     {
-        $this->setExpectedException('Zend\Loader\Exception', 'locate class');
+        $this->setExpectedException('Zend\Loader\Exception\ExceptionInterface', 'locate class');
         StaticFilter::execute('1234', 'UnknownFilter');
     }
 }

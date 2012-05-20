@@ -2,7 +2,5 @@
 
 namespace Zend\ServiceManager\Exception;
 
-class InvalidServiceNameException
-    extends \RuntimeException implements ExceptionInterface
-{
-}
+class InvalidServiceNameException extends RuntimeException
+{}

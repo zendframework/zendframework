@@ -29,7 +29,7 @@ echo "Encrypted text: $result \n";
 
     <para>
         The BlockCipher is initialized using a factory method with the name of the cipher adapter to use (mcrypt)
-        and the parameters to pass to the adapter (the AES algorihtm). In order to encrypt a string we need to specify an
+        and the parameters to pass to the adapter (the AES algorithm). In order to encrypt a string we need to specify an
         encryption key and we used the <methodname>setKey()</methodname> method for that scope. The encryption is provided by the <methodname>encrypt()</methodname> method.
     </para>
 
@@ -78,7 +78,7 @@ $blockCipher = BlockCipher::factory('mcrypt', array(
     <para>
         To decrypt a string we can use the <methodname>decrypt()</methodname> method. In order to successfully decrypt a string we have to
         configure the BlockCipher with the same parameters of the encryption. In the previous example that means to
-        reuse the AES algorihtm with the same encryption key.
+        reuse the AES algorithm with the same encryption key.
     </para>
 
     <para>

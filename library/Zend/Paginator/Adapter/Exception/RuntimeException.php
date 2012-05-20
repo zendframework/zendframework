@@ -10,6 +10,8 @@
 
 namespace Zend\Paginator\Adapter\Exception;
 
+use Zend\Paginator\Exception;
+
 /**
  * @category   Zend
  * @package    Zend\Paginator\Adapter
@@ -18,6 +20,6 @@ namespace Zend\Paginator\Adapter\Exception;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class RuntimeException
-    extends \Zend\Paginator\Exception\RuntimeException
+    extends Exception\RuntimeException
     implements ExceptionInterface
 {}

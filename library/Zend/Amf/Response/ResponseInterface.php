@@ -18,7 +18,10 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Amf;
+namespace Zend\Amf\Response;
+
+use Zend\Amf\Parser,
+    Zend\Amf\Value;
 
 /**
  * Handles converting the PHP object ready for response back into AMF
@@ -27,12 +30,12 @@ namespace Zend\Amf;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Response
+interface ResponseInterface
 {
     /**
      * Instantiate new output stream and start serialization
      *
-     * @return \Zend\Amf\Response
+     * @return ResponseInterface
      */
     public function finalize();
 
@@ -40,8 +43,8 @@ interface Response
      * Serialize the PHP data types back into Actionscript and
      * create and AMF stream.
      *
-     * @param  Zend\Amf\Parser\OutputStream $stream
-     * @return Zend\Amf\Response
+     * @param  Parser\OutputStream $stream
+     * @return ResponseInterface
      */
     public function writeMessage(Parser\OutputStream $stream);
 
@@ -62,8 +65,8 @@ interface Response
     /**
      * Add an AMF body to be sent to the Flash Player
      *
-     * @param  Zend\Amf\Value\MessageBody $body
-     * @return Zend\Amf\Response
+     * @param  Value\MessageBody $body
+     * @return ResponseInterface
      */
     public function addAmfBody(Value\MessageBody $body);
 
@@ -77,8 +80,8 @@ interface Response
     /**
      * Add an AMF Header to be sent back to the flash player
      *
-     * @param  Zend\Amf\Value\MessageHeader $header
-     * @return Zend\Amf\Response
+     * @param  Value\MessageHeader $header
+     * @return ResponseInterface
      */
     public function addAmfHeader(Value\MessageHeader $header);
 
@@ -93,7 +96,7 @@ interface Response
      * Set the AMF encoding that will be used for serialization
      *
      * @param  int $encoding
-     * @return Zend\Amf\Response
+     * @return ResponseInterface
      */
     public function setObjectEncoding($encoding);
 }

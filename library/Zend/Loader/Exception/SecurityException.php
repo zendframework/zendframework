@@ -20,8 +20,8 @@
  */
 
 namespace Zend\Loader\Exception;
-require_once __DIR__ . '/ExceptionInterface.php';
-use Zend\Loader\Exception;
+
+require_once __DIR__ . '/DomainException.php';
 
 /**
  * @category   Zend

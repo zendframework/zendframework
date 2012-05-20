@@ -22,8 +22,8 @@ namespace Zend\Config\Processor;
 
 use Zend\Config\Config,
     Zend\Config\Exception,
-    \Traversable,
-    \ArrayObject;
+    Traversable,
+    ArrayObject;
 
 /**
  * @category   Zend

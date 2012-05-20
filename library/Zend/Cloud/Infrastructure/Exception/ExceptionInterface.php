@@ -11,5 +11,7 @@
 
 namespace Zend\Cloud\Infrastructure\Exception;
 
-interface ExceptionInterface
+use Zend\Cloud\Exception\ExceptionInterface as Exception;
+
+interface ExceptionInterface extends Exception
 {}

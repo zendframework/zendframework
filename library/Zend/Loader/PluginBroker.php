@@ -208,7 +208,7 @@ class PluginBroker implements Broker, ServiceLocatorAwareInterface
             }
         }
 
-        $class = $this->getClassLoader()->load($pluginName);
+        $class = $this->getClassLoader()->load($plugin);
         if (empty($class) && !class_exists($plugin)) {
             throw new Exception\RuntimeException('Unable to locate class associated with "' . $pluginName . '"');
         }

@@ -22,8 +22,8 @@ namespace Zend\Config\Processor;
 
 use Zend\Config\Config,
     Zend\Config\Exception\InvalidArgumentException,
-    \Traversable,
-    \ArrayObject;
+    Traversable,
+    ArrayObject;
 
 /**
  * @category   Zend

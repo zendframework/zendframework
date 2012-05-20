@@ -22,31 +22,29 @@
 namespace Zend\Amf\Parser;
 
 /**
- * Interface that all deserializers must implement.
+ * Interface for all AMF serializers.
  *
- * @see        http://opensource.adobe.com/svn/opensource/blazeds/trunk/modules/core/src/java/flex/messaging/io/amf/
  * @package    Zend_Amf
  * @subpackage Parser
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Deserializer
+interface SerializerInterface
 {
     /**
      * Constructor
      *
-     * @param  Zend\Amf\Parser\InputStream $stream
+     * @param  OutputStream $stream
      * @return void
      */
-    public function __construct(InputStream $stream);
+    public function __construct(OutputStream $stream);
 
     /**
-     * Checks for AMF marker types and calls the appropriate methods
-     * for deserializing those marker types. Markers are the data type of
-     * the following value.
+     * Find the PHP object type and convert it into an AMF object type
      *
-     * @param  int $typeMarker
-     * @return mixed Whatever the data type is of the marker in php
+     * @param  mixed $content
+     * @param  int $markerType
+     * @return void
      */
-    public function readTypeMarker($markerType = null);
+    public function writeTypeMarker(&$content, $markerType = null);
 }

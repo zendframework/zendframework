@@ -2,7 +2,7 @@
 
 namespace Zend\Server\Exception;
 
-class InvalidArgumentException
-    extends \InvalidArgumentException
+class BadMethodCallException
+    extends \BadMethodCallException
     implements ExceptionInterface
 {}

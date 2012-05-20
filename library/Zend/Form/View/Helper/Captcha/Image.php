@@ -21,8 +21,8 @@
 
 namespace Zend\Form\View\Helper\Captcha;
 
-use Zend\Captcha\Image as CaptchaAdapter,
-    Zend\Form\ElementInterface;
+use Zend\Captcha\Image as CaptchaAdapter;
+use Zend\Form\ElementInterface;
 
 /**
  * @category   Zend

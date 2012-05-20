@@ -21,9 +21,9 @@
 
 namespace Zend\Form\View\Helper;
 
-use Traversable,
-    Zend\Form\ElementInterface,
-    Zend\Form\Exception;
+use Traversable;
+use Zend\Form\ElementInterface;
+use Zend\Form\Exception;
 
 /**
  * @category   Zend

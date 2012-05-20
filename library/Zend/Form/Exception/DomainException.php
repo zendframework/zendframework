@@ -14,6 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Form
+ * @subpackage Exception
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
@@ -22,14 +23,12 @@
 namespace Zend\Form\Exception;
 
 /**
- * @uses       Zend\Form\Exception
- * @uses       \InvalidArgumentException
  * @category   Zend
  * @package    Zend_Form
+ * @subpackage Exception
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class DomainException
-    extends \DomainException
-    implements ExceptionInterface
+class DomainException extends \DomainException implements 
+    ExceptionInterface
 {}

@@ -2,8 +2,10 @@
 
 namespace Zend\Amf\Parser\Exception;
 
+use Zend\Amf\Exception;
+
 class RuntimeException
-    extends \RuntimeException
-    implements \Zend\Amf\Parser\Exception
+    extends Exception\RuntimeException
+    implements ExceptionInterface
 {
 }

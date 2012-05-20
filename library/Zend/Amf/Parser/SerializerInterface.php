@@ -14,18 +14,37 @@
  *
  * @category   Zend
  * @package    Zend_Amf
+ * @subpackage Parser
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Amf;
+namespace Zend\Amf\Parser;
 
 /**
- * @category   Zend
+ * Interface for all AMF serializers.
+ *
  * @package    Zend_Amf
+ * @subpackage Parser
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Exception
+interface SerializerInterface
 {
+    /**
+     * Constructor
+     *
+     * @param  OutputStream $stream
+     * @return void
+     */
+    public function __construct(OutputStream $stream);
+
+    /**
+     * Find the PHP object type and convert it into an AMF object type
+     *
+     * @param  mixed $content
+     * @param  int $markerType
+     * @return void
+     */
+    public function writeTypeMarker(&$content, $markerType = null);
 }

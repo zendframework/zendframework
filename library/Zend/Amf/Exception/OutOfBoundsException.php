@@ -2,8 +2,8 @@
 
 namespace Zend\Amf\Exception;
 
-class RuntimeException
-    extends \RuntimeException
+class OutOfBoundsException
+    extends \OutOfBoundsException
     implements ExceptionInterface
 {
 }

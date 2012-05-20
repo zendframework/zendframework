@@ -2,8 +2,10 @@
 
 namespace Zend\Amf\Parser\Exception;
 
+use Zend\Amf\Exception;
+
 class OutOfBoundsException
-    extends \OutOfBoundsException
-    implements \Zend\Amf\Parser\Exception
+    extends Exception\OutOfBoundsException
+    implements ExceptionInterface
 {
 }

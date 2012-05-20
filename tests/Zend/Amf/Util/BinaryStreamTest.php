@@ -35,7 +35,7 @@ use Zend\Amf\Util;
 class BinaryStreamTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @expectedException Zend\Amf\Exception
+     * @expectedException Zend\Amf\Exception\ExceptionInterface
      */
     public function testConstructorShouldThrowExceptionForInvalidStream()
     {
@@ -43,7 +43,7 @@ class BinaryStreamTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Zend\Amf\Exception
+     * @expectedException Zend\Amf\Exception\ExceptionInterface
      */
     public function testReadBytesShouldRaiseExceptionForBufferUnderrun()
     {

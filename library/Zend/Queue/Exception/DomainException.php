@@ -29,6 +29,6 @@ namespace Zend\Queue\Exception;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class DomainException 
-    extends \DomainException implements ExceptionInterface
-{
-}
+    extends \DomainException
+    implements ExceptionInterface
+{}

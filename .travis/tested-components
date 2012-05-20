@@ -33,7 +33,7 @@ Zend/Math
 Zend/Measure
 Zend/Memory
 Zend/Mime
-Zend/Module
+Zend/ModuleManager
 Zend/Mvc
 Zend/Navigation
 Zend/OAuth

@@ -21,6 +21,8 @@
 
 namespace Zend\Mail\Header\Exception;
 
+use Zend\Mail\Exception;
+
 /**
  * @category   Zend
  * @package    Zend_Mail
@@ -29,7 +31,6 @@ namespace Zend\Mail\Header\Exception;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class RuntimeException 
-    extends \RuntimeException 
+    extends Exception\RuntimeException
     implements ExceptionInterface
-{
-}
+{}

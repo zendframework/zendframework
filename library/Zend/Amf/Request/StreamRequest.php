@@ -90,6 +90,7 @@ class StreamRequest implements RequestInterface
      *
      * @param  \Zend\Amf\Parser\InputStream
      * @return \Zend\Amf\Request\StreamRequest
+     * @throws Amf\Exception\RuntimeException
      */
     public function readMessage(Parser\InputStream $stream)
     {
@@ -129,6 +130,7 @@ class StreamRequest implements RequestInterface
      * - DATA Object
      *
      * @return \Zend\Amf\Value\MessageHeader
+     * @throws Amf\Exception\RuntimeException
      */
     public function readHeader()
     {
@@ -150,6 +152,7 @@ class StreamRequest implements RequestInterface
      * Deserialize a message body from the input stream
      *
      * @return \Zend\Amf\Value\MessageBody
+     * @throws Amf\Exception\RuntimeException
      */
     public function readBody()
     {

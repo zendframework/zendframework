@@ -48,7 +48,6 @@ class HttpRequest extends StreamRequest
      * occurs in doing so, or if the AMF body is invalid, the request is declared a
      * fault.
      *
-     * @return void
      */
     public function __construct()
     {

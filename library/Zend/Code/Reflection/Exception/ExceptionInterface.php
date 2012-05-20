@@ -20,13 +20,13 @@
 
 namespace Zend\Code\Reflection\Exception;
 
+use Zend\Code\Exception\ExceptionInterface as Exception;
+
 /**
  * @category   Zend
  * @package    Zend_Reflection
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface ExceptionInterface
-{
-
-}
+interface ExceptionInterface extends Exception
+{}

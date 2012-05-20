@@ -9,6 +9,8 @@
  */
 namespace Zend\Crypt\PublicKey\Rsa\Exception;
 
+use Zend\Crypt\Exception;
+
 /**
  * Invalid argument exception
  *
@@ -19,7 +21,6 @@ namespace Zend\Crypt\PublicKey\Rsa\Exception;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class InvalidArgumentException
-    extends \InvalidArgumentException
+    extends Exception\InvalidArgumentException
     implements ExceptionInterface
-{
-}
+{}

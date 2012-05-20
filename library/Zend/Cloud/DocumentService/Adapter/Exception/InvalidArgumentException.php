@@ -13,7 +13,8 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Cloud_DocumentService_Adapter
+ * @package    Zend_Cloud
+ * @subpackage DocumentService_Adapter
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -22,7 +23,13 @@ namespace Zend\Cloud\DocumentService\Adapter\Exception;
 
 use Zend\Cloud\DocumentService\Exception;
 
-class InvalidArgumentException
-    extends Exception\InvalidArgumentException
-    implements ExceptionInterface
+/**
+ * @category   Zend
+ * @package    Zend_Cloud
+ * @subpackage DocumentService_Adapter
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
+class InvalidArgumentException extends Exception\InvalidArgumentException implements 
+    ExceptionInterface
 {}

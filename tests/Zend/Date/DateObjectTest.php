@@ -109,7 +109,7 @@ class DateObjectTest extends \PHPUnit_Framework_TestCase
         try {
             $date = new Date("notimestamp");
             $this->fail("exception expected");
-        } catch (\Zend\Date\Exception $e) {
+        } catch (\Zend\Date\Exception\ExceptionInterface $e) {
             // success
         }
     }
@@ -141,7 +141,7 @@ class DateObjectTest extends \PHPUnit_Framework_TestCase
             $date = new DateObjectTestHelper(Date::now());
             $date->setUnixTimestamp("notimestamp");
             $this->fail("exception expected");
-        } catch (\Zend\Date\Exception $e) {
+        } catch (\Zend\Date\Exception\ExceptionInterface $e) {
             // success
         }
     }
@@ -510,7 +510,7 @@ class DateObjectTest extends \PHPUnit_Framework_TestCase
             if (function_exists('timezone_open')) {
                 $this->fail("exception expected");
             }
-        } catch (\Zend\Date\Exception $e) {
+        } catch (\Zend\Date\Exception\ExceptionInterface $e) {
             $this->assertRegexp('/not a known timezone/i', $e->getMessage());
             //$this->assertSame('Unknown', $e->getOperand());
         }

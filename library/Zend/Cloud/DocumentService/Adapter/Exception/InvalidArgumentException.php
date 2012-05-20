@@ -20,9 +20,9 @@
 
 namespace Zend\Cloud\DocumentService\Adapter\Exception;
 
+use Zend\Cloud\DocumentService\Exception;
+
 class InvalidArgumentException
-    extends \InvalidArgumentException
+    extends Exception\InvalidArgumentException
     implements ExceptionInterface
-{
-    
-}
+{}

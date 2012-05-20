@@ -29,6 +29,6 @@ namespace Zend\Queue\Exception;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class LogicException
-    extends \LogicException implements ExceptionInterface
-{
-}
+    extends \LogicException
+    implements ExceptionInterface
+{}

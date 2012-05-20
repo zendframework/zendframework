@@ -21,7 +21,7 @@
 
 
 namespace Zend\Loader\Exception;
-require_once __DIR__ . '/../Exception.php';
+require_once __DIR__ . '/ExceptionInterface.php';
 use Zend\Loader\Exception;
 
 /**
@@ -33,6 +33,5 @@ use Zend\Loader\Exception;
  */
 class InvalidArgumentException
     extends \InvalidArgumentException
-    implements Exception
-{
-}
+    implements ExceptionInterface
+{}

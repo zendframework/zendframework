@@ -8,7 +8,6 @@
  * @package   Zend_Db
  */
 
-
 namespace Zend\Db\TableGateway\Feature;
 
 use Zend\EventManager\EventManagerInterface,

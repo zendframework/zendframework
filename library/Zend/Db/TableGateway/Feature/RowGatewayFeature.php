@@ -31,10 +31,10 @@ class RowGatewayFeature extends AbstractFeature
             if (is_string($args[0])) {
                 $primaryKey = $args[0];
                 $rowGatewayPrototype = new RowGateway($primaryKey, $this->tableGateway->table, $this->tableGateway->adapter, $this->tableGateway->sql);
-                $this->tableGateway->selectResultPrototype->setRowObjectPrototype($rowGatewayPrototype);
+                $this->tableGateway->resultSetPrototype->setRowObjectPrototype($rowGatewayPrototype);
             } elseif ($args[0] instanceof RowGatewayInterface) {
                 $rowGatewayPrototype = $args[0];
-                $this->tableGateway->selectResultPrototype->setRowObjectPrototype($rowGatewayPrototype);
+                $this->tableGateway->resultSetPrototype->setRowObjectPrototype($rowGatewayPrototype);
             }
         } else {
             // get from metadata feature
@@ -46,7 +46,7 @@ class RowGatewayFeature extends AbstractFeature
             }
             $primaryKey = $metadata->sharedData['metadata']['primaryKey'];
             $rowGatewayPrototype = new RowGateway($primaryKey, $this->tableGateway->table, $this->tableGateway->adapter, $this->tableGateway->sql);
-            $this->tableGateway->selectResultPrototype->setRowObjectPrototype($rowGatewayPrototype);
+            $this->tableGateway->resultSetPrototype->setRowObjectPrototype($rowGatewayPrototype);
         }
     }
 

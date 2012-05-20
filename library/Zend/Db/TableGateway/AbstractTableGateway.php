@@ -52,19 +52,19 @@ abstract class AbstractTableGateway implements TableGatewayInterface
     protected $columns = array();
 
     /**
+     * @var Feature\FeatureSet
+     */
+    protected $featureSet = null;
+
+    /**
      * @var ResultSet
      */
-    protected $selectResultPrototype = null;
+    protected $resultSetPrototype = null;
 
     /**
      * @var Sql\Sql
      */
     protected $sql = null;
-
-    /**
-     * @var Feature\FeatureSet
-     */
-    protected $featureSet = null;
 
     /**
      *
@@ -106,8 +106,8 @@ abstract class AbstractTableGateway implements TableGatewayInterface
             throw new Exception\RuntimeException('This table object does not have a valid table set.');
         }
 
-        if (!$this->selectResultPrototype instanceof ResultSet) {
-            $this->selectResultPrototype = new ResultSet;
+        if (!$this->resultSetPrototype instanceof ResultSet) {
+            $this->resultSetPrototype = new ResultSet;
         }
 
         if (!$this->sql instanceof Sql) {
@@ -148,21 +148,29 @@ abstract class AbstractTableGateway implements TableGatewayInterface
     }
 
     /**
-     * Get select result prototype
-     *
-     * @return ResultSet
-     */
-    public function getSelectResultPrototype()
-    {
-        return $this->selectResultPrototype;
-    }
-
-    /**
      * @return Feature\FeatureSet
      */
     public function getFeatureSet()
     {
         return $this->featureSet;
+    }
+
+    /**
+     * Get select result prototype
+     *
+     * @return ResultSet
+     */
+    public function getResultSetPrototype()
+    {
+        return $this->resultSetPrototype;
+    }
+
+    /**
+     * @return Sql
+     */
+    public function getSql()
+    {
+        return $this->sql;
     }
 
     /**
@@ -213,6 +221,11 @@ abstract class AbstractTableGateway implements TableGatewayInterface
             throw new \RuntimeException('The table name of the provided select object must match that of the table');
         }
 
+        if ($selectState['columns'] == array(Select::SQL_STAR)
+            && $this->columns !== array()) {
+            $select->columns($this->columns);
+        }
+
         // apply preSelect features
         $this->featureSet->apply('preSelect', array($select));
 
@@ -221,7 +234,7 @@ abstract class AbstractTableGateway implements TableGatewayInterface
         $result = $statement->execute();
 
         // build result set
-        $resultSet = clone $this->selectResultPrototype;
+        $resultSet = clone $this->resultSetPrototype;
         $resultSet->setDataSource($result);
 
         // apply postSelect features
@@ -243,7 +256,7 @@ abstract class AbstractTableGateway implements TableGatewayInterface
         }
         $insert = $this->sql->insert();
         $insert->values($set);
-        $this->executeInsert($insert);
+        return $this->executeInsert($insert);
     }
 
     /**
@@ -259,6 +272,8 @@ abstract class AbstractTableGateway implements TableGatewayInterface
     }
 
     /**
+     * @todo add $columns support
+     *
      * @param Insert $insert
      * @return mixed
      * @throws Exception\RuntimeException
@@ -315,6 +330,8 @@ abstract class AbstractTableGateway implements TableGatewayInterface
     }
 
     /**
+     * @todo add $columns support
+     *
      * @param Update $update
      * @return mixed
      * @throws Exception\RuntimeException
@@ -369,6 +386,8 @@ abstract class AbstractTableGateway implements TableGatewayInterface
     }
 
     /**
+     * @todo add $columns support
+     *
      * @param Delete $delete
      * @return mixed
      * @throws Exception\RuntimeException
@@ -448,7 +467,7 @@ abstract class AbstractTableGateway implements TableGatewayInterface
         if ($this->featureSet->canCallMagicCall($method)) {
             return $this->featureSet->callMagicCall($method, $arguments);
         }
-        throw new Exception\InvalidArgumentException('Invalid magic property access in ' . __CLASS__ . '::__set()');
+        throw new Exception\InvalidArgumentException('Invalid method (' . $method . ') called, caught by ' . __CLASS__ . '::__call()');
     }
 
     /**
@@ -456,7 +475,7 @@ abstract class AbstractTableGateway implements TableGatewayInterface
      */
     public function __clone()
     {
-        $this->selectResultPrototype = (isset($this->selectResultPrototype)) ? clone $this->selectResultPrototype : null;
+        $this->resultSetPrototype = (isset($this->resultSetPrototype)) ? clone $this->resultSetPrototype : null;
         $this->sql = clone $this->sql;
         if (is_object($this->table)) {
             $this->table = clone $this->table;

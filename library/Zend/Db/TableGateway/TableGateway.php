@@ -32,7 +32,7 @@ class TableGateway extends AbstractTableGateway
      * @param ResultSet $selectResultPrototype
      * @param Sql\Sql $selectResultPrototype
      */
-    public function __construct($table, Adapter $adapter, $features = null, ResultSet $selectResultPrototype = null, Sql $sql = null)
+    public function __construct($table, Adapter $adapter, $features = null, ResultSet $resultSetPrototype = null, Sql $sql = null)
     {
         // table
         if (!(is_string($table) || $table instanceof TableIdentifier)) {
@@ -43,11 +43,26 @@ class TableGateway extends AbstractTableGateway
         // adapter
         $this->adapter = $adapter;
 
-        // feature set object
-        $this->featureSet = ($featureSet) ?: new Feature\FeatureSet();
+        // process features
+        if ($features !== null) {
+            if ($features instanceof Feature\AbstractFeature) {
+                $features = array($features);
+            }
+            if (is_array($features)) {
+                $this->featureSet = new Feature\FeatureSet($features);
+            } elseif ($features instanceof Feature\FeatureSet) {
+                $this->featureSet = $features;
+            } else {
+                throw new Exception\InvalidArgumentException(
+                    'TableGateway expects $feature to be an instance of an AbstractFeature or a FeatureSet, or an array of AbstractFeatures'
+                );
+            }
+        } else {
+            $this->featureSet = new Feature\FeatureSet();
+        }
 
         // result prototype
-        $this->selectResultPrototype = ($selectResultPrototype) ?: new ResultSet;
+        $this->resultSetPrototype = ($resultSetPrototype) ?: new ResultSet;
 
         // Sql object (factory for select, insert, update, delete)
         $this->sql = ($sql) ?: new Sql($this->adapter, $this->table);

@@ -22,6 +22,8 @@
 
 namespace Zend\Mail\Storage\Exception;
 
+use Zend\Mail\Exception;
+
 /**
  * Exception for Zend_Mail component.
  *
@@ -32,7 +34,6 @@ namespace Zend\Mail\Storage\Exception;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class OutOfBoundsException
-    extends \OutOfBoundsException
+    extends Exception\OutOfBoundsException
     implements ExceptionInterface
-{
-}
+{}

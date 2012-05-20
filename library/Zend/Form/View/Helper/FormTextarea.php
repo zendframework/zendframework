@@ -21,8 +21,8 @@
 
 namespace Zend\Form\View\Helper;
 
-use Zend\Form\ElementInterface;
-use Zend\Form\Exception;
+use Zend\Form\ElementInterface,
+    Zend\Form\Exception;
 
 /**
  * @category   Zend

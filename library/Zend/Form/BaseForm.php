@@ -61,7 +61,7 @@ class BaseForm extends Fieldset implements FormInterface
     /**
      * Data being validated
      * 
-     * @var null|array|\Traversable
+     * @var null|array|Traversable
      */
     protected $data;
  

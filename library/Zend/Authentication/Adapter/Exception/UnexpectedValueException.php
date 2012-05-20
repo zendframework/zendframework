@@ -2,8 +2,10 @@
 
 namespace Zend\Authentication\Adapter\Exception;
 
+use Zend\Authentication\Exception;
+
 class UnexpectedValueException
-    extends \UnexpectedValueException
+    extends Exception\UnexpectedValueException
     implements ExceptionInterface
 {
 }

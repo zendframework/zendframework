@@ -95,7 +95,7 @@ class AutoloaderMultiVersionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Zend_Loader_Exception
+     * @expectedException Zend\Loader\Exception\ExceptionInterface
      */
     public function testSettingZfPathFailsOnInvalidVersionString()
     {
@@ -103,7 +103,7 @@ class AutoloaderMultiVersionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Zend_Loader_Exception
+     * @expectedException Zend\Loader\Exception\ExceptionInterface
      */
     public function testSettingZfPathFailsWhenBasePathDoesNotExist()
     {
@@ -111,7 +111,7 @@ class AutoloaderMultiVersionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Zend_Loader_Exception
+     * @expectedException Zend\Loader\Exception\ExceptionInterface
      */
     public function testSettingZfVersionFailsWhenNoValidInstallsDiscovered()
     {

@@ -85,7 +85,7 @@ class ClassMapAutoloaderTest extends \PHPUnit_Framework_TestCase
     public function testAllowsRegisteringArrayAutoloadMapDirectly()
     {
         $map = array(
-            'Zend\Loader\Exception' => __DIR__ . '/../../../library/Zend/Loader/Exception.php',
+            'Zend\Loader\Exception\ExceptionInterface' => __DIR__ . '/../../../library/Zend/Loader/Exception/ExceptionInterface.php',
         );
         $this->loader->registerAutoloadMap($map);
         $test = $this->loader->getAutoloadMap();
@@ -95,7 +95,7 @@ class ClassMapAutoloaderTest extends \PHPUnit_Framework_TestCase
     public function testAllowsRegisteringArrayAutoloadMapViaConstructor()
     {
         $map = array(
-            'Zend\Loader\Exception' => __DIR__ . '/../../../library/Zend/Loader/Exception.php',
+            'Zend\Loader\Exception\ExceptionInterface' => __DIR__ . '/../../../library/Zend/Loader/Exception/ExceptionInterface.php',
         );
         $loader = new ClassMapAutoloader(array($map));
         $test = $loader->getAutoloadMap();
@@ -119,7 +119,7 @@ class ClassMapAutoloaderTest extends \PHPUnit_Framework_TestCase
     public function testRegisteringMultipleMapsMergesThem()
     {
         $map = array(
-            'Zend\Loader\Exception' => __DIR__ . '/../../../library/Zend/Loader/Exception.php',
+            'Zend\Loader\Exception\ExceptionInterface' => __DIR__ . '/../../../library/Zend/Loader/Exception/ExceptionInterface.php',
             'ZendTest\Loader\StandardAutoloaderTest' => 'some/bogus/path.php',
         );
         $this->loader->registerAutoloadMap($map);
@@ -134,7 +134,7 @@ class ClassMapAutoloaderTest extends \PHPUnit_Framework_TestCase
     public function testCanRegisterMultipleMapsAtOnce()
     {
         $map = array(
-            'Zend\Loader\Exception' => __DIR__ . '/../../../library/Zend/Loader/Exception.php',
+            'Zend\Loader\Exception\ExceptionInterface' => __DIR__ . '/../../../library/Zend/Loader/Exception/ExceptionInterface.php',
             'ZendTest\Loader\StandardAutoloaderTest' => 'some/bogus/path.php',
         );
         $maps = array($map, __DIR__ . '/_files/goodmap.php');

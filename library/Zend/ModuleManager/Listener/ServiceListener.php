@@ -40,9 +40,28 @@ use Zend\Stdlib\ArrayUtils;
 class ServiceListener implements ListenerAggregateInterface
 {
     /**
+     * @var bool
+     */
+    protected $configured = false;
+
+    /**
      * @var \Zend\Stdlib\CallbackHandler[]
      */
     protected $listeners = array();
+
+    /**
+     * Service configuration
+     * 
+     * @var array
+     */
+    protected $serviceConfig = array(
+        'abstract_factories' => array(),
+        'aliases'            => array(),
+        'factories'          => array(),
+        'invokables'         => array(),
+        'services'           => array(),
+        'shared'             => array(),
+    );
 
     /**
      * @var ServiceLocatorInterface
@@ -108,14 +127,15 @@ class ServiceListener implements ListenerAggregateInterface
             $config = ArrayUtils::iteratorToArray($config);
         }
         if (is_array($config)) {
-            $config = new ServiceConfiguration($config);
+            $this->serviceConfig = ArrayUtils::merge($this->serviceConfig, $config);
+            return;
         }
 
         if (!$config instanceof ServiceConfiguration) {
             return;
         }
 
-        $config->configureServiceManager($this->services);
+        $this->mergeServiceConfiguration($config);
     }
 
     /**
@@ -138,7 +158,50 @@ class ServiceListener implements ListenerAggregateInterface
         ) {
             return;
         }
-        $serviceConfig  = new ServiceConfiguration($config['service_manager']);
+
+        $this->serviceConfig = ArrayUtils::merge($this->serviceConfig, $config['service_manager']);
+
+        $this->configureServiceManager();
+    }
+
+    /**
+     * Configure the service manager
+     *
+     * Configures the service manager based on the internal, merged
+     * service configuration.
+     * 
+     * @return void
+     */
+    public function configureServiceManager()
+    {
+        if ($this->configured) {
+            // Don't configure twice
+            return;
+        }
+        $serviceConfig = new ServiceConfiguration($this->serviceConfig);
         $serviceConfig->configureServiceManager($this->services);
+        $this->configured = true;
+    }
+
+    /**
+     * Merge a service configuration container
+     *
+     * Extracts the various service configuration arrays, and then merges with
+     * the internal service configuration.
+     * 
+     * @param  ServiceConfiguration $config 
+     * @return void
+     */
+    protected function mergeServiceConfiguration(ServiceConfiguration $config)
+    {
+        $serviceConfig = array(
+            'abstract_factories' => $config->getAbstractFactories(),
+            'aliases'            => $config->getAliases(),
+            'factories'          => $config->getFactories(),
+            'invokables'         => $config->getInvokables(),
+            'services'           => $config->getServices(),
+            'shared'             => $config->getShared(),
+        );
+        $this->serviceConfig = ArrayUtils::merge($this->serviceConfig, $serviceConfig);
     }
 }

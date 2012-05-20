@@ -146,9 +146,10 @@ class ServiceManager implements ServiceLocatorInterface
         }
 
         if ($this->allowOverride === false && $this->has($name)) {
-            throw new Exception\InvalidServiceNameException(
-                'A service by this name or alias already exists and cannot be overridden, please use an alternate name.'
-            );
+            throw new Exception\InvalidServiceNameException(sprintf(
+                'A service by the name or alias "%s" already exists and cannot be overridden, please use an alternate name',
+                $name
+            ));
         }
 
         $this->factories[$name] = $factory;

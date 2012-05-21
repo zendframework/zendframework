@@ -421,7 +421,8 @@ class ApplicationTest extends TestCase
     {
         $this->serviceManager->get('ControllerLoader');
         $this->setupBadController(false);
-        $this->serviceManager->setFactory('bad', function() {
+        $controllerLoader = $this->serviceManager->get('ControllerLoader');
+        $controllerLoader->setFactory('bad', function() {
             return new stdClass;
         });
         $response = $this->application->getResponse();

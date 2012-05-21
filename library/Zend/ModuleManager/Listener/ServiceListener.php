@@ -123,19 +123,22 @@ class ServiceListener implements ListenerAggregateInterface
         }
 
         $config = $module->getServiceConfiguration();
+
+        if ($config instanceof ServiceConfiguration) {
+            $this->mergeServiceConfiguration($config);
+            return;
+        }
+
         if ($config instanceof Traversable) {
             $config = ArrayUtils::iteratorToArray($config);
         }
-        if (is_array($config)) {
-            $this->serviceConfig = ArrayUtils::merge($this->serviceConfig, $config);
+
+        if (!is_array($config)) {
+            // If we don't have an array by this point, nothing left to do.
             return;
         }
 
-        if (!$config instanceof ServiceConfiguration) {
-            return;
-        }
-
-        $this->mergeServiceConfiguration($config);
+        $this->serviceConfig = ArrayUtils::merge($this->serviceConfig, $config);
     }
 
     /**

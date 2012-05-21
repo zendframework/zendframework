@@ -21,9 +21,9 @@
 
 namespace Zend\Mvc\Service;
 
-use Zend\View\Strategy\FeedStrategy;
-use Zend\ServiceManager\Exception\ExceptionInterface as ServiceManagerException;
+use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\View\Strategy\FeedStrategy;
 
 /**
  * @category   Zend

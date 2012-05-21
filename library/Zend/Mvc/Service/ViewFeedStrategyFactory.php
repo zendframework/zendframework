@@ -49,10 +49,6 @@ class ViewFeedStrategyFactory implements FactoryInterface
     {
         $feedRenderer = $serviceLocator->get('ViewFeedRenderer');
         $feedStrategy = new FeedStrategy($feedRenderer);
-
-        $view = $serviceLocator->get('View');
-        $view->events()->attach($feedStrategy, 100);
-
         return $feedStrategy;
     }
 }

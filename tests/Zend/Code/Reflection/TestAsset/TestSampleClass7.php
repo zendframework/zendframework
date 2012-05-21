@@ -1,7 +1,15 @@
 <?php
+/**
+ * @author Jeremiah Small <jsmall@soliantconsulting.com>
+ */
 
 namespace ZendTest\Code\Reflection\TestAsset;
 
+/**
+ * This is a sample class docblock
+ *
+ * @myTag blah
+ */
 class TestSampleClass7
 {
     /**

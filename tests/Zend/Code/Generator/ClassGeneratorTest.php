@@ -83,7 +83,7 @@ class ClassGeneratorTest extends \PHPUnit_Framework_TestCase
     public function testPropertyAccessors()
     {
         $classGenerator = new ClassGenerator();
-        $classGenerator->setProperties(array(
+        $classGenerator->addProperties(array(
             'propOne',
             new PropertyGenerator('propTwo')
             ));
@@ -119,7 +119,7 @@ class ClassGeneratorTest extends \PHPUnit_Framework_TestCase
 
         $this->setExpectedException(
             'Zend\Code\Generator\Exception\InvalidArgumentException',
-            'setProperty() expects either a string or an instance of Zend\Code\Generator\PropertyGenerator'
+            'addProperty() expects string for name'
             );
         $classGenerator->addProperty(true);
     }
@@ -127,7 +127,7 @@ class ClassGeneratorTest extends \PHPUnit_Framework_TestCase
     public function testMethodAccessors()
     {
         $classGenerator = new ClassGenerator();
-        $classGenerator->setMethods(array(
+        $classGenerator->addMethods(array(
             'methodOne',
             new MethodGenerator('methodTwo')
             ));
@@ -151,7 +151,7 @@ class ClassGeneratorTest extends \PHPUnit_Framework_TestCase
 
         $this->setExpectedException(
             'Zend\Code\Generator\Exception\ExceptionInterface',
-            'setMethod() expects either a string method name or an instance of Zend\Code\Generator\MethodGenerator'
+            'addMethod() expects string for name'
             );
 
         $classGenerator->addMethod(true);
@@ -165,11 +165,11 @@ class ClassGeneratorTest extends \PHPUnit_Framework_TestCase
         $methodB->setName("foo");
 
         $classGenerator = new ClassGenerator();
-        $classGenerator->setMethod($methodA);
+        $classGenerator->addMethodFromGenerator($methodA);
 
         $this->setExpectedException('Zend\Code\Generator\Exception\InvalidArgumentException', 'A method by name foo already exists in this class.');
 
-        $classGenerator->setMethod($methodB);
+        $classGenerator->addMethodFromGenerator($methodB);
     }
 
     /**
@@ -177,11 +177,8 @@ class ClassGeneratorTest extends \PHPUnit_Framework_TestCase
      */
     public function testHasMethod()
     {
-        $method = new MethodGenerator();
-        $method->setName('methodOne');
-
         $classGenerator = new ClassGenerator();
-        $classGenerator->setMethod($method);
+        $classGenerator->addMethod('methodOne');
 
         $this->assertTrue($classGenerator->hasMethod('methodOne'));
     }
@@ -191,11 +188,8 @@ class ClassGeneratorTest extends \PHPUnit_Framework_TestCase
      */
     public function testHasProperty()
     {
-        $property = new PropertyGenerator();
-        $property->setName('propertyOne');
-
         $classGenerator = new ClassGenerator();
-        $classGenerator->setProperty($property);
+        $classGenerator->addProperty('propertyOne');
 
         $this->assertTrue($classGenerator->hasProperty('propertyOne'));
     }

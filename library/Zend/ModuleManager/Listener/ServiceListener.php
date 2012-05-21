@@ -155,14 +155,12 @@ class ServiceListener implements ListenerAggregateInterface
     {
         $configListener = $e->getConfigListener();
         $config         = $configListener->getMergedConfig(false);
-        if (!isset($config['service_manager'])
-            || !is_array($config['service_manager'])
-            || empty($config['service_manager'])
+        if (isset($config['service_manager'])
+            && is_array($config['service_manager'])
+            && !empty($config['service_manager'])
         ) {
-            return;
+            $this->serviceConfig = ArrayUtils::merge($this->serviceConfig, $config['service_manager']);
         }
-
-        $this->serviceConfig = ArrayUtils::merge($this->serviceConfig, $config['service_manager']);
 
         $this->configureServiceManager();
     }

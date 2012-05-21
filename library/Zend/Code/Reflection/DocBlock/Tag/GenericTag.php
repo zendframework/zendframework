@@ -104,6 +104,7 @@ class GenericTag implements TagInterface
 
     protected function parse($docBlockLine)
     {
+        $this->content = trim($docBlockLine);
         $this->values = explode($this->contentSplitCharacter, $docBlockLine);
     }
 

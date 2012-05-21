@@ -490,7 +490,7 @@ class ViewManager implements ListenerAggregateInterface
 
             $listener = $this->services->get($strategy);
             if ($listener instanceof ListenerAggregateInterface) {
-                $view->attach($listener, 100);
+                $view->events()->attach($listener, 100);
             }
         }
     }

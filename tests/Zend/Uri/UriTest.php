@@ -385,8 +385,20 @@ class UriTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($uri->isValid());
     }
 
+	/**
+     * Test that valid relative URIs pass validation
+     *
+     * @param string $uriString
+     * @dataProvider validRelativeUriStringProvider
+     */
+    public function testValidRelativeUriIsValid($uriString)
+    {
+        $uri = new Uri($uriString);
+        $this->assertTrue($uri->isValidRelative());
+    }
+
     /**
-     * Test that invalid URIs pass validation
+     * Test that invalid URIs fail validation
      *
      * @param \Zend\Uri\Uri $uri
      * @dataProvider invalidUriObjectProvider
@@ -394,6 +406,17 @@ class UriTest extends \PHPUnit_Framework_TestCase
     public function testInvalidUriIsInvalid(Uri $uri)
     {
         $this->assertFalse($uri->isValid());
+    }
+
+	/**
+     * Test that invalid relative URIs fail validation
+     *
+     * @param \Zend\Uri\Uri $uri
+     * @dataProvider invalidRelativeUriObjectProvider
+     */
+    public function testInvalidRelativeUriIsInvalid(Uri $uri)
+    {
+        $this->assertFalse($uri->isValidRelative());
     }
 
     /**
@@ -819,6 +842,21 @@ class UriTest extends \PHPUnit_Framework_TestCase
         );
     }
 
+	/**
+     * Data provider for valid relative URIs, not necessarily complete
+     *
+     * @return array
+     */
+    static public function validRelativeUriStringProvider()
+    {
+        return array(
+            array('foo/bar?query'),
+            array('../relative/path'),
+            array('?queryOnly'),
+            array('#fragmentOnly'),
+        );
+    }
+
     /**
      * Valid schemes
      *
@@ -918,6 +956,46 @@ class UriTest extends \PHPUnit_Framework_TestCase
             array($obj2),
             array($obj3),
             array($obj4)
+        );
+    }
+
+	/**
+     * Data provider for invalid relative URI objects
+     *
+     * @return array
+     */
+    static public function invalidRelativeUriObjectProvider()
+    {
+        // Empty URI is not valid
+        $obj1 = new Uri;
+
+        // Path cannot begin with '//'
+        $obj2 = new Uri;
+        $obj2->setPath('//path');
+
+        // A object with port
+        $obj3 = new Uri;
+        $obj3->setPort(123);
+
+        // A object with userInfo
+        $obj4 = new Uri;
+        $obj4->setUserInfo('shahar:password');
+
+        // A object with scheme
+        $obj5 = new Uri;
+        $obj5->setScheme('https');
+
+        // A object with host
+        $obj6 = new Uri;
+        $obj6->setHost('example.com');
+
+        return array(
+            array($obj1),
+            array($obj2),
+            array($obj3),
+            array($obj4),
+            array($obj5),
+            array($obj6)
         );
     }
 

@@ -37,7 +37,7 @@ class ReflectionDocBlockTagTest extends \PHPUnit_Framework_TestCase
 {
     public function testTagDescriptionIsReturned()
     {
-        $this->markTestIncomplete('DocBlock Tag not completed yet');
+//         $this->markTestIncomplete('DocBlock Tag not completed yet');
 
         $classReflection = new Reflection\ClassReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass5');
 
@@ -47,7 +47,7 @@ class ReflectionDocBlockTagTest extends \PHPUnit_Framework_TestCase
 
     public function testTagShouldAllowJustTagNameInDocBlockTagLine()
     {
-        $this->markTestIncomplete('DocBlock Tag not completed yet');
+//         $this->markTestIncomplete('DocBlock Tag not completed yet');
 
         $classReflection = new Reflection\ClassReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass6');
 
@@ -57,17 +57,17 @@ class ReflectionDocBlockTagTest extends \PHPUnit_Framework_TestCase
 
     public function testTagShouldAllowMultipleWhitespacesBeforeDescription()
     {
-        $this->markTestIncomplete('DocBlock Tag not completed yet');
+//         $this->markTestIncomplete('DocBlock Tag not completed yet');
         $classReflection = new Reflection\ClassReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass6');
 
         $tag = $classReflection->getMethod('doSomething')->getDocBlock()->getTag('descriptionTag');
-        $this->assertEquals('          A tag with just a description', $tag->getDescription(), 'Final Match Failed');
-        $this->assertEquals('A tag with just a description', $tag->getDescription('trimWhitespace'), 'Final Match Failed');
+        $this->assertNotEquals('          A tag with just a description', $tag->getContent(), 'Final Match Failed');
+        $this->assertEquals('A tag with just a description', $tag->getContent(), 'Final Match Failed');
     }
 
     public function testToString()
     {
-        $this->markTestIncomplete('DocBlock Tag not completed yet');
+//         $this->markTestIncomplete('DocBlock Tag not completed yet');
 
         $classReflection = new Reflection\ClassReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass6');
 
@@ -98,17 +98,17 @@ class ReflectionDocBlockTagTest extends \PHPUnit_Framework_TestCase
 
     public function testAllowsMultipleSpacesInDocBlockTagLine()
     {
-        $this->markTestIncomplete('DocBlock Tag not completed yet');
+//         $this->markTestIncomplete('DocBlock Tag not completed yet');
 
         $classReflection = new Reflection\ClassReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass6');
 
         $paramTag = $classReflection->getMethod('doSomething')->getDocBlock()->getTag('param');
 
-        $trimOpt = Reflection\ReflectionDocBlockTag::TRIM_WHITESPACE;
+//         $trimOpt = Reflection\ReflectionDocBlockTag::TRIM_WHITESPACE;
         
-        $this->assertEquals($paramTag->getType($trimOpt), 'int', 'Second Match Failed');
-        $this->assertEquals($paramTag->getVariable($trimOpt), '$var', 'Third Match Failed');
-        $this->assertEquals($paramTag->getDescription($trimOpt),'Description of $var', 'Final Match Failed');
+        $this->assertEquals($paramTag->getType(), 'int', 'Second Match Failed');
+        $this->assertEquals($paramTag->getVariableName(), '$var', 'Third Match Failed');
+        $this->assertEquals($paramTag->getDescription(),'Description of $var', 'Final Match Failed');
     }
 
 
@@ -117,16 +117,16 @@ class ReflectionDocBlockTagTest extends \PHPUnit_Framework_TestCase
      */
     public function testNamespaceInParam()
     {
-        $this->markTestIncomplete('DocBlock Tag not completed yet');
+//         $this->markTestIncomplete('DocBlock Tag not completed yet');
 
         $classReflection = new Reflection\ClassReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass7');
         $paramTag        = $classReflection->getMethod('doSomething')->getDocBlock()->getTag('param');
 
-        $trimOpt = Reflection\ReflectionDocBlockTag::TRIM_WHITESPACE;
-
-        $this->assertEquals('Zend\Foo\Bar', $paramTag->getType($trimOpt));
-        $this->assertEquals('$var', $paramTag->getVariable($trimOpt));
-        $this->assertEquals('desc', $paramTag->getDescription($trimOpt));
+//        $trimOpt = Reflection\ReflectionDocBlockTag::TRIM_WHITESPACE;
+        
+        $this->assertEquals('Zend\Foo\Bar', $paramTag->getType());
+        $this->assertEquals('$var', $paramTag->getVariableName());
+        $this->assertEquals('desc', $paramTag->getDescription());
     }
 
     public function testType()

@@ -47,8 +47,8 @@ class ViewFeedStrategyFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        $feednRenderer = $serviceLocator->get('ViewFeedRenderer');
-        $feednStrategy = new FeedStrategy($feedRenderer);
+        $feedRenderer = $serviceLocator->get('ViewFeedRenderer');
+        $feedStrategy = new FeedStrategy($feedRenderer);
 
         $view = $serviceLocator->get('View');
         $view->events()->attach($feedStrategy, 100);

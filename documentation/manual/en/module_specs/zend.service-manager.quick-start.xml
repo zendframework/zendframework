@@ -203,7 +203,7 @@
 
             <programlisting language="php"><![CDATA[
 <?php
-// a module configuration, "module/SomeModule/config/module.php"
+// a module configuration, "module/SomeModule/config/module.config.php"
 return array(
     'service_manager' => array(
         'abstract_factories' => array(

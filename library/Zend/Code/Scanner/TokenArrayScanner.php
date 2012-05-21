@@ -53,9 +53,12 @@ class TokenArrayScanner implements ScannerInterface
         return $this->annotationManager;
     }
 
+    /**
+     * @todo Assignment of $this->docComment should probably be done in scan() 
+     *       and then $this->getDocComment() just retrieves it.
+     */
     public function getDocComment()
     {
-        #FIXME: Assignment of $this->docComment should probably be done in scan() and then $this->getDocComment() just retrieves it.
         foreach ($this->tokens as $token) {
             $type    = $token[0];
             $value   = $token[1];
@@ -227,6 +230,11 @@ class TokenArrayScanner implements ScannerInterface
         // @todo
     }
 
+    /**
+     * @todo: $this->docComment should be assigned for valid docblock during 
+     *        the scan instead of $this->getDocComment() (starting with 
+     *        T_DOC_COMMENT case)
+     */
     protected function scan()
     {
         if ($this->isScanned) {
@@ -328,7 +336,6 @@ class TokenArrayScanner implements ScannerInterface
 
             case T_DOC_COMMENT:
 
-                #FIXME: $this->docComment should be assigned for valid docblock during the scan instead of $this->getDocComment()
                 $MACRO_DOC_COMMENT_START();
                 goto SCANNER_CONTINUE;
 

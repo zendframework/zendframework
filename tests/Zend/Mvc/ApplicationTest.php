@@ -375,11 +375,31 @@ class ApplicationTest extends TestCase
     /**
      * @group error-handling
      */
-    public function testInabilityToRetrieveControllerShouldTriggerDispatchError()
+    public function testInabilityToRetrieveControllerShouldTriggerExceptionError()
     {
         $this->setupBadController(false);
         $controllerLoader = $this->serviceManager->get('ControllerLoader');
         $controllerLoader->setInvokableClass('bad', 'DoesNotExist');
+        $response = $this->application->getResponse();
+        $events   = $this->application->events();
+        $events->attach('dispatch.error', function ($e) use ($response) {
+            $error      = $e->getError();
+            $controller = $e->getController();
+            $response->setContent("Code: " . $error . '; Controller: ' . $controller);
+            return $response;
+        });
+
+        $this->application->run();
+        $this->assertContains(Application::ERROR_EXCEPTION, $response->getContent());
+        $this->assertContains('bad', $response->getContent());
+    }
+
+    /**
+     * @group error-handling
+     */
+    public function testInabilityToRetrieveControllerShouldTriggerDispatchError()
+    {
+        $this->setupBadController(false);
         $response = $this->application->getResponse();
         $events   = $this->application->events();
         $events->attach('dispatch.error', function ($e) use ($response) {

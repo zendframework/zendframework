@@ -24,7 +24,8 @@ use ArrayObject;
 use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateInterface;
 use Zend\ServiceManager\ServiceManager;
-use Zend\ServiceManager\Exception\ExceptionInterface as InstanceException;
+use Zend\ServiceManager\Exception\ServiceNotFoundException;
+use Zend\ServiceManager\Exception\ServiceNotCreatedException;
 use Zend\Stdlib\ArrayUtils;
 use Zend\Stdlib\DispatchableInterface;
 
@@ -99,16 +100,31 @@ class DispatchListener implements ListenerAggregateInterface
 
         $exception = false;
         try {
-            $controller = $controllerLoader->get($controllerName);
-            $wasLoaded  = true;
-        } catch (\Exception $exception) {
-            $wasLoaded =false;
+            try {
+                $controller = $controllerLoader->get($controllerName);
+                $wasLoaded  = true;
+            } catch (ServiceNotFoundException $exception) {
+                $wasLoaded =false;
+            }
+        } catch (ServiceNotCreatedException $exception) {
+            $error = clone $e;
+            $error->setError($application::ERROR_EXCEPTION)
+                  ->setController($controllerName)
+                  ->setParam('exception', $exception);
+            $results = $events->trigger('dispatch.error', $error);
+            if (count($results)) {
+                $return  = $results->last();
+            } else {
+                $return = $error->getParams();
+            }
+            return $this->complete($return, $e);
         }
 
         if (!$wasLoaded) {
             $error = clone $e;
             $error->setError($application::ERROR_CONTROLLER_NOT_FOUND)
                   ->setController($controllerName)
+                  ->setControllerClass('invalid controller class or alias: '.$controllerName)
                   ->setParam('exception', $exception);
 
             $results = $events->trigger('dispatch.error', $error);

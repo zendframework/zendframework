@@ -101,16 +101,6 @@ class AbstractTableGatewayTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($this->mockAdapter, $this->table->getAdapter());
     }
 
-//    /**
-//     * @covers Zend\Db\TableGateway\AbstractTableGateway::setSelectResultPrototype
-//     */
-//    public function testSetSelectResultPrototype()
-//    {
-//        $resultSet = new ResultSet;
-//        $this->table->setSelectResultPrototype($resultSet);
-//        $this->assertSame($resultSet, $this->table->getSelectResultPrototype());
-//    }
-
     /**
      * @covers Zend\Db\TableGateway\AbstractTableGateway::getSql
      */
@@ -120,7 +110,7 @@ class AbstractTableGatewayTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Zend\Db\TableGateway\AbstractTableGateway::getSelectResultPrototype
+     * @covers Zend\Db\TableGateway\AbstractTableGateway::getResultSetPrototype
      */
     public function testGetSelectResultPrototype()
     {
@@ -130,6 +120,7 @@ class AbstractTableGatewayTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers Zend\Db\TableGateway\AbstractTableGateway::select
      * @covers Zend\Db\TableGateway\AbstractTableGateway::selectWith
+     * @covers Zend\Db\TableGateway\AbstractTableGateway::executeSelect
      */
     public function testSelectWithNoWhere()
     {
@@ -143,6 +134,7 @@ class AbstractTableGatewayTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers Zend\Db\TableGateway\AbstractTableGateway::select
      * @covers Zend\Db\TableGateway\AbstractTableGateway::selectWith
+     * @covers Zend\Db\TableGateway\AbstractTableGateway::executeSelect
      */
     public function testSelectWithWhereString()
     {
@@ -165,6 +157,8 @@ class AbstractTableGatewayTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Zend\Db\TableGateway\AbstractTableGateway::insert
+     * @covers Zend\Db\TableGateway\AbstractTableGateway::insertWith
+     * @covers Zend\Db\TableGateway\AbstractTableGateway::executeInsert
      */
     public function testInsert()
     {
@@ -185,6 +179,8 @@ class AbstractTableGatewayTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Zend\Db\TableGateway\AbstractTableGateway::update
+     * @covers Zend\Db\TableGateway\AbstractTableGateway::updateWith
+     * @covers Zend\Db\TableGateway\AbstractTableGateway::executeUpdate
      */
     public function testUpdate()
     {
@@ -200,6 +196,8 @@ class AbstractTableGatewayTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Zend\Db\TableGateway\AbstractTableGateway::delete
+     * @covers Zend\Db\TableGateway\AbstractTableGateway::deleteWith
+     * @covers Zend\Db\TableGateway\AbstractTableGateway::executeDelete
      */
     public function testDelete()
     {

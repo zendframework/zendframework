@@ -50,10 +50,11 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $this->_server->setProduction(false);
         Parser\TypeLoader::resetMap();
         Session\Container::setDefaultManager(null);
-        $this->session = new \ZendTest\Session\TestAsset\TestManager(array(
+        $config = new Session\Configuration\StandardConfiguration(array(
             'class'   => 'Zend\\Session\\Configuration\\StandardConfiguration',
             'storage' => 'Zend\\Session\\Storage\\ArrayStorage',
         ));
+        $this->session = new \ZendTest\Session\TestAsset\TestManager($config);
         Session\Container::setDefaultManager($this->session);
     }
 

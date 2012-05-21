@@ -215,7 +215,7 @@ return array(
         'aliases' => array(
             // Aliasing a FQCN to a service name
             'SomeModule\Model\User' => 'User',
-            // Aliasing a short name to a known service name
+            // Aliasing a name to a known service name
             'AdminUser' => 'User',
             // Aliasing to an alias
             'SuperUser' => 'AdminUser',
@@ -297,7 +297,7 @@ class Module
             'aliases' => array(
                 // Aliasing a FQCN to a service name
                 'SomeModule\Model\User' => 'User',
-                // Aliasing a short name to a known service name
+                // Aliasing a name to a known service name
                 'AdminUser' => 'User',
                 // Aliasing to an alias
                 'SuperUser' => 'AdminUser',

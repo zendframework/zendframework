@@ -21,6 +21,7 @@
 
 namespace Zend\Mvc\Service;
 
+use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\View\Renderer\JsonRenderer;
 

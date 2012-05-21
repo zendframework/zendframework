@@ -21,9 +21,9 @@
 
 namespace Zend\Mvc\Service;
 
-use Zend\View\Strategy\FeedStrategy;
-use Zend\ServiceManager\Exception\ExceptionInterface as ServiceManagerException;
+use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\View\Strategy\FeedStrategy;
 
 /**
  * @category   Zend
@@ -47,8 +47,8 @@ class ViewFeedStrategyFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        $feednRenderer = $serviceLocator->get('ViewFeedRenderer');
-        $feednStrategy = new FeedStrategy($feedRenderer);
+        $feedRenderer = $serviceLocator->get('ViewFeedRenderer');
+        $feedStrategy = new FeedStrategy($feedRenderer);
 
         $view = $serviceLocator->get('View');
         $view->events()->attach($feedStrategy, 100);

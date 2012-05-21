@@ -20,11 +20,14 @@
  */
 
 namespace Zend\Amf\Parser\Amf3;
+
 use Zend\Amf\Parser\AbstractSerializer,
     Zend\Amf,
     Zend\Amf\Parser,
     Zend\Amf\Value,
-    Zend\Date;
+    Zend\Date,
+    DOMDocument,
+    SimpleXMLElement;
 
 /**
  * Detect PHP object type and convert it to a corresponding AMF3 object type
@@ -64,6 +67,7 @@ class Serializer extends AbstractSerializer
      * @param  mixed $data
      * @param  int $markerType
      * @param  mixed $dataByVal
+     * @throws Parser\Exception\ExceptionInterface
      * @return void
      */
     public function writeTypeMarker(&$data, $markerType = null, $dataByVal = false)
@@ -149,7 +153,7 @@ class Serializer extends AbstractSerializer
                         $markerType = Amf\Constants::AMF3_DATE;
                     } else if ($data instanceof Value\ByteArray) {
                         $markerType = Amf\Constants::AMF3_BYTEARRAY;
-                    } else if (($data instanceof \DOMDocument) || ($data instanceof \SimpleXMLElement)) {
+                    } else if (($data instanceof DOMDocument) || ($data instanceof SimpleXMLElement)) {
                         $markerType = Amf\Constants::AMF3_XMLSTRING;
                     } else {
                         $markerType = Amf\Constants::AMF3_OBJECT;
@@ -166,7 +170,7 @@ class Serializer extends AbstractSerializer
      * Write an AMF3 integer
      *
      * @param int|float $data
-     * @return Zend\Amf\Parser\Amf3\Serializer
+     * @return Serializer
      */
     public function writeInteger($int)
     {
@@ -200,7 +204,7 @@ class Serializer extends AbstractSerializer
      * The string is prepended with strlen($string) << 1 | 0x01
      *
      * @param  string $string
-     * @return Zend\Amf\Parser\Amf3\Serializer
+     * @return Serializer
      */
     protected function writeBinaryString(&$string)
     {
@@ -241,7 +245,8 @@ class Serializer extends AbstractSerializer
      * Send ByteArray to output stream
      *
      * @param  string|\Zend\Amf\Value\ByteArray  $data
-     * @return Zend\Amf\Parser\Amf3\Serializer
+     * @return Serializer
+     * @throws Parser\Exception\OutOfBoundsException
      */
     public function writeByteArray(&$data)
     {
@@ -266,7 +271,8 @@ class Serializer extends AbstractSerializer
      * Send xml to output stream
      *
      * @param  DOMDocument|SimpleXMLElement  $xml
-     * @return Zend\Amf\Parser\Amf3\Serializer
+     * @return Serializer
+     * @throws Parser\Exception\OutOfBoundsException
      */
     public function writeXml($xml)
     {
@@ -276,9 +282,9 @@ class Serializer extends AbstractSerializer
 
         if (is_string($xml)) {
             //nothing to do
-        } elseif ($xml instanceof \DOMDocument) {
+        } elseif ($xml instanceof DOMDocument) {
             $xml = $xml->saveXml();
-        } elseif ($xml instanceof \SimpleXMLElement) {
+        } elseif ($xml instanceof SimpleXMLElement) {
             $xml = $xml->asXML();
         } else {
             throw new Parser\Exception\OutOfBoundsException('Invalid xml specified; must be a DOMDocument or SimpleXMLElement');
@@ -292,8 +298,9 @@ class Serializer extends AbstractSerializer
     /**
      * Convert DateTime/Zend_Date to AMF date
      *
-     * @param  DateTime|\Zend\Date\Date $date
-     * @return Zend\Amf\Parser\Amf3\Serializer
+     * @param  \DateTime|\Zend\Date\Date $date
+     * @return Serializer
+     * @throws Parser\Exception\OutOfBoundsException
      */
     public function writeDate($date)
     {
@@ -319,7 +326,7 @@ class Serializer extends AbstractSerializer
      * Write a PHP array back to the amf output stream
      *
      * @param array $array
-     * @return Zend\Amf\Parser\Amf3\Serializer
+     * @return Serializer
      */
     public function writeArray(&$array)
     {
@@ -382,7 +389,8 @@ class Serializer extends AbstractSerializer
      * Write object to ouput stream
      *
      * @param  mixed $data
-     * @return Zend\Amf\Parser\Amf3\Serializer
+     * @return Serializer
+     * @throws Parser\Exception\OutOfBoundsException
      */
     public function writeObject($object)
     {

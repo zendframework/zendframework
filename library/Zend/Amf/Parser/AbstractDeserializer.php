@@ -39,14 +39,14 @@ abstract class AbstractDeserializer implements DeserializerInterface
     /**
      * The raw string that represents the AMF request.
      *
-     * @var Zend\Amf\Parser\InputStream
+     * @var InputStream
      */
     protected $_stream;
 
     /**
      * Constructor
      *
-     * @param  Zend\Amf\Parser\InputStream $stream
+     * @param  InputStream $stream
      * @return void
      */
     public function __construct(InputStream $stream)

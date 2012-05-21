@@ -41,7 +41,7 @@ abstract class AbstractSerializer implements SerializerInterface
     /**
      * Constructor
      *
-     * @param  Zend\Amf\Parser\OutputStream $stream
+     * @param  OutputStream $stream
      * @return void
      */
     public function __construct(OutputStream $stream)

@@ -19,8 +19,7 @@
         Form validation is as easy as providing an array of data to the
         <methodname>setData()</methodname> method. If you want to simplify your work even more, you
         can bind an object to the form; on successful validation, it will be populated from the
-        validated values. (You can also access the raw values at any time by retrieving the input
-        filter.)
+        validated values.
     </para>
 
     <example xml:id="zend.form.quick-start.programmatic">
@@ -422,6 +421,13 @@ if ($form->isValid() {
         <para>
             You can get the raw data if you want, by accessing the composed input filter.
         </para>
+
+        <programlisting language="php"><![CDATA[
+$filter = $form->getInputFilter();
+
+$rawValues    = $filter->getRawValues();
+$nameRawValue = $filter->getRawValue('name');
+]]></programlisting>
     </example>
 
     <example xml:id="zend.form.quick-start.input-specification">

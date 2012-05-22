@@ -20,7 +20,7 @@
     <itemizedlist>
         <listitem>
             <para>
-                <clasname>Elements</clasname>, which simply consist of a name and attributes.
+                <classname>Elements</classname>, which simply consist of a name and attributes.
             </para>
         </listitem>
 

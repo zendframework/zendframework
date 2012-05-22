@@ -632,9 +632,7 @@ class App
         preg_match("/^(.*?)(\?.*)?$/", $uri, $matches);
         $this->_httpClient->setUri($matches[1]);
         $queryArray = $uriObj->getQueryAsArray();
-        foreach ($queryArray as $name => $value) {
-          $this->_httpClient->setParameterGet(array($name, $value));
-        }
+        $this->_httpClient->setParameterGet($queryArray);
 
 
         $this->_httpClient->setOptions(array('maxredirects' => 0));

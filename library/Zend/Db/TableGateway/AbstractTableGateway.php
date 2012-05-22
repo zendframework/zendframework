@@ -314,7 +314,7 @@ abstract class AbstractTableGateway implements TableGatewayInterface
         $update = $sql->update();
         $update->set($set);
         $update->where($where);
-        $this->executeUpdate($update);
+        return $this->executeUpdate($update);
     }
 
     /**
@@ -372,7 +372,7 @@ abstract class AbstractTableGateway implements TableGatewayInterface
         } else {
             $delete->where($where);
         }
-        $this->executeDelete($delete);
+        return $this->executeDelete($delete);
     }
 
     /**

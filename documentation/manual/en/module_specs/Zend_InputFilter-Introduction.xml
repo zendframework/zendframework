@@ -82,9 +82,9 @@ $inputfilter->add($input, 'foo')
             ));
 
 echo "Before:\n";
-echo $inputFilter->getRawValue('foo') . "\n";
+echo $inputFilter->getRawValue('foo') . "\n"; // the output is ' Bar3 '
 echo "After:\n";
-echo $inputFilter->getValue('foo') . "\n";
+echo $inputFilter->getValue('foo') . "\n"; // the output is 'Bar'
 ]]></programlisting>
 
     <para>

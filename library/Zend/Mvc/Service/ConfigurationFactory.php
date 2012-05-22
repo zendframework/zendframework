@@ -51,7 +51,7 @@ class ConfigurationFactory implements FactoryInterface
         $mm           = $serviceLocator->get('ModuleManager');
         $mm->loadModules();
         $moduleParams = $mm->getEvent()->getParams();
-        $config       = $moduleParams['configListener']->getMergedConfig();
+        $config       = $moduleParams['configListener']->getMergedConfig(false);
         return $config;
     }
 }

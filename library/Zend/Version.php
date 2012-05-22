@@ -35,7 +35,7 @@ final class Version
     /**
      * Zend Framework version identification - see compareVersion()
      */
-    const VERSION = '2.0.0beta3';
+    const VERSION = '2.0.0beta4';
 
     /**
      * The latest stable version Zend Framework available

@@ -191,7 +191,8 @@ class AbstractTableGatewayTest extends \PHPUnit_Framework_TestCase
             ->method('where')
             ->with($this->equalTo('id = 2'));
 
-        $this->table->update(array('foo' => 'bar'), 'id = 2');
+        $affectedRows = $this->table->update(array('foo' => 'bar'), 'id = 2');
+        $this->assertEquals(5, $affectedRows);
     }
 
     /**
@@ -208,7 +209,8 @@ class AbstractTableGatewayTest extends \PHPUnit_Framework_TestCase
             ->method('where')
             ->with($this->equalTo('foo'));
 
-        $this->table->delete('foo');
+        $affectedRows = $this->table->delete('foo');
+        $this->assertEquals(5, $affectedRows);
     }
 
     /**

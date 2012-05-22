@@ -1189,12 +1189,12 @@
             <!--</xi:include>-->
         <!--</chapter>-->
 
-        <chapter xml:id="zend.inputfilter">
-            <title>Zend_InputFilter</title>
+        <chapter xml:id="zend.input-filter">
+            <title>Zend\InputFilter</title>
 
-            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_InputFilter-Introduction.xml" parse="xml">
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/zend.input-filter.intro.xml" parse="xml">
                 <xi:fallback>
-                    <xi:include href="../en/module_specs/Zend_InputFilter-Introduction.xml" parse="xml"/>
+                    <xi:include href="../en/module_specs/zend.input-filter.intro.xml" parse="xml"/>
                 </xi:fallback>
             </xi:include>
         </chapter>

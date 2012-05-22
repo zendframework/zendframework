@@ -180,7 +180,7 @@ class ViewManager implements ListenerAggregateInterface
             $map = $this->config['helper_map'];
         }
         if (!in_array('Zend\Form\View\HelperLoader', $map)) {
-            $map[] = 'Zend\Form\View\HelperLoader';
+            array_unshift($map, 'Zend\Form\View\HelperLoader');
         }
         $this->helperLoader = new ViewHelperLoader($map);
 

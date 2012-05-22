@@ -1189,6 +1189,16 @@
             <!--</xi:include>-->
         <!--</chapter>-->
 
+        <chapter xml:id="zend.inputfilter">
+            <title>Zend_InputFilter</title>
+
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_InputFilter-Introduction.xml" parse="xml">
+                <xi:fallback>
+                    <xi:include href="../en/module_specs/Zend_InputFilter-Introduction.xml" parse="xml"/>
+                </xi:fallback>
+            </xi:include>
+        </chapter>
+
         <!--<chapter xml:id="zend.json"><title>Zend_Json</title>-->
             <!---->
             <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Json-Introduction.xml" parse="xml">-->

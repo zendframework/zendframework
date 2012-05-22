@@ -21,6 +21,12 @@ beta release (beta5) before starting the RC process.
 
 ### NEW FEATURES IN BETA4
 
+PLEASE NOTE: this beta includes a large number of breaks from the previous beta,
+due to introduction of the ServiceManager, changes to the EventManager, renaming
+of the ModuleManager, rewrite of the Form component, and several changes in the
+View layer. Please consult the ZendSkeletonApplication to get an idea of the
+changes necessary to make your application work with beta4.
+
  - Config component (Enrico Zimuel)
     -  Added reader and writer implementations for JSON and YAML configuration
  - Crypt and Math (Enrico Zimuel)
@@ -89,6 +95,9 @@ beta release (beta5) before starting the RC process.
     - Created a new "ViewManager" class, which triggers on the bootstrap event,
       at which time it creates the various objects of the view layer and wires
       them together as well as registers them with the appropriate events.
+    - InjectTemplateListener now uses the controller namespace to further
+      namespace the view template; the default is now 
+      "<normalized top-level namespace>/<normalized controller name>/<action>"
  - ServiceManager component (Ralph Schindler, Matthew Weier O'Phinney)
     - Highly performant, programmatic service creation
     - Largely replaces DI, but can also consume Zend\Di
@@ -100,14 +109,14 @@ beta release (beta5) before starting the RC process.
       - Abstract (fallback) factories
       - Initializers (manipulate instances after creation)
     - Fully integrated in the MVC solution
- - Renamed interfaces
+ - Renamed interfaces (Gabriel Baker, Sascha Prolic, Maks3w)
    - Most, if not all, interfaces were renamed to suffix with the word
      "Interface". This is to promote discovery of interfaces, as well as make
      naming simpler.
- - Composer support
+ - Composer support (Rob Allen, Marco Pivetta, Kyle Spraggs)
    - Zend Framework is now installable via Composer (http://packagist.org/), as
      are each of its individual components
- - Travis CI integration
+ - Travis CI integration (Marco Pivetta, Maks3w)
    - ZF2 is tested on each commit by http://travis-ci.org/
 
 Over *400* pull requests for a variety of features and bugfixes were handled

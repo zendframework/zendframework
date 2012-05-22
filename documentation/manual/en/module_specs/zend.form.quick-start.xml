@@ -389,6 +389,17 @@ if ($form->isValid()) {
 ]]></programlisting>
 
         <para>
+            When an object is bound to the form, calling <methodname>getData()</methodname> will
+            return that object by default. If you want to return an associative array instead, you
+            can pass the <varname>FormInterface::VALUES_AS_ARRAY</varname> flag to the method.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+use Zend\Form\FormInterface;
+$data = $form->getData(FormInterface::VALUES_AS_ARRAY);
+]]></programlisting>
+
+        <para>
             Zend Framework ships several standard <link
                 linkend="zend.stdlib.hydrator">hydrators</link>, and implementation is as simple as
             implementing <classname>Zend\Stdlib\Hydrator\HydratorInterface</classname>, which looks
@@ -531,6 +542,43 @@ return array(
         ),
     ),
 );
+]]></programlisting>
+    </example>
+
+    <example xml:id="zend.form.quick-start.partial">
+        <info><title>Validation Groups</title></info>
+
+        <para>
+            Sometimes you want to validate only a subset of form elements. As an example, let's say
+            we're re-using our contact form over a web service; in this case, the
+            <classname>Csrf</classname>, <classname>Captcha</classname>, and submit button elements
+            are not of interest, and shouldn't be validated.
+        </para>
+
+        <para>
+            <classname>Zend\Form</classname> provides a proxy method to the underlying
+            <classname>InputFilter</classname>'s <methodname>setValidationGroup()</methodname>
+            method, allowing us to perform this operation.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$form->setValidationGroup('name', 'email', 'subject', 'message');
+$form->setData($data);
+if ($form->isValid()) {
+    // Contains only the "name", "email", "subject", and "message" values
+    $data = $form->getData();
+}
+]]></programlisting>
+
+        <para>
+            If you later want to reset the form to validate all, simply pass the
+            <varname>FormInterface::VALIDATE_ALL</varname> flag to the
+            <methodname>setValidationGroup()</methodname> method.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+use Zend\Form\FormInterface;
+$form->setValidationGroup(FormInterface::VALIDATE_ALL);
 ]]></programlisting>
     </example>
 </section>

@@ -56,6 +56,10 @@ application work with beta4.
       removed other extensions in favor of "Features"
     - Zend\Db\TableGateway: created a "Features" API in TableGatway to promote
       horizontal extension of TableGatway
+ - Di (Ralph Schindler, Marco Pivetta)
+    - Added method injectDependencies($instance), to allow injecting an object
+      after an instance is already available (used in the ServiceManager)
+    - Various fixes based on issue reports
  - Dojo
     - REMOVED. Support was for out-dated versions of Dojo, and with the new Form
       rewrite, it needs to be completely rewritten. This is targetted for post

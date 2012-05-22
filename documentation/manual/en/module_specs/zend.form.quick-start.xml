@@ -692,6 +692,9 @@ $form->setAttribute('action', $this->url('contact/process'));
 
 // Set the method attribute for the form
 $form->setAttribute('method', 'post');
+
+// Get the form label plugin
+$formLabel = $this->plugin('formLabel');
  
 // Render the opening tag
 echo $this->form()->openTag($form);
@@ -699,37 +702,37 @@ echo $this->form()->openTag($form);
 <div class="form_element">
 <?php 
     $name = $form->get('name');
-    echo $this->formLabel()->openTag($name);
+    echo $formLabel->openTag($name);
     echo $this->formInput($name);
     echo $this->formElementErrors($name);
-    echo $this->formLabel()->closeTag();
+    echo $formLabel->closeTag();
 ?></div>
  
 <div class="form_element">
 <?php 
     $subject = $form->get('subject');
-    echo $this->formLabel()->openTag($subject);
+    echo $formLabel->openTag($subject);
     echo $this->formInput($subject);
     echo $this->formElementErrors($subject);
-    echo $this->formLabel()->closeTag();
+    echo $formLabel->closeTag();
 ?></div>
  
 <div class="form_element">
 <?php 
     $message = $form->get('message');
-    echo $this->formLabel()->openTag($message);
+    echo $formLabel->openTag($message);
     echo $this->formInput($message);
     echo $this->formElementErrors($message);
-    echo $this->formLabel()->closeTag();
+    echo $formLabel->closeTag();
 ?></div>
  
 <div class="form_element">
 <?php 
     $captcha = $form->get('captcha');
-    echo $this->formLabel()->openTag($captcha);
+    echo $formLabel->openTag($captcha);
     echo $this->formInput($captcha);
     echo $this->formElementErrors($captcha);
-    echo $this->formLabel()->closeTag();
+    echo $formLabel->closeTag();
 ?></div>
 
 <?php echo $this->formElement($form->get('security') ?>

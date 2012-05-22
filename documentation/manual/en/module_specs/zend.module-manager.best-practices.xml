@@ -3,7 +3,7 @@
 <section 
     xmlns="http://docbook.org/ns/docbook" version="5.0"
     xmlns:xlink="http://www.w3.org/1999/xlink"
-    xml:id="zend.module.best-practices">
+    xml:id="zend.module-manager.best-practices">
 
     
         <title>Best Practices when Creating Modules</title>

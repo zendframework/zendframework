@@ -3,7 +3,7 @@
 <section 
     xmlns="http://docbook.org/ns/docbook" version="5.0"
     xmlns:xlink="http://www.w3.org/1999/xlink"
-    xml:id="zend.module.intro">
+    xml:id="zend.module-manager.intro">
     
         <title>Introduction to the Module System</title>
     
@@ -46,7 +46,7 @@
 
         <listitem>
             <para>
-                <link linkend="zend.module.module-manager"><emphasis role="strong">The Module
+                <link linkend="zend.module-manager.module-manager"><emphasis role="strong">The Module
                         Manager</emphasis></link> - <classname>Zend\Module\Manager</classname>
                 simply takes an array of module names and fires a sequence of events for each one,
                 allowing the behavior of the module system to be defined entirely by the listeners
@@ -101,7 +101,7 @@ module_root/
             &lt;.phtml files&gt;
 </literallayout>
 
-    <section xml:id="zend.module.intro.the-autoload-files">
+    <section xml:id="zend.module-manager.intro.the-autoload-files">
         
             <title>The autoload_*.php Files</title>
         

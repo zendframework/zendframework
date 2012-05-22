@@ -3,7 +3,7 @@
 <section 
     xmlns="http://docbook.org/ns/docbook" version="5.0"
     xmlns:xlink="http://www.w3.org/1999/xlink"
-    xml:id="zend.module.module-class">
+    xml:id="zend.module-manager.module-class">
     
         <title>The Module Class</title>
     
@@ -15,7 +15,7 @@
         instance of <classname>{moduleName}\Module</classname> for each enabled module.
     </para>
 
-    <example xml:id="zend.module.module-class.example.minimal-module">
+    <example xml:id="zend.module-manager.module-class.example.minimal-module">
         
             <title>A Minimal Module</title>
         
@@ -25,7 +25,7 @@
             <classname>Zend\Module\Listener\ModuleResolverListener</classname> will simply expect
             the class <classname>MyModule\Module</classname> to be available. It relies on a
             registered autoloader, (typically <classname
-                xlink:href="zend.module.module-autoloader">Zend\Loader\ModuleAutoloader</classname>)
+                xlink:href="zend.module-manager.module-autoloader">Zend\Loader\ModuleAutoloader</classname>)
             to find and include the <classname>MyModule\Module</classname> class if it is not
             already available. 
         </para>
@@ -65,7 +65,7 @@ class Module
         more.
     </para>
 
-    <example xml:id="zend.module.module-class.example.typical-module-class">
+    <example xml:id="zend.module-manager.module-class.example.typical-module-class">
         
             <title>A Typical Module Class</title>
         
@@ -107,13 +107,13 @@ class Module implements AutoloaderProvider
     <para>
         For a list of the provided module manager listeners and the interfaces and methods that
         allow on <classname>Module</classname> classes, see the <link
-            linkend="zend.module.module-manager.module-manager-listeners">module manager listeners
+            linkend="zend.module-manager.module-manager.module-manager-listeners">module manager listeners
             documentation</link> and the <link
-            linkend="zend.module.module-manager.module-manager-events">module mananger events
+            linkend="zend.module-manager.module-manager.module-manager-events">module mananger events
             documentation</link>.
     </para>
 
-    <section xml:id="zend.module.module-class.the-loadModules.post-event">
+    <section xml:id="zend.module-manager.module-class.the-loadModules.post-event">
         
             <title>The "loadModules.post" Event</title>
         
@@ -129,12 +129,12 @@ class Module implements AutoloaderProvider
             <para>
                 For more information on methods like <methodname>init()</methodname> and
                 <methodname>getConfig()</methodname>, refer to the <link
-                    linkend="zend.module.module-manager.module-manager-listeners">module manager
+                    linkend="zend.module-manager.module-manager.module-manager-listeners">module manager
                     listeners documentation</link>.
             </para>
         </note>
 
-        <example xml:id="zend.module.module-class.example.loadModules.post-event">
+        <example xml:id="zend.module-manager.module-class.example.loadModules.post-event">
             
                 <title>Sample Usage of "loadModules.post" Event</title>
             
@@ -164,7 +164,7 @@ class Module
         </example>
     </section>
 
-    <section xml:id="zend.module.module-class.the-mvc-bootstrap-event">
+    <section xml:id="zend.module-manager.module-class.the-mvc-bootstrap-event">
         
             <title>The MVC "bootstrap" Event</title>
         
@@ -178,7 +178,7 @@ class Module
             <code>$bootstrap->bootstrap($application)</code> is called.
         </para>
 
-        <example xml:id="zend.module.module-class.example.mvc-bootstrap-event">
+        <example xml:id="zend.module-manager.module-class.example.mvc-bootstrap-event">
             
                 <title>Sample Usage of the MVC "bootstrap" Event</title>
             

@@ -1530,36 +1530,36 @@
             <!--</xi:include>-->
         <!--</chapter>-->
 
-        <chapter xml:id="zend.module">
-            <title>Zend\Module</title>
+        <chapter xml:id="zend.module-manager">
+            <title>Zend\ModuleManager</title>
 
-            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Module-Intro.xml" parse="xml">
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/zend.module-manager.intro.xml" parse="xml">
                 <xi:fallback>
-                    <xi:include href="../en/module_specs/Zend_Module-Intro.xml" parse="xml"/>
+                    <xi:include href="../en/module_specs/zend.module-manager.intro.xml" parse="xml"/>
                 </xi:fallback>
             </xi:include>
 
-            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Module-Module-Manager.xml" parse="xml">
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/zend.module-manager.module-manager.xml" parse="xml">
                 <xi:fallback>
-                    <xi:include href="../en/module_specs/Zend_Module-Module-Manager.xml" parse="xml"/>
+                    <xi:include href="../en/module_specs/zend.module-manager.module-manager.xml" parse="xml"/>
                 </xi:fallback>
             </xi:include>
 
-            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Module-Module-Class.xml" parse="xml">
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/zend.module-manager.module-class.xml" parse="xml">
                 <xi:fallback>
-                    <xi:include href="../en/module_specs/Zend_Module-Module-Class.xml" parse="xml"/>
+                    <xi:include href="../en/module_specs/zend.module-manager.module-class.xml" parse="xml"/>
                 </xi:fallback>
             </xi:include>
 
-            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Module-Module-Autoloader.xml" parse="xml">
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/zend.module-manager.module-autoloader.xml" parse="xml">
                 <xi:fallback>
-                    <xi:include href="../en/module_specs/Zend_Module-Module-Autoloader.xml" parse="xml"/>
+                    <xi:include href="../en/module_specs/zend.module-manager.module-autoloader.xml" parse="xml"/>
                 </xi:fallback>
             </xi:include>
 
-            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Module-Best-Practices.xml" parse="xml">
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/zend.module-manager.best-practices.xml" parse="xml">
                 <xi:fallback>
-                    <xi:include href="../en/module_specs/Zend_Module-Best-Practices.xml" parse="xml"/>
+                    <xi:include href="../en/module_specs/zend.module-manager.best-practices.xml" parse="xml"/>
                 </xi:fallback>
             </xi:include>
         </chapter>

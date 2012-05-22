@@ -3,7 +3,7 @@
 <section 
     xmlns="http://docbook.org/ns/docbook" version="5.0"
     xmlns:xlink="http://www.w3.org/1999/xlink"
-    xml:id="zend.module.module-manager">
+    xml:id="zend.module-manager.module-manager">
     
         <title>The Module Manager</title>
     
@@ -15,7 +15,7 @@
         are all performed by attached event listeners.
     </para>
 
-    <section xml:id="zend.module.module-manager.module-manager-events">
+    <section xml:id="zend.module-manager.module-manager.module-manager-events">
         
             <title>Module Manager Events</title>
         
@@ -92,7 +92,7 @@
         </variablelist>
     </section>
     
-    <section xml:id="zend.module.module-manager.module-manager-listeners">
+    <section xml:id="zend.module-manager.module-manager.module-manager-listeners">
         
             <title>Module Manager Listeners</title>
         

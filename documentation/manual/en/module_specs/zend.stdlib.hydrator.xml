@@ -4,7 +4,7 @@
     xmlns="http://docbook.org/ns/docbook" version="5.0" 
     xmlns:xlink="http://www.w3.org/1999/xlink"
     xml:id="zend.stdlib.hydrator">
-    <info><title>Zend\Stdlib\Hydrator</title></info>
+    <title>Zend\Stdlib\Hydrator</title>
 
     <para>
         Hydration is the act of populating an object from a set of data.
@@ -20,7 +20,7 @@
     </para>
 
     <section xml:id="zend.stdlib.hydrator.interface">
-        <info><title>HydratorInterface</title></info>
+        <title>HydratorInterface</title>
 
         <programlisting language="php"><![CDATA[
 namespace Zend\Stdlib\Hydrator;
@@ -48,7 +48,7 @@ interface HydratorInterface
     </section>
 
     <section xml:id="zend.stdlib.hydrator.usage">
-        <info><title>Usage</title></info>
+        <title>Usage</title>
 
         <para>
             Usage is quite simple: simply instantiate the hydrator, and then pass information to it.
@@ -68,7 +68,7 @@ $data = $hydrator->extract($object);
     </section>
 
     <section xml:id="zend.stdlib.hydrator.concrete">
-        <info><title>Available Implementations</title></info>
+        <title>Available Implementations</title>
 
         <itemizedlist>
             <listitem>

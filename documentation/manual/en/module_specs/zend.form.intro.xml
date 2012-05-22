@@ -4,7 +4,7 @@
     xmlns="http://docbook.org/ns/docbook" version="5.0" 
     xmlns:xlink="http://www.w3.org/1999/xlink"
     xml:id="zend.form.intro">
-    <info><title>Zend\Form</title></info>
+    <title>Zend\Form</title>
 
     <para>
         <classname>Zend\Form</classname> is intended primarily as a bridge between your domain

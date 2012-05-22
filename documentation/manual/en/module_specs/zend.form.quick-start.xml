@@ -4,7 +4,7 @@
     xmlns="http://docbook.org/ns/docbook" version="5.0" 
     xmlns:xlink="http://www.w3.org/1999/xlink"
     xml:id="zend.form.quick-start">
-    <info><title>Zend\Form Quick Start</title></info>
+    <title>Zend\Form Quick Start</title>
 
     <para>
         Forms are relatively easy to create. At the bare minimum, each element or fieldset requires
@@ -23,7 +23,7 @@
     </para>
 
     <example xml:id="zend.form.quick-start.programmatic">
-        <info><title>Programmatic Form Creation</title></info>
+        <title>Programmatic Form Creation</title>
 
         <para>
             If nothing else, you can simply start creating elements, fieldsets, and forms and wiring
@@ -122,7 +122,7 @@ $form->add($send);
     </example>
 
     <example xml:id="zend.form.quick-start.factory">
-        <info><title>Creation via Factory</title></info>
+        <title>Creation via Factory</title>
 
         <para>
             You can create the entire form, and input filter, using the
@@ -297,7 +297,7 @@ $form    = $factory->createForm(array(
     </example>
 
     <example xml:id="zend.form.quick-start.extension">
-        <info><title>Factory-backed Form Extension</title></info>
+        <title>Factory-backed Form Extension</title>
 
         <para>
             The default <classname>Form</classname> implementation is backed by the
@@ -390,7 +390,7 @@ class ContactForm extends Form
     </example>
 
     <example xml:id="zend.form.quick-start.validation">
-        <info><title>Validating Forms</title></info>
+        <title>Validating Forms</title>
 
         <para>
             Validating forms requires three steps. First, the form must have an input filter
@@ -431,7 +431,7 @@ $nameRawValue = $filter->getRawValue('name');
     </example>
 
     <example xml:id="zend.form.quick-start.input-specification">
-        <info><title>Hinting to the Input Filter</title></info>
+        <title>Hinting to the Input Filter</title>
 
         <para>
             Often, you'll create elements that you expect to behave in the same way on each usage,
@@ -541,7 +541,7 @@ class SenderFieldset extends Fieldset implements InputFilterProviderInterface
     </example>
 
     <example xml:id="zend.form.quick-start.binding">
-        <info><title>Binding an object</title></info>
+        <title>Binding an object</title>
 
         <para>
             As noted in the intro, forms in Zend Framework bridge the domain model and the view
@@ -653,7 +653,7 @@ interface Hydrator
     </example>
 
     <example xml:id="zend.form.quick-start.rendering">
-        <info><title>Rendering</title></info>
+        <title>Rendering</title>
 
         <para>
             As noted previously, forms are meant to bridge the domain model and view layer. We've
@@ -780,7 +780,7 @@ return array(
     </example>
 
     <example xml:id="zend.form.quick-start.partial">
-        <info><title>Validation Groups</title></info>
+        <title>Validation Groups</title>
 
         <para>
             Sometimes you want to validate only a subset of form elements. As an example, let's say

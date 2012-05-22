@@ -36,6 +36,26 @@ application work with beta4.
     - Provides BigInteger support
     - Provides common methodology surrounding credential encryption and hashing
  - Db layer (Ralph Schindler)
+    - Zend\Db\Adapter: added buffer() to the ResultInterface, added that feature
+      to Mysqli Result object
+    - Zend\Db\Adapter: added ability to subselect Sqlite for returning a true
+      count()
+    - Zend\Db\Adapter: added API to return helper closures from the Adapter API
+    - Renamed "database" to "schema" in all usages across Zend\Db
+    - Zend\Db\Adapter: Various fixes for PDO connection parameters
+    - Zend\Db\Sql: created a shared AbstractSql implementation to share
+      expression processing
+    - Zend\Db\Sql: created a more robust "Expression" object for use in Select
+      and Predicates
+    - Zend\Db\Sql: created an internal workflow and architecture to handle the
+      creation of platform specific queries
+    - Zend\Db\Sql: implemented limit() and offset() API to Select
+    - Zend\Db\Sql: added having(), order() to SELECT API
+    - Zend\Db\Sql: added alias support to Select::columns()
+    - Zend\Db\TableGateway: reorganized AbstractTableGateway and TableGateway,
+      removed other extensions in favor of "Features"
+    - Zend\Db\TableGateway: created a "Features" API in TableGatway to promote
+      horizontal extension of TableGatway
  - Dojo
     - REMOVED. Support was for out-dated versions of Dojo, and with the new Form
       rewrite, it needs to be completely rewritten. This is targetted for post

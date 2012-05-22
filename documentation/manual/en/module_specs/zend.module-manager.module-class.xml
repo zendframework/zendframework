@@ -3,7 +3,7 @@
 <section 
     xmlns="http://docbook.org/ns/docbook" version="5.0"
     xmlns:xlink="http://www.w3.org/1999/xlink"
-    xml:id="zend.module.module-class">
+    xml:id="zend.module-manager.module-class">
     
         <title>The Module Class</title>
     
@@ -11,21 +11,22 @@
     <para>
         By default, ZF2 module system simply expects each module name to be able to be resolved to
         an object instance. The default module resolver,
-        <classname>Zend\Module\Listener\ModuleResolverListener</classname>, simply instantiates an
-        instance of <classname>{moduleName}\Module</classname> for each enabled module.
+        <classname>Zend\ModuleManager\Listener\ModuleResolverListener</classname>, simply
+        instantiates an instance of <classname>{moduleName}\Module</classname> for each enabled
+        module.
     </para>
 
-    <example xml:id="zend.module.module-class.example.minimal-module">
+    <example xml:id="zend.module-manager.module-class.example.minimal-module">
         
             <title>A Minimal Module</title>
         
 
         <para>
             As an example, provided the module name "MyModule",
-            <classname>Zend\Module\Listener\ModuleResolverListener</classname> will simply expect
+            <classname>Zend\ModuleManager\Listener\ModuleResolverListener</classname> will simply expect
             the class <classname>MyModule\Module</classname> to be available. It relies on a
             registered autoloader, (typically <classname
-                xlink:href="zend.module.module-autoloader">Zend\Loader\ModuleAutoloader</classname>)
+                xlink:href="zend.module-manager.module-autoloader">Zend\Loader\ModuleAutoloader</classname>)
             to find and include the <classname>MyModule\Module</classname> class if it is not
             already available. 
         </para>
@@ -65,7 +66,7 @@ class Module
         more.
     </para>
 
-    <example xml:id="zend.module.module-class.example.typical-module-class">
+    <example xml:id="zend.module-manager.module-class.example.typical-module-class">
         
             <title>A Typical Module Class</title>
         
@@ -78,9 +79,7 @@ class Module
         <programlisting language="php"><![CDATA[
 namespace MyModule;
 
-use Zend\Module\Consumer\AutoloaderProvider;
-
-class Module implements AutoloaderProvider
+class Module
 {
     public function getAutoloaderConfig()
     {
@@ -106,14 +105,15 @@ class Module implements AutoloaderProvider
 
     <para>
         For a list of the provided module manager listeners and the interfaces and methods that
-        allow on <classname>Module</classname> classes, see the <link
-            linkend="zend.module.module-manager.module-manager-listeners">module manager listeners
+        <classname>Module</classname> classes may implement in order to interact with the module
+        manager and application, see the <link
+            linkend="zend.module-manager.module-manager.module-manager-listeners">module manager listeners
             documentation</link> and the <link
-            linkend="zend.module.module-manager.module-manager-events">module mananger events
+            linkend="zend.module-manager.module-manager.module-manager-events">module mananger events
             documentation</link>.
     </para>
 
-    <section xml:id="zend.module.module-class.the-loadModules.post-event">
+    <section xml:id="zend.module-manager.module-class.the-loadModules.post-event">
         
             <title>The "loadModules.post" Event</title>
         
@@ -129,19 +129,19 @@ class Module implements AutoloaderProvider
             <para>
                 For more information on methods like <methodname>init()</methodname> and
                 <methodname>getConfig()</methodname>, refer to the <link
-                    linkend="zend.module.module-manager.module-manager-listeners">module manager
+                    linkend="zend.module-manager.module-manager.module-manager-listeners">module manager
                     listeners documentation</link>.
             </para>
         </note>
 
-        <example xml:id="zend.module.module-class.example.loadModules.post-event">
+        <example xml:id="zend.module-manager.module-class.example.loadModules.post-event">
             
                 <title>Sample Usage of "loadModules.post" Event</title>
             
 
             <programlisting language="php"><![CDATA[
-use Zend\EventManager\EventDescription as Event,
-    Zend\Module\Manager as ModuleManager;
+use Zend\EventManager\EventInterface as Event;
+use Zend\ModuleManager\ModuleManager;
 
 class Module
 {
@@ -164,7 +164,7 @@ class Module
         </example>
     </section>
 
-    <section xml:id="zend.module.module-class.the-mvc-bootstrap-event">
+    <section xml:id="zend.module-manager.module-class.the-mvc-bootstrap-event">
         
             <title>The MVC "bootstrap" Event</title>
         
@@ -173,34 +173,26 @@ class Module
             If you are writing an MVC-oriented module for ZF2, you may need access to additional
             parts of the application in your <classname>Module</classname> class such as the
             instance of <classname>Zend\Mvc\Application</classname> or its registered service
-            locator/DI instance. For this, you may utilize the MVC "bootstrap" event. The bootstrap
+            manager instance. For this, you may utilize the MVC "bootstrap" event. The bootstrap
             event is triggered after the "loadModule.post" event, once
-            <code>$bootstrap->bootstrap($application)</code> is called.
+            <code>$application->bootstrap()</code> is called.
         </para>
 
-        <example xml:id="zend.module.module-class.example.mvc-bootstrap-event">
+        <example xml:id="zend.module-manager.module-class.example.mvc-bootstrap-event">
             
                 <title>Sample Usage of the MVC "bootstrap" Event</title>
             
 
             <programlisting language="php"><![CDATA[
-use Zend\EventManager\EventDescription as Event,
-    Zend\EventManager\StaticEventManager;
+use Zend\EventManager\EventInterface as Event;
 
 class Module
 {
-    public function init()
-    {
-        // Remember to keep the init() method as lightweight as possible
-        $events = StaticEventManager::getInstance();
-        $events->attach('bootstrap', 'bootstrap', array($this, 'mvcBootstrap'));
-    }
-
-    public function mvcBootstrap(Event $e)
+    public function onBootstrap(Event $e)
     {
         // This method is called once the MVC bootstrapping is complete
-        $application = $e->getParam('application');
-        $locator     = $application->getLocator();
+        $application = $e->getApplication();
+        $services    = $application->getServiceManager();
     }
 }
 ]]></programlisting>

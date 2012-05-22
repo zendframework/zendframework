@@ -3,7 +3,7 @@
 <section 
     xmlns="http://docbook.org/ns/docbook" version="5.0"
     xmlns:xlink="http://www.w3.org/1999/xlink"
-    xml:id="zend.module.module-autoloader">
+    xml:id="zend.module-manager.module-autoloader">
 
     
         <title>The Module Autoloader</title>
@@ -16,14 +16,14 @@
         classes from a variety of sources.
     </para>
 
-    <section xml:id="zend.module.module-autoloader.usage">
+    <section xml:id="zend.module-manager.module-autoloader.usage">
         
             <title>Module Autoloader Usage</title>
         
 
         <para>
             If you are using the provided
-            <classname>Zend\Module\Listener\DefaultListenerAggregate</classname>, then it is very
+            <classname>Zend\ModuleManager\Listener\DefaultListenerAggregate</classname>, then it is very
             simple to set up the module autoloader. You simply need to provide an array of module
             paths, either absolute or relative to the application's root, for the module autoloader
             to check when loading modules. The default listener aggregate will take care of
@@ -36,7 +36,7 @@
             <filename>public/index.php</filename>.
         </para>
 
-        <example xml:id="zend.module.module-autoloader.example.module-autoloading">
+        <example xml:id="zend.module-manager.module-autoloader.example.module-autoloading">
             
                 <title>Registering module paths with the default listener aggregate</title>
             
@@ -49,8 +49,8 @@
 
             <programlisting language="php"><![CDATA[
 // public/index.php
-use Zend\Module\Listener,
-    Zend\Module\Manager;
+use Zend\ModuleManager\Listener;
+use Zend\ModuleManager\ModuleManager;
 
 chdir(dirname(__DIR__));
 
@@ -65,7 +65,7 @@ $listenerOptions = new Listener\ListenerOptions(array(
 $defaultListeners = new Listener\DefaultListenerAggregate($listenerOptions);
 
 // Instantiate the module manager
-$moduleManager = new Manager(array(
+$moduleManager = new ModuleManager(array(
     'Application',
     'FooModule',
     'BarModule',
@@ -87,7 +87,7 @@ $moduleManager->loadModules();
 
     </section>
     
-    <section xml:id="zend.module.module-autoloader.non-standard-module-paths">
+    <section xml:id="zend.module-manager.module-autoloader.non-standard-module-paths">
         
             <title>Non-Standard / Explicit Module Paths</title>
         
@@ -98,7 +98,7 @@ $moduleManager->loadModules();
             paths.
         </para>
 
-        <example xml:id="zend.module.module-autoloader.example.module-loading-nonstandard-paths">
+        <example xml:id="zend.module-manager.module-autoloader.example.module-loading-nonstandard-paths">
             
                 <title>Registering a Non-Standard / Explicit Module Path</title>
             
@@ -112,9 +112,9 @@ $moduleManager->loadModules();
 
             <programlisting language="php"><![CDATA[
 // ./public/index.php
-use Zend\Loader\ModuleAutoloader,
-    Zend\Module\Listener,
-    Zend\Module\Manager;
+use Zend\Loader\ModuleAutoloader;
+use Zend\ModuleManager\Listener;
+use Zend\ModuleManager\ModuleManager;
 
 chdir(dirname(__DIR__));
 
@@ -143,7 +143,7 @@ $defaultListeners = new Listener\DefaultListenerAggregate($listenerOptions);
  */
 
 // Instantiate the module manager
-$moduleManager = new Manager(array(
+$moduleManager = new ModuleManager(array(
     'MyModule',
     'FooModule',
     'BarModule',
@@ -160,7 +160,7 @@ $moduleManager->loadModules();
         </para>
     </section>
 
-    <section xml:id="zend.module.module-autoloader.packaging-modules-with-phar">
+    <section xml:id="zend.module-manager.module-autoloader.packaging-modules-with-phar">
         
             <title>Packaging Modules with Phar</title>
         

@@ -193,6 +193,6 @@ You can find a copy of this license in [LICENSE.txt](LICENSE.txt).
 
 ### ACKNOWLEDGEMENTS
 
-The Zend Framework team would like to thank all the contributors to the Zend
+The Zend Framework team would like to thank all the [contributors](https://github.com/zendframework/zf2/contributors) to the Zend
 Framework project, our corporate sponsor, and you, the Zend Framework user.
 Please visit us sometime soon at http://framework.zend.com.

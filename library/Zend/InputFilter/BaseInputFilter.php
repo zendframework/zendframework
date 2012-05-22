@@ -126,6 +126,7 @@ class BaseInputFilter implements InputFilterInterface
             $data = ArrayUtils::iteratorToArray($data);
         }
         $this->data = $data;
+        $this->populate();
         return $this;
     }
 
@@ -154,7 +155,6 @@ class BaseInputFilter implements InputFilterInterface
             if (!isset($this->data[$name])) {
                 // Not sure how to handle input filters in this case
                 if ($input instanceof InputFilterInterface) {
-                    $input->setData(array());
                     if (!$input->isValid()) {
                         $this->invalidInputs[$name] = $input;
                         $valid = false;
@@ -193,7 +193,6 @@ class BaseInputFilter implements InputFilterInterface
 
             $value = $this->data[$name];
             if ($input instanceof InputFilterInterface) {
-                $input->setData($value);
                 if (!$input->isValid()) {
                     $this->invalidInputs[$name] = $input;
                     $valid = false;
@@ -203,7 +202,6 @@ class BaseInputFilter implements InputFilterInterface
                 continue;
             }
             if ($input instanceof InputInterface) {
-                $input->setValue($value);
                 if (!$input->isValid($this->data)) {
                     // Validation failure
                     $this->invalidInputs[$name] = $input;
@@ -397,6 +395,38 @@ class BaseInputFilter implements InputFilterInterface
                     $name
                 ));
             }
+        }
+    }
+
+    /**
+     * Populate the values of all attached inputs
+     * 
+     * @return void
+     */
+    protected function populate()
+    {
+        foreach (array_keys($this->inputs) as $name) {
+            $input = $this->inputs[$name];
+
+            if (!isset($this->data[$name])) {
+                // No value; clear value in this input
+                if ($input instanceof InputFilterInterface) {
+                    $input->setData(array());
+                    continue;
+                }
+
+                $input->setValue(null);
+                continue;
+            }
+
+            $value = $this->data[$name];
+
+            if ($input instanceof InputFilterInterface) {
+                $input->setData($value);
+                continue;
+            }
+
+            $input->setValue($value);
         }
     }
 }

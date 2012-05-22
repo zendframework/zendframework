@@ -134,8 +134,7 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
     /**
      * Constructor
      * 
-     * @param  null|string $table 
-     * @param  null|string $schema
+     * @param  null|string $table
      * @return void
      */
     public function __construct($table = null)

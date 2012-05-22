@@ -406,4 +406,131 @@ interface Hydrator
 }
 ]]></programlisting>
     </example>
+
+    <example xml:id="zend.form.quick-start.rendering">
+        <info><title>Rendering</title></info>
+
+        <para>
+            As noted previously, forms are meant to bridge the domain model and view layer. We've
+            discussed the domain model binding, but what about the view?
+        </para>
+
+        <para>
+            The form component ships a set of form-specific view helpers. These accept the various
+            form objects, and introspect them in order to generate markup. Typically, they will
+            inspect the attributes, but in special cases, they may look at other properties and
+            composed objects.
+        </para>
+
+        <para>
+            When preparing to render, you will likely want to call
+            <methodname>prepare()</methodname>. This method ensures that certain injections are
+            done, and will likely in the future munge names to allow for
+            <varname>scoped[array][notation]</varname>.
+        </para>
+
+        <para>
+            The most used and simplest view helpers available are
+            <classname>Form</classname>, <classname>FormElement</classname>,
+            <classname>FormLabel</classname>, and <classname>FormElementErrors</classname>. Let's
+            use them to display the contact form.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+<?php
+// within a view script
+$form = $this->form;
+$form->prepare();
+
+// Assuming the "contact/process" route exists...
+$form->setAttribute('action', $this->url('contact/process'));
+
+// Set the method attribute for the form
+$form->setAttribute('method', 'post');
+ 
+// Render the opening tag
+echo $this->form()->openTag($form);
+?>
+<div class="form_element">
+<?php 
+    $name = $form->get('name');
+    echo $this->formLabel()->openTag($name);
+    echo $this->formInput($name);
+    echo $this->formElementErrors($name);
+    echo $this->formLabel()->closeTag();
+?></div>
+ 
+<div class="form_element">
+<?php 
+    $subject = $form->get('subject');
+    echo $this->formLabel()->openTag($subject);
+    echo $this->formInput($subject);
+    echo $this->formElementErrors($subject);
+    echo $this->formLabel()->closeTag();
+?></div>
+ 
+<div class="form_element">
+<?php 
+    $message = $form->get('message');
+    echo $this->formLabel()->openTag($message);
+    echo $this->formInput($message);
+    echo $this->formElementErrors($message);
+    echo $this->formLabel()->closeTag();
+?></div>
+ 
+<div class="form_element">
+<?php 
+    $captcha = $form->get('captcha');
+    echo $this->formLabel()->openTag($captcha);
+    echo $this->formInput($captcha);
+    echo $this->formElementErrors($captcha);
+    echo $this->formLabel()->closeTag();
+?></div>
+
+<?php echo $this->formElement($form->get('security') ?>
+<?php echo $this->formElement($form->get('send') ?>
+ 
+<?php echo $this->form()->closeTag() ?>
+]]></programlisting>
+
+        <para>
+            There are a few things to note about this. First, to prevent confusion in IDEs and
+            editors when syntax highlighting, we use helpers to both open and close the form and
+            label tags. Second, there's a lot of repetition happening here; we could easily create a
+            partial view script or a composite helper to reduce boilerplate. Third, note that not
+            all elements are created equal -- the CSRF and submit elements don't need labels or
+            error messages necessarily. Finally, note that the <classname>FormElement</classname>
+            helper tries to do the right thing -- it delegates actual markup generation toother view
+            helpers; however, it can only guess what specific form helper to delegate to based on
+            the list it has. If you introduce new form view helpers, you'll need to extend the
+            <classname>FormElement</classname> helper, or create your own.
+        </para>
+
+        <para>
+            Currently, the complete list of available form helpers is:
+            <classname>FormCaptcha</classname>, 
+            <classname>FormInput</classname> (which handles any type that the input HTML element
+            accepts), <classname>FormMultiCheckbox</classname> (for creating sets of related
+            checkboxes), <classname>FormRadio</classname>, <classname>FormSelect</classname>
+            (which can also handle optgroups), and <classname>FormTextarea</classname>.
+        </para>
+
+        <para>
+            In order to use these form view helpers in the first place, you need to inform the
+            helper loader about them. The easiest way to do this is in your configuration; simply
+            add an entry for <classname>Zend\Form\View\HelperLoader</classname> to the
+            <varname>helper_map</varname> key of the <varname>view_manager</varname> configuration:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+// In some module configuration, or a config/autoload/ configuration file:
+return array(
+    'view_manager' => array(
+        'helper_map' => array(
+            'Zend\Form\View\HelperLoader,
+        ),
+    ),
+);
+]]></programlisting>
+    </example>
 </section>

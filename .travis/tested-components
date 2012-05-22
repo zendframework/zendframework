@@ -22,6 +22,7 @@ Zend/Form
 Zend/GData
 Zend/Http
 Zend/InfoCard
+Zend/InputFilter
 Zend/Json
 Zend/Ldap
 Zend/Loader

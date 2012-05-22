@@ -19,7 +19,8 @@
         Form validation is as easy as providing an array of data to the
         <methodname>setData()</methodname> method. If you want to simplify your work even more, you
         can bind an object to the form; on successful validation, it will be populated from the
-        validated values.
+        validated values. (You can also access the raw values at any time by retrieving the input
+        filter.)
     </para>
 
     <example xml:id="zend.form.quick-start.programmatic">
@@ -78,13 +79,13 @@ $submit->setAttributes(array(
 
 
 $form = new Form('contact');
-$form->addElement($name);
-$form->addElement($email);
-$form->addElement($subject);
-$form->addElement($message);
-$form->addElement($captcha);
-$form->addElement($csrf);
-$form->addElement($send);
+$form->add($name);
+$form->add($email);
+$form->add($subject);
+$form->add($message);
+$form->add($captcha);
+$form->add($csrf);
+$form->add($send);
 
 $nameInput = new Input('name');
 // configure input... and all others
@@ -93,9 +94,31 @@ $inputFilter = new InputFilter();
 
 $form->setInputFilter($inputFilter);
 ]]></programlisting>
+
+        <para>
+            As a demonstration of fieldsets, let's alter the above slightly. We'll create two
+            fieldsets, one for the sender information, and another for the message details.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$sender = new Fieldset('sender');
+$sender->add($name);
+$sender->add($email);
+
+$details = new Fieldset('details');
+$details->add($subject);
+$details->add($message);
+
+$form = new Form('contact');
+$form->add($sender);
+$form->add($details);
+$form->add($captcha);
+$form->add($csrf);
+$form->add($send);
+]]></programlisting>
     
         <para>
-            As you can see, this can be tedious.
+            Regardles of approach, as you can see, this can be tedious.
         </para>
     </example>
 
@@ -181,6 +204,93 @@ $form    = $factory->createForm(array(
 ));
 ]]></programlisting>
 
+        <para>
+            If we wanted to use fieldsets, as we demonstrated in the previous example, we could do
+            the following:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+use Zend\Form\Factory;
+$factory = new Factory();
+$form    = $factory->createForm(array(
+    'hydrator'  => 'Zend\Stdlib\Hydrator\ArraySerializable'
+    'fieldsets' => array(
+        array(
+            'name' => 'sender',
+            'elements' => array(
+                array(
+                    'name' => 'name',
+                    'attributes' => array(
+                        'type'  => 'text',
+                        'label' => 'Your name',
+                    ),
+                ),
+                array(
+                    'name' => 'email',
+                    'attributes' => array(
+                        'type'  => 'email',
+                        'label' => 'Your email address',
+                    ),
+                ),
+            ),
+        ),
+        array(
+            'name' => 'details',
+            'elements' => array(
+                array(
+                    'name' => 'subject',
+                    'attributes' => array(
+                        'type'  => 'text',
+                        'label' => 'Subject',
+                    ),
+                ),
+                array(
+                    'name' => 'message',
+                    'attributes' => array(
+                        'type'  => 'textarea',
+                        'label' => 'Message',
+                    ),
+                ),
+            ),
+        ),
+    ),
+    'elements' => array(
+        array(
+            'type' => 'Zend\Form\Element\Captcha',
+            'name' => 'captcha',
+            'attributes' => array(
+                'label' => 'Please verify you are human',
+                'captcha => array(
+                    'class' => 'Dumb',
+                ),
+            ),
+        ),
+        array(
+            'type' => 'Zend\Form\Element\Csrf',
+            'name' => 'security',
+        ),
+        array(
+            'name' => 'send',
+            'attributes' => array(
+                'type'  => 'submit',
+                'label' => 'Send',
+            ),
+        ),
+    ),
+
+    // Configuration to pass on to 
+    // Zend\InputFilter\Factory::createInputFilter()
+    'input_filter' => array(
+        /* ... */
+    ),
+));
+]]></programlisting>
+
+        <para>
+            Note that the chief difference is nesting; otherwise, the information is basically the
+            same.
+        </para>
+        
         <para>
             The chief benefits to using the <classname>Factory</classname> are allowing you to store
             definitions in configuration, and usage of significant whitespace.
@@ -314,6 +424,116 @@ if ($form->isValid() {
         </para>
     </example>
 
+    <example xml:id="zend.form.quick-start.input-specification">
+        <info><title>Hinting to the Input Filter</title></info>
+
+        <para>
+            Often, you'll create elements that you expect to behave in the same way on each usage,
+            and for which you'll want specific filters or validation as well. Since the input filter
+            is a separate object, how can you achieve these latter points?
+        </para>
+
+        <para>
+            Because the default form implementation composes a factory, and the default factory
+            composes an input filter factory, you can have your elements and/or fieldsets hint to
+            the input filter. If no input or input filter is provided in the input filter for that
+            element, these hints will be retrieved and used to create them.
+        </para>
+
+        <para>
+            To do so, one of the following must occur. For elements, they must implement
+            <classname>Zend\InputFilter\InputProviderInterface</classname>, which defines a
+            <methodname>getInputSpecification()</methodname> method; for fieldsets, they must
+            implement <classname>Zend\InputFilter\InputFilterProviderInterface</classname>, which
+            defines a <methodname>getInputFilterSpecification()</methodname> method.
+        </para>
+
+        <para>
+            In the case of an element, the <methodname>getInputSpecification()</methodname> method
+            should return data to be used by the input filter factory to create an input.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+namespace Contact\Form;
+
+use Zend\Form\Element;
+use Zend\InputFilter\InputProviderInterface;
+use Zend\Validator;
+
+class EmailElement extends Element implements InputProviderInterface
+{
+    protected $attributes = array(
+        'type' => 'email',
+    );
+
+    public function getInputSpecification()
+    {
+        return array(
+            'name'     => $this->getName(),
+            'required' => true,
+            'filters'  => array(
+                array('name' => 'Zend\Filter\StringTrim'),
+            ),
+            'validators' => array(
+                new Validator\Email(),
+            ),
+        );
+    }
+}
+]]></programlisting>
+
+        <para>
+            The above would hint to the input filter to create and attach an input named after the
+            element, marking it as required, and giving it a <classname>StringTrim</classname>
+            filter and an <classname>Email</classname> validator. Note that you can either rely on
+            the input filter to create filters and validators, or directly instantiate them.
+        </para>
+
+        <para>
+            For fieldsets, you do very similarly; the difference is that
+            <methodname>getInputFilterSpecification()</methodname> must return configuration for an
+            input filter.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+namespace Contact\Form;
+
+use Zend\Form\Fieldset;
+use Zend\InputFilter\InputFilterProviderInterface;
+
+class SenderFieldset extends Fieldset implements InputFilterProviderInterface
+{
+    public function getInputFilterSpecification()
+    {
+        return array(
+            'name' => array(
+                'required' => true,
+                'filters'  => array(
+                    array('name' => 'Zend\Filter\StringTrim'),
+                ),
+            ),
+            'email' => array(
+                'required' => true,
+                'filters'  => array(
+                    array('name' => 'Zend\Filter\StringTrim'),
+                ),
+                'validators' => array(
+                    new Validator\Email(),
+                ),
+            ),
+        );
+    }
+}
+]]></programlisting>
+
+        <para>
+            Specifications are a great way to make forms, fieldsets, and elements re-usable
+            trivially in your applications. In fact, the <classname>Captcha</classname> and
+            <classname>Csrf</classname> elements define specifications in order to ensure they can
+            work without additional user configuration!
+        </para>
+    </example>
+
     <example xml:id="zend.form.quick-start.binding">
         <info><title>Binding an object</title></info>
 
@@ -351,6 +571,14 @@ if ($form->isValid() {
                     then the <classname>Hydrator</classname> will be passed the validated values to
                     use to hydrate the bound object. (If you do not want this behavior, call
                     <methodname>setBindOnValidate(FormInterface::BIND_MANUAL)</methodname>).
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    If the object implements
+                    <classname>Zend\InputFilter\InputFilterAwareInterface</classname>, the input
+                    filter it composes will be used instead of the one composed on the form.
                 </para>
             </listitem>
         </itemizedlist>

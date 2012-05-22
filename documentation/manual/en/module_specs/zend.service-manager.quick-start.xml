@@ -4,7 +4,7 @@
     xmlns="http://docbook.org/ns/docbook" version="5.0" 
     xmlns:xlink="http://www.w3.org/1999/xlink"
     xml:id="zend.service-manager.quick-start">
-    <info><title>Zend\ServiceManager Quick Start</title></info>
+    <title>Zend\ServiceManager Quick Start</title>
 
     <para>
         By default, Zend Framework utilizes <classname>Zend\ServiceManager</classname> within the
@@ -56,7 +56,7 @@
     </para>
 
     <section xml:id="zend.service-manager.quick-start.config">
-        <info><title>Using Configuration</title></info>
+        <title>Using Configuration</title>
 
         <para>
             Configuration requires a <varname>service_manager</varname> key at the top level of your
@@ -116,7 +116,7 @@
     </section>
 
     <section xml:id="zend.service-manager.quick-start.module">
-        <info><title>Modules as Service Providers</title></info>
+        <title>Modules as Service Providers</title>
 
         <para>
             Modules may act as service configuration providers. To do so, the Module class must
@@ -161,10 +161,10 @@
     </section>
 
     <section xml:id="zend.service-manager.quick-start.examples">
-        <info><title>Examples</title></info>
+        <title>Examples</title>
 
         <example xml:id="zend.service-manager.quick-start.examples.config-array">
-            <info><title>Sample configuration</title></info>
+            <title>Sample configuration</title>
 
             <para>
                 The following is valid configuration for any configuration being merged in your
@@ -255,7 +255,7 @@ return array(
 ]]></programlisting>
 
             <note>
-                <info><title>Configuration and PHP</title></info>
+                <title>Configuration and PHP</title>
 
                 <para>
                     Typically, you should not have your configuration files create new instances of
@@ -273,7 +273,7 @@ return array(
         </example>
 
         <example xml:id="zend.service-manager.quick-start.examples.return-array">
-            <info><title>Module returning an array</title></info>
+            <title>Module returning an array</title>
 
             <para>
                 The following demonstrates returning an array of configuration from a module class.
@@ -341,7 +341,7 @@ class Module
         </example>
 
         <example xml:id="zend.service-manager.quick-start.examples.return-config-instance">
-            <info><title>Returning a Configuration instance</title></info>
+            <title>Returning a Configuration instance</title>
 
             <para>
                 First, let's create a class that holds configuration.
@@ -402,7 +402,7 @@ class Module
         </example>
 
         <example xml:id="zend.service-manager.quick-start.examples.service-manager-aware">
-            <info><title>Creating a ServiceManager-aware class</title></info>
+            <title>Creating a ServiceManager-aware class</title>
 
             <para>
                 By default, the Zend Framework MVC registers an initializer that will inject the

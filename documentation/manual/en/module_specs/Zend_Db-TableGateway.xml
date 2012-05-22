@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" 
-    xml:id="zend.db.tablegateway">
+<section xmlns="http://docbook.org/ns/docbook" version="5.0"
+         xml:id="zend.db.tablegateway">
     <title>Zend\Db\TableGateway</title>
 
     <para>
@@ -13,7 +13,7 @@
     <programlisting language="php"><![CDATA[
 interface Zend\Db\TableGateway\TableGatewayInterface
 {
-    public function getTableName();
+    public function getTable();
     public function select($where = null);
     public function insert($set);
     public function update($set, $where = null);
@@ -21,106 +21,222 @@ interface Zend\Db\TableGateway\TableGatewayInterface
 }
 ]]></programlisting>
 
-    <section xml:id="zend.db.tablegateway.by-example">
-        <title>Examples</title>
+    <para>
+        There are two primary implementations of the TableGatewayInterface
+        that are of the most useful: AbstractTableGateway and TableGateway.
+        The AbstractTableGateway is an abstract basic implementation that provides
+        functionality for select(), insert(), update(), delete(), as well as an
+        additional API for doing these same kinds of tasks with explicit SQL
+        objects.  These methods are selectWith(), insertWith(), updateWith()
+        and deleteWith().  In addition, AbstracTableGateway also implements
+        a "Feature" API, that allows for expanding the behaviors of the
+        base TableGateway implementation without having to extend the
+        class with this new functionality. The TableGateway concrete
+        implementation simply adds a sensible constructor to the AbstractTableGateway
+        class so that out-the-box, TableGateway does not need to be extended
+        in order to be consumed and utilized to its fullest.
+    </para>
+
+
+    <section xml:id="zend.db.tablegateway.basic">
+        <title>Basic Usage</title>
 
         <para>
-            Here are a few examples of TableGateway usage
+            The quickest way to get up and running with Zend\Db\TableGateway is
+            to configure and utilize the concrete implementation of the TableGatway.
+            The API of the concrete TableGateway is:
         </para>
 
-        <section xml:id="zend.db.tablegateway.by-example.select">
-            <title>Selecting Rows</title>
+        <programlisting language="php"><![CDATA[
+class TableGateway extends AbstractTableGateway
+{
+	public $lastInsertValue;
+	public $table;
+	public $adapter;
 
-            <programlisting language="php"><![CDATA[
-$artistTable = new Zend\Db\TableGateway\TableGateway('artist', $adapter);
+	public function __construct($table, Adapter $adapter, $features = null, ResultSet $resultSetPrototype = null, Sql $sql = null)
+
+	/** Inherited from AbstractTableGateway */
+
+    public function isInitialized();
+    public function initialize();
+    public function getTable();
+    public function getAdapter();
+    public function getColumns();
+    public function getFeatureSet();
+    public function getResultSetPrototype();
+    public function getSql();
+    public function select($where = null);
+    public function selectWith(Select $select);
+    public function insert($set);
+    public function insertWith(Insert $insert);
+    public function update($set, $where = null);
+    public function updateWith(Update $update);
+    public function delete($where);
+    public function deleteWith(Delete $delete);
+    public function getLastInsertValue();
+
+}
+]]></programlisting>
+
+        <para>
+            The concrete TableGateway object practices constructor injection for
+            getting dependencies and options into the instance.  The table name
+            and an instance of an Adapter are all that is needed to setup a working
+            TableGateway object.
+        </para>
+
+        <para>
+            Out of the box, this implementation makes no assumptions about table
+            structure or metadata, and when select() is executed, a simple ResultSet
+            object with the populated Adapter's Result (the datasource) will be returned
+            and ready for iteration.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+use Zend\Db\TableGateway\TableGateway;
+$projectTable = new TableGateway('project', $adapter);
+$rowset = $projectTable->select(array('type' => 'PHP'));
+
+echo 'Projects of type PHP: ' .
+foreach ($rowset as $projectRow) {
+	echo $projectRow['name'] . PHP_EOL;
+}
+
+// or, when expecting a single row:
+$artistTable = new TableGateway('artist', $adapter);
 $rowset = $artistTable->select(array('id' => 2));
-$row = $rowset->current();
+$artistRow = $rowset->current();
 
-$name = $row['name'];
-$name2 = $row->name;
-]]></programlisting>
-        </section>
-
-        <section xml:id="zend.db.tablegateway.by-example.insert">
-            <title>Inserting Rows</title>
-
-            <programlisting language="php"><![CDATA[
-$artistTable = new Zend\Db\TableGateway\TableGateway('artist', $adapter);
-$result = $artistTable->insert(array(
-    'name' => 'New Artist',
-    'history' => 'This is the history'
-));
-
-// $result is rows affected by the insert
-
-$lastId = $artistTable->getLastInsertId();
-]]></programlisting>
-        </section>
-
-        <section xml:id="zend.db.tablegateway.by-example.update">
-            <title>Updating Rows</title>
-
-            <programlisting language="php"><![CDATA[
-$artistTable = new Zend\Db\TableGateway\TableGateway('artist', $adapter);
-$result = $artistTable->update(array('name' => 'New Artist'), array('id' => 2));
-
-$name = $row['name'];
+var_dump($artistRow->toArray());
 ]]></programlisting>
 
-        </section>
+        <para>
+            The select() method takes the same arguments as Zend\Db\Sql\Select::where()
+            with the addition of also being able to accept a closure, which in turn, will
+            be passed the current Select object that is being used to build the SELECT
+            query.  The following usage is possible:
+        </para>
 
-        <section xml:id="zend.db.tablegateway.by-example.delete">
-            <title>Deleting Rows</title>
-
-            <programlisting language="php"><![CDATA[
-$artistTable = new Zend\Db\TableGateway\TableGateway('artist', $adapter);
-$result = $artistTable->delete(array('id' => 2));
-]]></programlisting>
-        </section>
-
-        <section xml:id="zend.db.tablegateway.by-example.select-with-where">
-            <title>Using a Fluent Where With Select</title>
-
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
+use Zend\Db\TableGateway\TableGateway,
+	Zend\Db\Sql\Select;
 $artistTable = new TableGateway('artist', $adapter);
-$where = $select->where;
-$where->like('name', 'Bar%');
-$rowset = $artistTable->select($where);
-$row = $rowset->current();
-]]></programlisting>
-        </section>
 
-        <section xml:id="zend.db.tablegateway.by-example.select-with-closure">
-            <title>Using a Closure With Select</title>
-
-            <programlisting language="php"><![CDATA[
-$artistTable = new TableGateway('artist', $adapter);
+// search for at most 2 artists who's name starts with Brit, ascending
 $rowset = $artistTable->select(function (Select $select) {
-    $select->where->like('name', 'Bar%');
+	$select->where->like('name', 'Brit%');
+	$select->order('name ASC')->limit(2);
 });
-$row = $rowset->current();
 ]]></programlisting>
-        </section>
 
-        <section xml:id="zend.db.tablegateway.by-example.row-gateway">
-            <title>Row Gateway Integration</title>
-
-            <programlisting language="php"><![CDATA[
-$artistTable = new Zend\Db\TableGateway\TableGateway('artist', $adapter);
-$artistTable->setSelectResultPrototype(
-    new Zend\Db\ResultSet\ResultSet(new Zend\Db\RowGateway\RowGateway($artistTable, 'id'))
-);
-
-// find and update
-$rowset = $artistTable->select(array('id' => 2));
-$row = $rowset->current();
-$row['name'] = 'New Artist'; // array notation
-$affected = $row->save();
-
-// check
-$rowset = $artistTable->select(array('id' => 2));
-$row = $rowset->current();
-]]></programlisting>
-        </section>
     </section>
+
+    <section xml:id="zend.db.tablegateway.features">
+        <title>TableGateway Features</title>
+
+        <para>
+            The Features API allows for extending the functionality of the base TableGatway
+            object without having to polymorphically extend the base class.  This allows for
+            a wider array of possible mixing and matching of features to achieve a particular
+            behiavior that needs to be attained to make the base implementation of TableGateway
+            useful for a particular problem.
+        </para>
+
+        <para>
+            With the TableGateway object, features should be injected though the constructor.
+            The constructor can take Features in 3 different forms: as a single feature object,
+            as a FeatureSet object, or as an array of Feature objects.
+        </para>
+
+        <para>
+            There are a number of features built-in and shipped with Zend\Db:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    GlobalAdapterFeature: the ability to use a global/static adapter without needing
+                    to inject it into a TableGateway instance.  This is more useful when you are
+                    extending the AbstractTableGateway implementation:
+                </para>
+
+                <programlisting language="php"><![CDATA[
+class MyTableGateway extends AbstractTableGateway
+{
+	public function __construct()
+	{
+		$this->table = 'my_table';
+		$this->featureSet = new Feature\FeatureSet();
+		$this->featureSet->addFeature(new Feature\GlobalAdapterFeature());
+		$this->initialize();
+	}
+}
+
+// elsewhere in code, in a bootstrap
+Zend\Db\TableGateway\Feature\GlobalAdapterFeature::setStaticAdapter($adapter);
+
+// in a controller, or model somewhere
+$table = new MyTableGateway(); // adapter is statially loaded
+]]></programlisting>
+
+            </listitem>
+            <listitem>
+                <para>
+                    MasterSlaveFeature: the ability to use a master adapter for insert(), update(),
+                    and delete() while using a slave adapter for all select() operations.
+                </para>
+
+                <programlisting language="php"><![CDATA[
+$table = new TableGateway('artist', $adapter, new Feature\MasterSlaveFeature($slaveAdapter));
+]]></programlisting>
+
+            </listitem>
+
+            <listitem>
+                <para>
+                    MetadataFeature: the ability populate TableGateway with column information from
+                    a Metadata object.  It will also store the primary key information in case
+                    RowGatewayFeature needs to consume this information.
+                </para>
+
+                <programlisting language="php"><![CDATA[
+$table = new TableGateway('artist', $adapter, new Feature\MeatadataFeature());
+]]></programlisting>
+
+            </listitem>
+
+            <listitem>
+                <para>
+                    EventFeature: the ability utilize a TableGateway object with Zend\EventManager
+                    and to be able to subscribe to various events in a TableGateway lifecycle.
+                </para>
+
+                <programlisting language="php"><![CDATA[
+$table = new TableGateway('artist', $adapter, new Feature\EventFeature($eventManagerInstance));
+]]></programlisting>
+
+            </listitem>
+
+            <listitem>
+                <para>
+                    RowGatewayFeature: the ability for select() to return a ResultSet object that
+                    upon iteration will
+                </para>
+
+                <programlisting language="php"><![CDATA[
+$table = new TableGateway('artist', $adapter, new Feature\RowGatewayFeature('id'));
+$results = $table->select(array('id' => 2));
+
+$artistRow = $results->current();
+$artistRow->name = 'New Name';
+$artistRow->save();
+]]></programlisting>
+
+            </listitem>
+
+        </itemizedlist>
+
+    </section>
+
 </section>

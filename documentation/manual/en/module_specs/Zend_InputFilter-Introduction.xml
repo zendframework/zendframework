@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.inputfilter.introduction"><title>Introduction</title>
+    
+
+    <para>
+        The <classname>Zend\InputFilter</classname> component can be used to filter and validate generic sets of input data.
+        For instance, you could use it to filter $_GET or $_POST values, CLI arguments, etc.
+    </para>
+
+    <para>
+        To pass input data to the <classname>Zend\InputFilter</classname> you can use the <methodname>setData()</methodname> method.
+        The data must be specified using an associative array. Below is reported an example on how to validate the data coming from a FORM
+        using the POST method.
+    </para>
+
+    <programlisting language="php"><![CDATA[
+use Zend\InputFilter\InputFilter,
+    Zend\InputFilter\Input,
+    Zend\Validator;
+
+$email = new Input('email');
+$email->getValidatorChain()
+      ->addValidator(new Validator\EmailAddress());
+
+$password = new Input('password');
+$password->getValidatorChain()
+         ->addValidator(new Validator\StringLength(8));
+
+$inputFilter = new InputFilter();
+$inputFilter->add($email)
+            ->add($password)
+            ->setData($_POST);
+
+if ($inputFilter->isValid()) {
+    echo "The form is valid\n";
+} else {
+    echo "The form is not valid\n";
+    foreach ($inputFilter->getInvalidInput() as $error) {
+        print_r ($error->getMessages());
+    }
+}
+]]></programlisting>
+
+    <para>
+        In this example we validated email and password values. The email must be a valid address and the password must be composed with
+        at least 8 characters. If the input data are not valid we reported the list of the invalid input using the <methodname>getInvalidInput()</methodname> method.
+    </para>
+
+    <para>
+        You can add one or more validator to each input using the <methodname>addValidator()</methodname> method for each validator.
+        It is also possible to specify a group, a subset of the data to be validated. In order to create a validation group you can use the
+        <methodname>setValidationGroup()</methodname> method. You can specify the list of the input's name as array or as parameters.
+        Below is reported an example:
+    </para>
+
+    <programlisting language="php"><![CDATA[
+$filterInput->setValidationGroup('email', 'password');
+// or
+$filterInput->setValidationGroup(array('email', 'password'));
+]]></programlisting>
+
+    <para>
+        You can also validate and/or filter the data using the <classname>Zend\InputFilter</classname>. To filter data you have to use the <methodname>getFilterChain()</methodname> method.
+        Below is reported an example that uses only the filtering without the validation.
+    </para>
+
+    <programlisting language="php"><![CDATA[
+use Zend\InputFilter\InputFilter,
+    Zend\InputFilter\Input;
+
+$input = new Input('foo');
+$input->getFilterChain()
+      ->attachByName('stringtrim')
+      ->attachByName('alpha');
+
+$inputfilter = new InputFilter();
+$inputfilter->add($input, 'foo')
+            ->setData(array(
+                'foo' => ' Bar3 ';
+            ));
+
+echo "Before:\n";
+echo $inputFilter->getRawValue('foo') . "\n";
+echo "After:\n";
+echo $inputFilter->getValue('foo') . "\n";
+]]></programlisting>
+
+    <para>
+        The <methodname>getValue()</methodname> returns the filtered value of the 'foo' input, the getRawValue() returns the original value of the input.
+    </para>
+
+    <para>
+        We provide also a <classname>Zend\InputFilter\Factory</classname> class to initialize the InputFilter based on a configuration array.
+        Below is reported an example where we created a password input value with the same constraints proposed before (a string with at least 8 characters):
+    </para>
+
+    <programlisting language="php"><![CDATA[
+use Zend\InputFilter\Factory;
+
+$factory = new Factory();
+$inputFilter = $factory->createInputFilter(array(
+    'password' => array(
+        'name'       => 'password',
+        'required'   => true,
+        'validators' => array(
+            array(
+                'name' => 'not_empty',
+            ),
+            array(
+                'name' => 'string_length',
+                'options' => array(
+                    'min' => 8
+                ),
+            ),
+        ),
+    )
+));
+
+$inputFilter->setData($_POST);
+echo $inputFilter->isValid() ? "Valid form" : "Invalid form";
+]]></programlisting>
+
+</section>

@@ -456,6 +456,6 @@ class BaseInputFilterTest extends TestCase
         );
         $filter->setData($data);
         $test = $filter->getValue('foo');
-        $this->assertSame('baz bat', $test);
+        $this->assertSame('bazbat', $test);
     }
 }

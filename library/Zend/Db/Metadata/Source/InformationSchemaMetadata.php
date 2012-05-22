@@ -67,7 +67,7 @@ class InformationSchemaMetadata implements MetadataInterface
      * @param  string $database
      * @return array 
      */
-    public function getTableNames($schema = null, $database = null)
+    public function getTableNames($schema = null)
     {
         // set values for database & schema
         $database = ($database) ?: '__DEFAULT_DB__';
@@ -109,7 +109,7 @@ class InformationSchemaMetadata implements MetadataInterface
      * @param  string $database
      * @return array 
      */
-    public function getTables($schema = null, $database = null)
+    public function getTables($schema = null)
     {
         // set values for database & schema
         $database = ($database) ?: '__DEFAULT_DB__';
@@ -132,7 +132,7 @@ class InformationSchemaMetadata implements MetadataInterface
      * @param  string $database
      * @return Object\TableObject 
      */
-    public function getTable($tableName, $schema = null, $database = null)
+    public function getTable($tableName, $schema = null)
     {
         // set values for database & schema
         $database = ($database) ?: '__DEFAULT_DB__';
@@ -151,7 +151,7 @@ class InformationSchemaMetadata implements MetadataInterface
      * @param string $schema
      * @param string $database 
      */
-    public function getViewNames($schema = null, $database = null)
+    public function getViewNames($schema = null)
     {
         // TODO: Implement getViewNames() method.
     }
@@ -162,7 +162,7 @@ class InformationSchemaMetadata implements MetadataInterface
      * @param string $schema
      * @param string $database 
      */
-    public function getViews($schema = null, $database = null)
+    public function getViews($schema = null)
     {
         // TODO: Implement getViews() method.
     }
@@ -174,7 +174,7 @@ class InformationSchemaMetadata implements MetadataInterface
      * @param string $schema
      * @param string $database 
      */
-    public function getView($viewName, $schema = null, $database = null)
+    public function getView($viewName, $schema = null)
     {
         // TODO: Implement getView() method.
     }
@@ -187,7 +187,7 @@ class InformationSchemaMetadata implements MetadataInterface
      * @param  string $database
      * @return array 
      */
-    public function getColumnNames($table, $schema = null, $database = null)
+    public function getColumnNames($table, $schema = null)
     {
         // set values for database & schema
         $database = ($database) ?: '__DEFAULT_DB__';
@@ -214,7 +214,7 @@ class InformationSchemaMetadata implements MetadataInterface
      * @param  string $database
      * @return array 
      */
-    public function getColumns($table, $schema = null, $database = null)
+    public function getColumns($table, $schema = null)
     {
         // set values for database & schema
         $database = ($database) ?: '__DEFAULT_DB__';
@@ -242,7 +242,7 @@ class InformationSchemaMetadata implements MetadataInterface
      * @param  string $database
      * @return Object\ColumnObject 
      */
-    public function getColumn($columnName, $table, $schema = null, $database = null)
+    public function getColumn($columnName, $table, $schema = null)
     {
         // set values for database & schema
         $database = ($database) ?: '__DEFAULT_DB__';
@@ -280,7 +280,7 @@ class InformationSchemaMetadata implements MetadataInterface
      * @param  string $database
      * @return array 
      */
-    public function getConstraints($table, $schema = null, $database = null)
+    public function getConstraints($table, $schema = null)
     {
         // set values for database & schema
         $database = ($database) ?: '__DEFAULT_DB__';
@@ -311,7 +311,7 @@ class InformationSchemaMetadata implements MetadataInterface
      * @param  string $database
      * @return Object\ConstraintObject 
      */
-    public function getConstraint($constraintName, $table, $schema = null, $database = null)
+    public function getConstraint($constraintName, $table, $schema = null)
     {
         // set values for database & schema
         $database = ($database) ?: '__DEFAULT_DB__';
@@ -350,7 +350,7 @@ class InformationSchemaMetadata implements MetadataInterface
      * @param  string $database
      * @return Object\ConstraintKeyObject 
      */
-    public function getConstraintKeys($constraint, $table, $schema = null, $database = null)
+    public function getConstraintKeys($constraint, $table, $schema = null)
     {
         // set values for database & schema
         $database = ($database) ?: '__DEFAULT_DB__';
@@ -394,7 +394,7 @@ class InformationSchemaMetadata implements MetadataInterface
      * @param string $schema
      * @param string $database 
      */
-    public function getTriggerNames($schema = null, $database = null)
+    public function getTriggerNames($schema = null)
     {
         // TODO: Implement getTriggerNames() method.
     }
@@ -405,7 +405,7 @@ class InformationSchemaMetadata implements MetadataInterface
      * @param string $schema
      * @param string $database 
      */
-    public function getTriggers($schema = null, $database = null)
+    public function getTriggers($schema = null)
     {
         // TODO: Implement getTriggers() method.
     }
@@ -417,7 +417,7 @@ class InformationSchemaMetadata implements MetadataInterface
      * @param string $schema
      * @param string $database 
      */
-    public function getTrigger($triggerName, $schema = null, $database = null)
+    public function getTrigger($triggerName, $schema = null)
     {
         // TODO: Implement getTrigger() method.
     }

@@ -8,9 +8,9 @@
  * @package   Zend_Db
  */
 
-namespace Zend\Db\TableGateway\Exception;
+namespace Zend\Db\RowGateway\Exception;
 
-class InvalidArgumentException extends \InvalidArgumentException implements ExceptionInterface
+class RuntimeException extends \RuntimeException implements ExceptionInterface
 {
 
 }

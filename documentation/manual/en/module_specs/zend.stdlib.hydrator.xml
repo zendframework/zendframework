@@ -47,6 +47,26 @@ interface HydratorInterface
 ]]></programlisting>
     </section>
 
+    <section xml:id="zend.stdlib.hydrator.usage">
+        <info><title>Usage</title></info>
+
+        <para>
+            Usage is quite simple: simply instantiate the hydrator, and then pass information to it.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+use Zend\Stdlib\Hydrator;
+$hydrator = Hydrator\ArraySerializable();
+
+$object = new ArrayObject(array());
+
+$hydrator->hydrate($someData, $object);
+
+// or, if the object has data we want as an array:
+$data = $hydrator->extract($object);
+]]></programlisting>
+    </section>
+
     <section xml:id="zend.stdlib.hydrator.concrete">
         <info><title>Available Implementations</title></info>
 

@@ -1,0 +1,409 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<section 
+    xmlns="http://docbook.org/ns/docbook" version="5.0" 
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    xml:id="zend.form.quick-start">
+    <info><title>Zend\Form Quick Start</title></info>
+
+    <para>
+        Forms are relatively easy to create. At the bare minimum, each element or fieldset requires
+        a name; typically, you'll also provide some attributes to hint to the view layer how it
+        might render the item. The form itself will also typically compose an <classname
+            linkend="zend.input-filter">InputFilter</classname> -- which you can also conveniently
+        create directly in the form via a factory. Individual elements can hint as to what defaults
+        to use when generating a related input for the input filter.
+    </para>
+
+    <para>
+        Form validation is as easy as providing an array of data to the
+        <methodname>setData()</methodname> method. If you want to simplify your work even more, you
+        can bind an object to the form; on successful validation, it will be populated from the
+        validated values.
+    </para>
+
+    <example xml:id="zend.form.quick-start.programmatic">
+        <info><title>Programmatic Form Creation</title></info>
+
+        <para>
+            If nothing else, you can simply start creating elements, fieldsets, and forms and wiring
+            them together.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+use Zend\Captcha;
+use Zend\Form\Element;
+use Zend\Form\Fieldset;
+use Zend\Form\Form;
+use Zend\InputFilter\Input;
+use Zend\InputFilter\InputFilter;
+
+$name = new Element('name');
+$name->setAttributes(array(
+    'type'  => 'text',
+    'label' => 'Your name',
+));
+
+$email = new Element('email');
+$email->setAttributes(array(
+    'type'  => 'email',
+    'label' => 'Your email address',
+));
+
+$subject = new Element('subject');
+$subject->setAttributes(array(
+    'type'  => 'text',
+    'label' => 'Subject',
+));
+
+$message = new Element('message');
+$message->setAttributes(array(
+    'type'  => 'textarea',
+    'label' => 'Message',
+));
+
+$captcha = new Element\Captcha('captcha');
+$captcha->setCaptcha(new Captcha\Dumb());
+$captcha->setAttributes(array(
+    'label' => 'Please verify you are human',
+));
+
+$csrf = new Element\Csrf('security');
+
+$submit = new Element('send');
+$submit->setAttributes(array(
+    'type'  => 'submit',
+    'label' => 'Send',
+));
+
+
+$form = new Form('contact');
+$form->addElement($name);
+$form->addElement($email);
+$form->addElement($subject);
+$form->addElement($message);
+$form->addElement($captcha);
+$form->addElement($csrf);
+$form->addElement($send);
+
+$nameInput = new Input('name');
+// configure input... and all others
+$inputFilter = new InputFilter();
+// attach all inputs
+
+$form->setInputFilter($inputFilter);
+]]></programlisting>
+    
+        <para>
+            As you can see, this can be tedious.
+        </para>
+    </example>
+
+    <example xml:id="zend.form.quick-start.factory">
+        <info><title>Creation via Factory</title></info>
+
+        <para>
+            You can create the entire form, and input filter, using the
+            <classname>Factory</classname>. This is particularly nice if you want to store your
+            forms as pure configuration; you can simply pass the configuration to the factory and be
+            done.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+use Zend\Form\Factory;
+$factory = new Factory();
+$form    = $factory->createForm(array(
+    'hydrator' => 'Zend\Stdlib\Hydrator\ArraySerializable'
+    'elements' => array(
+        array(
+            'name' => 'name',
+            'attributes' => array(
+                'type'  => 'text',
+                'label' => 'Your name',
+            ),
+        ),
+        array(
+            'name' => 'email',
+            'attributes' => array(
+                'type'  => 'email',
+                'label' => 'Your email address',
+            ),
+        ),
+        array(
+            'name' => 'subject',
+            'attributes' => array(
+                'type'  => 'text',
+                'label' => 'Subject',
+            ),
+        ),
+        array(
+            'name' => 'message',
+            'attributes' => array(
+                'type'  => 'textarea',
+                'label' => 'Message',
+            ),
+        ),
+        array(
+            'type' => 'Zend\Form\Element\Captcha',
+            'name' => 'captcha',
+            'attributes' => array(
+                'label' => 'Please verify you are human',
+                'captcha => array(
+                    'class' => 'Dumb',
+                ),
+            ),
+        ),
+        array(
+            'type' => 'Zend\Form\Element\Csrf',
+            'name' => 'security',
+        ),
+        array(
+            'name' => 'send',
+            'attributes' => array(
+                'type'  => 'submit',
+                'label' => 'Send',
+            ),
+        ),
+    ),
+    /* If we had fieldsets, they'd go here; fieldsets contain
+     * "elements" and "fieldsets" keys, and potentially a "type"
+     * key indicating the specific FieldsetInterface 
+     * implementation to use.
+    'fieldsets' => array(
+    ),
+     */
+
+    // Configuration to pass on to 
+    // Zend\InputFilter\Factory::createInputFilter()
+    'input_filter' => array(
+        /* ... */
+    ),
+));
+]]></programlisting>
+
+        <para>
+            The chief benefits to using the <classname>Factory</classname> are allowing you to store
+            definitions in configuration, and usage of significant whitespace.
+        </para>
+    </example>
+
+    <example xml:id="zend.form.quick-start.extension">
+        <info><title>Factory-backed Form Extension</title></info>
+
+        <para>
+            The default <classname>Form</classname> implementation is backed by the
+            <classname>Factory</classname>. This allows you to extend it, and define your form
+            internally. This has the benefit of allowing a mixture of programmatic and
+            factory-backed creation, as well as defining a form for re-use in your application.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+namespace Contact;
+
+use Zend\Captcha\AdapterInterface as CaptchaAdapter;
+use Zend\Form\Element;
+use Zend\Form\Form;
+
+class ContactForm extends Form
+{
+    protected $captcha;
+
+    public function setCaptcha(CaptchaAdapter $captcha)
+    {
+        $this->captcha = $captcha;
+    }
+
+    public function prepareElements()
+    {
+        // add() can take either an Element/Fieldset instance, 
+        // or a specification, from which the appropriate object
+        // will be built.
+
+        $this->add(array(
+            'name' => 'name',
+            'attributes' => array(
+                'type'  => 'text',
+                'label' => 'Your name',
+            ),
+        ));
+        $this->add(array(
+            'name' => 'email',
+            'attributes' => array(
+                'type'  => 'email',
+                'label' => 'Your email address',
+            ),
+        ));
+        $this->add(array(
+            'name' => 'subject',
+            'attributes' => array(
+                'type'  => 'text',
+                'label' => 'Subject',
+            ),
+        ));
+        $this->add(array(
+            'name' => 'message',
+            'attributes' => array(
+                'type'  => 'textarea',
+                'label' => 'Message',
+            ),
+        ));
+        $this->add(array(
+            'type' => 'Zend\Form\Element\Captcha',
+            'name' => 'captcha',
+            'attributes' => array(
+                'label' => 'Please verify you are human',
+                'captcha => $this->captcha,
+            ),
+        )),
+        $this->add(new Element\Csrf('security'));
+        $this->add(array(
+            'name' => 'send',
+            'attributes' => array(
+                'type'  => 'submit',
+                'label' => 'Send',
+            ),
+        ));
+
+        // We could also define the input filter here, or
+        // lazy-create it in the getInputFilter() method.
+    }
+));
+]]></programlisting>
+
+        <para>
+            You'll note that this example introduces a method,
+            <methodname>prepareElements()</methodname>. This is done to allow altering and/or
+            configuring either the form or input filter factory instances, which could then have
+            bearing on how elements, inputs, etc. are created. In this case, it also allows
+            injection of the CAPTCHA adapter, allowing us to configure it elsewhere in our
+            application and inject it into the form.
+        </para>
+    </example>
+
+    <example xml:id="zend.form.quick-start.validation">
+        <info><title>Validating Forms</title></info>
+
+        <para>
+            Validating forms requires three steps. First, the form must have an input filter
+            attached. Second, you must inject the data to validate into the form. Third, you
+            validate the form. If invalid, you can retrieve the error messages, if any.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$form = new Contact\ContactForm();
+
+// If the form doesn't define an input filter by default, inject one.
+$form->setInputFilter(new Contact\ContactFilter());
+
+// Get the data. In an MVC application, you might try:
+$data = $request->post();  // for POST data
+$data = $request->query(); // for GET (or query string) data
+
+$form->setData($data);
+
+// Validate the form
+if ($form->isValid() {
+    $validatedData = $form->getData();
+} else {
+    $messages = $form->getMessages();
+}
+]]></programlisting>
+
+        <para>
+            You can get the raw data if you want, by accessing the composed input filter.
+        </para>
+    </example>
+
+    <example xml:id="zend.form.quick-start.binding">
+        <info><title>Binding an object</title></info>
+
+        <para>
+            As noted in the intro, forms in Zend Framework bridge the domain model and the view
+            layer. Let's see that in action.
+        </para>
+
+        <para>
+            When you <methodname>bind()</methodname> an object to the form, the following happens:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    The composed <classname>Hydrator</classname> calls
+                    <methodname>extract()</methodname> on the object, and uses the values returned,
+                    if any, to populate the <varname>value</varname> attributes of all elements.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    When <methodname>isValid()</methodname> is called, if
+                    <methodname>setData()</methodname> has not been previously set, the form uses
+                    the composed <classname>Hydrator</classname> to extract values from the object,
+                    and uses those during validation.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    If <methodname>isValid()</methodname> is successful (and the
+                    <varname>bindOnValidate</varname> flag is enabled, which is true by default),
+                    then the <classname>Hydrator</classname> will be passed the validated values to
+                    use to hydrate the bound object. (If you do not want this behavior, call
+                    <methodname>setBindOnValidate(FormInterface::BIND_MANUAL)</methodname>).
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            This is easier to understand in practice.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$contact = new ArrayObject;
+$contact['subject'] = '[Contact Form] ';
+$contact['message'] = 'Type your message here';
+
+$form    = new Contact\ContactForm;
+
+$form->bind($contact); // form now has default values for 
+                       // 'subject' and 'message'
+
+$data = array(
+    'name'    => 'John Doe',
+    'email'   => 'j.doe@example.tld',
+    'subject' => '[Contact Form] \'sup?',
+);
+$form->setData($data);
+
+if ($form->isValid()) {
+    // $contact now looks like:
+    // array(
+    //     'name'    => 'John Doe',
+    //     'email'   => 'j.doe@example.tld',
+    //     'subject' => '[Contact Form] \'sup?',
+    //     'message' => 'Type your message here',
+    // )
+    // only as an ArrayObject
+}
+]]></programlisting>
+
+        <para>
+            Zend Framework ships several standard <link
+                linkend="zend.stdlib.hydrator">hydrators</link>, and implementation is as simple as
+            implementing <classname>Zend\Stdlib\Hydrator\HydratorInterface</classname>, which looks
+            like this:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+namespace Zend\Stdlib\Hydrator;
+
+interface Hydrator
+{
+    /** @return array */
+    public function extract($object);
+    public function hydrate(array $data, $object);
+}
+]]></programlisting>
+    </example>
+</section>

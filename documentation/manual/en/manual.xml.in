@@ -992,8 +992,21 @@
             <!--</xi:include>-->
         <!--</chapter>-->
 
-        <!--<chapter xml:id="zend.form"><title>Zend_Form</title>-->
-        <!--</chapter>-->
+        <chapter xml:id="zend.form"><title>Zend_Form</title>
+            <title>Zend\Form</title>
+
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/zend.form.intro.xml" parse="xml">
+                <xi:fallback>
+                    <xi:include href="../en/module_specs/zend.form.intro.xml" parse="xml"/>
+                </xi:fallback>
+            </xi:include>
+
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/zend.form.quick-start.xml" parse="xml">
+                <xi:fallback>
+                    <xi:include href="../en/module_specs/zend.form.quick-start.xml" parse="xml"/>
+                </xi:fallback>
+            </xi:include>
+        </chapter>
 
         <!--<chapter xml:id="zend.gdata"><title>Zend_Gdata</title>-->
             <!---->
@@ -2105,6 +2118,16 @@
                 <!--</xi:fallback>-->
             <!--</xi:include>-->
         <!--</chapter>-->
+
+        <chapter xml:id="zend.stdlib">
+            <title>Zend\Stdlib</title>
+
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/zend.stdlib.hydrator.xml" parse="xml">
+                <xi:fallback>
+                    <xi:include href="../en/module_specs/zend.stdlib.hydrator.xml" parse="xml"/>
+                </xi:fallback>
+            </xi:include>
+        </chapter>
 
         <!--<chapter xml:id="zend.tag"><title>Zend_Tag</title>-->
             <!---->

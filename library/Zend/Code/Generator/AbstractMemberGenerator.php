@@ -70,7 +70,7 @@ abstract class AbstractMemberGenerator extends AbstractGenerator
     /**
      * Set flags
      *
-     * @param $flags
+     * @param int|array $flags
      * @return AbstractMemberGenerator
      */
     public function setFlags($flags)
@@ -91,7 +91,7 @@ abstract class AbstractMemberGenerator extends AbstractGenerator
     /**
      * Add flag
      *
-     * @param $flag
+     * @param int $flag
      * @return AbstractMemberGenerator
      */
     public function addFlag($flag)
@@ -103,7 +103,7 @@ abstract class AbstractMemberGenerator extends AbstractGenerator
     /**
      * Remove flag
      *
-     * @param $flag
+     * @param int $flag
      * @return AbstractMemberGenerator
      */
     public function removeFlag($flag)

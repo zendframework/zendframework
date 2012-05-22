@@ -33,7 +33,7 @@ use Zend\Stdlib\Exception;
 class ClassMethods implements HydratorInterface
 {
     /**
-     * CameCase usage to extract attribute with getter/setter method name
+     * CamelCase usage to extract attribute with getter/setter method name
      * @var boolean
      */
     protected $useCamelCase;

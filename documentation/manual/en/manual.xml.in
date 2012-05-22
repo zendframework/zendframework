@@ -2098,6 +2098,26 @@
             <!--</xi:include>-->
         <!--</chapter>-->
 
+        <chapter xml:id="zend.service-manager">
+            <info><title>Zend\ServiceManager</title></info>
+
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+                href="module_specs/zend.service-manager.intro.xml" parse="xml">
+                <xi:fallback>
+                    <xi:include href="../en/module_specs/zend.service-manager.intro.xml"
+                        parse="xml"/>
+                </xi:fallback>
+            </xi:include>
+
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+                href="module_specs/zend.service-manager.quick-start.xml" parse="xml">
+                <xi:fallback>
+                    <xi:include href="../en/module_specs/zend.service-manager.quick-start.xml"
+                        parse="xml"/>
+                </xi:fallback>
+            </xi:include>
+        </chapter>
+
         <!--<chapter xml:id="zend.session"><title>Zend_Session</title>-->
             <!---->
             <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Session-Introduction.xml" parse="xml">-->

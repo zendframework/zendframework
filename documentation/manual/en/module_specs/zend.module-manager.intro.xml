@@ -40,14 +40,15 @@
                 <emphasis role="strong">The Module Autoloader</emphasis> -
                 <classname>Zend\Loader\ModuleAutoloader</classname> is a specialized autoloader that
                 is responsible for the locating and loading of modules'
-                <classname>Module</classname> classes from a variety of sources.
+                <classname linkend="zend.module-manager.module-class">Module</classname> classes from
+                a variety of sources.
             </para>
         </listitem>
 
         <listitem>
             <para>
                 <link linkend="zend.module-manager.module-manager"><emphasis role="strong">The Module
-                        Manager</emphasis></link> - <classname>Zend\Module\Manager</classname>
+                        Manager</emphasis></link> - <classname>Zend\ModuleManager\ModuleManager</classname>
                 simply takes an array of module names and fires a sequence of events for each one,
                 allowing the behavior of the module system to be defined entirely by the listeners
                 which are attached to the module manager.
@@ -56,7 +57,7 @@
 
         <listitem>
             <para>
-                <emphasis role="strong">Module Manager Listeners</emphasis> - Event listeners can be
+                <emphasis role="strong">ModuleManager Listeners</emphasis> - Event listeners can be
                 attached to the module manager's various events. These listeners can do everything
                 from resolving and loading modules to performing complex initialization tasks and
                 introspection into each returned module object.
@@ -97,8 +98,9 @@ module_root/
         &lt;module_namespace&gt;/
             &lt;test code files&gt;
     views/
-        &lt;dir-named-after-a-controller/
-            &lt;.phtml files&gt;
+        &lt;dir-named-after-module-namespace&gt;/
+            &lt;dir-named-after-a-controller&gt;/
+                &lt;.phtml files&gt;
 </literallayout>
 
     <section xml:id="zend.module-manager.intro.the-autoload-files">
@@ -141,7 +143,7 @@ module_root/
         <para>
             The purpose of these three files is to provide reasonable default mechanisms for
             autoloading the classes contained in the module, thus providing a trivial way to consume
-            the module without requiring <classname>Zend\Module</classname> (e.g., for use outside a
+            the module without requiring <classname>Zend\ModuleManager</classname> (e.g., for use outside a
             ZF2 application).
         </para>
     </section>

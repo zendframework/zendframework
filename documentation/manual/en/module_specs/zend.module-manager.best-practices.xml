@@ -18,16 +18,16 @@
             <para>
                 <emphasis role="strong">Keep the <methodname>init()</methodname> method
                     lightweight.</emphasis> Be conservative with the actions you perform in the
-                <methodname>init()</methodname> method of your <classname>Module</classname> class.
-                This method is run for <emphasis>every</emphasis> page request, and should not
-                perform anything heavy. As a rule of thumb, registering event listeners is an
-                appropriate task to perform in the <methodname>init()</methodname> method. Such
-                lightweight tasks will generally not have a measurable impact on the performance of
-                your application, even with many modules enabled. It is considered bad practice to
-                utilize the <methodname>init()</methodname> method for setting up or configuring
+                <methodname>init()</methodname> and <methodname>onBootstrap()</methodname> methods
+                of your <classname>Module</classname> class.  These methods are run for
+                <emphasis>every</emphasis> page request, and should not perform anything heavy. As a
+                rule of thumb, registering event listeners is an appropriate task to perform in
+                these methods. Such lightweight tasks will generally not have a measurable impact on
+                the performance of your application, even with many modules enabled. It is
+                considered bad practice to utilize these methods for setting up or configuring
                 instances of application resources such as a database connection, application
-                logger, or mailer.  Tasks such as these are better served through the dependency
-                injection capabilities of Zend Framework 2.
+                logger, or mailer.  Tasks such as these are better served through the service
+                manager capabilities of Zend Framework 2.
             </para>
         </listitem>
 

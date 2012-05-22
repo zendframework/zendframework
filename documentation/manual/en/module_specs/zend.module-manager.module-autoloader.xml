@@ -23,7 +23,7 @@
 
         <para>
             If you are using the provided
-            <classname>Zend\Module\Listener\DefaultListenerAggregate</classname>, then it is very
+            <classname>Zend\ModuleManager\Listener\DefaultListenerAggregate</classname>, then it is very
             simple to set up the module autoloader. You simply need to provide an array of module
             paths, either absolute or relative to the application's root, for the module autoloader
             to check when loading modules. The default listener aggregate will take care of
@@ -49,8 +49,8 @@
 
             <programlisting language="php"><![CDATA[
 // public/index.php
-use Zend\Module\Listener,
-    Zend\Module\Manager;
+use Zend\ModuleManager\Listener;
+use Zend\ModuleManager\ModuleManager;
 
 chdir(dirname(__DIR__));
 
@@ -65,7 +65,7 @@ $listenerOptions = new Listener\ListenerOptions(array(
 $defaultListeners = new Listener\DefaultListenerAggregate($listenerOptions);
 
 // Instantiate the module manager
-$moduleManager = new Manager(array(
+$moduleManager = new ModuleManager(array(
     'Application',
     'FooModule',
     'BarModule',
@@ -112,9 +112,9 @@ $moduleManager->loadModules();
 
             <programlisting language="php"><![CDATA[
 // ./public/index.php
-use Zend\Loader\ModuleAutoloader,
-    Zend\Module\Listener,
-    Zend\Module\Manager;
+use Zend\Loader\ModuleAutoloader;
+use Zend\ModuleManager\Listener;
+use Zend\ModuleManager\ModuleManager;
 
 chdir(dirname(__DIR__));
 
@@ -143,7 +143,7 @@ $defaultListeners = new Listener\DefaultListenerAggregate($listenerOptions);
  */
 
 // Instantiate the module manager
-$moduleManager = new Manager(array(
+$moduleManager = new ModuleManager(array(
     'MyModule',
     'FooModule',
     'BarModule',

@@ -9,10 +9,10 @@
     
 
     <para>
-        The module manager, <classname>Zend\Module\Manager</classname>, is a very simple class which
-        is responsible for iterating over an array of module names and triggering a sequence of
-        events for each. Instantiation of module classes, initialization tasks, and configuration
-        are all performed by attached event listeners.
+        The module manager, <classname>Zend\ModuleManager\ModuleManager</classname>, is a very
+        simple class which is responsible for iterating over an array of module names and triggering
+        a sequence of events for each. Instantiation of module classes, initialization tasks, and
+        configuration are all performed by attached event listeners.
     </para>
 
     <section xml:id="zend.module-manager.module-manager.module-manager-events">
@@ -21,7 +21,7 @@
         
 
         <variablelist>
-            <title>Events triggered by <classname>Zend\Module\Manager</classname></title>
+            <title>Events triggered by <classname>Zend\ModuleManager\ModuleManager</classname></title>
 
             <varlistentry>
                 <term>loadModules.pre</term>
@@ -31,7 +31,7 @@
                         Triggered prior to any modules being loaded. This event is useful for
                         registering a module autoloader. ZF2 ships with a default module autoloader
                         which is automatically attached to this event if you are using
-                        <classname>Zend\Module\Listener\DefaultListenerAggregate</classname>, both
+                        <classname>Zend\ModuleManager\Listener\DefaultListenerAggregate</classname>, both
                         of which are covered in detail later.
                     </para>
                 </listitem>
@@ -82,7 +82,7 @@
                         This event is triggered by the module manager to allow any listeners to
                         perform work after every module has finished loading. For example, the
                         default configuration listener,
-                        <classname>Zend\Module\Listener\ConfigListener</classname> (covered later),
+                        <classname>Zend\ModuleManager\Listener\ConfigListener</classname> (covered later),
                         attaches to this event to merge additional user-supplied configuration which
                         is meant to override the default supplied configurations of installed
                         modules.
@@ -105,7 +105,7 @@
             <title>Provided Module Manager Listeners</title>
 
             <varlistentry>
-                <term><classname>Zend\Module\Listener\DefaultListenerAggregate</classname></term>
+                <term><classname>Zend\ModuleManager\Listener\DefaultListenerAggregate</classname></term>
 
                 <listitem>
                     <para>
@@ -119,19 +119,22 @@
             </varlistentry>
 
             <varlistentry>
-                <term><classname>Zend\Module\Listener\ModuleResolverListener</classname></term>
+                <term><classname>Zend\ModuleManager\Listener\AutoloaderListener</classname></term>
 
                 <listitem>
                     <para>
-                        This is the default module resolver. It attaches to the "loadModule.resolve"
-                        event and simply returns an instance of
-                        <classname>{moduleName}\Module</classname>.
+                        This listener checks each module to see if it has implemented 
+                        <classname>Zend\ModuleManager\Feature\AutoloaderProviderInterface</classname>
+                        or simply defined the <methodname>getAutoloaderConfig()</methodname> method. If
+                        so, it calls the <methodname>getAutoloaderConfig()</methodname> method on
+                        the module class and passes the returned array to
+                        <classname>Zend\Loader\AutoloaderFactory</classname>.
                     </para>
                 </listitem>
             </varlistentry>
 
             <varlistentry>
-                <term><classname>Zend\Module\Listener\ConfigListener</classname></term>
+                <term><classname>Zend\ModuleManager\Listener\ConfigListener</classname></term>
 
                 <listitem>
                     <para>
@@ -144,31 +147,108 @@
             </varlistentry>
             
             <varlistentry>
-                <term><classname>Zend\Module\Listener\InitTrigger</classname></term>
+                <term><classname>Zend\ModuleManager\Listener\InitTrigger</classname></term>
 
                 <listitem>
                     <para>
-                        If a module class has an <methodname>init()</methodname> method, this
-                        listener will call it and pass the current instance of
-                        <classname>Zend\Module\Manager</classname> as the sole parameter. The
+                        If a module class either implements
+                        <classname>Zend\ModuleManager\Feature\InitProviderInterface</classname>, or
+                        simply defines an <methodname>init()</methodname> method, this
+                        listener will call <methodname>init()</methodname> and pass the current instance of
+                        <classname>Zend\ModuleManager\ModuleManager</classname> as the sole parameter. The
                         <methodname>init()</methodname> method is called for
-                        <emphasis>every</emphasis> module on <emphasis>every</emphasis> page request
-                        and should <emphasis>only</emphasis> be used for performing
+                        <emphasis>every</emphasis> module implementing this feature, on
+                        <emphasis>every</emphasis> page request and should <emphasis>only</emphasis>
+                        be used for performing <emphasis>lightweight</emphasis> tasks such as
+                        registering event listeners.
+                    </para>
+                </listitem>
+            </varlistentry>
+            
+            <varlistentry>
+                <term><classname>Zend\ModuleManager\Listener\LocatorRegistrationListener</classname></term>
+
+                <listitem>
+                    <para>
+                        If a module class implements
+                        <classname>Zend\ModuleManager\Feature\LocatorRegisteredInterface</classname>, this
+                        listener will inject the module class instance into the
+                        <classname>ServiceManager</classname> using the module class name as the
+                        service name. This allows you to later retrieve the module class from the
+                        <classname>ServiceManager</classname>.
+                    </para>
+                </listitem>
+            </varlistentry>
+            
+            <varlistentry>
+                <term><classname>Zend\ModuleManager\Listener\ModuleResolverListener</classname></term>
+
+                <listitem>
+                    <para>
+                        This is the default module resolver. It attaches to the "loadModule.resolve"
+                        event and simply returns an instance of
+                        <classname>{moduleName}\Module</classname>.
+                    </para>
+                </listitem>
+            </varlistentry>
+            
+            <varlistentry>
+                <term><classname>Zend\ModuleManager\Listener\OnBootstrapListener</classname></term>
+
+                <listitem>
+                    <para>
+                        If a module class implements
+                        <classname>Zend\ModuleManager\Feature\BootstrapListenerInterface</classname>,
+                        or simply defines an <methodname>onBootstrap()</methodname> method, this
+                        listener will register the <methodname>onBootstrap()</methodname> method
+                        with the <classname>Zend\Mvc\Application</classname>
+                        <varname>bootstrap</varname> event. This method will then be triggered
+                        during the <varname>bootstrap</varname> event (and passed an
+                        <classname>MvcEvent</classname> instance).
+                    </para>
+
+                    <para>
+                        Like the <classname>InitTrigger</classname>, the
+                        <methodname>onBootstrap()</methodname> method is called for
+                        <emphasis>every</emphasis> module implementing this feature, on
+                        <emphasis>every</emphasis> page request, and should
+                        <emphasis>only</emphasis> be used for performing
                         <emphasis>lightweight</emphasis> tasks such as registering event listeners.
                     </para>
                 </listitem>
             </varlistentry>
-
+            
             <varlistentry>
-                <term><classname>Zend\Module\Listener\AutoloaderListener</classname></term>
+                <term><classname>Zend\ModuleManager\Listener\ServiceListener</classname></term>
 
                 <listitem>
                     <para>
-                        This listener checks each module to see if it has implemented the
-                        <classname>Zend\Module\Consumer\AutoloaderProvider</classname> interface. If
-                        so, it calls the <methodname>getAutoloaderConfig()</methodname> method on
-                        the module class and passes the returned array to
-                        <classname>Zend\Loader\AutoloaderFactory</classname>.
+                        If a module class implements
+                        <classname>Zend\ModuleManager\Feature\ServiceProviderInterface</classname>,
+                        or simply defines an <methodname>getServiceConfiguration()</methodname> method, this
+                        listener will call that method and aggregate the return values for use in
+                        configuring the <classname>ServiceManager</classname>.
+                    </para>
+
+                    <para>
+                        The <methodname>getServiceConfiguration()</methodname> method may return
+                        either an array of configuration compatible with
+                        <classname>Zend\ServiceManager\Configuration</classname>, an instance of
+                        that class, or the string name of a class that extends it. Values are merged
+                        and aggregated on completion, and then merged with any configuration from
+                        the <classname>ConfigListener</classname> falling
+                        under the <varname>service_manager</varname> key. For more information, see
+                        the <classname linkend="zend.service-manager">ServiceManager</classname>
+                        documentation.
+                    </para>
+
+                    <para>
+                        Unlike the other listeners, this listener is not managed by the
+                        <classname>DefaultListenerAggregate</classname>; instead, it is created and
+                        instantiated within the
+                        <classname>Zend\Mvc\Service\ModuleManagerFactory</classname>, where it is
+                        injected with the current <classname>ServiceManager</classname> instance
+                        before being registered with the <classname>ModuleManager</classname> events.
                     </para>
                 </listitem>
             </varlistentry>

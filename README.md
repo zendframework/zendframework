@@ -4,103 +4,114 @@ Master: [![Build Status](https://secure.travis-ci.org/zendframework/zf2.png?bran
 
 ## RELEASE INFORMATION
 
-*Zend Framework 2.0.0beta3*
+*Zend Framework 2.0.0beta4*
 
 THIS RELEASE IS A DEVELOPMENT RELEASE AND NOT INTENDED FOR PRODUCTION USE.
 PLEASE USE AT YOUR OWN RISK.
 
-This is the third in a series of planned beta releases. The beta release
+This is the fourth in a series of planned beta releases. The beta release
 cycle will follow the "gmail" style of betas, whereby new features will
 be added in each new release, and BC will not be guaranteed; beta
-releases will happen approximately every six weeks. 
+releases will happen _approximately_ every six weeks. 
 
-Once the established milestones have been reached and the featureset has
-reached maturity and reasonable stability, we will freeze the API and
-prepare for Release Candidate status.
+Once the established milestones have been reached and the featureset has reached
+maturity and reasonable stability, we will freeze the API and prepare for
+Release Candidate (RC) status. At this time, we are only planning for one more
+beta release (beta5) before starting the RC process.
 
-### NEW FEATURES IN BETA3
+### NEW FEATURES IN BETA4
 
- -  Refactored Config component (Ben Scholzen, Artur Bodera, Enrico Zimuel, 
-    Evan Coury)
-     -  All readers moved under Zend\Config\Reader
-         -  JSON and YAML readers removed until beta4
-         -  New API:
+ - Config component (Enrico Zimuel)
+    -  Added reader and writer implementations for JSON and YAML configuration
+ - Crypt and Math (Enrico Zimuel)
+    - Creates a generic API for string and stream en/decryption
+    - Provides bcrypt support
+    - Provides BigInteger support
+    - Provides common methodology surrounding credential encryption and hashing
+ - Db layer (Ralph Schindler)
+ - EventManager (Matthew Weier O'Phinney)
+    - New SharedEventManager, a non-static version of the original
+      StaticEventManager
+    - StaticEventManager now extends SharedEventManager and implements a
+      singleton pattern
+    - New ServiceManager creates a shared instance of SharedEventManager and
+      injects it in a non-shared EventManager instance per service; static usage
+      is discouraged at this time.
+    - attachAggregate() now accepts an optional $priority, which, when present,
+      will be passed to the ListenerAggregate, allowing specifying a priority
+      during attachment of its events.
+    - EventManager now can handle arrays of events as well as wildcard events
+    - SharedEventManager now can handle arrays of contexts, wildcard contexts,
+      and arrays/wildcard events.
+ - Form (Matthew Weier O'Phinney, Kyle Spraggs, Guilherme Blanco)
+    - Complete rewrite
+    - Elements compose a name and attributes
+    - Fieldsets compose a name, attributes, and elements and fieldsets
+    - Forms compose a name, attributes, elements, fieldsets, an InputFilter, and
+      optionally a Hydrator and bound object.
+    - New form view helpers accept the Form objects in order to generate markup.
+    - Object binding allows direct binding of model data to and from the Form.
+ - InputFilter (Matthew Weier O'Phinney)
+    - New component for object-oriented creation of input filters
+    - Input objects compose filter and validator chains, as well as metadata
+      such as required, allow empty, break on failure, and more.
+    - InputFilter objects compose Input and InputFilter objects, and allow
+      validating the entire set or specified validation groups.
+ - Log (Enrico Zimuel, Benoit Durand)
+    - Refactored to provide more flexibility
+    - Adds API discoverability (instead of method overloading)
+    - Uses the PluginBroker for loading writers and formatters
+    - Uses PriorityQueue to manage writer priority
+    - Uses FilterChain for filtering messages
+    - Adds a renderer for exceptions, a JSON formatter, and additional interfaces
+ - Mail (Enrico Zimuel)
+    - Allow batch sending via the SMTP transport
+ - ModuleManager (Evan Coury, Matthew Weier O'Phinney)
+    - Renamed from "Module" to "ModuleManager"
+    - Renamed "Consumer" subnamespace to "Feature"
+    - Added new listeners:
+      - OnBootstrapListener (Module classes defining onBootstrap() will have
+        that method attached as a listener on the Application bootstrap event)
+      - LocatorRegistrationListener (Module classes implementing the
+        LocatorRegisteredInterface feature will be injected in the
+        ServiceManager)
+      - ServiceListener (Module classes defining getServiceConfiguration() will
+        have that method called, and the configuration merged; once all modules
+        are loaded, that merged configuration will be passed to the
+        ServiceManager)
+ - MVC (Matthew Weier O'Phinney, Ralph Schindler, Evan Coury)
+    - Removed Bootstrap class and rewrote Application class
+      - Composes a ServiceManager, and simply fires events
+    - Added RouteListener and DispatchListener classes, implementing the default
+      route and dispatch strategies.
+    - Created a new "Service" subnamespace, with ServiceManager configuration
+      and factories for the default MVC services.
+    - Created a new "ViewManager" class, which triggers on the bootstrap event,
+      at which time it creates the various objects of the view layer and wires
+      them together as well as registers them with the appropriate events.
+ - ServiceManager component (Ralph Schindler, Matthew Weier O'Phinney)
+    - Highly performant, programmatic service creation
+    - Largely replaces DI, but can also consume Zend\Di
+    - Allows:
+      - Service registration
+      - Lazy-loaded service objects
+      - Service factories
+      - Service aliasing
+      - Abstract (fallback) factories
+      - Initializers (manipulate instances after creation)
+    - Fully integrated in the MVC solution
+ - Renamed interfaces
+   - Most, if not all, interfaces were renamed to suffix with the word
+     "Interface". This is to promote discovery of interfaces, as well as make
+     naming simpler.
+ - Composer support
+   - Zend Framework is now installable via Composer (http://packagist.org/), as
+     are each of its individual components
+ - Travis CI integration
+   - ZF2 is tested on each commit by http://travis-ci.org/
 
-            ```php
-            $xml = new Zend\Config\Reader\Xml(); 
-            $config = new Zend\Config\Config($xml->fromFile($filename));
-            ```
-            or:
-
-            ```php
-            $xml     = new Zend\Config\Reader\Xml(); 
-            $config = $xml->fromFile($filename, true);
-            ```
-
-            or, simpler: `$config = Zend\Config\Factory::fromFile($filename);`
-         -  All constant injection removed from readers
-             -  New Processor API allows processing the retrieved configuration 
-                to do optional injection/manipulation of configuration values.
-         -  Ability to import other configuration files within a configuration 
-            file added.
-     -  Factory added, to simplify retrieving configuration from any 
-        configuration format supported.
- -  New View layer (Matthew Weier O'Phinney)
-     -  View layer is now:
-         -  Models, for aggregating and representing data to render; models may be
-            nested to represent complex view hierarchies
-         -  Renderers, which render templates, using either variables provided or
-            Models
-         -  Resolvers, which resolve template names to resources a renderer may
-            consume
-         -  View, which allows attaching strategies for determining the renderer 
-            to use, as well as how to inject the response when done.
-     -  Old `Zend_View` is now `Zend\View\Renderer\PhpRenderer`
-         -  Composes a `Resolver`, a `PluginBroker` (for helpers), a Variables 
-            container (for aggregating variables to pass to the view script), 
-            and a `FilterChain` (for output filtering). 
-         -  `render()` now accepts `View\Models`
-         -  allows rendering stacks of templates under the same variable scope, 
-            via the `addTemplate()` mechanism
-         -  moves escaping to an Escape view helper; no auto-escaping is enabled
-     -  MVC integration
-         -  Strategy listeners for:
-             -  Handling and returning 404 pages
-             -  Handling and returning error pages due to exceptions
-             -  RAD support for creation and injection of view models from action
-                controller return values
-         -  Addition of a "render" event, executing after "dispatch" and before
-            "finish"
- -  New Db layer (Ralph Schindler)
-     -  Complete rewrite from the ground up.
-     -  New architecture features low-level drivers, which also provide access to
-        the PHP resource being consumed; adapters, which provide basic 
-        abstraction for common CRUD operations; new SQL abstraction layer, with 
-        full predicate support; abstraction for ResultSet's, with the ability to 
-        cast rows to specific object types; abstraction for SQL metadata; and a 
-       revised Table and Row Data Gateway.
- -  New Zend\Service\AgileZen component (Enrico Zimuel)
-     -  Support for the full AgileZen (http://www.agilezen.com) API
-     -  Developed for use with http://framework.zend.com/zf2/board 
- -  PHP 5.4 support
-     -  A number of issues when running ZF2 under PHP 5.4 were identified and
-        corrected.
- -  Other components that received attention:
-     -  Zend\GData (Maks3w)
-     -  Zend\Navigation (Kyle Spraggs, Frank Brückner)
-     -  Zend\Session (Mike Willbanks) (mwillibanks)
-     -  Zend\Service\Technorati (Maks3w)
-     -  Zend\Service\StrikeIron (Maks3w)
-     -  Zend\Service\Twitter (Maks3w)
-     -  Zend\Http\Header\Accept* (Matthew Weier O'Phinney, Enrico Zimuel)
-     -  Adds support for q priority, level identifiers, and wildcard media and
-        submedia types
-     -  Zend\Ldap (Maks3w, Stefah Gehrig)
-     -  Zend\Oauth (bakura10)
-     -  Zend\Mvc and Zend\Module (Evan Coury, many others)
-
-Around 200 pull requests for a variety of features and bugfixes were handled
-since beta2.
+Over *400* pull requests for a variety of features and bugfixes were handled
+since beta3!
 
 ### SYSTEM REQUIREMENTS
 

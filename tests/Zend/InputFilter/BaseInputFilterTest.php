@@ -430,7 +430,7 @@ class BaseInputFilterTest extends TestCase
     public function testCanRetrieveRawValuesIndividuallyWithoutValidating()
     {
         $filter = $this->getInputFilter();
-        $validData = array(
+        $data = array(
             'foo' => ' bazbat ',
             'bar' => '12345',
             'nest' => array(
@@ -438,8 +438,24 @@ class BaseInputFilterTest extends TestCase
                 'bar' => '12345',
             ),
         );
-        $filter->setData($validData);
+        $filter->setData($data);
         $test = $filter->getRawValue('foo');
-        $this->assertSame($validData['foo'], $test);
+        $this->assertSame($data['foo'], $test);
+    }
+
+    public function testCanRetrieveUnvalidatedButFilteredInputValue()
+    {
+        $filter = $this->getInputFilter();
+        $data = array(
+            'foo' => ' baz 2 bat ',
+            'bar' => '12345',
+            'nest' => array(
+                'foo' => ' bazbat ',
+                'bar' => '12345',
+            ),
+        );
+        $filter->setData($data);
+        $test = $filter->getValue('foo');
+        $this->assertSame('baz bat', $test);
     }
 }

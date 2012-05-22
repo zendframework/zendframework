@@ -44,7 +44,7 @@ class Foo implements DispatchableInterface
       <title>InjectApplicationEvent</title>
 
       <para>
-        The <classname>Zend\Mvc\InjectApplicationEvent</classname> interface
+        The <classname>Zend\Mvc\InjectApplicationEventInterface</classname>
         hints to the <classname>Application</classname> instance that it should
         inject its <classname>MvcEvent</classname> into the controller itself.
         Why would this be useful?
@@ -75,7 +75,7 @@ if (!$id) {
 ]]></programlisting>
 
       <para>
-        The <classname>InjectApplicationEvent</classname> interface defines
+        The <classname>InjectApplicationEventInterface</classname> defines
         simply two methods:
       </para>
 
@@ -87,12 +87,12 @@ public function getEvent($event);
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.mvc.controllers.interfaces.locator-aware">
-      <title>LocatorAware</title>
+    <section xml:id="zend.mvc.controllers.interfaces.service-manager-aware">
+      <title>ServiceManagerAware</title>
 
       <para>
         In most cases, you should define your controllers such that
-        dependencies are injected by the Dependency Injection container,
+        dependencies are injected by the application's <classname>ServiceManager</classname>,
         via either constructor arguments or setter methods.
       </para>
 
@@ -105,17 +105,54 @@ public function getEvent($event);
       </para>
 
       <para>
-        The <classname>LocatorAware</classname> interface hints to the
-        <classname>Application</classname> that it should inject its Locator
-        instance (whether that's a DI container or a custom Service
-        Locator) into the controller. It defines simply two methods:
+        The <classname>ServiceManagerAwareInterface</classname> interface hints to 
+        the <classname>ServiceManager</classname> that it should inject itself
+        into the controller. It defines simply one method:
       </para>
 
       <programlisting language="php"><![CDATA[
-use Zend\Di\LocatorInterface;
+use Zend\ServiceManager\ServiceManager;
+use Zend\ServiceManager\ServiceManagerAwareInterface;
 
-public function setLocator(LocatorInterface $locator);
-public function getLocator($locator);
+public function setServiceManager(ServiceManager $serviceManager);
+]]></programlisting>
+    </section>
+
+    <section xml:id="zend.mvc.controllers.interfaces.event-manager-aware">
+        <info><title>EventManagerAware</title></info>
+
+        <para>
+            Typically, it's nice to be able to tie into a controller's workflow
+            without needing to extend it or hardcode behavior into it. The
+            solution for this at the framework level is to use the
+            <classname>EventManager</classname>.
+        </para>
+
+        <para>
+            You can hint to the <classname>ServiceManager</classname> that you
+            want an <classname>EventManager</classname> injected by implementing
+            the interfaces <classname>EventManagerAwareInterface</classname> and
+            <classname>EventsCapableInterface</classname>; the former tells the
+            <classname>ServiceManager</classname> to inject an
+            <classname>EventManager</classname>, the latter to other objects
+            that this class has an accessible
+            <classname>EventManager</classname> instance.
+        </para>
+
+        <para>
+            Combined, you define two methods. The first, a setter, should also
+            set any <classname>EventManager</classname> identifiers you want to
+            listen on, and the second, a getter, should simply return the
+            composed <classname>EventManager</classname> instance
+        </para>
+
+        <programlisting language="php"><![CDATA[
+use Zend\EventManager\EventManagerAwareInterface;
+use Zend\EventManager\EventManagerInterface;
+use Zend\EventManager\EventsCapableInterface;
+
+public function setEventManager(EventManagerInterface $events);
+public function events();
 ]]></programlisting>
     </section>
 
@@ -298,42 +335,32 @@ class BarController extends ActionController
 
         <listitem>
           <para>
-            <classname>Zend\Mvc\InjectApplicationEvent</classname>
+            <classname>Zend\Mvc\InjectApplicationEventInterface</classname>
           </para>
         </listitem>
 
         <listitem>
           <para>
-            <classname>Zend\Mvc\LocatorAware</classname>
+            <classname>Zend\ServiceManager\ServiceManagerAwareInterface</classname>
+          </para>
+        </listitem>
+
+        <listitem>
+          <para>
+            <classname>Zend\EventManager\EventManagerAwareInterface</classname>
+          </para>
+        </listitem>
+
+        <listitem>
+          <para>
+            <classname>Zend\EventManager\EventsCapableInterface</classname>
           </para>
         </listitem>
       </itemizedlist>
 
       <para>
-        Additionally, it composes
-        <classname>Zend\EventManager\EventCollection</classname>, exposing the
-        following methods:
-      </para>
-
-      <itemizedlist>
-        <listitem>
-          <para>
-            <classname>setEventManager(EventCollection $events)</classname>
-          </para>
-        </listitem>
-
-        <listitem>
-          <para>
-            <methodname>events()</methodname> (returns the attached
-            <classname>EventCollection</classname>, and an
-            <classname>EventManager</classname> by default.
-          </para>
-        </listitem>
-      </itemizedlist>
-
-      <para>
-        By default, it will create an <classname>EventManager</classname> that
-        listens on the following contexts:
+        The composed <classname>EventManager</classname> will be configured to
+        listen on the following contexts:
       </para>
 
       <itemizedlist>
@@ -451,42 +478,32 @@ class BarController extends ActionController
 
         <listitem>
           <para>
-            <classname>Zend\Mvc\InjectApplicationEvent</classname>
+            <classname>Zend\Mvc\InjectApplicationEventInterface</classname>
           </para>
         </listitem>
 
         <listitem>
           <para>
-            <classname>Zend\Mvc\LocatorAware</classname>
+            <classname>Zend\ServiceManager\ServiceManagerAwareInterface</classname>
+          </para>
+        </listitem>
+
+        <listitem>
+          <para>
+            <classname>Zend\EventManager\EventManagerAwareInterface</classname>
+          </para>
+        </listitem>
+
+        <listitem>
+          <para>
+            <classname>Zend\EventManager\EventsCapableInterface</classname>
           </para>
         </listitem>
       </itemizedlist>
 
       <para>
-        Additionally, it composes
-        <classname>Zend\EventManager\EventCollection</classname>, exposing the
-        following methods:
-      </para>
-
-      <itemizedlist>
-        <listitem>
-          <para>
-            <methodname>setEventManager(EventCollection $events)</methodname>
-          </para>
-        </listitem>
-
-        <listitem>
-          <para>
-            <methodname>events()</methodname> (returns the attached
-            <classname>EventCollection</classname>, and an
-            <classname>EventManager</classname> by default.
-          </para>
-        </listitem>
-      </itemizedlist>
-
-      <para>
-        By default, it will create an <classname>EventManager</classname> that
-        listens on the following contexts:
+        The composed <classname>EventManager</classname> will be configured to
+        listen on the following contexts:
       </para>
 
       <itemizedlist>
@@ -498,7 +515,7 @@ class BarController extends ActionController
 
         <listitem>
           <para>
-            <classname>Zend\Mvc\Controller\RestfulController</classname>
+            <classname>Zend\Mvc\Controller\ActionController</classname>
           </para>
         </listitem>
       </itemizedlist>

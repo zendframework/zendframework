@@ -1579,6 +1579,12 @@
                 </xi:fallback>
             </xi:include>
 
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Mvc-Services.xml" parse="xml">
+                <xi:fallback>
+                    <xi:include href="../en/module_specs/Zend_Mvc-Services.xml" parse="xml"/>
+                </xi:fallback>
+            </xi:include>
+
             <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Mvc-Routing.xml" parse="xml">
                 <xi:fallback>
                     <xi:include href="../en/module_specs/Zend_Mvc-Routing.xml" parse="xml"/>

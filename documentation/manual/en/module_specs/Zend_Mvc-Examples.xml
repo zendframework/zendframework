@@ -31,7 +31,7 @@ $response = $this->response;
 
       <para>
         Additionally, if your controller implements
-        <classname>InjectApplicationEvent</classname> (as both
+        <classname>InjectApplicationEventInterface</classname> (as both
         <classname>ActionController</classname> and
         <classname>RestfulController</classname> do), you can access these
         objects from the attached <classname>MvcEvent</classname>:
@@ -60,7 +60,7 @@ $response = $event->getResponse();
 
       <para>
         Within your controller, if you implement
-        <classname>InjectApplicationEvent</classname> (as both
+        <classname>InjectApplicationEventInterface</classname> (as both
         <classname>ActionController</classname> and
         <classname>RestfulController</classname> do), you can access this
         object from the attached <classname>MvcEvent</classname>:
@@ -113,20 +113,20 @@ $matches = $event->getRouteMatch();
 
       <para>
         Each <classname>Module</classname> class can have an optional
-        <methodname>init()</methodname> method. Typically, you'll setup
-        event listeners for you module here. The <methodname>init()</methodname>
-        method is called for <emphasis>every</emphasis> module on
-        <emphasis>every</emphasis> page request and should
-        <emphasis>only</emphasis> be used for performing
+        <methodname>onBootstrap()</methodname> method. Typically, you'll do
+        module-specific configuration here, or setup event listeners for you
+        module here. The <methodname>onBootstrap()</methodname> method is called
+        for <emphasis>every</emphasis> module on <emphasis>every</emphasis> page
+        request and should <emphasis>only</emphasis> be used for performing
         <emphasis>lightweight</emphasis> tasks such as registering event
         listeners.
       </para>
 
       <para>
-        The base <classname>Bootstrap</classname> class shipped with the
+        The base <classname>Application</classname> class shipped with the
         framework has an <classname>EventManager</classname> associated with it,
-        and once the locator and router instances are initialized, it triggers a
-        "bootstrap" event, with "application" and "config" parameters.
+        and once the modules are initialized, it triggers a "bootstrap" event,
+        with a <methodname>getApplication()</methodname> method on the event.
       </para>
 
       <para>
@@ -137,23 +137,13 @@ $matches = $event->getRouteMatch();
       <programlisting language="php"><![CDATA[
 namespace SomeCustomModule;
 
-use Zend\EventManager\StaticEventManager,
-    Zend\Mvc\MvcEvent;
-
 class Module
 {
-    public function init()
+    public function onBootstrap($e)
     {
-        // Remember to keep the init() method as lightweight as possible
-        $events = StaticEventManager::getInstance();
-        $events->attach('bootstrap', MvcEvent::EVENT_BOOTSTRAP, array($this, 'registerListeners'));
-    }
-
-    public function registerListeners($e)
-    {
-        $application = $e->getParam('application');
-        $config      = $e->getParam('config');
-        $view        = $application->getLocator()->get('view');
+        $application = $e->getApplication();
+        $config      = $application->getConfiguration();
+        $view        = $application->getServiceManager()->get('View');
         $view->headTitle($config['view']['base_title']);
 
         $listeners   = new Listeners\ViewListener();
@@ -164,17 +154,15 @@ class Module
 ]]></programlisting>
 
       <para>
-        The above demonstrates several things. First, it shows registering a
-        callback on the bootstrap's "bootstrap" event (within the
-        <methodname>init()</methodname> method). Second, it demonstrates that
+        The above demonstrates several things. First, it demonstrates a listener
+        on the application's "bootstrap" event (the
+        <methodname>onBootstrap()</methodname> method). Second, it demonstrates that
         listener, and how it can be used to register listeners with the
-        application. It grabs the <classname>Application</classname> instance,
-        as well as the module manager instance. From the
-        <classname>Application</classname>, it is able to grab the attached
-        locator, and from the <classname>Managar</classname>, it grabs
-        configuration. These are then used to retrieve the view, configure some
-        helpers, and then register a listener aggregate with the application
-        event manager.
+        application. It grabs the <classname>Application</classname> instance;
+        from the <classname>Application</classname>, it is able to grab the attached
+        service manager and configuration. These are then used to retrieve the
+        view, configure some helpers, and then register a listener aggregate
+        with the application event manager.
       </para>
     </section>
   </section>

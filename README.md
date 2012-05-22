@@ -23,9 +23,10 @@ beta release (beta5) before starting the RC process.
 
 PLEASE NOTE: this beta includes a large number of breaks from the previous beta,
 due to introduction of the ServiceManager, changes to the EventManager, renaming
-of the ModuleManager, rewrite of the Form component, and several changes in the
-View layer. Please consult the ZendSkeletonApplication to get an idea of the
-changes necessary to make your application work with beta4.
+of the ModuleManager, rewrite of the Form component (and removal of the Dojo
+component), and several changes in the View layer. Please consult the
+ZendSkeletonApplication to get an idea of the changes necessary to make your
+application work with beta4.
 
  - Config component (Enrico Zimuel)
     -  Added reader and writer implementations for JSON and YAML configuration
@@ -35,6 +36,10 @@ changes necessary to make your application work with beta4.
     - Provides BigInteger support
     - Provides common methodology surrounding credential encryption and hashing
  - Db layer (Ralph Schindler)
+ - Dojo
+    - REMOVED. Support was for out-dated versions of Dojo, and with the new Form
+      rewrite, it needs to be completely rewritten. This is targetted for post
+      2.0.0 at this time.
  - EventManager (Matthew Weier O'Phinney)
     - New SharedEventManager, a non-static version of the original
       StaticEventManager
@@ -113,6 +118,9 @@ changes necessary to make your application work with beta4.
    - Most, if not all, interfaces were renamed to suffix with the word
      "Interface". This is to promote discovery of interfaces, as well as make
      naming simpler.
+   - Exceptions are affected by this as well. Exception marker interfaces were
+     renamed to ExceptionInterface and pushed into the Exception subnamespace of
+     each component
  - Composer support (Rob Allen, Marco Pivetta, Kyle Spraggs)
    - Zend Framework is now installable via Composer (http://packagist.org/), as
      are each of its individual components

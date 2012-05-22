@@ -22,18 +22,18 @@ interface Zend\Db\TableGateway\TableGatewayInterface
 ]]></programlisting>
 
     <para>
-        There are two primary implementations of the TableGatewayInterface
-        that are of the most useful: AbstractTableGateway and TableGateway.
-        The AbstractTableGateway is an abstract basic implementation that provides
-        functionality for select(), insert(), update(), delete(), as well as an
+        There are two primary implementations of the <classname>TableGatewayInterface</classname>
+        that are of the most useful: <classname>AbstractTableGateway</classname> and <classname>TableGateway</classname>.
+        The <classname>AbstractTableGateway</classname> is an abstract basic implementation that provides
+        functionality for <methodname>select()</methodname>, <methodname>insert()</methodname>, <methodname>update()</methodname>, <methodname>delete()</methodname>, as well as an
         additional API for doing these same kinds of tasks with explicit SQL
-        objects.  These methods are selectWith(), insertWith(), updateWith()
-        and deleteWith().  In addition, AbstracTableGateway also implements
+        objects.  These methods are <methodname>selectWith()</methodname>, <methodname>insertWith()</methodname>, <methodname>updateWith()</methodname>
+        and <methodname>deleteWith()</methodname>.  In addition, AbstracTableGateway also implements
         a "Feature" API, that allows for expanding the behaviors of the
-        base TableGateway implementation without having to extend the
-        class with this new functionality. The TableGateway concrete
-        implementation simply adds a sensible constructor to the AbstractTableGateway
-        class so that out-the-box, TableGateway does not need to be extended
+        base <classname>TableGateway</classname> implementation without having to extend the
+        class with this new functionality. The <classname>TableGateway</classname> concrete
+        implementation simply adds a sensible constructor to the <classname>AbstractTableGateway</classname>
+        class so that out-of-the-box, <classname>TableGateway</classname> does not need to be extended
         in order to be consumed and utilized to its fullest.
     </para>
 
@@ -43,8 +43,8 @@ interface Zend\Db\TableGateway\TableGatewayInterface
 
         <para>
             The quickest way to get up and running with Zend\Db\TableGateway is
-            to configure and utilize the concrete implementation of the TableGatway.
-            The API of the concrete TableGateway is:
+            to configure and utilize the concrete implementation of the <classname>TableGateway</classname>.
+            The API of the concrete <classname>TableGateway</classname> is:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -80,15 +80,15 @@ class TableGateway extends AbstractTableGateway
 ]]></programlisting>
 
         <para>
-            The concrete TableGateway object practices constructor injection for
+            The concrete <classname>TableGateway</classname> object practices constructor injection for
             getting dependencies and options into the instance.  The table name
             and an instance of an Adapter are all that is needed to setup a working
-            TableGateway object.
+            <classname>TableGateway</classname> object.
         </para>
 
         <para>
             Out of the box, this implementation makes no assumptions about table
-            structure or metadata, and when select() is executed, a simple ResultSet
+            structure or metadata, and when <methodname>select()</methodname> is executed, a simple ResultSet
             object with the populated Adapter's Result (the datasource) will be returned
             and ready for iteration.
         </para>
@@ -112,7 +112,7 @@ var_dump($artistRow->toArray());
 ]]></programlisting>
 
         <para>
-            The select() method takes the same arguments as Zend\Db\Sql\Select::where()
+            The <methodname>select()</methodname> method takes the same arguments as <classname>Zend\Db\Sql\Select::where()</classname>
             with the addition of also being able to accept a closure, which in turn, will
             be passed the current Select object that is being used to build the SELECT
             query.  The following usage is possible:
@@ -136,15 +136,15 @@ $rowset = $artistTable->select(function (Select $select) {
         <title>TableGateway Features</title>
 
         <para>
-            The Features API allows for extending the functionality of the base TableGatway
+            The Features API allows for extending the functionality of the base <classname>TableGateway</classname>
             object without having to polymorphically extend the base class.  This allows for
             a wider array of possible mixing and matching of features to achieve a particular
-            behiavior that needs to be attained to make the base implementation of TableGateway
+            behiavior that needs to be attained to make the base implementation of <classname>TableGateway</classname>
             useful for a particular problem.
         </para>
 
         <para>
-            With the TableGateway object, features should be injected though the constructor.
+            With the <classname>TableGateway</classname> object, features should be injected though the constructor.
             The constructor can take Features in 3 different forms: as a single feature object,
             as a FeatureSet object, or as an array of Feature objects.
         </para>
@@ -157,12 +157,12 @@ $rowset = $artistTable->select(function (Select $select) {
             <listitem>
                 <para>
                     GlobalAdapterFeature: the ability to use a global/static adapter without needing
-                    to inject it into a TableGateway instance.  This is more useful when you are
-                    extending the AbstractTableGateway implementation:
+                    to inject it into a <classname>TableGateway</classname> instance.  This is more useful when you are
+                    extending the <classname>AbstractTableGateway</classname> implementation:
                 </para>
 
                 <programlisting language="php"><![CDATA[
-class MyTableGateway extends AbstractTableGateway
+class MyTableGateway extends <classname>AbstractTableGateway</classname>
 {
 	public function __construct()
 	{
@@ -195,7 +195,7 @@ $table = new TableGateway('artist', $adapter, new Feature\MasterSlaveFeature($sl
 
             <listitem>
                 <para>
-                    MetadataFeature: the ability populate TableGateway with column information from
+                    MetadataFeature: the ability populate <classname>TableGateway</classname> with column information from
                     a Metadata object.  It will also store the primary key information in case
                     RowGatewayFeature needs to consume this information.
                 </para>
@@ -208,8 +208,8 @@ $table = new TableGateway('artist', $adapter, new Feature\MeatadataFeature());
 
             <listitem>
                 <para>
-                    EventFeature: the ability utilize a TableGateway object with Zend\EventManager
-                    and to be able to subscribe to various events in a TableGateway lifecycle.
+                    EventFeature: the ability utilize a <classname>TableGateway</classname> object with Zend\EventManager
+                    and to be able to subscribe to various events in a <classname>TableGateway</classname> lifecycle.
                 </para>
 
                 <programlisting language="php"><![CDATA[
@@ -220,7 +220,7 @@ $table = new TableGateway('artist', $adapter, new Feature\EventFeature($eventMan
 
             <listitem>
                 <para>
-                    RowGatewayFeature: the ability for select() to return a ResultSet object that
+                    RowGatewayFeature: the ability for <methodname>select()</methodname> to return a ResultSet object that
                     upon iteration will
                 </para>
 

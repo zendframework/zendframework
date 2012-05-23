@@ -35,7 +35,7 @@ use DateTime,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Logger implements LoggableInterface, Pluggable
+class Logger implements LoggerInterface, Pluggable
 {
     /**
      * @const int defined from the BSD Syslog message severities

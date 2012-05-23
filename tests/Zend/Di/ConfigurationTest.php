@@ -72,7 +72,25 @@ class ConfigurationTest extends TestCase
             );
         
     }
-    
 
-    
+    public function testConfigurationCanConfigureRuntimeDefinitionEnabledByDefaultFromIni()
+    {
+        $ini = ConfigFactory::fromFile(__DIR__ . '/_files/sample.ini', true)->get('section-c');
+        $config = new Configuration($ini->di);
+        $di = new Di();
+        $di->configure($config);
+        $definition = $di->definitions()->getDefinitionByType('Zend\Di\Definition\RuntimeDefinition');
+        $this->assertInstanceOf('Zend\Di\Definition\RuntimeDefinition', $definition);
+    }
+
+    public function testConfigurationCanConfigureRuntimeDefinitionDisabledFromIni()
+    {
+        $ini = ConfigFactory::fromFile(__DIR__ . '/_files/sample.ini', true)->get('section-d');
+        $config = new Configuration($ini->di);
+        $di = new Di();
+        $di->configure($config);
+        $definition = $di->definitions()->getDefinitionByType('Zend\Di\Definition\RuntimeDefinition');
+        $this->assertFalse($definition);
+    }
+
 }

@@ -20,9 +20,9 @@
  
 namespace Zend\Feed\Writer\Renderer;
 
-use Zend\Feed\Writer,
-    DOMDocument,
-    DOMElement;
+use DOMDocument;
+use DOMElement;
+use Zend\Feed\Writer;
 
 /**
 * @category Zend
@@ -233,7 +233,7 @@ class AbstractRenderer
     {
         Writer\Writer::registerCoreExtensions();
         $all = Writer\Writer::getExtensions();
-        if (stripos(get_class($this), 'entry')) {
+        if (stripos(get_called_class(), 'entry')) {
             $exts = $all['entryRenderer'];
         } else {
             $exts = $all['feedRenderer'];

@@ -103,4 +103,20 @@ class ConfigurationTest extends TestCase
         $definition = $di->definitions()->getDefinitionByType('Zend\Di\Definition\RuntimeDefinition');
         $this->assertTrue($definition->getIntrospectionStrategy()->getUseAnnotations());
     }
+
+    public function testConfigurationCanConfigureCompiledDefinition()
+    {
+        $config = ConfigFactory::fromFile(__DIR__ . '/_files/sample.php', true);
+        $config = new Configuration($config->di);
+        $di = new Di();
+        $di->configure($config);
+        $definition = $di->definitions()->getDefinitionByType('Zend\Di\Definition\ArrayDefinition');
+        $this->assertInstanceOf('Zend\Di\Definition\ArrayDefinition', $definition);
+        $this->assertTrue($di->definitions()->hasClass('My\DbAdapter'));
+        $this->assertTrue($di->definitions()->hasClass('My\EntityA'));
+        $this->assertTrue($di->definitions()->hasClass('My\Mapper'));
+        $this->assertTrue($di->definitions()->hasClass('My\RepositoryA'));
+        $this->assertTrue($di->definitions()->hasClass('My\RepositoryB'));
+        $this->assertFalse($di->definitions()->hasClass('My\Foo'));
+    }
 }

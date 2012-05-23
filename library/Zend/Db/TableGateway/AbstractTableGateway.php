@@ -26,7 +26,7 @@ use Zend\Db\Adapter\Adapter,
  *
  * @property Adapter $adapter
  * @property int $lastInsertValue
- * @property string $tableName
+ * @property string $table
  */
 abstract class AbstractTableGateway implements TableGatewayInterface
 {
@@ -111,7 +111,7 @@ abstract class AbstractTableGateway implements TableGatewayInterface
         }
 
         if (!$this->sql instanceof Sql) {
-            $this->sql = new Sql($this->adapter, $this->tableName);
+            $this->sql = new Sql($this->adapter, $this->table);
         }
 
         $this->featureSet->apply('postInitialize', array());

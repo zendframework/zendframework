@@ -26,7 +26,7 @@ use Zend\Db\Adapter\Adapter,
  *
  * @property Adapter $adapter
  * @property int $lastInsertValue
- * @property string $tableName
+ * @property string $table
  */
 abstract class AbstractTableGateway implements TableGatewayInterface
 {

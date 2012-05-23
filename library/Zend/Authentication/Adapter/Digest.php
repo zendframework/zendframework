@@ -67,7 +67,6 @@ class Digest implements AdapterInterface
      * @param  mixed $realm
      * @param  mixed $username
      * @param  mixed $password
-     * @return void
      */
     public function __construct($filename = null, $realm = null, $username = null, $password = null)
     {
@@ -94,7 +93,7 @@ class Digest implements AdapterInterface
      * Sets the filename option value
      *
      * @param  mixed $filename
-     * @return Zend\Authentication\Adapter\Digest Provides a fluent interface
+     * @return Digest Provides a fluent interface
      */
     public function setFilename($filename)
     {
@@ -116,7 +115,7 @@ class Digest implements AdapterInterface
      * Sets the realm option value
      *
      * @param  mixed $realm
-     * @return Zend\Authentication\Adapter\Digest Provides a fluent interface
+     * @return Digest Provides a fluent interface
      */
     public function setRealm($realm)
     {
@@ -138,7 +137,7 @@ class Digest implements AdapterInterface
      * Sets the username option value
      *
      * @param  mixed $username
-     * @return Zend\Authentication\Adapter\Digest Provides a fluent interface
+     * @return Digest Provides a fluent interface
      */
     public function setUsername($username)
     {
@@ -160,7 +159,7 @@ class Digest implements AdapterInterface
      * Sets the password option value
      *
      * @param  mixed $password
-     * @return Zend\Authentication\Adapter\Digest Provides a fluent interface
+     * @return Digest Provides a fluent interface
      */
     public function setPassword($password)
     {
@@ -171,8 +170,8 @@ class Digest implements AdapterInterface
     /**
      * Defined by Zend\Authentication\Adapter\AdapterInterface
      *
-     * @throws Zend\Authentication\Adapter\Exception\ExceptionInterface
-     * @return Zend\Authentication\Result
+     * @throws Exception\ExceptionInterface
+     * @return AuthenticationResult
      */
     public function authenticate()
     {

@@ -21,11 +21,11 @@
 
 namespace Zend\Authentication\Adapter;
 
-use Zend\Authentication\Result as AuthenticationResult,
-    Zend\Db\Adapter\Adapter as DbAdapter,
-    Zend\Db\Sql\Select as DbSelect,
-    Zend\Db\Sql\Expression,
-    Zend\Db\ResultSet\ResultSet;
+use Zend\Authentication\Result as AuthenticationResult;
+use Zend\Db\Adapter\Adapter as DbAdapter;
+use Zend\Db\ResultSet\ResultSet;
+use Zend\Db\Sql\Expression;
+use Zend\Db\Sql\Select as DbSelect;
 
 /**
  * @category   Zend

@@ -21,9 +21,9 @@
 
 namespace Zend\Authentication\Storage;
 
-use Zend\Authentication\Storage\StorageInterface as AuthenticationStorage,
-    Zend\Session\Container as SessionContainer,
-    Zend\Session\ManagerInterface as SessionManager;
+use Zend\Authentication\Storage\StorageInterface as AuthenticationStorage;
+use Zend\Session\Container as SessionContainer;
+use Zend\Session\ManagerInterface as SessionManager;
 
 /**
  * @category   Zend
@@ -70,7 +70,7 @@ class Session implements StorageInterface
      *
      * @param  mixed $namespace
      * @param  mixed $member
-     * @return void
+     * @param  SessionManager $manager
      */
     public function __construct($namespace = null, $member = null, SessionManager $manager = null)
     {

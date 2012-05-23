@@ -43,7 +43,6 @@ class FileResolver implements ResolverInterface
      * Constructor
      *
      * @param  string $path Complete filename where the credentials are stored
-     * @return void
      */
     public function __construct($path = '')
     {
@@ -56,8 +55,8 @@ class FileResolver implements ResolverInterface
      * Set the path to the credentials file
      *
      * @param  string $path
-     * @return Zend\Authentication\Adapter\Http\FileResolver Provides a fluent interface
-     * @throws Zend\Authentication\Adapter\Http\Exception\ExceptionInterface
+     * @return FileResolver Provides a fluent interface
+     * @throws Exception\ExceptionInterface
      */
     public function setFile($path)
     {
@@ -98,7 +97,7 @@ class FileResolver implements ResolverInterface
      * @param  string $realm    Authentication Realm
      * @return string|false User's shared secret, if the user is found in the
      *         realm, false otherwise.
-     * @throws Zend\Authentication\Adapter\Http\Exception\ExceptionInterface
+     * @throws Exception\ExceptionInterface
      */
     public function resolve($username, $realm)
     {

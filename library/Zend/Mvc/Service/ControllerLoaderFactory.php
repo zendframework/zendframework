@@ -89,7 +89,7 @@ class ControllerLoaderFactory implements FactoryInterface
 
         $controllerLoader->addInitializer(function ($instance) use ($serviceLocator) {
             if ($instance instanceof Pluggable) {
-                $instance->setBroker($serviceLocator->get('ControllerPluginBroker'));
+                $instance->setBroker(clone $serviceLocator->get('ControllerPluginBroker'));
             }
         });
 

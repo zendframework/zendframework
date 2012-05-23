@@ -134,53 +134,6 @@ class ValueTest extends \PHPUnit_Framework_TestCase
         Value::getXmlRpcValue(PHP_INT_MAX + 5000, Value::XMLRPC_TYPE_INTEGER);
     }
 
-    // BigInteger
-
-    /**
-     * @group ZF-6445
-     * @dataProvider ZendTest\XmlRpc\TestProvider::provideGenerators
-     */
-    public function testMarshalBigIntegerFromFromXmlRpc(Generator $generator)
-    {
-        Value::setGenerator($generator);
-        $bigInt = (string)(PHP_INT_MAX + 1);
-        $native = new BigInteger();
-        $native->init($bigInt);
-
-        $xmlStrings = array("<value><i8>$bigInt</i8></value>",
-                            "<value><ex:i8 xmlns:ex=\"http://ws.apache.org/xmlrpc/namespaces/extensions\">$bigInt</ex:i8></value>");
-
-        foreach ($xmlStrings as $xml) {
-            $value = Value::getXmlRpcValue($xml, Value::XML_STRING);
-            $this->assertEquals($native, $value->getValue());
-            $this->assertEquals('i8', $value->getType());
-            $this->assertEquals($this->wrapXml($xml), $value->saveXml());
-        }
-    }
-
-    /**
-     * @group ZF-6445
-     */
-    public function testMarshalBigIntegerFromNative()
-    {
-        $native = (string)(PHP_INT_MAX + 1);
-        $types = array(Value::XMLRPC_TYPE_APACHEI8,
-                       Value::XMLRPC_TYPE_I8);
-
-        $bigInt = new BigInteger();
-        $bigInt->init($native);
-
-        foreach ($types as $type) {
-            $value = Value::getXmlRpcValue($native, $type);
-            $this->assertSame('i8', $value->getType());
-            $this->assertEquals($bigInt, $value->getValue());
-        }
-
-        $value = Value::getXmlRpcValue($bigInt);
-        $this->assertSame('i8', $value->getType());
-        $this->assertEquals($bigInt, $value->getValue());
-    }
-
     // Double
 
     public function testFactoryAutodetectsFloat()

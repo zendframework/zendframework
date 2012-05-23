@@ -48,7 +48,11 @@ class Configuration
         foreach ($definition as $definitionType => $definitionData) {
             switch ($definitionType) {
                 case 'compiler':
-                    // @todo
+                    foreach ($definitionData as $filename) {
+                        if (is_readable($filename)) {
+                            $di->definitions()->addDefinition(new \Zend\Di\Definition\ArrayDefinition(include $filename), false);
+                        }
+                    }
                     break;
                 case 'runtime':
                     // @todo

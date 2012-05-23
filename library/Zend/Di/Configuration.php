@@ -55,7 +55,17 @@ class Configuration
                     }
                     break;
                 case 'runtime':
-                    // @todo
+                    if (isset($definitionData['enabled']) && !$definitionData['enabled']) {
+                        // Remove runtime from definition list if not enabled
+                        $definitions = array();
+                        foreach ($di->definitions() as $definition) {
+                            if (!$definition instanceof \Zend\Di\Definition\RuntimeDefinition) {
+                                $definitions[] = $definition;
+                            }
+                        }
+                        $definitions = new DefinitionList($definitions);
+                        $di->setDefinitionList($definitions);
+                    }
                     break;
                 case 'class':
                     foreach ($definitionData as $className => $classData) {

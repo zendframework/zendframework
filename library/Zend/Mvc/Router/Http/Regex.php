@@ -87,7 +87,7 @@ class Regex implements RouteInterface
      * @see    Route::factory()
      * @param  array|\Traversable $options
      * @throws \Zend\Mvc\Router\Exception\InvalidArgumentException
-     * @return void
+     * @return Regex
      */
     public static function factory($options = array())
     {

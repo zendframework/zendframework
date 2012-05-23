@@ -132,6 +132,7 @@ abstract class ActionController implements
      *
      * @param  MvcEvent $e
      * @return mixed
+     * @throws Exception\DomainException
      */
     public function execute(MvcEvent $e)
     {
@@ -141,7 +142,7 @@ abstract class ActionController implements
              * @todo Determine requirements for when route match is missing.
              *       Potentially allow pulling directly from request metadata?
              */
-            throw new \DomainException('Missing route matches; unsure how to retrieve action');
+            throw new Exception\DomainException('Missing route matches; unsure how to retrieve action');
         }
 
         $action = $routeMatch->getParam('action', 'not-found');
@@ -287,6 +288,7 @@ abstract class ActionController implements
      *
      * @param  string|Broker $broker Plugin broker to load plugins
      * @return Zend\Loader\Pluggable
+     * @throws Exception\InvalidArgumentException
      */
     public function setBroker($broker)
     {
@@ -303,7 +305,7 @@ abstract class ActionController implements
     /**
      * Get plugin instance
      *
-     * @param  string     $plugin  Name of plugin to return
+     * @param  string     $name    Name of plugin to return
      * @param  null|array $options Options to pass to plugin constructor (if not already instantiated)
      * @return mixed
      */

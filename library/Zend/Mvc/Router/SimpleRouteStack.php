@@ -73,6 +73,7 @@ class SimpleRouteStack implements RouteStackInterface
      * @see    Route::factory()
      * @param  array|\Traversable $options
      * @return SimpleRouteStack
+     * @throws Exception\InvalidArgumentException
      */
     public static function factory($options = array())
     {
@@ -136,6 +137,7 @@ class SimpleRouteStack implements RouteStackInterface
      * @see    RouteStack::addRoutes()
      * @param  array|\Traversable $routes
      * @return SimpleRouteStack
+     * @throws Exception\InvalidArgumentException
      */
     public function addRoutes($routes)
     {

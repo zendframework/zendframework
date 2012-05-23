@@ -312,6 +312,7 @@ class Segment implements RouteInterface
      *
      * @see    Route::match()
      * @param  Request $request
+     * @param  string|null $pathOffset
      * @return RouteMatch
      */
     public function match(Request $request, $pathOffset = null)

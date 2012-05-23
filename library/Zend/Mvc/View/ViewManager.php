@@ -126,7 +126,7 @@ class ViewManager implements ListenerAggregateInterface
     /**
      * Prepares the view layer
      * 
-     * @param  ApplicationInterface $application 
+     * @param  $event
      * @return void
      */
     public function onBootstrap($event)

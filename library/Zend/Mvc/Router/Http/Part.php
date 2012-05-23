@@ -67,6 +67,7 @@ class Part extends TreeRouteStack implements RouteInterface
      * @param  boolean     $mayTerminate
      * @param  RouteBroker $routeBroker
      * @param  array|null  $childRoutes
+     * @throws Exception\InvalidArgumentException
      */
     public function __construct($route, $mayTerminate, RouteBroker $routeBroker, array $childRoutes = null)
     {
@@ -174,6 +175,7 @@ class Part extends TreeRouteStack implements RouteInterface
      * @param  array $params
      * @param  array $options
      * @return mixed
+     * @throws Exception\RuntimeException
      */
     public function assemble(array $params = array(), array $options = array())
     {

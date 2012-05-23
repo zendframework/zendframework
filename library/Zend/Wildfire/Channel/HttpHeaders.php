@@ -201,7 +201,7 @@ class HttpHeaders
     protected function _registerControllerPlugin()
     {
         $controller = Controller\Front::getInstance();
-        if (!$controller->hasPlugin(get_class($this))) {
+        if (!$controller->hasPlugin(get_called_class())) {
             $controller->registerPlugin($this, self::$_controllerPluginStackIndex);
         }
     }

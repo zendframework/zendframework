@@ -66,7 +66,7 @@ class Forward extends AbstractPlugin
      */
     public function dispatch($name, array $params = null)
     {
-        $event   = $this->getEvent();
+        $event   = clone($this->getEvent());
         $locator = $this->getLocator();
         $scoped  = false;
 
@@ -90,11 +90,8 @@ class Forward extends AbstractPlugin
         }
 
         // Allow passing parameters to seed the RouteMatch with
-        $cachedMatches = false;
         if ($params) {
-            $matches       = new RouteMatch($params);
-            $cachedMatches = $event->getRouteMatch();
-            $event->setRouteMatch($matches);
+            $event->setRouteMatch(new RouteMatch($params));
         }
 
         if ($this->numNestedForwards > $this->maxNestedForwards) {
@@ -105,10 +102,6 @@ class Forward extends AbstractPlugin
         $return = $controller->dispatch($event->getRequest(), $event->getResponse());
 
         $this->numNestedForwards--;
-
-        if ($cachedMatches) {
-            $event->setRouteMatch($cachedMatches);
-        }
 
         return $return;
     }

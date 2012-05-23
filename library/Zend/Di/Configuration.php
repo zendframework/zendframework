@@ -65,6 +65,10 @@ class Configuration
                         }
                         $definitions = new DefinitionList($definitions);
                         $di->setDefinitionList($definitions);
+                    } elseif (isset($definitionData['use_annotations']) && $definitionData['use_annotations']) {
+                        $di->definitions()->getDefinitionByType('\Zend\Di\Definition\RuntimeDefinition')
+                            ->getIntrospectionStrategy()
+                            ->setUseAnnotations(true);
                     }
                     break;
                 case 'class':

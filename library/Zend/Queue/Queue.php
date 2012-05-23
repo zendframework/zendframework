@@ -532,7 +532,7 @@ class Queue implements Countable
     public function debugInfo()
     {
         $info = array();
-        $info['self']                     = get_class($this);
+        $info['self']                     = get_called_class();
         $info['adapter']                  = get_class($this->getAdapter());
         foreach ($this->getAdapter()->getCapabilities() as $feature => $supported) {
             $info['adapter-' . $feature]  = ($supported) ? 'yes' : 'no';

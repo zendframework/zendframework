@@ -80,10 +80,10 @@ class Forward extends AbstractPlugin
         if (!$controller instanceof Dispatchable) {
             throw new Exception\DomainException('Can only forward to DispatchableInterface classes; class of type ' . get_class($controller) . ' received');
         }
+        if ($controller instanceof InjectApplicationEventInterface) {
+            $controller->setEvent($event);
+        }
         if (!$scoped) {
-            if ($controller instanceof InjectApplicationEventInterface) {
-                $controller->setEvent($event);
-            }
             if ($controller instanceof ServiceLocatorAwareInterface) {
                 $controller->setServiceLocator($locator);
             }

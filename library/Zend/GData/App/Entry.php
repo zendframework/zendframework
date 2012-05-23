@@ -215,7 +215,7 @@ class Entry extends FeedEntryParent
 
         // Set classname to current class, if not otherwise set
         if ($className === null) {
-            $className = get_class($this);
+            $className = get_called_class();
         }
 
         // Append ETag, if present (Gdata v2 and above, only) and doesn't

@@ -11,5 +11,7 @@
 
 namespace Zend\Cloud\StorageService\Exception;
 
-interface ExceptionInterface
+use Zend\Cloud\Exception\ExceptionInterface as Exception;
+
+interface ExceptionInterface extends Exception
 {}

@@ -20,8 +20,7 @@
 
 namespace Zend\Config\Writer;
 
-use Zend\Config\Writer,
-    Zend\Config\Exception,
+use Zend\Config\Exception,
     Zend\Config\Config,
     Zend\Stdlib\ArrayUtils,
     Traversable;
@@ -32,12 +31,12 @@ use Zend\Config\Writer,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class AbstractWriter implements Writer
+abstract class AbstractWriter implements WriterInterface
 {
     /**
      * toFile(): defined by Writer interface.
      *
-     * @see    Writer::toFile()
+     * @see    WriterInterface::toFile()
      * @param  string  $filename
      * @param  mixed   $config
      * @param  boolean $exclusiveLock
@@ -70,7 +69,7 @@ abstract class AbstractWriter implements Writer
     /**
      * toString(): defined by Writer interface.
      *
-     * @see    Writer::toString()
+     * @see    WriterInterface::toString()
      * @param  mixed   $config
      * @return void
      */

@@ -20,15 +20,9 @@
  */
 
 namespace ZendTest\Search\Lucene\Storage;
+
 use Zend\Search\Lucene\Storage\Directory;
-
-/**
- * Zend_Search_Lucene_Storage_Directory_Filesystem
- */
-
-/**
- * PHPUnit test case
- */
+use Zend\Search\Lucene\Storage\File;
 
 /**
  * @category   Zend
@@ -44,7 +38,7 @@ class DirectoryTest extends \PHPUnit_Framework_TestCase
     {
         $tempPath = __DIR__ . '/_tempFiles/_files';
 
-        // remove files from temporary direcytory
+        // remove files from temporary directory
         $dir = opendir($tempPath);
         while (($file = readdir($dir)) !== false) {
             if (!is_dir($tempPath . '/' . $file)) {
@@ -55,11 +49,11 @@ class DirectoryTest extends \PHPUnit_Framework_TestCase
 
         $directory = new Directory\Filesystem($tempPath);
 
-        $this->assertTrue($directory instanceof Directory);
+        $this->assertTrue($directory instanceof Directory\DirectoryInterface);
         $this->assertEquals(count($directory->fileList()), 0);
 
         $fileObject = $directory->createFile('file1');
-        $this->assertTrue($fileObject instanceof \Zend\Search\Lucene\Storage\File);
+        $this->assertTrue($fileObject instanceof File\FileInterface);
         unset($fileObject);
         $this->assertEquals($directory->fileLength('file1'), 0);
 
@@ -108,7 +102,7 @@ class DirectoryTest extends \PHPUnit_Framework_TestCase
     public function testFilesystemSubfoldersAutoCreation()
     {
         $directory = new Directory\Filesystem(__DIR__ . '/_tempFiles/_files/dir1/dir2/dir3');
-        $this->assertTrue($directory instanceof Directory);
+        $this->assertTrue($directory instanceof Directory\DirectoryInterface);
         $directory->close();
 
         rmdir(__DIR__ . '/_tempFiles/_files/dir1/dir2/dir3');

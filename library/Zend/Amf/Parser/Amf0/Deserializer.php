@@ -58,7 +58,7 @@ class Deserializer extends AbstractDeserializer
      *
      * @param  integer $typeMarker
      * @return mixed whatever the data type is of the marker in php
-     * @throws Zend\Amf\Exception for invalid type
+     * @throws ParserException\InvalidArgumentException for invalid type
      */
     public function readTypeMarker($typeMarker = null)
     {
@@ -171,7 +171,7 @@ class Deserializer extends AbstractDeserializer
      * Called when marker type is 7.
      *
      * @return object
-     * @throws Zend\Amf\Exception for invalid reference keys
+     * @throws ParserException\OutOfBoundsException for invalid reference keys
      */
     public function readReference()
     {

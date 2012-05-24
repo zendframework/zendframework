@@ -123,7 +123,7 @@
                         Connects the <classname>Zend\Ldap\Ldap</classname> instance to the given
                         <acronym>LDAP</acronym> server. All parameters are optional and will be
                         taken from the <acronym>LDAP</acronym> connection and binding parameters
-                        passed to the instance via the construtor or via
+                        passed to the instance via the constructor or via
                         <methodname>Zend\Ldap\Ldap::setOptions()</methodname> when set to
                         <constant>NULL</constant>.
                     </entry>
@@ -137,7 +137,7 @@
                     <entry>
                         Authenticates <varname>$username</varname> with
                         <varname>$password</varname> at the <acronym>LDAP</acronym> server. If both
-                        paramaters are omitted the binding will be carried out with the credentials
+                        parameters are omitted the binding will be carried out with the credentials
                         given in the connection and binding parameters. If no credentials are
                         given in the connection and binding parameters an anonymous bind
                         will be performed. Note that this requires anonymous binds to be allowed
@@ -152,7 +152,7 @@
                     <entry>
                         <code>Zend\Ldap\Collection search(string|Zend\Ldap\Filter\AbstractFilter $filter,
                             string|Zend\Ldap\Dn $basedn, integer $scope, array $attributes, string
-                            $sort, string $collectionClass)</code>
+                            $sort, string $collectionClass, integer $sizelimit, integer $timelimit)</code>
                     </entry>
 
                     <entry>
@@ -250,6 +250,32 @@
                                     </para>
                                 </listitem>
                             </varlistentry>
+
+                            <varlistentry>
+                                <term>
+                                    <code>integer $sizelimit</code>
+                                </term>
+
+                                <listitem>
+                                    <para>
+                                        Enables you to limit the count of entries fetched. Setting this to 0 means no
+                                        limit.
+                                    </para>
+                                </listitem>
+                            </varlistentry>
+
+                            <varlistentry>
+                                <term>
+                                    <code>integer $timelimit</code>
+                                </term>
+
+                                <listitem>
+                                    <para>
+                                        Sets the number of seconds how long is spend on the search. Setting this to 0
+                                        means no limit.
+                                    </para>
+                                </listitem>
+                            </varlistentry>
                         </variablelist>
                     </entry>
                 </row>
@@ -288,9 +314,10 @@
 
                 <row>
                     <entry>
-                        <code>array searchEntries(string|Zend\Ldap\Filter\AbstractFilter
-                        $filter, string|Zend\Ldap\Dn $basedn, integer $scope, array
-                        $attributes, string $sort)</code>
+                        <code>array searchEntries(string|Zend\Ldap\Filter\AbstractFilter $filter, string|Zend\Ldap\Dn
+                            $basedn, integer $scope, array $attributes, string $sort, string $reverseSort, integer
+                            $sizelimit, integer $timelimit)
+                        </code>
                     </entry>
 
                     <entry>
@@ -312,7 +339,7 @@
                         Retrieves the <acronym>LDAP</acronym> entry identified by
                         <varname>$dn</varname> with the attributes specified in
                         <varname>$attributes</varname>. if <varname>$attributes</varname> is
-                        ommitted, all attributes (<methodname>array()</methodname>) are included in
+                        omitted, all attributes (<methodname>array()</methodname>) are included in
                         the result. <varname>$throwOnNotFound</varname> is
                         <constant>FALSE</constant> by default, so the method will return
                         <constant>NULL</constant> if the specified entry cannot be found. If set to
@@ -562,7 +589,7 @@
                         </entry>
 
                         <entry>
-                            Constructor. The constrcutor must be provided by a
+                            Constructor. The constructor must be provided by a
                             <classname>Zend\Ldap\Collection\Iterator\Interface</classname> which
                             does the real result iteration.
                             <classname>Zend\Ldap\Collection\Iterator\Default</classname> is the

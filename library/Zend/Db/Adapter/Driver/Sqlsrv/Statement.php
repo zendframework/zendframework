@@ -175,19 +175,24 @@ class Statement implements StatementInterface
             $this->prepare();
         }
 
-        if ($parameters !== null) {
-            if (is_array($parameters)) {
-                $parameters = new ParameterContainer($parameters);
+        /** START Standard ParameterContainer Merging Block */
+        if (!$this->parameterContainer instanceof ParameterContainer) {
+            if ($parameters instanceof ParameterContainer) {
+                $this->parameterContainer = $parameters;
+                $parameters = null;
+            } else {
+                $this->parameterContainer = new ParameterContainer();
             }
-            if (!$parameters instanceof ParameterContainer) {
-                throw new Exception\InvalidArgumentException('ParameterContainer expected');
-            }
-            $this->parameterContainer = $parameters;
         }
 
-        if ($this->parameterContainer) {
+        if (is_array($parameters)) {
+            $this->parameterContainer->setFromArray($parameters);
+        }
+
+        if ($this->parameterContainer->count() > 0) {
             $this->bindParametersFromContainer();
         }
+        /** END Standard ParameterContainer Merging Block */
 
         $resultValue = sqlsrv_execute($this->resource);
 

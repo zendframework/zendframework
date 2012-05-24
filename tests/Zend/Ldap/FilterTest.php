@@ -21,8 +21,8 @@
 
 namespace ZendTest\Ldap;
 
-use Zend\Ldap,
-    Zend\Ldap\Filter;
+use Zend\Ldap;
+use Zend\Ldap\Filter;
 
 /**
  * @category   Zend

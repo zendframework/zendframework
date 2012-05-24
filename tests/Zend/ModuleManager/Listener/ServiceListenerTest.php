@@ -24,6 +24,7 @@ namespace ZendTest\ModuleManager\Listener;
 use ArrayObject;
 use PHPUnit_Framework_TestCase as TestCase;
 use stdClass;
+use Zend\ModuleManager\Listener\ConfigListener;
 use Zend\ModuleManager\Listener\ServiceListener;
 use Zend\ModuleManager\ModuleEvent;
 use Zend\ServiceManager\Configuration as ServiceConfiguration;
@@ -93,6 +94,7 @@ class ServiceListenerTest extends TestCase
 
     public function assertServiceManagerIsConfigured()
     {
+        $this->listener->configureServiceManager();
         foreach ($this->getServiceConfiguration() as $prop => $expected) {
             if ($prop == 'invokables') {
                 $prop = 'invokableClasses';
@@ -136,6 +138,16 @@ class ServiceListenerTest extends TestCase
         $module = new TestAsset\ServiceProviderModule($config);
         $this->event->setModule($module);
         $this->listener->onLoadModule($this->event);
+        $this->assertServiceManagerIsConfigured();
+    }
+
+    public function testMergedConfigurationContainingServiceManagerKeyWillConfigureServiceManagerPostLoadModules()
+    {
+        $config = array('service_manager' => $this->getServiceConfiguration());
+        $configListener = new ConfigListener();
+        $configListener->setMergedConfig($config);
+        $this->event->setConfigListener($configListener);
+        $this->listener->onLoadModulesPost($this->event);
         $this->assertServiceManagerIsConfigured();
     }
 }

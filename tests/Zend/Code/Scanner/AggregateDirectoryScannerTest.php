@@ -1,6 +1,6 @@
 <?php
 
-namespace Zend\Code\Scanner\DerivedScanner;
+namespace ZendTest\Code\Scanner\DerivedScanner;
 
 use PHPUnit_Framework_TestCase;
 

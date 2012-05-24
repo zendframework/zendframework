@@ -11,5 +11,7 @@
 
 namespace Zend\Cloud\DocumentService\Adapter\Exception;
 
-interface ExceptionInterface
+use Zend\Cloud\DocumentService\Exception\ExceptionInterface as Exception;
+
+interface ExceptionInterface extends Exception
 {}

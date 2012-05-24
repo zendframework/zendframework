@@ -10,6 +10,8 @@
 
 namespace Zend\ModuleManager\Listener\Exception;
 
+use Zend\ModuleManager\Exception;
+
 /**
  * Runtime Exception
  * 
@@ -17,6 +19,6 @@ namespace Zend\ModuleManager\Listener\Exception;
  * @package    Zend_ModuleManager
  * @subpackage Listener
  */
-class RuntimeException extends \RuntimeException implements 
+class RuntimeException extends Exception\RuntimeException implements 
     ExceptionInterface
 {}

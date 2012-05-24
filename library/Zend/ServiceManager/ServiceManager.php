@@ -146,9 +146,10 @@ class ServiceManager implements ServiceLocatorInterface
         }
 
         if ($this->allowOverride === false && $this->has($name)) {
-            throw new Exception\InvalidServiceNameException(
-                'A service by this name or alias already exists and cannot be overridden, please use an alternate name.'
-            );
+            throw new Exception\InvalidServiceNameException(sprintf(
+                'A service by the name or alias "%s" already exists and cannot be overridden, please use an alternate name',
+                $name
+            ));
         }
 
         $this->factories[$name] = $factory;
@@ -426,7 +427,17 @@ class ServiceManager implements ServiceLocatorInterface
         }
 
         // check abstract factories
-        foreach ($this->abstractFactories as $abstractFactory) {
+        foreach ($this->abstractFactories as $index => $abstractFactory) {
+            // Support string abstract factory class names
+            if (is_string($abstractFactory) && class_exists($abstractFactory, true)) {
+                $this->abstractFactory[$index] = $abstractFactory = new $abstractFactory();
+            }
+
+            // Bad abstract factory; skip
+            if (!$abstractFactory instanceof AbstractFactoryInterface) {
+                continue;
+            }
+            
             if ($abstractFactory->canCreateServiceWithName($cName, $rName)) {
                 return true;
             }
@@ -543,6 +554,21 @@ class ServiceManager implements ServiceLocatorInterface
         unset($circularDependencyResolver[spl_object_hash($this) . '-' . $cName]);
 
         return $instance;
+    }
+
+    /**
+     * Retrieve a keyed list of all registered services. Handy for debugging!
+     *
+     * @return array
+     */
+    public function getRegisteredServices()
+    {
+        return array(
+            'invokableClasses' => array_keys($this->invokableClasses),
+            'factories' => array_keys($this->factories),
+            'aliases' => array_keys($this->aliases),
+            'instances' => array_keys($this->instances),
+        );
     }
 
 }

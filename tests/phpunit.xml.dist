@@ -9,7 +9,6 @@
         <exclude>
             <group>disable</group>
             <group>Zend_Dojo</group>
-            <group>Zend_Search_Lucene</group>
         </exclude>
     </groups>
 </phpunit>

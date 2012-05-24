@@ -38,9 +38,9 @@ class FileGenerator extends AbstractGenerator
     protected $filename = null;
 
     /**
-     * @var \Zend\Code\GeneratorDocblock
+     * @var DocBlockGenerator
      */
-    protected $docblock = null;
+    protected $docBlock = null;
 
     /**
      * @var array
@@ -71,9 +71,8 @@ class FileGenerator extends AbstractGenerator
      * Constructor
      *
      * Passes $options to {@link setOptions()}.
-     * 
-     * @param  array|\Traversable $options 
-     * @return void
+     *
+     * @param array|\Traversable $options
      */
     public function __construct($options = null)
     {
@@ -87,7 +86,8 @@ class FileGenerator extends AbstractGenerator
      * This will keep previous changes to the file in tact during the same PHP process
      *
      * @param string $filePath
-     * @param bool $includeIfNotAlreadyIncluded
+     * @param bool   $includeIfNotAlreadyIncluded
+     * @throws Exception\InvalidArgumentException
      * @return FileGenerator
      */
     public static function fromReflectedFileName($filePath, $includeIfNotAlreadyIncluded = true)
@@ -95,7 +95,7 @@ class FileGenerator extends AbstractGenerator
         $realpath = realpath($filePath);
 
         if ($realpath === false) {
-            if ( ($realpath = FileReflection::findRealpathInIncludePath($filePath)) === false) {
+            if (($realpath = FileReflection::findRealpathInIncludePath($filePath)) === false) {
                 throw new Exception\InvalidArgumentException('No file for ' . $realpath . ' was found.');
             }
         }
@@ -127,6 +127,7 @@ class FileGenerator extends AbstractGenerator
         foreach ($fileReflection->getClasses() as $class) {
             $phpClass = ClassGenerator::fromReflection($class);
             $phpClass->setContainingFileGenerator($file);
+
             $file->setClass($phpClass);
 
             $classStartLine = $class->getStartLine(true);
@@ -153,8 +154,9 @@ class FileGenerator extends AbstractGenerator
         }
 
         $namespace = $fileReflection->getNamespace();
+
         if ($namespace != '') {
-            $file->setNamespace($fileReflection->getNamespace());
+            $file->setNamespace($namespace);
         }
 
         $uses = $fileReflection->getUses();
@@ -163,19 +165,19 @@ class FileGenerator extends AbstractGenerator
         }
 
         if (($fileReflection->getDocComment() != '')) {
-            $docblock = $fileReflection->getDocblock();
-            $file->setDocblock(DocblockGenerator::fromReflection($docblock));
+            $docBlock = $fileReflection->getDocBlock();
+            $file->setDocBlock(DocBlockGenerator::fromReflection($docBlock));
 
-            $bodyLines = explode("\n", $body);
+            $bodyLines  = explode("\n", $body);
             $bodyReturn = array();
             for ($lineNum = 1; $lineNum <= count($bodyLines); $lineNum++) {
-                if ($lineNum == $docblock->getStartLine()) {
+                if ($lineNum == $docBlock->getStartLine()) {
                     $bodyReturn[] = str_replace(
                         '?',
                         $class->getName(),
-                        '/* Zend_Code_Generator_FileGenerator-DocblockMarker */'
+                        '/* Zend_Code_Generator_FileGenerator-DocBlockMarker */'
                     );
-                    $lineNum = $docblock->getEndLine();
+                    $lineNum      = $docBlock->getEndLine();
                 } else {
                     $bodyReturn[] = $bodyLines[$lineNum - 1]; // adjust for index -> line conversion
                 }
@@ -198,7 +200,7 @@ class FileGenerator extends AbstractGenerator
                     $fileGenerator->filename = $value;
                     continue;
                 case 'class':
-                    $fileGenerator->setClass(($value instanceof ClassGenerator) ?: ClassGenerator::fromArray($value));
+                    $fileGenerator->setClass(($value instanceof ClassGenerator) ? : ClassGenerator::fromArray($value));
                     continue;
                 case 'requiredFiles':
                 case 'required_files':
@@ -217,37 +219,38 @@ class FileGenerator extends AbstractGenerator
 
 
     /**
-     * setDocblock() Set the docblock
+     * setDocBlock() Set the DocBlock
      *
-     * @param DocblockGenerator|string $docblock
+     * @param DocBlockGenerator|string $docBlock
+     * @throws Exception\InvalidArgumentException
      * @return FileGenerator
      */
-    public function setDocblock($docblock)
+    public function setDocBlock($docBlock)
     {
-        if (is_string($docblock)) {
-            $docblock = array('shortDescription' => $docblock);
+        if (is_string($docBlock)) {
+            $docBlock = array('shortDescription' => $docBlock);
         }
 
-        if (is_array($docblock)) {
-            $docblock = new DocblockGenerator($docblock);
-        } elseif (!$docblock instanceof DocblockGenerator) {
+        if (is_array($docBlock)) {
+            $docBlock = new DocBlockGenerator($docBlock);
+        } elseif (!$docBlock instanceof DocBlockGenerator) {
             throw new Exception\InvalidArgumentException(
-                'setDocblock() is expecting either a string, array or an instance of Zend\Code\Generator\DocblockGenerator'
+                'setDocBlock() is expecting either a string, array or an instance of Zend\Code\Generator\DocBlockGenerator'
             );
         }
 
-        $this->docblock = $docblock;
+        $this->docBlock = $docBlock;
         return $this;
     }
 
     /**
-     * Get docblock
+     * Get DocBlock
      *
-     * @return DocblockGenerator
+     * @return DocBlockGenerator
      */
-    public function getDocblock()
+    public function getDocBlock()
     {
-        return $this->docblock;
+        return $this->docBlock;
     }
 
     /**
@@ -298,7 +301,7 @@ class FileGenerator extends AbstractGenerator
 
     /**
      * setNamespace()
-     * 
+     *
      * @param $namespace
      * @return FileGenerator
      */
@@ -310,7 +313,7 @@ class FileGenerator extends AbstractGenerator
 
     /**
      * getUses()
-     * 
+     *
      * Returns an array with the first element the use statement, second is the as part.
      * If $withResolvedAs is set to true, there will be a third element that is the
      * "resolved" as statement, as the second part is not required in use statements
@@ -325,7 +328,7 @@ class FileGenerator extends AbstractGenerator
             for ($useIndex = 0; $useIndex < count($uses); $useIndex++) {
                 if ($uses[$useIndex][1] == '') {
                     if (($lastSeparator = strrpos($uses[$useIndex][0], '\\')) !== false) {
-                        $uses[$useIndex][2] = substr($uses[$useIndex][0], $lastSeparator+1);
+                        $uses[$useIndex][2] = substr($uses[$useIndex][0], $lastSeparator + 1);
                     } else {
                         $uses[$useIndex][2] = $uses[$useIndex][0];
                     }
@@ -384,6 +387,7 @@ class FileGenerator extends AbstractGenerator
      * setClass()
      *
      * @param  array|string|ClassGenerator $class
+     * @throws Exception\InvalidArgumentException
      * @return FileGenerator
      */
     public function setClass($class)
@@ -403,10 +407,8 @@ class FileGenerator extends AbstractGenerator
             );
         }
 
-        $className = $class->getName();
-
         // @todo check for dup here
-        $className = $class->getName();
+        $className                 = $class->getName();
         $this->classes[$className] = $class;
         return $this;
     }
@@ -472,7 +474,7 @@ class FileGenerator extends AbstractGenerator
      */
     public function isSourceDirty()
     {
-        if (($docblock = $this->getDocblock()) && $docblock->isSourceDirty()) {
+        if (($docBlock = $this->getDocBlock()) && $docBlock->isSourceDirty()) {
             return true;
         }
 
@@ -506,18 +508,25 @@ class FileGenerator extends AbstractGenerator
 
         // if there are markers, put the body into the output
         if (preg_match('#/\* Zend_Code_Generator_FileGenerator-(.*?)Marker:#', $body)) {
-            $output .= $body;
-            $body    = '';
+            $tokens = token_get_all($body);
+            foreach ($tokens as $token) {
+                if (is_array($token) && in_array($token[0], array(T_OPEN_TAG, T_COMMENT, T_DOC_COMMENT, T_WHITESPACE))
+                ) {
+                    $output .= $token[1];
+                }
+            }
+            $body = '';
         }
 
-        // Add file docblock, if any
-        if (null !== ($docblock = $this->getDocblock())) {
-            $docblock->setIndentation('');
+        // Add file DocBlock, if any
+        if (null !== ($docBlock = $this->getDocBlock())) {
+            $docBlock->setIndentation('');
 
-            if (preg_match('#/* Zend_Code_Generator_FileGenerator-DocblockMarker */#', $output)) {
-                $output = preg_replace('#/* Zend_CodeGenerator_Php_File-DocblockMarker */#', $docblock->generate(), $output, 1);
+            if (preg_match('#/* Zend_Code_Generator_FileGenerator-DocBlockMarker */#', $output)) {
+                $output = preg_replace('#/* Zend_CodeGenerator_Php_File-DocBlockMarker */#', $docBlock->generate(),
+                                       $output, 1);
             } else {
-                $output .= $docblock->generate() . self::LINE_FEED;
+                $output .= $docBlock->generate() . self::LINE_FEED;
             }
         }
 
@@ -551,7 +560,7 @@ class FileGenerator extends AbstractGenerator
                     $output .= sprintf('use %s as %s;%s', $import, $alias, self::LINE_FEED);
                 }
             }
-            $output.= self::LINE_FEED;
+            $output .= self::LINE_FEED;
         }
 
         // process classes
@@ -561,9 +570,12 @@ class FileGenerator extends AbstractGenerator
                 $regex = str_replace('?', $class->getName(),
                                      '/* Zend_Code_Generator_FileGenerator-ClassMarker: {?} */');
                 $regex = preg_quote($regex, '#');
-                if (preg_match('#'.$regex.'#', $output)) {
-                    $output = preg_replace('#'.$regex.'#', $class->generate(), $output, 1);
+                if (preg_match('#' . $regex . '#', $output)) {
+                    $output = preg_replace('#' . $regex . '#', $class->generate(), $output, 1);
                 } else {
+                    if ($namespace) {
+                        $class->setNamespaceName(null);
+                    }
                     $output .= $class->generate() . self::LINE_FEED;
                 }
             }
@@ -572,7 +584,7 @@ class FileGenerator extends AbstractGenerator
 
         if (!empty($body)) {
 
-            // add an extra space betwee clsses and
+            // add an extra space between classes and
             if (!empty($classes)) {
                 $output .= self::LINE_FEED;
             }

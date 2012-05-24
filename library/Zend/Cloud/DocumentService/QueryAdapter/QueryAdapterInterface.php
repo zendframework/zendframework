@@ -45,7 +45,7 @@ interface QueryAdapterInterface
      * SELECT clause (fields to be selected)
      *
      * @param string $select
-     * @return \Zend\Cloud\DocumentService\QueryAdapter
+     * @return \Zend\Cloud\DocumentService\QueryAdapter\QueryAdapterInterface
      */
     public function select($select);
 

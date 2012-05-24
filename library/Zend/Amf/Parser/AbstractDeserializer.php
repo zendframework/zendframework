@@ -34,19 +34,19 @@ namespace Zend\Amf\Parser;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class AbstractDeserializer implements Deserializer
+abstract class AbstractDeserializer implements DeserializerInterface
 {
     /**
      * The raw string that represents the AMF request.
      *
-     * @var Zend\Amf\Parser\InputStream
+     * @var InputStream
      */
     protected $_stream;
 
     /**
      * Constructor
      *
-     * @param  Zend\Amf\Parser\InputStream $stream
+     * @param  InputStream $stream
      * @return void
      */
     public function __construct(InputStream $stream)

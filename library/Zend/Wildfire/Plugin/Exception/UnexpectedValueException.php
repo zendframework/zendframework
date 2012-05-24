@@ -20,7 +20,8 @@
  */
 
 namespace Zend\Wildfire\Plugin\Exception;
-use Zend\Wildfire\Plugin\Exception;
+
+use Zend\Wildfire\Exception;
 
 /**
  * Exception for Zend_Wildfire component.
@@ -31,7 +32,6 @@ use Zend\Wildfire\Plugin\Exception;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class UnexpectedValueException
-    extends \UnexpectedValueException
-    implements Exception
-{
-}
+    extends Exception\UnexpectedValueException
+    implements ExceptionInterface
+{}

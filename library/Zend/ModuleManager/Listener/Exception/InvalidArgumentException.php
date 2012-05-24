@@ -10,6 +10,8 @@
 
 namespace Zend\ModuleManager\Listener\Exception;
 
+use Zend\ModuleManager\Exception;
+
 /**
  * Invalid Argument Exception
  * 
@@ -17,6 +19,6 @@ namespace Zend\ModuleManager\Listener\Exception;
  * @package    Zend_ModuleManager
  * @subpackage Listener
  */
-class InvalidArgumentException extends \InvalidArgumentException implements 
+class InvalidArgumentException extends Exception\InvalidArgumentException implements 
     ExceptionInterface
 {}

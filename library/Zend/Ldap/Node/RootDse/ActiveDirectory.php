@@ -21,8 +21,8 @@
 
 namespace Zend\Ldap\Node\RootDse;
 
-use Zend\Ldap,
-    Zend\Ldap\Node;
+use Zend\Ldap;
+use Zend\Ldap\Node;
 
 /**
  * Zend\Ldap\Node\RootDse\ActiveDirectory provides a simple data-container for

@@ -20,11 +20,11 @@
 
 namespace Zend\Code\Reflection;
 
-use ReflectionClass,
-    Zend\Code\Reflection\FileReflection,
-    Zend\Code\Scanner\FileScanner,
-    Zend\Code\Annotation,
-    Zend\Code\Scanner\AnnotationScanner;
+use ReflectionClass;
+use Zend\Code\Reflection\FileReflection;
+use Zend\Code\Scanner\FileScanner;
+use Zend\Code\Annotation;
+use Zend\Code\Scanner\AnnotationScanner;
 
 /**
  * @category   Zend
@@ -57,7 +57,7 @@ class ClassReflection extends ReflectionClass implements ReflectionInterface
      * Return the classes DocBlock reflection object
      *
      * @return DocBlockReflection
-     * @throws \Zend\Code\Reflection\Exception for missing docblock or invalid reflection class
+     * @throws \Zend\Code\Reflection\Exception\ExceptionInterface for missing DocBock or invalid reflection class
      */
     public function getDocBlock()
     {
@@ -74,7 +74,8 @@ class ClassReflection extends ReflectionClass implements ReflectionInterface
     }
 
     /**
-     * @return AnnotationCollection
+     * @param  Annotation\AnnotationManager $annotationManager
+     * @return Annotation\AnnotationCollection
      */
     public function getAnnotations(Annotation\AnnotationManager $annotationManager)
     {
@@ -83,8 +84,8 @@ class ClassReflection extends ReflectionClass implements ReflectionInterface
         }
 
         if (!$this->annotations) {
-            $fileScanner = new FileScanner($this->getFileName());
-            $nameInformation = $fileScanner->getClassNameInformation($this->getName());
+            $fileScanner       = new FileScanner($this->getFileName());
+            $nameInformation   = $fileScanner->getClassNameInformation($this->getName());
             $this->annotations = new AnnotationScanner($annotationManager, $docComment, $nameInformation);
         }
 
@@ -109,14 +110,14 @@ class ClassReflection extends ReflectionClass implements ReflectionInterface
     /**
      * Return the contents of the class
      *
-     * @param bool $includeDocblock
+     * @param bool $includeDocBlock
      * @return string
      */
-    public function getContents($includeDocblock = true)
+    public function getContents($includeDocBlock = true)
     {
         $filename  = $this->getFileName();
         $filelines = file($filename);
-        $startnum  = $this->getStartLine($includeDocblock);
+        $startnum  = $this->getStartLine($includeDocBlock);
         $endnum    = $this->getEndLine() - $this->getStartLine();
 
         return implode('', array_splice($filelines, $startnum, $endnum, true));
@@ -125,14 +126,14 @@ class ClassReflection extends ReflectionClass implements ReflectionInterface
     /**
      * Get all reflection objects of implemented interfaces
      *
-     * @return array Array of \Zend\Code\Reflection\ReflectionClass
+     * @return ClassReflection[]
      */
     public function getInterfaces()
     {
         $phpReflections  = parent::getInterfaces();
         $zendReflections = array();
         while ($phpReflections && ($phpReflection = array_shift($phpReflections))) {
-            $instance = new ClassReflection($phpReflection->getName());
+            $instance          = new ClassReflection($phpReflection->getName());
             $zendReflections[] = $instance;
             unset($phpReflection);
         }
@@ -162,7 +163,7 @@ class ClassReflection extends ReflectionClass implements ReflectionInterface
     {
         $methods = array();
         foreach (parent::getMethods($filter) as $method) {
-            $instance = new MethodReflection($this->getName(), $method->getName());
+            $instance  = new MethodReflection($this->getName(), $method->getName());
             $methods[] = $instance;
         }
         return $methods;
@@ -189,7 +190,7 @@ class ClassReflection extends ReflectionClass implements ReflectionInterface
      * Return reflection property of this class by name
      *
      * @param  string $name
-     * @return \PropertyReflection\Code\Reflection\ReflectionProperty
+     * @return PropertyReflection
      */
     public function getProperty($name)
     {
@@ -203,18 +204,19 @@ class ClassReflection extends ReflectionClass implements ReflectionInterface
      * Return reflection properties of this class
      *
      * @param  int $filter
-     * @return array Array of \Zend\Code\Reflection\ReflectionProperty
+     * @return PropertyReflection[]
      */
     public function getProperties($filter = -1)
     {
-        $phpReflections = parent::getProperties($filter);
+        $phpReflections  = parent::getProperties($filter);
         $zendReflections = array();
         while ($phpReflections && ($phpReflection = array_shift($phpReflections))) {
-            $instance = new PropertyReflection($this->getName(), $phpReflection->getName());
+            $instance          = new PropertyReflection($this->getName(), $phpReflection->getName());
             $zendReflections[] = $instance;
             unset($phpReflection);
         }
         unset($phpReflections);
+
         return $zendReflections;
     }
 

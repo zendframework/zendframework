@@ -241,9 +241,9 @@ class Generator
         $container = new CodeGen\PhpClass();
         $container->setName($this->containerClass)
                   ->setExtendedClass('ServiceLocator')
-                  ->setMethod($get)
-                  ->setMethods($getters)
-                  ->setMethods($aliasMethods);
+                  ->addMethodFromGenerator($get)
+                  ->addMethods($getters)
+                  ->addMethods($aliasMethods);
 
         // Create PHP file code generation object
         $classFile = new CodeGen\PhpFile();

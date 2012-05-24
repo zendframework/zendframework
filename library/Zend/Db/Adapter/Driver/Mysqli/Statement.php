@@ -170,9 +170,9 @@ class Statement implements StatementInterface
         $this->resource = $this->mysqli->prepare($this->sql);
         if (!$this->resource instanceof \mysqli_stmt) {
             throw new Exception\InvalidQueryException(
-                'Statement couldn\'t be produced with sql: "' . $sql . '"',
+                'Statement couldn\'t be produced with sql: ' . $sql,
                 null,
-                new ErrorException($this->mysqli->error, $this->mysqli->errno)
+                new Exception\ErrorException($this->mysqli->error, $this->mysqli->errno)
             );
         }
 
@@ -191,17 +191,24 @@ class Statement implements StatementInterface
             $this->prepare();
         }
 
-        $parameters = ($parameters) ?: $this->parameterContainer;
-
-        if ($parameters != null) {
-            if (is_array($parameters)) {
-                $parameters = new ParameterContainer($parameters);
+        /** START Standard ParameterContainer Merging Block */
+        if (!$this->parameterContainer instanceof ParameterContainer) {
+            if ($parameters instanceof ParameterContainer) {
+                $this->parameterContainer = $parameters;
+                $parameters = null;
+            } else {
+                $this->parameterContainer = new ParameterContainer();
             }
-            if (!$parameters instanceof ParameterContainer) {
-                throw new Exception\InvalidArgumentException('ParameterContainer expected');
-            }
-            $this->bindParametersFromContainer($parameters);
         }
+
+        if (is_array($parameters)) {
+            $this->parameterContainer->setFromArray($parameters);
+        }
+
+        if ($this->parameterContainer->count() > 0) {
+            $this->bindParametersFromContainer();
+        }
+        /** END Standard ParameterContainer Merging Block */
 
         if ($this->resource->execute() === false) {
             throw new Exception\RuntimeException($this->resource->error);
@@ -223,15 +230,15 @@ class Statement implements StatementInterface
      * 
      * @param ParameterContainer $pContainer
      */
-    protected function bindParametersFromContainer(ParameterContainer $pContainer)
+    protected function bindParametersFromContainer()
     {
-        $parameters = $pContainer->getNamedArray();
+        $parameters = $this->parameterContainer->getNamedArray();
         $type = '';
         $args = array();
 
         foreach ($parameters as $name => &$value) {
-            if ($pContainer->offsetHasErrata($name)) {
-                switch ($pContainer->offsetGetErrata($name)) {
+            if ($this->parameterContainer->offsetHasErrata($name)) {
+                switch ($this->parameterContainer->offsetGetErrata($name)) {
                     case ParameterContainer::TYPE_DOUBLE:
                         $type .= 'd';
                         break;

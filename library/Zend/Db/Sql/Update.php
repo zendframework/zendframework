@@ -147,6 +147,17 @@ class Update extends AbstractSql implements SqlInterface, PreparableSqlInterface
         return $this;
     }
 
+    public function getRawState($key = null)
+    {
+        $rawState = array(
+            'emptyWhereProtection' => $this->emptyWhereProtection,
+            'table' => $this->table,
+            'set' => $this->set,
+            'where' => $this->where
+        );
+        return (isset($key) && array_key_exists($key, $rawState)) ? $rawState[$key] : $rawState;
+    }
+
     /**
      * Prepare statement
      *
@@ -200,10 +211,6 @@ class Update extends AbstractSql implements SqlInterface, PreparableSqlInterface
     {
         $adapterPlatform = ($adapterPlatform) ?: new Sql92;
         $table = $adapterPlatform->quoteIdentifier($this->table);
-
-//        if ($this->schema != '') {
-//            $table = $platform->quoteIdentifier($this->schema) . $platform->getIdentifierSeparator() . $table;
-//        }
 
         $set = $this->set;
         if (is_array($set)) {

@@ -98,7 +98,7 @@ Roles file format:
      *
      * @see Zend_Auth_Adapter_Interface#authenticate()
      * @return AuthenticationResult
-     * @throws AuthenticationAdapter\Exception
+     * @throws AuthenticationAdapter\Exception\InvalidArgumentException
      */
     public function authenticate()
     {

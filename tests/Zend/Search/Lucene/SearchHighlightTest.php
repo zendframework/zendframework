@@ -20,16 +20,9 @@
  */
 
 namespace ZendTest\Search\Lucene;
+
 use Zend\Search\Lucene\Search\Query;
 use Zend\Search\Lucene\Search;
-
-/**
- * Zend_Search_Lucene
- */
-
-/**
- * PHPUnit test case
- */
 
 /**
  * @category   Zend
@@ -42,14 +35,14 @@ use Zend\Search\Lucene\Search;
 class SearchHighlightTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * Wildcard pattern minimum preffix
+     * Wildcard pattern minimum prefix
      *
      * @var integer
      */
     protected $_wildcardMinPrefix;
 
     /**
-     * Fuzzy search default preffix length
+     * Fuzzy search default prefix length
      *
      * @var integer
      */

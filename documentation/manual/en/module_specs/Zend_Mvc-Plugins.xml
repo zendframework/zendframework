@@ -210,7 +210,7 @@ public function successAction()
 
     <para>
       For the <classname>Forward</classname> plugin to work, the controller
-      calling it must be <classname>LocatorAware</classname>; otherwise, the
+      calling it must be <classname>ServiceManagerAware</classname>; otherwise, the
       plugin will be unable to retrieve a configured and injected
       instance of the requested controller.
     </para>
@@ -223,10 +223,10 @@ public function successAction()
     <itemizedlist>
       <listitem>
         <para>
-          <varname>$name</varname>, the name of the controller to invoke.
-          This may be either the fully qualified class name, or an alias
-          defined and recognized by the Locator instance attached to the
-          invoking controller.
+          <varname>$name</varname>, the name of the controller to invoke.  This
+          may be either the fully qualified class name, or an alias defined and
+          recognized by the <classname>ServiceManager</classname> instance
+          attached to the invoking controller.
         </para>
       </listitem>
 

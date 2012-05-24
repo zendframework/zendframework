@@ -20,8 +20,8 @@
  */
 
 namespace ZendTest\Code\Generator;
-use Zend\Code\Generator\PropertyGenerator,
-    Zend\Code\Generator\PropertyValueGenerator;
+use Zend\Code\Generator\PropertyGenerator;
+use Zend\Code\Generator\PropertyValueGenerator;
 
 /**
  * @category   Zend
@@ -160,9 +160,7 @@ EOS;
      */
     public function testPropertyWillLoadFromReflection()
     {
-        $this->markTestIncomplete('Skipped for now');
-
-        $reflectionClass = new \Zend\Code\Reflection\ReflectionClass('\ZendTest\Code\Generator\TestAsset\TestClassWithManyProperties');
+        $reflectionClass = new \Zend\Code\Reflection\ClassReflection('\ZendTest\Code\Generator\TestAsset\TestClassWithManyProperties');
 
         // test property 1
         $reflProp = $reflectionClass->getProperty('_bazProperty');
@@ -201,7 +199,7 @@ EOS;
     /**
      * @group ZF-7205
      */
-    public function testPropertyCanHaveDocblock()
+    public function testPropertyCanHaveDocBlock()
     {
         $codeGenProperty = new PropertyGenerator(
             'someVal',
@@ -209,7 +207,7 @@ EOS;
             PropertyGenerator::FLAG_STATIC | PropertyGenerator::FLAG_PROTECTED
         );
 
-        $codeGenProperty->setDocblock('@var string $someVal This is some val');
+        $codeGenProperty->setDocBlock('@var string $someVal This is some val');
 
         $expected = <<<EOS
     /**

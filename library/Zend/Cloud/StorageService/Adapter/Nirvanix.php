@@ -44,7 +44,7 @@ class Nirvanix implements AdapterInterface
 
     /**
      * The Nirvanix adapter
-     * @var \Zend\Service\Nirvanix
+     * @var \Zend\Service\Nirvanix\Nirvanix
      */
     protected $_nirvanix;
     protected $_imfNs;

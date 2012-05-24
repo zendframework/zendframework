@@ -35,6 +35,9 @@ use Zend\Stdlib\Hydrator;
  */
 class Factory
 {
+    /**
+     * @var InputFilterFactory
+     */
     protected $inputFilterFactory;
 
     /**

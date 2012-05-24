@@ -21,8 +21,8 @@
  */
 
 namespace Zend\Loader\Exception;
-require_once __DIR__ . '/../Exception.php';
-use Zend\Loader\Exception;
+
+require_once __DIR__ . '/DomainException.php';
 
 /**
  * Plugin class loader exceptions
@@ -33,6 +33,6 @@ use Zend\Loader\Exception;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class PluginLoaderException extends \DomainException implements Exception
+class PluginLoaderException extends DomainException
 {
 }

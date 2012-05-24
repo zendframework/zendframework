@@ -73,7 +73,7 @@ class SqliteMetadata implements MetadataInterface
      * @param  string $database
      * @return array 
      */
-    public function getTableNames($schema = null, $database = null)
+    public function getTableNames($schema = null)
     {
         if ($this->tableData == null) {
             $this->loadTableColumnData();
@@ -93,7 +93,7 @@ class SqliteMetadata implements MetadataInterface
      * @param  string $database
      * @return array 
      */
-    public function getTables($schema = null, $database = null)
+    public function getTables($schema = null)
     {
         $tables = array();
         foreach ($this->getTableNames() as $table) {
@@ -110,11 +110,11 @@ class SqliteMetadata implements MetadataInterface
      * @param  string $database
      * @return Object\TableObject 
      */
-    public function getTable($table, $schema = null, $database = null)
+    public function getTable($table, $schema = null)
     {
         $tableObj = new Object\TableObject($table);
         $tableObj->setColumns($this->getColumns($table));
-        $tableObj->setConstraints($this->getConstraints($table, $schema, $database));
+        $tableObj->setConstraints($this->getConstraints($table, $schema));
 
         return $tableObj;
     }
@@ -125,7 +125,7 @@ class SqliteMetadata implements MetadataInterface
      * @param string $schema
      * @param string $database 
      */
-    public function getViews($schema = null, $database = null)
+    public function getViews($schema = null)
     {
 
     }
@@ -137,9 +137,21 @@ class SqliteMetadata implements MetadataInterface
      * @param string $schema
      * @param string $database 
      */
-    public function getColumnNames($table, $schema = null, $database = null)
+    public function getColumnNames($table, $schema = null)
     {
+        if ($this->tableData == null) {
+            $this->loadTableColumnData();
+        }
 
+        if (!isset($this->tableData[$table])) {
+            throw new Exception\InvalidArgumentException('Invalid table name provided');
+        }
+
+        $names = array();
+        foreach ($this->tableData[$table] as $columnData) {
+            $names[] = $columnData['name'];
+        }
+        return $names;
     }
 
     /**
@@ -151,7 +163,7 @@ class SqliteMetadata implements MetadataInterface
      * @param  string $database
      * @return Object\ColumnObject 
      */
-    public function getColumn($columnName, $table, $schema = null, $database = null)
+    public function getColumn($columnName, $table, $schema = null)
     {
         $sql = 'PRAGMA table_info("' . $table . '")';
         $rows = $this->adapter->query($sql, Adapter::QUERY_MODE_EXECUTE);
@@ -184,13 +196,13 @@ class SqliteMetadata implements MetadataInterface
      * @param  string $database
      * @return array 
      */
-    public function getColumns($table, $schema = null, $database = null)
+    public function getColumns($table, $schema = null)
     {
         $sql = 'PRAGMA table_info("' . $table . '")';
         $rows = $this->adapter->query($sql, Adapter::QUERY_MODE_EXECUTE);
         $columns = array();
         foreach ($rows as $row) {
-            $columns[] = $this->getColumn($row['name'], $table, $schema, $database);
+            $columns[] = $this->getColumn($row['name'], $table, $schema);
         }
         return $columns;
     }
@@ -203,7 +215,7 @@ class SqliteMetadata implements MetadataInterface
      * @param  string $database
      * @return array 
      */
-    public function getConstraints($table, $schema = null, $database = null)
+    public function getConstraints($table, $schema = null)
     {
         if ($this->constraintData == null) {
             $this->loadConstraintData();
@@ -211,7 +223,7 @@ class SqliteMetadata implements MetadataInterface
 
         $constraints = array();
         foreach ($this->constraintData[$table] as $constraintData) {
-            $constraints[] = $this->getConstraint($constraintData['name'], $table, $schema, $database);
+            $constraints[] = $this->getConstraint($constraintData['name'], $table, $schema);
         }
 
         return $constraints;
@@ -226,7 +238,7 @@ class SqliteMetadata implements MetadataInterface
      * @param  string $database
      * @return Object\ConstraintObject 
      */
-    public function getConstraint($constraintName, $table, $schema = null, $database = null)
+    public function getConstraint($constraintName, $table, $schema = null)
     {
         if ($this->constraintData == null) {
             $this->loadConstraintData();
@@ -248,7 +260,7 @@ class SqliteMetadata implements MetadataInterface
 
         $constraint = new Object\ConstraintObject($found['name'], $table);
         $constraint->setType($found['type']);
-        $constraint->setKeys($this->getConstraintKeys($found['name'], $table, $schema, $database));
+        $constraint->setKeys($this->getConstraintKeys($found['name'], $table, $schema));
         return $constraint;
     }
 
@@ -261,7 +273,7 @@ class SqliteMetadata implements MetadataInterface
      * @param  string $database
      * @return Object\ConstraintKeyObject 
      */
-    public function getConstraintKeys($constraint, $table, $schema = null, $database = null)
+    public function getConstraintKeys($constraint, $table, $schema = null)
     {
         if ($this->constraintData == null) {
             $this->loadConstraintData();
@@ -302,7 +314,7 @@ class SqliteMetadata implements MetadataInterface
      * @param  string $database
      * @return array 
      */
-    public function getViewNames($schema = null, $database = null)
+    public function getViewNames($schema = null)
     {
         return array();
     }
@@ -315,7 +327,7 @@ class SqliteMetadata implements MetadataInterface
      * @param  string $database
      * @return array
      */
-    public function getView($viewName, $schema = null, $database = null)
+    public function getView($viewName, $schema = null)
     {
         return array();
     }
@@ -327,7 +339,7 @@ class SqliteMetadata implements MetadataInterface
      * @param  string $database
      * @return array 
      */
-    public function getTriggers($schema = null, $database = null)
+    public function getTriggers($schema = null)
     {
         return array();
     }
@@ -339,7 +351,7 @@ class SqliteMetadata implements MetadataInterface
      * @param  string $database
      * @return array 
      */
-    public function getTriggerNames($schema = null, $database = null)
+    public function getTriggerNames($schema = null)
     {
         return array();
     }
@@ -352,7 +364,7 @@ class SqliteMetadata implements MetadataInterface
      * @param  string $database
      * @return array
      */
-    public function getTrigger($triggerName, $schema = null, $database = null)
+    public function getTrigger($triggerName, $schema = null)
     {
         return array();
     }

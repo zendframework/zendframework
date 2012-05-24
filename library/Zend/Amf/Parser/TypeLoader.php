@@ -167,6 +167,7 @@ final class TypeLoader
      *
      * @param resource $resource
      * @return mixed
+     * @throws Exception\ExceptionInterface
      */
     public static function handleResource($resource)
     {
@@ -179,7 +180,7 @@ final class TypeLoader
                 $resource = $parser->parse($resource);
             }
             return $resource;
-        } catch(Exception $e) {
+        } catch(Exception\ExceptionInterface $e) {
             throw new Exception\InvalidArgumentException($e->getMessage(), $e->getCode(), $e);
         } catch(\Exception $e) {
             throw new Exception\RuntimeException('Can not serialize resource type: '. get_resource_type($resource), 0, $e);

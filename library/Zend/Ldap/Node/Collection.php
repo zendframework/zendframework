@@ -24,7 +24,7 @@ namespace Zend\Ldap\Node;
 use Zend\Ldap;
 
 /**
- * Zend\Ldap\Node\Collection provides a collecion of nodes.
+ * Zend\Ldap\Node\Collection provides a collection of nodes.
  *
  * @category   Zend
  * @package    Zend_Ldap

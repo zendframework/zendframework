@@ -88,6 +88,17 @@ class Delete extends AbstractSql implements SqlInterface, PreparableSqlInterface
         return $this;
     }
 
+    public function getRawState($key = null)
+    {
+        $rawState = array(
+            'emptyWhereProtection' => $this->emptyWhereProtection,
+            'table' => $this->table,
+            'set' => $this->set,
+            'where' => $this->where
+        );
+        return (isset($key) && array_key_exists($key, $rawState)) ? $rawState[$key] : $rawState;
+    }
+
     /**
      * Create where clause
      * 

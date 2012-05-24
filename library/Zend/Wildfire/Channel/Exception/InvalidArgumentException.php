@@ -20,7 +20,8 @@
  */
 
 namespace Zend\Wildfire\Channel\Exception;
-use Zend\Wildfire\Channel\Exception;
+
+use Zend\Wildfire\Exception;
 
 /**
  * Exception for Zend_Wildfire component.
@@ -31,7 +32,6 @@ use Zend\Wildfire\Channel\Exception;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class InvalidArgumentException
-    extends \InvalidArgumentException
-    implements Exception
-{
-}
+    extends Exception\InvalidArgumentException
+    implements ExceptionInterface
+{}

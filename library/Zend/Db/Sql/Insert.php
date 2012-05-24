@@ -122,6 +122,17 @@ class Insert implements SqlInterface, PreparableSqlInterface
         return $this;
     }
 
+    public function getRawState($key = null)
+    {
+        $rawState = array(
+            'columns' => $this->columns,
+            'table' => $this->table,
+            'columns' => $this->columns,
+            'values' => $this->values
+        );
+        return (isset($key) && array_key_exists($key, $rawState)) ? $rawState[$key] : $rawState;
+    }
+
     /**
      * Prepare statement
      *
@@ -171,10 +182,6 @@ class Insert implements SqlInterface, PreparableSqlInterface
     {
         $adapterPlatform = ($adapterPlatform) ?: new Sql92;
         $table = $adapterPlatform->quoteIdentifier($this->table);
-
-//        if ($this->schema != '') {
-//            $table = $platform->quoteIdentifier($this->schema) . $platform->getIdentifierSeparator() . $table;
-//        }
 
         $columns = array_map(array($adapterPlatform, 'quoteIdentifier'), $this->columns);
         $columns = implode(', ', $columns);

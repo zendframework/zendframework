@@ -256,7 +256,7 @@ abstract class Value
                     return $value;
                 }
 
-                if ($value instanceof \Zend\Crypt\Math\BigInteger) {
+                if ($value instanceof \Zend\Math\BigInteger) {
                     return new Value\BigInteger($value);
                 }
 

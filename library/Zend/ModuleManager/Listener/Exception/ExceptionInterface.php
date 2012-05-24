@@ -10,7 +10,7 @@
 
 namespace Zend\ModuleManager\Listener\Exception;
 
-use Zend\ModuleManager\Exception;
+use Zend\ModuleManager\Exception\ExceptionInterface as Exception;
 
 /**
  * Exception interface
@@ -19,5 +19,5 @@ use Zend\ModuleManager\Exception;
  * @package    Zend_ModuleManager
  * @subpackage Listener
  */
-interface ExceptionInterface extends Exception\ExceptionInterface
+interface ExceptionInterface extends Exception
 {}

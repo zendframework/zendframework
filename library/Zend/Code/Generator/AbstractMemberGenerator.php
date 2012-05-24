@@ -21,8 +21,8 @@
 
 namespace Zend\Code\Generator;
 
-use Zend\Code\Generator,
-    Zend\Code\Generator\Exception;
+use Zend\Code\Generator;
+use Zend\Code\Generator\Exception;
 
 /**
  * @category   Zend
@@ -53,9 +53,9 @@ abstract class AbstractMemberGenerator extends AbstractGenerator
     /**#@-*/
 
     /**
-     * @var \Zend\Code\Generator\DocblockGenerator
+     * @var \Zend\Code\Generator\DocBlockGenerator
      */
-    protected $docblock = null;
+    protected $docBlock = null;
 
     /**
      * @var string
@@ -70,7 +70,7 @@ abstract class AbstractMemberGenerator extends AbstractGenerator
     /**
      * Set flags
      *
-     * @param $flags
+     * @param int|array $flags
      * @return AbstractMemberGenerator
      */
     public function setFlags($flags)
@@ -78,7 +78,7 @@ abstract class AbstractMemberGenerator extends AbstractGenerator
 
         if (is_array($flags)) {
             $flagsArray = $flags;
-            $flags = 0x00;
+            $flags      = 0x00;
             foreach ($flagsArray as $flag) {
                 $flags |= $flag;
             }
@@ -91,7 +91,7 @@ abstract class AbstractMemberGenerator extends AbstractGenerator
     /**
      * Add flag
      *
-     * @param $flag
+     * @param int $flag
      * @return AbstractMemberGenerator
      */
     public function addFlag($flag)
@@ -103,7 +103,7 @@ abstract class AbstractMemberGenerator extends AbstractGenerator
     /**
      * Remove flag
      *
-     * @param $flag
+     * @param int $flag
      * @return AbstractMemberGenerator
      */
     public function removeFlag($flag)
@@ -114,33 +114,34 @@ abstract class AbstractMemberGenerator extends AbstractGenerator
 
 
     /**
-     * Set the docblock
+     * Set the DocBlock
      *
-     * @param DocblockGenerator|string $docblock
+     * @param DocBlockGenerator|string $docBlock
+     * @throws Exception\InvalidArgumentException
      * @return AbstractMemberGenerator
      */
-    public function setDocblock($docblock)
+    public function setDocBlock($docBlock)
     {
-        if (is_string($docblock)) {
-            $docblock = new DocblockGenerator($docblock);
-        } elseif (!$docblock instanceof DocblockGenerator) {
+        if (is_string($docBlock)) {
+            $docBlock = new DocBlockGenerator($docBlock);
+        } elseif (!$docBlock instanceof DocBlockGenerator) {
             throw new Exception\InvalidArgumentException(
-                'setDocblock() is expecting either a string, array or an instance of Zend\Code\Generator\DocblockGenerator'
+                'setDocBlock() is expecting either a string, array or an instance of Zend\Code\Generator\DocBlockGenerator'
             );
         }
 
-        $this->docblock = $docblock;
+        $this->docBlock = $docBlock;
         return $this;
     }
 
     /**
-     * getDocblock()
+     * getDocBlock()
      *
-     * @return DocblockGenerator
+     * @return DocBlockGenerator
      */
-    public function getDocblock()
+    public function getDocBlock()
     {
-        return $this->docblock;
+        return $this->docBlock;
     }
 
     /**
@@ -203,7 +204,7 @@ abstract class AbstractMemberGenerator extends AbstractGenerator
      */
     public function isStatic()
     {
-        return ($this->flags & self::FLAG_STATIC); // is FLAG_STATIC in flags
+        return (bool) ($this->flags & self::FLAG_STATIC); // is FLAG_STATIC in flags
     }
 
     /**

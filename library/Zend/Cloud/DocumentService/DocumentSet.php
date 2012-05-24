@@ -33,7 +33,7 @@ class DocumentSet implements \Countable, \IteratorAggregate
     /** @var int */
     protected $_documentCount;
 
-    /** @var ArrayIterator */
+    /** @var \ArrayIterator */
     protected $_documents;
 
     /**

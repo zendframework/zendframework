@@ -25,7 +25,9 @@ use Zend\Amf\Exception,
     Zend\Code\Reflection\PropertyReflection,
     Zend\Server\Reflection,
     Zend\Server\Reflection\ReflectionClass as ServerReflectionClass,
-    SplFileInfo;
+    SplFileInfo,
+    DOMElement,
+    DOMDocument;
 
 /**
  * This class implements a service for generating AMF service descriptions as XML.
@@ -64,7 +66,6 @@ class Introspector
     /**
      * Constructor
      *
-     * @return void
      */
     public function __construct()
     {
@@ -130,7 +131,7 @@ class Introspector
      * @param  DOMElement $typexml target XML element
      * @return void
      */
-    protected function _addClassAttributes($typename, \DOMElement $typexml)
+    protected function _addClassAttributes($typename, DOMElement $typexml)
     {
         // Do not try to autoload here because _phpTypeToAS should
         // have already attempted to load this class

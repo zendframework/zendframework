@@ -216,6 +216,7 @@
 
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Ldap-API-Ldap.xml"/>
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Ldap-API-Ldap-Attribute.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Ldap-API-Ldap-Converter-Converter.xml"/>
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Ldap-API-Ldap-Dn.xml"/>
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Ldap-API-Ldap-Filter.xml"/>
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Ldap-API-Ldap-Node.xml"/>

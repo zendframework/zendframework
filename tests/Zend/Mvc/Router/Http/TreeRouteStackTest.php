@@ -147,6 +147,62 @@ class TreeRouteStackTest extends TestCase
         $this->assertEquals('http://example.com', $stack->assemble(array(), array('name' => 'foo')));
     }
 
+    public function testAssembleCanonicalUriWithHostnameRouteAndQueryRoute()
+    {
+        $uri   = new HttpUri();
+        $uri->setScheme('http');
+        $stack = new TreeRouteStack();
+        $stack->setRequestUri($uri);
+        $stack->addRoute(
+        	'foo',
+            array(
+                'type' => 'Hostname',
+                'options' => array(
+                    'route' => 'example.com',
+                ),
+                'child_routes' => array(
+                    'index' => array(
+                        'type' => 'Literal',
+                        'options' => array(
+                            'route' => '/',
+                        ),
+                        'child_routes' => array(
+                            'query' => array(
+                                'type' => 'Query',
+                            ),
+                        ),
+                    ),
+                ),
+            )
+        );
+
+        $this->assertEquals('http://example.com/?bar=baz', $stack->assemble(array('bar' => 'baz'), array('name' => 'foo/index/query')));
+    }
+
+    public function testAssembleWithQueryRoute()
+    {
+        $uri   = new HttpUri();
+        $uri->setScheme('http');
+        $stack = new TreeRouteStack();
+        $stack->setRequestUri($uri);
+        $stack->addRoute(
+        	'index',
+            array(
+                'type' => 'Literal',
+                'options' => array(
+                    'route' => '/',
+                ),
+                'child_routes' => array(
+                    'query' => array(
+                        'type' => 'Query',
+                    ),
+                ),
+            )
+        );
+
+        $this->assertEquals('/?bar=baz', $stack->assemble(array('bar' => 'baz'), array('name' => 'index/query')));
+    }
+
     public function testAssembleWithoutNameOption()
     {
         $this->setExpectedException('Zend\Mvc\Router\Exception\InvalidArgumentException', 'Missing "name" option');

@@ -66,6 +66,6 @@ interface StatementInterface
      * @param null $parameters
      * @return ResultInterface
      */
-    public function execute();
+    public function execute($parameters = null);
 
 }

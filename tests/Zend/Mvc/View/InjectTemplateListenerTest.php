@@ -55,10 +55,10 @@ class InjectTemplateListenerTest extends TestCase
 
         $this->listener->injectTemplate($this->event);
 
-        $this->assertEquals('somewhat/useful', $model->getTemplate());
+        $this->assertEquals('foo/somewhat/useful', $model->getTemplate());
     }
 
-    public function testUsesControllerOnlyIfNoActionInRouteMatch()
+    public function testUsesModuleAndControllerOnlyIfNoActionInRouteMatch()
     {
         $this->routeMatch->setParam('controller', 'Foo\Controller\SomewhatController');
 
@@ -67,7 +67,7 @@ class InjectTemplateListenerTest extends TestCase
 
         $this->listener->injectTemplate($this->event);
 
-        $this->assertEquals('somewhat', $model->getTemplate());
+        $this->assertEquals('foo/somewhat', $model->getTemplate());
     }
 
     public function testNormalizesLiteralControllerNameIfNoNamespaceSeparatorPresent()

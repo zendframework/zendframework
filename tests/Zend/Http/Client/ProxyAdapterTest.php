@@ -47,8 +47,6 @@ class ProxyAdapterTest extends SocketTest
      */
     protected function setUp()
     {
-        $this->markTestIncomplete('Proxy adapter incomplete at the moment');
-
         if (defined('TESTS_ZEND_HTTP_CLIENT_HTTP_PROXY') &&
               TESTS_ZEND_HTTP_CLIENT_HTTP_PROXY) {
 

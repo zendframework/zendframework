@@ -19,7 +19,8 @@
  */
 
 namespace Zend\Wildfire\Protocol\Exception;
-use Zend\Wildfire\Protocol\Exception;
+
+use Zend\Wildfire\Exception;
 
 /**
  * Exception for Zend_Wildfire component.
@@ -30,7 +31,6 @@ use Zend\Wildfire\Protocol\Exception;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class OutOfRangeException
-    extends \OutOfRangeException
-    implements Exception
-{
-}
+    extends Exception\OutOfRangeException
+    implements ExceptionInterface
+{}

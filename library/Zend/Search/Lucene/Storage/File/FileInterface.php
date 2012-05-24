@@ -48,7 +48,7 @@ interface FileInterface
      * @param integer $whence
      * @return integer
      */
-    public function seek($offset, $whence=\SEEK\SET);
+    public function seek($offset, $whence=SEEK_SET);
 
     /**
      * Get file position.

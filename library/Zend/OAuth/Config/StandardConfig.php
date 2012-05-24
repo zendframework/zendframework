@@ -125,7 +125,7 @@ class StandardConfig implements ConfigInterface
      * If relevant, a PEM encoded RSA private key encapsulated as a
      * Zend_Crypt_Rsa Key
      *
-     * @var \Zend\Crypt\Rsa\PrivateKey
+     * @var \Zend\Crypt\PublicKey\Rsa\PrivateKey
      */
     protected $_rsaPrivateKey = null;
 
@@ -133,7 +133,7 @@ class StandardConfig implements ConfigInterface
      * If relevant, a PEM encoded RSA public key encapsulated as a
      * Zend_Crypt_Rsa Key
      *
-     * @var \Zend\Crypt\Rsa\PublicKey
+     * @var \Zend\Crypt\Rsa\PublicKey\PublicKey
      */
     protected $_rsaPublicKey = null;
 
@@ -563,10 +563,10 @@ class StandardConfig implements ConfigInterface
     /**
      * Set RSA public key
      *
-     * @param  \Zend\Crypt\Rsa\PublicKey $key
+     * @param  \Zend\Crypt\PublicKey\Rsa\PublicKey $key
      * @return StandardConfig
      */
-    public function setRsaPublicKey(\Zend\Crypt\Rsa\PublicKey $key)
+    public function setRsaPublicKey(\Zend\Crypt\PublicKey\Rsa\PublicKey $key)
     {
         $this->_rsaPublicKey = $key;
         return $this;
@@ -575,7 +575,7 @@ class StandardConfig implements ConfigInterface
     /**
      * Get RSA public key
      *
-     * @return \Zend\Crypt\Rsa\PublicKey
+     * @return \Zend\Crypt\PublicKey\Rsa\PublicKey
      */
     public function getRsaPublicKey()
     {
@@ -585,10 +585,10 @@ class StandardConfig implements ConfigInterface
     /**
      * Set RSA private key
      *
-     * @param  \Zend\Crypt\Rsa\PrivateKey $key
+     * @param  \Zend\Crypt\PublicKey\Rsa\PrivateKey $key
      * @return StandardConfig
      */
-    public function setRsaPrivateKey(\Zend\Crypt\Rsa\PrivateKey $key)
+    public function setRsaPrivateKey(\Zend\Crypt\PublicKey\Rsa\PrivateKey $key)
     {
         $this->_rsaPrivateKey = $key;
         return $this;
@@ -597,7 +597,7 @@ class StandardConfig implements ConfigInterface
     /**
      * Get RSA private key
      *
-     * @return \Zend\Crypt\Rsa\PrivateKey
+     * @return \Zend\Crypt\PublicKey\Rsa\PrivateKey
      */
     public function getRsaPrivateKey()
     {

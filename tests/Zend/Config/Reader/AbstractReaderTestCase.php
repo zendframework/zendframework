@@ -22,7 +22,7 @@
 namespace ZendTest\Config\Reader;
 
 use \PHPUnit_Framework_TestCase as TestCase,
-    \Zend\Config\Reader\Reader,
+    \Zend\Config\Reader\ReaderInterface,
     \ReflectionClass;
 
 /**
@@ -36,7 +36,7 @@ use \PHPUnit_Framework_TestCase as TestCase,
 abstract class AbstractReaderTestCase extends TestCase
 {
     /**
-     * @var Reader
+     * @var ReaderInterface
      */
     protected $reader;
     

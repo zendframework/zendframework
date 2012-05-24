@@ -38,31 +38,31 @@ class ParameterReflection extends ReflectionParameter implements ReflectionInter
     /**
      * Get declaring class reflection object
      *
-     * @param  string $reflectionClass Reflection class to use
-     * @return \Zend\Code\Reflection\ReflectionClass
+     * @return ClassReflection
      */
     public function getDeclaringClass()
     {
         $phpReflection  = parent::getDeclaringClass();
         $zendReflection = new ClassReflection($phpReflection->getName());
         unset($phpReflection);
+
         return $zendReflection;
     }
 
     /**
      * Get class reflection object
      *
-     * @param  string $reflectionClass Reflection class to use
-     * @return \Zend\Code\Reflection\ReflectionClass
+     * @return ClassReflection
      */
     public function getClass()
     {
-        $phpReflection  = parent::getClass();
+        $phpReflection = parent::getClass();
         if ($phpReflection == null) {
             return null;
         }
         $zendReflection = new ClassReflection($phpReflection->getName());
         unset($phpReflection);
+
         return $zendReflection;
     }
 
@@ -70,7 +70,7 @@ class ParameterReflection extends ReflectionParameter implements ReflectionInter
      * Get declaring function reflection object
      *
      * @param  string $reflectionClass Reflection class to use
-     * @return Zend_Reflection_Function|\MethodReflection\Code\Reflection\ReflectionMethod
+     * @return FunctionReflection|MethodReflection
      */
     public function getDeclaringFunction($reflectionClass = null)
     {
@@ -81,6 +81,7 @@ class ParameterReflection extends ReflectionParameter implements ReflectionInter
             $zendReflection = new FunctionReflection($phpReflection->getName());
         }
         unset($phpReflection);
+
         return $zendReflection;
     }
 
@@ -91,8 +92,8 @@ class ParameterReflection extends ReflectionParameter implements ReflectionInter
      */
     public function getType()
     {
-        if ($docblock = $this->getDeclaringFunction()->getDocBlock()) {
-            $params = $docblock->getTags('param');
+        if ($docBlock = $this->getDeclaringFunction()->getDocBlock()) {
+            $params = $docBlock->getTags('param');
 
             if (isset($params[$this->getPosition()])) {
                 return $params[$this->getPosition()]->getType();

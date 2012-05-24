@@ -40,11 +40,11 @@ class ServiceManagerConfiguration implements ConfigurationInterface
      * @var array
      */
     protected $services = array(
-        'Request'                      => 'Zend\Http\PhpEnvironment\Request',
-        'Response'                     => 'Zend\Http\PhpEnvironment\Response',
-        'RouteListener'                => 'Zend\Mvc\RouteListener',
-        'DispatchListener'             => 'Zend\Mvc\DispatchListener',
-        'ViewManager'                  => 'Zend\Mvc\View\ViewManager',
+        'DispatchListener' => 'Zend\Mvc\DispatchListener',
+        'Request'          => 'Zend\Http\PhpEnvironment\Request',
+        'Response'         => 'Zend\Http\PhpEnvironment\Response',
+        'RouteListener'    => 'Zend\Mvc\RouteListener',
+        'ViewManager'      => 'Zend\Mvc\View\ViewManager',
     );
 
     /**
@@ -53,15 +53,19 @@ class ServiceManagerConfiguration implements ConfigurationInterface
      * @var array
      */
     protected $factories = array(
-        'EventManager'                 => 'Zend\Mvc\Service\EventManagerFactory',
-        'ModuleManager'                => 'Zend\Mvc\Service\ModuleManagerFactory',
-        'Configuration'                => 'Zend\Mvc\Service\ConfigurationFactory',
-        'Router'                       => 'Zend\Mvc\Service\RouterFactory',
-        'ControllerPluginLoader'       => 'Zend\Mvc\Service\ControllerPluginLoaderFactory',
-        'ControllerPluginBroker'       => 'Zend\Mvc\Service\ControllerPluginBrokerFactory',
-        'Application'                  => 'Zend\Mvc\Service\ApplicationFactory',
-        'DependencyInjector'           => 'Zend\Mvc\Service\DiFactory',
-        'ControllerLoader'             => 'Zend\Mvc\Service\ControllerLoaderFactory',
+        'Application'            => 'Zend\Mvc\Service\ApplicationFactory',
+        'Configuration'          => 'Zend\Mvc\Service\ConfigurationFactory',
+        'ControllerLoader'       => 'Zend\Mvc\Service\ControllerLoaderFactory',
+        'ControllerPluginBroker' => 'Zend\Mvc\Service\ControllerPluginBrokerFactory',
+        'ControllerPluginLoader' => 'Zend\Mvc\Service\ControllerPluginLoaderFactory',
+        'DependencyInjector'     => 'Zend\Mvc\Service\DiFactory',
+        'EventManager'           => 'Zend\Mvc\Service\EventManagerFactory',
+        'ModuleManager'          => 'Zend\Mvc\Service\ModuleManagerFactory',
+        'Router'                 => 'Zend\Mvc\Service\RouterFactory',
+        'ViewFeedRenderer'       => 'Zend\Mvc\Service\ViewFeedRendererFactory',
+        'ViewFeedStrategy'       => 'Zend\Mvc\Service\ViewFeedStrategyFactory',
+        'ViewJsonRenderer'       => 'Zend\Mvc\Service\ViewJsonRendererFactory',
+        'ViewJsonStrategy'       => 'Zend\Mvc\Service\ViewJsonStrategyFactory',
     );
 
     /**

@@ -82,15 +82,15 @@ class Factory
         $spec = $this->validateSpecification($spec, __METHOD__);
         $type = isset($spec['type']) ? $spec['type'] : 'Zend\Form\Element';
 
-        if (is_subclass_of($type, 'Zend\Form\FormInterface', true)) {
+        if (is_subclass_of($type, 'Zend\Form\FormInterface')) {
             return $this->createForm($spec);
         }
         
-        if (is_subclass_of($type, 'Zend\Form\FieldsetInterface', true)) {
+        if (is_subclass_of($type, 'Zend\Form\FieldsetInterface')) {
             return $this->createFieldset($spec);
         }
 
-        if (!is_subclass_of($type, 'Zend\Form\ElementInterface', true)) {
+        if (!is_subclass_of($type, 'Zend\Form\ElementInterface')) {
             throw new Exception\DomainException(sprintf(
                 '%s expects the $spec["type"] to implement one of %s, %s, or %s; received %s',
                 __METHOD__,

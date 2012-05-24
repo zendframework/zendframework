@@ -9,32 +9,39 @@
  */
 namespace Zend\Crypt\PublicKey\Rsa;
 
+use Countable;
+
 /**
  * @category   Zend
  * @package    Zend_Crypt
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Key implements \Countable
+abstract class AbstractKey implements Countable
 {
     /**
      * @var string
      */
-    protected $_pemString = null;
+    protected $pemString = null;
+
+    /**
+     * @var string
+     */
+    protected $certificateString = null;
 
     /**
      * Bits, key string and type of key
      *
      * @var array
      */
-    protected $_details = array();
+    protected $details = array();
 
     /**
      * Key Resource
      *
      * @var resource
      */
-    protected $_opensslKeyResource = null;
+    protected $opensslKeyResource = null;
 
     /**
      * Retrieves key resource
@@ -43,7 +50,7 @@ class Key implements \Countable
      */
     public function getOpensslKeyResource()
     {
-        return $this->_opensslKeyResource;
+        return $this->opensslKeyResource;
     }
 
     /**
@@ -54,10 +61,10 @@ class Key implements \Countable
      */
     public function toString()
     {
-        if (!empty($this->_pemString)) {
-            return $this->_pemString;
-        } elseif (!empty($this->_certificateString)) {
-            return $this->_certificateString;
+        if (!empty($this->pemString)) {
+            return $this->pemString;
+        } elseif (!empty($this->certificateString)) {
+            return $this->certificateString;
         }
         throw new Exception\RuntimeException('No public key string representation is available');
     }
@@ -77,7 +84,7 @@ class Key implements \Countable
      */
     public function count()
     {
-        return $this->_details['bits'];
+        return $this->details['bits'];
     }
 
     /**
@@ -87,6 +94,6 @@ class Key implements \Countable
      */
     public function getType()
     {
-        return $this->_details['type'];
+        return $this->details['type'];
     }
 }

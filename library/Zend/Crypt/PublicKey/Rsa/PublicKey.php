@@ -15,40 +15,37 @@ namespace Zend\Crypt\PublicKey\Rsa;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class PublicKey extends Key
+class PublicKey extends AbstractKey
 {
-
-    protected $_certificateString = null;
-
-    public function __construct($string)
-    {
-        $this->_parse($string);
-    }
-
     /**
      * @param string $string
      * @throws Exception\RuntimeException
      */
-    protected function _parse($string)
+    public function __construct($string)
     {
-        if (preg_match("/^-----BEGIN CERTIFICATE-----/", $string)) {
-            $this->_certificateString = $string;
-        } else {
-            $this->_pemString = $string;
-        }
-
         $result = openssl_pkey_get_public($string);
         if (!$result) {
-            throw new Exception\RuntimeException('Unable to load public key');
+            throw new Exception\RuntimeException(
+                'Unable to load public key; openssl ' . openssl_error_string() . 'STR:' .$string
+            );
         }
 
-        $this->_opensslKeyResource = $result;
-        $this->_details            = openssl_pkey_get_details($this->_opensslKeyResource);
+        if (strpos($string, '-----BEGIN CERTIFICATE-----') !== false) {
+            $this->certificateString = $string;
+        } else {
+            $this->pemString = $string;
+        }
+
+        $this->opensslKeyResource = $result;
+        $this->details            = openssl_pkey_get_details($this->opensslKeyResource);
     }
 
+    /**
+     * @return null
+     */
     public function getCertificate()
     {
-        return $this->_certificateString;
+        return $this->certificateString;
     }
 
 }

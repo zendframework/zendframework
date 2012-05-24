@@ -20,10 +20,10 @@ namespace Zend\Crypt\Key\Derivation;
 class SaltedS2k
 {
     protected static $supportedMhashAlgos = array (
-	'md2'        => MHASH_MD2,
-	'md4'        => MHASH_MD4,
-	'md5'        => MHASH_MD5,
-	'sha1'       => MHASH_SHA1,
+        'md2'        => MHASH_MD2,
+        'md4'        => MHASH_MD4,
+        'md5'        => MHASH_MD5,
+        'sha1'       => MHASH_SHA1,
 	'sha224'     => MHASH_SHA224,
 	'sha256'     => MHASH_SHA256,
 	'sha382'     => MHASH_SHA384,
@@ -59,9 +59,9 @@ class SaltedS2k
         if (!in_array($hash, array_keys(self::$supportedMhashAlgos))) {
             throw new Exception\InvalidArgumentException("The hash algorihtm $hash is not supported by " . __CLASS__);
         }
-	if (strlen($salt)<8) {
-	    throw new Exception\InvalidArgumentException('The salt size must be at least of 8 bytes');
-	}
-	return mhash_keygen_s2k(self::$supportedMhashAlgos[$hash], $password, $salt, $bytes);
+        if (strlen($salt)<8) {
+            throw new Exception\InvalidArgumentException('The salt size must be at least of 8 bytes');
+        }
+        return mhash_keygen_s2k(self::$supportedMhashAlgos[$hash], $password, $salt, $bytes);
     }
 }

@@ -117,6 +117,13 @@ class JsonStrategy implements ListenerAggregateInterface
                     // application/json Accept header found
                     return $this->renderer;
                 }
+                if (0 === strpos($mediaType, 'application/javascript')) {
+                    // application/javascript Accept header found
+                    if (false != ($callback = $request->query()->get('callback'))) {
+                        $this->renderer->setJsonpCallback($callback);
+                    }
+                    return $this->renderer;
+                }
             }
         }
 
@@ -148,6 +155,10 @@ class JsonStrategy implements ListenerAggregateInterface
         $response = $e->getResponse();
         $response->setContent($result);
         $headers = $response->headers();
-        $headers->addHeaderLine('content-type', 'application/json');
+        if ($this->renderer->hasJsonpCallback()) {
+            $headers->addHeaderLine('content-type', 'application/javascript');
+        } else {
+            $headers->addHeaderLine('content-type', 'application/json');
+        }
     }
 }

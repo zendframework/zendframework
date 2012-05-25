@@ -214,20 +214,28 @@ class ViewManager implements ListenerAggregateInterface
             return $urlHelper;
         });
 
+        $config = $this->config;
+
         // Configure basePath view helper with base path from configuration, if available
-        if (isset($this->config['base_path'])) {
-            $basePath = $this->config['base_path'];
-        } else {
-            $basePath = $this->services->get('Request')->getBasePath();
-        }
-        $basePathHelper = $this->helperBroker->load('basePath');
-        $basePathHelper->setBasePath($basePath);
+        $this->services->setFactory('Zend\View\Helper\BasePath', function($sm) use($config) {
+            $basePathHelper = new \Zend\View\Helper\BasePath;
+            if (isset($config['base_path'])) {
+                $basePath = $config['base_path'];
+            } else {
+                $basePath = $sm->get('Request')->getBasePath();
+            }
+            $basePathHelper->setBasePath($basePath);
+            return $basePathHelper;
+        });
 
         // Configure doctype view helper with doctype from configuration, if available
-        if (isset($this->config['doctype'])) {
-            $doctype = $this->helperBroker->load('doctype');
-            $doctype->setDoctype($this->config['doctype']);
-        }
+        $this->services->setFactory('Zend\View\Helper\Doctype', function($sm) use($config) {
+            $doctypeHelper = new \Zend\View\Helper\Doctype;
+            if (isset($config['doctype'])) {
+                $doctypeHelper->setDoctype($config['doctype']);
+            }
+            return $doctypeHelper;
+        });
 
         $this->services->setService('ViewHelperBroker', $this->helperBroker);
         $this->services->setAlias('Zend\View\HelperBroker', 'ViewHelperBroker');

@@ -174,7 +174,7 @@ class ServiceManagerConfiguration implements ConfigurationInterface
 
         $serviceManager->addInitializer(function ($instance) use ($serviceManager) {
             if ($instance instanceof ServiceManagerAwareInterface) {
-                $instance->setServiceManager($instance);
+                $instance->setServiceManager($serviceManager);
             }
         });
 

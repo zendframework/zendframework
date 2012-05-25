@@ -208,9 +208,11 @@ class ViewManager implements ListenerAggregateInterface
         $this->helperBroker->setServiceLocator($this->services);
 
         // Configure URL view helper with router
-        $router = $this->services->get('Router');
-        $url    = $this->helperBroker->load('url');
-        $url->setRouter($router);
+        $this->services->setFactory('Zend\View\Helper\Url', function($sm) {
+            $urlHelper = new \Zend\View\Helper\Url;
+            $urlHelper->setRouter($sm->get('Router'));
+            return $urlHelper;
+        });
 
         // Configure basePath view helper with base path from configuration, if available
         if (isset($this->config['base_path'])) {

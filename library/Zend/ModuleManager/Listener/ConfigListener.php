@@ -72,6 +72,7 @@ class ConfigListener extends AbstractListener implements
             $this->setMergedConfig($this->getCachedConfig());
         } else {
             $this->addConfigGlobPaths($this->getOptions()->getConfigGlobPaths());
+            $this->addConfigStaticPaths($this->getOptions()->getConfigStaticPaths());
         }
     }
 

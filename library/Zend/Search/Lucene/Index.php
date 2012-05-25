@@ -685,13 +685,15 @@ class Index implements SearchIndexInterface
         $query->execute($this);
 
         $topScore = 0;
-
+        $hitId = 0;
+        
         $resultSetLimit = Lucene::getResultSetLimit();
         foreach ($query->matchedDocs() as $id => $num) {
             $docScore = $query->score($id, $this);
             if( $docScore != 0 ) {
                 $hit = new Search\QueryHit($this);
-                $hit->id = $id;
+                $hit->id = ++$hitId;
+                $hit->document_id = $id;
                 $hit->score = $docScore;
 
                 $hits[]   = $hit;

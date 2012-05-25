@@ -45,10 +45,16 @@ class QueryHit
     protected $_document = null;
 
     /**
-     * Number of the document in the index
+     * Unique hit id
      * @var integer
      */
     public $id;
+    
+    /**
+     * Number of the document in the index
+     * @var integer
+     */
+    public $document_id;
 
     /**
      * Score of the hit
@@ -102,7 +108,7 @@ class QueryHit
     public function getDocument()
     {
         if (!$this->_document instanceof Document) {
-            $this->_document = $this->_index->getDocument($this->id);
+            $this->_document = $this->_index->getDocument($this->document_id);
         }
 
         return $this->_document;

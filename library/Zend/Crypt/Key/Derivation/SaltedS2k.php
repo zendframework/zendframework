@@ -50,7 +50,7 @@ class SaltedS2k
      *
      * @param  string  $hash       The hash algorithm to be used by HMAC
      * @param  string  $password   The source password/key
-     * @param  integer bytes       The output size in bytes
+     * @param  integer $bytes      The output size in bytes
      * @param  string  $salt       The salt of the algorithm
      * @return string
      */

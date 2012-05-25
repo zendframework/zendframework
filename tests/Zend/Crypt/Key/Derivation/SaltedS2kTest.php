@@ -29,6 +29,7 @@ use Zend\Crypt\Key\Derivation\SaltedS2k;
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @group      Zend_Crypt
  */
 class SaltedS2kTest extends \PHPUnit_Framework_TestCase
 {
@@ -45,7 +46,7 @@ class SaltedS2kTest extends \PHPUnit_Framework_TestCase
     {
         $password = SaltedS2k::calc('sha256', 'test', $this->salt, 32);
         $this->assertEquals(32, strlen($password));
-        $this->assertEquals(base64_encode($password), 'qzQISUBUSP1iqYtwe/druhdOVqluc/Y2TetdSHSbaw8=');
+        $this->assertEquals('qzQISUBUSP1iqYtwe/druhdOVqluc/Y2TetdSHSbaw8=', base64_encode($password));
     }
 
     public function testCalcWithWrongHash()

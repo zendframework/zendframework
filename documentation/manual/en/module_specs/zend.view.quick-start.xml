@@ -748,8 +748,9 @@ class Module
     public function init($manager)
     {
         // Register a bootstrap event
-        $events = StaticEventManager::getInstance();
-        $events->attach('bootstrap', 'bootstrap', array($this, 'bootstrap'));
+        $events       = $moduleManager->events();
+        $sharedEvents = $events->getSharedManager();
+        $sharedEvents->attach('bootstrap', 'bootstrap', array($this, 'bootstrap'), 100);
     }
 
     public function bootstrap($e)
@@ -863,8 +864,9 @@ class Module
     public function init($manager)
     {
         // Register a bootstrap event
-        $events = StaticEventManager::getInstance();
-        $events->attach('bootstrap', 'bootstrap', array($this, 'bootstrap'));
+        $events       = $moduleManager->events();
+        $sharedEvents = $events->getSharedManager();
+        $sharedEvents->attach('bootstrap', 'bootstrap', array($this, 'bootstrap'), 100);
     }
 
     public function bootstrap($e)
@@ -914,8 +916,9 @@ class Module
     public function init($manager)
     {
         // Register a bootstrap event
-        $events = StaticEventManager::getInstance();
-        $events->attach('bootstrap', 'bootstrap', array($this, 'bootstrap'));
+        $events       = $moduleManager->events();
+        $sharedEvents = $events->getSharedManager();
+        $sharedEvents->attach('bootstrap', 'bootstrap', array($this, 'bootstrap'), 100);
     }
 
     public function bootstrap($e)

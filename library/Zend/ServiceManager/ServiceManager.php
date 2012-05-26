@@ -287,19 +287,16 @@ class ServiceManager implements ServiceLocatorInterface
             }
         }
 
+        // Still no instance? raise an exception
         if (!$instance) {
-
-            // Still no instance? raise an exception
-            if (!$instance) {
-                throw new Exception\ServiceNotCreatedException(sprintf(
-                        '%s was unable to fetch or create an instance for %s',
-                        __METHOD__,
-                        $name
-                    ),
-                    null,
-                    ($selfException === null) ? null : $selfException->getPrevious()
-                );
-            }
+            throw new Exception\ServiceNotCreatedException(sprintf(
+                '%s was unable to fetch or create an instance for %s',
+                    __METHOD__,
+                    $name
+                ),
+                null,
+                ($selfException === null) ? null : $selfException->getPrevious()
+            );
         }
 
         if (isset($this->shared[$cName]) && $this->shared[$cName] === true) {

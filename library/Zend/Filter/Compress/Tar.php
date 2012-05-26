@@ -210,7 +210,7 @@ class Tar extends AbstractCompressionAlgorithm
      * Decompresses the given content
      *
      * @param  string $content
-     * @return boolean
+     * @return string
      * @throws Exception\RuntimeException if unable to find archive
      * @throws Exception\RuntimeException if error occurs decompressing archive
      */

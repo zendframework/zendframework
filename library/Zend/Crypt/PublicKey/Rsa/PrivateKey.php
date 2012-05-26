@@ -20,7 +20,7 @@ class PrivateKey extends AbstractKey
     /**
      * Public key
      *
-     * @var string
+     * @var PublicKey
      */
     protected $publicKey = null;
 
@@ -34,7 +34,7 @@ class PrivateKey extends AbstractKey
     public function __construct($pemString, $passPhrase = null)
     {
         $result = openssl_pkey_get_private($pemString, $passPhrase);
-        if (!$result) {
+        if (false === $result) {
             throw new Exception\RuntimeException(
                 'Unable to load private key; openssl ' . openssl_error_string()
             );
@@ -48,13 +48,63 @@ class PrivateKey extends AbstractKey
     /**
      * Get the public key
      *
-     * @return string
+     * @return PublicKey
      */
     public function getPublicKey()
     {
         if ($this->publicKey === null) {
             $this->publicKey = new PublicKey($this->details['key']);
         }
+
         return $this->publicKey;
+    }
+
+    /**
+     * Encrypt using this key
+     *
+     * @param string $data
+     * @return string
+     * @throws Exception\RuntimeException
+     */
+    public function encrypt($data)
+    {
+        $encrypted = '';
+        $result = openssl_private_encrypt($data, $encrypted, $this->getOpensslKeyResource());
+        if (false === $result) {
+            throw new Exception\RuntimeException(
+                'Can not encrypt; openssl ' . openssl_error_string()
+            );
+        }
+
+        return $encrypted;
+    }
+
+
+    /**
+     * Decrypt using this key
+     *
+     * @param string $data
+     * @return string
+     * @throws Exception\RuntimeException
+     */
+    public function decrypt($data)
+    {
+        $decrypted = '';
+        $result = openssl_private_decrypt($data, $decrypted, $this->getOpensslKeyResource());
+        if (false === $result) {
+            throw new Exception\RuntimeException(
+                'Can not decrypt; openssl ' . openssl_error_string()
+            );
+        }
+
+        return $decrypted;
+    }
+
+    /**
+     * @return string
+     */
+    public function toString()
+    {
+        return $this->pemString;
     }
 }

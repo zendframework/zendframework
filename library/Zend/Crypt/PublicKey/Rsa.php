@@ -10,7 +10,7 @@
 namespace Zend\Crypt\PublicKey;
 
 use Zend\Crypt\PublicKey\RsaOptions;
-use Zend\Crypt\Exception;
+use Zend\Crypt\PublicKey\Rsa\Exception;
 use Traversable;
 use ArrayObject;
 use Zend\Stdlib\ArrayUtils;
@@ -25,6 +25,8 @@ use Zend\Stdlib\ArrayUtils;
  */
 class Rsa
 {
+    const DEFAULT_KEY_SIZE = 2048;
+
     const FORMAT_BINARY = 'binary';
     const FORMAT_BASE64 = 'base64';
 
@@ -42,7 +44,7 @@ class Rsa
     public function __construct(RsaOptions $options = null)
     {
         if (!extension_loaded('openssl')) {
-            throw new Rsa\Exception\RuntimeException(
+            throw new Exception\RuntimeException(
                 'Zend\Crypt\PublicKey\Rsa requires openssl extension to be loaded.'
             );
         }
@@ -75,32 +77,13 @@ class Rsa
     }
 
     /**
-     * Get the private key
-     *
-     * @return Rsa\PrivateKey
-     */
-    public function getPrivateKey()
-    {
-        return $this->options->getPrivateKey();
-    }
-
-    /**
-     * Get the public key
-     *
-     * @return Rsa\PublicKey
-     */
-    public function getPublicKey()
-    {
-        return $this->options->getPublicKey();
-    }
-
-    /**
      * Sign
      *
      * @param  string         $data
      * @param  Rsa\PrivateKey $privateKey
      * @param  string         $format
      * @return string
+     * @throws Rsa\Exception\RuntimeException
      */
     public function sign($data, Rsa\PrivateKey $privateKey = null, $format = null)
     {
@@ -115,6 +98,11 @@ class Rsa
             $privateKey->getOpensslKeyResource(),
             $this->options->getHashAlgorithm()
         );
+        if (false === $result) {
+            throw new Exception\RuntimeException(
+                'Can not generate signature; openssl ' . openssl_error_string()
+            );
+        }
 
         if ($format == self::FORMAT_BASE64) {
             return base64_encode($signature);
@@ -126,22 +114,33 @@ class Rsa
     /**
      * Verify signature
      *
-     * @param  string $data
-     * @param  string $signature
-     * @param  string $format
-     * @return boolean
+     * @param string $data
+     * @param string $signature
+     * @param null|Rsa\PublicKey $publicKey
+     * @param null|string $format
+     * @return bool
+     * @throws Rsa\Exception\RuntimeException
      */
-    public function verifySignature($data, $signature, $format = null)
+    public function verify($data, $signature, Rsa\PublicKey $publicKey = null,  $format = null)
     {
         if ($format == self::FORMAT_BASE64) {
             $signature = base64_decode($signature);
         }
+        if (null === $publicKey) {
+            $publicKey = $this->options->getPublicKey();
+        }
+
         $result = openssl_verify(
             $data,
             $signature,
-            $this->options->getPublicKey()->getOpensslKeyResource(),
+            $publicKey->getOpensslKeyResource(),
             $this->options->getHashAlgorithm()
         );
+        if (-1 === $result) {
+            throw new Exception\RuntimeException(
+                'Can not verify signature; openssl ' . openssl_error_string()
+            );
+        }
 
         return ($result === 1);
     }
@@ -149,62 +148,62 @@ class Rsa
     /**
      * Encrypt
      *
-     * @param string  $data
+     * @param string          $data
      * @param Rsa\AbstractKey $key
-     * @param string  $format
+     * @param string          $format
      * @return string
+     * @throws Rsa\Exception\RuntimeException
      */
-    public function encrypt($data, Rsa\AbstractKey $key, $format = null)
+    public function encrypt($data, Rsa\AbstractKey $key = null, $format = null)
     {
-        $encrypted = '';
-        if ($key instanceof Rsa\PrivateKey) {
-            openssl_private_encrypt($data, $encrypted, $key->getOpensslKeyResource());
-        } else {
-            openssl_public_encrypt($data, $encrypted, $key->getOpensslKeyResource());
+        if (null === $key) {
+            $key = $this->options->getPublicKey();
         }
+
+        $encrypted = $key->encrypt($data);
 
         if ($format == self::FORMAT_BASE64) {
             return base64_encode($encrypted);
+        } else {
+            return $encrypted;
         }
-
-        return $encrypted;
     }
 
     /**
      * Decrypt
      *
-     * @param string  $data
+     * @param string          $data
      * @param Rsa\AbstractKey $key
-     * @param string  $format
+     * @param string          $format
      * @return string
+     * @throws Rsa\Exception\RuntimeException
      */
-    public function decrypt($data, Rsa\AbstractKey $key, $format = null)
+    public function decrypt($data, Rsa\AbstractKey $key = null, $format = null)
     {
-        $decrypted = '';
         if ($format == self::FORMAT_BASE64) {
             $data = base64_decode($data);
         }
 
-        if ($key instanceof Rsa\PublicKey) {
-            openssl_public_decrypt($data, $decrypted, $key->getOpensslKeyResource());
-        } else {
-            openssl_private_decrypt($data, $decrypted, $key->getOpensslKeyResource());
+        if (null === $key) {
+            $key = $this->options->getPrivateKey();
         }
 
-        return $decrypted;
+        return $key->decrypt($data);
     }
 
     /**
      * Generate keys
      *
      * @param  array $options
-     * @return \ArrayObject
+     * @return ArrayObject
+     * @throws Rsa\Exception\RuntimeException
      */
     public function generateKeys(array $options = null)
     {
-        if (null === $options) {
-            $options = array();
-        }
+        $config = array(
+            'private_key_bits' => self::DEFAULT_KEY_SIZE,
+            'private_key_type' => OPENSSL_KEYTYPE_RSA
+        );
 
         if (isset($options['pass_phrase'])) {
             $passPhrase = $options['pass_phrase'];
@@ -212,22 +211,28 @@ class Rsa
             $passPhrase = $this->options->getPassPhrase();
         }
 
-        $options['private_key_type'] = OPENSSL_KEYTYPE_RSA;
+        if (isset($options['private_key_bits'])) {
+            $config['private_key_bits'] = $options['private_key_bits'];
+        }
 
+        // generate
         $privateKey = null;
         $publicKey  = null;
-        $resource   = openssl_pkey_new($options);
-
-        openssl_pkey_export($resource, $private, $passPhrase);
+        $resource   = openssl_pkey_new($config);
+        $result     = openssl_pkey_export($resource, $private, $passPhrase);
+        if (false === $result) {
+            throw new Exception\RuntimeException(
+                'Can not export key; openssl ' . openssl_error_string()
+            );
+        }
 
         $privateKey = new Rsa\PrivateKey($private, $passPhrase);
         $details    = openssl_pkey_get_details($resource);
         $publicKey  = new Rsa\PublicKey($details['key']);
-        $return     = new ArrayObject(array(
-            'privateKey' => $privateKey,
-            'publicKey'  => $publicKey
-        ), ArrayObject::ARRAY_AS_PROPS);
 
-        return $return;
+        return new ArrayObject(array(
+            'privateKey' => $privateKey,
+            'publicKey' => $publicKey
+        ), ArrayObject::ARRAY_AS_PROPS);
     }
 }

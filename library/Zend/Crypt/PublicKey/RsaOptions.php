@@ -11,6 +11,8 @@
 namespace Zend\Crypt\PublicKey;
 
 use Zend\Stdlib\Options;
+use Zend\Crypt\PublicKey\Rsa\PrivateKey;
+use Zend\Crypt\PublicKey\Rsa\PublicKey;
 use Zend\Crypt\PublicKey\Rsa\Exception;
 
 /**
@@ -22,12 +24,12 @@ use Zend\Crypt\PublicKey\Rsa\Exception;
 class RsaOptions extends Options
 {
     /**
-     * @var string|Rsa\PrivateKey
+     * @var PrivateKey
      */
     protected $privateKey = null;
 
     /**
-     * @var Rsa\PublicKey
+     * @var PublicKey
      */
     protected $publicKey = null;
 
@@ -61,10 +63,20 @@ class RsaOptions extends Options
      */
     protected $passPhrase;
 
+
     /**
-     * Get the private key
-     *
-     * @return Rsa\PrivateKey
+     * @param Rsa\PrivateKey $key
+     * @return RsaOptions
+     */
+    public function setPrivateKey(PrivateKey $key)
+    {
+        $this->privateKey = $key;
+        $this->publicKey  = $this->privateKey->getPublicKey();
+        return $this;
+    }
+
+    /**
+     * @return null|Rsa\PrivateKey
      */
     public function getPrivateKey()
     {
@@ -72,21 +84,40 @@ class RsaOptions extends Options
     }
 
     /**
-     * Get the public key
-     *
-     * @return Rsa\PublicKey
+     * @param Rsa\PublicKey $key
+     * @return RsaOptions
+     */
+    public function setPublicKey(PublicKey $key)
+    {
+        $this->publicKey = $key;
+        return $this;
+    }
+
+    /**
+     * @return null|Rsa\PublicKey
      */
     public function getPublicKey()
     {
         return $this->publicKey;
     }
 
+    /**
+     * Set pass phrase
+     *
+     * @param string $phrase
+     * @return RsaOptions
+     */
     public function setPassPhrase($phrase)
     {
         $this->passPhrase = (string) $phrase;
         return $this;
     }
 
+    /**
+     * Get pass phrase
+     *
+     * @return string
+     */
     public function getPassPhrase()
     {
         return $this->passPhrase;
@@ -96,18 +127,21 @@ class RsaOptions extends Options
      * Set PEM string
      *
      * @param string $value
+     * @return RsaOptions
      */
     public function setPemString($value)
     {
         $this->pemString = $value;
-        //try {
+
+        try {
             $this->privateKey = new Rsa\PrivateKey($this->pemString, $this->passPhrase);
             $this->publicKey  = $this->privateKey->getPublicKey();
-        //} catch (Rsa\Exception\RuntimeException $e) {
-        //    echo "\t", $e->getMessage(), "\n";
-        //    $this->privateKey = null;
-        //    $this->publicKey  = new Rsa\PublicKey($this->pemString);
-        //}
+        } catch (Rsa\Exception\RuntimeException $e) {
+            $this->privateKey = null;
+            $this->publicKey  = new Rsa\PublicKey($this->pemString);
+        }
+
+        return $this;
     }
 
     /**
@@ -123,12 +157,22 @@ class RsaOptions extends Options
     /**
      * Set PEM path
      *
-     * @param string $value
+     * @param string $path
+     * @return RsaOptions
+     * @throws Rsa\Exception\InvalidArgumentException
      */
-    public function setPemPath($value)
+    public function setPemPath($path)
     {
-        $this->pemPath = $value;
-        $this->setPemString(file_get_contents($this->pemPath));
+        if (!is_readable($path)) {
+            throw new Exception\InvalidArgumentException(
+                "PEM file '{$path}' is not readable"
+            );
+        }
+
+        $this->pemPath = $path;
+        $this->setPemString(file_get_contents($path));
+
+        return $this;
     }
 
     /**
@@ -144,7 +188,8 @@ class RsaOptions extends Options
     /**
      * Set hash algorithm
      *
-     * @param $name
+     * @param  $name
+     * @return RsaOptions
      * @throws Rsa\Exception\RuntimeException
      * @throws Rsa\Exception\InvalidArgumentException
      */
@@ -179,6 +224,8 @@ class RsaOptions extends Options
                 );
                 break;
         }
+
+        return $this;
     }
 
     /**
@@ -199,11 +246,14 @@ class RsaOptions extends Options
      * Set certificate string
      *
      * @param string $value
+     * @return RsaOptions
      */
     public function setCertificateString($value)
     {
         $this->certificateString = $value;
-        $this->publicKey         = new Rsa\PublicKey($this->certificateString, $this->passPhrase);
+        $this->publicKey         = new Rsa\PublicKey($this->certificateString);
+
+        return $this;
     }
 
     /**
@@ -219,14 +269,23 @@ class RsaOptions extends Options
     /**
      * Set certificate path
      *
-     * @param string $value
+     * @param string $path
+     * @return RsaOptions
+     * @throws Rsa\Exception\InvalidArgumentException
      */
-    public function setCertificatePath($value)
+    public function setCertificatePath($path)
     {
-        $this->certificatePath = $value;
-        $this->setCertificateString(file_get_contents($this->certificatePath));
-    }
+        if (!is_readable($path)) {
+            throw new Exception\InvalidArgumentException(
+                "Certificate file '{$path}' is not readable"
+            );
+        }
 
+        $this->certificatePath = $path;
+        $this->setCertificateString(file_get_contents($path));
+
+        return $this;
+    }
 
     /**
      * Get certificate path

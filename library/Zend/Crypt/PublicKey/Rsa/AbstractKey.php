@@ -19,15 +19,12 @@ use Countable;
  */
 abstract class AbstractKey implements Countable
 {
-    /**
-     * @var string
-     */
-    protected $pemString = null;
+    const DEFAULT_KEY_SIZE = 2048;
 
     /**
      * @var string
      */
-    protected $certificateString = null;
+    protected $pemString = null;
 
     /**
      * Bits, key string and type of key
@@ -44,7 +41,7 @@ abstract class AbstractKey implements Countable
     protected $opensslKeyResource = null;
 
     /**
-     * Retrieves key resource
+     * Retrieve openssl key resource
      *
      * @return resource
      */
@@ -54,20 +51,30 @@ abstract class AbstractKey implements Countable
     }
 
     /**
-     * To string
+     * Encrypt using this key
      *
+     * @abstract
+     * @param string $data
      * @return string
-     * @throws Exception\RuntimeException
      */
-    public function toString()
-    {
-        if (!empty($this->pemString)) {
-            return $this->pemString;
-        } elseif (!empty($this->certificateString)) {
-            return $this->certificateString;
-        }
-        throw new Exception\RuntimeException('No public key string representation is available');
-    }
+    abstract public function encrypt($data);
+
+    /**
+     * Decrypt using this key
+     *
+     * @abstract
+     * @param string $data
+     * @return string
+     */
+    abstract public function decrypt($data);
+
+    /**
+     * Get string representation of this key
+     *
+     * @abstract
+     * @return string
+     */
+    abstract public function toString();
 
     /**
      * @return string

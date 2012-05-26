@@ -24,6 +24,8 @@ use Zend\Math\Math;
  */
 class DiffieHellman
 {
+    const DEFAULT_KEY_SIZE = 2048;
+
     /**
      * Key formats
      */
@@ -138,11 +140,11 @@ class DiffieHellman
                 $details['priv_key'] = $this->convert(
                     $this->privateKey, self::FORMAT_NUMBER, self::FORMAT_BINARY
                 );
-                $opensslKeyResource  = openssl_pkey_new(array('dh' => $details));
+                $opensslKeyResource = openssl_pkey_new(array('dh' => $details));
             } else {
                 $opensslKeyResource = openssl_pkey_new(array(
                     'dh'               => $details,
-                    'private_key_bits' => 384,
+                    'private_key_bits' => self::DEFAULT_KEY_SIZE,
                     'private_key_type' => OPENSSL_KEYTYPE_DH
                 ));
             }
@@ -164,6 +166,7 @@ class DiffieHellman
             $publicKey = $this->math->powmod($this->getGenerator(), $this->getPrivateKey(), $this->getPrime());
             $this->setPublicKey($publicKey);
         }
+
         return $this;
     }
 
@@ -217,10 +220,10 @@ class DiffieHellman
      *
      * @param string $publicKey
      * @param string $publicKeyFormat
-     * @param string $outputFormat
-     * @return mixed
-     * @throws \Zend\Crypt\Exception\RuntimeException
+     * @param string $secretKeyFormat
+     * @return string
      * @throws \Zend\Crypt\Exception\InvalidArgumentException
+     * @throws \Zend\Crypt\Exception\RuntimeException
      */
     public function computeSecretKey($publicKey, $publicKeyFormat = self::FORMAT_NUMBER,
                                                  $secretKeyFormat = self::FORMAT_NUMBER)
@@ -416,8 +419,8 @@ class DiffieHellman
             case self::FORMAT_BTWOC:
                 $number = $this->math->fromBinary($number);
                 break;
-            default:
             case self::FORMAT_NUMBER:
+            default:
                 // do nothing
                 break;
         }
@@ -430,8 +433,8 @@ class DiffieHellman
             case self::FORMAT_BTWOC:
                 return $this->math->btwoc($this->math->toBinary($number));
                 break;
-            default:
             case self::FORMAT_NUMBER:
+            default:
                 return $number;
                 break;
         }

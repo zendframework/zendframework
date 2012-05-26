@@ -76,11 +76,6 @@ class Queue implements Countable
     protected $_messageSetClass = '\Zend\Queue\Message\MessageIterator';
 
     /**
-     * @var \Zend\Log\Logger
-     */
-    protected $_logger = null;
-
-    /**
      * Constructor
      *
      * Can be called as

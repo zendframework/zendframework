@@ -35,9 +35,10 @@ use Zend\Crypt\PublicKey\Rsa\Exception;
  */
 class RsaTest extends \PHPUnit_Framework_TestCase
 {
-
+    /** @var string */
     protected $_testPemString = null;
 
+    /** @var string */
     protected $_testPemPath = null;
 
     /** @var string */
@@ -65,7 +66,7 @@ class RsaTest extends \PHPUnit_Framework_TestCase
         $this->openSslConf = $openSslConf;
 
         try {
-            $math = new Rsa();
+            $rsa = new Rsa();
         } catch (Exception\RuntimeException $e) {
             if (strpos($e->getMessage(), 'requires openssl extention') !== false) {
                 $this->markTestSkipped($e->getMessage());
@@ -121,6 +122,7 @@ CERT;
         $this->_testCertificatePath = realpath(__DIR__ . '/../_files/test.cert');
     }
 
+
     public function testConstructorSetsPemString()
     {
         $rsa = new Rsa(new RsaOptions(array('pem_string' => $this->_testPemString)));
@@ -137,84 +139,57 @@ CERT;
     {
         $rsa = new Rsa(new RsaOptions(array('pem_path' => $this->_testPemPath)));
         $this->assertEquals($this->_testPemString, $rsa->getOptions()->getPemString());
-
-        //$rsa = new RSA(array('pemPath'=> $this->_testPemPath));
-        //$this->assertEquals($this->_testPemString, $rsa->getPemString());
     }
 
     public function testConstructorSetsCertificateString()
     {
         $rsa = new Rsa(new RsaOptions(array('certificate_string' => $this->_testCertificateString)));
         $this->assertEquals($this->_testCertificateString, $rsa->getOptions()->getCertificateString());
-
-        //$rsa = new RSA(array('certificateString'=> $this->_testCertificateString));
-        //$this->assertEquals($this->_testCertificateString, $rsa->getCertificateString());
     }
 
     public function testConstructorSetsCertificatePath()
     {
         $rsa = new Rsa(new RsaOptions(array('certificate_path' => $this->_testCertificatePath)));
         $this->assertEquals($this->_testCertificatePath, $rsa->getOptions()->getCertificatePath());
-
-        //$rsa = new RSA(array('certificatePath'=> $this->_testCertificatePath));
-        //$this->assertEquals($this->_testCertificatePath, $rsa->getCertificatePath());
     }
 
     public function testSetCertificatePathLoadsCertificateString()
     {
         $rsa = new Rsa(new RsaOptions(array('certificate_path' => $this->_testCertificatePath)));
         $this->assertEquals($this->_testCertificateString, $rsa->getOptions()->getCertificateString());
-
-        //$rsa = new RSA(array('certificate_path'=> $this->_testCertificatePath));
-        //$this->assertEquals($this->_testCertificateString, $rsa->getCertificateString());
     }
 
     public function testConstructorSetsHashOption()
     {
         $rsa = new Rsa(new RsaOptions(array('hash_algorithm' => 'md5')));
         $this->assertEquals(OPENSSL_ALGO_MD5, $rsa->getOptions()->getHashAlgorithm());
-
-        //$rsa = new RSA(array('hashAlgorithm'=> 'md5'));
-        //$this->assertEquals(OPENSSL_ALGO_MD5, $rsa->getHashAlgorithm());
     }
 
     public function testSetPemStringParsesPemForPrivateKey()
     {
         $rsa = new Rsa(new RsaOptions(array('pem_string' => $this->_testPemString)));
-        $this->assertInstanceOf('Zend\\Crypt\\PublicKey\\RSA\\PrivateKey', $rsa->getPrivateKey());
-
-        //$rsa = new RSA(array('pemString'=> $this->_testPemString));
-        //$this->assertInstanceOf('Zend\\Crypt\\PublicKey\\RSA\\PrivateKey', $rsa->getPrivateKey());
+        $this->assertInstanceOf('Zend\\Crypt\\PublicKey\\RSA\\PrivateKey', $rsa->getOptions()->getPrivateKey());
     }
 
 
     public function testSetPemStringParsesPemForPublicKey()
     {
         $rsa = new Rsa(new RsaOptions(array('pem_string' => $this->_testPemString)));
-        $this->assertInstanceOf('Zend\\Crypt\\PublicKey\\RSA\\PublicKey', $rsa->getPublicKey());
+        $this->assertInstanceOf('Zend\\Crypt\\PublicKey\\RSA\\PublicKey', $rsa->getOptions()->getPublicKey());
 
-        //$rsa = new RSA(array('pemString'=> $this->_testPemString));
-        //$this->assertInstanceOf('Zend\\Crypt\\PublicKey\\RSA\\PublicKey', $rsa->getPublicKey());
     }
 
     public function testSetCertificateStringParsesCertificateForNullPrivateKey()
     {
         $rsa = new Rsa(new RsaOptions(array('certificate_string' => $this->_testCertificateString)));
-        $this->assertSame(null, $rsa->getPrivateKey());
-
-        //$rsa = new RSA(array('certificateString'=> $this->_testCertificateString));
-        //$this->assertEquals(null, $rsa->getPrivateKey());
+        $this->assertSame(null, $rsa->getOptions()->getPrivateKey());
     }
 
     public function testSetCertificateStringParsesCertificateForPublicKey()
     {
         $rsa = new Rsa(new RsaOptions(array('certificate_string' => $this->_testCertificateString)));
-        $this->assertInstanceOf('Zend\\Crypt\\PublicKey\\RSA\\PublicKey', $rsa->getPublicKey());
-
-        //$rsa = new RSA(array('certificateString'=> $this->_testCertificateString));
-        //$this->assertInstanceOf('Zend\\Crypt\\PublicKey\\RSA\\PublicKey', $rsa->getPublicKey());
+        $this->assertInstanceOf('Zend\\Crypt\\PublicKey\\RSA\\PublicKey', $rsa->getOptions()->getPublicKey());
     }
-
 
     public function testSignGeneratesExpectedBinarySignature()
     {
@@ -249,7 +224,8 @@ CERT;
     {
         $rsa       = new Rsa(new RsaOptions(array('pem_string' => $this->_testPemString)));
         $signature = $rsa->sign('1234567890');
-        $result    = $rsa->verifySignature('1234567890', $signature);
+        $result    = $rsa->verify('1234567890', $signature);
+
         $this->assertSame(true, $result);
     }
 
@@ -258,7 +234,8 @@ CERT;
         $rsa        = new Rsa(new RsaOptions(array('certificate_string' => $this->_testCertificateString)));
         $privateKey = new Rsa\PrivateKey($this->_testPemString);
         $signature  = $rsa->sign('1234567890', $privateKey);
-        $result     = $rsa->verifySignature('1234567890', $signature);
+        $result     = $rsa->verify('1234567890', $signature);
+
         $this->assertSame(true, $result);
     }
 
@@ -266,27 +243,58 @@ CERT;
     {
         $rsa       = new Rsa(new RsaOptions(array('pem_string' => $this->_testPemString)));
         $signature = $rsa->sign('1234567890', null, Rsa::FORMAT_BASE64);
-        $result    = $rsa->verifySignature('1234567890', $signature, Rsa::FORMAT_BASE64);
+        $result    = $rsa->verify('1234567890', $signature, null, Rsa::FORMAT_BASE64);
+
         $this->assertSame(true, $result);
+    }
+
+    public function testEncryptionWithPublicKey()
+    {
+        $publicKey  = new Rsa\PublicKey($this->_testCertificateString);
+        $privateKey = new Rsa\PrivateKey($this->_testPemString);
+
+        $encrypted = $publicKey->encrypt('1234567890');
+
+        $this->assertEquals('1234567890', $privateKey->decrypt($encrypted));
+    }
+
+    public function testEncryptionWithPrivateKey()
+    {
+        $publicKey  = new Rsa\PublicKey($this->_testCertificateString);
+        $privateKey = new Rsa\PrivateKey($this->_testPemString);
+
+        $encrypted = $privateKey->encrypt('1234567890');
+
+        $this->assertEquals('1234567890', $publicKey->decrypt($encrypted));
+    }
+
+    public function testEncryptionWithOwnKeys()
+    {
+        $rsa       = new Rsa(new RsaOptions(array('pem_string' => $this->_testPemString)));
+        $encrypted = $rsa->encrypt('1234567890');
+
+        $this->assertEquals('1234567890', $rsa->decrypt($encrypted));
     }
 
     public function testEncryptionUsingPublicKeyEncryption()
     {
         $rsa       = new Rsa(new RsaOptions(array('pem_string' => $this->_testPemString)));
-        $encrypted = $rsa->encrypt('1234567890', $rsa->getPublicKey());
+        $encrypted = $rsa->encrypt('1234567890', $rsa->getOptions()->getPublicKey());
+
         $this->assertEquals(
             '1234567890',
-            $rsa->decrypt($encrypted, $rsa->getPrivateKey())
+            $rsa->decrypt($encrypted, $rsa->getOptions()->getPrivateKey())
         );
     }
 
     public function testEncryptionUsingPublicKeyBase64Encryption()
     {
         $rsa       = new Rsa(new RsaOptions(array('pem_string' => $this->_testPemString)));
-        $encrypted = $rsa->encrypt('1234567890', $rsa->getPublicKey(), Rsa::FORMAT_BASE64);
+        $encrypted = $rsa->encrypt('1234567890', $rsa->getOptions()->getPublicKey(), Rsa::FORMAT_BASE64);
+
         $this->assertEquals(
             '1234567890',
-            $rsa->decrypt($encrypted, $rsa->getPrivateKey(), Rsa::FORMAT_BASE64)
+            $rsa->decrypt($encrypted, $rsa->getOptions()->getPrivateKey(), Rsa::FORMAT_BASE64)
         );
     }
 
@@ -294,50 +302,36 @@ CERT;
     {
         $rsa       = new Rsa(new RsaOptions(array('certificate_string' => $this->_testCertificateString)));
         $rsa2      = new Rsa(new RsaOptions(array('pem_string' => $this->_testPemString)));
-        $encrypted = $rsa->encrypt('1234567890', $rsa->getPublicKey(), Rsa::FORMAT_BASE64);
+        $encrypted = $rsa->encrypt('1234567890', $rsa->getOptions()->getPublicKey(), Rsa::FORMAT_BASE64);
+
         $this->assertEquals(
             '1234567890',
-            $rsa->decrypt($encrypted, $rsa2->getPrivateKey(), Rsa::FORMAT_BASE64)
+            $rsa->decrypt($encrypted, $rsa2->getOptions()->getPrivateKey(), Rsa::FORMAT_BASE64)
         );
     }
-
 
     public function testEncryptionUsingPrivateKeyEncryption()
     {
         $rsa       = new Rsa(new RsaOptions(array('pem_string' => $this->_testPemString)));
-        $encrypted = $rsa->encrypt('1234567890', $rsa->getPrivateKey());
+        $encrypted = $rsa->encrypt('1234567890', $rsa->getOptions()->getPrivateKey());
+
         $this->assertEquals(
             '1234567890',
-            $rsa->decrypt($encrypted, $rsa->getPublicKey())
+            $rsa->decrypt($encrypted, $rsa->getOptions()->getPublicKey())
         );
     }
 
     public function testEncryptionUsingPrivateKeyBase64Encryption()
     {
         $rsa       = new Rsa(new RsaOptions(array('pem_string' => $this->_testPemString)));
-        $encrypted = $rsa->encrypt('1234567890', $rsa->getPrivateKey(), Rsa::FORMAT_BASE64);
+        $encrypted = $rsa->encrypt('1234567890', $rsa->getOptions()->getPrivateKey(), Rsa::FORMAT_BASE64);
         $this->assertEquals(
             '1234567890',
-            $rsa->decrypt($encrypted, $rsa->getPublicKey(), Rsa::FORMAT_BASE64)
+            $rsa->decrypt($encrypted, $rsa->getOptions()->getPublicKey(), Rsa::FORMAT_BASE64)
         );
     }
 
-
-    public function testKeyGenerationCreatesArrayObjectResult()
-    {
-        if (!$this->openSslConf) {
-            $this->markTestSkipped('No openssl.cnf found or defined; cannot generate keys');
-        }
-        $rsa  = new Rsa();
-        $keys = $rsa->generateKeys(array(
-            'config'           => $this->openSslConf,
-            'private_key_bits' => 512,
-        ));
-        $this->assertInstanceOf('ArrayObject', $keys);
-    }
-
-
-    public function testKeyGenerationCreatesKeysInArrayObject()
+    public function testKeyGeneration()
     {
         if (!$this->openSslConf) {
             $this->markTestSkipped('No openssl.cnf found or defined; cannot generate keys');
@@ -348,6 +342,7 @@ CERT;
             'config'           => $this->openSslConf,
             'private_key_bits' => 512,
         ));
+
         $this->assertInstanceOf('Zend\\Crypt\\PublicKey\\Rsa\\PrivateKey', $keys->privateKey);
         $this->assertInstanceOf('Zend\\Crypt\\PublicKey\\Rsa\\PublicKey', $keys->publicKey);
     }
@@ -364,7 +359,6 @@ CERT;
             'private_key_bits' => 512,
             'pass_phrase'     => '0987654321'
         ));
-
 
         try {
             $rsa = new Rsa(new RsaOptions(array(

@@ -21,10 +21,10 @@
 
 namespace Zend\Authentication\Adapter;
 
-use Zend\Authentication,
-    Zend\Http\Request as HTTPRequest,
-    Zend\Http\Response as HTTPResponse,
-    Zend\Uri\UriFactory;
+use Zend\Authentication;
+use Zend\Http\Request as HTTPRequest;
+use Zend\Http\Response as HTTPResponse;
+use Zend\Uri\UriFactory;
 
 /**
  * HTTP Authentication Adapter
@@ -59,14 +59,14 @@ class Http implements AdapterInterface
     /**
      * Object that looks up user credentials for the Basic scheme
      *
-     * @var Zend\Authentication\Adapter\Http\Resolver
+     * @var Http\ResolverInterface
      */
     protected $_basicResolver;
 
     /**
      * Object that looks up user credentials for the Digest scheme
      *
-     * @var Zend\Authentication\Adapter\Http\Resolver
+     * @var Http\ResolverInterface
      */
     protected $_digestResolver;
 
@@ -161,8 +161,7 @@ class Http implements AdapterInterface
      *    'use_opaque' => <bool> Whether to send the opaque value in the header
      *    'alogrithm' => <string> See $_supportedAlgos. Default: MD5
      *    'proxy_auth' => <bool> Whether to do authentication as a Proxy
-     * @throws Zend\Authentication\Adapter\InvalidArgumentException
-     * @return void
+     * @throws Exception\InvalidArgumentException
      */
     public function __construct(array $config)
     {
@@ -241,8 +240,8 @@ class Http implements AdapterInterface
     /**
      * Setter for the _basicResolver property
      *
-     * @param  Zend\Authentication\Adapter\Http\ResolverInterface $resolver
-     * @return Zend\Authentication\Adapter\Http Provides a fluent interface
+     * @param  Http\ResolverInterface $resolver
+     * @return Http Provides a fluent interface
      */
     public function setBasicResolver(Http\ResolverInterface $resolver)
     {
@@ -254,7 +253,7 @@ class Http implements AdapterInterface
     /**
      * Getter for the _basicResolver property
      *
-     * @return Zend\Authentication\Adapter\Http\ResolverInterface
+     * @return Http\ResolverInterface
      */
     public function getBasicResolver()
     {
@@ -264,8 +263,8 @@ class Http implements AdapterInterface
     /**
      * Setter for the _digestResolver property
      *
-     * @param  Zend\Authentication\Adapter\Http\ResolverInterface $resolver
-     * @return Zend\Authentication\Adapter\Http Provides a fluent interface
+     * @param  Http\ResolverInterface $resolver
+     * @return Http Provides a fluent interface
      */
     public function setDigestResolver(Http\ResolverInterface $resolver)
     {
@@ -277,7 +276,7 @@ class Http implements AdapterInterface
     /**
      * Getter for the _digestResolver property
      *
-     * @return Zend\Authentication\Adapter\Http\ResolverInterface
+     * @return Http\ResolverInterface
      */
     public function getDigestResolver()
     {
@@ -333,8 +332,8 @@ class Http implements AdapterInterface
     /**
      * Authenticate
      *
-     * @throws Zend\Authentication\Adapter\Exception\RuntimeException
-     * @return Zend\Authentication\Result
+     * @throws Exception\RuntimeException
+     * @return Authentication\Result
      */
     public function authenticate()
     {
@@ -398,7 +397,7 @@ class Http implements AdapterInterface
      * Sets a 401 or 407 Unauthorized response code, and creates the
      * appropriate Authenticate header(s) to prompt for credentials.
      *
-     * @return Zend\Authentication\Result Always returns a non-identity Auth result
+     * @return Authentication\Result Always returns a non-identity Auth result
      */
     protected function _challengeClient()
     {
@@ -464,8 +463,8 @@ class Http implements AdapterInterface
      * Basic Authentication
      *
      * @param  string $header Client's Authorization header
-     * @throws Zend\Authentication\Exception\ExceptionInterface
-     * @return Zend\Authentication\Result
+     * @throws Exception\ExceptionInterface
+     * @return Authentication\Result
      */
     protected function _basicAuth($header)
     {
@@ -511,8 +510,8 @@ class Http implements AdapterInterface
      * Digest Authentication
      *
      * @param  string $header Client's Authorization header
-     * @throws Zend\Authentication\Adapter\Exception\ExceptionInterface
-     * @return Zend\Authentication\Result Valid auth result only on successful auth
+     * @throws Exception\ExceptionInterface
+     * @return Authentication\Result Valid auth result only on successful auth
      */
     protected function _digestAuth($header)
     {

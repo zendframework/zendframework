@@ -77,7 +77,7 @@ abstract class RestfulController implements
     protected $event;
 
     /**
-     * @var EventCollection
+     * @var EventManagerInterface
      */
     protected $events;
 

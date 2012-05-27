@@ -263,7 +263,7 @@ class PythonPickle extends AbstractAdapter
             $this->_writeObject($value);
         } else {
             throw new RuntimeException(
-                'PHP-Type "'.gettype($value).'" isn\'t serializable with '.get_class($this)
+                'PHP-Type "'.gettype($value).'" isn\'t serializable with '.get_called_class()
             );
         }
     }

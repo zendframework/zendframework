@@ -31,6 +31,11 @@ class ListenerOptions extends Options
      * @var array
      */
     protected $configGlobPaths = array();
+    
+    /**
+     * @var array
+     */
+    protected $configStaticPaths = array();
 
     /**
      * @var bool
@@ -86,6 +91,16 @@ class ListenerOptions extends Options
     {
         return $this->configGlobPaths;
     }
+    
+    /**
+     * Get the static paths to load additional config files 
+     * 
+     * @return array
+     */
+    public function getConfigStaticPaths()
+    {
+        return $this->configStaticPaths;
+    }
 
     /**
      * Set the glob patterns to use for loading additional config files
@@ -104,6 +119,25 @@ class ListenerOptions extends Options
             );
         }
         $this->configGlobPaths = $configGlobPaths;
+    }
+    
+    /**
+     * Set the static paths to use for loading additional config files
+     * 
+     * @param array $configStaticPaths
+     * @return ListenerOptions
+     */
+    public function setConfigStaticPaths($configStaticPaths)
+    {
+        if (!is_array($configStaticPaths) && !$configStaticPaths instanceof Traversable) {
+            throw new Exception\InvalidArgumentException(
+                sprintf('Argument passed to %::%s() must be an array, '
+                . 'implement the \Traversable interface, or be an '
+                . 'instance of Zend\Config\Config. %s given.',
+                __CLASS__, __METHOD__, gettype($configStaticPaths))
+            );
+        }
+        $this->configStaticPaths = $configStaticPaths;
     }
 
     /**

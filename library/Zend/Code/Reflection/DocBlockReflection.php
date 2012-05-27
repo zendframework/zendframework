@@ -121,7 +121,7 @@ class DocBlockReflection implements ReflectionInterface
             $this->docComment = $commentOrReflector;
         } else {
             throw new Exception\InvalidArgumentException(
-                get_class($this) . ' must have a (string) DocComment or a Reflector in the constructor'
+                get_called_class() . ' must have a (string) DocComment or a Reflector in the constructor'
             );
         }
 

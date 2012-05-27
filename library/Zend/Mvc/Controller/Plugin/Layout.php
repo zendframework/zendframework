@@ -60,7 +60,7 @@ class Layout extends AbstractPlugin
      * Otherwise, attempts to set the template for that view model.
      * 
      * @param  null|string $template 
-     * @return void
+     * @return Model|Layout
      */
     public function __invoke($template = null)
     {

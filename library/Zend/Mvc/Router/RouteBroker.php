@@ -142,6 +142,7 @@ class RouteBroker implements Broker
      * @param  string $route
      * @param  array  $options
      * @return RouteInterface
+     * @throws Exception\RuntimeException
      */
     public function load($route, array $options = array())
     {
@@ -220,6 +221,7 @@ class RouteBroker implements Broker
      * @see    Broker::setClassLoader()
      * @param  ShortNameLocator $loader
      * @return RouteBroker
+     * @throws Exception\InvalidArgumentException
      */
     public function setClassLoader(ShortNameLocator $loader)
     {

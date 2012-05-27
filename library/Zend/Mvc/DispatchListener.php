@@ -97,7 +97,6 @@ class DispatchListener implements ListenerAggregateInterface
         $events           = $application->events();
         $controllerLoader = $application->getServiceManager()->get('ControllerLoader');
 
-        $wasLoaded = false;
         $exception = false;
         try {
             $controller = $controllerLoader->get($controllerName);

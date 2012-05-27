@@ -21,8 +21,9 @@
 namespace ZendTest\Feed\PubSubHubbub\Model;
 
 use Zend\Feed\PubSubHubbub\Model\Subscription;
-use \Zend\Db\Adapter\Adapter as DbAdapter;
-use \Zend\Db\TableGateway\TableGateway;
+use Zend\Db\Adapter\Adapter as DbAdapter;
+use Zend\Db\TableGateway\TableGateway;
+use Zend\Date;
 
 /**
  * @category   Zend
@@ -71,6 +72,14 @@ class SubscriptionTest extends \PHPUnit_Framework_TestCase
         $reflection = new \ReflectionClass('Zend\Feed\PubSubHubbub\Model\Subscription');
         $this->assertTrue($reflection->implementsInterface('Zend\Feed\PubSubHubbub\Model\SubscriptionPersistenceInterface'));
         unset($reflection);
+    }
+
+    public function testCurrentTimeSetterAndGetter()
+    {
+        $now = new Date\Date;
+        $subscription = new Subscription(new TableGateway('subscription', $this->initDb()));
+        $subscription->setNow($now);
+        $this->assertSame($subscription->getNow(), $now);
     }
 
     protected function initDb()

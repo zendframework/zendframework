@@ -54,6 +54,10 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
         $this->_tableGateway->expects($this->any())->method('getAdapter')
             ->will($this->returnValue($this->_adapter));
         $storage = new Model\Subscription($this->_tableGateway);
+
+        $this->now = new Date\Date;
+        $storage->setNow(clone $this->now);
+
         $this->_callback->setStorage($storage);
 
         $this->_get = array(
@@ -268,7 +272,7 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
             ->with($this->equalTo(array('id' => 'verifytokenkey')))
             ->will($this->returnValue($this->_rowset));
 
-        $t = new Date\Date;
+        $t = clone $this->now;
         $rowdata = array(
             'id' => 'verifytokenkey',
             'verify_token' => hash('sha256', 'cba'),
@@ -305,7 +309,7 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
             ->with($this->equalTo(array('id' => 'verifytokenkey')))
             ->will($this->returnValue($this->_rowset));
 
-        $t = new Date\Date;
+        $t = clone $this->now;
         $rowdata = array(
             'id' => 'verifytokenkey',
             'verify_token' => hash('sha256', 'cba'),
@@ -348,7 +352,6 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
             ->with($this->equalTo(array('id' => 'verifytokenkey')))
             ->will($this->returnValue($this->_rowset));
 
-        $t = new Date\Date;
         $rowdata = array(
             'id' => 'verifytokenkey',
             'verify_token' => hash('sha256', 'cba'),

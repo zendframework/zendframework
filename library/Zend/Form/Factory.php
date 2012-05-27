@@ -21,6 +21,7 @@
 namespace Zend\Form;
 
 use ArrayAccess;
+use ReflectionClass;
 use Traversable;
 use Zend\InputFilter\Factory as InputFilterFactory;
 use Zend\InputFilter\InputFilterInterface;
@@ -51,7 +52,7 @@ class Factory
         $this->inputFilterFactory = $inputFilterFactory;
         return $this;
     }
-    
+
     /**
      * Get current input filter factory
      *
@@ -70,11 +71,11 @@ class Factory
     /**
      * Create an element, fieldset, or form
      *
-     * Introspects the 'type' key of the provided $spec, and determines what 
-     * type is being requested; if none is provided, assumes the spec 
+     * Introspects the 'type' key of the provided $spec, and determines what
+     * type is being requested; if none is provided, assumes the spec
      * represents simply an element.
-     * 
-     * @param  array|Traversable $spec 
+     *
+     * @param  array|Traversable $spec
      * @return ElementInterface
      */
     public function create($spec)
@@ -82,26 +83,39 @@ class Factory
         $spec = $this->validateSpecification($spec, __METHOD__);
         $type = isset($spec['type']) ? $spec['type'] : 'Zend\Form\Element';
 
-        if (is_subclass_of($type, 'Zend\Form\FormInterface')) {
+        if ($type instanceof FormInterface) {
             return $this->createForm($spec);
         }
-        
-        if (is_subclass_of($type, 'Zend\Form\FieldsetInterface')) {
+
+        if ($type instanceof FieldsetInterface) {
             return $this->createFieldset($spec);
         }
 
-        if (!is_subclass_of($type, 'Zend\Form\ElementInterface')) {
-            throw new Exception\DomainException(sprintf(
-                '%s expects the $spec["type"] to implement one of %s, %s, or %s; received %s',
-                __METHOD__,
-                'Zend\Form\ElementInterface',
-                'Zend\Form\FieldsetInterface',
-                'Zend\Form\FormInterface',
-                $type
-            ));
+        if ($type instanceof ElementInterface) {
+            return $this->createElement($spec);
         }
 
-        return $this->createElement($spec);
+        if (is_string($type) && class_exists($type)) {
+            $reflection = new ReflectionClass($type);
+            if ($reflection->implementsInterface('Zend\Form\FormInterface')) {
+                return $this->createForm($spec);
+            }
+            if ($reflection->implementsInterface('Zend\Form\FieldsetInterface')) {
+                return $this->createFieldset($spec);
+            }
+            if ($reflection->implementsInterface('Zend\Form\ElementInterface')) {
+                return $this->createElement($spec);
+            }
+        }
+
+        throw new Exception\DomainException(sprintf(
+            '%s expects the $spec["type"] to implement one of %s, %s, %s, or a valid full qualified class name; received %s',
+            __METHOD__,
+            'Zend\Form\ElementInterface',
+            'Zend\Form\FieldsetInterface',
+            'Zend\Form\FormInterface',
+            $type
+        ));
     }
 
     /**
@@ -110,10 +124,10 @@ class Factory
      * Specification can contain any of the following:
      * - type: the Element class to use; defaults to \Zend\Form\Element
      * - name: what name to provide the element, if any
-     * - attributes: an array, Traversable, or ArrayAccess object of element 
+     * - attributes: an array, Traversable, or ArrayAccess object of element
      *   attributes to assign
-     * 
-     * @param  array|Traversable|ArrayAccess $spec 
+     *
+     * @param  array|Traversable|ArrayAccess $spec
      * @return ElementInterface
      * @throws Exception\InvalidArgumentException for an invalid $spec
      * @throws Exception\DomainException for an invalid element type
@@ -152,14 +166,14 @@ class Factory
      * Specification can contain any of the following:
      * - type: the Fieldset class to use; defaults to \Zend\Form\Fieldset
      * - name: what name to provide the fieldset, if any
-     * - attributes: an array, Traversable, or ArrayAccess object of element 
+     * - attributes: an array, Traversable, or ArrayAccess object of element
      *   attributes to assign
-     * - elements: an array or Traversable object where each entry is an array 
+     * - elements: an array or Traversable object where each entry is an array
      *   or ArrayAccess object containing the keys:
      *   - flags: (optional) array of flags to pass to FieldsetInterface::add()
      *   - spec: the actual element specification, per {@link createElement()}
-     * 
-     * @param  array|Traversable|ArrayAccess $spec 
+     *
+     * @param  array|Traversable|ArrayAccess $spec
      * @return FieldsetInterface
      * @throws Exception\InvalidArgumentException for an invalid $spec
      * @throws Exception\DomainException for an invalid fieldset type
@@ -170,7 +184,7 @@ class Factory
 
         $type = isset($spec['type']) ? $spec['type'] : 'Zend\Form\Fieldset';
         $spec['type'] = $type;
-        
+
         $fieldset = $this->createElement($spec);
         if (!$fieldset instanceof FieldsetInterface) {
             throw new Exception\DomainException(sprintf(
@@ -194,10 +208,10 @@ class Factory
     /**
      * Create a form based on the provided specification
      *
-     * Specification follows that of {@link createFieldset()}, and adds the 
+     * Specification follows that of {@link createFieldset()}, and adds the
      * following keys:
-     * 
-     * @param  array|Traversable|ArrayAccess $spec 
+     *
+     * @param  array|Traversable|ArrayAccess $spec
      * @return FormInterface
      * @throws Exception\InvalidArgumentException for an invalid $spec
      * @throws Exception\DomainException for an invalid form type
@@ -208,7 +222,7 @@ class Factory
 
         $type = isset($spec['type']) ? $spec['type'] : 'Zend\Form\Form';
         $spec['type'] = $type;
-        
+
         $form = $this->createFieldset($spec);
         if (!$form instanceof FormInterface) {
             throw new Exception\DomainException(sprintf(
@@ -233,8 +247,8 @@ class Factory
      * Validate a provided specification
      *
      * Ensures we have an array, Traversable, or ArrayAccess object, and returns it.
-     * 
-     * @param  array|Traversable|ArrayAccess $spec 
+     *
+     * @param  array|Traversable|ArrayAccess $spec
      * @param  string $method Method invoking the validator
      * @return array|ArrayAccess
      * @throws Exception\InvalidArgumentException for invalid $spec
@@ -263,9 +277,9 @@ class Factory
 
     /**
      * Takes a list of element specifications, creates the elements, and injects them into the provided fieldset
-     * 
-     * @param  array|Traversable|ArrayAccess $elements 
-     * @param  FieldsetInterface $fieldset 
+     *
+     * @param  array|Traversable|ArrayAccess $elements
+     * @param  FieldsetInterface $fieldset
      * @param  string $method Method invoking this one (for exception messages)
      * @return void
      */
@@ -284,9 +298,9 @@ class Factory
 
     /**
      * Takes a list of fieldset specifications, creates the fieldsets, and injects them into the master fieldset
-     * 
-     * @param  array|Traversable|ArrayAccess $fieldsets 
-     * @param  FieldsetInterface $masterFieldset 
+     *
+     * @param  array|Traversable|ArrayAccess $fieldsets
+     * @param  FieldsetInterface $masterFieldset
      * @param  string $method Method invoking this one (for exception messages)
      * @return void
      */
@@ -306,16 +320,16 @@ class Factory
     /**
      * Prepare an input filter instance and inject in the provided form
      *
-     * If the input filter specified is a string, assumes it is a class name, 
+     * If the input filter specified is a string, assumes it is a class name,
      * and attempts to instantiate it. If the class does not exist, or does
      * not extend InputFilterInterface, an exception is raised.
      *
-     * Otherwise, $spec is passed on to the attached InputFilter Factory 
+     * Otherwise, $spec is passed on to the attached InputFilter Factory
      * instance in order to create the input filter.
-     * 
-     * @param  string|array|Traversable $spec 
-     * @param  FormInterface $form 
-     * @param  string $method 
+     *
+     * @param  string|array|Traversable $spec
+     * @param  FormInterface $form
+     * @param  string $method
      * @return void
      * @throws Exception\DomainException for unknown InputFilter class or invalid InputFilter instance
      */
@@ -349,12 +363,12 @@ class Factory
     /**
      * Prepare and inject a named hydrator
      *
-     * Takes a string indicating a hydrator class name, instantiates the class 
+     * Takes a string indicating a hydrator class name, instantiates the class
      * by that name, and injects the hydrator instance into the form.
-     * 
-     * @param  string $hydratorName 
-     * @param  FormInterface $form 
-     * @param  string $method 
+     *
+     * @param  string $hydratorName
+     * @param  FormInterface $form
+     * @param  string $method
      * @return void
      * @throws Exception\DomainException if $hydratorName is not a string, does not resolve to a known class, or the class does not implement Hydrator\HydratorInterface
      */

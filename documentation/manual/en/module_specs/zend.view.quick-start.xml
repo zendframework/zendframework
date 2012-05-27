@@ -761,7 +761,7 @@ class Module
 
         // Set the layout template
         $viewModel = $e->getViewModel();
-        $viewModel->setLayout('content/layout');
+        $viewModel->setTemplate('content/layout');
     }
 }
 ]]></programlisting>

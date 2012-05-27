@@ -333,7 +333,7 @@ class Memcacheq extends AbstractAdapter
      */
     public function deleteMessage(Message $message)
     {
-        throw new Exception\UnsupportedMethodCallException('deleteMessage() is not supported in  ' . get_class($this));
+        throw new Exception\UnsupportedMethodCallException('deleteMessage() is not supported in  ' . get_called_class());
     }
 
     /********************************************************************

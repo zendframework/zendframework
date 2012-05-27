@@ -46,7 +46,7 @@ abstract class AbstractAdapter implements AdapterInterface, EventsCapableInterfa
     /**
      * The used EventManager if any
      *
-     * @var null|EventCollection
+     * @var null|EventManagerInterface
      */
     protected $events = null;
 
@@ -223,7 +223,7 @@ abstract class AbstractAdapter implements AdapterInterface, EventsCapableInterfa
     /**
      * Get the event manager
      *
-     * @return EventCollection
+     * @return EventManagerInterface
      */
     public function events()
     {

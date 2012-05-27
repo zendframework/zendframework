@@ -163,7 +163,7 @@ class PregReplace extends AbstractFilter
     public function filter($value)
     {
         if ($this->_matchPattern == null) {
-            throw new Exception\RuntimeException(get_class($this) . ' does not have a valid MatchPattern set.');
+            throw new Exception\RuntimeException(get_called_class() . ' does not have a valid MatchPattern set.');
         }
 
         return preg_replace($this->_matchPattern, $this->_replacement, $value);

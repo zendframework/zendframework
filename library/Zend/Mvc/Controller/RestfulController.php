@@ -280,7 +280,7 @@ abstract class RestfulController implements
         $events->setIdentifiers(array(
             'Zend\Stdlib\DispatchableInterface',
             __CLASS__,
-            get_class($this)
+            get_called_class()
         ));
         $this->events = $events;
         $this->attachDefaultListeners();

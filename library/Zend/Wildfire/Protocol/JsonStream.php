@@ -153,7 +153,7 @@ class JsonStream
     public function getPayload(Wildfire\Channel $channel)
     {
         if (!$channel instanceof Wildfire\Channel\HttpHeaders) {
-            throw new Exception\InvalidArgumentException('The '.get_class($channel).' channel is not supported by the '.get_class($this).' protocol.');
+            throw new Exception\InvalidArgumentException('The '.get_class($channel).' channel is not supported by the '.get_called_class().' protocol.');
         }
 
         if ($this->_plugins) {

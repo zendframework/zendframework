@@ -79,7 +79,6 @@ class DateTest extends \PHPUnit_Framework_TestCase
     public function tearDown()
     {
         Date::setOptions($this->_orig);
-        $this->_cache->clear(CacheAdapter::MATCH_ALL);
         date_default_timezone_set($this->_originaltimezone);
     }
 
@@ -5234,7 +5233,7 @@ class DateTest extends \PHPUnit_Framework_TestCase
         }
 
         $cache = CacheFactory::adapterFactory('memory', array('memory_limit' => 0));
-        Date\Date::setOptions(array('cache' => $cache));
+        Date::setOptions(array('cache' => $cache));
     }
 
     public function testIsDate()

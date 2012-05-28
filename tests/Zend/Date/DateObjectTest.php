@@ -56,7 +56,6 @@ class DateObjectTest extends \PHPUnit_Framework_TestCase
     public function tearDown()
     {
         date_default_timezone_set($this->_originaltimezone);
-        $this->_cache->clear(CacheAdapter::MATCH_ALL);
     }
 
     /**

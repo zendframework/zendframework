@@ -20,7 +20,7 @@
 
 namespace Zend\Date;
 
-use Zend\Cache\Storage\Adapter\AdapterInterface as CacheAdapter,
+use Zend\Cache\Storage\StorageInterface as CacheStorage,
     Zend\Locale\Data\Cldr,
     Zend\Locale\Format,
     Zend\Locale\Locale,
@@ -265,8 +265,8 @@ class Date extends DateObject
                         if ($value === null) {
                             parent::$_cache = null;
                         } else {
-                            if (!$value instanceof CacheAdapter) {
-                                throw new Exception\InvalidArgumentException("Instance of Zend\Cache\Storage\Adapter\AdapterInterface expected");
+                            if (!$value instanceof CacheStorage) {
+                                throw new Exception\InvalidArgumentException("Instance of Zend\Cache\Storage\StorageInterface expected");
                             }
 
                             parent::$_cache     = $value;
@@ -4637,20 +4637,20 @@ class Date extends DateObject
      */
     public static function isDate($date, $format = null, $locale = null)
     {
-        if (!is_string($date) 
-            && !is_numeric($date) 
-            && !($date instanceof Date) 
+        if (!is_string($date)
+            && !is_numeric($date)
+            && !($date instanceof Date)
             && !is_array($date)
         ) {
             return false;
         }
 
-        if (($format !== null) 
-            && ($format != 'ee') 
-            && ($format != 'ss') 
-            && ($format != 'GG') 
-            && ($format != 'MM') 
-            && ($format != 'EE') 
+        if (($format !== null)
+            && ($format != 'ee')
+            && ($format != 'ss')
+            && ($format != 'GG')
+            && ($format != 'MM')
+            && ($format != 'EE')
             && ($format != 'TT')
             && Locale::isLocale($format)
         ) {
@@ -4685,7 +4685,7 @@ class Date extends DateObject
             $parsed = $date;
         }
 
-        if (((strpos($format, 'Y') !== false) || (strpos($format, 'y') !== false)) 
+        if (((strpos($format, 'Y') !== false) || (strpos($format, 'y') !== false))
             && !isset($parsed['year'])
         ) {
             // Year expected but not found
@@ -4702,7 +4702,7 @@ class Date extends DateObject
             return false;
         }
 
-        if (((strpos($format, 'H') !== false) || (strpos($format, 'h') !== false)) 
+        if (((strpos($format, 'H') !== false) || (strpos($format, 'h') !== false))
             && !isset($parsed['hour'])
         ) {
             // Hour expected but not found

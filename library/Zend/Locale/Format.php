@@ -21,7 +21,7 @@
 
 namespace Zend\Locale;
 
-use Zend\Cache\Storage\Adapter\AdapterInterface as CacheAdapter,
+use Zend\Cache\Storage\StorageInterface as CacheStorage,
     Zend\Locale\Data\Cldr;
 
 /**
@@ -145,7 +145,7 @@ class Format
                     break;
 
                 case 'cache' :
-                    if ($value instanceof CacheAdapter) {
+                    if ($value instanceof CacheStorage) {
                         Cldr::setCache($value);
                     }
                     break;

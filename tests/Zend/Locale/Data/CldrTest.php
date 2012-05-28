@@ -38,21 +38,6 @@ use Zend\Locale\Data\Cldr,
 class CldrTest extends \PHPUnit_Framework_TestCase
 {
 
-    private $_cache = null;
-
-    public function setUp()
-    {
-        $this->_cache = CacheFactory::adapterFactory('memory', array('memory_limit' => 0));
-        Cldr::setCache($this->_cache);
-    }
-
-
-    public function tearDown()
-    {
-        $this->_cache->clear(CacheAdapter::MATCH_ALL);
-    }
-    
-    
     /**
      * test for reading with standard locale
      * expected array
@@ -71,8 +56,7 @@ class CldrTest extends \PHPUnit_Framework_TestCase
         $locale = new Locale('de');
         $this->assertTrue(is_array(Cldr::getDisplayLanguage($locale)));
     }
-    
-    
+
     /**
      * test for reading without type
      * expected empty array
@@ -108,7 +92,7 @@ class CldrTest extends \PHPUnit_Framework_TestCase
         $value = Cldr::getDisplayLanguage('de', false, 'de');
         $this->assertEquals('Deutsch', $value);
     }
-    
+
     /**
      * test for reading the territorylist in different
      * languages

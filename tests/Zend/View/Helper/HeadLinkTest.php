@@ -417,5 +417,14 @@ class HeadLinkTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals($expected, $test);
     }
+
+    /**
+     * @issue ZF-10345
+     */
+    public function testIdAttributeIsSupported()
+    {
+        $this->helper->appendStylesheet(array('href' => '/bar/baz', 'id' => 'foo'));
+        $this->assertContains('id="foo"', $this->helper->toString());
+    }
 }
 

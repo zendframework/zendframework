@@ -64,7 +64,6 @@ class HeadTitle extends Placeholder\Container\Standalone
      *
      * @param  string $title
      * @param  string $setType
-     * @param  string $separator
      * @return \Zend\View\Helper\HeadTitle
      */
     public function __invoke($title = null, $setType = null)

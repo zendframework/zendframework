@@ -60,7 +60,7 @@ class HydratorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($datas['fooBar'], '1');
         $this->assertTrue(isset($datas['fooBarBaz']));
         $this->assertFalse(isset($datas['foo_bar']));
-        $hydrator->hydrate(array('fooBar' => 'foo', 'fooBarBaz' => 'bar'), $this->classMethodsCamelCase);
+        $this->classMethodsCamelCase = $hydrator->hydrate(array('fooBar' => 'foo', 'fooBarBaz' => 'bar'), $this->classMethodsCamelCase);
         $this->assertEquals($this->classMethodsCamelCase->getFooBar(), 'foo');
         $this->assertEquals($this->classMethodsCamelCase->getFooBarBaz(), 'bar');
     }
@@ -73,7 +73,7 @@ class HydratorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($datas['fooBar'], '1');
         $this->assertFalse(isset($datas['fooBarBaz']));
         $this->assertFalse(isset($datas['foo_bar']));
-        $hydrator->hydrate(array('fooBar' => 'foo'), $this->classMethodsCamelCaseMissing);
+        $this->classMethodsCamelCaseMissing = $hydrator->hydrate(array('fooBar' => 'foo'), $this->classMethodsCamelCaseMissing);
         $this->assertEquals($this->classMethodsCamelCaseMissing->getFooBar(), 'foo');
         $this->assertEquals($this->classMethodsCamelCaseMissing->getFooBarBaz(), '2');
     }
@@ -86,7 +86,7 @@ class HydratorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($datas['foo_bar'], '1');
         $this->assertTrue(isset($datas['foo_bar_baz']));
         $this->assertFalse(isset($datas['fooBar']));
-        $hydrator->hydrate(array('foo_bar' => 'foo', 'foo_bar_baz' => 'bar'), $this->classMethodsUnderscore);
+        $this->classMethodsUnderscore = $hydrator->hydrate(array('foo_bar' => 'foo', 'foo_bar_baz' => 'bar'), $this->classMethodsUnderscore);
         $this->assertEquals($this->classMethodsUnderscore->getFooBar(), 'foo');
         $this->assertEquals($this->classMethodsUnderscore->getFooBarBaz(), 'bar');
     }

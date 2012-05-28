@@ -25,7 +25,13 @@ use ArrayObject,
     stdClass,
     Zend\Cache\Exception,
     Zend\Cache\Storage\Capabilities,
-    Zend\Cache\Storage\Adapter\MemoryOptions,
+    Zend\Cache\Storage\ClearExpiredInterface,
+    Zend\Cache\Storage\ClearByPrefixInterface,
+    Zend\Cache\Storage\FlushableInterface,
+    Zend\Cache\Storage\IterableInterface,
+    Zend\Cache\Storage\TagableInterface,
+    Zend\Cache\Storage\AvailableSpaceCapableInterface,
+    Zend\Cache\Storage\TotalSpaceCapableInterface,
     Zend\Cache\Utils;
 
 /**
@@ -35,7 +41,10 @@ use ArrayObject,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Memory extends AbstractAdapter
+class Memory
+    extends AbstractAdapter
+    implements ClearExpiredInterface, ClearByPrefixInterface, FlushableInterface, TagableInterface,
+               IterableInterface, AvailableSpaceCapableInterface, TotalSpaceCapableInterface
 {
     /**
      * Data Array
@@ -46,7 +55,7 @@ class Memory extends AbstractAdapter
      *         <KEY> => array(
      *             0 => <VALUE>
      *             1 => <MICROTIME>
-     *             2 => <TAGS>
+     *             ['tags' => <TAGS>]
      *         )
      *     )
      * )
@@ -85,31 +94,220 @@ class Memory extends AbstractAdapter
         return $this->options;
     }
 
+    /* TotalSpaceCapableInterface */
+
+    /**
+     * Get total space in bytes
+     *
+     * @return int|float
+     */
+    public function getTotalSpace()
+    {
+        return $this->getOptions()->getMemoryLimit();
+    }
+
+    /* AvailableSpaceCapableInterface */
+
+    /**
+     * Get available space in bytes
+     *
+     * @return int|float
+     */
+    public function getAvailableSpace()
+    {
+        $total = $this->getOptions()->getMemoryLimit();
+        $avail = $total - (float) memory_get_usage(true);
+        return ($avail > 0) ? $avail : 0;
+    }
+
+    /* IterableInterface */
+
+    /**
+     * Get the storage iterator
+     *
+     * @return MemoryIterator
+     */
+    public function getIterator()
+    {
+        $ns   = $this->getOptions()->getNamespace();
+        $keys = array();
+
+        if (isset($this->data[$ns])) {
+            foreach ($this->data[$ns] as $key => & $tmp) {
+                if ($this->internalHasItem($key)) {
+                    $keys[] = $key;
+                }
+            }
+        }
+
+        return new KeyListIterator($this, $keys);
+    }
+
+    /* FlushableInterface */
+
+    /**
+     * Flush the whole storage
+     *
+     * @return boolean
+     */
+    public function flush()
+    {
+        $this->data = array();
+        return true;
+    }
+
+    /* ClearExpiredInterface */
+
+    /**
+     * Remove expired items
+     *
+     * @return boolean
+     */
+    public function clearExpired()
+    {
+        $ttl = $this->getOptions()->getTtl();
+        if ($ttl <= 0) {
+            return true;
+        }
+
+        $ns = $this->getOptions()->getNamespace();
+        if (!isset($this->data[$ns])) {
+            return true;
+        }
+
+        $data = & $this->data[$ns];
+        foreach ($data as $key => & $item) {
+            if (microtime(true) >= $data[$key][1] + $ttl) {
+                unset($data[$key]);
+            }
+        }
+
+        return true;
+    }
+
+    /* ClearByPrefixInterface */
+
+    /**
+     * Remove items matching given prefix
+     *
+     * @param string $prefix
+     * @return boolean
+     */
+    public function clearByPrefix($prefix)
+    {
+        $ns = $this->getOptions()->getNamespace();
+        if (!isset($this->data[$ns])) {
+            return true;
+        }
+
+        $prefixL = strlen($prefix);
+        $data    = & $this->data[$ns];
+        foreach ($data as $key => & $item) {
+            if (substr($key, 0, $prefixL) === $prefix) {
+                unset($data[$key]);
+            }
+        }
+
+        return true;
+    }
+
+    /* TagableInterface */
+
+    /**
+     * Set tags to an item by given key.
+     * An empty array will remove all tags.
+     *
+     * @param string   $key
+     * @param string[] $tags
+     * @return boolean
+     */
+    public function setTags($key, array $tags)
+    {
+        $ns = $this->getOptions()->getNamespace();
+        if (!$this->data[$ns]) {
+            return false;
+        }
+
+        $data = & $this->data[$ns];
+        if (isset($data[$key])) {
+            $data[$key]['tags'] = $tags;
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Get tags of an item by given key
+     *
+     * @param string $key
+     * @return string[]|FALSE
+    */
+    public function getTags($key)
+    {
+        $ns = $this->getOptions()->getNamespace();
+        if (!$this->data[$ns]) {
+            return false;
+        }
+
+        $data = & $this->data[$ns];
+        if (!isset($data[$key])) {
+            return false;
+        }
+
+        return isset($data[$key]['tags']) ? $data[$key]['tags'] : array();
+    }
+
+    /**
+     * Remove items matching given tags.
+     *
+     * If $disjunction only one of the given tags must match
+     * else all given tags must match.
+     *
+     * @param string[] $tags
+     * @param boolean  $disjunction
+     * @return boolean
+    */
+    public function clearByTags(array $tags, $disjunction = false)
+    {
+        $ns = $this->getOptions()->getNamespace();
+        if (!$this->data[$ns]) {
+            return true;
+        }
+
+        $tagCount = count($tags);
+        $data     = & $this->data[$ns];
+        foreach ($data as $key => & $item) {
+            if (isset($item['tags'])) {
+                $diff = array_diff($tags, $item['tags']);
+                if (($disjunction && count($diff) < $tagCount) || (!$disjunction && !$diff)) {
+                    unset($data[$key]);
+                }
+            }
+        }
+
+        return true;
+    }
+
     /* reading */
 
     /**
      * Internal method to get an item.
      *
-     * Options:
-     *  - ttl <int>
-     *    - The time-to-life
-     *  - namespace <string>
-     *    - The namespace to use
-     *
      * @param  string  $normalizedKey
-     * @param  array   $normalizedOptions
      * @param  boolean $success
      * @param  mixed   $casToken
      * @return mixed Data on success, null on failure
      * @throws Exception\ExceptionInterface
      */
-    protected function internalGetItem(& $normalizedKey, array & $normalizedOptions, & $success = null, & $casToken = null)
+    protected function internalGetItem(& $normalizedKey, & $success = null, & $casToken = null)
     {
-        $ns      = $normalizedOptions['namespace'];
+        $options = $this->getOptions();
+        $ns      = $options->getNamespace();
         $success = isset($this->data[$ns][$normalizedKey]);
         if ($success) {
             $data = & $this->data[$ns][$normalizedKey];
-            $ttl  = $normalizedOptions['ttl'];
+            $ttl  = $options->getTtl();
             if ($ttl && microtime(true) >= ($data[1] + $ttl) ) {
                 $success = false;
             }
@@ -126,31 +324,26 @@ class Memory extends AbstractAdapter
     /**
      * Internal method to get multiple items.
      *
-     * Options:
-     *  - ttl <int>
-     *    - The time-to-life
-     *  - namespace <string>
-     *    - The namespace to use
-     *
      * @param  array $normalizedKeys
-     * @param  array $normalizedOptions
      * @return array Associative array of keys and values
      * @throws Exception\ExceptionInterface
      */
-    protected function internalGetItems(array & $normalizedKeys, array & $normalizedOptions)
+    protected function internalGetItems(array & $normalizedKeys)
     {
-        $ns = $normalizedOptions['namespace'];
+        $options = $this->getOptions();
+        $ns      = $options->getNamespace();
         if (!isset($this->data[$ns])) {
             return array();
         }
 
         $data = & $this->data[$ns];
-        $ttl  = $normalizedOptions['ttl'];
+        $ttl  = $options->getTtl();
+        $now  = microtime(true);
 
         $result = array();
         foreach ($normalizedKeys as $normalizedKey) {
             if (isset($data[$normalizedKey])) {
-                if (!$ttl || microtime(true) < ($data[$normalizedKey][1] + $ttl) ) {
+                if (!$ttl || $now < ($data[$normalizedKey][1] + $ttl) ) {
                     $result[$normalizedKey] = $data[$normalizedKey][0];
                 }
             }
@@ -162,26 +355,21 @@ class Memory extends AbstractAdapter
     /**
      * Internal method to test if an item exists.
      *
-     * Options:
-     *  - ttl <int>
-     *    - The time-to-life
-     *  - namespace <string>
-     *    - The namespace to use
-     *
      * @param  string $normalizedKey
      * @param  array  $normalizedOptions
      * @return boolean
      * @throws Exception\ExceptionInterface
      */
-    protected function internalHasItem(& $normalizedKey, array & $normalizedOptions)
+    protected function internalHasItem(& $normalizedKey)
     {
-        $ns = $normalizedOptions['namespace'];
+        $options = $this->getOptions();
+        $ns      = $options->getNamespace();
         if (!isset($this->data[$ns][$normalizedKey])) {
             return false;
         }
 
         // check if expired
-        $ttl = $normalizedOptions['ttl'];
+        $ttl = $options->getTtl();
         if ($ttl && microtime(true) >= ($this->data[$ns][$normalizedKey][1] + $ttl) ) {
             return false;
         }
@@ -192,31 +380,26 @@ class Memory extends AbstractAdapter
     /**
      * Internal method to test multiple items.
      *
-     * Options:
-     *  - ttl <int>
-     *    - The time-to-life
-     *  - namespace <string>
-     *    - The namespace to use
-     *
      * @param  array $keys
-     * @param  array $options
      * @return array Array of found keys
      * @throws Exception\ExceptionInterface
      */
-    protected function internalHasItems(array & $normalizedKeys, array & $normalizedOptions)
+    protected function internalHasItems(array & $normalizedKeys)
     {
-        $ns = $normalizedOptions['namespace'];
+        $options = $this->getOptions();
+        $ns      = $options->getNamespace();
         if (!isset($this->data[$ns])) {
             return array();
         }
 
         $data = & $this->data[$ns];
-        $ttl  = $normalizedOptions['ttl'];
+        $ttl  = $options->getTtl();
+        $now  = microtime(true);
 
         $result = array();
         foreach ($normalizedKeys as $normalizedKey) {
             if (isset($data[$normalizedKey])) {
-                if (!$ttl || microtime(true) < ($data[$normalizedKey][1] + $ttl) ) {
+                if (!$ttl || $now < ($data[$normalizedKey][1] + $ttl) ) {
                     $result[] = $normalizedKey;
                 }
             }
@@ -228,14 +411,7 @@ class Memory extends AbstractAdapter
     /**
      * Get metadata of an item.
      *
-     * Options:
-     *  - ttl <float> optional
-     *    - The time-to-life (Default: ttl of object)
-     *  - namespace <string> optional
-     *    - The namespace to use (Default: namespace of object)
-     *
      * @param  string $normalizedKey
-     * @param  array  $normalizedOptions
      * @return array|boolean Metadata on success, false on failure
      * @throws Exception\ExceptionInterface
      *
@@ -243,16 +419,15 @@ class Memory extends AbstractAdapter
      * @triggers getMetadata.post(PostEvent)
      * @triggers getMetadata.exception(ExceptionEvent)
      */
-    protected function internalGetMetadata(& $normalizedKey, array & $normalizedOptions)
+    protected function internalGetMetadata(& $normalizedKey)
     {
-        if (!$this->internalHasItem($normalizedKey, $normalizedOptions)) {
+        if (!$this->internalHasItem($normalizedKey)) {
             return false;
         }
 
-        $ns = $normalizedOptions['namespace'];
+        $ns = $this->getOptions()->getNamespace();
         return array(
             'mtime' => $this->data[$ns][$normalizedKey][1],
-            'tags'  => $this->data[$ns][$normalizedKey][2],
         );
     }
 
@@ -261,29 +436,24 @@ class Memory extends AbstractAdapter
     /**
      * Internal method to store an item.
      *
-     * Options:
-     *  - namespace <string>
-     *    - The namespace to use
-     *  - tags <array>
-     *    - An array of tags
-     *
      * @param  string $normalizedKey
      * @param  mixed  $value
-     * @param  array  $normalizedOptions
      * @return boolean
      * @throws Exception\ExceptionInterface
      */
-    protected function internalSetItem(& $normalizedKey, & $value, array & $normalizedOptions)
+    protected function internalSetItem(& $normalizedKey, & $value)
     {
-        if (!$this->hasFreeCapacity()) {
-            $memoryLimit = $this->getOptions()->getMemoryLimit();
-            throw new Exception\OutOfCapacityException(
+        $options = $this->getOptions();
+
+        if (!$this->hasAvailableSpace()) {
+            $memoryLimit = $options->getMemoryLimit();
+            throw new Exception\OutOfSpaceException(
                 "Memory usage exceeds limit ({$memoryLimit})."
             );
         }
 
-        $ns = $normalizedOptions['namespace'];
-        $this->data[$ns][$normalizedKey] = array($value, microtime(true), $normalizedOptions['tags']);
+        $ns = $options->getNamespace();
+        $this->data[$ns][$normalizedKey] = array($value, microtime(true));
 
         return true;
     }
@@ -291,34 +461,30 @@ class Memory extends AbstractAdapter
     /**
      * Internal method to store multiple items.
      *
-     * Options:
-     *  - namespace <string>
-     *    - The namespace to use
-     *  - tags <array>
-     *    - An array of tags
-     *
      * @param  array $normalizedKeyValuePairs
-     * @param  array $normalizedOptions
      * @return array Array of not stored keys
      * @throws Exception\ExceptionInterface
      */
-    protected function internalSetItems(array & $normalizedKeyValuePairs, array & $normalizedOptions)
+    protected function internalSetItems(array & $normalizedKeyValuePairs)
     {
-        if (!$this->hasFreeCapacity()) {
-            $memoryLimit = $this->getOptions()->getMemoryLimit();
-            throw new Exception\OutOfCapacityException(
-                'Memory usage exceeds limit ({$memoryLimit}).'
+        $options = $this->getOptions();
+
+        if (!$this->hasAvailableSpace()) {
+            $memoryLimit = $options->getMemoryLimit();
+            throw new Exception\OutOfSpaceException(
+                "Memory usage exceeds limit ({$memoryLimit})."
             );
         }
 
-        $ns = $normalizedOptions['namespace'];
+        $ns = $options->getNamespace();
         if (!isset($this->data[$ns])) {
             $this->data[$ns] = array();
         }
 
         $data = & $this->data[$ns];
+        $now  = microtime(true);
         foreach ($normalizedKeyValuePairs as $normalizedKey => $value) {
-            $data[$normalizedKey] = array($value, microtime(true), $normalizedOptions['tags']);
+            $data[$normalizedKey] = array($value, $now);
         }
 
         return array();
@@ -327,60 +493,50 @@ class Memory extends AbstractAdapter
     /**
      * Add an item.
      *
-     * Options:
-     *  - namespace <string>
-     *    - The namespace to use
-     *  - tags <array>
-     *    - An array of tags
-     *
-     * @param  string $key
+     * @param  string $normalizedKey
      * @param  mixed  $value
-     * @param  array  $options
      * @return boolean
      * @throws Exception\ExceptionInterface
      */
-    protected function internalAddItem(& $normalizedKey, & $value, array & $normalizedOptions)
+    protected function internalAddItem(& $normalizedKey, & $value)
     {
-        if (!$this->hasFreeCapacity()) {
-            $memoryLimit = $this->getOptions()->getMemoryLimit();
-            throw new Exception\OutOfCapacityException(
+        $options = $this->getOptions();
+
+        if (!$this->hasAvailableSpace()) {
+            $memoryLimit = $options->getMemoryLimit();
+            throw new Exception\OutOfSpaceException(
                 "Memory usage exceeds limit ({$memoryLimit})."
             );
         }
 
-        $ns = $normalizedOptions['namespace'];
+        $ns = $options->getNamespace();
         if (isset($this->data[$ns][$normalizedKey])) {
             return false;
         }
 
-        $this->data[$ns][$normalizedKey] = array($value, microtime(true), $normalizedOptions['tags']);
+        $this->data[$ns][$normalizedKey] = array($value, microtime(true));
         return true;
     }
 
     /**
      * Internal method to add multiple items.
      *
-     * Options:
-     *  - namespace <string>
-     *    - The namespace to use
-     *  - tags <array>
-     *    - An array of tags
-     *
      * @param  array $normalizedKeyValuePairs
-     * @param  array $normalizedOptions
      * @return array Array of not stored keys
      * @throws Exception\ExceptionInterface
      */
-    protected function internalAddItems(array & $normalizedKeyValuePairs, array & $normalizedOptions)
+    protected function internalAddItems(array & $normalizedKeyValuePairs)
     {
-        if (!$this->hasFreeCapacity()) {
-            $memoryLimit = $this->getOptions()->getMemoryLimit();
-            throw new Exception\OutOfCapacityException(
-                'Memory usage exceeds limit ({$memoryLimit}).'
+        $options = $this->getOptions();
+
+        if (!$this->hasAvailableSpace()) {
+            $memoryLimit = $options->getMemoryLimit();
+            throw new Exception\OutOfSpaceException(
+                "Memory usage exceeds limit ({$memoryLimit})."
             );
         }
 
-        $ns = $normalizedOptions['namespace'];
+        $ns = $options->getNamespace();
         if (!isset($this->data[$ns])) {
             $this->data[$ns] = array();
         }
@@ -392,7 +548,7 @@ class Memory extends AbstractAdapter
             if (isset($data[$normalizedKey])) {
                 $result[] = $normalizedKey;
             } else {
-                $data[$normalizedKey] = array($value, $now, $normalizedOptions['tags']);
+                $data[$normalizedKey] = array($value, $now);
             }
         }
 
@@ -402,27 +558,18 @@ class Memory extends AbstractAdapter
     /**
      * Internal method to replace an existing item.
      *
-     * Options:
-     *  - ttl <float>
-     *    - The time-to-life
-     *  - namespace <string>
-     *    - The namespace to use
-     *  - tags <array>
-     *    - An array of tags
-     *
      * @param  string $normalizedKey
      * @param  mixed  $value
-     * @param  array  $normalizedOptions
      * @return boolean
      * @throws Exception\ExceptionInterface
      */
-    protected function internalReplaceItem(& $normalizedKey, & $value, array & $normalizedOptions)
+    protected function internalReplaceItem(& $normalizedKey, & $value)
     {
-        $ns = $normalizedOptions['namespace'];
+        $ns = $this->getOptions()->getNamespace();
         if (!isset($this->data[$ns][$normalizedKey])) {
             return false;
         }
-        $this->data[$ns][$normalizedKey] = array($value, microtime(true), $normalizedOptions['tags']);
+        $this->data[$ns][$normalizedKey] = array($value, microtime(true));
 
         return true;
     }
@@ -430,22 +577,13 @@ class Memory extends AbstractAdapter
     /**
      * Internal method to replace multiple existing items.
      *
-     * Options:
-     *  - ttl <float>
-     *    - The time-to-life
-     *  - namespace <string>
-     *    - The namespace to use
-     *  - tags <array>
-     *    - An array of tags
-     *
      * @param  array $normalizedKeyValuePairs
-     * @param  array $normalizedOptions
      * @return array Array of not stored keys
      * @throws Exception\ExceptionInterface
      */
-    protected function internalReplaceItems(array & $normalizedKeyValuePairs, array & $normalizedOptions)
+    protected function internalReplaceItems(array & $normalizedKeyValuePairs)
     {
-        $ns = $normalizedOptions['namespace'];
+        $ns = $this->getOptions()->getNamespace();
         if (!isset($this->data[$ns])) {
             return array_keys($normalizedKeyValuePairs);
         }
@@ -456,7 +594,7 @@ class Memory extends AbstractAdapter
             if (!isset($data[$normalizedKey])) {
                 $result[] = $normalizedKey;
             } else {
-                $data[$normalizedKey] = array($value, microtime(true), $normalizedOptions['tags']);
+                $data[$normalizedKey] = array($value, microtime(true));
             }
         }
 
@@ -466,18 +604,13 @@ class Memory extends AbstractAdapter
     /**
      * Internal method to reset lifetime of an item
      *
-     * Options:
-     *  - namespace <string>
-     *    - The namespace to use
-     *
      * @param  string $normalizedKey
-     * @param  array  $normalizedOptions
      * @return boolean
      * @throws Exception\ExceptionInterface
      */
-    protected function internalTouchItem(& $normalizedKey, array & $normalizedOptions)
+    protected function internalTouchItem(& $normalizedKey)
     {
-        $ns = $normalizedOptions['namespace'];
+        $ns = $this->getOptions()->getNamespace();
 
         if (!isset($this->data[$ns][$normalizedKey])) {
             return false;
@@ -490,18 +623,13 @@ class Memory extends AbstractAdapter
     /**
      * Internal method to remove an item.
      *
-     * Options:
-     *  - namespace <string>
-     *    - The namespace to use
-     *
      * @param  string $normalizedKey
-     * @param  array  $normalizedOptions
      * @return boolean
      * @throws Exception\ExceptionInterface
      */
-    protected function internalRemoveItem(& $normalizedKey, array & $normalizedOptions)
+    protected function internalRemoveItem(& $normalizedKey)
     {
-        $ns = $normalizedOptions['namespace'];
+        $ns = $this->getOptions()->getNamespace();
         if (!isset($this->data[$ns][$normalizedKey])) {
             return false;
         }
@@ -519,21 +647,14 @@ class Memory extends AbstractAdapter
     /**
      * Internal method to increment an item.
      *
-     * Options:
-     *  - ttl <float>
-     *    - The time-to-life
-     *  - namespace <string>
-     *    - The namespace to use
-     *
      * @param  string $normalizedKey
      * @param  int    $value
-     * @param  array  $normalizedOptions
      * @return int|boolean The new value on success, false on failure
      * @throws Exception\ExceptionInterface
      */
-    protected function internalIncrementItem(& $normalizedKey, & $value, array & $normalizedOptions)
+    protected function internalIncrementItem(& $normalizedKey, & $value)
     {
-        $ns   = $normalizedOptions['namespace'];
+        $ns   = $this->getOptions()->getNamespace();
         $data = & $this->data[$ns];
         if (isset($data[$normalizedKey])) {
             $data[$normalizedKey][0]+= $value;
@@ -542,7 +663,7 @@ class Memory extends AbstractAdapter
         } else {
             // initial value
             $newValue             = $value;
-            $data[$normalizedKey] = array($newValue, microtime(true), null);
+            $data[$normalizedKey] = array($newValue, microtime(true));
         }
 
         return $newValue;
@@ -551,21 +672,14 @@ class Memory extends AbstractAdapter
     /**
      * Internal method to decrement an item.
      *
-     * Options:
-     *  - ttl <float>
-     *    - The time-to-life
-     *  - namespace <string>
-     *    - The namespace to use
-     *
      * @param  string $normalizedKey
      * @param  int    $value
-     * @param  array  $normalizedOptions
      * @return int|boolean The new value on success, false on failure
      * @throws Exception\ExceptionInterface
      */
-    protected function internalDecrementItem(& $normalizedKey, & $value, array & $normalizedOptions)
+    protected function internalDecrementItem(& $normalizedKey, & $value)
     {
-        $ns   = $normalizedOptions['namespace'];
+        $ns   = $this->getOptions()->getNamespace();
         $data = & $this->data[$ns];
         if (isset($data[$normalizedKey])) {
             $data[$normalizedKey][0]-= $value;
@@ -574,201 +688,10 @@ class Memory extends AbstractAdapter
         } else {
             // initial value
             $newValue             = -$value;
-            $data[$normalizedKey] = array($newValue, microtime(true), null);
+            $data[$normalizedKey] = array($newValue, microtime(true));
         }
 
         return $newValue;
-    }
-
-    /* find */
-
-    /**
-     * internal method to find items.
-     *
-     * Options:
-     *  - ttl <float>
-     *    - The time-to-live
-     *  - namespace <string>
-     *    - The namespace to use
-     *  - tags <array>
-     *    - Tags to search for used with matching modes of
-     *      Adapter::MATCH_TAGS_*
-     *
-     * @param  int   $normalizedMode Matching mode (Value of Adapter::MATCH_*)
-     * @param  array $normalizedOptions
-     * @return boolean
-     * @throws Exception\ExceptionInterface
-     * @see    fetch()
-     * @see    fetchAll()
-     */
-    protected function internalFind(& $normalizedMode, array & $normalizedOptions)
-    {
-        if ($this->stmtActive) {
-            throw new Exception\RuntimeException('Statement already in use');
-        }
-
-        $tags      = & $normalizedOptions['tags'];
-        $emptyTags = $keys = array();
-        foreach ($this->data[ $normalizedOptions['namespace'] ] as $key => &$item) {
-
-            // compare expired / active
-            if (($normalizedMode & self::MATCH_ALL) != self::MATCH_ALL) {
-
-                // if MATCH_EXPIRED -> filter active items
-                if (($normalizedMode & self::MATCH_EXPIRED) == self::MATCH_EXPIRED) {
-                    if ($this->internalHasItem($key, $normalizedOptions)) {
-                        continue;
-                    }
-
-                // if MATCH_ACTIVE -> filter expired items
-                } else {
-                    if (!$this->internalHasItem($key, $normalizedOptions)) {
-                        continue;
-                    }
-                }
-            }
-
-            // compare tags
-            if ($tags !== null) {
-                $tagsStored = isset($item[2]) ? $item[2] : $emptyTags;
-
-                if ( ($normalizedMode & self::MATCH_TAGS_OR) == self::MATCH_TAGS_OR ) {
-                    $matched = (count(array_diff($tags, $tagsStored)) != count($tags));
-                } elseif ( ($normalizedMode & self::MATCH_TAGS_AND) == self::MATCH_TAGS_AND ) {
-                    $matched = (count(array_diff($tags, $tagsStored)) == 0);
-                }
-
-                // negate
-                if ( ($normalizedMode & self::MATCH_TAGS_NEGATE) == self::MATCH_TAGS_NEGATE ) {
-                    $matched = !$matched;
-                }
-
-                if (!$matched) {
-                    continue;
-                }
-            }
-
-            $keys[] = $key;
-        }
-
-        // don't check expiry on fetch
-        $normalizedOptions['ttl'] = 0;
-
-        $this->stmtKeys    = $keys;
-        $this->stmtOptions = $normalizedOptions;
-        $this->stmtActive  = true;
-
-        return true;
-    }
-
-    /**
-     * Internal method to fetch the next item from result set
-     *
-     * @return array|boolean The next item or false
-     * @throws Exception\ExceptionInterface
-     */
-    protected function internalFetch()
-    {
-        if (!$this->stmtActive) {
-            return false;
-        }
-
-        $options = & $this->stmtOptions;
-
-        // get the next valid item
-        do {
-            $key = array_shift($this->stmtKeys);
-            if ($key === null) {
-                break;
-            }
-
-            if (!$this->internalHasItem($key, $options)) {
-                continue;
-            }
-
-            break;
-        } while (true);
-
-        // free statement after last item
-        if (!$key) {
-            $this->stmtActive  = false;
-            $this->stmtKeys    = null;
-            $this->stmtOptions = null;
-
-            return false;
-        }
-
-        $ref    = & $this->data[ $options['namespace'] ][$key];
-        $result = array();
-        foreach ($options['select'] as $select) {
-            if ($select == 'key') {
-                $result['key'] = $key;
-            } elseif ($select == 'value') {
-                $result['value'] = $ref[0];
-            } elseif ($select == 'mtime') {
-                $result['mtime'] = $ref[1];
-            } elseif ($select == 'tags') {
-                $result['tags'] = $ref[2];
-            } else {
-                $result[$select] = null;
-            }
-        }
-
-        return $result;
-    }
-
-    /* cleaning */
-
-    /**
-     * Internal method to clear items off all namespaces.
-     *
-     * @param  int   $normalizedMode Matching mode (Value of Adapter::MATCH_*)
-     * @param  array $normalizedOptions
-     * @return boolean
-     * @throws Exception\ExceptionInterface
-     * @see    clearByNamespace()
-     */
-    protected function internalClear(& $normalizedMode, array & $normalizedOptions)
-    {
-        if (!$normalizedOptions['tags'] && ($normalizedMode & self::MATCH_ALL) == self::MATCH_ALL) {
-            $this->data = array();
-        } else {
-            foreach ($this->data as & $data) {
-                $this->clearNamespacedDataArray($data, $normalizedMode, $normalizedOptions);
-            }
-        }
-
-        return true;
-    }
-
-    /**
-     * Clear items by namespace.
-     *
-     * Options:
-     *  - ttl <float>
-     *    - The time-to-life
-     *  - namespace <string>
-     *    - The namespace to use
-     *  - tags <array>
-     *    - Tags to search for used with matching modes of Adapter::MATCH_TAGS_*
-     *
-     * @param  int   $normalizedMode Matching mode (Value of Adapter::MATCH_*)
-     * @param  array $normalizedOptions
-     * @return boolean
-     * @throws Exception\ExceptionInterface
-     * @see    clear()
-     */
-    protected function internalClearByNamespace(& $normalizedMode, array & $normalizedOptions)
-    {
-        if (isset($this->data[ $normalizedOptions['namespace'] ])) {
-            if (!$normalizedOptions['tags'] && ($normalizedMode & self::MATCH_ALL) == self::MATCH_ALL) {
-                unset($this->data[ $normalizedOptions['namespace'] ]);
-            } else {
-                $this->clearNamespacedDataArray($this->data[ $normalizedOptions['namespace'] ], $normalizedMode, $normalizedOptions);
-            }
-        }
-
-        return true;
     }
 
     /* status */
@@ -796,21 +719,14 @@ class Memory extends AbstractAdapter
                         'object'   => true,
                         'resource' => true,
                     ),
-                    'supportedMetadata' => array(
-                        'mtime',
-                        'tags',
-                    ),
+                    'supportedMetadata' => array('mtime'),
                     'maxTtl'             => PHP_INT_MAX,
                     'staticTtl'          => false,
-                    'tagging'            => true,
                     'ttlPrecision'       => 0.05,
                     'expiredRead'        => true,
                     'maxKeyLength'       => 0,
                     'namespaceIsPrefix'  => false,
                     'namespaceSeparator' => '',
-                    'iterable'           => true,
-                    'clearAllNamespaces' => true,
-                    'clearByNamespace'   => true,
                 )
             );
         }
@@ -818,35 +734,14 @@ class Memory extends AbstractAdapter
         return $this->capabilities;
     }
 
-    /**
-     * Internal method to get storage capacity.
-     *
-     * @param  array $normalizedOptions
-     * @return array|boolean Associative array of capacity, false on failure
-     * @throws Exception\ExceptionInterface
-     */
-    protected function internalGetCapacity(array & $normalizedOptions)
-    {
-        $total = $this->getOptions()->getMemoryLimit();
-        $free  = $total - (float) memory_get_usage(true);
-        return array(
-            'total' => $total,
-            'free'  => ($free >= 0) ? $free : 0,
-        );
-    }
-
     /* internal */
 
     /**
-     * Has the memory adapter storage free capacity
-     * to store items
-     *
-     * Similar logic as getCapacity() but without triggering
-     * events and returns boolean.
+     * Has space available to store items?
      *
      * @return boolean
      */
-    protected function hasFreeCapacity()
+    protected function hasAvailableSpace()
     {
         $total = $this->getOptions()->getMemoryLimit();
 
@@ -855,67 +750,7 @@ class Memory extends AbstractAdapter
             return true;
         }
 
-        $free  = $total - (float) memory_get_usage(true);
+        $free = $total - (float) memory_get_usage(true);
         return ($free > 0);
-    }
-
-    /**
-     * Internal method to run a clear command
-     * on a given data array which doesn't contain namespaces.
-     *
-     * Options:
-     *   - ttl  <float>  required
-     *   - tags <array>  required
-     *
-     * @param array $data
-     * @param int $mode
-     * @param array $options
-     */
-    protected function clearNamespacedDataArray(array &$data, $mode, array &$options)
-    {
-        $tags = &$options['tags'];
-        $time = microtime(true);
-        $ttl  = $options['ttl'];
-
-        $emptyTags = $keys = array();
-        foreach ($data as $key => &$item) {
-
-            // compare expired / active
-            if (($mode & self::MATCH_ALL) != self::MATCH_ALL) {
-
-                // if MATCH_EXPIRED mode selected don't match active items
-                if (($mode & self::MATCH_EXPIRED) == self::MATCH_EXPIRED) {
-                    if ($ttl == 0 || $time <= ($item[1]+$ttl) ) {
-                        continue;
-                    }
-
-                // if MATCH_ACTIVE mode selected don't match expired items
-                } elseif ($ttl > 0 && $time >= ($item[1]+$ttl)) {
-                    continue;
-                }
-            }
-
-            // compare tags
-            if ($tags !== null) {
-                $tagsStored = isset($item[2]) ? $item[2] : $emptyTags;
-
-                if ( ($mode & self::MATCH_TAGS_OR) == self::MATCH_TAGS_OR ) {
-                    $matched = (count(array_diff($tags, $tagsStored)) != count($tags));
-                } elseif ( ($mode & self::MATCH_TAGS_AND) == self::MATCH_TAGS_AND ) {
-                    $matched = (count(array_diff($tags, $tagsStored)) == 0);
-                }
-
-                // negate
-                if ( ($mode & self::MATCH_TAGS_NEGATE) == self::MATCH_TAGS_NEGATE ) {
-                    $matched = !$matched;
-                }
-
-                if (!$matched) {
-                    continue;
-                }
-            }
-
-            unset($data[$key]);
-        }
     }
 }

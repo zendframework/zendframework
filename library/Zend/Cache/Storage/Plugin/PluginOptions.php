@@ -44,13 +44,6 @@ class PluginOptions extends Options
 
     /**
      * Used by:
-     * - ClearByFactor
-     * @var int
-     */
-    protected $clearByNamespace = true;
-
-    /**
-     * Used by:
      * - ExceptionHandler
      * @var callable
      */
@@ -95,7 +88,7 @@ class PluginOptions extends Options
      * Set automatic clearing factor
      *
      * Used by:
-     * - ClearByFactor
+     * - ClearExpiredByFactor
      *
      * @param  int $clearingFactor
      * @return PluginOptions
@@ -110,41 +103,13 @@ class PluginOptions extends Options
      * Get automatic clearing factor
      *
      * Used by:
-     * - ClearByFactor
+     * - ClearExpiredByFactor
      *
      * @return int
      */
     public function getClearingFactor()
     {
         return $this->clearingFactor;
-    }
-
-    /**
-     * Set flag indicating whether or not to clear by namespace
-     *
-     * Used by:
-     * - ClearByFactor
-     *
-     * @param  bool $clearByNamespace
-     * @return PluginOptions
-     */
-    public function setClearByNamespace($clearByNamespace)
-    {
-        $this->clearByNamespace = $clearByNamespace;
-        return $this;
-    }
-
-    /**
-     * Clear items by namespace?
-     *
-     * Used by:
-     * - ClearByFactor
-     *
-     * @return bool
-     */
-    public function getClearByNamespace()
-    {
-        return $this->clearByNamespace;
     }
 
     /**

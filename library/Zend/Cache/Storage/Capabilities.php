@@ -36,11 +36,11 @@ use ArrayObject,
 class Capabilities
 {
     /**
-     * The storage adapter
+     * The storage instance
      *
-     * @var Adapter
+     * @var StorageInterface
      */
-    protected $adapter;
+    protected $storage;
 
     /**
      * A marker to set/change capabilities
@@ -57,24 +57,9 @@ class Capabilities
     protected $baseCapabilities;
 
     /**
-     * Clear all namespaces
-     */
-    protected $_clearAllNamespaces;
-
-    /**
-     * Clear by namespace
-     */
-    protected $_clearByNamespace;
-
-    /**
      * Expire read
      */
     protected $_expiredRead;
-
-    /**
-     * Iterable
-     */
-    protected $_iterable;
 
     /**
      * Max key length
@@ -117,13 +102,6 @@ class Capabilities
     protected $_supportedMetadata;
 
     /**
-     * Supports tagging?
-     *
-     * @var bool
-     */
-    protected $_tagging;
-
-    /**
      * Ttl precision
      */
     protected $_ttlPrecision;
@@ -142,12 +120,12 @@ class Capabilities
      * @param null|Capabilities $baseCapabilities
      */
     public function __construct(
-        Adapter\AdapterInterface $adapter,
+        StorageInterface $storage,
         stdClass $marker,
         array $capabilities = array(),
         Capabilities $baseCapabilities = null
     ) {
-        $this->adapter = $adapter;
+        $this->storage = $storage;
         $this->marker  = $marker;
         $this->baseCapabilities = $baseCapabilities;
 
@@ -163,7 +141,7 @@ class Capabilities
      */
     public function getAdapter()
     {
-        return $this->adapter;
+        return $this->storage;
     }
 
     /**
@@ -447,93 +425,6 @@ class Capabilities
     }
 
     /**
-     * Get if items are iterable
-     *
-     * @return boolean
-     */
-    public function getIterable()
-    {
-        return $this->getCapability('iterable', false);
-    }
-
-    /**
-     * Set if items are iterable
-     *
-     * @param  stdClass $marker
-     * @param  boolean $flag
-     * @return Capabilities Fluent interface
-     */
-    public function setIterable(stdClass $marker, $flag)
-    {
-        return $this->setCapability($marker, 'iterable', (bool)$flag);
-    }
-
-    /**
-     * Get support to clear items of all namespaces
-     *
-     * @return boolean
-     */
-    public function getClearAllNamespaces()
-    {
-        return $this->getCapability('clearAllNamespaces', false);
-    }
-
-    /**
-     * Set support to clear items of all namespaces
-     *
-     * @param  stdClass $marker
-     * @param  boolean $flag
-     * @return Capabilities Fluent interface
-     */
-    public function setClearAllNamespaces(stdClass $marker, $flag)
-    {
-        return $this->setCapability($marker, 'clearAllNamespaces', (bool)$flag);
-    }
-
-    /**
-     * Get support to clear items by namespace
-     *
-     * @return boolean
-     */
-    public function getClearByNamespace()
-    {
-        return $this->getCapability('clearByNamespace', false);
-    }
-
-    /**
-     * Set support to clear items by namespace
-     *
-     * @param  stdClass $marker
-     * @param  boolean $flag
-     * @return Capabilities Fluent interface
-     */
-    public function setClearByNamespace(stdClass $marker, $flag)
-    {
-        return $this->setCapability($marker, 'clearByNamespace', (bool)$flag);
-    }
-
-    /**
-     * Set value for tagging
-     *
-     * @param  mixed tagging
-     * @return $this
-     */
-    public function setTagging(stdClass $marker, $tagging)
-    {
-        return $this->setCapability($marker, 'tagging', (bool) $tagging);
-    }
-
-    /**
-     * Get value for tagging
-     *
-     * @return mixed
-     */
-    public function getTagging()
-    {
-        return $this->getCapability('tagging', false);
-    }
-
-    /**
      * Get a capability
      *
      * @param  string $name
@@ -572,8 +463,8 @@ class Capabilities
             $this->$property = $value;
 
             // trigger event
-            if ($this->adapter instanceof EventsCapableInterface) {
-                $this->adapter->events()->trigger('capability', $this->adapter, new ArrayObject(array(
+            if ($this->storage instanceof EventsCapableInterface) {
+                $this->storage->events()->trigger('capability', $this->storage, new ArrayObject(array(
                     $name => $value
                 )));
             }

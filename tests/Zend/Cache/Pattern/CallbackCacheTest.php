@@ -66,7 +66,7 @@ class CallbackCacheTest extends CommonPatternTest
 {
 
     /**
-     * @var Zend\Cache\Storage\Adapter\AdapterInterface
+     * @var Zend\Cache\Storage\StorageInterface
      */
     protected $_storage;
 
@@ -113,26 +113,6 @@ class CallbackCacheTest extends CommonPatternTest
         );
     }
 
-    public function testCallWithPredefinedCallbackAndArgumentKey()
-    {
-        $callback = __NAMESPACE__ . '\TestCallbackCache::emptyMethod';
-        $args     = array('arg1', 2, 3.33, null);
-        $options = array(
-            'callback_key' => 'callback',
-            'argument_key' => 'arguments',
-        );
-
-        $expectedKey = md5($options['callback_key'].$options['argument_key']);
-        $usedKey     = null;
-        $this->_options->getStorage()->events()->attach('setItem.pre', function ($event) use (&$usedKey) {
-            $params = $event->getParams();
-            $usedKey = $params['key'];
-        });
-
-        $this->_pattern->call($callback, $args, $options);
-        $this->assertEquals($expectedKey, $usedKey);
-    }
-
     public function testGenerateKey()
     {
         $callback = __NAMESPACE__ . '\TestCallbackCache::emptyMethod';
@@ -147,23 +127,6 @@ class CallbackCacheTest extends CommonPatternTest
 
         $this->_pattern->call($callback, $args);
         $this->assertEquals($generatedKey, $usedKey);
-    }
-
-    public function testGenerateKeyWithPredefinedCallbackAndArgumentKey()
-    {
-        $callback = __NAMESPACE__ . '\TestCallbackCache::emptyMethod';
-        $args     = array('arg1', 2, 3.33, null);
-        $options = array(
-            'callback_key' => 'callback',
-            'argument_key' => 'arguments',
-        );
-
-        $expectedKey = md5($options['callback_key'].$options['argument_key']);
-
-        $this->assertEquals(
-            $expectedKey,
-            $this->_pattern->generateKey($callback, $args, $options)
-        );
     }
 
     public function testCallInvalidCallbackException()
@@ -212,5 +175,4 @@ class CallbackCacheTest extends CommonPatternTest
             $this->assertEquals('', $data);
         }
     }
-
 }

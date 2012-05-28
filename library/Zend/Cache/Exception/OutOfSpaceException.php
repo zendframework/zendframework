@@ -14,39 +14,18 @@
  *
  * @category   Zend
  * @package    Zend_Cache
- * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace ZendTest\Cache\Pattern;
-use Zend\Cache;
+namespace Zend\Cache\Exception;
 
 /**
  * @category   Zend
  * @package    Zend_Cache
- * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_Cache
  */
-class CaptureCacheTest extends CommonPatternTest
+class OutOfSpaceException extends \OverflowException implements ExceptionInterface
 {
-
-    public function setUp()
-    {
-        $this->_options = new Cache\Pattern\PatternOptions(array(
-            // TODO
-        ));
-        $this->_pattern = new Cache\Pattern\CaptureCache();
-        $this->_pattern->setOptions($this->_options);
-
-        parent::setUp();
-    }
-
-    public function tearDown()
-    {
-        // TODO
-        parent::tearDown();
-    }
 }

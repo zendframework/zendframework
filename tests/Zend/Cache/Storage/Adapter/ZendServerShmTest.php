@@ -68,5 +68,4 @@ class ZendServerShmTest extends CommonAdapterTest
 
         parent::tearDown();
     }
-
 }

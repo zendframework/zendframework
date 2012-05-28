@@ -89,15 +89,6 @@ class FilesystemOptions extends AdapterOptions
     protected $keyPattern = '/^[a-z0-9_\+\-]*$/Di';
 
     /**
-     * Overwrite default namespace pattern
-     *
-     * Defined in AdapterOptions.
-     *
-     * @var string
-     */
-    protected $namespacePattern = '/^[a-z0-9_\+\-]*$/Di';
-
-    /**
      * Namespace separator
      *
      * @var string

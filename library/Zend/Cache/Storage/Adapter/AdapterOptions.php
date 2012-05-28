@@ -24,6 +24,7 @@ namespace Zend\Cache\Storage\Adapter;
 use ArrayObject,
     Zend\Cache\Exception,
     Zend\Cache\Storage\Event,
+    Zend\Cache\Storage\StorageInterface,
     Zend\EventManager\EventsCapableInterface,
     Zend\Stdlib\Options;
 
@@ -59,13 +60,6 @@ class AdapterOptions extends Options
      * @var string
      */
     protected $namespace = 'zfcache';
-
-    /**
-     * Validate namespace against pattern
-     *
-     * @var string
-     */
-    protected $namespacePattern = '';
 
     /**
      * Readable option
@@ -110,10 +104,10 @@ class AdapterOptions extends Options
     /**
      * Adapter using this instance
      *
-     * @param  AdapterInterface|null $adapter
+     * @param  StorageInterface|null $adapter
      * @return AdapterOptions
      */
-    public function setAdapter(AdapterInterface $adapter = null)
+    public function setAdapter(StorageInterface $adapter = null)
     {
         $this->adapter = $adapter;
         return $this;
@@ -162,15 +156,8 @@ class AdapterOptions extends Options
      */
     public function setNamespace($namespace)
     {
-        $namespace = (string)$namespace;
+        $namespace = (string) $namespace;
         if ($this->namespace !== $namespace) {
-            $pattern = $this->getNamespacePattern();
-            if ($pattern && !preg_match($pattern, $namespace)) {
-                throw new Exception\InvalidArgumentException(
-                    "The namespace '{$namespace}' doesn't match agains pattern '{$pattern}'"
-                );
-            }
-
             $this->triggerOptionEvent('namespace', $namespace);
             $this->namespace = $namespace;
         }
@@ -186,48 +173,6 @@ class AdapterOptions extends Options
     public function getNamespace()
     {
         return $this->namespace;
-    }
-
-    /**
-     * Set namespace pattern
-     *
-     * @param  null|string $pattern
-     * @return AdapterOptions
-     */
-    public function setNamespacePattern($pattern)
-    {
-        $pattern = (string) $pattern;
-        if ($this->namespacePattern !== $pattern) {
-            if ($pattern !== '') {
-                // validate pattern
-                if (@preg_match($pattern, '') === false) {
-                    $err = error_get_last();
-                    throw new Exception\InvalidArgumentException("Invalid pattern '{$pattern}': {$err['message']}");
-
-                // validate current namespace
-                } elseif (($ns = $this->getNamespace()) && !preg_match($pattern, $ns)) {
-                    throw new Exception\RuntimeException(
-                        "The current namespace '{$ns}' doesn't match agains pattern '{$pattern}'"
-                        . " - please change the namespace first"
-                    );
-                }
-            }
-
-            $this->triggerOptionEvent('namespace_pattern', $pattern);
-            $this->namespacePattern = $pattern;
-        }
-
-        return $this;
-    }
-
-    /**
-     * Get namespace pattern
-     *
-     * @return string
-     */
-    public function getNamespacePattern()
-    {
-        return $this->namespacePattern;
     }
 
     /**

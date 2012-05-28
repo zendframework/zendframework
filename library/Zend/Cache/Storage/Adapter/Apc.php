@@ -21,12 +21,18 @@
 
 namespace Zend\Cache\Storage\Adapter;
 
-use APCIterator,
+use APCIterator as BaseApcIterator,
     ArrayObject,
     stdClass,
     Traversable,
     Zend\Cache\Exception,
-    Zend\Cache\Storage\Capabilities;
+    Zend\Cache\Storage\Capabilities,
+    Zend\Cache\Storage\ClearByPrefixInterface,
+    Zend\Cache\Storage\ClearByNamespaceInterface,
+    Zend\Cache\Storage\FlushableInterface,
+    Zend\Cache\Storage\IterableInterface,
+    Zend\Cache\Storage\AvailableSpaceCapableInterface,
+    Zend\Cache\Storage\TotalSpaceCapableInterface;
 
 /**
  * @package    Zend_Cache
@@ -35,31 +41,17 @@ use APCIterator,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Apc extends AbstractAdapter
+class Apc
+    extends AbstractAdapter
+    implements ClearByPrefixInterface, ClearByNamespaceInterface, FlushableInterface, IterableInterface,
+               AvailableSpaceCapableInterface, TotalSpaceCapableInterface
 {
     /**
-     * Map selected properties on getDelayed & find
-     * to APCIterator selector
+     * Buffered total space in bytes
      *
-     * Init on constructor after ext/apc has been tested
-     *
-     * @var null|array
+     * @var null|int|float
      */
-    protected static $selectMap = null;
-
-    /**
-     * The used namespace separator
-     *
-     * @var string
-     */
-    protected $namespaceSeparator = ':';
-
-    /**
-     * Statement
-     *
-     * @var null|APCIterator
-     */
-    protected $stmtIterator = null;
+    protected $totalSpace;
 
     /**
      * Constructor
@@ -82,25 +74,6 @@ class Apc extends AbstractAdapter
         if (!$enabled) {
             throw new Exception\ExtensionNotLoadedException(
                 "ext/apc is disabled - see 'apc.enabled' and 'apc.enable_cli'"
-            );
-        }
-
-        // init select map
-        if (static::$selectMap === null) {
-            static::$selectMap = array(
-                // 'key'       => \APC_ITER_KEY,
-                'value'     => \APC_ITER_VALUE,
-                'mtime'     => \APC_ITER_MTIME,
-                'ctime'     => \APC_ITER_CTIME,
-                'atime'     => \APC_ITER_ATIME,
-                'rtime'     => \APC_ITER_DTIME,
-                'ttl'       => \APC_ITER_TTL,
-                'num_hits'  => \APC_ITER_NUM_HITS,
-                'ref_count' => \APC_ITER_REFCOUNT,
-                'mem_size'  => \APC_ITER_MEM_SIZE,
-
-                // virtual keys
-                'internal_key' => \APC_ITER_KEY,
             );
         }
 
@@ -139,26 +112,113 @@ class Apc extends AbstractAdapter
         return $this->options;
     }
 
+    /* TotalSpaceCapableInterface */
+
+    /**
+     * Get total space in bytes
+     *
+     * @return int|float
+     */
+    public function getTotalSpace()
+    {
+        if ($this->totalSpace !== null) {
+            $smaInfo = apc_sma_info(true);
+            $this->totalSpace = $smaInfo['num_seg'] * $smaInfo['seg_size'];
+        }
+
+        return $this->totalSpace;
+    }
+
+    /* AvailableSpaceCapableInterface */
+
+    /**
+     * Get available space in bytes
+     *
+     * @return int|float
+     */
+    public function getAvailableSpace()
+    {
+        $smaInfo = apc_sma_info(true);
+        return $smaInfo['avail_mem'];
+    }
+
+    /* IterableInterface */
+
+    /**
+     * Get the storage iterator
+     *
+     * @return ApcIterator
+     */
+    public function getIterator()
+    {
+        $options = $this->getOptions();
+        $prefix  = $options->getNamespace() . $options->getNamespaceSeparator();
+        $pattern = '/^' . preg_quote($prefix, '/') . '/';
+        $format  = 0;
+
+        $baseIt = new BaseApcIterator('user', $pattern, 0, 1, \APC_LIST_ACTIVE);
+        return new ApcIterator($this, $baseIt, $prefix);
+    }
+
+    /* FlushableInterface */
+
+    /**
+     * Flush the whole storage
+     *
+     * @return boolean
+     */
+    public function flush()
+    {
+        return apc_clear_cache('user');
+    }
+
+    /* ClearByNamespaceInterface */
+
+    /**
+     * Remove items by given namespace
+     *
+     * @param string $prefix
+     * @return boolean
+     */
+    public function clearByNamespace($namespace)
+    {
+        $options = $this->getOptions();
+        $prefix  = $namespace . $options->getNamespaceSeparator();
+        $pattern = '/^' . preg_quote($prefix, '/') . '+/';
+        return apc_delete(new BaseApcIterator('user', $pattern, 0, 1, \APC_LIST_ACTIVE));
+    }
+
+    /* ClearByPrefixInterface */
+
+    /**
+     * Remove items matching given prefix
+     *
+     * @param string $prefix
+     * @return boolean
+     */
+    public function clearByPrefix($prefix)
+    {
+        $options = $this->getOptions();
+        $prefix  = $options->getNamespace() . $options->getNamespaceSeparator() . $prefix;
+        $pattern = '/^' . preg_quote($prefix, '/') . '+/';
+        return apc_delete(new BaseApcIterator('user', $pattern, 0, 1, \APC_LIST_ACTIVE));
+    }
 
     /* reading */
 
     /**
      * Internal method to get an item.
      *
-     * Options:
-     *  - namespace <string>
-     *    - The namespace to use
-     *
      * @param  string  $normalizedKey
-     * @param  array   $normalizedOptions
      * @param  boolean $success
      * @param  mixed   $casToken
      * @return mixed Data on success, null on failure
      * @throws Exception\ExceptionInterface
      */
-    protected function internalGetItem(& $normalizedKey, array & $normalizedOptions, & $success = null, & $casToken = null)
+    protected function internalGetItem(& $normalizedKey, & $success = null, & $casToken = null)
     {
-        $prefix      = $normalizedOptions['namespace'] . $this->getOptions()->getNamespaceSeparator();
+        $options     = $this->getOptions();
+        $prefix      = $options->getNamespace() . $options->getNamespaceSeparator();
         $internalKey = $prefix . $normalizedKey;
         $result      = apc_fetch($internalKey, $success);
 
@@ -173,19 +233,14 @@ class Apc extends AbstractAdapter
     /**
      * Internal method to get multiple items.
      *
-     * Options:
-     *  - namespace <string>
-     *    - The namespace to use
-     *
      * @param  array $normalizedKeys
-     * @param  array $normalizedOptions
      * @return array Associative array of keys and values
      * @throws Exception\ExceptionInterface
      */
-    protected function internalGetItems(array & $normalizedKeys, array & $normalizedOptions)
+    protected function internalGetItems(array & $normalizedKeys)
     {
-        $namespaceSep = $this->getOptions()->getNamespaceSeparator();
-        $prefix = $normalizedOptions['namespace'] . $this->getOptions()->getNamespaceSeparator();
+        $options = $this->getOptions();
+        $prefix  = $options->getNamespace() . $options->getNamespaceSeparator();
 
         $internalKeys = array();
         foreach ($normalizedKeys as $normalizedKey) {
@@ -207,36 +262,29 @@ class Apc extends AbstractAdapter
     /**
      * Internal method to test if an item exists.
      *
-     * Options:
-     *  - namespace <string>
-     *    - The namespace to use
-     *
      * @param  string $normalizedKey
-     * @param  array  $normalizedOptions
      * @return boolean
      * @throws Exception\ExceptionInterface
      */
-    protected function internalHasItem(& $normalizedKey, array & $normalizedOptions)
+    protected function internalHasItem(& $normalizedKey)
     {
-        $prefix = $normalizedOptions['namespace'] . $this->getOptions()->getNamespaceSeparator();
+        $options = $this->getOptions();
+        $prefix  = $options->getNamespace() . $options->getNamespaceSeparator();
         return apc_exists($prefix . $normalizedKey);
     }
 
     /**
      * Internal method to test multiple items.
      *
-     * Options:
-     *  - namespace <string>
-     *    - The namespace to use
-     *
      * @param  array $keys
-     * @param  array $options
      * @return array Array of found keys
      * @throws Exception\ExceptionInterface
      */
-    protected function internalHasItems(array & $normalizedKeys, array & $normalizedOptions)
+    protected function internalHasItems(array & $normalizedKeys)
     {
-        $prefix       = $normalizedOptions['namespace'] . $this->getOptions()->getNamespaceSeparator();
+        $options = $this->getOptions();
+        $prefix  = $options->getNamespace() . $options->getNamespaceSeparator();
+
         $internalKeys = array();
         foreach ($normalizedKeys as $normalizedKey) {
             $internalKeys[] = $prefix . $normalizedKey;
@@ -257,12 +305,7 @@ class Apc extends AbstractAdapter
     /**
      * Get metadata of an item.
      *
-     * Options:
-     *  - namespace <string> optional
-     *    - The namespace to use (Default: namespace of object)
-     *
      * @param  string $normalizedKey
-     * @param  array  $normalizedOptions
      * @return array|boolean Metadata on success, false on failure
      * @throws Exception\ExceptionInterface
      *
@@ -270,17 +313,19 @@ class Apc extends AbstractAdapter
      * @triggers getMetadata.post(PostEvent)
      * @triggers getMetadata.exception(ExceptionEvent)
      */
-    protected function internalGetMetadata(& $normalizedKey, array & $normalizedOptions)
+    protected function internalGetMetadata(& $normalizedKey)
     {
-        $internalKey = $normalizedOptions['namespace'] . $this->getOptions()->getNamespaceSeparator() . $normalizedKey;
+        $options     = $this->getOptions();
+        $prefix      = $options->getNamespace() . $options->getNamespaceSeparator();
+        $internalKey = $prefix . $normalizedKey;
 
         // @see http://pecl.php.net/bugs/bug.php?id=22564
         if (!apc_exists($internalKey)) {
             $metadata = false;
         } else {
-            $format   = \APC_ITER_ALL ^ \APC_ITER_VALUE ^ \APC_ITER_TYPE;
+            $format   = \APC_ITER_ALL ^ \APC_ITER_VALUE ^ \APC_ITER_TYPE ^ \APC_ITER_REFCOUNT;
             $regexp   = '/^' . preg_quote($internalKey, '/') . '$/';
-            $it       = new APCIterator('user', $regexp, $format, 100, \APC_LIST_ACTIVE);
+            $it       = new BaseApcIterator('user', $regexp, $format, 100, \APC_LIST_ACTIVE);
             $metadata = $it->current();
         }
 
@@ -295,29 +340,26 @@ class Apc extends AbstractAdapter
     /**
      * Get metadata of multiple items
      *
-     * Options:
-     *  - namespace <string> optional
-     *    - The namespace to use (Default: namespace of object)
-     *
      * @param  array $normalizedKeys
-     * @param  array $normalizedOptions
      * @return array Associative array of keys and metadata
      *
      * @triggers getMetadatas.pre(PreEvent)
      * @triggers getMetadatas.post(PostEvent)
      * @triggers getMetadatas.exception(ExceptionEvent)
      */
-    protected function internalGetMetadatas(array & $normalizedKeys, array & $normalizedOptions)
+    protected function internalGetMetadatas(array & $normalizedKeys)
     {
         $keysRegExp = array();
         foreach ($normalizedKeys as $normalizedKey) {
             $keysRegExp[] = preg_quote($normalizedKey, '/');
         }
-        $prefix = $normalizedOptions['namespace'] . $this->getOptions()->getNamespaceSeparator();
-        $regexp = '/^' . preg_quote($prefix, '/') . '(' . implode('|', $keysRegExp) . ')' . '$/';
-        $format = \APC_ITER_ALL ^ \APC_ITER_VALUE ^ \APC_ITER_TYPE;
 
-        $it      = new APCIterator('user', $regexp, $format, 100, \APC_LIST_ACTIVE);
+        $options = $this->getOptions();
+        $prefix  = $options->getNamespace() . $options->getNamespaceSeparator();
+        $regexp  = '/^' . preg_quote($prefix, '/') . '(' . implode('|', $keysRegExp) . ')' . '$/';
+        $format  = \APC_ITER_ALL ^ \APC_ITER_VALUE ^ \APC_ITER_TYPE ^ \APC_ITER_REFCOUNT;
+
+        $it      = new BaseApcIterator('user', $regexp, $format, 100, \APC_LIST_ACTIVE);
         $result  = array();
         $prefixL = strlen($prefix);
         foreach ($it as $internalKey => $metadata) {
@@ -338,48 +380,39 @@ class Apc extends AbstractAdapter
     /**
      * Internal method to store an item.
      *
-     * Options:
-     *  - ttl <float>
-     *    - The time-to-life
-     *  - namespace <string>
-     *    - The namespace to use
-     *
      * @param  string $normalizedKey
      * @param  mixed  $value
-     * @param  array  $normalizedOptions
      * @return boolean
      * @throws Exception\ExceptionInterface
      */
-    protected function internalSetItem(& $normalizedKey, & $value, array & $normalizedOptions)
+    protected function internalSetItem(& $normalizedKey, & $value)
     {
-        $prefix = $normalizedOptions['namespace'] . $this->getOptions()->getNamespaceSeparator();
+        $options     = $this->getOptions();
+        $prefix      = $options->getNamespace() . $options->getNamespaceSeparator();
         $internalKey = $prefix . $normalizedKey;
-        if (!apc_store($internalKey, $value, $normalizedOptions['ttl'])) {
+        $ttl         = $options->getTtl();
+
+        if (!apc_store($internalKey, $value, $ttl)) {
             $type = is_object($value) ? get_class($value) : gettype($value);
             throw new Exception\RuntimeException(
-                "apc_store('{$internalKey}', <{$type}>, {$normalizedOptions['ttl']}) failed"
+                "apc_store('{$internalKey}', <{$type}>, {$ttl}) failed"
             );
         }
+
         return true;
     }
 
     /**
      * Internal method to store multiple items.
      *
-     * Options:
-     *  - ttl <float>
-     *    - The time-to-life
-     *  - namespace <string>
-     *    - The namespace to use
-     *
      * @param  array $normalizedKeyValuePairs
-     * @param  array $normalizedOptions
      * @return array Array of not stored keys
      * @throws Exception\ExceptionInterface
      */
-    protected function internalSetItems(array & $normalizedKeyValuePairs, array & $normalizedOptions)
+    protected function internalSetItems(array & $normalizedKeyValuePairs)
     {
-        $prefix = $normalizedOptions['namespace'] . $this->getOptions()->getNamespaceSeparator();
+        $options = $this->getOptions();
+        $prefix  = $options->getNamespace() . $options->getNamespaceSeparator();
 
         $internalKeyValuePairs = array();
         foreach ($normalizedKeyValuePairs as $normalizedKey => &$value) {
@@ -387,7 +420,7 @@ class Apc extends AbstractAdapter
             $internalKeyValuePairs[$internalKey] = &$value;
         }
 
-        $failedKeys = apc_store($internalKeyValuePairs, null, $normalizedOptions['ttl']);
+        $failedKeys = apc_store($internalKeyValuePairs, null, $options->getTtl());
         $failedKeys = array_keys($failedKeys);
 
         // remove prefix
@@ -402,29 +435,26 @@ class Apc extends AbstractAdapter
     /**
      * Add an item.
      *
-     * Options:
-     *  - ttl <float>
-     *    - The time-to-life
-     *  - namespace <string>
-     *    - The namespace to use
-     *
      * @param  string $normalizedKey
      * @param  mixed  $value
-     * @param  array  $normalizedOptions
      * @return boolean
      * @throws Exception\ExceptionInterface
      */
-    protected function internalAddItem(& $normalizedKey, & $value, array & $normalizedOptions)
+    protected function internalAddItem(& $normalizedKey, & $value)
     {
-        $internalKey = $normalizedOptions['namespace'] . $this->getOptions()->getNamespaceSeparator() . $normalizedKey;
-        if (!apc_add($internalKey, $value, $normalizedOptions['ttl'])) {
+        $options     = $this->getOptions();
+        $prefix      = $options->getNamespace() . $options->getNamespaceSeparator();
+        $internalKey = $prefix . $normalizedKey;
+        $ttl         = $options->getTtl();
+
+        if (!apc_add($internalKey, $value, $ttl)) {
             if (apc_exists($internalKey)) {
                 return false;
             }
 
             $type = is_object($value) ? get_class($value) : gettype($value);
             throw new Exception\RuntimeException(
-                "apc_add('{$internalKey}', <{$type}>, {$normalizedOptions['ttl']}) failed"
+                "apc_add('{$internalKey}', <{$type}>, {$ttl}) failed"
             );
         }
 
@@ -434,27 +464,22 @@ class Apc extends AbstractAdapter
     /**
      * Internal method to add multiple items.
      *
-     * Options:
-     *  - ttl <float>
-     *    - The time-to-life
-     *  - namespace <string>
-     *    - The namespace to use
-     *
      * @param  array $normalizedKeyValuePairs
-     * @param  array $normalizedOptions
      * @return array Array of not stored keys
      * @throws Exception\ExceptionInterface
      */
-    protected function internalAddItems(array & $normalizedKeyValuePairs, array & $normalizedOptions)
+    protected function internalAddItems(array & $normalizedKeyValuePairs)
     {
+        $options = $this->getOptions();
+        $prefix  = $options->getNamespace() . $options->getNamespaceSeparator();
+
         $internalKeyValuePairs = array();
-        $prefix                = $normalizedOptions['namespace'] . $this->getOptions()->getNamespaceSeparator();
         foreach ($normalizedKeyValuePairs as $normalizedKey => $value) {
             $internalKey = $prefix . $normalizedKey;
             $internalKeyValuePairs[$internalKey] = $value;
         }
 
-        $failedKeys = apc_add($internalKeyValuePairs, null, $normalizedOptions['ttl']);
+        $failedKeys = apc_add($internalKeyValuePairs, null, $options->getTtl());
         $failedKeys = array_keys($failedKeys);
 
         // remove prefix
@@ -469,29 +494,26 @@ class Apc extends AbstractAdapter
     /**
      * Internal method to replace an existing item.
      *
-     * Options:
-     *  - ttl <float>
-     *    - The time-to-life
-     *  - namespace <string>
-     *    - The namespace to use
-     *
      * @param  string $normalizedKey
      * @param  mixed  $value
-     * @param  array  $normalizedOptions
      * @return boolean
      * @throws Exception\ExceptionInterface
      */
-    protected function internalReplaceItem(& $normalizedKey, & $value, array & $normalizedOptions)
+    protected function internalReplaceItem(& $normalizedKey, & $value)
     {
-        $internalKey = $normalizedOptions['namespace'] . $this->getOptions()->getNamespaceSeparator() . $normalizedKey;
+        $options     = $this->getOptions();
+        $prefix      = $options->getNamespace() . $options->getNamespaceSeparator();
+        $internalKey = $prefix . $normalizedKey;
+        $ttl         = $options->getTtl();
+
         if (!apc_exists($internalKey)) {
             return false;
         }
 
-        if (!apc_store($internalKey, $value, $normalizedOptions['ttl'])) {
+        if (!apc_store($internalKey, $value, $ttl)) {
             $type = is_object($value) ? get_class($value) : gettype($value);
             throw new Exception\RuntimeException(
-                "apc_store('{$internalKey}', <{$type}>, {$normalizedOptions['ttl']}) failed"
+                "apc_store('{$internalKey}', <{$type}>, {$ttl}) failed"
             );
         }
 
@@ -501,37 +523,31 @@ class Apc extends AbstractAdapter
     /**
      * Internal method to remove an item.
      *
-     * Options:
-     *  - namespace <string>
-     *    - The namespace to use
-     *
      * @param  string $normalizedKey
-     * @param  array  $normalizedOptions
      * @return boolean
      * @throws Exception\ExceptionInterface
      */
-    protected function internalRemoveItem(& $normalizedKey, array & $normalizedOptions)
+    protected function internalRemoveItem(& $normalizedKey)
     {
-        $internalKey = $normalizedOptions['namespace'] . $this->getOptions()->getNamespaceSeparator() . $normalizedKey;
+        $options     = $this->getOptions();
+        $prefix      = $options->getNamespace() . $options->getNamespaceSeparator();
+        $internalKey = $prefix . $normalizedKey;
         return apc_delete($internalKey);
     }
 
     /**
      * Internal method to remove multiple items.
      *
-     * Options:
-     *  - namespace <string>
-     *    - The namespace to use
-     *
      * @param  array $keys
-     * @param  array $options
      * @return array Array of not removed keys
      * @throws Exception\ExceptionInterface
      */
-    protected function internalRemoveItems(array & $normalizedKeys, array & $normalizedOptions)
+    protected function internalRemoveItems(array & $normalizedKeys)
     {
+        $options = $this->getOptions();
+        $prefix  = $options->getNamespace() . $options->getNamespaceSeparator();
+
         $internalKeys = array();
-        $prefix       = $normalizedOptions['namespace'] . $this->getOptions()->getNamespaceSeparator();
         foreach ($normalizedKeys as $normalizedKey) {
             $internalKeys[] = $prefix . $normalizedKey;
         }
@@ -550,30 +566,27 @@ class Apc extends AbstractAdapter
     /**
      * Internal method to increment an item.
      *
-     * Options:
-     *  - ttl <float>
-     *    - The time-to-life
-     *  - namespace <string>
-     *    - The namespace to use
-     *
      * @param  string $normalizedKey
      * @param  int    $value
-     * @param  array  $normalizedOptions
      * @return int|boolean The new value on success, false on failure
      * @throws Exception\ExceptionInterface
      */
-    protected function internalIncrementItem(& $normalizedKey, & $value, array & $normalizedOptions)
+    protected function internalIncrementItem(& $normalizedKey, & $value)
     {
-        $internalKey = $normalizedOptions['namespace'] . $this->getOptions()->getNamespaceSeparator() . $normalizedKey;
-        $value       = (int)$value;
+        $options     = $this->getOptions();
+        $prefix      = $options->getNamespace() . $options->getNamespaceSeparator();
+        $internalKey = $prefix . $normalizedKey;
+        $ttl         = $options->getTtl();
+        $value       = (int) $value;
         $newValue    = apc_inc($internalKey, $value);
 
         // initial value
         if ($newValue === false) {
+            $ttl      = $options->getTtl();
             $newValue = $value;
-            if (!apc_add($internalKey, $newValue, $normalizedOptions['ttl'])) {
+            if (!apc_add($internalKey, $newValue, $ttl)) {
                 throw new Exception\RuntimeException(
-                    "apc_add('{$internalKey}', {$newValue}, {$normalizedOptions['ttl']}) failed"
+                    "apc_add('{$internalKey}', {$newValue}, {$ttl}) failed"
                 );
             }
         }
@@ -584,222 +597,31 @@ class Apc extends AbstractAdapter
     /**
      * Internal method to decrement an item.
      *
-     * Options:
-     *  - ttl <float>
-     *    - The time-to-life
-     *  - namespace <string>
-     *    - The namespace to use
-     *
      * @param  string $normalizedKey
      * @param  int    $value
-     * @param  array  $normalizedOptions
      * @return int|boolean The new value on success, false on failure
      * @throws Exception\ExceptionInterface
      */
-    protected function internalDecrementItem(& $normalizedKey, & $value, array & $normalizedOptions)
+    protected function internalDecrementItem(& $normalizedKey, & $value)
     {
-        $internalKey = $normalizedOptions['namespace'] . $this->getOptions()->getNamespaceSeparator() . $normalizedKey;
-        $value       = (int)$value;
+        $options     = $this->getOptions();
+        $prefix      = $options->getNamespace() . $options->getNamespaceSeparator();
+        $internalKey = $prefix . $normalizedKey;
+        $value       = (int) $value;
         $newValue    = apc_dec($internalKey, $value);
 
         // initial value
         if ($newValue === false) {
-            // initial value
+            $ttl      = $options->getTtl();
             $newValue = -$value;
-            if (!apc_add($internalKey, $newValue, $normalizedOptions['ttl'])) {
+            if (!apc_add($internalKey, $newValue, $ttl)) {
                 throw new Exception\RuntimeException(
-                    "apc_add('{$internalKey}', {$newValue}, {$normalizedOptions['ttl']}) failed"
+                    "apc_add('{$internalKey}', {$newValue}, {$ttl}) failed"
                 );
             }
         }
 
         return $newValue;
-    }
-
-    /* non-blocking */
-
-    /**
-     * Internal method to request multiple items.
-     *
-     * Options:
-     *  - ttl <float>
-     *    - The time-to-live
-     *  - namespace <string>
-     *    - The namespace to use
-     *  - select <array>
-     *    - An array of the information the returned item contains
-     *  - callback <callback> optional
-     *    - An result callback will be invoked for each item in the result set.
-     *    - The first argument will be the item array.
-     *    - The callback does not have to return anything.
-     *
-     * @param  array $normalizedKeys
-     * @param  array $normalizedOptions
-     * @return boolean
-     * @throws Exception\ExceptionInterface
-     * @see    fetch()
-     * @see    fetchAll()
-     */
-    protected function internalGetDelayed(array & $normalizedKeys, array & $normalizedOptions)
-    {
-        if ($this->stmtActive) {
-            throw new Exception\RuntimeException('Statement already in use');
-        }
-
-        if (isset($normalizedOptions['callback']) && !is_callable($normalizedOptions['callback'], false)) {
-            throw new Exception\InvalidArgumentException('Invalid callback');
-        }
-
-        $format = 0;
-        foreach ($normalizedOptions['select'] as $property) {
-            if (isset(self::$selectMap[$property])) {
-                $format = $format | self::$selectMap[$property];
-            }
-        }
-
-        $prefix = $normalizedOptions['namespace'] . $this->getOptions()->getNamespaceSeparator();
-        $search = array();
-        foreach ($normalizedKeys as $normalizedKey) {
-            $search[] = preg_quote($normalizedKey, '/');
-        }
-        $search = '/^' . preg_quote($prefix, '/') . '(' . implode('|', $search) . ')$/';
-
-        $this->stmtIterator = new APCIterator('user', $search, $format, 1, \APC_LIST_ACTIVE);
-        $this->stmtActive   = true;
-        $this->stmtOptions  = & $normalizedOptions;
-
-        if (isset($normalizedOptions['callback'])) {
-            $callback = & $normalizedOptions['callback'];
-            while (($item = $this->fetch()) !== false) {
-                call_user_func($callback, $item);
-            }
-        }
-
-        return true;
-    }
-
-    /* find */
-
-    /**
-     * internal method to find items.
-     *
-     * Options:
-     *  - namespace <string>
-     *    - The namespace to use
-     *
-     * @param  int   $normalizedMode Matching mode (Value of Adapter::MATCH_*)
-     * @param  array $normalizedOptions
-     * @return boolean
-     * @throws Exception\ExceptionInterface
-     * @see    fetch()
-     * @see    fetchAll()
-     */
-    protected function internalFind(& $normalizedMode, array & $normalizedOptions)
-    {
-        if ($this->stmtActive) {
-            throw new Exception\RuntimeException('Statement already in use');
-        }
-
-        // This adapter doesn't support to read expired items
-        if (($normalizedMode & self::MATCH_ACTIVE) == self::MATCH_ACTIVE) {
-            $prefix = $normalizedOptions['namespace'] . $this->getOptions()->getNamespaceSeparator();
-            $search = '/^' . preg_quote($prefix, '/') . '+/';
-
-            $format = 0;
-            foreach ($normalizedOptions['select'] as $property) {
-                if (isset(self::$selectMap[$property])) {
-                    $format = $format | self::$selectMap[$property];
-                }
-            }
-
-            $this->stmtIterator = new APCIterator('user', $search, $format, 1, \APC_LIST_ACTIVE);
-            $this->stmtActive   = true;
-            $this->stmtOptions  = & $normalizedOptions;
-        }
-
-        return true;
-    }
-
-    /**
-     * Internal method to fetch the next item from result set
-     *
-     * @return array|boolean The next item or false
-     * @throws Exception\ExceptionInterface
-     */
-    protected function internalFetch()
-    {
-        if (!$this->stmtActive) {
-            return false;
-        }
-
-        $prefix  = $this->stmtOptions['namespace'] . $this->getOptions()->getNamespaceSeparator();
-        $prefixL = strlen($prefix);
-
-        do {
-            if (!$this->stmtIterator->valid()) {
-                // clear stmt
-                $this->stmtActive   = false;
-                $this->stmtIterator = null;
-                $this->stmtOptions  = null;
-
-                return false;
-            }
-
-            // @see http://pecl.php.net/bugs/bug.php?id=22564
-            $exist = apc_exists($this->stmtIterator->key());
-            if ($exist) {
-                $result = $this->stmtIterator->current();
-                $this->normalizeMetadata($result);
-
-                $select = $this->stmtOptions['select'];
-                if (in_array('key', $select)) {
-                    $internalKey = $this->stmtIterator->key();
-                    $result['key'] = substr($internalKey, $prefixL);
-                }
-            }
-
-            $this->stmtIterator->next();
-        } while (!$exist);
-
-        return $result;
-    }
-
-    /* cleaning */
-
-    /**
-     * Internal method to clear items off all namespaces.
-     *
-     * @param  int   $normalizedMode Matching mode (Value of Adapter::MATCH_*)
-     * @param  array $normalizedOptions
-     * @return boolean
-     * @throws Exception\ExceptionInterface
-     * @see    clearByNamespace()
-     */
-    protected function internalClear(& $normalizedMode, array & $normalizedOptions)
-    {
-        return $this->clearByRegEx('/.*/', $normalizedMode, $normalizedOptions);
-    }
-
-    /**
-     * Clear items by namespace.
-     *
-     * Options:
-     *  - namespace <string>
-     *    - The namespace to use
-     *  - tags <array>
-     *    - Tags to search for used with matching modes of Adapter::MATCH_TAGS_*
-     *
-     * @param  int   $normalizedMode Matching mode (Value of Adapter::MATCH_*)
-     * @param  array $normalizedOptions
-     * @return boolean
-     * @throws Exception\ExceptionInterface
-     * @see    clear()
-     */
-    protected function internalClearByNamespace(& $normalizedMode, array & $normalizedOptions)
-    {
-        $prefix = $normalizedOptions['namespace'] . $this->getOptions()->getNamespaceSeparator();
-        $regex  = '/^' . preg_quote($prefix, '/') . '+/';
-        return $this->clearByRegEx($regex, $normalizedMode, $normalizedOptions);
     }
 
     /* status */
@@ -828,28 +650,18 @@ class Apc extends AbstractAdapter
                         'resource' => false,
                     ),
                     'supportedMetadata' => array(
-                        'atime',
-                        'ctime',
                         'internal_key',
-                        'mem_size',
-                        'mtime',
-                        'num_hits',
-                        'ref_count',
-                        'rtime',
-                        'ttl',
+                        'atime', 'ctime', 'mtime', 'rtime',
+                        'size', 'hits', 'ttl',
                     ),
                     'maxTtl'             => 0,
                     'staticTtl'          => true,
-                    'tagging'            => false,
                     'ttlPrecision'       => 1,
                     'useRequestTime'     => (bool) ini_get('apc.use_request_time'),
                     'expiredRead'        => false,
                     'maxKeyLength'       => 5182,
                     'namespaceIsPrefix'  => true,
                     'namespaceSeparator' => $this->getOptions()->getNamespaceSeparator(),
-                    'iterable'           => true,
-                    'clearAllNamespaces' => true,
-                    'clearByNamespace'   => true,
                 )
             );
 
@@ -869,41 +681,7 @@ class Apc extends AbstractAdapter
         return $this->capabilities;
     }
 
-    /**
-     * Internal method to get storage capacity.
-     *
-     * @param  array $normalizedOptions
-     * @return array|boolean Associative array of capacity, false on failure
-     * @throws Exception\ExceptionInterface
-     */
-    protected function internalGetCapacity(array & $normalizedOptions)
-    {
-        $mem = apc_sma_info(true);
-        return array(
-            'free'  => $mem['avail_mem'],
-            'total' => $mem['num_seg'] * $mem['seg_size'],
-        );
-    }
-
     /* internal */
-
-    /**
-     * Clear cached items based on key regex
-     *
-     * @param  string $regex
-     * @param  int    $mode
-     * @param  array  $options
-     * @return bool
-     */
-    protected function clearByRegEx($regex, $mode, array &$options)
-    {
-        if (($mode & self::MATCH_ACTIVE) != self::MATCH_ACTIVE) {
-            // no need to clear expired items
-            return true;
-        }
-
-        return apc_delete(new APCIterator('user', $regex, 0, 1, \APC_LIST_ACTIVE));
-    }
 
     /**
      * Normalize metadata to work with APC
@@ -911,34 +689,22 @@ class Apc extends AbstractAdapter
      * @param  array $metadata
      * @return void
      */
-    protected function normalizeMetadata(array &$metadata)
+    protected function normalizeMetadata(array & $metadata)
     {
-        // rename
-        if (isset($metadata['creation_time'])) {
-            $metadata['ctime'] = $metadata['creation_time'];
-            unset($metadata['creation_time']);
-        }
+        $metadata['internal_key'] = $metadata['key'];
+        $metadata['ctime']        = $metadata['creation_time'];
+        $metadata['atime']        = $metadata['access_time'];
+        $metadata['rtime']        = $metadata['deletion_time'];
+        $metadata['size']         = $metadata['mem_size'];
+        $metadata['hits']         = $metadata['num_hits'];
 
-        if (isset($metadata['access_time'])) {
-            $metadata['atime'] = $metadata['access_time'];
-            unset($metadata['access_time']);
-        }
-
-        if (isset($metadata['deletion_time'])) {
-            $metadata['rtime'] = $metadata['deletion_time'];
-            unset($metadata['deletion_time']);
-        }
-
-        // remove namespace prefix
-        if (isset($metadata['key'])) {
-            $pos = strpos($metadata['key'], $this->getOptions()->getNamespaceSeparator());
-            if ($pos !== false) {
-                $metadata['internal_key'] = $metadata['key'];
-            } else {
-                $metadata['internal_key'] = $metadata['key'];
-            }
-
-            unset($metadata['key']);
-        }
+        unset(
+            $metadata['key'],
+            $metadata['creation_time'],
+            $metadata['access_time'],
+            $metadata['deletion_time'],
+            $metadata['mem_size'],
+            $metadata['num_hits']
+        );
     }
 }

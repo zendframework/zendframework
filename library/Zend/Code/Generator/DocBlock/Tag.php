@@ -67,7 +67,7 @@ class Tag extends AbstractGenerator
             $this->setName($options['name']);
         }
         if (key_exists('description', $options)) {
-            $this->setName($options['description']);
+            $this->setDescription($options['description']);
         }
     }
 

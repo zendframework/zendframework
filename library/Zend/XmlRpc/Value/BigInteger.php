@@ -31,17 +31,12 @@ namespace Zend\XmlRpc\Value;
 class BigInteger extends Integer
 {
     /**
-     * @var \Zend\Math\BigInteger
-     */
-    protected $_integer;
-
-    /**
      * @param mixed $value
      */
     public function __construct($value)
     {
-        $this->_integer = new \Zend\Math\BigInteger();
-        $this->_value   = $this->_integer->init($this->_value);
+        $integer = new \Zend\Math\BigInteger();
+        $this->_value   = $integer->init($value);
         $this->_type    = self::XMLRPC_TYPE_I8;
     }
 
@@ -52,6 +47,6 @@ class BigInteger extends Integer
      */
     public function getValue()
     {
-        return $this->_integer;
+        return $this->_value;
     }
 }

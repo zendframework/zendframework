@@ -49,7 +49,7 @@ class Stream extends Response
      *
      * @var string
      */
-    protected $stream_name;
+    protected $streamName;
 
     /**
      * Should we clean up the stream file when this response is closed?
@@ -107,33 +107,32 @@ class Stream extends Response
      */
     public function getStreamName()
     {
-        return $this->stream_name;
+        return $this->streamName;
     }
 
     /**
      * Set file name associated with the stream
      *
-     * @param string $stream_name Name to set
+     * @param string $streamName Name to set
      * @return Stream
      */
-    public function setStreamName($stream_name)
+    public function setStreamName($streamName)
     {
-        $this->stream_name = $stream_name;
+        $this->streamName = $streamName;
         return $this;
     }
 
     /**
      * Create a new Zend\Http\Response\Stream object from a string
      *
-     * @param  string $response_str
+     * @param  string $responseString
      * @param  resource $stream
      * @return Stream
      */
-    public static function fromStream($response_str, $stream)
+    public static function fromStream($responseString, $stream)
     {
-        $response= new static();
 
-        $response::fromString($response_str);
+        $response = static::fromString($responseString);
         if (is_resource($stream)) {
             $response->setStream($stream);
         }
@@ -174,7 +173,7 @@ class Stream extends Response
         if ($this->stream) {
             $this->readStream();
         }
-        return $this->body;
+        return $this->content;
     }
 
     /**
@@ -190,20 +189,20 @@ class Stream extends Response
             return '';
         }
 
-        $this->body = stream_get_contents($this->stream);
-        fclose($this->stream);
-        $this->stream = null;
+        $this->content = stream_get_contents($this->stream);
+        $this->stream  = null; //Could be listened by others
     }
 
+    /**
+     * Destructor
+     */
     public function __destruct()
     {
         if (is_resource($this->stream)) {
-            fclose($this->stream);
-            $this->stream = null;
+            $this->stream = null; //Could be listened by others
         }
         if ($this->_cleanup) {
             @unlink($this->stream_name);
         }
     }
-
 }

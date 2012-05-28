@@ -253,7 +253,7 @@ class Reader
             return self::importString($responseXml);
         } elseif ($cache) {
             $data = $cache->getItem($cacheId);
-            if ($data !== false) {
+            if ($data) {
                 return self::importString($data);
             }
             $response = $client->send();

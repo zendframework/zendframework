@@ -180,10 +180,29 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
         $registered = \Zend\Registry::get(Registry::REGISTRY_KEY);
         $this->assertSame($registry, $registered);
     }
+
+    /**
+     * @group ZF-10793
+     */
+    public function testSetValueCreateContainer()
+    {
+        $this->registry->setContainerClass('ZendTest\View\Helper\Placeholder\MockContainer');
+        $data = array(
+            'ZF-10793'
+        );
+        $container = $this->registry->createContainer('foo', $data);
+        $this->assertEquals(array('ZF-10793'), $container->data);
+    }
 }
 
 class MockContainer extends Container\AbstractContainer
 {
+    public $data = array();
+
+    public function __construct($data)
+    {
+        $this->data = $data;
+    }
 }
 
 class BogusContainer

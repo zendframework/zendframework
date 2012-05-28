@@ -189,8 +189,8 @@ class Stream extends Response
             return '';
         }
 
-        $this->content = stream_get_contents($this->stream);
-        $this->stream  = null; //Could be listened by others
+        $this->content .= stream_get_contents($this->stream);
+        $this->stream   = null; //Could be listened by others
     }
 
     /**

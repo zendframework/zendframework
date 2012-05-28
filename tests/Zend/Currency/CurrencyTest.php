@@ -22,7 +22,7 @@
 namespace ZendTest\Currency;
 
 use Zend\Cache\StorageFactory as CacheFactory,
-    Zend\Cache\Storage\Adapter\AdapterInterface as CacheAdapter,
+    Zend\Cache\Storage\StorageInterface as CacheStorage,
     Zend\Currency,
     Zend\Locale;
 
@@ -40,11 +40,6 @@ class CurrencyTest extends \PHPUnit_Framework_TestCase
     {
         $this->_cache = CacheFactory::adapterFactory('memory', array('memory_limit' => 0));
         Currency\Currency::setCache($this->_cache);
-    }
-
-    public function tearDown()
-    {
-        Currency\Currency::clearCache(CacheAdapter::MATCH_ALL);
     }
 
     /**
@@ -549,10 +544,7 @@ class CurrencyTest extends \PHPUnit_Framework_TestCase
     public function testCaching()
     {
         $cache = Currency\Currency::getCache();
-        $this->assertTrue($cache instanceof CacheAdapter);
-        $this->assertTrue(Currency\Currency::hasCache());
-
-        Currency\Currency::clearCache();
+        $this->assertTrue($cache instanceof CacheStorage);
         $this->assertTrue(Currency\Currency::hasCache());
 
         Currency\Currency::removeCache();

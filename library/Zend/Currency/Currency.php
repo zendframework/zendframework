@@ -20,7 +20,7 @@
 
 namespace Zend\Currency;
 
-use Zend\Cache\Storage\Adapter\AdapterInterface as CacheAdapter,
+use Zend\Cache\Storage\StorageInterface as CacheStorage,
     Zend\Locale,
     Zend\Locale\Data\Cldr;
 
@@ -477,7 +477,7 @@ class Currency
     /**
      * Returns the set cache
      *
-     * @return CacheAdapter The set cache
+     * @return CacheStorage The set cache
      */
     public static function getCache()
     {
@@ -487,10 +487,10 @@ class Currency
     /**
      * Sets a cache for Zend_Currency
      *
-     * @param  CacheAdapter $cache Cache to set
+     * @param  CacheStorage $cache Cache to set
      * @return void
      */
-    public static function setCache(CacheAdapter $cache)
+    public static function setCache(CacheStorage $cache)
     {
         Cldr::setCache($cache);
     }
@@ -513,16 +513,6 @@ class Currency
     public static function removeCache()
     {
         Cldr::removeCache();
-    }
-
-    /**
-     * Clears all set cache data
-     *
-     * @return void
-     */
-    public static function clearCache($tag = null)
-    {
-        Cldr::clearCache($tag);
     }
 
     /**

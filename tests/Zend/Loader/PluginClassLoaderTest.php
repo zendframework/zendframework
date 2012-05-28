@@ -33,6 +33,9 @@ use Zend\Loader\PluginClassLoader;
  */
 class PluginClassLoaderTest extends \PHPUnit_Framework_TestCase
 {
+    /** @var PluginClassLoader */
+    public $loader;
+
     public function setUp()
     {
         // Clear any static maps
@@ -262,8 +265,8 @@ class PluginClassLoaderTest extends \PHPUnit_Framework_TestCase
 
     public function testRegisterPluginsCanAcceptArrayElementWithClassNameProvidingAMap()
     {
-        $this->loader->registerPlugins(array('ZendTest\Loader\TestAsset\TestPluginMap'));
         $pluginMap = new TestAsset\TestPluginMap;
+        $this->loader->registerPlugins(array('ZendTest\Loader\TestAsset\TestPluginMap'));
         $this->assertEquals($pluginMap->map, $this->loader->getRegisteredPlugins());
     }
 

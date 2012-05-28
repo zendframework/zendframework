@@ -20,8 +20,7 @@
 
 namespace Zend\Validator\File;
 
-use Zend\Loader,
-    Zend\Validator\Exception;
+use Zend\Validator\Exception;
 
 /**
  * Validator for the sha1 hash of given files
@@ -107,7 +106,7 @@ class Sha1 extends Hash
         }
 
         // Is file readable ?
-        if (!Loader::isReadable($value)) {
+        if (false === stream_resolve_include_path($value)) {
             return $this->_throw($file, self::NOT_FOUND);
         }
 

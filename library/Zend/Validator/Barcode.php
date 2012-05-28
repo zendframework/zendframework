@@ -103,9 +103,6 @@ class Barcode extends AbstractValidator
         if (is_string($adapter)) {
             $adapter = ucfirst(strtolower($adapter));
             $adapter = 'Zend\Validator\Barcode\\' . $adapter;
-            if (\Zend\Loader::isReadable('Zend/Validator/Barcode/' . $adapter . '.php')) {
-                $adapter = 'Zend\Validator\Barcode\\' . $adapter;
-            }
 
             if (!class_exists($adapter)) {
                 throw new Exception\InvalidArgumentException('Barcode adapter matching "' . $adapter . '" not found');

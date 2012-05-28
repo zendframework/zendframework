@@ -22,7 +22,7 @@
 namespace ZendTest\Translator\Adapter;
 
 use Zend\Cache\StorageFactory as CacheFactory,
-    Zend\Cache\Storage\Adapter\AdapterInterface as CacheAdapter,
+    Zend\Cache\Storage\StorageInterface as CacheStorage,
     Zend\Locale,
     Zend\Translator,
     Zend\Translator\Adapter;
@@ -46,18 +46,12 @@ class ArrayTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        if (Adapter\ArrayAdapter::hasCache()) {
-            Adapter\ArrayAdapter::clearCache();
-            Adapter\ArrayAdapter::removeCache();
-        }
+        Adapter\ArrayAdapter::removeCache();
     }
 
     public function tearDown()
     {
-        if (Adapter\ArrayAdapter::hasCache()) {
-            Adapter\ArrayAdapter::clearCache();
-            Adapter\ArrayAdapter::removeCache();
-        }
+        Adapter\ArrayAdapter::removeCache();
     }
 
     public function testCreate()
@@ -277,14 +271,14 @@ class ArrayTest extends \PHPUnit_Framework_TestCase
 
         $adapter = new Adapter\ArrayAdapter(__DIR__ . '/_files/translation_en.php', 'en');
         $cache   = Adapter\ArrayAdapter::getCache();
-        $this->assertTrue($cache instanceof CacheAdapter);
+        $this->assertTrue($cache instanceof CacheStorage);
         unset ($adapter);
 
         Adapter\ArrayAdapter::setCache($cache);
         $this->assertTrue(Adapter\ArrayAdapter::hasCache());
         $adapter = new Adapter\ArrayAdapter(__DIR__ . '/_files/translation_en.php', 'en');
         $cache   = Adapter\ArrayAdapter::getCache();
-        $this->assertTrue($cache instanceof CacheAdapter);
+        $this->assertTrue($cache instanceof CacheStorage);
 
         Adapter\ArrayAdapter::removeCache();
         $this->assertFalse(Adapter\ArrayAdapter::hasCache());
@@ -307,7 +301,7 @@ class ArrayTest extends \PHPUnit_Framework_TestCase
 
         $adapter = new Adapter\ArrayAdapter(__DIR__ . '/_files/translation_en.php', 'en');
         $cache   = Adapter\ArrayAdapter::getCache();
-        $this->assertTrue($cache instanceof CacheAdapter);
+        $this->assertTrue($cache instanceof CacheStorage);
 
         $adapter->addTranslation(__DIR__ . '/_files/translation_en.php', 'ru', array('reload' => true));
         $test = $adapter->getMessages('all');

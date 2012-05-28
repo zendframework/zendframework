@@ -107,6 +107,8 @@ class HeadTitle extends Placeholder\Container\Standalone
             );
         }
         $this->_defaultAttachOrder = $setType;
+
+        return $this;
     }
 
     /**

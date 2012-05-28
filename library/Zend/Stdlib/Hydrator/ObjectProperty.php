@@ -60,7 +60,7 @@ class ObjectProperty implements HydratorInterface
      * 
      * @param  array $data 
      * @param  object $object 
-     * @return void
+     * @return object
      * @throws Exception\BadMethodCallException for a non-object $object
      */
     public function hydrate(array $data, $object)
@@ -74,5 +74,6 @@ class ObjectProperty implements HydratorInterface
         foreach ($data as $property => $value) {
             $object->$property = $value;
         }
+        return $object;
     }
 }

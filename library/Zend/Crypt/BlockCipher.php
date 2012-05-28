@@ -180,7 +180,7 @@ class BlockCipher
      */
     public function setBinaryOutput($value)
     {
-        $this->binary = (boolean)$value;
+        $this->binaryOutput = (boolean)$value;
         return $this;
     }
 
@@ -191,7 +191,7 @@ class BlockCipher
      */
     public function getBinaryOutput()
     {
-        return $this->binary;
+        return $this->binaryOutput;
     }
 
     /**

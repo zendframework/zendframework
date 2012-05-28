@@ -84,7 +84,6 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
         $this->_config = Config\Factory::fromFile(__DIR__ . '/_files/config.xml', true);
 
         $this->_cache = CacheFactory::adapterFactory('memory', array('memory_limit' => 0));
-        $this->_cache->clear(CacheAdapter::MATCH_ALL);
         Paginator\Paginator::setCache($this->_cache);
 
         $this->_restorePaginatorDefaults();
@@ -92,10 +91,6 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
 
     protected function tearDown()
     {
-        if ($this->_cache) {
-            $this->_cache->clear(CacheAdapter::MATCH_ALL);
-            $this->_cache = null;
-        }
         $this->_dbConn = null;
         $this->_testCollection = null;
         $this->_paginator = null;
@@ -142,7 +137,6 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
 
         Paginator\Paginator::setScrollingStyleBroker(new Paginator\ScrollingStyleBroker());
 
-        $this->_cache->clear(CacheAdapter::MATCH_ALL);
         $this->_paginator->setCacheEnabled(true);
     }
 

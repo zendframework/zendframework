@@ -466,7 +466,9 @@ class ViewManager implements ListenerAggregateInterface
      *
      * If there is a "mvc_strategies" key of the view manager configuration, loop
      * through it. Pull each as a service fromt the service manager, and, if it
-     * is a ListenerAggregate, pass $events to it's attach method.
+     * is a ListenerAggregate, attach it to the view, at priority 100. This
+     * latter allows each to trigger before the default mvc rendering strategy,
+     * and for them to trigger in the order they are registered.
      */
     protected function registerMvcRenderingStrategies(EventManagerInterface $events)
     {
@@ -488,7 +490,7 @@ class ViewManager implements ListenerAggregateInterface
 
             $listener = $this->services->get($mvcStrategy);
             if ($listener instanceof ListenerAggregateInterface) {
-                $listener->attach($events);
+                $events->attach($listener, 100);
             }
         }
     }

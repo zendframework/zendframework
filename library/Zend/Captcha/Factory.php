@@ -81,7 +81,9 @@ abstract class Factory
                 $class
             ));
         }
-        $options = array();
+        
+        unset($options['class']);
+
         if (isset($options['options'])) {
             $options = $options['options'];
         }

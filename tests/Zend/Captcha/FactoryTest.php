@@ -181,4 +181,15 @@ class FactoryTest extends TestCase
         ));
         $this->assertInstanceOf('Zend\Captcha\ReCaptcha', $captcha);
     }
+
+    public function testOptionsArePassedToCaptchaAdapter()
+    {
+        $captcha = Captcha\Factory::factory(array(
+            'class'   => 'ZendTest\Captcha\TestAsset\MockCaptcha',
+            'options' => array(
+                'foo' => 'bar',
+            ),
+        ));
+        $this->assertEquals(array('foo' => 'bar'), $captcha->options);
+    }
 }

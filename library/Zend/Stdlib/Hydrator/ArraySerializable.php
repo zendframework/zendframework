@@ -67,10 +67,8 @@ class ArraySerializable implements HydratorInterface
     {
         if (is_callable(array($object, 'exchangeArray'))) {
             $object->exchangeArray($data);
-            return;
         } else if (is_callable(array($object, 'populate'))) {
             $object->populate($data);
-            return;
         } else {
             throw new Exception\BadMethodCallException(sprintf(
                 '%s expects the provided object to implement exchangeArray() or populate()',

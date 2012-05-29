@@ -9,58 +9,72 @@
  */
 namespace Zend\Crypt\PublicKey\Rsa;
 
+use Countable;
+
 /**
  * @category   Zend
  * @package    Zend_Crypt
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Key implements \Countable
+abstract class AbstractKey implements Countable
 {
+    const DEFAULT_KEY_SIZE = 2048;
+
     /**
      * @var string
      */
-    protected $_pemString = null;
+    protected $pemString = null;
 
     /**
      * Bits, key string and type of key
      *
      * @var array
      */
-    protected $_details = array();
+    protected $details = array();
 
     /**
      * Key Resource
      *
      * @var resource
      */
-    protected $_opensslKeyResource = null;
+    protected $opensslKeyResource = null;
 
     /**
-     * Retrieves key resource
+     * Retrieve openssl key resource
      *
      * @return resource
      */
     public function getOpensslKeyResource()
     {
-        return $this->_opensslKeyResource;
+        return $this->opensslKeyResource;
     }
 
     /**
-     * To string
+     * Encrypt using this key
      *
+     * @abstract
+     * @param string $data
      * @return string
-     * @throws Exception\RuntimeException
      */
-    public function toString()
-    {
-        if (!empty($this->_pemString)) {
-            return $this->_pemString;
-        } elseif (!empty($this->_certificateString)) {
-            return $this->_certificateString;
-        }
-        throw new Exception\RuntimeException('No public key string representation is available');
-    }
+    abstract public function encrypt($data);
+
+    /**
+     * Decrypt using this key
+     *
+     * @abstract
+     * @param string $data
+     * @return string
+     */
+    abstract public function decrypt($data);
+
+    /**
+     * Get string representation of this key
+     *
+     * @abstract
+     * @return string
+     */
+    abstract public function toString();
 
     /**
      * @return string
@@ -77,7 +91,7 @@ class Key implements \Countable
      */
     public function count()
     {
-        return $this->_details['bits'];
+        return $this->details['bits'];
     }
 
     /**
@@ -87,6 +101,6 @@ class Key implements \Countable
      */
     public function getType()
     {
-        return $this->_details['type'];
+        return $this->details['type'];
     }
 }

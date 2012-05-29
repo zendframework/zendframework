@@ -92,8 +92,10 @@ class Mcrypt implements SymmetricInterface
     protected $supportedModes = array(
         'cbc'  => MCRYPT_MODE_CBC,
         'cfb'  => MCRYPT_MODE_CFB,
+        'ctr'  => 'ctr',
         'ofb'  => MCRYPT_MODE_OFB,
-        'nofb' => MCRYPT_MODE_NOFB
+        'nofb' => MCRYPT_MODE_NOFB,
+        'ncfb' => 'ncfb'
     );
 
     /**

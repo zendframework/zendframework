@@ -253,9 +253,6 @@ class ViewManager implements ListenerAggregateInterface
         $stack = array();
         if (isset($this->config['template_path_stack'])) {
             $stack = $this->config['template_path_stack'];
-            if ($stack instanceof Traversable) {
-                $stack = ArrayUtils::iteratorToArray($stack);
-            }
         }
         $templatePathStack = new ViewResolver\TemplatePathStack();
         $templatePathStack->addPaths($stack);

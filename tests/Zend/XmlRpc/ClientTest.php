@@ -655,6 +655,24 @@ class ClientTest extends \PHPUnit_Framework_TestCase
           );
     }
 
+    /**
+     * @group ZF-1897
+     */
+    public function testHandlesLeadingOrTrailingWhitespaceInChunkedResponseProperly()
+    {
+        $baseUri = "http://foo:80";
+        $this->httpAdapter = new Adapter\Test();
+        $this->httpClient = new Http\Client(null, array('adapter' => $this->httpAdapter));
+        
+        $respBody = file_get_contents(dirname(__FILE__) . "/_files/ZF1897-response-chunked.txt");
+        $this->httpAdapter->setResponse($respBody);
+
+        $this->xmlrpcClient = new Client($baseUri);
+        $this->xmlrpcClient->setHttpClient($this->httpClient);
+        
+        $this->assertEquals('FOO', $this->xmlrpcClient->call('foo'));
+    }
+
     // Helpers
     public function setServerResponseTo($nativeVars)
     {

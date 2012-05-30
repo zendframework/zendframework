@@ -621,6 +621,40 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $signature = $introspector->getMethodSignature('add');
     }
 
+
+    /**
+     * @group ZF-8580
+     */
+    public function testCallSelectsCorrectSignatureIfMoreThanOneIsAvailable()
+    {
+        $this->mockIntrospector();
+
+        $this->mockedIntrospector
+             ->expects($this->exactly(2))
+             ->method('getMethodSignature')
+             ->with('get')
+             ->will($this->returnValue(array(
+                 array('parameters' => array('int')),
+                 array('parameters' => array('array'))
+             )));
+
+          $expectedResult = 'array';
+          $this->setServerResponseTo($expectedResult);
+
+          $this->assertSame(
+              $expectedResult,
+              $this->xmlrpcClient->call('get', array(array(1)))
+          );
+
+          $expectedResult = 'integer';
+          $this->setServerResponseTo($expectedResult);
+
+          $this->assertSame(
+              $expectedResult,
+              $this->xmlrpcClient->call('get', array(1))
+          );
+    }
+
     // Helpers
     public function setServerResponseTo($nativeVars)
     {

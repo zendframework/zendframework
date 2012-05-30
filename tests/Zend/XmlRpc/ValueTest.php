@@ -20,13 +20,14 @@
  */
 
 namespace ZendTest\XmlRpc;
+use stdClass;
 use Zend\XmlRpc\Value;
 use Zend\XmlRpc\Generator\GeneratorInterface as Generator;
 use Zend\Math\BigInteger;
 use Zend\Date;
 
 /**
- * Test case for Zend_XmlRpc_Value
+ * Test case for Value
  *
  * @category   Zend
  * @package    Zend_XmlRpc
@@ -785,6 +786,84 @@ class ValueTest extends \PHPUnit_Framework_TestCase
     {
         $xmlRpcValue = new Value\String('foo');
         $this->assertSame($xmlRpcValue, Value::getXmlRpcValue($xmlRpcValue));
+    }
+
+
+    public function testGetXmlRpcTypeByValue()
+    {
+        $this->assertSame(
+            Value::XMLRPC_TYPE_NIL,
+            Value::getXmlRpcTypeByValue(new Value\Nil)
+        );
+
+        $this->assertEquals(
+            Value::XMLRPC_TYPE_DATETIME,
+            Value::getXmlRpcTypeByValue(new \DateTime)
+        );
+
+        $this->assertEquals(
+            Value::XMLRPC_TYPE_DATETIME,
+            Value::getXmlRpcTypeByValue(new \Zend\Date\Date)
+        );
+
+        $this->assertEquals(
+            Value::XMLRPC_TYPE_STRUCT,
+            Value::getXmlRpcTypeByValue(array('foo' => 'bar'))
+        );
+
+        $object = new stdClass;
+        $object->foo = 'bar';
+
+        $this->assertEquals(
+            Value::XMLRPC_TYPE_STRUCT,
+            Value::getXmlRpcTypeByValue($object)
+        );
+
+        $this->assertEquals(
+            Value::XMLRPC_TYPE_ARRAY,
+            Value::getXmlRpcTypeByValue(new stdClass)
+        );
+
+        $this->assertEquals(
+            Value::XMLRPC_TYPE_ARRAY,
+            Value::getXmlRpcTypeByValue(array(1, 3, 3, 7))
+        );
+
+        $this->assertEquals(
+            Value::XMLRPC_TYPE_INTEGER,
+            Value::getXmlRpcTypeByValue(42)
+        );
+
+        $this->assertEquals(
+            Value::XMLRPC_TYPE_DOUBLE,
+            Value::getXmlRpcTypeByValue(13.37)
+        );
+
+        $this->assertEquals(
+            Value::XMLRPC_TYPE_BOOLEAN,
+            Value::getXmlRpcTypeByValue(true)
+        );
+
+        $this->assertEquals(
+            Value::XMLRPC_TYPE_BOOLEAN,
+            Value::getXmlRpcTypeByValue(false)
+        );
+
+        $this->assertEquals(
+            Value::XMLRPC_TYPE_NIL,
+            Value::getXmlRpcTypeByValue(null)
+        );
+
+        $this->assertEquals(
+            Value::XMLRPC_TYPE_STRING,
+            Value::getXmlRpcTypeByValue('Zend Framework')
+        );
+    }
+
+    public function testGetXmlRpcTypeByValueThrowsExceptionOnInvalidValue()
+    {
+        $this->setExpectedException('Zend\XmlRpc\Exception\InvalidArgumentException');
+        Value::getXmlRpcTypeByValue(fopen(__FILE__, 'r'));
     }
 
     // Custom Assertions and Helper Methods

@@ -59,7 +59,7 @@ class TokenArrayScanner implements ScannerInterface
      */
     public function getDocComment()
     {
-        foreach ($this->tokens as $token) {
+	    foreach ($this->tokens as $token) {
             $type    = $token[0];
             $value   = $token[1];
             $lineNum = $token[2];
@@ -67,7 +67,6 @@ class TokenArrayScanner implements ScannerInterface
                 continue;
             } elseif ($type == T_DOC_COMMENT) {
                 $this->docComment = $value;
-                $this->startLine  = $lineNum + substr_count($value, "\n") + 1;
                 return $this->docComment;
             } else {
                 // Only whitespace is allowed before file docblocks

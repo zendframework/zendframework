@@ -151,7 +151,7 @@ class BaseInputFilter implements InputFilterInterface
         $inputs = $this->validationGroup ?: array_keys($this->inputs);
         foreach ($inputs as $name) {
             $input = $this->inputs[$name];
-            if (!array_key_exists($name, $this->data) or ($this->data[$name] == "")) {
+            if (!array_key_exists($name, $this->data) || ($this->data[$name] == '')) {
                 // - test if input is required
                 if (!$input->isRequired()) {
                     $this->validInputs[$name] = $input;
@@ -163,7 +163,7 @@ class BaseInputFilter implements InputFilterInterface
                     continue;
                 }
                 // make sure we have a value (empty) for validation
-                $this->data[$name] = "";
+                $this->data[$name] = '';
             }
             
             $value = $this->data[$name];

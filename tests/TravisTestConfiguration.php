@@ -780,6 +780,11 @@ defined('TESTS_ZEND_SERVICE_YAHOO_ONLINE_APPID') || define('TESTS_ZEND_SERVICE_Y
 defined('TESTS_ZEND_SOAP_AUTODISCOVER_ONLINE_SERVER_BASEURI') || define('TESTS_ZEND_SOAP_AUTODISCOVER_ONLINE_SERVER_BASEURI', false);
 
 /**
+ * Zend\TimeSync tests
+ */
+defined('TESTS_ZEND_TIMESYNC_ONLINE_ENABLED') || define('TESTS_ZEND_TIMESYNC_ONLINE_ENABLED', false);
+
+/**
  * Zend\Uri tests
  *
  * Setting CRASH_TEST_ENABLED to true will enable some tests that may

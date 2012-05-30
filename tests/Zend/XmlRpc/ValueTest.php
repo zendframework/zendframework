@@ -39,6 +39,8 @@ use Zend\Date;
  */
 class ValueTest extends \PHPUnit_Framework_TestCase
 {
+    public $xmlRpcDateFormat = 'Ymd\\TH:i:s';
+
     // Boolean
 
     public function testFactoryAutodetectsBoolean()
@@ -368,8 +370,8 @@ class ValueTest extends \PHPUnit_Framework_TestCase
         $xml    = '<value><array/></value>';
 
         $this->setExpectedException('Zend\XmlRpc\Exception\ValueException',
-        	'Invalid XML for XML-RPC native array type: ARRAY tag must contain DATA tag'
-        	);
+            'Invalid XML for XML-RPC native array type: ARRAY tag must contain DATA tag'
+            );
         $val = Value::getXmlRpcValue($xml, Value::XML_STRING);
     }
 
@@ -574,8 +576,8 @@ class ValueTest extends \PHPUnit_Framework_TestCase
 
         $this->assertXmlRpcType('dateTime', $val);
 
-        $expected = '1997-07-16T19:20+01:00';
-        $this->assertSame(strtotime($native), strtotime($val->getValue()));
+        $expected = new DateTime($native);
+        $this->assertSame($expected->format($this->xmlRpcDateFormat), $val->getValue());
     }
 
     public function testMarshalDateTimeFromNativeStringProducesIsoOutput()
@@ -586,16 +588,15 @@ class ValueTest extends \PHPUnit_Framework_TestCase
 
         $this->assertXmlRpcType('dateTime', $val);
 
-        $expected = date('c', strtotime($native));
-        $expected = substr($expected, 0, strlen($expected) - 6);
-        $expected = str_replace('-', '', $expected);
+        $expected = new DateTime($native);
         $received = $val->getValue();
-        $this->assertEquals($expected, $received);
+        $this->assertEquals($expected->format($this->xmlRpcDateFormat), $received);
     }
 
     public function testMarshalDateTimeFromInvalidString()
     {
-        $this->setExpectedException('Zend\XmlRpc\Exception\ValueException', "Cannot convert given value 'foobarbaz' to a timestamp");
+        $this->setExpectedException('Zend\XmlRpc\Exception\ValueException', 
+                                    "The timezone could not be found in the database");
         Value::getXmlRpcValue('foobarbaz', Value::XMLRPC_TYPE_DATETIME);
     }
 
@@ -607,6 +608,17 @@ class ValueTest extends \PHPUnit_Framework_TestCase
 
         $this->assertXmlRpcType('dateTime', $val);
         $this->assertSame($native, strtotime($val->getValue()));
+    }
+
+    /**
+     * @group ZF-11588
+     */
+    public function testMarshalDateTimeBeyondUnixEpochFromNativeStringPassedToConstructor()
+    {
+        $native = '2040-01-01T00:00:00';
+        $value  = new Value\DateTime($native);
+        $expected = new DateTime($native);
+        $this->assertSame($expected->format($this->xmlRpcDateFormat), $value->getValue());
     }
 
     /**
@@ -623,7 +635,8 @@ class ValueTest extends \PHPUnit_Framework_TestCase
 
         $this->assertXmlRpcType('dateTime', $val);
         $this->assertEquals('dateTime.iso8601', $val->getType());
-        $this->assertSame(strtotime($iso8601), strtotime($val->getValue()));
+        $expected = new DateTime($iso8601);
+        $this->assertSame($expected->format($this->xmlRpcDateFormat), $val->getValue());
         $this->assertEquals($this->wrapXml($xml), $val->saveXml());
     }
 

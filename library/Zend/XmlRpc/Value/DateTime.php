@@ -64,12 +64,13 @@ class DateTime extends Scalar
         } elseif (is_numeric($value)) { // The value is numeric, we make sure it is an integer
             $this->_value = date($this->_phpFormatString, (int)$value);
         } else {
-            $timestamp = strtotime($value);
-            if ($timestamp === false || $timestamp == -1) { // cannot convert the value to a timestamp
-                throw new Exception\ValueException('Cannot convert given value \''. $value .'\' to a timestamp');
+            try {
+                $dateTime = new \DateTime($value);
+            } catch (\Exception $e) {
+                throw new Exception\ValueException($e->getMessage(), $e->getCode(), $e);
             }
 
-            $this->_value = date($this->_phpFormatString, $timestamp); // Convert the timestamp to iso8601 format
+            $this->_value = $dateTime->format($this->_phpFormatString); // Convert the DateTime to iso8601 format
         }
     }
 

@@ -54,7 +54,7 @@ class TimeSyncTest extends \PHPUnit_Framework_TestCase
     {
         $server = new TimeSync\TimeSync();
 
-        $this->assertTrue($server instanceof TimeSync\TimeSync);
+        $this->assertInstanceOf('Zend\TimeSync\TimeSync', $server);
     }
 
     /**
@@ -67,7 +67,7 @@ class TimeSyncTest extends \PHPUnit_Framework_TestCase
         $server = new TimeSync\TimeSync($this->timeservers);
         $result = $server->getServer('server_f');
 
-        $this->assertTrue($result instanceof TimeSync\Protocol);
+        $this->assertInstanceOf('Zend\TimeSync\Protocol', $result);
     }
 
     /**
@@ -82,7 +82,7 @@ class TimeSyncTest extends \PHPUnit_Framework_TestCase
         $server->setServer('windows_time');
         $result = $server->getServer();
 
-        $this->assertTrue($result instanceof TimeSync\Ntp);
+        $this->assertInstanceOf('Zend\TimeSync\Ntp', $result);
     }
 
     /**
@@ -96,7 +96,7 @@ class TimeSyncTest extends \PHPUnit_Framework_TestCase
         $server->setServer('windows_time');
         $result = $server->getServer();
 
-        $this->assertTrue($result instanceof TimeSync\Ntp);
+        $this->assertInstanceOf('Zend\TimeSync\Ntp', $result);
     }
 
     /**
@@ -110,7 +110,7 @@ class TimeSyncTest extends \PHPUnit_Framework_TestCase
         $server->setServer('windows_time');
         $result = $server->getServer();
 
-        $this->assertTrue($result instanceof TimeSync\Sntp);
+        $this->assertInstanceOf('Zend\TimeSync\SNtp', $result);
     }
 
     /**
@@ -215,14 +215,14 @@ class TimeSyncTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetDate()
     {
+        if (!constant('TESTS_ZEND_TIMESYNC_ONLINE_ENABLED')) {
+            $this->markTestSkipped('Zend\TimeSync online tests are not enabled in TestConfiguration');
+        }
+
         $server = new TimeSync\TimeSync($this->timeservers);
 
-        try {
-            $result = $server->getDate();
-            $this->assertTrue($result instanceof \Zend\Date\Date);
-        } catch (TimeSync\Exception\InvalidArgumentException $e) {
-            $this->assertContains('All timeservers are bogus', $e->getMessage());
-        }
+        $result = $server->getDate();
+        $this->assertInstanceOf('Zend\Date\Date', $result);
     }
 
     /**
@@ -232,14 +232,14 @@ class TimeSyncTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetNtpDate()
     {
+        if (!constant('TESTS_ZEND_TIMESYNC_ONLINE_ENABLED')) {
+            $this->markTestSkipped('Zend\TimeSync online tests are not enabled in TestConfiguration');
+        }
+
         $server = new TimeSync\TimeSync('ntp://time.windows.com', 'time_windows');
 
-        try {
-            $result = $server->getDate();
-            $this->assertTrue($result instanceof \Zend\Date\Date);
-        } catch (TimeSync\Exception\RuntimeException $e) {
-            $this->assertContains('All timeservers are bogus', $e->getMessage());
-        }
+        $result = $server->getDate();
+        $this->assertInstanceOf('Zend\Date\Date', $result);
     }
 
     /**
@@ -249,14 +249,14 @@ class TimeSyncTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetSntpDate()
     {
+        if (!constant('TESTS_ZEND_TIMESYNC_ONLINE_ENABLED')) {
+            $this->markTestSkipped('Zend\TimeSync online tests are not enabled in TestConfiguration');
+        }
+
         $server = new TimeSync\TimeSync('sntp://time-C.timefreq.bldrdoc.gov');
 
-        try {
-            $result = $server->getDate();
-            $this->assertTrue($result instanceof \Zend\Date\Date);
-        } catch (TimeSync\Exception\InvalidArgumentException $e) {
-            $this->assertContains('All timeservers are bogus', $e->getMessage());
-        }
+        $result = $server->getDate();
+        $this->assertInstanceOf('Zend\Date\Date', $result);
     }
 
     /**
@@ -279,7 +279,7 @@ class TimeSyncTest extends \PHPUnit_Framework_TestCase
             $i = 0;
             while($e = $e->getPrevious()) {
                 $i++;
-                $this->assertTrue($e instanceof TimeSync\Exception\ExceptionInterface);
+                $this->assertInstanceOf('Zend\TimeSync\Exception\ExceptionInterface', $e);
             }
             $this->assertEquals(2, $i);
         }
@@ -295,7 +295,7 @@ class TimeSyncTest extends \PHPUnit_Framework_TestCase
         $servers = new TimeSync\TimeSync($this->timeservers);
 
         foreach ($servers as $key => $server) {
-            $this->assertTrue($server instanceof TimeSync\Protocol);
+            $this->assertInstanceOf('Zend\TimeSync\Protocol', $server);
         }
     }
 
@@ -306,14 +306,14 @@ class TimeSyncTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetInfo()
     {
-        $server = new TimeSync\TimeSync('time.windows.com');
-        try {
-            $date   = $server->getDate();
-            $result = $server->getInfo();
-
-            $this->assertTrue(count($result) > 0);
-        } catch (TimeSync\Exception\ExceptionInterface  $e) {
-            // nothing
+        if (!constant('TESTS_ZEND_TIMESYNC_ONLINE_ENABLED')) {
+            $this->markTestSkipped('Zend\TimeSync online tests are not enabled in TestConfiguration');
         }
+
+        $server = new TimeSync\TimeSync('time.windows.com');
+        $date   = $server->getDate();
+        $result = $server->getInfo();
+
+        $this->assertTrue(count($result) > 0);
     }
 }

@@ -161,15 +161,15 @@ class ParameterGenerator extends AbstractGenerator
      *
      * Certain variables are difficult to express
      *
-     * @param null|bool|string|int|float|ValueGenerator $defaultValue
+     * @param null|bool|string|int|float|array|ValueGenerator $defaultValue
      * @return ParameterGenerator
      */
     public function setDefaultValue($defaultValue)
     {
-        if (!$defaultValue instanceof ValueGenerator) {
-            $this->defaultValue = new ValueGenerator($defaultValue);
-        } else {
+        if ($defaultValue instanceof ValueGenerator) {
             $this->defaultValue = $defaultValue;
+        } else {
+            $this->defaultValue = new ValueGenerator($defaultValue);
         }
         /*
         if ($defaultValue === null) {
@@ -265,9 +265,9 @@ class ParameterGenerator extends AbstractGenerator
             $output .= ' = ';
             if (is_string($this->defaultValue)) {
                 $output .= ValueGenerator::escape($this->defaultValue);
-            } else if ($this->defaultValue instanceof ValueGenerator) {
+            } elseif ($this->defaultValue instanceof ValueGenerator) {
                 $this->defaultValue->setOutputMode(ValueGenerator::OUTPUT_SINGLE_LINE);
-                $output .= (string)$this->defaultValue;
+                $output .= $this->defaultValue;
             } else {
                 $output .= $this->defaultValue;
             }

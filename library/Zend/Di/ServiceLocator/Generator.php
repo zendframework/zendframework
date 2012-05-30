@@ -1,16 +1,19 @@
 <?php
-// @todo refactor to use new Definition interface
+
 namespace Zend\Di\ServiceLocator;
 
 use Zend\Di\Di,
-    Zend\CodeGenerator\Php as CodeGen,
-    Zend\Di\DependencyInjectionInterface,
+    Zend\Code\Generator as CodeGen,
     Zend\Di\Exception;
 
+/**
+ * @todo refactor to use new Definition interface
+ */
 class Generator
 {
     protected $containerClass = 'ApplicationContext';
 
+    /** @var DependencyInjectorProxy */
     protected $injector;
 
     protected $namespace;
@@ -20,8 +23,7 @@ class Generator
      *
      * Requires a DependencyInjection manager on which to operate.
      * 
-     * @param  DependencyInjectionInterface $injector
-     * @return void
+     * @param Di $injector
      */
     public function __construct(Di $injector)
     {
@@ -59,7 +61,7 @@ class Generator
      * created the specified class and service locator methods.
      * 
      * @param  null|string $filename 
-     * @return CodeGen\PhpFile
+     * @return CodeGen\FileGenerator
      */
     public function getCodeGenerator($filename = null)
     {
@@ -185,7 +187,7 @@ class Generator
             // End getter body
             $getterBody .= "return \$object;\n";
 
-            $getterDef = new CodeGen\PhpMethod();
+            $getterDef = new CodeGen\MethodGenerator();
             $getterDef->setName($getter)
                       ->setBody($getterBody);
             $getters[] = $getterDef;
@@ -212,16 +214,14 @@ class Generator
         $switch .= "}\n\n";
 
         // Build get() method
-        $nameParam   = new CodeGen\PhpParameter();
+        $nameParam   = new CodeGen\ParameterGenerator();
         $nameParam->setName('name');
-        $defaultParams = new CodeGen\PhpParameterDefaultValue();
-        $defaultParams->setValue(array());
-        $paramsParam = new CodeGen\PhpParameter();
+        $paramsParam = new CodeGen\ParameterGenerator();
         $paramsParam->setName('params')
                     ->setType('array')
-                    ->setDefaultValue($defaultParams);
+                    ->setDefaultValue(array());
 
-        $get = new CodeGen\PhpMethod();
+        $get = new CodeGen\MethodGenerator();
         $get->setName('get');
         $get->setParameters(array(
             $nameParam,
@@ -238,7 +238,7 @@ class Generator
         }
 
         // Create class code generation object
-        $container = new CodeGen\PhpClass();
+        $container = new CodeGen\ClassGenerator();
         $container->setName($this->containerClass)
                   ->setExtendedClass('ServiceLocator')
                   ->addMethodFromGenerator($get)
@@ -246,7 +246,7 @@ class Generator
                   ->addMethods($aliasMethods);
 
         // Create PHP file code generation object
-        $classFile = new CodeGen\PhpFile();
+        $classFile = new CodeGen\FileGenerator();
         $classFile->setUse('Zend\Di\ServiceLocator')
                   ->setClass($container);
 
@@ -294,12 +294,12 @@ class Generator
      * 
      * @param  string $alias 
      * @param  class $class Class to which alias refers
-     * @return CodeGen\PhpMethod
+     * @return CodeGen\MethodGenerator
      */
     protected function getCodeGenMethodFromAlias($alias, $class)
     {
         $alias = $this->normalizeAlias($alias);
-        $method = new CodeGen\PhpMethod();
+        $method = new CodeGen\MethodGenerator();
         $method->setName($alias)
                ->setBody(sprintf('return $this->get(\'%s\');', $class));
         return $method;

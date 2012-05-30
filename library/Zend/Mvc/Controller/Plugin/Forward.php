@@ -66,7 +66,7 @@ class Forward extends AbstractPlugin
      */
     public function dispatch($name, array $params = null)
     {
-        $event   = $this->getEvent();
+        $event   = clone($this->getEvent());
         $locator = $this->getLocator();
         $scoped  = false;
 
@@ -80,21 +80,18 @@ class Forward extends AbstractPlugin
         if (!$controller instanceof Dispatchable) {
             throw new Exception\DomainException('Can only forward to DispatchableInterface classes; class of type ' . get_class($controller) . ' received');
         }
+        if ($controller instanceof InjectApplicationEventInterface) {
+            $controller->setEvent($event);
+        }
         if (!$scoped) {
-            if ($controller instanceof InjectApplicationEventInterface) {
-                $controller->setEvent($event);
-            }
             if ($controller instanceof ServiceLocatorAwareInterface) {
                 $controller->setServiceLocator($locator);
             }
         }
 
         // Allow passing parameters to seed the RouteMatch with
-        $cachedMatches = false;
         if ($params) {
-            $matches       = new RouteMatch($params);
-            $cachedMatches = $event->getRouteMatch();
-            $event->setRouteMatch($matches);
+            $event->setRouteMatch(new RouteMatch($params));
         }
 
         if ($this->numNestedForwards > $this->maxNestedForwards) {
@@ -105,10 +102,6 @@ class Forward extends AbstractPlugin
         $return = $controller->dispatch($event->getRequest(), $event->getResponse());
 
         $this->numNestedForwards--;
-
-        if ($cachedMatches) {
-            $event->setRouteMatch($cachedMatches);
-        }
 
         return $return;
     }

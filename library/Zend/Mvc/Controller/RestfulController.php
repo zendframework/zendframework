@@ -25,7 +25,6 @@ use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\EventInterface as Event;
 use Zend\EventManager\EventManager;
 use Zend\EventManager\EventManagerAwareInterface;
-use Zend\EventManager\EventsCapableInterface;
 use Zend\Http\Request as HttpRequest;
 use Zend\Http\PhpEnvironment\Response as HttpResponse;
 use Zend\Loader\Broker;
@@ -51,7 +50,6 @@ use Zend\Stdlib\ResponseInterface as Response;
 abstract class RestfulController implements 
     Dispatchable,
     EventManagerAwareInterface,
-    EventsCapableInterface,
     InjectApplicationEventInterface,
     ServiceLocatorAwareInterface,
     Pluggable

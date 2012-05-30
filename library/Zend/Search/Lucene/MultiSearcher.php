@@ -379,7 +379,7 @@ class MultiSearcher implements SearchIndexInterface
                 }
             }
 
-            $indexShift += count($hits);
+            $indexShift += $index->count();
             $hitsList[] = $hits;
         }
 

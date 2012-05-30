@@ -53,9 +53,13 @@ class ServerUrl extends AbstractHelper
      */
     public function __construct()
     {
-        if (isset($_SERVER['HTTPS']) && ($_SERVER['HTTPS'] == 'on' || $_SERVER['HTTPS'] === true)) {
-            $scheme = 'https';
-        } else {
+        switch (true) {
+            case (isset($_SERVER['HTTPS']) && ($_SERVER['HTTPS'] == 'on' || $_SERVER['HTTPS'] === true)):
+            case (isset($_SERVER['HTTP_SCHEME']) && ($_SERVER['HTTP_SCHEME'] == 'https')):
+            case (isset($_SERVER['SERVER_PORT']) && ($_SERVER['SERVER_PORT'] == 443)):
+                $scheme = 'https';
+                break;
+            default:
             $scheme = 'http';
         }
         $this->setScheme($scheme);

@@ -151,4 +151,26 @@ class ServerUrlTest extends \PHPUnit_Framework_TestCase
         $url = new Helper\ServerUrl();
         $this->assertEquals('http://example.com', $url->__invoke(new \stdClass()));
     }
+
+    /**
+     * @group ZF-9919
+     */
+    public function testServerUrlWithScheme()
+    {
+        $_SERVER['HTTP_SCHEME'] = 'https';
+        $_SERVER['HTTP_HOST'] = 'example.com';
+        $url = new Helper\ServerUrl();
+        $this->assertEquals('https://example.com', $url->__invoke());
+    }
+
+    /**
+     * @group ZF-9919
+     */
+    public function testServerUrlWithPort()
+    {
+        $_SERVER['SERVER_PORT'] = 443;
+        $_SERVER['HTTP_HOST'] = 'example.com';
+        $url = new Helper\ServerUrl();
+        $this->assertEquals('https://example.com', $url->__invoke());
+    }
 }

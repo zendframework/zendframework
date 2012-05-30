@@ -61,7 +61,7 @@ class Currency extends AbstractHelper
      * Output a formatted currency
      *
      * @param  integer|float                    $value    Currency value to output
-     * @param  string|\Zend\Locale\Locale|\Zend\Currency\Currency $currency OPTIONAL Currency to use for this call
+     * @param  string|\Zend\Locale\Locale|array $currency OPTIONAL Currency to use for this call
      * @return string Formatted currency
      */
     public function __invoke($value = null, $currency = null)

@@ -48,10 +48,28 @@ class Configuration
         foreach ($definition as $definitionType => $definitionData) {
             switch ($definitionType) {
                 case 'compiler':
-                    // @todo
+                    foreach ($definitionData as $filename) {
+                        if (is_readable($filename)) {
+                            $di->definitions()->addDefinition(new \Zend\Di\Definition\ArrayDefinition(include $filename), false);
+                        }
+                    }
                     break;
                 case 'runtime':
-                    // @todo
+                    if (isset($definitionData['enabled']) && !$definitionData['enabled']) {
+                        // Remove runtime from definition list if not enabled
+                        $definitions = array();
+                        foreach ($di->definitions() as $definition) {
+                            if (!$definition instanceof \Zend\Di\Definition\RuntimeDefinition) {
+                                $definitions[] = $definition;
+                            }
+                        }
+                        $definitions = new DefinitionList($definitions);
+                        $di->setDefinitionList($definitions);
+                    } elseif (isset($definitionData['use_annotations']) && $definitionData['use_annotations']) {
+                        $di->definitions()->getDefinitionByType('\Zend\Di\Definition\RuntimeDefinition')
+                            ->getIntrospectionStrategy()
+                            ->setUseAnnotations(true);
+                    }
                     break;
                 case 'class':
                     foreach ($definitionData as $className => $classData) {

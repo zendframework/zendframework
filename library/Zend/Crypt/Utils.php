@@ -17,31 +17,34 @@ namespace Zend\Crypt;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-
-class Tool
+class Utils
 {
     /**
      * Compare two strings to avoid timing attacks
      *
-     * @param  string $stringA
-     * @param  string $stringB
+     * C function memcmp() internally used by PHP, exits as soon as a difference
+     * is found in the two buffers. That makes possible of leaking
+     * timing information useful to an attacker attempting to iteratively guess
+     * the unknown string (e.g. password).
+     *
+     * @param  string $expected
+     * @param  string $actual
      * @return boolean
      */
-    public static function compareString($stringA, $stringB)
+    public static function compareStrings($expected, $actual)
     {
-        $stringA = (string)$stringA;
-        $stringB = (string)$stringB;
-        if (strlen($stringA) === 0) {
-            return false;
-        }
-        if (strlen($stringA) !== strlen($stringB)) {
-            return false;
-        }
+        $expected     = (string) $expected;
+        $actual       = (string) $actual;
+        $lenExpected  = strlen($expected);
+        $lenActual    = strlen($actual);
+        $len          = min($lenExpected, $lenActual);
+
         $result = 0;
-        $len    = strlen($stringA);
         for ($i = 0; $i < $len; $i++) {
-            $result |= ord($stringA{$i}) ^ ord($stringB{$i});
+            $result |= ord($expected[$i]) ^ ord($actual[$i]);
         }
-        return $result === 0;
+        $result |= $lenExpected ^ $lenActual;
+
+        return ($result === 0);
     }
 }

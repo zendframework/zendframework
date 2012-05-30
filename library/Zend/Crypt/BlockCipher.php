@@ -105,6 +105,7 @@ class BlockCipher
      * Set the symmetric cipher broker
      *
      * @param  string|SymmetricBroker $broker
+     * @throws Exception\InvalidArgumentException
      */
     public static function setSymmetricBroker($broker)
     {
@@ -199,6 +200,7 @@ class BlockCipher
      *
      * @param  string $key
      * @return BlockCipher
+     * @throws Exception\InvalidArgumentException
      */
     public function setKey($key)
     {
@@ -224,6 +226,7 @@ class BlockCipher
      *
      * @param  string $algo
      * @return BlockCipher
+     * @throws Exception\InvalidArgumentException
      */
     public function setCipherAlgorithm($algo)
     {
@@ -269,6 +272,7 @@ class BlockCipher
      *
      * @param  string $hash
      * @return BlockCipher
+     * @throws Exception\InvalidArgumentException
      */
     public function setHashAlgorithm($hash)
     {
@@ -296,6 +300,7 @@ class BlockCipher
      *
      * @param  string $data
      * @return string
+     * @throws Exception\InvalidArgumentException
      */
     public function encrypt($data)
     {

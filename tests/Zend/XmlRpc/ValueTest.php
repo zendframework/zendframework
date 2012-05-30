@@ -21,6 +21,7 @@
 
 namespace ZendTest\XmlRpc;
 use stdClass;
+use DateTime;
 use Zend\XmlRpc\Value;
 use Zend\XmlRpc\Generator\GeneratorInterface as Generator;
 use Zend\Math\BigInteger;
@@ -703,6 +704,26 @@ class ValueTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(trim($xml), trim($val->saveXml()));
     }
 
+    /**
+     * @group ZF-10776
+     */
+    public function testGetValueDatetime()
+    {
+        $expectedValue = '20100101T00:00:00';
+        $zfDate         = new Date\Date('2010-01-01 00:00:00', 'yyyy-MM-dd HH:mm:ss');
+        $phpDatetime     = new DateTime('20100101T00:00:00');
+        $phpDateNative   = '20100101T00:00:00';
+
+        $xmlRpcValueDateTime = new Value\DateTime($zfDate);
+        $this->assertEquals($expectedValue, $xmlRpcValueDateTime->getValue());
+
+        $xmlRpcValueDateTime = new Value\DateTime($phpDatetime);
+        $this->assertEquals($expectedValue, $xmlRpcValueDateTime->getValue());
+
+        $xmlRpcValueDateTime = new Value\DateTime($phpDateNative);
+        $this->assertEquals($expectedValue, $xmlRpcValueDateTime->getValue());
+    }
+
     // Base64
 
     public function testMarshalBase64FromString()
@@ -798,7 +819,7 @@ class ValueTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(
             Value::XMLRPC_TYPE_DATETIME,
-            Value::getXmlRpcTypeByValue(new \DateTime)
+            Value::getXmlRpcTypeByValue(new DateTime)
         );
 
         $this->assertEquals(

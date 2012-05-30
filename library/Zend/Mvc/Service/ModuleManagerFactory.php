@@ -49,7 +49,6 @@ class ModuleManagerFactory implements FactoryInterface
      * the default listener aggregate is attached. The ModuleEvent is also created
      * and attached to the module manager.
      * 
-     * @todo   move config glob path into module_listener_options or similar
      * @param  ServiceLocatorInterface $serviceLocator 
      * @return ModuleManager
      */

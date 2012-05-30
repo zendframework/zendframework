@@ -126,7 +126,7 @@ class Generator
 
             // Create method call code
             $methods = '';
-            foreach ($meta->getMethods() as $key => $methodData) {
+            foreach ($meta->getMethods() as $methodData) {
                 if (!isset($methodData['name']) && !isset($methodData['method'])) {
                     continue;
                 }

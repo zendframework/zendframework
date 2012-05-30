@@ -278,7 +278,7 @@ class InstanceManager /* implements InstanceManagerInterface */
      */
     public function setParameters($aliasOrClass, array $parameters)
     {
-        return $this->setConfiguration($aliasOrClass, array('parameters' => $parameters), true);
+        $this->setConfiguration($aliasOrClass, array('parameters' => $parameters), true);
     }
     
     /**
@@ -290,12 +290,12 @@ class InstanceManager /* implements InstanceManagerInterface */
      */
     public function setInjections($aliasOrClass, array $injections)
     {
-        return $this->setConfiguration($aliasOrClass, array('injections' => $injections), true);
+        $this->setConfiguration($aliasOrClass, array('injections' => $injections), true);
     }
 
     public function setShared($aliasOrClass, $isShared)
     {
-        return $this->setConfiguration($aliasOrClass, array('shared' => $isShared), true);
+        $this->setConfiguration($aliasOrClass, array('shared' => $isShared), true);
     }
 
     public function hasTypePreferences($interfaceOrAbstract)

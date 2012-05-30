@@ -20,8 +20,7 @@
 
 namespace Zend\Validator\File;
 
-use finfo,
-    Zend\Loader;
+use finfo;
 
 /**
  * Validator for the mime type of a file
@@ -56,7 +55,7 @@ class ExcludeMimeType extends MimeType
         }
 
         // Is file readable ?
-        if (!Loader::isReadable($value)) {
+        if (false === stream_resolve_include_path($value)) {
             return $this->createError($file, self::NOT_READABLE);
         }
 

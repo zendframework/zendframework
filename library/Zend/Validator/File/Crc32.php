@@ -20,8 +20,6 @@
 
 namespace Zend\Validator\File;
 
-use Zend\Loader;
-
 /**
  * Validator for the crc32 hash of given files
  *
@@ -106,7 +104,7 @@ class Crc32 extends Hash
         }
 
         // Is file readable ?
-        if (!Loader::isReadable($value)) {
+        if (false === stream_resolve_include_path($value)) {
             return $this->_throw($file, self::NOT_FOUND);
         }
 

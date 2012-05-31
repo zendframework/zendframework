@@ -2,7 +2,7 @@
 
 namespace Zend\Navigation;
 
-use Zend\Config\Factory as ConfigFactory;
+use Zend\Config;
 use Zend\Navigation\Exception;
 use Zend\Navigation\Navigation;
 use Zend\Navigation\Page\Mvc as MvcPage;
@@ -25,13 +25,15 @@ class MvcNavigationFactory implements FactoryInterface
             );
         } else if (is_string($config)) {
             if (file_exists($config)) {
-                $config = ConfigFactory::fromFile($config);
+                $config = Config\Factory::fromFile($config);
             } else {
                 throw new Exception\InvalidArgumentException(sprintf(
                     'Config was a string but file "%s" does not exist',
                     $config
                 ));
             }
+        } else if ($config instanceof Config\Config) {
+            $config = $config->toArray();
         } else if (!is_array($config)) {
             throw new Exception\InvalidArgumentException(
                 'Config must be a filename or an array of pages'

@@ -47,7 +47,7 @@ class RouterFactory implements FactoryInterface
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $config = $serviceLocator->get('Configuration');
-        $routes = $config['router'] ?: array();
+        $routes = isset($config['router']) ? $config['router'] : array();
         $router = Router::factory($routes);
         return $router;
     }

@@ -50,12 +50,14 @@ class MvcFactoryTest extends \PHPUnit_Framework_TestCase
         $configuration = array(
             'modules' => array(),
             'module_listener_options' => array(),
-            'service_manager' => array()
+            'service_manager' => array(),
         );
 
         $serviceConfig  = new \Zend\Mvc\Service\ServiceManagerConfiguration($configuration['service_manager']);
         $serviceManager = new \Zend\ServiceManager\ServiceManager($serviceConfig);
         $serviceManager->setService('ApplicationConfiguration', $configuration);
+        $serviceManager->get('ModuleManager')->loadModules();
+        $serviceManager->get('Application')->bootstrap();
 
         $this->serviceManager = $serviceManager;
     }
@@ -68,6 +70,9 @@ class MvcFactoryTest extends \PHPUnit_Framework_TestCase
 
     }
 
+    /**
+     * @covers \Zend\Navigation\MvcNavigationFactory
+     */
     public function testConstructFromArray()
     {
         $argument = array(
@@ -92,6 +97,22 @@ class MvcFactoryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(3, $container->count());
     }
 
+    /**
+     * @covers \Zend\Navigation\MvcNavigationFactory
+     */
+    public function testConstructFromFileString()
+    {
+        $argument = __DIR__ . '/_files/navigation.xml';
+        $factory  = new MvcNavigationFactory($argument);
+        $this->serviceManager->setFactory('MvcNavigation', $factory);
+
+        $container = $this->serviceManager->get('MvcNavigation');
+        $this->assertEquals(3, $container->count());
+    }
+
+    /**
+     * @covers \Zend\Navigation\MvcNavigationFactory
+     */
     public function testConstructFromConfig()
     {
         $argument = new Config\Config(array(
@@ -109,7 +130,10 @@ class MvcFactoryTest extends \PHPUnit_Framework_TestCase
             )
         ));
 
-        $container = new Navigation\Navigation($argument);
+        $factory = new MvcNavigationFactory($argument);
+        $this->serviceManager->setFactory('MvcNavigation', $factory);
+
+        $container = $this->serviceManager->get('MvcNavigation');
         $this->assertEquals(3, $container->count());
     }
 }

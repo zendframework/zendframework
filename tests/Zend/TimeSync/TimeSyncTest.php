@@ -21,7 +21,6 @@
 
 namespace ZendTest\TimeSync;
 
-use Zend\Date\Date;
 use Zend\TimeSync;
 
 /**

@@ -64,6 +64,7 @@ class ServiceFactoryTest extends \PHPUnit_Framework_TestCase
                     'Configuration' => function() {
                         return array(
                             'navigation' => array(
+                                'file'    => __DIR__ . '/_files/navigation.xml',
                                 'default' => array(
                                     array(
                                         'label' => 'Page 1',
@@ -110,6 +111,12 @@ class ServiceFactoryTest extends \PHPUnit_Framework_TestCase
     protected function tearDown()
     {
 
+    }
+
+    public function testDefaultFactoryAcceptsFileString()
+    {
+        $this->serviceManager->setFactory('Navigation', 'ZendTest\Navigation\TestAsset\FileNavigationFactory');
+        $container = $this->serviceManager->get('Navigation');
     }
 
     public function testMvcPagesGetInjectedWithComponents()

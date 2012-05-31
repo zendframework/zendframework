@@ -2,6 +2,7 @@
 
 namespace Zend\Navigation\Service;
 
+use Zend\Config;
 use Zend\Navigation\Exception;
 use Zend\Navigation\Navigation;
 use Zend\Navigation\Page\Mvc as MvcPage;
@@ -43,11 +44,33 @@ abstract class AbstractNavigationFactory implements FactoryInterface
             $application = $serviceLocator->get('Application');
             $urlHelper   = $serviceLocator->get('ViewHelperBroker')->load('url');
             $routeMatch  = $application->getMvcEvent()->getRouteMatch();
-            $pages       = $configuration['navigation'][$this->getName()];
+            $pages       = $this->getPagesFromConfig($configuration['navigation'][$this->getName()]);
 
             $this->pages = $this->injectComponents($pages, $routeMatch, $urlHelper);
         }
         return $this->pages;
+    }
+
+    protected function getPagesFromConfig($config = null)
+    {
+        if (is_string($config)) {
+            if (file_exists($config)) {
+                $config = Config\Factory::fromFile($config);
+            } else {
+                throw new Exception\InvalidArgumentException(sprintf(
+                    'Config was a string but file "%s" does not exist',
+                    $config
+                ));
+            }
+        } else if ($config instanceof Config\Config) {
+            $config = $config->toArray();
+        } else if (!is_array($config)) {
+            throw new Exception\InvalidArgumentException('
+                Invalid input, expected array, filename, or Zend\Config object'
+            );
+        }
+
+        return $config;
     }
 
     protected function injectComponents($pages, RouteMatch $routeMatch, UrlHelper $urlHelper)

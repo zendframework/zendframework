@@ -40,8 +40,7 @@ class GenericRole implements RoleInterface
     /**
      * Sets the Role identifier
      *
-     * @param  string $roleId
-     * @return void
+     * @param string $roleId
      */
     public function __construct($roleId)
     {

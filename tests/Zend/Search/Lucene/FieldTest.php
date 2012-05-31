@@ -20,15 +20,8 @@
  */
 
 namespace ZendTest\Search\Lucene;
+
 use Zend\Search\Lucene\Document;
-
-/**
- * Zend_Search_Lucene_Field
- */
-
-/**
- * PHPUnit test case
- */
 
 /**
  * @category   Zend

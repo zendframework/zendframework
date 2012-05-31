@@ -124,6 +124,28 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
         );
     }
 
+    public function testCanAcceptContextWithoutOptions()
+    {
+        $value     = 'bar';
+        $context   = array('foo' => 'bar', 'bar' => 'baz');
+        $validator = new Validator\Callback(function($v, $c) use ($value, $context) {
+            return (($value == $v) && ($context == $c));
+        });
+        $this->assertTrue($validator->isValid($value, $context));
+    }
+
+    public function testCanAcceptContextWithOptions()
+    {
+        $value     = 'bar';
+        $context   = array('foo' => 'bar', 'bar' => 'baz');
+        $options   = array('baz' => 'bat');
+        $validator = new Validator\Callback(function($v, $c, $baz) use ($value, $context, $options) {
+            return (($value == $v) && ($context == $c) && ($options['baz'] == $baz));
+        });
+        $validator->setCallbackOptions($options);
+        $this->assertTrue($validator->isValid($value, $context));
+    }
+
     public function objectCallback($value)
     {
         return true;

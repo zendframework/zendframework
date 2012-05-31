@@ -1184,7 +1184,7 @@ class InputFilterTest extends \PHPUnit_Framework_TestCase
         // Do not add namespace on purpose, so MyDigits will not be found
         $input = new InputFilter(null, $validators, $data);
 
-        $this->setExpectedException('Zend\Loader\Exception', 'locate class');
+        $this->setExpectedException('Zend\Loader\Exception\ExceptionInterface', 'locate class');
         $this->assertTrue($input->hasInvalid(), 'Expected hasInvalid() to return true');
     }
 
@@ -1620,7 +1620,7 @@ class InputFilterTest extends \PHPUnit_Framework_TestCase
         );
         $filter = new InputFilter($filters, $validators, $data, $options);
 
-        $this->setExpectedException('Zend\Loader\Exception', 'locate class');
+        $this->setExpectedException('Zend\Loader\Exception\ExceptionInterface', 'locate class');
         $filter->process();
     }
 

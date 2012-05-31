@@ -2,9 +2,9 @@
 
 namespace ZendTest\Loader\TestAsset;
 
-use Zend\Di\LocatorInterface;
+use Zend\ServiceManager\ServiceLocatorInterface;
 
-class ServiceLocator implements LocatorInterface
+class ServiceLocator implements ServiceLocatorInterface
 {
     protected $services = array();
 
@@ -15,6 +15,11 @@ class ServiceLocator implements LocatorInterface
         }
 
         return $this->services[$name];
+    }
+
+    public function has($name)
+    {
+        return (isset($this->services[$name]));
     }
 
     public function set($name, $object)

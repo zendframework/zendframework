@@ -45,9 +45,9 @@ class PropertyReflection extends PhpReflectionProperty implements ReflectionInte
     }
 
     /**
-     * Get docblock comment
+     * Get DocBlock comment
      *
-     * @return string|false False if no docblock defined
+     * @return string|false False if no DocBlock defined
      */
     public function getDocComment()
     {

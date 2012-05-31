@@ -20,12 +20,9 @@
  */
 
 namespace ZendTest\Search\Lucene;
+
 use Zend\Search\Lucene;
 use Zend\Search;
-
-/**
- * PHPUnit test case
- */
 
 /**
  * @category   Zend

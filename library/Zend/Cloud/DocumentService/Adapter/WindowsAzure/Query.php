@@ -63,7 +63,7 @@ class Query implements QueryAdapterInterface
      * Does nothing for Azure.
      *
      * @param  string $select
-     * @return \Zend\Cloud\DocumentService\Adapter\WindowsAzure_Query
+     * @return \Zend\Cloud\DocumentService\Adapter\WindowsAzure\Query
      */
     public function select($select)
     {

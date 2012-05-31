@@ -55,7 +55,6 @@ class FileReflectionTest extends \PHPUnit_Framework_TestCase
         $reflectionFile = new FileReflection($fileToReflect);
         $this->assertEquals(get_class($reflectionFile), 'Zend\Code\Reflection\FileReflection');
         $this->assertEquals(count($reflectionFile->getClasses()), 1);
-        //$this->assertEquals(get_class($reflectionFile->getClass('ZendTest\Code\Reflection\TestAsset\TestSampleClass')), 'Zend\Code\Reflection\ReflectionClass');
     }
 
     public function testFileGetClassReturnsFirstClassWithNoOptions()
@@ -107,21 +106,20 @@ class FileReflectionTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(24, $reflectionFile->getEndLine());
     }
 
-    public function testFileGetDocblockReturnsFileDocblock()
+    public function testFileGetDocBlockReturnsFileDocBlock()
     {
-        $this->markTestIncomplete('File docblocks not implemented yet');
-
-        $fileToReflect = __DIR__ . '/TestAsset/TestSampleClass.php';
+        $fileToReflect = __DIR__ . '/TestAsset/TestSampleClass7.php';
         include_once $fileToReflect;
         $reflectionFile = new FileReflection($fileToReflect);
-        $this->assertTrue($reflectionFile->getDocblock() instanceof \Zend\Code\Reflection\DocBlockReflection);
+        
+        $this->assertTrue($reflectionFile->getDocBlock() instanceof \Zend\Code\Reflection\DocBlockReflection);
+        $this->assertEquals('Jeremiah Small <jsmall@soliantconsulting.com>', $reflectionFile->getDocBlock()->getTag('author')->getContent());
     }
 
     public function testFileGetFunctionsReturnsFunctions()
     {
         $this->markTestIncomplete('Function scanning not implemented yet');
 
-        //$this->markTestSkipped('Regex in Zend_Reflection_File needs work in the function department');
         $fileToRequire = __DIR__ . '/TestAsset/FileOfFunctions.php';
         include_once $fileToRequire;
         $reflectionFile = new FileReflection($fileToRequire);
@@ -152,4 +150,3 @@ class FileReflectionTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($expected, $reflectionFile->getUses());
     }
 }
-

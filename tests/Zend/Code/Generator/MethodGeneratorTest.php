@@ -20,10 +20,10 @@
  */
 
 namespace ZendTest\Code\Generator;
-use Zend\Code\Generator\MethodGenerator,
-    Zend\Code\Generator\ParameterGenerator,
-    Zend\Code\Generator\ValueGenerator,
-    Zend\Code\Reflection\MethodReflection;
+use Zend\Code\Generator\MethodGenerator;
+use Zend\Code\Generator\ParameterGenerator;
+use Zend\Code\Generator\ValueGenerator;
+use Zend\Code\Reflection\MethodReflection;
 
 /**
  * @category   Zend
@@ -63,13 +63,13 @@ class PhpMethodTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Foo', $method->getBody());
     }
 
-    public function testDocblockGetterAndSetter()
+    public function testDocBlockGetterAndSetter()
     {
-        $docblockGenerator = new \Zend\Code\Generator\DocblockGenerator();
+        $docblockGenerator = new \Zend\Code\Generator\DocBlockGenerator();
 
         $method = new MethodGenerator();
-        $method->setDocblock($docblockGenerator);
-        $this->assertTrue($docblockGenerator === $method->getDocblock());
+        $method->setDocBlock($docblockGenerator);
+        $this->assertTrue($docblockGenerator === $method->getDocBlock());
     }
 
 
@@ -156,7 +156,7 @@ EOS;
     /**
      * @group ZF-7205
      */
-    public function testMethodCanHaveDocblock()
+    public function testMethodCanHaveDocBlock()
     {
         $methodGeneratorProperty = new MethodGenerator(
             'someFoo',

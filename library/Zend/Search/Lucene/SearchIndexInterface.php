@@ -188,7 +188,7 @@ interface SearchIndexInterface extends Index\TermsStreamInterface
      * Input is a string or Zend_Search_Lucene_Search_Query.
      *
      * @param mixed $query
-     * @return array \Zend\Search\Lucene\Search\QueryHit
+     * @return array|\Zend\Search\Lucene\Search\QueryHit
      * @throws \Zend\Search\Lucene\Exception\ExceptionInterface
      */
     public function find($query);

@@ -176,7 +176,7 @@ class ArrayTest extends \PHPUnit_Framework_TestCase
     public function testLocale2()
     {
         $adapter = new Adapter\ArrayAdapter(__DIR__ . '/_files/translation_en.php', 'en');
-        $this->setExpectedException('Zend\Translator\Exception');
+        $this->setExpectedException('Zend\Translator\Exception\ExceptionInterface');
         $adapter->setLocale('nolocale');
     }
 

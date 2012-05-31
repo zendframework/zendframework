@@ -84,17 +84,10 @@ prompt> git clone --recursive git://github.com/zendframework/ZendSkeletonApplica
     <para>
       By default, one module is provided with the
       <classname>ZendSkeletonApplication</classname>, named
-      "Application". It provides the following:
+      "Application". It provides simply a controller to handle the "home" page
+      of the application, the layout template, and templates for 404 and error
+      pages.
     </para>
-
-    <itemizedlist>
-      <listitem>
-        <para>
-          A view listener that will render views based on the selected
-          controller, and inject it into a site layout.
-        </para>
-      </listitem>
-    </itemizedlist>
 
     <para>
       Typically, you will not need to touch this other than to provide an
@@ -168,15 +161,9 @@ return array();
 
     <programlisting language="php"><![CDATA[
 return array(
-    'di' => array(
-        'instance' => array(
-            'alias' => array(
-            ),
-            'Zend\View\TemplatePathStack' => array('parameters' => array(
-                'paths'  => array(
-                    '<module-name>' => __DIR__ . '/../views',
-                ),
-            )),
+    'view_manager' => array(
+        'template_path_stack' => array(
+            '<module-name>' => __DIR__ . '/../view'
         ),
     ),
 );
@@ -195,8 +182,6 @@ return array(
 
     <programlisting language="php"><![CDATA[
 namespace <your module name here>;
-
-use Zend\Module\Consumer\AutoloaderProvider;
 
 class Module implements AutoloaderProvider
 {
@@ -312,14 +297,15 @@ class Module implements AutoloaderProvider
 <?php
 namespace <module name>\Controller;
 
-use Zend\Mvc\Controller\ActionController,
-    Zend\View\Model\ViewModel;
+use Zend\Mvc\Controller\ActionController;
+use Zend\View\Model\ViewModel;
 
 class HelloController extends ActionController
 {
     public function worldAction()
     {
-        $message = $this->getRequest()->query()->get('message', 'foo');
+        $request = $this->getRequest();
+        $message = $request->query()->get('message', 'foo');
         return new ViewModel(array('message' => $message));
     }
 }
@@ -377,9 +363,9 @@ class HelloController extends ActionController
     <title>Create a view script</title>
 
     <para>
-      Create the directory <filename>view/hello</filename>.  Inside that
-      directory, create a file named <filename>world.phtml</filename>. Inside
-      that, paste in the following:
+      Create the directory <filename>view/&lt;module-name&gt;hello</filename>.
+      Inside that directory, create a file named
+      <filename>world.phtml</filename>. Inside that, paste in the following:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -427,34 +413,46 @@ class HelloController extends ActionController
     </note>
 
     <para>
-      Open your <filename>configs/module.config.php</filename> file, and
-      modify it to add to the "routes" parameters so it reads as
+      Additionally, we need to tell the application we have a controller.
+    </para>
+
+    <note>
+        <para>
+            We inform the application about controllers we expect to have in the
+            application. This is to prevent somebody requesting any service the
+            <classname>ServiceManager</classname> knows about in an attempt to
+            break the application. The dispatcher uses a special, scoped
+            container that will only pull controllers that are specifically
+            registered with it, either as invokable classes or via factories.
+        </para>
+    </note>
+
+    <para>
+      Open your <filename>config/module.config.php</filename> file, and modify
+      it to add to the "routes" and "controller" parameters so it reads as
       follows:
     </para>
 
     <programlisting language="php"><![CDATA[
 return array(
-    'di' => array(
-        'instance' => array(
-            'Zend\Mvc\Router\RouteStack' => array(
-                'parameters' => array(
-                    'routes' => array(
-                        '<module name>-hello-world' => array(
-                            'type'    => 'Zend\Mvc\Router\Http\Literal',
-                                'options' => array(
-                                'route' => '/hello/world',
-                                'defaults' => array(
-                                    'controller' => '<module namespace>\Controller\HelloController',
-                                    'action'     => 'world',
-                                ),
-                            ),
-                        ),
-                    ),
+    'routes' => array(
+        '<module name>-hello-world' => array(
+            'type'    => 'Literal',
+                'options' => array(
+                'route' => '/hello/world',
+                'defaults' => array(
+                    'controller' => '<module namespace>-Hello',
+                    'action'     => 'world',
                 ),
             ),
         ),
-        // ... other di configuration ...
     ),
+    'controller' => array(
+        'classes' => array(
+            '<module namespace>-Hello' => '<module namespace>\Controller\HelloController',
+        ),
+    ),
+    // ... other configuration ...
 );
 ]]></programlisting>
   </section>
@@ -473,7 +471,7 @@ return array(
     </para>
 
     <para>
-      Remember the <filename>config/application.config.php</filename>
+      Remember the <filename>config/application.php</filename>
       file? Let's modify it to add our new module. Once done, it should
       read as follows:
     </para>

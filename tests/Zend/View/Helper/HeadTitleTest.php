@@ -212,4 +212,14 @@ class HeadTitleTest extends \PHPUnit_Framework_TestCase
         $placeholder = $this->helper->__invoke('Bar');
         $this->assertContains('BarFoo', $placeholder->toString());
     }
+
+
+    /**
+     *  @group ZF-10284
+     */
+    public function testReturnTypeDefaultAttachOrder()
+    {
+        $this->assertTrue($this->helper->setDefaultAttachOrder('PREPEND') instanceof Helper\HeadTitle);
+        $this->assertEquals('PREPEND', $this->helper->getDefaultAttachOrder());
+    }
 }

@@ -70,6 +70,7 @@ class TreeRouteStack extends SimpleRouteStack
             'segment'  => __NAMESPACE__ . '\Segment',
             'wildcard' => __NAMESPACE__ . '\Wildcard',
             'query'    => __NAMESPACE__ . '\Query',
+            'method'   => __NAMESPACE__ . '\Method',
         ));
     }
 
@@ -103,7 +104,7 @@ class TreeRouteStack extends SimpleRouteStack
         if ($specs instanceof Traversable) {
             $specs = ArrayUtils::iteratorToArray($specs);
         } elseif (!is_array($specs)) {
-            throw new Exception\InvalidArgumentException('RouteInterface definition must be an array or Traversable object');
+            throw new Exception\InvalidArgumentException('Route definition must be an array or Traversable object');
         }
 
         $route = parent::routeFromArray($specs);
@@ -195,7 +196,7 @@ class TreeRouteStack extends SimpleRouteStack
         $route = $this->routes->get($names[0]);
 
         if (!$route) {
-            throw new Exception\RuntimeException(sprintf('RouteInterface with name "%s" not found', $names[0]));
+            throw new Exception\RuntimeException(sprintf('Route with name "%s" not found', $names[0]));
         }
 
         if (isset($names[1])) {
@@ -234,6 +235,8 @@ class TreeRouteStack extends SimpleRouteStack
                     $uri->setScheme($this->requestUri->getScheme());
                 }
 
+                return $uri->setPath($path)->toString();
+            } elseif (!$uri->isAbsolute() && $uri->isValidRelative()) {
                 return $uri->setPath($path)->toString();
             }
         }

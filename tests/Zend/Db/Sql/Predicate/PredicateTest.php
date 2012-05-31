@@ -124,7 +124,7 @@ class PredicateTest extends TestCase
         $predicate->in('foo.bar', array('foo', 'bar'));
         $parts = $predicate->getExpressionData();
         $this->assertEquals(1, count($parts));
-        $this->assertContains('%1$s IN (%2$s)', $parts[0]);
+        $this->assertContains('%s IN (%s, %s)', $parts[0]);
         $this->assertContains(array('foo.bar', 'foo', 'bar'), $parts[0]);
     }
 

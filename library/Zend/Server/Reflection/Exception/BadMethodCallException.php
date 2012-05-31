@@ -2,7 +2,9 @@
 
 namespace Zend\Server\Reflection\Exception;
 
+use Zend\Server\Exception;
+
 class BadMethodCallException
-    extends \BadMethodCallException
-    implements \Zend\Server\Reflection\Exception
+    extends Exception\BadMethodCallException
+    implements ExceptionInterface
 {}

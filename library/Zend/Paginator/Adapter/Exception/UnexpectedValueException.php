@@ -10,6 +10,8 @@
 
 namespace Zend\Paginator\Adapter\Exception;
 
+use Zend\Paginator\Exception;
+
 /**
  * @category   Zend
  * @package    Zend\Paginator\Adapter
@@ -17,7 +19,6 @@ namespace Zend\Paginator\Adapter\Exception;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class UnexpectedValueException
-    extends \Zend\Paginator\Exception\UnexpectedValueException
-    implements ExceptionInterface
+class UnexpectedValueException extends Exception\UnexpectedValueException implements 
+    ExceptionInterface
 {}

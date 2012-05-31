@@ -26,8 +26,6 @@ namespace Zend\Config\Exception;
  * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
-class InvalidArgumentException
-    extends \InvalidArgumentException
-    implements \Zend\Config\Exception
-{
-}
+class InvalidArgumentException extends \InvalidArgumentException implements 
+    ExceptionInterface
+{}

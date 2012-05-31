@@ -367,7 +367,7 @@ abstract class Container implements RecursiveIterator, Countable
         throw new Exception\BadMethodCallException(
             sprintf(
                 'Bad method call: Unknown method %s::%s',
-                get_class($this),
+                get_called_class(),
                 $method
             )
         );

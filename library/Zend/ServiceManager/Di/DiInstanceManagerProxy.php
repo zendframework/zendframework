@@ -25,6 +25,13 @@ class DiInstanceManagerProxy extends DiInstanceManager
     {
         $this->diInstanceManager = $diInstanceManager;
         $this->serviceLocator = $serviceLocator;
+
+        // localize state
+        $this->aliases = &$diInstanceManager->aliases;
+        $this->sharedInstances = &$diInstanceManager->sharedInstances;
+        $this->sharedInstancesWithParams = &$diInstanceManager->sharedInstancesWithParams;
+        $this->configurations = &$diInstanceManager->configurations;
+        $this->typePreferences = &$diInstanceManager->typePreferences;
     }
 
     /**

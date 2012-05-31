@@ -47,7 +47,7 @@ class WriterBroker extends PluginBroker
      */
     protected function validatePlugin($plugin)
     {
-        if (!$plugin instanceof Writer) {
+        if (!$plugin instanceof Writer\WriterInterface) {
             throw new Exception\InvalidArgumentException('Writer must implement Zend\Log\Writer');
         }
 

@@ -24,6 +24,7 @@ namespace Zend\Search\Lucene\Index;
 use Zend\Search\Lucene,
 	Zend\Search\Lucene\Search\Similarity,
 	Zend\Search\Lucene\Storage\Directory,
+	Zend\Search\Lucene\Exception\ExceptionInterface,
 	Zend\Search\Lucene\Exception\RuntimeException,
 	Zend\Search\Lucene\Exception\InvalidFileFormatException,
 	Zend\Search\Lucene\Exception\InvalidArgumentException;
@@ -153,7 +154,7 @@ class SegmentInfo implements TermsStreamInterface
     /**
      * File system adapter.
      *
-     * @var \Zend\Search\Lucene\Storage\DirectoryInterface\Filesystem
+     * @var \Zend\Search\Lucene\Storage\Directory\DirectoryInterface
      */
     private $_directory;
 
@@ -204,7 +205,7 @@ class SegmentInfo implements TermsStreamInterface
     /**
      * Zend_Search_Lucene_Index_SegmentInfo constructor
      *
-     * @param \Zend\Search\Lucene\Storage\Directory $directory
+     * @param \Zend\Search\Lucene\Storage\Directory\DirectoryInterface $directory
      * @param string     $name
      * @param integer    $docCount
      * @param integer    $delGen
@@ -213,7 +214,7 @@ class SegmentInfo implements TermsStreamInterface
      * @param boolean    $isCompound
      * @throws \Zend\Search\Lucene\Exception\RuntimeException
      */
-    public function __construct(Directory $directory, $name, $docCount, $delGen = 0, $docStoreOptions = null, $hasSingleNormFile = false, $isCompound = null)
+    public function __construct(Directory\DirectoryInterface $directory, $name, $docCount, $delGen = 0, $docStoreOptions = null, $hasSingleNormFile = false, $isCompound = null)
     {
         $this->_directory = $directory;
         $this->_name      = $name;
@@ -264,7 +265,7 @@ class SegmentInfo implements TermsStreamInterface
 
                 // Compound file is found
                 $this->_isCompound = true;
-            } catch (Lucene\Exception $e) {
+            } catch (ExceptionInterface $e) {
                 if (strpos($e->getMessage(), 'is not readable') !== false) {
                     // Compound file is not found or is not readable
                     $this->_isCompound = false;
@@ -390,7 +391,7 @@ class SegmentInfo implements TermsStreamInterface
 
                 return $deletions;
             }
-        } catch(Lucene\Exception $e) {
+        } catch(ExceptionInterface $e) {
             if (strpos($e->getMessage(), 'is not readable') === false) {
                 throw new RuntimeException($e->getMessage(), $e->getCode(), $e);
             }
@@ -486,7 +487,7 @@ class SegmentInfo implements TermsStreamInterface
      * @param string $extension
      * @param boolean $shareHandler
      * @throws \Zend\Search\Lucene\Exception\InvalidFileFormatException
-     * @return \Zend\Search\Lucene\Storage\File
+     * @return \Zend\Search\Lucene\Storage\File\FileInterface
      */
     public function openCompoundFile($extension, $shareHandler = true)
     {
@@ -757,7 +758,7 @@ class SegmentInfo implements TermsStreamInterface
     /**
      * Load terms dictionary index
      *
-     * @throws \Zend\Search\Lucene\Exception
+     * @throws \Zend\Search\Lucene\Exception\ExceptionInterface
      */
     private function _loadDictionaryIndex()
     {
@@ -1617,7 +1618,7 @@ class SegmentInfo implements TermsStreamInterface
     /**
      * Term Dictionary File object for stream like terms reading
      *
-     * @var \Zend\Search\Lucene\Storage\File
+     * @var \Zend\Search\Lucene\Storage\File\FileInterface
      */
     private $_tisFile = null;
 
@@ -1631,7 +1632,7 @@ class SegmentInfo implements TermsStreamInterface
     /**
      * Frequencies File object for stream like terms reading
      *
-     * @var \Zend\Search\Lucene\Storage\File
+     * @var \Zend\Search\Lucene\Storage\File\FileInterface
      */
     private $_frqFile = null;
 
@@ -1645,7 +1646,7 @@ class SegmentInfo implements TermsStreamInterface
     /**
      * Positions File object for stream like terms reading
      *
-     * @var \Zend\Search\Lucene\Storage\File
+     * @var \Zend\Search\Lucene\Storage\File\FileInterface
      */
     private $_prxFile = null;
 

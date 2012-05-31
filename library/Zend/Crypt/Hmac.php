@@ -7,70 +7,24 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Crypt
  */
-
 namespace Zend\Crypt;
-
-use Zend\Crypt\Exception\HmacException;
 
 /**
  * PHP implementation of the RFC 2104 Hash based Message Authentication Code
- * algorithm.
  *
- * @todo  Patch for refactoring failed tests (key block sizes >80 using internal algo)
- * @todo       Check if mhash() is a required alternative (will be PECL-only soon)
  * @category   Zend
  * @package    Zend_Crypt
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Hmac extends Crypt
+class Hmac
 {
-
     /**
-     * The key to use for the hash
-     *
-     * @var string
-     */
-    protected static $_key = null;
-
-    /**
-     * pack() format to be used for current hashing method
-     *
-     * @var string
-     */
-    protected static $_packFormat = null;
-
-    /**
-     * Hashing algorithm; can be the md5/sha1 functions or any algorithm name
-     * listed in the output of PHP 5.1.2+ hash_algos().
-     *
-     * @var string
-     */
-    protected static $_hashAlgorithm = 'md5';
-
-    /**
-     * List of algorithms supported my mhash()
+     * List of hash algorithms supported
      *
      * @var array
      */
-    protected static $_supportedMhashAlgorithms = array(
-        'adler32',
-        'crc32',
-        'crc32b',
-        'gost',
-        'haval128',
-        'haval160',
-        'haval192',
-        'haval256',
-        'md4',
-        'md5',
-        'ripemd160',
-        'sha1',
-        'sha256',
-        'tiger',
-        'tiger128',
-        'tiger160',
-    );
+    protected static $supportedAlgorithms = array();
 
     /**
      * Constants representing the output mode of the hash algorithm
@@ -87,92 +41,59 @@ class Hmac extends Crypt
      * @param  string $hash
      * @param  string $data
      * @param  string $output
-     * @param  boolean $internal
      * @return string
      */
     public static function compute($key, $hash, $data, $output = self::STRING)
     {
-        // set the key
         if (!isset($key) || empty($key)) {
-            throw new HmacException('provided key is null or empty');
-        }
-        self::$_key = $key;
-
-        // set the hash
-        self::_setHashAlgorithm($hash);
-
-        // perform hashing and return
-        return self::_hash($data, $output);
-    }
-
-    /**
-     * Setter for the hash method.
-     *
-     * @param  string $hash
-     * @return void
-     */
-    protected static function _setHashAlgorithm($hash)
-    {
-        if (!isset($hash) || empty($hash)) {
-            throw new HmacException('provided hash string is null or empty');
+            throw new Exception\InvalidArgumentException('Provided key is null or empty');
         }
 
         $hash = strtolower($hash);
-        $hashSupported = false;
-
-        if (function_exists('hash_algos') && in_array($hash, hash_algos())) {
-            $hashSupported = true;
+        if (!self::isSupported($hash)) {
+            throw new Exception\InvalidArgumentException('Hash algorithm provided is not supported on this PHP installation');
         }
 
-        if ($hashSupported === false && function_exists('mhash') && in_array($hash, self::$_supportedAlgosMhash)) {
-            $hashSupported = true;
-        }
-
-        if ($hashSupported === false) {
-            throw new HmacException('hash algorithm provided is not supported on this PHP installation; please enable the hash or mhash extensions');
-        }
-        self::$_hashAlgorithm = $hash;
-    }
-
-    /**
-     * Perform HMAC and return the keyed data
-     *
-     * @param string $data
-     * @param string $output
-     * @param bool $internal Option to not use hash() functions for testing
-     * @return string
-     */
-    protected static function _hash($data, $output = self::STRING, $internal = false)
-    {
-        if (function_exists('hash_hmac')) {
-            if ($output == self::BINARY) {
-                return hash_hmac(self::$_hashAlgorithm, $data, self::$_key, 1);
-            }
-            return hash_hmac(self::$_hashAlgorithm, $data, self::$_key);
-        }
-
-        if (function_exists('mhash')) {
-            if ($output == self::BINARY) {
-                return mhash(self::_getMhashDefinition(self::$_hashAlgorithm), $data, self::$_key);
-            }
-            $bin = mhash(self::_getMhashDefinition(self::$_hashAlgorithm), $data, self::$_key);
-            return bin2hex($bin);
+        if ($output == self::BINARY) {
+            return hash_hmac($hash, $data, $key, 1);
+        } else {
+            return hash_hmac($hash, $data, $key);
         }
     }
 
     /**
-     * Since MHASH accepts an integer constant representing the hash algorithm
-     * we need to make a small detour to get the correct integer matching our
-     * algorithm's name.
+     * Get the output size according to the hash algorithm and the output format
      *
-     * @param string $hashAlgorithm
+     * @param  string $hash
+     * @param  string $output
      * @return integer
      */
-    protected static function _getMhashDefinition($hashAlgorithm)
+    public static function getOutputSize($hash, $output = self::STRING)
     {
-        for ($i = 0; $i <= mhash_count(); $i++) {
-            $types[mhash_get_hash_name($i)] = $i;
+        return strlen(self::compute('key', $hash, 'data', $output));
+    }
+
+    /**
+     * Get the supported algorithm
+     *
+     * @return array
+     */
+    public static function getSupportedAlgorithms()
+    {
+        if (empty(self::$supportedAlgorithms)) {
+            self::$supportedAlgorithms = hash_algos();
         }
-        return $types[strtoupper($hashAlgorithm)];
+        return self::$supportedAlgorithms;
+    }
+
+    /**
+     * Is the hash algorithm supported?
+     *
+     * @param  string $algo
+     * @return boolean
+     */
+    public static function isSupported($algo)
+    {
+        return in_array($algo, self::getSupportedAlgorithms());
     }
 }

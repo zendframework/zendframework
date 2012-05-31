@@ -20,7 +20,7 @@
  */
 
 namespace ZendTest\View\Helper\Navigation;
-use Zend\Controller\Request;
+
 use Zend\View;
 
 /**

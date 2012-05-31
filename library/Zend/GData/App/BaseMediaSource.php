@@ -147,7 +147,7 @@ abstract class BaseMediaSource implements MediaSource
      */
     public function __isset($name)
     {
-        $rc = new \ReflectionClass(get_class($this));
+        $rc = new \ReflectionClass(get_called_class());
         $privName = '_' . $name;
         if (!($rc->hasProperty($privName))) {
             throw new InvalidArgumentException(

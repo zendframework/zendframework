@@ -20,7 +20,7 @@
  */
 
 namespace Zend\Service\Amazon\Authentication;
-use Zend\Crypt;
+use Zend\Crypt\Hmac;
 
 /**
  * @category   Zend
@@ -122,7 +122,7 @@ class V2 extends Authentication
 
         $data .= implode('&', $arrData);
 
-        $hmac = Crypt\Hmac::compute($this->_secretKey, 'SHA256', $data, Crypt\Hmac::BINARY);
+        $hmac = Hmac::compute($this->_secretKey, 'SHA256', $data, Hmac::BINARY);
 
         $paramaters['Signature'] = base64_encode($hmac);
 

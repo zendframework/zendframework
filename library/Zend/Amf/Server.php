@@ -98,7 +98,7 @@ class Server implements ServerDefinition
 
     /**
      * Namespace allows all AMF calls to not clobber other PHP session variables
-     * @var Zend\Session\Container default session namespace zend_amf
+     * @var \Zend\Session\Container default session namespace zend_amf
      */
     protected $_sessionNamespace = 'zend_amf';
 
@@ -111,7 +111,7 @@ class Server implements ServerDefinition
     /**
      * Authentication handler object
      *
-     * @var Zend\Amf\AbstractAuthentication
+     * @var \Zend\Amf\AbstractAuthentication
      */
     protected $_auth;
 
@@ -125,7 +125,7 @@ class Server implements ServerDefinition
     /**
      * ACL handler object
      *
-     * @var Zend\Acl\Acl
+     * @var \Zend\Acl\Acl
      */
     protected $_acl;
 
@@ -141,7 +141,7 @@ class Server implements ServerDefinition
      * Set authentication service
      *
      * @param  Zend\Authentication\AuthenticationService $auth
-     * @return Zend\Amf\Server
+     * @return Server
      */
     public function setAuthService(AuthenticationService $auth)
     {
@@ -165,8 +165,8 @@ class Server implements ServerDefinition
     /**
      * Set authentication adapter
      *
-     * @param  Zend\Amf\AbstractAuthentication $auth
-     * @return Zend\Amf\Server
+     * @param  AbstractAuthentication $auth
+     * @return Server
      */
     public function setAuth(AbstractAuthentication $auth)
     {
@@ -177,7 +177,7 @@ class Server implements ServerDefinition
    /**
      * Get authentication adapter
      *
-     * @return Zend\Amf\AbstractAuthentication
+     * @return AbstractAuthentication
      */
     public function getAuth()
     {
@@ -187,8 +187,8 @@ class Server implements ServerDefinition
     /**
      * Set ACL adapter
      *
-     * @param  Zend\Acl\Acl $acl
-     * @return Zend\Amf\Server
+     * @param  \Zend\Acl\Acl $acl
+     * @return Server
      */
     public function setAcl(\Zend\Acl\Acl $acl)
     {
@@ -198,7 +198,7 @@ class Server implements ServerDefinition
    /**
      * Get ACL adapter
      *
-     * @return Zend\Acl\Acl
+     * @return \Zend\Acl\Acl
      */
     public function getAcl()
     {
@@ -209,7 +209,7 @@ class Server implements ServerDefinition
      * Set production flag
      *
      * @param  bool $flag
-     * @return Zend\Amf\Server
+     * @return Server
      */
     public function setProduction($flag)
     {
@@ -229,7 +229,7 @@ class Server implements ServerDefinition
 
     /**
      * @param namespace of all incoming sessions defaults to Zend_Amf
-     * @return Zend\Amf\Server
+     * @return Server
      */
     public function setSession($namespace = 'Zend_Amf')
     {
@@ -253,6 +253,7 @@ class Server implements ServerDefinition
      * @param string|object $object Object or class being accessed
      * @param string $function Function or method being accessed
      * @return unknown_type
+     * @throws Exception\RuntimeException
      */
     protected function _checkAcl($object, $function)
     {
@@ -299,6 +300,7 @@ class Server implements ServerDefinition
      * 
      * @param  string|Broker $broker 
      * @return Server
+     * @throws Exception\InvalidArgumentException
      */
     public function setBroker($broker)
     {
@@ -341,7 +343,7 @@ class Server implements ServerDefinition
      * @param  string $method Is the method to execute
      * @param  mixed $param values for the method
      * @return mixed $response the result of executing the method
-     * @throws Zend\Amf\Server\Exception
+     * @throws Exception\ExceptionInterface
      */
     protected function _dispatch($method, $params = null, $source = null)
     {
@@ -413,9 +415,10 @@ class Server implements ServerDefinition
      *
      * A command message is a flex.messaging.messages.CommandMessage
      *
-     * @see    Zend_Amf_Value_Messaging_CommandMessage
-     * @param  Zend\Amf\Value\Messaging\CommandMessage $message
-     * @return Zend\Amf\Value\Messaging\AcknowledgeMessage
+     * @see    Value\Messaging\CommandMessage
+     * @param  Value\Messaging\CommandMessage $message
+     * @return Value\Messaging\AcknowledgeMessage
+     * @throws Exception\RuntimeException
      */
     protected function _loadCommandMessage(Value\Messaging\CommandMessage $message)
     {
@@ -458,7 +461,7 @@ class Server implements ServerDefinition
      * @param mixed $detail Detailed data about the error
      * @param int $code Error code
      * @param int $line Error line
-     * @return Zend\Amf\Value\Messaging\ErrorMessage|array
+     * @return Value\Messaging\ErrorMessage|array
      */
     protected function _errorMessage($objectEncoding, $message, $description, $detail, $code, $line)
     {
@@ -487,6 +490,7 @@ class Server implements ServerDefinition
      * @param string $userid
      * @param string $password
      * @return boolean
+     * @throws Exception\RuntimeException
      */
     protected function _handleAuth( $userid,  $password)
     {
@@ -515,9 +519,8 @@ class Server implements ServerDefinition
      *
      * @todo   should implement and SPL observer pattern for custom AMF headers
      * @todo   DescribeService support
-     * @param  Zend\Amf\Request\StreamRequest $request
-     * @return Zend\Amf\Response\StreamResponse
-     * @throws Zend\Amf\Server\Exception|Exception
+     * @param  Request\StreamRequest $request
+     * @return Response\StreamResponse
      */
     protected function _handle(Request\StreamRequest $request)
     {
@@ -639,8 +642,9 @@ class Server implements ServerDefinition
     /**
      * Handle an AMF call from the gateway.
      *
-     * @param  null|Zend\Amf\Request\StreamRequest $request Optional
-     * @return Zend\Amf\Response\StreamResponse
+     * @param  null|Request\StreamRequest $request Optional
+     * @return Response\StreamResponse
+     * @throws Exception\RuntimeException
      */
     public function handle($request = null)
     {
@@ -677,8 +681,9 @@ class Server implements ServerDefinition
     /**
      * Set request object
      *
-     * @param  string|Zend\Amf\Request\StreamRequest $request
-     * @return Zend\Amf\Server
+     * @param  string|Request\StreamRequest $request
+     * @return Server
+     * @throws Exception\InvalidArgumentException
      */
     public function setRequest($request)
     {
@@ -699,7 +704,7 @@ class Server implements ServerDefinition
     /**
      * Return currently registered request object
      *
-     * @return null|Zend\Amf\Request\StreamRequest
+     * @return null|Request\StreamRequest
      */
     public function getRequest()
     {
@@ -713,8 +718,9 @@ class Server implements ServerDefinition
     /**
      * Public access method to private Zend_Amf_Server_Response reference
      *
-     * @param  string|Zend_Amf_Server_Response $response
-     * @return Zend\Amf\Server
+     * @param  string|Response\StreamResponse $response
+     * @return Server
+     * @throws Exception\InvalidArgumentException
      */
     public function setResponse($response)
     {
@@ -757,8 +763,8 @@ class Server implements ServerDefinition
      * @param  string|object $class
      * @param  string $namespace Optional
      * @param  mixed $arg Optional arguments to pass to a method
-     * @return Zend\Amf\Server
-     * @throws Zend\Amf\Server\Exception on invalid input
+     * @return Server
+     * @throws Exception\InvalidArgumentException on invalid input
      */
     public function setClass($class, $namespace = '', $argv = null)
     {
@@ -796,8 +802,8 @@ class Server implements ServerDefinition
      *
      * @param  string|array $function Valid callback
      * @param  string $namespace Optional namespace prefix
-     * @return Zend\Amf\Server
-     * @throws Zend\Amf\Server\Exception
+     * @return Server
+     * @throws Exception\InvalidArgumentException
      */
     public function addFunction($function, $namespace = '')
     {
@@ -829,6 +835,7 @@ class Server implements ServerDefinition
      * Zend_Server_Reflection_Function_Abstract pairs
      *
      * @return void
+     * @throws Exception\InvalidArgumentException
      */
     protected function _buildDispatchTable()
     {
@@ -919,7 +926,7 @@ class Server implements ServerDefinition
      *
      * @param  string $asClass
      * @param  string $phpClass
-     * @return Zend\Amf\Server
+     * @return Server
      */
     public function setClassMap($asClass, $phpClass)
     {

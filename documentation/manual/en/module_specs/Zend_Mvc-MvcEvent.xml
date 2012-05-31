@@ -24,6 +24,12 @@
   <itemizedlist>
     <listitem>
       <para>
+        <classname>Application</classname> object
+      </para>
+    </listitem>
+
+    <listitem>
+      <para>
         <classname>Request</classname> object
       </para>
     </listitem>
@@ -51,6 +57,13 @@
         "Result", usually the result of dispatching a controller
       </para>
     </listitem>
+
+    <listitem>
+      <para>
+        <classname>ViewModel</classname> object, typically representing the
+        layout view model
+      </para>
+    </listitem>
   </itemizedlist>
 
   <para>
@@ -58,6 +71,18 @@
   </para>
 
   <itemizedlist>
+    <listitem>
+      <para>
+        <methodname>setApplication($application)</methodname>
+      </para>
+    </listitem>
+
+    <listitem>
+      <para>
+        <methodname>getApplication()</methodname>
+      </para>
+    </listitem>
+
     <listitem>
       <para>
         <methodname>setRequest($request)</methodname>
@@ -117,14 +142,27 @@
         <methodname>getResult()</methodname>
       </para>
     </listitem>
+
+    <listitem>
+      <para>
+        <methodname>setViewModel($viewModel)</methodname>
+      </para>
+    </listitem>
+
+    <listitem>
+      <para>
+        <methodname>getViewModel()</methodname>
+      </para>
+    </listitem>
   </itemizedlist>
 
   <para>
-    Within <methodname>Application::run()</methodname>, the event is injected
-    with the Request, Response, and Router immediately. Following the
-    <varname>route</varname> event, it will be injected also with the
-    <classname>RouteMatch</classname> object encapsulating the results of
-    routing.
+    The <classname>Application</classname>, <classname>Request</classname>,
+    <classname>Response</classname>, <classname>Router</classname>, and
+    <classname>ViewModel</classname> are all injected during the
+    <varname>bootstrap</varname> event. Following the <varname>route</varname>
+    event, it will be injected also with the <classname>RouteMatch</classname>
+    object encapsulating the results of routing.
   </para>
 
   <para>

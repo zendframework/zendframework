@@ -97,7 +97,7 @@ class Tiff extends AbstractImage
      *
      * @param int $type
      * @param string $bytes
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
     protected function unpackBytes($type, $bytes) {
         if(!isset($this->_endianType)) {
@@ -133,7 +133,7 @@ class Tiff extends AbstractImage
      * Object constructor
      *
      * @param string $imageFileName
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
     public function __construct($imageFileName)
     {

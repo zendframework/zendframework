@@ -769,7 +769,7 @@ abstract class AbstractHelper extends View\Helper\HtmlElement implements HelperI
      */
     protected function _normalizeId($value)
     {
-        $prefix = get_class($this);
+        $prefix = get_called_class();
         $prefix = strtolower(trim(substr($prefix, strrpos($prefix, '\\')), '\\'));
 
         return $prefix . '-' . $value;

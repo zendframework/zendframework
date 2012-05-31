@@ -123,10 +123,7 @@ if (isset($opts->l)) {
             $classmapPathParts = explode('/', $classmapPathCompare);
 
             foreach ($classmapPathParts as $index => $part) {
-                var_dump($libraryPathParts[$index]);
-                var_dump($part);
-                var_dump(1);
-                
+
                 if (isset($libraryPathParts[$index]) && $libraryPathParts[$index] == $part) {
                     continue;
                 }

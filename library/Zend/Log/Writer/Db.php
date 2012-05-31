@@ -75,7 +75,7 @@ class Db extends AbstractWriter
     public function __construct(Adapter $db, $tableName, array $columnMap = null, $separator = null)
     {
         if ($db === null) {
-            Exception\InvalidArgumentException('You must pass a valid Zend\Db\Adapter\Adapter');
+            throw new Exception\InvalidArgumentException('You must pass a valid Zend\Db\Adapter\Adapter');
         }
         
         $this->db        = $db;
@@ -90,10 +90,11 @@ class Db extends AbstractWriter
     /**
      * Formatting is not possible on this writer
      *
+     * @param Formatter\FormatterInterface $formatter
      * @return void
      * @throws Exception\InvalidArgumentException
      */
-    public function setFormatter(Formatter $formatter)
+    public function setFormatter(Formatter\FormatterInterface $formatter)
     {
         throw new Exception\InvalidArgumentException(get_class() . ' does not support formatting');
     }

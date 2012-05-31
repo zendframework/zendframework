@@ -31,6 +31,5 @@ namespace Zend\XmlRpc\Client\Exception;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class IntrospectException
-    extends \InvalidArgumentException
-    implements \Zend\XmlRpc\Client\Exception\ExceptionInterface
+    extends InvalidArgumentException
 {}

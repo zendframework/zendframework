@@ -346,8 +346,6 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
 
         foreach ($headers as $key => $val)
             $this->assertContains(strtolower("$key: $val"), $body);
-
-        $this->assertContains(strtolower($acceptHeader), $body);
     }
 
     /**

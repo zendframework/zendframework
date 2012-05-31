@@ -21,40 +21,41 @@
 
 namespace Zend\Code\Scanner;
 
-use Zend\Code\Exception,
-    stdClass;
+use Zend\Code\Exception;
+use stdClass;
 
 /**
  * Shared utility methods used by scanners
  *
  * @package    Zend_Code
  * @subpackage Scanner
- * @license New BSD {@link http://framework.zend.com/license/new-bsd}
+ * @license    New BSD {@link http://framework.zend.com/license/new-bsd}
  */
 class Util
 {
     public static function resolveImports(&$value, $key = null, stdClass $data)
     {
         if (!property_exists($data, 'uses') || !property_exists($data, 'namespace')) {
-            throw new Exception\InvalidArgumentException(sprintf(
-                '%s expects a data object containing "uses" and "namespace" properties; on or both missing',
-                __METHOD__
-            ));
+            throw new Exception\InvalidArgumentException(
+                sprintf(
+                    '%s expects a data object containing "uses" and "namespace" properties; on or both missing',
+                    __METHOD__
+                ));
         }
-        
+
         if ($data->namespace && !$data->uses && strlen($value) > 0 && $value{0} != '\\') {
             $value = $data->namespace . '\\' . $value;
             return;
         }
-        
+
         if (!$data->uses || strlen($value) <= 0 || $value{0} == '\\') {
             $value = ltrim($value, '\\');
             return;
         }
-        
+
         if ($data->namespace || $data->uses) {
             $firstPart = $value;
-            if (($firstPartEnd = strpos($firstPart, '\\')) !== false)  {
+            if (($firstPartEnd = strpos($firstPart, '\\')) !== false) {
                 $firstPart = substr($firstPart, 0, $firstPartEnd);
             } else {
                 $firstPartEnd = strlen($firstPart);

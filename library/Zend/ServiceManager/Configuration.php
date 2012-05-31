@@ -52,7 +52,7 @@ class Configuration implements ConfigurationInterface
         }
 
         foreach ($this->getInvokables() as $name => $invokable) {
-            $serviceManager->setInvokable($name, $invokable);
+            $serviceManager->setInvokableClass($name, $invokable);
         }
 
         foreach ($this->getServices() as $name => $service) {

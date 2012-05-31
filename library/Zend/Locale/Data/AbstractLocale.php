@@ -23,7 +23,8 @@ namespace Zend\Locale\Data;
 
 use Zend\Cache\Storage\StorageInterface as CacheStorage,
     Zend\Locale\Locale,
-    Zend\Locale\Exception\InvalidArgumentException;
+    Zend\Locale\Exception\InvalidArgumentException,
+    Zend\Locale\Exception\UnsupportedMethodException;
 
 /**
  * Locale data reader, handles the CLDR
@@ -127,7 +128,7 @@ abstract class AbstractLocale
      */
     public static function getDisplayLanguage($locale, $invert = false, $detail = null)
     {
-        throw new UnsupportedMethod('This implementation does not support the selected locale information');
+        throw new UnsupportedMethodException('This implementation does not support the selected locale information');
     }
 
     /**
@@ -141,7 +142,7 @@ abstract class AbstractLocale
      */
     public static function getDisplayScript($locale, $invert = false, $detail = null)
     {
-        throw new UnsupportedMethod('This implementation does not support the selected locale information');
+        throw new UnsupportedMethodException('This implementation does not support the selected locale information');
     }
 
     /**
@@ -155,7 +156,7 @@ abstract class AbstractLocale
      */
     public static function getDisplayTerritory($locale, $invert = false, $detail = null)
     {
-        throw new UnsupportedMethod('This implementation does not support the selected locale information');
+        throw new UnsupportedMethodException('This implementation does not support the selected locale information');
     }
 
     /**
@@ -169,7 +170,7 @@ abstract class AbstractLocale
      */
     public static function getDisplayVariant($locale, $invert = false, $detail = null)
     {
-        throw new UnsupportedMethod('This implementation does not support the selected locale information');
+        throw new UnsupportedMethodException('This implementation does not support the selected locale information');
     }
 
 /**

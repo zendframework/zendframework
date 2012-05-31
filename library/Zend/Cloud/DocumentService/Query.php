@@ -57,11 +57,11 @@ class Query implements QueryAdapter\QueryAdapterInterface
      * You can use any clause by doing $query->foo('bar')
      * but concrete adapters should be able to recognise it
      *
-     * The call will be iterpreted as clause 'foo' with argument 'bar'
+     * The call will be interpreted as clause 'foo' with argument 'bar'
      *
      * @param  string $name Clause/method name
      * @param  mixed $args
-     * @return Zend\Cloud\DocumentService\Query
+     * @return \Zend\Cloud\DocumentService\Query
      */
     public function __call($name, $args)
     {
@@ -73,7 +73,7 @@ class Query implements QueryAdapter\QueryAdapterInterface
      * SELECT clause (fields to be selected)
      *
      * @param  null|string|array $select
-     * @return Zend\Cloud\DocumentService\Query
+     * @return \Zend\Cloud\DocumentService\Query
      */
     public function select($select)
     {
@@ -91,7 +91,7 @@ class Query implements QueryAdapter\QueryAdapterInterface
      * FROM clause
      *
      * @param string $name Field names
-     * @return Zend\Cloud\DocumentService\Query
+     * @return \Zend\Cloud\DocumentService\Query
      */
     public function from($name)
     {

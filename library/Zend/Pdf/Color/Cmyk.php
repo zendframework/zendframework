@@ -21,8 +21,7 @@
 
 namespace Zend\Pdf\Color;
 
-use Zend\Pdf\Color,
-    Zend\Pdf\InternalType;
+use Zend\Pdf\InternalType;
 
 /**
  * CMYK color implementation
@@ -33,7 +32,7 @@ use Zend\Pdf\Color,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Cmyk implements Color
+class Cmyk implements ColorInterface
 {
     /**
      * Cyan level.

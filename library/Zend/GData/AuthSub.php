@@ -116,7 +116,7 @@ class AuthSub
         }
 
         // Parse Google's response
-        if ($response->isSuccessful()) {
+        if ($response->isSuccess()) {
             $goog_resp = array();
             foreach (explode("\n", $response->getBody()) as $l) {
                 $l = rtrim($l);
@@ -166,7 +166,7 @@ class AuthSub
         }
         ob_end_clean();
         // Parse Google's response
-        if ($response->isSuccessful()) {
+        if ($response->isSuccess()) {
             return true;
         } else {
             return false;

@@ -29,6 +29,6 @@ namespace Zend\Queue\Exception;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class UnexpectedValueException
-    extends \UnexpectedValueException implements ExceptionInterface
-{
-}
+    extends \UnexpectedValueException
+    implements ExceptionInterface
+{}

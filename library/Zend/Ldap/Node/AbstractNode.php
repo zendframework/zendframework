@@ -35,11 +35,12 @@ use Zend\Ldap\Exception;
  */
 abstract class AbstractNode implements \ArrayAccess, \Countable
 {
-    protected static $systemAttributes=array('createtimestamp', 'creatorsname',
-        'entrycsn', 'entrydn', 'entryuuid', 'hassubordinates', 'modifiersname',
-        'modifytimestamp', 'structuralobjectclass', 'subschemasubentry',
-        'distinguishedname', 'instancetype', 'name', 'objectcategory', 'objectguid',
-        'usnchanged', 'usncreated', 'whenchanged', 'whencreated');
+    protected static $systemAttributes = array('createtimestamp', 'creatorsname',
+                                               'entrycsn', 'entrydn', 'entryuuid', 'hassubordinates', 'modifiersname',
+                                               'modifytimestamp', 'structuralobjectclass', 'subschemasubentry',
+                                               'distinguishedname', 'instancetype', 'name', 'objectcategory',
+                                               'objectguid',
+                                               'usnchanged', 'usncreated', 'whenchanged', 'whencreated');
 
     /**
      * Holds the node's DN.
@@ -330,8 +331,7 @@ abstract class AbstractNode implements \ArrayAccess, \Countable
     {
         if ($name == 'dn') {
             return $this->getDnString();
-        }
-        else {
+        } else {
             return Ldap\Attribute::getAttribute($this->currentData, $name, $index);
         }
     }

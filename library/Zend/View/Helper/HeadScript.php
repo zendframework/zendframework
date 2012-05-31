@@ -369,7 +369,6 @@ class HeadScript extends Placeholder\Container\Standalone
             );
         }
 
-        $this->_isValid($value);
         return $this->getContainer()->offsetSet($index, $value);
     }
 

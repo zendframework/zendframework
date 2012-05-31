@@ -47,7 +47,7 @@ class Null extends AbstractAdapter
      */
     public function isExists($name)
     {
-        throw new Exception\UnsupportedMethodCallException(__FUNCTION__ . '() is not supported by ' . get_class($this));
+        throw new Exception\UnsupportedMethodCallException(__FUNCTION__ . '() is not supported by ' . get_called_class());
     }
 
 
@@ -58,7 +58,7 @@ class Null extends AbstractAdapter
      */
     public function create($name, $timeout=null)
     {
-        throw new Exception\UnsupportedMethodCallException(__FUNCTION__ . '() is not supported by ' . get_class($this));
+        throw new Exception\UnsupportedMethodCallException(__FUNCTION__ . '() is not supported by ' . get_called_class());
     }
 
     /**
@@ -68,7 +68,7 @@ class Null extends AbstractAdapter
      */
     public function delete($name)
     {
-        throw new Exception\UnsupportedMethodCallException(__FUNCTION__ . '() is not supported by ' . get_class($this));
+        throw new Exception\UnsupportedMethodCallException(__FUNCTION__ . '() is not supported by ' . get_called_class());
     }
 
     /**
@@ -78,7 +78,7 @@ class Null extends AbstractAdapter
      */
     public function getQueues()
     {
-        throw new Exception\UnsupportedMethodCallException(__FUNCTION__ . '() is not supported by ' . get_class($this));
+        throw new Exception\UnsupportedMethodCallException(__FUNCTION__ . '() is not supported by ' . get_called_class());
     }
 
     /**
@@ -88,7 +88,7 @@ class Null extends AbstractAdapter
      */
     public function count(Queue $queue=null)
     {
-        throw new Exception\UnsupportedMethodCallException(__FUNCTION__ . '() is not supported by ' . get_class($this));
+        throw new Exception\UnsupportedMethodCallException(__FUNCTION__ . '() is not supported by ' . get_called_class());
     }
 
     /********************************************************************
@@ -102,7 +102,7 @@ class Null extends AbstractAdapter
      */
     public function send($message, Queue $queue=null)
     {
-        throw new Exception\UnsupportedMethodCallException(__FUNCTION__ . '() is not supported by ' . get_class($this));
+        throw new Exception\UnsupportedMethodCallException(__FUNCTION__ . '() is not supported by ' . get_called_class());
     }
 
     /**
@@ -112,7 +112,7 @@ class Null extends AbstractAdapter
      */
     public function receive($maxMessages=null, $timeout=null, Queue $queue=null)
     {
-        throw new Exception\UnsupportedMethodCallException(__FUNCTION__ . '() is not supported by ' . get_class($this));
+        throw new Exception\UnsupportedMethodCallException(__FUNCTION__ . '() is not supported by ' . get_called_class());
     }
 
     /**
@@ -122,7 +122,7 @@ class Null extends AbstractAdapter
      */
     public function deleteMessage(Message $message)
     {
-        throw new Exception\UnsupportedMethodCallException(__FUNCTION__ . '() is not supported by ' . get_class($this));
+        throw new Exception\UnsupportedMethodCallException(__FUNCTION__ . '() is not supported by ' . get_called_class());
     }
 
     /********************************************************************

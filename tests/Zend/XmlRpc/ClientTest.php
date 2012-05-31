@@ -621,6 +621,58 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $signature = $introspector->getMethodSignature('add');
     }
 
+
+    /**
+     * @group ZF-8580
+     */
+    public function testCallSelectsCorrectSignatureIfMoreThanOneIsAvailable()
+    {
+        $this->mockIntrospector();
+
+        $this->mockedIntrospector
+             ->expects($this->exactly(2))
+             ->method('getMethodSignature')
+             ->with('get')
+             ->will($this->returnValue(array(
+                 array('parameters' => array('int')),
+                 array('parameters' => array('array'))
+             )));
+
+          $expectedResult = 'array';
+          $this->setServerResponseTo($expectedResult);
+
+          $this->assertSame(
+              $expectedResult,
+              $this->xmlrpcClient->call('get', array(array(1)))
+          );
+
+          $expectedResult = 'integer';
+          $this->setServerResponseTo($expectedResult);
+
+          $this->assertSame(
+              $expectedResult,
+              $this->xmlrpcClient->call('get', array(1))
+          );
+    }
+
+    /**
+     * @group ZF-1897
+     */
+    public function testHandlesLeadingOrTrailingWhitespaceInChunkedResponseProperly()
+    {
+        $baseUri = "http://foo:80";
+        $this->httpAdapter = new Adapter\Test();
+        $this->httpClient = new Http\Client(null, array('adapter' => $this->httpAdapter));
+        
+        $respBody = file_get_contents(dirname(__FILE__) . "/_files/ZF1897-response-chunked.txt");
+        $this->httpAdapter->setResponse($respBody);
+
+        $this->xmlrpcClient = new Client($baseUri);
+        $this->xmlrpcClient->setHttpClient($this->httpClient);
+        
+        $this->assertEquals('FOO', $this->xmlrpcClient->call('foo'));
+    }
+
     // Helpers
     public function setServerResponseTo($nativeVars)
     {

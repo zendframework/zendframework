@@ -28,5 +28,5 @@ namespace Zend\Form\Exception;
  */
 class BadMethodCallException 
     extends \BadMethodCallException
-    implements \Zend\Form\Exception
+    implements ExceptionInterface
 {}

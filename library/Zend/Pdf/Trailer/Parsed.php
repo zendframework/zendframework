@@ -121,14 +121,14 @@ class Parsed extends AbstractTrailer
      * Get header of free objects list
      * Returns object number of last free object
      *
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      * @return integer
      */
     public function getLastFreeObject()
     {
         try {
             $this->_context->getRefTable()->getNextFree('0 65535 R');
-        } catch (Exception $e) {
+        } catch (Exception\ExceptionInterface $e) {
             if ($e->getMessage() == 'Object not found.') {
                 /**
                  * Here is work around for some wrong generated PDFs.

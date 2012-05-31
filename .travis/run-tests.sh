@@ -1,5 +1,5 @@
 #!/bin/bash
-travisdir=$(dirname $(readlink /proc/$$/fd/255))
+travisdir=$(dirname "$0")
 testdir="$travisdir/../tests"
 testedcomponents=(`cat "$travisdir/tested-components"`)
 result=0

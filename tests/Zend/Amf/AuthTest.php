@@ -194,7 +194,12 @@ class AuthTest extends \PHPUnit_Framework_TestCase
         $this->_server->setAcl($this->_acl);
         $resp = $this->_callServiceAuth("testuser", "", 'ZendTest\\Amf\\TestAsset\\Authentication\\NoAcl');
         $this->assertTrue($resp[0]->getData() instanceof Messaging\AcknowledgeMessage);
-        $this->assertContains("hello", $resp[1]->getData());
+        $this->assertTrue(isset($resp[1]));
+        $this->assertTrue(is_object($resp[1]));
+        $this->assertTrue(method_exists($resp[1], 'getData'));
+        $data = $resp[1]->getData();
+        $this->assertInternalType('string', $data);
+        $this->assertContains("hello", $data);
     }
 
     // Class-defined ACL

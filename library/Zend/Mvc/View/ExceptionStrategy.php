@@ -84,7 +84,7 @@ class ExceptionStrategy implements ListenerAggregateInterface
     /**
      * Flag: display exceptions in error pages?
      *
-     * @param  bool $flag
+     * @param  bool $displayExceptions
      * @return ExceptionStrategy
      */
     public function setDisplayExceptions($displayExceptions)

@@ -84,8 +84,8 @@ class Currency
      *
      * @param  string|array       $options OPTIONAL Options array or currency short name
      *                                              when string is given
-     * @param  string|Zend\Locale\Locale $locale  OPTIONAL locale name
-     * @throws Zend\Currency\Exception   When currency is invalid
+     * @param  string|\Zend\Locale\Locale $locale  OPTIONAL locale name
+     * @throws Exception\InvalidArgumentException   When currency is invalid
      */
     public function __construct($options = null, $locale = null)
     {
@@ -129,7 +129,7 @@ class Currency
      *
      * @param  integer|float $value   OPTIONAL Currency value
      * @param  array         $options OPTIONAL options to set temporary
-     * @throws Zend\Currency\Exception When the value is not a number
+     * @throws Exception\InvalidArgumentException When the value is not a number
      * @return string
      */
     public function toCurrency($value = null, array $options = array())
@@ -273,7 +273,7 @@ class Currency
      * actual set locale will be used
      *
      * @param  array $options (Optional) Options to set
-     * @return Zend\Currency\Currency
+     * @return Currency
      */
     public function setFormat(array $options = array())
     {
@@ -285,8 +285,8 @@ class Currency
      * Internal function for checking static given locale parameter
      *
      * @param  string                    $currency (Optional) Currency name
-     * @param  string|Zend\Locale\Locale $locale   (Optional) Locale to display informations
-     * @throws Zend\Currency\Exception   When locale contains no region
+     * @param  string|\Zend\Locale\Locale $locale   (Optional) Locale to display informations
+     * @throws Exception\InvalidArgumentException   When locale contains no region
      * @return string The extracted locale representation as string
      */
     private function _checkParams($currency = null, $locale = null)
@@ -321,8 +321,8 @@ class Currency
      * Returns the actual or details of other currency symbols,
      * when no symbol is available it returns the currency shortname (f.e. FIM for Finnian Mark)
      *
-     * @param  string                    $currency (Optional) Currency name
-     * @param  string|Zend\Locale\Locale $locale   (Optional) Locale to display informations
+     * @param  string                     $currency (Optional) Currency name
+     * @param  string|\Zend\Locale\Locale $locale   (Optional) Locale to display informations
      * @return string
      */
     public function getSymbol($currency = null, $locale = null)
@@ -349,8 +349,8 @@ class Currency
     /**
      * Returns the actual or details of other currency shortnames
      *
-     * @param  string                    $currency OPTIONAL Currency's name
-     * @param  string|Zend\Locale\Locale $locale   OPTIONAL The locale
+     * @param  string                     $currency OPTIONAL Currency's name
+     * @param  string|\Zend\Locale\Locale $locale   OPTIONAL The locale
      * @return string
      */
     public function getShortName($currency = null, $locale = null)
@@ -384,8 +384,8 @@ class Currency
     /**
      * Returns the actual or details of other currency names
      *
-     * @param  string                    $currency (Optional) Currency's short name
-     * @param  string|Zend\Locale\Locale $locale   (Optional) The locale
+     * @param  string                     $currency (Optional) Currency's short name
+     * @param  string|\Zend\Locale\Locale $locale   (Optional) The locale
      * @return string
      */
     public function getName($currency = null, $locale = null)
@@ -413,7 +413,7 @@ class Currency
      * Returns a list of regions where this currency is or was known
      *
      * @param  string $currency OPTIONAL Currency's short name
-     * @throws Zend\Currency\Exception When no currency was defined
+     * @throws Exception\InvalidArgumentException When no currency was defined
      * @return array List of regions
      */
     public function getRegionList($currency = null)
@@ -520,9 +520,9 @@ class Currency
      * Example: 'de_XX' will be set to 'de' because 'de_XX' does not exist
      * 'xx_YY' will be set to 'root' because 'xx' does not exist
      *
-     * @param  string|Zend\Locale\Locale $locale (Optional) Locale for parsing input
-     * @throws Zend\Currency\Exception When the given locale does not exist
-     * @return Zend\Currency Provides fluent interface
+     * @param  string|\Zend\Locale\Locale $locale (Optional) Locale for parsing input
+     * @throws Exception\InvalidArgumentException When the given locale does not exist
+     * @return Currency Provides fluent interface
      */
     public function setLocale($locale = null)
     {
@@ -533,7 +533,7 @@ class Currency
             } else {
                 throw new Exception\InvalidArgumentException("No region found within the locale '" . (string) $locale . "'");
             }
-        } catch (Locale\Exception $e) {
+        } catch (Locale\Exception\ExceptionInterface $e) {
             throw new Exception\InvalidArgumentException($e->getMessage());
         }
 
@@ -568,9 +568,9 @@ class Currency
     /**
      * Adds a currency
      *
-     * @param float|integer|Zend\Currency\Currency $value    Add this value to currency
-     * @param string|Zend\Currency\Currency        $currency The currency to add
-     * @return Zend\Currency\Currency
+     * @param float|integer|Currency $value    Add this value to currency
+     * @param string|Currency        $currency The currency to add
+     * @return Currency
      */
     public function setValue($value, $currency = null)
     {
@@ -581,9 +581,9 @@ class Currency
     /**
      * Adds a currency
      *
-     * @param float|integer|Zend\Currency\Currency $value    Add this value to currency
-     * @param string|Zend\Currency\Currency        $currency The currency to add
-     * @return Zend\Currency\Currency
+     * @param float|integer|Currency $value    Add this value to currency
+     * @param string|Currency        $currency The currency to add
+     * @return Currency
      */
     public function add($value, $currency = null)
     {
@@ -595,9 +595,9 @@ class Currency
     /**
      * Substracts a currency
      *
-     * @param float|integer|Zend\Currency\Currency $value    Substracts this value from currency
-     * @param string|Zend\Currency\Currency        $currency The currency to substract
-     * @return Zend\Currency\Currency
+     * @param float|integer|Currency $value    Substracts this value from currency
+     * @param string|Currency        $currency The currency to substract
+     * @return Currency
      */
     public function sub($value, $currency = null)
     {
@@ -609,9 +609,9 @@ class Currency
     /**
      * Divides a currency
      *
-     * @param float|integer|Zend\Currency\Currency $value    Divides this value from currency
-     * @param string|Zend\Currency\Currency        $currency The currency to divide
-     * @return Zend\Currency\Currency
+     * @param float|integer|Currency $value    Divides this value from currency
+     * @param string|Currency        $currency The currency to divide
+     * @return Currency
      */
     public function div($value, $currency = null)
     {
@@ -623,9 +623,9 @@ class Currency
     /**
      * Multiplies a currency
      *
-     * @param float|integer|Zend\Currency\Currency $value    Multiplies this value from currency
-     * @param string|Zend\Currency\Currency        $currency The currency to multiply
-     * @return Zend\Currency\Currency
+     * @param float|integer|Currency $value    Multiplies this value from currency
+     * @param string|Currency        $currency The currency to multiply
+     * @return Currency
      */
     public function mul($value, $currency = null)
     {
@@ -637,9 +637,9 @@ class Currency
     /**
      * Calculates the modulo from a currency
      *
-     * @param float|integer|Zend\Currency\Currency $value    Calculate modulo from this value
-     * @param string|Zend\Currency\Currency        $currency The currency to calculate the modulo
-     * @return Zend\Currency\Currency
+     * @param float|integer|Currency $value    Calculate modulo from this value
+     * @param string|Currency        $currency The currency to calculate the modulo
+     * @return Currency
      */
     public function mod($value, $currency = null)
     {
@@ -651,9 +651,9 @@ class Currency
     /**
      * Compares two currencies
      *
-     * @param float|integer|Zend\Currency\Currency $value    Compares the currency with this value
-     * @param string|Zend\Currency\Currency        $currency The currency to compare this value from
-     * @return Zend\Currency\Currency
+     * @param float|integer|Currency $value    Compares the currency with this value
+     * @param string|Currency        $currency The currency to compare this value from
+     * @return Currency
      */
     public function compare($value, $currency = null)
     {
@@ -671,8 +671,8 @@ class Currency
     /**
      * Returns true when the two currencies are equal
      *
-     * @param float|integer|Zend\Currency\Currency $value    Compares the currency with this value
-     * @param string|Zend\Currency\Currency        $currency The currency to compare this value from
+     * @param float|integer|Currency $value    Compares the currency with this value
+     * @param string|Currency        $currency The currency to compare this value from
      * @return boolean
      */
     public function equals($value, $currency = null)
@@ -688,8 +688,8 @@ class Currency
     /**
      * Returns true when the currency is more than the given value
      *
-     * @param float|integer|Zend\Currency\Currency $value    Compares the currency with this value
-     * @param string|Zend\Currency\Currency        $currency The currency to compare this value from
+     * @param float|integer|Currency $value    Compares the currency with this value
+     * @param string|Currency        $currency The currency to compare this value from
      * @return boolean
      */
     public function isMore($value, $currency = null)
@@ -705,8 +705,8 @@ class Currency
     /**
      * Returns true when the currency is less than the given value
      *
-     * @param float|integer|Zend\Currency\Currency $value    Compares the currency with this value
-     * @param string|Zend\Currency\Currency        $currency The currency to compare this value from
+     * @param float|integer|Currency $value    Compares the currency with this value
+     * @param string|Currency        $currency The currency to compare this value from
      * @return boolean
      */
     public function isLess($value, $currency = null)
@@ -723,8 +723,8 @@ class Currency
     /**
      * Internal method which calculates the exchanges currency
      *
-     * @param float|integer|Zend\Currency\Currency $value    Compares the currency with this value
-     * @param string|Zend\Currency\Currency        $currency The currency to compare this value from
+     * @param float|integer|Currency $value    Compares the currency with this value
+     * @param string|Currency        $currency The currency to compare this value from
      * @return float
      */
     protected function _exchangeCurrency($value, $currency)
@@ -753,7 +753,7 @@ class Currency
     /**
      * Returns the set service class
      *
-     * @return Zend\Currency\CurrencyService
+     * @return CurrencyService
      */
     public function getService()
     {
@@ -763,8 +763,8 @@ class Currency
     /**
      * Sets a new exchange service
      *
-     * @param string|Zend\Currency\CurrencyService $service Service class
-     * @return Zend\Currency\Currency
+     * @param string|CurrencyService $service Service class
+     * @return Currency
      */
     public function setService($service)
     {
@@ -787,12 +787,12 @@ class Currency
      * Internal method for checking the options array
      *
      * @param  array $options Options to check
-     * @throws Zend\Currency\Exception On unknown position
-     * @throws Zend\Currency\Exception On unknown locale
-     * @throws Zend\Currency\Exception On unknown display
-     * @throws Zend\Currency\Exception On precision not between -1 and 30
-     * @throws Zend\Currency\Exception On problem with script conversion
-     * @throws Zend\Currency\Exception On unknown options
+     * @throws Exception\InvalidArgumentException On unknown position
+     * @throws Exception\InvalidArgumentException On unknown locale
+     * @throws Exception\InvalidArgumentException On unknown display
+     * @throws Exception\InvalidArgumentException On precision not between -1 and 30
+     * @throws Exception\InvalidArgumentException On problem with script conversion
+     * @throws Exception\InvalidArgumentException On unknown options
      * @return array
      */
     protected function _checkOptions(array $options = array())
@@ -847,7 +847,7 @@ class Currency
                 case 'script':
                     try {
                         Locale\Format::convertNumerals(0, $options['script']);
-                    } catch (Locale\Exception $e) {
+                    } catch (Locale\Exception\ExceptionInterface $e) {
                         throw new Exception\InvalidArgumentException($e->getMessage());
                     }
                     break;

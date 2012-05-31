@@ -31,27 +31,22 @@ namespace Zend\XmlRpc\Value;
 class BigInteger extends Integer
 {
     /**
-     * @var \Zend\Crypt\Math\BigInteger
-     */
-    protected $_integer;
-
-    /**
      * @param mixed $value
      */
     public function __construct($value)
     {
-        $this->_integer = new \Zend\Crypt\Math\BigInteger();
-        $this->_value   = $this->_integer->init($this->_value);
+        $integer = new \Zend\Math\BigInteger();
+        $this->_value   = $integer->init($value);
         $this->_type    = self::XMLRPC_TYPE_I8;
     }
 
     /**
      * Return bigint value object
      *
-     * @return \Zend\Crypt\Math\BigInteger
+     * @return \Zend\Math\BigInteger
      */
     public function getValue()
     {
-        return $this->_integer;
+        return $this->_value;
     }
 }

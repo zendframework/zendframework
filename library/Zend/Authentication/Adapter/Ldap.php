@@ -21,9 +21,9 @@
 
 namespace Zend\Authentication\Adapter;
 
-use Zend\Authentication\Result as AuthenticationResult,
-    Zend\Ldap as ZendLdap,
-    Zend\Ldap\Exception\LdapException;
+use Zend\Authentication\Result as AuthenticationResult;
+use Zend\Ldap as ZendLdap;
+use Zend\Ldap\Exception\LdapException;
 
 /**
  * @category   Zend
@@ -76,7 +76,6 @@ class Ldap implements AdapterInterface
      * @param  array  $options  An array of arrays of Zend\Ldap\Ldap options
      * @param  string $username The username of the account being authenticated
      * @param  string $password The password of the account being authenticated
-     * @return void
      */
     public function __construct(array $options = array(), $username = null, $password = null)
     {
@@ -235,8 +234,8 @@ class Ldap implements AdapterInterface
     /**
      * Authenticate the user
      *
-     * @return Zend\Authentication\Result
-     * @throws Zend\Authentication\Adapter\Exception\ExceptionInterface
+     * @return AuthenticationResult
+     * @throws Exception\ExceptionInterface
      */
     public function authenticate()
     {
@@ -273,7 +272,7 @@ class Ldap implements AdapterInterface
         foreach ($this->options as $name => $options) {
 
             if (!is_array($options)) {
-                throw new InvalidArgumentException('Adapter options array not an array');
+                throw new Exception\InvalidArgumentException('Adapter options array not an array');
             }
             $adapterOptions = $this->prepareOptions($ldap, $options);
             $dname = '';

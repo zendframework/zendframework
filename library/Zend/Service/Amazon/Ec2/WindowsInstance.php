@@ -20,7 +20,7 @@
  */
 
 namespace Zend\Service\Amazon\Ec2;
-use Zend\Crypt;
+use Zend\Crypt\Hmac;
 
 /**
  * An Amazon EC2 interface that allows yout to run, terminate, reboot and describe Amazon
@@ -176,7 +176,7 @@ class WindowsInstance extends AbstractEc2
      */
     protected function _signS3UploadPolicy($policy)
     {
-        $hmac = Crypt\Hmac::compute($this->_getSecretKey(), 'SHA1', $policy, Crypt\Hmac::BINARY);
+        $hmac = Hmac::compute($this->_getSecretKey(), 'SHA1', $policy, Hmac::BINARY);
         return $hmac;
     }
 }

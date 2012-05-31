@@ -19,15 +19,17 @@
   <itemizedlist>
     <listitem>
       <para>
-        <classname>Zend\Di</classname>, specifically its
-        <classname>LocatorInterface</classname> interface, but by default the dependency
-        injection container
+        <classname>Zend\ServiceManager</classname>. Zend Framework provides a
+        set of default service definitions to use in order to create and
+        configure your application instance and workflow.
       </para>
     </listitem>
 
     <listitem>
       <para>
-        <classname>Zend\EventManager</classname>
+        <classname>Zend\EventManager</classname>, which is used everywhere from
+        initial bootstrapping of the application to returning the response; the
+        MVC is event driven.
       </para>
     </listitem>
 
@@ -76,16 +78,35 @@
         event wiring, action dispatching, etc.
       </para>
     </listitem>
+
+    <listitem>
+      <para>
+        <classname>Zend\Mvc\Service</classname>, which provides a set of
+        <classname>ServiceManager</classname> factories and definitions for the
+        default application workflow.
+      </para>
+    </listitem>
+
+    <listitem>
+      <para>
+        <classname>Zend\Mvc\View</classname>, which provides the default
+        wiring for renderer selection, view script resolution, helper
+        registration, and more; additionally, it provides a number of
+        listeners that tie into the MVC workflow to provide features such as
+        automated template name resolution, automated view model creation
+        and injection, and more.
+      </para>
+    </listitem>
   </itemizedlist>
 
   <para>
     The gateway to the MVC is the
-    <classname>Zend\Mvc\Application</classname> object (referred to simply
-    as <classname>Application</classname> from this point forward). Its
-    primary responsibilities are to <emphasis>route</emphasis> the
-    request, and to retrieve and <emphasis>dispatch</emphasis> the
-    controller discovered. Once accomplished, it returns a response,
-    which can then be <emphasis>sent</emphasis>.
+    <classname>Zend\Mvc\Application</classname> object (referred to simply as
+    <classname>Application</classname> from this point forward). Its primary
+    responsibilities are to <emphasis>bootstrap</emphasis> resources,
+    <emphasis>route</emphasis> the request, and to retrieve and
+    <emphasis>dispatch</emphasis> the controller discovered. Once accomplished,
+    it returns a response, which can then be <emphasis>sent</emphasis>.
   </para>
 
   <section xml:id="zend.mvc.intro.basic-application-structure">
@@ -98,7 +119,11 @@
     <literallayout>
 application_root/
     config/
-        application.config.php
+        application.php
+        autoload/
+            global.php
+            local.php
+            // etc.
     data/
     module/
     vendor/
@@ -181,8 +206,9 @@ module_root/
         &lt;module_namespace&gt;/
             &lt;test code files&gt;
     view/
-        &lt;dir-named-after-a-controller/
-            &lt;.phtml files&gt;
+        &lt;dir-named-after-module-namespace&gt;/
+            &lt;dir-named-after-a-controller&gt;/
+                &lt;.phtml files&gt;
 </literallayout>
 
     <para>
@@ -217,7 +243,10 @@ class Module
       <emphasis>every</emphasis> page request and should
       <emphasis>only</emphasis> be used for performing
       <emphasis>lightweight</emphasis> tasks such as registering event
-      listeners.
+      listeners. Similarly, an <methodname>onBootstrap()</methodname> method
+      (which accepts an <classname>MvcEvent</classname> instance) may be
+      defined; it will be triggered for every page request, and should be used
+      for lightweight tasks only.
     </para>
 
     <para>
@@ -304,102 +333,184 @@ class Module
     <title>Bootstrapping an Application</title>
 
     <para>
-      An <classname>Application</classname> composes several objects, but the
-      ones of particular interest to the developer are the Router and the
-      Locator. These will always need to be configured and injected in
-      order for the <classname>Application</classname> to run. Thus,
-      bootstrapping consists of configuring and injecting the router, as
-      well as the locator.
+        The <classname>Application</classname> has six basic dependencies.
     </para>
 
-    <para>
-      Zend Framework ships a default bootstrap implementation in
-      <classname>Zend\Mvc\Bootstrap</classname>. This class accepts an
-      instance of <classname>Zend\Config\Config</classname> to its constructor;
-      once you have an instance, you then call its
-      <methodname>bootstrap()</methodname> method, passing it the
-      <classname>Application</classname> instance. It will then configure your
-      locator (using <classname>Zend\Di\Di</classname> by default) and your
-      router (using <classname>Zend\Mvc\Router\Http\TreeRouteStack</classname>
-      by default).
-    </para>
+    <itemizedlist>
+        <listitem>
+            <para>
+                <emphasis role="strong">configuration</emphasis>, usually an
+                array or object implementing <classname>ArrayAccess</classname>.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <emphasis role="strong">ServiceManager</emphasis> instance.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <emphasis role="strong">EventManager</emphasis> instance, which,
+                by default, is pulled from the
+                <classname>ServiceManager</classname>, by the service name
+                "EventManager".
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <emphasis role="strong">ModuleManager</emphasis> instance, which,
+                by default, is pulled from the
+                <classname>ServiceManager</classname>, by the service name
+                "ModuleManager".
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <emphasis role="strong">Request</emphasis> instance, which,
+                by default, is pulled from the
+                <classname>ServiceManager</classname>, by the service name
+                "Request".
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <emphasis role="strong">Response</emphasis> instance, which,
+                by default, is pulled from the
+                <classname>ServiceManager</classname>, by the service name
+                "Response".
+            </para>
+        </listitem>
+    </itemizedlist>
 
     <para>
-      Once those two tasks are accomplished, it then triggers a "bootstrap"
-      event on its attached <classname>EventManager</classname> instance. This
-      allows your modules to attach listeners, and thus perform additional, 
-      module-specific, bootstrapping tasks (which might include registering
-      ACLs, setting up cache or log listeners, etc.).
-    </para>
-
-    <para>
-      Usage would then be as follows:
+        These may be satisfied at instantiation:
     </para>
 
     <programlisting language="php"><![CDATA[
-// Assuming $config is the merged config from all modules
-$bootstrap   = new Bootstrap($config);
-$application = new Application();
-$bootstrap->bootstrap($application);
+use Zend\EventManager\EventManager;
+use Zend\Http\PhpEnvironment;
+use Zend\ModuleManager\ModuleManager;
+use Zend\Mvc\Application;
+use Zend\ServiceManager\ServiceManager;
+
+$config = include 'config/application.php';
+
+$serviceManager = new ServiceManager();
+$serviceManager->setService('EventManager', new EventManager());
+$serviceManager->setService('ModuleManager', new ModuleManager());
+$serviceManager->setService('Request', new PhpEnvironment\Request());
+$serviceManager->setService('Response', new PhpEnvironment\Response());
+
+$application = new Application($config, $serviceManager);
 ]]></programlisting>
 
     <para>
-      At this point, your <classname>Application</classname> would be ready
-      to run:
+      Once you've done this, there are two additional actions you can take. The
+      first is to "bootstrap" the application. In the default implementation,
+      this does the following:
+    </para>
+
+    <itemizedlist>
+        <listitem>
+            <para>
+                Attaches the default route listener
+                (<classname>Zend\Mvc\RouteListener</classname>).
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                Attaches the default dispatch listener
+                (<classname>Zend\Mvc\DispatchListener</classname>).
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                Attaches the <classname>ViewManager</classname> listener
+                (<classname>Zend\Mvc\View\ViewManager</classname>).
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                Creates the <classname>MvcEvent</classname>, and injects it with
+                the application, request, and response; it also retrieves the
+                router (<classname>Zend\Mvc\Router\Http\TreeRouteStack</classname>)
+                at this time and attaches it to the event.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                Triggers the "bootstrap" event.
+            </para>
+        </listitem>
+    </itemizedlist>
+
+    <para>
+      If you do not want these actions, or want to provide alternatives, you can
+      do so by extending the <classname>Application</classname> class and/or
+      simply coding what actions you want to occur.
+    </para>
+
+    <para>
+      The second action you can take with the configured
+      <classname>Application</classname> is to <methodname>run()</methodname>
+      it. Calling this method simply does the following: it triggers the
+      "route" event, followed by the "dispatch" event, and, depending on
+      execution, the "render" event; when done, it triggers the "finish"
+      event, and then returns the response instance. If an error occurs during
+      either the "route" or "dispatch" event, a "dispatch.error" event is
+      triggered as well.
+    </para>
+
+    <para>
+      This is a lot to remember in order to bootstrap the application; in fact,
+      we haven't covered all the services available by default yet. You can
+      greatly simplify things by using the default
+      <classname>ServiceManager</classname> configuration shipped with the MVC.
     </para>
 
     <programlisting language="php"><![CDATA[
+use Zend\Loader\AutoloaderFactory;
+use Zend\Mvc\Service\ServiceManagerConfiguration;
+use Zend\ServiceManager\ServiceManager;
+
+// setup autoloader
+AutoloaderFactory::factory();
+
+// get application stack configuration
+$configuration = include 'config/application.config.php';
+
+// setup service manager
+$serviceManager = new ServiceManager(new ServiceManagerConfiguration());
+$serviceManager->setService('ApplicationConfiguration', $configuration);
+
+// load modules -- which will provide services, configuration, and more
+$serviceManager->get('ModuleManager')->loadModules();
+
+// bootstrap and run application
+$application = $serviceManager->get('Application');
+$application->bootstrap();
 $response = $application->run();
 $response->send();
 ]]></programlisting>
 
     <para>
-      The <methodname>run()</methodname> method does basically four things:
-    </para>
-
-    <itemizedlist>
-      <listitem>
-        <para>
-          It martials the <classname>Request</classname> object, ensuring that it
-          is fully configured based on the current request environment (this
-          includes injecting headers, query and POST parameters, and more).
-        </para>
-      </listitem>
-
-      <listitem>
-        <para>
-          It triggers a "route" event. By default, the
-          <methodname>route()</methodname> method of the
-          <classname>Application</classname> is registered as a listener, but you
-          can provide your own listeners to either replace it or intercept
-          before or after it executes.
-        </para>
-      </listitem>
-
-      <listitem>
-        <para>
-          It triggers a "dispatch" event. By default, the
-          <methodname>dispatch()</methodname> method of the
-          <classname>Application</classname> is registered as a listener, but you
-          can provide your own listeners to either replace it or intercept
-          before or after it executes.
-        </para>
-      </listitem>
-
-      <listitem>
-        <para>
-          It martials a <classname>Response</classname> object capable of sending
-          itself from the return values of the "dispatch" event.
-        </para>
-      </listitem>
-    </itemizedlist>
-
-    <para>
-      You'll note that you have a great amount of control over the
-      workflow. Using the EventManager's priority system, you can
-      intercept the "route" and "dispatch" events
-      anywhere during execution, allowing you to craft your own
-      application workflows as needed.
+      You'll note that you have a great amount of control over the workflow.
+      Using the <classname>ServiceManager</classname>, you have fine-grained
+      control over what services are available, how they are instantiated, and
+      what dependencies are injected into them. Using the
+      <classname>EventManager</classname>'s priority system, you can intercept
+      any of the application events ("bootstrap", "route", "dispatch",
+      "dispatch.error", "render", and "finish") anywhere during execution,
+      allowing you to craft your own application workflows as needed.
     </para>
   </section>
 
@@ -414,12 +525,11 @@ $response->send();
     </para>
 
     <para>
-      The answer is via <classname>Zend\Module\Manager</classname>. This
+      The answer is via <classname>Zend\ModuleManager\ModuleManager</classname>. This
       component allows you to specify where modules exist, and it will
-      then locate each module and initialize it. If a module's
-      <classname>Module</classname> class has a
-      <methodname>getConfig()</methodname> method, it will retrieve its
-      configuration and merge it with the application configuration.
+      then locate each module and initialize it. Module classes can tie into
+      various listeners on the <classname>ModuleManager</classname> in order to
+      provide configuration, services, listeners, and more to the application.
       Sound complicated? It's not.
     </para>
 
@@ -427,21 +537,19 @@ $response->send();
       <title>Configuring the Module Manager</title>
 
       <para>
-          The first step is configuring the module manager. The easiest way to
-          do this is to utilize the provided
-          <classname>Zend\Module\Listener\DefaultListenerAggregate</classname>.
-          Then you simply inform the module manager which modules to load and
-          attach the listener aggregate.
+          The first step is configuring the module manager.  You simply inform
+          the module manager which modules to load, and potentially provide
+          configuration for the module listeners.
       </para>
 
       <para>
-        Remember the <filename>application.config.php</filename> from
-        earlier? We're going to provide some configuration.
+        Remember the <filename>application.php</filename> from earlier? We're
+        going to provide some configuration.
       </para>
 
       <programlisting language="php"><![CDATA[
 <?php
-// config/application.config.php
+// config/application.php
 return array(
     'modules' => array(
         /* ... */
@@ -459,33 +567,6 @@ return array(
         As we add modules to the system, we'll add items to the
         <varname>modules</varname> array.
       </para>
-
-      <para>
-        Now, within our <filename>public/index.php</filename>, we can setup
-        the <classname>DefaultListenerAggregate</classname>:
-      </para>
-
-      <programlisting language="php"><![CDATA[
-use Zend\Module\Listener;
-
-$moduleConfig     = include __DIR__ . '/../configs/application.config.php';
-$listenerOptions  = new Listener\ListenerOptions($moduleConfig['module_listener_options']);
-$defaultListeners = new Listener\DefaultListenerAggregate($listenerOptions);
-]]></programlisting>
-
-      <para>
-        Once we have that out of the way, we can instantiate our module
-        manager:
-      </para>
-
-      <programlisting language="php"><![CDATA[
-use Zend\Module\Manager as ModuleManager;
-
-$moduleManager = new ModuleManager(
-    $moduleConfig['modules']
-);
-$moduleManager->events()->attachAggregate($defaultListeners);
-]]></programlisting>
 
       <para>
         Each <classname>Module</classname> class that has configuration it wants
@@ -506,6 +587,13 @@ class Module
     }
 }
 ]]></programlisting>
+
+      <para>
+        There are a number of other methods you can define for tasks ranging
+        from providing autoloader configuration, to providing services to the
+        <classname>ServiceManager</classname>, to listening to the bootstrap
+        event. The ModuleManager documentation goes into more detail on these.
+      </para>
     </section>
   </section>
 
@@ -513,15 +601,12 @@ class Module
     <title>Conclusion</title>
 
     <para>
-      The ZF2 MVC layer is incredibly flexible, offering an opt-in, easy
-      to create modular infrastructure, as well as the ability to craft
-      your own application workflows via the EventManager system.
-      Bootstrapping, while largely left to the developer, is
-      straight-forward and provides a simple methodology for configuring
-      the application and informing it of the various routes and services
-      in play. The module manager is a lightweight and simple approach to
-      enforcing a modular architecture that encourages clean separation
-      of concerns and code re-use.
+      The ZF2 MVC layer is incredibly flexible, offering an opt-in, easy to
+      create modular infrastructure, as well as the ability to craft your own
+      application workflows via the <classname>ServiceManager</classname> and
+      <classname>EventManager</classname>.  The module manager is a lightweight
+      and simple approach to enforcing a modular architecture that encourages
+      clean separation of concerns and code re-use.
     </para>
   </section>
 </section>

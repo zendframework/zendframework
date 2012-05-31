@@ -20,8 +20,8 @@
 
 namespace Zend\Code\Reflection;
 
-use Zend\Code\NameInformation,
-    Zend\Code\Scanner\CachingFileScanner;
+use Zend\Code\NameInformation;
+use Zend\Code\Scanner\CachingFileScanner;
 
 /**
  * @category   Zend
@@ -34,69 +34,68 @@ class FileReflection implements ReflectionInterface
     /**
      * @var string
      */
-    protected $filePath        = null;
+    protected $filePath = null;
 
     /**
      * @var string
      */
-    protected $docComment      = null;
+    protected $docComment = null;
 
     /**
      * @var int
      */
-    protected $startLine       = 1;
+    protected $startLine = 1;
 
     /**
      * @var int
      */
-    protected $endLine         = null;
+    protected $endLine = null;
 
     /**
      * @var string
      */
-    protected $namespaces      = array();
+    protected $namespaces = array();
 
     /**
      * @var string[]
      */
-    protected $uses            = array();
+    protected $uses = array();
 
     /**
      * @var string[]
      */
-    protected $requiredFiles   = array();
+    protected $requiredFiles = array();
 
     /**
      * @var ReflectionClass[]
      */
-    protected $classes         = array();
+    protected $classes = array();
 
     /**
      * @var FunctionReflection[]
      */
-    protected $functions       = array();
+    protected $functions = array();
 
     /**
      * @var string
      */
-    protected $contents        = null;
+    protected $contents = null;
 
     /**
      * Constructor
      *
-     * @param string $file
+     * @param string $filename
+     * @throws Exception\RuntimeException
      * @return FileReflection
      */
-    public function __construct($file)
+    public function __construct($filename)
     {
-        $fileName = $file;
-
-        if (($fileRealPath = realpath($fileName)) === false) {
-            $fileRealPath = stream_resolve_include_path($fileName);
+        if (($fileRealPath = realpath($filename)) === false) {
+            $fileRealPath = stream_resolve_include_path($filename);
         }
 
         if (!$fileRealPath || !in_array($fileRealPath, get_included_files())) {
-            throw new Exception\RuntimeException('File ' . $file . ' must be required before it can be reflected');
+            throw new Exception\RuntimeException('File ' . $filename . ' must be required before it can be reflected');
         }
 
         $this->filePath = $fileRealPath;
@@ -158,11 +157,11 @@ class FileReflection implements ReflectionInterface
     }
 
     /**
-     * Return the docblock
+     * Return the DocBlock
      *
      * @return DocBlockReflection
      */
-    public function getDocblock()
+    public function getDocBlock()
     {
         if (!($docComment = $this->getDocComment())) {
             return false;
@@ -208,7 +207,7 @@ class FileReflection implements ReflectionInterface
     {
         $classes = array();
         foreach ($this->classes as $class) {
-            $instance = new ClassReflection($class);
+            $instance  = new ClassReflection($class);
             $classes[] = $instance;
         }
         return $classes;
@@ -223,7 +222,7 @@ class FileReflection implements ReflectionInterface
     {
         $functions = array();
         foreach ($this->functions as $function) {
-            $instance = new FunctionReflection($function);
+            $instance    = new FunctionReflection($function);
             $functions[] = $instance;
         }
         return $functions;
@@ -233,8 +232,8 @@ class FileReflection implements ReflectionInterface
      * Retrieve the reflection class of a given class found in this file
      *
      * @param  null|string $name
-     * @return \Zend\Code\Reflection\ReflectionClass
-     * @throws \Zend\Code\Reflection\Exception for invalid class name or invalid reflection class
+     * @return ClassReflection
+     * @throws Exception\InvalidArgumentException for invalid class name or invalid reflection class
      */
     public function getClass($name = null)
     {
@@ -242,11 +241,13 @@ class FileReflection implements ReflectionInterface
             reset($this->classes);
             $selected = current($this->classes);
             $instance = new ClassReflection($selected);
+
             return $instance;
         }
 
         if (in_array($name, $this->classes)) {
             $instance = new ClassReflection($name);
+
             return $instance;
         }
 
@@ -260,7 +261,7 @@ class FileReflection implements ReflectionInterface
      */
     public function getContents()
     {
-        return $this->contents;
+        return file_get_contents($this->filePath);
     }
 
     public function toString()
@@ -290,33 +291,34 @@ class FileReflection implements ReflectionInterface
      */
     protected function reflect()
     {
-        $scanner = new CachingFileScanner($this->filePath);
-        $this->docComment = $scanner->getDocComment();
+        $scanner             = new CachingFileScanner($this->filePath);
+        $this->docComment    = $scanner->getDocComment();
         $this->requiredFiles = $scanner->getIncludes();
-        $this->classes = $scanner->getClassNames();
-        $this->namespaces = $scanner->getNamespaces();
-        $this->uses = $scanner->getUses();
+        $this->classes       = $scanner->getClassNames();
+        $this->namespaces    = $scanner->getNamespaces();
+        $this->uses          = $scanner->getUses();
     }
 
     /**
-     * Validate / check a file level docblock
+     * Validate / check a file level DocBlock
      *
      * @param  array $tokens Array of tokenizer tokens
      * @return void
      */
-    protected function checkFileDocBlock($tokens) {
+    protected function checkFileDocBlock($tokens)
+    {
         foreach ($tokens as $token) {
             $type    = $token[0];
             $value   = $token[1];
             $lineNum = $token[2];
-            if(($type == T_OPEN_TAG) || ($type == T_WHITESPACE)) {
+            if (($type == T_OPEN_TAG) || ($type == T_WHITESPACE)) {
                 continue;
             } elseif ($type == T_DOC_COMMENT) {
                 $this->docComment = $value;
                 $this->startLine  = $lineNum + substr_count($value, "\n") + 1;
                 return;
             } else {
-                // Only whitespace is allowed before file docblocks
+                // Only whitespace is allowed before file DocBlocks
                 return;
             }
         }

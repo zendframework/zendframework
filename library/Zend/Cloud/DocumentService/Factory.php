@@ -50,7 +50,7 @@ class Factory extends AbstractFactory
      */
     private function __construct()
     {
-        // private ctor - should not be used
+        // private constructor - should not be used
     }
 
     /**

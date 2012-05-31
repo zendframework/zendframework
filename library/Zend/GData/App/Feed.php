@@ -277,7 +277,7 @@ class Feed extends FeedSourceParent
         $nextLinkHref = $nextLink->getHref();
         $service = new App($this->getHttpClient());
 
-        return $service->getFeed($nextLinkHref, get_class($this));
+        return $service->getFeed($nextLinkHref, get_called_class());
     }
 
    /**
@@ -297,7 +297,7 @@ class Feed extends FeedSourceParent
         $previousLinkHref = $previousLink->getHref();
         $service = new App($this->getHttpClient());
 
-        return $service->getFeed($previousLinkHref, get_class($this));
+        return $service->getFeed($previousLinkHref, get_called_class());
     }
 
     /**

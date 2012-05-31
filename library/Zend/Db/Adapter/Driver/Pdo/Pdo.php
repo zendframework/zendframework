@@ -1,37 +1,32 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Db
- * @subpackage Adapter
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Db
  */
 
 namespace Zend\Db\Adapter\Driver\Pdo;
 
-use Zend\Db\Adapter\Driver\DriverInterface;
+use Zend\Db\Adapter\Driver\DriverInterface,
+    Zend\Db\Adapter\Driver\Feature\DriverFeatureInterface,
+    Zend\Db\Adapter\Driver\Feature\AbstractFeature,
+    Zend\Db\Adapter\Exception;
 
 /**
  * @category   Zend
  * @package    Zend_Db
  * @subpackage Adapter
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Pdo implements DriverInterface
+class Pdo implements DriverInterface, DriverFeatureInterface
 {
+    /**
+     * @const
+     */
+    const FEATURES_DEFAULT = 'default';
+
     /**
      * @var Connection
      */
@@ -48,23 +43,37 @@ class Pdo implements DriverInterface
     protected $resultPrototype = null;
 
     /**
+     * @var array
+     */
+    protected $features = array();
+
+    /**
      * @param array|Connection|\PDO $connection
      * @param null|Statement $statementPrototype
      * @param null|Result $resultPrototype
      */
-    public function __construct($connection, Statement $statementPrototype = null, Result $resultPrototype = null)
+    public function __construct($connection, Statement $statementPrototype = null, Result $resultPrototype = null, $features = self::FEATURES_DEFAULT)
     {
         if (!$connection instanceof Connection) {
             $connection = new Connection($connection);
         }
 
         if (!$connection instanceof Connection) {
-            throw new \InvalidArgumentException('$connection must be an array of parameters or a Pdo\Connection object');
+            throw new Exception\InvalidArgumentException('$connection must be an array of parameters or a Pdo\Connection object');
         }
 
         $this->registerConnection($connection);
         $this->registerStatementPrototype(($statementPrototype) ?: new Statement());
         $this->registerResultPrototype(($resultPrototype) ?: new Result());
+        if (is_array($features)) {
+            foreach ($features as $name => $feature) {
+                $this->addFeature($name, $feature);
+            }
+        } elseif ($features instanceof AbstractFeature) {
+            $this->addFeature($features->getName(), $features);
+        } elseif ($features === self::FEATURES_DEFAULT) {
+            $this->setupDefaultFeatures();
+        }
     }
 
     /**
@@ -79,6 +88,7 @@ class Pdo implements DriverInterface
         $this->connection->setDriver($this);
         return $this;
     }
+
     /**
      * Register statement prototype
      * 
@@ -89,6 +99,7 @@ class Pdo implements DriverInterface
         $this->statementPrototype = $statementPrototype;
         $this->statementPrototype->setDriver($this);
     }
+
     /**
      * Register result prototype
      * 
@@ -98,6 +109,45 @@ class Pdo implements DriverInterface
     {
         $this->resultPrototype = $resultPrototype;
     }
+
+    /**
+     * @param string|AbstractFeature $nameOrFeature
+     * @param mixed $value
+     * @return Pdo
+     */
+    public function addFeature($name, $feature)
+    {
+        if ($feature instanceof AbstractFeature) {
+            $name = $feature->getName(); // overwrite the name, just in case
+            $feature->setDriver($this);
+        }
+        $this->features[$name] = $feature;
+        return $this;
+    }
+
+    /**
+     * setup the default features for Pdo
+     */
+    public function setupDefaultFeatures()
+    {
+        if ($this->connection->getDriverName() == 'sqlite') {
+            $this->addFeature(null, new Feature\SqliteRowCounter);
+        }
+        return $this;
+    }
+
+    /**
+     * @param $name
+     * @return bool
+     */
+    public function getFeature($name)
+    {
+        if (isset($this->features[$name])) {
+            return $this->features[$name];
+        }
+        return false;
+    }
+
     /**
      * Get database platform name
      * 
@@ -106,7 +156,7 @@ class Pdo implements DriverInterface
      */
     public function getDatabasePlatformName($nameFormat = self::NAME_FORMAT_CAMELCASE)
     {
-        $name = $this->getConnection()->getResource()->getAttribute(\PDO::ATTR_DRIVER_NAME);
+        $name = $this->getConnection()->getDriverName();
         if ($nameFormat == self::NAME_FORMAT_CAMELCASE) {
             return ucfirst($name);
         } else {
@@ -120,13 +170,14 @@ class Pdo implements DriverInterface
             }
         }
     }
+
     /**
      * Check environment
      */
     public function checkEnvironment()
     {
         if (!extension_loaded('PDO')) {
-            throw new \Exception('The PDO extension is required for this adapter but the extension is not loaded');
+            throw new Exception\RuntimeException('The PDO extension is required for this adapter but the extension is not loaded');
         }
     }
 
@@ -158,10 +209,19 @@ class Pdo implements DriverInterface
      * @param resource $resource
      * @return Result
      */
-    public function createResult($resource)
+    public function createResult($resource, $context = null)
     {
         $result = clone $this->resultPrototype;
-        $result->initialize($resource, $this->connection->getLastGeneratedValue());
+        $rowCount = null;
+
+        // special feature, sqlite PDO counter
+        if ($this->connection->getDriverName() == 'sqlite'
+            && ($sqliteRowCounter = $this->getFeature('SqliteRowCounter'))
+            && $resource->columnCount() > 0) {
+            $rowCount = $sqliteRowCounter->getRowCountClosure($context);
+        }
+
+        $result->initialize($resource, $this->connection->getLastGeneratedValue(), $rowCount);
         return $result;
     }
 
@@ -194,4 +254,5 @@ class Pdo implements DriverInterface
     {
         $this->connection->getLastGeneratedValue();
     }
+
 }

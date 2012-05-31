@@ -41,7 +41,6 @@ class GenericResource implements ResourceInterface
      * Sets the Resource identifier
      *
      * @param  string $resourceId
-     * @return void
      */
     public function __construct($resourceId)
     {

@@ -1,34 +1,59 @@
 <?php
+/**
+ * Zend Framework
+ *
+ * LICENSE
+ *
+ * This source file is subject to the new BSD license that is bundled
+ * with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://framework.zend.com/license/new-bsd
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@zend.com so we can send you a copy immediately.
+ *
+ * @category   Zend
+ * @package    Zend_Mvc
+ * @subpackage Controller
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
 
 namespace Zend\Mvc\Controller;
 
-use Zend\Di\LocatorInterface,
-    Zend\EventManager\EventManagerInterface,
-    Zend\EventManager\EventInterface as Event,
-    Zend\EventManager\EventManager,
-    Zend\EventManager\EventManagerAwareInterface,
-    Zend\EventManager\EventsCapableInterface,
-    Zend\Http\PhpEnvironment\Response as HttpResponse,
-    Zend\Loader\Broker,
-    Zend\Loader\Pluggable,
-    Zend\Mvc\Exception,
-    Zend\Mvc\InjectApplicationEventInterface,
-    Zend\Mvc\LocatorAwareInterface,
-    Zend\Mvc\MvcEvent,
-    Zend\Stdlib\DispatchableInterface as Dispatchable,
-    Zend\Stdlib\RequestInterface as Request,
-    Zend\Stdlib\ResponseInterface as Response,
-    Zend\View\Model\ViewModel;
+use Zend\EventManager\EventManagerInterface;
+use Zend\EventManager\EventInterface as Event;
+use Zend\EventManager\EventManager;
+use Zend\EventManager\EventManagerAwareInterface;
+use Zend\EventManager\EventsCapableInterface;
+use Zend\Http\PhpEnvironment\Response as HttpResponse;
+use Zend\Loader\Broker;
+use Zend\Loader\Pluggable;
+use Zend\Mvc\Exception;
+use Zend\Mvc\InjectApplicationEventInterface;
+use Zend\Mvc\MvcEvent;
+use Zend\ServiceManager\ServiceLocatorAwareInterface;
+use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\Stdlib\DispatchableInterface as Dispatchable;
+use Zend\Stdlib\RequestInterface as Request;
+use Zend\Stdlib\ResponseInterface as Response;
+use Zend\View\Model\ViewModel;
 
 /**
  * Basic action controller
+ *
+ * @category   Zend
+ * @package    Zend_Mvc
+ * @subpackage Controller
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class ActionController implements 
     Dispatchable, 
     EventManagerAwareInterface, 
     EventsCapableInterface,
     InjectApplicationEventInterface, 
-    LocatorAwareInterface, 
+    ServiceLocatorAwareInterface, 
     Pluggable
 {
     //use \Zend\EventManager\ProvidesEvents;
@@ -107,6 +132,7 @@ abstract class ActionController implements
      *
      * @param  MvcEvent $e
      * @return mixed
+     * @throws Exception\DomainException
      */
     public function execute(MvcEvent $e)
     {
@@ -116,7 +142,7 @@ abstract class ActionController implements
              * @todo Determine requirements for when route match is missing.
              *       Potentially allow pulling directly from request metadata?
              */
-            throw new \DomainException('Missing route matches; unsure how to retrieve action');
+            throw new Exception\DomainException('Missing route matches; unsure how to retrieve action');
         }
 
         $action = $routeMatch->getParam('action', 'not-found');
@@ -166,8 +192,8 @@ abstract class ActionController implements
         $events->setIdentifiers(array(
             'Zend\Stdlib\DispatchableInterface',
             __CLASS__,
-            get_class($this),
-            substr(get_class($this), 0, strpos(get_class($this), '\\'))
+            get_called_class(),
+            substr(get_called_class(), 0, strpos(get_called_class(), '\\'))
         ));
         $this->events = $events;
         $this->attachDefaultListeners();
@@ -226,10 +252,10 @@ abstract class ActionController implements
     /**
      * Set locator instance
      *
-     * @param  LocatorInterface $locator
+     * @param  ServiceLocatorInterface $locator
      * @return void
      */
-    public function setLocator(LocatorInterface $locator)
+    public function setServiceLocator(ServiceLocatorInterface $locator)
     {
         $this->locator = $locator;
     }
@@ -237,9 +263,9 @@ abstract class ActionController implements
     /**
      * Retrieve locator instance
      *
-     * @return LocatorInterface
+     * @return ServiceLocatorInterface
      */
-    public function getLocator()
+    public function getServiceLocator()
     {
         return $this->locator;
     }
@@ -262,6 +288,7 @@ abstract class ActionController implements
      *
      * @param  string|Broker $broker Plugin broker to load plugins
      * @return Zend\Loader\Pluggable
+     * @throws Exception\InvalidArgumentException
      */
     public function setBroker($broker)
     {
@@ -278,7 +305,7 @@ abstract class ActionController implements
     /**
      * Get plugin instance
      *
-     * @param  string     $plugin  Name of plugin to return
+     * @param  string     $name    Name of plugin to return
      * @param  null|array $options Options to pass to plugin constructor (if not already instantiated)
      * @return mixed
      */

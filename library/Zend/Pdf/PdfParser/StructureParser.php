@@ -92,7 +92,7 @@ class StructureParser
      * Load XReference table and referenced objects
      *
      * @param integer $offset
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      * @return \Zend\Pdf\Trailer\Parsed
      */
     private function _loadXRefTable($offset)
@@ -338,7 +338,7 @@ class StructureParser
      * @param mixed $source
      * @param \Zend\Pdf\ObjectFactory $factory
      * @param boolean $load
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
     public function __construct($source, Pdf\ObjectFactory $factory, $load)
     {

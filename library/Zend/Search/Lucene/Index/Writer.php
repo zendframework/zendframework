@@ -24,6 +24,7 @@ namespace Zend\Search\Lucene\Index;
 use Zend\Search\Lucene\Storage\Directory,
 	Zend\Search\Lucene\Document,
 	Zend\Search\Lucene,
+    Zend\Search\Lucene\Exception\ExceptionInterface,
 	Zend\Search\Lucene\Exception\RuntimeException,
 	Zend\Search\Lucene\Exception\InvalidFileFormatException;
 
@@ -88,7 +89,7 @@ class Writer
     /**
      * File system adapter.
      *
-     * @var \Zend\Search\Lucene\Storage\Directory
+     * @var \Zend\Search\Lucene\Storage\Directory\DirectoryInterface
      */
     private $_directory = null;
 
@@ -127,7 +128,7 @@ class Writer
      *
      * It's a reference to the corresponding Zend_Search_Lucene::$_segmentInfos array
      *
-     * @var array \Zend\Search\Lucene\Index\SegmentInfo
+     * @var array|\Zend\Search\Lucene\Index\SegmentInfo
      */
     private $_segmentInfos;
 
@@ -162,11 +163,11 @@ class Writer
     /**
      * Create empty index
      *
-     * @param \Zend\Search\Lucene\Storage\Directory $directory
+     * @param \Zend\Search\Lucene\Storage\Directory\DirectoryInterface $directory
      * @param integer $generation
      * @param integer $nameCount
      */
-    public static function createIndex(Directory $directory, $generation, $nameCount)
+    public static function createIndex(Directory\DirectoryInterface $directory, $generation, $nameCount)
     {
         if ($generation == 0) {
             // Create index in pre-2.1 mode
@@ -217,12 +218,12 @@ class Writer
     /**
      * Open the index for writing
      *
-     * @param \Zend\Search\Lucene\Storage\Directory $directory
+     * @param \Zend\Search\Lucene\Storage\Directory\DirectoryInterface $directory
      * @param array $segmentInfos
      * @param integer $targetFormatVersion
-     * @param \Zend\Search\Lucene\Storage\File $cleanUpLock
+     * @param \Zend\Search\Lucene\Storage\File\FileInterface $cleanUpLock
      */
-    public function __construct(Directory $directory, &$segmentInfos, $targetFormatVersion)
+    public function __construct(Directory\DirectoryInterface $directory, &$segmentInfos, $targetFormatVersion)
     {
         $this->_directory           = $directory;
         $this->_segmentInfos        = &$segmentInfos;
@@ -410,7 +411,7 @@ class Writer
 
         try {
             $genFile = $this->_directory->getFileObject('segments.gen', false);
-        } catch (Lucene\Exception $e) {
+        } catch (ExceptionInterface $e) {
             if (strpos($e->getMessage(), 'is not readable') !== false) {
                 $genFile = $this->_directory->createFile('segments.gen');
             } else {
@@ -708,7 +709,7 @@ class Writer
                     if (substr($file, strlen($file)-4) != '.cfx') {
                         $this->_directory->deleteFile($file);
                     }
-                } catch (Lucene\Exception $e) {
+                } catch (ExceptionInterface $e) {
                     if (strpos($e->getMessage(), 'Can\'t delete file') === false) {
                         // That's not "file is under processing or already deleted" exception
                         // Pass it through

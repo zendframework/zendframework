@@ -275,11 +275,11 @@ class TimeSyncTest extends \PHPUnit_Framework_TestCase
 
         try {
             $result = $server->getDate();
-        } catch (TimeSync\Exception $e) {
+        } catch (TimeSync\Exception\ExceptionInterface $e) {
             $i = 0;
             while($e = $e->getPrevious()) {
                 $i++;
-                $this->assertTrue($e instanceof TimeSync\Exception);
+                $this->assertTrue($e instanceof TimeSync\Exception\ExceptionInterface);
             }
             $this->assertEquals(2, $i);
         }
@@ -312,7 +312,7 @@ class TimeSyncTest extends \PHPUnit_Framework_TestCase
             $result = $server->getInfo();
 
             $this->assertTrue(count($result) > 0);
-        } catch (TimeSync\Exception  $e) {
+        } catch (TimeSync\Exception\ExceptionInterface  $e) {
             // nothing
         }
     }

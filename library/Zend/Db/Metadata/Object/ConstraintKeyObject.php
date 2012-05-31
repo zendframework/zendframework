@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Db
- * @subpackage Metadata
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Db
  */
 
 namespace Zend\Db\Metadata\Object;
@@ -25,8 +14,6 @@ namespace Zend\Db\Metadata\Object;
  * @category   Zend
  * @package    Zend_Db
  * @subpackage Metadata
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class ConstraintKeyObject
 {
@@ -41,36 +28,43 @@ class ConstraintKeyObject
      * @var string
      */
     protected $columnName = null;
+
     /**
      *
      * @var type
      */
     protected $ordinalPosition = null;
+
     /**
      *
      * @var type
      */
     protected $positionInUniqueConstraint = null;
+
     /**
      *
      * @var string 
      */
     protected $referencedTableSchema = null;
+
     /**
      *
      * @var string
      */
     protected $referencedTableName = null;
+
     /**
      *
      * @var string 
      */
     protected $referencedColumnName = null;
+
     /**
      *
      * @var type 
      */
     protected $foreignKeyUpdateRule = null;
+
     /**
      *
      * @var type 
@@ -86,6 +80,7 @@ class ConstraintKeyObject
     {
         $this->setColumnName($column);
     }
+
     /**
      * Get column name
      * 
@@ -95,6 +90,7 @@ class ConstraintKeyObject
     {
         return $this->columnName;
     }
+
     /**
      * Set column name
      * 
@@ -106,6 +102,7 @@ class ConstraintKeyObject
         $this->columnName = $columnName;
         return $this;
     }
+
     /**
      * Get ordinal position
      * 
@@ -115,6 +112,7 @@ class ConstraintKeyObject
     {
         return $this->ordinalPosition;
     }
+
     /**
      * Set ordinal position
      * 
@@ -126,6 +124,7 @@ class ConstraintKeyObject
         $this->ordinalPosition = $ordinalPosition;
         return $this;
     }
+
     /**
      * Get position in unique constraint
      * 
@@ -135,6 +134,7 @@ class ConstraintKeyObject
     {
         return $this->positionInUniqueConstraint;
     }
+
     /**
      * Set position in unique constraint
      * 
@@ -146,6 +146,7 @@ class ConstraintKeyObject
         $this->positionInUniqueConstraint = $positionInUniqueConstraint;
         return $this;
     }
+
     /**
      * Get referencred table schema
      * 
@@ -155,6 +156,7 @@ class ConstraintKeyObject
     {
         return $this->referencedTableSchema;
     }
+
     /**
      * Set referenced table schema
      * 
@@ -166,6 +168,7 @@ class ConstraintKeyObject
         $this->referencedTableSchema = $referencedTableSchema;
         return $this;
     }
+
     /**
      * Get referenced table name
      * 
@@ -175,6 +178,7 @@ class ConstraintKeyObject
     {
         return $this->referencedTableName;
     }
+
     /**
      * Set Referenced table name
      * 
@@ -186,6 +190,7 @@ class ConstraintKeyObject
         $this->referencedTableName = $referencedTableName;
         return $this;
     }
+
     /**
      * Get referenced column name
      * 
@@ -195,6 +200,7 @@ class ConstraintKeyObject
     {
         return $this->referencedColumnName;
     }
+
     /**
      * Set referenced column name
      * 
@@ -206,6 +212,7 @@ class ConstraintKeyObject
         $this->referencedColumnName = $referencedColumnName;
         return $this;
     }
+
     /**
      * set foreign key update rule
      * 
@@ -215,6 +222,7 @@ class ConstraintKeyObject
     {
         $this->foreignKeyUpdateRule = $foreignKeyUpdateRule;
     }
+
     /**
      * Get foreign key update rule
      * 
@@ -224,6 +232,7 @@ class ConstraintKeyObject
     {
         return $this->foreignKeyUpdateRule;
     }
+
     /**
      * Set foreign key delete rule
      * 
@@ -233,6 +242,7 @@ class ConstraintKeyObject
     {
         $this->foreignKeyDeleteRule = $foreignKeyDeleteRule;
     }
+
     /**
      * get foreign key delete rule
      * 

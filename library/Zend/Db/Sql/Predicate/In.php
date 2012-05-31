@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Db
- * @subpackage Sql
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Db
  */
 
 namespace Zend\Db\Sql\Predicate;
@@ -25,12 +14,9 @@ namespace Zend\Db\Sql\Predicate;
  * @category   Zend
  * @package    Zend_Db
  * @subpackage Sql
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class In implements PredicateInterface
 {
-    protected $specification = '%1$s IN (%2$s)';
     protected $identifier;
     protected $valueSet;
 
@@ -91,28 +77,6 @@ class In implements PredicateInterface
     }
 
     /**
-     * Set specification string to use in forming SQL predicate
-     * 
-     * @param  string $specification 
-     * @return In
-     */
-    public function setSpecification($specification)
-    {
-        $this->specification = $specification;
-        return $this;
-    }
-
-    /**
-     * Get specification string to use in forming SQL predicate
-     * 
-     * @return string
-     */
-    public function getSpecification()
-    {
-        return $this->specification;
-    }
-
-    /**
      * Return array of parts for where statement
      *
      * @return array
@@ -120,6 +84,7 @@ class In implements PredicateInterface
     public function getExpressionData()
     {
         $values = $this->getValueSet();
+        $specification = '%s IN (' . implode(', ', array_fill(0, count($values), '%s')) . ')';
         $types  = array_fill(0, count($values), self::TYPE_VALUE);
 
         $identifier = $this->getIdentifier();
@@ -127,9 +92,10 @@ class In implements PredicateInterface
         array_unshift($types, self::TYPE_IDENTIFIER);
 
         return array(array(
-            $this->getSpecification(),
+            $specification,
             $values,
             $types,
         ));
     }
+
 }

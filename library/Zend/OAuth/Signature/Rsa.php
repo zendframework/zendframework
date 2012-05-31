@@ -19,7 +19,7 @@
  */
 
 namespace Zend\OAuth\Signature;
-use Zend\Crypt\Rsa as RSAEncryption;
+use Zend\Crypt\PublicKey\Rsa as RSAEncryption;
 
 /**
  * @category   Zend

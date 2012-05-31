@@ -20,16 +20,9 @@
  */
 
 namespace ZendTest\Search\Lucene\Index;
+
 use Zend\Search\Lucene\Index;
 use Zend\Search\Lucene\Storage\Directory;
-
-/**
- * Zend_Search_Lucene_Index_TermsPriorityQueue
- */
-
-/**
- * PHPUnit test case
- */
 
 /**
  * @category   Zend

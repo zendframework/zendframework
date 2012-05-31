@@ -178,7 +178,7 @@ class RestfulControllerTest extends TestCase
 
     public function testControllerIsLocatorAware()
     {
-        $this->assertInstanceOf('Zend\Mvc\LocatorAwareInterface', $this->controller);
+        $this->assertInstanceOf('Zend\ServiceManager\ServiceLocatorAwareInterface', $this->controller);
     }
 
     public function testControllerIsEventAware()

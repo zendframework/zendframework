@@ -86,14 +86,6 @@ defined('TESTS_ZEND_CONFIG_WRITER_YAML_CALLBACK') || define('TESTS_ZEND_CONFIG_W
 defined('TESTS_ZEND_CONFIG_READER_YAML_CALLBACK') || define('TESTS_ZEND_CONFIG_READER_YAML_CALLBACK', '');
 
 /**
- * Zend\Controller
- *
- * TESTS_ZEND_CONTROLLER_DISPATCHER_OB => test disabling output buffering in
- *                                        dispatcher
- */
-defined('TESTS_ZEND_CONTROLLER_DISPATCHER_OB') || define('TESTS_ZEND_CONTROLLER_DISPATCHER_OB', false);
-
-/**
  * Zend\Crypt related constants
  *
  * TESTS_ZEND_CRYPT_OPENSSL_CONF => location of an openssl.cnf file for use

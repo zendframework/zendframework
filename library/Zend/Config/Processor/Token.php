@@ -21,10 +21,9 @@
 namespace Zend\Config\Processor;
 
 use Zend\Config\Config,
-    Zend\Config\Processor,
     Zend\Config\Exception,
-    \Traversable,
-    \ArrayObject;
+    Traversable,
+    ArrayObject;
 
 /**
  * @category   Zend
@@ -32,7 +31,7 @@ use Zend\Config\Config,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Token implements Processor
+class Token implements ProcessorInterface
 {
     /**
      * Token prefix.
@@ -202,9 +201,9 @@ class Token implements Processor
 
     /**
      * Process
-     * 
+     *
      * @param  Config $config
-     * @return Config 
+     * @return Config
      */
     public function process(Config $config)
     {

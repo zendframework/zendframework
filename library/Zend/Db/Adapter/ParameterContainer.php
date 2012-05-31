@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Db
- * @subpackage Adapter
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Db
  */
 
 namespace Zend\Db\Adapter;
@@ -25,8 +14,6 @@ namespace Zend\Db\Adapter;
  * @category   Zend
  * @package    Zend_Db
  * @subpackage Adapter
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class ParameterContainer implements \Iterator, \ArrayAccess
 {
@@ -99,7 +86,7 @@ class ParameterContainer implements \Iterator, \ArrayAccess
     {
         $this->data[$name] =& $this->data[$from];
     }
-    
+
     /**
      * Offset set
      * 
@@ -161,7 +148,7 @@ class ParameterContainer implements \Iterator, \ArrayAccess
         }
         $this->errata[$name] = $errata;
     }
-    
+
     /**
      * Offset get errata
      * 
@@ -174,7 +161,7 @@ class ParameterContainer implements \Iterator, \ArrayAccess
             $name = $this->positions[$name];
         }
         if (!array_key_exists($name, $this->data)) {
-            throw new \InvalidArgumentException('Data does not exist for this name/position');
+            throw new Exception\InvalidArgumentException('Data does not exist for this name/position');
         }
         return $this->errata[$name];
     }
@@ -204,7 +191,7 @@ class ParameterContainer implements \Iterator, \ArrayAccess
             $name = $this->positions[$name];
         }
         if (!array_key_exists($name, $this->errata)) {
-            throw new \InvalidArgumentException('Data does not exist for this name/position');
+            throw new Exception\InvalidArgumentException('Data does not exist for this name/position');
         }
         $this->errata[$name] = null;
     }

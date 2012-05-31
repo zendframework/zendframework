@@ -92,9 +92,22 @@ class InjectTemplateListener implements ListenerAggregateInterface
         }
 
         $routeMatch = $e->getRouteMatch();
-        $controller = $routeMatch->getParam('controller', 'index');
+        $controller = $e->getTarget();
+        if (is_object($controller)) {
+            $controller = get_class($controller);
+        }
+        if (!$controller) {
+            $controller = $routeMatch->getParam('controller', '');
+        }
+
+        $module     = $this->deriveModuleNamespace($controller);
         $controller = $this->deriveControllerClass($controller);
-        $template   = $this->inflectName($controller);
+
+        $template   = $this->inflectName($module);
+        if (!empty($template)) {
+            $template .= '/';
+        }
+        $template  .= $this->inflectName($controller);
 
         $action     = $routeMatch->getParam('action');
         if (null !== $action) {
@@ -116,6 +129,21 @@ class InjectTemplateListener implements ListenerAggregateInterface
         }
         $name = $this->inflector->filter($name);
         return strtolower($name);
+    }
+
+    /**
+     * Determine the top-level namespace of the controller
+     * 
+     * @param  string $controller 
+     * @return string
+     */
+    protected function deriveModuleNamespace($controller)
+    {
+        if (!strstr($controller, '\\')) {
+            return '';
+        }
+        $module = substr($controller, 0, strpos($controller, '\\'));
+        return $module;
     }
 
     /**

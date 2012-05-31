@@ -173,7 +173,7 @@ class Filesystem implements DirectoryInterface
      * Creates a new, empty file in the directory with the given $filename.
      *
      * @param string $filename
-     * @return \Zend\Search\Lucene\Storage\File
+     * @return \Zend\Search\Lucene\Storage\File\FileInterface
      */
     public function createFile($filename)
     {
@@ -338,7 +338,7 @@ class Filesystem implements DirectoryInterface
      *
      * @param string $filename
      * @param boolean $shareHandler
-     * @return \Zend\Search\Lucene\Storage\File
+     * @return \Zend\Search\Lucene\Storage\File\FileInterface
      */
     public function getFileObject($filename, $shareHandler = true)
     {

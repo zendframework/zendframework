@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Db
- * @subpackage Metadata
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Db
  */
 
 namespace Zend\Db\Metadata\Object;
@@ -25,8 +14,6 @@ namespace Zend\Db\Metadata\Object;
  * @category   Zend
  * @package    Zend_Db
  * @subpackage Metadata
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class ConstraintObject
 {
@@ -70,24 +57,25 @@ class ConstraintObject
     {
         return $this->catalogName;
     }
-    
+
     public function setCatalogName($catalogName)
     {
         $this->catalogName = $catalogName;
         return $this;
     }
-    
+
     public function getSchemaName()
     {
         return $this->schemaName;
     }
-    
+
     public function setSchemaName($schemaName)
     {
         $this->schemaName = $schemaName;
         return $this;
     }
     */
+
     /**
      * Constructor
      * 
@@ -103,6 +91,7 @@ class ConstraintObject
             $this->setSchemaName($schemaName);
         }
     }
+
     /**
      * Set name
      * 
@@ -112,6 +101,7 @@ class ConstraintObject
     {
         $this->name = $name;
     }
+
     /**
      * Get name
      * 
@@ -121,6 +111,7 @@ class ConstraintObject
     {
         return $this->name;
     }
+
     /**
      * Set schema name
      * 
@@ -130,6 +121,7 @@ class ConstraintObject
     {
         $this->schemaName = $schemaName;
     }
+
     /**
      * Get schema name
      * 
@@ -139,6 +131,7 @@ class ConstraintObject
     {
         return $this->schemaName;
     }
+
     /**
      * Get table name
      * 
@@ -148,6 +141,7 @@ class ConstraintObject
     {
         return $this->tableName;
     }
+
     /**
      * Set table name
      * 
@@ -159,6 +153,7 @@ class ConstraintObject
         $this->tableName = $tableName;
         return $this;
     }
+
     /**
      * Set type
      * 
@@ -168,6 +163,7 @@ class ConstraintObject
     {
         $this->type = $constraintType;
     }
+
     /**
      * Get type
      * 
@@ -177,6 +173,7 @@ class ConstraintObject
     {
         return $this->type;
     }
+
     /**
      * Set keys
      * 
@@ -186,6 +183,7 @@ class ConstraintObject
     {
         $this->keys = $keys;
     }
+
     /**
      * Get keys
      * 
@@ -195,6 +193,7 @@ class ConstraintObject
     {
         return $this->keys;
     }
+
     /**
      * Is primary key
      * 
@@ -204,6 +203,7 @@ class ConstraintObject
     {
         return (strtoupper($this->type) == 'PRIMARY');
     }
+
     /**
      * Is unique key
      * 
@@ -213,6 +213,7 @@ class ConstraintObject
     {
         return (strtoupper($this->type) == 'UNIQUE');
     }
+
     /**
      * Is foreign key
      * 

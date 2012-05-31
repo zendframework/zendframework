@@ -43,7 +43,7 @@ class ValueGenerator extends AbstractGenerator
     /**#@-*/
 
     const OUTPUT_MULTIPLE_LINE = 'multipleLine';
-    const OUTPUT_SINGLE_LINE = 'singleLine';
+    const OUTPUT_SINGLE_LINE   = 'singleLine';
 
     /**
      * @var mixed
@@ -53,7 +53,7 @@ class ValueGenerator extends AbstractGenerator
     /**
      * @var string
      */
-    protected $type  = self::TYPE_AUTO;
+    protected $type = self::TYPE_AUTO;
 
     /**
      * @var int
@@ -246,6 +246,7 @@ class ValueGenerator extends AbstractGenerator
     /**
      * generate()
      *
+     * @throws Exception\RuntimeException
      * @return string
      */
     public function generate()
@@ -265,7 +266,7 @@ class ValueGenerator extends AbstractGenerator
                 $rii = new \RecursiveIteratorIterator(
                     $it = new \RecursiveArrayIterator($value),
                     \RecursiveIteratorIterator::SELF_FIRST
-                    );
+                );
                 foreach ($rii as $curKey => $curValue) {
                     if (!$curValue instanceof ValueGenerator) {
                         $curValue = new self($curValue);
@@ -283,7 +284,7 @@ class ValueGenerator extends AbstractGenerator
         switch ($type) {
             case self::TYPE_BOOLEAN:
             case self::TYPE_BOOL:
-                $output .= ( $value ? 'true' : 'false' );
+                $output .= ($value ? 'true' : 'false');
                 break;
             case self::TYPE_STRING:
                 $output .= self::escape($value);
@@ -309,7 +310,7 @@ class ValueGenerator extends AbstractGenerator
                     }
                 }
                 $outputParts = array();
-                $noKeyIndex = 0;
+                $noKeyIndex  = 0;
                 foreach ($value as $n => $v) {
                     /* @var $v ValueGenerator */
                     $v->setArrayDepth($this->arrayDepth + 1);
@@ -344,7 +345,7 @@ class ValueGenerator extends AbstractGenerator
      * Quotes value for PHP code.
      *
      * @param string $input Raw string.
-     * @param bool $quote Whether add surrounding quotes or not.
+     * @param bool   $quote Whether add surrounding quotes or not.
      * @return string PHP-ready code.
      */
     public static function escape($input, $quote = true)

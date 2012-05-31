@@ -21,12 +21,15 @@
 
 namespace Zend\Cloud\Infrastructure\Adapter\Exception;
 
+use Zend\Cloud\Infrastructure\Exception;
+
 /**
  * @package    Zend_Cloud_Infrastructure
  * @subpackage Infrastructure
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class InvalidArgumentException extends \InvalidArgumentException implements ExceptionInterface
-{
-}
+class InvalidArgumentException
+    extends Exception\InvalidArgumentException
+    implements ExceptionInterface
+{}

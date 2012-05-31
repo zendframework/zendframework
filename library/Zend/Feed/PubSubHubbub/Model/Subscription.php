@@ -32,6 +32,12 @@ use Zend\Date;
  */
 class Subscription extends AbstractModel implements SubscriptionPersistenceInterface
 {
+    /**
+     * Common Date\Date object to assist with unit testing
+     * 
+     * @var Date\Date
+     */
+    protected $now;
     
     /**
      * Save subscription to RDMBS
@@ -50,7 +56,7 @@ class Subscription extends AbstractModel implements SubscriptionPersistenceInter
         $result = $this->_db->select(array('id' => $data['id']));
         if ($result && (0 < count($result))) {
             $data['created_time'] = $result->current()->created_time;
-            $now = new Date\Date;
+            $now = $this->getNow();
             if (array_key_exists('lease_seconds', $data) 
                 && $data['lease_seconds']
             ) {
@@ -126,4 +132,28 @@ class Subscription extends AbstractModel implements SubscriptionPersistenceInter
         return false;
     }
 
+    /**
+     * Get a new Date\Date or the one injected for testing
+     * 
+     * @return Date\Date
+     */
+    public function getNow()
+    {
+        if (null === $this->now) {
+            return new Date\Date;
+        }
+        return $this->now;
+    }
+
+    /**
+     * Set a Date\Date instance for assisting with unit testing
+     * 
+     * @param Date\Date $now
+     * @return Subscription
+     */
+    public function setNow(Date\Date $now)
+    {
+        $this->now = $now;
+        return $this;
+    }
 }

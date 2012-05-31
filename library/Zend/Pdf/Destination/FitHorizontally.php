@@ -46,7 +46,7 @@ class FitHorizontally extends Explicit
      * @param \Zend\Pdf\Page|integer $page  Page object or page number
      * @param float $top  Top edge of displayed page
      * @return \Zend\Pdf\Destination\FitHorizontally
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
     public static function create($page, $top)
     {

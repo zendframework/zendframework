@@ -20,7 +20,6 @@
  */
 
 namespace Zend\TimeSync\Exception;
-use Zend\TimeSync\Exception;
 
 /**
  * Exception for Zend_TimeSync component.
@@ -32,6 +31,5 @@ use Zend\TimeSync\Exception;
  */
 class InvalidArgumentException
     extends \InvalidArgumentException
-    implements Exception
-{
-}
+    implements ExceptionInterface
+{}

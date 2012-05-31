@@ -60,7 +60,7 @@ class BinaryStream
      * little Endian encoding.
      *
      * @param  string $stream use '' if creating a new stream or pass a string if reading.
-     * @return void
+     * @throws Exception\InvalidArgumentException
      */
     public function __construct($stream)
     {
@@ -90,7 +90,7 @@ class BinaryStream
      * @todo   Should check that there are enough bytes left in the stream we are about to read.
      * @param  int $length
      * @return string
-     * @throws Zend\Amf\Exception for buffer underrun
+     * @throws Exception\LengthException for buffer underrun
      */
     public function readBytes($length)
     {
@@ -108,7 +108,7 @@ class BinaryStream
      * Usually a string.
      *
      * @param  string $bytes
-     * @return Zend\Amf\Util\BinaryStream
+     * @return BinaryStream
      */
     public function writeBytes($bytes)
     {
@@ -120,6 +120,7 @@ class BinaryStream
      * Reads a signed byte
      *
      * @return int Value is in the range of -128 to 127.
+     * @throws Exception\UnderflowException
      */
     public function readByte()
     {
@@ -134,7 +135,7 @@ class BinaryStream
      * Writes the passed string into a signed byte on the stream.
      *
      * @param  string $stream
-     * @return Zend\Amf\Util\BinaryStream
+     * @return BinaryStream
      */
     public function writeByte($stream)
     {
@@ -156,7 +157,7 @@ class BinaryStream
      * Write an the integer to the output stream as a 32 bit signed integer
      *
      * @param  int $stream
-     * @return Zend\Amf\Util\BinaryStream
+     * @return BinaryStream
      */
     public function writeInt($stream)
     {
@@ -179,7 +180,7 @@ class BinaryStream
      * Wite a UTF-8 string to the outputstream
      *
      * @param  string $stream
-     * @return Zend\Amf\Util\BinaryStream
+     * @return BinaryStream
      */
     public function writeUtf($stream)
     {
@@ -204,7 +205,7 @@ class BinaryStream
      * Write a long UTF string to the buffer
      *
      * @param  string $stream
-     * @return Zend\Amf\Util\BinaryStream
+     * @return BinaryStream
      */
     public function writeLongUtf($stream)
     {
@@ -226,7 +227,7 @@ class BinaryStream
      * Write long numeric value to output stream
      *
      * @param  int|string $stream
-     * @return Zend\Amf\Util\BinaryStream
+     * @return BinaryStream
      */
     public function writeLong($stream)
     {
@@ -269,7 +270,7 @@ class BinaryStream
      * Writes an IEEE 754 double-precision floating point number from the data stream.
      *
      * @param  string|double $stream
-     * @return Zend\Amf\Util\BinaryStream
+     * @return BinaryStream
      */
     public function writeDouble($stream)
     {

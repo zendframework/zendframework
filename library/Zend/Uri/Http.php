@@ -23,7 +23,10 @@ class Http extends Uri
     /**
      * @see Uri::$validSchemes
      */
-    protected static $validSchemes = array('http', 'https');
+    protected static $validSchemes = array(
+        'http',
+        'https'
+    );
 
     /**
      * @see Uri::$defaultPorts

@@ -20,9 +20,8 @@
  */
 
 namespace Zend\Pdf\InternalType\StreamFilter;
-use Zend\Pdf\Exception;
 
-use Zend\Pdf\InternalType\StreamFilter,
+use Zend\Pdf\Exception,
     Zend\Pdf;
 
 /**
@@ -33,7 +32,7 @@ use Zend\Pdf\InternalType\StreamFilter,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class AsciiHex implements StreamFilter
+class AsciiHex implements StreamFilterInterface
 {
     /**
      * Encode data
@@ -41,7 +40,7 @@ class AsciiHex implements StreamFilter
      * @param string $data
      * @param array $params
      * @return string
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
     public static function encode($data, $params = null)
     {
@@ -54,7 +53,7 @@ class AsciiHex implements StreamFilter
      * @param string $data
      * @param array $params
      * @return string
-     * @throws \Zend\Pdf\Exception
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
      */
     public static function decode($data, $params = null)
     {

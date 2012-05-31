@@ -72,7 +72,9 @@ class CallbackCacheTest extends CommonPatternTest
 
     public function setUp()
     {
-        $this->_storage = new Cache\Storage\Adapter\Memory();
+        $this->_storage = new Cache\Storage\Adapter\Memory(array(
+            'memory_limit' => 0
+        ));
         $this->_options = new Cache\Pattern\PatternOptions(array(
             'storage' => $this->_storage,
         ));

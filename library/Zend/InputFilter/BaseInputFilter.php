@@ -152,15 +152,18 @@ class BaseInputFilter implements InputFilterInterface
         foreach ($inputs as $name) {
             $input = $this->inputs[$name];
             if (!array_key_exists($name, $this->data) || ($this->data[$name] == '')) {
-                // - test if input is required
-                if (!$input->isRequired()) {
-                    $this->validInputs[$name] = $input;
-                    continue;
-                }
-                // - test if input allows empty
-                if ($input->allowEmpty()) {
-                    $this->validInputs[$name] = $input;
-                    continue;
+		        if($input instanceof InputInterface)
+		        {
+                    // - test if input is required
+                    if (!$input->isRequired()) {
+                        $this->validInputs[$name] = $input;
+                        continue;
+                    }
+                    // - test if input allows empty
+                    if ($input->allowEmpty()) {
+                        $this->validInputs[$name] = $input;
+                        continue;
+                    }
                 }
                 // make sure we have a value (empty) for validation
                 $this->data[$name] = '';

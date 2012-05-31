@@ -120,7 +120,9 @@ class ClassMethods implements HydratorInterface
                 $property = preg_replace_callback('/(_[a-z])/', $transform, $property);
             }
             $method = 'set' . ucfirst($property);
-            $object->$method($value);
+            if (method_exists($object, $method)) {
+                $object->$method($value);
+            }
         }
         return $object;
     }

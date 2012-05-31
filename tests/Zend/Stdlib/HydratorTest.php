@@ -37,6 +37,22 @@ use ZendTest\Stdlib\TestAsset\ClassMethodsCamelCase,
  */
 class HydratorTest extends \PHPUnit_Framework_TestCase
 {
+
+    /**
+     * @var ClassMethodsCamelCase
+     */
+    protected $classMethodsCamelCase;
+
+    /**
+     * @var ClassMethodsCamelCaseMissing
+     */
+    protected $classMethodsCamelCaseMissing;
+
+    /**
+     * @var ClassMethodsUnderscore
+     */
+    protected $classMethodsUnderscore;
+
     public function setUp()
     {
         $this->classMethodsCamelCase = new ClassMethodsCamelCase();
@@ -92,5 +108,17 @@ class HydratorTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($this->classMethodsUnderscore, $test);
         $this->assertEquals($test->getFooBar(), 'foo');
         $this->assertEquals($test->getFooBarBaz(), 'bar');
+    }
+
+    public function testHydratorClassMethodsIgnoresInvalidValues()
+    {
+        $hydrator = new ClassMethods(false);
+        $data = array(
+            'foo_bar' => '1',
+            'foo_bar_baz' => '2',
+            'invalid' => 'value'
+        );
+        $test = $hydrator->hydrate($data, $this->classMethodsUnderscore);
+        $this->assertSame($this->classMethodsUnderscore, $test);
     }
 }

@@ -29,7 +29,7 @@ namespace Zend\Math;
 class Math extends BigInteger
 {
     /**
-     * Generate random bytes using OpenSSL and/or MCRYPT_DEV_URANDOM and/or /dev/urandom
+     * Generate random bytes using OpenSSL or Mcrypt and mt_rand() as fallback
      *
      * @param  integer $length
      * @param  boolean $strong true if you need a strong random generator (cryptography)
@@ -40,35 +40,35 @@ class Math extends BigInteger
         if ($length <= 0) {
             return false;
         }
-        $rand = '';
         if (extension_loaded('openssl')) {
             $rand = openssl_random_pseudo_bytes($length, $secure);
-            if (!$secure) {
-                $rand = '';
+            if ($secure === true) {
+                return $rand;
             }
         }
         if (extension_loaded('mcrypt')) {
-            $rand ^= mcrypt_create_iv($length, MCRYPT_DEV_URANDOM);
+            // PHP bug #55169
+            // @see https://bugs.php.net/bug.php?id=55169
+            if (strtoupper(substr(PHP_OS, 0, 3)) ==! 'WIN' ||
+                version_compare(PHP_VERSION, '5.3.7') >= 0) {
+                $rand = mcrypt_create_iv($length, MCRYPT_DEV_URANDOM);
+                if ($rand !== false && strlen($rand) === $length) {
+                    return $rand;
+                }
+            }    
         }
-        if (file_exists('/dev/urandom')) {
-            $dev = fopen('/dev/urandom', 'r');
-            $rand ^= fread($dev, $length);
-            fclose($dev);
+        if ($strong) {
+            throw new Exception\RuntimeException(
+                'This PHP environment doesn\'t support secure random number generation. ' .
+                'Please consider to install the OpenSSL and/or Mcrypt extensions'
+            );
         }
-        if (empty($rand)) {
-            if ($strong) {
-                throw new Exception\RuntimeException(
-                    'This PHP environment doesn\'t support secure random number generation. ' .
-                        'Please consider to install the OpenSSL and/or Mcrypt extensions'
-                );
-            }
-            for ($i = 0; $i < $length; $i++) {
-                $rand .= chr(mt_rand(0, 255));
-            }
+        $rand = '';
+        for ($i = 0; $i < $length; $i++) {
+            $rand .= chr(mt_rand(0, 255));
         }
         return $rand;
     }
-
     /**
      * Generate a random number between $min and $max
      *

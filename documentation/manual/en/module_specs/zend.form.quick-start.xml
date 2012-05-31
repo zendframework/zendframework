@@ -702,7 +702,7 @@ echo $this->form()->openTag($form);
 <div class="form_element">
 <?php 
     $name = $form->get('name');
-    echo $formLabel->openTag($name) . $name->getAttribute('label');
+    echo $formLabel->openTag() . $name->getAttribute('label');
     echo $this->formInput($name);
     echo $this->formElementErrors($name);
     echo $formLabel->closeTag();
@@ -711,7 +711,7 @@ echo $this->form()->openTag($form);
 <div class="form_element">
 <?php 
     $subject = $form->get('subject');
-    echo $formLabel->openTag($subject) . $subject->getAttribute('label');
+    echo $formLabel->openTag() . $subject->getAttribute('label');
     echo $this->formInput($subject);
     echo $this->formElementErrors($subject);
     echo $formLabel->closeTag();
@@ -720,7 +720,7 @@ echo $this->form()->openTag($form);
 <div class="form_element">
 <?php 
     $message = $form->get('message');
-    echo $formLabel->openTag($message) . $message->getAttribute('label');
+    echo $formLabel->openTag() . $message->getAttribute('label');
     echo $this->formInput($message);
     echo $this->formElementErrors($message);
     echo $formLabel->closeTag();
@@ -729,7 +729,7 @@ echo $this->form()->openTag($form);
 <div class="form_element">
 <?php 
     $captcha = $form->get('captcha');
-    echo $formLabel->openTag($captcha) . $captcha->getAttribute('label');
+    echo $formLabel->openTag() . $captcha->getAttribute('label');
     echo $this->formInput($captcha);
     echo $this->formElementErrors($captcha);
     echo $formLabel->closeTag();

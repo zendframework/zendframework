@@ -26,8 +26,6 @@ use Zend\Stdlib\ArrayUtils;
 use RecursiveIteratorIterator;
 use Zend\Navigation\AbstractContainer;
 use Zend\Navigation\Page\AbstractPage;
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\View;
 use Zend\View\Exception;
 
@@ -40,7 +38,7 @@ use Zend\View\Exception;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Links extends AbstractHelper implements ServiceLocatorAwareInterface
+class Links extends AbstractHelper
 {
     /**#@+
      * Constants used for specifying which link types to find and render
@@ -65,11 +63,6 @@ class Links extends AbstractHelper implements ServiceLocatorAwareInterface
     const RENDER_CUSTOM     = 0x8000;
     const RENDER_ALL        = 0xffff;
     /**#@+**/
-
-    /**
-     * @var ServiceLocatorInterface
-     */
-    protected $serviceLocator;
 
     /**
      * Maps render constants to W3C link types
@@ -157,17 +150,6 @@ class Links extends AbstractHelper implements ServiceLocatorAwareInterface
         }
 
         return parent::__call($method, $arguments);
-    }
-
-    public function setServiceLocator(ServiceLocatorInterface $serviceLocator)
-    {
-        $this->serviceLocator = $serviceLocator;
-        return $this;
-    }
-
-    public function getServiceLocator()
-    {
-        return $this->serviceLocator;
     }
 
     /**

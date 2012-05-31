@@ -49,12 +49,23 @@ class MvcNavigationFactory implements FactoryInterface
 
         MvcPage::setDefaultUrlHelper($urlHelper);
 
-        foreach($this->pages as &$page) {
+        $pages = $this->injectRouteMatch($this->pages, $routeMatch);
 
+        return new Navigation($pages);
+    }
+
+    protected function injectRouteMatch($pages, $routeMatch)
+    {
+        foreach($pages as &$page) {
+            $hasMvc = isset($page['action']) || isset($page['controller']) || isset($page['route']);
+            if ($hasMvc && !isset($page['routeMatch'])) {
+                $page['routeMatch'] = $routeMatch;
+            }
+
+            if (isset($page['pages'])) {
+                $page['pages'] = $this->injectRouteMatch($page['pages'], $routeMatch);
+            }
         }
-
-        $container = new Navigation($this->pages);
-
-        return $container;
+        return $pages;
     }
 }

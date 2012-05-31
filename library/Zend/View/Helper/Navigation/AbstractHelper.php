@@ -21,14 +21,16 @@
 
 namespace Zend\View\Helper\Navigation;
 
-use RecursiveIteratorIterator,
-    Zend\Acl,
-    Zend\Navigation,
-    Zend\Navigation\Page\AbstractPage,
-    Zend\Registry,
-    Zend\Translator,
-    Zend\View,
-    Zend\View\Exception;
+use RecursiveIteratorIterator;
+use Zend\Acl;
+use Zend\Navigation;
+use Zend\Navigation\Page\AbstractPage;
+use Zend\ServiceManager\ServiceLocatorAwareInterface;
+use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\Registry;
+use Zend\Translator;
+use Zend\View;
+use Zend\View\Exception;
 
 /**
  * Base class for navigational helpers
@@ -39,8 +41,16 @@ use RecursiveIteratorIterator,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class AbstractHelper extends View\Helper\HtmlElement implements HelperInterface
+abstract class AbstractHelper
+    extends View\Helper\HtmlElement
+    implements HelperInterface,
+               ServiceLocatorAwareInterface
 {
+    /**
+     * @var ServiceLocatorInterface
+     */
+    protected $serviceLocator;
+
     /**
      * AbstractContainer to operate on by default
      *
@@ -127,7 +137,16 @@ abstract class AbstractHelper extends View\Helper\HtmlElement implements HelperI
      */
     protected static $defaultRole;
 
-    // Accessors:
+    public function setServiceLocator(ServiceLocatorInterface $serviceLocator)
+    {
+        $this->serviceLocator = $serviceLocator;
+        return $this;
+    }
+
+    public function getServiceLocator()
+    {
+        return $this->serviceLocator;
+    }
 
     /**
      * Sets navigation container the helper operates on by default

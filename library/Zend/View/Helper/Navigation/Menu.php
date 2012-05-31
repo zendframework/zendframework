@@ -24,8 +24,6 @@ namespace Zend\View\Helper\Navigation;
 use RecursiveIteratorIterator;
 use Zend\Navigation\AbstractContainer;
 use Zend\Navigation\Page\AbstractPage;
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\View;
 use Zend\View\Exception;
 
@@ -38,7 +36,7 @@ use Zend\View\Exception;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Menu extends AbstractHelper implements ServiceLocatorAwareInterface
+class Menu extends AbstractHelper
 {
     /**
      * CSS class to use for the ul element
@@ -69,11 +67,6 @@ class Menu extends AbstractHelper implements ServiceLocatorAwareInterface
     protected $partial = null;
 
     /**
-     * @var ServiceLocatorInterface
-     */
-    protected $serviceLocator;
-
-    /**
      * View helper entry point:
      * Retrieves helper and optionally sets container to operate on
      *
@@ -91,26 +84,6 @@ class Menu extends AbstractHelper implements ServiceLocatorAwareInterface
         }
 
         return $this;
-    }
-
-    // Accessors:
-
-    /**
-     * @param \Zend\ServiceManager\ServiceLocatorInterface $serviceLocator
-     * @return Menu
-     */
-    public function setServiceLocator(ServiceLocatorInterface $serviceLocator)
-    {
-        $this->serviceLocator = $serviceLocator;
-        return $this;
-    }
-
-    /**
-     * @return \Zend\ServiceManager\ServiceLocatorInterface
-     */
-    public function getServiceLocator()
-    {
-        return $this->serviceLocator;
     }
 
     /**

@@ -23,8 +23,6 @@ namespace Zend\View\Helper\Navigation;
 
 use Zend\Navigation\AbstractContainer;
 use Zend\Navigation\Page\AbstractPage;
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\View;
 use Zend\View\Exception;
 
@@ -37,13 +35,8 @@ use Zend\View\Exception;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Breadcrumbs extends AbstractHelper implements ServiceLocatorAwareInterface
+class Breadcrumbs extends AbstractHelper
 {
-    /**
-     * @var ServiceLocatorInterface
-     */
-    protected $serviceLocator;
-
     /**
      * Breadcrumbs separator string
      *
@@ -88,17 +81,6 @@ class Breadcrumbs extends AbstractHelper implements ServiceLocatorAwareInterface
         }
 
         return $this;
-    }
-
-    public function setServiceLocator(ServiceLocatorInterface $serviceLocator)
-    {
-        $this->serviceLocator = $serviceLocator;
-        return $this;
-    }
-
-    public function getServiceLocator()
-    {
-        return $this->serviceLocator;
     }
 
     /**

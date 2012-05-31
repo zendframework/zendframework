@@ -25,8 +25,6 @@ use DOMDocument;
 use RecursiveIteratorIterator;
 use Zend\Navigation\Page\AbstractPage;
 use Zend\Navigation\AbstractContainer;
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\Uri;
 use Zend\View;
 use Zend\View\Exception;
@@ -42,7 +40,7 @@ use Zend\View\Exception;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Sitemap extends AbstractHelper implements ServiceLocatorAwareInterface
+class Sitemap extends AbstractHelper
 {
     /**
      * Namespace for the <urlset> tag
@@ -57,11 +55,6 @@ class Sitemap extends AbstractHelper implements ServiceLocatorAwareInterface
      * @var string
      */
     const SITEMAP_XSD = 'http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd';
-
-    /**
-     * @var ServiceLocatorInterface
-     */
-    protected $serviceLocator;
 
     /**
      * Whether XML output should be formatted
@@ -114,17 +107,6 @@ class Sitemap extends AbstractHelper implements ServiceLocatorAwareInterface
         }
 
         return $this;
-    }
-
-    public function setServiceLocator(ServiceLocatorInterface $serviceLocator)
-    {
-        $this->serviceLocator = $serviceLocator;
-        return $this;
-    }
-
-    public function getServiceLocator()
-    {
-        return $this->serviceLocator;
     }
 
     /**

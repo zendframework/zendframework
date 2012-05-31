@@ -8,13 +8,12 @@ use Zend\Di\Di,
 class DependencyInjectorProxy extends Di
 {
     /**
-     * @var DependencyInjector
+     * @var Di
      */
     protected $di;
 
     /**
-     * @param DependencyInjector $di
-     * @return void
+     * @param Di $di
      */
     public function __construct(Di $di)
     {

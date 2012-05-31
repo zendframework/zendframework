@@ -381,9 +381,9 @@ abstract class AbstractAdapter implements StorageInterface, EventsCapableInterfa
                 return $eventRs->last();
             }
 
-            if (isset($args['success'], $args['casToken'])) {
+            if ($args->offsetExists('success') && $args->offsetExists('casToken')) {
                 $result = $this->internalGetItem($args['key'], $args['success'], $args['casToken']);
-            } elseif (isset($args['success'])) {
+            } elseif ($args->offsetExists('success')) {
                 $result = $this->internalGetItem($args['key'], $args['success']);
             } else {
                 $result = $this->internalGetItem($args['key']);

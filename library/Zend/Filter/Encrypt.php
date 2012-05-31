@@ -22,7 +22,6 @@ namespace Zend\Filter;
 
 use Traversable;
 use Zend\Stdlib\ArrayUtils;
-use Zend\Loader;
 
 /**
  * Encrypts a given string
@@ -84,7 +83,7 @@ class Encrypt extends AbstractFilter
             $options = array();
         }
 
-        if (Loader::isReadable('Zend/Filter/Encrypt/' . ucfirst($adapter). '.php')) {
+        if (stream_resolve_include_path('Zend/Filter/Encrypt/' . ucfirst($adapter). '.php')) {
             $adapter = 'Zend\\Filter\\Encrypt\\' . ucfirst($adapter);
         }
 

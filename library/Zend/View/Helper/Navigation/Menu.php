@@ -21,11 +21,13 @@
 
 namespace Zend\View\Helper\Navigation;
 
-use RecursiveIteratorIterator,
-    Zend\Navigation\Container,
-    Zend\Navigation\Page\AbstractPage,
-    Zend\View,
-    Zend\View\Exception;
+use RecursiveIteratorIterator;
+use Zend\Navigation\AbstractContainer;
+use Zend\Navigation\Page\AbstractPage;
+use Zend\ServiceManager\ServiceLocatorAwareInterface;
+use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\View;
+use Zend\View\Exception;
 
 /**
  * Helper for rendering menus from navigation containers
@@ -36,7 +38,7 @@ use RecursiveIteratorIterator,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Menu extends AbstractHelper
+class Menu extends AbstractHelper implements ServiceLocatorAwareInterface
 {
     /**
      * CSS class to use for the ul element
@@ -67,14 +69,23 @@ class Menu extends AbstractHelper
     protected $partial = null;
 
     /**
+     * @var ServiceLocatorInterface
+     */
+    protected $serviceLocator;
+
+    /**
      * View helper entry point:
      * Retrieves helper and optionally sets container to operate on
      *
-     * @param  Container $container [optional] container to operate on
+     * @param  AbstractContainer $container [optional] container to operate on
      * @return Menu      fluent interface, returns self
      */
-    public function __invoke(Container $container = null)
+    public function __invoke($container = null)
     {
+        if (is_string($container)) {
+            $container = $this->getServiceLocator()->get($container);
+        }
+
         if (null !== $container) {
             $this->setContainer($container);
         }
@@ -83,6 +94,24 @@ class Menu extends AbstractHelper
     }
 
     // Accessors:
+
+    /**
+     * @param \Zend\ServiceManager\ServiceLocatorInterface $serviceLocator
+     * @return Menu
+     */
+    public function setServiceLocator(ServiceLocatorInterface $serviceLocator)
+    {
+        $this->serviceLocator = $serviceLocator;
+        return $this;
+    }
+
+    /**
+     * @return \Zend\ServiceManager\ServiceLocatorInterface
+     */
+    public function getServiceLocator()
+    {
+        return $this->serviceLocator;
+    }
 
     /**
      * Sets CSS class to use for the first 'ul' element when rendering
@@ -298,7 +327,7 @@ class Menu extends AbstractHelper
      * Renders the deepest active menu within [$minDepth, $maxDeth], (called
      * from {@link renderMenu()})
      *
-     * @param  Container                 $container  container to render
+     * @param  AbstractContainer         $container  container to render
      * @param  array                     $active     active page and depth
      * @param  string                    $ulClass    CSS class for first UL
      * @param  string                    $indent     initial indentation
@@ -306,7 +335,7 @@ class Menu extends AbstractHelper
      * @param  int|null                  $maxDepth   maximum depth
      * @return string                                rendered menu
      */
-    protected function renderDeepestMenu(Container $container,
+    protected function renderDeepestMenu(AbstractContainer $container,
                                          $ulClass,
                                          $indent,
                                          $minDepth,
@@ -350,7 +379,7 @@ class Menu extends AbstractHelper
     /**
      * Renders a normal menu (called from {@link renderMenu()})
      *
-     * @param  Container                 $container   container to render
+     * @param  AbstractContainer                 $container   container to render
      * @param  string                    $ulClass     CSS class for first UL
      * @param  string                    $indent      initial indentation
      * @param  int|null                  $minDepth    minimum depth
@@ -358,7 +387,7 @@ class Menu extends AbstractHelper
      * @param  bool                      $onlyActive  render only active branch?
      * @return string
      */
-    protected function _renderMenu(Container $container,
+    protected function _renderMenu(AbstractContainer $container,
                                    $ulClass,
                                    $indent,
                                    $minDepth,
@@ -471,18 +500,19 @@ class Menu extends AbstractHelper
      * Available $options:
      *
      *
-     * @param  Container $container [optional] container to create menu from. 
+     * @param  AbstractContainer $container [optional] container to create menu from.
      *                              Default is to use the container retrieved 
      *                              from {@link getContainer()}.
      * @param  array     $options   [optional] options for controlling rendering 
      * @return string    rendered menu
      */
-    public function renderMenu(Container $container = null,
+    public function renderMenu(AbstractContainer $container = null,
                                array $options = array()
     ) {
         if (null === $container) {
             $container = $this->getContainer();
         }
+
 
         $options = $this->normalizeOptions($options);
 
@@ -519,7 +549,7 @@ class Menu extends AbstractHelper
      * ));
      * </code>
      *
-     * @param  Container                 $container  [optional] container to
+     * @param  AbstractContainer                 $container  [optional] container to
      *                                               render. Default is to render
      *                                               the container registered in
      *                                               the helper.
@@ -534,7 +564,7 @@ class Menu extends AbstractHelper
      *                                               {@link getIndent()}.
      * @return string                                rendered content
      */
-    public function renderSubMenu(Container $container = null,
+    public function renderSubMenu(AbstractContainer $container = null,
                                   $ulClass = null,
                                   $indent = null
     ) {
@@ -555,7 +585,7 @@ class Menu extends AbstractHelper
      * as-is, and will be available in the partial script as 'container', e.g.
      * <code>echo 'Number of pages: ', count($this->container);</code>.
      *
-     * @param  Container     $container [optional] container to pass to view 
+     * @param  AbstractContainer     $container [optional] container to pass to view
      *                                  script. Default is to use the container 
      *                                  registered in the helper.
      * @param  string|array  $partial   [optional] partial view script to use. 
@@ -569,7 +599,7 @@ class Menu extends AbstractHelper
      * @throws Exception\RuntimeException if no partial provided
      * @throws Exception\InvalidArgumentException if partial is invalid array
      */
-    public function renderPartial(Container $container = null,
+    public function renderPartial(AbstractContainer $container = null,
                                   $partial = null
     ) {
         if (null === $container) {
@@ -621,12 +651,12 @@ class Menu extends AbstractHelper
      * @see renderPartial()
      * @see renderMenu()
      *
-     * @param  Container $container [optional] container to render. Default is 
+     * @param  AbstractContainer $container [optional] container to render. Default is
      *                              to render the container registered in the 
      *                              helper.
      * @return string               helper output
      */
-    public function render(Container $container = null)
+    public function render(AbstractContainer $container = null)
     {
         $partial = $this->getPartial();
         if ($partial) {

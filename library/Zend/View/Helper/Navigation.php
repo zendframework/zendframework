@@ -21,12 +21,14 @@
 
 namespace Zend\View\Helper;
 
-use Zend\Loader\ShortNameLocator,
-    Zend\Loader\PluginClassLoader,
-    Zend\Navigation\Container,
-    Zend\View\Helper\Navigation\AbstractHelper as AbstractNavigationHelper,
-    Zend\View\Helper\Navigation\HelperInterface as NavigationHelper,
-    Zend\View\Exception;
+use Zend\Loader\ShortNameLocator;
+use Zend\Loader\PluginClassLoader;
+use Zend\Navigation\AbstractContainer;
+use Zend\ServiceManager\ServiceLocatorAwareInterface;
+use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\View\Helper\Navigation\AbstractHelper as AbstractNavigationHelper;
+use Zend\View\Helper\Navigation\HelperInterface as NavigationHelper;
+use Zend\View\Exception;
 
 /**
  * Proxy helper for retrieving navigational helpers and forwarding calls
@@ -37,7 +39,7 @@ use Zend\Loader\ShortNameLocator,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Navigation extends AbstractNavigationHelper
+class Navigation extends AbstractNavigationHelper implements ServiceLocatorAwareInterface
 {
     /**
      * View helper namespace
@@ -50,6 +52,11 @@ class Navigation extends AbstractNavigationHelper
      * @var ShortNameLocator
      */
     protected $loader;
+
+    /**
+     * @var ServiceLocatorInterface
+     */
+    protected $serviceLocator;
 
     /**
      * Default proxy to use in {@link render()}
@@ -89,13 +96,14 @@ class Navigation extends AbstractNavigationHelper
     /**
      * Helper entry point
      *
-     * @param  \Zend\Navigation\Container $container  [optional] container to
-     *                                               operate on
-     * @return \Zend\View\Helper\Navigation           fluent interface, returns
-     *                                               self
+     * @param  string|AbstractContainer $container container to operate on
+     * @return Navigation
      */
-    public function __invoke(Container $container = null)
+    public function __invoke($container = null)
     {
+        if (is_string($container)) {
+            $container = $this->getServiceLocator()->get($container);
+        }
         if (null !== $container) {
             $this->setContainer($container);
         }
@@ -133,11 +141,32 @@ class Navigation extends AbstractNavigationHelper
         // check if call should proxy to another helper
         $helper = $this->findHelper($method, false);
         if ($helper) {
+            if ($helper instanceof ServiceLocatorAwareInterface) {
+                $helper->setServiceLocator($this->getServiceLocator());
+            }
             return call_user_func_array($helper, $arguments);
         }
 
         // default behaviour: proxy call to container
         return parent::__call($method, $arguments);
+    }
+
+    /**
+     * @param \Zend\ServiceManager\ServiceLocatorInterface $serviceLocator
+     * @return Navigation
+     */
+    public function setServiceLocator(ServiceLocatorInterface $serviceLocator)
+    {
+        $this->serviceLocator = $serviceLocator;
+        return $this;
+    }
+
+    /**
+     * @return \Zend\ServiceManager\ServiceLocatorInterface
+     */
+    public function getServiceLocator()
+    {
+        return $this->serviceLocator;
     }
 
     /**
@@ -352,7 +381,7 @@ class Navigation extends AbstractNavigationHelper
     /**
      * Renders helper
      *
-     * @param  \Zend\Navigation\Container $container  [optional] container to
+     * @param  \Zend\Navigation\AbstractContainer $container  [optional] container to
      *                                               render. Default is to
      *                                               render the container
      *                                               registered in the helper.
@@ -362,7 +391,7 @@ class Navigation extends AbstractNavigationHelper
      *                                               the interface specified in
      *                                               {@link findHelper()}
      */
-    public function render(Container $container = null)
+    public function render(AbstractContainer $container = null)
     {
         $helper = $this->findHelper($this->getDefaultProxy());
         return $helper->render($container);

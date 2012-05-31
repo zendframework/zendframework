@@ -42,9 +42,9 @@ use RecursiveIteratorIterator,
 abstract class AbstractHelper extends View\Helper\HtmlElement implements HelperInterface
 {
     /**
-     * Container to operate on by default
+     * AbstractContainer to operate on by default
      *
-     * @var Navigation\Container
+     * @var Navigation\AbstractContainer
      */
     protected $container;
 
@@ -134,10 +134,10 @@ abstract class AbstractHelper extends View\Helper\HtmlElement implements HelperI
      *
      * Implements {@link HelperInterface::setContainer()}.
      *
-     * @param  Navigation\Container $container [optional] container to operate on.  Default is null, meaning container will be reset.
+     * @param  Navigation\AbstractContainer $container [optional] container to operate on.  Default is null, meaning container will be reset.
      * @return AbstractHelper  fluent interface, returns self
      */
-    public function setContainer(Navigation\Container $container = null)
+    public function setContainer(Navigation\AbstractContainer $container = null)
     {
         $this->container = $container;
         return $this;
@@ -156,7 +156,7 @@ abstract class AbstractHelper extends View\Helper\HtmlElement implements HelperI
      * If no container is set, and nothing is found in Zend\Registry, a new
      * container will be instantiated and stored in the helper.
      *
-     * @return Navigation\Container  navigation container
+     * @return Navigation\AbstractContainer  navigation container
      */
     public function getContainer()
     {
@@ -164,7 +164,7 @@ abstract class AbstractHelper extends View\Helper\HtmlElement implements HelperI
             // try to fetch from registry first
             if (\Zend\Registry::isRegistered('Zend_Navigation')) {
                 $nav = \Zend\Registry::get('Zend_Navigation');
-                if ($nav instanceof Navigation\Container) {
+                if ($nav instanceof Navigation\AbstractContainer) {
                     return $this->container = $nav;
                 }
             }
@@ -491,7 +491,7 @@ abstract class AbstractHelper extends View\Helper\HtmlElement implements HelperI
     /**
      * Finds the deepest active page in the given container
      *
-     * @param  Navigation\Container $container  container to search
+     * @param  Navigation\AbstractContainer $container  container to search
      * @param  int|null             $minDepth   [optional] minimum depth
      *                                          required for page to be
      *                                          valid. Default is to use
@@ -509,7 +509,7 @@ abstract class AbstractHelper extends View\Helper\HtmlElement implements HelperI
      *                                          'page', or an empty array
      *                                          if not found
      */
-    public function findActive(Navigation\Container $container,
+    public function findActive(Navigation\AbstractContainer $container,
                                $minDepth = null,
                                $maxDepth = -1)
     {
@@ -769,7 +769,7 @@ abstract class AbstractHelper extends View\Helper\HtmlElement implements HelperI
      */
     protected function _normalizeId($value)
     {
-        $prefix = get_called_class();
+        $prefix = get_class($this);
         $prefix = strtolower(trim(substr($prefix, strrpos($prefix, '\\')), '\\'));
 
         return $prefix . '-' . $value;

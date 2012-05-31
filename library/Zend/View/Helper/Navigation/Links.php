@@ -23,11 +23,13 @@ namespace Zend\View\Helper\Navigation;
 
 use Traversable;
 use Zend\Stdlib\ArrayUtils;
-use RecursiveIteratorIterator,
-    Zend\Navigation,
-    Zend\Navigation\Page\AbstractPage,
-    Zend\View,
-    Zend\View\Exception;
+use RecursiveIteratorIterator;
+use Zend\Navigation\AbstractContainer;
+use Zend\Navigation\Page\AbstractPage;
+use Zend\ServiceManager\ServiceLocatorAwareInterface;
+use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\View;
+use Zend\View\Exception;
 
 /**
  * Helper for printing <link> elements
@@ -38,7 +40,7 @@ use RecursiveIteratorIterator,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Links extends AbstractHelper
+class Links extends AbstractHelper implements ServiceLocatorAwareInterface
 {
     /**#@+
      * Constants used for specifying which link types to find and render
@@ -63,6 +65,11 @@ class Links extends AbstractHelper
     const RENDER_CUSTOM     = 0x8000;
     const RENDER_ALL        = 0xffff;
     /**#@+**/
+
+    /**
+     * @var ServiceLocatorInterface
+     */
+    protected $serviceLocator;
 
     /**
      * Maps render constants to W3C link types
@@ -104,19 +111,21 @@ class Links extends AbstractHelper
      *
      * @see _findRoot()
      *
-     * @var Navigation\Container
+     * @var AbstractContainer
      */
     protected $root;
 
     /**
-     * View helper entry point:
-     * Retrieves helper and optionally sets container to operate on
+     * Helper entry point
      *
-     * @param  Navigation\Container $container [optional] container to operate on
-     * @return Links     fluent interface, returns self
+     * @param  string|AbstractContainer $container container to operate on
+     * @return Navigation
      */
-    public function __invoke(Navigation\Container $container = null)
+    public function __invoke($container = null)
     {
+        if (is_string($container)) {
+            $container = $this->getServiceLocator()->get($container);
+        }
         if (null !== $container) {
             $this->setContainer($container);
         }
@@ -150,7 +159,16 @@ class Links extends AbstractHelper
         return parent::__call($method, $arguments);
     }
 
-    // Accessors:
+    public function setServiceLocator(ServiceLocatorInterface $serviceLocator)
+    {
+        $this->serviceLocator = $serviceLocator;
+        return $this;
+    }
+
+    public function getServiceLocator()
+    {
+        return $this->serviceLocator;
+    }
 
     /**
      * Sets the helper's render flag
@@ -221,8 +239,7 @@ class Links extends AbstractHelper
      * @param  AbstractPage $page  page to find links for
      * @return array related pages
      */
-    public function findAllRelations(AbstractPage $page,
-                                     $flag = null)
+    public function findAllRelations(AbstractPage $page, $flag = null)
     {
         if (!is_int($flag)) {
             $flag = self::RENDER_ALL;
@@ -613,7 +630,7 @@ class Links extends AbstractHelper
      * to the render method.
      *
      * @param  AbstractPage $page  page to find root for
-     * @return Navigation\Container   the root container of the given page
+     * @return AbstractContainer   the root container of the given page
      */
     protected function findRoot(AbstractPage $page)
     {
@@ -648,7 +665,7 @@ class Links extends AbstractHelper
         if ($mixed instanceof AbstractPage) {
             // value is a page instance; return directly
             return $mixed;
-        } elseif ($mixed instanceof Navigation\Container) {
+        } elseif ($mixed instanceof AbstractContainer) {
             // value is a container; return pages in it
             $pages = array();
             foreach ($mixed as $page) {
@@ -740,13 +757,13 @@ class Links extends AbstractHelper
      *
      * Implements {@link HelperInterface::render()}.
      *
-     * @param  Navigation\Container $container [optional] container to render. 
+     * @param  AbstractContainer $container [optional] container to render.
      *                                         Default is to render the 
      *                                         container registered in the 
      *                                         helper.
      * @return string                          helper output
      */
-    public function render(Navigation\Container $container = null)
+    public function render(AbstractContainer $container = null)
     {
         if (null === $container) {
             $container = $this->getContainer();

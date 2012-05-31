@@ -26,7 +26,8 @@ $feed = new Zend_Feed_Atom('http://atom.example.com/feed/');
 echo 'The feed contains ' . $feed->count() . ' entries.' . "\n\n";
 foreach ($feed as $entry) {
     echo 'Title: ' . $entry->title() . "\n";
-    echo 'Summary: ' . $entry->summary() . "\n\n";
+    echo 'Summary: ' . $entry->summary() . "\n";
+    echo 'URL: ' . $entry->link['href'] . "\n\n";
 }
 ]]></programlisting>
     </example>
@@ -94,6 +95,14 @@ foreach ($feed as $entry) {
             <para>
                 <property>link</property> - A link to another format or an alternate view of
                 this entry
+            </para>
+
+            <para>
+                The link property of an atom entry typically has an
+                <property>href</property> attribute.  Attributes can be accessed
+                using array notation. For example,
+                <command>$entry->link['rel']</command> and
+                <command>$entry->link['href']</command>.
             </para>
         </listitem>
 

@@ -29,7 +29,7 @@ namespace Zend\Math;
 class Math extends BigInteger
 {
     /**
-     * Generate random bytes using OpenSSL and/or MCRYPT_DEV_URANDOM and/or /dev/urandom
+     * Generate random bytes using OpenSSL or Mcrypt and mt_rand() as fallback
      *
      * @param  integer $length
      * @param  boolean $strong true if you need a strong random generator (cryptography)

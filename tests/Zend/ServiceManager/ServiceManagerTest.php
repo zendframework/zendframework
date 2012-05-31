@@ -159,6 +159,15 @@ class ServiceManagerTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers Zend\ServiceManager\ServiceManager::get
      */
+    public function testGetDoesNotThrowExceptionOnEmptyArray()
+    {
+        $this->serviceManager->setService('foo', array());
+        $this->serviceManager->get('foo');
+    }
+
+    /**
+     * @covers Zend\ServiceManager\ServiceManager::get
+     */
     public function testGetThrowsExceptionOnUnknownService()
     {
         $this->setExpectedException('Zend\ServiceManager\Exception\ServiceNotCreatedException');

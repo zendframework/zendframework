@@ -274,7 +274,7 @@ class ServiceManager implements ServiceLocatorInterface
 
         $selfException = null;
 
-        if (!$instance) {
+        if (!$instance && !is_array($instance)) {
             try {
                 $instance = $this->create(array($cName, $rName));
             } catch (Exception\ServiceNotCreatedException $selfException) {
@@ -290,7 +290,7 @@ class ServiceManager implements ServiceLocatorInterface
         }
 
         // Still no instance? raise an exception
-        if (!$instance) {
+        if (!$instance && !is_array($instance)) {
             throw new Exception\ServiceNotCreatedException(sprintf(
                 '%s was unable to fetch or create an instance for %s',
                     __METHOD__,

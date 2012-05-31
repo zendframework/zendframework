@@ -25,7 +25,6 @@ use Zend\Loader\ShortNameLocator;
 use Zend\Loader\PluginClassLoader;
 use Zend\Navigation\AbstractContainer;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\View\Helper\Navigation\AbstractHelper as AbstractNavigationHelper;
 use Zend\View\Helper\Navigation\HelperInterface as NavigationHelper;
 use Zend\View\Exception;
@@ -39,7 +38,7 @@ use Zend\View\Exception;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Navigation extends AbstractNavigationHelper implements ServiceLocatorAwareInterface
+class Navigation extends AbstractNavigationHelper
 {
     /**
      * View helper namespace
@@ -54,44 +53,39 @@ class Navigation extends AbstractNavigationHelper implements ServiceLocatorAware
     protected $loader;
 
     /**
-     * @var ServiceLocatorInterface
-     */
-    protected $serviceLocator;
-
-    /**
      * Default proxy to use in {@link render()}
      *
      * @var string
      */
-    protected $_defaultProxy = 'menu';
+    protected $defaultProxy = 'menu';
 
     /**
      * Contains references to proxied helpers
      *
      * @var array
      */
-    protected $_helpers = array();
+    protected $helpers = array();
 
     /**
      * Whether container should be injected when proxying
      *
      * @var bool
      */
-    protected $_injectContainer = true;
+    protected $injectContainer = true;
 
     /**
      * Whether ACL should be injected when proxying
      *
      * @var bool
      */
-    protected $_injectAcl = true;
+    protected $injectAcl = true;
 
     /**
      * Whether translator should be injected when proxying
      *
      * @var bool
      */
-    protected $_injectTranslator = true;
+    protected $injectTranslator = true;
 
     /**
      * Helper entry point
@@ -152,24 +146,6 @@ class Navigation extends AbstractNavigationHelper implements ServiceLocatorAware
     }
 
     /**
-     * @param \Zend\ServiceManager\ServiceLocatorInterface $serviceLocator
-     * @return Navigation
-     */
-    public function setServiceLocator(ServiceLocatorInterface $serviceLocator)
-    {
-        $this->serviceLocator = $serviceLocator;
-        return $this;
-    }
-
-    /**
-     * @return \Zend\ServiceManager\ServiceLocatorInterface
-     */
-    public function getServiceLocator()
-    {
-        return $this->serviceLocator;
-    }
-
-    /**
      * Set plugin loader for retrieving navigation helpers
      *
      * @param ShortNameLocator $loader
@@ -216,20 +192,18 @@ class Navigation extends AbstractNavigationHelper implements ServiceLocatorAware
      */
     public function findHelper($proxy, $strict = true)
     {
-        if (isset($this->_helpers[$proxy])) {
-            return $this->_helpers[$proxy];
+        if (isset($this->helpers[$proxy])) {
+            return $this->helpers[$proxy];
         }
 
         $loader = $this->getPluginLoader();
+        $class  = $loader->load($proxy);
 
-        if ($strict) {
-            $class = $loader->load($proxy);
-        } else {
-            try {
-                $class = $loader->load($proxy);
-            } catch (\Zend\Loader\Exception $e) {
-                return null;
-            }
+        if ($strict && !$class) {
+            throw new Exception\RuntimeException(sprintf(
+                'Failed to plugin for %s',
+                $proxy
+            ));
         }
 
         $helper = new $class();
@@ -248,7 +222,7 @@ class Navigation extends AbstractNavigationHelper implements ServiceLocatorAware
 
         $helper->setView($this->view);
         $this->_inject($helper);
-        $this->_helpers[$proxy] = $helper;
+        $this->helpers[$proxy] = $helper;
 
         return $helper;
     }
@@ -290,7 +264,7 @@ class Navigation extends AbstractNavigationHelper implements ServiceLocatorAware
      */
     public function setDefaultProxy($proxy)
     {
-        $this->_defaultProxy = (string) $proxy;
+        $this->defaultProxy = (string) $proxy;
         return $this;
     }
 
@@ -301,7 +275,7 @@ class Navigation extends AbstractNavigationHelper implements ServiceLocatorAware
      */
     public function getDefaultProxy()
     {
-        return $this->_defaultProxy;
+        return $this->defaultProxy;
     }
 
     /**
@@ -314,7 +288,7 @@ class Navigation extends AbstractNavigationHelper implements ServiceLocatorAware
      */
     public function setInjectContainer($injectContainer = true)
     {
-        $this->_injectContainer = (bool) $injectContainer;
+        $this->injectContainer = (bool) $injectContainer;
         return $this;
     }
 
@@ -325,7 +299,7 @@ class Navigation extends AbstractNavigationHelper implements ServiceLocatorAware
      */
     public function getInjectContainer()
     {
-        return $this->_injectContainer;
+        return $this->injectContainer;
     }
 
     /**
@@ -338,7 +312,7 @@ class Navigation extends AbstractNavigationHelper implements ServiceLocatorAware
      */
     public function setInjectAcl($injectAcl = true)
     {
-        $this->_injectAcl = (bool) $injectAcl;
+        $this->injectAcl = (bool) $injectAcl;
         return $this;
     }
 
@@ -349,7 +323,7 @@ class Navigation extends AbstractNavigationHelper implements ServiceLocatorAware
      */
     public function getInjectAcl()
     {
-        return $this->_injectAcl;
+        return $this->injectAcl;
     }
 
     /**
@@ -362,7 +336,7 @@ class Navigation extends AbstractNavigationHelper implements ServiceLocatorAware
      */
     public function setInjectTranslator($injectTranslator = true)
     {
-        $this->_injectTranslator = (bool) $injectTranslator;
+        $this->injectTranslator = (bool) $injectTranslator;
         return $this;
     }
 
@@ -373,7 +347,7 @@ class Navigation extends AbstractNavigationHelper implements ServiceLocatorAware
      */
     public function getInjectTranslator()
     {
-        return $this->_injectTranslator;
+        return $this->injectTranslator;
     }
 
     // Zend\View\Helper\Navigation\Helper:

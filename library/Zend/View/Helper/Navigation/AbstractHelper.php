@@ -27,8 +27,6 @@ use Zend\Navigation;
 use Zend\Navigation\Page\AbstractPage;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
-use Zend\Registry;
-use Zend\Translator;
 use Zend\View;
 use Zend\View\Exception;
 
@@ -137,12 +135,23 @@ abstract class AbstractHelper
      */
     protected static $defaultRole;
 
+    /**
+     * Set the service locator.
+     *
+     * @param ServiceLocatorInterface $serviceLocator
+     * @return AbstractHelper
+     */
     public function setServiceLocator(ServiceLocatorInterface $serviceLocator)
     {
         $this->serviceLocator = $serviceLocator;
         return $this;
     }
 
+    /**
+     * Get the service locator.
+     *
+     * @return \Zend\ServiceManager\ServiceLocatorInterface
+     */
     public function getServiceLocator()
     {
         return $this->serviceLocator;
@@ -167,28 +176,14 @@ abstract class AbstractHelper
      *
      * Implements {@link HelperInterface::getContainer()}.
      *
-     * If a helper is not explicitly set in this helper instance by calling
-     * {@link setContainer()} or by passing it through the helper entry point,
-     * this method will look in {@link \Zend\Registry} for a container by using
-     * the key 'Zend_Navigation'.
-     *
-     * If no container is set, and nothing is found in Zend\Registry, a new
-     * container will be instantiated and stored in the helper.
+     * If no container is set, a new container will be instantiated and
+     * stored in the helper.
      *
      * @return Navigation\AbstractContainer  navigation container
      */
     public function getContainer()
     {
         if (null === $this->container) {
-            // try to fetch from registry first
-            if (\Zend\Registry::isRegistered('Zend_Navigation')) {
-                $nav = \Zend\Registry::get('Zend_Navigation');
-                if ($nav instanceof Navigation\AbstractContainer) {
-                    return $this->container = $nav;
-                }
-            }
-
-            // nothing found in registry, create new container
             $this->container = new \Zend\Navigation\Navigation();
         }
 
@@ -307,12 +302,6 @@ abstract class AbstractHelper
      */
     public function getTranslator()
     {
-        if (null === $this->translator) {
-            if (Registry::isRegistered('Zend_Translator')) {
-                $this->setTranslator(Registry::get('Zend_Translator'));
-            }
-        }
-
         return $this->translator;
     }
 

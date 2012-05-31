@@ -71,7 +71,9 @@ class ObjectCacheTest extends CommonPatternTest
     public function setUp()
     {
         $class = __NAMESPACE__ . '\TestObjectCache';
-        $this->_storage = new Cache\Storage\Adapter\Memory();
+        $this->_storage = new Cache\Storage\Adapter\Memory(array(
+            'memory_limit' => 0
+        ));
         $this->_options = new Cache\Pattern\PatternOptions(array(
             'object'  => new $class(),
             'storage' => $this->_storage,

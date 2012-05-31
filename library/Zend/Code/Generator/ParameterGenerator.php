@@ -166,29 +166,11 @@ class ParameterGenerator extends AbstractGenerator
      */
     public function setDefaultValue($defaultValue)
     {
-        if ($defaultValue instanceof ValueGenerator) {
-            $this->defaultValue = $defaultValue;
-        } else {
-            $this->defaultValue = new ValueGenerator($defaultValue);
+        if (!($defaultValue instanceof ValueGenerator)) {
+            $defaultValue = new ValueGenerator($defaultValue);
         }
-        /*
-        if ($defaultValue === null) {
-            $this->defaultValue = new ValueGenerator();
-        } elseif (is_string($defaultValue)) {
-            $this->defaultValue = new ValueGenerator($defaultValue);
-        } elseif (is_array($defaultValue)) {
-            $defaultValue = str_replace(array("\r", "\n"), "", var_export($defaultValue, true));
-            $this->defaultValue = new ValueGenerator($defaultValue);
-        } elseif (is_bool($defaultValue)) {
-            if($defaultValue == true) {
-                $this->defaultValue = new ValueGenerator('true');
-            } else {
-                $this->defaultValue = new ValueGenerator('false');
-            }
-        } else {
-            $this->defaultValue = $defaultValue;
-        }
-        */
+        $this->defaultValue = $defaultValue;
+
         return $this;
     }
 

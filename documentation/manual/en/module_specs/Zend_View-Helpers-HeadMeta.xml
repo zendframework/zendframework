@@ -73,6 +73,37 @@
     </itemizedlist>
 
     <para>
+        The following methods are also supported with XHTML1_RDFA doctype
+        set with the <link linkend="zend.view.helpers.initial.doctype">Doctype helper</link>:
+    </para>
+
+    <itemizedlist>
+        <listitem>
+            <para>
+                <command>appendProperty($property, $content, $modifiers)</command>
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <command>offsetSetProperty($index, $property, $content, $modifiers)</command>
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <command>prependProperty($property, $content, $modifiers)</command>
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <command>setProperty($property, $content, $modifiers)</command>
+            </para>
+        </listitem>
+    </itemizedlist>
+
+    <para>
         The <varname>$keyValue</varname> item is used to define a value for the 'name'
         or 'http-equiv' key; <varname>$content</varname> is the value for the
         'content' key, and <varname>$modifiers</varname> is an optional associative
@@ -85,7 +116,8 @@
             $keyValue, $keyType = 'name', $modifiers = array(), $placement =
             'APPEND')</command>. <varname>$keyValue</varname> is the content for the key
         specified in <varname>$keyType</varname>, which should be either 'name' or
-        'http-equiv'. <varname>$placement</varname> can be either 'SET' (overwrites
+        'http-equiv'. <varname>$keyType</varname> may also be specified as 'property' if the
+        doctype has been set to XHTML1_RDFA. <varname>$placement</varname> can be 'SET' (overwrites
         all previously stored values), 'APPEND' (added to end of stack), or
         'PREPEND' (added to top of stack).
     </para>

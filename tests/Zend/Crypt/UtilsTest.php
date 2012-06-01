@@ -21,7 +21,7 @@
 
 namespace ZendTest\Crypt;
 
-use Zend\Crypt\Tool;
+use Zend\Crypt\Utils;
 
 /**
  * Outside the Internal Function tests, tests do not distinguish between hash and mhash
@@ -36,11 +36,11 @@ use Zend\Crypt\Tool;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Crypt
  */
-class ToolTest extends \PHPUnit_Framework_TestCase
+class UtilsTest extends \PHPUnit_Framework_TestCase
 {
-    public function testCompare()
+    public function testCompareStringsBasic()
     {
-        $this->assertTrue(Tool::compareString('test', 'test'));
-        $this->assertFalse(Tool::compareString('test', 'Test'));
+        $this->assertTrue(Utils::compareStrings('test', 'test'));
+        $this->assertFalse(Utils::compareStrings('test', 'Test'));
     }
 }

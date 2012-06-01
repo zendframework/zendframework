@@ -11,7 +11,7 @@ namespace Zend\Crypt;
 
 use Zend\Crypt\Symmetric\SymmetricInterface;
 use Zend\Crypt\Hmac;
-use Zend\Crypt\Tool;
+use Zend\Crypt\Utils;
 use Zend\Crypt\Key\Derivation\Pbkdf2;
 use Zend\Math\Math;
 
@@ -105,6 +105,7 @@ class BlockCipher
      * Set the symmetric cipher broker
      *
      * @param  string|SymmetricBroker $broker
+     * @throws Exception\InvalidArgumentException
      */
     public static function setSymmetricBroker($broker)
     {
@@ -199,6 +200,7 @@ class BlockCipher
      *
      * @param  string $key
      * @return BlockCipher
+     * @throws Exception\InvalidArgumentException
      */
     public function setKey($key)
     {
@@ -224,6 +226,7 @@ class BlockCipher
      *
      * @param  string $algo
      * @return BlockCipher
+     * @throws Exception\InvalidArgumentException
      */
     public function setCipherAlgorithm($algo)
     {
@@ -241,7 +244,7 @@ class BlockCipher
     /**
      * Get the cipher algorithm
      *
-     * @return string|false
+     * @return string|boolean
      */
     public function getCipherAlgorithm()
     {
@@ -269,6 +272,7 @@ class BlockCipher
      *
      * @param  string $hash
      * @return BlockCipher
+     * @throws Exception\InvalidArgumentException
      */
     public function setHashAlgorithm($hash)
     {
@@ -296,6 +300,7 @@ class BlockCipher
      *
      * @param  string $data
      * @return string
+     * @throws Exception\InvalidArgumentException
      */
     public function encrypt($data)
     {
@@ -338,6 +343,7 @@ class BlockCipher
      *
      * @param  string $data
      * @return string|boolean
+     * @throws Exception\InvalidArgumentException
      */
     public function decrypt($data)
     {
@@ -371,7 +377,7 @@ class BlockCipher
         $hmacNew = Hmac::compute($keyHmac,
                                  $this->hash,
                                  $this->cipher->getAlgorithm() . $ciphertext);
-        if (!Tool::compareString($hmacNew, $hmac)) {
+        if (!Utils::compareStrings($hmacNew, $hmac)) {
             return false;
         }
         return $this->cipher->decrypt($ciphertext);

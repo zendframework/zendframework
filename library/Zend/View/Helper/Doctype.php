@@ -117,8 +117,8 @@ class Doctype extends AbstractHelper
                 case self::XHTML1_STRICT:
                 case self::XHTML1_TRANSITIONAL:
                 case self::XHTML1_FRAMESET:
-                case self::XHTML1_RDFA:
                 case self::XHTML_BASIC1:
+                case self::XHTML1_RDFA:
                 case self::XHTML5:
                 case self::HTML4_STRICT:
                 case self::HTML4_LOOSE:

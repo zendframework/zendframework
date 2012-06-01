@@ -270,7 +270,7 @@ class ServiceManager implements ServiceLocatorInterface
 
         if (isset($this->instances[$cName])) {
             $instance = $this->instances[$cName];
-        } 
+        }
 
         $selfException = null;
 
@@ -278,12 +278,14 @@ class ServiceManager implements ServiceLocatorInterface
             try {
                 $instance = $this->create(array($cName, $rName));
             } catch (Exception\ServiceNotCreatedException $selfException) {
-                foreach ($this->peeringServiceManagers as $peeringServiceManager) {
-                    try {
-                        $instance = $peeringServiceManager->get($name);
-                        break;
-                    } catch (Exception\ServiceNotCreatedException $e) {
-                        continue;
+                if($usePeeringServiceManagers) {
+                    foreach ($this->peeringServiceManagers as $peeringServiceManager) {
+                        try {
+                            $instance = $peeringServiceManager->get($name);
+                            break;
+                        } catch (Exception\ServiceNotCreatedException $e) {
+                            continue;
+                        }
                     }
                 }
             }
@@ -436,7 +438,7 @@ class ServiceManager implements ServiceLocatorInterface
             if (!$abstractFactory instanceof AbstractFactoryInterface) {
                 continue;
             }
-            
+
             if ($abstractFactory->canCreateServiceWithName($cName, $rName)) {
                 return true;
             }

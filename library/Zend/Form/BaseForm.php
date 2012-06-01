@@ -192,7 +192,7 @@ class BaseForm extends Fieldset implements FormInterface
                 $data = $filter->getValues();
                 break;
         }
-        $hydrator->hydrate($data, $this->object);
+        $this->object = $hydrator->hydrate($data, $this->object);
     }
 
     /**

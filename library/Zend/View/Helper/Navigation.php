@@ -198,11 +198,17 @@ class Navigation extends AbstractNavigationHelper
 
         if ($strict && !$class) {
             throw new Exception\RuntimeException(sprintf(
-                'Failed to plugin for %s',
+                'Failed to find plugin for %s',
                 $proxy
             ));
         }
 
+        if (!class_exists($class)) {
+            if ($strict) {
+                throw new Exception\RuntimeException('Failed to find a class to proxy to');
+            }
+            return false;
+        }
         $helper = new $class();
 
         if (!$helper instanceof AbstractNavigationHelper) {

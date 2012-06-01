@@ -75,10 +75,6 @@ class Menu extends AbstractHelper
      */
     public function __invoke($container = null)
     {
-        if (is_string($container)) {
-            $container = $this->getServiceLocator()->get($container);
-        }
-
         if (null !== $container) {
             $this->setContainer($container);
         }

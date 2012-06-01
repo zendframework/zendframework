@@ -68,24 +68,6 @@ class MenuTest extends AbstractTest
         $this->assertEquals(0, count($this->_helper->getContainer()));
     }
 
-    public function testAutoloadingContainerFromRegistry()
-    {
-        $oldReg = null;
-        if (\Zend\Registry::isRegistered(self::REGISTRY_KEY)) {
-            $oldReg = \Zend\Registry::get(self::REGISTRY_KEY);
-        }
-        \Zend\Registry::set(self::REGISTRY_KEY, $this->_nav1);
-
-        $this->_helper->setContainer(null);
-
-        $expected = $this->_getExpected('menu/default1.html');
-        $actual = $this->_helper->render();
-
-        \Zend\Registry::set(self::REGISTRY_KEY, $oldReg);
-
-        $this->assertEquals($expected, $actual);
-    }
-
     public function testSetIndentAndOverrideInRenderMenu()
     {
         $this->_helper->setIndent(8);
@@ -206,24 +188,6 @@ class MenuTest extends AbstractTest
         $this->assertEquals($expected, $this->_helper->render());
     }
 
-    public function testTranslationUsingTranslatorFromRegistry()
-    {
-        $oldReg = \Zend\Registry::isRegistered('Zend_Translator')
-                ? \Zend\Registry::get('Zend_Translator')
-                : null;
-
-        $translator = $this->_getTranslator();
-        \Zend\Registry::set('Zend_Translator', $translator);
-
-        $expected = $this->_getExpected('menu/translated.html');
-        $actual = $this->_helper->render();
-
-        \Zend\Registry::set('Zend_Translator', $oldReg);
-
-        $this->assertEquals($expected, $actual);
-
-    }
-
     public function testDisablingTranslation()
     {
         $translator = $this->_getTranslator();
@@ -264,14 +228,6 @@ class MenuTest extends AbstractTest
         } catch (\Zend\View\Exception\ExceptionInterface $e) {
         }
     }
-
-
-
-
-
-
-
-
 
     public function testSetMaxDepth()
     {

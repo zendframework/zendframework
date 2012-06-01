@@ -95,9 +95,6 @@ class Navigation extends AbstractNavigationHelper
      */
     public function __invoke($container = null)
     {
-        if (is_string($container)) {
-            $container = $this->getServiceLocator()->get($container);
-        }
         if (null !== $container) {
             $this->setContainer($container);
         }
@@ -135,7 +132,7 @@ class Navigation extends AbstractNavigationHelper
         // check if call should proxy to another helper
         $helper = $this->findHelper($method, false);
         if ($helper) {
-            if ($helper instanceof ServiceLocatorAwareInterface) {
+            if ($helper instanceof ServiceLocatorAwareInterface && $this->getServiceLocator()) {
                 $helper->setServiceLocator($this->getServiceLocator());
             }
             return call_user_func_array($helper, $arguments);

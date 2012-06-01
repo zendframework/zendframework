@@ -113,24 +113,6 @@ class SitemapTest extends AbstractTest
         $this->assertEquals(0, count($this->_helper->getContainer()));
     }
 
-    public function testAutoloadContainerFromRegistry()
-    {
-        $oldReg = null;
-        if (\Zend\Registry::isRegistered(self::REGISTRY_KEY)) {
-            $oldReg = \Zend\Registry::get(self::REGISTRY_KEY);
-        }
-        \Zend\Registry::set(self::REGISTRY_KEY, $this->_nav1);
-
-        $this->_helper->setContainer(null);
-
-        $expected = $this->_getExpected('sitemap/default1.xml');
-        $actual = $this->_helper->render();
-
-        \Zend\Registry::set(self::REGISTRY_KEY, $oldReg);
-
-        $this->assertEquals($expected, $expected);
-    }
-
     public function testRenderSuppliedContainerWithoutInterfering()
     {
         $rendered1 = $this->_getExpected('sitemap/default1.xml');
@@ -204,7 +186,7 @@ class SitemapTest extends AbstractTest
 
     public function testThrowExceptionOnInvalidLoc()
     {
-	$this->markTestIncomplete('Zend\URI changes affect this test');
+	    $this->markTestIncomplete('Zend\URI changes affect this test');
         $nav = clone $this->_nav2;
         $nav->addPage(array('label' => 'Invalid', 'uri' => 'http://w.'));
 

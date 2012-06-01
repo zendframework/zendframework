@@ -27,6 +27,7 @@ use Zend\Navigation;
 use Zend\Navigation\Page\AbstractPage;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\Translator;
 use Zend\View;
 use Zend\View\Exception;
 
@@ -162,11 +163,25 @@ abstract class AbstractHelper
      *
      * Implements {@link HelperInterface::setContainer()}.
      *
-     * @param  Navigation\AbstractContainer $container [optional] container to operate on.  Default is null, meaning container will be reset.
+     * @param  string|Navigation\AbstractContainer $container [optional] container to operate on.  Default is null, meaning container will be reset.
      * @return AbstractHelper  fluent interface, returns self
      */
-    public function setContainer(Navigation\AbstractContainer $container = null)
+    public function setContainer($container = null)
     {
+        if (is_string($container)) {
+            if (!$this->getServiceLocator()) {
+                throw new Exception\InvalidArgumentException(sprintf(
+                    'Attempted to set container with alias "%s" but no ServiceLocator wwas set',
+                    $container
+                ));
+            }
+        } else if (null !== $container && !$container instanceof Navigation\AbstractContainer) {
+            throw new  Exception\InvalidArgumentException(
+                'Container must be a string alias or an instance of ' .
+                'Zend\Navigation\AbstractContainer'
+            );
+        }
+
         $this->container = $container;
         return $this;
     }

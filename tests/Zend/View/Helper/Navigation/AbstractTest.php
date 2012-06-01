@@ -21,13 +21,13 @@
 
 namespace ZendTest\View\Helper\Navigation;
 
-use Zend\Navigation\Navigation,
-    Zend\Acl\Acl,
-    Zend\Acl\Role\GenericRole,
-    Zend\Acl\Resource\GenericResource,
-    Zend\Config\Factory as ConfigFactory,
-    Zend\Translator\Translator,
-    Zend\View\Renderer\PhpRenderer;
+use Zend\Navigation\Navigation;
+use Zend\Acl\Acl;
+use Zend\Acl\Role\GenericRole;
+use Zend\Acl\Resource\GenericResource;
+use Zend\Config\Factory as ConfigFactory;
+use Zend\Translator\Translator;
+use Zend\View\Renderer\PhpRenderer;
 
 /**
  * Base class for navigation view helper tests

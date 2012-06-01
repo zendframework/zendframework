@@ -21,9 +21,8 @@
 
 namespace ZendTest\View\Helper\Navigation;
 
-use Zend\Registry,
-    Zend\Navigation\Navigation,
-    Zend\View\Exception\ExceptionInterface;
+use Zend\Navigation\Navigation;
+use Zend\View\Exception\ExceptionInterface;
 
 /**
  * Tests Zend_View_Helper_Navigation_Breadcrumbs
@@ -73,23 +72,6 @@ class BreadcrumbsTest extends AbstractTest
         $new = $this->_helper->getContainer();
 
         $this->assertNotEquals($old, $new);
-    }
-
-    public function testAutoloadContainerFromRegistry()
-    {
-        $oldReg = null;
-        if (Registry::isRegistered(self::REGISTRY_KEY)) {
-            $oldReg = Registry::get(self::REGISTRY_KEY);
-        }
-        Registry::set(self::REGISTRY_KEY, $this->_nav1);
-
-        $this->_helper->setContainer();
-        $expected = $this->_getExpected('bc/default.html');
-        $actual = $this->_helper->render();
-
-        Registry::set(self::REGISTRY_KEY, $oldReg);
-
-        $this->assertEquals($expected, $actual);
     }
 
     public function testSetSeparator()
@@ -181,23 +163,6 @@ class BreadcrumbsTest extends AbstractTest
 
         $expected = $this->_getExpected('bc/translated.html');
         $this->assertEquals($expected, $this->_helper->render());
-    }
-
-    public function testTranslationFromTranslatorInRegistry()
-    {
-        $oldReg = Registry::isRegistered('Zend_Translator')
-                ? Registry::get('Zend_Translator')
-                : null;
-
-        $translator = $this->_getTranslator();
-        Registry::set('Zend_Translator', $translator);
-
-        $expected = $this->_getExpected('bc/translated.html');
-        $actual = $this->_helper->render();
-
-        Registry::set('Zend_Translator', $oldReg);
-
-        $this->assertEquals($expected, $actual);
     }
 
     public function testDisablingTranslation()

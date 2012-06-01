@@ -113,12 +113,18 @@ class ServiceFactoryTest extends \PHPUnit_Framework_TestCase
 
     }
 
+    /**
+     * @covers \Zend\Navigation\MvcNavigationFactory
+     */
     public function testDefaultFactoryAcceptsFileString()
     {
         $this->serviceManager->setFactory('Navigation', 'ZendTest\Navigation\TestAsset\FileNavigationFactory');
         $container = $this->serviceManager->get('Navigation');
     }
 
+    /**
+     * @covers \Zend\Navigation\MvcNavigationFactory
+     */
     public function testMvcPagesGetInjectedWithComponents()
     {
         $this->serviceManager->setFactory('Navigation', 'Zend\Navigation\Service\DefaultNavigationFactory');

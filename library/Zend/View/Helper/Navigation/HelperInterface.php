@@ -38,13 +38,13 @@ interface HelperInterface
     /**
      * Sets navigation container the helper should operate on by default
      *
-     * @param  Navigation\AbstractContainer $container [optional] container to operate
+     * @param  string|Navigation\AbstractContainer $container [optional] container to operate
      *                                         on. Default is null, which 
      *                                         indicates that the container 
      *                                         should be reset.
      * @return HelperInterface fluent interface, returns self
      */
-    public function setContainer(Navigation\AbstractContainer $container = null);
+    public function setContainer($container = null);
 
     /**
      * Returns the navigation container the helper operates on by default

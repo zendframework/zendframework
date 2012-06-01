@@ -475,9 +475,9 @@ class Menu extends AbstractHelper
      * @param  array     $options   [optional] options for controlling rendering 
      * @return string    rendered menu
      */
-    public function renderMenu(AbstractContainer $container = null,
-                               array $options = array()
-    ) {
+    public function renderMenu($container = null, array $options = array())
+    {
+        $this->parseContainer($container);
         if (null === $container) {
             $container = $this->getContainer();
         }
@@ -568,9 +568,9 @@ class Menu extends AbstractHelper
      * @throws Exception\RuntimeException if no partial provided
      * @throws Exception\InvalidArgumentException if partial is invalid array
      */
-    public function renderPartial(AbstractContainer $container = null,
-                                  $partial = null
-    ) {
+    public function renderPartial($container = null, $partial = null)
+    {
+        $this->parseContainer($container);
         if (null === $container) {
             $container = $this->getContainer();
         }
@@ -625,7 +625,7 @@ class Menu extends AbstractHelper
      *                              helper.
      * @return string               helper output
      */
-    public function render(AbstractContainer $container = null)
+    public function render($container = null)
     {
         $partial = $this->getPartial();
         if ($partial) {

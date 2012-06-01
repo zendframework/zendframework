@@ -48,6 +48,23 @@ class MenuTest extends AbstractTest
      */
     protected $_helper;
 
+    public function testCanRenderMenuFromServiceAlias()
+    {
+        $this->_helper->setServiceLocator($this->serviceManager);
+
+        $returned = $this->_helper->renderMenu('Navigation');
+        $this->assertEquals($returned, $this->_getExpected('menu/default1.html'));
+    }
+
+    public function testCanRenderPartialFromServiceAlias()
+    {
+        $this->_helper->setPartial('menu.phtml');
+        $this->_helper->setServiceLocator($this->serviceManager);
+
+        $returned = $this->_helper->renderPartial('Navigation');
+        $this->assertEquals($returned, $this->_getExpected('menu/partial.html'));
+    }
+
     public function testHelperEntryPointWithoutAnyParams()
     {
         $returned = $this->_helper->__invoke();

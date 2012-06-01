@@ -362,7 +362,7 @@ class Navigation extends AbstractNavigationHelper
      *                                               the interface specified in
      *                                               {@link findHelper()}
      */
-    public function render(AbstractContainer $container = null)
+    public function render($container = null)
     {
         $helper = $this->findHelper($this->getDefaultProxy());
         return $helper->render($container);

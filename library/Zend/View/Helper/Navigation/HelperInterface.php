@@ -190,7 +190,7 @@ interface HelperInterface
     /**
      * Renders helper
      *
-     * @param  Navigation\AbstractContainer $container [optional] container to render.
+     * @param  string|Navigation\AbstractContainer $container [optional] container to render.
      *                                         Default is null, which indicates 
      *                                         that the helper should render 
      *                                         the container returned by {@link 
@@ -198,5 +198,5 @@ interface HelperInterface
      * @return string helper output
      * @throws \Zend\View\Exception\ExceptionInterface if unable to render
      */
-    public function render(Navigation\AbstractContainer $container = null);
+    public function render($container = null);
 }

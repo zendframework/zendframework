@@ -23,12 +23,12 @@ namespace ZendTest\Navigation;
 
 use Zend\Config;
 use Zend\Mvc\Router\RouteMatch;
+use Zend\Mvc\Service\ServiceManagerConfiguration;
 use Zend\Navigation;
 use Zend\Navigation\Page\Mvc as MvcPage;
 use Zend\Navigation\Service\ConstructedNavigationFactory;
 use Zend\Navigation\Service\DefaultNavigationFactory;
 use Zend\ServiceManager\ServiceManager;
-use Zend\Mvc\Service\ServiceManagerConfiguration;
 
 /**
  * Tests the class Zend\Navigation\MvcNavigationFactory

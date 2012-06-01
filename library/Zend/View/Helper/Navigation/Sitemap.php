@@ -436,15 +436,14 @@ class Sitemap extends AbstractHelper
      *
      * Implements {@link HelperInterface::render()}.
      *
-     * @param  AbstractContainer $container [optional] container to render. Default is
+     * @param  link|AbstractContainer $container [optional] container to render. Default is
      *                              to render the container registered in the 
      *                              helper.
      * @return string               helper output
      */
-    public function render(AbstractContainer $container = null)
+    public function render($container = null)
     {
         $dom = $this->getDomSitemap($container);
-
         $xml = $this->getUseXmlDeclaration() ?
                $dom->saveXML() :
                $dom->saveXML($dom->documentElement);

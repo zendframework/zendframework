@@ -51,6 +51,23 @@ class BreadcrumbsTest extends AbstractTest
      */
     protected $_helper;
 
+    public function testCanRenderStraightFromServiceAlias()
+    {
+        $this->_helper->setServiceLocator($this->serviceManager);
+
+        $returned = $this->_helper->renderStraight('Navigation');
+        $this->assertEquals($returned, $this->_getExpected('bc/default.html'));
+    }
+
+    public function testCanRenderPartialFromServiceAlias()
+    {
+        $this->_helper->setPartial('bc.phtml');
+        $this->_helper->setServiceLocator($this->serviceManager);
+
+        $returned = $this->_helper->renderPartial('Navigation');
+        $this->assertEquals($returned, $this->_getExpected('bc/partial.html'));
+    }
+
     public function testHelperEntryPointWithoutAnyParams()
     {
         $returned = $this->_helper->__invoke();

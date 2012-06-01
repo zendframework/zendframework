@@ -168,20 +168,7 @@ abstract class AbstractHelper
      */
     public function setContainer($container = null)
     {
-        if (is_string($container)) {
-            if (!$this->getServiceLocator()) {
-                throw new Exception\InvalidArgumentException(sprintf(
-                    'Attempted to set container with alias "%s" but no ServiceLocator wwas set',
-                    $container
-                ));
-            }
-        } else if (null !== $container && !$container instanceof Navigation\AbstractContainer) {
-            throw new  Exception\InvalidArgumentException(
-                'Container must be a string alias or an instance of ' .
-                'Zend\Navigation\AbstractContainer'
-            );
-        }
-
+        $this->parseContainer($container);
         $this->container = $container;
         return $this;
     }
@@ -203,6 +190,26 @@ abstract class AbstractHelper
         }
 
         return $this->container;
+    }
+
+    protected function parseContainer(&$container = null)
+    {
+        if (null === $container) {
+            ; // intentionally left blank
+        } else if (is_string($container)) {
+            if (!$this->getServiceLocator()) {
+                throw new Exception\InvalidArgumentException(sprintf(
+                    'Attempted to set container with alias "%s" but no ServiceLocator wwas set',
+                    $container
+                ));
+            }
+            $container = $this->getServiceLocator()->get($container);
+        } else if (!$container instanceof Navigation\AbstractContainer) {
+            throw new  Exception\InvalidArgumentException(
+                'Container must be a string alias or an instance of ' .
+                    'Zend\Navigation\AbstractContainer'
+            );
+        }
     }
 
     /**
@@ -532,10 +539,9 @@ abstract class AbstractHelper
      *                                          'page', or an empty array
      *                                          if not found
      */
-    public function findActive(Navigation\AbstractContainer $container,
-                               $minDepth = null,
-                               $maxDepth = -1)
+    public function findActive($container, $minDepth = null, $maxDepth = -1)
     {
+        $this->parseContainer($container);
         if (!is_int($minDepth)) {
             $minDepth = $this->getMinDepth();
         }

@@ -73,6 +73,9 @@ class Breadcrumbs extends AbstractHelper
      */
     public function __invoke($container = null)
     {
+        if (is_string($container)) {
+            $container = $this->getServiceLocator()->get($container);
+        }
         if (null !== $container) {
             $this->setContainer($container);
         }
@@ -166,8 +169,9 @@ class Breadcrumbs extends AbstractHelper
      *                              to render the container registered in the helper.
      * @return string               helper output
      */
-    public function renderStraight(AbstractContainer $container = null)
+    public function renderStraight($container = null)
     {
+        $this->parseContainer($container);
         if (null === $container) {
             $container = $this->getContainer();
         }
@@ -230,9 +234,9 @@ class Breadcrumbs extends AbstractHelper
      * @throws Exception\RuntimeException if no partial provided
      * @throws Exception\InvalidArgumentException if partial is invalid array
      */
-    public function renderPartial(AbstractContainer $container = null,
-                                  $partial = null)
+    public function renderPartial($container = null, $partial = null)
     {
+        $this->parseContainer($container);
         if (null === $container) {
             $container = $this->getContainer();
         }
@@ -298,7 +302,7 @@ class Breadcrumbs extends AbstractHelper
      *                              to render the container registered in the helper.
      * @return string               helper output
      */
-    public function render(AbstractContainer $container = null)
+    public function render($container = null)
     {
         $partial = $this->getPartial();
         if ($partial) {

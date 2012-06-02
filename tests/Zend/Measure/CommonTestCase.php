@@ -21,7 +21,6 @@
 
 namespace ZendTest\Measure;
 use Zend\Cache\StorageFactory as CacheFactory,
-    Zend\Cache\Storage\Adapter\AdapterInterface as CacheAdapter,
     Zend\Locale\Locale;
 
 /**
@@ -39,22 +38,9 @@ use Zend\Cache\StorageFactory as CacheFactory,
 abstract class CommonTestCase extends \PHPUnit_Framework_TestCase
 {
 
-    /**
-     * The used cache adapter
-     * @var CacheAdapter
-     */
-    protected $cache;
-
     public function setUp()
     {
-        $this->cache = CacheFactory::adapterFactory('memory', array('memory_limit' => 0));
-        Locale::setCache($this->cache);
-    }
-
-    public function tearDown()
-    {
-        if ($this->cache) {
-            $this->cache->clear(CacheAdapter::MATCH_ALL);
-        }
+        $cache = CacheFactory::adapterFactory('memory', array('memory_limit' => 0));
+        Locale::setCache($cache);
     }
 }

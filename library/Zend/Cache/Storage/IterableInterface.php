@@ -35,5 +35,7 @@ interface IterableInterface extends \IteratorAggregate
      *
      * @return IteratorInterface
      */
-    public function getIterator();
+    // PHP 5.3.3: Fatal error: Can't inherit abstract function IteratorAggregate::getIterator()
+    // (previously declared abstract in Zend\Cache\Storage\IterableInterface)
+    //public function getIterator();
 }

@@ -192,19 +192,31 @@ abstract class AbstractHelper
         return $this->container;
     }
 
+    /**
+     * Verifies container and eventually fetches it from service locator if it is a string
+     *
+     * @param \Zend\Navigation\AbstractContainer|string|null $container
+     * @throws \Zend\View\Exception\InvalidArgumentException
+     */
     protected function parseContainer(&$container = null)
     {
         if (null === $container) {
-            ; // intentionally left blank
-        } else if (is_string($container)) {
+            return;
+        }
+
+        if (is_string($container)) {
             if (!$this->getServiceLocator()) {
                 throw new Exception\InvalidArgumentException(sprintf(
-                    'Attempted to set container with alias "%s" but no ServiceLocator wwas set',
+                    'Attempted to set container with alias "%s" but no ServiceLocator was set',
                     $container
                 ));
             }
+
             $container = $this->getServiceLocator()->get($container);
-        } else if (!$container instanceof Navigation\AbstractContainer) {
+            return;
+        }
+
+        if (!$container instanceof Navigation\AbstractContainer) {
             throw new  Exception\InvalidArgumentException(
                 'Container must be a string alias or an instance of ' .
                     'Zend\Navigation\AbstractContainer'
@@ -215,7 +227,7 @@ abstract class AbstractHelper
     /**
      * Sets the minimum depth a page must have to be included when rendering
      *
-     * @param  int $minDepth [optional] minimum depth. Default is null, which 
+     * @param  int $minDepth [optional] minimum depth. Default is null, which
      *                       sets no minimum depth.
      * @return AbstractHelper fluent interface, returns self
      */
@@ -245,7 +257,7 @@ abstract class AbstractHelper
     /**
      * Sets the maximum depth a page can have to be included when rendering
      *
-     * @param  int $maxDepth [optional] maximum depth. Default is null, which 
+     * @param  int $maxDepth [optional] maximum depth. Default is null, which
      *                       sets no maximum depth.
      * @return AbstractHelper fluent interface, returns self
      */
@@ -297,9 +309,9 @@ abstract class AbstractHelper
      *
      * Implements {@link HelperInterface::setTranslator()}.
      *
-     * @param  mixed $translator [optional] translator.  Expects an object of 
+     * @param  mixed $translator [optional] translator.  Expects an object of
      *                           type {@link Translator\Adapter\AbstractAdapter}
-     *                           or {@link Translator\Translator}, or null. 
+     *                           or {@link Translator\Translator}, or null.
      *                           Default is null, which sets no translator.
      * @return AbstractHelper  fluent interface, returns self
      */
@@ -363,7 +375,7 @@ abstract class AbstractHelper
      *
      * Implements {@link HelperInterface::setRole()}.
      *
-     * @param  mixed $role [optional] role to set. Expects a string, an 
+     * @param  mixed $role [optional] role to set. Expects a string, an
      *                     instance of type {@link Acl\Role\RoleInterface}, or null. Default
      *                     is null, which will set no role.
      * @return AbstractHelper  fluent interface, returns self
@@ -377,7 +389,7 @@ abstract class AbstractHelper
             $this->role = $role;
         } else {
             throw new Exception\InvalidArgumentException(sprintf(
-                '$role must be a string, null, or an instance of ' 
+                '$role must be a string, null, or an instance of '
                 .  'Zend\Acl\Role\RoleInterface; %s given',
                 (is_object($role) ? get_class($role) : gettype($role))
             ));
@@ -456,7 +468,7 @@ abstract class AbstractHelper
      *
      * Implements {@link HelperInterface::setUseTranslator()}.
      *
-     * @param  bool $useTranslator [optional] whether translator should be used. 
+     * @param  bool $useTranslator [optional] whether translator should be used.
      *                             Default is true.
      * @return AbstractHelper  fluent interface, returns self
      */
@@ -691,8 +703,8 @@ abstract class AbstractHelper
      *   will not be accepted if it is the descendant of a non-accepted page.
      *
      * @param  AbstractPage $page      page to check
-     * @param  bool         $recursive [optional] if true, page will not be 
-     *                                 accepted if it is the descendant of a 
+     * @param  bool         $recursive [optional] if true, page will not be
+     *                                 accepted if it is the descendant of a
      *                                 page that is not accepted. Default is true.
      * @return bool                    whether page should be accepted
      */
@@ -822,7 +834,7 @@ abstract class AbstractHelper
      * Sets default ACL role(s) to use when iterating pages if not explicitly
      * set later with {@link setRole()}
      *
-     * @param  mixed $role [optional] role to set. Expects null, string, or an 
+     * @param  mixed $role [optional] role to set. Expects null, string, or an
      *                     instance of {@link Acl\Role\RoleInterface}. Default is null, which
      *                     sets no default role.
      * @return void
@@ -830,8 +842,8 @@ abstract class AbstractHelper
      */
     public static function setDefaultRole($role = null)
     {
-        if (null === $role 
-            || is_string($role) 
+        if (null === $role
+            || is_string($role)
             || $role instanceof Acl\Role\RoleInterface
         ) {
             self::$defaultRole = $role;

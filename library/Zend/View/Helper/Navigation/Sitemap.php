@@ -21,13 +21,13 @@
 
 namespace Zend\View\Helper\Navigation;
 
-use DOMDocument,
-    RecursiveIteratorIterator,
-    Zend\Navigation\Page\AbstractPage,
-    Zend\Navigation\Container,
-    Zend\Uri,
-    Zend\View,
-    Zend\View\Exception;
+use DOMDocument;
+use RecursiveIteratorIterator;
+use Zend\Navigation\Page\AbstractPage;
+use Zend\Navigation\AbstractContainer;
+use Zend\Uri;
+use Zend\View;
+use Zend\View\Exception;
 
 /**
  * Helper for printing sitemaps
@@ -92,13 +92,12 @@ class Sitemap extends AbstractHelper
     protected $serverUrl;
 
     /**
-     * View helper entry point:
-     * Retrieves helper and optionally sets container to operate on
+     * Helper entry point
      *
-     * @param  Container $container  [optional] container to operate on
-     * @return Sitemap   fluent interface, returns self
+     * @param  string|AbstractContainer $container container to operate on
+     * @return Navigation
      */
-    public function __invoke(Container $container = null)
+    public function __invoke($container = null)
     {
         if (null !== $container) {
             $this->setContainer($container);
@@ -106,8 +105,6 @@ class Sitemap extends AbstractHelper
 
         return $this;
     }
-
-    // Accessors:
 
     /**
      * Sets whether XML output should be formatted
@@ -297,7 +294,7 @@ class Sitemap extends AbstractHelper
     /**
      * Returns a DOMDocument containing the Sitemap XML for the given container
      *
-     * @param  Container                 $container  [optional] container to get
+     * @param  AbstractContainer                 $container  [optional] container to get
      *                                               breadcrumbs from, defaults
      *                                               to what is registered in the
      *                                               helper
@@ -310,7 +307,7 @@ class Sitemap extends AbstractHelper
      *                                               validators are used and the
      *                                               loc element fails validation
      */
-    public function getDomSitemap(Container $container = null)
+    public function getDomSitemap(AbstractContainer $container = null)
     {
         if (null === $container) {
             $container = $this->getContainer();
@@ -439,15 +436,14 @@ class Sitemap extends AbstractHelper
      *
      * Implements {@link HelperInterface::render()}.
      *
-     * @param  Container $container [optional] container to render. Default is 
+     * @param  link|AbstractContainer $container [optional] container to render. Default is
      *                              to render the container registered in the 
      *                              helper.
      * @return string               helper output
      */
-    public function render(Container $container = null)
+    public function render($container = null)
     {
         $dom = $this->getDomSitemap($container);
-
         $xml = $this->getUseXmlDeclaration() ?
                $dom->saveXML() :
                $dom->saveXML($dom->documentElement);

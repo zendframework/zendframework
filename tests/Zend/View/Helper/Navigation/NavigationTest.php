@@ -20,6 +20,7 @@
  */
 
 namespace ZendTest\View\Helper\Navigation;
+
 use Zend\Acl;
 use Zend\View\Helper\Navigation;
 use Zend\Acl\Role;
@@ -84,22 +85,13 @@ class NavigationTest extends AbstractTest
         $this->assertEquals($accepted, false);
     }
 
-    public function testShouldProxyToMenuHelperByDeafult()
+    public function testShouldProxyToMenuHelperByDefault()
     {
-        // setup
-        $oldReg = null;
-        if (\Zend\Registry::isRegistered(self::REGISTRY_KEY)) {
-            $oldReg = \Zend\Registry::get(self::REGISTRY_KEY);
-        }
-        \Zend\Registry::set(self::REGISTRY_KEY, $this->_nav1);
-        $this->_helper->setContainer(null);
+        $this->_helper->setContainer($this->_nav1);
 
         // result
         $expected = $this->_getExpected('menu/default1.html');
         $actual = $this->_helper->render();
-
-        // teardown
-        \Zend\Registry::set(self::REGISTRY_KEY, $oldReg);
 
         $this->assertEquals($expected, $actual);
     }

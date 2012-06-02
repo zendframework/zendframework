@@ -23,11 +23,11 @@ namespace Zend\View\Helper\Navigation;
 
 use Traversable;
 use Zend\Stdlib\ArrayUtils;
-use RecursiveIteratorIterator,
-    Zend\Navigation,
-    Zend\Navigation\Page\AbstractPage,
-    Zend\View,
-    Zend\View\Exception;
+use RecursiveIteratorIterator;
+use Zend\Navigation\AbstractContainer;
+use Zend\Navigation\Page\AbstractPage;
+use Zend\View;
+use Zend\View\Exception;
 
 /**
  * Helper for printing <link> elements
@@ -104,18 +104,17 @@ class Links extends AbstractHelper
      *
      * @see _findRoot()
      *
-     * @var Navigation\Container
+     * @var AbstractContainer
      */
     protected $root;
 
     /**
-     * View helper entry point:
-     * Retrieves helper and optionally sets container to operate on
+     * Helper entry point
      *
-     * @param  Navigation\Container $container [optional] container to operate on
-     * @return Links     fluent interface, returns self
+     * @param  string|AbstractContainer $container container to operate on
+     * @return Navigation
      */
-    public function __invoke(Navigation\Container $container = null)
+    public function __invoke($container = null)
     {
         if (null !== $container) {
             $this->setContainer($container);
@@ -149,8 +148,6 @@ class Links extends AbstractHelper
 
         return parent::__call($method, $arguments);
     }
-
-    // Accessors:
 
     /**
      * Sets the helper's render flag
@@ -221,8 +218,7 @@ class Links extends AbstractHelper
      * @param  AbstractPage $page  page to find links for
      * @return array related pages
      */
-    public function findAllRelations(AbstractPage $page,
-                                     $flag = null)
+    public function findAllRelations(AbstractPage $page, $flag = null)
     {
         if (!is_int($flag)) {
             $flag = self::RENDER_ALL;
@@ -613,7 +609,7 @@ class Links extends AbstractHelper
      * to the render method.
      *
      * @param  AbstractPage $page  page to find root for
-     * @return Navigation\Container   the root container of the given page
+     * @return AbstractContainer   the root container of the given page
      */
     protected function findRoot(AbstractPage $page)
     {
@@ -648,7 +644,7 @@ class Links extends AbstractHelper
         if ($mixed instanceof AbstractPage) {
             // value is a page instance; return directly
             return $mixed;
-        } elseif ($mixed instanceof Navigation\Container) {
+        } elseif ($mixed instanceof AbstractContainer) {
             // value is a container; return pages in it
             $pages = array();
             foreach ($mixed as $page) {
@@ -740,14 +736,15 @@ class Links extends AbstractHelper
      *
      * Implements {@link HelperInterface::render()}.
      *
-     * @param  Navigation\Container $container [optional] container to render. 
+     * @param  AbstractContainer string|$container [optional] container to render.
      *                                         Default is to render the 
      *                                         container registered in the 
      *                                         helper.
      * @return string                          helper output
      */
-    public function render(Navigation\Container $container = null)
+    public function render($container = null)
     {
+        $this->parseContainer($container);
         if (null === $container) {
             $container = $this->getContainer();
         }

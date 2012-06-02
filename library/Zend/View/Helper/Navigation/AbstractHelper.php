@@ -21,14 +21,15 @@
 
 namespace Zend\View\Helper\Navigation;
 
-use RecursiveIteratorIterator,
-    Zend\Acl,
-    Zend\Navigation,
-    Zend\Navigation\Page\AbstractPage,
-    Zend\Registry,
-    Zend\Translator,
-    Zend\View,
-    Zend\View\Exception;
+use RecursiveIteratorIterator;
+use Zend\Acl;
+use Zend\Navigation;
+use Zend\Navigation\Page\AbstractPage;
+use Zend\ServiceManager\ServiceLocatorAwareInterface;
+use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\Translator;
+use Zend\View;
+use Zend\View\Exception;
 
 /**
  * Base class for navigational helpers
@@ -39,12 +40,20 @@ use RecursiveIteratorIterator,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class AbstractHelper extends View\Helper\HtmlElement implements HelperInterface
+abstract class AbstractHelper
+    extends View\Helper\HtmlElement
+    implements HelperInterface,
+               ServiceLocatorAwareInterface
 {
     /**
-     * Container to operate on by default
+     * @var ServiceLocatorInterface
+     */
+    protected $serviceLocator;
+
+    /**
+     * AbstractContainer to operate on by default
      *
-     * @var Navigation\Container
+     * @var Navigation\AbstractContainer
      */
     protected $container;
 
@@ -127,18 +136,39 @@ abstract class AbstractHelper extends View\Helper\HtmlElement implements HelperI
      */
     protected static $defaultRole;
 
-    // Accessors:
+    /**
+     * Set the service locator.
+     *
+     * @param ServiceLocatorInterface $serviceLocator
+     * @return AbstractHelper
+     */
+    public function setServiceLocator(ServiceLocatorInterface $serviceLocator)
+    {
+        $this->serviceLocator = $serviceLocator;
+        return $this;
+    }
+
+    /**
+     * Get the service locator.
+     *
+     * @return \Zend\ServiceManager\ServiceLocatorInterface
+     */
+    public function getServiceLocator()
+    {
+        return $this->serviceLocator;
+    }
 
     /**
      * Sets navigation container the helper operates on by default
      *
      * Implements {@link HelperInterface::setContainer()}.
      *
-     * @param  Navigation\Container $container [optional] container to operate on.  Default is null, meaning container will be reset.
+     * @param  string|Navigation\AbstractContainer $container [optional] container to operate on.  Default is null, meaning container will be reset.
      * @return AbstractHelper  fluent interface, returns self
      */
-    public function setContainer(Navigation\Container $container = null)
+    public function setContainer($container = null)
     {
+        $this->parseContainer($container);
         $this->container = $container;
         return $this;
     }
@@ -148,32 +178,38 @@ abstract class AbstractHelper extends View\Helper\HtmlElement implements HelperI
      *
      * Implements {@link HelperInterface::getContainer()}.
      *
-     * If a helper is not explicitly set in this helper instance by calling
-     * {@link setContainer()} or by passing it through the helper entry point,
-     * this method will look in {@link \Zend\Registry} for a container by using
-     * the key 'Zend_Navigation'.
+     * If no container is set, a new container will be instantiated and
+     * stored in the helper.
      *
-     * If no container is set, and nothing is found in Zend\Registry, a new
-     * container will be instantiated and stored in the helper.
-     *
-     * @return Navigation\Container  navigation container
+     * @return Navigation\AbstractContainer  navigation container
      */
     public function getContainer()
     {
         if (null === $this->container) {
-            // try to fetch from registry first
-            if (\Zend\Registry::isRegistered('Zend_Navigation')) {
-                $nav = \Zend\Registry::get('Zend_Navigation');
-                if ($nav instanceof Navigation\Container) {
-                    return $this->container = $nav;
-                }
-            }
-
-            // nothing found in registry, create new container
             $this->container = new \Zend\Navigation\Navigation();
         }
 
         return $this->container;
+    }
+
+    protected function parseContainer(&$container = null)
+    {
+        if (null === $container) {
+            ; // intentionally left blank
+        } else if (is_string($container)) {
+            if (!$this->getServiceLocator()) {
+                throw new Exception\InvalidArgumentException(sprintf(
+                    'Attempted to set container with alias "%s" but no ServiceLocator wwas set',
+                    $container
+                ));
+            }
+            $container = $this->getServiceLocator()->get($container);
+        } else if (!$container instanceof Navigation\AbstractContainer) {
+            throw new  Exception\InvalidArgumentException(
+                'Container must be a string alias or an instance of ' .
+                    'Zend\Navigation\AbstractContainer'
+            );
+        }
     }
 
     /**
@@ -288,12 +324,6 @@ abstract class AbstractHelper extends View\Helper\HtmlElement implements HelperI
      */
     public function getTranslator()
     {
-        if (null === $this->translator) {
-            if (Registry::isRegistered('Zend_Translator')) {
-                $this->setTranslator(Registry::get('Zend_Translator'));
-            }
-        }
-
         return $this->translator;
     }
 
@@ -491,7 +521,7 @@ abstract class AbstractHelper extends View\Helper\HtmlElement implements HelperI
     /**
      * Finds the deepest active page in the given container
      *
-     * @param  Navigation\Container $container  container to search
+     * @param  Navigation\AbstractContainer $container  container to search
      * @param  int|null             $minDepth   [optional] minimum depth
      *                                          required for page to be
      *                                          valid. Default is to use
@@ -509,10 +539,9 @@ abstract class AbstractHelper extends View\Helper\HtmlElement implements HelperI
      *                                          'page', or an empty array
      *                                          if not found
      */
-    public function findActive(Navigation\Container $container,
-                               $minDepth = null,
-                               $maxDepth = -1)
+    public function findActive($container, $minDepth = null, $maxDepth = -1)
     {
+        $this->parseContainer($container);
         if (!is_int($minDepth)) {
             $minDepth = $this->getMinDepth();
         }
@@ -769,7 +798,7 @@ abstract class AbstractHelper extends View\Helper\HtmlElement implements HelperI
      */
     protected function _normalizeId($value)
     {
-        $prefix = get_called_class();
+        $prefix = get_class($this);
         $prefix = strtolower(trim(substr($prefix, strrpos($prefix, '\\')), '\\'));
 
         return $prefix . '-' . $value;

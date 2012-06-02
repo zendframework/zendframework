@@ -82,6 +82,15 @@ class LinksTest extends AbstractTest
         $this->_doctypeHelper->setDoctype($this->_oldDoctype);
     }
 
+    public function testCanRenderFromServiceAlias()
+    {
+        $sm = $this->serviceManager;
+        $this->_helper->setServiceLocator($sm);
+
+        $returned = $this->_helper->render('Navigation');
+        $this->assertEquals($returned, $this->_getExpected('links/default.html'));
+    }
+
     public function testHelperEntryPointWithoutAnyParams()
     {
         $returned = $this->_helper->__invoke();

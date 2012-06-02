@@ -29,14 +29,14 @@ use Countable,
 /**
  * Zend_Navigation_Container
  *
- * Container class for Zend\Navigation\Page classes.
+ * AbstractContainer class for Zend\Navigation\Page classes.
  *
  * @category  Zend
  * @package   Zend_Navigation
  * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class Container implements RecursiveIterator, Countable
+abstract class AbstractContainer implements RecursiveIterator, Countable
 {
     /**
      * Contains sub pages
@@ -109,7 +109,7 @@ abstract class Container implements RecursiveIterator, Countable
      * calling {@link Page\AbstractPage::setParent()}.
      *
      * @param  Page\AbstractPage|array|Traversable $page  page to add
-     * @return Container fluent interface, returns self
+     * @return AbstractContainer fluent interface, returns self
      * @throws Exception\InvalidArgumentException if page is invalid
      */
     public function addPage($page)
@@ -151,10 +151,10 @@ abstract class Container implements RecursiveIterator, Countable
     /**
      * Adds several pages at once
      *
-     * @param  array|Traversable|Container $pages pages to add
-     * @return Container fluent interface, returns self
+     * @param  array|Traversable|AbstractContainer $pages pages to add
+     * @return AbstractContainer fluent interface, returns self
      * @throws Exception\InvalidArgumentException if $pages is not array,
-     *                                            Traversable or Container
+     *                                            Traversable or AbstractContainer
      */
     public function addPages($pages)
     {
@@ -162,7 +162,7 @@ abstract class Container implements RecursiveIterator, Countable
             throw new Exception\InvalidArgumentException(
                 'Invalid argument: $pages must be an array, an '
                 . 'instance of Traversable or an instance of '
-                . 'Zend\Navigation\Container'
+                . 'Zend\Navigation\AbstractContainer'
             );
         }
 
@@ -170,7 +170,7 @@ abstract class Container implements RecursiveIterator, Countable
         // (see {@link Page\AbstractPage::setParent()}), iteration of the
         // original container will break. As such, we need to iterate the
         // container into an array first.
-        if ($pages instanceof Container) {
+        if ($pages instanceof AbstractContainer) {
             $pages = iterator_to_array($pages);
         }
 
@@ -185,7 +185,7 @@ abstract class Container implements RecursiveIterator, Countable
      * Sets pages this container should have, removing existing pages
      *
      * @param  array $pages pages to set
-     * @return Container fluent interface, returns self
+     * @return AbstractContainer fluent interface, returns self
      */
     public function setPages(array $pages)
     {
@@ -236,7 +236,7 @@ abstract class Container implements RecursiveIterator, Countable
     /**
      * Removes all pages in container
      *
-     * @return Container fluent interface, returns self
+     * @return AbstractContainer fluent interface, returns self
      */
     public function removePages()
     {

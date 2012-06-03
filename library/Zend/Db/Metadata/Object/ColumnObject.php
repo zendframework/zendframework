@@ -85,6 +85,12 @@ class ColumnObject
 
     /**
      *
+     * @var boolean 
+     */
+    protected $numericUnsigned = null;
+
+    /**
+     *
      * @var array
      */
     protected $errata = array();
@@ -325,6 +331,23 @@ class ColumnObject
         return $this;
     }
 
+    /**
+     * @return boolean
+     */
+    public function getNumericUnsigned()
+    {
+        return $this->numericUnsigned;
+    }
+
+    /**
+     * @param $numericUnsigned boolean
+     */
+    public function setNumericUnsigned($numericUnsigned)
+    {
+        $this->numericUnsigned = $numericUnsigned;
+        return $this;
+    }
+
 //    /**
 //     * @return the $characterSetName
 //     */
@@ -365,6 +388,29 @@ class ColumnObject
     public function getErratas()
     {
         return $this->errata;
+    }
+
+    /**
+     * @return the $errata
+     */
+    public function setErratas(array $erratas)
+    {
+        foreach ($erratas as $name => $value) {
+            $this->setErrata($name, $value);
+        }
+        return $this;
+    }
+
+    /**
+     * @param string $errataName
+     * @return ColumnMetadata
+     */
+    public function getErrata($errataName)
+    {
+        if (array_key_exists($errataName, $this->errata)) {
+            return $this->errata[$errataName];
+        }
+        return null;
     }
 
     /**

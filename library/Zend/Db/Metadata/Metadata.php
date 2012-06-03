@@ -53,6 +53,7 @@ class Metadata implements MetadataInterface
     {
         switch ($adapter->getPlatform()->getName()) {
             case 'MySQL':
+                return new Source\MysqlMetadata($adapter);
             case 'SQLServer':
                 return new Source\InformationSchemaMetadata($adapter);
             case 'SQLite':

@@ -283,6 +283,8 @@ class Adapter
                 return new Platform\SqlServer();
             case 'Sqlite':
                 return new Platform\Sqlite();
+            case 'Postgresql':
+                return new Platform\Postgresql();
             default:
                 return new Platform\Sql92();
         }

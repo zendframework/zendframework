@@ -243,7 +243,7 @@ class Spreadsheets extends GData
         $query->setCellId($cell);
 
         $entry = $this->getCellEntry($query);
-        $entry->setCell(new Extension\Cell(null, $row, $col, $inputValue));
+        $entry->setCell(new Spreadsheets\Extension\Cell(null, $row, $col, $inputValue));
         $response = $entry->save();
         return $response;
     }
@@ -261,7 +261,7 @@ class Spreadsheets extends GData
         $newEntry = new Spreadsheets\ListEntry();
         $newCustomArr = array();
         foreach ($rowData as $k => $v) {
-            $newCustom = new Extension\Custom();
+            $newCustom = new Spreadsheets\Extension\Custom();
             $newCustom->setText($v)->setColumnName($k);
             $newEntry->addCustom($newCustom);
         }
@@ -286,7 +286,7 @@ class Spreadsheets extends GData
     {
         $newCustomArr = array();
         foreach ($newRowData as $k => $v) {
-            $newCustom = new Extension\Custom();
+            $newCustom = new Spreadsheets\Extension\Custom();
             $newCustom->setText($v)->setColumnName($k);
             $newCustomArr[] = $newCustom;
         }

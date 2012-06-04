@@ -113,7 +113,7 @@ class Photos extends GData
         $this->registerPackage('Zend\GData\Photos');
         $this->registerPackage('Zend\GData\Photos\Extension');
         parent::__construct($client, $applicationId);
-        $this->_httpClient->setParameterPost('service', self::AUTH_SERVICE_NAME);
+        $this->_httpClient->setParameterPost(array('service' => self::AUTH_SERVICE_NAME));
     }
 
     /**

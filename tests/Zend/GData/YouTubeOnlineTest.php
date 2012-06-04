@@ -36,6 +36,9 @@ use Zend\GData\App;
 class YouTubeOnlineTest extends \PHPUnit_Framework_TestCase
 {
 
+    /** @var YouTube */
+    public $gdata;
+
     public function setUp()
     {
         if (!constant('TESTS_ZEND_GDATA_ONLINE_ENABLED')) {
@@ -219,7 +222,7 @@ class YouTubeOnlineTest extends \PHPUnit_Framework_TestCase
         $feed = $this->gdata->getTopRatedVideoFeed();
         $client = $this->gdata->getHttpClient();
         $positionOfAPIProjection = strpos(
-            $client->getLastRequest(), "/feeds/api/");
+            $client->getLastRawRequest(), "/feeds/api/");
         $this->assertTrue(is_numeric($positionOfAPIProjection));
     }
 
@@ -229,7 +232,7 @@ class YouTubeOnlineTest extends \PHPUnit_Framework_TestCase
         $feed = $this->gdata->getMostViewedVideoFeed();
         $client = $this->gdata->getHttpClient();
         $positionOfAPIProjection = strpos(
-            $client->getLastRequest(), "/feeds/api/");
+            $client->getLastRawRequest(), "/feeds/api/");
         $this->assertTrue(is_numeric($positionOfAPIProjection));
     }
 
@@ -239,7 +242,7 @@ class YouTubeOnlineTest extends \PHPUnit_Framework_TestCase
         $feed = $this->gdata->getRecentlyFeaturedVideoFeed();
         $client = $this->gdata->getHttpClient();
         $positionOfAPIProjection = strpos(
-            $client->getLastRequest(), "/feeds/api/");
+            $client->getLastRawRequest(), "/feeds/api/");
         $this->assertTrue(is_numeric($positionOfAPIProjection));
     }
 
@@ -249,7 +252,7 @@ class YouTubeOnlineTest extends \PHPUnit_Framework_TestCase
         $feed = $this->gdata->getWatchOnMobileVideoFeed();
         $client = $this->gdata->getHttpClient();
         $positionOfAPIProjection = strpos(
-            $client->getLastRequest(), "/feeds/api/");
+            $client->getLastRawRequest(), "/feeds/api/");
         $this->assertTrue(is_numeric($positionOfAPIProjection));
     }
 

@@ -295,6 +295,7 @@ defined('TESTS_ZEND_GDATA_DOCS_DOCUMENTTITLE') || define('TESTS_ZEND_GDATA_DOCS_
  * be performed.
  */
 defined('TESTS_ZEND_GDATA_PHOTOS_ONLINE_ENABLED') || define('TESTS_ZEND_GDATA_PHOTOS_ONLINE_ENABLED', false);
+defined('TESTS_ZEND_GDATA_PHOTOS_USERNAME') || define('TESTS_ZEND_GDATA_PHOTOS_USERNAME', 'zfgdata');
 
 /**
  * Zend\Http\Client tests

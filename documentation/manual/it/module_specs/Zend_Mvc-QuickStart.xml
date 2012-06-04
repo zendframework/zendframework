@@ -15,7 +15,7 @@
     <info><title>Installare la  Zend Skeleton Application</title></info>
 
     <para>
-      Il modo più semplice per cominciare è prendere l'applicazione
+      Il modo più semplice per cominciare consiste nello scaricare l'applicazione
       di esempio ed i moduli. Per fare questo dobbiamo seguire i 
       seguenti passi.
     </para>
@@ -62,7 +62,7 @@ prompt> git clone --recursive git://github.com/zendframework/ZendSkeletonApplica
         <listitem>
           <para>
             Decomprimi l'archivio che hai selezionato e rinomina la directory
-            genitore per come hai chiamato il tuo progetto; noi utilizzeremo
+            dandole il nome del tuo progetto; noi utilizzeremo
             "my-application" in tutto il documento.
           </para>
         </listitem>
@@ -80,7 +80,7 @@ prompt> git clone --recursive git://github.com/zendframework/ZendSkeletonApplica
   </section>
 
   <section xml:id="zend.mvc.quick-start.create-a-new-module">
-    <info><title>Crea un nuofo modulo</title></info>
+    <info><title>Crea un nuovo modulo</title></info>
 
     <para>
       Di default, un modulo è incluso nella <classname>ZendSketonApplication</classname>,
@@ -97,7 +97,7 @@ prompt> git clone --recursive git://github.com/zendframework/ZendSkeletonApplica
     </itemizedlist>
 
     <para>
-      Tipicamente c'è bisogno di modificare questi altri file per modicare
+      È necessario modificare questi altri file qualora si volesse alterare
       la home page del tuo sito e/o la pagina di errore.
     </para>
 
@@ -106,7 +106,7 @@ prompt> git clone --recursive git://github.com/zendframework/ZendSkeletonApplica
     </para>
 
     <para>
-      Per iniziare con i moduli raccomandiamo di utilizzare la
+      Per iniziare a sviluppare moduli raccomandiamo di utilizzare la
       <classname>ZendSkeletonModule</classname> come base. Scaricala da 
       qui:
     </para>
@@ -127,12 +127,12 @@ prompt> git clone --recursive git://github.com/zendframework/ZendSkeletonApplica
 
     <para>
       Decomprimi il pacchetto e rinomina la directory "ZendSkeletonModule"
-      per riflettere il nome del module che vuoi creare; quando fatto, muovi
+      per riflettere il nome del module che vuoi creare; quando hai finito, muovi
       il module dentro il tuo nuovo progetto nella directory <filename>modules/</filename>.
     </para>
 
     <para>
-      A questo punto è tempo di creare qualche funzionalità.
+      A questo punto è possibile di creare qualche funzionalità.
     </para>
   </section>
 
@@ -140,8 +140,8 @@ prompt> git clone --recursive git://github.com/zendframework/ZendSkeletonApplica
     <info><title>Aggiorare la classe Module</title></info>
 
     <para>
-      Semplicemente aggiornare la classe module. Faremo attenzione
-      che il namespace sia corretto, la configurazione abilitata e
+      Semplicemente aggiornare la classe Module. Faremo attenzione
+      che il namespace sia corretto, che la configurazione sia abilitata e
       restituita e imposteremo l'autoloading  sull'inizializzazione.
       Finchè siamo attivamente al lavoro su questo modulo la lista
       delle classi sarà in continuo movimento e quindi dobbiamo
@@ -216,7 +216,7 @@ class Module implements AutoloaderProvider
 ]]></programlisting>
 
     <para>
-      A questo punto hai il tuo module correttamente modificato. Ora passiamo
+      A questo punto hai il tuo "module" correttamente modificato. Ora passiamo
       al controller!
     </para>
   </section>
@@ -240,36 +240,35 @@ class Module implements AutoloaderProvider
     <itemizedlist>
       <listitem>
         <para>
-          <classname>Zend\Mvc\Controller\ActionController</classname> allows
-          routes to match an "action". When matched, a method named
-          after the action will be called by the controller. As an example,
-          if you had a route that returned "foo" for the
-          "action" key, the "fooAction" method would be
-          invoked.
+          <classname>Zend\Mvc\Controller\ActionController</classname> permette
+          il "match" di una "route" con un'azione. Quando si verifica un "match"
+          un metodo verrà chiamato dal controller. Per esempio se hai una "route"
+          che restituisce "foo" per l'azione, il metodo "fooAction" sarà quello
+          invocato.
         </para>
       </listitem>
 
       <listitem>
         <para>
           <classname>Zend\Mvc\Controller\RestfulController</classname>
-          analizza la Request per determinare quale metodo HTTP è utilizzato
-          e chiama un metodo appropriato sulla basa di questa analisi.
+          analizza la Request per determinare quale metodo HTTP è stato utilizzato
+          e chiama un metodo appropriato sulla base di questa analisi.
         </para>
 
         <itemizedlist>
           <listitem>
             <para>
-              <varname>GET</varname> chiamera il metodo
+              <varname>GET</varname> chiamerà il metodo
               <methodname>getList()</methodname> , oppure, se viene scoperto un "id"
-              durante il match di routing, il metodo <methodname>get()</methodname> (con
-              l'identificatore passato).
+              durante il match di routing, il metodo <methodname>get()</methodname> (
+              l'identificatore passato come unico parametro).
             </para>
           </listitem>
 
           <listitem>
             <para>
               <varname>POST</varname> chiamerà un metodo <methodname>create()</methodname>
-              passando i parametri <varname>$_POST</varname>.
+              passando <varname>$_POST</varname> al primo parametro.
             </para>
           </listitem>
 
@@ -298,7 +297,7 @@ class Module implements AutoloaderProvider
       con una singola azione. Iniziamo creando la directory
       <filename>src/&lt;module name&gt;/Controller/</filename> e
       creiamo il file <filename>HelloController.php</filename> al
-      suo interno. Con il tuo IDE di sviluppo preferito modifica il
+      suo interno. Modifica il
       suo contenuto:
     </para>
 
@@ -340,7 +339,7 @@ class HelloController extends ActionController
       <listitem>
         <para>
           Stiamo realizzando un messaggio utilizzando i parametri 
-          (si è assolutamente una pessima idea in produzione!).
+          (si è assolutamente una pessima idea in ambiente di produzione!).
         </para>
       </listitem>
 
@@ -352,12 +351,12 @@ class HelloController extends ActionController
     </itemizedlist>
 
     <para>
-      Stiamo ritornando una <classname>ViewModel</classname>. Lo strato della
-      vista lo utilizzerà per visualizarla, con le variabili ed il template da
-      questa. Di default puoi omettere il nome del template e lei risolverà
+      Stiamo ritornando un <classname>ViewModel</classname>. Lo strato della
+      vista utilizzerà tale oggetto per visualizarla produrre un output tramite il template e le variabili assegnategli.
+      Di default puoi omettere il nome del template e la logica delle viste risolverà
       in automatico da "lowercase-controller-name/lowercase-action-name". Comunque
       puoi sovrascrivere questa specifica con qualcosa di differente
-      chiamando <methodname>setTemplate()</methodname> sulla instanza
+      chiamando <methodname>setTemplate()</methodname> sulla instanza del
       <classname>ViewModel</classname>. Tipicamnte, i template sono file con
       estensione ".phtml" nella cartella <filename>views</filename> del tuo
       modulo.
@@ -374,7 +373,7 @@ class HelloController extends ActionController
     <para>
       Crea la cartella <filename>view/&lt;module-name&gt;hello</filename>.
       Dentro questa directory , creiamo il file chiamato 
-      <filename>world.phtml</filename>. Dentro questo incolliamo
+      <filename>world.phtml</filename>. Dentro questo scriviamo il seguente codice
       quanto segue:
     </para>
 
@@ -391,25 +390,25 @@ class HelloController extends ActionController
     <note>
       <para>
         Che cosa è il metodo <methodname>escape()</methodname>? 
-        Attualment è un <link linkend="zend.view.helpers">view helper</link>,
+        Attualmente è un <link linkend="zend.view.helpers">view helper</link>,
         ed è disegnato per aiutarti a mitigare gli attacchi <acronym>XSS</acronym>.
         Mai fidarsi dell'input degli utenti, se non sei sicuro della sorgente
-        di una variabile della tua vista, fanne l'escape.
+        di una variabile della tua vista, usa l'escaping.
       </para>
     </note>
   </section>
 
   <section xml:id="zend.mvc.quick-start.create-a-route">
-    <info><title>Creare una strada</title></info>
+    <info><title>Creare una "route"</title></info>
 
     <para>
-      Ora abbiamo un controller ed una vista, dobbiamo creare una strada
+      Ora abbiamo un controller ed una vista, dobbiamo creare una "route"
       per queste.
     </para>
 
     <note>
       <para>
-        <classname>ZendSkeletonApplication</classname> trasporta una
+        <classname>ZendSkeletonApplication</classname> include una
         "route di base" che ti porta su questa azione. Questa "route"
         si compone come "/{controller}/{action}", che ti permette di
         specificare: "/zend-user-hello/world". Ora andremo a creare un
@@ -423,8 +422,8 @@ class HelloController extends ActionController
     </note>
     
     <para>
-      In aggiunta dobbiamo informare l'applicazione che abbiamo un
-      controller.
+        In aggiunta dobbiamo informare l'applicazione che riguardo il controller 
+        a noi creato.
     </para>
     
     <para>
@@ -454,77 +453,35 @@ return array(
     <para>
       Come prima, <varname>&lt;module-name&gt;</varname> deve essere
       modificato con la versione in caratteri minuscoli e separato
-      da trattini il namespace del modulo.
+      da trattini.
     </para>
 
     <para>
-      Ora abbiamo una strada per il nostro controller. Comunque, come
-      può sapere quale controller andare a caricare?
+      Ora abbiamo una "route" per il nostro controller. Comunque, come
+      può sapere quale controller andare ad eseguire?
       <varname>&lt;module name&gt;-hello</varname> è descrittivo ma non
-      è il nome della classe. La risposta è tramite un alias della dipendenza.
+      è il nome della classe. Ciò avviene tramite un cosiddetto `alias` che viene assegnato al controller.
     </para>
-  </section>
-
-  <section xml:id="zend.mvc.quick-start.create-a-di-alias">
-    <info><title>Creare un alias DI</title></info>
-
-    <para>
-      Ricorda che il <classname>Locator</classname>
-      Remember the Locator we discussed when talking about the
-      <classname>Application</classname> class? Well, by default, controllers
-      are pulled from it. When your router returns matches, the
-      assumption is that we have a "controller" key in those
-      matches, and we use that to retrieve the controller class.
-    </para>
-
-    <para>
-      However, how does this work when we have descriptive names that
-      aren't class names? Simple: aliasing.
-    </para>
-
-    <para>
-      Open your <filename>config/module.config.php</filename> file, and
-      modify it to add to the DI configuration's "instance"
-      array so it reads as follows:
-    </para>
-
-    <programlisting language="php"><![CDATA[
-return array(
-    // ... routes configuration ...
-    'di' => array(
-        'instance' => array(
-            'alias' => array(
-                '<module name>-hello' => '<module namespace>\Controller\HelloController',
-            ),
-            'Zend\View\TemplatePathStack' => array('parameters' => array(
-                'paths'  => array(
-                    '<module-name>' => __DIR__ . '/../views',
-                ),
-            )),
-        ),
-    ),
-);
-]]></programlisting>
   </section>
 
   <section xml:id="zend.mvc.quick-start.tell-the-application-about-our-module">
     <info><title>Informare l'applicazione del tuo modulo</title></info>
 
     <para>
-      Un problema. non abbiamo mai detto alla nostra applicazione che 
-      abbiamo un nuovo modulo!
+      Fin'ora non abbiamo mai spiegato alla nostra applicazione che è stato
+      aggiunto un nuovo modulo!
     </para>
 
     <para>
       Di default i moduli non sono analizzati finchè non viene detto
-      al manager dei moduli di questi. Quindi dobbiamo notificare
-      all'applicazione del nostro.
+      a Zend\ModuleManager di farlo. Quindi dobbiamo notificare
+      l'applicazione dell'esistenza del nostro modulo.
     </para>
 
     <para>
       Ricordi il file <filename>config/application.config.php</filename>?
-      Modificalo aggiungendo il nostro nuovo modulo. Quando fatto
-      dovrebbe essere come segue:
+      Modificalo aggiungendo il modulo. Una volta applicate le modifiche,
+      il file dovrebbe apparire come segue:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -553,8 +510,8 @@ return array(
     <info><title>Provalo!</title></info>
 
     <para>
-      Siamo pronti per provare tutto! Crea un nuovo "vhost" puntando
-      la "document root" sulla cartella <filename>public</filename>
+      Siamo pronti per provare il tutto! Crea un nuovo "vhost" puntando
+      la "document root" alla cartella <filename>public</filename>
       della tua applicazione e attiva il tuo browser. Dovresti vedere
       una semplice pagina come questa:
     </para>
@@ -566,8 +523,8 @@ Action:     index
 ]]></programlisting>
 
     <para>
-      Ora modifica l'URL appendendo la strada "hello/world"
-      e ricarica la pagina. Dovresti vedere il contenuto:
+      Ora ricarica l'URL appendendo il percorso "hello/world" all'indirizzo della pagina
+      la pagina. Dovresti vedere il seguente contenuto:
     </para>
 
     <programlisting language="html"><![CDATA[
@@ -577,7 +534,7 @@ Action:     index
 ]]></programlisting>
 
     <para>
-      Ora modifica ancora la "location" appendendo "?message=bar"
+      Ora modifica ancora l'indirizzo aggiungendo "?message=bar"
       e ricarica la pagina. Dovresti ottenere:
     </para>
 
@@ -589,7 +546,7 @@ Action:     index
 
     <para>
       Congratulazioni! Hai appena creato il tuo primo modulo
-      ZF2 MVC!
+      ZF2!
     </para>
   </section>
 </section>

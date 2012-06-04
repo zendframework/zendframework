@@ -393,7 +393,7 @@ class App
 
     /**
      * Set the major protocol version that should be used. Values < 1 will
-     * cause a \Zend\Gdata\App\InvalidArgumentException to be thrown.
+     * cause a \Zend\GData\App\InvalidArgumentException to be thrown.
      *
      * @see _majorProtocolVersion
      * @param int $value The major protocol version to use.
@@ -422,7 +422,7 @@ class App
     /**
      * Set the minor protocol version that should be used. If set to NULL, no
      * minor protocol version will be sent to the server. Values < 0 will
-     * cause a \Zend\Gdata\App\InvalidArgumentException to be thrown.
+     * cause a \Zend\GData\App\InvalidArgumentException to be thrown.
      *
      * @see _minorProtocolVersion
      * @param (int|NULL) $value The minor protocol version to use.
@@ -1063,9 +1063,9 @@ class App
      * significant amount of time to complete. In some cases this may cause
      * execution to timeout without proper precautions in place.
      *
-     * @param $feed The feed to iterate through.
+     * @param object $feed The feed to iterate through.
      * @return mixed A new feed of the same type as the one originally
-     *          passed in, containing all relevent entries.
+     *          passed in, containing all relevant entries.
      */
     public function retrieveAllEntriesForFeed($feed) {
         $feedClass = get_class($feed);
@@ -1093,7 +1093,7 @@ class App
      * NOTE: This will not work if you have customized the adapter
      * already to use a proxy server or other interface.
      *
-     * @param $logfile The logfile to use when logging the requests
+     * @param string $logfile The logfile to use when logging the requests
      */
     public function enableRequestDebugLogging($logfile)
     {

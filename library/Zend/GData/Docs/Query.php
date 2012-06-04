@@ -41,7 +41,7 @@ class Query extends \Zend\GData\Query
      *
      * @var string
      */
-    const DOCUMENTS_LIST_FEED_URI = 'http://docs.google.com/feeds/documents';
+    const DOCUMENTS_LIST_FEED_URI = 'https://docs.google.com/feeds/documents';
 
     /**
      * The generic base URL used by some inherited methods

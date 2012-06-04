@@ -38,8 +38,8 @@ namespace Zend\GData;
 class Photos extends GData
 {
 
-    const PICASA_BASE_URI = 'http://picasaweb.google.com/data';
-    const PICASA_BASE_FEED_URI = 'http://picasaweb.google.com/data/feed';
+    const PICASA_BASE_URI = 'https://picasaweb.google.com/data';
+    const PICASA_BASE_FEED_URI = 'https://picasaweb.google.com/data/feed';
     const AUTH_SERVICE_NAME = 'lh2';
 
     /**

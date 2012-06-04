@@ -40,32 +40,32 @@ class MediaGroup extends \Zend\GData\Media\Extension\MediaGroup
     protected $_rootNamespace = 'media';
 
     /**
-     * @var \Zend\GData\YouTube\Extension\Duration
+     * @var Duration
      */
     protected $_duration = null;
 
     /**
-     * @var \Zend\GData\YouTube\Extension\Private
+     * @var Private
      */
     protected $_private = null;
 
     /**
-     * @var \Zend\GData\YouTube\Extension\VideoId
+     * @var VideoId
      */
     protected $_videoid = null;
 
     /**
-     * @var \Zend\GData\YouTube\Extension\MediaRating
+     * @var MediaRating
      */
     protected $_mediarating = null;
 
     /**
-     * @var \Zend\GData\YouTube\Extension\MediaCredit
+     * @var MediaCredit
      */
     protected $_mediacredit = null;
 
     /**
-     * @var \Zend\GData\YouTube\Extension\Uploaded
+     * @var Uploaded
      */
     protected $_uploaded = null;
 
@@ -159,7 +159,7 @@ class MediaGroup extends \Zend\GData\Media\Extension\MediaGroup
     /**
      * Returns the duration value of this element
      *
-     * @return \Zend\GData\YouTube\Extension\Duration
+     * @return Duration
      */
     public function getDuration()
     {
@@ -169,8 +169,8 @@ class MediaGroup extends \Zend\GData\Media\Extension\MediaGroup
     /**
      * Sets the duration value of this element
      *
-     * @param \Zend\GData\YouTube\Extension\Duration $value The duration value
-     * @return \Zend\GData\YouTube\Extension\MediaGroup Provides a fluent
+     * @param Duration $value The duration value
+     * @return MediaGroup Provides a fluent
      *         interface
      */
     public function setDuration($value)
@@ -182,7 +182,7 @@ class MediaGroup extends \Zend\GData\Media\Extension\MediaGroup
     /**
      * Returns the videoid value of this element
      *
-     * @return \Zend\GData\YouTube\Extension\VideoId
+     * @return VideoId
      */
     public function getVideoId()
     {
@@ -192,8 +192,8 @@ class MediaGroup extends \Zend\GData\Media\Extension\MediaGroup
     /**
      * Sets the videoid value of this element
      *
-     * @param \Zend\GData\YouTube\Extension\VideoId $value The video id value
-     * @return \Zend\GData\YouTube\Extension\MediaGroup Provides a fluent
+     * @param VideoId $value The video id value
+     * @return MediaGroup Provides a fluent
      *         interface
      */
     public function setVideoId($value)
@@ -205,7 +205,7 @@ class MediaGroup extends \Zend\GData\Media\Extension\MediaGroup
     /**
      * Returns the yt:uploaded element
      *
-     * @return \Zend\GData\YouTube\Extension\Uploaded
+     * @return Uploaded
      */
     public function getUploaded()
     {
@@ -215,8 +215,8 @@ class MediaGroup extends \Zend\GData\Media\Extension\MediaGroup
     /**
      * Sets the yt:uploaded element
      *
-     * @param \Zend\GData\YouTube\Extension\Uploaded $value The uploaded value
-     * @return \Zend\GData\YouTube\Extension\MediaGroup Provides a fluent
+     * @param Uploaded $value The uploaded value
+     * @return MediaGroup Provides a fluent
      *         interface
      */
     public function setUploaded($value)
@@ -228,7 +228,7 @@ class MediaGroup extends \Zend\GData\Media\Extension\MediaGroup
     /**
      * Returns the private value of this element
      *
-     * @return \Zend\GData\YouTube\Extension\Private
+     * @return Private
      */
     public function getPrivate()
     {
@@ -238,8 +238,8 @@ class MediaGroup extends \Zend\GData\Media\Extension\MediaGroup
     /**
      * Sets the private value of this element
      *
-     * @param \Zend\GData\YouTube\Extension\Private $value The private value
-     * @return \Zend\GData\YouTube\Extension\MediaGroup Provides a fluent
+     * @param Private $value The private value
+     * @return MediaGroup Provides a fluent
      *         interface
      */
     public function setPrivate($value)
@@ -251,7 +251,7 @@ class MediaGroup extends \Zend\GData\Media\Extension\MediaGroup
     /**
      * Returns the rating value of this element
      *
-     * @return \Zend\GData\YouTube\Extension\MediaRating
+     * @return MediaRating
      */
     public function getMediaRating()
     {
@@ -261,8 +261,8 @@ class MediaGroup extends \Zend\GData\Media\Extension\MediaGroup
     /**
      * Sets the media:rating value of this element
      *
-     * @param \Zend\GData\YouTube\Extension\MediaRating $value The rating element
-     * @return \Zend\GData\YouTube\Extension\MediaGroup Provides a fluent
+     * @param MediaRating $value The rating element
+     * @return MediaGroup Provides a fluent
      *         interface
      */
     public function setMediaRating($value)
@@ -274,7 +274,7 @@ class MediaGroup extends \Zend\GData\Media\Extension\MediaGroup
     /**
      * Returns the media:credit value of this element
      *
-     * @return \Zend\GData\YouTube\Extension\MediaCredit
+     * @return MediaCredit
      */
     public function getMediaCredit()
     {
@@ -284,8 +284,8 @@ class MediaGroup extends \Zend\GData\Media\Extension\MediaGroup
     /**
      * Sets the media:credit value of this element
      *
-     * @param \Zend\GData\YouTube\Extension\MediaCredit $value The credit element
-     * @return \Zend\GData\YouTube\Extension\MediaGroup Provides a fluent
+     * @param MediaCredit $value The credit element
+     * @return MediaGroup Provides a fluent
      *         interface
      */
     public function setMediaCredit($value)

@@ -107,7 +107,7 @@ class YouTubeOnlineTest extends \PHPUnit_Framework_TestCase
         $entry = $this->gdata->getVideoEntry('66wj2g5yz0M');
         $this->assertEquals('TestMovie', $entry->title->text);
 
-        $entry = $this->gdata->getVideoEntry(null, 'http://gdata.youtube.com/feeds/api/videos/66wj2g5yz0M');
+        $entry = $this->gdata->getVideoEntry(null, 'https://gdata.youtube.com/feeds/api/videos/66wj2g5yz0M');
         $this->assertEquals('TestMovie', $entry->title->text);
     }
 
@@ -147,14 +147,14 @@ class YouTubeOnlineTest extends \PHPUnit_Framework_TestCase
         $service = YouTube::AUTH_SERVICE_NAME;
         $authenticationURL= 'https://www.google.com/youtube/accounts/ClientLogin';
         $httpClient = GData\ClientLogin::getHttpClient(
-                                          $username = $this->user,
-                                          $password = $this->pass,
-                                          $service,
-                                          $client = null,
-                                          $source = 'Google-UnitTests-1.0',
-                                          $loginToken = null,
-                                          $loginCaptcha = null,
-                                          $authenticationURL);
+            $this->user,
+            $this->pass,
+            $service,
+            null, // client
+            'Google-UnitTests-1.0', // source
+            null, // $loginToken
+            null, // loginCaptcha
+            $authenticationURL);
 
         $this->gdata = new YouTube($httpClient,
             'Google-UnitTests-1.0', 'ytapi-gdataops-12345-u78960r7-0',
@@ -267,6 +267,24 @@ class YouTubeOnlineTest extends \PHPUnit_Framework_TestCase
         }
     }
 
+    /**
+     * @group ZF-9479
+     */
+    public function testPerformV2Query()
+    {
+        $this->gdata->setMajorProtocolVersion(2);
+        $query = $this->gdata->newVideoQuery();
+        $query->videoQuery = 'zend framework';
+        $query->startIndex = 0;
+        $query->maxResults = 10;
+        $query->orderBy = 'viewCount';
+        $query->safeSearch = 'strict';
+        $videoFeed = $this->gdata->getVideoFeed($query);
+        $this->assertTrue(count($videoFeed->entry) > 0,
+            'Could not retrieve a single entry for location search:' .
+                $query->getQueryUrl(2));
+    }
+
     public function testPerformV2Query_Location()
     {
         $this->gdata->setMajorProtocolVersion(2);
@@ -314,14 +332,14 @@ class YouTubeOnlineTest extends \PHPUnit_Framework_TestCase
         $authenticationURL =
             'https://www.google.com/youtube/accounts/ClientLogin';
         $httpClient = GData\ClientLogin::getHttpClient(
-                                          $username = $this->user,
-                                          $password = $this->pass,
-                                          $service,
-                                          $client = null,
-                                          $source = 'Google-UnitTests-1.0',
-                                          $loginToken = null,
-                                          $loginCaptcha = null,
-                                          $authenticationURL);
+            $this->user,
+            $this->pass,
+            $service,
+            null, // client
+            'Google-UnitTests-1.0', // source
+            null, // $loginToken
+            null, // loginCaptcha
+            $authenticationURL);
 
         $yt = new YouTube(
             $httpClient, 'Google-UnitTests-1.0',
@@ -338,7 +356,7 @@ class YouTubeOnlineTest extends \PHPUnit_Framework_TestCase
         $titleString = $this->generateRandomString(10);
         $newPlaylist->title = $yt->newTitle()->setText($titleString);
         $newPlaylist->summary = $yt->newSummary()->setText('testing');
-        $postUrl = 'http://gdata.youtube.com/feeds/api/users/default/playlists';
+        $postUrl = 'https://gdata.youtube.com/feeds/api/users/default/playlists';
         $successfulInsertion = true;
 
         try {
@@ -397,14 +415,14 @@ class YouTubeOnlineTest extends \PHPUnit_Framework_TestCase
         $authenticationURL =
             'https://www.google.com/youtube/accounts/ClientLogin';
         $httpClient = GData\ClientLogin::getHttpClient(
-                                          $username = $this->user,
-                                          $password = $this->pass,
-                                          $service,
-                                          $client = null,
-                                          $source = 'Google-UnitTests-1.0',
-                                          $loginToken = null,
-                                          $loginCaptcha = null,
-                                          $authenticationURL);
+            $this->user,
+            $this->pass,
+            $service,
+            null, // client
+            'Google-UnitTests-1.0', // source
+            null, // $loginToken
+            null, // loginCaptcha
+            $authenticationURL);
 
         $yt = new YouTube(
             $httpClient, 'Google-UnitTests-1.0',
@@ -457,7 +475,7 @@ class YouTubeOnlineTest extends \PHPUnit_Framework_TestCase
             $channelToSubscribeTo));
 
         $postUrl =
-            'http://gdata.youtube.com/feeds/api/users/default/subscriptions';
+            'https://gdata.youtube.com/feeds/api/users/default/subscriptions';
 
         $successPosting = true;
         $message = null;
@@ -492,14 +510,14 @@ class YouTubeOnlineTest extends \PHPUnit_Framework_TestCase
         $authenticationURL =
             'https://www.google.com/youtube/accounts/ClientLogin';
         $httpClient = GData\ClientLogin::getHttpClient(
-                                          $username = $this->user,
-                                          $password = $this->pass,
-                                          $service,
-                                          $client = null,
-                                          $source = 'Google-UnitTests-1.0',
-                                          $loginToken = null,
-                                          $loginCaptcha = null,
-                                          $authenticationURL);
+            $this->user,
+            $this->pass,
+            $service,
+            null, // client
+            'Google-UnitTests-1.0', // source
+            null, // $loginToken
+            null, // loginCaptcha
+            $authenticationURL);
 
         $yt = new YouTube(
             $httpClient, 'Google-UnitTests-1.0',
@@ -552,7 +570,7 @@ class YouTubeOnlineTest extends \PHPUnit_Framework_TestCase
             $usernameOfFavoritesToSubscribeTo));
 
         $postUrl =
-            'http://gdata.youtube.com/feeds/api/users/default/subscriptions';
+            'https://gdata.youtube.com/feeds/api/users/default/subscriptions';
 
         $successPosting = true;
         $message = null;
@@ -587,14 +605,14 @@ class YouTubeOnlineTest extends \PHPUnit_Framework_TestCase
         $authenticationURL =
             'https://www.google.com/youtube/accounts/ClientLogin';
         $httpClient = GData\ClientLogin::getHttpClient(
-                                          $username = $this->user,
-                                          $password = $this->pass,
-                                          $service,
-                                          $client = null,
-                                          $source = 'Google-UnitTests-1.0',
-                                          $loginToken = null,
-                                          $loginCaptcha = null,
-                                          $authenticationURL);
+            $this->user,
+            $this->pass,
+            $service,
+            null, // client
+            'Google-UnitTests-1.0', // source
+            null, // $loginToken
+            null, // loginCaptcha
+            $authenticationURL);
 
         $yt = new YouTube(
             $httpClient, 'Google-UnitTests-1.0',
@@ -647,7 +665,7 @@ class YouTubeOnlineTest extends \PHPUnit_Framework_TestCase
             $playlistIdToSubscribeTo));
 
         $postUrl =
-            'http://gdata.youtube.com/feeds/api/users/default/subscriptions';
+            'https://gdata.youtube.com/feeds/api/users/default/subscriptions';
 
         $successPosting = true;
         $message = null;
@@ -685,14 +703,15 @@ class YouTubeOnlineTest extends \PHPUnit_Framework_TestCase
         $authenticationURL =
             'https://www.google.com/youtube/accounts/ClientLogin';
         $httpClient = GData\ClientLogin::getHttpClient(
-                                          $username = $this->user,
-                                          $password = $this->pass,
-                                          $service,
-                                          $client = null,
-                                          $source = 'Google-UnitTests-1.0',
-                                          $loginToken = null,
-                                          $loginCaptcha = null,
-                                          $authenticationURL);
+            $this->user,
+            $this->pass,
+            $service,
+            null, // client
+            'Google-UnitTests-1.0', // source
+            null, // $loginToken
+            null, // loginCaptcha
+            $authenticationURL
+        );
 
         $yt = new YouTube($httpClient, 'Google-UnitTests-1.0', $clientId, $developerKey);
 
@@ -740,7 +759,7 @@ class YouTubeOnlineTest extends \PHPUnit_Framework_TestCase
             $queryStringToSubscribeTo));
 
         $postUrl =
-            'http://gdata.youtube.com/feeds/api/users/default/subscriptions';
+            'https://gdata.youtube.com/feeds/api/users/default/subscriptions';
 
         $successPosting = true;
         $message = null;
@@ -1013,7 +1032,7 @@ class YouTubeOnlineTest extends \PHPUnit_Framework_TestCase
         $youtube->setMajorProtocolVersion(2);
 
         $mostDiscussedFeed = $youtube->getVideoFeed(
-            'http://gdata.youtube.com/feeds/api/standardfeeds/most_discussed');
+            'https://gdata.youtube.com/feeds/api/standardfeeds/most_discussed');
 
         // get first entry
         $mostDiscussedFeed->rewind();

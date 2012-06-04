@@ -140,7 +140,7 @@ class VideoQueryTest extends \PHPUnit_Framework_TestCase
         $yt = new YouTube();
         $query = $yt->newVideoQuery();
         $query->setVideoQuery('foo');
-        $expectedString = 'http://gdata.youtube.com/feeds/api/videos?q=foo';
+        $expectedString = 'https://gdata.youtube.com/feeds/api/videos?q=foo';
         $this->assertEquals($expectedString, $query->getQueryUrl(2));
     }
 

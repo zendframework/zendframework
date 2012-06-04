@@ -283,7 +283,7 @@ class EventEntry extends \Zend\GData\Entry
     }
 
     /**
-     * @param Zend_Gdata_Visibility $value
+     * @param \Zend\GData\Visibility $value
      * @return \Zend\GData\Kind\EventEntry Provides a fluent interface
      */
     public function setVisibility($value)

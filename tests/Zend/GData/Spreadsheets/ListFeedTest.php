@@ -20,7 +20,8 @@
  */
 
 namespace ZendTest\GData\Spreadsheets;
-use Zend\GData\Spreadsheets;
+
+use Zend\GData\Spreadsheets\ListFeed;
 
 /**
  * @category   Zend
@@ -34,30 +35,35 @@ use Zend\GData\Spreadsheets;
 class ListFeedTest extends \PHPUnit_Framework_TestCase
 {
 
+    /** @var ListFeed */
+    public $listFeed;
+
     public function setUp()
     {
-        $this->listFeed = new Spreadsheets\ListFeed(
+        $this->listFeed = new ListFeed(
                 file_get_contents(__DIR__ . '/_files/TestDataListFeedSample1.xml'),
                 true);
     }
 
     public function testToAndFromString()
     {
-        $this->assertTrue(count($this->listFeed->entries) == 1);
+        $this->assertEquals(2, count($this->listFeed->entries));
+        $this->assertEquals(2, $this->listFeed->entries->count());
         foreach($this->listFeed->entries as $entry)
         {
-            $this->assertTrue($entry instanceof Spreadsheets\ListEntry);
+            $this->assertInstanceOf('Zend\GData\Spreadsheets\ListEntry', $entry);
         }
 
-        $newListFeed = new Spreadsheets\ListFeed();
+        $newListFeed = new ListFeed();
         $doc = new \DOMDocument();
         $doc->loadXML($this->listFeed->saveXML());
         $newListFeed->transferFromDom($doc->documentElement);
 
-        $this->assertTrue(count($newListFeed->entries) == 1);
+        $this->assertEquals(2, count($newListFeed->entries));
+        $this->assertEquals(2, $newListFeed->entries->count());
         foreach($newListFeed->entries as $entry)
         {
-            $this->assertTrue($entry instanceof Spreadsheets\ListEntry);
+            $this->assertInstanceOf('Zend\GData\Spreadsheets\ListEntry', $entry);
         }
 
     }

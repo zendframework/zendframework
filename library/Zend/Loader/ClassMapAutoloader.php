@@ -99,7 +99,10 @@ class ClassMapAutoloader implements SplAutoloader
 
         if (!is_array($map)) {
             require_once __DIR__ . '/Exception/InvalidArgumentException.php';
-            throw new Exception\InvalidArgumentException('Map file provided does not return a map');
+            throw new Exception\InvalidArgumentException(sprintf(
+                'Map file provided (%s) does not return a map',
+                (is_string($location) ? $location : gettype($map))
+            ));
         }
 
         $this->map = array_merge($this->map, $map);

@@ -21,7 +21,7 @@
 
 namespace Zend\Service\Amazon\S3;
 
-use Zend\Crypt\Hmac;
+use Zend\Crypt;
 use Zend\Http\Header;
 use Zend\Http\Response\Stream as StreamResponse;
 use Zend\Service\Amazon;
@@ -109,24 +109,54 @@ class S3 extends \Zend\Service\Amazon\AbstractAmazon
 
     /**
      * Verify if the bucket name is valid
+     * For reference: http://docs.amazonwebservices.com/AmazonS3/latest/dev/BucketRestrictions.html
      *
      * @param string $bucket
      * @return boolean
      */
     public function _validBucketName($bucket)
     {
-        $len = strlen($bucket);
-        if ($len < 3 || $len > 255) {
-            throw new Exception\InvalidArgumentException("Bucket name \"$bucket\" must be between 3 and 255 characters long");
+
+        //Labels must not be empty and should start and end with letter or number (no dashes)
+        $labelEmpty = false;
+        $labelDash  = false;
+        $labels     = explode('.', $bucket);
+        foreach ($labels as $label) {
+            if (empty($label)) {
+                $labelEmpty = true;
+                break;
+            }
+
+            if ($label[0] == '-' || $label[strlen($label)-1] == '-') {
+                $labelDash = true;
+                break;
+            }
         }
 
-        if (preg_match('/[^a-z0-9\._-]/', $bucket)) {
+        //Label name length
+        $len = strlen($bucket);
+        if ($len < 3 || $len > 63) {
+            throw new Exception\InvalidArgumentException("Bucket name \"$bucket\" must be between 3 and 63 characters long");
+        }
+
+        //No Capital letters or underscores
+        if (preg_match('/[^a-z0-9\.-]/', $bucket)) {
             throw new Exception\InvalidArgumentException("Bucket name \"$bucket\" contains invalid characters");
         }
 
+        //IP Address
         if (preg_match('/(\d){1,3}\.(\d){1,3}\.(\d){1,3}\.(\d){1,3}/', $bucket)) {
             throw new Exception\InvalidArgumentException("Bucket name \"$bucket\" cannot be an IP address");
         }
+
+        if ($labelEmpty) {
+            throw new Exception\InvalidArgumentException("Bucket labels in \"$bucket\" must not be empty");
+        }
+
+        if ($labelDash) {
+            throw new Exception\InvalidArgumentException("Bucket labels in \"$bucket\" must start and end with a letter or a number");
+        }
+
         return true;
     }
 
@@ -311,7 +341,7 @@ class S3 extends \Zend\Service\Amazon\AbstractAmazon
 
         return $objects;
     }
-    
+
     /**
      * List the objects and common prefixes in a bucket.
      *
@@ -357,7 +387,7 @@ class S3 extends \Zend\Service\Amazon\AbstractAmazon
             'prefixes' => $prefixes
         );
     }
-    
+
     /**
      * Make sure the object name is valid
      *
@@ -418,8 +448,7 @@ class S3 extends \Zend\Service\Amazon\AbstractAmazon
         $this->getHttpClient()->setStream($streamfile?$streamfile:true);
         if ($paidobject) {
             $response = $this->_makeRequest('GET', $object, null, array(self::S3_REQUESTPAY_HEADER => 'requester'));
-        }
-        else {
+        } else {
             $response = $this->_makeRequest('GET', $object);
         }
         $this->getHttpClient()->setStream(null);
@@ -608,15 +637,16 @@ class S3 extends \Zend\Service\Amazon\AbstractAmazon
      */
     public function _makeRequest($method, $path='', $params=null, $headers=array(), $data=null)
     {
-        $retry_count = 0;
+        $retryCount         = 0;
+        $this->lastResponse = null;
 
         if (!is_array($headers)) {
             $headers = array($headers);
         }
 
-        $headers['Date'] = gmdate(DATE_RFC1123, time());
+        $headers['Date'] = $this->getRequestDate();  //Helps with testing the signature
 
-        if(is_resource($data) && $method != 'PUT') {
+        if (is_resource($data) && $method != 'PUT') {
             throw new Exception\InvalidArgumentException("Only PUT request supports stream data");
         }
 
@@ -639,14 +669,14 @@ class S3 extends \Zend\Service\Amazon\AbstractAmazon
 
         $client = $this->getHttpClient();
         $client->resetParameters();
-        
+
         $hasContentType = false;
         foreach($headers as $key => $value) {
             if (strtolower($key) == 'content-type') {
                 $hasContentType = true;
             }
         }
-        
+
         if (($method == 'PUT') && ($data !== null)) {
             if (!$hasContentType) {
                 $headers['Content-Type'] = self::getMimeType($path);
@@ -657,45 +687,38 @@ class S3 extends \Zend\Service\Amazon\AbstractAmazon
 
         $client->setUri($endpoint);
         $client->setMethod($method);
-        
+
         //Prevents from Http\Client adding up a content-type header, which would break signature
         if (!$hasContentType) {
             $headers['Content-Type'] = 'application/xml';
         }
-        
+
         $headers = $this->addSignature($method, $path, $headers);
         $client->setHeaders($headers);
-        
+
         if (is_array($params)) {
             $client->setParameterGet($params);
         }
-        
-        if (($method == 'PUT') && ($data !== null)) {
-            if (!isset($headers['Content-type'])) {
-                $headers['Content-type'] = self::getMimeType($path);
-            }
-            $client->setRawBody($data);
-        }
 
         do {
-            $retry         = false;
-            $response      = $client->send();
-            $response_code = $response->getStatusCode();
+            $retry                = false;
+            $this->lastResponse   = $client->send();
+            $responseCode         = $this->lastResponse->getStatusCode();
 
             // Some 5xx errors are expected, so retry automatically
-            if ($response_code >= 500 && $response_code < 600 && $retry_count <= 5) {
+            if ($responseCode >= 500 && $responseCode < 600 && $retryCount <= 5) {
                 $retry = true;
-                $retry_count++;
-                sleep($retry_count / 4 * $retry_count);
-            } elseif ($response_code == 307) {
+                $retryCount++;
+                sleep($retryCount / 4 * $retryCount);
+            } elseif ($responseCode == 307) {
                 // Need to redirect, new S3 endpoint given
                 // This should never happen as Zend_Http_Client will redirect automatically
-            } elseif ($response_code == 100) {
+            } elseif ($responseCode == 100) {
                 // echo 'OK to Continue';
             }
         } while ($retry);
 
-        return $response;
+        return $this->lastResponse;
     }
 
     /**
@@ -754,7 +777,13 @@ class S3 extends \Zend\Service\Amazon\AbstractAmazon
             }
         }
 
-        $sig_str .= '/'.parse_url($path, PHP_URL_PATH);
+        //US General bucket names must always be lowercased for the signature
+        $urlPath = parse_url($path, PHP_URL_PATH);
+        $urlPathParts = explode('/', $urlPath);
+        if (!empty($urlPathParts[0]))
+            $urlPathParts[0] = strtolower($urlPathParts[0]);
+        
+        $sig_str .= '/'.implode('/', $urlPathParts);
         if (strpos($path, '?location') !== false) {
             $sig_str .= '?location';
         }
@@ -765,9 +794,9 @@ class S3 extends \Zend\Service\Amazon\AbstractAmazon
             $sig_str .= '?torrent';
         }
 
-        $signature = base64_encode(Hmac::compute($this->_getSecretKey(), 'sha1', utf8_encode($sig_str), Hmac::BINARY));
+        $signature = base64_encode(Crypt\Hmac::compute($this->_getSecretKey(), 'sha1', utf8_encode($sig_str), Crypt\Hmac::BINARY));
         $headers['Authorization'] = 'AWS '.$this->_getAccessKey().':'.$signature;
-
+        
         return $headers;
     }
 

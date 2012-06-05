@@ -200,7 +200,8 @@ return array(
     "'%value%' does not appear to be a valid local network name" => "'%value%' non sembra essere un local network name valido",
     "'%value%' appears to be a local network name but local network names are not allowed" => "'%value%' sembra essere un local network name, ma i local network names non sono consentiti",
     "'%value%' appears to be a DNS hostname but the given punycode notation cannot be decoded" => "'%value%' sembra essere un hostname DNS ma la notazione punycode data non può essere decodificata",
-
+    "'%value%' does not appear to be a valid URI hostname" => "'%value%' non sembra essere un hostname URI valido",
+    
     // Zend_Validate_Iban
     "Unknown country within the IBAN '%value%'" => "Country Code sconosciuto nell'IBAN '%value%'",
     "'%value%' has a false IBAN format" => "'%value%' ha un formato IBAN non valido",

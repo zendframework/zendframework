@@ -158,13 +158,20 @@ class Pdo implements DriverInterface, DriverFeatureInterface
     {
         $name = $this->getConnection()->getDriverName();
         if ($nameFormat == self::NAME_FORMAT_CAMELCASE) {
-            return ucfirst($name);
+            switch ($name) {
+                case 'pgsql':
+                    return 'Postgresql';
+                default:
+                    return ucfirst($name);
+            }
         } else {
             switch ($name) {
                 case 'sqlite':
                     return 'SQLite';
                 case 'mysql':
                     return 'MySQL';
+                case 'pgsql':
+                    return 'PostgreSQL';
                 default:
                     return ucfirst($name);
             }

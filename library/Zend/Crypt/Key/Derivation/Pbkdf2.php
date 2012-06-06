@@ -38,12 +38,14 @@ class Pbkdf2
         }
         $num    = ceil($length / Hmac::getOutputSize($hash, Hmac::BINARY));
         $result = '';
-        for ($block = 0; $block < $num; $block++) {
+        for ($block = 1; $block <= $num; $block++) {
             $hmac = Hmac::compute($password, $hash, $salt . pack('N', $block), Hmac::BINARY);
+            $mix  = $hmac; 
             for ($i = 1; $i < $iterations; $i++) {
-                $hmac ^= Hmac::compute($password, $hash, $hmac, Hmac::BINARY);
+                $hmac = Hmac::compute($password, $hash, $hmac, Hmac::BINARY);
+                $mix ^= $hmac;    
             }
-            $result .= $hmac;
+            $result .= $mix;
         }
         return substr($result, 0, $length);
     }

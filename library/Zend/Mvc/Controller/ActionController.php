@@ -68,7 +68,7 @@ abstract class ActionController implements
     /**
      * Default action if none provided
      *
-     * @return array
+     * @return ViewModel
      */
     public function indexAction()
     {
@@ -80,7 +80,7 @@ abstract class ActionController implements
     /**
      * Action called if matched action does not exist
      *
-     * @return array
+     * @return ViewModel
      */
     public function notFoundAction()
     {
@@ -253,11 +253,12 @@ abstract class ActionController implements
      * Set locator instance
      *
      * @param  ServiceLocatorInterface $locator
-     * @return void
+     * @return ActionController
      */
     public function setServiceLocator(ServiceLocatorInterface $locator)
     {
         $this->locator = $locator;
+        return $this;
     }
 
     /**
@@ -273,7 +274,7 @@ abstract class ActionController implements
     /**
      * Get plugin broker instance
      *
-     * @return Zend\Loader\Broker
+     * @return Broker
      */
     public function getBroker()
     {
@@ -287,7 +288,7 @@ abstract class ActionController implements
      * Set plugin broker instance
      *
      * @param  string|Broker $broker Plugin broker to load plugins
-     * @return Zend\Loader\Pluggable
+     * @return ActionController
      * @throws Exception\InvalidArgumentException
      */
     public function setBroker($broker)

@@ -21,6 +21,8 @@
 namespace Zend\Mvc;
 
 use Zend\EventManager\EventsCapableInterface;
+use Zend\Stdlib\RequestInterface;
+use Zend\Stdlib\ResponseInterface;
 
 /**
  * @category   Zend
@@ -40,14 +42,14 @@ interface ApplicationInterface extends EventsCapableInterface
     /**
      * Get the request object
      *
-     * @return Request
+     * @return RequestInterface
      */
     public function getRequest();
 
     /**
      * Get the response object
      *
-     * @return Response
+     * @return ResponseInterface
      */
     public function getResponse();
 

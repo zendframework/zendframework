@@ -82,7 +82,7 @@ abstract class RestfulController implements
     protected $events;
 
     /**
-     * @var Locator
+     * @var ServiceLocatorInterface
      */
     protected $locator;
 
@@ -176,6 +176,11 @@ abstract class RestfulController implements
         return $e->getResult();
     }
 
+    /**
+     * @param MvcEvent $e
+     * @return mixed
+     * @throws Exception\DomainException
+     */
     public function execute(MvcEvent $e)
     {
         $routeMatch = $e->getRouteMatch();
@@ -184,7 +189,7 @@ abstract class RestfulController implements
              * @todo Determine requirements for when route match is missing.
              *       Potentially allow pulling directly from request metadata?
              */
-            throw new \DomainException('Missing route matches; unsure how to retrieve action');
+            throw new Exception\DomainException('Missing route matches; unsure how to retrieve action');
         }
 
         $request = $e->getRequest();
@@ -216,7 +221,7 @@ abstract class RestfulController implements
                 case 'put':
                     if (null === $id = $routeMatch->getParam('id')) {
                         if (!($id = $request->query()->get('id', false))) {
-                            throw new \DomainException('Missing identifier');
+                            throw new Exception\DomainException('Missing identifier');
                         }
                     }
                     $content = $request->getContent();
@@ -226,13 +231,13 @@ abstract class RestfulController implements
                 case 'delete':
                     if (null === $id = $routeMatch->getParam('id')) {
                         if (!($id = $request->query()->get('id', false))) {
-                            throw new \DomainException('Missing identifier');
+                            throw new Exception\DomainException('Missing identifier');
                         }
                     }
                     $return = $this->delete($id);
                     break;
                 default:
-                    throw new \DomainException('Invalid HTTP method!');
+                    throw new Exception\DomainException('Invalid HTTP method!');
             }
         }
 
@@ -360,7 +365,7 @@ abstract class RestfulController implements
     /**
      * Get plugin broker instance
      *
-     * @return Zend\Loader\Broker
+     * @return Broker
      */
     public function getBroker()
     {
@@ -374,7 +379,7 @@ abstract class RestfulController implements
      * Set plugin broker instance
      *
      * @param  string|Broker $broker Plugin broker to load plugins
-     * @return Zend\Loader\Pluggable
+     * @return RestfulController
      * @throws Exception\InvalidArgumentException
      */
     public function setBroker($broker)

@@ -92,7 +92,7 @@ class Part extends TreeRouteStack implements RouteInterface
      *
      * @see    Route::factory()
      * @param  mixed $options
-     * @throws \Zend\Mvc\Router\Exception\InvalidArgumentException
+     * @throws Exception\InvalidArgumentException
      * @return Part
      */
     public static function factory($options = array())

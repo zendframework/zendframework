@@ -226,14 +226,6 @@ class ArrayStorage extends ArrayObject implements StorageInterface
         if (isset($this['__ZF'][$key]) && is_array($value)) {
             if ($overwriteArray) {
                 $this['__ZF'][$key] = $value;
-            } elseif (null === $value) {
-                // unset($this['__ZF'][$key]) led to "indirect modification...
-                // has no effect" errors, so explicitly pulling array and 
-                // unsetting key.
-                $array = $this['__ZF'];
-                unset($array[$key]);
-                $this['__ZF'] = $array;
-                unset($array);
             } else {
                 $this['__ZF'][$key] = array_replace_recursive($this['__ZF'][$key], $value);
             }
@@ -250,6 +242,7 @@ class ArrayStorage extends ArrayObject implements StorageInterface
                 $this['__ZF'][$key] = $value;
             }
         }
+
         return $this;
     }
 

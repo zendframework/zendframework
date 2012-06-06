@@ -87,7 +87,7 @@ class XmlWriter extends AbstractGenerator
 
     /**
      * Emit XML document
-     * 
+     *
      * @return string
      */
     public function saveXml()

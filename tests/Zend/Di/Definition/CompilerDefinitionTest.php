@@ -49,9 +49,9 @@ class CompilerDefinitionTest extends TestCase
         $definition = new CompilerDefinition;
         $definition->addDirectory(__DIR__ . '/../TestAsset/CompilerClasses');
         $definition->compile();
-        $this->assertCount(0, $definition->getClassSupertypes('ZendTest\Di\TestAsset\CompilerClasses\C'));
-        $this->assertCount(1, $definition->getClassSupertypes('ZendTest\Di\TestAsset\CompilerClasses\D'));
-        $this->assertCount(2, $definition->getClassSupertypes('ZendTest\Di\TestAsset\CompilerClasses\E'));
+        $this->assertEquals(0, count($definition->getClassSupertypes('ZendTest\Di\TestAsset\CompilerClasses\C')));
+        $this->assertEquals(1, count($definition->getClassSupertypes('ZendTest\Di\TestAsset\CompilerClasses\D')));
+        $this->assertEquals(2, count($definition->getClassSupertypes('ZendTest\Di\TestAsset\CompilerClasses\E')));
         $this->assertContains('ZendTest\Di\TestAsset\CompilerClasses\C', $definition->getClassSupertypes('ZendTest\Di\TestAsset\CompilerClasses\D'));
         $this->assertContains('ZendTest\Di\TestAsset\CompilerClasses\C', $definition->getClassSupertypes('ZendTest\Di\TestAsset\CompilerClasses\E'));
         $this->assertContains('ZendTest\Di\TestAsset\CompilerClasses\D', $definition->getClassSupertypes('ZendTest\Di\TestAsset\CompilerClasses\E'));

@@ -145,4 +145,14 @@ class FormLabelTest extends CommonTestCase
         $this->setExpectedException('Zend\Form\Exception\DomainException', 'label');
         $markup = $this->helper->__invoke($element, '<input type="text" id="foo" />', FormLabelHelper::APPEND);
     }
+
+    public function testCallingFromViewHelperCanHandleOpenTagAndCloseTag()
+    {
+        $element = new Element('foo');
+        $helper = $this->helper;
+        $markup = $helper()->openTag();
+        $this->assertEquals('<label>', $markup);
+        $markup = $helper()->closeTag();
+        $this->assertEquals('</label>', $markup);
+    }
 }

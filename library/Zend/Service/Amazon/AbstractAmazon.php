@@ -21,7 +21,7 @@
 
 namespace Zend\Service\Amazon;
 
-use \Zend\Date\Date;
+use Zend\Date\Date;
 
 /**
  * Abstract Amazon class that handles the credentials for any of the Web Services that
@@ -36,16 +36,6 @@ use \Zend\Date\Date;
 abstract class AbstractAmazon extends \Zend\Service\AbstractService
 {
     /**
-     * @var string Amazon Access Key
-     */
-    protected static $_defaultAccessKey = null;
-
-    /**
-     * @var string Amazon Secret Key
-     */
-    protected static $_defaultSecretKey = null;
-
-    /**
      * @var string Amazon Secret Key
      */
     protected $secretKey;
@@ -57,7 +47,7 @@ abstract class AbstractAmazon extends \Zend\Service\AbstractService
 
     /**
      * Request date - useful for testing services with signature
-     * 
+     *
      * @var int|string|null Request date - useful for testing services with signature
      */
     protected $requestDate = null;
@@ -75,24 +65,11 @@ abstract class AbstractAmazon extends \Zend\Service\AbstractService
     /**
      * Set the keys to use when accessing SQS.
      *
-     * @param  string $access_key       Set the default Access Key
-     * @param  string $secret_key       Set the default Secret Key
+     * @param  string|null $accessKey       Set the current Access Key
+     * @param  string|null $secretKey       Set the current Secret Key
      * @return void
      */
-    public static function setKeys($accessKey, $secretKey)
-    {
-        self::$_defaultAccessKey = $accessKey;
-        self::$_defaultSecretKey = $secretKey;
-    }
-    
-    /**
-     * Set the keys to use when accessing SQS.
-     *
-     * @param  string $access_key       Set the current Access Key
-     * @param  string $secret_key       Set the current Secret Key
-     * @return void
-     */
-    public function setCurrentKeys($accessKey, $secretKey)
+    public function setKeys($accessKey, $secretKey)
     {
         $this->accessKey = $accessKey;
         $this->secretKey = $secretKey;
@@ -101,20 +78,16 @@ abstract class AbstractAmazon extends \Zend\Service\AbstractService
     /**
      * Set the RFC1123 request date - useful for testing the services with signature
      * If preserve is set, the specific object is kept for further requests
-     * 
+     *
      * @param null|\Zend\Date\Date $date
      * @param null|boolean         $preserve if the set date must be kept for further requests
      * @return void
      */
-    public function setRequestDate($date, $preserve = null)
+    public function setRequestDate(Date $date = null, $preserve = null)
     {
 
-        if (!$date instanceof Date && !is_null($date)) {
-            throw new Exception\InvalidArgumentException('First argument must be instance of \\Zend\\Date\\Date or null');
-        }
-
         if ($date instanceof Date && !is_null($preserve)) {
-                $date->{self::DATE_PRESERVE_KEY} = (boolean) $preserve;
+            $date->{self::DATE_PRESERVE_KEY} = (boolean) $preserve;
         }
 
         $this->requestDate = $date;
@@ -123,22 +96,11 @@ abstract class AbstractAmazon extends \Zend\Service\AbstractService
     /**
      * Create Amazon client.
      *
-     * @param  string $accessKey       Override the default Access Key
-     * @param  string $secretKey       Override the default Secret Key
-     * @return void
+     * @param  null|string $accessKey       Override the default Access Key
+     * @param  null|string $secretKey       Override the default Secret Key
      */
     public function __construct($accessKey=null, $secretKey=null)
     {
-        if (!$accessKey) {
-            $accessKey = self::$_defaultAccessKey;
-        }
-        if (!$secretKey) {
-            $secretKey = self::$_defaultSecretKey;
-        }
-
-        if (!$accessKey || !$secretKey) {
-            throw new Exception\InvalidArgumentException('AWS keys were not supplied');
-        }
         $this->accessKey = $accessKey;
         $this->secretKey = $secretKey;
     }
@@ -147,9 +109,14 @@ abstract class AbstractAmazon extends \Zend\Service\AbstractService
      * Method to fetch the Access Key
      *
      * @return string
+     * @throws Exception\InvalidArgumentException
      */
     protected function _getAccessKey()
     {
+        if (is_null($this->accessKey)) {
+            throw new Exception\InvalidArgumentException('AWS access key was not supplied');
+        }
+
         return $this->accessKey;
     }
 
@@ -157,9 +124,14 @@ abstract class AbstractAmazon extends \Zend\Service\AbstractService
      * Method to fetch the Secret AWS Key
      *
      * @return string
+     * @throws Exception\InvalidArgumentException
      */
     protected function _getSecretKey()
     {
+        if (is_null($this->secretKey)) {
+            throw new Exception\InvalidArgumentException('AWS secret key was not supplied');
+        }
+
         return $this->secretKey;
     }
 
@@ -176,9 +148,9 @@ abstract class AbstractAmazon extends \Zend\Service\AbstractService
 
     /**
      * Method to get the request date - returns gmdate(DATE_RFC1123, time())
-     * 
+     *
      *     "Tue, 15 May 2012 15:18:31 +0000"
-     *     
+     *
      * Unless setRequestDate was set (as when testing the service)
      *
      * @return string

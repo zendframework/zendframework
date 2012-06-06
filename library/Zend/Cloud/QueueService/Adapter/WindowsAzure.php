@@ -111,7 +111,7 @@ class WindowsAzure extends AbstractAdapter
                 $this->_storageClient->setProxy(true, $proxyHost, $proxyPort, $proxyCredentials);
             }
             if (isset($options[self::HTTP_ADAPTER])) {
-                $this->_storageClient->setHttpClientChannel($options[self::HTTP_ADAPTER]));
+                $this->_storageClient->setHttpClientChannel($options[self::HTTP_ADAPTER]);
             }
         } catch(WindowsAzureException\ExceptionInterface $e) {
             throw new Exception\RuntimeException('Error on create: '.$e->getMessage(), $e->getCode(), $e);

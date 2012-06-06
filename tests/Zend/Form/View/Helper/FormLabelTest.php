@@ -148,7 +148,6 @@ class FormLabelTest extends CommonTestCase
 
     public function testCallingFromViewHelperCanHandleOpenTagAndCloseTag()
     {
-        $element = new Element('foo');
         $helper = $this->helper;
         $markup = $helper()->openTag();
         $this->assertEquals('<label>', $markup);

@@ -155,7 +155,7 @@ BODY;
         $requestDate->set('Tue, 15 May 2012 15:18:31 +0000', Date::RFC_1123);
 
         $this->amazon->setRequestDate($requestDate);
-        $this->amazon->setCurrentKeys('AKIAIDCZ2WXN6NNB7YZA', 'sagA0Lge8R+ifORcyb6Z/qVbmtimFCUczvh51Jq8'); //Fake keys
+        $this->amazon->setKeys('AKIAIDCZ2WXN6NNB7YZA', 'sagA0Lge8R+ifORcyb6Z/qVbmtimFCUczvh51Jq8'); //Fake keys
 
         /**
          * Check of request inside _makeRequest

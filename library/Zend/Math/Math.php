@@ -92,14 +92,9 @@ class Math extends BigInteger
                 'The supplied range is too great to generate'
             );
         }
-        $bits  = (int)floor(log($range, 2) + 1);
-        $bytes = (int)max(ceil($bits / 8), 1);
-        $mask  = (int)(pow(2, $bits) - 1);
-        do {
-            $test   = self::randBytes($bytes, $strong);
-            $result = hexdec(bin2hex($test)) & $mask;
-        } while ($result > $range);
-        return $result + $min;
+	$bytes = (int) max(log($range,2) / 8, 1);
+	$rnd   = hexdec(bin2hex(self::randBytes($bytes, $strong)));
+	return $min + $rnd % ($range+1);
     }
 
     /**

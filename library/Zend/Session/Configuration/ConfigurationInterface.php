@@ -50,7 +50,7 @@ interface ConfigurationInterface
     public function getCookieDomain();
     public function setCookieSecure($cookieSecure);
     public function getCookieSecure();
-    public function setCookieHttpOnly($cookieHTTPOnly);
+    public function setCookieHttpOnly($cookieHttpOnly);
     public function getCookieHttpOnly();
     public function setUseCookies($useCookies);
     public function getUseCookies();

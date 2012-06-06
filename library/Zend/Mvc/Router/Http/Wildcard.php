@@ -84,7 +84,7 @@ class Wildcard implements RouteInterface
      *
      * @see    Route::factory()
      * @param  array|Traversable $options
-     * @throws \Zend\Mvc\Router\Exception\InvalidArgumentException
+     * @throws Exception\InvalidArgumentException
      * @return Wildcard
      */
     public static function factory($options = array())

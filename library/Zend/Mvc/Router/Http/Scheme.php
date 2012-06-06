@@ -67,8 +67,8 @@ class Scheme implements RouteInterface
      * factory(): defined by RouteInterface interface.
      *
      * @see    Route::factory()
-     * @param  array|\Traversable $options
-     * @throws \Zend\Mvc\Router\Exception\InvalidArgumentException
+     * @param  array|Traversable $options
+     * @throws Exception\InvalidArgumentException
      * @return Scheme
      */
     public static function factory($options = array())

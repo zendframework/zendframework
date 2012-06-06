@@ -57,17 +57,18 @@ class Pbkdf2Test extends \PHPUnit_Framework_TestCase
 
     /**
      * Test vectors from RFC 6070
+     * 
      * @see http://tools.ietf.org/html/draft-josefsson-pbkdf2-test-vectors-06 
      */
     public static function provideTestVectors()
     {
-	return array (
-	    array('sha1', 'password', 'salt', 1, 20, '0c60c80f961f0e71f3a9b524af6012062fe037a6'),
-	    array('sha1', 'password', 'salt', 2, 20, 'ea6c014dc72d6f8ccd1ed92ace1d41f0d8de8957'),
-	    array('sha1', 'password', 'salt', 4096, 20, '4b007901b765489abead49d926f721d065a429c1'),
+        return array (
+            array('sha1', 'password', 'salt', 1, 20, '0c60c80f961f0e71f3a9b524af6012062fe037a6'),
+            array('sha1', 'password', 'salt', 2, 20, 'ea6c014dc72d6f8ccd1ed92ace1d41f0d8de8957'),
+            array('sha1', 'password', 'salt', 4096, 20, '4b007901b765489abead49d926f721d065a429c1'),
 	    array('sha1', 'passwordPASSWORDpassword', 'saltSALTsaltSALTsaltSALTsaltSALTsalt', 4096, 25, '3d2eec4fe41c849b80c8d83662c0e44a8b291a964cf2f07038'),
-	    array('sha1', "pass\0word", "sa\0lt", 4096, 16, '56fa6aa75548099dcc37d7f03425e0c3')
-	);
+            array('sha1', "pass\0word", "sa\0lt", 4096, 16, '56fa6aa75548099dcc37d7f03425e0c3')
+        );
     }
 
     /**
@@ -75,7 +76,7 @@ class Pbkdf2Test extends \PHPUnit_Framework_TestCase
      */
     public function testRFC670($hash, $password, $salt, $cycles, $length, $expect)
     {
-	$result = Pbkdf2::calc($hash, $password, $salt, $cycles, $length);
-	$this->assertEquals($expect, bin2hex($result));
+        $result = Pbkdf2::calc($hash, $password, $salt, $cycles, $length);
+        $this->assertEquals($expect, bin2hex($result));
     }
 }

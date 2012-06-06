@@ -101,7 +101,7 @@ class ClassMapAutoloader implements SplAutoloader
             require_once __DIR__ . '/Exception/InvalidArgumentException.php';
             throw new Exception\InvalidArgumentException(sprintf(
                 'Map file provided (%s) does not return a map',
-                (is_string($location) ? $location : 'unexpected type: ' . gettype($map))
+                (isset($location) && is_string($location) ? $location : 'unexpected type: ' . gettype($map))
             ));
         }
 

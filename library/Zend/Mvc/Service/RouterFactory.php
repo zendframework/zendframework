@@ -21,7 +21,6 @@
 
 namespace Zend\Mvc\Service;
 
-use Zend\Mvc\Router\SimpleRouteStack;
 use Zend\Mvc\Router\Http\TreeRouteStack as Router;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
@@ -43,7 +42,7 @@ class RouterFactory implements FactoryInterface
      * default.
      * 
      * @param  ServiceLocatorInterface $serviceLocator 
-     * @return SimpleRouteStack
+     * @return TreeRouteStack
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {

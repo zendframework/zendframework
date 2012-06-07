@@ -32,9 +32,6 @@ use Zend\Stdlib\DispatchableInterface as Dispatchable;
  */
 abstract class AbstractPlugin
 {
-    /**
-     * @var Dispatchable
-     */
     protected $controller;
 
     /**

@@ -91,7 +91,7 @@ class Segment implements RouteInterface
      *
      * @see    Route::factory()
      * @param  array|Traversable $options
-     * @throws Exception\InvalidArgumentException
+     * @throws \Zend\Mvc\Router\Exception\InvalidArgumentException
      * @return Segment
      */
     public static function factory($options = array())

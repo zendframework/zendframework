@@ -38,7 +38,7 @@ class ViewFeedRendererFactory implements FactoryInterface
      * Create and return the feed view renderer
      *
      * @param  ServiceLocatorInterface $serviceLocator 
-     * @return FeedRenderer
+     * @return FeedStrategy
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {

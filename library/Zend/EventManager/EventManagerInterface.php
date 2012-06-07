@@ -84,7 +84,7 @@ interface EventManagerInterface extends SharedEventManagerAwareInterface
      * Detach an event listener
      * 
      * @param  CallbackHandler|ListenerAggregateInterface $listener 
-     * @return bool
+     * @return void
      */
     public function detach($listener);
 

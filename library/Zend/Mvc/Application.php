@@ -83,7 +83,7 @@ class Application implements
     protected $event;
 
     /**
-     * @var EventManagerInterface
+     * @var EventManager
      */
     protected $events;
 
@@ -111,7 +111,7 @@ class Application implements
      * Constructor
      *
      * @param mixed $configuration
-     * @param ServiceManager $serviceManager
+     * @param ServiceManager $serviceManager 
      */
     public function __construct($configuration, ServiceManager $serviceManager)
     {
@@ -179,7 +179,7 @@ class Application implements
     /**
      * Get the request object
      *
-     * @return RequestInterface
+     * @return Request
      */
     public function getRequest()
     {
@@ -189,7 +189,7 @@ class Application implements
     /**
      * Get the response object
      *
-     * @return ResponseInterface
+     * @return Response
      */
     public function getResponse()
     {
@@ -249,7 +249,7 @@ class Application implements
      *           discovered controller, and controller class (if known).
      *           Typically, a handler should return a populated Response object
      *           that can be returned immediately.
-     * @return ResponseInterface
+     * @return SendableResponse
      */
     public function run()
     {
@@ -309,7 +309,7 @@ class Application implements
      * event object.
      *
      * @param  MvcEvent $event
-     * @return ResponseInterface
+     * @return Response
      */
     protected function completeRequest(MvcEvent $event)
     {

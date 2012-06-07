@@ -454,7 +454,7 @@ class ViewManager implements ListenerAggregateInterface
     /**
      * Configures the MvcEvent view model to ensure it has the template injected
      * 
-     * @return \Zend\View\Model\ModelInterface
+     * @return \Zend\Mvc\View\Model\ModelInterface
      */
     public function getViewModel()
     {

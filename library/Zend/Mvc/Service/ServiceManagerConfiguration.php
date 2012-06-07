@@ -21,7 +21,6 @@
 
 namespace Zend\Mvc\Service;
 
-use Zend\EventManager\EventManagerAwareInterface;
 use Zend\ServiceManager\ConfigurationInterface;
 use Zend\ServiceManager\ServiceManager;
 use Zend\ServiceManager\ServiceManagerAwareInterface;

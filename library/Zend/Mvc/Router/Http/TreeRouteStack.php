@@ -96,7 +96,7 @@ class TreeRouteStack extends SimpleRouteStack
      * routeFromArray(): defined by SimpleRouteStack.
      *
      * @see    SimpleRouteStack::routeFromArray()
-     * @param  array|Traversable $specs
+     * @param  array|\Traversable $specs
      * @return RouteInterface
      */
     protected function routeFromArray($specs)

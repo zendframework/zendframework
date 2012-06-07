@@ -71,7 +71,7 @@ class SimpleRouteStack implements RouteStackInterface
      * factory(): defined by RouteInterface interface.
      *
      * @see    Route::factory()
-     * @param  array|Traversable $options
+     * @param  array|\Traversable $options
      * @return SimpleRouteStack
      * @throws Exception\InvalidArgumentException
      */
@@ -135,7 +135,7 @@ class SimpleRouteStack implements RouteStackInterface
      * addRoutes(): defined by RouteStackInterface interface.
      *
      * @see    RouteStack::addRoutes()
-     * @param  array|Traversable $routes
+     * @param  array|\Traversable $routes
      * @return SimpleRouteStack
      * @throws Exception\InvalidArgumentException
      */

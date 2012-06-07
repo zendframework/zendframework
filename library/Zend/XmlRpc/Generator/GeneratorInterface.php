@@ -35,7 +35,7 @@ interface GeneratorInterface
      *
      * @return string
      */
-    public function saveXML();
+    public function saveXml();
 
     public function stripDeclaration($xml);
     public function flush();

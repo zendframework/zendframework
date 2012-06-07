@@ -50,6 +50,7 @@ class GenericHeader implements HeaderInterface
      * 
      * @param  string $fieldName
      * @return GenericHeader
+     * @throws Exception\InvalidArgumentException(
      */
     public function setFieldName($fieldName)
     {
@@ -62,7 +63,9 @@ class GenericHeader implements HeaderInterface
 
         // Validate what we have
         if (!preg_match('/^[a-z][a-z0-9-]*$/i', $fieldName)) {
-            throw new Exception\InvalidArgumentException('Header name must start with a letter, and consist of only letters, numbers, and dashes');
+            throw new Exception\InvalidArgumentException(
+                'Header name must start with a letter, and consist of only letters, numbers, and dashes'
+            );
         }
 
         $this->fieldName = $fieldName;
@@ -116,10 +119,7 @@ class GenericHeader implements HeaderInterface
      */
     public function toString()
     {
-        $name  = $this->getFieldName();
-        $value = $this->getFieldValue();
-
-        return $name. ': ' . $value . "\r\n";
+        return $this->getFieldName() . ': ' . $this->getFieldValue();
     }
 
 }

@@ -262,7 +262,7 @@ class Headers implements Iterator, Countable
             foreach (array_keys($this->headersKeys, $key) as $index) {
                 $headers[] = $this->headers[$index];
             }
-            return new \ArrayIterator($headers);
+            return new ArrayIterator($headers);
         } else {
             $index = array_search($key, $this->headersKeys);
             if ($index === false) {

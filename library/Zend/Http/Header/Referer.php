@@ -10,6 +10,8 @@
 
 namespace Zend\Http\Header;
 
+use Zend\Uri\Http as HttpUri;
+
 /**
  * Content-Location Header
  *
@@ -21,6 +23,21 @@ namespace Zend\Http\Header;
  */
 class Referer extends AbstractLocation implements HeaderInterface
 {
+    /**
+     * Set the URI/URL for this header
+     * according to RFC Referer URI should not have fragment
+     *
+     * @param string|HttpUri $uri
+     * @return Referer
+     */
+    public function setUri($uri)
+    {
+        parent::setUri($uri);
+
+        $this->uri->setFragment(null);
+        return $this;
+    }
+
     /**
      * Return header name
      *

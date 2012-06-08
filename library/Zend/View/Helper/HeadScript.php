@@ -55,7 +55,7 @@ class HeadScript extends Placeholder\Container\Standalone
     protected $_arbitraryAttributes = false;
 
     /**
-     * Are arbitrary attributes allowed?
+     * Should scripts be escaped with cdata or html comment tags?
      * @var bool
      */
     protected $_escapeScript = true;

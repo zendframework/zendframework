@@ -158,9 +158,15 @@ class Factory
                     break;
                 case 'required':
                     $input->setRequired($value);
+                    if (!isset($inputSpecification['allow_empty'])) {
+                        $input->setAllowEmpty(!$value);
+                    }
                     break;
                 case 'allow_empty':
                     $input->setAllowEmpty($value);
+                    if (!isset($inputSpecification['required'])) {
+                        $input->setRequired(!$value);
+                    }
                     break;
                 case 'filters':
                     if (!is_array($value) && !$value instanceof Traversable) {

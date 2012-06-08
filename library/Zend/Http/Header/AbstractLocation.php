@@ -15,8 +15,7 @@ use Zend\Uri\Exception as UriException;
 
 /**
  * Abstract Location Header
- *
- * Lays out foundation for:
+ * Supports headers that have URI as value
  * @see Zend\Http\Header\Location
  * @see Zend\Http\Header\ContentLocation
  * @see Zend\Http\Header\Referer
@@ -33,6 +32,8 @@ use Zend\Uri\Exception as UriException;
 abstract class AbstractLocation implements HeaderInterface
 {
     /**
+     * URI for this header
+     *
      * @var HttpUri
      */
     protected $uri = null;
@@ -48,7 +49,8 @@ abstract class AbstractLocation implements HeaderInterface
     {
         $locationHeader = new static();
 
-        list($name, $uri) = explode(': ', $headerLine, 2);
+        // ZF-5520 - IIS bug, no space after colon
+        list($name, $uri) = explode(':', $headerLine, 2);
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== strtolower($locationHeader->getFieldName())) {
@@ -63,7 +65,7 @@ abstract class AbstractLocation implements HeaderInterface
     }
 
     /**
-     * Set the URI/URL for this request, this can be a string or an instance of Zend\Uri\Http
+     * Set the URI/URL for this header, this can be a string or an instance of Zend\Uri\Http
      *
      * @param string|HttpUri $uri
      * @return AbstractLocation
@@ -90,7 +92,7 @@ abstract class AbstractLocation implements HeaderInterface
     }
 
     /**
-     * Return the URI for this request object
+     * Return the URI for this header
      *
      * @return string
      */
@@ -103,7 +105,7 @@ abstract class AbstractLocation implements HeaderInterface
     }
 
     /**
-     * Return the URI for this request object as an instance of Zend\Uri\Http
+     * Return the URI for this header as an instance of Zend\Uri\Http
      *
      * @return HttpUri
      */
@@ -116,6 +118,8 @@ abstract class AbstractLocation implements HeaderInterface
     }
 
     /**
+     * Get header value as URI string
+     *
      * @return string
      */
     public function getFieldValue()
@@ -124,6 +128,8 @@ abstract class AbstractLocation implements HeaderInterface
     }
 
     /**
+     * Output header line
+     *
      * @return string
      */
     public function toString()

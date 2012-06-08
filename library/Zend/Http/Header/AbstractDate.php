@@ -215,7 +215,7 @@ abstract class AbstractDate implements HeaderInterface
     }
 
     /**
-     * Output header line
+     * Return header line
      *
      * @return string
      */

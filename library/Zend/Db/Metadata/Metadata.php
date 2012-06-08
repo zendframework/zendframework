@@ -66,21 +66,32 @@ class Metadata implements MetadataInterface
     // @todo methods
 
     /**
-     * @param null $schema
-     * @param null $database
+     * Get base tables
+     *
+     * @param string $schema
+     * @return Object\TableObject[]
+     */
+    public function getBaseTables($schema = null)
+    {
+        return $this->source->getBaseTables();
+    }
+
+    /**
+     * Get base tables and views
+     *
+     * @param string $schema
      * @return Object\TableObject[]
      */
     public function getTables($schema = null)
     {
         return $this->source->getTables();
     }
-
+    
     /**
-     * Get views
-     * 
-     * @param  string $schema
-     * @param  string $database
-     * @return array 
+     * Get base tables and views
+     *
+     * @param string $schema
+     * @return Object\TableObject[]
      */
     public function getViews($schema = null)
     {

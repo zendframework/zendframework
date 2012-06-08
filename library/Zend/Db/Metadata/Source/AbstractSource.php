@@ -75,7 +75,7 @@ abstract class AbstractSource implements MetadataInterface
 
         $this->loadTableNameData($schema);
 
-        return $this->data['table_names'][$schema];
+        return array_keys($this->data['table_names'][$schema]);
     }
 
     /**
@@ -110,10 +110,80 @@ abstract class AbstractSource implements MetadataInterface
             $schema = $this->defaultSchema;
         }
 
+        $this->loadTableNameData($schema);
+
+        if (!isset($this->data['table_names'][$schema][$tableName])) {
+            throw new \Exception('Table "' . $tableName . '" does not exist');
+        }
+
         $table = new Object\TableObject($tableName);
-        $table->setType('table');
+        $table->setType($this->data['table_names'][$schema][$tableName]);
         $table->setColumns($this->getColumns($tableName, $schema));
         return $table;
+    }
+
+    /**
+     * Get table names
+     *
+     * @param  string $schema
+     * @return string[]
+     */
+    public function getBaseTableNames($schema = null)
+    {
+        if ($schema === null) {
+            $schema = $this->defaultSchema;
+        }
+
+        $this->loadTableNameData($schema);
+
+        $baseTableNames = array();
+        foreach ($this->data['table_names'][$schema] as $tableName => $tableType) {
+            if ('BASE TABLE' == $tableType) {
+                $baseTableNames[] = $tableName;
+            }
+        }
+        return $baseTableNames;
+    }
+
+    /**
+     * Get tables
+     *
+     * @param  string $schema
+     * @return Object\TableObject[]
+     */
+    public function getBaseTables($schema = null)
+    {
+        if ($schema === null) {
+            $schema = $this->defaultSchema;
+        }
+
+        $baseTables = array();
+        foreach ($this->getBaseTableNames($schema) as $tableName) {
+            $baseTables[] = $this->getTable($tableName, $schema);
+        }
+        return $baseTables;
+    }
+
+    /**
+     * Get table
+     *
+     * @param  string $tableName
+     * @param  string $schema
+     * @return Object\TableObject
+     */
+    public function getBaseTable($baseTableName, $schema = null)
+    {
+        if ($schema === null) {
+            $schema = $this->defaultSchema;
+        }
+
+        $this->loadTableNameData($schema);
+
+        $tableNames = $this->data['table_names'][$schema];
+        if (isset($tableNames[$baseTableName]) && 'BASE TABLE' == $tableNames[$baseTableName]) {
+            return $this->getTable($baseTableName, $schema);
+        }
+        throw new \Exception('Base Table "' . $baseTableName . '" does not exist');
     }
 
     /**
@@ -123,7 +193,19 @@ abstract class AbstractSource implements MetadataInterface
      */
     public function getViewNames($schema = null)
     {
-        // TODO: Implement getViewNames() method.
+        if ($schema === null) {
+            $schema = $this->defaultSchema;
+        }
+
+        $this->loadTableNameData($schema);
+
+        $viewNames = array();
+        foreach ($this->data['table_names'][$schema] as $tableName => $tableType) {
+            if ('VIEW' == $tableType) {
+                $viewNames[] = $tableName;
+            }
+        }
+        return $viewNames;
     }
 
     /**
@@ -133,7 +215,15 @@ abstract class AbstractSource implements MetadataInterface
      */
     public function getViews($schema = null)
     {
-        // TODO: Implement getViews() method.
+        if ($schema === null) {
+            $schema = $this->defaultSchema;
+        }
+
+        $views = array();
+        foreach ($this->getViewNames($schema) as $tableName) {
+            $views[] = $this->getTable($tableName, $schema);
+        }
+        return $views;
     }
 
     /**
@@ -144,7 +234,17 @@ abstract class AbstractSource implements MetadataInterface
      */
     public function getView($viewName, $schema = null)
     {
-        // TODO: Implement getView() method.
+        if ($schema === null) {
+            $schema = $this->defaultSchema;
+        }
+
+        $this->loadTableNameData($schema);
+
+        $tableNames = $this->data['table_names'][$schema];
+        if (isset($tableNames[$viewName]) && 'VIEW' == $tableNames[$viewName]) {
+            return $this->getTable($viewName, $schema);
+        }
+        throw new \Exception('View "' . $viewName . '" does not exist');
     }
 
     /**

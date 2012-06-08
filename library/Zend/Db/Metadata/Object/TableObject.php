@@ -165,4 +165,23 @@ class TableObject
         return $this->name;
     }
 
+    /**
+     * Is base table
+     *
+     * @return boolean
+     */
+    public function isBaseTable()
+    {
+        return (strtoupper($this->type) == 'BASE TABLE');
+    }
+
+    /**
+     * Is view
+     *
+     * @return boolean
+     */
+    public function isView()
+    {
+        return (strtoupper($this->type) == 'VIEW');
+    }
 }

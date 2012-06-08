@@ -44,7 +44,7 @@ class FormElementErrors extends AbstractHelper
     /**@+
      * @var array Default attributes for the open format tag
      */
-    protected $attributes;
+    protected $attributes = array();
 
     /**
      * Set the string used to close message representation

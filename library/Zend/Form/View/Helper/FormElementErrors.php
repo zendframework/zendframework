@@ -41,7 +41,7 @@ class FormElementErrors extends AbstractHelper
     protected $messageSeparatorString = '</li><li>';
     /**@-*/
 
-    /**@+
+    /**
      * @var array Default attributes for the open format tag
      */
     protected $attributes = array();

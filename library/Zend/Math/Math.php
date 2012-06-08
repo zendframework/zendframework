@@ -26,7 +26,7 @@ namespace Zend\Math;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Math extends BigInteger
+class Math
 {
     /**
      * Generate random bytes using OpenSSL or Mcrypt and mt_rand() as fallback
@@ -110,27 +110,5 @@ class Math extends BigInteger
             return "\x00" . $long;
         }
         return $long;
-    }
-
-    /**
-     * Translate a binary form into a big integer string
-     *
-     * @param string $binary
-     * @return string
-     */
-    public function fromBinary($binary)
-    {
-        return $this->_math->binaryToInteger($binary);
-    }
-
-    /**
-     * Translate a big integer string into a binary form
-     *
-     * @param string $integer
-     * @return string
-     */
-    public function toBinary($integer)
-    {
-        return $this->_math->integerToBinary($integer);
     }
 }

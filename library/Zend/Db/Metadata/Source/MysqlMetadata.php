@@ -21,6 +21,31 @@ use Zend\Db\Metadata\MetadataInterface,
  */
 class MysqlMetadata extends AbstractSource
 {
+    protected function fetchSchemaData()
+    {
+        $platform = $this->adapter->getPlatform();
+
+        $isColumns = array(
+            'SCHEMA_NAME',
+        );
+
+        array_walk($isColumns, function (&$c) use ($platform) { $c = $platform->quoteIdentifier($c); });
+
+        $sql = 'SELECT ' . implode(', ', $isColumns)
+             . ' FROM ' . $platform->quoteIdentifierChain(array('INFORMATION_SCHEMA', 'SCHEMATA'))
+             . ' WHERE ' . $platform->quoteIdentifier('SCHEMA_NAME')
+             . ' NOT IN (' . $platform->quoteValueList(array('INFORMATION_SCHEMA', 'MYSQL')) . ')';
+
+        $results = $this->adapter->query($sql, Adapter::QUERY_MODE_EXECUTE);
+
+        $schemas = array();
+        foreach ($results->toArray() as $row) {
+            $schemas[] = $row['SCHEMA_NAME'];
+        }
+
+        return $schemas;
+    }
+
     protected function fetchTableNameData($schema)
     {
         $platform = $this->adapter->getPlatform();

@@ -58,7 +58,9 @@ abstract class AbstractSource implements MetadataInterface
      */
     public function getSchemas()
     {
-        // TODO: Implement getSchemas() method.
+        $this->loadSchemaData();
+
+        return $this->data['schemas'];
     }
 
     /**
@@ -482,6 +484,15 @@ abstract class AbstractSource implements MetadataInterface
             }
             $data = &$data[$key];
         }
+    }
+
+    protected function loadSchemaData()
+    {
+        if (isset($this->data['schemas'])) {
+            return;
+        }
+        $this->prepareDataHierarchy('schemas');
+        $this->data['schemas'] = $this->fetchSchemaData();
     }
 
     protected function loadTableNameData($schema)

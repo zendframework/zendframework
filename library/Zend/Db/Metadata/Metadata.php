@@ -169,7 +169,7 @@ class Metadata implements MetadataInterface
      */
     public function getSchemas()
     {
-        // TODO: Implement getSchemas() method.
+        return $this->source->getSchemas();
     }
 
     /**

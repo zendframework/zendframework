@@ -201,7 +201,7 @@ class ConstraintObject
      */
     public function isPrimaryKey()
     {
-        return (strtoupper($this->type) == 'PRIMARY');
+        return (strtoupper($this->type) == 'PRIMARY KEY');
     }
 
     /**

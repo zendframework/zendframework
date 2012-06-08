@@ -75,6 +75,17 @@ class FormElementErrorsTest extends CommonTestCase
         $this->assertContains('ul class="error"', $markup);
     }
 
+    public function testCanSpecifyAttributesForOpeningTagUsingInvoke()
+    {
+        $helper = $this->helper;
+        $messages = $this->getMessageList();
+        $element  = new Element('foo');
+        $element->setMessages($messages);
+
+        $markup = $helper($element, array('class' => 'error'));
+        $this->assertContains('ul class="error"', $markup);
+    }
+
     public function testCanSpecifyAlternateMarkupStringsViaSetters()
     {
         $messages = $this->getMessageList();
@@ -83,10 +94,22 @@ class FormElementErrorsTest extends CommonTestCase
 
         $this->helper->setMessageOpenFormat('<div%s><span>')
                      ->setMessageCloseString('</span></div>')
-                     ->setMessageSeparatorString('</span><span>');
+                     ->setMessageSeparatorString('</span><span>')
+                     ->setAttributes(array('class' => 'error'));
+
+        $markup = $this->helper->render($element);
+        $this->assertRegexp('#<div class="error">\s*<span>First error message</span>\s*<span>Second error message</span>\s*<span>Third error message</span>\s*</div>#s', $markup);
+    }
+
+    public function testSpecifiedAttributesOverrideDefaults()
+    {
+        $messages = $this->getMessageList();
+        $element  = new Element('foo');
+        $element->setMessages($messages);
+        $element->setAttributes(array('class' => 'foo'));
 
         $markup = $this->helper->render($element, array('class' => 'error'));
-        $this->assertRegexp('#<div class="error">\s*<span>First error message</span>\s*<span>Second error message</span>\s*<span>Third error message</span>\s*</div>#s', $markup);
+        $this->assertContains('ul class="error"', $markup);
     }
 
     public function testRendersNestedMessageSetsAsAFlatList()
@@ -106,4 +129,12 @@ class FormElementErrorsTest extends CommonTestCase
         $markup = $this->helper->render($element, array('class' => 'error'));
         $this->assertRegexp('#<ul class="error">\s*<li>First validator message</li>\s*<li>Second validator first message</li>\s*<li>Second validator second message</li>\s*</ul>#s', $markup);
     }
+
+    public function testCallingTheHelperToRenderInvokeCanReturnObject()
+    {
+        $helper = $this->helper;
+        $this->assertEquals($helper(), $helper);
+    }
+
+
 }

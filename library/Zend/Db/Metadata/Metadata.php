@@ -84,7 +84,7 @@ class Metadata implements MetadataInterface
      */
     public function getTables($schema = null)
     {
-        return $this->source->getTables();
+        return $this->source->getTables($schema);
     }
     
     /**
@@ -95,7 +95,7 @@ class Metadata implements MetadataInterface
      */
     public function getViews($schema = null)
     {
-        return $this->source->getViews();
+        return $this->source->getViews($schema);
     }
 
     /**
@@ -107,7 +107,7 @@ class Metadata implements MetadataInterface
      */
     public function getTriggers($schema = null)
     {
-        return $this->source->getTriggers();
+        return $this->source->getTriggers($schema);
     }
 
     /**
@@ -133,7 +133,7 @@ class Metadata implements MetadataInterface
      */
     public function getColumns($table, $schema = null)
     {
-        return $this->source->getColumns($table);
+        return $this->source->getColumns($table, $schema);
     }
 
     /**
@@ -147,7 +147,7 @@ class Metadata implements MetadataInterface
      */
     public function getConstraintKeys($constraint, $table, $schema = null)
     {
-        return $this->source->getConstraintKeys($constraint, $table);
+        return $this->source->getConstraintKeys($constraint, $table, $schema);
     }
 
     /**
@@ -205,7 +205,7 @@ class Metadata implements MetadataInterface
      */
     public function getViewNames($schema = null)
     {
-        // TODO: Implement getViewNames() method.
+        return $this->source->getTable($schema);
     }
 
     /**
@@ -217,7 +217,7 @@ class Metadata implements MetadataInterface
      */
     public function getView($viewName, $schema = null)
     {
-        // TODO: Implement getView() method.
+        return $this->source->getView($viewName, $schema);
     }
 
     /**
@@ -264,7 +264,7 @@ class Metadata implements MetadataInterface
      */
     public function getColumn($columnName, $table, $schema = null)
     {
-        // TODO: Implement getColumn() method.
+        return $this->source->getColumn($columnName, $table, $schema);
     }
 
 }

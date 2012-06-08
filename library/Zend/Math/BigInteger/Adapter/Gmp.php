@@ -23,11 +23,11 @@ use Zend\Math\BigInteger\Exception as BigIntegerException;
 class Gmp implements AdapterInterface
 {
     /**
-     * Create GMP number resource representing big integer from string
+     * Create string representing big integer in decimal form from arbitrary integer format
      *
      * @param string $operand
      * @param integer|null $base
-     * @return bool|resource
+     * @return bool|string
      */
     public function init($operand, $base = null)
     {
@@ -49,7 +49,7 @@ class Gmp implements AdapterInterface
             }
         }
 
-        return gmp_init($sign . $operand, $base);
+        return gmp_strval(gmp_init($sign . $operand, $base));
     }
 
     /**

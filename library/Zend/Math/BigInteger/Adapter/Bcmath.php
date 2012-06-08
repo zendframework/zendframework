@@ -32,7 +32,7 @@ class Bcmath implements AdapterInterface
     }
 
     /**
-     * Create string representing big integer from various formats
+     * Create string representing big integer in decimal form from arbitrary integer format
      *
      * @param string $operand
      * @param int|null $base

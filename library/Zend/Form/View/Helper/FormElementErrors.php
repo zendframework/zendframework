@@ -41,6 +41,11 @@ class FormElementErrors extends AbstractHelper
     protected $messageSeparatorString = '</li><li>';
     /**@-*/
 
+    /**@+
+     * @var array Default attributes for the open format tag
+     */
+    protected $attributes;
+
     /**
      * Set the string used to close message representation
      *
@@ -108,9 +113,31 @@ class FormElementErrors extends AbstractHelper
     }
 
     /**
+     * Set the attributes that will go on the message open format
+     *
+     * @param array key value pairs of attributes
+     * @return FormElementErrors
+     */
+    public function setAttributes(array $attributes)
+    {
+        $this->attributes = $attributes;
+    }
+
+    /**
+     * Get the attributes that will go on the message open format
+     *
+     * @return array
+     */
+    public function getAttributes()
+    {
+        return $this->attributes;
+    }
+
+    /**
      * Render validation errors for the provided $element
      * 
      * @param  ElementInterface $element 
+     * @param  array $attributes
      * @return string
      */
     public function render(ElementInterface $element, array $attributes = array())
@@ -128,6 +155,7 @@ class FormElementErrors extends AbstractHelper
         }
 
         // Prepare attributes for opening tag
+        $attributes = array_merge($this->attributes, $attributes);
         $attributes = $this->createAttributesString($attributes);
         if (!empty($attributes)) {
             $attributes = ' ' . $attributes;
@@ -151,13 +179,17 @@ class FormElementErrors extends AbstractHelper
     /**
      * Invoke helper as functor
      *
-     * Proxies to {@link render()}.
+     * Proxies to {@link render()} if an element is passed.
      * 
      * @param  ElementInterface $element 
-     * @return string
+     * @param  array $attributes
+     * @return string|FormElementErrors
      */
-    public function __invoke(ElementInterface $element)
+    public function __invoke(ElementInterface $element = null, array $attributes = array())
     {
-        return $this->render($element);
+        if ($element) {
+            return $this->render($element, $attributes);
+        }
+        return $this;
     }
 }

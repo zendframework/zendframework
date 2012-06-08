@@ -22,7 +22,6 @@
 namespace ZendTest\Form\View\Helper;
 
 use Zend\Form\Element;
-use Zend\Form\Exception;
 use Zend\Form\View\Helper\FormCheckbox as FormCheckboxHelper;
 
 /**
@@ -81,6 +80,9 @@ class FormCheckboxTest extends CommonTestCase
         $this->assertRegexp('#type="hidden"\s+name="foo"\s+value="0"#', $markup);
     }
 
+    /**
+     * @expectedException Zend\Form\Exception\DomainException
+     */
     public function testOptionsAttributeDoesNotHaveTwoValues()
     {
         $element = new Element('foo');
@@ -89,12 +91,8 @@ class FormCheckboxTest extends CommonTestCase
             'unchecked',
             'badoption',
         );
+
         $element->setAttribute('options', $options);
-        try {
-            $markup  = $this->helper->render($element);
-            $this->fail('An expected Exception\DomainException was not raised');
-        } catch (Exception\DomainException $e) {
-            //
-        }
+        $markup  = $this->helper->render($element);
     }
 }

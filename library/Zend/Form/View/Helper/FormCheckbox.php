@@ -35,11 +35,6 @@ use Zend\Form\Exception;
 class FormCheckbox extends FormInput
 {
     /**
-     * @var FormInput
-     */
-    protected $inputHelper;
-
-    /**
      * Render a form <input> element from the provided $element
      * 
      * @param  ElementInterface $element 
@@ -47,7 +42,7 @@ class FormCheckbox extends FormInput
      */
     public function render(ElementInterface $element)
     {
-        $name = static::getName($element);
+        $name = $element->getName();
         if (empty($name)) {
             throw new Exception\DomainException(sprintf(
                 '%s requires that the element has an assigned name; none discovered',
@@ -56,8 +51,11 @@ class FormCheckbox extends FormInput
         }
 
         // default checked/unchecked values
-        $attributes = $element->getAttributes() + array(
-            'options' => array(1, 0),
+        $attributes = array_merge(
+            array(
+                'options' => array(1, 0),
+            ),
+            $element->getAttributes()
         );
 
         if (!is_array($attributes['options']) && !$attributes['options'] instanceof Traversable) { 
@@ -80,21 +78,13 @@ class FormCheckbox extends FormInput
         $attributes['name']    = $name;
         $attributes['checked'] = '';
         $attributes['type']    = $this->getInputType();
-        $inputHelper           = $this->getInputHelper();
         $closingBracket        = $this->getInlineClosingBracket();
 
-        foreach ($options as $index => $value) {
-            // first item is the checked value
-            if ($index === 0) {
-                if (isset($attributes['value']) && $attributes['value'] == $value) {
-                    $attributes['checked'] = 'checked';
-                }
-
-                $attributes['value'] = $value;
-            } else {
-                $uncheckedValue = $value;
-            }
+        list($checkedValue, $uncheckedValue) = $options;
+        if (isset($attributes['value']) && $attributes['value'] == $checkedValue) {
+            $attributes['checked'] = 'checked';
         }
+        $attributes['value'] = $checkedValue;
 
         $hiddenAttributes = array(
             'name'  => $attributes['name'],
@@ -135,38 +125,5 @@ class FormCheckbox extends FormInput
     protected function getInputType()
     {
         return 'checkbox';
-    }
-
-    /**
-     * Retrieve the FormInput helper
-     * 
-     * @return FormInput
-     */
-    protected function getInputHelper()
-    {
-        if ($this->inputHelper) {
-            return $this->inputHelper;
-        }
-
-        if ($this->view instanceof Pluggable) {
-            $this->inputHelper = $this->view->plugin('form_input');
-        }
-
-        if (!$this->inputHelper instanceof FormInput) {
-            $this->inputHelper = new FormInput();
-        }
-
-        return $this->inputHelper;
-    }
-
-    /**
-     * Get element name
-     * 
-     * @param  ElementInterface $element 
-     * @return string
-     */
-    protected static function getName(ElementInterface $element)
-    {
-        return $element->getName();
     }
 }

@@ -494,8 +494,12 @@ class HeadScript extends Placeholder\Container\Standalone
         } else {
             $useCdata = $this->useCdata ? true : false;
         }
-        $escapeStart = $this->escapeScript() ? ($useCdata) ? '//<![CDATA[' : '//<!--' : '';
-        $escapeEnd   = $this->escapeScript() ? ($useCdata) ? '//]]>'       : '//-->' : '';
+
+        $escapeStart = $escapeEnd   = '';
+        if ($this->escapeScript()) {
+            $escapeStart = ($useCdata) ? '//<![CDATA[' : '//<!--';
+            $escapeEnd   = ($useCdata) ? '//]]>' : '//-->';
+        }
 
         $items = array();
         $this->getContainer()->ksort();

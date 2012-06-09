@@ -549,4 +549,11 @@ abstract class AbstractSource implements MetadataInterface
         $this->prepareDataHierarchy('constraint_references', $schema);
         $this->data['constraint_references'][$schema] = $this->fetchConstraintReferences($schema);
     }
+
+    abstract protected function fetchSchemaData();
+    abstract protected function fetchTableNameData($schema);
+    abstract protected function fetchColumnData($table, $schema);
+    abstract protected function fetchConstraintDataNames($schema);
+    abstract protected function fetchConstraintDataKeys($schema);
+    abstract protected function fetchConstraintReferences($schema);
 }

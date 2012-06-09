@@ -81,13 +81,6 @@ class SvgTest extends TestCommon
         $this->renderer->setResource($svgResource, 10);
     }
 
-    public function testObjectSvgResource()
-    {
-        $this->setExpectedException('Zend\Barcode\Renderer\Exception\ExceptionInterface');
-        $svgResource = new \StdClass();
-        $this->renderer->setResource($svgResource);
-    }
-
     public function testDrawReturnResource()
     {
         Barcode\Barcode::setBarcodeFont(__DIR__ . '/../Object/_fonts/Vera.ttf');

@@ -20,6 +20,8 @@
  */
 
 namespace Zend\Service\Amazon;
+
+use DOMElement;
 use Zend\Service\Amazon\Exception;
 
 /**
@@ -112,17 +114,12 @@ class Item
     /**
      * Parse the given <Item> element
      *
-     * @param  null|DOMElement $dom
-     * @return void
-     * @throws	\Zend\Service\Amazon\Exception
+     * @param DOMElement $dom
      * 
      * @group ZF-9547
      */
-    public function __construct($dom)
+    public function __construct(DOMElement $dom)
     {
-        if (!$dom instanceof \DOMElement) {
-            throw new Exception\InvalidArgumentException('Item passed to Amazon\Item must be instace of DOMElement');
-        }
         $xpath = new \DOMXPath($dom->ownerDocument);
         $xpath->registerNamespace('az', 'http://webservices.amazon.com/AWSECommerceService/2011-08-01');
         $this->ASIN = $xpath->query('./az:ASIN/text()', $dom)->item(0)->data;

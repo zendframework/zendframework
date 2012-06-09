@@ -927,7 +927,7 @@ class SegmentInfo implements TermsStreamInterface
      * @throws \Zend\Search\Lucene\Exception\InvalidArgumentException
      * @return array
      */
-    public function termDocs(Term $term, $shift = 0, $docsFilter = null)
+    public function termDocs(Term $term, $shift = 0, DocsFilter $docsFilter = null)
     {
         $termInfo = $this->getTermInfo($term);
 
@@ -944,12 +944,6 @@ class SegmentInfo implements TermsStreamInterface
         $result = array();
 
         if ($docsFilter !== null) {
-            if (!$docsFilter instanceof DocsFilter) {
-                throw new InvalidArgumentException(
-                	'Documents filter must be an instance of Zend\Search\Lucene\Index\DocsFilter or null.'
-                );
-            }
-
             if (isset($docsFilter->segmentFilters[$this->_name])) {
                 // Filter already has some data for the current segment
 
@@ -1049,7 +1043,7 @@ class SegmentInfo implements TermsStreamInterface
      * @param \Zend\Search\Lucene\Index\DocsFilter|null $docsFilter
      * @return \Zend\Search\Lucene\Index\TermInfo
      */
-    public function termFreqs(Term $term, $shift = 0, $docsFilter = null)
+    public function termFreqs(Term $term, $shift = 0, DocsFilter $docsFilter = null)
     {
         $termInfo = $this->getTermInfo($term);
 
@@ -1068,12 +1062,6 @@ class SegmentInfo implements TermsStreamInterface
         $result = array();
 
         if ($docsFilter !== null) {
-            if (!$docsFilter instanceof DocsFilter) {
-                throw new InvalidArgumentException(
-                	'Documents filter must be an instance of Zend\Search\Lucene\Index\DocsFilter or null.'
-                );
-            }
-
             if (isset($docsFilter->segmentFilters[$this->_name])) {
                 // Filter already has some data for the current segment
 
@@ -1175,7 +1163,7 @@ class SegmentInfo implements TermsStreamInterface
      * @param \Zend\Search\Lucene\Index\DocsFilter|null $docsFilter
      * @return \Zend\Search\Lucene\Index\TermInfo
      */
-    public function termPositions(Term $term, $shift = 0, $docsFilter = null)
+    public function termPositions(Term $term, $shift = 0, DocsFilter $docsFilter = null)
     {
         $termInfo = $this->getTermInfo($term);
 
@@ -1194,12 +1182,6 @@ class SegmentInfo implements TermsStreamInterface
 
 
         if ($docsFilter !== null) {
-            if (!$docsFilter instanceof DocsFilter) {
-                throw new InvalidArgumentException(
-                	'Documents filter must be an instance of Zend_Search_Lucene_Index_DocsFilter or null.'
-                );
-            }
-
             if (isset($docsFilter->segmentFilters[$this->_name])) {
                 // Filter already has some data for the current segment
 

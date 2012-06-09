@@ -54,8 +54,7 @@ class PatternFactory
         }
         if (is_array($options)) {
             $options = new Pattern\PatternOptions($options);
-        }
-        if (!$options instanceof Pattern\PatternOptions) {
+        } elseif (!$options instanceof Pattern\PatternOptions) {
             throw new Exception\InvalidArgumentException(sprintf(
                 '%s expects an array, Traversable object, or %s\Pattern\PatternOptions object; received "%s"',
                 __METHOD__,

@@ -264,6 +264,13 @@ class ServiceManager implements ServiceLocatorInterface
             do {
                 $cName = $this->aliases[$cName];
             } while ($this->hasAlias($cName));
+
+            if (!$this->has($cName)) {
+                throw new Exception\ServiceNotFoundException(sprintf(
+                    'An alias "%s" was requested but no service could be found.',
+                    $name
+                ));
+            }
         }
 
         $instance = null;
@@ -475,10 +482,6 @@ class ServiceManager implements ServiceLocatorInterface
 
         if ($this->allowOverride === false && $this->hasAlias($alias)) {
             throw new Exception\InvalidServiceNameException('An alias by this name already exists');
-        }
-
-        if (!$this->has($nameOrAlias)) {
-            throw new Exception\ServiceNotFoundException('A target service or target alias could not be located');
         }
 
         $this->aliases[$alias] = $nameOrAlias;

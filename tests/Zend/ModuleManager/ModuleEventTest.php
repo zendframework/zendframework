@@ -93,10 +93,4 @@ class ModuleEventTest extends TestCase
         $test = $this->event->getConfigListener();
         $this->assertSame($configListener, $test);
     }
-
-    public function testPassingNonConfigMergerToSetConfigListenerRaisesException()
-    {
-        $this->setExpectedException('Zend\ModuleManager\Exception\InvalidArgumentException');
-        $this->event->setConfigListener(new StdClass);
-    }
 }

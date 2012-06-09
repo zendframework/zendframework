@@ -393,15 +393,10 @@ class FileGenerator extends AbstractGenerator
     public function setClass($class)
     {
         if (is_array($class)) {
-            $class     = ClassGenerator::fromArray($class);
-            $className = $class->getName();
-        }
-
-        if (is_string($class)) {
+            $class = ClassGenerator::fromArray($class);
+        } elseif (is_string($class)) {
             $class = new ClassGenerator($class);
-        }
-
-        if (!$class instanceof ClassGenerator) {
+        } elseif (!$class instanceof ClassGenerator) {
             throw new Exception\InvalidArgumentException(
                 'setClass() is expecting either a string, array or an instance of Zend\Code\Generator\ClassGenerator'
             );

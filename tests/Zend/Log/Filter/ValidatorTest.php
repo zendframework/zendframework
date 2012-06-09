@@ -37,12 +37,6 @@ use Zend\Log\Logger,
  */
 class ValidatorTest extends \PHPUnit_Framework_TestCase
 {
-    public function testRecognizesInvalidValidator()
-    {
-        $this->setExpectedException('Zend\Log\Exception\InvalidArgumentException', 'Expected Zend\Validator object');
-        new Validator('invalid');
-    }
-
     public function testValidatorFilter()
     {
         $filter = new Validator(new Alnum());

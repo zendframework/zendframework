@@ -239,11 +239,8 @@ class Logger implements LoggerInterface, Pluggable
      * @throws Exception\InvalidArgumentException
      * @return Logger
      */
-    public function setWriters($writers)
+    public function setWriters(SplPriorityQueue $writers)
     {
-        if (!$writers instanceof SplPriorityQueue) {
-            throw new Exception\InvalidArgumentException('Writers must be a SplPriorityQueue of Zend\Log\Writer');
-        }
         foreach ($writers->toArray() as $writer) {
             if (!$writer instanceof Writer\WriterInterface) {
                 throw new Exception\InvalidArgumentException('Writers must be a SplPriorityQueue of Zend\Log\Writer');

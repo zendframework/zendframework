@@ -54,10 +54,6 @@ class Mysqli implements DriverInterface
             $connection = new Connection($connection);
         }
 
-        if (!$connection instanceof Connection) {
-            throw new Exception\InvalidArgumentException('$connection must be an array of parameters or a Pdo\Connection object');
-        }
-
         $this->registerConnection($connection);
         $this->registerStatementPrototype(($statementPrototype) ?: new Statement());
         $this->registerResultPrototype(($resultPrototype) ?: new Result());

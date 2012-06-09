@@ -238,8 +238,7 @@ class App
     {
         if ($client === null) {
             $client = new Http\Client();
-        }
-        if (!$client instanceof Http\Client) {
+        } elseif (!$client instanceof Http\Client) {
             throw new App\HttpException(
                 'Argument is not an instance of Zend\Http\Client.');
         }

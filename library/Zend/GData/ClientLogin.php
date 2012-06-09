@@ -84,9 +84,7 @@ class ClientLogin
 
         if ($client == null) {
             $client = new HttpClient();
-        }
-        
-        if (!$client instanceof \Zend\Http\Client) {
+        } elseif (!$client instanceof \Zend\Http\Client) {
             throw new App\HttpException(
                     'Client is not an instance of Zend\Http\Client.');
         }

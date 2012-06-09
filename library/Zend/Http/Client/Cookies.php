@@ -137,12 +137,8 @@ class Cookies //implements ParametersInterface
      * @param Response $response
      * @param Uri\Uri|string $ref_uri Requested URI
      */
-    public function addCookiesFromResponse($response, $ref_uri)
+    public function addCookiesFromResponse(Response $response, $ref_uri)
     {
-        if (!$response instanceof Response) {
-            throw new Exception\InvalidArgumentException('$response is expected to be a Response object');
-        }
-
         $cookie_hdrs = $response->headers()->get('Set-Cookie');
 
         if (is_array($cookie_hdrs)) {
@@ -182,8 +178,7 @@ class Cookies //implements ParametersInterface
     {
         if (is_string($uri)) {
             $uri = Uri\UriFactory::factory($uri, 'http');
-        }
-        if (!$uri instanceof Uri\Uri) {
+        } elseif (!$uri instanceof Uri\Uri) {
             throw new Exception\InvalidArgumentException("Invalid URI string or object passed");
         }
 
@@ -221,9 +216,7 @@ class Cookies //implements ParametersInterface
     {
         if (is_string($uri)) {
             $uri = Uri\UriFactory::factory($uri, 'http');
-        }
-
-        if (!$uri instanceof Uri\Uri) {
+        } elseif (!$uri instanceof Uri\Uri) {
             throw new Exception\InvalidArgumentException('Invalid URI specified');
         }
 

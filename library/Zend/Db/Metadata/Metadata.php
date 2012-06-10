@@ -228,7 +228,7 @@ class Metadata implements MetadataInterface
      */
     public function getTriggerNames($schema = null)
     {
-        // TODO: Implement getTriggerNames() method.
+        return $this->source->getTriggerNames($schema);
     }
 
     /**
@@ -240,7 +240,7 @@ class Metadata implements MetadataInterface
      */
     public function getTrigger($triggerName, $schema = null)
     {
-        // TODO: Implement getTrigger() method.
+        return $this->source->getTrigger($triggerName, $schema);
     }
 
     /**

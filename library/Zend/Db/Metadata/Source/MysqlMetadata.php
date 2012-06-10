@@ -290,4 +290,58 @@ class MysqlMetadata extends AbstractSource
 
         return $data;
     }
+    
+    protected function fetchTriggerData($schema)
+    {
+        $platform = $this->adapter->getPlatform();
+        
+        $isColumns = array(
+//            'TRIGGER_CATALOG',
+//            'TRIGGER_SCHEMA',
+            'TRIGGER_NAME',
+            'EVENT_MANIPULATION',
+            'EVENT_OBJECT_CATALOG',
+            'EVENT_OBJECT_SCHEMA',
+            'EVENT_OBJECT_TABLE',
+            'ACTION_ORDER',
+            'ACTION_CONDITION',
+            'ACTION_STATEMENT',
+            'ACTION_ORIENTATION',
+            'ACTION_TIMING',
+            'ACTION_REFERENCE_OLD_TABLE',
+            'ACTION_REFERENCE_NEW_TABLE',
+            'ACTION_REFERENCE_OLD_ROW',
+            'ACTION_REFERENCE_NEW_ROW',
+            'CREATED',
+        );
+
+        array_walk($isColumns, function (&$c) use ($platform) {
+            $c = $platform->quoteIdentifier($c);
+        });
+
+        $sql = 'SELECT ' . implode(', ', $isColumns)
+        . ' FROM ' . $platform->quoteIdentifierInFragment('INFORMATION_SCHEMA.TRIGGERS')
+        . ' WHERE ';
+        
+        if ($schema != self::DEFAULT_SCHEMA) {
+            $sql .= $platform->quoteIdentifier('TRIGGER_SCHEMA')
+            . ' = ' . $platform->quoteValue($schema);
+        } else {
+            $sql .= $platform->quoteIdentifier('TRIGGER_SCHEMA')
+            . ' != ' . $platform->quoteValue('INFORMATION_SCHEMA');
+        }
+
+        $results = $this->adapter->query($sql, Adapter::QUERY_MODE_EXECUTE);
+
+        $data = array();
+        foreach ($results->toArray() as $row) {
+            $row = array_change_key_case($row, CASE_LOWER);
+            if (null !== $row['created']) {
+                $row['created'] = new \DateTime($row['created']);
+            }
+            $data[$row['trigger_name']] = $row;
+        }
+
+        return $data;
+    }
 }

@@ -450,22 +450,34 @@ abstract class AbstractSource implements MetadataInterface
      * Get trigger names
      *
      * @param string $schema
-     * @param string $database
      */
     public function getTriggerNames($schema = null)
     {
-        // TODO: Implement getTriggerNames() method.
+        if ($schema === null) {
+            $schema = $this->defaultSchema;
+        }
+
+        $this->loadTriggerData($schema);
+
+        return array_keys($this->data['triggers'][$schema]);
     }
 
     /**
      * Get triggers
      *
      * @param string $schema
-     * @param string $database
      */
     public function getTriggers($schema = null)
     {
-        // TODO: Implement getTriggers() method.
+        if ($schema === null) {
+            $schema = $this->defaultSchema;
+        }
+
+        $triggers = array();
+        foreach ($this->getTriggerNames($schema) as $triggerName) {
+            $triggers[] = $this->getTrigger($triggerName, $schema);
+        }
+        return $triggers;
     }
 
     /**
@@ -473,11 +485,40 @@ abstract class AbstractSource implements MetadataInterface
      *
      * @param string $triggerName
      * @param string $schema
-     * @param string $database
      */
     public function getTrigger($triggerName, $schema = null)
     {
-        // TODO: Implement getTrigger() method.
+        if ($schema === null) {
+            $schema = $this->defaultSchema;
+        }
+
+        $this->loadTriggerData($schema);
+
+        if (!isset($this->data['triggers'][$schema][$triggerName])) {
+            throw new \Exception('Trigger "' . $triggerName . '" does not exist');
+        }
+
+        $info = $this->data['triggers'][$schema][$triggerName];
+
+        $trigger = new Object\TriggerObject();
+
+        $trigger->setName($triggerName);
+        $trigger->setEventManipulation($info['event_manipulation']);
+        $trigger->setEventObjectCatalog($info['event_object_catalog']);
+        $trigger->setEventObjectSchema($info['event_object_schema']);
+        $trigger->setEventObjectTable($info['event_object_table']);
+        $trigger->setActionOrder($info['action_order']);
+        $trigger->setActionCondition($info['action_condition']);
+        $trigger->setActionStatement($info['action_statement']);
+        $trigger->setActionOrientation($info['action_orientation']);
+        $trigger->setActionTiming($info['action_timing']);
+        $trigger->setActionReferenceOldTable($info['action_reference_old_table']);
+        $trigger->setActionReferenceNewTable($info['action_reference_new_table']);
+        $trigger->setActionReferenceOldRow($info['action_reference_old_row']);
+        $trigger->setActionReferenceNewRow($info['action_reference_new_row']);
+        $trigger->setCreated($info['created']);
+
+        return $trigger;
     }
 
     /**
@@ -562,10 +603,21 @@ abstract class AbstractSource implements MetadataInterface
         $this->data['constraint_references'][$schema] = $this->fetchConstraintReferences($schema);
     }
 
+    protected function loadTriggerData($schema)
+    {
+        if (isset($this->data['triggers'][$schema])) {
+            return;
+        }
+
+        $this->prepareDataHierarchy('triggers', $schema);
+        $this->data['triggers'][$schema] = $this->fetchTriggerData($schema);
+    }
+
     abstract protected function fetchSchemaData();
     abstract protected function fetchTableNameData($schema);
     abstract protected function fetchColumnData($table, $schema);
     abstract protected function fetchConstraintDataNames($schema);
     abstract protected function fetchConstraintDataKeys($schema);
     abstract protected function fetchConstraintReferences($schema);
+    abstract protected function fetchTriggerData($schema);
 }

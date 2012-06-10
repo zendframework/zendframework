@@ -21,7 +21,8 @@
 
 namespace ZendTest\Mail\Transport;
 
-use Zend\Mail\Message,
+use Zend\Mail\Headers,
+    Zend\Mail\Message,
     Zend\Mail\Transport\Smtp,
     Zend\Mail\Transport\SmtpOptions,
     ZendTest\Mail\TestAsset\SmtpProtocolSpy;
@@ -36,7 +37,9 @@ use Zend\Mail\Message,
  */
 class SmtpTest extends \PHPUnit_Framework_TestCase
 {
+    /** @var Smtp */
     public $transport;
+    /** @var SmtpProtocolSpy */
     public $connection;
 
     public function setUp()
@@ -63,6 +66,34 @@ class SmtpTest extends \PHPUnit_Framework_TestCase
             'X-Foo-Bar' => 'Matthew',
         ));
         return $message;
+    }
+
+    public function testSendMailWithoutMinimalHeaders() {
+        $this->setExpectedException(
+            'Zend\Mail\Transport\Exception\RuntimeException',
+            'transport expects either a Sender or at least one From address in the Message; none provided'
+        );
+        $message = new Message();
+        $message->setBody('testSendMailWithoutMinimalHeaders');
+        $this->transport->send($message);
+    }
+
+    public function testSendMinimalMail() {
+        $headers = new Headers();
+        $headers->addHeaderLine('Date', 'Sun, 10 Jun 2012 20:07:24 +0200');
+        $message = new Message();
+        $message
+            ->setHeaders($headers)
+            ->setSender('ralph.schindler@zend.com', 'Ralph Schindler')
+            ->setBody('testSendMailWithoutMinimalHeaders')
+        ;
+        $expectedMessage = "Date: Sun, 10 Jun 2012 20:07:24 +0200\r\n"
+            . "Sender: Ralph Schindler <ralph.schindler@zend.com>\r\n"
+            . "\r\ntestSendMailWithoutMinimalHeaders";
+
+        $this->transport->send($message);
+
+        $this->assertSame($expectedMessage, $this->connection->getData());
     }
 
     public function testReceivesMailArtifacts()

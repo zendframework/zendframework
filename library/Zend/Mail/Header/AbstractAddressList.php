@@ -208,6 +208,6 @@ abstract class AbstractAddressList implements HeaderInterface
     {
         $name  = $this->getFieldName();
         $value = $this->getFieldValue();
-        return sprintf('%s: %s', $name, $value);
+        return (empty($value)) ? '' : sprintf('%s: %s', $name, $value);
     }
 }

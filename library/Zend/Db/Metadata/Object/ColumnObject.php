@@ -247,6 +247,14 @@ class ColumnObject
     }
 
     /**
+     * @return bool $isNullable
+     */
+    public function isNullable()
+    {
+        return $this->isNullable;
+    }
+
+    /**
      * @return the $dataType
      */
     public function getDataType()
@@ -346,6 +354,14 @@ class ColumnObject
     {
         $this->numericUnsigned = $numericUnsigned;
         return $this;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isNumericUnsigned()
+    {
+        return $this->numericUnsigned;
     }
 
 //    /**

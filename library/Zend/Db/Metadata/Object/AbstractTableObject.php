@@ -15,7 +15,7 @@ namespace Zend\Db\Metadata\Object;
  * @package    Zend_Db
  * @subpackage Metadata
  */
-class TableObject
+abstract class AbstractTableObject
 {
 
     /*
@@ -84,28 +84,6 @@ class TableObject
     }
 
     /**
-     * Get type
-     * 
-     * @return string 
-     */
-    public function getType()
-    {
-        return $this->type;
-    }
-
-    /**
-     * Set type
-     * 
-     * @param  string $type
-     * @return TableObject 
-     */
-    public function setType($type)
-    {
-        $this->type = $type;
-        return $this;
-    }
-
-    /**
      * Set columns
      * 
      * @param array $columns 
@@ -163,25 +141,5 @@ class TableObject
     public function getName()
     {
         return $this->name;
-    }
-
-    /**
-     * Is base table
-     *
-     * @return boolean
-     */
-    public function isBaseTable()
-    {
-        return (strtoupper($this->type) == 'BASE TABLE');
-    }
-
-    /**
-     * Is view
-     *
-     * @return boolean
-     */
-    public function isView()
-    {
-        return (strtoupper($this->type) == 'VIEW');
     }
 }

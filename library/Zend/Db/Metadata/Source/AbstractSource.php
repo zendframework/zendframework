@@ -118,8 +118,20 @@ abstract class AbstractSource implements MetadataInterface
             throw new \Exception('Table "' . $tableName . '" does not exist');
         }
 
-        $table = new Object\TableObject($tableName);
-        $table->setType($this->data['table_names'][$schema][$tableName]);
+        $data = $this->data['table_names'][$schema][$tableName];
+        switch ($data['table_type']) {
+            case 'BASE TABLE':
+                $table = new Object\BaseTableObject($tableName);
+                break;
+            case 'VIEW':
+                $table = new Object\ViewObject($tableName);
+                $table->setViewDefinition($data['view_definition']);
+                $table->setCheckOption($data['check_option']);
+                $table->setIsUpdatable($data['is_updatable']);
+                break;
+            default:
+                throw new \Exception('Table "' . $tableName . '" is of an unsupported type "' . $data['table_type'] . '"');
+        }
         $table->setColumns($this->getColumns($tableName, $schema));
         return $table;
     }

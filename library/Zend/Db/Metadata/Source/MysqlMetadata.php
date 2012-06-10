@@ -51,22 +51,32 @@ class MysqlMetadata extends AbstractSource
         $platform = $this->adapter->getPlatform();
 
         $isColumns = array(
-            'TABLE_NAME',
-            'TABLE_TYPE',
+            'T.TABLE_NAME',
+            'T.TABLE_TYPE',
+            'V.VIEW_DEFINITION',
+            'V.CHECK_OPTION',
+            'V.IS_UPDATABLE',
         );
 
-        array_walk($isColumns, function (&$c) use ($platform) { $c = $platform->quoteIdentifier($c); });
+        array_walk($isColumns, function (&$c) use ($platform) { $c = $platform->quoteIdentifierInFragment($c); });
 
         $sql = 'SELECT ' . implode(', ', $isColumns)
-             . ' FROM ' . $platform->quoteIdentifierChain(array('INFORMATION_SCHEMA', 'TABLES'))
+             . ' FROM ' . $platform->quoteIdentifierInFragment('INFORMATION_SCHEMA.TABLES T')
+
+             . ' LEFT JOIN ' . $platform->quoteIdentifierInFragment('INFORMATION_SCHEMA.VIEWS V')
+             . ' ON ' . $platform->quoteIdentifierInFragment('T.TABLE_SCHEMA')
+             . '  = ' . $platform->quoteIdentifierInFragment('V.TABLE_SCHEMA')
+             . ' AND ' . $platform->quoteIdentifierInFragment('T.TABLE_NAME')
+             . '  = ' . $platform->quoteIdentifierInFragment('V.TABLE_NAME')
+
              . ' WHERE ' . $platform->quoteIdentifier('TABLE_TYPE')
              . ' IN (' . $platform->quoteValueList(array('BASE TABLE', 'VIEW')) . ')';
 
         if ($schema != self::DEFAULT_SCHEMA) {
-            $sql .= ' AND ' . $platform->quoteIdentifier('TABLE_SCHEMA')
+            $sql .= ' AND ' . $platform->quoteIdentifierInFragment('T.TABLE_SCHEMA')
                   . ' = ' . $platform->quoteValue($schema);
         } else {
-            $sql .= ' AND ' . $platform->quoteIdentifier('TABLE_SCHEMA')
+            $sql .= ' AND ' . $platform->quoteIdentifierInFragment('T.TABLE_SCHEMA')
                   . ' != ' . $platform->quoteValue('INFORMATION_SCHEMA');
         }
 
@@ -74,7 +84,12 @@ class MysqlMetadata extends AbstractSource
 
         $tables = array();
         foreach ($results->toArray() as $row) {
-            $tables[$row['TABLE_NAME']] = $row['TABLE_TYPE'];
+            $tables[$row['TABLE_NAME']] = array(
+                'table_type' => $row['TABLE_TYPE'],
+                'view_definition' => $row['VIEW_DEFINITION'],
+                'check_option' => $row['CHECK_OPTION'],
+                'is_updatable' => ('YES' == $row['IS_UPDATABLE']),
+            );
         }
 
         return $tables;

@@ -34,7 +34,7 @@ class MysqlMetadata extends AbstractSource
         $sql = 'SELECT ' . implode(', ', $isColumns)
              . ' FROM ' . $platform->quoteIdentifierChain(array('INFORMATION_SCHEMA', 'SCHEMATA'))
              . ' WHERE ' . $platform->quoteIdentifier('SCHEMA_NAME')
-             . ' NOT IN (' . $platform->quoteValueList(array('INFORMATION_SCHEMA', 'MYSQL')) . ')';
+             . ' != ' . $platform->quoteValue('INFORMATION_SCHEMA');
 
         $results = $this->adapter->query($sql, Adapter::QUERY_MODE_EXECUTE);
 

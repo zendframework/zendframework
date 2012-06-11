@@ -19,9 +19,9 @@
         </para>
 
         <programlisting language="php"><![CDATA[
-$service = Zend_Gdata_Analytics::AUTH_SERVICE_NAME;
-$client = Zend_Gdata_ClientLogin::getHttpClient($email, $password, $service);
-$analytics = new Zend_Gdata_Analytics($client);  
+$service = Zend\GData\Analytics::AUTH_SERVICE_NAME;
+$client = Zend\GData\ClientLogin::getHttpClient($email, $password, $service);
+$analytics = new Zend\GData\Analytics($client);  
 $accounts = $analytics->getAccountFeed();
 
 foreach ($accounts as $account) {  
@@ -31,8 +31,8 @@ foreach ($accounts as $account) {
 
         <para>
             The <command>$analytics->getAccountFeed()</command> call, results in a 
-            <classname>Zend_Gdata_Analytics_AccountFeed</classname> object that  contains
-            <classname>Zend_Gdata_Analytics_AccountEntry</classname> objects. Each of this
+            <classname>Zend\GData\Analytics\AccountFeed</classname> object that  contains
+            <classname>Zend\GData\Analytics\AccountEntry</classname> objects. Each of this
             objects represent a google analytics account.
         </para>
     </section>
@@ -43,7 +43,7 @@ foreach ($accounts as $account) {
         <para>
             Besides the account feed, google offers a data feed, to retrieve report data using
             the Google Analytics <acronym>API</acronym>. To easily request for these reports,
-            Zend_Gdata_Analytics offers a simple query construction interface. You can use all
+            Zend\GData\Analytics offers a simple query construction interface. You can use all
             the <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://code.google.com/intl/de-CH/apis/analytics/docs/gdata/dimsmets/dimsmets.html">metrics
             and dimensions</link> specified by the API. Additionaly you can apply some <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://code.google.com/intl/de-CH/apis/analytics/docs/gdata/v2/gdataReferenceDataFeed.html#filters">filters</link>
             to retrieve some <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://code.google.com/intl/de-CH/apis/analytics/docs/gdata/gdataCommonQueries.html">common
@@ -52,15 +52,15 @@ foreach ($accounts as $account) {
 
         <programlisting language="php"><![CDATA[
 $query = $service->newDataQuery()->setProfileId($profileId)  
-  ->addMetric(Zend_Gdata_Analytics_DataQuery::METRIC_BOUNCES)   
-  ->addMetric(Zend_Gdata_Analytics_DataQuery::METRIC_VISITS) 
-  ->addDimension(Zend_Gdata_Analytics_DataQuery::DIMENSION_MEDIUM)  
-  ->addDimension(Zend_Gdata_Analytics_DataQuery::DIMENSION_SOURCE)  
+  ->addMetric(Zend\GData\Analytics\DataQuery::METRIC_BOUNCES)
+  ->addMetric(Zend\GData\Analytics\DataQuery::METRIC_VISITS)
+  ->addDimension(Zend\GData\Analytics\DataQuery::DIMENSION_MEDIUM)
+  ->addDimension(Zend\GData\Analytics\DataQuery::DIMENSION_SOURCE)
   ->addFilter("ga:browser==Firefox")  
   ->setStartDate('2011-05-01')   
   ->setEndDate('2011-05-31')   
-  ->addSort(Zend_Gdata_Analytics_DataQuery::METRIC_VISITS, true)  
-  ->addSort(Zend_Gdata_Analytics_DataQuery::METRIC_BOUNCES, false)  
+  ->addSort(Zend\GData\Analytics\DataQuery::METRIC_VISITS, true)
+  ->addSort(Zend\GData\Analytics\DataQuery::METRIC_BOUNCES, false)
   ->setMaxResults(50); 
   
 $result = $analytics->getDataFeed($query);

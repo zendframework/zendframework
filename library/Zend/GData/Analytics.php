@@ -50,7 +50,7 @@ class Analytics extends GData
         $this->registerPackage('Zend_Gdata_Analytics');
         $this->registerPackage('Zend_Gdata_Analytics_Extension');
         parent::__construct($client, $applicationId);
-        $this->_httpClient->setParameterPost('service', self::AUTH_SERVICE_NAME);
+        $this->_httpClient->setParameterPost(array('service' => self::AUTH_SERVICE_NAME));
     }
 
     /**
@@ -61,7 +61,7 @@ class Analytics extends GData
     public function getAccountFeed()
     {
         $uri = self::ANALYTICS_ACCOUNT_FEED_URI . '/default?prettyprint=true';
-        return parent::getFeed($uri, 'Zend_Gdata_Analytics_AccountFeed');
+        return parent::getFeed($uri, 'Zend\GData\Analytics\AccountFeed');
     }
 
     /**
@@ -70,16 +70,14 @@ class Analytics extends GData
      * @param mixed $location
      * @return Analytics\DataFeed
      */
-    public function getDataFeed($location)
+    public function getDataFeed($location = self::ANALYTICS_FEED_URI)
     {
-		if ($location == null) {
-            $uri = self::ANALYTICS_FEED_URI;
-        } elseif ($location instanceof Query) {
+		if ($location instanceof Query) {
             $uri = $location->getQueryUrl();
         } else {
             $uri = $location;
         }
-        return parent::getFeed($uri, 'Zend_Gdata_Analytics_DataFeed');
+        return parent::getFeed($uri, 'Zend\GData\Analytics\DataFeed');
     }
 
     /**

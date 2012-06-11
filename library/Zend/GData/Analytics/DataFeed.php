@@ -42,7 +42,7 @@ class DataFeed extends GData\Feed
      *
      * @var string
      */
-    protected $_feedClassName = 'Zend_Gdata_Analytics_DataFeed';
+    protected $_feedClassName = 'Zend\GData\Analytics\DataFeed';
 
     public function __construct($element = null)
     {

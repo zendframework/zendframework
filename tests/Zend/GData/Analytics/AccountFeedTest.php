@@ -21,7 +21,6 @@
 
 namespace ZendTest\GData\Analytics;
 
-use Zend\GData\Analytics\AccountEntry;
 use Zend\GData\Analytics\AccountFeed;
 
 /**
@@ -49,10 +48,10 @@ class AccountFeedTest extends \PHPUnit_Framework_TestCase
 
     public function testAccountFeed()
     {
-        $this->assertEquals(count($this->accountFeed->entries), 3);
-        $this->assertEquals($this->accountFeed->entries->count(), 3);
+        $this->assertEquals(3, count($this->accountFeed->entries));
+        $this->assertEquals(3, $this->accountFeed->entries->count());
         foreach ($this->accountFeed->entries as $entry) {
-            $this->assertTrue($entry instanceof AccountEntry);
+            $this->assertInstanceOf('Zend\GData\Analytics\AccountEntry', $entry);
         }
     }
 }

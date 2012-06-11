@@ -45,7 +45,7 @@ class AccountFeed extends GData\Feed
     protected $_feedClassName = 'Zend\GData\Analytics\AccountFeed';
 
     /**
-     * @see Zend_GData_Feed::__construct()
+     * @see Zend\GData\Feed::__construct()
      */
     public function __construct($element = null)
     {

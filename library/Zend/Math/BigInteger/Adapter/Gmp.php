@@ -177,14 +177,17 @@ class Gmp implements AdapterInterface
     public function comp($leftOperand, $rightOperand)
     {
         $result = gmp_cmp($leftOperand, $rightOperand);
-        return ($result !== 0) ? (($result > 0) ? 1: -1 ) : 0;
+        if ($result !== 0) {
+            $result = ($result > 0) ? 1 : -1;
+        }
+        return $result;
     }
 
     /**
      * Convert big integer into it's binary number representation
      *
      * @param string $int
-     * @param bool $twoc  return in twos' compliment form
+     * @param bool $twoc  return in twos' complement form
      * @return string
      */
     public function intToBin($int, $twoc = false)
@@ -222,7 +225,6 @@ class Gmp implements AdapterInterface
     /**
      * Convert binary number into big integer
      *
-     * @abstract
      * @param string $bytes
      * @param bool $twoc  whether binary number is in twos' compliment form
      * @return string

@@ -11,7 +11,6 @@
 namespace Zend\Math\BigInteger;
 
 use Zend\Math\BigInteger\Adapter\AdapterInterface;
-use Zend\Math\BigInteger\AdapterBroker;
 use Zend\Loader\Broker;
 
 /**
@@ -25,21 +24,20 @@ class BigInteger
     /**
      * Broker for loading adapters
      *
-     * @var null|Zend\Loader\Broker
+     * @var null|Broker
      */
     protected static $adapterBroker = null;
 
     /**
      * The default adapter.
      *
-     * @var Zend\Math\BigInteger\Adapter\AdapterInterface
+     * @var AdapterInterface
      */
     protected static $defaultAdapter = null;
 
     /**
      * Create a BigInteger adapter instance
      *
-     * @static
      * @param string|null $adapterName
      * @return AdapterInterface
      */
@@ -57,7 +55,6 @@ class BigInteger
     /**
      * Set adapter broker
      *
-     * @static
      * @param Broker $broker
      */
     public static function setAdapterBroker(Broker $broker)
@@ -81,7 +78,6 @@ class BigInteger
     /**
      * Set default BigInteger adapter
      *
-     * @static
      * @param string|AdapterInterface $adapter
      */
     public static function setDefaultAdapter($adapter)
@@ -92,7 +88,6 @@ class BigInteger
     /**
      * Get default BigInteger adapter
      *
-     * @static
      * @return null|AdapterInterface
      */
     public static function getDefaultAdapter()
@@ -106,7 +101,6 @@ class BigInteger
     /**
      * Determine and return available adapter
      *
-     * @static
      * @return AdapterInterface
      * @throws Exception\RuntimeException
      */
@@ -123,9 +117,8 @@ class BigInteger
     }
 
     /**
-     * Cal adapter methods statically
+     * Call adapter methods statically
      *
-     * @static
      * @param $method
      * @param $args
      * @return mixed

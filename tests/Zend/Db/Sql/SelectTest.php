@@ -451,6 +451,16 @@ class SelectTest extends \PHPUnit_Framework_TestCase
             'processJoin'   => array(array(array('INNER', '"zac"', '"m" = "n"')))
         );
 
+        // join with table aliases
+        $select25 = new Select;
+        $select25->from('foo')->join(array('b' => 'bar'), 'b.foo_id = foo.foo_id');
+        $sqlPrep25 = // same
+        $sqlStr25 = 'SELECT "foo".*, "b".* FROM "foo" INNER JOIN "bar" "b" ON "b"."foo_id" = "foo"."foo_id"';
+        $internalTests25 = array(
+            'processSelect' => array(array(array('"foo".*'), array('"b".*')), '"foo"'),
+            'processJoinAlias' => array(array(array('INNER', '"bar"', '"b"', '"b"."foo_id" = "foo"."foo_id"')))
+        );
+
         // where (simple string)
         $select12 = new Select;
         $select12->from('foo')->where('x = 5');
@@ -615,6 +625,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
             array($select22, $sqlPrep22, array(),    $sqlStr22, $internalTests22),
             array($select23, $sqlPrep23, $params23,  $sqlStr23, $internalTests23),
             array($select24, $sqlPrep24, $params24,  $sqlStr24, $internalTests24),
+            array($select25, $sqlPrep25, array(),    $sqlStr25, $internalTests25),
         );
     }
 

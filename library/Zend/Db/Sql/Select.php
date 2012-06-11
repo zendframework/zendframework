@@ -30,6 +30,7 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
      */
     const SPECIFICATION_SELECT = 'select';
     const SPECIFICATION_JOIN = 'join';
+    const SPECIFICATION_JOIN_ALIAS = 'joinAlias';
     const SPECIFICATION_WHERE = 'where';
     const SPECIFICATION_GROUP = 'group';
     const SPECIFICATION_HAVING = 'having';
@@ -58,6 +59,11 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
         self::SPECIFICATION_JOIN   => array(
             '%1$s' => array(
                 array(3 => '%1$s JOIN %2$s ON %3$s', 'combinedby' => ' ')
+            )
+        ),
+        self::SPECIFICATION_JOIN_ALIAS   => array(
+            '%1$s' => array(
+                array(4 => '%1$s JOIN %2$s %3$s ON %4$s', 'combinedby' => ' ')
             )
         ),
         self::SPECIFICATION_WHERE  => 'WHERE %1$s',
@@ -471,7 +477,13 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
         foreach ($this->joins as $join) {
             foreach ($join['columns'] as $jKey => $jColumn) {
                 $jColumns = array();
-                $jColumns[] = $platform->quoteIdentifier($join['name']) . $separator . $platform->quoteIdentifierInFragment($jColumn);
+                if (is_array($join['name'])) {
+                    $keys = array_keys($join['name']);
+                    $name = array_pop($keys);
+                } else {
+                    $name = $join['name'];
+                }
+                $jColumns[] = $platform->quoteIdentifier($name) . $separator . $platform->quoteIdentifierInFragment($jColumn);
                 if (is_string($jKey)) {
                     $jColumns[] = $platform->quoteIdentifier($jKey);
                 } elseif ($jColumn !== self::SQL_STAR) {
@@ -493,10 +505,49 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
         // process joins
         $joinSpecArgArray = array();
         foreach ($this->joins as $j => $join) {
+            if (is_array($join['name'])) {
+                continue;
+            }
+
             $joinSpecArgArray[$j] = array();
             $joinSpecArgArray[$j][] = strtoupper($join['type']); // type
             $joinSpecArgArray[$j][] = $platform->quoteIdentifier($join['name']); // table
             $joinSpecArgArray[$j][] = $platform->quoteIdentifierInFragment($join['on'], array('=', 'AND', 'OR', '(', ')')); // on
+        }
+
+        if (count($joinSpecArgArray) === 0) {
+            return null;
+        }
+
+        return array($joinSpecArgArray);
+    }
+
+    protected function processJoinAlias(PlatformInterface $platform, Adapter $adapter = null, ParameterContainer $parameterContainer = null)
+    {
+        if (!$this->joins) {
+            return null;
+        }
+
+        // process joins
+        $joinSpecArgArray = array();
+        foreach ($this->joins as $j => $join) {
+            if (!is_array($join['name'])) {
+                continue;
+            }
+
+            $keys = array_keys($join['name']);
+            $alias = array_pop($keys);
+            $name = $join['name'][$alias];
+
+            $joinSpecArgArray[$j] = array();
+            $joinSpecArgArray[$j][] = strtoupper($join['type']); // type
+            $joinSpecArgArray[$j][] = $platform->quoteIdentifier($name); // table
+            $joinSpecArgArray[$j][] = $platform->quoteIdentifier($alias); // table alias
+            $joinSpecArgArray[$j][] = $platform->quoteIdentifierInFragment($join['on'], array('=', 'AND', 'OR', '(', ')')); // on
+        }
+
+        if (count($joinSpecArgArray) === 0) {
+            return null;
         }
 
         return array($joinSpecArgArray);

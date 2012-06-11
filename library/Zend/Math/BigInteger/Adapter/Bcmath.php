@@ -49,7 +49,7 @@ class Bcmath implements AdapterInterface
                 $base = 10;
                 $operand = $m[1];
             // octal
-            } else if (preg_match('#^(0[0-9]+)$#', $operand, $m)) {
+            } else if (preg_match('#^(0[0-7]+)$#', $operand, $m)) {
                 $base = 8;
                 $operand = $m[1];
             // hex
@@ -202,7 +202,7 @@ class Bcmath implements AdapterInterface
      * Convert big integer into it's binary number representation
      *
      * @param string $operand
-     * @param bool $twoc return in two's compliment form
+     * @param bool $twoc return in two's complement form
      * @return string
      */
     public function intToBin($operand, $twoc = false)

@@ -26,7 +26,6 @@ interface AdapterInterface
     /**
      * Create adapter-specific representation of a big integer
      *
-     * @abstract
      * @param string $operand
      * @param integer|null $base
      * @return mixed
@@ -36,7 +35,6 @@ interface AdapterInterface
     /**
      * Add two big integers
      *
-     * @abstract
      * @param string $leftOperand
      * @param string $rightOperand
      * @return string
@@ -46,7 +44,6 @@ interface AdapterInterface
     /**
      * Subtract two big integers
      *
-     * @abstract
      * @param string $leftOperand
      * @param string $rightOperand
      * @return string
@@ -56,7 +53,6 @@ interface AdapterInterface
     /**
      * Multiply two big integers
      *
-     * @abstract
      * @param string $leftOperand
      * @param string $rightOperand
      * @return string
@@ -67,7 +63,6 @@ interface AdapterInterface
      * Divide two big integers
      * (this method returns only int part of result)
      *
-     * @abstract
      * @param string $leftOperand
      * @param string $rightOperand
      * @return string
@@ -86,7 +81,6 @@ interface AdapterInterface
     /**
      * Get the square root of a big integer
      *
-     * @abstract
      * @param string $operand
      * @return string
      */
@@ -95,7 +89,6 @@ interface AdapterInterface
     /**
      * Get modulus of a big integer
      *
-     * @abstract
      * @param string $leftOperand
      * @param string $modulus
      * @return string
@@ -105,7 +98,6 @@ interface AdapterInterface
     /**
      * Raise a big integer to another, reduced by a specified modulus
      *
-     * @abstract
      * @param string $leftOperand
      * @param string $rightOperand
      * @param string $modulus
@@ -116,7 +108,6 @@ interface AdapterInterface
     /**
      * Compare two big integers
      *
-     * @abstract
      * @param string $leftOperand
      * @param string $rightOperand
      * @return int
@@ -126,7 +117,6 @@ interface AdapterInterface
     /**
      * Convert big integer into it's binary number representation
      *
-     * @abstract
      * @param string $int
      * @param bool $twoc
      * @return string
@@ -136,7 +126,6 @@ interface AdapterInterface
     /**
      * Convert binary number into big integer
      *
-     * @abstract
      * @param string $bytes
      * @param bool $twoc
      * @return string
@@ -146,7 +135,6 @@ interface AdapterInterface
     /**
      * Convert a number between arbitrary bases
      *
-     * @abstract
      * @param string $operand
      * @param int $fromBase
      * @param int $toBase

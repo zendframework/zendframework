@@ -476,7 +476,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         $sqlStr14 = 'SELECT "foo".*, "b".* FROM "foo" INNER JOIN "bar" "b" ON "b"."foo_id" = "foo"."foo_id"';
         $internalTests14 = array(
             'processSelect' => array(array(array('"foo".*'), array('"b".*')), '"foo"'),
-            'processJoinAlias' => array(array(array('INNER', '"bar"', '"b"', '"b"."foo_id" = "foo"."foo_id"')))
+            'processJoin' => array(array(array('INNER', '"bar" "b"', '"b"."foo_id" = "foo"."foo_id"')))
         );
 
         // where (simple string)

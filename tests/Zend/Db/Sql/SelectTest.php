@@ -348,6 +348,22 @@ class SelectTest extends \PHPUnit_Framework_TestCase
             'processSelect' => array(array(array('"bar"."foo".*')), '"bar"."foo"')
         );
 
+        // table with alias
+        $select26 = new Select();
+        $select26->from(array('f'=>'foo'));
+        $sqlPrep26 = $sqlStr26 = 'SELECT "f".* FROM "foo" "f"';
+        $internalTests26 = array(
+            'processSelect' => array(array(array('"f".*')), '"foo" "f"')
+        );
+
+        // table with alias with table as TableIdentifier
+        $select27 = new Select();
+        $select27->from(new TableIdentifier(array('f'=>'foo')));
+        $sqlPrep27 = $sqlStr27 = 'SELECT "f".* FROM "foo" "f"';
+        $internalTests27 = array(
+            'processSelect' => array(array(array('"f".*')), '"foo" "f"')
+        );
+
         // columns
         $select2 = new Select;
         $select2->from('foo')->columns(array('bar', 'baz'));
@@ -626,6 +642,8 @@ class SelectTest extends \PHPUnit_Framework_TestCase
             array($select23, $sqlPrep23, $params23,  $sqlStr23, $internalTests23),
             array($select24, $sqlPrep24, $params24,  $sqlStr24, $internalTests24),
             array($select25, $sqlPrep25, array(),    $sqlStr25, $internalTests25),
+            array($select26, $sqlPrep26, array(),    $sqlStr26, $internalTests26),
+            array($select27, $sqlPrep27, array(),    $sqlStr27, $internalTests27),
         );
     }
 

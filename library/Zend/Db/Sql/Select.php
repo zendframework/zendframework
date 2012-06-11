@@ -167,8 +167,12 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
             throw new \InvalidArgumentException('Since this object was created with a table and/or schema in the constructor, it is read only.');
         }
 
-        if (!is_string($table) && !$table instanceof TableIdentifier) {
-            throw new Exception\InvalidArgumentException('$table must be a string or an instance of TableIdentifier');
+        if (!is_string($table) && !is_array($table) && !$table instanceof TableIdentifier) {
+            throw new Exception\InvalidArgumentException('$table must be a string, array, or an instance of TableIdentifier');
+        }
+
+        if (is_array($table)) {
+            $table = new TableIdentifier($table);
         }
 
         $this->table = $table;
@@ -423,19 +427,34 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
         if (!$this->table) {
             return null;
         }
+
+        $aliased = false;
+
         // create quoted table name to use in columns processing
         if ($this->table instanceof TableIdentifier) {
-            list($table, $schema) = $this->table->getTableAndSchema();
+            list($table, $schema, $alias) = $this->table->getTableAndSchema();
             $table = $platform->quoteIdentifier($table);
             if ($schema) {
                 $table = $platform->quoteIdentifier($schema) . $platform->getIdentifierSeparator() . $table;
             }
+            
+            if ($alias) {
+                $aliased = true;
+                $alias = $platform->quoteIdentifier($alias);
+                $table = $table . ' ' . $alias;
+            }
         } else {
             $table = $platform->quoteIdentifier($this->table);
         }
-        $quotedTable = ($this->prefixColumnsWithTable)
-            ? $table . $platform->getIdentifierSeparator()
-            : '';
+
+        $quotedTable = '';
+        if ($this->prefixColumnsWithTable) {
+            if ($aliased) {
+                $quotedTable = $alias . $platform->getIdentifierSeparator();
+            } else {
+                $quotedTable = $table . $platform->getIdentifierSeparator();
+            }
+        }
 
         // process table columns
         $columns = array();

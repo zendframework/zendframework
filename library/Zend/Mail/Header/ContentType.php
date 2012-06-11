@@ -141,7 +141,7 @@ class ContentType implements HeaderInterface
      */
     public function toString()
     {
-        return 'Content-Type: ' . $this->getFieldValue() . "\r\n";
+        return 'Content-Type: ' . $this->getFieldValue();
     }
 
     /**

@@ -35,6 +35,42 @@ use Zend\Form\Exception;
 class FormCheckbox extends FormInput
 {
     /**
+     * @var boolean
+     */
+    protected $useHiddenElement = true;
+
+    /**
+     * @var array
+     */
+    protected $defaultStateValues = array(
+        'checkedValue'   => '1',
+        'uncheckedValue' => '0',
+    );
+
+    /**
+     * Returns the option for prefixing the element with a hidden element
+     * for the unset value.
+     *
+     * @return  boolean
+     */
+    public function getUseHiddenElement()
+    {
+        return $this->useHiddenElement;
+    }
+
+    /**
+     * Sets the option for prefixing the element with a hidden element
+     * for the unset value.
+     *
+     * @return  boolean
+     */
+    public function setUseHiddenElement($useHiddenElement)
+    {
+        $this->useHiddenElement = (bool) $useHiddenElement;
+        return $this;
+    }
+
+    /**
      * Render a form <input> element from the provided $element
      * 
      * @param  ElementInterface $element 
@@ -50,54 +86,61 @@ class FormCheckbox extends FormInput
             ));
         }
 
-        // default checked/unchecked values
-        $attributes = array_merge(
-            array(
-                'options' => array(1, 0),
-            ),
-            $element->getAttributes()
-        );
+        $attributes = $element->getAttributes();
+        if (empty($attributes['options'])) {
+            $attributes['options'] = array();
+        }
+        $options = $attributes['options'];
+        unset($attributes['options']);
 
-        if (!is_array($attributes['options']) && !$attributes['options'] instanceof Traversable) { 
+        // default checked/unchecked values
+        foreach ($this->defaultStateValues as $key => $value) {
+            if (empty($options[$key])) {
+                $options[$key] = $value;
+            }
+        }
+
+        if (!is_array($options) && !$options instanceof Traversable) { 
             throw new Exception\DomainException(sprintf(
                 '%s requires that the element has an array or Traversable "options" attribute.',
                 __METHOD__
             )); 
         }
 
-        if (count($attributes['options']) != 2) {
-            throw new Exception\DomainException(sprintf(
-                '%s requires that the element has two options specified: the checked and unchecked values',
-                __METHOD__
-            )); 
-        }
-
-        $options = $attributes['options'];
-        unset($attributes['options']);
-
         $attributes['name']    = $name;
         $attributes['checked'] = '';
         $attributes['type']    = $this->getInputType();
         $closingBracket        = $this->getInlineClosingBracket();
 
-        list($checkedValue, $uncheckedValue) = $options;
-        if (isset($attributes['value']) && $attributes['value'] == $checkedValue) {
+        if (isset($attributes['value']) && $attributes['value'] == $options['checkedValue']) {
             $attributes['checked'] = 'checked';
         }
-        $attributes['value'] = $checkedValue;
+        $attributes['value'] = $options['checkedValue'];
 
-        $hiddenAttributes = array(
-            'name'  => $attributes['name'],
-            'value' => $uncheckedValue,
-        );
-
-        return sprintf(
-            '<input type="hidden" %s%s<input %s%s', 
-            $this->createAttributesString($hiddenAttributes),
-            $closingBracket,
+        $rendered = sprintf(
+            '<input %s%s', 
             $this->createAttributesString($attributes), 
             $closingBracket
         );
+
+        $useHiddenElement = isset($attributes['useHiddenElement'])
+            ? (bool) $attributes['useHiddenElement']
+            : $this->useHiddenElement;
+
+        if ($useHiddenElement) {
+            $hiddenAttributes = array(
+                'name'  => $attributes['name'],
+                'value' => $options['uncheckedValue'],
+            );
+
+            $rendered = sprintf(
+                '<input type="hidden" %s%s', 
+                $this->createAttributesString($hiddenAttributes),
+                $closingBracket
+            ) . $rendered;
+        }
+
+        return $rendered;
     }
 
     /**

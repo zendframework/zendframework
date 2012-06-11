@@ -43,8 +43,8 @@ class FormCheckboxTest extends CommonTestCase
     {
         $element = new Element('foo');
         $options = array(
-            'checked',
-            'unchecked',
+            'checkedValue'   => 'checked',
+            'uncheckedValue' => 'unchecked',
         );
         $element->setAttribute('options', $options);
         return $element;
@@ -80,19 +80,21 @@ class FormCheckboxTest extends CommonTestCase
         $this->assertRegexp('#type="hidden"\s+name="foo"\s+value="0"#', $markup);
     }
 
-    /**
-     * @expectedException Zend\Form\Exception\DomainException
-     */
-    public function testOptionsAttributeDoesNotHaveTwoValues()
+    public function testSetUseHiddenElementDoesNotRenderHiddenInput()
     {
         $element = new Element('foo');
-        $options = array(
-            'checked',
-            'unchecked',
-            'badoption',
-        );
-
-        $element->setAttribute('options', $options);
-        $markup  = $this->helper->render($element);
+        $markup  = $this->helper->setUseHiddenElement(false)->render($element);
+        $this->assertRegexp('#type="checkbox"\s+value="1"#', $markup);
+        $this->assertNotRegexp('#type="hidden"\s+name="foo"\s+value="0"#', $markup);
     }
+
+    public function testSetUseHiddenElementAttributeDoesNotRenderHiddenInput()
+    {
+        $element = new Element('foo');
+        $element->setAttribute('useHiddenElement', false);
+        $markup  = $this->helper->render($element);
+        $this->assertRegexp('#type="checkbox"\s+value="1"#', $markup);
+        $this->assertNotRegexp('#type="hidden"\s+name="foo"\s+value="0"#', $markup);
+    }
+
 }

@@ -352,18 +352,18 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         $select2 = new Select();
         $select2->from(array('f'=>'foo'));
         $sqlPrep2 = // same
-        $sqlStr2 = 'SELECT "f".* FROM "foo" "f"';
+        $sqlStr2 = 'SELECT "f".* FROM "foo" AS "f"';
         $internalTests2 = array(
-            'processSelect' => array(array(array('"f".*')), '"foo" "f"')
+            'processSelect' => array(array(array('"f".*')), '"foo" AS "f"')
         );
 
         // table with alias with table as TableIdentifier
         $select3 = new Select();
         $select3->from(new TableIdentifier(array('f'=>'foo')));
         $sqlPrep3 = // same
-        $sqlStr3 = 'SELECT "f".* FROM "foo" "f"';
+        $sqlStr3 = 'SELECT "f".* FROM "foo" AS "f"';
         $internalTests3 = array(
-            'processSelect' => array(array(array('"f".*')), '"foo" "f"')
+            'processSelect' => array(array(array('"f".*')), '"foo" AS "f"')
         );
 
         // columns
@@ -473,10 +473,10 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         $select14 = new Select;
         $select14->from('foo')->join(array('b' => 'bar'), 'b.foo_id = foo.foo_id');
         $sqlPrep14 = // same
-        $sqlStr14 = 'SELECT "foo".*, "b".* FROM "foo" INNER JOIN "bar" "b" ON "b"."foo_id" = "foo"."foo_id"';
+        $sqlStr14 = 'SELECT "foo".*, "b".* FROM "foo" INNER JOIN "bar" AS "b" ON "b"."foo_id" = "foo"."foo_id"';
         $internalTests14 = array(
             'processSelect' => array(array(array('"foo".*'), array('"b".*')), '"foo"'),
-            'processJoin' => array(array(array('INNER', '"bar" "b"', '"b"."foo_id" = "foo"."foo_id"')))
+            'processJoin' => array(array(array('INNER', '"bar" AS "b"', '"b"."foo_id" = "foo"."foo_id"')))
         );
 
         // where (simple string)

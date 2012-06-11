@@ -152,7 +152,7 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
     /**
      * Create from clause
      * 
-     * @param  string|TableIdentifier $table
+     * @param  string|array|TableIdentifier $table
      * @param  null|string $schema
      * @return Select
      */
@@ -201,7 +201,7 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
     /**
      * Create join clause
      * 
-     * @param  string $name 
+     * @param  string|array $name 
      * @param  string $on 
      * @param  string|array $columns 
      * @param  string $type one of the JOIN_* constants
@@ -423,8 +423,6 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
             return null;
         }
 
-        $aliased = false;
-
         // create quoted table name to use in columns processing
         if ($this->table instanceof TableIdentifier) {
             list($table, $schema, $alias) = $this->table->getTableAndSchema();
@@ -434,9 +432,8 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
             }
             
             if ($alias) {
-                $aliased = true;
                 $alias = $platform->quoteIdentifier($alias);
-                $table = $table . ' ' . $alias;
+                $table = $table . ' AS ' . $alias;
             }
         } else {
             $table = $platform->quoteIdentifier($this->table);
@@ -444,7 +441,7 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
 
         $quotedTable = '';
         if ($this->prefixColumnsWithTable) {
-            if ($aliased) {
+            if (isset($alias)) {
                 $quotedTable = $alias . $platform->getIdentifierSeparator();
             } else {
                 $quotedTable = $table . $platform->getIdentifierSeparator();
@@ -525,7 +522,7 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
                 $alias = array_pop($keys);
                 $name = $join['name'][$alias];
 
-                $nameArg = $platform->quoteIdentifier($name) . ' ' . $platform->quoteIdentifier($alias);
+                $nameArg = $platform->quoteIdentifier($name) . ' AS ' . $platform->quoteIdentifier($alias);
             } else {
                 $nameArg = $platform->quoteIdentifier($join['name']);
             }

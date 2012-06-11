@@ -300,4 +300,10 @@ class FormTextareaTest extends CommonTestCase
         $this->assertContains('<textarea', $markup);
         $this->assertContains('name="foo"', $markup);
     }
+
+    public function testInvokeWithNoElementChainsHelper()
+    {
+        $element = new Element('foo');
+        $this->assertSame($this->helper, $this->helper->__invoke());
+    }
 }

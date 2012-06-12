@@ -1,0 +1,110 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns='http://www.w3.org/2005/Atom' xmlns:dxp='http://schemas.google.com/analytics/2009' xmlns:ga='http://schemas.google.com/ga/2009' xmlns:openSearch='http://a9.com/-/spec/opensearch/1.1/' xmlns:gd='http://schemas.google.com/g/2005' gd:etag='W/&quot;DUcCRX47eCp7I2A9WxNbFkk.&quot;' gd:kind='analytics#accounts'>
+        <id>http://www.google.com/analytics/feeds/accounts/abc@test.com</id>
+        <updated>2009-11-19T08:11:04.000-08:00</updated>
+        <title>Profile list for abc@test.com</title>
+        <link rel='self' type='application/atom+xml' href='http://www.google.com/analytics/feeds/accounts/default'/>
+        <author>
+                <name>Google Analytics</name>
+        </author>
+        <generator version='1.0'>Google Analytics</generator>
+        <openSearch:totalResults>41</openSearch:totalResults>
+        <openSearch:startIndex>1</openSearch:startIndex>
+        <openSearch:itemsPerPage>3</openSearch:itemsPerPage>
+        <dxp:segment id='gaid::-1' name='All Visits'>
+                <dxp:definition> </dxp:definition>
+        </dxp:segment>
+        <dxp:segment id='gaid::-2' name='New Visitors'>
+                <dxp:definition>ga:visitorType==New Visitor</dxp:definition>
+        </dxp:segment>
+        <dxp:segment id='gaid::-3' name='Returning Visitors'>
+                <dxp:definition>ga:visitorType==Returning Visitor</dxp:definition>
+        </dxp:segment>
+        <dxp:segment id='gaid::-4' name='Paid Search Traffic'>
+                <dxp:definition>ga:medium==cpa,ga:medium==cpc,ga:medium==cpm,ga:medium==cpp,ga:medium==cpv,ga:medium==ppc</dxp:definition>
+        </dxp:segment>
+        <dxp:segment id='gaid::-5' name='Non-paid Search Traffic'>
+                <dxp:definition>ga:medium==organic</dxp:definition>
+        </dxp:segment>
+        <dxp:segment id='gaid::-6' name='Search Traffic'>
+                <dxp:definition>ga:medium==cpa,ga:medium==cpc,ga:medium==cpm,ga:medium==cpp,ga:medium==cpv,ga:medium==organic,ga:medium==ppc</dxp:definition>
+        </dxp:segment>
+        <dxp:segment id='gaid::-7' name='Direct Traffic'>
+                <dxp:definition>ga:medium==(none)</dxp:definition>
+        </dxp:segment>
+        <dxp:segment id='gaid::-8' name='Referral Traffic'>
+                <dxp:definition>ga:medium==referral</dxp:definition>
+        </dxp:segment>
+        <dxp:segment id='gaid::-9' name='Visits with Conversions'>
+                <dxp:definition>ga:goalCompletionsAll&gt;0</dxp:definition>
+        </dxp:segment>
+        <dxp:segment id='gaid::-10' name='Visits with Transactions'>
+                <dxp:definition>ga:transactions&gt;0</dxp:definition>
+        </dxp:segment>
+        <dxp:segment id='gaid::-11' name='Visits from iPhones'>
+                <dxp:definition>ga:operatingSystem==iPhone</dxp:definition>
+        </dxp:segment>
+        <dxp:segment id='gaid::-12' name='Non-bounce Visits'>
+                <dxp:definition>ga:bounces==0</dxp:definition>
+        </dxp:segment>
+        <dxp:segment id='gaid::0' name='Sources Form Google'>
+                <dxp:definition>ga:source=~^\Qgoogle\E</dxp:definition>
+        </dxp:segment>
+        <entry gd:etag='W/&quot;DUcCRX47eCp7I2A9WxNbFkk.&quot;' gd:kind='analytics#account'>
+                <id>http://www.google.com/analytics/feeds/accounts/ga:1174</id>
+                <updated>2009-11-19T08:11:04.000-08:00</updated>
+                <title>www.googlestore.com</title>
+                <link rel='alternate' type='text/html' href='http://www.google.com/analytics'/>
+                <ga:goal active='true' name='Completing Order' number='1' value='10.0'>
+                        <ga:destination caseSensitive='false' expression='/purchaseComplete.html' matchType='regex' step1Required='false'>
+                                <ga:step name='View Product Categories' number='1' path='/Apps|Accessories'/>
+                                <ga:step name='View Product' number='2' path='/Apps|Accessories/(.*)\.axd'/>
+                                <ga:step name='View Shopping Cart' number='3' path='/shoppingcart.aspx'/>
+                                <ga:step name='Login' number='4' path='/login.html'/>
+                                <ga:step name='Place Order' number='5' path='/placeOrder.html'/>
+                        </ga:destination>
+                </ga:goal>
+                <ga:goal active='true' name='Browsed my site over 5 minutes' number='2' value='0.0'>
+                        <ga:engagement comparison='&gt;' thresholdValue='300' type='timeOnSite'/>
+                </ga:goal>
+                <ga:goal active='true' name='Visited &gt; 4 pages' number='3' value='0.25'>
+                        <ga:engagement comparison='&gt;' thresholdValue='4' type='pagesVisited'/>
+                </ga:goal>
+                <dxp:property name='ga:accountId' value='30481'/>
+                <dxp:property name='ga:accountName' value='Google Store'/>
+                <dxp:property name='ga:profileId' value='1174'/>
+                <dxp:property name='ga:webPropertyId' value='UA-30481-1'/>
+                <dxp:property name='ga:currency' value='USD'/>
+                <dxp:property name='ga:timezone' value='America/Los_Angeles'/>
+                <dxp:tableId>ga:1174</dxp:tableId>
+        </entry>
+        <entry gd:etag='W/&quot;DkEASH47eCp7I2A9WxNbFUo.&quot;' gd:kind='analytics#account'>
+                <id>http://www.google.com/analytics/feeds/accounts/ga:11380020</id>
+                <updated>2009-11-18T12:04:09.000-08:00</updated>
+                <title>Googlestore - overall</title>
+                <link rel='alternate' type='text/html' href='http://www.google.com/analytics'/>
+                <ga:goal active='false' name='goal2.html' number='1' value='0.0'>
+                        <ga:destination caseSensitive='false' expression='/goal2.html' matchType='head' step1Required='false'/>
+                </ga:goal>
+                <dxp:property name='ga:accountId' value='30481'/>
+                <dxp:property name='ga:accountName' value='Google Store'/>
+                <dxp:property name='ga:profileId' value='11380020'/>
+                <dxp:property name='ga:webPropertyId' value='UA-30481-1'/>
+                <dxp:property name='ga:currency' value='USD'/>
+                <dxp:property name='ga:timezone' value='America/Los_Angeles'/>
+                <dxp:tableId>ga:11380020</dxp:tableId>
+        </entry>
+        <entry gd:etag='W/&quot;C04HRn47eCp7I2A9WxJbGUQ.&quot;' gd:kind='analytics#account'>
+                <id>http://www.google.com/analytics/feeds/accounts/ga:11380025</id>
+                <updated>2009-07-30T15:12:17.000-07:00</updated>
+                <title>Googlestore - no filters</title>
+                <link rel='alternate' type='text/html' href='http://www.google.com/analytics'/>
+                <dxp:property name='ga:accountId' value='30481'/>
+                <dxp:property name='ga:accountName' value='Google Store'/>
+                <dxp:property name='ga:profileId' value='11380025'/>
+                <dxp:property name='ga:webPropertyId' value='UA-30481-1'/>
+                <dxp:property name='ga:currency' value='USD'/>
+                <dxp:property name='ga:timezone' value='America/Los_Angeles'/>
+                <dxp:tableId>ga:11380025</dxp:tableId>
+        </entry>
+</feed>

@@ -13,35 +13,37 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_GData
- * @subpackage UnitTests
+ * @package    Zend_Gdata
+ * @subpackage Analytics
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace ZendTest\GData;
-
-/**
- * PHPUnit test case
- */
+namespace Zend\GData\Analytics\Extension;
 
 /**
  * @category   Zend
- * @package    Zend_GData
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_GData
+ * @package    Zend_Gdata
+ * @subpackage Analytics
  */
-class SkipClientLoginTest extends \PHPUnit_Framework_TestCase
+class Metric extends Property
 {
-    public function setUp()
-    {
-        $this->markTestSkipped("Zend_GData authenticated tests are not enabled in TestConfiguration.php");
-    }
+    protected $_rootNamespace = 'ga';
+    protected $_rootElement = 'metric';
+    protected $_value = null;
+    protected $_name = null;
 
-    public function testClientLogin()
+	protected function takeAttributeFromDOM($attribute)
     {
-        // this is here only so we have at least one test
+        switch ($attribute->localName) {
+	        case 'name':
+	        	$this->_name = $attribute->nodeValue;
+		        break;
+	        case 'value':
+	            $this->_value = $attribute->nodeValue;
+	            break;
+	        default:
+	            parent::takeAttributeFromDOM($attribute);
+        }
     }
 }

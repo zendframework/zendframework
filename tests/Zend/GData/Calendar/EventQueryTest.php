@@ -47,7 +47,7 @@ class EventQueryTest extends \PHPUnit_Framework_TestCase
     public function testDefaultBaseUrlForQuery()
     {
         $queryUrl = $this->query->getQueryUrl();
-        $this->assertEquals('http://www.google.com/calendar/feeds/default/public/full',
+        $this->assertEquals('https://www.google.com/calendar/feeds/default/public/full',
                 $queryUrl);
     }
 
@@ -244,7 +244,7 @@ class EventQueryTest extends \PHPUnit_Framework_TestCase
         $this->query->setProjection("composite");
         $this->query->setEvent(self::ZEND_CONFERENCE_EVENT);
         $this->query->setComments(self::ZEND_CONFERENCE_EVENT_COMMENT);
-        $this->assertEquals("http://www.google.com/calendar/feeds/developer-calendar@google.com/private/composite/" .
+        $this->assertEquals("https://www.google.com/calendar/feeds/developer-calendar@google.com/private/composite/" .
                 self::ZEND_CONFERENCE_EVENT . "/comments/" . self::ZEND_CONFERENCE_EVENT_COMMENT,
                 $this->query->getQueryUrl());
     }
@@ -252,13 +252,13 @@ class EventQueryTest extends \PHPUnit_Framework_TestCase
     public function testDefaultQueryURIGeneration()
     {
         $this->query->resetParameters();
-        $this->assertEquals("http://www.google.com/calendar/feeds/default/public/full",
+        $this->assertEquals("https://www.google.com/calendar/feeds/default/public/full",
                 $this->query->getQueryUrl());
     }
 
     public function testCanNullifyParameters()
     {
-       $testURI = "http://www.google.com/calendar/feeds/foo%40group.calendar.google.com/private/full";
+       $testURI = "https://www.google.com/calendar/feeds/foo%40group.calendar.google.com/private/full";
        $this->query = new Calendar\EventQuery($testURI);
        $this->query->setUser(null);
        $this->query->setVisibility(null);

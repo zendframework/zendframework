@@ -80,7 +80,7 @@ class VideoEntry extends MediaEntry
     /**
      * Specifies the comments associated with a video.
      *
-     * @var Zend_Gdata_Extensions_Comments
+     * @var \Zend\GData\Extension\Comments
      */
     protected $_comments = null;
 
@@ -993,7 +993,7 @@ class VideoEntry extends MediaEntry
      *
      * @param integer $ratingValue A number representing the rating. Must
      *          be between 1 and 5 inclusive.
-     * @throws Zend_Gdata_Exception
+     * @throws App\InvalidArgumentException
      * @return \Zend\GData\YouTube\VideoEntry Provides a fluent interface.
      */
     public function setVideoRating($ratingValue)

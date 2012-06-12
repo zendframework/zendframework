@@ -101,7 +101,7 @@ abstract class FeedEntryParent extends Base
      * @deprecated Deprecated as of Zend Framework 1.7. Use
      *             setService() instead.
      * @param  \Zend\Http\Client $httpClient
-     * @return \Zend\GData\App\FeedEntryParent Provides a fluent interface
+     * @return FeedEntryParent Provides a fluent interface
      */
     public function setHttpClient(\Zend\Http\Client $httpClient)
     {
@@ -134,7 +134,7 @@ abstract class FeedEntryParent extends Base
      * perform network requests, such as when calling save() and delete().
      *
      * @param \Zend\GData\App $instance The new service instance.
-     * @return \Zend\GData\App\FeedEntryParent Provides a fluent interface.
+     * @return FeedEntryParent Provides a fluent interface.
      */
     public function setService($instance)
     {
@@ -235,7 +235,7 @@ abstract class FeedEntryParent extends Base
     }
 
     /**
-     * @return \Zend\GData\App\Extension\Author
+     * @return Extension\Author
      */
     public function getAuthor()
     {
@@ -247,7 +247,7 @@ abstract class FeedEntryParent extends Base
      * author is represented by an atom:author element
      *
      * @param array $value
-     * @return \Zend\GData\App\FeedEntryParent Provides a fluent interface
+     * @return FeedEntryParent Provides a fluent interface
      */
     public function setAuthor($value)
     {
@@ -259,7 +259,7 @@ abstract class FeedEntryParent extends Base
      * Returns the array of categories that classify this feed/entry.  Each
      * category is represented in an atom feed by an atom:category element.
      *
-     * @return array Array of \Zend\GData\App\Extension\Category
+     * @return array Array of Extension\Category
      */
     public function getCategory()
     {
@@ -270,8 +270,8 @@ abstract class FeedEntryParent extends Base
      * Sets the array of categories that classify this feed/entry.  Each
      * category is represented in an atom feed by an atom:category element.
      *
-     * @param array $value Array of \Zend\GData\App\Extension\Category
-     * @return \Zend\GData\App\FeedEntryParent Provides a fluent interface
+     * @param array $value Array of Extension\Category
+     * @return FeedEntryParent Provides a fluent interface
      */
     public function setCategory($value)
     {
@@ -283,7 +283,7 @@ abstract class FeedEntryParent extends Base
      * Returns the array of contributors to this feed/entry.  Each contributor
      * is represented in an atom feed by an atom:contributor XML element
      *
-     * @return array An array of \Zend\GData\App\Extension\Contributor
+     * @return array An array of Extension\Contributor
      */
     public function getContributor()
     {
@@ -295,7 +295,7 @@ abstract class FeedEntryParent extends Base
      * is represented in an atom feed by an atom:contributor XML element
      *
      * @param array $value
-     * @return \Zend\GData\App\FeedEntryParent Provides a fluent interface
+     * @return FeedEntryParent Provides a fluent interface
      */
     public function setContributor($value)
     {
@@ -304,7 +304,7 @@ abstract class FeedEntryParent extends Base
     }
 
     /**
-     * @return \Zend\GData\App\Extension\Id
+     * @return Extension\Id
      */
     public function getId()
     {
@@ -312,8 +312,8 @@ abstract class FeedEntryParent extends Base
     }
 
     /**
-     * @param \Zend\GData\App\Extension\Id $value
-     * @return \Zend\GData\App\FeedEntryParent Provides a fluent interface
+     * @param Extension\Id $value
+     * @return FeedEntryParent Provides a fluent interface
      */
     public function setId($value)
     {
@@ -323,16 +323,16 @@ abstract class FeedEntryParent extends Base
 
     /**
      * Given a particular 'rel' value, this method returns a matching
-     * \Zend\Gdata\App\Extension\Link element.  If the 'rel' value
-     * is not provided, the full array of \Zend\Gdata\App\Extension\Link
+     * Extension\Link element.  If the 'rel' value
+     * is not provided, the full array of Extension\Link
      * elements is returned.  In an atom feed, each link is represented
      * by an atom:link element.  The 'rel' value passed to this function
      * is the atom:link/@rel attribute.  Example rel values include 'self',
      * 'edit', and 'alternate'.
      *
      * @param string $rel The rel value of the link to be found.  If null,
-     *     the array of \Zend\Gdata\App\Extension\link elements is returned
-     * @return mixed Either a single \Zend\Gdata\App\Extension\link element,
+     *     the array of Extension\link elements is returned
+     * @return mixed Either a single Extension\link element,
      *     an array of the same or null is returned depending on the rel value
      *     supplied as the argument to this function
      */
@@ -351,11 +351,11 @@ abstract class FeedEntryParent extends Base
     }
 
     /**
-     * Returns the \Zend\Gdata\App\Extension\Link element which represents
+     * Returns the Extension\Link element which represents
      * the URL used to edit this resource.  This link is in the atom feed/entry
      * as an atom:link with a rel attribute value of 'edit'.
      *
-     * @return \Zend\GData\App\Extension\Link The link, or null if not found
+     * @return Extension\Link The link, or null if not found
      */
     public function getEditLink()
     {
@@ -363,12 +363,12 @@ abstract class FeedEntryParent extends Base
     }
 
     /**
-     * Returns the \Zend\Gdata\App\Extension\Link element which represents
+     * Returns the Extension\Link element which represents
      * the URL used to retrieve the next chunk of results when paging through
      * a feed.  This link is in the atom feed as an atom:link with a
      * rel attribute value of 'next'.
      *
-     * @return \Zend\GData\App\Extension\Link The link, or null if not found
+     * @return Extension\Link The link, or null if not found
      */
     public function getNextLink()
     {
@@ -376,12 +376,12 @@ abstract class FeedEntryParent extends Base
     }
 
     /**
-     * Returns the \Zend\Gdata\App\Extension\Link element which represents
+     * Returns the Extension\Link element which represents
      * the URL used to retrieve the previous chunk of results when paging
      * through a feed.  This link is in the atom feed as an atom:link with a
      * rel attribute value of 'previous'.
      *
-     * @return \Zend\GData\App\Extension\Link The link, or null if not found
+     * @return Extension\Link The link, or null if not found
      */
     public function getPreviousLink()
     {
@@ -389,7 +389,7 @@ abstract class FeedEntryParent extends Base
     }
 
     /**
-     * @return \Zend\GData\App\Extension\Link
+     * @return Extension\Link
      */
     public function getLicenseLink()
     {
@@ -397,12 +397,12 @@ abstract class FeedEntryParent extends Base
     }
 
     /**
-     * Returns the \Zend\Gdata\App\Extension\Link element which represents
+     * Returns the Extension\Link element which represents
      * the URL used to retrieve the entry or feed represented by this object
      * This link is in the atom feed/entry as an atom:link with a
      * rel attribute value of 'self'.
      *
-     * @return \Zend\GData\App\Extension\Link The link, or null if not found
+     * @return Extension\Link The link, or null if not found
      */
     public function getSelfLink()
     {
@@ -410,15 +410,15 @@ abstract class FeedEntryParent extends Base
     }
 
     /**
-     * Returns the \Zend\Gdata\App\Extension\Link element which represents
+     * Returns the Extension\Link element which represents
      * the URL for an alternate view of the data represented by this feed or
      * entry.  This alternate view is commonly a user-facing webpage, blog
      * post, etc.  The MIME type for the data at the URL is available from the
-     * returned \Zend\Gdata\App\Extension\Link element.
+     * returned Extension\Link element.
      * This link is in the atom feed/entry as an atom:link with a
      * rel attribute value of 'self'.
      *
-     * @return \Zend\GData\App\Extension\Link The link, or null if not found
+     * @return Extension\Link The link, or null if not found
      */
     public function getAlternateLink()
     {
@@ -426,8 +426,8 @@ abstract class FeedEntryParent extends Base
     }
 
     /**
-     * @param array $value The array of \Zend\GData\App\Extension\Link elements
-     * @return \Zend\GData\App\FeedEntryParent Provides a fluent interface
+     * @param array $value The array of Extension\Link elements
+     * @return FeedEntryParent Provides a fluent interface
      */
     public function setLink($value)
     {
@@ -436,7 +436,7 @@ abstract class FeedEntryParent extends Base
     }
 
     /**
-     * @return \Zend\Gdata\AppExtension\Rights
+     * @return Extension\Rights
      */
     public function getRights()
     {
@@ -444,8 +444,8 @@ abstract class FeedEntryParent extends Base
     }
 
     /**
-     * @param \Zend\GData\App\Extension\Rights $value
-     * @return \Zend\GData\App\FeedEntryParent Provides a fluent interface
+     * @param Extension\Rights $value
+     * @return FeedEntryParent Provides a fluent interface
      */
     public function setRights($value)
     {
@@ -458,7 +458,7 @@ abstract class FeedEntryParent extends Base
      * short textual representation of this resource and is found as
      * an atom:title element in a feed or entry
      *
-     * @return \Zend\GData\App\Extension\Title
+     * @return Extension\Title
      */
     public function getTitle()
     {
@@ -486,8 +486,8 @@ abstract class FeedEntryParent extends Base
      * short textual representation of this resource and is found as
      * an atom:title element in a feed or entry
      *
-     * @param \Zend\GData\App\Extension\Title $value
-     * @return \Zend\GData\App\FeedEntryParent Provides a fluent interface
+     * @param Extension\Title $value
+     * @return FeedEntryParent Provides a fluent interface
      */
     public function setTitle($value)
     {
@@ -496,7 +496,7 @@ abstract class FeedEntryParent extends Base
     }
 
     /**
-     * @return \Zend\GData\App\Extension\Updated
+     * @return Extension\Updated
      */
     public function getUpdated()
     {
@@ -504,8 +504,8 @@ abstract class FeedEntryParent extends Base
     }
 
     /**
-     * @param \Zend\GData\App\Extension\Updated $value
-     * @return \Zend\GData\App\FeedEntryParent Provides a fluent interface
+     * @param Extension\Updated $value
+     * @return FeedEntryParent Provides a fluent interface
      */
     public function setUpdated($value)
     {
@@ -518,7 +518,7 @@ abstract class FeedEntryParent extends Base
      * unsets the Etag.
      *
      * @param Etag $value
-     * @return \Zend\GData\App\Entry Provides a fluent interface
+     * @return Entry Provides a fluent interface
      */
     public function setEtag(Etag $value) {
         $this->_etag = $value;
@@ -536,12 +536,12 @@ abstract class FeedEntryParent extends Base
 
     /**
      * Set the major protocol version that should be used. Values < 1
-     * (excluding NULL) will cause a \Zend\Gdata\App\InvalidArgumentException
+     * (excluding NULL) will cause a InvalidArgumentException
      * to be thrown.
      *
      * @see _majorProtocolVersion
      * @param (int|NULL) $value The major protocol version to use.
-     * @throws \Zend\GData\App\InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function setMajorProtocolVersion($value)
     {
@@ -566,11 +566,11 @@ abstract class FeedEntryParent extends Base
     /**
      * Set the minor protocol version that should be used. If set to NULL, no
      * minor protocol version will be sent to the server. Values < 0 will
-     * cause a \Zend\Gdata\App\InvalidArgumentException to be thrown.
+     * cause a InvalidArgumentException to be thrown.
      *
      * @see _minorProtocolVersion
      * @param (int|NULL) $value The minor protocol version to use.
-     * @throws \Zend\GData\App\InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function setMinorProtocolVersion($value)
     {

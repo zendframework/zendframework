@@ -47,7 +47,7 @@ class ACLRole extends \Zend\GData\Extension
     protected $_value = null;
 
     /**
-     * Constructs a new \Zend\Gdata\Docs\Extension\ACLRole object.
+     * Constructs a new \Zend\GData\Docs\Extension\ACLRole object.
      *
      * @param string $value The role of the acl.
      */
@@ -112,7 +112,7 @@ class ACLRole extends \Zend\GData\Extension
      * Set the value for this element's value attribute.
      *
      * @param string $value The desired value for this attribute.
-     * @return \Zend\Gdata\Docs\Extension\ACLRole The element being modified.
+     * @return \Zend\GData\Docs\Extension\ACLRole The element being modified.
      */
     public function setValue($value)
     {

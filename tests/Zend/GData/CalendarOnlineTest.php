@@ -20,6 +20,7 @@
  */
 
 namespace ZendTest\GData;
+
 use Zend\GData\Calendar;
 
 /**
@@ -64,18 +65,19 @@ class CalendarOnlineTest extends \PHPUnit_Framework_TestCase
     /**
      * @group ZF-1701
      */
-    /*
     public function testCalendarOnlineFeed()
     {
         $eventFeed = $this->gdata->getCalendarEventFeed();
-        foreach ($eventFeed as $event) {
-            $title = $event->title;
-            $times = $event->when;
-            $location = $event->where;
-            $recurrence = $event->recurrence;
+        $this->assertTrue(strpos($eventFeed->title->text, TESTS_ZEND_GDATA_CLIENTLOGIN_EMAIL)
+            !== false);
+        $eventCount = 0;
+        foreach ( $eventFeed as $event ) {
+            $this->assertInstanceOf('Zend\GData\Calendar\EventEntry', $event);
+            $eventCount++;
         }
+        $this->assertTrue($eventCount > 0 );
+        $this->assertTrue(count($eventFeed) == $eventCount);
     }
-    */
 
     function getEvent($eventId)
     {

@@ -121,8 +121,8 @@ class ListEntry extends \Zend\GData\Entry
     }
 
     /**
-     * @param \Zend\GData\Calendar\Extension\AccessLevel $value
-     * @return Zend_Gdata_Extension_ListEntry Provides a fluent interface
+     * @param Extension\AccessLevel $value
+     * @return ListEntry Provides a fluent interface
      */
     public function setAccessLevel($value)
     {
@@ -135,8 +135,8 @@ class ListEntry extends \Zend\GData\Entry
     }
 
     /**
-     * @param \Zend\GData\Calendar\Extension\Color $value
-     * @return Zend_Gdata_Extension_ListEntry Provides a fluent interface
+     * @param Extension\Color $value
+     * @return ListEntry Provides a fluent interface
      */
     public function setColor($value)
     {
@@ -150,8 +150,8 @@ class ListEntry extends \Zend\GData\Entry
     }
 
     /**
-     * @param \Zend\GData\Calendar\Extension\Hidden $value
-     * @return Zend_Gdata_Extension_ListEntry Provides a fluent interface
+     * @param Extension\Hidden $value
+     * @return ListEntry Provides a fluent interface
      */
     public function setHidden($value)
     {
@@ -165,8 +165,8 @@ class ListEntry extends \Zend\GData\Entry
     }
 
     /**
-     * @param \Zend\GData\Calendar\Extension\Selected $value
-     * @return Zend_Gdata_Extension_ListEntry Provides a fluent interface
+     * @param Extension\Selected $value
+     * @return ListEntry Provides a fluent interface
      */
     public function setSelected($value)
     {
@@ -180,8 +180,8 @@ class ListEntry extends \Zend\GData\Entry
     }
 
     /**
-     * @param \Zend\GData\Calendar\Extension\Timezone $value
-     * @return Zend_Gdata_Extension_ListEntry Provides a fluent interface
+     * @param Extension\Timezone $value
+     * @return ListEntry Provides a fluent interface
      */
     public function setTimezone($value)
     {
@@ -196,7 +196,7 @@ class ListEntry extends \Zend\GData\Entry
 
     /**
      * @param \Zend\GData\Extension\Where $value
-     * @return Zend_Gdata_Extension_ListEntry Provides a fluent interface
+     * @return ListEntry Provides a fluent interface
      */
     public function setWhere($value)
     {

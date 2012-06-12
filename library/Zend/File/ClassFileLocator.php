@@ -96,8 +96,8 @@ class ClassFileLocator extends FilterIterator
         $tokens   = token_get_all($contents);
         $count    = count($tokens);
         $i        = 0;
+        $t_trait  = defined('T_TRAIT') ? T_TRAIT : -1; // For preserve PHP 5.3 compatibility
         while ($i < $count) {
-        $t_trait  = defined('T_TRAIT') ? T_TRAIT : -1;
             $token = $tokens[$i];
 
             if (!is_array($token)) {

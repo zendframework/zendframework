@@ -35,30 +35,63 @@ class ExceptionHandlerTest extends \PHPUnit_Framework_TestCase
 {
     public function testFormat()
     {
-        $date = date('c');
         $event = array(
-            'timestamp'    => $date,
+            'timestamp'    => '2012-06-12T09:00:00+02:00',
             'message'      => 'test',
             'priority'     => 1,
             'priorityName' => 'CRIT',
             'extra' => array (
                 'file'  => 'test.php',
                 'line'  => 1,
-                'trace' => array(array(
-                    'file'     => 'test.php',
-                    'line'     => 1,
-                    'function' => 'test',
-                    'class'    => 'Test',
-                    'type'     => '::',
-                    'args'     => array(1)
-                ))
+                'trace' => array(
+                    array(
+                        'file'     => 'test.php',
+                        'line'     => 1,
+                        'function' => 'test',
+                        'class'    => 'Test',
+                        'type'     => '::',
+                        'args'     => array(1)
+                    ),
+                    array(
+                        'file'     => 'test.php',
+                        'line'     => 2,
+                        'function' => 'test',
+                        'class'    => 'Test',
+                        'type'     => '::',
+                        'args'     => array(1)
+                    )
+                )
             )
         );
+        $expected = <<<EOF
+2012-06-12T09:00:00+02:00 CRIT (1) test in test.php on line 1
+[Trace]
+File  : test.php
+Line  : 1
+Func  : test
+Class : Test
+Type  : static
+Args  : Array
+(
+    [0] => 1
+)
+
+File  : test.php
+Line  : 2
+Func  : test
+Class : Test
+Type  : static
+Args  : Array
+(
+    [0] => 1
+)
+
+
+EOF;
+
         $formatter = new ExceptionHandler();
         $output = $formatter->format($event);
 
-        $this->assertEquals($date . " CRIT (1) test in test.php on line 1\n" .
-                "[Trace]\nFile  : test.php\nLine  : 1\nFunc  : test\nClass : Test\n" .
-                "Type  : static\nArgs  : Array\n(\n    [0] => 1\n)\n\n", $output);
+        $this->assertEquals($expected, $output);
     }
 }

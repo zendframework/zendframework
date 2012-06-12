@@ -21,6 +21,8 @@
 
 namespace Zend\Mail\Header;
 
+use Zend\Mail\Headers;
+
 /**
  * @todo       Allow setting date from DateTime, Zend\Date, or string
  * @category   Zend
@@ -135,6 +137,6 @@ class Received implements HeaderInterface, MultipleHeadersInterface
             }
             $strings[] = $header->toString();
         }
-        return implode("\r\n", $strings);
+        return implode(Headers::EOL, $strings);
     }
 }

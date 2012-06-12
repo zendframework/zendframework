@@ -546,6 +546,8 @@ class Message
     public function toString()
     {
         $headers = $this->headers();
-        return $headers->toString() . "\r\n" . $this->getBodyText();
+        return $headers->toString()
+               . Headers::EOL
+               . $this->getBodyText();
     }
 }

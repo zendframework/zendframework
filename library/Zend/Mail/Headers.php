@@ -41,6 +41,12 @@ use ArrayIterator,
  */
 class Headers implements Iterator, Countable
 {
+    /** @var string End of Line for fields */
+    const EOL = "\r\n";
+
+    /** @var string Start of Line when folding */
+    const FOLDING = "\r\n ";
+
     /**
      * @var PluginClassLoader
      */
@@ -80,7 +86,7 @@ class Headers implements Iterator, Countable
         $currentLine = '';
 
         // iterate the header lines, some might be continuations
-        foreach (explode("\r\n", $string) as $line) {
+        foreach (explode(self::EOL, $string) as $line) {
             // check if a header name is present
             if (preg_match('/^(?P<name>[^()><@,;:\"\\/\[\]?=}{ \t]+):.*$/', $line, $matches)) {
                 if ($currentLine) {
@@ -410,7 +416,7 @@ class Headers implements Iterator, Countable
         $headers = '';
         foreach ($this->headers as $header) {
             if ($str = $header->toString()) {
-                $headers .= $str . "\r\n";
+                $headers .= $str . self::EOL;
             }
         }
 

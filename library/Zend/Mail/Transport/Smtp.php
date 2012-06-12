@@ -243,7 +243,7 @@ class Smtp implements TransportInterface, Pluggable
         }
 
         // Issue DATA command to client
-        $connection->data($headers . "\r\n" . $body);
+        $connection->data($headers . Headers::EOL . $body);
     }
 
     /**

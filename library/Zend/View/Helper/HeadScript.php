@@ -409,7 +409,8 @@ class HeadScript extends Placeholder\Container\Standalone
         if (!empty($item->attributes)) {
             foreach ($item->attributes as $key => $value) {
                 if ((!$this->arbitraryAttributesAllowed()
-                    && !in_array($key, $this->_optionalAttributes)) || in_array($key, array('conditional', 'noescape')))
+                    && !in_array($key, $this->_optionalAttributes)) 
+                    || in_array($key, array('conditional', 'noescape')))
                 {
                     continue;
                 }

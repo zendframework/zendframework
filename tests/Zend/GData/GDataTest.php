@@ -56,19 +56,6 @@ class GDataTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($client, $client2);
     }
 
-    public function testExceptionNotHttpClient()
-    {
-        $obj = new \ArrayObject();
-        try {
-            $gdata = new GData\GData($obj);
-            $this->fail('Expecting to catch Zend_GData_App_HttpException');
-        } catch (\Exception $e) {
-            $this->assertThat($e, $this->isInstanceOf('Zend\GData\App\HttpException'),
-                'Expecting Zend\GData\App\HttpException, got '.get_class($e));
-            $this->assertEquals('Argument is not an instance of Zend\Http\Client.', $e->getMessage());
-        }
-    }
-
     public function testGetFeedExceptionInvalidLocationType()
     {
         $gdata = new GData\GData();

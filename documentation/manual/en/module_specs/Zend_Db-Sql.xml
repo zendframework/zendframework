@@ -158,6 +158,25 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
 ]]></programlisting>
 
         <para>
+            from():
+        </para>
+
+        <programlisting language="php"><![CDATA[
+// as a string:
+$select->from('foo');
+
+// as an array to specify an alias:
+// produces SELECT "t".* FROM "table" AS "t"
+
+$select->from(array('t' => 'table'));
+
+// using a Sql\TableIdentifier:
+// same output as above
+
+$select->from(new TableIdentifier(array('t' => 'table')));
+]]></programlisting>
+
+        <para>
             columns():
         </para>
 
@@ -182,6 +201,10 @@ $select->join(
 	array('bar', 'baz'), // (optional) list of columns, same requiremetns as columns() above
 	$select::JOIN_OUTER // (optional), one of inner, outer, left, right also represtned by constants in the API
 );
+
+$select->from(array('f' => 'foo'))  // base table
+    ->join(array('b' => 'bar'),     // join table with alias
+    'f.foo_id = b.foo_id');         // join expression
 ]]></programlisting>
 
         <para>

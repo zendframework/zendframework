@@ -28,7 +28,7 @@ use DirectoryIterator,
     RecursiveIteratorIterator;
 
 /**
- * Locate files containing PHP classes, interfaces, or abstracts
+ * Locate files containing PHP classes, interfaces, abstracts or traits
  *
  * @category   Zend
  * @package    Zend_File
@@ -97,6 +97,7 @@ class ClassFileLocator extends FilterIterator
         $count    = count($tokens);
         $i        = 0;
         while ($i < $count) {
+        $t_trait  = defined('T_TRAIT') ? T_TRAIT : -1;
             $token = $tokens[$i];
 
             if (!is_array($token)) {
@@ -136,9 +137,10 @@ class ClassFileLocator extends FilterIterator
                     // Set the namespace of this file in the object
                     $file->namespace = $namespace;
                     break;
+                case $t_trait:
                 case T_CLASS:
                 case T_INTERFACE:
-                    // Abstract class, class, or interface found
+                    // Abstract class, class, interface or trait found
 
                     // Get the classname
                     $class = '';

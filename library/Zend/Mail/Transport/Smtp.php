@@ -235,6 +235,14 @@ class Smtp implements TransportInterface, Pluggable
         $headers    = $this->prepareHeaders($message);
         $body       = $this->prepareBody($message);
 
+        if ((count($recipients) == 0) && (!empty($headers) || !empty($body))) {
+            throw new Exception\RuntimeException(  // Per RFC 2821 3.3 (page 18)
+                sprintf(
+                    '%s transport expects at least one recipient if the message has at least one header or body',
+                    __CLASS__
+                ));
+        }
+
         // Set sender email address
         $connection->mail($from);
 
@@ -262,7 +270,7 @@ class Smtp implements TransportInterface, Pluggable
         }
 
         $from = $message->from();
-        if (!count($from)) {
+        if (!count($from)) { // Per RFC 2822 3.6
             throw new Exception\RuntimeException(sprintf(
                 '%s transport expects either a Sender or at least one From address in the Message; none provided',
                 __CLASS__

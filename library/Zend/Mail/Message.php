@@ -441,7 +441,7 @@ class Message
     public function getBodyText()
     {
         if ($this->body instanceof Mime\Message) {
-            return $this->body->generateMessage();
+            return $this->body->generateMessage(Headers::EOL);
         }
 
         return (string) $this->body;

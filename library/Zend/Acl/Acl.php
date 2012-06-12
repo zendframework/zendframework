@@ -119,9 +119,7 @@ class Acl
     {
         if (is_string($role)) {
             $role = new Role\GenericRole($role);
-        }
-
-        if (!$role instanceof Role\RoleInterface) {
+        } elseif (!$role instanceof Role\RoleInterface) {
             throw new Exception\InvalidArgumentException('addRole() expects $role to be of type Zend\Acl\Role\RoleInterface');
         }
 
@@ -248,9 +246,7 @@ class Acl
     {
         if (is_string($resource)) {
             $resource = new Resource\GenericResource($resource);
-        }
-
-        if (!$resource instanceof Resource\ResourceInterface) {
+        } elseif (!$resource instanceof Resource\ResourceInterface) {
             throw new Exception\InvalidArgumentException('addResource() expects $resource to be of type Zend\Acl\Resource\ResourceInterface');
         }
 

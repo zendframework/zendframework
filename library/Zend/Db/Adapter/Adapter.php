@@ -74,9 +74,7 @@ class Adapter
     {
         if (is_array($driver)) {
             $driver = $this->createDriverFromParameters($driver);
-        }
-
-        if (!$driver instanceof Driver\DriverInterface) {
+        } elseif (!$driver instanceof Driver\DriverInterface) {
             throw new Exception\InvalidArgumentException(
                 'The supplied or instantiated driver object does not implement Zend\Db\Adapter\Driver\DriverInterface'
             );

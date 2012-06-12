@@ -176,10 +176,9 @@ class YouTube extends Media
     {
         if ($client === null) {
             $client = new Http\Client();
-        }
-        if (!$client instanceof Http\Client) {
+        } elseif (!$client instanceof Http\Client) {
             throw new App\HttpException(
-                'Argument is not an instance of Zend_Http_Client.');
+                'Argument is not an instance of Zend\Http\Client.');
         }
 
         if ($clientId != null) {

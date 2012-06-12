@@ -223,6 +223,8 @@ class AuthSub
     {
         if ($client == null) {
             $client = new HttpClient();
+        } elseif (!$client instanceof Client) {
+            throw new App\HttpException('Client is not an instance of Zend_Http_Client.');
         }
         $useragent = 'Zend_Framework_Gdata/' . \Zend\Version::VERSION;
         $client->setOptions(array(

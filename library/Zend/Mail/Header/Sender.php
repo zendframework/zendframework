@@ -154,8 +154,7 @@ class Sender implements HeaderInterface
     {
         if (is_string($emailOrAddress)) {
             $emailOrAddress = new Mail\Address($emailOrAddress, $name);
-        }
-        if (!$emailOrAddress instanceof Mail\Address\AddressInterface) {
+        } elseif (!$emailOrAddress instanceof Mail\Address\AddressInterface) {
             throw new Exception\InvalidArgumentException(sprintf(
                 '%s expects a string or AddressInterface object; received "%s"',
                 __METHOD__,

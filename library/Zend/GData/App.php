@@ -606,7 +606,9 @@ class App
             throw new App\InvalidArgumentException(
                 'You must specify an URI to which to post.');
         }
-        //$headers['Content-Type'] = $contentType;
+        if ($contentType != null){
+			$headers['Content-Type'] = $contentType; 
+		}
         if (self::getGzipEnabled()) {
             // some services require the word 'gzip' to be in the user-agent
             // header in addition to the accept-encoding header

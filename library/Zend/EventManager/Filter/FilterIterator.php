@@ -96,7 +96,7 @@ class FilterIterator extends SplPriorityQueue
      * @param  mixed $context 
      * @param  array $params 
      * @param  FilterIterator $chain 
-     * @return void
+     * @return mixed
      */
     public function next($context = null, array $params = array(), $chain = null)
     {

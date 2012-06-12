@@ -25,7 +25,6 @@ use ArrayIterator,
     Iterator,
     Countable,
     Traversable,
-    Zend\Loader\PluginClassLoader,
     Zend\Loader\PluginClassLocator;
 
 /**
@@ -48,7 +47,7 @@ class Headers implements Iterator, Countable
     const FOLDING = "\r\n ";
 
     /**
-     * @var PluginClassLoader
+     * @var \Zend\Loader\PluginClassLoader
      */
     protected $pluginClassLoader = null;
 
@@ -134,25 +133,7 @@ class Headers implements Iterator, Countable
     public function getPluginClassLoader()
     {
         if ($this->pluginClassLoader === null) {
-            $this->pluginClassLoader = new PluginClassLoader(array(
-                'bcc'          => 'Zend\Mail\Header\Bcc',
-                'cc'           => 'Zend\Mail\Header\Cc',
-                'contenttype'  => 'Zend\Mail\Header\ContentType',
-                'content_type' => 'Zend\Mail\Header\ContentType',
-                'content-type' => 'Zend\Mail\Header\ContentType',
-                'date'         => 'Zend\Mail\Header\Date',
-                'from'         => 'Zend\Mail\Header\From',
-                'mimeversion'  => 'Zend\Mail\Header\MimeVersion',
-                'mime_version' => 'Zend\Mail\Header\MimeVersion',
-                'mime-version' => 'Zend\Mail\Header\MimeVersion',
-                'received'     => 'Zend\Mail\Header\Received',
-                'replyto'      => 'Zend\Mail\Header\ReplyTo',
-                'reply_to'     => 'Zend\Mail\Header\ReplyTo',
-                'reply-to'     => 'Zend\Mail\Header\ReplyTo',
-                'sender'       => 'Zend\Mail\Header\Sender',
-                'subject'      => 'Zend\Mail\Header\Subject',
-                'to'           => 'Zend\Mail\Header\To',
-            ));
+            $this->pluginClassLoader = new Header\HeaderLoader();
         }
         return $this->pluginClassLoader;
     }

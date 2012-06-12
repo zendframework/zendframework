@@ -54,12 +54,6 @@ class HeadScript extends Placeholder\Container\Standalone
      */
     protected $_arbitraryAttributes = false;
 
-    /**
-     * Should scripts be escaped with cdata or html comment tags?
-     * @var bool
-     */
-    protected $_escapeScript = true;
-
     /**#@+
      * Capture type and/or attributes (used for hinting during capture)
      * @var string
@@ -401,38 +395,6 @@ class HeadScript extends Placeholder\Container\Standalone
     }
 
     /**
-     * Set flag indicating if scripts should be escaped with one of these
-     *
-     * //<!--
-     * ...your script
-     * //]]>
-     *
-     * or
-     *
-     * //<![CDATA[
-     * ...your script
-     * //-->
-     *
-     * @param  bool $flag Set flag
-     * @return \Zend\View\Helper\HeadScript
-     */
-    public function setEscapeScript($flag)
-    {
-        $this->_escapeScript = (bool) $flag;
-        return $this;
-    }
-
-    /**
-     * Are arbitrary attributes allowed?
-     *
-     * @return bool
-     */
-    public function escapeScript()
-    {
-        return $this->_escapeScript;
-    }
-
-    /**
      * Create script HTML
      *
      * @param  mixed  $item        Item to convert
@@ -446,8 +408,9 @@ class HeadScript extends Placeholder\Container\Standalone
         $attrString = '';
         if (!empty($item->attributes)) {
             foreach ($item->attributes as $key => $value) {
-                if (!$this->arbitraryAttributesAllowed()
-                    && !in_array($key, $this->_optionalAttributes))
+                if ((!$this->arbitraryAttributesAllowed()
+                    && !in_array($key, $this->_optionalAttributes)) 
+                    || in_array($key, array('conditional', 'noescape')))
                 {
                     continue;
                 }
@@ -458,10 +421,25 @@ class HeadScript extends Placeholder\Container\Standalone
             }
         }
 
+
+        $addScriptEscape = !(isset($item->attributes['noescape']) && filter_var($item->attributes['noescape'], FILTER_VALIDATE_BOOLEAN));
+
         $type = ($this->_autoEscape) ? $this->_escape($item->type) : $item->type;
         $html  = '<script type="' . $type . '"' . $attrString . '>';
         if (!empty($item->source)) {
-              $html .= PHP_EOL . $indent . '    ' . $escapeStart . PHP_EOL . $item->source . $indent . '    ' . $escapeEnd . PHP_EOL . $indent;
+            $html .= PHP_EOL ;
+
+            if ($addScriptEscape) {
+                $html .= $indent . '    ' . $escapeStart . PHP_EOL;
+            }
+
+            $html .= $indent . '    ' . $item->source;
+
+            if ($addScriptEscape) {
+                $html .= $indent . '    ' . $escapeEnd . PHP_EOL;
+            }
+            
+            $html .= $indent;
         }
         $html .= '</script>';
 
@@ -495,11 +473,8 @@ class HeadScript extends Placeholder\Container\Standalone
             $useCdata = $this->useCdata ? true : false;
         }
 
-        $escapeStart = $escapeEnd   = '';
-        if ($this->escapeScript()) {
-            $escapeStart = ($useCdata) ? '//<![CDATA[' : '//<!--';
-            $escapeEnd   = ($useCdata) ? '//]]>' : '//-->';
-        }
+        $escapeStart = ($useCdata) ? '//<![CDATA[' : '//<!--';
+        $escapeEnd   = ($useCdata) ? '//]]>' : '//-->';
 
         $items = array();
         $this->getContainer()->ksort();

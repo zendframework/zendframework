@@ -607,8 +607,8 @@ class App
                 'You must specify an URI to which to post.');
         }
         if ($contentType != null){
-			$headers['Content-Type'] = $contentType; 
-		}
+            $headers['Content-Type'] = $contentType; 
+        }
         if (self::getGzipEnabled()) {
             // some services require the word 'gzip' to be in the user-agent
             // header in addition to the accept-encoding header

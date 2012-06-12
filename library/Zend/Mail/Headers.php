@@ -250,12 +250,12 @@ class Headers implements Iterator, Countable
     /**
      * Remove a Header from the container
      *
-     * @param Header\HeaderInterface $header
+     * @param  string $fieldName
      * @return bool
      */
-    public function removeHeader(Header\HeaderInterface $header)
+    public function removeHeader($fieldName)
     {
-        $key = $this->normalizeFieldName($header->getFieldName());
+        $key = $this->normalizeFieldName($fieldName);
         $index = array_search($key, $this->headersKeys, true);
         if ($index !== false) {
             unset($this->headersKeys[$index]);

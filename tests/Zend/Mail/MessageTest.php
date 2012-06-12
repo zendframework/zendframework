@@ -40,6 +40,9 @@ use stdClass,
  */
 class MessageTest extends \PHPUnit_Framework_TestCase
 {
+    /** @var Message */
+    public $message;
+
     public function setUp()
     {
         $this->message = new Message();

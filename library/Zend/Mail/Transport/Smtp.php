@@ -22,15 +22,16 @@
 namespace Zend\Mail\Transport;
 
 use Zend\Loader\Pluggable,
-    Zend\Mail,
+    Zend\Mail\Address,
     Zend\Mail\Headers,
+    Zend\Mail\Message,
     Zend\Mail\Protocol,
     Zend\Mail\Protocol\Exception as ProtocolException;
 
 /**
  * SMTP connection object
  *
- * Loads an instance of \Zend\Mail\Protocol\Smtp and forwards smtp transactions
+ * Loads an instance of Zend\Mail\Protocol\Smtp and forwards smtp transactions
  *
  * @category   Zend
  * @package    Zend_Mail
@@ -213,9 +214,9 @@ class Smtp implements TransportInterface, Pluggable
      * The connection via the protocol adapter is made just-in-time to allow a
      * developer to add a custom adapter if required before mail is sent.
      *
-     * @param Mail\Message $message
+     * @param Message $message
      */
-    public function send(Mail\Message $message)
+    public function send(Message $message)
     {
         // If sending multiple messages per session use existing adapter
         $connection = $this->getConnection();
@@ -249,14 +250,14 @@ class Smtp implements TransportInterface, Pluggable
     /**
      * Retrieve email address for envelope FROM
      *
-     * @param  Mail\Message $message
+     * @param  Message $message
      * @throws Exception\RuntimeException
      * @return string
      */
-    protected function prepareFromAddress(Mail\Message $message)
+    protected function prepareFromAddress(Message $message)
     {
         $sender = $message->getSender();
-        if ($sender instanceof Mail\Address\AddressInterface) {
+        if ($sender instanceof Address\AddressInterface) {
             return $sender->getEmail();
         }
 
@@ -275,11 +276,11 @@ class Smtp implements TransportInterface, Pluggable
 
     /**
      * Prepare array of email address recipients
-     * 
-     * @param  Mail\Message $message
+     *
+     * @param  Message $message
      * @return array
      */
-    protected function prepareRecipients(Mail\Message $message)
+    protected function prepareRecipients(Message $message)
     {
         $recipients = array();
         foreach ($message->to() as $address) {
@@ -297,29 +298,24 @@ class Smtp implements TransportInterface, Pluggable
 
     /**
      * Prepare header string from message
-     * 
-     * @param  Mail\Message $message
+     *
+     * @param  Message $message
      * @return string
      */
-    protected function prepareHeaders(Mail\Message $message)
+    protected function prepareHeaders(Message $message)
     {
-        $headers = new Headers();
-        foreach ($message->headers() as $header) {
-            if ('Bcc' == $header->getFieldName()) {
-                continue;
-            }
-            $headers->addHeader($header);
-        }
+        $headers = clone $message->headers();
+        $headers->removeHeader('Bcc');
         return $headers->toString();
     }
 
     /**
      * Prepare body string from message
-     * 
-     * @param  Mail\Message $message
+     *
+     * @param  Message $message
      * @return string
      */
-    protected function prepareBody(Mail\Message $message)
+    protected function prepareBody(Message $message)
     {
         return $message->getBodyText();
     }
@@ -327,7 +323,7 @@ class Smtp implements TransportInterface, Pluggable
     /**
      * Lazy load the connection, and pass it helo
      * 
-     * @return Mail\Protocol\Smtp
+     * @return Protocol\Smtp
      */
     protected function lazyLoadConnection()
     {

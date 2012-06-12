@@ -475,11 +475,7 @@ class Message
      */
     protected function clearHeaderByName($headerName)
     {
-        $headers = $this->headers();
-        if ($headers->has($headerName)) {
-            $header = $headers->get($headerName);
-            $headers->removeHeader($header);
-        }
+        $this->headers()->removeHeader($headerName);
     }
 
     /**

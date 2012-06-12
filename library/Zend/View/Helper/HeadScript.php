@@ -54,6 +54,12 @@ class HeadScript extends Placeholder\Container\Standalone
      */
     protected $_arbitraryAttributes = false;
 
+    /**
+     * Should scripts be escaped with cdata or html comment tags?
+     * @var bool
+     */
+    protected $_escapeScript = true;
+
     /**#@+
      * Capture type and/or attributes (used for hinting during capture)
      * @var string
@@ -395,6 +401,38 @@ class HeadScript extends Placeholder\Container\Standalone
     }
 
     /**
+     * Set flag indicating if scripts should be escaped with one of these
+     *
+     * //<!--
+     * ...your script
+     * //]]>
+     *
+     * or
+     *
+     * //<![CDATA[
+     * ...your script
+     * //-->
+     *
+     * @param  bool $flag Set flag
+     * @return \Zend\View\Helper\HeadScript
+     */
+    public function setEscapeScript($flag)
+    {
+        $this->_escapeScript = (bool) $flag;
+        return $this;
+    }
+
+    /**
+     * Are arbitrary attributes allowed?
+     *
+     * @return bool
+     */
+    public function escapeScript()
+    {
+        return $this->_escapeScript;
+    }
+
+    /**
      * Create script HTML
      *
      * @param  mixed  $item        Item to convert
@@ -456,8 +494,12 @@ class HeadScript extends Placeholder\Container\Standalone
         } else {
             $useCdata = $this->useCdata ? true : false;
         }
-        $escapeStart = ($useCdata) ? '//<![CDATA[' : '//<!--';
-        $escapeEnd   = ($useCdata) ? '//]]>'       : '//-->';
+
+        $escapeStart = $escapeEnd   = '';
+        if ($this->escapeScript()) {
+            $escapeStart = ($useCdata) ? '//<![CDATA[' : '//<!--';
+            $escapeEnd   = ($useCdata) ? '//]]>' : '//-->';
+        }
 
         $items = array();
         $this->getContainer()->ksort();

@@ -20,6 +20,8 @@
 
 namespace Zend\EventManager;
 
+use ArrayAccess;
+
 /**
  * Representation of an event
  *

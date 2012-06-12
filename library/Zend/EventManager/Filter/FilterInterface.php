@@ -20,6 +20,7 @@
 
 namespace Zend\EventManager\Filter;
 
+use Zend\EventManager\ResponseCollection;
 use Zend\Stdlib\CallbackHandler;
 
 /**

@@ -20,8 +20,8 @@
 
 namespace Zend\EventManager\Filter;
 
-use Zend\Stdlib\CallbackHandler,
-    Zend\Stdlib\SplPriorityQueue;
+use Zend\Stdlib\CallbackHandler;
+use Zend\Stdlib\SplPriorityQueue;
 
 /**
  * Specialized priority queue implementation for use with an intercepting 

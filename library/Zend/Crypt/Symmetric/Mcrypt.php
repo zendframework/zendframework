@@ -101,7 +101,9 @@ class Mcrypt implements SymmetricInterface
     /**
      * Constructor
      *
-     * @param array|Traversable $options
+     * @param  array|Traversable $options
+     * @throws Exception\RuntimeException
+     * @throws Exception\InvalidArgumentException
      */
     public function __construct($options = array())
     {
@@ -181,6 +183,7 @@ class Mcrypt implements SymmetricInterface
      * Set the symmetric cipher broker
      *
      * @param  string|PaddingBroker $broker
+     * @throws Exception\InvalidArgumentException
      * @return void
      */
     public static function setPaddingBroker($broker)
@@ -218,6 +221,7 @@ class Mcrypt implements SymmetricInterface
      * Set the encryption key
      *
      * @param  string $key
+     * @throws Exception\InvalidArgumentException
      * @return Mcrypt
      */
     public function setKey($key)
@@ -246,6 +250,7 @@ class Mcrypt implements SymmetricInterface
      * Set the encryption algorithm (cipher)
      *
      * @param  string $algo
+     * @throws Exception\InvalidArgumentException
      * @return Mcrypt
      */
     public function setAlgorithm($algo)
@@ -295,6 +300,7 @@ class Mcrypt implements SymmetricInterface
      * Encrypt
      *
      * @param  string $data
+     * @throws Exception\InvalidArgumentException
      * @return string
      */
     public function encrypt($data)
@@ -330,6 +336,7 @@ class Mcrypt implements SymmetricInterface
      * Decrypt
      *
      * @param  string $data
+     * @throws Exception\InvalidArgumentException
      * @return string
      */
     public function decrypt($data)
@@ -381,6 +388,7 @@ class Mcrypt implements SymmetricInterface
      * Set the salt (IV)
      *
      * @param  string $salt
+     * @throws Exception\InvalidArgumentException
      * @return Mcrypt
      */
     public function setSalt($salt)
@@ -411,6 +419,7 @@ class Mcrypt implements SymmetricInterface
      * Set the cipher mode
      *
      * @param  string $mode
+     * @throws Exception\InvalidArgumentException
      * @return Mcrypt
      */
     public function setMode($mode)

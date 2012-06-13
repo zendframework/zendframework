@@ -91,5 +91,4 @@ class ApcTest extends CommonAdapterTest
 
         parent::tearDown();
     }
-
 }

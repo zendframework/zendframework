@@ -101,8 +101,8 @@ class MemcachedTest extends CommonAdapterTest
 
     public function tearDown()
     {
-        if (!empty($this->_storage)) {
-            $this->_storage->clear();
+        if ($this->_storage) {
+            $this->_storage->flush();
         }
 
         parent::tearDown();

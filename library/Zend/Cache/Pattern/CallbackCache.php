@@ -22,8 +22,7 @@
 namespace Zend\Cache\Pattern;
 
 use Zend\Cache\Exception,
-    Zend\Cache\StorageFactory,
-    Zend\Cache\Storage\Adapter\AdapterInterface as StorageAdapter;
+    Zend\Cache\StorageFactory;
 
 /**
  * @category   Zend
@@ -56,17 +55,16 @@ class CallbackCache extends AbstractPattern
      *
      * @param  callback   $callback  A valid callback
      * @param  array      $args      Callback arguments
-     * @param  array      $options   Options
      * @return mixed Result
      * @throws Exception
      */
-    public function call($callback, array $args = array(), array $options = array())
+    public function call($callback, array $args = array())
     {
-        $classOptions = $this->getOptions();
-
+        $options = $this->getOptions();
+        $storage = $options->getStorage();
         $success = null;
-        $key     = $this->_generateKey($callback, $args, $options);
-        $result  = $classOptions->getStorage()->getItem($key, $options, $success);
+        $key     = $this->generateCallbackKey($callback, $args);
+        $result  = $storage->getItem($key, $success);
         if ($success) {
             if (!isset($result[0])) {
                 throw new Exception\RuntimeException("Invalid cached data for key '{$key}'");
@@ -76,7 +74,7 @@ class CallbackCache extends AbstractPattern
             return $result[0];
         }
 
-        $cacheOutput = $classOptions->getCacheOutput();
+        $cacheOutput = $options->getCacheOutput();
         if ($cacheOutput) {
             ob_start();
             ob_implicit_flush(false);
@@ -103,7 +101,7 @@ class CallbackCache extends AbstractPattern
             $data = array($ret);
         }
 
-        $classOptions->getStorage()->setItem($key, $data, $options);
+        $storage->setItem($key, $data);
 
         return $ret;
     }
@@ -123,106 +121,91 @@ class CallbackCache extends AbstractPattern
 
     /**
      * Generate a unique key in base of a key representing the callback part
-     * and a key representing the arguments part merged using md5($callbackKey.$argumentsKey).
-     *
-     * Options:
-     *   callback_key  A string representing the callback part of the key
-     *                 or NULL to autogenerate the callback key part
-     *   argument_key  A string representing the arguments part of the key
-     *                 or NULL to autogenerate the arguments key part
+     * and a key representing the arguments part.
      *
      * @param  callback   $callback  A valid callback
      * @param  array      $args      Callback arguments
-     * @param  array      $options   Options
      * @return string
      * @throws Exception
      */
-    public function generateKey($callback, array $args = array(), array $options = array())
+    public function generateKey($callback, array $args = array())
     {
-        return $this->_generateKey($callback, $args, $options);
+        return $this->generateCallbackKey($callback, $args);
     }
 
     /**
      * Generate a unique key in base of a key representing the callback part
-     * and a key representing the arguments part merged using md5($callbackKey.$argumentsKey).
+     * and a key representing the arguments part.
      *
      * @param  callback   $callback  A valid callback
      * @param  array      $args      Callback arguments
-     * @param  array      $options   Options
      * @return string
-     * @throws Exception\InvalidArgumentException
-     * @throws Exception\RuntimeException
+     * @throws Exception
      */
-    protected function _generateKey($callback, array $args, array $options)
+    protected function generateCallbackKey($callback, array $args)
     {
-        $callbackKey  = '';
-        $argumentKey  = '';
-
-        // generate callback key part
-        if (isset($options['callback_key'])) {
-            $callbackKey = (string) $options['callback_key'];
-
-            if (!is_callable($callback, false)) {
-                throw new Exception\InvalidArgumentException('Invalid callback');
-            }
-        } else {
-            if (!is_callable($callback, false, $callbackKey)) {
-                throw new Exception\InvalidArgumentException('Invalid callback');
-            }
-
-            // functions, methods and classnames are case-insensitive
-            $callbackKey = strtolower($callbackKey);
-
-            // generate a unique key of object callbacks
-            if (is_object($callback)) { // Closures & __invoke
-                $object = $callback;
-            } elseif (isset($callback[0])) { // array($object, 'method')
-                $object = $callback[0];
-            }
-            if (isset($object)) {
-                try {
-                    $serializedObject = @serialize($object);
-                } catch (\Exception $e) {
-                    throw new Exception\RuntimeException(
-                        "Can't serialize callback: see previous exception"
-                    , 0, $e);
-                }
-
-                if (!$serializedObject) {
-                    $lastErr = error_get_last();
-                    throw new Exception\RuntimeException(
-                        "Can't serialize callback: "
-                        . $lastErr['message']
-                    );
-                }
-                $callbackKey.= $serializedObject;
-            }
+        if (!is_callable($callback, false, $callbackKey)) {
+            throw new Exception\InvalidArgumentException('Invalid callback');
         }
 
-        // generate argument key part
-        if (isset($options['argument_key'])) {
-            $argumentKey = (string)$options['argument_key'];
-        } elseif ($args) {
+        // functions, methods and classnames are case-insensitive
+        $callbackKey = strtolower($callbackKey);
+
+        // generate a unique key of object callbacks
+        if (is_object($callback)) { // Closures & __invoke
+            $object = $callback;
+        } elseif (isset($callback[0])) { // array($object, 'method')
+            $object = $callback[0];
+        }
+        if (isset($object)) {
             try {
-                $serializedArgs = @serialize(array_values($args));
+                $serializedObject = @serialize($object);
             } catch (\Exception $e) {
                 throw new Exception\RuntimeException(
-                    "Can't serialize arguments: see previous exception"
-                , 0, $e);
-            }
-
-            if (!$serializedArgs) {
-                $lastErr = error_get_last();
-                throw new Exception\RuntimeException(
-                    "Can't serialize arguments: "
-                    . $lastErr['message']
+                    "Can't serialize callback: see previous exception", 0, $e
                 );
             }
 
-            $argumentKey = $serializedArgs;
+            if (!$serializedObject) {
+                $lastErr = error_get_last();
+                throw new Exception\RuntimeException(
+                    "Can't serialize callback: " . $lastErr['message']
+                );
+            }
+            $callbackKey.= $serializedObject;
         }
 
-        // merge and return the key parts
-        return md5($callbackKey.$argumentKey);
+        return md5($callbackKey) . $this->generateArgumentsKey($args);
+    }
+
+    /**
+     * Generate a unique key of the argument part.
+     *
+     * @param  array $args
+     * @return string
+     * @throws Exception
+     */
+    protected function generateArgumentsKey(array $args)
+    {
+        if (!$args) {
+            return '';
+        }
+
+        try {
+            $serializedArgs = @serialize(array_values($args));
+        } catch (\Exception $e) {
+            throw new Exception\RuntimeException(
+                "Can't serialize arguments: see previous exception"
+            , 0, $e);
+        }
+
+        if (!$serializedArgs) {
+            $lastErr = error_get_last();
+            throw new Exception\RuntimeException(
+                "Can't serialize arguments: " . $lastErr['message']
+            );
+        }
+
+        return md5($serializedArgs);
     }
 }

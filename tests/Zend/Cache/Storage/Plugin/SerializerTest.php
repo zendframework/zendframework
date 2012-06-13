@@ -61,9 +61,6 @@ class SerializerTest extends CommonPluginTest
             'getItem.post'        => 'onReadItemPost',
             'getItems.post'       => 'onReadItemsPost',
 
-            'fetch.post'          => 'onFetchPost',
-            'fetchAll.post'       => 'onFetchAllPost',
-
             'setItem.pre'         => 'onWriteItemPre',
             'setItems.pre'        => 'onWriteItemsPre',
             'addItem.pre'         => 'onWriteItemPre',
@@ -135,5 +132,4 @@ class SerializerTest extends CommonPluginTest
         $this->assertSame(123, $values['key1']);
         $this->assertSame(456, $values['key2']);
     }
-
 }

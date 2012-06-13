@@ -70,13 +70,6 @@ class ExceptionHandler extends AbstractPlugin
         $handles[] = $events->attach('getMetadata.exception', $callback, $priority);
         $handles[] = $events->attach('getMetadatas.exception', $callback, $priority);
 
-        // non-blocking
-        $handles[] = $events->attach('getDelayed.exception', $callback, $priority);
-        $handles[] = $events->attach('find.exception', $callback, $priority);
-
-        $handles[] = $events->attach('fetch.exception', $callback, $priority);
-        $handles[] = $events->attach('fetchAll.exception', $callback, $priority);
-
         // write
         $handles[] = $events->attach('setItem.exception', $callback, $priority);
         $handles[] = $events->attach('setItems.exception', $callback, $priority);
@@ -101,14 +94,6 @@ class ExceptionHandler extends AbstractPlugin
 
         $handles[] = $events->attach('decrementItem.exception', $callback, $priority);
         $handles[] = $events->attach('decrementItems.exception', $callback, $priority);
-
-        // clear
-        $handles[] = $events->attach('clear.exception', $callback, $priority);
-        $handles[] = $events->attach('clearByNamespace.exception', $callback, $priority);
-
-        // additional
-        $handles[] = $events->attach('optimize.exception', $callback, $priority);
-        $handles[] = $events->attach('getCapacity.exception', $callback, $priority);
 
         return $this;
     }

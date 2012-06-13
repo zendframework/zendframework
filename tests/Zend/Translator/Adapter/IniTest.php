@@ -42,6 +42,16 @@ use Zend\Locale;
  */
 class IniTest extends \PHPUnit_Framework_TestCase
 {
+    public function setUp()
+    {
+        Adapter\Ini::removeCache();
+    }
+
+    public function tearDown()
+    {
+        Adapter\Ini::removeCache();
+    }
+
     public function testCreate()
     {
         $adapter = new Adapter\Ini(__DIR__ . '/_files/translation_en.ini');

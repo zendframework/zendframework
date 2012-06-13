@@ -49,5 +49,4 @@ class CaptureCacheTest extends CommonPatternTest
         // TODO
         parent::tearDown();
     }
-
 }

@@ -22,7 +22,7 @@
 namespace ZendTest\Translator;
 
 use Zend\Cache\StorageFactory as CacheFactory,
-    Zend\Cache\Storage\Adapter\AdapterInterface as CacheAdapter,
+    Zend\Cache\Storage\StorageInterface as CacheStorage,
     Zend\Locale,
     Zend\Log,
     Zend\Log\Writer,
@@ -43,31 +43,13 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
     {
         putenv("HTTP_ACCEPT_LANGUAGE=,ja,de-AT-DE;q=1,en_US;q=0.5");
 
-        if (Translator\Translator::hasCache()) {
-            Translator\Translator::clearCache();
-            Translator\Translator::removeCache();
-        }
-
-        if (Adapter\ArrayAdapter::hasCache()) {
-            Adapter\ArrayAdapter::clearCache();
-            Adapter\ArrayAdapter::removeCache();
-        }
-
         $cache = CacheFactory::adapterFactory('memory', array('memory_limit' => 0));
         Translator\Translator::setCache($cache);
     }
 
     public function tearDown()
     {
-        if (Translator\Translator::hasCache()) {
-            Translator\Translator::clearCache();
-            Translator\Translator::removeCache();
-        }
-
-        if (Adapter\ArrayAdapter::hasCache()) {
-            Adapter\ArrayAdapter::clearCache();
-            Adapter\ArrayAdapter::removeCache();
-        }
+        Translator\Translator::removeCache();
     }
 
     public function testCreate()
@@ -247,16 +229,15 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
         Translator\Translator::setCache($cache);
 
         $cache = Translator\Translator::getCache();
-        $this->assertTrue($cache instanceof CacheAdapter);
+        $this->assertTrue($cache instanceof CacheStorage);
         $this->assertTrue(Translator\Translator::hasCache());
 
         $lang = new Translator\Translator(Translator\Translator::AN_ARRAY, array('msg1' => 'Message 1 (en)'), 'en');
         $adapter = $lang->getAdapter();
         $this->assertTrue($adapter instanceof Adapter\ArrayAdapter);
         $adaptercache = $adapter->getCache();
-        $this->assertTrue($adaptercache instanceof CacheAdapter);
+        $this->assertTrue($adaptercache instanceof CacheStorage);
 
-        Translator\Translator::clearCache();
         $this->assertTrue(Translator\Translator::hasCache());
         Translator\Translator::removeCache();
         $this->assertFalse(Translator\Translator::hasCache());
@@ -872,7 +853,7 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
         ));
 
         $return = Translator\Translator::getCache();
-        $this->assertTrue($return instanceof CacheAdapter);
+        $this->assertTrue($return instanceof CacheStorage);
         $this->assertTrue(Translator\Translator::hasCache());
     }
 

@@ -54,15 +54,14 @@ class ObjectCache extends CallbackCache
      *
      * @param  string $method  Method name to call
      * @param  array  $args    Method arguments
-     * @param  array  $options Cache options
      * @return mixed
      * @throws Exception
      */
-    public function call($method, array $args = array(), array $options = array())
+    public function call($method, array $args = array())
     {
-        $classOptions = $this->getOptions();
-        $object       = $classOptions->getObject();
-        $method       = strtolower($method);
+        $options = $this->getOptions();
+        $object  = $options->getObject();
+        $method  = strtolower($method);
 
         // handle magic methods
         switch ($method) {
@@ -72,8 +71,8 @@ class ObjectCache extends CallbackCache
 
                 $object->{$property} = $value;
 
-                if (!$classOptions->getObjectCacheMagicProperties()
-                    || property_exists($object, $property) 
+                if (!$options->getObjectCacheMagicProperties()
+                    || property_exists($object, $property)
                 ) {
                     // no caching if property isn't magic
                     // or caching magic properties is disabled
@@ -83,20 +82,20 @@ class ObjectCache extends CallbackCache
                 // remove cached __get and __isset
                 $removeKeys = null;
                 if (method_exists($object, '__get')) {
-                    $removeKeys[] = $this->generateKey('__get', array($property), $options);
+                    $removeKeys[] = $this->generateKey('__get', array($property));
                 }
                 if (method_exists($object, '__isset')) {
-                    $removeKeys[] = $this->generateKey('__isset', array($property), $options);
+                    $removeKeys[] = $this->generateKey('__isset', array($property));
                 }
                 if ($removeKeys) {
-                    $classOptions->getStorage()->removeMulti($removeKeys);
+                    $options->getStorage()->removeItems($removeKeys);
                 }
                 return;
 
             case '__get':
                 $property = array_shift($args);
 
-                if (!$classOptions->getObjectCacheMagicProperties()
+                if (!$options->getObjectCacheMagicProperties()
                     || property_exists($object, $property)
                 ) {
                     // no caching if property isn't magic
@@ -105,23 +104,12 @@ class ObjectCache extends CallbackCache
                 }
 
                 array_unshift($args, $property);
-
-                if (!isset($options['callback_key'])) {
-                    if ((isset($options['entity_key']) 
-                        && ($entityKey = $options['entity_key']) !== null)
-                        || ($entityKey = $classOptions->getObjectKey() !== null)
-                    ) {
-                        $options['callback_key'] = $entityKey . '::' . strtolower($method);
-                        unset($options['entity_key']);
-                    }
-                }
-
-                return parent::call(array($object, '__get'), $args, $options);
+                return parent::call(array($object, '__get'), $args);
 
            case '__isset':
                 $property = array_shift($args);
 
-                if (!$classOptions->getObjectCacheMagicProperties()
+                if (!$options->getObjectCacheMagicProperties()
                     || property_exists($object, $property)
                 ) {
                     // no caching if property isn't magic
@@ -129,24 +117,14 @@ class ObjectCache extends CallbackCache
                     return isset($object->{$property});
                 }
 
-                if (!isset($options['callback_key'])) {
-                    if ((isset($options['entity_key']) 
-                        && ($entityKey = $options['entity_key']) !== null)
-                        || ($entityKey = $classOptions->getObjectKey() !== null)
-                    ) {
-                        $options['callback_key'] = $entityKey . '::' . strtolower($method);
-                        unset($options['entity_key']);
-                    }
-                }
-
-                return parent::call(array($object, '__isset'), array($property), $options);
+                return parent::call(array($object, '__isset'), array($property));
 
             case '__unset':
                 $property = array_shift($args);
 
                 unset($object->{$property});
 
-                if (!$classOptions->getObjectCacheMagicProperties()
+                if (!$options->getObjectCacheMagicProperties()
                     || property_exists($object, $property)
                 ) {
                     // no caching if property isn't magic
@@ -157,64 +135,65 @@ class ObjectCache extends CallbackCache
                 // remove previous cached __get and __isset calls
                 $removeKeys = null;
                 if (method_exists($object, '__get')) {
-                    $removeKeys[] = $this->generateKey('__get', array($property), $options);
+                    $removeKeys[] = $this->generateKey('__get', array($property));
                 }
                 if (method_exists($object, '__isset')) {
-                    $removeKeys[] = $this->generateKey('__isset', array($property), $options);
+                    $removeKeys[] = $this->generateKey('__isset', array($property));
                 }
                 if ($removeKeys) {
-                    $classOptions->getStorage()->removeMulti($removeKeys);
+                    $options->getStorage()->removeItems($removeKeys);
                 }
                 return;
         }
 
-        $cache = $classOptions->getCacheByDefault();
+        $cache = $options->getCacheByDefault();
         if ($cache) {
-            $cache = !in_array($method, $classOptions->getObjectNonCacheMethods());
+            $cache = !in_array($method, $options->getObjectNonCacheMethods());
         } else {
-            $cache = in_array($method, $classOptions->getObjectCacheMethods());
+            $cache = in_array($method, $options->getObjectCacheMethods());
         }
 
         if (!$cache) {
             if ($args) {
                 return call_user_func_array(array($object, $method), $args);
-            } 
+            }
             return $object->{$method}();
         }
 
-        if (!isset($options['callback_key'])) {
-            if ((isset($options['entity_key']) && ($entityKey = $options['entity_key']) !== null)
-                || (($entityKey = $classOptions->getObjectKey()) !== null)
-            ) {
-                $options['callback_key'] = $entityKey . '::' . strtolower($method);
-                unset($options['entity_key']);
-            }
-        }
-
-        return parent::call(array($object, $method), $args, $options);
+        return parent::call(array($object, $method), $args);
     }
 
     /**
-     * Generate a unique key from the method name and arguments
+     * Generate a unique key in base of a key representing the callback part
+     * and a key representing the arguments part.
      *
-     * @param  string   $method  The method name
-     * @param  array    $args    Method arguments
-     * @param  array    $options Options
+     * @param  string     $method  The method
+     * @param  array      $args    Callback arguments
      * @return string
      * @throws Exception
      */
-    public function generateKey($method, array $args = array(), array $options = array())
+    public function generateKey($method, array $args = array())
     {
-        $classOptions = $this->getOptions();
-        if (!isset($options['callback_key'])) {
-            if ( (isset($options['entity_key']) && ($entityKey = $options['entity_key']) !== null)
-              || (($entityKey = $classOptions->getObjectKey()) !== null)) {
-                $options['callback_key'] = $entityKey . '::' . strtolower($method);
-                unset($options['entity_key']);
-            }
-        }
+        return $this->generateCallbackKey(
+            array($this->getOptions()->getObject(), $method),
+            $args
+        );
+    }
 
-        return parent::generateKey(array($classOptions->getObject(), $method), $args, $options);
+    /**
+     * Generate a unique key in base of a key representing the callback part
+     * and a key representing the arguments part.
+     *
+     * @param  callback   $callback  A valid callback
+     * @param  array      $args      Callback arguments
+     * @return string
+     * @throws Exception
+     */
+    protected function generateCallbackKey($callback, array $args = array())
+    {
+        $callbackKey = md5($this->getOptions()->getObjectKey() . '::' . strtolower($callback[1]));
+        $argumentKey = $this->generateArgumentsKey($args);
+        return $callbackKey . $argumentKey;
     }
 
     /**
@@ -314,7 +293,7 @@ class ObjectCache extends CallbackCache
      * @return mixed
      * @see    http://php.net/manual/language.oop5.magic.php#language.oop5.magic.invoke
      */
-    public function __invoke() 
+    public function __invoke()
     {
         return $this->call('__invoke', func_get_args());
     }

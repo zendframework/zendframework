@@ -48,11 +48,6 @@ class AccessControllerTest extends \PHPUnit_Framework_TestCase
         $this->_cache = CacheFactory::adapterFactory('memory', array('memory_limit' => 0));
     }
 
-    public function tearDown()
-    {
-        $this->_cache->clear(CacheAdapter::MATCH_ALL);
-    }
-
     /**
      * tests the Movable memory container object creation
      */
@@ -63,7 +58,6 @@ class AccessControllerTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue($memObject instanceof \Zend\Memory\Container\AccessController);
     }
-
 
     /**
      * tests the value access methods
@@ -90,7 +84,6 @@ class AccessControllerTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($memObject->value instanceof \Zend\Memory\Value);
         $this->assertEquals((string)$memObject->value, 'another value');
     }
-
 
     /**
      * tests lock()/unlock()/isLocked() functions

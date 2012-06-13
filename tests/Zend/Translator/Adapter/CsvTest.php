@@ -44,9 +44,12 @@ class CsvTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        if (Adapter\Csv::hasCache()) {
-            Adapter\Csv::removeCache();
-        }
+        Adapter\Csv::removeCache();
+    }
+
+    public function tearDown()
+    {
+        Adapter\Csv::removeCache();
     }
 
     public function testCreate()

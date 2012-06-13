@@ -23,6 +23,7 @@ namespace Zend\Cache\Storage\Plugin;
 
 use Traversable,
     Zend\Cache\Exception,
+    Zend\Cache\Storage\OptimizableInterface,
     Zend\Cache\Storage\PostEvent,
     Zend\EventManager\EventManagerInterface;
 
@@ -61,10 +62,8 @@ class OptimizeByFactor extends AbstractPlugin
         $this->handles[$index] = & $handles;
 
         $callback = array($this, 'optimizeByFactor');
-        $handles[] = $events->attach('removeItem.post',       $callback, $priority);
-        $handles[] = $events->attach('removeItems.post',      $callback, $priority);
-        $handles[] = $events->attach('clear.post',            $callback, $priority);
-        $handles[] = $events->attach('clearByNamespace.post', $callback, $priority);
+        $handles[] = $events->attach('removeItem.post',  $callback, $priority);
+        $handles[] = $events->attach('removeItems.post', $callback, $priority);
 
         return $this;
     }
@@ -102,10 +101,14 @@ class OptimizeByFactor extends AbstractPlugin
      */
     public function optimizeByFactor(PostEvent $event)
     {
+        $storage = $event->getStorage();
+        if ( !($storage instanceof OptimizableInterface) ) {
+            return;
+        }
+
         $factor = $this->getOptions()->getOptimizingFactor();
-        if ($factor && $event->getResult() && mt_rand(1, $factor) == 1) {
-            $params = $event->getParams();
-            $event->getStorage()->optimize($params['options']);
+        if ($factor && mt_rand(1, $factor) == 1) {
+            $storage->optimize();
         }
     }
 }

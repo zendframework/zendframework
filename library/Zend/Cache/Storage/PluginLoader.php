@@ -40,27 +40,14 @@ class PluginLoader extends PluginClassLoader
      * @var array
      */
     protected $plugins = array(
-        'clear_by_factor'    => 'Zend\Cache\Storage\Plugin\ClearByFactor',
-        'clearbyfactor'      => 'Zend\Cache\Storage\Plugin\ClearByFactor',
+        'clear_expired_by_factor' => 'Zend\Cache\Storage\Plugin\ClearExpiredByFactor',
+        'clearexpiredbyfactor'    => 'Zend\Cache\Storage\Plugin\ClearExpiredByFactor',
         'exception_handler'  => 'Zend\Cache\Storage\Plugin\ExceptionHandler',
         'exceptionhandler'   => 'Zend\Cache\Storage\Plugin\ExceptionHandler',
-        //'filter'             => 'Zend\Cache\Storage\Plugin\Filter',
         'ignore_user_abort'  => 'Zend\Cache\Storage\Plugin\IgnoreUserAbort',
         'ignoreuserabort'    => 'Zend\Cache\Storage\Plugin\IgnoreUserAbort',
-        //'key_filter'         => 'Zend\Cache\Storage\Plugin\KeyFilter',
-        //'keyfilter'          => 'Zend\Cache\Storage\Plugin\KeyFilter',
-        //'levels'             => 'Zend\Cache\Storage\Plugin\Levels',
-        //'locking'            => 'Zend\Cache\Storage\Plugin\Locking',
-        //'master_file'        => 'Zend\Cache\Storage\Plugin\MasterFile',
-        //'masterfile'         => 'Zend\Cache\Storage\Plugin\MasterFile',
         'optimize_by_factor' => 'Zend\Cache\Storage\Plugin\OptimizeByFactor',
         'optimizebyfactor'   => 'Zend\Cache\Storage\Plugin\OptimizeByFactor',
-        //'reluctant'          => 'Zend\Cache\Storage\Plugin\Reluctant',
         'serializer'         => 'Zend\Cache\Storage\Plugin\Serializer',
-        //'store_times'        => 'Zend\Cache\Storage\Plugin\StoreTimes',
-        //'storetimes'         => 'Zend\Cache\Storage\Plugin\StoreTimes',
-        //'tagging'            => 'Zend\Cache\Storage\Plugin\Tagging',
-        //'write_control'      => 'Zend\Cache\Storage\Plugin\WriteControl',
-        //'writecontrol'       => 'Zend\Cache\Storage\Plugin\WriteControl',
     );
 }

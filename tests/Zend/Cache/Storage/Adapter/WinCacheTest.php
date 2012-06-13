@@ -70,5 +70,4 @@ class WinCacheTest extends CommonAdapterTest
 
         parent::tearDown();
     }
-
 }

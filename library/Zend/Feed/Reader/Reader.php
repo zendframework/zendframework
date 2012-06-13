@@ -20,7 +20,7 @@
 
 namespace Zend\Feed\Reader;
 
-use Zend\Cache\Storage\Adapter\AdapterInterface as CacheAdapter,
+use Zend\Cache\Storage\StorageInterface as CacheStorage,
     Zend\Http,
     Zend\Loader,
     Zend\Stdlib\ErrorHandler,
@@ -66,7 +66,7 @@ class Reader
     /**
      * Cache instance
      *
-     * @var CacheAdapter
+     * @var CacheStorage
      */
     protected static $_cache = null;
 
@@ -112,7 +112,7 @@ class Reader
     /**
      * Get the Feed cache
      *
-     * @return CacheAdapter
+     * @return CacheStorage
      */
     public static function getCache()
     {
@@ -122,10 +122,10 @@ class Reader
     /**
      * Set the feed cache
      *
-     * @param  CacheAdapter $cache
+     * @param  CacheStorage $cache
      * @return void
      */
-    public static function setCache(CacheAdapter $cache)
+    public static function setCache(CacheStorage $cache)
     {
         self::$_cache = $cache;
     }
@@ -253,7 +253,7 @@ class Reader
             return self::importString($responseXml);
         } elseif ($cache) {
             $data = $cache->getItem($cacheId);
-            if ($data !== false) {
+            if ($data) {
                 return self::importString($data);
             }
             $response = $client->send();

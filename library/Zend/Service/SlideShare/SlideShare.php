@@ -23,7 +23,7 @@ namespace Zend\Service\SlideShare;
 
 use SimpleXMLElement,
     Zend\Cache\StorageFactory as CacheFactory,
-    Zend\Cache\Storage\Adapter\AdapterInterface as CacheAdapter,
+    Zend\Cache\Storage\StorageInterface as CacheStorage,
     Zend\Http,
     Zend\Http\Client;
 
@@ -113,7 +113,7 @@ class SlideShare
     /**
      * The Cache object to use to perform caching
      *
-     * @var CacheAdapter
+     * @var CacheStorage
      */
     protected $cacheobject;
 
@@ -152,28 +152,28 @@ class SlideShare
     }
 
     /**
-     * Sets the CacheAdapter object to use to cache the results of API queries
+     * Sets the CacheStorage object to use to cache the results of API queries
      *
-     * @param  CacheAdapter $cacheobject The CacheAdapter object used
+     * @param  CacheStorage $cacheobject The CacheStorage object used
      * @return Zend\Service\SlideShare\SlideShare
      */
-    public function setCacheObject(CacheAdapter $cacheobject)
+    public function setCacheObject(CacheStorage $cacheobject)
     {
         $this->cacheobject = $cacheobject;
         return $this;
     }
 
     /**
-     * Gets the CacheAdapter object which will be used to cache API queries. If no cache object
+     * Gets the CacheStorage object which will be used to cache API queries. If no cache object
      * was previously set the the default will be used (Filesystem caching in /tmp with a life
      * time of 43200 seconds)
      *
-     * @return CacheAdapter The object used in caching
+     * @return CacheStorage The object used in caching
      */
     public function getCacheObject()
     {
 
-        if (!($this->cacheobject instanceof CacheAdapter)) {
+        if (!($this->cacheobject instanceof CacheStorage)) {
             $cache = CacheFactory::factory(array(
                 'adapter' => array(
                     'name' => 'filesystem',

@@ -44,13 +44,13 @@ class PostEvent extends Event
      *
      * Accept a target and its parameters.
      *
-     * @param  string      $name
-     * @param  Adapter     $storage
-     * @param  ArrayObject $params
-     * @param  mixed       $result
+     * @param  string           $name
+     * @param  StorageInterface $storage
+     * @param  ArrayObject      $params
+     * @param  mixed            $result
      * @return void
      */
-    public function __construct($name, Adapter\AdapterInterface $storage, ArrayObject $params, & $result)
+    public function __construct($name, StorageInterface $storage, ArrayObject $params, & $result)
     {
         parent::__construct($name, $storage, $params);
         $this->setResult($result);

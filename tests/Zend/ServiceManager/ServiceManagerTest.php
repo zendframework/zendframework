@@ -170,7 +170,7 @@ class ServiceManagerTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetThrowsExceptionOnUnknownService()
     {
-        $this->setExpectedException('Zend\ServiceManager\Exception\ServiceNotCreatedException');
+        $this->setExpectedException('Zend\ServiceManager\Exception\ServiceNotFoundException');
         $this->assertEquals('bar', $this->serviceManager->get('foo'));
     }
 

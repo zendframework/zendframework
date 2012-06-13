@@ -284,12 +284,12 @@ class ServiceManager implements ServiceLocatorInterface
         if (!$instance && !is_array($instance)) {
             try {
                 $instance = $this->create(array($cName, $rName));
-            } catch (Exception\ServiceNotCreatedException $selfException) {
+            } catch (Exception\ServiceNotFoundException $selfException) {
                 foreach ($this->peeringServiceManagers as $peeringServiceManager) {
                     try {
                         $instance = $peeringServiceManager->get($name);
                         break;
-                    } catch (Exception\ServiceNotCreatedException $e) {
+                    } catch (Exception\ServiceNotFoundException $e) {
                         continue;
                     }
                 }
@@ -298,7 +298,7 @@ class ServiceManager implements ServiceLocatorInterface
 
         // Still no instance? raise an exception
         if (!$instance && !is_array($instance)) {
-            throw new Exception\ServiceNotCreatedException(sprintf(
+            throw new Exception\ServiceNotFoundException(sprintf(
                 '%s was unable to fetch or create an instance for %s',
                     __METHOD__,
                     $name
@@ -390,7 +390,7 @@ class ServiceManager implements ServiceLocatorInterface
         }
 
         if ($this->throwExceptionInCreate == true && $instance === false) {
-            throw new Exception\ServiceNotCreatedException(sprintf(
+            throw new Exception\ServiceNotFoundException(sprintf(
                 'No valid instance was found for %s%s',
                 $cName,
                 ($rName ? '(alias: ' . $rName . ')' : '')
@@ -544,6 +544,9 @@ class ServiceManager implements ServiceLocatorInterface
         try {
             $instance = call_user_func($callable, $this, $cName, $rName);
         } catch (\Exception $e) {
+            if ($e instanceof Exception\ServiceNotFoundException) {
+                throw $e;
+            }
             throw new Exception\ServiceNotCreatedException(
                 sprintf('Abstract factory raised an exception when creating "%s"; no instance returned', $rName),
                 $e->getCode(),

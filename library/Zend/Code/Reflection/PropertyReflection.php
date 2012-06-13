@@ -21,6 +21,9 @@
 namespace Zend\Code\Reflection;
 
 use ReflectionProperty as PhpReflectionProperty;
+use Zend\Code\Annotation\AnnotationManager;
+use Zend\Code\Scanner\AnnotationScanner;
+use Zend\Code\Scanner\CachingFileScanner;
 
 /**
  * @todo       implement line numbers
@@ -31,6 +34,8 @@ use ReflectionProperty as PhpReflectionProperty;
  */
 class PropertyReflection extends PhpReflectionProperty implements ReflectionInterface
 {
+    protected $annotations;
+
     /**
      * Get declaring class reflection object
      *
@@ -64,6 +69,28 @@ class PropertyReflection extends PhpReflectionProperty implements ReflectionInte
         }
         $r = new DocBlockReflection($docComment);
         return $r;
+    }
+
+    /**
+     * @param AnnotationManager $annotationManager
+     * @return AnnotationCollection
+     */
+    public function getAnnotations(AnnotationManager $annotationManager)
+    {
+        if (null !== $this->annotations) {
+            return $this->annotations;
+        }
+
+        if (($docComment = $this->getDocComment()) == '') {
+            return false;
+        }
+
+        $class              = $this->getDeclaringClass();
+        $cachingFileScanner = new CachingFileScanner($class->getFileName());
+        $nameInformation    = $cachingFileScanner->getClassNameInformation($class->getName());
+        $this->annotations  = new AnnotationScanner($annotationManager, $docComment, $nameInformation);
+
+        return $this->annotations;
     }
 
     public function toString()

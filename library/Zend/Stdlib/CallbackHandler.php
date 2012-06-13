@@ -20,9 +20,9 @@
 
 namespace Zend\Stdlib;
 
-use Closure,
-    ReflectionClass,
-    WeakRef;
+use Closure;
+use ReflectionClass;
+use WeakRef;
 
 /**
  * CallbackHandler

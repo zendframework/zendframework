@@ -106,7 +106,7 @@ class FormElementTest extends TestCase
     {
         return array(
             array('radio', 'input', 'type="radio"'),
-            array('checkbox', 'input', 'type="checkbox"'),
+            array('multi_checkbox', 'input', 'type="checkbox"'),
             array('select', 'option', '<select'),
         );
     }

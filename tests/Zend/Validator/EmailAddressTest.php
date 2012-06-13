@@ -287,11 +287,8 @@ class EmailAddressTest extends \PHPUnit_Framework_TestCase
      */
     public function testMXRecords()
     {
-        if (!defined('TESTS_ZEND_VALIDATE_ONLINE_ENABLED')
-            || !constant('TESTS_ZEND_VALIDATE_ONLINE_ENABLED')
-        ) {
+        if (!constant('TESTS_ZEND_VALIDATOR_ONLINE_ENABLED')) {
             $this->markTestSkipped('Testing MX records has been disabled');
-            return;
         }
 
         $validator = new Validator\EmailAddress(Hostname::ALLOW_DNS, true);
@@ -571,11 +568,8 @@ class EmailAddressTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetMXRecord()
     {
-        if (!defined('TESTS_ZEND_VALIDATE_ONLINE_ENABLED')
-            || !constant('TESTS_ZEND_VALIDATE_ONLINE_ENABLED')
-        ) {
+        if (!constant('TESTS_ZEND_VALIDATOR_ONLINE_ENABLED')) {
             $this->markTestSkipped('Testing MX records has been disabled');
-            return;
         }
 
         $validator = new Validator\EmailAddress(array('useMxCheck' => true, 'allow' => Hostname::ALLOW_ALL));
@@ -631,6 +625,9 @@ class EmailAddressTest extends \PHPUnit_Framework_TestCase
      */
     public function testUseMxCheckBasicValid()
     {
+        if (!constant('TESTS_ZEND_VALIDATOR_ONLINE_ENABLED')) {
+            $this->markTestSkipped('Testing MX records has been disabled');
+        }
         $validator = new Validator\EmailAddress(array(
             'useMxCheck'        => true,
             'useDeepMxCheck'    => true

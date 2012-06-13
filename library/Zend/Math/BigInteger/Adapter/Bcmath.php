@@ -17,8 +17,7 @@ use Zend\Math\BigInteger\Exception;
  *
  * @category   Zend
  * @package    Zend_Math
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @subpackage BigInteger
  */
 class Bcmath implements AdapterInterface
 {
@@ -40,25 +39,25 @@ class Bcmath implements AdapterInterface
      */
     public function init($operand, $base = null)
     {
-        $sign = (strpos($operand, '-') === 0) ? '-' : '';
+        $sign    = (strpos($operand, '-') === 0) ? '-' : '';
         $operand = ltrim($operand, '-+');
 
         if (null === $base) {
             // decimal
             if (preg_match('#^([1-9][0-9]*)$#', $operand, $m)) {
-                $base = 10;
+                $base    = 10;
                 $operand = $m[1];
             // octal
             } else if (preg_match('#^(0[0-7]+)$#', $operand, $m)) {
-                $base = 8;
+                $base    = 8;
                 $operand = $m[1];
             // hex
             } else if (preg_match('#^(?:0x)?([0-9a-f]+)$#', strtolower($operand), $m)) {
-                $base = 16;
+                $base    = 16;
                 $operand = $m[1];
             // scientific notation
             } else if (preg_match('#^([1-9]?\.?[0-9]+)[eE]\+?([0-9]+)$#', $operand, $m)) {
-                $base = 10;
+                $base    = 10;
                 $operand = bcmul($m[1], bcpow('10', $m[2]));
             } else {
                 return false;
@@ -209,7 +208,7 @@ class Bcmath implements AdapterInterface
     {
         $nb = chr(0);
         $isNegative = (strpos($operand, '-') === 0) ? true : false;
-        $operand = ltrim($operand, '+-0');
+        $operand    = ltrim($operand, '+-0');
 
         if (empty($operand)) {
             return $nb;
@@ -221,8 +220,8 @@ class Bcmath implements AdapterInterface
 
         $bytes = '';
         while (bccomp($operand, '0', 0) > 0) {
-            $temp = bcmod($operand, '16777216');
-            $bytes = chr($temp >> 16) . chr($temp >> 8) . chr($temp) . $bytes;
+            $temp    = bcmod($operand, '16777216');
+            $bytes   = chr($temp >> 16) . chr($temp >> 8) . chr($temp) . $bytes;
             $operand = bcdiv($operand, '16777216');
         }
         $bytes = ltrim($bytes, $nb);
@@ -274,11 +273,11 @@ class Bcmath implements AdapterInterface
     /**
      * Base conversion. Bases 2..62 are supported
      *
-     * @param string $operand
-     * @param int    $fromBase
-     * @param int    $toBase
+     * @param  string $operand
+     * @param  int    $fromBase
+     * @param  int    $toBase
      * @return string
-     * @throws \Zend\Math\BigInteger\Exception\InvalidArgumentException
+     * @throws Exception\InvalidArgumentException
      */
     public function baseConvert($operand, $fromBase, $toBase = 10)
     {
@@ -290,13 +289,14 @@ class Bcmath implements AdapterInterface
             throw new Exception\InvalidArgumentException(
                 "Unsupported base: {$fromBase}, should be 2..62"
             );
-        } else   if ($toBase < 2 || $toBase > 62) {
+        }
+        if ($toBase < 2 || $toBase > 62) {
             throw new Exception\InvalidArgumentException(
                 "Unsupported base: {$toBase}, should be 2..62"
             );
         }
 
-        $sign = (strpos($operand, '-') === 0) ? '-' : '';
+        $sign    = (strpos($operand, '-') === 0) ? '-' : '';
         $operand = ltrim($operand, '-+');
 
         $chars = self::BASE62_ALPHABET;

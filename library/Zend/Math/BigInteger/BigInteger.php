@@ -16,8 +16,7 @@ use Zend\Loader\Broker;
 /**
  * @category   Zend
  * @package    Zend_Math
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @subpackage BigInteger
  */
 class BigInteger
 {
@@ -38,13 +37,13 @@ class BigInteger
     /**
      * Create a BigInteger adapter instance
      *
-     * @param string|null $adapterName
+     * @param  string|AdapterInterface|null $adapterName
      * @return AdapterInterface
      */
     public static function factory($adapterName = null)
     {
         if (null === $adapterName) {
-            return static::getDefaultAdapter();
+            return static::getAvailableAdapter();
         } else if ($adapterName instanceof AdapterInterface) {
             return $adapterName;
         } else {
@@ -119,8 +118,8 @@ class BigInteger
     /**
      * Call adapter methods statically
      *
-     * @param $method
-     * @param $args
+     * @param  string $method
+     * @param  mixed $args
      * @return mixed
      */
     public static function __callStatic($method, $args)

@@ -10,15 +10,14 @@
 
 namespace Zend\Math\BigInteger\Adapter;
 
-use Zend\Math\BigInteger\Exception as BigIntegerException;
+use Zend\Math\BigInteger\Exception;
 
 /**
  * GMP extension adapter
  *
  * @category   Zend
  * @package    Zend_Math
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @subpackage BigInteger
  */
 class Gmp implements AdapterInterface
 {
@@ -31,10 +30,11 @@ class Gmp implements AdapterInterface
      */
     public function init($operand, $base = null)
     {
-        $sign = (strpos($operand, '-') === 0) ? '-' : '';
+        $sign    = (strpos($operand, '-') === 0) ? '-' : '';
         $operand = ltrim($operand, '-+');
 
         if (null === $base) {
+            // scientific notation
             if (preg_match('#^(?:([1-9])\.)?([0-9]+)[eE]\+?([0-9]+)$#', $operand, $m)) {
                 if (!empty($m[1])) {
                     if ($m[3] < strlen($m[2])) {
@@ -45,6 +45,7 @@ class Gmp implements AdapterInterface
                 }
                 $operand = str_pad(($m[1] . $m[2]), ($m[3] + 1), '0', STR_PAD_RIGHT);
             } else {
+                // let GMP guess base
                 $base = 0;
             }
         }
@@ -95,16 +96,16 @@ class Gmp implements AdapterInterface
      * Divide two big integers and return integer part result
      * Raises exception if the denominator is zero
      *
-     * @param string $leftOperand
-     * @param string $rightOperand
+     * @param  string $leftOperand
+     * @param  string $rightOperand
      * @return string|null
-     * @throws \Zend\Math\BigInteger\Exception\DivisionByZeroException
+     * @throws Exception\DivisionByZeroException
      */
     public function div($leftOperand, $rightOperand)
     {
         $result = @gmp_div_q($leftOperand, $rightOperand);
         if (false === $result) {
-            throw new BigIntegerException\DivisionByZeroException(
+            throw new Exception\DivisionByZeroException(
                 "Division by zero: {$leftOperand} / {$rightOperand}"
             );
         }
@@ -128,7 +129,7 @@ class Gmp implements AdapterInterface
     /**
      * Get the square root of a big integer
      *
-     * @param string $operand
+     * @param  string $operand
      * @return string
      */
     public function sqrt($operand)
@@ -140,8 +141,8 @@ class Gmp implements AdapterInterface
     /**
      * Get modulus of a big integer
      *
-     * @param string $leftOperand
-     * @param string $modulus
+     * @param  string $leftOperand
+     * @param  string $modulus
      * @return string
      */
     public function mod($leftOperand, $modulus)
@@ -153,9 +154,9 @@ class Gmp implements AdapterInterface
     /**
      * Raise a big integer to another, reduced by a specified modulus
      *
-     * @param string $leftOperand
-     * @param string $rightOperand
-     * @param string $modulus
+     * @param  string $leftOperand
+     * @param  string $rightOperand
+     * @param  string $modulus
      * @return string
      */
     public function powmod($leftOperand, $rightOperand, $modulus)
@@ -186,15 +187,15 @@ class Gmp implements AdapterInterface
     /**
      * Convert big integer into it's binary number representation
      *
-     * @param string $int
-     * @param bool $twoc  return in twos' complement form
+     * @param  string $int
+     * @param  bool $twoc  return in twos' complement form
      * @return string
      */
     public function intToBin($int, $twoc = false)
     {
-        $nb = chr(0);
+        $nb         = chr(0);
         $isNegative = (strpos($int, '-') === 0) ? true : false;
-        $int = ltrim($int, '+-0');
+        $int        = ltrim($int, '+-0');
 
         if (empty($int)) {
             return $nb;
@@ -225,8 +226,8 @@ class Gmp implements AdapterInterface
     /**
      * Convert binary number into big integer
      *
-     * @param string $bytes
-     * @param bool $twoc  whether binary number is in twos' compliment form
+     * @param  string $bytes
+     * @param  bool $twoc  whether binary number is in twos' compliment form
      * @return string
      */
     public function binToInt($bytes, $twoc = false)
@@ -236,7 +237,7 @@ class Gmp implements AdapterInterface
         $sign = '';
         if ($isNegative) {
             $bytes = ~$bytes;
-            $sign = '-';
+            $sign  = '-';
         }
 
         $result = gmp_init($sign . bin2hex($bytes), 16);
@@ -251,11 +252,11 @@ class Gmp implements AdapterInterface
     /**
      * Base conversion. Bases 2..62 are supported
      *
-     * @param string $operand
-     * @param int    $fromBase
-     * @param int    $toBase
+     * @param  string $operand
+     * @param  int    $fromBase
+     * @param  int    $toBase
      * @return string
-     * @throws \Zend\Math\BigInteger\Exception\InvalidArgumentException
+     * @throws Exception\InvalidArgumentException
      */
     public function baseConvert($operand, $fromBase, $toBase = 10)
     {
@@ -264,18 +265,21 @@ class Gmp implements AdapterInterface
         }
 
         if ($fromBase < 2 || $fromBase > 62) {
-            throw new BigIntegerException\InvalidArgumentException(
+            throw new Exception\InvalidArgumentException(
                 "Unsupported base: {$fromBase}, should be 2..62"
             );
-        } else   if ($toBase < 2 || $toBase > 62) {
-            throw new BigIntegerException\InvalidArgumentException(
+        }
+        if ($toBase < 2 || $toBase > 62) {
+            throw new Exception\InvalidArgumentException(
                 "Unsupported base: {$toBase}, should be 2..62"
             );
-        } else if ($fromBase <= 36 && $toBase <= 36) {
+        }
+
+        if ($fromBase <= 36 && $toBase <= 36) {
             return gmp_strval(gmp_init($operand, $fromBase), $toBase);
         }
 
-        $sign = (strpos($operand, '-') === 0) ? '-' : '';
+        $sign    = (strpos($operand, '-') === 0) ? '-' : '';
         $operand = ltrim($operand, '-+');
 
         $chars = self::BASE62_ALPHABET;
@@ -283,7 +287,7 @@ class Gmp implements AdapterInterface
         // convert operand to decimal
         if ($fromBase !== 10 ) {
             $decimal = '0';
-            for ($i = 0, $len  = strlen($operand); $i < $len; $i++) {
+            for ($i = 0, $len = strlen($operand); $i < $len; $i++) {
                 $decimal = gmp_mul($decimal, $fromBase);
                 $decimal = gmp_add($decimal, strpos($chars, $operand[$i]));
             }
@@ -299,7 +303,7 @@ class Gmp implements AdapterInterface
         $result = '';
         do {
             list($decimal, $remainder) = gmp_div_qr($decimal, $toBase);
-            $pos = gmp_strval($remainder);
+            $pos    = gmp_strval($remainder);
             $result = $chars[$pos] . $result;
         } while (gmp_cmp($decimal, '0'));
 

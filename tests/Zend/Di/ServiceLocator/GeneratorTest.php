@@ -1,12 +1,12 @@
 <?php
 namespace ZendTest\Di\ServiceLocator;
 
-use Zend\Di\Di,
-    Zend\Di\Configuration,
-    Zend\Di\ServiceLocator\Generator as ContainerGenerator,
-    Zend\Di\Definition\BuilderDefinition as Definition,
-    Zend\Di\Definition\Builder,
-    PHPUnit_Framework_TestCase as TestCase;
+use Zend\Di\Di;
+use Zend\Di\Configuration;
+use Zend\Di\ServiceLocator\Generator as ContainerGenerator;
+use Zend\Di\Definition\BuilderDefinition as Definition;
+use Zend\Di\Definition\Builder;
+use PHPUnit_Framework_TestCase as TestCase;
 
 class GeneratorTest extends TestCase
 {

@@ -2,10 +2,10 @@
 
 namespace ZendTest\Di\Definition;
 
-use Zend\Di\Definition\CompilerDefinition,
-    Zend\Code\Scanner\DirectoryScanner,
-    Zend\Code\Scanner\FileScanner,
-    PHPUnit_Framework_TestCase as TestCase;
+use Zend\Di\Definition\CompilerDefinition;
+use Zend\Code\Scanner\DirectoryScanner;
+use Zend\Code\Scanner\FileScanner;
+use PHPUnit_Framework_TestCase as TestCase;
 
 class CompilerDefinitionTest extends TestCase
 {

@@ -10,8 +10,19 @@ class Console
      * @var Di
      */
     protected $di = null;
+
+    /**
+     * @var array
+     */
     protected $runtimeClasses = array();
 
+    /**
+     * Export
+     *
+     * @param Di $di
+     * @param array $runtimeClasses
+     * @return void
+     */
     public static function export(Di $di, array $runtimeClasses = array())
     {
         $console = new static($di);
@@ -19,6 +30,11 @@ class Console
         $console->render($di);
     }
 
+    /**
+     * Constructor
+     *
+     * @param null|Di $di
+     */
     public function __construct(Di $di = null)
     {
         $this->di = ($di) ?: new Di;

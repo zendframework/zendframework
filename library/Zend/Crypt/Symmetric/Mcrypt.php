@@ -70,19 +70,19 @@ class Mcrypt implements SymmetricInterface
      * @var array
      */
     protected $supportedAlgos = array(
-        'aes'          => MCRYPT_RIJNDAEL_128,
-        'blowfish'     => MCRYPT_BLOWFISH,
-        'des'          => MCRYPT_DES,
-        '3des'         => MCRYPT_TRIPLEDES,
-        'tripledes'    => MCRYPT_TRIPLEDES,
-        'cast-128'     => MCRYPT_CAST_128,
-        'cast-256'     => MCRYPT_CAST_256,
-        'rijndael-128' => MCRYPT_RIJNDAEL_128,
-        'rijndael-192' => MCRYPT_RIJNDAEL_192,
-        'rijndael-256' => MCRYPT_RIJNDAEL_256,
-        'saferplus'    => MCRYPT_SAFERPLUS,
-        'serpent'      => MCRYPT_SERPENT,
-        'twofish'      => MCRYPT_TWOFISH
+        'aes'          => 'rijndael-128',
+        'blowfish'     => 'blowfish',
+        'des'          => 'des',
+        '3des'         => 'tripledes',
+        'tripledes'    => 'tripledes',
+        'cast-128'     => 'cast-128',
+        'cast-256'     => 'cast-256',
+        'rijndael-128' => 'rijndael-128',
+        'rijndael-192' => 'rijndael-192',
+        'rijndael-256' => 'rijndael-256',
+        'saferplus'    => 'saferplus',
+        'serpent'      => 'serpent',
+        'twofish'      => 'twofish'
     );
     /**
      * Supported encryption modes
@@ -90,11 +90,11 @@ class Mcrypt implements SymmetricInterface
      * @var array
      */
     protected $supportedModes = array(
-        'cbc'  => MCRYPT_MODE_CBC,
-        'cfb'  => MCRYPT_MODE_CFB,
+        'cbc'  => 'cbc',
+        'cfb'  => 'cfb',
         'ctr'  => 'ctr',
-        'ofb'  => MCRYPT_MODE_OFB,
-        'nofb' => MCRYPT_MODE_NOFB,
+        'ofb'  => 'ofb',
+        'nofb' => 'nofb',
         'ncfb' => 'ncfb'
     );
 

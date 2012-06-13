@@ -23,6 +23,7 @@ namespace ZendTest\Crypt\Password;
 
 use Zend\Crypt\Password\Bcrypt;
 use Zend\Config\Config;
+use Zend\Crypt\Password\Exception;
 
 /**
  * @category   Zend
@@ -45,7 +46,12 @@ class BcryptTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->bcrypt         = new Bcrypt();
+        try {
+            $this->bcrypt = new Bcrypt();
+            $password = $this->bcrypt->create('test');
+        } catch (Exception\RuntimeException $e) {
+            $this->markTestSkipped('This system doesn\'t support strong random numbers, I cannot run BcryptTest');
+        }
         $this->salt           = '1234567890123456';
         $this->password       = 'test';
         $this->bcryptPassword = '$2a$14$MTIzNDU2Nzg5MDEyMzQ1NeWUUefVlefsTbFhsbqKFv/vPSZBrSFVm';

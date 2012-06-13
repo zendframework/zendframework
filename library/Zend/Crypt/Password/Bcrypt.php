@@ -12,6 +12,7 @@ namespace Zend\Crypt\Password;
 use Zend\Math\Math;
 use Traversable;
 use Zend\Stdlib\ArrayUtils;
+use Zend\Math\Exception as MathException;
 
 /**
  * Bcrypt algorithm using crypt() function of PHP
@@ -70,7 +71,11 @@ class Bcrypt implements PasswordInterface
     public function create($password)
     {
         if (empty($this->salt)) {
-            $salt = Math::randBytes(self::MIN_SALT_SIZE, true);
+            try {
+                $salt = Math::randBytes(self::MIN_SALT_SIZE, true);
+            } catch (MathException\RuntimeException $e) {
+                throw new Exception\RuntimeException($e->getMessage());
+            }    
         } else {
             $salt = $this->salt;
         }

@@ -76,7 +76,12 @@ class FormElement extends BaseAbstractHelper
             return $helper($element);
         }
 
-        if (is_array($options) && $type == 'checkbox') {
+        if ($type == 'checkbox') {
+            $helper = $renderer->plugin('form_checkbox');
+            return $helper($element);
+        }
+
+        if (is_array($options) && $type == 'multi_checkbox') {
             $helper = $renderer->plugin('form_multi_checkbox');
             return $helper($element);
         }

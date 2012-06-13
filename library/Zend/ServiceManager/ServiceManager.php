@@ -286,11 +286,9 @@ class ServiceManager implements ServiceLocatorInterface
                 $instance = $this->create(array($cName, $rName));
             } catch (Exception\ServiceNotFoundException $selfException) {
                 foreach ($this->peeringServiceManagers as $peeringServiceManager) {
-                    try {
+                    if ($peeringServiceManager->has($name)) {
                         $instance = $peeringServiceManager->get($name);
                         break;
-                    } catch (Exception\ServiceNotFoundException $e) {
-                        continue;
                     }
                 }
             }

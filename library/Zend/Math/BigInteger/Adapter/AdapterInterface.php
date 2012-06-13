@@ -13,8 +13,7 @@ namespace Zend\Math\BigInteger\Adapter;
 /**
  * @category   Zend
  * @package    Zend_Math
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @subpackage BigInteger
  */
 interface AdapterInterface
 {
@@ -26,8 +25,8 @@ interface AdapterInterface
     /**
      * Create adapter-specific representation of a big integer
      *
-     * @param string $operand
-     * @param integer|null $base
+     * @param  string $operand
+     * @param  integer|null $base
      * @return mixed
      */
     public function init($operand, $base = null);
@@ -35,8 +34,8 @@ interface AdapterInterface
     /**
      * Add two big integers
      *
-     * @param string $leftOperand
-     * @param string $rightOperand
+     * @param  string $leftOperand
+     * @param  string $rightOperand
      * @return string
      */
     public function add($leftOperand, $rightOperand);
@@ -44,8 +43,8 @@ interface AdapterInterface
     /**
      * Subtract two big integers
      *
-     * @param string $leftOperand
-     * @param string $rightOperand
+     * @param  string $leftOperand
+     * @param  string $rightOperand
      * @return string
      */
     public function sub($leftOperand, $rightOperand);
@@ -53,8 +52,8 @@ interface AdapterInterface
     /**
      * Multiply two big integers
      *
-     * @param string $leftOperand
-     * @param string $rightOperand
+     * @param  string $leftOperand
+     * @param  string $rightOperand
      * @return string
      */
     public function mul($leftOperand, $rightOperand);
@@ -63,8 +62,8 @@ interface AdapterInterface
      * Divide two big integers
      * (this method returns only int part of result)
      *
-     * @param string $leftOperand
-     * @param string $rightOperand
+     * @param  string $leftOperand
+     * @param  string $rightOperand
      * @return string
      */
     public function div($leftOperand, $rightOperand);
@@ -72,8 +71,8 @@ interface AdapterInterface
     /**
      * Raise a big integers to another
      *
-     * @param string $operand
-     * @param string $exp
+     * @param  string $operand
+     * @param  string $exp
      * @return string
      */
     public function pow($operand, $exp);
@@ -81,7 +80,7 @@ interface AdapterInterface
     /**
      * Get the square root of a big integer
      *
-     * @param string $operand
+     * @param  string $operand
      * @return string
      */
     public function sqrt($operand);
@@ -89,8 +88,8 @@ interface AdapterInterface
     /**
      * Get modulus of a big integer
      *
-     * @param string $leftOperand
-     * @param string $modulus
+     * @param  string $leftOperand
+     * @param  string $modulus
      * @return string
      */
     public function mod($leftOperand, $modulus);
@@ -98,9 +97,9 @@ interface AdapterInterface
     /**
      * Raise a big integer to another, reduced by a specified modulus
      *
-     * @param string $leftOperand
-     * @param string $rightOperand
-     * @param string $modulus
+     * @param  string $leftOperand
+     * @param  string $rightOperand
+     * @param  string $modulus
      * @return string
      */
     public function powmod($leftOperand, $rightOperand, $modulus);
@@ -108,8 +107,8 @@ interface AdapterInterface
     /**
      * Compare two big integers
      *
-     * @param string $leftOperand
-     * @param string $rightOperand
+     * @param  string $leftOperand
+     * @param  string $rightOperand
      * @return int
      */
     public function comp($leftOperand, $rightOperand);
@@ -117,8 +116,8 @@ interface AdapterInterface
     /**
      * Convert big integer into it's binary number representation
      *
-     * @param string $int
-     * @param bool $twoc
+     * @param  string $int
+     * @param  bool $twoc
      * @return string
      */
     public function intToBin($int, $twoc = false);
@@ -126,8 +125,8 @@ interface AdapterInterface
     /**
      * Convert binary number into big integer
      *
-     * @param string $bytes
-     * @param bool $twoc
+     * @param  string $bytes
+     * @param  bool $twoc
      * @return string
      */
     public function binToInt($bytes, $twoc = false);
@@ -135,9 +134,9 @@ interface AdapterInterface
     /**
      * Convert a number between arbitrary bases
      *
-     * @param string $operand
-     * @param int $fromBase
-     * @param int $toBase
+     * @param  string $operand
+     * @param  int $fromBase
+     * @param  int $toBase
      * @return string
      */
     public function baseConvert($operand, $fromBase, $toBase = 10);

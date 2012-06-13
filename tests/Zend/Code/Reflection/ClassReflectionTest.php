@@ -94,8 +94,11 @@ class ClassReflectionTest extends \PHPUnit_Framework_TestCase
         $reflectionClass = new ClassReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass2');
         $target = <<<EOS
 {
-
     protected \$_prop1 = null;
+
+    /**
+     * @Sample({"foo":"bar"})
+     */
     protected \$_prop2 = null;
 
     public function getProp1()

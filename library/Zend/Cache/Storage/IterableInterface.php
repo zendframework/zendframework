@@ -27,15 +27,9 @@ namespace Zend\Cache\Storage;
  * @subpackage Storage
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
+ * @method IteratorInterface getIterator() Get the storage iterator
  */
 interface IterableInterface extends \IteratorAggregate
 {
-    /**
-     * Get the storage iterator
-     *
-     * @return IteratorInterface
-     */
-    // PHP 5.3.3: Fatal error: Can't inherit abstract function IteratorAggregate::getIterator()
-    // (previously declared abstract in Zend\Cache\Storage\IterableInterface)
-    //public function getIterator();
 }

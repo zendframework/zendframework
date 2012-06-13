@@ -17,24 +17,23 @@ use Zend\Uri\Http as HttpUri;
  *
  * @category   Zend
  * @package    Zend_Http
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @subpackage Headers
  * @link       http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.36
  */
-class Referer extends AbstractLocation implements HeaderInterface
+class Referer extends AbstractLocation
 {
     /**
      * Set the URI/URL for this header
      * according to RFC Referer URI should not have fragment
      *
-     * @param string|HttpUri $uri
+     * @param  string|HttpUri $uri
      * @return Referer
      */
     public function setUri($uri)
     {
         parent::setUri($uri);
-
         $this->uri->setFragment(null);
+
         return $this;
     }
 

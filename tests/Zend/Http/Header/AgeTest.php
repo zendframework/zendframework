@@ -38,7 +38,7 @@ class AgeTest extends \PHPUnit_Framework_TestCase
     public function testAgeCorrectsDeltaSecondsOverflow()
     {
         $ageHeader = new Age();
-        $ageHeader->setDeltaSeconds('2147483650');
+        $ageHeader->setDeltaSeconds(PHP_INT_MAX);
         $this->assertEquals('Age: 2147483648', $ageHeader->toString());
     }
 }

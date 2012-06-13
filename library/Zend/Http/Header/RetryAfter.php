@@ -15,11 +15,10 @@ namespace Zend\Http\Header;
  *
  * @category   Zend
  * @package    Zend_Http
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @subpackage Headers
  * @link       http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.37
  */
-class RetryAfter extends AbstractDate implements HeaderInterface
+class RetryAfter extends AbstractDate
 {
     /**
      * Value of header in delta-seconds
@@ -32,7 +31,7 @@ class RetryAfter extends AbstractDate implements HeaderInterface
     /**
      * Create Retry-After header from string
      *
-     * @param string $headerLine
+     * @param  string $headerLine
      * @return RetryAfter
      * @throws Exception\InvalidArgumentException
      */

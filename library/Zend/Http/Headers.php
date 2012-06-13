@@ -23,8 +23,6 @@ use ArrayIterator;
  *
  * @category   Zend
  * @package    Zend_Http
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @see        http://www.w3.org/Protocols/rfc2616/rfc2616-sec4.html#sec4.2
  */
 class Headers implements Iterator, Countable
@@ -68,7 +66,7 @@ class Headers implements Iterator, Countable
                 if ($current) {
                     // a header name was present, then store the current complete line
                     $headers->headersKeys[] = static::createKey($current['name']);
-                    $headers->headers[] = $current;
+                    $headers->headers[]     = $current;
                 }
                 $current = array(
                     'name' => $matches['name'],
@@ -90,7 +88,7 @@ class Headers implements Iterator, Countable
         }
         if ($current) {
             $headers->headersKeys[] = static::createKey($current['name']);
-            $headers->headers[] = $current;
+            $headers->headers[]     = $current;
         }
         return $headers;
     }
@@ -191,6 +189,7 @@ class Headers implements Iterator, Countable
 
         $this->headersKeys[] = $headerKey;
         $this->headers[]     = array('name' => $headerName, 'line' => $line);
+
         return $this;
     }
 
@@ -204,6 +203,7 @@ class Headers implements Iterator, Countable
     {
         $this->headersKeys[] = static::createKey($header->getFieldName());
         $this->headers[]     = $header;
+
         return $this;
     }
 
@@ -219,6 +219,7 @@ class Headers implements Iterator, Countable
         if ($index !== false) {
             unset($this->headersKeys[$index]);
             unset($this->headers[$index]);
+
             return true;
         }
         return false;

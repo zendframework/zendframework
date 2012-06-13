@@ -15,8 +15,7 @@ namespace Zend\Http\Header;
  *
  * @category   Zend
  * @package    Zend_Http
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @subpackage Headers
  * @link       http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.6
  */
 class Age implements HeaderInterface

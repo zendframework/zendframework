@@ -14,8 +14,7 @@ namespace Zend\Http\Header;
  *
  * @category   Zend
  * @package    Zend_Http
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @subpackage Headers
  * @link       http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.10
  */
 class Connection implements HeaderInterface
@@ -23,8 +22,18 @@ class Connection implements HeaderInterface
     const CONNECTION_CLOSE      = 'close';
     const CONNECTION_KEEP_ALIVE = 'keep-alive';
 
+    /**
+     * Value of this header
+     *
+     * @var string
+     */
     protected $value = self::CONNECTION_KEEP_ALIVE;
 
+    /**
+     * @param $headerLine
+     * @return Connection
+     * @throws Exception\InvalidArgumentException
+     */
     public static function fromString($headerLine)
     {
         $header = new static();

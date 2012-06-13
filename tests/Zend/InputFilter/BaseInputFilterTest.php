@@ -458,4 +458,23 @@ class BaseInputFilterTest extends TestCase
         $test = $filter->getValue('foo');
         $this->assertSame('bazbat', $test);
     }
+
+    public function testGetRequiredNotEmptyValidationMessages()
+    {
+        $filter = new InputFilter();
+
+        $foo   = new Input();
+        $foo->setRequired(true);
+        $foo->setAllowEmpty(false);
+
+        $filter->add($foo, 'foo');
+
+        $data = array('foo' => null);
+        $filter->setData($data);
+
+        $this->assertFalse($filter->isValid());
+        $messages = $filter->getMessages();
+        $this->assertArrayHasKey('foo', $messages);
+        $this->assertNotEmpty($messages['foo']);
+    }
 }

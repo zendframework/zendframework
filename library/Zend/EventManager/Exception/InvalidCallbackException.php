@@ -13,35 +13,21 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_GData
- * @subpackage UnitTests
+ * @package    Zend_Stdlib
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace ZendTest\GData;
+namespace Zend\EventManager\Exception;
 
 /**
- * PHPUnit test case
- */
-
-/**
+ * Invalid callback exception
+ *
  * @category   Zend
- * @package    Zend_GData
- * @subpackage UnitTests
+ * @package    Zend_EventManager
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_GData
  */
-class SkipClientLoginTest extends \PHPUnit_Framework_TestCase
+class InvalidCallbackException extends DomainException implements ExceptionInterface
 {
-    public function setUp()
-    {
-        $this->markTestSkipped("Zend_GData authenticated tests are not enabled in TestConfiguration.php");
-    }
-
-    public function testClientLogin()
-    {
-        // this is here only so we have at least one test
-    }
 }

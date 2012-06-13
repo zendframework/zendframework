@@ -20,9 +20,9 @@
 
 namespace Zend\Stdlib;
 
-use Countable,
-    IteratorAggregate,
-    Serializable;
+use Countable;
+use IteratorAggregate;
+use Serializable;
 
 /**
  * Re-usable, serializable priority queue implementation

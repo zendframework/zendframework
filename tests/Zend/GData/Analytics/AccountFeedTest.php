@@ -13,35 +13,45 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_GData
+ * @package    Zend_Gdata_Analytics
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace ZendTest\GData;
+namespace ZendTest\GData\Analytics;
 
-/**
- * PHPUnit test case
- */
+use Zend\GData\Analytics\AccountFeed;
 
 /**
  * @category   Zend
- * @package    Zend_GData
+ * @package    Zend_Gdata_Analytics
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_GData
+ * @group      Zend_Gdata
+ * @group      Zend_Gdata_Analytics
  */
-class SkipOnlineTest extends \PHPUnit_Framework_TestCase
+class AccountFeedTest extends \PHPUnit_Framework_TestCase
 {
+
+    /** @var AccountFeed */
+    public $accountFeed;
+
     public function setUp()
     {
-        $this->markTestSkipped("Zend_GData online tests are not enabled in TestConfiguration.php");
+        $this->accountFeed = new AccountFeed(
+            file_get_contents(dirname(__FILE__) . '/_files/TestAccountFeed.xml'),
+            true
+        );
     }
 
-    public function testOnline()
+    public function testAccountFeed()
     {
-        // this is here only so we have at least one test
+        $this->assertEquals(3, count($this->accountFeed->entries));
+        $this->assertEquals(3, $this->accountFeed->entries->count());
+        foreach ($this->accountFeed->entries as $entry) {
+            $this->assertInstanceOf('Zend\GData\Analytics\AccountEntry', $entry);
+        }
     }
 }

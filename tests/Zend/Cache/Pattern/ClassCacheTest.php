@@ -57,13 +57,15 @@ class ClassCacheTest extends CommonPatternTest
 {
 
     /**
-     * @var Zend\Cache\Storage\Adapter\AdapterInterface
+     * @var Zend\Cache\Storage\StorageInterface
      */
     protected $_storage;
 
     public function setUp()
     {
-        $this->_storage = new Cache\Storage\Adapter\Memory();
+        $this->_storage = new Cache\Storage\Adapter\Memory(array(
+            'memory_limit' => 0
+        ));
         $this->_options = new Cache\Pattern\PatternOptions(array(
             'class'   => __NAMESPACE__ . '\TestClassCache',
             'storage' => $this->_storage,
@@ -111,12 +113,6 @@ class ClassCacheTest extends CommonPatternTest
         $this->assertEquals($generatedKey, $usedKey);
     }
 
-    public function testCallUnknownMethodException()
-    {
-        $this->setExpectedException('Zend\\Cache\\Exception\\InvalidArgumentException');
-        $this->_pattern->call('notExiststingMethod');
-    }
-
     protected function _testCall($method, array $args)
     {
         $returnSpec = 'foobar_return(' . implode(', ', $args) . ') : ';
@@ -146,5 +142,4 @@ class ClassCacheTest extends CommonPatternTest
             $this->assertEquals('', $data);
         }
     }
-
 }

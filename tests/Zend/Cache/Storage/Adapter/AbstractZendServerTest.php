@@ -21,7 +21,7 @@
 
 namespace ZendTest\Cache\Storage\Adapter;
 
-use Zend\Cache\Storage\Adapter\AdapterInterface as Adapter,
+use Zend\Cache\Storage\StorageInterface,
     Zend\Cache\Storage\Adapter\AdapterOptions,
     Zend\Cache\Storage\Adapter\AbstractZendServer;
 
@@ -54,91 +54,54 @@ class AbstractZendServerTest extends \PHPUnit_Framework_TestCase
         $this->assertInternalType('boolean', $options->getReadable());
         $this->assertInternalType('integer', $options->getTtl());
         $this->assertInternalType('string', $options->getNamespace());
-        $this->assertInternalType('string', $options->getNamespacePattern());
         $this->assertInternalType('string', $options->getKeyPattern());
     }
 
-    public function testGetWithDefaultNamespace()
+    public function testGetItem()
     {
-        $this->_options->setNamespace('defaultns');
+        $this->_options->setNamespace('ns');
 
         $this->_storage->expects($this->once())
                        ->method('zdcFetch')
-                       ->with($this->equalTo('defaultns' . AbstractZendServer::NAMESPACE_SEPARATOR . 'key'))
+                       ->with($this->equalTo('ns' . AbstractZendServer::NAMESPACE_SEPARATOR . 'key'))
                        ->will($this->returnValue('value'));
 
         $this->assertEquals('value', $this->_storage->getItem('key'));
     }
 
-    public function testGetWithArgNamespace()
+    public function testGetMetadata()
     {
-        $this->_options->setNamespace('defaultns');
+        $this->_options->setNamespace('ns');
 
         $this->_storage->expects($this->once())
                        ->method('zdcFetch')
-                       ->with($this->equalTo('argns' . AbstractZendServer::NAMESPACE_SEPARATOR . 'key'))
-                       ->will($this->returnValue('value'));
-
-        $this->assertEquals('value', $this->_storage->getItem('key', array('namespace' => 'argns')));
-    }
-
-    public function testInfoWithDefaultNamespace()
-    {
-        $this->_options->setNamespace('defaultns');
-
-        $this->_storage->expects($this->once())
-                       ->method('zdcFetch')
-                       ->with($this->equalTo('defaultns' . AbstractZendServer::NAMESPACE_SEPARATOR . 'key'))
+                       ->with($this->equalTo('ns' . AbstractZendServer::NAMESPACE_SEPARATOR . 'key'))
                        ->will($this->returnValue('value'));
 
         $this->assertEquals(array(), $this->_storage->getMetadata('key'));
     }
 
-    public function testInfoWithArgNamespace()
+    public function testHasItem()
     {
-        $this->_options->setNamespace('defaultns');
+        $this->_options->setNamespace('ns');
 
         $this->_storage->expects($this->once())
                        ->method('zdcFetch')
-                       ->with($this->equalTo('argns' . AbstractZendServer::NAMESPACE_SEPARATOR . 'key'))
-                       ->will($this->returnValue('value'));
-
-        $this->assertEquals(array(), $this->_storage->getMetadata('key', array('namespace' => 'argns')));
-    }
-
-    public function testExistsWithDefaultNamespace()
-    {
-        $this->_options->setNamespace('defaultns');
-
-        $this->_storage->expects($this->once())
-                       ->method('zdcFetch')
-                       ->with($this->equalTo('defaultns' . AbstractZendServer::NAMESPACE_SEPARATOR . 'key'))
+                       ->with($this->equalTo('ns' . AbstractZendServer::NAMESPACE_SEPARATOR . 'key'))
                        ->will($this->returnValue('value'));
 
         $this->assertEquals(true, $this->_storage->hasItem('key'));
     }
 
-    public function testExistsWithArgNamespace()
-    {
-        $this->_options->setNamespace('defaultns');
-
-        $this->_storage->expects($this->once())
-                       ->method('zdcFetch')
-                       ->with($this->equalTo('argns' . AbstractZendServer::NAMESPACE_SEPARATOR . 'key'))
-                       ->will($this->returnValue('value'));
-
-        $this->assertEquals(true, $this->_storage->hasItem('key', array('namespace' => 'argns')));
-    }
-
-    public function testSetWithDefaultNamespaceAndTtl()
+    public function testSetItem()
     {
         $this->_options->setTtl(10);
-        $this->_options->setNamespace('defaultns');
+        $this->_options->setNamespace('ns');
 
         $this->_storage->expects($this->once())
                        ->method('zdcStore')
                        ->with(
-                           $this->equalTo('defaultns' . AbstractZendServer::NAMESPACE_SEPARATOR . 'key'),
+                           $this->equalTo('ns' . AbstractZendServer::NAMESPACE_SEPARATOR . 'key'),
                            $this->equalTo('value'),
                            $this->equalTo(10)
                        )
@@ -147,86 +110,15 @@ class AbstractZendServerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(true, $this->_storage->setItem('key', 'value'));
     }
 
-    public function testSetWithArgNamespaceAndTtl()
+    public function testRemoveItem()
     {
-        $this->_options->setTtl(10);
-        $this->_options->setNamespace('defaultns');
-
-        $this->_storage->expects($this->once())
-                       ->method('zdcStore')
-                       ->with(
-                           $this->equalTo('argns' . AbstractZendServer::NAMESPACE_SEPARATOR . 'key'),
-                           $this->equalTo('value'),
-                           $this->equalTo(100)
-                       )
-                       ->will($this->returnValue(true));
-
-        $this->assertEquals(true, $this->_storage->setItem('key', 'value', array('namespace' => 'argns', 'ttl' => 100)));
-    }
-
-    public function testRemoveWithDefaultNamespace()
-    {
-        $this->_options->setNamespace('defaultns');
+        $this->_options->setNamespace('ns');
 
         $this->_storage->expects($this->once())
                        ->method('zdcDelete')
-                       ->with($this->equalTo('defaultns' . AbstractZendServer::NAMESPACE_SEPARATOR . 'key'))
+                       ->with($this->equalTo('ns' . AbstractZendServer::NAMESPACE_SEPARATOR . 'key'))
                        ->will($this->returnValue(true));
 
         $this->assertEquals(true, $this->_storage->removeItem('key'));
     }
-
-    public function testRemoveWithArgNamespace()
-    {
-        $this->_options->setNamespace('defaultns');
-
-        $this->_storage->expects($this->once())
-                       ->method('zdcDelete')
-                       ->with($this->equalTo('argns' . AbstractZendServer::NAMESPACE_SEPARATOR . 'key'))
-                       ->will($this->returnValue(true));
-
-        $this->assertEquals(true, $this->_storage->removeItem('key', array('namespace' => 'argns')));
-    }
-
-    public function testClearExpired()
-    {
-        $this->_storage->expects($this->never())
-                       ->method('zdcClear');
-
-        $this->assertEquals(true, $this->_storage->clear(Adapter::MATCH_EXPIRED));
-    }
-
-    public function testClearActive()
-    {
-        $this->_storage->expects($this->once())
-                       ->method('zdcClear')
-                       ->will($this->returnValue(true));
-
-        $rs = $this->_storage->clear(Adapter::MATCH_ACTIVE);
-        $this->assertEquals(true, $rs);
-    }
-
-    public function testClearActiveByDefaultNamespace()
-    {
-        $this->_storage->expects($this->once())
-                       ->method('zdcClearByNamespace')
-                       ->with($this->equalTo($this->_options->getNamespace()))
-                       ->will($this->returnValue(true));
-
-        $rs = $this->_storage->clearByNamespace(Adapter::MATCH_ACTIVE);
-        $this->assertEquals(true, $rs);
-    }
-
-    public function testClearActiveByArgNamespace()
-    {
-        $ns = 'namespace';
-        $this->_storage->expects($this->once())
-                       ->method('zdcClearByNamespace')
-                       ->with($this->equalTo($ns))
-                       ->will($this->returnValue(true));
-
-        $rs = $this->_storage->clearByNamespace(Adapter::MATCH_ACTIVE, array('namespace' => $ns));
-        $this->assertEquals(true, $rs);
-    }
-
 }

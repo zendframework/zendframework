@@ -247,6 +247,12 @@ class Request extends HttpRequest
         if ($httpXRewriteUrl !== null) {
             $requestUri = $httpXRewriteUrl;
         }
+        
+        // Check for IIS 7.0 or later with ISAPI_Rewrite
+        $httpXOriginalUrl = $this->server()->get('HTTP_X_ORIGINAL_URL');
+        if ($httpXOriginalUrl !== null) {
+            $requestUri = $httpXOriginalUrl;
+        }
        
         // IIS7 with URL Rewrite: make sure we get the unencoded url
         // (double slash problem).

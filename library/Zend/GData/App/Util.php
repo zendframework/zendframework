@@ -22,7 +22,7 @@
 namespace Zend\GData\App;
 
 /**
- * Utility class for static functions needed by \Zend\Gdata\App
+ * Utility class for static functions needed by \Zend\GData\App
  *
  * @category   Zend
  * @package    Zend_Gdata

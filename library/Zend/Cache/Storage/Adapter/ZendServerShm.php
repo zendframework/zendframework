@@ -22,7 +22,10 @@
 namespace Zend\Cache\Storage\Adapter;
 
 use ArrayObject,
-    Zend\Cache\Exception;
+    Zend\Cache\Exception,
+    Zend\Cache\Storage\ClearByNamespaceInterface,
+    Zend\Cache\Storage\FlushableInterface,
+    Zend\Cache\Storage\TotalSpaceCapableInterface;
 
 /**
  * @category   Zend
@@ -31,7 +34,9 @@ use ArrayObject,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ZendServerShm extends AbstractZendServer
+class ZendServerShm
+    extends AbstractZendServer
+    implements FlushableInterface, ClearByNamespaceInterface, TotalSpaceCapableInterface
 {
 
     /**
@@ -52,22 +57,44 @@ class ZendServerShm extends AbstractZendServer
         parent::__construct($options);
     }
 
+    /* FlushableInterface */
+
     /**
-     * Internal method to get storage capacity.
+     * Flush the whole storage
      *
-     * @param  array $normalizedOptions
-     * @return array|boolean Associative array of capacity, false on failure
-     * @throws Exception\ExceptionInterface
+     * @return boolean
      */
-    protected function internalGetCapacity(array & $normalizedOptions)
+    public function flush()
     {
-        $total = (int)ini_get('zend_datacache.shm.memory_cache_size');
-        $total*= 1048576; // MB -> Byte
-        return array(
-            'total' => $total,
-            // TODO: How to get free capacity status
-        );
+        return zend_shm_cache_clear();
     }
+
+    /* ClearByNamespaceInterface */
+
+    /**
+     * Remove items of given namespace
+     *
+     * @param string $namespace
+     * @return boolean
+     */
+    public function clearByNamespace($namespace)
+    {
+        return zend_shm_cache_clear($namespace);
+    }
+
+    /* TotalSpaceCapableInterface */
+
+    /**
+     * Get total space in bytes
+     *
+     * @return int|float
+     */
+    public function getTotalSpace()
+    {
+        return (int) ini_get('zend_datacache.shm.memory_cache_size') * 1048576;
+    }
+
+    /* internal */
 
     /**
      * Store data into Zend Data SHM Cache
@@ -126,36 +153,5 @@ class ZendServerShm extends AbstractZendServer
     protected function zdcDelete($internalKey)
     {
         return zend_shm_cache_delete($internalKey);
-    }
-
-    /**
-     * Clear items of all namespaces from Zend Data SHM Cache
-     *
-     * @return void
-     * @throws Exception\RuntimeException
-     */
-    protected function zdcClear()
-    {
-        if (!zend_shm_cache_clear()) {
-            throw new Exception\RuntimeException(
-                'zend_shm_cache_clear() failed'
-            );
-        }
-    }
-
-    /**
-     * Clear items of the given namespace from Zend Data SHM Cache
-     *
-     * @param  string $namespace
-     * @return void
-     * @throws Exception\RuntimeException
-     */
-    protected function zdcClearByNamespace($namespace)
-    {
-        if (!zend_shm_cache_clear($namespace)) {
-            throw new Exception\RuntimeException(
-                "zend_shm_cache_clear({$namespace}) failed"
-            );
-        }
     }
 }

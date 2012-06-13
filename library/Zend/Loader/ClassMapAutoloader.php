@@ -85,7 +85,7 @@ class ClassMapAutoloader implements SplAutoloader
      * An autoload map should be an associative array containing 
      * classname/file pairs.
      * 
-     * @param  string|array $location 
+     * @param  string|array $map 
      * @return ClassMapAutoloader
      */
     public function registerAutoloadMap($map)
@@ -99,7 +99,10 @@ class ClassMapAutoloader implements SplAutoloader
 
         if (!is_array($map)) {
             require_once __DIR__ . '/Exception/InvalidArgumentException.php';
-            throw new Exception\InvalidArgumentException('Map file provided does not return a map');
+            throw new Exception\InvalidArgumentException(sprintf(
+                'Map file provided does not return a map. Map file: "%s"',
+                (isset($location) && is_string($location) ? $location : 'unexpected type: ' . gettype($map))
+            ));
         }
 
         $this->map = array_merge($this->map, $map);
@@ -177,7 +180,10 @@ class ClassMapAutoloader implements SplAutoloader
     {
         if (!file_exists($location)) {
             require_once __DIR__ . '/Exception/InvalidArgumentException.php';
-            throw new Exception\InvalidArgumentException('Map file provided does not exist');
+            throw new Exception\InvalidArgumentException(sprintf(
+                'Map file provided does not exist. Map file: "%s"',
+                (is_string($location) ? $location : 'unexpected type: ' . gettype($location))
+            ));
         }
 
         if (!$path = static::realPharPath($location)) {

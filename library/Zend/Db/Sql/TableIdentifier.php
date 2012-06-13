@@ -27,11 +27,22 @@ class TableIdentifier
     protected $schema;
 
     /**
+     * @var string
+     */
+    protected $alias;
+
+    /**
      * @param string $table
      * @param string $schema
      */
     public function __construct($table, $schema = null)
     {
+        if (is_array($table)) {
+            $keys = array_keys($table);
+            $this->alias = array_pop($keys) ?: null;
+
+            $table = $table[$this->alias];
+        }
         $this->table = $table;
         $this->schema = $schema;
     }
@@ -76,9 +87,33 @@ class TableIdentifier
         return $this->schema;
     }
 
+    /**
+     * @return bool
+     */
+    public function hasAlias()
+    {
+        return ($this->alias != null);
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getAlias()
+    {
+        return $this->alias;
+    }
+
+    /**
+     * @param string $alias
+     */
+    public function setAlias($alias)
+    {
+        $this->alias = $alias;
+    }
+
     public function getTableAndSchema()
     {
-        return array($this->table, $this->schema);
+        return array($this->table, $this->schema, $this->alias);
     }
 
 }

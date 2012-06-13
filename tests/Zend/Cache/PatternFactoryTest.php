@@ -67,5 +67,4 @@ class PatternFactoryTest extends \PHPUnit_Framework_TestCase
 
         $this->assertNotSame($pattern1, $pattern2);
     }
-
 }

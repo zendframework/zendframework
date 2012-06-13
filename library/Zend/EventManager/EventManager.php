@@ -20,12 +20,12 @@
 
 namespace Zend\EventManager;
 
-use Zend\Stdlib\CallbackHandler,
-    Zend\Stdlib\Exception\InvalidCallbackException,
-    Zend\Stdlib\PriorityQueue,
-    ArrayObject,
-    SplPriorityQueue,
-    Traversable;
+use ArrayAccess;
+use ArrayObject;
+use SplPriorityQueue;
+use Traversable;
+use Zend\Stdlib\CallbackHandler;
+use Zend\Stdlib\PriorityQueue;
 
 /**
  * Event manager: notification system
@@ -70,7 +70,6 @@ class EventManager implements EventManagerInterface
      * SharedEventManagerInterface.
      *
      * @param  null|string|int|array|Traversable $identifiers
-     * @return void
      */
     public function __construct($identifiers = null)
     {
@@ -176,6 +175,7 @@ class EventManager implements EventManagerInterface
      * @param  array|ArrayAccess $argv Array of arguments; typically, should be associative
      * @param  null|callback $callback
      * @return ResponseCollection All listener return values
+     * @throws Exception\InvalidCallbackException
      */
     public function trigger($event, $target = null, $argv = array(), $callback = null)
     {
@@ -199,7 +199,7 @@ class EventManager implements EventManagerInterface
         }
 
         if ($callback && !is_callable($callback)) {
-            throw new InvalidCallbackException('Invalid callback provided');
+            throw new Exception\InvalidCallbackException('Invalid callback provided');
         }
 
         return $this->triggerListeners($event, $e, $callback);
@@ -216,7 +216,8 @@ class EventManager implements EventManagerInterface
      * @param  string|object $target Object calling emit, or symbol describing target (such as static method name)
      * @param  array|ArrayAccess $argv Array of arguments; typically, should be associative
      * @param  Callable $callback
-     * @throws InvalidCallbackException if invalid callback provided
+     * @return ResponseCollection
+     * @throws Exception\InvalidCallbackException if invalid callback provided
      */
     public function triggerUntil($event, $target, $argv = null, $callback = null)
     {
@@ -240,7 +241,7 @@ class EventManager implements EventManagerInterface
         }
 
         if (!is_callable($callback)) {
-            throw new InvalidCallbackException('Invalid callback provided');
+            throw new Exception\InvalidCallbackException('Invalid callback provided');
         }
 
         return $this->triggerListeners($event, $e, $callback);
@@ -264,6 +265,7 @@ class EventManager implements EventManagerInterface
      * @param  callback|int $callback If string $event provided, expects PHP callback; for a ListenerAggregateInterface $event, this will be the priority
      * @param  int $priority If provided, the priority at which to register the callback
      * @return CallbackHandler|mixed CallbackHandler if attaching callback (to allow later unsubscribe); mixed if attaching aggregate
+     * @throws Exception\InvalidArgumentException
      */
     public function attach($event, $callback = null, $priority = 1)
     {

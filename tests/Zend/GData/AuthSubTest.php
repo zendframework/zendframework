@@ -20,12 +20,10 @@
  */
 
 namespace ZendTest\GData;
+
 use Zend\GData;
-
-/**
- * Test helper
- */
-
+use Zend\Http\Client;
+use Zend\Http\Client\Adapter\Test as AdapterTest;
 
 /**
  * @category   Zend
@@ -34,12 +32,15 @@ use Zend\GData;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_GData
+ * @group      Zend_Gdata_AuthSub
  */
 class AuthSubTest extends \PHPUnit_Framework_TestCase
 {
-    public function setUp()
-    {
-    }
+    /**
+     * Dummy token used during testing
+     * @var string
+     */
+    protected $token = 'DQAAFPHOW7DCTN';
 
     public function testNormalGetAuthSubTokenUri()
     {
@@ -128,5 +129,130 @@ class AuthSubTest extends \PHPUnit_Framework_TestCase
             $c = new GData\HttpClient();
             $c->setAuthSubPrivateKeyFile("zendauthsubfilenotfound",  null, true);
         }
+    }
+    public function testAuthSubSessionTokenReceivesSuccessfulResult()
+    {
+        $adapter = new AdapterTest();
+        $adapter->setResponse("HTTP/1.1 200 OK\r\n\r\nToken={$this->token}\r\nExpiration=20201004T123456Z");
+
+        $client = new GData\HttpClient();
+        $client->setUri('http://example.com/AuthSub');
+        $client->setAdapter($adapter);
+
+        $respToken = GData\AuthSub::getAuthSubSessionToken($this->token, $client);
+        $this->assertEquals($this->token, $respToken);
+    }
+
+    /**
+     * @expectedException Zend\GData\App\AuthException
+     */
+    public function testAuthSubSessionTokenCatchesFailedResult()
+    {
+        $adapter = new AdapterTest();
+        $adapter->setResponse("HTTP/1.1 500 Internal Server Error\r\n\r\nInternal Server Error");
+
+        $client = new GData\HttpClient();
+        $client->setUri('http://example.com/AuthSub');
+        $client->setAdapter($adapter);
+
+        $newtok = GData\AuthSub::getAuthSubSessionToken($this->token, $client);
+    }
+
+    /**
+     * @expectedException Zend\GData\App\HttpException
+     */
+    public function testAuthSubSessionTokenCatchesHttpClientException()
+    {
+        $adapter = new AdapterTest();
+        $adapter->setNextRequestWillFail(true);
+
+        $client = new GData\HttpClient();
+        $client->setUri('http://example.com/AuthSub');
+        $client->setAdapter($adapter);
+
+        $newtok = GData\AuthSub::getAuthSubSessionToken($this->token, $client);
+    }
+
+    public function testAuthSubRevokeTokenReceivesSuccessfulResult()
+    {
+        $adapter = new AdapterTest();
+        $adapter->setResponse("HTTP/1.1 200 OK");
+
+        $client = new GData\HttpClient();
+        $client->setUri('http://example.com/AuthSub');
+        $client->setAdapter($adapter);
+
+        $revoked = GData\AuthSub::AuthSubRevokeToken($this->token, $client);
+        $this->assertTrue($revoked);
+    }
+
+    public function testAuthSubRevokeTokenCatchesFailedResult()
+    {
+        $adapter = new AdapterTest();
+        $adapter->setResponse("HTTP/1.1 500 Not Successful");
+
+        $client = new GData\HttpClient();
+        $client->setUri('http://example.com/AuthSub');
+        $client->setAdapter($adapter);
+
+        $revoked = GData\AuthSub::AuthSubRevokeToken($this->token, $client);
+        $this->assertFalse($revoked);
+    }
+
+    /**
+     * @expectedException Zend\Gdata\App\HttpException
+     */
+    public function testAuthSubRevokeTokenCatchesHttpClientException()
+    {
+        $adapter = new AdapterTest();
+        $adapter->setNextRequestWillFail(true);
+
+        $client = new GData\HttpClient();
+        $client->setUri('http://example.com/AuthSub');
+        $client->setAdapter($adapter);
+
+        $revoked = GData\AuthSub::AuthSubRevokeToken($this->token, $client);
+    }
+
+    public function testGetAuthSubTokenInfoReceivesSuccessfulResult()
+    {
+        $adapter = new AdapterTest();
+        $adapter->setResponse("HTTP/1.1 200 OK
+
+Target=http://example.com
+Scope=http://example.com
+Secure=false");
+
+        $client = new GData\HttpClient();
+        $client->setUri('http://example.com/AuthSub');
+        $client->setAdapter($adapter);
+
+        $respBody = GData\AuthSub::getAuthSubTokenInfo($this->token, $client);
+
+        $this->assertContains("Target=http://example.com", $respBody);
+        $this->assertContains("Scope=http://example.com", $respBody);
+        $this->assertContains("Secure=false", $respBody);
+    }
+
+    /**
+     * @expectedException Zend\Gdata\App\HttpException
+     */
+    public function testGetAuthSubTokenInfoCatchesHttpClientException()
+    {
+        $adapter = new AdapterTest();
+        $adapter->setNextRequestWillFail(true);
+
+        $client = new GData\HttpClient();
+        $client->setUri('http://example.com/AuthSub');
+        $client->setAdapter($adapter);
+
+        $revoked = GData\AuthSub::getAuthSubTokenInfo($this->token, $client);
+    }
+
+    public function testGetHttpClientProvidesNewClientWhenNullPassed()
+    {
+        $client = GData\AuthSub::getHttpClient($this->token);
+        $this->assertTrue($client instanceof GData\HttpClient );
+        $this->assertEquals($this->token, $client->getAuthSubToken());
     }
 }

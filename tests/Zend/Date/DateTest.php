@@ -80,7 +80,6 @@ class DateTest extends \PHPUnit_Framework_TestCase
     public function tearDown()
     {
         Date::setOptions($this->_orig);
-        $this->_cache->clear(CacheAdapter::MATCH_ALL);
         date_default_timezone_set($this->_originaltimezone);
     }
 

@@ -347,7 +347,10 @@ class BlockCipher
      */
     public function decrypt($data)
     {
-        if (empty($data)) {
+        if (!is_string($data)) {
+            throw new Exception\InvalidArgumentException('The data to decrypt must be a string');
+        }
+        if ('' === $data) {
             throw new Exception\InvalidArgumentException('The data to decrypt cannot be empty');
         }
         if (empty($this->key)) {

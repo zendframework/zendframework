@@ -126,4 +126,10 @@ class FormMultiCheckboxTest extends CommonTestCase
         $markup  = $this->helper->render($element);
         $this->assertContains('foo[]', $markup);
     }
+
+    public function testInvokeWithNoElementChainsHelper()
+    {
+        $element = $this->getElement();
+        $this->assertSame($this->helper, $this->helper->__invoke());
+    }
 }

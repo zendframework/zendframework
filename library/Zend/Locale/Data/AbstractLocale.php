@@ -21,7 +21,7 @@
 
 namespace Zend\Locale\Data;
 
-use Zend\Cache\Storage\Adapter\AdapterInterface as CacheAdapter,
+use Zend\Cache\Storage\StorageInterface as CacheStorage,
     Zend\Locale\Locale,
     Zend\Locale\Exception\InvalidArgumentException,
     Zend\Locale\Exception\UnsupportedMethodException;
@@ -40,7 +40,7 @@ abstract class AbstractLocale
     /**
      * Internal cache for ldml values
      *
-     * @var CacheAdapter
+     * @var CacheStorage
      * @access private
      */
     protected static $_cache = null;
@@ -54,16 +54,9 @@ abstract class AbstractLocale
     protected static $_cacheDisabled = false;
 
     /**
-     * Internal value to remember if cache supports tags
-     *
-     * @var boolean
-     */
-    protected static $_cacheTags = false;
-
-    /**
      * Returns the set cache
      *
-     * @return CacheAdapter The set cache
+     * @return CacheStorage The set cache
      */
     public static function getCache()
     {
@@ -73,16 +66,11 @@ abstract class AbstractLocale
     /**
      * Set a cache for Zend_Locale_Data
      *
-     * @param CacheAdapter $cache A cache frontend
+     * @param CacheStorage $cache A cache frontend
      */
-    public static function setCache(CacheAdapter $cache)
+    public static function setCache(CacheStorage $cache)
     {
         self::$_cache = $cache;
-
-        foreach ($cache->getPlugins() as $plugin) {
-        }
-
-        self::_getTagSupportForCache();
     }
 
     /**
@@ -92,7 +80,7 @@ abstract class AbstractLocale
      */
     public static function hasCache()
     {
-        if (self::$_cache instanceof CacheAdapter) {
+        if (self::$_cache instanceof CacheStorage) {
             return true;
         }
 
@@ -107,29 +95,6 @@ abstract class AbstractLocale
     public static function removeCache()
     {
         self::$_cache = null;
-    }
-
-    /**
-     * Clears all set cache data
-     *
-     * @param string $tag Tag to clear when the default tag name is not used (Optional)
-     * @return void
-     */
-    public static function clearCache($tag = null)
-    {
-        if (!self::$_cache instanceof CacheAdapter) {
-            return;
-        }
-
-        if (self::$_cacheTags) {
-            if ($tag == null) {
-                $tag = 'Zend_Locale';
-            }
-
-            self::$_cache->clear(CacheAdapter::MATCH_TAGS_OR, array('tags' => array($tag)));
-        } else {
-            self::$_cache->clear(CacheAdapter::MATCH_ALL);
-        }
     }
 
     /**
@@ -150,38 +115,6 @@ abstract class AbstractLocale
     public static function isCacheDisabled()
     {
         return self::$_cacheDisabled;
-    }
-
-    /**
-     * Returns true when the actual set cache supports tags
-     *
-     * @return boolean
-     */
-    public static function hasCacheTagSupport()
-    {
-      return self::$_cacheTags;
-    }
-
-    /**
-     * Internal method to check if the given cache supports tags
-     *
-     * @return false|string
-     */
-    protected static function _getTagSupportForCache()
-    {
-        if (!self::$_cache instanceof CacheAdapter) {
-            self::$_cacheTags = false;
-            return false;
-        }
-
-        $capabilities = self::$_cache->getCapabilities();
-        if (!$capabilities->getTagging()) {
-            self::$_cacheTags = false;
-            return false;
-        }
-
-        self::$_cacheTags = true;
-        return true;
     }
 
     /**

@@ -25,6 +25,7 @@ use stdClass,
     Zend\Mail\Address,
     Zend\Mail\AddressList,
     Zend\Mail\Header,
+    Zend\Mail\Headers,
     Zend\Mail\Message,
     Zend\Mime\Message as MimeMessage,
     Zend\Mime\Mime,
@@ -40,6 +41,9 @@ use stdClass,
  */
 class MessageTest extends \PHPUnit_Framework_TestCase
 {
+    /** @var Message */
+    public $message;
+
     public function setUp()
     {
         $this->message = new Message();
@@ -593,7 +597,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
         $this->message->setBody($body);
 
         $text = $this->message->getBodyText();
-        $this->assertEquals($body->generateMessage(), $text);
+        $this->assertEquals($body->generateMessage(Headers::EOL), $text);
         $this->assertContains('--foo-bar', $text);
         $this->assertContains('--foo-bar--', $text);
         $this->assertContains('Content-Type: text/plain', $text);

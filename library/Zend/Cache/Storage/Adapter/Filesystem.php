@@ -27,7 +27,17 @@ use ArrayObject,
     Exception as BaseException,
     Zend\Cache\Exception,
     Zend\Cache\Storage,
+    Zend\Cache\Storage\StorageInterface,
     Zend\Cache\Storage\Capabilities,
+    Zend\Cache\Storage\ClearExpiredInterface,
+    Zend\Cache\Storage\ClearByNamespaceInterface,
+    Zend\Cache\Storage\ClearByPrefixInterface,
+    Zend\Cache\Storage\FlushableInterface,
+    Zend\Cache\Storage\IterableInterface,
+    Zend\Cache\Storage\AvailableSpaceCapableInterface,
+    Zend\Cache\Storage\OptimizableInterface,
+    Zend\Cache\Storage\TagableInterface,
+    Zend\Cache\Storage\TotalSpaceCapableInterface,
     Zend\Cache\Utils,
     Zend\Stdlib\ErrorHandler;
 
@@ -38,21 +48,19 @@ use ArrayObject,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Filesystem extends AbstractAdapter
+class Filesystem
+    extends AbstractAdapter
+    implements FlushableInterface, ClearExpiredInterface, ClearByNamespaceInterface, ClearByPrefixInterface,
+               TagableInterface, IterableInterface, OptimizableInterface,
+               AvailableSpaceCapableInterface, TotalSpaceCapableInterface
 {
-    /**
-     * GlobIterator used as statement
-     *
-     * @var GlobIterator|null
-     */
-    protected $stmtGlob = null;
 
     /**
-     * Matching mode of active statement
+     * Buffered total space in bytes
      *
-     * @var integer|null
+     * @var null|int|float
      */
-    protected $stmtMatch = null;
+    protected $totalSpace;
 
     /**
      * An identity for the last filespec
@@ -99,19 +107,358 @@ class Filesystem extends AbstractAdapter
         return $this->options;
     }
 
+    /* FlushableInterface */
+
+    /**
+     * Flush the whole storage
+     *
+     * @return boolean
+     */
+    public function flush()
+    {
+        $flags = GlobIterator::SKIP_DOTS | GlobIterator::CURRENT_AS_PATHNAME;
+        $dir   = $this->getOptions()->getCacheDir();
+        $clearFolder = null;
+        $clearFolder = function ($dir) use (& $clearFolder, $flags) {
+            $it = new GlobIterator($dir . \DIRECTORY_SEPARATOR . '*', $flags);
+            foreach ($it as $pathname) {
+                if ($it->isDir()) {
+                    $clearFolder($pathname);
+                    rmdir($pathname);
+                } else {
+                    unlink($pathname);
+                }
+            }
+        };
+
+        ErrorHandler::start();
+        $clearFolder($dir);
+        $error = ErrorHandler::stop();
+        if ($error) {
+            throw new Exception\RuntimeException("Flushing directory '{$dir}' failed", 0, $error);
+        }
+
+        return true;
+    }
+
+    /* ClearExpiredInterface */
+
+    /**
+     * Remove expired items
+     *
+     * @return boolean
+     */
+    public function clearExpired()
+    {
+        $options = $this->getOptions();
+        $prefix  = $options->getNamespace() . $options->getNamespaceSeparator();
+
+        $flags = GlobIterator::SKIP_DOTS | GlobIterator::CURRENT_AS_FILEINFO;
+        $path  = $options->getCacheDir()
+            . str_repeat(\DIRECTORY_SEPARATOR . $prefix . '*', $options->getDirLevel())
+            . \DIRECTORY_SEPARATOR . $prefix . '*.dat';
+        $glob = new GlobIterator($path, $flags);
+        $time = time();
+        $ttl  = $options->getTtl();
+
+        ErrorHandler::start();
+        foreach ($glob as $entry) {
+            $mtime = $entry->getMTime();
+            if ($time >= $mtime + $ttl) {
+                $pathname = $entry->getPathname();
+                unlink($pathname);
+
+                $tagPathname = substr($pathname, 0, -4) . '.tag';
+                if (file_exists($tagPathname)) {
+                    unlink($tagPathname);
+                }
+
+                $ifoPathname = substr($pathname, 0, -4) . '.ifo';
+                if (file_exists($ifoPathname)) {
+                    unlink($ifoPathname);
+                }
+            }
+        }
+        $error = ErrorHandler::stop();
+        if ($error) {
+            throw new Exception\RuntimeException("Failed to clear expired items", 0, $error);
+        }
+
+        return true;
+    }
+
+    /* ClearByNamespaceInterface */
+
+    /**
+     * Remove items by given namespace
+     *
+     * @param string $namespace
+     * @return boolean
+     */
+    public function clearByNamespace($namespace)
+    {
+        $options  = $this->getOptions();
+        $nsPrefix = $namespace . $options->getNamespaceSeparator();
+
+        $flags = GlobIterator::SKIP_DOTS | GlobIterator::CURRENT_AS_PATHNAME;
+        $path = $options->getCacheDir()
+        . str_repeat(\DIRECTORY_SEPARATOR . $nsPrefix . '*', $options->getDirLevel())
+        . \DIRECTORY_SEPARATOR . $nsPrefix . '*';
+        $glob = new GlobIterator($path, $flags);
+        $time = time();
+        $ttl  = $options->getTtl();
+
+        ErrorHandler::start();
+        foreach ($glob as $pathname) {
+            unlink($pathname);
+        }
+        $error = ErrorHandler::stop();
+        if ($error) {
+            throw new Exception\RuntimeException("Failed to remove file '{$pathname}'", 0, $error);
+        }
+
+        return true;
+    }
+
+    /* ClearByPrefixInterface */
+
+    /**
+     * Remove items matching given prefix
+     *
+     * @param string $prefix
+     * @return boolean
+     */
+    public function clearByPrefix($prefix)
+    {
+        $options  = $this->getOptions();
+        $nsPrefix = $options->getNamespace() . $options->getNamespaceSeparator();
+
+        $flags = GlobIterator::SKIP_DOTS | GlobIterator::CURRENT_AS_PATHNAME;
+        $path = $options->getCacheDir()
+            . str_repeat(\DIRECTORY_SEPARATOR . $nsPrefix . '*', $options->getDirLevel())
+            . \DIRECTORY_SEPARATOR . $nsPrefix . $prefix . '*';
+        $glob = new GlobIterator($path, $flags);
+        $time = time();
+        $ttl  = $options->getTtl();
+
+        ErrorHandler::start();
+        foreach ($glob as $pathname) {
+            unlink($pathname);
+        }
+        $error = ErrorHandler::stop();
+        if ($error) {
+            throw new Exception\RuntimeException("Failed to remove file '{$pathname}'", 0, $error);
+        }
+
+        return true;
+    }
+
+    /* TagableInterface  */
+
+    /**
+     * Set tags to an item by given key.
+     * An empty array will remove all tags.
+     *
+     * @param string   $key
+     * @param string[] $tags
+     * @return boolean
+     */
+    public function setTags($key, array $tags)
+    {
+        $this->normalizeKey($key);
+        if (!$this->internalHasItem($key)) {
+            return false;
+        }
+
+        $filespec = $this->getFileSpec($key);
+
+        if (!$tags) {
+            $this->unlink($filespec . '.tag');
+            return true;
+        }
+
+        $this->putFileContent($filespec . '.tag', implode("\n", $tags));
+        return true;
+    }
+
+    /**
+     * Get tags of an item by given key
+     *
+     * @param string $key
+     * @return string[]|FALSE
+     */
+    public function getTags($key)
+    {
+        $this->normalizeKey($key);
+        if (!$this->internalHasItem($key)) {
+            return false;
+        }
+
+        $filespec = $this->getFileSpec($key);
+        $tags     = array();
+        if (file_exists($filespec . '.tag')) {
+            $tags = explode("\n", $this->getFileContent($filespec . '.tag'));
+        }
+
+        return $tags;
+    }
+
+    /**
+     * Remove items matching given tags.
+     *
+     * If $disjunction only one of the given tags must match
+     * else all given tags must match.
+     *
+     * @param string[] $tags
+     * @param boolean  $disjunction
+     * @return boolean
+     */
+    public function clearByTags(array $tags, $disjunction = false)
+    {
+        if (!$tags) {
+            return true;
+        }
+
+        $tagCount = count($tags);
+        $options  = $this->getOptions();
+        $prefix   = $options->getNamespace() . $options->getNamespaceSeparator();
+
+        $flags = GlobIterator::SKIP_DOTS | GlobIterator::CURRENT_AS_PATHNAME;
+        $path  = $options->getCacheDir()
+            . str_repeat(\DIRECTORY_SEPARATOR . $prefix . '*', $options->getDirLevel())
+            . \DIRECTORY_SEPARATOR . $prefix . '*.tag';
+        $glob = new GlobIterator($path, $flags);
+        $time = time();
+        $ttl  = $options->getTtl();
+
+        foreach ($glob as $pathname) {
+            $diff = array_diff($tags, explode("\n", $this->getFileContent($pathname)));
+
+            $rem  = false;
+            if ($disjunction && count($diff) < $tagCount) {
+                $rem = true;
+            } elseif (!$disjunction && !$diff) {
+                $rem = true;
+            }
+
+            if ($rem) {
+                unlink($pathname);
+
+                $datPathname = substr($pathname, 0, -4) . '.dat';
+                if (file_exists($datPathname)) {
+                    unlink($datPathname);
+                }
+
+                $ifoPathname = substr($pathname, 0, -4) . '.ifo';
+                if (file_exists($ifoPathname)) {
+                    unlink($ifoPathname);
+                }
+            }
+        }
+
+        return true;
+    }
+
+    /* IterableInterface */
+
+    /**
+     * Get the storage iterator
+     *
+     * @return FilesystemIterator
+     */
+    public function getIterator()
+    {
+        $options = $this->getOptions();
+        $prefix  = $options->getNamespace() . $options->getNamespaceSeparator();
+        $path    = $options->getCacheDir()
+            . str_repeat(\DIRECTORY_SEPARATOR . $prefix . '*', $options->getDirLevel())
+            . \DIRECTORY_SEPARATOR . $prefix . '*.dat';
+        return new FilesystemIterator($this, $path, $prefix);
+    }
+
+    /* OptimizableInterface */
+
+    /**
+     * Optimize the storage
+     *
+     * @return void
+     * @return Exception\RuntimeException
+     */
+    public function optimize()
+    {
+        $baseOptions = $this->getOptions();
+        if ($baseOptions->getDirLevel()) {
+            // removes only empty directories
+            $this->rmDir(
+                $baseOptions->getCacheDir(),
+                $baseOptions->getNamespace() . $baseOptions->getNamespaceSeparator()
+            );
+        }
+        return true;
+    }
+
+    /* TotalSpaceCapableInterface */
+
+    /**
+     * Get total space in bytes
+     *
+     * @return int|float
+     */
+    public function getTotalSpace()
+    {
+        if ($this->totalSpace !== null) {
+            $path = $this->getOptions()->getCacheDir();
+
+            ErrorHandler::start();
+            $total = disk_total_space($path);
+            $error = ErrorHandler::stop();
+            if ($total === false) {
+                throw new Exception\RuntimeException("Can't detect total space of '{$path}'", 0, $error);
+            }
+
+            // clean total space buffer on change cache_dir
+            $events     = $this->events();
+            $handle     = null;
+            $totalSpace = & $this->totalSpace;
+            $callback   = function ($event) use (& $events, & $handle, & $totalSpace) {
+                $params = $event->getParams();
+                if (isset($params['cache_dir'])) {
+                    $totalSpace = null;
+                    $events->detach($handle);
+                }
+            };
+            $handle = $this->events()->attach($callback);
+        }
+        return $this->totalSpace;
+    }
+
+    /* AvailableSpaceCapableInterface */
+
+    /**
+     * Get available space in bytes
+     *
+     * @return int|float
+     */
+    public function getAvailableSpace()
+    {
+        $path = $this->getOptions()->getCacheDir();
+
+        ErrorHandler::start();
+        $avail = disk_free_space($path);
+        $error = ErrorHandler::stop();
+        if ($avail === false) {
+            throw new Exception\RuntimeException("Can't detect free space of '{$path}'", 0, $error);
+        }
+
+        return $avail;
+    }
+
     /* reading */
 
     /**
      * Get an item.
      *
-     * Options:
-     *  - ttl <int> optional
-     *    - The time-to-life (Default: ttl of object)
-     *  - namespace <string> optional
-     *    - The namespace to use (Default: namespace of object)
-     *
      * @param  string  $key
-     * @param  array   $options
      * @param  boolean $success
      * @param  mixed   $casToken
      * @return mixed Data on success, null on failure
@@ -121,27 +468,27 @@ class Filesystem extends AbstractAdapter
      * @triggers getItem.post(PostEvent)
      * @triggers getItem.exception(ExceptionEvent)
      */
-    public function getItem($key, array $options = array(), & $success = null, & $casToken = null)
+    public function getItem($key, & $success = null, & $casToken = null)
     {
-        $baseOptions = $this->getOptions();
-        if ($baseOptions->getReadable() && $baseOptions->getClearStatCache()) {
+        $options = $this->getOptions();
+        if ($options->getReadable() && $options->getClearStatCache()) {
             clearstatcache();
         }
 
-        return parent::getItem($key, $options, $success, $casToken);
+        $argn = func_num_args();
+        if ($argn > 2) {
+            return parent::getItem($key, $success, $casToken);
+        } elseif ($argn > 1) {
+            return parent::getItem($key, $success);
+        } else {
+            return parent::getItem($key);
+        }
     }
 
     /**
      * Get multiple items.
      *
-     * Options:
-     *  - ttl <int> optional
-     *    - The time-to-life (Default: ttl of object)
-     *  - namespace <string> optional
-     *    - The namespace to use (Default: namespace of object)
-     *
      * @param  array $keys
-     * @param  array $options
      * @return array Associative array of keys and values
      * @throws Exception\ExceptionInterface
      *
@@ -149,45 +496,37 @@ class Filesystem extends AbstractAdapter
      * @triggers getItems.post(PostEvent)
      * @triggers getItems.exception(ExceptionEvent)
      */
-    public function getItems(array $keys, array $options = array())
+    public function getItems(array $keys)
     {
-        $baseOptions = $this->getOptions();
-        if ($baseOptions->getReadable() && $baseOptions->getClearStatCache()) {
+        $options = $this->getOptions();
+        if ($options->getReadable() && $options->getClearStatCache()) {
             clearstatcache();
         }
 
-        return parent::getItems($keys, $options);
+        return parent::getItems($keys);
     }
 
     /**
      * Internal method to get an item.
      *
-     * Options:
-     *  - ttl <int>
-     *    - The time-to-life
-     *  - namespace <string>
-     *    - The namespace to use
-     *
      * @param  string  $normalizedKey
-     * @param  array   $normalizedOptions
      * @param  boolean $success
      * @param  mixed   $casToken
      * @return mixed Data on success, null on failure
      * @throws Exception\ExceptionInterface
      */
-    protected function internalGetItem(& $normalizedKey, array & $normalizedOptions, & $success = null, & $casToken = null)
+    protected function internalGetItem(& $normalizedKey, & $success = null, & $casToken = null)
     {
-        if (!$this->internalHasItem($normalizedKey, $normalizedOptions)) {
+        if (!$this->internalHasItem($normalizedKey)) {
             $success = false;
             return null;
         }
 
         try {
-            $filespec    = $this->getFileSpec($normalizedKey, $normalizedOptions);
-            $baseOptions = $this->getOptions();
-            $data        = $this->getFileContent($filespec . '.dat');
+            $filespec = $this->getFileSpec($normalizedKey);
+            $data     = $this->getFileContent($filespec . '.dat');
 
-            if ($baseOptions->getReadControl()) {
+            if ($this->getOptions()->getReadControl()) {
                 if ( ($info = $this->readInfoFile($filespec . '.ifo'))
                     && isset($info['hash'], $info['algo'])
                     && Utils::generateHash($info['algo'], $data, true) != $info['hash']
@@ -199,20 +538,14 @@ class Filesystem extends AbstractAdapter
             }
 
             // use filemtime + filesize as CAS token
-            $casToken = filemtime($filespec . '.dat') . filesize($filespec . '.dat');
+            if (func_num_args() > 2) {
+                $casToken = filemtime($filespec . '.dat') . filesize($filespec . '.dat');
+            }
             $success  = true;
             return $data;
 
-        } catch (Exception $e) {
+        } catch (BaseException $e) {
             $success = false;
-
-            try {
-                // remove cache file on exception
-                $this->internalRemoveItem($normalizedKey, $normalizedOptions);
-            } catch (Exception $tmp) {
-                // do not throw remove exception on this point
-            }
-
             throw $e;
         }
     }
@@ -220,26 +553,15 @@ class Filesystem extends AbstractAdapter
     /**
      * Internal method to get multiple items.
      *
-     * Options:
-     *  - ttl <int>
-     *    - The time-to-life
-     *  - namespace <string>
-     *    - The namespace to use
-     *
      * @param  array $normalizedKeys
-     * @param  array $normalizedOptions
      * @return array Associative array of keys and values
      * @throws Exception\ExceptionInterface
      */
-    protected function internalGetItems(array & $normalizedKeys, array & $normalizedOptions)
+    protected function internalGetItems(array & $normalizedKeys)
     {
-        $baseOptions = $this->getOptions();
-
-        // Don't change arguments passed by reference
-        $keys    = $normalizedKeys;
-        $options = $normalizedOptions;
-
-        $result = array();
+        $options = $this->getOptions();
+        $keys    = $normalizedKeys; // Don't change argument passed by reference
+        $result  = array();
         while ($keys) {
 
             // LOCK_NB if more than one items have to read
@@ -248,12 +570,12 @@ class Filesystem extends AbstractAdapter
 
             // read items
             foreach ($keys as $i => $key) {
-                if (!$this->internalHasItem($key, $options)) {
+                if (!$this->internalHasItem($key)) {
                     unset($keys[$i]);
                     continue;
                 }
 
-                $filespec = $this->getFileSpec($key, $options);
+                $filespec = $this->getFileSpec($key);
                 $data     = $this->getFileContent($filespec . '.dat', $nonBlocking, $wouldblock);
                 if ($nonBlocking && $wouldblock) {
                     continue;
@@ -261,7 +583,7 @@ class Filesystem extends AbstractAdapter
                     unset($keys[$i]);
                 }
 
-                if ($baseOptions->getReadControl()) {
+                if ($options->getReadControl()) {
                     $info = $this->readInfoFile($filespec . '.ifo');
                     if (isset($info['hash'], $info['algo'])
                         && Utils::generateHash($info['algo'], $data, true) != $info['hash']
@@ -275,8 +597,8 @@ class Filesystem extends AbstractAdapter
                 $result[$key] = $data;
             }
 
-            // Don't check ttl after first iteration
-            $options['ttl'] = 0;
+            // TODO: Don't check ttl after first iteration
+            // $options['ttl'] = 0;
         }
 
         return $result;
@@ -285,14 +607,7 @@ class Filesystem extends AbstractAdapter
     /**
      * Test if an item exists.
      *
-     * Options:
-     *  - ttl <int> optional
-     *    - The time-to-life (Default: ttl of object)
-     *  - namespace <string> optional
-     *    - The namespace to use (Default: namespace of object)
-     *
      * @param  string $key
-     * @param  array  $options
      * @return boolean
      * @throws Exception\ExceptionInterface
      *
@@ -300,27 +615,20 @@ class Filesystem extends AbstractAdapter
      * @triggers hasItem.post(PostEvent)
      * @triggers hasItem.exception(ExceptionEvent)
      */
-    public function hasItem($key, array $options = array())
+    public function hasItem($key)
     {
-        $baseOptions = $this->getOptions();
-        if ($baseOptions->getReadable() && $baseOptions->getClearStatCache()) {
+        $options = $this->getOptions();
+        if ($options->getReadable() && $options->getClearStatCache()) {
             clearstatcache();
         }
 
-        return parent::hasItem($key, $options);
+        return parent::hasItem($key);
     }
 
     /**
      * Test multiple items.
      *
-     * Options:
-     *  - ttl <int> optional
-     *    - The time-to-life (Default: ttl of object)
-     *  - namespace <string> optional
-     *    - The namespace to use (Default: namespace of object)
-     *
      * @param  array $keys
-     * @param  array $options
      * @return array Array of found keys
      * @throws Exception\ExceptionInterface
      *
@@ -328,46 +636,39 @@ class Filesystem extends AbstractAdapter
      * @triggers hasItems.post(PostEvent)
      * @triggers hasItems.exception(ExceptionEvent)
      */
-    public function hasItems(array $keys, array $options = array())
+    public function hasItems(array $keys)
     {
-        $baseOptions = $this->getOptions();
-        if ($baseOptions->getReadable() && $baseOptions->getClearStatCache()) {
+        $options = $this->getOptions();
+        if ($options->getReadable() && $options->getClearStatCache()) {
             clearstatcache();
         }
 
-        return parent::hasItems($keys, $options);
+        return parent::hasItems($keys);
     }
 
     /**
      * Internal method to test if an item exists.
-     *
-     * Options:
-     *  - ttl <int>
-     *    - The time-to-life
-     *  - namespace <string>
-     *    - The namespace to use
      *
      * @param  string $normalizedKey
      * @param  array  $normalizedOptions
      * @return boolean
      * @throws Exception\ExceptionInterface
      */
-    protected function internalHasItem(& $normalizedKey, array & $normalizedOptions)
+    protected function internalHasItem(& $normalizedKey)
     {
-        $ttl      = $normalizedOptions['ttl'];
-        $filespec = $this->getFileSpec($normalizedKey, $normalizedOptions);
-
-        if (!file_exists($filespec . '.dat')) {
+        $file = $this->getFileSpec($normalizedKey) . '.dat';
+        if (!file_exists($file)) {
             return false;
         }
 
+        $ttl = $this->getOptions()->getTtl();
         if ($ttl) {
             ErrorHandler::start();
-            $mtime = filemtime($filespec . '.dat');
+            $mtime = filemtime($file);
             $error = ErrorHandler::stop();
             if (!$mtime) {
                 throw new Exception\RuntimeException(
-                    "Error getting mtime of file '{$filespec}.dat'", 0, $error
+                    "Error getting mtime of file '{$file}'", 0, $error
                 );
             }
 
@@ -383,66 +684,61 @@ class Filesystem extends AbstractAdapter
      * Get metadata
      *
      * @param string $key
-     * @param array  $options
      * @return array|boolean Metadata on success, false on failure
      */
-    public function getMetadata($key, array $options = array())
+    public function getMetadata($key)
     {
-        $baseOptions = $this->getOptions();
-        if ($baseOptions->getReadable() && $baseOptions->getClearStatCache()) {
+        $options = $this->getOptions();
+        if ($options->getReadable() && $options->getClearStatCache()) {
             clearstatcache();
         }
 
-        return parent::getMetadata($key, $options);
+        return parent::getMetadata($key);
     }
 
     /**
      * Get metadatas
      *
      * @param array $keys
-     * @param array $options
      * @return array Associative array of keys and metadata
      */
     public function getMetadatas(array $keys, array $options = array())
     {
-        $baseOptions = $this->getOptions();
-        if ($baseOptions->getReadable() && $baseOptions->getClearStatCache()) {
+        $options = $this->getOptions();
+        if ($options->getReadable() && $options->getClearStatCache()) {
             clearstatcache();
         }
 
-        return parent::getMetadatas($keys, $options);
+        return parent::getMetadatas($keys);
     }
 
     /**
      * Get info by key
      *
      * @param string $normalizedKey
-     * @param array  $normalizedOptions
      * @return array|boolean Metadata on success, false on failure
      */
-    protected function internalGetMetadata(& $normalizedKey, array & $normalizedOptions)
+    protected function internalGetMetadata(& $normalizedKey)
     {
-        if (!$this->internalHasItem($normalizedKey, $normalizedOptions)) {
+        if (!$this->internalHasItem($normalizedKey)) {
             return false;
         }
 
-        $baseOptions = $this->getOptions();
-        $filespec    = $this->getFileSpec($normalizedKey, $normalizedOptions);
+        $options  = $this->getOptions();
+        $filespec = $this->getFileSpec($normalizedKey);
+        $file     = $filespec . '.dat';
 
-        $metadata = $this->readInfoFile($filespec . '.ifo');
-        if (!$metadata) {
-            $metadata  = array();
+        $metadata = array(
+            'filespec' => $filespec,
+            'mtime'    => filemtime($file)
+        );
+
+        if (!$options->getNoCtime()) {
+            $metadata['ctime'] = filectime($file);
         }
 
-        $metadata['filespec'] = $filespec;
-        $metadata['mtime']    = filemtime($filespec . '.dat');
-
-        if (!$baseOptions->getNoCtime()) {
-            $metadata['ctime'] = filectime($filespec . '.dat');
-        }
-
-        if (!$baseOptions->getNoAtime()) {
-            $metadata['atime'] = fileatime($filespec . '.dat');
+        if (!$options->getNoAtime()) {
+            $metadata['atime'] = fileatime($file);
         }
 
         return $metadata;
@@ -451,64 +747,33 @@ class Filesystem extends AbstractAdapter
     /**
      * Internal method to get multiple metadata
      *
-     * Options:
-     *  - ttl <int>
-     *    - The time-to-life
-     *  - namespace <string>
-     *    - The namespace to use
-     *
      * @param  array $normalizedKeys
-     * @param  array $normalizedOptions
      * @return array Associative array of keys and metadata
      * @throws Exception\ExceptionInterface
      */
-    protected function internalGetMetadatas(array & $normalizedKeys, array & $normalizedOptions)
+    protected function internalGetMetadatas(array & $normalizedKeys)
     {
-        $baseOptions = $this->getOptions();
-        $result      = array();
+        $options = $this->getOptions();
+        $result  = array();
 
-        // Don't change arguments passed by reference
-        $keys    = $normalizedKeys;
-        $options = $normalizedOptions;
+        foreach ($normalizedKeys as $normalizedKey) {
+            $filespec = $this->getFileSpec($normalizedKey);
+            $file     = $filespec . '.dat';
 
-        while ($keys) {
+            $metadata = array(
+                'filespec' => $filespec,
+                'mtime'    => filemtime($file),
+            );
 
-            // LOCK_NB if more than one items have to read
-            $nonBlocking = count($keys) > 1;
-            $wouldblock  = null;
-
-            foreach ($keys as $i => $key) {
-                if (!$this->internalHasItem($key, $options)) {
-                    unset($keys[$i]);
-                    continue;
-                }
-
-                $filespec = $this->getFileSpec($key, $options);
-
-                $metadata = $this->readInfoFile($filespec . '.ifo', $nonBlocking, $wouldblock);
-                if ($nonBlocking && $wouldblock) {
-                    continue;
-                } elseif (!$metadata) {
-                    $metadata = array();
-                }
-
-                $metadata['filespec'] = $filespec;
-                $metadata['mtime']    = filemtime($filespec . '.dat');
-
-                if (!$baseOptions->getNoCtime()) {
-                    $metadata['ctime'] = filectime($filespec . '.dat');
-                }
-
-                if (!$baseOptions->getNoAtime()) {
-                    $metadata['atime'] = fileatime($filespec . '.dat');
-                }
-
-                $result[$key] = $metadata;
-                unset($keys[$i]);
+            if (!$options->getNoCtime()) {
+                $metadata['ctime'] = filectime($file);
             }
 
-            // Don't check ttl after first iteration
-            $options['ttl'] = 0;
+            if (!$options->getNoAtime()) {
+                $metadata['atime'] = fileatime($file);
+            }
+
+            $result[$normalizedKey] = $metadata;
         }
 
         return $result;
@@ -519,15 +784,8 @@ class Filesystem extends AbstractAdapter
     /**
      * Store an item.
      *
-     * Options:
-     *  - namespace <string> optional
-     *    - The namespace to use (Default: namespace of object)
-     *  - tags <array> optional
-     *    - An array of tags
-     *
      * @param  string $key
      * @param  mixed  $value
-     * @param  array  $options
      * @return boolean
      * @throws Exception\ExceptionInterface
      *
@@ -535,27 +793,19 @@ class Filesystem extends AbstractAdapter
      * @triggers setItem.post(PostEvent)
      * @triggers setItem.exception(ExceptionEvent)
      */
-    public function setItem($key, $value, array $options = array())
+    public function setItem($key, $value)
     {
-        $baseOptions = $this->getOptions();
-        if ($baseOptions->getWritable() && $baseOptions->getClearStatCache()) {
+        $options = $this->getOptions();
+        if ($options->getWritable() && $options->getClearStatCache()) {
             clearstatcache();
         }
-
-        return parent::setItem($key, $value, $options);
+        return parent::setItem($key, $value);
     }
 
     /**
      * Store multiple items.
      *
-     * Options:
-     *  - namespace <string> optional
-     *    - The namespace to use (Default: namespace of object)
-     *  - tags <array> optional
-     *    - An array of tags
-     *
      * @param  array $keyValuePairs
-     * @param  array $options
      * @return array Array of not stored keys
      * @throws Exception\ExceptionInterface
      *
@@ -563,28 +813,21 @@ class Filesystem extends AbstractAdapter
      * @triggers setItems.post(PostEvent)
      * @triggers setItems.exception(ExceptionEvent)
      */
-    public function setItems(array $keyValuePairs, array $options = array())
+    public function setItems(array $keyValuePairs)
     {
-        $baseOptions = $this->getOptions();
-        if ($baseOptions->getWritable() && $baseOptions->getClearStatCache()) {
+        $options = $this->getOptions();
+        if ($options->getWritable() && $options->getClearStatCache()) {
             clearstatcache();
         }
 
-        return parent::setItems($keyValuePairs, $options);
+        return parent::setItems($keyValuePairs);
     }
 
     /**
      * Add an item.
      *
-     * Options:
-     *  - namespace <string> optional
-     *    - The namespace to use (Default: namespace of object)
-     *  - tags <array> optional
-     *    - An array of tags
-     *
      * @param  string $key
      * @param  mixed  $value
-     * @param  array  $options
      * @return boolean
      * @throws Exception\ExceptionInterface
      *
@@ -592,27 +835,20 @@ class Filesystem extends AbstractAdapter
      * @triggers addItem.post(PostEvent)
      * @triggers addItem.exception(ExceptionEvent)
      */
-    public function addItem($key, $value, array $options = array())
+    public function addItem($key, $value)
     {
-        $baseOptions = $this->getOptions();
-        if ($baseOptions->getWritable() && $baseOptions->getClearStatCache()) {
+        $options = $this->getOptions();
+        if ($options->getWritable() && $options->getClearStatCache()) {
             clearstatcache();
         }
 
-        return parent::addItem($key, $value, $options);
+        return parent::addItem($key, $value);
     }
 
     /**
      * Add multiple items.
      *
-     * Options:
-     *  - namespace <string> optional
-     *    - The namespace to use (Default: namespace of object)
-     *  - tags <array> optional
-     *    - An array of tags
-     *
      * @param  array $keyValuePairs
-     * @param  array $options
      * @return boolean
      * @throws Exception\ExceptionInterface
      *
@@ -620,28 +856,21 @@ class Filesystem extends AbstractAdapter
      * @triggers addItems.post(PostEvent)
      * @triggers addItems.exception(ExceptionEvent)
      */
-    public function addItems(array $keyValuePairs, array $options = array())
+    public function addItems(array $keyValuePairs)
     {
-        $baseOptions = $this->getOptions();
-        if ($baseOptions->getWritable() && $baseOptions->getClearStatCache()) {
+        $options = $this->getOptions();
+        if ($options->getWritable() && $options->getClearStatCache()) {
             clearstatcache();
         }
 
-        return parent::addItems($keyValuePairs, $options);
+        return parent::addItems($keyValuePairs);
     }
 
     /**
      * Replace an existing item.
      *
-     * Options:
-     *  - namespace <string> optional
-     *    - The namespace to use (Default: namespace of object)
-     *  - tags <array> optional
-     *    - An array of tags
-     *
      * @param  string $key
      * @param  mixed  $value
-     * @param  array  $options
      * @return boolean
      * @throws Exception\ExceptionInterface
      *
@@ -649,27 +878,20 @@ class Filesystem extends AbstractAdapter
      * @triggers replaceItem.post(PostEvent)
      * @triggers replaceItem.exception(ExceptionEvent)
      */
-    public function replaceItem($key, $value, array $options = array())
+    public function replaceItem($key, $value)
     {
-        $baseOptions = $this->getOptions();
-        if ($baseOptions->getWritable() && $baseOptions->getClearStatCache()) {
+        $options = $this->getOptions();
+        if ($options->getWritable() && $options->getClearStatCache()) {
             clearstatcache();
         }
 
-        return parent::replaceItem($key, $value, $options);
+        return parent::replaceItem($key, $value);
     }
 
     /**
      * Replace multiple existing items.
      *
-     * Options:
-     *  - namespace <string> optional
-     *    - The namespace to use (Default: namespace of object)
-     *  - tags <array> optional
-     *    - An array of tags
-     *
      * @param  array $keyValuePairs
-     * @param  array $options
      * @return boolean
      * @throws Exception\ExceptionInterface
      *
@@ -677,56 +899,47 @@ class Filesystem extends AbstractAdapter
      * @triggers replaceItems.post(PostEvent)
      * @triggers replaceItems.exception(ExceptionEvent)
      */
-    public function replaceItems(array $keyValuePairs, array $options = array())
+    public function replaceItems(array $keyValuePairs)
     {
-        $baseOptions = $this->getOptions();
-        if ($baseOptions->getWritable() && $baseOptions->getClearStatCache()) {
+        $options = $this->getOptions();
+        if ($options->getWritable() && $options->getClearStatCache()) {
             clearstatcache();
         }
 
-        return parent::replaceItems($keyValuePairs, $options);
+        return parent::replaceItems($keyValuePairs);
     }
 
     /**
      * Internal method to store an item.
      *
-     * Options:
-     *  - namespace <string>
-     *    - The namespace to use
-     *  - tags <array>
-     *    - An array of tags
-     *
      * @param  string $normalizedKey
      * @param  mixed  $value
-     * @param  array  $normalizedOptions
      * @return boolean
      * @throws Exception\ExceptionInterface
      */
-    protected function internalSetItem(& $normalizedKey, & $value, array & $normalizedOptions)
+    protected function internalSetItem(& $normalizedKey, & $value)
     {
-        $baseOptions = $this->getOptions();
-        $filespec    = $this->getFileSpec($normalizedKey, $normalizedOptions);
+        $options  = $this->getOptions();
+        $filespec = $this->getFileSpec($normalizedKey);
         $this->prepareDirectoryStructure($filespec);
 
         $info = null;
-        if ($baseOptions->getReadControl()) {
-            $info['hash'] = Utils::generateHash($baseOptions->getReadControlAlgo(), $value, true);
-            $info['algo'] = $baseOptions->getReadControlAlgo();
-        }
-        if (isset($options['tags'])) {
-            $info['tags'] = $normalizedOptions['tags'];
+        if ($options->getReadControl()) {
+            $info['hash'] = Utils::generateHash($options->getReadControlAlgo(), $value, true);
+            $info['algo'] = $options->getReadControlAlgo();
         }
 
         // write files
         try {
             // set umask for files
-            $oldUmask = umask($baseOptions->getFileUmask());
+            $oldUmask = umask($options->getFileUmask());
 
             $contents = array($filespec . '.dat' => & $value);
             if ($info) {
                 $contents[$filespec . '.ifo'] = serialize($info);
             } else {
                 $this->unlink($filespec . '.ifo');
+                $this->unlink($filespec . '.tag');
             }
 
             while ($contents) {
@@ -746,7 +959,7 @@ class Filesystem extends AbstractAdapter
 
             return true;
 
-        } catch (Exception $e) {
+        } catch (BaseException $e) {
             // reset umask on exception
             umask($oldUmask);
             throw $e;
@@ -756,18 +969,11 @@ class Filesystem extends AbstractAdapter
     /**
      * Internal method to store multiple items.
      *
-     * Options:
-     *  - namespace <string>
-     *    - The namespace to use
-     *  - tags <array>
-     *    - An array of tags
-     *
      * @param  array $normalizedKeyValuePairs
-     * @param  array $normalizedOptions
      * @return array Array of not stored keys
      * @throws Exception\ExceptionInterface
      */
-    protected function internalSetItems(array & $normalizedKeyValuePairs, array & $normalizedOptions)
+    protected function internalSetItems(array & $normalizedKeyValuePairs)
     {
         $baseOptions = $this->getOptions();
         $oldUmask    = null;
@@ -775,7 +981,7 @@ class Filesystem extends AbstractAdapter
         // create an associated array of files and contents to write
         $contents = array();
         foreach ($normalizedKeyValuePairs as $key => & $value) {
-            $filespec = $this->getFileSpec($key, $normalizedOptions);
+            $filespec = $this->getFileSpec($key);
             $this->prepareDirectoryStructure($filespec);
 
             // *.dat file
@@ -787,13 +993,11 @@ class Filesystem extends AbstractAdapter
                 $info['hash'] = Utils::generateHash($baseOptions->getReadControlAlgo(), $value, true);
                 $info['algo'] = $baseOptions->getReadControlAlgo();
             }
-            if (isset($normalizedOptions['tags'])) {
-                $info['tags'] = & $normalizedOptions['tags'];
-            }
             if ($info) {
                 $contents[$filespec . '.ifo'] = serialize($info);
             } else {
                 $this->unlink($filespec . '.ifo');
+                $this->unlink($filespec . '.tag');
             }
         }
 
@@ -820,7 +1024,7 @@ class Filesystem extends AbstractAdapter
             // return OK
             return array();
 
-        } catch (Exception $e) {
+        } catch (BaseException $e) {
             // reset umask on exception
             umask($oldUmask);
             throw $e;
@@ -833,76 +1037,55 @@ class Filesystem extends AbstractAdapter
      * It uses the token received from getItem() to check if the item has
      * changed before overwriting it.
      *
-     * Options:
-     *  - namespace <string> optional
-     *    - The namespace to use (Default: namespace of object)
-     *  - tags <array> optional
-     *    - An array of tags
-     *
      * @param  mixed  $token
      * @param  string $key
      * @param  mixed  $value
-     * @param  array  $options
      * @return boolean
      * @throws Exception\ExceptionInterface
      * @see    getItem()
      * @see    setItem()
      */
-    public function checkAndSetItem($token, $key, $value, array $options = array())
+    public function checkAndSetItem($token, $key, $value)
     {
-        $baseOptions = $this->getOptions();
-        if ($baseOptions->getWritable() && $baseOptions->getClearStatCache()) {
+        $options = $this->getOptions();
+        if ($options->getWritable() && $options->getClearStatCache()) {
             clearstatcache();
         }
 
-        return parent::checkAndSetItem($token, $key, $value, $options);
+        return parent::checkAndSetItem($token, $key, $value);
     }
 
     /**
      * Internal method to set an item only if token matches
      *
-     * Options:
-     *  - ttl <float>
-     *    - The time-to-life
-     *  - namespace <string>
-     *    - The namespace to use
-     *  - tags <array>
-     *    - An array of tags
-     *
      * @param  mixed  $token
      * @param  string $normalizedKey
      * @param  mixed  $value
-     * @param  array  $normalizedOptions
      * @return boolean
      * @throws Exception\ExceptionInterface
      * @see    getItem()
      * @see    setItem()
      */
-    protected function internalCheckAndSetItem(& $token, & $normalizedKey, & $value, array & $normalizedOptions)
+    protected function internalCheckAndSetItem(& $token, & $normalizedKey, & $value)
     {
-        if (!$this->internalHasItem($normalizedKey, $normalizedOptions)) {
+        if (!$this->internalHasItem($normalizedKey)) {
             return false;
         }
 
         // use filemtime + filesize as CAS token
-        $filespec = $this->getFileSpec($normalizedKey, $normalizedOptions);
-        $check    = filemtime($filespec . '.dat') . filesize($filespec . '.dat');
+        $file  = $this->getFileSpec($normalizedKey) . '.dat';
+        $check = filemtime($file) . filesize($file);
         if ($token !== $check) {
             return false;
         }
 
-        return $this->internalSetItem($normalizedKey, $value, $normalizedOptions);
+        return $this->internalSetItem($normalizedKey, $value);
     }
 
     /**
      * Reset lifetime of an item
      *
-     * Options:
-     *  - namespace <string> optional
-     *    - The namespace to use (Default: namespace of object)
-     *
      * @param  string $key
-     * @param  array  $options
      * @return boolean
      * @throws Exception\ExceptionInterface
      *
@@ -910,25 +1093,20 @@ class Filesystem extends AbstractAdapter
      * @triggers touchItem.post(PostEvent)
      * @triggers touchItem.exception(ExceptionEvent)
      */
-    public function touchItem($key, array $options = array())
+    public function touchItem($key)
     {
-        $baseOptions = $this->getOptions();
-        if ($baseOptions->getWritable() && $baseOptions->getClearStatCache()) {
+        $options = $this->getOptions();
+        if ($options->getWritable() && $options->getClearStatCache()) {
             clearstatcache();
         }
 
-        return parent::touchItem($key, $options);
+        return parent::touchItem($key);
     }
 
     /**
      * Reset lifetime of multiple items.
      *
-     * Options:
-     *  - namespace <string> optional
-     *    - The namespace to use (Default: namespace of object)
-     *
      * @param  array $keys
-     * @param  array $options
      * @return array Array of not updated keys
      * @throws Exception\ExceptionInterface
      *
@@ -936,37 +1114,30 @@ class Filesystem extends AbstractAdapter
      * @triggers touchItems.post(PostEvent)
      * @triggers touchItems.exception(ExceptionEvent)
      */
-    public function touchItems(array $keys, array $options = array())
+    public function touchItems(array $keys)
     {
-        $baseOptions = $this->getOptions();
-        if ($baseOptions->getWritable() && $baseOptions->getClearStatCache()) {
+        $options = $this->getOptions();
+        if ($options->getWritable() && $options->getClearStatCache()) {
             clearstatcache();
         }
 
-        return parent::touchItems($keys, $options);
+        return parent::touchItems($keys);
     }
 
     /**
      * Internal method to reset lifetime of an item
      *
-     * Options:
-     *  - ttl <float>
-     *    - The time-to-life
-     *  - namespace <string>
-     *    - The namespace to use
-     *
      * @param  string $key
-     * @param  array  $options
      * @return boolean
      * @throws Exception\ExceptionInterface
      */
-    protected function internalTouchItem(& $normalizedKey, array & $normalizedOptions)
+    protected function internalTouchItem(& $normalizedKey)
     {
-        if (!$this->internalHasItem($normalizedKey, $normalizedOptions)) {
+        if (!$this->internalHasItem($normalizedKey)) {
             return false;
         }
 
-        $filespec = $this->getFileSpec($normalizedKey, $normalizedOptions);
+        $filespec = $this->getFileSpec($normalizedKey);
 
         ErrorHandler::start();
         $touch = touch($filespec . '.dat');
@@ -983,12 +1154,7 @@ class Filesystem extends AbstractAdapter
     /**
      * Remove an item.
      *
-     * Options:
-     *  - namespace <string> optional
-     *    - The namespace to use (Default: namespace of object)
-     *
      * @param  string $key
-     * @param  array  $options
      * @return boolean
      * @throws Exception\ExceptionInterface
      *
@@ -996,25 +1162,20 @@ class Filesystem extends AbstractAdapter
      * @triggers removeItem.post(PostEvent)
      * @triggers removeItem.exception(ExceptionEvent)
      */
-    public function removeItem($key, array $options = array())
+    public function removeItem($key)
     {
-        $baseOptions = $this->getOptions();
-        if ($baseOptions->getWritable() && $baseOptions->getClearStatCache()) {
+        $options = $this->getOptions();
+        if ($options->getWritable() && $options->getClearStatCache()) {
             clearstatcache();
         }
 
-        return parent::removeItem($key, $options);
+        return parent::removeItem($key);
     }
 
     /**
      * Remove multiple items.
      *
-     * Options:
-     *  - namespace <string> optional
-     *    - The namespace to use (Default: namespace of object)
-     *
      * @param  array $keys
-     * @param  array $options
      * @return array Array of not removed keys
      * @throws Exception\ExceptionInterface
      *
@@ -1022,174 +1183,33 @@ class Filesystem extends AbstractAdapter
      * @triggers removeItems.post(PostEvent)
      * @triggers removeItems.exception(ExceptionEvent)
      */
-    public function removeItems(array $keys, array $options = array())
+    public function removeItems(array $keys)
     {
-        $baseOptions = $this->getOptions();
-        if ($baseOptions->getWritable() && $baseOptions->getClearStatCache()) {
+        $options = $this->getOptions();
+        if ($options->getWritable() && $options->getClearStatCache()) {
             clearstatcache();
         }
 
-        return parent::removeItems($keys, $options);
+        return parent::removeItems($keys);
     }
 
     /**
      * Internal method to remove an item.
      *
-     * Options:
-     *  - namespace <string>
-     *    - The namespace to use
-     *
      * @param  string $normalizedKey
-     * @param  array  $normalizedOptions
      * @return boolean
      * @throws Exception\ExceptionInterface
      */
-    protected function internalRemoveItem(& $normalizedKey, array & $normalizedOptions)
+    protected function internalRemoveItem(& $normalizedKey)
     {
-        $filespec = $this->getFileSpec($normalizedKey, $normalizedOptions);
+        $filespec = $this->getFileSpec($normalizedKey);
         if (!file_exists($filespec . '.dat')) {
             return false;
         } else {
             $this->unlink($filespec . '.dat');
+            $this->unlink($filespec . '.tag');
             $this->unlink($filespec . '.ifo');
         }
-        return true;
-    }
-
-    /* non-blocking */
-
-    /**
-     * internal method to find items.
-     *
-     * Options:
-     *  - ttl <float>
-     *    - The time-to-live
-     *  - namespace <string>
-     *    - The namespace to use
-     *
-     * @param  int   $normalizedMode Matching mode (Value of Adapter::MATCH_*)
-     * @param  array $normalizedOptions
-     * @return boolean
-     * @throws Exception\ExceptionInterface
-     * @see    fetch()
-     * @see    fetchAll()
-     */
-    protected function internalFind(& $normalizedMode, array & $normalizedOptions)
-    {
-        if ($this->stmtActive) {
-            throw new Exception\RuntimeException('Statement already in use');
-        }
-
-        try {
-            $baseOptions = $this->getOptions();
-
-            $prefix = $normalizedOptions['namespace'] . $baseOptions->getNamespaceSeparator();
-            $find   = $baseOptions->getCacheDir()
-                    . str_repeat(\DIRECTORY_SEPARATOR . $prefix . '*', $baseOptions->getDirLevel())
-                    . \DIRECTORY_SEPARATOR . $prefix . '*.dat';
-            $glob   = new GlobIterator($find);
-
-            $this->stmtActive  = true;
-            $this->stmtGlob    = $glob;
-            $this->stmtMatch   = $normalizedMode;
-            $this->stmtOptions = $normalizedOptions;
-        } catch (BaseException $e) {
-            throw new Exception\RuntimeException("new GlobIterator({$find}) failed", 0, $e);
-        }
-
-        return true;
-    }
-
-    /**
-     * Internal method to fetch the next item from result set
-     *
-     * @return array|boolean The next item or false
-     * @throws Exception\ExceptionInterface
-     */
-    protected function internalFetch()
-    {
-        if (!$this->stmtActive) {
-            return false;
-        }
-
-        if ($this->stmtGlob !== null) {
-            $result = $this->fetchByGlob();
-
-            if ($result === false) {
-                // clear statement
-                $this->stmtActive  = false;
-                $this->stmtGlob    = null;
-                $this->stmtMatch   = null;
-                $this->stmtOptions = null;
-            }
-        } else {
-            $result = parent::internalFetch();
-        }
-
-        return $result;
-    }
-
-    /* cleaning */
-
-    /**
-     * Internal method to clear items off all namespaces.
-     *
-     * @param  int   $normalizedMode Matching mode (Value of Adapter::MATCH_*)
-     * @param  array $normalizedOptions
-     * @return boolean
-     * @throws Exception\ExceptionInterface
-     * @see    clearByNamespace()
-     */
-    protected function internalClear(& $normalizedMode, array & $normalizedOptions)
-    {
-        return $this->clearByPrefix('', $normalizedMode, $normalizedOptions);
-    }
-
-    /**
-     * Clear items by namespace.
-     *
-     * Options:
-     *  - ttl <float>
-     *    - The time-to-life
-     *  - namespace <string>
-     *    - The namespace to use
-     *  - tags <array>
-     *    - Tags to search for used with matching modes of Adapter::MATCH_TAGS_*
-     *
-     * @param  int   $normalizedMode Matching mode (Value of Adapter::MATCH_*)
-     * @param  array $normalizedOptions
-     * @return boolean
-     * @throws Exception\ExceptionInterface
-     * @see    clear()
-     */
-    protected function internalClearByNamespace(& $normalizedMode, array & $normalizedOptions)
-    {
-        $prefix = $normalizedOptions['namespace'] . $this->getOptions()->getNamespaceSeparator();
-        return $this->clearByPrefix($prefix, $normalizedMode, $normalizedOptions);
-    }
-
-    /**
-     * Internal method to optimize adapter storage.
-     *
-     * Options:
-     *  - namespace <string>
-     *    - The namespace to use
-     *
-     * @param  array $normalizedOptions
-     * @return boolean
-     * @throws Exception\ExceptionInterface
-     */
-    protected function internalOptimize(array & $normalizedOptions)
-    {
-        $baseOptions = $this->getOptions();
-        if ($baseOptions->getDirLevel()) {
-            // removes only empty directories
-            $this->rmDir(
-                $baseOptions->getCacheDir(),
-                $normalizedOptions['namespace'] . $baseOptions->getNamespaceSeparator()
-            );
-        }
-
         return true;
     }
 
@@ -1232,15 +1252,11 @@ class Filesystem extends AbstractAdapter
                     'supportedMetadata'  => $metadata,
                     'maxTtl'             => 0,
                     'staticTtl'          => false,
-                    'tagging'            => true,
                     'ttlPrecision'       => 1,
                     'expiredRead'        => true,
                     'maxKeyLength'       => 251, // 255 - strlen(.dat | .ifo)
                     'namespaceIsPrefix'  => true,
                     'namespaceSeparator' => $options->getNamespaceSeparator(),
-                    'iterable'           => true,
-                    'clearAllNamespaces' => true,
-                    'clearByNamespace'   => true,
                 )
             );
 
@@ -1278,226 +1294,7 @@ class Filesystem extends AbstractAdapter
         return $this->capabilities;
     }
 
-    /**
-     * Internal method to get storage capacity.
-     *
-     * @param  array $normalizedOptions
-     * @return array|boolean Associative array of capacity, false on failure
-     * @throws Exception\ExceptionInterface
-     */
-    protected function internalGetCapacity(array & $normalizedOptions)
-    {
-        return Utils::getDiskCapacity($this->getOptions()->getCacheDir());
-    }
-
     /* internal */
-
-    /**
-     * Fetch by glob
-     *
-     * @return array|bool
-     */
-    protected function fetchByGlob()
-    {
-        $options = $this->stmtOptions;
-        $mode    = $this->stmtMatch;
-
-        $prefix  = $options['namespace'] . $this->getOptions()->getNamespaceSeparator();
-        $prefixL = strlen($prefix);
-
-        do {
-            try {
-                $valid = $this->stmtGlob->valid();
-            } catch (\LogicException $e) {
-                // @link https://bugs.php.net/bug.php?id=55701
-                // GlobIterator throws LogicException with message
-                // 'The parent constructor was not called: the object is in an invalid state'
-                $valid = false;
-            }
-            if (!$valid) {
-                return false;
-            }
-
-            $item = array();
-            $meta = null;
-
-            $current = $this->stmtGlob->current();
-            $this->stmtGlob->next();
-
-            $filename = $current->getFilename();
-            if ($prefix !== '') {
-                if (substr($filename, 0, $prefixL) != $prefix) {
-                    continue;
-                }
-
-                // remove prefix and suffix (.dat)
-                $key = substr($filename, $prefixL, -4);
-            } else {
-                // remove suffix (.dat)
-                $key = substr($filename, 0, -4);
-            }
-
-            // if MATCH_ALL mode do not check expired
-            if (($mode & self::MATCH_ALL) != self::MATCH_ALL) {
-                $mtime = $current->getMTime();
-
-                // if MATCH_EXPIRED -> filter not expired items
-                if (($mode & self::MATCH_EXPIRED) == self::MATCH_EXPIRED) {
-                    if ( time() < ($mtime + $options['ttl']) ) {
-                        continue;
-                    }
-
-                // if MATCH_ACTIVE -> filter expired items
-                } else {
-                    if ( time() >= ($mtime + $options['ttl']) ) {
-                        continue;
-                    }
-                }
-            }
-
-            // check tags only if one of the tag matching mode is selected
-            if (($mode & 070) > 0) {
-
-                $meta = $this->internalGetMetadata($key, $options);
-
-                // if MATCH_TAGS mode -> check if all given tags available in current cache
-                if (($mode & self::MATCH_TAGS_AND) == self::MATCH_TAGS_AND ) {
-                    if (!isset($meta['tags']) || count(array_diff($options['tags'], $meta['tags'])) > 0) {
-                        continue;
-                    }
-
-                // if MATCH_NO_TAGS mode -> check if no given tag available in current cache
-                } elseif( ($mode & self::MATCH_TAGS_NEGATE) == self::MATCH_TAGS_NEGATE ) {
-                    if (isset($meta['tags']) && count(array_diff($options['tags'], $meta['tags'])) != count($options['tags'])) {
-                        continue;
-                    }
-
-                // if MATCH_ANY_TAGS mode -> check if any given tag available in current cache
-                } elseif ( ($mode & self::MATCH_TAGS_OR) == self::MATCH_TAGS_OR ) {
-                    if (!isset($meta['tags']) || count(array_diff($options['tags'], $meta['tags'])) == count($options['tags'])) {
-                        continue;
-                    }
-
-                }
-            }
-
-            foreach ($options['select'] as $select) {
-                if ($select == 'key') {
-                    $item['key'] = $key;
-                } else if ($select == 'value') {
-                    $item['value'] = $this->getFileContent($current->getPathname());
-                } else if ($select != 'key') {
-                    if ($meta === null) {
-                        $meta = $this->internalGetMetadata($key, $options);
-                    }
-                    $item[$select] = isset($meta[$select]) ? $meta[$select] : null;
-                }
-            }
-
-            return $item;
-        } while (true);
-    }
-
-    /**
-     * Clear by prefix
-     *
-     * @param $prefix
-     * @param $mode
-     * @param array $opts
-     * @return bool
-     * @throws RuntimeException
-     */
-    protected function clearByPrefix($prefix, $mode, array &$opts)
-    {
-        $baseOptions = $this->getOptions();
-        if (!$baseOptions->getWritable()) {
-            return false;
-        }
-
-        $ttl = $opts['ttl'];
-
-        if ($baseOptions->getClearStatCache()) {
-            clearstatcache();
-        }
-
-        try {
-            $find = $baseOptions->getCacheDir()
-                . str_repeat(\DIRECTORY_SEPARATOR . $prefix . '*', $baseOptions->getDirLevel())
-                . \DIRECTORY_SEPARATOR . $prefix . '*.dat';
-            $glob = new GlobIterator($find);
-        } catch (BaseException $e) {
-            throw new Exception\RuntimeException('Instantiating GlobIterator failed', 0, $e);
-        }
-
-        $time = time();
-
-        foreach ($glob as $entry) {
-
-            // if MATCH_ALL mode do not check expired
-            if (($mode & self::MATCH_ALL) != self::MATCH_ALL) {
-
-                $mtime = $entry->getMTime();
-                if (($mode & self::MATCH_EXPIRED) == self::MATCH_EXPIRED) {
-                    if ( $time <= ($mtime + $ttl) ) {
-                        continue;
-                    }
-
-                // if Zend_Cache::MATCH_ACTIVE mode selected do not remove expired data
-                } else {
-                    if ( $time >= ($mtime + $ttl) ) {
-                        continue;
-                    }
-                }
-            }
-
-            // remove file suffix (*.dat)
-            $pathnameSpec = substr($entry->getPathname(), 0, -4);
-
-            ////////////////////////////////////////
-            // on this time all expire tests match
-            ////////////////////////////////////////
-
-            // check tags only if one of the tag matching mode is selected
-            if (($mode & 070) > 0) {
-
-                $info = $this->readInfoFile($pathnameSpec . '.ifo');
-
-                // if MATCH_TAGS mode -> check if all given tags available in current cache
-                if (($mode & self::MATCH_TAGS) == self::MATCH_TAGS ) {
-                    if (!isset($info['tags'])
-                        || count(array_diff($opts['tags'], $info['tags'])) > 0
-                    ) {
-                        continue;
-                    }
-
-                // if MATCH_NO_TAGS mode -> check if no given tag available in current cache
-                } elseif(($mode & self::MATCH_NO_TAGS) == self::MATCH_NO_TAGS) {
-                    if (isset($info['tags'])
-                        && count(array_diff($opts['tags'], $info['tags'])) != count($opts['tags'])
-                    ) {
-                        continue;
-                    }
-
-                // if MATCH_ANY_TAGS mode -> check if any given tag available in current cache
-                } elseif ( ($mode & self::MATCH_ANY_TAGS) == self::MATCH_ANY_TAGS ) {
-                    if (!isset($info['tags'])
-                        || count(array_diff($opts['tags'], $info['tags'])) == count($opts['tags'])
-                    ) {
-                        continue;
-                    }
-                }
-            }
-
-            ////////////////////////////////////////
-            // on this time all tests match
-            ////////////////////////////////////////
-
-            $this->unlink($pathnameSpec . '.dat'); // delete data file
-            $this->unlink($pathnameSpec . '.ifo'); // delete info file
-        }
-
-        return true;
-    }
 
     /**
      * Removes directories recursive by namespace
@@ -1537,16 +1334,14 @@ class Filesystem extends AbstractAdapter
      * Get file spec of the given key and namespace
      *
      * @param  string $normalizedKey
-     * @param  array  $normalizedOptions
      * @return string
      */
-    protected function getFileSpec($normalizedKey, array & $normalizedOptions)
+    protected function getFileSpec($normalizedKey)
     {
-        $baseOptions = $this->getOptions();
-        $prefix      = $normalizedOptions['namespace'] . $baseOptions->getNamespaceSeparator();
-
-        $path  = $baseOptions->getCacheDir() . \DIRECTORY_SEPARATOR;
-        $level = $baseOptions->getDirLevel();
+        $options = $this->getOptions();
+        $prefix  = $options->getNamespace() . $options->getNamespaceSeparator();
+        $path    = $options->getCacheDir() . \DIRECTORY_SEPARATOR;
+        $level   = $options->getDirLevel();
 
         $fileSpecId = $path . $prefix . $normalizedKey . '/' . $level;
         if ($this->lastFileSpecId !== $fileSpecId) {

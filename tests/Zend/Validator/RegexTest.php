@@ -20,17 +20,9 @@
  */
 
 namespace ZendTest\Validator;
+
 use Zend\Validator,
     ReflectionClass;
-
-/**
- * Test helper
- */
-
-/**
- * @see Zend_Validator_Regex
- */
-
 
 /**
  * @category   Zend
@@ -111,25 +103,33 @@ class RegexTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @ZF-11863
+     * @dataProvider specialCharValidationProvider
      */
-    public function testSpecialCharValidation()
+    public function testSpecialCharValidation($expected, $input)
     {
-        /**
-         * The elements of each array are, in order:
-         *      - pattern
-         *      - expected validation result
-         *      - array of test input values
-         */
-        $valuesExpected = array(
-            array('/^[[:alpha:]\']+$/iu', true, array('test', 'òèùtestòò', 'testà', 'teààst', 'ààòòìùéé', 'èùòìiieeà')),
-            array('/^[[:alpha:]\']+$/iu', false, array('test99'))
-            );
-        foreach ($valuesExpected as $element) {
-            $validator = new Validator\Regex($element[0]);
-            foreach ($element[2] as $input) {
-                $this->assertEquals($element[1], $validator->isValid($input));
-            }
-        }
+        // Locale changed due a bug with PHP versions lower than 5.3.4 (https://bugs.php.net/bug.php?id=52971)
+        setlocale(LC_ALL, 'es_ES');
+        $validator = new Validator\Regex('/^[[:alpha:]\']+$/iu');
+        $this->assertEquals($expected, $validator->isValid($input),
+                            'Reason: ' . implode('', $validator->getMessages()));
+    }
+
+    /**
+     * The elements of each array are, in order:
+     *      - expected validation result
+     *      - test input value
+     */
+    public function specialCharValidationProvider()
+    {
+        return array(
+            array(true, 'test'),
+            array(true, 'òèùtestòò'),
+            array(true, 'testà'),
+            array(true, 'teààst'),
+            array(true, 'ààòòìùéé'),
+            array(true, 'èùòìiieeà'),
+            array(false, 'test99'),
+        );
     }
     
     public function testEqualsMessageTemplates()

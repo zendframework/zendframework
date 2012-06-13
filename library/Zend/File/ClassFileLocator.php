@@ -28,7 +28,7 @@ use DirectoryIterator,
     RecursiveIteratorIterator;
 
 /**
- * Locate files containing PHP classes, interfaces, or abstracts
+ * Locate files containing PHP classes, interfaces, abstracts or traits
  *
  * @category   Zend
  * @package    Zend_File
@@ -53,18 +53,15 @@ class ClassFileLocator extends FilterIterator
             }
 
             $dirOrIterator = new RecursiveDirectoryIterator($dirOrIterator, RecursiveDirectoryIterator::FOLLOW_SYMLINKS);
-        }
-        if (!$dirOrIterator instanceof DirectoryIterator) {
+        } elseif (!$dirOrIterator instanceof DirectoryIterator) {
             throw new Exception\InvalidArgumentException('Expected a DirectoryIterator');
         }
 
         if ($dirOrIterator instanceof RecursiveIterator) {
-            $iterator = new RecursiveIteratorIterator($dirOrIterator);
-        } else {
-            $iterator = $dirOrIterator;
+            $dirOrIterator = new RecursiveIteratorIterator($dirOrIterator);
         }
 
-        parent::__construct($iterator);
+        parent::__construct($dirOrIterator);
     }
 
     /**
@@ -95,8 +92,8 @@ class ClassFileLocator extends FilterIterator
         $contents = file_get_contents($file->getRealPath());
         $tokens   = token_get_all($contents);
         $count    = count($tokens);
-        $i        = 0;
-        while ($i < $count) {
+        $t_trait  = defined('T_TRAIT') ? T_TRAIT : -1; // For preserve PHP 5.3 compatibility
+        for ($i = 0; $i < $count; $i++) {
             $token = $tokens[$i];
 
             if (!is_array($token)) {
@@ -105,22 +102,15 @@ class ClassFileLocator extends FilterIterator
                 continue;
             }
 
-            list($id, $content, $line) = $token;
-
-            switch ($id) {
+            switch ($token[0]) {
                 case T_NAMESPACE:
                     // Namespace found; grab it for later
                     $namespace = '';
-                    $done      = false;
-                    do {
-                        ++$i;
-                        if (!array_key_exists($i, $tokens)) {
-                            break;
-                        }
+                    for ($i++; $i < $count; $i++) {
                         $token = $tokens[$i];
                         if (is_string($token)) {
                             if (';' === $token) {
-                                $done = true;
+                                break;
                             }
                             continue;
                         }
@@ -131,42 +121,34 @@ class ClassFileLocator extends FilterIterator
                                 $namespace .= $content;
                                 break;
                         }
-                    } while (!$done && $i < $count);
+                    }
 
                     // Set the namespace of this file in the object
                     $file->namespace = $namespace;
                     break;
+                case $t_trait:
                 case T_CLASS:
                 case T_INTERFACE:
-                    // Abstract class, class, or interface found
+                    // Abstract class, class, interface or trait found
 
                     // Get the classname
-                    $class = '';
-                    do {
-                        ++$i;
+                    for ($i++; $i < $count; $i++) {
                         $token = $tokens[$i];
                         if (is_string($token)) {
                             continue;
                         }
                         list($type, $content, $line) = $token;
-                        switch ($type) {
-                            case T_STRING:
-                                $class = $content;
-                                break;
+                        if (T_STRING == $type) {
+                            // If a classname was found, set it in the object, and
+                            // return boolean true (found)
+                            $file->classname = $content;
+                            return true;
                         }
-                    } while (empty($class) && $i < $count);
-
-                    // If a classname was found, set it in the object, and 
-                    // return boolean true (found)
-                    if (!empty($class)) {
-                        $file->classname = $class;
-                        return true;
                     }
                     break;
                 default:
                     break;
             }
-            ++$i;
         }
 
         // No class-type tokens found; return false

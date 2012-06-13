@@ -261,7 +261,7 @@ class UserEntry extends \Zend\GData\Entry
      *
      * @param array $value A collection of
      *          Zend_Gdata_GApps_Extension_FeedLink objects.
-     * @return Zend_Gdata_GApps_EventEntry Provides a fluent interface.
+     * @return EventEntry Provides a fluent interface.
      */
     public function setFeedLink($value)
     {

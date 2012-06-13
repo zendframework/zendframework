@@ -49,14 +49,14 @@ class ActivityEntry extends \Zend\GData\Entry
     /**
      * The ID of the video that was part of the activity
      *
-     * @var Zend_Gdata_YouTube_VideoId
+     * @var Extension\VideoId
      */
     protected $_videoId = null;
 
     /**
      * The username for the user that was part of the activity
      *
-     * @var Zend_Gdata_YouTube_Username
+     * @var Extension\Username
      */
     protected $_username = null;
 
@@ -159,7 +159,7 @@ class ActivityEntry extends \Zend\GData\Entry
     /**
      * Returns the rating for this activity entry.
      *
-     * @return null|Zend_Gdata_YouTube_Extension_Rating
+     * @return null|Extension\Rating
      */
     public function getRating()
     {

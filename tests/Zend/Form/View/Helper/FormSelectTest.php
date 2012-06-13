@@ -180,4 +180,10 @@ class FormSelectTest extends CommonTestCase
         $markup = $this->helper->render($element);
         $this->assertRegexp('#<select[^>]*?(name="foo\[\]")#', $markup);
     }
+
+    public function testInvokeWithNoElementChainsHelper()
+    {
+        $element = $this->getElement();
+        $this->assertSame($this->helper, $this->helper->__invoke());
+    }
 }

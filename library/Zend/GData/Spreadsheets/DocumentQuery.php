@@ -36,7 +36,7 @@ use Zend\GData\App;
 class DocumentQuery extends \Zend\GData\Query
 {
 
-    const SPREADSHEETS_FEED_URI = 'http://spreadsheets.google.com/feeds';
+    const SPREADSHEETS_FEED_URI = 'https://spreadsheets.google.com/feeds';
 
     protected $_defaultFeedUri = self::SPREADSHEETS_FEED_URI;
     protected $_documentType;

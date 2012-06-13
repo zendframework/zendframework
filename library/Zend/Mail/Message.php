@@ -441,7 +441,7 @@ class Message
     public function getBodyText()
     {
         if ($this->body instanceof Mime\Message) {
-            return $this->body->generateMessage();
+            return $this->body->generateMessage(Headers::EOL);
         }
 
         return (string) $this->body;
@@ -475,11 +475,7 @@ class Message
      */
     protected function clearHeaderByName($headerName)
     {
-        $headers = $this->headers();
-        if ($headers->has($headerName)) {
-            $header = $headers->get($headerName);
-            $headers->removeHeader($header);
-        }
+        $this->headers()->removeHeader($headerName);
     }
 
     /**
@@ -546,6 +542,8 @@ class Message
     public function toString()
     {
         $headers = $this->headers();
-        return $headers->toString() . "\r\n" . $this->getBodyText();
+        return $headers->toString()
+               . Headers::EOL
+               . $this->getBodyText();
     }
 }

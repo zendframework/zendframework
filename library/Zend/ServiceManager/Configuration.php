@@ -11,6 +11,11 @@ class Configuration implements ConfigurationInterface
         $this->configuration = $configuration;
     }
 
+    public function getAllowOverride()
+    {
+        return (isset($this->configuration['allow_override'])) ? $this->configuration['allow_override'] : null;
+    }
+    
     public function getFactories()
     {
         return (isset($this->configuration['factories'])) ? $this->configuration['factories'] : array();
@@ -43,6 +48,9 @@ class Configuration implements ConfigurationInterface
 
     public function configureServiceManager(ServiceManager $serviceManager)
     {
+        $allowOverride = $this->getAllowOverride();
+        isset($allowOverride) ? $serviceManager->setAllowOverride($allowOverride) : null;
+        
         foreach ($this->getFactories() as $name => $factory) {
             $serviceManager->setFactory($name, $factory);
         }

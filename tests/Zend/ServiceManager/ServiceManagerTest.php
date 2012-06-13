@@ -170,7 +170,7 @@ class ServiceManagerTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetThrowsExceptionOnUnknownService()
     {
-        $this->setExpectedException('Zend\ServiceManager\Exception\ServiceNotCreatedException');
+        $this->setExpectedException('Zend\ServiceManager\Exception\ServiceNotFoundException');
         $this->assertEquals('bar', $this->serviceManager->get('foo'));
     }
 
@@ -303,10 +303,30 @@ class ServiceManagerTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers Zend\ServiceManager\ServiceManager::setAlias
      */
-    public function testSetAliasThrowExceptionOnServiceNotFound()
+    public function testSetAliasDoesNotThrowExceptionOnServiceNotFound()
+    {
+        $this->serviceManager->setAlias('foo', 'bar');
+    }
+
+    /**
+     * @covers Zend\ServiceManager\ServiceManager::get
+     */
+    public function testGetServiceThrowsExceptionOnAliasWithNoSetService()
     {
         $this->setExpectedException('Zend\ServiceManager\Exception\ServiceNotFoundException');
         $this->serviceManager->setAlias('foo', 'bar');
+        $this->serviceManager->get('foo');
+    }
+
+    /**
+     * @cover Zend\ServiceManager\ServiceManager::get
+     */
+    public function testGetServiceThrowsExceptionOnMultipleAliasesWithNoSetService()
+    {
+        $this->setExpectedException('Zend\ServiceManager\Exception\ServiceNotFoundException');
+        $this->serviceManager->setAlias('foo', 'bar');
+        $this->serviceManager->setAlias('baz', 'foo');
+        $this->serviceManager->get('foo');
     }
 
     /**

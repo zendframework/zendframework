@@ -42,8 +42,9 @@ class Connection implements ConnectionInterface
 
     /**
      * Constructor
-     * 
-     * @param mixed $connectionInfo 
+     *
+     * @param array|resource $connectionInfo
+     * @throws \Zend\Db\Adapter\Exception\InvalidArgumentException
      */
     public function __construct($connectionInfo)
     {
@@ -51,6 +52,8 @@ class Connection implements ConnectionInterface
             $this->setConnectionParameters($connectionInfo);
         } elseif (is_resource($connectionInfo)) {
             $this->setResource($connectionInfo);
+        } else {
+            throw new Exception\InvalidArgumentException('$connection must be an array of parameters or a resource');
         }
     }
 

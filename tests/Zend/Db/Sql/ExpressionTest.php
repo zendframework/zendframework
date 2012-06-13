@@ -95,6 +95,18 @@ class ExpressionTest extends \PHPUnit_Framework_TestCase
             )),
             $expression->getExpressionData()
         );
-
     }
+
+    public function testGetExpressionDataWillEscapePercent()
+    {
+        $expression = new Expression('X LIKE "foo%"');
+        $this->assertEquals(array(array(
+                'X LIKE "foo%%"',
+                array(),
+                array()
+            )),
+            $expression->getExpressionData()
+        );
+    }
+
 }

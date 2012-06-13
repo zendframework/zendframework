@@ -29,7 +29,10 @@ use ArrayObject,
     Zend\Cache\Exception,
     Zend\Cache\Storage\Event,
     Zend\Cache\Storage\CallbackEvent,
-    Zend\Cache\Storage\Capabilities;
+    Zend\Cache\Storage\Capabilities,
+    Zend\Cache\Storage\FlushableInterface,
+    Zend\Cache\Storage\AvailableSpaceCapableInterface,
+    Zend\Cache\Storage\TotalSpaceCapableInterface;
 
 /**
  * @package    Zend_Cache
@@ -37,9 +40,10 @@ use ArrayObject,
  * @subpackage Storage
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @todo       Implement the find() method
  */
-class Memcached extends AbstractAdapter
+class Memcached
+    extends AbstractAdapter
+    implements FlushableInterface, AvailableSpaceCapableInterface, TotalSpaceCapableInterface
 {
     /**
      * Major version of ext/memcached
@@ -88,6 +92,7 @@ class Memcached extends AbstractAdapter
                 $this->memcached->setOption($k, $v);
             }
         }
+        $this->memcached->setOption(MemcachedResource::OPT_PREFIX_KEY, $options->getNamespace());
 
         $servers = $options->getServers();
         if (!$servers) {
@@ -95,6 +100,8 @@ class Memcached extends AbstractAdapter
             $servers = $options->getServers();
         }
         $this->memcached->addServers($servers);
+
+
 
         // get notified on change options
         $memc   = $this->memcached;
@@ -110,6 +117,10 @@ class Memcached extends AbstractAdapter
                         $memc->setOption($k, $v);
                     }
                 }
+            }
+
+            if (isset($params['namespace'])) {
+                $memc->setOption(MemcachedResource::OPT_PREFIX_KEY, $params['namespace']);
             }
 
             // TODO: update on change/add server(s)
@@ -148,32 +159,75 @@ class Memcached extends AbstractAdapter
         return $this->options;
     }
 
+    /* FlushableInterface */
+
+    /**
+     * Flush the whole storage
+     *
+     * @return boolean
+     */
+    public function flush()
+    {
+        if (!$this->memcached->flush()) {
+            throw $this->getExceptionByResultCode($this->memcached->getResultCode());
+        }
+        return true;
+    }
+
+    /* TotalSpaceCapableInterface */
+
+    /**
+     * Get total space in bytes
+     *
+     * @return int|float
+     */
+    public function getTotalSpace()
+    {
+        $stats = $this->memcached->getStats();
+        if ($stats === false) {
+            throw new Exception\RuntimeException($this->memcached->getResultMessage());
+        }
+
+        $mem = array_pop($stats);
+        return $mem['limit_maxbytes'];
+    }
+
+    /* AvailableSpaceCapableInterface */
+
+    /**
+     * Get available space in bytes
+     *
+     * @return int|float
+     */
+    public function getAvailableSpace()
+    {
+        $stats = $this->memcached->getStats();
+        if ($stats === false) {
+            throw new Exception\RuntimeException($this->memcached->getResultMessage());
+        }
+
+        $mem = array_pop($stats);
+        return $mem['limit_maxbytes'] - $mem['bytes'];
+    }
+
     /* reading */
 
     /**
      * Internal method to get an item.
      *
-     * Options:
-     *  - namespace <string>
-     *    - The namespace to use
-     *
      * @param  string  $normalizedKey
-     * @param  array   $normalizedOptions
      * @param  boolean $success
      * @param  mixed   $casToken
      * @return mixed Data on success, null on failure
      * @throws Exception\ExceptionInterface
      */
-    protected function internalGetItem(& $normalizedKey, array & $normalizedOptions, & $success = null, & $casToken = null)
+    protected function internalGetItem(& $normalizedKey, & $success = null, & $casToken = null)
     {
-        $this->memcached->setOption(MemcachedResource::OPT_PREFIX_KEY, $normalizedOptions['namespace']);
-
-        // TODO: option to enable CAS feature
-        //if (array_key_exists('token', $normalizedOptions)) {
+        if (func_num_args() > 2) {
             $result = $this->memcached->get($normalizedKey, null, $casToken);
-        //} else {
-        //    $result = $this->memcached->get($normalizedKey);
-        //}
+        } else {
+            $result = $this->memcached->get($normalizedKey);
+        }
 
         $success = true;
         if ($result === false || $result === null) {
@@ -193,19 +247,12 @@ class Memcached extends AbstractAdapter
     /**
      * Internal method to get multiple items.
      *
-     * Options:
-     *  - namespace <string>
-     *    - The namespace to use
-     *
      * @param  array $normalizedKeys
-     * @param  array $normalizedOptions
      * @return array Associative array of keys and values
      * @throws Exception\ExceptionInterface
      */
-    protected function internalGetItems(array & $normalizedKeys, array & $normalizedOptions)
+    protected function internalGetItems(array & $normalizedKeys)
     {
-        $this->memcached->setOption(MemcachedResource::OPT_PREFIX_KEY, $normalizedOptions['namespace']);
-
         $result = $this->memcached->getMulti($normalizedKeys);
         if ($result === false) {
             throw $this->getExceptionByResultCode($this->memcached->getResultCode());
@@ -217,19 +264,12 @@ class Memcached extends AbstractAdapter
     /**
      * Internal method to test if an item exists.
      *
-     * Options:
-     *  - namespace <string>
-     *    - The namespace to use
-     *
      * @param  string $normalizedKey
-     * @param  array  $normalizedOptions
      * @return boolean
      * @throws Exception\ExceptionInterface
      */
-    protected function internalHasItem(& $normalizedKey, array & $normalizedOptions)
+    protected function internalHasItem(& $normalizedKey)
     {
-        $this->memcached->setOption(MemcachedResource::OPT_PREFIX_KEY, $normalizedOptions['namespace']);
-
         $value = $this->memcached->get($normalizedKey);
         if ($value === false || $value === null) {
             $rsCode = $this->memcached->getResultCode();
@@ -248,19 +288,12 @@ class Memcached extends AbstractAdapter
     /**
      * Internal method to test multiple items.
      *
-     * Options:
-     *  - namespace <string>
-     *    - The namespace to use
-     *
-     * @param  array $keys
-     * @param  array $options
+     * @param  array $normalizedKeys
      * @return array Array of found keys
      * @throws Exception\ExceptionInterface
      */
-    protected function internalHasItems(array & $normalizedKeys, array & $normalizedOptions)
+    protected function internalHasItems(array & $normalizedKeys)
     {
-        $this->memcached->setOption(MemcachedResource::OPT_PREFIX_KEY, $normalizedOptions['namespace']);
-
         $result = $this->memcached->getMulti($normalizedKeys);
         if ($result === false) {
             throw $this->getExceptionByResultCode($this->memcached->getResultCode());
@@ -272,23 +305,12 @@ class Memcached extends AbstractAdapter
     /**
      * Get metadata of multiple items
      *
-     * Options:
-     *  - namespace <string> optional
-     *    - The namespace to use
-     *
      * @param  array $normalizedKeys
-     * @param  array $normalizedOptions
      * @return array Associative array of keys and metadata
      * @throws Exception\ExceptionInterface
-     *
-     * @triggers getMetadatas.pre(PreEvent)
-     * @triggers getMetadatas.post(PostEvent)
-     * @triggers getMetadatas.exception(ExceptionEvent)
      */
-    protected function internalGetMetadatas(array & $normalizedKeys, array & $normalizedOptions)
+    protected function internalGetMetadatas(array & $normalizedKeys)
     {
-        $this->memcached->setOption(MemcachedResource::OPT_PREFIX_KEY, $normalizedOptions['namespace']);
-
         $result = $this->memcached->getMulti($normalizedKeys);
         if ($result === false) {
             throw $this->getExceptionByResultCode($this->memcached->getResultCode());
@@ -306,23 +328,14 @@ class Memcached extends AbstractAdapter
     /**
      * Internal method to store an item.
      *
-     * Options:
-     *  - ttl <float>
-     *    - The time-to-life
-     *  - namespace <string>
-     *    - The namespace to use
-     *
      * @param  string $normalizedKey
      * @param  mixed  $value
-     * @param  array  $normalizedOptions
      * @return boolean
      * @throws Exception\ExceptionInterface
      */
-    protected function internalSetItem(& $normalizedKey, & $value, array & $normalizedOptions)
+    protected function internalSetItem(& $normalizedKey, & $value)
     {
-        $this->memcached->setOption(MemcachedResource::OPT_PREFIX_KEY, $normalizedOptions['namespace']);
-
-        $expiration = $this->expirationTime($normalizedOptions['ttl']);
+        $expiration = $this->expirationTime();
         if (!$this->memcached->set($normalizedKey, $value, $expiration)) {
             throw $this->getExceptionByResultCode($this->memcached->getResultCode());
         }
@@ -333,22 +346,13 @@ class Memcached extends AbstractAdapter
     /**
      * Internal method to store multiple items.
      *
-     * Options:
-     *  - ttl <float>
-     *    - The time-to-life
-     *  - namespace <string>
-     *    - The namespace to use
-     *
      * @param  array $normalizedKeyValuePairs
-     * @param  array $normalizedOptions
      * @return array Array of not stored keys
      * @throws Exception\ExceptionInterface
      */
-    protected function internalSetItems(array & $normalizedKeyValuePairs, array & $normalizedOptions)
+    protected function internalSetItems(array & $normalizedKeyValuePairs)
     {
-        $this->memcached->setOption(MemcachedResource::OPT_PREFIX_KEY, $normalizedOptions['namespace']);
-
-        $expiration = $this->expirationTime($normalizedOptions['ttl']);
+        $expiration = $this->expirationTime();
         if (!$this->memcached->setMulti($normalizedKeyValuePairs, $expiration)) {
             throw $this->getExceptionByResultCode($this->memcached->getResultCode());
         }
@@ -359,23 +363,14 @@ class Memcached extends AbstractAdapter
     /**
      * Add an item.
      *
-     * Options:
-     *  - ttl <float>
-     *    - The time-to-live
-     *  - namespace <string>
-     *    - The namespace to use
-     *
      * @param  string $normalizedKey
      * @param  mixed  $value
-     * @param  array  $normalizedOptions
      * @return boolean
      * @throws Exception\ExceptionInterface
      */
-    protected function internalAddItem(& $normalizedKey, & $value, array & $normalizedOptions)
+    protected function internalAddItem(& $normalizedKey, & $value)
     {
-        $this->memcached->setOption(MemcachedResource::OPT_PREFIX_KEY, $normalizedOptions['namespace']);
-
-        $expiration = $this->expirationTime($normalizedOptions['ttl']);
+        $expiration = $this->expirationTime();
         if (!$this->memcached->add($normalizedKey, $value, $expiration)) {
             if ($this->memcached->getResultCode() == MemcachedResource::RES_NOTSTORED) {
                 return false;
@@ -389,23 +384,14 @@ class Memcached extends AbstractAdapter
     /**
      * Internal method to replace an existing item.
      *
-     * Options:
-     *  - ttl <float>
-     *    - The time-to-life
-     *  - namespace <string>
-     *    - The namespace to use
-     *
      * @param  string $normalizedKey
      * @param  mixed  $value
-     * @param  array  $normalizedOptions
      * @return boolean
      * @throws Exception\ExceptionInterface
      */
-    protected function internalReplaceItem(& $normalizedKey, & $value, array & $normalizedOptions)
+    protected function internalReplaceItem(& $normalizedKey, & $value)
     {
-        $this->memcached->setOption(MemcachedResource::OPT_PREFIX_KEY, $normalizedOptions['namespace']);
-
-        $expiration = $this->expirationTime($normalizedOptions['ttl']);
+        $expiration = $this->expirationTime();
         if (!$this->memcached->replace($normalizedKey, $value, $expiration)) {
             if ($this->memcached->getResultCode() == MemcachedResource::RES_NOTSTORED) {
                 return false;
@@ -419,28 +405,17 @@ class Memcached extends AbstractAdapter
     /**
      * Internal method to set an item only if token matches
      *
-     * Options:
-     *  - ttl <float>
-     *    - The time-to-life
-     *  - namespace <string>
-     *    - The namespace to use
-     *  - tags <array>
-     *    - An array of tags
-     *
      * @param  mixed  $token
      * @param  string $normalizedKey
      * @param  mixed  $value
-     * @param  array  $normalizedOptions
      * @return boolean
      * @throws Exception\ExceptionInterface
      * @see    getItem()
      * @see    setItem()
      */
-    protected function internalCheckAndSetItem(& $token, & $normalizedKey, & $value, array & $normalizedOptions)
+    protected function internalCheckAndSetItem(& $token, & $normalizedKey, & $value)
     {
-        $this->memcached->setOption(MemcachedResource::OPT_PREFIX_KEY, $normalizedOptions['namespace']);
-
-        $expiration = $this->expirationTime($normalizedOptions['ttl']);
+        $expiration = $this->expirationTime();
         $result     = $this->memcached->cas($token, $normalizedKey, $value, $expiration);
 
         if ($result === false) {
@@ -457,18 +432,12 @@ class Memcached extends AbstractAdapter
     /**
      * Internal method to remove an item.
      *
-     * Options:
-     *  - namespace <string>
-     *    - The namespace to use
-     *
      * @param  string $normalizedKey
-     * @param  array  $normalizedOptions
      * @return boolean
      * @throws Exception\ExceptionInterface
      */
-    protected function internalRemoveItem(& $normalizedKey, array & $normalizedOptions)
+    protected function internalRemoveItem(& $normalizedKey)
     {
-        $this->memcached->setOption(MemcachedResource::OPT_PREFIX_KEY, $normalizedOptions['namespace']);
         $result = $this->memcached->delete($normalizedKey);
 
         if ($result === false) {
@@ -486,23 +455,17 @@ class Memcached extends AbstractAdapter
     /**
      * Internal method to remove multiple items.
      *
-     * Options:
-     *  - namespace <string>
-     *    - The namespace to use
-     *
-     * @param  array $keys
-     * @param  array $options
+     * @param  array $normalizedKeys
      * @return array Array of not removed keys
      * @throws Exception\ExceptionInterface
      */
-    protected function internalRemoveItems(array & $normalizedKeys, array & $normalizedOptions)
+    protected function internalRemoveItems(array & $normalizedKeys)
     {
         // support for removing multiple items at once has been added in ext/memcached-2.0.0
         if (static::$extMemcachedMajorVersion < 2) {
-            return parent::internalRemoveItems($normalizedKeys, $normalizedOptions);
+            return parent::internalRemoveItems($normalizedKeys);
         }
 
-        $this->memcached->setOption(MemcachedResource::OPT_PREFIX_KEY, $normalizedOptions['namespace']);
         $rsCodes = $this->memcached->deleteMulti($normalizedKeys);
 
         $missingKeys = array();
@@ -521,22 +484,13 @@ class Memcached extends AbstractAdapter
     /**
      * Internal method to increment an item.
      *
-     * Options:
-     *  - ttl <float>
-     *    - The time-to-life
-     *  - namespace <string>
-     *    - The namespace to use
-     *
      * @param  string $normalizedKey
      * @param  int    $value
-     * @param  array  $normalizedOptions
      * @return int|boolean The new value on success, false on failure
      * @throws Exception\ExceptionInterface
      */
-    protected function internalIncrementItem(& $normalizedKey, & $value, array & $normalizedOptions)
+    protected function internalIncrementItem(& $normalizedKey, & $value)
     {
-        $this->memcached->setOption(MemcachedResource::OPT_PREFIX_KEY, $normalizedOptions['namespace']);
-
         $value    = (int)$value;
         $newValue = $this->memcached->increment($normalizedKey, $value);
 
@@ -545,9 +499,8 @@ class Memcached extends AbstractAdapter
 
             // initial value
             if ($rsCode == MemcachedResource::RES_NOTFOUND) {
-                $newValue   = $value;
-                $expiration = $this->expirationTime($normalizedOptions['ttl']);
-                $this->memcached->add($normalizedKey, $newValue, $expiration);
+                $newValue = $value;
+                $this->memcached->add($normalizedKey, $newValue, $this->expirationTime());
                 $rsCode = $this->memcached->getResultCode();
             }
 
@@ -562,22 +515,13 @@ class Memcached extends AbstractAdapter
     /**
      * Internal method to decrement an item.
      *
-     * Options:
-     *  - ttl <float>
-     *    - The time-to-life
-     *  - namespace <string>
-     *    - The namespace to use
-     *
      * @param  string $normalizedKey
      * @param  int    $value
-     * @param  array  $normalizedOptions
      * @return int|boolean The new value on success, false on failure
      * @throws Exception\ExceptionInterface
      */
-    protected function internalDecrementItem(& $normalizedKey, & $value, array & $normalizedOptions)
+    protected function internalDecrementItem(& $normalizedKey, & $value)
     {
-        $this->memcached->setOption(MemcachedResource::OPT_PREFIX_KEY, $normalizedOptions['namespace']);
-
         $value    = (int)$value;
         $newValue = $this->memcached->decrement($normalizedKey, $value);
 
@@ -586,9 +530,8 @@ class Memcached extends AbstractAdapter
 
             // initial value
             if ($rsCode == MemcachedResource::RES_NOTFOUND) {
-                $newValue   = -$value;
-                $expiration = $this->expirationTime($normalizedOptions['ttl']);
-                $this->memcached->add($normalizedKey, $newValue, $expiration);
+                $newValue = -$value;
+                $this->memcached->add($normalizedKey, $newValue, $this->expirationTime());
                 $rsCode = $this->memcached->getResultCode();
             }
 
@@ -598,154 +541,6 @@ class Memcached extends AbstractAdapter
         }
 
         return $newValue;
-    }
-
-    /* non-blocking */
-
-    /**
-     * Internal method to request multiple items.
-     *
-     * Options:
-     *  - ttl <float>
-     *    - The time-to-live
-     *  - namespace <string>
-     *    - The namespace to use
-     *  - select <array>
-     *    - An array of the information the returned item contains
-     *  - callback <callback> optional
-     *    - An result callback will be invoked for each item in the result set.
-     *    - The first argument will be the item array.
-     *    - The callback does not have to return anything.
-     *
-     * @param  array $normalizedKeys
-     * @param  array $normalizedOptions
-     * @return boolean
-     * @throws Exception\ExceptionInterface
-     * @see    fetch()
-     * @see    fetchAll()
-     */
-    protected function internalGetDelayed(array & $normalizedKeys, array & $normalizedOptions)
-    {
-        if ($this->stmtActive) {
-            throw new Exception\RuntimeException('Statement already in use');
-        }
-
-        if (isset($normalizedOptions['callback']) && !is_callable($normalizedOptions['callback'], false)) {
-            throw new Exception\InvalidArgumentException('Invalid callback');
-        }
-
-        $this->memcached->setOption(MemcachedResource::OPT_PREFIX_KEY, $normalizedOptions['namespace']);
-
-        // redirect callback
-        if (isset($normalizedOptions['callback'])) {
-            $cb = function (MemcachedResource $memc, array & $item) use (& $normalizedOptions) {
-                $select = & $normalizedOptions['select'];
-
-                // handle selected key
-                if (!in_array('key', $select)) {
-                    unset($item['key']);
-                }
-
-                // handle selected value
-                if (!in_array('value', $select)) {
-                    unset($item['value']);
-                }
-
-                call_user_func($normalizedOptions['callback'], $item);
-            };
-
-            if (!$this->memcached->getDelayed($normalizedKeys, false, $cb)) {
-                throw $this->getExceptionByResultCode($this->memcached->getResultCode());
-            }
-        } else {
-            if (!$this->memcached->getDelayed($normalizedKeys)) {
-                throw $this->getExceptionByResultCode($this->memcached->getResultCode());
-            }
-
-            $this->stmtActive  = true;
-            $this->stmtOptions = & $normalizedOptions;
-        }
-
-        return true;
-    }
-
-    /**
-     * Internal method to fetch the next item from result set
-     *
-     * @return array|boolean The next item or false
-     * @throws Exception\ExceptionInterface
-     */
-    protected function internalFetch()
-    {
-        if (!$this->stmtActive) {
-            return false;
-        }
-
-        $result = $this->memcached->fetch();
-        if (!empty($result)) {
-            $select = & $this->stmtOptions['select'];
-
-            // handle selected key
-            if (!in_array('key', $select)) {
-                unset($result['key']);
-            }
-
-            // handle selected value
-            if (!in_array('value', $select)) {
-                unset($result['value']);
-            }
-
-        } else {
-            // clear stmt
-            $this->stmtActive  = false;
-            $this->stmtOptions = null;
-        }
-
-        return $result;
-    }
-
-    /**
-     * Internal method to return all items of result set.
-     *
-     * @return array The result set as array containing all items
-     * @throws Exception\ExceptionInterface
-     * @see    fetch()
-     */
-    protected function internalFetchAll()
-    {
-        $result = $this->memcached->fetchAll();
-        if ($result === false) {
-            throw new Exception\RuntimeException("Memcached::fetchAll() failed");
-        }
-
-        $select = $this->stmtOptions['select'];
-        foreach ($result as & $elem) {
-            if (!in_array('key', $select)) {
-                unset($elem['key']);
-            }
-        }
-
-        return $result;
-    }
-
-    /* cleaning */
-
-    /**
-     * Internal method to clear items off all namespaces.
-     *
-     * @param  int   $normalizedMode Matching mode (Value of Adapter::MATCH_*)
-     * @param  array $normalizedOptions
-     * @return boolean
-     * @throws Exception\ExceptionInterface
-     * @see    clearByNamespace()
-     */
-    protected function internalClear(& $normalizedMode, array & $normalizedOptions)
-    {
-        if (!$this->memcached->flush()) {
-            throw $this->getExceptionByResultCode($this->memcached->getResultCode());
-        }
-
-        return true;
     }
 
     /* status */
@@ -776,41 +571,16 @@ class Memcached extends AbstractAdapter
                     'supportedMetadata'  => array(),
                     'maxTtl'             => 0,
                     'staticTtl'          => true,
-                    'tagging'            => false,
                     'ttlPrecision'       => 1,
                     'useRequestTime'     => false,
                     'expiredRead'        => false,
                     'maxKeyLength'       => 255,
                     'namespaceIsPrefix'  => true,
-                    'iterable'           => false,
-                    'clearAllNamespaces' => true,
-                    'clearByNamespace'   => false,
                 )
             );
         }
 
         return $this->capabilities;
-    }
-
-    /**
-     * Internal method to get storage capacity.
-     *
-     * @param  array $normalizedOptions
-     * @return array|boolean Associative array of capacity, false on failure
-     * @throws Exception\ExceptionInterface
-     */
-    protected function internalGetCapacity(array & $normalizedOptions)
-    {
-        $stats = $this->memcached->getStats();
-        if ($stats === false) {
-            throw $this->getExceptionByResultCode($this->memcached->getResultCode());
-        }
-
-        $mem = array_pop($stats);
-        return array(
-            'free'  => $mem['limit_maxbytes'] - $mem['bytes'],
-            'total' => $mem['limit_maxbytes'],
-        );
     }
 
     /* internal */
@@ -827,11 +597,11 @@ class Memcached extends AbstractAdapter
      * expiration value is larger than that, the server will consider it to be
      * real Unix time value rather than an offset from current time.
      *
-     * @param int $ttl
      * @return int
      */
-    protected function expirationTime($ttl)
+    protected function expirationTime()
     {
+        $ttl = $this->getOptions()->getTtl();
         if ($ttl > 2592000) {
             return time() + $ttl;
         }

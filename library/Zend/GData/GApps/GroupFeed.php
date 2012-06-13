@@ -30,7 +30,7 @@ use Zend\GData\GApps;
  * provided by the Google Apps servers.
  *
  * For information on requesting this feed from a server, see the Google
- * Apps service class, \Zend\Gdata\Gapps.
+ * Apps service class, \Zend\GData\GApps.
  *
  * @category   Zend
  * @package    Zend_Gdata
@@ -41,7 +41,7 @@ use Zend\GData\GApps;
 class GroupFeed extends \Zend\GData\Feed
 {
 
-    protected $_entryClassName = '\Zend\Gdata\Gapps\GroupEntry';
-    protected $_feedClassName = '\Zend\Gdata\Gapps\GroupFeed';
+    protected $_entryClassName = '\Zend\GData\GApps\GroupEntry';
+    protected $_feedClassName = '\Zend\GData\GApps\GroupFeed';
 
 }

@@ -45,7 +45,7 @@ class MathTest extends \PHPUnit_Framework_TestCase
     {
         for ($length=1; $length<4096; $length++) {
             $rand = Math::randBytes($length);
-            $this->assertTrue(!empty($rand));
+            $this->assertTrue($rand !== false);
             $this->assertEquals($length, strlen($rand));
         }
     }

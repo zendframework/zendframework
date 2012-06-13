@@ -49,7 +49,7 @@ class Math extends BigInteger
         if (extension_loaded('mcrypt')) {
             // PHP bug #55169
             // @see https://bugs.php.net/bug.php?id=55169
-            if (strtoupper(substr(PHP_OS, 0, 3)) ==! 'WIN' ||
+            if (strtoupper(substr(PHP_OS, 0, 3)) !== 'WIN' ||
                 version_compare(PHP_VERSION, '5.3.7') >= 0) {
                 $rand = mcrypt_create_iv($length, MCRYPT_DEV_URANDOM);
                 if ($rand !== false && strlen($rand) === $length) {

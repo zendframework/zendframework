@@ -108,7 +108,7 @@ class RegexTest extends \PHPUnit_Framework_TestCase
     public function testSpecialCharValidation($expected, $input)
     {
         // Locale changed due a bug with PHP versions lower than 5.3.4 (https://bugs.php.net/bug.php?id=52971)
-        setlocale(LC_ALL, 'es_ES');
+        setlocale(LC_ALL, 'Spanish_Spain', 'es_ES', 'es_ES.utf-8');
         $validator = new Validator\Regex('/^[[:alpha:]\']+$/iu');
         $this->assertEquals($expected, $validator->isValid($input),
                             'Reason: ' . implode('', $validator->getMessages()));

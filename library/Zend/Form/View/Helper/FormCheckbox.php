@@ -151,7 +151,7 @@ class FormCheckbox extends FormInput
      * @param  ElementInterface $element 
      * @return string
      */
-    public function __invoke(ElementInterface $element)
+    public function __invoke(ElementInterface $element = null)
     {
         if (!$element) {
             return $this;

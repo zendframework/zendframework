@@ -21,6 +21,8 @@
 
 namespace Zend\Mail\Header;
 
+use Zend\Mail\Headers;
+
 /**
  * @todo       Allow setting date from DateTime, Zend\Date, or string
  * @category   Zend
@@ -29,7 +31,7 @@ namespace Zend\Mail\Header;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Received implements MultipleHeadersInterface
+class Received implements HeaderInterface, MultipleHeadersInterface
 {
     /**
      * @var string
@@ -135,6 +137,6 @@ class Received implements MultipleHeadersInterface
             }
             $strings[] = $header->toString();
         }
-        return implode("\r\n", $strings);
+        return implode(Headers::EOL, $strings);
     }
 }

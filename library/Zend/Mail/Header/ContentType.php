@@ -21,6 +21,8 @@
 
 namespace Zend\Mail\Header;
 
+use Zend\Mail\Headers;
+
 /**
  * @category   Zend
  * @package    Zend_Mail
@@ -64,7 +66,7 @@ class ContentType implements HeaderInterface
             throw new Exception\InvalidArgumentException('Invalid header line for Content-Type string');
         }
 
-        $value  = str_replace("\r\n ", " ", $value);
+        $value  = str_replace(Headers::FOLDING, " ", $value);
         $values = preg_split('#\s*;\s*#', $value);
         $type   = array_shift($values);
 
@@ -108,7 +110,7 @@ class ContentType implements HeaderInterface
         foreach ($this->parameters as $attribute => $value) {
             $values[] = sprintf('%s="%s"', $attribute, $value);
         }
-        $value = implode(";\r\n ", $values);
+        $value = implode(';' . Headers::FOLDING, $values);
         return $value;
     }
 
@@ -141,7 +143,7 @@ class ContentType implements HeaderInterface
      */
     public function toString()
     {
-        return 'Content-Type: ' . $this->getFieldValue() . "\r\n";
+        return 'Content-Type: ' . $this->getFieldValue();
     }
 
     /**

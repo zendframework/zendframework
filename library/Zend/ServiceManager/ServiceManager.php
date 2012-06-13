@@ -543,10 +543,9 @@ class ServiceManager implements ServiceLocatorInterface
         $circularDependencyResolver[spl_object_hash($this) . '-' . $cName] = true;
         try {
             $instance = call_user_func($callable, $this, $cName, $rName);
+        } catch (Exception\ServiceNotFoundException $e) {
+            throw $e;
         } catch (\Exception $e) {
-            if ($e instanceof Exception\ServiceNotFoundException) {
-                throw $e;
-            }
             throw new Exception\ServiceNotCreatedException(
                 sprintf('Abstract factory raised an exception when creating "%s"; no instance returned', $rName),
                 $e->getCode(),

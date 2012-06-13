@@ -227,21 +227,18 @@ class App
     }
 
     /**
-     * Set the \Zend\Http\Client object used for communication
+     * Set the Zend\Http\Client object used for communication
      *
      * @param \Zend\Http\Client $client The client to use for communication
      * @throws \Zend\GData\App\HttpException
      * @return \Zend\GData\App Provides a fluent interface
      */
-    public function setHttpClient($client,
-        $applicationId = 'MyCompany-MyApp-1.0')
+    public function setHttpClient(Http\Client $client = null, $applicationId = 'MyCompany-MyApp-1.0')
     {
         if ($client === null) {
             $client = new Http\Client();
-        } elseif (!$client instanceof Http\Client) {
-            throw new App\HttpException(
-                'Argument is not an instance of Zend\Http\Client.');
         }
+
         $userAgent = $applicationId . ' Zend_Framework_Gdata/' .
             \Zend\Version::VERSION;
         $client->getRequest()->headers()->addHeaderLine('User-Agent', $userAgent);

@@ -297,6 +297,8 @@ class ServiceManager implements ServiceLocatorInterface
                             continue;
                         } catch (Exception\ServiceNotCreatedException $e) {
                             continue;
+                        } catch (\Exception $e) {
+                            throw $e;
                         }
                         break;
                     }
@@ -346,9 +348,10 @@ class ServiceManager implements ServiceLocatorInterface
             $invokable = $this->invokableClasses[$cName];
             if (!class_exists($invokable)) {
                 throw new Exception\ServiceNotCreatedException(sprintf(
-                    '%s: failed retrieving "%s" via invokable class "%s"; class does not exist',
+                    '%s: failed retrieving "%s%s" via invokable class "%s"; class does not exist',
                     __METHOD__,
-                    $name,
+                    $cName,
+                    ($rName ? '(alias: ' . $rName . ')' : ''),
                     $cName
                 ));
             }

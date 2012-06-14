@@ -390,7 +390,7 @@ class ApplicationTest extends TestCase
         });
 
         $this->application->run();
-        $this->assertContains(Application::ERROR_EXCEPTION, $response->getContent());
+        $this->assertContains(Application::ERROR_CONTROLLER_NOT_FOUND, $response->getContent());
         $this->assertContains('bad', $response->getContent());
     }
 

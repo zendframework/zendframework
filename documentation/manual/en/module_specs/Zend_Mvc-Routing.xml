@@ -584,7 +584,7 @@ $route = Segment::factory(array(
       
       <para>
         The intention of the <classname>Query</classname> part is that you do 
-        not instiate it in its own right but to use it as a child of another route 
+        not instantiate it in its own right but to use it as a child of another route 
         part. 
       </para>
       

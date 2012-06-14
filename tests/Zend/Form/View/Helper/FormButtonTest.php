@@ -124,17 +124,17 @@ class FormButtonTest extends CommonTestCase
         $this->$assertion($expected, $markup);
     }
 
-    public function testRaisesExceptionWhenContentAttributeIsNotPresentInElement()
+    public function testRaisesExceptionWhenLabelAttributeIsNotPresentInElement()
     {
         $element = new Element('foo');
-        $this->setExpectedException('Zend\Form\Exception\DomainException', 'content');
+        $this->setExpectedException('Zend\Form\Exception\DomainException', 'label');
         $markup = $this->helper->render($element);
     }
 
     public function testPassingElementToRenderGeneratesButtonMarkup()
     {
         $element = new Element('foo');
-        $element->setAttribute('content', '{button_content}');
+        $element->setAttribute('label', '{button_content}');
         $markup = $this->helper->render($element);
         $this->assertContains('>{button_content}<', $markup);
         $this->assertContains('name="foo"', $markup);

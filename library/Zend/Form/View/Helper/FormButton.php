@@ -100,7 +100,8 @@ class FormButton extends FormInput
     }
 
     /**
-     * Render a form <button> element from the provided $element
+     * Render a form <button> element from the provided $element,
+     * using content from $buttonContent or the element's "label" attribute
      *
      * @param  ElementInterface $element
      * @param  null|string $buttonContent
@@ -111,10 +112,10 @@ class FormButton extends FormInput
         $openTag = $this->openTag($element);
         $content = false;
         if (null === $buttonContent) {
-            $content = $element->getAttribute('content');
+            $content = $element->getAttribute('label');
             if (null === $content) {
                 throw new Exception\DomainException(sprintf(
-                    '%s expects either button content as the second argument, or that the element provided has a content attribute; neither found',
+                    '%s expects either button content as the second argument, or that the element provided has a label attribute; neither found',
                     __METHOD__
                 ));
             }

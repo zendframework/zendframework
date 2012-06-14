@@ -103,7 +103,7 @@ class Sender implements HeaderInterface
         if (!empty($name)) {
             $encoding = $this->getEncoding();
             if ('ASCII' !== $encoding) {
-                $name  = HeaderWrap::mimeEncodeValue($name, $encoding, false);
+                $name  = HeaderWrap::mimeEncodeValue($name, $encoding);
             }
             $email = sprintf('%s %s', $name, $email);
         }

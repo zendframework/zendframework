@@ -82,11 +82,7 @@ class Subject implements UnstructuredInterface
      */
     public function getFieldValue()
     {
-        $encoding = $this->getEncoding();
-        if ($encoding == 'ASCII') {
-            return HeaderWrap::wrap($this->subject, $this);
-        }
-        return HeaderWrap::mimeEncodeValue($this->subject, $encoding, true);
+        return HeaderWrap::wrap($this->subject, $this);
     }
 
     /**

@@ -635,9 +635,10 @@ $this->url(
 
       <para>
         As you can see above you must add "/query" to your route name in order 
-        to append a query string. Any parameters that you pass into the helper 
-        that have not been explicitly defined in the "page" route. If you do 
-        not specify "/query" then any additional parameters would be ignored.
+        to append a query string. When passing parameters into the url helper 
+        any that have not been explicitly defined in the "page" route would then
+        be appended as a query string. If you do not specify "/query" then 
+        any additional parameters would be ignored.
       </para>
       
       <para>

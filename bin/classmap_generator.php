@@ -37,10 +37,10 @@ use Zend\Loader\StandardAutoloader;
  *                              file
  */
 
-$libraryPath = getenv('LIB_PATH') ? getenv('LIB_PATH') : __DIR__ . '/../library';
-if (is_dir($libraryPath)) {
+$zfLibraryPath = getenv('LIB_PATH') ? getenv('LIB_PATH') : __DIR__ . '/../library';
+if (is_dir($zfLibraryPath)) {
     // Try to load StandardAutoloader from library
-    if (false === include($libraryPath . '/Zend/Loader/StandardAutoloader.php')) {
+    if (false === include($zfLibraryPath . '/Zend/Loader/StandardAutoloader.php')) {
         echo 'Unable to locate autoloader via library; aborting' . PHP_EOL;
         exit(2);
     }
@@ -51,6 +51,8 @@ if (is_dir($libraryPath)) {
         exit(2);
     }
 }
+
+$libraryPath = getcwd();
 
 // Setup autoloading
 $loader = new StandardAutoloader();

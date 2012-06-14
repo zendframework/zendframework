@@ -19,7 +19,7 @@ use Zend\EventManager\EventsCapableInterface;
  * @category Zend
  * @package  Zend_Module
  */
-interface ModuleManagerInterface extends EventManagerAwareInterface, EventsCapableInterface
+interface ModuleManagerInterface extends EventManagerAwareInterface
 {
     /**
      * Load the provided modules.

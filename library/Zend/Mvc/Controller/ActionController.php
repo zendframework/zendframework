@@ -25,7 +25,6 @@ use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\EventInterface as Event;
 use Zend\EventManager\EventManager;
 use Zend\EventManager\EventManagerAwareInterface;
-use Zend\EventManager\EventsCapableInterface;
 use Zend\Http\PhpEnvironment\Response as HttpResponse;
 use Zend\Loader\Broker;
 use Zend\Loader\Pluggable;
@@ -51,7 +50,6 @@ use Zend\View\Model\ViewModel;
 abstract class ActionController implements 
     Dispatchable, 
     EventManagerAwareInterface, 
-    EventsCapableInterface,
     InjectApplicationEventInterface, 
     ServiceLocatorAwareInterface, 
     Pluggable

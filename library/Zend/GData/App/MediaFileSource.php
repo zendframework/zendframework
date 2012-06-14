@@ -47,7 +47,7 @@ class MediaFileSource extends BaseMediaSource
     protected $_contentType = null;
 
     /**
-     * Create a new \Zend\Gdata\App\MediaFileSource object.
+     * Create a new \Zend\GData\App\MediaFileSource object.
      *
      * @param string $filename The name of the file to read from.
      */

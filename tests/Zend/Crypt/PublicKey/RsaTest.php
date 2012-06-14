@@ -68,7 +68,7 @@ class RsaTest extends \PHPUnit_Framework_TestCase
         try {
             $rsa = new Rsa();
         } catch (Exception\RuntimeException $e) {
-            if (strpos($e->getMessage(), 'requires openssl extention') !== false) {
+            if (strpos($e->getMessage(), 'requires openssl extension') !== false) {
                 $this->markTestSkipped($e->getMessage());
             } else {
                 throw $e;

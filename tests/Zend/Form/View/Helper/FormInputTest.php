@@ -431,4 +431,10 @@ class FormInputTest extends CommonTestCase
         $this->assertContains('<input', $markup);
         $this->assertContains('name="foo"', $markup);
     }
+
+    public function testInvokeWithNoElementChainsHelper()
+    {
+        $element = new Element('foo');
+        $this->assertSame($this->helper, $this->helper->__invoke());
+    }
 }

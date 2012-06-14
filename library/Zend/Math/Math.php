@@ -49,7 +49,7 @@ class Math extends BigInteger
         if (extension_loaded('mcrypt')) {
             // PHP bug #55169
             // @see https://bugs.php.net/bug.php?id=55169
-            if (strtoupper(substr(PHP_OS, 0, 3)) ==! 'WIN' ||
+            if (strtoupper(substr(PHP_OS, 0, 3)) !== 'WIN' ||
                 version_compare(PHP_VERSION, '5.3.7') >= 0) {
                 $rand = mcrypt_create_iv($length, MCRYPT_DEV_URANDOM);
                 if ($rand !== false && strlen($rand) === $length) {
@@ -92,14 +92,15 @@ class Math extends BigInteger
                 'The supplied range is too great to generate'
             );
         }
-        $bits  = (int)floor(log($range, 2) + 1);
-        $bytes = (int)max(ceil($bits / 8), 1);
-        $mask  = (int)(pow(2, $bits) - 1);
+        $log    = log($range, 2);
+        $bytes  = (int) ($log / 8) + 1; 
+        $bits   = (int) $log + 1; 
+        $filter = (int) (1 << $bits) - 1;
         do {
-            $test   = self::randBytes($bytes, $strong);
-            $result = hexdec(bin2hex($test)) & $mask;
-        } while ($result > $range);
-        return $result + $min;
+            $rnd = hexdec(bin2hex(self::randBytes($bytes, $strong)));
+            $rnd = $rnd & $filter;
+        } while ($rnd > $range);
+        return $min + $rnd;
     }
 
     /**

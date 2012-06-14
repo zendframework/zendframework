@@ -36,9 +36,12 @@ class GettextTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        if (Adapter\Gettext::hasCache()) {
-            Adapter\Gettext::removeCache();
-        }
+        Adapter\Gettext::removeCache();
+    }
+
+    public function tearDown()
+    {
+        Adapter\Gettext::removeCache();
     }
 
     public function testCreate()

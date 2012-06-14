@@ -67,4 +67,13 @@
         </itemizedlist>
     </para>
 
+    <note>
+        <title>PHP-CryptLib</title>
+
+        <para>
+            Most of the ideas behind the <classname>Zend\Crypt</classname> component have been inspired by the <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://github.com/ircmaxell/PHP-CryptLib">PHP-CryptLib project</link> of <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://blog.ircmaxell.com/">Anthony Ferrara</link>.
+            PHP-CryptLib is an all-inclusive pure PHP cryptographic library for all cryptographic needs. It is meant to be easy to install and use, yet extensible and powerful enough for even the most experienced developer.
+        </para>
+    </note>
+    
 </section>

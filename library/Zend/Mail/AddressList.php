@@ -50,8 +50,7 @@ class AddressList implements Countable, Iterator
     {
         if (is_string($emailOrAddress)) {
             $emailOrAddress = $this->createAddress($emailOrAddress, $name);
-        }
-        if (!$emailOrAddress instanceof Address\AddressInterface) {
+        } elseif (!$emailOrAddress instanceof Address\AddressInterface) {
             throw new Exception\InvalidArgumentException(sprintf(
                 '%s expects an email address or %s\Address object as its first argument; received "%s"',
                 __METHOD__,

@@ -34,8 +34,8 @@ namespace Zend\GData;
  */
 class Spreadsheets extends GData
 {
-    const SPREADSHEETS_FEED_URI = 'http://spreadsheets.google.com/feeds/spreadsheets';
-    const SPREADSHEETS_POST_URI = 'http://spreadsheets.google.com/feeds/spreadsheets/private/full';
+    const SPREADSHEETS_FEED_URI = 'https://spreadsheets.google.com/feeds/spreadsheets';
+    const SPREADSHEETS_POST_URI = 'https://spreadsheets.google.com/feeds/spreadsheets/private/full';
     const WORKSHEETS_FEED_LINK_URI = 'http://schemas.google.com/spreadsheets/2006#worksheetsfeed';
     const LIST_FEED_LINK_URI = 'http://schemas.google.com/spreadsheets/2006#listfeed';
     const CELL_FEED_LINK_URI = 'http://schemas.google.com/spreadsheets/2006#cellsfeed';
@@ -136,7 +136,7 @@ class Spreadsheets extends GData
      * Gets a worksheet entry.
      *
      * @param string $location A DocumentQuery or a URI specifying the entry location.
-     * @return WorksheetEntry
+     * @return Spreadsheets\WorksheetEntry
      */
     public function GetWorksheetEntry($location)
     {
@@ -174,7 +174,7 @@ class Spreadsheets extends GData
      * Gets a cell entry.
      *
      * @param string $location A CellQuery or a URI specifying the entry location.
-     * @return CellEntry
+     * @return Spreadsheets\CellEntry
      */
     public function getCellEntry($location)
     {
@@ -243,7 +243,7 @@ class Spreadsheets extends GData
         $query->setCellId($cell);
 
         $entry = $this->getCellEntry($query);
-        $entry->setCell(new Extension\Cell(null, $row, $col, $inputValue));
+        $entry->setCell(new Spreadsheets\Extension\Cell(null, $row, $col, $inputValue));
         $response = $entry->save();
         return $response;
     }
@@ -261,7 +261,7 @@ class Spreadsheets extends GData
         $newEntry = new Spreadsheets\ListEntry();
         $newCustomArr = array();
         foreach ($rowData as $k => $v) {
-            $newCustom = new Extension\Custom();
+            $newCustom = new Spreadsheets\Extension\Custom();
             $newCustom->setText($v)->setColumnName($k);
             $newEntry->addCustom($newCustom);
         }
@@ -286,7 +286,7 @@ class Spreadsheets extends GData
     {
         $newCustomArr = array();
         foreach ($newRowData as $k => $v) {
-            $newCustom = new Extension\Custom();
+            $newCustom = new Spreadsheets\Extension\Custom();
             $newCustom->setText($v)->setColumnName($k);
             $newCustomArr[] = $newCustom;
         }

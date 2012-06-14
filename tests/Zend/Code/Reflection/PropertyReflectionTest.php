@@ -21,6 +21,8 @@
 
 namespace ZendTest\Code\Reflection;
 
+use Zend\Code\Annotation\AnnotationManager;
+
 /**
  * @category   Zend
  * @package    Zend_Reflection
@@ -37,5 +39,26 @@ class PropertyReflectionTest extends \PHPUnit_Framework_TestCase
         $property = new \Zend\Code\Reflection\PropertyReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass2', '_prop1');
         $this->assertInstanceOf('Zend\Code\Reflection\ClassReflection', $property->getDeclaringClass());
         $this->assertEquals('ZendTest\Code\Reflection\TestAsset\TestSampleClass2', $property->getDeclaringClass()->getName());
+    }
+
+    public function testAnnotationScanningIsPossible()
+    {
+        $manager = new AnnotationManager(array(
+            new TestAsset\SampleAnnotation(),
+        ));
+        $property = new \Zend\Code\Reflection\PropertyReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass2', '_prop2');
+        $annotations = $property->getAnnotations($manager);
+        $this->assertInstanceOf('Zend\Code\Annotation\AnnotationCollection', $annotations);
+        $this->assertTrue($annotations->hasAnnotation('ZendTest\Code\Reflection\TestAsset\SampleAnnotation'));
+        $found = false;
+        foreach ($annotations as $key => $annotation) {
+            if (!$annotation instanceof TestAsset\SampleAnnotation) {
+                continue;
+            }
+            $this->assertEquals(get_class($annotation) . ': {"foo":"bar"}', $annotation->content);
+            $found = true;
+            break;
+        }
+        $this->assertTrue($found);
     }
 }

@@ -74,13 +74,6 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
         $this->assertSame($barcode, $this->renderer->getBarcode());
     }
 
-    public function testSetInvalidBarcodeObject()
-    {
-        $this->setExpectedException('\Zend\Barcode\Renderer\Exception\ExceptionInterface');
-        $barcode = new \StdClass();
-        $this->renderer->setBarcode($barcode);
-    }
-
     public function testGoodModuleSize()
     {
         $this->renderer->setModuleSize(2.34);

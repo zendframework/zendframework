@@ -187,7 +187,7 @@ defined('TESTS_ZEND_DB_ADAPTER_SQLSRV_DATABASE') || define('TESTS_ZEND_DB_ADAPTE
 defined('TESTS_ZEND_FEED_READER_ONLINE_ENABLED') || define('TESTS_ZEND_FEED_READER_ONLINE_ENABLED', false);
 
 /**
- * Zend\Gdata tests
+ * Zend\GData tests
  *
  * If the ONLINE_ENABLED property is false, only tests that can be executed with
  * a mock HTTP client are run. No request is sent to the Google Gdata servers.
@@ -288,12 +288,14 @@ defined('TESTS_ZEND_GDATA_YOUTUBE_CLIENT_ID') || define('TESTS_ZEND_GDATA_YOUTUB
  * be performed.
  */
 defined('TESTS_ZEND_GDATA_DOCS_ONLINE_ENABLED') || define('TESTS_ZEND_GDATA_DOCS_ONLINE_ENABLED', false);
+defined('TESTS_ZEND_GDATA_DOCS_DOCUMENTTITLE') || define('TESTS_ZEND_GDATA_DOCS_DOCUMENTTITLE', 'title');
 
 /*
  * This indicates that online tests for the GData Photos API should
  * be performed.
  */
 defined('TESTS_ZEND_GDATA_PHOTOS_ONLINE_ENABLED') || define('TESTS_ZEND_GDATA_PHOTOS_ONLINE_ENABLED', false);
+defined('TESTS_ZEND_GDATA_PHOTOS_USERNAME') || define('TESTS_ZEND_GDATA_PHOTOS_USERNAME', 'zfgdata');
 
 /**
  * Zend\Http\Client tests

@@ -58,7 +58,7 @@ class ContentTypeTest extends \PHPUnit_Framework_TestCase
     {
         $contentTypeHeader = new ContentType();
         $contentTypeHeader->setType('foo/bar');
-        $this->assertEquals("Content-Type: foo/bar\r\n", $contentTypeHeader->toString());
+        $this->assertEquals("Content-Type: foo/bar", $contentTypeHeader->toString());
     }
 
     public function testProvidingParametersIntroducesHeaderFolding()

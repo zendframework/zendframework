@@ -45,7 +45,7 @@ class ListFeed extends \Zend\GData\Feed
      *
      * @var string
      */
-    protected $_feedClassName = 'Zend\Gdata\Spreadsheets\ListFeed';
+    protected $_feedClassName = 'Zend\GData\Spreadsheets\ListFeed';
 
     /**
      * Constructs a new Zend_Gdata_Spreadsheets_ListFeed object.

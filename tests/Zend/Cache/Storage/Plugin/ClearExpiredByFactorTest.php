@@ -3,10 +3,10 @@
 namespace ZendTest\Cache\Storage\Plugin;
 use Zend\Cache,
     Zend\Cache\Storage\PostEvent,
-    ZendTest\Cache\Storage\TestAsset\MockAdapter,
+    ZendTest\Cache\Storage\TestAsset\ClearExpiredMockAdapter,
     ArrayObject;
 
-class ClearByFactorTest extends CommonPluginTest
+class ClearExpiredByFactorTest extends CommonPluginTest
 {
 
     /**
@@ -18,11 +18,11 @@ class ClearByFactorTest extends CommonPluginTest
 
     public function setUp()
     {
-        $this->_adapter = new MockAdapter();
+        $this->_adapter = new ClearExpiredMockAdapter();
         $this->_options = new Cache\Storage\Plugin\PluginOptions(array(
             'clearing_factor' => 1,
         ));
-        $this->_plugin  = new Cache\Storage\Plugin\ClearByFactor();
+        $this->_plugin  = new Cache\Storage\Plugin\ClearExpiredByFactor();
         $this->_plugin->setOptions($this->_options);
 
         parent::setUp();
@@ -34,10 +34,10 @@ class ClearByFactorTest extends CommonPluginTest
 
         // check attached callbacks
         $expectedListeners = array(
-            'setItem.post'        => 'clearByFactor',
-            'setItems.post'       => 'clearByFactor',
-            'addItem.post'        => 'clearByFactor',
-            'addItems.post'       => 'clearByFactor',
+            'setItem.post'  => 'clearExpiredByFactor',
+            'setItems.post' => 'clearExpiredByFactor',
+            'addItem.post'  => 'clearExpiredByFactor',
+            'addItems.post' => 'clearExpiredByFactor',
         );
         foreach ($expectedListeners as $eventName => $expectedCallbackMethod) {
             $listeners = $this->_adapter->events()->getListeners($eventName);
@@ -63,50 +63,24 @@ class ClearByFactorTest extends CommonPluginTest
         $this->assertEquals(0, count($this->_adapter->events()->getEvents()));
     }
 
-    public function testClearByFactorUsingNamespace()
+    public function testClearExpiredByFactor()
     {
-        $adapter = $this->getMock(get_class($this->_adapter), array('clearByNamespace'));
+        $adapter = $this->getMock(get_class($this->_adapter), array('clearExpired'));
         $this->_options->setClearingFactor(1);
-        $this->_options->setClearByNamespace(true);
 
-        // test optimize will be called
+        // test clearByNamespace will be called
         $adapter
             ->expects($this->once())
-            ->method('clearByNamespace')
+            ->method('clearExpired')
             ->will($this->returnValue(true));
 
         // call event callback
         $result = true;
         $event = new PostEvent('setItem.post', $adapter, new ArrayObject(array(
-            'options'  => array(),
+            'options' => array(),
         )), $result);
-
-        $this->_plugin->clearByFactor($event);
+        $this->_plugin->clearExpiredByFactor($event);
 
         $this->assertTrue($event->getResult());
     }
-
-    public function testClearByFactorAllNamespaces()
-    {
-        $adapter = $this->getMock(get_class($this->_adapter), array('clear'));
-        $this->_options->setClearingFactor(1);
-        $this->_options->setClearByNamespace(false);
-
-        // test optimize will be called
-        $adapter
-            ->expects($this->once())
-            ->method('clear')
-            ->will($this->returnValue(true));
-
-        // call event callback
-        $result = true;
-        $event = new PostEvent('setItem.post', $adapter, new ArrayObject(array(
-            'options'  => array(),
-        )), $result);
-
-        $this->_plugin->clearByFactor($event);
-
-        $this->assertTrue($event->getResult());
-    }
-
 }

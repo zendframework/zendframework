@@ -30,7 +30,7 @@ use Zend\GData\GApps;
  * provided by the Google Apps servers.
  *
  * For information on requesting this feed from a server, see the Google
- * Apps service class, Zend_Gdata_Gapps.
+ * Apps service class, Zend\GData\GApps.
  *
  * @category   Zend
  * @package    Zend_Gdata
@@ -38,10 +38,10 @@ use Zend\GData\GApps;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class MemberFeed extends \Zend\Gdata\Feed
+class MemberFeed extends \Zend\GData\Feed
 {
 
-    protected $_entryClassName = '\Zend\Gdata\Gapps\MemberEntry';
-    protected $_feedClassName = '\Zend\Gdata\Gapps\MemberFeed';
+    protected $_entryClassName = '\Zend\GData\GApps\MemberEntry';
+    protected $_feedClassName = '\Zend\GData\GApps\MemberFeed';
 
 }

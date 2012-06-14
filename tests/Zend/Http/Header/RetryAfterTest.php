@@ -9,9 +9,16 @@ class RetryAfterTest extends \PHPUnit_Framework_TestCase
 
     public function testRetryAfterFromStringCreatesValidRetryAfterHeader()
     {
-        $retryAfterHeader = RetryAfter::fromString('Retry-After: xxx');
+        $retryAfterHeader = RetryAfter::fromString('Retry-After: 10');
         $this->assertInstanceOf('Zend\Http\Header\HeaderInterface', $retryAfterHeader);
         $this->assertInstanceOf('Zend\Http\Header\RetryAfter', $retryAfterHeader);
+        $this->assertEquals('10', $retryAfterHeader->getDeltaSeconds());
+    }
+
+    public function testRetryAfterFromStringCreatesValidRetryAfterHeaderFromDate()
+    {
+        $retryAfterHeader = RetryAfter::fromString('Retry-After: Sun, 06 Nov 1994 08:49:37 GMT');
+        $this->assertEquals('Sun, 06 Nov 1994 08:49:37 GMT', $retryAfterHeader->getDate());
     }
 
     public function testRetryAfterGetFieldNameReturnsHeaderName()
@@ -22,23 +29,23 @@ class RetryAfterTest extends \PHPUnit_Framework_TestCase
 
     public function testRetryAfterGetFieldValueReturnsProperValue()
     {
-        $this->markTestIncomplete('RetryAfter needs to be completed');
-
         $retryAfterHeader = new RetryAfter();
-        $this->assertEquals('xxx', $retryAfterHeader->getFieldValue());
+        $retryAfterHeader->setDeltaSeconds(3600);
+        $this->assertEquals('3600', $retryAfterHeader->getFieldValue());
+        $retryAfterHeader->setDate('Sun, 06 Nov 1994 08:49:37 GMT');
+        $this->assertEquals('Sun, 06 Nov 1994 08:49:37 GMT', $retryAfterHeader->getFieldValue());
     }
 
     public function testRetryAfterToStringReturnsHeaderFormattedString()
     {
-        $this->markTestIncomplete('RetryAfter needs to be completed');
-
         $retryAfterHeader = new RetryAfter();
 
-        // @todo set some values, then test output
-        $this->assertEmpty('Retry-After: xxx', $retryAfterHeader->toString());
-    }
+        $retryAfterHeader->setDeltaSeconds(3600);
+        $this->assertEquals('Retry-After: 3600', $retryAfterHeader->toString());
 
-    /** Implmentation specific tests here */
-    
+        $retryAfterHeader->setDate('Sun, 06 Nov 1994 08:49:37 GMT');
+        $this->assertEquals('Retry-After: Sun, 06 Nov 1994 08:49:37 GMT', $retryAfterHeader->toString());
+
+    }
 }
 

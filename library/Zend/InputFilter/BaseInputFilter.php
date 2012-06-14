@@ -152,7 +152,7 @@ class BaseInputFilter implements InputFilterInterface
         foreach ($inputs as $name) {
             $input = $this->inputs[$name];
 
-            if (!isset($this->data[$name])) {
+            if (!array_key_exists($name, $this->data)) {
                 // Not sure how to handle input filters in this case
                 if ($input instanceof InputFilterInterface) {
                     if (!$input->isValid()) {

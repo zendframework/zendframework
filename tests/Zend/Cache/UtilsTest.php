@@ -30,11 +30,6 @@ use Zend\Cache\Utils;
 class UtilsTest extends \PHPUnit_Framework_TestCase
 {
 
-    public function testGetDiskCapacity()
-    {
-        $this->_assertCapacity(Utils::getDiskCapacity(__DIR__));
-    }
-
     public function testGetPhpMemoryCapacity()
     {
         $this->_assertCapacity(Utils::getPhpMemoryCapacity());
@@ -69,5 +64,4 @@ class UtilsTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertEquals(pack('l', strlen('test')), Utils::generateHash('strlen', 'test', true));
     }
-
 }

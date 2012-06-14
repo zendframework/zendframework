@@ -1015,6 +1015,11 @@
                     <!--<xi:include href="../en/module_specs/Zend_Gdata-Introduction.xml" parse="xml"/>-->
                 <!--</xi:fallback>-->
             <!--</xi:include>-->
+            <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Gdata_Analytics.xml" parse="xml">-->
+                <!--<xi:fallback>-->
+                    <!--<xi:include href="../en/module_specs/Zend_Gdata_Analytics.xml" parse="xml"/>-->
+                <!--</xi:fallback>-->
+            <!--</xi:include>-->
             <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Gdata_AuthSub.xml" parse="xml">-->
                 <!--<xi:fallback>-->
                     <!--<xi:include href="../en/module_specs/Zend_Gdata_AuthSub.xml" parse="xml"/>-->

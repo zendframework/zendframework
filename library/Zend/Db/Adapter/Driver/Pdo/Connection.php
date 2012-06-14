@@ -47,7 +47,8 @@ class Connection implements ConnectionInterface
     protected $inTransaction = false;
 
     /**
-     * @param array|\PDO $connectionParameters
+     * @param array|\PDO|null $connectionParameters
+     * @throws \Zend\Db\Adapter\Exception\InvalidArgumentException
      */
     public function __construct($connectionParameters = null)
     {
@@ -55,6 +56,8 @@ class Connection implements ConnectionInterface
             $this->setConnectionParameters($connectionParameters);
         } elseif ($connectionParameters instanceof \PDO) {
             $this->setResource($connectionParameters);
+        } elseif (null !== $connectionParameters) {
+            throw new Exception\InvalidArgumentException('$connection must be an array of parameters, a PDO object or null');
         }
     }
 

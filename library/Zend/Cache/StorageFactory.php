@@ -53,7 +53,7 @@ class StorageFactory
      * This can instantiate storage adapters and plugins.
      *
      * @param array|Traversable $cfg
-     * @return Storage\Adapter\AdapterInterface
+     * @return Storage\StorageInterface
      * @throws Exception\InvalidArgumentException
      */
     public static function factory($cfg)
@@ -139,21 +139,21 @@ class StorageFactory
     /**
      * Instantiate a storage adapter
      *
-     * @param  string|Storage\Adapter\AdapterInterface               $adapterName
-     * @param  null|array|Traversable|Storage\Adapter\AdapterOptions $options
-     * @return Storage\Adapter\AdapterInterface
+     * @param  string|Storage\StorageInterface                  $adapterName
+     * @param  array|Traversable|Storage\Adapter\AdapterOptions $options
+     * @return Storage\StorageInterface
      * @throws Exception\RuntimeException
      */
-    public static function adapterFactory($adapterName, $options = null)
+    public static function adapterFactory($adapterName, $options = array())
     {
-        if ($adapterName instanceof Storage\Adapter\AdapterInterface) {
+        if ($adapterName instanceof Storage\StorageInterface) {
             // $adapterName is already an adapter object
             $adapter = $adapterName;
         } else {
             $adapter = static::getAdapterBroker()->load($adapterName);
         }
 
-        if ($options !== null) {
+        if ($options) {
             $adapter->setOptions($options);
         }
 
@@ -198,7 +198,7 @@ class StorageFactory
     /**
      * Instantiate a storage plugin
      *
-     * @param string|Storage\Plugin $pluginName
+     * @param string|Storage\Plugin                          $pluginName
      * @param array|Traversable|Storage\Plugin\PluginOptions $options
      * @return Storage\Plugin
      * @throws Exception\RuntimeException
@@ -216,7 +216,9 @@ class StorageFactory
             $options = new Storage\Plugin\PluginOptions($options);
         }
 
-        $plugin->setOptions($options);
+        if ($options) {
+            $plugin->setOptions($options);
+        }
 
         return $plugin;
     }

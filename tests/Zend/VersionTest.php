@@ -71,6 +71,9 @@ class Zend_VersionTest extends \PHPUnit_Framework_TestCase
      */
     public function testFetchLatestVersion()
     {
+        if(!extension_loaded('openssl')) {
+            $this->markTestSkipped('This test requires openssl extension to be enabled in PHP');
+        }
         $actual = Version::getLatest();
         if ('not available' === $actual) {
             $this->markIncomplete('http://framework.zend.com/ may be down');

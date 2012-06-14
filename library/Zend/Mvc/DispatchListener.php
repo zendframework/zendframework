@@ -24,7 +24,8 @@ use ArrayObject;
 use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateInterface;
 use Zend\ServiceManager\ServiceManager;
-use Zend\ServiceManager\Exception\ExceptionInterface as InstanceException;
+use Zend\ServiceManager\Exception\ServiceNotFoundException;
+use Zend\ServiceManager\Exception\ServiceNotCreatedException;
 use Zend\Stdlib\ArrayUtils;
 use Zend\Stdlib\DispatchableInterface;
 
@@ -100,15 +101,11 @@ class DispatchListener implements ListenerAggregateInterface
         $exception = false;
         try {
             $controller = $controllerLoader->get($controllerName);
-            $wasLoaded  = true;
-        } catch (\Exception $exception) {
-            $wasLoaded =false;
-        }
-
-        if (!$wasLoaded) {
+        } catch (ServiceNotFoundException $exception) {
             $error = clone $e;
             $error->setError($application::ERROR_CONTROLLER_NOT_FOUND)
                   ->setController($controllerName)
+                  ->setControllerClass('invalid controller class or alias: '.$controllerName)
                   ->setParam('exception', $exception);
 
             $results = $events->trigger('dispatch.error', $error);
@@ -117,6 +114,20 @@ class DispatchListener implements ListenerAggregateInterface
             } else {
                 $return = $error->getParams();
             }
+            
+            return $this->complete($return, $e);
+        } catch (\Exception $exception) {
+            $error = clone $e;
+            $error->setError($application::ERROR_EXCEPTION)
+                  ->setController($controllerName)
+                  ->setParam('exception', $exception);
+            $results = $events->trigger('dispatch.error', $error);
+            if (count($results)) {
+                $return = $results->last();
+            } else {
+                $return = $error->getParams();
+            }
+
             return $this->complete($return, $e);
         }
 
@@ -128,7 +139,7 @@ class DispatchListener implements ListenerAggregateInterface
 
             $results = $events->trigger('dispatch.error', $error);
             if (count($results)) {
-                $return  = $results->last();
+                $return = $results->last();
             } else {
                 $return = $error->getParams();
             }
@@ -143,7 +154,7 @@ class DispatchListener implements ListenerAggregateInterface
         }
 
         try {
-            $return   = $controller->dispatch($request, $response);
+            $return = $controller->dispatch($request, $response);
         } catch (\Exception $ex) {
             $error = clone $e;
             $error->setError($application::ERROR_EXCEPTION)
@@ -152,7 +163,7 @@ class DispatchListener implements ListenerAggregateInterface
                   ->setParam('exception', $ex);
             $results = $events->trigger('dispatch.error', $error);
             if (count($results)) {
-                $return  = $results->last();
+                $return = $results->last();
             } else {
                 $return = $error->getParams();
             }

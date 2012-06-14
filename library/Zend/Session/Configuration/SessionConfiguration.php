@@ -24,7 +24,7 @@ use Zend\Validator\Hostname as HostnameValidator,
     Zend\Session\Exception;
 
 /**
- * Session configuration proxying to session INI options 
+ * Session configuration proxying to session INI options
  *
  * @category   Zend
  * @package    Zend_Session
@@ -83,11 +83,11 @@ class SessionConfiguration extends StandardConfiguration
     /**
      * Set storage option in backend configuration store
      *
-     * Does nothing in this implementation; others might use it to set things 
+     * Does nothing in this implementation; others might use it to set things
      * such as INI settings.
-     * 
-     * @param  string $storageName 
-     * @param  mixed $storageValue 
+     *
+     * @param  string $storageName
+     * @param  mixed $storageValue
      * @return SessionConfiguration
      */
     public function setStorageOption($storageName, $storageValue)
@@ -113,7 +113,7 @@ class SessionConfiguration extends StandardConfiguration
      * Retrieve a storage option from a backend configuration store
      *
      * Used to retrieve default values from a backend configuration store.
-     * 
+     *
      * @param  string $storageOption
      * @return mixed
      */
@@ -133,6 +133,7 @@ class SessionConfiguration extends StandardConfiguration
             case 'use_cookies':
             case 'use_only_cookies':
             case 'use_trans_sid':
+            case 'cookie_httponly':
                 $transform = function ($value) {
                     return (bool) $value;
                 };
@@ -150,9 +151,9 @@ class SessionConfiguration extends StandardConfiguration
 
     /**
      * Handle PHP errors
-     * 
-     * @param  int $code 
-     * @param  string $message 
+     *
+     * @param  int $code
+     * @param  string $message
      * @return void
      */
     protected function handleError($code, $message)
@@ -163,8 +164,8 @@ class SessionConfiguration extends StandardConfiguration
 
     /**
      * Set session.save_handler
-     * 
-     * @param  string $phpSaveHandler 
+     *
+     * @param  string $phpSaveHandler
      * @return SessionConfiguration
      * @throws Exception\InvalidArgumentException
      */
@@ -184,8 +185,8 @@ class SessionConfiguration extends StandardConfiguration
 
     /**
      * Set session.serialize_handler
-     * 
-     * @param  string $serializeHandler 
+     *
+     * @param  string $serializeHandler
      * @return SessionConfiguration
      * @throws Exception\InvalidArgumentException
      */
@@ -223,10 +224,10 @@ class SessionConfiguration extends StandardConfiguration
         ini_set('session.cache_limiter', $cacheLimiter);
         return $this;
     }
-   
+
     /**
      * Retrieve list of valid hash functions
-     * 
+     *
      * @return array
      */
     protected function getHashFunctions()
@@ -234,7 +235,7 @@ class SessionConfiguration extends StandardConfiguration
         if (empty($this->validHashFunctions)) {
             /**
              * @see http://php.net/manual/en/session.configuration.php#ini.session.hash-function
-             * "0" and "1" refer to MD5-128 and SHA1-160, respectively, and are 
+             * "0" and "1" refer to MD5-128 and SHA1-160, respectively, and are
              * valid in addition to whatever is reported by hash_algos()
              */
             $this->validHashFunctions = array('0', '1') + hash_algos();
@@ -244,8 +245,8 @@ class SessionConfiguration extends StandardConfiguration
 
     /**
      * Set session.hash_function
-     * 
-     * @param  string|int $hashFunction 
+     *
+     * @param  string|int $hashFunction
      * @return SessionConfiguration
      * @throws Exception\InvalidArgumentException
      */
@@ -264,8 +265,8 @@ class SessionConfiguration extends StandardConfiguration
 
     /**
      * Set session.hash_bits_per_character
-     * 
-     * @param  int $hashBitsPerCharacter 
+     *
+     * @param  int $hashBitsPerCharacter
      * @return SessionConfiguration
      * @throws Exception\InvalidArgumentException
      */

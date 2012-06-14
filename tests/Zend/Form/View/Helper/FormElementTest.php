@@ -106,7 +106,7 @@ class FormElementTest extends TestCase
     {
         return array(
             array('radio', 'input', 'type="radio"'),
-            array('checkbox', 'input', 'type="checkbox"'),
+            array('multi_checkbox', 'input', 'type="checkbox"'),
             array('select', 'option', '<select'),
         );
     }
@@ -166,5 +166,11 @@ class FormElementTest extends TestCase
 
         $this->assertContains('<textarea', $markup);
         $this->assertContains('>Initial content<', $markup);
+    }
+
+    public function testInvokeWithNoElementChainsHelper()
+    {
+        $element = new Element('foo');
+        $this->assertSame($this->helper, $this->helper->__invoke());
     }
 }

@@ -43,7 +43,6 @@ class ValueTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($valueObject->getRef(), 'data data data ...');
     }
 
-
     /**
      * tests the value reference retrieval
      */
@@ -55,7 +54,6 @@ class ValueTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals($valueObject->getRef(), '012_456789');
     }
-
 
     /**
      * tests the __toString() functionality

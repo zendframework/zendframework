@@ -264,26 +264,33 @@ class ServiceManager implements ServiceLocatorInterface
             do {
                 $cName = $this->aliases[$cName];
             } while ($this->hasAlias($cName));
+
+            if (!$this->has($cName)) {
+                throw new Exception\ServiceNotFoundException(sprintf(
+                    'An alias "%s" was requested but no service could be found.',
+                    $name
+                ));
+            }
         }
 
         $instance = null;
 
         if (isset($this->instances[$cName])) {
             $instance = $this->instances[$cName];
-        } 
+        }
 
         $selfException = null;
 
         if (!$instance && !is_array($instance)) {
             try {
                 $instance = $this->create(array($cName, $rName));
-            } catch (Exception\ServiceNotCreatedException $selfException) {
-                foreach ($this->peeringServiceManagers as $peeringServiceManager) {
-                    try {
-                        $instance = $peeringServiceManager->get($name);
-                        break;
-                    } catch (Exception\ServiceNotCreatedException $e) {
-                        continue;
+            } catch (Exception\ServiceNotFoundException $selfException) {
+                if ($usePeeringServiceManagers) {
+                    foreach ($this->peeringServiceManagers as $peeringServiceManager) {
+                        if ($peeringServiceManager->has($name)) {
+                            $instance = $peeringServiceManager->get($name);
+                            break;
+                        }
                     }
                 }
             }
@@ -291,7 +298,7 @@ class ServiceManager implements ServiceLocatorInterface
 
         // Still no instance? raise an exception
         if (!$instance && !is_array($instance)) {
-            throw new Exception\ServiceNotCreatedException(sprintf(
+            throw new Exception\ServiceNotFoundException(sprintf(
                 '%s was unable to fetch or create an instance for %s',
                     __METHOD__,
                     $name
@@ -383,7 +390,7 @@ class ServiceManager implements ServiceLocatorInterface
         }
 
         if ($this->throwExceptionInCreate == true && $instance === false) {
-            throw new Exception\ServiceNotCreatedException(sprintf(
+            throw new Exception\ServiceNotFoundException(sprintf(
                 'No valid instance was found for %s%s',
                 $cName,
                 ($rName ? '(alias: ' . $rName . ')' : '')
@@ -436,7 +443,7 @@ class ServiceManager implements ServiceLocatorInterface
             if (!$abstractFactory instanceof AbstractFactoryInterface) {
                 continue;
             }
-            
+
             if ($abstractFactory->canCreateServiceWithName($cName, $rName)) {
                 return true;
             }
@@ -475,10 +482,6 @@ class ServiceManager implements ServiceLocatorInterface
 
         if ($this->allowOverride === false && $this->hasAlias($alias)) {
             throw new Exception\InvalidServiceNameException('An alias by this name already exists');
-        }
-
-        if (!$this->has($nameOrAlias)) {
-            throw new Exception\ServiceNotFoundException('A target service or target alias could not be located');
         }
 
         $this->aliases[$alias] = $nameOrAlias;
@@ -540,6 +543,8 @@ class ServiceManager implements ServiceLocatorInterface
         $circularDependencyResolver[spl_object_hash($this) . '-' . $cName] = true;
         try {
             $instance = call_user_func($callable, $this, $cName, $rName);
+        } catch (Exception\ServiceNotFoundException $e) {
+            throw $e;
         } catch (\Exception $e) {
             throw new Exception\ServiceNotCreatedException(
                 sprintf('Abstract factory raised an exception when creating "%s"; no instance returned', $rName),

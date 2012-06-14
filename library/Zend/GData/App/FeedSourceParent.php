@@ -60,7 +60,7 @@ abstract class FeedSourceParent extends FeedEntryParent
      * @deprecated Deprecated as of Zend Framework 1.7. Use
      *             setService() instead.
      * @param  \Zend\Http\Client $httpClient
-     * @return \Zend\GData\App\FeedSourceParent Provides a fluent interface
+     * @return FeedSourceParent Provides a fluent interface
      */
     public function setHttpClient(\Zend\Http\Client $httpClient)
     {
@@ -77,7 +77,7 @@ abstract class FeedSourceParent extends FeedEntryParent
      * save() and delete().
      *
      * @param \Zend\GData\App $instance The new service instance.
-     * @return \Zend\GData\App\FeedEntryParent Provides a fluent interface.
+     * @return FeedEntryParent Provides a fluent interface.
      */
     public function setService($instance)
     {
@@ -163,7 +163,7 @@ abstract class FeedSourceParent extends FeedEntryParent
     }
 
     /**
-     * @return \Zend\Gdata\AppExtension\Generator
+     * @return Extension\Generator
      */
     public function getGenerator()
     {
@@ -171,8 +171,8 @@ abstract class FeedSourceParent extends FeedEntryParent
     }
 
     /**
-     * @param \Zend\GData\App\Extension\Generator $value
-     * @return \Zend\GData\App\FeedSourceParent Provides a fluent interface
+     * @param Extension\Generator $value
+     * @return FeedSourceParent Provides a fluent interface
      */
     public function setGenerator($value)
     {
@@ -181,7 +181,7 @@ abstract class FeedSourceParent extends FeedEntryParent
     }
 
     /**
-     * @return \Zend\Gdata\AppExtension\Icon
+     * @return Extension\Icon
      */
     public function getIcon()
     {
@@ -189,8 +189,8 @@ abstract class FeedSourceParent extends FeedEntryParent
     }
 
     /**
-     * @param \Zend\GData\App\Extension\Icon $value
-     * @return \Zend\GData\App\FeedSourceParent Provides a fluent interface
+     * @param Extension\Icon $value
+     * @return FeedSourceParent Provides a fluent interface
      */
     public function setIcon($value)
     {
@@ -199,7 +199,7 @@ abstract class FeedSourceParent extends FeedEntryParent
     }
 
     /**
-     * @return \Zend\Gdata\AppExtension\logo
+     * @return Extension\logo
      */
     public function getlogo()
     {
@@ -207,8 +207,8 @@ abstract class FeedSourceParent extends FeedEntryParent
     }
 
     /**
-     * @param \Zend\Gdata\AppExtension\logo $value
-     * @return \Zend\GData\App\FeedSourceParent Provides a fluent interface
+     * @param Extension\logo $value
+     * @return FeedSourceParent Provides a fluent interface
      */
     public function setlogo($value)
     {
@@ -217,7 +217,7 @@ abstract class FeedSourceParent extends FeedEntryParent
     }
 
     /**
-     * @return \Zend\Gdata\AppExtension\Subtitle
+     * @return Extension\Subtitle
      */
     public function getSubtitle()
     {
@@ -225,8 +225,8 @@ abstract class FeedSourceParent extends FeedEntryParent
     }
 
     /**
-     * @param \Zend\GData\App\Extension\Subtitle $value
-     * @return \Zend\GData\App\FeedSourceParent Provides a fluent interface
+     * @param Extension\Subtitle $value
+     * @return FeedSourceParent Provides a fluent interface
      */
     public function setSubtitle($value)
     {

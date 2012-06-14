@@ -38,101 +38,59 @@ class SmtpProtocolSpy extends Smtp
     protected $helo;
     protected $mail;
     protected $rcpt = array();
-    protected $data;
+    protected $_sess = true;
 
-    /**
-     * "Connect" to server
-     * 
-     * @return void
-     */
     public function connect()
     {
         $this->connect = true;
+        return true;
     }
 
-    /**
-     * Set server name we're talking to
-     * 
-     * @param  string $serverName 
-     * @return void
-     */
     public function helo($serverName = '127.0.0.1')
     {
+        parent::helo($serverName);
         $this->helo = $serverName;
     }
 
-    /**
-     * quit implementation
-     *
-     * Resets helo value and calls rset
-     * 
-     * @return void
-     */
     public function quit()
     {
         $this->helo = null;
         $this->rset();
     }
 
-    /**
-     * Disconnect implementation
-     *
-     * Resets connect flag and calls rset
-     * 
-     * @return void
-     */
     public function disconnect()
     {
         $this->helo    = null;
         $this->connect = false;
         $this->rset();
     }
-    
-    /**
-     * "Reset" connection
-     *
-     * Resets state of mail, rcpt, and data properties
-     * 
-     * @return void
-     */
+
     public function rset()
     {
-        $this->mail = null;
+        parent::rset();
         $this->rcpt = array();
-        $this->data = null;
     }
 
-    /**
-     * Set envelope FROM
-     * 
-     * @param  string $from 
-     * @return void
-     */
     public function mail($from)
     {
+        parent::mail($from);
         $this->mail = $from;
     }
 
-    /**
-     * Add recipient
-     * 
-     * @param  string $to 
-     * @return void
-     */
     public function rcpt($to)
     {
+        $this->_rcpt = true;
         $this->rcpt[] = $to;
     }
 
-    /**
-     * Set data
-     * 
-     * @param  string $data 
-     * @return void
-     */
-    public function data($data)
+    protected function _send($request)
     {
-        $this->data = $data;
+        // Save request to internal log
+        $this->_addLog($request . self::EOL);
+    }
+
+    protected function _expect($code, $timeout = null) {
+        return '';
     }
 
     /**
@@ -173,15 +131,5 @@ class SmtpProtocolSpy extends Smtp
     public function getRecipients()
     {
         return $this->rcpt;
-    }
-
-    /**
-     * Get data value
-     * 
-     * @return null|string
-     */
-    public function getData()
-    {
-        return $this->data;
     }
 }

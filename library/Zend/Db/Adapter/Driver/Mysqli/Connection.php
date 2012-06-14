@@ -27,7 +27,7 @@ class Connection implements ConnectionInterface
     protected $driver = null;
 
     /**
-     * Connection paramters
+     * Connection parameters
      * 
      * @var array 
      */
@@ -39,16 +39,17 @@ class Connection implements ConnectionInterface
     protected $resource = null;
 
     /**
-     * In transcaction
+     * In transaction
      * 
      * @var boolean
      */
-    protected $inTransaction = false;    
+    protected $inTransaction = false;
 
     /**
      * Constructor
-     * 
-     * @param mysqli $connectionInfo 
+     *
+     * @param array|mysqli|null $connectionInfo
+     * @throws \Zend\Db\Adapter\Exception\InvalidArgumentException
      */
     public function __construct($connectionInfo = null)
     {
@@ -56,6 +57,8 @@ class Connection implements ConnectionInterface
             $this->setConnectionParameters($connectionInfo);
         } elseif ($connectionInfo instanceof \mysqli) {
             $this->setResource($connectionInfo);
+        } elseif (null !== $connectionInfo) {
+            throw new Exception\InvalidArgumentException('$connection must be an array of parameters, a mysqli object or null');
         }
     }
 

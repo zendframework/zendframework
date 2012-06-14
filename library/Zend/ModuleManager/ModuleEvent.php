@@ -90,19 +90,11 @@ class ModuleEvent extends Event
     /**
      * Set module object to compose in this event
      *
-     * @param  Listener\ConfigMergerInterface $listener
+     * @param  Listener\ConfigMergerInterface $configListener
      * @return ModuleEvent
      */
-    public function setConfigListener($configListener)
+    public function setConfigListener(Listener\ConfigMergerInterface $configListener)
     {
-        if (!$configListener instanceof Listener\ConfigMergerInterface) {
-            throw new Exception\InvalidArgumentException(sprintf(
-                '%s::%s() expects an object implementing Zend\ModuleManager\Listener\ConfigMergerInterface as an argument; %s provided',
-                __CLASS__, 
-                __METHOD__, 
-                (is_object($configListener) ? get_class($configListener) : gettype($configListener))
-            ));
-        }
         $this->setParam('configListener', $configListener);
         return $this;
     }

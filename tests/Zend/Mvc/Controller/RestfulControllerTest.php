@@ -39,6 +39,7 @@ class RestfulControllerTest extends TestCase
         $result = $this->controller->dispatch($this->request, $this->response);
         $this->assertArrayHasKey('entities', $result);
         $this->assertEquals($entities, $result['entities']);
+        $this->assertEquals('getList', $this->routeMatch->getParam('action'));
     }
 
     public function testDispatchInvokesGetMethodWhenNoActionPresentAndIdentifierPresentOnGet()
@@ -49,6 +50,7 @@ class RestfulControllerTest extends TestCase
         $result = $this->controller->dispatch($this->request, $this->response);
         $this->assertArrayHasKey('entity', $result);
         $this->assertEquals($entity, $result['entity']);
+        $this->assertEquals('get', $this->routeMatch->getParam('action'));
     }
 
     public function testDispatchInvokesCreateMethodWhenNoActionPresentAndPostInvoked()
@@ -60,6 +62,7 @@ class RestfulControllerTest extends TestCase
         $result = $this->controller->dispatch($this->request, $this->response);
         $this->assertArrayHasKey('entity', $result);
         $this->assertEquals($entity, $result['entity']);
+        $this->assertEquals('create', $this->routeMatch->getParam('action'));
     }
 
     public function testDispatchInvokesUpdateMethodWhenNoActionPresentAndPutInvokedWithIdentifier()
@@ -76,6 +79,7 @@ class RestfulControllerTest extends TestCase
         $this->assertEquals(1, $test['id']);
         $this->assertArrayHasKey('name', $test);
         $this->assertEquals(__FUNCTION__, $test['name']);
+        $this->assertEquals('update', $this->routeMatch->getParam('action'));
     }
 
     public function testDispatchInvokesDeleteMethodWhenNoActionPresentAndDeleteInvokedWithIdentifier()
@@ -87,6 +91,7 @@ class RestfulControllerTest extends TestCase
         $result = $this->controller->dispatch($this->request, $this->response);
         $this->assertEquals(array(), $result);
         $this->assertEquals(array(), $this->controller->entity);
+        $this->assertEquals('delete', $this->routeMatch->getParam('action'));
     }
 
     public function testDispatchCallsActionMethodBasedOnNormalizingAction()

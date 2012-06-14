@@ -36,12 +36,12 @@ class Link extends \Zend\GData\App\Extension\Link
     protected $_webContent = null;
 
     /**
-     * Constructs a new Zend_Gdata_Calendar_Extension_Link object.
+     * Constructs a new Link object.
      * @see Zend_Gdata_App_Extension_Link#__construct
-     * @param Zend_Gdata_Calendar_Extension_Webcontent $webContent
+     * @param Webcontent $webContent
      */
     public function __construct($href = null, $rel = null, $type = null,
-            $hrefLang = null, $title = null, $length = null, $webContent = null)
+            $hrefLang = null, $title = null, $length = null, WebContent $webContent = null)
     {
         $this->registerAllNamespaces(\Zend\GData\Calendar::$namespaces);
         parent::__construct($href, $rel, $type, $hrefLang, $title, $length);
@@ -91,7 +91,7 @@ class Link extends \Zend\GData\App\Extension\Link
     /**
      * Get the value for this element's WebContent attribute.
      *
-     * @return Zend_Gdata_Calendar_Extension_Webcontent The WebContent value
+     * @return WebContent The WebContent value
      */
     public function getWebContent()
     {
@@ -101,8 +101,8 @@ class Link extends \Zend\GData\App\Extension\Link
     /**
      * Set the value for this element's WebContent attribute.
      *
-     * @param \Zend\GData\Calendar\Extension\WebContent $value The desired value for this attribute.
-     * @return Zend_Calendar_Extension_Link The element being modified.  Provides a fluent interface.
+     * @param WebContent $value The desired value for this attribute.
+     * @return Link The element being modified.  Provides a fluent interface.
      */
     public function setWebContent($value)
     {

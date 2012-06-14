@@ -14,18 +14,47 @@
  *
  * @category   Zend
  * @package    Zend_Cache
+ * @subpackage Storage
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Cache\Exception;
+namespace Zend\Cache\Storage;
 
 /**
  * @category   Zend
  * @package    Zend_Cache
+ * @subpackage Storage
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class OutOfCapacityException extends \OverflowException implements ExceptionInterface
+interface IteratorInterface extends \Iterator
 {
+
+    const CURRENT_AS_SELF     = 0;
+    const CURRENT_AS_KEY      = 1;
+    const CURRENT_AS_VALUE    = 2;
+    const CURRENT_AS_METADATA = 3;
+
+    /**
+     * Get storage instance
+     *
+     * @return StorageInterface
+     */
+    public function getStorage();
+
+    /**
+     * Get iterator mode
+     *
+     * @return int Value of IteratorInterface::CURRENT_AS_*
+     */
+    public function getMode();
+
+    /**
+     * Set iterator mode
+     *
+     * @param int $mode Value of IteratorInterface::CURRENT_AS_*
+     * @return IteratorInterface Fluent interface
+     */
+    public function setMode($mode);
 }

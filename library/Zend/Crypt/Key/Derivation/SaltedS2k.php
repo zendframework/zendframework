@@ -52,6 +52,7 @@ class SaltedS2k
      * @param  string  $password   The source password/key
      * @param  integer $bytes      The output size in bytes
      * @param  string  $salt       The salt of the algorithm
+     * @throws Exception\InvalidArgumentException
      * @return string
      */
     public static function calc($hash, $password, $salt, $bytes)

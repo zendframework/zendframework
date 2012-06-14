@@ -13,5 +13,4 @@ class DummyStoragePlugin extends AbstractPlugin
     {
         $this->setOptions($options);
     }
-
 }

@@ -25,7 +25,6 @@ use ArrayIterator,
     Iterator,
     Countable,
     Traversable,
-    Zend\Loader\PluginClassLoader,
     Zend\Loader\PluginClassLocator;
 
 /**
@@ -41,8 +40,14 @@ use ArrayIterator,
  */
 class Headers implements Iterator, Countable
 {
+    /** @var string End of Line for fields */
+    const EOL = "\r\n";
+
+    /** @var string Start of Line when folding */
+    const FOLDING = "\r\n ";
+
     /**
-     * @var PluginClassLoader
+     * @var \Zend\Loader\PluginClassLoader
      */
     protected $pluginClassLoader = null;
 
@@ -52,13 +57,13 @@ class Headers implements Iterator, Countable
     protected $headersKeys = array();
 
     /**
-     * @var array Array of header array information or HeaderInterface instances
+     * @var  Header\HeaderInterface[] instances
      */
     protected $headers = array();
 
     /**
      * Header encoding; defaults to ASCII
-     * 
+     *
      * @var string
      */
     protected $encoding = 'ASCII';
@@ -76,26 +81,21 @@ class Headers implements Iterator, Countable
      */
     public static function fromString($string)
     {
-        $headers = new static();
-        $current = array();
+        $headers     = new static();
+        $currentLine = '';
 
         // iterate the header lines, some might be continuations
-        foreach (explode("\r\n", $string) as $line) {
-
+        foreach (explode(self::EOL, $string) as $line) {
             // check if a header name is present
             if (preg_match('/^(?P<name>[^()><@,;:\"\\/\[\]?=}{ \t]+):.*$/', $line, $matches)) {
-                if ($current) {
+                if ($currentLine) {
                     // a header name was present, then store the current complete line
-                    $headers->headersKeys[] = str_replace(array('-', '_'), '', strtolower($current['name']));
-                    $headers->headers[] = $current;
+                    $headers->addHeaderLine($currentLine);
                 }
-                $current = array(
-                    'name' => $matches['name'],
-                    'line' => trim($line)
-                );
+                $currentLine = trim($line);
             } elseif (preg_match('/^\s+.*$/', $line, $matches)) {
                 // continuation: append to current line
-                $current['line'] .= trim($line);
+                $currentLine .= trim($line);
             } elseif (preg_match('/^\s*$/', $line)) {
                 // empty line indicates end of headers
                 break;
@@ -107,9 +107,8 @@ class Headers implements Iterator, Countable
                 ));
             }
         }
-        if ($current) {
-            $headers->headersKeys[] = str_replace(array('-', '_'), '', strtolower($current['name']));
-            $headers->headers[] = $current;
+        if ($currentLine) {
+            $headers->addHeaderLine($currentLine);
         }
         return $headers;
     }
@@ -134,33 +133,15 @@ class Headers implements Iterator, Countable
     public function getPluginClassLoader()
     {
         if ($this->pluginClassLoader === null) {
-            $this->pluginClassLoader = new PluginClassLoader(array(
-                'bcc'          => 'Zend\Mail\Header\Bcc',
-                'cc'           => 'Zend\Mail\Header\Cc',
-                'contenttype'  => 'Zend\Mail\Header\ContentType',
-                'content_type' => 'Zend\Mail\Header\ContentType',
-                'content-type' => 'Zend\Mail\Header\ContentType',
-                'date'         => 'Zend\Mail\Header\Date',
-                'from'         => 'Zend\Mail\Header\From',
-                'mimeversion'  => 'Zend\Mail\Header\MimeVersion',
-                'mime_version' => 'Zend\Mail\Header\MimeVersion',
-                'mime-version' => 'Zend\Mail\Header\MimeVersion',
-                'received'     => 'Zend\Mail\Header\Received',
-                'replyto'      => 'Zend\Mail\Header\ReplyTo',
-                'reply_to'     => 'Zend\Mail\Header\ReplyTo',
-                'reply-to'     => 'Zend\Mail\Header\ReplyTo',
-                'sender'       => 'Zend\Mail\Header\Sender',
-                'subject'      => 'Zend\Mail\Header\Subject',
-                'to'           => 'Zend\Mail\Header\To',
-            ));
+            $this->pluginClassLoader = new Header\HeaderLoader();
         }
         return $this->pluginClassLoader;
     }
 
     /**
      * Set the header encoding
-     * 
-     * @param  string $encoding 
+     *
+     * @param  string $encoding
      * @return Headers
      */
     public function setEncoding($encoding)
@@ -174,7 +155,7 @@ class Headers implements Iterator, Countable
 
     /**
      * Get the header encoding
-     * 
+     *
      * @return string
      */
     public function getEncoding()
@@ -240,24 +221,13 @@ class Headers implements Iterator, Countable
             ));
         }
 
-        $matches = null;
-        if (preg_match('/^(?P<name>[^()><@,;:\"\\/\[\]?=}{ \t]+):.*$/', $headerFieldNameOrLine, $matches)
-            && $fieldValue === null
-        ) {
-            // is a header
-            $headerName = $matches['name'];
-            $headerKey  = str_replace(array('-', '_', ' ', '.'), '', strtolower($matches['name']));
-            $line       = $headerFieldNameOrLine;
-        } elseif ($fieldValue === null) {
-            throw new Exception\InvalidArgumentException('A field name was provided without a field value');
+        if ($fieldValue === null) {
+            $header = Header\GenericHeader::fromString($headerFieldNameOrLine);
         } else {
-            $headerName = $headerFieldNameOrLine;
-            $headerKey  = str_replace(array('-', '_', ' ', '.'), '', strtolower($headerFieldNameOrLine));
-            $line       = $headerFieldNameOrLine . ': ' . $fieldValue;
+            $header = new Header\GenericHeader($headerFieldNameOrLine, $fieldValue);
         }
 
-        $this->headersKeys[] = $headerKey;
-        $this->headers[]     = array('name' => $headerName, 'line' => $line);
+        $this->addHeader($header);
         return $this;
     }
 
@@ -280,12 +250,13 @@ class Headers implements Iterator, Countable
     /**
      * Remove a Header from the container
      *
-     * @param Header\HeaderInterface $header
+     * @param  string $fieldName
      * @return bool
      */
-    public function removeHeader(Header\HeaderInterface $header)
+    public function removeHeader($fieldName)
     {
-        $index = array_search($header, $this->headers, true);
+        $key = $this->normalizeFieldName($fieldName);
+        $index = array_search($key, $this->headersKeys, true);
         if ($index !== false) {
             unset($this->headersKeys[$index]);
             unset($this->headers[$index]);
@@ -298,7 +269,7 @@ class Headers implements Iterator, Countable
      * Clear all headers
      *
      * Removes all headers from queue
-     * 
+     *
      * @return Headers
      */
     public function clearHeaders()
@@ -309,53 +280,45 @@ class Headers implements Iterator, Countable
 
     /**
      * Get all headers of a certain name/type
-     * 
+     *
      * @param  string $name
-     * @return boolean|Header\HeaderInterface|ArrayIterator
+     * @return boolean|ArrayIterator|Header\HeaderInterface Returns false if there is no headers with $name in this
+     * contain, an ArrayIterator if the header is a MultipleHeadersInterface instance and finally returns
+     * HeaderInterface for the rest of cases.
      */
     public function get($name)
     {
         $key = $this->normalizeFieldName($name);
-        if (!in_array($key, $this->headersKeys)) {
-            return false;
+        $results = array();
+
+        foreach (array_keys($this->headersKeys, $key) as $index) {
+            $results[] = $this->headers[$index];
         }
 
-        $class = ($this->getPluginClassLoader()->load($key)) ?: 'Zend\Mail\Header\GenericHeader';
-
-        if (in_array('Zend\Mail\Header\MultipleHeadersInterface', class_implements($class, true))) {
-            $headers = array();
-            foreach (array_keys($this->headersKeys, $key) as $index) {
-                if (is_array($this->headers[$index])) {
-                    $this->lazyLoadHeader($index);
-                }
-            }
-            foreach (array_keys($this->headersKeys, $key) as $index) {
-                $headers[] = $this->headers[$index];
-            }
-            return new ArrayIterator($headers);
-        } else {
-            $index = array_search($key, $this->headersKeys);
-            if ($index === false) {
+        switch(count($results)) {
+            case 0:
                 return false;
-            }
-            if (is_array($this->headers[$index])) {
-                return $this->lazyLoadHeader($index);
-            } else {
-                return $this->headers[$index];
-            }
+            case 1:
+                if ($results[0] instanceof Header\MultipleHeadersInterface) {
+                    return new ArrayIterator($results);
+                } else {
+                    return $results[0];
+                }
+            default:
+                return new ArrayIterator($results);
         }
     }
 
     /**
      * Test for existence of a type of header
-     * 
+     *
      * @param  string $name
      * @return bool
      */
     public function has($name)
     {
         $name = $this->normalizeFieldName($name);
-        return (in_array($name, $this->headersKeys));
+        return in_array($name, $this->headersKeys);
     }
 
     /**
@@ -374,7 +337,7 @@ class Headers implements Iterator, Countable
      */
     public function key()
     {
-        return (key($this->headers));
+        return key($this->headers);
     }
 
     /**
@@ -404,7 +367,7 @@ class Headers implements Iterator, Countable
     public function current()
     {
         $current = current($this->headers);
-        if (is_array($current)) {
+        if ($current instanceof Header\GenericHeader) {
             $current = $this->lazyLoadHeader(key($this->headers));
         }
         return $current;
@@ -432,17 +395,12 @@ class Headers implements Iterator, Countable
     public function toString()
     {
         $headers = '';
-        foreach ($this->toArray() as $fieldName => $fieldValue) {
-            if (is_array($fieldValue)) {
-                // Handle multi-value headers
-                foreach ($fieldValue as $value) {
-                    $headers .= $fieldName . ': ' . $value . "\r\n";
-                }
-                continue;
+        foreach ($this->headers as $header) {
+            if ($str = $header->toString()) {
+                $headers .= $str . self::EOL;
             }
-            // Handle single-value headers
-            $headers .= $fieldName . ': ' . $fieldValue . "\r\n";
         }
+
         return $headers;
     }
 
@@ -463,14 +421,8 @@ class Headers implements Iterator, Countable
                     $headers[$name] = array();
                 }
                 $headers[$name][] = $header->getFieldValue();
-            } elseif ($header instanceof Header\HeaderInterface) {
-                $headers[$header->getFieldName()] = $header->getFieldValue();
             } else {
-                $matches = null;
-                preg_match('/^(?P<name>[^()><@,;:\"\\/\[\]?=}{ \t]+):\s*(?P<value>.*)$/', $header['line'], $matches);
-                if ($matches) {
-                    $headers[$matches['name']] = $matches['value'];
-                }
+                $headers[$header->getFieldName()] = $header->getFieldValue();
             }
         }
         return $headers;
@@ -502,7 +454,7 @@ class Headers implements Iterator, Countable
         $class = ($this->getPluginClassLoader()->load($key)) ?: 'Zend\Mail\Header\GenericHeader';
 
         $encoding = $this->getEncoding();
-        $headers  = $class::fromString($current['line']);
+        $headers  = $class::fromString($current->toString());
         if (is_array($headers)) {
             $current = array_shift($headers);
             $current->setEncoding($encoding);
@@ -523,8 +475,8 @@ class Headers implements Iterator, Countable
 
     /**
      * Normalize a field name
-     * 
-     * @param  string $fieldName 
+     *
+     * @param  string $fieldName
      * @return string
      */
     protected function normalizeFieldName($fieldName)

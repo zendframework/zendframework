@@ -201,16 +201,20 @@ abstract class RestfulController implements
             switch (strtolower($request->getMethod())) {
                 case 'get':
                     if (null !== $id = $routeMatch->getParam('id')) {
+                        $action = 'get';
                         $return = $this->get($id);
                         break;
                     }
                     if (null !== $id = $request->query()->get('id')) {
+                        $action = 'get';
                         $return = $this->get($id);
                         break;
                     }
+                    $action = 'getList';
                     $return = $this->getList();
                     break;
                 case 'post':
+                    $action = 'create';
                     $return = $this->create($request->post()->toArray());
                     break;
                 case 'put':
@@ -221,6 +225,7 @@ abstract class RestfulController implements
                     }
                     $content = $request->getContent();
                     parse_str($content, $parsedParams);
+                    $action = 'update';
                     $return = $this->update($id, $parsedParams);
                     break;
                 case 'delete':
@@ -229,11 +234,14 @@ abstract class RestfulController implements
                             throw new \DomainException('Missing identifier');
                         }
                     }
+                    $action = 'delete';
                     $return = $this->delete($id);
                     break;
                 default:
                     throw new \DomainException('Invalid HTTP method!');
             }
+
+            $routeMatch->setParam('action', $action);
         }
 
         // Emit post-dispatch signal, passing:

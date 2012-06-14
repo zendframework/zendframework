@@ -39,6 +39,16 @@ use Zend\Translator\Exception\InvalidFileTypeException;
  */
 class QtTest extends \PHPUnit_Framework_TestCase
 {
+    public function setUp()
+    {
+        Adapter\Qt::removeCache();
+    }
+
+    public function tearDown()
+    {
+        Adapter\Qt::removeCache();
+    }
+
     public function testCreate()
     {
         $adapter = new Adapter\Qt(__DIR__ . '/_files/translation_en.ts');
@@ -69,7 +79,7 @@ class QtTest extends \PHPUnit_Framework_TestCase
             $this->assertContains('failed.ts', $e->getMessage());
         }
     }
-    
+
     public function testToString()
     {
         $adapter = new Adapter\Qt(__DIR__ . '/_files/translation_en.ts');

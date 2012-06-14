@@ -33,7 +33,7 @@ application work with beta4.
  - Crypt and Math (Enrico Zimuel)
     - Creates a generic API for string and stream en/decryption
     - Provides bcrypt support
-    - Provides BigInteger support
+    - Provides `BigInteger` support
     - Provides common methodology surrounding credential encryption and hashing
  - Db layer (Ralph Schindler)
     - Zend\Db\Adapter: added buffer() to the ResultInterface, added that feature

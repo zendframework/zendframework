@@ -301,20 +301,6 @@ class ClassGenerator extends AbstractGenerator
      */
     public function setDocBlock(DocBlockGenerator $docBlock)
     {
-        /*
-        if (is_string($docBlock)) {
-            $docBlock = array('shortDescription' => $docBlock);
-        }
-
-        if (is_array($docBlock)) {
-            $docBlock = new DocBlockGenerator($docBlock);
-        } elseif (!$docBlock instanceof DocBlockGenerator) {
-            throw new Exception\InvalidArgumentException(
-                'setDocBlock() is expecting either a string, array or an instance of Zend\Code\Generator\DocBlockGenerator'
-            );
-        }
-        */
-
         $this->docBlock = $docBlock;
 
         return $this;

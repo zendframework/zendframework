@@ -227,22 +227,18 @@ class App
     }
 
     /**
-     * Set the \Zend\Http\Client object used for communication
+     * Set the Zend\Http\Client object used for communication
      *
      * @param \Zend\Http\Client $client The client to use for communication
      * @throws \Zend\GData\App\HttpException
      * @return \Zend\GData\App Provides a fluent interface
      */
-    public function setHttpClient($client,
-        $applicationId = 'MyCompany-MyApp-1.0')
+    public function setHttpClient(Http\Client $client = null, $applicationId = 'MyCompany-MyApp-1.0')
     {
         if ($client === null) {
             $client = new Http\Client();
         }
-        if (!$client instanceof Http\Client) {
-            throw new App\HttpException(
-                'Argument is not an instance of Zend\Http\Client.');
-        }
+
         $userAgent = $applicationId . ' Zend_Framework_Gdata/' .
             \Zend\Version::VERSION;
         $client->getRequest()->headers()->addHeaderLine('User-Agent', $userAgent);
@@ -393,7 +389,7 @@ class App
 
     /**
      * Set the major protocol version that should be used. Values < 1 will
-     * cause a \Zend\Gdata\App\InvalidArgumentException to be thrown.
+     * cause a \Zend\GData\App\InvalidArgumentException to be thrown.
      *
      * @see _majorProtocolVersion
      * @param int $value The major protocol version to use.
@@ -422,7 +418,7 @@ class App
     /**
      * Set the minor protocol version that should be used. If set to NULL, no
      * minor protocol version will be sent to the server. Values < 0 will
-     * cause a \Zend\Gdata\App\InvalidArgumentException to be thrown.
+     * cause a \Zend\GData\App\InvalidArgumentException to be thrown.
      *
      * @see _minorProtocolVersion
      * @param (int|NULL) $value The minor protocol version to use.
@@ -606,7 +602,9 @@ class App
             throw new App\InvalidArgumentException(
                 'You must specify an URI to which to post.');
         }
-        //$headers['Content-Type'] = $contentType;
+        if ($contentType != null){
+            $headers['Content-Type'] = $contentType; 
+        }
         if (self::getGzipEnabled()) {
             // some services require the word 'gzip' to be in the user-agent
             // header in addition to the accept-encoding header
@@ -1063,9 +1061,9 @@ class App
      * significant amount of time to complete. In some cases this may cause
      * execution to timeout without proper precautions in place.
      *
-     * @param $feed The feed to iterate through.
+     * @param object $feed The feed to iterate through.
      * @return mixed A new feed of the same type as the one originally
-     *          passed in, containing all relevent entries.
+     *          passed in, containing all relevant entries.
      */
     public function retrieveAllEntriesForFeed($feed) {
         $feedClass = get_class($feed);
@@ -1093,7 +1091,7 @@ class App
      * NOTE: This will not work if you have customized the adapter
      * already to use a proxy server or other interface.
      *
-     * @param $logfile The logfile to use when logging the requests
+     * @param string $logfile The logfile to use when logging the requests
      */
     public function enableRequestDebugLogging($logfile)
     {

@@ -668,9 +668,7 @@ class Index implements SearchIndexInterface
     {
         if (is_string($query)) {
             $query = Search\QueryParser::parse($query);
-        }
-
-        if (!$query instanceof Search\Query\AbstractQuery) {
+        } elseif (!$query instanceof Search\Query\AbstractQuery) {
             throw new InvalidArgumentException('Query must be a string or Zend\Search\Lucene\Search\Query object');
         }
 

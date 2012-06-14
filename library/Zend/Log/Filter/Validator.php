@@ -44,15 +44,9 @@ class Validator implements FilterInterface
      * Filter out any log messages not matching the validator
      *
      * @param  ZendValidator $validator
-     * @throws Exception\InvalidArgumentException
      */
-    public function __construct($validator)
+    public function __construct(ZendValidator $validator)
     {
-        if (!$validator instanceof ZendValidator) {
-            throw new Exception\InvalidArgumentException(sprintf(
-                'Expected Zend\Validator object'
-            ));
-        }
         $this->validator = $validator;
     }
 

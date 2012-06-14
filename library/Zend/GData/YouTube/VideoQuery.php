@@ -357,7 +357,7 @@ class VideoQuery extends \Zend\GData\Query
      * Set the value of the orderby parameter
      *
      * @param string $value
-     * @return Zend_Gdata_YouTube_Query Provides a fluent interface
+     * @return Query Provides a fluent interface
      */
     public function setOrderBy($value)
     {

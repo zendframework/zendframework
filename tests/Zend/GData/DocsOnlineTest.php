@@ -34,6 +34,11 @@ use Zend\GData\Docs;
 class DocsOnlineTest extends \PHPUnit_Framework_TestCase
 {
 
+    /** @var string */
+    public $docTitle;
+    /** @var Docs */
+    public $gdata;
+
     public function setUp()
     {
         if (!constant('TESTS_ZEND_GDATA_ONLINE_ENABLED')) {

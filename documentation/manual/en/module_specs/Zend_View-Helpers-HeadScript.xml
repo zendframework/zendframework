@@ -100,6 +100,32 @@ $this->headScript()->appendFile(
         </example>
     </note>
 
+    <note><title>Preventing HTML style comments or CDATA wrapping of scripts</title>
+
+        <para>
+            By default <classname>HeadScript</classname> will wrap scripts with HTML 
+            comments or it wraps scripts with XHTML cdata. This behavior can be
+            problematic when you intend to use the script tag in an alternative way by
+            setting the type to something other then 'text/javascript'. To prevent such 
+            escaping, pass an <varname>noescape</varname> with a value of true as part of
+            the <varname>$attrs</varname> parameter in the method calls.
+        </para>
+
+        <example xml:id="zend.view.helpers.initial.headscript.noescape"><title>Create an jQuery template with the headScript</title>
+
+            <programlisting language="php"><![CDATA[
+// jquery template
+$template = '<div class="book">{{:title}}</div>';
+$this->headScript()->appendScript(
+    $template,
+    'text/x-jquery-tmpl',
+    array('id='tmpl-book', 'noescape' => true)
+);
+
+]]></programlisting>
+        </example>
+    </note>
+
     <para>
         <classname>HeadScript</classname> also allows capturing scripts; this can be
         useful if you want to create the client-side script programmatically,

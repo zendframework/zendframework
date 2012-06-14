@@ -65,9 +65,9 @@ class Statement implements StatementInterface
 
     /**
      * Set driver
-     * 
+     *
      * @param  Sqlsrv $driver
-     * @return Statement 
+     * @return Statement
      */
     public function setDriver(Sqlsrv $driver)
     {
@@ -76,12 +76,12 @@ class Statement implements StatementInterface
     }
 
     /**
-     * 
+     *
      * One of two resource types will be provided here:
      * a) "SQL Server Connection" when a prepared statement needs to still be produced
-     * b) "SQL Server Statement" when a prepared statement has been already produced 
+     * b) "SQL Server Statement" when a prepared statement has been already produced
      * (there will need to already be a bound param set if it applies to this query)
-     * 
+     *
      * @param resource
      */
     public function initialize($resource)
@@ -91,7 +91,7 @@ class Statement implements StatementInterface
 
     /**
      * Set parameter container
-     * 
+     *
      * @param ParameterContainer $parameterContainer
      */
     public function setParameterContainer(ParameterContainer $parameterContainer)
@@ -109,7 +109,7 @@ class Statement implements StatementInterface
 
     /**
      * Get resource
-     * 
+     *
      * @return resource
      */
     public function getResource()
@@ -127,10 +127,10 @@ class Statement implements StatementInterface
 
     /**
      * Get sql
-     * 
-     * @return string 
+     *
+     * @return string
      */
-    public function getSQL()
+    public function getSql()
     {
         return $this->sql;
     }
@@ -165,9 +165,9 @@ class Statement implements StatementInterface
 
     /**
      * Execute
-     * 
+     *
      * @param  array|ParameterContainer $parameters
-     * @return type 
+     * @return type
      */
     public function execute($parameters = null)
     {
@@ -210,7 +210,7 @@ class Statement implements StatementInterface
 
     /**
      * Bind parameters from container
-     * 
+     *
      */
     protected function bindParametersFromContainer()
     {

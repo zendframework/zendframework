@@ -125,7 +125,8 @@ class Expression implements ExpressionInterface
                 ? $this->types[$i] : self::TYPE_VALUE;
         }
 
-        $expression = $this->expression;
+        // assign locally, escaping % signs
+        $expression = str_replace('%', '%%', $this->expression);
 
         if (count($parameters) > 0) {
             $count = 0;

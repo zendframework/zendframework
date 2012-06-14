@@ -38,8 +38,8 @@ namespace Zend\GData;
 class Photos extends GData
 {
 
-    const PICASA_BASE_URI = 'http://picasaweb.google.com/data';
-    const PICASA_BASE_FEED_URI = 'http://picasaweb.google.com/data/feed';
+    const PICASA_BASE_URI = 'https://picasaweb.google.com/data';
+    const PICASA_BASE_FEED_URI = 'https://picasaweb.google.com/data/feed';
     const AUTH_SERVICE_NAME = 'lh2';
 
     /**
@@ -113,7 +113,7 @@ class Photos extends GData
         $this->registerPackage('Zend\GData\Photos');
         $this->registerPackage('Zend\GData\Photos\Extension');
         parent::__construct($client, $applicationId);
-        $this->_httpClient->setParameterPost('service', self::AUTH_SERVICE_NAME);
+        $this->_httpClient->setParameterPost(array('service' => self::AUTH_SERVICE_NAME));
     }
 
     /**

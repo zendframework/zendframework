@@ -76,12 +76,12 @@ class FormElement extends BaseAbstractHelper
             return $helper($element);
         }
 
-        if (is_array($options) && $type == 'checkbox') {
-            $helper = $renderer->plugin('form_multi_checkbox');
+        if ($type == 'checkbox') {
+            $helper = $renderer->plugin('form_checkbox');
             return $helper($element);
         }
 
-        if (is_array($options) && $type == 'checkbox') {
+        if (is_array($options) && $type == 'multi_checkbox') {
             $helper = $renderer->plugin('form_multi_checkbox');
             return $helper($element);
         }
@@ -106,11 +106,15 @@ class FormElement extends BaseAbstractHelper
      *
      * Proxies to {@link render()}.
      * 
-     * @param  ElementInterface $element 
+     * @param  ElementInterface|null $element 
      * @return string
      */
-    public function __invoke(ElementInterface $element)
+    public function __invoke(ElementInterface $element = null)
     {
+        if (!$element) {
+            return $this;
+        }
+
         return $this->render($element);
     }
 }

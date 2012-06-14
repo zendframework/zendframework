@@ -29,33 +29,6 @@ namespace Zend\Cache;
 abstract class Utils
 {
     /**
-     * Get disk capacity
-     *
-     * @param  string $path A directory of the filesystem or disk partition
-     * @return array
-     * @throws Exception\RuntimeException
-     */
-    public static function getDiskCapacity($path)
-    {
-        $total = @disk_total_space($path);
-        if ($total === false) {
-            $err = error_get_last();
-            throw new Exception\RuntimeException($err['message']);
-        }
-
-        $free = @disk_free_space($path);
-        if ($free === false) {
-            $err = error_get_last();
-            throw new Exception\RuntimeException($err['message']);
-        }
-
-        return array(
-            'total' => $total,
-            'free'  => $free,
-        );
-    }
-
-    /**
      * Get php memory capacity
      *
      * @return array
@@ -199,7 +172,7 @@ abstract class Utils
             $cmd  = 'sysctl -n hw.memsize';
             $out  = $ret = null;
             $line = exec($cmd, $out, $ret);
-           
+
             if ($ret) {
                 $out = implode("\n", $out);
                 throw new Exception\RuntimeException(
@@ -214,7 +187,7 @@ abstract class Utils
             $cmd  = 'vm_stat | grep free';
             $out  = $ret = null;
             $line = exec($cmd, $out, $ret);
-           
+
             if ($ret) {
                 $out = implode("\n", $out);
                 throw new Exception\RuntimeException(

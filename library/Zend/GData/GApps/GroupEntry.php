@@ -32,7 +32,7 @@ use Zend\GData\GApps;
  *
  * To transfer group entries to and from the Google Apps servers, including
  * creating new entries, refer to the Google Apps service class,
- * \Zend\Gdata\Gapps.
+ * \Zend\GData\Gapps.
  *
  * This class represents <atom:entry> in the Google Data protocol.
  *
@@ -45,13 +45,13 @@ use Zend\GData\GApps;
 class GroupEntry extends \Zend\GData\Entry
 {
 
-    protected $_entryClassName = '\Zend\Gdata\Gapps\GroupEntry';
+    protected $_entryClassName = '\Zend\GData\GApps\GroupEntry';
 
     /**
      * <apps:property> element containing information about other items
      * relevant to this entry.
      *
-     * @var \Zend\Gdata\Gapps\Extension\Property
+     * @var \Zend\GData\Gapps\Extension\Property
      */
     protected $_property = array();
 
@@ -63,7 +63,7 @@ class GroupEntry extends \Zend\GData\Entry
      */
     public function __construct($element = null)
     {
-        $this->registerAllNamespaces(\Zend\Gdata\Gapps::$namespaces);
+        $this->registerAllNamespaces(\Zend\GData\GApps::$namespaces);
         parent::__construct($element);
     }
 
@@ -99,7 +99,7 @@ class GroupEntry extends \Zend\GData\Entry
         switch ($absoluteNodeName) {
 
             case $this->lookupNamespace('apps') . ':' . 'property';
-                $property = new \Zend\Gdata\Gapps\Extension\Property();
+                $property = new Extension\Property();
                 $property->transferFromDOM($child);
                 $this->_property[] = $property;
                 break;
@@ -114,9 +114,9 @@ class GroupEntry extends \Zend\GData\Entry
      *
      * @param string $rel The rel value of the property to be found. If null,
      *          the array of properties is returned instead.
-     * @return mixed Either an array of \Zend\Gdata\Gapps\Extension\Property
+     * @return mixed Either an array of \Zend\GData\GApps\Extension\Property
      *          objects if $rel is null, a single
-     *          \Zend\Gdata\Gapps\Extension\Property object if $rel is specified
+     *          \Zend\GData\GApps\Extension\Property object if $rel is specified
      *          and a matching feed link is found, or null if $rel is
      *          specified and no matching property is found.
      */
@@ -138,8 +138,8 @@ class GroupEntry extends \Zend\GData\Entry
      * Set the value of the  property property for this object.
      *
      * @param array $value A collection of
-     *          \Zend\Gdata\Gapps\Extension\Property objects.
-     * @return \Zend\Gdata\Gapps\GroupEntry Provides a fluent interface.
+     *          \Zend\GData\GApps\Extension\Property objects.
+     * @return \Zend\GData\GApps\GroupEntry Provides a fluent interface.
      */
     public function setProperty($value)
     {

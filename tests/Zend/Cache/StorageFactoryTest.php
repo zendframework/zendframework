@@ -115,7 +115,7 @@ class StorageFactoryTest extends \PHPUnit_Framework_TestCase
     public function testFactoryWithPlugins()
     {
         $adapter = 'Memory';
-        $plugins = array('Serializer', 'ClearByFactor');
+        $plugins = array('Serializer', 'ClearExpiredByFactor');
 
         $cache = Cache\StorageFactory::factory(array(
             'adapter' => $adapter,
@@ -127,7 +127,7 @@ class StorageFactoryTest extends \PHPUnit_Framework_TestCase
 
         // test plugin structure
         $i = 0;
-        foreach ($cache->getPlugins() as $plugin) {
+        foreach ($cache->getPluginRegistry() as $plugin) {
             $this->assertInstanceOf('Zend\Cache\Storage\Plugin\\' . $plugins[$i++], $plugin);
         }
     }
@@ -147,7 +147,7 @@ class StorageFactoryTest extends \PHPUnit_Framework_TestCase
                 'Serializer',
 
                 // plugin as name-options pair
-                'ClearByFactor' => array(
+                'ClearExpiredByFactor' => array(
                     'clearing_factor' => 1,
                 ),
 
@@ -172,14 +172,14 @@ class StorageFactoryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('test', $storage->getOptions()->getNamespace());
 
         // test plugin structure
-        foreach ($storage->getPlugins() as $i => $plugin) {
+        foreach ($storage->getPluginRegistry() as $plugin) {
 
             // test plugin options
             $pluginClass = get_class($plugin);
             switch ($pluginClass) {
-                case 'Zend\Cache\Storage\Plugin\ClearByFactor':
+                case 'Zend\Cache\Storage\Plugin\ClearExpiredByFactor':
                     $this->assertSame(
-                        $factory['plugins']['ClearByFactor']['clearing_factor'],
+                        $factory['plugins']['ClearExpiredByFactor']['clearing_factor'],
                         $plugin->getOptions()->getClearingFactor()
                     );
                     break;
@@ -197,5 +197,4 @@ class StorageFactoryTest extends \PHPUnit_Framework_TestCase
 
         }
     }
-
 }

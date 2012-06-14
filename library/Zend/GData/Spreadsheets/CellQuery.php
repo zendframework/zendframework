@@ -36,7 +36,7 @@ use Zend\GData\App;
 class CellQuery extends \Zend\GData\Query
 {
 
-    const SPREADSHEETS_CELL_FEED_URI = 'http://spreadsheets.google.com/feeds/cells';
+    const SPREADSHEETS_CELL_FEED_URI = 'https://spreadsheets.google.com/feeds/cells';
 
     protected $_defaultFeedUri = self::SPREADSHEETS_CELL_FEED_URI;
     protected $_visibility = 'private';

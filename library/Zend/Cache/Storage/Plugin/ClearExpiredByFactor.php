@@ -24,7 +24,8 @@ namespace Zend\Cache\Storage\Plugin;
 use Traversable,
     Zend\EventManager\EventManagerInterface,
     Zend\Cache\Exception,
-    Zend\Cache\Storage\Adapter\AdapterInterface as Adapter,
+    Zend\Cache\Storage\ClearExpiredInterface,
+    Zend\Cache\Storage\StorageInterface,
     Zend\Cache\Storage\PostEvent;
 
 /**
@@ -34,7 +35,7 @@ use Traversable,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ClearByFactor extends AbstractPlugin
+class ClearExpiredByFactor extends AbstractPlugin
 {
     /**
      * Handles
@@ -61,7 +62,7 @@ class ClearByFactor extends AbstractPlugin
         $handles = array();
         $this->handles[$index] = & $handles;
 
-        $callback = array($this, 'clearByFactor');
+        $callback = array($this, 'clearExpiredByFactor');
         $handles[] = $events->attach('setItem.post',  $callback, $priority);
         $handles[] = $events->attach('setItems.post', $callback, $priority);
         $handles[] = $events->attach('addItem.post',  $callback, $priority);
@@ -96,22 +97,21 @@ class ClearByFactor extends AbstractPlugin
     }
 
     /**
-     * Clear storage by factor on a success _RESULT_
+     * Clear expired items by factor after writing new item(s)
      *
      * @param  PostEvent $event
      * @return void
      */
-    public function clearByFactor(PostEvent $event)
+    public function clearExpiredByFactor(PostEvent $event)
     {
-        $options = $this->getOptions();
-        $factor  = $options->getClearingFactor();
-        if ($factor && $event->getResult() && mt_rand(1, $factor) == 1) {
-            $params = $event->getParams();
-            if ($options->getClearByNamespace()) {
-                $event->getStorage()->clearByNamespace(Adapter::MATCH_EXPIRED, $params['options']);
-            } else {
-                $event->getStorage()->clear(Adapter::MATCH_EXPIRED, $params['options']);
-            }
+        $storage = $event->getStorage();
+        if ( !($storage instanceof ClearExpiredInterface) ) {
+            return;
+        }
+
+        $factor = $this->getOptions()->getClearingFactor();
+        if ($factor && mt_rand(1, $factor) == 1) {
+            $storage->clearExpired();
         }
     }
 }

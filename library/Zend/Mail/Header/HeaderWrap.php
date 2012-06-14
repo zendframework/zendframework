@@ -21,6 +21,8 @@
 
 namespace Zend\Mail\Header;
 
+use Zend\Mail\Headers;
+
 /**
  * Utility class used for creating wrapped or MIME-encoded versions of header
  * values.
@@ -60,7 +62,7 @@ abstract class HeaderWrap
      */
     protected static function wrapUnstructuredHeader($value)
     {
-        return wordwrap($value, 78, "\r\n ");
+        return wordwrap($value, 78, Headers::FOLDING);
     }
 
     /**
@@ -84,7 +86,7 @@ abstract class HeaderWrap
                 $temp    = '';
             }
         }
-        return implode("\r\n ", $lines);
+        return implode(Headers::FOLDING, $lines);
     }
 
     /**
@@ -110,7 +112,7 @@ abstract class HeaderWrap
                 ));
                 return str_replace('Header: ', '', $header);
             }, explode(' ', $value));
-            return implode("\r\n ", $words);
+            return implode(Headers::FOLDING, $words);
         }
 
         $header = iconv_mime_encode('Header', $value, array(

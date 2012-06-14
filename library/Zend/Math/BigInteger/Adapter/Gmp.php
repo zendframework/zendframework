@@ -167,9 +167,7 @@ class Gmp implements AdapterInterface
 
     /**
      * Compare two big integers and returns result as an integer where
-     * 0 means both are equal,
-     * > 0 value - that leftOperand is larger,
-     * < 0 value - rightOperand is larger.
+     * 0 means both are equal, 1 that leftOperand is larger, -1 that rightOperand is larger.
      *
      * @param  string $leftOperand
      * @param  string $rightOperand
@@ -227,7 +225,7 @@ class Gmp implements AdapterInterface
      * Convert binary number into big integer
      *
      * @param  string $bytes
-     * @param  bool $twoc  whether binary number is in twos' compliment form
+     * @param  bool $twoc  whether binary number is in twos' complement form
      * @return string
      */
     public function binToInt($bytes, $twoc = false)

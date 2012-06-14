@@ -184,9 +184,7 @@ class Bcmath implements AdapterInterface
 
     /**
      * Compare two big integers and returns result as an integer where
-     * 0 means both are equal,
-     * 1 - that leftOperand is larger,
-     * -1 value - rightOperand is larger.
+     * 0 means both are equal, 1 that leftOperand is larger, -1 that rightOperand is larger.
      *
      * @param  string $leftOperand
      * @param  string $rightOperand

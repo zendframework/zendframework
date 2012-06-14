@@ -1,13 +1,29 @@
 <?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Http
+ */
 
 namespace Zend\Http\PhpEnvironment;
 
-use Zend\Http\Request as HttpRequest,
-    Zend\Uri\Http as HttpUri,
-    Zend\Http\Header\Cookie,
-    Zend\Stdlib\Parameters,
-    Zend\Stdlib\ParametersInterface;
+use Zend\Http\Request as HttpRequest;
+use Zend\Uri\Http as HttpUri;
+use Zend\Http\Header\Cookie;
+use Zend\Stdlib\Parameters;
+use Zend\Stdlib\ParametersInterface;
 
+/**
+ * HTTP Request for current PHP environment
+ *
+ * @category   Zend
+ * @package    Zend_Http
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
 class Request extends HttpRequest
 {
     /**
@@ -33,10 +49,7 @@ class Request extends HttpRequest
 
     /**
      * Construct
-     *
      * Instantiates request.
-     *
-     * @return void
      */
     public function __construct()
     {
@@ -150,7 +163,7 @@ class Request extends HttpRequest
      * Provide an alternate Parameter Container implementation for server parameters in this object, (this is NOT the
      * primary API for value setting, for that see server())
      *
-     * @param \Zend\Stdlib\ParametersInterface $server
+     * @param ParametersInterface $server
      * @return Request
      */
     public function setServer(ParametersInterface $server)
@@ -211,20 +224,28 @@ class Request extends HttpRequest
         return $this;
     }
 
+    /**
+     * Grab headers from array or Traversable
+     *
+     * @param array|\Traversable $server
+     * @return array
+     */
     protected function serverToHeaders($server)
     {
         $headers = array();
 
         foreach ($server as $key => $value) {
-            if (strpos($key, 'HTTP_') === 0 && $value) {
-                $header = substr($key, 5);
-            } elseif (in_array($key, array('CONTENT_LENGTH', 'CONTENT_MD5', 'CONTENT_TYPE')) && $value) {
-                $header = $key;
+            if ($value && strpos($key, 'HTTP_') === 0) {
+                $name = strtr(substr($key, 5), '_', ' ');
+                $name = strtr(ucwords(strtolower($name)), ' ', '-');
+            } elseif ($value && strpos($key, 'CONTENT_') === 0) {
+                $name = substr($key, 8);
+                $name = 'Content-' . (($name == 'MD5') ? $name : ucfirst(strtolower($name)));
             } else {
                 continue;
             }
 
-            $headers[strtr($header, '_', '-')] = $value;
+            $headers[$name] = $value;
         }
 
         return $headers;

@@ -1,16 +1,29 @@
 <?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Http
+ */
 
 namespace Zend\Http;
 
-use Zend\Loader\PluginClassLoader,
-    Zend\Loader\PluginClassLocator,
-    Iterator,
-    Countable;
+use Zend\Http\HeaderLoader;
+use Zend\Loader\PluginClassLocator;
+use Iterator;
+use Countable;
+use Traversable;
+use ArrayIterator;
 
 /**
  * Basic HTTP headers collection functionality
- *
  * Handles aggregation of headers
+ *
+ * @category   Zend
+ * @package    Zend_Http
+ * @see        http://www.w3.org/Protocols/rfc2616/rfc2616-sec4.html#sec4.2
  */
 class Headers implements Iterator, Countable
 {
@@ -38,6 +51,7 @@ class Headers implements Iterator, Countable
      *
      * @param  string $string
      * @return Headers
+     * @throws Exception\RuntimeException
      */
     public static function fromString($string)
     {
@@ -51,8 +65,8 @@ class Headers implements Iterator, Countable
             if (preg_match('/^(?P<name>[^()><@,;:\"\\/\[\]?=}{ \t]+):.*$/', $line, $matches)) {
                 if ($current) {
                     // a header name was present, then store the current complete line
-                    $headers->headersKeys[] = str_replace(array('-', '_'), '', strtolower($current['name']));
-                    $headers->headers[] = $current;
+                    $headers->headersKeys[] = static::createKey($current['name']);
+                    $headers->headers[]     = $current;
                 }
                 $current = array(
                     'name' => $matches['name'],
@@ -73,8 +87,8 @@ class Headers implements Iterator, Countable
             }
         }
         if ($current) {
-            $headers->headersKeys[] = str_replace(array('-', '_'), '', strtolower($current['name']));
-            $headers->headers[] = $current;
+            $headers->headersKeys[] = static::createKey($current['name']);
+            $headers->headers[]     = $current;
         }
         return $headers;
     }
@@ -99,61 +113,7 @@ class Headers implements Iterator, Countable
     public function getPluginClassLoader()
     {
         if ($this->pluginClassLoader === null) {
-            $this->pluginClassLoader = new \Zend\Loader\PluginClassLoader(array(
-                'accept'             => 'Zend\Http\Header\Accept',
-                'acceptcharset'      => 'Zend\Http\Header\AcceptCharset',
-                'acceptencoding'     => 'Zend\Http\Header\AcceptEncoding',
-                'acceptlanguage'     => 'Zend\Http\Header\AcceptLanguage',
-                'acceptranges'       => 'Zend\Http\Header\AcceptRanges',
-                'age'                => 'Zend\Http\Header\Age',
-                'allow'              => 'Zend\Http\Header\Allow',
-                'authenticationinfo' => 'Zend\Http\Header\AuthenticationInfo',
-                'authorization'      => 'Zend\Http\Header\Authorization',
-                'cachecontrol'       => 'Zend\Http\Header\CacheControl',
-                'connection'         => 'Zend\Http\Header\Connection',
-                'contentdisposition' => 'Zend\Http\Header\ContentDisposition',
-                'contentencoding'    => 'Zend\Http\Header\ContentEncoding',
-                'contentlanguage'    => 'Zend\Http\Header\ContentLanguage',
-                'contentlength'      => 'Zend\Http\Header\ContentLength',
-                'contentlocation'    => 'Zend\Http\Header\ContentLocation',
-                'contentmd5'         => 'Zend\Http\Header\ContentMD5',
-                'contentrange'       => 'Zend\Http\Header\ContentRange',
-                'contenttype'        => 'Zend\Http\Header\ContentType',
-                'cookie'             => 'Zend\Http\Header\Cookie',
-                'date'               => 'Zend\Http\Header\Date',
-                'etag'               => 'Zend\Http\Header\Etag',
-                'expect'             => 'Zend\Http\Header\Expect',
-                'expires'            => 'Zend\Http\Header\Expires',
-                'from'               => 'Zend\Http\Header\From',
-                'host'               => 'Zend\Http\Header\Host',
-                'ifmatch'            => 'Zend\Http\Header\IfMatch',
-                'ifmodifiedsince'    => 'Zend\Http\Header\IfModifiedSince',
-                'ifnonematch'        => 'Zend\Http\Header\IfNoneMatch',
-                'ifrange'            => 'Zend\Http\Header\IfRange',
-                'ifunmodifiedsince'  => 'Zend\Http\Header\IfUnmodifiedSince',
-                'keepalive'          => 'Zend\Http\Header\KeepAlive',
-                'lastmodified'       => 'Zend\Http\Header\LastModified',
-                'location'           => 'Zend\Http\Header\Location',
-                'maxforwards'        => 'Zend\Http\Header\MaxForwards',
-                'pragma'             => 'Zend\Http\Header\Pragma',
-                'proxyauthenticate'  => 'Zend\Http\Header\ProxyAuthenticate',
-                'proxyauthorization' => 'Zend\Http\Header\ProxyAuthorization',
-                'range'              => 'Zend\Http\Header\Range',
-                'referer'            => 'Zend\Http\Header\Referer',
-                'refresh'            => 'Zend\Http\Header\Refresh',
-                'retryafter'         => 'Zend\Http\Header\RetryAfter',
-                'server'             => 'Zend\Http\Header\Server',
-                'setcookie'          => 'Zend\Http\Header\SetCookie',
-                'te'                 => 'Zend\Http\Header\TE',
-                'trailer'            => 'Zend\Http\Header\Trailer',
-                'transferencoding'   => 'Zend\Http\Header\TransferEncoding',
-                'upgrade'            => 'Zend\Http\Header\Upgrade',
-                'useragent'          => 'Zend\Http\Header\UserAgent',
-                'vary'               => 'Zend\Http\Header\Vary',
-                'via'                => 'Zend\Http\Header\Via',
-                'warning'            => 'Zend\Http\Header\Warning',
-                'wwwauthenticate'    => 'Zend\Http\Header\WWWAuthenticate'
-            ));
+            $this->pluginClassLoader = new HeaderLoader();
         }
         return $this->pluginClassLoader;
     }
@@ -165,6 +125,7 @@ class Headers implements Iterator, Countable
      *
      * @param  array|Traversable $headers
      * @return Headers
+     * @throws Exception\InvalidArgumentException
      */
     public function addHeaders($headers)
     {
@@ -213,13 +174,13 @@ class Headers implements Iterator, Countable
             && $fieldValue === null) {
             // is a header
             $headerName = $matches['name'];
-            $headerKey = str_replace(array('-', '_', ' ', '.'), '', strtolower($matches['name']));
+            $headerKey  = static::createKey($matches['name']);
             $line = $headerFieldNameOrLine;
         } elseif ($fieldValue === null) {
             throw new Exception\InvalidArgumentException('A field name was provided without a field value');
         } else {
             $headerName = $headerFieldNameOrLine;
-            $headerKey = str_replace(array('-', '_', ' ', '.'), '', strtolower($headerFieldNameOrLine));
+            $headerKey  = static::createKey($headerFieldNameOrLine);
             if (is_array($fieldValue)) {
                 $fieldValue = implode(', ', $fieldValue);
             }
@@ -227,7 +188,8 @@ class Headers implements Iterator, Countable
         }
 
         $this->headersKeys[] = $headerKey;
-        $this->headers[] = array('name' => $headerName, 'line' => $line);
+        $this->headers[]     = array('name' => $headerName, 'line' => $line);
+
         return $this;
     }
 
@@ -239,10 +201,9 @@ class Headers implements Iterator, Countable
      */
     public function addHeader(Header\HeaderInterface $header)
     {
-        $key = str_replace(array('-', '_', ' ', '.'), '', strtolower($header->getFieldName()));
+        $this->headersKeys[] = static::createKey($header->getFieldName());
+        $this->headers[]     = $header;
 
-        $this->headersKeys[] = $key;
-        $this->headers[] = $header;
         return $this;
     }
 
@@ -258,6 +219,7 @@ class Headers implements Iterator, Countable
         if ($index !== false) {
             unset($this->headersKeys[$index]);
             unset($this->headers[$index]);
+
             return true;
         }
         return false;
@@ -280,11 +242,11 @@ class Headers implements Iterator, Countable
      * Get all headers of a certain name/type
      * 
      * @param  string $name
-     * @return false|Header\HeaderInterface|\ArrayIterator
+     * @return bool|Header\HeaderInterface|ArrayIterator
      */
     public function get($name)
     {
-        $key = str_replace(array('-', '_', ' ', '.'), '', strtolower($name));
+        $key = static::createKey($name);
         if (!in_array($key, $this->headersKeys)) {
             return false;
         }
@@ -301,7 +263,7 @@ class Headers implements Iterator, Countable
             foreach (array_keys($this->headersKeys, $key) as $index) {
                 $headers[] = $this->headers[$index];
             }
-            return new \ArrayIterator($headers);
+            return new ArrayIterator($headers);
         } else {
             $index = array_search($key, $this->headersKeys);
             if ($index === false) {
@@ -323,8 +285,7 @@ class Headers implements Iterator, Countable
      */
     public function has($name)
     {
-        $name = str_replace(array('-', '_', ' ', '.'), '', strtolower($name));
-        return (in_array($name, $this->headersKeys));
+        return (in_array(static::createKey($name), $this->headersKeys));
     }
 
     /**
@@ -370,7 +331,7 @@ class Headers implements Iterator, Countable
     /**
      * Return the current value for this iterator, lazy loading it if need be
      *
-     * @return Header\HeaderInterface
+     * @return array|Header\HeaderInterface
      */
     public function current()
     {
@@ -477,7 +438,7 @@ class Headers implements Iterator, Countable
             $this->headers[$index] = $current = array_shift($headers);
             foreach ($headers as $header) {
                 $this->headersKeys[] = $key;
-                $this->headers[] = $header;
+                $this->headers[]     = $header;
             }
             return $current;
         } else {
@@ -487,4 +448,14 @@ class Headers implements Iterator, Countable
 
     }
 
+    /**
+     * Create array key from header name
+     *
+     * @param string $name
+     * @return string
+     */
+    protected static function createKey($name)
+    {
+        return str_replace(array('-', '_', ' ', '.'), '', strtolower($name));
+    }
 }

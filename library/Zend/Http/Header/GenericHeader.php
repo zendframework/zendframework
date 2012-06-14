@@ -1,7 +1,22 @@
 <?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Http
+ */
 
 namespace Zend\Http\Header;
 
+/**
+ * Content-Location Header
+ *
+ * @category   Zend
+ * @package    Zend_Http
+ * @subpackage Headers
+  */
 class GenericHeader implements HeaderInterface
 {
     /**
@@ -50,6 +65,7 @@ class GenericHeader implements HeaderInterface
      * 
      * @param  string $fieldName
      * @return GenericHeader
+     * @throws Exception\InvalidArgumentException(
      */
     public function setFieldName($fieldName)
     {
@@ -62,7 +78,9 @@ class GenericHeader implements HeaderInterface
 
         // Validate what we have
         if (!preg_match('/^[a-z][a-z0-9-]*$/i', $fieldName)) {
-            throw new Exception\InvalidArgumentException('Header name must start with a letter, and consist of only letters, numbers, and dashes');
+            throw new Exception\InvalidArgumentException(
+                'Header name must start with a letter, and consist of only letters, numbers, and dashes'
+            );
         }
 
         $this->fieldName = $fieldName;
@@ -116,10 +134,6 @@ class GenericHeader implements HeaderInterface
      */
     public function toString()
     {
-        $name  = $this->getFieldName();
-        $value = $this->getFieldValue();
-
-        return $name. ': ' . $value . "\r\n";
+        return $this->getFieldName() . ': ' . $this->getFieldValue();
     }
-
 }

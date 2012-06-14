@@ -30,11 +30,16 @@ class AgeTest extends \PHPUnit_Framework_TestCase
 
     public function testAgeToStringReturnsHeaderFormattedString()
     {
-        $ageHeader = Age::fromString('Age: 12');
+        $ageHeader = new Age();
+        $ageHeader->setDeltaSeconds('12');
         $this->assertEquals('Age: 12', $ageHeader->toString());
     }
 
-    /** Implmentation specific tests here */
-    
+    public function testAgeCorrectsDeltaSecondsOverflow()
+    {
+        $ageHeader = new Age();
+        $ageHeader->setDeltaSeconds(PHP_INT_MAX);
+        $this->assertEquals('Age: 2147483648', $ageHeader->toString());
+    }
 }
 

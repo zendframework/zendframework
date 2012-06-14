@@ -151,8 +151,8 @@ abstract class AbstractSource implements MetadataInterface
         $this->loadTableNameData($schema);
 
         $baseTableNames = array();
-        foreach ($this->data['table_names'][$schema] as $tableName => $tableType) {
-            if ('BASE TABLE' == $tableType) {
+        foreach ($this->data['table_names'][$schema] as $tableName => $data) {
+            if ('BASE TABLE' == $data['table_type']) {
                 $baseTableNames[] = $tableName;
             }
         }
@@ -181,7 +181,7 @@ abstract class AbstractSource implements MetadataInterface
     /**
      * Get table
      *
-     * @param  string $tableName
+     * @param  string $baseTableName
      * @param  string $schema
      * @return Object\TableObject
      */
@@ -194,7 +194,7 @@ abstract class AbstractSource implements MetadataInterface
         $this->loadTableNameData($schema);
 
         $tableNames = $this->data['table_names'][$schema];
-        if (isset($tableNames[$baseTableName]) && 'BASE TABLE' == $tableNames[$baseTableName]) {
+        if (isset($tableNames[$baseTableName]) && 'BASE TABLE' == $tableNames[$baseTableName]['table_type']) {
             return $this->getTable($baseTableName, $schema);
         }
         throw new \Exception('Base Table "' . $baseTableName . '" does not exist');
@@ -214,8 +214,8 @@ abstract class AbstractSource implements MetadataInterface
         $this->loadTableNameData($schema);
 
         $viewNames = array();
-        foreach ($this->data['table_names'][$schema] as $tableName => $tableType) {
-            if ('VIEW' == $tableType) {
+        foreach ($this->data['table_names'][$schema] as $tableName => $data) {
+            if ('VIEW' == $data['table_type']) {
                 $viewNames[] = $tableName;
             }
         }
@@ -255,7 +255,7 @@ abstract class AbstractSource implements MetadataInterface
         $this->loadTableNameData($schema);
 
         $tableNames = $this->data['table_names'][$schema];
-        if (isset($tableNames[$viewName]) && 'VIEW' == $tableNames[$viewName]) {
+        if (isset($tableNames[$viewName]) && 'VIEW' == $tableNames[$viewName]['table_type']) {
             return $this->getTable($viewName, $schema);
         }
         throw new \Exception('View "' . $viewName . '" does not exist');
@@ -355,7 +355,7 @@ abstract class AbstractSource implements MetadataInterface
             $schema = $this->defaultSchema;
         }
 
-        $this->loadConstraintData($schema);
+        $this->loadConstraintData($table, $schema);
 
         $constraints = array();
         foreach ($this->data['constraint_names'][$schema] as $constraintName => $constraintInfo) {
@@ -382,7 +382,7 @@ abstract class AbstractSource implements MetadataInterface
             $schema = $this->defaultSchema;
         }
 
-        $this->loadConstraintData($schema);
+        $this->loadConstraintData($table, $schema);
 
         $found = false;
         foreach ($this->data['constraint_names'][$schema] as $constraintInfo) {
@@ -417,7 +417,7 @@ abstract class AbstractSource implements MetadataInterface
             $schema = $this->defaultSchema;
         }
 
-        $this->loadConstraintData($schema);
+        $this->loadConstraintData($table, $schema);
 
         // organize references first
         $references = array();
@@ -524,11 +524,10 @@ abstract class AbstractSource implements MetadataInterface
     /**
      * Prepare data hierarchy
      *
-     * @param string $schema
+     * @param string $type
      * @param string $key ...
-     * @param array $rest
      */
-    protected function prepareDataHierarchy($schema)
+    protected function prepareDataHierarchy($type)
     {
         $data = &$this->data;
         foreach (func_get_args() as $key) {
@@ -541,83 +540,22 @@ abstract class AbstractSource implements MetadataInterface
 
     protected function loadSchemaData()
     {
-        if (isset($this->data['schemas'])) {
-            return;
-        }
-        $this->prepareDataHierarchy('schemas');
-        $this->data['schemas'] = $this->fetchSchemaData();
     }
 
     protected function loadTableNameData($schema)
     {
-        if (isset($this->data['table_names'][$schema])) {
-            return;
-        }
-        $this->prepareDataHierarchy('table_names', $schema);
-        $this->data['table_names'][$schema] = $this->fetchTableNameData($schema);
     }
 
     protected function loadColumnData($table, $schema)
     {
-        if (isset($this->data['columns'][$schema][$table])) {
-            return;
-        }
-        $this->prepareDataHierarchy('columns', $schema, $table);
-        $this->data['columns'][$schema][$table] = $this->fetchColumnData($table, $schema);
     }
 
-    protected function loadConstraintData($schema)
+    protected function loadConstraintData($table, $schema)
     {
-        $this->loadConstraintDataNames($schema);
-        $this->loadConstraintDataKeys($schema);
-        $this->loadConstraintReferences($schema);
-    }
-
-    protected function loadConstraintDataNames($schema)
-    {
-        if (isset($this->data['constraint_names'][$schema])) {
-            return;
-        }
-
-        $this->prepareDataHierarchy('constraint_names', $schema);
-        $this->data['constraint_names'][$schema] = $this->fetchConstraintDataNames($schema);
-    }
-
-    protected function loadConstraintDataKeys($schema)
-    {
-        if (isset($this->data['constraint_keys'][$schema])) {
-            return;
-        }
-
-        $this->prepareDataHierarchy('constraint_keys', $schema);
-        $this->data['constraint_keys'][$schema] = $this->fetchConstraintDataKeys($schema);
-    }
-
-    protected function loadConstraintReferences($schema)
-    {
-        if (isset($this->data['constraint_references'][$schema])) {
-            return;
-        }
-
-        $this->prepareDataHierarchy('constraint_references', $schema);
-        $this->data['constraint_references'][$schema] = $this->fetchConstraintReferences($schema);
     }
 
     protected function loadTriggerData($schema)
     {
-        if (isset($this->data['triggers'][$schema])) {
-            return;
-        }
-
-        $this->prepareDataHierarchy('triggers', $schema);
-        $this->data['triggers'][$schema] = $this->fetchTriggerData($schema);
     }
 
-    abstract protected function fetchSchemaData();
-    abstract protected function fetchTableNameData($schema);
-    abstract protected function fetchColumnData($table, $schema);
-    abstract protected function fetchConstraintDataNames($schema);
-    abstract protected function fetchConstraintDataKeys($schema);
-    abstract protected function fetchConstraintReferences($schema);
-    abstract protected function fetchTriggerData($schema);
 }

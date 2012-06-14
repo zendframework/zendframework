@@ -10,9 +10,9 @@
 
 namespace Zend\Db\Metadata\Source;
 
-use Zend\Db\Metadata\MetadataInterface,
-    Zend\Db\Adapter\Adapter,
-    Zend\Db\Metadata\Object;
+use Zend\Db\Metadata\MetadataInterface;
+use Zend\Db\Adapter\Adapter;
+use Zend\Db\Metadata\Object;
 
 /**
  * @category   Zend
@@ -21,33 +21,45 @@ use Zend\Db\Metadata\MetadataInterface,
  */
 class MysqlMetadata extends AbstractSource
 {
-    protected function fetchSchemaData()
+    protected function loadSchemaData()
     {
+        if (isset($this->data['schemas'])) {
+            return;
+        }
+        $this->prepareDataHierarchy('schemas');
+        
         $platform = $this->adapter->getPlatform();
-
+        
         $isColumns = array(
             'SCHEMA_NAME',
         );
 
-        array_walk($isColumns, function (&$c) use ($platform) { $c = $platform->quoteIdentifier($c); });
-
+        array_walk($isColumns, function (&$c) use ($platform) {
+            $c = $platform->quoteIdentifier($c);
+        });
+        
         $sql = 'SELECT ' . implode(', ', $isColumns)
-             . ' FROM ' . $platform->quoteIdentifierChain(array('INFORMATION_SCHEMA', 'SCHEMATA'))
-             . ' WHERE ' . $platform->quoteIdentifier('SCHEMA_NAME')
-             . ' != ' . $platform->quoteValue('INFORMATION_SCHEMA');
-
+        . ' FROM ' . $platform->quoteIdentifierChain(array('INFORMATION_SCHEMA', 'SCHEMATA'))
+        . ' WHERE ' . $platform->quoteIdentifier('SCHEMA_NAME')
+        . ' != ' . $platform->quoteValue('INFORMATION_SCHEMA');
+        
         $results = $this->adapter->query($sql, Adapter::QUERY_MODE_EXECUTE);
-
+        
         $schemas = array();
         foreach ($results->toArray() as $row) {
             $schemas[] = $row['SCHEMA_NAME'];
         }
 
-        return $schemas;
+        $this->data['schemas'] = $schemas;
     }
 
-    protected function fetchTableNameData($schema)
+    protected function loadTableNameData($schema)
     {
+        if (isset($this->data['table_names'][$schema])) {
+            return;
+        }
+        $this->prepareDataHierarchy('table_names', $schema);
+
         $platform = $this->adapter->getPlatform();
 
         $isColumns = array(
@@ -91,12 +103,16 @@ class MysqlMetadata extends AbstractSource
                 'is_updatable' => ('YES' == $row['IS_UPDATABLE']),
             );
         }
-
-        return $tables;
+        
+        $this->data['table_names'][$schema] = $tables;
     }
 
-    protected function fetchColumnData($table, $schema)
+    protected function loadColumnData($table, $schema)
     {
+        if (isset($this->data['columns'][$schema][$table])) {
+            return;
+        }
+        $this->prepareDataHierarchy('columns', $schema, $table);
         $platform = $this->adapter->getPlatform();
 
         $isColumns = array(
@@ -135,9 +151,9 @@ class MysqlMetadata extends AbstractSource
         }
 
         $results = $this->adapter->query($sql, Adapter::QUERY_MODE_EXECUTE);
-        $data = array();
+        $columns = array();
         foreach ($results->toArray() as $row) {
-            $data[$row['COLUMN_NAME']] = array(
+            $columns[$row['COLUMN_NAME']] = array(
                 'ordinal_position'          => $row['ORDINAL_POSITION'],
                 'column_default'            => $row['COLUMN_DEFAULT'],
                 'is_nullable'               => ('YES' == $row['IS_NULLABLE']),
@@ -151,11 +167,24 @@ class MysqlMetadata extends AbstractSource
             );
         }
 
-        return $data;
+        $this->data['columns'][$schema][$table] = $columns;
     }
 
-    protected function fetchConstraintDataNames($schema)
+    protected function loadConstraintData($table, $schema)
     {
+        $this->loadConstraintDataNames($schema);
+        $this->loadConstraintDataKeys($schema);
+        $this->loadConstraintReferences($schema);
+    }
+
+    protected function loadConstraintDataNames($schema)
+    {
+        if (isset($this->data['constraint_names'][$schema])) {
+            return;
+        }
+
+        $this->prepareDataHierarchy('constraint_names', $schema);
+
         $platform = $this->adapter->getPlatform();
 
         $isColumns = array(
@@ -164,24 +193,26 @@ class MysqlMetadata extends AbstractSource
             'TC.CONSTRAINT_TYPE',
         );
 
-        array_walk($isColumns, function (&$c) use ($platform) { $c = $platform->quoteIdentifierInFragment($c); });
+        array_walk($isColumns, function (&$c) use ($platform) {
+            $c = $platform->quoteIdentifierInFragment($c);
+        });
 
         $sql = 'SELECT ' . implode(', ', $isColumns)
-             . ' FROM ' . $platform->quoteIdentifierInFragment('INFORMATION_SCHEMA.TABLES T')
-             . ' INNER JOIN ' . $platform->quoteIdentifierInFragment('INFORMATION_SCHEMA.TABLE_CONSTRAINTS TC')
-             . ' ON ' . $platform->quoteIdentifierInFragment('T.TABLE_SCHEMA')
-             . '  = ' . $platform->quoteIdentifierInFragment('TC.TABLE_SCHEMA')
-             . ' AND ' . $platform->quoteIdentifierInFragment('T.TABLE_NAME')
-             . '  = ' . $platform->quoteIdentifierInFragment('TC.TABLE_NAME')
-             . ' WHERE ' . $platform->quoteIdentifierInFragment('T.TABLE_TYPE')
-             . ' IN (' . $platform->quoteValueList(array('BASE TABLE', 'VIEW')) . ')';
+        . ' FROM ' . $platform->quoteIdentifierInFragment('INFORMATION_SCHEMA.TABLES T')
+        . ' INNER JOIN ' . $platform->quoteIdentifierInFragment('INFORMATION_SCHEMA.TABLE_CONSTRAINTS TC')
+        . ' ON ' . $platform->quoteIdentifierInFragment('T.TABLE_SCHEMA')
+        . '  = ' . $platform->quoteIdentifierInFragment('TC.TABLE_SCHEMA')
+        . ' AND ' . $platform->quoteIdentifierInFragment('T.TABLE_NAME')
+        . '  = ' . $platform->quoteIdentifierInFragment('TC.TABLE_NAME')
+        . ' WHERE ' . $platform->quoteIdentifierInFragment('T.TABLE_TYPE')
+        . ' IN (' . $platform->quoteValueList(array('BASE TABLE', 'VIEW')) . ')';
 
         if ($schema != self::DEFAULT_SCHEMA) {
             $sql .= ' AND ' . $platform->quoteIdentifierInFragment('T.TABLE_SCHEMA')
-                  . ' = ' . $platform->quoteValue($schema);
+            . ' = ' . $platform->quoteValue($schema);
         } else {
             $sql .= ' AND ' . $platform->quoteIdentifierInFragment('T.TABLE_SCHEMA')
-                  . ' != ' . $platform->quoteValue('INFORMATION_SCHEMA');
+            . ' != ' . $platform->quoteValue('INFORMATION_SCHEMA');
         }
 
         $results = $this->adapter->query($sql, Adapter::QUERY_MODE_EXECUTE);
@@ -191,11 +222,17 @@ class MysqlMetadata extends AbstractSource
             $data[] = array_change_key_case($row, CASE_LOWER);
         }
 
-        return $data;
+        $this->data['constraint_names'][$schema] = $data;
     }
 
-    protected function fetchConstraintDataKeys($schema)
+    protected function loadConstraintDataKeys($schema)
     {
+        if (isset($this->data['constraint_keys'][$schema])) {
+            return;
+        }
+
+        $this->prepareDataHierarchy('constraint_keys', $schema);
+
         $platform = $this->adapter->getPlatform();
 
         $isColumns = array(
@@ -205,26 +242,28 @@ class MysqlMetadata extends AbstractSource
             'KCU.ORDINAL_POSITION',
         );
 
-        array_walk($isColumns, function (&$c) use ($platform) { $c = $platform->quoteIdentifierInFragment($c); });
+        array_walk($isColumns, function (&$c) use ($platform) {
+            $c = $platform->quoteIdentifierInFragment($c);
+        });
 
         $sql = 'SELECT ' . implode(', ', $isColumns)
-             . ' FROM ' . $platform->quoteIdentifierInFragment('INFORMATION_SCHEMA.TABLES T')
-
-             . ' INNER JOIN ' . $platform->quoteIdentifierInFragment('INFORMATION_SCHEMA.KEY_COLUMN_USAGE KCU')
-             . ' ON ' . $platform->quoteIdentifierInFragment('T.TABLE_SCHEMA')
-             . '  = ' . $platform->quoteIdentifierInFragment('KCU.TABLE_SCHEMA')
-             . ' AND ' . $platform->quoteIdentifierInFragment('T.TABLE_NAME')
-             . '  = ' . $platform->quoteIdentifierInFragment('KCU.TABLE_NAME')
-
-             . ' WHERE ' . $platform->quoteIdentifierInFragment('T.TABLE_TYPE')
-             . ' IN (' . $platform->quoteValueList(array('BASE TABLE', 'VIEW')) . ')';
+        . ' FROM ' . $platform->quoteIdentifierInFragment('INFORMATION_SCHEMA.TABLES T')
+        
+        . ' INNER JOIN ' . $platform->quoteIdentifierInFragment('INFORMATION_SCHEMA.KEY_COLUMN_USAGE KCU')
+        . ' ON ' . $platform->quoteIdentifierInFragment('T.TABLE_SCHEMA')
+        . '  = ' . $platform->quoteIdentifierInFragment('KCU.TABLE_SCHEMA')
+        . ' AND ' . $platform->quoteIdentifierInFragment('T.TABLE_NAME')
+        . '  = ' . $platform->quoteIdentifierInFragment('KCU.TABLE_NAME')
+        
+        . ' WHERE ' . $platform->quoteIdentifierInFragment('T.TABLE_TYPE')
+        . ' IN (' . $platform->quoteValueList(array('BASE TABLE', 'VIEW')) . ')';
 
         if ($schema != self::DEFAULT_SCHEMA) {
             $sql .= ' AND ' . $platform->quoteIdentifierInFragment('T.TABLE_SCHEMA')
-                  . ' = ' . $platform->quoteValue($schema);
+            . ' = ' . $platform->quoteValue($schema);
         } else {
             $sql .= ' AND ' . $platform->quoteIdentifierInFragment('T.TABLE_SCHEMA')
-                  . ' != ' . $platform->quoteValue('INFORMATION_SCHEMA');
+            . ' != ' . $platform->quoteValue('INFORMATION_SCHEMA');
         }
 
         $results = $this->adapter->query($sql, Adapter::QUERY_MODE_EXECUTE);
@@ -234,11 +273,17 @@ class MysqlMetadata extends AbstractSource
             $data[] = array_change_key_case($row, CASE_LOWER);
         }
 
-        return $data;
+        $this->data['constraint_keys'][$schema] = $data;
     }
 
-    protected function fetchConstraintReferences($schema)
+    protected function loadConstraintReferences($schema)
     {
+        if (isset($this->data['constraint_references'][$schema])) {
+            return;
+        }
+
+        $this->prepareDataHierarchy('constraint_references', $schema);
+
         $platform = $this->adapter->getPlatform();
 
         $isColumns = array(
@@ -251,34 +296,36 @@ class MysqlMetadata extends AbstractSource
             'KCU.REFERENCED_COLUMN_NAME'
         );
 
-        array_walk($isColumns, function (&$c) use ($platform) { $c = $platform->quoteIdentifierInFragment($c); });
+        array_walk($isColumns, function (&$c) use ($platform) {
+            $c = $platform->quoteIdentifierInFragment($c);
+        });
 
         $sql = 'SELECT ' . implode(', ', $isColumns)
-             . 'FROM ' . $platform->quoteIdentifierInFragment('INFORMATION_SCHEMA.TABLES T')
+        . 'FROM ' . $platform->quoteIdentifierInFragment('INFORMATION_SCHEMA.TABLES T')
 
-             . ' INNER JOIN ' . $platform->quoteIdentifierInFragment('INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS RC')
-             . ' ON ' . $platform->quoteIdentifierInFragment('T.TABLE_SCHEMA')
-             . '  = ' . $platform->quoteIdentifierInFragment('RC.CONSTRAINT_SCHEMA')
-             . ' AND ' . $platform->quoteIdentifierInFragment('T.TABLE_NAME')
-             . '  = ' . $platform->quoteIdentifierInFragment('RC.TABLE_NAME')
+        . ' INNER JOIN ' . $platform->quoteIdentifierInFragment('INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS RC')
+        . ' ON ' . $platform->quoteIdentifierInFragment('T.TABLE_SCHEMA')
+        . '  = ' . $platform->quoteIdentifierInFragment('RC.CONSTRAINT_SCHEMA')
+        . ' AND ' . $platform->quoteIdentifierInFragment('T.TABLE_NAME')
+        . '  = ' . $platform->quoteIdentifierInFragment('RC.TABLE_NAME')
 
-             . ' INNER JOIN ' . $platform->quoteIdentifierInFragment('INFORMATION_SCHEMA.KEY_COLUMN_USAGE KCU')
-             . ' ON ' . $platform->quoteIdentifierInFragment('RC.CONSTRAINT_SCHEMA')
-             . '  = ' . $platform->quoteIdentifierInFragment('KCU.TABLE_SCHEMA')
-             . ' AND ' . $platform->quoteIdentifierInFragment('RC.TABLE_NAME')
-             . '  = ' . $platform->quoteIdentifierInFragment('KCU.TABLE_NAME')
-             . ' AND ' . $platform->quoteIdentifierInFragment('RC.CONSTRAINT_NAME')
-             . '  = ' . $platform->quoteIdentifierInFragment('KCU.CONSTRAINT_NAME')
+        . ' INNER JOIN ' . $platform->quoteIdentifierInFragment('INFORMATION_SCHEMA.KEY_COLUMN_USAGE KCU')
+        . ' ON ' . $platform->quoteIdentifierInFragment('RC.CONSTRAINT_SCHEMA')
+        . '  = ' . $platform->quoteIdentifierInFragment('KCU.TABLE_SCHEMA')
+        . ' AND ' . $platform->quoteIdentifierInFragment('RC.TABLE_NAME')
+        . '  = ' . $platform->quoteIdentifierInFragment('KCU.TABLE_NAME')
+        . ' AND ' . $platform->quoteIdentifierInFragment('RC.CONSTRAINT_NAME')
+        . '  = ' . $platform->quoteIdentifierInFragment('KCU.CONSTRAINT_NAME')
 
-             . 'WHERE ' . $platform->quoteIdentifierInFragment('T.TABLE_TYPE')
-             . ' IN (' . $platform->quoteValueList(array('BASE TABLE', 'VIEW')) . ')';
+        . 'WHERE ' . $platform->quoteIdentifierInFragment('T.TABLE_TYPE')
+        . ' IN (' . $platform->quoteValueList(array('BASE TABLE', 'VIEW')) . ')';
 
         if ($schema != self::DEFAULT_SCHEMA) {
             $sql .= ' AND ' . $platform->quoteIdentifierInFragment('T.TABLE_SCHEMA')
-                  . ' = ' . $platform->quoteValue($schema);
+            . ' = ' . $platform->quoteValue($schema);
         } else {
             $sql .= ' AND ' . $platform->quoteIdentifierInFragment('T.TABLE_SCHEMA')
-                  . ' != ' . $platform->quoteValue('INFORMATION_SCHEMA');
+            . ' != ' . $platform->quoteValue('INFORMATION_SCHEMA');
         }
 
         $results = $this->adapter->query($sql, Adapter::QUERY_MODE_EXECUTE);
@@ -288,13 +335,19 @@ class MysqlMetadata extends AbstractSource
             $data[] = array_change_key_case($row, CASE_LOWER);
         }
 
-        return $data;
+        $this->data['constraint_references'][$schema] = $data;
     }
-    
-    protected function fetchTriggerData($schema)
+
+    protected function loadTriggerData($schema)
     {
+        if (isset($this->data['triggers'][$schema])) {
+            return;
+        }
+
+        $this->prepareDataHierarchy('triggers', $schema);
+
         $platform = $this->adapter->getPlatform();
-        
+
         $isColumns = array(
 //            'TRIGGER_CATALOG',
 //            'TRIGGER_SCHEMA',
@@ -318,7 +371,7 @@ class MysqlMetadata extends AbstractSource
         array_walk($isColumns, function (&$c) use ($platform) {
             $c = $platform->quoteIdentifier($c);
         });
-
+        
         $sql = 'SELECT ' . implode(', ', $isColumns)
         . ' FROM ' . $platform->quoteIdentifierInFragment('INFORMATION_SCHEMA.TRIGGERS')
         . ' WHERE ';
@@ -330,9 +383,9 @@ class MysqlMetadata extends AbstractSource
             $sql .= $platform->quoteIdentifier('TRIGGER_SCHEMA')
             . ' != ' . $platform->quoteValue('INFORMATION_SCHEMA');
         }
-
+        
         $results = $this->adapter->query($sql, Adapter::QUERY_MODE_EXECUTE);
-
+        
         $data = array();
         foreach ($results->toArray() as $row) {
             $row = array_change_key_case($row, CASE_LOWER);
@@ -342,6 +395,6 @@ class MysqlMetadata extends AbstractSource
             $data[$row['trigger_name']] = $row;
         }
 
-        return $data;
+        $this->data['triggers'][$schema] = $data;
     }
 }

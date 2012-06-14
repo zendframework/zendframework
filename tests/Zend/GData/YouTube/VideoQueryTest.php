@@ -20,6 +20,7 @@
  */
 
 namespace ZendTest\GData\YouTube;
+
 use Zend\GData\YouTube;
 use Zend\GData\App;
 
@@ -210,19 +211,22 @@ class VideoQueryTest extends \PHPUnit_Framework_TestCase
         $this->assertNull($query->setLocation($location));
         $this->assertEquals($location, $query->getLocation());
     }
-    
+
     /**
      * test related to ZF2-303
      */
     public function testQueryWithGetFeed()
     {
-    	$youtube = new \Zend\GData\YouTube();
-        $query = $youtube->newVideoQuery();
+        if (!constant('TESTS_ZEND_GDATA_ONLINE_ENABLED')) {
+            $this->markTestSkipped('Zend_GData online tests are not enabled');
+        }
+        $youtube           = new YouTube();
+        $query             = $youtube->newVideoQuery();
         $query->videoQuery = 'php';
         $query->startIndex = 0;
         $query->maxResults = 20;
-        $query->orderBy = 'viewCount';
-        $videoFeed = $youtube->getVideoFeed($query);
-        $this->assertTrue($videoFeed->count()>10);
+        $query->orderBy    = 'viewCount';
+        $videoFeed         = $youtube->getVideoFeed($query);
+        $this->assertTrue($videoFeed->count() > 10);
     }
 }

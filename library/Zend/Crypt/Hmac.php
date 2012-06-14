@@ -41,6 +41,7 @@ class Hmac
      * @param  string $hash
      * @param  string $data
      * @param  string $output
+     * @throws Exception\InvalidArgumentException
      * @return string
      */
     public static function compute($key, $hash, $data, $output = self::STRING)

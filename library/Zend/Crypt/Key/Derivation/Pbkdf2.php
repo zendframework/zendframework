@@ -29,6 +29,7 @@ class Pbkdf2
      * @param  string  $salt
      * @param  integer $iterations The number of iterations
      * @param  integer $length     The output size
+     * @throws Exception\InvalidArgumentException
      * @return string
      */
     public static function calc($hash, $password, $salt, $iterations, $length)

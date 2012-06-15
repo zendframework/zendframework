@@ -21,6 +21,8 @@
 
 namespace Zend\ModuleManager\Feature;
 
+use Zend\ModuleManager\ModuleManagerInterface;
+
 /**
  * @category   Zend
  * @package    Zend_ModuleManager
@@ -33,8 +35,8 @@ interface InitProviderInterface
     /**
      * Initialize workflow
      *
-     * @param  \Zend\ModuleManager\Manager $manager 
+     * @param  \Zend\ModuleManager\ModuleManagerInterface $manager 
      * @return void
      */
-    public function init($manager = null);
+    public function init(ModuleManagerInterface $manager);
 }

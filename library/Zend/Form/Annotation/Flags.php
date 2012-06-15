@@ -28,6 +28,36 @@ namespace Zend\Form\Annotation;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Fieldset extends Element
+class Flags extends AbstractAnnotation
 {
+    protected $flags;
+
+    /**
+     * Receive and process the contents of an annotation
+     * 
+     * @param  string $content 
+     * @return void
+     */
+    public function initialize($content)
+    {
+        $flags = $this->parseJsonContent($content, __METHOD__);
+        if (!is_array($flags)) {
+            throw new Exception\DomainException(sprintf(
+                '%s expects the annotation to define a JSON object or array; received "%s"',
+                __METHOD__,
+                gettype($flags)
+            ));
+        }
+        $this->flags = $flags;
+    }
+
+    /**
+     * Retrieve the flags
+     * 
+     * @return null|array
+     */
+    public function getFlags()
+    {
+        return $this->flags;
+    }
 }

@@ -28,7 +28,6 @@ use Zend\Code\Reflection\ClassReflection;
 use Zend\EventManager\EventManager;
 use Zend\EventManager\EventManagerAwareInterface;
 use Zend\EventManager\EventManagerInterface;
-use Zend\EventManager\EventsCapableInterface;
 use Zend\Form\Factory;
 use Zend\Stdlib\ArrayUtils;
 
@@ -39,9 +38,7 @@ use Zend\Stdlib\ArrayUtils;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class AnnotationBuilder implements
-    EventManagerAwareInterface,
-    EventsCapableInterface
+class AnnotationBuilder implements EventManagerAwareInterface
 {
     protected $annotationManager;
     protected $events;
@@ -121,13 +118,11 @@ class AnnotationBuilder implements
 
         $this->annotationManager = new AnnotationManager(array(
             new AllowEmpty(),
-            new BreakOnFailure(),
-            new Element(),
+            new Attributes(),
             new ErrorMessage(),
             new Exclude(),
-            new Fieldset(),
             new Filter(),
-            new Form(),
+            new Flags(),
             new Input(),
             new InputFilter(),
             new Name(),

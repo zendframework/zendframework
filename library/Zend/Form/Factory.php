@@ -211,6 +211,10 @@ class Factory
      * Specification follows that of {@link createFieldset()}, and adds the
      * following keys:
      *
+     * - input_filter: input filter instance, named input filter class, or 
+     *   array specification for the input filter factory
+     * - hydrator: hydrator instance or named hydrator class
+     *
      * @param  array|Traversable|ArrayAccess $spec
      * @return FormInterface
      * @throws Exception\InvalidArgumentException for an invalid $spec

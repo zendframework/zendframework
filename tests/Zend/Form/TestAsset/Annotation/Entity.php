@@ -17,7 +17,7 @@ class Entity
     /**
       * @Annotation\Filter({"name":"StringTrim"})
       * @Annotation\Validator({"name":"EmailAddress"})
-      * @Annotation\Element({"attributes":{"type":"password","label":"Enter your password"}})
+      * @Annotation\Attributes({"type":"password","label":"Enter your password"})
       */
     public $password;
 }

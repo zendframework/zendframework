@@ -44,9 +44,10 @@ class ElementAnnotationsListener implements ListenerAggregateInterface
     public function attach(EventManagerInterface $events)
     {
         $this->listeners[] = $events->attach('configureElement', array($this, 'handleAllowEmptyAnnotation'));
-        $this->listeners[] = $events->attach('configureElement', array($this, 'handleElementAnnotation'));
+        $this->listeners[] = $events->attach('configureElement', array($this, 'handleAttributesAnnotation'));
         $this->listeners[] = $events->attach('configureElement', array($this, 'handleErrorMessageAnnotation'));
         $this->listeners[] = $events->attach('configureElement', array($this, 'handleFilterAnnotation'));
+        $this->listeners[] = $events->attach('configureElement', array($this, 'handleFlagsAnnotation'));
         $this->listeners[] = $events->attach('configureElement', array($this, 'handleInputAnnotation'));
         $this->listeners[] = $events->attach('configureElement', array($this, 'handleRequiredAnnotation'));
         $this->listeners[] = $events->attach('configureElement', array($this, 'handleValidatorAnnotation'));
@@ -78,18 +79,15 @@ class ElementAnnotationsListener implements ListenerAggregateInterface
         $inputSpec['allow_empty'] = true;
     }
 
-    public function handleElementAnnotation($e)
+    public function handleAttributesAnnotation($e)
     {
         $annotation = $e->getParam('annotation');
-        if (!$annotation instanceof Element) {
+        if (!$annotation instanceof Attributes) {
             return;
         }
 
         $elementSpec = $e->getParam('elementSpec');
-
-        foreach ($annotation->getSpecification() as $key => $value) {
-            $elementSpec['spec'][$key] = $value;
-        }
+        $elementSpec['spec']['attributes'] = $annotation->getAttributes();
     }
 
     public function handleErrorMessageAnnotation($e)
@@ -115,6 +113,17 @@ class ElementAnnotationsListener implements ListenerAggregateInterface
             $inputSpec['filters'] = array();
         }
         $inputSpec['filters'][] = $annotation->getFilter();
+    }
+
+    public function handleFlagsAnnotation($e)
+    {
+        $annotation = $e->getParam('annotation');
+        if (!$annotation instanceof Flags) {
+            return;
+        }
+
+        $elementSpec = $e->getParam('elementSpec');
+        $elementSpec['flags'] = $annotation->getFlags();
     }
 
     public function handleInputAnnotation($e)

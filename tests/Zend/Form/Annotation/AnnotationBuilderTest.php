@@ -81,4 +81,26 @@ class AnnotationBuilderTest extends TestCase
         $this->assertArrayHasKey('type', $attributes);
         $this->assertEquals('text', $attributes['type']);
     }
+
+    public function testComplexEntityCreationWithPriorities()
+    {
+        $entity  = new TestAsset\Annotation\ComplexEntity();
+        $builder = new Annotation\AnnotationBuilder();
+        $form    = $builder->createForm($entity);
+
+        $this->assertEquals('user', $form->getName());
+        $attributes = $form->getAttributes();
+        $this->assertArrayHasKey('legend', $attributes);
+        $this->assertEquals('Register', $attributes['legend']);
+
+        $this->assertFalse($form->has('someComposedObject'));
+        $this->assertTrue($form->has('user_image'));
+        $this->assertTrue($form->has('email'));
+        $this->assertTrue($form->has('password'));
+        $this->assertTrue($form->has('username'));
+
+        $email = $form->get('email');
+        $test  = $form->getIterator()->getIterator()->current();
+        $this->assertSame($email, $test, 'Test is element ' . $test->getName());
+    }
 }

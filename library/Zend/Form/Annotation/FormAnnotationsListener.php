@@ -43,8 +43,8 @@ class FormAnnotationsListener implements ListenerAggregateInterface
      */
     public function attach(EventManagerInterface $events)
     {
-        $this->listeners[] = $events->attach('configureForm', array($this, 'handleFieldsetAnnotation'));
-        $this->listeners[] = $events->attach('configureForm', array($this, 'handleFormAnnotation'));
+        $this->listeners[] = $events->attach('configureForm', array($this, 'handleAttributesAnnotation'));
+        $this->listeners[] = $events->attach('configureForm', array($this, 'handleFlagsAnnotation'));
         $this->listeners[] = $events->attach('configureForm', array($this, 'handleInputFilterAnnotation'));
     }
 
@@ -63,32 +63,26 @@ class FormAnnotationsListener implements ListenerAggregateInterface
         }
     }
 
-    public function handleFieldsetAnnotation($e)
+    public function handleAttributesAnnotation($e)
     {
         $annotation = $e->getParam('annotation');
-        if (!$annotation instanceof Fieldset) {
+        if (!$annotation instanceof Attributes) {
             return;
         }
 
         $formSpec = $e->getParam('formSpec');
-
-        foreach ($annotation->getSpecification() as $key => $value) {
-            $formSpec[$key] = $value;
-        }
+        $formSpec['attributes'] = $annotation->getAttributes();
     }
 
-    public function handleFormAnnotation($e)
+    public function handleFlagsAnnotation($e)
     {
         $annotation = $e->getParam('annotation');
-        if (!$annotation instanceof Form) {
+        if (!$annotation instanceof Flags) {
             return;
         }
 
         $formSpec = $e->getParam('formSpec');
-
-        foreach ($annotation->getSpecification() as $key => $value) {
-            $formSpec[$key] = $value;
-        }
+        $formSpec['flags'] = $annotation->getFlags();
     }
 
     public function handleInputFilterAnnotation($e)

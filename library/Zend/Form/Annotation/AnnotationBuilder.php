@@ -147,16 +147,16 @@ class AnnotationBuilder implements EventManagerAwareInterface
     }
 
     /**
-     * Create a form from an object.
+     * Creates and returns a form specification for use with a factory
      *
      * Parses the object provided, and processes annotations for the class and 
-     * all properties. Information from annotations is then used to create a 
-     * form, its elements, and its input filter.
+     * all properties. Information from annotations is then used to create 
+     * specfications for a form, its elements, and its input filter.
      * 
      * @param  object $entity 
-     * @return \Zend\Form\Form
+     * @return array
      */
-    public function createForm($entity)
+    public function getFormSpecification($entity)
     {
         if (!is_object($entity)) {
             throw new Exception\InvalidArgumentException(sprintf(
@@ -166,7 +166,6 @@ class AnnotationBuilder implements EventManagerAwareInterface
             ));
         }
 
-        $formFactory       = $this->getFormFactory();
         $annotationManager = $this->getAnnotationManager();
         $formSpec          = new ArrayObject();
         $filterSpec        = new ArrayObject();
@@ -190,7 +189,19 @@ class AnnotationBuilder implements EventManagerAwareInterface
             $formSpec['input_filter'] = $filterSpec;
         }
 
-        $formSpec = ArrayUtils::iteratorToArray($formSpec);
+        return ArrayUtils::iteratorToArray($formSpec);
+    }
+
+    /**
+     * Create a form from an object.
+     *
+     * @param  object $entity 
+     * @return \Zend\Form\Form
+     */
+    public function createForm($entity)
+    {
+        $formSpec    = $this->getFormSpecification($entity);
+        $formFactory = $this->getFormFactory();
         return $formFactory->createForm($formSpec);
     }
 

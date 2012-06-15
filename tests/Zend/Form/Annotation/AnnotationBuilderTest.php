@@ -106,4 +106,12 @@ class AnnotationBuilderTest extends TestCase
         $hydrator = $form->getHydrator();
         $this->assertInstanceOf('Zend\Stdlib\Hydrator\ObjectProperty', $hydrator);
     }
+
+    public function testCanRetrieveOnlyFormSpecification()
+    {
+        $entity  = new TestAsset\Annotation\ComplexEntity();
+        $builder = new Annotation\AnnotationBuilder();
+        $spec    = $builder->getFormSpecification($entity);
+        $this->assertInternalType('array', $spec);
+    }
 }

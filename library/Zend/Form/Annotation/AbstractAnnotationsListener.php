@@ -34,6 +34,9 @@ use Zend\EventManager\ListenerAggregateInterface;
  */
 abstract class AbstractAnnotationsListener implements ListenerAggregateInterface
 {
+    /**
+     * @var \Zend\Stdlib\CallbackHandler[]
+     */
     protected $listeners = array();
 
     /**

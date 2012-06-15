@@ -50,6 +50,14 @@ class FormAnnotationsListener extends AbstractAnnotationsListener
         $this->listeners[] = $events->attach('discoverName', array($this, 'discoverFallbackName'));
     }
 
+    /**
+     * Handle the Attributes annotation
+     *
+     * Sets the attributes key of the form specification.
+     * 
+     * @param  \Zend\EventManager\EventInterface $e 
+     * @return void
+     */
     public function handleAttributesAnnotation($e)
     {
         $annotation = $e->getParam('annotation');
@@ -61,6 +69,14 @@ class FormAnnotationsListener extends AbstractAnnotationsListener
         $formSpec['attributes'] = $annotation->getAttributes();
     }
 
+    /**
+     * Handle the Flags annotation
+     *
+     * Sets the flags key of the form specification.
+     * 
+     * @param  \Zend\EventManager\EventInterface $e 
+     * @return void
+     */
     public function handleFlagsAnnotation($e)
     {
         $annotation = $e->getParam('annotation');
@@ -72,6 +88,14 @@ class FormAnnotationsListener extends AbstractAnnotationsListener
         $formSpec['flags'] = $annotation->getFlags();
     }
 
+    /**
+     * Handle the Hydrator annotation
+     *
+     * Sets the hydrator class to use in the form specification.
+     * 
+     * @param  \Zend\EventManager\EventInterface $e 
+     * @return void
+     */
     public function handleHydratorAnnotation($e)
     {
         $annotation = $e->getParam('annotation');
@@ -83,6 +107,14 @@ class FormAnnotationsListener extends AbstractAnnotationsListener
         $formSpec['hydrator'] = $annotation->getHydrator();
     }
 
+    /**
+     * Handle the InputFilter annotation
+     *
+     * Sets the input filter class to use in the form specification.
+     * 
+     * @param  \Zend\EventManager\EventInterface $e 
+     * @return void
+     */
     public function handleInputFilterAnnotation($e)
     {
         $annotation = $e->getParam('annotation');
@@ -94,6 +126,14 @@ class FormAnnotationsListener extends AbstractAnnotationsListener
         $formSpec['input_filter'] = $annotation->getInputFilter();
     }
 
+    /**
+     * Handle the Type annotation
+     *
+     * Sets the form class to use in the form specification.
+     * 
+     * @param  \Zend\EventManager\EventInterface $e 
+     * @return void
+     */
     public function handleTypeAnnotation($e)
     {
         $annotation = $e->getParam('annotation');

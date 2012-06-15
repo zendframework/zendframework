@@ -30,6 +30,9 @@ namespace Zend\Form\Annotation;
  */
 class Filter extends AbstractAnnotation
 {
+    /**
+     * @var array
+     */
     protected $filter;
 
     /**

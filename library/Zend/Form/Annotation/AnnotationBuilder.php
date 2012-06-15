@@ -40,9 +40,39 @@ use Zend\Stdlib\ArrayUtils;
  */
 class AnnotationBuilder implements EventManagerAwareInterface
 {
+    /**
+     * @var AnnotationManager 
+     */
     protected $annotationManager;
+
+    /** 
+     * @var EventManagerInterface 
+     */
     protected $events;
+
+    /** 
+     * @var Factory 
+     */
     protected $formFactory;
+
+    /**
+     * @var array Default annotations to register
+     */
+    protected $defaultAnnotations = array(
+        'AllowEmpty',
+        'Attributes',
+        'ErrorMessage',
+        'Exclude',
+        'Filter',
+        'Flags',
+        'Hydrator',
+        'Input',
+        'InputFilter',
+        'Name',
+        'Required',
+        'Type',
+        'Validator',
+    );
 
     /**
      * Set form factory to use when building form from annotations
@@ -64,6 +94,10 @@ class AnnotationBuilder implements EventManagerAwareInterface
      */
     public function setAnnotationManager(AnnotationManager $annotationManager)
     {
+        foreach ($this->defaultAnnotations as $annotationName) {
+            $class = __NAMESPACE__ . '\\' . $annotationName;
+            $annotationManager->registerAnnotation(new $class);
+        }
         $this->annotationManager = $annotationManager;
         return $this;
     }
@@ -116,21 +150,7 @@ class AnnotationBuilder implements EventManagerAwareInterface
             return $this->annotationManager;
         }
 
-        $this->annotationManager = new AnnotationManager(array(
-            new AllowEmpty(),
-            new Attributes(),
-            new ErrorMessage(),
-            new Exclude(),
-            new Filter(),
-            new Flags(),
-            new Hydrator(),
-            new Input(),
-            new InputFilter(),
-            new Name(),
-            new Required(),
-            new Type(),
-            new Validator(),
-        ));
+        $this->setAnnotationManager(new AnnotationManager());
         return $this->annotationManager;
     }
 

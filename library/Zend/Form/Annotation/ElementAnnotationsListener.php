@@ -54,6 +54,14 @@ class ElementAnnotationsListener extends AbstractAnnotationsListener
         $this->listeners[] = $events->attach('discoverName', array($this, 'discoverFallbackName'));
     }
 
+    /**
+     * Handle the AllowEmpty annotation
+     *
+     * Sets the allow_empty flag on the input specification array.
+     * 
+     * @param  \Zend\EventManager\EventInterface $e 
+     * @return void
+     */
     public function handleAllowEmptyAnnotation($e)
     {
         $annotation = $e->getParam('annotation');
@@ -65,6 +73,14 @@ class ElementAnnotationsListener extends AbstractAnnotationsListener
         $inputSpec['allow_empty'] = true;
     }
 
+    /**
+     * Handle the Attributes annotation
+     *
+     * Sets the attributes array of the element specification.
+     * 
+     * @param  \Zend\EventManager\EventInterface $e 
+     * @return void
+     */
     public function handleAttributesAnnotation($e)
     {
         $annotation = $e->getParam('annotation');
@@ -76,6 +92,14 @@ class ElementAnnotationsListener extends AbstractAnnotationsListener
         $elementSpec['spec']['attributes'] = $annotation->getAttributes();
     }
 
+    /**
+     * Handle the ErrorMessage annotation
+     *
+     * Sets the error_message of the input specification.
+     * 
+     * @param  \Zend\EventManager\EventInterface $e 
+     * @return void
+     */
     public function handleErrorMessageAnnotation($e)
     {
         $annotation = $e->getParam('annotation');
@@ -87,6 +111,14 @@ class ElementAnnotationsListener extends AbstractAnnotationsListener
         $inputSpec['error_message'] = $annotation->getMessage();
     }
 
+    /**
+     * Handle the Filter annotation
+     *
+     * Adds a filter to the filter chain specification for the input.
+     * 
+     * @param  \Zend\EventManager\EventInterface $e 
+     * @return void
+     */
     public function handleFilterAnnotation($e)
     {
         $annotation = $e->getParam('annotation');
@@ -101,6 +133,15 @@ class ElementAnnotationsListener extends AbstractAnnotationsListener
         $inputSpec['filters'][] = $annotation->getFilter();
     }
 
+    /**
+     * Handle the Flags annotation
+     *
+     * Sets the element flags in the specification (used typically for setting 
+     * priority).
+     * 
+     * @param  \Zend\EventManager\EventInterface $e 
+     * @return void
+     */
     public function handleFlagsAnnotation($e)
     {
         $annotation = $e->getParam('annotation');
@@ -112,6 +153,15 @@ class ElementAnnotationsListener extends AbstractAnnotationsListener
         $elementSpec['flags'] = $annotation->getFlags();
     }
 
+    /**
+     * Handle the Input annotation
+     *
+     * Sets the filter specification for the current element to the specified 
+     * input class name.
+     * 
+     * @param  \Zend\EventManager\EventInterface $e 
+     * @return void
+     */
     public function handleInputAnnotation($e)
     {
         $annotation = $e->getParam('annotation');
@@ -124,6 +174,14 @@ class ElementAnnotationsListener extends AbstractAnnotationsListener
         $filterSpec[$name] = $annotation->getInput();
     }
 
+    /**
+     * Handle the Required annotation
+     *
+     * Sets the required flag on the input based on the annotation value.
+     * 
+     * @param  \Zend\EventManager\EventInterface $e 
+     * @return void
+     */
     public function handleRequiredAnnotation($e)
     {
         $annotation = $e->getParam('annotation');
@@ -135,6 +193,14 @@ class ElementAnnotationsListener extends AbstractAnnotationsListener
         $inputSpec['required'] = (bool) $annotation->getRequired();
     }
 
+    /**
+     * Handle the Type annotation
+     *
+     * Sets the element class type to use in the element specification.
+     * 
+     * @param  \Zend\EventManager\EventInterface $e 
+     * @return void
+     */
     public function handleTypeAnnotation($e)
     {
         $annotation = $e->getParam('annotation');
@@ -146,6 +212,14 @@ class ElementAnnotationsListener extends AbstractAnnotationsListener
         $elementSpec['spec']['type'] = $annotation->getType();
     }
 
+    /**
+     * Handle the Validator annotation
+     *
+     * Adds a validator to the validator chain of the input specification.
+     * 
+     * @param  \Zend\EventManager\EventInterface $e 
+     * @return void
+     */
     public function handleValidatorAnnotation($e)
     {
         $annotation = $e->getParam('annotation');

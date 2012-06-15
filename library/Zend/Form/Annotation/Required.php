@@ -23,8 +23,18 @@ namespace Zend\Form\Annotation;
 
 use Zend\Filter\Boolean as BooleanFilter;
 
+/**
+ * @category   Zend
+ * @package    Zend_Form
+ * @subpackage Annotation
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
 class Required extends AbstractAnnotation
 {
+    /**
+     * @var bool
+     */
     protected $required = true;
 
     /**

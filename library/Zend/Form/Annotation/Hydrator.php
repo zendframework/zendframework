@@ -30,6 +30,9 @@ namespace Zend\Form\Annotation;
  */
 class Hydrator extends AbstractAnnotation
 {
+    /**
+     * @var string
+     */
     protected $hydrator;
 
     /**

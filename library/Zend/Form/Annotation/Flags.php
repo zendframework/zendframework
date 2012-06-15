@@ -30,6 +30,9 @@ namespace Zend\Form\Annotation;
  */
 class Flags extends AbstractAnnotation
 {
+    /**
+     * @var array
+     */
     protected $flags;
 
     /**

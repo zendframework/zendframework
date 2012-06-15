@@ -30,6 +30,9 @@ namespace Zend\Form\Annotation;
  */
 class ErrorMessage extends AbstractAnnotation
 {
+    /**
+     * @var string
+     */
     protected $message;
 
     /**

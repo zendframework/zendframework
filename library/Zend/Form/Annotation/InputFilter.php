@@ -30,6 +30,9 @@ namespace Zend\Form\Annotation;
  */
 class InputFilter extends AbstractAnnotation
 {
+    /**
+     * @var string
+     */
     protected $inputFilter;
 
     /**

@@ -28,12 +28,12 @@ namespace Zend\Form\Annotation;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Name extends AbstractAnnotation
+class Type extends AbstractAnnotation
 {
     /**
      * @var string
      */
-    protected $name;
+    protected $type;
 
     /**
      * Receive and process the contents of an annotation
@@ -43,28 +43,27 @@ class Name extends AbstractAnnotation
      */
     public function initialize($content)
     {
-        $name = $content;
+        $type = $content;
         if ('"' === substr($content, 0, 1)) {
-            $name = $this->parseJsonContent($content, __METHOD__);
+            $type = $this->parseJsonContent($content, __METHOD__);
         }
-        if (!is_string($name)) {
+        if (!is_string($type)) {
             throw new Exception\DomainException(sprintf(
                 '%s expects the annotation to define a string or a JSON string; received "%s"',
                 __METHOD__,
-                gettype($name)
+                gettype($type)
             ));
         }
-        $this->name = $name;
+        $this->type = $type;
     }
 
     /**
-     * Retrieve the name
+     * Retrieve the class type
      * 
      * @return null|string
      */
-    public function getName()
+    public function getType()
     {
-        return $this->name;
+        return $this->type;
     }
 }
-

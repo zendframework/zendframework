@@ -30,6 +30,9 @@ namespace Zend\Form\Annotation;
  */
 class Validator extends AbstractAnnotation
 {
+    /**
+     * @var array
+     */
     protected $validator;
 
     /**

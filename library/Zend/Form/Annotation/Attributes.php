@@ -30,6 +30,9 @@ namespace Zend\Form\Annotation;
  */
 class Attributes extends AbstractAnnotation
 {
+    /**
+     * @var array
+     */
     protected $attributes;
 
     /**

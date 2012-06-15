@@ -34,88 +34,149 @@ abstract class AbstractAccept implements HeaderInterface
 {
 
     protected $values = array();
-    protected $prioritizedValues = array();
     protected $priorityQueue;
-    protected $types = array();
 
-    protected $regexAddType; 
-    
+    protected $regexAddType;
+
+
     /**
      * Factory method: parse Accept header string
-     * 
-     * @param  string $headerLine 
+     *
+     * @param  string $headerLine
      * @return Accept
      */
     public static function fromString($headerLine)
     {
         $acceptHeader = new static();
 
+        if (!strpos($headerLine, ': ')) {
+            throw new Exception\InvalidArgumentException(
+                        'Invalid header line for ' . $acceptHeader->getFieldName() . ' header string'
+                      );
+        }
+
         list($name, $values) = explode(': ', $headerLine, 2);
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== strtolower($acceptHeader->getFieldName())) {
-            throw new Exception\InvalidArgumentException('Invalid header line for ' . $acceptHeader->getFieldName() . ' header string');
+            throw new Exception\InvalidArgumentException(
+                        'Invalid header line for ' . $acceptHeader->getFieldName() . ' header string'
+                      );
         }
 
         // process multiple accept values
-        $acceptHeader->values = explode(',', $values);
+        $values = explode(',', $values);
 
-        foreach ($acceptHeader->values as $index => $value) {
+        foreach ($values as $value) {
             $value = trim($value);
-            $acceptHeader->values[$index] = $value;
 
-            $payload = array(
-                'type' => strtolower($value),
-                'priority'   => 1,
-            );
-            if (strstr($value, ';')) {
-                list($type, $priority) = explode(';', $value, 2);
-                $payload['type'] = strtolower(trim($type));
-
-                // parse priority
-                $priority = explode(';', trim($priority));
-
-                $finalPriority = 1;
-                foreach ($priority as $p) {
-                    list($type, $value) = explode('=', trim($p), 2);
-                    if ($type == 'q') {
-                        $payload['priority'] = $value;
-                    } elseif ($type == 'level') {
-                        $payload['level'] = $value;
-                    }
-                }
-            }
-
-            if (!isset($acceptHeader->types[$payload['type']])) {
-                $acceptHeader->types[$payload['type']] = true;
-            }
-
-            $acceptHeader->prioritizedValues[] = $payload;
+            $payload = $acceptHeader->getPayloadValuesFromString($value);
+            $acceptHeader->values[] = $payload;
         }
 
         return $acceptHeader;
     }
 
+    protected function getPayloadValuesFromString($mediaType)
+    {
+        $raw = $mediaType;
+        if ($pos = strpos($mediaType, '/')) {
+            $type = trim(substr($mediaType, 0, $pos));
+        } else {
+            $type = trim(substr($mediaType, 0));
+        }
+
+        $params = array();
+        if(($pos = strpos($mediaType,';'))) {
+            $paramsStrings = explode(';', substr($mediaType, $pos+1));
+
+            foreach($paramsStrings as $value) { // fetch q=0.2 to array
+                $explode = explode('=', $value, 2);
+                $params[trim($explode[0])] = trim($explode[1]);
+            }
+        }
+
+        if ($pos = strpos($mediaType, ';')) {
+            $mediaType = trim(substr($mediaType, 0, $pos));
+        }
+
+        if ($pos = strpos($mediaType, '/')) {
+            $subtypeWhole = $format = $subtype = trim(substr($mediaType, strpos($mediaType, '/')+1));
+        } else {
+            $subtypeWhole = '';
+            $format = '*';
+            $subtype = '*';
+        }
+
+        $pos = strpos($subtype, '+');
+        if (false !== $pos) {
+            $format = trim(substr($subtype, $pos+1));
+            $subtype = trim(substr($subtype, 0, $pos));
+        }
+
+        return array(
+                'typeString' => trim($mediaType),
+                'type'    => $type,
+                'subtype' => $subtype,
+                'subtypeRaw' => $subtypeWhole,
+                'format'  => $format,
+                'priority' => isset($params['q']) ? $params['q'] : 1,
+                'params' => $params,
+                'raw' => trim($raw)
+        );
+    }
+
     /**
      * Get field value
-     * 
+     *
      * @return string
      */
     public function getFieldValue()
     {
+        return $this->getFieldValueInternal($this->values);
+    }
+
+    protected function getFieldValueInternal(array $values)
+    {
         $strings = array();
-        foreach ($this->values as $value) {
-            $strings[] = implode('; ', (array) $value);
+        foreach ($values as $value) {
+            $params = $value['params'];
+            array_walk($params, array($this, 'assembleFieldValueParam'));
+            $strings[] = $value['typeString'] . ';'.implode(';', $params);
         }
-        return implode(',', $strings);
+
+        return implode(', ', $strings);
+    }
+
+    /*
+     * Assemble and escape the field value parameters based on RFC 2616 secion 2.1
+     *
+     * @todo someone should review this thoroughly
+     * @param string value
+     * @param string $key
+     * @return void
+     */
+    protected function assembleFieldValueParam(&$value, $key)
+    {
+        $separators = array('(', ')', '<', '>', '@', ',', ';', ':', '\\', '"',
+                            '/', '[', ']', '?', '=', '{', '}',  ' ',  "\t");
+        $escaped = addcslashes($value, "\42!@\127!@\0..\37!@\177..\255");
+
+        if ($escaped == $value && ! array_intersect(str_split($value), $separators)) {
+            $value = $key.'='.$value;
+        } else {
+            $value = $key.'="'.$escaped.'"';
+        }
+
+        return $value;
     }
 
     /**
      * Add a type, with the given priority
-     * 
-     * @param  string $type 
-     * @param  int|float $priority 
-     * @param  int $level 
+     *
+     * @param  string $type
+     * @param  int|float $priority
+     * @param  int $level
      * @return Accept
      */
     protected function addType($type, $priority = 1, $level = null)
@@ -151,7 +212,7 @@ abstract class AbstractAccept implements HeaderInterface
                 $level
             ));
         }
-        
+
         $this->types[$type] = true;
 
         if (!empty($level)) {
@@ -166,7 +227,7 @@ abstract class AbstractAccept implements HeaderInterface
                 'priority'   => $priority
             );
         }
-        
+
         $value = $type;
         if (!empty($level)) {
             $value .= sprintf(';level=%d', $level);
@@ -181,8 +242,8 @@ abstract class AbstractAccept implements HeaderInterface
 
     /**
      * Does the header have the requested type?
-     * 
-     * @param  string $type 
+     *
+     * @param  string $type
      * @return bool
      */
     protected function hasType($type)
@@ -195,7 +256,7 @@ abstract class AbstractAccept implements HeaderInterface
         }
 
         // Check for media type
-        if (false !== strstr($type, '/')) {      
+        if (false !== strstr($type, '/')) {
             // Parent type wildcard matching
             $parent = substr($type, 0, strpos($type, '/'));
             if (isset($this->types[$parent . '/*'])) {
@@ -217,7 +278,7 @@ abstract class AbstractAccept implements HeaderInterface
 
     /**
      * Get a prioritized list of types
-     * 
+     *
      * @return PriorityQueue
      */
     public function getPrioritized()
@@ -231,19 +292,19 @@ abstract class AbstractAccept implements HeaderInterface
 
     /**
      * Create the priority queue
-     * 
+     *
      * @return void
      */
     protected function createPriorityQueue()
     {
         $queue = new PriorityQueue();
         foreach ($this->prioritizedValues as $data) {
-            // Do not include priority 0 in list
+            // Do not include priority 0 in list. see RFC2616 section 3.9
             if ($data['priority'] == 0) {
                 continue;
             }
 
-            // Hack to ensure priorities are correct; was not treating 
+            // Hack to ensure priorities are correct; was not treating
             // fractional values correctly
             $suffix = '';
             $level = 0;
@@ -252,6 +313,7 @@ abstract class AbstractAccept implements HeaderInterface
                 $suffix = ";level=$level";
             }
             $queue->insert($data['type'].$suffix, (float) $data['priority'] * 1000 + $level);
+//                     $queue->insert($data, (float) $data['priority'] * 1000 + $level);
         }
         $this->priorityQueue = $queue;
     }

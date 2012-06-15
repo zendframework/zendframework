@@ -213,14 +213,12 @@ class AnnotationBuilder implements EventManagerAwareInterface
      * @param  ArrayObject $formSpec 
      * @param  ArrayObject $filterSpec 
      * @return void
+     * @triggers discoverName
      * @triggers configureForm
      */
     protected function configureForm($annotations, $reflection, $formSpec, $filterSpec)
     {
-        $name = $reflection->getShortName();
-        if ($annotations->hasAnnotation('Zend\Form\Annotation\Name')) {
-            $name = $this->getNameFromAnnotation($annotations);
-        }
+        $name                   = $this->discoverName($annotations, $reflection);
         $formSpec['name']       = $name;
         $formSpec['attributes'] = array();
         $formSpec['elements']   = array();
@@ -245,6 +243,7 @@ class AnnotationBuilder implements EventManagerAwareInterface
      * @param  ArrayObject $formSpec 
      * @param  ArrayObject $filterSpec 
      * @return void
+     * @triggers discoverName
      * @triggers configureElement
      */
     protected function configureElement($annotations, $reflection, $formSpec, $filterSpec)
@@ -254,10 +253,8 @@ class AnnotationBuilder implements EventManagerAwareInterface
             return;
         }
 
-        $name = $reflection->getName();
-        if ($annotations->hasAnnotation('Zend\Form\Annotation\Name')) {
-            $name = $this->getNameFromAnnotation($annotations);
-        }
+        $events = $this->events();
+        $name   = $this->discoverName($annotations, $reflection);
 
         $elementSpec = new ArrayObject(array(
             'flags' => array(),
@@ -267,7 +264,6 @@ class AnnotationBuilder implements EventManagerAwareInterface
         ));
         $inputSpec   = new ArrayObject(array('name' => $name));
 
-        $events = $this->events();
         foreach ($annotations as $annotation) {
             $events->trigger(__FUNCTION__, $this, array(
                 'annotation'  => $annotation, 
@@ -288,22 +284,20 @@ class AnnotationBuilder implements EventManagerAwareInterface
     }
 
     /**
-     * Retrieve the name from an annotation
-     *
-     * Loops through annotations until a Name annotation is encountered. Once 
-     * encountered, the value of getName() is returned.
+     * Discover the name of the given form or element
      * 
      * @param  AnnotationCollection $annotations 
-     * @return string|false
+     * @param  \Reflector $reflection 
+     * @return string
      */
-    protected function getNameFromAnnotation($annotations)
+    protected function discoverName($annotations, $reflection)
     {
-        foreach ($annotations as $annotation) {
-            if (!$annotation instanceof Name) {
-                continue;
-            }
-            return $annotation->getName();
-        }
-        return false;
+        $results = $this->events()->trigger('discoverName', $this, array(
+            'annotations' => $annotations,
+            'reflection'  => $reflection,
+        ), function ($r) {
+            return (is_string($r) && !empty($r));
+        });
+        return $results->last();
     }
 }

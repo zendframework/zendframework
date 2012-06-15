@@ -22,7 +22,6 @@
 namespace Zend\Form\Annotation;
 
 use Zend\EventManager\EventManagerInterface;
-use Zend\EventManager\ListenerAggregateInterface;
 
 /**
  * @category   Zend
@@ -31,10 +30,8 @@ use Zend\EventManager\ListenerAggregateInterface;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class FormAnnotationsListener implements ListenerAggregateInterface
+class FormAnnotationsListener extends AbstractAnnotationsListener
 {
-    protected $listeners = array();
-
     /**
      * Attach listeners
      * 
@@ -47,21 +44,9 @@ class FormAnnotationsListener implements ListenerAggregateInterface
         $this->listeners[] = $events->attach('configureForm', array($this, 'handleFlagsAnnotation'));
         $this->listeners[] = $events->attach('configureForm', array($this, 'handleHydratorAnnotation'));
         $this->listeners[] = $events->attach('configureForm', array($this, 'handleInputFilterAnnotation'));
-    }
 
-    /**
-     * Detach listeners
-     * 
-     * @param  EventManagerInterface $events 
-     * @return void
-     */
-    public function detach(EventManagerInterface $events)
-    {
-        foreach ($this->listeners as $index => $listener) {
-            if (false !== $events->detach($listener)) {
-                unset($this->listeners[$index]);
-            }
-        }
+        $this->listeners[] = $events->attach('discoverName', array($this, 'handleNameAnnotation'));
+        $this->listeners[] = $events->attach('discoverName', array($this, 'discoverFallbackName'));
     }
 
     public function handleAttributesAnnotation($e)

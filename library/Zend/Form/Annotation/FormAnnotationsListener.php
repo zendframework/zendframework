@@ -45,6 +45,7 @@ class FormAnnotationsListener implements ListenerAggregateInterface
     {
         $this->listeners[] = $events->attach('configureForm', array($this, 'handleAttributesAnnotation'));
         $this->listeners[] = $events->attach('configureForm', array($this, 'handleFlagsAnnotation'));
+        $this->listeners[] = $events->attach('configureForm', array($this, 'handleHydratorAnnotation'));
         $this->listeners[] = $events->attach('configureForm', array($this, 'handleInputFilterAnnotation'));
     }
 
@@ -83,6 +84,17 @@ class FormAnnotationsListener implements ListenerAggregateInterface
 
         $formSpec = $e->getParam('formSpec');
         $formSpec['flags'] = $annotation->getFlags();
+    }
+
+    public function handleHydratorAnnotation($e)
+    {
+        $annotation = $e->getParam('annotation');
+        if (!$annotation instanceof Hydrator) {
+            return;
+        }
+
+        $formSpec = $e->getParam('formSpec');
+        $formSpec['hydrator'] = $annotation->getHydrator();
     }
 
     public function handleInputFilterAnnotation($e)

@@ -6,6 +6,7 @@ use Zend\Form\Annotation;
 /**
  * @Annotation\Name("user")
  * @Annotation\Attributes({"legend":"Register"})
+ * @Annotation\Hydrator(Zend\Stdlib\Hydrator\ObjectProperty)
  */
 class ComplexEntity
 {

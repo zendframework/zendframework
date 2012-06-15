@@ -123,6 +123,7 @@ class AnnotationBuilder implements EventManagerAwareInterface
             new Exclude(),
             new Filter(),
             new Flags(),
+            new Hydrator(),
             new Input(),
             new InputFilter(),
             new Name(),

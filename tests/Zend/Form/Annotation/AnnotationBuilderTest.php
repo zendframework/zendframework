@@ -114,4 +114,22 @@ class AnnotationBuilderTest extends TestCase
         $spec    = $builder->getFormSpecification($entity);
         $this->assertInternalType('array', $spec);
     }
+
+    public function testAllowsExtensionOfEntities()
+    {
+        $entity  = new TestAsset\Annotation\ExtendedEntity();
+        $builder = new Annotation\AnnotationBuilder();
+        $form    = $builder->createForm($entity);
+
+        $this->assertTrue($form->has('username'));
+        $this->assertTrue($form->has('password'));
+        $this->assertTrue($form->has('email'));
+
+        $this->assertEquals('extended', $form->getName());
+        $expected = array('username', 'password', 'email');
+        $test     = array();
+        foreach ($form as $element) {
+            $test[] = $element->getName();
+        }
+    }
 }

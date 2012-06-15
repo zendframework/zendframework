@@ -619,7 +619,7 @@ $route = Part::factory(array(
 ]]></programlisting>
 
       <para>
-        As you can see its pretty straight forward to specify the query part. 
+        As you can see, it's pretty straight forward to specify the query part. 
         This then allows you to create query strings using the url view helper. 
       </para>
       
@@ -628,24 +628,29 @@ $this->url(
     'page/query', 
     array(
         'name'=>'my-test-page', 
-        'format' => 'rss'
+        'format' => 'rss',
+        'limit' => 10,
     )
 );
 ]]></programlisting>
 
       <para>
-        As you can see above you must add "/query" to your route name in order 
-        to append a query string. When passing parameters into the url helper 
-        any that have not been explicitly defined in the "page" route would then
-        be appended as a query string. If you do not specify "/query" then 
-        any additional parameters would be ignored.
+        As you can see above, you must add "/query" to your route name in order 
+        to append a query string. If you do not specify "/query" in the route 
+        name then no query string will be appended. 
+      </para<
+      
       </para>
+        Our example "page" route has only one defined parameter of "name" 
+        ("/page[/:name]"), meaning that the remaining parameters of "format" 
+        and "limit" will then be appended as a query string.
+     </para>
       
       <para>
-        The output from our example should then give be 
-        "/page/mys-test-page?format=rss"
+        The output from our example should then be
+        "/page/mys-test-page?format=rss&limit=10"
       </para>
-
+      
     </section>
     
   </section>

@@ -47,6 +47,7 @@ class ElementAnnotationsListener extends AbstractAnnotationsListener
         $this->listeners[] = $events->attach('configureElement', array($this, 'handleFlagsAnnotation'));
         $this->listeners[] = $events->attach('configureElement', array($this, 'handleInputAnnotation'));
         $this->listeners[] = $events->attach('configureElement', array($this, 'handleRequiredAnnotation'));
+        $this->listeners[] = $events->attach('configureElement', array($this, 'handleTypeAnnotation'));
         $this->listeners[] = $events->attach('configureElement', array($this, 'handleValidatorAnnotation'));
 
         $this->listeners[] = $events->attach('discoverName', array($this, 'handleNameAnnotation'));
@@ -132,6 +133,17 @@ class ElementAnnotationsListener extends AbstractAnnotationsListener
 
         $inputSpec = $e->getParam('inputSpec');
         $inputSpec['required'] = (bool) $annotation->getRequired();
+    }
+
+    public function handleTypeAnnotation($e)
+    {
+        $annotation = $e->getParam('annotation');
+        if (!$annotation instanceof Type) {
+            return;
+        }
+
+        $elementSpec = $e->getParam('elementSpec');
+        $elementSpec['spec']['type'] = $annotation->getType();
     }
 
     public function handleValidatorAnnotation($e)

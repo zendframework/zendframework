@@ -44,6 +44,7 @@ class FormAnnotationsListener extends AbstractAnnotationsListener
         $this->listeners[] = $events->attach('configureForm', array($this, 'handleFlagsAnnotation'));
         $this->listeners[] = $events->attach('configureForm', array($this, 'handleHydratorAnnotation'));
         $this->listeners[] = $events->attach('configureForm', array($this, 'handleInputFilterAnnotation'));
+        $this->listeners[] = $events->attach('configureForm', array($this, 'handleTypeAnnotation'));
 
         $this->listeners[] = $events->attach('discoverName', array($this, 'handleNameAnnotation'));
         $this->listeners[] = $events->attach('discoverName', array($this, 'discoverFallbackName'));
@@ -91,5 +92,16 @@ class FormAnnotationsListener extends AbstractAnnotationsListener
 
         $formSpec = $e->getParam('formSpec');
         $formSpec['input_filter'] = $annotation->getInputFilter();
+    }
+
+    public function handleTypeAnnotation($e)
+    {
+        $annotation = $e->getParam('annotation');
+        if (!$annotation instanceof Type) {
+            return;
+        }
+
+        $formSpec = $e->getParam('formSpec');
+        $formSpec['type'] = $annotation->getType();
     }
 }

@@ -128,6 +128,7 @@ class AnnotationBuilder implements EventManagerAwareInterface
             new InputFilter(),
             new Name(),
             new Required(),
+            new Type(),
             new Validator(),
         ));
         return $this->annotationManager;

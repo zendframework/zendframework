@@ -132,4 +132,15 @@ class AnnotationBuilderTest extends TestCase
             $test[] = $element->getName();
         }
     }
+
+    public function testAllowsSpecifyingFormAndElementTypes()
+    {
+        $entity  = new TestAsset\Annotation\TypedEntity();
+        $builder = new Annotation\AnnotationBuilder();
+        $form    = $builder->createForm($entity);
+
+        $this->assertInstanceOf('ZendTest\Form\TestAsset\Annotation\Form', $form);
+        $element = $form->get('typed_element');
+        $this->assertInstanceOf('ZendTest\Form\TestAsset\Annotation\Element', $element);
+    }
 }

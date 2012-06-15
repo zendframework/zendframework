@@ -106,6 +106,8 @@ interface AdapterInterface
 
     /**
      * Compare two big integers
+     * Returns < 0 if leftOperand is less than rightOperand;
+     * > 0 if leftOperand is greater than rightOperand, and 0 if they are equal.
      *
      * @param  string $leftOperand
      * @param  string $rightOperand

@@ -33,8 +33,8 @@ class Bcmath implements AdapterInterface
     /**
      * Create string representing big integer in decimal form from arbitrary integer format
      *
-     * @param string $operand
-     * @param int|null $base
+     * @param  string $operand
+     * @param  int|null $base
      * @return bool|string
      */
     public function init($operand, $base = null)
@@ -79,8 +79,8 @@ class Bcmath implements AdapterInterface
     /**
      * Add two big integers
      *
-     * @param string $leftOperand
-     * @param string $rightOperand
+     * @param  string $leftOperand
+     * @param  string $rightOperand
      * @return string
      */
     public function add($leftOperand, $rightOperand)
@@ -91,8 +91,8 @@ class Bcmath implements AdapterInterface
     /**
      * Subtract two big integers
      *
-     * @param string $leftOperand
-     * @param string $rightOperand
+     * @param  string $leftOperand
+     * @param  string $rightOperand
      * @return string
      */
     public function sub($leftOperand, $rightOperand)
@@ -113,22 +113,23 @@ class Bcmath implements AdapterInterface
     }
 
     /**
-     * Divide two big integers and return integer part result
-     * Raises exception if the denominator is zero
+     * Divide two big integers and return integer part result.
+     * Raises exception if the divisor is zero.
      *
      * @param string $leftOperand
      * @param string $rightOperand
      * @return string
-     * @throws \Zend\Math\BigInteger\Exception\DivisionByZeroException
+     * @throws Exception\DivisionByZeroException
      */
     public function div($leftOperand, $rightOperand)
     {
-        $result = @bcdiv($leftOperand, $rightOperand);
-        if (null === $result) {
+        if ($rightOperand == 0) {
             throw new Exception\DivisionByZeroException(
-                "Division by zero: {$leftOperand} / {$rightOperand}"
+                "Division by zero; divisor = {$rightOperand}"
             );
         }
+
+        $result = bcdiv($leftOperand, $rightOperand);
 
         return $result;
     }
@@ -136,8 +137,8 @@ class Bcmath implements AdapterInterface
     /**
      * Raise a big integers to another
      *
-     * @param string $operand
-     * @param string $exp
+     * @param  string $operand
+     * @param  string $exp
      * @return string
      */
     public function pow($operand, $exp)
@@ -148,7 +149,7 @@ class Bcmath implements AdapterInterface
     /**
      * Get the square root of a big integer
      *
-     * @param string $operand
+     * @param  string $operand
      * @return string
      */
     public function sqrt($operand)
@@ -159,8 +160,8 @@ class Bcmath implements AdapterInterface
     /**
      * Get modulus of a big integer
      *
-     * @param string $leftOperand
-     * @param string $rightOperand
+     * @param  string $leftOperand
+     * @param  string $rightOperand
      * @return string
      */
     public function mod($leftOperand, $rightOperand)
@@ -172,9 +173,9 @@ class Bcmath implements AdapterInterface
     /**
      * Raise a big integer to another, reduced by a specified modulus
      *
-     * @param string $leftOperand
-     * @param string $rightOperand
-     * @param string $modulus
+     * @param  string $leftOperand
+     * @param  string $rightOperand
+     * @param  string $modulus
      * @return string
      */
     public function powmod($leftOperand, $rightOperand, $modulus)
@@ -184,7 +185,8 @@ class Bcmath implements AdapterInterface
 
     /**
      * Compare two big integers and returns result as an integer where
-     * 0 means both are equal, 1 that leftOperand is larger, -1 that rightOperand is larger.
+     * Returns < 0 if leftOperand is less than rightOperand;
+     * > 0 if leftOperand is greater than rightOperand, and 0 if they are equal.
      *
      * @param  string $leftOperand
      * @param  string $rightOperand
@@ -198,8 +200,8 @@ class Bcmath implements AdapterInterface
     /**
      * Convert big integer into it's binary number representation
      *
-     * @param string $operand
-     * @param bool $twoc return in two's complement form
+     * @param  string $operand
+     * @param  bool $twoc return in two's complement form
      * @return string
      */
     public function intToBin($operand, $twoc = false)
@@ -237,8 +239,8 @@ class Bcmath implements AdapterInterface
     /**
      * Convert big integer into it's binary number representation
      *
-     * @param string $bytes
-     * @param bool   $twoc whether binary number is in twos' complement form
+     * @param  string $bytes
+     * @param  bool   $twoc whether binary number is in twos' complement form
      * @return string
      */
     public function binToInt($bytes, $twoc = false)

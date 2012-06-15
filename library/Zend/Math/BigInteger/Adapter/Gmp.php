@@ -24,8 +24,8 @@ class Gmp implements AdapterInterface
     /**
      * Create string representing big integer in decimal form from arbitrary integer format
      *
-     * @param string $operand
-     * @param integer|null $base
+     * @param  string $operand
+     * @param  integer|null $base
      * @return bool|string
      */
     public function init($operand, $base = null)
@@ -56,8 +56,8 @@ class Gmp implements AdapterInterface
     /**
      * Add two big integers
      *
-     * @param string $leftOperand
-     * @param string $rightOperand
+     * @param  string $leftOperand
+     * @param  string $rightOperand
      * @return string
      */
     public function add($leftOperand, $rightOperand)
@@ -69,8 +69,8 @@ class Gmp implements AdapterInterface
     /**
      * Subtract two big integers
      *
-     * @param string $leftOperand
-     * @param string $rightOperand
+     * @param  string $leftOperand
+     * @param  string $rightOperand
      * @return string
      */
     public function sub($leftOperand, $rightOperand)
@@ -82,8 +82,8 @@ class Gmp implements AdapterInterface
     /**
      * Multiply two big integers
      *
-     * @param string $leftOperand
-     * @param string $rightOperand
+     * @param  string $leftOperand
+     * @param  string $rightOperand
      * @return string
      */
     public function mul($leftOperand, $rightOperand)
@@ -93,8 +93,8 @@ class Gmp implements AdapterInterface
     }
 
     /**
-     * Divide two big integers and return integer part result
-     * Raises exception if the denominator is zero
+     * Divide two big integers and return integer part result.
+     * Raises exception if the divisor is zero.
      *
      * @param  string $leftOperand
      * @param  string $rightOperand
@@ -103,21 +103,21 @@ class Gmp implements AdapterInterface
      */
     public function div($leftOperand, $rightOperand)
     {
-        $result = @gmp_div_q($leftOperand, $rightOperand);
-        if (false === $result) {
+        if ($rightOperand == 0) {
             throw new Exception\DivisionByZeroException(
-                "Division by zero: {$leftOperand} / {$rightOperand}"
+                "Division by zero; divisor = {$rightOperand}"
             );
         }
 
+        $result = @gmp_div_q($leftOperand, $rightOperand);
         return gmp_strval($result);
     }
 
     /**
      * Raise a big integers to another
      *
-     * @param string $operand
-     * @param string $exp
+     * @param  string $operand
+     * @param  string $exp
      * @return string
      */
     public function pow($operand, $exp)
@@ -167,7 +167,8 @@ class Gmp implements AdapterInterface
 
     /**
      * Compare two big integers and returns result as an integer where
-     * 0 means both are equal, 1 that leftOperand is larger, -1 that rightOperand is larger.
+     * Returns < 0 if leftOperand is less than rightOperand;
+     * > 0 if leftOperand is greater than rightOperand, and 0 if they are equal.
      *
      * @param  string $leftOperand
      * @param  string $rightOperand
@@ -175,11 +176,7 @@ class Gmp implements AdapterInterface
      */
     public function comp($leftOperand, $rightOperand)
     {
-        $result = gmp_cmp($leftOperand, $rightOperand);
-        if ($result !== 0) {
-            $result = ($result > 0) ? 1 : -1;
-        }
-        return $result;
+        return gmp_cmp($leftOperand, $rightOperand);
     }
 
     /**

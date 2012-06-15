@@ -307,7 +307,7 @@ defined('TESTS_ZEND_GDATA_PHOTOS_USERNAME') || define('TESTS_ZEND_GDATA_PHOTOS_U
  */
 defined('TESTS_ZEND_HTTP_CLIENT_BASEURI') || define('TESTS_ZEND_HTTP_CLIENT_BASEURI', false);
 
-defined('TESTS_ZEND_HTTP_CLIENT_ONLINE') || define('TESTS_ZEND_HTTP_CLIENT_ONLINE', true);
+defined('TESTS_ZEND_HTTP_CLIENT_ONLINE') || define('TESTS_ZEND_HTTP_CLIENT_ONLINE', false);
 
 /**
  * Zend\Http\Client\Proxy tests
@@ -786,7 +786,7 @@ defined('TESTS_ZEND_SOAP_AUTODISCOVER_ONLINE_SERVER_BASEURI') || define('TESTS_Z
 /**
  * Zend\TimeSync tests
  */
-defined('TESTS_ZEND_TIMESYNC_ONLINE_ENABLED') || define('TESTS_ZEND_TIMESYNC_ONLINE_ENABLED', true);
+defined('TESTS_ZEND_TIMESYNC_ONLINE_ENABLED') || define('TESTS_ZEND_TIMESYNC_ONLINE_ENABLED', false);
 
 /**
  * Zend\Uri tests
@@ -812,7 +812,7 @@ defined('TESTS_ZEND_VALIDATOR_ONLINE_ENABLED') || define('TESTS_ZEND_VALIDATOR_O
  *
  * Set ONLINE_ENABLED if you wish to fetch the latest version.
  */
-defined('TESTS_ZEND_VERSION_ONLINE_ENABLED') || define('TESTS_ZEND_VERSION_ONLINE_ENABLED', true);
+defined('TESTS_ZEND_VERSION_ONLINE_ENABLED') || define('TESTS_ZEND_VERSION_ONLINE_ENABLED', false);
 
 
 /**

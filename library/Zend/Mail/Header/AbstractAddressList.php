@@ -146,7 +146,7 @@ abstract class AbstractAddressList implements HeaderInterface
                 }
 
                 if ('ASCII' !== $encoding) {
-                    $name = HeaderWrap::mimeEncodeValue($name, $encoding, false);
+                    $name = HeaderWrap::mimeEncodeValue($name, $encoding);
                 }
                 $emails[] = sprintf('%s <%s>', $name, $email);
             }

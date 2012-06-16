@@ -190,7 +190,6 @@ abstract class RestfulController implements
         $request = $e->getRequest();
         $action  = $routeMatch->getParam('action', false);
         if ($action) {
-            var_dump($action);
             // Handle arbitrary methods, ending in Action
             $method = static::getMethodFromAction($action);
             if (!method_exists($this, $method)) {

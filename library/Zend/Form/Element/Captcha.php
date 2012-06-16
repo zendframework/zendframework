@@ -21,6 +21,7 @@
 
 namespace Zend\Form\Element;
 
+use Traversable;
 use Zend\Captcha as ZendCaptcha;
 use Zend\Form\Element;
 use Zend\Form\Exception;
@@ -37,9 +38,9 @@ class Captcha extends Element implements InputProviderInterface
 {
     /**
      * Set a single element attribute
-     * 
-     * @param  string $key 
-     * @param  mixed $value 
+     *
+     * @param  string $key
+     * @param  mixed $value
      * @return Element
      */
     public function setAttribute($key, $value)
@@ -53,8 +54,8 @@ class Captcha extends Element implements InputProviderInterface
 
     /**
      * Set captcha
-     * 
-     * @param  array|ZendCaptcha\AdapterInterface $captcha 
+     *
+     * @param  array|ZendCaptcha\AdapterInterface $captcha
      * @return Captcha
      */
     public function setCaptcha($captcha)
@@ -74,7 +75,7 @@ class Captcha extends Element implements InputProviderInterface
 
     /**
      * Retrieve captcha (if any)
-     * 
+     *
      * @return null|ZendCaptcha\AdapterInterface
      */
     public function getCaptcha()
@@ -86,7 +87,7 @@ class Captcha extends Element implements InputProviderInterface
      * Provide default input rules for this element
      *
      * Attaches the captcha as a validator.
-     * 
+     *
      * @return array
      */
     public function getInputSpecification()

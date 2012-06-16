@@ -64,10 +64,16 @@ abstract class AbstractAccept implements HeaderInterface
                       );
         }
 
-        // process multiple accept values
-        $values = explode(',', $values);
+        // process multiple accept values, they may be between quotes
+        if (!preg_match_all('/(?:[^,"]|"(?:[^\\\"]|\\\.)*")+/', $values, $values)
+            || !isset($values[0])
+        ) {
+            throw new Exception\InvalidArgumentException(
+                    'Invalid header line for ' . $acceptHeader->getFieldName() . ' header string'
+            );
+        }
 
-        foreach ($values as $value) {
+        foreach ($values[0] as $value) {
             $value = trim($value);
 
             $payload = $acceptHeader->getPayloadValuesFromString($value);
@@ -86,15 +92,7 @@ abstract class AbstractAccept implements HeaderInterface
             $type = trim(substr($mediaType, 0));
         }
 
-        $params = array();
-        if(($pos = strpos($mediaType,';'))) {
-            $paramsStrings = explode(';', substr($mediaType, $pos+1));
-
-            foreach($paramsStrings as $value) { // fetch q=0.2 to array
-                $explode = explode('=', $value, 2);
-                $params[trim($explode[0])] = trim($explode[1]);
-            }
-        }
+        $params = $this->parseParams($mediaType);
 
         if ($pos = strpos($mediaType, ';')) {
             $mediaType = trim(substr($mediaType, 0, $pos));
@@ -114,17 +112,49 @@ abstract class AbstractAccept implements HeaderInterface
             $subtype = trim(substr($subtype, 0, $pos));
         }
 
-        return array(
-                'typeString' => trim($mediaType),
-                'type'    => $type,
-                'subtype' => $subtype,
-                'subtypeRaw' => $subtypeWhole,
-                'format'  => $format,
-                'priority' => isset($params['q']) ? $params['q'] : 1,
-                'params' => $params,
-                'raw' => trim($raw)
+        return (object) array(
+                            'typeString' => trim($mediaType),
+                            'type'    => $type,
+                            'subtype' => $subtype,
+                            'subtypeRaw' => $subtypeWhole,
+                            'format'  => $format,
+                            'priority' => isset($params['q']) ? $params['q'] : 1,
+                            'params' => $params,
+                            'raw' => trim($raw)
         );
     }
+
+	/**
+     * @param mediaType
+     */
+    private function parseParams ($mediaType)
+    {
+        $params = array();
+        if (($pos = strpos($mediaType,';'))) {
+            preg_match_all('/(?:[^;"]|"(?:[^\\\"]|\\\.)*")+/', $mediaType, $paramsStrings);
+
+            if (isset($paramsStrings[0])) {
+                array_shift($paramsStrings[0]);
+                $paramsStrings = $paramsStrings[0];
+            } else {
+                $paramsStrings = array();
+            }
+
+            foreach($paramsStrings as $param) {
+                $explode = explode('=', $param, 2);
+
+                $value = trim($explode[1]);
+                if ($value[0] == '"' && substr($value, -1) == '"') {
+                    $value = substr(substr($value,1), 0, -1);
+                }
+
+                $params[trim($explode[0])] = stripslashes($value);
+            }
+        }
+
+        return $params;
+    }
+
 
     /**
      * Get field value
@@ -140,9 +170,9 @@ abstract class AbstractAccept implements HeaderInterface
     {
         $strings = array();
         foreach ($values as $value) {
-            $params = $value['params'];
+            $params = $value->params;
             array_walk($params, array($this, 'assembleFieldValueParam'));
-            $strings[] = $value['typeString'] . ';'.implode(';', $params);
+            $strings[] = $value->typeString . ';'.implode(';', $params);
         }
 
         return implode(', ', $strings);
@@ -158,9 +188,13 @@ abstract class AbstractAccept implements HeaderInterface
      */
     protected function assembleFieldValueParam(&$value, $key)
     {
-        $separators = array('(', ')', '<', '>', '@', ',', ';', ':', '\\', '"',
+        $separators = array('(', ')', '<', '>', '@', ',', ';', ':',
                             '/', '[', ']', '?', '=', '{', '}',  ' ',  "\t");
-        $escaped = addcslashes($value, "\42!@\127!@\0..\37!@\177..\255");
+
+        $escaped = preg_replace_callback('/[[:cntrl:]"\\\\]/', // escape cntrl, ", \
+                                         function($v) { return '\\' . $v[0]; },
+                                         $value
+                    );
 
         if ($escaped == $value && ! array_intersect(str_split($value), $separators)) {
             $value = $key.'='.$value;

@@ -138,15 +138,16 @@ class foobar2 {
     class AcceptTest extends \PHPUnit_Framework_TestCase
     {
 
-    public function testSomething()
+    public function testParsingAndAssemblingQuotedStrings()
     {
         ini_set('display_errors', 1);
         error_reporting(-1);
-        $acceptHeader = Accept::fromString(
-            'Accept:  application/vnd.foobar+html;q=1; version=2\3; level='.chr(5).'5, text/json;level=1, text/xml;level=2;q=0.4'
-        );
+        $acceptStr = 'Accept: application/vnd.foobar+html;q=1;version="2\\'
+                   . chr(22).'3\"";level="foo;, bar", text/json;level=1, text/xml;level=2;q=0.4';
+        $acceptHeader = Accept::fromString($acceptStr);
 
-        var_dump($acceptHeader->getFieldValue());
+        $this->assertEquals($acceptStr, 'Accept: '.$acceptHeader->getFieldValue());
+// var_dump($acceptHeader);
 //         var_dump($acceptHeader->getPrioritized());
     }
 

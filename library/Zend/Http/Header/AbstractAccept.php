@@ -19,8 +19,6 @@
  */
 namespace Zend\Http\Header;
 
-use Zend\Stdlib\PriorityQueue;
-
 /**
  * Abstract Accept Header
  *
@@ -35,17 +33,25 @@ abstract class AbstractAccept implements HeaderInterface
 
     /**
      *
-     * @var \Zend\Stdlib\PriorityQueue
+     * @var array
      */
     protected $mediaRanges = array();
 
     protected $regexAddType;
 
+    /**
+     * Determines if since last mutation the stack was sorted
+     * @var bool
+     */
+    protected $sorted = false;
 
+
+    /**
+     *
+     * @param string (optional) $headerLine
+     */
     public function __construct($headerLine = null)
     {
-//         $this->mediaRanges = new PriorityQueue();
-
         if (!$headerLine) {
             return;
         }
@@ -72,6 +78,13 @@ abstract class AbstractAccept implements HeaderInterface
         return new static($headerLine);
     }
 
+    /**
+     * Parse the media ranges represented by a header line
+     *
+     * @param string  $headerLine
+     * @throws Exception\InvalidArgumentException If header is invalid
+     * @return array
+     */
     public function getMediaRangesFromHeaderLine($headerLine)
     {
         // process multiple accept values, they may be between quotes
@@ -93,13 +106,17 @@ abstract class AbstractAccept implements HeaderInterface
         return $out;
     }
 
+    /**
+     * Parse the accept params belonging to a media range
+     *
+     * @param string $mediaType
+     * @return StdClass
+     */
     protected function getAcceptParamsFromMediaRangeString($mediaType)
     {
-        $raw = $mediaType;
-        if ($pos = strpos($mediaType, '/')) {
-            $type = trim(substr($mediaType, 0, $pos));
-        } else {
-            $type = trim(substr($mediaType, 0));
+        $raw = $subtypeWhole = $type = $mediaType;
+        if ($pos = strpos($mediaType, ';')) {
+            $type = substr($mediaType, 0, $pos);
         }
 
         $params = $this->parseMediaRanges($mediaType);
@@ -108,19 +125,8 @@ abstract class AbstractAccept implements HeaderInterface
             $mediaType = trim(substr($mediaType, 0, $pos));
         }
 
-        if ($pos = strpos($mediaType, '/')) {
-            $subtypeWhole = $format = $subtype = trim(substr($mediaType, strpos($mediaType, '/')+1));
-        } else {
-            $subtypeWhole = '';
-            $format = '*';
-            $subtype = '*';
-        }
-
-        $pos = strpos($subtype, '+');
-        if (false !== $pos) {
-            $format = trim(substr($subtype, $pos+1));
-            $subtype = trim(substr($subtype, 0, $pos));
-        }
+        $format = '*';
+        $subtype = '*';
 
         return (object) array(
                             'typeString' => trim($mediaType),
@@ -135,9 +141,11 @@ abstract class AbstractAccept implements HeaderInterface
     }
 
 	/**
-     * @param mediaType
+	 * Parse the keys contained in the header line
+	 *
+     * @param string mediaType
      */
-    private function parseMediaRanges ($mediaType)
+    protected function parseMediaRanges ($mediaType)
     {
         $params = array();
         if (($pos = strpos($mediaType,';'))) {
@@ -171,13 +179,12 @@ abstract class AbstractAccept implements HeaderInterface
      *
      * @return string
      */
-    public function getFieldValue()
+    public function getFieldValue($values = null)
     {
-        return $this->getFieldValueInternal($this->mediaRanges);
-    }
+        if (!$values) {
+            return $this->getFieldValue($this->mediaRanges);
+        }
 
-    protected function getFieldValueInternal($values)
-    {
         $strings = array();
         foreach ($values as $value) {
             $params = $value->params;
@@ -187,6 +194,7 @@ abstract class AbstractAccept implements HeaderInterface
 
         return implode(', ', $strings);
     }
+
 
     /*
      * Assemble and escape the field value parameters based on RFC 2616 secion 2.1
@@ -247,7 +255,7 @@ abstract class AbstractAccept implements HeaderInterface
             $params = array('q' => sprintf('%01.1f', $priority)) + $params;
         }
 
-        $assembledString = $this->getFieldValueInternal(
+        $assembledString = $this->getFieldValue(
                                 array((object)array('typeString' => $type, 'params' => $params))
                             );
 
@@ -255,7 +263,6 @@ abstract class AbstractAccept implements HeaderInterface
         $this->addMediaRangeToQueue($value);
         return $this;
     }
-
 
 
     /**
@@ -269,13 +276,19 @@ abstract class AbstractAccept implements HeaderInterface
         return (bool) $this->match($matchAgainst);
     }
 
+    /**
+     * Match a media string against this header
+     *
+     * @param array|string $matchAgainst
+     * @return array|boolean The matched value or false
+     */
     public function match($matchAgainst)
     {
         if (is_string($matchAgainst)) {
             $matchAgainst = $this->getMediaRangesFromHeaderLine($matchAgainst);
         }
 
-        foreach ($this->mediaRanges as $left) {
+        foreach ($this->getPrioritized() as $left) {
             foreach ($matchAgainst as $right) {
                 if($right->type == '*' || $left->type == '*') {
                     if ($res = $this->matchAcceptParams($left, $right)) {
@@ -301,6 +314,13 @@ abstract class AbstractAccept implements HeaderInterface
         return false;
     }
 
+    /**
+     * Return a match where all parameters in argument #1 match those in argument #2
+     *
+     * @param array $match1
+     * @param array $match2
+     * @return boolean|array
+     */
     protected function matchAcceptParams($match1, $match2)
     {
         foreach($match2->params as $key => $value) {
@@ -337,6 +357,7 @@ abstract class AbstractAccept implements HeaderInterface
 
 
     /**
+     * Add a key/value combination to the internal queue
      *
      * @param unknown_type $value
      * @return number
@@ -344,11 +365,13 @@ abstract class AbstractAccept implements HeaderInterface
     protected function addMediaRangeToQueue($value)
     {
         $this->mediaRanges[] = $value;
-        $this->sortMediaRanges();
+        $this->sorted = false;
     }
 
     /**
-     * See rfc2616 sect 14.1
+     * Sort the internal media ranges
+     *
+     * @See rfc2616 sect 14.1
      * Media ranges can be overridden by more specific media ranges or
      * specific media types. If more than one media range applies to a given
      * type, the most specific reference has precedence. For example,
@@ -377,11 +400,9 @@ abstract class AbstractAccept implements HeaderInterface
             // Asterisks
             $values = array('type', 'subtype','format');
             foreach($values as $value) {
-                if($a->$value == '*' && $b->$value == '*') {
-                    return 0;
-                } elseif($a->$value == '*') {
+                if($a->$value == '*' && $b->$value != '*') {
                     return 1;
-                } elseif($b->$value == '*') {
+                } elseif($b->$value == '*' && $a->$value != '*') {
                     return -1;
                 }
             }
@@ -400,10 +421,18 @@ abstract class AbstractAccept implements HeaderInterface
         };
 
         usort($this->mediaRanges, $sort);
+        $this->sorted = true;
     }
 
+    /**
+     * @return array with all the keys, values and parameters this header represents:
+     */
     public function getPrioritized()
     {
+        if (!$this->sorted) {
+            $this->sortMediaRanges();
+        }
+
         return $this->mediaRanges;
     }
 

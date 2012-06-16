@@ -8,6 +8,7 @@ use Zend\Http\Header\GenericHeader,
 
 class AcceptTest extends \PHPUnit_Framework_TestCase
 {
+
     public function testAcceptFromStringCreatesValidAcceptHeader()
     {
         $acceptHeader = Accept::fromString('Accept: xxx');
@@ -35,7 +36,9 @@ class AcceptTest extends \PHPUnit_Framework_TestCase
                      ->addMediaType('application/atom+xml', 0.9);
 
         // @todo set some values, then test output
-        $this->assertEquals('Accept: application/json, application/atom+xml;q=0.9, text/html;q=0.8', $acceptHeader->toString());
+        $this->assertEquals(
+            'Accept: text/html;q=0.8, application/json, application/atom+xml;q=0.9',
+            $acceptHeader->toString());
     }
 
 
@@ -76,8 +79,11 @@ class AcceptTest extends \PHPUnit_Framework_TestCase
                      ->addMediaType('text/html', 0.4, array('level' => 2))
                      ->addMediaType('application/atom+xml', 0.9);
 
-        $this->assertEquals('Accept: application/atom+xml;q=0.9, text/html;q=0.8'
-                            .';level=1, text/html;q=0.4;level=2', $acceptHeader->toString());
+        $this->assertEquals(
+                        'Accept: text/html;q=0.8;level=1, '
+                           .'text/html;q=0.4;level=2, application/atom+xml;q=0.9',
+                        $acceptHeader->toString()
+                );
     }
 
 
@@ -144,7 +150,6 @@ class AcceptTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals($acceptStr, $acceptHeader->getFieldName().': '.$acceptHeader->getFieldValue());
     }
-
 
 
     public function testVersioning()
@@ -240,6 +245,5 @@ class AcceptTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $acceptHdr->match('image'));
         //            $this->assertEquals($expected, $this->_handler->match('text'));
     }
-
 
 }

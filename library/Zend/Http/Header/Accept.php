@@ -75,4 +75,45 @@ class Accept extends AbstractAccept
     {
         return $this->hasType($type);
     }
+
+    protected function getAcceptParamsFromMediaRangeString($mediaType)
+    {
+        $raw = $mediaType;
+        if ($pos = strpos($mediaType, '/')) {
+            $type = trim(substr($mediaType, 0, $pos));
+        } else {
+            $type = trim(substr($mediaType, 0));
+        }
+
+        $params = $this->parseMediaRanges($mediaType);
+
+        if ($pos = strpos($mediaType, ';')) {
+            $mediaType = trim(substr($mediaType, 0, $pos));
+        }
+
+        if ($pos = strpos($mediaType, '/')) {
+            $subtypeWhole = $format = $subtype = trim(substr($mediaType, strpos($mediaType, '/')+1));
+        } else {
+            $subtypeWhole = '';
+            $format = '*';
+            $subtype = '*';
+        }
+
+        $pos = strpos($subtype, '+');
+        if (false !== $pos) {
+            $format = trim(substr($subtype, $pos+1));
+            $subtype = trim(substr($subtype, 0, $pos));
+        }
+
+        return (object) array(
+                'typeString' => trim($mediaType),
+                'type'    => $type,
+                'subtype' => $subtype,
+                'subtypeRaw' => $subtypeWhole,
+                'format'  => $format,
+                'priority' => isset($params['q']) ? $params['q'] : 1,
+                'params' => $params,
+                'raw' => trim($raw)
+        );
+    }
 }

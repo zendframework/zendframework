@@ -33,11 +33,33 @@ use Zend\Stdlib\PriorityQueue;
 abstract class AbstractAccept implements HeaderInterface
 {
 
-    protected $values = array();
-    protected $priorityQueue;
+    /**
+     *
+     * @var \Zend\Stdlib\PriorityQueue
+     */
+    protected $mediaRanges = array();
 
     protected $regexAddType;
 
+
+    public function __construct($headerLine = null)
+    {
+//         $this->mediaRanges = new PriorityQueue();
+
+        if (!$headerLine) {
+            return;
+        }
+
+        $fieldName = $this->getFieldName();
+        $pos = strlen($fieldName)+2;
+        if (substr($headerLine, 0, $pos) == $fieldName . ': ') {
+            $headerLine = substr($headerLine, $pos);
+        }
+
+        foreach($this->getMediaRangesFromHeaderLine($headerLine) as $value) {
+            $this->addMediaRangeToQueue($value);
+        }
+    }
 
     /**
      * Factory method: parse Accept header string
@@ -47,20 +69,10 @@ abstract class AbstractAccept implements HeaderInterface
      */
     public static function fromString($headerLine)
     {
-        $acceptHeader = new static();
-
-        $fieldName = $acceptHeader->getFieldName();
-        $pos = strlen($fieldName)+2;
-        if (substr($headerLine, 0, $pos) == $fieldName . ': ') {
-            $headerLine = substr($headerLine, $pos);
-        }
-
-        $acceptHeader->values = $acceptHeader->getPayloadsFromHeaderLine($headerLine);
-
-        return $acceptHeader;
+        return new static($headerLine);
     }
 
-    public function getPayloadsFromHeaderLine($headerLine)
+    public function getMediaRangesFromHeaderLine($headerLine)
     {
         // process multiple accept values, they may be between quotes
         if (!preg_match_all('/(?:[^,"]|"(?:[^\\\"]|\\\.)*")+/', $headerLine, $values)
@@ -75,13 +87,13 @@ abstract class AbstractAccept implements HeaderInterface
         foreach ($values[0] as $value) {
             $value = trim($value);
 
-            $out[] = $this->getPayloadValuesFromString($value);
+            $out[] = $this->getAcceptParamsFromMediaRangeString($value);
         }
 
         return $out;
     }
 
-    protected function getPayloadValuesFromString($mediaType)
+    protected function getAcceptParamsFromMediaRangeString($mediaType)
     {
         $raw = $mediaType;
         if ($pos = strpos($mediaType, '/')) {
@@ -90,7 +102,7 @@ abstract class AbstractAccept implements HeaderInterface
             $type = trim(substr($mediaType, 0));
         }
 
-        $params = $this->parseParams($mediaType);
+        $params = $this->parseMediaRanges($mediaType);
 
         if ($pos = strpos($mediaType, ';')) {
             $mediaType = trim(substr($mediaType, 0, $pos));
@@ -125,7 +137,7 @@ abstract class AbstractAccept implements HeaderInterface
 	/**
      * @param mediaType
      */
-    private function parseParams ($mediaType)
+    private function parseMediaRanges ($mediaType)
     {
         $params = array();
         if (($pos = strpos($mediaType,';'))) {
@@ -161,15 +173,15 @@ abstract class AbstractAccept implements HeaderInterface
      */
     public function getFieldValue()
     {
-        return $this->getFieldValueInternal($this->values);
+        return $this->getFieldValueInternal($this->mediaRanges);
     }
 
-    protected function getFieldValueInternal(array $values)
+    protected function getFieldValueInternal($values)
     {
         $strings = array();
         foreach ($values as $value) {
             $params = $value->params;
-            array_walk($params, array($this, 'assembleFieldValueParam'));
+            array_walk($params, array($this, 'assembleAcceptParam'));
             $strings[] = implode(';', array($value->typeString) + $params);
         }
 
@@ -184,7 +196,7 @@ abstract class AbstractAccept implements HeaderInterface
      * @param string $key
      * @return void
      */
-    protected function assembleFieldValueParam(&$value, $key)
+    protected function assembleAcceptParam(&$value, $key)
     {
         $separators = array('(', ')', '<', '>', '@', ',', ';', ':',
                             '/', '[', ']', '?', '=', '{', '}',  ' ',  "\t");
@@ -239,7 +251,8 @@ abstract class AbstractAccept implements HeaderInterface
                                 array((object)array('typeString' => $type, 'params' => $params))
                             );
 
-        $this->values[] = $this->getPayloadValuesFromString($assembledString);
+        $value = $this->getAcceptParamsFromMediaRangeString($assembledString);
+        $this->addMediaRangeToQueue($value);
         return $this;
     }
 
@@ -259,13 +272,13 @@ abstract class AbstractAccept implements HeaderInterface
     public function match($matchAgainst)
     {
         if (is_string($matchAgainst)) {
-            $matchAgainst = $this->getPayloadsFromHeaderLine($matchAgainst);
+            $matchAgainst = $this->getMediaRangesFromHeaderLine($matchAgainst);
         }
 
-        foreach ($matchAgainst as $left) {
-            foreach ($this->values as $right) {
+        foreach ($this->mediaRanges as $left) {
+            foreach ($matchAgainst as $right) {
                 if($right->type == '*' || $left->type == '*') {
-                    if ($res = $this->_matchParams($left, $right)) {
+                    if ($res = $this->matchAcceptParams($left, $right)) {
                         return $res;
                     }
                 }
@@ -276,7 +289,7 @@ abstract class AbstractAccept implements HeaderInterface
                             ($left->format == $right->format ||
                                     $right->format == '*' || $left->format == '*')))
                     {
-                        if ($res = $this->_matchParams($right, $left)) {
+                        if ($res = $this->matchAcceptParams($left, $right)) {
                             return $res;
                         }
                     }
@@ -288,7 +301,7 @@ abstract class AbstractAccept implements HeaderInterface
         return false;
     }
 
-    protected function _matchParams($match1, $match2)
+    protected function matchAcceptParams($match1, $match2)
     {
         foreach($match2->params as $key => $value) {
             if (isset($match1->params[$key])) {
@@ -322,45 +335,76 @@ abstract class AbstractAccept implements HeaderInterface
         return $match1;
     }
 
+
     /**
-     * Get a prioritized list of types
      *
-     * @return PriorityQueue
+     * @param unknown_type $value
+     * @return number
      */
+    protected function addMediaRangeToQueue($value)
+    {
+        $this->mediaRanges[] = $value;
+        $this->sortMediaRanges();
+    }
+
+    /**
+     * See rfc2616 sect 14.1
+     * Media ranges can be overridden by more specific media ranges or
+     * specific media types. If more than one media range applies to a given
+     * type, the most specific reference has precedence. For example,
+     *
+     * Accept: text/*, text/html, text/html;level=1, * /*
+     *
+     * have the following precedence:
+     *
+     * 1) text/html;level=1
+     * 2) text/html
+     * 3) text/*
+     * 4) * /*
+     *
+     * @return number
+     */
+    protected function sortMediaRanges()
+    {
+        $sort = function($a, $b) // If A has higher prio than B, return -1.
+        {
+            if ($a->priority > $b->priority) {
+                return -1;
+            } elseif ($a->priority < $b->priority) {
+                return 1;
+            }
+
+            // Asterisks
+            $values = array('type', 'subtype','format');
+            foreach($values as $value) {
+                if($a->$value == '*' && $b->$value == '*') {
+                    return 0;
+                } elseif($a->$value == '*') {
+                    return 1;
+                } elseif($b->$value == '*') {
+                    return -1;
+                }
+            }
+
+            if($a->type == 'application' && $b->type != 'application') {
+                return -1;
+            } elseif($b->type == 'application' && $a->type != 'application') {
+                return 1;
+            }
+
+            //@todo count number of dots in case of type==application in subtype
+
+            // So far they're still the same. Longest stringlength may be more specific
+            if(strlen($a->raw) == strlen($b->raw)) return 0;
+            return (strlen($a->raw) > strlen($b->raw)) ? -1 : 1;
+        };
+
+        usort($this->mediaRanges, $sort);
+    }
+
     public function getPrioritized()
     {
-        if (!$this->priorityQueue) {
-            $this->createPriorityQueue();
-        }
-
-        return $this->priorityQueue;
+        return $this->mediaRanges;
     }
 
-    /**
-     * Create the priority queue
-     *
-     * @return void
-     */
-    protected function createPriorityQueue()
-    {
-        $queue = new PriorityQueue();
-        foreach ($this->prioritizedValues as $data) {
-            // Do not include priority 0 in list. see RFC2616 section 3.9
-            if ($data['priority'] == 0) {
-                continue;
-            }
-
-            // Hack to ensure priorities are correct; was not treating
-            // fractional values correctly
-            $suffix = '';
-            $level = 0;
-            if (!empty($data['level'])) {
-                $level = $data['level'];
-                $suffix = ";level=$level";
-            }
-            $queue->insert($data['type'].$suffix, (float) $data['priority'] * 1000 + $level);
-//                     $queue->insert($data, (float) $data['priority'] * 1000 + $level);
-        }
-        $this->priorityQueue = $queue;
-    }
 }

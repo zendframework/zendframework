@@ -109,7 +109,7 @@ class Gmp implements AdapterInterface
             );
         }
 
-        $result = @gmp_div_q($leftOperand, $rightOperand);
+        $result = gmp_div_q($leftOperand, $rightOperand);
         return gmp_strval($result);
     }
 

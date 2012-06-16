@@ -54,9 +54,9 @@ class Registry
      * will have the least priority, and the last parent added will have the
      * highest priority.
      *
-     * @param  \Zend\Acl\Role\RoleInterface              $role
-     * @param  \Zend\Acl\Role\RoleInterface|string|array $parents
-     * @throws \Zend\Acl\Exception\InvalidArgumentException
+     * @param  Role\RoleInterface              $role
+     * @param  Role\RoleInterface|string|array $parents
+     * @throws Exception\InvalidArgumentException
      * @return Registry Provides a fluent interface
      */
     public function add(Role\RoleInterface $role, $parents = null)
@@ -103,9 +103,9 @@ class Registry
      *
      * The $role parameter can either be a Role or a Role identifier.
      *
-     * @param  \Zend\Acl\Role|string $role
-     * @throws \Zend\Acl\Exception\InvalidArgumentException
-     * @return \Zend\Acl\Role
+     * @param  Role\RoleInterface|string $role
+     * @throws Exception\InvalidArgumentException
+     * @return Role\RoleInterface
      */
     public function get($role)
     {
@@ -127,7 +127,7 @@ class Registry
      *
      * The $role parameter can either be a Role or a Role identifier.
      *
-     * @param  \Zend\Acl\Role|string $role
+     * @param  Role\RoleInterface|string $role
      * @return boolean
      */
     public function has($role)
@@ -151,7 +151,7 @@ class Registry
      *
      * If the Role does not have any parents, then an empty array is returned.
      *
-     * @param  \Zend\Acl\Role\RoleInterface|string $role
+     * @param  Role\RoleInterface|string $role
      * @return array
      */
     public function getParents($role)
@@ -170,10 +170,10 @@ class Registry
      * through the entire inheritance DAG to determine whether $role
      * inherits from $inherit through its ancestor Roles.
      *
-     * @param  \Zend\Acl\Role\RoleInterface|string  $role
-     * @param  \Zend\Acl\Role\RoleInterface|string  $inherit
-     * @param  boolean                              $onlyParents
-     * @throws \Zend\Acl\Exception\InvalidArgumentException
+     * @param  Role\RoleInterface|string  $role
+     * @param  Role\RoleInterface|string  $inherit
+     * @param  boolean                    $onlyParents
+     * @throws Exception\InvalidArgumentException
      * @return boolean
      */
     public function inherits($role, $inherit, $onlyParents = false)
@@ -181,8 +181,8 @@ class Registry
         try {
             $roleId    = $this->get($role)->getRoleId();
             $inheritId = $this->get($inherit)->getRoleId();
-        } catch (Exception $e) {
-            throw new Acl\Exception\InvalidArgumentException($e->getMessage(), $e->getCode(), $e);
+        } catch (Exception\ExceptionInterface $e) {
+            throw new Exception\InvalidArgumentException($e->getMessage(), $e->getCode(), $e);
         }
 
         $inherits = isset($this->_roles[$roleId]['parents'][$inheritId]);
@@ -205,15 +205,15 @@ class Registry
      *
      * The $role parameter can either be a Role or a Role identifier.
      *
-     * @param  \Zend\Acl\Role\RoleInterface|string $role
-     * @throws \Zend\Acl\Exception\InvalidArgumentException
+     * @param  Role\RoleInterface|string $role
+     * @throws Exception\InvalidArgumentException
      * @return Registry Provides a fluent interface
      */
     public function remove($role)
     {
         try {
             $roleId = $this->get($role)->getRoleId();
-        } catch (Exception $e) {
+        } catch (Exception\ExceptionInterface $e) {
             throw new Acl\Exception\InvalidArgumentException($e->getMessage(), $e->getCode(), $e);
         }
 

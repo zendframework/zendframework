@@ -31,10 +31,10 @@ namespace Zend\Http\Header;
 class Accept extends AbstractAccept
 {
     protected $regexAddType = '#^([a-zA-Z+-]+|\*)/(\*|[a-zA-Z0-9+-]+)$#';
-        
+
     /**
      * Get field name
-     * 
+     *
      * @return string
      */
     public function getFieldName()
@@ -44,7 +44,7 @@ class Accept extends AbstractAccept
 
     /**
      * Cast to string
-     * 
+     *
      * @return string
      */
     public function toString()
@@ -54,21 +54,21 @@ class Accept extends AbstractAccept
 
     /**
      * Add a media type, with the given priority
-     * 
-     * @param  string $type 
-     * @param  int|float $priority 
-     * @param  int $level 
+     *
+     * @param  string $type
+     * @param  int|float $priority
+     * @param  int $level
      * @return Accept
      */
-    public function addMediaType($type, $priority = 1, $level = null)
+    public function addMediaType($type, $priority = 1, array $params = array())
     {
-        return $this->addType($type, $priority, $level);
+        return $this->addType($type, $priority, $params);
     }
 
     /**
      * Does the header have the requested media type?
-     * 
-     * @param  string $type 
+     *
+     * @param  string $type
      * @return bool
      */
     public function hasMediaType($type)

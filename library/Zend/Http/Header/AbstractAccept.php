@@ -49,38 +49,36 @@ abstract class AbstractAccept implements HeaderInterface
     {
         $acceptHeader = new static();
 
-        if (!strpos($headerLine, ': ')) {
-            throw new Exception\InvalidArgumentException(
-                        'Invalid header line for ' . $acceptHeader->getFieldName() . ' header string'
-                      );
+        $fieldName = $acceptHeader->getFieldName();
+        $pos = strlen($fieldName)+2;
+        if (substr($headerLine, 0, $pos) == $fieldName . ': ') {
+            $headerLine = substr($headerLine, $pos);
         }
 
-        list($name, $values) = explode(': ', $headerLine, 2);
+        $acceptHeader->values = $acceptHeader->getPayloadsFromHeaderLine($headerLine);
 
-        // check to ensure proper header type for this factory
-        if (strtolower($name) !== strtolower($acceptHeader->getFieldName())) {
-            throw new Exception\InvalidArgumentException(
-                        'Invalid header line for ' . $acceptHeader->getFieldName() . ' header string'
-                      );
-        }
+        return $acceptHeader;
+    }
 
+    public function getPayloadsFromHeaderLine($headerLine)
+    {
         // process multiple accept values, they may be between quotes
-        if (!preg_match_all('/(?:[^,"]|"(?:[^\\\"]|\\\.)*")+/', $values, $values)
-            || !isset($values[0])
+        if (!preg_match_all('/(?:[^,"]|"(?:[^\\\"]|\\\.)*")+/', $headerLine, $values)
+                || !isset($values[0])
         ) {
             throw new Exception\InvalidArgumentException(
-                    'Invalid header line for ' . $acceptHeader->getFieldName() . ' header string'
+                    'Invalid header line for ' . $this->getFieldName() . ' header string'
             );
         }
 
+        $out = array();
         foreach ($values[0] as $value) {
             $value = trim($value);
 
-            $payload = $acceptHeader->getPayloadValuesFromString($value);
-            $acceptHeader->values[] = $payload;
+            $out[] = $this->getPayloadValuesFromString($value);
         }
 
-        return $acceptHeader;
+        return $out;
     }
 
     protected function getPayloadValuesFromString($mediaType)
@@ -172,7 +170,7 @@ abstract class AbstractAccept implements HeaderInterface
         foreach ($values as $value) {
             $params = $value->params;
             array_walk($params, array($this, 'assembleFieldValueParam'));
-            $strings[] = $value->typeString . ';'.implode(';', $params);
+            $strings[] = implode(';', array($value->typeString) + $params);
         }
 
         return implode(', ', $strings);
@@ -213,7 +211,7 @@ abstract class AbstractAccept implements HeaderInterface
      * @param  int $level
      * @return Accept
      */
-    protected function addType($type, $priority = 1, $level = null)
+    protected function addType($type, $priority = 1, array $params = array())
     {
         if (!preg_match($this->regexAddType, $type)) {
             throw new Exception\InvalidArgumentException(sprintf(
@@ -223,7 +221,9 @@ abstract class AbstractAccept implements HeaderInterface
             ));
         }
 
-        if (!is_int($priority) && !is_float($priority) && !is_numeric($priority)) {
+        if (!is_int($priority) && !is_float($priority) && !is_numeric($priority)
+            || $priority > 1 || $priority < 0
+        ) {
             throw new Exception\InvalidArgumentException(sprintf(
                 '%s expects a numeric priority; received %s',
                 __METHOD__,
@@ -231,48 +231,19 @@ abstract class AbstractAccept implements HeaderInterface
             ));
         }
 
-        if ($priority > 1 || $priority < 0) {
-            throw new Exception\InvalidArgumentException(sprintf(
-                '%s expects a priority between 0 and 1; received %01.1f',
-                __METHOD__,
-                (float) $priority
-            ));
+        if ($priority != 1) {
+            $params = array('q' => sprintf('%01.1f', $priority)) + $params;
         }
 
-        if (!empty($level) && (!is_numeric($level) || $level < 0)) {
-            throw new Exception\InvalidArgumentException(sprintf(
-                '%s expects an integer level greater than 0; received %s',
-                __METHOD__,
-                $level
-            ));
-        }
+        $assembledString = $this->getFieldValueInternal(
+                                array((object)array('typeString' => $type, 'params' => $params))
+                            );
 
-        $this->types[$type] = true;
-
-        if (!empty($level)) {
-            $this->prioritizedValues[] = array(
-                'type' => $type,
-                'priority'   => $priority,
-                'level'      => (integer) $level
-            );
-        } else {
-            $this->prioritizedValues[] = array(
-                'type' => $type,
-                'priority'   => $priority
-            );
-        }
-
-        $value = $type;
-        if (!empty($level)) {
-            $value .= sprintf(';level=%d', $level);
-        }
-        if ($priority < 1) {
-            $value .= sprintf(';q=%01.1f', $priority);
-        }
-        $this->values[] = $value;
-
+        $this->values[] = $this->getPayloadValuesFromString($assembledString);
         return $this;
     }
+
+
 
     /**
      * Does the header have the requested type?
@@ -280,34 +251,75 @@ abstract class AbstractAccept implements HeaderInterface
      * @param  string $type
      * @return bool
      */
-    protected function hasType($type)
+    protected function hasType($matchAgainst)
     {
-        $type = strtolower($type);
+        return (bool) $this->match($matchAgainst);
+    }
 
-        // Exact match
-        if (isset($this->types[$type])) {
-            return true;
+    public function match($matchAgainst)
+    {
+        if (is_string($matchAgainst)) {
+            $matchAgainst = $this->getPayloadsFromHeaderLine($matchAgainst);
         }
 
-        // Check for media type
-        if (false !== strstr($type, '/')) {
-            // Parent type wildcard matching
-            $parent = substr($type, 0, strpos($type, '/'));
-            if (isset($this->types[$parent . '/*'])) {
-                return true;
-            }
+        foreach ($matchAgainst as $left) {
+            foreach ($this->values as $right) {
+                if($right->type == '*' || $left->type == '*') {
+                    if ($res = $this->_matchParams($left, $right)) {
+                        return $res;
+                    }
+                }
 
-            // Wildcard matching
-            if (isset($this->types['*/*'])) {
-                return true;
-            }
-        } else {
-            if (isset($this->types['*'])) {
-                return true;
+                if ($left->type == $right->type) {
+                    if ((($left->subtype == $right->subtype ||
+                            ($right->subtype == '*' || $left->subtype == '*')) &&
+                            ($left->format == $right->format ||
+                                    $right->format == '*' || $left->format == '*')))
+                    {
+                        if ($res = $this->_matchParams($right, $left)) {
+                            return $res;
+                        }
+                    }
+                }
+
             }
         }
-        // No match
+
         return false;
+    }
+
+    protected function _matchParams($match1, $match2)
+    {
+        foreach($match2->params as $key => $value) {
+            if (isset($match1->params[$key])) {
+                if (strpos($value, '-')) {
+                    $values = explode('-', $value, 2);
+                    if($values[0] > $match1->params[$key] ||
+                            $values[1] < $match1->params[$key])
+                    {
+                        return false;
+                    }
+                } elseif (strpos($value, '|')) {
+                    $options = explode('|', $value);
+                    $good = false;
+                    foreach($options as $option) {
+                        if($option == $match1->params[$key]) {
+                            $good = true;
+                            break;
+                        }
+                    }
+
+                    if (!$good) {
+                        return false;
+                    }
+                } elseif($match1->params[$key] != $value) {
+                    return false;
+                }
+            }
+
+        }
+
+        return $match1;
     }
 
     /**

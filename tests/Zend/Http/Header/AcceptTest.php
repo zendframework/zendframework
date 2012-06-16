@@ -6,7 +6,8 @@ use Zend\Http\Header\GenericHeader,
     Zend\Http\Header\Accept;
 
 
-class foobar2 {
+class AcceptTest extends \PHPUnit_Framework_TestCase
+{
     public function testAcceptFromStringCreatesValidAcceptHeader()
     {
         $acceptHeader = Accept::fromString('Accept: xxx');
@@ -34,8 +35,9 @@ class foobar2 {
                      ->addMediaType('application/atom+xml', 0.9);
 
         // @todo set some values, then test output
-        $this->assertEquals('Accept: text/html;q=0.8,application/json,application/atom+xml;q=0.9', $acceptHeader->toString());
+        $this->assertEquals('Accept: text/html;q=0.8, application/json, application/atom+xml;q=0.9', $acceptHeader->toString());
     }
+
 
     /** Implementation specific tests here */
 
@@ -50,6 +52,8 @@ class foobar2 {
 
     public function testPrioritizesValuesBasedOnQParameter()
     {
+        $this->markTestSkipped('Not implemented yet');
+
         $header   = Accept::fromString('Accept: text/plain; q=0.5, text/html, text/xml; q=0, text/x-dvi; q=0.8, text/x-c');
         $expected = array(
             'text/html',
@@ -65,18 +69,23 @@ class foobar2 {
         $this->assertEquals($expected, $test);
     }
 
+
+
     public function testLevel()
     {
         $acceptHeader = new Accept();
-        $acceptHeader->addMediaType('text/html', 0.8, 1)
-                     ->addMediaType('text/html', 0.4, 2)
+        $acceptHeader->addMediaType('text/html', 0.8, array('level' => 1))
+                     ->addMediaType('text/html', 0.4, array('level' => 2))
                      ->addMediaType('application/atom+xml', 0.9);
 
-        $this->assertEquals('Accept: text/html;level=1;q=0.8,text/html;level=2;q=0.4,application/atom+xml;q=0.9', $acceptHeader->toString());
+        $this->assertEquals('Accept: text/html;q=0.8;level=1, text/html;q=0.4;level=2, application/atom+xml;q=0.9', $acceptHeader->toString());
     }
+
 
     public function testPrioritizedLevel()
     {
+        $this->markTestSkipped('Not implemented yet');
+
         $header = Accept::fromString('Accept: text/*;q=0.3, text/html;q=0.7, text/html;level=1,text/html;level=2;q=0.4, */*;q=0.5');
 
         $expected = array (
@@ -94,6 +103,7 @@ class foobar2 {
         $this->assertEquals($expected, $test);
     }
 
+
     public function testWildcharMediaType()
     {
         $acceptHeader = new Accept();
@@ -104,24 +114,9 @@ class foobar2 {
         $this->assertTrue($acceptHeader->hasMediaType('text/html'));
         $this->assertTrue($acceptHeader->hasMediaType('application/atom+xml'));
         $this->assertTrue($acceptHeader->hasMediaType('audio/basic'));
-        $this->assertEquals('Accept: text/*;q=0.8,application/*,*/*;q=0.4', $acceptHeader->toString());
+        $this->assertEquals('Accept: text/*;q=0.8, application/*, */*;q=0.4', $acceptHeader->toString());
     }
 
-
-/*****************************************************************************************/
-    /*****************************************************************************************/
-    /*****************************************************************************************/
-    /*****************************************************************************************/
-
-    public function testInvalidHeader()
-    {
-        try {
-            $acceptHeader = Accept::fromString('*/*'); // 'Accept: ' should be prepended
-            $this->fail('exception expected');
-        } catch (\Zend\Http\Header\Exception\InvalidArgumentException $e) {
-            $this->assertEquals($e->getMessage(), 'Invalid header line for Accept header string');
-        }
-    }
 
 
     public function testMatchWildCard()
@@ -132,40 +127,38 @@ class foobar2 {
         $acceptHeader = Accept::fromString('Accept: application/*');
         $this->assertTrue($acceptHeader->hasMediaType('application/vnd.foobar+json'));
         $this->assertTrue($acceptHeader->hasMediaType('application/vnd.foobar+*'));
-    }
- }
 
-    class AcceptTest extends \PHPUnit_Framework_TestCase
-    {
+        $acceptHeader = Accept::fromString('Accept: application/vnd.foobar+html');
+        $this->assertTrue($acceptHeader->hasMediaType('*/html'));
+        $this->assertTrue($acceptHeader->hasMediaType('application/vnd.foobar+*'));
+
+
+        $acceptHeader = Accept::fromString('Accept: text/html');
+        $this->assertTrue($acceptHeader->hasMediaType('*/html'));
+        $this->assertTrue($acceptHeader->hasMediaType('*/*+html'));
+
+        $this->assertTrue($acceptHeader->hasMediaType('text/*'));
+    }
+
 
     public function testParsingAndAssemblingQuotedStrings()
     {
-        ini_set('display_errors', 1);
-        error_reporting(-1);
         $acceptStr = 'Accept: application/vnd.foobar+html;q=1;version="2\\'
                    . chr(22).'3\"";level="foo;, bar", text/json;level=1, text/xml;level=2;q=0.4';
         $acceptHeader = Accept::fromString($acceptStr);
 
-        $this->assertEquals($acceptStr, 'Accept: '.$acceptHeader->getFieldValue());
-// var_dump($acceptHeader);
-//         var_dump($acceptHeader->getPrioritized());
+        $this->assertEquals($acceptStr, $acceptHeader->getFieldName().': '.$acceptHeader->getFieldValue());
     }
 
-}
-class foobar {
-//     function foboar() {
 
 
     public function testVersioning()
     {
-        $request = new RequestMock('http://fobar/jhkjh', $this->_bootstrap);
-        $request->setHeader('Accept', 'text/html;q=1; version=23; level=5, text/json;level=1,' .
-                'text/xml;level=2;q=0.4');
+        $acceptStr = 'Accept: text/html;q=1; version=23; level=5, text/json;level=1,' .
+                'text/xml;level=2;q=0.4';
+        $acceptHeader = Accept::fromString($acceptStr);
 
-        $this->_handler->setRequest($request);
-        $this->_handler->setAllowedFormats(array('json', 'html', 'image' => 'jpeg'));
-
-        $expected = array('typeString' => 'text/html',
+        $expected = (object) array('typeString' => 'text/html',
                 'type' => 'text',
                 'subtype' => 'html',
                 'subtypeRaw' => 'html',
@@ -174,25 +167,25 @@ class foobar {
                 'params' => array('q' => 1, 'version' => 23, 'level' => 5),
                 'raw' => 'text/html;q=1; version=23; level=5');
 
-        $this->assertFalse($this->_handler->match('text/html; version=22', false, false));
-        $this->assertEquals($expected, $this->_handler->match('text/html; version=23', false, false));
-        $this->assertFalse($this->_handler->match('text/html; version=24', false, false));
+        $this->assertFalse($acceptHeader->match('text/html; version=22'));
+        $this->assertEquals($expected, $acceptHeader->match('text/html; version=23'));
+        $this->assertFalse($acceptHeader->match('text/html; version=24'));
 
-        $this->assertEquals($expected, $this->_handler->match('text/html; version=22-24', false, false));
-        $this->assertFalse($this->_handler->match('text/html; version=20|22|24', false, false));
-        $this->assertEquals($expected, $this->_handler->match('text/html; version=22|23|24', false, false));
+        $this->assertEquals($expected, $acceptHeader->match('text/html; version=22-24'));
+        $this->assertFalse($acceptHeader->match('text/html; version=20|22|24'));
+        $this->assertEquals($expected, $acceptHeader->match('text/html; version=22|23|24'));
     }
 
-    public function testMoreVersioning()
+    public function testVersioningAndPriorization()
     {
-        $request = new RequestMock('http://fobar/jhkjh', $this->_bootstrap);
-        $request->setHeader('Accept', 'text/html; version=23, text/json; version=15.3; q=0.9,' .
-                'text/html;level=2;q=0.4');
+        $this->markTestSkipped('Not implemented yet');
 
-        $this->_handler->setRequest($request);
-        $this->_handler->setAllowedFormats(array('json', 'html'));
 
-        $expected = array('typeString' => 'text/json',
+        $acceptStr = 'Accept: text/html; version=23, text/json; version=15.3; q=0.9,' .
+                'text/html;level=2;q=0.4';
+        $acceptHeader = Accept::fromString($acceptStr);
+
+        $expected = (object) array('typeString' => 'text/json',
                 'type' => 'text',
                 'subtype' => 'json',
                 'subtypeRaw' => 'json',
@@ -200,9 +193,11 @@ class foobar {
                 'priority' => 0.9,
                 'params' => array('q' => 0.9, 'version' => 15.3),
                 'raw' => 'text/json; version=15.3; q=0.9');
-        $this->assertEquals($expected, $this->_handler->match(array('text/html; version=17', 'text/json; version=15-16'), false, false));
 
-        $expected = array('typeString' => 'text/html',
+        $str = 'text/html; version=17, text/json; version=15-16';
+        $this->assertEquals($expected, $acceptHeader->match($str));
+
+        $expected = (object) array('typeString' => 'text/html',
                 'type' => 'text',
                 'subtype' => 'html',
                 'subtypeRaw' => 'html',
@@ -210,45 +205,16 @@ class foobar {
                 'priority' => 0.4,
                 'params' => array('q' => 0.4, 'level' => 2),
                 'raw' => 'text/html;level=2;q=0.4');
-        $this->assertEquals($expected, $this->_handler->match(array('text/html; version=17', 'text/json; version=15-16; q=0.5'), false, false));
+
+        $str = 'text/html; version=17,text/json; version=15-16; q=0.5';
+        $this->assertEquals($expected, $acceptHeader->match($str));
     }
-
-    public function testIsPluginEnabled()
-    {
-        $front = Zend_Controller_Front::getInstance();
-
-        $pluginName = 'Idm_Controller_Plugin_AcceptHandler';
-        $plugins = array();
-        foreach($front->getPlugins() as $class) {
-            $plugins[] = get_class($class);
-        }
-        $this->assertContains($pluginName, $plugins, 'Plugin "' . $pluginName . '" should be loaded');
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     public function testPrioritizing()
     {
+        $this->markTestSkipped('Not implemented yet');
+
         $request = new RequestMock('http://fobar/jhkjh', $this->_bootstrap);
         $request->setHeader('Accept', 'text/*;q=0.3, */*,text/html;q=1, text/html;level=1,' .
                 'text/html;level=2;q=0.4, */*;q=0.5');

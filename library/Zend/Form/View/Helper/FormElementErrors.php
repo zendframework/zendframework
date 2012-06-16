@@ -21,6 +21,7 @@
 
 namespace Zend\Form\View\Helper;
 
+use Traversable;
 use Zend\Form\ElementInterface;
 use Zend\Form\Exception;
 
@@ -57,7 +58,7 @@ class FormElementErrors extends AbstractHelper
         $this->messageCloseString = (string) $messageCloseString;
         return $this;
     }
-    
+
     /**
      * Get the string used to close message representation
      *
@@ -79,7 +80,7 @@ class FormElementErrors extends AbstractHelper
         $this->messageOpenFormat = (string) $messageOpenFormat;
         return $this;
     }
-    
+
     /**
      * Get the formatted string used to open message representation
      *
@@ -101,7 +102,7 @@ class FormElementErrors extends AbstractHelper
         $this->messageSeparatorString = (string) $messageSeparatorString;
         return $this;
     }
-    
+
     /**
      * Get the string used to separate messages
      *
@@ -136,8 +137,8 @@ class FormElementErrors extends AbstractHelper
 
     /**
      * Render validation errors for the provided $element
-     * 
-     * @param  ElementInterface $element 
+     *
+     * @param  ElementInterface $element
      * @param  array $attributes
      * @return string
      */
@@ -181,8 +182,8 @@ class FormElementErrors extends AbstractHelper
      * Invoke helper as functor
      *
      * Proxies to {@link render()} if an element is passed.
-     * 
-     * @param  ElementInterface $element 
+     *
+     * @param  ElementInterface $element
      * @param  array $attributes
      * @return string|FormElementErrors
      */

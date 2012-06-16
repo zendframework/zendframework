@@ -96,11 +96,19 @@ class ImageTest extends CommonTestCase
         return $this->tmpDir;
     }
 
-    public function getElement() 
+    public function getElement()
     {
         $element = new Element('foo');
         $element->setAttribute('captcha', $this->captcha);
         return $element;
+    }
+
+    public function testMissingCaptchaAttributeThrowsDomainException()
+    {
+        $element = new Element('foo');
+
+        $this->setExpectedException('Zend\Form\Exception\DomainException');
+        $this->helper->render($element);
     }
 
     public function testRendersHiddenInputForId()

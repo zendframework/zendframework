@@ -52,25 +52,25 @@ class ExplodeTest extends \PHPUnit_Framework_TestCase
     public function getExpectedData()
     {
         return array(
-            //    value              delim break  N  valid  messages    assertion
-            array('foo,bar,dev,null', ',', false, 4, true,  array(),    'assertTrue'),
-            array('foo,bar,dev,null', ',', true,  1, false, array('X'), 'assertFalse'),
-            array('foo,bar,dev,null', ',', false, 4, false, array('X', 'X', 'X', 'X'), 'assertFalse'),
-            array('foo,bar,dev,null', ';', false, 1, true,  array(), 'assertTrue'),
-            array('foo;bar,dev;null', ',', false, 2, true,  array(), 'assertTrue'),
-            array('foo;bar,dev;null', ',', false, 2, false, array('X', 'X'), 'assertFalse'),
-            array('foo;bar;dev;null', ';', false, 4, true,  array(), 'assertTrue'),
-            array('foo',              ',', false, 1, true,  array(), 'assertTrue'),
-            array('foo',              ',', false, 1, false, array('X'), 'assertFalse'),
-            array('foo',              ',', true,  1, false, array('X'), 'assertFalse'),
-            array(array(),            ',', false, 0, true,  array(Validator\Explode::INVALID => 'Invalid'), 'assertFalse'),
+            //    value              delim break  N  valid  messages                   expects
+            array('foo,bar,dev,null', ',', false, 4, true,  array(),                   true),
+            array('foo,bar,dev,null', ',', true,  1, false, array('X'),                false),
+            array('foo,bar,dev,null', ',', false, 4, false, array('X', 'X', 'X', 'X'), false),
+            array('foo,bar,dev,null', ';', false, 1, true,  array(),                   true),
+            array('foo;bar,dev;null', ',', false, 2, true,  array(),                   true),
+            array('foo;bar,dev;null', ',', false, 2, false, array('X', 'X'),           false),
+            array('foo;bar;dev;null', ';', false, 4, true,  array(),                   true),
+            array('foo',              ',', false, 1, true,  array(),                   true),
+            array('foo',              ',', false, 1, false, array('X'),                false),
+            array('foo',              ',', true,  1, false, array('X'),                false),
+            array(array(),            ',', false, 0, true,  array(Validator\Explode::INVALID => 'Invalid'), false),
         );
     }
 
     /**
      * @dataProvider getExpectedData
      */
-    public function testExpectedBehavior($value, $delimiter, $breakOnFirst, $numIsValidCalls, $isValidReturn, $messages, $assertion)
+    public function testExpectedBehavior($value, $delimiter, $breakOnFirst, $numIsValidCalls, $isValidReturn, $messages, $expects)
     {
         $mockValidator = $this->getMock('Zend\Validator\ValidatorInterface');
         $mockValidator->expects($this->exactly($numIsValidCalls))->method('isValid')->will($this->returnValue($isValidReturn));
@@ -83,7 +83,7 @@ class ExplodeTest extends \PHPUnit_Framework_TestCase
         ));
         $validator->setMessage('Invalid', Validator\Explode::INVALID);
 
-        $this->$assertion($validator->isValid($value));
+        $this->assertEquals($expects,  $validator->isValid($value));
         $this->assertEquals($messages, $validator->getMessages());
     }
 

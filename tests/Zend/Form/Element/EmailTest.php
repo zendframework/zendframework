@@ -43,18 +43,18 @@ class EmailTest extends TestCase
         $this->assertInstanceOf('Zend\Validator\Explode', $validator);
     }
 
-    public function testCanInjectEmailValidator()
+    public function testCanInjectCustomValidator()
     {
         $element   = new EmailElement();
-        $validator = new EmailValidator();
+        $validator = $this->getMock('Zend\Validator\ValidatorInterface');
         $element->setValidator($validator);
         $this->assertSame($validator, $element->getValidator());
     }
 
-    public function testProvidesInputSpecificationThatIncludesEmailValidator()
+    public function testProvidesInputSpecificationThatIncludesCustomValidator()
     {
         $element   = new EmailElement();
-        $validator = new EmailValidator();
+        $validator = $this->getMock('Zend\Validator\ValidatorInterface');
         $element->setValidator($validator);
 
         $inputSpec = $element->getInputSpecification();

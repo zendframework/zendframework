@@ -96,7 +96,6 @@ class JsonStrategy implements ListenerAggregateInterface
      */
     public function selectRenderer(ViewEvent $e)
     {
-//         return $this->renderer;
         $model = $e->getModel();
 
         if ($model instanceof Model\JsonModel) {

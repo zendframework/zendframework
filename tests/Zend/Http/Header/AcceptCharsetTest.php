@@ -40,7 +40,7 @@ class AcceptCharsetTest extends \PHPUnit_Framework_TestCase
 
     public function testCanParseCommaSeparatedValues()
     {
-        $header = AcceptCharset::fromString('Accept-Charset: iso-8859-5,iso-8859-5;q=0.8,unicode-1-1');
+        $header = AcceptCharset::fromString('Accept-Charset: iso-8859-5;q=0.8,unicode-1-1');
         $this->assertTrue($header->hasCharset('iso-8859-5'));
         $this->assertTrue($header->hasCharset('unicode-1-1'));
     }

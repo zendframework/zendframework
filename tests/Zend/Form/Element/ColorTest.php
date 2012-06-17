@@ -59,7 +59,7 @@ class ColorTest extends TestCase
     public function testCanInjectValidator()
     {
         $element   = new ColorElement();
-        $validator = $mockValidator = $this->getMock('Zend\Validator\ValidatorInterface');
+        $validator = $this->getMock('Zend\Validator\ValidatorInterface');
         $element->setValidator($validator);
         $this->assertSame($validator, $element->getValidator());
     }
@@ -67,7 +67,7 @@ class ColorTest extends TestCase
     public function testProvidesInputSpecificationThatIncludesValidator()
     {
         $element = new ColorElement();
-        $validator = $mockValidator = $this->getMock('Zend\Validator\ValidatorInterface');
+        $validator = $this->getMock('Zend\Validator\ValidatorInterface');
         $element->setValidator($validator);
 
         $inputSpec = $element->getInputSpecification();

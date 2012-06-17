@@ -300,6 +300,7 @@ class Di implements DependencyInjectionInterface
                                         $methodParams = $definitions->getMethodParameters($type, $typeInjectionMethod);
                                         if ($methodParams) {
                                             foreach ($methodParams as $methodParam) {
+                                                // @todo override in ServiceLocator sub-namespace
                                                 $objectToInjectClass = $objectToInject instanceof ServiceLocator\GeneratorInstance ? $objectToInject->getClass() : get_class($objectToInject);
                                                 if ($objectToInjectClass == $methodParam[1] || $this->isSubclassOf($objectToInjectClass, $methodParam[1])) {
                                                     if ($this->resolveAndCallInjectionMethodForInstance($instance, $typeInjectionMethod, array($methodParam[0] => $objectToInject), $instanceAlias, true, $type)) {

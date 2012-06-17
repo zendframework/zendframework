@@ -24,45 +24,50 @@ namespace ZendTest\Form\Element;
 use PHPUnit_Framework_TestCase as TestCase;
 use Zend\Form\Element\Color as ColorElement;
 use Zend\Form\Factory;
-use Zend\Validator\Regex as RegexValidator;
 
 class ColorTest extends TestCase
 {
     public function colorData()
     {
         return array(
-            array('#012345', 'assertTrue'),
-            array('#abcdef', 'assertTrue'),
-            array('#012abc', 'assertTrue'),
-            array('#01a',    'assertFalse'),
-            array('01abcd',  'assertFalse'),
-            array('blue',    'assertFalse'),
+            array('#012345',     true),
+            array('#abcdef',     true),
+            array('#012abc',     true),
+            array('#012abcd',    false),
+            array('#012abcde',   false),
+            array('#ABCDEF',     true),
+            array('#012ABC',     true),
+            array('#bcdefg',     false),
+            array('#01a',        false),
+            array('01abcd',      false),
+            array('blue',        false),
+            array('transparent', false),
         );
     }
 
     /**
      * @dataProvider colorData
      */
-    public function testLazyLoadsRegexValidatorByDefault($color, $assertion)
+    public function testLazyLoadsRegexValidatorByDefaultAndValidatesColors($color, $expected)
     {
         $element   = new ColorElement();
         $validator = $element->getValidator();
         $this->assertInstanceOf('Zend\Validator\Regex', $validator);
-        $this->$assertion($validator->isValid($color));
+        $this->assertEquals($expected, $validator->isValid($color));
     }
 
     public function testCanInjectValidator()
     {
         $element   = new ColorElement();
-        $validator = new RegexValidator('/^#[0-9a-z]{6}$/');
+        $validator = $mockValidator = $this->getMock('Zend\Validator\ValidatorInterface');
         $element->setValidator($validator);
         $this->assertSame($validator, $element->getValidator());
     }
 
-    public function testProvidesInputSpecificationThatIncludesRegexValidator()
+    public function testProvidesInputSpecificationThatIncludesValidator()
     {
         $element = new ColorElement();
-        $validator = new RegexValidator('/^#[0-9a-z]{6}$/');
+        $validator = $mockValidator = $this->getMock('Zend\Validator\ValidatorInterface');
         $element->setValidator($validator);
 
         $inputSpec = $element->getInputSpecification();

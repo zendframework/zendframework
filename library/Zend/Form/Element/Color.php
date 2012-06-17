@@ -24,6 +24,7 @@ namespace Zend\Form\Element;
 use Zend\Form\Element;
 use Zend\InputFilter\InputProviderInterface;
 use Zend\Validator\Regex as RegexValidator;
+use Zend\Validator\ValidatorInterface;
 
 /**
  * @category   Zend
@@ -52,9 +53,9 @@ class Color extends Element implements InputProviderInterface
      * Set validator
      *
      * @param  ValidatorInterface $validator
-     * @return Email
+     * @return Color
      */
-    public function setValidator($validator)
+    public function setValidator(ValidatorInterface $validator)
     {
         $this->validator = $validator;
         return $this;
@@ -68,7 +69,7 @@ class Color extends Element implements InputProviderInterface
     public function getValidator()
     {
         if (null === $this->validator) {
-            $this->setValidator(new RegexValidator('/^#[0-9a-z]{6}$/'));
+            $this->setValidator(new RegexValidator('/^#[0-9a-fA-F]{6}$/'));
         }
         return $this->validator;
     }

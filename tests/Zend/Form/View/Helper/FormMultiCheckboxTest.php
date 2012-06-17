@@ -39,7 +39,7 @@ class FormMultiCheckboxTest extends CommonTestCase
         parent::setUp();
     }
 
-    public function getElement() 
+    public function getElement()
     {
         $element = new Element('foo');
         $options = array(
@@ -60,6 +60,27 @@ class FormMultiCheckboxTest extends CommonTestCase
         $this->assertEquals(3, substr_count($markup, 'name="foo'));
         $this->assertEquals(3, substr_count($markup, 'type="checkbox"'));
         $this->assertEquals(3, substr_count($markup, '<input'));
+        $this->assertEquals(3, substr_count($markup, '<label'));
+
+        foreach ($options as $label => $value) {
+            $this->assertContains(sprintf('>%s</label>', $label), $markup);
+            $this->assertContains(sprintf('value="%s"', $value), $markup);
+        }
+    }
+
+    public function testGenerateCheckBoxesAndHiddenElement()
+    {
+        $element = $this->getElement();
+        $element->setAttribute('useHiddenElement', true);
+        $element->setAttribute('uncheckedValue', 'none');
+        $options = $element->getAttribute('options');
+        $markup  = $this->helper->render($element);
+
+        $this->assertEquals(4, substr_count($markup, 'name="foo'));
+        $this->assertEquals(1, substr_count($markup, 'type="hidden"'));
+        $this->assertEquals(1, substr_count($markup, 'value="none"'));
+        $this->assertEquals(3, substr_count($markup, 'type="checkbox"'));
+        $this->assertEquals(4, substr_count($markup, '<input'));
         $this->assertEquals(3, substr_count($markup, '<label'));
 
         foreach ($options as $label => $value) {
@@ -102,6 +123,27 @@ class FormMultiCheckboxTest extends CommonTestCase
         foreach ($options as $label => $value) {
             $this->assertContains(sprintf('<label>%s<', $label), $markup);
         }
+    }
+
+    public function testAllowsSpecifyingLabelAttributes()
+    {
+        $element = $this->getElement();
+
+        $markup  = $this->helper
+            ->setLabelAttributes(array('class' => 'checkbox'))
+            ->render($element);
+
+        $this->assertEquals(3, substr_count($markup, '<label class="checkbox"'));
+    }
+
+    public function testAllowsSpecifyingLabelAttributesInElementAttributes()
+    {
+        $element = $this->getElement();
+        $element->setAttribute('labelAttributes', array('class' => 'checkbox'));
+
+        $markup  = $this->helper->render($element);
+
+        $this->assertEquals(3, substr_count($markup, '<label class="checkbox"'));
     }
 
     public function testIdShouldNotBeRenderedForEachRadio()

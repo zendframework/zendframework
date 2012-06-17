@@ -50,4 +50,17 @@ class EmailTest extends TestCase
         $element->setValidator($validator);
         $this->assertSame($validator, $element->getValidator());
     }
+
+    public function testProvidesInputSpecificationThatIncludesEmailValidator()
+    {
+        $element   = new EmailElement();
+        $validator = new EmailValidator();
+        $element->setValidator($validator);
+
+        $inputSpec = $element->getInputSpecification();
+        $this->assertArrayHasKey('validators', $inputSpec);
+        $this->assertInternalType('array', $inputSpec['validators']);
+        $test = array_shift($inputSpec['validators']);
+        $this->assertSame($validator, $test);
+    }
 }

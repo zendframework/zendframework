@@ -98,6 +98,8 @@ class HelperLoader extends PluginClassLoader
         'form_select'            => 'Zend\Form\View\Helper\FormSelect',
         'formsubmit'             => 'Zend\Form\View\Helper\FormSubmit',
         'form_submit'            => 'Zend\Form\View\Helper\FormSubmit',
+        'formtel'                => 'Zend\Form\View\Helper\FormTel',
+        'form_tel'               => 'Zend\Form\View\Helper\FormTel',
         'formtext'               => 'Zend\Form\View\Helper\FormText',
         'form_text'              => 'Zend\Form\View\Helper\FormText',
         'formtextarea'           => 'Zend\Form\View\Helper\FormTextarea',

@@ -218,6 +218,24 @@ class ServiceManagerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @group fml
+     */
+    public function testAllowsRetrievingFromPeeringContainerFirst()
+    {
+        $parent = new ServiceManager();
+        $parent->setFactory('foo', function($sm) {
+            return 'bar';
+        });
+        $child  = new ServiceManager();
+        $child->setFactory('foo', function($sm) {
+            return 'baz';
+        });
+        $child->addPeeringServiceManager($parent, ServiceManager::SCOPE_PARENT);
+        $child->setRetrieveFromPeeringManagerFirst(true);
+        $this->assertEquals('bar', $child->get('foo'));
+    }
+
+    /**
      * @covers Zend\ServiceManager\ServiceManager::create
      */
     public function testCreateWithInvokableClass()

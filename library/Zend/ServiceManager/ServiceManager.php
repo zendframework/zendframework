@@ -60,6 +60,11 @@ class ServiceManager implements ServiceLocatorInterface
     protected $peeringServiceManagers = array();
 
     /**
+     * @var bool
+     */
+    protected $retrieveFromPeeringManagerFirst = false;
+
+    /**
      * @var bool Track whether not ot throw exceptions during create()
      */
     protected $throwExceptionInCreate = true;
@@ -107,6 +112,17 @@ class ServiceManager implements ServiceLocatorInterface
     public function getThrowExceptionInCreate()
     {
         return $this->throwExceptionInCreate;
+    }
+
+    public function setRetrieveFromPeeringManagerFirst($retrieveFromPeeringManagerFirst = true)
+    {
+        $this->retrieveFromPeeringManagerFirst = (bool) $retrieveFromPeeringManagerFirst;
+        return $this;
+    }
+
+    public function retrieveFromPeeringManagerFirst()
+    {
+        return $this->retrieveFromPeeringManagerFirst;
     }
 
     /**
@@ -282,25 +298,20 @@ class ServiceManager implements ServiceLocatorInterface
         $selfException = null;
 
         if (!$instance && !is_array($instance)) {
-            try {
-                $instance = $this->create(array($cName, $rName));
-            } catch (\Exception $selfException) {
-                if (!$selfException instanceof Exception\ServiceNotFoundException &&
-                    !$selfException instanceof Exception\ServiceNotCreatedException) {
-                    throw $selfException;
-                }
-                if ($usePeeringServiceManagers) {
-                    foreach ($this->peeringServiceManagers as $peeringServiceManager) {
-                        try {
-                            $instance = $peeringServiceManager->get($name);
-                        } catch (Exception\ServiceNotFoundException $e) {
-                            continue;
-                        } catch (Exception\ServiceNotCreatedException $e) {
-                            continue;
-                        } catch (\Exception $e) {
-                            throw $e;
-                        }
-                        break;
+            $retrieveFromPeeringManagerFirst = $this->retrieveFromPeeringManagerFirst();
+            if ($usePeeringServiceManagers && $retrieveFromPeeringManagerFirst) {
+                $instance = $this->retrieveFromPeeringManager($name);
+            }
+            if (!$instance) {
+                try {
+                    $instance = $this->create(array($cName, $rName));
+                } catch (\Exception $selfException) {
+                    if (!$selfException instanceof Exception\ServiceNotFoundException &&
+                        !$selfException instanceof Exception\ServiceNotCreatedException) {
+                        throw $selfException;
+                    }
+                    if ($usePeeringServiceManagers && !$retrieveFromPeeringManagerFirst) {
+                        $instance = $this->retrieveFromPeeringManager($name);
                     }
                 }
             }
@@ -604,4 +615,21 @@ class ServiceManager implements ServiceLocatorInterface
         );
     }
 
+    protected function retrieveFromPeeringManager($name)
+    {
+        $instance = null;
+        foreach ($this->peeringServiceManagers as $peeringServiceManager) {
+            try {
+                $instance = $peeringServiceManager->get($name);
+            } catch (Exception\ServiceNotFoundException $e) {
+                continue;
+            } catch (Exception\ServiceNotCreatedException $e) {
+                continue;
+            } catch (\Exception $e) {
+                throw $e;
+            }
+            break;
+        }
+        return $instance;
+    }
 }

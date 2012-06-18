@@ -217,9 +217,6 @@ class ServiceManagerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('bar', $parent->get('foo'));
     }
 
-    /**
-     * @group fml
-     */
     public function testAllowsRetrievingFromPeeringContainerFirst()
     {
         $parent = new ServiceManager();

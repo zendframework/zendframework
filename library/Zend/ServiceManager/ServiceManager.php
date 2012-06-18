@@ -345,7 +345,7 @@ class ServiceManager implements ServiceLocatorInterface
     public function create($name)
     {
         $instance = false;
-        $rName = null;
+        $rName    = null;
 
         if (is_array($name)) {
             list($cName, $rName) = $name;
@@ -356,59 +356,15 @@ class ServiceManager implements ServiceLocatorInterface
         $cName = $this->canonicalizeName($cName);
 
         if (isset($this->invokableClasses[$cName])) {
-            $invokable = $this->invokableClasses[$cName];
-            if (!class_exists($invokable)) {
-                throw new Exception\ServiceNotCreatedException(sprintf(
-                    '%s: failed retrieving "%s%s" via invokable class "%s"; class does not exist',
-                    __METHOD__,
-                    $cName,
-                    ($rName ? '(alias: ' . $rName . ')' : ''),
-                    $cName
-                ));
-            }
-            $instance = new $invokable;
+            $instance = $this->createFromInvokable($cName, $rName);
         }
 
         if (!$instance && isset($this->factories[$cName])) {
-            $factory = $this->factories[$cName];
-            if (is_string($factory) && class_exists($factory, true)) {
-                $factory = new $factory;
-                $this->factories[$cName] = $factory;
-            }
-            if ($factory instanceof FactoryInterface) {
-                $instance = $this->createServiceViaCallback(array($factory, 'createService'), $cName, $rName);
-            } elseif (is_callable($factory)) {
-                $instance = $this->createServiceViaCallback($factory, $cName, $rName);
-            } else {
-                throw new Exception\ServiceNotCreatedException(sprintf(
-                    'While attempting to create %s%s an invalid factory was registered for this instance type.',
-                    $cName,
-                    ($rName ? '(alias: ' . $rName . ')' : '')
-                ));
-            }
+            $instance = $this->createFromFactory($cName, $rName);
         }
 
         if (!$instance && !empty($this->abstractFactories)) {
-            foreach ($this->abstractFactories as $index => $abstractFactory) {
-                // support factories as strings
-                if (is_string($abstractFactory) && class_exists($abstractFactory, true)) {
-                    $this->abstractFactories[$index] = $abstractFactory = new $abstractFactory;
-                }
-                if ($abstractFactory instanceof AbstractFactoryInterface) {
-                    $instance = $this->createServiceViaCallback(array($abstractFactory, 'createServiceWithName'), $cName, $rName);
-                } elseif (is_callable($abstractFactory)) {
-                    $instance = $this->createServiceViaCallback($abstractFactory, $cName, $rName);
-                } else {
-                    throw new Exception\ServiceNotCreatedException(sprintf(
-                        'While attempting to create %s%s an abstract factory could not produce a valid instance.',
-                        $cName,
-                        ($rName ? '(alias: ' . $rName . ')' : '')
-                    ));
-                }
-                if (is_object($instance)) {
-                    break;
-                }
-            }
+            $instance = $this->createFromAbstractFactory($cName, $rName);
         }
 
         if ($this->throwExceptionInCreate == true && $instance === false) {
@@ -615,6 +571,12 @@ class ServiceManager implements ServiceLocatorInterface
         );
     }
 
+    /**
+     * Attempt to retrieve an instance via a peering manager
+     * 
+     * @param  string $name 
+     * @return mixed
+     */
     protected function retrieveFromPeeringManager($name)
     {
         $instance = null;
@@ -630,6 +592,97 @@ class ServiceManager implements ServiceLocatorInterface
             }
             break;
         }
+        return $instance;
+    }
+
+    /**
+     * Attempt to create an instance via an invokable class
+     * 
+     * @param  string $canonicalName 
+     * @param  string $requestedName 
+     * @return null|\stdClass
+     * @throws Exception\ServiceNotCreatedException If resolved class does not exist
+     */
+    protected function createFromInvokable($canonicalName, $requestedName)
+    {
+        $invokable = $this->invokableClasses[$canonicalName];
+        if (!class_exists($invokable)) {
+            throw new Exception\ServiceNotCreatedException(sprintf(
+                '%s: failed retrieving "%s%s" via invokable class "%s"; class does not exist',
+                __METHOD__,
+                $canonicalName,
+                ($requestedName ? '(alias: ' . $requestedName . ')' : ''),
+                $canonicalName
+            ));
+        }
+        $instance = new $invokable;
+        return $instance;
+    }
+
+    /**
+     * Attempt to create an instance via a factory
+     * 
+     * @param  string $canonicalName 
+     * @param  string $requestedName 
+     * @return mixed
+     * @throws Exception\ServiceNotCreatedException If factory is not callable
+     */
+    protected function createFromFactory($canonicalName, $requestedName)
+    {
+        $factory = $this->factories[$canonicalName];
+        if (is_string($factory) && class_exists($factory, true)) {
+            $factory = new $factory;
+            $this->factories[$canonicalName] = $factory;
+        }
+        if ($factory instanceof FactoryInterface) {
+            $instance = $this->createServiceViaCallback(array($factory, 'createService'), $canonicalName, $requestedName);
+        } elseif (is_callable($factory)) {
+            $instance = $this->createServiceViaCallback($factory, $canonicalName, $requestedName);
+        } else {
+            throw new Exception\ServiceNotCreatedException(sprintf(
+                'While attempting to create %s%s an invalid factory was registered for this instance type.',
+                $canonicalName,
+                ($requestedName ? '(alias: ' . $requestedName . ')' : '')
+            ));
+        }
+        return $instance;
+    }
+
+    /**
+     * Attempt to create an instance via an abstract factory
+     * 
+     * @param  string $canonicalName 
+     * @param  string $requestedName 
+     * @return \stdClass|null
+     * @throws Exception\ServiceNotCreatedException If abstract factory is not callable
+     */
+    protected function createFromAbstractFactory($canonicalName, $requestedName)
+    {
+        foreach ($this->abstractFactories as $index => $abstractFactory) {
+            // support factories as strings
+            if (is_string($abstractFactory) && class_exists($abstractFactory, true)) {
+                $this->abstractFactories[$index] = $abstractFactory = new $abstractFactory;
+            }
+            if ($abstractFactory instanceof AbstractFactoryInterface) {
+                $instance = $this->createServiceViaCallback(
+                    array($abstractFactory, 'createServiceWithName'), 
+                    $canonicalName, 
+                    $requestedName
+                );
+            } elseif (is_callable($abstractFactory)) {
+                $instance = $this->createServiceViaCallback($abstractFactory, $canonicalName, $requestedName);
+            } else {
+                throw new Exception\ServiceNotCreatedException(sprintf(
+                    'While attempting to create %s%s an abstract factory could not produce a valid instance.',
+                    $canonicalName,
+                    ($requestedName ? '(alias: ' . $requestedName . ')' : '')
+                ));
+            }
+            if (is_object($instance)) {
+                break;
+            }
+        }
+
         return $instance;
     }
 }

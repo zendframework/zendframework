@@ -98,9 +98,9 @@ class MathTest extends \PHPUnit_Framework_TestCase
     public function testRandBigInteger()
     {
         try {
-            $math = new \Zend\Math\BigInteger();
-        } catch (\Zend\Math\Exception\ExceptionInterface $e) {
-            if (strpos($e->getMessage(), 'big integer precision math support not detected') !== false) {
+            $math = new \Zend\Math\BigInteger\BigInteger();
+        } catch (\Zend\Math\BigInteger\Exception\RuntimeException $e) {
+            if (strpos($e->getMessage(), 'math support is not detected') !== false) {
                 $this->markTestSkipped($e->getMessage());
             } else {
                 throw $e;

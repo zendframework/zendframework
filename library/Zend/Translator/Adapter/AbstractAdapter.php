@@ -364,7 +364,7 @@ abstract class AbstractAdapter
                     try {
                         $options['content'] = $info->getPathname();
                         $this->_addTranslationData($options);
-                    } catch (Exception $e) {
+                    } catch (Exception\ExceptionInterface $e) {
                         // ignore failed sources while scanning
                     }
                 }

@@ -526,6 +526,24 @@ class ServiceManager implements ServiceLocatorInterface
     }
 
     /**
+     * Add a peering relationship
+     * 
+     * @param  ServiceManager $manager 
+     * @param  string $peering 
+     * @return ServiceManager Current instance
+     */
+    public function addPeeringServiceManager(ServiceManager $manager, $peering = self::SCOPE_PARENT)
+    {
+        if ($peering == self::SCOPE_PARENT) {
+            $this->peeringServiceManagers[] = $manager;
+        }
+        if ($peering == self::SCOPE_CHILD) {
+            $manager->peeringServiceManagers[] = $this;
+        }
+        return $this;
+    }
+
+    /**
      * @param $name
      * @return string
      */

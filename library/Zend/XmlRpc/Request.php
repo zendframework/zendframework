@@ -294,12 +294,15 @@ class Request
             return false;
         }
 
+        // @see ZF-12293 - disable external entities for security purposes
+        $loadEntities = libxml_disable_entity_loader(true);
         try {
             $xml = new \SimpleXMLElement($request);
         } catch (\Exception $e) {
             // Not valid XML
             $this->_fault = new Fault(631);
             $this->_fault->setEncoding($this->getEncoding());
+            libxml_disable_entity_loader($loadEntities);
             return false;
         }
 
@@ -308,6 +311,7 @@ class Request
             // Missing method name
             $this->_fault = new Fault(632);
             $this->_fault->setEncoding($this->getEncoding());
+            libxml_disable_entity_loader($loadEntities);
             return false;
         }
 
@@ -321,6 +325,7 @@ class Request
                 if (!isset($param->value)) {
                     $this->_fault = new Fault(633);
                     $this->_fault->setEncoding($this->getEncoding());
+                    libxml_disable_entity_loader($loadEntities);
                     return false;
                 }
 
@@ -331,6 +336,7 @@ class Request
                 } catch (\Exception $e) {
                     $this->_fault = new Fault(636);
                     $this->_fault->setEncoding($this->getEncoding());
+                    libxml_disable_entity_loader($loadEntities);
                     return false;
                 }
             }
@@ -339,6 +345,7 @@ class Request
             $this->_params = $argv;
         }
 
+        libxml_disable_entity_loader($loadEntities);
         $this->_xml = $request;
 
         return true;

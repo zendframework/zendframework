@@ -102,5 +102,7 @@ class HelperLoader extends PluginClassLoader
         'form_text'              => 'Zend\Form\View\Helper\FormText',
         'formtextarea'           => 'Zend\Form\View\Helper\FormTextarea',
         'form_textarea'          => 'Zend\Form\View\Helper\FormTextarea',
+        'formurl'                => 'Zend\Form\View\Helper\FormUrl',
+        'form_url'               => 'Zend\Form\View\Helper\FormUrl',
     );
 }

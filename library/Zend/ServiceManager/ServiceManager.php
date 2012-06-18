@@ -378,8 +378,10 @@ class ServiceManager implements ServiceLocatorInterface
         foreach ($this->initializers as $initializer) {
             if ($initializer instanceof InitializerInterface) {
                 $initializer->initialize($instance);
-            } else {
+            } elseif (is_object($initializer) && is_callable($initializer)) {
                 $initializer($instance);
+            } else {
+                call_user_func($initializer, $instance);
             }
         }
 

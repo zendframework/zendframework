@@ -21,8 +21,6 @@
 namespace Zend\Filter;
 
 use Countable;
-use Zend\Loader\Broker;
-use Zend\Loader\Pluggable;
 use Zend\Stdlib\SplPriorityQueue;
 
 /**
@@ -31,9 +29,7 @@ use Zend\Stdlib\SplPriorityQueue;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class FilterChain extends AbstractFilter implements 
-    Pluggable, 
-    Countable
+class FilterChain extends AbstractFilter implements Countable
 {
     /**
      * Default priority at which filters are added
@@ -41,9 +37,9 @@ class FilterChain extends AbstractFilter implements
     const DEFAULT_PRIORITY = 1000;
 
     /**
-     * @var Broker
+     * @var ServiceManager
      */
-    protected $broker;
+    protected $services;
 
     /**
      * Filter chain
@@ -116,34 +112,27 @@ class FilterChain extends AbstractFilter implements
     }
 
     /**
-     * Get plugin broker instance
+     * Get service manager instance
      * 
-     * @return Zend\Loader\Broker
+     * @return ServiceManager
      */
-    public function getBroker()
+    public function getServiceManager()
     {
-        if (!$this->broker) {
-            $this->setBroker(new FilterBroker());
+        if (!$this->services) {
+            $this->setServiceManager(new ServiceManager());
         }
-        return $this->broker;
+        return $this->services;
     }
 
     /**
-     * Set plugin broker instance
+     * Set service manager instance
      * 
-     * @param  string|Broker $broker Plugin broker to load plugins
+     * @param  ServiceManager $services Service manager to use when loading plugins
      * @return FilterChain
      */
-    public function setBroker($broker)
+    public function setServiceManager(ServiceManager $services)
     {
-        if (!$broker instanceof Broker) {
-            throw new Exception\InvalidArgumentException(sprintf(
-                '%s expects an argument of type Zend\Loader\Broker; received "%s"',
-                __METHOD__,
-                (is_object($broker) ? get_class($broker) : gettype($broker))
-            ));
-        }
-        $this->broker = $broker;
+        $this->services = $services;
         return $this;
     }
 
@@ -156,42 +145,8 @@ class FilterChain extends AbstractFilter implements
      */
     public function plugin($name, array $options = array())
     {
-        $broker = $this->getBroker();
-        return $broker->load($name, $options);
-    }
-
-    /**
-     * Plugin Broker
-     *
-     * Set or retrieve the plugin broker, or retrieve a specific plugin from it.
-     *
-     * If $name is null, the broker instance is returned; it will be lazy-loaded
-     * if not already present.
-     *
-     * If $name is a Broker instance, this broker instance will replace or set 
-     * the internal broker, and the instance will be returned.
-     *
-     * If $name is a string, $name and $options will be passed to the broker's 
-     * load() method.
-     * 
-     * @param  null|Broker|string $name 
-     * @param array $options 
-     * @return Broker|FilterInterface
-     */
-    public function broker($name = null, $options = array())
-    {
-        if ($name instanceof Broker) {
-            $this->setBroker($name);
-            return $this->broker;
-        } 
-
-        $broker = $this->getBroker();
-
-        if (null === $name) {
-            return $broker;
-        }
-
-        return $broker->load($name, $options);
+        $services = $this->getServiceManager();
+        return $services->get($name, $options);
     }
 
     /**
@@ -238,7 +193,7 @@ class FilterChain extends AbstractFilter implements
                 $options = array($options);
             }
         }
-        $filter = $this->broker($name, $options);
+        $filter = $this->getServiceManager()->get($name, $options);
         return $this->attach($filter, $priority);
     }
 

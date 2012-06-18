@@ -22,6 +22,12 @@
 namespace Zend\Form\Annotation;
 
 /**
+ * Attributes annotation
+ *
+ * Expects a JSON-encoded object/associative array as the content. The value is
+ * used to set any attributes on the related form object (element, fieldset, or 
+ * form).
+ *
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Annotation

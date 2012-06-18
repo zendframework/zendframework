@@ -22,6 +22,11 @@
 namespace Zend\Form\Annotation;
 
 /**
+ * Exclude annotation
+ *
+ * Presence of this annotation hints to the AnnotationBuilder to skip the
+ * element when creating the form specification.
+ *
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Annotation

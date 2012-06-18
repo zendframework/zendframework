@@ -22,6 +22,12 @@
 namespace Zend\Form\Annotation;
 
 /**
+ * Input annotation
+ *
+ * Use this annotation to specify a specific input class to use with an element.
+ * The value should be a bare string or a JSON-encoded string indicating the 
+ * fully qualified class name of the input to use.
+ *
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Annotation

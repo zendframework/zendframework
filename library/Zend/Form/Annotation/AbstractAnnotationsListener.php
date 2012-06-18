@@ -26,6 +26,15 @@ use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateInterface;
 
 /**
+ * Base annotations listener.
+ *
+ * Provides an implementation of detach() that should work with any listener. 
+ * Also provides listeners for the "Name" annotation -- handleNameAnnotation()
+ * will listen for the "Name" annotation, while discoverFallbackName() listens
+ * on the "discoverName" event and will use the class or property name, as
+ * discovered via reflection, if no other annotation has provided the name
+ * already.
+ *
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Annotation

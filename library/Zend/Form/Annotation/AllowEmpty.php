@@ -22,6 +22,11 @@
 namespace Zend\Form\Annotation;
 
 /**
+ * AllowEmpty annotation
+ *
+ * Presence of this annotation is a hint that the associated 
+ * \Zend\InputFilter\Input should enable the allow_empty flag.
+ *
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Annotation

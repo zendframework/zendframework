@@ -22,6 +22,12 @@
 namespace Zend\Form\Annotation;
 
 /**
+ * Type annotation
+ *
+ * Use this annotation to specify the specific \Zend\Form class to use when 
+ * building the form, fieldset, or element. The value should be a bare string
+ * or JSON-encoded string, and represent a fully qualified classname.
+ *
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Annotation

@@ -22,6 +22,12 @@
 namespace Zend\Form\Annotation;
 
 /**
+ * Hydrator annotation
+ *
+ * Use this annotation to specify a specific hydrator class to use with the form.
+ * The value should be a bare string or a JSON-encoded string indicating the 
+ * fully qualified class name of the hydrator to use.
+ *
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Annotation

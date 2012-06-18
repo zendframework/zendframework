@@ -24,6 +24,21 @@ namespace Zend\Form\Annotation;
 use Zend\EventManager\EventManagerInterface;
 
 /**
+ * Default listeners for form annotations
+ *
+ * Defines and attaches a set of default listeners for form annotations
+ * (which are defined on object properties). These include:
+ *
+ * - Attributes
+ * - Flags
+ * - Hydrator
+ * - InputFilter
+ * - Type
+ *
+ * See the individual annotation classes for more details. The handlers 
+ * registered work with the annotation values, as well as the form 
+ * specification passed in the event object.
+ *
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Annotation

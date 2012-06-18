@@ -24,6 +24,14 @@ namespace Zend\Form\Annotation;
 use Zend\Filter\Boolean as BooleanFilter;
 
 /**
+ * Required annotation
+ *
+ * Use this annotation to specify the value of the "required" flag for a given
+ * input. Since the flag defaults to "true", this will typically be used to
+ * "unset" the flag (e.g., "@Annotation\Required(false)"). Any boolean value
+ * understood by \Zend\Filter\Boolean is allowed as the content; if the value
+ * is JSON-encoded, it will be decoded before being passed to the filter.
+ *
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Annotation

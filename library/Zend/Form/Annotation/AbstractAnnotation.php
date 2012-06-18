@@ -27,6 +27,13 @@ use Zend\Json\Exception as JsonException;
 use Zend\Json\Json;
 
 /**
+ * Base annotation for use with form annotation builder.
+ *
+ * Provides a stub for initialize(), allowing for "presence only" annotations 
+ * (i.e., annotations that define behavior simply by being present). 
+ * Additionally, provides a method for parsing the contents of an annotation
+ * if provided as a JSON entity.
+ *
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Annotation
@@ -51,7 +58,7 @@ abstract class AbstractAnnotation implements AnnotationInterface
      * @param  string $content 
      * @param  string $method 
      * @return mixed
-     * @throws Exception\DomainException
+     * @throws JsonException
      */
     public function parseJsonContent($content, $method)
     {

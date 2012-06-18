@@ -22,6 +22,17 @@
 namespace Zend\Form\Annotation;
 
 /**
+ * Filter annotation
+ *
+ * Expects a JSON-encoded object/associative array defining the filter. 
+ * Typically, this includes the "name" with an associated string value
+ * indicating the filter name or class, and optionally an "options" key
+ * with an object/associative array value of options to pass to the
+ * filter constructor.
+ *
+ * This annotation may be specified multiple times; filters will be added
+ * to the filter chain in the order specified.
+ *
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Annotation

@@ -22,6 +22,12 @@
 namespace Zend\Form\Annotation;
 
 /**
+ * Name annotation
+ *
+ * Use this annotation to specify a name other than the property or class name
+ * when building the form, element, or input. The value should be a bare string
+ * or JSON-encoded string.
+ *
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Annotation

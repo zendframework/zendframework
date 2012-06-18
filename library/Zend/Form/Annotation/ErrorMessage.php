@@ -22,6 +22,12 @@
 namespace Zend\Form\Annotation;
 
 /**
+ * ErrorMessaage annotation
+ *
+ * Allows providing an error message to seed the Input specification for a 
+ * given element. The content may either be a bare string or a JSON-encoded
+ * string.
+ *
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Annotation

@@ -32,6 +32,9 @@ use Zend\Form\Factory;
 use Zend\Stdlib\ArrayUtils;
 
 /**
+ * Parses a class' properties for annotations in order to create a form and 
+ * input filter definition.
+ *
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Annotation
@@ -283,7 +286,9 @@ class AnnotationBuilder implements EventManagerAwareInterface
                 'name' => $name
             ),
         ));
-        $inputSpec   = new ArrayObject(array('name' => $name));
+        $inputSpec = new ArrayObject(array(
+            'name' => $name,
+        ));
 
         foreach ($annotations as $annotation) {
             $events->trigger(__FUNCTION__, $this, array(

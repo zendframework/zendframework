@@ -22,6 +22,14 @@
 namespace Zend\Form\Annotation;
 
 /**
+ * Flags annotation
+ *
+ * Allows passing flags to the form factory. These flags are used to indicate 
+ * metadata, and typically the priority (order) in which an element will be 
+ * included.
+ *
+ * The value should be a JSON-encoded object/associative array.
+ *
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Annotation

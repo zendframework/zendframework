@@ -22,6 +22,17 @@
 namespace Zend\Form\Annotation;
 
 /**
+ * Validator annotation
+ *
+ * Expects a JSON-encoded object/associative array defining the validator. 
+ * Typically, this includes the "name" with an associated string value
+ * indicating the validator name or class, and optionally an "options" key
+ * with an object/associative array value of options to pass to the
+ * validator constructor.
+ *
+ * This annotation may be specified multiple times; validators will be added
+ * to the validator chain in the order specified.
+ *
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Annotation

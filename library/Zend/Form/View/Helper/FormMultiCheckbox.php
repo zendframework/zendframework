@@ -21,8 +21,6 @@
 
 namespace Zend\Form\View\Helper;
 
-use Zend\Paginator\Adapter\ArrayAdapter;
-
 use Traversable;
 use Zend\Form\ElementInterface;
 use Zend\Form\Exception;
@@ -165,6 +163,7 @@ class FormMultiCheckbox extends FormInput
      * Sets the option for prefixing the element with a hidden element
      * for the unset value.
      *
+     * @param  boolean $useHiddenElement
      * @return FormMultiCheckbox
      */
     public function setUseHiddenElement($useHiddenElement)
@@ -186,6 +185,7 @@ class FormMultiCheckbox extends FormInput
     /**
      * Sets the unchecked value used when "UseHiddenElement" is turned on.
      *
+     * @param  boolean $value
      * @return FormMultiCheckbox
      */
     public function setUncheckedValue($value)

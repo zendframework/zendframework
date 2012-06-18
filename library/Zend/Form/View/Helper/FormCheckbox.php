@@ -62,6 +62,7 @@ class FormCheckbox extends FormInput
      * Sets the option for prefixing the element with a hidden element
      * for the unset value.
      *
+     * @param  boolean $useHiddenElement
      * @return FormCheckbox
      */
     public function setUseHiddenElement($useHiddenElement)

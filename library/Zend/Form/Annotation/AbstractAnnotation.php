@@ -56,11 +56,10 @@ abstract class AbstractAnnotation implements AnnotationInterface
      * Parse and return JSON content
      * 
      * @param  string $content 
-     * @param  string $method 
      * @return mixed
      * @throws JsonException
      */
-    public function parseJsonContent($content, $method)
+    public function parseJsonContent($content)
     {
         $useBuiltIn = Json::$useBuiltinEncoderDecoder;
         Json::$useBuiltinEncoderDecoder = true;

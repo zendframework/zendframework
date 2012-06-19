@@ -20,8 +20,8 @@
 
 namespace Zend\Filter;
 
+use Zend\ServiceManager\AbstractPluginManager;
 use Zend\ServiceManager\ConfigurationInterface;
-use Zend\ServiceManager\ServiceManager as BaseServiceManager;
 
 /**
  * Service manager implementation for the filter chain.
@@ -35,20 +35,8 @@ use Zend\ServiceManager\ServiceManager as BaseServiceManager;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ServiceManager extends BaseServiceManager
+class ServiceManager extends AbstractPluginManager
 {
-    /**
-     * Allow overriding by default
-     * 
-     * @var bool
-     */
-    protected $allowOverride   = true;
-
-    /**
-     * @var mixed Options to use when creating an instance
-     */
-    protected $creationOptions = null;
-
     /**
      * Aliases for registered filter invokables
      * 
@@ -180,21 +168,6 @@ class ServiceManager extends BaseServiceManager
     );
 
     /**
-     * Constructor
-     *
-     * Add a default initializer to ensure the plugin is valid after instance
-     * creation.
-     * 
-     * @param  null|ConfigurationInterface $configuration 
-     * @return void
-     */
-    public function __construct(ConfigurationInterface $configuration = null)
-    {
-        parent::__construct($configuration);
-        $this->addInitializer(array($this, 'validatePlugin'), true);
-    }
-
-    /**
      * Validate the plugin
      *
      * Checks that the filter loaded is either a valid callback or an instance
@@ -220,60 +193,5 @@ class ServiceManager extends BaseServiceManager
             (is_object($plugin) ? get_class($plugin) : gettype($plugin)),
             __NAMESPACE__
         ));
-    }
-
-    /**
-     * Retrieve a service from the manager by name
-     *
-     * Allows passing an array of options to use when creating the instance.
-     * createFromInvokable() will use these and pass them to the instance
-     * constructor if not null and a non-empty array.
-     * 
-     * @param  string $name 
-     * @param  array $options 
-     * @param  bool $usePeeringServiceManagers 
-     * @return object
-     */
-    public function get($name, $options = array(), $usePeeringServiceManagers = true)
-    {
-        $this->creationOptions = $options;
-        $instance = parent::get($name, $usePeeringServiceManagers);
-        $this->creationOptions = null;
-        return $instance;
-    }
-
-    /**
-     * Attempt to create an instance via an invokable class
-     *
-     * Overrides parent implementation by passing $creationOptions to the 
-     * constructor, if non-null.
-     * 
-     * @param  string $canonicalName 
-     * @param  string $requestedName 
-     * @return null|\stdClass
-     * @throws Exception\ServiceNotCreatedException If resolved class does not exist
-     */
-    protected function createFromInvokable($canonicalName, $requestedName)
-    {
-        $invokable = $this->invokableClasses[$canonicalName];
-        if (!class_exists($invokable)) {
-            throw new Exception\ServiceNotCreatedException(sprintf(
-                '%s: failed retrieving "%s%s" via invokable class "%s"; class does not exist',
-                __METHOD__,
-                $canonicalName,
-                ($requestedName ? '(alias: ' . $requestedName . ')' : ''),
-                $canonicalName
-            ));
-        }
-
-        if (null === $this->creationOptions 
-            || (is_array($this->creationOptions) && empty($this->creationOptions))
-        ) {
-            $instance = new $invokable();
-        } else {
-            $instance = new $invokable($this->creationOptions);
-        }
-
-        return $instance;
     }
 }

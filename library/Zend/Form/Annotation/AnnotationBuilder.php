@@ -25,6 +25,7 @@ use ArrayObject;
 use Zend\Code\Annotation\AnnotationCollection;
 use Zend\Code\Annotation\AnnotationManager;
 use Zend\Code\Reflection\ClassReflection;
+use Zend\EventManager\Event;
 use Zend\EventManager\EventManager;
 use Zend\EventManager\EventManagerAwareInterface;
 use Zend\EventManager\EventManagerInterface;
@@ -65,6 +66,7 @@ class AnnotationBuilder implements EventManagerAwareInterface
     protected $defaultAnnotations = array(
         'AllowEmpty',
         'Attributes',
+        'ComposedObject',
         'ErrorMessage',
         'Exclude',
         'Filter',
@@ -178,17 +180,21 @@ class AnnotationBuilder implements EventManagerAwareInterface
      * all properties. Information from annotations is then used to create 
      * specifications for a form, its elements, and its input filter.
      * 
-     * @param  object $entity 
-     * @return array
+     * @param  string|object $entity Either an instance or a valid class name for an entity
+     * @return ArrayObject
      */
     public function getFormSpecification($entity)
     {
         if (!is_object($entity)) {
-            throw new Exception\InvalidArgumentException(sprintf(
-                '%s expects an object; received "%s"',
-                __METHOD__,
-                gettype($entity)
-            ));
+            if ((is_string($entity) && (!class_exists($entity))) // non-existent class
+                || (!is_string($entity)) // not an object or string
+            ) {
+                throw new Exception\InvalidArgumentException(sprintf(
+                    '%s expects an object or valid class name; received "%s"',
+                    __METHOD__,
+                    var_export($entity, 1)
+                ));
+            }
         }
 
         $annotationManager = $this->getAnnotationManager();
@@ -214,18 +220,18 @@ class AnnotationBuilder implements EventManagerAwareInterface
             $formSpec['input_filter'] = $filterSpec;
         }
 
-        return ArrayUtils::iteratorToArray($formSpec);
+        return $formSpec;
     }
 
     /**
      * Create a form from an object.
      *
-     * @param  object $entity 
+     * @param  string|object $entity 
      * @return \Zend\Form\Form
      */
     public function createForm($entity)
     {
-        $formSpec    = $this->getFormSpecification($entity);
+        $formSpec    = ArrayUtils::iteratorToArray($this->getFormSpecification($entity));
         $formFactory = $this->getFormFactory();
         return $formFactory->createForm($formSpec);
     }
@@ -291,23 +297,38 @@ class AnnotationBuilder implements EventManagerAwareInterface
             'name' => $name,
         ));
 
+        $event = new Event();
+        $event->setParams(array(
+            'name'        => $name,
+            'elementSpec' => $elementSpec,
+            'inputSpec'   => $inputSpec,
+            'formSpec'    => $formSpec, 
+            'filterSpec'  => $filterSpec,
+        ));
         foreach ($annotations as $annotation) {
-            $events->trigger(__FUNCTION__, $this, array(
-                'annotation'  => $annotation, 
-                'name'        => $name,
-                'elementSpec' => $elementSpec,
-                'inputSpec'   => $inputSpec,
-                'formSpec'    => $formSpec, 
-                'filterSpec'  => $filterSpec,
-            ));
+            $event->setParam('annotation', $annotation);
+            $events->trigger(__FUNCTION__, $this, $event);
         }
 
-        $filterSpec[$name] = $inputSpec;
+        $filterSpec[$name] = $event->getParam('inputSpec');
 
-        if (!isset($formSpec['elements'])) {
-            $formSpec['elements'] = array();
+        $elementSpec = $event->getParam('elementSpec');
+        $type        = (isset($elementSpec['spec']['type']))
+                     ? $elementSpec['spec']['type']
+                     : 'Zend\Form\Element';
+
+        // Compose as a fieldset or an element, based on specification type
+        if (is_subclass_of($type, 'Zend\Form\FieldsetInterface')) {
+            if (!isset($formSpec['fieldsets'])) {
+                $formSpec['fieldsets'] = array();
+            }
+            $formSpec['fieldsets'][] = $elementSpec;
+        } else {
+            if (!isset($formSpec['elements'])) {
+                $formSpec['elements'] = array();
+            }
+            $formSpec['elements'][] = $elementSpec;
         }
-        $formSpec['elements'][] = $elementSpec;
     }
 
     /**

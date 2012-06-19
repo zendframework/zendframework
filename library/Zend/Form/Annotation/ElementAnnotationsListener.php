@@ -61,6 +61,7 @@ class ElementAnnotationsListener extends AbstractAnnotationsListener
     {
         $this->listeners[] = $events->attach('configureElement', array($this, 'handleAllowEmptyAnnotation'));
         $this->listeners[] = $events->attach('configureElement', array($this, 'handleAttributesAnnotation'));
+        $this->listeners[] = $events->attach('configureElement', array($this, 'handleComposedObjectAnnotation'));
         $this->listeners[] = $events->attach('configureElement', array($this, 'handleErrorMessageAnnotation'));
         $this->listeners[] = $events->attach('configureElement', array($this, 'handleFilterAnnotation'));
         $this->listeners[] = $events->attach('configureElement', array($this, 'handleFlagsAnnotation'));
@@ -109,6 +110,43 @@ class ElementAnnotationsListener extends AbstractAnnotationsListener
 
         $elementSpec = $e->getParam('elementSpec');
         $elementSpec['spec']['attributes'] = $annotation->getAttributes();
+    }
+
+    /**
+     * Allow creating fieldsets from composed entity properties
+     * 
+     * @param  \Zend\EventManager\EventInterface $e 
+     * @return void
+     */
+    public function handleComposedObjectAnnotation($e)
+    {
+        $annotation = $e->getParam('annotation');
+        if (!$annotation instanceof ComposedObject) {
+            return;
+        }
+
+        $class             = $annotation->getComposedObject();
+        $annotationManager = $e->getTarget();
+        $specification     = $annotationManager->getFormSpecification($class);
+
+        $name        = $e->getParam('name');
+        $elementSpec = $e->getParam('elementSpec');
+        $filterSpec  = $e->getParam('filterSpec');
+
+        // Compose input filter into parent input filter
+        $inputFilter = $specification['input_filter'];
+        if (!isset($inputFilter['type'])) {
+            $inputFilter['type'] = 'Zend\InputFilter\InputFilter';
+        }
+        $e->setParam('inputSpec', $inputFilter);
+        unset($specification['input_filter']);
+
+        // Compose specification as a fieldset into parent form/fieldset
+        if (!isset($specification['type'])) {
+            $specification['type'] = 'Zend\Form\Fieldset';
+        }
+        $elementSpec['spec'] = $specification;
+        $elementSpec['spec']['name'] = $name;
     }
 
     /**

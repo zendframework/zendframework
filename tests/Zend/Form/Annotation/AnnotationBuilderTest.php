@@ -112,7 +112,7 @@ class AnnotationBuilderTest extends TestCase
         $entity  = new TestAsset\Annotation\ComplexEntity();
         $builder = new Annotation\AnnotationBuilder();
         $spec    = $builder->getFormSpecification($entity);
-        $this->assertInternalType('array', $spec);
+        $this->assertInstanceOf('ArrayObject', $spec);
     }
 
     public function testAllowsExtensionOfEntities()

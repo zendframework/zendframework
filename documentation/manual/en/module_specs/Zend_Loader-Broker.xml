@@ -25,7 +25,7 @@
             The <interfacename>Broker</interfacename> interface provides a simple contract for
             managing these extensions. At its simplest, it allows you to register and unregister
             concrete extension instances, mapping them to a short name. For added flexibility, it
-            allows specifying a <link linkend="zend.loader.short-name-locater">plugin class
+            allows specifying a <link linkend="zend.loader.short-name-locator">plugin class
                 loader</link> that may be used to resolve the short names to class names, and thus
             dynamically resolve the name to a new class instance.
         </para>
@@ -49,7 +49,7 @@ interface Broker
     public function load($plugin, array $options = null);
     public function register($name, $plugin);
     public function unregister($name);
-    public function setClassLoader(ShortNameLocater $loader);
+    public function setClassLoader(ShortNameLocator $loader);
     public function getClassLoader();
 }
 ]]></programlisting>
@@ -160,7 +160,7 @@ interface Broker
                 <methodsynopsis>
                     <methodname>setClassLoader</methodname>
                     <methodparam>
-                        <funcparams>Zend\Loader\ShortNameLocater $loader</funcparams>
+                        <funcparams>Zend\Loader\ShortNameLocator $loader</funcparams>
                     </methodparam>
                 </methodsynopsis>
             </refsynopsisdiv>
@@ -186,6 +186,7 @@ interface Broker
             <refsynopsisdiv>
                 <methodsynopsis>
                     <methodname>getClassLoader</methodname>
+                    <void/>
                 </methodsynopsis>
             </refsynopsisdiv>
 

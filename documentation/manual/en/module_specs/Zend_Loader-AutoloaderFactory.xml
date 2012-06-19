@@ -143,6 +143,7 @@ Zend\Loader\AutoloaderFactory::factory($config);
             <refsynopsisdiv>
                 <methodsynopsis>
                     <methodname>getRegisteredAutoloaders</methodname>
+                    <void/>
                 </methodsynopsis>
             </refsynopsisdiv>
 

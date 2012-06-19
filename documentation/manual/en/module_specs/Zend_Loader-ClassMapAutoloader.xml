@@ -159,7 +159,7 @@ $config = array(
                 <para>
                     Configures the state of the autoloader, including registering class maps.
                     Expects an array or <interfacename>Traversable</interfacename> object; the
-                    argument will be passed to <link linkend="zend.loader.class-map-autoloader.methods.register-autoloadmaps">registerAutoloadMaps()</link>.
+                    argument will be passed to <link linkend="zend.loader.class-map-autoloader.methods.register-autoload-maps">registerAutoloadMaps()</link>.
                 </para>
             </refsection>
         </refentry>
@@ -222,7 +222,7 @@ $config = array(
             </refsection>
         </refentry>
 
-        <refentry xml:id="zend.loader.standard-autoloader.methods.get-autoload-map">
+        <refentry xml:id="zend.loader.class-map-autoloader.methods.get-autoload-map">
             <refnamediv>
                 <refname>getAutoloadMap</refname>
                 <refpurpose>Retrieve the current class map</refpurpose>
@@ -231,6 +231,7 @@ $config = array(
             <refsynopsisdiv>
                 <methodsynopsis>
                     <methodname>getAutoloadMap</methodname>
+                    <void/>
                 </methodsynopsis>
             </refsynopsisdiv>
 
@@ -244,7 +245,7 @@ $config = array(
             </refsection>
         </refentry>
 
-        <refentry xml:id="zend.loader.standard-autoloader.methods.autoload">
+        <refentry xml:id="zend.loader.class-map-autoloader.methods.autoload">
             <refnamediv>
                 <refname>autoload</refname>
                 <refpurpose>Attempt to load a class.</refpurpose>
@@ -270,7 +271,7 @@ $config = array(
             </refsection>
         </refentry>
 
-        <refentry xml:id="zend.loader.standard-autoloader.methods.register">
+        <refentry xml:id="zend.loader.class-map-autoloader.methods.register">
             <refnamediv>
                 <refname>register</refname>
                 <refpurpose>Register with spl_autoload.</refpurpose>
@@ -279,6 +280,7 @@ $config = array(
             <refsynopsisdiv>
                 <methodsynopsis>
                     <methodname>register</methodname>
+                    <void/>
                 </methodsynopsis>
             </refsynopsisdiv>
 

@@ -94,7 +94,7 @@ if ($validator->isValid($hostname)) {
             <acronym>DNS</acronym> hostnames, <constant>ALLOW_IP</constant> to allow IP addresses,
             <constant>ALLOW_LOCAL</constant> to allow local network names,
             <constant>ALLOW_URI</constant> to allow
-            <ulink url="http://tools.ietf.org/html/rfc3986">RFC3986</ulink>-compliant addresses,
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://tools.ietf.org/html/rfc3986">RFC3986</link>-compliant addresses,
             and <constant>ALLOW_ALL</constant> to allow all four above types.
         </para>
 
@@ -102,7 +102,7 @@ if ($validator->isValid($hostname)) {
             <title>Additional Information on ALLOW_URI</title>
             <para>
                 <constant>ALLOW_URI</constant> allows to check hostnames
-                according to <ulink url="http://tools.ietf.org/html/rfc3986">RFC3986</ulink>. These
+                according to <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://tools.ietf.org/html/rfc3986">RFC3986</link>. These
                 are registered names which are used by <acronym>WINS</acronym>, NetInfo and also local
                 hostnames like those defined within your <filename>.hosts</filename> file.
             </para>

@@ -319,7 +319,7 @@ class AnnotationBuilder implements EventManagerAwareInterface
                      : 'Zend\Form\Element';
 
         // Compose as a fieldset or an element, based on specification type
-        if (is_subclass_of($type, 'Zend\Form\FieldsetInterface')) {
+        if ($this->isFieldset($type)) {
             if (!isset($formSpec['fieldsets'])) {
                 $formSpec['fieldsets'] = array();
             }
@@ -364,5 +364,25 @@ class AnnotationBuilder implements EventManagerAwareInterface
             return (true === $r);
         });
         return (bool) $results->last();
+    }
+
+    /**
+     * Determine if the type represents a fieldset
+     *
+     * For PHP versions >= 5.3.7, uses is_subclass_of; otherwise, uses 
+     * reflection to determine the interfaces implemented.
+     * 
+     * @param  string $type 
+     * @return bool
+     */
+    protected function isFieldset($type)
+    {
+        if (version_compare(PHP_VERSION, '>=5.3.7')) {
+            return is_subclass_of($type, 'Zend\Form\FieldsetInterface');
+        }
+
+        $r = new ReflectionClass($type);
+        $interfaces = $r->getInterfaceNames();
+        return (in_array('Zend\Form\FieldsetInterface', $interfaces));
     }
 }

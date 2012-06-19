@@ -30,7 +30,11 @@ class UrlTest extends TestCase
     public function urlData()
     {
         return array(
+            array('',                                      false),
             array('http',                                  false),
+            array('http:',                                 false),
+            array('http://',                               false),
+            array('http:///',                              true),
             array('http://www.example.org/',               true),
             array('http://www.example.org:80/',            true),
             array('https://www.example.org/',              true),
@@ -38,14 +42,13 @@ class UrlTest extends TestCase
             array('http://foo',                            true),
             array('http://foo.local',                      true),
             array('example.org',                           false),
-            array('example.org:',                          true),
+            array('example.org:',                          false),
             array('ftp://user:pass@example.org/',          true),
             array('http://example.org/?cat=5&test=joo',    true),
             array('http://www.fi/?cat=5&amp;test=joo',     true),
             array('http://[::1]/',                         true),
             array('http://[2620:0:1cfe:face:b00c::3]/',    true),
             array('http://[2620:0:1cfe:face:b00c::3]:80/', true),
-            array('',                                      false),
         );
     }
 
@@ -56,7 +59,7 @@ class UrlTest extends TestCase
     {
         $element   = new UrlElement();
         $validator = $element->getValidator();
-        $this->assertInstanceOf('Zend\Validator\Regex', $validator);
+        $this->assertInstanceOf('Zend\Validator\Uri', $validator);
         $this->assertEquals($expected, $validator->isValid($url));
     }
 

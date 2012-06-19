@@ -24,7 +24,7 @@ namespace Zend\Form\Annotation;
 use Zend\Form\Exception;
 
 /**
- * ErrorMessaage annotation
+ * ErrorMessage annotation
  *
  * Allows providing an error message to seed the Input specification for a 
  * given element. The content may either be a bare string or a JSON-encoded

@@ -638,9 +638,9 @@ $this->url(
         As you can see above, you must add "/query" to your route name in order 
         to append a query string. If you do not specify "/query" in the route 
         name then no query string will be appended. 
-      </para<
-      
       </para>
+      
+      <para>
         Our example "page" route has only one defined parameter of "name" 
         ("/page[/:name]"), meaning that the remaining parameters of "format" 
         and "limit" will then be appended as a query string.
@@ -648,7 +648,7 @@ $this->url(
       
       <para>
         The output from our example should then be
-        "/page/mys-test-page?format=rss&limit=10"
+        "/page/mys-test-page?format=rss&amp;limit=10"
       </para>
       
     </section>

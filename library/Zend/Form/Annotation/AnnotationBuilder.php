@@ -274,13 +274,14 @@ class AnnotationBuilder implements EventManagerAwareInterface
      * @param  ArrayObject $formSpec 
      * @param  ArrayObject $filterSpec 
      * @return void
+     * @triggers checkForExclude
      * @triggers discoverName
      * @triggers configureElement
      */
     protected function configureElement($annotations, $reflection, $formSpec, $filterSpec)
     {
         // If the element is marked as exclude, return early
-        if ($annotations->hasAnnotation('Zend\Form\Annotation\Exclude')) {
+        if ($this->checkForExclude($annotations)) {
             return;
         }
 
@@ -347,5 +348,21 @@ class AnnotationBuilder implements EventManagerAwareInterface
             return (is_string($r) && !empty($r));
         });
         return $results->last();
+    }
+
+    /**
+     * Determine if an element is marked to exclude from the definitions
+     * 
+     * @param  AnnotationCollection $annotations 
+     * @return true|false
+     */
+    protected function checkForExclude($annotations)
+    {
+        $results = $this->events()->trigger('checkForExclude', $this, array(
+            'annotations' => $annotations,
+        ), function ($r) {
+            return (true === $r);
+        });
+        return (bool) $results->last();
     }
 }

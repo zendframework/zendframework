@@ -72,6 +72,8 @@ class ElementAnnotationsListener extends AbstractAnnotationsListener
 
         $this->listeners[] = $events->attach('discoverName', array($this, 'handleNameAnnotation'));
         $this->listeners[] = $events->attach('discoverName', array($this, 'discoverFallbackName'));
+
+        $this->listeners[] = $events->attach('checkForExclude', array($this, 'handleExcludeAnnotation'));
     }
 
     /**
@@ -166,6 +168,21 @@ class ElementAnnotationsListener extends AbstractAnnotationsListener
 
         $inputSpec = $e->getParam('inputSpec');
         $inputSpec['error_message'] = $annotation->getMessage();
+    }
+
+    /**
+     * Determine if the element has been marked to exclude from the definition
+     * 
+     * @param  \Zend\EventManager\EventInterface $e 
+     * @return bool
+     */
+    public function handleExcludeAnnotation($e)
+    {
+        $annotations = $e->getParam('annotations');
+        if ($annotations->hasAnnotation('Zend\Form\Annotation\Exclude')) {
+            return true;
+        }
+        return false;
     }
 
     /**

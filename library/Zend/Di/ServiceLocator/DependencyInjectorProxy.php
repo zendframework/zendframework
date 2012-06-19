@@ -43,6 +43,12 @@ class DependencyInjectorProxy extends Di
         if ($instance instanceof GeneratorInstance) {
             /* @var $instance GeneratorInstance */
             $instance->setShared($isShared);
+
+            // When a callback is used, we don't know instance the class name.
+            // That's why we assume $name as the instance alias
+            if (null === $instance->getName()) {
+                $instance->setAlias($name);
+            }
         }
 
         return $instance;
@@ -82,14 +88,18 @@ class DependencyInjectorProxy extends Di
      */
     public function createInstanceViaCallback($callback, $params, $alias)
     {
+        if (is_string($callback)) {
+            $callback = explode('::', $callback);
+        }
+
         if (!is_callable($callback)) {
             throw new Exception\InvalidCallbackException('An invalid constructor callback was provided');
         }
 
-        // @todo add support for string callbacks?
-
         if (!is_array($callback) || is_object($callback[0])) {
-            throw new Exception\InvalidCallbackException('For purposes of service locator generation, constructor callbacks must refer to static methods only');
+            throw new Exception\InvalidCallbackException(
+                'For purposes of service locator generation, constructor callbacks must refer to static methods only'
+            );
         }
 
         $class  = $callback[0];

@@ -5,7 +5,7 @@ namespace Zend\Di\ServiceLocator;
 class GeneratorInstance
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected $class;
 
@@ -49,7 +49,9 @@ class GeneratorInstance
     }
 
     /**
-     * @return string instance or class name
+     * Retrieves the best available name for this instance (instance alias first then class name)
+     *
+     * @return string|null
      */
     public function getName()
     {
@@ -57,7 +59,9 @@ class GeneratorInstance
     }
 
     /**
-     * @return string
+     * Class of the instance. Null if class is unclear (such as when the instance is produced by a callback)
+     *
+     * @return string|null
      */
     public function getClass()
     {
@@ -65,6 +69,8 @@ class GeneratorInstance
     }
 
     /**
+     * Alias for the instance (if any)
+     *
      * @return string|null
      */
     public function getAlias()
@@ -102,7 +108,7 @@ class GeneratorInstance
     /**
      * Get instantiator
      *
-     * @return mixed constructor method or callable for the instance
+     * @return mixed constructor method name or callable responsible for generating instance
      */
     public function getConstructor()
     {
@@ -110,7 +116,8 @@ class GeneratorInstance
     }
 
     /**
-     * Get params
+     * Parameters passed to the instantiator as an ordered list of parameters. Each parameter that refers to another
+     * instance fetched recursively is a GeneratorInstance itself
      *
      * @return array
      */
@@ -144,7 +151,9 @@ class GeneratorInstance
     }
 
     /**
-     * Retrieves an ordered list of methods called on the instance
+     * Retrieves a list of methods that are called on the instance in their call order. Each returned element has form
+     * array('method' => 'methodName', 'params' => array( ... ordered list of call parameters ... ), where every call
+     * parameter that is a recursively fetched instance is a GeneratorInstance itself
      *
      * @return array
      */
@@ -162,6 +171,8 @@ class GeneratorInstance
     }
 
     /**
+     * Retrieves whether the instance is shared or not
+     *
      * @return bool
      */
     public function isShared()

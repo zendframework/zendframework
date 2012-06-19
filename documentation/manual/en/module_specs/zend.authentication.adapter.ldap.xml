@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.auth.adapter.ldap"><title>LDAP Authentication</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.authentication.adapter.ldap"><title>LDAP Authentication</title>
     
 
-    <section xml:id="zend.auth.adapter.ldap.introduction"><title>Introduction</title>
+    <section xml:id="zend.authentication.adapter.ldap.introduction"><title>Introduction</title>
         
 
         <para>
-            <classname>Zend_Auth_Adapter_Ldap</classname> supports web application authentication
+            <classname>Zend\Authentication\Adapter\Ldap</classname> supports web application authentication
             with <acronym>LDAP</acronym> services. Its features include username and domain name
             canonicalization, multi-domain authentication, and failover capabilities. It has been
             tested to work with
@@ -17,51 +17,63 @@
 
         <para>
             This documentation includes a guide on using
-            <classname>Zend_Auth_Adapter_Ldap</classname>, an exploration of its
+            <classname>Zend\Authentication\Adapter\Ldap</classname>, an exploration of its
             <acronym>API</acronym>, an outline of the various available options, diagnostic
             information for troubleshooting authentication problems, and example options for both
             Active Directory and OpenLDAP servers.
         </para>
     </section>
 
-    <section xml:id="zend.auth.adapter.ldap.usage"><title>Usage</title>
+    <section xml:id="zend.authentication.adapter.ldap.usage"><title>Usage</title>
         
 
         <para>
-            To incorporate <classname>Zend_Auth_Adapter_Ldap</classname> authentication into your
-            application quickly, even if you're not using <classname>Zend_Controller</classname>,
+            To incorporate <classname>Zend\Authentication\Adapter\Ldap</classname> authentication into your
+            application quickly, even if you're not using <classname>Zend\Mvc</classname>,
             the meat of your code should look something like the following:
         </para>
 
         <programlisting language="php"><![CDATA[
+use Zend\Authentication\AuthenticationService,
+    Zend\Authentication\Adapter\Ldap as AuthAdapter,
+    Zend\Config\Reader\Ini as ConfigReader,
+    Zend\Log\Logger,
+    Zend\Log\Writer\Stream as LogWriter,
+    Zend\Log\Filter\Priority as LogFilter;
+
 $username = $this->_request->getParam('username');
 $password = $this->_request->getParam('password');
 
-$auth = Zend_Auth::getInstance();
 
-$config = new Zend_Config_Ini('../application/config/config.ini',
-                              'production');
+$auth = new AuthenticationService();
+
+$config = new ConfigReader('./ldap-config.ini','production');
+                              
 $log_path = $config->ldap->log_path;
 $options = $config->ldap->toArray();
 unset($options['log_path']);
 
-$adapter = new Zend_Auth_Adapter_Ldap($options, $username,
-                                      $password);
+$adapter = new AuthAdapter($options, 
+                           $username,
+                           $password);
 
 $result = $auth->authenticate($adapter);
 
 if ($log_path) {
     $messages = $result->getMessages();
 
-    $logger = new Zend_Log();
-    $logger->addWriter(new Zend_Log_Writer_Stream($log_path));
-    $filter = new Zend_Log_Filter_Priority(Zend_Log::DEBUG);
+    $logger = new Logger;
+    $writer = new LogWriter($log_path);
+
+    $logger->addWriter($writer);
+
+    $filter = new LogFilter(Logger::DEBUG);
     $logger->addFilter($filter);
 
     foreach ($messages as $i => $message) {
         if ($i-- > 1) { // $messages[2] and up are log messages
             $message = str_replace("\n", "\n  ", $message);
-            $logger->log("Ldap: $i: $message", Zend_Log::DEBUG);
+            $logger->log("Ldap: $i: $message", Logger::DEBUG);
         }
     }
 }
@@ -69,21 +81,21 @@ if ($log_path) {
 
         <para>
             Of course, the logging code is optional, but it is highly recommended that you use a
-            logger. <classname>Zend_Auth_Adapter_Ldap</classname> will record just about every bit
+            logger. <classname>Zend\Authentication\Adapter\Ldap</classname> will record just about every bit
             of information anyone could want in <varname>$messages</varname> (more below), which is
             a nice feature in itself for something that has a history of being notoriously difficult
             to debug.
         </para>
 
         <para>
-            The <classname>Zend_Config_Ini</classname> code is used above to load the adapter
+            The <classname>Zend\Config\Reader\Ini</classname> code is used above to load the adapter
             options. It is also optional. A regular array would work equally well. The following is
-            an example <filename>application/config/config.ini</filename> file that has options for
+            an example <filename>ldap-config.ini</filename> file that has options for
             two separate servers. With multiple sets of server options the adapter will try each, in
             order, until the credentials are successfully authenticated. The names of the servers
             (e.g., 'server1' and 'server2') are largely arbitrary. For details regarding the options
             array, see the <emphasis>Server Options</emphasis> section below. Note that
-            <classname>Zend_Config_Ini</classname> requires that any values with "equals" characters
+            <classname>Zend\Config\Reader\Ini</classname> requires that any values with "equals" characters
             (<emphasis>=</emphasis>) will need to be quoted (like the DNs shown below).
         </para>
 
@@ -112,7 +124,7 @@ ldap.server2.baseDn = "CN=Users,DC=w,DC=net"
 ]]></programlisting>
 
         <para>
-            The above configuration will instruct <classname>Zend_Auth_Adapter_Ldap</classname> to
+            The above configuration will instruct <classname>Zend\Authentication\Adapter\Ldap</classname> to
             attempt to authenticate users with the OpenLDAP server <filename>s0.foo.net</filename>
             first. If the authentication fails for any reason, the AD server
             <filename>dc1.w.net</filename> will be tried.
@@ -131,17 +143,17 @@ ldap.server2.baseDn = "CN=Users,DC=w,DC=net"
         </para>
     </section>
 
-    <section xml:id="zend.auth.adapter.ldap.api"><title>The API</title>
+    <section xml:id="zend.authentication.adapter.ldap.api"><title>The API</title>
         
 
         <para>
-            The <classname>Zend_Auth_Adapter_Ldap</classname> constructor accepts three parameters.
+            The <classname>Zend\Authentication\Adapter\Ldap</classname> constructor accepts three parameters.
         </para>
 
         <para>
             The <varname>$options</varname> parameter is required and must be an array containing
             one or more sets of options. Note that it is <emphasis>an array of arrays</emphasis> of
-            <link linkend="zend.ldap"><classname>Zend_Ldap</classname></link> options. Even if you
+            <link linkend="zend.ldap"><classname>Zend\Ldap\Ldap</classname></link> options. Even if you
             will be using only one <acronym>LDAP</acronym> server, the options must still be within
             another array.
         </para>
@@ -208,7 +220,7 @@ Array
 
         <para>
             The names of servers (e.g. 'server1' and 'server2' shown above) are largely arbitrary,
-            but for the sake of using <classname>Zend_Config</classname>, the identifiers should be
+            but for the sake of using <classname>Zend\Config\Reader\Ini</classname>, the identifiers should be
             present (as opposed to being numeric indexes) and should not contain any special
             characters used by the associated file formats (e.g. the '<emphasis>.</emphasis>'
             <acronym>INI</acronym> property separator, '<emphasis>&amp;</emphasis>' for
@@ -227,20 +239,20 @@ Array
             <para>
                 When the <methodname>authenticate()</methodname> method is called, the adapter
                 iterates over each set of server options, sets them on the internal
-                <classname>Zend_Ldap</classname> instance, and calls the
-                <methodname>Zend_Ldap::bind()</methodname> method with the username and password
-                being authenticated. The <classname>Zend_Ldap</classname> class checks to see if
+                <classname>Zend\Ldap\Ldap</classname> instance, and calls the
+                <methodname>Zend\Ldap\Ldap::bind()</methodname> method with the username and password
+                being authenticated. The <classname>Zend\Ldap\Ldap</classname> class checks to see if
                 the username is qualified with a domain (e.g., has a domain component like
                 <filename>alice@foo.net</filename> or <filename>FOO\alice</filename>). If a domain
                 is present, but does not match either of the server's domain names
                 (<filename>foo.net</filename> or <acronym>FOO</acronym>), a special exception is
-                thrown and caught by <classname>Zend_Auth_Adapter_Ldap</classname> that causes that
+                thrown and caught by <classname>Zend\Authentication\Adapter\Ldap</classname> that causes that
                 server to be ignored and the next set of server options is selected. If a domain
                 <emphasis>does</emphasis> match, or if the user did not supply a qualified username,
-                <classname>Zend_Ldap</classname> proceeds to try to bind with the supplied
-                credentials. if the bind is not successful, <classname>Zend_Ldap</classname> throws
-                a <classname>Zend_Ldap_Exception</classname> which is caught by
-                <classname>Zend_Auth_Adapter_Ldap</classname> and the next set of server options is
+                <classname>Zend\Ldap\Ldap</classname> proceeds to try to bind with the supplied
+                credentials. if the bind is not successful, <classname>Zend\Ldap\Ldap</classname> throws
+                a <classname>Zend\Ldap\Exception\LdapException</classname> which is caught by
+                <classname>Zend\Authentication\Adapter\Ldap</classname> and the next set of server options is
                 tried. If the bind is successful, the iteration stops, and the adapter's
                 <methodname>authenticate()</methodname> method returns a successful result. If all
                 server options have been tried without success, the authentication fails, and
@@ -251,7 +263,7 @@ Array
 
         <para>
             The username and password parameters of the
-            <classname>Zend_Auth_Adapter_Ldap</classname> constructor represent the credentials
+            <classname>Zend\Authentication\Adapter\Ldap</classname> constructor represent the credentials
             being authenticated (i.e., the credentials supplied by the user through your
             <acronym>HTML</acronym> login form). Alternatively, they may also be set with the
             <methodname>setUsername()</methodname> and <methodname>setPassword()</methodname>
@@ -259,17 +271,17 @@ Array
         </para>
     </section>
 
-    <section xml:id="zend.auth.adapter.ldap.server-options"><title>Server Options</title>
+    <section xml:id="zend.authentication.adapter.ldap.server-options"><title>Server Options</title>
         
 
         <para>
             Each set of server options <emphasis>in the context of
-            <classname>Zend_Auth_Adapter_Ldap</classname></emphasis> consists of the following
+            <classname>Zend\Authentication\Adapter\Ldap</classname></emphasis> consists of the following
             options, which are passed, largely unmodified, to
-            <methodname>Zend_Ldap::setOptions()</methodname>:
+            <methodname>Zend\Ldap\Ldap::setOptions()</methodname>:
         </para>
 
-        <table xml:id="zend.auth.adapter.ldap.server-options.table"><title>Server Options</title>
+        <table xml:id="zend.authentication.adapter.ldap.server-options.table"><title>Server Options</title>
             
 
             <tgroup cols="2">
@@ -369,7 +381,7 @@ Array
                             <emphasis>CN=Alice Baker,OU=Sales,DC=foo,DC=net</emphasis> (basically
                             all servers <emphasis>except</emphasis> AD). If this option is
                             <constant>TRUE</constant>, this instructs
-                            <classname>Zend_Ldap</classname> to automatically retrieve the DN
+                            <classname>Zend\Ldap\Ldap</classname> to automatically retrieve the DN
                             corresponding to the username being authenticated, if it is not already
                             in DN form, and then re-bind with the proper DN. The default value is
                             <constant>FALSE</constant>. Currently only Microsoft Active Directory
@@ -415,15 +427,15 @@ Array
                             (e.g., <filename>alice@foo.net</filename>). The default value is 4
                             (e.g., <filename>alice@foo.net</filename>). For example, with a value
                             of 3, the identity returned by
-                            <methodname>Zend_Auth_Result::getIdentity()</methodname> (and
-                            <methodname>Zend_Auth::getIdentity()</methodname>, if
-                            <classname>Zend_Auth</classname> was used) will always be
+                            <methodname>Zend\Authentication\Result::getIdentity()</methodname> (and
+                            <methodname>Zend\Authentication\AuthenticationService::getIdentity()</methodname>, if
+                            <classname>Zend\Authentication\AuthenticationService</classname> was used) will always be
                             <filename>FOO\alice</filename>, regardless of what form Alice supplied,
                             whether it be <emphasis>alice</emphasis>,
                             <filename>alice@foo.net</filename>, <filename>FOO\alice</filename>,
                             <filename>FoO\aLicE</filename>, <filename>foo.net\alice</filename>,
                             etc. See the <emphasis>Account Name Canonicalization</emphasis> section
-                            in the <classname>Zend_Ldap</classname> documentation for details. Note
+                            in the <classname>Zend\Ldap\Ldap</classname> documentation for details. Note
                             that when using multiple sets of server options it is recommended, but
                             not required, that the same <property>accountCanonicalForm</property>
                             be used with all server options so that the resulting usernames are
@@ -522,17 +534,17 @@ Array
         </note>
     </section>
 
-    <section xml:id="zend.auth.adapter.ldap.debugging"><title>Collecting Debugging Messages</title>
+    <section xml:id="zend.authentication.adapter.ldap.debugging"><title>Collecting Debugging Messages</title>
         
 
         <para>
-            <classname>Zend_Auth_Adapter_Ldap</classname> collects debugging information within its
+            <classname>Zend\Authentication\Adapter\Ldap</classname> collects debugging information within its
             <methodname>authenticate()</methodname> method. This information is stored in the
-            <classname>Zend_Auth_Result</classname> object as messages. The array returned by
-            <methodname>Zend_Auth_Result::getMessages()</methodname> is described as follows
+            <classname>Zend\Authentication\Result</classname> object as messages. The array returned by
+            <methodname>Zend\Authentication\Result::getMessages()</methodname> is described as follows
         </para>
 
-        <table xml:id="zend.auth.adapter.ldap.debugging.table"><title>Debugging Messages</title>
+        <table xml:id="zend.authentication.adapter.ldap.debugging.table"><title>Debugging Messages</title>
             
 
             <tgroup cols="2">
@@ -580,17 +592,17 @@ Array
         </para>
     </section>
 
-    <section xml:id="zend.auth.adapter.ldap.options-common-server-specific"><title>Common Options for Specific Servers</title>
+    <section xml:id="zend.authentication.adapter.ldap.options-common-server-specific"><title>Common Options for Specific Servers</title>
         
 
-        <section xml:id="zend.auth.adapter.ldap.options-common-server-specific.active-directory"><title>Options for Active Directory</title>
+        <section xml:id="zend.authentication.adapter.ldap.options-common-server-specific.active-directory"><title>Options for Active Directory</title>
             
 
             <para>
                 For <acronym>ADS</acronym>, the following options are noteworthy:
             </para>
 
-            <table xml:id="zend.auth.adapter.ldap.options-common-server-specific.active-directory.table"><title>Options for Active Directory</title>
+            <table xml:id="zend.authentication.adapter.ldap.options-common-server-specific.active-directory.table"><title>Options for Active Directory</title>
                 
 
                 <tgroup cols="2">
@@ -685,7 +697,7 @@ Array
             <note>
                 <para>
                     Technically there should be no danger of accidental cross-domain authentication
-                    with the current <classname>Zend_Auth_Adapter_Ldap</classname> implementation,
+                    with the current <classname>Zend\Authentication\Adapter\Ldap</classname> implementation,
                     since server domains are explicitly checked, but this may not be true of a
                     future implementation that discovers the domain at runtime, or if an alternative
                     adapter is used (e.g., Kerberos). In general, account name ambiguity is known to
@@ -694,7 +706,7 @@ Array
             </note>
         </section>
 
-        <section xml:id="zend.auth.adapter.ldap.options-common-server-specific.openldap"><title>Options for OpenLDAP</title>
+        <section xml:id="zend.authentication.adapter.ldap.options-common-server-specific.openldap"><title>Options for OpenLDAP</title>
             
 
             <para>
@@ -702,7 +714,7 @@ Array
                 posixAccount style schema, the following options are noteworthy:
             </para>
 
-            <table xml:id="zend.auth.adapter.ldap.options-common-server-specific.openldap.table"><title>Options for OpenLDAP</title>
+            <table xml:id="zend.authentication.adapter.ldap.options-common-server-specific.openldap.table"><title>Options for OpenLDAP</title>
                 
 
                 <tgroup cols="2">

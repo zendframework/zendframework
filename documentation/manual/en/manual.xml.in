@@ -361,39 +361,38 @@
             <!--</xi:include>-->
         <!--</chapter>-->
 
-        <!--<chapter xml:id="zend.auth"><title>Zend_Auth</title>-->
-            <!---->
-            <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Auth.xml" parse="xml">-->
-                <!--<xi:fallback>-->
-                    <!--<xi:include href="../en/module_specs/Zend_Auth.xml" parse="xml"/>-->
-                <!--</xi:fallback>-->
-            <!--</xi:include>-->
-            <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Auth_Adapter_DbTable.xml" parse="xml">-->
-                <!--<xi:fallback>-->
-                    <!--<xi:include href="../en/module_specs/Zend_Auth_Adapter_DbTable.xml" parse="xml"/>-->
-                <!--</xi:fallback>-->
-            <!--</xi:include>-->
-            <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Auth_Adapter_Digest.xml" parse="xml">-->
-                <!--<xi:fallback>-->
-                    <!--<xi:include href="../en/module_specs/Zend_Auth_Adapter_Digest.xml" parse="xml"/>-->
-                <!--</xi:fallback>-->
-            <!--</xi:include>-->
-            <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Auth_Adapter_Http.xml" parse="xml">-->
-                <!--<xi:fallback>-->
-                    <!--<xi:include href="../en/module_specs/Zend_Auth_Adapter_Http.xml" parse="xml"/>-->
-                <!--</xi:fallback>-->
-            <!--</xi:include>-->
-            <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Auth_Adapter_Ldap.xml" parse="xml">-->
-                <!--<xi:fallback>-->
-                    <!--<xi:include href="../en/module_specs/Zend_Auth_Adapter_Ldap.xml" parse="xml"/>-->
-                <!--</xi:fallback>-->
-            <!--</xi:include>-->
+        <chapter xml:id="zend.authentication"><title>Zend\Authentication</title>
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/zend.authentication.intro.xml" parse="xml">
+                <xi:fallback>
+                    <xi:include href="../en/module_specs/zend.authentication.intro.xml" parse="xml"/>
+                </xi:fallback>
+            </xi:include>
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/zend.authentication.adapter.dbtable.xml" parse="xml">
+                <xi:fallback>
+                    <xi:include href="../en/module_specs/zend.authentication.adapter.dbtable.xml" parse="xml"/>
+                </xi:fallback>
+            </xi:include>
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/zend.authentication.adapter.digest.xml" parse="xml">
+                <xi:fallback>
+                    <xi:include href="../en/module_specs/zend.authentication.adapter.digest.xml" parse="xml"/>
+                </xi:fallback>
+            </xi:include>
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/zend.authentication.adapter.http.xml" parse="xml">
+                <xi:fallback>
+                    <xi:include href="../en/module_specs/zend.authentication.adapter.http.xml" parse="xml"/>
+                </xi:fallback>
+            </xi:include>
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/zend.authentication.adapter.ldap.xml" parse="xml">
+                <xi:fallback>
+                    <xi:include href="../en/module_specs/zend.authentication.adapter.ldap.xml" parse="xml"/>
+                </xi:fallback>
+            </xi:include>
             <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Auth_Adapter_OpenId.xml" parse="xml">-->
                 <!--<xi:fallback>-->
                     <!--<xi:include href="../en/module_specs/Zend_Auth_Adapter_OpenId.xml" parse="xml"/>-->
                 <!--</xi:fallback>-->
             <!--</xi:include>-->
-        <!--</chapter>-->
+        </chapter>
 
         <!--<chapter xml:id="zend.barcode"><title>Zend_Barcode</title>-->
             <!---->

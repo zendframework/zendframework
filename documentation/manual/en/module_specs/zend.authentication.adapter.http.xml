@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.auth.adapter.http"><title>HTTP Authentication Adapter</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.authentication.adapter.http"><title>HTTP Authentication Adapter</title>
     
 
-    <section xml:id="zend.auth.adapter.http.introduction"><title>Introduction</title>
+    <section xml:id="zend.authentication.adapter.http.introduction"><title>Introduction</title>
         
 
         <para>
-            <classname>Zend_Auth_Adapter_Http</classname> provides a mostly-compliant
+            <classname>Zend\Authentication\Adapter\Http</classname> provides a mostly-compliant
             implementation of <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://tools.ietf.org/html/rfc2617">RFC-2617</link>,
             <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/Basic_authentication_scheme">Basic</link>
             and <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/Digest_access_authentication">Digest</link>
@@ -75,7 +75,7 @@
         </itemizedlist>
     </section>
 
-    <section xml:id="zend.auth.adapter.design_overview"><title>Design Overview</title>
+    <section xml:id="zend.authentication.adapter.design_overview"><title>Design Overview</title>
         
 
         <para>
@@ -89,16 +89,16 @@
         </para>
     </section>
 
-    <section xml:id="zend.auth.adapter.configuration_options"><title>Configuration Options</title>
+    <section xml:id="zend.authentication.adapter.configuration_options"><title>Configuration Options</title>
         
 
         <para>
-            The <classname>Zend_Auth_Adapter_Http</classname> class requires a configuration array
+            The <classname>Zend\Authentication\Adapter\Http</classname> class requires a configuration array
             passed to its constructor. There are several configuration options available, and some
             are required:
         </para>
 
-        <table xml:id="zend.auth.adapter.configuration_options.table"><title>Configuration Options</title>
+        <table xml:id="zend.authentication.adapter.configuration_options.table"><title>Configuration Options</title>
             
 
             <tgroup cols="3">
@@ -160,6 +160,26 @@
                             below.
                         </entry>
                     </row>
+                    
+                    <row>
+                        <entry><emphasis><property>use_opaque</property></emphasis></entry>
+
+                        <entry>No</entry>
+
+                        <entry>
+                            Specifies whether to send the opaque value in the header. True by default.
+                        </entry>
+                    </row>
+                    
+                    <row>
+                        <entry><emphasis><property>algorithm</property></emphasis></entry>
+
+                        <entry>No</entry>
+
+                        <entry>
+                            Specified the algorithm. Defaults to MD5, the only supported option (for now).
+                        </entry>
+                    </row>
 
                     <row>
                         <entry><emphasis><property>proxy_auth</property></emphasis></entry>
@@ -187,7 +207,7 @@
         </note>
     </section>
 
-    <section xml:id="zend.auth.adapter.http.resolvers"><title>Resolvers</title>
+    <section xml:id="zend.authentication.adapter.http.resolvers"><title>Resolvers</title>
         
 
         <para>
@@ -199,13 +219,13 @@
         </para>
 
         <para>
-            <classname>Zend_Auth_Adapter_Http</classname> relies on objects implementing
-            <classname>Zend_Auth_Adapter_Http_Resolver_Interface</classname>. A text file resolver
+            <classname>Zend\Authentication\Adapter\Http</classname> relies on objects implementing
+            <classname>Zend\Authentication\Adapter\Http\ResolverInterface</classname>. A text file resolver
             class is included with this adapter, but any other kind of resolver can be created
             simply by implementing the resolver interface.
         </para>
 
-        <section xml:id="zend.auth.adapter.http.resolvers.file"><title>File Resolver</title>
+        <section xml:id="zend.authentication.adapter.http.resolvers.file"><title>File Resolver</title>
             
 
             <para>
@@ -234,8 +254,9 @@
             </para>
 
             <programlisting language="php"><![CDATA[
+use Zend\Authentication\Adapter\Http\FileResolver;
 $path     = 'files/passwd.txt';
-$resolver = new Zend_Auth_Adapter_Http_Resolver_File($path);
+$resolver = new FileResolver($path);
 ]]></programlisting>
 
             <para>
@@ -244,7 +265,7 @@ $resolver = new Zend_Auth_Adapter_Http_Resolver_File($path);
 
             <programlisting language="php"><![CDATA[
 $path     = 'files/passwd.txt';
-$resolver = new Zend_Auth_Adapter_Http_Resolver_File();
+$resolver = new FileResolver();
 $resolver->setFile($path);
 ]]></programlisting>
 
@@ -254,7 +275,7 @@ $resolver->setFile($path);
         </section>
     </section>
 
-    <section xml:id="zend.auth.adapter.http.basic_usage"><title>Basic Usage</title>
+    <section xml:id="zend.authentication.adapter.http.basic_usage"><title>Basic Usage</title>
         
 
         <para>
@@ -279,11 +300,11 @@ $config = array(
         </para>
 
         <para>
-            Next, create the <classname>Zend_Auth_Adapter_Http</classname> object:
+            Next, create the <classname>Zend\Authentication\Adapter\Http</classname> object:
         </para>
 
         <programlisting language="php"><![CDATA[
-$adapter = new Zend_Auth_Adapter_Http($config);
+$adapter = new Zend\Authentication\Adapter\Http($config);
 ]]></programlisting>
 
         <para>
@@ -292,10 +313,12 @@ $adapter = new Zend_Auth_Adapter_Http($config);
         </para>
 
         <programlisting language="php"><![CDATA[
-$basicResolver = new Zend_Auth_Adapter_Http_Resolver_File();
+use Zend\Authentication\Adapter\Http\FileResolver;
+
+$basicResolver = new FileResolver();
 $basicResolver->setFile('files/basicPasswd.txt');
 
-$digestResolver = new Zend_Auth_Adapter_Http_Resolver_File();
+$digestResolver = new FileResolver();
 $digestResolver->setFile('files/digestPasswd.txt');
 
 $adapter->setBasicResolver($basicResolver);
@@ -308,8 +331,8 @@ $adapter->setDigestResolver($digestResolver);
         </para>
 
         <programlisting language="php"><![CDATA[
-assert($request instanceof Zend_Controller_Request_Http);
-assert($response instanceof Zend_Controller_Response_Http);
+assert($request instanceof Zend\Http\Request);
+assert($response instanceof Zend\Http\Response);
 
 $adapter->setRequest($request);
 $adapter->setResponse($response);

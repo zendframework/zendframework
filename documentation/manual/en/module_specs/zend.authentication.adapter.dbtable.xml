@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.auth.adapter.dbtable"><title>Database Table Authentication</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.authentication.adapter.dbtable"><title>Database Table Authentication</title>
     
 
-    <section xml:id="zend.auth.adapter.dbtable.introduction"><title>Introduction</title>
+    <section xml:id="zend.authentication.adapter.dbtable.introduction"><title>Introduction</title>
         
 
         <para>
-            <classname>Zend_Auth_Adapter_DbTable</classname> provides the ability to
+            <classname>Zend\Authentication\Adapter\DbTable</classname> provides the ability to
             authenticate against credentials stored in a database table. Because
-            <classname>Zend_Auth_Adapter_DbTable</classname> requires an instance of
-            <classname>Zend_Db_Adapter_Abstract</classname> to be passed to its
+            <classname>Zend\Authentication\Adapter\DbTable</classname> requires an instance of
+            <classname>Zend\Db\Adapter\Adapter</classname> to be passed to its
             constructor, each instance is bound to a particular database
             connection. Other configuration options may be set through the
             constructor and through instance methods, one for each option.
@@ -66,13 +66,13 @@
             </listitem>
         </itemizedlist>
 
-        <example xml:id="zend.auth.adapter.dbtable.introduction.example.basic_usage"><title>Basic Usage</title>
+        <example xml:id="zend.authentication.adapter.dbtable.introduction.example.basic_usage"><title>Basic Usage</title>
             
 
             <para>
                 As explained in the introduction, the
-                <classname>Zend_Auth_Adapter_DbTable</classname> constructor requires an
-                instance of <classname>Zend_Db_Adapter_Abstract</classname> that serves as
+                <classname>Zend\Authentication\Adapter\DbTable</classname> constructor requires an
+                instance of <classname>Zend\Db\Adapter\Adapter</classname> that serves as
                 the database connection to which the authentication adapter
                 instance is bound. First, the database connection should be
                 created.
@@ -86,9 +86,13 @@
             </para>
 
             <programlisting language="php"><![CDATA[
-// Create an in-memory SQLite database connection
-$dbAdapter = new Zend_Db_Adapter_Pdo_Sqlite(array('dbname' =>
-                                                  ':memory:'));
+use Zend\Db\Adapter\Adapter as DbAdapter;
+
+// Create a SQLite database connection
+$dbAdapter = new DbAdapter(array(
+                'driver' => 'Pdo_Sqlite',
+                'database' => 'path/to/sqlite.db'
+            ));
 
 // Build a simple table creation query
 $sqlCreate = 'CREATE TABLE [users] ('
@@ -110,23 +114,24 @@ $dbAdapter->query($sqlInsert);
 
             <para>
                 With the database connection and table data available, an
-                instance of <classname>Zend_Auth_Adapter_DbTable</classname> may be
+                instance of <classname>Zend\Authentication\Adapter\DbTable</classname> may be
                 created. Configuration option values may be passed to the
                 constructor or deferred as parameters to setter methods after
                 instantiation:
             </para>
 
             <programlisting language="php"><![CDATA[
+use Zend\Authentication\Adapter\DbTable as AuthAdapter;
+
 // Configure the instance with constructor parameters...
-$authAdapter = new Zend_Auth_Adapter_DbTable(
-    $dbAdapter,
-    'users',
-    'username',
-    'password'
-);
+$authAdapter = new AuthAdapter($dbAdapter,
+                               'users',
+                               'username',
+                               'password'
+                               );
 
 // ...or configure the instance with setter methods
-$authAdapter = new Zend_Auth_Adapter_DbTable($dbAdapter);
+$authAdapter = new AuthAdapter($dbAdapter);
 
 $authAdapter
     ->setTableName('users')
@@ -156,7 +161,7 @@ $authAdapter
             <para>
                 In addition to the availability of the
                 <methodname>getIdentity()</methodname> method upon the authentication result
-                object, <classname>Zend_Auth_Adapter_DbTable</classname> also supports
+                object, <classname>Zend\Authentication\Adapter\DbTable</classname> also supports
                 retrieving the table row upon authentication success:
             </para>
 
@@ -186,14 +191,14 @@ Array
         </example>
     </section>
 
-    <section xml:id="zend.auth.adapter.dbtable.advanced.storing_result_row"><title>Advanced Usage: Persisting a DbTable Result Object</title>
+    <section xml:id="zend.authentication.adapter.dbtable.advanced.storing_result_row"><title>Advanced Usage: Persisting a DbTable Result Object</title>
         
 
         <para>
-            By default, <classname>Zend_Auth_Adapter_DbTable</classname> returns the
+            By default, <classname>Zend\Authentication\Adapter\DbTable</classname> returns the
             identity supplied back to the auth object upon successful
             authentication. Another use case scenario, where developers want to
-            store to the persistent storage mechanism of <classname>Zend_Auth</classname>
+            store to the persistent storage mechanism of <classname>Zend\Authentication</classname>
             an identity object containing other useful information, is solved by
              using the <methodname>getResultRowObject()</methodname> method to return a
             <emphasis>stdClass</emphasis> object. The following code snippet illustrates
@@ -201,7 +206,7 @@ Array
         </para>
 
         <programlisting language="php"><![CDATA[
-// authenticate with Zend_Auth_Adapter_DbTable
+// authenticate with Zend\Authentication\Adapter\DbTable
 $result = $this->_auth->authenticate($adapter);
 
 if ($result->isValid()) {
@@ -230,12 +235,12 @@ if ($result->isValid()) {
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.auth.adapter.dbtable.advanced.advanced_usage"><title>Advanced Usage By Example</title>
+    <section xml:id="zend.authentication.adapter.dbtable.advanced.advanced_usage"><title>Advanced Usage By Example</title>
         
 
         <para>
-            While the primary purpose of <classname>Zend_Auth</classname> (and consequently
-            <classname>Zend_Auth_Adapter_DbTable</classname>) is primarily
+            While the primary purpose of the <classname>Zend\Authentication</classname> component (and consequently
+            <classname>Zend\Authentication\Adapter\DbTable</classname>) is primarily
             <emphasis>authentication</emphasis> and not
             <emphasis>authorization</emphasis>, there are a few
             instances and problems that toe the line between which domain they fit
@@ -245,28 +250,29 @@ if ($result->isValid()) {
         </para>
 
         <para>
-            With that disclaimer out of the way, <classname>Zend_Auth_Adapter_DbTable</classname>
+            With that disclaimer out of the way, <classname>Zend\Authentication\Adapter\DbTable</classname>
             has some built in mechanisms that can be leveraged for additional checks at
             authentication time to solve some common user problems.
         </para>
 
         <programlisting language="php"><![CDATA[
+use Zend\Authentication\Adapter\DbTable as AuthAdapter;
+
 // The status field value of an account is not equal to "compromised"
-$adapter = new Zend_Auth_Adapter_DbTable(
-    $db,
-    'users',
-    'username',
-    'password',
-    'MD5(?) AND status != "compromised"'
-);
+$adapter = new AuthAdapter($db,
+                           'users',
+                           'username',
+                           'password',
+                           'MD5(?) AND status != "compromised"'
+                           );
 
 // The active field value of an account is equal to "TRUE"
-$adapter = new Zend_Auth_Adapter_DbTable(
-    $db,
-    'users',
-    'username',
-    'password',
-    'MD5(?) AND active = "TRUE"'
+$adapter = new AuthAdapter($db,
+                           'users',
+                           'username',
+                           'password',
+                           'MD5(?) AND active = "TRUE"'
+                           );
 ]]></programlisting>
 
         <para>
@@ -302,15 +308,14 @@ for ($i = 0; $i < 50; $i++) {
         </para>
 
         <programlisting language="php"><![CDATA[
-$adapter = new Zend_Auth_Adapter_DbTable(
-    $db,
-    'users',
-    'username',
-    'password',
-    "MD5(CONCAT('"
-    . Zend_Registry::get('staticSalt')
-    . "', ?, password_salt))"
-);
+$adapter = new AuthAdapter($db,
+                           'users',
+                           'username',
+                           'password',
+                           "MD5(CONCAT('"
+                                . Zend\Registry::get('staticSalt')
+                                . "', ?, password_salt))"
+                          );
 ]]></programlisting>
 
         <note>
@@ -324,8 +329,8 @@ $adapter = new Zend_Auth_Adapter_DbTable(
 
         <para>
             Another alternative is to use the <methodname>getDbSelect()</methodname> method
-            of the <classname>Zend_Auth_Adapter_DbTable</classname> after the adapter has been
-            constructed. This method will return the <classname>Zend_Db_Select</classname> object
+            of the <classname>Zend\Authentication\Adapter\DbTable</classname> after the adapter has been
+            constructed. This method will return the <classname>Zend\Db\Sql\Select</classname> object
             instance it will use to complete the <methodname>authenticate()</methodname> routine.
             It is important to note that this method will always return the same object regardless
             if <methodname>authenticate()</methodname> has been called or not. This object
@@ -342,13 +347,12 @@ $adapter = new Zend_Auth_Adapter_DbTable(
 
         <programlisting language="php"><![CDATA[
 // Continuing with the example from above
-$adapter = new Zend_Auth_Adapter_DbTable(
-    $db,
-    'users',
-    'username',
-    'password',
-    'MD5(?)'
-);
+$adapter = new AuthAdapter($db,
+                           'users',
+                           'username',
+                           'password',
+                           'MD5(?)'
+                           );
 
 // get select object (by reference)
 $select = $adapter->getDbSelect();

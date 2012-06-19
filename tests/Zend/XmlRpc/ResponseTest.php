@@ -259,4 +259,19 @@ EOD;
     {
         $this->_errorOccured = true;
     }
+
+    /**
+     * @group ZF-12293
+     */
+    public function testDoesNotAllowExternalEntities()
+    {
+        $payload = file_get_contents(dirname(__FILE__) . '/_files/ZF12293-response.xml');
+        $payload = sprintf($payload, 'file://' . realpath(dirname(__FILE__) . '/_files/ZF12293-payload.txt'));
+        $this->_response->loadXml($payload);
+        $value = $this->_response->getReturnValue();
+        $this->assertTrue(empty($value));
+        if (is_string($value)) {
+            $this->assertNotContains('Local file inclusion', $value);
+        }
+    }
 }

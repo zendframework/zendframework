@@ -573,7 +573,7 @@ class VolumeEntry extends \Zend\GData\Entry
     /**
      * Gets the thumbnail link
      *
-     * @return Zend_Gdata_App_Extension_link|null The thumbnail link
+     * @return \Zend\Gdata\App\Extension\link|null The thumbnail link
      */
     public function getThumbnailLink()
     {

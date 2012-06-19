@@ -217,7 +217,11 @@ class ModuleManager implements ModuleManagerInterface
      */
     public function setEventManager(EventManagerInterface $events)
     {
-        $events->setIdentifiers(array(__CLASS__, get_class($this)));
+        $events->setIdentifiers(array(
+            __CLASS__,
+            get_called_class(),
+            'module_manager',
+        ));
         $this->events = $events;
         return $this;
     }

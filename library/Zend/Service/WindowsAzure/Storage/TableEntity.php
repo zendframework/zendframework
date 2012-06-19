@@ -153,7 +153,7 @@ class TableEntity
     public function getAzureValues()
     {
         // Get accessors
-        $accessors = self::getAzureAccessors(get_class($this));
+        $accessors = self::getAzureAccessors(get_called_class());
 
         // Loop accessors and retrieve values
         $returnValue = array();
@@ -192,7 +192,7 @@ class TableEntity
     public function setAzureValues($values = array(), $throwOnError = false)
     {
         // Get accessors
-        $accessors = self::getAzureAccessors(get_class($this));
+        $accessors = self::getAzureAccessors(get_called_class());
 
         // Loop accessors and set values
         $returnValue = array();

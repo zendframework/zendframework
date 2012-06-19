@@ -263,7 +263,7 @@ class PythonPickle extends AbstractAdapter
             $this->_writeObject($value);
         } else {
             throw new RuntimeException(
-                'PHP-Type "'.gettype($value).'" isn\'t serializable with '.get_class($this)
+                'PHP-Type "'.gettype($value).'" isn\'t serializable with '.get_called_class()
             );
         }
     }
@@ -293,11 +293,11 @@ class PythonPickle extends AbstractAdapter
                 $this->_pickle .= self::OP_BINGET . chr($id);
             } else {
                 // LONG_BINGET + pack("<i", i)
-                $idBin = pack('l', $id);
+                $bin = pack('l', $id);
                 if (self::$_isLittleEndian === false) {
-                    $idBin = strrev($idBin);
+                    $bin = strrev($bin);
                 }
-                $this->_pickle .= self::OP_LONG_BINGET . $idBin;
+                $this->_pickle .= self::OP_LONG_BINGET . $bin;
             }
         } else {
             $this->_pickle .= self::OP_GET . $id . "\r\n";
@@ -318,11 +318,11 @@ class PythonPickle extends AbstractAdapter
                 $this->_pickle .= self::OP_BINPUT . chr($id);
             } else {
                 // LONG_BINPUT + pack("<i", i)
-                $idBin = pack('l', $id);
+                $bin = pack('l', $id);
                 if (self::$_isLittleEndian === false) {
-                    $idBin = strrev($idBin);
+                    $bin = strrev($bin);
                 }
-                $this->_pickle .= self::OP_LONG_BINPUT . $idBin;
+                $this->_pickle .= self::OP_LONG_BINPUT . $bin;
             }
         } else {
             $this->_pickle .= self::OP_PUT . $id . "\r\n";

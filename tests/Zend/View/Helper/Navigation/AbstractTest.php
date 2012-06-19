@@ -21,13 +21,16 @@
 
 namespace ZendTest\View\Helper\Navigation;
 
-use Zend\Navigation\Navigation,
-    Zend\Acl\Acl,
-    Zend\Acl\Role\GenericRole,
-    Zend\Acl\Resource\GenericResource,
-    Zend\Config\Factory as ConfigFactory,
-    Zend\Translator\Translator,
-    Zend\View\Renderer\PhpRenderer;
+use Zend\Navigation\Navigation;
+use Zend\Acl\Acl;
+use Zend\Acl\Role\GenericRole;
+use Zend\Acl\Resource\GenericResource;
+use Zend\Config\Factory as ConfigFactory;
+use Zend\Mvc\Router\RouteMatch;
+use Zend\Mvc\Service\ServiceManagerConfiguration;
+use Zend\ServiceManager\ServiceManager;
+use Zend\Translator\Translator;
+use Zend\View\Renderer\PhpRenderer;
 
 /**
  * Base class for navigation view helper tests
@@ -43,6 +46,11 @@ use Zend\Navigation\Navigation,
 abstract class AbstractTest extends \PHPUnit_Framework_TestCase
 {
     const REGISTRY_KEY = 'Zend_Navigation';
+
+    /**
+     * @var
+     */
+    protected $serviceManager;
 
     /**
      * Path to files needed for test
@@ -107,6 +115,40 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase
 
         // set nav1 in helper as default
         $this->_helper->setContainer($this->_nav1);
+
+        // setup service manager
+        $smConfig = array(
+            'modules'                 => array(),
+            'module_listener_options' => array(
+                'config_cache_enabled' => false,
+                'cache_dir'            => 'data/cache',
+                'module_paths'         => array(),
+            ),
+            'service_manager' => array(
+                'factories' => array(
+                    'Configuration' => function() use ($config) {
+                        return array(
+                            'navigation' => array(
+                                'default' => $config->get('nav_test1')
+                            )
+                        );
+                    }
+                )
+            ),
+        );
+
+        $sm = $this->serviceManager = new ServiceManager(new ServiceManagerConfiguration($smConfig['service_manager']));
+        $sm->setService('ApplicationConfiguration', $smConfig);
+        $sm->get('ModuleManager')->loadModules();
+        $sm->get('Application')->bootstrap();
+        $sm->setFactory('Navigation', 'Zend\Navigation\Service\DefaultNavigationFactory');
+
+        $app = $this->serviceManager->get('Application');
+        $app->getMvcEvent()->setRouteMatch(new RouteMatch(array(
+            'controller' => 'post',
+            'action'     => 'view',
+            'id'         => '1337',
+        )));
     }
 
     /**

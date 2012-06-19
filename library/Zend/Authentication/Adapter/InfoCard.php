@@ -54,7 +54,6 @@ class InfoCard implements AdapterInterface
      * Constructor
      *
      * @param  string $strXmlDocument The XML Token provided by the client
-     * @return void
      */
     public function __construct($strXmlDocument)
     {
@@ -65,8 +64,8 @@ class InfoCard implements AdapterInterface
     /**
      * Sets the InfoCard component Adapter to use
      *
-     * @param  Zend\InfoCard\Adapter\AdapterInterface $a
-     * @return Zend\Authentication\Adapter\InfoCard Provides a fluent interface
+     * @param  ZendInfoCard\Adapter\AdapterInterface $a
+     * @return InfoCard Provides a fluent interface
      */
     public function setAdapter(ZendInfoCard\Adapter\AdapterInterface $a)
     {
@@ -77,7 +76,7 @@ class InfoCard implements AdapterInterface
     /**
      * Retrieves the InfoCard component adapter being used
      *
-     * @return Zend\InfoCard\Adapter\AdapterInterface
+     * @return AdapterInterface
      */
     public function getAdapter()
     {
@@ -87,7 +86,7 @@ class InfoCard implements AdapterInterface
     /**
      * Retrieves the InfoCard public key cipher object being used
      *
-     * @return Zend\InfoCard\Cipher\PKI\PKIInterface
+     * @return ZendInfoCard\Cipher\PKI\PKIInterface
      */
     public function getPKCipherObject()
     {
@@ -97,8 +96,8 @@ class InfoCard implements AdapterInterface
     /**
      * Sets the InfoCard public key cipher object to use
      *
-     * @param  Zend\InfoCard\Cipher\PKI\PKIInterface $cipherObj
-     * @return \Zend\Authentication\Adapter\InfoCard Provides a fluent interface
+     * @param  ZendInfoCard\Cipher\PKI\PKIInterface $cipherObj
+     * @return InfoCard Provides a fluent interface
      */
     public function setPKICipherObject(ZendInfoCard\Cipher\PKI\PKIInterface $cipherObj)
     {
@@ -109,7 +108,7 @@ class InfoCard implements AdapterInterface
     /**
      * Retrieves the Symmetric cipher object being used
      *
-     * @return Zend\InfoCard\Cipher\Symmetric\AES128CBCInterface
+     * @return ZendInfoCard\Cipher\Symmetric\AES128CBCInterface
      */
     public function getSymCipherObject()
     {
@@ -119,8 +118,8 @@ class InfoCard implements AdapterInterface
     /**
      * Sets the InfoCard symmetric cipher object to use
      *
-     * @param  Zend\InfoCard\Cipher\Symmetric\AES128CBCInterface $cipherObj
-     * @return Zend\Authentication\Adapter\InfoCard Provides a fluent interface
+     * @param  ZendInfoCard\Cipher\Symmetric\AES128CBCInterface $cipherObj
+     * @return InfoCard Provides a fluent interface
      */
     public function setSymCipherObject(ZendInfoCard\Cipher\Symmetric\AES128CBCInterface $cipherObj)
     {
@@ -132,8 +131,8 @@ class InfoCard implements AdapterInterface
      * Remove a Certificate Pair by Key ID from the search list
      *
      * @param  string $keyId The Certificate Key ID returned from adding the certificate pair
-     * @throws Zend\InfoCard\Exception
-     * @return Zend\Authentication\Adapter\InfoCard Provides a fluent interface
+     * @throws ZendInfoCard\Exception\ExceptionInterface
+     * @return InfoCard Provides a fluent interface
      */
     public function removeCertificatePair($keyId)
     {
@@ -148,7 +147,7 @@ class InfoCard implements AdapterInterface
      * @param  string $publicKeyFile     The path to the certificate / public key for the pair
      * @param  string $type                (optional) The URI for the type of key pair this is (default RSA with OAEP padding)
      * @param  string $password            (optional) The password for the private key file if necessary
-     * @throws Zend\InfoCard\Exception
+     * @throws ZendInfoCard\Exception\ExceptionInterface
      * @return string A key ID representing this key pair in the component
      */
     public function addCertificatePair($privateKeyFile, $publicKeyFile, $type = ZendInfoCard\Cipher::ENC_RSA_OAEP_MGF1P, $password = null)
@@ -160,7 +159,7 @@ class InfoCard implements AdapterInterface
      * Return a Certificate Pair from a key ID
      *
      * @param  string $keyId The Key ID of the certificate pair in the component
-     * @throws Zend\InfoCard\Exception
+     * @throws ZendInfoCard\Exception\ExceptionInterface
      * @return array An array containing the path to the private/public key files,
      *               the type URI and the password if provided
      */
@@ -194,7 +193,7 @@ class InfoCard implements AdapterInterface
     /**
      * Authenticates the XML token
      *
-     * @return Zend\Authentication\Result The result of the authentication
+     * @return AuthenticationResult The result of the authentication
      */
     public function authenticate()
     {

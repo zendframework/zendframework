@@ -244,4 +244,16 @@ class Update extends AbstractSql implements SqlInterface, PreparableSqlInterface
                 return $this->where;
         }
     }
+	
+	/**
+     * __clone
+     *
+     * Resets the where object each time the Update is cloned.
+     *
+     * @return void
+     */
+    public function __clone()
+    {
+        $this->where = clone $this->where;
+    }
 }

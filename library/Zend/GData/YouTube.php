@@ -39,22 +39,22 @@ class YouTube extends Media
     const AUTH_SERVICE_NAME = 'youtube';
     const CLIENTLOGIN_URL = 'https://www.google.com/youtube/accounts/ClientLogin';
 
-    const STANDARD_TOP_RATED_URI = 'http://gdata.youtube.com/feeds/api/standardfeeds/top_rated';
-    const STANDARD_MOST_VIEWED_URI = 'http://gdata.youtube.com/feeds/api/standardfeeds/most_viewed';
-    const STANDARD_RECENTLY_FEATURED_URI = 'http://gdata.youtube.com/feeds/api/standardfeeds/recently_featured';
-    const STANDARD_WATCH_ON_MOBILE_URI = 'http://gdata.youtube.com/feeds/api/standardfeeds/watch_on_mobile';
+    const STANDARD_TOP_RATED_URI = 'https://gdata.youtube.com/feeds/api/standardfeeds/top_rated';
+    const STANDARD_MOST_VIEWED_URI = 'https://gdata.youtube.com/feeds/api/standardfeeds/most_viewed';
+    const STANDARD_RECENTLY_FEATURED_URI = 'https://gdata.youtube.com/feeds/api/standardfeeds/recently_featured';
+    const STANDARD_WATCH_ON_MOBILE_URI = 'https://gdata.youtube.com/feeds/api/standardfeeds/watch_on_mobile';
 
     const STANDARD_TOP_RATED_URI_V2 =
-        'http://gdata.youtube.com/feeds/api/standardfeeds/top_rated';
+        'https://gdata.youtube.com/feeds/api/standardfeeds/top_rated';
     const STANDARD_MOST_VIEWED_URI_V2 =
-        'http://gdata.youtube.com/feeds/api/standardfeeds/most_viewed';
+        'https://gdata.youtube.com/feeds/api/standardfeeds/most_viewed';
     const STANDARD_RECENTLY_FEATURED_URI_V2 =
-        'http://gdata.youtube.com/feeds/api/standardfeeds/recently_featured';
+        'https://gdata.youtube.com/feeds/api/standardfeeds/recently_featured';
     const STANDARD_WATCH_ON_MOBILE_URI_V2 =
-        'http://gdata.youtube.com/feeds/api/standardfeeds/watch_on_mobile';
+        'https://gdata.youtube.com/feeds/api/standardfeeds/watch_on_mobile';
 
-    const USER_URI = 'http://gdata.youtube.com/feeds/api/users';
-    const VIDEO_URI = 'http://gdata.youtube.com/feeds/api/videos';
+    const USER_URI = 'https://gdata.youtube.com/feeds/api/users';
+    const VIDEO_URI = 'https://gdata.youtube.com/feeds/api/videos';
     const PLAYLIST_REL = 'http://gdata.youtube.com/schemas/2007#playlist';
     const USER_UPLOADS_REL = 'http://gdata.youtube.com/schemas/2007#user.uploads';
     const USER_PLAYLISTS_REL = 'http://gdata.youtube.com/schemas/2007#user.playlists';
@@ -64,9 +64,9 @@ class YouTube extends Media
     const VIDEO_RESPONSES_REL = 'http://gdata.youtube.com/schemas/2007#video.responses';
     const VIDEO_RATINGS_REL = 'http://gdata.youtube.com/schemas/2007#video.ratings';
     const VIDEO_COMPLAINTS_REL = 'http://gdata.youtube.com/schemas/2007#video.complaints';
-    const ACTIVITY_FEED_URI = 'http://gdata.youtube.com/feeds/api/events';
+    const ACTIVITY_FEED_URI = 'https://gdata.youtube.com/feeds/api/events';
     const FRIEND_ACTIVITY_FEED_URI =
-        'http://gdata.youtube.com/feeds/api/users/default/friendsactivity';
+        'https://gdata.youtube.com/feeds/api/users/default/friendsactivity';
 
     /**
      * The URI of the in-reply-to schema for comments in reply to
@@ -83,7 +83,7 @@ class YouTube extends Media
      * @var string
      */
     const INBOX_FEED_URI =
-        'http://gdata.youtube.com/feeds/api/users/default/inbox';
+        'https://gdata.youtube.com/feeds/api/users/default/inbox';
 
     /**
      * The maximum number of users for which activity can be requested for,
@@ -167,19 +167,14 @@ class YouTube extends Media
      * Set the Zend_Http_Client object used for communication
      *
      * @param \Zend\Http\Client $client The client to use for communication
-     * @throws \Zend\GData\App\HttpException
      * @return \Zend\GData\App Provides a fluent interface
      */
-    public function setHttpClient($client,
+    public function setHttpClient(Http\Client $client = null,
         $applicationId = 'MyCompany-MyApp-1.0', $clientId = null,
         $developerKey = null)
     {
         if ($client === null) {
             $client = new Http\Client();
-        }
-        if (!$client instanceof Http\Client) {
-            throw new App\HttpException(
-                'Argument is not an instance of Zend_Http_Client.');
         }
 
         if ($clientId != null) {
@@ -206,7 +201,7 @@ class YouTube extends Media
         if ($location == null) {
             $uri = self::VIDEO_URI;
         } else if ($location instanceof Query) {
-            $uri = $location->getQueryUrl();
+            $uri = $location->getQueryUrl($this->getMajorProtocolVersion());
         } else {
             $uri = $location;
         }
@@ -236,7 +231,7 @@ class YouTube extends Media
                 $uri = self::VIDEO_URI . "/" . $videoId;
             }
         } else if ($location instanceof Query) {
-            $uri = $location->getQueryUrl();
+            $uri = $location->getQueryUrl($this->getMajorProtocolVersion());
         } else {
             $uri = $location;
         }
@@ -274,7 +269,7 @@ class YouTube extends Media
             $uri = self::VIDEO_URI . "/" . $videoId . "/" .
                 self::RELATED_URI_SUFFIX;
         } else if ($location instanceof Query) {
-            $uri = $location->getQueryUrl();
+            $uri = $location->getQueryUrl($this->getMajorProtocolVersion());
         } else {
             $uri = $location;
         }
@@ -296,7 +291,7 @@ class YouTube extends Media
             $uri = self::VIDEO_URI . "/" . $videoId . "/" .
                 self::RESPONSES_URI_SUFFIX;
         } else if ($location instanceof Query) {
-            $uri = $location->getQueryUrl();
+            $uri = $location->getQueryUrl($this->getMajorProtocolVersion());
         } else {
             $uri = $location;
         }
@@ -317,7 +312,7 @@ class YouTube extends Media
         if ($videoId !== null) {
             $uri = self::VIDEO_URI . "/" . $videoId . "/comments";
         } else if ($location instanceof Query) {
-            $uri = $location->getQueryUrl();
+            $uri = $location->getQueryUrl($this->getMajorProtocolVersion());
         } else {
             $uri = $location;
         }
@@ -348,7 +343,7 @@ class YouTube extends Media
                     $location->setFeedType('top rated');
                 }
             }
-            $uri = $location->getQueryUrl();
+            $uri = $location->getQueryUrl($this->getMajorProtocolVersion());
         } else {
             $uri = $location;
         }
@@ -380,7 +375,7 @@ class YouTube extends Media
                     $location->setFeedType('most viewed');
                 }
             }
-            $uri = $location->getQueryUrl();
+            $uri = $location->getQueryUrl($this->getMajorProtocolVersion());
         } else {
             $uri = $location;
         }
@@ -411,7 +406,7 @@ class YouTube extends Media
                     $location->setFeedType('recently featured');
                 }
             }
-            $uri = $location->getQueryUrl();
+            $uri = $location->getQueryUrl($this->getMajorProtocolVersion());
         } else {
             $uri = $location;
         }
@@ -443,7 +438,7 @@ class YouTube extends Media
                     $location->setFeedType('watch on mobile');
                 }
             }
-            $uri = $location->getQueryUrl();
+            $uri = $location->getQueryUrl($this->getMajorProtocolVersion());
         } else {
             $uri = $location;
         }
@@ -463,7 +458,7 @@ class YouTube extends Media
         if ($user !== null) {
             $uri = self::USER_URI . '/' . $user . '/playlists';
         } else if ($location instanceof Query) {
-            $uri = $location->getQueryUrl();
+            $uri = $location->getQueryUrl($this->getMajorProtocolVersion());
         } else {
             $uri = $location;
         }
@@ -481,7 +476,7 @@ class YouTube extends Media
     public function getPlaylistVideoFeed($location)
     {
         if ($location instanceof Query) {
-            $uri = $location->getQueryUrl();
+            $uri = $location->getQueryUrl($this->getMajorProtocolVersion());
         } else {
             $uri = $location;
         }
@@ -494,14 +489,14 @@ class YouTube extends Media
      * @param string $user (optional) The username of interest
      * @param mixed $location (optional) The URL to query or a
      *         Zend_Gdata_Query object from which a URL can be determined
-     * @return Zend_Gdata_YouTube_SubscriptionListFeed The feed of subscriptions
+     * @return YouTube\SubscriptionListFeed The feed of subscriptions
      */
     public function getSubscriptionFeed($user = null, $location = null)
     {
         if ($user !== null) {
             $uri = self::USER_URI . '/' . $user . '/subscriptions';
-        } else if ($location instanceof GData\Query) {
-            $uri = $location->getQueryUrl();
+        } else if ($location instanceof Query) {
+            $uri = $location->getQueryUrl($this->getMajorProtocolVersion());
         } else {
             $uri = $location;
         }
@@ -521,7 +516,7 @@ class YouTube extends Media
         if ($user !== null) {
             $uri = self::USER_URI . '/' . $user . '/contacts';
         } else if ($location instanceof Query) {
-            $uri = $location->getQueryUrl();
+            $uri = $location->getQueryUrl($this->getMajorProtocolVersion());
         } else {
             $uri = $location;
         }
@@ -542,7 +537,7 @@ class YouTube extends Media
             $uri = self::USER_URI . '/' . $user . '/' .
                    self::UPLOADS_URI_SUFFIX;
         } else if ($location instanceof Query) {
-            $uri = $location->getQueryUrl();
+            $uri = $location->getQueryUrl($this->getMajorProtocolVersion());
         } else {
             $uri = $location;
         }
@@ -563,7 +558,7 @@ class YouTube extends Media
             $uri = self::USER_URI . '/' . $user . '/' .
                    self::FAVORITES_URI_SUFFIX;
         } else if ($location instanceof Query) {
-            $uri = $location->getQueryUrl();
+            $uri = $location->getQueryUrl($this->getMajorProtocolVersion());
         } else {
             $uri = $location;
         }
@@ -583,7 +578,7 @@ class YouTube extends Media
         if ($user !== null) {
             $uri = self::USER_URI . '/' . $user;
         } else if ($location instanceof Query) {
-            $uri = $location->getQueryUrl();
+            $uri = $location->getQueryUrl($this->getMajorProtocolVersion());
         } else {
             $uri = $location;
         }
@@ -645,7 +640,7 @@ class YouTube extends Media
      * @return array An array containing a token and URL
      */
     public function getFormUploadToken($videoEntry,
-        $url='http://gdata.youtube.com/action/GetUploadToken')
+        $url='https://gdata.youtube.com/action/GetUploadToken')
     {
         if ($url != null && is_string($url)) {
             // $response is a Zend_Http_response object
@@ -660,7 +655,7 @@ class YouTube extends Media
     /**
      * Retrieves the activity feed for users
      *
-     * @param mixed $usernames A string identifying the usernames for which to
+     * @param mixed $username A string identifying the usernames for which to
      *              retrieve activity for. This can also be a Zend_Gdata_Query
      *              object from which a URL can be determined.
      * @throws \Zend\GData\App\VersionException if using version less than 2.
@@ -675,7 +670,7 @@ class YouTube extends Media
 
         $uri = null;
         if ($username instanceof Query) {
-            $uri = $username->getQueryUrl();
+            $uri = $username->getQueryUrl($this->getMajorProtocolVersion());
         } else {
             if (count(explode(',', $username)) >
                 self::ACTIVITY_FEED_MAX_USERS) {
@@ -731,7 +726,7 @@ class YouTube extends Media
      * be provided.
      *
      * @param string $body The body of the message
-     * @param \Zend\GData\YouTube\VideoEntry (optional) The video entry to send
+     * @param YouTube\VideoEntry $videoEntry (optional) The video entry to send
      * @param string $videoId The id of the video to send
      * @param string $recipientUserName The username of the recipient
      * @throws \Zend\GData\App\InvalidArgumentException if no valid
@@ -749,7 +744,7 @@ class YouTube extends Media
                 '\Zend\GData\YouTube->sendVideoMessage().');
         }
 
-        $messageEntry = new InboxEntry();
+        $messageEntry = new YouTube\InboxEntry();
 
         if ($this->getMajorProtocolVersion() == null ||
             $this->getMajorProtocolVersion() == 1) {
@@ -765,7 +760,7 @@ class YouTube extends Media
             // TODO there seems to be a bug where v1 inbox entries dont
             // retain their description...
             $messageEntry->setDescription(
-                new Extension\Description($body));
+                new YouTube\Extension\Description($body));
 
         } else {
             if (!$videoId) {
@@ -776,7 +771,7 @@ class YouTube extends Media
             $messageEntry->setSummary($this->newSummary($body));
         }
 
-        $insertUrl = 'http://gdata.youtube.com/feeds/api/users/' .
+        $insertUrl = 'https://gdata.youtube.com/feeds/api/users/' .
             $recipientUserName . '/inbox';
         $response = $this->insertEntry($messageEntry, $insertUrl,
             '\Zend\GData\YouTube\InboxEntry');
@@ -786,13 +781,12 @@ class YouTube extends Media
     /**
      * Post a comment in reply to an existing comment
      *
-     * @param $commentEntry \Zend\GData\YouTube\CommentEntry The comment entry
+     * @param YouTube\CommentEntry $commentEntry The comment entry
      *        to reply to
-     * @param $commentText string The text of the comment to post
-     * @return A \Zend\GData\YouTube\CommentEntry representing the posted
-     *         comment
+     * @param string $commentText The text of the comment to post
+     * @return YouTube\CommentEntry the posted comment
      */
-    public function replyToCommentEntry($commentEntry, $commentText)
+    public function replyToCommentEntry(YouTube\CommentEntry $commentEntry, $commentText)
     {
         $newComment = $this->newCommentEntry();
         $newComment->content = $this->newContent()->setText($commentText);

@@ -20,9 +20,9 @@
 
 namespace Zend\EventManager;
 
-use Zend\Stdlib\CallbackHandler,
-    Zend\Stdlib\PriorityQueue,
-    ArrayObject;
+use ArrayObject;
+use Zend\Stdlib\CallbackHandler;
+use Zend\Stdlib\PriorityQueue;
 
 /**
  * Event manager: notification system
@@ -56,7 +56,7 @@ class GlobalEventManager
     /**
      * Get event collection on which this operates
      * 
-     * @return void
+     * @return EventManagerInterface
      */
     public static function getEventCollection()
     {
@@ -147,6 +147,6 @@ class GlobalEventManager
      */
     public static function clearListeners($event)
     {
-        return static::getEventCollection()->clearListeners($event);
+        static::getEventCollection()->clearListeners($event);
     }
 }

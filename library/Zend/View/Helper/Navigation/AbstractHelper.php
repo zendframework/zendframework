@@ -21,14 +21,15 @@
 
 namespace Zend\View\Helper\Navigation;
 
-use RecursiveIteratorIterator,
-    Zend\Acl,
-    Zend\Navigation,
-    Zend\Navigation\Page\AbstractPage,
-    Zend\Registry,
-    Zend\Translator,
-    Zend\View,
-    Zend\View\Exception;
+use RecursiveIteratorIterator;
+use Zend\Acl;
+use Zend\Navigation;
+use Zend\Navigation\Page\AbstractPage;
+use Zend\ServiceManager\ServiceLocatorAwareInterface;
+use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\Translator;
+use Zend\View;
+use Zend\View\Exception;
 
 /**
  * Base class for navigational helpers
@@ -39,12 +40,20 @@ use RecursiveIteratorIterator,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class AbstractHelper extends View\Helper\HtmlElement implements HelperInterface
+abstract class AbstractHelper
+    extends View\Helper\HtmlElement
+    implements HelperInterface,
+               ServiceLocatorAwareInterface
 {
     /**
-     * Container to operate on by default
+     * @var ServiceLocatorInterface
+     */
+    protected $serviceLocator;
+
+    /**
+     * AbstractContainer to operate on by default
      *
-     * @var Navigation\Container
+     * @var Navigation\AbstractContainer
      */
     protected $container;
 
@@ -127,18 +136,39 @@ abstract class AbstractHelper extends View\Helper\HtmlElement implements HelperI
      */
     protected static $defaultRole;
 
-    // Accessors:
+    /**
+     * Set the service locator.
+     *
+     * @param ServiceLocatorInterface $serviceLocator
+     * @return AbstractHelper
+     */
+    public function setServiceLocator(ServiceLocatorInterface $serviceLocator)
+    {
+        $this->serviceLocator = $serviceLocator;
+        return $this;
+    }
+
+    /**
+     * Get the service locator.
+     *
+     * @return \Zend\ServiceManager\ServiceLocatorInterface
+     */
+    public function getServiceLocator()
+    {
+        return $this->serviceLocator;
+    }
 
     /**
      * Sets navigation container the helper operates on by default
      *
      * Implements {@link HelperInterface::setContainer()}.
      *
-     * @param  Navigation\Container $container [optional] container to operate on.  Default is null, meaning container will be reset.
+     * @param  string|Navigation\AbstractContainer $container [optional] container to operate on.  Default is null, meaning container will be reset.
      * @return AbstractHelper  fluent interface, returns self
      */
-    public function setContainer(Navigation\Container $container = null)
+    public function setContainer($container = null)
     {
+        $this->parseContainer($container);
         $this->container = $container;
         return $this;
     }
@@ -148,28 +178,14 @@ abstract class AbstractHelper extends View\Helper\HtmlElement implements HelperI
      *
      * Implements {@link HelperInterface::getContainer()}.
      *
-     * If a helper is not explicitly set in this helper instance by calling
-     * {@link setContainer()} or by passing it through the helper entry point,
-     * this method will look in {@link \Zend\Registry} for a container by using
-     * the key 'Zend_Navigation'.
+     * If no container is set, a new container will be instantiated and
+     * stored in the helper.
      *
-     * If no container is set, and nothing is found in Zend\Registry, a new
-     * container will be instantiated and stored in the helper.
-     *
-     * @return Navigation\Container  navigation container
+     * @return Navigation\AbstractContainer  navigation container
      */
     public function getContainer()
     {
         if (null === $this->container) {
-            // try to fetch from registry first
-            if (\Zend\Registry::isRegistered('Zend_Navigation')) {
-                $nav = \Zend\Registry::get('Zend_Navigation');
-                if ($nav instanceof Navigation\Container) {
-                    return $this->container = $nav;
-                }
-            }
-
-            // nothing found in registry, create new container
             $this->container = new \Zend\Navigation\Navigation();
         }
 
@@ -177,9 +193,41 @@ abstract class AbstractHelper extends View\Helper\HtmlElement implements HelperI
     }
 
     /**
+     * Verifies container and eventually fetches it from service locator if it is a string
+     *
+     * @param \Zend\Navigation\AbstractContainer|string|null $container
+     * @throws \Zend\View\Exception\InvalidArgumentException
+     */
+    protected function parseContainer(&$container = null)
+    {
+        if (null === $container) {
+            return;
+        }
+
+        if (is_string($container)) {
+            if (!$this->getServiceLocator()) {
+                throw new Exception\InvalidArgumentException(sprintf(
+                    'Attempted to set container with alias "%s" but no ServiceLocator was set',
+                    $container
+                ));
+            }
+
+            $container = $this->getServiceLocator()->get($container);
+            return;
+        }
+
+        if (!$container instanceof Navigation\AbstractContainer) {
+            throw new  Exception\InvalidArgumentException(
+                'Container must be a string alias or an instance of ' .
+                    'Zend\Navigation\AbstractContainer'
+            );
+        }
+    }
+
+    /**
      * Sets the minimum depth a page must have to be included when rendering
      *
-     * @param  int $minDepth [optional] minimum depth. Default is null, which 
+     * @param  int $minDepth [optional] minimum depth. Default is null, which
      *                       sets no minimum depth.
      * @return AbstractHelper fluent interface, returns self
      */
@@ -209,7 +257,7 @@ abstract class AbstractHelper extends View\Helper\HtmlElement implements HelperI
     /**
      * Sets the maximum depth a page can have to be included when rendering
      *
-     * @param  int $maxDepth [optional] maximum depth. Default is null, which 
+     * @param  int $maxDepth [optional] maximum depth. Default is null, which
      *                       sets no maximum depth.
      * @return AbstractHelper fluent interface, returns self
      */
@@ -261,9 +309,9 @@ abstract class AbstractHelper extends View\Helper\HtmlElement implements HelperI
      *
      * Implements {@link HelperInterface::setTranslator()}.
      *
-     * @param  mixed $translator [optional] translator.  Expects an object of 
+     * @param  mixed $translator [optional] translator.  Expects an object of
      *                           type {@link Translator\Adapter\AbstractAdapter}
-     *                           or {@link Translator\Translator}, or null. 
+     *                           or {@link Translator\Translator}, or null.
      *                           Default is null, which sets no translator.
      * @return AbstractHelper  fluent interface, returns self
      */
@@ -288,12 +336,6 @@ abstract class AbstractHelper extends View\Helper\HtmlElement implements HelperI
      */
     public function getTranslator()
     {
-        if (null === $this->translator) {
-            if (Registry::isRegistered('Zend_Translator')) {
-                $this->setTranslator(Registry::get('Zend_Translator'));
-            }
-        }
-
         return $this->translator;
     }
 
@@ -333,7 +375,7 @@ abstract class AbstractHelper extends View\Helper\HtmlElement implements HelperI
      *
      * Implements {@link HelperInterface::setRole()}.
      *
-     * @param  mixed $role [optional] role to set. Expects a string, an 
+     * @param  mixed $role [optional] role to set. Expects a string, an
      *                     instance of type {@link Acl\Role\RoleInterface}, or null. Default
      *                     is null, which will set no role.
      * @return AbstractHelper  fluent interface, returns self
@@ -347,7 +389,7 @@ abstract class AbstractHelper extends View\Helper\HtmlElement implements HelperI
             $this->role = $role;
         } else {
             throw new Exception\InvalidArgumentException(sprintf(
-                '$role must be a string, null, or an instance of ' 
+                '$role must be a string, null, or an instance of '
                 .  'Zend\Acl\Role\RoleInterface; %s given',
                 (is_object($role) ? get_class($role) : gettype($role))
             ));
@@ -426,7 +468,7 @@ abstract class AbstractHelper extends View\Helper\HtmlElement implements HelperI
      *
      * Implements {@link HelperInterface::setUseTranslator()}.
      *
-     * @param  bool $useTranslator [optional] whether translator should be used. 
+     * @param  bool $useTranslator [optional] whether translator should be used.
      *                             Default is true.
      * @return AbstractHelper  fluent interface, returns self
      */
@@ -491,7 +533,7 @@ abstract class AbstractHelper extends View\Helper\HtmlElement implements HelperI
     /**
      * Finds the deepest active page in the given container
      *
-     * @param  Navigation\Container $container  container to search
+     * @param  Navigation\AbstractContainer $container  container to search
      * @param  int|null             $minDepth   [optional] minimum depth
      *                                          required for page to be
      *                                          valid. Default is to use
@@ -509,10 +551,9 @@ abstract class AbstractHelper extends View\Helper\HtmlElement implements HelperI
      *                                          'page', or an empty array
      *                                          if not found
      */
-    public function findActive(Navigation\Container $container,
-                               $minDepth = null,
-                               $maxDepth = -1)
+    public function findActive($container, $minDepth = null, $maxDepth = -1)
     {
+        $this->parseContainer($container);
         if (!is_int($minDepth)) {
             $minDepth = $this->getMinDepth();
         }
@@ -662,8 +703,8 @@ abstract class AbstractHelper extends View\Helper\HtmlElement implements HelperI
      *   will not be accepted if it is the descendant of a non-accepted page.
      *
      * @param  AbstractPage $page      page to check
-     * @param  bool         $recursive [optional] if true, page will not be 
-     *                                 accepted if it is the descendant of a 
+     * @param  bool         $recursive [optional] if true, page will not be
+     *                                 accepted if it is the descendant of a
      *                                 page that is not accepted. Default is true.
      * @return bool                    whether page should be accepted
      */
@@ -793,7 +834,7 @@ abstract class AbstractHelper extends View\Helper\HtmlElement implements HelperI
      * Sets default ACL role(s) to use when iterating pages if not explicitly
      * set later with {@link setRole()}
      *
-     * @param  mixed $role [optional] role to set. Expects null, string, or an 
+     * @param  mixed $role [optional] role to set. Expects null, string, or an
      *                     instance of {@link Acl\Role\RoleInterface}. Default is null, which
      *                     sets no default role.
      * @return void
@@ -801,8 +842,8 @@ abstract class AbstractHelper extends View\Helper\HtmlElement implements HelperI
      */
     public static function setDefaultRole($role = null)
     {
-        if (null === $role 
-            || is_string($role) 
+        if (null === $role
+            || is_string($role)
             || $role instanceof Acl\Role\RoleInterface
         ) {
             self::$defaultRole = $role;

@@ -78,9 +78,15 @@ class BaseInputFilterTest extends TestCase
         $bar = new Input();
         $bar->getFilterChain()->attachByName('stringtrim');
         $bar->getValidatorChain()->addValidator(new Validator\Digits());
+        
+        $baz = new Input();
+        $baz->setRequired(false);
+        $baz->getFilterChain()->attachByName('stringtrim');
+        $baz->getValidatorChain()->addValidator(new Validator\StringLength(1, 6)); 
 
         $filter->add($foo, 'foo')
                ->add($bar, 'bar')
+               ->add($baz, 'baz')
                ->add($this->getChildInputFilter(), 'nest');
 
         return $filter;
@@ -99,8 +105,14 @@ class BaseInputFilterTest extends TestCase
         $bar->getFilterChain()->attachByName('stringtrim');
         $bar->getValidatorChain()->addValidator(new Validator\Digits());
 
+        $baz = new Input();
+        $baz->setRequired(false);
+        $baz->getFilterChain()->attachByName('stringtrim');
+        $baz->getValidatorChain()->addValidator(new Validator\StringLength(1, 6));
+        
         $filter->add($foo, 'foo')
-               ->add($bar, 'bar');
+               ->add($bar, 'bar')
+               ->add($baz, 'baz');
         return $filter;
     }
 
@@ -110,9 +122,11 @@ class BaseInputFilterTest extends TestCase
         $validData = array(
             'foo' => ' bazbat ',
             'bar' => '12345',
+            'baz' => '',
             'nest' => array(
                 'foo' => ' bazbat ',
                 'bar' => '12345',
+                'baz' => '',
             ),
         );
         $filter->setData($validData);
@@ -121,9 +135,11 @@ class BaseInputFilterTest extends TestCase
         $invalidData = array(
             'foo' => ' baz bat ',
             'bar' => 'abc45',
+            'baz' => ' ',
             'nest' => array(
                 'foo' => ' baz bat ',
                 'bar' => '123ab',
+                'baz' => ' ',
             ),
         );
         $filter->setData($invalidData);
@@ -210,9 +226,11 @@ class BaseInputFilterTest extends TestCase
         $validData = array(
             'foo' => ' bazbat ',
             'bar' => '12345',
+            'baz' => '',
             'nest' => array(
                 'foo' => ' bazbat ',
                 'bar' => '12345',
+                'baz' => '',
             ),
         );
         $filter->setData($validData);
@@ -220,9 +238,11 @@ class BaseInputFilterTest extends TestCase
         $expected = array(
             'foo' => 'bazbat',
             'bar' => '12345',
+            'baz' => '',
             'nest' => array(
                 'foo' => 'bazbat',
                 'bar' => '12345',
+                'baz' => '',
             ),
         );
         $this->assertEquals($expected, $filter->getValues());
@@ -234,9 +254,11 @@ class BaseInputFilterTest extends TestCase
         $validData = array(
             'foo' => ' bazbat ',
             'bar' => '12345',
+            'baz' => '',
             'nest' => array(
                 'foo' => ' bazbat ',
                 'bar' => '12345',
+                'baz' => '',
             ),
         );
         $filter->setData($validData);
@@ -247,12 +269,16 @@ class BaseInputFilterTest extends TestCase
     public function testCanGetValidationMessages()
     {
         $filter = $this->getInputFilter();
+        $filter->get('baz')->setRequired(true);
+        $filter->get('nest')->get('baz')->setRequired(true);
         $invalidData = array(
             'foo' => ' bazbat boo ',
             'bar' => 'abc45',
+            'baz' => '',
             'nest' => array(
                 'foo' => ' baz bat boo ',
                 'bar' => '123yz',
+                'baz' => '',
             ),
         );
         $filter->setData($invalidData);
@@ -268,6 +294,9 @@ class BaseInputFilterTest extends TestCase
                 case 'bar':
                     $this->assertArrayHasKey(Validator\Digits::NOT_DIGITS, $currentMessages);
                     break;
+                case 'baz':
+                    $this->assertArrayHasKey(Validator\NotEmpty::IS_EMPTY, $currentMessages);
+                    break;
                 case 'nest':
                     foreach ($value as $k => $v) {
                         $this->assertArrayHasKey($k, $messages[$key]);
@@ -278,6 +307,9 @@ class BaseInputFilterTest extends TestCase
                                 break;
                             case 'bar':
                                 $this->assertArrayHasKey(Validator\Digits::NOT_DIGITS, $currentMessages);
+                                break;
+                            case 'baz':
+                                $this->assertArrayHasKey(Validator\NotEmpty::IS_EMPTY, $currentMessages);
                                 break;
                             default:
                                 $this->fail(sprintf('Invalid key "%s" encountered in messages array', $k));
@@ -457,5 +489,24 @@ class BaseInputFilterTest extends TestCase
         $filter->setData($data);
         $test = $filter->getValue('foo');
         $this->assertSame('bazbat', $test);
+    }
+
+    public function testGetRequiredNotEmptyValidationMessages()
+    {
+        $filter = new InputFilter();
+
+        $foo   = new Input();
+        $foo->setRequired(true);
+        $foo->setAllowEmpty(false);
+
+        $filter->add($foo, 'foo');
+
+        $data = array('foo' => null);
+        $filter->setData($data);
+
+        $this->assertFalse($filter->isValid());
+        $messages = $filter->getMessages();
+        $this->assertArrayHasKey('foo', $messages);
+        $this->assertNotEmpty($messages['foo']);
     }
 }

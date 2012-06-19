@@ -78,6 +78,14 @@ class ModuleManagerTest extends TestCase
         // Restore original include_path
         set_include_path($this->includePath);
     }
+    
+    public function testEventManagerIdentifiers()
+    {
+        $moduleManager = new ModuleManager(array());
+        $identifiers = $moduleManager->events()->getIdentifiers();
+        $expected    = array('Zend\ModuleManager\ModuleManager', 'module_manager');
+        $this->assertEquals($expected, array_values($identifiers));
+    }
 
     public function testCanLoadSomeModule()
     {

@@ -668,9 +668,7 @@ class Index implements SearchIndexInterface
     {
         if (is_string($query)) {
             $query = Search\QueryParser::parse($query);
-        }
-
-        if (!$query instanceof Search\Query\AbstractQuery) {
+        } elseif (!$query instanceof Search\Query\AbstractQuery) {
             throw new InvalidArgumentException('Query must be a string or Zend\Search\Lucene\Search\Query object');
         }
 
@@ -685,13 +683,13 @@ class Index implements SearchIndexInterface
         $query->execute($this);
 
         $topScore = 0;
-
+        
         $resultSetLimit = Lucene::getResultSetLimit();
         foreach ($query->matchedDocs() as $id => $num) {
             $docScore = $query->score($id, $this);
             if( $docScore != 0 ) {
                 $hit = new Search\QueryHit($this);
-                $hit->id = $id;
+                $hit->document_id = $hit->id = $id;
                 $hit->score = $docScore;
 
                 $hits[]   = $hit;

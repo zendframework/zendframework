@@ -192,6 +192,7 @@ class Result implements \Iterator, ResultInterface
         }
 
         if (($r = $this->resource->fetch()) === null) {
+            $this->resource->close();
             return false;
         } elseif ($r === false) {
             throw new Exception\RuntimeException($this->resource->error);

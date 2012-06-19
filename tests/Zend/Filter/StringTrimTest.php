@@ -22,7 +22,7 @@
 namespace ZendTest\Filter;
 
 use stdClass;
-use Zend\Filter\StringTrim as StringTrimFilter;
+use Zend\Filter\StringTrim;
 
 /**
  * @category   Zend
@@ -35,20 +35,18 @@ use Zend\Filter\StringTrim as StringTrimFilter;
 class StringTrimTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * Zend_Filter_StringTrim object
-     *
-     * @var Zend_Filter_StringTrim
+     * @var StringTrim
      */
     protected $_filter;
 
     /**
-     * Creates a new Zend_Filter_StringTrim object for each test method
+     * Creates a new Zend\Filter\StringTrim object for each test method
      *
      * @return void
      */
     public function setUp()
     {
-        $this->_filter = new StringTrimFilter();
+        $this->_filter = new StringTrim();
     }
 
     /**
@@ -103,7 +101,7 @@ class StringTrimTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @ZF-7183
+     * @group ZF-7183
      */
     public function testZF7183()
     {
@@ -112,7 +110,17 @@ class StringTrimTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @ZF-7902
+     * @group ZF2-170
+     */
+    public function testZF2170()
+    {
+        $filter = $this->_filter;
+        $this->assertEquals('Расчет', $filter('Расчет'));
+    }
+
+
+    /**
+     * @group ZF-7902
      */
     public function testZF7902()
     {
@@ -121,7 +129,7 @@ class StringTrimTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @ZF-10891
+     * @group ZF-10891
      */
     public function testZF10891()
     {
@@ -131,10 +139,8 @@ class StringTrimTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Зенд', $filter('   Зенд'));
 
         $trim_charlist = " \t\n\r\x0B・。";
-        $filter = new StringTrimFilter($trim_charlist);
+        $filter = new StringTrim($trim_charlist);
         $this->assertEquals('Зенд', $filter->filter('。  Зенд  。'));
-
-
     }
 
     public function getNonStringValues()

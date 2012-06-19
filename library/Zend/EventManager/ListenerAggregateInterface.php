@@ -42,7 +42,6 @@ interface ListenerAggregateInterface
      * implementation will pass this to the aggregate.
      *
      * @param EventManagerInterface $events
-     * @param null|int $priority Optional priority "hint" to use when attaching listeners
      */
     public function attach(EventManagerInterface $events);
 

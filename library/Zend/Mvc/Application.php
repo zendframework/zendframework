@@ -110,11 +110,8 @@ class Application implements
     /**
      * Constructor
      *
-     * 
-     * 
-     * @param mixed $configuration 
+     * @param mixed $configuration
      * @param ServiceManager $serviceManager 
-     * @return void
      */
     public function __construct($configuration, ServiceManager $serviceManager)
     {
@@ -212,7 +209,7 @@ class Application implements
     /**
      * Set the event manager instance
      *
-     * @param  EventCollection $eventManager
+     * @param  EventManagerInterface $eventManager
      * @return Application
      */
     public function setEventManager(EventManagerInterface $eventManager)
@@ -231,7 +228,7 @@ class Application implements
      *
      * Lazy-loads an EventManager instance if none registered.
      *
-     * @return EventCollection
+     * @return EventManagerInterface
      */
     public function events()
     {

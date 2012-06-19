@@ -48,6 +48,18 @@ class DocBlockTagGeneratorTest extends \PHPUnit_Framework_TestCase
         $this->tag = null;
     }
 
+    public function testCanPassNameToConstructor()
+    {
+        $tag = new Tag(array('name' => 'Foo'));
+        $this->assertEquals('Foo', $tag->getName());
+    }
+
+    public function testCanPassDescriptionToConstructor()
+    {
+        $tag = new Tag(array('description' => 'Foo'));
+        $this->assertEquals('Foo', $tag->getDescription());
+    }
+
     public function testNameGetterAndSetterPersistValue()
     {
         $this->tag->setName('Foo');

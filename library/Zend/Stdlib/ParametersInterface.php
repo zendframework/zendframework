@@ -2,10 +2,10 @@
 
 namespace Zend\Stdlib;
 
-use ArrayAccess,
-    Countable,
-    Serializable,
-    Traversable;
+use ArrayAccess;
+use Countable;
+use Serializable;
+use Traversable;
 
 /* 
  * Basically, an ArrayObject. You could simply define something like:

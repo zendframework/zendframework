@@ -111,12 +111,12 @@ class AuthSub
 
         try {
             $response = $client->send();
-        } catch (Client\Exception $e) {
+        } catch (Client\Exception\ExceptionInterface $e) {
             throw new App\HttpException($e->getMessage(), $e);
         }
 
         // Parse Google's response
-        if ($response->isSuccessful()) {
+        if ($response->isSuccess()) {
             $goog_resp = array();
             foreach (explode("\n", $response->getBody()) as $l) {
                 $l = rtrim($l);
@@ -161,12 +161,13 @@ class AuthSub
         ob_start();
         try {
             $response = $client->send();
-        } catch (Client\Exception $e) {
+        } catch (Client\Exception\ExceptionInterface $e) {
+            ob_end_clean();
             throw new App\HttpException($e->getMessage(), $e);
         }
         ob_end_clean();
         // Parse Google's response
-        if ($response->isSuccessful()) {
+        if ($response->isSuccess()) {
             return true;
         } else {
             return false;
@@ -202,7 +203,8 @@ class AuthSub
         ob_start();
         try {
             $response = $client->send();
-        } catch (Client\Exception $e) {
+        } catch (Client\Exception\ExceptionInterface $e) {
+            ob_end_clean();
             throw new App\HttpException($e->getMessage(), $e);
         }
         ob_end_clean();
@@ -214,16 +216,15 @@ class AuthSub
      * as the Authorization header
      *
      * @param string $token The token to retrieve information about
-     * @param \Zend\GData\HttpClient $client (optional) HTTP client to use to make the request
+     * @param HttpClient $client (optional) HTTP client to use to make the request
+     * @return HttpClient
      */
-    public static function getHttpClient($token, $client = null)
+    public static function getHttpClient($token, HttpClient $client = null)
     {
         if ($client == null) {
             $client = new HttpClient();
         }
-        if (!$client instanceof Client) {
-            throw new App\HttpException('Client is not an instance of Zend_Http_Client.');
-        }
+
         $useragent = 'Zend_Framework_Gdata/' . \Zend\Version::VERSION;
         $client->setOptions(array(
                 'strictredirects' => true,

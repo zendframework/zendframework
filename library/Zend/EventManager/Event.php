@@ -109,6 +109,7 @@ class Event implements EventInterface
      * 
      * @param  array|ArrayAccess|object $params 
      * @return Event
+     * @throws Exception\InvalidArgumentException
      */
     public function setParams($params)
     {

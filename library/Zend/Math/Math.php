@@ -26,10 +26,10 @@ namespace Zend\Math;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Math extends BigInteger
+class Math
 {
     /**
-     * Generate random bytes using OpenSSL and/or MCRYPT_DEV_URANDOM and/or /dev/urandom
+     * Generate random bytes using OpenSSL or Mcrypt and mt_rand() as fallback
      *
      * @param  integer $length
      * @param  boolean $strong true if you need a strong random generator (cryptography)
@@ -40,35 +40,35 @@ class Math extends BigInteger
         if ($length <= 0) {
             return false;
         }
-        $rand = '';
         if (extension_loaded('openssl')) {
             $rand = openssl_random_pseudo_bytes($length, $secure);
-            if (!$secure) {
-                $rand = '';
+            if ($secure === true) {
+                return $rand;
             }
         }
         if (extension_loaded('mcrypt')) {
-            $rand ^= mcrypt_create_iv($length, MCRYPT_DEV_URANDOM);
+            // PHP bug #55169
+            // @see https://bugs.php.net/bug.php?id=55169
+            if (strtoupper(substr(PHP_OS, 0, 3)) !== 'WIN' ||
+                version_compare(PHP_VERSION, '5.3.7') >= 0) {
+                $rand = mcrypt_create_iv($length, MCRYPT_DEV_URANDOM);
+                if ($rand !== false && strlen($rand) === $length) {
+                    return $rand;
+                }
+            }    
         }
-        if (file_exists('/dev/urandom')) {
-            $dev = fopen('/dev/urandom', 'r');
-            $rand ^= fread($dev, $length);
-            fclose($dev);
+        if ($strong) {
+            throw new Exception\RuntimeException(
+                'This PHP environment doesn\'t support secure random number generation. ' .
+                'Please consider to install the OpenSSL and/or Mcrypt extensions'
+            );
         }
-        if (empty($rand)) {
-            if ($strong) {
-                throw new Exception\RuntimeException(
-                    'This PHP environment doesn\'t support secure random number generation. ' .
-                        'Please consider to install the OpenSSL and/or Mcrypt extensions'
-                );
-            }
-            for ($i = 0; $i < $length; $i++) {
-                $rand .= chr(mt_rand(0, 255));
-            }
+        $rand = '';
+        for ($i = 0; $i < $length; $i++) {
+            $rand .= chr(mt_rand(0, 255));
         }
         return $rand;
     }
-
     /**
      * Generate a random number between $min and $max
      *
@@ -92,14 +92,15 @@ class Math extends BigInteger
                 'The supplied range is too great to generate'
             );
         }
-        $bits  = (int)floor(log($range, 2) + 1);
-        $bytes = (int)max(ceil($bits / 8), 1);
-        $mask  = (int)(pow(2, $bits) - 1);
+        $log    = log($range, 2);
+        $bytes  = (int) ($log / 8) + 1; 
+        $bits   = (int) $log + 1; 
+        $filter = (int) (1 << $bits) - 1;
         do {
-            $test   = self::randBytes($bytes, $strong);
-            $result = hexdec(bin2hex($test)) & $mask;
-        } while ($result > $range);
-        return $result + $min;
+            $rnd = hexdec(bin2hex(self::randBytes($bytes, $strong)));
+            $rnd = $rnd & $filter;
+        } while ($rnd > $range);
+        return $min + $rnd;
     }
 
     /**
@@ -115,27 +116,5 @@ class Math extends BigInteger
             return "\x00" . $long;
         }
         return $long;
-    }
-
-    /**
-     * Translate a binary form into a big integer string
-     *
-     * @param string $binary
-     * @return string
-     */
-    public function fromBinary($binary)
-    {
-        return $this->_math->binaryToInteger($binary);
-    }
-
-    /**
-     * Translate a big integer string into a binary form
-     *
-     * @param string $integer
-     * @return string
-     */
-    public function toBinary($integer)
-    {
-        return $this->_math->integerToBinary($integer);
     }
 }

@@ -21,7 +21,7 @@
 
 namespace Zend\GData\Docs;
 
-use Zend\GData\Gapps;
+use Zend\GData\GApps;
 
 /**
  * Data model class for a Google Docs ACL Entry.

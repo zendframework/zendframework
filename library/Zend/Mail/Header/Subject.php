@@ -28,7 +28,7 @@ namespace Zend\Mail\Header;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Subject implements HeaderInterface, UnstructuredInterface
+class Subject implements UnstructuredInterface
 {
     /**
      * @var string
@@ -82,11 +82,7 @@ class Subject implements HeaderInterface, UnstructuredInterface
      */
     public function getFieldValue()
     {
-        $encoding = $this->getEncoding();
-        if ($encoding == 'ASCII') {
-            return HeaderWrap::wrap($this->subject, $this);
-        }
-        return HeaderWrap::mimeEncodeValue($this->subject, $encoding, true);
+        return HeaderWrap::wrap($this->subject, $this);
     }
 
     /**

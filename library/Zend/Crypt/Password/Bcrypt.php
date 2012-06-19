@@ -12,6 +12,7 @@ namespace Zend\Crypt\Password;
 use Zend\Math\Math;
 use Traversable;
 use Zend\Stdlib\ArrayUtils;
+use Zend\Math\Exception as MathException;
 
 /**
  * Bcrypt algorithm using crypt() function of PHP
@@ -37,6 +38,7 @@ class Bcrypt implements PasswordInterface
      * Constructor
      *
      * @param array|Traversable $options
+     * @throws Exception\InvalidArgumentException
      */
     public function __construct($options = array())
     {
@@ -65,12 +67,17 @@ class Bcrypt implements PasswordInterface
      * Bcrypt
      *
      * @param  string $password
+     * @throws Exception\RuntimeException
      * @return string
      */
     public function create($password)
     {
         if (empty($this->salt)) {
-            $salt = Math::randBytes(self::MIN_SALT_SIZE, true);
+            try {
+                $salt = Math::randBytes(self::MIN_SALT_SIZE, true);
+            } catch (MathException\RuntimeException $e) {
+                throw new Exception\RuntimeException($e->getMessage());
+            }    
         } else {
             $salt = $this->salt;
         }
@@ -98,6 +105,7 @@ class Bcrypt implements PasswordInterface
      * Set the cost parameter
      *
      * @param  integer|string $cost
+     * @throws Exception\InvalidArgumentException
      * @return Bcrypt
      */
     public function setCost($cost)
@@ -128,6 +136,7 @@ class Bcrypt implements PasswordInterface
      * Set the salt value
      *
      * @param  string $salt
+     * @throws Exception\InvalidArgumentException
      * @return Bcrypt
      */
     public function setSalt($salt)

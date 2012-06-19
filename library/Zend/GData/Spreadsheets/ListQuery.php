@@ -36,7 +36,7 @@ use Zend\GData\App;
 class ListQuery extends \Zend\GData\Query
 {
 
-    const SPREADSHEETS_LIST_FEED_URI = 'http://spreadsheets.google.com/feeds/list';
+    const SPREADSHEETS_LIST_FEED_URI = 'https://spreadsheets.google.com/feeds/list';
 
     protected $_defaultFeedUri = self::SPREADSHEETS_LIST_FEED_URI;
     protected $_visibility = 'private';

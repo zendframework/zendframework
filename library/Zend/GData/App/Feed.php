@@ -31,7 +31,7 @@ namespace Zend\GData\App;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Feed extends FeedSourceParent
-        implements \Iterator, \ArrayAccess
+        implements \Iterator, \ArrayAccess, \Countable
 {
 
     /**
@@ -79,8 +79,8 @@ class Feed extends FeedSourceParent
     /**
      * Retrieves the DOM model representing this object and all children
      *
-     * @param DOMDocument $doc
-     * @return DOMElement
+     * @param \DOMDocument $doc
+     * @return \DOMElement
      */
     public function getDOM($doc = null, $majorVersion = 1, $minorVersion = null)
     {
@@ -95,7 +95,7 @@ class Feed extends FeedSourceParent
      * Creates individual Entry objects of the appropriate type and
      * stores them in the $_entry array based upon DOM data.
      *
-     * @param DOMNode $child The DOMNode to process
+     * @param \DOMNode $child The DOMNode to process
      */
     protected function takeChildFromDOM($child)
     {
@@ -178,7 +178,7 @@ class Feed extends FeedSourceParent
      * Gets the array of atom:entry elements contained within this
      * atom:feed representation
      *
-     * @return array \Zend\GData\App\Entry array
+     * @return array|\Zend\GData\App\Entry
      */
     public function getEntry()
     {
@@ -277,7 +277,7 @@ class Feed extends FeedSourceParent
         $nextLinkHref = $nextLink->getHref();
         $service = new App($this->getHttpClient());
 
-        return $service->getFeed($nextLinkHref, get_class($this));
+        return $service->getFeed($nextLinkHref, get_called_class());
     }
 
    /**
@@ -297,7 +297,7 @@ class Feed extends FeedSourceParent
         $previousLinkHref = $previousLink->getHref();
         $service = new App($this->getHttpClient());
 
-        return $service->getFeed($previousLinkHref, get_class($this));
+        return $service->getFeed($previousLinkHref, get_called_class());
     }
 
     /**
@@ -321,7 +321,7 @@ class Feed extends FeedSourceParent
     /**
      * Set the minor protocol version that should be used. If set to NULL, no
      * minor protocol version will be sent to the server. Values < 0 will
-     * cause a \Zend\Gdata\App\InvalidArgumentException to be thrown.
+     * cause a \Zend\GData\App\InvalidArgumentException to be thrown.
      *
      * This value will be propogated to all child entries.
      *

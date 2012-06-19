@@ -210,9 +210,11 @@ class ServiceManager implements ServiceLocatorInterface
         $name = $this->canonicalizeName($name);
 
         if ($this->allowOverride === false && $this->has($name)) {
-            throw new Exception\InvalidServiceNameException(
-                'A service by this name or alias already exists and cannot be overridden, please use an alternate name.'
-            );
+            throw new Exception\InvalidServiceNameException(sprintf(
+                '%s: A service by the name "%s" or alias already exists and cannot be overridden, please use an alternate name.',
+                __METHOD__,
+                $name
+            ));
         }
 
         /**
@@ -262,44 +264,58 @@ class ServiceManager implements ServiceLocatorInterface
             do {
                 $cName = $this->aliases[$cName];
             } while ($this->hasAlias($cName));
+
+            if (!$this->has($cName)) {
+                throw new Exception\ServiceNotFoundException(sprintf(
+                    'An alias "%s" was requested but no service could be found.',
+                    $name
+                ));
+            }
         }
 
         $instance = null;
 
         if (isset($this->instances[$cName])) {
             $instance = $this->instances[$cName];
-        } 
+        }
 
         $selfException = null;
 
-        if (!$instance) {
+        if (!$instance && !is_array($instance)) {
             try {
                 $instance = $this->create(array($cName, $rName));
-            } catch (Exception\ServiceNotCreatedException $selfException) {
-                foreach ($this->peeringServiceManagers as $peeringServiceManager) {
-                    try {
-                        $instance = $peeringServiceManager->get($name);
+            } catch (\Exception $selfException) {
+                if (!$selfException instanceof Exception\ServiceNotFoundException &&
+                    !$selfException instanceof Exception\ServiceNotCreatedException) {
+                    throw $selfException;
+                }
+                if ($usePeeringServiceManagers) {
+                    foreach ($this->peeringServiceManagers as $peeringServiceManager) {
+                        try {
+                            $instance = $peeringServiceManager->get($name);
+                        } catch (Exception\ServiceNotFoundException $e) {
+                            continue;
+                        } catch (Exception\ServiceNotCreatedException $e) {
+                            continue;
+                        } catch (\Exception $e) {
+                            throw $e;
+                        }
                         break;
-                    } catch (Exception\ServiceNotCreatedException $e) {
-                        continue;
                     }
                 }
             }
         }
 
-        if (!$instance) {
-
-            // Still no instance? raise an exception
-            if (!$instance) {
-                throw new Exception\ServiceNotCreatedException(sprintf(
-                        '%s was unable to fetch or create an instance for %s',
-                        __METHOD__,
-                        $name
-                    ),
-                    null,
-                    ($selfException === null) ? null : $selfException->getPrevious()
-                );
-            }
+        // Still no instance? raise an exception
+        if (!$instance && !is_array($instance)) {
+            throw new Exception\ServiceNotFoundException(sprintf(
+                '%s was unable to fetch or create an instance for %s',
+                    __METHOD__,
+                    $name
+                ),
+                null,
+                ($selfException === null) ? null : $selfException->getPrevious()
+            );
         }
 
         if (isset($this->shared[$cName]) && $this->shared[$cName] === true) {
@@ -332,9 +348,10 @@ class ServiceManager implements ServiceLocatorInterface
             $invokable = $this->invokableClasses[$cName];
             if (!class_exists($invokable)) {
                 throw new Exception\ServiceNotCreatedException(sprintf(
-                    '%s: failed retrieving "%s" via invokable class "%s"; class does not exist',
+                    '%s: failed retrieving "%s%s" via invokable class "%s"; class does not exist',
                     __METHOD__,
-                    $name,
+                    $cName,
+                    ($rName ? '(alias: ' . $rName . ')' : ''),
                     $cName
                 ));
             }
@@ -384,7 +401,7 @@ class ServiceManager implements ServiceLocatorInterface
         }
 
         if ($this->throwExceptionInCreate == true && $instance === false) {
-            throw new Exception\ServiceNotCreatedException(sprintf(
+            throw new Exception\ServiceNotFoundException(sprintf(
                 'No valid instance was found for %s%s',
                 $cName,
                 ($rName ? '(alias: ' . $rName . ')' : '')
@@ -437,7 +454,7 @@ class ServiceManager implements ServiceLocatorInterface
             if (!$abstractFactory instanceof AbstractFactoryInterface) {
                 continue;
             }
-            
+
             if ($abstractFactory->canCreateServiceWithName($cName, $rName)) {
                 return true;
             }
@@ -476,10 +493,6 @@ class ServiceManager implements ServiceLocatorInterface
 
         if ($this->allowOverride === false && $this->hasAlias($alias)) {
             throw new Exception\InvalidServiceNameException('An alias by this name already exists');
-        }
-
-        if (!$this->has($nameOrAlias)) {
-            throw new Exception\ServiceNotFoundException('A target service or target alias could not be located');
         }
 
         $this->aliases[$alias] = $nameOrAlias;
@@ -541,6 +554,8 @@ class ServiceManager implements ServiceLocatorInterface
         $circularDependencyResolver[spl_object_hash($this) . '-' . $cName] = true;
         try {
             $instance = call_user_func($callable, $this, $cName, $rName);
+        } catch (Exception\ServiceNotFoundException $e) {
+            throw $e;
         } catch (\Exception $e) {
             throw new Exception\ServiceNotCreatedException(
                 sprintf('Abstract factory raised an exception when creating "%s"; no instance returned', $rName),

@@ -58,10 +58,6 @@ class Pdo implements DriverInterface, DriverFeatureInterface
             $connection = new Connection($connection);
         }
 
-        if (!$connection instanceof Connection) {
-            throw new Exception\InvalidArgumentException('$connection must be an array of parameters or a Pdo\Connection object');
-        }
-
         $this->registerConnection($connection);
         $this->registerStatementPrototype(($statementPrototype) ?: new Statement());
         $this->registerResultPrototype(($resultPrototype) ?: new Result());
@@ -158,13 +154,20 @@ class Pdo implements DriverInterface, DriverFeatureInterface
     {
         $name = $this->getConnection()->getDriverName();
         if ($nameFormat == self::NAME_FORMAT_CAMELCASE) {
-            return ucfirst($name);
+            switch ($name) {
+                case 'pgsql':
+                    return 'Postgresql';
+                default:
+                    return ucfirst($name);
+            }
         } else {
             switch ($name) {
                 case 'sqlite':
                     return 'SQLite';
                 case 'mysql':
                     return 'MySQL';
+                case 'pgsql':
+                    return 'PostgreSQL';
                 default:
                     return ucfirst($name);
             }

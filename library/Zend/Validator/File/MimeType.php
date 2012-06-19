@@ -21,7 +21,6 @@
 namespace Zend\Validator\File;
 
 use Traversable,
-    Zend\Loader,
     Zend\Stdlib\ArrayUtils,
     Zend\Validator\AbstractValidator,
     Zend\Validator\Exception;
@@ -358,7 +357,7 @@ class MimeType extends AbstractValidator
         }
 
         // Is file readable ?
-        if (!Loader::isReadable($value)) {
+        if (false === stream_resolve_include_path($value)) {
             return $this->createError($file, self::NOT_READABLE);
         }
 

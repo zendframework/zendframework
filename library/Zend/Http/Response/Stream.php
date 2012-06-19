@@ -21,7 +21,9 @@
 
 namespace Zend\Http\Response;
 
-use Zend\Http\Response;
+use Zend\Http\Response,
+    Zend\Http\Exception;
+
 
 /**
  * Zend_Http_Response represents an HTTP 1.0 / 1.1 response message. It
@@ -35,6 +37,21 @@ use Zend\Http\Response;
  */
 class Stream extends Response
 {
+    
+    /**
+     * The Content-Length value, if set
+     *
+     * @var int
+     */
+    protected $contentLength = null;
+    
+    /**
+     * The portion of the body that has alredy been streamed
+     *
+     * @var int
+     */
+    protected $contentStreamed = 0;
+    
     /**
      * Response as stream
      *
@@ -49,14 +66,14 @@ class Stream extends Response
      *
      * @var string
      */
-    protected $stream_name;
+    protected $streamName;
 
     /**
      * Should we clean up the stream file when this response is closed?
      *
      * @var boolean
      */
-    protected $_cleanup;
+    protected $cleanup;
 
     /**
      * Get the response as stream
@@ -87,7 +104,7 @@ class Stream extends Response
      */
     public function getCleanup()
     {
-        return $this->_cleanup;
+        return $this->cleanup;
     }
 
     /**
@@ -97,7 +114,7 @@ class Stream extends Response
      */
     public function setCleanup($cleanup = true)
     {
-        $this->_cleanup = $cleanup;
+        $this->cleanup = $cleanup;
     }
 
     /**
@@ -107,40 +124,94 @@ class Stream extends Response
      */
     public function getStreamName()
     {
-        return $this->stream_name;
+        return $this->streamName;
     }
 
     /**
      * Set file name associated with the stream
      *
-     * @param string $stream_name Name to set
+     * @param string $streamName Name to set
      * @return Stream
      */
-    public function setStreamName($stream_name)
+    public function setStreamName($streamName)
     {
-        $this->stream_name = $stream_name;
+        $this->streamName = $streamName;
         return $this;
     }
 
+    
     /**
-     * Create a new Zend\Http\Response\Stream object from a string
+     * Create a new Zend\Http\Response\Stream object from a stream
      *
-     * @param  string $response_str
+     * @param  string $responseString
      * @param  resource $stream
      * @return Stream
      */
-    public static function fromStream($response_str, $stream)
+    public static function fromStream($responseString, $stream)
     {
-        $response= new static();
+    
+        if (!is_resource($stream)) {
+            throw new Exception\InvalidArgumentException('A valid stream is required');
+        }
 
-        $response::fromString($response_str);
+        $headerComplete = false;
+        $headersString  = '';
+        
+        $responseArray = explode("\n",$responseString);
+
+        while (count($responseArray)) {
+            $nextLine = array_shift($responseArray);
+            $headersString .= $nextLine."\n";
+            $nextLineTrimmed = trim($nextLine);
+            if ($nextLineTrimmed == "") {
+                $headerComplete = true;
+                break;
+            }
+            
+        }
+        
+        if (!$headerComplete) {
+            while (false !== ($nextLine = fgets($stream))) {
+                
+                $headersString .= trim($nextLine)."\r\n";
+                if ($nextLine == "\r\n" || $nextLine == "\n") {
+                    $headerComplete = true;
+                    break;
+                }
+            }
+        } 
+
+        if (!$headerComplete) {
+            throw new Exception\OutOfRangeException('End of header not found');
+        }
+            
+        $response = static::fromString($headersString);
+    
         if (is_resource($stream)) {
             $response->setStream($stream);
+        }
+        
+        if (count($responseArray)) {
+            $response->content = implode("\n", $responseArray);
+        } 
+    
+        $headers = $response->headers();
+        foreach($headers as $header) {
+            if ($header instanceof \Zend\Http\Header\ContentLength) {
+                $response->contentLength = (int) $header->getFieldValue();
+                if (strlen($response->content) > $response->contentLength) {
+                    throw new Exception\OutOfRangeException(
+                        sprintf('Too much content was extracted from the stream (%d instead of %d bytes)',
+                                    strlen($this->content), $this->contentLength));
+                }
+                break;
+            }
         }
 
         return $response;
     }
-
+    
+    
     /**
      * Get the response body as string
      *
@@ -174,9 +245,10 @@ class Stream extends Response
         if ($this->stream) {
             $this->readStream();
         }
-        return $this->body;
+        return $this->content;
     }
 
+    
     /**
      * Read stream content and return it as string
      *
@@ -186,24 +258,34 @@ class Stream extends Response
      */
     protected function readStream()
     {
-        if (!is_resource($this->stream)) {
-            return '';
+        if (!is_null($this->contentLength)) {
+            $bytes =  $this->contentLength - $this->contentStreamed;
+        } else {
+            $bytes = -1; //Read the whole buffer
         }
 
-        $this->body = stream_get_contents($this->stream);
-        fclose($this->stream);
-        $this->stream = null;
+        if (!is_resource($this->stream) || $bytes == 0) {
+            return '';
+        }
+    
+        $this->content         .= stream_get_contents($this->stream, $bytes);
+        $this->contentStreamed += strlen($this->content);
+    
+        if ($this->contentLength == $this->contentStreamed) {
+            $this->stream = null;
+        }
     }
-
+        
+    /**
+     * Destructor
+     */
     public function __destruct()
     {
         if (is_resource($this->stream)) {
-            fclose($this->stream);
-            $this->stream = null;
+            $this->stream = null; //Could be listened by others
         }
-        if ($this->_cleanup) {
+        if ($this->cleanup) {
             @unlink($this->stream_name);
         }
     }
-
 }

@@ -21,7 +21,8 @@
 
 namespace ZendTest\Mail\Transport;
 
-use Zend\Mail\Message,
+use Zend\Mail\Headers,
+    Zend\Mail\Message,
     Zend\Mail\Transport\Smtp,
     Zend\Mail\Transport\SmtpOptions,
     ZendTest\Mail\TestAsset\SmtpProtocolSpy;
@@ -36,7 +37,9 @@ use Zend\Mail\Message,
  */
 class SmtpTest extends \PHPUnit_Framework_TestCase
 {
+    /** @var Smtp */
     public $transport;
+    /** @var SmtpProtocolSpy */
     public $connection;
 
     public function setUp()
@@ -65,6 +68,53 @@ class SmtpTest extends \PHPUnit_Framework_TestCase
         return $message;
     }
 
+    /**
+     *  Per RFC 2822 3.6
+     */
+    public function testSendMailWithoutMinimalHeaders() {
+        $this->setExpectedException(
+            'Zend\Mail\Transport\Exception\RuntimeException',
+            'transport expects either a Sender or at least one From address in the Message; none provided'
+        );
+        $message = new Message();
+        $this->transport->send($message);
+    }
+
+    /**
+     *  Per RFC 2821 3.3 (page 18)
+     *  - RCPT (recipient) must be called before DATA (headers or body)
+     */
+    public function testSendMailWithoutRecipient() {
+        $this->setExpectedException(
+            'Zend\Mail\Transport\Exception\RuntimeException',
+            'at least one recipient if the message has at least one header or body'
+        );
+        $message = new Message();
+        $message->setSender('ralph.schindler@zend.com', 'Ralph Schindler');
+        $this->transport->send($message);
+    }
+
+    public function testSendMinimalMail() {
+        $headers = new Headers();
+        $headers->addHeaderLine('Date', 'Sun, 10 Jun 2012 20:07:24 +0200');
+        $message = new Message();
+        $message
+            ->setHeaders($headers)
+            ->setSender('ralph.schindler@zend.com', 'Ralph Schindler')
+            ->setBody('testSendMailWithoutMinimalHeaders')
+            ->addTo('zf-devteam@zend.com', 'ZF DevTeam')
+        ;
+        $expectedMessage = "Date: Sun, 10 Jun 2012 20:07:24 +0200\r\n"
+                           . "Sender: Ralph Schindler <ralph.schindler@zend.com>\r\n"
+                           . "To: ZF DevTeam <zf-devteam@zend.com>\r\n"
+                           . "\r\n"
+                           . "testSendMailWithoutMinimalHeaders";
+
+        $this->transport->send($message);
+
+        $this->assertContains($expectedMessage, $this->connection->getLog());
+    }
+
     public function testReceivesMailArtifacts()
     {
         $message = $this->getMessage();
@@ -74,7 +124,7 @@ class SmtpTest extends \PHPUnit_Framework_TestCase
         $expectedRecipients = array('zf-devteam@zend.com', 'matthew@zend.com', 'zf-crteam@lists.zend.com');
         $this->assertEquals($expectedRecipients, $this->connection->getRecipients());
 
-        $data = $this->connection->getData();
+        $data = $this->connection->getLog();
         $this->assertContains('To: ZF DevTeam <zf-devteam@zend.com>', $data);
         $this->assertContains('Subject: Testing Zend\Mail\Transport\Sendmail', $data);
         $this->assertContains("Cc: matthew@zend.com\r\n", $data);

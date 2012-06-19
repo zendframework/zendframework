@@ -20,8 +20,8 @@
 
 namespace Zend\EventManager;
 
-use Zend\Stdlib\CallbackHandler,
-    Zend\Stdlib\PriorityQueue;
+use Zend\Stdlib\CallbackHandler;
+use Zend\Stdlib\PriorityQueue;
 
 /**
  * Interface for shared event listener collections

@@ -369,10 +369,10 @@ class FormInputTest extends CommonTestCase
     {
         return array(
             array('XHTML11'),
-            array('XHTML_RDFA1'),
             array('XHTML1_STRICT'),
             array('XHTML1_TRANSITIONAL'),
             array('XHTML1_FRAMESET'),
+            array('XHTML1_RDFA'),
             array('XHTML_BASIC1'),
             array('XHTML5'),
         );
@@ -430,5 +430,11 @@ class FormInputTest extends CommonTestCase
         $markup  = $this->helper->__invoke($element);
         $this->assertContains('<input', $markup);
         $this->assertContains('name="foo"', $markup);
+    }
+
+    public function testInvokeWithNoElementChainsHelper()
+    {
+        $element = new Element('foo');
+        $this->assertSame($this->helper, $this->helper->__invoke());
     }
 }

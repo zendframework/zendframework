@@ -21,12 +21,13 @@
 
 namespace Zend\View\Helper;
 
-use Zend\Loader\ShortNameLocator,
-    Zend\Loader\PluginClassLoader,
-    Zend\Navigation\Container,
-    Zend\View\Helper\Navigation\AbstractHelper as AbstractNavigationHelper,
-    Zend\View\Helper\Navigation\HelperInterface as NavigationHelper,
-    Zend\View\Exception;
+use Zend\Loader\ShortNameLocator;
+use Zend\Loader\PluginClassLoader;
+use Zend\Navigation\AbstractContainer;
+use Zend\ServiceManager\ServiceLocatorAwareInterface;
+use Zend\View\Helper\Navigation\AbstractHelper as AbstractNavigationHelper;
+use Zend\View\Helper\Navigation\HelperInterface as NavigationHelper;
+use Zend\View\Exception;
 
 /**
  * Proxy helper for retrieving navigational helpers and forwarding calls
@@ -56,45 +57,43 @@ class Navigation extends AbstractNavigationHelper
      *
      * @var string
      */
-    protected $_defaultProxy = 'menu';
+    protected $defaultProxy = 'menu';
 
     /**
      * Contains references to proxied helpers
      *
      * @var array
      */
-    protected $_helpers = array();
+    protected $helpers = array();
 
     /**
      * Whether container should be injected when proxying
      *
      * @var bool
      */
-    protected $_injectContainer = true;
+    protected $injectContainer = true;
 
     /**
      * Whether ACL should be injected when proxying
      *
      * @var bool
      */
-    protected $_injectAcl = true;
+    protected $injectAcl = true;
 
     /**
      * Whether translator should be injected when proxying
      *
      * @var bool
      */
-    protected $_injectTranslator = true;
+    protected $injectTranslator = true;
 
     /**
      * Helper entry point
      *
-     * @param  \Zend\Navigation\Container $container  [optional] container to
-     *                                               operate on
-     * @return \Zend\View\Helper\Navigation           fluent interface, returns
-     *                                               self
+     * @param  string|AbstractContainer $container container to operate on
+     * @return Navigation
      */
-    public function __invoke(Container $container = null)
+    public function __invoke($container = null)
     {
         if (null !== $container) {
             $this->setContainer($container);
@@ -133,6 +132,9 @@ class Navigation extends AbstractNavigationHelper
         // check if call should proxy to another helper
         $helper = $this->findHelper($method, false);
         if ($helper) {
+            if ($helper instanceof ServiceLocatorAwareInterface && $this->getServiceLocator()) {
+                $helper->setServiceLocator($this->getServiceLocator());
+            }
             return call_user_func_array($helper, $arguments);
         }
 
@@ -187,22 +189,26 @@ class Navigation extends AbstractNavigationHelper
      */
     public function findHelper($proxy, $strict = true)
     {
-        if (isset($this->_helpers[$proxy])) {
-            return $this->_helpers[$proxy];
+        if (isset($this->helpers[$proxy])) {
+            return $this->helpers[$proxy];
         }
 
         $loader = $this->getPluginLoader();
+        $class  = $loader->load($proxy);
 
-        if ($strict) {
-            $class = $loader->load($proxy);
-        } else {
-            try {
-                $class = $loader->load($proxy);
-            } catch (\Zend\Loader\Exception $e) {
-                return null;
-            }
+        if ($strict && !$class) {
+            throw new Exception\RuntimeException(sprintf(
+                'Failed to find plugin for %s',
+                $proxy
+            ));
         }
 
+        if (!class_exists($class)) {
+            if ($strict) {
+                throw new Exception\RuntimeException('Failed to find a class to proxy to');
+            }
+            return false;
+        }
         $helper = new $class();
 
         if (!$helper instanceof AbstractNavigationHelper) {
@@ -219,7 +225,7 @@ class Navigation extends AbstractNavigationHelper
 
         $helper->setView($this->view);
         $this->_inject($helper);
-        $this->_helpers[$proxy] = $helper;
+        $this->helpers[$proxy] = $helper;
 
         return $helper;
     }
@@ -261,7 +267,7 @@ class Navigation extends AbstractNavigationHelper
      */
     public function setDefaultProxy($proxy)
     {
-        $this->_defaultProxy = (string) $proxy;
+        $this->defaultProxy = (string) $proxy;
         return $this;
     }
 
@@ -272,7 +278,7 @@ class Navigation extends AbstractNavigationHelper
      */
     public function getDefaultProxy()
     {
-        return $this->_defaultProxy;
+        return $this->defaultProxy;
     }
 
     /**
@@ -285,7 +291,7 @@ class Navigation extends AbstractNavigationHelper
      */
     public function setInjectContainer($injectContainer = true)
     {
-        $this->_injectContainer = (bool) $injectContainer;
+        $this->injectContainer = (bool) $injectContainer;
         return $this;
     }
 
@@ -296,7 +302,7 @@ class Navigation extends AbstractNavigationHelper
      */
     public function getInjectContainer()
     {
-        return $this->_injectContainer;
+        return $this->injectContainer;
     }
 
     /**
@@ -309,7 +315,7 @@ class Navigation extends AbstractNavigationHelper
      */
     public function setInjectAcl($injectAcl = true)
     {
-        $this->_injectAcl = (bool) $injectAcl;
+        $this->injectAcl = (bool) $injectAcl;
         return $this;
     }
 
@@ -320,7 +326,7 @@ class Navigation extends AbstractNavigationHelper
      */
     public function getInjectAcl()
     {
-        return $this->_injectAcl;
+        return $this->injectAcl;
     }
 
     /**
@@ -333,7 +339,7 @@ class Navigation extends AbstractNavigationHelper
      */
     public function setInjectTranslator($injectTranslator = true)
     {
-        $this->_injectTranslator = (bool) $injectTranslator;
+        $this->injectTranslator = (bool) $injectTranslator;
         return $this;
     }
 
@@ -344,7 +350,7 @@ class Navigation extends AbstractNavigationHelper
      */
     public function getInjectTranslator()
     {
-        return $this->_injectTranslator;
+        return $this->injectTranslator;
     }
 
     // Zend\View\Helper\Navigation\Helper:
@@ -352,7 +358,7 @@ class Navigation extends AbstractNavigationHelper
     /**
      * Renders helper
      *
-     * @param  \Zend\Navigation\Container $container  [optional] container to
+     * @param  \Zend\Navigation\AbstractContainer $container  [optional] container to
      *                                               render. Default is to
      *                                               render the container
      *                                               registered in the helper.
@@ -362,7 +368,7 @@ class Navigation extends AbstractNavigationHelper
      *                                               the interface specified in
      *                                               {@link findHelper()}
      */
-    public function render(Container $container = null)
+    public function render($container = null)
     {
         $helper = $this->findHelper($this->getDefaultProxy());
         return $helper->render($container);

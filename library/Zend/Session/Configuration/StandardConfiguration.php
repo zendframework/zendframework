@@ -40,7 +40,7 @@ class StandardConfiguration implements Configurable
      * @var Zend\Filter Filter to convert CamelCase to underscore_separated
      */
     protected $camelCaseToUnderscoreFilter;
-    
+
     /**
      * @var string session.cookie_domain
      */
@@ -49,7 +49,7 @@ class StandardConfiguration implements Configurable
     /**
      * @var bool session.cookie_httponly
      */
-    protected $cookieHTTPOnly;
+    protected $cookieHttpOnly;
 
     /**
      * @var int session.cookie_lifetime
@@ -94,11 +94,11 @@ class StandardConfiguration implements Configurable
     /**
      * Set storage option in backend configuration store
      *
-     * Does nothing in this implementation; others might use it to set things 
+     * Does nothing in this implementation; others might use it to set things
      * such as INI settings.
-     * 
-     * @param  string $storageName 
-     * @param  mixed $storageValue 
+     *
+     * @param  string $storageName
+     * @param  mixed $storageValue
      * @return StandardConfiguration
      */
     public function setStorageOption($storageName, $storageValue)
@@ -109,7 +109,7 @@ class StandardConfiguration implements Configurable
      * Retrieve a storage option from a backend configuration store
      *
      * Used to retrieve default values from a backend configuration store.
-     * 
+     *
      * @param  string $storageOption
      * @return mixed
      */
@@ -120,8 +120,8 @@ class StandardConfiguration implements Configurable
 
     /**
      * Set session.save_path
-     * 
-     * @param  string $savePath 
+     *
+     * @param  string $savePath
      * @return StandardConfiguration
      * @throws Exception\InvalidArgumentException on invalid path
      */
@@ -137,7 +137,7 @@ class StandardConfiguration implements Configurable
 
     /**
      * Set session.save_path
-     * 
+     *
      * @return string|null
      */
     public function getSavePath()
@@ -150,8 +150,8 @@ class StandardConfiguration implements Configurable
 
     /**
      * Set session.name
-     * 
-     * @param  string $name 
+     *
+     * @param  string $name
      * @return StandardConfiguration
      * @throws Exception\InvalidArgumentException
      */
@@ -167,7 +167,7 @@ class StandardConfiguration implements Configurable
 
     /**
      * Get session.name
-     * 
+     *
      * @return null|string
      */
     public function getName()
@@ -177,11 +177,11 @@ class StandardConfiguration implements Configurable
         }
         return $this->name;
     }
-    
+
     /**
      * Set session.gc_probability
-     * 
-     * @param  int $gcProbability 
+     *
+     * @param  int $gcProbability
      * @return StandardConfiguration
      * @throws Exception\InvalidArgumentException
      */
@@ -201,8 +201,8 @@ class StandardConfiguration implements Configurable
 
     /**
      * Set session.gc_divisor
-     * 
-     * @param  int $gcDivisor 
+     *
+     * @param  int $gcDivisor
      * @return StandardConfiguration
      * @throws Exception\InvalidArgumentException
      */
@@ -222,8 +222,8 @@ class StandardConfiguration implements Configurable
 
     /**
      * Set gc.maxlifetime
-     * 
-     * @param  int $gcMaxlifetime 
+     *
+     * @param  int $gcMaxlifetime
      * @return StandardConfiguration
      * @throws Exception\InvalidArgumentException
      */
@@ -245,8 +245,8 @@ class StandardConfiguration implements Configurable
 
     /**
      * Set session.cookie_lifetime
-     * 
-     * @param  int $cookieLifetime 
+     *
+     * @param  int $cookieLifetime
      * @return StandardConfiguration
      * @throws Exception\InvalidArgumentException
      */
@@ -266,7 +266,7 @@ class StandardConfiguration implements Configurable
 
     /**
      * Get session.cookie_lifetime
-     * 
+     *
      * @return int
      */
     public function getCookieLifetime()
@@ -276,11 +276,11 @@ class StandardConfiguration implements Configurable
         }
         return $this->cookieLifetime;
     }
-    
+
     /**
      * Set session.cookie_path
-     * 
-     * @param  string $cookiePath 
+     *
+     * @param  string $cookiePath
      * @return StandardConfiguration
      * @throws Exception\InvalidArgumentException
      */
@@ -300,7 +300,7 @@ class StandardConfiguration implements Configurable
 
     /**
      * Get session.cookie_path
-     * 
+     *
      * @return string
      */
     public function getCookiePath()
@@ -310,11 +310,11 @@ class StandardConfiguration implements Configurable
         }
         return $this->cookiePath;
     }
-    
+
     /**
      * Set session.cookie_domain
-     * 
-     * @param  string $cookieDomain 
+     *
+     * @param  string $cookieDomain
      * @return StandardConfiguration
      * @throws Exception\InvalidArgumentException
      */
@@ -337,7 +337,7 @@ class StandardConfiguration implements Configurable
 
     /**
      * Get session.cookie_domain
-     * 
+     *
      * @return string
      */
     public function getCookieDomain()
@@ -347,11 +347,11 @@ class StandardConfiguration implements Configurable
         }
         return $this->cookieDomain;
     }
-    
+
     /**
      * Set session.cookie_secure
-     * 
-     * @param  bool $cookieSecure 
+     *
+     * @param  bool $cookieSecure
      * @return StandardConfiguration
      */
     public function setCookieSecure($cookieSecure)
@@ -363,7 +363,7 @@ class StandardConfiguration implements Configurable
 
     /**
      * Get session.cookie_secure
-     * 
+     *
      * @return bool
      */
     public function getCookieSecure()
@@ -373,39 +373,39 @@ class StandardConfiguration implements Configurable
         }
         return $this->cookieSecure;
     }
-    
+
     /**
      * Set session.cookie_httponly
      *
-     * case sensitive method lookups in setOptions means this method has an 
+     * case sensitive method lookups in setOptions means this method has an
      * unusual casing
      *
-     * @param  bool $cookieHTTPOnly
+     * @param  bool $cookieHttpOnly
      * @return StandardConfiguration
      */
-    public function setCookieHttponly($cookieHTTPOnly)
+    public function setCookieHttpOnly($cookieHttpOnly)
     {
-        $this->cookieHTTPOnly = (bool) $cookieHTTPOnly;
-        $this->setStorageOption('cookie_httponly', $this->cookieHTTPOnly);
+        $this->cookieHttpOnly = (bool) $cookieHttpOnly;
+        $this->setStorageOption('cookie_httponly', $this->cookieHttpOnly);
         return $this;
     }
 
     /**
      * Get session.cookie_httponly
-     * 
+     *
      * @return bool
      */
-    public function getCookieHTTPOnly()
+    public function getCookieHttpOnly()
     {
-        if (null === $this->cookieHTTPOnly) {
-            $this->cookieHTTPOnly = $this->getStorageOption('cookie_httponly');
+        if (null === $this->cookieHttpOnly) {
+            $this->cookieHttpOnly = $this->getStorageOption('cookie_httponly');
         }
-        return $this->cookieHTTPOnly;
+        return $this->cookieHttpOnly;
     }
-    
+
     /**
      * Set session.use_cookies
-     * 
+     *
      * @param  bool $useCookies
      * @return StandardConfiguration
      */
@@ -418,7 +418,7 @@ class StandardConfiguration implements Configurable
 
     /**
      * Get session.use_cookies
-     * 
+     *
      * @return bool
      */
     public function getUseCookies()
@@ -428,10 +428,10 @@ class StandardConfiguration implements Configurable
         }
         return $this->useCookies;
     }
-    
+
     /**
      * Set session.entropy_file
-     * 
+     *
      * @param  string $entropyFile
      * @return StandardConfiguration
      * @throws Exception\InvalidArgumentException
@@ -448,8 +448,8 @@ class StandardConfiguration implements Configurable
 
     /**
      * set session.entropy_length
-     * 
-     * @param  int $entropyLength 
+     *
+     * @param  int $entropyLength
      * @return StandardConfiguration
      * @throws Exception\InvalidArgumentException
      */
@@ -469,8 +469,8 @@ class StandardConfiguration implements Configurable
 
     /**
      * Set session.cache_expire
-     * 
-     * @param  int $cacheExpire 
+     *
+     * @param  int $cacheExpire
      * @return StandardConfiguration
      * @throws Exception\InvalidArgumentException
      */
@@ -492,8 +492,8 @@ class StandardConfiguration implements Configurable
 
     /**
      * Set session.hash_bits_per_character
-     * 
-     * @param  int $hashBitsPerCharacter 
+     *
+     * @param  int $hashBitsPerCharacter
      * @return StandardConfiguration
      * @throws Exception\InvalidArgumentException
      */
@@ -510,8 +510,8 @@ class StandardConfiguration implements Configurable
 
     /**
      * Set remember_me_seconds
-     * 
-     * @param  int $rememberMeSeconds 
+     *
+     * @param  int $rememberMeSeconds
      * @return StandardConfiguration
      * @throws Exception\InvalidArgumentException
      */
@@ -533,7 +533,7 @@ class StandardConfiguration implements Configurable
 
     /**
      * Get remember_me_seconds
-     * 
+     *
      * @return int
      */
     public function getRememberMeSeconds()
@@ -543,25 +543,24 @@ class StandardConfiguration implements Configurable
         }
         return $this->rememberMeSeconds;
     }
- 
+
     /**
      * Set many options at once
      *
-     * If a setter method exists for the key, that method will be called; 
-     * otherwise, a standard option will be set with the value provided via 
+     * If a setter method exists for the key, that method will be called;
+     * otherwise, a standard option will be set with the value provided via
      * {@link setOption()}.
-     * 
-     * @param  array $options 
+     *
+     * @param  array $options
      * @return StandardConfiguration
      */
     public function setOptions(array $options)
     {
-        $methods = get_class_methods($this);
         foreach ($options as $key => $value) {
             // translate key from underscore_separated to TitleCased
             $methodKey = str_replace(' ', '', ucwords(str_replace('_', ' ', $key)));
             $method = 'set' . $methodKey;
-            if (in_array($method, $methods)) {
+            if (method_exists($this, $method)) {
                 $this->$method($value);
             } else {
                 $this->setOption($key, $value);
@@ -575,10 +574,10 @@ class StandardConfiguration implements Configurable
      *
      * Keys are normalized to lowercase. After setting internally, calls
      * {@link setStorageOption()} to allow further processing.
-     * 
-     * 
-     * @param  string $option 
-     * @param  mixed $value 
+     *
+     *
+     * @param  string $option
+     * @param  mixed $value
      * @return StandardConfiguration
      */
     public function setOption($option, $value)
@@ -592,13 +591,13 @@ class StandardConfiguration implements Configurable
     /**
      * Get an individual option
      *
-     * Keys are normalized to lowercase. If the option is not found, attempts 
+     * Keys are normalized to lowercase. If the option is not found, attempts
      * to retrieve it via {@link getStorageOption()}; if a value is returned
      * from that method, it will be set as the internal value and returned.
      *
      * Returns null for unfound options
-     * 
-     * @param  string $option 
+     *
+     * @param  string $option
      * @return mixed
      */
     public function getOption($option)
@@ -619,8 +618,8 @@ class StandardConfiguration implements Configurable
 
     /**
      * Check to see if an internal option has been set for the key provided.
-     * 
-     * @param  string $option 
+     *
+     * @param  string $option
      * @return bool
      */
     public function hasOption($option)
@@ -631,7 +630,7 @@ class StandardConfiguration implements Configurable
 
     /**
      * Cast configuration to an array
-     * 
+     *
      * @return array
      */
     public function toArray()
@@ -639,7 +638,7 @@ class StandardConfiguration implements Configurable
         $options = $this->options;
         $extraOpts = array(
             'cookie_domain'       => $this->getCookieDomain(),
-            'cookie_httponly'     => $this->getCookieHTTPOnly(),
+            'cookie_httponly'     => $this->getCookieHttpOnly(),
             'cookie_lifetime'     => $this->getCookieLifetime(),
             'cookie_path'         => $this->getCookiePath(),
             'cookie_secure'       => $this->getCookieSecure(),
@@ -654,11 +653,11 @@ class StandardConfiguration implements Configurable
     /**
      * Intercept get*() and set*() methods
      *
-     * Intercepts getters and setters and passes them to getOption() and setOption(), 
+     * Intercepts getters and setters and passes them to getOption() and setOption(),
      * respectively.
-     * 
-     * @param  string $method 
-     * @param  array $args 
+     *
+     * @param  string $method
+     * @param  array $args
      * @return mixed
      * @throws Exception\BadMethodCallException on non-getter/setter method
      */
@@ -684,8 +683,8 @@ class StandardConfiguration implements Configurable
 
     /**
      * Normalize an option name to lowercase
-     * 
-     * @param  string $option 
+     *
+     * @param  string $option
      * @return string
      */
     protected function normalizeOption($option)
@@ -695,7 +694,7 @@ class StandardConfiguration implements Configurable
 
     /**
      * Retrieve the CamelCaseToUnderscoreFilter
-     * 
+     *
      * @return CamelCaseToUnderscoreFilter
      */
     protected function getCamelCaseToUnderscoreFilter()

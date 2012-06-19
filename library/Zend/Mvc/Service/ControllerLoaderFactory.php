@@ -25,9 +25,10 @@ use Zend\Loader\Pluggable;
 use Zend\ServiceManager\Di\DiAbstractServiceFactory;
 use Zend\ServiceManager\Di\DiServiceInitializer;
 use Zend\ServiceManager\FactoryInterface;
+use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\ServiceManager\ServiceManager;
-use Zend\View\View;
+use Zend\EventManager\EventManagerAwareInterface;
 
 /**
  * @category   Zend
@@ -77,7 +78,7 @@ class ControllerLoaderFactory implements FactoryInterface
             }
         }
 
-        if ($serviceLocator->has('Di')) {
+        if (isset($configuration['di']) && $serviceLocator->has('Di')) {
             $di = $serviceLocator->get('Di');
             $controllerLoader->addAbstractFactory(
                 new DiAbstractServiceFactory($di, DiAbstractServiceFactory::USE_SL_BEFORE_DI)
@@ -88,8 +89,16 @@ class ControllerLoaderFactory implements FactoryInterface
         }
 
         $controllerLoader->addInitializer(function ($instance) use ($serviceLocator) {
+            if ($instance instanceof ServiceLocatorAwareInterface) {
+                $instance->setServiceLocator($serviceLocator->get('Zend\ServiceManager\ServiceLocatorInterface'));
+            }
+
+            if ($instance instanceof EventManagerAwareInterface) {
+                $instance->setEventManager($serviceLocator->get('EventManager'));
+            }
+
             if ($instance instanceof Pluggable) {
-                $instance->setBroker($serviceLocator->get('ControllerPluginBroker'));
+                $instance->setBroker(clone $serviceLocator->get('ControllerPluginBroker'));
             }
         });
 

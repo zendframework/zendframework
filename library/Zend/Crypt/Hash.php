@@ -30,6 +30,7 @@ class Hash
      * @param  string $hash
      * @param  string $data
      * @param  string $output
+     * @throws Exception\InvalidArgumentException
      * @return string
      */
     public static function compute($hash, $data, $output = self::STRING)

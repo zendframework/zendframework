@@ -143,7 +143,7 @@ echo $inputFilter->isValid() ? "Valid form" : "Invalid form";
     </para>
 
     <para>
-        Finally, the default <class>InputFilter</class> implementation is backed by a
+        Finally, the default <classname>InputFilter</classname> implementation is backed by a
         <classname>Factory</classname>. This means that when calling <methodname>add()</methodname>,
         you can provide a specification that the <classname>Factory</classname> would understand,
         and it will create the appropriate object. You may create either

@@ -117,4 +117,23 @@ class UpdateTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals('UPDATE "foo" SET "bar" = \'baz\' WHERE x = y', $this->update->getSqlString());
     }
+
+    /**
+     * @covers Zend\Db\Sql\Update::__clone
+     */
+    public function testCloneUpdate()
+    {
+        $update1 = clone $this->update;
+        $update1->table('foo')
+                ->set(array('bar' => 'baz'))
+                ->where('x = y');
+
+        $update2 = clone $this->update;
+        $update2->table('foo')
+            ->set(array('bar' => 'baz'))
+            ->where(array(
+                'id = ?'=>1
+            ));
+        $this->assertEquals('UPDATE "foo" SET "bar" = \'baz\' WHERE id = \'1\'', $update2->getSqlString());
+    }
 }

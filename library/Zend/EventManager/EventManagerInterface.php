@@ -20,9 +20,9 @@
 
 namespace Zend\EventManager;
 
-use Zend\Stdlib\CallbackHandler,
-    Traversable,
-    ArrayObject;
+use ArrayObject;
+use Traversable;
+use Zend\Stdlib\CallbackHandler;
 
 /**
  * Interface for messengers
@@ -84,7 +84,7 @@ interface EventManagerInterface extends SharedEventManagerAwareInterface
      * Detach an event listener
      * 
      * @param  CallbackHandler|ListenerAggregateInterface $listener 
-     * @return void
+     * @return bool
      */
     public function detach($listener);
 
@@ -115,7 +115,7 @@ interface EventManagerInterface extends SharedEventManagerAwareInterface
      * Set the event class to utilize
      *
      * @param  string $class
-     * @return EventCollection
+     * @return EventManagerInterface
      */
     public function setEventClass($class);
 
@@ -130,7 +130,7 @@ interface EventManagerInterface extends SharedEventManagerAwareInterface
      * Set the identifiers (overrides any currently set identifiers)
      *
      * @param string|int|array|Traversable $identifiers
-     * @return EventCollection
+     * @return EventManagerInterface
      */
     public function setIdentifiers($identifiers);
 
@@ -138,7 +138,7 @@ interface EventManagerInterface extends SharedEventManagerAwareInterface
      * Add some identifier(s) (appends to any currently set identifiers)
      *
      * @param string|int|array|Traversable $identifiers
-     * @return EventCollection
+     * @return EventManagerInterface
      */
     public function addIdentifiers($identifiers);
 

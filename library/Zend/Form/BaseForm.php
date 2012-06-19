@@ -111,7 +111,7 @@ class BaseForm extends Fieldset implements FormInterface
      * Typically, also passes data on to the composed input filter.
      * 
      * @param  array|\ArrayAccess $data 
-     * @return Form
+     * @return BaseForm
      */
     public function setData($data)
     {
@@ -192,7 +192,7 @@ class BaseForm extends Fieldset implements FormInterface
                 $data = $filter->getValues();
                 break;
         }
-        $hydrator->hydrate($data, $this->object);
+        $this->object = $hydrator->hydrate($data, $this->object);
     }
 
     /**
@@ -207,9 +207,9 @@ class BaseForm extends Fieldset implements FormInterface
             throw new Exception\InvalidArgumentException(sprintf(
                 '%s expects the flag to be one of %s::%s or %s::%s',
                 __METHOD__,
-                get_class($this),
+                get_called_class(),
                 'BIND_ON_VALIDATE',
-                get_class($this),
+                get_called_class(),
                 'BIND_MANUAL'
             ));
         }
@@ -231,7 +231,7 @@ class BaseForm extends Fieldset implements FormInterface
      * Set the hydrator to use when binding an object to the form
      * 
      * @param  Hydrator\HydratorInterface $hydrator 
-     * @return Form
+     * @return BaseForm
      */
     public function setHydrator(Hydrator\HydratorInterface $hydrator)
     {
@@ -354,7 +354,7 @@ class BaseForm extends Fieldset implements FormInterface
      *
      * Typically, proxies to the composed input filter
      *
-     * @return FormInterface
+     * @return BaseForm
      */
     public function setValidationGroup()
     {
@@ -391,7 +391,7 @@ class BaseForm extends Fieldset implements FormInterface
      * Set the input filter used by this form
      * 
      * @param  InputFilterInterface $inputFilter 
-     * @return Form
+     * @return BaseForm
      */
     public function setInputFilter(InputFilterInterface $inputFilter)
     {

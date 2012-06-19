@@ -26,7 +26,7 @@ use Zend\Stdlib\ArrayUtils;
 use RecursiveDirectoryIterator,
     RecursiveIteratorIterator,
     RecursiveRegexIterator,
-    Zend\Cache\Storage\Adapter\AdapterInterface as CacheAdapter,
+    Zend\Cache\Storage\StorageInterface as CacheStorage,
     Zend\Log,
     Zend\Locale,
     Zend\Translator,
@@ -58,16 +58,9 @@ abstract class AbstractAdapter
 
     /**
      * Internal cache for all adapters
-     * @var CacheAdapter
+     * @var CacheStorage
      */
-    protected static $_cache     = null;
-
-    /**
-     * Internal value to remember if cache supports tags
-     *
-     * @var boolean
-     */
-    private static $_cacheTags = false;
+    protected static $_cache = null;
 
     /**
      * Scans for the locale within the name of the directory
@@ -371,7 +364,7 @@ abstract class AbstractAdapter
                     try {
                         $options['content'] = $info->getPathname();
                         $this->_addTranslationData($options);
-                    } catch (Exception $e) {
+                    } catch (Exception\ExceptionInterface $e) {
                         // ignore failed sources while scanning
                     }
                 }
@@ -989,7 +982,7 @@ abstract class AbstractAdapter
     /**
      * Returns the set cache
      *
-     * @return CacheAdapter The set cache
+     * @return CacheStorage The set cache
      */
     public static function getCache()
     {
@@ -999,12 +992,11 @@ abstract class AbstractAdapter
     /**
      * Sets a cache for all Zend_Translator_Adapter's
      *
-     * @param CacheAdapter $cache Cache to store to
+     * @param CacheStorage $cache Cache to store to
      */
-    public static function setCache(CacheAdapter $cache)
+    public static function setCache(CacheStorage $cache)
     {
         self::$_cache = $cache;
-        self::_getTagSupportForCache();
     }
 
     /**
@@ -1032,25 +1024,6 @@ abstract class AbstractAdapter
     }
 
     /**
-     * Clears all set cache data
-     *
-     * @param string $tag Tag to clear when the default tag name is not used
-     * @return void
-     */
-    public static function clearCache($tag = null)
-    {
-        if (self::$_cacheTags) {
-            if ($tag == null) {
-                $tag = 'Zend_Translator';
-            }
-
-            self::$_cache->clear(CacheAdapter::MATCH_TAGS_OR, array('tags' => array($tag)));
-        } else {
-            self::$_cache->clear(CacheAdapter::MATCH_ALL);
-        }
-    }
-
-    /**
      * Saves the given cache
      * Prevents broken cache when write_control is disabled and displays problems by log or error
      *
@@ -1060,13 +1033,7 @@ abstract class AbstractAdapter
      */
     protected function saveCache($data, $id)
     {
-        if (self::$_cacheTags) {
-            self::$_cache->setItem($id, $data, array('tags' => array($this->_options['tag'])));
-        } else {
-            self::$_cache->setItem($id, $data);
-        }
-
-        if (!self::$_cache->hasItem($id)) {
+        if (!self::$_cache->setItem($id, $data)) {
             if (!$this->_options['disableNotices']) {
                 if ($this->_options['log']) {
                     $this->_options['log']->log($this->_options['logPriority'], "Writing to cache failed.");
@@ -1075,7 +1042,6 @@ abstract class AbstractAdapter
                 }
             }
 
-            self::$_cache->removeItem($id);
             return false;
         }
 
@@ -1088,19 +1054,4 @@ abstract class AbstractAdapter
      * @return string
      */
     abstract public function toString();
-
-    /**
-     * Internal method to check if the given cache supports tags
-     *
-     * @return void
-     */
-    private static function _getTagSupportForCache()
-    {
-        if (!self::$_cache instanceof CacheAdapter) {
-            self::$_cacheTags = false;
-            return false;
-        }
-        self::$_cacheTags = true;
-        return true;
-    }
 }

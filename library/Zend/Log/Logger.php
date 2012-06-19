@@ -35,7 +35,7 @@ use DateTime,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Logger implements LoggableInterface, Pluggable
+class Logger implements LoggerInterface, Pluggable
 {
     /**
      * @const int defined from the BSD Syslog message severities
@@ -239,11 +239,8 @@ class Logger implements LoggableInterface, Pluggable
      * @throws Exception\InvalidArgumentException
      * @return Logger
      */
-    public function setWriters($writers)
+    public function setWriters(SplPriorityQueue $writers)
     {
-        if (!$writers instanceof SplPriorityQueue) {
-            throw new Exception\InvalidArgumentException('Writers must be a SplPriorityQueue of Zend\Log\Writer');
-        }
         foreach ($writers->toArray() as $writer) {
             if (!$writer instanceof Writer\WriterInterface) {
                 throw new Exception\InvalidArgumentException('Writers must be a SplPriorityQueue of Zend\Log\Writer');

@@ -22,6 +22,7 @@
 namespace Zend\Mail\Header;
 
 use Zend\Mail\AddressList;
+use Zend\Mail\Headers;
 
 /**
  * Base class for headers composing address lists (to, from, cc, bcc, reply-to)
@@ -79,7 +80,7 @@ abstract class AbstractAddressList implements HeaderInterface
         $header = new static();
 
         // split value on ","
-        $fieldValue = str_replace("\r\n ", " ", $fieldValue);
+        $fieldValue = str_replace(Headers::FOLDING, ' ', $fieldValue);
         $values     = explode(',', $fieldValue);
         array_walk($values, 'trim');
 
@@ -145,12 +146,12 @@ abstract class AbstractAddressList implements HeaderInterface
                 }
 
                 if ('ASCII' !== $encoding) {
-                    $name = HeaderWrap::mimeEncodeValue($name, $encoding, false);
+                    $name = HeaderWrap::mimeEncodeValue($name, $encoding);
                 }
                 $emails[] = sprintf('%s <%s>', $name, $email);
             }
         }
-        $string = implode(",\r\n ", $emails);
+        $string = implode(',' . Headers::FOLDING, $emails);
         return $string;
     }
 
@@ -208,6 +209,6 @@ abstract class AbstractAddressList implements HeaderInterface
     {
         $name  = $this->getFieldName();
         $value = $this->getFieldValue();
-        return sprintf("%s: %s\r\n", $name, $value);
+        return (empty($value)) ? '' : sprintf('%s: %s', $name, $value);
     }
 }

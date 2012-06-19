@@ -110,7 +110,7 @@ class AddressListHeaderTest extends \PHPUnit_Framework_TestCase
     public function testStringRepresentationIncludesHeaderAndFieldValue($header, $type)
     {
         $this->populateAddressList($header->getAddressList());
-        $expected = sprintf("%s: %s\r\n", $type, $this->getExpectedFieldValue());
+        $expected = sprintf('%s: %s', $type, $this->getExpectedFieldValue());
         $this->assertEquals($expected, $header->toString());
     }
 

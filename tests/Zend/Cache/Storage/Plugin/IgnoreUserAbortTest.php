@@ -125,5 +125,4 @@ class IgnoreUserAbortTest extends CommonPluginTest
         // no events should be attached
         $this->assertEquals(0, count($this->_adapter->events()->getEvents()));
     }
-
 }

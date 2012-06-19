@@ -110,7 +110,7 @@ abstract class AbstractRenderer implements RendererInterface
             $this->setOptions($options);
         }
         $this->type = strtolower(substr(
-            get_class($this),
+            get_called_class(),
             strlen($this->rendererNamespace) + 1
         ));
     }
@@ -317,13 +317,8 @@ abstract class AbstractRenderer implements RendererInterface
      * @param  Object\ObjectInterface $barcode
      * @return AbstractRenderer
      */
-    public function setBarcode($barcode)
+    public function setBarcode(Object\ObjectInterface $barcode)
     {
-        if (!$barcode instanceof Object\ObjectInterface) {
-            throw new Exception\InvalidArgumentException(
-                'Invalid barcode object provided to setBarcode()'
-            );
-        }
         $this->barcode = $barcode;
         return $this;
     }

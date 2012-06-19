@@ -86,5 +86,4 @@ class MockPlugin extends AbstractPlugin
     {
         return $this->calledEvents;
     }
-
 }

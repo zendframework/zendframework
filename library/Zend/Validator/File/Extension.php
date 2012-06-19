@@ -22,7 +22,6 @@ namespace Zend\Validator\File;
 
 use Traversable;
 use Zend\Stdlib\ArrayUtils;
-use Zend\Loader;
 
 /**
  * Validator for the file extension of a file
@@ -197,7 +196,7 @@ class Extension extends \Zend\Validator\AbstractValidator
         }
 
         // Is file readable ?
-        if (!Loader::isReadable($value)) {
+        if (false === stream_resolve_include_path($value)) {
             return $this->_throw($file, self::NOT_FOUND);
         }
 

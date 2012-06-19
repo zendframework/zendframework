@@ -430,5 +430,41 @@ document.write(bar.strlen());');
 
         $this->assertEquals($expected, $test);
     }
-}
 
+    public function testConditionalWithAllowArbitraryAttributesDoesNotIncludeConditionalScript()
+    {
+        $this->helper->__invoke()->setAllowArbitraryAttributes(true);
+        $this->helper->__invoke()->appendFile('/js/foo.js', 'text/javascript', array('conditional' => 'lt IE 7'));
+        $test = $this->helper->__invoke()->toString();
+
+        $this->assertNotContains('conditional', $test);
+    }
+
+    public function testNoEscapeWithAllowArbitraryAttributesDoesNotIncludeNoEscapeScript()
+    {
+        $this->helper->__invoke()->setAllowArbitraryAttributes(true);
+        $this->helper->__invoke()->appendScript('// some script', 'text/javascript', array('noescape' => true));
+        $test = $this->helper->__invoke()->toString();
+
+        $this->assertNotContains('noescape', $test);
+    }
+
+    public function testNoEscapeDefaultsToFalse()
+    {
+        $this->helper->__invoke()->appendScript('// some script' . PHP_EOL, 'text/javascript', array());
+        $test = $this->helper->__invoke()->toString();
+
+        $this->assertContains('//<!--', $test);
+        $this->assertContains('//-->', $test);
+    }
+
+    public function testNoEscapeTrue()
+    {
+        $this->helper->__invoke()->appendScript('// some script' . PHP_EOL, 'text/javascript', array('noescape' => true));
+        $test = $this->helper->__invoke()->toString();
+
+        $this->assertNotContains('//<!--', $test);
+        $this->assertNotContains('//-->', $test);
+    }
+
+}

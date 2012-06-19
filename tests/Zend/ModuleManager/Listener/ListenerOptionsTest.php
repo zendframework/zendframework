@@ -37,6 +37,7 @@ class ListenerOptionsTest extends TestCase
             'config_cache_key'        => 'foo',
             'module_paths'            => array('module','paths'),
             'config_glob_paths'       => array('glob','paths'),
+            'config_static_paths'       => array('static','custom_paths'),
         ));
         $this->assertSame($options->getCacheDir(), __DIR__);
         $this->assertTrue($options->getConfigCacheEnabled());
@@ -45,6 +46,7 @@ class ListenerOptionsTest extends TestCase
         $this->assertSame('foo', $options->getConfigCacheKey());
         $this->assertSame(array('module', 'paths'), $options->getModulePaths());
         $this->assertSame(array('glob', 'paths'), $options->getConfigGlobPaths());
+        $this->assertSame(array('static', 'custom_paths'), $options->getConfigStaticPaths());
     }
 
     public function testCanAccessKeysAsProperties()
@@ -55,6 +57,7 @@ class ListenerOptionsTest extends TestCase
             'config_cache_key'        => 'foo',
             'module_paths'            => array('module','paths'),
             'config_glob_paths'       => array('glob','paths'),
+            'config_static_paths'       => array('static','custom_paths'),
         ));
         $this->assertSame($options->cache_dir, __DIR__);
         $options->cache_dir = 'foo';
@@ -66,10 +69,10 @@ class ListenerOptionsTest extends TestCase
         $this->assertTrue($options->config_cache_enabled);
         $options->config_cache_enabled = false;
         $this->assertFalse($options->config_cache_enabled);
-
         $this->assertEquals('foo', $options->config_cache_key);
         $this->assertSame(array('module', 'paths'), $options->module_paths);
         $this->assertSame(array('glob', 'paths'), $options->config_glob_paths);
+        $this->assertSame(array('static', 'custom_paths'), $options->config_static_paths);
     }
 
     public function testSetModulePathsAcceptsConfigOrTraverable()

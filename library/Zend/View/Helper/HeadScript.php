@@ -369,7 +369,6 @@ class HeadScript extends Placeholder\Container\Standalone
             );
         }
 
-        $this->_isValid($value);
         return $this->getContainer()->offsetSet($index, $value);
     }
 
@@ -409,8 +408,8 @@ class HeadScript extends Placeholder\Container\Standalone
         $attrString = '';
         if (!empty($item->attributes)) {
             foreach ($item->attributes as $key => $value) {
-                if (!$this->arbitraryAttributesAllowed()
-                    && !in_array($key, $this->_optionalAttributes))
+                if ((!$this->arbitraryAttributesAllowed() && !in_array($key, $this->_optionalAttributes)) 
+                    || in_array($key, array('conditional', 'noescape')))
                 {
                     continue;
                 }
@@ -421,10 +420,25 @@ class HeadScript extends Placeholder\Container\Standalone
             }
         }
 
+
+        $addScriptEscape = !(isset($item->attributes['noescape']) && filter_var($item->attributes['noescape'], FILTER_VALIDATE_BOOLEAN));
+
         $type = ($this->_autoEscape) ? $this->_escape($item->type) : $item->type;
         $html  = '<script type="' . $type . '"' . $attrString . '>';
         if (!empty($item->source)) {
-              $html .= PHP_EOL . $indent . '    ' . $escapeStart . PHP_EOL . $item->source . $indent . '    ' . $escapeEnd . PHP_EOL . $indent;
+            $html .= PHP_EOL ;
+
+            if ($addScriptEscape) {
+                $html .= $indent . '    ' . $escapeStart . PHP_EOL;
+            }
+
+            $html .= $indent . '    ' . $item->source;
+
+            if ($addScriptEscape) {
+                $html .= $indent . '    ' . $escapeEnd . PHP_EOL;
+            }
+            
+            $html .= $indent;
         }
         $html .= '</script>';
 
@@ -457,8 +471,9 @@ class HeadScript extends Placeholder\Container\Standalone
         } else {
             $useCdata = $this->useCdata ? true : false;
         }
+
         $escapeStart = ($useCdata) ? '//<![CDATA[' : '//<!--';
-        $escapeEnd   = ($useCdata) ? '//]]>'       : '//-->';
+        $escapeEnd   = ($useCdata) ? '//]]>' : '//-->';
 
         $items = array();
         $this->getContainer()->ksort();

@@ -76,11 +76,6 @@ class Queue implements Countable
     protected $_messageSetClass = '\Zend\Queue\Message\MessageIterator';
 
     /**
-     * @var \Zend\Log\Logger
-     */
-    protected $_logger = null;
-
-    /**
      * Constructor
      *
      * Can be called as
@@ -532,7 +527,7 @@ class Queue implements Countable
     public function debugInfo()
     {
         $info = array();
-        $info['self']                     = get_class($this);
+        $info['self']                     = get_called_class();
         $info['adapter']                  = get_class($this->getAdapter());
         foreach ($this->getAdapter()->getCapabilities() as $feature => $supported) {
             $info['adapter-' . $feature]  = ($supported) ? 'yes' : 'no';

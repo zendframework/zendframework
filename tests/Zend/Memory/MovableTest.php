@@ -70,7 +70,6 @@ class MovableTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals((string)$memObject->value, 'another value');
     }
 
-
     /**
      * tests lock()/unlock()/isLocked() functions
      */

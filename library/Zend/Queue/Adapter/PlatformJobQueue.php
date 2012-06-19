@@ -110,7 +110,7 @@ class PlatformJobQueue extends AbstractAdapter
      */
     public function create($name, $timeout=null)
     {
-        throw new Exception\UnsupportedMethodCallException('create() is not supported in ' . get_class($this));
+        throw new Exception\UnsupportedMethodCallException('create() is not supported in ' . get_called_class());
     }
 
     /**
@@ -122,7 +122,7 @@ class PlatformJobQueue extends AbstractAdapter
      */
     public function delete($name)
     {
-        throw new Exception\UnsupportedMethodCallException('delete() is not supported in ' . get_class($this));
+        throw new Exception\UnsupportedMethodCallException('delete() is not supported in ' . get_called_class());
     }
 
     /**

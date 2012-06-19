@@ -20,8 +20,7 @@
 
 namespace Zend\EventManager;
 
-use Zend\Stdlib\CallbackHandler,
-    Zend\Stdlib\Exception\InvalidCallbackException;
+use Zend\Stdlib\CallbackHandler;
 
 /**
  * FilterChain: intercepting filter manager
@@ -42,8 +41,6 @@ class FilterChain implements Filter\FilterInterface
      * Constructor
      *
      * Initializes Filter\FilterIterator in which filters will be aggregated
-     * 
-     * @return void
      */
     public function __construct()
     {
@@ -81,11 +78,12 @@ class FilterChain implements Filter\FilterInterface
      * @param  callback $callback PHP Callback
      * @param  int $priority Priority in the queue at which to execute; defaults to 1 (higher numbers == higher priority)
      * @return CallbackHandler (to allow later unsubscribe)
+     * @throws Exception\InvalidCallbackException
      */
     public function attach($callback, $priority = 1)
     {
         if (empty($callback)) {
-            throw new InvalidCallbackException('No callback provided');
+            throw new Exception\InvalidCallbackException('No callback provided');
         }
         $filter = new CallbackHandler($callback, array('priority' => $priority));
         $this->filters->insert($filter, $priority);
@@ -106,7 +104,7 @@ class FilterChain implements Filter\FilterInterface
     /**
      * Retrieve all filters
      * 
-     * @return FilterIterator
+     * @return Filter\FilterIterator
      */
     public function getFilters()
     {
@@ -133,6 +131,6 @@ class FilterChain implements Filter\FilterInterface
      */
     public function getResponses()
     {
-        return $this->responses;
+        return null;
     }
 }

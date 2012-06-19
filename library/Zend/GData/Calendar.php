@@ -35,8 +35,8 @@ namespace Zend\GData;
 class Calendar extends GData
 {
 
-    const CALENDAR_FEED_URI = 'http://www.google.com/calendar/feeds';
-    const CALENDAR_EVENT_FEED_URI = 'http://www.google.com/calendar/feeds/default/private/full';
+    const CALENDAR_FEED_URI = 'https://www.google.com/calendar/feeds';
+    const CALENDAR_EVENT_FEED_URI = 'https://www.google.com/calendar/feeds/default/private/full';
     const AUTH_SERVICE_NAME = 'cl';
 
     protected $_defaultPostUri = self::CALENDAR_EVENT_FEED_URI;

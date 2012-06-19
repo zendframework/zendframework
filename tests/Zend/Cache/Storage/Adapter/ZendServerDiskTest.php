@@ -63,5 +63,4 @@ class ZendServerDiskTest extends CommonAdapterTest
 
         parent::tearDown();
     }
-
 }

@@ -23,7 +23,7 @@ namespace Zend\Cache\Pattern;
 
 use Zend\Cache\Exception,
     Zend\Cache\StorageFactory,
-    Zend\Cache\Storage\Adapter\AdapterInterface as StorageAdapter,
+    Zend\Cache\Storage\StorageInterface as Storage,
     Zend\Stdlib\Options;
 
 /**
@@ -149,7 +149,7 @@ class PatternOptions extends Options
      * - ClassCache
      * - ObjectCache
      * - OutputCache
-     * @var null|StorageAdapter
+     * @var null|Storage
      */
     protected $storage;
 
@@ -170,7 +170,7 @@ class PatternOptions extends Options
     /**
      * Used by:
      * - CaptureCache
-     * @var null|StorageAdapter
+     * @var null|Storage
      */
     protected $tagStorage;
 
@@ -623,6 +623,9 @@ class PatternOptions extends Options
      */
     public function getObjectKey()
     {
+        if (!$this->objectKey) {
+            return get_class($this->getObject());
+        }
         return $this->objectKey;
     }
 
@@ -686,13 +689,12 @@ class PatternOptions extends Options
      * - ObjectCache
      * - OutputCache
      *
-     * @param  string|array|StorageAdapter $storage
+     * @param  string|array|Storage $storage
      * @return PatternOptions
      */
     public function setStorage($storage)
     {
-        $storage = $this->storageFactory($storage);
-        $this->storage = $storage;
+        $this->storage = $this->storageFactory($storage);
         return $this;
     }
 
@@ -705,7 +707,7 @@ class PatternOptions extends Options
      * - ObjectCache
      * - OutputCache
      *
-     * @return null|StorageAdapter
+     * @return null|Storage
      */
     public function getStorage()
     {
@@ -772,13 +774,12 @@ class PatternOptions extends Options
      * Used by:
      * - CaptureCache
      *
-     * @param  string|array|StorageAdapter $tagStorage
+     * @param  string|array|Storage $tagStorage
      * @return PatternOptions
      */
     public function setTagStorage($tagStorage)
     {
-        $tagStorage = $this->storageFactory($tagStorage);
-        $this->tagStorage = $tagStorage;
+        $this->tagStorage = $this->storageFactory($tagStorage);
         return $this;
     }
 
@@ -788,7 +789,7 @@ class PatternOptions extends Options
      * Used by:
      * - CaptureCache
      *
-     * @return null|StorageAdapter
+     * @return null|Storage
      */
     public function getTagStorage()
     {
@@ -858,7 +859,7 @@ class PatternOptions extends Options
     /**
      * Create a storage object from a given specification
      *
-     * @param  array|string|StorageAdapter $storage
+     * @param  array|string|Storage $storage
      * @return StorageAdapter
      */
     protected function storageFactory($storage)
@@ -867,9 +868,9 @@ class PatternOptions extends Options
             $storage = StorageFactory::factory($storage);
         } elseif (is_string($storage)) {
             $storage = StorageFactory::adapterFactory($storage);
-        } elseif ( !($storage instanceof StorageAdapter) ) {
+        } elseif ( !($storage instanceof Storage) ) {
             throw new Exception\InvalidArgumentException(
-                'The storage must be an instanceof Zend\Cache\Storage\Adapter\AdapterInterface '
+                'The storage must be an instanceof Zend\Cache\Storage\StorageInterface '
                 . 'or an array passed to Zend\Cache\Storage::factory '
                 . 'or simply the name of the storage adapter'
             );

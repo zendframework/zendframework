@@ -25,7 +25,6 @@ use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\EventInterface as Event;
 use Zend\EventManager\EventManager;
 use Zend\EventManager\EventManagerAwareInterface;
-use Zend\EventManager\EventsCapableInterface;
 use Zend\Http\Request as HttpRequest;
 use Zend\Http\PhpEnvironment\Response as HttpResponse;
 use Zend\Loader\Broker;
@@ -51,7 +50,6 @@ use Zend\Stdlib\ResponseInterface as Response;
 abstract class RestfulController implements 
     Dispatchable,
     EventManagerAwareInterface,
-    EventsCapableInterface,
     InjectApplicationEventInterface,
     ServiceLocatorAwareInterface,
     Pluggable
@@ -77,7 +75,7 @@ abstract class RestfulController implements
     protected $event;
 
     /**
-     * @var EventCollection
+     * @var EventManagerInterface
      */
     protected $events;
 
@@ -148,11 +146,12 @@ abstract class RestfulController implements
      * @param  Request $request
      * @param  null|Response $response
      * @return mixed|Response
+     * @throws Exception\InvalidArgumentException
      */
     public function dispatch(Request $request, Response $response = null)
     {
         if (!$request instanceof HttpRequest) {
-            throw new \InvalidArgumentException('Expected an HTTP request');
+            throw new Exception\InvalidArgumentException('Expected an HTTP request');
         }
         $this->request = $request;
         if (!$response) {
@@ -200,16 +199,20 @@ abstract class RestfulController implements
             switch (strtolower($request->getMethod())) {
                 case 'get':
                     if (null !== $id = $routeMatch->getParam('id')) {
+                        $action = 'get';
                         $return = $this->get($id);
                         break;
                     }
                     if (null !== $id = $request->query()->get('id')) {
+                        $action = 'get';
                         $return = $this->get($id);
                         break;
                     }
+                    $action = 'getList';
                     $return = $this->getList();
                     break;
                 case 'post':
+                    $action = 'create';
                     $return = $this->create($request->post()->toArray());
                     break;
                 case 'put':
@@ -220,6 +223,7 @@ abstract class RestfulController implements
                     }
                     $content = $request->getContent();
                     parse_str($content, $parsedParams);
+                    $action = 'update';
                     $return = $this->update($id, $parsedParams);
                     break;
                 case 'delete':
@@ -228,11 +232,14 @@ abstract class RestfulController implements
                             throw new \DomainException('Missing identifier');
                         }
                     }
+                    $action = 'delete';
                     $return = $this->delete($id);
                     break;
                 default:
                     throw new \DomainException('Invalid HTTP method!');
             }
+
+            $routeMatch->setParam('action', $action);
         }
 
         // Emit post-dispatch signal, passing:
@@ -279,7 +286,7 @@ abstract class RestfulController implements
         $events->setIdentifiers(array(
             'Zend\Stdlib\DispatchableInterface',
             __CLASS__,
-            get_class($this)
+            get_called_class()
         ));
         $this->events = $events;
         $this->attachDefaultListeners();
@@ -374,6 +381,7 @@ abstract class RestfulController implements
      *
      * @param  string|Broker $broker Plugin broker to load plugins
      * @return Zend\Loader\Pluggable
+     * @throws Exception\InvalidArgumentException
      */
     public function setBroker($broker)
     {
@@ -390,7 +398,7 @@ abstract class RestfulController implements
     /**
      * Get plugin instance
      *
-     * @param  string     $plugin  Name of plugin to return
+     * @param  string     $name    Name of plugin to return
      * @param  null|array $options Options to pass to plugin constructor (if not already instantiated)
      * @return mixed
      */

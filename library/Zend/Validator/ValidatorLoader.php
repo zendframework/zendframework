@@ -141,6 +141,7 @@ class ValidatorLoader extends PluginClassLoader
         'callback'                     => 'Zend\Validator\Callback',
         'credit_card'                  => 'Zend\Validator\CreditCard',
         'creditcard'                   => 'Zend\Validator\CreditCard',
+        'csrf'                         => 'Zend\Validator\Csrf',
         'date'                         => 'Zend\Validator\Date',
         'db_\\no_record_exists'        => 'Zend\Validator\Db\NoRecordExists',
         'db_\\norecordexists'          => 'Zend\Validator\Db\NoRecordExists',

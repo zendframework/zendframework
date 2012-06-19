@@ -640,4 +640,28 @@ class DiTest extends \PHPUnit_Framework_TestCase
         $b = $di->get('b_alias');
         $this->assertInstanceOf('ZendTest\Di\TestAsset\SetterInjection\A', $b->a);
     }
+
+    /*
+     * @group SetterInjection
+     * @group SupertypeResolution
+     */
+    public function testInjectionForSetterInjectionWillNotUseSupertypeWhenChildParamIsExplicitlyDefined()
+    {
+        $di = new Di();
+        // for setter injection, the dependency is not required, thus it must be forced
+        $di->instanceManager()->setParameters(
+            'ZendTest\Di\TestAsset\InheritanceClasses\B',
+            array('test' => 'b')
+        );
+        $di->instanceManager()->setParameters(
+            'ZendTest\Di\TestAsset\InheritanceClasses\A',
+            array('test' => 'a')
+        );
+
+        $b = $di->get('ZendTest\Di\TestAsset\InheritanceClasses\B');
+        $this->assertEquals('b', $b->test);
+
+        $c = $di->get('ZendTest\Di\TestAsset\InheritanceClasses\C');
+        $this->assertEquals('b', $c->test);
+    }
 }

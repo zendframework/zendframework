@@ -21,6 +21,9 @@
 
 namespace Zend\Mail\Header;
 
+use Zend\Mail\Headers;
+use Zend\Mime\Mime;
+
 /**
  * Utility class used for creating wrapped or MIME-encoded versions of header
  * values.
@@ -43,7 +46,7 @@ abstract class HeaderWrap
     public static function wrap($value, HeaderInterface $header)
     {
         if ($header instanceof UnstructuredInterface) {
-            return static::wrapUnstructuredHeader($value);
+            return static::wrapUnstructuredHeader($value, $header);
         } elseif ($header instanceof StructuredInterface) {
             return static::wrapStructuredHeader($value, $header);
         }
@@ -54,23 +57,28 @@ abstract class HeaderWrap
      * Wrap an unstructured header line
      *
      * Wrap at 78 characters or before, based on whitespace.
-     * 
-     * @param  string $value 
+     *
+     * @param string          $value
+     * @param HeaderInterface $header
      * @return string
      */
-    protected static function wrapUnstructuredHeader($value)
+    protected static function wrapUnstructuredHeader($value, HeaderInterface $header)
     {
-        return wordwrap($value, 78, "\r\n ");
+        $encoding = $header->getEncoding();
+        if ($encoding == 'ASCII') {
+            return wordwrap($value, 78, Headers::FOLDING);
+        }
+        return static::mimeEncodeValue($value, $encoding, 78);
     }
 
     /**
      * Wrap a structured header line
      * 
-     * @param  string          $value 
-     * @param  HeaderInterface $header 
+     * @param  string              $value
+     * @param  StructuredInterface $header
      * @return string
      */
-    protected static function wrapStructuredHeader($value, HeaderInterface $header)
+    protected static function wrapStructuredHeader($value, StructuredInterface $header)
     {
         $delimiter = $header->getDelimiter();
 
@@ -84,7 +92,7 @@ abstract class HeaderWrap
                 $temp    = '';
             }
         }
-        return implode("\r\n ", $lines);
+        return implode(Headers::FOLDING, $lines);
     }
 
     /**
@@ -95,29 +103,11 @@ abstract class HeaderWrap
      * 
      * @param  string $value 
      * @param  string $encoding 
-     * @param  bool $splitWords Whether or not to split the $value on whitespace 
-     *                          and encode each word separately.
-     * @return string
+     * @param  int    $lineLength maximum line-length, by default 998
+     * @return string Returns the mime encode value without the last line ending
      */
-    public static function mimeEncodeValue($value, $encoding, $splitWords = false)
+    public static function mimeEncodeValue($value, $encoding, $lineLength = 998)
     {
-        if ($splitWords) {
-            $words = array_map(function($word) use ($encoding) {
-                $header = iconv_mime_encode('Header', $word, array(
-                    'scheme'         => 'Q',
-                    'line-length'    => 78,
-                    'output-charset' => $encoding,
-                ));
-                return str_replace('Header: ', '', $header);
-            }, explode(' ', $value));
-            return implode("\r\n ", $words);
-        }
-
-        $header = iconv_mime_encode('Header', $value, array(
-            'scheme'         => 'Q',
-            'line-length'    => 998,
-            'output-charset' => $encoding,
-        ));
-        return str_replace('Header: ', '', $header);
+        return Mime::encodeQuotedPrintableHeader($value, $encoding, $lineLength, Headers::EOL);
     }
 }

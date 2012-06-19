@@ -741,18 +741,9 @@ $this->layout()->footer = $this->render('article/footer');
             <programlisting language="php"><![CDATA[
 namespace Content;
 
-use Zend\EventManager\StaticEventManager;
-
 class Module
 {
-    public function init($manager)
-    {
-        // Register a bootstrap event
-        $events = StaticEventManager::getInstance();
-        $events->attach('bootstrap', 'bootstrap', array($this, 'bootstrap'));
-    }
-
-    public function bootstrap($e)
+    public function onBootstrap($e)
     {
         // Register a dispatch event
         $app = $e->getParam('application');
@@ -770,7 +761,7 @@ class Module
 
         // Set the layout template
         $viewModel = $e->getViewModel();
-        $viewModel->setLayout('content/layout');
+        $viewModel->setTemplate('content/layout');
     }
 }
 ]]></programlisting>
@@ -856,18 +847,9 @@ class Module
             <programlisting language="php"><![CDATA[
 namespace Application;
 
-use Zend\EventManager\StaticEventManager;
-
 class Module
 {
-    public function init($manager)
-    {
-        // Register a bootstrap event
-        $events = StaticEventManager::getInstance();
-        $events->attach('bootstrap', 'bootstrap', array($this, 'bootstrap'));
-    }
-
-    public function bootstrap($e)
+    public function onBootstrap($e)
     {
         // Register a "render" event, at high priority (so it executes prior
         // to the view attempting to render)
@@ -878,7 +860,7 @@ class Module
     public function registerJsonStrategy($e)
     {
         $app          = $e->getTarget();
-        $locator      = $app->getLocator();
+        $locator      = $app->getServiceManager();
         $view         = $locator->get('Zend\View\View');
         $jsonStrategy = $locator->get('Zend\View\Strategy\JsonStrategy');
 
@@ -907,18 +889,9 @@ class Module
             <programlisting language="php"><![CDATA[
 namespace Content;
 
-use Zend\EventManager\StaticEventManager;
-
 class Module
 {
-    public function init($manager)
-    {
-        // Register a bootstrap event
-        $events = StaticEventManager::getInstance();
-        $events->attach('bootstrap', 'bootstrap', array($this, 'bootstrap'));
-    }
-
-    public function bootstrap($e)
+    public function onBootstrap($e)
     {
         // Register a render event
         $app = $e->getParam('application');
@@ -940,7 +913,7 @@ class Module
 
         // Set the JSON strategy when controllers from this module are selected
         $app          = $e->getTarget();
-        $locator      = $app->getLocator();
+        $locator      = $app->getServiceManager();
         $view         = $locator->get('Zend\View\View');
         $jsonStrategy = $locator->get('Zend\View\Strategy\JsonStrategy');
 

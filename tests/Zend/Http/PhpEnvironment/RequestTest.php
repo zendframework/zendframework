@@ -263,6 +263,19 @@ class RequestTest extends TestCase
     }
 
     /**
+     * @dataProvider serverHeaderProvider
+     * @param array  $server
+     * @param string $name
+     */
+    public function testRequestStringHasCorrectHeaderName(array $server, $name)
+    {
+        $_SERVER = $server;
+        $request = new Request();
+
+        $this->assertContains($name, $request->toString());
+    }
+
+    /**
      * Data provider for testing server hostname.
      */
     public static function serverHostnameProvider()

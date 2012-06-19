@@ -14,6 +14,12 @@ class HeadersTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Countable', $headers);
     }
 
+    public function testHeadersCanGetPluginClassLoader()
+    {
+        $headers = new Headers();
+        $this->assertInstanceOf('Zend\Http\HeaderLoader', $headers->getPluginClassLoader());
+    }
+
     public function testHeadersFromStringFactoryCreatesSingleObject()
     {
         $headers = Headers::fromString("Fake: foo-bar");
@@ -192,6 +198,7 @@ class HeadersTest extends \PHPUnit_Framework_TestCase
         $headers = new Headers();
         $headers->addHeaders(array('Foo' => 'bar', 'Baz' => 'baz'));
         $iterations = 0;
+        /** @var \Zend\Http\Header\HeaderInterface $header */
         foreach ($headers as $index => $header) {
             $iterations++;
             $this->assertInstanceOf('Zend\Http\Header\GenericHeader', $header);

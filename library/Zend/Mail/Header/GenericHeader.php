@@ -56,8 +56,11 @@ class GenericHeader implements HeaderInterface
     public static function fromString($headerLine)
     {
         $headerLine = iconv_mime_decode($headerLine, ICONV_MIME_DECODE_CONTINUE_ON_ERROR);
-        list($fieldName, $fieldValue) = explode(': ', $headerLine, 2);
-        $header = new static($fieldName, $fieldValue);
+        $parts = explode(': ', $headerLine, 2);
+        if (count($parts) != 2) {
+            throw new Exception\InvalidArgumentException('Header must match with the format "name: value"');
+        }
+        $header = new static($parts[0], $parts[1]);
         return $header;
     }
 
@@ -79,7 +82,7 @@ class GenericHeader implements HeaderInterface
     }
 
     /**
-     * Set header field name
+     * Set header name
      *
      * @param  string $fieldName
      * @throws Exception\InvalidArgumentException
@@ -96,7 +99,9 @@ class GenericHeader implements HeaderInterface
 
         // Validate what we have
         if (!preg_match('/^[a-z][a-z0-9-]*$/i', $fieldName)) {
-            throw new Exception\InvalidArgumentException('Header name must start with a letter, and consist of only letters, numbers, and dashes');
+            throw new Exception\InvalidArgumentException(
+                'Header name must start with a letter, and consist of only letters, numbers and dashes'
+            );
         }
 
         $this->fieldName = $fieldName;
@@ -104,7 +109,7 @@ class GenericHeader implements HeaderInterface
     }
 
     /**
-     * Retrieve header field name
+     * Retrieve header name
      *
      * @return string
      */
@@ -114,7 +119,7 @@ class GenericHeader implements HeaderInterface
     }
 
     /**
-     * Set header field value
+     * Set header value
      * 
      * @param  string $fieldValue
      * @return GenericHeader
@@ -132,7 +137,7 @@ class GenericHeader implements HeaderInterface
     }
 
     /**
-     * Retrieve header field value
+     * Retrieve header value
      * 
      * @return string
      */
@@ -164,9 +169,9 @@ class GenericHeader implements HeaderInterface
     }
 
     /**
-     * Cast to string as a well formed HTTP header line
+     * Cast to string
      *
-     * Returns in form of "NAME: VALUE\r\n"
+     * Returns in form of "NAME: VALUE"
      *
      * @return string
      */
@@ -175,6 +180,6 @@ class GenericHeader implements HeaderInterface
         $name  = $this->getFieldName();
         $value = $this->getFieldValue();
 
-        return $name. ': ' . $value . "\r\n";
+        return $name. ': ' . $value;
     }
 }

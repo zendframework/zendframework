@@ -70,19 +70,19 @@ class Mcrypt implements SymmetricInterface
      * @var array
      */
     protected $supportedAlgos = array(
-        'aes'          => MCRYPT_RIJNDAEL_128,
-        'blowfish'     => MCRYPT_BLOWFISH,
-        'des'          => MCRYPT_DES,
-        '3des'         => MCRYPT_TRIPLEDES,
-        'tripledes'    => MCRYPT_TRIPLEDES,
-        'cast-128'     => MCRYPT_CAST_128,
-        'cast-256'     => MCRYPT_CAST_256,
-        'rijndael-128' => MCRYPT_RIJNDAEL_128,
-        'rijndael-192' => MCRYPT_RIJNDAEL_192,
-        'rijndael-256' => MCRYPT_RIJNDAEL_256,
-        'saferplus'    => MCRYPT_SAFERPLUS,
-        'serpent'      => MCRYPT_SERPENT,
-        'twofish'      => MCRYPT_TWOFISH
+        'aes'          => 'rijndael-128',
+        'blowfish'     => 'blowfish',
+        'des'          => 'des',
+        '3des'         => 'tripledes',
+        'tripledes'    => 'tripledes',
+        'cast-128'     => 'cast-128',
+        'cast-256'     => 'cast-256',
+        'rijndael-128' => 'rijndael-128',
+        'rijndael-192' => 'rijndael-192',
+        'rijndael-256' => 'rijndael-256',
+        'saferplus'    => 'saferplus',
+        'serpent'      => 'serpent',
+        'twofish'      => 'twofish'
     );
     /**
      * Supported encryption modes
@@ -90,16 +90,20 @@ class Mcrypt implements SymmetricInterface
      * @var array
      */
     protected $supportedModes = array(
-        'cbc'  => MCRYPT_MODE_CBC,
-        'cfb'  => MCRYPT_MODE_CFB,
-        'ofb'  => MCRYPT_MODE_OFB,
-        'nofb' => MCRYPT_MODE_NOFB
+        'cbc'  => 'cbc',
+        'cfb'  => 'cfb',
+        'ctr'  => 'ctr',
+        'ofb'  => 'ofb',
+        'nofb' => 'nofb',
+        'ncfb' => 'ncfb'
     );
 
     /**
      * Constructor
      *
-     * @param array|Traversable $options
+     * @param  array|Traversable $options
+     * @throws Exception\RuntimeException
+     * @throws Exception\InvalidArgumentException
      */
     public function __construct($options = array())
     {
@@ -179,6 +183,7 @@ class Mcrypt implements SymmetricInterface
      * Set the symmetric cipher broker
      *
      * @param  string|PaddingBroker $broker
+     * @throws Exception\InvalidArgumentException
      * @return void
      */
     public static function setPaddingBroker($broker)
@@ -216,6 +221,7 @@ class Mcrypt implements SymmetricInterface
      * Set the encryption key
      *
      * @param  string $key
+     * @throws Exception\InvalidArgumentException
      * @return Mcrypt
      */
     public function setKey($key)
@@ -244,6 +250,7 @@ class Mcrypt implements SymmetricInterface
      * Set the encryption algorithm (cipher)
      *
      * @param  string $algo
+     * @throws Exception\InvalidArgumentException
      * @return Mcrypt
      */
     public function setAlgorithm($algo)
@@ -293,6 +300,7 @@ class Mcrypt implements SymmetricInterface
      * Encrypt
      *
      * @param  string $data
+     * @throws Exception\InvalidArgumentException
      * @return string
      */
     public function encrypt($data)
@@ -328,6 +336,7 @@ class Mcrypt implements SymmetricInterface
      * Decrypt
      *
      * @param  string $data
+     * @throws Exception\InvalidArgumentException
      * @return string
      */
     public function decrypt($data)
@@ -379,6 +388,7 @@ class Mcrypt implements SymmetricInterface
      * Set the salt (IV)
      *
      * @param  string $salt
+     * @throws Exception\InvalidArgumentException
      * @return Mcrypt
      */
     public function setSalt($salt)
@@ -409,6 +419,7 @@ class Mcrypt implements SymmetricInterface
      * Set the cipher mode
      *
      * @param  string $mode
+     * @throws Exception\InvalidArgumentException
      * @return Mcrypt
      */
     public function setMode($mode)

@@ -417,7 +417,7 @@ class Uri
         if (!$baseUri instanceof static) {
             throw new Exception\InvalidUriTypeException(sprintf(
                 'Provided base URL is not an instance of "%s"',
-                get_class($this)
+                get_called_class()
             ));
         }
 
@@ -645,7 +645,7 @@ class Uri
             throw new Exception\InvalidUriPartException(sprintf(
                 'Scheme "%s" is not valid or is not accepted by %s',
                 $scheme,
-                get_class($this)
+                get_called_class()
             ), Exception\InvalidUriPartException::INVALID_SCHEME);
         }
 
@@ -692,7 +692,7 @@ class Uri
             throw new Exception\InvalidUriPartException(sprintf(
                 'Host "%s" is not valid or is not accepted by %s',
                 $host,
-                get_class($this)
+                get_called_class()
             ), Exception\InvalidUriPartException::INVALID_HOSTNAME);
         }
 

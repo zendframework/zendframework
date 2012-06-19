@@ -25,6 +25,7 @@ use stdClass,
     Zend\Mail\Address,
     Zend\Mail\AddressList,
     Zend\Mail\Header,
+    Zend\Mail\Headers,
     Zend\Mail\Message,
     Zend\Mime\Message as MimeMessage,
     Zend\Mime\Mime,
@@ -40,6 +41,9 @@ use stdClass,
  */
 class MessageTest extends \PHPUnit_Framework_TestCase
 {
+    /** @var Message */
+    public $message;
+
     public function setUp()
     {
         $this->message = new Message();
@@ -593,7 +597,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
         $this->message->setBody($body);
 
         $text = $this->message->getBodyText();
-        $this->assertEquals($body->generateMessage(), $text);
+        $this->assertEquals($body->generateMessage(Headers::EOL), $text);
         $this->assertContains('--foo-bar', $text);
         $this->assertContains('--foo-bar--', $text);
         $this->assertContains('Content-Type: text/plain', $text);
@@ -613,10 +617,6 @@ class MessageTest extends \PHPUnit_Framework_TestCase
 
     public function testSettingNonAsciiEncodingForcesMimeEncodingOfSomeHeaders()
     {
-        if (!function_exists('iconv_mime_encode')) {
-            $this->markTestSkipped('Encoding relies on iconv extension');
-        }
-
         $this->message->addTo('zf-devteam@zend.com', 'ZF DevTeam');
         $this->message->addFrom('matthew@zend.com', "Matthew Weier O'Phinney");
         $this->message->addCc('zf-contributors@lists.zend.com', 'ZF Contributors List');
@@ -626,38 +626,23 @@ class MessageTest extends \PHPUnit_Framework_TestCase
 
         $test = $this->message->headers()->toString();
 
-        $expected = $this->encodeString('ZF DevTeam', 'UTF-8');
+        $expected = '=?UTF-8?Q?ZF=20DevTeam?=';
         $this->assertContains($expected, $test);
         $this->assertContains('<zf-devteam@zend.com>', $test);
 
-        $expected = $this->encodeString("Matthew Weier O'Phinney", 'UTF-8');
+        $expected = "=?UTF-8?Q?Matthew=20Weier=20O'Phinney?=";
         $this->assertContains($expected, $test, $test);
         $this->assertContains('<matthew@zend.com>', $test);
 
-        $expected = $this->encodeString("ZF Contributors List", 'UTF-8');
+        $expected = '=?UTF-8?Q?ZF=20Contributors=20List?=';
         $this->assertContains($expected, $test);
         $this->assertContains('<zf-contributors@lists.zend.com>', $test);
 
-        $expected = $this->encodeString("ZF CR Team", 'UTF-8');
+        $expected = '=?UTF-8?Q?ZF=20CR=20Team?=';
         $this->assertContains($expected, $test);
         $this->assertContains('<zf-crteam@lists.zend.com>', $test);
 
-        $self     = $this;
-        $words    = array_map(function($word) use ($self) {
-            return $self->encodeString($word, 'UTF-8');
-        }, explode(' ', 'This is a subject'));
-        $expected = 'Subject: ' . implode("\r\n ", $words);
-        $this->assertContains($expected, $test, $test);
-    }
-
-    public function encodeString($string, $charset)
-    {
-        $encoded = iconv_mime_encode('Header', $string, array(
-            'scheme'         => 'Q',
-            'output-charset' => $charset,
-            'line-length'    => 998,
-        ));
-        $encoded = str_replace('Header: ', '', $encoded);
-        return $encoded;
+        $expected = 'Subject: =?UTF-8?Q?This=20is=20a=20subject?=';
+        $this->assertContains($expected, $test);
     }
 }

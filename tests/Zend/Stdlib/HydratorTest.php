@@ -37,6 +37,22 @@ use ZendTest\Stdlib\TestAsset\ClassMethodsCamelCase,
  */
 class HydratorTest extends \PHPUnit_Framework_TestCase
 {
+
+    /**
+     * @var ClassMethodsCamelCase
+     */
+    protected $classMethodsCamelCase;
+
+    /**
+     * @var ClassMethodsCamelCaseMissing
+     */
+    protected $classMethodsCamelCaseMissing;
+
+    /**
+     * @var ClassMethodsUnderscore
+     */
+    protected $classMethodsUnderscore;
+
     public function setUp()
     {
         $this->classMethodsCamelCase = new ClassMethodsCamelCase();
@@ -60,9 +76,10 @@ class HydratorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($datas['fooBar'], '1');
         $this->assertTrue(isset($datas['fooBarBaz']));
         $this->assertFalse(isset($datas['foo_bar']));
-        $hydrator->hydrate(array('fooBar' => 'foo', 'fooBarBaz' => 'bar'), $this->classMethodsCamelCase);
-        $this->assertEquals($this->classMethodsCamelCase->getFooBar(), 'foo');
-        $this->assertEquals($this->classMethodsCamelCase->getFooBarBaz(), 'bar');
+        $test = $hydrator->hydrate(array('fooBar' => 'foo', 'fooBarBaz' => 'bar'), $this->classMethodsCamelCase);
+        $this->assertSame($this->classMethodsCamelCase, $test);
+        $this->assertEquals($test->getFooBar(), 'foo');
+        $this->assertEquals($test->getFooBarBaz(), 'bar');
     }
     
     public function testHydratorClassMethodsCamelCaseWithSetterMissing()
@@ -73,9 +90,10 @@ class HydratorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($datas['fooBar'], '1');
         $this->assertFalse(isset($datas['fooBarBaz']));
         $this->assertFalse(isset($datas['foo_bar']));
-        $hydrator->hydrate(array('fooBar' => 'foo'), $this->classMethodsCamelCaseMissing);
-        $this->assertEquals($this->classMethodsCamelCaseMissing->getFooBar(), 'foo');
-        $this->assertEquals($this->classMethodsCamelCaseMissing->getFooBarBaz(), '2');
+        $test = $hydrator->hydrate(array('fooBar' => 'foo'), $this->classMethodsCamelCaseMissing);
+        $this->assertSame($this->classMethodsCamelCaseMissing, $test);
+        $this->assertEquals($test->getFooBar(), 'foo');
+        $this->assertEquals($test->getFooBarBaz(), '2');
     }
     
     public function testHydratorClassMethodsUnderscore()
@@ -86,8 +104,21 @@ class HydratorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($datas['foo_bar'], '1');
         $this->assertTrue(isset($datas['foo_bar_baz']));
         $this->assertFalse(isset($datas['fooBar']));
-        $hydrator->hydrate(array('foo_bar' => 'foo', 'foo_bar_baz' => 'bar'), $this->classMethodsUnderscore);
-        $this->assertEquals($this->classMethodsUnderscore->getFooBar(), 'foo');
-        $this->assertEquals($this->classMethodsUnderscore->getFooBarBaz(), 'bar');
+        $test = $hydrator->hydrate(array('foo_bar' => 'foo', 'foo_bar_baz' => 'bar'), $this->classMethodsUnderscore);
+        $this->assertSame($this->classMethodsUnderscore, $test);
+        $this->assertEquals($test->getFooBar(), 'foo');
+        $this->assertEquals($test->getFooBarBaz(), 'bar');
+    }
+
+    public function testHydratorClassMethodsIgnoresInvalidValues()
+    {
+        $hydrator = new ClassMethods(false);
+        $data = array(
+            'foo_bar' => '1',
+            'foo_bar_baz' => '2',
+            'invalid' => 'value'
+        );
+        $test = $hydrator->hydrate($data, $this->classMethodsUnderscore);
+        $this->assertSame($this->classMethodsUnderscore, $test);
     }
 }

@@ -16,6 +16,7 @@ use Zend\Config\Factory as ConfigFactory;
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
 use Zend\ModuleManager\ModuleEvent;
 use Zend\Stdlib\ArrayUtils;
+use Zend\Stdlib\Glob;
 use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateInterface;
 
@@ -72,6 +73,7 @@ class ConfigListener extends AbstractListener implements
             $this->setMergedConfig($this->getCachedConfig());
         } else {
             $this->addConfigGlobPaths($this->getOptions()->getConfigGlobPaths());
+            $this->addConfigStaticPaths($this->getOptions()->getConfigStaticPaths());
         }
     }
 
@@ -302,7 +304,7 @@ class ConfigListener extends AbstractListener implements
                 break;
 
             case self::GLOB_PATH:
-                $config = ConfigFactory::fromFiles(glob($path['path'], GLOB_BRACE));
+                $config = ConfigFactory::fromFiles(Glob::glob($path['path'], Glob::GLOB_BRACE));
                 break;
         }
         $this->mergeTraversableConfig($config);

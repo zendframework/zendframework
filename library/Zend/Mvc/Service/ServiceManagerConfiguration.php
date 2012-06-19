@@ -24,6 +24,8 @@ namespace Zend\Mvc\Service;
 use Zend\ServiceManager\ConfigurationInterface;
 use Zend\ServiceManager\ServiceManager;
 use Zend\ServiceManager\ServiceManagerAwareInterface;
+use Zend\EventManager\EventManagerInterface;
+use Zend\EventManager\EventManagerAwareInterface;
 
 /**
  * @category   Zend
@@ -107,7 +109,6 @@ class ServiceManagerConfiguration implements ConfigurationInterface
      * Merges internal arrays with those passed via configuration
      * 
      * @param  array $configuration 
-     * @return void
      */
     public function __construct(array $configuration = array())
     {
@@ -167,14 +168,16 @@ class ServiceManagerConfiguration implements ConfigurationInterface
         }
 
         $serviceManager->addInitializer(function ($instance) use ($serviceManager) {
-            if ($instance instanceof EventManagerAwareInterface) {
+            if ($instance instanceof EventManagerAwareInterface
+                && !$instance->events() instanceof EventManagerInterface
+            ) {
                 $instance->setEventManager($serviceManager->get('EventManager'));
             }
         });
 
         $serviceManager->addInitializer(function ($instance) use ($serviceManager) {
             if ($instance instanceof ServiceManagerAwareInterface) {
-                $instance->setServiceManager($instance);
+                $instance->setServiceManager($serviceManager);
             }
         });
 

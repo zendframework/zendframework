@@ -37,7 +37,6 @@ class HelperLoader extends PluginClassLoader
      * @var array Pre-aliased view helpers
      */
     protected $plugins = array(
-        'action'              => 'Zend\View\Helper\Action',
         'basepath'            => 'Zend\View\Helper\BasePath',
         'currency'            => 'Zend\View\Helper\Currency',
         'cycle'               => 'Zend\View\Helper\Cycle',

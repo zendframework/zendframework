@@ -20,8 +20,7 @@
 
 namespace Zend\Validator\File;
 
-use Zend\Loader,
-    Zend\Validator,
+use Zend\Validator,
     Zend\Validator\Exception;
 
 /**
@@ -151,7 +150,7 @@ class Hash extends Validator\AbstractValidator
         }
 
         // Is file readable ?
-        if (!Loader::isReadable($value)) {
+        if (false === stream_resolve_include_path($value)) {
             return $this->_throw($file, self::NOT_FOUND);
         }
 

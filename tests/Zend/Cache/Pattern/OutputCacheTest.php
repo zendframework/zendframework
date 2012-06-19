@@ -35,7 +35,7 @@ class OutputCacheTest extends CommonPatternTest
 {
 
     /**
-     * @var Zend\Cache\Storage\Adapter\AdapterInterface
+     * @var Zend\Cache\Storage\StorageInterface
      */
     protected $_storage;
 
@@ -48,7 +48,9 @@ class OutputCacheTest extends CommonPatternTest
 
     public function setUp()
     {
-        $this->_storage = new Cache\Storage\Adapter\Memory();
+        $this->_storage = new Cache\Storage\Adapter\Memory(array(
+            'memory_limit' => 0
+        ));
         $this->_options = new Cache\Pattern\PatternOptions(array(
             'storage' => $this->_storage,
         ));
@@ -112,5 +114,4 @@ class OutputCacheTest extends CommonPatternTest
         $this->setExpectedException('Zend\Cache\Exception\MissingKeyException');
         $this->_pattern->start(''); // empty key
     }
-
 }

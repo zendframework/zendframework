@@ -74,9 +74,7 @@ class Adapter
     {
         if (is_array($driver)) {
             $driver = $this->createDriverFromParameters($driver);
-        }
-
-        if (!$driver instanceof Driver\DriverInterface) {
+        } elseif (!$driver instanceof Driver\DriverInterface) {
             throw new Exception\InvalidArgumentException(
                 'The supplied or instantiated driver object does not implement Zend\Db\Adapter\Driver\DriverInterface'
             );
@@ -283,6 +281,8 @@ class Adapter
                 return new Platform\SqlServer();
             case 'Sqlite':
                 return new Platform\Sqlite();
+            case 'Postgresql':
+                return new Platform\Postgresql();
             default:
                 return new Platform\Sql92();
         }

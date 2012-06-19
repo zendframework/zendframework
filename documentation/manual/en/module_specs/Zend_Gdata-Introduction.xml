@@ -74,6 +74,13 @@
 
             <listitem>
                 <para>
+                    <link linkend="zend.gdata.analytics">Google Analytics</link>
+                    is a visitor statistics application.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
                     <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://code.google.com/apis/blogger/developers_guide_php.html">Google
                         Blogger</link> is a popular Internet provider of
                     "push-button publishing" and syndication.

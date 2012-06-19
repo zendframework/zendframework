@@ -144,4 +144,24 @@ class AnnotationBuilderTest extends TestCase
         $element = $form->get('typed_element');
         $this->assertInstanceOf('ZendTest\Form\TestAsset\Annotation\Element', $element);
     }
+
+    public function testAllowsComposingChildEntities()
+    {
+        $entity  = new TestAsset\Annotation\EntityComposingAnEntity();
+        $builder = new Annotation\AnnotationBuilder();
+        $form    = $builder->createForm($entity);
+
+        $this->assertTrue($form->has('composed'));
+        $composed = $form->get('composed');
+        $this->assertInstanceOf('Zend\Form\FieldsetInterface', $composed);
+        $this->assertTrue($composed->has('username'));
+        $this->assertTrue($composed->has('password'));
+
+        $filter = $form->getInputFilter();
+        $this->assertTrue($filter->has('composed'));
+        $composed = $filter->get('composed');
+        $this->assertInstanceOf('Zend\InputFilter\InputFilterInterface', $composed);
+        $this->assertTrue($composed->has('username'));
+        $this->assertTrue($composed->has('password'));
+    }
 }

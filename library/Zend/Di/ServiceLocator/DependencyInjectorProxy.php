@@ -122,7 +122,7 @@ class DependencyInjectorProxy extends Di
     protected function resolveAndCallInjectionMethodForInstance($instance, $method, $params, $alias, $methodIsRequired, $methodClass = null)
     {
         if (!$instance instanceof GeneratorInstance) {
-            parent::resolveAndCallInjectionMethodForInstance($instance, $method, $params, $alias, $methodIsRequired, $methodClass);
+            return parent::resolveAndCallInjectionMethodForInstance($instance, $method, $params, $alias, $methodIsRequired, $methodClass);
         }
 
         /* @var $instance GeneratorInstance */
@@ -135,5 +135,13 @@ class DependencyInjectorProxy extends Di
                 'params' => $callParameters,
             ));
         }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    protected function getClass($instance)
+    {
+        return $instance instanceof GeneratorInstance ? $instance->getClass() : get_class($instance);
     }
 }

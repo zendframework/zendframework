@@ -114,7 +114,7 @@
                 the queried role inherits (herein, "guest", "member", and
                 "admin"):
             </para>
-volgende testen!
+            
             <programlisting language="php"><![CDATA[
 use Zend\Acl\Acl,
     Zend\Acl\Role\GenericRole as Role,
@@ -287,7 +287,6 @@ $acl->addRole(new Role('administrator'));
 
     <section xml:id="zend.acl.introduction.defining"><title>Defining Access Controls</title>
         
-
         <para>
             Now that the <acronym>ACL</acronym> contains the relevant roles, rules can be
             established that define how resources may be accessed by roles. You may have noticed

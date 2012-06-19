@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.acl.refining"><title>Refining Access Controls</title>
     
-
     <section xml:id="zend.acl.refining.precise"><title>Precise Access Controls</title>
         
 

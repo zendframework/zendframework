@@ -131,6 +131,7 @@ class AnnotationBuilderTest extends TestCase
         foreach ($form as $element) {
             $test[] = $element->getName();
         }
+        $this->assertEquals($expected, $test);
     }
 
     public function testAllowsSpecifyingFormAndElementTypes()

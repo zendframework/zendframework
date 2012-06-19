@@ -24,7 +24,7 @@ use Zend\ServiceManager\AbstractPluginManager;
 use Zend\ServiceManager\ConfigurationInterface;
 
 /**
- * Service manager implementation for the filter chain.
+ * Plugin manager implementation for the filter chain.
  *
  * Enforces that filters retrieved are either callbacks or instances of
  * FilterInterface. Additionally, it registers a number of default filters
@@ -35,7 +35,7 @@ use Zend\ServiceManager\ConfigurationInterface;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ServiceManager extends AbstractPluginManager
+class FilterPluginManager extends AbstractPluginManager
 {
     /**
      * Aliases for registered filter invokables

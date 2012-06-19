@@ -37,9 +37,9 @@ class FilterChain extends AbstractFilter implements Countable
     const DEFAULT_PRIORITY = 1000;
 
     /**
-     * @var ServiceManager
+     * @var FilterPluginManager
      */
-    protected $services;
+    protected $plugins;
 
     /**
      * Filter chain
@@ -112,27 +112,27 @@ class FilterChain extends AbstractFilter implements Countable
     }
 
     /**
-     * Get service manager instance
+     * Get plugin manager instance
      * 
-     * @return ServiceManager
+     * @return FilterPluginManager
      */
-    public function getServiceManager()
+    public function getPluginManager()
     {
-        if (!$this->services) {
-            $this->setServiceManager(new ServiceManager());
+        if (!$this->plugins) {
+            $this->setPluginManager(new FilterPluginManager());
         }
-        return $this->services;
+        return $this->plugins;
     }
 
     /**
-     * Set service manager instance
+     * Set plugin manager instance
      * 
-     * @param  ServiceManager $services Service manager to use when loading plugins
+     * @param  FilterPluginManager $plugins 
      * @return FilterChain
      */
-    public function setServiceManager(ServiceManager $services)
+    public function setPluginManager(FilterPluginManager $plugins)
     {
-        $this->services = $services;
+        $this->plugins = $plugins;
         return $this;
     }
 
@@ -145,8 +145,8 @@ class FilterChain extends AbstractFilter implements Countable
      */
     public function plugin($name, array $options = array())
     {
-        $services = $this->getServiceManager();
-        return $services->get($name, $options);
+        $plugins = $this->getPluginManager();
+        return $plugins->get($name, $options);
     }
 
     /**
@@ -193,7 +193,7 @@ class FilterChain extends AbstractFilter implements Countable
                 $options = array($options);
             }
         }
-        $filter = $this->getServiceManager()->get($name, $options);
+        $filter = $this->getPluginManager()->get($name, $options);
         return $this->attach($filter, $priority);
     }
 

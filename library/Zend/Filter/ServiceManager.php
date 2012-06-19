@@ -1,15 +1,59 @@
 <?php
+/**
+ * Zend Framework
+ *
+ * LICENSE
+ *
+ * This source file is subject to the new BSD license that is bundled
+ * with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://framework.zend.com/license/new-bsd
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@zend.com so we can send you a copy immediately.
+ *
+ * @category   Zend
+ * @package    Zend_Filter
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
 
 namespace Zend\Filter;
 
 use Zend\ServiceManager\ConfigurationInterface;
 use Zend\ServiceManager\ServiceManager as BaseServiceManager;
 
+/**
+ * Service manager implementation for the filter chain.
+ *
+ * Enforces that filters retrieved are either callbacks or instances of
+ * FilterInterface. Additionally, it registers a number of default filters
+ * available, as well as aliases for them.
+ *
+ * @category   Zend
+ * @package    Zend_Filter
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
 class ServiceManager extends BaseServiceManager
 {
+    /**
+     * Allow overriding by default
+     * 
+     * @var bool
+     */
     protected $allowOverride   = true;
+
+    /**
+     * @var mixed Options to use when creating an instance
+     */
     protected $creationOptions = null;
 
+    /**
+     * Aliases for registered filter invokables
+     * 
+     * @var array
+     */
     protected $aliases = array(
         'base_name'                      => 'basename',
         'compress_bz2'                   => 'compress\\bz2',
@@ -77,6 +121,11 @@ class ServiceManager extends BaseServiceManager
         'word_underscore_to_separator'   => 'word\\underscoretoseparator',
     );
 
+    /**
+     * Default set of filters
+     * 
+     * @var array
+     */
     protected $invokableClasses = array(
         'alnum'                          => 'Zend\Filter\Alnum',
         'alpha'                          => 'Zend\Filter\Alpha',
@@ -130,12 +179,31 @@ class ServiceManager extends BaseServiceManager
         'word\\underscoretoseparator'    => 'Zend\Filter\Word\UnderscoreToSeparator',
     );
 
+    /**
+     * Constructor
+     *
+     * Add a default initializer to ensure the plugin is valid after instance
+     * creation.
+     * 
+     * @param  null|ConfigurationInterface $configuration 
+     * @return void
+     */
     public function __construct(ConfigurationInterface $configuration = null)
     {
         parent::__construct($configuration);
         $this->addInitializer(array($this, 'validatePlugin'), true);
     }
 
+    /**
+     * Validate the plugin
+     *
+     * Checks that the filter loaded is either a valid callback or an instance
+     * of FilterInterface.
+     * 
+     * @param  mixed $plugin 
+     * @return void
+     * @throws Exception\RuntimeException if invalid
+     */
     public function validatePlugin($plugin)
     {
         if ($plugin instanceof FilterInterface) {
@@ -154,6 +222,18 @@ class ServiceManager extends BaseServiceManager
         ));
     }
 
+    /**
+     * Retrieve a service from the manager by name
+     *
+     * Allows passing an array of options to use when creating the instance.
+     * createFromInvokable() will use these and pass them to the instance
+     * constructor if not null and a non-empty array.
+     * 
+     * @param  string $name 
+     * @param  array $options 
+     * @param  bool $usePeeringServiceManagers 
+     * @return object
+     */
     public function get($name, $options = array(), $usePeeringServiceManagers = true)
     {
         $this->creationOptions = $options;
@@ -186,7 +266,9 @@ class ServiceManager extends BaseServiceManager
             ));
         }
 
-        if (null === $this->creationOptions) {
+        if (null === $this->creationOptions 
+            || (is_array($this->creationOptions) && empty($this->creationOptions))
+        ) {
             $instance = new $invokable();
         } else {
             $instance = new $invokable($this->creationOptions);

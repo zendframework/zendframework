@@ -23,7 +23,7 @@ namespace Zend\Form\Annotation;
 
 use Zend\Code\Annotation\AnnotationInterface;
 use Zend\Form\Exception;
-use Zend\Json\Exception as JsonException;
+use Zend\Json\Exception\ExceptionInterface as JsonException;
 use Zend\Json\Json;
 
 /**

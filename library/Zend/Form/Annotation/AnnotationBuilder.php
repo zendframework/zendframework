@@ -28,6 +28,7 @@ use Zend\Code\Reflection\ClassReflection;
 use Zend\EventManager\EventManager;
 use Zend\EventManager\EventManagerAwareInterface;
 use Zend\EventManager\EventManagerInterface;
+use Zend\Form\Exception;
 use Zend\Form\Factory;
 use Zend\Stdlib\ArrayUtils;
 

@@ -176,7 +176,7 @@ class AnnotationBuilder implements EventManagerAwareInterface
      *
      * Parses the object provided, and processes annotations for the class and 
      * all properties. Information from annotations is then used to create 
-     * specfications for a form, its elements, and its input filter.
+     * specifications for a form, its elements, and its input filter.
      * 
      * @param  object $entity 
      * @return array

@@ -33,6 +33,11 @@ use Zend\Code\Exception;
 class AnnotationManager
 {
     /**
+     * @var array
+     */
+    protected $aliases = array();
+
+    /**
      * @var string[]
      */
     protected $annotationNames = array();
@@ -75,6 +80,31 @@ class AnnotationManager
     }
 
     /**
+     * Alias an annotation name
+     * 
+     * @param  string $alias 
+     * @param  string $class May be either a registered annotation name or another alias
+     * @return AnnotationManager
+     */
+    public function setAlias($alias, $class)
+    {
+        if (!in_array($class, $this->annotationNames) && !$this->hasAlias($class))
+        {
+            throw new Exception\InvalidArgumentException(sprintf(
+                '%s: Cannot alias "%s" to "%s", as class "%s" is not currently a registered annotation or alias',
+                __METHOD__,
+                $alias,
+                $class,
+                $class
+            ));
+        }
+
+        $alias = $this->normalizeAlias($alias);
+        $this->aliases[$alias] = $class;
+        return $this;
+    }
+
+    /**
      * Checks if the manager has annotations for a class
      *
      * @param $class
@@ -82,8 +112,15 @@ class AnnotationManager
      */
     public function hasAnnotation($class)
     {
-        // Only if its name exists as a key
-        return in_array($class, $this->annotationNames);
+        if (in_array($class, $this->annotationNames)) {
+            return true;
+        }
+
+        if ($this->hasAlias($class)) {
+            return true;
+        }
+
+        return false;
     }
 
     /**
@@ -100,6 +137,10 @@ class AnnotationManager
             throw new Exception\RuntimeException('This annotation class is not supported by this annotation manager');
         }
 
+        if ($this->hasAlias($class)) {
+            $class = $this->resolveAlias($class);
+        }
+
         $index      = array_search($class, $this->annotationNames);
         $annotation = $this->annotations[$index];
 
@@ -108,5 +149,43 @@ class AnnotationManager
             $newAnnotation->initialize($content);
         }
         return $newAnnotation;
+    }
+
+    /**
+     * Normalize an alias name
+     * 
+     * @param  string $alias 
+     * @return string
+     */
+    protected function normalizeAlias($alias)
+    {
+        return strtolower(str_replace(array('-', '_', ' ', '\\', '/'), '', $alias));
+    }
+
+    /**
+     * Do we have an alias by the provided name?
+     * 
+     * @param  string $alias 
+     * @return bool
+     */
+    protected function hasAlias($alias)
+    {
+        $alias = $this->normalizeAlias($alias);
+        return (isset($this->aliases[$alias]));
+    }
+
+    /**
+     * Resolve an alias to a class name
+     * 
+     * @param  string $alias 
+     * @return string
+     */
+    protected function resolveAlias($alias)
+    {
+        do {
+            $normalized = $this->normalizeAlias($alias);
+            $class      = $this->aliases[$normalized];
+        } while ($this->hasAlias($class));
+        return $class;
     }
 }

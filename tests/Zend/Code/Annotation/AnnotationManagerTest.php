@@ -67,4 +67,16 @@ class AnnotationManagerTest extends TestCase
         $this->assertTrue($manager->hasAnnotation(__NAMESPACE__ . '\TestAsset\Foo'));
         $this->assertTrue($manager->hasAnnotation(__NAMESPACE__ . '\TestAsset\Bar'));
     }
+
+    public function testAllowsSpecifyingAliases()
+    {
+        $bar = new TestAsset\Bar();
+        $this->manager->registerAnnotation($bar);
+        $this->manager->setAlias(__NAMESPACE__ . '\TestAsset\Foo', get_class($bar));
+
+        $test = $this->manager->createAnnotation(__NAMESPACE__ . '\TestAsset\Foo', 'test content');
+        $this->assertInstanceOf(__NAMESPACE__ . '\TestAsset\Bar', $test);
+        $this->assertNotSame($bar, $test);
+        $this->assertEquals('test content', $test->content);
+    }
 }

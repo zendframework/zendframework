@@ -130,59 +130,6 @@ class ServiceManager extends BaseServiceManager
         'word\\underscoretoseparator'    => 'Zend\Filter\Word\UnderscoreToSeparator',
     );
 
-    protected $shared = array(
-        'alnum'                          => false,
-        'alpha'                          => false,
-        'basename'                       => false,
-        'boolean'                        => false,
-        'callback'                       => false,
-        'compress'                       => false,
-        'compress\\bz2'                  => false,
-        'compress\\gz'                   => false,
-        'compress\\lzf'                  => false,
-        'compress\\rar'                  => false,
-        'compress\\tar'                  => false,
-        'compress\\zip'                  => false,
-        'decompress'                     => false,
-        'decrypt'                        => false,
-        'digits'                         => false,
-        'dir'                            => false,
-        'encrypt'                        => false,
-        'encrypt\\mcrypt'                => false,
-        'encrypt\\openssl'               => false,
-        'encrypt_openssl'                => false,
-        'file\\decrypt'                  => false,
-        'file\\encrypt'                  => false,
-        'file\\lowercase'                => false,
-        'file\\rename'                   => false,
-        'file\\uppercase'                => false,
-        'htmlentities'                   => false,
-        'inflector'                      => false,
-        'int'                            => false,
-        'localizedtonormalized'          => false,
-        'normalizedtolocalized'          => false,
-        'null'                           => false,
-        'pregreplace'                    => false,
-        'realpath'                       => false,
-        'stringtolower'                  => false,
-        'stringtoupper'                  => false,
-        'stringtrim'                     => false,
-        'stripnewlines'                  => false,
-        'striptags'                      => false,
-        'word\\camelcasetodash'          => false,
-        'word\\camelcasetoseparator'     => false,
-        'word\\camelcasetounderscore'    => false,
-        'word\\dashtocamelcase'          => false,
-        'word\\dashtoseparator'          => false,
-        'word\\dashtounderscore'         => false,
-        'word\\separatortocamelcase'     => false,
-        'word\\separatortodash'          => false,
-        'word\\separatortoseparator'     => false,
-        'word\\underscoretocamelcase'    => false,
-        'word\\underscoretodash'         => false,
-        'word\\underscoretoseparator'    => false,
-    );
-
     public function __construct(ConfigurationInterface $configuration = null)
     {
         parent::__construct($configuration);
@@ -205,21 +152,6 @@ class ServiceManager extends BaseServiceManager
             (is_object($plugin) ? get_class($plugin) : gettype($plugin)),
             __NAMESPACE__
         ));
-    }
-
-    public function setInvokableClass($name, $invokableClass, $shared = false)
-    {
-        return parent::setInvokableClass($name, $invokableClass, $shared);
-    }
-
-    public function setFactory($name, $factory, $shared = false)
-    {
-        return parent::setFactory($name, $factory, $shared);
-    }
-
-    public function setService($name, $service, $shared = false)
-    {
-        return parent::setService($name, $service, $shared);
     }
 
     public function get($name, $options = array(), $usePeeringServiceManagers = true)

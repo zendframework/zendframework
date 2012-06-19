@@ -100,7 +100,7 @@
             ambiguity condition and how <classname>Zend\Acl\Acl</classname> solves it.
         </para>
 
-        <example xml:id="zend.acl.introduction.roles.example.multiple_inheritance"><title>Multiple Inheritance among Roles</title>
+        <section xml:id="zend.acl.introduction.roles.example.multiple_inheritance"><title>Multiple Inheritance among Roles</title>
             
 
             <para>
@@ -114,7 +114,7 @@
                 the queried role inherits (herein, "guest", "member", and
                 "admin"):
             </para>
-volgende testen!
+
             <programlisting language="php"><![CDATA[
 use Zend\Acl\Acl,
     Zend\Acl\Role\GenericRole as Role,
@@ -160,7 +160,7 @@ echo $acl->isAllowed('someUser', 'someResource') ? 'allowed' : 'denied';
                 since the "member" role is examined before the "guest" role, the example code would
                 print "allowed".
             </para>
-        </example>
+        </section>
 
         <note>
             <para>

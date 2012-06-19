@@ -377,11 +377,11 @@ class AnnotationBuilder implements EventManagerAwareInterface
      */
     protected function isFieldset($type)
     {
-        if (version_compare(PHP_VERSION, '>=5.3.7')) {
+        if (version_compare(PHP_VERSION, '5.3.7', 'gte')) {
             return is_subclass_of($type, 'Zend\Form\FieldsetInterface');
         }
 
-        $r = new ReflectionClass($type);
+        $r = new ClassReflection($type);
         $interfaces = $r->getInterfaceNames();
         return (in_array('Zend\Form\FieldsetInterface', $interfaces));
     }

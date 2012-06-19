@@ -96,7 +96,7 @@ if ($view->doctype()->isHtml5()) {
 ]]></programlisting>
     </example>
 
-    <example id="zend.view.helpers.initial.doctype.xhtml1_rdfa">
+    <example xml:id="zend.view.helpers.initial.doctype.xhtml1_rdfa">
         <title>Choosing a Doctype to Use with the Open Graph Protocol</title>
 
         <para>

@@ -88,8 +88,7 @@ class AnnotationManager
      */
     public function setAlias($alias, $class)
     {
-        if (!in_array($class, $this->annotationNames) && !$this->hasAlias($class))
-        {
+        if (!in_array($class, $this->annotationNames) && !$this->hasAlias($class)) {
             throw new Exception\InvalidArgumentException(sprintf(
                 '%s: Cannot alias "%s" to "%s", as class "%s" is not currently a registered annotation or alias',
                 __METHOD__,

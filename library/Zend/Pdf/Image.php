@@ -190,7 +190,7 @@ abstract class Image
      */
     protected static function _extractJpegImage($dataSource)
     {
-        throw new Exception\Exception\NotImplementedException('Jpeg image fileparser is not implemented. Old styly implementation has to be used.');
+        throw new Exception\NotImplementedException('Jpeg image fileparser is not implemented. Old styly implementation has to be used.');
 
         $imageParser = new BinaryParser\Image\Jpeg($dataSource);
         $image       = new Resource\Image\Jpeg($imageParser);

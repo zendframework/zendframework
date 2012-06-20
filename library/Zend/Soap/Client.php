@@ -395,7 +395,7 @@ class Client implements ServerClient
     public function setEncoding($encoding)
     {
         if (!is_string($encoding)) {
-            throw new ClientException('Invalid encoding specified');
+            throw new Exception\InvalidArgumentException('Invalid encoding specified');
         }
 
         $this->_encoding = $encoding;

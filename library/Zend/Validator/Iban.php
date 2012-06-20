@@ -117,7 +117,6 @@ class Iban extends AbstractValidator
         }
 
         if (is_array($options)) {
-            $options = $options;
             if (array_key_exists('locale', $options)) {
                 $options  = $options['locale'];
                 unset($options['locale']);
@@ -135,7 +134,7 @@ class Iban extends AbstractValidator
         if ($options !== null) {
             $this->setLocale($options);
         }
-        
+
         parent::__construct($options);
     }
 

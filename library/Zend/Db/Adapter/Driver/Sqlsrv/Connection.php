@@ -59,9 +59,9 @@ class Connection implements ConnectionInterface
 
     /**
      * Set driver
-     * 
+     *
      * @param  Sqlsrv $driver
-     * @return Connection 
+     * @return Connection
      */
     public function setDriver(Sqlsrv $driver)
     {
@@ -71,9 +71,9 @@ class Connection implements ConnectionInterface
 
     /**
      * Set connection parameters
-     * 
+     *
      * @param  array $connectionParameters
-     * @return Connection 
+     * @return Connection
      */
     public function setConnectionParameters(array $connectionParameters)
     {
@@ -83,8 +83,8 @@ class Connection implements ConnectionInterface
 
     /**
      * Get connection parameters
-     * 
-     * @return array 
+     *
+     * @return array
      */
     public function getConnectionParameters()
     {
@@ -93,8 +93,8 @@ class Connection implements ConnectionInterface
 
     /**
      * Get default catalog
-     * 
-     * @return null 
+     *
+     * @return null
      */
     public function getDefaultCatalog()
     {
@@ -103,8 +103,8 @@ class Connection implements ConnectionInterface
 
     /**
      * Get dafault schema
-     * 
-     * @return string 
+     *
+     * @return string
      */
     public function getDefaultSchema()
     {
@@ -119,9 +119,9 @@ class Connection implements ConnectionInterface
 
     /**
      * Set resource
-     * 
+     *
      * @param  resource $resource
-     * @return Connection 
+     * @return Connection
      */
     public function setResource($resource)
     {
@@ -142,8 +142,8 @@ class Connection implements ConnectionInterface
 
     /**
      * Connect
-     * 
-     * @return null 
+     *
+     * @return null
      */
     public function connect()
     {
@@ -208,7 +208,7 @@ class Connection implements ConnectionInterface
     public function disconnect()
     {
         sqlsrv_close($this->resource);
-        unset($this->resource);
+        $this->resource = null;
     }
 
     /**
@@ -241,7 +241,7 @@ class Connection implements ConnectionInterface
     }
 
     /**
-     * Rollback 
+     * Rollback
      */
     public function rollback()
     {
@@ -262,9 +262,9 @@ class Connection implements ConnectionInterface
 
     /**
      * Execute
-     * 
+     *
      * @param  string $sql
-     * @return mixed 
+     * @return mixed
      */
     public function execute($sql)
     {
@@ -293,9 +293,9 @@ class Connection implements ConnectionInterface
 
     /**
      * Prepare
-     * 
+     *
      * @param  string $sql
-     * @return string 
+     * @return string
      */
     public function prepare($sql)
     {
@@ -309,8 +309,8 @@ class Connection implements ConnectionInterface
 
     /**
      * Get last generated id
-     * 
-     * @return mixed 
+     *
+     * @return mixed
      */
     public function getLastGeneratedValue()
     {

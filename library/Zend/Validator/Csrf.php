@@ -21,7 +21,9 @@
 
 namespace Zend\Validator;
 
-use Zend\Session\Container as SessionContainer;
+use Traversable,
+    Zend\Stdlib\ArrayUtils,
+    Zend\Session\Container as SessionContainer;
 
 class Csrf extends AbstractValidator
 {
@@ -49,13 +51,13 @@ class Csrf extends AbstractValidator
     /**
      * Static cache of the session names to generated hashes
      *
-     * @var array 
+     * @var array
      */
     protected static $hashCache;
 
     /**
      * Name of CSRF element (used to create non-colliding hashes)
-     * 
+     *
      * @var string
      */
     protected $name = 'csrf';
@@ -79,8 +81,8 @@ class Csrf extends AbstractValidator
 
     /**
      * Constructor
-     * 
-     * @param  array $options 
+     *
+     * @param  array $options
      * @return void
      */
     public function __construct($options = array())
@@ -118,9 +120,9 @@ class Csrf extends AbstractValidator
 
     /**
      * Does the provided token match the one generated?
-     * 
-     * @param  string $value 
-     * @param  mixed $context 
+     *
+     * @param  string $value
+     * @param  mixed $context
      * @return bool
      */
     public function isValid($value, $context = null)
@@ -148,7 +150,7 @@ class Csrf extends AbstractValidator
         $this->name = (string) $name;
         return $this;
     }
-    
+
     /**
      * Get CSRF name
      *
@@ -302,7 +304,7 @@ class Csrf extends AbstractValidator
      * Get validation token
      *
      * Retrieve token from session, if it exists.
-     * 
+     *
      * @return null|string
      */
     protected function getValidationToken()

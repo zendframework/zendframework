@@ -100,7 +100,7 @@ echo "$acctname\n";
             </para>
 
             <para>
-                This behavior is critical to <link linkend="zend.auth.adapter.ldap"><classname>Zend\Auth\Adapter\Ldap</classname></link>,
+                This behavior is critical to <link linkend="zend.authentication.adapter.ldap"><classname>Zend\Authentication\Adapter\Ldap</classname></link>,
                 which passes the username supplied by the user directly to
                 <methodname>bind()</methodname>.
             </para>
@@ -305,7 +305,7 @@ foreach ($multiOptions as $name => $options) {
             </para>
 
             <para>
-                The above code is very similar to code used within <link linkend="zend.auth.adapter.ldap"><classname>Zend\Auth\Adapter\Ldap</classname></link>.
+                The above code is very similar to code used within <link linkend="zend.authentication.adapter.ldap"><classname>Zend\Authentication\Adapter\Ldap</classname></link>.
                 In fact, we recommend that you simply use that authentication adapter for
                 multi-domain + failover <acronym>LDAP</acronym> based authentication
                 (or copy the code).

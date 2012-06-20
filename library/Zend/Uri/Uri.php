@@ -39,6 +39,7 @@ class Uri
     const HOST_IPVANY    = 7;
     const HOST_DNSNAME   = 8;
     const HOST_DNSORIPV4 = 9;
+    const HOST_DNSORIPV6 = 10;
     const HOST_REGNAME   = 16;
     const HOST_ALL       = 31;
 

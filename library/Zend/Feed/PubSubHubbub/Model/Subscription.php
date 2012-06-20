@@ -20,8 +20,9 @@
  */
 
 namespace Zend\Feed\PubSubHubbub\Model;
-use Zend\Feed\PubSubHubbub;
+
 use Zend\Date;
+use Zend\Feed\PubSubHubbub;
 
 /**
  * @category   Zend

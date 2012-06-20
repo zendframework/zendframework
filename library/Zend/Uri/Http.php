@@ -39,7 +39,7 @@ class Http extends Uri
     /**
      * @see Uri::$validHostTypes
      */
-    protected $validHostTypes = self::HOST_DNSORIPV4;
+    protected $validHostTypes = self::HOST_DNSORIPV6;
 
     /**
      * User name as provided in authority of URI

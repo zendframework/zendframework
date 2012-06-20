@@ -179,6 +179,13 @@ defined('TESTS_ZEND_DB_ADAPTER_SQLSRV_PASSWORD') || define('TESTS_ZEND_DB_ADAPTE
 defined('TESTS_ZEND_DB_ADAPTER_SQLSRV_DATABASE') || define('TESTS_ZEND_DB_ADAPTER_SQLSRV_DATABASE', 'test');
 
 /**
+ * Zend\Feed\PubSubHubbub tests
+ *
+ * If the BASEURI property requires a valid Uri to run online tests.
+ */
+defined('TESTS_ZEND_FEED_PUBSUBHUBBUB_BASEURI') || define('TESTS_ZEND_FEED_PUBSUBHUBBUB_BASEURI', false);
+
+/**
  * Zend\Feed\Reader tests
  *
  * If the ONLINE_ENABLED property is false, only tests that can be executed
@@ -306,6 +313,8 @@ defined('TESTS_ZEND_GDATA_PHOTOS_USERNAME') || define('TESTS_ZEND_GDATA_PHOTOS_U
  * URL of this directory.
  */
 defined('TESTS_ZEND_HTTP_CLIENT_BASEURI') || define('TESTS_ZEND_HTTP_CLIENT_BASEURI', false);
+
+defined('TESTS_ZEND_HTTP_CLIENT_ONLINE') || define('TESTS_ZEND_HTTP_CLIENT_ONLINE', false);
 
 /**
  * Zend\Http\Client\Proxy tests
@@ -784,7 +793,7 @@ defined('TESTS_ZEND_SOAP_AUTODISCOVER_ONLINE_SERVER_BASEURI') || define('TESTS_Z
 /**
  * Zend\TimeSync tests
  */
-defined('TESTS_ZEND_TIMESYNC_ONLINE_ENABLED') || define('TESTS_ZEND_TIMESYNC_ONLINE_ENABLED', true);
+defined('TESTS_ZEND_TIMESYNC_ONLINE_ENABLED') || define('TESTS_ZEND_TIMESYNC_ONLINE_ENABLED', false);
 
 /**
  * Zend\Uri tests
@@ -803,7 +812,15 @@ defined('TESTS_ZEND_URI_CRASH_TEST_ENABLED') || define('TESTS_ZEND_URI_CRASH_TES
  * Set ONLINE_ENABLED if you wish to run validators that require network
  * connectivity.
  */
-defined('TESTS_ZEND_VALIDATE_ONLINE_ENABLED') || define('TESTS_ZEND_VALIDATE_ONLINE_ENABLED', false);
+defined('TESTS_ZEND_VALIDATOR_ONLINE_ENABLED') || define('TESTS_ZEND_VALIDATOR_ONLINE_ENABLED', false);
+
+/**
+ * Zend\Version tests
+ *
+ * Set ONLINE_ENABLED if you wish to fetch the latest version.
+ */
+defined('TESTS_ZEND_VERSION_ONLINE_ENABLED') || define('TESTS_ZEND_VERSION_ONLINE_ENABLED', false);
+
 
 /**
  * PHPUnit Code Coverage / Test Report

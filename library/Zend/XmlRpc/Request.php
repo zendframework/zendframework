@@ -294,12 +294,16 @@ class Request
             return false;
         }
 
+        // @see ZF-12293 - disable external entities for security purposes
+        $loadEntities = libxml_disable_entity_loader(true);
         try {
             $xml = new \SimpleXMLElement($request);
+            libxml_disable_entity_loader($loadEntities);
         } catch (\Exception $e) {
             // Not valid XML
             $this->_fault = new Fault(631);
             $this->_fault->setEncoding($this->getEncoding());
+            libxml_disable_entity_loader($loadEntities);
             return false;
         }
 

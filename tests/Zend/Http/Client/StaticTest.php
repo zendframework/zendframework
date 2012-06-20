@@ -342,6 +342,9 @@ class StaticTest extends \PHPUnit_Framework_TestCase
      */
     public function testInvalidPostContentType()
     {
+        if (!constant('TESTS_ZEND_HTTP_CLIENT_ONLINE')) {
+            $this->markTestSkipped('Zend\Http\Client online tests are not enabled');
+        }
         $this->setExpectedException(
             'Zend\Http\Exception\RuntimeException',
             'Cannot handle content type \'x-foo/something-fake\' automatically');
@@ -359,6 +362,9 @@ class StaticTest extends \PHPUnit_Framework_TestCase
      */
     public function testSocketErrorException()
     {
+        if (!constant('TESTS_ZEND_HTTP_CLIENT_ONLINE')) {
+            $this->markTestSkipped('Zend\Http\Client online tests are not enabled');
+        }
         $this->setExpectedException(
             'Zend\Http\Client\Adapter\Exception\RuntimeException',
             'Unable to Connect to tcp://255.255.255.255:80');
@@ -395,6 +401,9 @@ class StaticTest extends \PHPUnit_Framework_TestCase
      */
     public function testFormDataEncodingWithMultiArrayZF7038()
     {
+        if (!constant('TESTS_ZEND_HTTP_CLIENT_ONLINE')) {
+            $this->markTestSkipped('Zend\Http\Client online tests are not enabled');
+        }
         $this->_client->setAdapter('Zend\Http\Client\Adapter\Test');
         $this->_client->setUri('http://example.com');
         $this->_client->setEncType(HTTPClient::ENC_FORMDATA);
@@ -439,6 +448,9 @@ class StaticTest extends \PHPUnit_Framework_TestCase
      */
     public function testMultibyteRawPostDataZF2098()
     {
+        if (!constant('TESTS_ZEND_HTTP_CLIENT_ONLINE')) {
+            $this->markTestSkipped('Zend\Http\Client online tests are not enabled');
+        }
         $this->_client->setAdapter('Zend\Http\Client\Adapter\Test');
         $this->_client->setUri('http://example.com');
 
@@ -464,6 +476,9 @@ class StaticTest extends \PHPUnit_Framework_TestCase
      */
     public function testOpenTempStreamWithValidFileDoesntThrowsException()
     {
+        if (!constant('TESTS_ZEND_HTTP_CLIENT_ONLINE')) {
+            $this->markTestSkipped('Zend\Http\Client online tests are not enabled');
+        }
         $url = 'http://www.example.com/';
         $config = array (
             'outputstream' => realpath(__DIR__ . '/_files/zend_http_client_stream.file'),
@@ -486,6 +501,9 @@ class StaticTest extends \PHPUnit_Framework_TestCase
      */
     public function testOpenTempStreamWithBogusFileClosesTheConnection()
     {
+        if (!constant('TESTS_ZEND_HTTP_CLIENT_ONLINE')) {
+            $this->markTestSkipped('Zend\Http\Client online tests are not enabled');
+        }
         $this->setExpectedException(
             'Zend\Http\Exception\RuntimeException',
             'Could not open temp file /path/to/bogus/file.ext');
@@ -506,6 +524,9 @@ class StaticTest extends \PHPUnit_Framework_TestCase
      */
     public function testEncodedCookiesInRequestHeaders()
     {
+        if (!constant('TESTS_ZEND_HTTP_CLIENT_ONLINE')) {
+            $this->markTestSkipped('Zend\Http\Client online tests are not enabled');
+        }
         $this->_client->addCookie('foo', 'bar=baz');
         $this->_client->send();
         $cookieValue = 'Cookie: foo='.urlencode('bar=baz');
@@ -520,6 +541,9 @@ class StaticTest extends \PHPUnit_Framework_TestCase
      */
     public function testRawCookiesInRequestHeaders()
     {
+        if (!constant('TESTS_ZEND_HTTP_CLIENT_ONLINE')) {
+            $this->markTestSkipped('Zend\Http\Client online tests are not enabled');
+        }
         $this->_client->setOptions(array('encodecookies' => false));
         $this->_client->addCookie('foo', 'bar=baz');
         $this->_client->send();

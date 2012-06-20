@@ -13,7 +13,7 @@
 
         <para>
             Internally, it consumes both <link linkend="zend.console.getopt">Zend\Console\Getopt</link> (for parsing command-line
-            options) and <link linkend="zend.file.class-file-locater">Zend\File\ClassFileLocater</link> for
+            options) and <link linkend="zend.file.class-file-locator">Zend\File\ClassFileLocator</link> for
             recursively finding all PHP class files in a given tree.
         </para>
     </section>

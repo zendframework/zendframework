@@ -33,7 +33,7 @@ class HttpResponse
      *
      * @var string
      */
-    protected $_body = '';
+    protected $content = '';
 
     /**
      * Array of headers. Each header is an array with keys 'name' and 'value'
@@ -47,17 +47,17 @@ class HttpResponse
      *
      * @var int
      */
-    protected $_httpResponseCode = 200;
+    protected $statusCode = 200;
 
     /**
      * Send the response, including all headers
      *
      * @return void
      */
-    public function sendResponse()
+    public function send()
     {
         $this->sendHeaders();
-        echo $this->getBody();
+        echo $this->getContent();
     }
 
     /**
@@ -70,22 +70,22 @@ class HttpResponse
      */
     public function sendHeaders()
     {
-        if (count($this->_headers) || (200 != $this->_httpResponseCode)) {
+        if (count($this->_headers) || (200 != $this->statusCode)) {
             $this->canSendHeaders(true);
-        } elseif (200 == $this->_httpResponseCode) {
+        } elseif (200 == $this->statusCode) {
             return;
         }
         $httpCodeSent = false;
         foreach ($this->_headers as $header) {
-            if (!$httpCodeSent && $this->_httpResponseCode) {
-                header($header['name'] . ': ' . $header['value'], $header['replace'], $this->_httpResponseCode);
+            if (!$httpCodeSent && $this->statusCode) {
+                header($header['name'] . ': ' . $header['value'], $header['replace'], $this->statusCode);
                 $httpCodeSent = true;
             } else {
                 header($header['name'] . ': ' . $header['value'], $header['replace']);
             }
         }
         if (!$httpCodeSent) {
-            header('HTTP/1.1 ' . $this->_httpResponseCode);
+            header('HTTP/1.1 ' . $this->statusCode);
             $httpCodeSent = true;
         }
     }
@@ -170,13 +170,13 @@ class HttpResponse
      * @return HttpResponse
      * @throws Exception\InvalidArgumentException
      */
-    public function setHttpResponseCode($code)
+    public function setStatusCode($code)
     {
         if (!is_int($code) || (100 > $code) || (599 < $code)) {
             throw new Exception\InvalidArgumentException('Invalid HTTP response'
             . ' code:' . $code);
         }
-        $this->_httpResponseCode = $code;
+        $this->statusCode = $code;
         return $this;
     }
 
@@ -185,9 +185,9 @@ class HttpResponse
      *
      * @return int
      */
-    public function getHttpResponseCode()
+    public function getStatusCode()
     {
-        return $this->_httpResponseCode;
+        return $this->statusCode;
     }
 
     /**
@@ -196,9 +196,9 @@ class HttpResponse
      * @param  string $content
      * @return \Zend\Feed\PubSubHubbub\HttpResponse
      */
-    public function setBody($content)
+    public function setContent($content)
     {
-        $this->_body = (string) $content;
+        $this->content = (string) $content;
         $this->setHeader('content-length', strlen($content));
         return $this;
     }
@@ -208,9 +208,9 @@ class HttpResponse
      *
      * @return string
      */
-    public function getBody()
+    public function getContent()
     {
-        return $this->_body;
+        return $this->content;
     }
 
     /**

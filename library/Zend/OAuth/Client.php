@@ -140,7 +140,7 @@ class Client extends HttpClient
     protected function _prepareBody()
     {
         if($this->_streamingRequest) {
-            $this->setHeaders(array('Content-Length' => 
+            $this->setHeaders(array('Content-Length' =>
                 $this->raw_post_data->getTotalSize()));
             return $this->raw_post_data;
         }
@@ -214,7 +214,7 @@ class Client extends HttpClient
         $this->prepareOAuth();
         return parent::send($request);
     }
-    
+
     /**
      * Performs OAuth preparation on the request before sending.
      *
@@ -251,7 +251,6 @@ class Client extends HttpClient
                 $this->_getSignableParametersAsQueryString()
             );
             $this->setRawData($raw);
-            $this->paramsPost = array();
         } elseif ($requestScheme == OAuth::REQUEST_SCHEME_QUERYSTRING) {
             $params = array();
             $query = $this->getUri()->getQuery();
@@ -263,17 +262,15 @@ class Client extends HttpClient
                         (array_key_exists(1, $kvTuple) ? $kvTuple[1] : NULL);
                 }
             }
-            if (!empty($this->paramsPost)) {
-                $params = array_merge($params, $this->paramsPost);
-                $query  = $this->getToken()->toQueryString(
-                    $this->getRequest()->getUri(), $this->_config, $params
-                );
+
+            if ($this->request->post()->count() > 0) {
+                $params = array_merge($params, $this->request->post()->toArray());
             }
+
             $query = $this->getToken()->toQueryString(
                 $this->getRequest()->getUri(), $this->_config, $params
             );
             $this->getUri()->setQuery($query);
-            $this->paramsGet = array();
         } else {
             throw new Exception\RuntimeException('Invalid request scheme: ' . $requestScheme);
         }
@@ -289,19 +286,14 @@ class Client extends HttpClient
     protected function _getSignableParametersAsQueryString()
     {
         $params = array();
-            if (!empty($this->paramsGet)) {
-                $params = array_merge($params, $this->paramsGet);
-                $query  = $this->getToken()->toQueryString(
-                    $this->getRequest()->getUri(), $this->_config, $params
-                );
-            }
-            if (!empty($this->paramsPost)) {
-                $params = array_merge($params, $this->paramsPost);
-                $query  = $this->getToken()->toQueryString(
-                    $this->getRequest()->getUri(), $this->_config, $params
-                );
-            }
-            return $params;
+        if ($this->request->query()->count() > 0) {
+            $params = array_merge($params, $this->request->query()->toArray());
+        }
+        if ($this->request->post()->count() > 0) {
+            $params = array_merge($params, $this->request->post()->toArray());
+        }
+
+        return $params;
     }
 
     /**

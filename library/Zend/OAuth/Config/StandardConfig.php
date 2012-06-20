@@ -178,6 +178,9 @@ class StandardConfig implements ConfigInterface
                 case 'consumerSecret':
                     $this->setConsumerSecret($value);
                     break;
+                case 'token':
+                    $this->setToken($value);
+                    break;
                 case 'signatureMethod':
                     $this->setSignatureMethod($value);
                     break;
@@ -204,6 +207,9 @@ class StandardConfig implements ConfigInterface
                     break;
                 case 'requestMethod':
                     $this->setRequestMethod($value);
+                    break;
+                case 'requestScheme':
+                    $this->setRequestScheme($value);
                     break;
                 case 'rsaPrivateKey':
                     $this->setRsaPrivateKey($value);

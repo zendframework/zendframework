@@ -179,6 +179,13 @@ defined('TESTS_ZEND_DB_ADAPTER_SQLSRV_PASSWORD') || define('TESTS_ZEND_DB_ADAPTE
 defined('TESTS_ZEND_DB_ADAPTER_SQLSRV_DATABASE') || define('TESTS_ZEND_DB_ADAPTER_SQLSRV_DATABASE', 'test');
 
 /**
+ * Zend\Feed\PubSubHubbub tests
+ *
+ * If the BASEURI property requires a valid Uri to run online tests.
+ */
+defined('TESTS_ZEND_FEED_PUBSUBHUBBUB_BASEURI') || define('TESTS_ZEND_FEED_PUBSUBHUBBUB_BASEURI', false);
+
+/**
  * Zend\Feed\Reader tests
  *
  * If the ONLINE_ENABLED property is false, only tests that can be executed

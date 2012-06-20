@@ -153,7 +153,7 @@ ldap.server2.baseDn = "CN=Users,DC=w,DC=net"
         <para>
             The <varname>$options</varname> parameter is required and must be an array containing
             one or more sets of options. Note that it is <emphasis>an array of arrays</emphasis> of
-            <link linkend="zend.ldap"><classname>Zend\Ldap\Ldap</classname></link> options. Even if you
+            <link linkend="zend.ldap.introduction"><classname>Zend\Ldap\Ldap</classname></link> options. Even if you
             will be using only one <acronym>LDAP</acronym> server, the options must still be within
             another array.
         </para>

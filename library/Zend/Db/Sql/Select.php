@@ -530,7 +530,7 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
             $joinSpecArgArray[$j] = array();
             $joinSpecArgArray[$j][] = strtoupper($join['type']); // type
             $joinSpecArgArray[$j][] = $nameArg; // table
-            $joinSpecArgArray[$j][] = $platform->quoteIdentifierInFragment($join['on'], array('=', 'AND', 'OR', '(', ')')); // on
+            $joinSpecArgArray[$j][] = $platform->quoteIdentifierInFragment($join['on'], array('=', 'AND', 'OR', '(', ')', 'BETWEEN')); // on
         }
 
         return array($joinSpecArgArray);

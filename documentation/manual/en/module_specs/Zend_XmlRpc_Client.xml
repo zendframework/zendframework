@@ -134,7 +134,7 @@ $result = $client->call('test.sayHello', array($arg1, $arg2));
                         </row>
 
                         <row>
-                            <entry>Zend\Crypt\Math\BigInteger</entry>
+                            <entry>Zend\Math\BigInteger\BigInteger</entry>
                             <entry>i8</entry>
                         </row>
 

@@ -327,8 +327,9 @@ class Response extends Message implements ResponseInterface
     /**
      * Set HTTP status code and (optionally) message
      *
-     * @param numeric $code
-     * @return Response
+     * @param integer $code
+     * @throws Exception\InvalidArgumentException
+     * @return \Zend\Http\Response
      */
     public function setStatusCode($code)
     {

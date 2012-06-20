@@ -29,7 +29,7 @@ use Zend\Feed\PubSubHubbub,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Callback extends PubSubHubbub\AbstractCallbackInterface
+class Callback extends PubSubHubbub\AbstractCallback
 {
     /**
      * Contains the content of any feeds sent as updates to the Callback URL
@@ -99,14 +99,13 @@ class Callback extends PubSubHubbub\AbstractCallbackInterface
                 || $this->_getHeader('Content-Type') == 'application/rdf+xml')
         ) {
             $this->setFeedUpdate($this->_getRawBody());
-            $this->getHttpResponse()
-                 ->setHeader('X-Hub-On-Behalf-Of', $this->getSubscriberCount());
+            $this->getHttpResponse()->setHeader('X-Hub-On-Behalf-Of', $this->getSubscriberCount());
         /**
          * Handle any (un)subscribe confirmation requests
          */
         } elseif ($this->isValidHubVerification($httpGetData)) {
             $data = $this->_currentSubscriptionData;
-            $this->getHttpResponse()->setBody($httpGetData['hub_challenge']);
+            $this->getHttpResponse()->setContent($httpGetData['hub_challenge']);
             $data['subscription_state'] = PubSubHubbub\PubSubHubbub::SUBSCRIPTION_VERIFIED;
             if (isset($httpGetData['hub_lease_seconds'])) {
                 $data['lease_seconds'] = $httpGetData['hub_lease_seconds'];
@@ -116,7 +115,7 @@ class Callback extends PubSubHubbub\AbstractCallbackInterface
          * Hey, C'mon! We tried everything else!
          */
         } else {
-            $this->getHttpResponse()->setHttpResponseCode(404);
+            $this->getHttpResponse()->setStatusCode(404);
         }
         if ($sendResponseNow) {
             $this->sendResponse();

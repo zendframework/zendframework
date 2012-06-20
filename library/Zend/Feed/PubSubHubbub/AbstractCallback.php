@@ -23,6 +23,7 @@ namespace Zend\Feed\PubSubHubbub;
 
 use Traversable;
 use Zend\Stdlib\ArrayUtils;
+use Zend\Http\PhpEnvironment\Response as PhpResponse;
 
 /**
  * @category   Zend
@@ -31,14 +32,14 @@ use Zend\Stdlib\ArrayUtils;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class AbstractCallbackInterface implements CallbackInterface
+abstract class AbstractCallback implements CallbackInterface
 {
     /**
-     * An instance of Zend_Feed_Pubsubhubbub_Model_SubscriptionPersistence used 
-     * to background save any verification tokens associated with a subscription
+     * An instance of Zend\Feed\Pubsubhubbub\Model\SubscriptionPersistenceInterface
+     * used to background save any verification tokens associated with a subscription
      * or other.
      *
-     * @var \Zend\Feed\PubSubHubbub\Model\SubscriptionPersistenceInterface
+     * @var Model\SubscriptionPersistenceInterface
      */
     protected $_storage = null;
 
@@ -47,7 +48,7 @@ abstract class AbstractCallbackInterface implements CallbackInterface
      * Zend\Feed\Pubsubhubbub\HttpResponse which shares an unenforced interface with
      * (i.e. not inherited from) Zend\Controller\Response\Http.
      *
-     * @var httpResponse|\Zend\Controller\Response\Http
+     * @var HttpResponse|PhpResponse
      */
     protected $_httpResponse = null;
 
@@ -76,7 +77,7 @@ abstract class AbstractCallbackInterface implements CallbackInterface
      * Process any injected configuration options
      *
      * @param  array|Traversable $options Options array or Traversable object
-     * @return AbstractCallbackInterface
+     * @return AbstractCallback
      * @throws Exception\InvalidArgumentException
      */
     public function setOptions($options)
@@ -86,7 +87,7 @@ abstract class AbstractCallbackInterface implements CallbackInterface
         }
 
         if (!is_array($options)) {
-            throw new Exception('Array or Traversable object'
+            throw new Exception\InvalidArgumentException('Array or Traversable object'
             . 'expected, got ' . gettype($options));
         }
 
@@ -102,7 +103,7 @@ abstract class AbstractCallbackInterface implements CallbackInterface
 
     /**
      * Send the response, including all headers.
-     * If you wish to handle this via Zend_Controller, use the getter methods
+     * If you wish to handle this via Zend_Http, use the getter methods
      * to retrieve any data needed to be set on your HTTP Response object, or
      * simply give this object the HTTP Response instance to work with for you!
      *
@@ -110,7 +111,7 @@ abstract class AbstractCallbackInterface implements CallbackInterface
      */
     public function sendResponse()
     {
-        $this->getHttpResponse()->sendResponse();
+        $this->getHttpResponse()->send();
     }
 
     /**
@@ -119,7 +120,7 @@ abstract class AbstractCallbackInterface implements CallbackInterface
      * or other.
      *
      * @param  Model\SubscriptionPersistenceInterface $storage
-     * @return AbstractCallbackInterface
+     * @return AbstractCallback
      */
     public function setStorage(Model\SubscriptionPersistenceInterface $storage)
     {
@@ -149,19 +150,16 @@ abstract class AbstractCallbackInterface implements CallbackInterface
      * Zend\Feed\Pubsubhubbub\HttpResponse which shares an unenforced interface with
      * (i.e. not inherited from) Zend\Controller\Response\Http.
      *
-     * @param  HttpResponse|\Zend\Controller\Response\Http $httpResponse
-     * @return AbstractCallbackInterface
+     * @param  HttpResponse|PhpResponse $httpResponse
+     * @return AbstractCallback
      * @throws Exception\InvalidArgumentException
      */
     public function setHttpResponse($httpResponse)
     {
-        if (!is_object($httpResponse)
-            || (!$httpResponse instanceof HttpResponse
-                && !$httpResponse instanceof \Zend\Controller\Response\Http)
-        ) {
+        if (!$httpResponse instanceof HttpResponse && !$httpResponse instanceof PhpResponse) {
             throw new Exception\InvalidArgumentException('HTTP Response object must'
                 . ' implement one of Zend\Feed\Pubsubhubbub\HttpResponse or'
-                . ' Zend\Controller\Response\Http');
+                . ' Zend\Http\PhpEnvironment\Response');
         }
         $this->_httpResponse = $httpResponse;
         return $this;
@@ -172,7 +170,7 @@ abstract class AbstractCallbackInterface implements CallbackInterface
      * Zend\Feed\Pubsubhubbub\HttpResponse which shares an unenforced interface with
      * (i.e. not inherited from) Zend\Controller\Response\Http.
      *
-     * @return HttpResponse|\Zend\Controller\Response\Http
+     * @return HttpResponse|PhpResponse
      */
     public function getHttpResponse()
     {
@@ -188,7 +186,7 @@ abstract class AbstractCallbackInterface implements CallbackInterface
      * Defaults to 1 if left unchanged.
      *
      * @param  string|int $count
-     * @return AbstractCallbackInterface
+     * @return AbstractCallback
      * @throws Exception\InvalidArgumentException
      */
     public function setSubscriberCount($count)
@@ -215,6 +213,7 @@ abstract class AbstractCallbackInterface implements CallbackInterface
 
     /**
      * Attempt to detect the callback URL (specifically the path forward)
+     * @return string
      */
     protected function _detectCallbackUrl()
     {
@@ -269,6 +268,7 @@ abstract class AbstractCallbackInterface implements CallbackInterface
      * Retrieve a Header value from either $_SERVER or Apache
      *
      * @param string $header
+     * @return bool|string
      */
     protected function _getHeader($header)
     {

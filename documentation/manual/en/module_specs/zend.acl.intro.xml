@@ -100,21 +100,19 @@
             ambiguity condition and how <classname>Zend\Acl\Acl</classname> solves it.
         </para>
 
-        <example xml:id="zend.acl.introduction.roles.example.multiple_inheritance"><title>Multiple Inheritance among Roles</title>
-            
+        <para>
+            The following code defines three base roles - "guest",
+            "member", and "admin" - from which other roles may
+            inherit. Then, a role identified by "someUser" is established and
+            inherits from the three other roles. The order in which these roles appear in the
+            <varname>$parents</varname> array is important. When necessary,
+            <classname>Zend\Acl\Acl</classname> searches for access rules defined not only for the
+            queried role (herein, "someUser"), but also upon the roles from which
+            the queried role inherits (herein, "guest", "member", and
+            "admin"):
+        </para>
 
-            <para>
-                The following code defines three base roles - "guest",
-                "member", and "admin" - from which other roles may
-                inherit. Then, a role identified by "someUser" is established and
-                inherits from the three other roles. The order in which these roles appear in the
-                <varname>$parents</varname> array is important. When necessary,
-                <classname>Zend\Acl\Acl</classname> searches for access rules defined not only for the
-                queried role (herein, "someUser"), but also upon the roles from which
-                the queried role inherits (herein, "guest", "member", and
-                "admin"):
-            </para>
-            
+        <example xml:id="zend.acl.introduction.roles.example.multiple_inheritance"><title>Multiple Inheritance among Roles</title>
             <programlisting language="php"><![CDATA[
 use Zend\Acl\Acl,
     Zend\Acl\Role\GenericRole as Role,
@@ -136,31 +134,31 @@ $acl->allow('member', 'someResource');
 
 echo $acl->isAllowed('someUser', 'someResource') ? 'allowed' : 'denied';
 ]]></programlisting>
-
-            <para>
-                Since there is no rule specifically defined for the "someUser" role and
-                "someResource", <classname>Zend\Acl\Acl</classname> must search for rules that may be
-                defined for roles that "someUser" inherits. First, the "admin" role is visited, and
-                there is no access rule defined for it. Next, the "member" role is visited, and
-                <classname>Zend\Acl\Acl</classname> finds that there is a rule specifying that "member"
-                is allowed access to "someResource".
-            </para>
-
-            <para>
-                If <classname>Zend\Acl\Acl</classname> were to continue examining the rules defined for
-                other parent roles, however, it would find that "guest" is denied access to
-                "someResource". This fact introduces an ambiguity because now
-                "someUser" is both denied and allowed access to "someResource", by reason of having
-                inherited conflicting rules from different parent roles.
-            </para>
-
-            <para>
-                <classname>Zend\Acl\Acl</classname> resolves this ambiguity by completing a query when
-                it finds the first rule that is directly applicable to the query. In this case,
-                since the "member" role is examined before the "guest" role, the example code would
-                print "allowed".
-            </para>
         </example>
+
+        <para>
+            Since there is no rule specifically defined for the "someUser" role and
+            "someResource", <classname>Zend\Acl\Acl</classname> must search for rules that may be
+            defined for roles that "someUser" inherits. First, the "admin" role is visited, and
+            there is no access rule defined for it. Next, the "member" role is visited, and
+            <classname>Zend\Acl\Acl</classname> finds that there is a rule specifying that "member"
+            is allowed access to "someResource".
+        </para>
+
+        <para>
+            If <classname>Zend\Acl\Acl</classname> were to continue examining the rules defined for
+            other parent roles, however, it would find that "guest" is denied access to
+            "someResource". This fact introduces an ambiguity because now
+            "someUser" is both denied and allowed access to "someResource", by reason of having
+            inherited conflicting rules from different parent roles.
+        </para>
+
+        <para>
+            <classname>Zend\Acl\Acl</classname> resolves this ambiguity by completing a query when
+            it finds the first rule that is directly applicable to the query. In this case,
+            since the "member" role is examined before the "guest" role, the example code would
+            print "allowed".
+        </para>
 
         <note>
             <para>
@@ -287,6 +285,7 @@ $acl->addRole(new Role('administrator'));
 
     <section xml:id="zend.acl.introduction.defining"><title>Defining Access Controls</title>
         
+
         <para>
             Now that the <acronym>ACL</acronym> contains the relevant roles, rules can be
             established that define how resources may be accessed by roles. You may have noticed

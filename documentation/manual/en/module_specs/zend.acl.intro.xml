@@ -100,19 +100,21 @@
             ambiguity condition and how <classname>Zend\Acl\Acl</classname> solves it.
         </para>
 
-        <para>
-            The following code defines three base roles - "guest",
-            "member", and "admin" - from which other roles may
-            inherit. Then, a role identified by "someUser" is established and
-            inherits from the three other roles. The order in which these roles appear in the
-            <varname>$parents</varname> array is important. When necessary,
-            <classname>Zend\Acl\Acl</classname> searches for access rules defined not only for the
-            queried role (herein, "someUser"), but also upon the roles from which
-            the queried role inherits (herein, "guest", "member", and
-            "admin"):
-        </para>
+        <example xml:id="zend.acl.introduction.roles.example.multiple_inheritance">
+            <title>Multiple Inheritance among Roles</title>
 
-        <example xml:id="zend.acl.introduction.roles.example.multiple_inheritance"><title>Multiple Inheritance among Roles</title>
+            <para>
+                The following code defines three base roles - "guest",
+                "member", and "admin" - from which other roles may
+                inherit. Then, a role identified by "someUser" is established and
+                inherits from the three other roles. The order in which these roles appear in the
+                <varname>$parents</varname> array is important. When necessary,
+                <classname>Zend\Acl\Acl</classname> searches for access rules defined not only for the
+                queried role (herein, "someUser"), but also upon the roles from which
+                the queried role inherits (herein, "guest", "member", and
+                "admin"):
+            </para>
+
             <programlisting language="php"><![CDATA[
 use Zend\Acl\Acl,
     Zend\Acl\Role\GenericRole as Role,

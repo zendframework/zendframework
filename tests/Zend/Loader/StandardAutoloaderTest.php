@@ -22,8 +22,9 @@
 
 namespace ZendTest\Loader;
 
-use Zend\Loader\StandardAutoloader,
-    Zend\Loader\Exception\InvalidArgumentException;
+use Zend\Loader\StandardAutoloader;
+use Zend\Loader\Exception\InvalidArgumentException;
+use ReflectionClass;
 
 /**
  * @category   Zend
@@ -190,4 +191,21 @@ class StandardAutoloaderTest extends \PHPUnit_Framework_TestCase
         $loader->autoload('ZendTest\UnusualNamespace\Name_Space\Namespaced_Class');
         $this->assertTrue(class_exists('ZendTest\UnusualNamespace\Name_Space\Namespaced_Class', false));
     }
+
+    public function testZendFrameworkNamespaceIsNotLoadedByDefault()
+    {
+        $loader = new StandardAutoloader();
+        $expected = array();
+        $this->assertAttributeEquals($expected, 'namespaces', $loader);
+    }
+
+    public function testCanTellAutoloaderToRegisterZendNamespaceAtInstantiation()
+    {
+        $loader = new StandardAutoloader(array('autoregister_zf' => true));
+        $r      = new ReflectionClass($loader);
+        $file   = $r->getFileName();
+        $expected = array('Zend\\' => dirname(dirname($file)) . DIRECTORY_SEPARATOR);
+        $this->assertAttributeEquals($expected, 'namespaces', $loader);
+    }
+
 }

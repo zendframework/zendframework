@@ -109,4 +109,21 @@ class StaticFilterTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('Zend\ServiceManager\Exception\ExceptionInterface');
         StaticFilter::execute('1234', 'UnknownFilter');
     }
+
+    public function testUsesDifferentConfigurationOnEachRequest()
+    {
+        $first = StaticFilter::execute('foo', 'callback', array(
+            'callback' => function ($value) {
+                return 'FOO';
+            },
+        ));
+        $second = StaticFilter::execute('foo', 'callback', array(
+            'callback' => function ($value) {
+                return 'BAR';
+            },
+        ));
+        $this->assertNotSame($first, $second);
+        $this->assertEquals('FOO', $first);
+        $this->assertEquals('BAR', $second);
+    }
 }

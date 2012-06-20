@@ -81,10 +81,7 @@ class StaticFilter
         $filteredValue = $filter->filter($value);
 
         // Unregistering filter to allow different arguments on subsequent calls
-        // Commenting out for now; SM solution provides no facilities for 
-        // unregistering an instance, nor for marking as unshared after 
-        // registration yet.
-        // $broker->unregister($classBaseName);
+        $plugins->setService($classBaseName, null);
 
         return $filteredValue;
     }

@@ -145,7 +145,7 @@ $loader->register();
                 <listitem>
                     <para>
                         The argument passed may be either an array or a
-                        <interface>Traversable</interface> object (such as a
+                        <interfacename>Traversable</interfacename> object (such as a
                         <classname>Zend\Config</classname> object.
                     </para>
                 </listitem>
@@ -341,6 +341,7 @@ $loader->register();
             <refsynopsisdiv>
                 <methodsynopsis>
                     <methodname>isFallbackAutoloader</methodname>
+                    <void/>
                 </methodsynopsis>
             </refsynopsisdiv>
 
@@ -491,6 +492,7 @@ $loader->register();
             <refsynopsisdiv>
                 <methodsynopsis>
                     <methodname>register</methodname>
+                    <void/>
                 </methodsynopsis>
             </refsynopsisdiv>
 

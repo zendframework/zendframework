@@ -1,30 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.loader.plugin-class-locater"><title>The PluginClassLocater interface</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.loader.plugin-class-locator"><title>The PluginClassLocator interface</title>
     
 
-    <section xml:id="zend.loader.plugin-class-locater.intro"><title>Overview</title>
+    <section xml:id="zend.loader.plugin-class-locator.intro"><title>Overview</title>
         
 
         <para>
-            The <interfacename>PluginClassLocater</interfacename> interface describes a component
+            The <interfacename>PluginClassLocator</interfacename> interface describes a component
             capable of maintaining an internal map of plugin names to actual class names. Classes
             implementing this interface can register and unregister plugin/class associations, and
             return the entire map.
         </para>
     </section>
 
-    <section xml:id="zend.loader.plugin-class-locater.quick-start"><title>Quick Start</title>
+    <section xml:id="zend.loader.plugin-class-locator.quick-start"><title>Quick Start</title>
         
 
         <para>
-            Classes implementing the <interfacename>PluginClassLocater</interfacename> need to
+            Classes implementing the <interfacename>PluginClassLocator</interfacename> need to
             implement only three methods, as illustrated below.
         </para>
 
         <programlisting language="php"><![CDATA[
 namespace Zend\Loader;
 
-interface PluginClassLocater
+interface PluginClassLocator
 {
     public function registerPlugin($shortName, $className);
     public function unregisterPlugin($shortName);
@@ -33,7 +33,7 @@ interface PluginClassLocater
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.loader.plugin-class-locater.options"><title>Configuration Options</title>
+    <section xml:id="zend.loader.plugin-class-locator.options"><title>Configuration Options</title>
         
 
         <para>
@@ -41,10 +41,10 @@ interface PluginClassLocater
         </para>
     </section>
 
-    <section xml:id="zend.loader.plugin-class-locater.methods"><title>Available Methods</title>
+    <section xml:id="zend.loader.plugin-class-locator.methods"><title>Available Methods</title>
         
 
-        <refentry xml:id="zend.loader.plugin-class-locater.methods.register-plugin">
+        <refentry xml:id="zend.loader.plugin-class-locator.methods.register-plugin">
             <refnamediv>
                 <refname>registerPlugin</refname>
                 <refpurpose>Register a mapping of plugin name to class name</refpurpose>
@@ -70,7 +70,7 @@ interface PluginClassLocater
             </refsection>
         </refentry>
 
-        <refentry xml:id="zend.loader.plugin-class-locater.methods.unregister-plugin">
+        <refentry xml:id="zend.loader.plugin-class-locator.methods.unregister-plugin">
             <refnamediv>
                 <refname>unregisterPlugin</refname>
                 <refpurpose>Remove a plugin/class name association</refpurpose>
@@ -95,7 +95,7 @@ interface PluginClassLocater
             </refsection>
         </refentry>
 
-        <refentry xml:id="zend.loader.plugin-class-locater.methods.get-registered-plugins">
+        <refentry xml:id="zend.loader.plugin-class-locator.methods.get-registered-plugins">
             <refnamediv>
                 <refname>getRegisteredPlugins</refname>
                 <refpurpose>Retrieve the map of plugin name/class name associations</refpurpose>
@@ -104,6 +104,7 @@ interface PluginClassLocater
             <refsynopsisdiv>
                 <methodsynopsis>
                     <methodname>getRegisteredPlugins</methodname>
+                    <void/>
                 </methodsynopsis>
             </refsynopsisdiv>
 
@@ -118,12 +119,12 @@ interface PluginClassLocater
 
     </section>
 
-    <section xml:id="zend.loader.plugin-class-locater.examples"><title>Examples</title>
+    <section xml:id="zend.loader.plugin-class-locator.examples"><title>Examples</title>
         
 
 
         <para>
-            Please see the <link linkend="zend.loader.plugin-class-locater.quick-start">Quick
+            Please see the <link linkend="zend.loader.plugin-class-locator.quick-start">Quick
                 Start</link> for the interface specification.
         </para>
     </section>

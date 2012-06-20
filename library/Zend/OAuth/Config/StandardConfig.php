@@ -628,7 +628,7 @@ class StandardConfig implements ConfigInterface
      * @return OAuth\Token\TokenInterface
      */
     public function getToken()
-    {var_dump($this->_token);exit;
+    {
         return $this->_token;
     }
 

@@ -93,10 +93,10 @@ abstract class Word extends AbstractAdapter
      * @var integer
      */
     protected $timeout = 300;
-    
+
     /**
      * Should generate() keep session or create a new one?
-     * 
+     *
      * @var boolean
      */
     protected $keepSession = false;
@@ -219,11 +219,11 @@ abstract class Word extends AbstractAdapter
 
     /**
      * Sets if session should be preserved on generate()
-     * 
+     *
      * @param $keepSession Should session be kept on generate()?
      * @return Word
      */
-    public function setKeepSession($keepSession) 
+    public function setKeepSession($keepSession)
     {
         $this->keepSession = $keepSession;
         return $this;
@@ -231,7 +231,7 @@ abstract class Word extends AbstractAdapter
 
     /**
      * Numbers should be included in the pattern?
-     * 
+     *
      * @return bool
      */
     public function getUseNumbers()
@@ -241,7 +241,7 @@ abstract class Word extends AbstractAdapter
 
     /**
      * Set if numbers should be included in the pattern
-     * 
+     *
      * @param  bool $useNumbers numbers should be included in the pattern?
      * @return Word
      */
@@ -347,7 +347,7 @@ abstract class Word extends AbstractAdapter
     public function generate()
     {
         if (!$this->keepSession) {
-            $this->session = null;   
+            $this->session = null;
         }
         $id = $this->generateRandomId();
         $this->setId($id);
@@ -358,7 +358,7 @@ abstract class Word extends AbstractAdapter
 
     /**
      * Generate a random identifier
-     * 
+     *
      * @return void
      */
     protected function generateRandomId()
@@ -417,6 +417,6 @@ abstract class Word extends AbstractAdapter
      */
     public function getHelperName()
     {
-        return "captcha\word";
+        return 'captcha/word';
     }
 }

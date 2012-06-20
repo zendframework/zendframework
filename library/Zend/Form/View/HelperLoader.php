@@ -69,6 +69,8 @@ class HelperLoader extends PluginClassLoader
         'form_captcha_recaptcha' => 'Zend\Form\View\Helper\Captcha\ReCaptcha',
         'formcheckbox'           => 'Zend\Form\View\Helper\FormCheckbox',
         'form_checkbox'          => 'Zend\Form\View\Helper\FormCheckbox',
+        'formcolor'              => 'Zend\Form\View\Helper\FormColor',
+        'form_color'             => 'Zend\Form\View\Helper\FormColor',
         'formelement'            => 'Zend\Form\View\Helper\FormElement',
         'form_element'           => 'Zend\Form\View\Helper\FormElement',
         'formelementerrors'      => 'Zend\Form\View\Helper\FormElementErrors',

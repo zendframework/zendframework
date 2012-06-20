@@ -89,7 +89,7 @@ if ($argc == 1) {
                 $components[] = 'Zend_Search_Lucene';
                 break;
             default:
-                if (strpos($arg, 'Zend')) {
+                if (strpos($arg, 'Zend') !== false) {
                     $components[] = $arg;
                 } else {
                     $components[] = 'Zend_' . $arg;
@@ -101,6 +101,7 @@ if ($argc == 1) {
 $result = 0;
 if ($run_as == 'groups') {
     $groups = join(',', $components);
+    echo "$groups:\n";
     system("$phpunit_bin $phpunit_opts $phpunit_coverage --group " . $groups, $result);
     echo "\n\n";
 } else {

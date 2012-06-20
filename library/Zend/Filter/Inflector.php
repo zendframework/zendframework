@@ -35,9 +35,9 @@ use Zend\Loader\Broker;
 class Inflector extends AbstractFilter
 {
     /**
-     * @var \Zend\Loader\Broker
+     * @var FilterPluginManager
      */
-    protected $_pluginBroker = null;
+    protected $_pluginManager = null;
 
     /**
      * @var string
@@ -98,26 +98,26 @@ class Inflector extends AbstractFilter
     /**
      * Retreive plugin broker
      *
-     * @return \Zend\Loader\Broker
+     * @return FilterPluginManager
      */
-    public function getPluginBroker()
+    public function getPluginManager()
     {
-        if (!$this->_pluginBroker instanceof Broker) {
-            $this->setPluginBroker(new FilterBroker());
+        if (!$this->_pluginManager instanceof FilterPluginManager) {
+            $this->setPluginManager(new FilterPluginManager());
         }
 
-        return $this->_pluginBroker;
+        return $this->_pluginManager;
     }
 
     /**
      * Set plugin broker
      *
-     * @param \Zend\Loader\Broker $broker
+     * @param  FilterPluginManager $manager
      * @return Inflector
      */
-    public function setPluginBroker(Broker $broker)
+    public function setPluginManager(FilterPluginManager $manager)
     {
-        $this->_pluginBroker = $broker;
+        $this->_pluginManager = $manager;
         return $this;
     }
 
@@ -483,6 +483,6 @@ class Inflector extends AbstractFilter
         }
 
         $rule = (string) $rule;
-        return $this->getPluginBroker()->load($rule);
+        return $this->getPluginManager()->get($rule);
     }
 }

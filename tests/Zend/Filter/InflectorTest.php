@@ -22,9 +22,7 @@
 namespace ZendTest\Filter;
 
 use Zend\Filter\Inflector as InflectorFilter,
-    Zend\Filter\FilterBroker,
-    Zend\Loader\Broker,
-    Zend\Loader\PluginBroker;
+    Zend\Filter\FilterPluginManager;
 
 /**
  * Test class for Zend_Filter_Inflector.
@@ -47,23 +45,23 @@ class InflectorTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->inflector = new InflectorFilter();
-        $this->broker    = $this->inflector->getPluginBroker();
+        $this->broker    = $this->inflector->getPluginManager();
     }
 
-    public function testGetPluginBrokerReturnsFilterBrokerByDefault()
+    public function testGetPluginManagerReturnsFilterManagerByDefault()
     {
-        $broker = $this->inflector->getPluginBroker();
-        $this->assertTrue($broker instanceof FilterBroker);
+        $broker = $this->inflector->getPluginManager();
+        $this->assertTrue($broker instanceof FilterPluginManager);
     }
 
-    public function testSetPluginBrokerAllowsSettingAlternatePluginBroker()
+    public function testSetPluginManagerAllowsSettingAlternatePluginManager()
     {
-        $defaultBroker = $this->inflector->getPluginBroker();
-        $broker = new PluginBroker();
-        $this->inflector->setPluginBroker($broker);
-        $receivedBroker = $this->inflector->getPluginBroker();
-        $this->assertNotSame($defaultBroker, $receivedBroker);
-        $this->assertSame($broker, $receivedBroker);
+        $defaultManager = $this->inflector->getPluginManager();
+        $manager = new FilterPluginManager();
+        $this->inflector->setPluginManager($manager);
+        $receivedManager = $this->inflector->getPluginManager();
+        $this->assertNotSame($defaultManager, $receivedManager);
+        $this->assertSame($manager, $receivedManager);
     }
 
     public function testTargetAccessorsWork()
@@ -335,10 +333,10 @@ class InflectorTest extends \PHPUnit_Framework_TestCase
     protected function _testOptions($inflector)
     {
         $options = $this->getOptions();
-        $broker  = $inflector->getPluginBroker();
+        $broker  = $inflector->getPluginManager();
         $this->assertEquals($options['target'], $inflector->getTarget());
 
-        $this->assertInstanceOf('Zend\Filter\FilterBroker', $broker);
+        $this->assertInstanceOf('Zend\Filter\FilterPluginManager', $broker);
         $this->assertTrue($inflector->isThrowTargetExceptionsOn());
         $this->assertEquals($options['targetReplacementIdentifier'], $inflector->getTargetReplacementIdentifier());
 

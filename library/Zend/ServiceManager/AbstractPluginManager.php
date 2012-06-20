@@ -90,6 +90,11 @@ abstract class AbstractPluginManager extends ServiceManager
      */
     public function get($name, $options = array(), $usePeeringServiceManagers = true)
     {
+        // Allow specifying a class name directly; registers as an invokable class
+        if (!$this->has($name) && class_exists($name)) {
+            $this->setInvokableClass($name, $name);
+        }
+
         $this->creationOptions = $options;
         $instance = parent::get($name, $usePeeringServiceManagers);
         $this->creationOptions = null;

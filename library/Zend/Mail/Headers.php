@@ -296,7 +296,11 @@ class Headers implements Iterator, Countable
         $results = array();
 
         foreach (array_keys($this->headersKeys, $key) as $index) {
-            $results[] = $this->headers[$index];
+            if ($this->headers[$index] instanceof Header\GenericHeader) {
+                $results[] = $this->lazyLoadHeader($index);
+            } else {
+                $results[] = $this->headers[$index];
+            }
         }
 
         switch(count($results)) {

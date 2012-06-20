@@ -73,6 +73,8 @@ class HelperLoader extends PluginClassLoader
         'form_element'           => 'Zend\Form\View\Helper\FormElement',
         'formelementerrors'      => 'Zend\Form\View\Helper\FormElementErrors',
         'form_element_errors'    => 'Zend\Form\View\Helper\FormElementErrors',
+        'formemail'              => 'Zend\Form\View\Helper\FormEmail',
+        'form_email'             => 'Zend\Form\View\Helper\FormEmail',
         'formfile'               => 'Zend\Form\View\Helper\FormFile',
         'form_file'              => 'Zend\Form\View\Helper\FormFile',
         'formhidden'             => 'Zend\Form\View\Helper\FormHidden',

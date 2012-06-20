@@ -228,51 +228,42 @@ class Client extends HttpClient
     public function prepareOAuth()
     {
         $requestScheme = $this->getRequestScheme();
-        $requestMethod = $this->getRequestMethod();
-        $query = null;
-        if ($requestScheme == OAuth::REQUEST_SCHEME_HEADER) {
-            $oauthHeaderValue = $this->getToken()->toHeader(
-                $this->getRequest()->getUri(),
-                $this->_config,
-                $this->_getSignableParametersAsQueryString()
-            );
-            $this->setHeaders(array('Authorization' => $oauthHeaderValue));
-        } elseif ($requestScheme == OAuth::REQUEST_SCHEME_POSTBODY) {
-            if ($requestMethod == HttpRequest::METHOD_GET) {
-                throw new Exception\RuntimeException(
-                    'The client is configured to'
-                    . ' pass OAuth parameters through a POST body but request method'
-                    . ' is set to GET'
+        switch ($requestScheme) {
+            case OAuth::REQUEST_SCHEME_HEADER:
+                $oauthHeaderValue = $this->getToken()->toHeader(
+                    $this->getRequest()->getUri(),
+                    $this->_config,
+                    $this->_getSignableParameters()
                 );
-            }
-            $raw = $this->getToken()->toQueryString(
-                $this->getRequest()->getUri(),
-                $this->_config,
-                $this->_getSignableParametersAsQueryString()
-            );
-            $this->setRawData($raw);
-        } elseif ($requestScheme == OAuth::REQUEST_SCHEME_QUERYSTRING) {
-            $params = array();
-            $query = $this->getUri()->getQuery();
-            if ($query) {
-                $queryParts = explode('&', $this->getUri()->getQuery());
-                foreach ($queryParts as $queryPart) {
-                    $kvTuple = explode('=', $queryPart);
-                    $params[$kvTuple[0]] =
-                        (array_key_exists(1, $kvTuple) ? $kvTuple[1] : NULL);
+                $this->setHeaders(array('Authorization' => $oauthHeaderValue));
+                break;
+            case OAuth::REQUEST_SCHEME_POSTBODY:
+                if ($this->getRequestMethod() == HttpRequest::METHOD_GET) {
+                    throw new Exception\RuntimeException(
+                        'The client is configured to'
+                            . ' pass OAuth parameters through a POST body but request method'
+                            . ' is set to GET'
+                    );
                 }
-            }
+                $query  = $this->getToken()->toQueryString(
+                    $this->getRequest()->getUri(),
+                    $this->_config,
+                    $this->_getSignableParameters()
+                );
 
-            if ($this->request->post()->count() > 0) {
-                $params = array_merge($params, $this->request->post()->toArray());
-            }
+                $this->setRawData($query);
+                break;
+            case OAuth::REQUEST_SCHEME_QUERYSTRING:
+                $query  = $this->getToken()->toQueryString(
+                    $this->getRequest()->getUri(),
+                    $this->_config,
+                    $this->_getSignableParameters()
+                );
 
-            $query = $this->getToken()->toQueryString(
-                $this->getRequest()->getUri(), $this->_config, $params
-            );
-            $this->getUri()->setQuery($query);
-        } else {
-            throw new Exception\RuntimeException('Invalid request scheme: ' . $requestScheme);
+                $this->getUri()->setQuery($query);
+                break;
+            default:
+                throw new Exception\RuntimeException('Invalid request scheme: ' . $requestScheme);
         }
     }
 
@@ -283,14 +274,15 @@ class Client extends HttpClient
      *
      * @return string
      */
-    protected function _getSignableParametersAsQueryString()
+    protected function _getSignableParameters()
     {
         $params = array();
-        if ($this->request->query()->count() > 0) {
-            $params = array_merge($params, $this->request->query()->toArray());
+        if ($this->getRequest()->query()->count() > 0) {
+            $params = array_merge($params, $this->getRequest()->query()->toArray());
         }
-        if ($this->request->post()->count() > 0) {
-            $params = array_merge($params, $this->request->post()->toArray());
+
+        if ($this->getRequest()->post()->count() > 0) {
+            $params = array_merge($params, $this->getRequest()->post()->toArray());
         }
 
         return $params;

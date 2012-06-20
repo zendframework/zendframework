@@ -307,6 +307,8 @@ defined('TESTS_ZEND_GDATA_PHOTOS_USERNAME') || define('TESTS_ZEND_GDATA_PHOTOS_U
  */
 defined('TESTS_ZEND_HTTP_CLIENT_BASEURI') || define('TESTS_ZEND_HTTP_CLIENT_BASEURI', false);
 
+defined('TESTS_ZEND_HTTP_CLIENT_ONLINE') || define('TESTS_ZEND_HTTP_CLIENT_ONLINE', false);
+
 /**
  * Zend\Http\Client\Proxy tests
  *
@@ -803,7 +805,15 @@ defined('TESTS_ZEND_URI_CRASH_TEST_ENABLED') || define('TESTS_ZEND_URI_CRASH_TES
  * Set ONLINE_ENABLED if you wish to run validators that require network
  * connectivity.
  */
-defined('TESTS_ZEND_VALIDATE_ONLINE_ENABLED') || define('TESTS_ZEND_VALIDATE_ONLINE_ENABLED', false);
+defined('TESTS_ZEND_VALIDATOR_ONLINE_ENABLED') || define('TESTS_ZEND_VALIDATOR_ONLINE_ENABLED', false);
+
+/**
+ * Zend\Version tests
+ *
+ * Set ONLINE_ENABLED if you wish to fetch the latest version.
+ */
+defined('TESTS_ZEND_VERSION_ONLINE_ENABLED') || define('TESTS_ZEND_VERSION_ONLINE_ENABLED', false);
+
 
 /**
  * PHPUnit Code Coverage / Test Report

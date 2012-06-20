@@ -269,10 +269,9 @@ class Client extends HttpClient
 
     /**
      * Collect all signable parameters into a single array across query string
-     * and POST body. These are returned as a properly formatted single
-     * query string.
+     * and POST body.
      *
-     * @return string
+     * @return array
      */
     protected function _getSignableParameters()
     {

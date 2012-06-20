@@ -61,10 +61,10 @@ class FactoryTest extends TestCase
 
     public function testFactoryUsesComposedFilterChainWhenCreatingNewInputObjects()
     {
-        $factory     = new Factory();
-        $filterChain = new Filter\FilterChain();
-        $broker      = new PluginBroker;
-        $filterChain->setBroker($broker);
+        $factory       = new Factory();
+        $filterChain   = new Filter\FilterChain();
+        $pluginManager = new Filter\FilterPluginManager();
+        $filterChain->setPluginManager($pluginManager);
         $factory->setDefaultFilterChain($filterChain);
         $input = $factory->createInput(array(
             'name' => 'foo',
@@ -72,7 +72,7 @@ class FactoryTest extends TestCase
         $this->assertInstanceOf('Zend\InputFilter\InputInterface', $input);
         $inputFilterChain = $input->getFilterChain();
         $this->assertNotSame($filterChain, $inputFilterChain);
-        $this->assertSame($broker, $inputFilterChain->getBroker());
+        $this->assertSame($pluginManager, $inputFilterChain->getPluginManager());
     }
 
     public function testFactoryUsesComposedValidatorChainWhenCreatingNewInputObjects()
@@ -94,10 +94,11 @@ class FactoryTest extends TestCase
     public function testFactoryInjectsComposedFilterAndValidatorChainsIntoInputObjectsWhenCreatingNewInputFilterObjects()
     {
         $factory        = new Factory();
+        $filterPlugins  = new Filter\FilterPluginManager();
         $broker         = new PluginBroker;
-        $filterChain = new Filter\FilterChain();
+        $filterChain    = new Filter\FilterChain();
         $validatorChain = new Validator\ValidatorChain();
-        $filterChain->setBroker($broker);
+        $filterChain->setPluginManager($filterPlugins);
         $validatorChain->setBroker($broker);
         $factory->setDefaultFilterChain($filterChain);
         $factory->setDefaultValidatorChain($validatorChain);
@@ -113,7 +114,7 @@ class FactoryTest extends TestCase
         $this->assertInstanceOf('Zend\InputFilter\InputInterface', $input);
         $inputFilterChain    = $input->getFilterChain();
         $inputValidatorChain = $input->getValidatorChain();
-        $this->assertSame($broker, $inputFilterChain->getBroker());
+        $this->assertSame($filterPlugins, $inputFilterChain->getPluginManager());
         $this->assertSame($broker, $inputValidatorChain->getBroker());
     }
 

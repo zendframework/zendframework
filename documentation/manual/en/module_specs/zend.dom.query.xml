@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.dom.query"><title>Zend_Dom_Query</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.dom.query"><title>Zend\Dom\Query</title>
     
 
     <para>
-        <classname>Zend_Dom_Query</classname> provides mechanisms for querying
+        <classname>Zend\Dom\Query</classname> provides mechanisms for querying
         <acronym>XML</acronym> and (X)<acronym>HTML</acronym> documents utilizing either XPath or
         <acronym>CSS</acronym> selectors. It was developed to aid with functional testing of
         <acronym>MVC</acronym> applications, but could also be used for rapid development of screen
@@ -26,17 +26,18 @@
         
 
         <para>
-            To use <classname>Zend_Dom_Query</classname>, you instantiate a
-            <classname>Zend_Dom_Query</classname> object, optionally passing a document to
+            To use <classname>Zend\Dom\Query</classname>, you instantiate a
+            <classname>Zend\Dom\Query</classname> object, optionally passing a document to
             query (a string). Once you have a document, you can use either the
             <methodname>query()</methodname> or <methodname>queryXpath()</methodname> methods; each
-            method will return a <classname>Zend_Dom_Query_Result</classname> object with
+            method will return a <classname>Zend\Dom\NodeList</classname> object with
             any matching nodes.
         </para>
 
         <para>
-            The primary difference between <classname>Zend_Dom_Query</classname> and using
-            DOMDocument + DOMXPath is the ability to select against <acronym>CSS</acronym>
+            The primary difference between <classname>Zend\Dom\Query</classname> and using
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/domnodelist">DOMDocument</link>
+            + <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/domxpath">DOMXPath</link> is the ability to select against <acronym>CSS</acronym>
             selectors. You can utilize any of the following, in any combination:
         </para>
 
@@ -150,14 +151,17 @@
             Once you've performed your query, you can then work with the result
             object to determine information about the nodes, as well as to pull
             them and/or their content directly for examination and manipulation.
-            <classname>Zend_Dom_Query_Result</classname> implements <classname>Countable</classname>
-            and <classname>Iterator</classname>, and store the results internally as
-            DOMNodes and DOMElements. As an example, consider the following call,
-            that selects against the <acronym>HTML</acronym> above:
+            <classname>Zend\Dom\NodeList</classname> implements <classname>Countable</classname>
+            and <classname>Iterator</classname>, and stores the results internally as
+            a <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/domdocument">DOMDocument</link> 
+            and <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/domnodelist">DOMNodeList</link>. 
+            As an example, consider the following call, that selects against the <acronym>HTML</acronym> above:
         </para>
 
         <programlisting language="php"><![CDATA[
-$dom = new Zend_Dom_Query($html);
+use Zend\Dom\Query;
+
+$dom = new Query($html);
 $results = $dom->query('.foo .bar a');
 
 $count = count($results); // get number of matches: 4
@@ -167,10 +171,10 @@ foreach ($results as $result) {
 ]]></programlisting>
 
         <para>
-            <classname>Zend_Dom_Query</classname> also allows straight XPath queries
+            <classname>Zend\Dom\Query</classname> also allows straight XPath queries
             utilizing the <methodname>queryXpath()</methodname> method; you can pass any
             valid XPath query to this method, and it will return a
-            <classname>Zend_Dom_Query_Result</classname> object.
+            <classname>Zend\Dom\NodeList</classname> object.
         </para>
     </section>
 
@@ -178,45 +182,53 @@ foreach ($results as $result) {
         
 
         <para>
-            The <classname>Zend_Dom_Query</classname> family of classes have the following
+            The <classname>Zend\Dom\Query</classname> family of classes have the following
             methods available.
         </para>
 
-        <section xml:id="zend.dom.query.methods.zenddomquery"><title>Zend_Dom_Query</title>
+        <section xml:id="zend.dom.query.methods.zenddomquery"><title>Zend\Dom\Query</title>
             
 
             <para>
                 The following methods are available to
-                <classname>Zend_Dom_Query</classname>:
+                <classname>Zend\Dom\Query</classname>:
             </para>
 
             <itemizedlist>
                 <listitem>
                     <para>
-                        <methodname>setDocumentXml($document)</methodname>: specify an
+                        <methodname>setDocumentXml($document, $encoding = null)</methodname>: specify an
                         <acronym>XML</acronym> string to query against.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <methodname>setDocumentXhtml($document)</methodname>: specify an
+                        <methodname>setDocumentXhtml($document, $encoding = null)</methodname>: specify an
                         <acronym>XHTML</acronym> string to query against.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <methodname>setDocumentHtml($document)</methodname>: specify an
+                        <methodname>setDocumentHtml($document, $encoding = null)</methodname>: specify an
                         <acronym>HTML</acronym> string to query against.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <methodname>setDocument($document)</methodname>: specify a
-                        string to query against; <classname>Zend_Dom_Query</classname> will
+                        <methodname>setDocument($document, $encoding = null)</methodname>: specify a
+                        string to query against; <classname>Zend\Dom\Query</classname> will
                         then attempt to autodetect the document type.
+                    </para>
+                </listitem>
+                
+                <listitem>
+                    <para>
+                        <methodname>setEncoding($encoding)</methodname>: specify an encoding 
+                        string to use. This encoding will be passed to 
+                        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/domdocument.construct">DOMDocument's constructor</link> if specified. 
                     </para>
                 </listitem>
 
@@ -235,10 +247,16 @@ foreach ($results as $result) {
                         <constant>DOC_HTML</constant> class constants.
                     </para>
                 </listitem>
+                
+                <listitem>
+                    <para>
+                        <methodname>getEncoding()</methodname>: retrieves the specified encoding.
+                    </para>
+                </listitem>
 
                 <listitem>
                     <para>
-                        <methodname>query($query)</methodname>: query the document using
+                        <methodname>execute($query)</methodname>: query the document using
                         <acronym>CSS</acronym> selector notation.
                     </para>
                 </listitem>
@@ -252,11 +270,11 @@ foreach ($results as $result) {
             </itemizedlist>
         </section>
 
-        <section xml:id="zend.dom.query.methods.zenddomqueryresult"><title>Zend_Dom_Query_Result</title>
+        <section xml:id="zend.dom.query.methods.zenddomnodelist"><title>Zend\Dom\NodeList</title>
             
 
             <para>
-                As mentioned previously, <classname>Zend_Dom_Query_Result</classname>
+                As mentioned previously, <classname>Zend\Dom\NodeList</classname>
                 implements both <classname>Iterator</classname> and
                 <classname>Countable</classname>, and as such can be used in a
                 <methodname>foreach()</methodname> loop as well as with the
@@ -276,7 +294,7 @@ foreach ($results as $result) {
                     <para>
                         <methodname>getXpathQuery()</methodname>: return the XPath query
                         used to produce the result. Internally,
-                        <classname>Zend_Dom_Query</classname> converts <acronym>CSS</acronym>
+                        <classname>Zend\Dom\Query</classname> converts <acronym>CSS</acronym>
                         selector queries to XPath, so this value will always be populated.
                     </para>
                 </listitem>

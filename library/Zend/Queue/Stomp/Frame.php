@@ -294,7 +294,7 @@ class Frame implements StompFrame
     {
         try {
             $return = $this->toFrame();
-        } catch (Exception $e) {
+        } catch (Exception\ExceptionInterface $e) {
             $return = '';
         }
         return $return;

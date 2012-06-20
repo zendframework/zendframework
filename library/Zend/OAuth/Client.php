@@ -165,7 +165,7 @@ class Client extends HttpClient
      *
      * This is used to support POSTing from open file handles without
      * caching the entire body into memory. It is a wrapper around
-     * Zend\Http\Client::setRawData().
+     * Zend\Http\Client::setRawBody().
      *
      * @param string $data The request data
      * @param string $enctype The encoding type
@@ -174,7 +174,8 @@ class Client extends HttpClient
     public function setRawDataStream($data, $enctype = null)
     {
         $this->_streamingRequest = true;
-        return $this->setRawData($data, $enctype);
+        $this->setEncType($enctype);
+        return $this->setRawBody($data);
     }
 
     /**
@@ -251,7 +252,7 @@ class Client extends HttpClient
                     $this->_getSignableParameters()
                 );
 
-                $this->setRawData($query);
+                $this->setRawBody($query);
                 break;
             case OAuth::REQUEST_SCHEME_QUERYSTRING:
                 $query  = $this->getToken()->toQueryString(

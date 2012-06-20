@@ -20,8 +20,6 @@
 
 namespace Zend\Filter;
 
-use Zend\Loader\Broker;
-
 /**
  * @category   Zend
  * @package    Zend_Filter
@@ -31,32 +29,32 @@ use Zend\Loader\Broker;
 class StaticFilter
 {
     /**
-     * @var Broker
+     * @var FilterPluginManager
      */
-    protected static $broker;
+    protected static $plugins;
 
     /**
-     * Set broker for resolving filter classes
+     * Set plugin manager for resolving filter classes
      * 
-     * @param  Broker $broker 
+     * @param  FilterPluginManager $manager 
      * @return void
      */
-    public static function setBroker(Broker $broker = null)
+    public static function setPluginManager(FilterPluginManager $manager = null)
     {
-        self::$broker = $broker;
+        self::$plugins = $manager;
     }
 
     /**
-     * Get broker for loading filter classes
+     * Get plugin manager for loading filter classes
      * 
-     * @return Broker
+     * @return FilterPluginManager
      */
-    public static function getBroker()
+    public static function getPluginManager()
     {
-        if (null === self::$broker) {
-            static::setBroker(new FilterBroker());
+        if (null === self::$plugins) {
+            static::setPluginManager(new FilterPluginManager());
         }
-        return self::$broker;
+        return self::$plugins;
     }
 
     /**
@@ -77,13 +75,16 @@ class StaticFilter
      */
     public static function execute($value, $classBaseName, array $args = array())
     {
-        $broker = static::getBroker();
+        $plugins = static::getPluginManager();
 
-        $filter = $broker->load($classBaseName, $args);
+        $filter = $plugins->get($classBaseName, $args);
         $filteredValue = $filter->filter($value);
 
         // Unregistering filter to allow different arguments on subsequent calls
-        $broker->unregister($classBaseName);
+        // Commenting out for now; SM solution provides no facilities for 
+        // unregistering an instance, nor for marking as unshared after 
+        // registration yet.
+        // $broker->unregister($classBaseName);
 
         return $filteredValue;
     }

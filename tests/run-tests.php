@@ -25,8 +25,11 @@
  * @package  UnitTests
  */
 
+// PHPUnit doesn't understand relative paths well when they are in the config file.
+chdir(__DIR__);
+
 $phpunit_bin      = 'phpunit';
-$phpunit_conf     = __DIR__ . (file_exists(__DIR__ . '/phpunit.xml') ? '/phpunit.xml' : '/phpunit.xml.dist');
+$phpunit_conf     = (file_exists('phpunit.xml') ? 'phpunit.xml' : 'phpunit.xml.dist');
 $phpunit_opts     = "-c $phpunit_conf";
 $phpunit_coverage = '';
 

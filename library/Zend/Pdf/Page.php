@@ -306,7 +306,7 @@ class Page
                  * @todo support of user defined pagesize notations, like:
                  *       "210x297mm", "595x842", "8.5x11in", "612x792"
                  */
-                throw new Exception\Exception\InvalidArgumentException('Wrong pagesize notation.');
+                throw new Exception\InvalidArgumentException('Wrong pagesize notation.');
             }
             /**
              * @todo support of pagesize recalculation to "default user space units"
@@ -792,7 +792,7 @@ class Page
                 $fonts[$resourceId] = $extractedFont;
             } catch (Exception\NotImplementedException $e) {
                 // Just skip unsupported font types.
-                if ($e->getMessage() != Resource\Font\Font\Extracted::TYPE_NOT_SUPPORTED) {
+                if ($e->getMessage() != Resource\Font\Extracted::TYPE_NOT_SUPPORTED) {
                     throw $e;
                 }
             }
@@ -845,7 +845,7 @@ class Page
                 return new Resource\Font\Extracted($fontDictionary);
             } catch (Exception\NotImplementedException $e) {
                 // Just skip unsupported font types.
-                if ($e->getMessage() != Resource\Font\Font\Extracted::TYPE_NOT_SUPPORTED) {
+                if ($e->getMessage() != Resource\Font\Extracted::TYPE_NOT_SUPPORTED) {
                     throw $e;
                 }
 

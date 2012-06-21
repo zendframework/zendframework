@@ -102,6 +102,25 @@ abstract class AbstractPluginManager extends ServiceManager
     }
 
     /**
+     * Register a service with the locator.
+     *
+     * Validates that the service object via validatePlugin() prior to
+     * attempting to register it.
+     * 
+     * @param  string $name
+     * @param  mixed $service
+     * @param  bool $shared
+     * @return AbstractPluginManager
+     * @throws Exception\InvalidServiceNameException
+     */
+    public function setService($name, $service, $shared = true)
+    {
+        $this->validatePlugin($service);
+        parent::setService($name, $service, $shared);
+        return $this;
+    }
+
+    /**
      * Attempt to create an instance via an invokable class
      *
      * Overrides parent implementation by passing $creationOptions to the 

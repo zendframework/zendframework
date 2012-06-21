@@ -14,36 +14,33 @@
  *
  * @category   Zend
  * @package    Zend_Log
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
-namespace Zend\Log;
+namespace ZendTest\Log;
 
-use Zend\Loader\PluginClassLoader;
+use Zend\Log\WriterPluginManager;
 
 /**
  * @category   Zend
  * @package    Zend_Log
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @group      Zend_Log
  */
-class WriterLoader extends PluginClassLoader
+class WriterPluginManagerTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * @var array Pre-aliased writers
-     */
-    protected $plugins = array(
-        'db'           => 'Zend\Log\Writer\Db',
-        'firebug'      => 'Zend\Log\Writer\Firebug',
-        'mail'         => 'Zend\Log\Writer\Mail',
-        'mock'         => 'Zend\Log\Writer\Mock',
-        'null'         => 'Zend\Log\Writer\Null',
-        'stream'       => 'Zend\Log\Writer\Stream',
-        'syslog'       => 'Zend\Log\Writer\Syslog',
-        'zend_monitor' => 'Zend\Log\Writer\ZendMonitor',
-    );
+    public function setUp()
+    {
+        $this->plugins = new WriterPluginManager();
+    }
+
+    public function testRegisteringInvalidWriterRaisesException()
+    {
+        $this->setExpectedException('Zend\Log\Exception\InvalidArgumentException', 'must implement');
+        $this->plugins->setService('test', $this);
+    }
 }

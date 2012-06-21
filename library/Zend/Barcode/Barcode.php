@@ -22,8 +22,6 @@ namespace Zend\Barcode;
 
 use Traversable,
     Zend,
-    Zend\Loader\Broker,
-    Zend\Loader\ShortNameLocator,
     Zend\Stdlib\ArrayUtils;
 
 /**
@@ -50,45 +48,45 @@ class Barcode
     protected static $staticFont = null;
 
     /**
-     * The parser broker
+     * The parser plugin manager
      *
-     * @var Broker
+     * @var ObjectPluginManager
      */
-    protected static $objectBroker;
+    protected static $objectPlugins;
 
     /**
-     * The renderer broker
+     * The renderer plugin manager
      *
-     * @var Broker
+     * @var RendererPluginManager
      */
-    protected static $rendererBroker;
+    protected static $rendererPlugins;
 
     /**
-     * Get the parser broker
+     * Get the parser plugin manager
      *
-     * @return Broker
+     * @return ObjectPluginManager
      */
-    public static function getObjectBroker()
+    public static function getObjectPluginManager()
     {
-        if (!self::$objectBroker instanceof Broker) {
-            self::$objectBroker = new ObjectBroker();
+        if (!self::$objectPlugins instanceof ObjectPluginManager) {
+            self::$objectPlugins = new ObjectPluginManager();
         }
 
-        return self::$objectBroker;
+        return self::$objectPlugins;
     }
 
     /**
-     * Get the renderer broker
+     * Get the renderer plugin manager
      *
-     * @return Broker
+     * @return RendererPluginManager
      */
-    public static function getRendererBroker()
+    public static function getRendererPluginManager()
     {
-        if (!self::$rendererBroker instanceof Broker) {
-            self::$rendererBroker = new RendererBroker();
+        if (!self::$rendererPlugins instanceof RendererPluginManager) {
+            self::$rendererPlugins = new RendererPluginManager();
         }
 
-        return self::$rendererBroker;
+        return self::$rendererPlugins;
     }
 
     /**
@@ -210,7 +208,7 @@ class Barcode
             );
         }
 
-        return self::getObjectBroker()->load($barcode, $barcodeConfig);
+        return self::getObjectPluginManager()->get($barcode, $barcodeConfig);
     }
 
     /**
@@ -261,7 +259,7 @@ class Barcode
             );
         }
 
-        return self::getRendererBroker()->load($renderer, $rendererConfig);
+        return self::getRendererPluginManager()->get($renderer, $rendererConfig);
     }
 
     /**

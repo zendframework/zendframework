@@ -67,6 +67,7 @@ class FormRowTest extends TestCase
         $this->helper->setLabelPosition('prepend');
         $markup = $this->helper->render($element);
         $this->assertContains('<label>The value for foo:<', $markup);
+        $this->assertContains('</label>', $markup);
     }
 
     public function testCanCreateLabelValueAfterInput()
@@ -76,6 +77,7 @@ class FormRowTest extends TestCase
         $this->helper->setLabelPosition('append');
         $markup = $this->helper->render($element);
         $this->assertContains('<label><input', $markup);
+        $this->assertContains('</label>', $markup);
     }
 
     public function testCanCreateMarkupWithoutLabel()

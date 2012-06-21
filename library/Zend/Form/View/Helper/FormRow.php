@@ -80,7 +80,7 @@ class FormRow extends BaseAbstractHelper
                     break;
             }
         } else {
-            $markup = $element . $elementErrors;
+            $markup = $elementString . $elementErrors;
         }
 
         return $markup;

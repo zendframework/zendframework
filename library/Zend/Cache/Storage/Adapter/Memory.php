@@ -29,7 +29,7 @@ use ArrayObject,
     Zend\Cache\Storage\ClearByPrefixInterface,
     Zend\Cache\Storage\FlushableInterface,
     Zend\Cache\Storage\IterableInterface,
-    Zend\Cache\Storage\TagableInterface,
+    Zend\Cache\Storage\TaggableInterface,
     Zend\Cache\Storage\AvailableSpaceCapableInterface,
     Zend\Cache\Storage\TotalSpaceCapableInterface,
     Zend\Cache\Utils;
@@ -41,10 +41,14 @@ use ArrayObject,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Memory
-    extends AbstractAdapter
-    implements ClearExpiredInterface, ClearByPrefixInterface, FlushableInterface, TagableInterface,
-               IterableInterface, AvailableSpaceCapableInterface, TotalSpaceCapableInterface
+class Memory extends AbstractAdapter implements 
+    AvailableSpaceCapableInterface,
+    ClearByPrefixInterface,
+    ClearExpiredInterface,
+    FlushableInterface,
+    IterableInterface,
+    TaggableInterface,
+    TotalSpaceCapableInterface
 {
     /**
      * Data Array
@@ -211,7 +215,7 @@ class Memory
         return true;
     }
 
-    /* TagableInterface */
+    /* TaggableInterface */
 
     /**
      * Set tags to an item by given key.

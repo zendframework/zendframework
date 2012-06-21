@@ -14,43 +14,49 @@
  *
  * @category   Zend
  * @package    Zend_Cache
+ * @subpackage Storage
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Cache;
-
-use Zend\Loader\PluginBroker;
+namespace Zend\Cache\Storage;
 
 /**
- * Broker for cache pattern instances
- *
  * @category   Zend
  * @package    Zend_Cache
+ * @subpackage Storage
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class PatternBroker extends PluginBroker
+interface TaggableInterface
 {
     /**
-     * @var string Default plugin loading strategy
+     * Set tags to an item by given key.
+     * An empty array will remove all tags.
+     *
+     * @param string   $key
+     * @param string[] $tags
+     * @return boolean
      */
-    protected $defaultClassLoader = 'Zend\Cache\PatternLoader';
+    public function setTags($key, array $tags);
 
     /**
-     * Determine if we have a valid pattern
+     * Get tags of an item by given key
      *
-     * @param  mixed $plugin
-     * @return true
-     * @throws Exception\RuntimeException
+     * @param string $key
+     * @return string[]|FALSE
      */
-    protected function validatePlugin($plugin)
-    {
-        if (!$plugin instanceof Pattern\PatternInterface) {
-            throw new Exception\RuntimeException(
-                'Cache pattern must implement Zend\Cache\Pattern\PatternInterface'
-            );
-        }
-        return true;
-    }
+    public function getTags($key);
+
+    /**
+     * Remove items matching given tags.
+     *
+     * If $disjunction only one of the given tags must match
+     * else all given tags must match.
+     *
+     * @param string[] $tags
+     * @param boolean  $disjunction
+     * @return boolean
+     */
+    public function clearByTags(array $tags, $disjunction = false);
 }

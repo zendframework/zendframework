@@ -20,9 +20,9 @@
 
 namespace Zend\Validator;
 
-use Traversable,
-    Zend\Uri\Uri as UriHandler,
-    Zend\Stdlib\ArrayUtils;
+use Traversable;
+use Zend\Uri\Uri as UriHandler;
+use Zend\Stdlib\ArrayUtils;
 
 /**
  * @category   Zend
@@ -57,7 +57,6 @@ class Uri extends AbstractValidator
      * @var boolean
      */
     protected $allowAbsolute = true;
-
 
     /**
      * Sets default option values for this instance
@@ -177,12 +176,9 @@ class Uri extends AbstractValidator
         try {
             $uriHandler->parse($value);
             if ($uriHandler->isValid()) {
-                if ($this->allowRelative && $this->allowAbsolute) {
-                    return true;
-                }
-
-                // settings must match result
-                if (($this->allowAbsolute && $uriHandler->isAbsolute())
+                // It will either be a valid absolute or relative URI
+                if (($this->allowRelative && $this->allowAbsolute)
+                    || ($this->allowAbsolute && $uriHandler->isAbsolute())
                     || ($this->allowRelative && $uriHandler->isValidRelative())
                 ) {
                     return true;

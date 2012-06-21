@@ -21,10 +21,10 @@
 
 namespace Zend\Form\Element;
 
-use Zend\Form\Element,
-    Zend\InputFilter\InputProviderInterface,
-    Zend\Validator\Uri as UriValidator,
-    Zend\Validator\ValidatorInterface;
+use Zend\Form\Element;
+use Zend\InputFilter\InputProviderInterface;
+use Zend\Validator\Uri as UriValidator;
+use Zend\Validator\ValidatorInterface;
 
 /**
  * @category   Zend

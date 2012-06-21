@@ -112,7 +112,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testStaticFactoryClassNotFound()
     {
-        $this->setExpectedException('Zend\Loader\Exception\RuntimeException', 'unknownvalidator');
+        $this->setExpectedException('Zend\ServiceManager\Exception\ServiceNotFoundException');
         Validator\StaticValidator::execute('1234', 'UnknownValidator');
     }
 

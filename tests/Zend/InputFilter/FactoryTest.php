@@ -26,7 +26,6 @@ use Zend\Filter;
 use Zend\InputFilter\Factory;
 use Zend\InputFilter\Input;
 use Zend\InputFilter\InputFilter;
-use Zend\Loader\PluginBroker;
 use Zend\Validator;
 
 class FactoryTest extends TestCase
@@ -77,10 +76,10 @@ class FactoryTest extends TestCase
 
     public function testFactoryUsesComposedValidatorChainWhenCreatingNewInputObjects()
     {
-        $factory        = new Factory();
-        $validatorChain = new Validator\ValidatorChain();
-        $broker         = new PluginBroker;
-        $validatorChain->setBroker($broker);
+        $factory          = new Factory();
+        $validatorChain   = new Validator\ValidatorChain();
+        $validatorPlugins = new Validator\ValidatorPluginManager();
+        $validatorChain->setPluginManager($validatorPlugins);
         $factory->setDefaultValidatorChain($validatorChain);
         $input = $factory->createInput(array(
             'name' => 'foo',
@@ -88,18 +87,18 @@ class FactoryTest extends TestCase
         $this->assertInstanceOf('Zend\InputFilter\InputInterface', $input);
         $inputValidatorChain = $input->getValidatorChain();
         $this->assertNotSame($validatorChain, $inputValidatorChain);
-        $this->assertSame($broker, $inputValidatorChain->getBroker());
+        $this->assertSame($validatorPlugins, $inputValidatorChain->getPluginManager());
     }
 
     public function testFactoryInjectsComposedFilterAndValidatorChainsIntoInputObjectsWhenCreatingNewInputFilterObjects()
     {
-        $factory        = new Factory();
-        $filterPlugins  = new Filter\FilterPluginManager();
-        $broker         = new PluginBroker;
-        $filterChain    = new Filter\FilterChain();
-        $validatorChain = new Validator\ValidatorChain();
+        $factory          = new Factory();
+        $filterPlugins    = new Filter\FilterPluginManager();
+        $validatorPlugins = new Validator\ValidatorPluginManager();
+        $filterChain      = new Filter\FilterChain();
+        $validatorChain   = new Validator\ValidatorChain();
         $filterChain->setPluginManager($filterPlugins);
-        $validatorChain->setBroker($broker);
+        $validatorChain->setPluginManager($validatorPlugins);
         $factory->setDefaultFilterChain($filterChain);
         $factory->setDefaultValidatorChain($validatorChain);
 
@@ -115,7 +114,7 @@ class FactoryTest extends TestCase
         $inputFilterChain    = $input->getFilterChain();
         $inputValidatorChain = $input->getValidatorChain();
         $this->assertSame($filterPlugins, $inputFilterChain->getPluginManager());
-        $this->assertSame($broker, $inputValidatorChain->getBroker());
+        $this->assertSame($validatorPlugins, $inputValidatorChain->getPluginManager());
     }
 
     public function testFactoryWillCreateInputWithSuggestedFilters()

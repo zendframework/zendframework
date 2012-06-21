@@ -165,6 +165,14 @@ class Result implements \Iterator, ResultInterface
     }
 
     /**
+     * @return bool|int
+     */
+    public function getFieldCount()
+    {
+        return sqlsrv_num_fields($this->resource);
+    }
+
+    /**
      * Is query result
      * 
      * @return boolean 

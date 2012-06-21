@@ -40,7 +40,7 @@ abstract class AbstractFeature extends AbstractTableGateway
     public function preInitialize();
     public function postInitialize();
     public function preSelect(Select $select);
-    public function postSelect(StatementInterface $statement, ResultInterface $result, ResultSet $resultSet);
+    public function postSelect(StatementInterface $statement, ResultInterface $result, ResultSetInterface $resultSet);
     public function preInsert(Insert $insert);
     public function postInsert(StatementInterface $statement, ResultInterface $result);
     public function preUpdate(Update $update);

@@ -13,7 +13,8 @@ namespace Zend\Db\Adapter\Driver\Pdo;
 use Zend\Db\Adapter\Driver\ResultInterface,
     Iterator,
     PDO as PDOResource,
-    PDOStatement;
+    PDOStatement,
+    Zend\Db\Adapter\Exception;
 
 /**
  * @category   Zend
@@ -178,6 +179,14 @@ class Result implements Iterator, ResultInterface
             $this->rowCount = $this->resource->rowCount();
         }
         return $this->rowCount;
+    }
+
+    /**
+     * @return int
+     */
+    public function getFieldCount()
+    {
+        return $this->resource->columnCount();
     }
 
     /**

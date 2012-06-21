@@ -22,4 +22,5 @@ interface ResultInterface extends \Countable, \Iterator
     public function getAffectedRows();
     public function getGeneratedValue();
     public function getResource();
+    public function getFieldCount();
 }

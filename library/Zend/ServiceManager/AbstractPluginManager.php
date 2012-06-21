@@ -115,7 +115,9 @@ abstract class AbstractPluginManager extends ServiceManager
      */
     public function setService($name, $service, $shared = true)
     {
-        $this->validatePlugin($service);
+        if ($service) {
+            $this->validatePlugin($service);
+        }
         parent::setService($name, $service, $shared);
         return $this;
     }

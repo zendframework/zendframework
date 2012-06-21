@@ -22,6 +22,7 @@
 namespace Zend\Form\View\Helper;
 
 use Traversable;
+use Zend\Loader\Pluggable;
 use Zend\Form\ElementInterface;
 use Zend\Form\Exception;
 
@@ -202,7 +203,7 @@ class FormMultiCheckbox extends FormInput
      */
     public function render(ElementInterface $element)
     {
-        $name   = static::getName($element);
+        $name = static::getName($element);
         if (empty($name)) {
             throw new Exception\DomainException(sprintf(
                 '%s requires that the element has an assigned name; none discovered',
@@ -221,54 +222,106 @@ class FormMultiCheckbox extends FormInput
             ));
         }
 
-        if (isset($attributes['labelAttributes'])) {
-            $labelAttributes = $attributes['labelAttributes'];
-            unset($attributes['labelAttributes']);
-        } else {
-            $labelAttributes = $this->labelAttributes;
-        }
-
         $options = $attributes['options'];
         unset($attributes['options']);
 
         $attributes['name'] = $name;
         $attributes['type'] = $this->getInputType();
 
-        $values = array();
+        $selectedOptions = array();
         if (isset($attributes['value'])) {
-            $values = (array) $attributes['value'];
+            $selectedOptions = (array) $attributes['value'];
             unset($attributes['value']);
+        }
+
+        $rendered = $this->renderOptions($options, $selectedOptions, $attributes);
+
+        // Render hidden element
+        $useHiddenElement = isset($attributes['useHiddenElement'])
+            ? (bool) $attributes['useHiddenElement']
+            : $this->useHiddenElement;
+
+        if ($useHiddenElement) {
+            $rendered = $this->renderHiddenElement($element, $attributes) . $rendered;
+        }
+
+        return $rendered;
+    }
+
+    protected function renderOptions(array $options, array $selectedOptions, array $attributes)
+    {
+        if (isset($attributes['labelAttributes'])) {
+            $globalLabelAttributes = $attributes['labelAttributes'];
+            unset($attributes['labelAttributes']);
+        } else {
+            $globalLabelAttributes = $this->labelAttributes;
         }
 
         $inputHelper    = $this->getInputHelper();
         $escapeHelper   = $this->getEscapeHelper();
         $labelHelper    = $this->getLabelHelper();
-        $labelOpen      = $labelHelper->openTag($labelAttributes);
         $labelClose     = $labelHelper->closeTag();
         $labelPosition  = $this->getLabelPosition();
         $closingBracket = $this->getInlineClosingBracket();
-        $template       = $labelOpen . '%s%s' . $labelClose;
+
         $combinedMarkup = array();
         $count          = 0;
 
-        foreach ($options as $label => $value) {
+        foreach ($options as $key => $optionSpec) {
             $count++;
             if ($count > 1 && array_key_exists('id', $attributes)) {
                 unset($attributes['id']);
             }
-            $attributes['value']   = $value;
-            $attributes['checked'] = '';
-            if (in_array($value, $values, true)) {
-                $attributes['checked'] = 'checked';
+
+            $value           = '';
+            $label           = $key;
+            $selected        = false;
+            $disabled        = false;
+            $inputAttributes = $attributes;
+            $labelAttributes = $globalLabelAttributes;
+
+            if (is_string($optionSpec) || is_numeric($optionSpec) || is_bool($optionSpec)) {
+                $optionSpec = array('value' => (string) $optionSpec);
             }
 
-            $label = $escapeHelper($label);
+            if (isset($optionSpec['value'])) {
+                $value = $optionSpec['value'];
+            }
+            if (isset($optionSpec['label'])) {
+                $label = $optionSpec['label'];
+            }
+            if (isset($optionSpec['selected'])) {
+                $selected = $optionSpec['selected'];
+            }
+            if (isset($optionSpec['disabled'])) {
+                $disabled = $optionSpec['disabled'];
+            }
+            if (isset($optionSpec['labelAttributes'])) {
+                $labelAttributes = (isset($labelAttributes))
+                    ? array_merge($labelAttributes, $optionSpec['labelAttributes'])
+                    : $optionSpec['labelAttributes'];
+            }
+            if (isset($optionSpec['attributes'])) {
+                $inputAttributes = array_merge($inputAttributes, $optionSpec['attributes']);
+            }
+
+            if (in_array($value, $selectedOptions, true)) {
+                $selected = true;
+            }
+
+            $inputAttributes['value']    = $value;
+            $inputAttributes['checked']  = $selected;
+            $inputAttributes['disabled'] = $disabled;
+
             $input = sprintf(
                 '<input %s%s',
-                $this->createAttributesString($attributes),
+                $this->createAttributesString($inputAttributes),
                 $closingBracket
             );
 
+            $label     = $escapeHelper($label);
+            $labelOpen = $labelHelper->openTag($labelAttributes);
+            $template  = $labelOpen . '%s%s' . $labelClose;
             switch ($labelPosition) {
                 case self::LABEL_PREPEND:
                     $markup = sprintf($template, $label, $input);
@@ -282,30 +335,34 @@ class FormMultiCheckbox extends FormInput
             $combinedMarkup[] = $markup;
         }
 
-        $rendered = implode($this->getSeparator(), $combinedMarkup);
+        return implode($this->getSeparator(), $combinedMarkup);
+    }
 
-        $useHiddenElement = isset($attributes['useHiddenElement'])
-            ? (bool) $attributes['useHiddenElement']
-            : $this->useHiddenElement;
+    /**
+     * Render a hidden element for empty/unchecked value
+     *
+     * @param  ElementInterface $element
+     * @param  array $attributes
+     * @return string
+     */
+    protected function renderHiddenElement(ElementInterface $element, array $attributes)
+    {
+        $closingBracket = $this->getInlineClosingBracket();
 
-        if ($useHiddenElement) {
-            $uncheckedValue = isset($attributes['uncheckedValue'])
+        $uncheckedValue = isset($attributes['uncheckedValue'])
                 ? $attributes['uncheckedValue']
                 : $this->uncheckedValue;
 
-            $hiddenAttributes = array(
-                'name'  => $element->getName(),
-                'value' => $uncheckedValue,
-            );
+        $hiddenAttributes = array(
+            'name'  => $element->getName(),
+            'value' => $uncheckedValue,
+        );
 
-            $rendered = sprintf(
-                '<input type="hidden" %s%s',
-                $this->createAttributesString($hiddenAttributes),
-                $closingBracket
-            ) . $rendered;
-        }
-
-        return $rendered;
+        return sprintf(
+            '<input type="hidden" %s%s',
+            $this->createAttributesString($hiddenAttributes),
+            $closingBracket
+        );
     }
 
     /**

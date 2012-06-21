@@ -51,6 +51,24 @@ class FormMultiCheckboxTest extends CommonTestCase
         return $element;
     }
 
+    public function getElementWithOptionSpec()
+    {
+        $element = new Element('foo');
+        $options = array(
+            'This is the first label' => 'value1',
+            'This is the second label' => array(
+                'value'           => 'value2',
+                'label'           => 'This is the second label (overridden)',
+                'disabled'        => false,
+                'labelAttributes' => array('class' => 'label-class'),
+                'attributes'      => array('class' => 'input-class'),
+            ),
+            'This is the third label' => 'value3',
+        );
+        $element->setAttribute('options', $options);
+        return $element;
+    }
+
     public function testUsesOptionsAttributeToGenerateCheckBoxes()
     {
         $element = $this->getElement();
@@ -66,6 +84,36 @@ class FormMultiCheckboxTest extends CommonTestCase
             $this->assertContains(sprintf('>%s</label>', $label), $markup);
             $this->assertContains(sprintf('value="%s"', $value), $markup);
         }
+    }
+
+    public function testUsesOptionsAttributeWithOptionSpecToGenerateCheckBoxes()
+    {
+        $element = $this->getElementWithOptionSpec();
+        $options = $element->getAttribute('options');
+        $markup  = $this->helper->render($element);
+
+        $this->assertEquals(3, substr_count($markup, 'name="foo'));
+        $this->assertEquals(3, substr_count($markup, 'type="checkbox"'));
+        $this->assertEquals(3, substr_count($markup, '<input'));
+        $this->assertEquals(3, substr_count($markup, '<label'));
+
+        $this->assertContains(
+            sprintf('>%s</label>', 'This is the first label'), $markup
+        );
+        $this->assertContains(sprintf('value="%s"', 'value1'), $markup);
+
+        $this->assertContains(
+            sprintf('>%s</label>', 'This is the second label (overridden)'), $markup
+        );
+        $this->assertContains(sprintf('value="%s"', 'value2'), $markup);
+        $this->assertEquals(1, substr_count($markup, 'class="label-class"'));
+        $this->assertEquals(1, substr_count($markup, 'class="input-class"'));
+
+        $this->assertContains(
+            sprintf('>%s</label>', 'This is the third label'), $markup
+        );
+        $this->assertContains(sprintf('value="%s"', 'value3'), $markup);
+
     }
 
     public function testGenerateCheckBoxesAndHiddenElement()

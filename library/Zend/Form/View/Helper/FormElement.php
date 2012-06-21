@@ -23,7 +23,6 @@ namespace Zend\Form\View\Helper;
 
 use Zend\Form\Element;
 use Zend\Form\ElementInterface;
-use Zend\Loader\Pluggable;
 use Zend\View\Helper\AbstractHelper as BaseAbstractHelper;
 
 /**
@@ -47,7 +46,7 @@ class FormElement extends BaseAbstractHelper
     public function render(ElementInterface $element)
     {
         $renderer = $this->getView();
-        if (!$renderer instanceof Pluggable) {
+        if (!method_exists($renderer, 'plugin')) {
             // Bail early if renderer is not pluggable
             return '';
         }

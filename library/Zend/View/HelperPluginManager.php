@@ -16,27 +16,33 @@
  * @package    Zend_View
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 namespace Zend\View;
 
-use Zend\Loader\PluginClassLoader;
+use Zend\ServiceManager\AbstractPluginManager;
+use Zend\ServiceManager\ConfigurationInterface;
 
 /**
- * Plugin Class Loader implementation for view helpers.
+ * Plugin manager implementation for view helpers
+ *
+ * Enforces that heleprs retrieved are instances of
+ * Helper\HelperInterface. Additionally, it registers a number of default 
+ * helpers.
  *
  * @category   Zend
- * @package    Zend_View
+ * @package    Zend_Paginator
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class HelperLoader extends PluginClassLoader
+class HelperPluginManager extends AbstractPluginManager
 {
     /**
-     * @var array Pre-aliased view helpers
+     * Default set of helpers
+     * 
+     * @var array
      */
-    protected $plugins = array(
+    protected $invokableClasses = array(
         'basepath'            => 'Zend\View\Helper\BasePath',
         'currency'            => 'Zend\View\Helper\Currency',
         'cycle'               => 'Zend\View\Helper\Cycle',
@@ -63,12 +69,90 @@ class HelperLoader extends PluginClassLoader
         'partial'             => 'Zend\View\Helper\Partial',
         'placeholder'         => 'Zend\View\Helper\Placeholder',
         'renderchildmodel'    => 'Zend\View\Helper\RenderChildModel',
-        'render_child_model'  => 'Zend\View\Helper\RenderChildModel',
         'rendertoplaceholder' => 'Zend\View\Helper\RenderToPlaceholder',
         'serverurl'           => 'Zend\View\Helper\ServerUrl',
         'translator'          => 'Zend\View\Helper\Translator',
         'url'                 => 'Zend\View\Helper\Url',
         'viewmodel'           => 'Zend\View\Helper\ViewModel',
-        'view_model'          => 'Zend\View\Helper\ViewModel',
     );
+
+    /**
+     * @var Renderer\RendererInterface
+     */
+    protected $renderer;
+
+    /**
+     * Constructor
+     *
+     * After invoking parent constructor, add an initializer to inject the
+     * attached renderer, if any, to the currently requested helper.
+     * 
+     * @param  null|ConfigurationInterface $configuration 
+     * @return void
+     */
+    public function __construct(ConfigurationInterface $configuration = null)
+    {
+        parent::__construct($configuration);
+        $this->addInitializer(array($this, 'injectRenderer'));
+    }
+
+    /**
+     * Set renderer
+     * 
+     * @param  Renderer\RendererInterface $renderer 
+     * @return HelperPluginManager
+     */
+    public function setRenderer(Renderer\RendererInterface $renderer)
+    {
+        $this->renderer = $renderer;
+        return $this;
+    }
+
+    /**
+     * Retrieve renderer instance
+     * 
+     * @return null|Renderer\RendererInterface
+     */
+    public function getRenderer()
+    {
+        return $this->renderer;
+    }
+
+    /**
+     * Inject a helper instance with the registered renderer
+     *
+     * @param  Helper\HelperInterface $helper 
+     * @return void
+     */
+    public function injectRenderer($helper)
+    {
+        $renderer = $this->getRenderer();
+        if (null === $renderer) { 
+            return;
+        }
+        $helper->setView($renderer);
+    }
+
+    /**
+     * Validate the plugin
+     *
+     * Checks that the helper loaded is an instance of Helper\HelperInterface.
+     * 
+     * @param  mixed $plugin 
+     * @return void
+     * @throws Exception\InvalidHelperException if invalid
+     */
+    public function validatePlugin($plugin)
+    {
+        if ($plugin instanceof Helper\HelperInterface) {
+            // we're okay
+            return;
+        }
+
+        throw new Exception\InvalidHelperException(sprintf(
+            'Plugin of type %s is invalid; must implement %s\Helper\HelperInterface',
+            (is_object($plugin) ? get_class($plugin) : gettype($plugin)),
+            __NAMESPACE__
+        ));
+    }
 }

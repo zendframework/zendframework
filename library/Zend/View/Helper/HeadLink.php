@@ -286,7 +286,7 @@ class HeadLink extends Placeholder\Container\Standalone
             }
         }
 
-        if ($this->view instanceof \Zend\Loader\Pluggable) {
+        if (method_exists($this->view, 'plugin')) {
             $link .= ($this->view->plugin('doctype')->isXhtml()) ? '/>' : '>';
         } else {
             $link .= '/>';

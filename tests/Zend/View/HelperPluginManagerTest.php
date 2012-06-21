@@ -21,8 +21,8 @@
 
 namespace ZendTest\View;
 
-use Zend\View\HelperBroker,
-    Zend\View\Renderer\PhpRenderer;
+use Zend\View\HelperPluginManager;
+use Zend\View\Renderer\PhpRenderer;
 
 /**
  * @category   Zend
@@ -32,54 +32,49 @@ use Zend\View\HelperBroker,
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_View
  */
-class HelperBrokerTest extends \PHPUnit_Framework_TestCase
+class HelperPluginManagerTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        $this->broker = new HelperBroker();
-    }
-
-    public function testUsesHelperLoaderAsDefaultClassLoader()
-    {
-        $this->assertInstanceOf('Zend\View\HelperLoader', $this->broker->getClassLoader());
+        $this->helpers = new HelperPluginManager();
     }
 
     public function testViewIsNullByDefault()
     {
-        $this->assertNull($this->broker->getView());
+        $this->assertNull($this->helpers->getRenderer());
     }
 
-    public function testAllowsPassingRendererForView()
+    public function testAllowsInjectingRenderer()
     {
         $renderer = new PhpRenderer();
-        $this->broker->setView($renderer);
-        $this->assertSame($renderer, $this->broker->getView());
+        $this->helpers->setRenderer($renderer);
+        $this->assertSame($renderer, $this->helpers->getRenderer());
     }
 
     public function testInjectsRendererToHelperWhenRendererIsPresent()
     {
         $renderer = new PhpRenderer();
-        $this->broker->setView($renderer);
-        $helper = $this->broker->load('doctype');
+        $this->helpers->setRenderer($renderer);
+        $helper = $this->helpers->get('doctype');
         $this->assertSame($renderer, $helper->getView());
     }
 
     public function testNoRendererInjectedInHelperWhenRendererIsNotPresent()
     {
-        $helper = $this->broker->load('doctype');
+        $helper = $this->helpers->get('doctype');
         $this->assertNull($helper->getView());
     }
 
     public function testRegisteringInvalidHelperRaisesException()
     {
         $this->setExpectedException('Zend\View\Exception\InvalidHelperException');
-        $this->broker->register('test', $this);
+        $this->helpers->setService('test', $this);
     }
 
     public function testLoadingInvalidHelperRaisesException()
     {
-        $this->broker->getClassLoader()->registerPlugin('test', get_class($this));
+        $this->helpers->setInvokableClass('test', get_class($this));
         $this->setExpectedException('Zend\View\Exception\InvalidHelperException');
-        $this->broker->register('test', $this);
+        $this->helpers->get('test');
     }
 }

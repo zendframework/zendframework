@@ -64,8 +64,8 @@ class HeadLinkTest extends \PHPUnit_Framework_TestCase
             }
         }
         $this->basePath = __DIR__ . '/_files/modules';
-        $this->view = new View();
-        $this->helper = new Helper\HeadLink();
+        $this->view     = new View();
+        $this->helper   = new Helper\HeadLink();
         $this->helper->setView($this->view);
     }
 

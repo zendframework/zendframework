@@ -26,10 +26,12 @@ use Traversable;
 use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateInterface;
 use Zend\Mvc\ApplicationInterface;
+use Zend\Mvc\Exception;
 use Zend\Mvc\MvcEvent;
+use Zend\ServiceManager\ConfigurationInterface;
+use Zend\ServiceManager\ServiceManager;
 use Zend\Stdlib\ArrayUtils;
-use Zend\View\HelperBroker as ViewHelperBroker;
-use Zend\View\HelperLoader as ViewHelperLoader;
+use Zend\View\HelperPluginManager as ViewHelperManager;
 use Zend\View\Renderer\PhpRenderer as ViewPhpRenderer;
 use Zend\View\Resolver as ViewResolver;
 use Zend\View\Strategy\PhpRendererStrategy;
@@ -39,14 +41,13 @@ use Zend\View\View;
  * Prepares the view layer
  *
  * Instantiates and configures all classes related to the view layer, including 
- * the renderer (and its associated resolver(s) and helper broker), the view 
+ * the renderer (and its associated resolver(s) and helper manager), the view 
  * object (and its associated rendering strategies), and the various MVC
  * strategies and listeners.
  *
  * Defines and manages the following services:
  *
- * - ViewHelperLoader (also aliased to Zend\View\HelperLoader)
- * - ViewHelperBroker (also aliased to Zend\View\HelperBroker)
+ * - ViewHelperManager (also aliased to Zend\View\HelperPluginManager and ViewHelperBroker)
  * - ViewTemplateMapResolver (also aliased to Zend\View\Resolver\TemplateMapResolver)
  * - ViewTemplatePathStack (also aliased to Zend\View\Resolver\TemplatePathStack)
  * - ViewResolver (also aliased to Zend\View\Resolver\AggregateResolver and ResolverInterface)
@@ -86,8 +87,7 @@ class ViewManager implements ListenerAggregateInterface
      * configured by the view manager
      */
     protected $exceptionStrategy;
-    protected $helperBroker;
-    protected $helperLoader;
+    protected $helperManager;
     protected $mvcRenderingStrategy;
     protected $renderer;
     protected $rendererStrategy;
@@ -166,47 +166,48 @@ class ViewManager implements ListenerAggregateInterface
     }
 
     /**
-     * Instantiates and configures the renderer's helper loader
+     * Instantiates and configures the renderer's helper manager
      * 
-     * @return ViewHelperLoader
+     * @return ViewHelperManager
      */
-    public function getHelperLoader()
+    public function getHelperManager()
     {
-        if ($this->helperLoader) {
-            return $this->helperLoader;
+        if ($this->helperManager) {
+            return $this->helperManager;
         }
 
+        $this->helperManager = new ViewHelperManager();
+
+        // Setup additional helpers
         $map = array();
         if (isset($this->config['helper_map'])) {
             $map = $this->config['helper_map'];
         }
-        if (!in_array('Zend\Form\View\HelperLoader', $map)) {
-            array_unshift($map, 'Zend\Form\View\HelperLoader');
+        if (!in_array('Zend\Form\View\HelperConfiguration', $map)) {
+            array_unshift($map, 'Zend\Form\View\HelperConfiguration');
         }
-        $this->helperLoader = new ViewHelperLoader($map);
-
-        $this->services->setService('ViewHelperLoader', $this->helperLoader);
-        $this->services->setAlias('Zend\View\HelperLoader', 'ViewHelperLoader');
-
-        return $this->helperLoader;
-    }
-
-    /**
-     * Instantiates and configures the renderer's helper broker
-     * 
-     * @return ViewHelperBroker
-     */
-    public function getHelperBroker()
-    {
-        if ($this->helperBroker) {
-            return $this->helperBroker;
+        foreach ($map as $key => $service) {
+            if ((!is_string($key) || is_numeric($key))
+                && class_exists($service)
+            ) {
+                $config = new $service;
+                if (!$config instanceof ConfigurationInterface) {
+                    throw new Exception\RuntimeException(sprintf(
+                        'Invalid helper configuration map provided; received "%s", expected class implementing %s',
+                        $service, 
+                        'Zend\ServiceManager\ConfigurationInterface'
+                    ));
+                }
+                $config->configureServiceManager($this->helperManager);
+                continue;
+            }
+            $this->helperManager->setInvokableClass($key, $service);
         }
-
-        $this->helperBroker = new ViewHelperBroker();
-        $this->helperBroker->setClassLoader($this->getHelperLoader());
 
         // Seed with service manager
-        $this->helperBroker->setServiceLocator($this->services);
+        if ($this->services instanceof ServiceManager) {
+            $this->helperManager->addPeeringServiceManager($this->services, ServiceManager::SCOPE_PARENT);
+        }
 
         // Configure URL view helper with router
         $this->services->setFactory('Zend\View\Helper\Url', function($sm) {
@@ -238,10 +239,11 @@ class ViewManager implements ListenerAggregateInterface
             return $doctypeHelper;
         });
 
-        $this->services->setService('ViewHelperBroker', $this->helperBroker);
-        $this->services->setAlias('Zend\View\HelperBroker', 'ViewHelperBroker');
+        $this->services->setService('ViewHelperManager', $this->helperManager);
+        $this->services->setAlias('ViewHelperBroker', 'ViewHelperManager');
+        $this->services->setAlias('Zend\View\HelperPluginManager', 'ViewHelperManager');
 
-        return $this->helperBroker;
+        return $this->helperManager;
     }
 
     /**
@@ -296,7 +298,7 @@ class ViewManager implements ListenerAggregateInterface
         }
 
         $this->renderer = new ViewPhpRenderer;
-        $this->renderer->setBroker($this->getHelperBroker());
+        $this->renderer->setHelperPluginManager($this->getHelpermanager());
         $this->renderer->setResolver($this->getResolver());
 
         $model       = $this->getViewModel();

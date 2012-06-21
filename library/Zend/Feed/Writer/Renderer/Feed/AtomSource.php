@@ -31,7 +31,7 @@ use Zend\Feed\Writer\Renderer,
 * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
 * @license http://framework.zend.com/license/new-bsd New BSD License
 */
-class AtomSource extends AtomAbstract implements Renderer\RendererInterface
+class AtomSource extends AbstractAtom implements Renderer\RendererInterface
 {
 
     /**

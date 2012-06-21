@@ -78,6 +78,14 @@ class FormRowTest extends TestCase
         $this->assertContains('<label><input', $markup);
     }
 
+    public function testCanCreateMarkupWithoutLabel()
+    {
+        $element = new Element('foo');
+        $element->setAttribute('type', 'text');
+        $markup = $this->helper->render($element);
+        $this->assertEquals('<input name="foo" type="text">', $markup);
+    }
+
     public function testInvokeWithNoElementChainsHelper()
     {
         $this->assertSame($this->helper, $this->helper->__invoke());

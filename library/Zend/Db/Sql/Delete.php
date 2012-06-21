@@ -124,9 +124,9 @@ class Delete extends AbstractSql implements SqlInterface, PreparableSqlInterface
                     } else {
                         $predicate = new Predicate\Expression($pvalue);
                     }
+                    $this->where->addPredicate($predicate, $combination);
                 }
             }
-            $this->where->addPredicate($predicate, $combination);
         }
         return $this;
     }

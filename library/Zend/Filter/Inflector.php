@@ -22,7 +22,6 @@ namespace Zend\Filter;
 
 use Traversable;
 use Zend\Stdlib\ArrayUtils;
-use Zend\Loader\Broker;
 
 /**
  * Filter chain for string inflection
@@ -110,7 +109,7 @@ class Inflector extends AbstractFilter
     }
 
     /**
-     * Set plugin broker
+     * Set plugin manager
      *
      * @param  FilterPluginManager $manager
      * @return Inflector
@@ -133,12 +132,12 @@ class Inflector extends AbstractFilter
             $options = ArrayUtils::iteratorToArray($options);
         }
 
-        // Set broker
-        if (array_key_exists('pluginBroker', $options)) {
-            if (is_scalar($options['pluginBroker']) && class_exists($options['pluginBroker'])) {
-                $options['pluginBroker'] = new $options['pluginBroker'];
+        // Set plugin manager
+        if (array_key_exists('pluginManager', $options)) {
+            if (is_scalar($options['pluginManager']) && class_exists($options['pluginManager'])) {
+                $options['pluginManager'] = new $options['pluginManager'];
             }
-            $this->setPluginBroker($options['pluginBroker']);
+            $this->setPluginManager($options['pluginManager']);
         }
 
         if (array_key_exists('throwTargetExceptionsOn', $options)) {

@@ -35,7 +35,7 @@ class GenericRole implements RoleInterface
      *
      * @var string
      */
-    protected $_roleId;
+    protected $roleId;
 
     /**
      * Sets the Role identifier
@@ -44,7 +44,7 @@ class GenericRole implements RoleInterface
      */
     public function __construct($roleId)
     {
-        $this->_roleId = (string) $roleId;
+        $this->roleId = (string) $roleId;
     }
 
     /**
@@ -54,7 +54,7 @@ class GenericRole implements RoleInterface
      */
     public function getRoleId()
     {
-        return $this->_roleId;
+        return $this->roleId;
     }
 
     /**

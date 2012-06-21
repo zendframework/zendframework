@@ -20,7 +20,9 @@
 
 namespace Zend\Acl\Assertion;
 
-use Zend\Acl;
+use Zend\Acl\Acl;
+use Zend\Acl\Resource\ResourceInterface;
+use Zend\Acl\Role\RoleInterface;
 
 /**
  * @category   Zend
@@ -43,5 +45,5 @@ interface AssertionInterface
      * @param  string                         $privilege
      * @return boolean
      */
-    public function assert(Acl\Acl $acl, Acl\Role\RoleInterface $role = null, Acl\Resource\ResourceInterface $resource = null, $privilege = null);
+    public function assert(Acl $acl, RoleInterface $role = null, ResourceInterface $resource = null, $privilege = null);
 }

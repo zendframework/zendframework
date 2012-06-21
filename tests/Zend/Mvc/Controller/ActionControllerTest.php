@@ -6,7 +6,7 @@ use PHPUnit_Framework_TestCase as TestCase,
     Zend\EventManager\SharedEventManager,
     Zend\Http\Request,
     Zend\Http\Response,
-    Zend\Mvc\Controller\PluginBroker,
+    Zend\Mvc\Controller\PluginManager,
     Zend\Mvc\MvcEvent,
     Zend\Mvc\Router\RouteMatch;
 
@@ -149,29 +149,29 @@ class ActionControllerTest extends TestCase
 
     public function testControllerIsPluggable()
     {
-        $this->assertInstanceOf('Zend\Loader\Pluggable', $this->controller);
+        $this->assertTrue(method_exists($this->controller, 'plugin'));
     }
 
-    public function testComposesPluginBrokerByDefault()
+    public function testComposesPluginManagerByDefault()
     {
-        $broker = $this->controller->getBroker();
-        $this->assertInstanceOf('Zend\Mvc\Controller\PluginBroker', $broker);
+        $plugins = $this->controller->getPluginManager();
+        $this->assertInstanceOf('Zend\Mvc\Controller\PluginManager', $plugins);
     }
 
-    public function testPluginBrokerComposesController()
+    public function testPluginManagerComposesController()
     {
-        $broker = $this->controller->getBroker();
-        $controller = $broker->getController();
+        $plugins    = $this->controller->getPluginManager();
+        $controller = $plugins->getController();
         $this->assertSame($this->controller, $controller);
     }
 
-    public function testInjectingBrokerSetsControllerWhenPossible()
+    public function testInjectingPluginManagerSetsControllerWhenPossible()
     {
-        $broker = new PluginBroker();
-        $this->assertNull($broker->getController());
-        $this->controller->setBroker($broker);
-        $this->assertSame($this->controller, $broker->getController());
-        $this->assertSame($broker, $this->controller->getBroker());
+        $plugins = new PluginManager();
+        $this->assertNull($plugins->getController());
+        $this->controller->setPluginManager($plugins);
+        $this->assertSame($this->controller, $plugins->getController());
+        $this->assertSame($plugins, $this->controller->getPluginManager());
     }
 
     public function testMethodOverloadingShouldReturnPluginWhenFound()

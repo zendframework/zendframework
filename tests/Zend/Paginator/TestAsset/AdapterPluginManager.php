@@ -17,11 +17,12 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @version    $Id$
  */
 
 namespace ZendTest\Paginator\TestAsset;
 
-use Zend\Paginator\ScrollingStyleBroker as BaseScrollingStyleBroker;
+use Zend\Paginator\AdapterPluginManager as BaseAdapterPluginManager;
 
 /**
  * @category   Zend
@@ -30,6 +31,6 @@ use Zend\Paginator\ScrollingStyleBroker as BaseScrollingStyleBroker;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ScrollingStyleBroker extends BaseScrollingStyleBroker
+class AdapterPluginManager extends BaseAdapterPluginManager
 {
 }

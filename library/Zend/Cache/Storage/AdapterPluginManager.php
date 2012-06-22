@@ -64,20 +64,7 @@ class AdapterPluginManager extends AbstractPluginManager
      * 
      * @var array
      */
-    protected $shared = array(
-        'apc'            => false,
-        'filesystem'     => false,
-        'memcached'      => false,
-        'memory'         => false,
-        'sysvshm'        => false,
-        'systemvshm'     => false,
-        'sqlite'         => false,
-        'dba'            => false,
-        'wincache'       => false,
-        'xcache'         => false,
-        'zendserverdisk' => false,
-        'zendservershm'  => false,
-    );
+    protected $shareByDefault = false;
 
     /**
      * Validate the plugin

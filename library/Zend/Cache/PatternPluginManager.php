@@ -55,14 +55,7 @@ class PatternPluginManager extends AbstractPluginManager
      * 
      * @var array
      */
-    protected $shared = array(
-        'callback' => false,
-        'capture'  => false,
-        'class'    => false,
-        'object'   => false,
-        'output'   => false,
-        'page'     => false,
-    );
+    protected $shareByDefault = false;
 
     /**
      * Validate the plugin

@@ -57,13 +57,7 @@ class PluginManager extends AbstractPluginManager
      * 
      * @var array
      */
-    protected $shared = array(
-        'clearexpiredbyfactor' => false,
-        'exceptionhandler'     => false,
-        'ignoreuserabort'      => false,
-        'optimizebyfactor'     => false,
-        'serializer'           => false,
-    );
+    protected $shareByDefault = false;
 
     /**
      * Validate the plugin

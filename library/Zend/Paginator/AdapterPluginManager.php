@@ -51,15 +51,9 @@ class AdapterPluginManager extends AbstractPluginManager
     );
 
     /**
-     * @var array Do not share by default
+     * @var bool Do not share by default
      */
-    protected $shared = array(
-        'array'         => false,
-        'dbselect'      => false,
-        'dbtableselect' => false,
-        'iterator'      => false,
-        'null'          => false,
-    );
+    protected $shareByDefault = false;
 
     /**
      * Validate the plugin

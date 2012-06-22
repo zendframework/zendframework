@@ -60,6 +60,13 @@ class ServiceManager implements ServiceLocatorInterface
     protected $peeringServiceManagers = array();
 
     /**
+     * Whether or not to share by default
+     * 
+     * @var bool
+     */
+    protected $shareByDefault = true;
+
+    /**
      * @var bool
      */
     protected $retrieveFromPeeringManagerFirst = false;
@@ -97,6 +104,35 @@ class ServiceManager implements ServiceLocatorInterface
     }
 
     /**
+     * Set flag indicating whether services are shared by default
+     * 
+     * @param  bool $shareByDefault 
+     * @return ServiceManager
+     * @throws Exception\RuntimeException if allowOverride is false
+     */
+    public function setShareByDefault($shareByDefault)
+    {
+        if ($this->allowOverride === false) {
+            throw new Exception\RuntimeException(sprintf(
+                '%s: cannot alter default shared service setting; container is marked immutable (allow_override is false)',
+                __METHOD__
+            ));
+        }
+        $this->shareByDefault = (bool) $shareByDefault;
+        return $this;
+    }
+
+    /**
+     * Are services shared by default?
+     * 
+     * @return bool
+     */
+    public function shareByDefault()
+    {
+        return $this->shareByDefault;
+    }
+
+    /**
      * @param bool $throwExceptionInCreate
      * @return ServiceManager
      */
@@ -114,12 +150,23 @@ class ServiceManager implements ServiceLocatorInterface
         return $this->throwExceptionInCreate;
     }
 
+    /**
+     * Set flag indicating whether to pull from peering manager before attempting creation
+     * 
+     * @param  bool $retrieveFromPeeringManagerFirst 
+     * @return ServiceManager
+     */
     public function setRetrieveFromPeeringManagerFirst($retrieveFromPeeringManagerFirst = true)
     {
         $this->retrieveFromPeeringManagerFirst = (bool) $retrieveFromPeeringManagerFirst;
         return $this;
     }
 
+    /**
+     * Should we retrieve from the peering manager prior to attempting to create a service?
+     * 
+     * @return bool
+     */
     public function retrieveFromPeeringManagerFirst()
     {
         return $this->retrieveFromPeeringManagerFirst;
@@ -329,7 +376,8 @@ class ServiceManager implements ServiceLocatorInterface
             );
         }
 
-        if (!isset($this->instances[$cName])
+        if ($this->shareByDefault()
+            && !isset($this->instances[$cName])
             && (!isset($this->shared[$cName]) || $this->shared[$cName] === true)
         ) {
             $this->instances[$cName] = $instance;

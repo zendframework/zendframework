@@ -51,11 +51,9 @@ class PaddingPluginManager extends AbstractPluginManager
     /**
      * Do not share by default
      * 
-     * @var array
+     * @var bool
      */
-    protected $shared = array(
-        'pkcs7' => false,
-    );
+    protected $shareByDefault = false;
 
     /**
      * Validate the plugin

@@ -41,6 +41,10 @@ class StaticValidator
      */
     public static function setPluginManager(ValidatorPluginManager $plugins = null)
     {
+        // Don't share by default to allow different arguments on subsequent calls
+        if ($plugins instanceof ValidatorPluginManager) {
+            $plugins->setShareByDefault(false);
+        }
         self::$plugins = $plugins;
     }
 
@@ -69,11 +73,6 @@ class StaticValidator
         $plugins = static::getPluginManager();
 
         $validator = $plugins->get($classBaseName, $args);
-        $result    = $validator->isValid($value);
-
-        // Unregister validator in case different args are used on later invocation
-        $plugins->setService($classBaseName, null);
-
-        return $result;
+        return $validator->isValid($value);
     }
 }

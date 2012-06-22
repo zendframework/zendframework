@@ -49,11 +49,9 @@ class SymmetricPluginManager extends AbstractPluginManager
     /**
      * Do not share by default
      * 
-     * @var array
+     * @var bool
      */
-    protected $shared = array(
-        'mcrypt' => false,
-    );
+    protected $shareByDefault = false;
 
     /**
      * Validate the plugin

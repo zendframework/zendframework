@@ -41,6 +41,10 @@ class StaticFilter
      */
     public static function setPluginManager(FilterPluginManager $manager = null)
     {
+        // Don't share by default to allow different arguments on subsequent calls
+        if ($manager instanceof FilterPluginManager) {
+            $manager->setShareByDefault(false);
+        }
         self::$plugins = $manager;
     }
 
@@ -78,11 +82,6 @@ class StaticFilter
         $plugins = static::getPluginManager();
 
         $filter = $plugins->get($classBaseName, $args);
-        $filteredValue = $filter->filter($value);
-
-        // Unregistering filter to allow different arguments on subsequent calls
-        $plugins->setService($classBaseName, null);
-
-        return $filteredValue;
+        return $filter->filter($value);
     }
 }

@@ -21,10 +21,10 @@
 namespace ZendTest\Feed\PubSubHubbub\Subscriber;
 
 use Zend\Date\Date;
-use Zend\Db\ResultSet\Row;
 use Zend\Feed\PubSubHubbub\HttpResponse;
 use Zend\Feed\PubSubHubbub\Model;
 use Zend\Feed\PubSubHubbub\Subscriber\Callback as CallbackSubscriber;
+use ArrayObject;
 
 /**
  * @category   Zend
@@ -280,8 +280,7 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
             'lease_seconds' => 10000
         );
 
-        $row = new Row;
-        $row->exchangeArray($rowdata);
+        $row = new ArrayObject($rowdata, ArrayObject::ARRAY_AS_PROPS);
 
         $this->_rowset->expects($this->any())
             ->method('current')
@@ -323,8 +322,7 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
             'lease_seconds' => 10000
         );
 
-        $row = new Row;
-        $row->exchangeArray($rowdata);
+        $row = new ArrayObject($rowdata, ArrayObject::ARRAY_AS_PROPS);
 
         $this->_rowset->expects($this->any())
             ->method('current')
@@ -370,7 +368,7 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
             'created_time' => time()
         );
 
-        $row = new Row(array('data' => $rowdata));
+        $row = new ArrayObject($rowdata, ArrayObject::ARRAY_AS_PROPS);
 
         $this->_rowset->expects($this->any())
             ->method('current')
@@ -433,7 +431,8 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
             'lease_seconds' => 10000
         );
 
-        $row = new Row(array('data' => $rowdata));
+        $row = new ArrayObject($rowdata, ArrayObject::ARRAY_AS_PROPS);
+
 
         $this->_rowset->expects($this->any())
             ->method('current')
@@ -467,7 +466,8 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
             'lease_seconds' => 10000
         );
 
-        $row = new Row(array('data' => $rowdata));
+        $row = new ArrayObject($rowdata, ArrayObject::ARRAY_AS_PROPS);
+
 
         $this->_rowset->expects($this->any())
             ->method('current')

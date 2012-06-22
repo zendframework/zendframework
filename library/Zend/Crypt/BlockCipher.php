@@ -7,6 +7,7 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Crypt
  */
+
 namespace Zend\Crypt;
 
 use Zend\Crypt\Symmetric\SymmetricInterface;
@@ -20,42 +21,46 @@ use Zend\Math\Math;
  *
  * @category   Zend
  * @package    Zend_Crypt
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class BlockCipher
 {
     const KEY_DERIV_HMAC = 'sha256';
+
     /**
      * Symmetric cipher
      *
      * @var SymmetricInterface
      */
     protected $cipher;
+
     /**
      * Symmetric cipher broker
      *
      * @var SymmetricBroker
      */
     protected static $symmetricBroker = null;
+
     /**
      * Hash algorithm fot HMAC
      *
      * @var string
      */
     protected $hash = 'sha256';
+
     /**
      * The output is binary?
      *
      * @var boolean
      */
     protected $binaryOutput = false;
+
     /**
      * User's key
      *
      * @var string
      */
     protected $key;
+
     /**
      * Number of iterations for Pbkdf2
      *
@@ -278,7 +283,7 @@ class BlockCipher
     {
         if (!Hash::isSupported($hash)) {
             throw new Exception\InvalidArgumentException(
-                "The specified hash algorithm $hash is not supported by Zend\Crypt\Hash"
+                "The specified hash algorithm '{$hash}' is not supported by Zend\Crypt\Hash"
             );
         }
         $this->hash = $hash;
@@ -328,7 +333,7 @@ class BlockCipher
         $keyHmac = substr($hash, $keySize);
         // encryption
         $ciphertext = $this->cipher->encrypt($data);
-        // HMAC 
+        // HMAC
         $hmac = Hmac::compute($keyHmac,
                               $this->hash,
                               $this->cipher->getAlgorithm() . $ciphertext);

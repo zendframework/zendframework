@@ -7,52 +7,110 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Crypt
  */
+
 namespace Zend\Crypt\PublicKey;
 
 use Zend\Crypt\PublicKey\RsaOptions;
 use Zend\Crypt\PublicKey\Rsa\Exception;
-use Traversable;
-use ArrayObject;
 use Zend\Stdlib\ArrayUtils;
+use Traversable;
 
 /**
  * Implementation of the RSA public key encryption algorithm.
  *
  * @category   Zend
  * @package    Zend_Crypt
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @subpackage PublicKey
  */
 class Rsa
 {
-    const DEFAULT_KEY_SIZE = 2048;
-
-    const FORMAT_BINARY = 'binary';
-    const FORMAT_BASE64 = 'base64';
-
     /**
      * @var RsaOptions
      */
     protected $options = null;
 
     /**
+     * RSA instance factory
+     *
+     * @param  array|Traversable $options
+     * @return Rsa
+     * @throws Rsa\Exception\RuntimeException
+     * @throws Rsa\Exception\InvalidArgumentException
+     */
+    public static function factory($options)
+    {
+        if (!extension_loaded('openssl')) {
+            throw new Exception\RuntimeException(
+                'Can not create Zend\Crypt\PublicKey\Rsa; openssl extension to be loaded'
+            );
+        }
+
+        if ($options instanceof Traversable) {
+            $options = ArrayUtils::iteratorToArray($options);
+        } elseif (!is_array($options)) {
+            throw new Exception\InvalidArgumentException(
+                'The options parameter must be an array or a Traversable'
+            );
+        }
+
+        $privateKey = null;
+        $passPhrase = isset($options['pass_phrase']) ? $options['pass_phrase'] : null;
+        if (isset($options['private_key'])) {
+            if (is_file($options['private_key'])) {
+                $privateKey = Rsa\PrivateKey::fromFile($options['private_key'], $passPhrase);
+            } elseif (is_string($options['private_key'])) {
+                $privateKey = new Rsa\PrivateKey($options['private_key'], $passPhrase);
+            } else {
+                throw new Exception\InvalidArgumentException(
+                    'Parameter "private_key" must be PEM formatted string or path to key file'
+                );
+            }
+            unset($options['private_key']);
+        }
+
+        $publicKey = null;
+        if (isset($options['public_key'])) {
+            if (is_file($options['public_key'])) {
+                $publicKey = Rsa\PublicKey::fromFile($options['public_key']);
+            } elseif (is_string($options['public_key'])) {
+                $publicKey = new Rsa\PublicKey($options['public_key']);
+            } else {
+                throw new Exception\InvalidArgumentException(
+                    'Parameter "public_key" must be PEM/certificate string or path to key/certificate file'
+                );
+            }
+            unset($options['public_key']);
+        }
+
+        $options = new RsaOptions($options);
+        if ($privateKey instanceof Rsa\PrivateKey) {
+            $options->setPrivateKey($privateKey);
+        }
+        if ($publicKey instanceof Rsa\PublicKey) {
+            $options->setPublicKey($publicKey);
+        }
+
+        return new Rsa($options);
+    }
+
+    /**
      * Class constructor
      *
-     * @param RsaOptions $options
+     * @param  RsaOptions $options
      * @throws Rsa\Exception\RuntimeException
      */
     public function __construct(RsaOptions $options = null)
     {
         if (!extension_loaded('openssl')) {
             throw new Exception\RuntimeException(
-                'Zend\Crypt\PublicKey\Rsa requires openssl extension to be loaded.'
+                'Zend\Crypt\PublicKey\Rsa requires openssl extension to be loaded'
             );
         }
 
-        if (null !== $options) {
-            $this->setOptions($options);
-        } else {
+        if ($options === null) {
             $this->options = new RsaOptions();
+        } else {
+            $this->options = $options;
         }
     }
 
@@ -69,6 +127,8 @@ class Rsa
     }
 
     /**
+     * Get options
+     *
      * @return RsaOptions
      */
     public function getOptions()
@@ -77,15 +137,14 @@ class Rsa
     }
 
     /**
-     * Sign
+     * Sign with private key
      *
-     * @param  string         $data
+     * @param  string     $data
      * @param  Rsa\PrivateKey $privateKey
-     * @param  string         $format
      * @return string
      * @throws Rsa\Exception\RuntimeException
      */
-    public function sign($data, Rsa\PrivateKey $privateKey = null, $format = null)
+    public function sign($data, Rsa\PrivateKey $privateKey = null)
     {
         $signature = '';
         if (null === $privateKey) {
@@ -96,7 +155,7 @@ class Rsa
             $data,
             $signature,
             $privateKey->getOpensslKeyResource(),
-            $this->options->getHashAlgorithm()
+            $this->options->getOpensslSignatureAlgorithm()
         );
         if (false === $result) {
             throw new Exception\RuntimeException(
@@ -104,28 +163,24 @@ class Rsa
             );
         }
 
-        if ($format == self::FORMAT_BASE64) {
-            return base64_encode($signature);
-        } else {
+        if ($this->options->getBinaryOutput()) {
             return $signature;
+        } else {
+            return base64_encode($signature);
         }
     }
 
     /**
-     * Verify signature
+     * Verify signature with public key
      *
-     * @param string $data
-     * @param string $signature
-     * @param null|Rsa\PublicKey $publicKey
-     * @param null|string $format
+     * @param  string $data
+     * @param  string $signature
+     * @param  null|Rsa\PublicKey $publicKey
      * @return bool
      * @throws Rsa\Exception\RuntimeException
      */
-    public function verify($data, $signature, Rsa\PublicKey $publicKey = null,  $format = null)
+    public function verify($data, $signature, Rsa\PublicKey $publicKey = null)
     {
-        if ($format == self::FORMAT_BASE64) {
-            $signature = base64_decode($signature);
-        }
         if (null === $publicKey) {
             $publicKey = $this->options->getPublicKey();
         }
@@ -134,7 +189,7 @@ class Rsa
             $data,
             $signature,
             $publicKey->getOpensslKeyResource(),
-            $this->options->getHashAlgorithm()
+            $this->options->getOpensslSignatureAlgorithm()
         );
         if (-1 === $result) {
             throw new Exception\RuntimeException(
@@ -146,93 +201,64 @@ class Rsa
     }
 
     /**
-     * Encrypt
+     * Encrypt with private/public key
      *
-     * @param string          $data
-     * @param Rsa\AbstractKey $key
-     * @param string          $format
+     * @param  string          $data
+     * @param  Rsa\AbstractKey $key
      * @return string
-     * @throws Rsa\Exception\RuntimeException
+     * @throws Rsa\Exception\InvalidArgumentException
      */
-    public function encrypt($data, Rsa\AbstractKey $key = null, $format = null)
+    public function encrypt($data, Rsa\AbstractKey $key = null)
     {
         if (null === $key) {
             $key = $this->options->getPublicKey();
         }
 
+        if (null === $key) {
+            throw new Exception\InvalidArgumentException('No key specified for the decryption');
+        }
+
         $encrypted = $key->encrypt($data);
 
-        if ($format == self::FORMAT_BASE64) {
-            return base64_encode($encrypted);
-        } else {
+        if ($this->options->getBinaryOutput()) {
             return $encrypted;
+        } else {
+            return base64_encode($encrypted);
         }
     }
 
     /**
-     * Decrypt
+     * Decrypt with private/public key
      *
-     * @param string          $data
-     * @param Rsa\AbstractKey $key
-     * @param string          $format
+     * @param  string          $data
+     * @param  Rsa\AbstractKey $key
      * @return string
-     * @throws Rsa\Exception\RuntimeException
+     * @throws Rsa\Exception\InvalidArgumentException
      */
-    public function decrypt($data, Rsa\AbstractKey $key = null, $format = null)
+    public function decrypt($data, Rsa\AbstractKey $key = null)
     {
-        if ($format == self::FORMAT_BASE64) {
-            $data = base64_decode($data);
+        if (null === $key) {
+            $key = $this->options->getPrivateKey();
         }
 
         if (null === $key) {
-            $key = $this->options->getPrivateKey();
+            throw new Exception\InvalidArgumentException('No key specified for the decryption');
         }
 
         return $key->decrypt($data);
     }
 
     /**
-     * Generate keys
+     * Generate new private/public key pair
+     * @see RsaOptions::generateKeys()
      *
-     * @param  array $options
-     * @return ArrayObject
+     * @param  array $opensslConfig
+     * @return Rsa
      * @throws Rsa\Exception\RuntimeException
      */
-    public function generateKeys(array $options = null)
+    public function generateKeys(array $opensslConfig = array())
     {
-        $config = array(
-            'private_key_bits' => self::DEFAULT_KEY_SIZE,
-            'private_key_type' => OPENSSL_KEYTYPE_RSA
-        );
-
-        if (isset($options['pass_phrase'])) {
-            $passPhrase = $options['pass_phrase'];
-        } else {
-            $passPhrase = $this->options->getPassPhrase();
-        }
-
-        if (isset($options['private_key_bits'])) {
-            $config['private_key_bits'] = $options['private_key_bits'];
-        }
-
-        // generate
-        $privateKey = null;
-        $publicKey  = null;
-        $resource   = openssl_pkey_new($config);
-        $result     = openssl_pkey_export($resource, $private, $passPhrase);
-        if (false === $result) {
-            throw new Exception\RuntimeException(
-                'Can not export key; openssl ' . openssl_error_string()
-            );
-        }
-
-        $privateKey = new Rsa\PrivateKey($private, $passPhrase);
-        $details    = openssl_pkey_get_details($resource);
-        $publicKey  = new Rsa\PublicKey($details['key']);
-
-        return new ArrayObject(array(
-            'privateKey' => $privateKey,
-            'publicKey' => $publicKey
-        ), ArrayObject::ARRAY_AS_PROPS);
+        $this->options->generateKeys($opensslConfig);
+        return $this;
     }
 }

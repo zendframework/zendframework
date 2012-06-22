@@ -7,6 +7,7 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Crypt
  */
+
 namespace Zend\Crypt;
 
 /**
@@ -14,8 +15,6 @@ namespace Zend\Crypt;
  *
  * @category   Zend
  * @package    Zend_Crypt
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Hmac
 {
@@ -27,24 +26,18 @@ class Hmac
     protected static $supportedAlgorithms = array();
 
     /**
-     * Constants representing the output mode of the hash algorithm
-     */
-    const STRING = 'string';
-    const BINARY = 'binary';
-
-    /**
      * Performs a HMAC computation given relevant details such as Key, Hashing
      * algorithm, the data to compute MAC of, and an output format of String,
-     * Binary notation or BTWOC.
+     * or Binary.
      *
      * @param  string $key
      * @param  string $hash
      * @param  string $data
-     * @param  string $output
+     * @param  bool   $binaryOutput
      * @throws Exception\InvalidArgumentException
      * @return string
      */
-    public static function compute($key, $hash, $data, $output = self::STRING)
+    public static function compute($key, $hash, $data, $binaryOutput = false)
     {
         if (!isset($key) || empty($key)) {
             throw new Exception\InvalidArgumentException('Provided key is null or empty');
@@ -52,26 +45,24 @@ class Hmac
 
         $hash = strtolower($hash);
         if (!self::isSupported($hash)) {
-            throw new Exception\InvalidArgumentException('Hash algorithm provided is not supported on this PHP installation');
+            throw new Exception\InvalidArgumentException(
+                "Hash algorithm is not supported on this PHP installation; provided '{$hash}'"
+            );
         }
 
-        if ($output == self::BINARY) {
-            return hash_hmac($hash, $data, $key, 1);
-        } else {
-            return hash_hmac($hash, $data, $key);
-        }
+        return hash_hmac($hash, $data, $key, (bool) $binaryOutput);
     }
 
     /**
      * Get the output size according to the hash algorithm and the output format
      *
      * @param  string $hash
-     * @param  string $output
+     * @param  bool $binaryOutput
      * @return integer
      */
-    public static function getOutputSize($hash, $output = self::STRING)
+    public static function getOutputSize($hash, $binaryOutput = false)
     {
-        return strlen(self::compute('key', $hash, 'data', $output));
+        return strlen(self::compute('key', $hash, 'data', (bool) $binaryOutput));
     }
 
     /**

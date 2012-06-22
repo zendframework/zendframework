@@ -43,6 +43,11 @@ class FormRow extends BaseAbstractHelper
      */
     protected $labelPosition = self::LABEL_PREPEND;
 
+    /**
+     * @var array
+     */
+    protected $rowLabelAttributes;
+
 
     /**
      * Utility form helper that renders a label (if it exists), an element and errors
@@ -59,17 +64,23 @@ class FormRow extends BaseAbstractHelper
             return '';
         }
 
-        $labelHelper = $renderer->plugin('form_label');
-        $elementHelper = $renderer->plugin('form_element');
+        $labelHelper         = $renderer->plugin('form_label');
+        $elementHelper       = $renderer->plugin('form_element');
         $elementErrorsHelper = $renderer->plugin('form_element_errors');
-
-        $labelOpen      = $labelHelper->openTag();
-        $labelClose     = $labelHelper->closeTag();
-        $label = $element->getAttribute('label');
-        $elementString = $elementHelper->render($element);
-        $elementErrors = $elementErrorsHelper->render($element);
+        $label               = $element->getAttribute('label');
+        $elementString       = $elementHelper->render($element);
+        $elementErrors       = $elementErrorsHelper->render($element);
 
         if (!empty($label)) {
+            $rowLabelAttributes  = $element->getAttribute('rowLabelAttributes');
+
+            if (empty($rowLabelAttributes)) {
+                $rowLabelAttributes = $this->rowLabelAttributes;
+            }
+
+            $labelOpen  = $labelHelper->openTag($rowLabelAttributes);
+            $labelClose = $labelHelper->closeTag();
+
             switch ($this->labelPosition) {
                 case self::LABEL_PREPEND:
                     $markup = $labelOpen . $label . $elementString . $labelClose . $elementErrors;
@@ -134,5 +145,27 @@ class FormRow extends BaseAbstractHelper
     public function getLabelPosition()
     {
         return $this->labelPosition;
+    }
+
+    /**
+     * Set the attributes for the row label
+     *
+     * @param array $rowLabelAttributes
+     * @return FormRow
+     */
+    public function setRowLabelAttributes($rowLabelAttributes)
+    {
+        $this->rowLabelAttributes = $rowLabelAttributes;
+        return $this;
+    }
+
+    /**
+     * Get the attributes for the row label
+     *
+     * @return array
+     */
+    public function getRowLabelAttributes()
+    {
+        return $this->rowLabelAttributes;
     }
 }

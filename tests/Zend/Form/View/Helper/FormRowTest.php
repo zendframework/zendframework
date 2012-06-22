@@ -80,12 +80,35 @@ class FormRowTest extends TestCase
         $this->assertContains('</label>', $markup);
     }
 
+    function testCanRenderRowLabelAttributes()
+    {
+        $element = new Element('foo');
+        $element->setAttribute('label', 'The value for foo:');
+        $element->setAttribute('rowLabelAttributes', array('class' => 'bar'));
+        $this->helper->setLabelPosition('append');
+        $markup = $this->helper->render($element);
+        $this->assertContains("<label class=\"bar\">", $markup);
+    }
+
     public function testCanCreateMarkupWithoutLabel()
     {
         $element = new Element('foo');
         $element->setAttribute('type', 'text');
         $markup = $this->helper->render($element);
         $this->assertEquals('<input name="foo" type="text">', $markup);
+    }
+
+    public function testCanRenderErrors()
+    {
+        $element  = new Element('foo');
+        $element->setMessages(array(
+            'First error message',
+            'Second error message',
+            'Third error message',
+        ));
+
+        $markup = $this->helper->render($element);
+        $this->assertRegexp('#<ul>\s*<li>First error message</li>\s*<li>Second error message</li>\s*<li>Third error message</li>\s*</ul>#s', $markup);
     }
 
     public function testInvokeWithNoElementChainsHelper()

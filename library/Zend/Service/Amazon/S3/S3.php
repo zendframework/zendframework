@@ -21,7 +21,7 @@
 
 namespace Zend\Service\Amazon\S3;
 
-use Zend\Crypt;
+use Zend\Crypt\Hmac;
 use Zend\Http\Header;
 use Zend\Http\Response\Stream as StreamResponse;
 use Zend\Service\Amazon;
@@ -246,7 +246,7 @@ class S3 extends \Zend\Service\Amazon\AbstractAmazon
             
             //Prevents from the fatal error method call on a non-object
             foreach ($info as $key => $value)
-                if ($value instanceof Header\HeaderDescription) {
+                if ($value instanceof Header\HeaderInterface) {
                     $info[$key] = $value->getFieldValue();
                 }
                 
@@ -794,8 +794,8 @@ class S3 extends \Zend\Service\Amazon\AbstractAmazon
             $sig_str .= '?torrent';
         }
 
-        $signature = base64_encode(Crypt\Hmac::compute($this->_getSecretKey(), 'sha1', utf8_encode($sig_str), Crypt\Hmac::BINARY));
-        $headers['Authorization'] = 'AWS '.$this->_getAccessKey().':'.$signature;
+        $signature = base64_encode(Hmac::compute($this->_getSecretKey(), 'sha1', utf8_encode($sig_str), true));
+        $headers['Authorization'] = 'AWS ' . $this->_getAccessKey() . ':' . $signature;
         
         return $headers;
     }

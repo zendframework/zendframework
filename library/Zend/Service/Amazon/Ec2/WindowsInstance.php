@@ -176,7 +176,7 @@ class WindowsInstance extends AbstractEc2
      */
     protected function _signS3UploadPolicy($policy)
     {
-        $hmac = Hmac::compute($this->_getSecretKey(), 'SHA1', $policy, Hmac::BINARY);
+        $hmac = Hmac::compute($this->_getSecretKey(), 'SHA1', $policy, true);
         return $hmac;
     }
 }

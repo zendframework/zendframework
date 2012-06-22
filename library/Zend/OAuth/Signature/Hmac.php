@@ -43,7 +43,7 @@ class Hmac extends AbstractSignature
             $this->_key,
             $this->_hashAlgorithm,
             $this->_getBaseSignatureString($params, $method, $url),
-            HMACEncryption::BINARY
+            true
         );
         return base64_encode($binaryHash);
     }

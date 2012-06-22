@@ -57,88 +57,75 @@ class UriTest extends \PHPUnit_Framework_TestCase
         $this->validator = new Validator\Uri();
     }
 
-    /**
-     * Data Provider for URIs, not necessarily complete
-     *
-     * @return array
-     */
-    public function uriDataProvider()
+    public function testHasDefaultSettingsAndLazyLoadsUriHandler()
+    {
+        $validator = $this->validator;
+        $uriHandler = $validator->getUriHandler();
+        $this->assertInstanceOf('Zend\Uri\Uri', $uriHandler);
+        $this->assertTrue($validator->getAllowRelative());
+        $this->assertTrue($validator->getAllowAbsolute());
+    }
+
+    public function testConstructorWithArraySetsOptions()
+    {
+        $uriMock = $this->getMock('Zend\Uri\Uri');
+        $validator = new Validator\Uri(array(
+            'uriHandler' => $uriMock,
+            'allowRelative' => false,
+            'allowAbsolute' => false,
+        ));
+        $this->assertEquals($uriMock, $validator->getUriHandler());
+        $this->assertFalse($validator->getAllowRelative());
+        $this->assertFalse($validator->getAllowAbsolute());
+    }
+
+    public function testConstructorWithArgsSetsOptions()
+    {
+        $uriMock = $this->getMock('Zend\Uri\Uri');
+        $validator = new Validator\Uri($uriMock, false, false);
+        $this->assertEquals($uriMock, $validator->getUriHandler());
+        $this->assertFalse($validator->getAllowRelative());
+        $this->assertFalse($validator->getAllowAbsolute());
+    }
+
+    public function allowOptionsDataProvider()
     {
         return array(
-            //    Uri                                        relative? absolute?
-            array('http',                                    true,     false),
-            array('http:',                                   false,    false),
-            //array('http:/',                                  false,    false), // TODO: FAILS
-            array('http://',                                 false,    false),
-            array('http:///',                                false,    true),
-            array('http://www.example.org/',                 false,    true),
-            array('http://www.example.org:80/',              false,    true),
-            array('https://www.example.org/',                false,    true),
-            array('https://www.example.org:80/',             false,    true),
-            array('example.org',                             true,     false),
-            //array('example.org:',                            false,    true), // TODO: FAILS
-            array('http://foo',                              false,    true),
-            array('http://foo.local',                        false,    true),
-            array('ftp://user:pass@example.org/',            false,    true),
-            array('http://example.org/?cat=5&test=joo',      false,    true),
-            array('http://www.fi/?cat=5&amp;test=joo',       false,    true),
-            //array('http://[::1]/',                           false,    true), // TODO: FAILS
-            //array('http://[2620:0:1cfe:face:b00c::3]/',      false,    true), // TODO: FAILS
-            array('http://[2620:0:1cfe:face:b00c::3]:80/',   false,    true),
-            array('a:b',                                     false,    true),
-            array('http://www.zend.com',                     false,    true),
-            array('https://example.com:10082/foo/bar?query', false,    true),
-            array('../relative/path',                        true,     false),
-            array('?queryOnly',                              true,     false),
-            array('#fragmentOnly',                           true,     false),
-            array('mailto:bob@example.com',                  false,    true),
-            array('bob@example.com',                         true,     false),
-            array('http://a_.!~*\'(-)n0123Di%25%26:pass;:&=+$,word@www.zend.com', false, true)
+            //    allowAbsolute allowRelative isAbsolute isRelative isValid expects
+            array(true,         true,         true,      false,     true,   true),
+            array(true,         true,         false,     true,      true,   true),
+            array(false,        true,         true,      false,     true,   false),
+            array(false,        true,         false,     true,      true,   true),
+            array(true,         false,        true,      false,     true,   true),
+            array(true,         false,        false,     true,      true,   false),
+            array(false,        false,        true,      false,     true,   false),
+            array(false,        false,        false,     true,      true,   false),
+            array(true,         true,         false,     false,     false,  false),
         );
     }
 
     /**
-     * @dataProvider uriDataProvider
+     * @dataProvider allowOptionsDataProvider
      */
-    public function testValidateAbsoluteOrRelativeAllowed($uri, $isRelative, $isAbsolute)
-    {
-        $validator = $this->validator;
-        $this->assertTrue($validator->getAllowAbsolute());
-        $this->assertTrue($validator->getAllowRelative());
+    public function testUriHandlerBehaviorWithAllowSettings(
+        $allowAbsolute, $allowRelative, $isAbsolute, $isRelative, $isValid, $expects
+    ) {
+        $uriMock = $this->getMock(
+            'Zend\Uri\Uri',
+            array('parse', 'isValid', 'isAbsolute', 'isValidRelative')
+        );
+        $uriMock->expects($this->once())
+            ->method('isValid')->will($this->returnValue($isValid));
+        $uriMock->expects($this->any())
+            ->method('isAbsolute')->will($this->returnValue($isAbsolute));
+        $uriMock->expects($this->any())
+            ->method('isValidRelative')->will($this->returnValue($isRelative));
 
-        $uriHandler = $validator->getUriHandler();
-        $this->assertInstanceOf('Zend\Uri\Uri', $uriHandler);
-        $this->assertEquals(($isRelative || $isAbsolute), $validator->isValid($uri));
-    }
+        $this->validator->setUriHandler($uriMock)
+            ->setAllowAbsolute($allowAbsolute)
+            ->setAllowRelative($allowRelative);
 
-    /**
-     * @dataProvider uriDataProvider
-     */
-    public function testValidateAbsoluteOnly($uri, $isRelative, $isAbsolute)
-    {
-        $validator = $this->validator;
-        $validator->setAllowAbsolute(true)->setAllowRelative(false);
-        $this->assertTrue($validator->getAllowAbsolute());
-        $this->assertFalse($validator->getAllowRelative());
-
-        $uriHandler = $validator->getUriHandler();
-        $this->assertInstanceOf('Zend\Uri\Uri', $uriHandler);
-        $this->assertEquals($isAbsolute, $validator->isValid($uri));
-    }
-
-    /**
-     * @dataProvider uriDataProvider
-     */
-    public function testValidateRelativeOnly($uri, $isRelative, $isAbsolute)
-    {
-        $validator = $this->validator;
-        $validator->setAllowAbsolute(false)->setAllowRelative(true);
-        $this->assertFalse($validator->getAllowAbsolute());
-        $this->assertTrue($validator->getAllowRelative());
-
-        $uriHandler = $validator->getUriHandler();
-        $this->assertInstanceOf('Zend\Uri\Uri', $uriHandler);
-        $this->assertEquals($isRelative, $validator->isValid($uri));
+        $this->assertEquals($expects, $this->validator->isValid('uri'));
     }
 
     /**

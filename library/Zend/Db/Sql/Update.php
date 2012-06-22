@@ -182,8 +182,16 @@ class Update extends AbstractSql implements SqlInterface, PreparableSqlInterface
         if (is_array($set)) {
             $setSql = array();
             foreach ($set as $column => $value) {
-                $parameterContainer->offsetSet($column, $value);
-                $setSql[] = $platform->quoteIdentifier($column) . ' = ' . $driver->formatParameterName($column);
+                if ($value instanceof Expression) {
+                    $exprData = $this->processExpression($value, $platform, $driver);
+                    $setSql[] = $platform->quoteIdentifier($column) . ' = ' . $exprData['sql'];
+                    if (count($exprData['parameters']) > 0) {
+                        $parameterContainer->merge($exprData['parameters']);
+                    }
+                } else {
+                    $setSql[] = $platform->quoteIdentifier($column) . ' = ' . $driver->formatParameterName($column);
+                    $parameterContainer->offsetSet($column, $value);
+                }
             }
             $set = implode(', ', $setSql);
         }
@@ -215,8 +223,13 @@ class Update extends AbstractSql implements SqlInterface, PreparableSqlInterface
         $set = $this->set;
         if (is_array($set)) {
             $setSql = array();
-            foreach ($set as $setName => $setValue) {
-                $setSql[] = $adapterPlatform->quoteIdentifier($setName) . ' = ' . $adapterPlatform->quoteValue($setValue);
+            foreach ($set as $column => $value) {
+                if ($value instanceof Expression) {
+                    $exprData = $this->processExpression($value, $adapterPlatform);
+                    $setSql[] = $adapterPlatform->quoteIdentifier($column) . ' = ' . $exprData['sql'];
+                } else {
+                    $setSql[] = $adapterPlatform->quoteIdentifier($column) . ' = ' . $adapterPlatform->quoteValue($value);
+                }
             }
             $set = implode(', ', $setSql);
         }

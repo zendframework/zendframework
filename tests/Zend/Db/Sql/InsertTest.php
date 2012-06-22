@@ -82,9 +82,9 @@ class InsertTest extends \PHPUnit_Framework_TestCase
     public function testGetSqlString()
     {
         $this->insert->into('foo')
-            ->values(array('bar' => 'baz'));
+            ->values(array('bar' => 'baz', 'boo' => new Expression('NOW()')));
 
-        $this->assertEquals('INSERT INTO "foo" ("bar") VALUES (\'baz\')', $this->insert->getSqlString());
+        $this->assertEquals('INSERT INTO "foo" ("bar", "boo") VALUES (\'baz\', NOW())', $this->insert->getSqlString());
     }
 
     /**

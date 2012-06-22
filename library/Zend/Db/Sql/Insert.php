@@ -167,7 +167,6 @@ class Insert extends AbstractSql implements SqlInterface, PreparableSqlInterface
                 $values[$cIndex] = $driver->formatParameterName($column);
                 $parameterContainer->offsetSet($column, $this->values[$cIndex]);
             }
-
         }
 
         $sql = sprintf(
@@ -194,7 +193,16 @@ class Insert extends AbstractSql implements SqlInterface, PreparableSqlInterface
         $columns = array_map(array($adapterPlatform, 'quoteIdentifier'), $this->columns);
         $columns = implode(', ', $columns);
 
-        $values = array_map(array($adapterPlatform, 'quoteValue'), $this->values);
+        $values = array();
+        foreach ($this->values as $value) {
+            if ($value instanceof Expression) {
+                $exprData = $this->processExpression($value, $adapterPlatform);
+                $values[] = $exprData['sql'];
+            } else {
+                $values[] = $adapterPlatform->quoteValue($value);
+            }
+        }
+
         $values = implode(', ', $values);
 
         return sprintf($this->specifications[self::SPECIFICATION_INSERT], $table, $columns, $values);

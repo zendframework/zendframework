@@ -76,16 +76,17 @@ class Headers implements Iterator, Countable
      * will be lazy loaded)
      *
      * @param  string $string
+     * @param  string $EOL EOL string; defaults to {@link EOL}
      * @throws Exception\RuntimeException
      * @return Headers
      */
-    public static function fromString($string)
+    public static function fromString($string, $EOL = self::EOL)
     {
         $headers     = new static();
         $currentLine = '';
 
         // iterate the header lines, some might be continuations
-        foreach (explode(self::EOL, $string) as $line) {
+        foreach (explode($EOL, $string) as $line) {
             // check if a header name is present
             if (preg_match('/^(?P<name>[^()><@,;:\"\\/\[\]?=}{ \t]+):.*$/', $line, $matches)) {
                 if ($currentLine) {

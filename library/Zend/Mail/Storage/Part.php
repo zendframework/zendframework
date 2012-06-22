@@ -117,18 +117,18 @@ class Part implements RecursiveIterator, Part\PartInterface
             $this->_headers->addHeaders($headers);
         } elseif (isset($params['headers'])) {
             if (is_array($params['headers'])) {
-                $headers = $params['headers'];
+                $this->_headers = new Headers();
+                $this->_headers->addHeaders($params['headers']);
             } else {
-                $body    = null; // "Declare" variable since it's passed by reference
-                $headers = null; // "Declare" variable since it's passed by reference
                 if (empty($params['noToplines'])) {
+                    $this->_headers = new Headers();
                     Mime\Decode::splitMessage($params['headers'], $headers, $this->_topLines);
+                    $this->_headers->addHeaders($headers);
                 } else {
-                    Mime\Decode::splitMessage($params['headers'], $headers, $body);
+                    $this->_headers = Headers::fromString($params['headers']);
                 }
             }
-            $this->_headers = new Headers();
-            $this->_headers->addHeaders($headers);
+
             if (isset($params['content'])) {
                 $this->_content = $params['content'];
             }
@@ -284,13 +284,11 @@ class Part implements RecursiveIterator, Part\PartInterface
     public function getHeaders()
     {
         if (null === $this->_headers) {
-            $this->_headers = new Headers();
             if ($this->_mail) {
-                $body    = null; // "Declare" variable since it's passed by reference
-                $headers = null; // "Declare" variable since it's passed by reference
                 $part = $this->_mail->getRawHeader($this->_messageNum);
-                Mime\Decode::splitMessage($part, $headers, $body);
-                $this->_headers->addHeaders($headers);
+                $this->_headers = Headers::fromString($part);
+            } else {
+                $this->_headers = new Headers();
             }
         }
 

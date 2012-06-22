@@ -118,7 +118,7 @@ class HashTest extends \PHPUnit_Framework_TestCase
 
     public function testBinaryOutput()
     {
-        $hash = Hash::compute('sha1', 'test', true);
+        $hash = Hash::compute('sha1', 'test', Hash::OUTPUT_BINARY);
         $this->assertEquals('qUqP5cyxm6YcTAhz05Hph5gvu9M=', base64_encode($hash));
     }
 

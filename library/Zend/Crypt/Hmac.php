@@ -18,6 +18,9 @@ namespace Zend\Crypt;
  */
 class Hmac
 {
+    const OUTPUT_STRING = 'string';
+    const OUTPUT_BINARY = 'binary';
+
     /**
      * List of hash algorithms supported
      *
@@ -33,11 +36,11 @@ class Hmac
      * @param  string $key
      * @param  string $hash
      * @param  string $data
-     * @param  bool   $binaryOutput
+     * @param  string $output
      * @throws Exception\InvalidArgumentException
      * @return string
      */
-    public static function compute($key, $hash, $data, $binaryOutput = false)
+    public static function compute($key, $hash, $data, $output = self::OUTPUT_STRING)
     {
         if (!isset($key) || empty($key)) {
             throw new Exception\InvalidArgumentException('Provided key is null or empty');
@@ -50,19 +53,20 @@ class Hmac
             );
         }
 
-        return hash_hmac($hash, $data, $key, (bool) $binaryOutput);
+        $output = ($output === self::OUTPUT_BINARY);
+        return hash_hmac($hash, $data, $key, $output);
     }
 
     /**
      * Get the output size according to the hash algorithm and the output format
      *
      * @param  string $hash
-     * @param  bool $binaryOutput
+     * @param  string $output
      * @return integer
      */
-    public static function getOutputSize($hash, $binaryOutput = false)
+    public static function getOutputSize($hash, $output = self::OUTPUT_STRING)
     {
-        return strlen(self::compute('key', $hash, 'data', (bool) $binaryOutput));
+        return strlen(self::compute('key', $hash, 'data', $output));
     }
 
     /**

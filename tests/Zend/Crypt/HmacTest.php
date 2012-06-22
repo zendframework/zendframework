@@ -228,7 +228,7 @@ class HmacTest extends \PHPUnit_Framework_TestCase
 
     public function testBinaryOutput()
     {
-        $data = HMAC::compute('key', 'sha256', 'test', true);
+        $data = HMAC::compute('key', 'sha256', 'test', HMAC::OUTPUT_BINARY);
         $this->assertEquals('Aq+1YwSQLGVvy3N83QPeYgW7bUAdooEu/ZstNqCK8Vk=', base64_encode($data));
     }
 }

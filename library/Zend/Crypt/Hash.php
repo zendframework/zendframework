@@ -16,6 +16,9 @@ namespace Zend\Crypt;
  */
 class Hash
 {
+    const OUTPUT_STRING = 'string';
+    const OUTPUT_BINARY = 'binary';
+
     /**
      * List of hash algorithms supported
      *
@@ -26,11 +29,11 @@ class Hash
     /**
      * @param  string $hash
      * @param  string $data
-     * @param  bool   $binaryOutput
+     * @param  string $output
      * @throws Exception\InvalidArgumentException
      * @return string
      */
-    public static function compute($hash, $data, $binaryOutput = false)
+    public static function compute($hash, $data, $output = self::OUTPUT_STRING)
     {
         $hash = strtolower($hash);
         if (!self::isSupported($hash)) {
@@ -39,19 +42,20 @@ class Hash
             );
         }
 
-        return hash($hash, $data, (bool) $binaryOutput);
+        $output = ($output === self::OUTPUT_BINARY);
+        return hash($hash, $data, $output);
     }
 
     /**
      * Get the output size according to the hash algorithm and the output format
      *
      * @param  string $hash
-     * @param  bool   $binaryOutput
+     * @param  string $output
      * @return integer
      */
-    public static function getOutputSize($hash, $binaryOutput = false)
+    public static function getOutputSize($hash, $output = self::OUTPUT_STRING)
     {
-        return strlen(self::compute($hash, 'data', (bool) $binaryOutput));
+        return strlen(self::compute($hash, 'data', $output));
     }
 
     /**

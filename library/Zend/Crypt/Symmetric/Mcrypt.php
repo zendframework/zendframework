@@ -22,48 +22,53 @@ use Zend\Stdlib\ArrayUtils;
  *
  * @category   Zend
  * @package    Zend_Crypt
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Mcrypt implements SymmetricInterface
 {
     const DEFAULT_PADDING = 'pkcs7';
+
     /**
      * Key
      *
      * @var string
      */
     protected $key;
+
     /**
      * IV
      *
      * @var string
      */
     protected $iv;
+
     /**
      * Encryption algorithm
      *
      * @var string
      */
     protected $algo = 'aes';
+
     /**
      * Encryption mode
      *
      * @var string
      */
     protected $mode = 'cbc';
+
     /**
      * Padding
      *
      * @var Padding\PaddingInterface
      */
     protected $padding;
+
     /**
      * Padding broker
      *
      * @var PaddingBroker
      */
     protected static $paddingBroker = null;
+
     /**
      * Supported cipher algorithms
      *
@@ -84,6 +89,7 @@ class Mcrypt implements SymmetricInterface
         'serpent'      => 'serpent',
         'twofish'      => 'twofish'
     );
+
     /**
      * Supported encryption modes
      *
@@ -191,17 +197,17 @@ class Mcrypt implements SymmetricInterface
         if (is_string($broker)) {
             if (!class_exists($broker)) {
                 throw new Exception\InvalidArgumentException(sprintf(
-                                                                 'Unable to locate padding broker of class "%s"',
-                                                                 $broker
-                                                             ));
+                    'Unable to locate padding broker of class "%s"',
+                    $broker
+                ));
             }
             $broker = new $broker();
         }
         if (!$broker instanceof PaddingBroker) {
             throw new Exception\InvalidArgumentException(sprintf(
-                                                             'Padding broker must extend PaddingBroker; received "%s"',
-                                                             (is_object($broker) ? get_class($broker) : gettype($broker))
-                                                         ));
+                'Padding broker must extend PaddingBroker; received "%s"',
+                (is_object($broker) ? get_class($broker) : gettype($broker))
+            ));
         }
         self::$paddingBroker = $broker;
     }

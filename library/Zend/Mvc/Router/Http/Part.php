@@ -24,7 +24,7 @@ namespace Zend\Mvc\Router\Http;
 use Traversable,
     Zend\Stdlib\ArrayUtils,
     Zend\Stdlib\RequestInterface as Request,
-    Zend\Mvc\Router\RouteBroker,
+    Zend\Mvc\Router\RoutePluginManager,
     Zend\Mvc\Router\Exception,
     Zend\Mvc\Router\PriorityList;
 
@@ -63,15 +63,15 @@ class Part extends TreeRouteStack implements RouteInterface
     /**
      * Create a new part route.
      *
-     * @param  mixed       $route
-     * @param  boolean     $mayTerminate
-     * @param  RouteBroker $routeBroker
-     * @param  array|null  $childRoutes
+     * @param  mixed              $route
+     * @param  boolean            $mayTerminate
+     * @param  RoutePluginManager $routePlugins
+     * @param  array|null         $childRoutes
      * @throws Exception\InvalidArgumentException
      */
-    public function __construct($route, $mayTerminate, RouteBroker $routeBroker, array $childRoutes = null)
+    public function __construct($route, $mayTerminate, RoutePluginManager $routePlugins, array $childRoutes = null)
     {
-        $this->routeBroker = $routeBroker;
+        $this->routePluginManager = $routePlugins;
 
         if (!$route instanceof RouteInterface) {
             $route = $this->routeFromArray($route);
@@ -107,8 +107,8 @@ class Part extends TreeRouteStack implements RouteInterface
             throw new Exception\InvalidArgumentException('Missing "route" in options array');
         }
 
-        if (!isset($options['route_broker'])) {
-            throw new Exception\InvalidArgumentException('Missing "route_broker" in options array');
+        if (!isset($options['route_plugins'])) {
+            throw new Exception\InvalidArgumentException('Missing "route_plugins" in options array');
         }
 
         if (!isset($options['may_terminate'])) {
@@ -122,7 +122,7 @@ class Part extends TreeRouteStack implements RouteInterface
             $options['child_routes'] = ArrayUtils::iteratorToArray($options['child_routes']);
         }
 
-        return new static($options['route'], $options['may_terminate'], $options['route_broker'], $options['child_routes']);
+        return new static($options['route'], $options['may_terminate'], $options['route_plugins'], $options['child_routes']);
     }
 
     /**

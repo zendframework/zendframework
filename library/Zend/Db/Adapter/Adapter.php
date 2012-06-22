@@ -70,7 +70,7 @@ class Adapter
      * @param Platform\PlatformInterface $platform
      * @param ResultSet\ResultSet $queryResultPrototype
      */
-    public function __construct($driver, Platform\PlatformInterface $platform = null, ResultSet\ResultSet $queryResultPrototype = null)
+    public function __construct($driver, Platform\PlatformInterface $platform = null, ResultSet\ResultSetInterface $queryResultPrototype = null)
     {
         if (is_array($driver)) {
             $driver = $this->createDriverFromParameters($driver);
@@ -175,7 +175,7 @@ class Adapter
 
         if ($result instanceof Driver\ResultInterface && $result->isQueryResult()) {
             $resultSet = clone $this->queryResultSetPrototype;
-            $resultSet->setDataSource($result);
+            $resultSet->initialize($result);
             return $resultSet;
         }
 

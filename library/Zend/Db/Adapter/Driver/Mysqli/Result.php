@@ -297,6 +297,14 @@ class Result implements \Iterator, ResultInterface
     }
 
     /**
+     * @return int
+     */
+    public function getFieldCount()
+    {
+        return $this->resource->field_count;
+    }
+
+    /**
      * @return mixed|null
      */
     public function getGeneratedValue()

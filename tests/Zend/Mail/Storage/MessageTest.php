@@ -141,9 +141,11 @@ class MessageTest extends \PHPUnit_Framework_TestCase
         $raw = "sUBject: test\nSubJect: test2\n" . $raw;
         $message = new Message(array('raw' => $raw));
 
-        $this->assertEquals($message->getHeader('subject', 'string'),
-                           'test' . Mime\Mime::LINEEND . 'test2' . Mime\Mime::LINEEND .  'multipart');
-        $this->assertEquals($message->getHeader('subject'),  array('test', 'test2', 'multipart'));
+        $this->assertEquals('test' . Mime\Mime::LINEEND . 'test2' . Mime\Mime::LINEEND . 'multipart',
+                            $message->getHeader('subject', 'string'));
+
+        $this->assertEquals(array('test', 'test2', 'multipart'),
+                            $message->getHeader('subject', 'array'));
     }
 
     public function testContentTypeDecode()
@@ -279,18 +281,13 @@ class MessageTest extends \PHPUnit_Framework_TestCase
     public function testEmptyHeader()
     {
         $message = new Message(array());
-        $this->assertEquals(array(), $message->getHeaders());
+        $this->assertEquals(array(), $message->getHeaders()->toArray());
 
         $message = new Message(array());
         $subject = null;
-        try {
-            $subject = $message->subject;
-        } catch (Exception\InvalidArgumentException $e) {
-            // ok
-        }
-        if ($subject) {
-            $this->fail('no exception raised while getting header from empty message');
-        }
+
+        $this->setExpectedException('Zend\\Mail\\Exception\\InvalidArgumentException');
+        $message->subject;
     }
 
     public function testEmptyBody()
@@ -317,11 +314,11 @@ class MessageTest extends \PHPUnit_Framework_TestCase
     {
         $message = new Message(array('headers' => array('subject' => 'foo')));
 
-        $this->assertTrue( $message->headerExists('subject'));
+        $this->assertTrue( $message->getHeaders()->has('subject'));
         $this->assertTrue( isset($message->subject) );
-        $this->assertTrue( $message->headerExists('SuBject'));
+        $this->assertTrue( $message->getHeaders()->has('SuBject'));
         $this->assertTrue( isset($message->suBjeCt) );
-        $this->assertFalse($message->headerExists('From'));
+        $this->assertFalse($message->getHeaders()->has('From'));
     }
 
     public function testWrongMultipart()

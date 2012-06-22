@@ -73,7 +73,8 @@ class File extends Part
         }
 
         $body = null; // "Declare" variable since it's passed by reference
-        Mime\Decode::splitMessage($header, $this->_headers, $body);
+        Mime\Decode::splitMessage($header, $headers, $body);
+        $this->getHeaders()->addHeaders($headers);
 
         $this->_contentPos[0] = ftell($this->_fh);
         if ($endPos !== null) {

@@ -222,12 +222,15 @@ class Headers implements Iterator, Countable
         }
 
         if ($fieldValue === null) {
-            $header = Header\GenericHeader::fromString($headerFieldNameOrLine);
+            $this->addHeader(Header\GenericHeader::fromString($headerFieldNameOrLine));
+        } elseif (is_array($fieldValue)) {
+            foreach($fieldValue as $i) {
+                $this->addHeader(new Header\GenericMultiHeader($headerFieldNameOrLine, $i));
+            }
         } else {
-            $header = new Header\GenericHeader($headerFieldNameOrLine, $fieldValue);
+            $this->addHeader(new Header\GenericHeader($headerFieldNameOrLine, $fieldValue));
         }
 
-        $this->addHeader($header);
         return $this;
     }
 

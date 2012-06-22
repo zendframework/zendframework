@@ -32,14 +32,7 @@ use Zend\ServiceManager\ConfigurationInterface;
 class WriterPluginManager extends AbstractPluginManager
 {
     /**
-     * Aliases for registered filter invokables
-     * 
-     * @var array
-     */
-    protected $aliases = array();
-
-    /**
-     * Default set of filters
+     * Default set of writers
      * 
      * @var array
      */
@@ -57,12 +50,11 @@ class WriterPluginManager extends AbstractPluginManager
     /**
      * Validate the plugin
      *
-     * Checks that the filter loaded is either a valid callback or an instance
-     * of FilterInterface.
+     * Checks that the writer loaded is an instance of Writer\WriterInterface.
      * 
      * @param  mixed $plugin 
      * @return void
-     * @throws Exception\RuntimeException if invalid
+     * @throws Exception\InvalidArgumentException if invalid
      */
     public function validatePlugin($plugin)
     {

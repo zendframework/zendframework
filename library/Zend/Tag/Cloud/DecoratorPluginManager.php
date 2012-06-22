@@ -22,7 +22,6 @@
 namespace Zend\Tag\Cloud;
 
 use Zend\ServiceManager\AbstractPluginManager;
-use Zend\ServiceManager\ConfigurationInterface;
 use Zend\Tag\Exception;
 
 /**

@@ -21,7 +21,6 @@
 namespace Zend\Crypt;
 
 use Zend\ServiceManager\AbstractPluginManager;
-use Zend\ServiceManager\ConfigurationInterface;
 
 /**
  * Plugin manager implementation for the symmetric adapter instances.

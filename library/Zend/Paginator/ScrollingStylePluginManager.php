@@ -21,12 +21,11 @@
 namespace Zend\Paginator;
 
 use Zend\ServiceManager\AbstractPluginManager;
-use Zend\ServiceManager\ConfigurationInterface;
 
 /**
  * Plugin manager implementation for scrolling style adapters
  *
- * Enforces that adapters retrieved are either callbacks or instances of
+ * Enforces that adapters retrieved are instances of
  * ScrollingStyle\ScrollingStyleInterface. Additionally, it registers a number 
  * of default adapters available.
  *

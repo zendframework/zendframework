@@ -21,7 +21,6 @@
 namespace Zend\Filter;
 
 use Zend\ServiceManager\AbstractPluginManager;
-use Zend\ServiceManager\ConfigurationInterface;
 
 /**
  * Plugin manager implementation for the filter chain.
@@ -37,13 +36,6 @@ use Zend\ServiceManager\ConfigurationInterface;
  */
 class FilterPluginManager extends AbstractPluginManager
 {
-    /**
-     * Aliases for registered filter invokables
-     * 
-     * @var array
-     */
-    protected $aliases = array();
-
     /**
      * Default set of filters
      * 

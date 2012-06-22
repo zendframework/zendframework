@@ -22,7 +22,6 @@
 namespace Zend\Crypt\Symmetric;
 
 use Zend\ServiceManager\AbstractPluginManager;
-use Zend\ServiceManager\ConfigurationInterface;
 
 /**
  * Plugin manager implementation for the padding adapter instances.
@@ -58,12 +57,11 @@ class PaddingPluginManager extends AbstractPluginManager
     /**
      * Validate the plugin
      *
-     * Checks that the filter loaded is either a valid callback or an instance
-     * of FilterInterface.
+     * Checks that the padding adaper loaded is an instance of Padding\PaddingInterface.
      * 
      * @param  mixed $plugin 
      * @return void
-     * @throws Exception\RuntimeException if invalid
+     * @throws Exception\InvalidArgumentException if invalid
      */
     public function validatePlugin($plugin)
     {

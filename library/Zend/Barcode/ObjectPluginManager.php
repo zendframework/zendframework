@@ -21,7 +21,6 @@
 namespace Zend\Barcode;
 
 use Zend\ServiceManager\AbstractPluginManager;
-use Zend\ServiceManager\ConfigurationInterface;
 
 /**
  * Plugin manager implementation for barcode parsers.
@@ -31,7 +30,7 @@ use Zend\ServiceManager\ConfigurationInterface;
  * barcode parsers.
  *
  * @category   Zend
- * @package    Zend_Filter
+ * @package    Zend_Barcode
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -71,7 +70,7 @@ class ObjectPluginManager extends AbstractPluginManager
      * 
      * @param  mixed $plugin 
      * @return void
-     * @throws Exception\RuntimeException if invalid
+     * @throws Exception\InvalidArgumentException if invalid
      */
     public function validatePlugin($plugin)
     {

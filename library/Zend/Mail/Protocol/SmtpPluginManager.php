@@ -22,7 +22,6 @@
 namespace Zend\Mail\Protocol;
 
 use Zend\ServiceManager\AbstractPluginManager;
-use Zend\ServiceManager\ConfigurationInterface;
 
 /**
  * Plugin manager implementation for SMTP extensions.
@@ -57,7 +56,7 @@ class SmtpPluginManager extends AbstractPluginManager
      * 
      * @param  mixed $plugin 
      * @return void
-     * @throws Exception\RuntimeException if invalid
+     * @throws Exception\InvalidArgumentException if invalid
      */
     public function validatePlugin($plugin)
     {

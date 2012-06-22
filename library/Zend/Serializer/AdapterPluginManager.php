@@ -21,7 +21,6 @@
 namespace Zend\Serializer;
 
 use Zend\ServiceManager\AbstractPluginManager;
-use Zend\ServiceManager\ConfigurationInterface;
 
 /**
  * Plugin manager implementation for serializer adapters.

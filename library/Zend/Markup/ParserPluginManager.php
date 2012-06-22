@@ -21,7 +21,6 @@
 namespace Zend\Markup;
 
 use Zend\ServiceManager\AbstractPluginManager;
-use Zend\ServiceManager\ConfigurationInterface;
 
 /**
  * Plugin manager implementation for parser adapters

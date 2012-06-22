@@ -22,7 +22,6 @@
 namespace Zend\Math\BigInteger;
 
 use Zend\ServiceManager\AbstractPluginManager;
-use Zend\ServiceManager\ConfigurationInterface;
 
 /**
  * Plugin manager implementation for BigInteger adapters.

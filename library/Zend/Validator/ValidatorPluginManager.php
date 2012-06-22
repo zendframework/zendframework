@@ -21,7 +21,6 @@
 namespace Zend\Validator;
 
 use Zend\ServiceManager\AbstractPluginManager;
-use Zend\ServiceManager\ConfigurationInterface;
 
 /**
  * @category   Zend
@@ -32,14 +31,7 @@ use Zend\ServiceManager\ConfigurationInterface;
 class ValidatorPluginManager extends AbstractPluginManager
 {
     /**
-     * Aliases for registered filter invokables
-     * 
-     * @var array
-     */
-    protected $aliases = array();
-
-    /**
-     * Default set of filters
+     * Default set of validators
      * 
      * @var array
      */

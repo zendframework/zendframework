@@ -23,6 +23,7 @@ namespace ZendTest\Validator;
 
 use Zend\Validator;
 use ReflectionClass;
+use Zend\Uri\Exception\InvalidArgumentException;
 
 /**
  * Test helper
@@ -126,6 +127,17 @@ class UriTest extends \PHPUnit_Framework_TestCase
             ->setAllowRelative($allowRelative);
 
         $this->assertEquals($expects, $this->validator->isValid('uri'));
+    }
+
+    public function testUriHandlerThrowsExceptionInParseMethodNotValid()
+    {
+        $uriMock = $this->getMock('Zend\Uri\Uri');
+        $uriMock->expects($this->once())
+            ->method('parse')
+            ->will($this->throwException(new InvalidArgumentException()));
+
+        $this->validator->setUriHandler($uriMock);
+        $this->assertFalse($this->validator->isValid('uri'));
     }
 
     /**

@@ -24,7 +24,7 @@ namespace Zend\Form\View\Helper;
 use Zend\Form\ElementInterface;
 use Zend\Form\Exception;
 use Zend\Loader\Pluggable;
-use Zend\View\Helper\AbstractHelper as BaseAbstractHelper;
+use Zend\Form\View\Helper\AbstractHelper;
 
 /**
  * @category   Zend
@@ -33,7 +33,7 @@ use Zend\View\Helper\AbstractHelper as BaseAbstractHelper;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class FormRow extends BaseAbstractHelper
+class FormRow extends AbstractHelper
 {
     const LABEL_APPEND  = 'append';
     const LABEL_PREPEND = 'prepend';
@@ -47,6 +47,21 @@ class FormRow extends BaseAbstractHelper
      * @var array
      */
     protected $rowLabelAttributes;
+
+    /**
+     * @var FormLabel
+     */
+    protected $labelHelper;
+
+    /**
+     * @var FormElement
+     */
+    protected $elementHelper;
+
+    /**
+     * @var FormElementErrors
+     */
+    protected $elementErrorsHelper;
 
 
     /**
@@ -64,14 +79,16 @@ class FormRow extends BaseAbstractHelper
             return '';
         }
 
-        $labelHelper         = $renderer->plugin('form_label');
-        $elementHelper       = $renderer->plugin('form_element');
-        $elementErrorsHelper = $renderer->plugin('form_element_errors');
+        $escapeHelper        = $this->getEscapeHelper();
+        $labelHelper         = $this->getLabelHelper();
+        $elementHelper       = $this->getElementHelper();
+        $elementErrorsHelper = $this->getElementErrorsHelper();
         $label               = $element->getAttribute('label');
         $elementString       = $elementHelper->render($element);
         $elementErrors       = $elementErrorsHelper->render($element);
 
         if (!empty($label)) {
+            $label = $escapeHelper($label);
             $rowLabelAttributes = $element->getAttribute('rowLabelAttributes');
 
             if (empty($rowLabelAttributes)) {
@@ -182,5 +199,71 @@ class FormRow extends BaseAbstractHelper
     public function getRowLabelAttributes()
     {
         return $this->rowLabelAttributes;
+    }
+
+    /**
+     * Retrieve the FormLabel helper
+     *
+     * @return FormLabel
+     */
+    protected function getLabelHelper()
+    {
+        if ($this->labelHelper) {
+            return $this->labelHelper;
+        }
+
+        if ($this->view instanceof Pluggable) {
+            $this->labelHelper = $this->view->plugin('form_label');
+        }
+
+        if (!$this->labelHelper instanceof FormLabel) {
+            $this->labelHelper = new FormLabel();
+        }
+
+        return $this->labelHelper;
+    }
+
+    /**
+     * Retrieve the FormElement helper
+     *
+     * @return FormElement
+     */
+    protected function getElementHelper()
+    {
+        if ($this->elementHelper) {
+            return $this->elementHelper;
+        }
+
+        if ($this->view instanceof Pluggable) {
+            $this->elementHelper = $this->view->plugin('form_element');
+        }
+
+        if (!$this->elementHelper instanceof FormElement) {
+            $this->elementHelper = new FormElement();
+        }
+
+        return $this->elementHelper;
+    }
+
+    /**
+     * Retrieve the FormElementErrors helper
+     *
+     * @return FormElementErrors
+     */
+    protected function getElementErrorsHelper()
+    {
+        if ($this->elementErrorsHelper) {
+            return $this->elementErrorsHelper;
+        }
+
+        if ($this->view instanceof Pluggable) {
+            $this->elementErrorsHelper = $this->view->plugin('form_element_errors');
+        }
+
+        if (!$this->elementErrorsHelper instanceof FormElementErrors) {
+            $this->elementErrorsHelper = new FormElementErrors();
+        }
+
+        return $this->elementErrorsHelper;
     }
 }

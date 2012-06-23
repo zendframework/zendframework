@@ -20,12 +20,12 @@
 
 namespace Zend\Search\Lucene;
 
-use Zend\Search\Lucene\Search\Similarity\AbstractSimilarity,
-	Zend\Search\Lucene\Storage\Directory,
-	Zend\Search\Lucene\Exception\InvalidArgumentException,
-	Zend\Search\Lucene\Exception\RuntimeException,
-	Zend\Search\Lucene\Exception\InvalidFileFormatException,
-    Zend\Search\Lucene\Exception\OutOfRangeException;
+use Zend\Search\Lucene\Search\Similarity\AbstractSimilarity;
+use Zend\Search\Lucene\Storage\Directory;
+use Zend\Search\Lucene\Exception\InvalidArgumentException;
+use Zend\Search\Lucene\Exception\RuntimeException;
+use Zend\Search\Lucene\Exception\InvalidFileFormatException;
+use Zend\Search\Lucene\Exception\OutOfRangeException;
 
 /**
  * @category   Zend

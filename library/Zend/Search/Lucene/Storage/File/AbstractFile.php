@@ -21,8 +21,8 @@
 
 namespace Zend\Search\Lucene\Storage\File;
 
-use Zend\Search\Lucene\Storage\File,
-    Zend\Search\Lucene;
+use Zend\Search\Lucene\Storage\File;
+use Zend\Search\Lucene;
 
 /**
  * @category   Zend

@@ -112,13 +112,18 @@ class FormRow extends BaseAbstractHelper
      *
      * Proxies to {@link render()}.
      *
-     * @param  ElementInterface|null $element
-     * @return string
+     * @param null|ElementInterface $element
+     * @param null|string $labelPosition
+     * @return string|FormRow
      */
-    public function __invoke(ElementInterface $element = null)
+    public function __invoke(ElementInterface $element = null, $labelPosition = null)
     {
         if (!$element) {
             return $this;
+        }
+
+        if ($labelPosition !== null) {
+            $this->setLabelPosition($labelPosition);
         }
 
         return $this->render($element);

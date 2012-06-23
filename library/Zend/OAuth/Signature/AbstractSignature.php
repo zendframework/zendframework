@@ -20,9 +20,9 @@
 
 namespace Zend\OAuth\Signature;
 
-use Zend\OAuth\Http\Utility as HTTPUtility,
-    Zend\OAuth\Exception,
-    Zend\Uri;
+use Zend\OAuth\Http\Utility as HTTPUtility;
+use Zend\OAuth\Exception;
+use Zend\Uri;
 
 /**
  * @category   Zend

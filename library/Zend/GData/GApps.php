@@ -1216,7 +1216,7 @@ class GApps extends GData
         //if the enitiy is not a member, an exception is thrown
         try {
             $results = $this->get($uri);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $results = false;
         }
 
@@ -1330,7 +1330,7 @@ class GApps extends GData
         //if the enitiy is not an owner of the group, an exception is thrown
         try {
             $results = $this->get($uri);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $results = false;
         }
 

@@ -284,13 +284,23 @@ class ServiceManager implements ServiceLocatorInterface
         if (!$instance && !is_array($instance)) {
             try {
                 $instance = $this->create(array($cName, $rName));
-            } catch (Exception\ServiceNotFoundException $selfException) {
+            } catch (\Exception $selfException) {
+                if (!$selfException instanceof Exception\ServiceNotFoundException &&
+                    !$selfException instanceof Exception\ServiceNotCreatedException) {
+                    throw $selfException;
+                }
                 if ($usePeeringServiceManagers) {
                     foreach ($this->peeringServiceManagers as $peeringServiceManager) {
-                        if ($peeringServiceManager->has($name)) {
+                        try {
                             $instance = $peeringServiceManager->get($name);
-                            break;
+                        } catch (Exception\ServiceNotFoundException $e) {
+                            continue;
+                        } catch (Exception\ServiceNotCreatedException $e) {
+                            continue;
+                        } catch (\Exception $e) {
+                            throw $e;
                         }
+                        break;
                     }
                 }
             }
@@ -338,9 +348,10 @@ class ServiceManager implements ServiceLocatorInterface
             $invokable = $this->invokableClasses[$cName];
             if (!class_exists($invokable)) {
                 throw new Exception\ServiceNotCreatedException(sprintf(
-                    '%s: failed retrieving "%s" via invokable class "%s"; class does not exist',
+                    '%s: failed retrieving "%s%s" via invokable class "%s"; class does not exist',
                     __METHOD__,
-                    $name,
+                    $cName,
+                    ($rName ? '(alias: ' . $rName . ')' : ''),
                     $cName
                 ));
             }

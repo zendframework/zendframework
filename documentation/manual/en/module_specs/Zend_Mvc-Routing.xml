@@ -573,5 +573,85 @@ $route = Segment::factory(array(
 ));
 ]]></programlisting>
     </section>
+    
+    <section xml:id="zend.mvc.routing.route-types.query">
+      <title>Zend\Mvc\Router\Http\Query</title>
+      
+      <para>
+        The <classname>Query</classname> route part allows you to specify and 
+        capture query string parameters for a given route.
+      </para>
+      
+      <para>
+        The intention of the <classname>Query</classname> part is that you do 
+        not instantiate it in its own right but to use it as a child of another route 
+        part. 
+      </para>
+      
+      <para>
+        An example of its usage would be
+      </para>
+      
+      <programlisting language="php"><![CDATA[
+$route = Part::factory(array(
+    'home' => array(
+        'page'    => 'segment',
+        'options' => array(
+            'route'    => '/page[/:name]',
+            'constraints' => array(
+                'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
+            ),
+            'defaults' => array(
+                'controller' => 'page',
+                'action'     => 'index',
+            ),
+        )
+    ),
+    'may_terminate' => true,
+    'route_broker'  => $routeBroker,
+    'child_routes'  => array(
+        'query' => array(
+            'type' => 'Query',
+        ),
+    ),
+));
+]]></programlisting>
+
+      <para>
+        As you can see, it's pretty straight forward to specify the query part. 
+        This then allows you to create query strings using the url view helper. 
+      </para>
+      
+      <programlisting language="php"><![CDATA[
+$this->url(
+    'page/query', 
+    array(
+        'name'=>'my-test-page', 
+        'format' => 'rss',
+        'limit' => 10,
+    )
+);
+]]></programlisting>
+
+      <para>
+        As you can see above, you must add "/query" to your route name in order 
+        to append a query string. If you do not specify "/query" in the route 
+        name then no query string will be appended. 
+      </para>
+      
+      <para>
+        Our example "page" route has only one defined parameter of "name" 
+        ("/page[/:name]"), meaning that the remaining parameters of "format" 
+        and "limit" will then be appended as a query string.
+     </para>
+      
+      <para>
+        The output from our example should then be
+        "/page/mys-test-page?format=rss&amp;limit=10"
+      </para>
+      
+    </section>
+    
   </section>
 </section>

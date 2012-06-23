@@ -57,7 +57,7 @@ class PubSubHubbub
      * best if directly given an instance of Zend_Feed_Reader_Atom|Rss
      * to leverage off.
      *
-     * @param  \Zend\Feed\Reader\AbstractFeed|string $source
+     * @param  \Zend\Feed\Reader\Feed\AbstractFeed|string $source
      * @return array
      * @throws Exception\InvalidArgumentException
      */
@@ -65,12 +65,12 @@ class PubSubHubbub
     {
         if (is_string($source)) {
             $feed = Reader\Reader::import($source);
-        } elseif (is_object($source) && $source instanceof Reader\Feed\AbstractFeed) {
+        } elseif ($source instanceof Reader\Feed\AbstractFeed) {
             $feed = $source;
         } else {
             throw new Exception\InvalidArgumentException('The source parameter was'
             . ' invalid, i.e. not a URL string or an instance of type'
-            . ' Zend\Feed\Reader\FeedAbstract or Zend\Feed\Abstract');
+            . ' Zend\Feed\Reader\Feed\AbstractFeed');
         }
         return $feed->getHubs();
     }

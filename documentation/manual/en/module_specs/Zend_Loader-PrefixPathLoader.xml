@@ -33,7 +33,7 @@
 
         <para>
             <classname>PrefixPathLoader</classname> implements the
-            <interfacename>ShortNameLocater</interfacename> and
+            <interfacename>ShortNameLocator</interfacename> and
             <interfacename>PrefixPathMapper</interfacename> interfaces.
         </para>
 
@@ -126,7 +126,7 @@ $plugin = new $class();
     <section xml:id="zend.loader.prefix-path-loader.methods"><title>Available Methods</title>
         
 
-        <refentry xml:id="zend.loader.standard-autoloader.methods.constructor">
+        <refentry xml:id="zend.loader.prefix-path-loader.methods.constructor">
             <refnamediv>
                 <refname>__construct</refname>
                 <refpurpose>Instantiate and initialize loader</refpurpose>
@@ -481,6 +481,7 @@ $plugin = new $class();
             <refsynopsisdiv>
                 <methodsynopsis>
                     <methodname>getPluginMap</methodname>
+                    <void/>
                 </methodsynopsis>
             </refsynopsisdiv>
 
@@ -503,6 +504,7 @@ $plugin = new $class();
             <refsynopsisdiv>
                 <methodsynopsis>
                     <methodname>getClassMap</methodname>
+                    <void/>
                 </methodsynopsis>
             </refsynopsisdiv>
 

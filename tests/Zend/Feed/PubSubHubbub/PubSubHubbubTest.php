@@ -19,7 +19,9 @@
  */
 
 namespace ZendTest\Feed\PubSubHubbub;
-use Zend\Feed\PubSubHubbub;
+
+use Zend\Feed\PubSubHubbub\PubSubHubbub;
+use Zend\Feed\Reader\Reader as FeedReader;
 
 /**
  * @category   Zend
@@ -32,26 +34,11 @@ use Zend\Feed\PubSubHubbub;
  */
 class PubSubHubbubTest extends \PHPUnit_Framework_TestCase
 {
-
-    public function teardown()
-    {
-        PubSubHubbub\PubSubHubbub::clearHttpClient();
-    }
-
-    public function testCanSetCustomHttpClient()
-    {
-        PubSubHubbub\PubSubHubbub::setHttpClient(new Pubsub());
-        $this->assertInstanceOf('ZendTest\Feed\PubSubHubbub\Pubsub', PubSubHubbub\PubSubHubbub::getHttpClient());
-    }
-
     public function testCanDetectHubs()
     {
-        $feed = \Zend\Feed\Reader\Reader::importFile(__DIR__ . '/_files/rss20.xml');
+        $feed = FeedReader::importFile(__DIR__ . '/_files/rss20.xml');
         $this->assertEquals(array(
             'http://www.example.com/hub', 'http://www.example.com/hub2'
-        ), PubSubHubbub\PubSubHubbub::detectHubs($feed));
+        ), PubSubHubbub::detectHubs($feed));
     }
-
 }
-
-class Pubsub extends \Zend\Http\Client {}

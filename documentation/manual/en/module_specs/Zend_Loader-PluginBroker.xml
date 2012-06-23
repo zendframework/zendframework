@@ -33,13 +33,13 @@
         </itemizedlist>
 
         <para>
-            In sum, it acts as a factory/builder, service locater, and object registry.
+            In sum, it acts as a factory/builder, service locator, and object registry.
         </para>
 
         <para>
-            The <classname>PluginBroker</classname> is designed to work in conjunction with a <link linkend="zend.loader.short-name-locater">ShortNameLocater</link> -- usually a <link linkend="zend.loader.plugin-class-loader">PluginClassLoader</link>, but sometimes a
+            The <classname>PluginBroker</classname> is designed to work in conjunction with a <link linkend="zend.loader.short-name-locator">ShortNameLocator</link> -- usually a <link linkend="zend.loader.plugin-class-loader">PluginClassLoader</link>, but sometimes a
             <link linkend="zend.loader.prefix-path-loader">PrefixPathLoader</link>. The
-            <interfacename>ShortNameLocater</interfacename> provides the ability to resolve a plugin
+            <interfacename>ShortNameLocator</interfacename> provides the ability to resolve a plugin
             name to a class; the <classname>PluginBroker</classname> then instantiates, stores, and
             returns an object of that class.
         </para>
@@ -99,12 +99,12 @@ $broker->register('url', $urlHelper);
                         <listitem>
                             <para>A string indicating a fully qualified class name to use for the
                                 class loader. The class must implement
-                                <interfacename>ShortNameLocater</interfacename>.</para>
+                                <interfacename>ShortNameLocator</interfacename>.</para>
                         </listitem>
 
                         <listitem>
                             <para>An object implementing
-                                <interfacename>ShortNameLocater</interfacename>.</para>
+                                <interfacename>ShortNameLocator</interfacename>.</para>
                         </listitem>
 
                         <listitem>
@@ -113,7 +113,7 @@ $broker->register('url', $urlHelper);
                                 <varname>options</varname>. An object of the type described in
                                 <varname>class</varname> will be instantiated, with the
                                 <varname>options</varname> provided, if any. The class must
-                                implement <interfacename>ShortNameLocater</interfacename>.</para>
+                                implement <interfacename>ShortNameLocator</interfacename>.</para>
                         </listitem>
                     </itemizedlist>
                 </listitem>
@@ -300,7 +300,7 @@ $broker->register('url', $urlHelper);
                 <methodsynopsis>
                     <methodname>setClassLoader</methodname>
                     <methodparam>
-                        <funcparams>ShortNameLocater $loader</funcparams>
+                        <funcparams>ShortNameLocator $loader</funcparams>
                     </methodparam>
                 </methodsynopsis>
             </refsynopsisdiv>
@@ -311,7 +311,7 @@ $broker->register('url', $urlHelper);
                 <para>
                     Use this method to set a plugin class loader to use when resolving plugin names
                     to class names. As noted in the signature, the object must adhere to the
-                    <interfacename>ShortNameLocater</interfacename> interface.
+                    <interfacename>ShortNameLocator</interfacename> interface.
                 </para>
             </refsection>
         </refentry>
@@ -325,6 +325,7 @@ $broker->register('url', $urlHelper);
             <refsynopsisdiv>
                 <methodsynopsis>
                     <methodname>getClassLoader</methodname>
+                    <void/>
                 </methodsynopsis>
             </refsynopsisdiv>
 
@@ -333,7 +334,7 @@ $broker->register('url', $urlHelper);
 
                 <para>
                     Retrieves the plugin class resolver; the object will always be an implemenation
-                    of <interfacename>ShortNameLocater</interfacename>.
+                    of <interfacename>ShortNameLocator</interfacename>.
                 </para>
             </refsection>
         </refentry>
@@ -391,6 +392,7 @@ $broker->setValidator(function($plugin) {
             <refsynopsisdiv>
                 <methodsynopsis>
                     <methodname>getValidator</methodname>
+                    <void/>
                 </methodsynopsis>
             </refsynopsisdiv>
 

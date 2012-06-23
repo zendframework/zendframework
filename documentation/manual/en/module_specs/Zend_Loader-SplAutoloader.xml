@@ -180,6 +180,7 @@ class ModifiedIncludePathAutoloader implements SplAutoloader
             <refsynopsisdiv>
                 <methodsynopsis>
                     <methodname>register</methodname>
+                    <void/>
                 </methodsynopsis>
             </refsynopsisdiv>
 

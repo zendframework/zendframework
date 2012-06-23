@@ -428,7 +428,7 @@ class DbTable implements AdapterInterface
         $dbSelect->prepareStatement($this->_zendDb, $statement);
         $resultSet = new ResultSet();
         try {
-            $resultSet->setDataSource($statement->execute(array($this->_credential, $this->_identity)));
+            $resultSet->initialize($statement->execute(array($this->_credential, $this->_identity)));
             $resultIdentities = $resultSet->toArray();
         } catch (\Exception $e) {
             throw new Exception\RuntimeException(

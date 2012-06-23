@@ -23,9 +23,11 @@
 namespace ZendTest\Stdlib;
 
 use Zend\Stdlib\Hydrator\ClassMethods;
-use ZendTest\Stdlib\TestAsset\ClassMethodsCamelCase,
-    ZendTest\Stdlib\TestAsset\ClassMethodsUnderscore,
-    ZendTest\Stdlib\TestAsset\ClassMethodsCamelCaseMissing;
+use Zend\Stdlib\Hydrator\Reflection;
+use ZendTest\Stdlib\TestAsset\ClassMethodsCamelCase;
+use ZendTest\Stdlib\TestAsset\ClassMethodsUnderscore;
+use ZendTest\Stdlib\TestAsset\ClassMethodsCamelCaseMissing;
+use ZendTest\Stdlib\TestAsset\Reflection as ReflectionAsset;
 
 /**
  * @category   Zend
@@ -53,11 +55,17 @@ class HydratorTest extends \PHPUnit_Framework_TestCase
      */
     protected $classMethodsUnderscore;
 
+    /**
+     * @var ReflectionAsset
+     */
+    protected $reflection;
+
     public function setUp()
     {
         $this->classMethodsCamelCase = new ClassMethodsCamelCase();
         $this->classMethodsCamelCaseMissing = new ClassMethodsCamelCaseMissing();
         $this->classMethodsUnderscore = new ClassMethodsUnderscore();
+        $this->reflection = new ReflectionAsset;
     }
     
     public function testInitiateValues()
@@ -66,6 +74,23 @@ class HydratorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($this->classMethodsCamelCase->getFooBarBaz(), '2');
         $this->assertEquals($this->classMethodsUnderscore->getFooBar(), '1');
         $this->assertEquals($this->classMethodsUnderscore->getFooBarBaz(), '2');
+    }
+
+    public function testHydratorReflection()
+    {
+        $hydrator = new Reflection;
+        $datas    = $hydrator->extract($this->reflection);
+        $this->assertTrue(isset($datas['foo']));
+        $this->assertEquals($datas['foo'], '1');
+        $this->assertTrue(isset($datas['fooBar']));
+        $this->assertEquals($datas['fooBar'], '2');
+        $this->assertTrue(isset($datas['fooBarBaz']));
+        $this->assertEquals($datas['fooBarBaz'], '3');
+
+        $test = $hydrator->hydrate(array('foo' => 'foo', 'fooBar' => 'bar', 'fooBarBaz' => 'baz'), $this->reflection);
+        $this->assertEquals($test->foo, 'foo');
+        $this->assertEquals($test->getFooBar(), 'bar');
+        $this->assertEquals($test->getFooBarBaz(), 'baz');
     }
 
     public function testHydratorClassMethodsCamelCase()

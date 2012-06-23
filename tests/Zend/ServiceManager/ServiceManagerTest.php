@@ -2,8 +2,12 @@
 
 namespace ZendTest\ServiceManager;
 
-use Zend\ServiceManager\ServiceManager,
-    Zend\ServiceManager\Configuration;
+use Zend\Di\Di;
+use Zend\Mvc\Service\DiFactory;
+use Zend\ServiceManager\Di\DiAbstractServiceFactory;
+use Zend\ServiceManager\Exception;
+use Zend\ServiceManager\ServiceManager;
+use Zend\ServiceManager\Configuration;
 
 class ServiceManagerTest extends \PHPUnit_Framework_TestCase
 {
@@ -381,5 +385,31 @@ class ServiceManagerTest extends \PHPUnit_Framework_TestCase
         $serviceManager->setFactory('foo', 'ZendTest\ServiceManager\TestAsset\FooFactory');
         $foo = $serviceManager->get('unknownObject');
         $this->assertInstanceOf('ZendTest\ServiceManager\TestAsset\Foo', $foo);
+    }
+
+    public function testPeeringService()
+    {
+        $di = new Di();
+        $di->instanceManager()->setParameters('ZendTest\ServiceManager\TestAsset\Bar', array('foo' => array('a')));
+        $this->serviceManager->addAbstractFactory(new DiAbstractServiceFactory($di));
+        $sm = $this->serviceManager->createScopedServiceManager(ServiceManager::SCOPE_PARENT);
+        $sm->setFactory('di', new DiFactory());
+        $bar = $sm->get('ZendTest\ServiceManager\TestAsset\Bar', true);
+        $this->assertInstanceOf('ZendTest\ServiceManager\TestAsset\Bar', $bar);
+    }
+
+    public function testPeeringServiceFallbackOnCreateFailure()
+    {
+        $factory = function ($sm) {
+            return new TestAsset\Bar();
+        };
+        $serviceManager = new ServiceManager();
+        $serviceManager->setFactory('ZendTest\ServiceManager\TestAsset\Bar', $factory);
+        $sm = $serviceManager->createScopedServiceManager(ServiceManager::SCOPE_CHILD);
+        $di = new Di();
+        $di->instanceManager()->setParameters('ZendTest\ServiceManager\TestAsset\Bar', array('foo' => array('a')));
+        $sm->addAbstractFactory(new DiAbstractServiceFactory($di));
+        $bar = $serviceManager->get('ZendTest\ServiceManager\TestAsset\Bar');
+        $this->assertInstanceOf('ZendTest\ServiceManager\TestAsset\Bar', $bar);
     }
 }

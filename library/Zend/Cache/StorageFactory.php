@@ -205,7 +205,7 @@ class StorageFactory
      */
     public static function pluginFactory($pluginName, $options = array())
     {
-        if ($pluginName instanceof Storage\Plugin) {
+        if ($pluginName instanceof Storage\Plugin\PluginInterface) {
             // $pluginName is already an plugin object
             $plugin = $pluginName;
         } else {

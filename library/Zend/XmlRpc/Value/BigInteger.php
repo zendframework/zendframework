@@ -21,6 +21,8 @@
 
 namespace Zend\XmlRpc\Value;
 
+use Zend\Math\BigInteger\BigInteger as BigIntegerMath;
+
 /**
  * @category   Zend
  * @package    Zend_XmlRpc
@@ -35,15 +37,14 @@ class BigInteger extends Integer
      */
     public function __construct($value)
     {
-        $integer = new \Zend\Math\BigInteger();
-        $this->_value   = $integer->init($value);
-        $this->_type    = self::XMLRPC_TYPE_I8;
+        $this->_value = BigIntegerMath::factory()->init($value, 10);
+        $this->_type  = self::XMLRPC_TYPE_I8;
     }
 
     /**
      * Return bigint value object
      *
-     * @return \Zend\Math\BigInteger
+     * @return string
      */
     public function getValue()
     {

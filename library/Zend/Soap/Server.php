@@ -796,7 +796,7 @@ class Server implements \Zend\Server\Server
         $setRequestException = null;
         try {
             $this->_setRequest($request);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $setRequestException = $e;
         }
 

@@ -40,6 +40,7 @@ class PluginLoader extends PluginClassLoader
         'flashmessenger'  => 'Zend\Mvc\Controller\Plugin\FlashMessenger',
         'forward'         => 'Zend\Mvc\Controller\Plugin\Forward',
         'layout'          => 'Zend\Mvc\Controller\Plugin\Layout',
+        'params'          => 'Zend\Mvc\Controller\Plugin\Params',
         'redirect'        => 'Zend\Mvc\Controller\Plugin\Redirect',
         'url'             => 'Zend\Mvc\Controller\Plugin\Url',
     );

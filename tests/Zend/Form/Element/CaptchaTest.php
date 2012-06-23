@@ -22,6 +22,7 @@
 namespace ZendTest\Form\Element;
 
 use PHPUnit_Framework_TestCase as TestCase;
+use ArrayObject;
 use Zend\Captcha;
 use Zend\Form\Element\Captcha as CaptchaElement;
 use Zend\Form\Factory;
@@ -37,11 +38,33 @@ class CaptchaTest extends TestCase
     public function testCaptchaIsMutable()
     {
         $element = new CaptchaElement();
+
+        // by instance
         $captcha = new Captcha\Dumb(array(
             'sessionClass' => 'ZendTest\Captcha\TestAsset\SessionContainer',
         ));
         $element->setCaptcha($captcha);
         $this->assertSame($captcha, $element->getCaptcha());
+
+        // by array
+        $captcha = array(
+            'class'   => 'dumb',
+            'options' => array(
+                'sessionClass' => 'ZendTest\Captcha\TestAsset\SessionContainer',
+            )
+        );
+        $element->setCaptcha($captcha);
+        $this->assertInstanceOf('Zend\Captcha\Dumb', $element->getCaptcha());
+
+        // by traversable
+        $captcha = new ArrayObject(array(
+            'class'   => 'dumb',
+            'options' => array(
+                    'sessionClass' => 'ZendTest\Captcha\TestAsset\SessionContainer',
+            )
+        ));
+        $element->setCaptcha($captcha);
+        $this->assertInstanceOf('Zend\Captcha\Dumb', $element->getCaptcha());
     }
 
     public function testSettingCaptchaSetsCaptchaAttribute()

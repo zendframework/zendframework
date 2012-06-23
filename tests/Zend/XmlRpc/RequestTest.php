@@ -333,4 +333,19 @@ class RequestTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('ISO-8859-1', $this->_request->getEncoding());
         $this->assertEquals('ISO-8859-1', Value::getGenerator()->getEncoding());
     }
+
+    /**
+     * @group ZF-12293
+     */
+    public function testDoesNotAllowExternalEntities()
+    {
+        $payload = file_get_contents(dirname(__FILE__) . '/_files/ZF12293-request.xml');
+        $payload = sprintf($payload, 'file://' . realpath(dirname(__FILE__) . '/_files/ZF12293-payload.txt'));
+        $this->_request->loadXml($payload);
+        $method = $this->_request->getMethod();
+        $this->assertTrue(empty($method));
+        if (is_string($method)) {
+            $this->assertNotContains('Local file inclusion', $method);
+        }
+    }
 }

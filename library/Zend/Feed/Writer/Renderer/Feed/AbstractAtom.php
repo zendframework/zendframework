@@ -66,6 +66,7 @@ class AbstractAtom extends Renderer\AbstractRenderer
      * @param  DOMDocument $dom 
      * @param  DOMElement $root 
      * @return void
+     * @throws Writer\Exception\InvalidArgumentException
      */
     protected function _setTitle(DOMDocument $dom, DOMElement $root)
     {
@@ -113,6 +114,7 @@ class AbstractAtom extends Renderer\AbstractRenderer
      * @param  DOMDocument $dom 
      * @param  DOMElement $root 
      * @return void
+     * @throws Writer\Exception\InvalidArgumentException
      */
     protected function _setDateModified(DOMDocument $dom, DOMElement $root)
     {
@@ -188,6 +190,7 @@ class AbstractAtom extends Renderer\AbstractRenderer
      * @param  DOMDocument $dom 
      * @param  DOMElement $root 
      * @return void
+     * @throws Writer\Exception\InvalidArgumentException
      */
     protected function _setFeedLinks(DOMDocument $dom, DOMElement $root)
     {
@@ -262,6 +265,7 @@ class AbstractAtom extends Renderer\AbstractRenderer
      * @param  DOMDocument $dom 
      * @param  DOMElement $root 
      * @return void
+     * @throws Writer\Exception\InvalidArgumentException
      */
     protected function _setId(DOMDocument $dom, DOMElement $root)
     {

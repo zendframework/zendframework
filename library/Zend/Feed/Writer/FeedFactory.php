@@ -89,7 +89,7 @@ abstract class FeedFactory
      * Normalize a key
      * 
      * @param  string $key 
-     * @return void
+     * @return string
      */
     protected static function convertKey($key)
     {

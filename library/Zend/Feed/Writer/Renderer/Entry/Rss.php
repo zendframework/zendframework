@@ -85,6 +85,7 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
      * @param  DOMDocument $dom 
      * @param  DOMElement $root 
      * @return void
+     * @throws Writer\Exception\InvalidArgumentException
      */
     protected function _setTitle(DOMDocument $dom, DOMElement $root)
     {
@@ -113,6 +114,7 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
      * @param  DOMDocument $dom
      * @param  DOMElement $root
      * @return void
+     * @throws Writer\Exception\InvalidArgumentException
      */
     protected function _setDescription(DOMDocument $dom, DOMElement $root)
     {
@@ -210,6 +212,7 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
      * @param  DOMDocument $dom 
      * @param  DOMElement $root 
      * @return void
+     * @throws Writer\Exception\InvalidArgumentException
      */
     protected function _setEnclosure(DOMDocument $dom, DOMElement $root)
     {

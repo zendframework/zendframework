@@ -374,6 +374,7 @@ class Atom extends AbstractEntry implements EntryInterface
      * Set the XPath query (incl. on all Extensions)
      *
      * @param DOMXPath $xpath
+     * @return void
      */
     public function setXpath(DOMXPath $xpath)
     {

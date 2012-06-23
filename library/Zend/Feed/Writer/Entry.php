@@ -126,6 +126,7 @@ class Entry
      * Set the feed character encoding
      *
      * @return string|null
+     * @throws Exception\InvalidArgumentException
      */
     public function setEncoding($encoding)
     {

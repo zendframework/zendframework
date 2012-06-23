@@ -220,7 +220,7 @@ class Rss extends AbstractFeed
                         try {
                             $date->set($dateModified, $standard);
                             break;
-                        } catch (Date\Exception $e) {
+                        } catch (Date\Exception\ExceptionInterface $e) {
                             if ($standard == Date\Date::DATES) {
                                 throw new Exception\RuntimeException(
                                     'Could not load date due to unrecognised'
@@ -281,7 +281,7 @@ class Rss extends AbstractFeed
                         try {
                             $date->set($lastBuildDate, $standard);
                             break;
-                        } catch (Date\Exception $e) {
+                        } catch (Date\Exception\ExceptionInterface $e) {
                             if ($standard == Date\Date::DATES) {
                                 throw new Exception\RuntimeException(
                                     'Could not load date due to unrecognised'

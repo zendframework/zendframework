@@ -20,10 +20,11 @@
 
 namespace Zend\Feed\Writer\Renderer\Entry;
 
-use Zend\Feed\Writer\Renderer,
-    Zend\Feed\Writer,
-    DOMDocument,
-    DOMElement;
+use DOMDocument;
+use DOMElement;
+use Zend\Date;
+use Zend\Feed\Writer\Renderer;
+use Zend\Feed\Writer;
 
 /**
 * @category Zend

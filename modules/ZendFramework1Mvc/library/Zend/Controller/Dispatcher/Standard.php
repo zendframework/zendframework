@@ -268,7 +268,7 @@ class Standard extends AbstractDispatcher
         if (!($controller instanceof \Zend\Controller\ActionController) &&
             !($controller instanceof \Zend\Controller\Action)) {
             throw new Exception(
-                'Controller "' . $className . '" is not an instance of Zend\Controller\ActionController'
+                'Controller "' . $className . '" is not an instance of Zend\Controller\AbstractActionController'
             );
         }
 

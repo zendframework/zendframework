@@ -1555,10 +1555,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Controller/Action/Interface.php</originalRelativeFilePath>
       <originalClassName>Zend_Controller_Action_Interface</originalClassName>
-      <newRelativeFilePath>Zend/Controller/ActionController.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/Controller/AbstractActionControllerntroller.php</newRelativeFilePath>
       <newNamespace>Zend\Controller</newNamespace>
-      <newClassName>ActionController</newClassName>
-      <newFullyQualifiedName>Zend\Controller\ActionController</newFullyQualifiedName>
+      <newClassName>AbstractActionController</newClassName>
+      <newFullyQualifiedName>Zend\Controller\AbstractActionController</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Controller/Action.php</originalRelativeFilePath>

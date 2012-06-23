@@ -251,10 +251,10 @@ return array(
             <programlisting language="php"><![CDATA[
 namespace Foo\Controller;
 
-use Zend\Mvc\Controller\ActionController,
+use Zend\Mvc\Controller\AbstractActionController,
     Zend\View\Model\ViewModel;
 
-class BarController extends ActionController
+class BarController extends AbstractActionController
 {
     public function doSomethingAction()
     {
@@ -316,9 +316,9 @@ class BarController extends ActionController
             <programlisting language="php"><![CDATA[
 namespace Foo\Controller;
 
-use Zend\Mvc\Controller\ActionController;
+use Zend\Mvc\Controller\AbstractActionController;
 
-class BarController extends ActionController
+class BarController extends AbstractActionController
 {
     public function doSomethingCrazyAction()
     {
@@ -352,10 +352,10 @@ class BarController extends ActionController
             <programlisting language="php"><![CDATA[
 namespace Content\Controller;
 
-use Zend\Mvc\Controller\ActionController,
+use Zend\Mvc\Controller\AbstractActionController,
     Zend\View\Model\ViewModel;
 
-class ArticleController extends ActionController
+class ArticleController extends AbstractActionController
 {
     public function viewAction()
     {
@@ -568,10 +568,10 @@ return array(
             <programlisting language="php"><![CDATA[
 namespace Foo\Controller;
 
-use Zend\Mvc\Controller\ActionController,
+use Zend\Mvc\Controller\AbstractActionController,
     Zend\View\Model\ViewModel;
 
-class BarController extends ActionController
+class BarController extends AbstractActionController
 {
     public function doSomethingAction()
     {
@@ -601,10 +601,10 @@ class BarController extends ActionController
             <programlisting language="php"><![CDATA[
 namespace Foo\Controller;
 
-use Zend\Mvc\Controller\ActionController,
+use Zend\Mvc\Controller\AbstractActionController,
     Zend\View\Model\ViewModel;
 
-class BarController extends ActionController
+class BarController extends AbstractActionController
 {
     public function doSomethingAction()
     {
@@ -635,10 +635,10 @@ class BarController extends ActionController
             <programlisting language="php"><![CDATA[
 namespace Content\Controller;
 
-use Zend\Mvc\Controller\ActionController,
+use Zend\Mvc\Controller\AbstractActionController,
     Zend\View\Model\ViewModel;
 
-class ArticleController extends ActionController
+class ArticleController extends AbstractActionController
 {
     public function viewAction()
     {
@@ -667,10 +667,10 @@ class ArticleController extends ActionController
             <programlisting language="php"><![CDATA[
 namespace Content\Controller;
 
-use Zend\Mvc\Controller\ActionController,
+use Zend\Mvc\Controller\AbstractActionController,
     Zend\View\Model\ViewModel;
 
-class ArticleController extends ActionController
+class ArticleController extends AbstractActionController
 {
     public function viewAction()
     {

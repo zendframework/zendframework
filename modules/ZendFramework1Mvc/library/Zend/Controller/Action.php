@@ -28,7 +28,7 @@ use Zend\Controller\Request\AbstractRequest,
 /**
  * @uses       \Zend\Controller\Action\Exception
  * @uses       \Zend\Controller\Action\HelperBroker
- * @uses       \Zend\Controller\ActionController
+ * @uses       \Zend\Controller\AbstractActionController
  * @uses       \Zend\Controller\Exception
  * @uses       \Zend\Controller\Front
  * @uses       \Zend\View\View

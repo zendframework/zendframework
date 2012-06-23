@@ -33,7 +33,7 @@
                     <classname>Zend_Controller</classname> の処理全体を取りまとめます。
                     FrontController パターンであるといえます。
                     サーバから受け取ったすべてのリクエストを <classname>Zend_Controller_Front</classname>
-                    が処理し、最終的にリクエストを ActionController
+                    が処理し、最終的にリクエストを AbstractActionController
                     (<classname>Zend_Controller_Action</classname>) に委譲します。
                 </para>
             </listitem>

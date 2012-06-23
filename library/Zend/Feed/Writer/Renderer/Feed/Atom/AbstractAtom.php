@@ -20,9 +20,9 @@
 
 namespace Zend\Feed\Writer\Renderer\Feed\Atom;
 
-use Zend\Feed,
-    DOMDocument,
-    DOMElement;
+use Zend\Feed;
+use DOMDocument;
+use DOMElement;
 
 /**
  * @category   Zend

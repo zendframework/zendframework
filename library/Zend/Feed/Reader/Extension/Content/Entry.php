@@ -20,8 +20,8 @@
 
 namespace Zend\Feed\Reader\Extension\Content;
 
-use Zend\Feed\Reader,
-    Zend\Feed\Reader\Extension;
+use Zend\Feed\Reader;
+use Zend\Feed\Reader\Extension;
 
 /**
 * @category Zend

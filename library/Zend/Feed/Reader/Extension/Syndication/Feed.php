@@ -20,9 +20,9 @@
 
 namespace Zend\Feed\Reader\Extension\Syndication;
 
-use Zend\Feed\Reader,
-    Zend\Feed\Reader\Extension,
-    Zend\Date;
+use Zend\Feed\Reader;
+use Zend\Feed\Reader\Extension;
+use Zend\Date;
 
 /**
  * @category   Zend

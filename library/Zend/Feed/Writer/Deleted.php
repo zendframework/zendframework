@@ -20,8 +20,8 @@
 
 namespace Zend\Feed\Writer;
 
-use Zend\Date,
-    Zend\Uri;
+use Zend\Date;
+use Zend\Uri;
 
 /**
 * @category Zend

@@ -20,12 +20,12 @@
 
 namespace Zend\Feed\Reader;
 
-use Zend\Cache\Storage\StorageInterface as CacheStorage,
-    Zend\Http,
-    Zend\Loader,
-    Zend\Stdlib\ErrorHandler,
-    DOMDocument,
-    DOMXPath;
+use Zend\Cache\Storage\StorageInterface as CacheStorage;
+use Zend\Http;
+use Zend\Loader;
+use Zend\Stdlib\ErrorHandler;
+use DOMDocument;
+use DOMXPath;
 
 /**
 * @category Zend

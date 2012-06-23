@@ -20,14 +20,14 @@
 
 namespace Zend\Feed\Reader\Extension\Atom;
 
-use DOMDocument,
-    DOMElement,
-    stdClass,
-    Zend\Date,
-    Zend\Feed\Reader,
-    Zend\Feed\Reader\Collection,
-    Zend\Feed\Reader\Extension,
-    Zend\Uri;
+use DOMDocument;
+use DOMElement;
+use stdClass;
+use Zend\Date;
+use Zend\Feed\Reader;
+use Zend\Feed\Reader\Collection;
+use Zend\Feed\Reader\Extension;
+use Zend\Uri;
 
 /**
 * @category Zend

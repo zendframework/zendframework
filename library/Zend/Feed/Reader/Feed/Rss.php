@@ -20,11 +20,11 @@
 
 namespace Zend\Feed\Reader\Feed;
 
-use Zend\Feed\Reader,
-    Zend\Feed\Reader\Collection,
-    Zend\Feed\Reader\Exception,
-    Zend\Date,
-    DOMDocument;
+use Zend\Feed\Reader;
+use Zend\Feed\Reader\Collection;
+use Zend\Feed\Reader\Exception;
+use Zend\Date;
+use DOMDocument;
 
 /**
 * @category Zend

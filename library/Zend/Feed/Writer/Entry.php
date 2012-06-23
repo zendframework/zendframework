@@ -20,9 +20,9 @@
 
 namespace Zend\Feed\Writer;
 
-use Zend\Feed\Writer\Exception,
-    Zend\Uri,
-    Zend\Date;
+use Zend\Feed\Writer\Exception;
+use Zend\Uri;
+use Zend\Date;
 
 /**
 * @category Zend

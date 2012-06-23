@@ -20,13 +20,13 @@
 
 namespace Zend\Feed\Writer\Renderer\Entry;
 
-use DOMDocument,
-    DOMElement,
-    Zend\Date,
-    Zend\Feed\Writer,
-    Zend\Feed\Writer\Renderer,
-    Zend\Uri,
-    Zend\Validator;
+use DOMDocument;
+use DOMElement;
+use Zend\Date;
+use Zend\Feed\Writer;
+use Zend\Feed\Writer\Renderer;
+use Zend\Uri;
+use Zend\Validator;
 
 /**
  * @category Zend

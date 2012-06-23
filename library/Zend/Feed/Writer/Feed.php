@@ -20,10 +20,10 @@
 
 namespace Zend\Feed\Writer;
 
-use Countable,
-    Iterator,
-    Zend\Date,
-    Zend\Feed\Writer\Renderer;
+use Countable;
+use Iterator;
+use Zend\Date;
+use Zend\Feed\Writer\Renderer;
 
 /**
 * @category Zend

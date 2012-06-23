@@ -20,8 +20,8 @@
  
 namespace Zend\Feed\Writer\Extension\ITunes;
 
-use Zend\Feed\Writer,
-    Zend\Uri;
+use Zend\Feed\Writer;
+use Zend\Uri;
 
 /**
 * @category Zend

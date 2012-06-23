@@ -20,8 +20,8 @@
 
 namespace Zend\Feed\PubSubHubbub;
 
-use Zend\Feed\Reader,
-    Zend\Http;
+use Zend\Feed\Reader;
+use Zend\Http;
 
 /**
  * @category   Zend

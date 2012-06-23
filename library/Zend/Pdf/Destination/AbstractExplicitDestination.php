@@ -32,7 +32,7 @@ use Zend\Pdf;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class Explicit extends AbstractDestination
+abstract class AbstractExplicitDestination extends AbstractDestination
 {
     /**
      * Destination description array
@@ -49,7 +49,7 @@ abstract class Explicit extends AbstractDestination
     protected $_isRemote;
 
     /**
-     * Explicit destination object constructor
+     * AbstractExplicitDestination destination object constructor
      *
      * @param \Zend\Pdf\InternalType\AbstractTypeObject $destinationArray
      * @throws \Zend\Pdf\Exception\ExceptionInterface

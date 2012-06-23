@@ -9785,12 +9785,12 @@
       <newFullyQualifiedName>Zend\PDF\Color</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
-      <originalRelativeFilePath>Zend/Pdf/Destination/Explicit.php</originalRelativeFilePath>
+      <originalRelativeFilePath>Zend/Pdf/Destination/AbstractExplicitDestination.phpicitDestination.php</originalRelativeFilePath>
       <originalClassName>Zend_Pdf_Destination_Explicit</originalClassName>
-      <newRelativeFilePath>Zend/PDF/Destination/Explicit.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/PDF/Destination/AbstractExplicitDestinationExplicitDestination.php</newRelativeFilePath>
       <newNamespace>Zend\PDF\Destination</newNamespace>
-      <newClassName>Explicit</newClassName>
-      <newFullyQualifiedName>Zend\PDF\Destination\Explicit</newFullyQualifiedName>
+      <newClassName>AbstractExplicitDestination</newClassName>
+      <newFullyQualifiedName>Zend\PDF\Destination\AbstractExplicitDestination</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Pdf/Destination/Fit.php</originalRelativeFilePath>

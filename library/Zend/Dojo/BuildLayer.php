@@ -22,8 +22,8 @@ namespace Zend\Dojo;
 
 use Traversable;
 use Zend\Stdlib\ArrayUtils;
-use Zend\Json\Json,
-    Zend\View\Renderer\RendererInterface as Renderer;
+use Zend\Json\Json;
+use Zend\View\Renderer\RendererInterface as Renderer;
 
 /**
  * Dojo module layer and custom build profile generation support

@@ -20,8 +20,8 @@
 
 namespace Zend\Dojo;
 
-use Zend\View\Renderer\RendererInterface as Renderer,
-    Zend\View\Renderer\PhpRenderer;
+use Zend\View\Renderer\RendererInterface as Renderer;
+use Zend\View\Renderer\PhpRenderer;
 
 /**
  * Enable Dojo components

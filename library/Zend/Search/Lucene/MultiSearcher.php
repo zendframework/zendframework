@@ -596,7 +596,7 @@ class MultiSearcher implements SearchIndexInterface
      * Retrive similarity used by index reader
      *
      * @throws \Zend\Search\Lucene\Exception\RuntimeException
-     * @return \Zend\Search\Lucene\Search\Similarity
+     * @return \Zend\Search\Lucene\Search\Similarity\AbstractSimilarity
      */
     public function getSimilarity()
     {

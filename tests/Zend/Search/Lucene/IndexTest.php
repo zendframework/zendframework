@@ -217,7 +217,7 @@ class IndexTest extends \PHPUnit_Framework_TestCase
     {
         $index = Lucene\Lucene::open(__DIR__ . '/_indexSample/_files');
 
-        $this->assertTrue($index->getSimilarity() instanceof \Zend\Search\Lucene\Search\Similarity);
+        $this->assertTrue($index->getSimilarity() instanceof \Zend\Search\Lucene\Search\Similarity\AbstractSimilarity);
     }
 
     public function testNorm()

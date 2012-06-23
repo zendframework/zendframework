@@ -272,7 +272,7 @@ interface SearchIndexInterface extends Index\TermsStreamInterface
     /**
      * Retrive similarity used by index reader
      *
-     * @return \Zend\Search\Lucene\Search\Similarity
+     * @return \Zend\Search\Lucene\Search\Similarity\AbstractSimilarity
      */
     public function getSimilarity();
 

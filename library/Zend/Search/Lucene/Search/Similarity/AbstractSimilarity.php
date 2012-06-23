@@ -19,7 +19,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Search\Lucene\Search;
+namespace Zend\Search\Lucene\Search\Similarity;
 
 /**
  * @todo !!!!!!! This class is actually used as singleton. It has to be redesigned.
@@ -32,12 +32,12 @@ namespace Zend\Search\Lucene\Search;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class Similarity
+abstract class AbstractSimilarity
 {
     /**
      * The Similarity implementation used by default.
      *
-     * @var \Zend\Search\Lucene\Search\Similarity
+     * @var AbstractSimilarity
      */
     private static $_defaultImpl;
 
@@ -309,9 +309,9 @@ abstract class Similarity
      * Set the default Similarity implementation used by indexing and search
      * code.
      *
-     * @param \Zend\Search\Lucene\Search\Similarity $similarity
+     * @param AbstractSimilarity $similarity
      */
-    public static function setDefault(Similarity $similarity)
+    public static function setDefault(AbstractSimilarity $similarity)
     {
         self::$_defaultImpl = $similarity;
     }
@@ -321,12 +321,12 @@ abstract class Similarity
      * Return the default Similarity implementation used by indexing and search
      * code.
      *
-     * @return \Zend\Search\Lucene\Search\Similarity
+     * @return AbstractSimilarity
      */
     public static function getDefault()
     {
-        if (!self::$_defaultImpl instanceof Similarity) {
-            self::$_defaultImpl = new Similarity\DefaultSimilarity();
+        if (!self::$_defaultImpl instanceof AbstractSimilarity) {
+            self::$_defaultImpl = new DefaultSimilarity();
         }
 
         return self::$_defaultImpl;

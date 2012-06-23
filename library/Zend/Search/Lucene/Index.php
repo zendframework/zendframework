@@ -20,7 +20,7 @@
 
 namespace Zend\Search\Lucene;
 
-use Zend\Search\Lucene\Search\Similarity,
+use Zend\Search\Lucene\Search\Similarity\AbstractSimilarity,
 	Zend\Search\Lucene\Storage\Directory,
 	Zend\Search\Lucene\Exception\InvalidArgumentException,
 	Zend\Search\Lucene\Exception\RuntimeException,
@@ -1047,11 +1047,11 @@ class Index implements SearchIndexInterface
     /**
      * Retrive similarity used by index reader
      *
-     * @return \Zend\Search\Lucene\Search\Similarity
+     * @return \Zend\Search\Lucene\Search\Similarity\AbstractSimilarity
      */
     public function getSimilarity()
     {
-        return Similarity::getDefault();
+        return AbstractSimilarity::getDefault();
     }
 
 

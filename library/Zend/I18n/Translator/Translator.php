@@ -66,6 +66,13 @@ class Translator
     protected $locale;
 
     /**
+     * Locale to use as fallback if there is no translation.
+     *
+     * @var string
+     */
+    protected $fallbackLocale;
+
+    /**
      * Translation cache.
      *
      * @var CacheAdapter
@@ -92,7 +99,7 @@ class Translator
     }
 
     /**
-     * Get default locale.
+     * Get the default locale.
      *
      * @return string
      */
@@ -106,13 +113,29 @@ class Translator
     }
 
     /**
-     * Returns the set cache
+     * Set the fallback locale.
      *
-     * @return CacheAdapter The set cache
+     * @param  string $locale
+     * @return Translator
      */
-    public function getCache()
+    public function setFallbackLocale($locale)
     {
-        return $this->cache;
+        $this->locale = $locale;
+        return $this;
+    }
+
+    /**
+     * Get the fallback locale.
+     *
+     * @return string
+     */
+    public function getFallbackLocale()
+    {
+        if ($this->locale === null) {
+            $this->locale = Locale::getDefault();
+        }
+
+        return $this->locale;
     }
 
     /**
@@ -125,6 +148,16 @@ class Translator
     {
         $this->cache = $cache;
         return $this;
+    }
+
+    /**
+     * Returns the set cache
+     *
+     * @return CacheAdapter The set cache
+     */
+    public function getCache()
+    {
+        return $this->cache;
     }
 
     /**
@@ -159,9 +192,16 @@ class Translator
      */
     public function translate($message, $textDomain = 'default', $locale = null)
     {
-        $translation = $this->getTranslatedMessage($message, $textDomain, $locale);
+        $locale      = ($locale ?: $this->getLocale());
+        $translation = $this->getTranslatedMessage($message, $locale, $textDomain);
 
-        return ($translation === null || $translation === '' ? $message : $translation);
+        if ($translation !== null && $translation !== '') {
+            return $translation;
+        } elseif (null !== ($fallbackLocale = $this->getFallbackLocale()) && $locale !== $fallbackLocale) {
+            return $this->translate($message, $textDomain, $fallbackLocale);
+        }
+
+        return $message;
     }
 
     /**
@@ -174,12 +214,21 @@ class Translator
      * @param  type $locale
      * @return string
      */
-    public function translatePlural($singular, $plural, $number,
-        $textDomain = 'default', $locale = null
+    public function translatePlural(
+        $singular,
+        $plural,
+        $number,
+        $textDomain = 'default',
+        $locale = null
     ) {
-        $translation = $this->getTranslatedMessage($message, $textDomain, $locale);
+        $locale      = ($locale ?: $this->getLocale());
+        $translation = $this->getTranslatedMessage($message, $locale, $textDomain);
 
         if ($translation === null || $translation === '') {
+            if (null !== ($fallbackLocale = $this->getFallbackLocale()) && $locale !== $fallbackLocale) {
+                return $this->translatePlural($singular, $plural, $number, $textDomain, $fallbackLocale);
+            }
+
             return ($number != 1 ? $singular : $plural);
         }
 
@@ -198,18 +247,18 @@ class Translator
      * Get a translated message.
      *
      * @param  string $message
-     * @param  string $textDomain
      * @param  string $locale
+     * @param  string $textDomain
      * @return string|null
      */
-    protected function getTranslatedMessage($message, $textDomain = 'default',
-        $locale = null
+    protected function getTranslatedMessage(
+        $message,
+        $locale = null,
+        $textDomain = 'default'
     ) {
         if ($message === '') {
             return '';
         }
-
-        $locale = ($locale ?: $this->getLocale());
 
         if (!isset($this->messages[$textDomain][$locale])) {
             $this->loadMessages($textDomain, $locale);
@@ -231,8 +280,11 @@ class Translator
      * @param  string $locale
      * @return Translator
      */
-    public function addTranslationFile($type, $filename,
-        $textDomain = 'default', $locale = null
+    public function addTranslationFile(
+        $type,
+        $filename,
+        $textDomain = 'default',
+        $locale = null
     ) {
         $locale = ($locale ?: '*');
 
@@ -257,7 +309,9 @@ class Translator
      * @param  string $textDomain
      * @return Translator
      */
-    public function addTranslationPattern($type, $baseDir, $pattern,
+    public function addTranslationPattern($type,
+        $baseDir,
+        $pattern,
         $textDomain = 'default'
     ) {
         if (!isset($this->patterns[$textDomain])) {

@@ -24,7 +24,7 @@ namespace Zend\Captcha;
 use Zend\Session\Container;
 
 /**
- * Word-based captcha adapter
+ * AbstractWord-based captcha adapter
  *
  * Generates random word which user should recognise
  *
@@ -34,7 +34,7 @@ use Zend\Session\Container;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class Word extends AbstractAdapter
+abstract class AbstractWord extends AbstractAdapter
 {
     /**#@+
      * @var array Character sets
@@ -140,7 +140,7 @@ abstract class Word extends AbstractAdapter
      * Set session class for persistence
      *
      * @param  string $sessionClass
-     * @return Word
+     * @return AbstractWord
      */
     public function setSessionClass($sessionClass)
     {
@@ -162,7 +162,7 @@ abstract class Word extends AbstractAdapter
      * Set word length of captcha
      *
      * @param integer $wordlen
-     * @return Word
+     * @return AbstractWord
      */
     public function setWordlen($wordlen)
     {
@@ -199,7 +199,7 @@ abstract class Word extends AbstractAdapter
      * Set timeout for session token
      *
      * @param  int $ttl
-     * @return Word
+     * @return AbstractWord
      */
     public function setTimeout($ttl)
     {
@@ -221,7 +221,7 @@ abstract class Word extends AbstractAdapter
      * Sets if session should be preserved on generate()
      *
      * @param $keepSession Should session be kept on generate()?
-     * @return Word
+     * @return AbstractWord
      */
     public function setKeepSession($keepSession)
     {
@@ -243,7 +243,7 @@ abstract class Word extends AbstractAdapter
      * Set if numbers should be included in the pattern
      *
      * @param  bool $useNumbers numbers should be included in the pattern?
-     * @return Word
+     * @return AbstractWord
      */
     public function setUseNumbers($useNumbers)
     {
@@ -274,7 +274,7 @@ abstract class Word extends AbstractAdapter
      * Set session namespace object
      *
      * @param  Container $session
-     * @return Word
+     * @return AbstractWord
      */
     public function setSession(Container $session)
     {
@@ -303,7 +303,7 @@ abstract class Word extends AbstractAdapter
      * Set captcha word
      *
      * @param  string $word
-     * @return Word
+     * @return AbstractWord
      */
     protected function setWord($word)
     {

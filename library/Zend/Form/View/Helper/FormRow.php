@@ -73,12 +73,6 @@ class FormRow extends AbstractHelper
      */
     public function render(ElementInterface $element)
     {
-        $renderer = $this->getView();
-        if (!$renderer instanceof Pluggable) {
-            // Bail early if renderer is not pluggable
-            return '';
-        }
-
         $escapeHelper        = $this->getEscapeHelper();
         $labelHelper         = $this->getLabelHelper();
         $elementHelper       = $this->getElementHelper();

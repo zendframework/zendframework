@@ -71,6 +71,9 @@ class HelperLoader extends PluginClassLoader
         'form_checkbox'          => 'Zend\Form\View\Helper\FormCheckbox',
         'formcolor'              => 'Zend\Form\View\Helper\FormColor',
         'form_color'             => 'Zend\Form\View\Helper\FormColor',
+        'formdate'               => 'Zend\Form\View\Helper\FormDate',
+        'formdatetime'           => 'Zend\Form\View\Helper\FormDateTime',
+        'formdatetimelocal'      => 'Zend\Form\View\Helper\FormDateTimeLocal',
         'formelement'            => 'Zend\Form\View\Helper\FormElement',
         'form_element'           => 'Zend\Form\View\Helper\FormElement',
         'formelementerrors'      => 'Zend\Form\View\Helper\FormElementErrors',
@@ -87,6 +90,7 @@ class HelperLoader extends PluginClassLoader
         'form_input'             => 'Zend\Form\View\Helper\FormInput',
         'formlabel'              => 'Zend\Form\View\Helper\FormLabel',
         'form_label'             => 'Zend\Form\View\Helper\FormLabel',
+        'formmonth'              => 'Zend\Form\View\Helper\FormMonth',
         'formmulticheckbox'      => 'Zend\Form\View\Helper\FormMultiCheckbox',
         'form_multicheckbox'     => 'Zend\Form\View\Helper\FormMultiCheckbox',
         'form_multi_checkbox'    => 'Zend\Form\View\Helper\FormMultiCheckbox',
@@ -108,5 +112,7 @@ class HelperLoader extends PluginClassLoader
         'form_text'              => 'Zend\Form\View\Helper\FormText',
         'formtextarea'           => 'Zend\Form\View\Helper\FormTextarea',
         'form_textarea'          => 'Zend\Form\View\Helper\FormTextarea',
+        'formtime'               => 'Zend\Form\View\Helper\FormTime',
+        'formweek'               => 'Zend\Form\View\Helper\FormWeek',
     );
 }

@@ -72,7 +72,7 @@ class FormRow extends BaseAbstractHelper
         $elementErrors       = $elementErrorsHelper->render($element);
 
         if (!empty($label)) {
-            $rowLabelAttributes  = $element->getAttribute('rowLabelAttributes');
+            $rowLabelAttributes = $element->getAttribute('rowLabelAttributes');
 
             if (empty($rowLabelAttributes)) {
                 $rowLabelAttributes = $this->rowLabelAttributes;
@@ -80,9 +80,12 @@ class FormRow extends BaseAbstractHelper
 
             // Multicheckbox elements have to be handled differently as the HTML standard does not allow nested
             // labels. The semantic way is to group them inside a fieldset
-            if ($element->getAttribute('type') === 'multi_checkbox' ||
-                $element->getAttribute('type') === 'radio') {
-                $markup = sprintf('<fieldset><legend>%s</legend>%s</fieldset>', $label, $elementString);
+            $type = $element->getAttribute('type');
+            if ($type === 'multi_checkbox' || $type === 'multicheckbox' || $type === 'radio') {
+                $markup = sprintf(
+                    '<fieldset><legend>%s</legend>%s</fieldset>',
+                    $label,
+                    $elementString);
             } else {
                 $labelOpen  = $labelHelper->openTag($rowLabelAttributes);
                 $labelClose = $labelHelper->closeTag();

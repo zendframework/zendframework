@@ -20,8 +20,9 @@
  */
 
 namespace ZendTest\GData\YouTube;
+
 use Zend\GData\YouTube;
-use Zend\GData\App\AbstractExtension;
+use Zend\GData\App\Extension;
 use Zend\GData\App;
 
 /**

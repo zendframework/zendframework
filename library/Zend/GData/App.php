@@ -22,9 +22,9 @@
 
 namespace Zend\GData;
 
-use Zend\Http,
-    Zend\Http\Header\Etag,
-    Zend\Uri;
+use Zend\Http;
+use Zend\Http\Header\Etag;
+use Zend\Uri;
 
 /**
  * Provides Atom Publishing Protocol (APP) functionality.  This class and all
@@ -717,7 +717,7 @@ class App
             $requestData['method'], $requestData['url']);
 
         $feedContent = $response->getBody();
-        if (!$this->_useObjectMapping) {
+        if (!!$this->_useObjectMapping) {
             return $feedContent;
         }
         $feed = self::importString($feedContent, $className);

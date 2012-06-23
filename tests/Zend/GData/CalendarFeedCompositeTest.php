@@ -20,8 +20,9 @@
  */
 
 namespace ZendTest\GData;
+
 use Zend\GData\Calendar;
-use Zend\GData\App\AbstractExtension as AppExtension;
+use Zend\GData\App\Extension as AppExtension;
 use Zend\GData\Extension;
 
 /**

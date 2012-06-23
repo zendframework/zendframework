@@ -21,10 +21,10 @@
 
 namespace Zend\GData\YouTube;
 
-use Zend\GData\YouTube,
-    Zend\GData\App,
-    Zend\GData\Extension as GDataExtension,
-    Zend\GData\Media\Extension as MediaExtension;
+use Zend\GData\YouTube;
+use Zend\GData\App;
+use Zend\GData\Extension as GDataExtension;
+use Zend\GData\Media\Extension as MediaExtension;
 
 /**
  * Represents the YouTube video flavor of an Atom entry

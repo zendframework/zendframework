@@ -22,8 +22,8 @@
 
 namespace ZendTest\GData\App;
 
-use Zend\GData\App,
-    Zend\Http\Header\Etag;
+use Zend\GData\App;
+use Zend\Http\Header\Etag;
 
 /**
  * @category   Zend

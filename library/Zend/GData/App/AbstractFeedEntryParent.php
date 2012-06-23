@@ -21,8 +21,8 @@
 
 namespace Zend\GData\App;
 
-use Zend\GData\App,
-    Zend\Http\Header\Etag;
+use Zend\GData\App;
+use Zend\Http\Header\Etag;
 
 /**
  * Abstract class for common functionality in entries and feeds

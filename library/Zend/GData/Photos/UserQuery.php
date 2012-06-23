@@ -21,8 +21,8 @@
 
 namespace Zend\GData\Photos;
 
-use Zend\GData\Photos,
-    Zend\GData\App;
+use Zend\GData\Photos;
+use Zend\GData\App;
 
 /**
  * Assists in constructing queries for user entries.

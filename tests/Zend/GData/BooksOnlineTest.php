@@ -20,8 +20,9 @@
  */
 
 namespace ZendTest\GData;
+
 use Zend\GData\Books;
-use Zend\GData\App\AbstractExtension;
+use Zend\GData\App\Extension;
 
 /**
  * @category   Zend

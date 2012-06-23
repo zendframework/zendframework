@@ -21,6 +21,8 @@
 
 namespace Zend\GData\App\Extension;
 
+use Zend\GData\App\AbstractBase;
+
 /**
  * Gdata App extensions
  *

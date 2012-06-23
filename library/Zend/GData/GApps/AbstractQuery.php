@@ -21,6 +21,7 @@
 
 namespace Zend\GData\GApps;
 
+use Zend\GData\GApps;
 use Zend\GData\Query;
 
 /**

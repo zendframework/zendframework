@@ -20,7 +20,8 @@
  */
 
 namespace ZendTest\GData\App;
-use Zend\GData\App\AbstractExtension;
+
+use Zend\GData\App\Extension;
 
 /**
  * @category   Zend

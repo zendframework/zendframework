@@ -21,7 +21,7 @@
 
 namespace Zend\GData\GApps;
 
-use Zend\GData\GApps;
+use Zend\GData\Query;
 
 /**
  * Assists in constructing queries for Google Apps entries. This class
@@ -36,7 +36,7 @@ use Zend\GData\GApps;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class Query extends \Zend\GData\Query
+abstract class AbstractQuery extends Query
 {
 
     /**

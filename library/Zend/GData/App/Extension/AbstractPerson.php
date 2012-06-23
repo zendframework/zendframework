@@ -21,8 +21,6 @@
 
 namespace Zend\GData\App\Extension;
 
-use Zend\GData\App\Extension;
-
 /**
  * Base class for people (currently used by atom:author, atom:contributor)
  *
@@ -32,7 +30,7 @@ use Zend\GData\App\Extension;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class Person extends Extension
+abstract class AbstractPerson extends AbstractExtension
 {
 
     protected $_rootElement = null;
@@ -116,7 +114,7 @@ abstract class Person extends Extension
 
     /**
      * @param \Zend\GData\App\Extension\Email $value
-     * @return \Zend\GData\App\Extension\Person Provides a fluent interface
+     * @return \Zend\GData\App\Extension\AbstractPerson Provides a fluent interface
      */
     public function setEmail($value)
     {
@@ -134,7 +132,7 @@ abstract class Person extends Extension
 
     /**
      * @param \Zend\GData\App\Extension\Uri $value
-     * @return \Zend\GData\App\Extension\Person Provides a fluent interface
+     * @return \Zend\GData\App\Extension\AbstractPerson Provides a fluent interface
      */
     public function setUri($value)
     {

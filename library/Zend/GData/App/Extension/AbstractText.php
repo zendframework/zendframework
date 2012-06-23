@@ -21,8 +21,6 @@
 
 namespace Zend\GData\App\Extension;
 
-use Zend\GData\App\Extension;
-
 /**
  * Abstract class for data models that require only text and type-- such as:
  * title, summary, etc.
@@ -33,7 +31,7 @@ use Zend\GData\App\Extension;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class Text extends Extension
+abstract class AbstractText extends AbstractExtension
 {
 
     protected $_rootElement = null;
@@ -76,7 +74,7 @@ abstract class Text extends Extension
 
     /*
      * @param string $value
-     * @return Zend\GData\App\Extension\Text Provides a fluent interface
+     * @return Zend\GData\App\Extension\AbstractText Provides a fluent interface
      */
     public function setType($value)
     {

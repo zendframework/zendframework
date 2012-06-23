@@ -21,7 +21,7 @@
 
 namespace ZendTest\GData\Photos;
 use Zend\GData\Photos;
-use Zend\GData\App\Extension;
+use Zend\GData\App\AbstractExtension;
 
 /**
  * @category   Zend

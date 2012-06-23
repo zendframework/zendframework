@@ -21,7 +21,7 @@
 
 namespace ZendTest\GData;
 use Zend\GData\Books;
-use Zend\GData\App\Extension;
+use Zend\GData\App\AbstractExtension;
 
 /**
  * @category   Zend

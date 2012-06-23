@@ -21,7 +21,7 @@
 namespace Zend\Amf;
 
 /**
- * Base abstract class for AMF authentication implementation
+ * AbstractBase abstract class for AMF authentication implementation
  *
  * @package    Zend_Amf
  * @subpackage Auth

@@ -23,7 +23,7 @@ namespace ZendTest\GData;
 
 use Zend\GData,
     Zend\GData\App,
-    Zend\GData\App\Extension,
+    Zend\GData\App\AbstractExtension,
     Zend\Http\Header\Etag,
     ZendTest\GData\TestAsset;
 

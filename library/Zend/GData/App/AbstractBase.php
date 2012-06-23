@@ -30,7 +30,7 @@ namespace Zend\GData\App;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class Base
+abstract class AbstractBase
 {
 
     /**
@@ -127,7 +127,7 @@ abstract class Base
      * This represents any raw text contained within the XML element
      *
      * @param string $value Child text node
-     * @return \Zend\GData\App\Base Returns an object of the same type as 'this' to provide a fluent interface.
+     * @return \Zend\GData\App\AbstractBase Returns an object of the same type as 'this' to provide a fluent interface.
      */
     public function setText($value)
     {
@@ -152,7 +152,7 @@ abstract class Base
      * child XML elements to any data model class.
      *
      * @param array $value All extension elements
-     * @return \Zend\GData\App\Base Returns an object of the same type as 'this' to provide a fluent interface.
+     * @return \Zend\GData\App\AbstractBase Returns an object of the same type as 'this' to provide a fluent interface.
      */
     public function setExtensionElements($value)
     {
@@ -181,7 +181,7 @@ abstract class Base
      * This can be used to add arbitrary attributes to any data model element
      *
      * @param array $value All extension attributes
-     * @return \Zend\GData\App\Base Returns an object of the same type as 'this' to provide a fluent interface.
+     * @return \Zend\GData\App\AbstractBase Returns an object of the same type as 'this' to provide a fluent interface.
      */
     public function setExtensionAttributes($value)
     {

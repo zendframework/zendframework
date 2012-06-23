@@ -33,7 +33,7 @@ use Zend\GData\App,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class FeedEntryParent extends Base
+abstract class AbstractFeedEntryParent extends AbstractBase
 {
     /**
      * Service instance used to make network requests.
@@ -101,7 +101,7 @@ abstract class FeedEntryParent extends Base
      * @deprecated Deprecated as of Zend Framework 1.7. Use
      *             setService() instead.
      * @param  \Zend\Http\Client $httpClient
-     * @return FeedEntryParent Provides a fluent interface
+     * @return AbstractFeedEntryParent Provides a fluent interface
      */
     public function setHttpClient(\Zend\Http\Client $httpClient)
     {
@@ -134,7 +134,7 @@ abstract class FeedEntryParent extends Base
      * perform network requests, such as when calling save() and delete().
      *
      * @param \Zend\GData\App $instance The new service instance.
-     * @return FeedEntryParent Provides a fluent interface.
+     * @return AbstractFeedEntryParent Provides a fluent interface.
      */
     public function setService($instance)
     {
@@ -247,7 +247,7 @@ abstract class FeedEntryParent extends Base
      * author is represented by an atom:author element
      *
      * @param array $value
-     * @return FeedEntryParent Provides a fluent interface
+     * @return AbstractFeedEntryParent Provides a fluent interface
      */
     public function setAuthor($value)
     {
@@ -271,7 +271,7 @@ abstract class FeedEntryParent extends Base
      * category is represented in an atom feed by an atom:category element.
      *
      * @param array $value Array of Extension\Category
-     * @return FeedEntryParent Provides a fluent interface
+     * @return AbstractFeedEntryParent Provides a fluent interface
      */
     public function setCategory($value)
     {
@@ -295,7 +295,7 @@ abstract class FeedEntryParent extends Base
      * is represented in an atom feed by an atom:contributor XML element
      *
      * @param array $value
-     * @return FeedEntryParent Provides a fluent interface
+     * @return AbstractFeedEntryParent Provides a fluent interface
      */
     public function setContributor($value)
     {
@@ -313,7 +313,7 @@ abstract class FeedEntryParent extends Base
 
     /**
      * @param Extension\Id $value
-     * @return FeedEntryParent Provides a fluent interface
+     * @return AbstractFeedEntryParent Provides a fluent interface
      */
     public function setId($value)
     {
@@ -427,7 +427,7 @@ abstract class FeedEntryParent extends Base
 
     /**
      * @param array $value The array of Extension\Link elements
-     * @return FeedEntryParent Provides a fluent interface
+     * @return AbstractFeedEntryParent Provides a fluent interface
      */
     public function setLink($value)
     {
@@ -445,7 +445,7 @@ abstract class FeedEntryParent extends Base
 
     /**
      * @param Extension\Rights $value
-     * @return FeedEntryParent Provides a fluent interface
+     * @return AbstractFeedEntryParent Provides a fluent interface
      */
     public function setRights($value)
     {
@@ -487,7 +487,7 @@ abstract class FeedEntryParent extends Base
      * an atom:title element in a feed or entry
      *
      * @param Extension\Title $value
-     * @return FeedEntryParent Provides a fluent interface
+     * @return AbstractFeedEntryParent Provides a fluent interface
      */
     public function setTitle($value)
     {
@@ -505,7 +505,7 @@ abstract class FeedEntryParent extends Base
 
     /**
      * @param Extension\Updated $value
-     * @return FeedEntryParent Provides a fluent interface
+     * @return AbstractFeedEntryParent Provides a fluent interface
      */
     public function setUpdated($value)
     {

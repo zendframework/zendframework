@@ -1036,7 +1036,7 @@ class App
             if ($foundClassName != null) {
                 $reflectionObj = new \ReflectionClass($foundClassName);
                 $instance = $reflectionObj->newInstanceArgs($args);
-                if ($instance instanceof App\FeedEntryParent) {
+                if ($instance instanceof App\AbstractFeedEntryParent) {
                     $instance->setHttpClient($this->_httpClient);
 
                     // Propogate version data

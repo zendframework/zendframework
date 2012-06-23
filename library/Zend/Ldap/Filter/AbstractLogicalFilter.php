@@ -24,7 +24,7 @@ namespace Zend\Ldap\Filter;
 use Zend\Ldap\Filter\Exception;
 
 /**
- * Zend\Ldap\Filter\LogicalFilter provides a base implementation for a grouping filter.
+ * Zend\Ldap\Filter\AbstractLogicalFilter provides a base implementation for a grouping filter.
  *
  * @category   Zend
  * @package    Zend_Ldap
@@ -32,7 +32,7 @@ use Zend\Ldap\Filter\Exception;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class LogicalFilter extends AbstractFilter
+abstract class AbstractLogicalFilter extends AbstractFilter
 {
     const TYPE_AND = '&';
     const TYPE_OR  = '|';
@@ -75,7 +75,7 @@ abstract class LogicalFilter extends AbstractFilter
      * Adds a filter to this grouping filter.
      *
      * @param  AbstractFilter $filter
-     * @return LogicalFilter
+     * @return AbstractLogicalFilter
      */
     public function addFilter(AbstractFilter $filter)
     {

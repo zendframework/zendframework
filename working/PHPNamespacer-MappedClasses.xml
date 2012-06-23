@@ -7827,10 +7827,10 @@
    <mappedClass>
       <originalRelativeFilePath>Zend/Ldap/Filter/Logical.php</originalRelativeFilePath>
       <originalClassName>Zend_Ldap_Filter_Logical</originalClassName>
-      <newRelativeFilePath>Zend/LDAP/Filter/LogicalFilter.php</newRelativeFilePath>
+      <newRelativeFilePath>Zend/LDAP/Filter/AbstractLogicalFilter.phplter.php</newRelativeFilePath>
       <newNamespace>Zend\LDAP\Filter</newNamespace>
-      <newClassName>LogicalFilter</newClassName>
-      <newFullyQualifiedName>Zend\LDAP\Filter\LogicalFilter</newFullyQualifiedName>
+      <newClassName>AbstractLogicalFilter</newClassName>
+      <newFullyQualifiedName>Zend\LDAP\Filter\AbstractLogicalFilter</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Ldap/Filter/Mask.php</originalRelativeFilePath>

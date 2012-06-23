@@ -98,6 +98,24 @@ class FormRowTest extends TestCase
         $this->assertEquals('<input name="foo" type="text">', $markup);
     }
 
+    public function testCanHandleMultiCheckboxesCorrectly()
+    {
+        $options = array(
+            'This is the first label' => 'value1',
+            'This is the second label' => 'value2',
+            'This is the third label' => 'value3',
+        );
+
+        $element = new Element('foo');
+        $element->setAttribute('type', 'multi_checkbox');
+        $element->setAttribute('label', 'This is a multi-checkbox');
+        $element->setAttribute('options', $options);
+        $markup = $this->helper->render($element);
+        $this->assertContains("<fieldset>", $markup);
+        $this->assertContains("<legend>", $markup);
+        $this->assertContains("<label>", $markup);
+    }
+
     public function testCanRenderErrors()
     {
         $element  = new Element('foo');

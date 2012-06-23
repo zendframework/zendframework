@@ -78,17 +78,24 @@ class FormRow extends BaseAbstractHelper
                 $rowLabelAttributes = $this->rowLabelAttributes;
             }
 
-            $labelOpen  = $labelHelper->openTag($rowLabelAttributes);
-            $labelClose = $labelHelper->closeTag();
+            // Multicheckbox elements have to be handled differently as the HTML standard does not allow nested
+            // labels. The semantic way is to group them inside a fieldset
+            if ($element->getAttribute('type') === 'multi_checkbox' ||
+                $element->getAttribute('type') === 'radio') {
+                $markup = sprintf('<fieldset><legend>%s</legend>%s</fieldset>', $label, $elementString);
+            } else {
+                $labelOpen  = $labelHelper->openTag($rowLabelAttributes);
+                $labelClose = $labelHelper->closeTag();
 
-            switch ($this->labelPosition) {
-                case self::LABEL_PREPEND:
-                    $markup = $labelOpen . $label . $elementString . $labelClose . $elementErrors;
-                    break;
-                case self::LABEL_APPEND:
-                default:
-                    $markup = $labelOpen . $elementString . $label . $labelClose . $elementErrors;
-                    break;
+                switch ($this->labelPosition) {
+                    case self::LABEL_PREPEND:
+                        $markup = $labelOpen . $label . $elementString . $labelClose . $elementErrors;
+                        break;
+                    case self::LABEL_APPEND:
+                    default:
+                        $markup = $labelOpen . $elementString . $label . $labelClose . $elementErrors;
+                        break;
+                }
             }
         } else {
             $markup = $elementString . $elementErrors;

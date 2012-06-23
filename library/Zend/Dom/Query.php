@@ -20,9 +20,9 @@
 
 namespace Zend\Dom;
 
-use DOMDocument,
-    DOMNodeList,
-    DOMXPath;
+use DOMDocument;
+use DOMNodeList;
+use DOMXPath;
 
 /**
  * Query DOM structures based on CSS selectors and/or XPath

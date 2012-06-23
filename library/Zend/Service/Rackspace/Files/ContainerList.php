@@ -21,8 +21,8 @@
 
 namespace Zend\Service\Rackspace\Files;
 
-use Zend\Service\Rackspace\Files\Container,
-        Zend\Service\Rackspace\Files as RackspaceFiles;
+use Zend\Service\Rackspace\Files\Container;
+use Zend\Service\Rackspace\Files as RackspaceFiles;
 
 /**
  * List of servers retrived from the GoGrid web service

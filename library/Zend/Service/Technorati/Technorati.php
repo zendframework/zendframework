@@ -21,9 +21,9 @@
 
 namespace Zend\Service\Technorati;
 
-use DomDocument,
-    Zend\Http\Response,
-    Zend\Rest\Client\RestClient;
+use DomDocument;
+use Zend\Http\Response;
+use Zend\Rest\Client\RestClient;
 
 /**
  * Zend\Service\Technorati provides an easy, intuitive and object-oriented interface

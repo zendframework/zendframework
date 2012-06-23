@@ -21,9 +21,9 @@
 
 namespace Zend\Service\GoGrid;
 
-use Zend\Service\GoGrid\GoGrid as GoGridAbstract,
-        Zend\Service\GoGrid\Object as GoGridObject,
-        Zend\Service\GoGrid\ObjectList as GoGridObjectList;
+use Zend\Service\GoGrid\GoGrid as GoGridAbstract;
+use Zend\Service\GoGrid\Object as GoGridObject;
+use Zend\Service\GoGrid\ObjectList as GoGridObjectList;
 
 class Job extends GoGridAbstract
 {

@@ -21,8 +21,8 @@
 
 namespace Zend\Service\Rackspace;
 
-use Zend\Service\Rackspace\Exception,
-    Zend\Http\Client as HttpClient;
+use Zend\Service\Rackspace\Exception;
+use Zend\Http\Client as HttpClient;
 
 abstract class Rackspace
 {

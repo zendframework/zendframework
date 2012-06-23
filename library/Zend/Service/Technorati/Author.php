@@ -21,8 +21,8 @@
 
 namespace Zend\Service\Technorati;
 
-use DomElement,
-    DOMXPath;
+use DomElement;
+use DOMXPath;
 
 /**
  * Represents a weblog Author object. It usually belongs to a Technorati account.

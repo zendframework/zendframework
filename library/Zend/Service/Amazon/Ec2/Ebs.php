@@ -20,8 +20,8 @@
  */
 
 namespace Zend\Service\Amazon\Ec2;
-use Zend\Service\Amazon,
-    Zend\Service\Amazon\Ec2\Exception;
+use Zend\Service\Amazon;
+use Zend\Service\Amazon\Ec2\Exception;
 
 /**
  * An Amazon EC2 interface to create, describe, attach, detach and delete Elastic Block

@@ -21,8 +21,8 @@
 
 namespace Zend\Service\Rackspace;
 
-use Zend\Service\Rackspace\Rackspace as RackspaceAbstract,
-    Zend\Http\Client as HttpClient;
+use Zend\Service\Rackspace\Rackspace as RackspaceAbstract;
+use Zend\Http\Client as HttpClient;
 
 class Files extends RackspaceAbstract
 {

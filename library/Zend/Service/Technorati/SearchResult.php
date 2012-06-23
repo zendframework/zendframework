@@ -21,8 +21,8 @@
 
 namespace Zend\Service\Technorati;
 
-use DomElement,
-    Zend\Uri;
+use DomElement;
+use Zend\Uri;
 
 /**
  * Represents a single Technorati Search query result object.
